@@ -39,7 +39,7 @@ is responsible for,
 
 [`Parser`](#Parser-Component) is responsible for parsing and validating user input.
 
-[`Family`](#Persons-Component) is responsible for holding the user data of PlanITarium in memory.
+[`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
 
 [`Money`](#Money-Component) is responsible for holding the monetary information in memory.
 
@@ -47,7 +47,7 @@ is responsible for,
 
 **How the components interact with each other**
 
-The slightly simplified *Sequence Diagram* below shows how the components interact for the scenrio where the user issues
+The slightly simplified *Sequence Diagram* below shows how the components interact for the scenario where the user issues
 the command `add /n Alice /g 2`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
@@ -145,7 +145,6 @@ https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/pla
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/PersonList.java)
 and [`Person.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Person.java)
-)
 
 ![FamilyComponent](images/FamilyComponent.png)
 
@@ -159,13 +158,14 @@ The `Person` component,
 * Depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person` 
   contains an `IncomeList` and `ExpenditureList`.
 
-### MoneyList Component
+### Money Component
 
 <!-- {For Jiarong} -->
 
 ### Storage Component
 
-**Class:**
+**Class:** [`Storage.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/storage/Storage.java)
 
 ![StorageDiagram](images/StorageDiagram.png)
 
@@ -184,7 +184,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Command Execution
 
-In PlanITarium, a command usually have following format:
+In PlanITarium, a command usually has the following format:
 
 ```md
 [command type][indicator][description]
@@ -205,7 +205,7 @@ There may be several indicators for every input, such as
 addin \i 200 \d salary \u 1
 ```
 
-is to add a income for the person whose uid is 1, and the description of this income is salary.
+is to add an income for the person whose uid is 1, and the description of this income is salary.
 
 When `PlanITarium` receives such input, it will pass the input to `CommandFactory`. The `CommandFactory` will call
 `Parser` to parse the input into several components according to the indicator. The `Parser` will then return the type
@@ -452,26 +452,26 @@ command object has been created by [`CommandFactory`](#Command-Execution):
     * Pros: Easy to implement and less memory usage.
     * Cons: May have performance issues as it needs to iterate through every person's expenditure.
 
-* **Altertive 2:** Maintain an array list for each category and store a copy of expenses.
+* **Alternative 2:** Maintain an array list for each category and store a copy of expenses.
     * Pros: Fast to print expenses in a category, no unnecessary look-ups.
     * Cons: Poor memory management, needs to store twice as many expenditures.
 
 ### Data Archiving
 
-#### \[Proposed]Saving and loading feature
+#### Saving and loading feature
 
-##### Proposed implementation
+##### Implementation
 
-The proposed saving and loading mechanism is facilitated by `Family`. It loads records of `PersonList` for each logical
+The saving and loading mechanism is facilitated by `Family`. It loads records of `PersonList` for each logical
 grouping inside family from a local file, process the data and adds the record to `Family` for the current session.
 Saves the `PersonList` record of each `Family` grouping back into the local file upon exit of the program. It implements
 the following operations:
 
 * `Storage#checkFileExists()` -- Checks if `PlanITarium.txt` file exists in the local hard drive, creates one if it does
   not.
-* `Storage#saveData()` -- Writes `PersonList` record of each `Storage` grouping into `PlanITarium.txt` file upon exit of
+* `Storage#saveData()` -- Writes `PersonList` record of each `Family` grouping into `PlanITarium.txt` file upon exit of
   the program.
-* `Storage#loadData()` -- Opens and reads `PlanITarium.txt` for any existing `PersonList` records and updates the
+* `Storage#loadData()` -- Opens and reads `PlanITarium.txt` for any existing `Family` records and updates each
   `PersonList` data in the current session for each logical group in `Family`.
 
 Given below is an example scenario and how the save and load mechanism behaves at each step.
@@ -479,17 +479,18 @@ Given below is an example scenario and how the save and load mechanism behaves a
 Step 1. The user launches the application. A `Storage` object will be initialised with an empty `PersonList` for each
 `Family` grouping. The following sequence diagram shows how the `Storage` object is initialised
 
-Step 2. The program will create a new `PersonList` for the session which calls `Storage#loadData()`, causing a check if
-the local file `PlanITarium.txt` exists by calling `Storage#checkFileExists()` and creates one if it does not. The data
-in the local file will be read, parsed and added to the empty `PersonList` in `Storage` by calling `PersonList` adding
-operations. The data in the `PersonList` will then be returned to `PersonList` for each `Family` grouping in the current
-session. The following sequence diagram shows how the loading operation works:
+Step 2. The program will create a new `Family` object for the session which calls `Storage#loadData()`, causing a check 
+if the local file `PlanITarium.txt` exists by calling `Storage#checkFileExists()` and creates one if it does not. The 
+data in the local file will be read, parsed and added to the empty `Family` in `Storage` by calling `Family` adding
+operations. After all lines of the files has been read and all data added, the `Family` object is then returned to main
+and the `Family` object of the current session will consist of the data in `Family` of `Storage`. 
+The following sequence diagram shows how the loading operation works:
 
 ![StorageLoadSequence](images/StorageLoadSequence.png)
 
 Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called. All
 data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
-`(group type) (user/operation) (Category) (Info)` which are to be read again when the program starts up. The following
+`(user/operation) (Info)` which are to be read again when the program starts up. The following
 Sequence diagram shows how the saving operation will work:
 
 ![StorageSaveSequence](images/StorageSaveSequence.png)
@@ -513,11 +514,32 @@ Sequence diagram shows how the saving operation will work:
 
 ### Logging
 
-{Describe the usage of logging for the product.}
+The logging of this product is facilitated by [`ProjectLogger.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/ProjectLogger.java).
+
+Each class contains a static `logger` which logs information and errors through all instances of the class in a single
+log file. The log files are named after the class, an example being `Family.log` for the `Family` class.
+
+Simple logging is used as it provides sufficient information for documentation and debugging purposes. The log files 
+are rewritten during every run of PlanITarium, so renaming of the old logs are necessary should it need to be saved.
 
 ### Testing
 
-{Describe the testing methods for the product.}
+PlanITarium is tested mainly in 2 ways:
+* JUnit testing
+* IO redirection testing
+
+#### JUnit testing
+
+JUnit testing can be performed by running the tests in the [`test`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/test/java/seedu/planitarium) folder.
+
+#### IO redirection testing
+
+IO redirection testing can be performed via the following steps:
+1. Launch a terminal in `tp/text-ui-test`
+2. Edit the input file `input.txt`, and the expected output `EXPECTED.txt` if necessary
+3. Run the file `runtest.bat` in the terminal
 
 ---
 
@@ -525,11 +547,12 @@ Sequence diagram shows how the saving operation will work:
 
 ### Target user profile
 
-{Describe the target user profile}
+The target user profile for PlanITarium is young adults who have a family to support.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+PlanITarium offers ease of financial tracking for the entire family. It features a single input process for performing 
+tasks, and users will be able to neatly categorise their family members as well as expenditures.
 
 ---
 
@@ -539,6 +562,8 @@ Sequence diagram shows how the saving operation will work:
 |---------|----------|---------------------------|-------------------------------------------------------------|
 | v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
 | v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+
+ 
 
 ---
 
@@ -556,4 +581,4 @@ Sequence diagram shows how the saving operation will work:
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+See [IO redirection testing](#IO-redirection-testing).

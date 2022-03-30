@@ -91,6 +91,15 @@ public abstract class Money {
     }
 
     /**
+     * Sets the initDate of the money object.
+     *
+     * @param initDate Init date of the money object
+     */
+    public void setInitDate(LocalDate initDate) {
+        this.initDate = initDate;
+    }
+
+    /**
      * Returns the money object string representation, which includes its
      * description, its amount in two decimal place, and it's recurring status.
      *

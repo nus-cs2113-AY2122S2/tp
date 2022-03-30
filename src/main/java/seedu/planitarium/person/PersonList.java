@@ -191,7 +191,7 @@ public class PersonList {
      */
     public void deleteExpend(int personIndex, int expendIndex) {
         LOGGER.log(Level.INFO, Constants.DELETE_EXPEND_CALL_MESSAGE);
-        getPerson(personIndex).deleteIncome(expendIndex);
+        getPerson(personIndex).deleteExpend(expendIndex);
     }
 
     /**
