@@ -366,6 +366,9 @@ Expected outcome:
     2: [Module] EE4204 Lecture: Wednesday, 2pm-4pm
 
 #### Reading from .ics file: `read ics`
+Creates a list of your modules by reading from .ics calendar file that can be downloaded from nusmods.com.
+
+This is an efficient alternative to add modules function where you can only add one module at a time.
 
 Prerequisites:
 1. Download the .ics file of your academic schedule from nusmods.com.
@@ -538,7 +541,8 @@ Here are the matching contacts in your list:
 | Add (Module)   | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
 | Add (Contact)  | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |
 | Find (Module)  | `find <query>`                                                                                                              |
-| Edit (Module)  | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                                                                  |
+| Edit (Module)  | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                      |
+| Read from .ics (Module) | `read ics` |
 | Remove         | `rm INDEX`                                                                                                                  |
 | List           | `list`                                                                                                                      |
 | Return to Menu | `menu`                                                                                                                      |
