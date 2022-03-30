@@ -11,10 +11,12 @@ import java.util.ArrayList;
  * The constructor will initialize all rooms with status vacant
  */
 public class EventList {
+    private Ui ui;
     private ArrayList<Event> eventList;
 
     public EventList(ArrayList<Event> eventList) {  // dummy data for initialization
         this.eventList = eventList;
+        this.ui = new Ui();
     }
 
     public ArrayList<Event> getEventList() {
@@ -26,6 +28,7 @@ public class EventList {
             LocalDate at = LocalDate.parse(atString);
             Event event = new Event(description, at);
             eventList.add(event);
+            ui.printEventAdded(event);
         } catch (Exception e) {
             throw new InvalidDateException();
         }
@@ -34,13 +37,15 @@ public class EventList {
     public void delete(String n) throws InvalidDateException {
         try {
             int j = Integer.parseInt(n) - 1;
+            Event deleted = eventList.get(j);
             eventList.remove(j);
+            ui.printEventDeleted(deleted);
         } catch (Exception e) {
             throw new InvalidDateException();
         }
     }
 
-    public void save() throws IOException {
+    public void save() throws IOException, HotelLiteManagerException {
         EventListFileManager eventFileManager = new EventListFileManager();
         eventFileManager.save(eventList);
     }

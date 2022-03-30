@@ -36,13 +36,18 @@ public class Housekeeper {
 
     public String getAvailability() {
         if (availability == null) {
-            return "<Enter Availability>";
+            return "N/A";
         }
-        String availableStr = "( ";
+        String availableStr = "";
+        int reachEnd = 1;
         for (Integer i : availableList) {
-            availableStr += daysList[i] + " ";
+            if (availableList.size() <= reachEnd) {
+                availableStr += daysList[i];
+            } else {
+                availableStr += daysList[i] + " ";
+            }
+            reachEnd += 1;
         }
-        availableStr += ")";
         return availableStr;
     }
 

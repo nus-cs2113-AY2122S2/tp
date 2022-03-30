@@ -10,8 +10,9 @@ import seedu.duke.command.Command;
  */
 
 public class AddHousekeeperPerformanceCommand extends Command {
-    private HousekeeperPerformance housekeeperPerformance;
     private static Logger logger = Logger.getLogger("housekeeperPerformanceLogger");
+    private static final String DELIMITER = "/";
+    private HousekeeperPerformance housekeeperPerformance;
 
     /**
      * Takes in the user input and checks if the formatting of the command for
@@ -25,15 +26,35 @@ public class AddHousekeeperPerformanceCommand extends Command {
      *                                   the rating is invalid (not an integer from 1-5 inclusive).
      */
     public AddHousekeeperPerformanceCommand(String userInput) throws HotelLiteManagerException {
-        if (!userInput.contains("/")) {
+        if (!userInput.contains(DELIMITER)) {
             logger.log(Level.WARNING, "A '/' character is needed to separate the housekeeper's name "
                     + "from their rating.");
+            throw new InvalidCommandException();
+        }
+        if (countSlashes(userInput) > 1) {
+            logger.log(Level.WARNING, "More than one '/' character detected. There should only be a single '/'"
+                    + " that separates the housekeeper's name from their performance.");
+            throw new InvalidCommandException();
+        }
+        if (userInput.trim().equals(DELIMITER)) {
+            logger.log(Level.WARNING, "Housekeeper name and performance rating were both found to be empty.");
             throw new InvalidCommandException();
         }
         String housekeeperName = extractHousekeeperName(userInput);
         int housekeeperRating = extractHousekeeperRating(userInput);
         HousekeeperPerformance housekeeperPerformance = new HousekeeperPerformance(housekeeperName, housekeeperRating);
         setHousekeeperPerformance(housekeeperPerformance);
+    }
+
+    public int countSlashes(String userInput) {
+        int slashCount = 0;
+        for (int i = 0; i < userInput.length(); i++) {
+            String curChar = Character.toString(userInput.charAt(i));
+            if (curChar.equals(DELIMITER)) {
+                slashCount += 1;
+            }
+        }
+        return slashCount;
     }
 
     /**
@@ -64,12 +85,15 @@ public class AddHousekeeperPerformanceCommand extends Command {
      */
     public int extractHousekeeperRating(String userInput) throws HotelLiteManagerException {
         String[] splitInput = userInput.split("/");
-        String ratingString = splitInput[1].trim();
+        String ratingString = "";
         int ratingValue;
         try {
+            ratingString = splitInput[1].trim();
             ratingValue = Integer.parseInt(ratingString);
         } catch (NumberFormatException e) {
             throw new InvalidHousekeeperPerformanceRatingException();
+        } catch (IndexOutOfBoundsException e) {
+            throw new EmptyHousekeeperPerformanceRatingException();
         }
         if (ratingValue < 1 || ratingValue > 5) {
             throw new InvalidHousekeeperPerformanceRatingException();

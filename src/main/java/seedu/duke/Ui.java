@@ -14,6 +14,8 @@ public class Ui {
     private static final String LINE = "======================================================================";
     private static final String ITEM_LIST_HEADER = "=========== Item List ===========";
     private static final String END_OF_LIST_LINE = "======== End of the list ========";
+    private static final String MESSAGE_HEADER = "========== Noted ! ==========";
+    private static final String END_OF_MESSAGE_LINE = "=============================";
     private static final String TABLE_HEADER = "Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHousekeeper Name";
 
     /**
@@ -26,6 +28,70 @@ public class Ui {
         return userInput;
     }
 
+    public void printEventAdded(Event event) {
+        System.out.println(LINE);
+        System.out.println("I have added the following event in your list:");
+        System.out.println("\t" + event.toString());
+        System.out.println(LINE);
+    }
+
+    public void printAllEvents(ArrayList<Event> events) {
+        System.out.println(LINE);
+        System.out.println("Here are all the events in your list:");
+        int j = 0;
+        for (Event event : events) {
+            j = j + 1;
+            System.out.println("\t" + j + ". " + event.toString());
+        }
+        System.out.println(LINE);
+    }
+
+    public void printGreeting() {
+        int row = 5;
+        int i;
+        int j;
+        int space = row - 1;
+        for (j = 1; j <= row; j++) {
+            for (i = 1; i <= space; i++) {
+                System.out.print(" ");
+            }
+            space--;
+            for (i = 1; i <= 2 * j - 1; i++) {
+                System.out.print("*");
+            }
+            System.out.println("");
+        }
+        space = 1;
+        for (j = 1; j <= row - 1; j++) {
+            for (i = 1; i <= space; i++) {
+                System.out.print(" ");
+            }
+            space++;
+            for (i = 1; i <= 2 * (row - j) - 1; i++) {
+                System.out.print("*");
+            }
+            System.out.println("");
+        }
+        System.out.println("Hi, I am Hotel Lite, and "
+                + "I will do the managing for you.");
+        System.out.println("How can I help you today?");
+    }
+
+
+    public void printEventDeleted(Event event) {
+        System.out.println(LINE);
+        System.out.println("I have deleted the following event from your list:");
+        System.out.println("\t" + event.toString());
+        System.out.println(LINE);
+    }
+
+    public void printAssignedHousekeeper(String roomID, String name) {
+        System.out.println(LINE);
+        System.out.println("I have assigned " + name
+                + " to room number " + roomID + ".");
+        System.out.println(LINE);
+    }
+
 
     public void printErrorMessage(HotelLiteManagerException exception) {
         System.out.println(exception.getErrorMessage());
@@ -36,9 +102,9 @@ public class Ui {
     }
 
     public void printHousekeeperNoted(Housekeeper housekeeper) {
-        System.out.println("========== Noted ! ==========");
+        printNotedLine();
         System.out.println(housekeeper);
-        System.out.println("=============================");
+        printBottomLine();
     }
 
     /**
@@ -48,10 +114,12 @@ public class Ui {
      * @param listOfItems The item list containing all the items in the inventory.
      */
     public void printAddItemAcknowledgementMessage(ItemList listOfItems) {
+        System.out.println(MESSAGE_HEADER);
         System.out.println("The item and its pax has been added to the item list.");
         assert (listOfItems.getSize() > 0) : "Assertion Failed! Number of items in the item list is 0 after an item "
                 + "was added to it.";
         System.out.printf("There are currently %d items within the item list.\n", listOfItems.getSize());
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printItemAlreadyInTheListErrorMessage(String nameOfItemToAdd) {
@@ -88,15 +156,17 @@ public class Ui {
     }
 
     public void printNoItemsFoundInListAcknowledgementMessage() {
+        System.out.println(MESSAGE_HEADER);
         System.out.println("No Item matching the criteria has been found.");
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printHousekeeperList(HousekeeperList housekeeperList) {
-        printMessage("======== Housekeeper List ========");
+        printMessage("=============== Housekeeper List ================");
         for (int i = 0; i < housekeeperList.getTotalHousekeeper(); i++) {
             System.out.println((i + 1) + ". " + housekeeperList.getHousekeeper(i));
         }
-        printMessage("======== End of the list ========");
+        printMessage("=============== End of the list =================");
     }
 
     public void printHousekeeperListReset(HousekeeperList housekeeperList) {
@@ -107,7 +177,7 @@ public class Ui {
     public void printFoundHousekeeperList(ArrayList<Housekeeper> housekeeperPrintList, int dayInteger) {
         String day = getDayInString(dayInteger);
 
-        printMessage("======== " + day + " List ========");
+        printMessage("=========== " + day + " List ===========");
         if (housekeeperPrintList.isEmpty()) {
             printMessage("TAKE NOTE! NO ONE IS AVAILABLE!!");
         }
@@ -116,7 +186,7 @@ public class Ui {
             System.out.println(i + ". " + housekeeper.getName());
             i += 1;
         }
-        printMessage("======== End of the list ========");
+        printMessage("========= End of the list =========");
     }
 
     private String getDayInString(int dayInteger) {
@@ -152,14 +222,14 @@ public class Ui {
     public void printOverAgeList(ArrayList<Housekeeper> housekeeperPrintList) {
         printMessage("======== Age Limit Exceed List ========");
         if (housekeeperPrintList.isEmpty()) {
-            printMessage("Everyone is within age limit");
+            printMessage("No one exceed age limit");
         }
         int i = 1;
         for (Housekeeper housekeeper : housekeeperPrintList) {
             System.out.println(i + ". " + housekeeper);
             i += 1;
         }
-        printMessage("======== End of the list ========");
+        printMessage("=========== End of the list ===========");
     }
 
     /**
@@ -173,18 +243,24 @@ public class Ui {
         int updatedItemNewPax = updatedItem.getPax();
         assert (!updatedItemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
         assert (updatedItemNewPax >= 0) : "Assertion Failed! Updated item has a pax that is less than 0.";
+        System.out.println(MESSAGE_HEADER);
         System.out.printf("The pax of %s has been updated to %d.\n", updatedItemName, updatedItemNewPax);
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printUpdateItemNameAcknowledgementMessage(String oldItemName, String newItemName) {
+        System.out.println(MESSAGE_HEADER);
         System.out.printf("The name of %s has been updated to %s.\n", oldItemName, newItemName);
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printAddSatisfactionAcknowledgementMessage(SatisfactionList satisfactionList,
                                                            Satisfaction recentSatisfaction) {
-        System.out.println("The Satisfaction instance " + recentSatisfaction.getCustomerName() + ": "
+        System.out.println("========== Noted ! ==========");
+        System.out.println("The Satisfaction instance " + recentSatisfaction.getCustomerName().toUpperCase() + ": "
                 + recentSatisfaction.getSatisfactionValue() + " has been added to the list of Satisfactions.");
         System.out.printf("There are currently %d recorded customer satisfactions.\n", satisfactionList.getSize());
+        System.out.println("=============================");
     }
 
 
@@ -192,23 +268,40 @@ public class Ui {
         String itemName = updatedItem.getName();
         itemName = itemName.toUpperCase();
         assert (!itemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
+        System.out.println(MESSAGE_HEADER);
         System.out.printf("%s has been removed from the Item List.\n", itemName);
         System.out.printf("There are currently %d items within the Item List.\n", listOfItems.getSize());
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printAddHousekeeperPerformanceAcknowledgementMessage(HousekeeperPerformanceList
                                                                              housekeeperPerformanceList,
                                                                      HousekeeperPerformance housekeeperPerformance) {
-        System.out.println("The HousekeeperPerformance instance " + housekeeperPerformance.getName() + ": "
-                + housekeeperPerformance.getRating() + " has been added to the list of housekeeper performances.");
+        System.out.println("========== Noted ! ==========");
+        System.out.println("The HousekeeperPerformance instance " + housekeeperPerformance.getName().toUpperCase()
+                + ": " + housekeeperPerformance.getRating() + " has been added to the list "
+                + "of housekeeper performances.");
         System.out.printf("There are currently %d recorded housekeeper performances.\n",
                 housekeeperPerformanceList.getSize());
+        System.out.println("=============================");
     }
 
     public void printTableHeader() {
         System.out.println(LINE);
         System.out.println(TABLE_HEADER);
         System.out.println(LINE);
+    }
+
+    public void printFileNotFoundMessage(String fileName) {
+        System.out.printf("File %s was not found and is unable to be created.\n", fileName);
+    }
+
+    public void printNotedLine() {
+        System.out.println("================ Noted! ===================");
+    }
+
+    public void printBottomLine() {
+        System.out.println("===========================================");
     }
 }
 

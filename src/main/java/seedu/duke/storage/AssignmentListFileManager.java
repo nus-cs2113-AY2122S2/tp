@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.HotelLiteManagerException;
 import seedu.duke.Room;
 import seedu.duke.RoomType;
 
@@ -11,9 +12,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AssignmentListFileManager extends FileManager {
-    private static final String FILE_PATH = "assignment_list.txt";
+    private static final String FILE_PATH = "ListFolder/assignment_list.txt";
 
-    public void load(HashMap<Integer, String> map) throws IOException {
+    public void load(HashMap<Integer, String> map) throws IOException, HotelLiteManagerException {
         Boolean isNewFile = !isFileExist(FILE_PATH);
         File file = getFile(FILE_PATH);
         if (isNewFile) {
@@ -31,7 +32,7 @@ public class AssignmentListFileManager extends FileManager {
     }
 
 
-    public void save(HashMap<Integer, String> map) throws IOException {
+    public void save(HashMap<Integer, String> map) throws IOException, HotelLiteManagerException {
         File file = getFile(FILE_PATH);
         FileWriter fileWriter = new FileWriter(FILE_PATH);
         for (Map.Entry<Integer, String> set :

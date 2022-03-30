@@ -51,13 +51,12 @@ view recorded housekeeper
 is a new year
 view recorded housekeeper
 View Recorded Housekeeper
-Update Item Name Swimming Pool /
-Update Item Name / Premium Swimming Pool
-Update Item Name Spoon / Premium Spoon
 Search Item
 Search Item o
 View Items With Zero Pax
 View Items With Zero
 Add Item Premium Spoon / 500
 Add Item Table / 2000
+Update Item Pax Table / 100000000
+Add Item Swiss Watch / 100000000
 bye

@@ -1,54 +1,57 @@
-package seedu.duke.command.itemcommand;
+package seedu.duke.command.itemcommands;
 
 import seedu.duke.command.Command;
 import seedu.duke.HotelLiteManagerException;
-import seedu.duke.EmptyItemPaxException;
-import seedu.duke.EmptyItemNameException;
-import seedu.duke.InvalidCommandException;
+import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.Item;
 import seedu.duke.ItemList;
 import seedu.duke.Ui;
 import seedu.duke.ListContainer;
 import seedu.duke.InvalidItemPaxException;
+import seedu.duke.InvalidUpdateItemPaxCommandException;
+import seedu.duke.storage.ItemListFileManager;
 
-import java.util.Locale;
+import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 /**
- * Represents a command to add a new item to the item list. An AddItemCommand object consists of the name of the item
- * to add as well as its pax.
+ * Represents a command to update the pax of an item within the item list. An UpdateItemPaxCommand object consists of
+ * the name of the item to update and the new pax value.
  */
-public class AddItemCommand extends Command {
+public class UpdateItemPaxCommand extends Command {
+    private Item item;
     private static final String DELIMITER = "/";
     private static final int NUMBER_OF_PARTS_IN_COMMAND = 2;
-    private Item item;
     private static Logger itemLogger = Logger.getLogger("itemLogger");
 
     /**
-     * Takes in the user input and checks if the formatting of the Add Item Command within the user input is
+     * Takes in the user input and checks if the formatting of the Update Item Pax Command within the user input is
      * valid.
-     * Extracts out the item name and item pax from the user input and creates an AddItemCommand object.
+     * Extracts out the item name and item pax from the user input and creates an UpdateItemPaxCommand object.
      *
      * @param userInput The user's input.
-     * @throws HotelLiteManagerException if the formatting of the add item pax command is invalid, the item pax is
+     * @throws HotelLiteManagerException if the formatting of the update item pax command is invalid, the item pax is
      *                                   empty or invalid, the item name is empty, or the item name and pax are both
      *                                   empty.
      */
-    public AddItemCommand(String userInput) throws HotelLiteManagerException {
+    public UpdateItemPaxCommand(String userInput) throws HotelLiteManagerException {
         if (userInput.startsWith(DELIMITER)) {
-            itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
+            itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemCommand. "
+                    + "Exception thrown.");
             throw new EmptyItemNameException();
         }
         if (userInput.endsWith(DELIMITER)) {
-            itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
-            throw new EmptyItemPaxException();
+            itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemCommand. "
+                    + "Exception thrown.");
+            throw new EmptyItemNameException();
         }
         StringTokenizer tokens = new StringTokenizer(userInput, DELIMITER);
         if (tokens.countTokens() != NUMBER_OF_PARTS_IN_COMMAND) {
-            itemLogger.log(Level.WARNING, "Invalid formatting for AddItemCommand detected. Exception thrown.");
-            throw new InvalidCommandException();
+            itemLogger.log(Level.WARNING, "Invalid formatting for UpdateItemCommand detected."
+                    + " Exception thrown.");
+            throw new InvalidUpdateItemPaxCommandException();
         }
         String itemName = extractItemName(tokens);
         int itemPax = extractItemPax(tokens);
@@ -67,7 +70,8 @@ public class AddItemCommand extends Command {
         String itemName = tokens.nextToken();
         itemName = itemName.trim();
         if (itemName.isEmpty()) {
-            itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
+            itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemPaxCommand. "
+                    + "Exception thrown.");
             throw new EmptyItemNameException();
         }
         return itemName;
@@ -86,43 +90,40 @@ public class AddItemCommand extends Command {
         String itemPaxStringVersion = token.nextToken();
         itemPaxStringVersion = itemPaxStringVersion.trim();
         if (itemPaxStringVersion.isEmpty()) {
-            itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
-            throw new EmptyItemPaxException();
+            itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemPaxCommand. "
+                    + "Exception thrown.");
+            throw new EmptyItemNameException();
         }
         try {
             itemPax = Integer.parseInt(itemPaxStringVersion);
         } catch (NumberFormatException e) {
-            itemLogger.log(Level.WARNING, "Detected an invalid item pax for AddItemCommand. Exception thrown.");
+            itemLogger.log(Level.WARNING, "Detected an invalid item pax for UpdateItemPaxCommand. "
+                    + "Exception thrown.");
             throw new InvalidItemPaxException();
         }
-        if (itemPax <= 0) {
-            itemLogger.log(Level.WARNING, "Detected an invalid item pax for AddItemCommand. Exception thrown.");
+        if (itemPax < 0 || itemPax > 1000000) {
+            itemLogger.log(Level.WARNING, "Detected an invalid item pax for UpdateItemPaxCommand. "
+                    + "Exception thrown.");
             throw new InvalidItemPaxException();
         }
         return itemPax;
     }
 
     /**
-     * Adds a new item to the item list using the item name and pax found in the instance variable
-     * named item within the AddItemPaxCommand object.
-     * Returns an acknowledgement message to inform the user that the item has been added to the item list as well
-     * as the number of items within the item list.
+     * Updates the pax of the item within the item list using the item name and new pax found in the instance
+     * variable named item within the UpdateItemPaxCommand object.
      *
      * @param ui The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    @Override
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         ItemList listOfItems = listContainer.getItemList();
-        Item item = getItem();
-        assert (item != null) : "Assertion Failed! There is no item within the AddItemCommand object.";
-        boolean isItemAlreadyInTheList = listOfItems.addItemToList(item);
-        if (isItemAlreadyInTheList == true) {
-            String nameOfItemToAdd = item.getName();
-            nameOfItemToAdd = nameOfItemToAdd.toUpperCase();
-            ui.printItemAlreadyInTheListErrorMessage(nameOfItemToAdd);
-            return;
-        }
-        ui.printAddItemAcknowledgementMessage(listOfItems);
+        assert (item != null) : "Assertion Failed! There is no item within the UpdateItemPaxCommand object.";
+        listOfItems.updateItemPaxInList(item);
+        ui.printUpdateItemPaxAcknowledgementMessage(item);
+        ItemListFileManager itemListFileManager = new ItemListFileManager();
+        itemListFileManager.writeItemListToFile(listOfItems);
     }
 
     public Item getItem() {
@@ -132,5 +133,4 @@ public class AddItemCommand extends Command {
     public void setItem(Item item) {
         this.item = item;
     }
-
 }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.duke.command.Command;
+import seedu.duke.command.housekeepercommands.AddAvailabilityCommand;
 
 
 public class AddAvailabilityTest {
@@ -20,6 +21,13 @@ public class AddAvailabilityTest {
 
     @Test
     public void commandParser_addCommandInvalidAvailability_exceptionThrown() {
-        assertThrows(InvalidAvailabilityException.class, () -> new CommandParser().parse("availability Susan / "));
+        assertThrows(InvalidAvailabilityException.class, () -> new CommandParser()
+                .parse("availability Susan / "));
+    }
+
+    @Test
+    public void commandParser_addCommandExtraSlash_exceptionThrown() {
+        assertThrows(InvalidAvailabilityException.class, () -> new CommandParser()
+                .parse("availability Susan /3/"));
     }
 }

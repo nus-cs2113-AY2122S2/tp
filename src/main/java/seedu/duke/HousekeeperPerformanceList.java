@@ -58,7 +58,7 @@ public class HousekeeperPerformanceList {
             System.out.println("======== Housekeeper Performance List ========");
             int number = 1;
             for (HousekeeperPerformance housekeeperPerformance : housekeeperPerformanceList) {
-                System.out.println(Integer.toString(number) + ". [ " + housekeeperPerformance.getName()
+                System.out.println(Integer.toString(number) + ". [ " + housekeeperPerformance.getName().toUpperCase()
                         + " ]: " + housekeeperPerformance.getRating());
                 number += 1;
             }
@@ -70,7 +70,7 @@ public class HousekeeperPerformanceList {
      * Sorts the HousekeeperPerformance objects based on rating in descending order.
      */
     public void sortHousekeeperPerformances() {
-        Collections.sort(housekeeperPerformanceList,new Comparator<HousekeeperPerformance>() {
+        Collections.sort(housekeeperPerformanceList, new Comparator<HousekeeperPerformance>() {
             @Override
             public int compare(HousekeeperPerformance a, HousekeeperPerformance b) {
                 return a.getRating() > b.getRating() ? -1 : (a.getRating() > b.getRating() ? 1 : 0);

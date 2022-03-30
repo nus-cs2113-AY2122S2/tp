@@ -1,8 +1,16 @@
-package seedu.duke;
+package seedu.duke.command.housekeepercommands;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import seedu.duke.command.Command;
+import seedu.duke.ListContainer;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.Ui;
+import seedu.duke.UserDoesNotExistException;
+import seedu.duke.EmptyNameException;
+import seedu.duke.HousekeeperList;
+import seedu.duke.AssignmentMap;
 
 public class DeleteHousekeeperCommand extends Command {
     private String name;
@@ -36,7 +44,9 @@ public class DeleteHousekeeperCommand extends Command {
         housekeeperList.removeHousekeeperInList(name);
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         assignmentMap.removeAssignment(name);
+        ui.printNotedLine();
         ui.printMessage("Deleted " + name + " from the list of profile");
         ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
+        ui.printBottomLine();
     }
 }

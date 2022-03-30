@@ -1,13 +1,13 @@
 package seedu.duke;
 
-
-import seedu.duke.storage.AssignmentListFileManager;
-import seedu.duke.storage.EventListFileManager;
-import seedu.duke.storage.RoomFileManager;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import seedu.duke.storage.AssignmentListFileManager;
+import seedu.duke.storage.RoomFileManager;
+import seedu.duke.storage.EventListFileManager;
+import seedu.duke.storage.ItemListFileManager;
+import seedu.duke.storage.SatisfactionListFileManager;
 
 public class ListContainer {
     private HousekeeperList housekeeperList;
@@ -18,7 +18,7 @@ public class ListContainer {
     private ItemList itemList;
     private EventList eventList;
 
-    public ListContainer() throws IOException {
+    public ListContainer() throws IOException, HotelLiteManagerException {
         satisfactionList = new SatisfactionList();
         housekeeperList = new HousekeeperList();
         housekeeperPerformanceList = new HousekeeperPerformanceList();
@@ -38,7 +38,11 @@ public class ListContainer {
         eventFileManager.load(eventArrayList);
         eventList = new EventList(eventArrayList);
 
-        itemList = new ItemList();
+        ItemListFileManager itemListFileManager = new ItemListFileManager();
+        itemList = itemListFileManager.load();
+
+        SatisfactionListFileManager satisfactionListFileManager = new SatisfactionListFileManager();
+        satisfactionList = satisfactionListFileManager.load();
     }
 
 
