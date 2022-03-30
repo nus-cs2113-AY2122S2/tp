@@ -33,7 +33,7 @@ public class ListCommand extends Command {
         String user = this.name;
         try {
             if (user.length() == 0) {
-                throw new MissingValueException();
+                throw new MissingValueException(); // why dun return the error msg directly?
             } else if (user.equalsIgnoreCase("all")) {
                 return listAll(masterTimetable);
             } else {

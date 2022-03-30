@@ -6,7 +6,7 @@ import static seedu.meetingjio.parser.Parser.HEADINGS_DELETE_EVENT;
 
 public class ParserArguments {
 
-    protected static String[] splitArgumentsAddLesson(String arguments) {
+    protected static String[] splitArgumentsAllParams(String arguments) {
         String[] eventDescription = new String[6];
         String[] splitArguments = arguments.split(" ");
         int index = -1;
@@ -38,7 +38,7 @@ public class ParserArguments {
         return eventDescription;
     }
 
-    protected static String[] splitArgumentsAddMeeting(String arguments) {
+    protected static String[] splitArgumentsWithoutName(String arguments) {
         String[] eventDescription = new String[5];
         String[] splitArguments = arguments.split(" ");
         int index = -1;

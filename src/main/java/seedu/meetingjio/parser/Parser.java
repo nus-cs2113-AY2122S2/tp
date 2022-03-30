@@ -7,6 +7,7 @@ import seedu.meetingjio.commands.ClearCommand;
 import seedu.meetingjio.commands.AddUserCommand;
 import seedu.meetingjio.commands.AddLessonCommand;
 import seedu.meetingjio.commands.AddMeetingCommand;
+import seedu.meetingjio.commands.EditCommand;
 import seedu.meetingjio.commands.FreeCommand;
 import seedu.meetingjio.commands.CommandResult;
 import seedu.meetingjio.commands.HelpCommand;
@@ -16,7 +17,6 @@ import seedu.meetingjio.exceptions.InvalidModeException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.MissingValueException;
 
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,8 +41,6 @@ public class Parser {
     private final String command;
     private final String arguments;
     public static Logger logger = Logger.getLogger(Parser.class.getName());
-    private ParserHelperMethods parserHelperMethods = new ParserHelperMethods();
-    private ParserArguments parserArguments = new ParserArguments();
 
     private static final int NAME_INDEX = 0;
     private static final int TITLE_INDEX = 1;
@@ -56,8 +54,8 @@ public class Parser {
     protected static final String[] HEADINGS_DELETE_EVENT = {"n/", "i/"};
 
     public Parser(String input) {
-        this.command = parserArguments.getCommandFromInput(input);
-        this.arguments = parserArguments.getArgumentsFromInput(input);
+        this.command = ParserArguments.getCommandFromInput(input);
+        this.arguments = ParserArguments.getArgumentsFromInput(input);
     }
 
     public String getArguments() {
@@ -70,6 +68,10 @@ public class Parser {
             return prepareAddUser();
         case AddLessonCommand.COMMAND_WORD:
             return prepareAddLesson();
+        case AddMeetingCommand.COMMAND_WORD:
+            return prepareAddMeeting();
+        case EditCommand.COMMAND_WORD:
+            return prepareEdit();
         case ListCommand.COMMAND_WORD:
             return new ListCommand(arguments);
         case DeleteCommand.COMMAND_WORD:
@@ -80,8 +82,6 @@ public class Parser {
             return new FreeCommand(arguments);
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-        case AddMeetingCommand.COMMAND_WORD:
-            return prepareAddMeeting();
         default:
             String feedback = ERROR_INVALID_COMMAND + '\n' + MESSAGE_HELP;
             return new CommandResult(feedback);
@@ -89,26 +89,25 @@ public class Parser {
     }
 
     private Command prepareAddUser() {
-        String name = arguments.trim();
-        if (name.isEmpty()) {
+        if (arguments.isEmpty()) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_USER);
         }
-        return new AddUserCommand(name);
+        return new AddUserCommand(arguments);
     }
     
     private Command prepareAddLesson() {
         try {
-            String[] eventDescription = parserArguments.splitArgumentsAddLesson(this.getArguments());
-            parserHelperMethods.checkNonNullValues(eventDescription);
+            String[] eventDescription = ParserArguments.splitArgumentsAllParams(this.getArguments());
+            ParserHelperMethods.checkNonNullValues(eventDescription);
 
             String day = eventDescription[DAY_INDEX];
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
             String mode = eventDescription[MODE_INDEX];
 
-            parserHelperMethods.checkDay(day);
-            parserHelperMethods.checkTime(startTime, endTime);
-            parserHelperMethods.checkMode(mode);
+            ParserHelperMethods.checkDay(day);
+            ParserHelperMethods.checkTime(startTime, endTime);
+            ParserHelperMethods.checkMode(mode);
 
             String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
@@ -130,13 +129,17 @@ public class Parser {
         }
     }
 
+    private Command prepareEdit() {
+        return new CommandResult("");
+    }
+
     /**
      * Try to parse the delete command to see if index has been done.
      */
     private Command prepareDelete() {
         try {
-            String[] eventDescription = parserArguments.splitArgumentsDeleteCommand(this.getArguments());
-            parserHelperMethods.checkNonNullValues(eventDescription);
+            String[] eventDescription = ParserArguments.splitArgumentsDeleteCommand(this.getArguments());
+            ParserHelperMethods.checkNonNullValues(eventDescription);
 
             String name = eventDescription[0];
             int index = Integer.parseInt(eventDescription[1]);
@@ -155,8 +158,8 @@ public class Parser {
 
     private Command prepareAddMeeting() {
         try {
-            String[] eventDescription = parserArguments.splitArgumentsAddMeeting(this.getArguments());
-            parserHelperMethods.checkNonNullValues(eventDescription);
+            String[] eventDescription = ParserArguments.splitArgumentsWithoutName(this.getArguments());
+            ParserHelperMethods.checkNonNullValues(eventDescription);
 
             //there is no name for meeting because meeting applies to everyone
             String day = eventDescription[DAY_INDEX - 1];
@@ -164,9 +167,9 @@ public class Parser {
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX - 1]);
             String mode = eventDescription[MODE_INDEX - 1];
 
-            parserHelperMethods.checkDay(day);
-            parserHelperMethods.checkTime(startTime, endTime);
-            parserHelperMethods.checkMode(mode);
+            ParserHelperMethods.checkDay(day);
+            ParserHelperMethods.checkTime(startTime, endTime);
+            ParserHelperMethods.checkMode(mode);
 
             String title = eventDescription[TITLE_INDEX - 1];
             return new AddMeetingCommand(title, day, startTime, endTime, mode);
