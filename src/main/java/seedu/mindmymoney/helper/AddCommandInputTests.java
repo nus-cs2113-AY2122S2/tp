@@ -3,6 +3,7 @@ package seedu.mindmymoney.helper;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
 import seedu.mindmymoney.constants.IncomeCategoryTypes;
+import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
@@ -76,7 +77,7 @@ public class AddCommandInputTests {
         }
 
         if (!isExpenditureInList(inputPaymentMethod, creditCardList)) {
-            throw new MindMyMoneyException("Input Cash or a Credit Card after the /e field!");
+            throw new MindMyMoneyException("Input Cash or a Credit Card after the /pm field!");
         }
     }
 
@@ -149,5 +150,19 @@ public class AddCommandInputTests {
         if (!isIncomeCategoryInList(inputCategory)) {
             throw new MindMyMoneyException("Input Salary, Allowance, Investment or Others!");
         }
+    }
+
+    /**
+     * Checks if date input format is valid.
+     *
+     * @param input The string of the date input.
+     * @return true if format is valid, false otherwise.
+     */
+    public static boolean isValidInput(String input) {
+        if (input.matches(ValidationRegexTypes.VALIDATION_REGEX_D)) {
+            return true;
+        }
+        return false;
+
     }
 }

@@ -60,7 +60,7 @@ public class GeneralFunctions {
         try {
             if (!hasCorrectFlagFormat(input, startingFlag, endingFlag)) {
                 throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!\n"
-                        + "For eg. \"add /e cash /c Food /d Porridge /a 4.50 /t 2022-03\"");
+                        + "For eg. \"add /pm cash /c Food /d Porridge /a 4.50 /t 30/03/2022\"");
             }
 
             startingFlag = startingFlag + " ";

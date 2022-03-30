@@ -15,10 +15,10 @@ import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.PERSONAL;
 import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.ENTERTAINMENT;
 import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.OTHERS;
 import static seedu.mindmymoney.constants.ExpenditureFields.TIME;
-import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.findItemsInList;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
 import static seedu.mindmymoney.helper.GeneralFunctions.findMatchingCategoryInArraylist;
+import static seedu.mindmymoney.helper.TimeFunctions.isValidInput;
 
 /**
  * Container for functions that help do calculations.
@@ -31,11 +31,13 @@ public class Calculations {
      *
      * @param input           The month to calculate expenditure for.
      * @param expenditureList The list containing all expenditures to search for.
-     * @throws MindMyMoneyException when findItemsInList throws MindMyMoneyException.
+     * @throws MindMyMoneyException When findItemsInList throws MindMyMoneyException.
      */
     public static void calculateExpenditurePerMonth(String input, ExpenditureList expenditureList)
         throws MindMyMoneyException {
-        input = capitalise(input);
+        if (!isValidInput(input)) {
+            throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
+        }
         ArrayList<Expenditure> foundItems = findItemsInList(input, TIME.toString(), expenditureList);
         float sumOfExpenditure = 0;
         for (Expenditure item : foundItems) {
@@ -45,7 +47,7 @@ public class Calculations {
         if (sumOfExpenditure == 0.0) {
             throw new MindMyMoneyException("Month and year not found in the list! Do check your input");
         }
-        System.out.println("Total expenditure in the month of " + input + " is $" + sumOfExpenditure + ".");
+        System.out.println("Total expenditure in " + input + " is $" + sumOfExpenditure + ".");
         displayExpenditureBreakdown(foundItems, sumOfExpenditure);
     }
 
@@ -62,7 +64,6 @@ public class Calculations {
         float personalPercentage = calculatePercentage(PERSONAL, foundItems, sumOfExpenditure);
         float entertainmentPercentage = calculatePercentage(ENTERTAINMENT, foundItems, sumOfExpenditure);
         float othersPercentage = calculatePercentage(OTHERS, foundItems, sumOfExpenditure);
-
         System.out.println(System.lineSeparator() + "BREAKDOWN OF EXPENSES:");
         System.out.print(PrintStrings.LINE);
         System.out.println("FOOD:          " + printBar(foodPercentage) + " " + foodPercentage + "%");

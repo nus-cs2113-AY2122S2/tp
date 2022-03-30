@@ -1,18 +1,22 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.constants.PrintStrings;
+import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
+import seedu.mindmymoney.helper.GeneralFunctions;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.Income;
 import seedu.mindmymoney.userfinancial.User;
 
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
 /**
  * Represents the List command.
@@ -22,6 +26,7 @@ public class ListCommand extends Command {
     public CreditCardList creditCardList;
     public IncomeList incomeList;
     private String listInput;
+    private static final int COUNTVALUE = 1;
 
     public ListCommand(String listInput, User user) {
         this.expenditureList = user.getExpenditureListArray();
@@ -41,12 +46,12 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Indicates whether the list command is to list expenditure(s) by looking for the /expenses flag.
+     * Indicates whether the list command is to list expenditure(s) by looking for the /e flag.
      *
-     * @return true if the /expenses flag is present, false otherwise.
+     * @return true if the /pm flag is present, false otherwise.
      */
     private boolean hasExpensesFlag() {
-        return FLAG_OF_EXPENSES.equals(listInput);
+        return listInput.contains(FLAG_OF_EXPENSES);
     }
 
     /**
@@ -67,23 +72,91 @@ public class ListCommand extends Command {
         return FLAG_OF_INCOME.equals(listInput);
     }
 
-
     /**
      * Gets all expenditures and formats them into a String to be printed.
      *
      * @return String of expenditures.
+     * @throws MindMyMoneyException Throws an exception when the date is not in the correct format
      */
-    public String expenditureListToString() {
-        int indexOfList = 1;
+    public String expenditureListToString() throws MindMyMoneyException {
+        int count = COUNTVALUE;
         String listInString = "";
-
-        for (Expenditure i : expenditureList.expenditureListArray) {
-            listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + ". Paid using "
-                    + i.getPaymentMethod() + " [" + i.getCategory() + "]" + " [" + i.getTime() + "]\n";
-            indexOfList++;
+        if (listInput.equals(FLAG_OF_EXPENSES)) {
+            listInString = listString(count, listInString);
+        } else {
+            listInString = outputListWithDate(count,listInString);
         }
         assert listInString.length() != 0 : "Return string should be non-empty";
         return listInString;
+    }
+
+    /**
+     * Outputs the list of expenses with date.
+     * @param count To obtain the numbering when listing the expenses.
+     * @param listInString String where the content of output is appended to.
+     * @return String of expenditures.
+     * @throws MindMyMoneyException Throws an exception when the date is not in the correct format.
+     */
+    public String outputListWithDate(int count, String listInString) throws MindMyMoneyException {
+        String[] inputArray = GeneralFunctions.parseInput(listInput);
+        if (!inputArray[INDEX_OF_SECOND_ITEM].equals("")) {
+            if (!isValidInput(inputArray[INDEX_OF_SECOND_ITEM])) {
+                throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
+            }
+            return listStringWithDate(count, listInString, inputArray);
+        } else {
+            return listString(count, listInString);
+        }
+    }
+
+    /**
+     * Formats the output of expenses in list according to date.
+     *
+     * @param count To obtain the numbering when listing the expenses.
+     * @param listInString String where the content of output is appended to.
+     * @return String of expenditures
+     */
+    public String listStringWithDate(int count, String listInString, String[] inputArray) {
+        for (Expenditure i : expenditureList.expenditureListArray) {
+            if (i.getTime().contains(inputArray[INDEX_OF_SECOND_ITEM])) {
+                listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription()
+                        + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod()
+                        + " [" + i.getTime() + "]" + "\n";
+                count++;
+            }
+        }
+        return listInString;
+    }
+
+    /**
+     * Formats the output of all expenses in list.
+     *
+     * @param count To obtain the numbering when listing the expenses.
+     * @param listInString String where the content of output is appended to.
+     * @return String of expenditures
+     */
+    public String listString(int count, String listInString) {
+        for (Expenditure i : expenditureList.expenditureListArray) {
+            listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription() + "("
+                    + i.getCategory() + ") " + "using " + i.getPaymentMethod() + " [" + i.getTime() + "]" + "\n";
+            count++;
+        }
+        return listInString;
+    }
+
+    /**
+     * Checks if date input format is valid.
+     *
+     * @param input The string of the date input.
+     * @return true if format is valid, false otherwise.
+     */
+    public static boolean isValidInput(String input) {
+        if (input.matches(ValidationRegexTypes.VALIDATION_REGEX_D)
+                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_M)
+                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_Y)) {
+            return true;
+        }
+        return false;
     }
 
     /**
