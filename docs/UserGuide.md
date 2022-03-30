@@ -23,6 +23,12 @@
    * Increase Age of All Housekeepers
 3. [Event Related Commands](#Event-Related-Commands)
 4. [Room Related Commands](#Room-Related-Commands)
+   * Check in a room
+   * Check out a room
+   * Check room information
+   * Check all room information
+   * Check room information by level
+   * Check room information by category
 5. [Item Related Commands](#Item-Related-Commands)
 
 {Give detailed description of each feature}
@@ -809,3 +815,13 @@ Expected output:
 | get available on | ```get available on DAY ```<br/>eg.```get available on 1``` |
 | is a new week | ```is a new week ```|
 | is a new year | ```is a new year ``` |
+
+
+| Room Command | Format, Example |
+| --- | --- |
+| check in a room | ```check in ROOM_NUMBER```<br/>eg. ```check in 301```|
+| check out a room | ```check out ROOM_NUMBER```<br/>eg. ```check out 301```|
+| check room information | ```check room ROOM_NUMBER```<br/>eg. ```check room 301```|
+| check all room information | ```check all room``` <br/>eg. ```check all room```|
+| check room information by level | ```check level LEVEL_NUMBER ```<br/>eg.```check level 4``` |
+| check room information by category | ```check category CATEGORY ```<br/>eg.```check category single``` |
