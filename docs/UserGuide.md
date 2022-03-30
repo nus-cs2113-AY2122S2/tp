@@ -335,7 +335,7 @@ Deletes an existing activity from a particular session so that you can remove ac
 >- A confirmation must be given before deletion takes place.
 >
 > **⚠️Warning:**
-> - This action is irreversible, once the command has been entered, the activity would be immediately deleted.
+>- This action is irreversible, once the command has been entered, the activity would be immediately deleted.
 
 <br>
 
@@ -394,6 +394,7 @@ There are two ways that you can edit an activity:
 >
 > **⚠️Warning:**
 >- All fields must be supplied in the command, not just the ones you wish to edit.
+>- This action is irreversible, once the command has been entered, the activity would be immediately edited.
 
 **Example**
 - An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1, part of 
