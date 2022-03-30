@@ -137,16 +137,16 @@ class PersonListTest {
     public void getTotalIncome_addIncome_returnAmount() {
         PersonList list = new PersonList();
         list.addPerson(VALID_NAME);
-        list.addIncome(FIRST_ENTRY, VALID_DESCRIPTION, FIRST_AMOUNT, PERMANENT, SILENT);
-        assertEquals(FIRST_AMOUNT, list.getTotalIncome());
+        list.addIncome(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, list.getTotalIncome());
     }
 
     @Test
     public void getTotalExpenditure_addExpend_returnAmount() {
         PersonList list = new PersonList();
         list.addPerson(VALID_NAME);
-        list.addExpend(FIRST_ENTRY, VALID_DESCRIPTION, SECOND_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
-        assertEquals(FIRST_AMOUNT, list.getTotalExpenditure());
+        list.addExpend(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, list.getTotalExpenditure());
     }
 
     @Test
