@@ -1,7 +1,7 @@
-#Developer Guide
+# Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
-#Contents
+# Contents
 * [Acknowledgements](#acknowledgements)
 * [Getting Started For Beginners](#getting-started-for-beginners)
 * [Design](#design)
