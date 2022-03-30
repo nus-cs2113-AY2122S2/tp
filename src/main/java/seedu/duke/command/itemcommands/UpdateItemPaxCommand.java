@@ -44,9 +44,9 @@ public class UpdateItemPaxCommand extends Command {
             throw new EmptyItemNameException();
         }
         if (userInput.endsWith(DELIMITER)) {
-            itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemCommand. "
+            itemLogger.log(Level.WARNING, "Detected an empty item Pax for UpdateItemCommand. "
                     + "Exception thrown.");
-            throw new EmptyItemNameException();
+            throw new EmptyItemPaxException();
         }
         StringTokenizer tokens = new StringTokenizer(userInput, DELIMITER);
         if (tokens.countTokens() != NUMBER_OF_PARTS_IN_COMMAND) {
