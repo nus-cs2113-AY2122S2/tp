@@ -280,7 +280,7 @@ The general workflow of the `group /create` command is as follows:
 6. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
 7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
 8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUi#printlnMessage`.
-9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and groupId. 
+9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and group unique identifier. 
 10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new Group object in the Profile.
 11. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created.
 
@@ -302,8 +302,8 @@ The general workflow of the `group /view` command is as follows:
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called before a group within 
 the list of groups can be retrieved.
 5. The `GroupViewCommand` object runs the `Profile#getGroup` method to retrieve the group represented by the
-groupId provided.
-   1. If the group with requested groupId does not exist, an error message is printed out with
+group unique identifier provided.
+   1. If the group with requested group unique identifier does not exist, an error message is printed out with
    `TextUI#printlnMessage`.
    2. Else, the string representing the details of the requested group is retrieved using the `Group#toString`
    method. The string is then printed out with `TextUI#printlnMessageWithDivider`.
