@@ -46,8 +46,10 @@ Example of usage:
 Expected output: 
 
 ```
-The Satisfaction instance will smith: 3 has been added to the list of Satisfactions.
+========== Noted ! ==========
+The Satisfaction instance WILL SMITH: 3 has been added to the list of Satisfactions.
 There are currently 1 recorded customer satisfactions.
+=============================
 ```
 
 
@@ -67,28 +69,34 @@ Example of usage:
 
 Expected output:
 ```
-The Satisfaction instance will smith: 3 has been added to the list of Satisfactions.
+========== Noted ! ==========
+The Satisfaction instance WILL SMITH: 3 has been added to the list of Satisfactions.
 There are currently 1 recorded customer satisfactions.
+=============================
 
-The Satisfaction instance bob: 5 has been added to the list of Satisfactions.
+========== Noted ! ==========
+The Satisfaction instance BOB: 5 has been added to the list of Satisfactions.
 There are currently 2 recorded customer satisfactions.
+=============================
 
-The Satisfaction instance chris rock: 4 has been added to the list of Satisfactions.
+========== Noted ! ==========
+The Satisfaction instance CHRIS ROCK: 4 has been added to the list of Satisfactions.
 There are currently 3 recorded customer satisfactions.
+=============================
 
 ======== Customer Satisfaction List ========
-1. [ will smith ]: 3
-2. [ bob ]: 5
-3. [ chris rock ]: 4
+1. [ WILL SMITH ]: 3
+2. [ BOB ]: 5
+3. [ CHRIS ROCK ]: 4
 ============= End of the list =============
 ```
 
-### Adding a housekeeper's performance: `add housekeeper performance`
+### Adding a housekeeper's performance: `add performance`
 Adds a new housekeeper performance (name of housekeeper and their performance rating from 1-5) to the list of
 housekeeper performances. 
 
 
-Format: `add housekeeper performance HOUSEKEEPER_NAME / PERFORMANCE_RATING`
+Format: `add performance HOUSEKEEPER_NAME / PERFORMANCE_RATING`
 
 * The `HOUSEKEEPER_NAME` can be in a natural language format. It must not be the name of a 
 housekeeper who already has a recorded performance rating, and it must be the name of a 
@@ -97,44 +105,52 @@ housekeeper who has a corresponding record in the list of housekeepers.
 
 Example of usage:
 
-`add housekeeper performance Fred Jones / 4`
+`add performance Fred Jones / 4`
 
 Expected output:
 
 ```
-The HousekeeperPerformance instance Fred Jones: 4 has been added to the list of housekeeper performances.
+========== Noted ! ==========
+The HousekeeperPerformance instance FRED JONES: 4 has been added to the list of housekeeper performances.
 There are currently 1 recorded housekeeper performances.
+=============================
 ```
 
-### View all housekeeper performances: `view housekeeper performances`
+### View all housekeeper performances: `view performances`
 Lists out all housekeeper performances recorded so far in a user-readable format. The performance
 ratings are sorted in descending order (from highest to lowest). 
 
-Format: `view housekeeper performances`
+Format: `view performances`
 
 Example of usage:
 
-`add housekeeper performance Fred Jones / 4`  <br />
-`add housekeeper performance Joe Johnson / 2`  <br />
-`add housekeeper performance John Smith / 3`  <br />
-`view housekeeper performances` 
+`add performance Fred Jones / 4`  <br />
+`add performance Joe Johnson / 2`  <br />
+`add performance John Smith / 3`  <br />
+`view performances` 
 
 Expected output:
 
 ```
-The HousekeeperPerformance instance Fred Jones: 4 has been added to the list of housekeeper performances.
+========== Noted ! ==========
+The HousekeeperPerformance instance FRED JONES: 4 has been added to the list of housekeeper performances.
 There are currently 1 recorded housekeeper performances.
+=============================
 
-The HousekeeperPerformance instance Joe Johnson: 2 has been added to the list of housekeeper performances.
+========== Noted ! ==========
+The HousekeeperPerformance instance JOE JOHNSON: 2 has been added to the list of housekeeper performances.
 There are currently 2 recorded housekeeper performances.
+=============================
 
-The HousekeeperPerformance instance John Smith: 3 has been added to the list of housekeeper performances.
+========== Noted ! ==========
+The HousekeeperPerformance instance JOHN SMITH: 3 has been added to the list of housekeeper performances.
 There are currently 3 recorded housekeeper performances.
+=============================
 
 ======== Housekeeper Performance List ========
-1. [ Fred Jones ]: 4
-2. [ John Smith ]: 3
-3. [ Joe Johnson ]: 2
+1. [ FRED JONES ]: 4
+2. [ JOHN SMITH ]: 3
+3. [ JOE JOHNSON ]: 2
 ============= End of the list =============
 ```
 
