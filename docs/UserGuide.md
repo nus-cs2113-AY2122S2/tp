@@ -134,6 +134,17 @@ Format: `delete TASK_NUMBER`
 Example:
 - `delete 1`
 
+### Deleting your recurring tasks
+
+Format: `delete TASK_NUMBER /repeat`
+
+| Parameters  | Description                                         | Accepted inputs       | Optional |
+|:-----------:|-----------------------------------------------------|-----------------------|----------|
+| TASK_NUMBER | The index of the task as seen in the `show` command | Any valid task number | No       |
+
+Example:
+- `delete 1 /repeat`
+
 
 ### Editing your tasks: `edit`
 
@@ -159,7 +170,7 @@ Examples:
 - Occurrences earlier than the specified task will not be affected.
 - To change frequency, delete and add the recurring task with the new frequency using the `delete` and `add` command respectively.
 
-Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME]`
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME] /repeat`
 
 |    Parameters    | Description                                         | Accepted inputs                                   | Optional               |
 |:----------------:|-----------------------------------------------------|---------------------------------------------------|------------------------|
