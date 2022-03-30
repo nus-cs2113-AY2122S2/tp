@@ -4,6 +4,7 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.logging.Level;
 
@@ -16,8 +17,8 @@ public class ActivityDeleteCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The activity was deleted successfully.";
     
-    private int sessionId;
-    private int activityId;
+    private final int sessionId;
+    private final int activityId;
 
     /**
      * Initializes an ActivityDeleteCommand object.
@@ -44,16 +45,17 @@ public class ActivityDeleteCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        TextUI ui = manager.getUi();
         try {
             Session session = manager.getProfile().getSession(sessionId);
             assert session != null : Message.ASSERT_ACTIVITYDELETE_SESSION_IS_NULL;
             session.removeActivity(activityId);
             assert !session.hasActivity(activityId) : Message.ASSERT_ACTIVITYDELETE_ACTIVITY_NOT_DELETED;
             manager.saveProfile();
-            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED + activityId);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessageWithDivider(e.getMessage());
+            ui.printlnMessageWithDivider(e.getMessage());
         }
     }
 }
