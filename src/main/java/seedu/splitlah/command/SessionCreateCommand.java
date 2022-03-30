@@ -56,19 +56,23 @@ public class SessionCreateCommand extends Command {
     @Override
     public void run(Manager manager) {
         TextUI ui = manager.getUi();
+        Profile profile = manager.getProfile();
+
         PersonList personList = new PersonList();
         if (personNames != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
             if (hasDuplicates) {
-                ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
+                ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION);
+                Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_SESSION);
                 return;
             }
             personList.convertToPersonList(personNames);
         }
+
         Group group = null;
         if (groupId != -1) {
             try {
-                group = manager.getProfile().getGroup(groupId);
+                group = profile.getGroup(groupId);
                 personList.mergeListOfPersons(group.getPersonList());
             } catch (InvalidDataException dataException) {
                 ui.printlnMessage(dataException.getMessage());
@@ -76,12 +80,13 @@ public class SessionCreateCommand extends Command {
             }
         }
 
-        boolean isSessionExists = manager.getProfile().hasSessionName(sessionName);
+        boolean isSessionExists = profile.hasSessionName(sessionName);
         if (isSessionExists) {
             ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_DUPLICATE_NAMES_IN_SESSION_LIST);
             return;
         }
-        Profile profile = manager.getProfile();
+
         int newSessionId = profile.getNewSessionId();
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList, group);
         profile.addSession(newSession);

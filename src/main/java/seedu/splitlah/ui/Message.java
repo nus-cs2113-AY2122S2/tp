@@ -160,8 +160,26 @@ public abstract class Message {
             "This person is not participating in the activity with Id: ";
 
     // PersonList
+    public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION =
+            "There are duplicate names in the person list for the session you are trying to create. "
+                    + "Please rectify and try again.";
+    public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP =
+            "There are duplicate names in the person list for the group you are trying to create. "
+                    + "Please rectify and try again.";
+    public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_ACTIVITY =
+            "There are duplicate names in the persons involved for the activity you are trying to create. "
+                    + "Please rectify and try again.";
     public static final String ASSERT_PERSONLIST_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exist but not detected.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_SESSION =
+            "An Session object failed to be added into the list of sessions because there are duplicate names in"
+                    + "the person list.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_GROUP =
+            "A Group object failed to be added into the list of groups because there are duplicate names in"
+                    + "the person list.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_ACTIVITY=
+            "An Activity object failed to be added into the list of activities because there are duplicate names in"
+                    + "the involved list.";
 
     // Name
     public static final String ERROR_NAME_INVALID_NAME =
@@ -186,9 +204,8 @@ public abstract class Message {
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
             "There is another session with the same name. Please rename and try again.";
-    public static final String ERROR_PROFILE_DUPLICATE_NAME =
-            "There are duplicate names in the person list for the session you are trying to create. "
-                    + "Please rectify and try again.";
+    public static final String ERROR_PROFILE_DUPLICATE_GROUP =
+            "There is another group with the same name. Please rename and try again.";
     public static final String ERROR_PROFILE_SESSION_LIST_EMPTY =
             "There are currently no sessions stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
@@ -234,6 +251,9 @@ public abstract class Message {
             "The person list or group identifier delimiters are missing but was not handled in prepare function.";
     public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
             "A session was added into the list of sessions with Id: ";
+    public static final String LOGGER_SESSIONCREATE_DUPLICATE_NAMES_IN_SESSION_LIST =
+            "A Session object failed to be added into the list of sessions because there are duplicate names in"
+                    + "the session list.";
 
     // Session Delete Command
     public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
@@ -277,9 +297,6 @@ public abstract class Message {
             "Please only include either a total cost or a list of costs.";
     public static final String ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST =
             "Please include either a cost or a list of costs.";
-    public static final String ERROR_ACTIVITYCREATE_DUPLICATE_NAME =
-            "There are duplicate names in the persons involved for the activity you are trying to create. "
-                    + "Please rectify and try again.";
     public static final String ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE =
             "Session ID is less than or equals to zero.";
     public static final String ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING =
@@ -296,9 +313,6 @@ public abstract class Message {
             "An Activity object was succesfully added into the list of activities with Id: ";
     public static final String LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY =
             "An Activity object failed to be added into the list of activities due to the following error: ";
-    public static final String LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST =
-            "An Activity object failed to be added into the list of activities because there are duplicate names in"
-                    + "the involved list.";
 
     // Activity Edit Command
     public static final String LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY =
@@ -361,14 +375,11 @@ public abstract class Message {
             "This person is not in the group.";
 
     // Group Create Command
-    public static final String ERROR_GROUPCREATE_DUPLICATE_GROUP_NAME =
-            "There is another group with the same name.";
-    public static final String ERROR_GROUPCREATE_DUPLICATE_NAMES =
-            "There are duplicate names in the person list for the group you are trying to create.";
-    public static final String ERROR_GROUPCREATE_DUPLICATE_GROUP_ID =
-             "There is another group with the same Id.";
-    public static final String ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
-             "Name duplicates exists but not detected.";
+    public static final String LOGGER_GROUPCREATE_GROUP_ADDED =
+            "A group was added into the list of groups with Id: ";
+    public static final String LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST =
+            "A Group object failed to be added into the list of groups because there are duplicate names in"
+                    + "the group list.";
 
     // Group View Command
     public static final String ASSERT_GROUPVIEW_INCORRECT_GROUP =
@@ -389,9 +400,6 @@ public abstract class Message {
             "All the groups have been listed.";
 
     // Group Edit Command
-    public static final String ERROR_GROUPEDIT_INVALID_PERSONLIST =
-        "The specified person list does not contain all existing persons that was previously "
-            + "created in the session. Please rectify and try again.";
     public static final String ERROR_GROUPEDIT_DUPLICATE_NAME =
         "There are duplicate names in the person list for the group you are trying to edit. "
             + "Please rectify and try again.";
