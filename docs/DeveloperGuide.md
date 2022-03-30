@@ -40,25 +40,31 @@ Refer to the [_User Guide_](UserGuide.md).
 
 ### Architecture
 
-The ***Architecture Diagram*** given above explains the high-level design ***HALPMI***.
+The ***Architecture Diagram*** given above explains the high-level design ***HalpMi***.
 
 Given below is a quick overview of main components and how they interact with each other.
 
-**Main components of the architecture**
+#### **Main components of the architecture**
 
-**`Main`** has single method called `main` that initialises a new instance of a Manager class, and calls the `runLoop()`
+**`Duke`** has single method called `main` which is called upon launch. This initialises a new instance of a `Manager` class, and calls the `runLoop()`
 method belonging to the Manager object.
 
-[**`Assets`**](#asset-classes): Refers to a collection of classes that are the main assets of the application.
+[**`Assets`**](#asset-classes): Refers to a collection of classes that hold all the necessary data given by the User in
+current and past usages.
 
-The rest of the App consists of three components.
+The rest of the App consists of these components.
 
-* [**`UI`**](#ui-component): The UI of the App.
 * [**`Manager`**](#manager-component): The Brain.
-* [**`Helper`**](#helper-classes): Core Classes that help with operations.
-  * [**`Command`**](#command): Calls all the commands.
-  * [**`Parser`**](#parser): Breaks down user input into parameters accepted by the app, also checks if parameters are valid.
-  * [**`Storage`**](#storage): Reads data from data files anf writes data to data files, also stores in app memory.
+* [**`Helper`**](#helper-classes): A collection of core classes that aid with the Logical Operations performed by HalpMi.
+    * [**`Command`**](#command): Contains the changes or updates to be made.
+    * [**`UI`**](#ui-component): The UI of the App.
+    * [**`Parser`**](#parser): Breaks down user input into parameters accepted by the app and creates a Command Object.
+    * [**`Validator`**](): Checks if the input provided by the User is Valid.
+    * [**`Storage`**](#storage): Reads data from data files and writes data to data files, also stores in app memory.
+  
+The Sequence Diagram below showcases the general Logic and Flow of the program from Launch till Exit.
+
+![Sequence Diagram](diagrams/SequenceDiagram.png)
 
 ### UI component
 
