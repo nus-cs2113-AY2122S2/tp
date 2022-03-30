@@ -7,6 +7,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.WrongDurationFormatException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -42,6 +43,8 @@ public class ModHappyParser extends Parser {
             return commandParser.parseCommand(parsedCommand.get(ARGUMENT));
         } catch (ParseException e) {
             throw new ParseException();
+        } catch (WrongDurationFormatException e) {
+            throw new WrongDurationFormatException();
         } catch (ModHappyException e) {
             throw new UnknownCommandException(userInput);
         } catch (Exception e) {

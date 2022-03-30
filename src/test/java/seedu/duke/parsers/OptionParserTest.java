@@ -4,13 +4,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import seedu.duke.exceptions.UnknownConfigurationGroupWord;
+import seedu.duke.exceptions.UnknownConfigurationGroupWordException;
 import seedu.duke.util.StringConstants;
 
 public class OptionParserTest {
     private OptionParser optionParser;
+
+    private void testParseCommand_expectUnknownConfigGroupWordException(String testString) {
+        assertThrows(UnknownConfigurationGroupWordException.class, () -> {
+            optionParser.parseCommand(testString);
+        });
+    }
 
     @BeforeEach
     public void setUp() {
@@ -58,27 +65,13 @@ public class OptionParserTest {
     @Test
     public void parse_badConfigName() {
         final String testString = "ILLEGAL_TASK_SHOWN";
-        try {
-            optionParser.parseCommand(testString);
-            fail();
-        } catch (UnknownConfigurationGroupWord e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectUnknownConfigGroupWordException(testString);
     }
 
     @Test
     public void parse_legalConfigNameAndBadValue() {
         final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=true1";
-        try {
-            optionParser.parseCommand(testString);
-            fail();
-        } catch (UnknownConfigurationGroupWord e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectUnknownConfigGroupWordException(testString);
     }
 
     @Test

@@ -32,12 +32,10 @@ public class TaskDuration {
 
     /**
      * A duration of a task.
-     * @param durationString String-format duration
-     * @throws ModHappyException Fails to create the TaskDuration.
+     * @param durationString The duration, as a string.
+     * @throws ModHappyException If the duration could not be properly parsed.
      */
     public TaskDuration(String durationString) throws ModHappyException {
-
-
         HashMap<String, String> parsedDurationString = parseDurationString(durationString);
 
         // the input unit is hours
@@ -68,11 +66,10 @@ public class TaskDuration {
 
         // no legal input unit match, throw exception
         throw new WrongDurationFormatException();
-
     }
 
 
-    // Intentionally implement the parse method independently here, because later will refact the command parser.
+    // Intentionally implement the parse method independently here, because later will refactor the command parser.
     private HashMap<String, String> parseDurationString(String durationString) throws ModHappyException {
         Pattern commandPattern = Pattern.compile(DURATION_STRING_FORMAT);
         Matcher matcher = commandPattern.matcher(durationString.trim());

@@ -266,9 +266,7 @@ public class StringConstants {
     public static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = "%d hours";
     public static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = "%d minutes";
     public static final String DURATION_STRING_FORMAT = "(?<duration>[1-9]\\d*\\.?\\d*|0\\.\\d*[1-9])"
-            + "\\s*(?<durationUnit>\\bm|M|min|Min|minutes|Minutes|minute|Minute"
-            + "|h|H|hours|Hours|hour|Hour|\\b|"
-            + "\\Bm|M|min|Min|minutes|Minutes|minute|Minute|h|H|hours|Hours|hour|Hour\\b)";
+            + "\\s*(?<durationUnit>.*)";
 
     /**
      * General strings.

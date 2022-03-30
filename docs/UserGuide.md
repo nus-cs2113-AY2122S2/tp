@@ -6,6 +6,7 @@
 - 3\. [About this user guide](#3-about-this-user-guide)
   - 3.1\. [Explanation of notation](#31-explanation-of-notation)
   - 3.2\. [Specifying tasks](#32-specifying-tasks)
+  - 3.3\. [Specifying durations](#33-specifying-durations)
 - 4\. [Features](#4-features)
   - 4.1\. [Accessing help](#41-accessing-help-help)
   - 4.2\. [Accessing options](#42-accessing-options-option)
@@ -76,6 +77,8 @@ As a result, providing the task's number is not specific enough for Mod Happy to
 - Task number `3`, module code `CS2113T`: refers to task number 3 stored under the module CS2113T.
 - Task number `2`, no module code specified: refers to task number 2 stored under the General Tasks list.
 
+<br>
+
 ### 3.3. Specifying durations
 
 Some Mod Happy commands require you to provide a duration. You can specify these in the following format:
@@ -89,7 +92,7 @@ Format: `DURATION_AMOUNT DURATION_UNIT`
   
 > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
 >
-> You can only choose to specify the duration in hours or minutes — not both.
+> You can only choose to specify the duration in hours or minutes — not both. If you need to specify "2 hours and 45 minutes", for example, try `2.75 hours` instead.
 
 <br><br><br>
 
@@ -100,6 +103,8 @@ Format: `DURATION_AMOUNT DURATION_UNIT`
 Shows you help text for the command word supplied. If no command word is supplied, you will be shown a generic help message instead.
 
 Format: `help [COMMAND_WORD]`
+
+- `COMMAND_WORD`: The command you wish to view the help message for.
 
 <br>
 
@@ -115,11 +120,16 @@ Allows you to view and change various user preferences which can affect other as
 
   Shows you a short description of the supplied configuration option as well as its corresponding valid values.<br><br>
   Format: `option CONFIG_NAME`<br><br>
-  Example: `option SHOW_COMPLETED_TASKS`<br><br>
+  - `CONFIG_NAME`: The name of the configuration option you wish to view the details of.<br><br>
+  Example: `option SHOW_COMPLETED_TASKS`
+  <br><br>
 - **Editing a specific configuration option**
 
-  Allows you to edit the value of a configuration option of your choice. The new value of the configuration option must be valid.<br><br>
+  Allows you to edit the value of a configuration option of your choice.<br><br>
   Format: `option CONFIG_NAME=NEW_VALUE`<br><br>
+  - `CONFIG_NAME`: The name of the configuration option you wish to modify.
+  - `NEW_VALUE`: The new value of the configuration option. This value must be a value accepted by the target configuration option.
+  <br><br>
   Example: `option SHOW_COMPLETED_TASKS=false`
 
 <br>
@@ -141,6 +151,10 @@ The following configuration options currently exist:
   > The module code must be a single word, and can only consist of alphanumeric characters as well as the underscore `_`.
 
   Format: `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br><br>
+  - `MODULE_CODE`: The module code of the module. Must be a single word containing only alphanumeric characters and underscore `_`.
+  - `MODULAR_CREDITS`: The number of modular credits the module has. Must be an integer from 0 to 100, inclusive.
+  - `MODULE_DESCRIPTION`: A short description of the module. Can contain any characters except double quotes `"`.
+  <br><br>
   Example: `add mod CS2113T 4 -d "Software Engineering"`<br><br>
 
   > 📔 <span style="color:#3333ff">**NOTE:**</span>
@@ -153,11 +167,13 @@ The following configuration options currently exist:
   You may optionally specify a short description for the task, as well as an estimate for the expected time spent working on it.<br><br>
 
   Format: `add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`<br><br>
+  - `TASK_NAME`: The name of the task. Can contain any characters except double quotes `"`.
+  - `MODULE_CODE`: The module code of the module to be associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+  - `TASK_DESCRIPTION`: A short description of the task. Can contain any characters except double quotes `"`.
+  - `ESTIMATED_WORKING_TIME`: The expected duration spent working on the task. The duration must be specified in [this format](#33-specifying-durations).
+  <br><br>
   Example (general task without any parameters): `add task "Review PR"`<br>
   Example (module task with parameters): `add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour" `
-  > 📔 <span style="color:#00bb00">**NOTE:**</span>
-  >
-  > ESTIMATED_WORKING_TIME is in task duration format, please check [task duration](#33-specifying-durations) to see the supporting format.
 
 <br>
 
@@ -167,11 +183,16 @@ The following configuration options currently exist:
 
   Deletes the specified module from your module list.<br><br>
   Format: `del mod MODULE_CODE`<br><br>
+  - `MODULE_CODE`: The module code of the module to be deleted. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+  <br><br>
   Example: `del mod CS2113T`<br><br>
 - **Delete task: `del task`**
 
   Deletes the [specified task](#32-specifying-tasks) from its parent module, or the General Tasks list if you do not specify a module code.<br><br>
   Format: `del task TASK_NUMBER [-m MODULE_CODE]`<br><br>
+  - `TASK_NUMBER`: The number of the task to be deleted. Must be a positive integer.
+  - `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+  <br><br>
   Example (general task): `del task 1`<br>
   Example (module task): `del task 1 -m CS2113T`
 
@@ -183,11 +204,19 @@ The following configuration options currently exist:
 
   Edits an attribute of a module you have previously created. Only the module description is editable after creation.<br><br>
   Format: `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` <br><br>
+  - `MODULE_CODE`: The module code of the module to be edited. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+  - `MODULE_DESCRIPTION`: The new module description for the module. Can contain any characters except double quotes `"`.
+  <br><br>
   Example: `edit mod CS2113T -d "Software Engineering & OOP"`<br><br>
 - **Edit task: `edit task`**
 
   Edits an attribute of the [specified task](#32-specifying-tasks). You can edit the task name, description, and estimated working time, but the task cannot be associated with a different module.<br><br>
-  Format: `edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" | -d "TASK_DESCRIPTION" | -t "ESTIMATED_WORKING_TIME")`
+  Format: `edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" | -d "TASK_DESCRIPTION" | -t "ESTIMATED_WORKING_TIME")`<br><br>
+  - `TASK_NUMBER`: The number of the task to be edited. Must be a positive integer.
+  - `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+  - `TASK_NAME`: The name of the task. Can contain any characters except double quotes `"`.
+  - `TASK_DESCRIPTION`: The new description for the task. Can contain any characters except double quotes `"`.
+  - `ESTIMATED_WORKING_TIME`: The new expected duration. The duration must be specified in [this format](#33-specifying-durations).
   <br><br>
   Example: `edit task 1 -m CS2113T -n "CS2113T Tutorial 2"` <br><br>
   > 📔 <span style="color:#3333ff">**NOTE:**</span>
@@ -204,7 +233,10 @@ Allows you to mark the [specified task](#32-specifying-tasks) as completed or un
 
 The `c` flag indicates that the task will be marked as completed, while the `u` flag marks the task as uncompleted.
 
-Format: `mark (c | u) TASK_INDEX [-m MODULE_CODE]`<br><br>
+Format: `mark (c | u) TASK_NUMBER [-m MODULE_CODE]`<br><br>
+- `TASK_NUMBER`: The number of the task to be marked. Must be a positive integer.
+- `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+<br><br>
 Example (mark general task as completed): `mark c 1`<br>
 Example (mark module task as uncompleted): `mark u 1 -m CS2113T`
 
@@ -218,7 +250,10 @@ Allows you to add or delete a tag from the [specified task](#32-specifying-tasks
 >
 > The tag name must be a single word; it cannot contain whitespace.
 
-Format: `tag (add | del) TASK_INDEX [-m MODULE_CODE] TAG_NAME`
+Format: `tag (add | del) TASK_NUMBER [-m MODULE_CODE] TAG_NAME`
+- `TASK_NUMBER`: The number of the task to be deleted. Must be a positive integer.
+- `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+- `TAG_NAME`: The name of the tag to be added or deleted. Must be a single word containing only alphanumeric characters and underscore `_`. 
 
 Example: `tag add 1 -m CS2113T project`
 
@@ -236,6 +271,8 @@ If a [tag name](#47-managing-custom-tags-tag) is provided, only tasks with the a
 
 Format: `list [TAG_NAME]`
 
+- `TAG_NAME`: The name of the tag to be filtered for. Must be a single word containing only alphanumeric characters and underscore `_`.
+
 <br>
 
 ### 4.9. Setting a module's grade: `grade`
@@ -243,6 +280,9 @@ Format: `list [TAG_NAME]`
 Assigns a grade to a module of your choice.
 
 Format: `grade MODULE_CODE MODULE_GRADE`
+
+- `MODULE_CODE`: The module code of the module to be assigned the grade. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+- `MODULE_GRADE`: The grade to be assigned to the module.
 
 > 📔 <span style="color:#3333ff">**NOTE:**</span>
 >
