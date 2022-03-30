@@ -1,23 +1,29 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-!include Style.puml
+!define ABSTRACT &#123;abstract&#125;
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam classFontSize 12
+skinparam classAttributeFontSize 12
+hide circle
 
 package command {
-    class "ABSTRACT\n Command "
+    class "ABSTRACT\nCommand" as Command
     class DeleteCommand
     class TextUi
     class ExitCommand
 
-    "ABSTRACT\n Command " <|-- DeleteCommand
-    "ABSTRACT\n Command " <|-- ExitCommand
+    Command <|-- DeleteCommand
+    Command <|-- ExitCommand
     DeleteCommand ..> CommandResult :creates >
     ExitCommand ..> CommandResult :creates >
 
     DeleteCommand ..> TextUi :uses >
 
-    class "ABSTRACT\n Command " {
-        +execute(): CommandResult { abstract }
+    class Command {
+        +execute(): CommandResult ABSTRACT
     }
 
     class DeleteCommand {

@@ -3,7 +3,7 @@ package seedu.duke.commands;
 import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.UnknownConfigurationGroupWord;
+import seedu.duke.exceptions.UnknownConfigurationGroupWordException;
 import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
@@ -16,21 +16,23 @@ public class OptionCommand extends Command {
     private String newValue = null;
 
     public OptionCommand(String configurationGroupWord, String newValue) throws ModHappyException {
-        if (!Objects.isNull(configurationGroupWord)) {
-            try {
-                configurationGroup = Configuration.ConfigurationGroup.valueOf(configurationGroupWord);
-                // Checks whether the configurationGroupWord and newValue are legal.
-                if (!Objects.isNull(newValue)) {
-                    if (Configuration.LEGAL_VALUES.containsKey(configurationGroup)
-                            && Configuration.LEGAL_VALUES.get(configurationGroup).contains(newValue)) {
-                        this.newValue = newValue;
-                    } else {
-                        throw new UnknownConfigurationGroupWord(configurationGroupWord + " " + newValue);
-                    }
-                }
-            } catch (Exception e) {
-                throw new UnknownConfigurationGroupWord(configurationGroupWord);
+        if (Objects.isNull(configurationGroupWord)) {
+            return;
+        }
+        try {
+            configurationGroup = Configuration.ConfigurationGroup.valueOf(configurationGroupWord);
+            // Checks whether the configurationGroupWord and newValue are legal.
+            if (Objects.isNull(newValue)) {
+                return;
             }
+            if (Configuration.LEGAL_VALUES.containsKey(configurationGroup)
+                    && Configuration.LEGAL_VALUES.get(configurationGroup).contains(newValue)) {
+                this.newValue = newValue;
+            } else {
+                throw new UnknownConfigurationGroupWordException(configurationGroupWord + " " + newValue);
+            }
+        } catch (Exception e) {
+            throw new UnknownConfigurationGroupWordException(configurationGroupWord);
         }
     }
 

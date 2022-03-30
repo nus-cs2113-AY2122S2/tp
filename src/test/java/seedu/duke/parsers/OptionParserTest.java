@@ -4,19 +4,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import seedu.duke.exceptions.UnknownConfigurationGroupWord;
-import seedu.duke.util.Configuration;
+import seedu.duke.exceptions.UnknownConfigurationGroupWordException;
+import seedu.duke.util.StringConstants;
 
 public class OptionParserTest {
     private OptionParser optionParser;
-    private Configuration configuration;
+
+    private void testParseCommand_expectUnknownConfigGroupWordException(String testString) {
+        assertThrows(UnknownConfigurationGroupWordException.class, () -> {
+            optionParser.parseCommand(testString);
+        });
+    }
 
     @BeforeEach
     public void setUp() {
         optionParser = new OptionParser();
-        configuration = new Configuration();
     }
 
     @Test
@@ -32,11 +37,12 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parse_configName() {
-        final String testString = "COMPLETED_TASKS_SHOWN";
+    public void parse_legalConfigName() {
+        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME;
         try {
             optionParser.parseCommand(testString);
-            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME,
+                    optionParser.parsedCommand.get("configurationGroupWord"));
             assertNull(optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
@@ -44,50 +50,38 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parse_configNameAndValue() {
-        final String testString = "COMPLETED_TASKS_SHOWN=true";
+    public void parse_legalConfigNameAndLegalValue() {
+        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=" + StringConstants.TRUE;
         try {
             optionParser.parseCommand(testString);
-            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
-            assertEquals("true", optionParser.parsedCommand.get("newValue"));
+            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME,
+                    optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals(StringConstants.TRUE, optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void parseIllegal_badConfigName() {
+    public void parse_badConfigName() {
         final String testString = "ILLEGAL_TASK_SHOWN";
-        try {
-            optionParser.parseCommand(testString);
-            fail();
-        } catch (UnknownConfigurationGroupWord e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectUnknownConfigGroupWordException(testString);
     }
 
     @Test
-    public void parseLegal_configNameAndBadValue() {
-        final String testString = "COMPLETED_TASKS_SHOWN=true1";
-        try {
-            optionParser.parseCommand(testString);
-            fail();
-        } catch (UnknownConfigurationGroupWord e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+    public void parse_legalConfigNameAndBadValue() {
+        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=true1";
+        testParseCommand_expectUnknownConfigGroupWordException(testString);
     }
 
     @Test
-    public void parseLegal_andLegalValueWithSpaceAtLast() {
-        final String testString = "COMPLETED_TASKS_SHOWN=true ";
+    public void parse_legalConfigNameAndLegalValue_withExtraWhitespace() {
+        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=" + StringConstants.TRUE + " ";
         try {
             optionParser.parseCommand(testString);
-            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
-            assertEquals("true", optionParser.parsedCommand.get("newValue"));
+            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME,
+                    optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals(StringConstants.TRUE, optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
         }

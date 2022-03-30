@@ -1,6 +1,5 @@
 package seedu.duke.parsers;
 
-import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,7 +23,6 @@ import seedu.duke.commands.OptionCommand;
 import seedu.duke.commands.ResetCommand;
 import seedu.duke.commands.SaveCommand;
 import seedu.duke.commands.TagCommand;
-import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.data.Module;
@@ -32,6 +30,12 @@ import seedu.duke.data.Task;
 
 public class ModHappyParserTest {
     private ModHappyParser parser;
+
+    private void testParseCommand_expectParseException(String testString) {
+        assertThrows(ParseException.class, () -> {
+            parser.parseCommand(testString);
+        });
+    }
 
     @BeforeEach
     public void setUp() {
@@ -130,14 +134,7 @@ public class ModHappyParserTest {
     public void parse_addCommand_task_withTargetModule_invalidModuleCode() {
         final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
                 + "-m cs 2113 t";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -164,14 +161,7 @@ public class ModHappyParserTest {
         final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d\"   "
                 + "-t \"-t-t-t t-t-t /t/t -d -d -d \" "
                 + "-d \"-d-d-d /t /m -d -d  \" ";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ModHappyException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -196,14 +186,7 @@ public class ModHappyParserTest {
     public void parse_addCommand_task_withDescription_withTargetModule_wrongOrder() {
         final String testString = "add task \"/t/t/t/t-d\" -m cs2113t "
                 + "-t \"-d-t-m -d -t -t\" -d \"-d-d-d /t /m -d -d  \"";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ModHappyException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -227,14 +210,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_task_withWorkingTime_withTargetModule_wrongOrder() {
         final String testString = "add task \"/t/t/t/t-d\" -t \"-d-d-d /t /m -d -d  \" -m cs2113t ";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -260,81 +236,39 @@ public class ModHappyParserTest {
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_wrongOrder1() {
         final String testString = "add task \"/t/t/t/t-d\" -t \"-d-d-t-m /m -m -d -t  \" -d \"-d-d-d /t /m -d -d  \" "
                 + "-m cs2113t";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_wrongOrder2() {
         final String testString = "add task \"/t/t/t/t-d\" -t \"-d-d-t-m /m -m -d -t  \" -m cs2113t"
                 + "-d \"-d-d-d /t /m -d -d  \" ";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_wrongOrder3() {
         final String testString = "add task \"/t/t/t/t-d\" -m cs2113t  -t \" -d-d -t /m -m -m-d -t -m\""
                 + " -d \"-d -d-t-t -t -m -m -m /m/m\"";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_duplicateTaskDescription() {
         final String testString = "add task 000 -d \"123\" -t \"456\" -d \"789\"";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_duplicateWorkingTime() {
         final String testString = "add task 000 -t \"123\" -d \"456\" -t \"789\"";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_task_invalidInput() {
         final String testString = "add task 000 -d \"123\" -t \"456\" invalid";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -357,27 +291,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_module_invalidModularCredit() {
         final String testString = "add  \t mod modulecode four \t\t    ";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_module_noDescription_invalidModuleCode() {
         final String testString = "add  \t mod module code /c 4 \t\t    ";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -400,79 +320,37 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_module_withDescription_invalidModuleCode() {
         final String testString = "add  \t mod module code \t\t  4  -d \t\t  \t \"i am a descrip\t -d-d tion\t \"\t  ";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_module_withDescription_invalidInput() {
         final String testString = "add mod cs2113t 4 -d \"11111\"123";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_invalidFlag() {
         final String testString = "add /a \"blahblah\" -d \"blahblahblah\"";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_noFlagProvided() {
         final String testString = "add cs2113t";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_withModuleOnly_noModuleProvided() {
         final String testString = "add mod";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_addCommand_withTaskOnly_noTaskProvided() {
         final String testString = "add task";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -490,14 +368,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_deleteCommand_withTaskOnly_integerOverflow() {
         final String testString = "del task 2147483648";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -528,92 +399,43 @@ public class ModHappyParserTest {
     @Test
     public void parse_deleteCommand_withTask_withTargetModule_invalidModuleCode() {
         final String testString = "del task 1 -m cs 2113 t";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_deleteCommand_invalidFlag() {
-        final String testString = "del a 1";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        final String testString = "del /a 1";
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_deleteCommand_noFlagProvided() {
         final String testString = "del 1";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_deleteCommand_withModuleOnly_noModuleProvided() {
         final String testString = "del mod";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_deleteCommand_withTaskOnly_noIndexProvided() {
         final String testString = "del task";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_deleteCommand_withTaskOnly_notANumber() {
         final String testString = "del task iamnotanumber";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_deleteCommand_unnecessaryArgs() {
         final String testString = "del task 1 blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -633,66 +455,31 @@ public class ModHappyParserTest {
     @Test
     public void parse_editCommand_task_unnecessaryArgs() {
         final String testString = "edit task 1 blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_editCommand_task_noOptionalFlags() {
         final String testString = "edit task 1";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_editCommand_module_wrongFlag() {
         final String testString = "edit mod cs2113t -t \"111\"";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_editCommand_task_notANumber() {
         final String testString = "edit task two -t \"111\"";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_editCommand_task_tooManyFlags() {
         final String testString = "edit task 2 -m cs2113t -d \"123\" -t \"111\" ";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -709,14 +496,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_exitCommand_unnecessaryArgs() {
         final String testString = "exit blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -735,27 +515,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_gradeCommand_invalidGrade() {
         final String testString = "grade CS2113T F-";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_gradeCommand_wrongOrder() {
         final String testString = "grade A- CS2113T";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -772,14 +538,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_gpaCommand_unnecessaryArgs() {
         final String testString = "gpa blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -808,14 +567,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_helpCommand_unnecessaryArgs() {
         final String testString = "help add blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -844,14 +596,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_listCommand_unnecessaryArgs() {
         final String testString = "list test blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -883,66 +628,31 @@ public class ModHappyParserTest {
     @Test
     public void parse_markCommand_invalidFlag() {
         final String testString = "mark a 1";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_markCommand_noFlagProvided() {
         final String testString = "mark 1";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_markCommand_noIndexProvided() {
         final String testString = "mark c";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_markCommand_notANumber() {
         final String testString = "mark c iamnotanumber";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_markCommand_unnecessaryArgs() {
         final String testString = "mark c 1 blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -959,27 +669,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_optionCommand_invalidConfigName() {
         final String testString = "option invalidConfigName";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
     public void parse_optionCommand_noEqualSign() {
         final String testString = "option COMPLETED_TASKS_SHOWN false";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -996,14 +692,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_resetCommand_unnecessaryArgs() {
         final String testString = "reset blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -1019,15 +708,8 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_saveCommand_unnecessaryArgs() {
-        final String testString = "save blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
+        final String testString = "exit blahblah";
+        testParseCommand_expectParseException(testString);
     }
 
     @Test
@@ -1046,10 +728,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_tagCommand_invalidTagOperation_throwsParseException() {
-        final String testString = "tag invalidOp 1 tagDescription";
-        AtomicReference<Command> c = null;
-        assertThrows(ParseException.class, () -> {
-            c.set(parser.parseCommand(testString));
-        });
+        final String testString = "tag invalidOp 1 \"tag\"";
+        testParseCommand_expectParseException(testString);
     }
 }

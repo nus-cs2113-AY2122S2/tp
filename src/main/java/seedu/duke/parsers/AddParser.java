@@ -82,6 +82,9 @@ public class AddParser extends Parser {
             int modularCredit;
             try {
                 modularCredit = Integer.parseInt(modularCreditStr);
+                if (modularCredit > 100) {
+                    throw new ParseException();
+                }
             } catch (NumberFormatException e) {
                 throw new ParseException();
             }

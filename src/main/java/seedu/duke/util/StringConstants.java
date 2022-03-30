@@ -148,7 +148,8 @@ public class StringConstants {
     public static final String OPTION_HELP = "View and edit program configuration options.\n"
             + "Format to view all available configs: option\n"
             + "Format to view details for a specific config option: option CONFIG_NAME\n"
-            + "Format to set a config option: option CONFIG_NAME = NEW_VALUE";
+            + "Format to set a config option: option CONFIG_NAME = NEW_VALUE\n\n"
+            + "Available configs:\n";
 
 
     /**
@@ -178,12 +179,6 @@ public class StringConstants {
     public static final String ADD_TAG_MESSAGE = "Tag \"%s\" added:\n%s.";
     public static final String DEL_TAG_MESSAGE = "Tag \"%s\" removed:\n%s";
 
-    /**
-     * For CommandResult.
-     */
-    public static final String ARRAYLIST_RESULT = "ArrayList";
-    public static final String STRING_RESULT = "String";
-
 
     /**
      * For exceptions.
@@ -202,6 +197,8 @@ public class StringConstants {
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
     public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
+    public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with identical module codes found. "
+            + "Aborting load...";
 
 
     /**
@@ -254,7 +251,7 @@ public class StringConstants {
     public static final String TRUE = "true";
     public static final String FALSE = "false";
 
-    public static final String COMPLETED_TASKS_SHOWN_NAME = "COMPLETED_TASKS_SHOWN";
+    public static final String COMPLETED_TASKS_SHOWN_NAME = "SHOW_COMPLETED_TASKS";
     public static final String COMPLETED_TASKS_SHOWN_EXPLAIN = "Whether or not completed tasks should be displayed"
             + " by \"list\".";
     public static final String COMPLETED_TASKS_SHOWN_TRUE = "Show completed tasks";
@@ -269,16 +266,12 @@ public class StringConstants {
     public static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = "%d hours";
     public static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = "%d minutes";
     public static final String DURATION_STRING_FORMAT = "(?<duration>[1-9]\\d*\\.?\\d*|0\\.\\d*[1-9])"
-            + "\\s*(?<durationUnit>\\bm|M|min|Min|minutes|Minutes|minute|Minute"
-            + "|h|H|hours|Hours|hour|Hour|\\b|"
-            + "\\Bm|M|min|Min|minutes|Minutes|minute|Minute|h|H|hours|Hours|hour|Hour\\b)";
+            + "\\s*(?<durationUnit>.*)";
 
     /**
      * General strings.
      */
-    public static final String STRING = "String";
     public static final String INDENT = "    ";
-    public static final String NULL_STRING = "";
     public static final String LS = System.lineSeparator();
     public static final String LINE = "____________________________________________________________";
 }
