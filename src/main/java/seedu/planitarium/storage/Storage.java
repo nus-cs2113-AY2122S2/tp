@@ -43,9 +43,9 @@ public class Storage {
     private static final int DELIMIT_COUNT = 4;
     private static final int INIT_GROUP_NUMBER = 0;
 
-    private static int groupNumber = 0;
-    private static int expendNumber = 1;
-    private static int incomeNumber = 1;
+    private static int groupNumber;
+    private static int expendNumber;
+    private static int incomeNumber;
     private static File saveFile;
     private static int numberOfPerson = 0;
     private static String filePath;
@@ -62,6 +62,9 @@ public class Storage {
     public Storage() {
         filePath = FILE_DIR + FILE_SEPARATOR + FILE_NAME;
         saveFile = new File(filePath);
+        expendNumber = 1;
+        incomeNumber = 1;
+        groupNumber = 0;
         String loggerString = "New Storage constructed";
         logger.log(Level.INFO, loggerString);
     }
@@ -70,7 +73,7 @@ public class Storage {
      * Checks if the directory and file exists in the local hard drive, create one
      * if it does not.
      */
-    public static void checkFileExists() {
+    private static void checkFileExists() {
         String loggerString = "Method checkFileExists() called";
         logger.log(Level.INFO, loggerString);
         assert (FILE_DIR != null) : ASSERT_DIR_NOT_NULL;
@@ -80,12 +83,15 @@ public class Storage {
                 directory.mkdir();
             }
             if (saveFile.createNewFile()) {
-                System.out.println("PlanITarium file not found! Creating new file.");
+                loggerString = "PlanITarium file not found! Creating new file.";
+                logger.log(Level.INFO, loggerString);
             } else {
-                System.out.println("PlanITarium file exists!");
+                loggerString = "PlanITarium file exists!";
+                logger.log(Level.INFO, loggerString);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            loggerString = "Error in creating file";
+            logger.log(Level.SEVERE, loggerString);
         }
     }
 
@@ -185,7 +191,7 @@ public class Storage {
         familyData.addExpend(groupNumber, numberOfPerson, description, amount,
                 category, isPermanent, Constants.FOR_STORAGE);
         //familyData.getList(groupNumber).getPerson(numberOfPerson).setExpendDate(expendNumber, dataDate);
-        //expendNumber++;
+        expendNumber++;
     }
 
     /**
@@ -204,7 +210,7 @@ public class Storage {
         dataDate = parseInfoGetIncomeDate(info);
         familyData.addIncome(groupNumber, numberOfPerson, description, amount, isPermanent, Constants.FOR_STORAGE);
         //familyData.getList(groupNumber).getPerson(numberOfPerson).setIncomeDate(incomeNumber, dataDate);
-        //incomeNumber++;
+        incomeNumber++;
     }
 
     /**
@@ -323,6 +329,7 @@ public class Storage {
     public static void saveData(Family familyDataToSave) {
         String loggerString = "Method saveData() called";
         logger.log(Level.INFO, loggerString);
+        checkFileExists();
         assert (filePath != null) : ASSERT_PATH_NOT_NULL;
         try {
             FileWriter writeToFile = new FileWriter(filePath);
