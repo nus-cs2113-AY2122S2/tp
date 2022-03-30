@@ -195,7 +195,7 @@ Edits an existing session so that you can change details of a session.<br>
 > 
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the session would be edited.
-    
+
 <br>
 
 Examples of usage:
@@ -213,7 +213,7 @@ Examples of usage:
 
 
 ### Viewing a session : `session /view`
-Displays details about a session so you can review the session.<br>
+Displays details about a session so that you can review the session.<br>
 
 >Format: `session /view /sid [SESSION_ID]`
 ><br>
@@ -341,7 +341,7 @@ Deletes an existing activity from a particular session so that you can remove ac
 <br>
 
 ### Editing an activity: `activity /edit`
-Edits an existing activity so that you can change details of a activity.<br>
+Edits an existing activity so that you can change details of an activity.<br>
 
 There are two possible formats, depending on whether you want to split costs evenly across participants, or according
 to a cost list:
@@ -377,7 +377,7 @@ to a cost list:
   <br>
 ### Viewing an activity: `activity /view`
 
-> Display details about an activity so you can review the activity.<br>
+> Display details about an activity so that you can review the activity.<br>
 
 Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -512,7 +512,7 @@ Example of usage:
 <br>
 
 ### Viewing a group: `group /view`
-Display details about a group so that you can review the group's details.<br>
+Displays details about a group so that you can review the group's details.<br>
 
 >Format: `group /view /gid [GROUP_ID]`
 >
@@ -534,7 +534,8 @@ Display details about a group so that you can review the group's details.<br>
 <br>
 
 ### Listing all groups: `group /list`
-Displays all active groups. Deleted groups will not be listed.<br>
+Displays all existing groups so that you can have an overview of previously created groups.
+However, deleted groups will not be listed.
 
 >Format: `group /list`
 
