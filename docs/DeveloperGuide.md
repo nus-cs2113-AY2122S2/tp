@@ -301,8 +301,8 @@ The general workflow of the `group /view` command is as follows:
 3. `GroupViewCommand#run()` method is then invoked to run the `group /view` command.
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called before a group within 
 the list of groups can be retrieved.
-5. The `GroupViewCommand` object will then run `Profile#getGroup()` method to retrieve the group represented by the
-   groupId provided.
+5. The `GroupViewCommand` object will then run the `Profile#getGroup()` method to retrieve the group represented by the
+groupId provided.
    1. If the group with requested groupId does not exist, an error message will be printed out with
    `TextUI#printlnMessage()`.
    2. Else, the string representing the details of the requested group will be retrieved using the `Group#toString()`
