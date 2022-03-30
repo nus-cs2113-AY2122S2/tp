@@ -45,4 +45,21 @@ public class SearchCommand extends Command {
             ui.showMessages(String.valueOf(i + 1) + "." + results.get(i));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        SearchCommand toCompare;
+        if (other==this) {
+            // return if same object
+            return true;
+        }
+        if (other instanceof SearchCommand) {
+            // cast only if other is instance of SearchCommand
+            toCompare = (SearchCommand) other;
+            return (this.name.equals(toCompare.name)) && (this.description.equals(toCompare.description));
+        } else {
+            // null, or object not SearchCommand
+            return false;
+        }
+    }
 }

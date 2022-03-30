@@ -4,6 +4,7 @@ import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.DescCommand;
 import seedu.duke.commands.EditCommand;
+import seedu.duke.commands.SearchCommand;
 import seedu.duke.data.Item;
 
 import java.util.Optional;
@@ -31,6 +32,9 @@ public class ParserStubs {
             Optional.of(2),
             Optional.empty(),
             Optional.of(false));
+    public static final SearchCommand SEARCHCOMMAND_NAMEONLY = new SearchCommand(Optional.of(PAPERCUP_NAME), Optional.empty());
+    public static final SearchCommand SEARCHCOMMAND_DESCRIPTIONONLY = new SearchCommand(Optional.empty(), Optional.of(PAPERCUP_DESCRIPTION));
+    public static final SearchCommand SEARCHCOMMAND_NAMEANDDESCRIPTION = new SearchCommand(Optional.of(PAPERCUP_NAME), Optional.of(PAPERCUP_DESCRIPTION));
 
 }
 

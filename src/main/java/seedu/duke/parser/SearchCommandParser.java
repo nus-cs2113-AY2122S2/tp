@@ -25,7 +25,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION)) {
-            throw new InvMgrException(Messages.INVALID_COMMAND);
+            throw new InvMgrException(Messages.INVALID_SYNTAX);
         }
 
         Optional<String> name = argMultimap.getValue(PREFIX_NAME);
