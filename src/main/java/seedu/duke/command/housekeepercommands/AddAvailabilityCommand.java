@@ -120,16 +120,16 @@ public class AddAvailabilityCommand extends Command {
      * @throws HotelLiteManagerException When description of availability is invalid.
      */
     private String[] extractInput(String commandStringWithoutCommand) throws HotelLiteManagerException {
-        long slashCounts = commandStringWithoutCommand.codePoints()
-                .filter(ch -> ch == AVAILABILITY_INDICATE_CHARACTER)
-                .count();
-        if (!(slashCounts == CONTAIN_ONE_SLASH_ONLY)) {
-            logger.log(Level.WARNING, "Contains more than one slash.");
-            throw new InvalidAvailabilityException();
-        }
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AVAILABILITY_INDICATE);
         if (isSymbolIncorrect) {
             logger.log(Level.WARNING, "Availability Housekeeper command usage is wrong.");
+            throw new InvalidAvailabilityException();
+        }
+        long slashCounts = commandStringWithoutCommand.codePoints()
+                .filter(t -> t == AVAILABILITY_INDICATE_CHARACTER)
+                .count();
+        if (!(slashCounts == CONTAIN_ONE_SLASH_ONLY)) {
+            logger.log(Level.WARNING, "Contains more than one slash.");
             throw new InvalidAvailabilityException();
         }
         String[] input = commandStringWithoutCommand.split(AVAILABILITY_INDICATE);
