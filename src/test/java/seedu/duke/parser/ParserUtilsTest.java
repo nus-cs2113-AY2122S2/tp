@@ -53,8 +53,8 @@ public class ParserUtilsTest {
     @Test
     void parseRelative_validPrefix_returnInt() throws InvMgrException {
         String testInput = "-";
-        int expectedOutput = -1;
-        int actualOutput = ParserUtils.parseRelative(testInput);
+        boolean expectedOutput = false;
+        boolean actualOutput = ParserUtils.parseRelative(testInput);
         assertEquals(expectedOutput, actualOutput);
     }
 }
