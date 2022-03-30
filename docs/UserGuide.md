@@ -2,7 +2,10 @@
 
 ## Introduction
 
-{Give a product intro}
+Hotel Lite is a convenient tool for hotel owners to manage their businesses. 
+This application offers functionalities for keeping track of hotel inventory, 
+managing housekeeper staff records, recording customer satisfaction ratings, 
+and maintaining the state of checked-in/checked-out rooms. 
 
 ## Quick Start
 
