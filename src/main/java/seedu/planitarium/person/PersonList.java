@@ -177,7 +177,7 @@ public class PersonList {
      * @param isPermanent Whether the expenditure is recurring
      * @param isSilent Whether to print confirmation
      */
-    public void addExpend(int personIndex, String description, Double amount, int category, Boolean isPermanent,
+    public void addExpend(int personIndex, String description, Double amount, Integer category, Boolean isPermanent,
                           Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_EXPEND_CALL_MESSAGE);
         getPerson(personIndex).addExpend(description, amount, category, isPermanent, isSilent);
@@ -240,7 +240,7 @@ public class PersonList {
      * @param category The category of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      */
-    public void editExpend(int personIndex, int expendIndex, String description, Double amount, int category,
+    public void editExpend(int personIndex, int expendIndex, String description, Double amount, Integer category,
                            Boolean isPermanent) {
         LOGGER.log(Level.INFO, Constants.EDIT_EXPEND_CALL_MESSAGE);
         getPerson(personIndex).editExpend(expendIndex, description, amount, category, isPermanent);
@@ -252,7 +252,7 @@ public class PersonList {
      * @param description The string to look for
      * @param category The category of the entry
      */
-    public void find(String description, int category) {
+    public void find(String description, Integer category) {
         LOGGER.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
         for (Person person : personList) {
             person.find(description, category);

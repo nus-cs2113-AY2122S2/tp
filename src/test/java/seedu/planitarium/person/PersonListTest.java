@@ -208,23 +208,23 @@ class PersonListTest {
         assertEquals(0, list.getNumberOfExpenditures(FIRST_ENTRY));
     }
 
-    //    @Test
-    //    public void editIncome_addThenEdit_incomeChange() {
-    //        PersonList list = new PersonList();
-    //        list.addPerson(VALID_NAME);
-    //        list.addIncome(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
-    //        assertEquals(VALID_AMOUNT, list.getTotalIncome());
-    //        list.editIncome(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null);
-    //        assertEquals(NEW_AMOUNT, list.getTotalIncome());
-    //    }
-    //
-    //    @Test
-    //    public void editExpend_addThenEdit_expendChange() {
-    //        PersonList list = new PersonList();
-    //        list.addPerson(VALID_NAME);
-    //        list.addExpend(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
-    //        assertEquals(VALID_AMOUNT, list.getTotalExpenditure());
-    //        list.editExpend(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null, null);
-    //        assertEquals(NEW_AMOUNT, list.getTotalExpenditure());
-    //    }
+    @Test
+    public void editIncome_addThenEdit_incomeChange() {
+        PersonList list = new PersonList();
+        list.addPerson(VALID_NAME);
+        list.addIncome(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, list.getTotalIncome());
+        list.editIncome(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null);
+        assertEquals(NEW_AMOUNT, list.getTotalIncome());
+    }
+
+    @Test
+    public void editExpend_addThenEdit_expendChange() {
+        PersonList list = new PersonList();
+        list.addPerson(VALID_NAME);
+        list.addExpend(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, list.getTotalExpenditure());
+        list.editExpend(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null, null);
+        assertEquals(NEW_AMOUNT, list.getTotalExpenditure());
+    }
 }

@@ -53,7 +53,7 @@ public class Storage {
     private static String description;
     private static double amount;
     private static boolean isPermanent;
-    private static int category;
+    private static Integer category;
     private static LocalDate dataDate;
 
     /**

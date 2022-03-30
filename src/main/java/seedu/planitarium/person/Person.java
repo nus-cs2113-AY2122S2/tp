@@ -118,7 +118,7 @@ public class Person {
      * @param isPermanent Whether the expenditure is recurring
      * @param isSilent Whether to print confirmation
      */
-    public void addExpend(String description, Double amount, int category, Boolean isPermanent, Boolean isSilent) {
+    public void addExpend(String description, Double amount, Integer category, Boolean isPermanent, Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_EXPEND_CALL_MESSAGE);
         expenditureList.addExpenditure(description, amount, category, isPermanent);
         if (isSilent) {
@@ -251,7 +251,7 @@ public class Person {
      * @param category The category of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      */
-    public void editExpend(int expendIndex, String description, Double amount, int category, Boolean isPermanent) {
+    public void editExpend(int expendIndex, String description, Double amount, Integer category, Boolean isPermanent) {
         LOGGER.log(Level.INFO, Constants.EDIT_EXPEND_CALL_MESSAGE);
         expenditureList.editExpenditure(expendIndex, description, amount, category, isPermanent);
     }
@@ -262,7 +262,7 @@ public class Person {
      * @param description The string to look for
      * @param category The category of the entry
      */
-    public void find(String description, int category) {
+    public void find(String description, Integer category) {
         LOGGER.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
         System.out.println("Entries found for " + name + ":");
         incomeList.find(description);

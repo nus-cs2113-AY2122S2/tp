@@ -119,21 +119,21 @@ class PersonTest {
         assertEquals("u " + person.getName(), person.saveName());
     }
 
-    //    @Test
-    //    public void editIncome_addThenEdit_incomeChange() {
-    //        Person person = new Person(VALID_NAME);
-    //        person.addIncome(VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
-    //        assertEquals(VALID_AMOUNT, person.getTotalIncome());
-    //        person.editIncome(FIRST_ENTRY, null, NEW_AMOUNT, null);
-    //        assertEquals(NEW_AMOUNT, person.getTotalIncome());
-    //    }
-    //
-    //    @Test
-    //    public void editExpend_addThenEdit_expendChange() {
-    //        Person person = new Person(VALID_NAME);
-    //        person.addExpend(VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
-    //        assertEquals(VALID_AMOUNT, person.getTotalExpenditure());
-    //        person.editIncome(FIRST_ENTRY, null, NEW_AMOUNT, null);
-    //        assertEquals(NEW_AMOUNT, person.getTotalExpenditure());
-    //    }
+    @Test
+    public void editIncome_addThenEdit_incomeChange() {
+        Person person = new Person(VALID_NAME);
+        person.addIncome(VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, person.getTotalIncome());
+        person.editIncome(FIRST_ENTRY, null, NEW_AMOUNT, null);
+        assertEquals(NEW_AMOUNT, person.getTotalIncome());
+    }
+
+    @Test
+    public void editExpend_addThenEdit_expendChange() {
+        Person person = new Person(VALID_NAME);
+        person.addExpend(VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, person.getTotalExpenditure());
+        person.editExpend(FIRST_ENTRY, null, NEW_AMOUNT, null, null);
+        assertEquals(NEW_AMOUNT, person.getTotalExpenditure());
+    }
 }

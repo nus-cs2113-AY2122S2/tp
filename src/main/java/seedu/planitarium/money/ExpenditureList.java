@@ -43,7 +43,7 @@ public class ExpenditureList extends MoneyList {
      * @param category    The integer label of the category
      * @param isPermanent The recurring status of the expenditure
      */
-    public void addExpenditure(String description, Double amount, int category, Boolean isPermanent) {
+    public void addExpenditure(String description, Double amount, Integer category, Boolean isPermanent) {
         logger.log(Level.INFO, LOG_ADD_EXP);
         assert (description != null);
         assert (amount >= 0);
@@ -190,7 +190,7 @@ public class ExpenditureList extends MoneyList {
      * @param category    The new category, if any
      * @param isPermanent The new recurring status, if any
      */
-    public void editExpenditure(int index, String description, Double amount, int category, Boolean isPermanent) {
+    public void editExpenditure(int index, String description, Double amount, Integer category, Boolean isPermanent) {
         logger.log(Level.INFO, LOG_EDIT_EXP);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
@@ -256,7 +256,7 @@ public class ExpenditureList extends MoneyList {
      * @param description The user's search string.
      * @param category    The user's specified category
      */
-    public void find(String description, int category) {
+    public void find(String description, Integer category) {
         logger.log(Level.INFO, LOG_FIND);
         if (category == 0) {
             matchString(description);
@@ -288,7 +288,7 @@ public class ExpenditureList extends MoneyList {
      * @param description The user's search string.
      * @param category    The user's specified category
      */
-    private void matchString(String description, int category) {
+    private void matchString(String description, Integer category) {
         for (Expenditure item : expenditureArrayList) {
             Boolean inCategory = item.getCategory().equals(Category.getLabelForIndex(category));
             Boolean hasDescription = item.getDescription().contains(description);
