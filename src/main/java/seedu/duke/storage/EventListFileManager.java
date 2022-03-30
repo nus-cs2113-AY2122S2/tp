@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import seedu.duke.eventLists.Event;
+import seedu.duke.eventlists.Event;
 import java.util.Scanner;
 
 public class EventListFileManager extends FileManager {

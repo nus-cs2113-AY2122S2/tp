@@ -1,4 +1,4 @@
-package seedu.duke.eventLists;
+package seedu.duke.eventlists;
 
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidDateException;
