@@ -162,7 +162,7 @@ Deletes an existing session so that you can remove sessions that you do not need
 
 >Format: `session /delete /sid [SESSION_ID]`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 
 <br>
 
@@ -170,7 +170,7 @@ Deletes an existing session so that you can remove sessions that you do not need
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 > 
 > **⚠️Warning:**
-> - This action is irreversible, once the command has been entered, the session would be immediately deleted.
+> - This action is irreversible. The session is deleted immediately after entering this command.
 
 <br>
 
@@ -186,22 +186,22 @@ Edits an existing session so that you can change details of a session.<br>
 
 >Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 
 <br>
 
 > **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be edited.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
->- There are 3 editable fields, session name, session date and the people involved in the session.
+>- There are 3 editable fields: session name, session date and the people involved in the session.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited at a single run of the command.
 >- When editing the people involved, existing participants must be included in the command.
 >  - Example: If the session previously created had Alice and Bob with session ID of 1, 
->    and you wish to edit it to include charlie a valid edit command would be `session /edit /sid /pl Alice Bob Charlie`.
+>    and you wish to edit it to include Charlie a valid edit command would be `session /edit /sid /pl Alice Bob Charlie`.
 > 
 > **⚠️Warning:**
-> - This action is irreversible, once the command has been entered, the session would be edited.
+> - This action is irreversible. The session is edited immediately after entering this command.
 
 <br>
 
@@ -215,7 +215,7 @@ Examples of usage:
   ![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
 
 **Example 2** 
-- Edits the session to include charlie. <br><br>
+- Edits the session to include Charlie. <br><br>
   `session /edit /sid 1 /pl Alice Bob Charlie` <br><br>
   ![Session Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[2].png)
   <br>
@@ -227,7 +227,7 @@ Displays details about a session so that you can review the session.<br>
 >Format: `session /view /sid [SESSION_ID]`
 ><br>
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 
 <br>
 
@@ -268,7 +268,7 @@ However, deleted sessions will not be listed.
 ### Creating an activity: `activity /create`
 Creates an activity so that you can record the relevant details, and then assigns it to a session. <br>
 
-There are two ways that you can create an activity:
+There are 2 ways that you can create an activity:
 1. Record the total cost to be split amongst everyone involved
 2. Record each person's individual cost
 
@@ -279,7 +279,7 @@ There are two ways that you can create an activity:
 /cl [COST1 COST2 ...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 >
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_NAME]` refers to the name of the activity.
 >    * The activity name is **case-insensitive**.
 >* `[PERSON_PAID]` refers to the person who paid for the activity.
@@ -330,19 +330,18 @@ Deletes an existing activity from a particular session so that you can remove ac
 >Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
->    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
+>    * The unique identifier for an activity can be retrieved with the [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
 <br>
 
 > **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be removed.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be removed.
->- A confirmation must be given before deletion takes place.
 >
 > **⚠️Warning:**
->- This action is irreversible, once the command has been entered, the activity would be immediately deleted.
+>- This action is irreversible. The activity is deleted immediately after entering this command.
 
 <br>
 
@@ -356,7 +355,7 @@ Deletes an existing activity from a particular session so that you can remove ac
 ### Editing an activity: `activity /edit`
 Edits an existing activity so that you can change details of an activity.<br>
 
-There are two ways that you can edit an activity:
+There are 2 ways that you can edit an activity:
 1. Record the total cost to be split amongst everyone involved
 2. Record each person's individual cost
 
@@ -367,7 +366,7 @@ There are two ways that you can edit an activity:
   /i [NAME1 NAME2...] /cl [COST1 COST2...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 > 
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
 >    * The unique identifier for an activity can be retrieved with the [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 >* `[ACTIVITY_NAME]` refers to the name of the activity.
@@ -401,7 +400,7 @@ There are two ways that you can edit an activity:
 >
 > **⚠️Warnings:**
 >- All fields must be supplied in the command, not just the ones you wish to edit.
->- This action is irreversible, once the command has been entered, the activity would be immediately edited.
+>- This action is irreversible. The activity is edited immediately after entering this command.
 
 <br>
 
@@ -421,9 +420,9 @@ Displays details about an activity so that you can review the activity's details
 > Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_ID]` refers to the unique identifier of the activity. 
->    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
+>    * The unique identifier for an activity can be retrieved with the [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
 <br>
 
@@ -446,7 +445,7 @@ However, deleted activities will not be listed.
 >Format: `activity /list /sid [SESSION_ID]`
 >
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 
 <br>
 
@@ -475,7 +474,7 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 
 > Format: `session /summary /sid [SESSION_ID]`
 > * `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 
 <br>
 
@@ -532,7 +531,7 @@ Deletes an existing group so that you can remove groups that you do not need.
 > Format: `group /delete /gid [GROUP_ID]`
 >
 >* `[GROUP_ID]` refers to the unique identifier of the group.
->    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+>    * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
 
 <br>
 
@@ -540,7 +539,7 @@ Deletes an existing group so that you can remove groups that you do not need.
 >- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
 >
 > **⚠️Warning:**
-> - This action is irreversible, once the command has been entered, the group would be immediately deleted.
+> - This action is irreversible. The group is deleted immediately after entering this command.
 
 <br>
 
@@ -556,17 +555,17 @@ Edits an existing group so that you can change details of a group.<br>
 
 >Format: `group /edit /gid [GROUP_ID] [</n [GORUP_NAME]>] [</pl [NAME1 NAME2...]>]`
 >* `[GROUP_ID]` refers to the unique identifier of the group.
->    * The unique identifier for a gorup can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+>    * The unique identifier for a gorup can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
 
 <br>
 
 > **💡 Notes:**
 > - A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
 > - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
-> - There are 2 editable fields, group name and the people involved in the session.
+> - There are 2 editable fields: group name and the people involved in the session.
 >
 > **⚠️Warning:**
-> - This action is irreversible, once the command has been entered, the group would be edited.
+> - This action is irreversible. The group is edited immediately after entering this command.
 
 <br>
 
@@ -579,7 +578,7 @@ Examples of usage:
   ![Group Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[1].png)
 
 **Example 2**
-- Edits the group to include charlie. <br><br>
+- Edits the group to include Charlie. <br><br>
   `group /edit /gid 1 /pl Alice Bob Charlie` <br><br>
   ![Group Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[2].png)
   <br>
@@ -591,7 +590,7 @@ Displays details about a group so that you can review the group's details.<br>
 >Format: `group /view /gid [GROUP_ID]`
 >
 >* `[GROUP_ID]` refers to the unique identifier of the group.
->    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+>    * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
 
 <br>
 
@@ -629,7 +628,7 @@ However, deleted groups will not be listed.
 <br>
 
 ### Listing all available commands: `help`
-Displays all available SplitLah commands and their syntax so that you can get assistance when using SplitLah.<br>
+Displays all available SplitLah commands and their syntax to help you use SplitLah.<br>
 You can also refer to the [Command Summary](#command-summary) for a summary of all available commands in SplitLah.
 
 > Format: `help`
