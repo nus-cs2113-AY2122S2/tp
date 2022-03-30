@@ -26,7 +26,7 @@
 
 ## 1. Introduction
 
-Mod Happy is a command line application geared towards NUS students. Designed to be your personal assistant for all things academic, Mod Happy can **track** your outstanding tasks and **tag** them for easy organisation, **categorise** them according to modules, and even help you **calculate** your projected GPA.
+Mod Happy is a command line application geared towards NUS students. Designed to be your personal assistant for all things academic, Mod Happy can **track** your outstanding tasks, **tag** them for easy organisation and **categorise** them according to modules, and even help you **calculate** your projected GPA.
 
 <br><br><br>
 
@@ -51,12 +51,16 @@ The following section details the various terminologies and notation used throug
 ### 3.1. Explanation of notation
 
 - Fully capitalised field names, like `MODULE_CODE`,  indicate input parameters which you supply. For instance, in `del mod MODULE_CODE`, you would replace `MODULE_CODE` with the module code of the module you wish to delete (e.g. `del mod CS2113T`).
-- When multiple parameters are indicated within round brackets `()` and separated with `|`, you must choose exactly one of the options presented. For example, `mark (c | u)` means that you must pick either `mark c` or `mark u`.
+- When multiple parameters are enclosed within round brackets `()` and separated with `|`, you must choose exactly one of the options presented. For example, `mark (c | u)` means that you must pick either `mark c` or `mark u`.
 - Parts of the command indicated within square brackets `[]` are optional, and you may choose to omit the enclosed section if you wish. For example, if the command format is `list [TAG_NAME]`, `list` and `list example_tag` are both valid inputs.
 
 > 📔 <span style="color:#3333ff">**NOTE:**</span>
 > 
-> Pay special attention to whether input parameters are surrounded by double quotes (e.g. `-d "MODULE_DESCRIPTION"`). Missing or unnecessary double quotes will likely result in Mod Happy not understanding your command.
+> Pay special attention to whether input parameters are surrounded by double quotes in the command format. Missing or unnecessary double quotes will likely result in Mod Happy not understanding your command.
+> 
+> Example 1: `command EXAMPLE` does not require double quotes around `EXAMPLE`. `command hello` is an example of a valid command.
+> 
+> Example 2: `command "EXAMPLE_2"` requires double quotes around `EXAMPLE_2`. `command "hello"` is an example of a valid command.
 
 > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
 > 
@@ -66,7 +70,9 @@ The following section details the various terminologies and notation used throug
 
 ### 3.2. Specifying tasks
 
-Many commands require you to specify a task for it to act on. This is done by providing a task number, as well as optionally a module code. For example:
+To understand how to specify tasks, it helps for you to have a brief understanding of how Mod Happy organises them. When a task is created, it is associated with a module (or the General Tasks list, if no module is provided) and stored within its list of tasks. In other words, there is no master list of tasks; tasks belonging to two different modules are stored in two entirely separate lists.
+
+As a result, providing the task's number is not specific enough for Mod Happy to figure out which task you are referring to. Instead, you have to additionally specify the module code associated with the task. For example:
 - Task number `3`, module code `CS2113T`: refers to task number 3 stored under the module CS2113T.
 - Task number `2`, no module code specified: refers to task number 2 stored under the General Tasks list.
 
@@ -84,7 +90,7 @@ Format: `help [COMMAND_WORD]`
 
 ### 4.2. Accessing options: `option`
 
-Allows you to view and change your user preferences. This command has three different formats, each of which serve a different purpose.
+Allows you to view and change various user preferences which can affect other aspects of Mod Happy's operation. This command has three different formats, each of which serve a different purpose.
 
 - **Viewing available configuration options**
   
@@ -107,9 +113,9 @@ Allows you to view and change your user preferences. This command has three diff
 <br>
 The following configuration options currently exist:
 
-| Config name          | Description                                                                                                           | Accepted values                                                                |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| SHOW_COMPLETED_TASKS | Determines whether tasks marked as completed are shown when you run the `list` command.<br>**Default value: `false`** | `true`: **All** tasks are shown.<br>`false`: Only uncompleted tasks are shown. |  
+| Config name          | Description                                                                                                                                   | Accepted values                                                                |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| SHOW_COMPLETED_TASKS | Determines whether tasks marked as completed are shown when [listing tasks](#48-listing-all-tasksmodules-list).<br>**Default value: `false`** | `true`: **All** tasks are shown.<br>`false`: Only uncompleted tasks are shown. |  
 
 <br>
 
@@ -117,7 +123,7 @@ The following configuration options currently exist:
 
 - **Add module: `add mod`**
 
-  Adds a module to your module list. You have to indicate the number of modular credits and optionally specify a short description for the module.<br>
+  Adds a module to your module list. You must indicate the number of modular credits and may optionally specify a short description for the module.<br>
   > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
   >
   > The module code must be a single word, and can only consist of alphanumeric characters as well as the underscore `_`.
@@ -207,11 +213,11 @@ Example: `tag add 1 -m CS2113T "project"`
 
 Shows you your tasks, grouped by module code. General tasks are displayed separately.
 
-If a tag name is provided, only tasks with the associated tag will be shown.
+If a [tag name](#47-managing-custom-tags-tag) is provided, only tasks with the associated tag will be shown.
 
 > 📔 <span style="color:#3333ff">**NOTE:**</span>
 > 
-> If the `SHOW_COMPLETED_TASKS` option is set to `false`, you will only be shown your outstanding tasks. The number of tasks that were hidden will be indicated at the bottom of each group.
+> If the [`SHOW_COMPLETED_TASKS` option](#42-accessing-options-option) is set to `false`, you will only be shown your outstanding tasks. The number of tasks that were hidden will be indicated at the bottom of each group.
 
 Format: `list ["TAG_NAME"]`
 
@@ -234,7 +240,7 @@ Example: `grade CS2113T A+`
 
 ### 4.10. Viewing GPA: `gpa`
 
-Computes your GPA based the inputted grades of all currently stored modules, and displays it. Modules for which you have not inputted any grade are not factored into the calculation.
+Computes your GPA based the [inputted grades](#49-setting-a-modules-grade-grade) of all currently stored modules, and displays it. Modules for which you have not inputted any grade are not factored into the calculation.
 
 Format: `gpa`
 
