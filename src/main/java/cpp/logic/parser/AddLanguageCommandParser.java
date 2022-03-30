@@ -8,7 +8,7 @@ public class AddLanguageCommandParser implements CommandParser<AddLanguageComman
     @Override
     public AddLanguageCommand parse(String[] userInput) throws IllegalCommandException {
         if (userInput.length < Constants.THREE_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new IllegalCommandException(Constants.MESSAGE_INVALID_ADDLANGUAGE_COMMAND_FORMAT);
         }
         String projectName = userInput[1];
         String language = userInput[2];
@@ -17,7 +17,7 @@ public class AddLanguageCommandParser implements CommandParser<AddLanguageComman
         }
 
         if (language.equals("") || language.equals(" ")) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new IllegalCommandException(Constants.MESSAGE_INVALID_ADDLANGUAGE_COMMAND_FORMAT);
         }
 
         return new AddLanguageCommand(projectName, language);

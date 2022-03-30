@@ -3,15 +3,18 @@ package cpp.logic;
 import cpp.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.Command;
-import cpp.logic.parser.AddLanguageCommandParser;
+import cpp.logic.commands.ListLanguageCommand;
 import cpp.logic.commands.ListProjectCommand;
 
-import cpp.logic.parser.AddDeadlineCommandParser;
 import cpp.logic.parser.AddProjectCommandParser;
-import cpp.logic.parser.AddTodoCommandParser;
 import cpp.logic.parser.DeleteProjectCommandParser;
+import cpp.logic.parser.AddTodoCommandParser;
 import cpp.logic.parser.MarkCommandParser;
+import cpp.logic.parser.AddDeadlineCommandParser;
 import cpp.logic.parser.ViewProjectCommandParser;
+import cpp.logic.parser.AddLanguageCommandParser;
+import cpp.logic.parser.ListLanguageCommandParser;
+
 import cpp.model.ProjectList;
 import cpp.response.Response;
 
@@ -53,7 +56,7 @@ public class CommandHandler {
             executeResult = executeCommand(projectList, new AddLanguageCommandParser().parse(commands));
             break;
         case "listlanguages":
-            listLanguages(projectList, commands);
+            executeResult = executeCommand(projectList, new ListLanguageCommandParser().parse(commands));
             break;
         case "help":
             Response.printHelp();
@@ -67,13 +70,5 @@ public class CommandHandler {
     private String executeCommand(ProjectList projectList, Command command) {
         assert (command != null) : "The command should not be null.";
         return command.execute(projectList);
-    }
-
-    private void listLanguages(ProjectList projectList, String[] commands) throws IllegalCommandException {
-        assert (projectList != null && commands != null) : "Cannot list languages for this project.";
-        if (commands.length < Constants.TWO_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
-        }
-        projectList.listLanguages(commands[1]);
     }
 }

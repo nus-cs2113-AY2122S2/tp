@@ -76,6 +76,10 @@ public class Response {
         return ("Language added");
     }
 
+    public static String listLanguageSuccessfully() {
+        return ("Languages have been listed successfully.");
+    }
+
     public static String addMemberSuccessfully(String memberName) {
         return ("Member " + memberName + "has been added successfully.");
     }
