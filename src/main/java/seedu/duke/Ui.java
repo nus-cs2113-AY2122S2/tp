@@ -102,9 +102,9 @@ public class Ui {
     }
 
     public void printHousekeeperNoted(Housekeeper housekeeper) {
-        System.out.println("=============== Noted ! ================");
+        printNotedLine();
         System.out.println(housekeeper);
-        System.out.println("========================================");
+        printBottomLine();
     }
 
     /**
@@ -162,11 +162,11 @@ public class Ui {
     }
 
     public void printHousekeeperList(HousekeeperList housekeeperList) {
-        printMessage("======== Housekeeper List ========");
+        printMessage("=============== Housekeeper List ================");
         for (int i = 0; i < housekeeperList.getTotalHousekeeper(); i++) {
             System.out.println((i + 1) + ". " + housekeeperList.getHousekeeper(i));
         }
-        printMessage("======== End of the list ========");
+        printMessage("=============== End of the list =================");
     }
 
     public void printHousekeeperListReset(HousekeeperList housekeeperList) {
@@ -177,7 +177,7 @@ public class Ui {
     public void printFoundHousekeeperList(ArrayList<Housekeeper> housekeeperPrintList, int dayInteger) {
         String day = getDayInString(dayInteger);
 
-        printMessage("======== " + day + " List ========");
+        printMessage("=========== " + day + " List ===========");
         if (housekeeperPrintList.isEmpty()) {
             printMessage("TAKE NOTE! NO ONE IS AVAILABLE!!");
         }
@@ -186,7 +186,7 @@ public class Ui {
             System.out.println(i + ". " + housekeeper.getName());
             i += 1;
         }
-        printMessage("======== End of the list ========");
+        printMessage("========= End of the list =========");
     }
 
     private String getDayInString(int dayInteger) {

@@ -7,7 +7,7 @@ import seedu.duke.ListContainer;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.Ui;
 import seedu.duke.Housekeeper;
-import seedu.duke.InvalidHousekeeperProfileException;
+import seedu.duke.exceptions.InvalidHousekeeperProfileException;
 import seedu.duke.HousekeeperList;
 import seedu.duke.InvalidUserException;
 import seedu.duke.OverAgeException;
