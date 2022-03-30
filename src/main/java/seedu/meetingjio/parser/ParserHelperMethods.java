@@ -21,7 +21,7 @@ public class ParserHelperMethods {
         int startHours = startTime / 100;
         int endHours = endTime / 100;
         boolean invalidHours = startHours >= 24 || endHours >= 24;
-        if (invalidMinutes || invalidHours || startTime > endTime) {
+        if (invalidMinutes || invalidHours || startTime >= endTime) {
             throw new InvalidTimeException();
         }
     }
