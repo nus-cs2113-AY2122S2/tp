@@ -78,12 +78,14 @@ public class Expenditure {
             return false;
         }
         Expenditure expenditure = (Expenditure) object;
-        return description.equals(expenditure.description) && (amount == expenditure.amount);
+        return description.equals(expenditure.description) && (amount == expenditure.amount)
+                && category.equals(expenditure.category) && paymentMethod.equals(expenditure.paymentMethod)
+                && time.equals(expenditure.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description, amount);
+        return Objects.hash(description, amount, category, paymentMethod, time);
     }
 
 

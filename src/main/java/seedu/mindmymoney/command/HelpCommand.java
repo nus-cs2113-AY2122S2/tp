@@ -81,8 +81,8 @@ public class HelpCommand extends Command {
         } else {
             System.out.println("Invalid command! \n"
                     + "Type \"help /e\" to view the list of supported expenditure commands\n"
-                    + "Type \"help /cc\" to view the list of supported Credit Card commands"
-                    + System.lineSeparator());
+                    + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
+                    + "Type \"help /i\" to view the list of supported income commands\n");
         }
     }
 
@@ -138,9 +138,10 @@ public class HelpCommand extends Command {
         } else if (hasIncomeFlag()) {
             printIncomeHelpPage();
         } else {
-            throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
-                    + "Type 'list /e' to view your current list of expenses\n"
-                    + "Type 'list /cc' to view your current list of stored credit cards\n");
+            throw new MindMyMoneyException("Please ensure that you have entered a valid help command.\n"
+                    + "Type \"help /e\" to view the list of supported expenditure commands\n"
+                    + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
+                    + "Type \"help /i\" to view the list of supported income commands\n");
         }
     }
 }

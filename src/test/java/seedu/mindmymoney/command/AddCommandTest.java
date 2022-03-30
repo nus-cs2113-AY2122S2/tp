@@ -27,12 +27,12 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
 
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("Cash", "Personal", "Nike Shoes",
-            300, "Mar 2022"));
+            300, "30/03/2022"));
         String expectedOutput = getExpenditureOutput(testList);
         String actualOutput = getExpenditureOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);
@@ -48,12 +48,12 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cASh /c PerSONal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/pm cASh /c PerSONal /d Nike Shoes /a 300 /t 30/03/2022";
 
         new AddCommand(inputString, user).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("Cash", "Personal", "Nike Shoes",
-            300, "Mar 2022"));
+            300, "30/03/2022"));
         String expectedOutput = getExpenditureOutput(testList);
         String actualOutput = getExpenditureOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);
@@ -69,12 +69,12 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm Cash /c Personal /d Nike Shoes /a 300.1299786222834 /t 2022-03";
+        String inputString = "/pm Cash /c Personal /d Nike Shoes /a 300.1299786222834 /t 30/03/2022";
 
         new AddCommand(inputString, user).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("Cash", "Personal", "Nike Shoes",
-            (float) 300.13, "Mar 2022"));
+            (float) 300.13, "30/03/2022"));
         String expectedOutput = getExpenditureOutput(testList);
         String actualOutput = getExpenditureOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);
@@ -91,12 +91,12 @@ class AddCommandTest {
         IncomeList incomeList = new IncomeList();
         creditCardTestList.add(new CreditCard("posb",0.05,500,500));
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm posb /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/pm posb /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
 
         new AddCommand(inputString, user).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("posb", "Personal", "Nike Shoes",
-            300, "Mar 2022"));
+            300, "30/03/2022"));
         String expectedOutput = getExpenditureOutput(testList);
         String actualOutput = getExpenditureOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);
@@ -175,7 +175,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cash /c Personal /d Nike Shoes /a abcd /t 2022-03";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a abcd /t 30/03/2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());
@@ -190,7 +190,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cash /z Personal /d Nike Shoes /a 500 /t 2022-03";
+        String inputString = "/pm cash /z Personal /d Nike Shoes /a 500 /t 30/03/2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());
@@ -205,7 +205,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cash /d Nike Shoes /a 500 /t 2022-03 /c Personal";
+        String inputString = "/pm cash /d Nike Shoes /a 500 /t 30/03/2022 /c Personal";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());
@@ -220,7 +220,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm casssh /c Personal /d Nike Shoes /a 500 /t 2022-03 ";
+        String inputString = "/pm casssh /c Personal /d Nike Shoes /a 500 /t 30/03/2022 ";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());
@@ -235,7 +235,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cash /c Person /d Nike Shoes /a 500 /t 2022-03";
+        String inputString = "/pm cash /c Person /d Nike Shoes /a 500 /t 30/03/2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());
@@ -250,10 +250,22 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cash /c Person /d Nike Shoes /a 500 /t 2022-99";
+
+        String firstInputString = "/pm cash /c Person /d Nike Shoes /a 500 /t 30/4/2022";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(firstInputString, user).executeCommand());
+        String secondInputString = "/pm cash /c Person /d Nike Shoes /a 500 /t 04/2022";
 
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, user).executeCommand());
+            () -> new AddCommand(secondInputString, user).executeCommand());
+        String thirdInputString = "/pm cash /c Person /d Nike Shoes /a 500 /t 2022";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(thirdInputString, user).executeCommand());
+
+        String fourthInputString = "/pm cash /c Person /d Nike Shoes /a 500 /t 38/14/2022";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(fourthInputString, user).executeCommand());
     }
 
     /**
@@ -265,7 +277,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm  /c Person /d Nike Shoes /a 500 /t 2022-01";
+        String inputString = "/pm  /c Person /d Nike Shoes /a 500 /t 30/03/2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());
@@ -280,7 +292,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm Cash /c  /d Nike Shoes /a 500 /t 2022-01";
+        String inputString = "/pm Cash /c  /d Nike Shoes /a 500 /t 30/03/2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());
@@ -295,7 +307,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm Cash /c Food /d  /a 500 /t 2022-01";
+        String inputString = "/pm Cash /c Food /d  /a 500 /t 30/03/2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());
@@ -310,7 +322,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm Cash /c Food /d Shoes /a  /t 2022-01";
+        String inputString = "/pm Cash /c Food /d Shoes /a  /t 30/03/2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());
@@ -340,7 +352,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm/c Person /d Nike Shoes /a 500 /t 2022-01";
+        String inputString = "/pm/c Person /d Nike Shoes /a 500 /t 30/03/2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString, user).executeCommand());

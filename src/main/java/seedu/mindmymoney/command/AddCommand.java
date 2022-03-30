@@ -23,15 +23,18 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 
 import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
+import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
-import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the Add command.
@@ -69,6 +72,21 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Updates the total expenditure field in the credit card specified in the expenditure item.
+     *
+     * @param cardName Name of credit card to be updated.
+     * @param amount amount of new expenditure.
+     * @throws MindMyMoneyException when the card is not found in user's credit card list.
+     */
+    private void updateCreditCardTotalExpenditure(String cardName, float amount) throws MindMyMoneyException {
+        CreditCard creditCard = creditCardList.get(cardName);
+        if (creditCard == null) {
+            throw new MindMyMoneyException("Invalid Card Name!");
+        }
+        creditCard.addExpenditure(amount);
+    }
+
+    /**
      * Indicates whether the add command is to add an income by looking for the /i flag.
      *
      * @return true if the /i flag is present, false otherwise.
@@ -88,24 +106,27 @@ public class AddCommand extends Command {
         if (capitalise(paymentMethod).equals("Cash")) {
             paymentMethod = capitalise(paymentMethod);
         }
-
         String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
         testExpenditureCategory(inputCategory);
-        String category = capitalise(inputCategory);
-
         String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
         testDescription(description);
-
         String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
         testExpenditureAmount(amountAsString);
-
+        String category = capitalise(inputCategory);
         float amountAsFloat = Float.parseFloat(amountAsString);
         float amountInt = formatFloat(amountAsFloat);
-
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
-        String time = convertTime(inputTime);
-
+        if (!isValidInput(inputTime)) {
+            throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
+        }
+        LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String time = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         expenditureList.add(new Expenditure(paymentMethod, category, description, amountInt, time));
+
+        if (!paymentMethod.equals("Cash")) {
+            updateCreditCardTotalExpenditure(paymentMethod, amountInt);
+        }
+
         System.out.println("Successfully added: \n\n"
             + "Description: " + description + "\n"
             + "Amount: $" + amountInt + "\n"
