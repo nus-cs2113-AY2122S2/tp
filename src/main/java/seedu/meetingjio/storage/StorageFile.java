@@ -47,7 +47,7 @@ public class StorageFile {
             dataFile.createNewFile();
             FileOutputStream outFile = new FileOutputStream(dataFile, false);
             FileWriter dataWriter = new FileWriter(dataFile);
-            String str = masterTimetable.collateAll(masterTimetable);
+            String str = masterTimetable.collateAll(masterTimetable, 0);
             String truncatedString = "";
             if (str != "") {
                 truncatedString = str.substring(0, str.length() - 1);

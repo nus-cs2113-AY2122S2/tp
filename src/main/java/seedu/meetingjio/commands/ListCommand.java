@@ -1,5 +1,7 @@
 package seedu.meetingjio.commands;
 
+import seedu.meetingjio.events.Lesson;
+import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
@@ -12,12 +14,16 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_MASTER_TIMETABLE
 
 public class ListCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String ALL_COMMAND_WORD = "list";
+    public static final String LESSON_COMMAND_WORD = "list_lesson";
+    public static final String MEETING_COMMAND_WORD = "list_meeting";
 
     private final String name;
+    private final int constraint;
 
-    public ListCommand(String name) {
+    public ListCommand(String name, int constraint) {
         this.name = name;
+        this.constraint = constraint;
     }
 
     /**
@@ -35,9 +41,9 @@ public class ListCommand extends Command {
             if (user.length() == 0) {
                 throw new MissingValueException(); // why dun return the error msg directly?
             } else if (user.equalsIgnoreCase("all")) {
-                return listAll(masterTimetable);
+                return listAll(masterTimetable, constraint);
             } else {
-                return listUser(user, masterTimetable);
+                return listUser(user, masterTimetable, constraint);
             }
         } catch (MissingValueException mve) {
             return ERROR_UNSPECIFIED_LIST;
@@ -56,8 +62,8 @@ public class ListCommand extends Command {
      *     character at the end. If the string has no contents, an error message is shown to inform the user
      *     accordingly.
      */
-    private String listAll(MasterTimetable masterTimetable) {
-        String str = masterTimetable.collateAll(masterTimetable);
+    public static String listAll(MasterTimetable masterTimetable, int constraint) {
+        String str = masterTimetable.collateAll(masterTimetable, constraint);
         if (str.length() == 0) {
             return ERROR_EMPTY_MASTER_TIMETABLE;
         }
@@ -77,7 +83,7 @@ public class ListCommand extends Command {
      * @return str The string containing the user's timetable. If the user does not exist, or the user's timetable is
      *     empty, an appropriate error message will be shown to inform the user accordingly.
      */
-    public static String listUser(String user, MasterTimetable masterTimetable) {
+    public static String listUser(String user, MasterTimetable masterTimetable, int constraint) {
         Timetable timetable;
         try {
             timetable = masterTimetable.getByName(user);
@@ -91,6 +97,10 @@ public class ListCommand extends Command {
         timetable.sort();
         String str = "";
         for (int i = 0; i < timetable.size(); i++) {
+            if ((constraint == 1 && timetable.get(i) instanceof Meeting)
+                    || (constraint == 2 && timetable.get(i) instanceof Lesson)) {
+                continue;
+            }
             int listIndex = i + 1;
             str += listIndex + "." + timetable.get(i);
             if (i != timetable.size() - 1) {

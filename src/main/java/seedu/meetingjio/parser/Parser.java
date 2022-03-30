@@ -73,8 +73,12 @@ public class Parser {
             return prepareAddMeeting();
         case EditCommand.COMMAND_WORD:
             return prepareEdit();
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand(arguments);
+        case ListCommand.ALL_COMMAND_WORD:
+            return new ListCommand(arguments, 0);
+        case ListCommand.LESSON_COMMAND_WORD:
+            return new ListCommand(arguments, 1);
+        case ListCommand.MEETING_COMMAND_WORD:
+            return new ListCommand(arguments, 2);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:

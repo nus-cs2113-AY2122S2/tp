@@ -64,7 +64,7 @@ public class ListCommandTest {
      */
     @Test
     public void listCommand_emptyMasterTimetable() {
-        ListCommand listCommand = new ListCommand("all");
+        ListCommand listCommand = new ListCommand("all", 0);
         assertEquals(ERROR_EMPTY_MASTER_TIMETABLE, listCommand.execute(masterTimetable));
     }
 
@@ -74,7 +74,7 @@ public class ListCommandTest {
      */
     @Test
     public void listCommand_noValue() {
-        ListCommand listCommand = new ListCommand("");
+        ListCommand listCommand = new ListCommand("", 0);
         assertEquals(ERROR_UNSPECIFIED_LIST, listCommand.execute(masterTimetable));
     }
 
@@ -84,7 +84,7 @@ public class ListCommandTest {
      */
     @Test
     public void listCommand_noUser() {
-        ListCommand listCommand = new ListCommand("John");
+        ListCommand listCommand = new ListCommand("John", 0);
         assertEquals(ERROR_INVALID_USER, listCommand.execute(masterTimetable));
     }
 
