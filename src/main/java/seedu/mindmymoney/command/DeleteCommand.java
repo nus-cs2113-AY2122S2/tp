@@ -5,6 +5,8 @@ import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.IncomeList;
+import seedu.mindmymoney.userfinancial.CreditCard;
+import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.User;
 
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
@@ -71,6 +73,21 @@ public class DeleteCommand extends Command {
     }
 
     /**
+     * Updates the total expenditure field in the credit card specified in the expenditure item
+     *
+     * @param cardName Name of credit card to be updated
+     * @param amount amount of new expenditure
+     * @throws MindMyMoneyException when the card is not found in user's credit card list
+     */
+    private void updateCreditCardTotalExpenditure(String cardName, float amount) throws MindMyMoneyException {
+        CreditCard creditCard = creditCardList.get(cardName);
+        if (creditCard == null) {
+            throw new MindMyMoneyException("Invalid Card Name!");
+        }
+        creditCard.deductExpenditure(amount);
+    }
+
+    /**
      * Removes an expenditure from user's list of expenditure(s).
      *
      * @throws MindMyMoneyException when expenditure list is empty or an invalid command is received.
@@ -91,9 +108,16 @@ public class DeleteCommand extends Command {
 
             String getNumber = splitMessage[INDEX_OF_SECOND_ITEM];
             int positionToDelete = Integer.parseInt(getNumber) + LIST_INDEX_CORRECTION;
+            Expenditure expenditure = expenditureList.get(positionToDelete);
+
+            String paymentMethod = expenditure.getPaymentMethod();
+            if (!paymentMethod.equals("Cash")) {
+                updateCreditCardTotalExpenditure(paymentMethod, expenditure.getAmount());
+            }
+
             System.out.println("I have removed "
-                    + expenditureList.get(positionToDelete).getDescription()
-                    + " of $" + expenditureList.get(positionToDelete).getAmount()
+                    + expenditure.getDescription()
+                    + " of $" + expenditure.getAmount()
                     + " from the account" + System.lineSeparator());
             expenditureList.delete(positionToDelete);
             assert positionToDelete >= 0 : "Index should always be >= 0";

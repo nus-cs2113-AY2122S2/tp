@@ -1,5 +1,7 @@
 package seedu.mindmymoney.userfinancial;
 
+import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
+
 /**
  * Represents the credit card entry.
  */
@@ -8,6 +10,7 @@ public class CreditCard {
     private double cashback;
     private String nameOfCard;
     private float balance;
+    private float totalExpenditure = 0;
 
     public CreditCard(String nameOfCard, double cashback, float monthlyCardLimit, float balance) {
         setNameOfCard(nameOfCard);
@@ -48,9 +51,22 @@ public class CreditCard {
         return balance;
     }
 
+    public void addExpenditure(float amount) {
+        this.totalExpenditure += amount;
+    }
+
+    public void deductExpenditure(float amount) {
+        this.totalExpenditure -= amount;
+    }
+
+    public float getTotalCashback() {
+        return formatFloat((float)(totalExpenditure * (cashback/100))) ;
+    }
+
     @Override
     public String toString() {
-        return "Name: " + getNameOfCard() + " [Cashback: " + getCashback()
-                +  "%] [Card limit: $" + getMonthlyCardLimit() + "] [Card balance: $" + getBalance() + "]\n";
+        return "Name: " + getNameOfCard() + " [Cashback: " + getCashback() +  "%] [Cashback gained: $"
+                + getTotalCashback() + "] [Card limit: $" + getMonthlyCardLimit() + "] [Card balance: $" + getBalance()
+                + "]\n";
     }
 }

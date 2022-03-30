@@ -3,6 +3,7 @@ package seedu.mindmymoney.data;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Container for Credit Cards.
@@ -44,6 +45,22 @@ public class CreditCardList {
      */
     public CreditCard get(int index) {
         return creditCardListArray.get(index);
+    }
+
+
+    /**
+     * Retrieves the CreditCard with the given name
+     *
+     * @param name name of credit card to be searched
+     * @return CreditCard object with matching name as parameter
+     */
+    public CreditCard get(String name) {
+        for (CreditCard i : creditCardListArray) {
+            if (i.getNameOfCard().toLowerCase().equals(name.toLowerCase())) {
+                return i;
+            }
+        }
+        return null;
     }
 
     /**

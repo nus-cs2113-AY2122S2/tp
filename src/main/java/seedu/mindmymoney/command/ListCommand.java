@@ -184,8 +184,7 @@ public class ListCommand extends Command {
         int indexOfList = 1;
         String listInString = "";
         for (CreditCard i : creditCardList.creditCardListArray) {
-            listInString += indexOfList + ". Name: " + i.getNameOfCard() + " [Cashback: " + i.getCashback()
-                    +  "%] [Card limit: $" + i.getMonthlyCardLimit() + "] [Card balance: $" + i.getBalance() + "]\n";
+            listInString += indexOfList + ". " + i.toString();
             indexOfList++;
         }
 

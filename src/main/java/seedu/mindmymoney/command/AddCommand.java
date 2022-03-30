@@ -72,6 +72,21 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Updates the total expenditure field in the credit card specified in the expenditure item
+     *
+     * @param cardName Name of credit card to be updated
+     * @param amount amount of new expenditure
+     * @throws MindMyMoneyException when the card is not found in user's credit card list
+     */
+    private void updateCreditCardTotalExpenditure(String cardName, float amount) throws MindMyMoneyException {
+        CreditCard creditCard = creditCardList.get(cardName);
+        if (creditCard == null) {
+            throw new MindMyMoneyException("Invalid Card Name!");
+        }
+        creditCard.addExpenditure(amount);
+    }
+
+    /**
      * Indicates whether the add command is to add an income by looking for the /i flag.
      *
      * @return true if the /i flag is present, false otherwise.
@@ -107,6 +122,11 @@ public class AddCommand extends Command {
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String time = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         expenditureList.add(new Expenditure(paymentMethod, category, description, amountInt, time));
+
+        if (!paymentMethod.equals("Cash")) {
+            updateCreditCardTotalExpenditure(paymentMethod, amountInt);
+        }
+
         System.out.println("Successfully added: \n\n"
             + "Description: " + description + "\n"
             + "Amount: $" + amountInt + "\n"
