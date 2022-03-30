@@ -38,7 +38,7 @@ public class UpdateCommandTest {
     @Test
     void updateCommand_invalidInput_exceptionThrown() {
         Expenditure testExpenditure = new Expenditure("cash", "food",
-                "porridge", 5, "2022-03");
+                "porridge", 5, "March 2022");
         User testUser = new User();
         testUser.setExpenditureListArray(new ExpenditureList());
         testUser.getExpenditureListArray().add(testExpenditure);
