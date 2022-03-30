@@ -24,19 +24,27 @@ public class AddParser extends CommandParser{
         if (matches.get("flag").equals("g")) {
             String regexGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) up/(?<up>.*) ui/(?<ui>.*) wu/(?<isWholeUnit>.*) ba/(?<ba>.*)" +
                     " v/(?<v>.*) ip/(?<ip>.*) qty/(?<qty>.*)";
-            HashMap<String,String> regexGoodMatch = new
-                    Regex(userInput, regexGood).getGroupValues();
-            warehouse.addGoodToInventory(regexGoodMatch.get("sku"),regexGoodMatch.get("name"), regexGoodMatch.get("desc"),
-                    regexGoodMatch.get("up"), regexGoodMatch.get("ui"), regexGoodMatch.get("isWholeUnit"),regexGoodMatch.get("ba"),
-                    regexGoodMatch.get("v"), regexGoodMatch.get("ip"), regexGoodMatch.get("qty"));
+            HashMap<String,String> regexGoodMatch = new Regex(userInput, regexGood).getGroupValues();
+            warehouse.addGoodToInventory(regexGoodMatch.get("sku"),regexGoodMatch.get("name"),
+                    regexGoodMatch.get("desc"),
+                    Float.parseFloat(regexGoodMatch.get("up")), regexGoodMatch.get("ui"),
+                    Boolean.parseBoolean(regexGoodMatch.get("isWholeUnit")),
+                    Float.parseFloat(regexGoodMatch.get("ba")),
+                    Float.parseFloat(regexGoodMatch.get("v")),
+                    Boolean.parseBoolean(regexGoodMatch.get("ip")),
+                    Float.parseFloat(regexGoodMatch.get("qty")));
         } else if (matches.get("flag").equals("ug")){
             String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) up/(?<up>.*) ui/(?<ui>.*) wu/(?<isWholeUnit>.*) ba/(?<ba>.*)" +
                     " v/(?<v>.*) ip/(?<ip>.*)";
             HashMap<String,String> regexUnitGoodMatch = new
                     Regex(userInput, regexUnitGood).getGroupValues();
-            warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"),regexUnitGoodMatch.get("name"), regexUnitGoodMatch.get("desc"),
-                    regexUnitGoodMatch.get("up"), regexUnitGoodMatch.get("ui"), regexUnitGoodMatch.get("isWholeUnit"),regexUnitGoodMatch.get("ba"),
-                    regexUnitGoodMatch.get("v"), regexUnitGoodMatch.get("ip"));
+            warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"),regexUnitGoodMatch.get("name"),
+                    regexUnitGoodMatch.get("desc"),
+                    Float.parseFloat(regexUnitGoodMatch.get("up")), regexUnitGoodMatch.get("ui"),
+                    Boolean.parseBoolean(regexUnitGoodMatch.get("isWholeUnit")),
+                    Float.parseFloat(regexUnitGoodMatch.get("ba")),
+                    Float.parseFloat(regexUnitGoodMatch.get("v")),
+                    Boolean.parseBoolean(regexUnitGoodMatch.get("ip")));
         } else if (matches.get("flag").equals("bg")){
             // batch goods
             String regexBatchGoods = "fp/(?<filepath>.*)";

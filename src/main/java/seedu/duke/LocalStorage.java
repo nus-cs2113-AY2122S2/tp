@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 public class LocalStorage {
     private static final String OUT_DIR = "output";    // Honestly create a config file or smth
     private static final String SAVE_PATH = String.format("%s/%s", OUT_DIR, "STORAGE.json");
+    public static final String WAREHOUSE_PATH = String.format("%s/%s", OUT_DIR, "WAREHOUSE.json");
 
     /**
      * Opens and reads file at SAVE_PATH
@@ -76,6 +77,30 @@ public class LocalStorage {
             System.err.println("Failed to write to save file!" + e.getMessage());
         }
 
+    }
+    public static void writeSaveFile(String storeStr, String filePath){
+        Path dir = Paths.get(OUT_DIR);
+//        File f = new File(OUT_DIR);
+        if (!Files.exists(dir)) {   //createTempDirectory
+            try {
+                Files.createDirectory(Path.of(OUT_DIR));
+            } catch (IOException e) {
+                System.err.println("Failed to create directory!" + e.getMessage());
+            }
+        }
+//        String filePath = String.format("%s/%s", OUT_DIR, "SAVE.json");
+        try {
+            FileWriter fw = new FileWriter(SAVE_PATH);
+            fw.write(storeStr);
+            fw.close();
+        } catch (IOException e) {
+            System.err.println("Failed to write to save file!" + e.getMessage());
+        }
+
+    }
+
+    public static String json2str(JSONObject jo){
+        return jo.toString();
     }
 
 }
