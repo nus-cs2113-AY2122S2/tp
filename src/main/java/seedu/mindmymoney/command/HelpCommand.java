@@ -5,6 +5,7 @@ import seedu.mindmymoney.MindMyMoneyException;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
+import static seedu.mindmymoney.constants.Flags.EMPTY_PARAMETER;
 
 /**
  * Represents the Help command. This class also serves as a dummy class to return when an invalid command is
@@ -126,7 +127,11 @@ public class HelpCommand extends Command {
      * @throws MindMyMoneyException when an invalid command is received.
      */
     public void executeCommand() throws MindMyMoneyException {
-        if (hasExpensesFlag()) {
+        if (helpInput.equals(EMPTY_PARAMETER)) {
+            printExpenditureHelpPage();
+            printCreditCardHelpPage();
+            printIncomeHelpPage();
+        } else if (hasExpensesFlag()) {
             printExpenditureHelpPage();
         } else if (hasCreditCardListFlag()) {
             printCreditCardHelpPage();

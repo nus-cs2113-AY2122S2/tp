@@ -18,4 +18,5 @@ public class Flags {
     public static final String FLAG_OF_CREDIT_CARD = "/cc";
     public static final String FLAG_OF_EXPENSES = "/e";
     public static final String FLAG_OF_INCOME = "/i";
+    public static final String EMPTY_PARAMETER = "";
 }
