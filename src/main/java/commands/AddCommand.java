@@ -18,6 +18,7 @@ public class AddCommand extends Command {
     /** Help message for add command. */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a record to the RecordManager.\n"
             + "Parameters: i/ITEM_NAME p/PRICE d/DATE t/CATEGORY (if product) r/RENEWAL (if subscription)\n"
+            + "Note: There are only FOUR categories in product: fashion, food, accessory and others.\n"
             + "Example: " + COMMAND_WORD
             + " product i/handphone cover p/$10 t/accessory d/14022022\n"
             +  "Example: " + COMMAND_WORD

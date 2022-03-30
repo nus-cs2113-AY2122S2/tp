@@ -1,22 +1,38 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+hide footbox
 autonumber
 autoactivate on
-loop
-Spendvolope -> TextUi: getUserInput()
-Spendvolope <-- TextUi: fullUserInput
-Spendvolope -> Parser: parseCommand(fullUserInput)
-Parser -> Command**:
-Parser <-- Command
-Spendvolope <-- Parser: command
-Spendvolope -> Spendvolope: executeCommand(command)
-Spendvolope -> Command: execute()
-Command -> CommandResult**:
+
+loop while not exit command
+|||
+ref over Spendvelope, TextUi: getUserInput
+
+Spendvelope -> Parser: parseCommand(fullUserInput)
+alt add command
+    |||
+    ref over Parser, Command: addCommand
+    note right: Command object is created and returned to \nParser in each of the command references
+end
+Spendvelope <-- Parser: command
+
+Spendvelope -> Spendvelope: executeCommand(command)
+Spendvelope -> Command: execute()
+Command -> CommandResult**
+Activate CommandResult
 Command <-- CommandResult:result
-Spendvolope <-- Command: result
-Spendvolope <-- Spendvolope: result
-Spendvolope -> TextUi: showResultToUser(result)
+Spendvelope <-- Command: result
+destroy Command
+Spendvelope --> Spendvelope: result
+
+Spendvelope -> TextUi: showResultToUser(result)
+TextUi -> CommandResult: getRelevantRecords()
+TextUi <-- CommandResult
+TextUi -> CommandResult: getFeedbackToUser()
+TextUi <-- CommandResult
+destroy CommandResult
+Spendvelope <-- TextUi
 end
 
 @enduml
