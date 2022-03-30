@@ -3,6 +3,7 @@ package seedu.duke.command.itemcommands;
 import seedu.duke.command.Command;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.exceptions.EmptyItemNameException;
+import seedu.duke.EmptyItemPaxException;
 import seedu.duke.Item;
 import seedu.duke.ItemList;
 import seedu.duke.Ui;
@@ -90,9 +91,9 @@ public class UpdateItemPaxCommand extends Command {
         String itemPaxStringVersion = token.nextToken();
         itemPaxStringVersion = itemPaxStringVersion.trim();
         if (itemPaxStringVersion.isEmpty()) {
-            itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemPaxCommand. "
+            itemLogger.log(Level.WARNING, "Detected an empty item pax for UpdateItemPaxCommand. "
                     + "Exception thrown.");
-            throw new EmptyItemNameException();
+            throw new EmptyItemPaxException();
         }
         try {
             itemPax = Integer.parseInt(itemPaxStringVersion);

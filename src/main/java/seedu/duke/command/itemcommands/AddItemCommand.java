@@ -28,12 +28,12 @@ public class AddItemCommand extends Command {
     private static Logger itemLogger = Logger.getLogger("itemLogger");
 
     /**
-     * Takes in the user input and checks if the formatting of the Add Item Command within the user input is
+     * Takes in the user input and checks if the formatting of the add item command within the user input is
      * valid.
      * Extracts out the item name and item pax from the user input and creates an AddItemCommand object.
      *
      * @param userInput The user's input.
-     * @throws HotelLiteManagerException if the formatting of the add item pax command is invalid, the item pax is
+     * @throws HotelLiteManagerException if the formatting of the add item command is invalid, the item pax is
      *                                   empty or invalid, the item name is empty, or the item name and pax are both
      *                                   empty.
      */
@@ -108,9 +108,13 @@ public class AddItemCommand extends Command {
      * named item within the AddItemPaxCommand object.
      * Returns an acknowledgement message to inform the user that the item has been added to the item list as well
      * as the number of items within the item list.
+     * Updates the item list saved within the file ListFolder/ItemList.txt
      *
-     * @param ui The object that deals with user interface for the program.
+     * @param listContainer The object containing the data structure necessary for adding an item into the item list.
+     *                      In this case, we require access to the ItemList object which is within listContainer.
+     * @param ui            The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
+     * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
      */
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         ItemList listOfItems = listContainer.getItemList();
