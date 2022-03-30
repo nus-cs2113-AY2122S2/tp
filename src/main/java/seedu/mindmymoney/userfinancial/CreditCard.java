@@ -1,5 +1,11 @@
 package seedu.mindmymoney.userfinancial;
 
+import seedu.mindmymoney.MindMyMoneyException;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Represents the credit card entry.
  */
@@ -52,5 +58,15 @@ public class CreditCard {
     public String toString() {
         return "Name: " + getNameOfCard() + " [Cashback: " + getCashback()
                 +  "%] [Card limit: $" + getMonthlyCardLimit() + "] [Card balance: $" + getBalance() + "]\n";
+    }
+
+    /**
+     * Returns the input for an add command that recreates this CreditCard.
+     *
+     * @return A serialized CreditCard
+     */
+    public String getAddCommand() throws MindMyMoneyException {
+        return String.format("add /cc /n %s /cb %f /cl %f "
+                + "/bal %f\n", nameOfCard, cashback, monthlyCardLimit, balance);
     }
 }

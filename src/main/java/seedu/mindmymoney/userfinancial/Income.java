@@ -1,5 +1,7 @@
 package seedu.mindmymoney.userfinancial;
 
+import seedu.mindmymoney.MindMyMoneyException;
+
 /**
  * Represents the income entry.
  */
@@ -30,5 +32,14 @@ public class Income {
         String incomeInfo = "Amount: " + amount + "\n"
                 + "   Category: " + category + "\n";
         return incomeInfo;
+    }
+
+    /**
+     * Returns the input for an add command that recreates this Income.
+     *
+     * @return A serialized CreditCard
+     */
+    public String getAddCommand() throws MindMyMoneyException {
+        return String.format("add /i /a %f /c %s\n", amount, category);
     }
 }

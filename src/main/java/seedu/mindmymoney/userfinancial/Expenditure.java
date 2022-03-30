@@ -2,6 +2,9 @@ package seedu.mindmymoney.userfinancial;
 
 import seedu.mindmymoney.MindMyMoneyException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -83,61 +86,23 @@ public class Expenditure {
         return Objects.hash(description, amount);
     }
 
-    private static final String CONTROL_SEQUENCE_BEGIN = "<%<";
-    private static final String CONTROL_SEQUENCE_END = ">%>";
-    private static final String CONTROL_DELIMITER = CONTROL_SEQUENCE_BEGIN + "of amount" + CONTROL_SEQUENCE_END;
 
     /**
-     * Replaces all % with %%s. This is so the control sequences above function correctly.
-     *
-     * @param s A string to escape.
-     * @return The escaped string.
-     */
-    public static String escapeDataString(String s) {
-        return s.replaceAll("%", "%%");
-    }
-
-    /**
-     * Replaces all %%s with %. This undoes escapeDataString.
-     *
-     * @param s The string to unescape.
-     * @return The unescaped string.
-     */
-    public static String unescapeDataString(String s) {
-        return s.replaceAll("%%", "%");
-    }
-
-    /**
-     * Returns a String representation of the expenditure meant for automated parsing.
+     * Returns the input for an add command that recreates this Expenditure.
      *
      * @return A serialized expenditure
      */
-    public String serialize() {
-        return escapeDataString(description)
-                + CONTROL_DELIMITER
-                + escapeDataString(Float.toString(amount));
-    }
-
-    /**
-     * Converts the output of Expenditure.serialize into an Expenditure. This method will
-     * not work properly if the description contains the CONTROL_DELIMITER used internally
-     * by the function, and such cases may be considered incorrect formatting.
-     *
-     * @param serialized The serialized expenditure.
-     * @return An Expenditure.
-     * @throws MindMyMoneyException if formatting is incorrect.
-     */
-    public static Expenditure deserialize(String serialized) throws MindMyMoneyException {
-        String[] parts = serialized.split(CONTROL_DELIMITER);
-        if (parts.length != 2) {
-            throw new MindMyMoneyException("Invalid format for saved list item");
-        }
+    public String getAddCommand() throws MindMyMoneyException {
+        SimpleDateFormat parser = new SimpleDateFormat("MMM yyyy");
+        Date date;
         try {
-            int amount = Integer.parseInt(parts[1]);
-            String escapedDescription = unescapeDataString(parts[0].strip());
-            return new Expenditure(null, null, escapedDescription, amount, null);
-        } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("Invalid format for expenditure amount");
+            date = parser.parse(time);
+        } catch (ParseException pe) {
+            throw new MindMyMoneyException("Error occurred when serializing date " + time);
         }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        String formattedDate = formatter.format(date);
+        return String.format("add /pm %s /c %s /d %s /a %f /t %s\n",
+                paymentMethod, category, description, amount, formattedDate);
     }
 }

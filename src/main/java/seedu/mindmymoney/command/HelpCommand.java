@@ -140,7 +140,7 @@ public class HelpCommand extends Command {
         } else {
             throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
                     + "Type 'list /e' to view your current list of expenses\n"
-                    + "Type 'list /cc' to view your current list of stored credit cards");
+                    + "Type 'list /cc' to view your current list of stored credit cards\n");
         }
     }
 }

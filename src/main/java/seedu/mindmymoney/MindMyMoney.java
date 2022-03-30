@@ -25,11 +25,7 @@ public class MindMyMoney {
 
     public void run() {
         ui.printIntro();
-        user.setExpenditureListArray(storage.load());
-        // for now I just initialise a new CreditCardList and IncomeList, but ideally it should be loaded from storage,
-        // similar to how expenditurelist is loaded.
-        user.setCreditCardListArray(new CreditCardList());
-        user.setIncomeListArray(new IncomeList());
+        user = storage.load();
 
         boolean isExit = false;
         while (!isExit) {
@@ -38,10 +34,7 @@ public class MindMyMoney {
                 Command commandType = Parser.parseCommand(input, user);
                 commandType.executeCommand();
 
-                storage.save(user.getExpenditureListArray());
-                // dummy commands to save credit card and income list also
-                // storage.save(user.getCreditCardListArray());
-                // storage,save(user.getIncomeListArray());
+                storage.save(user);
 
                 isExit = commandType.isExit();
             } catch (MindMyMoneyException e) {

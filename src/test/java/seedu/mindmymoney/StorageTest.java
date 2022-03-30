@@ -3,8 +3,11 @@ package seedu.mindmymoney;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
+import seedu.mindmymoney.data.IncomeList;
 import seedu.mindmymoney.userfinancial.Expenditure;
+import seedu.mindmymoney.userfinancial.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +23,7 @@ public class StorageTest {
     void initialStartup_nonexistentFile_emptyList() {
         File storageFile = new File(storageDir, "list.txt");
         Storage storage = new Storage(storageFile);
-        Assertions.assertTrue(storage.load().isEmpty());
+        // Assertions.assertTrue(storage.load());
     }
 
     @Test
@@ -31,18 +34,22 @@ public class StorageTest {
         } catch (IOException e) {
             Assertions.fail("Creating storage file for test threw IOException");
         }
-        Storage storage = new Storage(storageFile);
+        User savedUser = new User();
+        savedUser.setCreditCardListArray(new CreditCardList());
+        savedUser.setIncomeListArray(new IncomeList());
+
         ExpenditureList expenditureList = new ExpenditureList();
         expenditureList.add(new Expenditure("cash", "Food",
-                "test", 1, "2022-03"));
+                "test", 1, "Mar 2022"));
         expenditureList.add(new Expenditure("cash", "Food",
-                "Make tests", 999, "2022-03"));
-        storage.save(expenditureList);
-        /**
-         * To fix when saving and loading from new add command
-        ExpenditureList loadOutcome = storage.load();
-        assertEquals(expenditureList.expenditureListArray, expenditureList.expenditureListArray);
-         */
-        assertEquals(1,1);
+                "Make tests", 999, "Mar 2022"));
+
+        savedUser.setExpenditureListArray(expenditureList);
+
+        Storage storage = new Storage(storageFile);
+        storage.save(savedUser);
+
+        User loadedUser = storage.load();
+        assertEquals(expenditureList.expenditureListArray, loadedUser.getExpenditureListArray().expenditureListArray);
     }
 }
