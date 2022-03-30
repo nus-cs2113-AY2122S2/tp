@@ -1,10 +1,28 @@
 # Developer Guide
 
+## Table of Content
+- [Acknowledgements](#acknowledgements)
+- [Introduction](#introduction)
+- [Architecture](#architecture)
+- [Design & Implementation](#design--implementation)
+  - [Study Session Implementation](#study-session-implementation)
+  - [Timetable Implementation](#timetable-implementation)
+  - [Storage Implementation](#storage-implementation)
+- [Product Scope](#product-scope)
+
 ## Acknowledgements
 
 - Team member Jun Lim's individual project codebase - [Github](#https://github.com/jltha/ip)
 
-##Architecture
+## Introduction
+
+Our product, Sherpass, is a desktop application for students to manage their academic schedules by adding their tasks,
+Sherpass will then compile their tasks and present it to them in a timetable. Sherpass also provides a 
+platform for them to focus on their academic tasks through the use of timers in our study sessions. Students can use
+the time to block out time to focus on their tasks. Optimised for use via a Command Line Interface (CLI),
+users who can type fast will be able to plan out their tasks in a much quicker fashion compared to traditional GUI apps.
+
+## Architecture
 
 ![image](https://user-images.githubusercontent.com/69501969/160375887-d6da7278-5259-4458-83c7-f53d89fef640.png)
 
@@ -131,7 +149,7 @@ track of time
   provided by Java has no way of pausing the timer, only stopping it.
 
 
-### Timetable 
+### Timetable implementation 
 
 The **TimeTable** component prints the daily or weekly schedule that the user wishes to see. 
 
@@ -200,8 +218,8 @@ the program.
   - Pros: Reduces computation time
   - Cons: Increases memory usage
 
-
-### Loading saved files
+### Storage Implementation
+#### Loading saved files
 
 Class diagram of Storage:
 
@@ -269,20 +287,28 @@ to block out pockets of time for studying, so that they can better focus during 
 
 ## User Stories
 
-| Version | As a ...  | I want to ...             | So that I can ...                                           |
-|---------|-----------|---------------------------|-------------------------------------------------------------|
-| v1.0    | new user  | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user      | find a to-do item by name | locate a to-do without having to go through the entire list |
-
+| Version | As a ... | I want to ...                                     | So that I can ...                          |
+|---------|----------|---------------------------------------------------|--------------------------------------------|
+| v1.0    | user     | see the tasks I have to do today                  | remember what tasks I have to complete     |
+| v1.0    | user     | edit task content and deadline                    | change my tasks accordingly                |
+| v1.0    | user     | see the tasks I have planned for the week         | have a better picture of the week ahead    |
+| v1.0    | user     | select amongst a few default study session timers | block out time to better focus on my tasks |
+| v1.0    | user     | see the remaining time in the study session       |                                            |
+| v1.0    | user     | be able to pause, stop and resume the study timer | go for a toilet/snack break                |
+| v2.0    | user     | see my timetable of tasks and events              | have a better picture of my schedule       |
+| v2.0    | user     | be able to mark my tasks as done in study session |                                            |
+| v2.0    | user     | add recurring tasks                               | enter my recurring tutorials and lectures  |
+| v2.0    | user     | click a button to interact with the study timer   | interact with the timer more naturally     |
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+- The response to any commands should be returned within 3 seconds.
+- The user interface should be user-friendly such that the product is still usable without referring to a user guide.
 
 ## Glossary
 
-* *glossary item* - Definition
+- To be updated
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+- To be updated
