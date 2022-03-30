@@ -397,6 +397,8 @@ There are two ways that you can edit an activity:
 >- All fields must be supplied in the command, not just the ones you wish to edit.
 >- This action is irreversible, once the command has been entered, the activity would be immediately edited.
 
+<br>
+
 **Example**
 - An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1, part of 
   a session with a `SESSION_ID` of 1. It was named *Lunch* with Alice and Bob.<br>
