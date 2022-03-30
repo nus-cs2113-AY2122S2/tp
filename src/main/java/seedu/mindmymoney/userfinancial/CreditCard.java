@@ -1,5 +1,6 @@
 package seedu.mindmymoney.userfinancial;
 
+import static seedu.mindmymoney.constants.Calculations.FLOAT_TO_PERCENTAGE;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
 
 /**
@@ -60,7 +61,7 @@ public class CreditCard {
     }
 
     public float getTotalCashback() {
-        return formatFloat((float)(totalExpenditure * (cashback / 100)));
+        return formatFloat((float)(totalExpenditure * (cashback * FLOAT_TO_PERCENTAGE)));
     }
 
     @Override

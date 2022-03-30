@@ -3,7 +3,6 @@ package seedu.mindmymoney.data;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Container for Credit Cards.
