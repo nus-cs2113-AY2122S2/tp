@@ -134,7 +134,7 @@ The `Command` component consist of the Command class and all the subclasses of t
   each representing commands that work with `Session`, `Activity` and `Group` classes respectively
   (JKL here refers to either `Create`, `Delete`, `Edit`, `List`, `View` or `Summary`).
 * The subclasses also include _utility commands_ such as `HelpCommand`, `ExitCommand` and `InvalidCommand`
-  (hereafter collectively referred to as UtilityCommand).
+  (hereafter collectively referred to as `UtilityCommand`).
 
 The general workflow of the `Command` component is as follows:
 1. After a `XYZCommand` object is created by the [`Parser` Component](#parser-component),
