@@ -481,11 +481,32 @@ Sequence diagram shows how the saving operation will work:
 
 ### Logging
 
-{Describe the usage of logging for the product.}
+The logging of this product is facilitated by [`ProjectLogger.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/ProjectLogger.java).
+
+Each class contains a static `logger` which logs information and errors through all instances of the class in a single
+log file. The log files are named after the class, an example being `Family.log` for the `Family` class.
+
+Simple logging is used as it provides sufficient information for documentation and debugging purposes. The log files 
+are rewritten during every run of PlanITarium, so renaming of the old logs are necessary should it need to be saved.
 
 ### Testing
 
-{Describe the testing methods for the product.}
+PlanITarium is tested mainly in 2 ways:
+* JUnit testing
+* IO redirection testing
+
+#### JUnit testing
+
+JUnit testing can be performed by running the tests in the [`test`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/test/java/seedu/planitarium) folder.
+
+#### IO redirection testing
+
+IO redirection testing can be performed via the following steps:
+1. Launch a terminal in `tp/text-ui-test`
+2. Edit the input file `input.txt`, and the expected output `EXPECTED.txt` if necessary
+3. Run the file `runtest.bat` in the terminal
 
 ---
 
@@ -493,11 +514,12 @@ Sequence diagram shows how the saving operation will work:
 
 ### Target user profile
 
-{Describe the target user profile}
+The target user profile for PlanITarium is young adults who have a family to support.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+PlanITarium offers ease of financial tracking for the entire family. It features a single input process for performing 
+tasks, and users will be able to neatly categorise their family members as well as expenditures.
 
 ---
 
@@ -524,4 +546,4 @@ Sequence diagram shows how the saving operation will work:
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+See [IO redirection testing](#IO-redirection-testing).
