@@ -39,7 +39,7 @@ is responsible for,
 
 [`Parser`](#Parser-Component) is responsible for parsing and validating user input.
 
-[`Family`](#Persons-Component) is responsible for holding the user data of PlanITarium in memory.
+[`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
 
 [`Money`](#Money-Component) is responsible for holding the monetary information in memory.
 
@@ -47,7 +47,7 @@ is responsible for,
 
 **How the components interact with each other**
 
-The slightly simplified *Sequence Diagram* below shows how the components interact for the scenrio where the user issues
+The slightly simplified *Sequence Diagram* below shows how the components interact for the scenario where the user issues
 the command `add /n Alice /g 2`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
@@ -113,7 +113,6 @@ https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/pla
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/PersonList.java)
 and [`Person.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Person.java)
-)
 
 ![FamilyComponent](images/FamilyComponent.png)
 
@@ -152,7 +151,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Command Execution
 
-In PlanITarium, a command usually have following format:
+In PlanITarium, a command usually has the following format:
 
 ```md
 [command type][indicator][description]
@@ -173,7 +172,7 @@ There may be several indicators for every input, such as
 addin \i 200 \d salary \u 1
 ```
 
-is to add a income for the person whose uid is 1, and the description of this income is salary.
+is to add an income for the person whose uid is 1, and the description of this income is salary.
 
 When `PlanITarium` receives such input, it will pass the input to `CommandFactory`. The `CommandFactory` will call
 `Parser` to parse the input into several components according to the indicator. The `Parser` will then return the type
@@ -420,7 +419,7 @@ command object has been created by [`CommandFactory`](#Command-Execution):
     * Pros: Easy to implement and less memory usage.
     * Cons: May have performance issues as it needs to iterate through every person's expenditure.
 
-* **Altertive 2:** Maintain an array list for each category and store a copy of expenses.
+* **Alternative 2:** Maintain an array list for each category and store a copy of expenses.
     * Pros: Fast to print expenses in a category, no unnecessary look-ups.
     * Cons: Poor memory management, needs to store twice as many expenditures.
 
