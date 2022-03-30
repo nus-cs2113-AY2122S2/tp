@@ -1,7 +1,7 @@
 package cpp.logic.commands;
 
 import cpp.model.ProjectList;
-import cpp.response.Response;
+import cpp.ui.Response;
 
 public class MarkCommand extends Command {
     private final int projectIndex;
