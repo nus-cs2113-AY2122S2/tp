@@ -28,6 +28,7 @@ public class ParserTest extends Parser {
             fail();
         }
     }
+    
     @Override
     public Command parseCommand(String userInput) {
         return null;
