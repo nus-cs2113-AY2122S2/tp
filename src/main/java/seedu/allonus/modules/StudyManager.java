@@ -55,7 +55,7 @@ public class StudyManager {
      * Edit module messages.
      */
     private static final String EDIT_MODULE_OPENING_MESSAGE = "Here is the module that you have chosen to edit:";
-    private static final String EDIT_MODULE_CHOOSE_MESSAGE = "Choose the part that you would like to edit: ";
+    private static final String EDIT_MODULE_CHOOSE_MESSAGE = "Choose the part that you would like to edit:";
     private static final String EDIT_MODULE_SUCCESS_MESSAGE = "Your Module was successfully edited! "
             + "Here are the changes";
     private static final String EDIT_MODULE_EXIT_MESSAGE = "Exiting the edit mode";
@@ -298,26 +298,51 @@ public class StudyManager {
     }
 
     private void editModuleTime(Module moduleToEdit, String editUserInput) {
-        String moduleTime = editUserInput.replace(MODULE_TIME_DELIMITER,EMPTY_STRING);
-        moduleToEdit.setTimeSlot(moduleTime);
-        printMessage(moduleToEdit.toString());
+        try {
+            String moduleTime = editUserInput.replace(MODULE_TIME_DELIMITER, EMPTY_STRING);
+            if (moduleTime.equals("")) {
+                throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
+            }
+            moduleToEdit.setTimeSlot(moduleTime);
+            printMessage(moduleToEdit.toString());
+        } catch (ModuleTimeException e) {
+            printMessage(e.getMessage());
+        }
     }
 
     private void editModuleDay(Module moduleToEdit, String editUserInput) {
-        String moduleDay = editUserInput.replace(MODULE_DAY_DELIMITER,EMPTY_STRING);
-        moduleToEdit.setDay(moduleDay);
-        printMessage(moduleToEdit.toString());
+        try {
+            String moduleDay = editUserInput.replace(MODULE_DAY_DELIMITER,EMPTY_STRING);
+            if (moduleDay.equals("")) {
+                throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
+            }
+            moduleToEdit.setDay(moduleDay);
+            printMessage(moduleToEdit.toString());
+        } catch (ModuleDayException e) {
+            printMessage(e.getMessage());
+        }
+
     }
 
     private void editModuleCode(Module moduleToEdit, String editUserInput) {
-        String moduleCode = editUserInput.replace(MODULE_CODE_DELIMITER,EMPTY_STRING);
-        moduleToEdit.setModuleCode(moduleCode);
-        printMessage(moduleToEdit.toString());
+        try {
+            String moduleCode = editUserInput.replace(MODULE_CODE_DELIMITER, EMPTY_STRING);
+            if (moduleCode.equals("")) {
+                throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
+            }
+            moduleToEdit.setModuleCode(moduleCode);
+            printMessage(moduleToEdit.toString());
+        } catch (ModuleCodeException e) {
+            printMessage(e.getMessage());
+        }
     }
 
     private void editModuleCategory(Module moduleToEdit, String editUserInput) {
-        String moduleCategory = editUserInput.replace(MODULE_CATEGORY_DELIMITER,EMPTY_STRING);
         try {
+            String moduleCategory = editUserInput.replace(MODULE_CATEGORY_DELIMITER,EMPTY_STRING);
+            if (moduleCategory.equals("")) {
+                throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
+            }
             moduleCategory = validateModuleCategory(moduleCategory);
             moduleToEdit.setCategory(moduleCategory);
             printMessage(moduleToEdit.toString());
@@ -383,7 +408,6 @@ public class StudyManager {
         } catch (ModuleCategoryException e) {
             printMessage(e.getMessage());
             logger.log(Level.WARNING, LOGGER_MISSING_CAT_IN_ADD);
-            printMessage(e.getMessage());
             return null;
         } catch (ModuleTimeException e) {
             logger.log(Level.WARNING, LOGGER_MISSING_TIME_IN_ADD);
