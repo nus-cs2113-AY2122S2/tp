@@ -167,7 +167,7 @@ Deletes an existing session so that you can remove sessions that you don't need.
 
 <br>
 
-**Example 1** 
+**Example** 
 - Remove an existing session with a unique identifier of 1.<br>
 `session /delete /sid 1` <br>
 ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
@@ -241,7 +241,7 @@ However, deleted sessions will not be listed.
 
 <br>
 
-**Example 1**
+**Example**
 - To list all existing sessions <br>
   `session /list`
 ![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
