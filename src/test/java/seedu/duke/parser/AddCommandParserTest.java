@@ -1,10 +1,7 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.Command;
 import seedu.duke.common.Messages;
-import seedu.duke.data.Item;
 
 import static seedu.duke.utils.ParserTestUtils.assertParseFailure;
 import static seedu.duke.utils.ParserTestUtils.assertParseSuccess;
@@ -20,7 +17,6 @@ public class AddCommandParserTest {
         String testInput = String.format(testInputFormat,
                 CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME,
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION);
-
         assertParseFailure(parser, testInput, Messages.INVALID_SYNTAX);
     }
 
@@ -31,7 +27,6 @@ public class AddCommandParserTest {
                 CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME,
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
                 CliSyntax.PREFIX_QUANTITY.getPrefix(), ParserStubs.PAPERCUP_QUANTITY);
-
         assertParseSuccess(parser, testInput, ParserStubs.PAPERCUP_ADDCOMMAND);
     }
 
@@ -42,7 +37,6 @@ public class AddCommandParserTest {
                 CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME,
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
                 CliSyntax.PREFIX_QUANTITY.getPrefix(), "asd");
-
         assertParseFailure(parser, testInput, Messages.INVALID_QUANTITY);
     }
 }
