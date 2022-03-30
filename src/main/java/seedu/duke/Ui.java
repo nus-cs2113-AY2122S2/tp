@@ -12,10 +12,10 @@ public class Ui {
     private Scanner in = new Scanner(System.in);
     private static final int ARRAY_INDEX_OFFSET = 1;
     private static final String LINE = "======================================================================";
-    private static final String ITEM_LIST_HEADER = "=========== Item List ===========";
-    private static final String END_OF_LIST_LINE = "======== End of the list ========";
-    private static final String MESSAGE_HEADER = "========== Noted ! ==========";
-    private static final String END_OF_MESSAGE_LINE = "=============================";
+    private static final String ITEM_LIST_HEADER = "=============== Item List =================";
+    private static final String END_OF_LIST_LINE = "============ End of the list ==============";
+    private static final String MESSAGE_HEADER = "================ Noted! ===================";
+    private static final String END_OF_MESSAGE_LINE = "===========================================";
     private static final String TABLE_HEADER = "Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHousekeeper Name";
 
     /**
@@ -29,21 +29,21 @@ public class Ui {
     }
 
     public void printEventAdded(Event event) {
-        System.out.println(LINE);
+        System.out.println(MESSAGE_HEADER);
         System.out.println("I have added the following event in your list:");
         System.out.println("\t" + event.toString());
-        System.out.println(LINE);
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printAllEvents(ArrayList<Event> events) {
-        System.out.println(LINE);
+        System.out.println(MESSAGE_HEADER);
         System.out.println("Here are all the events in your list:");
         int j = 0;
         for (Event event : events) {
             j = j + 1;
             System.out.println("\t" + j + ". " + event.toString());
         }
-        System.out.println(LINE);
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printGreeting() {
@@ -79,17 +79,17 @@ public class Ui {
 
 
     public void printEventDeleted(Event event) {
-        System.out.println(LINE);
+        System.out.println(MESSAGE_HEADER);
         System.out.println("I have deleted the following event from your list:");
         System.out.println("\t" + event.toString());
-        System.out.println(LINE);
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printAssignedHousekeeper(String roomID, String name) {
-        System.out.println(LINE);
+        System.out.println(MESSAGE_HEADER);
         System.out.println("I have assigned " + name
                 + " to room number " + roomID + ".");
-        System.out.println(LINE);
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
 
@@ -102,9 +102,9 @@ public class Ui {
     }
 
     public void printHousekeeperNoted(Housekeeper housekeeper) {
-        printNotedLine();
+        System.out.println(MESSAGE_HEADER);
         System.out.println(housekeeper);
-        printBottomLine();
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     /**
@@ -256,11 +256,11 @@ public class Ui {
 
     public void printAddSatisfactionAcknowledgementMessage(SatisfactionList satisfactionList,
                                                            Satisfaction recentSatisfaction) {
-        System.out.println("========== Noted ! ==========");
+        System.out.println(MESSAGE_HEADER);
         System.out.println("The Satisfaction instance " + recentSatisfaction.getCustomerName().toUpperCase() + ": "
                 + recentSatisfaction.getSatisfactionValue() + " has been added to the list of Satisfactions.");
         System.out.printf("There are currently %d recorded customer satisfactions.\n", satisfactionList.getSize());
-        System.out.println("=============================");
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
 
@@ -277,23 +277,19 @@ public class Ui {
     public void printAddHousekeeperPerformanceAcknowledgementMessage(HousekeeperPerformanceList
                                                                              housekeeperPerformanceList,
                                                                      HousekeeperPerformance housekeeperPerformance) {
-        System.out.println("========== Noted ! ==========");
+        System.out.println(MESSAGE_HEADER);
         System.out.println("The HousekeeperPerformance instance " + housekeeperPerformance.getName().toUpperCase()
                 + ": " + housekeeperPerformance.getRating() + " has been added to the list "
                 + "of housekeeper performances.");
         System.out.printf("There are currently %d recorded housekeeper performances.\n",
                 housekeeperPerformanceList.getSize());
-        System.out.println("=============================");
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printTableHeader() {
         System.out.println(LINE);
         System.out.println(TABLE_HEADER);
         System.out.println(LINE);
-    }
-
-    public void printFileNotFoundMessage(String fileName) {
-        System.out.printf("File %s was not found and is unable to be created.\n", fileName);
     }
 
     public void printNotedLine() {

@@ -666,8 +666,10 @@ add item Toilet Roll / 15
 
 Expected output:
 ```
+================ Noted! ===================
 The item and its pax has been added to the item list.
-Number of items within the Item List: 1
+There are currently 1 items within the item list.
+===========================================
 ```
 
 ### Update The Pax Of An Item In The Item List: `update item pax`
@@ -686,7 +688,9 @@ update item pax Toilet Roll / 300
 
 Expected output:
 ```
+================ Noted! ===================
 The pax of TOILET ROLL has been updated to 300.
+===========================================
 ```
 
 ### Update The Name Of An Item In The Item List: `update item name`
@@ -707,7 +711,9 @@ update item name Toilet Roll / Premium Toilet Roll
 
 Expected output:
 ```
-The name of TOILET ROLL has been updated to PREMIUM TOILET ROLL.`
+================ Noted! ===================
+The name of TOILET ROLL has been updated to PREMIUM TOILET ROLL.
+===========================================
 ```
 
 ### Delete An Item In The Item List: `delete item`
@@ -725,8 +731,10 @@ delete item Premium Toilet Roll
 
 Expected output:
 ```
+================ Noted! ===================
 PREMIUM TOILET ROLL has been removed from the Item List.
-Number of items within the Item List: 0
+There are currently 0 items within the Item List.
+===========================================
 ```
 
 ### View All Items: `view all items`
@@ -745,17 +753,24 @@ view all items
 
 Expected output:
 ```
+================ Noted! ===================
 The item and its pax has been added to the item list.
 There are currently 1 items within the item list.
+===========================================
+================ Noted! ===================
 The item and its pax has been added to the item list.
 There are currently 2 items within the item list.
+===========================================
+================ Noted! ===================
+=============== Item List =================
 The item and its pax has been added to the item list.
 There are currently 3 items within the item list.
-=========== Item List ===========
+===========================================
+=============== Item List =================
 1. Item Name: TOILET ROLL Item Pax: 15
 2. Item Name: TISSUE PAPER Item Pax: 20
 3. Item Name: TABLES Item Pax: 30
-======== End of the list ========
+============ End of the list ==============
 ```
 
 ### View All Items Within The Item List With A Pax Of Zero: `view items with zero pax`
@@ -774,12 +789,16 @@ view items with zero pax
 
 Expected output:
 ```
+================ Noted! ===================
 The pax of TOILET ROLL has been updated to 0.
+===========================================
+================ Noted! ===================
 The pax of TISSUE PAPER has been updated to 0.
-=========== Item List ===========
+===========================================
+=============== Item List =================
 1. Item Name: TOILET ROLL Item Pax: 0
 2. Item Name: TISSUE PAPER Item Pax: 0
-======== End of the list ========
+============ End of the list ==============
 ```
 
 ### Search For Items Within The Item List: `search item`
@@ -796,9 +815,9 @@ search item Toilet
 
 Expected output:
 ```
-=========== Item List ===========
+=============== Item List =================
 1. Item Name: TOILET ROLL Item Pax: 0
-======== End of the list ========
+============ End of the list ==============
 ```
 
 ## FAQ
@@ -832,3 +851,13 @@ Expected output:
 | check all room information | ```check all room``` <br/>eg. ```check all room```|
 | check room information by level | ```check level LEVEL_NUMBER ```<br/>eg.```check level 4``` |
 | check room information by category | ```check category CATEGORY ```<br/>eg.```check category single``` |
+
+| Item Command                       | Format, Example |
+|------------------------------------| --- |
+| add Item                           | ```add item ITEM NAME / PAX```<br/>eg. ```add item Toilet Roll / 15```|
+| update item pax                   | ```update item pax ITEM NAME / PAX```<br/>eg. ```update item pax Toilet Roll / 300```|
+| update item name             | ```update item name OLD ITEM NAME / NEW ITEM NAME```<br/>eg. ```update item name Toilet Roll / Premium Toilet Roll```|
+| delete item         | ```delete item NAME``` <br/>eg. ```delete item Premium Toilet Roll```|
+| view all items    | ```view all items ``` |
+| view items with zero pax | ```view items with zero pax ```|
+| search item | ```search item KEYWORD ```<br/>eg.```search item Toilet``` |
