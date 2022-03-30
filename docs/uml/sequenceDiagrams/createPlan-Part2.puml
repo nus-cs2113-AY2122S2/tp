@@ -4,29 +4,30 @@
 
 autonumber 7.1
 
+title Sequence Diagram of `PlanList#createAndAddPlan()`
+
 participant "planList\n:PlanList" AS pl
 participant "workoutList\n:WorkoutList" AS wl
 
 activate pl
 group sd Write new Plan data into file on user's system.
-pl -> ":String" : userArgument.split("/workouts")[0].trim()
-activate ":String"
-return userPlanNameInput:String
-deactivate ":String"
 
-pl -> ":String" : userArgument.split("/workouts")[1].trim()
-activate ":String"
-return userWorkoutIndexNumbersString:String
-deactivate ":String"
+ref over pl
+Parse the user input to obtain the plan name
+and the workout index numbers separated by comma.
+(Method calls not shown)
+end
 
 pl -> pl : checkPlanNameValidity(userPlanNameInput, className)
 activate pl
 return
 
-pl -> ":Integer" : userWorkoutIndexNumbersString.split(",").length
-activate ":Integer"
-return numberOfWorkoutsInAPlan:Integer
-deactivate ":Integer"
+
+ref over pl
+Obtain number of workouts to be added into
+the new plan (split string by comma).
+(Method calls not shown)
+end
 
 pl -> pl : checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className)
 activate pl
@@ -37,11 +38,13 @@ pl -> wtoadd : new
 activate wtoadd
 return
 
-loop until all workouts to be added in a plan is added (numberOfWorkoutsInAPlan)
-pl -> ":Integer" : parseInt(userWorkoutIndexNumbersString.split(",")[i].trim())
-activate ":Integer"
-return workoutIndexNumberInteger:Integer
-deactivate ":Integer"
+loop until all workouts to be added in a plan is added
+
+ref over pl
+Get each individual workout index numbers from user
+input string and convert them into an Integer.
+(Method calls not shown)
+end
 
 pl -> pl : checkWorkoutNumberWithinRange(workoutIndexNumberInteger, className)
 activate pl
