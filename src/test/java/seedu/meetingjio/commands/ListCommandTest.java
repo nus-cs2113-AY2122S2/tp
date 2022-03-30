@@ -18,9 +18,14 @@ public class ListCommandTest {
     private String answerJohn;
     private String answerPeter;
     private String answerAll;
+    private String answerAllLesson;
+    private String answerAllMeeting;
     private Command addCommand;
     private Command addCommandSameUser;
     private Command addCommandDifferentUser;
+    private Command addMeetingCommand;
+    private AddUserCommand addUserCommandJohn;
+    private AddUserCommand addUserCommandPeter;
 
     /**
      * Set up a Master Timetable object and multiple Add Commands.
@@ -41,6 +46,17 @@ public class ListCommandTest {
                 + "Peter\n"
                 + "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
 
+        answerAllLesson = "John\n"
+                + "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n"
+                + "2.[L] TITLE: CS2102\t\tDAY: Monday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n"
+                + "Peter\n"
+                + "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
+
+        answerAllMeeting = "John\n"
+                + "3.[M] TITLE: Lunch\t\tDAY: Tuesday\t\tSTART: 1200\t\tEND: 1400\t\tMODE: physical\n"
+                + "Peter\n"
+                + "2.[M] TITLE: Lunch\t\tDAY: Tuesday\t\tSTART: 1200\t\tEND: 1400\t\tMODE: physical";
+
         addCommand = new AddLessonCommand(
                 "John", "CS2113", "Monday",
                 1200, 1300, "online"
@@ -56,6 +72,14 @@ public class ListCommandTest {
                 1200, 1300, "online"
         );
 
+        addMeetingCommand = new AddMeetingCommand(
+                "Lunch", "Tuesday",
+                1200, 1400, "physical"
+        );
+
+        addUserCommandJohn = new AddUserCommand("John");
+        addUserCommandPeter = new AddUserCommand("Peter");
+
     }
 
     /**
@@ -64,7 +88,7 @@ public class ListCommandTest {
      */
     @Test
     public void listCommand_emptyMasterTimetable() {
-        ListCommand listCommand = new ListCommand("all");
+        ListCommand listCommand = new ListCommand("all", 0);
         assertEquals(ERROR_EMPTY_MASTER_TIMETABLE, listCommand.execute(masterTimetable));
     }
 
@@ -74,7 +98,7 @@ public class ListCommandTest {
      */
     @Test
     public void listCommand_noValue() {
-        ListCommand listCommand = new ListCommand("");
+        ListCommand listCommand = new ListCommand("", 0);
         assertEquals(ERROR_UNSPECIFIED_LIST, listCommand.execute(masterTimetable));
     }
 
@@ -84,7 +108,7 @@ public class ListCommandTest {
      */
     @Test
     public void listCommand_noUser() {
-        ListCommand listCommand = new ListCommand("John");
+        ListCommand listCommand = new ListCommand("John", 0);
         assertEquals(ERROR_INVALID_USER, listCommand.execute(masterTimetable));
     }
 
@@ -92,44 +116,69 @@ public class ListCommandTest {
      * Test method to ensure that the program only lists the timetable of a specific user
      * instead of listing everyone's timetables.
      */
-    //    @Test
-    //    public void listCommand_specificUser() {
-    //        addCommand.execute(masterTimetable);
-    //        addCommandSameUser.execute(masterTimetable);
-    //        addCommandDifferentUser.execute(masterTimetable);
-    //
-    //        ListCommand listCommand1 = new ListCommand("John");
-    //        assertEquals(answerJohn, listCommand1.execute(masterTimetable));
-    //
-    //        ListCommand listCommand2 = new ListCommand("Peter");
-    //        assertEquals(answerPeter, listCommand2.execute(masterTimetable));
-    //    }
+    @Test
+    public void listCommand_specificUser() {
+        addUserCommandJohn.execute(masterTimetable);
+        addUserCommandPeter.execute(masterTimetable);
+        addCommand.execute(masterTimetable);
+        addCommandSameUser.execute(masterTimetable);
+        addCommandDifferentUser.execute(masterTimetable);
+
+        ListCommand listCommand1 = new ListCommand("John", 0);
+        assertEquals(answerJohn, listCommand1.execute(masterTimetable));
+
+        ListCommand listCommand2 = new ListCommand("Peter",0);
+        assertEquals(answerPeter, listCommand2.execute(masterTimetable));
+    }
 
     /**
      * Test method to ensure that the program lists out everyone's timetable when the user
      * inputs 'list all'.
      */
-    //    @Test
-    //    public void listCommand_allUsers() {
-    //        addCommand.execute(masterTimetable);
-    //        addCommandSameUser.execute(masterTimetable);
-    //        addCommandDifferentUser.execute(masterTimetable);
-    //
-    //        ListCommand listCommand = new ListCommand("all");
-    //        assertEquals(answerAll, listCommand.execute(masterTimetable));
-    //    }
+    @Test
+    public void listCommand_allUsers() {
+        addUserCommandJohn.execute(masterTimetable);
+        addUserCommandPeter.execute(masterTimetable);
+        addCommand.execute(masterTimetable);
+        addCommandSameUser.execute(masterTimetable);
+        addCommandDifferentUser.execute(masterTimetable);
+
+        ListCommand listCommand = new ListCommand("all", 0);
+        assertEquals(answerAll, listCommand.execute(masterTimetable));
+    }
 
     /**
      * Test method to ensure that the program lists the user's timetable such that events in the timetable are sorted
      * based on each event's day and time.
      */
-    //    @Test
-    //    public void listCommand_checkSort() {
-    //        addCommandSameUser.execute(masterTimetable);
-    //        addCommand.execute(masterTimetable);
-    //
-    //        ListCommand listCommand = new ListCommand("John");
-    //        assertEquals(answerJohn, listCommand.execute(masterTimetable));
-    //    }
+    @Test
+    public void listCommand_checkSort() {
+        addUserCommandJohn.execute(masterTimetable);
+        addCommandSameUser.execute(masterTimetable);
+        addCommand.execute(masterTimetable);
+
+        ListCommand listCommand = new ListCommand("John", 0);
+        assertEquals(answerJohn, listCommand.execute(masterTimetable));
+    }
+
+    /**
+     * Test method to ensure that the program only lists lessons or meetings or both, depending on the user's input.
+     */
+    @Test
+    public void listSpecificEvent() {
+        addUserCommandJohn.execute(masterTimetable);
+        addUserCommandPeter.execute(masterTimetable);
+        addCommand.execute(masterTimetable);
+        addCommandSameUser.execute(masterTimetable);
+        addCommandDifferentUser.execute(masterTimetable);
+        addMeetingCommand.execute(masterTimetable);
+
+        ListCommand listCommand1 = new ListCommand("all", 1);
+        assertEquals(answerAllLesson, listCommand1.execute(masterTimetable));
+
+        ListCommand listCommand2 = new ListCommand("all",2);
+        assertEquals(answerAllMeeting, listCommand2.execute(masterTimetable));
+    }
 
 }
+

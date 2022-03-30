@@ -1,5 +1,7 @@
 package seedu.meetingjio.timetables;
 
+import seedu.meetingjio.events.Lesson;
+import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
@@ -14,6 +16,10 @@ public class Timetable {
     private ArrayList<Event> list;
 
     public static final int BUSY = 1;
+
+    public static final int LESSONS_ONLY = 1;
+    public static final int MEETINGS_ONLY = 2;
+
 
     public Timetable(String name) {
         this.name = name;
@@ -135,6 +141,28 @@ public class Timetable {
             }
         }
         list = tempList;
+    }
+
+    /**
+     * List contents of the timetable, taking into consideration the constraint supplied.
+     * If constraint supplied is LESSONS_ONLY, events that are meetings will not be added to the returned string.
+     * If constraint supplied is MEETINGS_ONLY, events that are lessons will not be added to the returned string.
+     *
+     * @param constraint Integer that is either 0, 1 or 2, indicating the user's constraint
+     * @return str String containing the labelled events of the timetable
+     */
+    public String listTimetable(int constraint) {
+        String str = "";
+        for (int i = 0; i < list.size(); i++) {
+            if ((constraint == LESSONS_ONLY && list.get(i) instanceof Meeting)
+                    || (constraint == MEETINGS_ONLY && list.get(i) instanceof Lesson)) {
+                continue;
+            }
+            int listIndex = i + 1;
+            str += listIndex + "." + list.get(i);
+            str += '\n';
+        }
+        return str;
     }
 
     public ArrayList<Event> getList() {

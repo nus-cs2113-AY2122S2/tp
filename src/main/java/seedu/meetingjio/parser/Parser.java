@@ -36,6 +36,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEE
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_EDIT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_EDIT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NAME_CANNOT_BE_ALL;
 
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
@@ -73,8 +74,12 @@ public class Parser {
             return prepareAddMeeting();
         case EditCommand.COMMAND_WORD:
             return prepareEdit();
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand(arguments);
+        case ListCommand.ALL_COMMAND_WORD:
+            return new ListCommand(arguments, 0);
+        case ListCommand.LESSON_COMMAND_WORD:
+            return new ListCommand(arguments, 1);
+        case ListCommand.MEETING_COMMAND_WORD:
+            return new ListCommand(arguments, 2);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
@@ -92,6 +97,8 @@ public class Parser {
     private Command prepareAddUser() {
         if (arguments.isEmpty()) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_USER);
+        } else if (arguments.equalsIgnoreCase("all")) {
+            return new CommandResult(ERROR_NAME_CANNOT_BE_ALL);
         }
         return new AddUserCommand(arguments);
     }
