@@ -443,19 +443,19 @@ public class PlanList {
      *         plan that includes the deleted workout.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
      */
-    private ArrayList<Integer> findPlanContainsTargetWorkout(String workoutToCheck) throws
+    public ArrayList<Integer> findPlanContainsTargetWorkout(String workoutToCheck) throws
              ArrayIndexOutOfBoundsException {
         Plan planObject;
         boolean isWorkoutInPlan = false;
-        ArrayList<Integer> planWithTargetWorkout = new ArrayList<Integer>();
+        ArrayList<Integer> planIndexWithTargetWorkout = new ArrayList<Integer>();
         for (int i = 1; i <= getPlansDisplayList().size(); i++) {
             planObject = getPlanFromIndexNum(i);
             isWorkoutInPlan = checkWorkoutInPlan(workoutToCheck, planObject);
             if (isWorkoutInPlan) {
-                planWithTargetWorkout.add(i);
+                planIndexWithTargetWorkout.add(i);
             }
         }
-        return planWithTargetWorkout;
+        return planIndexWithTargetWorkout;
     }
 
     public void updatePlanContainsUpdatedWorkout(String workoutToCheck, Workout updatedWorkout) throws
