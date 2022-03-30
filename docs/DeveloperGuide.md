@@ -24,35 +24,114 @@ This section describes some noteworthy details on how certain features are imple
 
 ## 3.1 Add Feature
 `add_lesson` allows users to create a new lesson and add it to their own timetables
+
 `add_meeting` allows users to create a new meeting and add it to all the existing timetables
 
 The following sequence diagram shows how the `add_lesson` operation generally works.
 ![AddLessonSequenceDiagram](diagrams/AddLessonSequenceDiagram.png)
 
-The following sequence diagram shows how the `add_lesson` operation works in detail.
-![AddLessonCommandSequenceDiagram](diagrams/AddLessonCommandSequenceDiagram.png)
+The following sequence diagram shows how the `add_meeting` operation works in detail.
+![AddMeetingCommandSequence](diagrams/AddMeetingCommandSequence.png)
 
-## 3.2 Data Saving Feature
+## 3.2 Listing Events Feature
+The `list` command is a command that the user can input in order to list out the events he has in his timetable.
 
-The save mechanism is facilitated by Storage. It creates a text file in the local machine and writes all the elements 
+`list [user]` displays the timetable for the particular user.
+
+`list all` displays the timetable for all users.
+
+In essence, the `list all` command repeatedly calls `list [user]` for all users.
+
+Before the timetable is listed out, it will also be sorted according to day and time for easy reading.
+
+The following sequence diagram shows how the command `` is executed.
+![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
+
+## 3.3 Finding Common Free Timeslots Feature
+The `free` command is a command that the user can input in order to find timeslots where all users are free.
+
+For greater customisation, `free [duration]` displays all common timeslots which has a duration longer than specified.
+
+The searching algorithm works by marking the busy slots of each timetable first.
+Timings that are not marked 'busy' are then identified as free time slots.
+
+The following sequence diagram shows how the command `free` is executed.
+![FreeCommandSequenceDiagram](diagrams/FreeCommandSequenceDiagram.png)
+
+## 3.4 Delete events `delete`
+Deletes an event from the user's specified timetable
+
+**Format:** ` delete n/NAME i/INDEX`
+
+* Deletes from the timetable of user
+* Deletes the lesson at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed lesson list.
+
+Example of usage:
+
+`delete n/John i/1`
+
+If the event is a meeting, it will delete this event from all users
+
+The following sequence diagram shows how the `delete` command works:
+![DeleteCommandSequenceDiagram](diagrams/DeleteCommandSequenceDiagram.png)
+
+Before the timetable is listed out, it will also be sorted according to day and time for easy reading.
+
+## 3.4 Data Saving Feature
+
+The save mechanism is facilitated by StorageFile. It creates a text file in the local machine and writes all the elements
 in the MasterTimetable and Timetable to the text file in human-readable format.
 
 Given below is the steps on how the save operation works.
 
-Step 1: When the user exits the application. The Storage.SaveData will be initialized. 
+Step 1: When the user exits the application. The StorageFile.saveData will be initialized.
 
 Step 2: It will check for the existence of the data file. If the file is not found, it will create the file.
-        Else do nothing.
+Else do nothing.
 
-Step 3: After creating the file, a for loop will be called to iterate through all elements in the MasterTimetable and Timetable list,
-        and write them into the data file.
+Step 3: After creating the file, collateAll method will be called to consolidate all elements in the MasterTimetable and Timetable list,
+and write them into the data file.
 
 Step 4: A message will be shown to the user, informing him that the data has been saved successfully. For any exception
-        encountered along the way, an error message will be displayed.
+encountered along the way, an error message will be shown.
 
 The following sequence diagram shows how the save operation works:
-
 ![SaveSequenceDiagram](diagrams/SaveSequenceDiagram.png)
+
+## 3.5 Loading Data Feature
+
+The save mechanism is facilitated by StorageFile. It reads the data specified in the local machine and stores all 
+the records back into the MasterTimetable and Timetable list.
+
+Given below is the steps on how the load operation works.
+
+Step 1: When the user starts the application. The StorageFile.LoadData will be initialized.
+
+Step 2: It will check for the existence of the data file. If the file is not found, do nothing.
+Else it will open the file and extract the record line by line.
+
+Step 3: If a record is a lesson type, then it will call ParserLocalData.prepareLoadLesson method.
+Else if the record is a meeting type, then it will add the record into the meetingList.
+
+Step 4: If there is no record left, the program will check if the previous record contain a meeting.
+If yes, it will call for ParserLocalData.prepareLoadMeeting method to add all the meetings into the list.
+
+The following sequence diagram shows how the load operation works:
+![LoadSequenceDiagram](diagrams/LoadSequenceDiagram.png)
+
+## 3.6 Clear events `clear`
+The `clear` command is a command that the user can clear a certain user's timetable or everyone's timetable.
+
+`clear [user]` clears the timetable for the particular user.
+
+`clear all` clearss the timetable for all users.
+
+
+No record of the user will persist when the clear is executed on a user.
+
+The following sequence diagram shows how the `clear` command works:
+![ClearCommandSequenceDiagram](diagrams/ClearCommandSequenceDiagram.png)
 
 ## Product scope
 ### Target user profile
@@ -92,13 +171,8 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
-##List Command
-The list command is a command that the user can input in order the list out the lessons he has in his timetable.
-![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
-This is the sequence diagram when the command `list` is executed.
-
 ##Clear Command
 The clear command is one of the commands the user can execute to clear the whole list. 
 
-![ClearCommandSequenceDiagram](diagrams/ClearCommandSequenceDiagram.png)
+
 Here is the sequence when the command `clear` is executed.

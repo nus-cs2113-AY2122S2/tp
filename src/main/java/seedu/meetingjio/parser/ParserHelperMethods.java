@@ -14,7 +14,7 @@ public class ParserHelperMethods {
      * @param endTime   Time at which the event ends
      * @throws InvalidTimeException If the given hours and minutes are invalid, or if startTime is later than endTime
      */
-    void checkTime(int startTime, int endTime) throws InvalidTimeException {
+    public static void checkTime(int startTime, int endTime) throws InvalidTimeException {
         int startMinutes = startTime % 100;
         int endMinutes = endTime % 100;
         boolean invalidMinutes = startMinutes >= 60 || endMinutes >= 60;
@@ -32,8 +32,8 @@ public class ParserHelperMethods {
      * @param eventDescription Array of user's input
      * @throws MissingValueException If at least one parameter has no value
      */
-    protected void checkNonNullValues(String[] eventDescription,int lastElementIndex) throws MissingValueException {
-        for (int i = 0; i < lastElementIndex; i++) {
+    public static  void checkNonNullValues(String[] eventDescription) throws MissingValueException {
+        for (int i = 0; i < eventDescription.length; i++) {
             if (eventDescription[i].length() == 0) {
                 throw new MissingValueException();
             }
@@ -47,7 +47,7 @@ public class ParserHelperMethods {
      * @param mode String given by user
      * @throws InvalidModeException If mode is neither online nor physical
      */
-    protected void checkMode(String mode) throws InvalidModeException {
+    public static void checkMode(String mode) throws InvalidModeException {
         if (mode.equals("online") || mode.equals("physical")) {
             return;
         }
@@ -60,7 +60,7 @@ public class ParserHelperMethods {
      * @param day String given by user
      * @throws InvalidDayException If value of 'day' does not correspond to an actual day
      */
-    void checkDay(String day) throws InvalidDayException {
+    public static void checkDay(String day) throws InvalidDayException {
         switch (day) {
         case "monday":
         case "tuesday":
