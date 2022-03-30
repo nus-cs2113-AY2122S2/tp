@@ -1,3 +1,5 @@
+//@@author ibrahimisramos
+
 package seedu.meetingjio.events;
 
 public class Meeting extends Event {

@@ -1,3 +1,5 @@
+//@@author lihao-InfoSec
+
 package seedu.meetingjio.parser;
 
 import seedu.meetingjio.commands.AddLessonCommand;
