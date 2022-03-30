@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/** Performs case insensitive search of an Item's name, or description, or both. */
 public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
     public static final String COMMAND_NAME = "Search Item";
@@ -15,10 +16,18 @@ public class SearchCommand extends Command {
     public static final String COMMAND_FORMAT = COMMAND_WORD + "/n name [/d description] | [/n name] /d description]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
             + "[Command Format] " + COMMAND_FORMAT + "\n";
+    public static final String SEARCH_RESULT_PREAMBLE = "Here are the items matching your search terms: ";
+    public static final String SEARCH_RESULT_ENTRY_FORMAT = "%d. %s";
 
     private final Optional<String> name;
     private final Optional<String> description;
 
+    /**
+     * Constructs a SearchCommand.
+     * One of {@code name} or {@code description} must not be null. This is enforced in {@code SearchCommandParser}.
+     * @param name a name to search for
+     * @param description a description to search for
+     */
     public SearchCommand(Optional<String> name, Optional<String> description) {
         this.name = name;
         this.description = description;
@@ -28,21 +37,22 @@ public class SearchCommand extends Command {
     public void execute(ItemList itemList, Ui ui) {
         // O(n) search for items matching name and description
         List<Item> results = new ArrayList<>();
-        for (int i = 0; i < itemList.getSize(); i++) {
+            for (int i = 0; i < itemList.getSize(); i++) {
             Item searchItem = itemList.getItem(i);
-            // Note that the .get() on the right is safe due to short circuit eval
-            if (this.name.isPresent() && !searchItem.getName().contains(name.get())) {
+            if (this.name.isPresent() && !caseInsensitiveComparison(searchItem.getDescription(), this.name.get())) {
                 continue;
             }
-            if (this.description.isPresent() && !searchItem.getDescription().contains(description.get())) {
+            if (this.description.isPresent() && !caseInsensitiveComparison(searchItem.getDescription(),
+                    this.description.get())) {
                 continue;
             }
             results.add(searchItem);
         }
 
-        ui.showMessages("Here are the items matching your search terms: ");
+        ui.showMessages(SEARCH_RESULT_PREAMBLE);
         for (int i = 0; i < results.size(); i++) {
-            ui.showMessages(String.valueOf(i + 1) + "." + results.get(i));
+            String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i, results.get(i));
+            ui.showMessages(printMsg);
         }
     }
 
@@ -61,5 +71,9 @@ public class SearchCommand extends Command {
             // null, or object not SearchCommand
             return false;
         }
+    }
+
+    private boolean caseInsensitiveComparison(String str1, String str2) {
+        return str1.equalsIgnoreCase(str2);
     }
 }
