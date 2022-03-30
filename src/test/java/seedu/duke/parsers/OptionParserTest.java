@@ -30,7 +30,7 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parse_configName() {
+    public void parse_legalConfigName() {
         final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME;
         try {
             optionParser.parseCommand(testString);
@@ -43,7 +43,7 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parse_configNameAndValue() {
+    public void parse_legalConfigNameAndLegalValue() {
         final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=" + StringConstants.TRUE;
         try {
             optionParser.parseCommand(testString);
@@ -56,7 +56,7 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parseIllegal_badConfigName() {
+    public void parse_badConfigName() {
         final String testString = "ILLEGAL_TASK_SHOWN";
         try {
             optionParser.parseCommand(testString);
@@ -69,13 +69,25 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parseIllegal_configNameAndBadValue() {
+    public void parse_legalConfigNameAndBadValue() {
         final String testString = "COMPLETED_TASKS_SHOWN=true1";
         try {
             optionParser.parseCommand(testString);
             fail();
         } catch (UnknownConfigurationGroupWord e) {
             return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_legalConfigNameAndLegalValue_withExtraWhitespace() {
+        final String testString = "COMPLETED_TASKS_SHOWN=true ";
+        try {
+            optionParser.parseCommand(testString);
+            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals("true", optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
         }

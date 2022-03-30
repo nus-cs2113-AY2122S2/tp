@@ -76,6 +76,21 @@ As a result, providing the task's number is not specific enough for Mod Happy to
 - Task number `3`, module code `CS2113T`: refers to task number 3 stored under the module CS2113T.
 - Task number `2`, no module code specified: refers to task number 2 stored under the General Tasks list.
 
+### 3.3. Specifying durations
+
+Some Mod Happy commands require you to provide a duration. You can specify these in the following format:
+
+Format: `DURATION_AMOUNT DURATION_UNIT`
+
+- `DURATION_AMOUNT`: Any positive number less than one billion (1000000000), including decimals.
+- `DURATION_UNIT`: The time unit that `DURATION_AMOUNT` is specified in. Mod Happy supports the following units:
+  - Hours: `h`, `H`, `hour`, `Hour`, `hours`, `Hours`
+  - Minutes: `m`, `M`, `min`, `Min`, `minutes`, `Minutes`
+  
+> ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
+>
+> You can only choose to specify the duration in hours or minutes — not both.
+
 <br><br><br>
 
 ## 4. Features
@@ -104,11 +119,8 @@ Allows you to view and change various user preferences which can affect other as
 - **Editing a specific configuration option**
 
   Allows you to edit the value of a configuration option of your choice. The new value of the configuration option must be valid.<br><br>
-  Format: `option CONFIG_NAME = NEW_VALUE`<br><br>
-  Example: `option SHOW_COMPLETED_TASKS = false`
-  > 📔 <span style="color:#3333ff">**NOTE:**</span>
-  >
-  > The whitespace around the `=` is optional. In other words, `option SHOW_COMPLETED_TASKS=false` is also a valid command input.
+  Format: `option CONFIG_NAME=NEW_VALUE`<br><br>
+  Example: `option SHOW_COMPLETED_TASKS=false`
 
 <br>
 The following configuration options currently exist:
@@ -143,6 +155,9 @@ The following configuration options currently exist:
   Format: `add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`<br><br>
   Example (general task without any parameters): `add task "Review PR"`<br>
   Example (module task with parameters): `add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour" `
+  > 📔 <span style="color:#00bb00">**NOTE:**</span>
+  >
+  > ESTIMATED_WORKING_TIME is in task duration format, please check [task duration](#33-specifying-durations) to see the supporting format.
 
 <br>
 
@@ -264,20 +279,21 @@ Format: `save`
 >
 > Mod Happy does **not** auto-save your changes! Do remember to save your work at regular intervals, or before exiting the program.
 
-<br>
+<br><br><br>
 
-## 5: FAQ
+## 5. FAQ
 
 **Q**: How do I transfer my data to another computer?
 
 **A**: Your task and module data are stored in the `data` folder, located in the same folder as Mod Happy's JAR file. To transfer data to another computer, simply copy this folder to the new machine. Make sure to place the folder in the same location as the Mod Happy application itself!
 
-## 6: Command summary
+<<<<<<< HEAD
+## 6. Command summary
 
 |                  Command                   | Format                                                                                                                                                                                   |
 |:------------------------------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |      [help](#41-accessing-help-help)       | `help [COMMAND_WORD]`                                                                                                                                                                    |
-|   [option](#42-accessing-options-option)   | `option`<br>`option CONFIG_NAME`<br>`option CONFIG_NAME = NEW_VALUE`                                                                                                                     |
+|   [option](#42-accessing-options-option)   | `option`<br>`option CONFIG_NAME`<br>`option CONFIG_NAME=NEW_VALUE`                                                                                                                       |
 |     [add](#43-adding-a-taskmodule-add)     | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`                         |
 |    [del](#44-deleting-a-taskmodule-del)    | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`                                                                                                                         |
 |   [edit](#45-editing-a-taskmodule-edit)    | <code>edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME")</code> <br> `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` |
