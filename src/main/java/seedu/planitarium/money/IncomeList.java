@@ -199,8 +199,8 @@ public class IncomeList extends MoneyList {
     /**
      * Edits the income's amount.
      *
-     * @param index       The income's index in the list
-     * @param isPermanent The income's amount
+     * @param index  The income's index in the list
+     * @param amount The income's amount
      */
     private void editIncAmount(int index, Double amount) {
         if (amount != null) {
@@ -212,7 +212,7 @@ public class IncomeList extends MoneyList {
      * Edits the income's description.
      *
      * @param index       The income's index in the list
-     * @param isPermanent The income's description.
+     * @param description The income's description.
      */
     private void editIncDesc(int index, String description) {
         if (description != null) {
