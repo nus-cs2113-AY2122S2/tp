@@ -32,7 +32,7 @@ public class ParserUtilsTest {
 
     @Test
     void parseQuantity_invalidIntQuantity_returnInt() {
-        String testInput = "0";
+        String testInput = "-1";
         assertThrows(InvMgrException.class, () -> ParserUtils.parseQuantity(testInput));
     }
 
