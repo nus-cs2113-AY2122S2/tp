@@ -49,19 +49,7 @@ public class ActivityListCommand extends Command {
     public void run(Manager manager) {
         try {
             Session sessionToBePrinted = manager.getProfile().getSession(sessionId);
-            ArrayList<Activity> activityListToBePrinted = sessionToBePrinted.getActivityList();
-            int activityListSize = activityListToBePrinted.size();
-            if (activityListToBePrinted.isEmpty()) {
-                manager.getUi().printlnMessage(Message.ERROR_ACTIVITYLIST_ACTIVITY_EMPTY);
-                return;
-            }
-
-            manager.getUi().printlnMessageWithDashDivider(LIST_HEADER_PREPEND + sessionId + LIST_CLOSER_POSTPEND);
-            for (int i = 0; i < activityListSize - 1; i++) {
-                manager.getUi().printlnMessage(activityListToBePrinted.get(i).getActivitySummaryString());
-            }
-            String lastActivityToPrint = activityListToBePrinted.get(activityListSize - 1).getActivitySummaryString();
-            manager.getUi().printlnMessageWithDivider(lastActivityToPrint);
+            manager.getUi().printlnMessage(sessionToBePrinted.getActivityListSummaryString());
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
             manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND + sessionId);
