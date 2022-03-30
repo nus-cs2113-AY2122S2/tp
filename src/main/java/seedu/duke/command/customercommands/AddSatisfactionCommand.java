@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import seedu.duke.ListContainer;
-import seedu.duke.Satisfaction;
-import seedu.duke.SatisfactionList;
+import seedu.duke.satisfactionlists.Satisfaction;
+import seedu.duke.satisfactionlists.SatisfactionList;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;

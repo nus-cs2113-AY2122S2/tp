@@ -1,8 +1,14 @@
 package seedu.duke;
 
-import seedu.duke.lists.Item;
-import seedu.duke.lists.ItemList;
+import seedu.duke.housekeeperlists.Housekeeper;
+import seedu.duke.housekeeperlists.HousekeeperList;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformance;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformanceList;
+import seedu.duke.itemlists.Item;
+import seedu.duke.itemlists.ItemList;
 import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.satisfactionlists.Satisfaction;
+import seedu.duke.satisfactionlists.SatisfactionList;
 
 import java.util.ArrayList;
 import java.util.Scanner;

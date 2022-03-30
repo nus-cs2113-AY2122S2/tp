@@ -3,8 +3,8 @@ package seedu.duke.command.housekeepercommands;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import seedu.duke.Housekeeper;
-import seedu.duke.HousekeeperList;
+import seedu.duke.housekeeperlists.Housekeeper;
+import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.HotelLiteManagerException;

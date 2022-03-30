@@ -5,9 +5,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.Ui;
-import seedu.duke.HousekeeperPerformanceList;
-import seedu.duke.HousekeeperPerformance;
-import seedu.duke.HousekeeperList;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformanceList;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformance;
+import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.ListContainer;
 
 import seedu.duke.command.Command;

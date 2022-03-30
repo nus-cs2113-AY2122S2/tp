@@ -7,9 +7,9 @@ import java.util.logging.Logger;
 import seedu.duke.ListContainer;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.Ui;
-import seedu.duke.Housekeeper;
+import seedu.duke.housekeeperlists.Housekeeper;
 import seedu.duke.exceptions.EmptyDayException;
-import seedu.duke.HousekeeperList;
+import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.command.Command;
 

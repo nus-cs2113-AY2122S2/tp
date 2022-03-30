@@ -2,11 +2,11 @@ package seedu.duke.command.itemcommands;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.lists.Item;
+import seedu.duke.itemlists.Item;
 import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.lists.ItemList;
+import seedu.duke.itemlists.ItemList;
 import seedu.duke.storage.ItemListFileManager;
 
 import java.io.IOException;

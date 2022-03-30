@@ -1,4 +1,4 @@
-package seedu.duke.lists;
+package seedu.duke.itemlists;
 
 import seedu.duke.exceptions.ItemNotFoundException;
 

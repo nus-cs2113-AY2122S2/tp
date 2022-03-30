@@ -6,11 +6,11 @@ import seedu.duke.command.Command;
 
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.Housekeeper;
+import seedu.duke.housekeeperlists.Housekeeper;
 import seedu.duke.exceptions.InvalidRoomNumberException;
 import seedu.duke.RoomList;
 import seedu.duke.AssignmentMap;
-import seedu.duke.HousekeeperList;
+import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.Room;
 import seedu.duke.exceptions.InvalidHousekeeperNameException;
 

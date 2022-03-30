@@ -1,6 +1,6 @@
 package seedu.duke.command.housekeepercommands;
 
-import seedu.duke.HousekeeperPerformanceList;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformanceList;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;

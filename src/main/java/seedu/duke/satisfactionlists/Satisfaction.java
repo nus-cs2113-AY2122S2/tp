@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.satisfactionlists;
 
 /**
  * Represents a Satisfaction object. Attributes include satisfactionValue
