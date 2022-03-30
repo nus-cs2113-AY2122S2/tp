@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import seedu.duke.JsonKeyConstants.OrderKeys;
 import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.LargeQuantityException;
 import util.exceptions.WrongCommandException;
@@ -233,4 +236,30 @@ public class Order {
     public String toString() {
         return String.format("%d - %s (%s)", orderId, receiver, shippingAddress);
     }
+
+
+    private JSONArray serializeOrderlines(){
+        JSONArray ja = new JSONArray();
+
+        return ja;
+    }
+
+    public JSONObject serialize(){
+        JSONObject jo = new JSONObject();
+        jo.put(OrderKeys.orderId, this.orderId);
+        jo.put(OrderKeys.receiver, this.receiver);
+        jo.put(OrderKeys.shippingAddress, this.shippingAddress);
+        jo.put(OrderKeys.totalCost, this.totalCost);
+        jo.put(OrderKeys.toFulfilBy, this.toFulfilBy);
+        jo.put(OrderKeys.fulfilledBy, this.fulfilledBy);
+        jo.put(OrderKeys.isFulfilled, this.isFulfilled);
+        jo.put(OrderKeys.comments, this.comments);
+        JSONArray ja_ol = this.serializeOrderlines();
+        if (ja_ol == null){
+            return null;
+        }
+        jo.put(OrderKeys.orderlines, this.orderlines);
+        return jo;
+    }
+
 }
