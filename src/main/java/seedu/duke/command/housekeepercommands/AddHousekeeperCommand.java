@@ -1,5 +1,6 @@
 package seedu.duke.command.housekeepercommands;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -15,6 +16,7 @@ import seedu.duke.UnderAgeException;
 import seedu.duke.InvalidAgeException;
 import seedu.duke.NameNotStringException;
 import seedu.duke.command.Command;
+import seedu.duke.storage.HousekeeperFileManager;
 
 /**
  * Extract name and age of housekeeper from user input and record it into the housekeeper list.
@@ -157,9 +159,11 @@ public class AddHousekeeperCommand extends Command {
      * @param ui The user interface for this execution method.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws InvalidUserException {
+    public void execute(ListContainer listContainer, Ui ui) throws InvalidUserException, IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.addHousekeeperInList(getHousekeeper());
         ui.printHousekeeperNoted(housekeeper);
+        HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
+        housekeeperFileManager.save(housekeeperList);
     }
 }

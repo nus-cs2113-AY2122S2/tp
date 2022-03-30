@@ -1,5 +1,6 @@
 package seedu.duke;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import seedu.duke.storage.RoomFileManager;
 import seedu.duke.storage.EventListFileManager;
 import seedu.duke.storage.ItemListFileManager;
 import seedu.duke.storage.SatisfactionListFileManager;
+import seedu.duke.storage.HousekeeperFileManager;
 
 public class ListContainer {
     private HousekeeperList housekeeperList;
@@ -41,8 +43,12 @@ public class ListContainer {
         ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemList = itemListFileManager.load();
 
+        HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
+        housekeeperList = housekeeperFileManager.load();
+
         SatisfactionListFileManager satisfactionListFileManager = new SatisfactionListFileManager();
         satisfactionList = satisfactionListFileManager.load();
+
     }
 
 

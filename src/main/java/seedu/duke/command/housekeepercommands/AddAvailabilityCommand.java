@@ -1,6 +1,5 @@
 package seedu.duke.command.housekeepercommands;
 
-
 import seedu.duke.ListContainer;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.InvalidAvailabilityException;
@@ -9,7 +8,9 @@ import seedu.duke.Ui;
 import seedu.duke.UserDoesNotExistException;
 import seedu.duke.HousekeeperList;
 import seedu.duke.command.Command;
+import seedu.duke.storage.HousekeeperFileManager;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -158,12 +159,13 @@ public class AddAvailabilityCommand extends Command {
      * @param ui The user interface for this execution method.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException {
+    public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException, IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.addAvailabilityInList(name, availability);
         ui.printNotedLine();
         ui.printMessage("Added " + name + " availability into records");
         ui.printBottomLine();
-
+        HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
+        housekeeperFileManager.save(housekeeperList);
     }
 }

@@ -1,5 +1,6 @@
 package seedu.duke.command.housekeepercommands;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import seedu.duke.UserDoesNotExistException;
 import seedu.duke.EmptyNameException;
 import seedu.duke.HousekeeperList;
 import seedu.duke.AssignmentMap;
+import seedu.duke.storage.HousekeeperFileManager;
 
 public class DeleteHousekeeperCommand extends Command {
     private String name;
@@ -39,7 +41,7 @@ public class DeleteHousekeeperCommand extends Command {
      * @throws UserDoesNotExistException User given is not in housekeeper list.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException {
+    public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException, IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.removeHousekeeperInList(name);
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
@@ -48,5 +50,7 @@ public class DeleteHousekeeperCommand extends Command {
         ui.printMessage("Deleted " + name + " from the list of profile");
         ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
         ui.printBottomLine();
+        HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
+        housekeeperFileManager.save(housekeeperList);
     }
 }
