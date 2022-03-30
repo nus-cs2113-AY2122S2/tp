@@ -23,7 +23,10 @@ import seedu.duke.commands.OptionCommand;
 import seedu.duke.commands.ResetCommand;
 import seedu.duke.commands.SaveCommand;
 import seedu.duke.commands.TagCommand;
-import seedu.duke.exceptions.ParseException;
+import seedu.duke.exceptions.AdditionalParameterException;
+import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.InvalidInputException;
+import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.data.Module;
 import seedu.duke.data.Task;
@@ -31,8 +34,27 @@ import seedu.duke.data.Task;
 public class ModHappyParserTest {
     private ModHappyParser parser;
 
-    private void testParseCommand_expectParseException(String testString) {
-        assertThrows(ParseException.class, () -> {
+
+    private void testParseCommand_expectAdditionalParameterException(String testString) {
+        assertThrows(AdditionalParameterException.class, () -> {
+            parser.parseCommand(testString);
+        });
+    }
+
+    private void testParseCommand_expectInvalidCompulsoryParameterException(String testString) {
+        assertThrows(InvalidCompulsoryParameterException.class, () -> {
+            parser.parseCommand(testString);
+        });
+    }
+
+    private void testParseCommand_expectInvalidInputException(String testString) {
+        assertThrows(InvalidInputException.class, () -> {
+            parser.parseCommand(testString);
+        });
+    }
+
+    private void testParseCommand_expectInvalidNumberException(String testString) {
+        assertThrows(InvalidNumberException.class, () -> {
             parser.parseCommand(testString);
         });
     }
@@ -134,7 +156,7 @@ public class ModHappyParserTest {
     public void parse_addCommand_task_withTargetModule_invalidModuleCode() {
         final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
                 + "-m cs 2113 t";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -161,7 +183,7 @@ public class ModHappyParserTest {
         final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d\"   "
                 + "-t \"-t-t-t t-t-t /t/t -d -d -d \" "
                 + "-d \"-d-d-d /t /m -d -d  \" ";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -186,7 +208,7 @@ public class ModHappyParserTest {
     public void parse_addCommand_task_withDescription_withTargetModule_wrongOrder() {
         final String testString = "add task \"/t/t/t/t-d\" -m cs2113t "
                 + "-t \"-d-t-m -d -t -t\" -d \"-d-d-d /t /m -d -d  \"";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -210,7 +232,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_task_withWorkingTime_withTargetModule_wrongOrder() {
         final String testString = "add task \"/t/t/t/t-d\" -t \"-d-d-d /t /m -d -d  \" -m cs2113t ";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -236,39 +258,39 @@ public class ModHappyParserTest {
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_wrongOrder1() {
         final String testString = "add task \"/t/t/t/t-d\" -t \"-d-d-t-m /m -m -d -t  \" -d \"-d-d-d /t /m -d -d  \" "
                 + "-m cs2113t";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_wrongOrder2() {
         final String testString = "add task \"/t/t/t/t-d\" -t \"-d-d-t-m /m -m -d -t  \" -m cs2113t"
                 + "-d \"-d-d-d /t /m -d -d  \" ";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_wrongOrder3() {
         final String testString = "add task \"/t/t/t/t-d\" -m cs2113t  -t \" -d-d -t /m -m -m-d -t -m\""
                 + " -d \"-d -d-t-t -t -m -m -m /m/m\"";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
     public void parse_addCommand_duplicateTaskDescription() {
-        final String testString = "add task 000 -d \"123\" -t \"456\" -d \"789\"";
-        testParseCommand_expectParseException(testString);
+        final String testString = "add task \"000\" -d \"123\" -t \"456\" -d \"789\"";
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
     public void parse_addCommand_duplicateWorkingTime() {
-        final String testString = "add task 000 -t \"123\" -d \"456\" -t \"789\"";
-        testParseCommand_expectParseException(testString);
+        final String testString = "add task \"000\" -t \"123\" -d \"456\" -t \"789\"";
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
     public void parse_addCommand_task_invalidInput() {
-        final String testString = "add task 000 -d \"123\" -t \"456\" invalid";
-        testParseCommand_expectParseException(testString);
+        final String testString = "add task \"000\" -d \"123\" -t \"456\" invalid";
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -291,13 +313,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_module_invalidModularCredit() {
         final String testString = "add  \t mod modulecode four \t\t    ";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_addCommand_module_noDescription_invalidModuleCode() {
         final String testString = "add  \t mod module code /c 4 \t\t    ";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
@@ -320,37 +342,37 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_module_withDescription_invalidModuleCode() {
         final String testString = "add  \t mod module code \t\t  4  -d \t\t  \t \"i am a descrip\t -d-d tion\t \"\t  ";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_addCommand_module_withDescription_invalidInput() {
         final String testString = "add mod cs2113t 4 -d \"11111\"123";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
     public void parse_addCommand_invalidFlag() {
         final String testString = "add /a \"blahblah\" -d \"blahblahblah\"";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_addCommand_noFlagProvided() {
         final String testString = "add cs2113t";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_addCommand_withModuleOnly_noModuleProvided() {
         final String testString = "add mod";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_addCommand_withTaskOnly_noTaskProvided() {
         final String testString = "add task";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
@@ -368,7 +390,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_deleteCommand_withTaskOnly_integerOverflow() {
         final String testString = "del task 2147483648";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidNumberException(testString);
     }
 
     @Test
@@ -399,43 +421,43 @@ public class ModHappyParserTest {
     @Test
     public void parse_deleteCommand_withTask_withTargetModule_invalidModuleCode() {
         final String testString = "del task 1 -m cs 2113 t";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
     public void parse_deleteCommand_invalidFlag() {
-        final String testString = "del /a 1";
-        testParseCommand_expectParseException(testString);
+        final String testString = "del a 1";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_deleteCommand_noFlagProvided() {
         final String testString = "del 1";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_deleteCommand_withModuleOnly_noModuleProvided() {
         final String testString = "del mod";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_deleteCommand_withTaskOnly_noIndexProvided() {
         final String testString = "del task";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_deleteCommand_withTaskOnly_notANumber() {
         final String testString = "del task iamnotanumber";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_deleteCommand_unnecessaryArgs() {
         final String testString = "del task 1 blahblah";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -455,31 +477,31 @@ public class ModHappyParserTest {
     @Test
     public void parse_editCommand_task_unnecessaryArgs() {
         final String testString = "edit task 1 blahblah";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_editCommand_task_noOptionalFlags() {
         final String testString = "edit task 1";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_editCommand_module_wrongFlag() {
         final String testString = "edit mod cs2113t -t \"111\"";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_editCommand_task_notANumber() {
         final String testString = "edit task two -t \"111\"";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_editCommand_task_tooManyFlags() {
         final String testString = "edit task 2 -m cs2113t -d \"123\" -t \"111\" ";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -496,7 +518,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_exitCommand_unnecessaryArgs() {
         final String testString = "exit blahblah";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectAdditionalParameterException(testString);
     }
 
     @Test
@@ -513,15 +535,21 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_gradeCommand_invalidGrade() {
+    public void parse_gradeCommand_invalidGrade1() {
         final String testString = "grade CS2113T F-";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
+    }
+
+    @Test
+    public void parse_gradeCommand_invalidGrade2() {
+        final String testString = "grade CS2113T G";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_gradeCommand_wrongOrder() {
         final String testString = "grade A- CS2113T";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
@@ -538,7 +566,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_gpaCommand_unnecessaryArgs() {
         final String testString = "gpa blahblah";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectAdditionalParameterException(testString);
     }
 
     @Test
@@ -567,7 +595,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_helpCommand_unnecessaryArgs() {
         final String testString = "help add blahblah";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -596,7 +624,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_listCommand_unnecessaryArgs() {
         final String testString = "list test blahblah";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -628,31 +656,31 @@ public class ModHappyParserTest {
     @Test
     public void parse_markCommand_invalidFlag() {
         final String testString = "mark a 1";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_markCommand_noFlagProvided() {
         final String testString = "mark 1";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_markCommand_noIndexProvided() {
         final String testString = "mark c";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_markCommand_notANumber() {
         final String testString = "mark c iamnotanumber";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_markCommand_unnecessaryArgs() {
         final String testString = "mark c 1 blahblah";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -669,13 +697,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_optionCommand_invalidConfigName() {
         final String testString = "option invalidConfigName";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
     public void parse_optionCommand_noEqualSign() {
         final String testString = "option COMPLETED_TASKS_SHOWN false";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectInvalidInputException(testString);
     }
 
     @Test
@@ -692,7 +720,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_resetCommand_unnecessaryArgs() {
         final String testString = "reset blahblah";
-        testParseCommand_expectParseException(testString);
+        testParseCommand_expectAdditionalParameterException(testString);
     }
 
     @Test
@@ -708,8 +736,8 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_saveCommand_unnecessaryArgs() {
-        final String testString = "exit blahblah";
-        testParseCommand_expectParseException(testString);
+        final String testString = "save blahblah";
+        testParseCommand_expectAdditionalParameterException(testString);
     }
 
     @Test
@@ -728,7 +756,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_tagCommand_invalidTagOperation_throwsParseException() {
-        final String testString = "tag invalidOp 1 \"tag\"";
-        testParseCommand_expectParseException(testString);
+        final String testString = "tag invalidOp 1 tagDescription";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 }

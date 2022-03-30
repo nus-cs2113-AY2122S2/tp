@@ -6,11 +6,13 @@ import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.Grades;
+import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 public class GpaCommand extends Command {
 
     private static final String GPA_MESSAGE = StringConstants.GPA_MESSAGE;
+    private static final int MAXIMUM_TOTAL_CREDITS = NumberConstants.MAXIMUM_TOTAL_CREDITS;
 
     private String result;
 
@@ -33,7 +35,7 @@ public class GpaCommand extends Command {
                 totalMc += mc;
                 weightedSum += modularGradePoint * mc;
             }
-            if (totalMc > 2000000000) {
+            if (totalMc > MAXIMUM_TOTAL_CREDITS) {
                 // Prevent integer overflow
                 throw new GpaNotComputableException();
             }

@@ -27,6 +27,7 @@ public class ModuleList {
      *
      * @param moduleCode the module code to be removed
      */
+
     public Module removeModule(String moduleCode) throws NoSuchModuleException {
         Module module = getModule(moduleCode);
         if (module == null) {

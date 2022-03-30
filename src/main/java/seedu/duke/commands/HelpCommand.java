@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
@@ -47,7 +49,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        if (command.isBlank()) {
+        if (Objects.isNull(command)) {
             return new CommandResult(HELP + "\n\n" + HELP_NOTE);
         }
         switch (command) {

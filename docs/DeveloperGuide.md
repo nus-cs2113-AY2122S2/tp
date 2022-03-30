@@ -1,7 +1,20 @@
 # Mod Happy: Developer Guide
 
 Mod Happy is a command-line-based application that helps students manage their academics.
-
+## Contents
+1. [Introduction](#introduction)
+2. [Purpose](#purpose)
+3. [Acknowledgements](#acknowledgements)
+4. [Design](#design)
+   <br>4.1. [UI Component](#ui-component)
+   <br>4.2. [Parser Component](#parser-component)
+   <br>4.3. [Data Component](#data-component)
+   <br>4.4. [Command Component](#command-component)
+   <br>4.5. [Storage Component](#storage-component)
+5. [Implementation](#implementation)
+   <br>5.1. [Tag Feature](#tag-feature)
+   <br>5.2. [GPA Feature](#gpa-feature) 
+6. [User Stories](#user-stories)
 ## Acknowledgements
 
 - Some foundational source code was adapted from [addressbook-level2](https://github.com/se-edu/addressbook-level2).

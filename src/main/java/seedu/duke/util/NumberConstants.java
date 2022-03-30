@@ -25,4 +25,14 @@ public class NumberConstants {
      */
     public static final long MINUTE_PER_HOUR = 60;
     public static final long MAXIMUM_ALLOWED_DURATION_NUMBER = 1000000000;
+
+    /**
+     * For AddParsers.
+     */
+    public static final int MAXIMUM_MODULAR_CREDITS = 100;
+
+    /**
+     * For GpaCommand.
+     */
+    public static final int MAXIMUM_TOTAL_CREDITS = 2000000000;
 }

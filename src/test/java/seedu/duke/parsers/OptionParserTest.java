@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import seedu.duke.exceptions.UnknownConfigurationGroupWordException;
+import seedu.duke.exceptions.UnsupportedResultTypeException;
+
 import seedu.duke.util.StringConstants;
 
 public class OptionParserTest {
@@ -15,6 +17,12 @@ public class OptionParserTest {
 
     private void testParseCommand_expectUnknownConfigGroupWordException(String testString) {
         assertThrows(UnknownConfigurationGroupWordException.class, () -> {
+            optionParser.parseCommand(testString);
+        });
+    }
+
+    private void testParseCommand_expectUnsupportedResultTypeException(String testString) {
+        assertThrows(UnsupportedResultTypeException.class, () -> {
             optionParser.parseCommand(testString);
         });
     }
@@ -38,10 +46,10 @@ public class OptionParserTest {
 
     @Test
     public void parse_legalConfigName() {
-        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME;
+        final String testString = StringConstants.SHOW_COMPLETED_TASKS_NAME;
         try {
             optionParser.parseCommand(testString);
-            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME,
+            assertEquals(StringConstants.SHOW_COMPLETED_TASKS_NAME,
                     optionParser.parsedCommand.get("configurationGroupWord"));
             assertNull(optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
@@ -51,10 +59,10 @@ public class OptionParserTest {
 
     @Test
     public void parse_legalConfigNameAndLegalValue() {
-        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=" + StringConstants.TRUE;
+        final String testString = StringConstants.SHOW_COMPLETED_TASKS_NAME + "=" + StringConstants.TRUE;
         try {
             optionParser.parseCommand(testString);
-            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME,
+            assertEquals(StringConstants.SHOW_COMPLETED_TASKS_NAME,
                     optionParser.parsedCommand.get("configurationGroupWord"));
             assertEquals(StringConstants.TRUE, optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
@@ -70,16 +78,16 @@ public class OptionParserTest {
 
     @Test
     public void parse_legalConfigNameAndBadValue() {
-        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=true1";
-        testParseCommand_expectUnknownConfigGroupWordException(testString);
+        final String testString = StringConstants.SHOW_COMPLETED_TASKS_NAME + "=true1";
+        testParseCommand_expectUnsupportedResultTypeException(testString);
     }
 
     @Test
     public void parse_legalConfigNameAndLegalValue_withExtraWhitespace() {
-        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=" + StringConstants.TRUE + " ";
+        final String testString = StringConstants.SHOW_COMPLETED_TASKS_NAME + "=" + StringConstants.TRUE + " ";
         try {
             optionParser.parseCommand(testString);
-            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME,
+            assertEquals(StringConstants.SHOW_COMPLETED_TASKS_NAME,
                     optionParser.parsedCommand.get("configurationGroupWord"));
             assertEquals(StringConstants.TRUE, optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {

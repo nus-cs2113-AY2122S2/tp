@@ -2,12 +2,14 @@ package seedu.duke.parsers;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.commands.Command;
+import seedu.duke.exceptions.InvalidCompulsoryParameterException;
+import seedu.duke.exceptions.InvalidInputException;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -28,6 +30,7 @@ public abstract class Parser {
     protected static final String TAG_COMMAND_WORD = StringConstants.TAG_COMMAND_WORD;
     protected static final String OPTION_COMMAND_WORD = StringConstants.OPTION_COMMAND_WORD;
 
+    protected static final String INVALID = StringConstants.INVALID;
 
     protected String commandFormat;
     protected HashMap<String, String> parsedCommand;
@@ -50,15 +53,20 @@ public abstract class Parser {
     public HashMap<String, String> parseString(String userInput) throws ModHappyException {
         final Pattern commandPattern = Pattern.compile(commandFormat);
         final Matcher matcher = commandPattern.matcher(userInput.trim());
-
         if (!matcher.matches()) {
-            throw new ParseException();
+            throw new InvalidCompulsoryParameterException();
         }
         for (Object groupName : groupNames) {
             try {
                 parsedCommand.put(groupName.toString(), matcher.group(groupName.toString()).trim());
             } catch (Exception e) {
                 parsedCommand.put(groupName.toString(), null);
+            }
+        }
+        if (groupNames.contains(INVALID)) {
+            String invalidInput = parsedCommand.get(INVALID);
+            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
+                throw new InvalidInputException(invalidInput);
             }
         }
         return parsedCommand;

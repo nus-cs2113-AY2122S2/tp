@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.WrongDurationFormatException;
 import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
@@ -75,7 +74,7 @@ public class TaskDuration {
         Matcher matcher = commandPattern.matcher(durationString.trim());
         HashMap<String, String> parserDurationString = new HashMap<>();
         if (!matcher.matches()) {
-            throw new ParseException();
+            throw new WrongDurationFormatException();
         }
         try {
             parserDurationString.put(DURATION_UNIT_GROUP_WORD, matcher.group(DURATION_UNIT_GROUP_WORD).trim());

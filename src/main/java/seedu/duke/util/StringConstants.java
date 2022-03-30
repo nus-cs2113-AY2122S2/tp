@@ -148,7 +148,7 @@ public class StringConstants {
     public static final String OPTION_HELP = "View and edit program configuration options.\n"
             + "Format to view all available configs: option\n"
             + "Format to view details for a specific config option: option CONFIG_NAME\n"
-            + "Format to set a config option: option CONFIG_NAME = NEW_VALUE\n\n"
+            + "Format to set a config option: option CONFIG_NAME=NEW_VALUE\n\n"
             + "Available configs:\n";
 
 
@@ -186,8 +186,13 @@ public class StringConstants {
     public static final String ERROR_NO_SUCH_MODULE = "Sorry, no such module exists ._.";
     public static final String ERROR_NO_SUCH_TASK = "Sorry, no such task exists ._.";
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
+    public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid compulsory parameters. "
+            + "Please check and try again.";
+    public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters.";
+    public static final String ERROR_PARSE_STRING = "\nError at '%s'.\nPlease check and try again.";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
-    public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
+    public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, the value \"%s\" is not supported for "
+            + "configuration \"%s\".";
     public static final String ERROR_WRITE_FILE = "Error writing to file...";
     public static final String ERROR_READ_FILE = "Error reading from file...";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, file creation failed...";
@@ -196,6 +201,9 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
+    public static final String ERROR_PARSE_INT_FAILED = "\nInvalid %s. Please check and try again.";
+    public static final String ERROR_MODULAR_CREDITS_FAILED = "modular credits";
+    public static final String ERROR_TASK_NUMBER_FAILED = "task number";
     public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
     public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with identical module codes found. "
             + "Aborting load...";
@@ -214,12 +222,14 @@ public class StringConstants {
     public static final String MODULE_GRADE = "moduleGrade";
     public static final String TASK_NUMBER = "taskNumber";
     public static final String FLAG = "flag";
-    public static final String TASK_INDEX = "taskIndex";
+    public static final String CONFIGURATION_GROUP_WORD = "configurationGroupWord";
+    public static final String NEW_VALUE = "newValue";
     public static final String COMPLETED_FLAG = "c";
     public static final String UNCOMPLETED_FLAG = "u";
     public static final String ARGUMENT = "arguments";
     public static final String TAG_NAME = "tagName";
     public static final String TAG_OPERATION = "tagOperation";
+    public static final String INVALID = "invalid";
     public static final String COMMAND_WORD = "commandWord";
     public static final String EXIT_COMMAND_WORD = "exit";
     public static final String ADD_COMMAND_WORD = "add";
@@ -234,6 +244,7 @@ public class StringConstants {
     public static final String SAVE_COMMAND_WORD = "save";
     public static final String TAG_COMMAND_WORD = "tag";
     public static final String OPTION_COMMAND_WORD = "option";
+
 
     /**
      * For grades.
@@ -251,11 +262,11 @@ public class StringConstants {
     public static final String TRUE = "true";
     public static final String FALSE = "false";
 
-    public static final String COMPLETED_TASKS_SHOWN_NAME = "SHOW_COMPLETED_TASKS";
-    public static final String COMPLETED_TASKS_SHOWN_EXPLAIN = "Whether or not completed tasks should be displayed"
-            + " by \"list\".";
-    public static final String COMPLETED_TASKS_SHOWN_TRUE = "Show completed tasks";
-    public static final String COMPLETED_TASKS_SHOWN_FALSE = "Hide completed tasks";
+    public static final String SHOW_COMPLETED_TASKS_NAME = "SHOW_COMPLETED_TASKS";
+    public static final String SHOW_COMPLETED_TASKS_EXPLAIN = "Determines if completed tasks should be displayed"
+            + " by \"list\" or not.";
+    public static final String SHOW_COMPLETED_TASKS_TRUE = "Show completed tasks";
+    public static final String SHOW_COMPLETED_TASKS_FALSE = "Hide completed tasks";
 
     /**
      * For TaskDuration.

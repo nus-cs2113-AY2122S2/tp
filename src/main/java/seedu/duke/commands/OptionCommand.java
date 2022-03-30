@@ -5,6 +5,7 @@ import java.util.Objects;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.UnknownConfigurationGroupWordException;
 import seedu.duke.data.ModuleList;
+import seedu.duke.exceptions.UnsupportedResultTypeException;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
@@ -16,23 +17,22 @@ public class OptionCommand extends Command {
     private String newValue = null;
 
     public OptionCommand(String configurationGroupWord, String newValue) throws ModHappyException {
-        if (Objects.isNull(configurationGroupWord)) {
-            return;
-        }
-        try {
-            configurationGroup = Configuration.ConfigurationGroup.valueOf(configurationGroupWord);
-            // Checks whether the configurationGroupWord and newValue are legal.
-            if (Objects.isNull(newValue)) {
-                return;
+        if (!Objects.isNull(configurationGroupWord)) {
+            try {
+                configurationGroup = Configuration.ConfigurationGroup.valueOf(configurationGroupWord);
+            } catch (IllegalArgumentException e) {
+                throw new UnknownConfigurationGroupWordException(configurationGroupWord);
             }
-            if (Configuration.LEGAL_VALUES.containsKey(configurationGroup)
-                    && Configuration.LEGAL_VALUES.get(configurationGroup).contains(newValue)) {
+            if (!Configuration.LEGAL_VALUES.containsKey(configurationGroup)) {
+                throw new UnknownConfigurationGroupWordException(configurationGroupWord);
+            }
+        }
+        if (!Objects.isNull(newValue)) {
+            if (Configuration.LEGAL_VALUES.get(configurationGroup).contains(newValue)) {
                 this.newValue = newValue;
             } else {
-                throw new UnknownConfigurationGroupWordException(configurationGroupWord + " " + newValue);
+                throw new UnsupportedResultTypeException(newValue, configurationGroupWord);
             }
-        } catch (Exception e) {
-            throw new UnknownConfigurationGroupWordException(configurationGroupWord);
         }
     }
 
