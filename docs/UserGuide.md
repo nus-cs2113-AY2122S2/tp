@@ -179,9 +179,9 @@ Adds or deletes a tag from the [specified task](#specifying-tasks).
 >
 > The tag name must be a single word; it cannot contain whitespace.
 
-Format: `tag (add | del) TASK_INDEX [-m MODULE_CODE] "TAG_NAME"`
+Format: `tag (add | del) TASK_INDEX [-m MODULE_CODE] TAG_NAME`
 
-Example: `tag add 1 -m CS2113T "project"`
+Example: `tag add 1 -m CS2113T project`
 
 ### Listing all tasks/modules: `list`
 
@@ -193,7 +193,7 @@ If a tag name is provided, only tasks with the associated tag will be shown.
 > 
 > If the `SHOW_COMPLETED_TASKS` option is set to `false`, any tasks marked as completed will be omitted from the displayed list. The number of hidden tasks is given at the bottom of each group.
 
-Format: `list ["TAG_NAME"]`
+Format: `list [TAG_NAME]`
 
 ### Setting a module's grade: `grade`
 
@@ -260,17 +260,17 @@ Mod Happy supports any positive decimal and integer no bigger than 1000,000,000.
 
 ## Command summary
 
-| Command | Format                                                                                                                                                                                   |
-|:-------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  help   | `help [COMMAND_WORD]`                                                                                                                                                                    |
-|   add   | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`                         |
-|   del   | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`                                                                                                                         |
+| Command | Format                                                                                                                                                                               |
+|:-------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  help   | `help [COMMAND_WORD]`                                                                                                                                                                |
+|   add   | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`                     |
+|   del   | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`                                                                                                                     |
 |  edit   | <code>edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME")</code> <br> `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` |
-|  mark   | <code>mark (c &#124; u) TASK_NUMBER [-m MODULE_CODE]</code>                                                                                                                              |
-|   tag   | <code>tag (add &#124; del) [-m MODULE_CODE] "TAG_NAME"</code>                                                                                                                            |
-|  list   | `list ["TAG_NAME"]`                                                                                                                                                                      |
-|  grade  | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                         |
-|   gpa   | `gpa`                                                                                                                                                                                    |
-|  reset  | `reset`          
+|  mark   | <code>mark (c &#124; u) TASK_NUMBER [-m MODULE_CODE]</code>                                                                                                                          |
+|   tag   | <code>tag (add &#124; del) [-m MODULE_CODE] TAG_NAME</code>                                                                                                                          |
+|  list   | `list [TAG_NAME]`                                                                                                                                                                    |
+|  grade  | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                     |
+|   gpa   | `gpa`                                                                                                                                                                                |
+|  reset  | `reset`    
 |  option | `option CONFIG_NAME=NEW_VALUE`
-|  save   | `save`                                                                                                                                                                                   |
+|  save   | `save`                                                                                                                                                                               |

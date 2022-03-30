@@ -32,8 +32,6 @@ public class Main {
     private final String configurationLoadErrorMessage = StringConstants.CONFIGURATION_DATA_LOAD_FAILED;
     private final String noConfigFileMessage = StringConstants.NO_CONFIG_DATA_FILE;
 
-
-    private TextUi ui;
     private ModHappyParser modHappyParser;
     private ModuleList moduleList;
     private Configuration configuration;
@@ -44,32 +42,30 @@ public class Main {
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
      */
     public static void main(String[] args) {
-        new Main().run(args);
+        new Main().run();
     }
 
     /**
      * Runs the program until termination.
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
      **/
-    public void run(String[] args) {
-        start(args);
+    public void run() {
+        start();
         runCommandLoopUntilExitCommand();
         exit();
     }
 
     /**
      * Sets up the required objects.
-     * @param args arguments supplied by the user at program launch.
      */
-    private void start(String[] args) {
+    private void start() {
         try {
-            ui = new TextUi();
             modHappyParser = new ModHappyParser();
             moduleList = new ModuleList();
             loadDataFromFile();
-            ui.showHelloMessage();
+            TextUi.showHelloMessage();
         } catch (Exception e) {
-            ui.showInitFailedMessage();
+            TextUi.showInitFailedMessage();
         }
     }
 
@@ -83,10 +79,10 @@ public class Main {
             modHappyStorage = new ModuleListStorage();
             try {
                 moduleList.setModuleList((ArrayList<Module>) modHappyStorage.loadData(modulePath));
-                ui.showUnformattedMessage(moduleLoadSuccessMessage);
+                TextUi.showUnformattedMessage(moduleLoadSuccessMessage);
             } catch (ModHappyException e) {
-                ui.showUnformattedMessage(e);
-                ui.showUnformattedMessage(moduleLoadErrorMessage);
+                TextUi.showUnformattedMessage(e);
+                TextUi.showUnformattedMessage(moduleLoadErrorMessage);
             }
         }
         File taskDataFile = new File(taskPath);
@@ -94,10 +90,10 @@ public class Main {
             modHappyStorage = new TaskListStorage();
             try {
                 moduleList.initialiseGeneralTasksFromTaskList((ArrayList<Task>) modHappyStorage.loadData(taskPath));
-                ui.showUnformattedMessage(taskLoadSuccessMessage);
+                TextUi.showUnformattedMessage(taskLoadSuccessMessage);
             } catch (ModHappyException e) {
-                ui.showUnformattedMessage(e);
-                ui.showUnformattedMessage(taskLoadErrorMessage);
+                TextUi.showUnformattedMessage(e);
+                TextUi.showUnformattedMessage(taskLoadErrorMessage);
             }
         }
         File configurationDataFile = new File(configurationPath);
@@ -105,14 +101,14 @@ public class Main {
             modHappyStorage = new ConfigurationStorage();
             try {
                 configuration = (Configuration) modHappyStorage.loadData(configurationPath);
-                ui.showUnformattedMessage(configurationLoadSuccessMessage);
+                TextUi.showUnformattedMessage(configurationLoadSuccessMessage);
             } catch (ModHappyException e) {
-                ui.showUnformattedMessage(e);
-                ui.showUnformattedMessage(configurationLoadErrorMessage);
+                TextUi.showUnformattedMessage(e);
+                TextUi.showUnformattedMessage(configurationLoadErrorMessage);
             }
         } else {
             configuration = new Configuration();
-            ui.showUnformattedMessage(noConfigFileMessage);
+            TextUi.showUnformattedMessage(noConfigFileMessage);
         }
     }
 
@@ -125,12 +121,12 @@ public class Main {
         String userCommandText;
         do {
             try {
-                userCommandText = ui.getUserCommand();
+                userCommandText = TextUi.getUserCommand();
                 command = modHappyParser.parseCommand(userCommandText);
                 CommandResult result = command.execute(moduleList, configuration);
-                ui.showMessage(result.toString());
+                TextUi.showMessage(result.toString());
             } catch (Exception e) {
-                ui.showMessage(e);
+                TextUi.showMessage(e);
             }
         } while (command == null || !ExitCommand.isExit);
     }
@@ -140,7 +136,7 @@ public class Main {
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
      * */
     private void exit() {
-        ui.showGoodByeMessage();
+        TextUi.showGoodByeMessage();
         System.exit(0);
     }
 
