@@ -41,25 +41,33 @@ Refer to the [_User Guide_](UserGuide.md).
 
 ### Architecture
 
-The ***Architecture Diagram*** given above explains the high-level design ***HALPMI***.
+![Architecture Diagram](diagrams/OverallArch.png)
+
+The ***Architecture Diagram*** given above explains the high-level design ***HalpMi***.
 
 Given below is a quick overview of main components and how they interact with each other.
 
-**Main components of the architecture**
+#### **Main components of the architecture**
 
-**`Main`** has single method called `main` that initialises a new instance of a Manager class, and calls the `runLoop()`
+**`Duke`** has single method called `main` which is called upon launch. This initialises a new instance of a `Manager` class, and calls the `runLoop()`
 method belonging to the Manager object.
 
-[**`Assets`**](#asset-classes): Refers to a collection of classes that are the main assets of the application.
+[**`Assets`**](#asset-classes): Refers to a collection of classes that hold all the necessary data given by the User in
+current and past usages.
 
-The rest of the App consists of three components.
+The rest of the App consists of these components.
 
-* [**`UI`**](#ui-component): The UI of the App.
 * [**`Manager`**](#manager-component): The Brain.
-* [**`Helper`**](#helper-classes): Core Classes that help with operations.
-  * [**`Command`**](#command): Calls all the commands.
-  * [**`Parser`**](#parser): Breaks down user input into parameters accepted by the app, also checks if parameters are valid.
-  * [**`Storage`**](#storage): Reads data from data files anf writes data to data files, also stores in app memory.
+* [**`Helper`**](#helper-classes): A collection of core classes that aid with the Logical Operations performed by HalpMi.
+    * [**`Command`**](#command): Contains the changes or updates to be made.
+    * [**`UI`**](#ui-component): The UI of the App.
+    * [**`Parser`**](#parser): Breaks down user input into parameters accepted by the app and creates a Command Object.
+    * [**`Validator`**](): Checks if the input provided by the User is Valid.
+    * [**`Storage`**](#storage): Reads data from data files and writes data to data files, also stores in app memory.
+  
+The Sequence Diagram below showcases the general Logic and Flow of the program from Launch till Exit.
+
+![Sequence Diagram](diagrams/SequenceDiagram.png)
 
 ### UI component
 
@@ -97,6 +105,14 @@ calls the validator class to validate the parameters, and then returns a command
 ![ParserUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ParserUML.puml)
 
 #### `Storage`
+
+![StorageClassUML](diagrams/StorageClassUML.png)
+The Storage class holds 4 different Lists found in the Assets collection as seen in the Class Diagram shown above. Any edits made
+to these Lists must be made by accessing them from the Storage object. The Storage class also has 4 load functions for each type of Asset,
+namely Patient, Doctor, Medicine and Appointment. These methods read in the respective text files to load existing information
+into their respective lists. The Storage class has 4 save methods that save the information found in the 4 Lists into text files
+in the CSV format. The Directory of these text files is found in the DIR String variable, the PATH for each of the 4 text files
+can be found in the PATH_MED, PATH_PAT, PATH_DOC, PATH_APP String variables respectively.
 
 ### Asset classes
 
@@ -139,8 +155,6 @@ Below is an example describing the behaviour of the `find` feature.
 * is reasonably comfortable using CLI apps
 
 ###Value proposition:
-Manage contacts faster than a typical mouse/GUI driven app
-Streamlines the updating of data and records
 
 Manage core clinic related data faster than using mouse or GUI.
 Ensure each data type conforms to certain standards with in-built validations.
