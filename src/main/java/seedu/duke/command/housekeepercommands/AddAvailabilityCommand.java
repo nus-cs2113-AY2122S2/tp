@@ -6,7 +6,7 @@ import seedu.duke.exceptions.InvalidAvailabilityException;
 import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.UserDoesNotExistException;
-import seedu.duke.HousekeeperList;
+import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.command.Command;
 import seedu.duke.storage.HousekeeperFileManager;
 

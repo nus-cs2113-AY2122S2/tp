@@ -1,4 +1,5 @@
-package seedu.duke;
+package seedu.duke.housekeeperperformancelists;
+
 
 import java.util.ArrayList;
 import java.util.Collections;

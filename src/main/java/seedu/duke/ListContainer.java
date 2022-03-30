@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import seedu.duke.lists.ItemList;
+import seedu.duke.housekeeperlists.HousekeeperList;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformanceList;
+import seedu.duke.itemlists.ItemList;
 import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.satisfactionlists.SatisfactionList;
 import seedu.duke.storage.AssignmentListFileManager;
 import seedu.duke.storage.RoomFileManager;
 import seedu.duke.storage.EventListFileManager;

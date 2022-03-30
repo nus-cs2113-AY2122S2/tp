@@ -2,7 +2,7 @@ package seedu.duke.command.itemcommands;
 
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.command.Command;
-import seedu.duke.lists.ItemList;
+import seedu.duke.itemlists.ItemList;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.InvalidViewItemsWithZeroPaxCommandException;

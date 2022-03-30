@@ -1,7 +1,7 @@
 package seedu.duke.storage;
 
-import seedu.duke.HousekeeperPerformance;
-import seedu.duke.HousekeeperPerformanceList;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformance;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformanceList;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.HousekeeperPerformanceFileNotFoundException;
 import seedu.duke.exceptions.InvalidHousekeeperPerformanceRatingException;

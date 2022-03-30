@@ -4,7 +4,7 @@ import seedu.duke.ListContainer;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.InvalidViewHousekeeperException;
-import seedu.duke.HousekeeperList;
+import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.command.Command;
 
 public class ViewHousekeeperListCommand extends Command {

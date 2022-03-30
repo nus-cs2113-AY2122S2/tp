@@ -10,6 +10,7 @@ import seedu.duke.exceptions.EmptySatisfactionCustomerException;
 import seedu.duke.exceptions.EmptySatisfactionValueException;
 import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.exceptions.InvalidSatisfactionValueException;
+import seedu.duke.satisfactionlists.Satisfaction;
 
 
 public class AddSatisfactionCommandTest {

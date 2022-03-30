@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.housekeeperlists;
 
 import seedu.duke.exceptions.InvalidUserException;
 import seedu.duke.exceptions.UserDoesNotExistException;

@@ -2,10 +2,10 @@ package seedu.duke.storage;
 
 
 import seedu.duke.exceptions.InvalidHousekeeperProfileException;
-import seedu.duke.HousekeeperList;
+import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.exceptions.HousekeeperFileNotFoundException;
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.Housekeeper;
+import seedu.duke.housekeeperlists.Housekeeper;
 import seedu.duke.exceptions.InvalidAgeException;
 import seedu.duke.exceptions.OverAgeException;
 import seedu.duke.exceptions.UnderAgeException;
