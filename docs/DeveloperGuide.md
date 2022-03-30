@@ -1,8 +1,45 @@
 # Developer Guide
 
-## Acknowledgements
+## Content Page
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [Introduction](#introduction)
+    * 
+* [Quick start](#quick-start)
+* [Command summary (Expenses)](#command-summary-expenses)
+* [Command summary (Credit Card)](#command-summary-credit-card)
+* [Features](#features)
+    * [Expenses](#expenses)
+        * [Display list of currently available commands for expenses: `help`](#display-a-list-of-commands-for-expenses)
+        * [Add an expenditure to your program: `add`](#add-an-expenditure-to-your-program-add)
+        * [Display current list of expenditures: `list` ](#display-current-list-of-expenditures-list)
+        * [Modify an expenditure on your list: `update`](#modify-an-expenditure-on-your-list-update)
+        * [Removing an expenditure on your list: `delete`](#removing-an-expenditure-on-your-list-delete)
+        * [Calculations that Mindmymoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
+            * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
+        * [Exiting MindMyMoney application: `bye`](#exiting-mindmymoney-application-bye)
+    * [Credit Card](#credit-card)
+        * [Display list of currently available commands for credit card: `help`](#display-list-of-currently-available-commands-for-credit-card-help)
+        * [Add a credit card to your program: `add`](#add-a-credit-card-to-your-program-add)
+        * [Display current list of credit cards: `list` ](#display-current-list-of-expenditures-list)
+        * [Modify a credit card on your list: `update`](#modify-a-credit-card-on-your-list-update)
+        * [Removing a credit card on your list: `delete`](#removing-a-credit-card-on-your-list-delete)
+    * [Saving the data](#saving-the-data)
+* [FAQ](#faq)
+* [Acknowledgements](#acknowledgements)
+
+## Introduction
+### Purpose
+This document specified architecture and software design decisions for the application, Mindmymoney.
+### Scope
+This describes the software architecture and software design decisions for the implementation
+of Mindmymoney. The intended audience of this document is the developers, designers, and
+software testers of Mindmymoney.
+### Mindmymoney
+`MindMyMoney` (M<sup>3</sup>) is a desktop app for managing users' personal finances, optimized for use via a
+Command Line Interface (CLI). With the application, users can track their expenses across multiple payment methods,
+calculate monthly expenditure, and set financial goals. The application is targeted at students looking to start 
+managing their personal finances.  
+
 
 ## Design
 
@@ -15,7 +52,7 @@ consist of:
 - `MMM`: Initialises the components in the correct sequence and connects them with each other. Also holds the user's
 expenditures in memory.
 - `Ui`: The User Interface of the application and deals with interaction with the user.
-- `Parser`: Deals with making sense of user commands.
+  - `Parser`: Deals with making sense of user commands.
 - `Commands`: The collection of all executable commands.
 - `Storage`: Reads data from, and writes data to the hard disk.
 
@@ -176,3 +213,7 @@ Aspect: How to make the list command easily tested using JUnit testing
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+## Acknowledgements
+
+{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}

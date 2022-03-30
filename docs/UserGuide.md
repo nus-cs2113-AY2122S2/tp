@@ -1,6 +1,6 @@
 # MindMyMoney User Guide
 
-##Content Page
+## Content Page
 
 * [Introduction](#introduction)
 * [Quick start](#quick-start)
