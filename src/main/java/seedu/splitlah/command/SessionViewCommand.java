@@ -52,7 +52,6 @@ public class SessionViewCommand extends Command {
                     + e.getMessage());
             return;
         }
-
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONVIEW_SESSION_VIEWED + sessionId);
     }
 }

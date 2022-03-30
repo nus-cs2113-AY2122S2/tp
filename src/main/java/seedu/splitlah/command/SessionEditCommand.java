@@ -49,7 +49,7 @@ public class SessionEditCommand extends Command {
     @Override
     public void run(Manager manager) {
         TextUI ui = manager.getUi();
-        Session session = null;
+        Session session;
         try {
             session = manager.getProfile().getSession(sessionId);
         } catch (InvalidDataException invalidDataException) {

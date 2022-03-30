@@ -10,6 +10,8 @@ import java.time.LocalDate;
 
 /**
  * Represents a command parser that is able to parse user arguments into a SessionCreateCommand object.
+ *
+ * @author Roy
  */
 public class SessionCreateCommandParser implements CommandParser<SessionCreateCommand> {
 
