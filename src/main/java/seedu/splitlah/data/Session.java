@@ -203,8 +203,12 @@ public class Session implements Serializable, Comparable<Session> {
 
         ArrayList<Person> involvedPersonList = deleteTarget.getInvolvedPersonList();
         if (involvedPersonList != null) {
+            boolean payerInParticipantList = involvedPersonList.contains(deleteTarget.getPersonPaid());
             for (Person person : involvedPersonList) {
                 person.removeActivityCost(activityId);
+            }
+            if (!payerInParticipantList) {
+                deleteTarget.getPersonPaid().removeActivityCost(activityId);
             }
         }
         activityList.remove(deleteTarget);
