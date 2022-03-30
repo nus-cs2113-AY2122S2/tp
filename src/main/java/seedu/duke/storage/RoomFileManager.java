@@ -1,6 +1,6 @@
 package seedu.duke.storage;
 
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.Room;
 import seedu.duke.RoomType;
 

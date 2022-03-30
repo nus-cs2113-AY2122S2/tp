@@ -4,6 +4,8 @@ package seedu.duke;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.storage.AssignmentListFileManager;
 import seedu.duke.storage.RoomFileManager;
 import seedu.duke.storage.EventListFileManager;

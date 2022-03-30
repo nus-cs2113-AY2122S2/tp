@@ -3,13 +3,13 @@ package seedu.duke.storage;
 
 import seedu.duke.exceptions.InvalidHousekeeperProfileException;
 import seedu.duke.HousekeeperList;
-import seedu.duke.HousekeeperFileNotFoundException;
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HousekeeperFileNotFoundException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.Housekeeper;
-import seedu.duke.InvalidAgeException;
-import seedu.duke.OverAgeException;
-import seedu.duke.UnderAgeException;
-import seedu.duke.NameNotStringException;
+import seedu.duke.exceptions.InvalidAgeException;
+import seedu.duke.exceptions.OverAgeException;
+import seedu.duke.exceptions.UnderAgeException;
+import seedu.duke.exceptions.NameNotStringException;
 
 import java.io.File;
 import java.io.FileNotFoundException;

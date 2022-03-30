@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.exceptions.HotelLiteManagerException;
 
 
 public class ExitCommand extends Command {

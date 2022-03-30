@@ -1,9 +1,8 @@
 package seedu.duke.command;
 
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.storage.ItemListFileManager;
 
 import java.io.IOException;
 

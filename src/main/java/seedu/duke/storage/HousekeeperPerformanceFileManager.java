@@ -2,9 +2,9 @@ package seedu.duke.storage;
 
 import seedu.duke.HousekeeperPerformance;
 import seedu.duke.HousekeeperPerformanceList;
-import seedu.duke.HotelLiteManagerException;
-import seedu.duke.HousekeeperPerformanceFileNotFoundException;
-import seedu.duke.InvalidHousekeeperPerformanceRatingException;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.HousekeeperPerformanceFileNotFoundException;
+import seedu.duke.exceptions.InvalidHousekeeperPerformanceRatingException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

@@ -3,6 +3,7 @@ package seedu.duke;
 import java.io.IOException;
 
 import seedu.duke.command.Command;
+import seedu.duke.exceptions.HotelLiteManagerException;
 
 public class Duke {
     /**

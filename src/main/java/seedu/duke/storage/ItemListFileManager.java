@@ -1,11 +1,11 @@
 package seedu.duke.storage;
 
 
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.ItemList;
 import seedu.duke.Item;
-import seedu.duke.ItemFileNotFoundException;
-import seedu.duke.InvalidItemPaxException;
+import seedu.duke.exceptions.ItemFileNotFoundException;
+import seedu.duke.exceptions.InvalidItemPaxException;
 
 import java.io.File;
 import java.io.FileNotFoundException;

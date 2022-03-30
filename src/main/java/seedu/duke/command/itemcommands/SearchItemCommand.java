@@ -1,8 +1,8 @@
 package seedu.duke.command.itemcommands;
 
 import seedu.duke.command.Command;
-import seedu.duke.HotelLiteManagerException;
-import seedu.duke.EmptyKeywordException;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.EmptyKeywordException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.ItemList;

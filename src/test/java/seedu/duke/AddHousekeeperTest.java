@@ -7,7 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.duke.command.Command;
 import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
 import seedu.duke.command.housekeepercommands.DeleteHousekeeperCommand;
+//import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.InvalidAgeException;
 import seedu.duke.exceptions.InvalidHousekeeperProfileException;
+import seedu.duke.exceptions.UnderAgeException;
+import seedu.duke.exceptions.OverAgeException;
+import seedu.duke.exceptions.NameNotStringException;
 
 
 public class AddHousekeeperTest {

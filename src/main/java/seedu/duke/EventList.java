@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidDateException;
 import seedu.duke.storage.EventListFileManager;
 
 import java.io.IOException;

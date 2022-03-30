@@ -1,15 +1,14 @@
 package seedu.duke.command.housekeepercommands;
 
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.command.Command;
 import seedu.duke.ListContainer;
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.Ui;
-import seedu.duke.UserDoesNotExistException;
-import seedu.duke.EmptyNameException;
+import seedu.duke.exceptions.UserDoesNotExistException;
+import seedu.duke.exceptions.EmptyNameException;
 import seedu.duke.HousekeeperList;
 import seedu.duke.AssignmentMap;
 import seedu.duke.storage.HousekeeperFileManager;

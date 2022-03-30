@@ -4,8 +4,8 @@ import seedu.duke.HousekeeperList;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
-import seedu.duke.HotelLiteManagerException;
-import seedu.duke.InvalidNewWeekException;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidNewWeekException;
 import seedu.duke.storage.HousekeeperFileManager;
 
 import java.io.IOException;

@@ -3,9 +3,9 @@ package seedu.duke.storage;
 import java.io.File;
 import java.io.IOException;
 
-import seedu.duke.FolderCreationFailException;
-import seedu.duke.HotelLiteManagerException;
-import seedu.duke.FileCreationFailException;
+import seedu.duke.exceptions.FolderCreationFailException;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.FileCreationFailException;
 
 public abstract class FileManager {
     public static final String FILE_SEPARATOR = "\\|";

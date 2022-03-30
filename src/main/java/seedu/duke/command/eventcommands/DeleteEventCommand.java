@@ -1,15 +1,12 @@
 package seedu.duke.command.eventcommands;
 
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.command.Command;
 
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.EventList;
-import seedu.duke.InvalidRoomNumberException;
-import seedu.duke.exceptions.InvalidHousekeeperProfileException;
-import seedu.duke.InvalidEventException;
-import seedu.duke.InvalidDateException;
+import seedu.duke.exceptions.InvalidEventException;
 
 import java.io.IOException;
 import java.util.logging.Level;

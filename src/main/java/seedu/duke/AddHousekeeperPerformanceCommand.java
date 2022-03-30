@@ -5,6 +5,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.command.Command;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.EmptyHousekeeperPerformanceNameException;
+import seedu.duke.exceptions.EmptyHousekeeperPerformanceRatingException;
+import seedu.duke.exceptions.InvalidHousekeeperPerformanceRatingException;
+import seedu.duke.exceptions.RepeatHousekeeperPerformanceNameException;
+import seedu.duke.exceptions.NonexistentHousekeeperException;
 import seedu.duke.storage.HousekeeperPerformanceFileManager;
 
 /**
