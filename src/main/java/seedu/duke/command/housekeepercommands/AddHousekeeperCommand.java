@@ -57,16 +57,16 @@ public class AddHousekeeperCommand extends Command {
     private Housekeeper extractDetails(String commandStringWithoutCommand)
             throws InvalidAgeException, InvalidHousekeeperProfileException, UnderAgeException, OverAgeException,
             NameNotStringException {
-        long slashCounts = commandStringWithoutCommand.codePoints()
-                .filter(ch -> ch == AGE_INDICATE_CHARACTER)
-                .count();
-        if (!(slashCounts == CONTAIN_ONE_SLASH_ONLY)) {
-            logger.log(Level.WARNING, "Contains more than one slash.");
-            throw new InvalidHousekeeperProfileException();
-        }
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
         if (isSymbolIncorrect) {
             logger.log(Level.WARNING, "Housekeeper command usage is found to be wrong.");
+            throw new InvalidHousekeeperProfileException();
+        }
+        long slashCounts = commandStringWithoutCommand.codePoints()
+                .filter(t -> t == AGE_INDICATE_CHARACTER)
+                .count();
+        if (!(slashCounts == CONTAIN_ONE_SLASH_ONLY)) {
+            logger.log(Level.WARNING, "Contains more than one slash.");
             throw new InvalidHousekeeperProfileException();
         }
         String[] input;
