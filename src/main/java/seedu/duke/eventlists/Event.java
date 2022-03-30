@@ -3,9 +3,6 @@ package seedu.duke.eventlists;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * 
- */
 public class Event {
     protected LocalDate at;
     public String description;
