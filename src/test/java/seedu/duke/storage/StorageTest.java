@@ -50,7 +50,7 @@ public class StorageTest {
 
     @Test
     void writeData_nullList_throwException() throws InvMgrException {
-        Storage testStorage = new Storage("test/data/read/actualData.json");
+        Storage testStorage = new Storage("test/data/save/actualData.json");
         assertThrows(NullPointerException.class, () -> testStorage.save(null));
     }
 
@@ -64,10 +64,10 @@ public class StorageTest {
         itemList.add(item2);
         itemList.add(item3);
 
-        Storage testStorage = new Storage("test/data/read/actualData.json");
+        Storage testStorage = new Storage("test/data/save/actualData.json");
         testStorage.save(itemList);
 
-        Storage expectedStorage = new Storage("test/data/read/expectedData.json");
+        Storage expectedStorage = new Storage("test/data/save/expectedData.json");
         assertStorageEquals(expectedStorage, testStorage);
     }
 
