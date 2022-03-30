@@ -281,7 +281,7 @@ The general workflow of the `group /create` command is as follows:
 7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
 8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUi#printlnMessage`.
 9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and group unique identifier. 
-10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new Group object in the Profile.
+10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new `Group` object in the `Profile` object.
 11. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created.
 
 ### Remove a group
