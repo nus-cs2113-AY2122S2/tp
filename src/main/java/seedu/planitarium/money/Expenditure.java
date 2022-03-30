@@ -48,7 +48,8 @@ public class Expenditure extends Money {
         return "e " + description + " - "
                 + amount + " - "
                 + isPermanent + " - "
-                + category;
+                + category + " - "
+                + initDate;
     }
 
     /**

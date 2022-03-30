@@ -320,4 +320,14 @@ public class ExpenditureList extends MoneyList {
             expenditureArrayList.remove(item);
         }
     }
+
+    /**
+     * Set the init date of a given expenditure object in the list.
+     *
+     * @param index    The index of the specified expenditure
+     * @param initDate Init date of the expenditure
+     */
+    public void setExpenditureInitDate(int index, LocalDate initDate) {
+        expenditureArrayList.get(index - 1).setInitDate(initDate);
+    }
 }

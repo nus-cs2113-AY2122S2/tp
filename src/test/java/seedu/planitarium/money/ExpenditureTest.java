@@ -87,7 +87,8 @@ class ExpenditureTest {
 
     @Test
     public void saveString_getString_success() {
-        String expectedString = "e food - 24.0 - false - 1";
+        String expectedString = "e food - 24.0 - false - 1"
+                + " - 2022-03-30";;
         String actualString = testItem.saveString();
         assertEquals(expectedString, actualString);
     }

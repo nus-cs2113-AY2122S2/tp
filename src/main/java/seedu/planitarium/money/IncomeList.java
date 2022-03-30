@@ -268,4 +268,14 @@ public class IncomeList extends MoneyList {
             incomeArrayList.remove(item);
         }
     }
+
+    /**
+     * Set the init date of a given income object in the list.
+     *
+     * @param index    The index of the specified income
+     * @param initDate Init date of the income
+     */
+    public void setIncomeInitDate(int index, LocalDate initDate) {
+        incomeArrayList.get(index - 1).setInitDate(initDate);
+    }
 }
