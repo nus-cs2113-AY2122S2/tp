@@ -3,11 +3,11 @@ package cpp.projects;
 import cpp.exceptions.IllegalCommandException;
 import cpp.model.ProjectList;
 import cpp.logic.CommandHandler;
+import cpp.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CommandHandlerTest {
     private static final String PROJECT1NAME = "CS2113tP";
@@ -17,6 +17,7 @@ class CommandHandlerTest {
     private static final String TODO2 = "Complete user guide.";
     private CommandHandler defaultCommandHandler;
     private ProjectList defaultProjectList;
+    private Response response;
 
 
     @BeforeEach
@@ -54,8 +55,36 @@ class CommandHandlerTest {
         assertEquals(status, "CS2113tP deleted successfully.");
     }
 
-    @Test public void testToDo() throws IllegalCommandException {
+    @Test
+    public void testToDo() throws IllegalCommandException {
         String status = defaultCommandHandler.handleUserInput(defaultProjectList, "todo 1 temp");
         assertEquals(status, "Todo temp has been added successfully.");
     }
+
+    @Test
+    public void testListProjects() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(defaultProjectList, "listprojects");
+        assertNotNull(status);
+    }
+
+    @Test
+    public void testMark() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(defaultProjectList, "mark 1 1");
+        assertEquals(status, response.markTodoSuccessfully());
+    }
+
+    @Test
+    public void testDeadline() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(defaultProjectList, "adddeadline CS2113tP 2024-12-12");
+        assertEquals(status, response.addDeadlineSuccessfully(PROJECT1NAME, "2024-12-12"));
+    }
+
+    @Test
+    public void testInvalidCommand() throws IllegalCommandException {
+        assertThrows(IllegalCommandException.class, () ->
+                defaultCommandHandler.handleUserInput(defaultProjectList,"zzzzz")
+        );
+    }
+
+
 }
