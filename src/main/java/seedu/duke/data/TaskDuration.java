@@ -9,23 +9,24 @@ import java.util.regex.Pattern;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.WrongDurationFormatException;
+import seedu.duke.util.NumberConstants;
+import seedu.duke.util.StringConstants;
 
 
 public class TaskDuration {
 
-
-    private static final String DURATION_STRING_FORMAT = "(?<duration>[1-9]\\d*\\.?\\d*|0\\.\\d*[1-9])"
-            + "\\s*(?<durationUnit>\\bm|M|min|Min|minutes|Minutes|minute|Minute"
-            + "|h|H|hours|Hours|hour|Hour|\\b|"
-            + "\\Bm|M|min|Min|minutes|Minutes|minute|Minute|h|H|hours|Hours|hour|Hour\\b)";
+    private static final long MINUTE_PER_HOUR = NumberConstants.MINUTE_PER_HOUR;
+    private static final String DURATION_GROUP_WORD = StringConstants.DURATION_GROUP_WORD;
+    private static final String DURATION_UNIT_GROUP_WORD = StringConstants.DURATION_UNIT_GROUP_WORD;
+    private static final String TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE =
+            StringConstants.TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE;
+    private static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = StringConstants.TO_STRING_FORMAT_WITH_HOUR_ONLY;
+    private static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = StringConstants.TO_STRING_FORMAT_WITH_MINUTE_ONLY;
+    private static final String DURATION_STRING_FORMAT = StringConstants.DURATION_STRING_FORMAT;
     private static final String[] HOUR_UNIT_WORD = {"h", "H", "hours", "Hours", "hour", "Hour"};
     private static final String[] MINUTE_UNIT_WORD = {"m", "M", "min", "Min", "minutes", "Minutes", "minute", "Minute"};
-    private static final String DURATION_GROUP_WORD = "duration";
-    private static final String DURATION_UNIT_GROUP_WORD = "durationUnit";
-    private static final String TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE = "%d hours %d minutes";
-    private static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = "%d hours";
-    private static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = "%d minutes";
-    private static final long MINUTE_PER_HOUR = 60;
+
+
     protected Duration taskDuration;
 
     /**
