@@ -17,12 +17,12 @@ public class TagParser extends Parser {
     public static final String TASK_MODULE = StringConstants.TASK_MODULE;
     public static final String TAG_NAME = StringConstants.TAG_NAME;
     private static final String TASK_NUMBER_STR = StringConstants.ERROR_TASK_NUMBER_FAILED;
-    
+
     // Unescaped Regex for testing:
     // ((?<tagOperation>\b(add|del)\b)?)(\s+(?<taskNumber>\d+))((\s+-m\s+(?<taskModule>\w+))?)
     // (\s+\"(?<tagName>\w+)\")(?<invalid>.*)
     private static final String TAG_FORMAT = "((?<tagOperation>\\b(add|del)\\b)?)(\\s+(?<taskNumber>\\d+))"
-            + "((\\s+-m\\s+(?<taskModule>\\w+))?)(\\s+\\\"(?<tagName>\\w+)\\\")(?<invalid>.*)";
+            + "((\\s+-m\\s+(?<taskModule>\\w+))?)(\\s+(?<tagName>\\w+))(?<invalid>.*)";
 
 
     public TagParser() {
