@@ -1,8 +1,13 @@
-package seedu.duke;
+package seedu.duke.command.customercommands;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+
+import seedu.duke.ListContainer;
+import seedu.duke.Satisfaction;
+import seedu.duke.SatisfactionList;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidCommandException;

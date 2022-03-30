@@ -1,5 +1,8 @@
-package seedu.duke;
+package seedu.duke.command.customercommands;
 
+import seedu.duke.ListContainer;
+import seedu.duke.SatisfactionList;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
 

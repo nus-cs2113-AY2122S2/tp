@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.duke.command.Command;
+import seedu.duke.command.customercommands.AddSatisfactionCommand;
 import seedu.duke.exceptions.EmptySatisfactionCustomerException;
 import seedu.duke.exceptions.EmptySatisfactionValueException;
 import seedu.duke.exceptions.InvalidCommandException;
