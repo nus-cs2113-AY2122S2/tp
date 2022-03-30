@@ -93,6 +93,14 @@ The parser parses the description of the command. It first calls the validator c
 
 #### `Storage`
 
+![StorageClassUML](diagrams/StorageClassUML.png)
+The Storage class holds 4 different Lists found in the Assets collection as seen in the Class Diagram shown above. Any edits made
+to these Lists must be made by accessing them from the Storage object. The Storage class also has 4 load functions for each type of Asset,
+namely Patient, Doctor, Medicine and Appointment. These methods read in the respective text files to load existing information
+into their respective lists. The Storage class has 4 save methods that save the information found in the 4 Lists into text files
+in the CSV format. The Directory of these text files is found in the DIR String variable, the PATH for each of the 4 text files
+can be found in the PATH_MED, PATH_PAT, PATH_DOC, PATH_APP String variables respectively.
+
 ### Asset classes
 
 
@@ -134,8 +142,6 @@ Below is an example describing the behaviour of the `find` feature.
 * is reasonably comfortable using CLI apps
 
 ###Value proposition:
-Manage contacts faster than a typical mouse/GUI driven app
-Streamlines the updating of data and records
 
 Manage core clinic related data faster than using mouse or GUI.
 Ensure each data type conforms to certain standards with in-built validations.
