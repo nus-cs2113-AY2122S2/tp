@@ -31,10 +31,15 @@ Step 2: The `Command Parser` Class would run the `parse` method and create an `A
 
 Step 3: The `AddItemCommand` class would be passed back to the `Duke` class.
 
-Step 4: The `execute` method of the `AddItemCommand` class would be run and the the `ItemList` Object would be called and the `AddItemCommand` object would pass its Item object to the `ItemList` Object's `addItemToList` method.
+Step 4: The `execute` method of the `AddItemCommand` class would be run and the `ItemList` Object would be extracted from the `List Container` object and the `AddItemCommand` object would pass its Item object to the `ItemList` Object's `addItemToList` method.
 
-Step 5: The addItemToList method would then add the `Item` object to its ArrayList of `Item` objects called listOfItems.
-Step 6: The `AddItemCommand` then call the `UI` and execute the `UI`'s `printAddItemAcknowledgementMessage` method which would print an acknowledgement message to the user informing him that the item has been added into the item list.
+Step 5: The `addItemToList` method would then call the `checkForItemDuplicates` method to check if there are any items within the item list with the same name as the item we are about to add.
+
+Step 6:I f there are is an item with a matching name found, we would then call the `UI` object and execute the `UI`'s `printItemAlreadyInTheListErrorMessage` method which would print a message informing the user that the item the user wants to add is already found within the item list and hence nothing would be added. Step 7 and 8 are skipped.
+
+Step 7: If there are no items with a matching name found, we would add the `Item` object to its ArrayList of `Item` objects called listOfItems. The `AddItemCommand` then call the `UI` and execute the `UI`'s `printAddItemAcknowledgementMessage` method which would print an acknowledgement message to the user informing him that the item has been added into the item list.
+
+Step 8: The `ItemListFileManager` object would be called and we would pass the item list to its `writeItemListToFile` method to write the updated item list into the file ListFolder/ItemList.txt.
 
 ## Implementation
 
