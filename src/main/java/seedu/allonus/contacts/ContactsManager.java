@@ -109,6 +109,16 @@ public class ContactsManager {
     }
 
     /**
+     * Returns logger attribute of this class ContactsManager.
+     *
+     * @return logger, an instance of class <code>Logger</code>, belonging to this <code>ContactsManager</code> class.
+     */
+    public Logger getLogger() {
+        return logger;
+    }
+
+
+    /**
      * Returns current contacts list.
      *
      * @return contacts list.
@@ -135,7 +145,7 @@ public class ContactsManager {
         isModified = true;
     }
 
-    private static void addContact(String userInput) {
+    private static void addContact(String userInput, boolean fromCommandLine) {
         Contact contact;
         try {
             contact = parseContact(userInput);
@@ -144,8 +154,10 @@ public class ContactsManager {
             return;
         }
         contactsList.add(contact);
-        printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact
-                + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, contactsList.size()));
+        if (fromCommandLine) {
+            printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact
+                    + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, contactsList.size()));
+        }
         isModified = true;
     }
 
@@ -155,7 +167,7 @@ public class ContactsManager {
      * @param savedContact the saved contact entry
      */
     public void loadAdd(String savedContact) {
-        addContact(savedContact);
+        addContact(savedContact, false);
     }
 
     /**
@@ -238,7 +250,7 @@ public class ContactsManager {
             } else if (userInput.startsWith("rm")) {
                 deleteContact(userInput);
             } else if (userInput.startsWith("add")) {
-                addContact(userInput);
+                addContact(userInput, true);
             } else if (userInput.startsWith("find")) {
                 findContacts(userInput);
             } else if (userInput.startsWith("edit")) {

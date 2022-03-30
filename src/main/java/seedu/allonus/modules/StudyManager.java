@@ -138,7 +138,7 @@ public class StudyManager {
             } else if (userInput.startsWith(DELETE_COMMAND)) {
                 deleteModule(userInput);
             } else if (userInput.startsWith(ADD_COMMAND)) {
-                addModule(userInput);
+                addModule(userInput, true);
             } else if (userInput.startsWith(EDIT_COMMAND)) {
                 editModule(userInput,ui);
             } else if (userInput.startsWith(FIND_COMMAND)) {
@@ -197,11 +197,16 @@ public class StudyManager {
      * @return number of items in module list.
      */
     public int getModuleCount() {
-        int count = 0;
-        for (Module m: modulesList) {
-            count++;
-        }
-        return count;
+        return modulesList.size();
+    }
+
+    /**
+     * Returns logger attribute of this class StudyManager.
+     *
+     * @return logger, an instance of class <code>Logger</code>, belonging to this <code>StudyManager</code> class.
+     */
+    public Logger getLogger() {
+        return logger;
     }
 
     /**
@@ -332,16 +337,17 @@ public class StudyManager {
      * Calls addModuleParser to parse the input string.
      * @param userInput String input that contains the add command and module attributes.
      */
-    public void addModule(String userInput) {
+    public void addModule(String userInput, boolean fromCommandLine) {
         Module newModule = addModuleParser(userInput);
         if (newModule == null) {
             return;
         }
         modulesList.add(newModule);
-        printMessage(ADD_MODULE_SUCCESS_MESSAGE);
-        printMessage(newModule.toString());
+        if (fromCommandLine) {
+            printMessage(ADD_MODULE_SUCCESS_MESSAGE);
+            printMessage(newModule.toString());
+        }
         isModified = true;
-
     }
 
     /**
@@ -350,7 +356,7 @@ public class StudyManager {
      * @param savedModule the saved module entry
      */
     public void loadAdd(String savedModule) {
-        addModule(savedModule);
+        addModule(savedModule, false);
     }
 
     /**

@@ -52,9 +52,9 @@ public class StudyManagerTest {
         String userInputCs3244 = "add m/CS3244 c/tut d/Monday t/2pm-3pm";
         String userInputEe4204 = "add m/EE4204 c/exam d/Monday t/10am-12pm";
 
-        studyManager.addModule(userInputCs2113);
-        studyManager.addModule(userInputCs3244);
-        studyManager.addModule(userInputEe4204);
+        studyManager.addModule(userInputCs2113, true);
+        studyManager.addModule(userInputCs3244, true);
+        studyManager.addModule(userInputEe4204, true);
 
         for (int i = 0; i < testList.size(); i++) {
             assertEquals(testList.get(i).getModuleCode(), studyManager.getModulesList().get(i).getModuleCode());
