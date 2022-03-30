@@ -65,6 +65,38 @@ and `ExpenditureList`.
 
 ### Commands Component
 
+The `Commands` component consists following classes: [`CommandFactory.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/CommandFactory.java)
+[`Command.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/Command.java)
+[`AddPersonCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/AddPersonCommand.java)
+[`DeletePersonCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/DeletePersonCommand.java)
+[`AddRecordCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/AddRecordCommand.java)
+[`DeleteRecordCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/DeleteRecordCommand.java)
+[`EditRecordCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/EditRecordCommand.java)
+[`HelpCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/HelpCommand.java)
+[`ListCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/ListCommand.java)
+[`ListCatCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/ListCatCommand.java)
+[`OverviewCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/OverviewCommand.java)
+[`SearchCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/SearchCommand.java)
+[`ExitCommand.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/ExitCommand.java)
+
+The `CommandFactory` provides a `getCommand()` function to get different commands according to the keywords of 
+user's instructions. This keyword is parsed by `Parser`. There're 11 cases, and it would throw an exception called 
+`UnknownInputException` if the keyword from user input is neither of the 11 cases provided. 
+
+The `Command` class is an abstract class that has abstract method ``
 <!-- {For Huilin} -->
 
 ### Parser Component

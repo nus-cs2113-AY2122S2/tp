@@ -20,8 +20,8 @@ public class DeletePersonCommand extends Command {
             "A person with uid '%d' is going to be deleted from group '%d'";
     protected static final String LOG_EXECUTE_INFO = "A person with '%d' is deleted from group '%d'";
 
-    protected int uid;
-    protected int group;
+    protected Integer uid;
+    protected Integer group;
 
     public DeletePersonCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);

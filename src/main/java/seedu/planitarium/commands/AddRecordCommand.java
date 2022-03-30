@@ -31,12 +31,12 @@ public class AddRecordCommand extends Command {
 
     protected String keyword;
     protected String description;
-    protected double amount;
-    protected boolean isPermanent;
-    protected boolean isSilent = Constants.FOR_USER;
-    protected int group;
-    protected int uid;
-    protected int category = -1;
+    protected Double amount;
+    protected Boolean isPermanent;
+    protected Boolean isSilent = Constants.FOR_USER;
+    protected Integer group;
+    protected Integer uid;
+    protected Integer category = -1;
 
     public AddRecordCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);

@@ -11,7 +11,7 @@ public class SearchCommand extends Command {
     private static final ProjectLogger logger = new ProjectLogger(className, fileName);
 
     protected String description;
-    protected int category;
+    protected Integer category;
 
     public SearchCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);

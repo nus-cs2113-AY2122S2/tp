@@ -22,8 +22,8 @@ public class AddPersonCommand extends Command {
     protected static final String LOG_EXECUTE_INFO = "'%s' is added to group '%d'";
 
     protected String name;
-    protected int group;
-    protected boolean isSilent;
+    protected Integer group;
+    protected Boolean isSilent;
 
     public AddPersonCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);

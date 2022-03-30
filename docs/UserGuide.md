@@ -22,8 +22,8 @@ you to:
 ## Table of Contents
 
 * [Quick Start](#quick-start)
-* [Quick Notes]()
-* [Features]()
+* [Quick Notes](#quick-notes)
+* [Features](#features)
     * [View all commands: `help`](#viewing-all-commands-help)
     * [Add a person: `add`](#add-a-person-add)
     * [Delete a person: `delete`](#delete-a-person-delete)
@@ -38,8 +38,8 @@ you to:
     * [Show expenditure categories: `listcat`](#show-expenditure-categories-listcat)
     * [Searching for details: `find`](#searching-for-details-find)
     * [Exit the program: `bye`](#exit-bye)
-* [Frequently Asked Questions]()
-* [Command Summary]()
+* [Frequently Asked Questions](#faq)
+* [Command Summary](#command-summary)
 
 <br/>
 
@@ -149,8 +149,11 @@ Format: `delete /g GROUP_INDEX /u USER_INDEX`
 
 Example of usage:
 
-`delete /u 1 /g 1`
+* Delete the person with uid = 1 from the Parents' group:
 
+  `delete /u 1 /g 1`
+
+*_Result_: The person with uid = 1 is deleted from the Parent's group 
 <br/>
 
 ### Add an income: `addin`
@@ -211,7 +214,19 @@ Example of usage:
 
 > Edit an income under a stated user
 
-Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
+Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX {/i INCOME /d DESCRIPTION /p <T|F>}`
+
+* **INCOME_INDEX** refers to the index of the income that you would like to modify
+* **GROUP_INDEX** refers to the index of the group that you belong to.
+* **USER_INDEX** refers to the index of that is tagged to you.
+* **DESCRIPTION** refers to the name or description of your income.
+* **INCOME** refers to the monetary value of your income.
+* **<T/(any)>** refers to whether your income is recurrent on a monthly-basis.
+
+> **Note**
+>
+> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) is optional in this case. You
+> can just modify the part that you modify.
 
 Example of usage:
 
@@ -268,7 +283,8 @@ Example of usage:
 
 > Edits an expenditure description, its value, its category index and its recurring status of a specific individual.
 
-Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
+Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX {/i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX 
+/p <T|F>}`
 
 * **USER_INDEX** refers to an index that is mapped to that individual.
 * **GROUP_INDEX** refers to an index that is mapped to the group that individual belongs to.
@@ -276,6 +292,11 @@ Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX /i EXPENDITUR
 * **EXPENDITURE** refers to the monetary value of the expenditure.
 * **CATEGORY_INDEX** refers to the category of the expenditure.
 * **<T|F>** refers to the setting of expenditure to be recurring or not recurring.
+
+> **Note**
+> 
+> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) is optional in this case. You
+> can just modify the part that you modify.
 
 Example of usage:
 
@@ -310,6 +331,8 @@ Format: `list /g GROUP_INDEX`
 
 Example of usage:
 
+* List all the members from Parents' group.
+
 `list /g 1`
 
 ![detail_list-command-screenshot]() <!-- this is a placeholder -->
@@ -336,6 +359,8 @@ Format: `find /d USER_STRING /c CATEGORY_INDEX`
 <!-- can put in notes ^ -->
 
 Example of usage:
+
+* Find all the records which descriptions include _Candy_ from Category 1.
 
 `find /d Candy /c 1`
 
