@@ -136,20 +136,15 @@ public class Parser {
             Map<String, String> newValues = ParserArguments.getAttributesMap(arguments);
 
             String name = newValues.get("n");
-            String indexStr = newValues.get("n");
+            String indexStr = newValues.get("i");
+            newValues.remove("n");
+            newValues.remove("i");
             int index = Integer.parseInt(indexStr);
-            if (newValues.isEmpty()) {
-                System.out.println("is empty");
-                return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
-            }
-            System.out.println(3);
 
             return new EditCommand(name, index, newValues);
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException mpe) {
-            System.out.println(mpe.getMessage());
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
         } catch (NumberFormatException nfe) {
-            System.out.println(nfe.getMessage());
             return new CommandResult(ERROR_INDEX_OUT_OF_BOUND);
         } catch (AssertionError ae) {
             logger.log(Level.INFO, "Assertion Error");

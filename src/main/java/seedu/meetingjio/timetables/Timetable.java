@@ -91,6 +91,25 @@ public class Timetable {
         return false;
     }
 
+    public boolean isValid() {
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                Event a = list.get(i);
+                Event b = list.get(j);
+                if (a.equals(b)) {
+                    return true;
+                }
+                if (a.overlaps(b)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Given 2 events, this method is used to compare which event comes first.
      * This is harnessed by tapping on the getDay method for the Event class, to compare the events' day.

@@ -3,7 +3,6 @@
 package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Event;
-import seedu.meetingjio.events.Lesson;
 
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
@@ -17,7 +16,6 @@ import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_ATTRIBUTE_VALUE;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
@@ -47,8 +45,7 @@ public class EditCommand extends Command {
     /**
      * Execute EditEvent command using the timetable provided.
      *
-     * @attribute
-     *masterTimetable MasterTimetable
+     * @param masterTimetable MasterTimetable
      *
      */
     @Override
@@ -63,11 +60,7 @@ public class EditCommand extends Command {
                 editEvent(event, originalValues);
                 return editAbort(ERROR_INVALID_ATTRIBUTE_VALUE);
             }
-            if (timetable.isDuplicate(event)) {
-                editEvent(event, originalValues);
-                return editAbort(ERROR_DUPLICATE_EVENT);
-            }
-            if (timetable.isOverlap(event)) {
+            if (timetable.isValid()) {
                 editEvent(event, originalValues);
                 return editAbort(ERROR_OVERLAPPING_EVENT);
             }
@@ -81,19 +74,20 @@ public class EditCommand extends Command {
     }
 
     private Boolean editEvent(Event event, Map<String, String> eventInfo) {
-        for (Map.Entry<String, String> entry : eventInfo.entrySet()) {
-            String attribute = entry.getKey();
-            String value = eventInfo.get(attribute);
-            try {
-                editHelper(event, attribute, value);
-            } catch (InvalidAttributeValueException iave) {
-                return false;
+        try {
+            for (Map.Entry<String, String> entry : eventInfo.entrySet()) {
+                String attribute = entry.getKey();
+                String value = eventInfo.get(attribute);
+                editAttribute(event, attribute, value);
             }
+            editTimes(event, eventInfo);
+            return true;
+        } catch (InvalidAttributeValueException iave) {
+            return false;
         }
-        return true;
     }
 
-    private void editHelper(Event event, String attribute, String value) throws InvalidAttributeValueException {
+    private void editAttribute(Event event, String attribute, String value) throws InvalidAttributeValueException {
         switch (attribute) {
         case TITLE:
             event.setTitle(value);
@@ -114,26 +108,33 @@ public class EditCommand extends Command {
                 throw new InvalidAttributeValueException();
             }
             break;
-        case START_TIME:
-            try {
-                int startTime = Integer.parseInt(value);
-                int endTime = event.getEndTime();
-                ParserHelperMethods.checkTime(startTime, endTime);
-            } catch (InvalidTimeException | NumberFormatException ite) {
-                throw new InvalidAttributeValueException();
-            }
-            break;
-        case END_TIME:
-            try {
-                int endTime = Integer.parseInt(value);
-                int startTime = event.getStartTime();
-                ParserHelperMethods.checkTime(startTime, endTime);
-            } catch (InvalidTimeException | NumberFormatException ite) {
-                throw new InvalidAttributeValueException();
-            }
-            break;
         default:
             return;
+        }
+    }
+
+    private void editTimes(Event event, Map<String, String> eventInfo) throws InvalidAttributeValueException {
+        try {
+            if (!eventInfo.containsKey(START_TIME) && !eventInfo.containsKey(END_TIME)) {
+                return;
+            }
+
+            int startTime = event.getStartTime();
+            int endTime = event.getEndTime();
+            if (eventInfo.containsKey(START_TIME)) {
+                String newStartTime = eventInfo.get(START_TIME);
+                startTime = Integer.parseInt(newStartTime);
+            }
+            if (eventInfo.containsKey(END_TIME)) {
+                String newEndTime = eventInfo.get(END_TIME);
+                endTime = Integer.parseInt(newEndTime);
+            }
+
+            ParserHelperMethods.checkTime(startTime, endTime);
+            event.setStartTime(startTime);
+            event.setEndTime(endTime);
+        } catch (InvalidTimeException | NumberFormatException ite) {
+            throw new InvalidAttributeValueException();
         }
     }
 
