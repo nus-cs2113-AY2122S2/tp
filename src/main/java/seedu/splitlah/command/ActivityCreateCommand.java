@@ -212,7 +212,7 @@ public class ActivityCreateCommand extends Command {
         TextUI ui = manager.getUi();
         if (hasDuplicates) {
             ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_ACTIVITY);
-            Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_ACTIVITY);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEACTIVITY);
             return;
         }
         try {

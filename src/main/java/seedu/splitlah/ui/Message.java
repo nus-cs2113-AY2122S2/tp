@@ -171,15 +171,21 @@ public abstract class Message {
                     + "Please rectify and try again.";
     public static final String ASSERT_PERSONLIST_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exist but not detected.";
-    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_SESSION =
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATESESSION =
             "An Session object failed to be added into the list of sessions because there are duplicate names in"
                     + "the person list.";
-    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_GROUP =
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEGROUP =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
                     + "the person list.";
-    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_ACTIVITY =
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEACTIVITY =
             "An Activity object failed to be added into the list of activities because there are duplicate names in"
                     + "the involved list.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITSESSION =
+            "An Session object failed to be added into the list of sessions because there are duplicate names in"
+                    + "the person list.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP =
+            "A Group object failed to be added into the list of groups because there are duplicate names in"
+                    + "the person list.";
 
     // Name
     public static final String ERROR_NAME_INVALID_NAME =
@@ -214,6 +220,10 @@ public abstract class Message {
             "There are currently no groups stored.";
     public static final String ERROR_PROFILE_GROUP_NOT_IN_LIST =
             "The group that you have specified was not found.";
+    public static final String LOGGER_PROFILE_SESSION_NOT_IN_LIST =
+            "The Session object was not found in the list";
+    public static final String LOGGER_PROFILE_GROUP_NOT_IN_LIST =
+            "The Group object was not found in the list";
 
     // Storage
     public static final String ERROR_STORAGE_FILE_NOT_FOUND =
@@ -420,9 +430,8 @@ public abstract class Message {
             "All the groups have been listed.";
 
     // Group Edit Command
-    public static final String ERROR_GROUPEDIT_DUPLICATE_NAME =
-        "There are duplicate names in the person list for the group you are trying to edit. "
-            + "Please rectify and try again.";
+    public static final String ASSERT_GROUPEDIT_GROUP_ID_INVALID =
+            "Group ID is less than or equals to zero.";
 
     // Group Edit Command Parser
     public static final String ERROR_GROUPEDIT_NO_EDIT_DELIMITERS_FOUND =

@@ -7,6 +7,8 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
+import java.util.logging.Level;
+
 /**
  * Represents a command object that edits a Group object.
  *
@@ -28,6 +30,7 @@ public class GroupEditCommand extends Command {
      * @param groupId       An integer that represents the group unique identifier for the group to be edited.
      */
     public GroupEditCommand(String[] involvedList, String groupName, int groupId) {
+        assert groupId > 0 : Message.ASSERT_GROUPEDIT_GROUP_ID_INVALID;
         this.involvedList = involvedList;
         this.groupName = groupName;
         this.groupId = groupId;
@@ -46,6 +49,7 @@ public class GroupEditCommand extends Command {
             group = manager.getProfile().getGroup(groupId);
         } catch (InvalidDataException invalidDataException) {
             ui.printlnMessageWithDivider(invalidDataException.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_PROFILE_GROUP_NOT_IN_LIST);
             return;
         }
 
@@ -53,6 +57,7 @@ public class GroupEditCommand extends Command {
             boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
             if (hasDuplicates) {
                 ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP);
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP);
                 return;
             }
             PersonList newPersonList = new PersonList();

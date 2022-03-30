@@ -82,7 +82,7 @@ public class GroupCreateCommand extends Command {
         boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
         if (hasDuplicates) {
             ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP);
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_GROUP);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEGROUP);
             return;
         }
 
