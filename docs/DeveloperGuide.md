@@ -101,7 +101,7 @@ As TextUI handles all input and output streams, these streams can be changed wit
 ### Parser Component
 ![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)
 <br>
-The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class
+The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class,
   as well as the `CommandParser` class and its subclasses.<br>
 * The `Parser` class provides utility methods to parse commands and arguments from the user and
   return a `Command` object representing an instruction that the user has for SplitLah.<br>
@@ -112,7 +112,7 @@ The `Parser` component consists of the `Parser` class, `ParserUtils` class, `Par
   subclass of the `Command` class.
 
 The general workflow of the `Parser` component is as follows:
-1. When required to parse for a command, the running `SplitLah` object will pass a String object containing
+1. When required to parse for a command, the running `SplitLah` object will pass a `String` object containing
    the user input to `Parser` class.
 2. `Parser` class instantiates a new `XYZCommandParser` object corresponding to the user input 
    and passes the user input to it.
@@ -128,7 +128,7 @@ The general workflow of the `Parser` component is as follows:
 ### Command Component
 ![Command Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/CommandComponent.drawio.png)
 <br>
-The `Command` component consist of the Command class and all the subclasses of the Command class
+The `Command` component consists of the Command class and all the subclasses of the Command class
 (also referred to as XYZCommand collectively).
 * The subclasses include _data related commands_ such as `SessionJKLCommand`, `ActivityJKLCommand` and `GroupJKLCommand`,
   each representing commands that work with `Session`, `Activity` and `Group` classes respectively
