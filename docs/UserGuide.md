@@ -153,7 +153,7 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 <br>
 
 ### Deleting a session: `session /delete`
-Deletes an existing session so that you can remove sessions that you don't need.<br>
+Deletes an existing session so that you can remove sessions that you do not need.<br>
 
 >Format: `session /delete /sid [SESSION_ID]`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
@@ -312,7 +312,7 @@ Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.<br>
 <br>
 
 ### Deleting an activity: `activity /delete`
-Deletes an existing activity from a particular session.<br>
+Deletes an existing activity from a particular session so that you can remove activities that you do not need.<br>
 
 >Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >
