@@ -301,12 +301,12 @@ The general workflow of the `group /view` command is as follows:
 3. `GroupViewCommand#run` method is then invoked to run the `group /view` command.
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called before a group within 
 the list of groups can be retrieved.
-5. The `GroupViewCommand` object will then run the `Profile#getGroup` method to retrieve the group represented by the
+5. The `GroupViewCommand` object runs the `Profile#getGroup` method to retrieve the group represented by the
 groupId provided.
-   1. If the group with requested groupId does not exist, an error message will be printed out with
+   1. If the group with requested groupId does not exist, an error message is printed out with
    `TextUI#printlnMessage`.
-   2. Else, the string representing the details of the requested group will be retrieved using the `Group#toString`
-   method. The string will then be printed out with `TextUI#printlnMessageWithDivider`.
+   2. Else, the string representing the details of the requested group is retrieved using the `Group#toString`
+   method. The string is then printed out with `TextUI#printlnMessageWithDivider`.
 
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
@@ -324,14 +324,14 @@ The general workflow of the `group /list` command is as follows:
 3. `GroupListCommand#run` method is then invoked to run the `group /list` command.
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called
 before the list of groups can be retrieved.
-5. The `GroupListCommand` object will then run `Profile#getGroupListSummaryString` method to retrieve a string
+5. The `GroupListCommand` object runs `Profile#getGroupListSummaryString` method to retrieve a string
 representing the summaries of the groups stored.
-   1. If there are no groups stored in the `Profile` object, a string representing an empty list of groups will be
+   1. If there are no groups stored in the `Profile` object, a string representing an empty list of groups is
    returned.
    2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of groups,
    calling `TableFormatter#addRow` for each group to create a table with the summary of each group. A string
-   representing the table will then be returned.
-6. The string retrieved will be printed out with `TextUI#printlnMessage` and the control is given back to `SplitLah`.
+   representing the table is then returned.
+6. The string retrieved is printed out with `TextUI#printlnMessage` and the control is given back to `SplitLah`.
 
 ## Product scope
 ### Target user profile
