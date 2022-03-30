@@ -82,17 +82,19 @@ How the Command class works:
 * Each method in the `Command` class would call on an `asset` class method which will manipulate the attributes inside it
 
 #### `Validator`
-The validator ensures that the parameters entered are correct. It checks the number of parameters entered, and ensure
-they are of the correct format. It throws a `HalpmiException` if the parameters
+![ValidatorClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ValidatorClassUML.puml)
+The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters
 entered are invalid.
-
 For example, validateAddPatient validates the parameter of `add patient` command, ensuring each parameter is in correct
-format.
+format. Please refer to the below sequence diagram for a clearer understanding.
+![ValidatorUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ValidatorUML.puml)
 
 
 #### `Parser`
+![ParserClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ParserClassUML.puml)
 The parser parses the description of the command. It first checks the number of parameters entered is correct and 
 calls the validator class to validate the parameters, and then returns a command if the validation is successful.
+![ParserUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ParserUML.puml)
 
 #### `Storage`
 
