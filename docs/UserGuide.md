@@ -45,6 +45,7 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
   * [Group Management](#group-management)
     * [Creating a group: `group /create`](#creating-a-group-group-create)
     * [Deleting a group: `group /delete`](#deleting-a-group-group-delete)
+    * [Editing a group: `group /edit`](#editing-a-group-group-edit)
     * [Viewing a group: `group /view`](#viewing-a-group-group-view)
     * [Listing all groups: `group /list`](#listing-all-groups-group-list)
   * [Miscellaneous](#miscellaneous)
@@ -554,7 +555,7 @@ Edits an existing group so that you can change details of a group.<br>
 
 >Format: `group /edit /gid [GROUP_ID] [</n [GORUP_NAME]>] [</pl [NAME1 NAME2...]>]`
 >* `[GROUP_ID]` refers to the unique identifier of the group.
-   >    * The unique identifier for a gorup can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+>    * The unique identifier for a gorup can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
 
 <br>
 
@@ -563,11 +564,13 @@ Edits an existing group so that you can change details of a group.<br>
 > - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
 > - There are 2 editable fields, group name and the people involved in the session.
 > - When editing the people involved, existing participants must be included in the command.
-    >  - Example: If the group previously created had Alice and Bob with group ID of 1,
-         >  and you wish to edit it to include charlie a valid edit command would be `group /edit /sid /pl Alice Bob Charlie`.
+>  - Example: If the group previously created had Alice and Bob with group ID of 1,
+>  and you wish to edit it to include charlie a valid edit command would be `group /edit /sid /pl Alice Bob Charlie`.
 >
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the group would be edited.
+
+<br>
 
 Examples of usage:
 - A group with a unique identifier of 1 was previously created, and named Class Outing with Alice and Bob involved.
@@ -581,9 +584,8 @@ Examples of usage:
 - Edit the group to include charlie. <br>
   `group /edit /gid 1 /pl Alice Bob Charlie` <br>
   ![Group Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[2].png)
-
-<br>
-<br>
+  <br>
+  <br>
 
 ### Viewing a group: `group /view`
 Displays details about a group so that you can review the group's details.<br>
