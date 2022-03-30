@@ -31,11 +31,11 @@ public class Calculations {
      *
      * @param input           The month to calculate expenditure for.
      * @param expenditureList The list containing all expenditures to search for.
-     * @throws MindMyMoneyException when findItemsInList throws MindMyMoneyException.
+     * @throws MindMyMoneyException When findItemsInList throws MindMyMoneyException.
      */
     public static void calculateExpenditurePerMonth(String input, ExpenditureList expenditureList)
         throws MindMyMoneyException {
-        if (!isValidInput(input)){
+        if (!isValidInput(input)) {
             throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
         }
         ArrayList<Expenditure> foundItems = findItemsInList(input, TIME.toString(), expenditureList);

@@ -12,7 +12,9 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.Income;
 import seedu.mindmymoney.userfinancial.User;
 
-import static seedu.mindmymoney.constants.Flags.*;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 
 /**
  * Represents the List command.

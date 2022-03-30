@@ -91,20 +91,15 @@ public class AddCommand extends Command {
         if (capitalise(paymentMethod).equals("Cash")) {
             paymentMethod = capitalise(paymentMethod);
         }
-
         String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
         testExpenditureCategory(inputCategory);
         String category = capitalise(inputCategory);
-
         String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
         testDescription(description);
-
         String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
         testExpenditureAmount(amountAsString);
-
         float amountAsFloat = Float.parseFloat(amountAsString);
         float amountInt = formatFloat(amountAsFloat);
-
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
         if (!isValidInput(inputTime)) {
             throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
