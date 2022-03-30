@@ -209,8 +209,8 @@ The general workflow of the `session /view` command is as follows:
 3. `SessionViewCommand#run` method is then invoked to run the `session /view` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
 5. The `SessionViewCommand` object then runs the `Profile#getSession` method to retrieve the session represented
-   by the `sessionId` provided.
-   1. If the session with the requested sessionId does not exist, an error message is printed out with 
+   by the session unique identifier provided.
+   1. If the session with the requested session unique identifier does not exist, an error message is printed out with 
       `TextUI#printlnMessage`.
    2. Else, a `String` object representing the details of the requested session is retrieved using the 
       `Session#toString` method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
