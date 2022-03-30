@@ -41,7 +41,7 @@ workings behind HALPMI.
 
 ### How to read the Guide?
 The User Guide is structured in a way that it is straight-forward and has a logical flow. Hence it should be easy for any User
-like you to get started with HALPMI immediately. 
+like you to get started with HALPMI immediately.
 
 Before reading, it is noteworthy to understand some formats and keywords used in this Guide for better clarity.
 * Command - Command refers to the text input that you will be providing on the CLI as and when prompted by HALPMI.
@@ -56,7 +56,7 @@ command.
 
 ### Setting Up Java
 
-Firstly you need to have Java 11 or above installed in your computer. If you are not sure on how to check if you have
+Firstly, you need to have Java 11 or above installed in your computer. If you are not sure on how to check if you have
 Java 11 installed on your computer, you can refer to [Check Java](https://www.howtogeek.com/717330/how-to-check-your-java-version-on-windows-10/).
 
 If you do not have Java already installed...
@@ -328,9 +328,15 @@ To find a doctor you would have to provide one of these parameters:
 6. Date Of Birth (DOB): `dob`
 7. Specialisation: `specialization`
 
-Format:`find doctor /info [parameter], [parameter of doctor]`
+Format: `find doctor /info [parameter], [keyword to find]`
 
-Example: `find doctor /info name, Jimmy`
+Example 1: `find doctor /info name, Jimmy`
+Example 2: `find doctor /info nric, S1234567X`
+Example 3: `find doctor /info age, 23`
+Example 4: `find doctor /info gender, M`
+Example 5: `find doctor /info address, 15 King's Avenue`
+Example 6: `find doctor /info dob, 1999-12-31`
+Example 7: `find doctor /info specialization, Dermatology`
 
 
 #### FIND PATIENT
@@ -347,9 +353,15 @@ To find a patient you would have to provide one of these parameters using the gi
 6. Date Of Birth (DOB): `dob`
 7. Date Of Admission (DOA): `admissiondate`
 
-Format:`find patient /info [parameter], [parameter of patient]`
+Format: `find patient /info [parameter], [keyword to find]`
 
-Example: `find patient /info nric, S7682373L`
+Example 1: `find patient /info name, Steven Oz`
+Example 2: `find patient /info nric, S1234567X`
+Example 3: `find patient /info age, 54`
+Example 4: `find patient /info gender, M`
+Example 5: `find patient /info address, 15 King's Avenue`
+Example 6: `find patient /info dob, 1999-12-31`
+Example 7: `find patient /info admissiondate, 2022-03-11`
 
 #### FIND MEDICINE
 
@@ -363,9 +375,14 @@ To find a medicine you would have to provide one of these parameters using the g
 4. Side Effects: `sideeffects`
 5. Quantity: `quantity`
 
-Format:`find medicine /info [parameter], [parameter of medicine]`
+Format: `find medicine /info [parameter], [keyword to find]`
 
-Example: `find medicine /info name, Paracetamol`
+Example 1: `find medicine /info name, Paracetamol`
+Example 2: `find medicine /info id, S125`
+Example 3: `find medicine /info dosage, 500`
+Example 4: `find medicine /info expiry, 2022-06-30`
+Example 5: `find medicine /info sideeffects, Headache`
+Example 6: `find medicine /info quantity, 10`
 
 ### Additional Features
 
@@ -396,9 +413,9 @@ When you start HalpMi for the first time, the following directory and files woul
 ```
 data/        // Primary resource directory for HalpMi
     ├── doctor.txt   // Text file containing doctor list
-    ├── patient.txt    // Text file containing patient list 
-    ├── medicine.txt       // Text file containing medcine list 
-    └── appointment.txt    // Text file containing appointment list 
+    ├── patient.txt    // Text file containing patient list
+    ├── medicine.txt       // Text file containing medcine list
+    └── appointment.txt    // Text file containing appointment list
 ```
 Do note that the directory (and by extension, the files) will be created in your terminal's
 **current working directory**. Thus, it is highly recommended for you to create a new directory
@@ -448,4 +465,8 @@ TO BE UPDATED
 | `delete patient`   | `delete patient /info [nric]`<br />e.g. `delete patient /info S1234567A`|
 | `delete medicine`  | `delete medicine /info [batch id]`<br />e.g. `delete medicine /info S234` |
 | `delete appointment`| `delete appointment /info [appointment id]`<br />e.g. `delete appointment /info A123` |
+| `find doctor`    | `find doctor /info [parameter], [keyword to find]`<br />e.g.`find doctor /info name, Jimmy`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or specialization) |
+| `find patient`    | `find patient /info [parameter], [keyword to find]`<br />e.g.`find patient /info name, Steven Oz`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or admissiondate) |
+| `find medicine`    | `find medicine /info [parameter], [keyword to find]`<br />e.g.`find medicine /info name, Paracetamol`<br />e.g.parameter must be one of the six (name, id, dosage, expiry, sideeffects, quantity) |
 | `to be updated`    | `to be updated` |
+

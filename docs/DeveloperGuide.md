@@ -71,23 +71,32 @@ The Sequence Diagram below showcases the general Logic and Flow of the program f
 
 ### UI component
 
+![UIClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/UIClassUML.png)
+<br>
+How the UI class works:
+* Based on the architecture sequence diagram, `Manager` class calls readCommand method in `UI` class and returns the UserInput
+* Afterwards, the `Manager` class calls readParameters method in `UI` class and returns another UserInput
+* Finally, the `Manager` class calls print method in `UI` class which in turn calls `Status` enum and returns the constant
+
 ### Manager component
 
-![ManagerUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ManagerUML.png)
+![ManagerUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ManagerClassUML.png)
 <br>
 How the Manager class works:
-* When `Duke` class instantiates a `Manager` object and calls `runLoop` method, the program will execute a while loop
-* The while loop only halts when `isTerminated` boolean becomes true. The programme exits
-* In the while loop, there is a switch statement. It calls a `Command/UI` method based on a commandWord
-* The commandWord determines which method is called
+* When `Duke` class instantiates a `Manager` object and calls runLoop method, the program will execute a while loop
+* In the while loop, there is a switch condition
+* Based on the parameter provided to the switch, it will call the respective methods in UI, Parser & Command classes
+* The while loop only halts when isTerminated boolean becomes true. Then, the programme exits
 
 ### Helper Classes
 #### `Command`
 
-![CommandUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/CommandUML.png)
+![CommandUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/CommandClassUML.png)
 How the Command class works:
-* The `Manager` class calls specific methods in `Command` class
-* Each method in the `Command` class would call on an `asset` class method which will manipulate the attributes inside it
+* Based on the architecture sequence diagram, the `Parser` class calls the `Validator` class to check if the inputs are valid
+* If it is valid, the `Command` subclass executes its method
+* The subclass is based on whether the user wants to access either the `Doctor`, `Patient`, `Medicine` or `Appointment` asset list class
+* The input parameters determine which of the `Command` subclass is used
 
 #### `Validator`
 ![ValidatorClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ValidatorClassUML.puml)
@@ -197,7 +206,7 @@ Device Environment:
 ## Glossary
 * *FUllNAME* - Standard form for fullname of patients and doctors is a String value with no spaces
 * *NRIC* - Standard form for nric of patients and doctors is a String value with no spaces
-* *AGE* - Standard form for age is an int value more than 0 
+* *AGE* - Standard form for age is an int value more than 0
 * *GENDER* - Standard form for gender of patients and doctors is a char value of "M" or "F"
 * *ADDRESS* - Standard form for address is a String value with no spaces
 * *DOB* - Standard form for date-of-birth is a String value with no spaces
@@ -207,7 +216,7 @@ Device Environment:
 * *DOSAGE* - Standard form for dosage of medicine is an int value, standard unit milligrams
 * *EXPIRY* - Standard form for expiry of medicine is a String value with no spaces
 * *SIDEEFFECTS* - Standard form for side effects of medicine is a String value with no spaces
-* *QUANTITY* - Standard form for quantity of medicine is an int value 
+* *QUANTITY* - Standard form for quantity of medicine is an int value
 * *APPOINTMENTID* - Standard form for appointment id is a String value with no spaces
 * *APPOINTMENTDETAILS* - Standard form for appointment details is a String value
 
