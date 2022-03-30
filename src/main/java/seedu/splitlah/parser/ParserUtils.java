@@ -18,6 +18,7 @@ import seedu.splitlah.parser.commandparser.SessionEditCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
+import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.format.DateTimeFormatter;
@@ -437,6 +438,9 @@ public class ParserUtils {
         case GroupDeleteCommand.COMMAND_TEXT:
             delimiterList = GroupDeleteCommand.COMMAND_DELIMITERS;
             break;
+        case GroupEditCommandParser.COMMAND_TEXT:
+            delimiterList = GroupEditCommandParser.COMMAND_DELIMITERS;
+            break;
         case GroupViewCommandParser.COMMAND_TEXT:
             delimiterList = GroupViewCommandParser.COMMAND_DELIMITERS;
             break;
@@ -490,6 +494,8 @@ public class ParserUtils {
         case GroupCreateCommand.COMMAND_TEXT:
             // Fallthrough
         case GroupDeleteCommand.COMMAND_TEXT:
+            // Fallthrough
+        case GroupEditCommandParser.COMMAND_TEXT:
             // Fallthrough
         case GroupListCommand.COMMAND_TEXT:
             // Fallthrough
