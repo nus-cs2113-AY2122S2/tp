@@ -34,6 +34,11 @@ public class AddEventCommand extends Command {
             logger.log(Level.INFO, "only one field entered");
             throw new InvalidEventException();
         }
+
+        if (description.equals("")) {
+            logger.log(Level.INFO, "no description added");
+            throw new InvalidEventException();
+        }
         String at = input[1].trim();
         if (at.isEmpty()) {
             throw new InvalidEventException();
