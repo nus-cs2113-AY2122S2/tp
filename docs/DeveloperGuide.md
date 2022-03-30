@@ -222,10 +222,11 @@ The general workflow of the `session /create` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionCreateCommand` object.
 3. `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
-4. Once the command starts to run, `SessionCreateCommand` class checks if there is an existing session with the same session name.
+4. Once the command runs, `SessionCreateCommand#run` method checks if there is an existing session with the same session name.
 5. If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUi#printlnMessage`.
 6. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
-7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile#addSession` is called to store the new `Session` object in the `Profile` object.
+7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
+which is used to call the `Profile#addSession` method in order to store the new `Session` object.
 8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUi#printlnMessage`.
 
@@ -247,12 +248,11 @@ The general workflow of the `session /delete` command is as follows:
    before the list of sessions can be retrieved.
 5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the session with the specified 
 session unique identifier from the list of sessions.
-   1. If the specified session unique identifier cannot be found, a `String` object 
-   representing an error message is returned.
+   1. If the specified session unique identifier cannot be found, an exception is thrown with an error message.
    2. Else the `Session` object with the specified session unique identifier is returned.
-6. The returned `Session` object is then removed from the list of sessions stored in `Profile` object.
-7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
+   3. The `Profile#removeSession` method is called to remove the `Session` object from the list of sessions stored in `Profile` object.
+6. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+7. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
 
 ### View a session
 ### List sessions
