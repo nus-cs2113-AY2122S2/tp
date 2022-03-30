@@ -4,7 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import cpp.Constants;
+import cpp.ui.Constants;
 
 public class Deadline {
 
