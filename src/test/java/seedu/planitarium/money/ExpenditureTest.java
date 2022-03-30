@@ -21,7 +21,7 @@ class ExpenditureTest {
 
     @BeforeEach
     public void setUp() {
-        testItem = new Expenditure("food", 24.0, 1, false);
+        testItem = new Expenditure("food", 24, 2, false);
     }
 
     @Test
