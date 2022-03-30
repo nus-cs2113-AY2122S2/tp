@@ -5,7 +5,7 @@ import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
-import seedu.duke.helper.command.CommandLineTable;
+import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.finder.MedicineFinder;
 
 import java.time.LocalDate;
@@ -47,7 +47,6 @@ public class MedicineList extends List {
                 Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],
                 Integer.parseInt(parameterArray[5]));
         medicines.add(newMedicine);
-        UI.printParagraph("Medicine has been added");
     }
 
     public void find(String[] command) {
@@ -99,7 +98,6 @@ public class MedicineList extends List {
         for (int i = 0; i < getSize(); i++) {
             if (medicines.get(i).getMedicineId().equals(medicineId)) {
                 medicines.remove(i);
-                UI.printParagraph("Medicine has been removed");
                 return;
             }
         }
@@ -116,12 +114,14 @@ public class MedicineList extends List {
         throw new NotFoundException("There are no medicines with given Batch ID!");
     }
 
-    public void viewExpired() {
+    public void viewExpired() throws HalpmiException {
         CommandLineTable medicineTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
-
+        if (expiredMedicines.size() == 0) {
+            throw new HalpmiException("There are no expired medicines.");
+        }
         for (Medicine medicine : expiredMedicines) {
             medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
                     String.valueOf(medicine.getDosage()),
@@ -131,7 +131,7 @@ public class MedicineList extends List {
         medicineTable.print();
     }
 
-    public void updateStock() {
+    public void updateStock() throws HalpmiException {
         for (int i = 0; i < medicines.size(); i++) {
             LocalDate date = LocalDate.parse(medicines.get(i).getExpiry());
             LocalDate today = LocalDate.now();

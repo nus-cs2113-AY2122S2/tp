@@ -3,20 +3,27 @@ package seedu.duke.assets;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
+import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.UI;
-import seedu.duke.helper.command.CommandLineTable;
+import seedu.duke.helper.finder.AppointmentFinder;
 
 import java.util.ArrayList;
 
 public class AppointmentList extends List {
     private ArrayList<Appointment> appointments = new ArrayList<>();
+    private ArrayList<Appointment> returnedFinderArray = new ArrayList<>();
 
+    public Appointment getAppointment(String appointmentId) {
+        for (Appointment appointment : appointments) {
+            if (appointment.getAppointmentId().equals(appointmentId)) {
+                return appointment;
+            }
+        }
+        return null;
+    }
+    
     public ArrayList<Appointment> getList() {
         return appointments;
-    }
-
-    public int getSize() {
-        return appointments.size();
     }
 
     @Override
@@ -31,7 +38,6 @@ public class AppointmentList extends List {
                 addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4],
                 addAppointmentParameters[5], addAppointmentParameters[6]);
         appointments.add(newAppointment);
-        UI.printParagraph("Appointment has been added");
         assert appointments.size() == numberOfAppointmentsBefore + 1;
     }
 
@@ -72,7 +78,7 @@ public class AppointmentList extends List {
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
         if (appointments.size() == 0) {
-            throw new HalpmiException("Doctor list is empty, please add doctor");
+            throw new HalpmiException("Appointment list is empty, please add appointment");
         }
         for (Appointment appointment : appointments) {
             appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
@@ -83,99 +89,95 @@ public class AppointmentList extends List {
     }
 
     @Override
-    public void view(String parameters) throws HalpmiException {
-        String[] parametersArray = parameters.split(",");
-        String criteria = parametersArray[0].trim();
-        String input = parametersArray[1].trim();
-        ArrayList<Appointment> foundAppointments = new ArrayList<>();
-        switch (criteria) {
-        case "appointment id":
-            for (int i = 0; i < appointments.size(); i++) {
-                if (appointments.get(i).getAppointmentId().equals(input)) {
-                    foundAppointments.add(appointments.get(i));
-                    assert foundAppointments.size() != 0;
-                } else {
-                    throw new HalpmiException("Appointment Id doesnt exist, please try again");
-                }
-            }
-            break;
-        case "patient name":
-            for (int i = 0; i < appointments.size(); i++) {
-                if (appointments.get(i).getPatientName().equals(input)) {
-                    foundAppointments.add(appointments.get(i));
-                    assert foundAppointments.size() != 0;
-                } else {
-                    throw new HalpmiException("Appointment Id doesnt exist, please try again");
-                }
-            }
-            break;
-        case "doctor name":
-            for (int i = 0; i < appointments.size(); i++) {
-                if (appointments.get(i).getDoctorName().equals(input)) {
-                    foundAppointments.add(appointments.get(i));
-                    assert foundAppointments.size() != 0;
-                } else {
-                    throw new HalpmiException("Doctor name doesnt exist, please try again");
-                }
-            }
-            break;
-        case "date":
-            for (int i = 0; i < appointments.size(); i++) {
-                if (appointments.get(i).getAppointmentDate().equals(input)) {
-                    foundAppointments.add(appointments.get(i));
-                    assert foundAppointments.size() != 0;
-                } else {
-                    throw new HalpmiException("Date doesnt exist, please try again");
-                }
-            }
-            break;
-        case "patient nric":
-            for (int i = 0; i < appointments.size(); i++) {
-                if (appointments.get(i).getPatientNric().equals(input)) {
-                    foundAppointments.add(appointments.get(i));
-                    assert foundAppointments.size() != 0;
-                } else {
-                    throw new HalpmiException("Patient nric doesnt exist, please try again");
-                }
-            }
-            break;
-        case "doctor nric":
-            for (int i = 0; i < appointments.size(); i++) {
-                if (appointments.get(i).getDoctorNric().equals(input)) {
-                    foundAppointments.add(appointments.get(i));
-                    assert foundAppointments.size() != 0;
-                } else {
-
-                    throw new HalpmiException("Doctor doesnt exist, please try again");
-                }
-            }
-            break;
-        default:
-            UI.printParagraph("Invalid search criteria! The valid criteria are:\n"
-                    + "patient name\n"
-                    + "patient name\n"
-                    + "doctor name\n"
-                    + "date\n"
-                    + "nric\n"
-                    + "Please try again!");
-            assert foundAppointments.size() == 0;
-            return;
+    public void view(String appointmentId) throws HalpmiException {
+        Appointment foundAppointment = getAppointment(appointmentId);
+        if (foundAppointment == null) {
+            throw new HalpmiException("Appointment doesn't exist please try again!");
         }
         CommandLineTable appointmentTable = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
-        for (Appointment appointment: foundAppointments) {
-            if (appointmentTable == null) {
-                appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
-                        appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
-                        appointment.getAppointmentDate(), appointment.getAppointmentDetails());
-            }
-            appointmentTable.print();
-        }
-        throw new HalpmiException("Appointment List is empty, please add appointment");
+        appointmentTable.addRow(foundAppointment.getAppointmentId(), foundAppointment.getPatientName(),
+                foundAppointment.getPatientNric(), foundAppointment.getDoctorName(), foundAppointment.getDoctorNric(),
+                foundAppointment.getAppointmentDate(), foundAppointment.getAppointmentDetails());
+        appointmentTable.print();
     }
 
+    public void findById(String[] parameters) {
+        try {
+            this.returnedFinderArray = AppointmentFinder.findAppointmentById(appointments, parameters[1]);
+            createArrayOfFoundAppointments();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Appointment with given ID doesn't exist. Please try again!");
+        }
+    }
+
+    public void findByPatientName(String[] parameters) {
+        try {
+            this.returnedFinderArray = AppointmentFinder.findAppointmentByPatientName(appointments, parameters[1]);
+            createArrayOfFoundAppointments();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Appointment with given patient name doesn't exist. Please try again!");
+        }
+    }
+
+    public void findByPatientNric(String[] parameters) {
+        try {
+            this.returnedFinderArray = AppointmentFinder.findAppointmentByPatientNric(appointments, (parameters[1]));
+            createArrayOfFoundAppointments();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Appointment with given patient nric doesn't exist. Please try again!");
+        }
+    }
+
+    public void findByDoctorName(String[] parameters) {
+        try {
+            this.returnedFinderArray = AppointmentFinder.findAppointmentByDoctorName(appointments, parameters[1]);
+            createArrayOfFoundAppointments();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Appointment with given doctor name doesn't exist. Please try again!");
+        }
+    }
+
+    public void findByDoctorNric(String[] parameters) {
+        try {
+            this.returnedFinderArray = AppointmentFinder.findAppointmentByDoctorNric(appointments, parameters[1]);
+            createArrayOfFoundAppointments();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Appointment with given doctor nric doesn't exist. Please try again!");
+        }
+    }
+
+    public void findByAppointmentDate(String[] parameters) {
+        try {
+            this.returnedFinderArray = AppointmentFinder.findAppointmentByDate(appointments, parameters[1]);
+            createArrayOfFoundAppointments();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Appointment with given date doesn't exist. Please try again!");
+        }
+    }
+
+    private void createArrayOfFoundAppointments() {
+        if (returnedFinderArray.isEmpty()) {
+            UI.printParagraph("Appointment doesn't exist please try again!");
+        } else {
+            CommandLineTable findAppointmentTable = new CommandLineTable();
+            findAppointmentTable.setShowVerticalLines(true);
+            findAppointmentTable.setHeaders("Appointment Id", "Patient Nric", "Patient Name", "Doctor Nric",
+                    "Doctor Name", "Appointment Date", "Appointment Details");
+            for (int i = 0; i < returnedFinderArray.size(); i++) {
+                findAppointmentTable.addRow(returnedFinderArray.get(i).getAppointmentId(),
+                        returnedFinderArray.get(i).getPatientNric(),
+                        returnedFinderArray.get(i).getPatientName(),
+                        returnedFinderArray.get(i).getDoctorNric(),
+                        returnedFinderArray.get(i).getDoctorName(),
+                        returnedFinderArray.get(i).getAppointmentDate(),
+                        returnedFinderArray.get(i).getAppointmentDetails());
+            }
+            findAppointmentTable.print();
+        }
+    }
 }
 
 

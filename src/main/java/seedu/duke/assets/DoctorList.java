@@ -4,7 +4,7 @@ import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
-import seedu.duke.helper.command.CommandLineTable;
+import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.finder.DoctorFinder;
 
 import java.util.ArrayList;
@@ -45,7 +45,6 @@ public class DoctorList extends List {
                 addDoctorParameters[3].charAt(0), addDoctorParameters[4], addDoctorParameters[5],
                 addDoctorParameters[6]);
         doctors.add(newDoctor);
-        UI.printParagraph("Doctor has been added");
     }
 
     //view particular doctor
@@ -103,7 +102,6 @@ public class DoctorList extends List {
         for (int i = 0; i < getSize(); i++) {
             if (doctors.get(i).getNric().equals(nric)) {
                 doctors.remove(i);
-                UI.printParagraph("Doctor has been removed");
                 return;
             }
         }

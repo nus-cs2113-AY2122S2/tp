@@ -1,4 +1,4 @@
-package seedu.duke.helper.command;
+package seedu.duke.helper;
 
 import java.util.ArrayList;
 import java.util.Arrays;

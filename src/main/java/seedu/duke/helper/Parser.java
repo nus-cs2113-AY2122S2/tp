@@ -15,6 +15,7 @@ import seedu.duke.helper.command.EditAppointmentCommand;
 import seedu.duke.helper.command.EditDoctorCommand;
 import seedu.duke.helper.command.EditMedicineCommand;
 import seedu.duke.helper.command.EditPatientCommand;
+import seedu.duke.helper.command.FindAppointmentCommand;
 import seedu.duke.helper.command.FindDoctorCommand;
 import seedu.duke.helper.command.FindMedicineCommand;
 import seedu.duke.helper.command.FindPatientCommand;
@@ -65,9 +66,7 @@ public class Parser {
         if (isNull(parameters)) {
             return new ViewPatientCommand(null);
         }
-        String[] viewPatientParameters = minParameterCheck(parameters, 1);
-        Validator.validateNric(viewPatientParameters[0]);
-        return new ViewPatientCommand(viewPatientParameters);
+        return parseFindPatient(parameters);
     }
 
     public static Command parseEditPatient(String parameters) throws HalpmiException {
@@ -92,9 +91,7 @@ public class Parser {
         if (isNull(parameters)) {
             return new ViewDoctorCommand(null);
         }
-        String[] viewDoctorParameters = minParameterCheck(parameters, 1);
-        Validator.validateNric(viewDoctorParameters[0]);
-        return new ViewDoctorCommand(viewDoctorParameters);
+        return parseFindDoctor(parameters);
     }
 
     public static Command parseEditDoctor(String parameters) throws HalpmiException {
@@ -119,8 +116,7 @@ public class Parser {
         if (isNull(parameters)) {
             return new ViewMedicineCommand(null);
         }
-        String[] viewMedicineParameters = minParameterCheck(parameters, 1);
-        return new ViewMedicineCommand(viewMedicineParameters);
+        return parseFindMedicine(parameters);
     }
 
     public static Command parseEditMedicine(String parameters) throws HalpmiException {
@@ -151,10 +147,15 @@ public class Parser {
 
     public static Command parseViewAppointment(String parameters) throws HalpmiException {
         if (isNull(parameters)) {
-            return new ViewMedicineCommand(null);
+            return new ViewAppointmentCommand(null);
         }
-        String[] viewAppointmentParameters = minParameterCheck(parameters, 2);
-        return new ViewAppointmentCommand(viewAppointmentParameters);
+        return parseFindAppointment(parameters);
+    }
+
+    public static Command parseFindAppointment(String parameters) throws HalpmiException {
+        String[] findAppointmentParameters = minParameterCheck(parameters, 2);
+        Validator.validateFindAppointment(findAppointmentParameters);
+        return new FindAppointmentCommand(findAppointmentParameters);
     }
 
     public static Command parseEditAppointment(String parameters) throws HalpmiException {
