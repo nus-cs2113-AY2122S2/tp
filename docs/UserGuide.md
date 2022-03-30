@@ -20,6 +20,8 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 - People who want to manage outings with multiple social circles in one application.
 - People who can type fast.
 
+<hr>
+
 ## Contents
 * [How to use this user guide](#how-to-use-this-user-guide)
 * [Quick Notes](#quick-notes)
@@ -50,6 +52,8 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
     * [Exiting the application: `exit`](#exiting-the-application-exit)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
+
+<hr>
 
 ## How to use this user guide
 - For each feature that SplitLah supports, we refer it as commands.
@@ -104,7 +108,6 @@ activity could have a different payer.
     - Each paid for by a different person.
 - At the end of a session, SplitLah calculates how much each person owes and who they need to pay. This information is
 displayed in an easy-to-read summary.
-
 
 <hr>
 
@@ -606,6 +609,10 @@ You can also refer to the [Command Summary](#command-summary) for a summary of a
 Quits the application.<br>
 
 > Format: `exit`
+
+<br>
+
+<hr>
  
 ## FAQ
 
@@ -613,6 +620,10 @@ Quits the application.<br>
 
 **A**: SplitLah 2.0 will create a save file in a folder named `data` that will be created in the same directory as
 `SplitLah.jar`. All changes will be saved to the save file upon exit.
+
+<br>
+
+<hr>
 
 ## Command Summary
 
