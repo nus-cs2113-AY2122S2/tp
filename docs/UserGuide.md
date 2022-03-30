@@ -64,7 +64,7 @@ The following table describes the **formats** used in this User Guide.
 | `BLOCK_TERM`        | The terms in upper casing are placeholders parameters for details to be supplied by you e.g. `add /n Alice` instead of `add /n NAME`.                    |
 | `/x BLOCK_TERM`     | The delimiter-term pairs not enclosed in any brackets are compulsory inputs to be supplied by you.                                                       |
 | `[/x BLOCK_TERM]`   | The delimiter-term pairs enclosed in square brackets are optional inputs that you may choose not to provide.                                             |
-| <code>/p <T&#124;F> | The parameters enclosed in angle brackets indicates that they have fixed values. You may choose any of the valuse that are separated by a vertical pipe. |
+| <code>/p <T&#124;F> | The parameters enclosed in angle brackets indicates that they have fixed values. You may choose any of the values that are separated by a vertical pipe. |
 
 Some additional points to take note of:
 
@@ -93,16 +93,16 @@ This section describes each command in detail.
 | Pair                              | Description                                                                                                                                                                                             |
 |:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `/n NAME`                         | The name of someone you would like to track.                                                                                                                                                            |
-| `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> You can find the group index from the [overview command]().                                                                   |
-| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [overview command]().                                                                                     |
+| `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> You can find the group index from the [overview command](#show-financial-summary-overview).                                   |
+| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [overview command](#show-financial-summary-overview).                                                     |
 | `/d DESCRIPTION`                  | The description (or name) of the income and expenditure you wish to track.                                                                                                                              |
-| `/c CATEGORY_INDEX`               | An index that refers to a category label such as 'Food and Drinks`.<br/>You can find the category index from the [list categories command]().                                                           |
+| `/c CATEGORY_INDEX`               | An index that refers to a category label such as 'Food and Drinks`.<br/>You can find the category index from the [list categories command](#show-expenditure-categories-listcat).                       |
 | `/i INCOME`                       | The monetary value of the income you wish to track.                                                                                                                                                     |
 | `/e EXPENDITURE`                  | The monetary value of the expenditure that you have made.                                                                                                                                               |
-| `/r (INCOME / EXPENDITURE)_INDEX` | An index that refers to an income or expenditure that you have recorded previously.<br/>You can find this index from the [listing records command]().                                                   |
+| `/r (INCOME / EXPENDITURE)_INDEX` | An index that refers to an income or expenditure that you have recorded previously.<br/>You can find this index from the [listing records command](#show-all-records-by-group-list).                    |
 | <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent. |
 
-<br/>
+---
 
 ### Viewing all commands: `help`
 
@@ -110,7 +110,7 @@ This section describes each command in detail.
 
 Format: `help`
 
-<br/>
+---
 
 ### Add a person: `add`
 
@@ -136,22 +136,22 @@ Example of usage:
 
   ![add-command-screenshot]() <!-- this is a placeholder -->
 
-<br/>
+---
 
 ### Delete a person: `delete`
 
-> Deletes a person from the list to track finance
+> Deletes a person from your family group.
 
 Format: `delete /g GROUP_INDEX /u USER_INDEX`
 
-* **USER_INDEX** refers to the index of that is tagged to the to-be-deleted person.
-* **GROUP_INDEX** refers to the index of the group that belongs to this person.
+* **GROUP_INDEX** refers to the index of the group that you belong to.
+* **USER_INDEX** refers to the index of that is tagged to you.
 
 Example of usage:
 
 `delete /u 1 /g 1`
 
-<br/>
+---
 
 ### Add an income: `addin`
 
@@ -179,7 +179,7 @@ Example of usage:
 
   ![addin-command-screenshot]() <!-- this is a placeholder -->
 
-<br/>
+---
 
 ### Delete an income: `deletein`
 
@@ -205,92 +205,110 @@ Example of usage:
 
   ![deletein-command-screenshot]() <!-- this is a placeholder -->
 
-<br/>
+---
 
 ### Edit an income: `editin`
 
-> Edit an income under a stated user
+> Edits an entry from your list of tracked incomes.
 
-Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>]`
+Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCRIPTION /p <T|(any)>]`
+
+* **GROUP_INDEX** refers to the index of the group that you belong to.
+* **USER_INDEX** refers to the index of that is tagged to you.
+* **INCOME_INDEX** refers to the index of the income you would like to edit.
+* **INCOME** refers to the monetary value of your income.
+* **DESCRIPTION** refers to the name or description of your income.
+* **<T/(any)>** refers to whether your income is recurrent on a monthly-basis.
 
 Example of usage:
 
-`editin /u 1 /g 1 /r 1 /i 200 /d salary /c 1 /p t`
+* Edits the recurrent Salary of $2,000 from Alice's income to $200.
 
-<br/>
+  `editin /u 1 /g 1 /r 1 /i 200`
+
+* _Result_: Income entry in Alice's income list is edited.
+
+  ![editin-command-screenshot]() <!-- this is a placeholder -->
+
+---
 
 ### Add an expenditure: `addout`
 
-> Adds an expenditure description and its value to a specific individual
+> Add an entry to your list of tracked expenditures.
 
-Format: `addout /g GROUP_INDEX /u USER_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
+Format: `addout /g GROUP_INDEX /u USER_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>`
 
-* **USER_INDEX** refers to an index that is mapped to that individual.
-* **GROUP_INDEX** refers to an index that is mapped to the group that individual belongs to.
-* **DESCRIPTION** refers to the name or description of the expenditure.
-* **EXPENDITURE** refers to the monetary value of the expenditure.
-* **CATEGORY_INDEX** refers to the category of the expenditure.
-* **<T|F>** refers to the setting of expenditure to be recurring or not recurring.
+* **GROUP_INDEX** refers to the index of the group that you belong to.
+* **USER_INDEX** refers to the index of that is tagged to you.
+* **EXPENDITURE** refers to the monetary value of your expenditure.
+* **DESCRIPTION** refers to the name or description of your expenditure.
+* **CATEGORY_INDEX** refers to the category of your expenditure.
+* **<T|(any)>** refers to whether your expenditure is recurrent on a monthly-basis.
 
 Example of usage:
 
-* Add a spending of $20 on a piece of candy to an individual with the user index of 1, in group 1 and type of
-  expenditure in category 1.
-    * Suppose that the user index 1 belong to Alice, group 3 to be children, category 1 to be Food and Drinks, and this
-      expenditure is recurring.
-        * `addout /u 1 /g 3 /e 20 /d candy /c 1 /p t`
+* Add a monthly-recurrent expenditure on candies of $20 to Alice's expenditure. This expenditure
+  is tagged under the "Food and Drinks" category.
+
+  `addout /u 1 /g 1 /e 20 /d candies /c 1 /p t`
+
+* _Result_: Entry for candies is added to Alice's expenditure list with an expenditure index of **1**.
 
   ![addout-command-screenshot]() <!-- this is a placeholder -->
 
-<br/>
+---
 
 ### Delete an expenditure: `deleteout`
 
-> Deletes an expenditure description and its value from a specific individual
+> Delete an entry from your list of tracked expenditure.
 
 Format: `deleteout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX`
 
-* **USER_INDEX** refers to an index that is mapped to that individual. .
-* **GROUP_INDEX** refers to an index that is mapped to the group that individual belongs to.
-* **EXPENDITURE_INDEX** refers to an index that is mapped to a specific expenditure of an individual.
+* **GROUP_INDEX** refers to the index of the group that you belong to.
+* **USER_INDEX** refers to the index of that is tagged to you.
+* **EXPENDITURE_INDEX** refers to the index of the expenditure you would like to delete.
 
 Example of usage:
 
-* Delete the previous entry, spending of $20 on Candy, from Alice in group 3.
-    * Suppose that the previous expenditure entry was given an index of 2
-    * `deleteout /u 1 /g 3 /r 2`
+* Delete the entry, recurrent candies of $20, from Alice's expenditure.
+
+  `deleteout /g 1 /u 1 /r 1`
+
+* _Result_: Expenditure entry is deleted from Alice's expenditure list.
 
   ![deleteout-command-screenshot]() <!-- this is a placeholder -->
 
-<br/>
+---
 
 ### Edit an expenditure: `editout`
 
-> Edits an expenditure description, its value, its category index and its recurring status of a specific individual.
+> Edits an entry from your list of tracked expenditures.
 
-Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>]`
+Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>]`
 
-* **USER_INDEX** refers to an index that is mapped to that individual.
-* **GROUP_INDEX** refers to an index that is mapped to the group that individual belongs to.
-* **DESCRIPTION** refers to the name or description of the expenditure.
-* **EXPENDITURE** refers to the monetary value of the expenditure.
-* **CATEGORY_INDEX** refers to the category of the expenditure.
-* **<T|F>** refers to the setting of expenditure to be recurring or not recurring.
+* **GROUP_INDEX** refers to the index of the group that you belong to.
+* **USER_INDEX** refers to the index of that is tagged to you.
+* **EXPENDITURE_INDEX** refers to the index of the expenditure you would like to edit.
+* **EXPENDITURE** refers to the monetary value of your expenditure.
+* **DESCRIPTION** refers to the name or description of your expenditure.
+* **CATEGORY_INDEX** refers to the category of your expenditure.
+* **<T/(any)>** refers to whether your expenditure is recurrent on a monthly-basis.
 
 Example of usage:
 
-* Edits an expenditure entry to have a description of sugar with value of $30, to be in category 1 and set to be
-  recurring.
-    * Suppose that the entry was given a user index of 1, in group 3 with an expenditure index of 1.
-    * `editout /u 1 /g 3 /r 1 /i 30 /d sugar /c 1 /p t`
+* Edits the recurrent candies expenditure of $20 from Alice's expenditure to $25.
+
+  `editin /u 1 /g 1 /r 1 /i 25`
+
+* _Result_: Expenditure entry in Alice's expenditure list is edited.
 
   ![editout-command-screenshot]() <!-- this is a placeholder -->
 
-<br/>
+---
 
 ### Show financial summary: `overview`
 
-> Shows a list of the total incomes, expenditures and remaining of each group
+> Shows a list of the total incomes, expenditures and disposable income of all groups.
 
 Format: `overview`
 
@@ -298,7 +316,7 @@ Example of usage:
 
 ![list-command-screenshot]() <!-- this is a placeholder -->
 
-<br/>
+---
 
 ### Show all records by group: `list`
 
@@ -306,7 +324,7 @@ Example of usage:
 
 Format: `list /g GROUP_INDEX`
 
-* **GROUP_INDEX** refers to an index that is mapped to the group that individual belongs to.
+* **GROUP_INDEX** refers to the index of the group that you belong to.
 
 Example of usage:
 
@@ -314,7 +332,7 @@ Example of usage:
 
 ![detail_list-command-screenshot]() <!-- this is a placeholder -->
 
-<br/>
+---
 
 ### Show expenditure categories: `listcat`
 
@@ -322,26 +340,34 @@ Example of usage:
 
 Format: `listcat`
 
-<br/>
+![listcat-command-screenshot]() <!-- this is a placeholder -->
+
+---
 
 ### Searching for details: `find`
 
-> Search for a string throughout all income and expenditure objects
+> Search for a string as provided by you throughout all your income and expenditure.
 
 Format: `find /d USER_STRING /c CATEGORY_INDEX`
 
 * **USER_STRING** refers to the keyword which you want to look for.
-    * Keywords are case-sensitive and inclusive. So a search for `brush` will successfully look for `toothbrush`.
+* **CATEGORY_INDEX** refers to the category of your expenditure.
 
-<!-- can put in notes ^ -->
+> :information_source: Notes:
+> * Keywords are case-sensitive and inclusive. So a search for `brush` will successfully look for `toothbrush`.
+> * If you want to search for expenditures in all categories instead of specific ones, set **CATEGORY_INDEX** to 0.
 
 Example of usage:
 
-`find /d Candy /c 1`
+* Search for "candies" in all income and expenditure.
 
-![find-command-screenshot]() <!-- this is a placeholder -->
+  `find /d candies /c 0`
 
-<br/>
+* _Result_: The result of the search is returned and printed to the screen.
+
+  ![find-command-screenshot]() <!-- this is a placeholder -->
+
+---
 
 ### Exit: `bye`
 
@@ -355,7 +381,11 @@ Format: `bye`
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: You can keep the file where your data stores, and transfer the file to another computer.
+**A**: After you exit the program, your application data will be automatically stored in a text file locally.
+You can transfer the data by transferring the text file to another computer and put it in the same
+directory as the application in the new computer. When the application starts up, it will automatically
+load the saved data in the text file. Do note that the application running in the new computer should
+be the same version as the application in your previous computer.
 
 <br/>
 
