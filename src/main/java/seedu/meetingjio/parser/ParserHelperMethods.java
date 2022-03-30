@@ -32,8 +32,8 @@ public class ParserHelperMethods {
      * @param eventDescription Array of user's input
      * @throws MissingValueException If at least one parameter has no value
      */
-    protected void checkNonNullValues(String[] eventDescription,int lastElementIndex) throws MissingValueException {
-        for (int i = 0; i < lastElementIndex; i++) {
+    protected void checkNonNullValues(String[] eventDescription) throws MissingValueException {
+        for (int i = 0; i < eventDescription.length; i++) {
             if (eventDescription[i].length() == 0) {
                 throw new MissingValueException();
             }

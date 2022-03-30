@@ -4,6 +4,7 @@ import seedu.meetingjio.parser.Parser;
 import seedu.meetingjio.commands.Command;
 import seedu.meetingjio.timetables.MasterTimetable;
 
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +56,7 @@ public class Ui {
      */
     public static void executeCommand(String userInput, MasterTimetable masterTimetable, Scanner in) {
         while (!userInput.equalsIgnoreCase(EXIT_COMMAND)) {
-            String trimmedInput = userInput.trim();
+            String trimmedInput = userInput.trim().toLowerCase();
             Parser parser = new Parser(trimmedInput);
             Command parsedCommand = parser.parseCommand();
             try {

@@ -57,6 +57,13 @@ public class Timetable {
         list.clear();
     }
 
+    /**
+     * Checks through all existing events to the event to be added
+     * to ensure that there is no duplicate.
+     *
+     * @param newEvent Event to be added
+     * @return true if there is identical event, otherwise false
+     */
     private boolean isDuplicate(Event newEvent) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
@@ -157,4 +164,15 @@ public class Timetable {
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Timetable)) {
+            return false;
+        }
+        Timetable timetable = (Timetable) obj;
+        if (!name.equalsIgnoreCase(timetable.name)) {
+            return false;
+        }
+        return true;
+    }
 }
