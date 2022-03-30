@@ -8,6 +8,7 @@ import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.SearchCommand;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
 
@@ -44,6 +45,9 @@ public class InputParser {
 
         case DescCommand.COMMAND_WORD:
             return new DescCommandParser().parse(arguments);
+
+        case SearchCommand.COMMAND_WORD:
+            return new SearchCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
