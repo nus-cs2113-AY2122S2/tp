@@ -302,10 +302,10 @@ The general workflow of the `group /view` command is as follows:
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called before a group within 
 the list of groups can be retrieved.
 5. The `GroupViewCommand` object will then run `Profile#getGroup()` method to retrieve the group represented by the
-   groupId.
-   1. If the group with requested groupId does not exist, an error message would be printed.
-   2. Else, the group requested will be printed.
-6. Lastly, `Splitlah` will wait for the next user input.
+   groupId provided.
+   1. If the group with requested groupId does not exist, an error message will be printed.
+   2. Else, the string representing the details of the requested group will be retrieved using the `Group#toString()`
+   method. The string will then be printed.
 
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
