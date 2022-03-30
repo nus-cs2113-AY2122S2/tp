@@ -1,57 +1,55 @@
 @startuml
-!include Style.puml
 
-skinparam arrowThickness 1.1
+!define ABSTRACT &#123;abstract&#125;
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam classFontSize 12
+skinparam classAttributeFontSize 12
+hide circle
+
 'I wasn't able to find a consistent standard for bound elements, so I just picked one
 package storage {
-    class "<<interface>>\n Storage" <T extends Object> {
+    class "<<interface>>\nStorage" as Storage <T extends Object> {
         --
         + writeData(object: T, path: String): void
         + loadData(path: String): T
         + createTargetFile(path: String): void
     }
 
-    "ABSTRACT\n JsonStorage" ..|> "<<interface>>\n Storage"
-    class "ABSTRACT\n JsonStorage" <T extends Object> {
+    class "ABSTRACT\n JsonStorage" as JsonStorage <T extends Object> {
        --
        + writeData(object: T, path: String): void
        + loadData(path: String): T ABSTRACT
        + createTargetFile(path: String): void
     }
 
-    "ABSTRACT\n ListStorage" --|> "ABSTRACT\n JsonStorage"
-    class "ABSTRACT\n ListStorage" <ModHappyT extends Object> {
+    class "ABSTRACT\n ListStorage" as ListStorage <ModHappyT extends Object> {
        --
        + loadData(path: String): ArrayList<ModHappyT> ABSTRACT
     }
 
-    "ABSTRACT\n ListStorage" ...> "ABSTRACT\n JsonStorage" : <<bind>>\nT -> ArrayList<ModHappyT>
-
-    ConfigurationStorage --|> "ABSTRACT\n JsonStorage"
     class ConfigurationStorage {
        --
        + loadData(path: String): Configuration
     }
 
-    ConfigurationStorage ..> "ABSTRACT\n JsonStorage" : <<bind>>\nT -> Configuration
-
-    ModuleListStorage --|> "ABSTRACT\n ListStorage"
     class ModuleListStorage {
        --
        + loadData(path: String): ArrayList<Module>
     }
 
-    ModuleListStorage ..> "ABSTRACT\n ListStorage" : <<bind>>\nModHappyT -> Module
-
-
-    TaskListStorage --|> "ABSTRACT\n ListStorage"
     class TaskListStorage {
        --
        + loadData(path: String):ArrayList<Task>
     }
-
-    TaskListStorage ...> "ABSTRACT\n ListStorage" : <<bind>>\nModHappyT -> Task
 }
+
+JsonStorage ..|> Storage
+ListStorage --|> JsonStorage : <<bind>>\nT -> ArrayList<ModHappyT>
+ConfigurationStorage --|> JsonStorage : <<bind>>\nT -> Configuration
+ModuleListStorage --|> ListStorage : <<bind>>\nModHappyT -> Module
+TaskListStorage --|> ListStorage : <<bind>>\nModHappyT -> Task
 
 note top of storage
 To avoid clutter, inherited methods
@@ -68,7 +66,7 @@ hide SaveCommand circle
 hide SaveCommand attributes
 hide SaveCommand methods
 
-Main--> "<<interface>>\n Storage"
-SaveCommand --> "<<interface>>\n Storage"
+Main--> Storage
+SaveCommand --> Storage
 
 @enduml
