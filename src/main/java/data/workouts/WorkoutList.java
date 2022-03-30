@@ -325,29 +325,6 @@ public class WorkoutList {
         return deletedWorkout;
     }
 
-//    /**
-//     * Gets the number of plans which includes the targeted workout.
-//     *
-//     * @param workoutToCheck The workout to look for in the plan.
-//     * @return An Arraylist of integer which includes the number of the
-//     *         plan that includes the deleted workout.
-//     * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
-//     */
-//    private ArrayList<Integer> findPlanContainsTargetWorkout(String workoutToCheck, PlanList planList) throws
-//            ArrayIndexOutOfBoundsException {
-//        Plan planObject;
-//        boolean isWorkoutInPlan = false;
-//        ArrayList<Integer> planNumberWithTargetWorkout = new ArrayList<Integer>();
-//        for (int i = 1; i <= planList.getPlansDisplayList().size(); i++) {
-//            planObject = planList.getPlanFromIndexNum(i);
-//            isWorkoutInPlan = planList.checkWorkoutInPlan(workoutToCheck, planObject);
-//            if (isWorkoutInPlan) {
-//                planNumberWithTargetWorkout.add(i);
-//            }
-//        }
-//        return planNumberWithTargetWorkout;
-//    }
-
     /**
      * This method checks whether the index supplied for operations
      * such as delete and update is within the range of the current workout list.
