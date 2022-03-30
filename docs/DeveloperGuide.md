@@ -142,7 +142,8 @@ entity that created those instances, but those are not indicated in the diagram.
 ### Add Housekeeper feature
 
 
-The add housekeeper mechanism is facilitated by `AddHousekeeperCommand`. It extends command. Additionally, it implements the following operations:
+The add housekeeper mechanism is facilitated by `AddHousekeeperCommand`. It extends command. Additionally, 
+it implements the following operations:
 * `AddHousekeeperCommand#extractDetails()`— Stores the name and age of the new Housekeeper
 * `AddHousekeeperCommand#extractName()`— Derive the name of the Housekeeper
 * `AddHousekeeperCommand#extractAge()`— Derive the age of Housekeeper and cast it into an integer
@@ -152,15 +153,51 @@ Given below is an example usage scenario of how AddHousekeeperCommand behaves at
 
 Step 1: User launches the application for the first time. The list of housekeeper in records is empty.
 
-Step 2: User give an add housekeeper command `add housekeeper sally / 40`. The input will be split by the delimiter `/` to derive `sally` and `40`. The `CommandParser` runs parse which will return a new `AddHousekeeperCommand`.
+Step 2: User give an add housekeeper command `add housekeeper susan / 33`. The input will be split by the delimiter
+`/` to derive `susan` and `33`. The `CommandParser` runs parse which will return a new `AddHousekeeperCommand`.
 
-Step 3: `AddHousekeeperCommand#extractDetails()` will call `AddHousekeeperCommand#extractName()` and `AddHousekeeperCommand#extractAge()` to derive `sally` and `40`.
+Step 3: `AddHousekeeperCommand#extractDetails()` will call `AddHousekeeperCommand#extractName()` 
+and `AddHousekeeperCommand#extractAge()` to derive `susan` and `33`.
 
-Step 4: The `AddHousekeeperCommand` will now contain `sally` and `40`.
+Step 4: The `AddHousekeeperCommand` will now contain `susan` and `33`.
 
-Step 5: The execute method will derive the housekeeper name, `susan` which would call `HousekeeperList#hasNameAdded()` to verify if name has been recorded. If name is not in records, `HousekeeperList#addHousekeeper()` would be called to add the housekeeper, `sally` and `40` into the housekeeperList.
+Step 5: The execute method will derive the housekeeper name, `susan` which would call `HousekeeperList#hasNameAdded()` 
+to verify if name has been recorded. If name is not in records, `HousekeeperList#addHousekeeper()` would be called to 
+add the housekeeper, `susan` and `33` into the housekeeperList.
 
-![class](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandv2.jpg)
+![Sequence](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandv2.jpg)
+
+### Delete Housekeeper feature 
+The add housekeeper mechanism is facilitated by `DeleteHousekeeperCommand`. It extends command. Additionally, it 
+implements the following operations:
+* `DeleteHousekeeperCommand#execute()` — Executes the addition of new housekeeper into list
+
+Given below is an example usage scenario of how DeleteHousekeeperCommand behaves at each step.
+
+Step 1: User has already added a housekeeper called `susan`, age `33`. Sally is not keen in working as a housekeeper
+anymore and resigns. User has to delete the records of `susan` form `housekeeperlist`.
+
+Step 2: User give a delete housekeeper command `delete housekeeper susan` The input will derive the name parameter of 
+the delete command which is `susan`.
+
+Step 3:  The `DeleteHousekeeperCommand` will now contain `susan`.
+
+Step 4: The execute method will call `HousekeeperList#removeHousekeeperInlist()`. The remove method in housekeeper list
+will then call `HousekeeperList#hasNameAdded` where it would use streams to store the housekeeper name which matches
+the name for the housekeeper to be deleted. Assuming `susan` exist, this method will then return true.
+
+Step 5: Since `susan` is recorded in the list, the program can proceed to delete `susan` from `housekeeperList`. 
+`HousekeeperList#getHousekeeperRemove()` will be called to derive the index of `susan` in the `housekeeperList`.
+Assuming `susan` is in the front of the list, the method will return `0`. This index will then be pass to 
+`HousekeeperList#removeHouseekeeper()` which removes `sally` from the list
+
+Step 6: It will then proceed to print noted message to inform user that the deletion has been completed by calling
+`Ui#printNoted()`, `Ui#printMessage()` and `Ui#printBottomLine`.
+
+Step 7: Changes in the list will be updated to file by calling `HousekeeperFileManager#save()` method.
+
+![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeper.jpg)
+
 
 ### Add Item Command
 The add item to a list of items in the invetory mechanism is facilated by 'AddItemCommand'. It extends 'Command' and implements the following operations:
