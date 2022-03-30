@@ -21,7 +21,7 @@ class ExpenditureTest {
 
     @BeforeEach
     public void setUp() {
-        testItem = new Expenditure("food", 24, 2, false);
+        testItem = new Expenditure("food", 24.0, 1, false);
     }
 
     @Test
@@ -95,7 +95,7 @@ class ExpenditureTest {
 
     @Test
     public void toString_getString_success() {
-        String expectedResult = "food: $24.00 - Recurring: false - Category: Food and Drinks";
+        String expectedResult = "food: $24.00 - Recurring: false - Category: Others";
         assertEquals(expectedResult, testItem.toString());
     }
 }

@@ -199,6 +199,7 @@ public class ExpenditureList extends MoneyList {
         editExpAmount(index, amount);
         editExpCat(index, category);
         editExpPerm(index, isPermanent);
+        System.out.println("Your Expenditure have been edited");
     }
 
     /**

@@ -182,6 +182,7 @@ public class IncomeList extends MoneyList {
         editIncDesc(index, description);
         editIncAmount(index, amount);
         editIncPerm(index, isPermanent);
+        System.out.println("Your Income have been edited");
     }
 
     /**
