@@ -35,15 +35,12 @@ calculate monthly expenditure, and set financial goals. The application is targe
 managing their personal finances.
 
 ### Purpose
-This document specified architecture and software design decisions for the application, MindMyMoney.
-### Scope
-This describes the software architecture and software design decisions for the implementation
-of MindMyMoney. The intended audience of this document is the developers, designers, and
-software testers of MindMyMoney.
+This document specifies the architecture and software design decisions for the application, MindMyMoney. 
+The intended audience of this document is the developers, designers, and software testers of MindMyMoney.
 ### Acknowledgements
 We would like to thank [AddressBook-3](https://se-education.org/addressbook-level3/) for assisting us in developing
 MindMyMoney.
-### Using the User Guide
+### Using the Developer Guide
 Along the guide you may encounter several icons. These icons will provide several useful information.
 > **💡 Note:**
 >- This tells you that there is additional information that is useful when you are using the application.
@@ -58,7 +55,7 @@ Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate
 ### Technologies used
 **MindMyMoney** is written fully in **Java 11** using  Object-Oriented Programming (OOP) paradigm to help structure and
 organise the code. This enables the efficiency of future improvements and revisions.
-Data stored in the application is saved into test files locally on the user's device.  
+Data stored in the application is saved into text files locally on the user's device.  
 
 ### Architecture Overview
 ![architecture diagram](images/architecture_diagram.png)  
