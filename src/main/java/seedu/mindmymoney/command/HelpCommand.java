@@ -83,7 +83,6 @@ public class HelpCommand extends Command {
                     + "Type \"help /e\" to view the list of supported expenditure commands\n"
                     + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
                     + "Type \"help /i\" to view the list of supported income commands\n"
-                    + System.lineSeparator());
         }
     }
 
