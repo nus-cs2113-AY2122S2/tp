@@ -2,9 +2,34 @@
 
 ## Introduction
 
-Sherpass is a desktop application for students to manage their academic schedules.
+Sherpass is a desktop application for students to manage their academic schedules and also provide a platform for them
+to focus on their academic tasks.
 Optimised for use via a Command Line Interface (CLI),
 users who can type fast will be able to plan out their tasks in a much quicker fashion compared to traditional GUI apps.
+
+### Managing your time
+You can add your tasks into Sherpass and get a detailed outline of your schedule. Using this schedule, you won't
+have to worry ever again about forgetting tasks and missing deadlines!
+
+Sherpass also allows you to easily add recurring tasks (e.g. classes). Simply refer to the command details for
+more information.
+
+### Study sessions
+Having trouble focusing while studying? Sherpass's study sessions allow you to select study timers, inspired by the
+increasingly popular [Pomodoro study sessions](https://examstudyexpert.com/pomodoro-study-method/), to help you keep track of the time whilst completing your tasks.
+
+#### During Study sessions
+Starting the study session will show you the tasks that you have planned to do for the day. You can then choose to
+start one of a few default timers provided by us, or start your own custom timer. You can also choose to start a
+stopwatch to keep track of how long you've been studying for, if you're unsure of how long you will need.
+
+#### After Study sessions
+After your study session, you will be prompted to mark the tasks you've completed as done. If you're still not done with
+certain tasks, feel free to start another productive session!
+
+### User Guide Target Audience
+New and inexperienced users who want to use Sherpass, as well as non-users who want to know more about what Sherpass
+can do.
 
 ## Table of Content
 - [Quick Start](#quick-start)
@@ -27,6 +52,8 @@ users who can type fast will be able to plan out their tasks in a much quicker f
     - Exit study session: [`leave`](#leave-the-study-session-leave)
   - Exit program: [`exit`]()
   - [Saving your tasks](#saving-your-tasks)
+- [FAQ](#faq)
+- [Glossary](#faq)
 - [Command Summary](#command-summary)
 
 ## Quick Start
@@ -38,34 +65,14 @@ from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Relea
 4. Open a terminal and navigate to the folder containing the jar file.
 5. Start the application on the terminal using `java -jar Sherpass.jar`
 
-## Features 
-
-### Managing your time
-You can add your tasks into Sherpass and get a detailed outline of your schedule. Using this schedule, you won't
-have to worry ever again about forgetting tasks and missing deadlines!
-
-Sherpass also allows you to easily add recurring tasks (e.g. classes). Simply refer to the command details for
-more information.
-
-### Study sessions
-Having trouble focusing while studying? Sherpass's study sessions allow you to select study timers, inspired by the
-increasingly popular Pomodoro study sessions, to help you keep track of the time whilst completing your tasks.
-
-#### During Study sessions
-Starting the study session will show you the tasks that you have planned to do for the day. You can then choose to
-start one of a few default timers provided by us, or start your own custom timer. You can also choose to start a 
-stopwatch to keep track of how long you've been studying for, if you're unsure of how long you will need.
-
-#### After Study sessions
-After your study session, you will be prompted to mark the tasks you've completed as done. If you're still not done with
-certain tasks, feel free to start another productive session!
+## Features
 
 ## Command Guide
 
 ### Notes on command input format:
-- Words in UPPER_CASE are the parameters to be supplied by the user.
+- Words in UPPER_CASE are the [parameters](#glossary) to be supplied by the user.
 - Items in square brackets are optional
-- Extraneous parameters for commands that do not take in parameters (such as show, stop, exit) will be ignored
+- [Extraneous](#glossary) parameters for commands that do not take in parameters (such as show, stop, exit) will be ignored
 
 ### Notes on task number format:
 - Each task added to your schedule is assigned a task number. You can see what number a task is assigned via
@@ -462,6 +469,10 @@ rectify the problem or allow Sherpass to create a new save file
 
 **A**: Transfer a copy of your save file to your other device and place it in `[JAR FILE LOCATION]/data/Sherpass.json`
 
+## Glossary
+
+* *Parameter* - A parameter is the means by which a value is passed to the command processing program.
+* *Extraneous* - Something that is unnecessary or irrelevant.
 ## Command Summary
 
 | Action                        | Format, Examples                                                                                                                                                             |
