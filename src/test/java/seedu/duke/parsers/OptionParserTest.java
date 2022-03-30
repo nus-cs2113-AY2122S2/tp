@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import seedu.duke.exceptions.UnknownConfigurationGroupWord;
+import seedu.duke.exceptions.UnsupportedResultTypeException;
 import seedu.duke.util.Configuration;
 
 public class OptionParserTest {
@@ -74,7 +75,7 @@ public class OptionParserTest {
         try {
             optionParser.parseCommand(testString);
             fail();
-        } catch (UnknownConfigurationGroupWord e) {
+        } catch (UnsupportedResultTypeException e) {
             return;
         } catch (Exception e) {
             fail();
