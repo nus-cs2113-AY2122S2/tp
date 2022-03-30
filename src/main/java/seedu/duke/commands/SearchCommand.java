@@ -24,25 +24,29 @@ public class SearchCommand extends Command {
 
     /**
      * Constructs a SearchCommand.
-     * One of {@code name} or {@code description} must not be null. This is enforced in {@code SearchCommandParser}.
+     * One of {@code name} or {@code description} must not be null.
      * @param name a name to search for
      * @param description a description to search for
+     * @throws
      */
     public SearchCommand(Optional<String> name, Optional<String> description) {
         this.name = name;
         this.description = description;
+        if (!name.isPresent() && !description.isPresent()) {
+            throw new NullPointerException();
+        }
     }
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
         // O(n) search for items matching name and description
         List<Item> results = new ArrayList<>();
-            for (int i = 0; i < itemList.getSize(); i++) {
+        for (int i = 0; i < itemList.getSize(); i++) {
             Item searchItem = itemList.getItem(i);
-            if (this.name.isPresent() && !caseInsensitiveComparison(searchItem.getName(), this.name.get())) {
+            if (this.name.isPresent() && !caseInsensitiveContains(searchItem.getName(), this.name.get())) {
                 continue;
             }
-            if (this.description.isPresent() && !caseInsensitiveComparison(searchItem.getDescription(),
+            if (this.description.isPresent() && !caseInsensitiveContains(searchItem.getDescription(),
                     this.description.get())) {
                 continue;
             }
@@ -73,7 +77,9 @@ public class SearchCommand extends Command {
         }
     }
 
-    private boolean caseInsensitiveComparison(String str1, String str2) {
-        return str1.equalsIgnoreCase(str2);
+    private boolean caseInsensitiveContains(String str1, String str2) {
+        String lowerStr1 = str1.toLowerCase();
+        String lowerStr2 = str2.toLowerCase();
+        return lowerStr1.contains(lowerStr2);
     }
 }
