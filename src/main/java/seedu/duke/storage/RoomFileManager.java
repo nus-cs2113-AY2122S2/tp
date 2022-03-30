@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.HotelLiteManagerException;
 import seedu.duke.Room;
 import seedu.duke.RoomType;
 
@@ -10,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RoomFileManager extends FileManager {
-    private static final String FILE_PATH = "room_file.txt";
+    private static final String FILE_PATH = "ListFolder/room_file.txt";
 
-    public void load(ArrayList<Room> roomList) throws IOException {
+    public void load(ArrayList<Room> roomList) throws IOException, HotelLiteManagerException {
         Boolean isNewFile = !isFileExist(FILE_PATH);
         File file = getFile(FILE_PATH);
         if (isNewFile) {
@@ -78,7 +79,7 @@ public class RoomFileManager extends FileManager {
         }
     }
 
-    public void save(ArrayList<Room> roomArrayList) throws IOException {
+    public void save(ArrayList<Room> roomArrayList) throws IOException, HotelLiteManagerException {
         File file = getFile(FILE_PATH);
         FileWriter fileWriter = new FileWriter(FILE_PATH);
         for (Room room : roomArrayList) {

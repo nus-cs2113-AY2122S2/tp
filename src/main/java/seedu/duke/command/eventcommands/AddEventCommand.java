@@ -83,7 +83,7 @@ public class AddEventCommand extends Command {
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfileException, IOException, InvalidDateException {
+            throws HotelLiteManagerException, IOException {
 
         final EventList eventList = listContainer.getEventList();
         String description = getDescription();

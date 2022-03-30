@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.Event;
+import seedu.duke.HotelLiteManagerException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EventListFileManager extends FileManager {
-    private static final String FILE_PATH = "event_file.txt";
+    private static final String FILE_PATH = "ListFolder/event_file.txt";
 
-    public void load(ArrayList<Event> eventList) throws IOException {
+    public void load(ArrayList<Event> eventList) throws IOException, HotelLiteManagerException {
         File file = getFile(FILE_PATH);
         Scanner scan = new Scanner(file);
         while (scan.hasNext()) {
@@ -28,7 +29,7 @@ public class EventListFileManager extends FileManager {
 
 
 
-    public void save(ArrayList<Event> eventList) throws IOException {
+    public void save(ArrayList<Event> eventList) throws IOException , HotelLiteManagerException{
         File file = getFile(FILE_PATH);
         FileWriter fileWriter = new FileWriter(FILE_PATH);
         for (Event event : eventList) {
