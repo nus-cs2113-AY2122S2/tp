@@ -509,25 +509,24 @@ Example of usage:
 <br>
 
 ### Viewing a group: `group /view`
+Display details about a group so that you can review the group's details.<br>
 
-> Display details about a group so you can review the group's details.<br>
-> A group represents one or more individuals.
-> It is used as a shortcut in several commands for identifying a group of individual persons.
+>Format: `group /view /gid [GROUP_ID]`
+>
+>* `[GROUP_ID]` refers to the unique identifier of the group.
+>    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
 
-Format: `group /view /gid [GROUP_ID]`
-
-* `[GROUP_ID]` refers to the unique identifier of the group.
-    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+<br>
 
 > **💡 Note:**
 >- The group with a unique identifier of `[GROUP_ID]` has to exist before the group can be viewed.
 
 <br>
 
-Example of usage:
-1. Views a group with a unique identifier of 1.
-    - `group /view /gid 1` <br>
-    ![Group view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupViewCommand.png)
+**Example**:
+- Views a group with a unique identifier of 1.<br>
+`group /view /gid 1` <br>
+![Group view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupViewCommand.png)
 <br>     
 <br>
 
