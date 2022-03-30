@@ -30,4 +30,9 @@ public class NumberConstants {
      * For AddParsers.
      */
     public static final int MAXIMUM_MODULAR_CREDITS = 100;
+
+    /**
+     * For GpaCommand.
+     */
+    public static final int MAXIMUM_TOTAL_CREDITS = 2000000000;
 }
