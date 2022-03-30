@@ -33,7 +33,7 @@ public class StorageFile {
 
     public static final String DATA_FILE_PATH = "MeetingJio.txt";
 
-    private static final String NO_TIMETABLE = "There are no lessons in your timetable yet!";
+    private static final String NO_TIMETABLE = "There are no events in your timetable yet!";
 
     /**
      * Saves all the timetables in a readable format as MeetingJio.txt.
