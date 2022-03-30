@@ -213,7 +213,7 @@ The general workflow of the `session /view` command is as follows:
    not found is printed using `TextUi#printlnMessage`.
 6. Once the session is retrieved, `Session#toString` is called on it to return a `String` object representing the 
    session details.
-7. `TextUi#printlnMessage` is called on the `String` object to print its details to the interface.
+7. `TextUi#printlnMessage` is called to print the session details previously retrieved to the interface.
 
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
