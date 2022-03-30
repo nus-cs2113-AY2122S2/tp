@@ -6,7 +6,7 @@ import seedu.duke.command.Command;
 
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.EventList;
+import seedu.duke.eventlists.EventList;
 import seedu.duke.exceptions.InvalidEventException;
 
 import java.io.IOException;
