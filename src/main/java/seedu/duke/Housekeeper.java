@@ -39,8 +39,14 @@ public class Housekeeper {
             return "N/A";
         }
         String availableStr = "";
+        int reachEnd = 1;
         for (Integer i : availableList) {
-            availableStr += daysList[i] + " ";
+            if (availableList.size() <= reachEnd) {
+                availableStr += daysList[i];
+            } else {
+                availableStr += daysList[i] + " ";
+            }
+            reachEnd += 1;
         }
         return availableStr;
     }
@@ -75,8 +81,7 @@ public class Housekeeper {
 
     @Override
     public String toString() {
-        return "[" + getName().toUpperCase() + "]: " + "Age: " + getAge() + ", Availability: ( " + getAvailability()
-                + " )";
+        return "[" + getName().toUpperCase() + "]: " + "Age: " + getAge() + ", Availability: " + getAvailability();
     }
 
     public void setNullAvailability() {
