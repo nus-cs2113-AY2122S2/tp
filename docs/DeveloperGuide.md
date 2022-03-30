@@ -426,20 +426,20 @@ command object has been created by [`CommandFactory`](#Command-Execution):
 
 ### Data Archiving
 
-#### \[Proposed]Saving and loading feature
+#### Saving and loading feature
 
-##### Proposed implementation
+##### Implementation
 
-The proposed saving and loading mechanism is facilitated by `Family`. It loads records of `PersonList` for each logical
+The saving and loading mechanism is facilitated by `Family`. It loads records of `PersonList` for each logical
 grouping inside family from a local file, process the data and adds the record to `Family` for the current session.
 Saves the `PersonList` record of each `Family` grouping back into the local file upon exit of the program. It implements
 the following operations:
 
 * `Storage#checkFileExists()` -- Checks if `PlanITarium.txt` file exists in the local hard drive, creates one if it does
   not.
-* `Storage#saveData()` -- Writes `PersonList` record of each `Storage` grouping into `PlanITarium.txt` file upon exit of
+* `Storage#saveData()` -- Writes `PersonList` record of each `Family` grouping into `PlanITarium.txt` file upon exit of
   the program.
-* `Storage#loadData()` -- Opens and reads `PlanITarium.txt` for any existing `PersonList` records and updates the
+* `Storage#loadData()` -- Opens and reads `PlanITarium.txt` for any existing `Family` records and updates each
   `PersonList` data in the current session for each logical group in `Family`.
 
 Given below is an example scenario and how the save and load mechanism behaves at each step.
@@ -447,17 +447,18 @@ Given below is an example scenario and how the save and load mechanism behaves a
 Step 1. The user launches the application. A `Storage` object will be initialised with an empty `PersonList` for each
 `Family` grouping. The following sequence diagram shows how the `Storage` object is initialised
 
-Step 2. The program will create a new `PersonList` for the session which calls `Storage#loadData()`, causing a check if
-the local file `PlanITarium.txt` exists by calling `Storage#checkFileExists()` and creates one if it does not. The data
-in the local file will be read, parsed and added to the empty `PersonList` in `Storage` by calling `PersonList` adding
-operations. The data in the `PersonList` will then be returned to `PersonList` for each `Family` grouping in the current
-session. The following sequence diagram shows how the loading operation works:
+Step 2. The program will create a new `Family` object for the session which calls `Storage#loadData()`, causing a check 
+if the local file `PlanITarium.txt` exists by calling `Storage#checkFileExists()` and creates one if it does not. The 
+data in the local file will be read, parsed and added to the empty `Family` in `Storage` by calling `Family` adding
+operations. After all lines of the files has been read and all data added, the `Family` object is then returned to main
+and the `Family` object of the current session will consist of the data in `Family` of `Storage`. 
+The following sequence diagram shows how the loading operation works:
 
 ![StorageLoadSequence](images/StorageLoadSequence.png)
 
 Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called. All
 data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
-`(group type) (user/operation) (Category) (Info)` which are to be read again when the program starts up. The following
+`(user/operation) (Info)` which are to be read again when the program starts up. The following
 Sequence diagram shows how the saving operation will work:
 
 ![StorageSaveSequence](images/StorageSaveSequence.png)
