@@ -72,11 +72,11 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Updates the total expenditure field in the credit card specified in the expenditure item
+     * Updates the total expenditure field in the credit card specified in the expenditure item.
      *
-     * @param cardName Name of credit card to be updated
-     * @param amount amount of new expenditure
-     * @throws MindMyMoneyException when the card is not found in user's credit card list
+     * @param cardName Name of credit card to be updated.
+     * @param amount amount of new expenditure.
+     * @throws MindMyMoneyException when the card is not found in user's credit card list.
      */
     private void updateCreditCardTotalExpenditure(String cardName, float amount) throws MindMyMoneyException {
         CreditCard creditCard = creditCardList.get(cardName);

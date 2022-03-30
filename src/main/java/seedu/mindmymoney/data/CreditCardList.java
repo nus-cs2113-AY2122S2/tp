@@ -49,10 +49,10 @@ public class CreditCardList {
 
 
     /**
-     * Retrieves the CreditCard with the given name
+     * Retrieves the CreditCard with the given name.
      *
-     * @param name name of credit card to be searched
-     * @return CreditCard object with matching name as parameter
+     * @param name name of credit card to be searched.
+     * @return CreditCard object with matching name as parameter.
      */
     public CreditCard get(String name) {
         for (CreditCard i : creditCardListArray) {
