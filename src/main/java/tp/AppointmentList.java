@@ -49,9 +49,11 @@ public class AppointmentList {
         appointments.remove(index - 1);
         countAppointment -= 1;
     }
+
     public int getSize() {
         return countAppointment;
     }
+
     @Override
     public String toString() {
         String toPrint = boundary + "Here are the existing appointments:" + System.lineSeparator();

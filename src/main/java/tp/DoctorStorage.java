@@ -62,7 +62,7 @@ public class DoctorStorage {
      * @return The doctorList of the IHospitalDoctors.txt
      * @throws IHospitalException
      */
-    public DoctorList loadTaskList() throws IHospitalException {
+    public DoctorList loadDoctorList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
             Scanner scanner = new Scanner(dataFile);

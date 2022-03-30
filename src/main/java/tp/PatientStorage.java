@@ -39,7 +39,7 @@ public class PatientStorage {
      * @param patients doctor list
      * @throws IHospitalException
      */
-    public void saveDoctorList(PatientList patients) throws IHospitalException {
+    public void savePatientList(PatientList patients) throws IHospitalException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
             int amount = patients.getSize();
@@ -63,7 +63,7 @@ public class PatientStorage {
      * @return The taskList of the duke.txt
      * @throws IHospitalException
      */
-    public PatientList loadTaskList() throws IHospitalException {
+    public PatientList loadPatientList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
             Scanner scanner = new Scanner(dataFile);
