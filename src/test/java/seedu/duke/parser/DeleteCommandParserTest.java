@@ -26,8 +26,7 @@ public class DeleteCommandParserTest {
     @Test
     void parse_validIndex_success() throws InvMgrException {
         String testInput = "1";
-        DeleteCommand expectedOutput = new DeleteCommand(0);
         DeleteCommand actualOutput = parser.parse(testInput);
-        assertEquals(expectedOutput, actualOutput);
+        assertEquals(ParserStubs.ZEROINDEX_DELETECOMMAND, actualOutput);
     }
 }

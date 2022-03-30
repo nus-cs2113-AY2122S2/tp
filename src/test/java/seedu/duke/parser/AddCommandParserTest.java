@@ -32,10 +32,7 @@ public class AddCommandParserTest {
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
                 CliSyntax.PREFIX_QUANTITY.getPrefix(), ParserStubs.PAPERCUP_QUANTITY);
 
-        int quantity = Integer.parseInt(ParserStubs.PAPERCUP_QUANTITY);
-        Item expectedItem = new Item(ParserStubs.PAPERCUP_NAME, quantity, ParserStubs.PAPERCUP_DESCRIPTION);
-        Command expectedCommand = new AddCommand(expectedItem);
-        assertParseSuccess(parser, testInput, expectedCommand);
+        assertParseSuccess(parser, testInput, ParserStubs.PAPERCUP_ADDCOMMAND);
     }
 
     @Test

@@ -26,8 +26,7 @@ public class DescCommandParserTest {
     @Test
     void parse_validIndex_success() throws InvMgrException {
         String testInput = "1";
-        DescCommand expectedOutput = new DescCommand(0);
         DescCommand actualOutput = parser.parse(testInput);
-        assertEquals(expectedOutput, actualOutput);
+        assertEquals(ParserStubs.ZEROINDEX_DESCCOMMAND, actualOutput);
     }
 }
