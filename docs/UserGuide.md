@@ -345,25 +345,44 @@ Deletes an existing activity from a particular session so that you can remove ac
 ### Editing an activity: `activity /edit`
 Edits an existing activity so that you can change details of an activity.<br>
 
-There are two possible formats, depending on whether you want to split costs evenly across participants, or according
-to a cost list:
+There are two ways that you can edit an activity:
+1. Record the total cost to be split amongst everyone involved
+2. Record each person's individual cost
 
-> Split costs evenly: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] /p [PAYER] /i
-> [NAME1 NAME2...] /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`<br>
+> Format 1: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] /p [PAYER] /i
+> [NAME1 NAME2...] /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 > 
-> Split using a cost list: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] p [PAYER]
-  /i [NAME1 NAME2...] /cl [COST1 COST2...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`<br>
+> Format 2: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] p [PAYER]
+  /i [NAME1 NAME2...] /cl [COST1 COST2...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+> 
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
-   >      * The unique identifier for an activity can be retrieved with the
-            [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
+>    * The unique identifier for an activity can be retrieved with the [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
+>* `[ACTIVITY_NAME]` refers to the name of the activity.
+>    * The activity name is **case-insensitive**.
+>* `[PERSON_PAID]` refers to the person who paid for the activity.
+>    * The person's name is **case-insensitive**.
+>* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+>    * Each individual name is **case-insensitive**.
+>* `[TOTAL_COST]` refers to the total cost of the activity.
+>* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
+>  * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
 
 <br>
 
 > **💡 Notes**
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
+     it.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
->- Each name in `[NAME1 NAME2 ...]` for a particular activity should be unique.
+>- The `[ACTIVITY_NAME]` should be unique across all activities.
+>- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
+   `[SESSION_ID]`.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also only be a single word without whitespaces.
+   >   - Example: `Alice Tan` is not allowed.
+>- The values that follow the delimiters `/co` and `/cl` can only have a maximum of 12 digits before
+   and 2 digits after the decimal point, if any.
 >
 > **⚠️Warning:**
 >- All fields must be supplied in the command, not just the ones you wish to edit.
