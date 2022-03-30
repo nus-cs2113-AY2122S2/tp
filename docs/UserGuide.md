@@ -136,7 +136,7 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >- The `[SESSION_NAME]` should be unique across all active sessions.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 > 
-> **⚠️Warning:**
+> **⚠️Warnings:**
 >- When using `/pl` and `/gid` delimiters together, if there is a duplicated name in `/pl` and 
    specified group with `/gid`. The duplicate name would be removed, storing only 1 instance of it.
 >- Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
@@ -145,13 +145,13 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 <br>
 
 **Example 1** 
-- Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.<br> 
+- Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.<br><br>
   `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br>
   ![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
 
 **Example 2** 
 - A [group has been created](#creating-a-group-group-create) with group named *Friends* with Charlie and Mike. <br>
-  Adds a new session named Class Gathering consisting of a group named *Friends* and Alice, on 16-04-2022.<br>
+  Adds a new session named Class Gathering consisting of a group named *Friends* and Alice, on 16-04-2022.<br><br>
   `session /create /n Glass Gathering /d 16-04-2022 /gid 1 /pl Alice` <br>
   ![Session create command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[2].png)
   <br>
@@ -175,7 +175,7 @@ Deletes an existing session so that you can remove sessions that you do not need
 <br>
 
 **Example** 
-- Removes an existing session with a unique identifier of 1.<br>
+- Removes an existing session with a unique identifier of 1.<br><br>
   `session /delete /sid 1` <br>
   ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
   <br>
@@ -208,12 +208,12 @@ Examples of usage:
   named Class Outing with Alice and Bob involved on 15-03-2022.
 
 **Example 1** 
-- Edits the session name to Class gathering and date to 16-03-2022. <br>
+- Edits the session name to Class gathering and date to 16-03-2022. <br><br>
   `session /edit /sid 1 /n Class gathering /d 16-03-2022` <br>
   ![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
 
 **Example 2** 
-- Edits the session to include charlie. <br>
+- Edits the session to include charlie. <br><br>
   `session /edit /sid 1 /pl Alice Bob Charlie` <br>
   ![Session Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[2].png)
   <br>
@@ -235,7 +235,7 @@ Displays details about a session so that you can review the session.<br>
 <br>
 
 **Example**:
-- Views a session with a unique identifier of 1.
+- Views a session with a unique identifier of 1.<br><br>
   `session /view /sid 1` <br>
   ![Session View command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionViewCommand.png)
   <br>     
@@ -250,8 +250,8 @@ However, deleted sessions will not be listed.
 <br>
 
 **Example**
-- Lists all existing sessions <br>
-  `session /list`
+- Lists all existing sessions <br><br>
+  `session /list`<br>
   ![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
   <br>
   <br>
@@ -310,13 +310,13 @@ There are two ways that you can create an activity:
 
 **Example 1**
 - Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid a total of $10
-for both Bob and herself which will be split equally between them later on.<br>
+for both Bob and herself which will be split equally between them later on.<br><br>
 `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br>
 ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 
 **Example 2**
 - Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
-  Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.<br>
+  Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.<br><br>
   `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
   ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
   <br>
@@ -345,7 +345,7 @@ Deletes an existing activity from a particular session so that you can remove ac
 <br>
 
 **Example**:
-- Removes an existing activity with a unique identifier of 1 from a session with a unique identifier of 2. <br>
+- Removes an existing activity with a unique identifier of 1 from a session with a unique identifier of 2. <br><br>
   `activity /delete /sid 2 /aid 1` <br>
   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
   <br>
@@ -397,7 +397,7 @@ There are two ways that you can edit an activity:
 >- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
    with a maximum of 3 digits before and 2 after the decimal point, if any.
 >
-> **⚠️Warning:**
+> **⚠️Warnings:**
 >- All fields must be supplied in the command, not just the ones you wish to edit.
 >- This action is irreversible, once the command has been entered, the activity would be immediately edited.
 
@@ -407,7 +407,7 @@ There are two ways that you can edit an activity:
 - An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1, part of 
   a session with a `SESSION_ID` of 1. It was named *Lunch* with Alice and Bob.<br>
   Edits the activity's name, payer, overall cost, GST percentage and service charge. List of participants remains
-  unchanged.<br>
+  unchanged.<br><br>
   `activity /edit /sid 1 /aid 1 /n Dinner /p Bob /i Alice Bob /co 30 /gst 7 /sc 10`<br>
   ![Activity edit command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityEditCommand.png)
   <br>
@@ -431,7 +431,7 @@ Displays details about an activity so that you can review the activity's details
 <br>
 
 **Example**
-- Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.<br>
+- Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.<br><br>
   `activity /view /sid 2 /aid 2` <br>
   ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
   <br>     
@@ -454,7 +454,7 @@ However, deleted activities will not be listed.
 <br>
 
 **Example**:
-- Lists all activities in a session with a unique identifier of 2.<br>
+- Lists all activities in a session with a unique identifier of 2.<br><br>
   `activity /list /sid 2` <br>
   ![Activity list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityListCommand.png)
   <br>     
@@ -485,8 +485,7 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 **Example**
 * Displays a session summary that summarises the [session that has been created](#creating-a-session-session-create)
   with session unique identifier of 1 to help Alice and Bob calculate what transactions they have to make to
-  resolve all their debts to each other.<br>
-
+  resolve all their debts to each other.<br><br>
   `session /summary /sid 1`<br>
   ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
   <br>
@@ -519,7 +518,7 @@ Creates a new group so that you do not to always enter the same persons' particu
 <br>
 
 **Example**:
-- Adds a new group named Uni Friends, with Alice and Bob involved.
+- Adds a new group named Uni Friends, with Alice and Bob involved.<br><br>
   `group /create /n Uni Friends /pl Alice Bob` <br>
   ![Group create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupCreateCommand.png)
   <br>
@@ -544,7 +543,7 @@ Deletes an existing group so that you can remove groups that you do not need.
 <br>
 
 **Example**:
-- Removes an existing group with a unique identifier of 1.
+- Removes an existing group with a unique identifier of 1.<br><br>
   `group /delete /gid 1` <br>
   ![Group delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupDeleteCommand.png)
   <br>
@@ -576,12 +575,12 @@ Examples of usage:
 - A group with a unique identifier of 1 was previously created, and named Class Outing with Alice and Bob involved.
 
 **Example 1**
-- Edit the group name to Class gathering. <br>
+- Edits the group name to Class gathering. <br><br>
   `group /edit /gid 1 /n Class gathering` <br>
   ![Group Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[1].png)
 
 **Example 2**
-- Edit the group to include charlie. <br>
+- Edits the group to include charlie. <br><br>
   `group /edit /gid 1 /pl Alice Bob Charlie` <br>
   ![Group Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[2].png)
   <br>
@@ -603,7 +602,7 @@ Displays details about a group so that you can review the group's details.<br>
 <br>
 
 **Example**:
-- Views a group with a unique identifier of 1.<br>
+- Views a group with a unique identifier of 1.<br><br>
   `group /view /gid 1` <br>
   ![Group view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupViewCommand.png)
   <br>     
@@ -618,8 +617,8 @@ However, deleted groups will not be listed.
 <br>
 
 **Example**:
-- Lists all existing groups.<br>
-  `group /list`
+- Lists all existing groups.<br><br>
+  `group /list`<br>
   ![Group list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupListCommand.png)
   <br>
   <br>
