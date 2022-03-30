@@ -10,14 +10,34 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.Income;
 import seedu.mindmymoney.userfinancial.User;
 
-import static seedu.mindmymoney.constants.Flags.*;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_AMOUNT;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
+import static seedu.mindmymoney.constants.Flags.FLAG_END_VALUE;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_NAME;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_LIMIT;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
+
 import static seedu.mindmymoney.constants.Indexes.SPLIT_LIMIT;
 import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
-import static seedu.mindmymoney.helper.AddCommandInputTests.*;
-import static seedu.mindmymoney.helper.GeneralFunctions.*;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
+
+import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
+import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
+import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
 import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
 
 /**
