@@ -17,6 +17,9 @@ public class Storage {
 
     private Profile profile;
 
+    /**
+     * Initializes a Storage object.
+     */
     public Storage() {
         profile = new Profile();
     }

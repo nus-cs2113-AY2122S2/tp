@@ -13,8 +13,12 @@ import java.util.Set;
  * @author Roy
  */
 public class PersonList implements Serializable {
+
     private ArrayList<Person> personList;
 
+    /**
+     * Initializes a PersonList object.
+     */
     public PersonList() {
         this.personList = new ArrayList<>();
     }
@@ -66,9 +70,7 @@ public class PersonList implements Serializable {
      * @param person A Person object to be removed.
      */
     public void removePerson(Person person) {
-        if (personList.contains(person)) {
-            personList.remove(person);
-        }
+        personList.remove(person);
     }
 
     /**
@@ -83,7 +85,7 @@ public class PersonList implements Serializable {
     /**
      * Converts a String array object of names to a list of Person objects.
      *
-     * @param personNames A String array object of names.
+     * @param personNames An array of String objects of names.
      */
     public void convertToPersonList(String[] personNames) {
         for (String name : personNames) {
@@ -106,6 +108,7 @@ public class PersonList implements Serializable {
     /**
      * Checks if String array object of names has duplicated names.
      *
+     * @param personNames An array of String objects of names.
      * @return true if it contains duplicates,
      *         false otherwise.
      */
@@ -120,5 +123,24 @@ public class PersonList implements Serializable {
         assert nameSet.size() == personNames.length :
                 Message.ASSERT_PERSONLIST_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
         return false;
+    }
+
+    /**
+     * Checks if the personList attribute is a superset of the ArrayList object of Person objects supplied.
+     * Assumption: Function is only called by SessionEditCommand class to verify if new list of Person objects
+     *             is superset of the ArrayList object supplied.
+     *
+     * @param oldList An ArrayList object of Person objects.
+     * @return true if the new list of Person objects is a superset of the ArrayList object of Person objects supplied,
+     *         false otherwise.
+     */
+    public boolean isSuperset(ArrayList<Person> oldList) {
+        int existCount = 0;
+        for (Person person : personList) {
+            if (oldList.contains(person)) {
+                existCount++;
+            }
+        }
+        return existCount == oldList.size();
     }
 }

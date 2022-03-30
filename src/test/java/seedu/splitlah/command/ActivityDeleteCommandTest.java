@@ -14,7 +14,7 @@ class ActivityDeleteCommandTest {
 
     /**
      * Creates a session that is stored and managed by the Manager object.
-     * Creates 2 activities in the new session that was created.
+     * Creates two activities in the new session that was created.
      */
     @BeforeEach
     void setUp() {
@@ -27,48 +27,6 @@ class ActivityDeleteCommandTest {
         String activityTwoArgs = "activity /create /sid 1 /n Lunch /p Alice /i Bob Charlie /cl 5 5";
         Command createActivityTwo = Parser.getCommand(activityTwoArgs);
         createActivityTwo.run(manager);
-    }
-
-    /**
-     * Checks if an InvalidCommand object is returned when there are delimiters not provided by the user.
-     */
-    @Test
-    public void prepare_hasMissingDelimiter_InvalidCommand() {
-        // Case 1: Missing both /sid and /aid delimiters
-        String argsMissingBothDelimiters = "activity /delete";
-        Command activityWithMissingBothDelimiters = Parser.getCommand(argsMissingBothDelimiters);
-        assertEquals(InvalidCommand.class, activityWithMissingBothDelimiters.getClass());
-
-        // Case 2: Missing /sid delimiter only
-        String argsMissingSidDelimiter = "activity /delete /aid 1";
-        Command activityWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
-        assertEquals(InvalidCommand.class, activityWithMissingSidDelimiter.getClass());
-
-        // Case 3: Missing /aid delimiter only
-        String argsMissingAidDelimiter = "activity /delete /sid 1";
-        Command activityWithMissingAidDelimiter = Parser.getCommand(argsMissingAidDelimiter);
-        assertEquals(InvalidCommand.class, activityWithMissingAidDelimiter.getClass());
-    }
-
-    /**
-     * Checks if an InvalidCommand object is returned when there are arguments not provided by the user.
-     */
-    @Test
-    public void prepare_hasMissingArgument_InvalidCommand() {
-        // Case 1: Missing both Session Id and Activity Id arguments
-        String argsMissingBothArguments = "activity /delete /sid /aid";
-        Command activityWithMissingBothArguments = Parser.getCommand(argsMissingBothArguments);
-        assertEquals(InvalidCommand.class, activityWithMissingBothArguments.getClass());
-
-        // Case 2: Missing Session Id argument only
-        String argsMissingSessionIdArgument = "activity /delete /sid /aid 1";
-        Command activityWithMissingSessionIdArgument = Parser.getCommand(argsMissingSessionIdArgument);
-        assertEquals(InvalidCommand.class, activityWithMissingSessionIdArgument.getClass());
-
-        // Case 3: Missing Activity Id argument only
-        String argsMissingActivityIdArgument = "activity /delete /sid 1 /aid";
-        Command activityWithMissingActivityIdArgument = Parser.getCommand(argsMissingActivityIdArgument);
-        assertEquals(InvalidCommand.class, activityWithMissingActivityIdArgument.getClass());
     }
 
     /**
