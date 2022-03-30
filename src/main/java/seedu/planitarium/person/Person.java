@@ -9,6 +9,7 @@ import seedu.planitarium.money.Income;
 import seedu.planitarium.money.IncomeList;
 import seedu.planitarium.money.ExpenditureList;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -266,5 +267,15 @@ public class Person {
         System.out.println("Entries found for " + name + ":");
         incomeList.find(description);
         expenditureList.find(description, category);
+    }
+
+    /**
+     * Sets the init date of the specified income.
+     *
+     * @param incomeIndex The index of the income
+     * @param initDate The date to set to
+     */
+    public void setIncomeDate(int incomeIndex, LocalDate initDate) {
+        incomeList.setIncomeInitDate(incomeIndex, initDate);
     }
 }
