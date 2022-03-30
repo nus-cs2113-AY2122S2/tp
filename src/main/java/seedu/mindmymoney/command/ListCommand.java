@@ -82,7 +82,7 @@ public class ListCommand extends Command {
         int count = COUNTVALUE;
         String listInString = "";
         if (listInput.equals(FLAG_OF_EXPENSES)) {
-            listInString = ListString(count, listInString);
+            listInString = listString(count, listInString);
         } else {
             listInString = outputListWithDate(count,listInString);
         }
@@ -91,21 +91,21 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Outputs the list of expenses with date
+     * Outputs the list of expenses with date.
      * @param count To obtain the numbering when listing the expenses.
      * @param listInString String where the content of output is appended to.
-     * @return String of expenditures
-     * @throws MindMyMoneyException Throws an exception when the date is not in the correct format
+     * @return String of expenditures.
+     * @throws MindMyMoneyException Throws an exception when the date is not in the correct format.
      */
-    public String outputListWithDate(int count, String listInString) throws MindMyMoneyException{
+    public String outputListWithDate(int count, String listInString) throws MindMyMoneyException {
         String[] inputArray = GeneralFunctions.parseInput(listInput);
         if (!inputArray[INDEX_OF_SECOND_ITEM].equals("")) {
             if (!isValidInput(inputArray[INDEX_OF_SECOND_ITEM])) {
                 throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
             }
-            return ListStringWithDate(count, listInString, inputArray);
+            return listStringWithDate(count, listInString, inputArray);
         } else {
-            return ListString(count, listInString);
+            return listString(count, listInString);
         }
     }
 
@@ -116,15 +116,15 @@ public class ListCommand extends Command {
      * @param listInString String where the content of output is appended to.
      * @return String of expenditures
      */
-    public String ListStringWithDate(int count, String listInString, String[] inputArray) {
+    public String listStringWithDate(int count, String listInString, String[] inputArray) {
         for (Expenditure i : expenditureList.expenditureListArray) {
-                    if (i.getTime().contains(inputArray[INDEX_OF_SECOND_ITEM])) {
-                        listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription()
-                                + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod()
-                                + " [" + i.getTime() + "]" + "\n";
-                        count++;
-                    }
-                }
+            if (i.getTime().contains(inputArray[INDEX_OF_SECOND_ITEM])) {
+                listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription()
+                        + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod()
+                        + " [" + i.getTime() + "]" + "\n";
+                count++;
+            }
+        }
         return listInString;
     }
 
@@ -135,7 +135,7 @@ public class ListCommand extends Command {
      * @param listInString String where the content of output is appended to.
      * @return String of expenditures
      */
-    public String ListString(int count, String listInString) {
+    public String listString(int count, String listInString) {
         for (Expenditure i : expenditureList.expenditureListArray) {
             listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription() + "("
                     + i.getCategory() + ") " + "using " + i.getPaymentMethod() + " [" + i.getTime() + "]" + "\n";
