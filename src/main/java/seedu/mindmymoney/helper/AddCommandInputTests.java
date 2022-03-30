@@ -13,7 +13,7 @@ import static seedu.mindmymoney.constants.PaymentMethod.CASH;
 /**
  * Input validation for Add Command.
  */
-public class AddCommandInputTests {
+public class  AddCommandInputTests {
 
     /**
      * Checks if input is cash or a name of credit card.
