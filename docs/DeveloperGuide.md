@@ -1,7 +1,7 @@
-#Developer Guide
+# Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
-#Contents
+# Contents
 * [Acknowledgements](#acknowledgements)
 * [Getting Started For Beginners](#getting-started-for-beginners)
 * [Design](#design)
@@ -72,51 +72,60 @@ The Sequence Diagram below showcases the general Logic and Flow of the program f
 
 ### UI component
 
-![UIClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/UIClassUML.png)
-<br>
+![UIClassUML](diagrams/UIClassUML.png)
+
 How the UI class works:
-* Based on the architecture sequence diagram, `Manager` class calls readCommand method in `UI` class and returns the UserInput
-* Afterwards, the `Manager` class calls readParameters method in `UI` class and returns another UserInput
-* Finally, the `Manager` class calls print method in `UI` class which in turn calls `Status` enum and returns the constant
+* Based on the architecture sequence diagram, `Manager` class calls readCommand method in `UI` class and returns the UserInput.
+* Afterwards, the `Manager` class calls readParameters method in `UI` class and returns another UserInput.
+* Finally, the `Manager` class calls print method in `UI` class which in turn calls `Status` enum and returns the constant.
 
 ### Manager component
 
-![ManagerUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ManagerClassUML.png)
+![ManagerUML](diagrams/ManagerClassUML.png)
 <br>
 How the Manager class works:
-* When `Duke` class instantiates a `Manager` object and calls runLoop method, the program will execute a while loop
-* In the while loop, there is a switch condition
-* Based on the parameter provided to the switch, it will call the respective methods in UI, Parser & Command classes
-* The while loop only halts when isTerminated boolean becomes true. Then, the programme exits
+* When `Duke` class instantiates a `Manager` object and calls runLoop method, the program will execute a while loop.
+* In the while loop, there is a switch condition.
+* Based on the parameter provided to the switch, it will call the respective methods in UI, Parser & Command classes.
+* The while loop only halts when isTerminated boolean becomes true. Then, the programme exits.
 
 ### Helper Classes
+
 #### `Command`
 
-![CommandUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/CommandClassUML.png)
+![CommandUML](diagrams/CommandClassUML.png)
+
 How the Command class works:
-* Based on the architecture sequence diagram, the `Parser` class calls the `Validator` class to check if the inputs are valid
-* If it is valid, the `Command` subclass executes its method
-* The subclass is based on whether the user wants to access either the `Doctor`, `Patient`, `Medicine` or `Appointment` asset list class
-* The input parameters determine which of the `Command` subclass is used
+* Based on the architecture sequence diagram, the `Parser` class calls the `Validator` class to check if the inputs are valid.
+* If it is valid, the `Command` subclass executes its method.
+* The subclass is based on whether the user wants to access either the `Doctor`, `Patient`, `Medicine` or `Appointment` asset list class.
+* The input parameters determine which of the `Command` subclass is used.
 
 #### `Validator`
-![ValidatorClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ValidatorClassUML.puml)
+
+![ValidatorClassUML](diagrams/ValidatorClassUML.png)
+
 The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters
 entered are invalid.
 For example, validateAddPatient validates the parameter of `add patient` command, ensuring each parameter is in correct
 format. Please refer to the below sequence diagram for a clearer understanding.
-![ValidatorUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ValidatorUML.puml)
+
+![ValidatorUML](diagrams/ValidatorUML.png)
 
 
 #### `Parser`
-![ParserClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ParserClassUML.puml)
+
+![ParserClassUML](diagrams/ParserClassUML.png)
+
 The parser parses the description of the command. It first checks the number of parameters entered is correct and 
 calls the validator class to validate the parameters, and then returns a command if the validation is successful.
-![ParserUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ParserUML.puml)
+
+![ParserUML](diagrams/ParserUML.png)
 
 #### `Storage`
 
 ![StorageClassUML](diagrams/StorageClassUML.png)
+
 The Storage class holds 4 different Lists found in the Assets collection as seen in the Class Diagram shown above. Any edits made
 to these Lists must be made by accessing them from the Storage object. The Storage class also has 4 load functions for each type of Asset,
 namely Patient, Doctor, Medicine and Appointment. These methods read in the respective text files to load existing information
@@ -125,15 +134,18 @@ in the CSV format. The Directory of these text files is found in the DIR String 
 can be found in the PATH_MED, PATH_PAT, PATH_DOC, PATH_APP String variables respectively.
 
 ### Asset classes
+
 #### `Appointment`
 
 ![AppointmentUML](diagrams/AppointmentUML.png)
 
 The Appointment class holds several attributes that are exposed via getter methods. To instantiate the class, all the
 attributes must be given to the constructor method.
+
 #### `Appointment List`
 
 ![AppointmentListUML](diagrams/AppointmentListUML.png)
+
 The AppointmentList class contains a private list of Appointments and another list for searching.  It has several
 public methods that allows the user to get information regarding the list, view the list as well as search for specific
 Appointment by selected criteria.
@@ -141,6 +153,7 @@ Appointment by selected criteria.
 #### `Medicine`
 
 ![MedicineUML](diagrams/MedicineUML.png)
+
 The Medicine class holds several attributes that are exposed via getter methods. To instantiate the class, all the
 attributes must be given to the constructor method. There is a method to edit the attribute data that can be called 
 whenever user types in the correct command.
@@ -148,13 +161,15 @@ whenever user types in the correct command.
 #### `Medicine List`
 
 ![MedicineListUML](diagrams/MedicineListUML.png)
+
 The MedicineList class contains private lists of Medicine, expired Medicine and one list for searching. It has several
 public methods that allows the user to get information regarding the list, view the list as well as search for specific
 Medicine by selected criteria.
 
-#### `Patient`
+##### `Patient`
 
 ![PatientUML](diagrams/PatientUML.png)
+
 The Patient class holds several attributes that are exposed via getter methods. To instantiate the class, all the
 attributes must be given to the constructor method. There is a method to edit the attribute data that can be called
 whenever user types in the correct command.
@@ -162,6 +177,7 @@ whenever user types in the correct command.
 #### `Patient List`
 
 ![PatientListUML](diagrams/PatientListUML.png)
+
 The PatientList class contains private lists of Patients and one list for searching. It has several
 public methods that allows the user to get information regarding the list, view the list as well as search for specific
 Patients by selected criteria.
@@ -169,6 +185,7 @@ Patients by selected criteria.
 #### `Doctor`
 
 ![DoctorUML](diagrams/DoctorUML.png)
+
 The Doctor class holds several attributes that are exposed via getter methods. To instantiate the class, all the
 attributes must be given to the constructor method. There is a method to edit the attribute data that can be called
 whenever user types in the correct command.
@@ -176,6 +193,7 @@ whenever user types in the correct command.
 #### `Doctor List`
 
 ![DoctorListUML](diagrams/DoctorListUML.png)
+
 The DoctorList class contains private lists of Doctors and one list for searching. It has several
 public methods that allows the user to get information regarding the list, view the list as well as search for specific
 Doctors by selected criteria.
