@@ -158,7 +158,9 @@ public class Group implements Serializable {
         }
 
         StringBuilder outputString = new StringBuilder("Group Id ");
-        outputString.append("#").append(groupId).append("  --").append("\n").append("Participants: ");
+        outputString.append("#").append(groupId).append("  --").append("\n");
+        outputString.append("Name: ").append(groupName).append("\n");
+        outputString.append("Participants:");
         for (int i = 0; i < personList.getSize(); i++) {
             String personName = personList.getPerson(i).getName();
             outputString.append("\n ").append(i + OFFSET).append(". ").append(personName);
