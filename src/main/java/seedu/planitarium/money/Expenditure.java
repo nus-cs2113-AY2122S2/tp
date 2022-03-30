@@ -16,7 +16,7 @@ public class Expenditure extends Money {
      * @param isPermanent Boolean var to indicate if expenditure is recurring
      * @param category    Expenditure's category
      */
-    public Expenditure(String description, double amount, int category, boolean isPermanent) {
+    public Expenditure(String description, Double amount, int category, Boolean isPermanent) {
         super(description, amount, isPermanent);
         this.category = category;
     }

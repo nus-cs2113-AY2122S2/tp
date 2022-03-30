@@ -11,7 +11,7 @@ public class Income extends Money {
      * @param amount      Income's amount
      * @param isPermanent Income's recurrence
      */
-    public Income(String description, double amount, boolean isPermanent) {
+    public Income(String description, Double amount, Boolean isPermanent) {
         super(description, amount, isPermanent);
     }
 

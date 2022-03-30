@@ -41,7 +41,7 @@ class ExpenditureTest {
     @Test
     public void addExpenditure_nullDescription_expectAssertionError() {
         try {
-            Expenditure testNullDescription = new Expenditure(null, 24, 1, false);
+            Expenditure testNullDescription = new Expenditure(null, 24.0, 1, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
