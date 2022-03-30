@@ -1,9 +1,12 @@
 package seedu.duke;
 
+import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import seedu.duke.command.Command;
+import seedu.duke.storage.ItemListFileManager;
+import seedu.duke.storage.SatisfactionListFileManager;
 
 
 /**
@@ -127,13 +130,15 @@ public class AddSatisfactionCommand extends Command {
      *                 must be included for the execution override.
      * @param ui The user interface for this execution method.
      */
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         if (satisfactionList.isCustomerInSatisfactionList(satisfaction.getCustomerName())) {
             throw new RepeatCustomerException();
         }
         satisfactionList.addSatisfaction(satisfaction);
         ui.printAddSatisfactionAcknowledgementMessage(satisfactionList, satisfaction);
+        SatisfactionListFileManager satisfactionListFileManager = new SatisfactionListFileManager();
+        satisfactionListFileManager.writeSatisfactionListToFile(satisfactionList);
 
     }
 
