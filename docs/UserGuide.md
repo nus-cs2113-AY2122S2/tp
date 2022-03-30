@@ -47,7 +47,7 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
     * [Listing all groups: `group /list`](#listing-all-groups-group-list)
   * [Miscellaneous](#miscellaneous)
     * [Listing all available commands: `help`](#listing-all-available-commands-help)
-    * [Exit](#exiting-the-application-exit)
+    * [Exiting the application: `exit`](#exiting-the-application-exit)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
