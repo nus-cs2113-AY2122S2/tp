@@ -20,7 +20,9 @@ public class AddPatientCommand extends Command {
 
     @Override
     public void execute(DoctorList doctorList, PatientList patientList,
-                        AppointmentList appointmentList, Ui ui, DoctorStorage storage) throws IHospitalException {
+                        AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
+                        PatientStorage patientStorage,
+                        AppointmentStorage appointmentStorage) throws IHospitalException {
         Patient patient = new Patient(id, name, phoneNumber, email);
         patientList.addPatient(patient);
     }

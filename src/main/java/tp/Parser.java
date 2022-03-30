@@ -92,8 +92,9 @@ public class Parser {
             return new ListAppointmentListCommand();
         } else if (fullCommand.contains("list patient")) {
             return new ListPatientListCommand();
-        } else
+        } else {
             throw new IHospitalException("Invalid command given");
+        }
 
         return null;
     }

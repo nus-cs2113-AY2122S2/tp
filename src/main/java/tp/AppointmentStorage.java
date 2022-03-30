@@ -18,10 +18,6 @@ public class AppointmentStorage {
     private static final Path filePath = Paths.get(root, "data", "IHospitalAppointments.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
-    /**
-     * The constructor of storage
-     * @throws IHospitalException
-     */
     public AppointmentStorage() throws IHospitalException {
         try {
             File fileDirectory = new File(dirPath.toString());
@@ -37,16 +33,16 @@ public class AppointmentStorage {
     }
 
     /**
-     *
+     * The function to save appointment list.
      * @param appointments doctor list
-     * @throws IHospitalException
+     * @throws IHospitalException IHospitalException
      */
-    public void saveAppointmentList (AppointmentList appointments) throws IHospitalException {
+    public void saveAppointmentList(AppointmentList appointments) throws IHospitalException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
             int amount = appointments.getSize();
             fw.write(String.format("%d\n", amount));
-            for(int i = 1; i <= amount; i++) {
+            for (int i = 1; i <= amount; i++) {
                 Appointment currAppointment = (Appointment)appointments.getAppointment(i);
                 fw.write(String.format("%d. Appointment:\n", i));
                 fw.write(currAppointment.getDoctor() + "\n");
@@ -62,28 +58,29 @@ public class AppointmentStorage {
     /**
      * A method that will load duke.txt and store the taskList into the current duke's taskList
      * @return The doctorList of the IHospitalDoctors.txt
-     * @throws IHospitalException
+     * @throws IHospitalException IHospitalException
      */
     public AppointmentList loadAppointmentList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
             Scanner scanner = new Scanner(dataFile);
             AppointmentList result = new AppointmentList();
-            if(!scanner.hasNext()) {
+            Doctor doctor;
+            if (!scanner.hasNext()) {
                 return result;
             }
             int n = scanner.nextInt();
             scanner.nextLine();//read enter
             String data;
 
-            for(int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++) {
                 data = scanner.nextLine();
                 String dummy = scanner.nextLine();
                 String id = dummy.substring(1, dummy.indexOf("]"));
                 String name = dummy.substring(dummy.indexOf("Name:") + 6, dummy.indexOf(" ||"));
                 String phoneNumber = dummy.substring(dummy.indexOf("No.:") + 5, dummy.indexOf(" || Email:"));
                 String email = dummy.substring(dummy.indexOf("Email:") + 7);
-                Doctor doctor = new Doctor(id, name, phoneNumber, email);
+                doctor = new Doctor(id, name, phoneNumber, email);
                 dummy = scanner.nextLine();
                 id = dummy.substring(1, dummy.indexOf("]"));
                 name = dummy.substring(dummy.indexOf("Name:") + 6, dummy.indexOf(" ||"));
