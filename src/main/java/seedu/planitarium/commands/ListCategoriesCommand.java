@@ -21,7 +21,6 @@ public class ListCategoriesCommand extends Command {
         logger.log(Level.INFO, LOG_LISTCAT_INFO);
     }
 
-    @Override
     public void execute() {
         Category.listCategories();
         logger.log(Level.INFO, LOG_EXECUTE_INFO);

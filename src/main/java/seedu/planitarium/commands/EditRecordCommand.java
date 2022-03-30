@@ -58,7 +58,6 @@ public class EditRecordCommand extends Command {
         logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, uid,group));
     }
 
-    @Override
     public void execute() throws PlanITariumException {
         assert (keyword != null) : KEYWORD_NOT_NULL;
         assert (family != null) : FAMILY_NOT_NULL;
