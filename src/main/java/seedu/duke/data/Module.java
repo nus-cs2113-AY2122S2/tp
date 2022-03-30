@@ -11,7 +11,6 @@ public class Module {
     private static final String MODULE_STRING_NO_DESC = "%s (%sMC, Grade: %s)";
     private static final String GENERAL_TASK_STRING = "%s";
     private static final String INDENT = StringConstants.INDENT;
-    private static final String NOT_ENTERED = StringConstants.NOT_ENTERED_STR;
     private static final int NOT_APPLICABLE = 0;
 
     private final String moduleCode;

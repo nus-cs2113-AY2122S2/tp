@@ -20,13 +20,13 @@ public class Configuration {
 
     // Legal configuration groups.
     public enum ConfigurationGroup {
-        SHOW_COMPLETED_TASKS;
+        SHOW_COMPLETED_TASKS
     }
 
     // Each configuration group shall have a default value.
     private static final String DEFAULT_VALUE_COMPLETED_TASK_SHOWN = FALSE;
 
-    // Each configuration group shall have a well defined legal values set.
+    // Each configuration group shall have a well-defined legal values set.
     public static final HashSet<String> LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN = new HashSet<>(Arrays.asList(TRUE, FALSE));
 
     // Add the explanation of the configuration group here for help.
@@ -47,6 +47,12 @@ public class Configuration {
     // A HashSet integrating explanations sets of legal values for all configuration groups
     public static final HashMap<ConfigurationGroup, HashSet<String>> EXPLAIN_LEGAL_VALUES = new HashMap<>();
 
+    // Initialise these values
+    static {
+        LEGAL_VALUES.put(ConfigurationGroup.SHOW_COMPLETED_TASKS, LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN);
+        EXPLAIN_LEGAL_VALUES.put(ConfigurationGroup.SHOW_COMPLETED_TASKS, EXPLAIN_LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN);
+    }
+
     // HashSet storing all current configuration settings.
     public HashMap<ConfigurationGroup, String> configurationGroupHashMap;
 
@@ -56,10 +62,9 @@ public class Configuration {
         LEGAL_VALUES.put(ConfigurationGroup.SHOW_COMPLETED_TASKS, LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN);
         EXPLAIN_LEGAL_VALUES.put(ConfigurationGroup.SHOW_COMPLETED_TASKS, EXPLAIN_LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN);
 
-        // Shall set the value of each configuration group to default
+        // Set the value of each configuration group to default
         configurationGroupHashMap.put(ConfigurationGroup.SHOW_COMPLETED_TASKS, DEFAULT_VALUE_COMPLETED_TASK_SHOWN);
     }
-
 
     public Configuration(HashMap<ConfigurationGroup, String> configurationGroupStringHashMap) {
         this();
@@ -102,5 +107,16 @@ public class Configuration {
      */
     public String getConfigurationValue(ConfigurationGroup group) {
         return configurationGroupHashMap.get(group);
+    }
+
+    /**
+     * Returns a list of all config settings and their descriptions.
+     */
+    public static String getAllConfigurationExplanations() {
+        String result = "";
+        for (String s : EXPLAIN_CONFIGURE_GROUP) {
+            result += s + LS;
+        }
+        return result;
     }
 }

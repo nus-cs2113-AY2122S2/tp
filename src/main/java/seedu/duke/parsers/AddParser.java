@@ -8,6 +8,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.GeneralParseException;
+import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -22,6 +23,7 @@ public class AddParser extends Parser {
     private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
     private static final String MODULAR_CREDIT = StringConstants.MODULAR_CREDIT;
     private static final String MODULAR_CREDIT_STR = StringConstants.ERROR_MODULAR_CREDITS_FAILED;
+    private static final int MAXIMUM_MODULAR_CREDITS = NumberConstants.MAXIMUM_MODULAR_CREDITS;
 
     // Unescaped regex for testing (split across a few lines):
     // (task\s+\"(?<taskName>[^\"]+)\"(\s+-m\s+(?<taskModule>\w+))?(\s+-d\s+\"(?<taskDescription>[^\"]+)\")?(\s+-t\s+\"
@@ -88,6 +90,9 @@ public class AddParser extends Parser {
             int modularCredit;
             try {
                 modularCredit = Integer.parseInt(modularCreditStr);
+                if (modularCredit > MAXIMUM_MODULAR_CREDITS) {
+                    throw new NumberFormatException();
+                }
             } catch (NumberFormatException e) {
                 throw new InvalidNumberException(MODULAR_CREDIT_STR);
             }

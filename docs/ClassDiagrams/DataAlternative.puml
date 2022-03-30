@@ -1,7 +1,10 @@
 @startuml
 
-!include Style.puml
-
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam classFontSize 12
+skinparam classAttributeFontSize 12
+hide circle
 hide attributes
 hide methods
 
