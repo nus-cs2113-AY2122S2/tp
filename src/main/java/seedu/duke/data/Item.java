@@ -12,7 +12,7 @@ public class Item {
     private String name;
     private int quantity;
     private String description;
-    public ArrayList<BorrowRecord> borrowRecords;
+    public ArrayList<BorrowRecord> borrowRecords = new ArrayList<BorrowRecord>();
 
     public Item(String name, int quantity, String description) {
         this.name = name;
