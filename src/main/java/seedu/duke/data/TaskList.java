@@ -48,7 +48,7 @@ public class TaskList {
     }
 
     /**
-     * Adds tag to the task list
+     * Adds tag to the task list.
      *
      * @param tagDescription The description of tag that is inputted by user
      * @param index The task number to be added with tag
@@ -65,7 +65,7 @@ public class TaskList {
     }
 
     /**
-     * Removes tag from the task list
+     * Removes tag from the task list.
      *
      * @param tagDescription The description of tag that is inputted by user
      * @param index The task number to remove the tag
@@ -106,6 +106,7 @@ public class TaskList {
 
     /**
      * Formats all tasks in the task list as a pretty printed string.
+     *
      * @param indent string representing the indentation level for each task item
      * @param showCompletedTasks whether completed tasks should be listed
      */
@@ -130,6 +131,7 @@ public class TaskList {
 
     /**
      * Formats all tasks in the task list with a matching tag as a pretty printed string.
+     *
      * @param indent string representing the indentation level for each task item
      * @param tag the tag to be matched
      * @param showCompletedTasks whether completed tasks should be listed
