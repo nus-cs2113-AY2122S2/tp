@@ -15,6 +15,7 @@ public class SearchCommand extends Command {
 
     public SearchCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
+        this.type = "SearchCMD";
         this.description = Parser.parseDescription(userInput);
         this.category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
     }

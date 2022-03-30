@@ -32,7 +32,7 @@ public class CommandFactoryTest {
         try {
             newCommand = factory.getCommand(null, family1);
         } catch (AssertionError e) {
-            assertEquals(Constants.INPUT_NOT_NULL, e.toString());
+            assertEquals(Constants.INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -43,7 +43,7 @@ public class CommandFactoryTest {
         try {
             newCommand = factory.getCommand(CommandsForTesting.ADDPERSON, family2);
         } catch (AssertionError e) {
-            assertEquals(Constants.FAMILY_NOT_NULL, e.toString());
+            assertEquals(Constants.FAMILY_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -52,7 +52,7 @@ public class CommandFactoryTest {
     @Test
     void getCommand_invalidCommand_ExceptionThrown() {
         try {
-            newCommand = factory.getCommand(CommandsForTesting.INVALIDCMD, family2);
+            newCommand = factory.getCommand(CommandsForTesting.INVALIDCMD, family1);
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), "Unknown instruction is detected. Error is detected from "
                     + "'CommandFactory'. Please check your input again.");

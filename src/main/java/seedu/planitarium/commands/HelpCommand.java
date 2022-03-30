@@ -16,6 +16,7 @@ public class HelpCommand extends Command {
 
     public HelpCommand(String userInput, Family family) {
         super(userInput, family);
+        this.type = "HelpCMD";
         logger.log(Level.INFO, LOG_HELP_INFO);
     }
 
