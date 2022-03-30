@@ -13,8 +13,9 @@ import seedu.meetingjio.exceptions.MissingParameterException;
 
 public class ParserArguments {
 
-    private static String[] splitArgumentsWithHeadings(String[] splitArguments, String[] headings, Boolean checkAllParams) 
-        throws MissingParameterException {
+    private static String[] splitArgumentsWithHeadings(String[] splitArguments, String[] headings, 
+        Boolean checkAllParams) throws MissingParameterException {
+        
         int count = headings.length;
         String[] eventDescription = new String[count];
         Arrays.fill(eventDescription, "");
