@@ -1,9 +1,7 @@
 package seedu.duke.commands;
 
-import seedu.duke.common.Messages;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
-import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -30,20 +28,20 @@ public class SearchCommand extends Command {
     public void execute(ItemList itemList, Ui ui) {
         // O(n) search for items matching name and description
         List<Item> results = new ArrayList<>();
-        for (int i = 0; i<itemList.getSize(); i++) {
+        for (int i = 0; i < itemList.getSize(); i++) {
             Item searchItem = itemList.getItem(i);
             // Note that the .get() on the right is safe due to short circuit eval
-            if(this.name.isPresent() && !searchItem.getName().contains(name.get())) {
+            if (this.name.isPresent() && !searchItem.getName().contains(name.get())) {
                 continue;
             }
-            if(this.description.isPresent() && !searchItem.getDescription().contains(description.get())) {
+            if (this.description.isPresent() && !searchItem.getDescription().contains(description.get())) {
                 continue;
             }
             results.add(searchItem);
         }
 
         ui.showMessages("Here are the items matching your search terms: ");
-        for (int i = 0; i<results.size(); i++) {
+        for (int i = 0; i < results.size(); i++) {
             ui.showMessages(String.valueOf(i + 1) + "." + results.get(i));
         }
     }
