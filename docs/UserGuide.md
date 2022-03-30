@@ -15,6 +15,7 @@
   * [Deleting](#deleting-delete)
   * [Editing](#editing-edit)
   * [Finding](#findingfind)
+  * [Additional Features]()
   * [Saving](#saving)
     * [Saved Data](#saving)
     * [Corrupt Files](#corrupt-files)
@@ -365,6 +366,27 @@ To find a medicine you would have to provide one of these parameters using the g
 Format:`find medicine /info [parameter], [parameter of medicine]`
 
 Example: `find medicine /info name, Paracetamol`
+
+### Additional Features
+
+#### Retrieving List of Expired Medicine in the inventory
+
+To retrieve list of expired medicine in your inventory, you can simply call the `update medicines` command. This command
+requires no additional parameter. **{DO NOTE THAT THIS LIST WILL BE CLEARED AND THE INFORMATION WITHIN WILL BE DESTROYED
+UPON EXIT OF THE APP}**
+
+Format: `update medicines`
+
+Example: `update medicines`
+
+##### Clearing List of Expired Medicine
+
+If you choose to clear the list of expired medicine manually you can use the `clear old medicines` command. This commmand
+requires no additional parameter.
+
+Format: `clear old medicines`
+
+Example: `clear old medicines`
 
 ### Saving
 
