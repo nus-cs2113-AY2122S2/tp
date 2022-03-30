@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class HalpmiException {
+    +HalpmiException(String)
+    +toString() : String
+}
+class DuplicateEntryException
+
+class UserInputErrorException
+
+class NotFoundException
+
+DuplicateEntryException --|> HalpmiException
+UserInputErrorException --|> HalpmiException
+NotFoundException --|> HalpmiException
+@enduml
