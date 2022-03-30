@@ -32,19 +32,19 @@ class CalculateInputCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 2022-03";
+        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 1000 /t 2022-04";
+        inputString = "/e cash /c Personal /d Nike Shoes /a 1000 /t 30/04/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 200 /t 2021-03";
+        inputString = "/e cash /c Personal /d Nike Shoes /a 200 /t 30/03/2021";
         new AddCommand(inputString, user).executeCommand();
 
         setUp();
-        new CalculateInputCommand("/epm Mar 2022", user).executeCommand();
+        new CalculateInputCommand("/epm 03/2022", user).executeCommand();
         tearDown();
-        String expectedOutput = "Total expenditure in the month of Mar 2022 is $3300.0." + System.lineSeparator()
+        String expectedOutput = "Total expenditure in 03/2022 is $3300.0." + System.lineSeparator()
                 + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
                 + "-----------------------------------------------" + System.lineSeparator()
                 + "FOOD:           0.0%" + System.lineSeparator()
@@ -68,15 +68,15 @@ class CalculateInputCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 0.5 /t 2022-03";
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 0.5 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 0.10 /t 2022-03";
+        inputString = "/e cash /c Personal /d Nike Shoes /a 0.10 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
         setUp();
-        new CalculateInputCommand("/epm mAr 2022", user).executeCommand();
+        new CalculateInputCommand("/epm 30/03/2022", user).executeCommand();
         tearDown();
-        String expectedOutput = "Total expenditure in the month of Mar 2022 is $0.6." + System.lineSeparator()
+        String expectedOutput = "Total expenditure in 30/03/2022 is $0.6." + System.lineSeparator()
                 + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
                 + "-----------------------------------------------" + System.lineSeparator()
                 + "FOOD:           0.0%" + System.lineSeparator()
@@ -100,13 +100,13 @@ class CalculateInputCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 2022-03";
+        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
         assertThrows(MindMyMoneyException.class,
-            () -> new CalculateInputCommand("/a Mar 2022", user).executeCommand());
+            () -> new CalculateInputCommand("/a 30/03/2022", user).executeCommand());
     }
 
     /**
@@ -119,13 +119,13 @@ class CalculateInputCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 2022-03";
+        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
         assertThrows(MindMyMoneyException.class,
-            () -> new CalculateInputCommand("Mar 2022", user).executeCommand());
+            () -> new CalculateInputCommand("30/03/2022", user).executeCommand());
     }
 
     /**
@@ -138,13 +138,13 @@ class CalculateInputCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 2022-03";
+        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
         assertThrows(MindMyMoneyException.class,
-            () -> new CalculateInputCommand("Mar 2022", user).executeCommand());
+            () -> new CalculateInputCommand("30/03/2022", user).executeCommand());
     }
 
     /**
@@ -158,7 +158,7 @@ class CalculateInputCommandTest {
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
         assertThrows(MindMyMoneyException.class,
-            () -> new CalculateInputCommand("Mar 2022", user).executeCommand());
+            () -> new CalculateInputCommand("30/03/2022", user).executeCommand());
     }
 
     public void tearDown() {

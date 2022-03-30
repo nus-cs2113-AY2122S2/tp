@@ -12,26 +12,101 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ListCommandTest {
     /**
-     * Tests list command on a non-empty list. Prints list of size 1 first, followed by list of size 2, to check for
-     * formatting
+     * Tests list command with no date on a non-empty list. Prints list of size 1 first,
+     * followed by list of size 2, to check for formatting.
      */
     @Test
-    void listToString_normalInputs_expectString() throws MindMyMoneyException {
+    void listToString_normalInputsWithNoDate_expectString() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
         String listInString = new ListCommand("/expenses", user).expenditureListToString();
-        assertEquals("1. $300.0 on Nike Shoes from Personal [Mar 2022]\n", listInString);
+        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
 
-        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 2022-03";
+        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(inputString2, user).executeCommand();
         listInString = new ListCommand("/expenses", user).expenditureListToString();
-        assertEquals("1. $300.0 on Nike Shoes from Personal [Mar 2022]\n"
-                + "2. $69.0 on Cream Pie from Food [Mar 2022]\n", listInString);
+        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
+        String listInString2 = new ListCommand("/expenses ", user).expenditureListToString();
+        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString2);
+    }
+
+    /**
+     * Tests list command with exact date, month, year on a non-empty list. Prints list of size 1 first,
+     * followed by list of size 2, to check for formatting.
+     */
+    @Test
+    void listToString_normalInputsWithExactDate_expectString() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        new AddCommand(inputString, user).executeCommand();
+        String listInString = new ListCommand("/expenses", user).expenditureListToString();
+        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
+        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
+        new AddCommand(inputString2, user).executeCommand();
+        String inputString3 = "/e cash /c Food /d Cream Pie /a 69 /t 30/04/2022";
+        new AddCommand(inputString3, user).executeCommand();
+        listInString = new ListCommand("/expenses 30/03/2022", user).expenditureListToString();
+        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
+    }
+
+    /**
+     * Tests list command with exact month, year on a non-empty list. Prints list of size 1 first,
+     * followed by list of size 2, to check for formatting.
+     */
+    @Test
+    void listToString_normalInputsWithExactMonth_expectString() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        new AddCommand(inputString, user).executeCommand();
+        String listInString = new ListCommand("/expenses", user).expenditureListToString();
+        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
+        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
+        new AddCommand(inputString2, user).executeCommand();
+        String inputString3 = "/e cash /c Food /d Cream Pie /a 69 /t 30/04/2022";
+        new AddCommand(inputString3, user).executeCommand();
+        listInString = new ListCommand("/expenses 03/2022", user).expenditureListToString();
+        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
+    }
+
+    /**
+     * Tests list command with exact year on a non-empty list. Prints list of size 1 first,
+     * followed by list of size 2, to check for formatting.
+     */
+    @Test
+    void listToString_normalInputsWithExactYear_expectString() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        new AddCommand(inputString, user).executeCommand();
+        String listInString = new ListCommand("/expenses", user).expenditureListToString();
+        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
+        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
+        new AddCommand(inputString2, user).executeCommand();
+        String inputString3 = "/e cash /c Food /d Cream Pie /a 69 /t 30/04/2021";
+        new AddCommand(inputString3, user).executeCommand();
+        listInString = new ListCommand("/expenses 2022", user).expenditureListToString();
+        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
     }
 
     /**
@@ -44,6 +119,48 @@ class ListCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         ListCommand listCommandTest = new ListCommand("/expenses", user);
+
+        assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
+    }
+
+    /**
+     * Tests list command for date, month and year on an empty list. Should expect an exception thrown
+     */
+    @Test
+    void listCommand_wrongDateFormat_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        ListCommand listCommandTest = new ListCommand("/expenses 39/14/2022", user);
+
+        assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
+    }
+
+    /**
+     * Tests list command for month and year on an empty list. Should expect an exception thrown
+     */
+    @Test
+    void listCommand_wrongMonthFormat_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        ListCommand listCommandTest = new ListCommand("/expenses 4/2022", user);
+
+        assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
+    }
+
+    /**
+     * Tests list command for year on an empty list. Should expect an exception thrown
+     */
+    @Test
+    void listCommand_wrongYearFormat_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        ListCommand listCommandTest = new ListCommand("/expenses /2022/", user);
 
         assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
     }

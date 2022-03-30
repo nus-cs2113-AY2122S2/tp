@@ -1,6 +1,7 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
@@ -31,7 +32,9 @@ import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
-import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the Add command.
@@ -103,8 +106,11 @@ public class AddCommand extends Command {
         float amountInt = formatFloat(amountAsFloat);
 
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
-        String time = convertTime(inputTime);
-
+        if (!isValidInput(inputTime)) {
+            throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
+        }
+        LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String time = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         expenditureList.add(new Expenditure(paymentMethod, category, description, amountInt, time));
         System.out.println("Successfully added: \n\n"
             + "Description: " + description + "\n"
@@ -114,6 +120,20 @@ public class AddCommand extends Command {
             + "Date: " + time + "\n\n"
             + "into the account");
         System.out.print(System.lineSeparator());
+    }
+
+    /**
+     * Checks if date input format is valid.
+     *
+     * @param input The string of the date input.
+     * @return true if format is valid, false otherwise.
+     */
+    public static boolean isValidInput(String input) {
+        if (input.matches(ValidationRegexTypes.VALIDATION_REGEX_D)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

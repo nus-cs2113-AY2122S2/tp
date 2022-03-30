@@ -3,6 +3,7 @@ package seedu.mindmymoney.helper;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
 import seedu.mindmymoney.constants.PrintStrings;
+import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
@@ -15,7 +16,6 @@ import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.PERSONAL;
 import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.ENTERTAINMENT;
 import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.OTHERS;
 import static seedu.mindmymoney.constants.ExpenditureFields.TIME;
-import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.findItemsInList;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
 import static seedu.mindmymoney.helper.GeneralFunctions.findMatchingCategoryInArraylist;
@@ -35,7 +35,9 @@ public class Calculations {
      */
     public static void calculateExpenditurePerMonth(String input, ExpenditureList expenditureList)
         throws MindMyMoneyException {
-        input = capitalise(input);
+        if (!isValidInput(input)){
+            throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
+        }
         ArrayList<Expenditure> foundItems = findItemsInList(input, TIME.toString(), expenditureList);
         float sumOfExpenditure = 0;
         for (Expenditure item : foundItems) {
@@ -45,8 +47,24 @@ public class Calculations {
         if (sumOfExpenditure == 0.0) {
             throw new MindMyMoneyException("Month and year not found in the list! Do check your input");
         }
-        System.out.println("Total expenditure in the month of " + input + " is $" + sumOfExpenditure + ".");
+        System.out.println("Total expenditure in " + input + " is $" + sumOfExpenditure + ".");
         displayExpenditureBreakdown(foundItems, sumOfExpenditure);
+    }
+
+    /**
+     * Checks if date input format is valid.
+     *
+     * @param input The string of the date input.
+     * @return true if format is valid, false otherwise.
+     */
+    public static boolean isValidInput(String input) {
+        if (input.matches(ValidationRegexTypes.VALIDATION_REGEX_D)
+                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_M)
+                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_Y)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -62,7 +80,6 @@ public class Calculations {
         float personalPercentage = calculatePercentage(PERSONAL, foundItems, sumOfExpenditure);
         float entertainmentPercentage = calculatePercentage(ENTERTAINMENT, foundItems, sumOfExpenditure);
         float othersPercentage = calculatePercentage(OTHERS, foundItems, sumOfExpenditure);
-
         System.out.println(System.lineSeparator() + "BREAKDOWN OF EXPENSES:");
         System.out.print(PrintStrings.LINE);
         System.out.println("FOOD:          " + printBar(foodPercentage) + " " + foodPercentage + "%");

@@ -2,9 +2,11 @@ package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.PrintStrings;
+import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
+import seedu.mindmymoney.helper.GeneralFunctions;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.Income;
@@ -46,7 +48,7 @@ public class ListCommand extends Command {
      * @return true if the /expenses flag is present, false otherwise.
      */
     private boolean hasExpensesFlag() {
-        return FLAG_OF_EXPENSES.equals(listInput);
+        return listInput.contains(FLAG_OF_EXPENSES);
     }
 
     /**
@@ -67,29 +69,69 @@ public class ListCommand extends Command {
         return FLAG_OF_INCOME.equals(listInput);
     }
 
-
     /**
      * Gets all expenditures and formats them into a String to be printed.
      *
      * @return String of expenditures.
+     * @throws MindMyMoneyException Throws an exception when the date is not in the correct format
      */
-    public String expenditureListToString() {
+    public String expenditureListToString() throws MindMyMoneyException {
         int indexOfList = 1;
         String listInString = "";
-
-        for (Expenditure i : expenditureList.expenditureListArray) {
-            if (i.getCategory() == null) {
-                listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription()
-                        + " [" + i.getTime() + "]" + "\n";
+        if (listInput.equals(FLAG_OF_EXPENSES)) {
+            listInString = printListString(indexOfList, listInString);
+        } else {
+            String[] inputArray = GeneralFunctions.parseInput(listInput);
+            if (!inputArray[1].equals("")) {
+                if (!isValidInput(inputArray[1])) {
+                    throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
+                }
+                for (Expenditure i : expenditureList.expenditureListArray) {
+                    if (i.getTime().contains(inputArray[1])) {
+                        listInString += indexOfList + ". $" + i.getAmount() + " was spent on " + i.getDescription()
+                                + "(" + i.getCategory() + ") " + "using " + i.getExpenditure()
+                                + " [" + i.getTime() + "]" + "\n";
+                        indexOfList++;
+                    }
+                }
             } else {
-                listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + " from "
-                        + i.getCategory() + " [" + i.getTime() + "]" + "\n";
+                listInString = printListString(indexOfList, listInString);
             }
-            indexOfList++;
         }
-
         assert listInString.length() != 0 : "Return string should be non-empty";
         return listInString;
+    }
+
+    /**
+     * Formats the output of expenses in list.
+     *
+     * @param index To obtain the numbering when listing the expenses.
+     * @param listInString String where the content of output is appended to.
+     * @return
+     */
+    public String printListString(int index, String listInString) {
+        for (Expenditure i : expenditureList.expenditureListArray) {
+            listInString += index + ". $" + i.getAmount() + " was spent on " + i.getDescription() + "("
+                    + i.getCategory() + ") " + "using " + i.getExpenditure() + " [" + i.getTime() + "]" + "\n";
+            index++;
+        }
+        return listInString;
+    }
+
+    /**
+     * Checks if date input format is valid.
+     *
+     * @param input The string of the date input.
+     * @return true if format is valid, false otherwise.
+     */
+    public static boolean isValidInput(String input) {
+        if (input.matches(ValidationRegexTypes.VALIDATION_REGEX_D)
+                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_M)
+                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_Y)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
