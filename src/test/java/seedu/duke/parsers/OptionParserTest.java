@@ -70,7 +70,7 @@ public class OptionParserTest {
 
     @Test
     public void parse_legalConfigNameAndBadValue() {
-        final String testString = "COMPLETED_TASKS_SHOWN=true1";
+        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=true1";
         try {
             optionParser.parseCommand(testString);
             fail();
@@ -83,11 +83,12 @@ public class OptionParserTest {
 
     @Test
     public void parse_legalConfigNameAndLegalValue_withExtraWhitespace() {
-        final String testString = "COMPLETED_TASKS_SHOWN=true ";
+        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=" + StringConstants.TRUE + " ";
         try {
             optionParser.parseCommand(testString);
-            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
-            assertEquals("true", optionParser.parsedCommand.get("newValue"));
+            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME,
+                    optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals(StringConstants.TRUE, optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
         }
