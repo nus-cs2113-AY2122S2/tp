@@ -205,7 +205,7 @@ Examples of usage:
 
 
 ### Viewing a session : `session /view`
-Displays details about a session.<br>
+Displays details about a session so you can review the session.<br>
 
 >Format: `session /view /sid [SESSION_ID]`
 ><br>
@@ -322,7 +322,7 @@ Example of usage:
 
 ### Viewing an activity: `activity /view`
 
-> Display details about an activity.<br>
+> Display details about an activity so you can review the activity.<br>
 
 Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -446,7 +446,7 @@ Example of usage:
 
 ### Viewing a group: `group /view`
 
-> Display details about a group.<br>
+> Display details about a group so you can review the group's details.<br>
 > A group represents one or more individuals.
 > It is used as a shortcut in several commands for identifying a group of individual persons.
 
