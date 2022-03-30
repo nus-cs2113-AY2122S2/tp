@@ -106,7 +106,6 @@ public class StringConstants {
     public static final String HELP_NOTE = "Compulsory flags start with \"/\". Optional flags start with \"-\".\n"
             + "Compulsory parameters are fully capitalised: e.g. MODULE_CODE.\n"
             + "Optional parameters are in square brackets: e.g. [-d MODULE_DESCRIPTION]";
-    public static final String EXIT_HELP = "Exits the program.\nFormat to exit program: exit";
     public static final String ADD_HELP = "Adds a module or task as indicated by the command input.\n"
             + "Format to add module: add mod MODULE_CODE MODULAR_CREDITS [-d \"MODULE_DESCRIPTION\"]\n"
             + "Format to add task:   add task \"TASK_NAME\" [-m MODULE_CODE] [-d \"TASK_DESCRIPTION\"]"
@@ -118,9 +117,13 @@ public class StringConstants {
             + "Format to edit a module: edit mod MODULE_CODE -d \"MODULE_DESCRIPTION\"\n"
             + "Format to edit a task:   edit task TASK_INDEX [-m MODULE_CODE]"
             + " (-n \"TASK_NAME\" | -d \"TASK_DESCRIPTION\" | -t \"ESTIMATED_WORKING_TIME\")";
+    public static final String EXIT_HELP = "Exits the program.\nFormat to exit program: exit";
     public static final String GRADE_HELP = "Sets the grade for the specified module.\n"
             + "Accepted values: A+, A, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU\n"
             + "Format to set a module's grade: grade MODULE_CODE MODULE_GRADE";
+    public static final String GPA_HELP = "Computes and displays the GPA based the inputted grades of all modules.\n"
+            + "Modules without any assigned grade are omitted from the calculation.\n"
+            + "Format to display GPA : gpa\n";
     public static final String LIST_HELP = "Displays a list of tasks, grouped by module code.\n"
             + "Completed tasks may or may not be shown depending on current user preferences.\n"
             + "If tag name is provided, list will only display tasks containing the tag name.\n"
@@ -136,7 +139,7 @@ public class StringConstants {
             + "Format to save: save";
     public static final String HELP = "Displays help and format for selected command.\n"
             + "Format to display help for specific command: help COMMAND\n"
-            + "Available commands: exit, add, del, edit, grade, list, mark, save, help, reset, tag";
+            + "Available commands: exit, add, del, edit, grade, gpa, help, list, mark, option, reset, save, tag";
     public static final String TAG_HELP = "Set a custom tag for your tasks. The tag cannot contain whitespace.\n"
             + "Format to add a tag: tag add TASK_INDEX [-m MODULE_CODE] TAG_NAME\n"
             + "Format to delete a tag: tag del TASK_INDEX [-m MODULE_CODE] TAG_NAME";

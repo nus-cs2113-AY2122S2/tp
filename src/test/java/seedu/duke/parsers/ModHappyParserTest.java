@@ -11,8 +11,13 @@ import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.EditCommand;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.GradeCommand;
+import seedu.duke.commands.GpaCommand;
+import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
+import seedu.duke.commands.OptionCommand;
+import seedu.duke.commands.ResetCommand;
+import seedu.duke.commands.SaveCommand;
 import seedu.duke.commands.TagCommand;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
@@ -536,7 +541,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_invalidFlag() {
-        final String testString = "del /a 1";
+        final String testString = "del a 1";
         try {
             parser.parseCommand(testString);
             fail();
@@ -613,19 +618,6 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_editCommand_task_unnecessaryArgs() {
-        final String testString = "edit task 1 blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     public void parse_editCommand_task_parsedCorrectly() {
         final String testString = "edit task 1 -m cs2113t -n \"changed\" ";
         try {
@@ -634,6 +626,19 @@ public class ModHappyParserTest {
             assertEquals(0, ((EditCommand) c).getTaskIndex()); // zero-indexed
             assertNull(((EditCommand) c).getModuleCode());
             assertEquals("cs2113t", ((EditCommand) c).getTaskModule());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_unnecessaryArgs() {
+        final String testString = "edit task 1 blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
@@ -692,6 +697,30 @@ public class ModHappyParserTest {
     }
 
     @Test
+    public void parse_exitCommand_parsedCorrectly() {
+        final String testString = "exit";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ExitCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_exitCommand_unnecessaryArgs() {
+        final String testString = "exit blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_gradeCommand_parsedCorrectly() {
         final String testString = "grade CS2113T a+";
         try {
@@ -720,6 +749,102 @@ public class ModHappyParserTest {
     @Test
     public void parse_gradeCommand_wrongOrder() {
         final String testString = "grade A- CS2113T";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_gpaCommand_parsedCorrectly() {
+        final String testString = "gpa";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof GpaCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_gpaCommand_unnecessaryArgs() {
+        final String testString = "gpa blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_helpCommand_parsedCorrectly() {
+        final String testString = "help";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof HelpCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_helpCommand_withCommandWord_parsedCorrectly() {
+        final String testString = "help add";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof HelpCommand);
+            assertEquals("add", ((HelpCommand) c).getCommand());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_helpCommand_unnecessaryArgs() {
+        final String testString = "help add blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_listCommand_parsedCorrectly() {
+        final String testString = "list";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ListCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_listCommandwithArgument_noExeceptionThrown() {
+        final String testString = "list test";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ListCommand);
+            assertEquals("test", ((ListCommand) c).getArgument());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_listCommand_unnecessaryArgs() {
+        final String testString = "list test blahblah";
         try {
             parser.parseCommand(testString);
             fail();
@@ -822,42 +947,80 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_listCommand_parsedCorrectly() {
-        final String testString = "list";
+    public void parse_optionCommand_parsedCorrectly() {
+        final String testString = "option";
         try {
             Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof ListCommand);
+            assertTrue(c instanceof OptionCommand);
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void parse_listCommandwithArgument_noExeceptionThrown() {
-        final String testString = "list test";
+    public void parse_optionCommand_invalidConfigName() {
+        final String testString = "option invalidConfigName";
         try {
-            Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof ListCommand);
-            assertEquals("test", ((ListCommand) c).getArgument());
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void parse_exitCommand_parsedCorrectly() {
-        final String testString = "exit";
+    public void parse_optionCommand_noEqualSign() {
+        final String testString = "option COMPLETED_TASKS_SHOWN false";
         try {
-            Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof ExitCommand);
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void parse_exitCommand_unnecessaryArgs() {
-        final String testString = "exit blahblah";
+    public void parse_resetCommand_parsedCorrectly() {
+        final String testString = "reset";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ResetCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_resetCommand_unnecessaryArgs() {
+        final String testString = "reset blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_saveCommand_parsedCorrectly() {
+        final String testString = "save";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof SaveCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_saveCommand_unnecessaryArgs() {
+        final String testString = "save blahblah";
         try {
             parser.parseCommand(testString);
             fail();
