@@ -9,7 +9,9 @@ import seedu.duke.Ui;
 import seedu.duke.ListContainer;
 import seedu.duke.InvalidItemPaxException;
 import seedu.duke.InvalidUpdateItemPaxCommandException;
+import seedu.duke.storage.ItemListFileManager;
 
+import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -115,11 +117,13 @@ public class UpdateItemPaxCommand extends Command {
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         ItemList listOfItems = listContainer.getItemList();
         assert (item != null) : "Assertion Failed! There is no item within the UpdateItemPaxCommand object.";
         listOfItems.updateItemPaxInList(item);
         ui.printUpdateItemPaxAcknowledgementMessage(item);
+        ItemListFileManager itemListFileManager = new ItemListFileManager();
+        itemListFileManager.writeItemListToFile(listOfItems);
     }
 
     public Item getItem() {

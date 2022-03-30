@@ -2,12 +2,13 @@ package seedu.duke.command.roomcommand;
 
 import java.io.IOException;
 
-import seedu.duke.AssignmentMap;
-import seedu.duke.InvalidRoomNumberException;
-import seedu.duke.ListContainer;
-import seedu.duke.Room;
 import seedu.duke.RoomList;
+import seedu.duke.ListContainer;
 import seedu.duke.Ui;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.AssignmentMap;
+import seedu.duke.Room;
+import seedu.duke.InvalidRoomNumberException;
 import seedu.duke.command.Command;
 import seedu.duke.command.RoomHelper;
 
@@ -30,7 +31,7 @@ public class CheckOutCommand extends Command {
      * @throws InvalidRoomNumberException if the room number is not inside the room list.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         this.roomList = listContainer.getRoomList();
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         for (Room room : roomList.getRoomList()) {

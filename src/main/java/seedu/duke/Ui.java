@@ -86,7 +86,7 @@ public class Ui {
     public void printAssignedHousekeeper(String roomID, String name) {
         System.out.println(LINE);
         System.out.println("I have assigned " + name
-               + " to room number " + roomID + ".");
+                + " to room number " + roomID + ".");
         System.out.println(LINE);
     }
 
@@ -278,6 +278,10 @@ public class Ui {
         System.out.println(LINE);
         System.out.println(TABLE_HEADER);
         System.out.println(LINE);
+    }
+
+    public void printFileNotFoundMessage(String fileName) {
+        System.out.printf("File %s was not found and is unable to be created.\n", fileName);
     }
 
     public void printNotedLine() {

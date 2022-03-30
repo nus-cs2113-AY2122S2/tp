@@ -10,7 +10,9 @@ import seedu.duke.ItemList;
 import seedu.duke.Ui;
 import seedu.duke.ListContainer;
 import seedu.duke.InvalidItemPaxException;
+import seedu.duke.storage.ItemListFileManager;
 
+import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -110,7 +112,7 @@ public class AddItemCommand extends Command {
      * @param ui The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
         assert (item != null) : "Assertion Failed! There is no item within the AddItemCommand object.";
@@ -122,6 +124,8 @@ public class AddItemCommand extends Command {
             return;
         }
         ui.printAddItemAcknowledgementMessage(listOfItems);
+        ItemListFileManager itemListFileManager = new ItemListFileManager();
+        itemListFileManager.writeItemListToFile(listOfItems);
     }
 
     public Item getItem() {

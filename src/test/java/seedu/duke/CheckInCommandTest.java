@@ -44,7 +44,7 @@ class CheckInCommandTest {
 
     //unhappy
     @Test
-    void execute_inValidRoomNumber_throwException() throws IOException, InvalidRoomNumberException {
+    void execute_inValidRoomNumber_throwException() throws IOException, HotelLiteManagerException {
         ListContainer listContainer = new ListContainer();
         Ui ui = new Ui();
         String inputCommand = "601";
