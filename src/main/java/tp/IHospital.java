@@ -15,7 +15,8 @@ public class IHospital {
 
     public void run() throws IHospitalException {
         ui.sayHello();
-        String fullCommand = Parser.getCommand();
+        String fullCommand;
+        fullCommand = Parser.getCommand();
         DoctorStorage doctorStorage = new DoctorStorage();
         PatientStorage patientStorage = new PatientStorage();
         AppointmentStorage appointmentStorage = new AppointmentStorage();
@@ -33,6 +34,9 @@ public class IHospital {
                 fullCommand = Parser.getCommand();
             }
         }
+        doctorStorage.saveDoctorList(doctors);
+        patientStorage.savePatientList(patients);
+        appointmentStorage.saveAppointmentList(appointments);
         ui.sayGoodbye();
     }
 

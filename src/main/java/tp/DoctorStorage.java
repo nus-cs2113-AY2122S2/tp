@@ -16,8 +16,8 @@ public class DoctorStorage {
     private static final Path dirPath = Paths.get(root, "data");
 
     /**
-     * The constructor of storage
-     * @throws IHospitalException
+     * The constructor of storage.
+     * @throws IHospitalException IHospitalException
      */
     public DoctorStorage() throws IHospitalException {
         try {
@@ -34,16 +34,16 @@ public class DoctorStorage {
     }
 
     /**
-     *
+     * The function to save Doctor list.
      * @param doctors doctor list
-     * @throws IHospitalException
+     * @throws IHospitalException IHospitalException
      */
     public void saveDoctorList(DoctorList doctors) throws IHospitalException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
             int amount = doctors.getSize();
             fw.write(String.format("%d\n", amount));
-            for(int i = 1; i <= amount; i++) {
+            for (int i = 1; i <= amount; i++) {
                 Doctor currDoctor = (Doctor) doctors.getDoctor(i);
                 fw.write(String.format("%d. Doctor:\n", i));
                 fw.write(currDoctor.getId() + "\n");
@@ -60,21 +60,21 @@ public class DoctorStorage {
     /**
      * A method that will load duke.txt and store the taskList into the current duke's taskList
      * @return The doctorList of the IHospitalDoctors.txt
-     * @throws IHospitalException
+     * @throws IHospitalException IHospitalException
      */
     public DoctorList loadDoctorList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
             Scanner scanner = new Scanner(dataFile);
             DoctorList result = new DoctorList();
-            if(!scanner.hasNext()) {
+            if (!scanner.hasNext()) {
                 return result;
             }
             int n = scanner.nextInt();
             scanner.nextLine();//read enter
             String data;
 
-            for(int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++) {
                 data = scanner.nextLine();
                 String id = scanner.nextLine();
                 String name = scanner.nextLine();
