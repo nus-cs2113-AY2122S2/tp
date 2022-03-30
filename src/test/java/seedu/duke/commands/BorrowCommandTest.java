@@ -20,7 +20,7 @@ public class BorrowCommandTest {
         Item item1 = new Item("Markers", 3, "Drawing");
         itemList.addItem(item1);
 
-        Command c = new BorrowCommand(0, "21-03-2021", "23-03-2021", "John Smith");
+        Command c = new BorrowCommand(0, "2021-03-21", "2021-03-23", "John Smith");
         c.execute(itemList, ui);
     }
 }
