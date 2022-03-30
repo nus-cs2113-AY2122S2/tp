@@ -1,5 +1,6 @@
 package seedu.duke.command.housekeepercommands;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import seedu.duke.Housekeeper;
@@ -9,6 +10,7 @@ import seedu.duke.Ui;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.command.Command;
 import seedu.duke.InvalidNewYearException;
+import seedu.duke.storage.HousekeeperFileManager;
 
 public class AgeIncreaseCommand extends Command {
     private static final String UPDATE_AGE_BY_ONE = "is a new year";
@@ -28,7 +30,7 @@ public class AgeIncreaseCommand extends Command {
      *                      executed.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) throws IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.increaseAllAgeByOne();
         ui.printMessage("Everyone age has increased by one");
@@ -36,5 +38,7 @@ public class AgeIncreaseCommand extends Command {
         ui.printMessage("**Over age limit housekeeper will be removed from list**");
         ui.printOverAgeList(overAgeHousekeeperList);
         housekeeperList.deleteOverAgeHousekeeper();
+        HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
+        housekeeperFileManager.save(housekeeperList);
     }
 }

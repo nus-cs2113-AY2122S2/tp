@@ -84,6 +84,10 @@ public class Housekeeper {
         return "[" + getName().toUpperCase() + "]: " + "Age: " + getAge() + ", Availability: " + getAvailability();
     }
 
+    public String toFileString() {
+        return getName() + " | " + getAge() + " | " + availability;
+    }
+
     public void setNullAvailability() {
         this.availability = null;
     }

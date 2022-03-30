@@ -6,6 +6,9 @@ import seedu.duke.Ui;
 import seedu.duke.command.Command;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.InvalidNewWeekException;
+import seedu.duke.storage.HousekeeperFileManager;
+
+import java.io.IOException;
 
 /**
  * Reset availability of each housekeeper when needed such as a start of a new week.
@@ -27,9 +30,11 @@ public class ResetAvailabilityCommand extends Command {
      *                      executed.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) throws IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.resetAvailability();
         ui.printHousekeeperListReset(housekeeperList);
+        HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
+        housekeeperFileManager.save(housekeeperList);
     }
 }
