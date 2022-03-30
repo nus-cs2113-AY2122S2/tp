@@ -396,27 +396,28 @@ There are two ways that you can edit an activity:
   ![Activity edit command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityEditCommand.png)
   <br>
   <br>
+
 ### Viewing an activity: `activity /view`
+Displays details about an activity so that you can review the activity's details.<br>
 
-> Display details about an activity so that you can review the activity.<br>
+> Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
+>
+>* `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>* `[ACTIVITY_ID]` refers to the unique identifier of the activity. 
+>    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
-Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
-
-
-* `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
-* `[ACTIVITY_ID]` refers to the unique identifier of the activity. 
-    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
+<br>
 
 > **💡 Note:**
 >- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
 
 <br>
 
-Example of usage:
-1. Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.
-    - `activity /view /sid 2 /aid 2` <br>
-      ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
+**Example**
+- Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.<br>
+`activity /view /sid 2 /aid 2` <br>
+![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
 <br>     
 <br>
 
