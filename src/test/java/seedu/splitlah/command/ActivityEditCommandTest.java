@@ -69,12 +69,12 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if an activity's payer remains unchanged when trying to change the payer to a nonexistent participant.
+     * Checks if an activity's payer remains unchanged when trying to change the payer to a person not in the session.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
     @Test
-    public void run_editActivityPayerToNonexistentPayer_payerIsNotEdited() throws InvalidDataException {
+    public void run_editActivityPayerToPersonNotInSession_payerIsNotEdited() throws InvalidDataException {
         String userInput = "activity /edit /sid 1 /aid 1 /n Lunch /p Michael /i Alice Bob Charlie /co 15";
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityEditCommand.class, command.getClass());
@@ -109,7 +109,7 @@ class ActivityEditCommandTest {
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
     @Test
-    public void run_editActivityPersonListWithInvalidNames_PersonListIsNotEdited() throws InvalidDataException {
+    public void run_editActivityPersonListWithPersonNotInSession_PersonListIsNotEdited() throws InvalidDataException {
         String userInput = "activity /edit /sid 1 /aid 1 /n Lunch /p Alice /i Michael Bob /co 15";
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityEditCommand.class, command.getClass());
@@ -128,7 +128,7 @@ class ActivityEditCommandTest {
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
     @Test
-    public void run_editActivityTotalCost_totalCostIsEdited() throws InvalidDataException {
+    public void run_editActivityOverallCost_overallCostIsEdited() throws InvalidDataException {
         String userInput = "activity /edit /sid 1 /aid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 20";
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityEditCommand.class, command.getClass());
@@ -141,7 +141,7 @@ class ActivityEditCommandTest {
      *
      */
     @Test
-    public void run_editActivityTotalCostToInvalidCost_totalCostIsNotEdited() {
+    public void run_editActivityOverallCostToInvalidCost_overallCostIsNotEdited() {
         String userInput = "activity /edit /sid 1 /aid 1 /n Lunch /p Alice /i Alice Bob Charlie /co -1";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
@@ -193,7 +193,7 @@ class ActivityEditCommandTest {
      *
      */
     @Test
-    public void run_editActivityServiceChargeWithInvalidServiceCharge_serviceChargeNotEdited() {
+    public void run_editActivityServiceChargeWithInvalidServiceCharge_serviceChargeIsNotEdited() {
         String userInput = "activity /edit /sid 1 /aid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 20 /sc -1";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
@@ -268,7 +268,7 @@ class ActivityEditCommandTest {
      * Checks if an activity is not edited when an activity has duplicate names in the involved list.
      */
     @Test
-    public void run_hasNameDuplicatesInInvolvedList_invalidCommandGenerated() {
+    public void run_hasNameDuplicatesInInvolvedList_activityNotEdited() {
         String userInput = "activity /edit /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
