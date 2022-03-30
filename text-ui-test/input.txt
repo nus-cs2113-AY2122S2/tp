@@ -76,5 +76,13 @@ find cs
 list
 rm 1
 list
+read ics
+nusmods_calendar.ics
+list
+rm 16
+read ics
+nus.ics
+read ics
+nus.txt
 menu
 exit

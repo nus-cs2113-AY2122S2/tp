@@ -114,7 +114,7 @@ public class ModuleCalendarReader {
                         continue;
                     }
                 }
-                moduleTime = timeSlot.toString();
+                moduleTime = timeSlot.toString().toLowerCase();
                 getExamDate();
                 standardizeModuleCategory();
                 modulesList.add(new Module(moduleCode,moduleCategory,moduleDay,moduleTime));
