@@ -187,10 +187,6 @@ public abstract class Message {
             "A Group object failed to be added into the list of groups because there are duplicate names in"
                     + "the person list.";
 
-    // Name
-    public static final String ERROR_NAME_INVALID_NAME =
-            "Invalid name. Names must contain only alphabetical characters.";
-
     // Session
     public static final String ERROR_SESSION_EMPTY_ACTIVITY_LIST =
             "The list of activities in the session is currently empty.";
@@ -304,7 +300,7 @@ public abstract class Message {
 
     // Session View Command
     public static final String LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED =
-            "A session could not be viewed.";
+            "A Session object was unable to be viewed from the list of sessions with Id: ";
     public static final String LOGGER_SESSIONVIEW_SESSION_VIEWED =
             "A session with the following Id was viewed: ";
 
@@ -336,14 +332,8 @@ public abstract class Message {
     // Activity Edit Command
     public static final String LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY =
             "An Activity object failed to be edited.";
-    public static final String LOGGER_ACTIVITYEDIT_SESSION_ID_NOT_FOUND =
-            "Session was not found with unique identifier of:";
     public static final String ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL =
             "The command arguments cannot be null.";
-    public static final String ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST =
-            "Manager does not exist.";
-    public static final String ASSERT_ACTIVITYEDIT_SESSIONID_MISSING =
-            "Session Id missing.";
     public static final String ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING =
             "Activity Id missing.";
     public static final String ASSERT_ACTIVITYEDIT_SESSIONID_LESS_THAN_ONE =
@@ -388,6 +378,12 @@ public abstract class Message {
             "Session was not found with unique identifier of:";
     public static final String LOGGER_ACTIVITYLIST_ACTIVITIES_LISTED =
             "All the activities have been listed with specified session Id: ";
+
+    // Activity View Command
+    public static final String LOGGER_ACTIVITYVIEW_ACTIVITY_VIEWED =
+            "An activity object was successfully viewed from activity Id: ";
+    public static final String LOGGER_ACTIVITYVIEW_ACTIVITY_NOT_VIEWED =
+            "An activity object was unable to be viewed from activity Id: ";
 
     // Group
     public static final String ERROR_GROUP_EMPTY_PERSON_LIST =
