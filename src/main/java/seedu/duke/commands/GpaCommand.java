@@ -33,6 +33,10 @@ public class GpaCommand extends Command {
                 totalMc += mc;
                 weightedSum += modularGradePoint * mc;
             }
+            if (totalMc > 2000000000) {
+                // Prevent integer overflow
+                throw new GpaNotComputableException();
+            }
         }
         if (totalMc == 0) {
             throw new GpaNotComputableException();

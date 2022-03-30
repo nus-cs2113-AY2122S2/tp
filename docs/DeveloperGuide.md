@@ -1,4 +1,4 @@
-# Developer Guide
+# Mod Happy: Developer Guide
 
 Mod Happy is a command-line-based application that helps students manage their academics.
 ## Contents
@@ -58,7 +58,7 @@ The `Parser` component serves to interpret user input and construct the relevant
 > `NoArgumentParser` is an exception to the above; instead of being associated with a single command type, it is responsible for handling all commands which do not accept any arguments.
 
 The following details how the `Parser` component works at runtime:
-
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ParserSequenceDiagram.puml)
 1. A single `ModHappyParser` instance is initialised by `Main` during at the start of the program.
 2. Each time the user inputs a command, `ModHappyParser`'s `parseCommand()` method with the input as the parameter.
 3. `ModHappyParser` identifies the relevant command-specific parser `XYZParser` and passes on the remaining unparsed arguments to its `parseCommand()` method.
@@ -106,13 +106,10 @@ The `Storage` component is responsible for the saving and loading of program dat
 
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/Storage.puml)
 
-Several type-specific classes exist, each overseeing the storage of a different type of user data: 
-
-* `ConfigurationStorage` handles the saving and loading of user preferences. This data is stored in the `data/configuration.json` file.
-* `TaskListStorage` handles the saving and loading of the General Tasks list as an `ArrayList<Task>` instance. This data is stored in the `data/tasks.json` file.
-* `ModuleListStorage` handles the saving and loading of all user-created modules as well as the tasks associated with them as an `ArrayList<Module>` instance. This data is stored in the `data/modules.json` file.
-
-All write operations rely on the general purpose `writeData()` method of the abstract class `JsonStorage`. However, read operations are implemented in each type-specific class; the `readData()` methods of these classes reconstruct the original object from the serialised data and return them.
+Storage is an interface supporting write/read data to/from computer storage:
+* Storage interface is implemented by JsonStorage in Mod Happy, which will read and load data to and from json format.
+* ListStorage can save a ArrayList of any class that extends Object in json format, and read them back into corresponding objects. (E.g. ModuleListStorage, TaskListStorage inherit from ListStorage)
+* There are navigability to Storage from Main and SaveComand, which handles the load and write data to/from disk respectively.
 
 ## Implementation
 
@@ -126,11 +123,11 @@ The tag feature allows the user to add user-created one-word tags to each task, 
 
 The following sequence diagram illustrates the process:
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/TagSeqDiagram/Tag.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/TagSeqDiagrams/Tag.puml)
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/TagSeqDiagram/GetModule.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/TagSeqDiagrams/GetModule.puml)
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/TagSeqDiagram/CheckAndRunTagOperation.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/TagSeqDiagrams/CheckAndRunTagOperation.puml)
 
 Here is an example on adding a tag to a general task:  
 
@@ -157,7 +154,14 @@ Here is an example on how to calculate GPA:
 
 Below is the sequence diagram of how the GPA feature works:
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/GPASeqDiagram/GPA.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/GPA.puml)
+
+### Storage Feature
+Several type-specific classes exist, each overseeing the storage of a different type of user data:
+
+* `ConfigurationStorage` handles the saving and loading of user preferences. This data is stored in the `data/configuration.json` file.
+* `TaskListStorage` handles the saving and loading of the General Tasks list as an `ArrayList<Task>` instance. This data is stored in the `data/tasks.json` file.
+* `ModuleListStorage` handles the saving and loading of all user-created modules as well as the tasks associated with them as an `ArrayList<Module>` instance. This data is stored in the `data/modules.json` file.
 
 ## Product scope
 

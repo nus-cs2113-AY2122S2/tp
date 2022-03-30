@@ -112,14 +112,18 @@ public class EditCommand extends Command {
      *
      * @param targetModule The module (or General Tasks) the target task belongs to.
      */
-    private void editTaskFromModule(Module targetModule) {
+    private void editTaskFromModule(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
         Task targetTask = taskList.getTask(taskIndex);
         String targetTaskName = targetTask.getTaskName();
         if (taskParameter.equals(TASK_DESCRIPTION)) {
             targetTask.setTaskDescription(changedParameter);
         } else if (taskParameter.equals(ESTIMATED_WORKING_TIME)) {
-            targetTask.setWorkingTime(changedParameter);
+            try {
+                targetTask.setWorkingTime(changedParameter);
+            } catch (ModHappyException e) {
+                throw e;
+            }
         } else {
             targetTask.setTaskName(changedParameter);
         }

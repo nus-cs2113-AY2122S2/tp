@@ -1,14 +1,11 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
-
-import java.util.Objects;
-
-import static seedu.duke.util.StringConstants.OPTION_COMMAND_WORD;
-import static seedu.duke.util.StringConstants.OPTION_HELP;
 
 public class HelpCommand extends Command {
     protected static final String EXIT_COMMAND_WORD = StringConstants.EXIT_COMMAND_WORD;
@@ -19,6 +16,7 @@ public class HelpCommand extends Command {
     protected static final String GPA_COMMAND_WORD = StringConstants.GPA_COMMAND_WORD;
     protected static final String LIST_COMMAND_WORD = StringConstants.LIST_COMMAND_WORD;
     protected static final String MARK_COMMAND_WORD = StringConstants.MARK_COMMAND_WORD;
+    protected static final String OPTION_COMMAND_WORD = StringConstants.OPTION_COMMAND_WORD;
     protected static final String RESET_COMMAND_WORD = StringConstants.RESET_COMMAND_WORD;
     protected static final String SAVE_COMMAND_WORD = StringConstants.SAVE_COMMAND_WORD;
     protected static final String TAG_COMMAND_WORD = StringConstants.TAG_COMMAND_WORD;
@@ -32,6 +30,7 @@ public class HelpCommand extends Command {
     protected static final String GPA_HELP = StringConstants.GPA_HELP;
     protected static final String LIST_HELP = StringConstants.LIST_HELP;
     protected static final String MARK_HELP = StringConstants.MARK_HELP;
+    protected static final String OPTION_HELP = StringConstants.OPTION_HELP;
     protected static final String RESET_HELP = StringConstants.RESET_HELP;
     protected static final String SAVE_HELP = StringConstants.SAVE_HELP;
     protected static final String TAG_HELP = StringConstants.TAG_HELP;
@@ -77,7 +76,7 @@ public class HelpCommand extends Command {
         case TAG_COMMAND_WORD:
             return new CommandResult(TAG_HELP);
         case OPTION_COMMAND_WORD:
-            return new CommandResult(OPTION_HELP);
+            return new CommandResult(OPTION_HELP + Configuration.getAllConfigurationExplanations());
         default:
             throw new ModHappyException(HELP_EXCEPTION);
         }

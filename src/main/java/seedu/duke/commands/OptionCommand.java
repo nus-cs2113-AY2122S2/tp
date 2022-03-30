@@ -3,7 +3,7 @@ package seedu.duke.commands;
 import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.UnknownConfigurationGroupWord;
+import seedu.duke.exceptions.UnknownConfigurationGroupWordException;
 import seedu.duke.data.ModuleList;
 import seedu.duke.exceptions.UnsupportedResultTypeException;
 import seedu.duke.util.Configuration;
@@ -21,10 +21,10 @@ public class OptionCommand extends Command {
             try {
                 configurationGroup = Configuration.ConfigurationGroup.valueOf(configurationGroupWord);
             } catch (IllegalArgumentException e) {
-                throw new UnknownConfigurationGroupWord(configurationGroupWord);
+                throw new UnknownConfigurationGroupWordException(configurationGroupWord);
             }
             if (!Configuration.LEGAL_VALUES.containsKey(configurationGroup)) {
-                throw new UnknownConfigurationGroupWord(configurationGroupWord);
+                throw new UnknownConfigurationGroupWordException(configurationGroupWord);
             }
         }
         if (!Objects.isNull(newValue)) {

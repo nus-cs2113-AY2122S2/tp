@@ -148,7 +148,9 @@ public class StringConstants {
     public static final String OPTION_HELP = "View and edit program configuration options.\n"
             + "Format to view all available configs: option\n"
             + "Format to view details for a specific config option: option CONFIG_NAME\n"
-            + "Format to set a config option: option CONFIG_NAME = NEW_VALUE";
+            + "Format to set a config option: option CONFIG_NAME=NEW_VALUE\n\n"
+            + "Available configs:\n";
+
 
     /**
      * For SaveCommand.
@@ -177,12 +179,6 @@ public class StringConstants {
     public static final String ADD_TAG_MESSAGE = "Tag \"%s\" added:\n%s.";
     public static final String DEL_TAG_MESSAGE = "Tag \"%s\" removed:\n%s";
 
-    /**
-     * For CommandResult.
-     */
-    public static final String ARRAYLIST_RESULT = "ArrayList";
-    public static final String STRING_RESULT = "String";
-
 
     /**
      * For exceptions.
@@ -193,7 +189,7 @@ public class StringConstants {
     public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid compulsory parameters. "
             + "Please check and try again.";
     public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters.";
-    public static final String ERROR_PARSE_STRING = "\nError at \"%s\".\nPlease check and try again.";
+    public static final String ERROR_PARSE_STRING = "\nError at '%s'.\nPlease check and try again.";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, the value \"%s\" is not supported for "
             + "configuration \"%s\".";
@@ -208,6 +204,9 @@ public class StringConstants {
     public static final String ERROR_PARSE_INT_FAILED = "\nInvalid %s. Please check and try again.";
     public static final String ERROR_MODULAR_CREDITS_FAILED = "modular credits";
     public static final String ERROR_TASK_NUMBER_FAILED = "task number";
+    public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
+    public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with identical module codes found. "
+            + "Aborting load...";
 
 
     /**
@@ -257,24 +256,33 @@ public class StringConstants {
     public static final String NOT_ENTERED_STR = "NOT_ENTERED";
 
     /**
-     * For options.
+     * For option.
      */
     public static final String DESCRIPTION_FORMAT = "%s: %s";
     public static final String TRUE = "true";
     public static final String FALSE = "false";
 
     public static final String SHOW_COMPLETED_TASKS_NAME = "SHOW_COMPLETED_TASKS";
-    public static final String SHOW_COMPLETED_TASKS_EXPLAIN = "Whether or not completed tasks should be displayed"
-            + " by \"list\".";
+    public static final String SHOW_COMPLETED_TASKS_EXPLAIN = "Determines if completed tasks should be displayed"
+            + " by \"list\" or not.";
     public static final String SHOW_COMPLETED_TASKS_TRUE = "Show completed tasks";
     public static final String SHOW_COMPLETED_TASKS_FALSE = "Hide completed tasks";
 
     /**
+     * For TaskDuration.
+     */
+    public static final String DURATION_GROUP_WORD = "duration";
+    public static final String DURATION_UNIT_GROUP_WORD = "durationUnit";
+    public static final String TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE = "%d hours %d minutes";
+    public static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = "%d hours";
+    public static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = "%d minutes";
+    public static final String DURATION_STRING_FORMAT = "(?<duration>[1-9]\\d*\\.?\\d*|0\\.\\d*[1-9])"
+            + "\\s*(?<durationUnit>.*)";
+
+    /**
      * General strings.
      */
-    public static final String STRING = "String";
     public static final String INDENT = "    ";
-    public static final String NULL_STRING = "";
     public static final String LS = System.lineSeparator();
     public static final String LINE = "____________________________________________________________";
 }

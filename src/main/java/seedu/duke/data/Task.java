@@ -1,7 +1,9 @@
 package seedu.duke.data;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
+import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
 public class Task {
@@ -17,17 +19,25 @@ public class Task {
     private boolean isTaskDone;
     private String taskName;
     private String taskDescription;
-    private String workingTime;
+    private TaskDuration workingTime;
     private TaskParameters taskParameters;
     private ArrayList<String> tags;
 
-    public Task(String taskName, String taskDescription, String workingTime) {
-        this.taskName = taskName;
-        this.taskDescription = taskDescription;
-        this.workingTime = workingTime;
-        isTaskDone = false;
-        taskParameters = getTaskParameterStatus();
-        tags = new ArrayList<>();
+    public Task(String taskName, String taskDescription, String workingTime) throws ModHappyException {
+        try {
+            this.taskName = taskName;
+            this.taskDescription = taskDescription;
+            if (!Objects.isNull(workingTime)) {
+                this.workingTime = new TaskDuration(workingTime);
+            } else {
+                this.workingTime = null;
+            }
+            isTaskDone = false;
+            taskParameters = getTaskParameterStatus();
+            tags = new ArrayList<>();
+        } catch (ModHappyException e) {
+            throw e;
+        }
     }
 
     public ArrayList<String> getTagList() {
@@ -43,7 +53,12 @@ public class Task {
     }
 
     public String getWorkingTime() {
-        return workingTime;
+        if (Objects.isNull(workingTime)) {
+            return null;
+        } else {
+            return workingTime.toString();
+        }
+
     }
 
     public void setTaskDescription(String description) {
@@ -51,9 +66,12 @@ public class Task {
         taskParameters = getTaskParameterStatus();
     }
 
-    public void setWorkingTime(String workingTime) {
-        this.workingTime = workingTime;
-        taskParameters = getTaskParameterStatus();
+    public void setWorkingTime(String workingTime) throws ModHappyException {
+        try {
+            this.workingTime = new TaskDuration(workingTime);
+        } catch (ModHappyException e) {
+            throw e;
+        }
     }
 
     public void setTaskName(String taskName) {

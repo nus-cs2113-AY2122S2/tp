@@ -5,10 +5,11 @@ import java.util.HashSet;
 
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.GeneralParseException;
-import seedu.duke.exceptions.UnknownConfigurationGroupWord;
+import seedu.duke.exceptions.UnknownConfigurationGroupWordException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.exceptions.UnsupportedResultTypeException;
+import seedu.duke.exceptions.WrongDurationFormatException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -42,8 +43,10 @@ public class ModHappyParser extends Parser {
             HashMap<String, String> parsedCommand = parseString(userInput);
             Parser commandParser = getCommandParser(parsedCommand.get(COMMAND_WORD));
             return commandParser.parseCommand(parsedCommand.get(ARGUMENT));
-        } catch (GeneralParseException | UnknownConfigurationGroupWord | UnsupportedResultTypeException e) {
+        } catch (GeneralParseException | UnknownConfigurationGroupWordException | UnsupportedResultTypeException e) {
             throw e;
+        } catch (WrongDurationFormatException e) {
+            throw new WrongDurationFormatException();
         } catch (ModHappyException e) {
             throw new UnknownCommandException(userInput);
         } catch (Exception e) {

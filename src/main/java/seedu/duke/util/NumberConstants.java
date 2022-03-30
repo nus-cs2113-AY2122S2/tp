@@ -19,4 +19,10 @@ public class NumberConstants {
      * For Task Indices.
      */
     public static final int INVALID_TASK_INDEX = -1;
+
+    /**
+     * For TaskDuration.
+     */
+    public static final long MINUTE_PER_HOUR = 60;
+    public static final long MAXIMUM_ALLOWED_DURATION_NUMBER = 1000000000;
 }
