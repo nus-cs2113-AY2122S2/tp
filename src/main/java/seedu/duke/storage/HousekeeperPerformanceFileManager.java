@@ -5,7 +5,6 @@ import seedu.duke.HousekeeperPerformanceList;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.HousekeeperPerformanceFileNotFoundException;
 import seedu.duke.InvalidHousekeeperPerformanceRatingException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -62,7 +61,7 @@ public class HousekeeperPerformanceFileManager extends FileManager {
             rating = housekeeperPerformance.getRating();
             performanceDetails = housekeeperName + '|' + rating;
             if (i != lastIndexOfArrayList) {
-                performanceDetails = performanceDetails+ System.lineSeparator();
+                performanceDetails = performanceDetails + System.lineSeparator();
             }
             fw.write(performanceDetails);
         }

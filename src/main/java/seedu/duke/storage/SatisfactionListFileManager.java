@@ -1,7 +1,10 @@
 package seedu.duke.storage;
 
-import seedu.duke.*;
-
+import seedu.duke.SatisfactionList;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.Satisfaction;
+import seedu.duke.SatisfactionFileNotFoundException;
+import seedu.duke.InvalidSatisfactionValueException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
