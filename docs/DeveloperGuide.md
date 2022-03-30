@@ -272,14 +272,14 @@ when the user invokes the `activity /list` command.
 <br>
 <br>
 The general workflow of the `activity /list` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `ActivityListCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityListCommand` object.
 3. `ActivityListCommand#run` method is then invoked to run the `activity /list` command.
 4. The list of activities are stored in a `Profile` object, hence `Manager#getProfile` is called.
 5. To retrieve the session containing the activity list from the `Profile` object, `Profile#getSession` is executed, returning a session containing all the activities to be listed.
 6. Once the session is retrieved, `ActivityListCommand` class will run `Session#getActivityListSummaryString`.
    1. If the activity list in the session is empty, the Session class will return a `String` object containing an error message.
-   2. If it's not empty, a table summarising the list of activities in the session will be returned. 
+   2. If it's not empty, a `String` object representing a table summarising the list of activities in the session will be returned. 
 7. Finally, the method `printlnMessageWithDivider` is called to print the message returned.
 
 ### Add a group
