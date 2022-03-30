@@ -21,11 +21,12 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 - People who can type fast.
 
 ## Contents
-* [How SplitLah works](#how-splitlah-works)
+* [How to use this user guide](#how-to-use-this-user-guide)
 * [Quick Notes](#quick-notes)
 * [Quick Start](#quick-start)
+* [How SplitLah works](#how-splitlah-works)
 * [Features](#features)
-  * [Session Management](#_session-management_)
+  * [Session Management](#session-management)
       * [Creating a session: `session /create`](#creating-a-session-session-create)
       * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
       * [Editing a session: `session /edit`](#editing-a-session-session-edit)
