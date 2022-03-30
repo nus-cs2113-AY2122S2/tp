@@ -83,12 +83,16 @@ public class TaskDuration {
     public String toString() {
         long numberOfHours = taskDuration.toHours();
         long numberOfMinutes = taskDuration.toMinutes();
+
         if (numberOfHours == 0) {
+            // The duration is less than 1 hour
             return String.format(TO_STRING_FORMAT_WITH_MINUTE_ONLY, taskDuration.toMinutes());
         } else if (numberOfHours * MINUTE_PER_HOUR < numberOfMinutes) {
+            // The duration is more than 1 hour and has minute offset
             long minuteOffset = numberOfMinutes - numberOfHours * MINUTE_PER_HOUR;
             return String.format(TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE, taskDuration.toHours(), minuteOffset);
         } else {
+            // The duration is more than 1 hour but with no minute offset
             return String.format(TO_STRING_FORMAT_WITH_HOUR_ONLY, taskDuration.toHours());
         }
 
