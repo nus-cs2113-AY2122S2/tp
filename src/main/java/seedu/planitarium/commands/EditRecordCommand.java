@@ -63,17 +63,17 @@ public class EditRecordCommand extends Command {
             try {
                 amount = Parser.getValidMoney(Parser.parseIncome(userInput));
             } catch (PlanITariumException e) {
-                amount = 0.0;
+                amount = null;
             }
             index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
                     family.getNumberOfIncomes(group, uid));
-            family.editIncome(uid, group, index, description, amount, isPermanent);
+            family.editIncome(group, uid, index, description, amount, isPermanent);
             CommandFactory.logger.log(Level.INFO, String.format(
-                    LOG_EXECUTE_INFO, INCOME, description, index, amount, category, uid, group));
+                    LOG_EXECUTE_INFO, INCOME, description, index, amount, category, group, uid));
             break;
         case EDIT_SPENT_CMD:
             index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput),
-                    family.getNumberOfExpenditures(uid, group));
+                    family.getNumberOfExpenditures(group, uid));
             try {
                 amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
             } catch (PlanITariumException e) {
@@ -86,7 +86,7 @@ public class EditRecordCommand extends Command {
             }
             family.editExpend(group, uid, index, description, amount, category, isPermanent);
             CommandFactory.logger.log(Level.INFO, String.format(
-                    LOG_EXECUTE_INFO, EXPEND, description, index, amount, category, uid, group));
+                    LOG_EXECUTE_INFO, EXPEND, description, index, amount, category, group, uid));
             break;
         default:
             CommandFactory.logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);

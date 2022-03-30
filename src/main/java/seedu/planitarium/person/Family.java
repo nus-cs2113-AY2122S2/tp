@@ -153,7 +153,7 @@ public class Family {
      * @param isPermanent Whether the expenditure is recurring
      * @param isSilent Whether to print confirmation
      */
-    public void addExpend(int group, int personIndex, String description, Double amount, int category,
+    public void addExpend(int group, int personIndex, String description, Double amount, Integer category,
                           Boolean isPermanent, Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_EXPEND_CALL_MESSAGE);
         getList(group).addExpend(personIndex, description, amount, category, isPermanent, isSilent);
@@ -267,7 +267,7 @@ public class Family {
      * @param isPermanent Whether the expenditure is recurring
      */
     public void editExpend(int group, int personIndex, int expendIndex, String description, Double amount,
-                           int category, Boolean isPermanent) {
+                           Integer category, Boolean isPermanent) {
         LOGGER.log(Level.INFO, Constants.EDIT_EXPEND_CALL_MESSAGE);
         getList(group).editExpend(personIndex, expendIndex, description, amount, category, isPermanent);
     }
@@ -278,7 +278,7 @@ public class Family {
      * @param description The string to look for
      * @param category The category of the entry
      */
-    public void find(String description, int category) {
+    public void find(String description, Integer category) {
         LOGGER.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             getList(i).find(description, category);

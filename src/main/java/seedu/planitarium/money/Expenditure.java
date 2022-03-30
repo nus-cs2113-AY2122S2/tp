@@ -6,7 +6,7 @@ import seedu.planitarium.category.Category;
 
 public class Expenditure extends Money {
 
-    private int category;
+    private Integer category;
 
     /**
      * Initialise a new Expenditure object.
@@ -16,7 +16,7 @@ public class Expenditure extends Money {
      * @param isPermanent Boolean var to indicate if expenditure is recurring
      * @param category    Expenditure's category
      */
-    public Expenditure(String description, Double amount, int category, Boolean isPermanent) {
+    public Expenditure(String description, Double amount, Integer category, Boolean isPermanent) {
         super(description, amount, isPermanent);
         this.category = category;
     }
@@ -35,7 +35,7 @@ public class Expenditure extends Money {
      *
      * @param category integer of the category label
      */
-    public void setCategory(int category) {
+    public void setCategory(Integer category) {
         this.category = category;
     }
 

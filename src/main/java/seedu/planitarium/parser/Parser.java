@@ -10,8 +10,6 @@ import seedu.planitarium.exceptions.InvalidMoneyException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.exceptions.EmptyStringException;
 import seedu.planitarium.global.Constants;
-import seedu.planitarium.person.Person;
-import seedu.planitarium.person.PersonList;
 
 import java.util.logging.Level;
 
@@ -330,10 +328,10 @@ public class Parser {
      * @return A valid category index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static int getValidCategoryIndex(String categoryIndex) throws InvalidIndexException {
+    public static Integer getValidCategoryIndex(String categoryIndex) throws InvalidIndexException {
         assert (categoryIndex != null) : ASSERT_CATEGORY_NOT_NULL;
         try {
-            int checkIndex = Integer.parseInt(categoryIndex);
+            Integer checkIndex = Integer.parseInt(categoryIndex);
             ParserUtility.checkTooHighIndex(checkIndex, Category.getNumberOfCategories());
             ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_CATEGORY_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));

@@ -28,14 +28,14 @@ public class DeletePersonCommand extends Command {
         this.type = "DeletePersonCMD";
         this.group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         this.uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
-        logger.log(Level.INFO, String.format(LOG_DELETEPERSONCMD_INFO, uid, group));
+        logger.log(Level.INFO, String.format(LOG_DELETEPERSONCMD_INFO, group, uid));
     }
 
     public void execute() throws PlanITariumException {
         assert (uid > 0) : Constants.USER_INDEX_NOT_VALID;
         assert (family != null) : Constants.FAMILY_NOT_NULL;
         family.deletePerson(uid,group);
-        logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, uid, group));
+        logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, group, uid));
     }
 
     @Override

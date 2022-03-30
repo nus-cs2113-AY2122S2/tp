@@ -206,25 +206,25 @@ public class FamilyTest {
         System.setOut(ORIGINAL_OUT);
     }
 
-    //    @Test
-    //    public void editIncome_addThenEdit_incomeChange() {
-    //        Family family = new Family();
-    //        family.addPerson(PARENTS_INDEX, VALID_NAME, SILENT);
-    //        family.addIncome(PARENTS_INDEX, FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
-    //        assertEquals(VALID_AMOUNT, family.getList(PARENTS_INDEX).getTotalIncome());
-    //        family.editIncome(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null);
-    //        assertEquals(NEW_AMOUNT, family.getList(PARENTS_INDEX).getTotalIncome());
-    //    }
-    //
-    //    @Test
-    //    public void editExpend_addThenEdit_expendChange() {
-    //        Family family = new Family();
-    //        family.addPerson(PARENTS_INDEX, VALID_NAME, SILENT);
-    //        family.addExpend(PARENTS_INDEX, FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT,
-    //        SILENT);
-    //        assertEquals(VALID_AMOUNT, family.getList(PARENTS_INDEX).getTotalExpenditure());
-    //        family.editExpend(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null,
-    //                null);
-    //        assertEquals(NEW_AMOUNT, family.getList(PARENTS_INDEX).getTotalExpenditure());
-    //    }
+    @Test
+    public void editIncome_addThenEdit_incomeChange() {
+        Family family = new Family();
+        family.addPerson(PARENTS_INDEX, VALID_NAME, SILENT);
+        family.addIncome(PARENTS_INDEX, FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, family.getList(PARENTS_INDEX).getTotalIncome());
+        family.editIncome(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null);
+        assertEquals(NEW_AMOUNT, family.getList(PARENTS_INDEX).getTotalIncome());
+    }
+
+    @Test
+    public void editExpend_addThenEdit_expendChange() {
+        Family family = new Family();
+        family.addPerson(PARENTS_INDEX, VALID_NAME, SILENT);
+        family.addExpend(PARENTS_INDEX, FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT,
+                SILENT);
+        assertEquals(VALID_AMOUNT, family.getList(PARENTS_INDEX).getTotalExpenditure());
+        family.editExpend(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null,
+                null);
+        assertEquals(NEW_AMOUNT, family.getList(PARENTS_INDEX).getTotalExpenditure());
+    }
 }

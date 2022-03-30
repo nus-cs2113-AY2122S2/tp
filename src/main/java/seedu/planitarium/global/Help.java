@@ -22,7 +22,7 @@ public class Help {
         CommandSummary.add(Constants.DELETE_EXPEND);
         CommandSummary.add(Constants.EDIT_EXPEND);
         CommandSummary.add(Constants.LIST);
-        CommandSummary.add(Constants.LIST_BY_GROUP);
+        CommandSummary.add(Constants.OVERVIEW);
         CommandSummary.add(Constants.LISTCAT);
         CommandSummary.add(Constants.HELP);
         CommandSummary.add(Constants.EXIT);
