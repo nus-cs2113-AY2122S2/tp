@@ -30,8 +30,7 @@ public class ItemList {
      * the user wants to add, the item would not be added into the item list.
      *
      * @param item The item that the user wants to add into the item list.
-     * @return true if there is no items within the item list which has the same name as the name passed into the
-     * function, false otherwise.
+     * @return true if there is no items within the item list which has the same name as that passed into the function
      */
     public boolean addItemToList(Item item) {
         boolean isItemAlreadyInTheList = checkForItemDuplicates(item.getName());
@@ -51,8 +50,7 @@ public class ItemList {
      * into the function.
      *
      * @param nameOfItemToAdd Name of the item that the user wants to add into the item list.
-     * @return true if there is no items within the item list which has the same name as the name passed into the
-     * function, false otherwise.
+     * @return true if there is no items within the item list which has the same name as that passed into the function
      */
     public boolean checkForItemDuplicates(String nameOfItemToAdd) {
         boolean isItemAlreadyInTheList = false;
