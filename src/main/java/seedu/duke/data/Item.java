@@ -1,6 +1,15 @@
 package seedu.duke.data;
 
+import seedu.duke.common.Messages;
+
+import java.util.Objects;
+
 public class Item {
+
+    private static final String NON_ZERO_QUANTITY = "quantity must be non-zero positive integer!";
+    private static final String NOT_NULL_NAME = "name must not be null!";
+    private static final String NOT_NULL_DESCRIPTION = "description must not be null!";
+
     private String name;
     private int quantity;
     private String description;
@@ -24,14 +33,19 @@ public class Item {
     }
 
     public void setName(String name) {
+        Objects.requireNonNull(name, NOT_NULL_NAME);
         this.name = name;
     }
 
     public void setQuantity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException(NON_ZERO_QUANTITY);
+        }
         this.quantity = quantity;
     }
 
     public void setDescription(String description) {
+        Objects.requireNonNull(description, NOT_NULL_DESCRIPTION);
         this.description = description;
     }
 
