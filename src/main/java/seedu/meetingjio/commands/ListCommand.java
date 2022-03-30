@@ -17,10 +17,23 @@ public class ListCommand extends Command {
     public static final String ALL_COMMAND_WORD = "list";
     public static final String LESSON_COMMAND_WORD = "list_lesson";
     public static final String MEETING_COMMAND_WORD = "list_meeting";
+    public static final int ALL = 0;
+    public static final int LESSONS_ONLY = 1;
+    public static final int MEETINGS_ONLY = 2;
 
     private final String name;
     private final int constraint;
 
+    /**
+     * The constructor for ListCommand takes in 2 parameters: name and constraint.
+     * There are only 3 values for constraint: 0, 1, 2.
+     * If constraint is ALL (0), it indicates that the user wants to list all events (lessons and meetings).
+     * If constraint is LESSONS_ONLY (1), it indicates that the user only wants to list lessons.
+     * If constraint is MEETINGS_ONLY (2), it indicates that the user only wants to list meetings.
+     *
+     * @param name Name of user whose timetable is to be printed, or 'all'
+     * @param constraint An integer that is either 0, 1 or 2
+     */
     public ListCommand(String name, int constraint) {
         this.name = name;
         this.constraint = constraint;
@@ -32,12 +45,12 @@ public class ListCommand extends Command {
      * If no parameter is supplied, programme should inform the user and continue running normally.
      *
      * @param masterTimetable MasterTimetable
-     * @return String containing the user's lessons or all users' lessons
+     * @return String containing the user's events or all users' events
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
         String user = this.name;
-        
+
         if (user.length() == 0) {
             return ERROR_UNSPECIFIED_LIST;
         } else if (user.equalsIgnoreCase("all")) {
@@ -50,8 +63,8 @@ public class ListCommand extends Command {
 
     /**
      * This method gets the masterTimetable to call the collateAll method to get the combined timetables of everyone.
-     * If the masterTimetable is empty (eg when 'list all' is the user's first input), the programme should inform
-     * the user gracefully.
+     * If the masterTimetable is empty (when 'list all' is the user's first input), the programme should inform the user
+     * gracefully.
      * The returned string needs to be truncated at the end otherwise there will be an extra newline character.
      *
      * @param masterTimetable The Master Timetable containing everyone's timetables
@@ -74,11 +87,16 @@ public class ListCommand extends Command {
      * This method is also called by the Master Timetable method collateAll, which calls listUser for all users.
      * While executing this method, the timetable is sorted based on the event's day and timing to allow the user to
      * quickly see his/her events easily.
+     * The listTimetable method is then called by the Timetable class to obtain the string containing the user's
+     * timetable.
+     * If the string is empty, an appropriate error message will be returned, informing the user that the timetable is
+     * empty.
      *
      * @param user The target user whose timetable is to be shown
      * @param masterTimetable The Master Timetable containing everyone's timetables
-     * @return str The string containing the user's timetable. If the user does not exist, or the user's timetable is
-     *     empty, an appropriate error message will be shown to inform the user accordingly.
+     * @param constraint Integer representing the constraint (all events, lessons only or meetings only)
+     * @return truncatedString The string containing the user's timetable. If the user does not exist, or the user's
+     *     timetable is empty, an appropriate error message will be shown to inform the user accordingly.
      */
     public static String listUser(String user, MasterTimetable masterTimetable, int constraint) {
         Timetable timetable;
@@ -95,11 +113,11 @@ public class ListCommand extends Command {
         String str = timetable.listTimetable(constraint);
         if (str.length() == 0) {
             switch (constraint) {
-            case 0:
+            case ALL:
                 return ERROR_EMPTY_LIST;
-            case 1:
+            case LESSONS_ONLY:
                 return ERROR_NO_LESSONS;
-            case 2:
+            case MEETINGS_ONLY:
                 return ERROR_NO_MEETINGS;
             }
         }
