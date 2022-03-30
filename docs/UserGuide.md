@@ -30,6 +30,7 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
    - `addproject cs2113`: Add a new project named cs2113 to the planner.
    - `listproject`: list out all projects in the list.  
    - `exit`: Exits the project.
+- The data will be automatically saved after the program exited safely.
 
 
 ## Features 
@@ -133,9 +134,15 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I transter my data to another computer?
 
-**A**: {your answer here}
+**A**: Copy the data file named `projectList.txt` through `your working directory/src/data/`, then send it to another computer.
+
+If you want to use this data on another computer, please follow any of the below options:
+- Option 1: You can firstly download your data and save the file as `projectList.txt`. Then create 2 new folders `src/data` under the directory where you prefer to work. You will be able to see your data when you start the app.
+- Option 2: You can first start the app on another computer. You will see the new folder generated under your working directory after the program exits. Replace the `projectList` file with the file you want to transfer under the path `./src/data/`.
+
+Please note that the file name should not be changed.
 
 ## Command Summary
 
