@@ -53,6 +53,27 @@ menu
 goto m/Study_Manager
 list
 add m/CS2113 c/lec d/Thursday t/2pm-4pm
+add m/EE4204 d/Wednesday t/1pm-2pm
+add c/tut d/Wednesday t/1pm-2pm
+add m/EE4204 c/tut t/1pm-2pm
+add m/EE4204 c/tut d/Wednesday
+add
+add m/EE4204 c/tut d/Wednesday t/1pm-2pm
+list
+find 2pm
+edit 1
+c/tut
+c/TUTORIAL
+c/
+m/
+d/
+t/
+done
+find tut
+find cs
+find Cs
+rm 1
+find cs
 list
 rm 1
 list
