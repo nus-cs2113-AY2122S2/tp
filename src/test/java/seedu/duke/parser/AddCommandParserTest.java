@@ -46,6 +46,6 @@ public class AddCommandParserTest {
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
                 CliSyntax.PREFIX_QUANTITY.getPrefix(), "asd");
 
-        assertParseFailure(parser, testInput, Messages.INVALID_SYNTAX);
+        assertParseFailure(parser, testInput, Messages.INVALID_QUANTITY);
     }
 }
