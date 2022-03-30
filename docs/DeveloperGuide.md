@@ -126,6 +126,8 @@ The general workflow of the `Parser` component is as follows:
 5. The created `XYZCommand` object is then returned to the `SplitLah` object to be run.
 
 ### Command Component
+![Command Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/CommandComponent.drawio.png)
+<br>
 
 ## Implementation
 
