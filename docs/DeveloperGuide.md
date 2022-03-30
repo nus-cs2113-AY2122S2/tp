@@ -28,31 +28,48 @@
 * [Acknowledgements](#acknowledgements)
 
 ## Introduction
+
+**MindMyMoney** (M<sup>3</sup>) is a desktop app for managing users' personal finances, optimized for use via a
+Command Line Interface (CLI). With the application, users can track their expenses across multiple payment methods,
+calculate monthly expenditure, and set financial goals. The application is targeted at students looking to start
+managing their personal finances.
+
 ### Purpose
 This document specified architecture and software design decisions for the application, Mindmymoney.
 ### Scope
 This describes the software architecture and software design decisions for the implementation
 of Mindmymoney. The intended audience of this document is the developers, designers, and
 software testers of Mindmymoney.
-### Mindmymoney
-`MindMyMoney` (M<sup>3</sup>) is a desktop app for managing users' personal finances, optimized for use via a
-Command Line Interface (CLI). With the application, users can track their expenses across multiple payment methods,
-calculate monthly expenditure, and set financial goals. The application is targeted at students looking to start 
-managing their personal finances.  
+### Acknowledgements
+We would like to thank [AddressBook-3](https://se-education.org/addressbook-level3/) for assisting us in developing
+Mindmymoney.
+### Using the User Guide
+Along the guide you may encounter several icons. These icons will provide several useful information.
+> **💡 Note:**
+>- This tells you that there is additional information that is useful when you are using the application.
 
+> **⚠️Warning⚠️**
+> - This tells you that there is some **important** information you should take note of to prevent issues from arising
+    when you are using the application.  
+
+Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the developer's guide.
 
 ## Design
+### Technologies used
+**MindMyMoney** is written fully in **Java 11** using  Object-Oriented Programming (OOP) paradigm to help structure and
+organise the code. This enables the efficiency of future improvements and revisions.
+Data stored in the application is saved into test files locally on the user's device.  
 
-### Architecture
-![architecture diagram](images/architecture_diagram.png)
-<br/> Fig 1 - Architecture Diagram
+### Architecture Overview
+![architecture diagram](images/architecture_diagram.png)  
+Fig 1 - Architecture Diagram
 
 The Architecture Diagram above shows the high-level design of the application. The **main components**
 consist of:
 - `MMM`: Initialises the components in the correct sequence and connects them with each other. Also holds the user's
 expenditures in memory.
 - `Ui`: The User Interface of the application and deals with interaction with the user.
-  - `Parser`: Deals with making sense of user commands.
+- `Parser`: Deals with making sense of user commands.
 - `Commands`: The collection of all executable commands.
 - `Storage`: Reads data from, and writes data to the hard disk.
 
@@ -64,11 +81,13 @@ The Sequence Diagram below shows an example of how the components interact with 
 where the user issues the command`add shoes 100`.
 
 ![sequence_diagram](images/sequence_diagram.png)
-<br/> Fig 2 - Sequence Diagram
+<br/> Fig 2 - Sequence Diagram  
 
-The sections below give more details for each component.
-
-<br/>
+### Component Overview 
+The major code is broken down into components for better abstraction. 
+The sections below give more details for each component.  
+> **💡 Note:**
+> - 
 
 ### UI component
 The source code can be found in [Ui.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Ui.java)
@@ -213,7 +232,3 @@ Aspect: How to make the list command easily tested using JUnit testing
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
-## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}

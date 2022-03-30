@@ -35,7 +35,15 @@ this app is for you!
 
 ### Using the User Guide
 This guide aims to equip you with the knowledge on how to set up the application and to utilise its many features.
-Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the user guide!
+Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the user guide! Along the guide you may
+ encounter several icons. These icons will provide several useful information. 
+> **💡 Note:**
+>- This tells you that there is additional information that is useful when you are using the application.
+
+> **⚠️Warning⚠️**
+> - This tells you that there is some **important** information you should take note of to prevent issues from arising 
+when you are using the application.
+
 
 ## Quick Start
 
