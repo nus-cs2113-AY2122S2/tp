@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+
+box   LOGIC_COLOR_T1
+participant ":Validator" as Validator LOGIC_COLOR_T2
+end box
+
+[-> Validator : validateAddPatient(parameters)
+activate Validator
+
+Validator -> Validator : validateNric(parameters[0])
+Validator -> Validator : validateFullName(parameters[1]);
+Validator -> Validator : validateAge(parameters[2]);
+Validator -> Validator : validateGender(parameters[3]);
+Validator -> Validator : validateAddress(parameters[4]);
+Validator -> Validator : validateDob(parameters[5]);
+Validator -> Validator : validateDoa((parameters[6]);
+alt LOGIC_COLOR_T2
+<- Validator : void
+else
+<- Validator: HalpmiException
+end
+
+
+deactivate Validator
+
+@enduml
+

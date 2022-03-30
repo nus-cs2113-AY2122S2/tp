@@ -12,6 +12,7 @@
     * [Command Component](#command)
     * [Parser Component](#parser)
     * [Storage Component](#storage)
+    * [Validator Component](#validator)
   * [Common Classes](#common-classes)
 * [Implementation](#implementation)
   * [Design Considerations](#design-considerations)
@@ -80,10 +81,20 @@ How the Command class works:
 * The `Manager` class calls specific methods in `Command` class
 * Each method in the `Command` class would call on an `asset` class method which will manipulate the attributes inside it
 
+#### `Validator`
+![ValidatorClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ValidatorClassUML.puml)
+The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters
+entered are invalid.
+For example, validateAddPatient validates the parameter of `add patient` command, ensuring each parameter is in correct
+format. Please refer to the below sequence diagram for a clearer understanding.
+![ValidatorUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ValidatorUML.puml)
+
+
 #### `Parser`
-The parser parses the description of the command. It first calls the validator class to validate the parameters and then returns a command.
-
-
+![ParserClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ParserClassUML.puml)
+The parser parses the description of the command. It first checks the number of parameters entered is correct and 
+calls the validator class to validate the parameters, and then returns a command if the validation is successful.
+![ParserUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ParserUML.puml)
 
 #### `Storage`
 
