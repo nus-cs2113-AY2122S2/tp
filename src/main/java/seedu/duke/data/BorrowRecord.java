@@ -7,9 +7,9 @@ public class BorrowRecord {
     private final LocalDate endDate;
     private final String borrowerName;
 
-    public BorrowRecord(LocalDate sDate, LocalDate eDate, String borrowerName) {
-        this.startDate = sDate;
-        this.endDate = eDate;
+    public BorrowRecord(LocalDate startDate, LocalDate endDate, String borrowerName) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.borrowerName = borrowerName;
     }
 }
