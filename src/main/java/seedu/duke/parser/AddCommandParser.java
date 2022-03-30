@@ -26,7 +26,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION)) {
-            throw new InvMgrException(Messages.INVALID_COMMAND);
+            throw new InvMgrException(Messages.INVALID_SYNTAX);
         }
 
         String name = argMultimap.getValue(PREFIX_NAME).get();

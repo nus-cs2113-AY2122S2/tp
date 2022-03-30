@@ -27,40 +27,34 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION, PREFIX_RELATIVE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION)) {
-            throw new InvMgrException(Messages.INVALID_COMMAND);
+            throw new InvMgrException(Messages.INVALID_SYNTAX);
         }
 
-        String name = null;
-        Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
-        if (optionalName.isPresent()) {
-            name = optionalName.get();
+        if (argMultimap.getValue(PREFIX_RELATIVE).isPresent() && !argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
+            throw new InvMgrException(Messages.INVALID_RELATIVE_WITHOUT_QUANTITY);
         }
 
-        Integer quantity = null;
-        Optional<String> optionalQuantity = argMultimap.getValue(PREFIX_QUANTITY);
-        if (optionalQuantity.isPresent()) {
-            quantity = ParserUtils.parseQuantity(optionalQuantity.get());
+        Optional<Integer> optionalIntQuantity = Optional.empty();
+        Optional<String> optionalStringQuantity = argMultimap.getValue(PREFIX_QUANTITY);
+        if (optionalStringQuantity.isPresent()) {
+            optionalIntQuantity = Optional.of(
+                    ParserUtils.parseQuantity(optionalStringQuantity.get()));
         }
 
-        String description = null;
-        Optional<String> optionalDescription = argMultimap.getValue(PREFIX_DESCRIPTION);
-        if (optionalDescription.isPresent()) {
-            description = optionalDescription.get();
-        }
-
-        boolean relative = false;
-        Optional<String> optionalRelative = argMultimap.getValue(PREFIX_RELATIVE);
-        if (optionalRelative.isPresent()) {
-            int multiplier = ParserUtils.parseRelative(optionalRelative.get());
-            // this sets multiplier to -1 or 1 depending on the given relative argument.
-            // + is a multiplier of 1, - is a multiplier of -1
-            quantity = quantity * multiplier;
-            relative = true;
+        Optional<Boolean> optionalRelativeAdd = Optional.empty();
+        Optional<String> optionalStringRelativeAdd = argMultimap.getValue(PREFIX_RELATIVE);
+        if (optionalStringRelativeAdd.isPresent()) {
+            optionalRelativeAdd = Optional.of(
+                    ParserUtils.parseRelative(optionalStringRelativeAdd.get()));
         }
 
         int index = ParserUtils.parseIndex(argMultimap.getPreamble()) - 1;
 
-        return new EditCommand(index, name, quantity, description, relative);
+        return new EditCommand(index,
+                argMultimap.getValue(PREFIX_NAME),
+                optionalIntQuantity,
+                argMultimap.getValue(PREFIX_DESCRIPTION),
+                optionalRelativeAdd);
     }
 
 
