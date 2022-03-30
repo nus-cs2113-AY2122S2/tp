@@ -4,11 +4,11 @@ import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
-import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
+import seedu.splitlah.parser.commandparser.GroupListCommandParser;
 import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
@@ -76,7 +76,7 @@ public abstract class Message {
                     + "14. View an existing group's details\n"
                     + "        " + GroupViewCommandParser.COMMAND_FORMAT + "\n"
                     + "15. List all existing groups\n"
-                    + "        " + GroupListCommand.COMMAND_FORMAT + "\n"
+                    + "        " + GroupListCommandParser.COMMAND_FORMAT + "\n"
                     + "16.  Show this help menu\n"
                     + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
                     + "17. Exit the program\n"
