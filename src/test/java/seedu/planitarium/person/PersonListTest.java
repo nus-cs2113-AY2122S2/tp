@@ -18,12 +18,12 @@ class PersonListTest {
     private static final int INVALID_INDEX = -10;
     private static final int FIRST_ENTRY = 1;
     private static final boolean SILENT = true;
-    private static final Double VALID_AMOUNT = 1000.0;
-    private static final Double NEW_AMOUNT = 500.0;
+    private static final int VALID_AMOUNT = 1000;
+    private static final int NEW_AMOUNT = 500;
     private static final String VALID_DESCRIPTION = "Testing";
     private static final boolean PERMANENT = true;
-    private static final Double FIRST_AMOUNT = 10.0;
-    private static final Double SECOND_AMOUNT = 5.0;
+    private static final double FIRST_AMOUNT = 10;
+    private static final double SECOND_AMOUNT = 5;
 
     private static final String EMPTY_STRING = "";
     private static final String SAMPLE_LIST = "1. Alice" + System.lineSeparator()
