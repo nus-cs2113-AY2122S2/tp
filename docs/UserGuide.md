@@ -232,7 +232,7 @@ Format: `addout /g GROUP_INDEX /u USER_INDEX /e EXPENDITURE /d DESCRIPTION /c CA
 * **CATEGORY_INDEX** refers to the category of the expenditure.
 * **<T|F>** refers to the setting of expenditure to be recurring or not recurring.
 
-Example of usgae:
+Example of usage:
 
 * Add a spending of $20 on a piece of candy to an individual with the user index of 1, in group 1 and type of
   expenditure in category 1.
@@ -366,17 +366,17 @@ the [features](#features) section.
 
 | Command                                                             | Format                                             |
 |---------------------------------------------------------------------|----------------------------------------------------|
-| [View all commands](#viewing-all-commands-help)                     | add /n __ /g __                                    |
-| [Add a person](#add-a-person-add)                                   | delete /u __ /g __                                 |
-| [Delete a person](#delete-a-person-delete)                          | addin /u__ /g __ /i __ /d __ /c __ /p __           |
-| [Add an income](#add-an-income-addin)                               | deletein /u __ /g __ /r __                         |
-| [Delete an income](#delete-an-income-deletein)                      | editin /u __ /g __ /r __ /i __ /d __ /c __  /p __  |
-| [Edit an income](#edit-an-income-editin)                            | addout /u__ /g __ /e __ /d __ /c __ /p __          |
-| [Add an expenditure](#add-an-expenditure-addout)                    | deleteout /u __ /g __ /r __                        |
-| [Delete an expenditure](#delete-an-expenditure-deleteout)           | editout /u __ /g __ /r __ /e __ /d __ /c __  /p __ |
-| [Edit an expenditure](#edit-an-expenditure-editout)                 | overview                                           |
-| [Show financial summary](#show-financial-summary-overview)          | list /g __                                         |
-| [Show all records by group](#show-all-records-by-group-list)        | find /d __ /c __                                   | 
+| [View all commands](#viewing-all-commands-help)                     | help                                               |
+| [Add a person](#add-a-person-add)                                   | add /n __ /g __                                    |
+| [Delete a person](#delete-a-person-delete)                          | delete /u __ /g __                                 |
+| [Add an income](#add-an-income-addin)                               | addin /u__ /g __ /i __ /d __ /c __ /p __           |
+| [Delete an income](#delete-an-income-deletein)                      | deletein /u __ /g __ /r __                         |
+| [Edit an income](#edit-an-income-editin)                            | editin /u __ /g __ /r __ /i __ /d __ /c __  /p __  |
+| [Add an expenditure](#add-an-expenditure-addout)                    | addout /u__ /g __ /e __ /d __ /c __ /p __          |
+| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /u __ /g __ /r __                        |
+| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /u __ /g __ /r __ /e __ /d __ /c __  /p __ |
+| [Show financial summary](#show-financial-summary-overview)          | overview                                           |
+| [Show all records by group](#show-all-records-by-group-list)        | list /g __                                         | 
 | [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                            |
-| [Searching for details](#searching-for-details-find)                | bye                                                |
-| [Exit the program](#exit-bye)                                       | help                                               |
+| [Searching for details](#searching-for-details-find)                | find /d __ /c __                                   |
+| [Exit the program](#exit-bye)                                       | bye                                                |
