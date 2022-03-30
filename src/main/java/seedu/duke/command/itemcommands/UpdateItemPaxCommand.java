@@ -3,7 +3,7 @@ package seedu.duke.command.itemcommands;
 import seedu.duke.command.Command;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.exceptions.EmptyItemNameException;
-import seedu.duke.EmptyItemPaxException;
+import seedu.duke.exceptions.EmptyItemPaxException;
 import seedu.duke.Item;
 import seedu.duke.ItemList;
 import seedu.duke.Ui;

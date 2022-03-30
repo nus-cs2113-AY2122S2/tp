@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.exceptions;
+
+import seedu.duke.HotelLiteManagerException;
 
 public class EmptyHousekeeperPerformanceNameException extends HotelLiteManagerException {
     private static final String ERROR_MESSAGE = "Error! Housekeeper name cannot be empty.";

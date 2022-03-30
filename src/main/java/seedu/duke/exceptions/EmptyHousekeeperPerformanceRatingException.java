@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.exceptions;
+
+import seedu.duke.HotelLiteManagerException;
 
 public class EmptyHousekeeperPerformanceRatingException extends HotelLiteManagerException {
     private static final String ERROR_MESSAGE = "Error! Housekeeper performance cannot be empty.";

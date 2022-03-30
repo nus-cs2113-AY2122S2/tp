@@ -5,6 +5,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.command.Command;
+import seedu.duke.exceptions.EmptyHousekeeperPerformanceNameException;
+import seedu.duke.exceptions.EmptyHousekeeperPerformanceRatingException;
 import seedu.duke.storage.HousekeeperPerformanceFileManager;
 
 /**

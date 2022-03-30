@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.command.itemcommands.AddItemCommand;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.EmptyItemNameException;
+import seedu.duke.exceptions.EmptyItemPaxException;
 
 class DukeTest {
     @Test

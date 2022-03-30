@@ -8,7 +8,7 @@ import seedu.duke.ListContainer;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.Ui;
 import seedu.duke.Housekeeper;
-import seedu.duke.EmptyDayException;
+import seedu.duke.exceptions.EmptyDayException;
 import seedu.duke.HousekeeperList;
 import seedu.duke.InvalidDayException;
 import seedu.duke.command.Command;
