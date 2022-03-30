@@ -8,7 +8,6 @@ import seedu.duke.Room;
 import seedu.duke.RoomList;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
-import seedu.duke.command.RoomHelper;
 
 
 /**

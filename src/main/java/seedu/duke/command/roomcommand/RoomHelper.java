@@ -1,4 +1,4 @@
-package seedu.duke.command;
+package seedu.duke.command.roomcommand;
 
 public class RoomHelper {
     public static boolean isValidIntNumber(String numberStr) {

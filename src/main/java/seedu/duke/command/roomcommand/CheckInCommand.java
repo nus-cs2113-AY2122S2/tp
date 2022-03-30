@@ -8,7 +8,6 @@ import seedu.duke.AssignmentMap;
 import seedu.duke.Room;
 import seedu.duke.exceptions.InvalidRoomNumberException;
 import seedu.duke.command.Command;
-import seedu.duke.command.RoomHelper;
 
 import java.io.IOException;
 

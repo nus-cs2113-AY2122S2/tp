@@ -10,7 +10,6 @@ import seedu.duke.AssignmentMap;
 import seedu.duke.Room;
 import seedu.duke.exceptions.InvalidRoomNumberException;
 import seedu.duke.command.Command;
-import seedu.duke.command.RoomHelper;
 
 /**
  * Class that checks out a room with corresponding room number
