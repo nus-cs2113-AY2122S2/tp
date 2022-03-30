@@ -72,9 +72,9 @@ expenditures in memory.
 - `Commands`: The collection of all executable commands.
 - `Storage`: Reads data from, and writes data to the hard disk.
 
-By abstracting out closely related code into classes, it allows`MMM`to deal at a higher level, without worrying
+By abstracting out closely related code into classes, it allows `MMM` to deal at a higher level, without worrying
 about the lower level details. Higher cohesion is also achieved and coupling is minimized as each component is
-only coupled to the main class,`MMM`.
+only coupled to the main class, `MMM`.
 
 The Sequence Diagram below shows an example of how the components interact with each other for the scenario 
 where the user issues the command`add shoes 100`.
@@ -87,54 +87,54 @@ The major code is broken down into components for better abstraction.
 The sections below give more details for each component.
 
 ### UI component
-The source code can be found in [Ui.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/Ui.java)
+The source code can be found in [`Ui.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Ui.java)
 
 ![ui_diagram](images/ui_diagram.png)
 <br/> Fig 3 - Ui Class Diagram
 
-The UI component consists of a`Ui`and`PrintStrings`class.
+The UI component consists of a `Ui` and `PrintStrings` class.
 
 The UI component:
-- Prints the welcome banner and message on startup, as well as a financial tip from the`PrintStrings`class.
-- Prints`>`before the user's input, to help the user differentiate between their input and an output from the
+- Prints the welcome banner and message on startup, as well as a financial tip from the `PrintStrings` class.
+- Prints `>` before the user's input, to help the user differentiate between their input and an output from the
 application.
 - Reads input from the user.
 
 <br/>
 
 ### Parser component
-The source code can be found in [Parser.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/Parser.java)
+The source code can be found in [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Parser.java)
 
 ![parser_diagram](images/parser_diagram.png)
 <br/> Fig 4 - Parser Class Diagram
 
-The Parser component consists of a`Parser`, `Functions`, `ExpenditureList` and `Expenditure`class
+The Parser component consists of a `Parser`, `Functions`, `ExpenditureList` and `Expenditure` class
 
 The Parser component:
-- Receives user's input and splits it into the Command Type and Description using the`Functions`class.
-- Uses the`itemList`, which is an`ExpenditureList`object, to instantiate a`Command`object based on the Command Type.
-- Returns the`Command`object that can then be executed.
+- Receives user's input and splits it into the Command Type and Description using the `Functions` class.
+- Uses the `itemList`, which is an `ExpenditureList` object, to instantiate a `Command` object based on the Command Type.
+- Returns the `Command` object that can then be executed.
 
-We pass in the`itemList`to the`Command`object instead of using a global variable to ease testing. This way, we can 
-add, delete and update`Expenditure`entries in a new`itemList`during testing without affecting the actual`itemList`.
+We pass in the `itemList` to the `Command` object instead of using a global variable to ease testing. This way, we can 
+add, delete and update `Expenditure` entries in a new `itemList` during testing without affecting the actual`itemList`.
 
 ### Command component 
-The source can be found in [command](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/command)
+The source can be found in [`command`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command)
 
 ![command_diagram](images/command_diagram.png)  
 Fig 5 - Command Class Diagram
 
-The Command component consists of `Command` abstract class, `AddCommand`, `ByeCommand`, `DeleteCommand`, `HelpCommand`
+The Command component consists of Command abstract class, `AddCommand`, `ByeCommand`, `DeleteCommand`, `HelpCommand`
 , `ListCommand`and `UpdateCommand` that extends the `Command` class.
 
 The Command component:
 - Provides all the Command classes which can be instantiated by `Parser.parseCommand()`. The Command objects can then be 
 executed. Only 1 Command object can be created.
-- Includes a `.executeCommand()` method in each Command classes which performs the relevant command and throws 
+- Includes a `Command.executeCommand()` method in each Command classes which performs the relevant command and throws 
 exceptions if an error is encountered. The error is then handled.
 
 ### Storage component 
-The source can be found in [Storage.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/Storage.java)
+The source can be found in [`Storage.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Storage.java)
 
 ![storage_diagram](images/storage_diagram.png)  
 Fig 6 - Storage Class Diagram
@@ -143,22 +143,22 @@ The Storage component consists of `Storage` class.
 
 The Storage component:
 - `MMM` class initialises a `Storage` object upon start up. The `Storage` class consists of 
-`load()` and `save()` methods. 
-- Concurrently, `MMM` will call the `load()` method and load any data that is stored on the hard disk.
-- `MMM` calls the `save()` method and stores remaining data onto the hard disk when the program exits.
+`Storage.load()` and `Storage.save()` methods. 
+- Concurrently, `MMM` will call the `Storage.load()` method and load any data that is stored on the hard disk.
+- `MMM` calls the `Storage.save()` method and stores remaining data onto the hard disk when the program exits.
 
 
 ## Implementation
 This section describes some noteworthy details on how certain features of MindMyMoney are implemented.
 
-### Add Command Component
-**API Reference**: `AddCommand.java`  
+### AddCommand Feature
+The source code can be found in [`AddCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/AddCommand.java)
 
-The Add Command component allows users to add in an expenditure, a new credit card or their income using a single command. 
+The AddCommand feature allows users to add in an expenditure, a new credit card or their income using a single command. 
 This component provides speed and ease of use by only requiring a single line of input.
 
 ### Subcomponents
-The Add Command component consists of 3 subcomponents. These features are differentiated by their flags.
+The AddCommand component consists of 3 subcomponents. These features are differentiated by their flags.
 - Add expenditure component.
 - Add credit card component.
 - Add income component.
@@ -166,21 +166,21 @@ The Add Command component consists of 3 subcomponents. These features are differ
 The sequence diagram below shows the interactions of when an `AddCommand` is parsed.  
 
 ![add_command_sequence_diagram](images/Add_Command_Sequence_Diagram.png)  
-Fig 7 - Add Command Sequence Diagram  
+Fig 7 - AddCommand Sequence Diagram  
 
 Below is an example scenario showing how the AddCommand behaves at each step.
 1. The `Parser` component parses user input and returns the new `AddCommand` object to the
    `MindMyMoney`.
 2. `AddCommand` instantiates `addInput`, `expenditureList`, `creditCardList`, `incomeList`.
-3. The application invokes `Addcommand.executeCommand()` to execute user instruction.
-4. If user input contains credit card flag, the application executes `addCreditCard()`.
-5. Else if user input contains income flag, the application executes `addIncome()`.
-6. Else the application executes `addExpenditure()`.
+3. The application invokes `AddCommand.executeCommand()` to execute user instruction.
+4. If user input contains credit card flag, the application executes `AddCommand.addCreditCard()`.
+5. Else if user input contains income flag, the application executes `AddCommand.addIncome()`.
+6. Else the application executes `AddCommand.addExpenditure()`.
 7. The application then returns to the Parser component.
 
 ### Add Credit Card Command
 MindMyMoney allow users to track their different credit cards. A user can add a new credit card through the 
-`addCreditCard()` command by specifying the credit card name, cash back, card limit and balance.
+`AddCommand.addCreditCard()` command by specifying the credit card name, cash back, card limit and balance.
 
 #### Current Implementation
 The sequence diagram below shows the interactions of different subcomponents of the system when adding a credit card
@@ -189,19 +189,19 @@ to the list.
 ![add_credit_card_command_sequence_diagram](images/Add_Credit_Card_Command_Sequence_Diagram.png)   
 Fig 8 - Add Credit Card Command Sequence Diagram  
 
-The `addCreditCard()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags,
+The `AddCommand.addCreditCard()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags,
 `Parser` will construct a new `AddCommand` which will be used to execute users input.
 
-1. During the execution, `addCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`,
+1. During the execution, `AddCommand.addCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`,
    `CASH_BACK`, `CARD_LIMIT` and `CARD_BALANCE` fields.
-2. Once all the fields are obtained, `addCreditCard()` object instantiates a new `CreditCard` 
+2. Once all the fields are obtained, `AddCommand.addCreditCard()` object instantiates a new `CreditCard` 
    object with the aforementioned 5 fields and adds them into the `CreditCardList`.
-3. The `addCreditCard()` object prints a list to show the user what it has saved.
-4. The `addCreditCard()` returns to `AddCommand`.
+3. The `AddCommand.addCreditCard()` object prints a list to show the user what it has saved.
+4. The `AddCommand.addCreditCard()` returns to `AddCommand`.
 
 ### Add Expenditure Command
 A key functionality of MindMyMoney is the ability to add and track user expenditure. A user can add in a new expenditure
-through the `addExpenditure()` command by specifying the payment method, the category, the description of the item, the cost of the item and the date of 
+through the `AddCommand.addExpenditure()` command by specifying the payment method, the category, the description of the item, the cost of the item and the date of 
 purchase.
 
 #### Current Implementation
@@ -209,22 +209,22 @@ The sequence diagram below shows the interactions of different subcomponents of 
 to the list.  
 
 ![add_expenditure_command_sequence_diagram](images/Add_Expenditure_Command_Sequence_Diagram.png)  
-Fig 8 - Add Expenditure Command Sequence Diagram  
+Fig 9 - Add Expenditure Command Sequence Diagram  
 
-The `addExpenditure()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags, 
+The `AddCommand.addExpenditure()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags, 
 `Parser` will construct a new `AddCommand` which will be used to execute users input.
 
-1. During the execution, `addExpenditure()` will parse through user input to obtain the `PAYMENT_METHOD`, `CATEGORY`,
+1. During the execution, `AddCommand.addExpenditure()` will parse through user input to obtain the `PAYMENT_METHOD`, `CATEGORY`,
    `DESCRIPTION`, `AMOUNT` and `TIME` fields.
-2. Once all the fields are obtained, `addExpenditure()` will run tests for its respective fields and capitalise the 
+2. Once all the fields are obtained, `AddCommand.addExpenditure()` will run tests for its respective fields and capitalise the 
    `PAYMENT_METHOD`, `CATEGORY` input.
-3. The `addExpenditure()` object instantiates a new `Expenditure` object with the aforementioned 5 fields and adds them
+3. The `AddCommand.addExpenditure()` object instantiates a new `Expenditure` object with the aforementioned 5 fields and adds them
    into the `ExpenditureList`.
-4. The `addExpenditure()` object prints a list to show the user what it has saved.
-5. The `addExpenditure()` returns to `AddCommand`.
+4. The `AddCommand.addExpenditure()` object prints a list to show the user what it has saved.
+5. The `AddCommand.addExpenditure()` returns to `AddCommand`.
 
-### Add Command Design Considerations
-Aspect: How to ask user for the fields of input
+### AddCommand Design Considerations
+Aspect: How to ask user for the fields of input.
 * Alternative 1 (current choice): User is asked to put in all fields at once, separated using flags.
     * Pros: Faster input, user can enter an expenditure using a single input.
     * Cons: User must be able to remember all the flags and its sequence.
@@ -241,19 +241,26 @@ that is actionable for the users.
 ![calculate_command_sequence_diagram](images/gif_loading.gif)
 
 ### List Command feature
-To enable users to view their current list of added expenditures. 
+The source code can be found in [`ListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/ListCommand.java)  
 
-#### Design considerations
-Aspect: How to make the list command easily tested using JUnit testing
-* Alternative 1 (current choice): Abstract the conversion of Expenditure to String in a separate listToString() method
-  * Pros: Easily tested using JUnit testing, by checking the String that the listToString() method returns
-  * Cons: Added layer of abstraction that may be deemed redundant
-
-* Alternative 2: Print directly in the ListCommand.executeCommand() method 
-  * Pros: Easily implemented with lesser lines of code as the code is minimalist
-  * Cons: JUnit testing would require I/O redirection prior to checking the output matches expectations
+MindMyMoney allow users to view their current list of added expenditures. 
+#### Current Implementation
+The sequence diagram below shows the interactions of different subcomponents of the system when listing.  
 
 ![list_command_sequence_diagram](images/List_Command_Sequence_Diagram.png)
+Fig 13 - List Command Sequence Diagram
+
+#### Design considerations
+Aspect: How to make the `ListCommand` easily tested using JUnit testing.
+* Alternative 1 (current choice): Abstract the conversion of `Expenditure` to `String` in a separate` ListCommand.listToString()` method.
+  * Pros: Easily tested using JUnit testing, by checking the String that the `ListCommand.listToString()` method returns.
+  * Cons: Added layer of abstraction that may be deemed redundant.
+
+* Alternative 2: Print directly in the `ListCommand.executeCommand()` method .
+  * Pros: Easily implemented with lesser lines of code as the code is minimalist.
+  * Cons: JUnit testing would require I/O redirection prior to checking the output matches expectations.
+
+
 
 ## Product scope
 ### Target user profile
