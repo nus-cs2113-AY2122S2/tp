@@ -221,6 +221,30 @@ when the user invokes the `session /create` command.
 The general workflow of the `session /create` command is as follows:
 
 ### Remove a session
+**API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `session /delete` command.
+<br>
+<br>
+![Delete Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionDeleteCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /delete` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionDeleteCommand` object.
+3. `SessionDeleteCommand#run` method is then invoked to run the `session /delete` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of sessions can be retrieved.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the session with the specified 
+session unique identifier from the list of sessions.
+   1. If the specified session unique identifier cannot be found, a `String` object 
+   representing session could not be found is returned.
+   2. Else the `Session` object with the specified session unique identifier is returned.
+6. With the `Session` object, it is removed from the list of sessions stored in `Profile` object.
+7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
+
 ### View a session
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
