@@ -298,6 +298,10 @@ public abstract class Message {
     public static final String LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED =
             "A session summary has been successful produced for the Session object with the following Id: ";
 
+    // Session List Command
+    public static final String LOGGER_SESSIONLIST_SESSIONSS_LISTED =
+            "All the sessions have been listed.";
+
     // Session View Command
     public static final String LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED =
             "A session could not be viewed.";
@@ -378,12 +382,12 @@ public abstract class Message {
             "An activity was not removed from the list of activities in a session with Id: ";
 
     // Activity List Command
-    public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
-            "There are currently no activities in this session.";
     public static final String ASSERT_ACTIVITYLIST_SESSION_ID_LESS_THAN_ONE =
             "Session unique identifier is less than one";
     public static final String LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND =
             "Session was not found with unique identifier of:";
+    public static final String LOGGER_ACTIVITYLIST_ACTIVITIES_LISTED =
+            "All the activities have been listed with specified session Id: ";
 
     // Group
     public static final String ERROR_GROUP_EMPTY_PERSON_LIST =

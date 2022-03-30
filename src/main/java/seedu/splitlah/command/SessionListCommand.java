@@ -1,6 +1,9 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.ui.Message;
+
+import java.util.logging.Level;
 
 /**
  * Represents a command that displays the details of each Session object within a Profile object.
@@ -18,5 +21,6 @@ public class SessionListCommand extends Command {
     public void run(Manager manager) {
         String sessionListSummary = manager.getProfile().getSessionListSummaryString();
         manager.getUi().printlnMessage(sessionListSummary);
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONLIST_SESSIONSS_LISTED);
     }
 }
