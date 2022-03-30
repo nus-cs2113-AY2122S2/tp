@@ -69,7 +69,8 @@ class IncomeTest {
 
     @Test
     public void saveString_getString_success() {
-        String expectedString = "i food - 1000.0 - false";
+        String expectedString = "i food - 1000.0 - false"
+                + " - 2022-03-30";;
         String actualString = testItem.saveString();
         assertEquals(expectedString, actualString);
     }
