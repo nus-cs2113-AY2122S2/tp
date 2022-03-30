@@ -542,10 +542,157 @@ King		303			 3			Vacant  			NA
 Twin		401			 4			Vacant  			susan
 Twin		402			 4			Occupied			NA
 ```
+## Item Related Commands
+### Add A New Item To The Item List: `add item`
+Adds a new item (name of item and its pax) to the item list which represents all the items found within the inventory.
 
+Format: `add item ITEM NAME / PAX`
+* `add item` is not case-sensitive.
+* `Item Name` can be any string of characters including numbers and symbols. 
+* `Item Name` given must not be currently present within the item list.
+* `Pax` given has a limit of 1000000.
 
+Example of usage:
+```
+add item Toilet Roll / 15
+```
 
+Expected output:
+```
+The item and its pax has been added to the item list.
+Number of items within the Item List: 1
+```
 
+### Update The Pax Of An Item In The Item List: `update item pax`
+Updates the pax of an item that is currently found within the item list to reflect an actual item within the inventory increasing or decreasing.
+
+Format: `update item pax ITEM NAME / PAX`
+* `update item pax` is not case-sensitive.
+* `ITEM NAME` given must be found within the item list to be eligible to be updated.
+* `ITEM NAME` is not case-sensitive.
+* `Pax` given has a limit of 1000000.
+
+Example of usage:
+```
+update item pax Toilet Roll / 300
+```
+
+Expected output:
+```
+The pax of TOILET ROLL has been updated to 300.
+```
+
+### Update The Name Of An Item In The Item List: `update item name`
+Updates the name of an item that is currently found within the item list.
+
+Format: `update item name OLD ITEM NAME / NEW ITEM NAME`
+
+* `update item name` is not case-sensitive.
+* `OLD ITEM NAME` given must be found within the item list as it is the name of the item currently within the item list which we want to update. 
+* `NEW ITEM NAME` is the new name for the updated item.
+* `NEW ITEM NAME` is not case-sensitive.
+* `OLD ITEM NAME` cannot be the same as `NEW ITEM NAME`.
+
+Example of usage:
+```
+update item name Toilet Roll / Premium Toilet Roll
+```
+
+Expected output:
+```
+The name of TOILET ROLL has been updated to PREMIUM TOILET ROLL.`
+```
+
+### Delete An Item In The Item List: `delete item`
+Removes an item that is currently found within the item list to reflect that we are no longer storing that product within the inventory.
+
+Format: `delete item NAME`
+* `delete item` is not case-sensitive.
+* `NAME` given must be found within the item list to be eligible to be deleted.
+* `NAME` is not case-sensitive.
+
+Example of usage:
+```
+delete item Premium Toilet Roll
+```
+
+Expected output:
+```
+PREMIUM TOILET ROLL has been removed from the Item List.
+Number of items within the Item List: 0
+```
+
+### View All Items: `view all items`
+Lists out all the items along with their respective pax within the list in a user-readable format.
+
+Format: `view all items`
+* `view all items` is not case-sensitive.
+
+Example of usage:
+```
+add item Toilet Roll / 15
+add item Tissue Paper / 20
+add item Tables / 30
+view all items
+```
+
+Expected output:
+```
+The item and its pax has been added to the item list.
+There are currently 1 items within the item list.
+The item and its pax has been added to the item list.
+There are currently 2 items within the item list.
+The item and its pax has been added to the item list.
+There are currently 3 items within the item list.
+=========== Item List ===========
+1. Item Name: TOILET ROLL Item Pax: 15
+2. Item Name: TISSUE PAPER Item Pax: 20
+3. Item Name: TABLES Item Pax: 30
+======== End of the list ========
+```
+
+### View All Items Within The Item List With A Pax Of Zero: `view items with zero pax`
+Lists out all the items which has a pax of zero within the item list in a user-readable format.This allows the user to easily know which items have run out in the inventory and need to be replenished.
+
+Format: `view items with zero pax`
+
+* `view items with zero pax` is not case-sensitive.
+
+Example of usage:
+```
+update item pax Toilet Roll / 0
+update item pax Tissue Paper / 0
+view items with zero pax
+```
+
+Expected output:
+```
+The pax of TOILET ROLL has been updated to 0.
+The pax of TISSUE PAPER has been updated to 0.
+=========== Item List ===========
+1. Item Name: TOILET ROLL Item Pax: 0
+2. Item Name: TISSUE PAPER Item Pax: 0
+======== End of the list ========
+```
+
+### Search For Items Within The Item List: `search item`
+Displays all items (item name and pax) within the item list that matches the input keyword.
+
+Format: `search item KEYWORD`
+
+Example of usage:
+```
+search item Toilet
+```
+* `search item` is not case-sensitive.
+* `KEYWORD` is not case-sensitive.
+
+Expected output:
+```
+=========== Item List ===========
+1. Item Name: TOILET ROLL Item Pax: 0
+======== End of the list ========
+```
 
 ## FAQ
 

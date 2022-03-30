@@ -100,9 +100,9 @@ public class Ui {
     }
 
     public void printHousekeeperNoted(Housekeeper housekeeper) {
-        System.out.println("========== Noted ! ==========");
+        System.out.println("=============== Noted ! ================");
         System.out.println(housekeeper);
-        System.out.println("=============================");
+        System.out.println("========================================");
     }
 
     /**
@@ -278,6 +278,14 @@ public class Ui {
         System.out.println(LINE);
         System.out.println(TABLE_HEADER);
         System.out.println(LINE);
+    }
+
+    public void printNotedLine() {
+        System.out.println("================ Noted! ===================");
+    }
+
+    public void printBottomLine() {
+        System.out.println("===========================================");
     }
 }
 
