@@ -305,23 +305,14 @@ to a cost list:
 
 > Split costs evenly: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] /p [PAYER] /i
 > [NAME1 NAME2...] /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`<br>
->* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list)
-command.
->* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
->      * The unique identifier for an activity can be retrieved with the
->[`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 > 
 > Split using a cost list: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] p [PAYER]
   /i [NAME1 NAME2...] /cl [COST1 COST2...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`<br>
 >* `[SESSION_ID]` refers to the unique identifier of the session.
-   >    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list)
-          command.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
    >      * The unique identifier for an activity can be retrieved with the
             [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
-
-<br>
 
 > **💡 Notes**
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
