@@ -1,6 +1,7 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
@@ -9,24 +10,15 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.Income;
 import seedu.mindmymoney.userfinancial.User;
 
-import static seedu.mindmymoney.constants.Flags.FLAG_END_VALUE;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_AMOUNT;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_LIMIT;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_NAME;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
+import static seedu.mindmymoney.constants.Flags.*;
 import static seedu.mindmymoney.constants.Indexes.SPLIT_LIMIT;
 import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
-import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
-import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
+import static seedu.mindmymoney.helper.AddCommandInputTests.*;
+import static seedu.mindmymoney.helper.GeneralFunctions.*;
+import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
 
 /**
  * Represents the Update command.
@@ -72,6 +64,10 @@ public class UpdateCommand extends Command {
         return updateInput.contains(FLAG_OF_INCOME);
     }
 
+    private boolean hasCategoryFlag() {
+        return updateInput.contains(FLAG_OF_CATEGORY);
+    }
+
     /**
      * Updates an Expenditure entry in user's expenditure list.
      *
@@ -79,35 +75,46 @@ public class UpdateCommand extends Command {
      */
     public void updateExpenditure() throws MindMyMoneyException {
         try {
-            String description;
-            String category = null;
+            String newCategory = null;
             String[] parseUpdateInput = updateInput.split(" ", SPLIT_LIMIT);
+            String indexAsString = parseUpdateInput[INDEX_OF_FIRST_ITEM];
+            int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
+            String newPaymentMethod = null;
 
-            // get the index to update, amount, description
-            String indexString = parseUpdateInput[INDEX_OF_FIRST_ITEM];
-            String expenditureDescription = parseUpdateInput[INDEX_OF_SECOND_ITEM];
-            int divisionIndex = expenditureDescription.lastIndexOf(" ");
-            String descriptionAndCategory = expenditureDescription.substring(INDEX_OF_FIRST_ITEM,
-                    divisionIndex).strip();
-            if (descriptionAndCategory.contains("-c ")) {
-                descriptionAndCategory = descriptionAndCategory.replace("-c ", "");
-                int divisionIndexForCategory = descriptionAndCategory.lastIndexOf(" ");
-                description = descriptionAndCategory.substring(INDEX_OF_FIRST_ITEM,
-                        divisionIndexForCategory).strip();
-                category = descriptionAndCategory.substring(divisionIndexForCategory).strip();
+            // Parse data from user's input
+            if (hasCategoryFlag()) {
+                newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
+
+                String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
+                testExpenditureCategory(inputCategory);
+                newCategory = capitalise(inputCategory);
             } else {
-                description = expenditureDescription.substring(INDEX_OF_FIRST_ITEM,
-                        divisionIndex).strip();
+                newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_DESCRIPTION);
+                // Take previous expenditure's category
+                newCategory = itemList.get(indexToUpdate).getCategory();
             }
-            String amountString = expenditureDescription.substring(divisionIndex).strip();
-            int indexToUpdate = Integer.parseInt(indexString) + LIST_INDEX_CORRECTION;
+            testPaymentMethod(newPaymentMethod, creditCardList);
+            if (capitalise(newPaymentMethod).equals("Cash")) {
+                newPaymentMethod = capitalise(newPaymentMethod);
+            }
 
-            //to edit to fit new add command
-            Expenditure newExpenditure = new Expenditure("cash", category, description,
-                    Integer.parseInt(amountString), "2022-02");
+            String newDescription = parseInputWithCommandFlag(updateInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
+            testDescription(newDescription);
+
+            String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
+            testExpenditureAmount(newAmountAsString);
+            float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
+
+            String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
+            String newTime = convertTime(inputTime);
+
+            //Create new expenditure object to substitute in
+            Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,
+                    newAmountAsFloat, newTime);
             itemList.set(indexToUpdate, newExpenditure);
-            System.out.printf("Successfully set expenditure %d to %s\n" + System.lineSeparator(),
-                    indexToUpdate - LIST_INDEX_CORRECTION, newExpenditure);
+            System.out.println(PrintStrings.LINE +
+                    "Successfully set expenditure " + indexAsString + " to:\n"
+            + newExpenditure.toString() + "\n" + PrintStrings.LINE);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input INDEX, DESCRIPTION or AMOUNT?");
         } catch (NumberFormatException e) {
@@ -140,17 +147,16 @@ public class UpdateCommand extends Command {
                     FLAG_END_VALUE);
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
-            //to edit to fit new add command
             CreditCard newCreditCard = new CreditCard(newCardName, Double.parseDouble(newCashBack),
                     Float.parseFloat(newCardLimit), Float.parseFloat(newCardBalance));
 
             creditCardList.set(indexToUpdate, newCreditCard);
-            System.out.printf("Successfully set credit card %d\n" + System.lineSeparator(),
-                    indexToUpdate - LIST_INDEX_CORRECTION);
+            System.out.println(PrintStrings.LINE + "Successfully set credit card " + indexAsString + " to :\n"
+                    + newCreditCard.toString() + PrintStrings.LINE);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MindMyMoneyException("Did you forget to input NAME, CASHBACK, CREDIT LIMIT or BALANCE?");
+            throw new MindMyMoneyException("Did you forget to input INDEX, NAME, CASHBACK, CREDIT LIMIT or BALANCE?");
         } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("CASHBACK, CREDIT LIMIT and BALANCE must be a number");
+            throw new MindMyMoneyException("INDEX, CASHBACK, CREDIT LIMIT and BALANCE must be a number");
         } catch (IndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Please input a valid index");
         }

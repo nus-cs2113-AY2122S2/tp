@@ -73,12 +73,13 @@ public class HelpCommand extends Command {
                     + "[NEW_CATEGORY] [NEW_AMOUNT]\n"
                     + "6. Removing an Expenditure entry: delete [INDEX]\n"
                     + "7. Exiting the program: bye\n"
-                    + "---------------------------------------------------------------------------------------\n";
+                    + "----------------------------------------------------------------------------------------------"
+                    + "-----\n";
 
             System.out.println(helpPage);
         } else {
             System.out.println("Invalid command! \n"
-                    + "Type \"help /expenses\" to view the list of supported expenditure commands\n"
+                    + "Type \"help /e\" to view the list of supported expenditure commands\n"
                     + "Type \"help /cc\" to view the list of supported Credit Card commands"
                     + System.lineSeparator());
         }
@@ -98,7 +99,7 @@ public class HelpCommand extends Command {
                 + "/cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]\n"
                 + "4. Removing a credit card: delete /cc [INDEX]\n"
                 + "5. Exiting the program: bye\n"
-                + "---------------------------------------------------------------------------------------\n";
+                + "---------------------------------------------------------------------------------------------------\n";
 
         System.out.println(helpPage);
     }
@@ -132,7 +133,7 @@ public class HelpCommand extends Command {
             printIncomeHelpPage();
         } else {
             throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
-                    + "Type 'list /expenses' to view your current list of expenses\n"
+                    + "Type 'list /e' to view your current list of expenses\n"
                     + "Type 'list /cc' to view your current list of stored credit cards");
         }
     }

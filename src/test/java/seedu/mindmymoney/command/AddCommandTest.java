@@ -384,7 +384,7 @@ class AddCommandTest {
      */
     public String getExpenditureOutput(ArrayList<Expenditure> list) {
         if (!list.isEmpty()) {
-            return list.get(list.size() + LIST_INDEX_CORRECTION).getExpenditure()
+            return list.get(list.size() + LIST_INDEX_CORRECTION).getPaymentMethod()
                 + list.get(list.size() + LIST_INDEX_CORRECTION).getCategory()
                 + list.get(list.size() + LIST_INDEX_CORRECTION).getDescription()
                 + list.get(list.size() + LIST_INDEX_CORRECTION).getAmount()

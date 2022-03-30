@@ -78,16 +78,10 @@ public class ListCommand extends Command {
         String listInString = "";
 
         for (Expenditure i : expenditureList.expenditureListArray) {
-            if (i.getCategory() == null) {
-                listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription()
-                        + " [" + i.getTime() + "]" + "\n";
-            } else {
-                listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + " from "
-                        + i.getCategory() + " [" + i.getTime() + "]" + "\n";
-            }
+            listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + ". Paid using "
+                    + i.getPaymentMethod() + " [" + i.getCategory() + "]" + " [" + i.getTime() + "]\n";
             indexOfList++;
         }
-
         assert listInString.length() != 0 : "Return string should be non-empty";
         return listInString;
     }
@@ -117,8 +111,8 @@ public class ListCommand extends Command {
         int indexOfList = 1;
         String listInString = "";
         for (CreditCard i : creditCardList.creditCardListArray) {
-            listInString += indexOfList + ". Name: " + i.getNameOfCard() + " Cashback: " + i.getCashback()
-                    +  "% Card limit: $" + i.getMonthlyCardLimit() + " Card balance: $" + i.getBalance() + "\n";
+            listInString += indexOfList + ". Name: " + i.getNameOfCard() + " [Cashback: " + i.getCashback()
+                    +  "%] [Card limit: $" + i.getMonthlyCardLimit() + "] [Card balance: $" + i.getBalance() + "]\n";
             indexOfList++;
         }
 
