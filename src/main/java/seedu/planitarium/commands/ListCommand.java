@@ -28,7 +28,6 @@ public class ListCommand extends Command {
         logger.log(Level.INFO, String.format(LOG_LIST_INFO, group));
     }
 
-    @Override
     public void execute() {
         assert (family != null) : Constants.FAMILY_NOT_NULL;
         family.list(group);
