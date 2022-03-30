@@ -1,6 +1,5 @@
 package seedu.meetingjio.commands;
 
-import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
@@ -119,6 +118,8 @@ public class ListCommand extends Command {
                 return ERROR_NO_LESSONS;
             case MEETINGS_ONLY:
                 return ERROR_NO_MEETINGS;
+            default:
+                return ERROR_EMPTY_LIST;
             }
         }
         String truncatedString = str.substring(0, str.length() - 1);
