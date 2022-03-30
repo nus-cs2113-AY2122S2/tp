@@ -204,8 +204,8 @@ when the user invokes the `session /view` command.
 <br>
 <br>
 The general workflow of the `session /view` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `SessionViewCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionViewCommand` object.
 3. `SessionViewCommand#run` method is then invoked to run the `session /view` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
 5. The `SessionViewCommand` object then runs the `Profile#getSession` method to retrieve the session represented
@@ -226,8 +226,8 @@ when the user invokes the `session /list` command.
 <br>
 <br>
 The general workflow of the `session /list` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
 3. `SessionListCommand#run` method is then invoked to run the `session /list` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
 6. To retrieve the sessions from profile, `Profile#getSessionList` is executed,
@@ -293,8 +293,8 @@ when the user invokes the `group /create` command.
 <br>
 <br>
 The general workflow of the `group /create` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
 3. A `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
 4. Once the command starts to run, `GroupCreateCommand` class checks if there are duplicates in the name list.
 5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUi#printlnMessage`. 
@@ -318,8 +318,8 @@ when the user invokes the `group /list` command.
 <br>
 <br>
 The general workflow of the `group /list` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
 3. `GroupListCommand#run()` method is then invoked to run the `group /list` command.
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called
 before the list of groups can be retrieved.
