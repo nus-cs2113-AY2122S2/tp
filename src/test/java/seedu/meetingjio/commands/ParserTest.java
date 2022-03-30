@@ -54,6 +54,18 @@ public class ParserTest {
 
     /**
      * Test method to ensure that the program informs user and continues running smoothly
+     * when the given start time is equal to the given end time.
+     */
+    @Test
+    public void prepareAdd_startTimeEqualToEndTime_throwException() {
+        String inputString = "add_lesson n/john t/cs2113 d/monday st/1600 et/1600 m/online";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_INVALID_TIME, command.execute(masterTimetable));
+    }
+
+    /**
+     * Test method to ensure that the program informs user and continues running smoothly
      * when the input for 'time' is not an integer.
      */
     @Test
