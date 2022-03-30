@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.lists.Item;
+import seedu.duke.itemlists.Item;
 import seedu.duke.command.Command;
 import seedu.duke.command.itemcommands.UpdateItemPaxCommand;
 import seedu.duke.exceptions.EmptyItemNameException;

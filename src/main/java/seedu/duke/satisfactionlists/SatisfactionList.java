@@ -1,8 +1,6 @@
-package seedu.duke;
+package seedu.duke.satisfactionlists;
 
-import seedu.duke.storage.SatisfactionListFileManager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

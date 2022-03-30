@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.housekeeperperformancelists;
 
 /**
  * Records the name and performance rating of a Housekeeper. Performance rating is an integer from 1-5, inclusive.

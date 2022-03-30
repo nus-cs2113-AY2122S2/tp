@@ -5,7 +5,7 @@ import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidUpdateItemNameCommandException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.lists.ItemList;
+import seedu.duke.itemlists.ItemList;
 import seedu.duke.storage.ItemListFileManager;
 import seedu.duke.exceptions.DuplicateItemNameException;
 

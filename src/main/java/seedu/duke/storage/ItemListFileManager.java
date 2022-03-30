@@ -2,8 +2,8 @@ package seedu.duke.storage;
 
 
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.lists.ItemList;
-import seedu.duke.lists.Item;
+import seedu.duke.itemlists.ItemList;
+import seedu.duke.itemlists.Item;
 import seedu.duke.exceptions.ItemFileNotFoundException;
 import seedu.duke.exceptions.InvalidItemPaxException;
 
