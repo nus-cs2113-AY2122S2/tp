@@ -7,10 +7,10 @@ import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
 
 public class OrderController extends Controller {
-    private static final String[] CHOICES = {"Exit", "Display Menu",
+    private static final String[] CHOICES = {"Exit",
         "Create an order", "Delete an order",
-        "Get total value of current order",
-        "Get total value of all orders in the list", "Print receipt"
+        "Get value of an order",
+        "Get total value of all orders", "Print receipt"
     };
     private final OrderManager orderManager = OrderManager.getInstance();
     private final DishManager dishManager = DishManager.getInstance();
@@ -32,21 +32,18 @@ public class OrderController extends Controller {
             }
             return true;
         case 1:
-            dishManager.printDishes();
-            break;
-        case 2:
             addNewOrder();
             break;
-        case 3:
+        case 2:
             deleteOrder();
             break;
-        case 4:
+        case 3:
             displayOrderPrice();
             break;
-        case 5:
+        case 4:
             displayAllOrderPrice();
             break;
-        case 6:
+        case 5:
             printOrder();
             break;
         default:
@@ -58,10 +55,12 @@ public class OrderController extends Controller {
     }
 
     private void addNewOrder() throws OperationTerminationException {
-        int index = InputParser.getInteger("Enter dishes you want to order (enter negative number to exit): ");
+        System.out.println("Creating a new order...");
+        int index = InputParser.getInteger("Enter dishes to add, enter negative number to exit: ");
         int createdOrderIdx = orderManager.getOrderCount();
         try {
             while (index >= 0) {
+                System.out.println("Added successfully!");
                 Dish dish = dishManager.getDishes().get(index);
                 orderManager.addDishToOrder(dish, createdOrderIdx);
                 index = InputParser.getInteger("You have "
@@ -78,6 +77,7 @@ public class OrderController extends Controller {
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
             orderManager.deleteOrder(userInputInt);
+            System.out.println("Deleted successfully!");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please enter a valid order index.");
         }
