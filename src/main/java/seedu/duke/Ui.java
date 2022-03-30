@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.lists.Item;
+import seedu.duke.lists.ItemList;
 import seedu.duke.exceptions.HotelLiteManagerException;
 
 import java.util.ArrayList;

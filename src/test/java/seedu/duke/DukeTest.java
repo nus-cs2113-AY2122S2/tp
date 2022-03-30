@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.lists.Item;
 import seedu.duke.command.itemcommands.AddItemCommand;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.EmptyItemNameException;
