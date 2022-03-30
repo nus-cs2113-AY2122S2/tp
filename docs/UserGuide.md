@@ -94,6 +94,7 @@ Examples:
 
 #### Adding a recurring task
 - All tasks will have the same task description.
+- You can easily add your lecture and tutorial classes into your schedule with this command.
 - For a **daily** recurring task, a **month's** worth of task will be added.
 - For a **weekly** recurring task, **2 months'** worth of task will be added.
 - For a **monthly** recurring task, a **year's** worth of task will be added.
