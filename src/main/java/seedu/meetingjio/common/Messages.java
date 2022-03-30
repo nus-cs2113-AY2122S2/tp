@@ -24,7 +24,9 @@ public class Messages {
     public static final String MESSAGE_DIVIDER = "________________________________________________________"
             + "__________________________________________________";
     public static final String MESSAGE_GOODBYE = "See you again!";
-    public static final String MESSAGE_ADD_FORMAT = "To add a lesson: add n/[Name] l/[Lesson] "
+    public static final String MESSAGE_ADD_LESSON_FORMAT = "To add a lesson: add_lesson n/[Name] t/[Lesson title] "
+            + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
+    public static final String MESSAGE_ADD_MEETING_FORMAT = "To add a meeting: add_meeting t/[Meeting title] "
             + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
     public static final String MESSAGE_DELETE_FORMAT = "To delete a lesson: delete [Index]\n";
     public static final String MESSAGE_LIST_ALL_FORMAT = "To list all lessons: list all\n";
@@ -38,14 +40,15 @@ public class Messages {
     public static final String MESSAGE_EXIT_FORMAT = "To exit the application: exit\n";
     public static final String MESSAGE_HELP = "Here is the list of commands available:\n"
             + MESSAGE_DIVIDER + "\n"
-            + "1. " + MESSAGE_ADD_FORMAT
-            + "2. " + MESSAGE_DELETE_FORMAT
-            + "3. " + MESSAGE_LIST_ALL_FORMAT
-            + "4. " + MESSAGE_LIST_USER_FORMAT
-            + "5. " + MESSAGE_FREE_GENERIC_FORMAT
-            + "6. " + MESSAGE_FREE_SPECIFIC_FORMAT
-            + "7. " + MESSAGE_CLEAR_FORMAT
-            + "8. " + MESSAGE_EXIT_FORMAT
+            + "1. " + MESSAGE_ADD_LESSON_FORMAT
+            + "2. " + MESSAGE_ADD_MEETING_FORMAT
+            + "3. " + MESSAGE_DELETE_FORMAT
+            + "4. " + MESSAGE_LIST_ALL_FORMAT
+            + "5. " + MESSAGE_LIST_USER_FORMAT
+            + "6. " + MESSAGE_FREE_GENERIC_FORMAT
+            + "7. " + MESSAGE_FREE_SPECIFIC_FORMAT
+            + "8. " + MESSAGE_CLEAR_FORMAT
+            + "9. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
 
     public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully";
