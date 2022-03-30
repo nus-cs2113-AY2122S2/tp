@@ -220,7 +220,8 @@ public class FamilyTest {
     //    public void editExpend_addThenEdit_expendChange() {
     //        Family family = new Family();
     //        family.addPerson(PARENTS_INDEX, VALID_NAME, SILENT);
-    //        family.addExpend(PARENTS_INDEX, FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
+    //        family.addExpend(PARENTS_INDEX, FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT,
+    //        SILENT);
     //        assertEquals(VALID_AMOUNT, family.getList(PARENTS_INDEX).getTotalExpenditure());
     //        family.editExpend(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null,
     //                null);
