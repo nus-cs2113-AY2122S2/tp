@@ -150,6 +150,7 @@ public class StringConstants {
             + "Format to view details for a specific config option: option CONFIG_NAME\n"
             + "Format to set a config option: option CONFIG_NAME = NEW_VALUE";
 
+
     /**
      * For SaveCommand.
      */
@@ -200,6 +201,7 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
+    public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
 
 
     /**
@@ -246,7 +248,7 @@ public class StringConstants {
     public static final String NOT_ENTERED_STR = "NOT_ENTERED";
 
     /**
-     * For options.
+     * For option.
      */
     public static final String DESCRIPTION_FORMAT = "%s: %s";
     public static final String TRUE = "true";
@@ -257,6 +259,19 @@ public class StringConstants {
             + " by \"list\".";
     public static final String COMPLETED_TASKS_SHOWN_TRUE = "Show completed tasks";
     public static final String COMPLETED_TASKS_SHOWN_FALSE = "Hide completed tasks";
+
+    /**
+     * For TaskDuration.
+     */
+    public static final String DURATION_GROUP_WORD = "duration";
+    public static final String DURATION_UNIT_GROUP_WORD = "durationUnit";
+    public static final String TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE = "%d hours %d minutes";
+    public static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = "%d hours";
+    public static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = "%d minutes";
+    public static final String DURATION_STRING_FORMAT = "(?<duration>[1-9]\\d*\\.?\\d*|0\\.\\d*[1-9])"
+            + "\\s*(?<durationUnit>\\bm|M|min|Min|minutes|Minutes|minute|Minute"
+            + "|h|H|hours|Hours|hour|Hour|\\b|"
+            + "\\Bm|M|min|Min|minutes|Minutes|minute|Minute|h|H|hours|Hours|hour|Hour\\b)";
 
     /**
      * General strings.

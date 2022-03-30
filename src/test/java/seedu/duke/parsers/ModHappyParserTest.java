@@ -1,9 +1,14 @@
 package seedu.duke.parsers;
 
 import java.util.concurrent.atomic.AtomicReference;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
@@ -19,17 +24,11 @@ import seedu.duke.commands.OptionCommand;
 import seedu.duke.commands.ResetCommand;
 import seedu.duke.commands.SaveCommand;
 import seedu.duke.commands.TagCommand;
+import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.data.Module;
 import seedu.duke.data.Task;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ModHappyParserTest {
     private ModHappyParser parser;
@@ -92,7 +91,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_task_withWorkingTime_parsedCorrectly() {
         final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
-                + "-t \"-d-d-d /t /m -d -d  \"";
+                + "-t \"1 h\"";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -100,7 +99,7 @@ public class ModHappyParserTest {
             assertNotEquals(null, t);
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
-            assertEquals("-d-d-d /t /m -d -d", t.getWorkingTime());
+            assertEquals("1 hours", t.getWorkingTime());
             assertNull(t.getTaskDescription());
             assertNull(((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
@@ -144,7 +143,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_parsedCorrectly() {
         final String testString = "add task \"/t/t/t/t-d\" -d \"-d-d-d /t /m -d -d  \" "
-                + "-t \"-t-t-t t-t-t /t/t -d -d -d \"";
+                + "-t \"0.5 m\"";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -153,7 +152,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getWorkingTime());
+            assertEquals("1 minutes", t.getWorkingTime());
             assertNull(((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -168,7 +167,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (ModHappyException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -200,7 +199,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (ModHappyException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -209,7 +208,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withWorkingTime_withTargetModule_parsedCorrectly() {
-        final String testString = "add task \"/t/t/t/t-d\" -m cs2113t -t \"-d-d-d /t /m -d -d  \" ";
+        final String testString = "add task \"/t/t/t/t-d\" -m cs2113t -t \"1 hour\" ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -218,7 +217,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertNull(t.getTaskDescription());
-            assertEquals("-d-d-d /t /m -d -d", t.getWorkingTime());
+            assertEquals("1 hours", t.getWorkingTime());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -241,7 +240,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_parsedCorrectly() {
         final String testString = "add task \"/t/t/t/t-d\" -m cs2113t -d \"-d-d-t-m /m -m -d -t  \" "
-                + "-t \"-d-d-d /t /m -d -d  \" ";
+                + "-t \"75 minutes\" ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -250,7 +249,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-t-m /m -m -d -t", t.getTaskDescription());
-            assertEquals("-d-d-d /t /m -d -d", t.getWorkingTime());
+            assertEquals("1 hours 15 minutes", t.getWorkingTime());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
