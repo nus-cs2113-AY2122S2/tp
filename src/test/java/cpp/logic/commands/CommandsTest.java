@@ -2,14 +2,6 @@ package cpp.logic.commands;
 
 import cpp.exceptions.IllegalCommandException;
 import cpp.model.ProjectList;
-import cpp.logic.CommandHandler;
-import cpp.logic.commands.AddDeadlineCommand;
-import cpp.logic.commands.AddProjectCommand;
-import cpp.logic.commands.AddTodoCommand;
-import cpp.logic.commands.DeleteProjectCommand;
-import cpp.logic.commands.ListProjectCommand;
-import cpp.logic.commands.MarkCommand;
-import cpp.logic.commands.ViewProjectCommand;
 import cpp.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
