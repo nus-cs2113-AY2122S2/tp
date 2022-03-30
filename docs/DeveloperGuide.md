@@ -40,6 +40,8 @@ Refer to the [_User Guide_](UserGuide.md).
 
 ### Architecture
 
+![Architecture Diagram](diagrams/OverallArch.png)
+
 The ***Architecture Diagram*** given above explains the high-level design ***HalpMi***.
 
 Given below is a quick overview of main components and how they interact with each other.
