@@ -11,8 +11,8 @@ public class HelpParser extends Parser {
     private static final String COMMAND_AS_HELP_ARGUMENT = StringConstants.HELP_COMMAND_ARGUMENT;
 
     // Unescaped regex for testing:
-    // (?<command>\w+)(?<invalid>.*)
-    private static final String HELP_FORMAT = "(?<command>\\w+)(?<invalid>.*)";
+    // (?<command>\w+)?(?<invalid>.*)
+    private static final String HELP_FORMAT = "(?<command>\\w+)?(?<invalid>.*)";
 
     public HelpParser() {
         super();

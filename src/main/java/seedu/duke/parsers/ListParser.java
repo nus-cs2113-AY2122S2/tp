@@ -17,6 +17,7 @@ public class ListParser extends Parser {
         super();
         this.commandFormat = LIST_FORMAT;
         groupNames.add(LIST_ARGUMENT);
+        groupNames.add(INVALID);
     }
 
     @Override

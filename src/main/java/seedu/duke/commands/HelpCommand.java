@@ -5,6 +5,8 @@ import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
+import java.util.Objects;
+
 import static seedu.duke.util.StringConstants.OPTION_COMMAND_WORD;
 import static seedu.duke.util.StringConstants.OPTION_HELP;
 
@@ -48,7 +50,7 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        if (command.isBlank()) {
+        if (Objects.isNull(command)) {
             return new CommandResult(HELP + "\n\n" + HELP_NOTE);
         }
         switch (command) {
