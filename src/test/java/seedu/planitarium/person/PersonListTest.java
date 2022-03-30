@@ -23,14 +23,14 @@ class PersonListTest {
     @Test
     public void getNumberOfMembers_addPerson_returnOne() {
         PersonList list = new PersonList();
-        list.addPerson(VALID_NAME, Constants.FOR_USER);
+        list.addPerson(VALID_NAME);
         assertEquals(1, list.getNumberOfMembers());
     }
     
     @Test
     public void getNumberOfMembers_addAndDeletePerson_returnZero() {
         PersonList list = new PersonList();
-        list.addPerson(VALID_NAME, Constants.FOR_USER);
+        list.addPerson(VALID_NAME);
         list.deletePerson(1);
         assertEquals(0, list.getNumberOfMembers());
     }
@@ -39,7 +39,7 @@ class PersonListTest {
     public void addPerson_nullName_assertionError() {
         PersonList list = new PersonList();
         try {
-            list.addPerson(null, Constants.FOR_USER);
+            list.addPerson(null);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -49,7 +49,7 @@ class PersonListTest {
     @Test
     public void removePerson_validIndex_success() {
         PersonList list = new PersonList();
-        list.addPerson(VALID_NAME, Constants.FOR_USER);
+        list.addPerson(VALID_NAME);
         list.deletePerson(1);
         assertTrue(list.getPersonList().isEmpty());
     }
