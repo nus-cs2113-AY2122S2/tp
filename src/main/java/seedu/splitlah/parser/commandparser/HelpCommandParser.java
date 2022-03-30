@@ -5,6 +5,8 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 
 /**
  * Represents a command parser that is able to parse user arguments into a HelpCommand object.
+ *
+ * @author Warren
  */
 public class HelpCommandParser implements CommandParser<HelpCommand> {
 

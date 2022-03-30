@@ -14,6 +14,8 @@ import java.util.logging.Level;
 
 /**
  * Represents a command which displays the details of each Activity object within a Session object.
+ *
+ * @author Tianle
  */
 public class ActivityListCommand extends Command {
 
