@@ -1,6 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.customercommands.AddSatisfactionCommand;
+import seedu.duke.command.customercommands.AverageSatisfactionCommand;
+import seedu.duke.command.customercommands.ViewSatisfactionsCommand;
 import seedu.duke.command.eventcommands.AddEventCommand;
 import seedu.duke.command.eventcommands.DeleteEventCommand;
 import seedu.duke.command.eventcommands.ViewEventsCommand;

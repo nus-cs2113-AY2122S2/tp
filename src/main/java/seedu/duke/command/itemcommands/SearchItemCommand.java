@@ -5,7 +5,7 @@ import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.EmptyKeywordException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.ItemList;
+import seedu.duke.lists.ItemList;
 
 /**
  * Represents a command to search for items within the item list that matches a specific keyword. An SearchItemCommand
