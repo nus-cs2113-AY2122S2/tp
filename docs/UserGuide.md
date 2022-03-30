@@ -120,6 +120,9 @@ Adds an object as indicated by the command argument.
   Format: `add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`<br><br>
   Example (general task without any parameters): `add task "Review PR"`<br>
   Example (module task with parameters): `add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour" `
+  > 📔 <span style="color:#00bb00">**NOTE:**</span>
+  >
+  > ESTIMATED_WORKING_TIME is in task duration format, please check [task duration](#task-duration) to see the supporting format.
 
 ### Deleting a task/module: `del`
 
@@ -226,6 +229,28 @@ Format: `save`
 > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
 >
 > Mod Happy does **not** auto-save your changes! Do remember to save your work at regular intervals, or before exiting the program.
+
+### Task Duration
+The format of task duration:
+`DURATION_NUMBER DURATION_UNIT`
+- **Duration number:**
+Mod Happy supports any positive decimal and integer no bigger than 1000,000,000. 
+- **Duration unit: Mod Happy understands the following forms of duration units:**
+
+| `hour` | `minute`                                                                                                                                                                            |
+|:-------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  h  |       m                 |
+|  H   | M         |
+|   hour   | minute                                                                                                                      |
+|  Hour   | Hour |
+|  hours   |         minutes            |
+|   Hours |   Minutes                        |
+|   | min                                                                                                                                                                 |
+| - | Min                                                                                                                              |
+
+> ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
+>
+> User can only choose either hour or minute as the input of duration unit. For decimal hour, Mod Happy will convert the decimal part as minute offset. For decimal minute, Mod Happy will do rounding for the decimal part. 
 
 ## FAQ
 
