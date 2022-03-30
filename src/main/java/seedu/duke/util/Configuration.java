@@ -91,9 +91,6 @@ public class Configuration {
      */
     public String getConfigurationsReport() {
         String listResult = "";
-        configurationGroupHashMap.entrySet().forEach(entry -> {
-            System.out.println(entry.getKey() + " " + entry.getValue());
-        });
         for (ConfigurationGroup group : ConfigurationGroup.values()) {
             listResult += INDENT + String.format(DESCRIPTION_FORMAT, group, configurationGroupHashMap.get(group)) + LS;
         }
