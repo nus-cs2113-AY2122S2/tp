@@ -2,50 +2,40 @@ package cpp.logic;
 
 import cpp.Constants;
 import cpp.exceptions.IllegalCommandException;
-import cpp.exceptions.NegativeIndexException;
 import cpp.logic.commands.Command;
 import cpp.logic.parser.AddLanguageCommandParser;
+import cpp.logic.commands.ListProjectCommand;
+
+import cpp.logic.parser.AddDeadlineCommandParser;
 import cpp.logic.parser.AddProjectCommandParser;
 import cpp.logic.parser.AddTodoCommandParser;
+import cpp.logic.parser.DeleteProjectCommandParser;
 import cpp.logic.parser.MarkCommandParser;
+import cpp.logic.parser.ViewProjectCommandParser;
 import cpp.model.ProjectList;
 import cpp.response.Response;
 
-import java.util.Arrays;
-
 public class CommandHandler {
-
-    /**
-     * Constructs new CommandHandler object.
-     *
-     */
-    public CommandHandler() {
-
-    }
-
     /**
      * Handles all non-exit commands given to program by user.
      *
      * @param projectList ProjectList for commands to work with
      * @param userInput Command entered by user
      */
-    public void handleUserInput(ProjectList projectList, String userInput) throws IllegalCommandException {
+    public String handleUserInput(ProjectList projectList, String userInput) throws IllegalCommandException {
         String[] commands = userInput.split(" ");
-        String projectName;
-        String executeResult;
+        String executeResult = "Default Result";
 
         switch (commands[0].toLowerCase()) {
         case "addproject": //add a project into list
-            projectName = getProjectName(commands);
-            projectList.addProject(projectName);
+            executeResult = executeCommand(projectList, new AddProjectCommandParser().parse(commands));
             break;
         case "deleteproject": //delete a project based on its name
-            projectName = getProjectName(commands);
-            projectList.deleteProject(projectName);
+            executeResult = executeCommand(projectList, new DeleteProjectCommandParser().parse(commands));
             break;
         case "listprojects":
         case "listproject": //view all project(s) by name
-            listProjects(projectList);
+            executeResult = executeCommand(projectList, new ListProjectCommand());
             break;
         case "todo":
             executeResult = executeCommand(projectList, new AddTodoCommandParser().parse(commands));
@@ -54,13 +44,13 @@ public class CommandHandler {
             executeResult = executeCommand(projectList, new MarkCommandParser().parse(commands));
             break;
         case "adddeadline":
-            addDeadline(projectList, commands);
+            executeResult = executeCommand(projectList, new AddDeadlineCommandParser().parse(commands));
             break;
         case "view":
-            view(projectList, commands);
+            executeResult = executeCommand(projectList, new ViewProjectCommandParser().parse(commands));
             break;
         case "addlanguage":
-            executeCommand(projectList, new AddLanguageCommandParser().parse(commands));
+            executeResult = executeCommand(projectList, new AddLanguageCommandParser().parse(commands));
             break;
         case "listlanguages":
             listLanguages(projectList, commands);
@@ -71,44 +61,12 @@ public class CommandHandler {
         default:
             throw new IllegalCommandException(Constants.UNKNOWN_COMMAND);
         }
-
-        //System.out.println("Execute result: ", executeResult);
-
+        return executeResult;
     }
 
     private String executeCommand(ProjectList projectList, Command command) {
         assert (command != null) : "The command should not be null.";
         return command.execute(projectList);
-    }
-
-    private String getProjectName(String[] userInput) {
-        assert (userInput.length >= Constants.TWO_ARGUMENTS) : "You must provide the name for the project!";
-        // get the splited version of project name
-        String[] splitedName = Arrays.copyOfRange(userInput, 1, userInput.length);
-        String projectName = String.join(" ", splitedName);
-        return projectName;
-
-    }
-
-    private void listProjects(ProjectList projectList) {
-        assert (projectList != null) : "Cannot print projects.";
-        projectList.printProject();
-    }
-
-    private void addDeadline(ProjectList projectList, String[] commands) throws IllegalCommandException {
-        assert (projectList != null && commands != null) : "Cannot add a deadline to a project.";
-        if (commands.length < Constants.THREE_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
-        }
-        projectList.addDeadline(commands[1], commands[2]);
-    }
-
-    private void view(ProjectList projectList, String[] commands) throws IllegalCommandException {
-        assert (projectList != null && commands != null) : "Cannot view this project.";
-        if (commands.length < Constants.TWO_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
-        }
-        projectList.view(commands[1]);
     }
 
     private void listLanguages(ProjectList projectList, String[] commands) throws IllegalCommandException {
@@ -118,17 +76,4 @@ public class CommandHandler {
         }
         projectList.listLanguages(commands[1]);
     }
-
-    private String parseTodoString(String[] strings) {
-        String todoString = "";
-        if (strings.length == Constants.THREE_ARGUMENTS) {
-            todoString = strings[2];
-        } else {
-            for (int i = 2; i < strings.length; i++) {
-                todoString = todoString + " " + strings[i];
-            }
-        }
-        return todoString;
-    }
-
 }

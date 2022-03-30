@@ -53,11 +53,11 @@ public class Response {
     }
 
     public static String addProjectSuccessfully(String name) {
-        return ("The project " + name + "has been added successfully.");
+        return ("The project " + name + " has been added successfully.");
     }
 
     public static String addTodoSuccessfully(String todo) {
-        return ("Todo " + todo + "has been added successfully.");
+        return ("Todo " + todo + " has been added successfully.");
     }
 
     public static String addTodoUnsuccessfully(String todo) {
@@ -76,4 +76,31 @@ public class Response {
         return ("Language added");
     }
 
+    public static String addMemberSuccessfully(String memberName) {
+        return ("Member " + memberName + "has been added successfully.");
+    }
+
+    public static String deleteProjectSuccessfully(String projectTitle) {
+        return (projectTitle + " deleted successfully.");
+    }
+
+    public static String deleteProjectUnsuccessfully(String projectTitle) {
+        return ("Unsuccessful deletion of project " + projectTitle);
+    }
+
+    public static String listProjectsSuccessfully() {
+        return ("Projects have been listed successfully.");
+    }
+
+    public static String viewCommandExecuted() {
+        return ("View command has been executed successfully.");
+    }
+
+    public static String addDeadlineSuccessfully(String projectTitle, String deadline) {
+        return "Deadline added to " + projectTitle + ": " + deadline;
+    }
+
+    public static String addDeadlineUnsuccessfully() {
+        return "Deadline addition was Unsuccessful.";
+    }
 }

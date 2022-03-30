@@ -8,36 +8,50 @@
 
 ### Implemented Features
 
+Following a restucture to the project to follow a more Object Oriented structure, as well as to allow for conformity and easy editing of code, many of our commands will follow a similar structure of the following:
+
+1. User enters a command, which is given to a Command Handler
+2. The handler passes this to a corresponding Parser object for that command, which will split it into its necessary parts
+3. The Parser will create a corresponding Command object for that command, which will perform its necessary actions
+4. The Command object will return successfully to the Command Handler, and the output will be given to the user (output for the user is stored in a `Response` class)
+
+The command to add a project is one example of this structure:
+
 #### Add a Project
-![image info](./UmlDiagrams/addProject.png)
+![image info](./UmlDiagrams/addProjectNew.png)
 
-**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+**Step1.** After recieving the necessary method call, the `CommandHandler` class will self-call executeCommand with both the list of projects as well as a constructor call to AddProjectCommandParser (and a call to the parse method of AddProjectCommandParser) as its parameters
 
-**Step2.** Once this project name is returned, `CommandHandler` will call the `addProject` method from `ProjectList` with the project Name as a parameter
+**Step2.** The AddProjectCommandParser object instance is created
 
-**Step3.** `ProjectList` will self-call the `add` method, using a constructor to a new `Project` object as a parameter
+**Step3.** The parse method of AddProjectCommandParser is called with `commands` (the user input) as its parameter.
 
-**Step4.** This new `Project` object is returned to the ProjectList, added, and the output "[projectName] added." is given to the user.
+**Step4.** AddProjectCommandParser will self call its `getProjectTitle` method. This will split the user's input and return the correct name for the project
 
-#### Delete a Project
-![image info](./UmlDiagrams/deleteProject.png)
+**Step5.** After returning this projectTitle to itself, `AddProjectCommandParser` will call the constructor for a new `AddProjectCommand` object
 
-Deleting a project functions very similarly to Adding a project.
+**Step6.** This `AddProjectCommand` object will use the newly gathered project name to call the `addProjct` command of the `ProjectList` class.
 
-**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+**Step7.** The status of this command completing is returned to `CommandHandler`, and the output is sent to the user.
 
-**Step2.** Once this project name is returned, `CommandHandler` will call the `deleteProject` method from `ProjectList` with the project Name as a parameter.
+Deleting a project will follow nearly the exact same structure; the only difference is that the corresponding Parser and Command objects will be used (`DeleteProjectCommandParser` and `DeleteProjectCommand`)
 
-**Step3.** `ProjectList` will self-call the findProjectIndex method, which will take the project name as a parameter.
+####Delete a Project
+![image info](./UmlDiagrams/deleteProjectNew.png)
+*The steps are omitted here as they are the exact same as adding a project, only with the differing class names previously mentioned.
 
-**Step4.** The findProjectIndex method will call `getTitle` with the project name as a parameter.
+#### Print Project List
+![image info](./UmlDiagrams/printProject.png)
 
-**Step5.** the `findProjectIndex` method is called on every Project in the ProjectList until it finds the correct one. If it doesn't, the user is given an according error message.
+**Step1.** When `CommandHandler` receives a user input starting with string "listproject" or "listprojects", it will call `listProjects`. This method ensure that `projectList` has been initialized before the next step.
 
-**Step6.** The index of the project is returned, and `ProjectList` will self-call the remove(index) method, removing the project from the planner.
+**Step2.** Once the first step is done, `listProjects` will call the `printProject` method from `ProjectList` with no parameter.
 
+**Step3.** `printList` will first check if the size of the private ArrayList named `projectList` is 0, which means that the arraylist is empty. If yes, it will print "You have not added any projects yet!" and return.
 
+**Step4.** It will then iterate over `projectList`, which type is `Project`. It will call `getTitle` and `getDeadline` from each array element in`the `Project` class.
 
+**Step5.** the general information of a project, i.e., its title and deadline, will be displayed.
 
 #### Todo feature
 ![image info](./UmlDiagrams/Todo.png)  
@@ -119,8 +133,40 @@ The Tasks Due Soon feature makes use of `ProjectList` and `CommandHandler` class
 
 
 
-
 #### Parse Command Feature
+
+### Previous project structure
+During v2.0, CSProjPlanner underwent a structure change to make it more OOP oriented and to make commands function in a way that are much more similar to each other.
+
+Because of this, many sequence diagrams look similar in the current version. The following sequence diagrams and explanations show what some of our features looked like at the end of v1.0:
+
+#### Add a Project
+![image info](./UmlDiagrams/addProject.png)
+
+**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+
+**Step2.** Once this project name is returned, `CommandHandler` will call the `addProject` method from `ProjectList` with the project Name as a parameter
+
+**Step3.** `ProjectList` will self-call the `add` method, using a constructor to a new `Project` object as a parameter
+
+**Step4.** This new `Project` object is returned to the ProjectList, added, and the output "[projectName] added." is given to the user.
+
+#### Delete a Project
+![image info](./UmlDiagrams/deleteProject.png)
+
+Deleting a project functions very similarly to Adding a project.
+
+**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+
+**Step2.** Once this project name is returned, `CommandHandler` will call the `deleteProject` method from `ProjectList` with the project Name as a parameter.
+
+**Step3.** `ProjectList` will self-call the findProjectIndex method, which will take the project name as a parameter.
+
+**Step4.** The findProjectIndex method will call `getTitle` with the project name as a parameter.
+
+**Step5.** the `findProjectIndex` method is called on every Project in the ProjectList until it finds the correct one. If it doesn't, the user is given an according error message.
+
+**Step6.** The index of the project is returned, and `ProjectList` will self-call the remove(index) method, removing the project from the planner.
 
 ## Product scope
 ### Target user profile
@@ -143,6 +189,7 @@ the program also allows for faster searching and editing than a GUI design once 
 |---------|-----------------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------|
 | v1.0    | new or experienced user     | add a task to the planner                                 | better organize my project                                                        |
 | v1.0    | user with existing projects | delete a project from the planner                         | remove projects that are already completed                                        |
+| v1.0    | user with existing projects | print all projects I have saved from the planner          | see what projects I have had so far                                               |
 | v1.0    | user with existing projects | add a to-do to a project                                  | get a clear outline of what needs to be done                                      |
 | v1.0    | student user                | add  a deadline for my project                            | keep track of due dates                                                           | 
 | v1.0    | student user                | view the details (to-do list and deadlines) of my project | see what needs to be done and when to do it                                       |
@@ -150,15 +197,11 @@ the program also allows for faster searching and editing than a GUI design once 
 | v1.0    | student user                | mark a to-do as not done                                  | fix mistakes of marking unfinished tasks                                          |
 | v1.0    | new user                    | access a help command                                     | familiarize myself with using the planner                                         |
 | v1.0    | student user                | exit the application                                      | close my planner when I am finished                                               |
-| ------  |                             |                                                           |                                                                                   |
+| ------  | --------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | v2.0    | student user                | add any web links/URLs                                    | keep track of relevant resources online                                           |
 | v2.0    | student user                | have quick access to my project's Github repo             | best keep track of my project lifecycle                                           |
 | v2.0    | student user                | list the programming languages/frameworks my project uses | know what languages/frameworks focus on and study                                 |
-| v2.0    | student user                | check what needs to be done within 24 hours               | focus on the most time-sensitive tasks                                            |
-| v2.0    | user with group projects    | assign tasks to members in a group                        | keep track of who is responsible for which part of the project                    |
-| v2.0    | user with group projects    | add members to a project                                  | remember who my group members are                                                 |
 | v2.0    | student user                | add a deadline to a to-do                                 | know the deadlines for each individual to-do                                      |
-| v2.0    | student user                | view my to-dos in order of due date                       | so that I know what I may need to work on first                                   |
 | v2.0    | student user                | save my project information in a file                     | keep a backup and also save my projects/schedules for the next time I use the app |
 
 ## Non-Functional Requirements
@@ -169,8 +212,9 @@ the program also allows for faster searching and editing than a GUI design once 
 
 ## Glossary
 
-* *Project* - Within CS ProjPlanner, a project is embarked on by Computer Science students for their university classes. As such, on top of typical project elements like titles, deadlines and tasks, projects include programming languages and GitHub repository links.
 * *Mainstream OS* - Windows, MacOS and Linux (Ubuntu) are all able to run CS ProjPlanner
+* *Project* - Within CS ProjPlanner, a project is embarked on by Computer Science students for their university classes. As such, on top of typical project elements like titles, deadlines and tasks, projects include programming languages and GitHub repository links.
+* *Todo* - Within each project is a list of (optional to add) todo's. These represent tasks to be done on the project
 
 ## Instructions for manual testing
 

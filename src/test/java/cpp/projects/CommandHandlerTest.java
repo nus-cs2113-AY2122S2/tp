@@ -6,6 +6,7 @@ import cpp.logic.CommandHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CommandHandlerTest {
@@ -39,5 +40,22 @@ class CommandHandlerTest {
         assertThrows(IllegalCommandException.class, () ->
                 defaultCommandHandler.handleUserInput(defaultProjectList, "unknownCommand")
         );
+    }
+
+    @Test
+    public void testAddProject() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(defaultProjectList, "addproject temp");
+        assertEquals(status, "The project temp has been added successfully.");
+    }
+
+    @Test
+    public void testDeleteProject() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(defaultProjectList, "deleteproject CS2113tP");
+        assertEquals(status, "CS2113tP deleted successfully.");
+    }
+
+    @Test public void testToDo() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(defaultProjectList, "todo 1 temp");
+        assertEquals(status, "Todo temp has been added successfully.");
     }
 }
