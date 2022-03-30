@@ -90,6 +90,36 @@ The parser parses the description of the command. It first calls the validator c
 ### Asset classes
 
 
+#### `Patient`
+
+![PatientUML](diagrams/PatientUML.png)
+The Patient class holds several attributes that are exposed via getter methods. To instantiate the class, all the
+attributes must be given to the constructor method. There is a method to edit the attribute data that can be called
+whenever user types in the correct command.
+
+#### `Patient List`
+
+![PatientListUML](diagrams/PatientListUML.png)
+The PatientList class contains private lists of Patients and one list for searching. It has several
+public methods that allows the user to get information regarding the list, view the list as well as search for specific
+Patients by selected criteria.
+
+#### `Doctor`
+
+![DoctorUML](diagrams/DoctorUML.png)
+The Doctor class holds several attributes that are exposed via getter methods. To instantiate the class, all the
+attributes must be given to the constructor method. There is a method to edit the attribute data that can be called
+whenever user types in the correct command.
+
+#### `Doctor List`
+
+![DoctorListUML](diagrams/DoctorListUML.png)
+The DoctorList class contains private lists of Doctors and one list for searching. It has several
+public methods that allows the user to get information regarding the list, view the list as well as search for specific
+Doctors by selected criteria.
+
+--------------------------------------------------------------------------------------------------------------------
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
