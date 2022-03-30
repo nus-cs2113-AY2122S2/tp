@@ -2,6 +2,7 @@ package seedu.duke.parser;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DescCommand;
+import seedu.duke.commands.EditCommand;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.DeleteCommand;
@@ -43,6 +44,9 @@ public class InputParser {
 
         case DescCommand.COMMAND_WORD:
             return new DescCommandParser().parse(arguments);
+
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
