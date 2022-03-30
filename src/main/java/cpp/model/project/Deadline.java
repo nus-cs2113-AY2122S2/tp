@@ -23,9 +23,13 @@ public class Deadline {
             try {
                 date = LocalDate.parse(stringDate);
             } catch (DateTimeParseException e) {
-                System.out.println("Improper format. Please look the valid format for dates");
+                throw e;
             }
         }
     }
 
+    @Override
+    public String toString() {
+        return date.toString();
+    }
 }

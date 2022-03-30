@@ -4,6 +4,7 @@ import cpp.Constants;
 import cpp.exceptions.NegativeIndexException;
 import cpp.model.project.Project;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class ProjectList {
@@ -35,20 +36,6 @@ public class ProjectList {
         System.out.println(Constants.SEPARATOR);
     }
 
-    /*
-    public void addProject(Project project) {
-        System.out.println(Constants.SEPARATOR);
-        int index = findProjectIndex(project.getTitle());
-        if (index == Constants.PROJECT_NOT_FOUND) { //this is a new project
-            projectList.add(project);
-            System.out.println(project.getTitle() + " added.");
-        } else {
-            System.out.println("Failed to add " + project.getTitle() + ". You have added this project before!");
-        }
-        System.out.println(Constants.SEPARATOR);
-    }
-     */
-
     /**
      * Deletes a Project from projectList.
      *
@@ -63,7 +50,6 @@ public class ProjectList {
         projectList.remove(index);
         System.out.println(title + " deleted.");
         System.out.println(Constants.SEPARATOR);
-
     }
 
     /**
@@ -174,8 +160,12 @@ public class ProjectList {
         int index = findProjectIndex(title);
         if (index != Constants.PROJECT_NOT_FOUND) {
             Project project = projectList.get(index);
-            project.setDeadline(deadline);
-            System.out.println("Deadline added to " + project.getTitle() + ": " + deadline);
+            try {
+                project.setDeadline(deadline);
+                System.out.println("Deadline added to " + title + ": " + deadline);
+            } catch (DateTimeParseException e) {
+                System.out.println("Improper format. Please look the valid format for dates");
+            }
         } else {
             System.out.println("Sorry! There was no project with that name.");
         }
@@ -200,6 +190,21 @@ public class ProjectList {
     public Project getProject(int index) {
         assert (index >= 0 && index < projectList.size()) : "Index out of range!";
         return projectList.get(index);
+    }
+
+    /**
+     * Gets the project of a given name
+     *
+     * @param projectName name of the given project
+     * @return target project with given name
+     */
+    public Project getProject(String projectName) {
+        assert (projectName != null) : "Invalid name";
+        int index = findProjectIndex(projectName);
+        if (index == Constants.PROJECT_NOT_FOUND) {
+            return null;
+        }
+        return getProject(index);
     }
 
     private int findProjectIndex(String name) {

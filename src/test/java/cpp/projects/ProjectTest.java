@@ -25,8 +25,8 @@ public class ProjectTest {
 
     @Test
     public void testDeadline() {
-        testProj.setDeadline("Sunday");
-        assertEquals(testProj.getDeadline(), "Sunday");
+        testProj.setDeadline("Tomorrow");
+        assertEquals(testProj.getDeadline(), "Tomorrow");
     }
 
     @Test
