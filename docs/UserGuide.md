@@ -284,7 +284,7 @@ Format: `study`
 
 Example:
 
-![image](https://user-images.githubusercontent.com/69501969/160329257-cf6fcbf7-9b2a-4c2a-bdfe-17b6c7517f9d.png)
+![image](https://user-images.githubusercontent.com/69501969/160783109-3187d5df-06f1-4fa4-a407-18a87a67c770.png)
 
 ### Starting a timer: `start`
 
@@ -297,10 +297,8 @@ to pause/resume/stop the timer quickly.
 command line interface instead.
 
 #### Starting a default timer: `start MODE_NUMBER`
-_Note: To be improved with study and rest timers - similar to pomodoro sessions._
 
-
-Start a study timer from our list of default timers.
+Jump right into a study session by starting a study timer from our list of default timers.
 
 **_Note:_**
 
@@ -334,9 +332,10 @@ In the pop-up window:
 ![](images/startDefaultOne.png)
 
 ### Starting a custom timer: `start`
-Start a custom study timer.
+Need something else rather than what is provided by our default timers? You can start your own custom timer to suit 
+your own needs.
 
-- Start a custom timer suited to your specific needs
+- Start a custom timer with `DURATION` set by you
 
 Format: `start /custom DURATION`
 
@@ -344,7 +343,7 @@ Format: `start /custom DURATION`
 |:----------------:|-----------------------------------------------------------|-------------------|----------|
 |     DURATION     | Duration of the timer (in seconds) that you wish to start | Any valid integer | No       |
 
-- Timer `DURATION` is in seconds (To be improved to provide more options)
+- Timer `DURATION` is in seconds
 - `/custom` flag is mandatory to start a custom timer
 
 Example:
@@ -360,8 +359,9 @@ In the pop-up window:
 ![](images/customTimer60sec.JPG)
 
 ### Starting a stopwatch: `start stopwatch`
-Start a stopwatch to track how long you've been studying.
-- Stopwatch tracks time elapsed and prints time elapsed.
+Not sure how long you'll need to complete your academic tasks? You can start a stopwatch to keep track of how long 
+you've been studying.
+- Stopwatch tracks and prints time elapsed.
 
 Format: `start stopwatch`
 
@@ -376,13 +376,16 @@ In the pop-up window:
 ![](images/stopWatch.png)
 
 ### Pausing a timer/stopwatch: `pause`
-Pauses a study timer/stopwatch that is currently running.
+Pauses a study timer/stopwatch that is currently running. Useful for when you want a quick toilet break, double check
+your tasks for the day, or mark a task as done.
 
 Format: `pause` or clicking the pause button in the pop-up window.
 
 Example:
 
 In the terminal:
+
+![](images/pauseTimer.png)
 
 ![image](https://user-images.githubusercontent.com/69501969/160329512-3a74d513-d95c-4aa2-9d88-a29ca3f93459.png)
 
@@ -392,7 +395,9 @@ Time left in the window will not change until the user enters `resume`
 in the terminal or clicks on the resume button.
 
 ### Resuming a timer/stopwatch: `resume`
-Resume a timer/stopwatch that has been paused.
+You can resume a paused timer/stopwatch when you're ready to work on your tasks again.
+
+- Resume a timer/stopwatch that has been paused.
 
 Format: `resume` or clicking the resume button in the pop-up window.
 
@@ -404,10 +409,14 @@ In the terminal:
 
 In the pop-up window:
 
-Time left/ Elapsed time will continue to run.
+![](images/resumeTimer.png)
+
+Time left/elapsed time will continue to run.
 
 ### Stopping a timer/stopwatch: `stop`
-Stop a timer/stopwatch that has been started.
+Finished your task earlier than expected, or something more urgent came up? You can stop a timer/stopwatch at any time.
+
+- Stop a timer/stopwatch that has been started.
 
 Format: 
 - Entering `stop` in the terminal
@@ -422,17 +431,21 @@ In the terminal:
 
 In the pop-up window:
 
+![](images/stopTimer.png)
+
 The window will disappear immediately after stopping the timer.
 
 ### Show your tasks: `show`
-Shows your list of tasks that you have planned to do for the day.
-- `show` can only be called when timer is paused or stopped.
+The show feature is also supported in the study session. 
+Simply follow the format from the [show feature](#show-your-tasks-show)
+to show your tasks.
 
-Format: `show all`
+**_Note:_**
+- You can only show tasks while the timer is paused or stopped.
 
 Example:
 
-![image](https://user-images.githubusercontent.com/69501969/160330233-43da64f3-4ccb-4780-a790-3f02c09052de.png)
+![image](https://user-images.githubusercontent.com/69501969/160788279-c38a7611-e1e9-4aef-87b7-6a06b6d96c9e.png)
 
 ### Mark your tasks as done: `mark`
 
