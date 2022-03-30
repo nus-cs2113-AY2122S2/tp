@@ -1,6 +1,7 @@
+//@@author yanjie1017
+
 package seedu.meetingjio.commands;
 
-import seedu.meetingjio.events.Lesson;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 

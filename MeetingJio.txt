@@ -1,0 +1,6 @@
+ibra
+1.[M] TITLE: meeting2		DAY: friday		START: 1230		END: 1330		MODE: online
+2.[L] TITLE: cs2113		DAY: friday		START: 1100		END: 1300		MODE: online
+3.[L] TITLE: abc		DAY: saturday		START: 1230		END: 1330		MODE: physical
+ym
+1.[M] TITLE: meeting2		DAY: friday		START: 1230		END: 1330		MODE: online

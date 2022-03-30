@@ -16,6 +16,7 @@ import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.InvalidModeException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.MissingValueException;
+import seedu.meetingjio.exceptions.MissingParameterException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -121,7 +122,7 @@ public class Parser {
             String title = eventDescription[TITLE_INDEX];
             return new AddLessonCommand(name, title, day, startTime, endTime, mode);
 
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_EVENT);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_EVENT);
@@ -142,20 +143,15 @@ public class Parser {
             Map<String, String> newValues = ParserArguments.getAttributesMap(arguments);
 
             String name = newValues.get("n");
-            String indexStr = newValues.get("n");
+            String indexStr = newValues.get("i");
+            newValues.remove("n");
+            newValues.remove("i");
             int index = Integer.parseInt(indexStr);
-            if (newValues.isEmpty()) {
-                System.out.println("is empty");
-                return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
-            }
-            System.out.println(3);
 
             return new EditCommand(name, index, newValues);
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
-            System.out.println(npe.getMessage());
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
         } catch (NumberFormatException nfe) {
-            System.out.println(nfe.getMessage());
             return new CommandResult(ERROR_INDEX_OUT_OF_BOUND);
         } catch (AssertionError ae) {
             logger.log(Level.INFO, "Assertion Error");
@@ -174,7 +170,7 @@ public class Parser {
             String name = eventDescription[0];
             int index = Integer.parseInt(eventDescription[1]);
             return new DeleteCommand(name, index);
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_DELETE);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_DELETE);
@@ -204,7 +200,7 @@ public class Parser {
             String title = eventDescription[TITLE_INDEX - 1];
             return new AddMeetingCommand(title, day, startTime, endTime, mode);
 
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_MEETING);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_MEETING);

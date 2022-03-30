@@ -1,3 +1,5 @@
+//@@author anyyongming
+
 package seedu.meetingjio.parser;
 
 import seedu.meetingjio.exceptions.InvalidDayException;
