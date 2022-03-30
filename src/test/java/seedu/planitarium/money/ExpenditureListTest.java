@@ -31,14 +31,14 @@ class ExpenditureListTest {
     @BeforeEach
     public void setUp() {
         personOne = new ExpenditureList();
-        personOne.addExpenditure("Food", 20, 1, false);
-        personOne.addExpenditure("Transport", 5, 1, false);
+        personOne.addExpenditure("Food", 20, 2, false);
+        personOne.addExpenditure("Transport", 5, 2, false);
     }
 
     @Test
     public void addExpenditure_newExpenditure_existsInExpenditure() {
         ExpenditureList personTwo = new ExpenditureList();
-        personTwo.addExpenditure("clothes", 30, 1, false);
+        personTwo.addExpenditure("clothes", 30, 2, false);
         String description = "clothes";
         double amount = 30;
         assertEquals(description, personTwo.getDescription(VALID_INDEX));
@@ -109,7 +109,7 @@ class ExpenditureListTest {
     public void addExpenditure_nullDescription_expectAssertionError() {
         ExpenditureList testList = new ExpenditureList();
         try {
-            testList.addExpenditure(null, 24, 1, false);
+            testList.addExpenditure(null, 24, 2, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -123,7 +123,7 @@ class ExpenditureListTest {
         personOne.editExpenditure(1, "Dabao", 1000.0, 2, true);
         assertEquals(personOne.getDescription(1), "Dabao");
         assertEquals(personOne.getExpenditureValue(1), 1000.0);
-        assertEquals(personOne.getCategory(1), Category.getLabelForIndex(2));
+        assertEquals(personOne.getCategory(2), Category.getLabelForIndex(2));
         assertTrue(personOne.isPermanent(1));
     }
 
@@ -131,7 +131,7 @@ class ExpenditureListTest {
     public void findExpenditure_validParam_Success() {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
-        personOne.find("Food", 1);
+        personOne.find("Food", 2);
         assertEquals(EXPECTED_LABELS, newOut.toString());
         System.setOut(ORIGINAL_OUT);
     }
@@ -140,7 +140,7 @@ class ExpenditureListTest {
     public void findExpenditure_allCat_Success() {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
-        personOne.find("Food", 0);
+        personOne.find("Food", 2);
         assertEquals(EXPECTED_LABELS, newOut.toString());
         System.setOut(ORIGINAL_OUT);
     }
@@ -156,7 +156,7 @@ class ExpenditureListTest {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
         ExpenditureList personTwo = new ExpenditureList();
-        personTwo.addExpenditure("Food", 20, 1, false);
+        personTwo.addExpenditure("Food", 20, 2, false);
         personTwo.printExpenditureList();
         assertEquals(EXPECTED_LABEL_NUMBERED, newOut.toString());
         System.setOut(ORIGINAL_OUT);
