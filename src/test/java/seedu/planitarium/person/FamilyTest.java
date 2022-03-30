@@ -22,9 +22,9 @@ public class FamilyTest {
     private static final boolean NOT_SILENT = false;
     private static final int FIRST_ENTRY = 1;
     private static final int VALID_AMOUNT = 1000;
+    private static final int NEW_AMOUNT = 500;
     private static final String VALID_DESCRIPTION = "Testing";
     private static final boolean PERMANENT = true;
-    private static final boolean NOT_PERMANENT = false;
 
     private static final String ADD_TO_PARENTS = "Alice has been successfully added to Parents"
             + System.lineSeparator();
@@ -49,14 +49,6 @@ public class FamilyTest {
     private static final String PARENTS_LIST = "For Parents:" + System.lineSeparator();
     private static final String MY_GEN_LIST = "For My generation:" + System.lineSeparator();
     private static final String CHILDREN_LIST = "For Children:" + System.lineSeparator();
-    private static final String INCOME_LIST_VIEW = "For Parents:" + System.lineSeparator()
-            + "1. Alice" + System.lineSeparator()
-            + "Here is the income list for Alice:" + System.lineSeparator()
-            + "1. Testing: $1000.00 - Recurring: true" + System.lineSeparator()
-            + "Here is the expenditure list for Alice:" + System.lineSeparator();
-    private static final String NEW_INCOME_LIST_VIEW = "";
-    private static final String EXPEND_LIST_VIEW = "";
-    private static final String NEW_EXPEND_LIST_VIEW = "";
 
     private ByteArrayOutputStream redirectIO() {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
@@ -216,32 +208,22 @@ public class FamilyTest {
 
     //    @Test
     //    public void editIncome_addThenEdit_incomeChange() {
-    //        ByteArrayOutputStream newOut = redirectIO();
-    //
     //        Family family = new Family();
+    //        family.addPerson(PARENTS_INDEX, VALID_NAME, SILENT);
     //        family.addIncome(PARENTS_INDEX, FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
-    //        family.list(PARENTS_INDEX);
-    //        assertEquals(INCOME_LIST_VIEW, newOut.toString());
-    //        family.editIncome(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, null, NOT_PERMANENT);
-    //        family.list(PARENTS_INDEX);
-    //        assertEquals(INCOME_LIST_VIEW + NEW_INCOME_LIST_VIEW, newOut.toString());
-    //
-    //        System.setOut(ORIGINAL_OUT);
+    //        assertEquals(VALID_AMOUNT, family.getList(PARENTS_INDEX).getTotalIncome());
+    //        family.editIncome(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null);
+    //        assertEquals(NEW_AMOUNT, family.getList(PARENTS_INDEX).getTotalIncome());
     //    }
     //
     //    @Test
     //    public void editExpend_addThenEdit_expendChange() {
-    //        ByteArrayOutputStream newOut = redirectIO();
-    //
     //        Family family = new Family();
+    //        family.addPerson(PARENTS_INDEX, VALID_NAME, SILENT);
     //        family.addExpend(PARENTS_INDEX, FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
-    //        family.list(PARENTS_INDEX);
-    //        assertEquals(EXPEND_LIST_VIEW, newOut.toString());
-    //        family.editExpend(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, null, FIRST_ENTRY,
-    //                NOT_PERMANENT);
-    //        family.list(PARENTS_INDEX);
-    //        assertEquals(EXPEND_LIST_VIEW + NEW_EXPEND_LIST_VIEW, newOut.toString());
-    //
-    //        System.setOut(ORIGINAL_OUT);
+    //        assertEquals(VALID_AMOUNT, family.getList(PARENTS_INDEX).getTotalExpenditure());
+    //        family.editExpend(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null,
+    //                null);
+    //        assertEquals(NEW_AMOUNT, family.getList(PARENTS_INDEX).getTotalExpenditure());
     //    }
 }

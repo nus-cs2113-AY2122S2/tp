@@ -19,9 +19,9 @@ class PersonListTest {
     private static final int FIRST_ENTRY = 1;
     private static final boolean SILENT = true;
     private static final int VALID_AMOUNT = 1000;
+    private static final int NEW_AMOUNT = 500;
     private static final String VALID_DESCRIPTION = "Testing";
     private static final boolean PERMANENT = true;
-    private static final boolean NOT_PERMANENT = false;
     private static final double FIRST_AMOUNT = 10;
     private static final double SECOND_AMOUNT = 5;
 
@@ -210,31 +210,21 @@ class PersonListTest {
 
     //    @Test
     //    public void editIncome_addThenEdit_incomeChange() {
-    //        ByteArrayOutputStream newOut = redirectIO();
-    //
     //        PersonList list = new PersonList();
+    //        list.addPerson(VALID_NAME);
     //        list.addIncome(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
-    //        list.list();
-    //        assertEquals(INCOME_LIST_VIEW, newOut.toString());
-    //        list.editIncome(FIRST_ENTRY, FIRST_ENTRY, null, null, NOT_PERMANENT);
-    //        list.list();
-    //        assertEquals(INCOME_LIST_VIEW + NEW_INCOME_LIST_VIEW, newOut.toString());
-    //
-    //        System.setOut(ORIGINAL_OUT);
+    //        assertEquals(VALID_AMOUNT, list.getTotalIncome());
+    //        list.editIncome(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null);
+    //        assertEquals(NEW_AMOUNT, list.getTotalIncome());
     //    }
     //
     //    @Test
     //    public void editExpend_addThenEdit_expendChange() {
-    //        ByteArrayOutputStream newOut = redirectIO();
-    //
     //        PersonList list = new PersonList();
+    //        list.addPerson(VALID_NAME);
     //        list.addExpend(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
-    //        list.list();
-    //        assertEquals(EXPEND_LIST_VIEW, newOut.toString());
-    //        list.editExpend(FIRST_ENTRY, FIRST_ENTRY, null, null, FIRST_ENTRY, NOT_PERMANENT);
-    //        list.list();
-    //        assertEquals(EXPEND_LIST_VIEW + NEW_EXPEND_LIST_VIEW, newOut.toString());
-    //
-    //        System.setOut(ORIGINAL_OUT);
+    //        assertEquals(VALID_AMOUNT, list.getTotalExpenditure());
+    //        list.editExpend(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null, null);
+    //        assertEquals(NEW_AMOUNT, list.getTotalExpenditure());
     //    }
 }
