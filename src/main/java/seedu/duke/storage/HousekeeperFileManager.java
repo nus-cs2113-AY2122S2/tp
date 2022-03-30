@@ -32,19 +32,18 @@ public class HousekeeperFileManager extends FileManager {
         } catch (FileNotFoundException e) {
             throw new HousekeeperFileNotFoundException();
         }
-
         while (scan.hasNext()) {
             String line = scan.nextLine();
             String[] splitData = line.split(FILE_SEPARATOR);
             String housekeeperName = splitData[0];
             String housekeeperAge = splitData[1];
-            String housekeeperAvailability = splitData[2].trim();
             String name;
             name = getName(housekeeperName);
             int ageNumber;
             ageNumber = getAgeNumber(housekeeperAge);
             housekeeper = new Housekeeper(name, ageNumber);
             housekeeperList.addHousekeeper(housekeeper);
+            String housekeeperAvailability = splitData[2].trim();
             if (!(housekeeperAvailability.equals("null"))) {
                 housekeeperList.addAvailabilityInList(name, housekeeperAvailability);
             }
@@ -53,7 +52,7 @@ public class HousekeeperFileManager extends FileManager {
     }
 
 
-    private int getAgeNumber(String housekeeperAge) throws HotelLiteManagerException{
+    private int getAgeNumber(String housekeeperAge) throws HotelLiteManagerException {
         int ageNumber;
         String age;
         try {
