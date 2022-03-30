@@ -92,6 +92,50 @@ You are now ready to begin developing!
 ## Design 
 ### Overview
 
+The features of WerkIt! are split and grouped into 5 main features:
+1. [Exercise-related features](#exercise-related-features)
+2. [Workout-related features](#workout-related-features)
+3. [Plan-related features](#plan-related-features)
+4. [Schedule-related features](#schedule-related-features)
+5. [Search-related features](#search-related-features)
+
+### Exercise-related features
+_to be updated_
+
+---
+
+### Workout-related features
+_to be updated_
+
+---
+
+### Plan-related features
+_to be updated_
+
+---
+
+### Schedule-related features
+_to be updated_
+
+---
+
+### Search-related features
+
+Below is a class diagram of the search-related features:
+![SearchUML](uml/classDiagrams/images/SearchClass.png)
+<br>
+
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
+user's command. If the user's command type is search, i.e. `search <userAction> <keywords>`, the
+`Parser#parseUserInput(String userInput)` method will parse the 'search' base word and proceed to create search related
+command using `Parser#createSearchCommand(String userInput)` method. This method will further evaluate the
+`<userAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to the
+constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If the `<keywords>`
+is not specified, an `InvalidCommandException` will be thrown.
+
+
 ---
 
 ## Implementation
@@ -406,9 +450,7 @@ Alright, the following workout has been removed:
 **(Steps 12 to 13)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list.
 <br><br>
-This completes the process of deleting an existing workout in WerkIt! 
-Click the user guide [here](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html#delete-a-workout-workout-delete)
-to view how you can run the `workout /delete` feature in the application.
+This completes the process of deleting an existing workout in WerkIt!
 
 ##### Design Considerations for Deleting Existing Workout
 ###### Rewrite All Workout To File
@@ -536,8 +578,6 @@ Alright, the following plan has been created:
 object's data into `plans.txt`, which is stored on the user's local filesystem.
 <br><br>
 This completes the process of adding a new plan to WerkIt!.
-Click the user guide [here](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html#create-a-plan-plan-new)
-to view how you can run the `plan /new` feature in the application.
 
 ---
 
@@ -586,8 +626,6 @@ To view each plan in detail, enter
 and the `PlanCommand` object returns to the `WerkIt` object.
 <br><br>
 This completes the process of displaying all plans in WerkIt!.
-Click the user guide [here](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html#list-a-plan-plan-list)
-to view how you can run the `plan /list` feature in the application.
 
 ---
 ### Schedule
@@ -883,18 +921,6 @@ This completes the process of clearing of all plans stored in the schedule on We
 
 ---
 ### Search
-![SearchUML](uml/classDiagrams/images/SearchClass.png)
-<br>
-
-When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
-`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
-class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
-user's command. If the user's command type is search, i.e. `search <userAction> <keywords>`, the
-`Parser#parseUserInput(String userInput)` method will parse the 'search' base word and proceed to create search related
-command using `Parser#createSearchCommand(String userInput)` method. This method will further evaluate the
-`<userAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to the
-constructor. If the `<userAction>` is null or incorrect, an InvalidCommandException will be thrown. If the `<keywords>`
-is not specified, an InvalidCommandException will be thrown.
 
 #### Search For Exercise
 Format: `search /exercise <keywords>`
