@@ -1,11 +1,9 @@
 package seedu.duke;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import seedu.duke.command.Command;
-import seedu.duke.storage.ItemListFileManager;
 import seedu.duke.storage.SatisfactionListFileManager;
 
 
