@@ -12,7 +12,7 @@
     * [Command Component](#command)
     * [Parser Component](#parser)
     * [Storage Component](#storage)
-  * [Common Classes](#common-classes)
+  * [Asset Classes](#asset-classes)
 * [Implementation](#implementation)
   * [Design Considerations](#design-considerations)
 * [Product Scope](#product-scope)
@@ -88,7 +88,32 @@ The parser parses the description of the command. It first calls the validator c
 #### `Storage`
 
 ### Asset classes
+#### `Appointment`
 
+![AppointmentUML](diagrams/AppointmentUML.png)
+
+The Appointment class holds several attributes that are exposed via getter methods. To instantiate the class, all the
+attributes must be given to the constructor method.
+#### `Appointment List`
+
+![AppointmentListUML](diagrams/AppointmentListUML.png)
+The AppointmentList class contains a private list of Appointments and another list for searching.  It has several
+public methods that allows the user to get information regarding the list, view the list as well as search for specific
+Appointment by selected criteria.
+
+#### `Medicine`
+
+![MedicineUML](diagrams/MedicineUML.png)
+The Medicine class holds several attributes that are exposed via getter methods. To instantiate the class, all the
+attributes must be given to the constructor method. There is a method to edit the attribute data that can be called 
+whenever user types in the correct command.
+
+#### `Medicine List`
+
+![MedicineListUML](diagrams/MedicineListUML.png)
+The MedicineList class contains private lists of Medicine, expired Medicine and one list for searching. It has several
+public methods that allows the user to get information regarding the list, view the list as well as search for specific
+Medicine by selected criteria.
 
 --------------------------------------------------------------------------------------------------------------------
 
