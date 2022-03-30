@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 
@@ -12,7 +13,7 @@ public class BorrowCommand extends Command {
     private final String eDate;
     private final String borrowerName;
 
-    public BorrowCommand(String itemIndex, String sDate, String eDate, String borrowerName) {
+    public BorrowCommand(int itemIndex, String sDate, String eDate, String borrowerName) {
         this.itemIndex = itemIndex;
         this.sDate = sDate;
         this.eDate = eDate;
@@ -21,7 +22,8 @@ public class BorrowCommand extends Command {
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        itemList.addBorrowRecord(itemIndex, sDate, eDate, borrowerName);
+        BorrowRecord newRecord = new BorrowRecord(sDate, eDate, borrowerName);
+        itemList.addBorrowRecord(itemIndex, newRecord);
         System.out.println("Successfully added borrow record!");
     }
 }
