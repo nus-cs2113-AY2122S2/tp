@@ -22,7 +22,9 @@ public class EditCommand extends Command {
     private final Optional<String> description;
     private final Optional<Boolean> relativeAdd;
 
-    public EditCommand(int index, Optional<String> name, Optional<Integer> quantity, Optional<String> description, Optional<Boolean> relativeAdd) {
+    public EditCommand(int index,
+            Optional<String> name, Optional<Integer> quantity,
+            Optional<String> description, Optional<Boolean> relativeAdd) {
         this.index = index;
         this.name = name;
         this.quantity = quantity;
@@ -68,7 +70,7 @@ public class EditCommand extends Command {
     @Override
     public boolean equals(Object other) {
         EditCommand toCompare;
-        if (other==this) {
+        if (other == this) {
             // return if same object
             return true;
         }

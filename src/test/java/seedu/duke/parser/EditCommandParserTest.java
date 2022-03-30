@@ -45,6 +45,7 @@ public class EditCommandParserTest {
                 1,
                 CliSyntax.PREFIX_QUANTITY.getPrefix(), ParserStubs.PAPERCUP_SETRELATIVEQUANTITY,
                 CliSyntax.PREFIX_RELATIVE.getPrefix(), "-");
-        assertParseSuccess(parser, testInputRelativeQuantity, ParserStubs.ZEROINDEX_EDITCOMMAND_NEGATIVERELATIVEQUANTITY);
+        assertParseSuccess(parser, testInputRelativeQuantity,
+                ParserStubs.ZEROINDEX_EDITCOMMAND_NEGATIVERELATIVEQUANTITY);
     }
 }

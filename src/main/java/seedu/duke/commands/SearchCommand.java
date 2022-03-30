@@ -49,7 +49,7 @@ public class SearchCommand extends Command {
     @Override
     public boolean equals(Object other) {
         SearchCommand toCompare;
-        if (other==this) {
+        if (other == this) {
             // return if same object
             return true;
         }
