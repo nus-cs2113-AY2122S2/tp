@@ -531,17 +531,15 @@ Display details about a group so that you can review the group's details.<br>
 <br>
 
 ### Listing all groups: `group /list`
+Displays all active groups. Deleted groups will not be listed.<br>
 
-> Displays all active groups. Deleted groups will not be listed.<br>
-> A group represents one or more individuals.
-> It is used as a shortcut in several commands for identifying a group of individual persons.
-
-Format: `group /list`
+>Format: `group /list`
 
 <br>
 
-Example of usage:
-
+**Example**:
+- To list all existing groups.<br>
+`group /list`
 ![Group list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupListCommand.png)
 <br>
 <br>
