@@ -384,4 +384,16 @@ public abstract class Message {
     // Group List Command
     public static final String LOGGER_GROUPLIST_GROUPS_LISTED =
             "All the groups have been listed.";
+
+    // Group Edit Command
+    public static final String ERROR_GROUPEDIT_INVALID_PERSONLIST =
+        "The specified person list does not contain all existing persons that was previously "
+            + "created in the session. Please rectify and try again.";
+    public static final String ERROR_GROUPEDIT_DUPLICATE_NAME =
+        "There are duplicate names in the person list for the group you are trying to edit. "
+            + "Please rectify and try again.";
+
+    // Group Edit Command Parser
+    public static final String ERROR_GROUPEDIT_NO_EDIT_DELIMITERS_FOUND =
+        "No delimiters were found. Please rectify and try again.";
 }

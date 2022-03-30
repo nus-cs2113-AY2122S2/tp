@@ -441,7 +441,7 @@ Displays all existing activities so that you can have an overview of previously 
 However, deleted activities will not be listed.
 
 >Format: `activity /list /sid [SESSION_ID]`
-> 
+>
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
@@ -550,6 +550,37 @@ Deletes an existing group so that you can remove groups that you do not need.
   <br>
 
 ### Editing a group: `group /edit`
+Edits an existing group so that you can change details of a group.<br>
+
+>Format: `group /edit /gid [GROUP_ID] [</n [GORUP_NAME]>] [</pl [NAME1 NAME2...]>]`
+>* `[GROUP_ID]` refers to the unique identifier of the group.
+   >    * The unique identifier for a gorup can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+
+<br>
+
+> **💡 Notes**
+> - A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
+> - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
+> - There are 2 editable fields, group name and the people involved in the session.
+> - When editing the people involved, existing participants must be included in the command.
+    >  - Example: If the group previously created had Alice and Bob with group ID of 1,
+         >  and you wish to edit it to include charlie a valid edit command would be `group /edit /sid /pl Alice Bob Charlie`.
+>
+> **⚠️Warning:**
+> - This action is irreversible, once the command has been entered, the group would be edited.
+
+Examples of usage:
+- A group with a unique identifier of 1 was previously created, and named Class Outing with Alice and Bob involved.
+
+**Example 1**
+- Edit the group name to Class gathering. <br>
+  `group /edit /gid 1 /n Class gathering` <br>
+  ![Group Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[1].png)
+
+**Example 2**
+- Edit the group to include charlie. <br>
+  `group /edit /gid 1 /pl Alice Bob Charlie` <br>
+  ![Group Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[2].png)
 
 <br>
 <br>

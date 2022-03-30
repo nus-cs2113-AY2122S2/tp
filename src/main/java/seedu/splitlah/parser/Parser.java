@@ -20,6 +20,7 @@ import seedu.splitlah.parser.commandparser.SessionEditCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
+import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
@@ -369,6 +370,8 @@ public class Parser {
                 return GroupDeleteCommand.prepare(remainingArgs);
             case GroupListCommand.COMMAND_TEXT:
                 return new GroupListCommand();
+            case GroupEditCommandParser.COMMAND_TEXT:
+                return new GroupEditCommandParser().getCommand(remainingArgs);
             case GroupViewCommandParser.COMMAND_TEXT:
                 return new GroupViewCommandParser().getCommand(remainingArgs);
             case HelpCommandParser.COMMAND_TEXT:
