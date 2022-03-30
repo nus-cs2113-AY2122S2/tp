@@ -24,7 +24,7 @@ Mod Happy is a command-line-based application that helps students manage their a
 
 The following architecture diagram provides a high level overview of the main components of Mod Happy and how they interact with one another.
 
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Components.puml)
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/Components.puml)
 
 The `Main` class is responsible for handling program initialisation, termination, as well as the application's main execution logic.
 
@@ -45,7 +45,7 @@ The `TextUi` class serves strictly as intermediary between the user and the prog
 
 ### Parser Component
 
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Parser.puml)
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/Parser.puml)
 
 The `Parser` component serves to interpret user input and construct the relevant `Command` objects to be returned to `Main` for execution later on. This component comprises the following classes:
 
@@ -70,7 +70,7 @@ The `Data` component is responsible for the storage and manipulation of tasks an
 
 The following partial class diagram illustrates the structure of this component.
 
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Data.puml)
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/Data.puml)
 
 The `ModuleList` class serves as the main data storage class for the program, and is always instantiated when the program is started. It holds:
 * A `Module` object representing the General Tasks list. This `Module` is instantiated upon `ModuleList`'s creation and is meant to be the "default" module for all uncategorised or miscellaneous tasks.
@@ -83,7 +83,7 @@ The `Module` class serves as a wrapper around a `TaskList`, providing additional
 > An alternative method of implementing `ModuleList` is shown below, where the default General Tasks
 list is simply represented as a `TaskList` instead of a full-fledged `Module`.
 >
-> ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/DataAlternative.puml)
+> ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/DataAlternative.puml)
 >
 > While this model is arguably closer to real life, the program logic would have to operate on different object types depending on whether a given `Task` belongs to a user-created Module or the default General Tasks list. This was deemed to increase coupling and introduce too much unnecessary clutter to the code, hence it was not used.
 
@@ -94,7 +94,7 @@ The `Command` component is in charge of actually executing the operations reques
 
 The following partial class diagram illustrates the structure of this component:
 
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/CommandClassDiagram.puml)
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/CommandClassDiagram.puml)
 
 All commands inherit the abstract `Command` class and must contain an `execute()` method. The program logic that must be executed to fulfil the requested command is implemented in this method. Additionally, `execute()` returns any command output to be displayed to the user as feedback.
 
@@ -104,7 +104,7 @@ All commands inherit the abstract `Command` class and must contain an `execute()
 
 The `Storage` component is responsible for the saving and loading of program data from and to its data files. The following class diagram illustrates the structure of this component:
 
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Storage.puml)
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/Storage.puml)
 
 Several type-specific classes exist, each overseeing the storage of a different type of user data: 
 
@@ -126,11 +126,11 @@ The tag feature allows the user to add user-created one-word tags to each task, 
 
 The following sequence diagram illustrates the process:
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/Tag.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/TagSeqDiagram/Tag.puml)
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/GetModule.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/TagSeqDiagram/GetModule.puml)
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/TagSeqDiagram/CheckAndRunTagOperation.puml)
 
 Here is an example on adding a tag to a general task:  
 
@@ -157,7 +157,7 @@ Here is an example on how to calculate GPA:
 
 Below is the sequence diagram of how the GPA feature works:
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/GPASeqDiagram/GPA.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/GPASeqDiagram/GPA.puml)
 
 ## Product scope
 

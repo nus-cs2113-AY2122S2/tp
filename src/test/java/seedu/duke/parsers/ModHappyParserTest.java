@@ -1049,7 +1049,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_tagCommand_addTag_withTargetModule_parsedCorrectly() {
-        final String testString = "tag add 1 -m cs2113t \"tag\"";
+        final String testString = "tag add 1 -m cs2113t tag";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof TagCommand);
@@ -1063,7 +1063,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_tagCommand_invalidTagOperation_throwsParseException() {
-        final String testString = "tag invalidOp 1 \"tag\"";
+        final String testString = "tag invalidOp 1 tagDescription";
         AtomicReference<Command> c = null;
         assertThrows(InvalidCompulsoryParameterException.class, () -> {
             c.set(parser.parseCommand(testString));
