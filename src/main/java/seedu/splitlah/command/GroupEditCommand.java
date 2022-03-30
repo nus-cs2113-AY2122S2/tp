@@ -52,7 +52,7 @@ public class GroupEditCommand extends Command {
         if (involvedList != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
             if (hasDuplicates) {
-                ui.printlnMessage(Message.ERROR_GROUPEDIT_DUPLICATE_NAME);
+                ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP);
                 return;
             }
             PersonList newPersonList = new PersonList();

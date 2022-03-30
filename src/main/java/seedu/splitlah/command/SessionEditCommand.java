@@ -61,7 +61,7 @@ public class SessionEditCommand extends Command {
         if (personNames != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
             if (hasDuplicates) {
-                ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
+                ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION);
                 return;
             }
             PersonList newPersonList = new PersonList();

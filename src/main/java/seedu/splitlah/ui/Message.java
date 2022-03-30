@@ -177,7 +177,7 @@ public abstract class Message {
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_GROUP =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
                     + "the person list.";
-    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_ACTIVITY=
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_ACTIVITY =
             "An Activity object failed to be added into the list of activities because there are duplicate names in"
                     + "the involved list.";
 
@@ -256,8 +256,12 @@ public abstract class Message {
                     + "the session list.";
 
     // Session Delete Command
+    public static final String ASSERT_SESSIONDELETE_SESSION_ID_NOT_INITIALIZED =
+            "Session Id not initialized.";
     public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
-            "A session was removed from the list of session with Id: ";
+            "A session was removed from the list of sessions with Id: ";
+    public static final String LOGGER_SESSIONDELETE_GROUP_REMOVED_FAILED =
+            "A session was not removed from the list of sessions with Id: ";
 
     // Session Edit Command
     public static final String ERROR_SESSIONEDIT_NO_EDIT_DELIMITERS_FOUND =
@@ -314,6 +318,7 @@ public abstract class Message {
     public static final String LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY =
             "An Activity object failed to be added into the list of activities due to the following error: ";
 
+
     // Activity Edit Command
     public static final String LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY =
             "An Activity object failed to be edited.";
@@ -359,6 +364,8 @@ public abstract class Message {
             "The activity was not deleted.";
     public static final String LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED =
             "An Activity object was successfully deleted from the list of activities with Id: ";
+    public static final String LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVE_FAILED =
+            "An activity was not removed from the list of activities in a session with Id: ";
 
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
@@ -380,6 +387,15 @@ public abstract class Message {
     public static final String LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
                     + "the group list.";
+
+    // Group Delete Command
+    public static final String ASSERT_GROUPDELETE_GROUP_ID_NOT_INITIALIZED =
+            "Group Id not initialized.";
+    public static final String LOGGER_GROUPDELETE_GROUP_REMOVED =
+            "A group was removed from the list of groups with Id: ";
+    public static final String LOGGER_GROUPDELETE_GROUP_REMOVED_FAILED =
+            "A group was not removed from the list of groups with Id: ";
+
 
     // Group View Command
     public static final String ASSERT_GROUPVIEW_INCORRECT_GROUP =

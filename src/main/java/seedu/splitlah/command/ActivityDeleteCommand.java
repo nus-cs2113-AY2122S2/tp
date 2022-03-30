@@ -56,6 +56,7 @@ public class ActivityDeleteCommand extends Command {
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED + activityId);
         } catch (InvalidDataException e) {
             ui.printlnMessageWithDivider(e.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVE_FAILED + activityId);
         }
     }
 }

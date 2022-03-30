@@ -5,6 +5,10 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
+import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
+
+import java.util.logging.Level;
 
 /**
  * Represents a command which deletes a Group object from a list of groups managed by the Profile object.
@@ -17,7 +21,7 @@ public class GroupDeleteCommand extends Command {
 
     public static final String COMMAND_FORMAT = "Syntax: group /delete /gid [GROUP_ID]";
 
-    private static final String SUCCESS_MESSAGE = "The group was deleted successfully.";
+    private static final String COMMAND_SUCCESS = "The group was deleted successfully.";
 
     public static final String[] COMMAND_DELIMITERS = {
         ParserUtils.GROUP_ID_DELIMITER,
@@ -31,7 +35,7 @@ public class GroupDeleteCommand extends Command {
      * @param groupId An integer that represents the group unique identifier for the group to be deleted.
      */
     public GroupDeleteCommand(int groupId) {
-        // TODO: Add assert to check whether groupId is valid.
+        assert groupId > 0 : Message.ASSERT_GROUPDELETE_GROUP_ID_NOT_INITIALIZED;
         this.groupId = groupId;
     }
 
@@ -58,12 +62,15 @@ public class GroupDeleteCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        TextUI ui = manager.getUi();
         try {
             manager.getProfile().removeGroup(groupId);
             manager.saveProfile();
-            manager.getUi().printlnMessageWithDivider(SUCCESS_MESSAGE);
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPDELETE_GROUP_REMOVED + groupId);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessageWithDivider(e.getMessage());
+            ui.printlnMessageWithDivider(e.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPDELETE_GROUP_REMOVED_FAILED + groupId);
         }
     }
 }

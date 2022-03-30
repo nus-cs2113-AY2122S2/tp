@@ -24,6 +24,7 @@ public class SessionDeleteCommand extends Command {
      * @param sessionId An integer that uniquely identifies a session.
      */
     public SessionDeleteCommand(int sessionId) {
+        assert sessionId > 0 : Message.ASSERT_SESSIONDELETE_SESSION_ID_NOT_INITIALIZED;
         this.sessionId = sessionId;
     }
 
@@ -42,6 +43,7 @@ public class SessionDeleteCommand extends Command {
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {
             ui.printlnMessage(dataException.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_GROUP_REMOVED_FAILED + sessionId);
         }
     }
 }
