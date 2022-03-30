@@ -1,5 +1,7 @@
 @startuml
 
+!include Style.puml
+
 hide attributes
 hide methods
 
