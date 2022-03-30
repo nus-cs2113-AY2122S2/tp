@@ -13,7 +13,7 @@ In the context for Simplst, a Good contains:
 * unique id as a number
 * name
 * quantity for the goods as a number
-* description of good
+* description of orderline
 
 ### What is an Order?
 In this context for Simplst, an order is a collection of goods that is for one reciepient and one address:
@@ -54,14 +54,14 @@ ____________________________________________________________
 ## Features
 
 ### Adding inventory items: `add`
-Add a new good or order into Simplst.
+Add a new orderline or order into Simplst.
 
 Format: 
 * Adding order: `add o/ oid/ID r/RECEIVER a/SHIPPING_ADDRESS`
 * Adding goods: `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
 
 Note:
-* `GID` is the unique id representing the [Good](#what-is-a-good). 
+* `GID` is the unique id representing the [Good](#what-is-a-orderline). 
 * `OID` is the unique id representing the [Order](#what-is-an-order).
 * The `QUANTITY` is a non-negative integer.
 
@@ -71,8 +71,8 @@ Example of adding an order:
 Adding an order of id 101, receiver John Doe, and an address of NUS
 `add o/ oid/101 r/John Doe a/NUS`
 
-Example of adding a good:
-Adding 15 tables relating to order id 101, with a good id of 1, and a description of "this is a lot of tables."
+Example of adding a orderline:
+Adding 15 tables relating to order id 101, with a orderline id of 1, and a description of "this is a lot of tables."
 `add g/ oid/101 gid/1 n/tables q/15 d/this is a lot of tables.`
 
 Expected Output
@@ -82,10 +82,10 @@ Order 101 is added
 ```
 
 #### Exceptions
-1. When trying to add a good, ensure that an order already exists, else Simplst will ask you to try adding the good again.
+1. When trying to add a orderline, ensure that an order already exists, else Simplst will ask you to try adding the orderline again.
 
 ### Removing inventory items: `remove`
-Remove an existing good or order in Simplst. 
+Remove an existing orderline or order in Simplst. 
 
 Format: 
 * Removing order: `remove o/ id/ID`
@@ -114,7 +114,7 @@ To get a list of names of every inventory item.
 Format: `list flag`
 
 Note:
-* The `flag` is either `o/` or `g/` to view either an order or good
+* The `flag` is either `o/` or `g/` to view either an order or orderline
 
 Example of usage:
 
@@ -133,12 +133,12 @@ List of goods:
 ```
 
 ### Getting a description of inventory: `view`
-View the details of a specific good, based on its ID number.
+View the details of a specific orderline, based on its ID number.
 
 Format: `view flag id/ID`
 
 Note:
-* The `flag` is either `o/` or `g/` to view either an order or good
+* The `flag` is either `o/` or `g/` to view either an order or orderline
 * The `ID` is an integer uniquely representing the corresponding items.
 
 Example of usage:
@@ -146,7 +146,7 @@ Example of usage:
 This is to view order with id 1
 `view o/ id/101`
 
-This is to view good with id 1
+This is to view orderline with id 1
 `view g/ id/102`
 
 Expected output:
@@ -181,11 +181,11 @@ There are 86 goods in total.
 ## Command Summary
 
 * Add order `add o/ id/ID r/RECEIVER a/SHIPPING_ADDRESS`
-* Add good `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
+* Add orderline `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
 * Remove order: `remove o/ i/ID`
-* Remove good: `remove g/ i/ID q/QUANTITY`
+* Remove orderline: `remove g/ i/ID q/QUANTITY`
 * List all orders: `list o/`
 * List all goods: `list g/`
 * View order: `view o/ id/ORDER_ID`
-* View good: `view g/ id/GOOD_ID`
+* View orderline: `view g/ id/GOOD_ID`
 * Total quantity of goods: `total`
