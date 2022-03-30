@@ -41,11 +41,12 @@ public class DeleteHousekeeperCommand extends Command {
      * @throws UserDoesNotExistException User given is not in housekeeper list.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.removeHousekeeperInList(name);
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         assignmentMap.removeAssignment(name);
+        assignmentMap.save();
         ui.printNotedLine();
         ui.printMessage("Deleted " + name + " from the list of profile");
         ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
