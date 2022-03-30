@@ -124,11 +124,21 @@ public class Parser {
         extractedParameters = extractParameter(parameters, PARAMETER_PATTERN_ITEM_NAME);
         String name = extractedParameters[0].replace("i/","");
         parameters = extractedParameters[1];
+        if (name.equals("")) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "Product name cannot be empty."));
+        }
 
         // extracts price
         extractedParameters = extractParameter(parameters, PARAMETER_PATTERN_PRICE);
         String priceString = extractedParameters[0];
-        Double price = Double.parseDouble(priceString.replaceAll(STRING_PATTERN_PRICE, ""));
+        priceString = priceString.replaceAll(STRING_PATTERN_PRICE, "");
+
+        Double price;
+        if (priceString.equals("")) {
+            price = 0.0;
+        } else {
+            price = Double.parseDouble(priceString.replaceAll(STRING_PATTERN_PRICE, ""));
+        }
         parameters = extractedParameters[1];
 
         // extracts date
@@ -210,7 +220,7 @@ public class Parser {
         Pattern pattern = Pattern.compile(parameterPattern);
         Matcher matcher = pattern.matcher(text);
         matcher.find();
-        result[0] = matcher.group(0).replace("d/","");
+        result[0] = matcher.group(0).replace("d/","").trim();
         result[1] = text.replace(matcher.group(0),"");
 
         return result;

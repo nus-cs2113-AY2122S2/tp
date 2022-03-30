@@ -12,3 +12,8 @@ S | abcd | 50000.0 | 14022022 | 14032022
 S | HAHAHA | 4000.0 | 14022022 | 14032022
 P | handphone8 cover | 2000.0 | 14022022 | accessory
 S | Net | 1.0 | 14022022 | 14032022
+P | handphone cover | 10.0 | 14022022 | accessory
+P | handphone cover | 10.0 | 14022022 | accessory
+P | handphone cover | 10.0 | 14022022 | accessory
+P | handphone cover | 0.0 | 14022022 | accessory
+P | handphone cover | 0.0 | 14022022 | accessory
