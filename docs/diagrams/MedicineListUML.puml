@@ -1,0 +1,29 @@
+@startuml
+
+class MedicineList {
+-medicines : Arraylist<Medicine> = null
+-expiredMedicines : Arraylist<Medicine> = null
+-returnedFinderArray : Arraylist<Medicine> = null
++getSize() : int
++getMedicine(String) : Medicine
++search(String) : Medicine
++add(String[]) : void
++find(String[]) : void
++getMedicineInfo(Medicine) : String
++view(String) : void
++view() : void
++remove(String) : void
++edit(String[]) : void
++viewExpired() : void
++updateStock() : void
++clearStock() : void
++findById(String[]) : void
++findByDosage(String[]) : void
++findByExpiry(String[]) : void
++findBySideEffects(String[]) : void
++findByQuantity(String[]) : void
++findByName(String[]) : void
++createArrayOfFoundMedicines() : void
+}
+
+@enduml

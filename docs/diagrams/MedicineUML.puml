@@ -1,0 +1,21 @@
+@startuml
+
+class Medicine {
+-medicineId : String
+-medicineName : String
+-dosage : int
+-expiry : String
+-sideEffects : String
+-quantity : int
++Medicine(medicineId, medicineName, dosage, expiry,sideEffects, quantity) : void
++edit(medicineName, dosage, expiry, sideEffects, quantity) : void
++saveString() : String
++getMedicineId() : String
++getMedicineName() : String
++getDosage() : String
++getExpiry() : String
++getSideEffects() : String
++getQuantiy() : int
+}
+
+@enduml
