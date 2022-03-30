@@ -1,54 +1,71 @@
-# Developer Guide
+# Mod Happy: Developer Guide
 
 ## Contents
-1. [Introduction](#introduction)
-2. [Product Scope](#product-scope)
-3. [About this developer guide](#about-this-developer-guide)
-   <br>2.1. [Purpose](#purpose)
-   <br>2.2. [Explanation of Notation](#explanation-of-notation) 
-4. [Acknowledgements](#acknowledgements)
-5. [Design](#design)
-   <br>4.1. [UI Component](#ui-component)
-   <br>4.2. [Parser Component](#parser-component)
-   <br>4.3. [Data Component](#data-component)
-   <br>4.4. [Command Component](#command-component)
-   <br>4.5. [Storage Component](#storage-component)
-6. [Implementation](#implementation)
-   <br>5.1. [Tag Feature](#tag-feature)
-   <br>5.2. [GPA Feature](#gpa-feature) 
+1. [Introduction](#1-introduction)
+2. [Product Scope](#2-product-scope)
+3. [About this developer guide](#3-about-this-developer-guide)
+   <br>3.1. [Purpose](#31-purpose)
+   <br>3.2. [Explanation of Notation](#32-explanation-of-notation) 
+4. [Acknowledgements](#4-acknowledgements)
+5. [Design](#5-design)
+   <br>5.1. [UI Component](#51-ui-component)
+   <br>5.2. [Parser Component](#52-parser-component)
+   <br>5.3. [Data Component](#53-data-component)
+   <br>5.4. [Command Component](#54-command-component)
+   <br>5.5. [Storage Component](#55-storage-component)
+6. [Implementation](#6-implementation)
+   <br>6.1. [Edit Feature](#61-edit-feature)
+   <br>6.2. [Tag Feature](#62-tag-feature)
+   <br>6.3. [Grade Feature](#63-grade-feature)
+   <br>6.2. [GPA Feature](#64-gpa-feature) 
+7. [User Stories](#7-user-stories)
+8. [Non-Functional Requirements](#8-non-functional-requirements)
+9. [Glossary](#9-glossary)
+10. [Instructions for manual testing](#10-instructions-for-manual-testing)
 
 
-## Introduction
+## 1. Introduction
 Mod Happy is a command-line-based application that helps students manage their academics. Users are able to add modules and tasks, and calculate their Grade Point Average (GPA).
+<br><br><br>
 
-## Product Scope
+## 2. Product Scope
+<br>
 
-### Target User Profile
+### 2.1. Target User Profile
 
 - Undergraduate Students
 - Comfortable using CLI applications
 - Able to type relatively quickly
+<br>
 
-### Value proposition
+### 2.2. Value proposition
 This application seeks to help the target users to keep track of and manage their module components and deadlines, as it can be confusing to juggle so many deliverables at once.
+<br><br><br>
 
-## About this developer guide
-### Purpose
+## 3. About this developer guide
+<br>
+
+### 3.1. Purpose
 This developer guide aims to allow you to understand the design and implementation considerations for Mod Happy. With this guide, you will be able to add on or modify any existing implementation for your own usage.
+<br>
 
-### Explanation of notation
-`Text` formatted as such represent the classes and functions implemented in the application. You can refer to the API provided to view the implementation directly.
+### 3.2. Explanation of notation
+`Text` formatted as such represent the classes and functions implemented in the application, and user input examples. 
 
 > 📔 <span style="color:#00bb00">**NOTE:**</span>
 >
-> Text enclosed in this "Note" block should be taken note of as it can contain important information about the Component/Implementation.
+> Text enclosed in this "Note" block should be taken note of as it can contain additional important information about the Component/Implementation.
 
-## Acknowledgements
+<br><br><br>
+
+## 4. Acknowledgements
 
 - Some foundational source code was adapted from [addressbook-level2](https://github.com/se-edu/addressbook-level2).
 - Google's [GSON library](https://github.com/google/gson) was used to facilitate serialisation and deserialisation of data stored in the data file.
 
-## Design
+<br><br><br>
+
+## 5. Design
 
 The following architecture diagram provides a high level overview of the main components of Mod Happy and how they interact with one another.
 
@@ -64,14 +81,18 @@ Mod Happy's components are summarised below:
 * `Data`: Manages module and task data in program memory.
 * `Storage`: Reads data from, and writes data to Mod Happy's data storage files.
 
-### UI Component
+<br>
+
+### 5.1. UI Component
 
 The `TextUi` class serves strictly as intermediary between the user and the program, and does not directly interact with any components other than the `Main` class. It fulfils the following roles:
 
 - Listens for and grabs the user's input using a `Scanner`, and returns it to `Main` as a string for further processing.
 - Displays any command results or status and error messages to the user.
 
-### Parser Component
+<br>
+
+### 5.2. Parser Component
 
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/Parser.puml)
 
@@ -92,7 +113,9 @@ The following details how the `Parser` component works at runtime:
 3. `ModHappyParser` identifies the relevant command-specific parser `XYZParser` and passes on the remaining unparsed arguments to its `parseCommand()` method.
 4. `XYZParser` parses the remaining command arguments and uses them to construct an `XYZCommand` instance, which is subsequently returned to `Main`.
 
-### Data Component
+<br>
+
+### 5.3. Data Component
 
 The `Data` component is responsible for the storage and manipulation of tasks and modules as well as their associated attributes in program memory.
 
@@ -115,8 +138,9 @@ list is simply represented as a `TaskList` instead of a full-fledged `Module`.
 >
 > While this model is arguably closer to real life, the program logic would have to operate on different object types depending on whether a given `Task` belongs to a user-created Module or the default General Tasks list. This was deemed to increase coupling and introduce too much unnecessary clutter to the code, hence it was not used.
 
+<br>
 
-### Command Component
+### 5.4. Command Component
 
 The `Command` component is in charge of actually executing the operations requested by the user.
 
@@ -128,7 +152,9 @@ All commands inherit the abstract `Command` class and must contain an `execute()
 
 `Command` instances are generated by their corresponding `Parser` classes (e.g. `AddCommand` is constructed by `AddParser`) and executed by `Main`.
 
-### Storage Component
+<br>
+
+### 5.5. Storage Component
 
 The `Storage` component is responsible for the saving and loading of program data from and to its data files. The following class diagram illustrates the structure of this component:
 
@@ -141,14 +167,14 @@ Several type-specific classes exist, each overseeing the storage of a different 
 * `ModuleListStorage` handles the saving and loading of all user-created modules as well as the tasks associated with them as an `ArrayList<Module>` instance. This data is stored in the `data/modules.json` file.
 
 All write operations rely on the general purpose `writeData()` method of the abstract class `JsonStorage`. However, read operations are implemented in each type-specific class; the `readData()` methods of these classes reconstruct the original object from the serialised data and return them.
+<br><br><br>
 
-## Implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+## 6. Implementation
 
 This section describes some details on how some features are implemented.
+<br>
 
-### Edit Feature
+### 6.1. Edit Feature
 
 The edit feature allows the user to change a parameter of a task/module. The parameters of a module is its module description while the parameters of a task are its task name, task description and estimated working time. 
 
@@ -165,7 +191,9 @@ Below is the sequence diagram of how the Grade feature works:
 *<br>UPDATE AFTER MERGE*
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/Edit.puml)
 
-### Tag Feature
+<br>
+
+### 6.2. Tag Feature
 
 The tag feature allows the user to add user-created one-word tags to each task, so that tasks can be filtered for easily. Each task stores its tags in an `ArrayList<String>`.
 
@@ -187,7 +215,9 @@ Here is an example on adding a tag to a general task:
 6. Next, `TagCommand` checks the `tagOperation`. As its value is `add`, `addTag(targetModule)` is called.
 7. Finally, command feedback is returned to `Main`, indicating that the operation was successful.
 
-### Grade Feature
+<br>
+
+### 6.3. Grade Feature
 
 The Grade feature allows the user to input their predicted/actual grade, according to the official grades that NUS supports.
 
@@ -202,10 +232,11 @@ Here is an example on how to assign a grade to a module:
 
 Below is the sequence diagram of how the Grade feature works:
 *<br>UPDATE AFTER MERGE*
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/Grade.puml) 
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/Grade.puml)
 
+<br>
 
-### GPA Feature
+### 6.4. GPA Feature
 
 The GPA feature computes the user's GPA to 2 decimal places, based on the inputted grades and modular credits of each module currently stored in the program.
 
@@ -221,54 +252,75 @@ Here is an example on how to calculate GPA:
 Below is the sequence diagram of how the GPA feature works:
 
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/GPASeqDiagram/GPA.puml)
+<br><br><br>
 
+## 7. User Stories
 
-## User Stories
+| Version | As a ... | I want to ...                                 | So that ...                                                                 |
+|---------|----------|-----------------------------------------------|-----------------------------------------------------------------------------|
+| v1.0    | new user | see usage instructions                        | I can refer to them when I forget how to use the application                |
+| v1.0    | user     | add a module                                  | I can track the progress of the module                                      |
+| v1.0    | user     | remove a module                               | I can keep track in case I decide to drop the module                        |
+| v1.0    | new user | save and load tasks                           | I can restore from backups                                                  |
+| v1.0    | user     | delete a task                                 | I can remove the task when I don't need it anymore                          |
+| v1.0    | user     | edit any existing task to suit my needs       | I can update the information of tasks easily                                |
+| v1.0    | user     | add tasks                                     | I can track the tasks later                                                 | 
+| v1.0    | user     | list all tasks                                | I can check all tasks                                                       |
+| v1.0    | user     | add descriptions and notes to a task          | I can reference them in the future                                          |                   
+| v1.0    | user     | edit descriptions and notes                   | I can change them                                                           |                                             
+| v1.0    | user     | add expected working time for each task       | I can estimate the amount of time I should put in                           |
+| v1.0    | user     | mark a task as completed or uncompleted       | I can manage the completeness of tasks easily                               |
+| v1.0    | user     | reset the program                             | I can start from scratch in a new semester                                  |                     
+| v1.0    | new user | see what commands I can use in the app        | I can use the app more easily                                               |                
+| v1.0    | user     | list all modules                              | I can view all modules that I have added                                    |                                  
+| v2.0    | user     | be prompted to confirm when deleting any task | I won’t delete the wrong task accidentally                                  |
+| v2.0    | user     | show or hide completed tasks in the task list | I can check the uncompleted tasks only                                      |
+| v2.0    | user     | create tags for tasks                         | I can categorise them more easily (e.g. tutorial, project, assignment, etc) |
+| v2.0    | user     | mark tasks as important                       | I can know what tasks to prioritise                                         |
+| v2.0    | user     | list tasks by tag                             | I can filter tasks I’m looking for                                          |
+| v2.0    | user     | input my grades                               | I can estimate my final grade                                               |
 
-| Version | As a ... | I want to ...                                                | So that ...                                                                 |
-|---------|----------|--------------------------------------------------------------|-----------------------------------------------------------------------------|
-| v1.0    | new user | see usage instructions                                       | I can refer to them when I forget how to use the application                |
-| v1.0    | user     | add a module                                                 | I can track the progress of the module                                      |
-| v1.0    | user     | remove a module in case I decide to drop the module          ||
-| v1.0    | new user | save and load tasks                                          | I can restore from backups                                                  |
-| v1.0    | user     | delete a task                                                | I can remove the task when I don't need it anymore                          |
-| v1.0    | user     | edit any existing task to suit my needs                      | I can update the information of tasks easily                                |
-| v1.0    | user     | add tasks                                                    | I can track the tasks later                                                 | 
-| v1.0    | user     | list all tasks                                               | I can check all tasks                                                       |
-| v1.0    | user     | add descriptions and notes to a task                         | I can reference them in the future                                          |                   
-| v1.0    | user     | edit descriptions and notes                                  | I can change them                                                           |                                             
-| v1.0    | user     | add expected working time for each task                      | I can estimate the amount of time I should put in                           ||
-| v1.0    | user     | mark a task as completed or uncompleted                      | I can manage the completeness of tasks easily                               |
-| v1.0    | user     | reset the program                                            | I can start from scratch in a new semester                                  |                     
-| v1.0    | new user | see what commands                                            | I can use in the app	I can use the app more easily                          |                
-| v1.0    | user     | list all modules                                             | I can view all modules that I have added                                    |                                  
-| v2.0    | user     | be prompted to confirm when deleting any task                | I won’t delete the wrong task accidentally                                  |
-| v2.0    | user     | show or hide completed tasks in the task list                | I can check the uncompleted tasks only                                      |
-| v2.0    | user     | create tags for tasks                                        | I can categorise them more easily (e.g. tutorial, project, assignment, etc) |
-| v2.0    | user     | mark tasks as important                                      | I can know what tasks to prioritise                                         |
-| v2.0    | user     | list tasks by tag                                            | I can filter tasks I’m looking for                                          |
-| v2.0    | user     | input my grades                                              | I can estimate my final grade                                               |
-| v2.0    | user     | sort modules by % grade                                      | I can know how well I am doing                                              |
-| v2.0    | user     | set a task as graded or ungraded                             | I can manage the grades of assessment easily                                |
-| v2.0    | user     | set the module weightage for each graded task in each module | I can check the progress of each module later                               |
-| v2.0    | user     | input my estimated/predicted grades for a task               | I can gauge my performance in the module thus far                           |
+<br><br><br>
 
-## Non-Functional Requirements
+## 8. Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 installed.
 2. Should be able to hold up to 1000 tasks and modules combined without a noticeable sluggishness in performance for typical usage.
 3. Should be able to save up to 1000 tasks and modules without taking up noticeable disk space.
+<br><br><br>
 
-
-## Glossary
+## 9. Glossary
 
 * *Mainstream OS* - Windows, Linux, Unix, OS-X
 
-## Instructions for manual testing
+<br><br><br>
+
+## 10. Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
 Below are instructions to perform manual testing of the application. Please refer to the User Guide for more details on the usage of the various commands.
+<br>
 
 ### Launch and exit
+1. Download the jar file and copy the file to an empty folder.
+2. Launch a command terminal and start the application by typing `java -jar tp.jar`.
+3. Exit the application by typing `exit`.
+<br>
+
+### Adding a module
+1. Test Case: `add mod CS2113T 4 -d "Software Engineering and OOP"` <br>
+   Expected: A module named CS2113T with 4 mc is added, with a description of "Software Engineering and OOP".
+2. Test Case: `add mod CS2113T 4` (Continuation from Test Case 1) <br>
+   Expected: No new module is added. Error details in the message shows that a module of the same name already exists.
+3. Test Case: `add mod CS2101` <br>
+   Expected: No new module is added. Error details in the message shows that there are invalid compulsory parameters in the command.
+<br>
+
+### Deleting a module
+1. Prerequisite: There are existing modules in the application, after testing Adding a module.
+2. Test Case: `del mod CS2113T` <br>
+   Expected: The module CS2113T is deleted.
+3. Test Case: `del mod CS2101` <br>
+   Expected: If CS2101 does not exist, no module is deleted. Error details in the message shows that there are no such module. 
 

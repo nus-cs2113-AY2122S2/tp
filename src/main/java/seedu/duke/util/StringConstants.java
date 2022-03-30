@@ -193,7 +193,7 @@ public class StringConstants {
     public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid compulsory parameters. "
             + "Please check and try again.";
     public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters.";
-    public static final String ERROR_PARSE_STRING = "\nError at \"%s\".\nPlease check and try again.";
+    public static final String ERROR_PARSE_STRING = "\nError at \'%s\'.\nPlease check and try again.";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, the value \"%s\" is not supported for "
             + "configuration \"%s\".";
