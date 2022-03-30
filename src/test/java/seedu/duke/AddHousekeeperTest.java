@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.duke.command.Command;
 import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
 import seedu.duke.command.housekeepercommands.DeleteHousekeeperCommand;
+import seedu.duke.exceptions.InvalidHousekeeperProfileException;
 
 
 public class AddHousekeeperTest {

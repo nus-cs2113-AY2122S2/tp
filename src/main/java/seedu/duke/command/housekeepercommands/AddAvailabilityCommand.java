@@ -159,10 +159,11 @@ public class AddAvailabilityCommand extends Command {
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException {
+        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
+        housekeeperList.addAvailabilityInList(name, availability);
         ui.printNotedLine();
         ui.printMessage("Added " + name + " availability into records");
         ui.printBottomLine();
-        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
-        housekeeperList.addAvailabilityInList(name, availability);
+
     }
 }

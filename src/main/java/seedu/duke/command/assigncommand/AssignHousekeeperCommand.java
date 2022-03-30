@@ -8,7 +8,7 @@ import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.Housekeeper;
 import seedu.duke.InvalidRoomNumberException;
-import seedu.duke.InvalidHousekeeperProfileException;
+import seedu.duke.exceptions.InvalidHousekeeperProfileException;
 import seedu.duke.RoomList;
 import seedu.duke.AssignmentMap;
 import seedu.duke.HousekeeperList;
