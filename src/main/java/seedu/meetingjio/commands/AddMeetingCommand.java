@@ -1,3 +1,5 @@
+//@@author ibrahimisramos
+
 package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Meeting;
