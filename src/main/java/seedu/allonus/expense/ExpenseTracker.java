@@ -223,6 +223,9 @@ public class ExpenseTracker {
                 } catch (ExpenseAmountException e) {
                     System.out.println(e.getMessage());
                     break;
+                } catch (NumberFormatException e) {
+                    System.out.println(MSG_NUMBERS_ONLY_AMOUNT);
+                    break;
                 }
             case ("category"):
                 toBeEdited.setCategory(newFields[1]);
