@@ -13,14 +13,18 @@
 
 ## Features
 1. [Customer Satisfaction Related Commands](#Customer-Satisfaction-Related-Commands)
+    * Add Customer Satisfaction 
+    * View All Customer Satisfactions
 2. [Housekeeper Related Commands](#Housekeeper-Related-Commands)
-   * Add Adding Housekeeper Profile
+   * Add Housekeeper Profile
    * Add/Update Availability of Housekeeper
    * View Recorded Housekeeper List
    * Delete Housekeeper
    * Obtain Housekeepers on Days of Interest
    * Reset Housekeeper Availability
    * Increase Age of All Housekeepers
+   * Adding Housekeeper Performance Rating
+   * View All Housekeeper Performances
 3. [Event Related Commands](#Event-Related-Commands)
 4. [Room Related Commands](#Room-Related-Commands)
 5. [Item Related Commands](#Item-Related-Commands)
@@ -90,70 +94,6 @@ There are currently 3 recorded customer satisfactions.
 3. [ CHRIS ROCK ]: 4
 ============= End of the list =============
 ```
-
-### Adding a housekeeper's performance: `add performance`
-Adds a new housekeeper performance (name of housekeeper and their performance rating from 1-5) to the list of
-housekeeper performances. 
-
-
-Format: `add performance HOUSEKEEPER_NAME / PERFORMANCE_RATING`
-
-* The `HOUSEKEEPER_NAME` can be in a natural language format. It must not be the name of a 
-housekeeper who already has a recorded performance rating, and it must be the name of a 
-housekeeper who has a corresponding record in the list of housekeepers. 
-* The `PERFORMANCE_RATING` must be an integer from 1-5, inclusive. 
-
-Example of usage:
-
-`add performance Fred Jones / 4`
-
-Expected output:
-
-```
-========== Noted ! ==========
-The HousekeeperPerformance instance FRED JONES: 4 has been added to the list of housekeeper performances.
-There are currently 1 recorded housekeeper performances.
-=============================
-```
-
-### View all housekeeper performances: `view performances`
-Lists out all housekeeper performances recorded so far in a user-readable format. The performance
-ratings are sorted in descending order (from highest to lowest). 
-
-Format: `view performances`
-
-Example of usage:
-
-`add performance Fred Jones / 4`  <br />
-`add performance Joe Johnson / 2`  <br />
-`add performance John Smith / 3`  <br />
-`view performances` 
-
-Expected output:
-
-```
-========== Noted ! ==========
-The HousekeeperPerformance instance FRED JONES: 4 has been added to the list of housekeeper performances.
-There are currently 1 recorded housekeeper performances.
-=============================
-
-========== Noted ! ==========
-The HousekeeperPerformance instance JOE JOHNSON: 2 has been added to the list of housekeeper performances.
-There are currently 2 recorded housekeeper performances.
-=============================
-
-========== Noted ! ==========
-The HousekeeperPerformance instance JOHN SMITH: 3 has been added to the list of housekeeper performances.
-There are currently 3 recorded housekeeper performances.
-=============================
-
-======== Housekeeper Performance List ========
-1. [ FRED JONES ]: 4
-2. [ JOHN SMITH ]: 3
-3. [ JOE JOHNSON ]: 2
-============= End of the list =============
-```
-
 
 ## Housekeeper Related Commands
 
@@ -428,6 +368,70 @@ Expected output:
 I have assigned susan to room number 301.
 ======================================================================
 ```
+
+### Adding a housekeeper's performance: `add performance`
+Adds a new housekeeper performance (name of housekeeper and their performance rating from 1-5) to the list of
+housekeeper performances.
+
+
+Format: `add performance HOUSEKEEPER_NAME / PERFORMANCE_RATING`
+
+* The `HOUSEKEEPER_NAME` can be in a natural language format. It must not be the name of a
+  housekeeper who already has a recorded performance rating, and it must be the name of a
+  housekeeper who has a corresponding record in the list of housekeepers.
+* The `PERFORMANCE_RATING` must be an integer from 1-5, inclusive.
+
+Example of usage:
+
+`add performance Fred Jones / 4`
+
+Expected output:
+
+```
+========== Noted ! ==========
+The HousekeeperPerformance instance FRED JONES: 4 has been added to the list of housekeeper performances.
+There are currently 1 recorded housekeeper performances.
+=============================
+```
+
+### View all housekeeper performances: `view performances`
+Lists out all housekeeper performances recorded so far in a user-readable format. The performance
+ratings are sorted in descending order (from highest to lowest).
+
+Format: `view performances`
+
+Example of usage:
+
+`add performance Fred Jones / 4`  <br />
+`add performance Joe Johnson / 2`  <br />
+`add performance John Smith / 3`  <br />
+`view performances`
+
+Expected output:
+
+```
+========== Noted ! ==========
+The HousekeeperPerformance instance FRED JONES: 4 has been added to the list of housekeeper performances.
+There are currently 1 recorded housekeeper performances.
+=============================
+
+========== Noted ! ==========
+The HousekeeperPerformance instance JOE JOHNSON: 2 has been added to the list of housekeeper performances.
+There are currently 2 recorded housekeeper performances.
+=============================
+
+========== Noted ! ==========
+The HousekeeperPerformance instance JOHN SMITH: 3 has been added to the list of housekeeper performances.
+There are currently 3 recorded housekeeper performances.
+=============================
+
+======== Housekeeper Performance List ========
+1. [ FRED JONES ]: 4
+2. [ JOHN SMITH ]: 3
+3. [ JOE JOHNSON ]: 2
+============= End of the list =============
+```
+
 
 ## Event Related Commands
 
@@ -794,7 +798,7 @@ Expected output:
 
 **A**: {your answer here}
 
-## Commary
+## Command Summary
 
 | General Command | Format, Example |
 | --- | --- |
