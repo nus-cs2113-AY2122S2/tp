@@ -309,30 +309,31 @@ Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.<br>
 <br>
 
 ### Deleting an activity: `activity /delete`
+Deletes an existing activity from a particular session.<br>
 
-> Deletes an existing activity from a particular session.<br>
+>Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
+>
+>* `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
+>    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
-Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
-
-* `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
-* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
-    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
+<br>
 
 > **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be removed.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be removed.
 >- A confirmation must be given before deletion takes place.
-
+>
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the activity would be immediately deleted.
 
 <br>
 
-Example of usage:
-1. Remove an existing activity with a unique identifier of 1 from a session with a unique <br> identifier of 2.
-   - `activity /delete /sid 2 /aid 1` <br>
-   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
+**Example**:
+- Remove an existing activity with a unique identifier of 1 from a session with a unique identifier of 2. <br>
+`activity /delete /sid 2 /aid 1` <br>
+![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
 <br>
 <br>
 
