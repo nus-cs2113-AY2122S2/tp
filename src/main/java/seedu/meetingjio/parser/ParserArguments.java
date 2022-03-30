@@ -13,18 +13,19 @@ import seedu.meetingjio.exceptions.MissingParameterException;
 
 public class ParserArguments {
 
-    private static String[] splitArgumentsWithHeadings(String[] splitArguments, String[] HEADINGS, Boolean checkAllParams) throws MissingParameterException {
-        int count = HEADINGS.length;
+    private static String[] splitArgumentsWithHeadings(String[] splitArguments, String[] headings, Boolean checkAllParams) 
+        throws MissingParameterException {
+        int count = headings.length;
         String[] eventDescription = new String[count];
         Arrays.fill(eventDescription, "");
 
         int index = -1;
         for (String str : splitArguments) {
-            if (isHeadings(str, HEADINGS) == -1) {
+            if (isHeadings(str, headings) == -1) {
                 eventDescription[index] += " " + str;
                 eventDescription[index] = eventDescription[index].trim();
             } else {
-                index = isHeadings(str, HEADINGS);
+                index = isHeadings(str, headings);
                 count--;
             }
         }
