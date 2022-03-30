@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber
+
+title Sequence Diagram of `schedule /clear` Command
+
+actor   User
+participant "werkIt:WerkIt" AS WerkIt
+participant "ui:UI" AS UI
+participant "parser:Parser" AS Parser
+participant "newCommand\n:ScheduleCommand" AS newCommand
+participant "dayList\n:DayList" AS DayList
+
+
+activate WerkIt
+WerkIt -> UI : getUserInput()
+activate UI
+User -> UI : `schedule /clear` command
+WerkIt <-- UI : userInputTrimmed:String
+deactivate UI
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> newCommand : execute()
+activate newCommand
+
+newCommand -> DayList : clearAllSchedule()
+activate DayList
+deactivate DayList
+
+newCommand -> UI : printClearedScheduleMessage();
+activate UI
+UI --> User: Display a message to indicate the process is completed
+deactivate UI
+
+participant "fileManager:FileManager" as FileManager
+newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)
+activate FileManager
+ref over FileManager
+Write the plans scheduled
+for the week into 'schedule.txt'
+file on user's system.
+end
+newCommand <-- FileManager
+deactivate FileManager
+
+destroy newCommand
+@enduml

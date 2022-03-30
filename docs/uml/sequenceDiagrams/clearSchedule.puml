@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber
+
+title Sequence Diagram of `schedule /clear` Command
+
+actor   User
+participant "werkIt:WerkIt" AS WerkIt
+participant "ui:UI" AS UI1
+participant "parser:Parser" AS Parser
+participant "newCommand\n:ScheduleCommand" AS newCommand
+participant "dayList\n:DayList" AS DayList
+
+
+activate WerkIt
+WerkIt -> UI1 : getUserInput()
+activate UI1
+User -> UI1 : `schedule /clear` command
+WerkIt <-- UI1 : userInputTrimmed:String
+deactivate UI1
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> newCommand : execute()
+activate newCommand
+
+newCommand -> DayList : clearDayPlan(userArgument)
+activate DayList
+create "Integer" AS int
+DayList -> int: parseInt(userArgument)
+DayList <-- int : dayNumber:Integer
+
+create InvalidScheduleException AS ise
+opt !isDayValid
+DayList -> ise : throw new InvalidScheduleException
+activate ise
+return
+deactivate ise
+end
+DayList -> DayList : covertDayNumberToDay(dayNumber)
+activate DayList
+return day:String
+DayList --> User : Display plan clear success message
+deactivate DayList
+
+participant "fileManager:FileManager" as FileManager
+newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)
+activate FileManager
+ref over FileManager
+Write the plans scheduled
+for the week into 'schedule.txt'
+file on user's system.
+end
+newCommand <-- FileManager
+deactivate FileManager
+
+destroy newCommand
+@enduml
