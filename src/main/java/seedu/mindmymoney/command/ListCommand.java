@@ -1,6 +1,7 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
@@ -24,6 +25,7 @@ public class ListCommand extends Command {
     public CreditCardList creditCardList;
     public IncomeList incomeList;
     private String listInput;
+    private static final int COUNTVALUE = 1;
 
     public ListCommand(String listInput, User user) {
         this.expenditureList = user.getExpenditureListArray();
@@ -43,7 +45,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Indicates whether the list command is to list expenditure(s) by looking for the /pm flag.
+     * Indicates whether the list command is to list expenditure(s) by looking for the /e flag.
      *
      * @return true if the /pm flag is present, false otherwise.
      */
@@ -76,44 +78,67 @@ public class ListCommand extends Command {
      * @throws MindMyMoneyException Throws an exception when the date is not in the correct format
      */
     public String expenditureListToString() throws MindMyMoneyException {
-        int indexOfList = 1;
+        int count = COUNTVALUE;
         String listInString = "";
         if (listInput.equals(FLAG_OF_EXPENSES)) {
-            listInString = printListString(indexOfList, listInString);
+            listInString = ListString(count, listInString);
         } else {
-            String[] inputArray = GeneralFunctions.parseInput(listInput);
-            if (!inputArray[1].equals("")) {
-                if (!isValidInput(inputArray[1])) {
-                    throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
-                }
-                for (Expenditure i : expenditureList.expenditureListArray) {
-                    if (i.getTime().contains(inputArray[1])) {
-                        listInString += indexOfList + ". $" + i.getAmount() + " was spent on " + i.getDescription()
-                                + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod()
-                                + " [" + i.getTime() + "]" + "\n";
-                        indexOfList++;
-                    }
-                }
-            } else {
-                listInString = printListString(indexOfList, listInString);
-            }
+            listInString = outputListWithDate(count,listInString);
         }
         assert listInString.length() != 0 : "Return string should be non-empty";
         return listInString;
     }
 
     /**
-     * Formats the output of expenses in list.
-     *
-     * @param index To obtain the numbering when listing the expenses.
+     * Outputs the list of expenses with date
+     * @param count To obtain the numbering when listing the expenses.
      * @param listInString String where the content of output is appended to.
-     * @return
+     * @return String of expenditures
+     * @throws MindMyMoneyException Throws an exception when the date is not in the correct format
      */
-    public String printListString(int index, String listInString) {
+    public String outputListWithDate(int count, String listInString) throws MindMyMoneyException{
+        String[] inputArray = GeneralFunctions.parseInput(listInput);
+        if (!inputArray[Indexes.INDEX_OF_SECOND_ITEM].equals("")) {
+            if (!isValidInput(inputArray[Indexes.INDEX_OF_SECOND_ITEM])) {
+                throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
+            }
+            return ListStringWithDate(count, listInString, inputArray);
+        } else {
+            return ListString(count, listInString);
+        }
+    }
+
+    /**
+     * Formats the output of expenses in list according to date.
+     *
+     * @param count To obtain the numbering when listing the expenses.
+     * @param listInString String where the content of output is appended to.
+     * @return String of expenditures
+     */
+    public String ListStringWithDate(int count, String listInString, String[] inputArray) {
         for (Expenditure i : expenditureList.expenditureListArray) {
-            listInString += index + ". $" + i.getAmount() + " was spent on " + i.getDescription() + "("
+                    if (i.getTime().contains(inputArray[Indexes.INDEX_OF_SECOND_ITEM])) {
+                        listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription()
+                                + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod()
+                                + " [" + i.getTime() + "]" + "\n";
+                        count++;
+                    }
+                }
+        return listInString;
+    }
+
+    /**
+     * Formats the output of all expenses in list.
+     *
+     * @param count To obtain the numbering when listing the expenses.
+     * @param listInString String where the content of output is appended to.
+     * @return String of expenditures
+     */
+    public String ListString(int count, String listInString) {
+        for (Expenditure i : expenditureList.expenditureListArray) {
+            listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription() + "("
                     + i.getCategory() + ") " + "using " + i.getPaymentMethod() + " [" + i.getTime() + "]" + "\n";
-            index++;
+            count++;
         }
         return listInString;
     }
@@ -129,9 +154,8 @@ public class ListCommand extends Command {
                 || input.matches(ValidationRegexTypes.VALIDATION_REGEX_M)
                 || input.matches(ValidationRegexTypes.VALIDATION_REGEX_Y)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**

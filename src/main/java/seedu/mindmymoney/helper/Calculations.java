@@ -35,7 +35,7 @@ public class Calculations {
      */
     public static void calculateExpenditurePerMonth(String input, ExpenditureList expenditureList)
         throws MindMyMoneyException {
-        if (!isValidInput(input)) {
+        if (!TimeFunctions.isValidInput(input)) {
             throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
         }
         ArrayList<Expenditure> foundItems = findItemsInList(input, TIME.toString(), expenditureList);
@@ -49,22 +49,6 @@ public class Calculations {
         }
         System.out.println("Total expenditure in " + input + " is $" + sumOfExpenditure + ".");
         displayExpenditureBreakdown(foundItems, sumOfExpenditure);
-    }
-
-    /**
-     * Checks if date input format is valid.
-     *
-     * @param input The string of the date input.
-     * @return true if format is valid, false otherwise.
-     */
-    public static boolean isValidInput(String input) {
-        if (input.matches(ValidationRegexTypes.VALIDATION_REGEX_D)
-                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_M)
-                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_Y)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**

@@ -5,6 +5,7 @@ import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
+import seedu.mindmymoney.helper.AddCommandInputTests;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Income;
@@ -101,7 +102,7 @@ public class AddCommand extends Command {
         float amountAsFloat = Float.parseFloat(amountAsString);
         float amountInt = formatFloat(amountAsFloat);
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
-        if (!isValidInput(inputTime)) {
+        if (!AddCommandInputTests.isValidInput(inputTime)) {
             throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
         }
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -115,20 +116,6 @@ public class AddCommand extends Command {
             + "Date: " + time + "\n\n"
             + "into the account");
         System.out.print(System.lineSeparator());
-    }
-
-    /**
-     * Checks if date input format is valid.
-     *
-     * @param input The string of the date input.
-     * @return true if format is valid, false otherwise.
-     */
-    public static boolean isValidInput(String input) {
-        if (input.matches(ValidationRegexTypes.VALIDATION_REGEX_D)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
