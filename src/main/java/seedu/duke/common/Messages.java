@@ -10,7 +10,8 @@ public class Messages {
     public static final String ERROR_MESSAGE = "Sorry, there was an error!\n";
     public static final String INVALID_INDEX = "The index you entered was invalid!\n";
     public static final String INVALID_QUANTITY = "The quantity you entered was invalid!\n";
-    public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item would be negative! "
+    public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
+            + "would be negative! "
             + "Your command has been terminated; no changes were made.";
 
     /* Used in ParserUtils.parseRelative only */

@@ -30,30 +30,35 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new InvMgrException(Messages.INVALID_COMMAND);
         }
 
-        int index = ParserUtils.parseIndex(argMultimap.getPreamble()) - 1;
         String name = null;
-        Integer quantity = null;
-        String description = null;
-        boolean relative = false;
-        Optional<String> optionalName= argMultimap.getValue(PREFIX_NAME);
-        Optional<String> optionalQuantity = argMultimap.getValue(PREFIX_QUANTITY);
-        Optional<String> optionalDescription = argMultimap.getValue(PREFIX_DESCRIPTION);
-        Optional<String> optionalRelative = argMultimap.getValue(PREFIX_RELATIVE);
+        Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
         if (optionalName.isPresent()) {
             name = optionalName.get();
         }
+
+        Integer quantity = null;
+        Optional<String> optionalQuantity = argMultimap.getValue(PREFIX_QUANTITY);
         if (optionalQuantity.isPresent()) {
             quantity = ParserUtils.parseQuantity(optionalQuantity.get());
         }
+
+        String description = null;
+        Optional<String> optionalDescription = argMultimap.getValue(PREFIX_DESCRIPTION);
         if (optionalDescription.isPresent()) {
             description = optionalDescription.get();
         }
+
+        boolean relative = false;
+        Optional<String> optionalRelative = argMultimap.getValue(PREFIX_RELATIVE);
         if (optionalRelative.isPresent()) {
             int multiplier = ParserUtils.parseRelative(optionalRelative.get());
-            // this sets multiplier to -1 or 1 depending on the given relative argument. + is a multiplier of 1, - is a multiplier of -1
+            // this sets multiplier to -1 or 1 depending on the given relative argument.
+            // + is a multiplier of 1, - is a multiplier of -1
             quantity = quantity * multiplier;
             relative = true;
         }
+
+        int index = ParserUtils.parseIndex(argMultimap.getPreamble()) - 1;
 
         return new EditCommand(index, name, quantity, description, relative);
     }

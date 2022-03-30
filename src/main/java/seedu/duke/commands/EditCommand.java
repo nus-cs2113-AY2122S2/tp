@@ -39,11 +39,12 @@ public class EditCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new InvMgrException(Messages.INVALID_INDEX);
         }
-        Item placeholderItem = new Item(targetedItem.getName(), targetedItem.getQuantity(), targetedItem.getDescription());
-        if (this.name!=null) {
+        Item placeholderItem = new Item(targetedItem.getName(),
+                targetedItem.getQuantity(), targetedItem.getDescription());
+        if (this.name != null) {
             placeholderItem.setName(this.name);
         }
-        if (this.quantity!=null) {
+        if (this.quantity != null) {
             int currentQuantity = relative ? placeholderItem.getQuantity() : 0;
             int newQuantity = currentQuantity + this.quantity;
             try {
@@ -52,7 +53,7 @@ public class EditCommand extends Command {
                 throw new InvMgrException(Messages.NEGATIVE_QUANTITY_MESSAGE, e);
             }
         }
-        if (this.description!=null) {
+        if (this.description != null) {
             placeholderItem.setName(this.name);
         }
         itemList.set(index, placeholderItem);
