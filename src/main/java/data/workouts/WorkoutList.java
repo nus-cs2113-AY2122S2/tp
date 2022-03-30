@@ -300,7 +300,14 @@ public class WorkoutList {
         ui.printDeleteWorkoutMessage(deletedWorkout);
 
         String deletedWorkoutDetail = deletedWorkout.toString();
+        deletePlanContainsDeletedWorkout(deletedWorkoutDetail, planList);
 
+        logger.exiting(getClass().getName(), "deleteWorkout");
+        return deletedWorkout;
+    }
+
+    public void deletePlanContainsDeletedWorkout(String deletedWorkoutDetail, PlanList planList) throws
+            InvalidPlanException {
         ArrayList<Integer> planIndexWithDeletedWorkout = planList.findPlanContainsTargetWorkout(deletedWorkoutDetail);
         if (planIndexWithDeletedWorkout.size() > 0) {
             System.out.println(deletedWorkoutDetail + " is found in:\n");
@@ -320,9 +327,6 @@ public class WorkoutList {
                     + planList.getPlansDisplayList().get(planIndexWithDeletedWorkout.get(i) - i - 1));
             planList.deletePlan(Integer.toString(planIndexWithDeletedWorkout.get(i) - i));
         }
-
-        logger.exiting(getClass().getName(), "deleteWorkout");
-        return deletedWorkout;
     }
 
     /**
