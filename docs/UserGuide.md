@@ -135,6 +135,8 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >  - Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
      includes Alice, only two names, Alice and Bob, would be saved.
 
+<br>
+
 **Example 1** 
 - Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.<br> 
 `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br>
@@ -163,6 +165,8 @@ Deletes an existing session so that you can remove sessions that you don't need.
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the session would be immediately deleted.
 
+<br>
+
 **Example 1** 
 - Remove an existing session with a unique identifier of 1.<br>
 `session /delete /sid 1` <br>
@@ -190,6 +194,8 @@ Edits an existing session so that you can change details of a session.<br>
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the session would be edited.
     
+<br>
+
 Examples of usage:
 - A session with a unique identifier of 1 was previously created named Class Outing with Alice and Bob involved on 15-03-2022.
 
@@ -217,6 +223,7 @@ Displays details about a session so you can review the session.<br>
 > **💡 Note:**
 >- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be viewed.
 
+<br>
 
 Example of usage:
 1. Views a session with a unique identifier of 1.
@@ -231,6 +238,8 @@ Displays all existing sessions so that you can have an overview of previously cr
 However, deleted sessions will not be listed.
 
 > Format: `session /list`
+
+<br>
 
 **Example 1**
 - To list all existing sessions <br>
@@ -314,6 +323,8 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the activity would be immediately deleted.
 
+<br>
+
 Example of usage:
 1. Remove an existing activity with a unique identifier of 1 from a session with a unique <br> identifier of 2.
    - `activity /delete /sid 2 /aid 1` <br>
@@ -371,6 +382,7 @@ Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 > **💡 Note:**
 >- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
 
+<br>
 
 Example of usage:
 1. Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.
@@ -390,6 +402,7 @@ Format: `activity /list /sid [SESSION_ID]`
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its activities can be listed.
 
+<br>
 
 Example of usage:
 1. Lists all activities in a session with a unique identifier of 2.
@@ -414,6 +427,8 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
+
+<br>
 
 **Example**
 * Displays a session summary that summarises the [session that has been created](#creating-a-session-session-create)
@@ -446,6 +461,7 @@ Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 >- The `[GROUP_NAME]` should be unique across all groups.
 >- Each name in `[NAME1 NAME2 ...]` for the group should be unique.
 
+<br>
 
 Example of usage:
 1. Adds a new group named Uni Friends, with Alice and Bob involved.
@@ -467,6 +483,8 @@ Format: `group /delete /gid [GROUP_ID]`
 
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the group would be immediately deleted.
+
+<br>
 
 Example of usage:
 1. Remove an existing group with a unique identifier of 1.
@@ -494,6 +512,8 @@ Format: `group /view /gid [GROUP_ID]`
 > **💡 Note:**
 >- The group with a unique identifier of `[GROUP_ID]` has to exist before the group can be viewed.
 
+<br>
+
 Example of usage:
 1. Views a group with a unique identifier of 1.
     - `group /view /gid 1` <br>
@@ -508,6 +528,8 @@ Example of usage:
 > It is used as a shortcut in several commands for identifying a group of individual persons.
 
 Format: `group /list`
+
+<br>
 
 Example of usage:
 
