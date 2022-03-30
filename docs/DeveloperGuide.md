@@ -200,7 +200,7 @@ The sequence diagram below models the interactions between various entities in S
 when the user invokes the `session /view` command.
 <br>
 <br>
-![View Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionViewCommand.drawio.png))
+![View Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionViewCommand.drawio.png)
 <br>
 <br>
 The general workflow of the `session /view` command is as follows:
@@ -211,8 +211,9 @@ The general workflow of the `session /view` command is as follows:
 5. To retrieve the sessions from profile, `Profile#getSession` is executed,
    returning the session with the matching session Id. If no session is found, a message indicating that the session was
    not found is printed using `TextUi#printlnMessage`.
-6. Once the session is retrieved, `TextUi#printlnMessage` is called on the session to print its details to the 
-   interface.
+6. Once the session is retrieved, `Session#toString` is called on it to return a `String` object representing the 
+   session details.
+7. `TextUi#printlnMessage` is called on the `String` object to print its details to the interface.
 
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
