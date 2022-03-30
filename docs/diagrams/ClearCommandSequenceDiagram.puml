@@ -1,25 +1,25 @@
 @startuml
-'https://plantuml.com/sequence-diagram'
-hide footbox
 actor user
-participant ":Main"
-participant ":ui"
-participant ":parser"
-participant ":command"
-participant ":ClearCommand"
 
+user -> ":Ui" ++ : "clear all"
+create ":Parser"
+":Ui" -> ":Parser" ++: new Parser("clear all")
+":Parser" --> ":Ui" --: parser:Parser
+":Ui" -> ":Parser" ++: parseCommand("clear all")
+create ":ClearCommand"
+":Parser" -> ":ClearCommand" ++: new ClearCommand()
+":ClearCommand" --> ":Parser" --: clearCommand:ClearCommand
+":Parser" --> ":Ui" --: clearCommand:ClearCommand
+":Ui" -> ":ClearCommand" ++: execute(masterTimetable)
+":ClearCommand" -> ":ClearCommand"++: clearAll(masterTimetable)
+":ClearCommand" -> ":MasterTimetable" ++: getByIndex(0)
+loop for each entry
+":MasterTimetable" --> ":ClearCommand" -- : timetable: Timetable
+":ClearCommand" -> ":ClearCommand"++: clearTimetable(timetable)
+":ClearCommand" -> ":MasterTimetable" ++: removeByIndex(0)
+":MasterTimetable" -> ":ClearCommand" --:
+end
 
-
-user -> ":ui" : "clear"
-":ui" --> ":Main" : get UserInput
-":Main" -> ":parser" : parseCommand("clear")
-":parser" -> ":command" : parseCommand("clear")
-":command" -> ":ClearCommand" :executeCommand(userInput,MasterTimetable)
-":command" --> ":parser" : ClearCommand
-":ClearCommand" -> ":ClearCommand" : execute()
-":ClearCommand" --> ":command" : CommandOutput
-":command" --> ":parser" : CommandOutput
-":parser" -> ":ui" : CommandOutput
-":ui" -> ":ui" : printConfirmation()
-":ui" --> ":Main"
+":ClearCommand" --> ":Ui" --: printAllClearConfirmation(): String
+":Ui" --> user
 @enduml

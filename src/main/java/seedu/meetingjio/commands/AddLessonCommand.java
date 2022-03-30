@@ -1,16 +1,17 @@
+//@@author yanjie1017
+
 package seedu.meetingjio.commands;
 
-import seedu.meetingjio.events.Event;
 import seedu.meetingjio.events.Lesson;
-import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
-import seedu.meetingjio.timetables.Timetable;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 
 public class AddLessonCommand extends Command {
     public static final String COMMAND_WORD = "add_lesson";
@@ -32,25 +33,19 @@ public class AddLessonCommand extends Command {
     }
 
     /**
-     * Execute Add command using the timetable provided.
+     * Execute AddLesson command using the timetable provided.
      *
      * @param masterTimetable MasterTimetable
      *
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
-        Timetable timetable;
         try {
-            timetable  = masterTimetable.getByName(name);
+            Lesson newLesson = new Lesson(title, day, startTime, endTime, mode);
+            masterTimetable.addLesson(newLesson, name);
+            return addConfirmation(newLesson, name);
         } catch (TimetableNotFoundException tnfe) {
-            timetable = new Timetable(name);
-            masterTimetable.add(timetable);
-            masterTimetable.deleteAllMeetings();
-        }
-        try {
-            Event newEvent = new Lesson(title, day, startTime, endTime, mode);
-            timetable.add(newEvent);
-            return addConfirmation(newEvent, name);
+            return ERROR_INVALID_USER;
         } catch (DuplicateEventException dee) {
             return ERROR_DUPLICATE_EVENT;
         } catch (OverlappingEventException oee) {
@@ -59,13 +54,13 @@ public class AddLessonCommand extends Command {
     }
 
     /**
-     * Inform user that add has happened.
+     * Inform user that lesson has been added.
      *
-     * @param event Event that inform user that said event has been event
-     *
+     * @param lesson Lesson that was added
+     * @param name User
      */
-    private String addConfirmation(Event event, String name) {
+    private String addConfirmation(Lesson lesson, String name) {
         return String.format("The following event has been added to %s's timetable:\n%s",
-                name, event);
+                name, lesson);
     }
 }

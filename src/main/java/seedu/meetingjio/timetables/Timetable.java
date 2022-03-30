@@ -1,5 +1,7 @@
 package seedu.meetingjio.timetables;
 
+import seedu.meetingjio.events.Lesson;
+import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
@@ -14,6 +16,10 @@ public class Timetable {
     private ArrayList<Event> list;
 
     public static final int BUSY = 1;
+
+    public static final int LESSONS_ONLY = 1;
+    public static final int MEETINGS_ONLY = 2;
+
 
     public Timetable(String name) {
         this.name = name;
@@ -57,7 +63,14 @@ public class Timetable {
         list.clear();
     }
 
-    private boolean isDuplicate(Event newEvent) {
+    /**
+     * Checks through all existing events to the event to be added
+     * to ensure that there is no duplicate.
+     *
+     * @param newEvent Event to be added
+     * @return true if there is identical event, otherwise false
+     */
+    public boolean isDuplicate(Event newEvent) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
             if (event.equals(newEvent)) {
@@ -74,11 +87,30 @@ public class Timetable {
      * @param newEvent Event to be added
      * @return true if there is overlap, otherwise false
      */
-    private boolean isOverlap(Event newEvent) {
+    public boolean isOverlap(Event newEvent) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
             if (event.overlaps(newEvent)) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isValid() {
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                Event a = list.get(i);
+                Event b = list.get(j);
+                if (a.equals(b)) {
+                    return true;
+                }
+                if (a.overlaps(b)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -95,9 +127,9 @@ public class Timetable {
      * @return true if Event E1 comes earlier than Event E2, false otherwise
      */
     private boolean isEarlier(Event event1, Event event2) {
-        if (event1.getDay() < event2.getDay()) {
+        if (event1.getDayInInt() < event2.getDayInInt()) {
             return true;
-        } else if (event1.getDay() == event2.getDay() && event1.startTime < event2.startTime) {
+        } else if (event1.getDayInInt() == event2.getDayInInt() && event1.getStartTime() < event2.getEndTime()) {
             return true;
         }
         return false;
@@ -130,6 +162,28 @@ public class Timetable {
         list = tempList;
     }
 
+    /**
+     * List contents of the timetable, taking into consideration the constraint supplied.
+     * If constraint supplied is LESSONS_ONLY, events that are meetings will not be added to the returned string.
+     * If constraint supplied is MEETINGS_ONLY, events that are lessons will not be added to the returned string.
+     *
+     * @param constraint Integer that is either 0, 1 or 2, indicating the user's constraint
+     * @return str String containing the labelled events of the timetable
+     */
+    public String listTimetable(int constraint) {
+        String str = "";
+        for (int i = 0; i < list.size(); i++) {
+            if ((constraint == LESSONS_ONLY && list.get(i) instanceof Meeting)
+                    || (constraint == MEETINGS_ONLY && list.get(i) instanceof Lesson)) {
+                continue;
+            }
+            int listIndex = i + 1;
+            str += listIndex + "." + list.get(i);
+            str += '\n';
+        }
+        return str;
+    }
+
     public ArrayList<Event> getList() {
         return list;
     }
@@ -148,13 +202,24 @@ public class Timetable {
     public void populateBusySlots(int[][] busySlots) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
-            int numericDay = event.getDay();
-            int numericStartTime = FreeCommand.convertTimeToFreeArrayIndex(event.startTime);
-            int numericEndTime = FreeCommand.convertTimeToFreeArrayIndex(event.endTime);
+            int numericDay = event.getDayInInt();
+            int numericStartTime = FreeCommand.convertTimeToFreeArrayIndex(event.getStartTime());
+            int numericEndTime = FreeCommand.convertTimeToFreeArrayIndex(event.getEndTime());
             for (int j = numericStartTime; j < numericEndTime; j++) {
                 busySlots[numericDay - 1][j] = BUSY;
             }
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Timetable)) {
+            return false;
+        }
+        Timetable timetable = (Timetable) obj;
+        if (!name.equalsIgnoreCase(timetable.name)) {
+            return false;
+        }
+        return true;
+    }
 }
