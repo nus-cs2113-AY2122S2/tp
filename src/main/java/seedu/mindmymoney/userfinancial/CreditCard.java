@@ -60,7 +60,7 @@ public class CreditCard {
     }
 
     public float getTotalCashback() {
-        return formatFloat((float)(totalExpenditure * (cashback/100))) ;
+        return formatFloat((float)(totalExpenditure * (cashback / 100)));
     }
 
     @Override
