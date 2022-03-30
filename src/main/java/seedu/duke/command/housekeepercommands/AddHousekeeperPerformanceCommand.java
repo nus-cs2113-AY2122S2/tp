@@ -1,8 +1,14 @@
-package seedu.duke;
+package seedu.duke.command.housekeepercommands;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import seedu.duke.Ui;
+import seedu.duke.HousekeeperPerformanceList;
+import seedu.duke.HousekeeperPerformance;
+import seedu.duke.HousekeeperList;
+import seedu.duke.ListContainer;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
@@ -13,6 +19,7 @@ import seedu.duke.exceptions.InvalidHousekeeperPerformanceRatingException;
 import seedu.duke.exceptions.RepeatHousekeeperPerformanceNameException;
 import seedu.duke.exceptions.NonexistentHousekeeperException;
 import seedu.duke.storage.HousekeeperPerformanceFileManager;
+
 
 /**
  * Represents a command to add a new HousekeeperPerformance object to the HousekeeperPerformanceList.
