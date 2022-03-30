@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":EditCommand" as EditCommand
+participant ":Module" as Module
+participant ":TaskList" as TaskList
+hide footbox
+
+mainframe **sd** Get Task
+
+activate EditCommand
+EditCommand -> Module: getTaskList()
+activate Module
+return taskList
+deactivate Module
+EditCommand -> TaskList: getTask(taskIndex)
+activate TaskList
+return targetTask
+deactivate TaskList
+
+@enduml

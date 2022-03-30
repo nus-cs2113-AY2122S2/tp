@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":EditCommand" as EditCommand
+participant ":ModuleList" as ModuleList
+hide footbox
+
+mainframe **sd** Get Module
+
+activate EditCommand
+EditCommand -> EditCommand: getTargetModule(moduleList)
+activate EditCommand
+alt Objects.isNull(taskModule)
+    EditCommand -> ModuleList: getGeneralTasks()
+    activate ModuleList
+    return
+
+else else
+    EditCommand -> ModuleList: getModule(taskModule)
+    activate ModuleList
+
+    alt Objects.isNull(taskModule)
+        [<-- ModuleList: throw NoSuchModuleException
+
+    else else
+    return targetModule
+
+    end
+end
+return
+deactivate EditCommand
+
+@enduml
