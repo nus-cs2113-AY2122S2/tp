@@ -6,7 +6,8 @@ import seedu.duke.command.Command;
 
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.EventList;
+import seedu.duke.eventLists.EventList;
+import seedu.duke.eventLists.Event;
 import seedu.duke.exceptions.InvalidRoomNumberException;
 import seedu.duke.exceptions.InvalidHousekeeperProfileException;
 

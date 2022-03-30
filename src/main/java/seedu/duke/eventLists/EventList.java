@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.eventLists;
 
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidDateException;
@@ -7,6 +7,7 @@ import seedu.duke.storage.EventListFileManager;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import seedu.duke.Ui;
 
 /**
  * Represents a data structure containing multiple Event objects.
