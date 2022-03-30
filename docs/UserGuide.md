@@ -258,7 +258,10 @@ However, deleted sessions will not be listed.
 <br>
 
 ### Creating an activity: `activity /create`
-Creates a new activity and assigns it to a session. <br>
+Creates an activity so that you can record the relevant details, and then assigns it to a session. <br>
+There are two ways that you can create an activity:
+1. Record the total cost to be split amongst everyone involved
+2. Record each person's individual cost
 
 > Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
@@ -282,13 +285,13 @@ Creates a new activity and assigns it to a session. <br>
 
 > **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
-> it.
+   it.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also only be a single word without whitespaces.
-   > <br>Example: `Alice Tan` is not allowed.
+>   - Example: `Alice Tan` is not allowed.
 >- The values that follow the delimiters `/co` and `/cl` can only have a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
 
