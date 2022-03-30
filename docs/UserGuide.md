@@ -314,6 +314,8 @@ to a cost list:
    >      * The unique identifier for an activity can be retrieved with the
             [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
+<br>
+
 > **💡 Notes**
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
 >- Each name in `[NAME1 NAME2 ...]` for a particular activity should be unique.
