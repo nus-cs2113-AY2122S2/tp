@@ -42,15 +42,15 @@ Examples of usage:
 > list -cb
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 19-03-2021 to 30-03-2021
+Borrow Duration: 2021-03-19 to 2021-03-30
 
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
-Borrow Duration: 21-03-2021 to 23-03-2021
+Borrow Duration: 2021-03-21 to 2021-03-23
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 29-03-2021 to 01-04-2021
+Borrow Duration: 2021-03-29 to 2021-04-01
 ```
 If there are no items have been borrowed from the inventory. The `list -cb` command will return:
 ```
@@ -62,11 +62,11 @@ There are no items in the inventory being borrowed.
 > list -cb p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 19-03-2021 to 30-03-2021
+Borrow Duration: 2021-03-23 to 2021-03-30
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 29-03-2021 to 01-04-2021
+Borrow Duration: 2021-04-24 to 2021-04-30
 ```
 If the person does not exist in the borrowings, the `list -cb p/BORROWER_NAME` will return:
 ```
@@ -85,15 +85,15 @@ Format: `borrow INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
 
 Examples of usage:
 ```
-> borrow 23 s/21-03-2021 e/23-03-2021 p/John Smith
+> borrow 23 s/2021-03-21 e/2021-03-23 p/John Smith
 You have successfully borrowed the following item:
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
-Borrow Duration: 21-03-2021 to 23-03-2021
+Borrow Duration: 2021-03-21 to 2021-03-23
 ```
 
 ```
-> borrow 12 s/21-03-2021 e/23-03-2021 p/John Smith
+> borrow 12 s/2021-03-21 e/2021-03-23 p/John Smith
 Sorry. The item is not avaiable for borrowing during this duration.
 ```
 
