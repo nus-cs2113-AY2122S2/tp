@@ -112,19 +112,21 @@ public class ParserTest {
         assertEquals(ERROR_MISSING_VALUES_ADD_EVENT, command.execute(masterTimetable));
     }
 
-//    @Test
-//    public void prepareDeleteCommand_invalidIndex_throwException() {
-//        String inputString = "delete hello";
-//        Parser parser = new Parser(inputString);
-//        Command command = parser.parseCommand();
-//        assertEquals(ERROR_INVALID_INDEX_FORMAT, command.execute(masterTimetable));
-//    }
-//
-//   @Test
-//    public void prepareDeleteCommand_noIndex_throwException() {
-//       String inputString = "delete";
-//       Parser parser = new Parser(inputString);
-//        Command command = parser.parseCommand();
-//       assertEquals(ERROR_INVALID_INDEX_FORMAT, command.execute(masterTimetable));
-//    }
+    /*
+    @Test
+    public void prepareDeleteCommand_invalidIndex_throwException() {
+        String inputString = "delete hello";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_INVALID_INDEX_FORMAT, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareDeleteCommand_noIndex_throwException() {
+        String inputString = "delete";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_INVALID_INDEX_FORMAT, command.execute(masterTimetable));
+    }
+    */
 }
