@@ -43,6 +43,15 @@ public class Group implements Serializable {
     }
 
     /**
+     * Updates the name of this Group object to the specified name.
+     *
+     * @param groupName A String object representing the updated name of the group.
+     */
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    /**
      * Returns the group's unique identifier.
      *
      * @return An integer representing the group's identifier.
