@@ -10,6 +10,13 @@ import java.time.LocalDate;
  * Borrow an item from the inventory for a specified duration.
  */
 public class BorrowCommand extends Command {
+    public static final String COMMAND_WORD = "borrow";
+    public static final String COMMAND_NAME = "Borrow an Item";
+    public static final String USAGE_MESSAGE = "Borrows an item from the inventory list";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " [item number] [start date] [end date] [name]";
+    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
+            + "[Command Format] " + COMMAND_FORMAT + "\n";
+
     private final int itemIndex;
     private final LocalDate startDate;
     private final LocalDate endDate;
