@@ -42,7 +42,7 @@ public class ParserUtils {
 
     /**
      * Returns -1 if {@code relative} is "-", and 1 if {@code relative} is "+" 1.
-     * The value returned represents a multiplier on the quantity.
+     * The value returned represents a multiplier on the quantity, used to edit quantity relatively.
      * @throws InvMgrException if the given {@code relative} is invalid (not either of the two options)
      */
     public static int parseRelative(String relative) throws InvMgrException {
