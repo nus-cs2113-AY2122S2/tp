@@ -23,7 +23,6 @@ public class ActivityCreateCommand extends Command {
   
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
 
-    private int activityId;
     private final int sessionId;
     private final String activityName;
     private double totalCost;
@@ -118,10 +117,8 @@ public class ActivityCreateCommand extends Command {
      * @param indexOfCostOwed An integer representing the index of the cost owed in the list of costs.
      * @param person          A person object representing the person whose costs are added to the
      *                        list of activity costs.
-     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
-            throws InvalidDataException {
+    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person) {
         if (person == personPaid) {
             person.addActivityCost(activityId, totalCost, costList[indexOfCostOwed]);
         } else {
@@ -214,12 +211,12 @@ public class ActivityCreateCommand extends Command {
     @Override
     public void run(Manager manager) {
         boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
+        TextUI ui = manager.getUi();
         if (hasDuplicates) {
-            manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
+            ui.printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
             return;
         }
-        TextUI ui = manager.getUi();
         try {
             updateCostAndCostList();
             assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL;
@@ -228,7 +225,7 @@ public class ActivityCreateCommand extends Command {
             Session session = profile.getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            activityId = profile.getNewActivityId();
+            int activityId = profile.getNewActivityId();
             addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
@@ -241,5 +238,4 @@ public class ActivityCreateCommand extends Command {
                     + "\n" + e.getMessage());
         }
     }
-
 }
