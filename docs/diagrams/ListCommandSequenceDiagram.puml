@@ -17,6 +17,8 @@ loop for each user
 ":MasterTimetable" -> ":ListCommand" ++: listUser(user, masterTimetable)
 ":ListCommand" -> ":Timetable" ++: sort()
 ":Timetable" --> ":ListCommand" --
+":ListCommand" -> ":Timetable" ++: listTimetable()
+":Timetable" --> ":ListCommand" --
 ":ListCommand" --> ":MasterTimetable" --
 end
 ":MasterTimetable" --> ":ListCommand" --: str

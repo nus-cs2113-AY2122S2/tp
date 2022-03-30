@@ -89,7 +89,7 @@ public class ClearCommandTest {
         addCommandDifferentUser.execute(masterTimetable);
         ClearCommand clearCommand = new ClearCommand("all");
         assertEquals(successClearAll,  clearCommand.execute(masterTimetable));
-        ListCommand listCommand = new ListCommand("all");
+        ListCommand listCommand = new ListCommand("all", 0);
         assertEquals(listSuccessPostClearAll, listCommand.execute(masterTimetable));
     }
 

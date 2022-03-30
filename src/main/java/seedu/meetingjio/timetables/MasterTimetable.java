@@ -113,15 +113,16 @@ public class MasterTimetable {
      * Once all timetables have been iterated through, the string is returned
      *
      * @param masterTimetable The Master Timetable containing everyone's timetables
+     * @param constraint Integer describing the constraint (all events, lessons only or meetings only)
      * @return str A string containing the labelled timetables of everyone
      */
-    public String collateAll(MasterTimetable masterTimetable) {
+    public String collateAll(MasterTimetable masterTimetable, int constraint) {
         String str = "";
         for (Timetable timetable : timetables) {
             String user = timetable.getName();
             str += user;
             str += '\n';
-            str += ListCommand.listUser(user, masterTimetable);
+            str += ListCommand.listUser(user, masterTimetable, constraint);
             str += '\n';
         }
         return str;
