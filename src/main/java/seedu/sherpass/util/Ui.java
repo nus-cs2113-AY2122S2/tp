@@ -1,6 +1,7 @@
 package seedu.sherpass.util;
 
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.timetable.Timetable;
 
 import java.util.Scanner;
 
@@ -41,6 +42,18 @@ public class Ui {
     }
 
     /**
+     * Returns a boolean value to see if there is any more
+     * user inputs.
+     *
+     * @return Returns true if there is still user inputs. Method may
+     *         be blocked while waiting for user inputs and scanner does
+     *         not continue scanning for inputs when it is waiting.
+     */
+    public boolean hasInput() {
+        return in.hasNext();
+    }
+
+    /**
      * Prints a partition line.
      */
     public void showLine() {
@@ -72,15 +85,15 @@ public class Ui {
      * Prints a welcome message to greet the user.
      * Shows the user the timetable and the number of pending tasks.
      *
-     * @param tasklist List of task in array representation
+     * @param taskList List of task in array representation
      * @param ui User interface
      */
-    public void showWelcomeMessage(TaskList tasklist, Ui ui) {
+    public void showWelcomeMessage(TaskList taskList, Ui ui) {
         String welcomeMessage = PARTITION_LINE + LS + WELCOME_MESSAGE_ONE
                 + LOGO + LS + PARTITION_LINE + LS + WELCOME_MESSAGE_TWO;
         showToUser(welcomeMessage);
-        Timetable.showTodaySchedule(tasklist, ui);
-        showReminderMessage(tasklist, ui);
+        Timetable.showTodaySchedule(taskList, ui);
+        showReminderMessage(taskList, ui);
         showLine();
     }
 
@@ -91,10 +104,6 @@ public class Ui {
         System.out.println(GOODBYE_MESSAGE);
     }
 
-    public void printEditTaskMessage(String task) {
-        System.out.println("Ok, I've edited this task as such!"
-                + "\n " + task);
-    }
 
     /**
      * Returns a string of repeated characters.
