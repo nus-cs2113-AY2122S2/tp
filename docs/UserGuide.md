@@ -31,22 +31,22 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
       * [Editing a session: `session /edit`](#editing-a-session-session-edit)
       * [Viewing a session: `session /view`](#viewing-a-session--session-view)
       * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
-  * [Activity Management](#_activity-management_)
+  * [Activity Management](#activity-management)
     * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
     * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
     * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
     * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
     * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
-  * [Transaction Management](#_transaction-management_)
+  * [Transaction Management](#transaction-management)
     * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
-  * [Group Management](#_group-management_)
+  * [Group Management](#group-management)
     * [Creating a group: `group /create`](#creating-a-group-group-create)
     * [Deleting a group: `group /delete`](#deleting-a-group-group-delete)
     * [Viewing a group: `group /view`](#viewing-a-group-group-view)
     * [Listing all groups: `group /list`](#listing-all-groups-group-list)
-  * [Miscellaneous](#_miscellaneous_)
+  * [Miscellaneous](#miscellaneous)
     * [Listing all available commands: `help`](#listing-all-available-commands-help)
-    * [Exit](#exit)
+    * [Exit](#exiting-the-application-exit)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -549,8 +549,8 @@ You can also refer to the [Command Summary](#command-summary) for a summary of a
 
 <br>
 
-### Exit
-Exits the application.<br>
+### Exiting the application: `exit`
+Quits the application.<br>
 
 > Format: `exit`
  
