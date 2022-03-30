@@ -11,7 +11,7 @@ public class Deadline {
     private LocalDate date;
 
     public Deadline(String stringDate) {
-        if(Constants.DAYS_OF_THE_WEEK.contains(stringDate.toUpperCase())) {
+        if (Constants.DAYS_OF_THE_WEEK.contains(stringDate.toUpperCase())) {
             DayOfWeek dateEnum = DayOfWeek.valueOf(stringDate.toUpperCase());
             LocalDate today = LocalDate.now();
             DayOfWeek todayEnum = today.getDayOfWeek();

@@ -193,7 +193,7 @@ public class ProjectList {
     }
 
     /**
-     * Gets the project of a given name
+     * Gets the project of a given name.
      *
      * @param projectName name of the given project
      * @return target project with given name

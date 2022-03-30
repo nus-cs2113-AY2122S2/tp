@@ -16,15 +16,17 @@ public class AddDeadlineCommand extends Command {
     @Override
     public String execute(ProjectList projectList) {
         Project project = projectList.getProject(projectName);
-//        if (project == null) {
-//            return Response.addDeadlineUnsuccessfully();
-//        }
-//        try {
-//            project.setDeadline(deadline);
-//            return Response.addDeadlineSuccessfully(projectName, deadline);
-//        } catch (DateTimeParseException e) {
-//            return Response.dateFormatError();
-//        }
+        /*
+        if (project == null) {
+            return Response.addDeadlineUnsuccessfully();
+        }
+        try {
+            project.setDeadline(deadline);
+            return Response.addDeadlineSuccessfully(projectName, deadline);
+        } catch (DateTimeParseException e) {
+            return Response.dateFormatError();
+        }
+        */
         projectList.addDeadline(projectName, deadline);
         if (project == null) {
             return Response.addDeadlineUnsuccessfully();
