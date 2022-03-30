@@ -14,10 +14,10 @@ public class BorrowCommand extends Command {
     private final LocalDate endDate;
     private final String borrowerName;
 
-    public BorrowCommand(int itemIndex, String sDate, String eDate, String borrowerName) {
+    public BorrowCommand(int itemIndex, String startDateStr, String endDateStr, String borrowerName) {
         this.itemIndex = itemIndex;
-        this.startDate = LocalDate.parse(sDate);
-        this.endDate = LocalDate.parse(eDate);
+        this.startDate = LocalDate.parse(startDateStr);
+        this.endDate = LocalDate.parse(endDateStr);
         this.borrowerName = borrowerName;
     }
 
