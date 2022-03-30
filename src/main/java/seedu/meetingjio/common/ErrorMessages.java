@@ -202,4 +202,7 @@ public class ErrorMessages {
 
     public static final String ERROR_INCORRECT_INDEX = "Hi, please ensure that the index is in correct sequence\n"
             + "1, 2, 3, 4, ...";
+
+    public static final String ERROR_DUPLICATE_USER_LOAD_NAME = " this user has duplicate "
+            + "records in the MeetingJio.txt";
 }
