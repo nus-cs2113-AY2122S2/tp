@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.duke.storage.SatisfactionListFileManager;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -29,6 +32,18 @@ public class SatisfactionList {
 
     public int getSize() {
         return satisfactionList.size();
+    }
+
+    /**
+     * Returns a specific item within the item list based on the index passed in.
+     *
+     * @param index The index of the item within the list that would be returned.
+     * @return The item specified by the index passed into the function.
+     */
+    public Satisfaction getSatisfaction(int index) {
+        ArrayList<Satisfaction> satisfactionList = getSatisfactionList();
+        Satisfaction satisfaction = satisfactionList.get(index);
+        return satisfaction;
     }
 
     /**
@@ -82,6 +97,4 @@ public class SatisfactionList {
         double satisfactionAverage = (double) satisfactionSum / (double) getSize();
         return satisfactionAverage;
     }
-
-
 }
