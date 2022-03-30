@@ -450,9 +450,7 @@ Alright, the following workout has been removed:
 **(Steps 12 to 13)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list.
 <br><br>
-This completes the process of deleting an existing workout in WerkIt! 
-Click the user guide [here](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html#delete-a-workout-workout-delete)
-to view how you can run the `workout /delete` feature in the application.
+This completes the process of deleting an existing workout in WerkIt!
 
 ##### Design Considerations for Deleting Existing Workout
 ###### Rewrite All Workout To File
@@ -580,8 +578,6 @@ Alright, the following plan has been created:
 object's data into `plans.txt`, which is stored on the user's local filesystem.
 <br><br>
 This completes the process of adding a new plan to WerkIt!.
-Click the user guide [here](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html#create-a-plan-plan-new)
-to view how you can run the `plan /new` feature in the application.
 
 ---
 
@@ -630,8 +626,6 @@ To view each plan in detail, enter
 and the `PlanCommand` object returns to the `WerkIt` object.
 <br><br>
 This completes the process of displaying all plans in WerkIt!.
-Click the user guide [here](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html#list-a-plan-plan-list)
-to view how you can run the `plan /list` feature in the application.
 
 ---
 ### Schedule
