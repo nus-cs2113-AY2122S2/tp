@@ -33,7 +33,7 @@ public class AssignmentMap {
         }
     }
 
-    public void save() throws IOException {
+    public void save() throws IOException, HotelLiteManagerException {
         AssignmentListFileManager assignmentListFileManager = new AssignmentListFileManager();
         assignmentListFileManager.save(map);
     }
