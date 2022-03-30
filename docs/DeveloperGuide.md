@@ -128,6 +128,14 @@ The general workflow of the `Parser` component is as follows:
 ### Command Component
 ![Command Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/CommandComponent.drawio.png)
 <br>
+The `Command` component consist of the Command class and all the subclasses of the Command class
+(also referred to as XYZCommand collectively).
+* The subclasses include _data related commands_ such as `SessionJKLCommand`, `ActivityJKLCommand` and `GroupJKLCommand`,
+  each representing commands that work with `Session`, `Activity` and `Group` classes respectively
+  (JKL here refers to either `Create`, `Delete`, `Edit`, `List`, `View` or `Summary`).
+* The subclasses also include _utility commands_ such as `HelpCommand`, `ExitCommand` and `InvalidCommand`
+  (hereafter collectively referred to as UtilityCommand).
+
 
 ## Implementation
 
