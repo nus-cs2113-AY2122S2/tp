@@ -27,8 +27,8 @@ public class GetAvailableHousekeeperCommand extends Command {
             logger.log(Level.WARNING, "Empty Day.");
             throw new EmptyDayException();
         }
-        assert (searchDay >= MONDAY_INDICATE & searchDay <= SUNDAY_INDICATE) : "Input day incorrect range.";
         searchDay = checkCorrectDayGiven(commandStringWithoutCommand);
+        assert (searchDay >= MONDAY_INDICATE & searchDay <= SUNDAY_INDICATE) : "Input day incorrect range.";
     }
 
     /**
