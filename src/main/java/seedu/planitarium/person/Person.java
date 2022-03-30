@@ -278,4 +278,14 @@ public class Person {
     public void setIncomeDate(int incomeIndex, LocalDate initDate) {
         incomeList.setIncomeInitDate(incomeIndex, initDate);
     }
+
+    /**
+     * Sets the init date of the specified expenditure.
+     *
+     * @param expendIndex The index of the expenditure
+     * @param initDate The date to set to
+     */
+    public void setExpenditureDate(int expendIndex, LocalDate initDate) {
+        expenditureList.setExpenditureInitDate(expendIndex, initDate);
+    }
 }
