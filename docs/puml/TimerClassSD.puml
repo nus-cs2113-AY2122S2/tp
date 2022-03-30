@@ -3,7 +3,7 @@
 hide footbox
 participant User
 participant StudyCommand as ":StudyCommand"
-participant Parser as "<<class>>\nParser"
+participant Parser as "<<class>>\nTimerParser"
 participant TimerLogic as ":TimerLogic"
 participant Timer as ":Countdown"
 
