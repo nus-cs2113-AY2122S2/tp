@@ -19,6 +19,10 @@ public class PatientList {
         return patients.get(index - 1);
     }
 
+    public int getSize() {
+        return countPatient;
+    }
+
     public void addPatient(Patient patient) {
         patients.add(patient);
         countPatient++;

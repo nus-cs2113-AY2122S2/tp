@@ -1,5 +1,7 @@
 package tp;
 
+import tp.person.Patient;
+
 public class IHospital {
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
@@ -11,15 +13,20 @@ public class IHospital {
     public IHospital() {
     }
 
-    public void run() {
+    public void run() throws IHospitalException {
         ui.sayHello();
         String fullCommand = Parser.getCommand();
-        Storage storage;
+        DoctorStorage doctorStorage = new DoctorStorage();
+        PatientStorage patientStorage = new PatientStorage();
+        AppointmentStorage appointmentStorage = new AppointmentStorage();
+        doctors = doctorStorage.loadDoctorList();
+        patients = patientStorage.loadPatientList();
+        appointments = appointmentStorage.loadAppointmentList();
 
         while (!fullCommand.equals("bye")) {
             try {
                 Command c = parser.parse(fullCommand);
-                // System.out.println(c.execute(doctors, patients, appointments, ui, storage));
+                c.execute(doctors, patients, appointments, ui, doctorStorage, patientStorage, appointmentStorage);
                 fullCommand = Parser.getCommand();
             } catch (IHospitalException e) {
                 System.out.println(e.getMessage());
@@ -29,7 +36,7 @@ public class IHospital {
         ui.sayGoodbye();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IHospitalException {
         new IHospital().run();
     }
 
