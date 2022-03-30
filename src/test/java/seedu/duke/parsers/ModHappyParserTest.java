@@ -23,18 +23,17 @@ import seedu.duke.commands.OptionCommand;
 import seedu.duke.commands.ResetCommand;
 import seedu.duke.commands.SaveCommand;
 import seedu.duke.commands.TagCommand;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.AdditionalParameterException;
+import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.InvalidInputException;
+import seedu.duke.exceptions.InvalidCompulsoryParameterException;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.data.Module;
 import seedu.duke.data.Task;
 
 public class ModHappyParserTest {
     private ModHappyParser parser;
 
-    private void testParseCommand_expectParseException(String testString) {
-        assertThrows(GeneralParseException.class, () -> {
-            parser.parseCommand(testString);
-        });
-    }
 
     private void testParseCommand_expectAdditionalParameterException(String testString) {
         assertThrows(AdditionalParameterException.class, () -> {
