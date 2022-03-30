@@ -208,10 +208,11 @@ Examples of usage:
 Displays details about a session.<br>
 
 >Format: `session /view /sid [SESSION_ID]`
->
->
+><br>
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+
+<br>
 
 > **💡 Note:**
 >- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be viewed.
