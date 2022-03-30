@@ -496,7 +496,7 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 ### Creating a group: `group /create`
 Creates a new group so that you do not to always enter the same persons' particulars every session.
 
->Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
+> Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 >
 >* `[GROUP_NAME]` refers to the name of the group.
 >    * The group name is **case-insensitive**.
@@ -519,27 +519,29 @@ Creates a new group so that you do not to always enter the same persons' particu
   <br>
 
 ### Deleting a group: `group /delete`
-> Deletes an existing group.<br>
+Deletes an existing group so that you can remove groups that you do not need.
 
-Format: `group /delete /gid [GROUP_ID]`
+> Format: `group /delete /gid [GROUP_ID]`
+>
+>* `[GROUP_ID]` refers to the unique identifier of the group.
+>    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
 
-* `[GROUP_ID]` refers to the unique identifier of the group.
-    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+<br>
 
 > **💡 Note:**
 >- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
-
+>
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the group would be immediately deleted.
 
 <br>
 
-Example of usage:
-1. Removes an existing group with a unique identifier of 1.
-    - `group /delete /gid 1` <br>
-      ![Group delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupDeleteCommand.png)
-<br>
-<br>
+**Example**:
+- Removes an existing group with a unique identifier of 1.
+  `group /delete /gid 1` <br>
+  ![Group delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupDeleteCommand.png)
+  <br>
+  <br>
 
 ### Editing a group: `group /edit`
 
@@ -563,10 +565,10 @@ Displays details about a group so that you can review the group's details.<br>
 
 **Example**:
 - Views a group with a unique identifier of 1.<br>
-`group /view /gid 1` <br>
-![Group view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupViewCommand.png)
-<br>     
-<br>
+  `group /view /gid 1` <br>
+  ![Group view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupViewCommand.png)
+  <br>     
+  <br>
 
 ### Listing all groups: `group /list`
 Displays all existing groups so that you can have an overview of previously created groups.
@@ -578,10 +580,10 @@ However, deleted groups will not be listed.
 
 **Example**:
 - Lists all existing groups.<br>
-`group /list`
-![Group list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupListCommand.png)
-<br>
-<br>
+  `group /list`
+  ![Group list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupListCommand.png)
+  <br>
+  <br>
 
 <hr>
 
