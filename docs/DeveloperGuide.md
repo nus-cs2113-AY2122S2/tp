@@ -97,6 +97,8 @@ It offers methods to print application output to and read user input from these 
 As TextUI handles all input and output streams, these streams can be changed without affecting the rest of the program.
 
 ### Storage Component
+![Storage Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/StorageComponent.drawio.png)
+<br>
 
 ### Parser Component
 ![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)

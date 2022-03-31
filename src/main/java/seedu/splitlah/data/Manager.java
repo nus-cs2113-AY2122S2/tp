@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class Manager {
     
-    private TextUI ui;
+    private final TextUI ui;
     private Profile profile;
     private Storage storage;
     private boolean isUsingStorage = false;
@@ -65,7 +65,8 @@ public class Manager {
      */
     private void loadFileSave() {
         try {
-            storage.loadStorage();
+            profile = storage.loadStorage();
+            return;
         } catch (IOException ioException) {
             logger.log(Level.FINEST, Message.LOGGER_STORAGE_FILE_ERROR);
             ui.printlnMessage(Message.ERROR_STORAGE_FILE_NOT_FOUND);
@@ -73,7 +74,7 @@ public class Manager {
             logger.log(Level.FINEST,Message.LOGGER_STORAGE_CLASS_NOT_FOUND);
             ui.printlnMessage(Message.ERROR_STORAGE_CLASS_EXCEPTION_ISSUE);
         }
-        profile = storage.getProfile();
+        profile = new Profile();
     }
 
     /**
