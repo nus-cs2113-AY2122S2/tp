@@ -230,7 +230,7 @@ type of action to be executed, in this case, list. It will then list the exercis
 
 The following sequence diagram illustrates how the `exercise /list` command works in greater detail:
 
-![List Exercise Sequence Diagram](uml/sequenceDiagrams/images/viewExercise.png)
+![List Exercise Sequence Diagram](uml/sequenceDiagrams/exercises/images/viewExercise.png)
 
 ---
 
@@ -248,7 +248,7 @@ The following sequence diagram illustrates how the `workout /new` command works 
 > have been removed from the sequence diagram. Some reference frames will be elaborated further 
 > down this section. Reference frames that will not be elaborated on will be made known.
 
-![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/CreateWorkout.png)
+![Create Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/CreateWorkout.png)
 
 (Steps 1 to 3) The program waits for the user to enter a new command, which in this case is the `workout /new` command,
 and returns the user input in a `String` object to `WerkIt#startContinuousUserPrompt()`. 
@@ -258,7 +258,7 @@ to a `Command` object on return to `WerkIt#startContinuousUserPrompt()`. In Step
 and because this is a `workout /new` command, the method will call `WorkoutList#createAndAddWorkout()`.
 
 The following 2 sequence diagrams are the detailed procedures for Step 7's `WorkoutList#createAndAddWorkout()`:
-![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/images/CreateAndAddWorkout-Part1.png)
+![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout-Part1.png)
 
 > Note: To improve the diagram's readability, logging-related and input-checking method calls in 
 > `WorkoutList#createAndAddWorkout()` have been omitted. 
@@ -286,7 +286,7 @@ If any of the three requirements are not met, either an `InvalidExerciseExceptio
 Again, note that the actual method calls to check for the validity of the user input are not shown in the sequence
 diagram for the same reason as mentioned above.
 
-![creatAndAddWorkout() Sequence Diagram (Part 2)](uml/sequenceDiagrams/images/CreateAndAddWorkout-Part2.png)
+![creatAndAddWorkout() Sequence Diagram (Part 2)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout-Part2.png)
 
 If the above checks pass, Step 7.7 will create the new `Workout` object with the user-specified exercise name and
 repetition value. Once that is done, a key of the `Workout` object will be generated in Step 7.9 (see the 
@@ -402,7 +402,7 @@ The following sequence diagram illustrates how the `workout /delete` command wor
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
 
-![Delete Workout Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkout-Part1.png)
+![Delete Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/deleteWorkout-Part1.png)
 <br><br>
 
 **(Steps 1 to 3)** The program waits for the user's input, which in this case, is the `workout /delete <workout index number in workout list>` command. 
@@ -418,7 +418,7 @@ was supplied (`workout /delete <workout index number in workout list>`). It then
 in order to perform the deletion of the workout. <br><br>
 The following sequence diagram is the detailed procedure for Step 7's `WorkoutList#deleteWorkout(userArguments)`:
 <br><br>
-![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkout-Part2.png)
+![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/workouts/images/deleteWorkout-Part2.png)
 
 <br><br>
 **(Steps 7.1 to 7.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
@@ -509,7 +509,7 @@ The following sequence diagram illustrates how the `plan /new` command works in 
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
 
-![Create Plan Sequence Diagram](uml/sequenceDiagrams/images/createPlan-Part1.png)
+![Create Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part1.png)
 <br><br>
 
 **(Steps 1 to 3)** The program waits for the user's input, which in this case, is the `plan /new <plan name> /workouts <workout index numbers in workout list separated by comma>` command.
@@ -525,7 +525,7 @@ was supplied (`plan /new <plan name> /workouts <workout index numbers in workout
 It then calls the appropriate method, `PlanList#createAndAddPlan(userArgument)`, in order to create a new plan. <br><br>
 The following sequence diagram is the detailed procedure for Step 7's `PlanList#createAndAddPlan(userArgument)`:
 <br><br>
-![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/images/createPlan-Part2.png)
+![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
 
 <br><br>
 **(Steps 7.1 to 7.2)** Before calling the `PlanList#checkPlanNameValidity(userPlanNameInput, className)` method,
@@ -593,7 +593,7 @@ The following sequence diagram illustrates how the `plan /list` command works in
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
 
-![List Plan Sequence Diagram](uml/sequenceDiagrams/images/listPlan.png)
+![List Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/listPlan.png)
 <br><br>
 **(Steps 1 to 3)** The program waits for the user's input, which in this case, is the `plan /list` command.
 Once the command is entered, the UI class will return the user input in a `String` object
@@ -681,7 +681,7 @@ The following sequence illustrates how the schedule /update command works in gre
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
 
-![Update Schedule Sequence Diagram](uml/sequenceDiagrams/images/updateSchedule.png)
+![Update Schedule Sequence Diagram](uml/sequenceDiagrams/schedule/images/updateSchedule.png)
 <br><br>
 
 (Steps 1 to 3) The program waits for the user's input, which in this case,
@@ -697,7 +697,7 @@ This `ScheduleCommand` object is upcasted to a `Command` object on return to the
 
 Steps 7 and 8 are explained in greater details in the following sequence diagram:
 
-![updateScheduleDetails](uml/sequenceDiagrams/images/updateScheduleDetails.png)
+![updateScheduleDetails](uml/sequenceDiagrams/schedule/images/updateScheduleDetails.png)
 
 (Steps 7.1 to 7.2) The DayList#updateDay method will be called to update/add a plan for a particular day in the schedule 
 stated by the user. It will fist call the String#split method to separate out the `userArgument` given by the user. Upon, 
@@ -769,7 +769,7 @@ The following sequence illustrates how the `schedule /list` command works in gre
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
 
-![ListSchedule](uml/sequenceDiagrams/images/listSchedule.png)
+![ListSchedule](uml/sequenceDiagrams/schedule/images/listSchedule.png)
 <br><br>
 
 (Steps 1 to 3) The program waits for the user's input, which in this case,
@@ -831,7 +831,7 @@ The following sequence illustrates how the `schedule /clear` command works in gr
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
 
-![ClearSchedule](uml/sequenceDiagrams/images/clearSchedule.png) 
+![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearSchedule.png) 
 <br><br>
 
 (Steps 1 to 3) The program waits for the user's input, which in this case,
@@ -883,7 +883,7 @@ The following sequence illustrates how the `schedule /clearall` command works in
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
 
-![ClearSchedule](uml/sequenceDiagrams/images/clearAllSchedule.png)
+![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearAllSchedule.png)
 <br><br>
 
 (Steps 1 to 3) The program waits for the user's input, which in this case,
@@ -934,7 +934,7 @@ correctly.
 
 The following sequence diagram illustrates how the `search /exercise` command works in greater detail:
 
-![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchExercise.png)
+![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchExercise.png)
 
 #### Search For Workout
 Format: `search /workout <keywords>`
@@ -950,7 +950,7 @@ correctly.
 
 The following sequence diagram illustrates how the `search /workout` command works in greater detail:
 
-![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchWorkout.png)
+![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchWorkout.png)
 
 #### Search For Plan
 Format: `search /plan <keywords>`
@@ -966,7 +966,7 @@ correctly.
 
 The following sequence diagram illustrates how the `search /plan` command works in greater detail:
 
-![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchPlan.png)
+![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchPlan.png)
 
 #### Search For All
 Format: `search /all <keywords>`
@@ -981,7 +981,7 @@ will either be a list of matching names of exercise, workout and plan or not fou
 
 The following sequence diagram illustrates how the `search /all` command works in greater detail:
 
-![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchAll.png)
+![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
 
 ---
 
