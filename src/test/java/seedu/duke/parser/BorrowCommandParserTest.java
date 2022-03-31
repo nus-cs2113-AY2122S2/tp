@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.commands.BorrowCommand;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.stubs.ParserStubs;
 
