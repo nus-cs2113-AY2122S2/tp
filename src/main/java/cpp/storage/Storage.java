@@ -103,6 +103,10 @@ public class Storage {
                 f.mkdirs();
             }
             Files.createFile(Paths.get("./src/data/projectList.txt"));
+            File file = new File("./src/data/projectList.txt");
+            file.setWritable(true, false);
+            file.setReadable(true, false);
+            file.setExecutable(true, false);
             //System.out.println("File created successfully!");
         } catch (IOException e) {
             //System.out.println("File created unsuccessfully!");
