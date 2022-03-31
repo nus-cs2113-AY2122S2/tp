@@ -27,7 +27,8 @@ public class ListCurrentBorrowingsCommand extends Command {
                 ArrayList<BorrowRecord> borrowRecords = borrowedItem.getBorrowRecords();
 
                 for (BorrowRecord record : borrowRecords) {
-                    if (record.getBorrowStatus() == BorrowStatus.PRESENT && record.getBorrowerName().equals(name)) {
+                    if (record.getBorrowStatus() == BorrowStatus.PRESENT
+                            && record.getBorrowerName().equals(name.get())) {
                         ui.showMessages("Name of Item: " + borrowedItem.getName(),
                                 "Name of Borrower: " + record.getBorrowerName(),
                                 "Borrow Duration: " + record.getBorrowDuration() + "\n");
@@ -40,7 +41,7 @@ public class ListCurrentBorrowingsCommand extends Command {
                 ArrayList<BorrowRecord> borrowRecords = borrowedItem.getBorrowRecords();
 
                 for (BorrowRecord record : borrowRecords) {
-                    if (record.getBorrowStatus() == BorrowStatus.FUTURE) {
+                    if (record.getBorrowStatus() == BorrowStatus.PRESENT) {
                         ui.showMessages("Name of Item: " + borrowedItem.getName(),
                                 "Name of Borrower: " + record.getBorrowerName(),
                                 "Borrow Duration: " + record.getBorrowDuration() + "\n");
