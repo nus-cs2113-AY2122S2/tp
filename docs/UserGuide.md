@@ -9,21 +9,11 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `MeetingJio` from [here](https://github.com/AY2122S2-CS2113-T11-3/tp/releases/tag/v1.0).
-3. Run `java -jar MeetingJio.jar` at the terminal.
-4. Type the command in the terminal and press Enter to execute it.
-5. Refer to the *Features* below for the details of the commands.
+4. Run `java -jar MeetingJio.jar` at the terminal.
+5. Type the command in the terminal and press Enter to execute it.
+6. Refer to the *Features* below for the details of the commands.
 
 ## Features
-
-### Add Lessons to your own timetable and others timetable
-
-### See slots for possible meetings based on duration
-s
-### Book meetings based on availability of all users
-
-### View everyone's timetable and availability
-
-### Save your timetable details to storage and retrieve accordingly
 
 ### Viewing help: `help`
 Shows a list of commands available.
