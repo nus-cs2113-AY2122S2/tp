@@ -28,6 +28,9 @@ public class BorrowCommandTest {
         c.execute(itemList, ui);
     }
 
+    /**
+     * Test if a BorrowCommand contains the same attributes as another BorrowCommand.
+     */
     @Test
     public void equals_borrowCommand() {
         LocalDate startDate = LocalDate.parse("2022-03-21");
