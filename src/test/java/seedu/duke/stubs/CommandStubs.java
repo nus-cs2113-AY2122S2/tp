@@ -38,13 +38,23 @@ public class CommandStubs {
     public static final ItemList EDIT_ALL_LIST_BEFORE = generateItemList(ITEM_MARKER);
     public static final ItemList EDIT_ALL_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_WHITEBOARD);
 
-    public static final ItemList TEST_ITEM_LIST = generateItemList(ITEM_PAPER_A4_10, ITEM_PAPER_A5_10, ITEM_MARKER,
-            ITEM_WHITEBOARD);
+    public static final ItemList TEST_ITEM_LIST = generateItemList(ITEM_MARKER, ITEM_PENCIL, ITEM_WHITEBOARD);
+    public static final ItemList TEST_ITEM_LIST_WITH_RECORDS = generateItemListWithRecords(TEST_ITEM_LIST);
 
     private static ItemList generateItemList(Item... items) {
         ArrayList<Item> list = new ArrayList<>();
         Collections.addAll(list, items);
         return new ItemList(list);
+    }
+
+    private static ItemList generateItemListWithRecords(ItemList itemList) {
+        itemList.addBorrowRecord(0, BorrowRecordStubs.PRESENTRECORD_A);
+        itemList.addBorrowRecord(0, BorrowRecordStubs.PRESENTRECORD_B);
+        itemList.addBorrowRecord(1, BorrowRecordStubs.PASTRECORD_A);
+        itemList.addBorrowRecord(1, BorrowRecordStubs.PASTRECORD_B);
+        itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_A);
+        itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_B);
+        return itemList;
     }
 
     private static ItemList generateImmutableItemList(Item... items) {
