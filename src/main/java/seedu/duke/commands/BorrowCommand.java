@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.BorrowStatus;
+import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 import java.time.LocalDate;
@@ -44,7 +45,12 @@ public class BorrowCommand extends Command {
     @Override
     public void execute(ItemList itemList, Ui ui) {
         BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName, borrowStatus);
-        itemList.addBorrowRecord(itemIndex, newRecord);
+        Item item = itemList.addBorrowRecord(itemIndex, newRecord);
+        ui.showMessages("Item has been successfully borrowed!",
+                "Name of Item: " + item.getName(),
+                "Name of Borrower: " + borrowerName,
+                "BorrowDuration: " + startDate + " to " + endDate,
+                "Borrow Status: " + borrowStatus);
     }
 
     @Override
