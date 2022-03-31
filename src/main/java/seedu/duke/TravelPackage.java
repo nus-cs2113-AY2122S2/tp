@@ -23,8 +23,7 @@ public class TravelPackage {
     private int numParticipants;
     private Reservations reservationList;
 
-
-    public TravelPackage(String name,int id, String startDate, String endDate,
+    public TravelPackage(String name, int id, String startDate, String endDate,
             String hotel, double price, String country, int maxParticipants) {
         this.name = name;
         this.id = id;
@@ -92,19 +91,31 @@ public class TravelPackage {
                 + this.hotel;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
 
+        TravelPackage cur = (TravelPackage) obj;
 
+        return cur.getID() == this.getID() && cur.getName().equals(this.getName())
+                && cur.getStartDate().equals(this.getStartDate())
+                && cur.getEndDate().equals(this.getEndDate()) && cur.getHotel().equals(this.getHotel())
+                && cur.getPrice() == this.getPrice() &&
+                cur.getCountry().equals(this.getCountry()) && cur.getMaxParticipants() == this.getMaxParticipants();
 
-//    public String toSave() {
-//        return name + " | " + Integer.toString(nextId) + " | " + Integer.toString(id) + " | " + // startDate, endDate
-//                hotel + " | " + Double.toString(price) + " | " + country + " | " + Integer.toString(maxParticipants)
-//                + " | " + Integer.toString(numParticipants);
-//    }
+    }
 
-
-
-
-
-
+    // public String toSave() {
+    // return name + " | " + Integer.toString(nextId) + " | " + Integer.toString(id)
+    // + " | " + // startDate, endDate
+    // hotel + " | " + Double.toString(price) + " | " + country + " | " +
+    // Integer.toString(maxParticipants)
+    // + " | " + Integer.toString(numParticipants);
+    // }
 
 }
