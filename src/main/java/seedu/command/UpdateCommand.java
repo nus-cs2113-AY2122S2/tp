@@ -10,7 +10,9 @@ public class UpdateCommand extends ModificationCommand {
     public static final String COMMAND_WORD = "update";
     public static final String COMMAND_DESCRIPTION = ": Updates the equipment with the specified serial number. "
             + System.lineSeparator()
-            + "Parameters: s/SERIAL_NUMBER(required) n/ITEM_NAME t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE"
+            + "Parameters in [square brackets] are optional."
+            + System.lineSeparator()
+            + "Parameters: s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]"
             + System.lineSeparator()
             + "Example: "
             + "update s/SM57-1 n/SpeakerC c/2510 pd/2022-08-21";

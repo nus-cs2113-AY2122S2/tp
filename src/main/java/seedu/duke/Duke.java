@@ -51,6 +51,7 @@ public class Duke {
 
     private CommandResult executeCommand(Command command) {
         command.setEquipmentManager(equipmentInventory);
+        command.setStorage(storage);
         CommandResult result = command.execute();
 
         return result;

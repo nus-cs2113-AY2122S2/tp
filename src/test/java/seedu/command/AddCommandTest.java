@@ -7,6 +7,7 @@ import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentManager;
 import seedu.equipment.EquipmentType;
+import seedu.parser.IncompleteCommandException;
 import seedu.parser.Parser;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class AddCommandTest {
@@ -49,36 +51,26 @@ class AddCommandTest {
 
     @Test
     void execute_incorrectCostFormat_exceptionThrown() {
-        addCommand = new AddCommand(new ArrayList<>(
+        assertThrows(NumberFormatException.class, () -> new AddCommand(new ArrayList<>(
                 Arrays.asList("n/Speaker B",
                         "s/S1404115ASF",
                         "t/SPEAKER",
                         "c/$1000",
                         "pf/Loud Technologies",
                         "pd/2022-02-23")
-        ));
-
-        CommandResult expectedResult = new CommandResult("Please enter numbers only for cost and omit symbols");
-        CommandResult actualResult = addCommand.execute();
-        assertEquals(expectedResult, actualResult);
+        )));
     }
 
     @Test
     void execute_incorrectEnumType_exceptionThrown() {
-        addCommand = new AddCommand(new ArrayList<>(
+        assertThrows(IllegalArgumentException.class, () -> new AddCommand(new ArrayList<>(
                 Arrays.asList("n/Speaker B",
                         "s/S1404115ASF",
                         "t/SPEAKERS",
                         "c/1000",
                         "pf/Loud Technologies",
                         "pd/2022-02-23")
-        ));
-        addCommand.setEquipmentManager(new EquipmentManager());
-        EquipmentManager equipmentManager = addCommand.equipmentManager;
-
-        CommandResult expectedResult = new CommandResult(ModificationCommand.INVALID_TYPE_MESSAGE);
-        CommandResult actualResult = addCommand.execute();
-        assertEquals(expectedResult, actualResult);
+        )));
     }
 
     @Test

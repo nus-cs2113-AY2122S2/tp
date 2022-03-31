@@ -44,7 +44,7 @@ class UpdateCommandTest {
                 + System.lineSeparator()
                 + "New name: Speaker C"
                 + System.lineSeparator()
-                + "New cost: 2000"
+                + "New cost: 2000.0"
                 + System.lineSeparator()
                 + "New purchase date: 2022-01-26");
 
@@ -55,9 +55,9 @@ class UpdateCommandTest {
 
     @Test
     void generateUpdatePairs_nonNullUpdates_success() {
-        ArrayList<Pair<String, String>> expectedResult = new ArrayList<>();
+        ArrayList<Pair<String, ?>> expectedResult = new ArrayList<>();
         expectedResult.add(new Pair<>("itemName", "Speaker C"));
-        expectedResult.add(new Pair<>("cost", "2000"));
+        expectedResult.add(new Pair<>("cost", 2000.0));
         expectedResult.add(new Pair<>("purchasedDate", "2022-01-26"));
 
         ArrayList<Pair<String, ?>> actualResult = updateCommand.generateUpdatePairs();

@@ -1,18 +1,18 @@
 # Table of Content
 
 - [Acknowledgements](#acknowledgements)
-- [Design and Implementation](#**Design-and-Implementation**)
-  - [Architecture](#Architecture)
-  - [Parser](#Parser)
-  - [Update feature](#Update-feature)
-  - [EquipmentManager](#EquipmentManager)
-- [Product scope](#Product scope)
-  - [Target user profile](#Target-user-profile)
-  - [Value proposition](#Value-proposition)
-- [User stories](#User-Stories)
-- [NonFunctional requirements](#NonFunctional Requirements)
-- [Glossary](#Glossary)
-- [Instructions for manual testing](#Instructions-for-manual-testing)
+- [Design and Implementation](#design-and-implementation)
+  - [Architecture](#architecture)
+  - [Parser](#parser)
+  - [Update feature](#update-feature)
+  - [EquipmentManager](#equipmentmanager)
+- [Product scope](#product-scope)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+- [User stories](#user-stories)
+- [NonFunctional requirements](#nonfunctional-requirements)
+- [Glossary](#glossary)
+- [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
