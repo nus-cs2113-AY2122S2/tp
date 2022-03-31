@@ -308,6 +308,7 @@ public class ProjectList {
             Project project = projectList.get(index);
             project.printDetails();
         }
+        listLanguages(title);
         System.out.println(Constants.SEPARATOR);
     }
 
