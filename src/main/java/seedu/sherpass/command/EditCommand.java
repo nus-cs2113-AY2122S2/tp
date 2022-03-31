@@ -10,6 +10,7 @@ import seedu.sherpass.util.Ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
@@ -54,13 +55,24 @@ public class EditCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            String taskToEdit = taskList.getTask(editIndex).toString();
+            Task taskToEdit = taskList.getTask(editIndex);
             String repeated = "";
+            long startDifferenceInSeconds = 0;
+            long endDifferenceInSeconds = 0;
+            if (doOnStartDateTime != null && doOnEndDateTime != null) {
+                startDifferenceInSeconds = taskToEdit.getDoOnStartDateTime().until(doOnStartDateTime,
+                        ChronoUnit.SECONDS);
+                endDifferenceInSeconds = taskToEdit.getDoOnEndDateTime().until(doOnEndDateTime,
+                        ChronoUnit.SECONDS);
+            }
+
             if (isRepeating) {
-                taskList.editRepeatedTasks(editIndex, taskDescription, doOnStartDateTime, doOnEndDateTime);
+                taskList.editRepeatedTasks(editIndex, taskDescription,
+                        startDifferenceInSeconds, endDifferenceInSeconds);
                 repeated = " repeated";
             } else {
-                taskList.editSingleTaskContent(editIndex, taskDescription, doOnStartDateTime, doOnEndDateTime, byDate);
+                taskList.editSingleTaskContent(editIndex, taskDescription,
+                        startDifferenceInSeconds, endDifferenceInSeconds, byDate);
             }
             ui.showToUser("Okay! I've edited this" + repeated + " task as such:\n\t" + taskToEdit);
             storage.writeSaveData(taskList);

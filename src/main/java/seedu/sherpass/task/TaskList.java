@@ -7,6 +7,8 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -148,8 +150,8 @@ public class TaskList {
     }
 
     public Task updateTask(Task taskToUpdate, String taskDescription,
-                           LocalDateTime currentDoOnStartDateTime,
-                           LocalDateTime currentDoOnEndDateTime,
+                           long startDifferenceInSeconds,
+                           long endDifferenceInSeconds,
                            LocalDateTime byDate) {
         if (!taskDescription.isBlank()) {
             taskToUpdate.setTaskDescription(taskDescription);
@@ -157,16 +159,22 @@ public class TaskList {
         if (byDate != null) {
             taskToUpdate.setByDate(byDate);
         }
-        if (currentDoOnStartDateTime != null) {
-            taskToUpdate.setDoOnStartDateTime(currentDoOnStartDateTime);
-            taskToUpdate.setDoOnEndDateTime(currentDoOnEndDateTime);
+        if (startDifferenceInSeconds != 0) {
+            taskToUpdate.setDoOnStartDateTime(taskToUpdate
+                    .getDoOnStartDateTime()
+                    .plusSeconds(startDifferenceInSeconds));
+        }
+        if (endDifferenceInSeconds != 0) {
+            taskToUpdate.setDoOnEndDateTime(taskToUpdate
+                    .getDoOnEndDateTime()
+                    .plusSeconds(endDifferenceInSeconds));
         }
         return taskToUpdate;
     }
 
     public void editSingleTaskContent(int editIndex, String taskDescription,
-                                      LocalDateTime currentDoOnStartDateTime,
-                                      LocalDateTime currentDoOnEndDateTime,
+                                      long startDifferenceInSeconds,
+                                      long endDifferenceInSeconds,
                                       LocalDateTime byDate) throws TimeClashException {
         Task taskToEdit = tasks.get(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
@@ -174,7 +182,7 @@ public class TaskList {
 
         int newIdentifier = generateIdentifier();
         Task updatedTask = updateTask(taskToEdit, taskDescription,
-                currentDoOnStartDateTime, currentDoOnEndDateTime, byDate);
+                startDifferenceInSeconds, endDifferenceInSeconds, byDate);
         updatedTask.setIdentifier(newIdentifier);
         updatedTask.setRepeatFrequency(Frequency.SINGLE);
 
@@ -185,20 +193,19 @@ public class TaskList {
     }
 
     public void editRepeatedTasks(int editIndex, String taskDescription,
-                                  LocalDateTime newDoOnStartDateTime,
-                                  LocalDateTime newDoOnEndDateTime) throws TimeClashException {
+                                  long startDifferenceInSeconds,
+                                  long endDifferenceInSeconds) throws TimeClashException {
         ArrayList<Task> affectedTasks = getAffectedTasks(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
         editedList.removeAll(affectedTasks);
 
         int newIdentifier = generateIdentifier();
         for (Task t : affectedTasks) {
-            Task newTask = updateTask(t, taskDescription, newDoOnStartDateTime, newDoOnEndDateTime, null);
+            Task newTask = updateTask(t, taskDescription,
+                    startDifferenceInSeconds, endDifferenceInSeconds, null);
             newTask.setIdentifier(newIdentifier);
             checkDateTimeClash(editedList, newTask);
             editedList.add(newTask);
-            newDoOnStartDateTime = incrementDate(newDoOnStartDateTime, t.getRepeatFrequency());
-            newDoOnEndDateTime = incrementDate(newDoOnEndDateTime, t.getRepeatFrequency());
         }
 
         tasks = editedList;
