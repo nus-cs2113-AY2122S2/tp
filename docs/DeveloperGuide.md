@@ -99,6 +99,21 @@ As TextUI handles all input and output streams, these streams can be changed wit
 ### Storage Component
 ![Storage Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/StorageComponent.drawio.png)
 <br>
+The `Storage` class is initialized by the `Manager` class when the application starts. 
+Upon initialization, the `Storage` class will check if there were pre-existing data stored by the user. 
+* If a data file is found, the `Storage` class would retrieve the data and save it 
+to the `Profile` object that is managed by the `Manager` class in the current run of SplitLah. 
+* Else a new data file is created and an empty `Profile` instance is created instead.
+
+Not all commands in SplitLah would trigger a file save, only commands that update attributes of the `Profile` object would trigger a file save.
+These commands are _create_, _delete_, and _edit_ commands. The command would execute the main 
+task of the command and `Manager#saveProfile` is called at the end to save the changes.
+* For instance, the user enters `group /create /n Highschool Friends /pl Alice Bob`, SplitLah would recognize this as 
+a `GroupCreateCommand` and proceed to create the new group. As this updates the list of groups stored in the `Profile` object,
+  `Manager#saveProfile` is called to save the newly created group into the save file.
+
+As all classes under the `Profile` component implement the `Serializable` class, the `Storage` class can write 
+into the save file without having to pre-process the data.
 
 ### Parser Component
 ![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)
