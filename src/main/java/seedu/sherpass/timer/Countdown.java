@@ -78,7 +78,8 @@ public class Countdown extends Timer  {
             jframe.setVisible(false);
             assert timeLeft <= NO_TIME_LEFT;
             isTimerRunning = false;
-            ui.showToUser("Time is up!\n "
+            TimerLogic.resetIsTimerInitialised();
+            ui.showToUser("Time is up!\n"
                     + "Would you like to start another timer, mark a task as done, or leave the study session?");
             Timetable.showTodaySchedule(taskList, ui);
             ui.showLine();
