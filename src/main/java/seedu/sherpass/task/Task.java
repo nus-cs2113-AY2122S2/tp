@@ -29,6 +29,26 @@ public class Task {
      */
     public Task(int identifier, String description, LocalDateTime byDate,
                 LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime,
+                Frequency repeatFrequency) {
+        this.identifier = identifier;
+        this.description = description;
+        this.byDate = byDate;
+        this.doOnStartDateTime = doOnStartDateTime;
+        this.doOnEndDateTime = doOnEndDateTime;
+        this.isDone = false;
+        this.repeatFrequency = repeatFrequency;
+        this.index = 0;
+    }
+
+    /**
+     * Creates a constructor for the parent class of tasks, 'Task'.
+     * Accepts only task description
+     *
+     * @param identifier Identity number of a repeated task.
+     * @param description Description of task.
+     */
+    public Task(int identifier, String description, LocalDateTime byDate,
+                LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime,
                 Frequency repeatFrequency, int index) {
         this.identifier = identifier;
         this.description = description;
