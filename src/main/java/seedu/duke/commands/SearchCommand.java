@@ -22,7 +22,6 @@ public class SearchCommand extends Command {
 
     private final Optional<String> name;
     private final Optional<String> description;
-    private List<Item> results;
 
     /**
      * Constructs a SearchCommand.
@@ -83,14 +82,6 @@ public class SearchCommand extends Command {
         String lowerStr1 = str1.toLowerCase();
         String lowerStr2 = str2.toLowerCase();
         return lowerStr1.contains(lowerStr2);
-    }
-
-    /**
-     * Get an immutable copy of search results.
-     * @return an immutable list representing the result of the SearchCommand
-     */
-    public List<Item> getResults() {
-        return List.copyOf(this.results);
     }
 
 }

@@ -1,14 +1,12 @@
 package seedu.duke.data;
 
-import seedu.duke.commands.EditCommand;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class ItemList {
 
-    private ArrayList<Item> itemArrayList;
+    private List<Item> itemArrayList;
 
-    public ItemList(ArrayList<Item> itemList) {
+    public ItemList(List<Item> itemList) {
         this.itemArrayList = itemList;
     }
 
@@ -32,7 +30,7 @@ public class ItemList {
         return itemArrayList.set(index, item);
     }
 
-    public ArrayList<Item> getItemArrayList() {
+    public List<Item> getItemArrayList() {
         return itemArrayList;
     }
 
