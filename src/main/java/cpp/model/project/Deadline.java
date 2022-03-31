@@ -16,9 +16,9 @@ public class Deadline {
             LocalDate today = LocalDate.now();
             DayOfWeek todayEnum = today.getDayOfWeek();
             int daysApart = dateEnum.getValue() - todayEnum.getValue();
-            daysApart = daysApart <= 0 ? Constants.DAYS_OF_THE_WEEK.size() - daysApart : daysApart;
-            today.plusDays(daysApart);
-            date = today;
+            daysApart = daysApart <= 0 ? Constants.DAYS_OF_THE_WEEK.size() + daysApart : daysApart;
+            date = today.plusDays(daysApart);
+            System.out.println();
         } else {
             try {
                 date = LocalDate.parse(stringDate);
