@@ -63,7 +63,7 @@ Format: `deleteproject [project_name]`
 #### Example of usage
 `deleteproject project1`
 
-### Example of output
+#### Example of output
 ```project1 deleted.```
 
 ---
