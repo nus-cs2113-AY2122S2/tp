@@ -90,7 +90,7 @@ public class Parser {
             }
         case CheckCommand.COMMAND_WORD:
             try {
-                args = prepareView(commandAndArgument.get(1));
+                args = prepareCheck(commandAndArgument.get(1));
                 return new CheckCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(CheckCommand.COMMAND_WORD + CheckCommand.COMMAND_DESCRIPTION);
@@ -228,7 +228,7 @@ public class Parser {
      * @return ArrayList of one element (assumes rest of string is item name)
      * @throws IncompleteCommandException if no match found
      */
-    protected ArrayList<String> prepareView(String args) throws IncompleteCommandException {
+    protected ArrayList<String> prepareCheck(String args) throws IncompleteCommandException {
         final Matcher matcher = VIEW_COMMAND_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new IncompleteCommandException("View command values are incomplete or missing!");

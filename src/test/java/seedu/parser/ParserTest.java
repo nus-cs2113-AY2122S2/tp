@@ -136,7 +136,7 @@ class ParserTest {
         ArrayList<String> expectedResult = new ArrayList<>(
                 Arrays.asList("Speaker   B")
         );
-        ArrayList<String> actualResult = parser.prepareView(
+        ArrayList<String> actualResult = parser.prepareCheck(
                 "   n/Speaker   B ");
         assertEquals(expectedResult, actualResult);
     }
@@ -147,7 +147,7 @@ class ParserTest {
                 Arrays.asList("Speaker   B")
         );
         try {
-            ArrayList<String> actualResult = parser.prepareView(
+            ArrayList<String> actualResult = parser.prepareCheck(
                     "s/Speaker   B");
             assertEquals(expectedResult, actualResult);
             fail();
