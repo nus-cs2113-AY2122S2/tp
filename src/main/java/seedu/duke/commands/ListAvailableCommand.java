@@ -52,12 +52,17 @@ public class ListAvailableCommand extends Command {
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        ui.showMessages("Here are the items available for borrowing");
+        boolean hasItem = false;
+        ui.showMessages("Here are the items available for borrowing:");
         for (int i = 0; i < itemList.getSize(); i++) {
             Item item = itemList.getItem(i);
             if (isAvailable(item)) {
+                hasItem = true;
                 ui.showMessages(String.valueOf(i + 1) + "." + item);
             }
+        }
+        if (!hasItem) {
+            ui.showMessages("Sorry. There are no items available for borrowings.");
         }
     }
 }

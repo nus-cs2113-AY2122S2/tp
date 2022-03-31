@@ -229,6 +229,27 @@ There are no overdue borrowings for David.
 ```
 
 
+### List Available Borrowings: `listab`
+List all items that is available between a start date and an end date. 
+
+Format:   
+`listab s/START_DATE e/END_DATE`: List all available borrowings between `START_DATE` and `END_DATE`.  
+* `START_DATE` and `END_DATE` must be in `YYYY-MM-DD` format.
+
+Examples of usage (Assuming today's date is **2021-03-31**):
+```
+> listab s/2022-06-06 e/2022-06-06
+Here are the items available for borrowing:
+1.Chalkboard | 1
+```
+If there are no items available for borrowings, the `listab` command will return:
+```
+> listab s/2022-03-31 e/2022-04-01
+Here are the items available for borrowing:
+Sorry. There are no items available for borrowings.
+```
+
+
 ### Borrow an Item: `borrow`
 Borrow the item that you want for the duration between the start date and end date.
 
