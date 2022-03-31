@@ -15,14 +15,14 @@ import java.util.Scanner;
 public class Storage {
     private File storageFile;
 
-    public Storage(File storageFile) {
+    public Storage(File storageFile) throws MindMyMoneyException {
         this.storageFile = storageFile;
         if (!storageFile.exists()) {
             try {
                 storageFile.createNewFile();
             } catch (IOException e) {
-                System.out.println("WARNING: Failed to create save file. "
-                        + "You may still use MindMyMoney; however, your expenditure list will not be saved.");
+                throw new MindMyMoneyException("WARNING: Failed to create save file. "
+                        + "You may still use MindMyMoney; however, your data may not be saved.");
             }
         }
     }

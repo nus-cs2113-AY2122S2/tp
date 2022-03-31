@@ -23,7 +23,11 @@ public class StorageTest {
     @Test
     void initialStartup_nonexistentFile_emptyList() {
         File storageFile = new File(storageDir, "list.txt");
-        Storage storage = new Storage(storageFile);
+        try {
+            Storage storage = new Storage(storageFile);
+        } catch (MindMyMoneyException e) {
+            fail();
+        }
     }
 
     @Test
@@ -46,11 +50,12 @@ public class StorageTest {
 
         savedUser.setExpenditureListArray(expenditureList);
 
-        Storage storage = new Storage(storageFile);
         try {
+            Storage storage = new Storage(storageFile);
             storage.save(savedUser);
             User loadedUser = storage.load();
-            assertEquals(expenditureList.expenditureListArray, loadedUser.getExpenditureListArray().expenditureListArray);
+            assertEquals(expenditureList.expenditureListArray,
+                    loadedUser.getExpenditureListArray().expenditureListArray);
         } catch (MindMyMoneyException e) {
             fail();
         }

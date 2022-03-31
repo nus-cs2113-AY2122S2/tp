@@ -18,18 +18,28 @@ public class MindMyMoney {
     private static final String STORAGE_FILENAME = "list.txt";
 
     public MindMyMoney() {
+        Storage savedStorage;
         ui = new Ui();
         user = new User();
-        storage = new Storage(new File(STORAGE_FILENAME));
+        try {
+            savedStorage = new Storage(new File(STORAGE_FILENAME));
+        } catch (MindMyMoneyException e) {
+            System.out.println(e.getMessage());
+            savedStorage = null;
+        }
+        storage = savedStorage;
     }
 
     public void run() {
         ui.printIntro();
-        try {
-            user = storage.load();
-        } catch (MindMyMoneyException e) {
-            System.out.println(e.getMessage());
-            System.out.println(System.lineSeparator());
+
+        if (storage != null) {
+            try {
+                user = storage.load();
+            } catch (MindMyMoneyException e) {
+                System.out.println(e.getMessage());
+                System.out.println(System.lineSeparator());
+            }
         }
 
         boolean isExit = false;
@@ -39,9 +49,12 @@ public class MindMyMoney {
                 Command commandType = Parser.parseCommand(input, user);
                 commandType.executeCommand();
 
-                storage.save(user);
-
                 isExit = commandType.isExit();
+
+                if (storage != null) {
+                    storage.save(user);
+                }
+
             } catch (MindMyMoneyException e) {
                 System.out.println(e.getMessage());
                 System.out.print(System.lineSeparator());
