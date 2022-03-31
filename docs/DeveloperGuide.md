@@ -94,7 +94,7 @@ The command to add a project is one example of this structure:
 
 Deleting a project will follow nearly the exact same structure; the only difference is that the corresponding Parser and Command objects will be used (`DeleteProjectCommandParser` and `DeleteProjectCommand`)
 
-#### sDelete a Project
+#### Delete a Project
 ![image info](./UmlDiagrams/deleteProjectNew.png)
 *The steps are omitted here as they are the exact same as adding a project, only with the differing class names previously mentioned.
 
@@ -143,17 +143,47 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 #### Add a Deadline to a Project
 
-**Step 1.** When `CommandHandler` receives a user input starting with string “adddeadline”, it will call the `addDeadline()` method
+**Step 1.** When `CommandHandler` receives a user input starting with string “addprojdeadline”, it will create an `AddProjectDeadlineCommandParser` object and call its `parse()` function to parse the user input
 
-**Step 2.** It will first check if the number of arguments provided matches what is required. If it is less, it will throw an `IllegalCommandException` and return.
+**Step 2.** The `AddProjectDeadlineCommandParser` object will parse the todo input. Upon parsing the user input, it will create a `AddProjectDeadlineCommand` and return it back to `CommandHandler`.
 
-**Step 3.** If the number of arguments is valid, call the projectList’s `addDeadline()` method, with the arguments of title and deadline.
+**Step 3.** After `CommandHandler` obtains the `AddProjectDeadlineCommand` returned by `AddProjectDeadlineCommandParser`, it then calls `executeCommand()` method in its own class.
 
-**Step 4.** We call the `findProjectIndex()` method to find the given project that matches the title provided. If the value indicates that the project does not exist, return immediately and indicate no deadline was added.
+**Step 4.** `executeCommand()` will call `execute()` method of `AddProjectDeadlineCommand`.
 
-**Step 5.** If the index of the project was found, call that specific Project’s `setDeadline()` method and update the deadline.
+**Step 5.** If the number of arguments is valid, call the projectList’s `addProjectDeadline()` method, with the arguments of title and deadline.
 
-![image info](./UmlDiagrams/AddDeadline.jpg)
+**Step 6.** We call the `findProjectIndex()` method to find the given project that matches the title provided. If the value indicates that the project does not exist, return immediately and indicate no deadline was added.
+
+**Step 7.** If the index of the project was found, call that specific Project’s `setDeadline()` method and update the deadline.
+
+**Step 8.** The string deadline is used to build the class object `Deadline`
+
+**Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
+
+![image info](./UmlDiagrams/AddProjectDeadline.jpg)
+
+#### Add a Deadline to a Todo
+
+**Step 1.** When `CommandHandler` receives a user input starting with string “addtododeadline”, it will create an `AddTodoDeadlineCommandParser` object and call its `parse()` function to parse the user input
+
+**Step 2.** The `AddProjectDeadlineCommandParser` object will parse the todo input. Upon parsing the user input, it will create a `AddTodoDeadlineCommand` and return it back to `CommandHandler`.
+
+**Step 3.** After `CommandHandler` obtains the `AddTodoDeadlineCommand` returned by `AddTodoDeadlineCommandParser`, it then calls `executeCommand()` method in its own class.
+
+**Step 4.** `executeCommand()` will call `execute()` method of `AddTodoDeadlineCommand`.
+
+**Step 5.** If the number of arguments is valid, call the projectList’s `addTodoDeadline()` method, with the arguments of indexProj, indexTodo, and deadline.
+
+**Step 6.** Using the indexProj, we find the index of the project we are looking for and call its `addTodoDeadline()` method, with the arguments indexTodo and deadline.
+
+**Step 7.** Using the index of the todo, we call that specific Todo’s `setDeadline()` method and update the deadline.
+
+**Step 8.** The string deadline is used to build the class object `Deadline`
+
+**Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
+
+![image info](./UmlDiagrams/AddTodoDeadline.jpg)
 
 ### Proposed Features
 
