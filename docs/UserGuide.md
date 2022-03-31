@@ -70,8 +70,8 @@ Please take note of these few terms. It is explained as below:
 | (Ubuntu) Linux    | [Bash Terminal](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal)              |
 
 > For Microsoft Windows operating systems, if you are having display issues (e.g. colours not displaying) with
-> your terminal, please see "My terminal in Windows is not displaying any colours in the application" 
-> in the [FAQ section](#frequently-asked-questions-faq).
+> your terminal, please see ["my terminal in Windows is not displaying any colours in the application"](#1-my-terminal-in-windows-is-not-displaying-any-colours-in-the-application) 
+> in the FAQ section.
 
 > For Linux operating systems, our application is tested on Ubuntu Linux using the default Bash shell.
 
