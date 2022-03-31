@@ -29,17 +29,17 @@ HDMI Cable | 2
 ```
 
 
-### List Current Borrowings: `list_current_borrowings`
+### List Current Borrowings: `listcb`
 List all items that are currently being borrowed. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
 
 Format:   
-`list_current_borrowings`: List all items that are current being borrowed.  
-`list_current_borrowings p/BORROWER_NAME`: List all items that are currently being borrowed by borrower
+`listcb`: List all items that are current being borrowed.  
+`listcb p/BORROWER_NAME`: List all items that are currently being borrowed by borrower
 * `BORROWER_NAME` must not contain punctuations.
 
 Examples of usage:
 ```
-> list -cb
+> listcb
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
@@ -54,12 +54,12 @@ Borrow Duration: 2021-03-29 to 2021-04-01
 ```
 If there are no items have been borrowed from the inventory, the `list -cb` command will return:
 ```
-> list -cb
+> listcb
 There are no items in the inventory being borrowed.
 ```
 
 ```
-> list -cb p/Sally
+> listcb p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-23 to 2021-03-30
@@ -70,7 +70,7 @@ Borrow Duration: 2021-04-24 to 2021-04-30
 ```
 If the person does not exist in the borrowings, the `list -cb p/BORROWER_NAME` will return:
 ```
-> list -cb p/David
+> listcb p/David
 There are no items currently borrowed by David.
 ```
 
