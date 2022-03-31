@@ -78,7 +78,7 @@ public class ProjectList {
      * @param todoString The todo task the user wants to add to the project
      */
     public void addTodoToProject(String indexString, String todoString) {
-        assert (todoString != null && todoString != "") : "Cannot add todo string to a project.";
+        assert (todoString != null && !todoString.equals("")) : "Cannot add todo string to a project.";
         int index;
         try {
             index = Integer.parseInt(indexString);
@@ -97,7 +97,7 @@ public class ProjectList {
     }
 
     public void addTodoToProject(int index, String todoString) throws IndexOutOfBoundsException {
-        assert (todoString != null && todoString != "") : "Cannot add todo string to a project.";
+        assert (todoString != null && !todoString.equals("")) : "Cannot add todo string to a project.";
         if (index > projectList.size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -153,8 +153,9 @@ public class ProjectList {
      * @param title Name of the project
      * @param deadline Deadline for the project
      */
-    public void addProjectDeadline(String title, String deadline) {
-        assert (title != null && deadline != null) : "Cannot add deadline.";
+    public void addDeadline(String title, String deadline) {
+        assert (title != null && !title.equals("")
+                && deadline != null && !deadline.equals("")) : "Cannot add deadline.";
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index != Constants.PROJECT_NOT_FOUND) {
@@ -231,7 +232,7 @@ public class ProjectList {
     }
 
     private int findProjectIndex(String name) {
-        assert (name != null && name != "") : "Cannot findProjectIndex.";
+        assert (name != null && !name.equals("")) : "Cannot findProjectIndex.";
         int count = 0;
 
         for (Project project : projectList) {
@@ -249,7 +250,7 @@ public class ProjectList {
      * @param title Name of the project
      */
     public void view(String title) {
-        assert (title != null && !title.equals("")) : "Cannot view the project";
+        assert (title != null && !title.equals("")) : "Cannot view the project.";
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index == Constants.PROJECT_NOT_FOUND) { //project not found
@@ -257,6 +258,38 @@ public class ProjectList {
         } else {
             Project project = projectList.get(index);
             project.printDetails();
+        }
+        System.out.println(Constants.SEPARATOR);
+    }
+
+    /**
+     * Displays all programming languages of a specified Project.
+     *
+     * @param title Name of the project
+     */
+    public void listLanguages(String title) {
+        assert (title != null && !title.equals("")) : "Cannot list languages for this project.";
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(title);
+        if (index == Constants.PROJECT_NOT_FOUND) { //project not found
+            System.out.println("Sorry! There was no project with that name.");
+        } else {
+            Project project = projectList.get(index);
+            project.printLanguages();
+        }
+        System.out.println(Constants.SEPARATOR);
+    }
+
+    public void addLanguages(String projectName, String language) {
+        assert (language != null && !language.equals("")) : "Cannot list languages for this project.";
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(projectName);
+        if (index == Constants.PROJECT_NOT_FOUND) {
+            System.out.println(Constants.INVALID_PROJECT_NAME);
+        } else {
+            Project project = projectList.get(index);
+            project.addLanguage(language);
+            System.out.println(language + " language added.");
         }
         System.out.println(Constants.SEPARATOR);
     }

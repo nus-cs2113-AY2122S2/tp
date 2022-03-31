@@ -1,5 +1,11 @@
 package cpp.logic;
 
+import cpp.ui.Constants;
+import cpp.exceptions.IllegalCommandException;
+import cpp.logic.commands.Command;
+import cpp.logic.commands.ListLanguageCommand;
+import cpp.logic.commands.ListProjectCommand;
+
 import cpp.logic.parser.AddProjectCommandParser;
 import cpp.logic.parser.AddProjectDeadlineCommandParser;
 import cpp.logic.parser.AddTodoCommandParser;
@@ -7,10 +13,8 @@ import cpp.logic.parser.AddTodoDeadlineCommandParser;
 import cpp.logic.parser.DeleteProjectCommandParser;
 import cpp.logic.parser.MarkCommandParser;
 import cpp.logic.parser.ViewProjectCommandParser;
-import cpp.ui.Constants;
-import cpp.exceptions.IllegalCommandException;
-import cpp.logic.commands.Command;
-import cpp.logic.commands.ListProjectCommand;
+import cpp.logic.parser.AddLanguageCommandParser;
+import cpp.logic.parser.ListLanguageCommandParser;
 
 import cpp.model.ProjectList;
 import cpp.ui.Response;
@@ -51,6 +55,12 @@ public class CommandHandler {
             break;
         case "view":
             executeResult = executeCommand(projectList, new ViewProjectCommandParser().parse(commands));
+            break;
+        case "addlanguage":
+            executeResult = executeCommand(projectList, new AddLanguageCommandParser().parse(commands));
+            break;
+        case "listlanguages":
+            executeResult = executeCommand(projectList, new ListLanguageCommandParser().parse(commands));
             break;
         case "help":
             Response.printHelp();

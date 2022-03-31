@@ -7,6 +7,12 @@ public class Project {
     private String title;
     private ArrayList<Todo> todos;
     private Deadline deadline;
+    private ArrayList<String> languages;
+
+    public Project() {
+        todos = new ArrayList<Todo>();
+        languages = new ArrayList<String>();
+    }
 
     /**
      * Constructs a Project object.
@@ -16,6 +22,7 @@ public class Project {
     public Project(String title) {
         this.title = title;
         todos = new ArrayList<Todo>();
+        languages = new ArrayList<String>();
     }
 
     /**
@@ -104,6 +111,10 @@ public class Project {
         return this.todos;
     }
 
+    public ArrayList<String> getLanguages() {
+        return this.languages;
+    }
+
     /**
      * Displays all details of the project.
      */
@@ -117,4 +128,21 @@ public class Project {
         }
     }
 
+
+    /**
+     * Displays all programming languages of the project.
+     */
+    public void printLanguages() {
+        System.out.print("Programming languages for " + getTitle() + ":\n");
+        int count = 1;
+        for (String language: getLanguages()) {
+            System.out.print("\t" + "[" + count + "]. " + language + "\n");
+            count++;
+        }
+    }
+
+    public void addLanguage(String language) {
+        assert (languages != null) : "Cannot add languages to this project.";
+        languages.add(language);
+    }
 }
