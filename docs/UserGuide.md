@@ -50,7 +50,7 @@ types of characters.
 #### Example of usage
 `addproject project1`
 
-### Example of output
+#### Example of output
 ```project1 added.```
 
 ---
