@@ -92,7 +92,7 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 6. Refer to Features for a more in-depth explanation of all commands available.
 
 ## How SplitLah works
-- An activity represents a single group activity, paid for by one person. An activity stores a list of its participants,
+- An activity represents a single group activity, paid for by one person. It stores a list of its participants,
 the payer and how much each participant owes.
   - Example: `Lunch at a restaurant`
   - Consisting of the following participants:
@@ -197,10 +197,10 @@ Edits an existing session so that you can change the details of a session.<br>
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 >- The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >  - Example: `Alice Tan` is not allowed.
->- There are 3 editable fields: session name, session date and the people involved in the session.
+>- There are 3 editable fields: session name, session date and the persons involved in the session.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
->- When editing the people involved, existing participants must be included in the command.
+>- When editing the persons involved, existing participants must be included in the command.
 >  - Example: If the session previously created had Alice and Bob with session unique identifier of 1 
 >    and you wish to edit it to include Charlie, a valid edit command would be
      `session /edit /sid 1 /pl Alice Bob Charlie`.
