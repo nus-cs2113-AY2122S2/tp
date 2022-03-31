@@ -3,7 +3,7 @@ package cpp;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.CommandHandler;
 import cpp.model.ProjectList;
-import cpp.response.Response;
+import cpp.ui.Response;
 import cpp.storage.Storage;
 
 import java.util.Scanner;

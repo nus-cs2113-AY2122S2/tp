@@ -1,6 +1,6 @@
-package cpp.response;
+package cpp.ui;
 
-import cpp.Constants;
+import cpp.ui.Constants;
 
 /**
  * Handles the responses to give to user.
