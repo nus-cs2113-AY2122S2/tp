@@ -54,7 +54,7 @@ public class Storage {
         ProjectList projectList = new ProjectList();;
         int indexProject = 1;
         while ((projectLine = in.readLine()) != null) {
-            String[] details = projectLine.split(";");
+            String[] details = projectLine.split("`");
             int indexTodo = 1;
             assert (details.length == 3) : "Unable to load data! Data is incomplete!";
 
@@ -114,8 +114,8 @@ public class Storage {
         for (int count = 0; count < total; count++) {
             Project project = projectList.getProject(count);
             String todoInfo = getTodoInfo(project.getTodos());
-            String projectInfo = project.getTitle() + ";" + todoInfo + ";" + project.getDeadline()
-                    + ";" + project.getGitHubLink();
+            String projectInfo = project.getTitle() + "`" + todoInfo + "`" + project.getDeadline()
+                    + "`" + project.getGitHubLink();
 
             writer.write(projectInfo + System.lineSeparator());
         }
