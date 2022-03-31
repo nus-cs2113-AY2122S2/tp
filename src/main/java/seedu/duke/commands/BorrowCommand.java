@@ -25,10 +25,10 @@ public class BorrowCommand extends Command {
     private final String borrowerName;
     private final BorrowStatus borrowStatus;
 
-    public BorrowCommand(int itemIndex, String startDateStr, String endDateStr, String borrowerName) {
+    public BorrowCommand(int itemIndex, LocalDate startDate, LocalDate endDate, String borrowerName) {
         this.itemIndex = itemIndex;
-        this.startDate = LocalDate.parse(startDateStr);
-        this.endDate = LocalDate.parse(endDateStr);
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.borrowerName = borrowerName;
 
         // Determine the borrow status compared to today's date
@@ -48,9 +48,8 @@ public class BorrowCommand extends Command {
         Item item = itemList.addBorrowRecord(itemIndex, newRecord);
         ui.showMessages("Item has been successfully borrowed!",
                 "Name of Item: " + item.getName(),
-                "Name of Borrower: " + borrowerName,
-                "BorrowDuration: " + startDate + " to " + endDate,
-                "Borrow Status: " + borrowStatus);
+                "Name of Borrower: " + newRecord.getBorrowerName(),
+                "Borrow Duration: " + newRecord.getBorrowDuration());
     }
 
     @Override

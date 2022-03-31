@@ -4,6 +4,7 @@ import seedu.duke.commands.BorrowCommand;
 import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import static seedu.duke.parser.CliSyntax.PREFIX_ITEM_INDEX;
@@ -32,11 +33,11 @@ public class BorrowCommandParser implements Parser<BorrowCommand> {
         }
 
         int itemIndex = ParserUtils.parseIndex(argMultimap.getValue(PREFIX_ITEM_INDEX).get()) - 1;
-        String startDateStr = argMultimap.getValue(PREFIX_START_DATE).get();
-        String endDateStr = argMultimap.getValue(PREFIX_END_DATE).get();
+        LocalDate startDate = ParserUtils.parseDate(argMultimap.getValue(PREFIX_START_DATE).get());
+        LocalDate endDate = ParserUtils.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
         String borrowerName = argMultimap.getValue(PREFIX_BORROWER_NAME).get();
 
-        return new BorrowCommand(itemIndex, startDateStr, endDateStr, borrowerName);
+        return new BorrowCommand(itemIndex, startDate, endDate, borrowerName);
     }
 
     /**
