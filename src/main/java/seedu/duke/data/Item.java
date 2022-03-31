@@ -32,6 +32,10 @@ public class Item {
         return quantity;
     }
 
+    public ArrayList<BorrowRecord> getBorrowRecords() {
+        return borrowRecords;
+    }
+
     public void setName(String name) {
         Objects.requireNonNull(name, NOT_NULL_NAME);
         this.name = name;
