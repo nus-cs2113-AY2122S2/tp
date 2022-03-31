@@ -14,28 +14,7 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 
 ## Features 
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user. Spaces are acceptable. <br>
-  e.g. in `check n/ITEM_NAME`, `ITEM_NAME` is a parameter which can be used as `check n/SM-57`.
-
-* Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `s/SERIAL_NUMBER n/ITEM_NAME`, `n/ITEM_NAME s/SERIAL_NUMBER` is also acceptable.
-
-* Only one attribute/value can be saved per parameter. Where multiple inputs are supplied, the last parameter will be taken instead of the first one. <br>
-  e.g. `... n/ITEM_NAME_1 n/ITEM_NAME_2` will be interpreted as `... n/ITEM_NAME_2`, omitting `n/ITEM_NAME_1` entirely.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `bye` and `save`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-</div>
-
-
+- [Introduction](#Introduction)
 - [Adding an equipment: `add`](#adding-an-equipment-add)
 - [Checking an equipment: `check`](#checking-an-equipment-check)
 - [Listing equipment: `list`](#listing-equipment-list)
@@ -45,10 +24,28 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 - [Getting help: `help`](#getting-help-help)
 - [Exiting the application: `bye`](#exiting-the-application-bye)
 
+
+### Introduction
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. Spaces are acceptable. <br>
+  e.g. in `check n/ITEM_NAME`, `ITEM_NAME` is a parameter which can be used as `check n/SM-57`.
+
+* Items in square brackets are optional. <br>
+  e.g. `s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] ...` can be used as `s/SM57-1 n/SM57 t/MICROPHONE...` or as `s/SM57-1 t/MICROPHONE...`.
+
+* After the command word (e.g. `add`, `update`), parameters can be in any order.<br>
+  e.g. if the command specifies `... s/SERIAL_NUMBER n/ITEM_NAME...`, `n/ITEM_NAME s/SERIAL_NUMBER` is also acceptable.
+
+* Only one attribute/value can be saved per parameter. Where multiple inputs are supplied, the last parameter will be taken instead of the first one. <br>
+  e.g. `... n/ITEM_NAME_1 n/ITEM_NAME_2` will be interpreted as `... n/ITEM_NAME_2`, omitting `n/ITEM_NAME_1` entirely.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `bye` and `save`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
 ### Adding an equipment: `add`
 Adds new Equipment to the list of Equipment.
 
-Format: `add n/ITEM_NAME sn/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`
+Format: `add n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`
 
 * The `TYPE` must be one of the following types: MICROPHONE, SPEAKER, STAND, CABLE.
 * The `COST` cannot contain any symbols.  
@@ -77,9 +74,11 @@ output:
 `1. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23`
 
 ### Listing equipment: `list`
-Print a list of all equipment in the inventory.
+Print a list of all equipment in the inventory. If a parameter is supplied, only the equipment matching to the parameter will be printed.
 
-Format: `list`
+Format: `list [PARAMETER_NAME]`
+
+* `PARAMETER_NAME` can only take on values of `SPEAKER`, `MICROPHONE`, `STAND`, `CABLE`.
 
 Example of usage and output:
 
@@ -89,15 +88,56 @@ output:
 
 `TOTAL QUANTITY OF EQUIPMENT: 2`
 
-`1. serialNumber=S89347971ASF,itemName=MixerC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21`
+`1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21`
 
 `2. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23`
 
-### Listing equipment by type
+Example of usage and output:
+
+`list microphone`
+
+output:
+
+`TOTAL QUANTITY OF EQUIPMENT: 1`
+
+`1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21`
 
 ### Updating an equipment: `update`
 
+Equipment can be updated with new information. Every parameter except serial number can be updated. 
+
+Format: `update s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`
+
+* The `TYPE` must be one of the following types: MICROPHONE, SPEAKER, STAND, CABLE.
+* The `COST` cannot contain any symbols.
+
+Example of usage and output:
+
+`update s/S14115ASF c/1200 pf/AVLFX`
+
+output: 
+
+`Equipment successfully updated for serial number S14115ASF,`<br>
+`Updated details are:`<br>
+`New cost: 1200.0`<br>
+`New purchased from: AVLFX`<br>
+
 ### Deleting an equipment: `delete`
+
+Removes an Equipment entry from the list of Equipment entirely. This is irreversible after the file is saved.
+
+Format: `update s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`
+
+* The `TYPE` must be one of the following types: MICROPHONE, SPEAKER, STAND, CABLE.
+* The `COST` cannot contain any symbols.
+
+Example of usage and output:
+
+`delete s/S14115ASF`
+
+output:
+
+`Equipment successfully deleted: SpeakerB, serial number S14115ASF`
 
 ### Saving application state: `save`
 
@@ -116,10 +156,10 @@ output:
 'Cheat Sheet' of commands here
 
 * Add equipment `todo n/TODO_NAME d/DEADLINE`
-* Listing equipment: 
-* Listing equipment by type: ADD ON HERE
-* Updating an equipment: ADD ON HERE
-* Deleting an equipment: ADD ON HERE
+* Listing equipment: `list`
+* Listing equipment by type: `list MICROPHONE`
+* Updating an equipment: `update s/S14115ASF c/1200 pf/AVLFX`
+* Deleting an equipment: `delete s/S14115ASF`
 * Saving application state: ADD ON HERE
 * Getting help: ADD ON HERE
 * Exiting the application: ADD ON HERE
