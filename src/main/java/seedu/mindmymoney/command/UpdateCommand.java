@@ -31,11 +31,16 @@ import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
-import static seedu.mindmymoney.helper.AddCommandInputTests.*;
+import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
-import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
 
 /**
  * Represents the Update command.
