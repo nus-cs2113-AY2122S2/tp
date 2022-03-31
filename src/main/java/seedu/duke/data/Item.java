@@ -32,6 +32,10 @@ public class Item {
         return quantity;
     }
 
+    public ArrayList<BorrowRecord> getBorrowRecords() {
+        return borrowRecords;
+    }
+
     public void setName(String name) {
         Objects.requireNonNull(name, NOT_NULL_NAME);
         this.name = name;
@@ -66,9 +70,11 @@ public class Item {
     /**
      * Add a new borrow record to the item.
      * @param newRecord A borrow record.
+     * @return This item that has been added with a new borrow record.
      */
-    public void addBorrowRecord(BorrowRecord newRecord) {
+    public Item addBorrowRecord(BorrowRecord newRecord) {
         this.borrowRecords.add(newRecord);
+        return this;
     }
 
     /**

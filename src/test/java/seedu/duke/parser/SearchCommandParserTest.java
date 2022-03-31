@@ -2,6 +2,7 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.common.Messages;
+import seedu.duke.stubs.ParserStubs;
 
 import static seedu.duke.utils.ParserTestUtils.assertParseFailure;
 import static seedu.duke.utils.ParserTestUtils.assertParseSuccess;
@@ -20,7 +21,7 @@ public class SearchCommandParserTest {
     @Test
     void parse_atLeastOneCompulsoryFieldPresent_success() {
         // Name only
-        String testInputNameOnlyFormat = " %s %s %s";
+        String testInputNameOnlyFormat = " %s %s%s";
         String testInputNameOnly = String.format(testInputNameOnlyFormat,
                 1,
                 CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME);
@@ -34,7 +35,7 @@ public class SearchCommandParserTest {
         assertParseSuccess(parser, testInputDescriptionOnly, ParserStubs.SEARCHCOMMAND_DESCRIPTIONONLY);
 
         // Both name and description
-        String testInputNameAndDescriptionFormat = " %s %s %s %s %s";
+        String testInputNameAndDescriptionFormat = " %s %s%s %s%s";
         String testInputNameAndDescription = String.format(testInputNameAndDescriptionFormat,
                 1,
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,

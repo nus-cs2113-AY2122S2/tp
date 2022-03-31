@@ -1,5 +1,6 @@
 package seedu.duke.parser;
 
+import seedu.duke.commands.BorrowCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DescCommand;
 import seedu.duke.commands.EditCommand;
@@ -9,6 +10,7 @@ import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.SearchCommand;
+
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
 
@@ -51,6 +53,9 @@ public class InputParser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case BorrowCommand.COMMAND_WORD:
+            return new BorrowCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
