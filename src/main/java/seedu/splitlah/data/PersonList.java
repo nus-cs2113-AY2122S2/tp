@@ -24,6 +24,21 @@ public class PersonList implements Serializable {
     }
 
     /**
+     * Initializes a PersonList object using an array of String object of names.
+     *
+     * @param personNames An array of String objects of names.
+     */
+    public PersonList(String[] personNames) {
+        this.personList = new ArrayList<>();
+        for (String name : personNames) {
+            Person newPerson = Person.createPersonFromString(name);
+            if (newPerson != null) {
+                addPerson(newPerson);
+            }
+        }
+    }
+
+    /**
      * Initializes a PersonList object using an ArrayList object of Person objects.
      *
      * @param personList An ArrayList object of Person objects.
@@ -89,20 +104,6 @@ public class PersonList implements Serializable {
      */
     public ArrayList<Person> getPersonList() {
         return personList;
-    }
-
-    /**
-     * Converts a String array object of names to a list of Person objects.
-     *
-     * @param personNames An array of String objects of names.
-     */
-    public void convertToPersonList(String[] personNames) {
-        for (String name : personNames) {
-            Person newPerson = Person.createPersonFromString(name);
-            if (newPerson != null) {
-                addPerson(newPerson);
-            }
-        }
     }
 
     /**
