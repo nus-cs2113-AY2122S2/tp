@@ -83,20 +83,20 @@ Format:
 `list -fb p/BORROWER_NAME`: List all future borrowings for Sally
 * `BORROWER_NAME` must not contain punctuations.
 
-Examples of usage (Assuming today's date is **18-03-2021**):
+Examples of usage (Assuming today's date is **2021-03-18**):
 ```
 > list -fb
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 19-03-2021 to 30-03-2021
+Borrow Duration: 2021-03-19 to 2021-03-21
 
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
-Borrow Duration: 21-03-2021 to 23-03-2021
+Borrow Duration: 2021-03-21 to 2021-03-23
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 29-03-2021 to 01-04-2021
+Borrow Duration: 2021-03-29 to 2021-04-01
 ```
 If there are no future borrowings, the `list -fb` command will return:
 ```
@@ -108,11 +108,11 @@ There are no future borrowings.
 > list -fb p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 19-03-2021 to 30-03-2021
+Borrow Duration: 2021-03-19 to 2021-03-30
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 29-03-2021 to 01-04-2021
+Borrow Duration: 2021-03-29 to 2021-04-01
 ```
 If the person does not exist in the borrowings, the `list -fb p/BORROWER_NAME` will return:
 ```
@@ -129,20 +129,20 @@ Format:
 `list -fb p/BORROWER_NAME`: List all overdue borrowings by Sally
 * `BORROWER_NAME` must not contain punctuations.
 
-Examples of usage (Assuming today's date is **31-03-2021**):
+Examples of usage (Assuming today's date is **2021-03-31**):
 ```
 > list -ob
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 19-03-2021 to 30-03-2021
+Borrow Duration: 2021-03-19 to 2021-03-30
 
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
-Borrow Duration: 21-03-2021 to 23-03-2021
+Borrow Duration: 2021-03-21 to 2021-03-23
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 29-03-2021 to 01-04-2021
+Borrow Duration: 2021-03-29 to 2021-04-01
 ```
 If there are no overdue borrowings, the `list -ob` command will return:
 ```
@@ -154,11 +154,11 @@ There are no overdue borrowings.
 > list -ob p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 19-03-2021 to 30-03-2021
+Borrow Duration: 2021-03-19 to 2021-03-30
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 29-03-2021 to 01-04-2021
+Borrow Duration: 2021-03-29 to 2021-04-01
 ```
 If the person does not exist in the borrowings, the `list -ob p/BORROWER_NAME` will return:
 ```
@@ -177,7 +177,7 @@ Format: `borrow i/ITEM_INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
 
 Examples of usage:
 ```
-> borrow i/23 s/21-03-2021 e/23-03-2021 p/John Smith
+> borrow i/23 s/2021-03-21 e/2021-03-21 p/John Smith
 You have successfully borrowed the following item:
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
@@ -185,7 +185,7 @@ Borrow Duration: 2021-03-21 to 2021-03-23
 ```
 
 ```
-> borrow i/12 s/21-03-2021 e/23-03-2021 p/John Smith
+> borrow i/12 s/2021-03-21 e/2021-03-21 p/John Smith
 Sorry. The item is not avaiable for borrowing during this duration.
 ```
 
