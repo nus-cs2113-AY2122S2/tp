@@ -46,7 +46,6 @@ public class Storage {
         try {
             BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
         } catch (IOException e) {
-            //System.out.println("Welcome new user!");
             createFile("./src/data");
         }
         BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
@@ -106,9 +105,7 @@ public class Storage {
             file.setWritable(true, false);
             file.setReadable(true, false);
             file.setExecutable(true, false);
-            //System.out.println("File created successfully!");
         } catch (IOException e) {
-            //System.out.println("File created unsuccessfully!");
         }
     }
 
