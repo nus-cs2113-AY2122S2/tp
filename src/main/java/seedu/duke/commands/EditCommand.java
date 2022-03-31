@@ -15,6 +15,9 @@ public class EditCommand extends Command {
     public static final String COMMAND_FORMAT = COMMAND_WORD + "/n name [/d description] | [/n name] /d description]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
             + "[Command Format] " + COMMAND_FORMAT + "\n";
+    public static final String EDIT_RESULT_FORMAT = "Item at index %d has been modified."
+            + "\nBefore: %s"
+            + "\nAfter: %s";
 
     private final int index;
     private final Optional<String> name;
@@ -62,9 +65,11 @@ public class EditCommand extends Command {
         }
 
         if (this.description.isPresent()) {
-            placeholderItem.setName(this.description.get());
+            placeholderItem.setDescription(this.description.get());
         }
+        ui.showMessages(String.format(EDIT_RESULT_FORMAT, this.index, targetedItem, placeholderItem));
         itemList.set(index, placeholderItem);
+
     }
 
     @Override
