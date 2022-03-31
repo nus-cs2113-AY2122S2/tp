@@ -4,14 +4,12 @@ public class Constants {
     // For Person component
     public static final int PARENTS = 1;
     public static final int MY_GEN = 2;
-    public static final int CHILDREN = 3;
     public static final int NUM_GROUPS = 3;
     public static final int SINGULAR = 1;
     public static final boolean FOR_USER = false;
     public static final boolean FOR_STORAGE = true;
     public static final String EMPTY_STRING = "";
     public static final String INDENTATION = "   ";
-    public static final String INDEX_ERROR_MESSAGE = "Invalid index passed in";
     public static final String FAMILY_INIT_MESSAGE = "New Family initialised";
     public static final String ADD_PERSON_CALL_MESSAGE = "Method addPerson() called";
     public static final String DELETE_PERSON_CALL_MESSAGE = "Method deletePerson() called";
