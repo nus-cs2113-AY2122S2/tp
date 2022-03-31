@@ -5,6 +5,7 @@ import records.Record;
 import records.Subscription;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,11 +19,15 @@ import java.util.Scanner;
 
 public class Storage {
     protected static String filePath;
+    protected static String totalExpenseFilePath;
+    protected static String limitFilePath;
     protected static final char PRODUCT = 'P';
     protected static final char SUBSCRIPTION = 'S';
 
-    public Storage(String filePath) {
+    public Storage(String filePath, String totalExpenseFilePath, String limitFilePath) {
         this.filePath = filePath;
+        this.totalExpenseFilePath = totalExpenseFilePath;
+        this.limitFilePath = limitFilePath;
     }
 
     /**
@@ -71,11 +76,79 @@ public class Storage {
      */
     public static void saveFile(ArrayList<Record> listArray) throws IOException {
         try {
-            FileWriter fw = new FileWriter("data/records.txt");
+            FileWriter fw = new FileWriter(filePath);
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < listArray.size(); i++) {
                 sb.append(listArray.get(i).saveRecords());
             }
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("IO exception");
+        }
+    }
+
+    public static double loadTotalExpenseFile() throws FileNotFoundException {
+        double totalExp;
+        try {
+            File f = new File(totalExpenseFilePath);
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+            Scanner s = new Scanner(f);
+            String message = s.nextLine();
+            totalExp = Double.parseDouble(message);
+            s.close();
+            return totalExp;
+        } catch (IOException e) {
+            System.out.println("IO exception");
+        }
+        return 0;
+    }
+
+    /**
+     * Helper for saveTotalExpense
+     * Saves the totalExpense to the filepath of the manager.Storage object
+     * @param totalExp is the value to write to file
+     */
+    public static void saveTotalExpenseFile(double totalExp) throws IOException {
+        try {
+            FileWriter fw = new FileWriter(totalExpenseFilePath);
+            StringBuffer sb = new StringBuffer();
+            sb.append(totalExp);
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("IO exception");
+        }
+    }
+
+    public static double loadLimitFile() throws FileNotFoundException {
+        double limit;
+        try {
+            File f = new File(limitFilePath);
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+            Scanner s = new Scanner(f);
+            String message = s.nextLine();
+            limit = Double.parseDouble(message);
+            s.close();
+            return limit;
+        } catch (IOException e) {
+            System.out.println("IO exception");
+        }
+        return 0;
+    }
+
+    /**
+     * Helper for saveTotalExpense
+     * Saves the totalExpense to the filepath of the manager.Storage object
+     * @param limit is the value to write to file
+     */
+    public static void saveLimitFile(double limit) throws IOException {
+        try {
+            FileWriter fw = new FileWriter(limitFilePath);
+            StringBuffer sb = new StringBuffer();
+            sb.append(limit);
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {

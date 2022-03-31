@@ -1,6 +1,17 @@
 package manager;
 
+import java.io.IOException;
+
 public class ExpenseManager {
+    private Storage storage;
+    /** Constructs a <code>RecordManager</code> with an empty list of records. */
+    public ExpenseManager() {
+        try {
+            loadTotalExpense();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private static double totalExpense = 0;
     private static double fashionExpense = 0;
     private static double foodExpense = 0;
@@ -60,5 +71,29 @@ public class ExpenseManager {
         accessoryExpense = 0;
         otherExpense = 0;
         subscriptionExpense = 0;
+    }
+
+    /**
+     * Calls <code>storage</code> method to load total expense from data file.
+     *
+     * @throws IOException data file cannot be read.
+     */
+    public void loadTotalExpense() throws IOException {
+        try {
+            totalExpense = storage.loadTotalExpenseFile();
+        } catch (IOException e) {
+            throw e;
+        }
+    }
+
+    /**
+     * Calls <code>storage</code> method to save total expense into data file.
+     */
+    public void saveTotalExpense() {
+        try {
+            storage.saveTotalExpenseFile(totalExpense);
+        } catch (IOException e) {
+            System.out.println("Saving failed.");
+        }
     }
 }
