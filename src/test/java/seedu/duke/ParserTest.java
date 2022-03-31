@@ -60,8 +60,9 @@ public class ParserTest {
      * @return a string describing an {@code AddCommand}.
      */
     private static String convertPersonToAddCommandString(TravelPackage t) {
-        String addCommand = "add " + t.getName() + " " + t.getStartDate() + " " + t.getEndDate() + " " +
-                t.getHotel() + " " + t.getPrice() + " " + t.getCountry() + " " + t.getMaxParticipants();
+        String addCommand = "add " + t.getName() + "," + t.getID() + "," + t.getStartDate() + "," + t.getEndDate() + ","
+                +
+                t.getHotel() + "," + t.getPrice() + "," + t.getCountry() + "," + t.getMaxParticipants();
         return addCommand;
     }
 
