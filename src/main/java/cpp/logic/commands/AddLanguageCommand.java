@@ -1,9 +1,7 @@
 package cpp.logic.commands;
 
-import cpp.Constants;
 import cpp.model.ProjectList;
-import cpp.model.project.Project;
-import cpp.response.Response;
+import cpp.ui.Response;
 
 public class AddLanguageCommand extends Command {
     private String projectName;
