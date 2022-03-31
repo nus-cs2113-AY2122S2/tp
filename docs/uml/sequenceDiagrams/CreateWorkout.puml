@@ -10,7 +10,6 @@ participant "werkIt:WerkIt" AS WerkIt
 participant "parser:Parser" AS Parser
 participant "newCommand\n:WorkoutCommand" AS newCommand
 participant "workoutList\n:WorkoutList" AS WorkoutList
-participant "ui:UI" AS UI2
 participant "fileManager:FileManager" as FileManager
 
 activate WerkIt
