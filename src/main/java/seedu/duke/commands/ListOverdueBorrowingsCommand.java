@@ -28,7 +28,7 @@ public class ListOverdueBorrowingsCommand extends Command {
 
                 for (BorrowRecord record : borrowRecords) {
                     //add check for returned
-                    if (record.getBorrowStatus() == BorrowStatus.PAST && record.getBorrowerName().equals(name)) {
+                    if (record.getBorrowStatus() == BorrowStatus.PAST && record.getBorrowerName().equals(name.get())) {
                         ui.showMessages("Name of Item: " + borrowedItem.getName(),
                                 "Name of Borrower: " + record.getBorrowerName(),
                                 "Borrow Duration: " + record.getBorrowDuration() + "\n");
