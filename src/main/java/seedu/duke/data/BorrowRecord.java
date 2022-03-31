@@ -14,4 +14,24 @@ public class BorrowRecord {
         this.borrowerName = borrowerName;
         this.borrowStatus = borrowStatus;
     }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public String getBorrowerName() {
+        return borrowerName;
+    }
+
+    public String getBorrowDuration() {
+        return (startDate.toString() + " to " + endDate.toString());
+    }
+
+    public BorrowStatus getBorrowStatus() {
+        return borrowStatus;
+    }
 }

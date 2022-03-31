@@ -1,14 +1,12 @@
 package seedu.duke.data;
 
-import seedu.duke.commands.EditCommand;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class ItemList {
 
-    private ArrayList<Item> itemArrayList;
+    private List<Item> itemArrayList;
 
-    public ItemList(ArrayList<Item> itemList) {
+    public ItemList(List<Item> itemList) {
         this.itemArrayList = itemList;
     }
 
@@ -32,19 +30,21 @@ public class ItemList {
         return itemArrayList.set(index, item);
     }
 
-    public ArrayList<Item> getItemArrayList() {
+    public List<Item> getItemArrayList() {
         return itemArrayList;
     }
 
     /**
      * Add a borrow record to a specific item in the itemArrayList as indicated
-     * by the itemIndex.
+     *      * by the itemIndex.
      *
-     * @param itemIndex A legal item index on the itemArrayList
+     * @param itemIndex A legal item index on the itemArrayList. Zero-based indexing.
      * @param newRecord A borrow record
+     * @return The item that has been added with the new borrow record.
      */
-    public void addBorrowRecord(int itemIndex, BorrowRecord newRecord) {
-        this.itemArrayList.get(itemIndex).addBorrowRecord(newRecord);
+    public Item addBorrowRecord(int itemIndex, BorrowRecord newRecord) {
+        Item item = this.itemArrayList.get(itemIndex).addBorrowRecord(newRecord);
+        return item;
     }
 
     @Override
