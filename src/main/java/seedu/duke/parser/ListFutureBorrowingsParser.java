@@ -7,7 +7,7 @@ import seedu.duke.exceptions.InvMgrException;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static seedu.duke.parser.CliSyntax.*;
+import static seedu.duke.parser.CliSyntax.PREFIX_BORROWER_NAME;
 
 public class ListFutureBorrowingsParser implements Parser<ListFutureBorrowingsCommand> {
 
