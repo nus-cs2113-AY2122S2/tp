@@ -51,7 +51,7 @@ public class ListCommand extends Command {
      * @return true if the /pm flag is present, false otherwise.
      */
     private boolean hasExpensesFlag() {
-        return listInput.contains(FLAG_OF_EXPENSES);
+        return listInput.equals(FLAG_OF_EXPENSES);
     }
 
     /**
@@ -137,8 +137,8 @@ public class ListCommand extends Command {
      */
     public String listString(int count, String listInString) {
         for (Expenditure i : expenditureList.expenditureListArray) {
-            listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription() + "("
-                    + i.getCategory() + ") " + "using " + i.getPaymentMethod() + " [" + i.getTime() + "]" + "\n";
+            listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription()
+                    + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod() + " [" + i.getTime() + "]" + "\n";
             count++;
         }
         return listInString;

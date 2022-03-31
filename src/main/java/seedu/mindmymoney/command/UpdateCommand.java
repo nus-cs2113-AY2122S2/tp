@@ -123,7 +123,9 @@ public class UpdateCommand extends Command {
             expenditureList.set(indexToUpdate, newExpenditure);
             System.out.println(PrintStrings.LINE
                     + "Successfully set expenditure " + indexAsString + " to:\n"
-                    + newExpenditure.toString() + "\n" + PrintStrings.LINE);
+                    + "$" + newExpenditure.getAmount() + " was spent on " + newExpenditure.getDescription()
+                    + "(" + newExpenditure.getCategory() + ") " + "using " + newExpenditure.getPaymentMethod()
+                    + " [" + newExpenditure.getTime() + "]" + "\n" + PrintStrings.LINE);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input INDEX, DESCRIPTION or AMOUNT?");
         } catch (NumberFormatException e) {
