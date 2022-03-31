@@ -37,6 +37,20 @@ public class TravelPackage {
         this.numParticipants = 0;
         this.reservationList = new Reservations();
     }
+    public TravelPackage(String name, int id, String startDate, String endDate,
+                         String hotel, double price, String country, int maxParticipants, int numParticipants) {
+        this.name = name;
+        this.id = id;
+        // this.period = [startDate,endDate];
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.hotel = hotel;
+        this.price = price;
+        this.country = country;
+        this.maxParticipants = maxParticipants;
+        this.numParticipants = numParticipants;
+        this.reservationList = new Reservations();
+    }
 
     public boolean isFull() {
         return this.numParticipants >= maxParticipants;
@@ -123,12 +137,22 @@ public class TravelPackage {
 
     }
 
-    // public String toSave() {
-    // return name + " | " + Integer.toString(nextId) + " | " + Integer.toString(id)
-    // + " | " + // startDate, endDate
-    // hotel + " | " + Double.toString(price) + " | " + country + " | " +
-    // Integer.toString(maxParticipants)
-    // + " | " + Integer.toString(numParticipants);
-    // }
+    public String saveTravelPackage(){
+        String str = toSave() + "$";
+        for (int i=0; i<reservationList.getReservationSize(); i++){
+            str += reservationList.getReservation(i).toSave() + "%";
+        }
+        return str;
+    }
+
+    public String toSave() {
+        return name + " | " + Integer.toString(id) +
+        " | " + startDate + " | " + endDate + " | " +
+        hotel + " | " + Double.toString(price) + " | " + country + " | " +
+        Integer.toString(maxParticipants)
+        + " | " + Integer.toString(numParticipants);
+    }
+
+
 
 }

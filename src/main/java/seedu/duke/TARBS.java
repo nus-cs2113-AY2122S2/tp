@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import seedu.duke.command.Command;
@@ -11,14 +10,8 @@ public class TARBS {
     }
 
     public static void run() {
-//        Storage storage = new Storage("packages.txt", "reservations.txt");
-//        Packages packages = storage.createPackages();
-//        Reservations reservations = storage.createReservatons();
-
-        //placeholder packages
-        Packages packages = new Packages();
-        TravelPackage start = new TravelPackage("packagename", 0, "29/3/2022","29/4/2022","hotelname", 99.99,"countryname",20);
-        packages.addPackage(start);
+        Storage storage = new Storage("data.txt");
+        Packages packages = storage.createPackages();
 
         boolean endProgram = false;
         System.out.println("Welcome to Travel Agency Booking Reservation System!");
@@ -35,7 +28,7 @@ public class TARBS {
                         " commands can be seen with the 'help' command");
             }
         }
-//        storage.convertListToFile(packages, reservations);
+        storage.savePackageToFile(packages);
     }
 
 }
