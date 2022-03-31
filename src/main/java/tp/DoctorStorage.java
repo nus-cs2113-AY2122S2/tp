@@ -1,6 +1,6 @@
 package tp;
 
-import java.person.Doctor;
+import tp.person.Doctor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
