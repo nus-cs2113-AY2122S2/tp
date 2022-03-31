@@ -34,10 +34,10 @@ class ActivityCreateCommandTest {
      */
     @Test
     public void run_hasNameDuplicatesInInvolvedList_activityNotCreated() throws InvalidDataException {
-        int currentActivityId = manager.getProfile().getActivityIdTracker();
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityCreateCommand.class, command.getClass());
+        int currentActivityId = manager.getProfile().getActivityIdTracker();
         command.run(manager);
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
         int testActivityId = manager.getProfile().getActivityIdTracker();
@@ -53,10 +53,10 @@ class ActivityCreateCommandTest {
      */
     @Test
     public void run_hasInvalidNameInInvolvedList_activityListSizeRemainsOne() throws InvalidDataException {
-        int currentActivityId = manager.getProfile().getActivityIdTracker();
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Eve Mallory /co 30";
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityCreateCommand.class, command.getClass());
+        int currentActivityId = manager.getProfile().getActivityIdTracker();
         command.run(manager);
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
         int testActivityId = manager.getProfile().getActivityIdTracker();
@@ -72,10 +72,10 @@ class ActivityCreateCommandTest {
      */
     @Test
     public void run_validCommand_activityListSizeBecomesTwo() throws InvalidDataException {
-        int currentActivityId = manager.getProfile().getActivityIdTracker();
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityCreateCommand.class, command.getClass());
+        int currentActivityId = manager.getProfile().getActivityIdTracker();
         command.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
         int testActivityId = manager.getProfile().getActivityIdTracker();
