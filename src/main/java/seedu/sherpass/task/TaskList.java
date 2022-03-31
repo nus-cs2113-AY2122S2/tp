@@ -222,14 +222,12 @@ public class TaskList {
      * @param ui Ui class for printing of messages.
      */
     public void printAllTasks(Ui ui) {
-        int printIndex = 1;
         System.out.println("Here are the tasks in your list:");
         for (Task task : tasks) {
-            ui.showToUser(printIndex + ". " + task);
-            printIndex++;
+            ui.showToUser(task.toString());
         }
         ui.showLine();
-        ui.showToUser("You have " + (printIndex - 1) + " task(s) in your list.");
+        ui.showToUser("You have " + tasks.size() + " task(s) in your list.");
     }
 
 
@@ -244,7 +242,6 @@ public class TaskList {
         return tasks.get(markIndex).isDone();
     }
 
-
     /**
      * Marks a task given the index of the task.
      * Index corresponds to its placement within the task array.
@@ -256,7 +253,6 @@ public class TaskList {
         tasks.get(markIndex).markAsDone();
         ui.showToUser("Nice! I've marked this task as done:\n  " + tasks.get(markIndex));
     }
-
 
     /**
      * Unmarks a task given the index of the task.
@@ -294,24 +290,16 @@ public class TaskList {
      * in task array.
      *
      * @param deleteIndex Index of a task to search for.
-     * @param ui          User Interface
      */
-    public void removeTask(int deleteIndex, Ui ui, boolean isRepeat) {
+    public void removeTask(int deleteIndex, boolean isRepeat) {
         Task taskToBeRemoved = tasks.get(deleteIndex);
-        String repeatKeyWord = EMPTY_STRING;
         if (!isRepeat) {
             tasks.remove(deleteIndex);
         } else if (taskToBeRemoved.getRepeatFrequency() != Frequency.SINGLE) {
-            repeatKeyWord = "repeated";
             int identifier = taskToBeRemoved.getIdentifier();
-            tasks.removeIf(task -> task.getIdentifier() == identifier);
-        } else {
-            ui.showToUser("The task is not a recurring task!");
-            return;
+            tasks.removeIf(task -> task.getIdentifier() == identifier && task.getIndex() >= taskToBeRemoved.getIndex());
         }
         updateIndex();
-        ui.showToUser("Okay. I've removed this " + repeatKeyWord + " task:\n  "
-                + taskToBeRemoved + "\nNow you have " + tasks.size() + " task(s) in the list.");
     }
 
     /**
@@ -339,6 +327,17 @@ public class TaskList {
             candidate = generator.nextInt(65536);
         } while (identifierList.contains(candidate));
         return candidate;
+    }
+
+    private void updateIndex() {
+        tasks.sort(new TaskDateComparator());
+        identifierList.clear();
+        int i = 1;
+        for (Task task : tasks) {
+            task.setIndex(i);
+            identifierList.add(task.getIdentifier());
+            i++;
+        }
     }
 
     /**

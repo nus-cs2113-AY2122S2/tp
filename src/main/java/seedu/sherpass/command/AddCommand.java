@@ -87,16 +87,16 @@ public class AddCommand extends Command {
         newTask = new Task(identifier, taskDescription, byDate, doOnStartDateTime, doOnEndDateTime, frequency);
         try {
             taskList.addTask(newTask);
+            ui.showToUser("Got it! I've added this task:\n   "
+                    + newTask + "\n"
+                    + "Now you have " + taskList.getSize() + " task(s) in your schedule!");
+            storage.writeSaveData(taskList);
         } catch (TimeClashException exception) {
             ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
             ui.showLine();
+            ui.showToUser("Clashing task: " + exception.getMessage());
         } catch (InvalidInputException exception) {
             ui.showToUser(exception.getMessage());
-            ui.showLine();
         }
-        ui.showToUser("Got it! I've added this task:\n   "
-                + newTask + "\n"
-                + "Now you have " + taskList.getSize() + " task(s) in your schedule!");
-        storage.writeSaveData(taskList);
     }
 }
