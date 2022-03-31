@@ -1,14 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.Command;
-import seedu.duke.commands.DescCommand;
-import seedu.duke.commands.EditCommand;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.HelpCommand;
-import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.*;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
 
