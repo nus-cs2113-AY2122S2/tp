@@ -6,7 +6,6 @@ autonumber
 
 title Sequence Diagram of `workout /new` Command
 
-actor   User
 participant "werkIt:WerkIt" AS WerkIt
 participant "ui:UI" AS UI1
 participant "parser:Parser" AS Parser
@@ -18,7 +17,6 @@ participant "fileManager:FileManager" as FileManager
 activate WerkIt
 WerkIt -> UI1 : getUserInput()
 activate UI1
-User -> UI1 : `workout /new` command
 WerkIt <-- UI1 : userInputTrimmed:String
 deactivate UI1
 
@@ -40,7 +38,6 @@ deactivate WorkoutList
 
 newCommand -> UI2 : printNewWorkoutCreatedMessage(newWorkout)
 activate UI2
-User <-- UI2 : New workout created message
 newCommand <-- UI2
 deactivate UI2
 
