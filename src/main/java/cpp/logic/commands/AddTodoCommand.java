@@ -1,8 +1,8 @@
 package cpp.logic.commands;
 
-import cpp.Constants;
+import cpp.ui.Constants;
 import cpp.model.ProjectList;
-import cpp.response.Response;
+import cpp.ui.Response;
 
 public class AddTodoCommand extends Command {
     private final int projectIndex;

@@ -1,9 +1,7 @@
 package cpp.logic.commands;
 
 import cpp.model.ProjectList;
-import cpp.response.Response;
-
-import java.security.spec.ECField;
+import cpp.ui.Response;
 
 public class DeleteProjectCommand extends Command {
     private final String projectToDelete;
