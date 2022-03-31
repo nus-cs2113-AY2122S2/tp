@@ -115,7 +115,8 @@ displayed in an easy-to-read summary.
 ## Features 
 
 ## _Session Management_
-> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
+> A session represents a group outing that involves a list of participants and 
+> spans an arbitrary period of time containing one or more activities.
 
 <br>
 
