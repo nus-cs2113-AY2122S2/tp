@@ -3,6 +3,7 @@ package seedu.sherpass.util;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.task.Task;
 
@@ -29,10 +30,10 @@ class StorageTest {
             TaskList tasks = new TaskList();
             Task newTask = new Task(-1,"task_one",
                     LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat),null,
-                    null, null, 0);
-            tasks.addTask(newTask, false, ui);
+                    null, null);
+            tasks.addTask(newTask);
             storage.writeSaveData(tasks);
-        } catch (IOException exception) {
+        } catch (IOException | TimeClashException exception) {
             exception.printStackTrace();
         }
         assertTrue(testFile.exists());

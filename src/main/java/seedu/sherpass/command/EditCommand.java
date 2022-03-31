@@ -1,5 +1,6 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
@@ -91,7 +92,7 @@ public class EditCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task taskToEdit = taskList.getTask(editIndex);
-        if (byDate != null && TaskParser.isValidFreq(taskToEdit.getRepeatFrequency())) {
+        if (byDate != null && taskToEdit.getRepeatFrequency() != Frequency.SINGLE) {
             ui.showToUser("A repeated task does not have a /by DATE");
             return;
         }
