@@ -1,0 +1,39 @@
+@startuml
+!include Style.puml
+
+box AddCommand
+participant ":Parser" as Parser LOGIC_COLOR_T1
+participant "Command:AddCommand" as AddCommand LOGIC_COLOR_T1
+end box
+
+Parser -> AddCommand: AddCommand.executeCommand()
+activate AddCommand
+
+AddCommand -> AddCommand: addInput,expenditureList,creditCardList, incomeList
+activate AddCommand
+AddCommand --> AddCommand:
+deactivate AddCommand
+
+alt hasCreditCardFlag()
+AddCommand -> AddCommand: addCreditCard()
+activate AddCommand
+AddCommand --> AddCommand:
+deactivate AddCommand
+
+
+else hasIncomeFlag()
+AddCommand -> AddCommand: addIncome()
+activate AddCommand
+AddCommand --> AddCommand:
+deactivate AddCommand
+
+else else
+AddCommand -> AddCommand: addExpenditure()
+activate AddCommand
+AddCommand --> AddCommand:
+deactivate AddCommand
+AddCommand --> Parser:
+deactivate AddCommand
+end
+
+@enduml

@@ -1,6 +1,6 @@
 # MindMyMoney User Guide
 
-##Content Page
+## Content Page
 
 * [Introduction](#introduction)
 * [Quick start](#quick-start)
@@ -13,9 +13,9 @@
         * [Display current list of expenditures: `list` ](#display-current-list-of-expenditures-list)
         * [Modify an expenditure on your list: `update`](#modify-an-expenditure-on-your-list-update)
         * [Removing an expenditure on your list: `delete`](#removing-an-expenditure-on-your-list-delete)
-        * [Calculations that Mindmymoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
+        * [Calculations that MindMyMoney provide: `calculate`](#calculations-that-MindMyMoney-provide-calculate)
           * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
-        * [Exiting MindMyMoney application: `bye`](#exiting-mindmymoney-application-bye)
+        * [Exiting MindMyMoney application: `bye`](#exiting-MindMyMoney-application-bye)
     * [Credit Card](#credit-card)
         * [Display list of currently available commands for credit card: `help`](#display-list-of-currently-available-commands-for-credit-card-help)
         * [Add a credit card to your program: `add`](#add-a-credit-card-to-your-program-add)
@@ -35,14 +35,22 @@ this app is for you!
 
 ### Using the User Guide
 This guide aims to equip you with the knowledge on how to set up the application and to utilise its many features.
-Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the user guide!
+Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the user guide! Along the guide you may
+ encounter several icons. These icons will provide several useful information. 
+> **💡 Note:**
+>- This tells you that there is additional information that is useful when you are using the application.
+
+> **⚠️Warning⚠️**
+> - This tells you that there is some **important** information you should take note of to prevent issues from arising 
+when you are using the application.
+
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed. Click
    [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) for the link to the Java 11
    installer.
-2. Download the latest version of `MindMyMoney.jar` from [here](https://github.com/AY2122S2-CS2113T-T10-4/tp/releases)).
+2. Download the latest version of `**MindMyMoney**.jar` from [here](https://github.com/AY2122S2-CS2113T-T10-4/tp/releases)).
 3. Copy the file to the folder you want to use as the _home folder_ for your MindMyMoney.
 4. Open a command line terminal in your _home folder_ and run `java -jar MindMyMoney.jar`.
    The startup interface similar to the one below should appear in a few seconds.  
