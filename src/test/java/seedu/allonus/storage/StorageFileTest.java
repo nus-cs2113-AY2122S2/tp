@@ -81,7 +81,7 @@ public class StorageFileTest {
 
     /**
      * Tests expense related methods of StorageFile including loadExpense and getExpenseInFileFormat.
-     * Ensures that the contents of the expense list is equal to the content loaded.
+     * Ensures that the content of the expense list is equal to the content loaded.
      */
     @BeforeEach
     public void testExpenseRelatedMethods() {
@@ -128,7 +128,7 @@ public class StorageFileTest {
                 if (fileReader.hasNext()) {
                     assertEquals("E," + expenses[i], fileReader.nextLine());
                 } else {
-                    assertEquals(1, 0);
+                    assertEquals(0, 1);
                 }
             }
 
@@ -136,7 +136,7 @@ public class StorageFileTest {
                 if (fileReader.hasNext()) {
                     assertEquals("S," + modules[i], fileReader.nextLine());
                 } else {
-                    assertEquals(1, 0);
+                    assertEquals(0, 1);
                 }
             }
 
@@ -144,7 +144,7 @@ public class StorageFileTest {
                 if (fileReader.hasNext()) {
                     assertEquals("C," + contacts[i], fileReader.nextLine());
                 } else {
-                    assertEquals(1, 0);
+                    assertEquals(0, 1);
                 }
             }
         } catch (FileNotFoundException e) {
