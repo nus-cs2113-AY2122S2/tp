@@ -55,10 +55,17 @@ public class BorrowCommand extends Command {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         BorrowCommand that = (BorrowCommand) o;
-        return itemIndex == that.itemIndex && startDate.equals(that.startDate) && endDate.equals(that.endDate) && borrowerName.equals(that.borrowerName);
+        return itemIndex == that.itemIndex &&
+                startDate.equals(that.startDate) &&
+                endDate.equals(that.endDate) &&
+                borrowerName.equals(that.borrowerName);
     }
 
 }

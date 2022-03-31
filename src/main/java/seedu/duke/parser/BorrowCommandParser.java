@@ -6,7 +6,10 @@ import seedu.duke.exceptions.InvMgrException;
 
 import java.util.stream.Stream;
 
-import static seedu.duke.parser.CliSyntax.*;
+import static seedu.duke.parser.CliSyntax.PREFIX_ITEM_INDEX;
+import static seedu.duke.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.duke.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.duke.parser.CliSyntax.PREFIX_BORROWER_NAME;
 
 /**
  * Parses input arguments and creates a new BorrowCommand object.
@@ -20,9 +23,11 @@ public class BorrowCommandParser implements Parser<BorrowCommand> {
      */
     public BorrowCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ITEM_INDEX, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_BORROWER_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_ITEM_INDEX,
+                        PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_BORROWER_NAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM_INDEX, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_BORROWER_NAME)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM_INDEX,
+                PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_BORROWER_NAME)) {
             throw new InvMgrException(Messages.INVALID_SYNTAX);
         }
 
