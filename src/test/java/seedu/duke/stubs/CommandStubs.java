@@ -38,6 +38,9 @@ public class CommandStubs {
     public static final ItemList EDIT_ALL_LIST_BEFORE = generateItemList(ITEM_MARKER);
     public static final ItemList EDIT_ALL_EXPECTED_LIST_AFTER = generateItemList(ITEM_WHITEBOARD);
 
+    public static final ItemList TEST_ITEM_LIST = generateItemList(ITEM_PAPER_A4_10, ITEM_PAPER_A5_10, ITEM_MARKER,
+            ITEM_WHITEBOARD);
+
     private static ItemList generateItemList(Item... items) {
         ArrayList<Item> list = new ArrayList<>();
         Collections.addAll(list, items);
