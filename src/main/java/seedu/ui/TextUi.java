@@ -8,7 +8,7 @@ import seedu.equipment.Equipment;
  * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/ui/TextUi.java
  */
 public class TextUi {
-    private static final String LOGO = "                  _                            _"
+    private static final String LOGO = "                   _                            _"
             + "                                               \n"
             + "                  (_)                          | |                                              \n"
             + "   ___  __ _ _   _ _ _ __  _ __ ___   ___ _ __ | |_ _ __ ___   __ _ _ __   __ _  __ _  ___ _ __ \n"
@@ -22,7 +22,7 @@ public class TextUi {
 
     public void showWelcomeMessage() {
         System.out.println("Hello from" + System.lineSeparator() + LOGO);
-        System.out.println("What do you want to do? (ENTER help TO SEE WHAT YOU CAN DO)");
+        System.out.println("What do you want to do? Enter `help` to see what you can do.");
     }
 
     /**

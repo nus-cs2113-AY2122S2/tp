@@ -15,8 +15,8 @@ import java.util.List;
 
 
 public class Storage {
-    public static final String FILE_NOT_FOUND_ERROR_MESSAGE = "File not found! "
-            + "A new file will be created after this session.";
+    public static final String FILE_NOT_FOUND_ERROR_MESSAGE = "Save file not found: "
+            + "a new file will be created after this session.";
     public static final String SAVE_ERROR_MESSAGE = "An error occurred while saving!";
     public static final String DUPLICATE_SERIAL_NUMBER_ERROR = "Duplicate serial number found!";
     public static final String path = "./equipments.json";
