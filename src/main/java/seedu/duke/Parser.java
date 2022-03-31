@@ -6,7 +6,6 @@ public class Parser {
     public static Command parse(String input) {
         String[] inputArray = input.split(" ");
         String commandType = inputArray[0];
-        System.out.println(commandType);
         int id;
         String start;
         String end;

@@ -74,9 +74,20 @@ public class TravelPackage {
         return this.maxParticipants;
     }
 
+    public int getNumParticipants() {return this.numParticipants;}
+
     public Reservations getReservationList() {
         return this.reservationList;
     };
+
+    public void addParticipants(int addParticipants) {
+            this.numParticipants = this.numParticipants + addParticipants;
+    }
+
+    public void removeParticipants(int removeParticipants) {
+            this.numParticipants = this.numParticipants - removeParticipants;
+    }
+
 
     public void setReservationList(Reservations r) {
         this.reservationList = r;
@@ -88,8 +99,10 @@ public class TravelPackage {
                 + this.getID() + "\nCountry: "
                 + this.country + "\nPrice: "
                 + this.price + "\nHotel: "
-                + this.hotel;
-    }
+                + this.hotel + "\nVacancies Filled: "
+                + this.numParticipants + "/" + this.maxParticipants + "\nTravel Period: "
+                + this.startDate + "-" + this.endDate
+    ;}
 
     @Override
     public boolean equals(Object obj) {
