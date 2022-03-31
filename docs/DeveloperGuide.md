@@ -60,7 +60,7 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
 The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts.
-The diagram depicts a scenario when a user attempts to create a session.
+The diagram depicts a scenario where a user attempts to create a session.
 
 
 
@@ -219,8 +219,41 @@ when the user invokes the `session /create` command.
 <br>
 <br>
 The general workflow of the `session /create` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionCreateCommand` object.
+3. `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
+4. Once the command runs, `SessionCreateCommand#run` method checks if there is an existing session with the same session name.
+5. If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUi#printlnMessage`.
+6. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
+7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
+which is used to call the `Profile#addSession` method in order to store the new `Session` object.
+8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUi#printlnMessage`.
 
 ### Remove a session
+**API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `session /delete` command.
+<br>
+<br>
+![Delete Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionDeleteCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /delete` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionDeleteCommand` object.
+3. The `SessionDeleteCommand#run` method is then invoked to run the `session /delete` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of sessions can be retrieved.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified 
+session unique identifier from the list of sessions.
+   * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+   * Else the `Session` object with the specified session unique identifier is returned.
+6. The `Profile#removeSession` method is then called to remove the `Session` object from the list of sessions stored in `Profile` object.
+7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
+
 ### View a session
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
@@ -233,18 +266,19 @@ when the user invokes the `session /list` command.
 <br>
 <br>
 The general workflow of the `session /list` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
 3. `SessionListCommand#run` method is then invoked to run the `session /list` command.
-4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
-5. To retrieve the sessions from profile, `Profile#getSessionList` is executed,
-   where a list of `Session` objects are returned.
-6. Once the list is retrieved, `SessionListCommand` class checks if the list is empty.
-  1. If the list is empty, a message indicating that the list is empty is printed
-     using `TextUi#printlnMessage`.
-  2. If the list is not empty, `SessionListCommand` will loop from the first to the second last session,
-     calling `TextUi#printlnMessage()` to print out a brief overview of each session.
-     Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of sessions can be retrieved.
+5. The `SessionListCommand` object runs the `Profile#getSessionListSummaryString` method to retrieve a `String` object
+   representing the summaries of the sessions stored.
+    1. If there are no sessions stored in the `Profile` object, a `String` object representing an empty list of sessions is
+       returned.
+    2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of sessions,
+       calling `TableFormatter#addRow` for each session to create a table with the summary of each session. A `String` object
+       representing the table is then returned.
+6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
 ### Settle a session
 **API reference:** [`SessionSummaryCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
@@ -334,6 +368,16 @@ The general workflow of the `group /create` command is as follows:
 11. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created.
 
 ### Remove a group
+**API reference:** [`GroupDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupDeleteCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `group /delete` command.
+<br>
+<br>
+![Delete Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupDeleteCommand.drawio.png)
+<br>
+<br>
+
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
 
