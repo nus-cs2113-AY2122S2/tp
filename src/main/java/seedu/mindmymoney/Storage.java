@@ -45,7 +45,9 @@ public class Storage {
     public User load() {
         try {
             Scanner scanner = new Scanner(storageFile);
-            return User.deserializeFrom(scanner);
+            User savedUser = User.deserializeFrom(scanner);
+            scanner.close();
+            return savedUser;
         } catch (FileNotFoundException e) {
             System.out.println("WARNING: Save file not found. MindMyMoney cannot read your saved data.");
             return new User();
