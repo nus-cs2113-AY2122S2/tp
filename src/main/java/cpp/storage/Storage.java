@@ -56,7 +56,7 @@ public class Storage {
         while ((projectLine = in.readLine()) != null) {
             String[] details = projectLine.split("`");
             int indexTodo = 1;
-            assert (details.length == 3) : "Unable to load data! Data is incomplete!";
+            assert (details.length == 4) : "Unable to load data! Data is incomplete!";
 
             String title = details[0];
             String todos = details[1];

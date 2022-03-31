@@ -124,7 +124,7 @@ public class Project {
     }
 
     /**
-     * Gets the list of all weblinks in the project
+     * Gets the list of all weblinks in the project.
      *
      * @return List of all weblinks
      */
@@ -133,7 +133,7 @@ public class Project {
     }
 
     /**
-     * Gets the gitHub repo link for this project
+     * Gets the gitHub repo link for this project.
      *
      * @return The GitHub repo link if it exists, empty string otherwise
      */
@@ -142,7 +142,8 @@ public class Project {
     }
 
     /**
-     * Sets the gitHub repo link for this project
+     * Sets the gitHub repo link for this project.
+     *
      * @param link The URL of the repo
      */
     public void setGitHubLink(String link) {
@@ -154,8 +155,8 @@ public class Project {
             Desktop desktop = Desktop.getDesktop();
             desktop.browse(new URI(gitHubLink));
         } catch (URISyntaxException e) {
-            System.out.println("This project's GitHub link doesn't seem functional.\n" +
-                    "Please use the addgit command with a functional URL.");
+            System.out.println("This project's GitHub link doesn't seem functional.\n"
+                    + "Please use the addgit command with a functional URL.");
         } catch (IOException e) {
             System.out.println("The link is functional, but your browser cannot be opened.");
         }

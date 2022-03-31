@@ -175,10 +175,6 @@ public class ProjectList {
     }
 
     /**
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 31a627ddfa79850edac3c5c1f1d01a8e88dd61ee
      * Changes the GitHub repo link of a Project.
      *
      * @param title Name of the project
@@ -207,11 +203,11 @@ public class ProjectList {
 
     }
     
-   /**
-   * Opens the GitHub repo in the user's primary browser
-   *
-   * @param title The project title to have its repo opened
-   */
+    /**
+     * Opens the GitHub repo in the user's primary browser.
+     *
+     * @param title The project title to have its repo opened
+     */
     public void openGit(String title) {
         assert (title != null && !title.equals("")) : "Cannot view the project.";
         System.out.println(Constants.SEPARATOR);
@@ -224,7 +220,7 @@ public class ProjectList {
         }
         System.out.println(Constants.SEPARATOR);
     }
-    
+
     /**
      * Adds a deadline to a specified Todo.
      *
