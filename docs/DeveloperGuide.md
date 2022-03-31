@@ -115,23 +115,25 @@ For example, `printDishes()`, iterates through `dishes` and calls `get(int)` met
 ### Order Management
 
 The management of menu is functioned by `OrderManager`, which implements following methods:
-
-- `void addOrder(Order order)` -- add a new order.
-- `int addDishToOrder(Object inputObj)` -- add dishes in to an order.
+- `void addDishToOrder(Dish dish, int orderIdx)` -- add dishes in to an order.
 - `void deleteOrder(int orderIndex)` -- delete an order using its order index.
 - `Order getOrder(int orderIndex)` -- get an order using its order index.
 - `double getOrderPrice(int orderIndex)` -- get the total price of an order using its order index.
 - `double getAllOrderValue()` -- get the total price of all orders.
 
-These functions are "delegated" to `ArrayLise<Order>`, which is associated with `OrderManager`.
+These functions are "delegated" to `ArrayList<Order>`, which is associated with `OrderManager`. 
 
-For example, `getOrder(int)`, iterates through `orders` and calls `get(int)` method (`getOrderPrice(int)`, `getAllOrderValue()` also call `get(int)`):
+Methods call `get(int)` to get the element.
 
+For example, `addDishToOrder(Dish dish, int orderIdx)`, iterates through `orders` and calls `addDish(Dish dish)` method:
 
-`deleteOrder(int)` calls `remove(int)`:
+![](diagrams/sqeuence/OrderManager_addDishToOrder.png)
 
+`deleteOrder(int)` calls `getOrderCount()`:
+![](diagrams/sqeuence/OrderManager_deleteOrder.png)
 
-`getOrderPrice(int)` calls `getTotalPrice()` and method `getAllOrderValue()` also calls `getTotalPrice()`:
+Both methods `getOrderPrice(int)` and `getAllOrderValue()` call `getTotalPrice()`:
+![](diagrams/sqeuence/OrderManager_displayAllOrderPrice.png)
 
 ### Staff Management
 
