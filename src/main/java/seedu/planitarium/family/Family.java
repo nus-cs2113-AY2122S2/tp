@@ -47,11 +47,8 @@ public class Family {
         case Constants.MY_GEN:
             toReturn = myGen;
             break;
-        case Constants.CHILDREN:
-            toReturn = children;
-            break;
         default:
-            LOGGER.log(Level.SEVERE, Constants.INDEX_ERROR_MESSAGE);
+            toReturn = children;
         }
         return toReturn;
     }
@@ -77,11 +74,8 @@ public class Family {
         case Constants.MY_GEN:
             toReturn = "My generation";
             break;
-        case Constants.CHILDREN:
-            toReturn = "Children";
-            break;
         default:
-            LOGGER.log(Level.SEVERE, Constants.INDEX_ERROR_MESSAGE);
+            toReturn = "Children";
         }
         return toReturn;
     }

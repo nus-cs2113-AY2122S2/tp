@@ -19,7 +19,8 @@ class IncomeListTest {
     private static int INVALID_INDEX = -1;
     private static int VALID_INDEX = 1;
     private IncomeList personOne;
-    private static final String EXPECTED_LABEL_NUMBERED = "1. Food: $20.00 - Recurring: false"
+    private static final String INDENTATION = "   ";
+    private static final String EXPECTED_LABEL_NUMBERED = INDENTATION + "1. Food: $20.00 - Recurring: false"
             + System.lineSeparator();
     private static final String EXPECTED_LABEL = "Food: $20.00 - Recurring: false"
             + System.lineSeparator();
