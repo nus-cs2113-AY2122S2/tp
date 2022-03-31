@@ -44,13 +44,13 @@ public class Storage {
 
     private static ProjectList readData() throws IOException {
         try {
-            BufferedReader in = new BufferedReader(new FileReader(".\\src\\data\\projectList.txt"));
+            BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
         } catch (IOException e) {
             //System.out.println("Welcome new user!");
             createFile("./src/data");
         }
         System.out.println("---- " + new File(".").getAbsolutePath());
-        BufferedReader in = new BufferedReader(new FileReader(".\\src\\data\\projectList.txt"));
+        BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
         String projectLine;
         ProjectList projectList = new ProjectList();;
         int indexProject = 1;
@@ -118,7 +118,7 @@ public class Storage {
      *  @throws IOException if the file/ file path does not exist.
      */
     private static void saveData(ProjectList projectList) throws IOException {
-        FileWriter writer = new FileWriter(".\\src\\data\\projectList.txt");
+        FileWriter writer = new FileWriter("./src/data/projectList.txt");
         int total = projectList.getProjectNo();
         for (int count = 0; count < total; count++) {
             Project project = projectList.getProject(count);
