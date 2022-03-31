@@ -43,7 +43,7 @@ public class TaskParserTest {
         String input = "foo /by 21/12/2022";
         String expected = "foo";
         String result = TaskParser.parseDescription(input);
-        assertEquals(result, expected);
+        assertEquals(expected, result);
     }
 
     @Test
