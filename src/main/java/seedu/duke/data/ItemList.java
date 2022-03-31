@@ -1,5 +1,7 @@
 package seedu.duke.data;
 
+import seedu.duke.commands.EditCommand;
+
 import java.util.ArrayList;
 
 public class ItemList {
@@ -26,7 +28,39 @@ public class ItemList {
         return this.itemArrayList.size();
     }
 
+    public Item set(int index, Item item) {
+        return itemArrayList.set(index, item);
+    }
+
     public ArrayList<Item> getItemArrayList() {
         return itemArrayList;
+    }
+
+    /**
+     * Add a borrow record to a specific item in the itemArrayList as indicated
+     * by the itemIndex.
+     *
+     * @param itemIndex A legal item index on the itemArrayList
+     * @param newRecord A borrow record
+     */
+    public void addBorrowRecord(int itemIndex, BorrowRecord newRecord) {
+        this.itemArrayList.get(itemIndex).addBorrowRecord(newRecord);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        ItemList toCompare;
+        if (other == this) {
+            // return if same object
+            return true;
+        }
+        if (other instanceof ItemList) {
+            // cast only if other is instance of EditCommand
+            toCompare = (ItemList) other;
+            return this.itemArrayList.equals(toCompare.itemArrayList);
+        } else {
+            // null, or object not EditCommand
+            return false;
+        }
     }
 }

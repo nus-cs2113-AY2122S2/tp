@@ -1,9 +1,18 @@
 package seedu.duke.data;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class Item {
+
+    private static final String NON_ZERO_QUANTITY = "quantity must be non-zero positive integer!";
+    private static final String NOT_NULL_NAME = "name must not be null!";
+    private static final String NOT_NULL_DESCRIPTION = "description must not be null!";
+
     private String name;
     private int quantity;
     private String description;
+    public ArrayList<BorrowRecord> borrowRecords = new ArrayList<BorrowRecord>();
 
     public Item(String name, int quantity, String description) {
         this.name = name;
@@ -24,14 +33,19 @@ public class Item {
     }
 
     public void setName(String name) {
+        Objects.requireNonNull(name, NOT_NULL_NAME);
         this.name = name;
     }
 
     public void setQuantity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException(NON_ZERO_QUANTITY);
+        }
         this.quantity = quantity;
     }
 
     public void setDescription(String description) {
+        Objects.requireNonNull(description, NOT_NULL_DESCRIPTION);
         this.description = description;
     }
 
@@ -50,6 +64,14 @@ public class Item {
     }
 
     /**
+     * Add a new borrow record to the item.
+     * @param newRecord A borrow record.
+     */
+    public void addBorrowRecord(BorrowRecord newRecord) {
+        this.borrowRecords.add(newRecord);
+    }
+
+    /**
      * Returns the string representation of an Item when saved to storage.
      *
      * @return String representation of an item for saving.
@@ -62,5 +84,14 @@ public class Item {
     @Override
     public String toString() {
         return String.format("%s | %d", name, quantity);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Item // instanceof handles nulls
+                && this.name.equals(((Item) other).name)
+                && this.description.equals(((Item) other).description)
+                && (this.quantity == ((Item) other).quantity));
     }
 }

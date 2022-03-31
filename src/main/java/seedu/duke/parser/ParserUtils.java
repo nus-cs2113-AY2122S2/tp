@@ -32,11 +32,26 @@ public class ParserUtils {
         try {
             int value = Integer.parseInt(trimmedQuantity);
             if (!(value >= 0)) {
-                throw new InvMgrException(Messages.INVALID_INDEX);
+                throw new InvMgrException(Messages.INVALID_QUANTITY);
             }
             return value;
         } catch (NumberFormatException ex) {
-            throw new InvMgrException(Messages.INVALID_INDEX);
+            throw new InvMgrException(Messages.INVALID_QUANTITY);
         }
+    }
+
+    /**
+     * Returns -1 if {@code relative} is "-", and 1 if {@code relative} is "+" 1.
+     * The value returned represents a multiplier on the quantity, used to edit quantity relatively.
+     * @throws InvMgrException if the given {@code relative} is invalid (not either of the two options)
+     */
+    public static boolean parseRelative(String relativeAdd) throws InvMgrException {
+        String trimmedRelativeAdd = relativeAdd.trim();
+        if (trimmedRelativeAdd.equals("+")) {
+            return true;
+        } else if (trimmedRelativeAdd.equals("-")) {
+            return false;
+        }
+        throw new InvMgrException(Messages.INVALID_RELATIVE_MESSAGE);
     }
 }

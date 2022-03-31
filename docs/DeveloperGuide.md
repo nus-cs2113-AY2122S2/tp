@@ -21,7 +21,17 @@ The following diagram shows a sequence diagram of the program when it is run.
    iv. `InvMgr` calls upon the `execute()` method of the returned `Command` object
 4. The loop stops when the user types `exit`.
 
-###Parser Component
+### UI Component
+![UiClassDiagram](img/UiClassDiagram.png)
+
+The `UI` component consists of a single `Ui` class.
+
+The `UI` component
+- Displays salutations, prompts for user input, error messages and results of queries.
+- Reads in user inputs
+- Depends on the `Messages` and `InvMgrException` classes in the `Common` component. It displays messages stored in the `Messages` class and displays an error message whenever `InvMgrException` is invoked.
+
+### Parser Component
 
 ![ParserClassDiagram](img/ParserClassDiagram.png)
 
@@ -135,11 +145,13 @@ The following diagram shows the sequence diagram illustrating how the data file 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+CCA Clubs that require assistance in inventory management, especially for fast typists who prefer CLI over GUI.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+1. Centralised management of resources that ensures accurate and timely allocation of equipment to students
+2. Increases the ease and efficiency of resource management
+3. More organised
 
 ## User Stories
 
@@ -165,13 +177,3 @@ The following diagram shows the sequence diagram illustrating how the data file 
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
-## UI Component
-![](img/UiClassDiagram.png)
-
-The `UI` component consists of a single `Ui` class.
-
-The `UI` component
-- Displays salutations, prompts for user input, error messages and results of queries.
-- Reads in user inputs
-- Depends on the `Messages` and `InvMgrException` classes in the `Common` component. It displays messages stored in the `Messages` class and displays an error message whenever `InvMgrException` is invoked. 

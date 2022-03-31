@@ -26,4 +26,11 @@ public class DescCommand extends Command {
         ui.showMessages("Name of Item: " + item.getName() + System.lineSeparator()
                 + "Description: " + item.getDescription());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DescCommand // instanceof handles nulls
+                && (this.index == ((DescCommand) other).index));
+    }
 }
