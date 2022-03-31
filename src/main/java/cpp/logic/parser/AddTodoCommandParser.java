@@ -4,7 +4,17 @@ import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.AddTodoCommand;
 
+/**
+ * Parses input arguments and creates a new AddTodoCommand object.
+ */
+
 public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
+
+    /**
+     * Parses the given {@code String[]} of arguments in the context of the AddTodoCommand
+     * and returns an AddTodoCommand object for execution.
+     * @throws IllegalCommandException if the user input does not conform the expected format
+     */
 
     @Override
     public AddTodoCommand parse(String[] userInput) throws IllegalCommandException {

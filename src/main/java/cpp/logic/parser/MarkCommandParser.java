@@ -4,7 +4,17 @@ import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.MarkCommand;
 
+/**
+ * Parses input arguments and creates a new MarkCommand object.
+ */
+
 public class MarkCommandParser implements CommandParser<MarkCommand> {
+
+    /**
+     * Parses the given {@code String[]} of arguments in the context of the MarkCommand
+     * and returns an MarkCommand object for execution.
+     * @throws IllegalCommandException if the user input does not conform the expected format
+     */
 
 
     @Override

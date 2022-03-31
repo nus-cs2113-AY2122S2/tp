@@ -4,7 +4,17 @@ import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.AddTodoDeadlineCommand;
 
+/**
+ * Parses input arguments and creates a new AddTodoDeadlineCommand object.
+ */
+
 public class AddTodoDeadlineCommandParser implements CommandParser<AddTodoDeadlineCommand> {
+
+    /**
+     * Parses the given {@code String[]} of arguments in the context of the AddTodoDeadlineCommand
+     * and returns an AddTodoDeadlineCommand object for execution.
+     * @throws IllegalCommandException if the user input does not conform the expected format
+     */
 
     @Override
     public AddTodoDeadlineCommand parse(String[] userInput) throws IllegalCommandException {

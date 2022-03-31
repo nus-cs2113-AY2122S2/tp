@@ -272,7 +272,6 @@ the program also allows for faster searching and editing than a GUI design once 
 | v1.0    | new user                    | access a help command                                     | familiarize myself with using the planner                                         |
 | v1.0    | student user                | exit the application                                      | close my planner when I am finished                                               |
 | ------  | --------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| v2.0    | student user                | add any web links/URLs                                    | keep track of relevant resources online                                           |
 | v2.0    | student user                | have quick access to my project's Github repo             | best keep track of my project lifecycle                                           |
 | v2.0    | student user                | list the programming languages/frameworks my project uses | know what languages/frameworks focus on and study                                 |
 | v2.0    | student user                | add a deadline to a to-do                                 | know the deadlines for each individual to-do                                      |

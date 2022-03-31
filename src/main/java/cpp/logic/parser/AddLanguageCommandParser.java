@@ -4,7 +4,18 @@ import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.AddLanguageCommand;
 
+/**
+ * Parses input arguments and creates a new AddLanguageCommand object.
+ */
+
 public class AddLanguageCommandParser implements CommandParser<AddLanguageCommand> {
+
+    /**
+     * Parses the given {@code String[]} of arguments in the context of the AddLanguageCommand
+     * and returns an AddLanguageCommand object for execution.
+     * @throws IllegalCommandException if the user input does not conform the expected format
+     */
+
     @Override
     public AddLanguageCommand parse(String[] userInput) throws IllegalCommandException {
         if (userInput.length < Constants.THREE_ARGUMENTS) {

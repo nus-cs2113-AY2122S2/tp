@@ -7,7 +7,17 @@ import cpp.logic.commands.DeleteProjectCommand;
 
 import java.util.Arrays;
 
+/**
+ * Parses input arguments and creates a new DeleteProjectCommand object.
+ */
+
 public class DeleteProjectCommandParser implements CommandParser<DeleteProjectCommand> {
+
+    /**
+     * Parses the given {@code String[]} of arguments in the context of the DeleteProjectCommand
+     * and returns an DeleteProjectCommand object for execution.
+     * @throws IllegalCommandException if the user input does not conform the expected format
+     */
 
     @Override
     public DeleteProjectCommand parse(String[] userInput) throws IllegalCommandException {

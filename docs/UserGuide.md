@@ -14,9 +14,11 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
    - [add todo to a project](#add-todo-to-a-project-todo)
    - [mark todo as done](#mark-todo-as-done-mark)
    - [add a deadline to a project](#add-a-deadline-to-a-project-addprojdeadline)
-   - [change the GitHub repo of a project](#change-the-github-repo-of-a-project)
-   - [open the GitHub repo of a project](#open-the-github-repo-of-a-project)
+   - [change the GitHub repo of a project](#change-the-GitHub-repo-of-a-project)
+   - [open the GitHub repo of a project](#open-the-GitHub-repo-of-a-project)
    - [add a deadline to a todo](#add-a-deadline-to-a-todo-addtododeadline)
+   - [add language to a project](#add-language-to-a-project-addlanguage)
+   - [list languages of a project](#list-languages-of-a-project-listlanguages)
    - [view](#view-details-of-a-project-view)
    - [exit](#exit-exit)
    
@@ -51,6 +53,7 @@ types of characters.
 ### Example of output
 ```project1 added.```
 
+---
 ### Delete a project: `deleteproject`
 Delete a project from your current list of projects
 
@@ -63,13 +66,14 @@ Format: `deleteproject [project_name]`
 ### Example of output
 ```project1 deleted.```
 
+---
 ### Print all projects: `listprojects`
 Prints all projects in the list with their names and project deadlines
 
 Format: `listprojects` or `listproject`
 
 * The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.
-
+---
 ### Add todo to a project: `todo`
 Adds a todo task with description to a project
 
@@ -81,6 +85,7 @@ Format: `todo [project_index] [description]`
 #### Example of output
 ```Todo:  buy textbooks have been added to project pro1```
 
+---
 ### Mark todo as done: `mark`
 
 Format: `mark [project_index] [todo_index]`
@@ -95,7 +100,7 @@ Format: `mark [project_index] [todo_index]`
 Todo has been marked as done successfully: 
 [X] buy textbooks
 ```
-
+---
 ### add a deadline to a project: `addprojdeadline`
 Adds a deadline date to a project
 
@@ -103,6 +108,7 @@ Format: `addprojdeadline [project_name] [deadline]`
 * deadline must be entered in the following format "yyyy-mm-dd"
 * Alternatively, entering a day of the week also works (i.e. Thursday)
 
+---
 ### change the GitHub repo of a project
 Changes the GitHub repository link for your project
 
@@ -113,6 +119,7 @@ Format: `changegit [project_name] [github_URL]`
 #### Example of usage
 `changegit project1 http://github.com/project1`
 
+---
 ### open the GitHub repo of a project
 Opens the GitHub repository in your default browser
 
@@ -127,6 +134,7 @@ Format: `opengit [project_name]`
 #### Example of output
 ```Deadline added to nextProject: 2022-05-22```
 
+---
 ### add a deadline to a todo: `addtododeadline`
 Adds a deadline date to a todo
 
@@ -140,6 +148,7 @@ Format: `addtododeadline [project_index] [todo_index] [deadline]`
 #### Example of output
 ```Deadline added to Complete Diagrams: 2022-05-22```
 
+---
 ### view details of a project: `view`
 View details of a project: Name, deadline, todos
 
@@ -156,18 +165,42 @@ Deadline: 17/03/2022
 	[1]. [X] complete addproject command
 	[2]. [ ] complete deleteproject command
 ```
+---
+### add language to a project: `addlanguage`  
+Adds language to a project  
+Format: `addlanguage [project_name] [language]`  
+#### Example of usage
+`addlanguage cs2113 java`
 
+#### Example of output 
+```
+java language added.
+```
+
+---
+### list languages of a project: `listlanguages`
+Lists languages of a project  
+Format: `listlanguages`
+#### Example of usage
+`listlanguages`  
+#### Example of output
+```
+Programming languages for cs2113:
+	[1]. java
+```
+---
 ### help: `help`
 List out all available commands
 
 Format: `help`
 
+---
 ### exit: `exit`
 Exit the program
 
 Format: `exit`
 
-
+---å
 ## FAQ
 
 **Q**: How do I transter my data to another computer?

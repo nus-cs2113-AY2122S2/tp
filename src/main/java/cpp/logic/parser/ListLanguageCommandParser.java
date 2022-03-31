@@ -6,7 +6,18 @@ import cpp.logic.commands.ListLanguageCommand;
 
 import java.util.Arrays;
 
+/**
+ * Parses input arguments and creates a new ListLanguageCommand object.
+ */
+
 public class ListLanguageCommandParser implements CommandParser<ListLanguageCommand> {
+
+    /**
+     * Parses the given {@code String[]} of arguments in the context of the ListLanguageCommand
+     * and returns an ListLanguageCommand object for execution.
+     * @throws IllegalCommandException if the user input does not conform the expected format
+     */
+
     @Override
     public ListLanguageCommand parse(String[] userInput) throws IllegalCommandException {
         assert (userInput != null) : "Cannot list languages for this project.";
