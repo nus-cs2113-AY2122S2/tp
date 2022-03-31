@@ -84,9 +84,10 @@ The `TextUI` class serves as an interface to read user inputs and print applicat
 ### Profile Component
 ![Profile Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/Profile%20Component.drawio.png)
 <br>
-The `Profile` class holds the list of sessions and groups that have been created by the user. 
-It also tracks the unique identifier for `Session`, `Activity` and `Group` classes. The `Profile`
-class would return a unique identifier every time a new `Session`, `Activity` or `Group` is created. 
+The `Profile` component is responsible for all data management and accesses within the lifetime of `SplitLah`.
+
+The `Profile` component consists of the `Profile`, `Session`, `Activity`, `PersonList`, `Person`, `ActivityCost`
+and `Name` classes.
 
 ### TextUI Component
 ![TextUI Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/TextUI%20Component.drawio.png)
