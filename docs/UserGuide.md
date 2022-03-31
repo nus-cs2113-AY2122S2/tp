@@ -225,6 +225,9 @@ Please note that the file name should not be changed.
 | add project deadline| `addprojdeadline [project_name] [deadline]`
 | change GitHub       | `changegit [project_name] [github_URL]`  |
 | open GitHub         | `opengit [project_name]`                 |
-| add todo deadline   | `addtododeadline [project_index] [todo_index] [deadline]`
+| add todo deadline   | `addtododeadline [project_index] [todo_index] [deadline]`|
 | view a project      | `view [project_name]`                    |
+| view a project      | `view [project_name]`                    |
+| addlanguage	      | `addlanguage [project_name] [language]`  |
+| listlanguages	      | `listlanguages`                          |
 | Exit                | `exit`                                   |
