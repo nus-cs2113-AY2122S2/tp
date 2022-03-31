@@ -18,6 +18,7 @@ public class SearchCommand extends Command {
             + "[Command Format] " + COMMAND_FORMAT + "\n";
     public static final String SEARCH_RESULT_PREAMBLE = "Here are the items matching your search terms: ";
     public static final String SEARCH_RESULT_ENTRY_FORMAT = "%d. %s";
+    public static final String FOUND_ITEM_FORMAT = "%s | %d | %s";
 
     private final Optional<String> name;
     private final Optional<String> description;
@@ -35,12 +36,12 @@ public class SearchCommand extends Command {
         if (!name.isPresent() && !description.isPresent()) {
             throw new NullPointerException();
         }
+        results = new ArrayList<>();
     }
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        // O(n) search for items matching name and description
-        List<Item> results = new ArrayList<>();
+        // O(n) search for items matching name and description\
         for (int i = 0; i < itemList.getSize(); i++) {
             Item searchItem = itemList.getItem(i);
             if (this.name.isPresent() && !caseInsensitiveContains(searchItem.getName(), this.name.get())) {
@@ -55,7 +56,7 @@ public class SearchCommand extends Command {
 
         ui.showMessages(SEARCH_RESULT_PREAMBLE);
         for (int i = 0; i < results.size(); i++) {
-            String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i, results.get(i));
+            String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i + 1, results.get(i).toDetailedString());
             ui.showMessages(printMsg);
         }
     }
@@ -82,4 +83,5 @@ public class SearchCommand extends Command {
         String lowerStr2 = str2.toLowerCase();
         return lowerStr1.contains(lowerStr2);
     }
+
 }
