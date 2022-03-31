@@ -61,6 +61,7 @@ public class Storage {
             String title = details[0];
             String todos = details[1];
             String deadline = details[2];
+            String gitHubLink = details[3];
 
             //add project to list
             projectList.addProject(title);
@@ -81,6 +82,8 @@ public class Storage {
             if (!deadline.equalsIgnoreCase("No deadline specified")) {
                 projectList.addDeadline(title, deadline);
             }
+
+            projectList.addGithubLink(title, gitHubLink);
 
             indexProject++;
         }
@@ -111,7 +114,8 @@ public class Storage {
         for (int count = 0; count < total; count++) {
             Project project = projectList.getProject(count);
             String todoInfo = getTodoInfo(project.getTodos());
-            String projectInfo = project.getTitle() + ";" + todoInfo + ";" + project.getDeadline();
+            String projectInfo = project.getTitle() + ";" + todoInfo + ";" + project.getDeadline()
+                    + ";" + project.getGitHubLink();
 
             writer.write(projectInfo + System.lineSeparator());
         }
