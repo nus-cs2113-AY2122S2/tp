@@ -59,9 +59,8 @@ public class OrderController extends Controller {
         int index = InputParser.getInteger("Enter dishes to add, enter negative number to exit: ");
         int createdOrderIdx = orderManager.getOrderCount();
         try {
-            while (index >= 0) {
-                System.out.println("Added successfully!");
-                Dish dish = dishManager.getDishes().get(index);
+            while (index >= 1) {
+                Dish dish = dishManager.getDishes().get(index - 1);
                 orderManager.addDishToOrder(dish, createdOrderIdx);
                 index = InputParser.getInteger("You have "
                         + orderManager.getOrders().get(createdOrderIdx).getDishCount()
