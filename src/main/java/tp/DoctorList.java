@@ -42,11 +42,21 @@ public class DoctorList {
         size -= 1;
     }
 
+    public void searchDoctor(String id){
+        for (int i = 0; i < doctors.size(); i++){
+            if (doctors.get(i).getId().trim().equals(id)){
+                System.out.println("Here is the doctor found:");
+                System.out.println(doctors.get(i));
+            }
+        }
+    }
+
     @Override
     public String toString() {
         String toPrint = boundary + "Here are the doctors in this hospital:" + System.lineSeparator();
         for (int i = 1; i <= size; i++) {
-            toPrint += (i + ". " + getDoctor(i));
+            toPrint += (i + ". " + getDoctor(i) + System.lineSeparator());
+
         }
         toPrint += ("You have " + size + " doctors recorded in the system."
                             + System.lineSeparator() + boundary + System.lineSeparator());
