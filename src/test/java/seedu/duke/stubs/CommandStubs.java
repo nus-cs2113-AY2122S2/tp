@@ -18,8 +18,10 @@ public class CommandStubs {
 
     public static final ItemList SEARCH_LIST = generateItemList(ITEM_PAPER_A4_10, ITEM_PAPER_A5_10, ITEM_MARKER,
             ITEM_WHITEBOARD);
-    public static final List<Item> SEARCH_RESULT_PAPER_NAME = generateImmutableResults(ITEM_PAPER_A4_10, ITEM_PAPER_A5_10);
-    public static final List<Item> SEARCH_RESULT_DRAW_DESCRIPTION = generateImmutableResults(ITEM_MARKER, ITEM_WHITEBOARD);
+    public static final List<Item> SEARCH_RESULT_PAPER_NAME = generateImmutableResults(
+            ITEM_PAPER_A4_10, ITEM_PAPER_A5_10);
+    public static final List<Item> SEARCH_RESULT_DRAW_DESCRIPTION = generateImmutableResults(
+            ITEM_MARKER, ITEM_WHITEBOARD);
     public static final List<Item> SEARCH_RESULT_PAPER_NAME_A4_DESCRIPTION = generateImmutableResults(ITEM_PAPER_A4_10);
     public static final List<Item> SEARCH_RESULT_NONE = generateImmutableResults();
 

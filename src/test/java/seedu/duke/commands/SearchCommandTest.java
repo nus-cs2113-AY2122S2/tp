@@ -32,7 +32,8 @@ public class SearchCommandTest {
         SearchCommand testPaperNameAndDescriptionCommand = new SearchCommand(Optional.of(ItemStubs.PAPER_NAME),
                 Optional.of(ItemStubs.A4_PAPER_DESCRIPTION));
         testPaperNameAndDescriptionCommand.execute(CommandStubs.SEARCH_LIST, uiStub);
-        assertEquals(CommandStubs.SEARCH_RESULT_PAPER_NAME_A4_DESCRIPTION,testPaperNameAndDescriptionCommand.getResults());
+        assertEquals(CommandStubs.SEARCH_RESULT_PAPER_NAME_A4_DESCRIPTION,
+                testPaperNameAndDescriptionCommand.getResults());
 
         // Expect Marker (Index 1) and Whiteboard Item (Index 2)
         uiStub = new UiStub();
