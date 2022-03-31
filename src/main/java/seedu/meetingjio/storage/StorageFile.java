@@ -1,3 +1,5 @@
+//@@author lihao-InfoSec
+
 package seedu.meetingjio.storage;
 
 import java.io.File;
@@ -31,7 +33,7 @@ public class StorageFile {
 
     public static final String DATA_FILE_PATH = "MeetingJio.txt";
 
-    private static final String NO_TIMETABLE = "There are no lessons in your timetable yet!";
+    private static final String NO_TIMETABLE = "There are no events in your timetable yet!";
 
     /**
      * Saves all the timetables in a readable format as MeetingJio.txt.
@@ -47,7 +49,7 @@ public class StorageFile {
             dataFile.createNewFile();
             FileOutputStream outFile = new FileOutputStream(dataFile, false);
             FileWriter dataWriter = new FileWriter(dataFile);
-            String str = masterTimetable.collateAll(masterTimetable);
+            String str = masterTimetable.collateAll(masterTimetable, 0);
             String truncatedString = "";
             if (str != "") {
                 truncatedString = str.substring(0, str.length() - 1);
@@ -83,6 +85,7 @@ public class StorageFile {
                     name = data;
                     listNum = 1;
                     personCount++;
+                    ParserLocalData.prepareLoadName(name, masterTimetable);
                 } else {
                     if (!isNoTimetableMessage(data)) {
                         if (checkIndex(data, listNum)) {

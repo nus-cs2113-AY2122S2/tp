@@ -81,21 +81,67 @@ The following event has been added to john's timetable:
 [L] TITLE: cs2113		DAY: friday		START: 1230		END: 1330		MODE: online
 ```
 
+### Listing all events: `list`
+Shows a list of events that has been added. 
 
-### Listing all lessons: `list`
-Shows a list of lessons that has been added.
+Format: `list [user]` or `list all`
 
-Format: `list`
+* If user is specified, only that user's events will be listed out.
+* If all is specified, every user's events will be listed out.
 
 Example of usage:
 
-`list`
+`list all`
 
 Expected outcome:
 ```
-1.NAME: John Doe		TITLE: CS2113		DAY: friday		START: 1230		END: 1330		MODE: online
+john doe
+1.[M] TITLE: brunch		DAY: monday		START: 1000		END: 1100		MODE: physical
+2.[L] TITLE: cs2113		DAY: friday		START: 1600		END: 1800		MODE: online
+jane doe
+1.[M] TITLE: brunch		DAY: monday		START: 1000		END: 1100		MODE: physical
+2.[L] TITLE: cs2102		DAY: monday		START: 1200		END: 1400		MODE: online
 ```
 
+### Listing all lessons: `list_lesson`
+Shows a list of lessons that has been added.
+
+Format: `list_lesson [user]` or `list_lesson all`
+
+* If user is specified, only that user's lessons will be listed out.
+* If all is specified, every user's lessons will be listed out.
+
+Example of usage:
+
+`list_lesson all`
+
+Expected outcome:
+```
+john doe
+2.[L] TITLE: cs2113		DAY: friday		START: 1600		END: 1800		MODE: online
+jane doe
+2.[L] TITLE: cs2102		DAY: monday		START: 1200		END: 1400		MODE: online
+```
+
+### Listing all meetings: `list_meeting`
+Shows a list of meetings that has been added.
+
+Format: `list_meeting [user]` or `list_meeting all`
+
+* If user is specified, only that user's meetings will be listed out.
+* If all is specified, every user's meetings will be listed out.
+
+Example of usage:
+
+`list_meeting all`
+
+Expected outcome:
+```
+john doe
+1.[M] TITLE: brunch		DAY: monday		START: 1000		END: 1100		MODE: physical
+jane doe
+1.[M] TITLE: brunch		DAY: monday		START: 1000		END: 1100		MODE: physical
+```
 
 ### Adding a new common meeting: `add_meeting`
 Adds a new meeting that will be synced with everyone

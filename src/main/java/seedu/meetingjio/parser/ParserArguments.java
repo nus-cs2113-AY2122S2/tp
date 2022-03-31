@@ -1,57 +1,85 @@
 package seedu.meetingjio.parser;
 
-import static seedu.meetingjio.parser.Parser.HEADINGS_ADD_LESSON;
-import static seedu.meetingjio.parser.Parser.HEADINGS_ADD_MEETING;
-import static seedu.meetingjio.parser.Parser.HEADINGS_DELETE_EVENT;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import static seedu.meetingjio.parser.Parser.HEADINGS_ALL;
+import static seedu.meetingjio.parser.Parser.HEADINGS_WITHOUT_NAME;
+import static seedu.meetingjio.parser.Parser.HEADINGS_NAME_INDEX;
+import static seedu.meetingjio.parser.Parser.HEADINGS_ALL_WITH_INDEX;
+
+import seedu.meetingjio.exceptions.MissingParameterException;
 
 public class ParserArguments {
 
-    protected static String[] splitArgumentsAddLesson(String arguments) {
-        String[] eventDescription = new String[6];
-        String[] splitArguments = arguments.split(" ");
+    private static String[] splitArgumentsWithHeadings(String[] splitArguments, String[] headings, 
+        Boolean checkAllParams) throws MissingParameterException {
+        
+        int count = headings.length;
+        String[] eventDescription = new String[count];
+        Arrays.fill(eventDescription, "");
+
         int index = -1;
         for (String str : splitArguments) {
-            if (containHeadings(str, HEADINGS_ADD_LESSON) == -1) {
+            if (isHeadings(str, headings) == -1) {
                 eventDescription[index] += " " + str;
                 eventDescription[index] = eventDescription[index].trim();
             } else {
-                index = containHeadings(str, HEADINGS_ADD_LESSON);
-                eventDescription[index] = str.substring(str.indexOf("/") + 1);
+                index = isHeadings(str, headings);
+                count--;
             }
+        }
+
+        if (checkAllParams && checkMissinglParams(count)) {
+            throw new MissingParameterException();
         }
         return eventDescription;
     }
 
-    protected static String[] splitArgumentsDeleteCommand(String arguments) {
-        String[] eventDescription = new String[2];
-        String[] splitArguments = arguments.split(" ");
-        int index = -1;
-        for (String str : splitArguments) {
-            if (containHeadings(str, HEADINGS_DELETE_EVENT) == -1) {
-                eventDescription[index] += " " + str;
-                eventDescription[index] = eventDescription[index].trim();
-            } else {
-                index = containHeadings(str, HEADINGS_DELETE_EVENT);
-                eventDescription[index] = str.substring(str.indexOf("/") + 1);
-            }
-        }
-        return eventDescription;
+    private static boolean checkMissinglParams(int count) {
+        return count > 0;
     }
 
-    protected static String[] splitArgumentsAddMeeting(String arguments) {
-        String[] eventDescription = new String[5];
-        String[] splitArguments = arguments.split(" ");
-        int index = -1;
-        for (String str : splitArguments) {
-            if (containHeadings(str, HEADINGS_ADD_MEETING) == -1) {
-                eventDescription[index] += " " + str;
-                eventDescription[index] = eventDescription[index].trim();
-            } else {
-                index = containHeadings(str, HEADINGS_ADD_MEETING);
-                eventDescription[index] = str.substring(str.indexOf("/") + 1);
+    protected static String[] splitArgumentsAll(String arguments) throws MissingParameterException {
+        String[] splitArguments = arguments.split("[ /]");
+        return splitArgumentsWithHeadings(splitArguments, HEADINGS_ALL, true);
+    }
+
+    protected static String[] splitArgumentsNameIndex(String arguments) throws MissingParameterException {
+        String[] splitArguments = arguments.split("[ /]");
+        return splitArgumentsWithHeadings(splitArguments, HEADINGS_NAME_INDEX, true);
+    }
+
+    protected static String[] splitArgumentsWithoutName(String arguments) throws MissingParameterException {
+        String[] splitArguments = arguments.split("[ /]");
+        return splitArgumentsWithHeadings(splitArguments, HEADINGS_WITHOUT_NAME, true);
+    }
+
+    protected static Map<String, String> getAttributesMap(String arguments) throws MissingParameterException {
+        String[] splitArguments = arguments.split("[ /]");
+        Map<String, String> attributes = new HashMap<>();
+
+        try {
+            String[] description = splitArgumentsWithHeadings(splitArguments, HEADINGS_ALL_WITH_INDEX, false);
+            for (int i = 0; i < description.length; i++) {
+                if (!description[i].isEmpty()) {
+                    String key = HEADINGS_ALL_WITH_INDEX[i];
+                    String value = description[i];
+                    attributes.put(key, value);
+                }
             }
+        } catch (MissingParameterException mpe) {
+            // not applies to EditCommand
         }
-        return eventDescription;
+
+        if (!attributes.containsKey("n") || !attributes.containsKey("i")) {
+            throw new MissingParameterException();
+        }
+        if (attributes.size() < 3) {
+            throw new MissingParameterException();
+        }
+        return attributes;
     }
 
     protected static String getArgumentsFromInput(String input) {
@@ -67,14 +95,10 @@ public class ParserArguments {
         return input.split(" ")[0].trim().toLowerCase();
     }
 
-    protected static int containHeadings(String str, String[] headings) {
+    protected static int isHeadings(String str, String[] headings) {
         for (int i = 0; i < headings.length; i++) {
-            if (str.contains(headings[i])) {
-                int headingLength = headings[i].length();
-                String subStr = str.substring(0, headingLength);
-                if (subStr.equals(headings[i])) {
-                    return i;
-                }
+            if (str.equals(headings[i])) {
+                return i;
             }
         }
         return -1;

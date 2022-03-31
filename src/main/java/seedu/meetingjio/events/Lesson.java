@@ -1,3 +1,5 @@
+//@@author yanjie1017
+
 package seedu.meetingjio.events;
 
 public class Lesson extends Event {

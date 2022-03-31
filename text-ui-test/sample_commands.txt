@@ -43,3 +43,6 @@ delete n/ibra i/1
 delete n/ibra i/1
 delete n/ym i/1
 
+//edit
+edit n/ibra i/1 d/monday
+edit n/ibra i/1 st/1200 et/1300

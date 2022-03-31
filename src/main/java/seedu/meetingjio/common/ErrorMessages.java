@@ -5,9 +5,12 @@ package seedu.meetingjio.common;
  */
 public class ErrorMessages {
 
-    public static final String ERROR_INDEX_OUT_OF_BOUND = "Hi I need a valid index in the list so I can delete";
+    // Common errors
+    public static final String ERROR_INDEX_OUT_OF_BOUND = "Hi I need a valid index in the list";
     public static final String ERROR_INVALID_INDEX_FORMAT = "Hi I did not receive a proper "
             + "integer that I can parse";
+
+    // Add Event Command
     public static final String ERROR_MISSING_PARAMETERS_ADD_EVENT = "Hi 1 or more parameters are missing\n"
             + "The required parameters are:\n"
             + "n/[Name]\n"
@@ -25,6 +28,8 @@ public class ErrorMessages {
             + "st/[StartTime]\n"
             + "et/[EndTime]\n"
             + "m/[Mode]";
+
+    // Attributes
     public static final String ERROR_INVALID_TIME = "Hi please input a valid time where "
             + "StartTime must be before EndTime\n"
             + "Accepted inputs are: 0000 - 2359";
@@ -39,9 +44,13 @@ public class ErrorMessages {
             + "sunday";
     public static final String ERROR_INVALID_MODE = "Hi please input a valid mode\n"
             + "Accepted inputs are: online or physical";
+    public static final String ERROR_INVALID_ATTRIBUTE_VALUE = "Invalid attribute value.";
+    public static final String ERROR_NAME_CANNOT_BE_ALL = "Sorry, the user's name cannot be 'all'";
 
     // List Command
-    public static final String ERROR_EMPTY_LIST = "There are no lessons in your timetable yet!";
+    public static final String ERROR_EMPTY_LIST = "There are no events in your timetable yet!";
+    public static final String ERROR_NO_LESSONS = "There are no lessons in your timetable yet!";
+    public static final String ERROR_NO_MEETINGS = "There are no meetings in your timetable yet!";
 
     // Event
     public static final String ERROR_DUPLICATE_EVENT = "This event already exists. "
@@ -54,11 +63,16 @@ public class ErrorMessages {
     public static final String ERROR_NON_EMPTY_LIST = "Failed to clear whole list";
     public static final String ERROR_DELETE_COMMAND_FAILED = "Failed to delete element";
     public static final String ERROR_INVALID_USER = "User does not exist";
-    public static final String ERROR_UNSPECIFIED_LIST = "Please specify which timetable to print";
+    public static final String ERROR_UNSPECIFIED_LIST = "Please specify which timetable to print. Accepted inputs are\n"
+            + "1. list_meeting [user]\n"
+            + "2. list_meeting all\n"
+            + "3. list_lesson [user]\n"
+            + "4. list_lesson all\n"
+            + "5. list [user]\n"
+            + "6. list all";
     public static final String ERROR_EMPTY_MASTER_TIMETABLE = "The Master Timetable has no populated timetables!";
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";
-    public static final String ERROR_DUPLICATE_USER = "This user already exists. New timetable will not be created.";
 
     // Meeting
     public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as "
@@ -67,15 +81,24 @@ public class ErrorMessages {
             + "This meeting will not be not added to the timetable.";
     public static final String ERROR_MEETING_DOES_NOT_EXIST = "This meeting does not exist";
 
+    // Free Command
     public static final String ERROR_FREE_INPUT_INVALID = "Please specify the minimum duration for everyone to be free "
             + "where duration is an integer indicating the minimum number of hours: free [duration]\n"
             + "If there is no such constraint for the duration, just input 'free'.";
     public static final String ERROR_NO_FREE_TIMESLOT = "Sorry, there is no timeslot that fits your requirement.";
 
+    // Save
     public static final String ERROR_DATA_SAVE_FAILED = "Error writing to file: MeetingJio.txt";
 
+    // Add User Command
     public static final String ERROR_MISSING_VALUES_ADD_USER = "Please provide a name to add";
+    public static final String ERROR_DUPLICATE_USER = "This user already exists. New timetable will not be created.";
+
+
+    // Clear Command
     public static final String ERROR_UNSPECIFIED_LIST_CLEAR = "Please specify which timetable to Clear";
+
+    // Delete Command
     public static final String ERROR_MISSING_PARAMETERS_DELETE = "Hi 1 or more parameters are missing\n"
             + "The required parameters are:\n"
             + "n/[Name]\n"
@@ -85,6 +108,7 @@ public class ErrorMessages {
             + "n/[Name]\n"
             + "i/[INDEX]\n";
 
+    // Add Meeting Command
     public static final String ERROR_MISSING_PARAMETERS_ADD_MEETING = "Hi 1 or more parameters are missing\n"
             + "The required parameters are:\n"
             + "t/[Title]\n"
@@ -101,6 +125,24 @@ public class ErrorMessages {
             + "et/[EndTime]\n"
             + "m/[Mode]";
 
+    // Edit Command
+    public static final String ERROR_MISSING_PARAMETERS_EDIT = "Hi 1 or more parameters are missing\n"
+            + "The required parameters are:\n"
+            + "\tn/[Name]\n"
+            + "\ti/[Index]\n"
+            + "The optional (at least one) parameters are:\n"
+            + "\tt/[Title]\n"
+            + "\td/[Day]\n"
+            + "\tst/[StartTime]\n"
+            + "\tet/[EndTime]\n"
+            + "\tm/[Mode]";
+
+    public static final String ERROR_MISSING_VALUES_EDIT = "Hi 1 or more parameters have missing values\n"
+            + "The parameters that require values are:\n"
+            + "\tn/[Name]\n"
+            + "\ti/[Index]\n";
+
+    // Load
     public static final String ERROR_MISSING_VALUES_LOAD_LESSON = "Hi 1 or more parameters have missing values "
             + "in the MeetingJio.txt\n"
             + "Please ensure that the following parameters are not empty:\n"
@@ -169,4 +211,7 @@ public class ErrorMessages {
 
     public static final String ERROR_INCORRECT_INDEX = "Hi, please ensure that the index is in correct sequence\n"
             + "1, 2, 3, 4, ...";
+
+    public static final String ERROR_DUPLICATE_USER_LOAD_NAME = " this user has duplicate "
+            + "records in the MeetingJio.txt";
 }
