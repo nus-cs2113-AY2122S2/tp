@@ -1036,29 +1036,23 @@ copy), delete the `werkItResources` directory and restart WerkIt! to recreate th
 
 ## Frequently Asked Questions (FAQ)
 
-**Q**: My terminal in Windows is not displaying any colours in the application.
+### 1. My terminal in Windows is not displaying any colours in the application.
 
 **A**: Please install Microsoft's newer terminal 'Windows Terminal' from the Microsoft Store via this
 [link](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701).
 
-<br/>
-
-**Q**: How do I transfer my data to another computer? 
+### 2. How do I transfer my data to another computer? 
 
 **A**: Locate your `werkItResources` directory and WerkIt! JAR file, copy and paste it in your other 
 computer's desired location. Thereafter, you can run WerkIt! as per normal. 
 (Please see [WerkIt's Local Storage Information](#werkits-local-storage-information) for recommended location).
 
-<br/>
-
-**Q**: I cannot see the workouts that I have created in previous sessions.
+### 3. I cannot see the workouts that I have created in previous sessions.
 
 **A**: Please ensure that you launch WerkIt! from the same directory that you did when starting the application for the 
 first time. Your saved data should be in that directory.
 
-<br/>
-
-**Q**: I keep getting file loading errors whenever I start WerkIt!
+### 4. I keep getting file loading errors whenever I start WerkIt!
 
 **A**: It is possible that your local file data is corrupted. If you have a backup copy of the `werkItResources`
 directory, replace your existing `werkItResources` directory with the backup copy. Otherwise, you will need to
