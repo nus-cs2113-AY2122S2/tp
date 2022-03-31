@@ -8,6 +8,7 @@ import seedu.duke.commands.EditCommand;
 import seedu.duke.commands.SearchCommand;
 import seedu.duke.data.Item;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 /* Contains various stubs and constants used for testing. */
@@ -18,8 +19,10 @@ public class ParserStubs {
     public static final String PAPERCUP_SETRELATIVEQUANTITY = "2";
     public static final String PAPERCUP_DESCRIPTION = "25ml cups";
     public static final String ITEM_INDEX = "1";
-    public static final String BORROW_START_DATE = "2022-03-21";
-    public static final String BORROW_END_DATE = "2022-03-30";
+    public static final String BORROW_START_DATE_STR = "2022-03-21";
+    public static final LocalDate BORROW_START_DATE = LocalDate.parse("2022-03-21");
+    public static final String BORROW_END_DATE_STR = "2022-03-30";
+    public static final LocalDate BORROW_END_DATE = LocalDate.parse("2022-03-30");
     public static final String BORROWER_NAME = "John";
 
     public static final Item PAPERCUP_ITEM = new Item(ParserStubs.PAPERCUP_NAME,
