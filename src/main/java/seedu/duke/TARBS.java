@@ -27,6 +27,7 @@ public class TARBS {
                 System.out.println("Wrong format. All available" +
                         " commands can be seen with the 'help' command");
             }
+            storage.savePackageToFile(packages);
         }
         storage.savePackageToFile(packages);
     }
