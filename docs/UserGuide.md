@@ -148,13 +148,13 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 <br>
 
 **Example 1** 
-- Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.<br><br>
+- Adds a new session named _Class Outing_ involving Alice and Bob on 15-03-2022.<br><br>
   `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br><br>
   ![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
 
 **Example 2** 
 - A [group has been created](#creating-a-group-group-create) with group named *Friends* with Charlie and Mike. <br>
-  Adds a new session named Class Gathering consisting of a group named *Friends* and Alice, on 16-04-2022.<br><br>
+  Adds a new session named _Class Gathering_ consisting of a group named *Friends* and Alice, on 16-04-2022.<br><br>
   `session /create /n Class Gathering /d 16-04-2022 /gid 1 /pl Alice` <br><br>
   ![Session create command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[2].png)
   <br>
@@ -213,10 +213,10 @@ Edits an existing session so that you can change the details of a session.<br>
 
 Examples of usage:
 - A [session has been created](#creating-a-session-session-create) with a unique identifier of 1,
-  named Class Outing with Alice and Bob involved on 15-03-2022.
+  named _Class Outing_ with Alice and Bob involved on 15-03-2022.
 
 **Example 1** 
-- Edits the name of the session to Class gathering and date to 16-03-2022. <br><br>
+- Edits the name of the session to _Class gathering_ and date to 16-03-2022. <br><br>
   `session /edit /sid 1 /n Class gathering /d 16-03-2022` <br><br>
   ![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
 
@@ -317,13 +317,13 @@ There are 2 ways that you can create an activity:
 <br>
 
 **Example 1**
-- Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid a total of $10
+- Adds a new activity to a session with a session unique identifier of 2 named _Class Lunch_. Alice paid a total of $10
   for both Bob and herself which is split equally between them later on.<br><br>
   `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br><br>
   ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 
 **Example 2**
-- Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
+- Adds a new activity to a session with a session unique identifier of 2 named _Class Lunch_. Alice paid for both
   Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.<br><br>
   `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br><br>
   ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
@@ -527,7 +527,7 @@ participated by the same group of persons.
 <br>
 
 **Example**:
-- Adds a new group named Uni Friends, with Alice and Bob involved.<br><br>
+- Adds a new group named _Uni Friends_, consisting of Alice and Bob.<br><br>
   `group /create /n Uni Friends /pl Alice Bob` <br><br>
   ![Group create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupCreateCommand.png)
   <br>
@@ -580,10 +580,10 @@ Edits an existing group so that you can change the details of a group.<br>
 <br>
 
 Examples of usage:
-- A group with a unique identifier of 1 was previously created, and named Class Outing with Alice and Bob involved.
+- A group with a unique identifier of 1 was previously created, and named _Class Outing_ with Alice and Bob involved.
 
 **Example 1**
-- Edits the group name to Class gathering. <br><br>
+- Edits the group name to _Class gathering_. <br><br>
   `group /edit /gid 1 /n Class gathering` <br><br>
   ![Group Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[1].png)
 
