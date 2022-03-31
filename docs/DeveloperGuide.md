@@ -95,7 +95,7 @@ and `Name` classes.
   It also holds an _optional_ `Group` object (explained in further detail in the following point).
   * A `Session` object is identified by a _session unique identifier_.
 * The `Group` class holds a single `PersonList` object and simply represents a collection of persons.<br>
-  A `Group` object serves as a reusable shortcut to represent a larger group of participants if used 
+  A `Group` object serves as a reusable shortcut to represent a group of participants if used 
   in the creation of a `Session` object.
   * A `Group` object is identified by a _group unique identifier_.
 * The `Activity` class holds a single `PersonList` object that represents persons involved in the activity as well as
