@@ -345,6 +345,16 @@ The general workflow of the `activity /create` command is as follows:
 12. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully created with `TextUi#printlnMessage`.
 
 ### Remove an activity
+**API reference:** [`ActivityDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityDeleteCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `activity /delete` command.
+<br>
+<br>
+![Create Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ActivityDeleteCommand.drawio.png)
+<br>
+<br>
+
 ### View an activity
 
 ### List activities
