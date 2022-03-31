@@ -13,6 +13,9 @@ Spendvelope -> Parser: parseCommand(fullUserInput)
 alt add command
     |||
     ref over Parser, Command: addCommand
+else delete command
+    |||
+    ref over Parser, Command: deleteCommand
     note right: Command object is created and returned to \nParser in each of the command references
 end
 Spendvelope <-- Parser: command
