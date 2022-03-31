@@ -1,3 +1,11 @@
+---
+layout: default
+title: WerkIt! User Guide
+nav_order: 1
+parent: WerkIt! Docs Main Menu
+---
+
+
 # WerkIt! Developer Guide
 
 ## Table of Contents

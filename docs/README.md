@@ -1,3 +1,10 @@
+---
+layout: default
+title: WerkIt! Docs Main Menu
+nav_order: 1
+has_children: true
+---
+
 # WerkIt!
 
 WerkIt! is an application for managing workout routines,
