@@ -19,8 +19,9 @@ public class ListFutureBorrowingsCommand extends Command {
     }
 
     public void execute(ItemList itemList, Ui ui) {
+        ui.showMessages("Here is a list of future borrowings: ");
+
         if (name.isPresent()) {
-            ui.showMessages("Here is a list of overdue borrowings for " + name.get() + ": ");
             for (int i = 0; i < itemList.getSize(); i++) {
                 Item borrowedItem = itemList.getItem(i);
                 ArrayList<BorrowRecord> borrowRecords = borrowedItem.getBorrowRecords();
@@ -36,7 +37,6 @@ public class ListFutureBorrowingsCommand extends Command {
                 }
             }
         } else {
-            ui.showMessages("Here is a list of overdue borrowings: ");
             for (int i = 0; i < itemList.getSize(); i++) {
                 Item borrowedItem = itemList.getItem(i);
                 ArrayList<BorrowRecord> borrowRecords = borrowedItem.getBorrowRecords();
