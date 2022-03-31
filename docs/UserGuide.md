@@ -234,7 +234,7 @@ Borrow the item that you want for the duration between the start date and end da
 
 Format: `borrow i/ITEM_INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
 * `ITEM_INDEX` should be within one of the index for ItemList.
-* The `START_DATE` and `END_DATE` must be in DD-MM-YYYY format.
+* The `START_DATE` and `END_DATE` must be in YYYY-MM-DD format.
 * The `BORROWER_NAME` cannot contain punctuations.
 
 Examples of usage:
