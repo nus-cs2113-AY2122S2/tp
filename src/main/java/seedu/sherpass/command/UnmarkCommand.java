@@ -23,7 +23,6 @@ public class UnmarkCommand extends Command {
      * Saves index of task to mark.
      *
      * @param markIndex Task index to mark.
-     * @param taskList  Task array.
      */
     public UnmarkCommand(int markIndex) {
         this.markIndex = markIndex;
