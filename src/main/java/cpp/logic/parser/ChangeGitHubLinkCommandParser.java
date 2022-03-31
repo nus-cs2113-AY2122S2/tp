@@ -5,7 +5,7 @@ import cpp.logic.commands.ChangeGitHubLinkCommand;
 import cpp.ui.Constants;
 
 /**
- * Parses input arguments and creates a new ChangeGitHubLinkCommand object
+ * Parses input arguments and creates a new ChangeGitHubLinkCommand object.
  */
 
 public class ChangeGitHubLinkCommandParser implements CommandParser<ChangeGitHubLinkCommand> {

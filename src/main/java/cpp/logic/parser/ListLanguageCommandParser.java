@@ -7,7 +7,7 @@ import cpp.logic.commands.ListLanguageCommand;
 import java.util.Arrays;
 
 /**
- * Parses input arguments and creates a new ListLanguageCommand object
+ * Parses input arguments and creates a new ListLanguageCommand object.
  */
 
 public class ListLanguageCommandParser implements CommandParser<ListLanguageCommand> {

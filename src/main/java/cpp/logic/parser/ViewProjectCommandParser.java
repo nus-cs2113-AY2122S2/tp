@@ -7,7 +7,7 @@ import cpp.logic.commands.ViewProjectCommand;
 import java.util.Arrays;
 
 /**
- * Parses input arguments and creates a new ViewProjectCommand object
+ * Parses input arguments and creates a new ViewProjectCommand object.
  */
 
 public class ViewProjectCommandParser implements CommandParser<ViewProjectCommand> {

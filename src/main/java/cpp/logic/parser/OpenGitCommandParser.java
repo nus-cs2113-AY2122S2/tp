@@ -8,7 +8,7 @@ import cpp.logic.commands.OpenGitCommand;
 import java.util.Arrays;
 
 /**
- * Parses input arguments and creates a new OpenGitCommand object
+ * Parses input arguments and creates a new OpenGitCommand object.
  */
 
 public class OpenGitCommandParser implements CommandParser<OpenGitCommand> {

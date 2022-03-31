@@ -5,7 +5,7 @@ import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.AddLanguageCommand;
 
 /**
- * Parses input arguments and creates a new AddLanguageCommand object
+ * Parses input arguments and creates a new AddLanguageCommand object.
  */
 
 public class AddLanguageCommandParser implements CommandParser<AddLanguageCommand> {

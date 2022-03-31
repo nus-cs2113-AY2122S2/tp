@@ -5,7 +5,7 @@ import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.AddTodoCommand;
 
 /**
- * Parses input arguments and creates a new AddTodoCommand object
+ * Parses input arguments and creates a new AddTodoCommand object.
  */
 
 public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {

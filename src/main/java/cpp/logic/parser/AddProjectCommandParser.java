@@ -7,7 +7,7 @@ import cpp.logic.commands.AddProjectCommand;
 import java.util.Arrays;
 
 /**
- * Parses input arguments and creates a new AddProjectCommand object
+ * Parses input arguments and creates a new AddProjectCommand object.
  */
 
 public class AddProjectCommandParser implements CommandParser<AddProjectCommand> {

@@ -5,7 +5,7 @@ import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.MarkCommand;
 
 /**
- * Parses input arguments and creates a new MarkCommand object
+ * Parses input arguments and creates a new MarkCommand object.
  */
 
 public class MarkCommandParser implements CommandParser<MarkCommand> {
