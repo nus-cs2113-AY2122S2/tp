@@ -49,8 +49,7 @@ public class BorrowCommand extends Command {
         ui.showMessages("Item has been successfully borrowed!",
                 "Name of Item: " + item.getName(),
                 "Name of Borrower: " + borrowerName,
-                "BorrowDuration: " + startDate + " to " + endDate,
-                "Borrow Status: " + borrowStatus);
+                "Borrow Duration: " + startDate + " to " + endDate);
     }
 
     @Override
