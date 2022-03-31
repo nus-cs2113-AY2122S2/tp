@@ -1,6 +1,6 @@
 package cpp.logic.parser;
 
-import cpp.Constants;
+import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.ViewProjectCommand;
 

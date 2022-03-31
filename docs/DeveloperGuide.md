@@ -1,40 +1,102 @@
 # Developer Guide
 
+- [Acknowledgements](#Acknowledgements)  
+- [Design & Implementation](#Design-&-Implementation)  
+  - [Architecture](#Architecture)
+  - [Implemented Features](#Implemented-Features)
+  - [Proposed Features](#Proposed-Features)
+- [Product scope](#Product-scope)
+- [User Stories](#User-Stories)
+- [Glossary](#Glossary)
+- [Instructions for manual testing](#Instructions-for-manual-testing)
+
+
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The design of Developer Guide is referenced from the [AB-3 Developer Guide](http://se-education.org/addressbook-level3/DeveloperGuide.html).
 
-## Design & implementation
+
+
+## Design & Implementation
+### Architecture
+#### Main components of the architecture
+![image info](./UmlDiagrams/Structure.png)  
+
+**Main** contains the main class called `CsProjPlanner`. It is responsible for:
+* At app launch: invokes methods to initialize the app, and gets prepared for receiving user input.
+* At shut down: invokes methods to store generated data.
+
+**UI** contains two classes `Constants` and `Response`. It is responsible for:
+* Store messages which will be displayed frequently.
+* Store magic numbers.
+* Handles the responses to give to user.  
+
+**Logic Component**  
+![image info](./UmlDiagrams/Logic.png)
+How the `Logic` component works:
+* When `CommandHandler` is called upon to execute a command, it creates `XYZCommandParser` object(e.g.,`AddProjectCommandParser`) which parses the user command and create a `XYZCommand` object (e.g., `AddProjectCommand`).
+* The created `XYZCommand` object is returned as a `Command` object.
+* All `XYZCommandParser` classes(e.g., `AddProjectCommandParser`, `AddTodoCommandParser`)inherit from the `Parser` interface.
+
+
+**Model Component**
+![image info](./UmlDiagrams/Model.png)
+
+* The `Model` component stores all project data i.e., all `Project` objects in a list i.e.`ProjectList`.  
+* Each project contains `Deadline` and `Todo` objects.  
+* Does not depend on any of the other components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+
+**Storage** contains class `Storage`. It is responsible for:
+* Save project data in txt format, and read them back into corresponding objects.
+* Dependent on some classes in the `Model` component.
+
 
 ### Implemented Features
 
+Following a restucture to the project to follow a more Object Oriented structure, as well as to allow for conformity and easy editing of code, many of our commands will follow a similar structure of the following:
+
+1. User enters a command, which is given to a Command Handler
+2. The handler passes this to a corresponding Parser object for that command, which will split it into its necessary parts
+3. The Parser will create a corresponding Command object for that command, which will perform its necessary actions
+4. The Command object will return successfully to the Command Handler, and the output will be given to the user (output for the user is stored in a `Response` class)
+
+The basic flow of the structure:
+
+![image info](./UmlDiagrams/CommandParser.png)
+
+**Step 1.** The user inputs command. The command is retrieved by `handleUserInput()` in `CommandHandler`.
+
+**Step 2.** `handleUserInput()` will check command type and create a new `CommandParser` object and call `parse()` in `CommandParser`.
+
+**Step 3.** `CommandParser` will check if the input can be parsed into a valid command. If it fails, it will throw exceptions. After parsing the user’s input, `CommandParser` will create a new `Command` object and return it back to `CommandHandler`.
+
+**Step 4.** `CommandHandler` will call `executeCommand()` in its own class to execute the returned command.
+
+The command to add a project is one example of this structure:
+
 #### Add a Project
-![image info](./UmlDiagrams/addProject.png)
+![image info](./UmlDiagrams/addProjectNew.png)
 
-**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+**Step1.** After recieving the necessary method call, the `CommandHandler` class will self-call executeCommand with both the list of projects as well as a constructor call to AddProjectCommandParser (and a call to the parse method of AddProjectCommandParser) as its parameters
 
-**Step2.** Once this project name is returned, `CommandHandler` will call the `addProject` method from `ProjectList` with the project Name as a parameter
+**Step2.** The AddProjectCommandParser object instance is created
 
-**Step3.** `ProjectList` will self-call the `add` method, using a constructor to a new `Project` object as a parameter
+**Step3.** The parse method of AddProjectCommandParser is called with `commands` (the user input) as its parameter.
 
-**Step4.** This new `Project` object is returned to the ProjectList, added, and the output "[projectName] added." is given to the user.
+**Step4.** AddProjectCommandParser will self call its `getProjectTitle` method. This will split the user's input and return the correct name for the project
 
-#### Delete a Project
-![image info](./UmlDiagrams/deleteProject.png)
+**Step5.** After returning this projectTitle to itself, `AddProjectCommandParser` will call the constructor for a new `AddProjectCommand` object
 
-Deleting a project functions very similarly to Adding a project.
+**Step6.** This `AddProjectCommand` object will use the newly gathered project name to call the `addProjct` command of the `ProjectList` class.
 
-**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+**Step7.** The status of this command completing is returned to `CommandHandler`, and the output is sent to the user.
 
-**Step2.** Once this project name is returned, `CommandHandler` will call the `deleteProject` method from `ProjectList` with the project Name as a parameter.
+Deleting a project will follow nearly the exact same structure; the only difference is that the corresponding Parser and Command objects will be used (`DeleteProjectCommandParser` and `DeleteProjectCommand`)
 
-**Step3.** `ProjectList` will self-call the findProjectIndex method, which will take the project name as a parameter.
-
-**Step4.** The findProjectIndex method will call `getTitle` with the project name as a parameter.
-
-**Step5.** the `findProjectIndex` method is called on every Project in the ProjectList until it finds the correct one. If it doesn't, the user is given an according error message.
-
-**Step6.** The index of the project is returned, and `ProjectList` will self-call the remove(index) method, removing the project from the planner.
+#### sDelete a Project
+![image info](./UmlDiagrams/deleteProjectNew.png)
+*The steps are omitted here as they are the exact same as adding a project, only with the differing class names previously mentioned.
 
 #### Print Project List
 ![image info](./UmlDiagrams/printProject.png)
@@ -50,17 +112,15 @@ Deleting a project functions very similarly to Adding a project.
 **Step5.** the general information of a project, i.e., its title and deadline, will be displayed.
 
 #### Todo feature
-![image info](./UmlDiagrams/Todo.png)  
+![image info](./UmlDiagrams/UpdatedTodoSequence.png)  
 
-**Step1.** When `CommandHandler` receives a user input starting with string “todo”, it will call `toDo()` function to parse the user input into the index of the target `Project` object and one description string.  
+**Step1.** When `CommandHandler` receives a user input starting with string “todo”, it will create a `AddTodoCommandParser` object and call `parse()`function to parse the user input.  
 
-**Step2.** If the number of provided arguments is less than the required number, the `toDo()` function will throw an `IllegalCommand` exception and return.  
+**Step2.** The `AddTodoCommandParser` object will parse the todo input. Upon parsing the user input, it will create a `AddTodoCommand` and return it back to `CommandHandler`.  
 
-**Step3.** If no exception is thrown, two strings will be generated by parsing the user input and the `toDo()` function will pass the two arguments to `projectList` for creating and adding a `Todo` object to a `Project` object.  
+**Step3.** After `CommandHandler` obtains the `AddTodoCommand` returned by `AddTodoCommandParser`, it then calls `executeCommand()` method in its own class.  
 
-**Step4.** When `projectList` receives the call, it will get the target `Project` object and pass the description string to it.  
-
-**Step5.** The `Project` object will create a `Todo` object and add it to the `ArrayList<Todo>` in `Project` class.  
+**Step4.** `executeCommand()` will call `execute()` method of `AddTodoCommand`. `AddTodoCommand` will call `addTodoToProject()` method in order to get the target project and add todo to it.
 
 #### View a Project
 
@@ -97,20 +157,8 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 ### Proposed Features
 
-![image info](./UmlDiagrams/CommandParser.png)  
+ 
 
-The proposed parse command feature makes use of CommandParser and its subclasses, and Command and its subclasses.  
-In the version 1.0 we simply used CommandHandler to parse user input for different commands, which may lead to violation of single responsibility principle. The proposed implementation will implement one command parser for each command (e.g. AddProjectCommand will have a paser named AddProjectCommandParser).  
-
-Given below is an example usage scenario and how the command parser behaves at each step.
-
-**Step 1.** The user inputs command. The command is retrieved by `handleUserInput()` in `CommandHandler`.  
-
-**Step 2.** `handleUserInput()` will check command type and create a new `CommandParser` object and call `parse()` in `CommandParser`.  
-
-**Step 3.** `CommandParser` will check if the input can be parsed into a valid command. If it fails, it will throw exceptions. After parsing the user’s input, `CommandParser` will create a new `Command` object and return it back to `CommandHandler`.  
-
-**Step 4.** `CommandHandler` will call `executeCommand()` in its own class to execute the returned command.  
 
 #### Tasks Due Soon Feature
 The Tasks Due Soon feature makes use of `ProjectList` and `CommandHandler` classes. It is facilitated by methods within the `Todo` and `Project` classes, stored within `ProjectList`.
@@ -129,7 +177,40 @@ The Tasks Due Soon feature makes use of `ProjectList` and `CommandHandler` class
 
 
 
-#### Parse Command Feature
+
+
+### Previous project structure
+During v2.0, CSProjPlanner underwent a structure change to make it more OOP oriented and to make commands function in a way that are much more similar to each other.
+
+Because of this, many sequence diagrams look similar in the current version. The following sequence diagrams and explanations show what some of our features looked like at the end of v1.0:
+
+#### Add a Project
+![image info](./UmlDiagrams/addProject.png)
+
+**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+
+**Step2.** Once this project name is returned, `CommandHandler` will call the `addProject` method from `ProjectList` with the project Name as a parameter
+
+**Step3.** `ProjectList` will self-call the `add` method, using a constructor to a new `Project` object as a parameter
+
+**Step4.** This new `Project` object is returned to the ProjectList, added, and the output "[projectName] added." is given to the user.
+
+#### Delete a Project
+![image info](./UmlDiagrams/deleteProject.png)
+
+Deleting a project functions very similarly to Adding a project.
+
+**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+
+**Step2.** Once this project name is returned, `CommandHandler` will call the `deleteProject` method from `ProjectList` with the project Name as a parameter.
+
+**Step3.** `ProjectList` will self-call the findProjectIndex method, which will take the project name as a parameter.
+
+**Step4.** The findProjectIndex method will call `getTitle` with the project name as a parameter.
+
+**Step5.** the `findProjectIndex` method is called on every Project in the ProjectList until it finds the correct one. If it doesn't, the user is given an according error message.
+
+**Step6.** The index of the project is returned, and `ProjectList` will self-call the remove(index) method, removing the project from the planner.
 
 ## Product scope
 ### Target user profile
@@ -164,11 +245,7 @@ the program also allows for faster searching and editing than a GUI design once 
 | v2.0    | student user                | add any web links/URLs                                    | keep track of relevant resources online                                           |
 | v2.0    | student user                | have quick access to my project's Github repo             | best keep track of my project lifecycle                                           |
 | v2.0    | student user                | list the programming languages/frameworks my project uses | know what languages/frameworks focus on and study                                 |
-| v2.0    | student user                | check what needs to be done within 24 hours               | focus on the most time-sensitive tasks                                            |
-| v2.0    | user with group projects    | assign tasks to members in a group                        | keep track of who is responsible for which part of the project                    |
-| v2.0    | user with group projects    | add members to a project                                  | remember who my group members are                                                 |
 | v2.0    | student user                | add a deadline to a to-do                                 | know the deadlines for each individual to-do                                      |
-| v2.0    | student user                | view my to-dos in order of due date                       | so that I know what I may need to work on first                                   |
 | v2.0    | student user                | save my project information in a file                     | keep a backup and also save my projects/schedules for the next time I use the app |
 
 ## Non-Functional Requirements
@@ -179,8 +256,9 @@ the program also allows for faster searching and editing than a GUI design once 
 
 ## Glossary
 
-* *Project* - Within CS ProjPlanner, a project is embarked on by Computer Science students for their university classes. As such, on top of typical project elements like titles, deadlines and tasks, projects include programming languages and GitHub repository links.
 * *Mainstream OS* - Windows, MacOS and Linux (Ubuntu) are all able to run CS ProjPlanner
+* *Project* - Within CS ProjPlanner, a project is embarked on by Computer Science students for their university classes. As such, on top of typical project elements like titles, deadlines and tasks, projects include programming languages and GitHub repository links.
+* *Todo* - Within each project is a list of (optional to add) todo's. These represent tasks to be done on the project
 
 ## Instructions for manual testing
 
