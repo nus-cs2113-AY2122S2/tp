@@ -127,6 +127,7 @@ public class Project {
     public void printDetails() {
         System.out.print("Project Name: " + getTitle() + "\n");
         System.out.print("Deadline: " + getDeadline() + "\n");
+        System.out.println("GitHub Repo: " + getGitHubLink());
         int count = 1;
         for (Todo todo: getTodos()) {
             System.out.print("\t" + "[" + count + "]. " + todo.toString() + "\n");

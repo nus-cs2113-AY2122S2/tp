@@ -4,6 +4,8 @@ import cpp.ui.Constants;
 import cpp.exceptions.NegativeIndexException;
 import cpp.model.project.Project;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -164,12 +166,41 @@ public class ProjectList {
                 project.setDeadline(deadline);
                 System.out.println("Deadline added to " + title + ": " + deadline);
             } catch (DateTimeParseException e) {
-                System.out.println("Improper format. Please look the valid format for dates");
+                System.out.println("Improper format. Please look at the valid format for dates");
             }
         } else {
             System.out.println("Sorry! There was no project with that name.");
         }
         System.out.println(Constants.SEPARATOR);
+    }
+
+    /**
+     * Changes the GitHub repo link of a Project.
+     *
+     * @param title Name of the project
+     * @param githubLink New GitHub repo link for the project
+     */
+    public void addGithubLink(String title, String githubLink) {
+        assert (title != null && title != "" && githubLink != null && githubLink != "") : "Cannot add deadline.";
+        URI githubURI;
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(title);
+        if (index != Constants.PROJECT_NOT_FOUND) {
+            System.out.println("hey");
+            Project project = projectList.get(index);
+            try {
+                githubURI = new URI(githubLink);
+                project.setGitHubLink(githubLink);
+                System.out.println("The Github Repo for " + title + " has been changed to: " + githubLink);
+            } catch (URISyntaxException e) {
+                System.out.println(Constants.MESSAGE_INVALID_LINK_FORMAT);
+            }
+        } else {
+            System.out.println(title + " -- " + index);
+            System.out.println("Sorry! There was no project with that name.");
+        }
+        System.out.println(Constants.SEPARATOR);
+
     }
 
     /**

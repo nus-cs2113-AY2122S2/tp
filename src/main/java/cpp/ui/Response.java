@@ -99,4 +99,12 @@ public class Response {
     public static String addDeadlineUnsuccessfully() {
         return "Deadline addition was Unsuccessful.";
     }
+
+    public static String addGithubLinkSuccessfully(String projectTitle, String githubLink) {
+        return "Github repo link " + githubLink + " added (or changed) in " + projectTitle + ".";
+    }
+
+    public static String addGithubLinkUnsuccessfully() {
+        return "Github repo link addition (or change) was unsuccessful.";
+    }
 }

@@ -59,7 +59,7 @@ Following a restucture to the project to follow a more Object Oriented structure
 1. User enters a command, which is given to a Command Handler
 2. The handler passes this to a corresponding Parser object for that command, which will split it into its necessary parts
 3. The Parser will create a corresponding Command object for that command, which will perform its necessary actions
-4. The Command object will return successfully to the Command Handler, and the output will be given to the user (output for the user is stored in a `Response` class)
+4. The Command object will return successfully to the Command Handler, and the output will be given to the user
 
 The basic flow of the structure:
 

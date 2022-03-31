@@ -32,6 +32,12 @@ public class Constants {
     public static final String MESSAGE_INVALID_ADD_MEMBER_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
             + "addmember [project_title] [member_name] /c[contact_number] /e[email]";
+    public static final String MESSAGE_INVALID_CHANGEGITHUBLINK_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
+            + "The correct format should be:\n"
+            + "changegit [project_title] [website URL]";
+    public static final String MESSAGE_INVALID_LINK_FORMAT =
+            "Please use the following format for your link:"
+            + "http://www.----.com";
 
     public static final int PROJECT_NOT_FOUND = -1;
     public static final int TWO_ARGUMENTS = 2;
