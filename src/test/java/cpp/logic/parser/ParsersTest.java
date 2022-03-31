@@ -4,7 +4,7 @@ import cpp.exceptions.IllegalCommandException;
 import cpp.exceptions.NegativeIndexException;
 import cpp.logic.commands.AddDeadlineCommand;
 import cpp.model.ProjectList;
-import cpp.response.Response;
+import cpp.ui.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

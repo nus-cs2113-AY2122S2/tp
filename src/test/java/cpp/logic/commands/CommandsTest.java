@@ -2,7 +2,7 @@ package cpp.logic.commands;
 
 import cpp.exceptions.IllegalCommandException;
 import cpp.model.ProjectList;
-import cpp.response.Response;
+import cpp.ui.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
