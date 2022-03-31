@@ -6,8 +6,8 @@ import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.money.Expenditure;
 import seedu.planitarium.money.Income;
-import seedu.planitarium.person.Family;
-import seedu.planitarium.person.Person;
+import seedu.planitarium.family.Family;
+import seedu.planitarium.family.Person;
 
 import java.io.File;
 import java.io.FileWriter;

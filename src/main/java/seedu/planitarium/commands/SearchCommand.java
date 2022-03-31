@@ -1,11 +1,9 @@
 package seedu.planitarium.commands;
 
-import seedu.planitarium.ProjectLogger;
-import seedu.planitarium.exceptions.InvalidIndexException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.parser.Parser;
-import seedu.planitarium.person.Family;
+import seedu.planitarium.family.Family;
 
 import java.util.logging.Level;
 

@@ -1,6 +1,6 @@
 //@@author teanweijun
 
-package seedu.planitarium.person;
+package seedu.planitarium.family;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;

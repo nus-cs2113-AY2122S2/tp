@@ -4,7 +4,7 @@ import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.exceptions.UnknownInputException;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
-import seedu.planitarium.person.Family;
+import seedu.planitarium.family.Family;
 import seedu.planitarium.ProjectLogger;
 
 import java.util.logging.Level;

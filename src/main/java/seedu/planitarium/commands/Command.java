@@ -2,9 +2,7 @@ package seedu.planitarium.commands;
 
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Constants;
-import seedu.planitarium.person.Family;
-import seedu.planitarium.person.PersonList;
-import seedu.planitarium.global.UI;
+import seedu.planitarium.family.Family;
 
 public abstract class Command {
 
