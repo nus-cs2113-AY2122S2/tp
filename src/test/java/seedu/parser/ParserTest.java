@@ -283,6 +283,13 @@ class ParserTest {
     }
 
     @Test
+    void parseCommand_trailingWhiteSpace_success() {
+        Command testCommand = parser.parseCommand("delete s/S1234567E         ");
+        Command expectedCommand = new DeleteCommand(new ArrayList<>(Collections.singleton("S1234567E")));
+        assertEquals(expectedCommand, testCommand);
+    }
+
+    @Test
     void parseCommand_deleteCommand_wrongArgType_exceptionThrown() {
         Command expectedCommand = new IncorrectCommand(DeleteCommand.COMMAND_WORD
                 + DeleteCommand.COMMAND_DESCRIPTION);
