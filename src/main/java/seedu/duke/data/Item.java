@@ -89,7 +89,14 @@ public class Item {
     // String representation of an item when printed on Ui
     @Override
     public String toString() {
-        return String.format("%s | %d", name, quantity);
+        return String.format("%s | %d", this.name, this.quantity);
+    }
+
+    public String toDetailedString() {
+        if (this.description.length()>15) {
+            return String.format("%s | %d | %s", this.name, this.quantity, this.description.substring(0, 14) + "...");
+        }
+        return String.format("%s | %d | %s", this.name, this.quantity, this.description);
     }
 
     @Override
