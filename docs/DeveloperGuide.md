@@ -89,12 +89,12 @@ The `Profile` component is responsible for all data management and accesses with
 The `Profile` component consists of the `Profile`, `Session`, `Activity`, `PersonList`, `Person`, `ActivityCost`
 and `Name` classes.
 * The `Profile` class serves as a container and holds a list of all `Session` and `Group` objects created by the user.<br>
-  It also keeps track and issues new _unique identifiers_ for the creation of `Session`, `Activity` and `Group` objects.
+  It also keeps track of and issues new _unique identifiers_ for the creation of `Session`, `Activity` and `Group` objects.
 * The `Session` class stores a list of `Activity` objects that are created within a `Session` object as well as a
   `PersonList` object that represent a collection of all participants in the session.<br>
-  It also holds an _optional_ `Group` object (explained in further detail in the following point).
+  It also holds an _optional_ `Group` object (explained in detail in the following point).
   * A `Session` object is identified by a _session unique identifier_.
-* The `Group` class holds a single `PersonList` object and simply represents a collection of persons.<br>
+* The `Group` class holds a single `PersonList` object and represents a collection of persons.<br>
   A `Group` object serves as a reusable shortcut to represent a group of participants if used 
   in the creation of a `Session` object.
   * A `Group` object is identified by a _group unique identifier_.
