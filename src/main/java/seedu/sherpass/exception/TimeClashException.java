@@ -1,11 +1,10 @@
 package seedu.sherpass.exception;
 
+import seedu.sherpass.task.Task;
+
 public class TimeClashException extends Exception {
-    public TimeClashException(String message) {
-        super(message);
-    }
 
-    public TimeClashException() {
-
+    public TimeClashException(Task clashingTask) {
+        super(clashingTask.toString());
     }
 }
