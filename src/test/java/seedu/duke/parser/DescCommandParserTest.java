@@ -3,6 +3,7 @@ package seedu.duke.parser;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.DescCommand;
 import seedu.duke.exceptions.InvMgrException;
+import seedu.duke.stubs.ParserStubs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

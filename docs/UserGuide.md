@@ -29,17 +29,17 @@ HDMI Cable | 2
 ```
 
 
-### List Current Borrowings: `list -cb`
+### List Current Borrowings: `listcb`
 List all items that are currently being borrowed. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
 
 Format:   
-`list -cb`: List all items that are current being borrowed.  
-`list -cb p/BORROWER_NAME`: List all items that are currently being borrowed by Sally
+`listcb`: List all items that are current being borrowed.  
+`listcb p/BORROWER_NAME`: List all items that are currently being borrowed by borrower
 * `BORROWER_NAME` must not contain punctuations.
 
 Examples of usage:
 ```
-> list -cb
+> listcb
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
@@ -54,12 +54,12 @@ Borrow Duration: 2021-03-29 to 2021-04-01
 ```
 If there are no items have been borrowed from the inventory, the `list -cb` command will return:
 ```
-> list -cb
+> listcb
 There are no items in the inventory being borrowed.
 ```
 
 ```
-> list -cb p/Sally
+> listcb p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-23 to 2021-03-30
@@ -70,7 +70,7 @@ Borrow Duration: 2021-04-24 to 2021-04-30
 ```
 If the person does not exist in the borrowings, the `list -cb p/BORROWER_NAME` will return:
 ```
-> list -cb p/David
+> listcb p/David
 There are no items currently borrowed by David.
 ```
 
@@ -170,14 +170,14 @@ There are no overdue borrowings for David.
 ### Borrow an Item: `borrow`
 Borrow the item that you want for the duration between the start date and end date.
 
-Format: `borrow INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
-* `INDEX` should be within one of the index for ItemList.
+Format: `borrow i/ITEM_INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
+* `ITEM_INDEX` should be within one of the index for ItemList.
 * The `START_DATE` and `END_DATE` must be in DD-MM-YYYY format.
 * The `BORROWER_NAME` cannot contain punctuations.
 
 Examples of usage:
 ```
-> borrow 23 s/2021-03-21 e/2021-03-23 p/John Smith
+> borrow i/23 s/21-03-2021 e/23-03-2021 p/John Smith
 You have successfully borrowed the following item:
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
@@ -185,12 +185,12 @@ Borrow Duration: 2021-03-21 to 2021-03-23
 ```
 
 ```
-> borrow 12 s/2021-03-21 e/2021-03-23 p/John Smith
+> borrow i/12 s/21-03-2021 e/23-03-2021 p/John Smith
 Sorry. The item is not avaiable for borrowing during this duration.
 ```
 
 ```
-> borrow 28
+> borrow i/28
 Sorry. This item does not exist in the current inventory.
 ```
 
