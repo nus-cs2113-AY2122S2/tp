@@ -67,7 +67,7 @@ public class EditCommand extends Command {
         if (this.description.isPresent()) {
             placeholderItem.setDescription(this.description.get());
         }
-        ui.showMessages(String.format(EDIT_RESULT_FORMAT, this.index, targetedItem, placeholderItem));
+        ui.showMessages(String.format(EDIT_RESULT_FORMAT, this.index, targetedItem.toDetailedString(), placeholderItem.toDetailedString()));
         itemList.set(index, placeholderItem);
 
     }
