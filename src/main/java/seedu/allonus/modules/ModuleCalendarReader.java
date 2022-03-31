@@ -14,6 +14,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
@@ -25,7 +31,7 @@ public class ModuleCalendarReader {
     private static final String FILE_NOT_FOUND_MESSAGE = "No such file found! Please ensure you have the correct name."
             + "\nThen place the file in the same directory as AllOnUs.jar.";
     private static final String LOGGER_FILE_NOT_FOUND = "No .ics file was found under the given name.";
-    private static final String SINGAPORE_TIMEZONE_KEYWORD = "SGT";
+    private static final String SINGAPORE_TIMEZONE_KEYWORD = "Asia/Singapore";
     private static final String ICS_DATE_FORMAT = "yyyyMMdd'T'HHmmss'Z'";
     private static final String PARSE_SUCCESS_MESSAGE = "\nI have found these modules from your ics file:\n";
     private static final String ADDED_TO_SCHEDULE_MESSAGE = "\nI have added these to your existing schedule!";
@@ -52,6 +58,7 @@ public class ModuleCalendarReader {
     private static final String FRIDAY = "Friday";
     private static final String SATURDAY = "Saturday";
     private static final String MODULE_CATEGORY_EXAM = "Exam";
+    public static final String UTC_TIMEZONE_KEYWORD = "UTC";
     private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
 
     static String icsFilePath;
@@ -80,8 +87,14 @@ public class ModuleCalendarReader {
     Date dateEnd;
     CalendarBuilder builder;
     SimpleDateFormat dateFormat;
+    SimpleDateFormat timeFormat;
     Calendar calendar;
     TimeZone sgTimeZone = TimeZone.getTimeZone(SINGAPORE_TIMEZONE_KEYWORD);
+    TimeZone utcTimeZone = TimeZone.getTimeZone(UTC_TIMEZONE_KEYWORD);
+    ZoneId sgZoneId = ZoneId.of(SINGAPORE_TIMEZONE_KEYWORD);
+    DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+            .appendPattern("h:mm a")
+            .toFormatter();
 
     public ArrayList<Module> parseIcsCalendar() {
         try {
@@ -89,7 +102,8 @@ public class ModuleCalendarReader {
             builder = new CalendarBuilder();
             dateFormat = new SimpleDateFormat(ICS_DATE_FORMAT);
 
-            dateFormat.setTimeZone(sgTimeZone);
+            // initially the data comes in utc timezone, we would later be converting it to sg timezone
+            dateFormat.setTimeZone(utcTimeZone);
             final UnfoldingReader unfoldingReader = new UnfoldingReader(new FileReader(icsFilePath), true);
 
             calendar = builder.build(unfoldingReader);
@@ -163,15 +177,22 @@ public class ModuleCalendarReader {
     private void getModuleEndTime(Property property) throws ParseException {
         String endTime = property.getValue();
         dateEnd = dateFormat.parse(endTime);
-        // System.out.println("End: " + dateEnd);
-        timeSlot.append("-" + new SimpleDateFormat(TIME_FORMAT_WITH_AMPM).format(dateEnd));
+        Instant instant = dateEnd.toInstant();
+        ZonedDateTime zonedDateEnd = instant.atZone(sgZoneId);
+        // timeFormat = new SimpleDateFormat(TIME_FORMAT_WITH_AMPM);
+        // timeFormat.setTimeZone(sgTimeZone);
+
+        timeSlot.append("-" +  zonedDateEnd.format(formatter));
     }
 
     private void getModuleStartTime(Property property) throws ParseException {
         String startTime = property.getValue();
         dateStart = dateFormat.parse(startTime);
-        // System.out.println("Start: " + dateStart);
-        timeSlot.append(new SimpleDateFormat(TIME_FORMAT_WITH_AMPM).format(dateStart));
+        Instant instant = dateStart.toInstant();
+        ZonedDateTime zonedDateStart = instant.atZone(sgZoneId);
+        //        timeFormat = new SimpleDateFormat(TIME_FORMAT_WITH_AMPM);
+        //        timeFormat.setTimeZone(sgTimeZone);
+        timeSlot.append(zonedDateStart.format(formatter));
 
         java.util.Calendar calendarNew = java.util.Calendar.getInstance();
         calendarNew.setTime(dateStart);
