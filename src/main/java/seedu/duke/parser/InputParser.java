@@ -10,6 +10,7 @@ import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.ListAvailableCommand;
 
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
@@ -57,6 +58,9 @@ public class InputParser {
         case BorrowCommand.COMMAND_WORD:
             return new BorrowCommandParser().parse(arguments);
 
+        case ListAvailableCommand.COMMAND_WORD:
+            return new ListAvaliableCommandParser().parse(arguments);
+        
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
