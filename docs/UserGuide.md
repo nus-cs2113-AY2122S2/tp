@@ -128,7 +128,7 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >  * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
 >  * The format of the date must be in `DD-MM-YYYY`.
->* `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
+>* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
 >  * Each individual name is **case-insensitive**.
  
 <br>
@@ -140,8 +140,8 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >  - Example: `Alice Tan` is not allowed.
 > 
 > **⚠️Warnings:**
->- If you include a name in `[NAME1 NAME2 ...]` that already exists in the group specified by `[GROUP_ID]`,
-   only one instance of this person is stored in the session.
+>- If you include a name of an individual in `[NAME1 NAME2 ...]` who already exists in the group specified by
+   `[GROUP_ID]`, only one instance of this individual is stored in the session.
 >- Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
    includes Alice, only two names, Alice and Bob, would be saved.
 
@@ -296,7 +296,7 @@ There are 2 ways that you can create an activity:
 >    * The activity name is **case-insensitive**.
 >* `[PERSON_PAID]` refers to the person who paid for the activity.
 >    * The person's name is **case-insensitive**.
->* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+>* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
 >    * Each individual name is **case-insensitive**.
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
@@ -385,7 +385,7 @@ There are 2 ways that you can edit an activity:
 >    * The activity name is **case-insensitive**.
 >* `[PERSON_PAID]` refers to the person who paid for the activity.
 >    * The person's name is **case-insensitive**.
->* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+>* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
 >    * Each individual name is **case-insensitive**.
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
@@ -508,20 +508,20 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <hr>
 
 ## _Group Management_
-> A group represents one or more individuals. Several commands use groups to quickly identify a group of individual
-  persons without having to manually enter their details one by one.
+> A group represents one or more individuals. Several commands use groups to quickly identify a group of individuals
+  without having to manually enter their details one by one.
 
 <br>
 
 ### Creating a group: `group /create`
-Creates a new group so that you do not have to always enter the same persons' particulars for every session that is
-participated by the same group of persons.
+Creates a new group so that you do not have to enter all the particulars for the same individuals whenever creating a
+new session that is participated by the same group of individuals.
 
 > Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 >
 >* `[GROUP_NAME]` refers to the name of the group.
 >    * The group name is **case-insensitive**.
->* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+>* `[NAME1 NAME2 ...]` refers to a list of individuals in the group.
 >    * Each individual name is **case-insensitive**.
 
 <br>
