@@ -3,6 +3,9 @@ package seedu.duke.parser;
 import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class ParserUtils {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -53,5 +56,22 @@ public class ParserUtils {
             return false;
         }
         throw new InvMgrException(Messages.INVALID_RELATIVE_MESSAGE);
+    }
+
+    /**
+     * Return a string representation of date as LocalDate type.
+     *
+     * @param dateStr Date entered by the user as String type.
+     * @return Date as LocalDate type
+     * @throws InvMgrException if the given string representation of
+     * date does not follow YYYY-MM-DD
+     */
+    public static LocalDate parseDate(String dateStr) throws InvMgrException {
+        try {
+            LocalDate date = LocalDate.parse(dateStr);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new InvMgrException(Messages.INVALID_DATE_FORMAT);
+        }
     }
 }

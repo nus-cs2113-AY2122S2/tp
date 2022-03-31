@@ -8,6 +8,7 @@ import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,14 +22,18 @@ public class BorrowCommandTest {
         Item item1 = new Item("Markers", 3, "Drawing");
         itemList.addItem(item1);
 
-        BorrowCommand c = new BorrowCommand(0, "2022-03-21", "2022-04-02", "John Smith");
+        LocalDate startDate = LocalDate.parse("2022-03-21");
+        LocalDate endDate = LocalDate.parse("2022-04-02");
+        BorrowCommand c = new BorrowCommand(0, startDate, endDate, "John Smith");
         c.execute(itemList, ui);
     }
 
     @Test
     public void equals_borrowCommand() {
-        BorrowCommand c1 = new BorrowCommand(0, "2022-03-21", "2022-04-02", "John Smith");
-        BorrowCommand c2 = new BorrowCommand(0, "2022-03-21", "2022-04-02", "John Smith");
+        LocalDate startDate = LocalDate.parse("2022-03-21");
+        LocalDate endDate = LocalDate.parse("2022-04-02");
+        BorrowCommand c1 = new BorrowCommand(0, startDate, endDate, "John Smith");
+        BorrowCommand c2 = new BorrowCommand(0, startDate, endDate, "John Smith");
 
         assertEquals(c1, c2);
     }
