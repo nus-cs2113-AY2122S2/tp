@@ -39,19 +39,18 @@ public class Parser {
      * Parses the user command input.
      *
      * @param userInput User command.
-     * @param taskList  Array of tasks.
      * @return Command type matching the user command.
      */
-    public static Command parseCommand(String userInput, TaskList taskList, Ui ui) {
+    public static Command parseCommand(String userInput, Ui ui) {
         String[] splitInput = userInput.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
         String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
         String argument = (splitInput.length > 1)
                 ? splitInput[COMMAND_CONTENT_INDEX].trim() : EMPTY_STRING;
         switch (commandWord) {
         case MarkCommand.COMMAND_WORD:
-            return TaskParser.prepareMarkOrUnmark(argument, MarkCommand.COMMAND_WORD, taskList);
+            return TaskParser.prepareMarkOrUnmark(argument, MarkCommand.COMMAND_WORD);
         case UnmarkCommand.COMMAND_WORD:
-            return TaskParser.prepareMarkOrUnmark(argument, UnmarkCommand.COMMAND_WORD, taskList);
+            return TaskParser.prepareMarkOrUnmark(argument, UnmarkCommand.COMMAND_WORD);
         case AddCommand.COMMAND_WORD:
             return TaskParser.prepareAdd(argument, ui);
         case EditCommand.COMMAND_WORD:

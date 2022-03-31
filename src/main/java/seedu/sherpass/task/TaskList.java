@@ -247,11 +247,9 @@ public class TaskList {
      * Index corresponds to its placement within the task array.
      *
      * @param markIndex Index of the task to mark as done.
-     * @param ui        User Interface.
      */
-    public void markTask(int markIndex, Ui ui) {
+    public void markTask(int markIndex) {
         tasks.get(markIndex).markAsDone();
-        ui.showToUser("Nice! I've marked this task as done:\n  " + tasks.get(markIndex));
     }
 
     /**
@@ -259,11 +257,9 @@ public class TaskList {
      * Index corresponds to its placement within the task array.
      *
      * @param markIndex Index of the task to mark as undone.
-     * @param ui        User Interface.
      */
-    public void unmarkTask(int markIndex, Ui ui) {
+    public void unmarkTask(int markIndex) {
         tasks.get(markIndex).markAsUndone();
-        ui.showToUser("Ok, I've marked this task as" + " not done yet:\n  " + tasks.get(markIndex));
     }
 
     /**
@@ -305,13 +301,10 @@ public class TaskList {
     /**
      * Deletes all tasks saved within the task array.
      *
-     * @param ui Ui for printing the completion of the deletion.
      */
-    public void deleteAllTasks(Ui ui) {
+    public void deleteAllTasks() {
         tasks.clear();
         identifierList.clear();
-        ui.showLine();
-        ui.showToUser("Done! Now you have 0 task in the list.");
     }
 
     private void refreshIdentifier() {

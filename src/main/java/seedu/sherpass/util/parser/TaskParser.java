@@ -209,16 +209,15 @@ public class TaskParser {
      *
      * @param argument    Argument parsed from user input. Excludes the input command "mark" / "unmark".
      * @param commandWord The input command, i.e. "mark" or "unmark".
-     * @param taskList    Array representation of the tasks.
      * @return A MarkCommand/UnmarkCommand depending on user input.
      */
-    public static Command prepareMarkOrUnmark(String argument, String commandWord, TaskList taskList) {
+    public static Command prepareMarkOrUnmark(String argument, String commandWord) {
         try {
             int markIndex = Integer.parseInt(argument) - 1;
             if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
-                return new MarkCommand(markIndex, taskList);
+                return new MarkCommand(markIndex);
             }
-            return new UnmarkCommand(markIndex, taskList);
+            return new UnmarkCommand(markIndex);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             System.out.println(ERROR_INVALID_MARKING_INDEX_MESSAGE);
         }
