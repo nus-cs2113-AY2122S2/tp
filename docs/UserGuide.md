@@ -392,7 +392,53 @@ Expected outcome:
     1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
     2: [Module] EE4204 Lecture: Wednesday, 2pm-4pm
 
+#### Reading from .ics file: `read ics`
+Creates a list of your modules by reading from .ics calendar file that can be downloaded from nusmods.com.
 
+This is an efficient alternative to add modules function where you can only add one module at a time.
+
+Prerequisites:
+1. Download the .ics file of your academic schedule from nusmods.com.
+2. Place the unedited .ics file in the same folder as your AllOnUs.jar file.
+
+Format: `read ics`
+
+Example of usage:
+
+    read ics
+    nusmods_calendar.ics
+
+
+Expected outcome:
+
+    read ics
+    Please enter the name of your .ics file from nusmods:
+    nusmods_calendar.ics
+    
+    I have found these modules from your ics file:
+    
+    1: [Module] EG2401A Lecture: Wednesday, 6:00 pm-8:00 pm
+    2: [Module] EG2401A Tutorial: Friday, 9:00 am-10:00 am
+    3: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
+    4: [Module] CS2113 Tutorial: Friday, 10:00 am-11:00 am
+    5: [Module] CS2113 Exam: Thursday 05-05-2022, 1:00 pm-3:00 pm
+    6: [Module] CG2271 Tutorial: Wednesday, 4:00 pm-5:00 pm
+    7: [Module] CG2271 Lecture: Wednesday, 10:00 am-12:00 pm
+    8: [Module] CG2271 Laboratory: Friday, 2:00 pm-4:00 pm
+    9: [Module] CG2271 Exam: Thursday 28-04-2022, 9:00 am-11:00 am
+    10: [Module] CS3244 Lecture: Thursday, 12:00 pm-2:00 pm
+    11: [Module] CS3244 Lecture: Monday, 2:00 pm-3:00 pm
+    12: [Module] CS3244 Tutorial: Monday, 5:00 pm-6:00 pm
+    13: [Module] CS3244 Exam: Saturday 23-04-2022, 9:00 am-11:00 am
+    14: [Module] EE4204 Lecture: Monday, 10:00 am-12:00 pm
+    15: [Module] EE4204 Tutorial: Wednesday, 1:00 pm-2:00 pm
+    16: [Module] EE4204 Exam: Friday 29-04-2022, 9:00 am-11:00 am
+    
+    I have added these to your existing schedule!
+    Exiting read ics mode
+
+The .ics file from nusmods.com has been parsed to get the relevant module details and has automatically added them to your module list.
+You can now perform all other StudyManager functions on this list as per normal.
 
 ### Contacts Tracker Features
 
@@ -522,7 +568,8 @@ Here are the matching contacts in your list:
 | Add (Module)   | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
 | Add (Contact)  | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |
 | Find (Module)  | `find <query>`                                                                                                              |
-| Edit (Module)  | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                                                                  |
+| Edit (Module)  | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                      |
+| Read from .ics (Module) | `read ics` |
 | Remove         | `rm INDEX`                                                                                                                  |
 | List           | `list`                                                                                                                      |
 | Return to Menu | `menu`                                                                                                                      |

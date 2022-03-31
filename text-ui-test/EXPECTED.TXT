@@ -156,10 +156,45 @@ Welcome to Modules Tracker, where you can track all your classes.
 There are no modules in your list yet!
 Okay, I have added a new module to the schedule
 [Module] CS2113 Lecture: Thursday, 2pm-4pm
+Please enter the category of your module
+Please enter the code for your module
+Please enter the day of your module
+Please enter the time of your module's class
+Please ensure that your input follows the form:
+add m/CS2113 c/lec d/Thursday t/2pm-4pm
+Okay, I have added a new module to the schedule
+[Module] EE4204 Tutorial: Wednesday, 1pm-2pm
 Here are the modules in your schedule:
 1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
-Noted I have removed this module from your schedule:
+2: [Module] EE4204 Tutorial: Wednesday, 1pm-2pm
+Here are the matching modules in your list:
+1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
+2: [Module] EE4204 Tutorial: Wednesday, 1pm-2pm
+Here is the module that you have chosen to edit:
 [Module] CS2113 Lecture: Thursday, 2pm-4pm
+Choose the part that you would like to edit:
+[Module] CS2113 Tutorial: Thursday, 2pm-4pm
+Please enter the category of your module
+Please enter the code for your module
+Please enter the day of your module
+Please enter the time of your module's class
+Your Module was successfully edited! Here are the changes
+[Module] CS2113 Tutorial: Thursday, 2pm-4pm
+Exiting the edit mode
+Here are the matching modules in your list:
+1: [Module] CS2113 Tutorial: Thursday, 2pm-4pm
+2: [Module] EE4204 Tutorial: Wednesday, 1pm-2pm
+Here are the matching modules in your list:
+1: [Module] CS2113 Tutorial: Thursday, 2pm-4pm
+Here are the matching modules in your list:
+1: [Module] CS2113 Tutorial: Thursday, 2pm-4pm
+Noted I have removed this module from your schedule:
+[Module] CS2113 Tutorial: Thursday, 2pm-4pm
+There are no modules that match "cs"
+Here are the modules in your schedule:
+1: [Module] EE4204 Tutorial: Wednesday, 1pm-2pm
+Noted I have removed this module from your schedule:
+[Module] EE4204 Tutorial: Wednesday, 1pm-2pm
 There are no modules in your list yet!
 Welcome back to the main menu
 Menu:

@@ -1,0 +1,35 @@
+ @startuml
+ skinparam arrowThickness 1.1
+ skinparam arrowColor black
+ skinparam classBackgroundColor LOGIC_COLOR
+package modules {
+
+    Class Module {
+        -moduleCode: String
+        -category: String
+        -day: String
+        -timeSlot: String
+    }
+    Package exceptions {
+        class InvalidFindInputException
+        class ModuleCategoryException
+        class ModuleCodeException
+        class ModuleDayException
+        class ModuleTImeException
+    }
+Class StudyManager {
+    -modulesList: Arraylist<String>
+}
+Class ModuleCalendarReader
+
+}
+StudyManager --> ModuleCalendarReader : uses
+StudyManager -->InvalidFindInputException
+StudyManager -->ModuleCategoryException
+StudyManager -->ModuleCodeException
+StudyManager -->ModuleDayException
+StudyManager --> ModuleTImeException
+ModuleCalendarReader --> Module
+
+StudyManager *--> "*" Module : creates
+ @enduml

@@ -12,33 +12,49 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-### Study Manager component
-API: `StudyManager.java`
 
-![](images/StudyManagerClass.png)
-
-The `StudyManager` component,
-1. Stores the academic schedule, i.e. all `Module` objects are contained in a `modulesList` object.
-2. The storage can be bound to `modulesList` list such that everytime a change is observed in the list it is saved on to a file.
-3. Does not depend on other components like `ExpenseTracker` and `ContactsManager`
 
 
 
 ## Product scope
 ### Target user profile
+* has a need to manage their academic schedule 
+* has a need to manage their expenses as a student
+* has a need to manage a significant number of contacts
+* prefer desktop apps over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
+
 
 {Describe the target user profile}
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+It solves the basic needs of a student such as managing academic schedule, expenses and contacts faster than a typical mouse driven or GUI driven apps.
 
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0| user|add a new module|refer when I am not sure what is on my schedule right now|
+|v1.0| user|list all modules|get a list of all my modules in one place|
+|v1.0| user|delete a module|remove modules or tasks that I am done with|
+|v1.0| user|add a new expense|keep track of my expenditure|
+|v1.0| user|list all expenses|get a list of all my expenses in one place|
+|v1.0| user|delete an expense|remove expenses that I do not need to track|
+|v1.0| user|add a new contact|keep track of my contacts|
+|v1.0| user|list all contacts|get a list of all my contacts in one place|
+|v1.0| user|delete a contacts|remove contacts that I do not need to track|
+|v2.0|user|find a module by name|locate a module without having to go through the entire list|
+|v2.0|user|edit a module|change details for my existing modules to ensure consistency|
+|v2.0|user|find an expense|locate an expense without having to go through the entire list|
+|v2.0|user|edit an expense |change details for my existing expenses |
+|v2.0|user|find a contact|locate a contact without having to go through the entire list|
+|v2.0|user|edit a contact|change details for my existing contacts|
+|v2.0|user|parse modules from NUSMods|easily add all my modules with a single command|
+|v2.0|user|save and load entries from a session|reload my entries from the previous session|
 
 ### Main Menu
 This section describes the implementation of core main menu features.
@@ -102,7 +118,38 @@ If the isExitCommand() method returns true on the string representing user input
 method of the AllOnUs class, which then calls the static exit method in the same class to print a termination message, and then finally control
 is returned to the OS. 
 
-### Modules
+### Study Manager component
+API: `StudyManager.java`
+
+![](images/ModuleClassDiagram.png)
+
+
+The `StudyManager` component,
+1. Stores the academic schedule, i.e. all `Module` objects are contained in a `modulesList` object.
+2. The storage can be bound to `modulesList` list such that everytime a change is observed in the list it is saved on to a file.
+3. Does not depend on other components like `ExpenseTracker` and `ContactsManager`
+
+How the StudyManager works:
+1. Based on a command entered by the user, StudyManager can perform the following functions 
+   1. add 
+   2. list
+   3. delete
+   4. edit
+   5. find 
+   6. read ics
+2. There are two ways to add to the `moduleList` to keep track of academic schedule 
+   1. Either the user can choose to add the modules one by one. (See user guide for add feature)
+   2. Or the user can choose to read from NUSMods .ics calendar file of their academic schedule.  (See user guide for read from ics feature)
+      1. This is more convenient as it can add multiple modules at a single go.
+      2. This feature makes use of the `ModuleCalendarReader.java` API.
+3. If there are any errors in the entry of `Module` parameters they are handled by the various exceptions in the `exceptions` package.
+
+   
+The two ways to add modules are illustrated in the sequence diagram below:
+
+
+![](images/StudyManagerSequenceDiagram.png)
+
 
 ### Expense Component
 
