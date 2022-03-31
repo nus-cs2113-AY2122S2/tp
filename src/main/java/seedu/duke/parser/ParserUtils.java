@@ -63,8 +63,7 @@ public class ParserUtils {
      *
      * @param dateStr Date entered by the user as String type.
      * @return Date as LocalDate type
-     * @throws InvMgrException if the given string representation of
-     * date does not follow YYYY-MM-DD
+     * @throws InvMgrException if the given string representation of date does not follow YYYY-MM-DD
      */
     public static LocalDate parseDate(String dateStr) throws InvMgrException {
         try {
