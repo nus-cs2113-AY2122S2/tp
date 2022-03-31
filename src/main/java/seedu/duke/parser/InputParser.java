@@ -60,12 +60,6 @@ public class InputParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ListFutureBorrowingsCommand.COMMAND_WORD:
-            return new ListFutureBorrowingsParser().parse(arguments);
-
-        case ListOverdueBorrowingsCommand.COMMAND_WORD:
-            return new ListOverdueBorrowingsParser().parse(arguments);
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
