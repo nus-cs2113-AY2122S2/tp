@@ -19,8 +19,9 @@ public class ExpenditureTest {
         Expenditure expenditure = new Expenditure("cash", "Food", "chicken"
                 + "expenditure", 20, "March 2022");
         try {
-            String serialized = expenditure.getAddCommand();
-            assertEquals(serialized, "add /pm cash /c Food /d chickenexpenditure /a 20.000000 /t 2022-03\n");
+            String serialized = expenditure.serialize();
+            Expenditure deserialized = Expenditure.deserialize(serialized);
+            assertEquals(expenditure, deserialized);
         } catch (MindMyMoneyException e) {
             fail();
         }

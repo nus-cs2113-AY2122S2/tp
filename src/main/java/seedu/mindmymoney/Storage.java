@@ -17,6 +17,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Class for handling loading and saving of expenditure lists.
@@ -42,29 +43,16 @@ public class Storage {
      * @return The saved list.
      */
     public User load() {
-        User savedUser = new User();
-        savedUser.setExpenditureListArray(new ExpenditureList());
-        savedUser.setCreditCardListArray(new CreditCardList());
-        savedUser.setIncomeListArray(new IncomeList());
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(storageFile));
-            String inputLine;
-            ArrayList<Expenditure> expenditureList = new ArrayList<Expenditure>();
-            while ((inputLine = bufferedReader.readLine()) != null) {
-                if (inputLine.length() == 0) {
-                    continue;
-                }
-                Command addCommand = Parser.parseCommand(inputLine, savedUser);
-                addCommand.executeCommand();
-            }
-            bufferedReader.close();
-            return savedUser;
+            Scanner scanner = new Scanner(storageFile);
+            return User.deserializeFrom(scanner);
         } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Save file not found. MindMyMoney will create another empty expenditure list.");
-            return savedUser;
-        } catch (IOException | MindMyMoneyException e) {
-            System.out.println("WARNING: Error when reading expenditure list: " + e.getMessage());
-            return savedUser;
+            System.out.println("WARNING: Save file not found. MindMyMoney cannot read your saved data.");
+            return new User();
+        } catch (MindMyMoneyException e) {
+            System.out.println("WARNING: Error when reading save data: " + e.getMessage()  + "\n"
+                + "MindMyMoney will create a new save file.");
+            return new User();
         }
     }
 
@@ -76,27 +64,14 @@ public class Storage {
     public void save(User user) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(storageFile));
-            for (Expenditure expenditure : user.getExpenditureListArray().expenditureListArray) {
-                String expenditureString = expenditure.getAddCommand();
-                bufferedWriter.write(expenditureString, 0, expenditureString.length());
-                bufferedWriter.newLine();
-            }
-            for (CreditCard creditCard: user.getCreditCardListArray().creditCardListArray) {
-                String creditCardString = creditCard.getAddCommand();
-                bufferedWriter.write(creditCardString, 0, creditCardString.length());
-                bufferedWriter.newLine();
-            }
-            for (Income income : user.getIncomeListArray().incomeListArray) {
-                String incomeString = income.getAddCommand();
-                bufferedWriter.write(incomeString, 0, incomeString.length());
-                bufferedWriter.newLine();
-            }
+            bufferedWriter.write(user.serialize());
             bufferedWriter.flush();
             bufferedWriter.close();
         } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Save file not found. MindMyMoney cannot save your expenditure list.");
-        } catch (IOException | MindMyMoneyException e) {
-            System.out.println("WARNING: Error when saving expenditure list: " + e.getMessage());
+            System.out.println("WARNING: Save file not found. MindMyMoney cannot read your saved data.");
+        } catch (IOException e) {
+            System.out.println("WARNING: Error when saving expenditure list: " + e.getMessage() + "\n"
+                + "MindMyMoney will create a new save file.");
         }
     }
 }

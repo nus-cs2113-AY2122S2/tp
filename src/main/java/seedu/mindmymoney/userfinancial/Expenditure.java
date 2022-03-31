@@ -1,16 +1,14 @@
 package seedu.mindmymoney.userfinancial;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.helper.PropertyList;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 
 /**
  * Represents the expenditure entry.
  */
-public class Expenditure {
+public class Expenditure implements MindMyMoneySerializable {
     private String description;
     private float amount;
     private String category;
@@ -90,21 +88,35 @@ public class Expenditure {
 
 
     /**
-     * Returns the input for an add command that recreates this Expenditure.
-     *
-     * @return A serialized expenditure
+     * Returns a String representation of this expenditure, in a machine-readable format.
+     * @return The serialized Expenditure.
      */
-    public String getAddCommand() throws MindMyMoneyException {
-        SimpleDateFormat parser = new SimpleDateFormat("MMM yyyy");
-        Date date;
+    public String serialize() {
+        PropertyList plist = new PropertyList();
+        plist.addProperty("description", description);
+        plist.addProperty("category", category);
+        plist.addProperty("paymentMethod", paymentMethod);
+        plist.addProperty("time", time);
+        plist.addProperty("amount", Float.toString(amount));
+        return plist.serialize();
+    }
+
+    /**
+     * Converts the output of Expenditure#serialize back into an Expenditure.
+     * @param serialized The serialized Expenditure
+     * @return An Expenditure.
+     * @throws MindMyMoneyException if the format is invalid.
+     */
+    public static Expenditure deserialize(String serialized) throws MindMyMoneyException {
+        PropertyList plist = PropertyList.deserialize(serialized);
         try {
-            date = parser.parse(time);
-        } catch (ParseException pe) {
-            throw new MindMyMoneyException("Error occurred when serializing date " + time);
+            return new Expenditure(plist.getValue("paymentMethod"),
+                    plist.getValue("category"),
+                    plist.getValue("description"),
+                    Float.parseFloat(plist.getValue("amount")),
+                    plist.getValue("time"));
+        } catch (NumberFormatException e) {
+            throw new MindMyMoneyException("Invalid number for amount during deserialization of " + serialized);
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
-        String formattedDate = formatter.format(date);
-        return String.format("add /pm %s /c %s /d %s /a %f /t %s\n",
-                paymentMethod, category, description, amount, formattedDate);
     }
 }

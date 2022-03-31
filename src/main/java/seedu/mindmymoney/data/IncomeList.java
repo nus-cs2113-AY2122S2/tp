@@ -1,8 +1,15 @@
 package seedu.mindmymoney.data;
 
+import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.userfinancial.Income;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import static seedu.mindmymoney.helper.SerializerFunctions.SERIALIZATION_INCOME_END_MARKER;
+import static seedu.mindmymoney.helper.SerializerFunctions.SERIALIZATION_INCOME_START_MARKER;
+import static seedu.mindmymoney.helper.SerializerFunctions.addListToStringBuilder;
+import static seedu.mindmymoney.helper.SerializerFunctions.convertInputToList;
 
 /**
  * Container for income lists.
@@ -63,5 +70,33 @@ public class IncomeList {
      */
     public void delete(int index) {
         incomeListArray.remove(index);
+    }
+
+    /**
+     * Converts this IncomeList into a machine-readable format.
+     * @return The serialized IncomeList
+     */
+    public String serialize() {
+        StringBuilder sb = new StringBuilder();
+        addListToStringBuilder(SERIALIZATION_INCOME_START_MARKER,
+                SERIALIZATION_INCOME_END_MARKER,
+                incomeListArray,
+                sb);
+        return sb.toString();
+    }
+
+    /**
+     * Reads a serialized IncomeList from the scanner.
+     * @param scanner A scanner
+     * @returns An IncomeList
+     * @throws MindMyMoneyException if the format is invalid.
+     */
+    public static IncomeList deserializeFrom(Scanner scanner) throws MindMyMoneyException {
+        IncomeList incomeList = new IncomeList();
+        incomeList.incomeListArray = convertInputToList(
+                SERIALIZATION_INCOME_START_MARKER,
+                SERIALIZATION_INCOME_END_MARKER,
+                scanner, Income::deserialize);
+        return incomeList;
     }
 }
