@@ -61,7 +61,7 @@ public class Storage {
             String title = details[0];
             String todos = details[1];
             String deadline = details[2];
-            String gitHubLink = details[3];
+            final String gitHubLink = details[3];
 
             //add project to list
             projectList.addProject(title);
