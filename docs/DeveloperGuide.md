@@ -124,7 +124,7 @@ As TextUI handles all input and output streams, these streams can be changed wit
 ![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)
 <br>
 The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class,
-  as well as the `CommandParser` class and its subclasses.<br>
+as well as the `CommandParser` class and its subclasses.<br>
 * The `Parser` class provides utility methods to parse commands and arguments from the user and
   return a `Command` object representing an instruction that the user has for SplitLah.<br>
   `Parser` class is the only class in the `Parser` component that other external classes actively interact with.<br>
@@ -215,15 +215,15 @@ the Command component when any user input is provided to SplitLah.
    (`ParseABC` is a placeholder for specific methods in `Parser` class, 
    e.g. `Parser#parseName` and `Parser#parseSessionId`)
    * For example, `SessionCreateCommandParser` has to call `parsePersonList`, `parseGroupId`, `parseName` and
-      `parseLocalDate` from `Parser` class in order to get the details to create a `Session` object.
+     `parseLocalDate` from `Parser` class in order to get the details to create a `Session` object.
    * If an exception is encountered, `XYZCommandParser` handles the exception accordingly, and if necessary,
-      throws an exception back to `Parser` class, resulting in an `InvalidCommand` object being created and returned.
+     throws an exception back to `Parser` class, resulting in an `InvalidCommand` object being created and returned.
 6. In detail, when `Parser#parseABC` is called, `Parser` class calls the method `getArgumentFromDelimiter` from
    `ParserUtils` class, which returns the respective object being parsed.
    * For example, when `SessionCreateCommandParser` calls `Parser#parsePersonList`,
-      `ParserUtils#getArgumentFromDelimiter` is called. After returning a `String` object containing the arguments to
-      `Parser` class, `Parser` class returns a `String[]` object to `SessionCreateCommandParser` after processing the
-      arguments.
+     `ParserUtils#getArgumentFromDelimiter` is called. After returning a `String` object containing the arguments to
+     `Parser` class, `Parser` class returns a `String[]` object to `SessionCreateCommandParser` after processing the
+     arguments.
    * Any exception encountered by `ParserUtils` class is propagated back to `XYZCommandParser` to be handled.
 7. After all necessary information is parsed, `XYZCommandParser` instantiates a new `XYZCommand` object and passes
    all parsed information to it through the constructor.
@@ -248,7 +248,7 @@ The general workflow of the `session /create` command is as follows:
 5. If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUi#printlnMessage`.
 6. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
 7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
-which is used to call the `Profile#addSession` method in order to store the new `Session` object.
+   which is used to call the `Profile#addSession` method in order to store the new `Session` object.
 8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUi#printlnMessage`.
 
@@ -295,11 +295,11 @@ The general workflow of the `session /list` command is as follows:
    before the list of sessions can be retrieved.
 5. The `SessionListCommand` object runs the `Profile#getSessionListSummaryString` method to retrieve a `String` object
    representing the summaries of the sessions stored.
-    1. If there are no sessions stored in the `Profile` object, a `String` object representing an empty list of sessions is
-       returned.
-    2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of sessions,
-       calling `TableFormatter#addRow` for each session to create a table with the summary of each session. A `String` object
-       representing the table is then returned.
+   1. If there are no sessions stored in the `Profile` object, a `String` object representing an empty list of sessions is
+      returned.
+   2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of sessions,
+      calling `TableFormatter#addRow` for each session to create a table with the summary of each session. A `String` object
+      representing the table is then returned.
 6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
 ### Settle a session
@@ -415,13 +415,13 @@ The general workflow of the `group /view` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupViewCommand` object.
 3. `GroupViewCommand#run` method is then invoked to run the `group /view` command.
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called before a group within 
-the list of groups can be retrieved.
+   the list of groups can be retrieved.
 5. The `GroupViewCommand` object runs the `Profile#getGroup` method to retrieve the group represented by the
-group unique identifier provided.
+   group unique identifier provided.
    1. If the group with requested group unique identifier does not exist, an error message is printed out with
-   `TextUI#printlnMessage`.
+      `TextUI#printlnMessage`.
    2. Else, the `String` object representing the details of the requested group is retrieved using the `Group#toString`
-   method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
+      method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
 
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
@@ -438,14 +438,14 @@ The general workflow of the `group /list` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
 3. `GroupListCommand#run` method is then invoked to run the `group /list` command.
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called
-before the list of groups can be retrieved.
+   before the list of groups can be retrieved.
 5. The `GroupListCommand` object runs the `Profile#getGroupListSummaryString` method to retrieve a `String` object
-representing the summaries of the groups stored.
+   representing the summaries of the groups stored.
    1. If there are no groups stored in the `Profile` object, a `String` object representing an empty list of groups is
-   returned.
+      returned.
    2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of groups,
-   calling `TableFormatter#addRow` for each group to create a table with the summary of each group. A `String` object
-   representing the table is then returned.
+      calling `TableFormatter#addRow` for each group to create a table with the summary of each group. A `String` object
+      representing the table is then returned.
 6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
 ## Product scope
