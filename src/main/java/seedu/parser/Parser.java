@@ -11,6 +11,8 @@ import seedu.command.CheckCommand;
 import seedu.command.DeleteCommand;
 import seedu.command.HelpCommand;
 import seedu.command.Command;
+import seedu.command.SaveCommand;
+import seedu.command.ByeCommand;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -122,7 +124,8 @@ public class Parser {
             return new HelpCommand();
         case SaveCommand.COMMAND_WORD:
             return new SaveCommand();
-
+        case ByeCommand.COMMAND_WORD:
+            return new ByeCommand();
         default:
             return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
         }
@@ -155,6 +158,10 @@ public class Parser {
             return resultArrayList;
         case SaveCommand.COMMAND_WORD:
             resultArrayList.add(SaveCommand.COMMAND_WORD);
+            resultArrayList.add(null);
+            return resultArrayList;
+        case ByeCommand.COMMAND_WORD:
+            resultArrayList.add(ByeCommand.COMMAND_WORD);
             resultArrayList.add(null);
             return resultArrayList;
         default:

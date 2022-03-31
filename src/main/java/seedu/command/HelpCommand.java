@@ -28,6 +28,11 @@ public class HelpCommand extends Command {
                 + System.lineSeparator()
                 + System.lineSeparator() + CheckCommand.COMMAND_WORD + CheckCommand.COMMAND_DESCRIPTION
                 + System.lineSeparator()
+                + System.lineSeparator() + SaveCommand.COMMAND_WORD + SaveCommand.COMMAND_DESCRIPTION
+                + System.lineSeparator()
+                + System.lineSeparator() + ByeCommand.COMMAND_WORD + ByeCommand.COMMAND_DESCRIPTION
+                + System.lineSeparator()
                 + System.lineSeparator() + HelpCommand.COMMAND_WORD + HelpCommand.COMMAND_DESCRIPTION);
+
     }
 }
