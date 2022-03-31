@@ -79,6 +79,11 @@ public class CommandHandler {
         return executeResult;
     }
 
+    /**
+     * Executes command and return the execution result as String.
+     * @return execution result
+     */
+
     private String executeCommand(ProjectList projectList, Command command) {
         assert (command != null) : "The command should not be null.";
         return command.execute(projectList);
