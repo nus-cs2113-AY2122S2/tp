@@ -7,6 +7,7 @@ import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.TaskList;
+import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.NumberConstants;
@@ -15,7 +16,8 @@ public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = StringConstants.DELETE_MESSAGE;
     private static final String DELETE_ABORT = StringConstants.DELETE_ABORT;
-
+    private static final String DELETE_CONFIRMATION = StringConstants.DELETE_CONFIRMATION;
+    private static final String DELETE_CONFIRMATION_INPUT_ERROR = StringConstants.DELETE_CONFIRMATION_INPUT_ERROR;
 
     private String moduleCode;
     private int taskIndex = NumberConstants.INVALID_TASK_INDEX;
@@ -67,13 +69,17 @@ public class DeleteCommand extends Command {
      *
      * @param moduleList List from which the module is to be deleted from.
      */
-    public void deleteModule(ModuleList moduleList) throws ModHappyException {
-        Module removedModule = moduleList.removeModule(moduleCode);
-        if (Objects.isNull(removedModule)) {
-            result = DELETE_ABORT;
-        } else {
-            result = String.format(DELETE_MESSAGE, removedModule);
+    public void deleteModule(ModuleList moduleList) throws NoSuchModuleException {
+        Module targetModule = moduleList.getModule(moduleCode);
+        if (targetModule.getTaskList().size() > 0) {
+            Boolean hasDeleteConfirmation = getUserConfirmation(targetModule);
+            if (!hasDeleteConfirmation) {
+                result = DELETE_ABORT;
+                return;
+            }
         }
+        Module removedModule = moduleList.removeModule(moduleCode);
+        result = String.format(DELETE_MESSAGE, removedModule);
     }
 
     /**
@@ -84,5 +90,27 @@ public class DeleteCommand extends Command {
     public void deleteTaskFromModule(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
         result = String.format(DELETE_MESSAGE, taskList.removeTask(taskIndex));
+    }
+
+    /**
+     * Gets confirmation from user to delete given module.
+     *
+     * @param module Module to be deleted.
+     * @return Returns true if user input is "yes", false if "no".
+     */
+    public Boolean getUserConfirmation(Module module) {
+        String prompt = String.format(DELETE_CONFIRMATION, module);
+        TextUi.showMessage(prompt);
+        String userConfirmation;
+        while (true) {
+            userConfirmation = TextUi.getUserCommand();
+            if (userConfirmation.equals("yes")) {
+                return true;
+            } else if (userConfirmation.equals("no")) {
+                return false;
+            } else {
+                TextUi.showMessage(DELETE_CONFIRMATION_INPUT_ERROR);
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ package seedu.duke.exceptions;
  */
 public class ModHappyException extends Exception {
     protected static final String LS = System.lineSeparator();
-    protected String errorMessage;
+    public String errorMessage;
 
     public ModHappyException(String message) {
         super(message);

@@ -1,17 +1,12 @@
 package seedu.duke.data;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import seedu.duke.exceptions.NoSuchModuleException;
-import seedu.duke.exceptions.ParseException;
-import seedu.duke.util.StringConstants;
 
 public class ModuleList {
     private ArrayList<Module> list;
     private final Module generalTasks;
-
-    private static final String DELETE_CONFIRMATION = StringConstants.DELETE_CONFIRMATION;
 
     public ModuleList() {
         list = new ArrayList<>();
@@ -32,25 +27,14 @@ public class ModuleList {
      *
      * @param moduleCode the module code to be removed
      */
-    public Module removeModule(String moduleCode) throws NoSuchModuleException, ParseException {
+
+    public Module removeModule(String moduleCode) throws NoSuchModuleException {
         Module module = getModule(moduleCode);
         if (module == null) {
             throw new NoSuchModuleException();
         }
-        String userConfirmation = "";
-        if (module.getTaskList().size() > 0) {
-            Scanner scanner = new Scanner(System.in);
-            String reply = String.format(DELETE_CONFIRMATION, module);
-            System.out.println(reply);
-            userConfirmation = scanner.nextLine().toLowerCase();
-        }
-        if (userConfirmation.equals("yes")) {
-            list.remove(module);
-            return module;
-        } else if (userConfirmation.equals("no")) {
-            return null;
-        }
-        throw new ParseException();
+        list.remove(module);
+        return module;
     }
 
     /**

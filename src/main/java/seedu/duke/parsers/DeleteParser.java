@@ -5,22 +5,24 @@ import java.util.Objects;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
+import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ParseException;
+import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.util.StringConstants;
 
 /**
  * This Parser supports the "del" command.
  */
 public class DeleteParser extends Parser {
-    public static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
-    public static final String TASK_MODULE = StringConstants.TASK_MODULE;
-    public static final String MODULE_CODE = StringConstants.MODULE_CODE;
+    private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
+    private static final String TASK_MODULE = StringConstants.TASK_MODULE;
+    private static final String MODULE_CODE = StringConstants.MODULE_CODE;
+    private static final String TASK_NUMBER_STR = StringConstants.ERROR_TASK_NUMBER_FAILED;
 
     // Unescaped regex for testing:
-    // (task\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?|mod\s+(?<moduleCode>\w+))
+    // (task\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?|mod\s+(?<moduleCode>\w+))(?<invalid>.*)
     private static final String DELETE_FORMAT = "(task\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?|"
-            + "mod\\s+(?<moduleCode>\\w+))";
+            + "mod\\s+(?<moduleCode>\\w+))(?<invalid>.*)";
 
     public DeleteParser() {
         super();
@@ -28,6 +30,7 @@ public class DeleteParser extends Parser {
         groupNames.add(TASK_NUMBER);
         groupNames.add(TASK_MODULE);
         groupNames.add(MODULE_CODE);
+        groupNames.add(INVALID);
     }
 
     @Override
@@ -44,7 +47,7 @@ public class DeleteParser extends Parser {
             try {
                 taskIndex = Integer.parseInt(taskNumberString) - 1;
             } catch (NumberFormatException e) {
-                throw new ParseException();
+                throw new InvalidNumberException(TASK_NUMBER_STR);
             }
             return new DeleteCommand(taskIndex, taskModuleString);
         }

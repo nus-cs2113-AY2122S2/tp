@@ -6,7 +6,6 @@ import java.util.Objects;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.GradeCommand;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -17,15 +16,16 @@ public class GradeParser extends Parser {
     public static final String MODULE_GRADE = StringConstants.MODULE_GRADE;
 
     // Unescaped regex for testing:
-    // ((?<moduleCode>\w+)(\s+(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U))))
+    // ((?<moduleCode>\w+)(\s+(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U))))(?<invalid>.*)
     private static final String GRADE_FORMAT = "((?<moduleCode>\\w+)(\\s+"
-            + "(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U))))";
+            + "(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U))))(?<invalid>.*)";
 
     public GradeParser() {
         super();
         this.commandFormat = GRADE_FORMAT;
         groupNames.add(MODULE_CODE);
         groupNames.add(MODULE_GRADE);
+        groupNames.add(INVALID);
     }
 
     @Override

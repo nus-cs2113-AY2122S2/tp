@@ -5,8 +5,9 @@ import java.util.Objects;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.EditCommand;
+import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ParseException;
+import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -21,16 +22,18 @@ public class EditParser extends Parser {
     private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
+    private static final String TASK_NUMBER_STR = StringConstants.ERROR_TASK_NUMBER_FAILED;
+
     // Unescaped regex for testing
-    // (task\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?(?=\s+-n\s+\"[^\"]+\"|
+    // ((task\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?(?=\s+-n\s+\"[^\"]+\"|
     // \s+-d\s+\"[^\"]+\"|\s+-t\s+\"[^\"]+\")(\s+-n\s+\"((?<taskName>[^\"]+)\")?|\s+-d\s+\"
     // ((?<taskDescription>[^\"]+)\")?|(\s+-t\s+\"(?<estimatedWorkingTime>[^\"]+)\")?))|(mod\s+
-    // (?<moduleCode>\w+?(?=(\s+-d\s+)))(\s+(-d\s+\"(?<moduleDescription>.+)\")))
-    private static final String EDIT_FORMAT = "(task\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?"
+    // (?<moduleCode>\w+?(?=(\s+-d\s+)))(\s+(-d\s+\"(?<moduleDescription>.+)\"))))(?<invalid>.*)
+    private static final String EDIT_FORMAT = "((task\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?"
             + "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|\\s+-t\\s+\\\"[^\\\"]+\\\")(\\s+-n\\s+\\\""
             + "((?<taskName>[^\\\"]+)\\\")?|\\s+-d\\s+\\\"((?<taskDescription>[^\\\"]+)\\\")?|(\\s+-t\\s+\\\""
             + "(?<estimatedWorkingTime>[^\\\"]+)\\\")?))|(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))(\\s+(-d\\s+\\\""
-            + "(?<moduleDescription>.+)\\\")))";
+            + "(?<moduleDescription>.+)\\\"))))(?<invalid>.*)";
 
     public EditParser() {
         super();
@@ -42,6 +45,7 @@ public class EditParser extends Parser {
         groupNames.add(MODULE_DESCRIPTION);
         groupNames.add(TASK_MODULE);
         groupNames.add(TASK_NAME);
+        groupNames.add(INVALID);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class EditParser extends Parser {
             try {
                 taskIndex = Integer.parseInt(taskNumberString) - 1;
             } catch (NumberFormatException e) {
-                throw new ParseException();
+                throw new InvalidNumberException(TASK_NUMBER_STR);
             }
             return new EditCommand(taskModule, taskIndex, taskDescription, estimatedWorkingTime, taskName);
         }

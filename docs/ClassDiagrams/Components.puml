@@ -1,4 +1,5 @@
 @startuml
+
 actor user
 user --> [Ui]
 [Ui] --> [Main]

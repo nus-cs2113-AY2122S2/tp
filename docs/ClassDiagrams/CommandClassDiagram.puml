@@ -1,16 +1,29 @@
 @startuml
 'https://plantuml.com/class-diagram
+
+!define ABSTRACT &#123;abstract&#125;
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam classFontSize 12
+skinparam classAttributeFontSize 12
+hide circle
+
 package command {
-    abstract class Command
+    class "ABSTRACT\nCommand" as Command
     class DeleteCommand
+    class TextUi
+    class ExitCommand
 
     Command <|-- DeleteCommand
     Command <|-- ExitCommand
     DeleteCommand ..> CommandResult :creates >
     ExitCommand ..> CommandResult :creates >
 
-    abstract class Command {
-        +execute(): CommandResult {abstract}
+    DeleteCommand ..> TextUi :uses >
+
+    class Command {
+        +execute(): CommandResult ABSTRACT
     }
 
     class DeleteCommand {
@@ -20,6 +33,12 @@ package command {
     +DeleteCommand(moduleCode: String)
     +DeleteCommand(taskModule: String, index: int)
     +execute(): CommandResult
+    +getUserConfirmation(): String {static}
+    }
+
+    class TextUi {
+    +getUserCommand(): String {static}
+    +showMessage(): void {static}
     }
 
     class ExitCommand {
@@ -36,6 +55,12 @@ note top of command
 Note:
 This class diagram only illustrates two
 example command types for simplicity.
+end note
+
+note left of DeleteCommand
+Note:
+Dependency on TextUi is
+unique to DeleteCommand.
 end note
 
 @enduml

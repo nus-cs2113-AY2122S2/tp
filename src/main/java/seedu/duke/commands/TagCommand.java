@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
-import seedu.duke.exceptions.ParseException;
+import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
@@ -63,7 +63,7 @@ public class TagCommand extends Command {
             removeTag(targetModule);
             return new CommandResult(result);
         default:
-            throw new ParseException();
+            throw new GeneralParseException();
         }
     }
 
