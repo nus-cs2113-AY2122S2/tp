@@ -3,7 +3,6 @@ package tp;
 import tp.person.Doctor;
 import tp.person.Patient;
 
-import javax.print.Doc;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -86,7 +85,8 @@ public class AppointmentStorage {
                 name = dummy.substring(dummy.indexOf("Name:") + 6, dummy.indexOf(" ||"));
                 phoneNumber = dummy.substring(dummy.indexOf("No.:") + 5, dummy.indexOf(" || Email:"));
                 email = dummy.substring(dummy.indexOf("Email:") + 7);
-                Patient patient = new Patient(id, name, phoneNumber, email);
+                String symptom=dummy.substring(dummy.indexOf("Symptom:")+9);
+                Patient patient = new Patient(id, name, phoneNumber, email, symptom);
                 String time = scanner.nextLine();
                 result.addAppointment(doctor, patient, LocalDateTime.parse(time));
             }

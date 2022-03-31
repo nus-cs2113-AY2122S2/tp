@@ -1,6 +1,5 @@
 package tp;
 
-import tp.person.Doctor;
 import tp.person.Patient;
 
 import java.io.File;
@@ -81,7 +80,9 @@ public class PatientStorage {
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
-                Patient patient = new Patient(id, name, phoneNumber, email);
+                String symptom=scanner.nextLine();
+                String description=scanner.nextLine();
+                Patient patient = new Patient(id, name, phoneNumber, email,symptom,description);
                 result.addPatient(patient);
             }
             return result;
