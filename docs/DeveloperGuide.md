@@ -86,22 +86,22 @@ Aim: Displays a list of all available commands that the user can refer to as a g
 ## Feature - Storage
 #### Initialisation (Loading Data)
 The sequence diagram that shows how `Storage` is created and the data is loaded from the saved files when the program is initialised is shown below: </br>
-![](StorageSeqDiag.png)
+![](LoadFileSeqDiag.png)
 
-1. `TARBS` creates a Storage object with the relevant file names.
+1. `TARBS` creates a Storage object with the relevant file name (`filePath`).
 2. `TARBS` then calls the `createPackages()` method of the Storage class
-3. `storage` will then load the contents of the file in the `Reservation` and `TravelPackages` file calling the different `parse` methods. The exact implementation is not shown in the diagram.
-4. A new `Package` object is constructed with the relevant data.
-5. `storage` returns `package` object to `TARBS`. 
+3. `storage` will call the `parseSavedFile()` method, which initiates a while loop that iterates through the text file and processes the string data using the respective `parse` methods.
+4. A new `TravelPackage` object is constructed with the relevant data.
+5. A new `Packages` object is created using the `TravelPackage` object and returned back to `TARBS`.
 
 #### Saving data
 The sequence diagram that shows how `Storage` is used to save the current list of travel packages and reservations is shown below: </br>
 
-![](SaveFileSeqDiag.png)
+![](SaveFilesSeqDiag.png)
 
-1. `TARBS` calls the `savePackages()` method of `storage`.
-2. `storage` will then write the contents of the two ArrayLists of `Reservation` and `TravelPackages` objects into text files by calling the respective `save` methods. The exact implementation is not shown in the diagram.
-
+1. `TARBS` calls the `savePackageToFile()` method of `storage`, passing in the `packages` object.
+2. `storage` will then use a loop to iteratively retrieve the data in string format from the individual `TravelPackage` objects.
+3. `storage` will create a new `FileWriter` object to write the string data into a text file.
 
 ## Feature - Parser
 The sequence diagram shows an example of how a user input is parsed and returns a new `Command`.
