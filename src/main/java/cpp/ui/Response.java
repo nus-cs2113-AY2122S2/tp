@@ -42,6 +42,8 @@ public class Response {
         System.out.println(count++ + ". todo [Project Index] [Description]");
         System.out.println(count++ + ". mark [Project Index] [Todo Index]");
         System.out.println(count++ + ". listprojects/listproject");
+        System.out.println(count++ + ". addlanguage [project_name] [language]");
+        System.out.println(count++ + ". listlanguages");
         System.out.println(count++ + ". view [Project Name]");
         System.out.println(count++ + ". exit");
         System.out.println(Constants.SEPARATOR);

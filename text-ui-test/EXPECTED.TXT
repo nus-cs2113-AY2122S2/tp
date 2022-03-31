@@ -23,8 +23,10 @@ Here are all the possible commands:
 7. todo [Project Index] [Description]
 8. mark [Project Index] [Todo Index]
 9. listprojects/listproject
-10. view [Project Name]
-11. exit
+10. addlanguage [project_name] [language]
+11. listlanguages
+12. view [Project Name]
+13. exit
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________

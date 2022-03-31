@@ -56,12 +56,13 @@ public class Storage {
         while ((projectLine = in.readLine()) != null) {
             String[] details = projectLine.split("`");
             int indexTodo = 1;
-            assert (details.length == 4) : "Unable to load data! Data is incomplete!";
+            assert (details.length == 5) : "Unable to load data! Data is incomplete!";
 
             String title = details[0];
             String todos = details[1];
             String deadline = details[2];
             final String gitHubLink = details[3];
+            final String languages = details[4];
 
             //add project to list
             projectList.addProject(title);
@@ -88,6 +89,12 @@ public class Storage {
             }
 
             projectList.addGithubLink(title, gitHubLink);
+
+            //add languages to project
+            String[] languageInfo = languages.split(",");
+            for (int i = 0; i < languageInfo.length; i++) {
+                projectList.addLanguages(title, languageInfo[i]);
+            }
 
             indexProject++;
         }
@@ -122,8 +129,9 @@ public class Storage {
         for (int count = 0; count < total; count++) {
             Project project = projectList.getProject(count);
             String todoInfo = getTodoInfo(project.getTodos());
+            String languageInfo = getLanguageInfo(project.getLanguages());
             String projectInfo = project.getTitle() + "`" + todoInfo + "`" + project.getDeadline()
-                    + "`" + project.getGitHubLink();
+                    + "`" + project.getGitHubLink() + "`" + languageInfo;
 
             writer.write(projectInfo + System.lineSeparator());
         }
@@ -150,5 +158,17 @@ public class Storage {
         // remove the first comma
         todoInfo = todoInfo.substring(1);
         return todoInfo;
+    }
+
+    private static String getLanguageInfo(ArrayList<String> languages) {
+        String languageInfo = "";
+        if (languages.size() == 0) {
+            return languageInfo;
+        }
+        for (String language : languages) {
+            languageInfo += "," + language;
+        }
+        languageInfo = languageInfo.substring(1);
+        return languageInfo;
     }
 }
