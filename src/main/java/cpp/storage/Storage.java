@@ -72,7 +72,9 @@ public class Storage {
                 String todoStatus = todoInfo[2 * i + 1];
                 String todoDeadline = todoInfo[2 * i + 2];
                 projectList.addTodoToProject(indexProject, todoDescrip);
-                projectList.addTodoDeadline(indexProject, i + 1, todoDeadline);
+                if (!todoDeadline.equalsIgnoreCase("No deadline specified")) {
+                    projectList.addTodoDeadline(indexProject, i + 1, todoDeadline);
+                }
                 //mark todo as done
                 if (todoStatus.equalsIgnoreCase("true")) { //this todo is marked as done
                     projectList.markTodoAsDone(indexProject, indexTodo);
