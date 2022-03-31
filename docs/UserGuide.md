@@ -137,17 +137,17 @@ There are no items currently borrowed by David.
 ```
 
 
-### List Future Borrowings: `list -fb`
+### List Future Borrowings: `listfb`
 List all items that will be borrowed in the future. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
 
 Format:   
-`list -fb`: List all future borrowings.  
-`list -fb p/BORROWER_NAME`: List all future borrowings for Sally
+`listfb`: List all future borrowings.  
+`listfb p/BORROWER_NAME`: List all future borrowings for Sally
 * `BORROWER_NAME` must not contain punctuations.
 
 Examples of usage (Assuming today's date is **2021-03-18**):
 ```
-> list -fb
+> listfb
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-21
@@ -160,14 +160,14 @@ Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
 ```
-If there are no future borrowings, the `list -fb` command will return:
+If there are no future borrowings, the `listfb` command will return:
 ```
-> list -fb
+> listfb
 There are no future borrowings.
 ```
 
 ```
-> list -fb p/Sally
+> listfb p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
@@ -176,24 +176,24 @@ Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
 ```
-If the person does not exist in the borrowings, the `list -fb p/BORROWER_NAME` will return:
+If the person does not exist in the borrowings, the `listfb p/BORROWER_NAME` will return:
 ```
-> list -fb p/David
+> listfb p/David
 There are no future borrowings for David.
 ```
 
 
-### List Overdue Borrowings: `list -ob`
+### List Overdue Borrowings: `listob`
 List all items should have been returned but have yet to be. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
 
 Format:   
-`list -ob`: List all overdue borrowings.  
-`list -fb p/BORROWER_NAME`: List all overdue borrowings by Sally
+`listob`: List all overdue borrowings.  
+`listob p/BORROWER_NAME`: List all overdue borrowings by Sally
 * `BORROWER_NAME` must not contain punctuations.
 
 Examples of usage (Assuming today's date is **2021-03-31**):
 ```
-> list -ob
+> listob
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
@@ -206,14 +206,14 @@ Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
 ```
-If there are no overdue borrowings, the `list -ob` command will return:
+If there are no overdue borrowings, the `listob` command will return:
 ```
-> list -ob
+> listob
 There are no overdue borrowings.
 ```
 
 ```
-> list -ob p/Sally
+> listob p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
@@ -222,9 +222,9 @@ Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
 ```
-If the person does not exist in the borrowings, the `list -ob p/BORROWER_NAME` will return:
+If the person does not exist in the borrowings, the `listob p/BORROWER_NAME` will return:
 ```
-> list -ob p/David
+> listob p/David
 There are no overdue borrowings for David.
 ```
 
