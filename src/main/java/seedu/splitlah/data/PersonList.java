@@ -26,7 +26,7 @@ public class PersonList implements Serializable {
     /**
      * Initializes a PersonList object using an array of String object of names.
      *
-     * @param personNames An array of String objects of names.
+     * @param personNames An array of String objects representing names of persons.
      */
     public PersonList(String[] personNames) {
         this.personList = new ArrayList<>();
