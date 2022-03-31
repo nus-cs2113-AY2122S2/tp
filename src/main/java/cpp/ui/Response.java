@@ -35,7 +35,6 @@ public class Response {
         System.out.println("Here are all the possible commands:");
         System.out.println(count++ + ". addproject [Project Name]");
         System.out.println(count++ + ". deleteproject [Project Name]");
-        System.out.println(count++ + ". adddeadline [Project Name] [Date]");
         System.out.println(count++ + ". changegit [Project Name] [GitHub URL]");
         System.out.println(count++ + ". opengit [Project Name]");
         System.out.println(count++ + ". addprojdeadline [Project Name] [Date]");

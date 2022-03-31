@@ -16,16 +16,15 @@ ____________________________________________________________
 Here are all the possible commands:
 1. addproject [Project Name]
 2. deleteproject [Project Name]
-3. adddeadline [Project Name] [Date]
-4. changegit [Project Name] [GitHub URL]
-5. opengit [Project Name]
-6. addprojdeadline [Project Name] [Date]
-7. addtododeadline [Project Index] [Todo Index] [Date]
-8. todo [Project Index] [Description]
-9. mark [Project Index] [Todo Index]
-10. listprojects/listproject
-11. view [Project Name]
-12. exit
+3. changegit [Project Name] [GitHub URL]
+4. opengit [Project Name]
+5. addprojdeadline [Project Name] [Date]
+6. addtododeadline [Project Index] [Todo Index] [Date]
+7. todo [Project Index] [Description]
+8. mark [Project Index] [Todo Index]
+9. listprojects/listproject
+10. view [Project Name]
+11. exit
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
