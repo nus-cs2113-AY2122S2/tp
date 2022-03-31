@@ -7,7 +7,6 @@ autonumber
 title Sequence Diagram of `workout /new` Command
 
 participant "werkIt:WerkIt" AS WerkIt
-participant "ui:UI" AS UI1
 participant "parser:Parser" AS Parser
 participant "newCommand\n:WorkoutCommand" AS newCommand
 participant "workoutList\n:WorkoutList" AS WorkoutList
@@ -15,10 +14,10 @@ participant "ui:UI" AS UI2
 participant "fileManager:FileManager" as FileManager
 
 activate WerkIt
-WerkIt -> UI1 : getUserInput()
-activate UI1
-WerkIt <-- UI1 : userInputTrimmed:String
-deactivate UI1
+
+ref over WerkIt
+Obtain user input.
+end
 
 WerkIt -> Parser : parseUserInput(userInput)
 activate Parser
@@ -36,10 +35,10 @@ end
 newCommand <-- WorkoutList : "newWorkout:Workout"
 deactivate WorkoutList
 
-newCommand -> UI2 : printNewWorkoutCreatedMessage(newWorkout)
-activate UI2
-newCommand <-- UI2
-deactivate UI2
+ref over newCommand
+Print on terminal that new
+workout is created.
+end
 
 newCommand -> FileManager : writeNewWorkoutToFile(newWorkout)
 activate FileManager
