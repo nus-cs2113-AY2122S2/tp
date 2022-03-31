@@ -74,10 +74,10 @@
 | ------- | --------------- |
 |packages|packages|
 |info|info {num} (num < number of available packages) <br/> e.g. info 2 |
-|add|add {package_name} {country} {duration} {price} {vacancies} <br/>  e.g. add Skiing_Trip Sweden 15/2/2022-19/2/2022 800 100|
+|add|add {package_name},{ID},{startDate},{endDate},{hotel},{price},{country},{vacancies} <br/>  e.g. add Skiing Trip,1,23/2/2022,24/2/2022,hotelName,90.99,Singapore,20|
 |delete|delete {num} (num < number of available packages) <br/> e.g. delete 2|
-|reserve|reserve {package_number} {contact_name} {contact_number} {number_pax} <br/> e..g reserve 3 John 91234567 3 |
-|remove|remove {reservation_id} <br/> e..g remove R001|
+|reserve|reserve {package_id},{contact_name},{contact_number},{number_pax} <br/> e..g reserve 3,John,91234567,3|
+|remove|remove {package_id},{contact_number} <br/> e..g remove 1,8888888|
 |reservations|reservations {package_number} <br/> eg. reservations 2|
 
 ## Feature - Help Command 
