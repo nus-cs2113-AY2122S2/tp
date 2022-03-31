@@ -36,7 +36,7 @@ public class Response {
         System.out.println(count++ + ". addproject [Project Name]");
         System.out.println(count++ + ". deleteproject [Project Name]");
         System.out.println(count++ + ". addprojdeadline [Project Name] [Date]");
-        System.out.println(count++ + ". addtododeadline [Project Index] [Todo Index] [deadline]");
+        System.out.println(count++ + ". addtododeadline [Project Index] [Todo Index] [Date]");
         System.out.println(count++ + ". todo [Project Index] [Description]");
         System.out.println(count++ + ". mark [Project Index] [Todo Index]");
         System.out.println(count++ + ". listprojects/listproject");

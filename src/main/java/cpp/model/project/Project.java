@@ -40,7 +40,7 @@ public class Project {
     }
 
     /**
-     * Adds a Todo to a project
+     * Adds a Todo to a project.
      *
      * @param todoString the todo to be added
      */
@@ -51,7 +51,7 @@ public class Project {
     }
 
     /**
-     * Gets the Todo a specified index
+     * Gets the Todo a specified index.
      *
      * @param index index of desired todo
      * @return the Todo

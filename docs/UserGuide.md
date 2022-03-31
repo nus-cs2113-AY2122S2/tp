@@ -114,7 +114,7 @@ Format: `addtododeadline [project_index] [todo_index] [deadline]`
 * Alternatively, entering a day of the week also works (i.e. Thursday)
 
 #### Example of usage
-`addprojdeadline 1 1 2022-05-22`
+`addtododeadline 1 1 2022-05-22`
 
 #### Example of output
 ```Deadline added to Complete Diagrams: 2022-05-22```
