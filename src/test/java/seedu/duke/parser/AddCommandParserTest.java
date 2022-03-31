@@ -13,7 +13,7 @@ public class AddCommandParserTest {
 
     @Test
     void parse_compulsoryFieldMissing_throwException() {
-        String testInputFormat = " %s %s %s %s";
+        String testInputFormat = " %s%s %s%s";
         // Missing quantity prefix
         String testInput = String.format(testInputFormat,
                 CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME,
@@ -23,7 +23,7 @@ public class AddCommandParserTest {
 
     @Test
     void parse_compulsoryFieldPresent_success() {
-        String testInputFormat = " %s %s %s %s %s %s";
+        String testInputFormat = " %s%s %s%s %s%s";
         String testInput = String.format(testInputFormat,
                 CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME,
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
@@ -33,7 +33,7 @@ public class AddCommandParserTest {
 
     @Test
     void parse_invalidQuantity_throwException() {
-        String testInputFormat = " %s %s %s %s %s %s";
+        String testInputFormat = " %s%s %s%s %s%s";
         String testInput = String.format(testInputFormat,
                 CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME,
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
