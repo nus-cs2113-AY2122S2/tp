@@ -122,4 +122,37 @@ public class Storage {
         }
     }
 
+    public static double loadLimitFile() throws FileNotFoundException {
+        double limit;
+        try {
+            File f = new File(limitFilePath);
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+            Scanner s = new Scanner(f);
+            String message = s.nextLine();
+            limit = Double.parseDouble(message);
+            s.close();
+            return limit;
+        } catch (IOException e) {
+            System.out.println("IO exception");
+        }
+        return 0;
+    }
+
+    /**
+     * Helper for saveTotalExpense
+     * Saves the totalExpense to the filepath of the manager.Storage object
+     * @param limit is the value to write to file
+     */
+    public static void saveLimitFile(double limit) throws IOException {
+        try {
+            FileWriter fw = new FileWriter(limitFilePath);
+            StringBuffer sb = new StringBuffer();
+            sb.append(limit);
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("IO exception");
+        }
+    }
 }

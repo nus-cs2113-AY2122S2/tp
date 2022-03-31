@@ -24,7 +24,7 @@ public class Spendvelope {
     private static final String limitFilePath = "data/limit.txt";
     private final TextUi ui = TextUi.getTextUiInstance();
     private final RecordManager recordMgr = new RecordManager(storage);
-    private final ExpenseManager expenseMgr = new ExpenseManager(storage);
+    private final ExpenseManager expenseMgr = new ExpenseManager();
     private final LimitManager limitMgr = LimitManager.getLimitManagerInstance();
     private static final Storage storage = new Storage(filePath,totalExpenseFilePath,limitFilePath);
 
@@ -45,6 +45,7 @@ public class Spendvelope {
         ui.showWelcomeMessage(VERSION);
         recordMgr.loadRecordlist();
         expenseMgr.loadTotalExpense();
+        limitMgr.loadLimit();
     }
 
     /** Prints the goodbye message and exits. */
@@ -78,6 +79,7 @@ public class Spendvelope {
             CommandResult result = command.execute();
             recordMgr.saveRecordlist();
             expenseMgr.saveTotalExpense();
+            limitMgr.saveLimit();
 
             return result;
         } catch (Exception e) {

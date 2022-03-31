@@ -1,11 +1,19 @@
 package manager;
 
+import java.io.IOException;
+
 public class LimitManager {
     private static LimitManager limitManager;
     private double limit;
-
-    private LimitManager() {
-        limit = 0;
+    private Storage storage;
+    /** Constructs a <code>RecordManager</code> with an empty list of records. */
+    public LimitManager() {
+        try {
+            limit = 0;
+            loadLimit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -48,6 +56,30 @@ public class LimitManager {
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Calls <code>storage</code> method to load limit from data file.
+     *
+     * @throws IOException data file cannot be read.
+     */
+    public void loadLimit() throws IOException {
+        try {
+            limit = storage.loadLimitFile();
+        } catch (IOException e) {
+            throw e;
+        }
+    }
+
+    /**
+     * Calls <code>storage</code> method to save limit into data file.
+     */
+    public void saveLimit() {
+        try {
+            storage.saveLimitFile(limit);
+        } catch (IOException e) {
+            System.out.println("Saving failed.");
         }
     }
 

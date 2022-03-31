@@ -5,7 +5,7 @@ import java.io.IOException;
 public class ExpenseManager {
     private Storage storage;
     /** Constructs a <code>RecordManager</code> with an empty list of records. */
-    public ExpenseManager(Storage storage) {
+    public ExpenseManager() {
         try {
             loadTotalExpense();
         } catch (IOException e) {
