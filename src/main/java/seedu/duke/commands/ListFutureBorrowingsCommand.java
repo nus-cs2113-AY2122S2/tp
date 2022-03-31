@@ -27,7 +27,9 @@ public class ListFutureBorrowingsCommand extends Command {
                 ArrayList<BorrowRecord> borrowRecords = borrowedItem.getBorrowRecords();
 
                 for (BorrowRecord record : borrowRecords) {
-                    if (record.getBorrowStatus() == BorrowStatus.FUTURE && record.getBorrowerName().equals(name)) {
+                    boolean isFutureBorrowing = record.getBorrowStatus() == BorrowStatus.FUTURE;
+                    boolean matchesName = record.getBorrowerName().equals(name.get());
+                    if (isFutureBorrowing && matchesName) {
                         ui.showMessages("Name of Item: " + borrowedItem.getName(),
                                 "Name of Borrower: " + record.getBorrowerName(),
                                 "Borrow Duration: " + record.getBorrowDuration() + "\n");
