@@ -246,13 +246,13 @@ The general workflow of the `session /delete` command is as follows:
 3. The `SessionDeleteCommand#run` method is then invoked to run the `session /delete` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
    before the list of sessions can be retrieved.
-5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the session with the specified 
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified 
 session unique identifier from the list of sessions.
-   1. If the specified session unique identifier cannot be found, an exception is thrown with an error message.
-   2. Else the `Session` object with the specified session unique identifier is returned.
-   3. The `Profile#removeSession` method is called to remove the `Session` object from the list of sessions stored in `Profile` object.
-6. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-7. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
+   * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+   * Else the `Session` object with the specified session unique identifier is returned.
+6. The `Profile#removeSession` method is then called to remove the `Session` object from the list of sessions stored in `Profile` object.
+7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
 
 ### View a session
 ### List sessions
