@@ -6,7 +6,7 @@
   - [Implemented Features](#Implemented-Features)
   - [Proposed Features](#Proposed-Features)
 - [Product scope](#Product-scope)
-- [User Stories](#User Stories)
+- [User Stories](#User-Stories)
 - [Glossary](#Glossary)
 - [Instructions for manual testing](#Instructions-for-manual-testing)
 
