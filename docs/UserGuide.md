@@ -105,7 +105,7 @@ The price of dish:
 
 ## Introduction
 `Order Management` feature is consist of several sub-features:
-> `Create an order`, `Delete an order`, `Get total value of current order`, `Get total value of all orders in the list`, `Print receipt`.
+> `Create an order`, `Delete an order`, `Get total price of an order`, `Get total price of all orders in the list`, `Print receipt`.
 
 ## Usage
 When using `Order Management`, the program pops up a select panel to ask for action:
@@ -113,8 +113,8 @@ When using `Order Management`, the program pops up a select panel to ask for act
 (0) Exit
 (1) Create an order
 (2) Delete an order
-(3) Get value of an order
-(4) Get total value of all orders
+(3) Get total price of an order
+(4) Get total price of all orders
 (5) Print receipt
 ******************************
 Enter choice: 
@@ -124,8 +124,8 @@ Enter corresponding index to use the feature.
 ## Accessing Order Menu
 > Enter `2` in `Main Menu` to enter order management function.
 
-## Creating a new order
-When using `Creating an order`, the user creates a new order and adds dishes to it. The program asks for user inputs.
+## Create a new order (indexed as 1)
+When using `Create an order`, the user creates a new order and adds dishes to it. The program asks for user inputs.
 > Enter `1` in `Order Menu`
 
 > Example: Add some dishes to: 2 Chicken Rice ($3.5 * 2), 1 Mala hotpot Set A($10)
@@ -142,10 +142,10 @@ Enter choice: 1
 Creating a new order...
 Enter dishes you want to add to the order (enter negative number to exit): 0
 You have 1 dish(es), some more: 
-0
+1
 Added successfully!
 You have 2 dish(es), some more: 
-1
+2
 Added successfully!
 You have 3 dish(es), some more: 
 -1
@@ -156,40 +156,81 @@ If the user input is invalid, the program issues an error.
 Creating a new order...
 Please enter a valid dish index and try again.
 ```
-## Deleting an order
-When using `Deleting an order`, the user deletes an existing order by index.
+## Delete an order (indexed as 2)
+When using `Delete an order`, the user deletes an existing order by index.
+Order index starts from 1.
 
 > Enter `2` in `Order Menu` 
 
-> Example: Delete order with index 0.
+> Example: Delete order with index 1.
 
 ```aidl
-Enter the order you want to delete: 0
+Enter choice: 2
+Deleting an order...
+Enter the order you want to delete: 1
 Deleted successfully!
 ```
+### Notice
+If the user input is invalid, the program issues an error.
+```aidl
+Deleting an order...
+Please enter a valid order index.
+```
 
-## Checking total value of an order
-When using `Checking total value of an order`, the user searches an order by index and checks the total value of the
- order. The order value is the sum of the prices of all dishes of that order.
+## Get total price of an order (indexed as 3)
+When using `Get total price of an order`, the user searches an order by index and checks the total price of the
+ order. Order index starts from 1.
 
 > Enter `3` in `Order Menu` 
 
-> Example: Delete order with index 0.
+> Example: Get total price of an order with index 1.
 
 ```aidl
 Enter choice: 3
-Enter the order you want to get price: 0
-Total value of this order: 17.000000. 
+Getting total price of an order...
+Enter the order you want to get price: 1
+Total value of this order: 13.500000. 
+```
+### Notice
+If the user input is invalid, the program issues an error.
+```aidl
+Getting total price of an order...
+Please enter a valid order index.
 ```
 
-## Checking total value of all orders
-When using `Checking total value of all orders`, the user gets the sum of values of all created orders. 
+## Get total price of all orders (indexed as 4)
+When using `Get total price of all orders`, the user gets the sum of prices of all created orders. 
 
 > Enter `4` in `Order Menu` 
 
 ```aidl
 Enter choice: 4
-Total value of all orders: 17.000000. 
+Getting total price of all orders in the list...
+Total value of all orders: 13.500000. 
+```
+
+## Print Receipt (indexed as 5)
+When using `Print Receipt`, the user searches an order by index and print all dishes in the
+order. Order index starts from 1.
+
+> Enter `5` in `Order Menu`
+
+> Example: Print receipt of an order with index 1.
+
+```aidl
+Enter choice: 5
+Printing receipt...
+Enter the order you want to display: 1
+This is your order. 
+Chicken Rice ---- $3.5
+Mala Hotpot Set A ---- $10.0
+Total Price: 13.5
+```
+### Notice
+If the user input is invalid, the program issues an error.
+```aidl
+Printing receipt...
+Invalid order index.
 ```
 ## Staff Management
 
