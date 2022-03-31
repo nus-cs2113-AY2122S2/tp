@@ -68,7 +68,8 @@ public class Storage {
 
             String[] todoInfo = todos.split(",");
             //add todo to project
-            for (int i = 0; i < (todoInfo.length) / 2; i++) {
+            for (int i = 0; i < (todoInfo.length - 1) / 2; i++) {
+                System.out.println(todoInfo.toString() + "--" + todoInfo.length);
                 String todoDescrip = todoInfo[2 * i];
                 String todoStatus = todoInfo[2 * i + 1];
                 String todoDeadline = todoInfo[2 * i + 2];
