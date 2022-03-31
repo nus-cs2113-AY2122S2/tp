@@ -95,10 +95,15 @@ public class Storage {
             f.getParentFile().mkdirs();
             f.createNewFile();
             Scanner s = new Scanner(f);
-            String message = s.nextLine();
-            totalExp = Double.parseDouble(message);
-            s.close();
-            return totalExp;
+            if (s.hasNext()) {
+                String message = s.nextLine();
+                totalExp = Double.parseDouble(message);
+                s.close();
+                return totalExp;
+            }
+            else {
+                return 0;
+            }
         } catch (IOException e) {
             System.out.println("IO exception");
         }
@@ -129,10 +134,15 @@ public class Storage {
             f.getParentFile().mkdirs();
             f.createNewFile();
             Scanner s = new Scanner(f);
-            String message = s.nextLine();
-            limit = Double.parseDouble(message);
-            s.close();
-            return limit;
+            if (s.hasNext()) {
+                String message = s.nextLine();
+                limit = Double.parseDouble(message);
+                s.close();
+                return limit;
+            }
+            else {
+                return 0;
+            }
         } catch (IOException e) {
             System.out.println("IO exception");
         }
