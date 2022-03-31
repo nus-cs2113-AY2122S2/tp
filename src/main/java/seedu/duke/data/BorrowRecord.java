@@ -20,7 +20,7 @@ public class BorrowRecord {
     }
 
     public String getBorrowDuration() {
-        return (startDate.toString() + "to" + endDate.toString());
+        return (startDate.toString() + " to " + endDate.toString());
     }
 
     public BorrowStatus getBorrowStatus() {
