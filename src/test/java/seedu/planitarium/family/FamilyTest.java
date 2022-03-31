@@ -26,6 +26,7 @@ public class FamilyTest {
     private static final String VALID_DESCRIPTION = "Testing";
     private static final boolean PERMANENT = true;
 
+    private static final String INDENTATION = "   ";
     private static final String ADD_TO_PARENTS = "Alice has been successfully added to Parents"
             + System.lineSeparator();
     private static final String ADD_TO_MY_GEN = "Alice has been successfully added to My generation"
@@ -35,17 +36,19 @@ public class FamilyTest {
     private static final String EMPTY_STRING = "";
     private static final String BASE_OVERVIEW = "Here are your disposable incomes by group:" + System.lineSeparator()
             + "1. Parents:" + System.lineSeparator()
-            + "Income: $0.0" + System.lineSeparator()
-            + "Expenditure: $0.0" + System.lineSeparator()
-            + "Disposable: $0.0" + System.lineSeparator()
+            + INDENTATION + "Income: $0.0" + System.lineSeparator()
+            + INDENTATION + "Expenditure: $0.0" + System.lineSeparator()
+            + INDENTATION + "Disposable: $0.0" + System.lineSeparator()
+            + System.lineSeparator()
             + "2. My generation:" + System.lineSeparator()
-            + "Income: $0.0" + System.lineSeparator()
-            + "Expenditure: $0.0" + System.lineSeparator()
-            + "Disposable: $0.0" + System.lineSeparator()
+            + INDENTATION + "Income: $0.0" + System.lineSeparator()
+            + INDENTATION + "Expenditure: $0.0" + System.lineSeparator()
+            + INDENTATION + "Disposable: $0.0" + System.lineSeparator()
+            + System.lineSeparator()
             + "3. Children:" + System.lineSeparator()
-            + "Income: $0.0" + System.lineSeparator()
-            + "Expenditure: $0.0" + System.lineSeparator()
-            + "Disposable: $0.0" + System.lineSeparator();
+            + INDENTATION + "Income: $0.0" + System.lineSeparator()
+            + INDENTATION + "Expenditure: $0.0" + System.lineSeparator()
+            + INDENTATION + "Disposable: $0.0" + System.lineSeparator();
     private static final String PARENTS_LIST = "For Parents:" + System.lineSeparator();
     private static final String MY_GEN_LIST = "For My generation:" + System.lineSeparator();
     private static final String CHILDREN_LIST = "For Children:" + System.lineSeparator();
