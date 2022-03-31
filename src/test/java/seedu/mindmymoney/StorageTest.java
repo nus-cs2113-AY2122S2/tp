@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StorageTest {
@@ -23,7 +24,6 @@ public class StorageTest {
     void initialStartup_nonexistentFile_emptyList() {
         File storageFile = new File(storageDir, "list.txt");
         Storage storage = new Storage(storageFile);
-        // Assertions.assertTrue(storage.load());
     }
 
     @Test
@@ -47,9 +47,12 @@ public class StorageTest {
         savedUser.setExpenditureListArray(expenditureList);
 
         Storage storage = new Storage(storageFile);
-        storage.save(savedUser);
-
-        User loadedUser = storage.load();
-        assertEquals(expenditureList.expenditureListArray, loadedUser.getExpenditureListArray().expenditureListArray);
+        try {
+            storage.save(savedUser);
+            User loadedUser = storage.load();
+            assertEquals(expenditureList.expenditureListArray, loadedUser.getExpenditureListArray().expenditureListArray);
+        } catch (MindMyMoneyException e) {
+            fail();
+        }
     }
 }

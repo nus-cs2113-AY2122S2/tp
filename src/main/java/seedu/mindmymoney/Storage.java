@@ -1,22 +1,12 @@
 package seedu.mindmymoney;
 
-import seedu.mindmymoney.command.Command;
-import seedu.mindmymoney.data.CreditCardList;
-import seedu.mindmymoney.data.ExpenditureList;
-import seedu.mindmymoney.data.IncomeList;
-import seedu.mindmymoney.userfinancial.CreditCard;
-import seedu.mindmymoney.userfinancial.Expenditure;
-import seedu.mindmymoney.userfinancial.Income;
 import seedu.mindmymoney.userfinancial.User;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -41,39 +31,39 @@ public class Storage {
      * Loads information from the save file. If the file does not exist, or if there is
      * an error when reading the file, return an empty list, and print a warning message.
      * @return The saved list.
+     * @throws MindMyMoneyException if an error occurs while reading the file, or if the file has an invalid format.
      */
-    public User load() {
+    public User load() throws MindMyMoneyException {
         try {
             Scanner scanner = new Scanner(storageFile);
             User savedUser = User.deserializeFrom(scanner);
             scanner.close();
             return savedUser;
         } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Save file not found. MindMyMoney cannot read your saved data.");
-            return new User();
+            throw new MindMyMoneyException("WARNING: Save file not found. MindMyMoney cannot read your saved data.");
         } catch (MindMyMoneyException e) {
-            System.out.println("WARNING: Error when reading save data: " + e.getMessage()  + "\n"
-                + "MindMyMoney will create a new save file.");
-            return new User();
+            throw new MindMyMoneyException("WARNING: Error when reading save data: " + e.getMessage()  + "\n"
+                + "MindMyMoney will create a new save file, possibly overwriting the existing file.\n"
+                + "If you have important data stored there, make a copy of the current save file.");
         }
     }
 
     /**
      * Saves the information associated with the given User. If the file does not exist, or if there is an error
      * when saving to the file, print a warning message.
-     * @param user user whose lists need to be saved.
+     * @param user User whose lists need to be saved.
+     * @throws MindMyMoneyException if an error occurs while saving.
      */
-    public void save(User user) {
+    public void save(User user) throws MindMyMoneyException {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(storageFile));
             bufferedWriter.write(user.serialize());
             bufferedWriter.flush();
             bufferedWriter.close();
         } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Save file not found. MindMyMoney cannot read your saved data.");
+            throw new MindMyMoneyException("WARNING: Save file not found. MindMyMoney cannot save your data.");
         } catch (IOException e) {
-            System.out.println("WARNING: Error when saving expenditure list: " + e.getMessage() + "\n"
-                + "MindMyMoney will create a new save file.");
+            throw new MindMyMoneyException("WARNING: Error when saving expenditure list: " + e.getMessage() + "\n");
         }
     }
 }

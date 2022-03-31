@@ -25,7 +25,12 @@ public class MindMyMoney {
 
     public void run() {
         ui.printIntro();
-        user = storage.load();
+        try {
+            user = storage.load();
+        } catch (MindMyMoneyException e) {
+            System.out.println(e.getMessage());
+            System.out.println(System.lineSeparator());
+        }
 
         boolean isExit = false;
         while (!isExit) {
