@@ -326,6 +326,23 @@ The sequence diagram below models the interactions between various entities in S
 when the user invokes the `activity /create` command.
 <br>
 <br>
+![Create Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ActivityCreateCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `activity /create` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityCreateCommand` object.
+3. `ActivityCreateCommand#run` method is then invoked to run the `activity /create` command.
+4. Once the command runs, `ActivityCreateCommand#run` method checks if there are duplicate names in the involved list. 
+   - If there are duplicate names in the involved list, a message indicating that there are duplicates is printed using `TextUi#printlnMessage`.
+5. The `ActivityCreateCommand` object updates the cost and cost list by invoking the `ActivityCreateCommand#updateCostAndCostList` method.
+6. Getter methods are called to obtain the necessary parameters used to instantiate an `Activity` object.
+7. The `ActivityCreateCommand` object then adds the respective costs to each `Person` object involved in the activity using the `ActivityCreateCommand#addAllActivityCost` method.
+8. Using the updated details as parameters, the `ActivityCreateCommand` object instantiates an `Activity` object to represent the new activity.
+9. The `Session#addActivity` method is called to add the new `Activity` object into the list of activities.
+10. After the activity is added to the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+11. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
+12. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully created with `TextUi#printlnMessage`.
 
 ### Remove an activity
 ### View an activity
