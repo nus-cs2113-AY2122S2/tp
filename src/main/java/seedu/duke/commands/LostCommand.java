@@ -34,7 +34,7 @@ public class LostCommand extends Command{
     public LostCommand(String userInput) {
         Ui ui = new Ui();
         try {
-            itemNumber = parseInt(userInput);
+            itemNumber = parseInt(userInput.trim());
         } catch (NumberFormatException e) {
             ui.showMessages(Messages.MISSING_ITEM_NUMBER_MESSAGE);
             ui.showDivider();
@@ -82,11 +82,6 @@ public class LostCommand extends Command{
         ui.showMessages(Messages.REPORTED_LOST_MESSAGE);
         System.out.println(lostItem);
         ui.showDivider();
-        try {
-            Storage.save(itemList.getItemArrayList());
-        } catch (InvMgrException e) {
-            e.printStackTrace();
-        }
     }
 
 }
