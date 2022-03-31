@@ -100,6 +100,24 @@ Format: `addprojdeadline [project_name] [deadline]`
 * deadline must be entered in the following format "yyyy-mm-dd"
 * Alternatively, entering a day of the week also works (i.e. Thursday)
 
+### change the GitHub repo of a project
+Changes the GitHub repository link for your project
+
+Format: `changegit [project_name [github_URL]`
+* Every project comes with the default github repo "http://github.com"
+* When entering your github_URL, it must begin with either http:// or https://
+
+#### Example of usage
+`changegit project1 http://github.com/project1`
+
+### open the GitHub repo of a project
+Opens the GitHub repository in your default browser
+
+Format: `opengit [project_name]`
+
+#### Example of usage
+`opengit project1`
+
 #### Example of usage
 `addprojdeadline nextProject 2022-05-22`
 

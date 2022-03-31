@@ -44,33 +44,34 @@ public class Storage {
 
     private static ProjectList readData() throws IOException {
         try {
-            BufferedReader in = new BufferedReader(new FileReader(".\\src\\data\\projectList.txt"));
+            BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
         } catch (IOException e) {
             //System.out.println("Welcome new user!");
             createFile("./src/data");
         }
-        BufferedReader in = new BufferedReader(new FileReader(".\\src\\data\\projectList.txt"));
+        BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
         String projectLine;
         ProjectList projectList = new ProjectList();;
         int indexProject = 1;
         while ((projectLine = in.readLine()) != null) {
-            String[] details = projectLine.split(";");
+            String[] details = projectLine.split("`");
             int indexTodo = 1;
-            assert (details.length == 3) : "Unable to load data! Data is incomplete!";
+            assert (details.length == 4) : "Unable to load data! Data is incomplete!";
 
             String title = details[0];
             String todos = details[1];
             String deadline = details[2];
+            final String gitHubLink = details[3];
 
             //add project to list
             projectList.addProject(title);
 
             String[] todoInfo = todos.split(",");
             //add todo to project
-            for (int i = 0; i < (todoInfo.length) / 2; i++) {
-                String todoDescrip = todoInfo[2 * i];
-                String todoStatus = todoInfo[2 * i + 1];
-                String todoDeadline = todoInfo[2 * i + 2];
+            for (int i = 0; i < (todoInfo.length) / 3; i++) {
+                String todoDescrip = todoInfo[3 * i];
+                String todoStatus = todoInfo[3 * i + 1];
+                String todoDeadline = todoInfo[3 * i + 2];
                 projectList.addTodoToProject(indexProject, todoDescrip);
                 if (!todoDeadline.equalsIgnoreCase("No deadline specified")) {
                     projectList.addTodoDeadline(indexProject, i + 1, todoDeadline);
@@ -86,6 +87,8 @@ public class Storage {
                 projectList.addProjectDeadline(title, deadline);
             }
 
+            projectList.addGithubLink(title, gitHubLink);
+
             indexProject++;
         }
         in.close();
@@ -99,6 +102,10 @@ public class Storage {
                 f.mkdirs();
             }
             Files.createFile(Paths.get("./src/data/projectList.txt"));
+            File file = new File("./src/data/projectList.txt");
+            file.setWritable(true, false);
+            file.setReadable(true, false);
+            file.setExecutable(true, false);
             //System.out.println("File created successfully!");
         } catch (IOException e) {
             //System.out.println("File created unsuccessfully!");
@@ -110,12 +117,13 @@ public class Storage {
      *  @throws IOException if the file/ file path does not exist.
      */
     private static void saveData(ProjectList projectList) throws IOException {
-        FileWriter writer = new FileWriter(".\\src\\data\\projectList.txt");
+        FileWriter writer = new FileWriter("./src/data/projectList.txt");
         int total = projectList.getProjectNo();
         for (int count = 0; count < total; count++) {
             Project project = projectList.getProject(count);
             String todoInfo = getTodoInfo(project.getTodos());
-            String projectInfo = project.getTitle() + ";" + todoInfo + ";" + project.getDeadline();
+            String projectInfo = project.getTitle() + "`" + todoInfo + "`" + project.getDeadline()
+                    + "`" + project.getGitHubLink();
 
             writer.write(projectInfo + System.lineSeparator());
         }

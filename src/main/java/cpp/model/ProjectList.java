@@ -4,6 +4,8 @@ import cpp.ui.Constants;
 import cpp.exceptions.NegativeIndexException;
 import cpp.model.project.Project;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -168,6 +170,53 @@ public class ProjectList {
             }
         } else {
             System.out.println("Sorry! There was no project with that name.");
+        }
+        System.out.println(Constants.SEPARATOR);
+    }
+
+    /**
+     * Changes the GitHub repo link of a Project.
+     *
+     * @param title Name of the project
+     * @param githubLink New GitHub repo link for the project
+     */
+    public void addGithubLink(String title, String githubLink) {
+        assert (title != null && title != "" && githubLink != null && githubLink != "") : "Cannot add deadline.";
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(title);
+        if (index != Constants.PROJECT_NOT_FOUND) {
+            Project project = projectList.get(index);
+            try {
+                if ((!githubLink.startsWith("http://") && !githubLink.startsWith("https://"))) {
+                    throw new URISyntaxException(githubLink, "invalid format");
+                }
+                project.setGitHubLink(githubLink);
+                System.out.println("The Github Repo for " + title + " has been changed to: " + githubLink);
+            } catch (URISyntaxException e) {
+                System.out.println(Constants.MESSAGE_INVALID_LINK_FORMAT);
+            }
+        } else {
+            System.out.println(title + " -- " + index);
+            System.out.println("Sorry! There was no project with that name.");
+        }
+        System.out.println(Constants.SEPARATOR);
+
+    }
+    
+    /**
+     * Opens the GitHub repo in the user's primary browser.
+     *
+     * @param title The project title to have its repo opened
+     */
+    public void openGit(String title) {
+        assert (title != null && !title.equals("")) : "Cannot view the project.";
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(title);
+        if (index == Constants.PROJECT_NOT_FOUND) { //project not found
+            System.out.println("Sorry! There was no project with that name.");
+        } else {
+            Project project = projectList.get(index);
+            project.openGit();
         }
         System.out.println(Constants.SEPARATOR);
     }

@@ -15,6 +15,8 @@ import cpp.logic.parser.MarkCommandParser;
 import cpp.logic.parser.ViewProjectCommandParser;
 import cpp.logic.parser.AddLanguageCommandParser;
 import cpp.logic.parser.ListLanguageCommandParser;
+import cpp.logic.parser.ChangeGitHubLinkCommandParser;
+import cpp.logic.parser.OpenGitCommandParser;
 
 import cpp.model.ProjectList;
 import cpp.ui.Response;
@@ -52,6 +54,12 @@ public class CommandHandler {
             break;
         case "addtododeadline":
             executeResult = executeCommand(projectList, new AddTodoDeadlineCommandParser().parse(commands));
+            break;
+        case "changegit":
+            executeResult = executeCommand(projectList, new ChangeGitHubLinkCommandParser().parse(commands));
+            break;
+        case "opengit":
+            executeResult = executeCommand(projectList, new OpenGitCommandParser().parse(commands));
             break;
         case "view":
             executeResult = executeCommand(projectList, new ViewProjectCommandParser().parse(commands));

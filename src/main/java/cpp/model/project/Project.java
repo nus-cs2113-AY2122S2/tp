@@ -1,11 +1,17 @@
 package cpp.model.project;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.Desktop;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Project {
     private String title;
     private ArrayList<Todo> todos;
+    private ArrayList<String> webLinks;
+    private String gitHubLink;
     private Deadline deadline;
     private ArrayList<String> languages;
 
@@ -22,6 +28,8 @@ public class Project {
     public Project(String title) {
         this.title = title;
         todos = new ArrayList<Todo>();
+        webLinks = new ArrayList<String>();
+        gitHubLink = new String("http://www.github.com");
         languages = new ArrayList<String>();
     }
 
@@ -116,11 +124,51 @@ public class Project {
     }
 
     /**
+     * Gets the list of all weblinks in the project.
+     *
+     * @return List of all weblinks
+     */
+    public ArrayList<String> getWebLinks() {
+        return this.webLinks;
+    }
+
+    /**
+     * Gets the gitHub repo link for this project.
+     *
+     * @return The GitHub repo link if it exists, empty string otherwise
+     */
+    public String getGitHubLink() {
+        return this.gitHubLink;
+    }
+
+    /**
+     * Sets the gitHub repo link for this project.
+     *
+     * @param link The URL of the repo
+     */
+    public void setGitHubLink(String link) {
+        this.gitHubLink = link;
+    }
+
+    public void openGit() {
+        try {
+            Desktop desktop = Desktop.getDesktop();
+            desktop.browse(new URI(gitHubLink));
+        } catch (URISyntaxException e) {
+            System.out.println("This project's GitHub link doesn't seem functional.\n"
+                    + "Please use the addgit command with a functional URL.");
+        } catch (IOException e) {
+            System.out.println("The link is functional, but your browser cannot be opened.");
+        }
+    }
+
+    /**
      * Displays all details of the project.
      */
     public void printDetails() {
         System.out.print("Project Name: " + getTitle() + "\n");
         System.out.print("Deadline: " + getDeadline() + "\n");
+        System.out.println("GitHub Repo: " + getGitHubLink());
         int count = 1;
         for (Todo todo: getTodos()) {
             System.out.print("\t" + "[" + count + "]. " + todo.toString() + "\n");

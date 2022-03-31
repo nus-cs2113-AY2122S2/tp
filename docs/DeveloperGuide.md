@@ -59,7 +59,7 @@ Following a restucture to the project to follow a more Object Oriented structure
 1. User enters a command, which is given to a Command Handler
 2. The handler passes this to a corresponding Parser object for that command, which will split it into its necessary parts
 3. The Parser will create a corresponding Command object for that command, which will perform its necessary actions
-4. The Command object will return successfully to the Command Handler, and the output will be given to the user (output for the user is stored in a `Response` class)
+4. The Command object will return successfully to the Command Handler, and the output will be given to the user
 
 The basic flow of the structure:
 
@@ -198,7 +198,7 @@ Because of this, many sequence diagrams look similar in the current version. The
 #### Delete a Project
 ![image info](./UmlDiagrams/deleteProject.png)
 
-Deleting a project functions very similarly to Adding a project.
+The previous deletion of a project functions very similarly to Adding a project.
 
 **Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
 
