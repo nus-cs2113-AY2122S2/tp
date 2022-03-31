@@ -514,7 +514,7 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <br>
 
 ### Creating a group: `group /create`
-Creates a new group so that you do not have to enter all the particulars for the same individuals whenever creating a
+Creates a new group so that you do not have to enter the particulars for the same individuals whenever creating a
 new session that is participated by the same group of individuals.
 
 > Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
