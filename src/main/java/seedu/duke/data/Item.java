@@ -93,7 +93,7 @@ public class Item {
     }
 
     public String toDetailedString() {
-        if (this.description.length()>15) {
+        if (this.description.length() > 15) {
             return String.format("%s | %d | %s", this.name, this.quantity, this.description.substring(0, 14) + "...");
         }
         return String.format("%s | %d | %s", this.name, this.quantity, this.description);
