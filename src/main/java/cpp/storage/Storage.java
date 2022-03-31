@@ -49,7 +49,6 @@ public class Storage {
             //System.out.println("Welcome new user!");
             createFile("./src/data");
         }
-        System.out.println("---- " + new File(".").getAbsolutePath());
         BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
         String projectLine;
         ProjectList projectList = new ProjectList();;
@@ -69,7 +68,7 @@ public class Storage {
 
             String[] todoInfo = todos.split(",");
             //add todo to project
-            for (int i = 0; i < (todoInfo.length - 1) / 2; i++) {
+            for (int i = 0; i < (todoInfo.length) / 3; i++) {
                 String todoDescrip = todoInfo[3 * i];
                 String todoStatus = todoInfo[3 * i + 1];
                 String todoDeadline = todoInfo[3 * i + 2];
