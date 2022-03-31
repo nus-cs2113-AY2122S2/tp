@@ -2,6 +2,7 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.common.Messages;
+import seedu.duke.stubs.ParserStubs;
 
 import static seedu.duke.utils.ParserTestUtils.assertParseFailure;
 import static seedu.duke.utils.ParserTestUtils.assertParseSuccess;
