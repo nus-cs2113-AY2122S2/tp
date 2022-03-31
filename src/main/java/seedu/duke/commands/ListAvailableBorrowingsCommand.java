@@ -8,7 +8,7 @@ import seedu.duke.ui.Ui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ListAvailableCommand extends Command {
+public class ListAvailableBorrowingsCommand extends Command {
     public static final String COMMAND_WORD = "listab";
     public static final String COMMAND_NAME = "List available items";
     public static final String USAGE_MESSAGE = 
@@ -20,7 +20,7 @@ public class ListAvailableCommand extends Command {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
-    public ListAvailableCommand(LocalDate startDate, LocalDate endDate) {
+    public ListAvailableBorrowingsCommand(LocalDate startDate, LocalDate endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }

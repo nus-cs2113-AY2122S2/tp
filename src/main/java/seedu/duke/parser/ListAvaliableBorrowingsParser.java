@@ -1,6 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.ListAvailableCommand;
+import seedu.duke.commands.ListAvailableBorrowingsCommand;
 import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
@@ -10,9 +10,9 @@ import java.util.stream.Stream;
 import static seedu.duke.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.duke.parser.CliSyntax.PREFIX_END_DATE;
 
-public class ListAvaliableCommandParser implements Parser<ListAvailableCommand> {
+public class ListAvaliableBorrowingsParser implements Parser<ListAvailableBorrowingsCommand> {
     
-    public ListAvailableCommand parse(String args) throws InvMgrException {
+    public ListAvailableBorrowingsCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap = 
                 ArgumentTokenizer.tokenize(args, PREFIX_START_DATE, PREFIX_END_DATE);
 
@@ -23,7 +23,7 @@ public class ListAvaliableCommandParser implements Parser<ListAvailableCommand> 
         LocalDate startDate = ParserUtils.parseDate(argMultimap.getValue(PREFIX_START_DATE).get());
         LocalDate endDate = ParserUtils.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
 
-        return new ListAvailableCommand(startDate, endDate);
+        return new ListAvailableBorrowingsCommand(startDate, endDate);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
