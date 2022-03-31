@@ -121,6 +121,7 @@ When using `Display Menu`, there is no need for input, the program will print th
 > Add some dish: Chicken Rice($3.5), Mala hotpot Set A($10), Soup (Along with Chicken Rice)($0), Chilli Crab($30)
 > Enter 1 to Display menu
 ```aidl
+Displaying menu...
 1. Chicken Rice ---- $3.5
 2. Mala Hotpot Set A ---- $10.0
 3. Soup (Along With Chicken Rice) ---- free
@@ -130,16 +131,17 @@ When using `Display Menu`, there is no need for input, the program will print th
 ### Notice
 If there is no dish in the menu. The output will be
 ```aidl
+Displaying menu...
 You haven't got a dish in menu!
 ```
 
 ## Create an order (indexed as 2)
 When using `Create an order`, the program pops up an input panel.
 ```aidl
-Adding new dish...
-The name of dish: 
+Creating an order...
+Enter dishes you want to order (enter negative number to exit):  
 ```
-> Enter the name of the new dish
+> Enter the index of the dish(es) you want to order
 ```aidl
 Enter choice: 2
 Adding new dish...

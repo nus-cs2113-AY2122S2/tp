@@ -32,7 +32,7 @@ public class OrderController extends Controller {
             }
             return true;
         case 1:
-            dishManager.printDishes();
+            displayMenu();
             break;
         case 2:
             addNewOrder();
@@ -57,7 +57,15 @@ public class OrderController extends Controller {
         return false;
     }
 
+    private void displayMenu() {
+        MainLogger.logInfo(this, "User is displaying menu");
+        System.out.println("Displaying menu...");
+        System.out.println(dishManager.printDishes());
+    }
+
     private void addNewOrder() throws OperationTerminationException {
+        MainLogger.logInfo(this, "User is creating an order");
+        System.out.println("Creating an order...");
         int index = InputParser.getInteger("Enter dishes you want to order (enter negative number to exit): ");
         int createdOrderIdx = orderManager.getOrderCount();
         try {
@@ -75,6 +83,8 @@ public class OrderController extends Controller {
     }
 
     private void deleteOrder() throws OperationTerminationException {
+        MainLogger.logInfo(this, "User is deleting an order");
+        System.out.println("Deleting an order...");
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
             orderManager.deleteOrder(userInputInt);
@@ -84,6 +94,8 @@ public class OrderController extends Controller {
     }
 
     private void displayOrderPrice() throws OperationTerminationException {
+        MainLogger.logInfo(this, "User is displaying the price of an order");
+        System.out.println("Getting total value of current order...");
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
             System.out.printf("Total value of this order: %f. \n", orderManager.getOrderPrice(userInputInt));
@@ -93,10 +105,14 @@ public class OrderController extends Controller {
     }
 
     private void displayAllOrderPrice() {
+        MainLogger.logInfo(this, "User is displaying the total price of all orders");
+        System.out.println("Getting total value of all orders in the list...");
         System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
     }
 
     private void printOrder() throws OperationTerminationException {
+        MainLogger.logInfo(this, "User is printing receipt");
+        System.out.println("Printing receipt...");
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to display: ");
             System.out.println("These is your order. \n" + orderManager.getOrder(userInputInt));
