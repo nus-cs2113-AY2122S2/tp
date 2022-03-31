@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BorrowCommandTest {
     @Test
-    public void execute_borrowCommand() throws InvMgrException {
+    public void execute_borrowCommand() {
         Ui ui = new Ui();
         ArrayList<Item> itemArrayList = new ArrayList<>();
         ItemList itemList = new ItemList(itemArrayList);
@@ -23,5 +23,13 @@ public class BorrowCommandTest {
 
         BorrowCommand c = new BorrowCommand(0, "2022-03-21", "2022-04-02", "John Smith");
         c.execute(itemList, ui);
+    }
+
+    @Test
+    public void equals_borrowCommand() {
+        BorrowCommand c1 = new BorrowCommand(0, "2022-03-21", "2022-04-02", "John Smith");
+        BorrowCommand c2 = new BorrowCommand(0, "2022-03-21", "2022-04-02", "John Smith");
+
+        assertEquals(c1, c2);
     }
 }
