@@ -1,22 +1,22 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-!include ../Style.puml
+!include ../../Style.puml
 
 autonumber
 
-title Sequence Diagram of `plan /list` Command
+title Sequence Diagram of `search /exercise` Command
 
 actor   User
 participant "werkIt:WerkIt" AS WerkIt
 participant "ui:UI" AS UI1
 participant "parser:Parser" AS Parser
-participant "newCommand\n:PlanCommand" AS newCommand
-participant "planList\n:PlanList" AS PlanList
+participant "newCommand\n:SearchCommand" AS newCommand
+participant "exerciseList\n:ExerciseList" AS ExerciseList
 
 activate WerkIt
 WerkIt -> UI1 : getUserInput()
 activate UI1
-User -> UI1 : `plan /list` command
+User -> UI1 : `search /exercise` command
 WerkIt <-- UI1 : userInputTrimmed:String
 deactivate UI1
 
@@ -27,18 +27,15 @@ deactivate Parser
 
 WerkIt -> newCommand : execute()
 activate newCommand
-newCommand -> PlanList : listAllPlan()
-activate PlanList
-opt application plan list is empty
-User <-- PlanList : No plan created yet message
-end
-loop all plans in plan list
-User <-- PlanList : Show name of plans
-end
-newCommand <-- PlanList
-deactivate PlanList
+newCommand -> ExerciseList : getExerciseList()
+activate ExerciseList
 
-WerkIt <-- newCommand
+newCommand <-- ExerciseList : "exerciseList:ArrayList<String>"
+deactivate ExerciseList
+
+newCommand -> newCommand : searchExercise()
+User <-- newCommand : search outcome
+
 deactivate newCommand
 
 destroy newCommand
