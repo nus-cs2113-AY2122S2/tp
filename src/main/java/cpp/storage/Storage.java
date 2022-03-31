@@ -106,6 +106,8 @@ public class Storage {
             file.setReadable(true, false);
             file.setExecutable(true, false);
         } catch (IOException e) {
+            System.out.println("File could not be created.");
+            System.exit(1);
         }
     }
 
