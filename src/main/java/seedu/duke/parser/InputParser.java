@@ -9,6 +9,7 @@ import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.LostCommand;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
 
@@ -60,6 +61,9 @@ public class InputParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case LostCommand.COMMAND_WORD:
+            return new LostCommand(arguments);
 
         default:
             throw new InvMgrException(Messages.INVALID_COMMAND);

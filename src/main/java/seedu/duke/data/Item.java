@@ -12,12 +12,17 @@ public class Item {
     private String name;
     private int quantity;
     private String description;
+    private boolean isLost = false;
     public ArrayList<BorrowRecord> borrowRecords = new ArrayList<BorrowRecord>();
 
     public Item(String name, int quantity, String description) {
         this.name = name;
         this.quantity = quantity;
         this.description = description;
+    }
+
+    public boolean getLost() {
+        return isLost;
     }
 
     public String getDescription() {
@@ -35,6 +40,14 @@ public class Item {
     public void setName(String name) {
         Objects.requireNonNull(name, NOT_NULL_NAME);
         this.name = name;
+    }
+
+    public void setLost(boolean isLost) {
+        this.isLost = isLost;
+    }
+
+    public void markTaskAsLost() {
+        this.setLost(true);
     }
 
     public void setQuantity(int quantity) {
@@ -80,11 +93,22 @@ public class Item {
         return String.format("%s | %d | %s", name, quantity, description);
     }
 
-    // String representation of an item when printed on Ui
     @Override
     public String toString() {
         return String.format("%s | %d", name, quantity);
     }
+    /**
+     *     // String representation of an item when printed on Ui
+     *     @Override
+     *     public String toString() {
+     *         String string1 = (name + " | " + quantity);
+     *         if (isLost) {
+     *             string1 = string1 + " |[LOST]";
+     *         }
+     *         return string1;
+     *     }
+     * */
+
 
     @Override
     public boolean equals(Object other) {

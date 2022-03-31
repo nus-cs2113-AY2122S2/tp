@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ItemList {
 
-    private ArrayList<Item> itemArrayList;
+    private static ArrayList<Item> itemArrayList;
 
     public ItemList(ArrayList<Item> itemList) {
         this.itemArrayList = itemList;
@@ -24,8 +24,8 @@ public class ItemList {
         return this.itemArrayList.get(index);
     }
 
-    public int getSize() {
-        return this.itemArrayList.size();
+    public static int getSize() {
+        return itemArrayList.size();
     }
 
     public Item set(int index, Item item) {
