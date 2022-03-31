@@ -1,5 +1,5 @@
 @startuml
-!include ../style.puml
+!include ../../Style.puml
 
 participant "werkIt:WerkIt" AS WerkIt
 participant "ui:UI" AS UI

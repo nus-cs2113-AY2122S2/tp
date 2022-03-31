@@ -69,8 +69,9 @@ Please take note of these few terms. It is explained as below:
 | Apple MacOS       | [Terminal](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac)     |
 | (Ubuntu) Linux    | [Bash Terminal](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal)              |
 
-> For Microsoft Windows operating systems, the Command Prompt (CMD) is **not** recommended for use with WerkIt!
-> as some texts in the application will not be displayed correctly.
+> For Microsoft Windows operating systems, if you are having display issues (e.g. colours not displaying) with
+> your terminal, please see ["my terminal in Windows is not displaying any colours in the application"](#1-my-terminal-in-windows-is-not-displaying-any-colours-in-the-application) 
+> in the FAQ section.
 
 > For Linux operating systems, our application is tested on Ubuntu Linux using the default Bash shell.
 
@@ -1035,22 +1036,23 @@ copy), delete the `werkItResources` directory and restart WerkIt! to recreate th
 
 ## Frequently Asked Questions (FAQ)
 
-**Q**: How do I transfer my data to another computer? 
+### 1. My terminal in Windows is not displaying any colours in the application.
+
+**A**: Please install Microsoft's newer terminal 'Windows Terminal' from the Microsoft Store via this
+[link](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701).
+
+### 2. How do I transfer my data to another computer? 
 
 **A**: Locate your `werkItResources` directory and WerkIt! JAR file, copy and paste it in your other 
 computer's desired location. Thereafter, you can run WerkIt! as per normal. 
 (Please see [WerkIt's Local Storage Information](#werkits-local-storage-information) for recommended location).
 
-<br/>
-
-**Q**: I cannot see the workouts that I have created in previous sessions.
+### 3. I cannot see the workouts that I have created in previous sessions.
 
 **A**: Please ensure that you launch WerkIt! from the same directory that you did when starting the application for the 
 first time. Your saved data should be in that directory.
 
-<br/>
-
-**Q**: I keep getting file loading errors whenever I start WerkIt!
+### 4. I keep getting file loading errors whenever I start WerkIt!
 
 **A**: It is possible that your local file data is corrupted. If you have a backup copy of the `werkItResources`
 directory, replace your existing `werkItResources` directory with the backup copy. Otherwise, you will need to
