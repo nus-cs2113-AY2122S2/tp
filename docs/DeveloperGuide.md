@@ -198,7 +198,7 @@ Because of this, many sequence diagrams look similar in the current version. The
 #### Delete a Project
 ![image info](./UmlDiagrams/deleteProject.png)
 
-Deleting a project functions very similarly to Adding a project.
+The previous deletion of a project functions very similarly to Adding a project.
 
 **Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
 

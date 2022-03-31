@@ -1,11 +1,15 @@
 package cpp.model.project;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Project {
     private String title;
     private ArrayList<Todo> todos;
+    private ArrayList<String> webLinks;
+    private String gitHubLink;
     private Deadline deadline;
 
     public Project() {
@@ -20,6 +24,8 @@ public class Project {
     public Project(String title) {
         this.title = title;
         todos = new ArrayList<Todo>();
+        webLinks = new ArrayList<String>();
+        gitHubLink = new String("http://www.github.com");
     }
 
     /**
@@ -87,6 +93,32 @@ public class Project {
      */
     public ArrayList<Todo> getTodos() {
         return this.todos;
+    }
+
+    /**
+     * Gets the list of all weblinks in the project
+     *
+     * @return List of all weblinks
+     */
+    public ArrayList<String> getWebLinks() {
+        return this.webLinks;
+    }
+
+    /**
+     * Gets the gitHub repo link for this project
+     *
+     * @return The GitHub repo link if it exists, empty string otherwise
+     */
+    public String getGitHubLink() {
+        return this.gitHubLink;
+    }
+
+    /**
+     * Sets the gitHub repo link for this project
+     * @param link The URL of the repo
+     */
+    public void setGitHubLink(String link) {
+        this.gitHubLink = link;
     }
 
     /**
