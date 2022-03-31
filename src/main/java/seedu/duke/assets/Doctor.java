@@ -27,7 +27,7 @@ public class Doctor extends Person {
     }
 
     public String saveString() {
-        return nric + "," + fullName + "," + age + "," + address + "," + gender
+        return nric + "," + fullName + "," + age + "," + gender + "," + address
                 + "," + dob + "," + specialization;
     }
 
