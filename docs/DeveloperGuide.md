@@ -533,21 +533,28 @@ they engage in during the outings.
 
 ## User Stories
 
-| Version | As a ...              | I want to ...                        | So that I can ...                                                           |
-|---------|-----------------------|--------------------------------------|-----------------------------------------------------------------------------|
-| v1.0    | New user              | see usage instructions               | refer to them when I forget how to use the application                      |
-| v1.0    | Budget conscious user | create sessions                      | record the transactions of the outing                                       |
-| v1.0    | Budget conscious user | create activities                    | able to track the expenditure for each activity                             |
-| v1.0    | Budget conscious user | view an existing session             | view the full details of a session previously created                       |
-| v1.0    | Budget conscious user | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity    |
-| v1.0    | Budget conscious user | list all existing sessions           | view all sessions previously created                                        |
-| v1.0    | Budget conscious user | list all activities in a session     | view all the activities that happened in the session                        |
-| v1.0    | Budget conscious user | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session |
-| v1.0    | User                  | exit the application                 | stop tracking                                                               |
+| Version | As a ...                   | I want to ...                        | So that I can ...                                                                  |
+|---------|----------------------------|--------------------------------------|------------------------------------------------------------------------------------|
+| v1.0    | New user                   | see usage instructions               | refer to them when I forget how to use the application                             |
+| v1.0    | Budget conscious user      | create sessions                      | record the transactions of the outing                                              |
+| v1.0    | Returning User             | delete sessions                      | remove unnecessary sessions                                                        |
+| v1.0    | Budget conscious user      | create activities                    | able to track the expenditure for each activity                                    |
+| v1.0    | Returning User             | delete activities                    | remove unnecessary activities                                                      |
+| v1.0    | Returning user             | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity           |
+| v1.0    | Budget conscious user      | list all existing sessions           | view all sessions previously created                                               |
+| v1.0    | Budget conscious user      | list all activities in a session     | view all the activities that happened in the session                               |
+| v1.0    | Budget conscious user      | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session        |
+| v2.0    | Careless User              | edit sessions                        | amend a mistake previously made when creating a session                            |
+| v2.0    | Returning user             | view an existing session             | view the full details of a session previously created                              |
+| v2.0    | Careless User              | edit activities                      | amend a mistake previously made when creating an activity                          |
+| v2.0    | User with a lot of friends | create groups                        | I can create sessions with groups instead of listing the person names out manually |
+| v2.0    | Returning User             | delete groups                        | remove unnecessary groups                                                          |
+| v2.0    | Careless User              | edit groups                          | amend a mistake previously made when creating a groups                             |
+| v2.0    | Returning User             | view groups                          | view the full details of a group previously created                                |
+| v2.0    | User with a lot of friends | list groups                          | view all groups previously created                                                 |
 
 ## Non-Functional Requirements
 1. The application should be able to work in any operating systems with `Java 11` installed.
-2. 
 
 ## Glossary
 
