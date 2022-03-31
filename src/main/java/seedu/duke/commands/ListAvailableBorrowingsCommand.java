@@ -15,7 +15,7 @@ public class ListAvailableBorrowingsCommand extends Command {
             "List all items avaliable between a start and end date";
     public static final String COMMAND_FORMAT = COMMAND_WORD + "[start date] [end date]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE
-    + ":\n" + "[Command Format] " + COMMAND_FORMAT + "\n";
+            + ":\n" + "[Command Format] " + COMMAND_FORMAT + "\n";
 
     private final LocalDate startDate;
     private final LocalDate endDate;
