@@ -190,6 +190,12 @@ Edits an existing session so that you can change the details of a session.<br>
 >Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
+>* `[SESSION_NAME]` refers to the name of the session.
+   >  * The session name is **case-insensitive**.
+>* `[SESSION_DATE]` refers to the date of the session.
+   >  * The format of the date must be in `DD-MM-YYYY`.
+>* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
+   >  * Each individual name is **case-insensitive**.
 
 <br>
 
@@ -563,8 +569,11 @@ Edits an existing group so that you can change the details of a group.<br>
 
 >Format: `group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]`
 >* `[GROUP_ID]` refers to the unique identifier of the group.
->    * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
-
+>  * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
+>* `[GROUP_NAME]` refers to the name of the group.
+>  * The group name is **case-insensitive**.
+>* `[NAME1 NAME2 ...]` refers to a list of individuals in the group.
+>  * Each individual name is **case-insensitive**.
 <br>
 
 > **💡 Notes:**
