@@ -174,7 +174,7 @@ public class ModuleCalendarReader {
         if (moduleCategory.startsWith(MODULE_CATEGORY_EXAM)) {
             //If category = exam then we also add the exam date to the module day.
             assert (dateStart != null) : DATE_WAS_NULL_MESSAGE;
-            moduleDay += " " + new SimpleDateFormat(STANDARD_DATE_FORMAT).format(dateStart);
+            moduleDay += "," + new SimpleDateFormat(STANDARD_DATE_FORMAT).format(dateStart);
         }
     }
 
