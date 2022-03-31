@@ -94,6 +94,15 @@ The sequence diagram that shows how `Storage` is created and the data is loaded 
 4. A new `Package` object is constructed with the relevant data.
 5. `storage` returns `package` object to `TARBS`. 
 
+#### Saving data
+The sequence diagram that shows how `Storage` is used to save the current list of travel packages and reservations is shown below: </br>
+
+![](SaveFilesSeqDiag.png)
+
+1. `TARBS` calls the `savePackages()` method of `storage`.
+2. `storage` will then write the contents of the two ArrayLists of `Reservation` and `TravelPackages` objects into text files by calling the respective `save` methods. The exact implementation is not shown in the diagram.
+
+
 ## Feature - Parser
 The sequence diagram shows an example of how a user input is parsed and returns a new `Command`.
 
