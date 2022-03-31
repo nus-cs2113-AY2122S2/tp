@@ -56,7 +56,7 @@ public class SearchCommand extends Command {
 
         ui.showMessages(SEARCH_RESULT_PREAMBLE);
         for (int i = 0; i < results.size(); i++) {
-            String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i, results.get(i).toDetailedString());
+            String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i+1, results.get(i).toDetailedString());
             ui.showMessages(printMsg);
         }
     }
