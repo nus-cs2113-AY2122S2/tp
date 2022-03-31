@@ -44,8 +44,8 @@ public class Constants {
             + "The correct format should be:\n"
             + "changegit [project_title] [website URL]";
     public static final String MESSAGE_INVALID_LINK_FORMAT =
-            "Please use the following format for your link:"
-            + "http://www.----.com";
+            "Please make sure your link begins with the following:\n"
+            + "http:// or https://";
 
     public static final int PROJECT_NOT_FOUND = -1;
     public static final int TWO_ARGUMENTS = 2;

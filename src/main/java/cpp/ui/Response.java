@@ -38,6 +38,7 @@ public class Response {
         System.out.println(count++ + ". addproject [Project Name]");
         System.out.println(count++ + ". deleteproject [Project Name]");
         System.out.println(count++ + ". adddeadline [Project Name] [Date]");
+        System.out.println(count++ + ". changegit [Project Name] [GitHub URL]");
         System.out.println(count++ + ". todo [Project Index] [Description]");
         System.out.println(count++ + ". mark [Project Index] [Todo Index]");
         System.out.println(count++ + ". listprojects/listproject");
@@ -114,5 +115,9 @@ public class Response {
 
     public static String addGithubLinkUnsuccessfully() {
         return "Github repo link addition (or change) was unsuccessful.";
+    }
+
+    public static String openGitCommandExecuted() {
+        return "Open Git Command Executed";
     }
 }

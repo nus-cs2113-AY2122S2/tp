@@ -1,7 +1,9 @@
 package cpp.model.project;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.awt.Desktop;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -126,6 +128,18 @@ public class Project {
      */
     public void setGitHubLink(String link) {
         this.gitHubLink = link;
+    }
+
+    public void openGit() {
+        try {
+            Desktop desktop = Desktop.getDesktop();
+            desktop.browse(new URI(gitHubLink));
+        } catch (URISyntaxException e) {
+            System.out.println("This project's GitHub link doesn't seem functional.\n" +
+                    "Please use the addgit command with a functional URL.");
+        } catch (IOException e) {
+            System.out.println("The link is functional, but your browser cannot be opened.");
+        }
     }
 
     /**

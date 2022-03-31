@@ -43,6 +43,9 @@ public class CommandHandler {
         case "changegit":
             executeResult = executeCommand(projectList, new ChangeGitHubLinkCommandParser().parse(commands));
             break;
+        case "opengit":
+            executeResult = executeCommand(projectList, new OpenGitCommandParser().parse(commands));
+            break;
         case "view":
             executeResult = executeCommand(projectList, new ViewProjectCommandParser().parse(commands));
             break;

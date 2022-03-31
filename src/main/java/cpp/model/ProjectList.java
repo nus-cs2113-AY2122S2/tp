@@ -183,14 +183,14 @@ public class ProjectList {
      */
     public void addGithubLink(String title, String githubLink) {
         assert (title != null && title != "" && githubLink != null && githubLink != "") : "Cannot add deadline.";
-        URI githubURI;
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index != Constants.PROJECT_NOT_FOUND) {
-            System.out.println("hey");
             Project project = projectList.get(index);
             try {
-                githubURI = new URI(githubLink);
+                if ((!githubLink.startsWith("http://") && !githubLink.startsWith("https://"))) {
+                    throw new URISyntaxException(githubLink, "invalid format");
+                }
                 project.setGitHubLink(githubLink);
                 System.out.println("The Github Repo for " + title + " has been changed to: " + githubLink);
             } catch (URISyntaxException e) {
@@ -202,6 +202,19 @@ public class ProjectList {
         }
         System.out.println(Constants.SEPARATOR);
 
+    }
+
+    public void openGit(String title) {
+        assert (title != null && !title.equals("")) : "Cannot view the project.";
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(title);
+        if (index == Constants.PROJECT_NOT_FOUND) { //project not found
+            System.out.println("Sorry! There was no project with that name.");
+        } else {
+            Project project = projectList.get(index);
+            project.openGit();
+        }
+        System.out.println(Constants.SEPARATOR);
     }
 
     /**
