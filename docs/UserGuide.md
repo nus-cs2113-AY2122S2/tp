@@ -140,7 +140,7 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 > 
 > **⚠️Warnings:**
 >- If you include a name in `[NAME1 NAME2 ...]` that already exists in the group specified by `[GROUP_ID]`,
-   only one instance of this person will be stored in the session.
+   only one instance of this person is stored in the session.
 >- Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
    includes Alice, only two names, Alice and Bob, would be saved.
 
@@ -250,7 +250,7 @@ Displays details about a session so that you can review the session.<br>
 
 ### Listing all sessions: `session /list`
 Displays all existing sessions so that you can have an overview of previously created sessions. 
-However, deleted sessions will not be listed.
+However, deleted sessions are not listed.
 
 > Format: `session /list`
 
@@ -317,9 +317,9 @@ There are 2 ways that you can create an activity:
 
 **Example 1**
 - Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid a total of $10
-for both Bob and herself which will be split equally between them later on.<br><br>
-`activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br><br>
-![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
+  for both Bob and herself which is split equally between them later on.<br><br>
+  `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br><br>
+  ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 
 **Example 2**
 - Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
@@ -445,7 +445,7 @@ Displays details about an activity so that you can review the activity's details
 
 ### Listing all activities in a session: `activity /list`
 Displays all existing activities so that you can have an overview of previously created activities.
-However, deleted activities will not be listed.
+However, deleted activities are not listed.
 
 >Format: `activity /list /sid [SESSION_ID]`
 >
@@ -615,7 +615,7 @@ Displays details about a group so that you can review the group's details.<br>
 
 ### Listing all groups: `group /list`
 Displays all existing groups so that you can have an overview of previously created groups.
-However, deleted groups will not be listed.
+However, deleted groups are not listed.
 
 >Format: `group /list`
 
@@ -655,8 +655,8 @@ Quits the application.<br>
 
 **Q**: Is data saved to the disk upon exit?
 
-**A**: SplitLah 2.0 will create a save file in a folder named `data` that will be created in the same directory as
-`SplitLah.jar`. All changes will be saved to the save file upon exit.
+**A**: SplitLah 2.0 creates a save file in a folder named `data` that is created in the same directory as
+`SplitLah.jar`. All changes are saved to the save file upon exit.
 
 <br>
 
