@@ -109,7 +109,7 @@ and `Name` classes.
 Each of the classes in the `Profile` component also provides utility methods to manage the objects that they hold.
 
 ### TextUI Component
-![TextUI Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/TextUI%20Component.drawio.png)
+![TextUI Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/TextUIComponent.drawio.png)
 <br>
 The `TextUI` class is initialized by the `Manager` class when the application starts.
 It stores a `Scanner` and `PrintStream` object supplied upon initialization to read and write to the user interface.
@@ -277,6 +277,27 @@ session unique identifier from the list of sessions.
 8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
 
 ### View a session
+**API reference:** [`SessionViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `session /view` command.
+<br>
+<br>
+![View Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionViewCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /view` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionViewCommand` object.
+3. `SessionViewCommand#run` method is then invoked to run the `session /view` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
+5. The `SessionViewCommand` object then runs the `Profile#getSession` method to retrieve the session represented
+   by the session unique identifier provided.
+   1. If the session with the requested session unique identifier does not exist, an error message is printed out with 
+      `TextUI#printlnMessage`.
+   2. Else, a `String` object representing the details of the requested session is retrieved using the 
+      `Session#toString` method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
+
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
 
@@ -291,16 +312,14 @@ The general workflow of the `session /list` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
 3. `SessionListCommand#run` method is then invoked to run the `session /list` command.
-4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
-   before the list of sessions can be retrieved.
-5. The `SessionListCommand` object runs the `Profile#getSessionListSummaryString` method to retrieve a `String` object
-   representing the summaries of the sessions stored.
-   1. If there are no sessions stored in the `Profile` object, a `String` object representing an empty list of sessions is
-      returned.
-   2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of sessions,
-      calling `TableFormatter#addRow` for each session to create a table with the summary of each session. A `String` object
-      representing the table is then returned.
-6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called which returns a `Profile`
+   object.
+5. Once the profile is retrieved, `SessionListCommand` runs the `Profile#getSessionListSummaryString` method.
+   1. If the session list in the profile is empty, the `Profile` class returns a `String` object containing an error 
+      message.
+   2. Otherwise, a `String` object representing a table summarising the list of sessions in the 
+      profile is returned.
+6. The `String` object retrieved is then printed out with `TextUI#printlnMessage`.
 
 ### Settle a session
 **API reference:** [`SessionSummaryCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
