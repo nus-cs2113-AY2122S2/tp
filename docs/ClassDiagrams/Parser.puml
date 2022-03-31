@@ -1,8 +1,15 @@
 @startuml
-!include Style.puml
+
+!define ABSTRACT &#123;abstract&#125;
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam classFontSize 12
+skinparam classAttributeFontSize 12
+hide circle
 
 package parsers {
-    abstract class Parser {
+    class "ABSTRACT\nParser" as Parser {
         commandFormat: String
         groupNames: HashSet<String>
         parsedCommand: HashMap<String, String>
@@ -29,19 +36,18 @@ Parser <|-u- ModHappyParser
 XYZParser <. ModHappyParser: uses <
 ModHappyParser <-u- Main
 
-hide Main circle
 hide Main methods
 hide Main attributes
 
 Parser <|-- XYZParser
 
-class "{abstract}\n Command " {
+class "ABSTRACT\nCommand" as Command {
 }
-hide "{abstract}\n Command " methods
-hide "{abstract}\n Command " attributes
+hide Command methods
+hide Command attributes
 
 XYZCommand <.u. ModHappyParser: returns <
-"{abstract}\n Command " <|-- XYZCommand
+Command <|-- XYZCommand
 
 hide XYZCommand methods
 hide XYZCommand attributes

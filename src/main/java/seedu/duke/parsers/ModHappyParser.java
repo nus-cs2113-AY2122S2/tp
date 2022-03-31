@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import seedu.duke.commands.Command;
+import seedu.duke.exceptions.GeneralParseException;
+import seedu.duke.exceptions.UnknownConfigurationGroupWordException;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.UnsupportedResultTypeException;
+import seedu.duke.exceptions.WrongDurationFormatException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -31,7 +34,7 @@ public class ModHappyParser extends Parser {
     /**
      * Extract the command word from the user input and invoke the relevant command-specific parser.
      * @return a Command instance associated with the user input
-     * @throws ParseException if the user input does not match the string
+     * @throws GeneralParseException if the user input does not match the string
      * @throws ModHappyException if the command word was not recognised
      */
     @Override
@@ -40,8 +43,10 @@ public class ModHappyParser extends Parser {
             HashMap<String, String> parsedCommand = parseString(userInput);
             Parser commandParser = getCommandParser(parsedCommand.get(COMMAND_WORD));
             return commandParser.parseCommand(parsedCommand.get(ARGUMENT));
-        } catch (ParseException e) {
-            throw new ParseException();
+        } catch (GeneralParseException | UnknownConfigurationGroupWordException | UnsupportedResultTypeException e) {
+            throw e;
+        } catch (WrongDurationFormatException e) {
+            throw new WrongDurationFormatException();
         } catch (ModHappyException e) {
             throw new UnknownCommandException(userInput);
         } catch (Exception e) {

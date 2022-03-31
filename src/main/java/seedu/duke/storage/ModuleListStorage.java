@@ -12,6 +12,7 @@ import java.util.Objects;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import seedu.duke.exceptions.DuplicateModuleException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
 
@@ -31,19 +32,26 @@ public class ModuleListStorage extends ListStorage<Module> {
     public ArrayList<Module> loadData(String path) throws ModHappyException {
         Gson gson = new GsonBuilder().create();
         Path file = new File(path).toPath();
+        ArrayList<Module> arrayList;
         try {
             Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
             Module[] list = gson.fromJson(reader, Module[].class);
-            ArrayList<Module> arrayList;
             if (!Objects.isNull(list)) {
                 arrayList = new ArrayList<>(Arrays.asList(list));
             } else {
                 arrayList = new ArrayList<>();
             }
-            return arrayList;
         } catch (Exception e) {
             throw new ReadException();
         }
+        ArrayList<String> moduleCodes = new ArrayList<>();
+        for (Module m : arrayList) {
+            if (moduleCodes.contains(m.getModuleCode())) {
+                throw new DuplicateModuleException();
+            }
+            moduleCodes.add(m.getModuleCode());
+        }
+        return arrayList;
     }
 
 }

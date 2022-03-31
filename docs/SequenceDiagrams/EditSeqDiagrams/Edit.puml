@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":ModHappyParser" as ModHappyParser
+participant ":EditParser" as EditParser
+participant ":EditCommand" as EditCommand
+participant ":ModuleList" as ModuleList
+participant ":Module" as Module
+participant ":TaskList" as TaskList
+participant ":Task" as Task
+hide footbox
+
+note right of ModHappyParser
+Some methods are omitted from this diagram.
+end note
+
+[->ModHappyParser:parseCommand(userInput)
+activate ModHappyParser
+create EditParser
+ModHappyParser -> EditParser: EditParser()
+activate EditParser
+return
+
+ModHappyParser -> EditParser: parseCommand(arguments)
+activate EditParser
+create EditCommand
+EditParser -> EditCommand: EditCommand(taskModule,taskIndex,description,workingTime,taskName)
+activate EditCommand
+return
+return
+return
+
+destroy EditParser
+
+[->EditCommand:execute(moduleList, configuration)
+activate EditCommand
+ref over EditCommand, ModuleList: Get Module
+EditCommand -> EditCommand: editTaskFromModule(targetModule)
+activate EditCommand
+ref over EditCommand, TaskList: Get Task
+EditCommand -> Task: setTaskDescription(description)
+activate Task
+return
+deactivate Task
+return CommandResult(result)
+deactivate EditCommand
+
+destroy EditCommand
+
+
+@enduml

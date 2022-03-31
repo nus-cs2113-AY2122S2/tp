@@ -9,14 +9,15 @@ import seedu.duke.util.StringConstants;
 
 public class ListParser extends Parser {
     private static final String LIST_ARGUMENT = StringConstants.LIST_ARGUMENT;
-    //Unescaped Regex for testing:
-    //((?<listArgument>\w*))*
-    private static final String LIST_FORMAT = "((?<listArgument>\\w+))*";
+    // Unescaped Regex for testing:
+    // ((?<listArgument>\w+))?(?<invalid>.*)
+    private static final String LIST_FORMAT = "((?<listArgument>\\w+))?(?<invalid>.*)";
 
     public ListParser() {
         super();
         this.commandFormat = LIST_FORMAT;
         groupNames.add(LIST_ARGUMENT);
+        groupNames.add(INVALID);
     }
 
     @Override
