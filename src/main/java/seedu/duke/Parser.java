@@ -37,6 +37,9 @@ public class Parser {
         case "packages":
             return new PackagesCommand();
 
+        case "info":
+            return prepareInfo(arguments);
+
         case "reserve":
             return prepareReserve(arguments);
 
@@ -110,6 +113,17 @@ public class Parser {
             int packageID = Integer.parseInt(argsArray[0]);
             String number = argsArray[1];
             return new RemoveReservationCommand(packageID, number);
+        } catch (Exception e) {
+            return new WrongFormatCommand(e.getMessage());
+        }
+    }
+
+    private static Command prepareInfo(String args) {
+        try {
+            String[] argsArray = args.trim().split(",");
+            int packageID = Integer.parseInt(argsArray[0]);
+            //String number = argsArray[1];
+            return new InfoCommand(packageID);
         } catch (Exception e) {
             return new WrongFormatCommand(e.getMessage());
         }
