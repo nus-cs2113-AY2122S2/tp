@@ -4,11 +4,11 @@ import cpp.model.ProjectList;
 import cpp.model.project.Project;
 import cpp.ui.Response;
 
-public class AddDeadlineCommand extends Command {
+public class AddProjectDeadlineCommand extends Command {
     private final String projectName;
     private final String deadline;
 
-    public AddDeadlineCommand(String projectName, String deadline) {
+    public AddProjectDeadlineCommand(String projectName, String deadline) {
         this.projectName = projectName;
         this.deadline = deadline;
     }
@@ -18,19 +18,19 @@ public class AddDeadlineCommand extends Command {
         Project project = projectList.getProject(projectName);
         /*
         if (project == null) {
-            return Response.addDeadlineUnsuccessfully();
+            return Response.addProjectDeadlineUnsuccessfully();
         }
         try {
             project.setDeadline(deadline);
-            return Response.addDeadlineSuccessfully(projectName, deadline);
+            return Response.addProjectDeadlineSuccessfully(projectName, deadline);
         } catch (DateTimeParseException e) {
             return Response.dateFormatError();
         }
         */
-        projectList.addDeadline(projectName, deadline);
+        projectList.addProjectDeadline(projectName, deadline);
         if (project == null) {
-            return Response.addDeadlineUnsuccessfully();
+            return Response.addProjectDeadlineUnsuccessfully();
         }
-        return Response.addDeadlineSuccessfully(projectName, project.getDeadline());
+        return Response.addProjectDeadlineSuccessfully(projectName, project.getDeadline());
     }
 }

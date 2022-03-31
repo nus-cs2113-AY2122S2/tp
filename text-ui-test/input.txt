@@ -1,8 +1,8 @@
 help
 addproject cs2113
-adddeadline cs2113 17/03/2022
-adddeadline cs2113 2022-03-17
-adddeadline cs3245 2022-03-24
+addprojdeadline cs2113 17/03/2022
+addprojdeadline cs2113 2022-03-17
+addprojdeadline cs3245 2022-03-24
 todo 1 set up iP repo
 todo fork iP
 listprojects

@@ -7,10 +7,11 @@ import cpp.logic.commands.ListLanguageCommand;
 import cpp.logic.commands.ListProjectCommand;
 
 import cpp.logic.parser.AddProjectCommandParser;
-import cpp.logic.parser.DeleteProjectCommandParser;
+import cpp.logic.parser.AddProjectDeadlineCommandParser;
 import cpp.logic.parser.AddTodoCommandParser;
+import cpp.logic.parser.AddTodoDeadlineCommandParser;
+import cpp.logic.parser.DeleteProjectCommandParser;
 import cpp.logic.parser.MarkCommandParser;
-import cpp.logic.parser.AddDeadlineCommandParser;
 import cpp.logic.parser.ViewProjectCommandParser;
 import cpp.logic.parser.AddLanguageCommandParser;
 import cpp.logic.parser.ListLanguageCommandParser;
@@ -46,8 +47,11 @@ public class CommandHandler {
         case "mark":
             executeResult = executeCommand(projectList, new MarkCommandParser().parse(commands));
             break;
-        case "adddeadline":
-            executeResult = executeCommand(projectList, new AddDeadlineCommandParser().parse(commands));
+        case "addprojdeadline":
+            executeResult = executeCommand(projectList, new AddProjectDeadlineCommandParser().parse(commands));
+            break;
+        case "addtododeadline":
+            executeResult = executeCommand(projectList, new AddTodoDeadlineCommandParser().parse(commands));
             break;
         case "view":
             executeResult = executeCommand(projectList, new ViewProjectCommandParser().parse(commands));
@@ -71,4 +75,5 @@ public class CommandHandler {
         assert (command != null) : "The command should not be null.";
         return command.execute(projectList);
     }
+
 }

@@ -1,7 +1,5 @@
 package cpp.ui;
 
-import cpp.ui.Constants;
-
 /**
  * Handles the responses to give to user.
  */
@@ -37,18 +35,13 @@ public class Response {
         System.out.println("Here are all the possible commands:");
         System.out.println(count++ + ". addproject [Project Name]");
         System.out.println(count++ + ". deleteproject [Project Name]");
-        System.out.println(count++ + ". adddeadline [Project Name] [Date]");
+        System.out.println(count++ + ". addprojdeadline [Project Name] [Date]");
+        System.out.println(count++ + ". addtododeadline [Project Index] [Todo Index] [Date]");
         System.out.println(count++ + ". todo [Project Index] [Description]");
         System.out.println(count++ + ". mark [Project Index] [Todo Index]");
         System.out.println(count++ + ". listprojects/listproject");
         System.out.println(count++ + ". view [Project Name]");
         System.out.println(count++ + ". exit");
-        System.out.println(Constants.SEPARATOR);
-    }
-
-    public static void printDefault() {
-        System.out.println(Constants.SEPARATOR);
-        System.out.println("Unknown command.");
         System.out.println(Constants.SEPARATOR);
     }
 
@@ -100,11 +93,11 @@ public class Response {
         return ("View command has been executed successfully.");
     }
 
-    public static String addDeadlineSuccessfully(String projectTitle, String deadline) {
+    public static String addProjectDeadlineSuccessfully(String projectTitle, String deadline) {
         return "Deadline added to " + projectTitle + ": " + deadline;
     }
 
-    public static String addDeadlineUnsuccessfully() {
+    public static String addProjectDeadlineUnsuccessfully() {
         return "Deadline addition was Unsuccessful.";
     }
 }

@@ -145,7 +145,6 @@ public class ProjectList {
         Project targetProject = projectList.get(indexProj - 1);
 
         targetProject.markTodoAsDone(indexTodo);
-
     }
 
     /**
@@ -154,7 +153,7 @@ public class ProjectList {
      * @param title Name of the project
      * @param deadline Deadline for the project
      */
-    public void addDeadline(String title, String deadline) {
+    public void addProjectDeadline(String title, String deadline) {
         assert (title != null && !title.equals("")
                 && deadline != null && !deadline.equals("")) : "Cannot add deadline.";
         System.out.println(Constants.SEPARATOR);
@@ -165,10 +164,34 @@ public class ProjectList {
                 project.setDeadline(deadline);
                 System.out.println("Deadline added to " + title + ": " + deadline);
             } catch (DateTimeParseException e) {
-                System.out.println("Improper format. Please look the valid format for dates");
+                System.out.println("Improper format. Please type it in yyyy-mm-dd format.");
             }
         } else {
             System.out.println("Sorry! There was no project with that name.");
+        }
+        System.out.println(Constants.SEPARATOR);
+    }
+
+    /**
+     * Adds a deadline to a specified Todo.
+     *
+     * @param indexProj Index of the project.
+     * @param indexTodo Index of the todo.
+     * @param deadline Deadline for the todo
+     */
+    public void addTodoDeadline(int indexProj, int indexTodo, String deadline) {
+        if (indexProj > projectList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        Project targetProject = projectList.get(indexProj - 1);
+
+        System.out.println(Constants.SEPARATOR);
+        try {
+            targetProject.addTodoDeadline(indexTodo, deadline);
+            String todoString = targetProject.getTodos().get(indexTodo - 1).getDescription();
+            System.out.println("Deadline added to " + todoString + ": " + deadline);
+        } catch (DateTimeParseException e) {
+            System.out.println("Improper format. Please type it in yyyy-mm-dd format.");
         }
         System.out.println(Constants.SEPARATOR);
     }

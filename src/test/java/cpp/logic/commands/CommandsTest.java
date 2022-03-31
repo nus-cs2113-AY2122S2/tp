@@ -31,8 +31,8 @@ public class CommandsTest {
 
     @Test
     public void testAddDeadline() throws IllegalCommandException {
-        AddDeadlineCommand addDeadlineCommand = new AddDeadlineCommand(PROJECT1NAME, DEADLINE);
-        String status = addDeadlineCommand.execute(defaultProjectList);
+        AddProjectDeadlineCommand addProjectDeadlineCommand = new AddProjectDeadlineCommand(PROJECT1NAME, DEADLINE);
+        String status = addProjectDeadlineCommand.execute(defaultProjectList);
         assertEquals(status, "Deadline added to " + PROJECT1NAME + ": " + DEADLINE);
     }
 
