@@ -4,8 +4,8 @@ import cpp.logic.parser.*;
 import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.Command;
+import cpp.logic.commands.ListLanguageCommand;
 import cpp.logic.commands.ListProjectCommand;
-
 import cpp.model.ProjectList;
 import cpp.ui.Response;
 
@@ -46,6 +46,12 @@ public class CommandHandler {
         case "view":
             executeResult = executeCommand(projectList, new ViewProjectCommandParser().parse(commands));
             break;
+        case "addlanguage":
+            executeResult = executeCommand(projectList, new AddLanguageCommandParser().parse(commands));
+            break;
+        case "listlanguages":
+            executeResult = executeCommand(projectList, new ListLanguageCommandParser().parse(commands));
+            break;
         case "help":
             Response.printHelp();
             break;
@@ -59,5 +65,4 @@ public class CommandHandler {
         assert (command != null) : "The command should not be null.";
         return command.execute(projectList);
     }
-
 }

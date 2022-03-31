@@ -11,9 +11,11 @@ public class Project {
     private ArrayList<String> webLinks;
     private String gitHubLink;
     private Deadline deadline;
+    private ArrayList<String> languages;
 
     public Project() {
         todos = new ArrayList<Todo>();
+        languages = new ArrayList<String>();
     }
 
     /**
@@ -26,6 +28,7 @@ public class Project {
         todos = new ArrayList<Todo>();
         webLinks = new ArrayList<String>();
         gitHubLink = new String("http://www.github.com");
+        languages = new ArrayList<String>();
     }
 
     /**
@@ -95,6 +98,10 @@ public class Project {
         return this.todos;
     }
 
+    public ArrayList<String> getLanguages() {
+        return this.languages;
+    }
+
     /**
      * Gets the list of all weblinks in the project
      *
@@ -135,4 +142,21 @@ public class Project {
         }
     }
 
+
+    /**
+     * Displays all programming languages of the project.
+     */
+    public void printLanguages() {
+        System.out.print("Programming languages for " + getTitle() + ":\n");
+        int count = 1;
+        for (String language: getLanguages()) {
+            System.out.print("\t" + "[" + count + "]. " + language + "\n");
+            count++;
+        }
+    }
+
+    public void addLanguage(String language) {
+        assert (languages != null) : "Cannot add languages to this project.";
+        languages.add(language);
+    }
 }

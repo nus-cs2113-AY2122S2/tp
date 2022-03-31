@@ -88,7 +88,7 @@ Format: `mark [project_index] [todo_index]`
 
 #### Example of output
 
-```aidl
+```
 Todo has been marked as done successfully: 
 [X] buy textbooks
 ```
@@ -114,7 +114,7 @@ Format: `view [project_name]`
 
 #### Example of output
 
-```aidl
+```
 Project Name: cs2113
 Deadline: 17/03/2022
 	[1]. [X] complete addproject command
