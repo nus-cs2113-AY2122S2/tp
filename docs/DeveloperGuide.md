@@ -1,3 +1,4 @@
+# Travel Agency Reservation Booking System (TARBS)
 # Developer Guide
 
 ## Acknowledgements
@@ -80,8 +81,29 @@
 |remove|remove {package_id},{contact_number} <br/> e.g remove 1,8888888 <br/> remove an existing reservation|
 |reservations|reservations {package_number} <br/> eg. reservations 2 <br/> print all reservations for a given travelPackageID|
 
+### Test Case 1
+
+New employees can enter `packages` to view all available packages by the agency.
+
+Additionally, they can enter `info {package number}` to view more in-depth information about the package.
+
+![image](https://user-images.githubusercontent.com/64303732/161110520-8ed18ddc-b356-43d5-95ed-7df5ca2de91d.png)
+
+Employees can also input new reservations using `reserve {package_id},{contact_name},{contact_number},{number_pax}`
+
+They can then view and verify reservations for that package using `reservation {package_number}`
+
+![image](https://user-images.githubusercontent.com/64303732/161111482-a2f9600d-d1f0-45b1-9a51-ef28848e4b57.png)
+
+![image](https://user-images.githubusercontent.com/64303732/161111551-c1acfd1e-90f3-426e-b8e3-175f050dba42.png)
+
+
 ## Feature - Help Command 
 Aim: Displays a list of all available commands that the user can refer to as a guide
+
+![image](https://user-images.githubusercontent.com/64303732/161110894-f9226a6c-e9f2-4cf3-9158-72cc8df19604.png)
+
+
 
 ## Feature - Storage
 #### Initialisation (Loading Data)
