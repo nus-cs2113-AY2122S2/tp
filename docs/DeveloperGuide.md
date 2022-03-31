@@ -289,9 +289,39 @@ session unique identifier from the list of sessions.
    * Else the `Session` object with the specified session unique identifier is returned.
 6. The `Profile#removeSession` method is then called to remove the `Session` object from the list of sessions stored in `Profile` object.
 7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
+8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully deleted.
 
 ### Edit a session
+**API reference:** [`SessionEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionEditCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `session /edit` command.
+<br>
+<br>
+![Edit Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionEditCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /edit` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionEditCommand` object.
+3. The `SessionEditCommand#run` method is then invoked to run the `session /edit` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of sessions can be retrieved.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified
+   session unique identifier from the list of sessions.
+   * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+   * Else the `Session` object with the specified session unique identifier is returned.
+6. The detail of how a session is updated in the reference diagram below.
+![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
+7. `SessionEditCommand#run` would check if there is an update for a new list of persons, new session or new session date.
+   * If there is an update on the list of persons. It would first check if the newly provided list of persons contains duplicated names.
+     * If duplicated names are detected, an error message would be printed and control is returned to `SplitLah`.
+     * Else, it would call `PersonList#isSuperSet` to check if the newly supplied list of persons contain all existing persons in the session.
+     * If `PersonList#isSuperSet` returns `true`, it would then call `Session#addPerson` to add in the new list of persons.
+   * If there is an update on the session name. It would call `Session#setSessionName` to set the new session name.
+   * If there is an update on the session date. It would call `Session#setDateCreated` to set the new session date.
+8. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+9. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
 
 ### View a session
 **API reference:** [`SessionViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
