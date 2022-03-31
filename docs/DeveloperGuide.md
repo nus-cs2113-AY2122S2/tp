@@ -1,3 +1,5 @@
+<p align="center"><img alt="logo" src="https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/pngLogo.png"></p>
+
 # Developer Guide
 ## Contents
 * [Acknowledgements](#acknowledgements)
@@ -36,6 +38,7 @@
 * Address Book (Level-3) - Provide samples of User Guide(UG) and Developer Guide(DG)
 
 ## Introduction
+The guide's purpose is to allow readers to understand how the application works internally, so that future engineers could continue working on the project with ease. 
 
 ### How to use this developer guide?
 * At the start of the developer guide, SplitLah is explained as different components.
@@ -47,6 +50,8 @@
 * SplitLah supports a total of **18 commands**. However, in this developer guide, we would not explain in detail how the `help` and `exit` command works. 
 To view the usages of SplitLah's commands please refer to our [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html).
 * The explanation of each command starts [here](#implementation).
+* In each command explanation section, there is an API reference link that brings the reader to the source code of the command. 
+* API reference refers to the main source code that is responsible for carrying out the command's action.
 
 ## Design
 ### Architecture
