@@ -25,6 +25,8 @@ public class CommandStubs {
     public static final Set<String> SEARCH_RESULT_PAPER_NAME_A4_DESCRIPTION = generateSearchResult(ITEM_PAPER_A4_10);
     public static final Set<String> SEARCH_RESULT_NONE = generateSearchResult();
 
+
+    public static final ItemList EDIT_NEGATIVE_QUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
     public static final ItemList EDIT_NAME_LIST_BEFORE = generateItemList(ITEM_PENCIL);
     public static final ItemList EDIT_NAME_EXPECTED_LIST_AFTER = generateItemList(ITEM_MARKER);
     public static final ItemList EDIT_ABSQUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
