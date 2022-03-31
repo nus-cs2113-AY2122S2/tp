@@ -1,16 +1,17 @@
 package cpp.logic;
 
+import cpp.logic.parser.AddProjectCommandParser;
+import cpp.logic.parser.AddProjectDeadlineCommandParser;
+import cpp.logic.parser.AddTodoCommandParser;
+import cpp.logic.parser.AddTodoDeadlineCommandParser;
+import cpp.logic.parser.DeleteProjectCommandParser;
+import cpp.logic.parser.MarkCommandParser;
+import cpp.logic.parser.ViewProjectCommandParser;
 import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.Command;
 import cpp.logic.commands.ListProjectCommand;
 
-import cpp.logic.parser.AddProjectDeadlineCommandParser;
-import cpp.logic.parser.AddProjectCommandParser;
-import cpp.logic.parser.AddTodoCommandParser;
-import cpp.logic.parser.DeleteProjectCommandParser;
-import cpp.logic.parser.MarkCommandParser;
-import cpp.logic.parser.ViewProjectCommandParser;
 import cpp.model.ProjectList;
 import cpp.ui.Response;
 
@@ -44,6 +45,9 @@ public class CommandHandler {
             break;
         case "addprojdeadline":
             executeResult = executeCommand(projectList, new AddProjectDeadlineCommandParser().parse(commands));
+            break;
+        case "addtododeadline":
+            executeResult = executeCommand(projectList, new AddTodoDeadlineCommandParser().parse(commands));
             break;
         case "view":
             executeResult = executeCommand(projectList, new ViewProjectCommandParser().parse(commands));

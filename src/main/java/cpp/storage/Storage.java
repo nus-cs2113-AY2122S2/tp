@@ -70,7 +70,9 @@ public class Storage {
             for (int i = 0; i < (todoInfo.length) / 2; i++) {
                 String todoDescrip = todoInfo[2 * i];
                 String todoStatus = todoInfo[2 * i + 1];
+                String todoDeadline = todoInfo[2 * i + 2];
                 projectList.addTodoToProject(indexProject, todoDescrip);
+                projectList.addTodoDeadline(indexProject, i + 1, todoDeadline);
                 //mark todo as done
                 if (todoStatus.equalsIgnoreCase("true")) { //this todo is marked as done
                     projectList.markTodoAsDone(indexProject, indexTodo);
@@ -132,7 +134,8 @@ public class Storage {
         for (Todo todo : todos) {
             String description = todo.getDescription();
             String status = todo.getDone();
-            todoInfo += "," + description + "," + status;
+            String deadline = todo.getDeadline();
+            todoInfo += "," + description + "," + status + "," + deadline;
         }
         // remove the first comma
         todoInfo = todoInfo.substring(1);

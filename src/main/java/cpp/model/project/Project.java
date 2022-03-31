@@ -8,10 +8,6 @@ public class Project {
     private ArrayList<Todo> todos;
     private Deadline deadline;
 
-    public Project() {
-        todos = new ArrayList<Todo>();
-    }
-
     /**
      * Constructs a Project object.
      *
@@ -36,12 +32,23 @@ public class Project {
         System.out.println(todos.get(index - 1));
     }
 
+    /**
+     * Adds a Todo to a project
+     *
+     * @param todoString the todo to be added
+     */
     public void addTodo(String todoString) {
         Todo newTodo = new Todo(todoString);
         todos.add(newTodo);
         System.out.println("Todo: " + todoString + " have been added to project " + getTitle());
     }
 
+    /**
+     * Gets the Todo a specified index
+     *
+     * @param index index of desired todo
+     * @return the Todo
+     */
     public Todo getTodo(int index) {
         return todos.get(index - 1);
     }
@@ -78,6 +85,14 @@ public class Project {
             return "No deadline specified";
         }
         return deadline.toString();
+    }
+
+    public void addTodoDeadline(int index, String stringDeadline) {
+        try {
+            todos.get(index - 1).setDeadline(new Deadline(stringDeadline));
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
     }
 
     /**

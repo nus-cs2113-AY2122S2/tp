@@ -28,7 +28,10 @@ public class Constants {
             + "deleteproject [project_title]";
     public static final String MESSAGE_INVALID_ADDPROJDEADLINE_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
-            + "adddeadline [project_title] [deadline]";
+            + "addprojdeadline [project_title] [deadline]";
+    public static final String MESSAGE_INVALID_ADDTODODEADLINE_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
+            + "The correct format should be:\n"
+            + "addtododeadline [project_index] [todo_index] [deadline]";
     public static final String MESSAGE_INVALID_ADD_MEMBER_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
             + "addmember [project_title] [member_name] /c[contact_number] /e[email]";
@@ -36,6 +39,7 @@ public class Constants {
     public static final int PROJECT_NOT_FOUND = -1;
     public static final int TWO_ARGUMENTS = 2;
     public static final int THREE_ARGUMENTS = 3;
+    public static final int FOUR_ARGUMENTS = 4;
 
     public static final String SUNDAY = "SUNDAY";
     public static final String MONDAY = "MONDAY";
@@ -43,7 +47,7 @@ public class Constants {
     public static final String WEDNESDAY = "WEDNESDAY";
     public static final String THURSDAY = "THURSDAY";
     public static final String FRIDAY = "FRIDAY";
-    public static final String SATURDAY = "SUNDAY";
+    public static final String SATURDAY = "SATURDAY";
     public static final Set<String> DAYS_OF_THE_WEEK = new HashSet<String>(Arrays.asList(
                 SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY));
 }

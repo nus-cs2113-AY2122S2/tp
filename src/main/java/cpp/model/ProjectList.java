@@ -145,7 +145,6 @@ public class ProjectList {
         Project targetProject = projectList.get(indexProj - 1);
 
         targetProject.markTodoAsDone(indexTodo);
-
     }
 
     /**
@@ -168,6 +167,30 @@ public class ProjectList {
             }
         } else {
             System.out.println("Sorry! There was no project with that name.");
+        }
+        System.out.println(Constants.SEPARATOR);
+    }
+
+    /**
+     * Adds a deadline to a specified Todo.
+     *
+     * @param indexProj Index of the project.
+     * @param indexTodo Index of the todo.
+     * @param deadline Deadline for the todo
+     */
+    public void addTodoDeadline(int indexProj, int indexTodo, String deadline) {
+        if (indexProj > projectList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        Project targetProject = projectList.get(indexProj - 1);
+
+        System.out.println(Constants.SEPARATOR);
+        try {
+            targetProject.addTodoDeadline(indexTodo, deadline);
+            String todoString = targetProject.getTodos().get(indexTodo - 1).getDescription();
+            System.out.println("Deadline added to " + todoString + ": " + deadline);
+        } catch (DateTimeParseException e) {
+            System.out.println("Improper format. Please type it in yyyy-mm-dd format.");
         }
         System.out.println(Constants.SEPARATOR);
     }
@@ -226,7 +249,7 @@ public class ProjectList {
      * @param title Name of the project
      */
     public void view(String title) {
-        assert (title != null && title != "") : "Cannot view the project";
+        assert (title != null && !title.equals("")) : "Cannot view the project";
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index == Constants.PROJECT_NOT_FOUND) { //project not found
