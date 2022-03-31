@@ -10,6 +10,9 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.Income;
 import seedu.mindmymoney.userfinancial.User;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
@@ -28,13 +31,7 @@ import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
-
+import static seedu.mindmymoney.helper.AddCommandInputTests.*;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
@@ -114,7 +111,11 @@ public class UpdateCommand extends Command {
             float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
 
             String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
-            String newTime = convertTime(inputTime);
+            if (!isValidInput(inputTime)) {
+                throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
+            }
+            LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String newTime = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
             //Create new expenditure object to substitute in
             Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,

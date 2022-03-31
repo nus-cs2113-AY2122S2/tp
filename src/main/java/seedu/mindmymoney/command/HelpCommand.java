@@ -69,11 +69,10 @@ public class HelpCommand extends Command {
                     + "2. Adding an Expenditure entry: add /e [EXPENDITURE] /c [CATEGORY] "
                     + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
                     + "3. Calculating the total expenditure in a month: calculate /epm [MONTH]\n"
-                    + "4. Updating an Expenditure entry: update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]\n"
-                    + "5. Updating an Expenditure entry with category: update [INDEX] /c [CATEGORY] "
+                    + "4. Updating an Expenditure: update [INDEX] /c [CATEGORY] "
                     + "/d [DESCRIPTION] /a [NEW_AMOUNT] /t [TIME]\n"
-                    + "6. Removing an Expenditure entry: delete [INDEX]\n"
-                    + "7. Exiting the program: bye\n"
+                    + "5. Removing an Expenditure entry: delete [INDEX]\n"
+                    + "6. Exiting the program: bye\n"
                     + "----------------------------------------------------------------------------------------------"
                     + "-----\n";
 
