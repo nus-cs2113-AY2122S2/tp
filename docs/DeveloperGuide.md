@@ -320,6 +320,13 @@ The general workflow of the `session /summary` command is as follows:
     obtained from the `SessionSummaryCommand#processAllTransactions` method.
 
 ### Add an activity
+**API reference:** [`ActivityCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityCreateCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `activity /create` command.
+<br>
+<br>
+
 ### Remove an activity
 ### View an activity
 
