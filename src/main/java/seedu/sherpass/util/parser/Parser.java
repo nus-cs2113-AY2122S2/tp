@@ -18,7 +18,7 @@ import seedu.sherpass.util.Ui;
 import static seedu.sherpass.constant.Index.COMMAND_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
-
+import static seedu.sherpass.constant.Index.SPLIT_TWO_PART_LIMIT;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.WHITESPACE;
@@ -43,7 +43,7 @@ public class Parser {
      * @return Command type matching the user command.
      */
     public static Command parseCommand(String userInput, TaskList taskList, Ui ui) {
-        String[] splitInput = userInput.split(WHITESPACE, 2);
+        String[] splitInput = userInput.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
         String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
         String argument = (splitInput.length > 1)
                 ? splitInput[COMMAND_CONTENT_INDEX].trim() : EMPTY_STRING;
@@ -55,9 +55,9 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return TaskParser.prepareAdd(argument, ui);
         case EditCommand.COMMAND_WORD:
-            return TaskParser.prepareEdit(argument, taskList, ui);
+            return TaskParser.prepareEdit(argument, ui);
         case DeleteCommand.COMMAND_WORD:
-            return TaskParser.prepareDelete(argument, taskList, ui);
+            return TaskParser.prepareDelete(argument, ui);
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         case StudyCommand.COMMAND_WORD:
