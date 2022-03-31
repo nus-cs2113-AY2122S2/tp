@@ -72,13 +72,13 @@
 
 | Command | Format Examples |
 | ------- | --------------- |
-|packages|packages|
+|packages|packages <br/> (prints details of all packages)|
 |info|info {num} (num < number of available packages) <br/> e.g. info 2 |
-|add|add {package_name},{ID},{startDate},{endDate},{hotel},{price},{country},{vacancies} <br/>  e.g. add Skiing Trip,1,23/2/2022,24/2/2022,hotelName,90.99,Singapore,20|
-|delete|delete {num} (num < number of available packages) <br/> e.g. delete 2|
-|reserve|reserve {package_id},{contact_name},{contact_number},{number_pax} <br/> e..g reserve 3,John,91234567,3|
-|remove|remove {package_id},{contact_number} <br/> e..g remove 1,8888888|
-|reservations|reservations {package_number} <br/> eg. reservations 2|
+|add|add {package_name},{ID},{startDate},{endDate},{hotel},{price},{country},{vacancies} <br/>  e.g. add Skiing Trip,1,23/2/2022,24/2/2022,hotelName,90.99,Singapore,20 <br/> adds a TravelPackage|
+|delete|delete {num} (num < number of available packages) <br/> e.g. delete 2 <br/> delete a TravelPackage|
+|reserve|reserve {package_id},{contact_name},{contact_number},{number_pax} <br/> e.g reserve 3,John,91234567,3|
+|remove|remove {package_id},{contact_number} <br/> e.g remove 1,8888888 <br/> remove an existing reservation|
+|reservations|reservations {package_number} <br/> eg. reservations 2 <br/> print all reservations for a given travelPackageID|
 
 ## Feature - Help Command 
 Aim: Displays a list of all available commands that the user can refer to as a guide
