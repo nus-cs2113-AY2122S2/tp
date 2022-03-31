@@ -69,8 +69,9 @@ Please take note of these few terms. It is explained as below:
 | Apple MacOS       | [Terminal](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac)     |
 | (Ubuntu) Linux    | [Bash Terminal](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal)              |
 
-> For Microsoft Windows operating systems, the Command Prompt (CMD) is **not** recommended for use with WerkIt!
-> as some texts in the application will not be displayed correctly.
+> For Microsoft Windows operating systems, if you are having display issues (e.g. colours not displaying) with
+> your terminal, please see "My terminal in Windows is not displaying any colours in the application" 
+> in the [FAQ section](#frequently-asked-questions-faq).
 
 > For Linux operating systems, our application is tested on Ubuntu Linux using the default Bash shell.
 
@@ -1034,6 +1035,13 @@ copy), delete the `werkItResources` directory and restart WerkIt! to recreate th
 ---
 
 ## Frequently Asked Questions (FAQ)
+
+**Q**: My terminal in Windows is not displaying any colours in the application.
+
+**A**: Please install Microsoft's newer terminal 'Windows Terminal' from the Microsoft Store via this
+[link](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701).
+
+<br/>
 
 **Q**: How do I transfer my data to another computer? 
 
