@@ -20,9 +20,10 @@ class ExpenditureListTest {
     private static int INVALID_INDEX = -1;
     private static int VALID_INDEX = 1;
     private static final PrintStream ORIGINAL_OUT = System.out;
+    private static final String INDENTATION = "   ";
     private static final String EXPECTED_LABELS = "Food: $20.00 - Recurring: false - "
             + "Category: Food and Drinks" + System.lineSeparator();
-    private static final String EXPECTED_LABEL_NUMBERED = "1. Food: $20.00 - Recurring: false "
+    private static final String EXPECTED_LABEL_NUMBERED = INDENTATION + "1. Food: $20.00 - Recurring: false "
             + "- Category: Food and Drinks" + System.lineSeparator();
     private static final int NUM_OF_EXP = 2;
 

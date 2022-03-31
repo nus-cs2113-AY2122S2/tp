@@ -8,8 +8,8 @@ import seedu.planitarium.exceptions.InvalidIndexException;
 import seedu.planitarium.exceptions.InvalidMoneyException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.exceptions.EmptyStringException;
-import seedu.planitarium.person.Person;
-import seedu.planitarium.person.PersonList;
+import seedu.planitarium.family.Person;
+import seedu.planitarium.family.PersonList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

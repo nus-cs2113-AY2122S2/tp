@@ -1,6 +1,6 @@
 //@@author teanweijun
 
-package seedu.planitarium.person;
+package seedu.planitarium.family;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,10 +25,11 @@ class PersonListTest {
     private static final Double FIRST_AMOUNT = 10.0;
     private static final Double SECOND_AMOUNT = 5.0;
 
+    private static final String INDENTATION = "   ";
     private static final String EMPTY_STRING = "";
     private static final String SAMPLE_LIST = "1. Alice" + System.lineSeparator()
-            + "Here is the income list for Alice:" + System.lineSeparator()
-            + "Here is the expenditure list for Alice:" + System.lineSeparator();
+            + INDENTATION + "List of incomes:" + System.lineSeparator()
+            + INDENTATION + "List of expenditures:" + System.lineSeparator();
 
     private ByteArrayOutputStream redirectIO() {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();

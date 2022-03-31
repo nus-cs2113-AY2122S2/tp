@@ -4,6 +4,7 @@ package seedu.planitarium.money;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.category.Category;
+import seedu.planitarium.global.Constants;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -87,7 +88,7 @@ public class ExpenditureList extends MoneyList {
         logger.log(Level.INFO, LOG_PRINT_LIST);
         int listIndex = 1;
         for (Expenditure item : expenditureArrayList) {
-            System.out.println(listIndex++ + ". " + item);
+            System.out.println(Constants.INDENTATION + listIndex++ + ". " + item);
         }
     }
 

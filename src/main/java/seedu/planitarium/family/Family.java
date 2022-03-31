@@ -1,6 +1,6 @@
 //@@author teanweijun
 
-package seedu.planitarium.person;
+package seedu.planitarium.family;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
@@ -47,11 +47,8 @@ public class Family {
         case Constants.MY_GEN:
             toReturn = myGen;
             break;
-        case Constants.CHILDREN:
-            toReturn = children;
-            break;
         default:
-            LOGGER.log(Level.SEVERE, Constants.INDEX_ERROR_MESSAGE);
+            toReturn = children;
         }
         return toReturn;
     }
@@ -77,11 +74,8 @@ public class Family {
         case Constants.MY_GEN:
             toReturn = "My generation";
             break;
-        case Constants.CHILDREN:
-            toReturn = "Children";
-            break;
         default:
-            LOGGER.log(Level.SEVERE, Constants.INDEX_ERROR_MESSAGE);
+            toReturn = "Children";
         }
         return toReturn;
     }
@@ -179,15 +173,32 @@ public class Family {
         System.out.println("Here are your disposable incomes by group:");
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
-            Double income = personList.getTotalIncome();
-            Double expenditure = personList.getTotalExpenditure();
-            Double disposable = personList.getRemain();
+            String income = formatValue(personList.getTotalIncome());
+            String expenditure = formatValue(personList.getTotalExpenditure());
+            String disposable = formatValue(personList.getRemain());
             String generation = getGenerationName(i);
             System.out.println(i + ". " + generation + ":" + System.lineSeparator()
-                    + "Income: $" + income + System.lineSeparator()
-                    + "Expenditure: $" + expenditure + System.lineSeparator()
-                    + "Disposable: $" + disposable);
+                    + Constants.INDENTATION + "Income: " + income + System.lineSeparator()
+                    + Constants.INDENTATION + "Expenditure: " + expenditure + System.lineSeparator()
+                    + Constants.INDENTATION + "Disposable: " + disposable);
+            // Print newline between generations
+            if (i != Constants.NUM_GROUPS) {
+                System.out.println(Constants.EMPTY_STRING);
+            }
         }
+    }
+
+    /**
+     * Returns the formatting of a monetary value depending on its polarity.
+     *
+     * @param entry The monetary value
+     * @return The formatting of the value
+     */
+    public String formatValue(Double entry) {
+        if (entry < 0) {
+            return ("-$" + (-entry));
+        }
+        return ("$" + entry);
     }
 
     /**

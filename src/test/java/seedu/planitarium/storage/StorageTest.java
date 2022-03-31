@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.planitarium.global.Constants;
-import seedu.planitarium.person.Family;
+import seedu.planitarium.family.Family;
 
 
 import java.io.File;

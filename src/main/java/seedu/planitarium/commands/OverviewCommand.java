@@ -1,7 +1,7 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
-import seedu.planitarium.person.Family;
+import seedu.planitarium.family.Family;
 
 import java.util.logging.Level;
 
