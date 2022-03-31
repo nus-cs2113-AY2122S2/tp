@@ -1,20 +1,24 @@
 package seedu.splitlah.parser;
 
-import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
-import seedu.splitlah.command.GroupListCommand;
-import seedu.splitlah.command.GroupViewCommand;
-import seedu.splitlah.command.SessionCreateCommand;
-import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
+import seedu.splitlah.parser.commandparser.ExitCommandParser;
+import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
+import seedu.splitlah.parser.commandparser.GroupListCommandParser;
+import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
+import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
+import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.SessionEditCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
-import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
+import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.format.DateTimeFormatter;
@@ -234,7 +238,7 @@ public class ParserUtils {
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
      *                                characters or a single decimal point character,
      *                                and cannot be parsed as a double,
-     *                                if the double parsed from the input String object is not a positive value,
+     *                                if the double parsed from the input String object is a negative value,
      *                                if the parsed double has more than 2 decimal points, or
      *                                if the parsed double has more than 3 digits before the decimal point.
      */
@@ -401,8 +405,11 @@ public class ParserUtils {
         case ActivityCreateCommandParser.COMMAND_TEXT:
             delimiterList = ActivityCreateCommandParser.COMMAND_DELIMITERS;
             break;
-        case ActivityDeleteCommand.COMMAND_TEXT:
-            delimiterList = ActivityDeleteCommand.COMMAND_DELIMITERS;
+        case ActivityDeleteCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityDeleteCommandParser.COMMAND_DELIMITERS;
+            break;
+        case ActivityEditCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityEditCommandParser.COMMAND_DELIMITERS;
             break;
         case ActivityListCommand.COMMAND_TEXT:
             delimiterList = ActivityListCommand.COMMAND_DELIMITERS;
@@ -410,11 +417,17 @@ public class ParserUtils {
         case ActivityViewCommand.COMMAND_TEXT:
             delimiterList = ActivityViewCommand.COMMAND_DELIMITERS;
             break;
-        case SessionCreateCommand.COMMAND_TEXT:
-            delimiterList = SessionCreateCommand.COMMAND_DELIMITERS;
+        case SessionCreateCommandParser.COMMAND_TEXT:
+            delimiterList = SessionCreateCommandParser.COMMAND_DELIMITERS;
             break;
-        case SessionDeleteCommand.COMMAND_TEXT:
-            delimiterList = SessionDeleteCommand.COMMAND_DELIMITERS;
+        case SessionDeleteCommandParser.COMMAND_TEXT:
+            delimiterList = SessionDeleteCommandParser.COMMAND_DELIMITERS;
+            break;
+        case SessionEditCommandParser.COMMAND_TEXT:
+            delimiterList = SessionEditCommandParser.COMMAND_DELIMITERS;
+            break;
+        case SessionViewCommandParser.COMMAND_TEXT:
+            delimiterList = SessionViewCommandParser.COMMAND_DELIMITERS;
             break;
         case SessionSummaryCommandParser.COMMAND_TEXT:
             delimiterList = SessionSummaryCommandParser.COMMAND_DELIMITERS;
@@ -425,8 +438,11 @@ public class ParserUtils {
         case GroupDeleteCommand.COMMAND_TEXT:
             delimiterList = GroupDeleteCommand.COMMAND_DELIMITERS;
             break;
-        case GroupViewCommand.COMMAND_TEXT:
-            delimiterList = GroupViewCommand.COMMAND_DELIMITERS;
+        case GroupEditCommandParser.COMMAND_TEXT:
+            delimiterList = GroupEditCommandParser.COMMAND_DELIMITERS;
+            break;
+        case GroupViewCommandParser.COMMAND_TEXT:
+            delimiterList = GroupViewCommandParser.COMMAND_DELIMITERS;
             break;
         default:
             return !remainingArgs.isEmpty();
@@ -453,17 +469,23 @@ public class ParserUtils {
         assert commandType != null : Message.ASSERT_PARSER_COMMAND_TYPE_NULL;
         
         switch (commandType.toLowerCase()) {
-        case SessionCreateCommand.COMMAND_TEXT:
+        case SessionCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case SessionDeleteCommand.COMMAND_TEXT:
+        case SessionDeleteCommandParser.COMMAND_TEXT:
+            // Fallthrough
+        case SessionEditCommandParser.COMMAND_TEXT:
             // Fallthrough
         case SessionSummaryCommandParser.COMMAND_TEXT:
             // Fallthrough
         case SessionListCommandParser.COMMAND_TEXT:
             // Fallthrough
+        case SessionViewCommandParser.COMMAND_TEXT:
+            // Fallthrough
         case ActivityCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ActivityDeleteCommand.COMMAND_TEXT:
+        case ActivityDeleteCommandParser.COMMAND_TEXT:
+            // Fallthrough
+        case ActivityEditCommandParser.COMMAND_TEXT:
             // Fallthrough
         case ActivityListCommand.COMMAND_TEXT:
             // Fallthrough
@@ -473,13 +495,15 @@ public class ParserUtils {
             // Fallthrough
         case GroupDeleteCommand.COMMAND_TEXT:
             // Fallthrough
-        case GroupListCommand.COMMAND_TEXT:
+        case GroupEditCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case GroupViewCommand.COMMAND_TEXT:
+        case GroupListCommandParser.COMMAND_TEXT:
+            // Fallthrough
+        case GroupViewCommandParser.COMMAND_TEXT:
             // Fallthrough
         case HelpCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ExitCommand.COMMAND_TEXT:
+        case ExitCommandParser.COMMAND_TEXT:
             // Fallthrough
             return true;
         default:

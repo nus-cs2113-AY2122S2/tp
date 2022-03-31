@@ -1,12 +1,9 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.logging.Level;
 
@@ -17,18 +14,9 @@ import java.util.logging.Level;
  */
 public class SessionDeleteCommand extends Command {
 
-    public static final String COMMAND_TEXT = "session /delete";
+    private static final String COMMAND_SUCCESS = "The session was deleted successfully.";
 
-    public static final String COMMAND_FORMAT = "Syntax: session /delete /sid [SESSION_ID]";
-
-    private static final String COMMAND_SUCCESS =
-            "The session was deleted successfully.";
-
-    public static final String[] COMMAND_DELIMITERS = {
-        ParserUtils.SESSION_ID_DELIMITER
-    };
-
-    private int sessionId;
+    private final int sessionId;
 
     /**
      * Initializes a SessionDeleteCommand object.
@@ -36,24 +24,8 @@ public class SessionDeleteCommand extends Command {
      * @param sessionId An integer that uniquely identifies a session.
      */
     public SessionDeleteCommand(int sessionId) {
+        assert sessionId > 0 : Message.ASSERT_SESSIONDELETE_SESSION_ID_NOT_INITIALIZED;
         this.sessionId = sessionId;
-    }
-
-    /**
-     * Prepares user arguments for the creation of a SessionDeleteCommand object.
-     *
-     * @param commandArgs A String object that represents the user's arguments.
-     * @return A SessionDeleteCommand object if session id was found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            return new SessionDeleteCommand(sessionId);
-        } catch (InvalidFormatException formatException) {
-            String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
-        }
     }
 
     /**
@@ -63,15 +35,15 @@ public class SessionDeleteCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        Session session = null;
+        TextUI ui = manager.getUi();
         try {
-            session = manager.getProfile().getSession(sessionId);
-            manager.getProfile().removeSession(session);
+            manager.getProfile().removeSession(sessionId);
             manager.saveProfile();
-            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {
-            manager.getUi().printlnMessage(dataException.getMessage());
+            ui.printlnMessage(dataException.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED_FAILED + sessionId);
         }
     }
 }

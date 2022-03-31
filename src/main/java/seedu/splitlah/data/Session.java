@@ -3,6 +3,7 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TableFormatter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Warren
  */
-public class Session implements Serializable {
+public class Session implements Serializable, Comparable<Session> {
 
     private String sessionName;
     private int sessionId;
@@ -23,11 +24,10 @@ public class Session implements Serializable {
     private Group group;
 
     // CONSTANTS
-    private static final String ACTIVITY_LIST_HEADER =
-            "Id | Activity Name | Cost | Payee";
-    private static final String PERSON_LIST_HEADER =
-            "Participants";
-    private static final String SUMMARY_STRING_SEPARATOR = " | ";
+    private static final String[] ACTIVITY_LIST_COLS = { "#", "Activities", "Cost", "Payer" };
+    private static final String PERSON_LIST_HEADER = "Participants:";
+    private static final String COST_FORMATTING = "%.2f";
+    private static final String COST_PREPEND = "$";
     private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
@@ -81,16 +81,6 @@ public class Session implements Serializable {
     }
 
     /**
-     * Returns a String object containing a human-readable version of the date of creation of the session.
-     * Format: DD Month YYYY, e.g. 04 March 2022
-     *
-     * @return A String object containing a human-readable version of the date of creation.
-     */
-    public String getDateString() {
-        return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
-    }
-
-    /**
      * Returns a list of Activity objects representing the activities that occurred in that session.
      *
      * @return An ArrayList object containing Activity objects that are part of the session.
@@ -118,6 +108,33 @@ public class Session implements Serializable {
     }
 
     /**
+     * Updates the group of this Session object to the specified group.
+     *
+     * @param group A Group object representing the updated group of the session.
+     */
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    /**
+     * Updates the date of this Session object to the specified date.
+     * 
+     * @param dateCreated A LocalDate object representing the updated date of the session.
+     */
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    /**
+     * Updates the name of this Session object to the specified name.
+     * 
+     * @param sessionName A String object representing the updated name of the session.
+     */
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
+    }
+
+    /**
      * Checks whether the Session object has an Activity object with the queried unique identifier.
      * 
      * @param activityId An integer that uniquely identifies an activity.
@@ -142,8 +159,8 @@ public class Session implements Serializable {
      *
      * @param activityId An integer that uniquely identifies an activity.
      * @return An Activity object in the Session class specified by activityId
-     * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object
-     *                              with the specified activityId
+     * @throws InvalidDataException If activityList is empty or
+     *                              if activityList does not contain an Activity object with the specified activityId
      */
     public Activity getActivity(int activityId) throws InvalidDataException {
         if (activityList.isEmpty()) {
@@ -164,8 +181,8 @@ public class Session implements Serializable {
      * objects involved in the activity.
      *
      * @param activityId An integer that uniquely identifies an activity.
-     * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object
-     *                              with the specified activityId
+     * @throws InvalidDataException If activityList is empty or
+     *                              if activityList does not contain an Activity object with the specified activityId
      */
     public void removeActivity(int activityId) throws InvalidDataException {
         if (activityList.isEmpty()) {
@@ -185,40 +202,28 @@ public class Session implements Serializable {
         }
 
         ArrayList<Person> involvedPersonList = deleteTarget.getInvolvedPersonList();
+        Person payer = deleteTarget.getPersonPaid();
         if (involvedPersonList != null) {
+            boolean isPayerInParticipantList = involvedPersonList.contains(payer);
             for (Person person : involvedPersonList) {
                 person.removeActivityCost(activityId);
+            }
+            if (!isPayerInParticipantList) {
+                payer.removeActivityCost(activityId);
             }
         }
         activityList.remove(deleteTarget);
     }
 
     /**
-     * Adds an Activity object to the session.
+     * Adds an Activity object to the session, then sorts the activity list by ascending activity unique identifier.
      *
      * @param activity An Activity object representing an activity that happened in the session.
      */
     public void addActivity(Activity activity) {
+        assert activity != null : Message.ASSERT_SESSION_ACTIVITY_NULL;
         activityList.add(activity);
-    }
-
-    /**
-     * Returns a Person object specified by a numerical index that identifies the Person.
-     *
-     * @param index An integer that represents a numerical index that identifies a Person object in the session.
-     * @return A Person object in the Session class specified by index.
-     * @throws InvalidDataException if personList is empty or index is not in [1, personList.size()].
-     */
-    public Person getPersonByIndex(int index) throws InvalidDataException {
-        if (personList.isEmpty()) {
-            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_PERSON_LIST);
-        }
-
-        try {
-            return personList.getPerson(index - ZERO_INDEXING_OFFSET);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new InvalidDataException(Message.ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST + personList.getSize());
-        }
+        activityList.sort(Activity::compareTo);
     }
 
     /**
@@ -226,14 +231,10 @@ public class Session implements Serializable {
      *
      * @param name A String object that represents a query name used to search for a Person object.
      * @return A Person object in the Session class that has a matching name.
-     * @throws InvalidDataException If personList is empty or 
-     *                              if no Person object in personList matches queried name.
+     * @throws InvalidDataException If no Person object in personList matches queried name.
      */
     public Person getPersonByName(String name) throws InvalidDataException {
-        if (personList.isEmpty()) {
-            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_PERSON_LIST);
-        }
-
+        assert name != null : Message.ASSERT_SESSION_NAME_NULL;
         for (Person person : personList.getPersonList()) {
             if (person.getName().equalsIgnoreCase(name)) {
                 return person;
@@ -247,10 +248,10 @@ public class Session implements Serializable {
      *
      * @param nameList An array of String objects that represent names of people in the session.
      * @return An ArrayList object containing Person objects with matching names.
-     * @throws InvalidDataException if personList is empty or
-     *                              if any name in nameList does not match a Person object in personList.
+     * @throws InvalidDataException If any name in nameList does not match a Person object in personList.
      */
     public ArrayList<Person> getPersonListByName(String[] nameList) throws InvalidDataException {
+        assert nameList != null && nameList.length != 0 : Message.ASSERT_SESSION_NAME_LIST_EMPTY;
         ArrayList<Person> personList = new ArrayList<>();
         for (String name : nameList) {
             Person newPerson = getPersonByName(name);
@@ -271,31 +272,36 @@ public class Session implements Serializable {
     /**
      * Returns a String object containing a summary of the state of the member attribute activityList.
      *
-     * @return A String object containing a summary of all Activity objects in activityList, or
+     * @return A String object containing a summary of all Activity objects in activityList or
      *         a message stating that the activityList is empty if there are no Activity objects within.
      */
-    private String getActivityListSummaryString() {
+    public String getActivityListSummaryString() {
         if (activityList.isEmpty()) {
             return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
         }
 
-        StringBuilder summaryString = new StringBuilder(ACTIVITY_LIST_HEADER);
+        TableFormatter summaryTable = new TableFormatter(
+                ACTIVITY_LIST_COLS[0], ACTIVITY_LIST_COLS[1], ACTIVITY_LIST_COLS[2], ACTIVITY_LIST_COLS[3]
+        );
         for (Activity activity : activityList) {
-            summaryString.append("\n > ").append(activity.getActivitySummaryString());
+            String id = Integer.toString(activity.getActivityId());
+            String name = activity.getActivityName();
+            String cost = COST_PREPEND + String.format(COST_FORMATTING, activity.getTotalCost());
+            String payer = activity.getPersonPaid().getName();
+            summaryTable.addRow(id, name, cost, payer);
         }
-        return summaryString.toString();
+        return summaryTable.toString();
     }
 
     /**
      * Returns a String object containing a summary of the state of the member attribute personList.
      *
-     * @return A String object containing a summary of all Person objects in personList, or
+     * @return A String object containing a summary of all Person objects in personList or
      *         a message stating that the personList is empty if there are no Person objects within.
      */
     private String getPersonListSummaryString() {
-        if (personList.isEmpty()) {
-            return Message.ERROR_SESSION_EMPTY_PERSON_LIST;
-        }
+        assert personList != null : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        assert personList.getSize() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
 
         StringBuilder summaryString = new StringBuilder(PERSON_LIST_HEADER);
         for (int i = 0; i < personList.getSize(); i++) {
@@ -308,8 +314,8 @@ public class Session implements Serializable {
     /**
      * Returns a String object containing a summary of the state of the member attribute group.
      *
-     * @return A String object containing the name of the Group object if group is not null, or
-     *         a message stating that there is no group in the session, if group is null.
+     * @return A String object containing the name of the Group object if group is not null or
+     *         a message stating that there is no group in the session if group is null.
      */
     private String getGroupSummaryString() {
         if (group == null) {
@@ -320,18 +326,20 @@ public class Session implements Serializable {
     }
 
     /**
-     * Returns a String object summarising the state of the Session object.
-     * 
-     * @return A String object containing a summary of the Session object.
+     * Returns an integer to identify whether this Session object should be ordered
+     * before or after another Session object when sorted.
+     *
+     * @param session The specified Session object that this Session object is compared against.
+     * @return An integer less than 0 if this Session object's sessionId is smaller than the specified
+     *         Session object's sessionId,
+     *         an integer greater than 0 if this object's sessionId is larger,
+     *         and 0 if both Session objects' sessionIds are numerically equal.
      */
-    public String getSessionSimplifiedString() {
-        return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n "
-                + SUMMARY_STRING_SEPARATOR + dateCreated.format(ParserUtils.DATE_FORMAT)
-                + SUMMARY_STRING_SEPARATOR + personList.getSize() + " participants"
-                + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities"
-                + SUMMARY_STRING_SEPARATOR + getGroupSummaryString();
+    @Override
+    public int compareTo(Session session) {
+        return Integer.compare(sessionId, session.getSessionId());
     }
-
+    
     /**
      * Returns a String object describing the state of the Session object.
      *
@@ -342,8 +350,8 @@ public class Session implements Serializable {
         return "Session Id #" + sessionId + " --\n"
                 + "Name: " + sessionName + '\n'
                 + "Date: " + dateCreated.format(ParserUtils.DATE_FORMAT) + '\n'
-                + getActivityListSummaryString() + '\n'
+                + getGroupSummaryString() + '\n'
                 + getPersonListSummaryString() + '\n'
-                + getGroupSummaryString();
+                + getActivityListSummaryString();
     }
 }

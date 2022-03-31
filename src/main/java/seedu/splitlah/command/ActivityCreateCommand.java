@@ -3,10 +3,12 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
-import seedu.splitlah.data.PersonList;
+import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,14 +23,14 @@ public class ActivityCreateCommand extends Command {
   
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
 
-    private int sessionId;
-    private String activityName;
+    private final int sessionId;
+    private final String activityName;
     private double totalCost;
-    private String payer;
-    private String[] involvedList;
+    private final String payer;
+    private final String[] involvedList;
     private double[] costList;
-    private double gst;
-    private double serviceCharge;
+    private final double gst;
+    private final double serviceCharge;
 
     private static final double ZERO_COST_PAID = 0;
     public static final double ZERO_COST_OWED = 0;
@@ -71,10 +73,8 @@ public class ActivityCreateCommand extends Command {
      *                           each representing a person involved in the activity.
      * @param personPaid         A Person object representing the person who paid for the activity.
      * @param activityId         An integer that uniquely identifies an activity.
-     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId)
-            throws InvalidDataException {
+    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId) {
         boolean hasAddedForPersonPaid = false;
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
@@ -115,10 +115,8 @@ public class ActivityCreateCommand extends Command {
      * @param indexOfCostOwed An integer representing the index of the cost owed in the list of costs.
      * @param person          A person object representing the person whose costs are added to the
      *                        list of activity costs.
-     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
-            throws InvalidDataException {
+    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person) {
         if (person == personPaid) {
             person.addActivityCost(activityId, totalCost, costList[indexOfCostOwed]);
         } else {
@@ -211,30 +209,36 @@ public class ActivityCreateCommand extends Command {
     @Override
     public void run(Manager manager) {
         boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
+        TextUI ui = manager.getUi();
         if (hasDuplicates) {
-            manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
-            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
+            ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_ACTIVITY);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEACTIVITY);
             return;
         }
         try {
             updateCostAndCostList();
             assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE;
-            Session session = manager.getProfile().getSession(sessionId);
+
+            Profile profile = manager.getProfile();
+            Session session = profile.getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
-            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            int activityId = manager.getProfile().getNewActivityId();
-            addAllActivityCost(involvedPersonList, personPaid, activityId);
+            ArrayList<Person> involvedArrayList = session.getPersonListByName(involvedList);
+            int activityId = profile.getNewActivityId();
+
+            addAllActivityCost(involvedArrayList, personPaid, activityId);
+
+            PersonList involvedPersonList = new PersonList(involvedArrayList);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
+
             session.addActivity(activity);
             manager.saveProfile();
-            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+            ui.printlnMessage(COMMAND_SUCCESS + activity);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+            ui.printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY
                     + "\n" + e.getMessage());
         }
     }
-
 }
