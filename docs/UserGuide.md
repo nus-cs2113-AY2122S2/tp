@@ -135,6 +135,8 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >  **💡 Notes:**
 >- The `[SESSION_NAME]` should be unique across all active sessions.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
+>- The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>  - Example: `Alice Tan` is not allowed.
 > 
 > **⚠️Warnings:**
 >- If you include a name in `[NAME1 NAME2 ...]` that already exists in the group specified by `[GROUP_ID]`,
@@ -193,12 +195,15 @@ Edits an existing session so that you can change details of a session.<br>
 > **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be edited.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
+>- The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>  - Example: `Alice Tan` is not allowed.
 >- There are 3 editable fields: session name, session date and the people involved in the session.
 >  - At least 1 field has to be edited for the command to run.
->  - More than 1 field can be edited at a single run of the command.
+>  - More than 1 field can be edited in a single run of the command.
 >- When editing the people involved, existing participants must be included in the command.
->  - Example: If the session previously created had Alice and Bob with session ID of 1, 
->    and you wish to edit it to include Charlie a valid edit command would be `session /edit /sid /pl Alice Bob Charlie`.
+>  - Example: If the session previously created had Alice and Bob with session unique identifier of 1 
+>    and you wish to edit it to include Charlie, a valid edit command would be
+     `session /edit /sid 1 /pl Alice Bob Charlie`.
 > 
 > **⚠️Warning:**
 > - This action is irreversible. The session is edited immediately after entering this command.
@@ -210,7 +215,7 @@ Examples of usage:
   named Class Outing with Alice and Bob involved on 15-03-2022.
 
 **Example 1** 
-- Edits the session name to Class gathering and date to 16-03-2022. <br><br>
+- Edits the name of the session to Class gathering and date to 16-03-2022. <br><br>
   `session /edit /sid 1 /n Class gathering /d 16-03-2022` <br><br>
   ![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
 
@@ -301,12 +306,12 @@ There are 2 ways that you can create an activity:
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
->- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also only be a single word without whitespaces.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >   - Example: `Alice Tan` is not allowed.
 >- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` can only have a maximum of 12 digits before
-  and 2 digits after the decimal point, if any.
+   and 2 digits after the decimal point, if any.
 >- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
-  with a maximum of 3 digits before and 2 after the decimal point, if any.
+   with a maximum of 3 digits before and 2 after the decimal point, if any.
 
 <br>
 
@@ -391,8 +396,8 @@ There are 2 ways that you can edit an activity:
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
->- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also only be a single word without whitespaces.
-   >   - Example: `Alice Tan` is not allowed.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>   - Example: `Alice Tan` is not allowed.
 >- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` can only have a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
 >- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
