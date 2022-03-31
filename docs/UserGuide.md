@@ -18,7 +18,7 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 ### Add Lessons to your own timetable and others timetable
 
 ### See slots for possible meetings based on duration
-
+s
 ### Book meetings based on availability of all users
 
 ### View everyone's timetable and availability

@@ -40,9 +40,9 @@ public class AddLessonCommand extends Command {
     @Override
     public String execute(MasterTimetable masterTimetable) {
         try {
-            Lesson newLesson = new Lesson(title, day, startTime, endTime, mode);
-            masterTimetable.addLesson(newLesson, name);
-            return addConfirmation(newLesson, name);
+            Lesson lesson = new Lesson(title, day, startTime, endTime, mode);
+            masterTimetable.addLesson(lesson, name);
+            return addConfirmation(lesson, name);
         } catch (TimetableNotFoundException tnfe) {
             return ERROR_INVALID_USER;
         } catch (DuplicateEventException dee) {
