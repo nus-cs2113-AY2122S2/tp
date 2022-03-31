@@ -35,9 +35,9 @@ public class ProjectTest {
         testProj.addTodo(TODO1);
         testProj.addTodo(TODO2);
         //System.out.println(testProj.getTodo(1));
-        assertEquals(testProj.getTodo(1).toString(), "[ ]" + TODO1 + ": " + NO_DEADLINE);
+        assertEquals(testProj.getTodo(1).toString(), "[ ] " + TODO1 + ": " + NO_DEADLINE);
         testProj.markTodoAsDone(2);
-        assertEquals(testProj.getTodo(2).toString(), "[X]" + TODO2 + ": " + NO_DEADLINE);
+        assertEquals(testProj.getTodo(2).toString(), "[X] " + TODO2 + ": " + NO_DEADLINE);
     }
 
 }
