@@ -1,8 +1,6 @@
 package cpp.logic.parser;
 
 import cpp.exceptions.IllegalCommandException;
-import cpp.exceptions.NegativeIndexException;
-import cpp.logic.commands.AddDeadlineCommand;
 import cpp.model.ProjectList;
 import cpp.ui.Response;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,15 +33,15 @@ public class ParsersTest {
     public void testAddDeadlineCommandParser() throws IllegalCommandException {
         String[] input = new String[1];
         input[0] = "dummy";
-        AddDeadlineCommandParser addDeadlineCommandParser = new AddDeadlineCommandParser();
+        AddProjectDeadlineCommandParser addProjectDeadlineCommandParser = new AddProjectDeadlineCommandParser();
         assertThrows(IllegalCommandException.class, () ->
-                addDeadlineCommandParser.parse(input)
+                addProjectDeadlineCommandParser.parse(input)
         );
         String[] input2 = new String[3];
         input2[0] = "adddeadline";
         input2[1] = "1";
         input2[2] = "2023-12-12";
-        assertNotNull(addDeadlineCommandParser.parse(input2));
+        assertNotNull(addProjectDeadlineCommandParser.parse(input2));
     }
 
     @Test

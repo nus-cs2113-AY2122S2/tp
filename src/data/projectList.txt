@@ -1,1 +1,1 @@
-temp` temporary to do,false`No deadline specified`https://github.com/AY2122S2-CS2113-F10-1/tp
+cs2100` add function1,false, add function2,true, add function3,false`No deadline specified`https://github.com/AY2122S2-CS2113-F10-1/tp

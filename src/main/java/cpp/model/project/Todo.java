@@ -1,11 +1,12 @@
 package cpp.model.project;
 
 /**
- * Represents a todo in a project.
+ * Represents a todo in a Todo.
  */
 public class Todo {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
+    private Deadline deadline;
 
     public Todo(String description) {
         this.description = description;
@@ -13,7 +14,7 @@ public class Todo {
     }
 
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + this.description;
+        return "[" + getStatusIcon() + "] " + description + ": " + getDeadline();
     }
 
     /**
@@ -33,13 +34,6 @@ public class Todo {
     }
 
     /**
-     * Marks the todo as undone.
-     */
-    public void markAsUndone() {
-        this.isDone = false;
-    }
-
-    /**
      * Gets the description of a todo.
      *
      * @return description
@@ -55,5 +49,26 @@ public class Todo {
      */
     public String getDone() {
         return isDone ? "true" : "false";
+    }
+
+    /**
+     * Sets a deadline to the Todo.
+     *
+     * @param deadline Deadline to be added
+     */
+    public void setDeadline(Deadline deadline) {
+        this.deadline = deadline;
+    }
+
+    /**
+     * Gets the deadline of the Todo.
+     *
+     * @return The deadline of the Todo
+     */
+    public String getDeadline() {
+        if (deadline == null) {
+            return "No deadline specified";
+        }
+        return deadline.toString();
     }
 }
