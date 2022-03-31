@@ -29,7 +29,7 @@ public class BorrowCommandTest {
     }
 
     /**
-     * Test if a BorrowCommand contains the same attributes as another BorrowCommand
+     * Test if a BorrowCommand contains the same attributes as another BorrowCommand.
      */
     @Test
     public void equals_borrowCommand() {
