@@ -154,8 +154,8 @@ public class ProjectList {
      * @param title Name of the project
      * @param deadline Deadline for the project
      */
-    public void addDeadline(String title, String deadline) {
-        assert (title != null && title != "" && deadline != null && deadline != "") : "Cannot add deadline.";
+    public void addProjectDeadline(String title, String deadline) {
+        assert (title != null && deadline != null) : "Cannot add deadline.";
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index != Constants.PROJECT_NOT_FOUND) {

@@ -79,7 +79,7 @@ public class Storage {
             }
             //add deadline to project if deadline is specified
             if (!deadline.equalsIgnoreCase("No deadline specified")) {
-                projectList.addDeadline(title, deadline);
+                projectList.addProjectDeadline(title, deadline);
             }
 
             indexProject++;

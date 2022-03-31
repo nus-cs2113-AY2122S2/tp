@@ -13,7 +13,7 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
    - [print all projects](#print-all-projects-listprojects)
    - [add todo to a project](#add-todo-to-a-project-todo)
    - [mark todo as done](#mark-todo-as-done-mark)
-   - [add a deadline to a project](#add-a-deadline-to-a-project-adddeadline)
+   - [add a deadline to a project](#add-a-deadline-to-a-project-addprojdeadline)
    - [view](#view-details-of-a-project-view)
    - [exit](#exit-exit)
    
@@ -93,15 +93,15 @@ Todo has been marked as done successfully:
 [X] buy textbooks
 ```
 
-### add a deadline to a project: `adddeadline`
+### add a deadline to a project: `addprojdeadline`
 Adds a deadline date to a project
 
-Format: `adddeadline [project_name] [deadline]`
+Format: `addprojdeadline [project_name] [deadline]`
 * deadline must be entered in the following format "yyyy-mm-dd"
 * Alternatively, entering a day of the week also works (i.e. Thursday)
 
 #### Example of usage
-`addDeadline nextProject Friday`
+`addprojdeadline nextProject Friday`
 
 #### Example of output
 ```Deadline added to nextProject: Sunday```
@@ -155,6 +155,6 @@ Please note that the file name should not be changed.
 | view all project(s) | `listproject`, `listprojects`            |
 | add todo            | `todo [project_index] [description]`     |
 | mark todo as done   | `mark [project_index] [todo_index]`      |
-| add deadline        | `adddeadline  [project_name] [deadline]` |
+| add deadline        | `addprojdeadline [project_name] [deadline]`
 | view a project      | `view [project_name]`                    |
 | Exit                | `exit`                                   |

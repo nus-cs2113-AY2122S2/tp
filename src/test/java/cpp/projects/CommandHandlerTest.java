@@ -78,7 +78,7 @@ class CommandHandlerTest {
     @Test
     public void testDeadline() throws IllegalCommandException {
         String status = defaultCommandHandler.handleUserInput(defaultProjectList, "adddeadline CS2113tP 2024-12-12");
-        assertEquals(status, response.addDeadlineSuccessfully(PROJECT1NAME, "2024-12-12"));
+        assertEquals(status, response.addProjectDeadlineSuccessfully(PROJECT1NAME, "2024-12-12"));
     }
 
     @Test

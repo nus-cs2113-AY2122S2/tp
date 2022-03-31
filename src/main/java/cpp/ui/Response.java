@@ -1,7 +1,5 @@
 package cpp.ui;
 
-import cpp.ui.Constants;
-
 /**
  * Handles the responses to give to user.
  */
@@ -46,12 +44,6 @@ public class Response {
         System.out.println(Constants.SEPARATOR);
     }
 
-    public static void printDefault() {
-        System.out.println(Constants.SEPARATOR);
-        System.out.println("Unknown command.");
-        System.out.println(Constants.SEPARATOR);
-    }
-
     public static String addProjectSuccessfully(String name) {
         return ("The project " + name + " has been added successfully.");
     }
@@ -72,10 +64,6 @@ public class Response {
         return ("Unsuccessful operation. Please check the target indexes.");
     }
 
-    public static String addMemberSuccessfully(String memberName) {
-        return ("Member " + memberName + "has been added successfully.");
-    }
-
     public static String deleteProjectSuccessfully(String projectTitle) {
         return (projectTitle + " deleted successfully.");
     }
@@ -92,11 +80,11 @@ public class Response {
         return ("View command has been executed successfully.");
     }
 
-    public static String addDeadlineSuccessfully(String projectTitle, String deadline) {
+    public static String addProjectDeadlineSuccessfully(String projectTitle, String deadline) {
         return "Deadline added to " + projectTitle + ": " + deadline;
     }
 
-    public static String addDeadlineUnsuccessfully() {
+    public static String addProjectDeadlineUnsuccessfully() {
         return "Deadline addition was Unsuccessful.";
     }
 }
