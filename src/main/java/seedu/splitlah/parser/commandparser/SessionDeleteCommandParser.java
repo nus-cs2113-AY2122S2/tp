@@ -7,6 +7,8 @@ import seedu.splitlah.parser.ParserUtils;
 
 /**
  * Represents a command parser that is able to parse user arguments into a SessionDeleteCommand object.
+ *
+ * @author Roy
  */
 public class SessionDeleteCommandParser implements CommandParser<SessionDeleteCommand> {
 

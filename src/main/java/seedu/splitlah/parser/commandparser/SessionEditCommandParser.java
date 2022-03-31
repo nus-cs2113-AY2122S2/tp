@@ -10,14 +10,16 @@ import java.time.LocalDate;
 
 /**
  * Represents a command parser that is able to parse user arguments into a SessionEditCommand object.
+ *
+ * @author Roy
  */
 public class SessionEditCommandParser implements CommandParser<SessionEditCommand> {
 
     public static final String COMMAND_TEXT = "session /edit";
 
     public static final String COMMAND_FORMAT =
-            "Syntax: session /edit /sid [SESSION_ID] /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...] "
-                    + "[</gid [GROUP_ID]>]";
+            "Syntax: session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] "
+                   + "[</pl [NAME1 NAME2...]>]";
 
     public static final String[] COMMAND_DELIMITERS = {
         ParserUtils.SESSION_ID_DELIMITER,
@@ -33,7 +35,8 @@ public class SessionEditCommandParser implements CommandParser<SessionEditComman
      * @param commandArgs A String object representing arguments provided by the user.
      * @return A SessionEditCommand object if all necessary arguments required for the SessionEditCommand object
      *         to function are found in the input arguments.
-     * @throws InvalidFormatException If at least one of the necessary arguments cannot be found in the input arguments.
+     * @throws InvalidFormatException If the session unique identifier cannot be found in the input arguments or
+     *                                if all optional arguments cannot be found in the input arguments.
      */
     @Override
     public SessionEditCommand getCommand(String commandArgs) throws InvalidFormatException {

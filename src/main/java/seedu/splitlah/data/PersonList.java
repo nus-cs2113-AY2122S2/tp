@@ -26,7 +26,7 @@ public class PersonList implements Serializable {
     /**
      * Returns the size of the ArrayList object of Person objects.
      *
-     * @return An integer that presents the size of the ArrayList object of Person objects.
+     * @return An integer that represents the size of the ArrayList object of Person objects.
      */
     public int getSize() {
         return personList.size();
@@ -89,8 +89,10 @@ public class PersonList implements Serializable {
      */
     public void convertToPersonList(String[] personNames) {
         for (String name : personNames) {
-            Person newPerson = new Person(name);
-            addPerson(newPerson);
+            Person newPerson = Person.createPersonFromString(name);
+            if (newPerson != null) {
+                addPerson(newPerson);
+            }
         }
     }
 

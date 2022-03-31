@@ -26,7 +26,6 @@ public class Session implements Serializable, Comparable<Session> {
     // CONSTANTS
     private static final String[] ACTIVITY_LIST_COLS = { "#", "Activities", "Cost", "Payer" };
     private static final String PERSON_LIST_HEADER = "Participants:";
-    private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final String COST_FORMATTING = "%.2f";
     private static final String COST_PREPEND = "$";
     private static final int ZERO_INDEXING_OFFSET = 1;
@@ -106,6 +105,15 @@ public class Session implements Serializable, Comparable<Session> {
      */
     public Group getGroup() {
         return group;
+    }
+
+    /**
+     * Updates the group of this Session object to the specified group.
+     *
+     * @param group A Group object representing the updated group of the session.
+     */
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     /**
@@ -194,22 +202,28 @@ public class Session implements Serializable, Comparable<Session> {
         }
 
         ArrayList<Person> involvedPersonList = deleteTarget.getInvolvedPersonList();
+        Person payer = deleteTarget.getPersonPaid();
         if (involvedPersonList != null) {
+            boolean isPayerInParticipantList = involvedPersonList.contains(payer);
             for (Person person : involvedPersonList) {
                 person.removeActivityCost(activityId);
+            }
+            if (!isPayerInParticipantList) {
+                payer.removeActivityCost(activityId);
             }
         }
         activityList.remove(deleteTarget);
     }
 
     /**
-     * Adds an Activity object to the session.
+     * Adds an Activity object to the session, then sorts the activity list by ascending activity unique identifier.
      *
      * @param activity An Activity object representing an activity that happened in the session.
      */
     public void addActivity(Activity activity) {
         assert activity != null : Message.ASSERT_SESSION_ACTIVITY_NULL;
         activityList.add(activity);
+        activityList.sort(Activity::compareTo);
     }
 
     /**
@@ -261,7 +275,7 @@ public class Session implements Serializable, Comparable<Session> {
      * @return A String object containing a summary of all Activity objects in activityList or
      *         a message stating that the activityList is empty if there are no Activity objects within.
      */
-    private String getActivityListSummaryString() {
+    public String getActivityListSummaryString() {
         if (activityList.isEmpty()) {
             return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
         }
@@ -309,19 +323,6 @@ public class Session implements Serializable, Comparable<Session> {
         } else {
             return "Group: " + group.getGroupName();
         }
-    }
-
-    /**
-     * Returns a String object summarising the state of the Session object.
-     * 
-     * @return A String object containing a summary of the Session object.
-     */
-    public String getSessionSimplifiedString() {
-        return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n "
-                + SUMMARY_STRING_SEPARATOR + dateCreated.format(ParserUtils.DATE_FORMAT)
-                + SUMMARY_STRING_SEPARATOR + personList.getSize() + " participants"
-                + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities"
-                + SUMMARY_STRING_SEPARATOR + getGroupSummaryString();
     }
 
     /**

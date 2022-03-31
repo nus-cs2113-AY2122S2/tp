@@ -7,6 +7,10 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
+import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
+
+import java.util.logging.Level;
 
 
 /**
@@ -25,10 +29,11 @@ public class ActivityViewCommand extends Command {
         ParserUtils.ACTIVITY_ID_DELIMITER
     };
 
-    private int sessionId;
-    private int activityId;
+    private final int sessionId;
+    private final int activityId;
 
     private static final String SESSION_ID_HEADER = "Session Id #";
+    private static final String ACTIVITY_ID_HEADER = "Activity Id #";
     private static final String SEPARATOR = " | ";
 
     /**
@@ -50,13 +55,17 @@ public class ActivityViewCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        TextUI ui = manager.getUi();
+        String logMessage = SESSION_ID_HEADER + sessionId + SEPARATOR + ACTIVITY_ID_HEADER + activityId;
         try {
             Session session = manager.getProfile().getSession(sessionId);
             Activity activityToBePrinted = session.getActivity(activityId);
             String messageToBePrinted = SESSION_ID_HEADER + sessionId + SEPARATOR + activityToBePrinted.toString();
-            manager.getUi().printlnMessageWithDivider(messageToBePrinted);
+            ui.printlnMessage(messageToBePrinted);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYVIEW_ACTIVITY_VIEWED + logMessage);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+            ui.printlnMessage(e.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYVIEW_ACTIVITY_NOT_VIEWED + logMessage);
         }
     }
 
