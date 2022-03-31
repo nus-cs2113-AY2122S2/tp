@@ -37,6 +37,10 @@ public class Item {
         return quantity;
     }
 
+    public ArrayList<BorrowRecord> getBorrowRecords() {
+        return borrowRecords;
+    }
+
     public void setName(String name) {
         Objects.requireNonNull(name, NOT_NULL_NAME);
         this.name = name;
@@ -79,9 +83,11 @@ public class Item {
     /**
      * Add a new borrow record to the item.
      * @param newRecord A borrow record.
+     * @return This item that has been added with a new borrow record.
      */
-    public void addBorrowRecord(BorrowRecord newRecord) {
+    public Item addBorrowRecord(BorrowRecord newRecord) {
         this.borrowRecords.add(newRecord);
+        return this;
     }
 
     /**
@@ -95,7 +101,14 @@ public class Item {
 
     @Override
     public String toString() {
-        return String.format("%s | %d", name, quantity);
+        return String.format("%s | %d", this.name, this.quantity);
+    }
+
+    public String toDetailedString() {
+        if (this.description.length() > 15) {
+            return String.format("%s | %d | %s", this.name, this.quantity, this.description.substring(0, 14) + "...");
+        }
+        return String.format("%s | %d | %s", this.name, this.quantity, this.description);
     }
     /**
      *     // String representation of an item when printed on Ui

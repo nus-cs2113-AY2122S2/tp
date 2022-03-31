@@ -1,8 +1,11 @@
 package seedu.duke.commands;
 
+import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
+
+import java.util.List;
 
 public abstract class Command {
 
@@ -10,6 +13,12 @@ public abstract class Command {
      * Represents whether a command is an exit command.
      * */
     private boolean isExit;
+    /**
+     * Used only for tests. Applicable only for commands that do not directly modify an ItemList.
+     * They can use this to temporarily store their results, and can be referenced via immutable copies.
+     * Since its a List, note that order matters.
+     */
+    List<Item> results;
 
     /**
      * By default, a command initialised as a non-exit command.
@@ -35,6 +44,10 @@ public abstract class Command {
      */
     public void execute(ItemList itemList, Ui ui) throws InvMgrException {
         throw new UnsupportedOperationException();
+    }
+
+    public List<Item> getResults() {
+        return List.copyOf(this.results);
     }
 
 }

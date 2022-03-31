@@ -17,7 +17,8 @@ public class Messages {
             + "Only '+' and '-' is allowed.\n";
     public static final String INVALID_RELATIVE_WITHOUT_QUANTITY = "The relative multiplier must be used in "
             + "conjunction with a quantity!";
-
+    public static final String INVALID_DATE_FORMAT = "Incorrect date format. Please enter "
+            + "dates in YYYY-MM-DD format.";
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would be negative! "
             + "Your command has been terminated; no changes were made.";
@@ -30,6 +31,4 @@ public class Messages {
     public static final String TASK_NUMBER_OUT_OF_RANGE_MESSAGE = "Sorry, the item number is out of range. "
             + "Please enter a different task number!";
     public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost.";
-
-
 }

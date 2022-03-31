@@ -66,7 +66,8 @@ public class Storage {
      * @param itemList the ArrayList of items to write to the data file
      * @throws InvMgrException for any IO exceptions while writing
      */
-    public static void save(ArrayList<Item> itemList) throws InvMgrException {
+
+    public void save(List<Item> itemList) throws InvMgrException {
         if (itemList == null) {
             throw new NullPointerException();
         }
