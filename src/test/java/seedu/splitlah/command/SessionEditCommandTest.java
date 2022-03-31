@@ -12,7 +12,6 @@ import seedu.splitlah.parser.ParserUtils;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class SessionEditCommandTest {
 
@@ -96,9 +95,9 @@ public class SessionEditCommandTest {
     @Test
     public void run_validCommand_sessionPersonListEdited() throws InvalidDataException {
         ArrayList<Person> originalPersonList = new ArrayList<>();
-        originalPersonList.add(new Person("alice"));
-        originalPersonList.add(new Person("bob"));
-        originalPersonList.add(new Person("charlie"));
+        originalPersonList.add(Person.createPersonFromString("alice"));
+        originalPersonList.add(Person.createPersonFromString("bob"));
+        originalPersonList.add(Person.createPersonFromString("charlie"));
 
         String userInput = "session /edit /sid 1 /pl Alice Bob Charlie";
         Command command = Parser.getCommand(userInput);

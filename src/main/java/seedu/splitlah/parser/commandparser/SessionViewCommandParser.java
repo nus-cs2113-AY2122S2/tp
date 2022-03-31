@@ -1,6 +1,5 @@
 package seedu.splitlah.parser.commandparser;
 
-import seedu.splitlah.command.SessionSummaryCommand;
 import seedu.splitlah.command.SessionViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;

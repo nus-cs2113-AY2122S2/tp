@@ -8,6 +8,8 @@ import seedu.splitlah.ui.Message;
 
 /**
  * Represents a command parser that is able to parse user arguments into a SessionSummaryCommand object.
+ *
+ * @author Warren
  */
 public class SessionSummaryCommandParser implements CommandParser<SessionSummaryCommand> {
 

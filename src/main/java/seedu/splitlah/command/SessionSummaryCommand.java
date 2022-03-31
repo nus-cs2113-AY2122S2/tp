@@ -20,7 +20,7 @@ import java.util.logging.Level;
  */
 public class SessionSummaryCommand extends Command {
 
-    private int sessionId;
+    private final int sessionId;
 
     // MISC CONSTANTS
     private static final String SUMMARY_HEADER_PREPEND = "Summary (Session Id #";

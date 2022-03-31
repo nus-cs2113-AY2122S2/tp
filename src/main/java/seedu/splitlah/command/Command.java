@@ -19,10 +19,10 @@ public abstract class Command {
     /**
      * Checks if command object is an instance of an ExitCommand.
      *
-     * @param command A command object to be checked.
-     * @return true if it is an ExitCommand, else false.
+     * @return true if it is an ExitCommand,
+     *         false otherwise.
      */
-    public static boolean isExitCommand(Command command) {
-        return command instanceof ExitCommand;
+    public boolean isExitCommand() {
+        return this instanceof ExitCommand;
     }
 }
