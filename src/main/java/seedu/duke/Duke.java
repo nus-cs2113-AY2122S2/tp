@@ -29,7 +29,7 @@ public class Duke {
         } else {
             System.out.println("New login. Please type the total number of goods"
                     + " your warehouse can hold");
-            ui = new UserInterface(new Warehouse(1000));
+            ui = new UserInterface(new Warehouse(1000F));
         }
         ui.run();
         bye();
