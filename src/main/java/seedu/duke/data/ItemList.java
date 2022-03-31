@@ -38,7 +38,7 @@ public class ItemList {
      * Add a borrow record to a specific item in the itemArrayList as indicated
      *      * by the itemIndex.
      *
-     * @param itemIndex A legal item index on the itemArrayList
+     * @param itemIndex A legal item index on the itemArrayList. Zero-based indexing.
      * @param newRecord A borrow record
      * @return The item that has been added with the new borrow record.
      */
