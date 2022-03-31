@@ -1,7 +1,7 @@
 @startuml
 !include Style.puml
 
-box AddCommand
+box addExpenditure()
 participant ":Parser" as Parser LOGIC_COLOR_T1
 participant "Command:AddCommand" as AddCommand LOGIC_COLOR_T1
 participant ":GeneralFunctions" as GeneralFunctions LOGIC_COLOR_T1
@@ -10,36 +10,44 @@ participant ":Expenditure" as Expenditure LOGIC_COLOR_T1
 participant ":expenditureList" as expenditureList LOGIC_COLOR_T1
 end box
 
-Parser -> AddCommand: AddCommand()#execute
+Parser -> AddCommand: AddCommand.executeCommand()
+activate AddCommand
+
+AddCommand -> AddCommand: addExpenditure()
 activate AddCommand
 
 
-AddCommand -> AddCommand: addInput,expenditureList,creditCardList
-activate AddCommand
-AddCommand --> AddCommand:
-deactivate AddCommand
 
 AddCommand -> GeneralFunctions: parseInputWithCommandFlag()
 activate GeneralFunctions
-
-GeneralFunctions --> AddCommand: expenditure, category, description, amount, time
+GeneralFunctions --> AddCommand: paymentMethod, category, description, amount, time
 deactivate GeneralFunctions
 
-AddCommand -> AddCommandInputTest: test(expenditure, category, description, amount)
+AddCommand -> AddCommandInputTest: test(paymentMethod, category, description, amount)
+activate AddCommandInputTest
 AddCommandInputTest --> AddCommand
+deactivate AddCommandInputTest
+
+AddCommand -> GeneralFunctions: capitalise(paymentMethod, category)
+activate GeneralFunctions
+GeneralFunctions --> AddCommand: Capitalised paymentMethod and category
+deactivate GeneralFunctions
 
 create Expenditure
-AddCommand -> Expenditure: new Expenditure(expenditure, category, description, amount, time)
+AddCommand -> Expenditure: new Expenditure(paymentMethod, category, description, amount, time)
 activate Expenditure
-
 Expenditure --> AddCommand
 deactivate Expenditure
 
 AddCommand -> expenditureList: expenditureList.add(new Expenditure)
 activate expenditureList
-
 expenditureList --> AddCommand
 deactivate expenditureList
 
+AddCommand -> AddCommand: print added expenditure
+
+AddCommand --> AddCommand:
+deactivate AddCommand
 AddCommand --> Parser: finishedMessage
+deactivate AddCommand
 @enduml

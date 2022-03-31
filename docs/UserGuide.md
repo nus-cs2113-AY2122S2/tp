@@ -1,6 +1,6 @@
 # MindMyMoney User Guide
 
-##Content Page
+## Content Page
 
 * [Introduction](#introduction)
 * [Quick start](#quick-start)
@@ -41,7 +41,15 @@ this app is for you!
 
 ### Using the User Guide
 This guide aims to equip you with the knowledge on how to set up the application and to utilise its many features.
-Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the user guide!
+Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the user guide! Along the guide you may
+ encounter several icons. These icons will provide several useful information. 
+> **💡 Note:**
+>- This tells you that there is additional information that is useful when you are using the application.
+
+> **⚠️Warning⚠️**
+> - This tells you that there is some **important** information you should take note of to prevent issues from arising 
+when you are using the application.
+
 
 <br/>
 
@@ -107,7 +115,7 @@ Adds a $4.50 expenditure of the description 'Porridge' that was paid in cash in 
 
 > **💡 Note:**
 >- `[CATEGORY]` and `[PAYMENT_METHOD]` are **case-insensitive**.
->-  Your credit card has to be [added](#add-a-credit-card-to-your-program) first before entering the name of the credit card as `[PAYMENT_METHOD]`.
+>-  Your credit card has to be [added](#add-a-credit-card-to-your-program-add) first before entering the name of the credit card as `[PAYMENT_METHOD]`.
 >- `[AMOUNT]` only accepts numbers with 2 decimal places. Any additional decimals will be rounded off or ignored
 >- `[DATE]` does not require any day input.
 
@@ -156,7 +164,7 @@ Shows the percentage spent on each category of expenditure, displayed in a horiz
 Format:`calculate /epm MMM YYYY`
 * Enter Month in `MMM` format, with first letter capitalised. For example `Jan`.
 * Enter Year in `YYYY` format. For example `2022`
-* Enter Month and Year seperated by a space, `MMM YYYY`. For example `Dec 2021`
+* Enter Month and Year separated by a space, `MMM YYYY`. For example `Dec 2021`
   For example: `calculate /epm Mar 2022`  <br>
   ![epm screenshot](./images/calculate_epm.PNG) <br>
 

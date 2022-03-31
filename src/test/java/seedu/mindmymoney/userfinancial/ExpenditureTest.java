@@ -5,39 +5,25 @@ import org.junit.jupiter.api.Test;
 import seedu.mindmymoney.MindMyMoneyException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Performs tests for Expenditures.
  */
 public class ExpenditureTest {
     /**
-     * Tests that an Expenditure can correctly serialize and deserialize itself.
-     * Sample description is intentionally populated with special characters
-     * to try and trip errors in parsing.
+     * Tests that an Expenditure can correctly serialize itself.
      */
     @Test
-    void serialization_normalInput_correctDeserialization() {
-        Expenditure expenditure = new Expenditure("cash", "Food", "Test%!$+:/=-<%<%<of amount>%>9()&)* \t\n"
-                + "expenditure", 20, "2022-03");
-        String serialized = expenditure.serialize();
-        /**
-         * to edit to fit new add command
+    void serialization_normalInput_correctSerialization() {
+        Expenditure expenditure = new Expenditure("cash", "Food", "chicken"
+                + "expenditure", 20, "March 2022");
         try {
+            String serialized = expenditure.serialize();
             Expenditure deserialized = Expenditure.deserialize(serialized);
             assertEquals(expenditure, deserialized);
         } catch (MindMyMoneyException e) {
-            Assertions.fail("MindMyMoney exception was thrown");
+            fail();
         }
-         */
-    }
-
-    /**
-     * Tests that an incorrectly formatted string will not be deserialized by Expenditure.
-     */
-    @Test
-    void deserialization_improperInput_throwsException() {
-        String incorrectSerialization1 = "food of $10";
-        assertThrows(MindMyMoneyException.class, () -> Expenditure.deserialize(incorrectSerialization1));
     }
 }

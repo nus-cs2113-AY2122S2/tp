@@ -18,18 +18,29 @@ public class MindMyMoney {
     private static final String STORAGE_FILENAME = "list.txt";
 
     public MindMyMoney() {
+        Storage savedStorage;
         ui = new Ui();
         user = new User();
-        storage = new Storage(new File(STORAGE_FILENAME));
+        try {
+            savedStorage = new Storage(new File(STORAGE_FILENAME));
+        } catch (MindMyMoneyException e) {
+            System.out.println(e.getMessage());
+            savedStorage = null;
+        }
+        storage = savedStorage;
     }
 
     public void run() {
         ui.printIntro();
-        user.setExpenditureListArray(storage.load());
-        // for now I just initialise a new CreditCardList and IncomeList, but ideally it should be loaded from storage,
-        // similar to how expenditurelist is loaded.
-        user.setCreditCardListArray(new CreditCardList());
-        user.setIncomeListArray(new IncomeList());
+
+        if (storage != null) {
+            try {
+                user = storage.load();
+            } catch (MindMyMoneyException e) {
+                System.out.println(e.getMessage());
+                System.out.println(System.lineSeparator());
+            }
+        }
 
         boolean isExit = false;
         while (!isExit) {
@@ -38,12 +49,12 @@ public class MindMyMoney {
                 Command commandType = Parser.parseCommand(input, user);
                 commandType.executeCommand();
 
-                storage.save(user.getExpenditureListArray());
-                // dummy commands to save credit card and income list also
-                // storage.save(user.getCreditCardListArray());
-                // storage,save(user.getIncomeListArray());
-
                 isExit = commandType.isExit();
+
+                if (storage != null) {
+                    storage.save(user);
+                }
+
             } catch (MindMyMoneyException e) {
                 System.out.println(e.getMessage());
                 System.out.print(System.lineSeparator());
