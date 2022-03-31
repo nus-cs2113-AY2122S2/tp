@@ -254,7 +254,6 @@ public class StorageFile {
 
         logger.log(Level.INFO, LOG_SAVING_EXPENSE_ENTRIES);
         if (expenseTracker.getExpenseCount() == 0) {
-            System.out.println(expenseTracker.getExpenseCount());
             fileWrite.write("");
             fileWrite.close();
         } else {
