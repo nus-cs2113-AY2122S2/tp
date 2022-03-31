@@ -62,10 +62,10 @@ public class BorrowCommand extends Command {
             return false;
         }
         BorrowCommand that = (BorrowCommand) o;
-        return itemIndex == that.itemIndex &&
-                startDate.equals(that.startDate) &&
-                endDate.equals(that.endDate) &&
-                borrowerName.equals(that.borrowerName);
+        return itemIndex == that.itemIndex
+                && startDate.equals(that.startDate)
+                && endDate.equals(that.endDate)
+                && borrowerName.equals(that.borrowerName);
     }
 
 }
