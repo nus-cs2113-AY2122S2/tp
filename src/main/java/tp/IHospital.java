@@ -1,6 +1,6 @@
 package tp;
 
-import java.person.Patient;
+import tp.person.Patient;
 
 public class IHospital {
     private static final Ui ui = new Ui();
