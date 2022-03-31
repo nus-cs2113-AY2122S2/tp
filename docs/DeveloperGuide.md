@@ -13,17 +13,21 @@
     * [Parser Component](#parser-component)
     * [Command Component](#command-component)
 * [Implementation](#implementation)
+  * [Parser implementation](#parsing-of-commands)
+  * [Session Commands](#session-commands)
     * [Add a session](#add-a-session)
     * [Remove a session](#remove-a-session)
     * [Edit a session](#edit-a-session)
     * [View a session](#view-a-session)
     * [List all sessions](#list-sessions)
     * [Settle a session](#settle-a-session)
+  * [Activity Commands](#activity-commands)
     * [Add an activity](#add-an-activity)
     * [Remove an activity](#remove-an-activity)
     * [Edit an activity](#edit-an-activity)
     * [View an activity](#view-an-activity)
     * [List all activities](#list-activities)
+  * [Group Commands](#group-commands)
     * [Add a group](#add-a-group)
     * [Remove a group](#remove-a-group)
     * [Edit a group](#edit-a-group)
@@ -191,6 +195,7 @@ The general workflow of the `Command` component is as follows:
 3. After `XYZCommand#run` completes, control is returned to `SplitLah` and
    the [lifecycle](#architecture) of an `XYZCommand` object ends.
 
+<hr>
 
 ## Implementation
 
@@ -247,6 +252,8 @@ the Command component when any user input is provided to SplitLah.
    all parsed information to it through the constructor.
 8. The newly instantiated `XYZCommand` object is then returned from `XYZCommandParser` to `Parser` class,
    and finally back to `SplitLah` to be run.
+
+## Session Commands
 
 ### Add a session
 **API reference:** [`SessionCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
@@ -409,6 +416,8 @@ The general workflow of the `session /summary` command is as follows:
 10. Finally, with the `TextUI` object, the method `printlnMessageWithDivider` is called to print the message
     obtained from the `SessionSummaryCommand#processAllTransactions` method.
 
+## Activity Commands
+
 ### Add an activity
 ### Remove an activity
 ### Edit an activity
@@ -434,6 +443,8 @@ The general workflow of the `activity /list` command is as follows:
    1. If the activity list in the session is empty, the Session class will return a `String` object containing an error message.
    2. If it's not empty, a `String` object representing a table summarising the list of activities in the session will be returned. 
 7. Finally, the method `printlnMessageWithDivider` is called to print the message returned.
+
+## Group Commands
 
 ### Add a group
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
@@ -518,6 +529,8 @@ representing the summaries of the groups stored.
    calling `TableFormatter#addRow` for each group to create a table with the summary of each group. A `String` object
    representing the table is then returned.
 6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
+
+<hr>
 
 ## Product scope
 ### Target user profile
