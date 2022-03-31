@@ -58,6 +58,7 @@ public class StaffController extends Controller {
      */
     private void printStaff() throws OperationTerminationException {
         MainLogger.logInfo(this, "Printing staff");
+        System.out.println("Printing staff...");
         try {
             staffManager.printStaff();
         } catch (IllegalStateException e) {
