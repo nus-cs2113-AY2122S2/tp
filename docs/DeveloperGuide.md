@@ -38,20 +38,18 @@
 * Address Book (Level-3) - Provide samples of User Guide(UG) and Developer Guide(DG)
 
 ## Introduction
-The guide's purpose is to allow readers to understand how the application works internally, so that future engineers could continue working on the project with ease. 
+The guide's purpose is to allow readers to understand how the application works internally, so that future engineers can continue working on the project with ease. 
 
-### How to use this developer guide?
-* At the start of the developer guide, SplitLah is explained as different components.
-* These components are divided into **8 components**: [Manager Component](#manager-component)
+### How to use this developer guide
+* SplitLah is divided into **eight components**: [Manager Component](#manager-component)
 [Profile Component](#profile-component), [TextUI Component](#textui-component),
 [Storage Component](#storage-component), [Parser Component](#parser-component) and [Command Component](#command-component)
-* Each component has its own section in this guide explaining them in greater detail.
-* There is also a [diagram](#interaction-between-components) that shows the inner workings of how each component interacts with each other inside SplitLah.
-* SplitLah supports a total of **18 commands**. However, in this developer guide, we would not explain in detail how the `help` and `exit` command works. 
-To view the usages of SplitLah's commands please refer to our [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html).
-* The explanation of each command starts [here](#implementation).
-* In each command explanation section, there is an API reference link that brings the reader to the source code of the command. 
-* API reference refers to the main source code that is responsible for carrying out the command's action.
+* Each component has its own section in this guide explaining them in detail.
+* This [diagram](#interaction-between-components) shows the inner workings of how each component interacts with each other.
+* SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands will not be explained in detail.
+* Please refer to the [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
+* Please refer to [here](#implementation) to find out how each command is designed and implemented in SplitLah.
+* Each command's section in this guide contains an API reference link that brings you to the main source code responsible for executing the command.
 
 ## Design
 ### Architecture
@@ -119,20 +117,25 @@ As TextUI handles all input and output streams, these streams can be changed wit
 ### Storage Component
 ![Storage Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/StorageComponent.drawio.png)
 <br>
-The `Storage` class is initialized by the `Manager` class when the application starts. 
-Upon initialization, the `Storage` class will check if there were pre-existing data stored by the user. 
-* If a data file is found, the `Storage` class would retrieve the data and save it 
-to the `Profile` object that is managed by the `Manager` class in the current run of SplitLah. 
-* Else a new data file is created and an empty `Profile` instance is created instead.
+The `Storage` class is initialised by the `Manager` class when the application starts. 
+Upon initialization, the `Storage` class checks if a save file already exists. 
+A save file records user data related to SplitLah even after the application is closed.
+* If a save file is found, the `Storage` class loads data from it into the `Profile` object managed by the `Manager` object.
+* Else a new data file is created and an empty `Profile` object is created instead.
 
-Not all commands in SplitLah would trigger a file save, only commands that update attributes of the `Profile` object would trigger a file save.
-These commands are _create_, _delete_, and _edit_ commands. The command would execute the main 
-task of the command and `Manager#saveProfile` is called at the end to save the changes.
-* For instance, the user enters `group /create /n Highschool Friends /pl Alice Bob`, SplitLah would recognize this as 
-a `GroupCreateCommand` and proceed to create the new group. As this updates the list of groups stored in the `Profile` object,
-  `Manager#saveProfile` is called to save the newly created group into the save file.
+When a command updates any attributes of the `Profile` object, the changes will be updated the save file. These commands are:
+* `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand`
+* `ActivityCreateCommand`, `ActivityDeleteCommand`, `ActivityEditCommand`
+* `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand`
 
-As all classes under the `Profile` component implement the `Serializable` class, the `Storage` class can write 
+Once the commands finishes executing, `Manager#saveProfile` is called to update the save file.<br>
+For example:
+  1. The user enters `session /create /n Class outing /d 31-03-2022 /pl Alice bob`
+  2. SplitLah recognizes this as a `SessionCreateCommand` and creates the new session. 
+  3. As this updates the list of sessions stored in the `Profile` object,
+    `Manager#saveProfile` is called to update the save file with the newly created session.
+
+All classes associated with the `Profile` component implements the `Serializable` class. This allows the `Storage` class to write
 into the save file without having to pre-process the data.
 
 ### Parser Component
@@ -313,7 +316,7 @@ The general workflow of the `session /edit` command is as follows:
    * Else the `Session` object with the specified session unique identifier is returned.
 6. The detail of how a session is updated in the reference diagram below.
 ![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
-7. `SessionEditCommand#run` would check if there is an update for a new list of persons, new session or new session date.
+7. `SessionEditCommand#run` will check if there is an update for a new list of persons, new session or new session date.
    * If there is an update on the list of persons. It would first check if the newly provided list of persons contains duplicated names.
      * If duplicated names are detected, an error message would be printed and control is returned to `SplitLah`.
      * Else, it would call `PersonList#isSuperSet` to check if the newly supplied list of persons contain all existing persons in the session.
