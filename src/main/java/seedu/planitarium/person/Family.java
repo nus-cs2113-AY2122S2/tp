@@ -184,9 +184,13 @@ public class Family {
             Double disposable = personList.getRemain();
             String generation = getGenerationName(i);
             System.out.println(i + ". " + generation + ":" + System.lineSeparator()
-                    + "Income: $" + income + System.lineSeparator()
-                    + "Expenditure: $" + expenditure + System.lineSeparator()
-                    + "Disposable: $" + disposable);
+                    + Constants.INDENTATION + "Income: $" + income + System.lineSeparator()
+                    + Constants.INDENTATION + "Expenditure: $" + expenditure + System.lineSeparator()
+                    + Constants.INDENTATION + "Disposable: $" + disposable);
+            // Print newline between generations
+            if (i != Constants.NUM_GROUPS) {
+                System.out.println(Constants.EMPTY_STRING);
+            }
         }
     }
 

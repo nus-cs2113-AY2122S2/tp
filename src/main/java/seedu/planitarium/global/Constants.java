@@ -9,6 +9,8 @@ public class Constants {
     public static final int SINGULAR = 1;
     public static final boolean FOR_USER = false;
     public static final boolean FOR_STORAGE = true;
+    public static final String EMPTY_STRING = "";
+    public static final String INDENTATION = "   ";
     public static final String INDEX_ERROR_MESSAGE = "Invalid index passed in";
     public static final String FAMILY_INIT_MESSAGE = "New Family initialised";
     public static final String ADD_PERSON_CALL_MESSAGE = "Method addPerson() called";

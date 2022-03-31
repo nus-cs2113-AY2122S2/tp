@@ -139,6 +139,10 @@ public class PersonList {
             System.out.println(i + ". " + person.getName());
             person.listIncome();
             person.listExpenditure();
+            // Print newline between persons
+            if (i != numberOfMembers) {
+                System.out.println(Constants.EMPTY_STRING);
+            }
         }
     }
 

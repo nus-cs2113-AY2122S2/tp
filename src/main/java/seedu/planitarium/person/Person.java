@@ -156,7 +156,7 @@ public class Person {
      */
     public void listExpenditure() {
         LOGGER.log(Level.INFO, Constants.LIST_EXPEND_CALL_MESSAGE);
-        System.out.println("Here is the expenditure list for " + name + ":");
+        System.out.println(Constants.INDENTATION + "List of expenditures:");
         expenditureList.printExpenditureList();
     }
 
@@ -165,7 +165,7 @@ public class Person {
      */
     public void listIncome() {
         LOGGER.log(Level.INFO, Constants.LIST_INCOME_CALL_MESSAGE);
-        System.out.println("Here is the income list for " + name + ":");
+        System.out.println(Constants.INDENTATION + "List of incomes:");
         incomeList.printIncomeList();
     }
 
