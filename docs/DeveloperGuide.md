@@ -6,7 +6,7 @@
   - [Implemented Features](#Implemented-Features)
   - [Proposed Features](#Proposed-Features)
 - [Product scope](#Product-scope)
-- [User Stories](#User Stories)
+- [User Stories](#User-Stories)
 - [Glossary](#Glossary)
 - [Instructions for manual testing](#Instructions-for-manual-testing)
 
@@ -20,7 +20,8 @@ The design of Developer Guide is referenced from the [AB-3 Developer Guide](http
 ## Design & Implementation
 ### Architecture
 #### Main components of the architecture
-![image info](./UmlDiagrams/Structure.png)
+![image info](./UmlDiagrams/Structure.png)  
+
 **Main** contains the main class called `CsProjPlanner`. It is responsible for:
 * At app launch: invokes methods to initialize the app, and gets prepared for receiving user input.
 * At shut down: invokes methods to store generated data.
@@ -93,7 +94,7 @@ The command to add a project is one example of this structure:
 
 Deleting a project will follow nearly the exact same structure; the only difference is that the corresponding Parser and Command objects will be used (`DeleteProjectCommandParser` and `DeleteProjectCommand`)
 
-####Delete a Project
+#### sDelete a Project
 ![image info](./UmlDiagrams/deleteProjectNew.png)
 *The steps are omitted here as they are the exact same as adding a project, only with the differing class names previously mentioned.
 
