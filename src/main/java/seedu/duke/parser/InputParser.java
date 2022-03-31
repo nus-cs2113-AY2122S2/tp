@@ -61,7 +61,7 @@ public class InputParser {
             return new BorrowCommandParser().parse(arguments);
 
         case ListAvailableBorrowingsCommand.COMMAND_WORD:
-            return new ListAvaliableBorrowingsParser().parse(arguments);
+            return new ListAvailableBorrowingsParser().parse(arguments);
         
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

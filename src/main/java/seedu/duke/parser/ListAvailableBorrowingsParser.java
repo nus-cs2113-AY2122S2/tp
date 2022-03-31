@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static seedu.duke.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.duke.parser.CliSyntax.PREFIX_END_DATE;
 
-public class ListAvaliableBorrowingsParser implements Parser<ListAvailableBorrowingsCommand> {
+public class ListAvailableBorrowingsParser implements Parser<ListAvailableBorrowingsCommand> {
     
     public ListAvailableBorrowingsCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap = 
