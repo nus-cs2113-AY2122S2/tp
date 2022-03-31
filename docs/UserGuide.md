@@ -200,7 +200,7 @@ Exit the program
 
 Format: `exit`
 
----å
+---
 ## FAQ
 
 **Q**: How do I transter my data to another computer?
