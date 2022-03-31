@@ -164,6 +164,7 @@ public class StudyManager {
         ArrayList<Module> icsModulesList = icsParser.readIcsFile(input);
         if (icsModulesList != null) {
             modulesList.addAll(icsModulesList);
+            isModified = true;
         }
         printMessage("Exiting read ics mode");
     }
