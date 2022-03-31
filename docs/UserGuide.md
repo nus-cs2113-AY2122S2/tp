@@ -52,9 +52,7 @@ Allows navigation back to the menu section of the application.
 Format: `menu`
 
 **Example of usage:**
-user types in the `menu` command from another section:
-`menu`
-which results in:
+user types in the `menu` command from another section which results in:
 ```
 Welcome back to the main menu
 Menu:
@@ -66,9 +64,7 @@ Displays user guide for menu.
 Format: `help`
 
 **Example of usage:**
-User enters `help` when in main menu:
-`help`
-which results in:
+User enters `help` when in main menu which results in:
 ```
 Going from menu to section of interest:
 
@@ -123,9 +119,7 @@ Terminates the application.
 Format: `exit`
 
 **Example of usage:**
-User enters `exit`:
-`exit`
-which results in:
+User enters `exit` which results in:
 ```
 Goodbye! Hope to see you again...
 ```
@@ -553,6 +547,11 @@ Expected outcome:
 Here are the matching contacts in your list:
  1. Name: Jane Not Doe, Faculty: FASS, Email: e0334987@u.nus.edu, Description: group mate for CS4215
 ```
+
+### Load and Save
+
+Loading and saving is done automatically and the user does not need to worry about manually saving or loading
+data. However, do not tamper with the load and save files. 
 
 ## FAQ
 

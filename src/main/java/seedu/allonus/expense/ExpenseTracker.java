@@ -52,6 +52,7 @@ public class ExpenseTracker {
     public static final String LOG_INVALID_INDEX_TYPE = "User entered invalid non-integer index";
     public static final String MSG_INVALID_INDEX_TYPE = "Please enter a valid integer for the index!";
     public static final String LOG_ADD_INTENT = "User wants to add an expense made";
+    public static final String LOG_ADD_INTENT_FROM_FILE = "File wants to add a saved expense made";
     public static final String MSG_EMPTY_LIST = "You haven't added any expenses to your list yet!";
     public static final String LOG_LIST_INTENT = "User wants to list all expenses made";
     public static final String LOG_INVALID_COMMANDS = "User entered invalid commands";
@@ -118,6 +119,15 @@ public class ExpenseTracker {
     }
 
     /**
+     * Returns logger attribute of this class ExpenseTracker.
+     *
+     * @return logger, an instance of class <code>Logger</code>, belonging to this <code>ExpenseTracker</code> class.
+     */
+    public Logger getLogger() {
+        return logger;
+    }
+
+    /**
      * Returns current expense list.
      *
      * @return expense list.
@@ -148,11 +158,17 @@ public class ExpenseTracker {
      * @param list list of expenses itself
      * @param e    the expense object itself to be added
      */
-    private static void addExpense(ArrayList<Expense> list, Expense e) {
-        logger.log(Level.INFO, LOG_ADD_INTENT);
+    private static void addExpense(ArrayList<Expense> list, Expense e, boolean fromCommandLine) {
+        if (fromCommandLine) {
+            logger.log(Level.INFO, LOG_ADD_INTENT);
+        } else {
+            logger.log(Level.INFO, LOG_ADD_INTENT_FROM_FILE);
+        }
         assert e != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
         list.add(e);
-        System.out.println("Added " + e);
+        if (fromCommandLine) {
+            System.out.println("Added " + e);
+        }
         Expense.setNoOfItems(Expense.getNoOfItems() + EXPENSE_INDEX);
         isModified = true;
     }
@@ -297,14 +313,14 @@ public class ExpenseTracker {
      *
      * @param rawInput the user's input itself
      */
-    private static void executeAdd(String rawInput) {
+    private static void executeAdd(String rawInput, boolean fromCommandLine) {
 
         try {
             String[] newExpense = parseNewExpense(rawInput);
             assert newExpense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
             Expense e = new Expense(newExpense[DATE_INDEX], newExpense[AMOUNT_INDEX],
                     newExpense[CATEGORY_INDEX], newExpense[REMARKS_INDEX]);
-            addExpense(expenseList, e);
+            addExpense(expenseList, e, fromCommandLine);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_EMPTY_FIELDS);
             System.out.println(MSG_EMPTY_FIELDS);
@@ -329,7 +345,7 @@ public class ExpenseTracker {
      * @param savedExpense the saved expense entry
      */
     public static void loadAdd(String savedExpense) {
-        executeAdd(savedExpense);
+        executeAdd(savedExpense, false);
     }
 
     /**
@@ -395,7 +411,7 @@ public class ExpenseTracker {
                 executeRemove(rawInput);
                 break;
             case ("add"):
-                executeAdd(rawInput);
+                executeAdd(rawInput, true);
                 break;
             case ("edit"):
                 executeEdit(ui, rawInput);

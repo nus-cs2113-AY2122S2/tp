@@ -1,8 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-!include Style.puml
-
 participant "AllOnUs" <<class>>
 participant ":AllOnUs"
 participant "ui:TextUi"

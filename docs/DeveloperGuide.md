@@ -237,9 +237,75 @@ call to update the value of the corresponding field of `contact`.
 ![](images/ContactSetFieldsSequenceSubdiagram.png)
 
 ### Load and Store
-Coming soon.
 
+**API:** `StorageFile.java`
 
+![](images/StorageFileClassDiagram.png)
+
+Note: Exception classes are left out of this diagram that aims to show the core structure of the load-save functionality.
+Some methods and attributes are not mentioned to keep the diagram simple while keeping the core information visible.
+
+As seen from the class diagram above (which shows the portions relevant to the StorageFile class), 
+the StorageFile class associates to a Logger class, a ContactsManager class, an ExpenseTracker class
+and a StudyManager class. The AllOnUs class (to do with main menu) associates to a StorageFile class and the 
+manager and tracker classes associate to the StorageFile class as well.
+
+The StorageFile class has private attributes `fileName` and `dataFileRelativePath` which define the name of the file
+and the relative path of the file to project directory, which are utilized in creating/locating the file by the 
+StorageFile class. More details on this will be discussed soon. All the methods in this class are public and the
+only static method `setFields()` is utilized by class AllOnUs to initialize the StorageFile class with instances of
+the ContactsManager, ExpenseTracker and StudyManager classes used in the application and the file related attributes.
+
+`get*InFileFormat()`, `load*()` and `create*()` methods represent multiple methods that adhere to the respective forms
+and will be discussed further as needed. 
+
+We first talk about the save functionality. 
+
+#### Save
+
+![](images/StorageFileSaveSequenceDiagram.png)
+![](images/StorageFileSaveSeqSubDiagram.png)
+
+Upon any modification to the lists maintained by the manager or tracker objects, a boolean `isModified` is changed to 
+`true` (initially `false` at the start of every iteration of interaction with the user) and this triggers a call to 
+the `saveData()` method of the StorageFile class. If the file for saving does not exist, it is created. While creating 
+the file, if it is discovered the directory does not exist either, it is created first. These are done through calls to 
+`createFile()` and `createDirectory()`. 
+
+The total number of expense items maintained by the expense tracker is then obtained through a call to `getExpenseCount()`
+which is a method of the ExpenseTracker class. For each of these items, we get a file representation of this expense item
+through a call to `getExpenseInFileFormat()`, which obtains the specific expense item through a call to `getExpenseList()`
+and this item is converted into file format. The expense item entry is then written to the file in "append" mode and is
+now considered "saved". These steps are repeated for module items managed by study manager and contact items managed 
+by contacts manager. 
+
+After all entries have been saved, control returns to where the `saveData()` method was called from so that interaction
+with the user can continue. 
+
+#### Load
+
+![](images/StorageFileLoadSequenceDiagram.png)
+![](images/StorageFileLoadSeqSubDiagram.png)
+
+This feature is only executed at the start of the application when we need to load the data stored on a file into our
+application. The `loadData()` method of StorageFile class is called by the `run()` method of AllOnUs class before
+entering the user interaction loop of the main menu. There is then a self-invocation of `transferDataFromFileToList()`
+which open the file to be loaded from before reading data from it. In the event the file does not exist, an exception 
+"FileNotFoundException" is raised which is caught by the `loadData()` method and the file creation process described 
+earlier occurs before a call to `transferDataFromFileToList()` again. In the sequence diagram above, this mechanism
+is described using "opt" to simplify the diagram but the outcome is equivalent to what is actually happening. 
+
+Once `transferDataFromFileToList()` is called (assuming the file is created by now, or the process above would repeat),
+each entry in the file is read and using a simple "if-else" clause we can determine whether the entry is an expense,
+a module or a contact (format of saved entry is specific to entry type). If it is an expense, `loadExpense()` is called
+which then calls `loadAdd()` belonging to the ExpenseTracker instance representing the expense tracker of the application.
+`loadAdd()` then calls the local method used for addition of expense entries into the locally maintained list.
+Here, we can see that the loading mechanism essentially relies on the underlying (already existing) item addition mechanisms
+that the manager and tracker classes possess to load entries correctly.
+Similar operations occur for entries of type module and contact. 
+
+Once all the entries have been loaded and there are no more lines to be read, the loop breaks and control returns to 
+the `run()` method of AllOnUs, so that interactions with the user can begin. 
 ## Non-Functional Requirements
 
 {Give non-functional requirements}

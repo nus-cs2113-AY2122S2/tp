@@ -9,9 +9,6 @@ import seedu.allonus.storage.StorageFile;
 
 import seedu.allonus.ui.TextUi;
 
-import static seedu.allonus.expense.ExpenseTracker.expenseRunner;
-
-import seedu.allonus.ui.TextUi;
 import seedu.allonus.modules.StudyManager;
 
 import java.util.NoSuchElementException;
@@ -22,6 +19,7 @@ import java.util.logging.Logger;
  * Runs the main menu functionality of the AllOnUs application and is also where the main method is located.
  */
 public class AllOnUs {
+    public static final String FILE_NAME = "allonusData.txt";
     private TextUi ui;
     private static Logger logger = Logger.getLogger("MenuLog");
 
@@ -138,7 +136,7 @@ public class AllOnUs {
         ExpenseTracker expenseTracker = new ExpenseTracker();
 
 
-        StorageFile.setFields(contactsManager, expenseTracker, studyManager);
+        StorageFile.setFields(contactsManager, expenseTracker, studyManager, FILE_NAME);
         StorageFile storageFile = new StorageFile();
         storageFile.loadData();
 
@@ -210,7 +208,6 @@ public class AllOnUs {
      * Main entry-point for the seedu.allonus.AllOnUs application.
      */
     public static void main(String[] args) {
-
         logger.setLevel(Level.WARNING);
         greet();
 
