@@ -34,11 +34,13 @@ public class FindCommand extends Command {
     public CommandResult execute() {
         try {
             List<Record> allRecords = recordMgr.getAllRecords();
-            ArrayList<Record> filteredRecords = (ArrayList<Record>) allRecords.stream()
-                    .filter(record -> record.getName().toLowerCase().contains(keyword.toLowerCase())).collect(toList());
+            ArrayList<Record> filteredRecords = filter(allRecords);
             return new CommandResult(getMessageForRecordListSummary(filteredRecords), filteredRecords);
         } catch (IndexOutOfBoundsException e) {
             return new CommandResult(Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
         }
+    }
+    public ArrayList<Record> filter(List<Record> allRecords){
+        return (ArrayList<Record>) allRecords.stream().filter(record -> record.getName().toLowerCase().contains(keyword.toLowerCase())).collect(toList());
     }
 }

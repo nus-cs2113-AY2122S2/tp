@@ -96,6 +96,17 @@ Displays all records in the RecordManager as a list with their index numbers.
 
 Format: `list`
 
+### Show record list: `Find`
+filter all the records in the RecordManager and display it as a list.
+
+Format: `find <KeyWord>`
+
+* The `KeyWord` can be any String.
+* The `KeyWord` is used to filter the name of the records in RecordManager.
+
+Example of usage: `find handphone`
+`
+
 ### Setting limit: `set`
 Set a total spending limit for a month and display the warning
 if the total expenditure exceeds the limit.
