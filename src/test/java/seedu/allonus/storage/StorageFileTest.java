@@ -14,7 +14,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * Tests the functionality of StorageFile class.
@@ -60,7 +59,10 @@ public class StorageFileTest {
         contactsManager.getLogger().setLevel(Level.SEVERE);
         storageFile.getLogger().setLevel(Level.WARNING);
 
-        storageFile.createFile();
+        File f = new File(storageFile.getDatafileRelativePath());
+        while (!f.exists()) {
+            storageFile.createFile();
+        }
         storageFile.saveData();
     }
 

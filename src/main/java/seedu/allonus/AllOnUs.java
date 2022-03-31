@@ -138,7 +138,8 @@ public class AllOnUs {
 
         StorageFile.setFields(contactsManager, expenseTracker, studyManager, FILE_NAME);
         StorageFile storageFile = new StorageFile();
-        storageFile.loadData();
+        //storageFile.loadData();
+        storageFile.saveData();
 
         while (true) {
             System.out.println("Menu:");
