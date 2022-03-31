@@ -24,6 +24,15 @@ public class PersonList implements Serializable {
     }
 
     /**
+     * Initializes a PersonList object using an ArrayList object of Person objects.
+     *
+     * @param personList An ArrayList object of Person objects.
+     */
+    public PersonList(ArrayList<Person> personList) {
+        this.personList = personList;
+    }
+
+    /**
      * Returns the size of the ArrayList object of Person objects.
      *
      * @return An integer that represents the size of the ArrayList object of Person objects.
