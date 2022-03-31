@@ -20,7 +20,8 @@ The design of Developer Guide is referenced from the [AB-3 Developer Guide](http
 ## Design & Implementation
 ### Architecture
 #### Main components of the architecture
-![image info](./UmlDiagrams/Structure.png)
+![image info](./UmlDiagrams/Structure.png)  
+
 **Main** contains the main class called `CsProjPlanner`. It is responsible for:
 * At app launch: invokes methods to initialize the app, and gets prepared for receiving user input.
 * At shut down: invokes methods to store generated data.
