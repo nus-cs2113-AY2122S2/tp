@@ -2,14 +2,39 @@
 
 ## Introduction
 
-EquipmentManager is a Command Line Interface application to help with keeping track of equipment details (e.g. current user, quantity, cost, warranty duration, purchase date) for the AV club. It provides a clean and fast way to manage the inventory as compared to “traditional” methods such as an excel spreadsheet.
+EquipmentManager is a Command Line Interface application to help with keeping track of equipment details (e.g. current user, quantity, cost, warranty duration, purchase date) for an AV club. It provides a clean and fast way to manage the inventory as compared to “traditional” methods such as an Excel spreadsheet.
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `EquipmentManager` from [here](https://github.com/AY2122S2-CS2113-F12-2/tp/releases).
+3. Copy the file to the folder you want to use as the _home folder_ for your `EquipmentManager` application.
+4. Double-click the file to start the app. 
+5. Type `help` to see the list of available commands.
 
 ## Features 
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. Spaces are acceptable. <br>
+  e.g. in `check n/ITEM_NAME`, `ITEM_NAME` is a parameter which can be used as `check n/SM-57`.
+
+* Items in square brackets are optional.<br>
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `s/SERIAL_NUMBER n/ITEM_NAME`, `n/ITEM_NAME s/SERIAL_NUMBER` is also acceptable.
+
+* Only one attribute/value can be saved per parameter. Where multiple inputs are supplied, the last parameter will be taken instead of the first one. <br>
+  e.g. `... n/ITEM_NAME_1 n/ITEM_NAME_2` will be interpreted as `... n/ITEM_NAME_2`, omitting `n/ITEM_NAME_1` entirely.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `bye` and `save`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
+
 
 - [Adding an equipment: `add`](#adding-an-equipment-add)
 - [Checking an equipment: `check`](#checking-an-equipment-check)
@@ -39,7 +64,7 @@ Check the details of the equipment that has the name specified.
 
 Format: `check n/ITEM_NAME`
 
-* Only the `ITEM_NAME` can be used to check for an equipment.
+* Only the `ITEM_NAME` can be used to check for a piece of equipment.
 
 Example of usage and output:
 
