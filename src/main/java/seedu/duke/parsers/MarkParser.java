@@ -31,6 +31,12 @@ public class MarkParser extends Parser {
         groupNames.add(TASK_MODULE);
     }
 
+    /**
+     * Parses user's input for "mark" command.
+     *
+     * @param userInput User input of completed flag or uncompleted flag, task index and task module.
+     * @throws ModHappyException if completed flag or uncompleted flag is not detected
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);
