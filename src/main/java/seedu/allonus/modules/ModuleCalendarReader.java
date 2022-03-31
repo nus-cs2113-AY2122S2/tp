@@ -60,14 +60,18 @@ public class ModuleCalendarReader {
     private static final String MODULE_CATEGORY_EXAM = "Exam";
     public static final String UTC_TIMEZONE_KEYWORD = "UTC";
     private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
+    public static final String PROJECT_PATH = System.getProperty("user.dir");
 
     static String icsFilePath;
 
     public ArrayList<Module> readIcsFile(String fileName) {
         logger.setLevel(Level.WARNING);
-        File icsFile = new File(fileName);
+        String directoryPath = PROJECT_PATH + File.separator + fileName;
+        // File icsFile = new File(fileName);
+        File icsFile = new File(directoryPath);
         if (icsFile.isFile()) {
-            icsFilePath = fileName;
+            // icsFilePath = fileName;
+            icsFilePath = directoryPath;
             return parseIcsCalendar();
         } else {
             System.out.println(FILE_NOT_FOUND_MESSAGE);
