@@ -5,6 +5,7 @@ import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Borrow an item from the inventory for a specified duration.
@@ -44,6 +45,14 @@ public class BorrowCommand extends Command {
     public void execute(ItemList itemList, Ui ui) {
         BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName, borrowStatus);
         itemList.addBorrowRecord(itemIndex, newRecord);
-        System.out.println("Successfully added borrow record!");
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BorrowCommand that = (BorrowCommand) o;
+        return itemIndex == that.itemIndex && startDate.equals(that.startDate) && endDate.equals(that.endDate) && borrowerName.equals(that.borrowerName);
+    }
+
 }
