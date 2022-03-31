@@ -4,6 +4,7 @@ import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.logging.Level;
 
@@ -15,7 +16,7 @@ import java.util.logging.Level;
  */
 public class GroupViewCommand extends Command {
 
-    private int groupId;
+    private final int groupId;
 
     /**
      * Initializes a GroupViewCommand object.
@@ -35,13 +36,14 @@ public class GroupViewCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        TextUI ui = manager.getUi();
         try {
             Group group = manager.getProfile().getGroup(groupId);
             assert group.getGroupId() == groupId : Message.ASSERT_GROUPVIEW_INCORRECT_GROUP;
-            manager.getUi().printlnMessageWithDivider(group.toString());
+            ui.printlnMessageWithDivider(group.toString());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPVIEW_GROUP_VIEWED + groupId);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+            ui.printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPVIEW_GROUP_NOT_VIEWED + groupId);
         }
     }
