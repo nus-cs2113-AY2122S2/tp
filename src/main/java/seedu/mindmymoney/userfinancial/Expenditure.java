@@ -1,13 +1,14 @@
 package seedu.mindmymoney.userfinancial;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.helper.PropertyList;
 
 import java.util.Objects;
 
 /**
  * Represents the expenditure entry.
  */
-public class Expenditure {
+public class Expenditure implements MindMyMoneySerializable {
     private String description;
     private float amount;
     private String category;
@@ -85,61 +86,37 @@ public class Expenditure {
         return Objects.hash(description, amount, category, paymentMethod, time);
     }
 
-    private static final String CONTROL_SEQUENCE_BEGIN = "<%<";
-    private static final String CONTROL_SEQUENCE_END = ">%>";
-    private static final String CONTROL_DELIMITER = CONTROL_SEQUENCE_BEGIN + "of amount" + CONTROL_SEQUENCE_END;
 
     /**
-     * Replaces all % with %%s. This is so the control sequences above function correctly.
-     *
-     * @param s A string to escape.
-     * @return The escaped string.
-     */
-    public static String escapeDataString(String s) {
-        return s.replaceAll("%", "%%");
-    }
-
-    /**
-     * Replaces all %%s with %. This undoes escapeDataString.
-     *
-     * @param s The string to unescape.
-     * @return The unescaped string.
-     */
-    public static String unescapeDataString(String s) {
-        return s.replaceAll("%%", "%");
-    }
-
-    /**
-     * Returns a String representation of the expenditure meant for automated parsing.
-     *
-     * @return A serialized expenditure
+     * Returns a String representation of this expenditure, in a machine-readable format.
+     * @return The serialized Expenditure.
      */
     public String serialize() {
-        return escapeDataString(description)
-                + CONTROL_DELIMITER
-                + escapeDataString(Float.toString(amount));
+        PropertyList plist = new PropertyList();
+        plist.addProperty("description", description);
+        plist.addProperty("category", category);
+        plist.addProperty("paymentMethod", paymentMethod);
+        plist.addProperty("time", time);
+        plist.addProperty("amount", Float.toString(amount));
+        return plist.serialize();
     }
 
     /**
-     * Converts the output of Expenditure.serialize into an Expenditure. This method will
-     * not work properly if the description contains the CONTROL_DELIMITER used internally
-     * by the function, and such cases may be considered incorrect formatting.
-     *
-     * @param serialized The serialized expenditure.
+     * Converts the output of Expenditure#serialize back into an Expenditure.
+     * @param serialized The serialized Expenditure
      * @return An Expenditure.
-     * @throws MindMyMoneyException if formatting is incorrect.
+     * @throws MindMyMoneyException if the format is invalid.
      */
     public static Expenditure deserialize(String serialized) throws MindMyMoneyException {
-        String[] parts = serialized.split(CONTROL_DELIMITER);
-        if (parts.length != 2) {
-            throw new MindMyMoneyException("Invalid format for saved list item");
-        }
+        PropertyList plist = PropertyList.deserialize(serialized);
         try {
-            int amount = Integer.parseInt(parts[1]);
-            String escapedDescription = unescapeDataString(parts[0].strip());
-            return new Expenditure(null, null, escapedDescription, amount, null);
+            return new Expenditure(plist.getValue("paymentMethod"),
+                    plist.getValue("category"),
+                    plist.getValue("description"),
+                    Float.parseFloat(plist.getValue("amount")),
+                    plist.getValue("time"));
         } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("Invalid format for expenditure amount");
+            throw new MindMyMoneyException("Invalid number for amount during deserialization of " + serialized);
         }
     }
 }

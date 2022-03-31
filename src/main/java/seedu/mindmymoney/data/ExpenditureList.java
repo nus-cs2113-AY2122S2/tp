@@ -1,8 +1,15 @@
 package seedu.mindmymoney.data;
 
+import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import static seedu.mindmymoney.helper.SerializerFunctions.SERIALIZATION_EXPENDITURE_END_MARKER;
+import static seedu.mindmymoney.helper.SerializerFunctions.SERIALIZATION_EXPENDITURE_START_MARKER;
+import static seedu.mindmymoney.helper.SerializerFunctions.addListToStringBuilder;
+import static seedu.mindmymoney.helper.SerializerFunctions.convertInputToList;
 
 /**
  * Container for expenditure lists.
@@ -72,5 +79,33 @@ public class ExpenditureList {
      */
     public void set(int index, Expenditure item) {
         expenditureListArray.set(index,item);
+    }
+
+    /**
+     * Converts this ExpenditureList into a machine-readable format.
+     * @return The serialized ExpenditureList
+     */
+    public String serialize() {
+        StringBuilder sb = new StringBuilder();
+        addListToStringBuilder(SERIALIZATION_EXPENDITURE_START_MARKER,
+                SERIALIZATION_EXPENDITURE_END_MARKER,
+                expenditureListArray,
+                sb);
+        return sb.toString();
+    }
+
+    /**
+     * Reads a serialized ExpenditureList from the scanner.
+     * @param scanner A scanner
+     * @returns An ExpenditureList.
+     * @throws MindMyMoneyException if the format is invalid.
+     */
+    public static ExpenditureList deserializeFrom(Scanner scanner) throws MindMyMoneyException {
+        ExpenditureList savedExpenditureList = new ExpenditureList();
+        savedExpenditureList.expenditureListArray = convertInputToList(
+                SERIALIZATION_EXPENDITURE_START_MARKER,
+                SERIALIZATION_EXPENDITURE_END_MARKER,
+                scanner, Expenditure::deserialize);
+        return savedExpenditureList;
     }
 }

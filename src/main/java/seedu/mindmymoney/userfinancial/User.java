@@ -1,8 +1,11 @@
 package seedu.mindmymoney.userfinancial;
 
+import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
+
+import java.util.Scanner;
 
 /**
  * Represents the user.
@@ -45,4 +48,35 @@ public class User {
     public IncomeList getIncomeListArray() {
         return incomeListArray;
     }
+
+    /**
+     * Returns a String representation of this user in a machine-readable format.
+     * @return A serialized User.
+     */
+    public String serialize() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(expenditureListArray.serialize());
+        sb.append(creditCardListArray.serialize());
+        sb.append(incomeListArray.serialize());
+        return sb.toString();
+    }
+
+
+    /**
+     * Converts the output of User#serialized back into a User. This method reads from
+     * a Scanner
+     * @param scanner A Scanner from which to read a serialized User.
+     * @return The User.
+     * @throws MindMyMoneyException if the format is incorrect.
+     */
+    public static User deserializeFrom(Scanner scanner) throws MindMyMoneyException {
+        User savedUser = new User();
+
+        savedUser.setExpenditureListArray(ExpenditureList.deserializeFrom(scanner));
+        savedUser.setCreditCardListArray(CreditCardList.deserializeFrom(scanner));
+        savedUser.setIncomeListArray(IncomeList.deserializeFrom(scanner));
+
+        return savedUser;
+    }
+
 }
