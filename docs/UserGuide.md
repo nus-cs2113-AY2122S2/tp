@@ -496,12 +496,14 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <hr>
 
 ## _Group Management_
-> A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.
+> A group represents one or more individuals. Several commands use groups to quickly identify a group of individual
+  persons without having to manually enter their details one by one.
 
 <br>
 
 ### Creating a group: `group /create`
-Creates a new group so that you do not to always enter the same persons' particulars every session.
+Creates a new group so that you do not have to always enter the same persons' particulars for every session that is
+participated by the same group of persons.
 
 > Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 >
@@ -553,9 +555,9 @@ Deletes an existing group so that you can remove groups that you do not need.
 ### Editing a group: `group /edit`
 Edits an existing group so that you can change details of a group.<br>
 
->Format: `group /edit /gid [GROUP_ID] [</n [GORUP_NAME]>] [</pl [NAME1 NAME2...]>]`
+>Format: `group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]`
 >* `[GROUP_ID]` refers to the unique identifier of the group.
->    * The unique identifier for a gorup can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
+>    * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
 
 <br>
 
