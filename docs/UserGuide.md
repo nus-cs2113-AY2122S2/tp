@@ -160,7 +160,7 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
   <br>
 
 ### Deleting a session: `session /delete`
-Deletes an existing session so that you can remove sessions that you do not need.<br>
+Deletes an existing session so that you can remove sessions that you no longer need.<br>
 
 >Format: `session /delete /sid [SESSION_ID]`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
@@ -184,7 +184,7 @@ Deletes an existing session so that you can remove sessions that you do not need
   <br>
 
 ### Editing a session: `session /edit`
-Edits an existing session so that you can change details of a session.<br>
+Edits an existing session so that you can change the details of a session.<br>
 
 >Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
@@ -330,7 +330,7 @@ There are 2 ways that you can create an activity:
   <br>
 
 ### Deleting an activity: `activity /delete`
-Deletes an existing activity from a particular session so that you can remove activities that you do not need.<br>
+Deletes an existing activity from a particular session so that you can remove activities that you no longer need.<br>
 
 >Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >
@@ -358,7 +358,7 @@ Deletes an existing activity from a particular session so that you can remove ac
   <br>
 
 ### Editing an activity: `activity /edit`
-Edits an existing activity so that you can change details of an activity.<br>
+Edits an existing activity so that you can change the details of an activity.<br>
 
 There are 2 ways that you can edit an activity:
 1. Record the total cost to be split amongst everyone involved
@@ -410,8 +410,8 @@ There are 2 ways that you can edit an activity:
 <br>
 
 **Example**
-- An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1, part of 
-  a session with a `SESSION_ID` of 1. It was named *Lunch* with Alice and Bob.<br>
+- An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1 in 
+  a session with a `SESSION_ID` of 1. It is named *Lunch* with Alice and Bob.<br>
   Edits the activity's name, payer, overall cost, GST percentage and service charge. List of participants remains
   unchanged.<br><br>
   `activity /edit /sid 1 /aid 1 /n Dinner /p Bob /i Alice Bob /co 30 /gst 7 /sc 10`<br><br>
@@ -533,7 +533,7 @@ participated by the same group of persons.
   <br>
 
 ### Deleting a group: `group /delete`
-Deletes an existing group so that you can remove groups that you do not need.
+Deletes an existing group so that you can remove groups that you no longer need.
 
 > Format: `group /delete /gid [GROUP_ID]`
 >
@@ -558,7 +558,7 @@ Deletes an existing group so that you can remove groups that you do not need.
   <br>
 
 ### Editing a group: `group /edit`
-Edits an existing group so that you can change details of a group.<br>
+Edits an existing group so that you can change the details of a group.<br>
 
 >Format: `group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]`
 >* `[GROUP_ID]` refers to the unique identifier of the group.
@@ -569,7 +569,9 @@ Edits an existing group so that you can change details of a group.<br>
 > **💡 Notes:**
 > - A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
 > - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
-> - There are 2 editable fields: group name and the people involved in the session.
+> - There are 2 editable fields: group name and the persons in the group.
+>  - At least 1 field has to be edited for the command to run.
+>  - More than 1 field can be edited in a single run of the command.
 >
 > **⚠️Warning:**
 > - This action is irreversible. The group is edited immediately after entering this command.
