@@ -1,6 +1,7 @@
 # Developer Guide
 ## Contents
 * [Acknowledgements](#acknowledgements)
+* [Introduction](#introduction)
 * [Design](#design)
     * [Architecture](#architecture)
     * [Manager Component](#manager-component)
@@ -9,18 +10,21 @@
     * [Storage Component](#storage-component)
     * [Parser Component](#parser-component)
     * [Command Component](#command-component)
-* Implementation
+* [Implementation](#implementation)
     * [Add a session](#add-a-session)
     * [Remove a session](#remove-a-session)
+    * [Edit a session](#edit-a-session)
     * [View a session](#view-a-session)
     * [List all sessions](#list-sessions)
     * [Settle a session](#settle-a-session)
     * [Add an activity](#add-an-activity)
     * [Remove an activity](#remove-an-activity)
+    * [Edit an activity](#edit-an-activity)
     * [View an activity](#view-an-activity)
     * [List all activities](#list-activities)
     * [Add a group](#add-a-group)
     * [Remove a group](#remove-a-group)
+    * [Edit a group](#edit-a-group)
     * [View a group](#view-a-group)
     * [List all groups](#list-groups)
 * [Project Scope](#product-scope)
@@ -28,9 +32,21 @@
 * [Non-Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
 
-
 ## Acknowledgements
 * Address Book (Level-3) - Provide samples of User Guide(UG) and Developer Guide(DG)
+
+## Introduction
+
+### How to use this developer guide?
+* At the start of the developer guide, SplitLah is explained as different components.
+* These components are divided into **8 components**: [Manager Component](#manager-component)
+[Profile Component](#profile-component), [TextUI Component](#textui-component),
+[Storage Component](#storage-component), [Parser Component](#parser-component) and [Command Component](#command-component)
+* Each component has its own section in this guide explaining them in greater detail.
+* There is also a [diagram](#interaction-between-components) that shows the inner workings of how each component interacts with each other inside SplitLah.
+* SplitLah supports a total of **18 commands**. However, in this developer guide, we would not explain in detail how the `help` and `exit` command works. 
+To view the usages of SplitLah's commands please refer to our [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html).
+* The explanation of each command starts [here](#implementation).
 
 ## Design
 ### Architecture
@@ -56,12 +72,11 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 * `Command`
     * Defines how a command is executed.
 
-**Interaction between components**
+### Interaction between components
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
 The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts.
 The diagram depicts a scenario where a user attempts to create a session.
-
 
 
 ### SplitLah Component
@@ -271,6 +286,8 @@ session unique identifier from the list of sessions.
 7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
 
+### Edit a session
+
 ### View a session
 **API reference:** [`SessionViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
 
@@ -356,6 +373,7 @@ The general workflow of the `session /summary` command is as follows:
 
 ### Add an activity
 ### Remove an activity
+### Edit an activity
 ### View an activity
 
 ### List activities
@@ -412,6 +430,8 @@ when the user invokes the `group /delete` command.
 ![Delete Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupDeleteCommand.drawio.png)
 <br>
 <br>
+
+### Edit a group
 
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
