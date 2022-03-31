@@ -30,16 +30,19 @@ Expected outcome:
 Here is the list of commands available:
 __________________________________________________________________________________________________________
 1. To add a user: add_user [Name]
-2. To add a lesson: add_lesson n/[Name] t/[Titile] d/[Day] st/[StartTime] et/[EndTime] m/[Mode]
+2. To add a lesson: add_lesson n/[Name] t/[Title] d/[Day] st/[StartTime] et/[EndTime] m/[Mode]
 3. To add a meeting: add_meeting t/[Title] d/[Day] st/[StartTime] et/[EndTime] m/[Mode]
 4. To delete a lesson: delete n/[Name] i/[Index]
-5. To list all lessons: list all
-6. To list a user's lessons: list [Name]
-7. To find free timeslots: free
-8. To find free timeslots given a minimum duration: free [duration]
-9. To clear all entries: clear all
-10. To clear all entries: clear [Name]
-11. To exit the application: exit
+5. To list all events: list all
+6. To list a user's events: list [Name]
+7. To list all lessons: list_lesson all
+8. To list a user's lessons: list_lesson [Name]
+9. To list all meetings: list_meeting all
+10. To find free timeslots: free
+11. To find free timeslots given a minimum duration: free [duration]
+12. To clear all entries: clear all
+13. To clear all entries: clear [Name]
+14. To exit the application: exit
 __________________________________________________________________________________________________________
 ```
 
@@ -186,7 +189,7 @@ The following event has been deleted from your timetable:
 ### Editing an event: `edit`
 Edits an event from the user's specified timetable based on the user input 
 
-**Format:** ` delete n/NAME i/INDEX t/TITLE d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`
+**Format:** ` edit n/NAME i/INDEX t/TITLE d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`
 
 * Required parameters: `NAME` and `INDEX`
 * Optional parameters: `TITLE`, `DAY_OF_WEEK`, `START_TIME`, `END_TIME`, `MODE`
@@ -195,11 +198,12 @@ Edits an event from the user's specified timetable based on the user input
 
 Example of usage:
 
-`edit n/John i/1 `
+`edit n/John i/1 t/CS2040 d/Monday m/physical`
 
 Expected outcome:
 ```
-
+The event has been updated to the following:
+[L] TITLE: cs2040		DAY: monday		START: 1230		END: 1330		MODE: physical
 ```
 
 

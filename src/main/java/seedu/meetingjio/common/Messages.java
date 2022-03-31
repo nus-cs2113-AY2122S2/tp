@@ -56,11 +56,11 @@ public class Messages {
             + "7. " + MESSAGE_LIST_ALL_LESSONS
             + "8. " + MESSAGE_LIST_USER_LESSONS
             + "9. " + MESSAGE_LIST_ALL_MEETINGS
-            + "7. " + MESSAGE_FREE_GENERIC_FORMAT
-            + "8. " + MESSAGE_FREE_SPECIFIC_FORMAT
-            + "9. " + MESSAGE_CLEAR_ALL_FORMAT
-            + "10. " + MESSAGE_CLEAR_USER_FORMAT
-            + "11. " + MESSAGE_EXIT_FORMAT
+            + "10. " + MESSAGE_FREE_GENERIC_FORMAT
+            + "11. " + MESSAGE_FREE_SPECIFIC_FORMAT
+            + "12. " + MESSAGE_CLEAR_ALL_FORMAT
+            + "13. " + MESSAGE_CLEAR_USER_FORMAT
+            + "14. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
 
     public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully";
