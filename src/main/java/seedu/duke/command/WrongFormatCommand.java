@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.Packages;
-import seedu.duke.Reservations;
 
 public class WrongFormatCommand extends Command {
 
