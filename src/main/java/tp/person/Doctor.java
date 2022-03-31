@@ -1,4 +1,4 @@
-package tp.person;
+package java.person;
 
 public class Doctor extends Person {
     protected boolean isOnDuty;

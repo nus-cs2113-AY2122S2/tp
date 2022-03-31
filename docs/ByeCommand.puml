@@ -2,12 +2,20 @@
 'https://plantuml.com/sequence-diagram
 
 
-User -> ":Duke": bye
-":Duke" -> ":parser": getCommand()
-":parser" --> ":Duke": fullCommand
-":Duke" -> ":Ui": sayGoodbye()
-":Ui" --> ":Duke": Goodbye message
-":Duke" --> User: Goodbye message
+User -> ":IHospital": bye
+":IHospital" -> ":parser": getCommand()
+":parser" --> ":IHospital": fullCommand
+
+":IHospital" -> ":DoctorStorage": saveDoctorList(doctors)
+":DoctorStorage" --> ":IHospital"
+":IHospital" -> ":PatientStorage": savePatientList(patients)
+":PatientStorage" --> ":IHospital"
+":IHospital" -> ":AppointmentStorage": saveAppointmentList(appointments)
+":AppointmentStorage" --> ":IHospital"
+
+":IHospital" -> ":Ui": sayGoodbye()
+":Ui" --> ":IHospital": Goodbye message
+":IHospital" --> User: Goodbye message
 
 
 @enduml

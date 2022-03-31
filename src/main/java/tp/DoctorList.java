@@ -29,6 +29,10 @@ public class DoctorList {
                                  + " doctors recorded in the system." + System.lineSeparator() + boundary);
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public void deleteDoctor(int index) {
         System.out.println(boundary + "Noted. I've removed this doctor:");
         System.out.println(doctors.get(index - 1));

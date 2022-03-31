@@ -1,10 +1,9 @@
 package tp;
 
-public class DeleteDoctorCommand extends Command {
-    private final int index;
+public class SortAppointmentByTimeCommand extends Command {
 
-    public DeleteDoctorCommand(int index) {
-        this.index = index;
+    public SortAppointmentByTimeCommand() {
+
     }
 
     @Override
@@ -12,6 +11,6 @@ public class DeleteDoctorCommand extends Command {
                         AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                         PatientStorage patientStorage,
                         AppointmentStorage appointmentStorage) throws IHospitalException {
-        doctorList.deleteDoctor(index);
+        appointmentList.sortByTime();
     }
 }

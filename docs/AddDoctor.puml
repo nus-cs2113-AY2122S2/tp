@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+User -> ":IHospital": add doctor /id 1234 /n john /ph 12341234 /e 1234@gmail.com
+":IHospital" -> ":Parser": parse(add doctor /id 1234 /n john /ph 12341234 /e 1234@gmail.com)
+":Parser" -> ":AddDoctorCommand": AddDoctorCommand("1234", "john", "12341234", "1234@gmail.com", false)
+":Parser" <-- ":AddDoctorCommand": AddDoctorCommand
+":IHospital" <-- ":Parser": AddDoctorCommand
+
+":IHospital" -> ":AddDoctorCommand": execute()
+":AddDoctorCommand" -> "doctor:Doctor": Doctor("1234", "john", "12341234", "1234@gmail.com")
+"doctor:Doctor" --> ":AddDoctorCommand": doctor
+":AddDoctorCommand" -> "doctorList:DoctorList": addDoctor(doctor)
+"doctorList:DoctorList" --> ":AddDoctorCommand"
+":IHospital" <-- ":AddDoctorCommand"
+User <-- ":IHospital"
+@enduml

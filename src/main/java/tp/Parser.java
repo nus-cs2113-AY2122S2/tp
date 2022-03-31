@@ -36,6 +36,13 @@ public class Parser {
                 System.out.println("The input format of the doctor information is wrong.");
             }
 
+        } else if (fullCommand.contains("get") && fullCommand.contains("appointment")) {
+            //get appointment /d 123456
+            String dummy = fullCommand.trim();
+            String id =  dummy.substring(dummy.indexOf("/d") + 3);
+            return new GetAppointmentsOfDoctorCommand(id);
+        } else if (fullCommand.contains("sort appointment")) {
+            return new SortAppointmentByTimeCommand();
         } else if (fullCommand.contains("add patient")) {
             String id;
             String dummy = fullCommand.trim();
@@ -92,8 +99,11 @@ public class Parser {
             return new ListAppointmentListCommand();
         } else if (fullCommand.contains("list patient")) {
             return new ListPatientListCommand();
-        } else
+        } else if (fullCommand.contains("help")) {
+            return new HelpCommand();
+        } else {
             throw new IHospitalException("Invalid command given");
+        }
 
         return null;
     }
