@@ -204,10 +204,10 @@ Edits an existing session so that you can change the details of a session.<br>
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 >- The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >  - Example: `Alice Tan` is not allowed.
->- There are 3 editable fields: session name, session date and the persons involved in the session.
+>- There are 3 editable fields: _session name_, _session date_ and the _list of participants_ in the session.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
->- When editing the persons involved, existing participants must be included in the command.
+>- When editing the _list of participants_, existing participants must be included in the command.
 >  - Example: If the session previously created had Alice and Bob with session unique identifier of 1 
 >    and you wish to edit it to include Charlie, a valid edit command would be
      `session /edit /sid 1 /pl Alice Bob Charlie`.
@@ -579,7 +579,7 @@ Edits an existing group so that you can change the details of a group.<br>
 > **💡 Notes:**
 > - A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
 > - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
-> - There are 2 editable fields: group name and the persons in the group.
+> - There are 2 editable fields: _group name_ and the _list of individuals_ in the group.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
 >
