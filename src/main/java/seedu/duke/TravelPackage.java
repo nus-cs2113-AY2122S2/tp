@@ -1,21 +1,24 @@
 package seedu.duke;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TravelPackage {
     public static final String EXAMPLENAME = "Switzerland - Conquer Summits";
     public static final int EXAMPLEID = 999;
-    public static final String EXAMPLESTART = "";
-    public static final String EXAMPLEEND = "";
+    public static final String EXAMPLESTART = "13/09/2022";
+    public static final String EXAMPLEEND = "22/10/2022";
     public static final String EXAMPLEHOTEL = "EXAMPLE HOTEL";
     public static final double EXAMPLEPRICE = 99.99;
     public static final String EXAMPLECOUNTRY = "Switzerland";
     public static final int EXAMPLEMAX = 10;
 
+    private static DateTimeFormatter printFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
     private final String name;
     private final int id;
-    private final String startDate;
-    private final String endDate;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
     private final String hotel;
     private final double price;
     private final String country;
@@ -23,11 +26,10 @@ public class TravelPackage {
     private int numParticipants;
     private Reservations reservationList;
 
-    public TravelPackage(String name, int id, String startDate, String endDate,
+    public TravelPackage(String name, int id, LocalDate startDate, LocalDate endDate,
             String hotel, double price, String country, int maxParticipants) {
         this.name = name;
         this.id = id;
-        // this.period = [startDate,endDate];
         this.startDate = startDate;
         this.endDate = endDate;
         this.hotel = hotel;
@@ -37,11 +39,11 @@ public class TravelPackage {
         this.numParticipants = 0;
         this.reservationList = new Reservations();
     }
-    public TravelPackage(String name, int id, String startDate, String endDate,
-                         String hotel, double price, String country, int maxParticipants, int numParticipants) {
+
+    public TravelPackage(String name, int id, LocalDate startDate, LocalDate endDate,
+            String hotel, double price, String country, int maxParticipants, int numParticipants) {
         this.name = name;
         this.id = id;
-        // this.period = [startDate,endDate];
         this.startDate = startDate;
         this.endDate = endDate;
         this.hotel = hotel;
@@ -65,11 +67,11 @@ public class TravelPackage {
     }
 
     public String getStartDate() {
-        return this.startDate;
+        return this.startDate.format(printFormat);
     }
 
     public String getEndDate() {
-        return this.endDate;
+        return this.endDate.format(printFormat);
     }
 
     public String getHotel() {
@@ -88,20 +90,21 @@ public class TravelPackage {
         return this.maxParticipants;
     }
 
-    public int getNumParticipants() {return this.numParticipants;}
+    public int getNumParticipants() {
+        return this.numParticipants;
+    }
 
     public Reservations getReservationList() {
         return this.reservationList;
     };
 
     public void addParticipants(int addParticipants) {
-            this.numParticipants = this.numParticipants + addParticipants;
+        this.numParticipants = this.numParticipants + addParticipants;
     }
 
     public void removeParticipants(int removeParticipants) {
-            this.numParticipants = this.numParticipants - removeParticipants;
+        this.numParticipants = this.numParticipants - removeParticipants;
     }
-
 
     public void setReservationList(Reservations r) {
         this.reservationList = r;
@@ -115,8 +118,8 @@ public class TravelPackage {
                 + this.price + "\nHotel: "
                 + this.hotel + "\nVacancies Filled: "
                 + this.numParticipants + "/" + this.maxParticipants + "\nTravel Period: "
-                + this.startDate + "-" + this.endDate
-    ;}
+                + this.startDate + "-" + this.endDate;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -137,9 +140,9 @@ public class TravelPackage {
 
     }
 
-    public String saveTravelPackage(){
+    public String saveTravelPackage() {
         String str = toSave() + "$";
-        for (int i=0; i<reservationList.getReservationSize(); i++){
+        for (int i = 0; i < reservationList.getReservationSize(); i++) {
             str += reservationList.getReservation(i).toSave() + "%";
         }
         return str;
@@ -147,12 +150,10 @@ public class TravelPackage {
 
     public String toSave() {
         return name + " | " + Integer.toString(id) +
-        " | " + startDate + " | " + endDate + " | " +
-        hotel + " | " + Double.toString(price) + " | " + country + " | " +
-        Integer.toString(maxParticipants)
-        + " | " + Integer.toString(numParticipants);
+                " | " + startDate.format(Parser.PARSE_FORMAT) + " | " + endDate.format(Parser.PARSE_FORMAT) + " | " +
+                hotel + " | " + Double.toString(price) + " | " + country + " | " +
+                Integer.toString(maxParticipants)
+                + " | " + Integer.toString(numParticipants);
     }
-
-
 
 }

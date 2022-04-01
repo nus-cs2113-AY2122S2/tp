@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.ByeCommand;
 import seedu.duke.command.Command;
@@ -41,13 +43,14 @@ public class ParserTest {
             return new TravelPackage(
                     TravelPackage.EXAMPLENAME,
                     TravelPackage.EXAMPLEID,
-                    TravelPackage.EXAMPLESTART,
-                    TravelPackage.EXAMPLEEND,
+                    LocalDate.from(Parser.PARSE_FORMAT.parse(TravelPackage.EXAMPLESTART)),
+                    LocalDate.from(Parser.PARSE_FORMAT.parse(TravelPackage.EXAMPLEEND)),
                     TravelPackage.EXAMPLEHOTEL,
                     TravelPackage.EXAMPLEPRICE,
                     TravelPackage.EXAMPLECOUNTRY,
                     TravelPackage.EXAMPLEMAX);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException("test person data should be valid by definition");
         }
     }
