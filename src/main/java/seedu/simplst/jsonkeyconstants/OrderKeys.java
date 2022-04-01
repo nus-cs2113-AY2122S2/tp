@@ -1,7 +1,7 @@
-package seedu.simplst.JsonKeyConstants;
+package seedu.simplst.jsonkeyconstants;
 
-public class OrderlinesKeys {
-    public static String orderlineId = "OLID";
+public class OrderKeys {
+    public static String orderId = "OID";
     public static String receiver = "R";
     public static String shippingAddress = "SA";
     public static String orderlines = "OL";

@@ -2,42 +2,42 @@ package seedu.simplst;
 
 public class Display {
 
-//    public static void addGood(String id, String name, String qty,
-//                               String desc, ArrayList<Orderline> userOrderlines) throws WrongCommandException {
-//        if (id.isBlank() || name.isBlank() || qty.isBlank()) {
-//            throw new WrongCommandException("add", true);
-//        }
-//        try {
-//            Orderline orderline = new Orderline(
-//                    Integer.parseInt(id),
-//                    name,
-//                    Integer.parseInt(qty),
-//                    desc);
-//            userOrderlines.add(orderline);
-//            System.out.printf("%d %s %s added\n", orderline.getQuantity(), orderline,
-//                    checkPlural(orderline.getQuantity()));
-//        } catch (NumberFormatException e) {
-//            throw new WrongCommandException("add", true);
-//        }
-//    }
+    //    public static void addGood(String id, String name, String qty,
+    //                               String desc, ArrayList<Orderline> userOrderlines) throws WrongCommandException {
+    //        if (id.isBlank() || name.isBlank() || qty.isBlank()) {
+    //            throw new WrongCommandException("add", true);
+    //        }
+    //        try {
+    //            Orderline orderline = new Orderline(
+    //                    Integer.parseInt(id),
+    //                    name,
+    //                    Integer.parseInt(qty),
+    //                    desc);
+    //            userOrderlines.add(orderline);
+    //            System.out.printf("%d %s %s added\n", orderline.getQuantity(), orderline,
+    //                    checkPlural(orderline.getQuantity()));
+    //        } catch (NumberFormatException e) {
+    //            throw new WrongCommandException("add", true);
+    //        }
+    //    }
 
     // Function to print grammar for statements to print
-//    public static String checkPlural(int numberOfGoods) {
-//        if (numberOfGoods <= 1) {
-//            return "is ";
-//        } else {
-//            return "are ";
-//        }
-//    }
+    //    public static String checkPlural(int numberOfGoods) {
+    //        if (numberOfGoods <= 1) {
+    //            return "is ";
+    //        } else {
+    //            return "are ";
+    //        }
+    //    }
 
 
     // successful output
-    public static void inventoryGoodQtyRemoved(Float qty, String goodName){
+    public static void inventoryGoodQtyRemoved(Float qty, String goodName) {
         System.out.println(qty + " of " + goodName + " has been removed.");
     }
 
-    public static void orderlineCheckedOff(String unitGoodName, String orderId){
-        System.out.println(unitGoodName + "of order " + orderId +  " has been removed.");
+    public static void orderlineCheckedOff(String unitGoodName, String orderId) {
+        System.out.println(unitGoodName + "of order " + orderId + " has been removed.");
     }
 
 
@@ -45,28 +45,28 @@ public class Display {
         System.out.println("Storage capacity: " + percentageCapacity + '%');
     }
 
-    public static void warehouseStateSaved(String filepath){
+    public static void warehouseStateSaved(String filepath) {
         System.out.println("Warehouse information succesfully stored in " + filepath);
     }
 
     // error outputs
-    public static void nonExistentGood(){
+    public static void nonExistentGood() {
         System.out.println("The goods you are trying to remove are not on the current list. "
                 + "Please try another id or add the goods first.");
     }
 
-    public static void qtyRemoveMoreThanExists(){
+    public static void qtyRemoveMoreThanExists() {
         System.out.println("The quantity input is larger than the current quantity of the goods. "
                 + "Please enter the command again with a smaller quantity.");
     }
 
     // exception outputs
-    public static void goodDontExistException(){
+    public static void goodDontExistException() {
         System.out.println("This type of Good you are trying to remove does not exist.\n"
                 + "Please type a valid id.");
     }
 
-    public static void serializeException(String obj){
+    public static void serializeException(String obj) {
         System.out.println("The following " + obj + " has trouble serializing."); // perhaps reattempt reserializing?
     }
 
@@ -87,10 +87,9 @@ public class Display {
                 + "* Storage capacity of warehouse: `storage-capacity`");
     }
 
-    public static void tryCommandAgain(){
+    public static void tryCommandAgain() {
         System.out.println("Please enter the command again.");
     }
-
 
 
 }

@@ -14,11 +14,11 @@ public class Orderline extends Good {
         super(unitGood, id, quantity);
     }
 
-    public void checkOff(){
+    public void checkOff() {
         this.isCheckedOff = true;
     }
 
-    public int getQuantityFulfilled(){
+    public int getQuantityFulfilled() {
         return quantityFulfilled;
     }
 
@@ -27,7 +27,7 @@ public class Orderline extends Good {
     }
 
     //    public void setUnitGoodByName(String name){
-//
-//    }
+    //
+    //    }
 
 }

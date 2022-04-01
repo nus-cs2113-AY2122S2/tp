@@ -1,6 +1,11 @@
 package seedu.simplst;
 
-import seedu.simplst.CommandParsers.*;
+import seedu.simplst.parsers.AddParser;
+import seedu.simplst.parsers.FindParser;
+import seedu.simplst.parsers.ListParser;
+import seedu.simplst.parsers.RemoveParser;
+import seedu.simplst.parsers.TotalParser;
+import seedu.simplst.parsers.ViewParser;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
 import util.exceptions.NullException;
@@ -11,7 +16,7 @@ import java.util.Scanner;
 public class UserInterface {
     private Warehouse warehouse;
 
-    private ListParser  listParser;
+    private ListParser listParser;
     private ViewParser viewParser;
     private AddParser addParser;
     private RemoveParser removeParser;
@@ -93,7 +98,7 @@ public class UserInterface {
                 Display.tryCommandAgain();
             } catch (InvalidFileException e) {
                 e.printStackTrace();
-            } catch (InvalidObjectType e){
+            } catch (InvalidObjectType e) {
                 Display.tryCommandAgain();
             }
             System.out.println("Another command?");

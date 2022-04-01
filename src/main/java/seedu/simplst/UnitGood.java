@@ -5,10 +5,9 @@ import util.exceptions.UnitTestException;
 import java.util.ArrayList;
 
 /**
- * Unit Goods Class will define a single object of a specified Good
+ * Unit Goods Class will define a single object of a specified Good.
  * This is akin to the blueprint of the Good to be stored in the
  * warehouse
- *
  * This can be used in future optimisation by being able to estimate
  * how many of certain goods can be procured based on the Unit Good
  * specifications.
@@ -27,7 +26,7 @@ public class UnitGood {
             this.capacity = convertCapacity(capacity);
         } catch (UnitTestException e) {
             System.out.println("Capacity Added is not either Small, Medium, Large. "
-            + "Default set to Medium");
+                    + "Default set to Medium");
             this.capacity = Capacity.MEDIUM;
         }
     }

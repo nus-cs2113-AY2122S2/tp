@@ -1,4 +1,4 @@
-package seedu.simplst.CommandParsers;
+package seedu.simplst.parsers;
 
 import seedu.simplst.Regex;
 import seedu.simplst.Warehouse;

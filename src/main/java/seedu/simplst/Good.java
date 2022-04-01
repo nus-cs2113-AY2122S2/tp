@@ -3,11 +3,10 @@ package seedu.simplst;
 import util.exceptions.LargeQuantityException;
 
 /**
- * Goods Class is the extension of a Unit Good
+ * Goods Class is the extension of a Unit Good.
  * It will hold details from a Unit Good as the details for the
  * item. A good will also hold the current quantity stored in the
  * warehouse currently.
- *
  * This is crucial as a heuristic for calculating space in the warehouse.
  */
 public class Good extends UnitGood {
@@ -24,8 +23,7 @@ public class Good extends UnitGood {
     }
 
     /**
-     * Removes specified quantity from current Good in
-     * the Warehouse
+     * Removes specified quantity from current Good in the Warehouse.
      *
      * @param quantity the quantity to remove
      * @throws LargeQuantityException when quantity to remove exceeds current quantity
@@ -51,7 +49,7 @@ public class Good extends UnitGood {
     }
 
     /**
-     * Calculate the Capacity Taken in terms of arbitrary units
+     * Calculate the Capacity Taken in terms of arbitrary units.
      * Calculated by arbitrary_unit * quantity_of_good
      *
      * @return Capacity in warehouse
@@ -69,6 +67,7 @@ public class Good extends UnitGood {
         case SMALL:
             capacityUnit = 1;
             break;
+        default:
         }
 
         return capacityUnit * quantity;

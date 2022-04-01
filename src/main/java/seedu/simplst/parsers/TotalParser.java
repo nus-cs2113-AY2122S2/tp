@@ -1,22 +1,23 @@
-package seedu.simplst.CommandParsers;
+package seedu.simplst.parsers;
 
 import seedu.simplst.Regex;
 import seedu.simplst.Warehouse;
 import util.exceptions.NullException;
 import util.exceptions.WrongCommandException;
 
-public class TotalParser extends CommandParser{
+public class TotalParser extends CommandParser {
     public TotalParser(Warehouse warehouse) {
         super(warehouse);
     }
 
-    protected void init_extract_params(){
+    protected void init_extract_params() {
         Regex regexMatch;
         String regex;
         regex = "(?<flag>[og])/ id/(?<id>\\d*)";
         regexMatch = new Regex(this.userInput, regex);
         this.matches = regexMatch.getGroupValues();
-    };
+    }
+
     protected void extract_params() throws WrongCommandException, NullException {
         if (matches.get("flag").equals("o")) {
             // get total orders with flag "o/"
@@ -29,5 +30,5 @@ public class TotalParser extends CommandParser{
             // wrong command exception
             throw new WrongCommandException("total", true);
         }
-    };
+    }
 }

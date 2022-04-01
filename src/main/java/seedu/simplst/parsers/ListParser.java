@@ -1,31 +1,32 @@
-package seedu.simplst.CommandParsers;
+package seedu.simplst.parsers;
 
 import seedu.simplst.Regex;
 import seedu.simplst.Warehouse;
 import util.exceptions.WrongCommandException;
 
-public class ViewParser extends CommandParser{
-    public ViewParser(Warehouse warehouse) {
+public class ListParser extends CommandParser {
+    public ListParser(Warehouse warehouse) {
         super(warehouse);
     }
 
-    protected void init_extract_params(){
+    protected void init_extract_params() {
         Regex regexMatch;
         String regex;
-        regex = "(?<flag>[og])/ id/(?<id>\\d*)";
+        regex = "(?<flag>[og])/";
         regexMatch = new Regex(this.userInput, regex);
         this.matches = regexMatch.getGroupValues();
-    };
+    }
+
     protected void extract_params() throws WrongCommandException {
         if (matches.get("flag").equals("o")) {
-            // view order with flag "o/"
-            warehouse.viewOrderById(matches.get("id"));
+            // list orders with flag "o/"
+            this.warehouse.listOrders();
         } else if (matches.get("flag").equals("g")) {
-            // view inventory good with flag "g/"
-            warehouse.viewGoodBySKU(matches.get("id"));
+            // list goods with flag "g/"
+            this.warehouse.listGoods(); // refers to inventory goods
         } else {
             // wrong command exception
-            throw new WrongCommandException("view", true);
+            throw new WrongCommandException("list", true);
         }
-    };
+    }
 }

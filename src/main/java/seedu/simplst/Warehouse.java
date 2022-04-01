@@ -3,8 +3,13 @@ package seedu.simplst;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import seedu.simplst.JsonKeyConstants.WarehouseKeys;
-import util.exceptions.*;
+import seedu.simplst.jsonkeyconstants.WarehouseKeys;
+import util.exceptions.InvalidFileException;
+import util.exceptions.InvalidObjectType;
+import util.exceptions.ItemDoesNotExistException;
+import util.exceptions.LargeQuantityException;
+import util.exceptions.UnitTestException;
+import util.exceptions.WrongCommandException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +25,7 @@ public class Warehouse {
 
 
     // In the case where they want to mass add a bunch of goods as part of setup
-    public void addUnitGoodToInventory(String sku, String name, String description,  String capacity)
+    public void addUnitGoodToInventory(String sku, String name, String description, String capacity)
             throws UnitTestException {
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
         unitGoodHashMap.put(sku, unitGood);
@@ -50,16 +55,21 @@ public class Warehouse {
         }
     }
 
-    public boolean isSKUInInventory(String SKU) {
-        return goodList.containsKey(SKU);
+    // Meant for batch adding goods, could be used with UI if i create a param map.
+    public void addGoodToInventory(int id, Object goodObject) {
+
     }
 
-    private Good getInventoryGoodBySKU(String SKU) {
-        return goodList.get(SKU);
+    public boolean isSkuInInventory(String sku) {
+        return goodList.containsKey(sku);
+    }
+
+    private Good getInventoryGoodBySku(String sku) {
+        return goodList.get(sku);
     }
 
     /**
-     * Used to count the number of unique goods in the warehouse
+     * Used to count the number of unique goods in the warehouse.
      *
      * @return number of unique goods
      */
@@ -101,7 +111,7 @@ public class Warehouse {
         }
     }
 
-    public void viewGoodBySKU(String sku) {
+    public void viewGoodBySku(String sku) {
         try {
             //            Integer idToBeViewed = Integer.parseInt(SKU);
             //            for (Order order : orderLists) {
@@ -115,8 +125,8 @@ public class Warehouse {
             //                    }
             //                }
             //            }
-            if (isSKUInInventory(sku)) {
-                Good curGood = getInventoryGoodBySKU(sku);
+            if (isSkuInInventory(sku)) {
+                Good curGood = getInventoryGoodBySku(sku);
                 UnitGood curUG = unitGoodHashMap.get(sku);
                 System.out.println("Viewing item with SKU " + sku);
                 System.out.println("Item name: " + curUG.getName());
@@ -206,8 +216,9 @@ public class Warehouse {
     }
 
     public void removeGoodFromInventory(String unitGoodId) throws ItemDoesNotExistException {
-        if (!goodList.containsKey(unitGoodId))
+        if (!goodList.containsKey(unitGoodId)) {
             throw new ItemDoesNotExistException();
+        }
         goodList.remove(unitGoodId);
     }
 
@@ -216,12 +227,12 @@ public class Warehouse {
         if (!goodList.containsKey(sku)) {
             throw new ItemDoesNotExistException();
         }
-        int qty_num = Integer.parseInt(qty);
-        goodList.get(sku).removeQuantity(qty_num);
+        int qtyNum = Integer.parseInt(qty);
+        goodList.get(sku).removeQuantity(qtyNum);
     }
 
     /**
-     * Removes the entire good
+     * Removes the entire good.
      *
      * @param sku sku of good to remove
      */
@@ -234,7 +245,7 @@ public class Warehouse {
     }
 
     /**
-     * Removes a specific quantity of specified good
+     * Removes a specific quantity of specified good.
      *
      * @param sku sku of good to remove
      */
@@ -298,56 +309,52 @@ public class Warehouse {
         warehouse.put(WarehouseKeys.capacityOccupied, getCapacityOccupied());
         warehouse.put(WarehouseKeys.inventoryTypeCount, uniqueInventories());
         warehouse.put(WarehouseKeys.totalCapacity, this.totalCapacity);
-        JSONArray s_ol = this.serializeOrders();
-        if (s_ol == null) {
+        JSONArray sol = this.serializeOrders();
+        if (sol == null) {
             return null;
         }
-        warehouse.put(WarehouseKeys.orderLists, s_ol);
+        warehouse.put(WarehouseKeys.orderLists, sol);
 
         return warehouse;
-    }
-
-    // Meant for batch adding goods, could be used with UI if i create a param map.
-    public void addGoodToInventory(int id, Object goodObject) {
-
     }
 
     public void batchSetOrders(String filePath) throws WrongCommandException, InvalidFileException, InvalidObjectType {
         String saveStr = LocalStorage.readSaveFile(filePath);
         // READ JSON FILE
-        JSONArray json_orders = (JSONArray) JSONValue.parse(saveStr);
+        JSONArray jsonOrders = (JSONArray) JSONValue.parse(saveStr);
         int idx = 0;
-        for (Object orderObject : json_orders) {
+        for (Object orderObject : jsonOrders) {
             addOrder(idx, orderObject);
             idx += 1;
         }
     }
 
     /**
-     * Adds all stuff in a csv or json (it's either one)
+     * Adds all stuff in a csv or json (it's either one).
      *
-     * @param filePath
-     * @throws InvalidFileException
+     * @param filePath path to file
+     * @throws InvalidFileException Invalid File
      */
     public void batchSetGoodsToInventory(String filePath) throws InvalidFileException {
         // READ JSON FILE
 
-        JSONArray json_goods = new JSONArray();
+        JSONArray jsonGoods = new JSONArray();
         int idx = 0;
-        for (Object goodObject : json_goods) {
+        for (Object goodObject : jsonGoods) {
             addGoodToInventory(idx, goodObject);
             idx += 1;
         }
     }
 
     // batch adding
-    private void addOrder(int id, Object orderObject) throws WrongCommandException, InvalidFileException, InvalidObjectType {
+    private void addOrder(int id, Object orderObject) throws
+            WrongCommandException, InvalidFileException, InvalidObjectType {
         String receiver = null;
         String shippingAddress = null;
         String toFulfilBy = null;
         String comments = null;
         if (orderObject instanceof JSONObject) {
-            JSONObject jOrderObject = (JSONObject) orderObject;
+            JSONObject jorderObject = (JSONObject) orderObject;
         } else if (orderObject instanceof Map) {
             Map orderMap = (Map) orderObject;
         } else {
@@ -368,7 +375,7 @@ public class Warehouse {
     }
 
     /**
-     * Getting the capacity left in the warehouse
+     * Getting the capacity left in the warehouse.
      *
      * @return capacity left
      */
@@ -386,7 +393,7 @@ public class Warehouse {
     }
 
     /**
-     * Getting the capacity occupied in the warehouse
+     * Getting the capacity occupied in the warehouse.
      *
      * @return capacity occupied
      */

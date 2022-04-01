@@ -1,4 +1,4 @@
-package seedu.simplst.CommandParsers;
+package seedu.simplst.parsers;
 
 import seedu.simplst.Warehouse;
 import util.exceptions.InvalidFileException;
@@ -13,18 +13,21 @@ public abstract class CommandParser {
     String userInput;
     Warehouse warehouse;
 
-    public CommandParser(Warehouse warehouse){
+    public CommandParser(Warehouse warehouse) {
         this.warehouse = warehouse;
     }
 
     protected abstract void init_extract_params();
-    protected abstract void extract_params() throws WrongCommandException, NullException, InvalidFileException, InvalidObjectType;
-//    protected abstract void validate_params();   // They need implement their own validate commands
 
-    public void parse(String userInput) throws WrongCommandException, NullException, InvalidFileException, InvalidObjectType {
+    protected abstract void extract_params() throws
+            WrongCommandException, NullException, InvalidFileException, InvalidObjectType;
+    //    protected abstract void validate_params();   // They need implement their own validate commands
+
+    public void parse(String userInput) throws
+            WrongCommandException, NullException, InvalidFileException, InvalidObjectType {
         this.userInput = userInput;
         this.init_extract_params();
-        try{
+        try {
             this.extract_params();
         } catch (InvalidObjectType e1) {
             return;
@@ -32,7 +35,7 @@ public abstract class CommandParser {
 
     }
 
-    public void paramRegexFormer(){
+    public void paramRegexFormer() {
 
     }
 
