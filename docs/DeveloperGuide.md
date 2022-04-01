@@ -341,15 +341,16 @@ The general workflow of the `session /edit` command is as follows:
    session unique identifier from the list of sessions.
    * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
    * Else the `Session` object with the specified session unique identifier is returned.
-6. The detail of how a session is updated in the reference diagram below.
-![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
+6. The detail of how a session is updated in the reference diagram below.<br>
+   ![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
 7. `SessionEditCommand#run` will check if there is an update for a new list of persons, new session or new session date.
    * If there is an update on the list of persons. It would first check if the newly provided list of persons contains duplicated names.
      * If duplicated names are detected, an error message would be printed and control is returned to `SplitLah`.
      * Else, it would call `PersonList#isSuperSet` to check if the newly supplied list of persons contain all existing persons in the session.
-     * If `PersonList#isSuperSet` returns `true`, it would then call `Session#addPerson` to add in the new list of persons.
-   * If there is an update on the session name. It would call `Session#setSessionName` to set the new session name.
-   * If there is an update on the session date. It would call `Session#setDateCreated` to set the new session date.
+     * If `PersonList#isSuperSet` returns `false`, an error message would be printed and control is returned to `SplitLah`.
+     * Else, if it returns `true` it would then call `Session#addPerson` to add in the new list of persons.
+   * If there is an update on the session name, `Session#setSessionName` is called to set the new session name.
+   * If there is an update on the session date, `Session#setDateCreated` is called to set the new session date.
 8. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
 9. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
 
