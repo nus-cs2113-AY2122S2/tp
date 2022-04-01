@@ -29,11 +29,6 @@ possible issues from arising when using the application.</p>
 
 <p class="box info">🧾  <b>Note</b>: Additional information that may be useful for you.</p>
 
-> ⚠️**Warning** : Information that you may want to pay attention to in order
-> to prevent possible issues from arising when using the application.
-
-> 🧾  **Note** : Additional information that may be useful for you.
-️
 
 ## Acknowledgements
 The following websites and codebases were referenced and adapted for our project:
@@ -50,7 +45,7 @@ The following websites and codebases were referenced and adapted for our project
 - [X] An IDE of your choice, though IntelliJ IDEA is recommended as this project is developed
 with this IDE.
 
-> 🧾 IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA. 
+<p class="box info"> 🧾 IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA.</p>
 
 ### Setting Up
 1. Fork the [WerkIt! GitHub repository](https://github.com/AY2122S2-CS2113T-T09-2/tp).
@@ -196,8 +191,8 @@ the user's input as a `String` object to `WerkIt#startContinuousUserPrompt()`. T
 `WerkIt#startContinuousUserPrompt()` calls `Parser#parseUserInput()` to parse the user's input and create an object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
 this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()`.
 
-> A detailed implementation of the parsing and creation of subclass-of-`Command` object process can be found in
-'[Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)'.
+<p class="box info">A detailed implementation of the parsing and creation of subclass-of-`Command` object process can be found in
+'[Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)'.</p>
 
 Next, `WerkIt#startContinuousUserPrompt()` calls on the `execute()` method of the subclass-of-`Command` object to
 perform the user's requested action. If the execution goes smoothly, this completes the user's inputted command.
