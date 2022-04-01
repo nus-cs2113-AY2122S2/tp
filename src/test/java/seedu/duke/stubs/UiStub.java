@@ -21,13 +21,12 @@ public class UiStub extends Ui {
      *
      * @param message Message to be displayed to user
      * */
-
      @Override
      public void showMessages(String... message) {
          Collections.addAll(outputMessages, message);
      }
 
-    public Set<String> getMessages() {
+     public Set<String> getMessages() {
         return this.outputMessages;
     }
 }
