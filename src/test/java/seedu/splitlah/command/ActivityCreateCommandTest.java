@@ -85,9 +85,6 @@ class ActivityCreateCommandTest {
      */
     @Test
     public void run_validCommand_activitySuccessfullyCreated() throws InvalidDataException {
-        Person alice = manager.getProfile().getSession(1).getPersonByName("Alice");
-        Person bob = manager.getProfile().getSession(1).getPersonByName("Bob");
-        Person charlie = manager.getProfile().getSession(1).getPersonByName("Charlie");
 
         //Case 1: Split costs evenly among 3 persons
         String userInputOne = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
@@ -97,14 +94,17 @@ class ActivityCreateCommandTest {
         assertEquals(ActivityCreateCommand.class, commandOne.getClass());
 
         //Checks that the number of activities stored increases by 1
-        int currentActivityOneId = manager.getProfile().getActivityIdTracker();
+        final int currentActivityOneId = manager.getProfile().getActivityIdTracker();
         commandOne.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
 
         //Checks that ActivityCost of all 3 persons are updated correctly
-        assertEquals(10, alice.getActivityCostOwed(2));
-        assertEquals(10, bob.getActivityCostOwed(2));
-        assertEquals(10, charlie.getActivityCostOwed(2));
+        Person aliceOne = manager.getProfile().getSession(1).getPersonByName("Alice");
+        Person bobOne = manager.getProfile().getSession(1).getPersonByName("Bob");
+        Person charlieOne = manager.getProfile().getSession(1).getPersonByName("Charlie");
+        assertEquals(10, aliceOne.getActivityCostOwed(2));
+        assertEquals(10, bobOne.getActivityCostOwed(2));
+        assertEquals(10, charlieOne.getActivityCostOwed(2));
 
         //Checks that the activityId is incremented
         int testActivityOneId = manager.getProfile().getActivityIdTracker();
@@ -118,14 +118,17 @@ class ActivityCreateCommandTest {
         assertEquals(ActivityCreateCommand.class, commandTwo.getClass());
 
         //Checks that the number of activities stored increases by 1
-        int currentActivityTwoId = manager.getProfile().getActivityIdTracker();
+        final int  currentActivityTwoId = manager.getProfile().getActivityIdTracker();
         commandTwo.run(manager);
         assertEquals(3, manager.getProfile().getSession(1).getActivityList().size());
 
         //Checks that ActivityCost of all 3 persons are updated correctly
-        assertEquals(5, alice.getActivityCostOwed(3));
-        assertEquals(10, bob.getActivityCostOwed(3));
-        assertEquals(15, charlie.getActivityCostOwed(3));
+        Person aliceTwo = manager.getProfile().getSession(1).getPersonByName("Alice");
+        Person bobTwo = manager.getProfile().getSession(1).getPersonByName("Bob");
+        Person charlieTwo = manager.getProfile().getSession(1).getPersonByName("Charlie");
+        assertEquals(5, aliceTwo.getActivityCostOwed(3));
+        assertEquals(10, bobTwo.getActivityCostOwed(3));
+        assertEquals(15, charlieTwo.getActivityCostOwed(3));
 
         //Checks that the activityId is incremented
         int testActivityTwoId = manager.getProfile().getActivityIdTracker();
