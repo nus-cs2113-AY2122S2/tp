@@ -23,30 +23,43 @@ class SessionTest {
 
     private static final int TEST_SESSION_ONE = 1;
     private static final int TEST_SESSION_TWO = 2;
+    private static final int TEST_SESSION_THREE = 3;
     private static final int TEST_ACTIVITY_ONE = 1;
     private static final int TEST_ACTIVITY_TWO = 2;
+    private static final int TEST_ACTIVITY_THREE = 3;
     private static final String CREATE_TEST_SESSION_INPUT_ONE =
             "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
     private static final String CREATE_TEST_SESSION_INPUT_TWO =
             "session /create /n Group lunch /d 17-03-2022 /pl Alice Bob";
+    private static final String CREATE_TEST_SESSION_INPUT_THREE =
+            "session /create /n Games at home /d 19-03-2022 /gid 1";
     private static final String CREATE_TEST_ACTIVITY_INPUT_ONE =
             "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
     private static final String CREATE_TEST_ACTIVITY_INPUT_TWO =
             "activity /create /sid 1 /n Dinner /p Alice /i Bob Charlie /co 30";
+    private static final String CREATE_TEST_ACTIVITY_INPUT_THREE =
+            "activity /create /sid 3 /n Order in /p Bob /i Bob Charlie /cl 15.49 14.49";
+    private static final String CREATE_TEST_GROUP_INPUT =
+            "group /create /n Besties /pl Bob Charlie";
 
     /**
      * Creates a session that is stored and managed by the Manager object.
      */
     @BeforeEach
     void setUp() {
+        Command createGroupCommand = Parser.getCommand(CREATE_TEST_GROUP_INPUT);
+        createGroupCommand.run(manager);
         Command createSessionCommandOne = Parser.getCommand(CREATE_TEST_SESSION_INPUT_ONE);
         Command createSessionCommandTwo = Parser.getCommand(CREATE_TEST_SESSION_INPUT_TWO);
+        Command createSessionCommandThree = Parser.getCommand(CREATE_TEST_SESSION_INPUT_THREE);
         createSessionCommandOne.run(manager);
         createSessionCommandTwo.run(manager);
+        createSessionCommandThree.run(manager);
 
         try {
             sessionOne = manager.getProfile().getSession(TEST_SESSION_ONE);
             sessionTwo = manager.getProfile().getSession(TEST_SESSION_TWO);
+            sessionThree = manager.getProfile().getSession(TEST_SESSION_THREE);
         } catch (InvalidDataException exception) {
             fail();
         }
@@ -418,4 +431,35 @@ class SessionTest {
         assertTrue(comparisonValue > 0);
     }
 
+    @Test
+    void toString_sessionWithoutGroup_returnsCorrectFormat() {
+        String expectedFormat = "Session Id #2 --\n"
+                + "Name: Group lunch\n"
+                + "Date: 17-03-2022\n"
+                + "Group: None\n"
+                + "Participants:\n"
+                + " 1. Alice\n"
+                + " 2. Bob\n"
+                + Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
+        assertEquals(expectedFormat, sessionTwo.toString());
+    }
+
+    @Test
+    void toString_sessionWithGroup_returnsCorrectFormat() {
+        Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_THREE);
+        createActivityCommand.run(manager);
+        String expectedFormat = "Session Id #3 --\n"
+                + "Name: Games at home\n"
+                + "Date: 19-03-2022\n"
+                + "Group: Besties\n"
+                + "Participants:\n"
+                + " 1. Bob\n"
+                + " 2. Charlie\n"
+                + "--------------------------------\n" 
+                + "# | Activities | Cost   | Payer \n"
+                + "--------------------------------\n"
+                + "1 | Order in   | $29.98 | Bob   \n"
+                + "================================";
+        assertEquals(expectedFormat, sessionThree.toString());
+    }
 }
