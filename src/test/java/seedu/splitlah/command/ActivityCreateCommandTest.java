@@ -8,7 +8,6 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 class ActivityCreateCommandTest {
 
@@ -85,7 +84,7 @@ class ActivityCreateCommandTest {
      *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_validCommand_activityListSizeBecomesTwo() throws InvalidDataException {
+    public void run_validCommand_activitySuccessfullyCreated() throws InvalidDataException {
         Person alice = manager.getProfile().getSession(1).getPersonByName("Alice");
         Person bob = manager.getProfile().getSession(1).getPersonByName("Bob");
         Person charlie = manager.getProfile().getSession(1).getPersonByName("Charlie");
