@@ -133,5 +133,29 @@ class ActivityCreateCommandTest {
         //Checks that the activityId is incremented
         int testActivityTwoId = manager.getProfile().getActivityIdTracker();
         assertEquals(currentActivityTwoId + 1, testActivityTwoId);
+
+        //Case 3: Payer not included in activity
+        String userInputThree = "activity /create /sid 1 /n Dinner /p Alice /i Bob Charlie /co 20";
+
+        //Checks that command returned is an ActivityCreateCommand object
+        Command commandThree = Parser.getCommand(userInputThree);
+        assertEquals(ActivityCreateCommand.class, commandThree.getClass());
+
+        //Checks that the number of activities stored increases by 1
+        final int  currentActivityThreeId = manager.getProfile().getActivityIdTracker();
+        commandThree.run(manager);
+        assertEquals(4, manager.getProfile().getSession(1).getActivityList().size());
+
+        //Checks that ActivityCost of all 3 persons are updated correctly
+        Person aliceThree = manager.getProfile().getSession(1).getPersonByName("Alice");
+        Person bobThree = manager.getProfile().getSession(1).getPersonByName("Bob");
+        Person charlieThree = manager.getProfile().getSession(1).getPersonByName("Charlie");
+        assertEquals(0, aliceThree.getActivityCostOwed(4));
+        assertEquals(10, bobThree.getActivityCostOwed(4));
+        assertEquals(10, charlieThree.getActivityCostOwed(4));
+
+        //Checks that the activityId is incremented
+        int testActivityThreeId = manager.getProfile().getActivityIdTracker();
+        assertEquals(currentActivityThreeId + 1, testActivityThreeId);
     }
 }
