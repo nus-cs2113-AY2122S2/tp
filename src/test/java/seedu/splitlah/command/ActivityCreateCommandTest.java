@@ -3,10 +3,12 @@ package seedu.splitlah.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ActivityCreateCommandTest {
 
@@ -35,11 +37,17 @@ class ActivityCreateCommandTest {
     @Test
     public void run_hasNameDuplicatesInInvolvedList_activityNotCreated() throws InvalidDataException {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
+
+        //Checks that command returned is an ActivityCreateCommand object
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityCreateCommand.class, command.getClass());
+
+        //Checks that the number of activities stored remains the same
         int currentActivityId = manager.getProfile().getActivityIdTracker();
         command.run(manager);
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+
+        //Checks that the activityId is not incremented
         int testActivityId = manager.getProfile().getActivityIdTracker();
         assertEquals(currentActivityId, testActivityId);
     }
@@ -54,11 +62,17 @@ class ActivityCreateCommandTest {
     @Test
     public void run_hasInvalidNameInInvolvedList_activityListSizeRemainsOne() throws InvalidDataException {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Eve Mallory /co 30";
+
+        //Checks that command returned is an ActivityCreateCommand object
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityCreateCommand.class, command.getClass());
+
+        //Checks that the number of activities stored remains the same
         int currentActivityId = manager.getProfile().getActivityIdTracker();
         command.run(manager);
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+
+        //Checks that the activityId is not incremented
         int testActivityId = manager.getProfile().getActivityIdTracker();
         assertEquals(currentActivityId, testActivityId);
     }
@@ -72,12 +86,19 @@ class ActivityCreateCommandTest {
      */
     @Test
     public void run_validCommand_activityListSizeBecomesTwo() throws InvalidDataException {
+        //Case 1: Split costs evenly among 3 persons
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
+
+        //Checks that command returned is an ActivityCreateCommand object
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityCreateCommand.class, command.getClass());
+
+        //Checks that the number of activities stored increases by 1
         int currentActivityId = manager.getProfile().getActivityIdTracker();
         command.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
+
+        //Checks that the activityId is incremented
         int testActivityId = manager.getProfile().getActivityIdTracker();
         assertEquals(currentActivityId + 1, testActivityId);
     }
