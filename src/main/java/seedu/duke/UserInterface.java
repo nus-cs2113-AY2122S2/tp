@@ -11,16 +11,22 @@ import java.util.Scanner;
 public class UserInterface {
     private Warehouse warehouse;
 
-    private ListParser listParser;
+    private ListParser  listParser;
     private ViewParser viewParser;
     private AddParser addParser;
     private RemoveParser removeParser;
     private TotalParser totalParser;
+    private FindParser findParser;
 
 
     public UserInterface(Warehouse warehouse) {
         this.warehouse = warehouse;
         this.listParser = new ListParser(warehouse);
+        this.findParser = new FindParser(warehouse);
+        this.viewParser = new ViewParser(warehouse);
+        this.addParser = new AddParser(warehouse);
+        this.removeParser = new RemoveParser(warehouse);
+        this.totalParser = new TotalParser(warehouse);
     }
 
     public void run() {
@@ -46,6 +52,9 @@ public class UserInterface {
                 case "view":
                     //using flags here to distinguish between different views????
                     viewParser.parse(userInput);
+                    break;
+                case "find":
+                    findParser.parse(userInput);
                     break;
                 case "list":
                     listParser.parse(userInput);
