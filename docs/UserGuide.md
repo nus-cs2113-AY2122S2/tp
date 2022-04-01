@@ -250,6 +250,27 @@ Example of usage: <br>
 * `findMenuItemType drinks` <br>
 * `findMenuItemType dessert` <br>
 
+## Staff 
+### Add staff object: `addStaff`
+ 
+Add a new staff with required staff information
+
+Format: `addStaff  id/ID pw/PW n/STAFF_NAME j/STAFF_JOB p/STAFF_PHONE email/STAFF_EMAIL`
+
+Example of usage: <br>
+* `addStaff id/1 pw/123wer n/Mike j/manager p/88888888 e/gmail ` <br>
+
+
+### Delete staff object: `deleteStaff`
+
+Delete a staff with its id and password
+
+Format: `deleteStaff  id/ID pw/PW L`
+
+Example of usage: <br>
+* `deleteStaff id/1 pw/123wer ` <br>
+
+
 ### Exit the system: `bye`
 
 Exit the system.

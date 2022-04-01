@@ -25,6 +25,14 @@ public class Staff {
         return name;
     }
 
+    public String getJob() {
+        return job;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -33,7 +41,7 @@ public class Staff {
         return email;
     }
 
-    public static boolean isValidIc(String newId) {
+    public static boolean isValidId(String newId) {
         if (newId.length() != 3) {
             return false;
         }

@@ -4,7 +4,7 @@ import arcs.data.customer.CustomerManager;
 import arcs.data.flightbooking.FlightBookingManager;
 import arcs.data.route.RouteManager;
 import arcs.data.menuitems.MenuItemManager;
-
+import arcs.data.staff.StaffManager;
 
 public abstract class Command {
 
@@ -13,13 +13,15 @@ public abstract class Command {
     protected FlightBookingManager flightBookingManager;
     protected MenuItemManager menuItemManager;
     protected CustomerManager customerManager;
+    protected StaffManager staffManager;
 
     public void setData(RouteManager routeManager, FlightBookingManager flightBookingManager,
-                        MenuItemManager menuItemManager, CustomerManager customerManager) {
+                        MenuItemManager menuItemManager, CustomerManager customerManager, StaffManager staffManager) {
         this.routeManager = routeManager;
         this.flightBookingManager = flightBookingManager;
         this.menuItemManager = menuItemManager;
         this.customerManager = customerManager;
+        this.staffManager = staffManager;
     }
 
     /**

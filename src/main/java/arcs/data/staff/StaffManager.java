@@ -17,9 +17,9 @@ public class StaffManager {
         this.staffs = staffs;
     }
 
-    public boolean hasDuplicateIc(String ic) {
+    public boolean hasDuplicateIc(String id) {
         for (Staff Staff: staffs) {
-            if (ic.equals(Staff.getId())) {
+            if (id.equals(Staff.getId())) {
                 return true;
             }
         }
@@ -49,13 +49,13 @@ public class StaffManager {
         return deleted;
     }
 
-    public Staff findStaff(String ic) throws ArcsException {
-        assert ic != null : "IC is null";
-        if (!Staff.isValidIc(ic)) {
-            throw new ArcsException("IC number is invalid.");
+    public Staff findStaff(String id) throws ArcsException {
+        assert id != null : "Id is null";
+        if (!Staff.isValidId(id)) {
+            throw new ArcsException("Id number is invalid.");
         }
         for (Staff Staff: staffs) {
-            if (ic.equals(Staff.getId())) {
+            if (id.equals(Staff.getId())) {
                 return Staff;
             }
         }
