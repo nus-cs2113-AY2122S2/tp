@@ -199,12 +199,9 @@ public class WorkoutList {
     /**
      * This method removes the intended workout in the workout list.
      * The intended workout to delete is determined by the user who
-     * will indicate the workout number to delete in the workout list.
-     * Checks whether the deleted workout is any plan. If there is a plan
-     * contains the deleted workout, the plan will also be deleted.
+     * will indicate the workout index number to delete in the workout list.
      *
      * @param userArgument The argument entered by user, that is, the workout index number to delete.
-     * @param planList An instance of the PlanList class.
      * @throws NumberFormatException If workout index number could not be parsed into an integer.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
      * @throws InvalidWorkoutException        If workout index number to delete is out of range.
