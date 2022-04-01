@@ -4,7 +4,7 @@ import seedu.duke.Packages;
 
 public class InfoCommand extends Command{
 
-    private int travelPackageID;
+    private final int travelPackageID;
 
     public InfoCommand (int id){
         this.travelPackageID = id;

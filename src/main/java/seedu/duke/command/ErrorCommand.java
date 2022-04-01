@@ -4,7 +4,7 @@ import seedu.duke.Packages;
 import seedu.duke.Reservations;
 
 public class ErrorCommand extends Command {
-    private String input;
+    private final String input;
 
     public ErrorCommand(String input) {
         this.input = input;
