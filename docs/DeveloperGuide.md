@@ -168,12 +168,13 @@ And `deleteStaff(int)` calls `remove(int)` to remove a `Staff` from `ArrayList<S
 ## User Stories
 
 
-|Version| As a ... | I want to ...                                  | So that I can ...          |
-|--------|----------|------------------------------------------------|----------------------------|
-|v1.0|staff| modify the order (add, delete, or check price) | keep the order up to date  |
-|v1.0|staff|modify the menu (add, delete, or modify dishes)|keep the menu up to date|
-|v2.0|staff| print out the order receipt                    | refer to the order anytime |
-|v2.0|staff|store the menu|refer to the menu anytime|
+| Version | As a ... | I want to ...                                    | So that I can ...               |
+|---------|----------|--------------------------------------------------|---------------------------------|
+| v1.0    | staff    | modify the order (add, delete, or check price)   | keep the order up to date       |
+| v1.0    | staff    | modify the menu (add, delete, or modify dishes)  | keep the menu up to date        |
+ | v1.0    | staff    | modify staff info (add, delete, modify employee) | keep the roster up to date      | 
+| v2.0    | staff    | print out the order receipt                      | refer to the order anytime      |
+| v2.0    | staff    | store the application data                       | save data across different uses |
 
 
 ## Non-Functional Requirements
