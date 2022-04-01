@@ -101,6 +101,18 @@ public class Parser {
             return new ListPatientListCommand();
         } else if (fullCommand.contains("help")) {
             return new HelpCommand();
+        } else if (fullCommand.contains("search doctor")){
+            String dummy = fullCommand.trim();
+            dummy = dummy.substring(dummy.length() - 4);
+            return new SearchDoctorCommand(dummy);
+        } else if (fullCommand.contains("search patient")) {
+            String dummy = fullCommand.trim();
+            dummy = dummy.substring(dummy.length() - 4);
+            return new SearchPatientCommand(dummy);
+        } else if (fullCommand.contains("search appointment")) {
+            String dummy = fullCommand.trim();
+            dummy = dummy.substring(17);
+            return new SearchAppointmentCommand(dummy);
         } else {
             throw new IHospitalException("Invalid command given");
         }

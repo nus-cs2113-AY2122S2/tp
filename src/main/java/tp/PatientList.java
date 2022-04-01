@@ -47,6 +47,15 @@ public class PatientList {
         countPatient -= 1;
     }
 
+    public void searchPatient(String id){
+        for (int i = 0; i < patients.size(); i++){
+            if (patients.get(i).getId().trim().equals(id)){
+                System.out.println("Here is the patient found:");
+                System.out.println(patients.get(i));
+            }
+        }
+    }
+
     @Override
     public String toString() {
         String toPrint = boundary + "Here are the patients recorded:" + System.lineSeparator();

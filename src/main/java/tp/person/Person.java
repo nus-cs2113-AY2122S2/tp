@@ -1,4 +1,4 @@
-package java.person;
+package tp.person;
 
 public class Person {
     protected String id;
