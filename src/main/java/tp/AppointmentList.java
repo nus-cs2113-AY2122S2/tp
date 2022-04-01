@@ -67,6 +67,15 @@ public class AppointmentList {
         return res;
     }
 
+    public void searchAppointment(String id){
+        for (int i = 0; i < appointments.size(); i++){
+            if (appointments.get(i).getTime().equals(LocalDateTime.parse(id))){
+                System.out.println("Here is the appointment found:");
+                System.out.println(appointments.get(i));
+            }
+        }
+    }
+
     public int getSize() {
         return countAppointment;
     }
@@ -108,7 +117,7 @@ public class AppointmentList {
     public String toString() {
         String toPrint = boundary + "Here are the existing appointments:" + System.lineSeparator();
         for (int i = 1; i <= countAppointment; i++) {
-            toPrint += (i + ". " + getAppointment(i));
+            toPrint += (i + ". " + getAppointment(i) + System.lineSeparator());
         }
         toPrint += ("Now you have " + countAppointment
                             + " appointments recorded in the system." + System.lineSeparator()
