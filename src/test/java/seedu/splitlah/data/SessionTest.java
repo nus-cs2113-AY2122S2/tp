@@ -363,4 +363,29 @@ class SessionTest {
             fail();
         }
     }
+
+    @Test
+    void getActivityListSummaryString_emptyActivityList_emptyActivityListErrorMessage() {
+        String activityListSummaryString = sessionOne.getActivityListSummaryString();
+        assertEquals(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST, activityListSummaryString);
+    }
+
+    @Test
+    void getActivityListSummaryString_populatedActivityList_activityListTable() {
+        final String expectedActivityListTable =
+                "--------------------------------\n"
+                        + "# | Activities | Cost   | Payer \n"
+                        + "--------------------------------\n"
+                        + "1 | Lunch      | $15.00 | Alice \n"
+                        + "2 | Dinner     | $30.00 | Alice \n"
+                        + "================================";
+        Command createActivityCommandOne = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
+        Command createActivityCommandTwo = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_TWO);
+        createActivityCommandOne.run(manager);
+        createActivityCommandTwo.run(manager);
+
+        String activityListSummaryString = sessionOne.getActivityListSummaryString();
+        assertEquals(expectedActivityListTable, activityListSummaryString);
+    }
+
 }
