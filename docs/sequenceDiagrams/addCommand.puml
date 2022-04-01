@@ -3,7 +3,7 @@
 
 hide footbox
 autonumber
-
+group addCommand
 ?-> Parser: Add command
 Activate Parser
 Parser -> Parser: prepareAddCommand(args)
@@ -79,4 +79,5 @@ Parser --> Parser: Return AddCommand
 Deactivate Parser
 ?<-- Parser
 Deactivate Parser
+end
 @enduml

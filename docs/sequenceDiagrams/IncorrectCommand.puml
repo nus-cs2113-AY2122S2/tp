@@ -1,4 +1,6 @@
 @startuml
+
+group IncorrectCommand
 'https://plantuml.com/sequence-diagram
 
 hide footbox
@@ -9,5 +11,5 @@ Parser -> IncorrectCommand **: IncorrectCommand
 Activate IncorrectCommand
 Parser <-- IncorrectCommand: return
 Deactivate IncorrectCommand
-
+end
 @enduml

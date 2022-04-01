@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-
+group ListCommand
 ?-> Parser: List Command
 Activate Parser
 
@@ -20,5 +20,5 @@ Deactivate ListCommand
 Deactivate Parser
 ?<-- Parser
 Deactivate Parser
-
+end
 @enduml
