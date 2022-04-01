@@ -19,6 +19,7 @@ prospective users to plan their exercise routines.
 This technical document is meant for current and future developers of WerkIt! as a reference point on the design,
 implementation, and other technical and non-technical aspects of the application.
 
+### Notations Used In This Guide
 When reading this document, there are several icons that you may encounter. 
 Below are the icons and their meanings:
 > ⚠️**Warning** : Information that you may want to pay attention to in order
