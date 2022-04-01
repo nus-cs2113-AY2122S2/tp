@@ -95,26 +95,42 @@ filtered by the query inputted by the user.
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Online shoppers who tend to splurge on virtual platforms
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+As online shopping becomes more convenient and transactions become easier, people tend to overshoot 
+their budget because they are not aware of their accumulated expenditure. It is designed to 
+regularly remind the buyer of their preset spending limit for each month.
+
 
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|---|----------|------------------|------------------|
+|v1.0|user|see usage instructions|refer to them when I forget how to use the application|
+| |online shopper|add and delete my spending record|note down what I have bought|
+| |“spendthrift” user|set spending warning and limits|be reminded if I exceed the spending limit I set|
+|v2.0|user|search record by name|locate a record without having to go through the entire list|
+| |user|get the summary of records classified by types|keep track of my spending for different types|
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. The system must not crash when users open the application.
+2. The system must provide 5 seconds or less feedback time.
+3. The system must have at least 75 percent maintainability for 24 hours.
+4. The system must have at least 85 percent reliability for a month.
+5. Error message must be displayed if the system encounters any error.
+6. The system must strive for consistency.
+7. The system must offer informative feedback when invalid inputs are detected or a certain process fails.
+
 
 ## Glossary
 
-* *glossary item* - Definition
+* *user* - A user is a person who uses the application to keep track of his expenses.
+* *system* - A system refers to Spendvelope.
+* *feedback* - Feedback refers to the response from the application to the user.
+
 
 ## Instructions for manual testing
 
