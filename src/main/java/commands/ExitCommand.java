@@ -11,4 +11,9 @@ public class ExitCommand extends Command {
     public void execute() {
         // Will do nothing, since it's an exit command
     }
+
+    @Override
+    public String getUserAction() {
+        return null;
+    }
 }

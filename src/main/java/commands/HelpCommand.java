@@ -12,6 +12,11 @@ public class HelpCommand extends Command {
     }
 
     @Override
+    public String getUserAction() {
+        return null;
+    }
+
+    @Override
     public void execute() {
         ui.printHelpMessage();
     }

@@ -34,6 +34,11 @@ public class ExerciseCommand extends Command {
     }
 
     @Override
+    public String getUserAction() {
+        return userAction;
+    }
+
+    @Override
     public void execute() {
         try {
             switch (userAction) {
