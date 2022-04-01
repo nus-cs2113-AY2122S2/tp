@@ -219,7 +219,12 @@ public class WerkIt {
             System.out.println(e.getMessage());
             logger.log(Level.WARNING, "Unknown file name was encountered.");
         }
-
+        if (!isWorkoutFileLoadSuccessful) {
+            fileManager.deleteAndRecreateWorkoutFile();
+            fileManager.rewriteAllWorkoutsToFile(getWorkoutList());
+            System.out.println("The corrupted workout data has been removed.");
+            logger.log(Level.INFO, "Workout file data loaded with corrupted data removed.");
+        }
         logger.log(Level.INFO, "Workout file data loaded.");
     }
 
@@ -231,6 +236,13 @@ public class WerkIt {
         } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
             logger.log(Level.WARNING, "Unknown file name was encountered.");
+        }
+
+        if (!isPlanFileLoadSuccessful) {
+            fileManager.deleteAndRecreatePlanFile();
+            fileManager.rewriteAllPlansToFile(getPlanList());
+            System.out.println("The corrupted plan data has been removed.");
+            logger.log(Level.INFO, "Plan file data loaded with corrupted data removed.");
         }
 
         logger.log(Level.INFO, "Plan file data loaded.");
@@ -250,6 +262,13 @@ public class WerkIt {
         } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
             logger.log(Level.WARNING, "Unknown file name was encountered.");
+        }
+
+        if (!isScheduleFileLoadSuccessful) {
+            fileManager.deleteAndRecreateScheduleFile();
+            fileManager.rewriteAllDaysScheduleToFile(getDayList());
+            System.out.println("The corrupted schedule data has been removed.");
+            logger.log(Level.INFO, "Schedule file data loaded with corrupted data removed.");
         }
 
         logger.log(Level.INFO, "Schedule file data loaded.");
