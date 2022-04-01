@@ -7,11 +7,19 @@ h5, h6 {
   font-size: 1.1rem;
 }
 
-p.warning-box {
+p.box {
   margin: 20px 10px 20px 10px;
-  border: 1px solid darkorange;
-  border-radius: 25px;
+  border-radius: 15px;
   padding: 20px;
+}
+
+p.warning {
+  border: 1px solid darkorange;
   background-color: orange;
   color: black;
+}
+
+p.info {
+  border: 1px solid dodgerblue;
+  background-color: cornflowerblue;
 }
