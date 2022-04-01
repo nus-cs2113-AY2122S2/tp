@@ -5,27 +5,18 @@
 autonumber
 
 title Sequence Diagram of `workout /delete` Command
+hide footbox
 
-actor   User
 participant "werkIt:WerkIt" AS WerkIt
-participant "ui:UI" AS UI1
-participant "parser:Parser" AS Parser
 participant "deleteCommand\n:WorkoutCommand" AS deleteCommand
 participant "workoutList\n:WorkoutList" AS WorkoutList
 participant "ui:UI" AS UI2
 participant "fileManager:FileManager" as FileManager
 
 activate WerkIt
-WerkIt -> UI1 : getUserInput()
-activate UI1
-User -> UI1 : `workout /delete` command
-WerkIt <-- UI1 : userInputTrimmed:String
-deactivate UI1
-
-WerkIt -> Parser : parseUserInput(userInput)
-activate Parser
-WerkIt <-- Parser : :Command
-deactivate Parser
+ref over WerkIt
+Obtain and parse user input.
+end
 
 WerkIt -> deleteCommand : execute()
 activate deleteCommand
@@ -35,12 +26,11 @@ ref over WorkoutList
 Delete existing workout
 specified by user.
 end
-deleteCommand <-- WorkoutList : "deletedWorkout:Workout"
+deleteCommand <-- WorkoutList : deletedWorkout:Workout
 deactivate WorkoutList
 
 deleteCommand -> UI2 : printDeleteWorkoutMessage(deletedWorkout)
 activate UI2
-User <-- UI2 : Existing workout removed message
 deleteCommand <-- UI2
 deactivate UI2
 
