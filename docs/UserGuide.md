@@ -141,9 +141,80 @@ output:
 
 ### Saving application state: `save`
 
+Saves the current state of the Equipment list to the equipments.json file.
+
+Format: `save`
+
+Example of usage and output:
+
+`save`
+
+Output:
+
+`Successfully saved.`
+
 ### Getting help: `help`
 
+When `help` is called, the application will print a list of all available commands along with their usages and examples.
+
+Format: `help`
+
+Example of usage and output:
+
+`help`
+
+Output:
+
+`add: Adds a Equipment to the equipmentInventory.`<br>
+`Parameters: n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`<br>
+`Example: add n/SpeakerB s/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23`
+
+`delete: Deletes the equipment with the specified serial number.`<br>
+`Parameters: s/SERIAL_NUMBER`<br>
+`Example: delete s/SM57-1`<br>
+
+`update: Updates the equipment with the specified serial number.`<br>
+`Parameters in [square brackets] are optional.`<br>
+`Parameters: s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`<br>
+`Example: update s/SM57-1 n/SpeakerC c/2510 pd/2022-08-21`<br>
+
+`list: Prints a list of all equipment in the inventory.`<br>
+`Parameters: NIL`<br>
+`Example: list`<br>
+
+`listPrints a list of all equipment in the inventory of the specified type.`<br>
+`Parameters: t/Type`<br>
+`Example: list MICROPHONE`<br>
+
+`check: Gives details of the equipment with the specified name.`<br>
+`Parameters: n/ITEM_NAME`<br>
+`Example: check n/MixerC`<br>
+
+`save: Saves current state of application.`<br>
+`Parameters: NIL`<br>
+`Example: save`<br>
+
+`bye: Exits the application.`<br>
+`Parameters: NIL`<br>
+`Example: bye`<br>
+
+`help: Shows details of available commands to users.`<br>
+`Parameters: NIL`<br>
+`Example: help`<br>
+
 ### Exiting the application: `bye`
+
+Exits the application and saves the current state of the Equipment list to the equipments.json file.
+
+Format: `bye`
+
+Example of usage and output:
+
+`bye`
+
+Output:
+
+`Bye, See you again!`
 
 ## FAQ
 
@@ -160,6 +231,6 @@ output:
 * Listing equipment by type: `list MICROPHONE`
 * Updating an equipment: `update s/S14115ASF c/1200 pf/AVLFX`
 * Deleting an equipment: `delete s/S14115ASF`
-* Saving application state: ADD ON HERE
-* Getting help: ADD ON HERE
-* Exiting the application: ADD ON HERE
+* Saving application state: `save`
+* Getting help: `help`
+* Exiting the application: `bye`
