@@ -418,7 +418,14 @@ public class WorkoutList {
         return false;
     }
 
-
+    /**
+     * Finds the workout that the user wants to update.
+     *
+     * @param userArgument The argument entered by user, which includes index of workout to update
+     *                     and new number of repetitions.
+     * @return targetWorkout The workout object which is going to be updated.
+     * @throws InvalidWorkoutException If index of workout is not valid.
+     */
     public String getTargetWorkout(String userArgument) throws InvalidWorkoutException {
         String[] updateDetails = userArgument.split(" ", 2);
         String indexToUpdateString = updateDetails[0].trim();
