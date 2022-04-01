@@ -398,4 +398,16 @@ class SessionTest {
         assertEquals(expectedActivityListTable, activityListSummaryString);
     }
 
+    @Test
+    void compareTo_sessionComparedToHasBiggerId_negativeInteger() {
+        int comparisonValue = sessionOne.compareTo(sessionTwo);
+        assertTrue(comparisonValue < 0);
+    }
+
+    @Test
+    void compareTo_sessionComparedToHasSmallerId_positiveInteger() {
+        int comparisonValue = sessionTwo.compareTo(sessionOne);
+        assertTrue(comparisonValue > 0);
+    }
+
 }
