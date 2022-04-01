@@ -225,6 +225,11 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if an Activity object and all ActivityCost objects related it are correctly removed from the
+     * Session object when the removeActivity method is called, an Activity object with the specified
+     * activity unique identifier exists in the Session object and the payer is not involved in the activity.
+     */
     @Test
     void removeActivity_activityExistsAndPayerIsNotInvolved_activityAndActivityCostRemoved() {
         // Activity 1: Payer is involved
