@@ -530,8 +530,8 @@ The following sequence diagram illustrates how the `plan /new` command works in 
 **(Before Step 1)** The user's input (in this case will be a `plan /new` command) is obtained and parsed to obtain
 a `PlanCommand` object that contains the user's input.
 
-> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+<span class="info box"> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+ ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
 that the plan action is of type `new`. Thus, it will subsequently call the
