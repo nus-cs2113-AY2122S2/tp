@@ -1,12 +1,11 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include ../../Style.puml
-
+hide footbox
 autonumber
 
 title Sequence Diagram of `search /exercise` Command
 
-actor   User
 participant "werkIt:WerkIt" AS WerkIt
 participant "ui:UI" AS UI1
 participant "parser:Parser" AS Parser
@@ -16,7 +15,6 @@ participant "exerciseList\n:ExerciseList" AS ExerciseList
 activate WerkIt
 WerkIt -> UI1 : getUserInput()
 activate UI1
-User -> UI1 : `search /exercise` command
 WerkIt <-- UI1 : userInputTrimmed:String
 deactivate UI1
 
@@ -34,7 +32,6 @@ newCommand <-- ExerciseList : "exerciseList:ArrayList<String>"
 deactivate ExerciseList
 
 newCommand -> newCommand : searchExercise()
-User <-- newCommand : search outcome
 
 deactivate newCommand
 
