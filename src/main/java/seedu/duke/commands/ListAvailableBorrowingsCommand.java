@@ -19,9 +19,8 @@ public class ListAvailableBorrowingsCommand extends Command {
     public static final String COMMAND_FORMAT = COMMAND_WORD + "[start date] [end date]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE
             + ":\n" + "[Command Format] " + COMMAND_FORMAT + "\n";
-    
-    private final String AVAILABLE_RESULT = "Here are the items available for borrowing:";
-    private final String NO_AVAILABLE_RESULT = 
+    public static final String AVAILABLE_RESULT = "Here are the items available for borrowing:";
+    public static final String NO_AVAILABLE_RESULT = 
             "Sorry. There are no items available for borrowings.";
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -54,7 +53,7 @@ public class ListAvailableBorrowingsCommand extends Command {
     }
 
     /**
-     * Compares startDate and endDate of a BorrowRecord to startDate and endDate of interest
+     * Compares startDate and endDate of a BorrowRecord to startDate and endDate of interest.
      * @param startDate start date of interest
      * @param endDate end date of interest
      * @param recordStartDate start date of a specific record
@@ -75,7 +74,7 @@ public class ListAvailableBorrowingsCommand extends Command {
     }
 
     /**
-     * Prints out a list of available items for borrowing throughout the time period
+     * Prints out a list of available items for borrowing throughout the time period.
      * @param itemList ItemList of all Item
      * @param ui User Interface
      */

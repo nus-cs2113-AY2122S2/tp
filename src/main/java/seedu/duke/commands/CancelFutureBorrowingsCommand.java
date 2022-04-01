@@ -7,6 +7,7 @@ import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.Item;
 
 import java.util.ArrayList;
+
 /**
  * Looks for a bookings under a borrower's name and removes it from the item.
  */
@@ -19,7 +20,6 @@ public class CancelFutureBorrowingsCommand extends Command {
     public static final String COMMAND_FORMAT = COMMAND_WORD + "[borrower name] [borrow index]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE
             + ":\n" + "[Command Format] " + COMMAND_FORMAT + "\n";
-
     private final String borrowerName;
     private final int borrowIndex;
 
