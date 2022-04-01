@@ -53,7 +53,7 @@ This guide's purpose is to explain the internal workings of SplitLah, so that fu
 * SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands will not be explained in detail.
 * Please refer to the [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
 * Please refer to [here](#implementation) to find out how each command is designed and implemented in SplitLah.
-* Each command's section in this guide contains an API reference link that brings you to the main source code responsible for executing the command.
+* Each command's section in this guide contains an API reference link encase in `code block` that brings you to the main source code responsible for executing the command.
 
 ## Design
 ### Architecture
@@ -145,12 +145,12 @@ The `Storage` class is initialised by the `Manager` class when the application s
 Upon initialization, the `Storage` class checks if a save file already exists. 
 A save file records user data related to SplitLah even after the application is closed.
 * If a save file is found, the `Storage` class loads data from it into the `Profile` object managed by the `Manager` object.
-* Else a new data file is created and an empty `Profile` object is created instead.
+* Else a new save file is created and an empty `Profile` object is created instead.
 
 When a command updates any attributes of the `Profile` object, the changes will be updated the save file. These commands are:
 * `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand`
 * `ActivityCreateCommand`, `ActivityDeleteCommand`, `ActivityEditCommand`
-* `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand`
+* `GroupCreateCommand`, `GroupDeleteCommand`, `GroupEditCommand`
 
 Once the commands finishes executing, `Manager#saveProfile` is called to update the save file.<br>
 For example:
