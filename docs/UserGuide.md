@@ -19,35 +19,84 @@ View the available commands.
 
 Format: `help`
 
-### Adding a person: `add`
-Adds a new person to the system.
+### Adding a doctor: `add doctor`
+Adds a new doctor to the system.
 
-Format: `add ROLE /id ID /n NAME /ph PHONE /e EMAIL`
-
-* The `ROLE` should be either doctor or patient.
+Format: `add doctor /id ID /n NAME /ph PHONE /e EMAIL`
 
 Example of usage: 
 
 `add doctor /id 1234 /n john /ph 12341234 /e 1234@gmail.com`
 
-`add patient /id 4321 /n Tom /ph 93333333 /e 3233@qq.com`
+
+### Adding a patient: `add patient`
+Adds a new patient to the system.
+
+Format: `add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS`
+
+Example of usage:
+
+`add patient /id 4321 /n Tom /ph 93333333 /e 3233@qq.com /s symptom /d descriptions`
+
 
 ### Adding an appointment: `add appointment`
 Adds a new appointment to the system.
 
-Format: `add appointment /t DATETIME /d DOCTOR_ID /p PATIENT_ID`
+Format: `add appointment /t DATETIME /d DOCTOR_NO /p PATIENT_NO`
+
+* The `DOCTOR_NO` and `PATIENT_NO` refer to their numbers in the list (not their IDs).
+
+* Please make sure that the doctor/patient you're adding to the appointment exist.
 
 Example of usage:
 
 `add appointment /t 2007-12-03T10:15:30 /d 1 /p 1`
 
+### Sorting appointment list: 'sort'
+Sorts existing appointments in the system (but does not print out).
+
+Format: `sort appointment`
+
+### Viewing doctor/patient/appointment list: `list`
+Lists existing doctors/patients/appointments in the system.
+
+Format: `list WHATYOUWANTTOLIST`
+
+Example of usage:
+
+`list doctor`
+
+`list patient`
+
+`list appointment`
+
+### Searching a person: `search`
+Searches existing doctors/patients with their numbers in the list.
+
+Format: `search ROLE NO`
+
+Example of usage:
+
+`search doctor 1`
+
+`search patient 3`
+
+### Searching an appointment: `search`
+Searches existing appointments with appointment time.
+
+Format: `search appointment DATETIME`
+
+Example of usage: 
+
+`search appointment 2007-12-03T10:15:30`
 
 ### Deleting a person or an appointment: `delete`
 Removes a person or an appointment from the system.
 
-Format: `delete ROLE ID` or `delete appointment APPOINTMENT_NO`
+Format: `delete ROLE NO` or `delete appointment APPOINTMENT_NO`
 
 * The `ROLE` should be either doctor or patient.
+* The `NO` here refers to the numbers in the list (not IDs).
 
 Example of usage:
 
@@ -68,11 +117,15 @@ Example of usage:
 
 * View Help `help`
 * Add Doctor `add doctor /id ID /n NAME /ph PHONE /e EMAIL`
-* Add Patient `add patient /id ID /n NAME /ph PHONE /e EMAIL`
+* Add Patient `add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS`
 * Add Appointment `add appointment /t 2022-03-19T15:16:00 /d DOCTOR_ID /p PATIENT_ID`
 * Delete Doctor `delete doctor DOCTOR_ID`
 * Delete Patient `delete patient PATIENT_ID`
 * Delete Appointment `delete appointment APPOINTMENT_NO.`
+* Sort Appointment List `sort appointment`
 * View Doctor list `list doctor`
 * View Patient list `list patient`
 * View Appointment list `list appointment`
+* Search Doctor `search doctor DOCTOR_NO`
+* Search Patient `search patient PATIENT_NO`
+* Search Appointment `search appointment DATETIME`

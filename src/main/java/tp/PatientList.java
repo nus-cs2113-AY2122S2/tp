@@ -56,11 +56,18 @@ public class PatientList {
     }
 
     public void searchPatient(String id){
+        boolean found = false;
         for (int i = 0; i < patients.size(); i++){
             if (patients.get(i).getId().trim().equals(id)){
-                System.out.println("Here is the patient found:");
+                System.out.println(boundary + "Here is the patient found:");
                 System.out.println(patients.get(i));
+                System.out.print(boundary);
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.print(boundary + "Patient not found."
+                                     + System.lineSeparator() + boundary);
         }
     }
 

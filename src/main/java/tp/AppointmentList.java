@@ -68,11 +68,18 @@ public class AppointmentList {
     }
 
     public void searchAppointment(String id){
+        boolean found = false;
         for (int i = 0; i < appointments.size(); i++){
             if (appointments.get(i).getTime().equals(LocalDateTime.parse(id))){
-                System.out.println("Here is the appointment found:");
+                System.out.println(boundary + "Here is the appointment found:");
                 System.out.println(appointments.get(i));
+                System.out.print(boundary);
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.print(boundary + "Appointment not found."
+                                     + System.lineSeparator() + boundary);
         }
     }
 
@@ -104,7 +111,7 @@ public class AppointmentList {
             return -1;
         }
     }
-    ;
+            ;
 
     public int myComparator(LocalDateTime t1, LocalDateTime t2) {
         if (t1.isBefore(t2)) {
