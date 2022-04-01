@@ -1,6 +1,9 @@
+<p align="center"><img alt="logo" src="https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/pngLogo.png"></p>
+
 # Developer Guide
 ## Contents
 * [Acknowledgements](#acknowledgements)
+* [Introduction](#introduction)
 * [Design](#design)
     * [Architecture](#architecture)
     * [Manager Component](#manager-component)
@@ -9,18 +12,25 @@
     * [Storage Component](#storage-component)
     * [Parser Component](#parser-component)
     * [Command Component](#command-component)
-* Implementation
+* [Implementation](#implementation)
+  * [Parser implementation](#parsing-of-commands)
+  * [Session Commands](#session-commands)
     * [Add a session](#add-a-session)
     * [Remove a session](#remove-a-session)
+    * [Edit a session](#edit-a-session)
     * [View a session](#view-a-session)
     * [List all sessions](#list-sessions)
     * [Settle a session](#settle-a-session)
+  * [Activity Commands](#activity-commands)
     * [Add an activity](#add-an-activity)
     * [Remove an activity](#remove-an-activity)
+    * [Edit an activity](#edit-an-activity)
     * [View an activity](#view-an-activity)
     * [List all activities](#list-activities)
+  * [Group Commands](#group-commands)
     * [Add a group](#add-a-group)
     * [Remove a group](#remove-a-group)
+    * [Edit a group](#edit-a-group)
     * [View a group](#view-a-group)
     * [List all groups](#list-groups)
 * [Project Scope](#product-scope)
@@ -28,9 +38,22 @@
 * [Non-Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
 
-
 ## Acknowledgements
 * Address Book (Level-3) - Provide samples of User Guide(UG) and Developer Guide(DG)
+
+## Introduction
+This guide's purpose is to explain the internal workings of SplitLah, so that future engineers can understand the application's implementation in detail and continue working on the project with ease.
+
+### How to use this developer guide
+* SplitLah is divided into **six components**: [Manager Component](#manager-component)
+[Profile Component](#profile-component), [TextUI Component](#textui-component),
+[Storage Component](#storage-component), [Parser Component](#parser-component) and [Command Component](#command-component)
+* Each component has its own section in this guide explaining them in detail.
+* This [diagram](#interaction-between-components) shows the inner workings of how each component interacts with each other.
+* SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands will not be explained in detail.
+* Please refer to the [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
+* Please refer to the [implementation section](#implementation) to find out how each command is designed and implemented in SplitLah.
+* Each command's section in this guide contains an API reference link encased in `code block` that brings you to the main source code responsible for executing the command.
 
 ## Design
 ### Architecture
@@ -56,12 +79,11 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 * `Command`
     * Defines how a command is executed.
 
-**Interaction between components**
+### Interaction between components
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
 The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts.
 The diagram depicts a scenario where a user attempts to create a session.
-
 
 
 ### SplitLah Component
@@ -119,6 +141,26 @@ As TextUI handles all input and output streams, these streams can be changed wit
 ### Storage Component
 ![Storage Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/StorageComponent.drawio.png)
 <br>
+The `Storage` class is initialised by the `Manager` class when the application starts. 
+Upon initialization, the `Storage` class checks if a save file already exists. 
+A save file records user data related to SplitLah even after the application is closed.
+* If a save file is found, the `Storage` class loads data from it into the `Profile` object managed by the `Manager` object.
+* Else a new save file is created and an empty `Profile` object is created instead.
+
+When a command updates any attributes of the `Profile` object, the changes will be updated the save file. These commands are:
+* `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand`
+* `ActivityCreateCommand`, `ActivityDeleteCommand`, `ActivityEditCommand`
+* `GroupCreateCommand`, `GroupDeleteCommand`, `GroupEditCommand`
+
+Once the commands finishes executing, `Manager#saveProfile` is called to update the save file.<br>
+For example:
+  1. The user enters `session /create /n Class outing /d 31-03-2022 /pl Alice bob`
+  2. SplitLah recognizes this as a `SessionCreateCommand` and creates the new session. 
+  3. As this updates the list of sessions stored in the `Profile` object,
+    `Manager#saveProfile` is called to update the save file with the newly created session.
+
+All classes associated with the `Profile` component implements the `Serializable` class. This allows the `Storage` class 
+to write all the data stored in the `Profile` component into the save file without having to pre-process the data.
 
 ### Parser Component
 ![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)
@@ -173,6 +215,7 @@ The general workflow of the `Command` component is as follows:
 3. After `XYZCommand#run` completes, control is returned to `SplitLah` and
    the [lifecycle](#architecture) of an `XYZCommand` object ends.
 
+<hr>
 
 ## Implementation
 
@@ -230,6 +273,8 @@ the Command component when any user input is provided to SplitLah.
 8. The newly instantiated `XYZCommand` object is then returned from `XYZCommandParser` to `Parser` class,
    and finally back to `SplitLah` to be run.
 
+## Session Commands
+
 ### Add a session
 **API reference:** [`SessionCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
 
@@ -250,7 +295,7 @@ The general workflow of the `session /create` command is as follows:
 7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
    which is used to call the `Profile#addSession` method in order to store the new `Session` object.
 8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUi#printlnMessage`.
+9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUi#printlnMessage.
 
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
@@ -274,7 +319,40 @@ session unique identifier from the list of sessions.
    * Else the `Session` object with the specified session unique identifier is returned.
 6. The `Profile#removeSession` method is then called to remove the `Session` object from the list of sessions stored in `Profile` object.
 7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
+8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully deleted.
+
+### Edit a session
+**API reference:** [`SessionEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionEditCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `session /edit` command.
+<br>
+<br>
+![Edit Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionEditCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /edit` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionEditCommand` object.
+3. The `SessionEditCommand#run` method is then invoked to run the `session /edit` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of sessions can be retrieved.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified
+   session unique identifier from the list of sessions.
+   * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+   * Else the `Session` object with the specified session unique identifier is returned.
+6. The detail of how a session is updated in the reference diagram below.<br>
+   ![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
+7. `SessionEditCommand#run` will check if there is an update for a new list of persons, new session or new session date.
+   * If there is an update on the list of persons. It would first check if the newly provided list of persons contains duplicated names.
+     * If duplicated names are detected, an error message would be printed and control is returned to `SplitLah`.
+     * Else, it would call `PersonList#isSuperSet` to check if the newly supplied list of persons contain all existing persons in the session.
+     * If `PersonList#isSuperSet` returns `false`, an error message would be printed and control is returned to `SplitLah`.
+     * Else, if it returns `true` it would then call `Session#addPerson` to add in the new list of persons.
+   * If there is an update on the session name, `Session#setSessionName` is called to set the new session name.
+   * If there is an update on the session date, `Session#setDateCreated` is called to set the new session date.
+8. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+9. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
 
 ### View a session
 **API reference:** [`SessionViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
@@ -360,8 +438,11 @@ The general workflow of the `session /summary` command is as follows:
 10. Finally, with the `TextUI` object, the method `printlnMessageWithDivider` is called to print the message
     obtained from the `SessionSummaryCommand#processAllTransactions` method.
 
+## Activity Commands
+
 ### Add an activity
 ### Remove an activity
+### Edit an activity
 ### View an activity
 
 ### List activities
@@ -384,6 +465,8 @@ The general workflow of the `activity /list` command is as follows:
    1. If the activity list in the session is empty, the Session class will return a `String` object containing an error message.
    2. If it's not empty, a `String` object representing a table summarising the list of activities in the session will be returned. 
 7. Finally, the method `printlnMessageWithDivider` is called to print the message returned.
+
+## Group Commands
 
 ### Add a group
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
@@ -418,6 +501,8 @@ when the user invokes the `group /delete` command.
 ![Delete Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupDeleteCommand.drawio.png)
 <br>
 <br>
+
+### Edit a group
 
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
@@ -467,6 +552,8 @@ The general workflow of the `group /list` command is as follows:
       representing the table is then returned.
 6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
+<hr>
+
 ## Product scope
 ### Target user profile
 * Budget conscious.
@@ -481,21 +568,28 @@ they engage in during the outings.
 
 ## User Stories
 
-| Version | As a ...              | I want to ...                        | So that I can ...                                                           |
-|---------|-----------------------|--------------------------------------|-----------------------------------------------------------------------------|
-| v1.0    | New user              | see usage instructions               | refer to them when I forget how to use the application                      |
-| v1.0    | Budget conscious user | create sessions                      | record the transactions of the outing                                       |
-| v1.0    | Budget conscious user | create activities                    | able to track the expenditure for each activity                             |
-| v1.0    | Budget conscious user | view an existing session             | view the full details of a session previously created                       |
-| v1.0    | Budget conscious user | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity    |
-| v1.0    | Budget conscious user | list all existing sessions           | view all sessions previously created                                        |
-| v1.0    | Budget conscious user | list all activities in a session     | view all the activities that happened in the session                        |
-| v1.0    | Budget conscious user | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session |
-| v1.0    | User                  | exit the application                 | stop tracking                                                               |
+| Version | As a ...                   | I want to ...                        | So that I can ...                                                                  |
+|---------|----------------------------|--------------------------------------|------------------------------------------------------------------------------------|
+| v1.0    | New user                   | see usage instructions               | refer to them when I forget how to use the application                             |
+| v1.0    | Budget conscious user      | create sessions                      | record the transactions of the outing                                              |
+| v1.0    | Returning User             | delete sessions                      | remove unnecessary sessions                                                        |
+| v1.0    | Budget conscious user      | create activities                    | able to track the expenditure for each activity                                    |
+| v1.0    | Returning User             | delete activities                    | remove unnecessary activities                                                      |
+| v1.0    | Returning user             | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity           |
+| v1.0    | Budget conscious user      | list all existing sessions           | view all sessions previously created                                               |
+| v1.0    | Budget conscious user      | list all activities in a session     | view all the activities that happened in the session                               |
+| v1.0    | Budget conscious user      | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session        |
+| v2.0    | Careless User              | edit sessions                        | amend a mistake previously made when creating a session                            |
+| v2.0    | Returning user             | view an existing session             | view the full details of a session previously created                              |
+| v2.0    | Careless User              | edit activities                      | amend a mistake previously made when creating an activity                          |
+| v2.0    | User with a lot of friends | create groups                        | I can create sessions with groups instead of listing the person names out manually |
+| v2.0    | Returning User             | delete groups                        | remove unnecessary groups                                                          |
+| v2.0    | Careless User              | edit groups                          | amend a mistake previously made when creating a groups                             |
+| v2.0    | Returning User             | view groups                          | view the full details of a group previously created                                |
+| v2.0    | User with a lot of friends | list groups                          | view all groups previously created                                                 |
 
 ## Non-Functional Requirements
 1. The application should be able to work in any operating systems with `Java 11` installed.
-2. 
 
 ## Glossary
 
