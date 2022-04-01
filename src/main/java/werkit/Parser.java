@@ -303,6 +303,10 @@ public class Parser {
             arguments = userInput.split(" ", 3)[2].trim();
             return new SearchCommand(userInput, ui, workoutList, actionKeyword, arguments);
         case SEARCH_ALL_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length == 2) {
+                arguments = " ";
+                return new SearchCommand(userInput, ui, exerciseList, workoutList, planList, actionKeyword, arguments);
+            }
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid search all command action.");
                 throw new InvalidCommandException(className,
