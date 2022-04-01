@@ -125,7 +125,6 @@ class ParserTest {
         assertTrue(parser.createWorkoutCommand("workout /update 1 15") instanceof WorkoutCommand);
         assertTrue(parser.createWorkoutCommand("workout /delete 1") instanceof WorkoutCommand);
         assertTrue(parser.createWorkoutCommand("workout /list") instanceof WorkoutCommand);
-        assertTrue(parser.createWorkoutCommand("workout /listall") instanceof WorkoutCommand);
     }
 
     @Test
