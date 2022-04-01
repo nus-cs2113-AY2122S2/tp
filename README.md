@@ -1,6 +1,7 @@
-# Duke project template
+# SplitLah
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This java project was made as a requirement for CS2113T. Our application, _SplitLah_, is a bill splitting application. 
+Given below are instructions on how to use it.
 
 ## Setting up in Intellij
 
