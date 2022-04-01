@@ -19,6 +19,15 @@ prospective users to plan their exercise routines.
 This technical document is meant for current and future developers of WerkIt! as a reference point on the design,
 implementation, and other technical and non-technical aspects of the application.
 
+### Notations Used In This Guide
+When reading this document, there are several icons that you may encounter. 
+Below are the icons and their meanings:
+> ⚠️**Warning** : Information that you may want to pay attention to in order
+> to prevent possible issues from arising when using the application.
+
+> 🧾  **Note** : Additional information that may be useful for you.
+️
+
 ## Acknowledgements
 The following websites and codebases were referenced and adapted for our project:
 
@@ -34,7 +43,7 @@ The following websites and codebases were referenced and adapted for our project
 - [X] An IDE of your choice, though IntelliJ IDEA is recommended as this project is developed
 with this IDE.
 
-> Note: IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA. 
+> 🧾 IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA. 
 
 ### Setting Up
 1. Fork the [WerkIt! GitHub repository](https://github.com/AY2122S2-CS2113T-T09-2/tp).
@@ -147,8 +156,8 @@ is not specified, an `InvalidCommandException` will be thrown.
   * [List Exercise](#list-exercise)
 * [Workout](#workout)
   * [Create New Workout](#create-new-workout)
-    * [Design Considerations](#design-considerations-for-creating-a-new-workout) 
-  * [List Workout](#list-workout)
+    * [Design Considerations](#design-considerations-for-creating-a-new-workout)
+  * [List All Workouts](#list-workout)
   * [Delete Existing Workout](#delete-existing-workout)
     * [Design Considerations](#design-considerations-for-deleting-existing-workout)
   * [Update Workout](#update-workout)
@@ -177,8 +186,8 @@ of Java's built-in `Scanner` class.
 
 Once the user has entered an input, `UI#getUserInput()` trims any preceding and trailing whitespaces before returning 
 the user's input as a `String` object to `WerkIt#startContinuousUserPrompt()`. Then, 
-`WerkIt#startContinuousUserPrompt()` calls `Parser#parseUserInput()` to parse the user's input and create a
-an object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
+`WerkIt#startContinuousUserPrompt()` calls `Parser#parseUserInput()` to parse the user's input and create an 
+object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
 this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()`.
 
 > A detailed implementation of the parsing and creation of subclass-of-`Command` object process can be found in
@@ -250,53 +259,57 @@ The following sequence diagram illustrates how the `workout /new` command works 
 
 ![Create Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/CreateWorkout.png)
 
-(Steps 1 to 3) The program waits for the user to enter a new command, which in this case is the `workout /new` command,
-and returns the user input in a `String` object to `WerkIt#startContinuousUserPrompt()`. 
+**(Before Step 1)** The user's input (in this case will be a `workout /new` command) is obtained and parsed to obtain
+a `WorkoutCommand` object that contains the user's input.
 
-(Steps 4 and 5) `Parser#parseUserInput()` parses the user input to obtain a `WorkoutCommand` object that is upcasted 
-to a `Command` object on return to `WerkIt#startContinuousUserPrompt()`. In Step 6, `WorkoutCommand#execute()` is called
-and because this is a `workout /new` command, the method will call `WorkoutList#createAndAddWorkout()`.
+> **Note:** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
-The following 2 sequence diagrams are the detailed procedures for Step 7's `WorkoutList#createAndAddWorkout()`:
-![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout-Part1.png)
+**(Step 1)** When `WorkoutCommand#execute()` is called, because this is a `workout /new` command, the method will call
+`WorkoutList#createAndAddWorkout()`.
 
-> Note: To improve the diagram's readability, logging-related and input-checking method calls in 
+The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createAndAddWorkout()`:
+![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout.png)
+
+> **Note:** To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in 
 > `WorkoutList#createAndAddWorkout()` have been omitted. 
 
-Firstly, methods from the `String` and `Integer` classes are called to parse the
+**(Before Step 2.1)** Methods from the `String` and `Integer` classes are called to parse the
 argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the
 `Workout` object:
 1. Name of the exercise
 2. Number of repetitions associated with the exercise in (1).
 
-Note that these methods are not shown in the sequence diagram to improve the readability of the sequence diagram.
-
-(Steps 7.1 to 7.6) Next, validity checks of the user input are carried out to ensure that the data entered is valid as a
-new `Workout` object. The requirements for a valid new `Workout` object is as follows:
-- [x] The exercise name must exist in `ExerciseList`'s `exerciseList`, which is an `ArrayList<String>` of exercise 
-names.
-- [x] The repetition value must be a non-negative integer greater than 0.
-- [x] The (exercise name, repetition value) must not already exist in the list of workouts maintained in
+Next, validity checks of the user input are carried out to ensure that the data entered is valid as a
+new `Workout` object. The requirements for a valid new `Workout` object are as follows:
+1. The exercise name must exist in `ExerciseList`'s `exerciseList`, which is an `ArrayList<String>` of exercise 
+names. An `InvalidExceptionException` is thrown if this requirement is not met. 
+2. The repetition value must be a non-negative integer greater than 0.
+3. The (exercise name, repetition value)-pair must not already exist in the list of workouts maintained in
 `WorkoutList`. For example, if a workout of 20 reps of push-ups is already stored in the list,
 it cannot be created again.
 
-If any of the three requirements are not met, either an `InvalidExerciseException` or an
-`InvalidWorkoutException` is thrown, and the entire workout creation process is aborted.
+If any of the three requirements are not met, the entire workout creation process is aborted.
+If requirement 1 is not met, an `InvalidExceptionException` will be thrown. If requirements 2 and/or 3 are not met, an 
+`InvalidWorkoutException` will be thrown.
 
-Again, note that the actual method calls to check for the validity of the user input are not shown in the sequence
-diagram for the same reason as mentioned above.
+Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability of the 
+sequence diagram.
 
-![creatAndAddWorkout() Sequence Diagram (Part 2)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout-Part2.png)
+**(Step 2.1)** If the above checks pass, a new `Workout` object with the user-specified exercise name and
+repetition value is created. 
 
-If the above checks pass, Step 7.7 will create the new `Workout` object with the user-specified exercise name and
-repetition value. Once that is done, a key of the `Workout` object will be generated in Step 7.9 (see the 
+**(Step 2.3)** Once the `Workout` object is created, a key of the object will be generated (see the 
 [Design Considerations](#design-considerations-for-creating-a-new-workout) section for more details of the `HashMap`
-implementation), before storing the key-`Workout` pair in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
-in Step 7.11. In Step 7.13, the key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
+implementation).
+
+**(Step 2.5)** The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
+
+**(Step 2.7)** The key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
 `ArrayList<String>` object stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the 
 command `workout /list` is entered by the user. This is the final step of `WorkoutList#createAndAddWorkout()`.
 
-(Step 9) Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
+**(Step 4)** Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
 the user via the terminal. The following is an example of a response after the user entered `workout /new russian twist 
 /reps 50`:
 ```
@@ -308,7 +321,7 @@ Alright, the following workout has been created:
 ----------------------------------------------------------------------
 ```
 
-(Step 12) `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
+**(Step 6)** `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
 `workouts.txt` which is stored on the user's local filesystem.
 
 This completes the process of adding a new workout to WerkIt!
@@ -364,29 +377,31 @@ to him/her.
 ---
 
 #### List Workout
-![SearchUML](uml/classDiagrams/images/listWorkout.png)
+A summary of the general procedure of listing all the workouts being stored on WerkIt! is as follows:
+1. User enters the command `workout /list`.
+2. The application will then process this command and display all workouts stored in the workoutList at once.
+
+The following sequence diagram illustrates how the `workout /list` command works in greater detail:
+> To simplify the sequence diagram, some method invocations that deemed to be trivial
+> have been removed from the sequence diagram. Reference frames will be elaborated further
+> down this section.
+
+![ListWorkoutUML](uml/sequenceDiagrams/workouts/images/listWorkout.png)
 <br>
-If the user's command type is to list the workouts created, i.e. `workout /list`, the
-`Parser#parseUserInput(String userInput)` method will parse the 'workout' base word and proceed to create workout related
-command using `Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the
-workout action, in this case, `/list` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
-WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. Once the workout command is created,
-this workout command is executed via the `WorkoutCommand#execute()` method. 
 
-As it is executed, the method will check the type of action to be executed, in this case, list. It will then list the workouts created and stored in the workoutList using the `WorkoutList#listWorkout()`
-method which will call `WorkoutList#continuousPrinting(int index, int noOfPrints)` method to determine
-the number of workouts to be printed. 
+(Steps 1 to 3) After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput(userInput)` method to parse the user input.
+Upon parsing of the input, a `WorkoutCommand` object is obtained. This `WorkoutCommand` object is upcasted to a `Command` object on return
+to the `WerkIt` object. It will then execute the workout command by calling the `WorkoutCommand#execute()` method.
 
-The maximum number of workouts to be displayed at a time is 10 workouts. If there are more than
-10 workouts stored in the workoutList, it will prompt the user to enter 'yes' or 'no' to determine the continuation of the printings.
-`isInputYesOrNo(String answer)` method is executed when user enter the answer for the continuation of printing.
+(Steps 4) Since the workout command entered is `workout /list` the `WorkoutList#listAllWorkout()` method will be called 
+to process the command and perform the action of listing the workouts. 
 
-If the answer given by the user is neither 'yes' nor 'no', user will be prompt to enter their option again until they give the expected input.
-When 'yes' is entered, the printing will continue and `WorkoutList#continuousPrinting(int index, int noOfPrints)` method will be executed again.
-Otherwise, `WorkoutList#listWorkout()` method will be terminated.
+(Steps 5 and 6) To get each of the workouts stored in the workoutList, `WorkoutList#getWorkoutFromIndexNum(index)` method 
+is called to obtain each of the `workout` object. Each `workout` object contains the exercise name as well as the 
+number of repetitions of that exercise set by the user. 
 
-##### List workouts command
-Format: `workout /list`
+(Steps 7 to 9) Upon obtaining the `workout` object, `Workout#toString()` method is called to formulate and print 
+the workouts which is being displayed on the terminal to the user. 
 
 ---
 
@@ -404,40 +419,38 @@ The following sequence diagram illustrates how the `workout /delete` command wor
 
 ![Delete Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/deleteWorkout-Part1.png)
 <br><br>
+**(Before Step 1)** The user's input (in this case will be a `workout /delete` command) is obtained and parsed to obtain
+a `WorkoutCommand` object that contains the user's input.
 
-**(Steps 1 to 3)** The program waits for the user's input, which in this case, is the `workout /delete <workout index number in workout list>` command. 
-An example of a valid command is `workout /delete 1`. Once the command is entered, the UI class will return the user input in a `String` object
-to the `WerkIt` object.
+> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+
+**(Step 1)** When the `WorkoutCommand#execute()` method is called, it will identify
+that the workout action is of type `delete`. Thus, it will subsequently call the 
+`WorkoutList#deleteWorkout()` method to perform the deletion of the workout.
 <br><br>
-**(Steps 4 to 6)** After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput(userInput)` method to parse the user input.
-Upon parsing of the input, a `WorkoutCommand` object is obtained. This `WorkoutCommand` object is upcasted to a `Command` object on return
-to the `WerkIt` object. It will then execute the workout command by calling the `WorkoutCommand#execute()` method.
-<br><br>
-**(Step 7)** The `WorkoutCommand#execute()` method identifies that the workout action is of type `delete` due to the workout command that 
-was supplied (`workout /delete <workout index number in workout list>`). It then calls the appropriate method, `WorkoutList#deleteWorkout(userArguments)`,
-in order to perform the deletion of the workout. <br><br>
-The following sequence diagram is the detailed procedure for Step 7's `WorkoutList#deleteWorkout(userArguments)`:
+The following sequence diagram is the detailed procedure for Step 2's `WorkoutList#deleteWorkout()`:
 <br><br>
 ![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/workouts/images/deleteWorkout-Part2.png)
+> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
+> `WorkoutList#deleteWorkout()` have been omitted.
 
 <br><br>
-**(Steps 7.1 to 7.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
-In this case, the user argument for `workout /delete <workout index number in workout list>` is the workout index number of the workout to be deleted from the workout list.
+**(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
+In this case, the user argument parameter is the workout index number of the workout to be deleted from the workout list as a `String` object.
 <br><br>
-**(Steps 7.3 to 7.6)** The `WorkoutList#deleteWorkout(userArgument)` method will then proceed to check whether the workout index number to be deleted
-is within the range of the workout list. This is done by calling the `WorkoutList#checkIndexIsWithinRange(indexToDelete)` method. If index to delete
-is within the range of the workout list, the method returns true, else it will return false.
-If the method returns false, then the `InvalidWorkoutException` exception is thrown.
+**(Steps 2.3 to 2.4)** With the workout index to delete, the `WorkoutList#deleteWorkout(userArgument)` method will then
+fetch the `Workout` object to be deleted by calling the `WorkoutList#getWorkoutFromIndexNum(indexToDelete)` method.
+However, before that `Workout` object is fetched, the `WorkoutList#deleteWorkout(userArgument)` method
+checks that the workout index to delete is within the range of the application's workout list.
+If index to delete is not within the range of the workout list, an `InvalidWorkoutException` exception is thrown.
 <br><br>
-**(Steps 7.7 to 7.8)** The `WorkoutList#deleteWorkout(userArgument)` method will then fetch the `Workout` object to be deleted
-by calling the `WorkoutList#getWorkoutFromIndexNum(indexToDelete)` method.
-<br><br>
-**(Steps 7.9 to 7.12)** The `Workout` object to be deleted is subsequently removed from the ArrayList and HashMap which stores the
+**(Steps 2.5 to 2.8)** The `Workout` object to be deleted is subsequently removed from the ArrayList and HashMap which stores the
 application's workout list.
 <br><br>
-**(Step 8)** The `WorkoutList#deleteWorkout(userArgument)` method returns the deleted `Workout` object to `WorkoutCommand`.
+**(Step 3)** The `WorkoutList#deleteWorkout(userArgument)` method returns the deleted `Workout` object to `WorkoutCommand`.
 <br><br>
-**(Steps 9 to 11)** Upon returning to the `WorkoutCommand` object, the `UI#printDeleteWorkoutMessage(deletedWorkout)` is called
+**(Steps 4 to 5)** Upon returning to the `WorkoutCommand` object, the `UI#printDeleteWorkoutMessage(deletedWorkout)` is called
 to display the workout that has been deleted to the user via the terminal. The following is an example 
 of a success deletion message after a valid workout is deleted from the application's workout list:
 ```
@@ -448,7 +461,7 @@ Alright, the following workout has been removed:
 
 ----------------------------------------------------------------------
 ```
-**(Steps 12 to 13)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
+**(Steps 6 to 7)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list.
 <br><br>
 This completes the process of deleting an existing workout in WerkIt!
@@ -511,60 +524,61 @@ The following sequence diagram illustrates how the `plan /new` command works in 
 
 ![Create Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part1.png)
 <br><br>
+**(Before Step 1)** The user's input (in this case will be a `plan /new` command) is obtained and parsed to obtain
+a `PlanCommand` object that contains the user's input.
 
-**(Steps 1 to 3)** The program waits for the user's input, which in this case, is the `plan /new <plan name> /workouts <workout index numbers in workout list separated by comma>` command.
-An example of a valid command is `plan /new Grow Biceps /workouts 1, 2, 3`. Once the command is entered, the UI class will return the user input in a `String` object
-to the `WerkIt` object.
+> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+
+**(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
+that the plan action is of type `new`. Thus, it will subsequently call the
+`PlanList#createAndAddPlan(userArgument)` method to perform the creation of the plan.
 <br><br>
-**(Steps 4 to 6)** After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput(userInput)` method to parse the user input.
-Upon parsing of the input, a `PlanCommand` object is obtained. This `PlanCommand` object is upcasted to a `Command` object on return
-to the `WerkIt` object. It will then execute the plan command by calling the `PlanCommand#execute()` method.
-<br><br>
-**(Step 7)** The `PlanCommand#execute()` method identifies that the plan action is of type `new` due to the plan command that
-was supplied (`plan /new <plan name> /workouts <workout index numbers in workout list separated by comma>`). 
-It then calls the appropriate method, `PlanList#createAndAddPlan(userArgument)`, in order to create a new plan. <br><br>
-The following sequence diagram is the detailed procedure for Step 7's `PlanList#createAndAddPlan(userArgument)`:
+The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan(userArgument)`:
 <br><br>
 ![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
+> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
+> `PlanList#createAndAddPlan()` have been omitted.
 
 <br><br>
-**(Steps 7.1 to 7.2)** Before calling the `PlanList#checkPlanNameValidity(userPlanNameInput, className)` method,
-the following information required to create the `Plan` object is obtained:
+**(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
+method is parsed to obtain the following information required to create the `Plan` object:
 1. Name of the plan.
 2. Workout index numbers in the workout list separated by comma.<br><br>
 
-Once, those information are obtained, the name of the plan to be created will be validated via calling the
-`PlanList#checkPlanNameValidity(userPlanNameInput, className)`.
+Once the information are obtained, the name of the plan to be created will be validated.
 This is to ensure all plan names are acceptable and unique in the application.
 If the plan name is invalid, an `InvalidPlanException` exception will be thrown.
 <br><br>
-**(Steps 7.3 to 7.4)** The `PlanList` object will then find out the number of workouts
-to be added into the new plan. Subsequently, it will call the `PlanList#checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className)` to ensure
-that the number of workouts to be added into the new plan does not exceed 10 workouts, and there should minimally
+Subsequently, this `PlanList#createAndAddPlan()` method will find out the number of workouts
+to be added into the new plan. This is done in order to check that the number of workouts to be added into the new plan
+does not exceed 10 workouts, and there should minimally
 be 1 workout in a plan. If the new plan does not meet the minimum and maximum workout number requirement,
 an `InvalidPlanException` will be thrown.
 <br><br>
-**(Steps 7.5 to 7.6)** An ArrayList of Workout object is created to store the workouts to be added into the new plan.
+**(Steps 2.1 to 2.2)** An ArrayList of Workout object is created to store the workouts to be added into the new plan.
 <br><br>
-**(Steps 7.7 to 7.10)** As the workout index numbers in the user input (e.g. "1, 2, 3") is of type `String`, 
+**(Steps 2.3 to 2.4)** As the workout indexes in the user argument parameter (e.g. "1, 2, 3") is of type `String`, 
 the loop will split (by comma) and convert each number string into an `Integer`. 
-Subsequently, the `PlanList#checkWorkoutNumberWithinRange(workoutIndexNumberInteger, className)` method
-is called to ensure that each workout index is within the application's workout list range. 
-Once the check is done, the valid `Workout` object is fetched from the application's workout list based 
-on the workout index and then added into the `ArrayList` that was created in the previous step (Steps 7.5 to 7.6).
+These workout indexes are also checked to ensure that they are within
+the application's workout list range.
+<br><br>
+If the workout indexes are valid, the valid `Workout` object is fetched from the application's workout list based 
+on the workout index and then added into the `ArrayList` that was created in the previous step (Steps 2.1 to 2.2).
 The loop will continue until all workouts to be added in the new plan is added into that `ArrayList`.
 <br><br>
-**(Steps 7.11 to 7.12)** Before adding this new plan, the 
-`PlanList#checkPlanWithSameWorkoutSequence(workoutsToAddInAPlanList, className)` is called to ensure that
-the new plan to be created does not contain the same workout order as any existing plans. If it does contain
-the same workout order as an existing plan, an `InvalidPlanException` exception will be thrown.
+**(Steps 2.5 to 2.10)** With the valid plan name and the `ArrayList` containing the workouts to be added into the new plan, 
+a new `Plan` object can be created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
+check that the new plan to be created does not contain the same workout order as any existing plans. If it does contain
+the same workout order as any existing plan, an `InvalidPlanException` exception will be thrown.
 <br><br>
-**(Steps 7.13 to 7.18)** With the valid plan name and the `ArrayList` containing the workouts to be added into 
-the new plan, a new `Plan` object is created. This new `Plan` object is then added to the application's plan list.
+If it is confirmed that the new plan does not contain
+the same workout order as any existing plan, a new `Plan` object is created.
+This new `Plan` object is then added to the application's plan list.
 <br><br>
-**(Step 8)** The `PlanList#createAndAddPlan(userArgument)` method returns the new `Plan` object to `PlanCommand`.
+**(Step 3)** The `PlanList#createAndAddPlan(userArgument)` method returns the new `Plan` object to `PlanCommand`.
 <br><br>
-**(Steps 9 to 11)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage(newPlan)` is called
+**(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage(newPlan)` is called
 to display the plan that has been created to the user via the terminal. The following is an example
 of a success plan creation message (new plan is called "Grow My Muscles"):
 ```
@@ -575,10 +589,10 @@ Alright, the following plan has been created:
 
 ----------------------------------------------------------------------
 ```
-**(Steps 12 to 13)** `FileManager#writeNewPlanToFile(newPlan)` is called to write the newly-created `Plan` 
+**(Steps 6 to 7)** `FileManager#writeNewPlanToFile(newPlan)` is called to write the newly-created `Plan` 
 object's data into `plans.txt`, which is stored on the user's local filesystem.
 <br><br>
-This completes the process of adding a new plan to WerkIt!.
+This completes the process of creating and adding a new plan to WerkIt!.
 
 ---
 
@@ -595,23 +609,21 @@ The following sequence diagram illustrates how the `plan /list` command works in
 
 ![List Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/listPlan.png)
 <br><br>
-**(Steps 1 to 3)** The program waits for the user's input, which in this case, is the `plan /list` command.
-Once the command is entered, the UI class will return the user input in a `String` object
-to the `WerkIt` object.
+**(Before Step 1)** The user's input (in this case will be a `plan /list` command) is obtained and parsed to obtain
+a `PlanCommand` object that contains the user's input.
+
+> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+
+**(Steps 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify
+that the plan action is of type `list`. Thus, it will subsequently call the
+`PlanList#listAllPlan()` method to display all available plan names.
 <br><br>
-**(Steps 4 to 6)** After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput(userInput)` method to parse the user input.
-Upon parsing of the input, a `PlanCommand` object is obtained. This `PlanCommand` object is upcasted to a `Command` object on return
-to the `WerkIt` object. It will then execute the plan command by calling the `PlanCommand#execute()` method.
+**(Step 3)** The `PlanList#listAllPlan()` method will first check if the application's plan list is empty.
+If it is, it will display to the user that no plan has been created yet.
 <br><br>
-**(Step 7)** The `PlanCommand#execute()` method identifies that the plan action is of type `list` due to the plan command that
-was supplied (`plan /list`). It then calls the appropriate method, `PlanList#listAllPlan()`, in order to display all plan names
-to the user.
-<br><br>
-**(Step 8)** The `PlanList#listAllPlan()` method will first check if the application's plan list is empty.
-If it is, it will display to the user via the terminal that no plan has been created yet.
-<br><br>
-**(Step 9)** The `PlanList#listAllPlan()` method will then loop through the plan list and show
-the names of the plan to the user via the terminal. The following is an example of what is 
+**(Step 4)** The `PlanList#listAllPlan()` method will then loop through the application's plan list and show
+the names of the plan to the user. The following is an example of what is 
 displayed to the user when the `plan /list` command is entered while the application's plan list is not empty:
 ```
 ----------------------------------------------------------------------
@@ -623,7 +635,7 @@ To view each plan in detail, enter
 2. Grow My Muscles
 ----------------------------------------------------------------------
 ```
-**(Steps 10 to 11)** The `PlanList#listAllPlan()` method returns to the `PlanCommand` object
+**(Steps 5 to 6)** The `PlanList#listAllPlan()` method returns to the `PlanCommand` object
 and the `PlanCommand` object returns to the `WerkIt` object.
 <br><br>
 This completes the process of displaying all plans in WerkIt!.
@@ -687,43 +699,40 @@ The following sequence illustrates how the schedule /update command works in gre
 (Steps 1 to 3) The program waits for the user's input, which in this case,
 is the schedule `/update <day number> <plan number>` command.
 An example of a valid command would be `schedule /update 1 1`.
-Once the command is entered, the UI class will return the user input in a String object to the WerkIt object.
-
-(Steps 4 to 5) After the user input is received, the WerkIt object will call the `Parser#parseUserInput()` method
+After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput(userInput)` method
 to parse the user input. A return `ScheduleCommand` object is obtained from the method.
 This `ScheduleCommand` object is upcasted to a `Command` object on return to the WerkIt object.
+The schedule command is being executed by calling the `ScheduleCommand#execute()` method.
 
-(Step 6) The schedule command is being executed by calling the `ScheduleCommand#execute()` method.
-
-Steps 7 and 8 are explained in greater details in the following sequence diagram:
+Steps 4 and 5 are explained in greater details in the following sequence diagram:
 
 ![updateScheduleDetails](uml/sequenceDiagrams/schedule/images/updateScheduleDetails.png)
 
-(Steps 7.1 to 7.2) The DayList#updateDay method will be called to update/add a plan for a particular day in the schedule 
-stated by the user. It will fist call the String#split method to separate out the `userArgument` given by the user. Upon, 
+(Steps 4.1 to 4.2) The `DayList#updateDay(userArgument)` method will be called to update/add a plan for a particular day in the schedule 
+stated by the user. It will fist call the `String#split(" ")` method to separate out the `userArgument` given by the user. Upon, 
 splitting of the whitespaces in `userArgument`, it will then check if the `userArgument` is valid. If it is invalid, an 
-Exception would be thrown to the user and following the termination of the process (step 7.4).
+Exception would be thrown to the user and following the termination of the process (step 4.3).
 
-(Steps 7.6 to 7.8) After splitting and checking the validity of `userArgument`, variables `userArgument[0]` representing
+(Steps 4.5 to 4.8) After splitting and checking the validity of `userArgument`, variables `userArgument[0]` representing
 day number and `userArgument[1]` representing the plan index of the plan stored in the planList are obtained. Both the 
 variables are then converted from data type string to integer. In addition, there is a check executed on both the converted 
-day number and plan number to ensure that they are valid. This check is done so by calling the `DayList#isDayValid` and
-`DayList#isPlanValid` methods respectively.
+day number and plan number to ensure that they are valid. This check is done so by calling the `DayList#isDayValid(DayNumber)` and
+`DayList#isPlanValid(planNumber)` methods respectively.
 
-(Steps 7.9 and 7.11) If the day number or plan number is not valid, an `InvalidScheduleException` would be thrown to the user,
+(Steps 4.9 and 4.11) If the day number or plan number is not valid, an `InvalidScheduleException` would be thrown to the user,
 and the entire updating of a plan for a particular day in the schedule process is aborted.
 
-(Steps 7.13 and 7.14) `PlanList#getPlanDisplayList` method is called to find and return the hash value of the plan number, 
+(Steps 4.13 and 4.14) `PlanList#getPlanDisplayList()` method is called to find and return the hash value of the plan number, 
 `planToAddKey:String` to be scheduled for a particular day. The `planToAddKey` is used to get the `plan` object in the 
-planList by calling the `PlanList#getPlanFromKey` (steps 7.15 to 7.16).
+planList by calling the `PlanList#getPlanFromKey` (steps 4.15 to 4.16).
 
-(Steps 7.17 to 7.18) Once the `Plan` object is retrieved, if there are no plan being scheduled for the day, 
-a new Day object is created and stored in the application.
+(Steps 4.17 to 4.18) Once the `Plan` object is retrieved, if there are no plan being scheduled for the day, 
+a new `Day` object is created and stored in the application.
 
-(Steps 7.19 to 7.20) However, if there is an existing plan scheduled for that particular day, the `Day` object that 
+(Steps 4.19 to 4.20) However, if there is an existing plan scheduled for that particular day, the `Day` object that 
 had already been created, will then be updated to store the latest plan scheduled for the day.
 
-(Step 9 and 10) After successfully created/updated the Day object, the `UI#printNewSchedule(newDay)` method
+(Steps 6 and 7) After successfully created/updated the Day object, the `UI#printNewSchedule(newDay)` method
 will be called to display the day and the corresponding plan scheduled for it via the terminal. The following is an
 example of the message after the user had successfully scheduled a plan for the day (e.g. `schedule /update 1 1`):
 ```
@@ -734,7 +743,7 @@ Monday -- arms
 
 ----------------------------------------------------------------------
 ```
-(Step 11) Lastly, before the `ScheduleCommand` object is discarded, the `FileManager#rewriteAllDaysScheduleToFile(dayList)`
+(Step 8) Lastly, before the `ScheduleCommand` object is discarded, the `FileManager#rewriteAllDaysScheduleToFile(dayList)`
 is called to rewrite the `schedule.txt` file according to the newly modified application's day list.
 
 This completes the process of scheduling a plan for a particular day in WerkIt!
@@ -745,13 +754,13 @@ For the application, schedule is defined to be a 7-days workout plan. The days t
 would be considered a rest day for the user. Therefore, when implementing the creation of `Day` object, a total of 7
 `Day` objects at most would be created and be stored in the dayList with size 7.
 
-Initially, if no plan has been scheduled for a particular day, the corresponding Day object would not be created.
-For example, if no plan is being scheduled for Monday, there will be no Day object created for Monday and the dayList
+Initially, if no plan has been scheduled for a particular day, the corresponding `Day` object would not be created.
+For example, if no plan is being scheduled for Monday, there will be no `Day` object created for Monday and the dayList
 with index 0 will not have any `Day` object being stored.
 
 If `dayList[0]` contains a `Day` object, it would mean that the user scheduled a plan on Monday. If the
 user were to execute the `schedule /update` command again to update the plan to be scheduled for Monday, the application
-will update the content in the Day object stored in `dayList[0]`. It will not recreate a Day object for Monday
+will update the content in the Day object stored in `dayList[0]`. It will not recreate a `Day` object for Monday
 to store the new plan.
 ---
 
@@ -774,24 +783,22 @@ The following sequence illustrates how the `schedule /list` command works in gre
 
 (Steps 1 to 3) The program waits for the user's input, which in this case,
 is the `schedule /list` command. Once the command is entered, the UI class will return
-the user input in a String object to the WerkIt object.
+the user input in a String object to the `WerkIt` object. After the user input is received, the WerkIt object will 
+call the `Parser#parseUserInput(userInput)` method to parse the user input. 
+A return `ScheduleCommand` object is obtained from the method.
+This `ScheduleCommand` object is upcasted to a `Command` object on return to the `WerkIt` object. 
+The schedule command is being executed by calling the `ScheduleCommand#execute()` method.
 
-(Steps 4 to 5) After the user input is received, the WerkIt object will call the `Parser#parseUserInput()` method
-to parse the user input. A return `ScheduleCommand` object is obtained from the method.
-This `ScheduleCommand` object is upcasted to a `Command` object on return to the WerkIt object.
-
-(Step 6) The schedule command is being executed by calling the `ScheduleCommand#execute()` method.
-
-(Step 7) Since the command passed in by the user is `schedule /list`, the application will execute the `DayList#printSchedule()` method.
+(Step 4) Since the command passed in by the user is `schedule /list`, the application will execute the `DayList#printSchedule()` method.
 No parameters are needed to be passed in the method as the method loop through the scheduleList, which stores all the plan names
 scheduled for the individual days.
 
-(Step 8 and 9) To ensure the printing of the schedule is formatted properly with a common standard, when `DayList#printSchedule()`
+(Steps 5 and 6) To ensure the printing of the schedule is formatted properly with a common standard, when `DayList#printSchedule()`
 method is called, it will invoke a for loop to pad the plan name for all the plans in the scheduleList
 with spaces by calling the `DayList#padWithSpaces(planForDay)` method. This method will pad both the front and back of the
 plan name with spaces. Total characters that the padding and the plan name combined should not exceed 30 characters.
 
-(Step 10) Upon the successful execution of the `DayList#printSchedule()` method, the plan scheduled on each of the day
+(Step 7) Upon the successful execution of the `DayList#printSchedule()` method, the plan scheduled on each of the day
 will be display on the console to the user. An expected outcome of the `schedule /list` command would be:
 
 ```
@@ -816,7 +823,7 @@ By default, if no plan is being scheduled for any of the day, the day is to be c
 
 ---
 #### Clear Schedule For A Day
-A summary of the general procedure of clearing a plan scheduled for a paricular day of the schedule in WerkIt! is as follows:
+A summary of the general procedure of clearing a plan scheduled for a particular day of the schedule in WerkIt! is as follows:
 1. User enters the command `schedule /clear <day number>`.
 2. The application will locate the index in the DayList which stores the corresponding `Day` object.
    This `Day` object will then be deleted from the DayList. For example, if `schedule /clear 1` command is entered,
@@ -836,27 +843,27 @@ The following sequence illustrates how the `schedule /clear` command works in gr
 
 (Steps 1 to 3) The program waits for the user's input, which in this case,
 is the `schedule /clear <day number>` command. An example of a valid command would be `schedule \clear 1`
-Once the command is entered, the UI class will return the user input in a String object to the WerkIt object.
+Once the command is entered, the UI class will return the user input in a `String` object to the `WerkIt` object.
+After the user input is received, the WerkIt object will call the `Parser#parseUserInput(userInput)` method
+to parse the user input. A return `ScheduleCommand` object is obtained from the method.
+This `ScheduleCommand` object is upcasted to a `Command` object on return to the `WerkIt` object.
+The schedule command is being executed by calling the `ScheduleCommand#execute()` method.
 
-(Steps 4 to 5) After the user input is received, the WerkIt object will call the `Parser#parseUserInput()` method
-to parse the user input. A return ScheduleCommand object is obtained from the method.
-This ScheduleCommand object is upcasted to a Command object on return to the WerkIt object.
+(Step 4) Since the command entered is `schedule /clear <day number>`, the `DayList#clearDayPlan(userArgument)` method will
+be called. This method will first convert the userArgument to an Integer data type (steps 5 and 6) and will then call
+the `DayList#isDayValid(dayNumber)` method to check whether the day number entered by the user is valid (step 7). 
+If the day number falls within the range of 1 to 7 then it is considered a valid day else 
+an `InvalidScheduleException` would be thrown to the user, and the entire clearing of plan for a 
+particular day in the schedule process is aborted.
 
-(Step 6) The schedule command is being executed by calling the `ScheduleCommand#execute()` method.
-
-(Step 7) Since the command entered is `schedule /clear <day number>`, the `DayList#clearDayPlan(userArgument)` method will
-be called. This method will first convert the userArgument to an Integer data type (steps 8 and 9) and will then call
-the `DayList#isDayValid()` method to check whether the day number entered by the user is valid (step 10). If the day number falls
-within the range of 1 to 7 then it is considered a valid day else an `InvalidScheduleException` would be thrown to the user, 
-and the entire clearing of plan for a particular day in the schedule process is aborted.
-
-(Steps 12 and 13) Upon checking the validity of the day number, the application will then delete the `Day` object that 
+(Steps 9 and 10) Upon checking the validity of the day number, the application will then delete the `Day` object that 
 stores the plan details for the specified day in the user command. Once, the `Day` object is successfully deleted, the 
-`DayList#convertDayNumberToDay` method will be called. As the method name suggests, this method will convert the day number
-to its corresponding meaning. For example, day number 1 will be converted to Monday. The purpose of this method is to 
+`DayList#convertDayNumberToDay(dayNumber)` method will be called. As the method name suggests, this method will 
+convert the day number to its corresponding meaning. 
+For example, day number 1 will be converted to Monday. The purpose of this method is to 
 make the success message displayed to the user more user-readable.
 
-(Step 14) After the plan is successfully cleared for that indicated day, a success message of the process would be
+(Step 11) After the plan is successfully cleared for that indicated day, a success message of the process would be
 printed to the user through the terminal. An example of a success message would be
 
 ```
@@ -865,15 +872,15 @@ Plan had been cleared for Monday.
 ----------------------------------------------------------------------
 ```
 
-(Step 15) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored in the dayList
-into `schedule.txt` which is stored on the user's local filesystem.
+(Step 12) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
+in the dayList into `schedule.txt` which is stored on the user's local filesystem.
 
 This completes the process of clearing a plan on a particular day of the schedule on WerkIt!
 
 ---
 #### Clear Schedule For The Week
 A summary of the general procedure of clearing all the plans stored in the schedule in WerkIt! is as follows:
-1. User enters the command `schedule /clearall.
+1. User enters the command `schedule /clearall`.
 2. The application will delete all the plans that had been added to the schedule.
 3. The success response is printed to the user through the terminal. 
 4. The `schedule.txt` will also be rewritten to reflect the changes.
@@ -888,17 +895,15 @@ The following sequence illustrates how the `schedule /clearall` command works in
 
 (Steps 1 to 3) The program waits for the user's input, which in this case,
 is the `schedule /clearall`. The UI class will return the user input in a String object to the WerkIt object.
-
-(Steps 4 to 5) After the user input is received, the WerkIt object will call the `Parser#parseUserInput()` method
+After the user input is received, the WerkIt object will call the `Parser#parseUserInput(userInput)` method
 to parse the user input. A return ScheduleCommand object is obtained from the method.
 This ScheduleCommand object is upcasted to a Command object on return to the WerkIt object.
+The schedule command is being executed by calling the `ScheduleCommand#execute()` method.
 
-(Step 6) The schedule command is being executed by calling the `ScheduleCommand#execute()` method.
-
-(Step 7) Since the command entered is `schedule /clearall`, the `DayList#clearAllSchedule()` method will
+(Step 4) Since the command entered is `schedule /clearall`, the `DayList#clearAllSchedule()` method will
 be called. This method will delete all the `Day` object stored in the dayList using a for loop.  
 
-(Steps 8 and 9) After all the plan is successfully cleared from the schedule, `UI#printClearedScheduleMessage()` method 
+(Steps 5 and 6) After all the plan is successfully cleared from the schedule, `UI#printClearedScheduleMessage()` method 
 will be called to print a success message of the process. This message would be printed to the user through the terminal. 
 An example of a success message would be
 
@@ -911,9 +916,10 @@ schedule /update <day number [1-7]> <plan number>
 ----------------------------------------------------------------------
 ```
 
-(Step 10) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the Day objects' data stored in the dayList
-into `schedule.txt` which is stored on the user's local filesystem. Since all Day objects are deleted, the writing of
-data into `schedule.txt` would be an equivalent of resetting the text file. 
+(Step 7) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
+in the dayList into `schedule.txt` which is stored on the user's local filesystem. 
+Since all Day objects are deleted, the writing of data into `schedule.txt` would be an equivalent of 
+resetting the text file. 
 
 This completes the process of clearing of all plans stored in the schedule on WerkIt!
 
@@ -1013,11 +1019,13 @@ The following sequence diagram illustrates how the `search /all` command works i
 * **Plan** - A set of workouts
     * Example:
 
+
 | Plan Name      | Contains                                                                                                               |
 |----------------|------------------------------------------------------------------------------------------------------------------------|
 | Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps)                                                          |
 | Whole Body!    | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
-<br><br>
+
+
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
 of their schedule. For instance, the user's daily schedule can look like this:
 

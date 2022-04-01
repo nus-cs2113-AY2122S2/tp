@@ -80,7 +80,7 @@ class WorkoutListTest {
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);
         System.setOut(ps);
-        wl.listWorkout();
+        wl.listAllWorkout();
         System.out.flush();
         String expectedOutput = "The workout list is empty";
         assertEquals(expectedOutput, consoleOutput.toString().trim());
@@ -101,7 +101,7 @@ class WorkoutListTest {
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);
         System.setOut(ps);
-        wl.listWorkout();
+        wl.listAllWorkout();
         System.out.flush();
         String consoleOutputs = consoleOutput.toString().replaceAll("\n", "").replaceAll("\r", "");
         assertEquals(expectedOutput, consoleOutputs);

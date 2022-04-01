@@ -2,9 +2,10 @@
 'https://plantuml.com/sequence-diagram
 !include ../../Style.puml
 
-autonumber 7.1
+autonumber 2.1
 
 title Sequence Diagram of `PlanList#createAndAddPlan()`
+hide footbox
 
 participant "planList\n:PlanList" AS pl
 participant "workoutList\n:WorkoutList" AS wl
@@ -13,27 +14,16 @@ activate pl
 group sd Write new Plan data into file on user's system.
 
 ref over pl
-Parse the user input to obtain the plan name
-and the workout index numbers separated by comma.
+Parse the user input to obtain the plan name and the workout index numbers separated by comma.
 (Method calls not shown)
 end
-
-pl -> pl : checkPlanNameValidity(userPlanNameInput, className)
-activate pl
-return
-
 
 ref over pl
-Obtain number of workouts to be added into
-the new plan (split string by comma).
+Obtain number of workouts to be added into the new plan (split string by comma).
 (Method calls not shown)
 end
 
-pl -> pl : checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className)
-activate pl
-return
-
-create "workoutsToAddInAPlanList:ArrayList<Workout>" AS wtoadd
+create "workoutsToAddInAPlanList\n:ArrayList<Workout>" AS wtoadd
 pl -> wtoadd : new
 activate wtoadd
 return
@@ -41,23 +31,15 @@ return
 loop until all workouts to be added in a plan is added
 
 ref over pl
-Get each individual workout index numbers from user
-input string and convert them into an Integer.
+Get each individual workout index from user input and
+fetch the corresponding Workout object from the application's workout list.
 (Method calls not shown)
 end
-
-pl -> pl : checkWorkoutNumberWithinRange(workoutIndexNumberInteger, className)
-activate pl
-return
 
 pl -> wtoadd : add(workoutToAddObject)
 activate wtoadd
 return
 end
-
-pl -> pl : checkPlanWithSameWorkoutSequence(workoutsToAddInAPlanList, className)
-activate pl
-return
 
 create "newPlan:Plan" AS newPlan
 pl -> newPlan : new Plan(userPlanNameInput, workoutsToAddInAPlanList)
