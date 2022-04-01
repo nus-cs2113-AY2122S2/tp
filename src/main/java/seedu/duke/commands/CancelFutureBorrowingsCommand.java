@@ -37,7 +37,7 @@ public class CancelFutureBorrowingsCommand extends Command {
      * Get an ArrayList of BorrowRecord in order of the borrower's future borrowings.
      * @param borrowerName the name of the borrower
      * @param itemList the ItemList of all Items
-     * @return ArrayList<BorrowRecord> in order of borrower's future borrowings.
+     * @return List of BorrowRecord in order of borrower's future borrowings.
      */
     private ArrayList<BorrowRecord> getBorrowRecords(String borrowerName, ItemList itemList) {
         ArrayList<BorrowRecord> records = new ArrayList<BorrowRecord>();
@@ -60,7 +60,7 @@ public class CancelFutureBorrowingsCommand extends Command {
      * Get an ArrayList of Item in order of the borrower's future borrowings.
      * @param borrowerName the name of the borrower
      * @param itemList the ItemList of all Items
-     * @return ArrayList<Item> in order of borrower's future borrowings.
+     * @return List of items in order of borrower's future borrowings.
      */
     private ArrayList<Item> getItems(String borrowerName, ItemList itemList) {
         ArrayList<Item> items = new ArrayList<Item>();
