@@ -38,7 +38,12 @@ class ActivityDeleteCommandTest {
     @Test
     public void run_sessionDoesNotExists_activityListSizeRemainsTwo() throws InvalidDataException {
         String userInput = "activity /delete /sid 3 /aid 1";
+
+        //Checks that command returned is an ActivityDeleteCommand object
         Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityDeleteCommand.class, command.getClass());
+
+        //Checks that the number of activities stored remains the same
         command.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
     }
@@ -52,7 +57,12 @@ class ActivityDeleteCommandTest {
     @Test
     public void run_activityDoesNotExists_activityListSizeRemainsTwo() throws InvalidDataException {
         String userInput = "activity /delete /sid 1 /aid 3";
+
+        //Checks that command returned is an ActivityDeleteCommand object
         Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityDeleteCommand.class, command.getClass());
+
+        //Checks that the number of activities stored remains the same
         command.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
     }
@@ -64,9 +74,14 @@ class ActivityDeleteCommandTest {
      *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_validCommand_activityListsSizeBecomesOne() throws InvalidDataException {
+    public void run_validCommand_activitySuccessfullyDeleted() throws InvalidDataException {
         String userInput = "activity /delete /sid 1 /aid 1";
+
+        //Checks that command returned is an ActivityDeleteCommand object
         Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityDeleteCommand.class, command.getClass());
+
+        //Checks that the number of activities stored decrease by 1
         command.run(manager);
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
     }
