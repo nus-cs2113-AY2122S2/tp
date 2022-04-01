@@ -26,8 +26,8 @@ public class Messages {
             + " Please enter an item number!\n";
     public static final String INVALID_ITEM_NUMBER_MESSAGE = "Sorry, You haven't entered a valid item number."
             + " Please enter a valid item number!\n";
-    public static final String EMPTY_ITEM_LIST_MESSAGE = "Your inventory is currently empty. " +
-            "Please enter add an item first!";
+    public static final String EMPTY_ITEM_LIST_MESSAGE = "Your inventory is currently empty. "
+            + "Please enter add an item first!";
     public static final String TASK_NUMBER_OUT_OF_RANGE_MESSAGE = "Sorry, the item number is out of range. "
             + "Please enter a different task number!";
     public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost.";
