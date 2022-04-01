@@ -66,8 +66,7 @@ public class SessionEditCommand extends Command {
                 Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITSESSION);
                 return;
             }
-            PersonList newPersonList = new PersonList();
-            newPersonList.convertToPersonList(personNames);
+            PersonList newPersonList = new PersonList(personNames);
             if (!newPersonList.isSuperset(session.getPersonList())) {
                 ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
                 return;

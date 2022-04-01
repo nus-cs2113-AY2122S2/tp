@@ -115,7 +115,8 @@ displayed in an easy-to-read summary.
 ## Features 
 
 ## _Session Management_
-> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
+> A session represents a group outing that involves a list of participants and 
+> spans an arbitrary period of time containing one or more activities.
 
 <br>
 
@@ -127,7 +128,7 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >  * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
 >  * The format of the date must be in `DD-MM-YYYY`.
->* `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
+>* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
 >  * Each individual name is **case-insensitive**.
  
 <br>
@@ -139,21 +140,21 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >  - Example: `Alice Tan` is not allowed.
 > 
 > **⚠️Warnings:**
->- If you include a name in `[NAME1 NAME2 ...]` that already exists in the group specified by `[GROUP_ID]`,
-   only one instance of this person is stored in the session.
+>- If you include a name of an individual in `[NAME1 NAME2 ...]` who already exists in the group specified by
+   `[GROUP_ID]`, only one instance of this individual is stored in the session.
 >- Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
    includes Alice, only two names, Alice and Bob, would be saved.
 
 <br>
 
 **Example 1** 
-- Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.<br><br>
+- Adds a new session named _Class Outing_ involving Alice and Bob on 15-03-2022.<br><br>
   `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br><br>
   ![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
 
 **Example 2** 
 - A [group has been created](#creating-a-group-group-create) with group named *Friends* with Charlie and Mike. <br>
-  Adds a new session named Class Gathering consisting of a group named *Friends* and Alice, on 16-04-2022.<br><br>
+  Adds a new session named _Class Gathering_ consisting of a group named *Friends* and Alice, on 16-04-2022.<br><br>
   `session /create /n Class Gathering /d 16-04-2022 /gid 1 /pl Alice` <br><br>
   ![Session create command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[2].png)
   <br>
@@ -189,6 +190,12 @@ Edits an existing session so that you can change the details of a session.<br>
 >Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
+>* `[SESSION_NAME]` refers to the name of the session.
+   >  * The session name is **case-insensitive**.
+>* `[SESSION_DATE]` refers to the date of the session.
+   >  * The format of the date must be in `DD-MM-YYYY`.
+>* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
+   >  * Each individual name is **case-insensitive**.
 
 <br>
 
@@ -197,10 +204,10 @@ Edits an existing session so that you can change the details of a session.<br>
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 >- The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >  - Example: `Alice Tan` is not allowed.
->- There are 3 editable fields: session name, session date and the persons involved in the session.
+>- There are 3 editable fields: _session name_, _session date_ and the _list of participants_ in the session.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
->- When editing the persons involved, existing participants must be included in the command.
+>- When editing the _list of participants_, existing participants must be included in the command.
 >  - Example: If the session previously created had Alice and Bob with session unique identifier of 1 
 >    and you wish to edit it to include Charlie, a valid edit command would be
      `session /edit /sid 1 /pl Alice Bob Charlie`.
@@ -212,10 +219,10 @@ Edits an existing session so that you can change the details of a session.<br>
 
 Examples of usage:
 - A [session has been created](#creating-a-session-session-create) with a unique identifier of 1,
-  named Class Outing with Alice and Bob involved on 15-03-2022.
+  named _Class Outing_ with Alice and Bob involved on 15-03-2022.
 
 **Example 1** 
-- Edits the name of the session to Class gathering and date to 16-03-2022. <br><br>
+- Edits the name of the session to _Class gathering_ and date to 16-03-2022. <br><br>
   `session /edit /sid 1 /n Class gathering /d 16-03-2022` <br><br>
   ![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
 
@@ -289,7 +296,7 @@ There are 2 ways that you can create an activity:
 >    * The activity name is **case-insensitive**.
 >* `[PERSON_PAID]` refers to the person who paid for the activity.
 >    * The person's name is **case-insensitive**.
->* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+>* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
 >    * Each individual name is **case-insensitive**.
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
@@ -316,13 +323,13 @@ There are 2 ways that you can create an activity:
 <br>
 
 **Example 1**
-- Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid a total of $10
+- Adds a new activity to a session with a session unique identifier of 2 named _Class Lunch_. Alice paid a total of $10
   for both Bob and herself which is split equally between them later on.<br><br>
   `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br><br>
   ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 
 **Example 2**
-- Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
+- Adds a new activity to a session with a session unique identifier of 2 named _Class Lunch_. Alice paid for both
   Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.<br><br>
   `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br><br>
   ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
@@ -378,7 +385,7 @@ There are 2 ways that you can edit an activity:
 >    * The activity name is **case-insensitive**.
 >* `[PERSON_PAID]` refers to the person who paid for the activity.
 >    * The person's name is **case-insensitive**.
->* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+>* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
 >    * Each individual name is **case-insensitive**.
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
@@ -501,20 +508,20 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <hr>
 
 ## _Group Management_
-> A group represents one or more individuals. Several commands use groups to quickly identify a group of individual
-  persons without having to manually enter their details one by one.
+> A group represents one or more individuals. Several commands use groups to quickly identify a group of individuals
+  without having to manually enter their details one by one.
 
 <br>
 
 ### Creating a group: `group /create`
-Creates a new group so that you do not have to always enter the same persons' particulars for every session that is
-participated by the same group of persons.
+Creates a new group so that you do not have to enter the particulars for the same individuals whenever creating a
+new session that is participated by the same group of individuals.
 
 > Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 >
 >* `[GROUP_NAME]` refers to the name of the group.
 >    * The group name is **case-insensitive**.
->* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+>* `[NAME1 NAME2 ...]` refers to a list of individuals in the group.
 >    * Each individual name is **case-insensitive**.
 
 <br>
@@ -526,7 +533,7 @@ participated by the same group of persons.
 <br>
 
 **Example**:
-- Adds a new group named Uni Friends, with Alice and Bob involved.<br><br>
+- Adds a new group named _Uni Friends_, consisting of Alice and Bob.<br><br>
   `group /create /n Uni Friends /pl Alice Bob` <br><br>
   ![Group create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupCreateCommand.png)
   <br>
@@ -562,14 +569,17 @@ Edits an existing group so that you can change the details of a group.<br>
 
 >Format: `group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]`
 >* `[GROUP_ID]` refers to the unique identifier of the group.
->    * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
-
+>  * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
+>* `[GROUP_NAME]` refers to the name of the group.
+>  * The group name is **case-insensitive**.
+>* `[NAME1 NAME2 ...]` refers to a list of individuals in the group.
+>  * Each individual name is **case-insensitive**.
 <br>
 
 > **💡 Notes:**
 > - A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
 > - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
-> - There are 2 editable fields: group name and the persons in the group.
+> - There are 2 editable fields: _group name_ and the _list of individuals_ in the group.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
 >
@@ -579,10 +589,10 @@ Edits an existing group so that you can change the details of a group.<br>
 <br>
 
 Examples of usage:
-- A group with a unique identifier of 1 was previously created, and named Class Outing with Alice and Bob involved.
+- A group with a unique identifier of 1 was previously created, and named _Class Outing_ with Alice and Bob involved.
 
 **Example 1**
-- Edits the group name to Class gathering. <br><br>
+- Edits the group name to _Class gathering_. <br><br>
   `group /edit /gid 1 /n Class gathering` <br><br>
   ![Group Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[1].png)
 
@@ -683,6 +693,7 @@ Quits the application.<br>
 | Show session summary                    | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                                                  |
 | Create a new group                      | Format: `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 …]`<br><br>Example: `group /create /n SplitLah /pl Roy Ivan Warren Saurav Tianle`                                                                                               |
 | Delete an existing group                | Format: `group /delete /gid [GROUP_ID]`<br><br>Example: `group /delete /gid 1`                                                                                                                                                          |
+| Edit an existing group                  | Format: `group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]`<br><br>Example: `group /edit /gid 1 /n Class gathering`                                                                                              |
 | View an existing group                  | Format: `group /view /gid [GROUP_ID]`<br><br>Example: `group /view /gid 1`                                                                                                                                                              |
 | List all groups                         | Format: `group /list`                                                                                                                                                                                                                   |
 | List all available commands             | Format: `help`                                                                                                                                                                                                                          |
