@@ -461,8 +461,14 @@ Alright, the following workout has been removed:
 
 ----------------------------------------------------------------------
 ```
-**(Steps 6 to 7)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
-the `workouts.txt` file according to the newly modified application's workout list.
+
+**(Steps 6 to 7)** The `WorkoutCommand#deletePlanContainsDeletedWorkout()` method will
+be called to delete any existing plan(s) that contains the workout that has been deleted.
+<br><br>
+**(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
+the `workouts.txt` file according to the newly modified application's workout list and the
+the `FileManager#rewriteAllPlansToFile(planList)` is also called to rewrite
+the `plans.txt` file according to the newly modified application's plan list.
 <br><br>
 This completes the process of deleting an existing workout in WerkIt!
 
