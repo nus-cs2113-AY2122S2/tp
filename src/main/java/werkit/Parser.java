@@ -46,6 +46,9 @@ public class Parser {
     private PlanList planList;
     private DayList dayList;
     private FileManager fileManager;
+    public static final String SPACE_CHARACTER = " ";
+    public static final int EXPECTED_NUMBER_OF_PARAMETERS_HELP = 1;
+    public static final int EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE = 2;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS = 2;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS = 3;
     private static Logger logger = Logger.getLogger(Parser.class.getName());
@@ -259,7 +262,12 @@ public class Parser {
      * @param userInput The user's input.
      * @return A HelpCommand object.
      */
-    public HelpCommand createHelpCommand(String userInput) {
+    public HelpCommand createHelpCommand(String userInput) throws InvalidCommandException {
+        String className = this.getClass().getSimpleName();
+        if (userInput.trim().split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_HELP) {
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_HELP_COMMAND_ERROR_MSG);
+        }
         return new HelpCommand(userInput);
     }
 
@@ -303,8 +311,8 @@ public class Parser {
             arguments = userInput.split(" ", 3)[2].trim();
             return new SearchCommand(userInput, ui, workoutList, actionKeyword, arguments);
         case SEARCH_ALL_ACTION_KEYWORD:
-            if (userInput.split(" ", 3).length == 2) {
-                arguments = " ";
+            if (userInput.split(" ", 3).length == EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE) {
+                arguments = SPACE_CHARACTER;
                 return new SearchCommand(userInput, ui, exerciseList, workoutList, planList, actionKeyword, arguments);
             }
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
