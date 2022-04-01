@@ -67,18 +67,30 @@ public class FileManager {
 
     private static Logger logger = Logger.getLogger(FileManager.class.getName());
 
+    /**
+     * Recreates the workout file.
+     * @throws IOException      If the application is unable to create the workout file.
+     */
     public void deleteAndRecreateWorkoutFile() throws IOException {
         File workoutFile = new File(String.valueOf(getWorkoutFilePath()));
         workoutFile.delete();
         workoutFile.createNewFile();
     }
 
+    /**
+     * Recreates the plan file.
+     * @throws IOException      If the application is unable to create the plan file.
+     */
     public void deleteAndRecreatePlanFile() throws IOException {
         File planFile = new File(String.valueOf(getPlanFilePath()));
         planFile.delete();
         planFile.createNewFile();
     }
 
+    /**
+     * Recreates the Schedule file.
+     * @throws IOException      If the application is unable to create the schedule file.
+     */
     public void deleteAndRecreateScheduleFile() throws IOException {
         File scheduleFile = new File(String.valueOf(getScheduleFilePath()));
         scheduleFile.delete();
