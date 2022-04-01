@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-
+group DeleteCommand
 ?-> Parser: Delete command
 Activate Parser
 Parser -> Parser: prepareDeleteCommand(args)
@@ -33,5 +33,6 @@ Parser --> Parser: Return DeleteCommand
 Deactivate Parser
 ?<-- Parser
 Deactivate Parser
+end
 
 @enduml

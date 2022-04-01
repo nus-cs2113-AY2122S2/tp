@@ -3,7 +3,7 @@
 
 hide footbox
 autonumber
-
+group LimitCommand
 ?-> Parser: Limit command
 Activate Parser
 Parser -> Parser: setLimitCommand(args)
@@ -25,4 +25,6 @@ Parser --> Parser: Return LimitCommand
 Deactivate Parser
 ?<-- Parser
 Deactivate Parser
+
+end
 @enduml

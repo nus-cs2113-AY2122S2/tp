@@ -3,6 +3,7 @@
 
 hide footbox
 autonumber
+group getUserInput
 autoactivate on
 
 Spendvelope -> TextUi: getUserCommand()
@@ -15,5 +16,5 @@ end
 TextUi -> TextUi: showToUser()
 TextUi --> TextUi
 TextUi --> Spendvelope: fullInputLine
-
+end
 @enduml
