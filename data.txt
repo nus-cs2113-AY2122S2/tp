@@ -1,3 +1,3 @@
-Experience Seoul | 1 | 01/4/2022 | 08/4/2022 | Marriott Seoul | 100.11 | Korea | 20 | 19$1,Tim,98765432,3%1,Brendan,12345,3%1,Tim,91234567,10%1,Bren,2468,3%
-Conquer Summits | 2 | 05/5/2022 | 11/5/2022 | Hotel Schweizerhof Luzern | 80.0 | Switzerland | 20 | 6$2,Tim,98765432,3%2,Brendan,12345,3%
-Back To Our Roots | 3 | 01/4/2022 | 20/4/2022 | Hotel in Malaysia | 50.0 | Malaysia | 100 | 6$3,Tim,98765432,3%3,Brendan,12345,3%
+Experience Seoul | 1 | 01/04/2022 | 08/04/2022 | Marriott Seoul | 100.11 | Korea | 20 | 19$1,Tim,98765432,3%1,Brendan,12345,3%1,Tim,91234567,10%1,Bren,2468,3%
+Conquer Summits | 2 | 05/05/2022 | 11/05/2022 | Hotel Schweizerhof Luzern | 80.0 | Switzerland | 20 | 6$2,Tim,98765432,3%2,Brendan,12345,3%
+Back To Our Roots | 3 | 01/04/2022 | 20/04/2022 | Hotel in Malaysia | 50.0 | Malaysia | 100 | 6$3,Tim,98765432,3%3,Brendan,12345,3%

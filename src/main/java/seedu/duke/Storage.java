@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class Storage {
     /**
      * String representation of the file path to the save file
      *
-     * @param   filePath
+     * @param filePath
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -60,7 +61,7 @@ public class Storage {
      *
      * @return ArrayList<TravelPackage> object for createPackages method
      */
-    public ArrayList<TravelPackage> parseSavedFile(){
+    public ArrayList<TravelPackage> parseSavedFile() {
         ArrayList<TravelPackage> t = new ArrayList<>();
         File pFile = new File(filePath);
         try {
@@ -87,7 +88,7 @@ public class Storage {
     public Reservations parseReservationFile(String str) {
         Reservations rList = new Reservations();
         String[] arrayElements = str.split("%");
-        for (int i=0; i< arrayElements.length; i++){
+        for (int i = 0; i < arrayElements.length; i++) {
             Reservation newR = parseReservation(arrayElements[i]);
             rList.initReservation(newR);
         }
@@ -99,7 +100,7 @@ public class Storage {
      *
      * @return Reservation
      */
-    public Reservation parseReservation(String str){
+    public Reservation parseReservation(String str) {
         String[] arrayElements = str.split(",");
         int packageID = Integer.parseInt(arrayElements[0].trim());
         String customerName = arrayElements[1].trim();
@@ -120,14 +121,16 @@ public class Storage {
         String sid = arrayElements[1].trim();
         int id = Integer.parseInt(sid);
         String start = arrayElements[2].trim();
+        LocalDate startDate = LocalDate.from(Parser.PARSE_FORMAT.parse(start));
         String end = arrayElements[3].trim();
+        LocalDate endDate = LocalDate.from(Parser.PARSE_FORMAT.parse(end));
         String hotel = arrayElements[4].trim();
         double price = Double.parseDouble(arrayElements[5].trim());
         String country = arrayElements[6].trim();
         int vacancies = Integer.parseInt(arrayElements[7].trim());
         int numParticipants = Integer.parseInt(arrayElements[8].trim());
-        TravelPackage newPackage = new TravelPackage(name, id, start, end, hotel, price, country, vacancies, numParticipants);
+        TravelPackage newPackage = new TravelPackage(name, id, startDate, endDate, hotel, price, country, vacancies,
+                numParticipants);
         return newPackage;
     }
 }
-
