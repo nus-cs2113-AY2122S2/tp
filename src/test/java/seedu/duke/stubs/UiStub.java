@@ -21,8 +21,8 @@ public class UiStub extends Ui {
      *
      * @param message Message to be displayed to user
      * */
-     @Override
-     public void showMessages(String... message) {
+    @Override
+    public void showMessages(String... message) {
          Collections.addAll(outputMessages, message);
      }
 
