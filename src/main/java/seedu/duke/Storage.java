@@ -48,8 +48,10 @@ public class Storage {
      * @return Packages object for Control class
      */
     public Packages createPackages() {
+        System.out.println("Loading save file...");
         ArrayList<TravelPackage> t = parseSavedFile();
         Packages p = new Packages(t);
+        System.out.println("Loaded!");
         return p;
     }
 
@@ -87,7 +89,7 @@ public class Storage {
         String[] arrayElements = str.split("%");
         for (int i=0; i< arrayElements.length; i++){
             Reservation newR = parseReservation(arrayElements[i]);
-            rList.addReservation(newR);
+            rList.initReservation(newR);
         }
         return rList;
     }

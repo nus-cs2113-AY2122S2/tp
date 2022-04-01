@@ -15,9 +15,10 @@ public class DeleteCommand extends Command {
         for (int i = 0; i < numberOfPackages; i++) {
             if (packages.getPackage(i).getID() == (id)) {
                 packages.removePackage(i);
-                break;
+                System.out.println("Travel package deleted!");
+                return;
             }
         }
-
+        System.out.println("Package not found!");
     }
 }

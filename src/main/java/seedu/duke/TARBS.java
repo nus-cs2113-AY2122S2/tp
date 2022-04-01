@@ -17,6 +17,7 @@ public class TARBS {
         System.out.println("Welcome to Travel Agency Booking Reservation System!");
         Scanner sc = new Scanner(System.in);
         while (!endProgram) {
+            storage.savePackageToFile(packages);
             System.out.println("Please enter command: ");
             try {
                 Command command = Parser.parse(sc.nextLine());
@@ -27,7 +28,6 @@ public class TARBS {
                 System.out.println("Wrong format. All available" +
                         " commands can be seen with the 'help' command");
             }
-            storage.savePackageToFile(packages);
         }
         storage.savePackageToFile(packages);
     }
