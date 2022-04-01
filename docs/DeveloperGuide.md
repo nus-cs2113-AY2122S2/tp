@@ -191,8 +191,8 @@ the user's input as a `String` object to `WerkIt#startContinuousUserPrompt()`. T
 `WerkIt#startContinuousUserPrompt()` calls `Parser#parseUserInput()` to parse the user's input and create an object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
 this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()`.
 
-<p class="box info">A detailed implementation of the parsing and creation of subclass-of-`Command` object process can be found in
-'[Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)'.</p>
+<span class="box info">A detailed implementation of the parsing and creation of subclass-of-`Command` object process can be found in
+'[Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)'.</span>
 
 Next, `WerkIt#startContinuousUserPrompt()` calls on the `execute()` method of the subclass-of-`Command` object to
 perform the user's requested action. If the execution goes smoothly, this completes the user's inputted command.
