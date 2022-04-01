@@ -1,9 +1,9 @@
 package seedu.duke;
 
 public class Customer {
-    private String customerID;
-    private String name;
-    private String contactNumber;
+    private final String customerID;
+    private final String name;
+    private final String contactNumber;
 
     public Customer(String customerID, String name, String contactNumber){
         this.customerID = customerID;

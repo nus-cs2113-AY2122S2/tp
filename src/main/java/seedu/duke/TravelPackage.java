@@ -13,7 +13,7 @@ public class TravelPackage {
     public static final String EXAMPLECOUNTRY = "Switzerland";
     public static final int EXAMPLEMAX = 10;
 
-    private static DateTimeFormatter printFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter printFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private final String name;
     private final int id;
@@ -96,7 +96,7 @@ public class TravelPackage {
 
     public Reservations getReservationList() {
         return this.reservationList;
-    };
+    }
 
     public void addParticipants(int addParticipants) {
         this.numParticipants = this.numParticipants + addParticipants;
@@ -149,11 +149,11 @@ public class TravelPackage {
     }
 
     public String toSave() {
-        return name + " | " + Integer.toString(id) +
+        return name + " | " + id +
                 " | " + startDate.format(Parser.PARSE_FORMAT) + " | " + endDate.format(Parser.PARSE_FORMAT) + " | " +
-                hotel + " | " + Double.toString(price) + " | " + country + " | " +
-                Integer.toString(maxParticipants)
-                + " | " + Integer.toString(numParticipants);
+                hotel + " | " + price + " | " + country + " | " +
+                maxParticipants
+                + " | " + numParticipants;
     }
 
 }

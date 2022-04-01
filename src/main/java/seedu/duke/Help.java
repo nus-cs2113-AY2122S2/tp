@@ -2,7 +2,7 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class Help {
-    private ArrayList<String[]> desc;
+    private final ArrayList<String[]> desc;
 
     public Help(){
         this.desc = new ArrayList<>();

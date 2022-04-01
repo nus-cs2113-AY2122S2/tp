@@ -7,7 +7,7 @@ import seedu.duke.Reservation;
 import java.util.Scanner;
 //add reservation to TravelPackage using travelpackage id
 public class ReservationCommand extends Command {
-    private Reservation newReservation;
+    private final Reservation newReservation;
 
     public ReservationCommand(int travelPackageID, String name, String number, int pax) {
         this.newReservation = new Reservation(travelPackageID, name, number, pax);

@@ -4,7 +4,7 @@ import seedu.duke.Packages;
 
 public class WrongFormatCommand extends Command {
 
-    private String feedback;
+    private final String feedback;
 
     public WrongFormatCommand(String feedback) {
         this.feedback = feedback;

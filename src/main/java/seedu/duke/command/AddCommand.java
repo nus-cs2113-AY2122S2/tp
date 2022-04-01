@@ -7,7 +7,7 @@ import seedu.duke.TravelPackage;
 
 //creates a TravelPackage and adds to packages
 public class AddCommand extends Command {
-    private TravelPackage newPackage;
+    private final TravelPackage newPackage;
 
     public AddCommand(String name, int id, LocalDate date1, LocalDate date2, String hotel, double price,
             String country,

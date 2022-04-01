@@ -39,6 +39,6 @@ public class Reservation {
     }
 
     public String toSave() {
-        return  Integer.toString(packageID) + "," + customerName + "," + contactNumber + "," + Integer.toString(numOfPax);
+        return packageID + "," + customerName + "," + contactNumber + "," + numOfPax;
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 //Packages include arrayList packages to hold all TravelPackages
 
 public class Packages {
-    private ArrayList<TravelPackage> packages;
+    private final ArrayList<TravelPackage> packages;
 
     public Packages() {
         this.packages = new ArrayList<>();

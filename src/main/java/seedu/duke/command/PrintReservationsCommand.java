@@ -4,7 +4,7 @@ import seedu.duke.Packages;
 import seedu.duke.TravelPackage;
 
 public class PrintReservationsCommand extends Command {
-    private int packageID;
+    private final int packageID;
 
     public PrintReservationsCommand(int packageID) {
         this.packageID = packageID;
