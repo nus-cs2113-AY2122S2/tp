@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-!include ../Style.puml
+!include ../../Style.puml
 
 autonumber
 
@@ -8,18 +8,15 @@ title Sequence Diagram of `schedule /list` Command
 
 actor   User
 participant "werkIt:WerkIt" AS WerkIt
-participant "ui:UI" AS UI1
 participant "parser:Parser" AS Parser
 participant "newCommand\n:ScheduleCommand" AS newCommand
 participant "dayList\n:DayList" AS DayList
 
 
 activate WerkIt
-WerkIt -> UI1 : getUserInput()
-activate UI1
-User -> UI1 : `schedule /list` command
-WerkIt <-- UI1 : userInputTrimmed:String
-deactivate UI1
+ref over WerkIt
+Obtain and parse user input
+end
 
 WerkIt -> Parser : parseUserInput(userInput)
 activate Parser

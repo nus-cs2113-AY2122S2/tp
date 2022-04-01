@@ -174,43 +174,6 @@ public class WorkoutList {
     }
 
     /**
-     * Prints all workouts stored in workout list. Display 10 workouts at a time and
-     * prompt the users if they want to view more workouts.
-     */
-    public void listWorkout() {
-        logger.entering(getClass().getName(), "listWorkout");
-        int index = 0;
-        int totalPrints = workoutsDisplayList.size();
-        String input = "";
-
-        while (totalPrints > MAX_DISPLAY) {
-            index = continuousPrinting(index, 10);
-            assert (index <= workoutsDisplayList.size());
-            totalPrints -= 10;
-            while (!isInputYesOrNo(input)) {
-                System.out.println("Do you want to view more workouts? [yes/no]");
-                Scanner in = new Scanner(System.in);
-                input = in.nextLine().toLowerCase();
-            }
-            if (!input.equals("yes")) {
-                return;
-            }
-            input = "";
-        }
-
-        if (totalPrints > 0) {
-            continuousPrinting(index, totalPrints);
-            System.out.println();
-            System.out.println("Showed all workouts in list");
-            return;
-        } else {
-            assert (workoutsDisplayList.size() == 0);
-            System.out.println("The workout list is empty");
-        }
-        logger.exiting(getClass().getName(), "listWorkout");
-    }
-
-    /**
      * Prints all workouts stored in workout list at once.
      */
     public void listAllWorkout() {
@@ -225,42 +188,6 @@ public class WorkoutList {
         System.out.println("Showed all workouts in list");
     }
 
-    /**
-     * Prints noOfPrints workouts stored in workout list .
-     *
-     * @param index of workouts stored in workoutList.
-     * @param noOfPrints number of workouts to be printed.
-     * @return index the next workout index to be printed.
-     */
-    public int continuousPrinting(int index, int noOfPrints) {
-        System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints)
-                + " of " + workoutsDisplayList.size() + ":");
-        System.out.println();
-        assert (noOfPrints <= workoutsDisplayList.size());
-        for (int i = 0; i < noOfPrints; i++) {
-            Workout workoutObject = getWorkoutFromIndexNum(index + 1);
-            System.out.println(index + 1 + ". " + workoutObject.toString());
-            index += 1;
-        }
-        return index;
-    }
-
-    /**
-     * Checks if the user input is "yes" or "no".
-     *
-     * @param answer input by user.
-     * @return true if input equals to "yes" or "no", else otherwise.
-     */
-    public boolean isInputYesOrNo(String answer) {
-        if (answer.equals("")) {
-            return false;
-        }
-        if (answer.equals("no") || answer.equals("yes")) {
-            return true;
-        }
-        logger.log(Level.WARNING, "User did not entered the command that was expected.");
-        return false;
-    }
 
     /**
      * This method removes the intended workout in the workout list.
