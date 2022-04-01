@@ -14,6 +14,7 @@ import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import werkit.UI;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -65,6 +66,24 @@ public class FileManager {
     private PlanList planList;
 
     private static Logger logger = Logger.getLogger(FileManager.class.getName());
+
+    public void deleteAndRecreateWorkoutFile() throws IOException {
+        File workoutFile = new File(String.valueOf(getWorkoutFilePath()));
+        workoutFile.delete();
+        workoutFile.createNewFile();
+    }
+
+    public void deleteAndRecreatePlanFile() throws IOException {
+        File planFile = new File(String.valueOf(getPlanFilePath()));
+        planFile.delete();
+        planFile.createNewFile();
+    }
+
+    public void deleteAndRecreateScheduleFile() throws IOException {
+        File scheduleFile = new File(String.valueOf(getScheduleFilePath()));
+        scheduleFile.delete();
+        scheduleFile.createNewFile();
+    }
 
     /**
      * Constructs a FileManager object. While instantiating, Paths objects of the various URIs
