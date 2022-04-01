@@ -1,6 +1,6 @@
-package java.person;
+package tp.person;
 
-public class Doctor extends Person {
+public class Doctor extends tp.person.Person {
     protected boolean isOnDuty;
 
     public Doctor(String id, String name, String phoneNumber, String email) {
