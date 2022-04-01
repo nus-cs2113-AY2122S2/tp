@@ -1,43 +1,59 @@
 package seedu.duke;
 
+import util.exceptions.UnitTestException;
+import util.exceptions.WrongCommandException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Locale;
+
+/**
+ * Unit Goods Class will define a single object of a specified Good
+ * This is akin to the blueprint of the Good to be stored in the
+ * warehouse
+ *
+ * This can be used in future optimisation by being able to estimate
+ * how many of certain goods can be procured based on the Unit Good
+ * specifications.
+ */
 public class UnitGood {
-    private int id;
-    private String SKU;
+    private String sku;
     private String name;
     private String description;
-    private Float unitPrice; //in dollars
-    private String unitItem;
-    private Boolean isUnitWhole;
-    private Float baseArea;
-    private Float volume;
-    private Boolean isPerishable;
-    public UnitGood(String SKU,
-                    String name,
-                    String description,
-                    Float unitPrice,
-                    String unitItem,
-                    Boolean isUnitWhole,
-                    Float baseArea,
-                    Float volume,
-                    Boolean isPerishable){
+    private Capacity capacity;
 
-        this.SKU = SKU;
+    public UnitGood(String sku, String name, String description, String capacity) {
+        this.sku = sku;
         this.name = name;
         this.description = description;
-        this.baseArea = baseArea;
-        this.unitPrice = unitPrice;
-        this.unitItem = unitItem;
-        this.isUnitWhole = isUnitWhole;
-        this.volume = volume;
-        this.isPerishable = isPerishable;
-
+        try {
+            this.capacity = convertCapacity(capacity);
+        } catch (UnitTestException e) {
+            System.out.println("Capacity Added is not either Small, Medium, Large. "
+            + "Default set to Medium");
+            this.capacity = Capacity.MEDIUM;
+        }
     }
 
-    public String getSummary(){
-        return String.format("%s: %s\n" +
-                "Cost: $%.2f/%s",
-                    name,description,unitPrice,unitItem
-                );
+    public Capacity convertCapacity(String capacity) throws
+            UnitTestException {
+        capacity = capacity.toUpperCase().trim();
+        Capacity[] capacities = Capacity.values();
+        ArrayList<String> capacityStrings = new ArrayList<>();
+
+        for (int i = 0; i < capacities.length; i++) {
+            capacityStrings.add(capacities[i].name());
+        }
+
+        if (capacityStrings.contains(capacity)) {
+            return Capacity.valueOf(capacity);
+        }
+
+        throw new UnitTestException();
+    }
+
+    public Capacity getCapacity() {
+        return capacity;
     }
 
     public String getDescription() {
@@ -48,9 +64,12 @@ public class UnitGood {
         return name;
     }
 
-    public String toString() {
-        return String.format("%d - %s (%s)",id, name, description);
+    public String getSku() {
+        return sku;
     }
 
-
+    @Override
+    public String toString() {
+        return String.format("%s - %s (%s)", sku, name, description);
+    }
 }
