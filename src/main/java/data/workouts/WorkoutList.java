@@ -280,7 +280,7 @@ public class WorkoutList {
      * @throws InvalidWorkoutException        If workout index number to delete is out of range.
      * @throws InvalidPlanException        If plan index number to delete is out of range.
      */
-    public Workout deleteWorkout(String userArgument, PlanList planList, UI ui) throws InvalidWorkoutException,
+    public void deleteWorkout(String userArgument, PlanList planList, UI ui) throws InvalidWorkoutException,
             NumberFormatException, ArrayIndexOutOfBoundsException, InvalidPlanException {
         logger.entering(getClass().getName(), "deleteWorkout");
         int indexToDelete = Integer.parseInt(userArgument.trim());
@@ -303,7 +303,6 @@ public class WorkoutList {
         deletePlanContainsDeletedWorkout(deletedWorkoutDetail, planList);
 
         logger.exiting(getClass().getName(), "deleteWorkout");
-        return deletedWorkout;
     }
 
     public void deletePlanContainsDeletedWorkout(String deletedWorkoutDetail, PlanList planList) throws
