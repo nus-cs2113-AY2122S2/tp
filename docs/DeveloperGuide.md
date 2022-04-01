@@ -24,7 +24,7 @@ When reading this document, there are several icons that you may encounter.
 Below are the icons and their meanings:
 
 
-<p class="warning-box">⚠️**Warning** : Information that you may want to pay attention to in order to prevent 
+<p class="warning-box">⚠️<b>Warning</b> : Information that you may want to pay attention to in order to prevent 
 possible issues from arising when using the application.</p>
 
 > ⚠️**Warning** : Information that you may want to pay attention to in order
