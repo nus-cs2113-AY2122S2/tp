@@ -91,7 +91,7 @@ public class SessionCreateCommand extends Command {
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList, group);
         profile.addSession(newSession);
         manager.saveProfile();
-        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + newSession);
+        ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + newSession);
         Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
     }
 }
