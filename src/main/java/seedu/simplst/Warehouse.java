@@ -1,9 +1,9 @@
-package seedu.duke;
+package seedu.simplst;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import seedu.duke.JsonKeyConstants.WarehouseKeys;
+import seedu.simplst.JsonKeyConstants.WarehouseKeys;
 import util.exceptions.*;
 
 import java.util.ArrayList;

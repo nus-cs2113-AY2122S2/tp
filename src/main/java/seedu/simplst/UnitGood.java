@@ -1,11 +1,8 @@
-package seedu.duke;
+package seedu.simplst;
 
 import util.exceptions.UnitTestException;
-import util.exceptions.WrongCommandException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
 
 /**
  * Unit Goods Class will define a single object of a specified Good

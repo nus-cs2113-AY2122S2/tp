@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.simplst;
 
 import java.util.ArrayList;
 import java.util.HashMap;

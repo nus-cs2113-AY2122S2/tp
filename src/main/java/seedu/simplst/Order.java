@@ -1,8 +1,8 @@
-package seedu.duke;
+package seedu.simplst;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import seedu.duke.JsonKeyConstants.OrderKeys;
+import seedu.simplst.JsonKeyConstants.OrderKeys;
 import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.LargeQuantityException;
 import util.exceptions.WrongCommandException;

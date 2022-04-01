@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.simplst;
 
 import util.exceptions.LargeQuantityException;
 

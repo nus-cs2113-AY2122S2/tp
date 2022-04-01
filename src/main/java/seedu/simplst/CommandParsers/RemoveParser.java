@@ -1,7 +1,7 @@
-package seedu.duke.CommandParsers;
+package seedu.simplst.CommandParsers;
 
-import seedu.duke.Regex;
-import seedu.duke.Warehouse;
+import seedu.simplst.Regex;
+import seedu.simplst.Warehouse;
 import util.exceptions.WrongCommandException;
 
 import java.util.HashMap;

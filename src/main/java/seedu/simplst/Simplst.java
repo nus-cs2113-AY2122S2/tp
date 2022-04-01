@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.simplst;
 
 import util.exceptions.NullException;
 
@@ -27,8 +27,8 @@ public class Simplst {
             // welcome user back;
             // ui = new UserInterface(new Warehouse(capacity));
         } else {
-            System.out.println("New login. Please type the total number of goods"
-                    + " your warehouse can hold");
+            // System.out.println("New login. Please type the total number of goods"
+            //         + " your warehouse can hold");
             ui = new UserInterface(new Warehouse(1000));
         }
         ui.run();

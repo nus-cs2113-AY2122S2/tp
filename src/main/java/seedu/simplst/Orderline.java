@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.simplst;
 
 /*
  * Class to handle the Goods information

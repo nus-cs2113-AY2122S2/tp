@@ -1,6 +1,6 @@
-package seedu.duke;
+package seedu.simplst;
 
-import seedu.duke.CommandParsers.*;
+import seedu.simplst.CommandParsers.*;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
 import util.exceptions.NullException;

@@ -1,10 +1,4 @@
-package seedu.duke;
-
-import util.exceptions.LargeQuantityException;
-import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.WrongCommandException;
-
-import java.util.ArrayList;
+package seedu.simplst;
 
 public class Display {
 
