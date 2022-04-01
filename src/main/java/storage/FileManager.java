@@ -505,6 +505,36 @@ public class FileManager {
         return hasNoErrorsDuringLoad;
     }
 
+    /**
+     * Reloads the data from schedule file to DayList after deletion of workout/plan that is related to the schedule.
+     * @param dayList   The DayList object to store the day schedule in.
+     * @return          Returns true if the deleted workout/plan does not affect the current schedule.
+     * @throws IOException  If the method is unable to open the schedule file.
+     */
+    public boolean reloadScheduleFromFile(DayList dayList) throws IOException {
+        int deletedScheduleCount = 0;
+        boolean hasNoErrorsDuringLoad = true;
+        Scanner scheduleFileReader = new Scanner(getScheduleFilePath());
+        while (scheduleFileReader.hasNext()) {
+            try {
+                String scheduleFileDataLine = scheduleFileReader.nextLine();
+                String[] parsedScheduleFileDataLine = parseFileDataLine(scheduleFileDataLine);
+                addFileScheduleToList(dayList, parsedScheduleFileDataLine);
+            } catch ( ArrayIndexOutOfBoundsException | InvalidScheduleException | InvalidPlanException e) {
+                deletedScheduleCount += 1;
+                if (deletedScheduleCount == 1) {
+                    System.out.print(System.lineSeparator());
+                    System.out.println("The following schedule(s) is(are) " +
+                            "removed due to the removal of\nrelevant plan(s).");
+                    System.out.print(System.lineSeparator());
+                }
+                hasNoErrorsDuringLoad = false;
+            }
+        }
+
+        return hasNoErrorsDuringLoad;
+    }
+
     public String[] parsePlansFileData(String fileDataLine) {
         String[] parsedPlansData = fileDataLine.split(FILE_DATA_DELIMITER_REGEX, 2);
         return parsedPlansData;
