@@ -202,6 +202,12 @@ public abstract class Message {
             "The String object to be used to search for Person objects by name cannot be null.";
     public static final String ASSERT_SESSION_NAME_LIST_EMPTY =
             "The String array object to be used to search for Person objects by name cannot be null or empty.";
+    public static final String ASSERT_SESSION_COMPARED_SESSION_NULL =
+            "The Session object provided in the parameter of the comparison method cannot be null.";
+    public static final String LOGGER_SESSION_ACTIVITY_REMOVAL =
+            "An activity with the following id has been requested to be deleted: ";
+    public static final String LOGGER_SESSION_ACTIVITYCOST_REMOVAL =
+            "An activity cost from the following person has been requested to be deleted: ";
 
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
