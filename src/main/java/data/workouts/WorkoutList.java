@@ -178,14 +178,18 @@ public class WorkoutList {
      */
     public void listAllWorkout() {
         int index = 1;
-        System.out.println("Showing workouts " + (index) + "-" + workoutsDisplayList.size()
-                + " of " + workoutsDisplayList.size() + ":");
-        while (index <= workoutsDisplayList.size()) {
-            Workout workoutObject = getWorkoutFromIndexNum(index);
-            System.out.println(index + ". " + workoutObject.toString());
-            index += 1;
+        if (workoutsDisplayList.size() <= 0) {
+            System.out.println("The workout list is empty");
+        } else {
+            System.out.println("Showing workouts " + (index) + "-" + workoutsDisplayList.size()
+                    + " of " + workoutsDisplayList.size() + ":");
+            while (index <= workoutsDisplayList.size()) {
+                Workout workoutObject = getWorkoutFromIndexNum(index);
+                System.out.println(index + ". " + workoutObject.toString());
+                index += 1;
+            }
+            System.out.println("Showed all workouts in list");
         }
-        System.out.println("Showed all workouts in list");
     }
 
 
