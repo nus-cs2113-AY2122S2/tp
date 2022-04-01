@@ -8,11 +8,19 @@ import java.util.ArrayList;
 public class PatientList {
     public static String boundary = "____________________________________________________________"
                                             + System.lineSeparator();
-    protected ArrayList<Patient> patients = new ArrayList<>();
+    protected static ArrayList<Patient> patients = new ArrayList<>();
     protected int countPatient;
 
     public PatientList() {
         countPatient = 0;
+    }
+
+    public static void addPatientDescription(String description, String index) {
+        for (Patient patient : patients) {
+            System.out.println(" check");
+            if (patient.getId().trim().equals(index))
+                patient.addDescription(description);
+        }
     }
 
     public Person getPatient(int index) {
