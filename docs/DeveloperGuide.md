@@ -6,7 +6,7 @@ This developer guide follows the suggested format given in [AddressBook-Level3 d
 
 ## Design
 ### Architecture
-![Architecture diagram](Architecture diagram.jpg)
+![Architecture diagram](Architecture_diagram.jpg)
 The architecture diagram given above explains the high-level design of the App.
 
 Given below is an overview of the main components and how they interact with each other.
