@@ -92,8 +92,7 @@ public class GroupCreateCommand extends Command {
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST);
             return;
         }
-        PersonList personList = new PersonList();
-        personList.convertToPersonList(personNames);
+        PersonList personList = new PersonList(personNames);
         int newGroupId = profile.getNewGroupId();
         Group newGroup = new Group(groupName, newGroupId, personList);
         profile.addGroup(newGroup);

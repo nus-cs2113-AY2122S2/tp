@@ -66,7 +66,7 @@ public class SessionCreateCommand extends Command {
                 Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATESESSION);
                 return;
             }
-            personList.convertToPersonList(personNames);
+            personList = new PersonList(personNames);
         }
 
         Group group = null;
