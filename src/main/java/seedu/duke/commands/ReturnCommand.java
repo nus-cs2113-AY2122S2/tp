@@ -26,7 +26,7 @@ public class ReturnCommand extends Command {
             + "\n";
 
     /**
-     * Prepares the return command for execution by extracting the task number of the task to be marked
+     * Prepares the return command for execution by extracting the task number of the task to be marked.
      *
      * @param userInput User's input string
      */
