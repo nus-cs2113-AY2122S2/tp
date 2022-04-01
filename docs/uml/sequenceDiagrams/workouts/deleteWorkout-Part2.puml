@@ -2,9 +2,10 @@
 'https://plantuml.com/sequence-diagram
 !include ../../Style.puml
 
-autonumber 7.1
+autonumber 2.1
 
 title Sequence Diagram of `WorkoutList#deleteWorkout()`
+hide footbox
 
 participant "workoutList\n:WorkoutList" AS wl
 
@@ -13,17 +14,6 @@ wl -> ":Integer" :parseInt(userArgument)
 activate ":Integer"
 return indextoDelete:int
 deactivate ":Integer"
-
-wl -> wl :checkIndexIsWithinRange(indexToDelete)
-activate wl
-return isIndexToDeleteValid:boolean
-
-opt !isIndexToDeleteValid
-create ":InvalidWorkoutException" AS wre
-wl -> wre : throw new InvalidWorkoutException
-activate wre
-return
-end
 
 wl -> wl :getWorkoutFromIndexNum(indexToDelete)
 activate wl
