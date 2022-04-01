@@ -52,7 +52,7 @@ This guide's purpose is to explain the internal workings of SplitLah, so that fu
 * This [diagram](#interaction-between-components) shows the inner workings of how each component interacts with each other.
 * SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands will not be explained in detail.
 * Please refer to the [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
-* Please refer to [here](#implementation) to find out how each command is designed and implemented in SplitLah.
+* Please refer to the [implementation section](#implementation) to find out how each command is designed and implemented in SplitLah.
 * Each command's section in this guide contains an API reference link encase in `code block` that brings you to the main source code responsible for executing the command.
 
 ## Design
@@ -295,7 +295,7 @@ The general workflow of the `session /create` command is as follows:
 7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
    which is used to call the `Profile#addSession` method in order to store the new `Session` object.
 8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUi#printlnMessage`.
+9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUi#printlnMessage.
 
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
