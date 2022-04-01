@@ -42,10 +42,10 @@
 * Address Book (Level-3) - Provide samples of User Guide(UG) and Developer Guide(DG)
 
 ## Introduction
-The guide's purpose is to allow readers to understand how the application works internally, so that future engineers can continue working on the project with ease. 
+This guide's purpose is to explain the internal workings of SplitLah, so that future engineers can understand the application's implementation in detail and continue working on the project with ease.
 
 ### How to use this developer guide
-* SplitLah is divided into **eight components**: [Manager Component](#manager-component)
+* SplitLah is divided into **six components**: [Manager Component](#manager-component)
 [Profile Component](#profile-component), [TextUI Component](#textui-component),
 [Storage Component](#storage-component), [Parser Component](#parser-component) and [Command Component](#command-component)
 * Each component has its own section in this guide explaining them in detail.
