@@ -72,21 +72,19 @@ public class Parser {
         } else if (fullCommand.contains("add appointment")) {
             String time;
             String dummy = fullCommand.trim();
-            try {
-                int timeIndex = dummy.indexOf("/t");
-                int doctorIndex = dummy.indexOf("/d");
-                time = dummy.substring(timeIndex, doctorIndex);
-                int patientIndex = dummy.indexOf("/p");
-                String s = dummy.substring(doctorIndex, patientIndex);
+            int timeIndex = dummy.indexOf("/t");
+            int doctorIndex = dummy.indexOf("/d");
+            timeIndex += 3;
+            time = dummy.substring(timeIndex, doctorIndex).trim();
+            int patientIndex = dummy.indexOf("/p");
+            doctorIndex += 3;
+            String s = dummy.substring(doctorIndex, patientIndex).trim();
 
-                doctorIndex = Integer.parseInt(s);
-                patientIndex += 3;
-                s = dummy.substring(patientIndex);
-                patientIndex = Integer.parseInt(s);
-                return new AddAppointmentCommand(doctorIndex, patientIndex, time);
-            } catch (Exception e) {
-                System.out.println("The input format of the appointment information is wrong.");
-            }
+            doctorIndex = Integer.parseInt(s);
+            patientIndex += 3;
+            s = dummy.substring(patientIndex).trim();
+            patientIndex = Integer.parseInt(s);
+            return new AddAppointmentCommand(doctorIndex, patientIndex, time);
         } else if (fullCommand.contains("delete doctor")) {
             String dummy = fullCommand.trim();
             int index = Integer.parseInt(dummy.substring(dummy.length() - 1));

@@ -43,11 +43,18 @@ public class DoctorList {
     }
 
     public void searchDoctor(String id){
+        boolean found = false;
         for (int i = 0; i < doctors.size(); i++){
             if (doctors.get(i).getId().trim().equals(id)){
-                System.out.println("Here is the doctor found:");
+                System.out.println(boundary + "Here is the doctor found:");
                 System.out.println(doctors.get(i));
+                System.out.print(boundary);
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.print(boundary + "Doctor not found."
+                                     + System.lineSeparator() + boundary);
         }
     }
 
