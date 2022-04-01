@@ -111,7 +111,7 @@ public class Item {
         return String.format("%s | %d | %s", this.name, this.quantity, this.description);
     }
     /**
-     *     // String representation of an item when printed on Ui
+     *     // String representation of an item when printed on Ui.
      *     @Override
      *     public String toString() {
      *         String string1 = (name + " | " + quantity);

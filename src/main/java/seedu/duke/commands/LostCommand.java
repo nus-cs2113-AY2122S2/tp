@@ -12,7 +12,7 @@ import seedu.duke.common.Messages;
 
 import static java.lang.Integer.parseInt;
 
-public class LostCommand extends Command{
+public class LostCommand extends Command {
     protected int itemNumber = -1;
     public static final String COMMAND_WORD = "lost";
     public static final String COMMAND_NAME = "Report Lost Item";
@@ -27,7 +27,7 @@ public class LostCommand extends Command{
             + "\n";
 
     /**
-     * Prepares the lost command for execution by extracting the task number of the task to be marked
+     * Prepares the lost command for execution by extracting the task number of the task to be marked.
      *
      * @param userInput User's input string
      */
