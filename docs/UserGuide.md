@@ -139,8 +139,8 @@ Format: `list`
 **Expected outcome:**
 ```
 Here are the expenses you have made so far:
- 1. 15/3/2022 | 9.50 | Movie | Spiderman: No Way Home
- 2. 14/3/2022 | 4.30 | Food | Chicken rice for lunch
+ 1. 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
+ 2. 2022-03-16 | $4.30 | Food | Chicken rice for lunch
 ```
 #### Adding an expense: `add`
 Adds a new expense to the list of expenses. The keyword `add` is used followed by the date, 
@@ -208,6 +208,7 @@ Format:
 |-------------------|-------------------------------------------------------------------------------------------------------|
 | ```<FIELD> ```    | The field of a record to be edited.<br/>Valid fields: `<DATE>`, `<AMOUNT>`, `<CATEGORY>`, `<REMARKS>` |
 | ```<NEW VALUE>``` | The new value to be inserted at the specified field. <br>It must comply with the constraints specified by `add` section above.|
+
 **Example of usage:**
 
 `edit 1`
