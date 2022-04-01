@@ -149,11 +149,10 @@ public class Order {
                 }
 
                 orderline.setQuantity(orderline.getQuantity() - qty);
-                UnitGood orderlineUnit = orderline.getUnitGood();
                 if (qty < 2) {
-                    System.out.println(qty + " " + orderlineUnit.getName() + " has been removed.");
+                    System.out.println(qty + " " + orderline.getName() + " has been removed.");
                 } else {
-                    System.out.println(qty + " " + orderlineUnit.getName() + " have been removed.");
+                    System.out.println(qty + " " + orderline.getName() + " have been removed.");
                 }
 
                 if (orderline.getQuantity() == 0) {
