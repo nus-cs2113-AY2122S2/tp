@@ -80,3 +80,16 @@ Therefore, airlines counter staff need a fast an efficient way to manage the man
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+
+## Plan to add for following development:
+#### 1. stuff class: define stuff class
+      stuff id(key), stuff name, authentication code
+#### 2. stuff method:
+    add and delete stuff
+#### 3. develop stuff ui interface
+#### 4. add stuff authentication before edit flight
+    
+    How the feature is implemented (or is going to be implemented).
+    Why it is implemented that way.
+    Alternatives considered.
