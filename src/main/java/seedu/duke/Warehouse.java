@@ -8,70 +8,73 @@ import util.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Warehouse {
-    private Float capacityOccupied = 0F;
-    private Float totalCapacity; // volume
+    private int totalCapacity = 0; //in terms of arbritrary_units
     private static ArrayList<Order> orderLists = new ArrayList<>();
-    private Map<String, Good> inventory = new HashMap<String, Good>();
-    private int inventoryTypeCount = 0;
+    private HashMap<String, UnitGood> unitGoodHashMap = new HashMap<>();
+    private LinkedHashMap<String, Good> goodList = new LinkedHashMap<>();
 
-//    // Map of constants for JSON keys
-//    private Map<String,String> JSONConstants = new HashMap<String,String>();
-//    private void setupJSONConstants(){
-//
-//    }
 
-    public Warehouse(Integer capacity) {
-        this.totalCapacity = (float)capacity;
-//        setupJSONConstants();
+    // In the case where they want to mass add a bunch of goods as part of setup
+    public void addUnitGoodToInventory(String sku, String name, String description,  String capacity)
+            throws UnitTestException {
+        UnitGood unitGood = new UnitGood(sku, name, description, capacity);
+        unitGoodHashMap.put(sku, unitGood);
     }
 
-    public Warehouse(Float capacity) {
-        this.totalCapacity = capacity;
-//        setupJSONConstants();
-    }
+    // In the case where they want add single/multiple of new/existing type of good
+    public void addGoodToInventory(String sku, String qty)
+            throws WrongCommandException, ItemDoesNotExistException {
+        UnitGood unitGood = unitGoodHashMap.get(sku);
 
-    public boolean isSKUInInventory(String SKU){
-        return inventory.containsKey(SKU);
-    }
-
-    private Good getInventoryGoodBySKU(String SKU){
-        return inventory.get(SKU);
-    }
-
-    public Float getCapacityOccupied() {
-        return capacityOccupied;
-    }
-
-    public void getPercentOccupied(){
-        Float totalGoods = totalInventoryVol();
-        Float warehouseCapacity = getCapacityOccupied();
-        Float percentageCapacity = (totalGoods / warehouseCapacity) * 100;
-        Display.displayStorageCapacity(percentageCapacity);
-    }
-
-    public boolean setCapacity(String input) {
-        try {
-            Float capacity = Float.parseFloat(input);//Integer.parseInt(input);
-            assert capacity > 0;
-
-            if (capacity < totalInventoryVol()) {
-                throw new LargeQuantityException();
+        if (unitGood == null) {
+            if (sku.isBlank()) {
+                // add command without typing sku
+                throw new WrongCommandException("add", true);
             }
-            this.capacityOccupied = capacity;
-            System.out.printf("Current Warehouse capacity is %d\n", capacity);
-            return true;
-        } catch (LargeQuantityException largeQuantityException) {
-            System.out.println("Current total goods in the warehouse is more"
-                    + " than input capacity");
-        } catch (NumberFormatException numberFormatException) {
-            System.out.println("Please set the Warehouse capacity again.");
+            // current unit good does not exist
+            throw new ItemDoesNotExistException();
         }
-        return false;
+
+        try {
+            int quantity = Integer.parseInt(qty);
+            Good good = new Good(unitGood, goodList.size() + 1, quantity);
+            goodList.put(sku, good);
+        } catch (NumberFormatException e1) {
+            // quantity was not a number
+            throw new WrongCommandException("add", true);
+        }
     }
+
+    public boolean isSKUInInventory(String SKU) {
+        return goodList.containsKey(SKU);
+    }
+
+    private Good getInventoryGoodBySKU(String SKU) {
+        return goodList.get(SKU);
+    }
+
+    /**
+     * Used to count the number of unique goods in the warehouse
+     *
+     * @return number of unique goods
+     */
+    public int uniqueInventories() {
+        ArrayList<Good> uniqueGoods = new ArrayList<>();
+
+        goodList.forEach((sku, good) -> {
+            if (!uniqueGoods.contains(good)) {
+                uniqueGoods.add(good);
+            }
+        });
+
+        return uniqueGoods.size();
+    }
+
 
     public void viewOrderById(String orderId) {
         try {
@@ -98,24 +101,24 @@ public class Warehouse {
         }
     }
 
-    public void viewGoodBySKU(String SKU) {
+    public void viewGoodBySKU(String sku) {
         try {
-//            Integer idToBeViewed = Integer.parseInt(SKU);
-//            for (Order order : orderLists) {
-//                for (Orderline orderline : order.getOrderlines()) {
-//                    if (idToBeViewed.equals(orderline.getId())) {
-//                        System.out.println("Viewing item with id " + orderline.getId());
-//                        System.out.println("Item name: " + orderline.getName());
-//                        System.out.println("Item description: " + orderline.getDescription());
-//                        System.out.println("Item quantity: " + orderline.getQuantity());
-//                        return;
-//                    }
-//                }
-//            }
-            if (isSKUInInventory(SKU)){
-                Good curGood = getInventoryGoodBySKU(SKU);
-                UnitGood curUG = curGood.getUnitGood();
-                System.out.println("Viewing item with SKU " + SKU);
+            //            Integer idToBeViewed = Integer.parseInt(SKU);
+            //            for (Order order : orderLists) {
+            //                for (Orderline orderline : order.getOrderlines()) {
+            //                    if (idToBeViewed.equals(orderline.getId())) {
+            //                        System.out.println("Viewing item with id " + orderline.getId());
+            //                        System.out.println("Item name: " + orderline.getName());
+            //                        System.out.println("Item description: " + orderline.getDescription());
+            //                        System.out.println("Item quantity: " + orderline.getQuantity());
+            //                        return;
+            //                    }
+            //                }
+            //            }
+            if (isSKUInInventory(sku)) {
+                Good curGood = getInventoryGoodBySKU(sku);
+                UnitGood curUG = unitGoodHashMap.get(sku);
+                System.out.println("Viewing item with SKU " + sku);
                 System.out.println("Item name: " + curUG.getName());
                 System.out.println("Item description: " + curUG.getDescription());
                 System.out.println("Item quantity: " + curGood.getQuantity());
@@ -130,11 +133,11 @@ public class Warehouse {
 
     public void findGoods(String name) {
         AtomicInteger counter = new AtomicInteger();
-        inventory.forEach((SKU, good) -> {
-            if (good.getUnitGood().getName().toLowerCase().contains(name.toLowerCase())) {
-                System.out.println("Viewing item with SKU " + SKU);
-                System.out.println("Item name: " + good.getUnitGood().getName());
-                System.out.println("Item description: " + good.getUnitGood().getDescription());
+        goodList.forEach((sku, good) -> {
+            if (good.getName().toLowerCase().contains(name.toLowerCase())) {
+                System.out.println("Viewing item with SKU " + sku);
+                System.out.println("Item name: " + good.getName());
+                System.out.println("Item description: " + good.getDescription());
                 System.out.println("Item quantity: " + good.getQuantity());
                 System.out.println("");
                 counter.getAndIncrement();
@@ -170,7 +173,7 @@ public class Warehouse {
         System.out.println("List of goods:");
         System.out.println("id | name");
         int counter = 0;
-        for (Order order: orderLists) {
+        for (Order order : orderLists) {
             for (Orderline orderline : order.getOrderlines()) {
                 System.out.println("\t" + (counter + 1) + ". " + orderline);
                 counter++;
@@ -178,29 +181,9 @@ public class Warehouse {
         }
     }
 
-    public Float totalInventoryVol() {   //should be float
-        Float total = 0f;
-        for (Order order: orderLists) {
-            for (Orderline orderline : order.getOrderlines()) {
-                total += orderline.getQuantity();
-            }
-        }
-        return total;
-    }
-
-    public Float inventoryVolLeft(){
-        return 0f;
-    }
-
-    public Float percentageInvVolLeft(){
-        return 0f;
-    }
-
     public int totalOrder() {
         return orderLists.size();
     }
-
-
 
     public Order findOrder(int orderId) throws ItemDoesNotExistException {
         for (Order order : orderLists) {
@@ -222,142 +205,49 @@ public class Warehouse {
         throw new ItemDoesNotExistException();
     }
 
-    // In the case where they want to mass add a bunch of goods as part of setup
-    public void addUnitGoodToInventory(
-            String SKU,
-            String name,
-           String description,
-           Float unitPrice,
-           String unitItem,
-           Boolean isWholeUnit,
-            Float baseArea,
-            Float volume,
-            Boolean isPerishable){
-        Good newGood = new Good();
-        newGood.assignUnitGood(SKU,name, description, unitPrice, unitItem, isWholeUnit,
-                baseArea, volume, isPerishable);
-        inventory.put(Integer.toString(inventoryTypeCount),newGood);
-        inventoryTypeCount += 1;
+    public void removeGoodFromInventory(String unitGoodId) throws ItemDoesNotExistException {
+        if (!goodList.containsKey(unitGoodId))
+            throw new ItemDoesNotExistException();
+        goodList.remove(unitGoodId);
     }
 
-    // Meant for batch adding goods, could be used with UI if i create a param map.
-    public void addGoodToInventory(int id, Object goodObject){
-
-    }
-    // In the case where they want add single/multiple of new/existing type of good
-    public void addGoodToInventory(
-            String sku,
-            String name,
-            String desc,
-            Float up,
-            String ui,
-            Boolean isWholeUnit,
-            Float ba,
-            Float v,
-            Boolean ip,
-            Float qty) throws WrongCommandException {
-        if (sku.isBlank()) {
-            throw new WrongCommandException("add", true);
+    public void removeQtyGoodFromInventory(String sku, String qty) throws
+            ItemDoesNotExistException, LargeQuantityException {
+        if (!goodList.containsKey(sku)) {
+            throw new ItemDoesNotExistException();
         }
+        int qty_num = Integer.parseInt(qty);
+        goodList.get(sku).removeQuantity(qty_num);
+    }
+
+    /**
+     * Removes the entire good
+     *
+     * @param sku sku of good to remove
+     */
+    public void removeGoods(String sku) {
         try {
-            if (inventory.containsKey(sku)){
-                Good curGood = inventory.get(sku);
-                Float curQty = curGood.getQuantity();
-                curGood.setQuantity(curQty + qty); // might overflow
-            } else {
-                Good newGood = new Good();
-                newGood.setQuantity(qty);
-                newGood.assignUnitGood(
-                        sku,
-                        name,
-                        desc,
-                        up,
-                        ui,
-                        isWholeUnit,
-                        ba,
-                        v,
-                        ip
-                );
-                inventory.put(sku, newGood);
-            }
-        } catch (NumberFormatException e1) {
-            throw new WrongCommandException("add", true);
+            this.removeGoodFromInventory(sku);
+        } catch (ItemDoesNotExistException e2) {
+            Display.goodDontExistException();
         }
     }
 
     /**
-     * Adds all stuff in a csv or json (it's either one)
-     * @param filePath
-     * @throws InvalidFileException
+     * Removes a specific quantity of specified good
+     *
+     * @param sku sku of good to remove
      */
-    public void batchSetGoodsToInventory(String filePath) throws InvalidFileException {
-        // READ JSON FILE
-
-        JSONArray json_goods = new JSONArray();
-        int idx = 0;
-        for (Object goodObject : json_goods){
-            addGoodToInventory(idx, goodObject);
-            idx += 1;
-        }
-    }
-    public void removeGoodFromInventory(String unitGoodId) throws ItemDoesNotExistException {
-        if (!inventory.containsKey(unitGoodId)) throw new ItemDoesNotExistException();
-        inventory.remove(unitGoodId);
-    }
-
-    public void removeQtyGoodFromInventory(String unitGoodId, String qty) throws ItemDoesNotExistException {
-        if (!inventory.containsKey(unitGoodId)) throw new ItemDoesNotExistException();
-        Float qty_num = Float.parseFloat(qty);
-        inventory.get(unitGoodId).removeQuantity(qty_num);
-    }
-
-    public void removeGoods(String unitGoodId){
+    public void removeGoods(String sku, String qty) throws WrongCommandException {
         try {
-            this.removeGoodFromInventory(unitGoodId);
-        } catch (ItemDoesNotExistException e2) {
-            Display.goodDontExistException();
-        }
-    }
-    public void removeGoods(String unitGoodId, String qty) throws WrongCommandException {
-        try {
-            this.removeQtyGoodFromInventory(unitGoodId, qty);
+            removeQtyGoodFromInventory(sku, qty);
         } catch (NumberFormatException e1) {
             throw new WrongCommandException("remove", true);
         } catch (ItemDoesNotExistException e2) {
             Display.goodDontExistException();
-        }
-    }
-
-    private void addOrder(int id, Object orderObject) throws WrongCommandException, InvalidFileException, InvalidObjectType {
-        String receiver = null;
-        String shippingAddress = null;
-        String toFulfilBy = null;
-        String comments = null;
-        if ( orderObject instanceof JSONObject) {
-            JSONObject jOrderObject = (JSONObject) orderObject;
-        } else if (orderObject instanceof Map) {
-            Map orderMap = (Map)orderObject;
-        } else {
-            throw new InvalidObjectType("Order should either be JSONObject or Map type");
-        }
-
-        try {
-            Order order = new Order(id, receiver, shippingAddress, toFulfilBy, comments);
-            orderLists.add(order);
-            System.out.println("Order " + id + " is added");
-        } catch (NumberFormatException e) {
-            throw new WrongCommandException("add", true);
-        }
-    }
-
-    public void batchSetOrders(String filePath) throws WrongCommandException, InvalidFileException, InvalidObjectType {
-        String saveStr = LocalStorage.readSaveFile(filePath);
-        // READ JSON FILE
-        JSONArray json_orders = (JSONArray) JSONValue.parse(saveStr);
-        int idx = 0;
-        for (Object orderObject : json_orders){
-            addOrder(idx, orderObject);
-            idx += 1;
+        } catch (LargeQuantityException e3) {
+            System.out.println("Quantity to remove is larger than current quantity");
+            throw new WrongCommandException("remove", true);
         }
     }
 
@@ -378,22 +268,20 @@ public class Warehouse {
         }
     }
 
-
     // Related to saving state outside program
-
-    public Boolean saveWarehouseState(){
+    public Boolean saveWarehouseState() {
         String fp = LocalStorage.WAREHOUSE_PATH;
         // Create JSON Obj
         JSONObject state = this.serialize();
         // Save to file
-        LocalStorage.writeSaveFile(LocalStorage.json2str(state),fp);
+        LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
         Display.warehouseStateSaved(fp);
         return true;
     }
 
-    private JSONArray serializeOrders(){
+    private JSONArray serializeOrders() {
         JSONArray ja = new JSONArray();
-        for (Order o : orderLists){
+        for (Order o : orderLists) {
             try {
                 JSONObject jo = o.serialize();
                 ja.add(jo);
@@ -407,16 +295,125 @@ public class Warehouse {
     private JSONObject serialize() {
         JSONObject warehouse = new JSONObject();
 
-        warehouse.put(WarehouseKeys.capacityOccupied, this.capacityOccupied);
-        warehouse.put(WarehouseKeys.inventoryTypeCount, this.inventoryTypeCount);
+        warehouse.put(WarehouseKeys.capacityOccupied, getCapacityOccupied());
+        warehouse.put(WarehouseKeys.inventoryTypeCount, uniqueInventories());
         warehouse.put(WarehouseKeys.totalCapacity, this.totalCapacity);
         JSONArray s_ol = this.serializeOrders();
-        if (s_ol == null){
+        if (s_ol == null) {
             return null;
         }
         warehouse.put(WarehouseKeys.orderLists, s_ol);
 
         return warehouse;
+    }
+
+    // Meant for batch adding goods, could be used with UI if i create a param map.
+    public void addGoodToInventory(int id, Object goodObject) {
+
+    }
+
+    public void batchSetOrders(String filePath) throws WrongCommandException, InvalidFileException, InvalidObjectType {
+        String saveStr = LocalStorage.readSaveFile(filePath);
+        // READ JSON FILE
+        JSONArray json_orders = (JSONArray) JSONValue.parse(saveStr);
+        int idx = 0;
+        for (Object orderObject : json_orders) {
+            addOrder(idx, orderObject);
+            idx += 1;
+        }
+    }
+
+    /**
+     * Adds all stuff in a csv or json (it's either one)
+     *
+     * @param filePath
+     * @throws InvalidFileException
+     */
+    public void batchSetGoodsToInventory(String filePath) throws InvalidFileException {
+        // READ JSON FILE
+
+        JSONArray json_goods = new JSONArray();
+        int idx = 0;
+        for (Object goodObject : json_goods) {
+            addGoodToInventory(idx, goodObject);
+            idx += 1;
+        }
+    }
+
+    // batch adding
+    private void addOrder(int id, Object orderObject) throws WrongCommandException, InvalidFileException, InvalidObjectType {
+        String receiver = null;
+        String shippingAddress = null;
+        String toFulfilBy = null;
+        String comments = null;
+        if (orderObject instanceof JSONObject) {
+            JSONObject jOrderObject = (JSONObject) orderObject;
+        } else if (orderObject instanceof Map) {
+            Map orderMap = (Map) orderObject;
+        } else {
+            throw new InvalidObjectType("Order should either be JSONObject or Map type");
+        }
+
+        try {
+            Order order = new Order(id, receiver, shippingAddress, toFulfilBy, comments);
+            orderLists.add(order);
+            System.out.println("Order " + id + " is added");
+        } catch (NumberFormatException e) {
+            throw new WrongCommandException("add", true);
+        }
+    }
+
+    public Warehouse(Integer capacity) {
+        this.totalCapacity = capacity;
+    }
+
+    /**
+     * Getting the capacity left in the warehouse
+     *
+     * @return capacity left
+     */
+    public int getCapacityLeft() {
+        int totalGoods = getCapacityOccupied();
+
+        return totalCapacity - totalGoods;
+    }
+
+    public void getPercentOccupied() {
+        int totalGoods = getCapacityOccupied();
+        Float percentageCapacity = (
+                (float) totalGoods / (float) totalCapacity) * 100;
+        Display.displayStorageCapacity(percentageCapacity);
+    }
+
+    /**
+     * Getting the capacity occupied in the warehouse
+     *
+     * @return capacity occupied
+     */
+    public int getCapacityOccupied() {
+        AtomicInteger total = new AtomicInteger();
+        goodList.forEach((sku, good) -> total.addAndGet(good.capacityTaken()));
+        return total.get();
+    }
+
+    public boolean setCapacity(String input) {
+        try {
+            int capacity = Integer.parseInt(input);//Integer.parseInt(input);
+            assert capacity > 0;
+
+            if (capacity < getCapacityOccupied()) {
+                throw new LargeQuantityException();
+            }
+            totalCapacity = capacity;
+            System.out.printf("Current Warehouse capacity is %d\n", capacity);
+            return true;
+        } catch (LargeQuantityException largeQuantityException) {
+            System.out.println("Current total goods in the warehouse is more"
+                    + " than input capacity");
+        } catch (NumberFormatException numberFormatException) {
+            System.out.println("Please set the Warehouse capacity again.");
+        }
+        return false;
     }
 
 }
