@@ -24,10 +24,10 @@ When reading this document, there are several icons that you may encounter.
 Below are the icons and their meanings:
 
 
-<p class="box warning">⚠️<b>Warning</b>: Information that you may want to pay attention to in order to prevent 
-possible issues from arising when using the application.</p>
+<span class="box warning">⚠️**Warning**: Information that you may want to pay attention to in order to prevent 
+possible issues from arising when using the application.</span>
 
-<p class="box info">🧾  <b>Note</b>: Additional information that may be useful for you.</p>
+<span class="box info">🧾  **Note**: Additional information that may be useful for you.</span>
 
 
 ## Acknowledgements
@@ -45,7 +45,7 @@ The following websites and codebases were referenced and adapted for our project
 - [X] An IDE of your choice, though IntelliJ IDEA is recommended as this project is developed
 with this IDE.
 
-<p class="box info"> 🧾 IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA.</p>
+<span class="box info"> 🧾 IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA.</span>
 
 ### Setting Up
 1. Fork the [WerkIt! GitHub repository](https://github.com/AY2122S2-CS2113T-T09-2/tp).
@@ -254,17 +254,18 @@ A summary of the general procedure of a new workout being inputted and stored in
 4. The new `Workout` object data is written to the resource file `workouts.txt`.
 
 The following sequence diagram illustrates how the `workout /new` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that are deemed to be trivial 
-> have been removed from the sequence diagram. Some reference frames will be elaborated further 
-> down this section. Reference frames that will not be elaborated on will be made known.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that are deemed to be trivial 
+have been removed from the sequence diagram. Some reference frames will be elaborated further 
+down this section. Reference frames that will not be elaborated on will be made known.</span>
 
 ![Create Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/CreateWorkout.png)
 
 **(Before Step 1)** The user's input (in this case will be a `workout /new` command) is obtained and parsed to obtain
 a `WorkoutCommand` object that contains the user's input.
 
-> **Note:** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+<span class="box info"> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When `WorkoutCommand#execute()` is called, because this is a `workout /new` command, the method will call
 `WorkoutList#createAndAddWorkout()`.
@@ -272,8 +273,8 @@ a `WorkoutCommand` object that contains the user's input.
 The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createAndAddWorkout()`:
 ![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout.png)
 
-> **Note:** To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in 
-> `WorkoutList#createAndAddWorkout()` have been omitted. 
+<span class="box info"> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in 
+> `WorkoutList#createAndAddWorkout()` have been omitted.</span> 
 
 **(Before Step 2.1)** Methods from the `String` and `Integer` classes are called to parse the
 argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the
@@ -412,17 +413,18 @@ A summary of the general procedure of an existing workout being removed from Wer
 4. The resource file, `workouts.txt`, is rewritten according to the application's workout list that has been modified.
 
 The following sequence diagram illustrates how the `workout /delete` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![Delete Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/deleteWorkout-Part1.png)
 <br><br>
 **(Before Step 1)** The user's input (in this case will be a `workout /delete` command) is obtained and parsed to obtain
 a `WorkoutCommand` object that contains the user's input.
 
-> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+<span class="box info"> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+ ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `WorkoutCommand#execute()` method is called, it will identify
 that the workout action is of type `delete`. Thus, it will subsequently call the 
@@ -431,8 +433,9 @@ that the workout action is of type `delete`. Thus, it will subsequently call the
 The following sequence diagram is the detailed procedure for Step 2's `WorkoutList#deleteWorkout()`:
 <br><br>
 ![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/workouts/images/deleteWorkout-Part2.png)
-> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
-> `WorkoutList#deleteWorkout()` have been omitted.
+
+<span class="box info"> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
+ `WorkoutList#deleteWorkout()` have been omitted.</span>
 
 <br><br>
 **(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
@@ -517,9 +520,10 @@ A summary of the general procedure of a new plan being created and stored in Wer
 4. The new `Plan` object data is written to the resource file `plans.txt`.
 
 The following sequence diagram illustrates how the `plan /new` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![Create Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part1.png)
 <br><br>
@@ -536,8 +540,9 @@ that the plan action is of type `new`. Thus, it will subsequently call the
 The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan(userArgument)`:
 <br><br>
 ![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
-> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
-> `PlanList#createAndAddPlan()` have been omitted.
+
+<span class="box info"> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
+ `PlanList#createAndAddPlan()` have been omitted.</span>
 
 <br><br>
 **(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
@@ -602,17 +607,18 @@ A summary of the general procedure of listing all plans in the application is as
 2. A list of plan names is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `plan /list` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![List Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/listPlan.png)
 <br><br>
 **(Before Step 1)** The user's input (in this case will be a `plan /list` command) is obtained and parsed to obtain
 a `PlanCommand` object that contains the user's input.
 
-> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+<span class="box info"> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+ ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Steps 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify
 that the plan action is of type `list`. Thus, it will subsequently call the
@@ -688,9 +694,10 @@ A summary of the general procedure of updating a plan for a particular day to th
 4. The Day object data is written to the resource file `schedule.txt`.
 
 The following sequence illustrates how the schedule /update command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![Update Schedule Sequence Diagram](uml/sequenceDiagrams/schedule/images/updateSchedule.png)
 <br><br>
@@ -776,9 +783,10 @@ can be schedule on Monday by the command of `schedule /upate 1 1`. To view the p
 command `schedule /list`.
 
 The following sequence illustrates how the `schedule /list` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![ListSchedule](uml/sequenceDiagrams/schedule/images/listSchedule.png)
 <br><br>
@@ -838,9 +846,10 @@ A summary of the general procedure of clearing a plan scheduled for a paricular 
 5. The `schedule.txt` will also be rewritten to reflect the changes. 
 
 The following sequence illustrates how the `schedule /clear` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearSchedule.png) 
 <br><br>
@@ -890,9 +899,10 @@ A summary of the general procedure of clearing all the plans stored in the sched
 4. The `schedule.txt` will also be rewritten to reflect the changes.
 
 The following sequence illustrates how the `schedule /clearall` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearAllSchedule.png)
 <br><br>
