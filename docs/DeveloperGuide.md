@@ -159,8 +159,8 @@ For example:
   3. As this updates the list of sessions stored in the `Profile` object,
     `Manager#saveProfile` is called to update the save file with the newly created session.
 
-All classes associated with the `Profile` component implements the `Serializable` class. This allows the `Storage` class to write
-into the save file without having to pre-process the data.
+All classes associated with the `Profile` component implements the `Serializable` class. This allows the `Storage` class 
+to write all the data stored in the `Profile` component into the save file without having to pre-process the data.
 
 ### Parser Component
 ![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)
