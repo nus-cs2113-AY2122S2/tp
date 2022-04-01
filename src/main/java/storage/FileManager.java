@@ -520,12 +520,12 @@ public class FileManager {
                 String scheduleFileDataLine = scheduleFileReader.nextLine();
                 String[] parsedScheduleFileDataLine = parseFileDataLine(scheduleFileDataLine);
                 addFileScheduleToList(dayList, parsedScheduleFileDataLine);
-            } catch ( ArrayIndexOutOfBoundsException | InvalidScheduleException | InvalidPlanException e) {
+            } catch (ArrayIndexOutOfBoundsException | InvalidScheduleException | InvalidPlanException e) {
                 deletedScheduleCount += 1;
                 if (deletedScheduleCount == 1) {
                     System.out.print(System.lineSeparator());
-                    System.out.println("The following schedule(s) is(are) " +
-                            "removed due to the removal of\nrelevant plan(s).");
+                    System.out.println("The following schedule(s) is(are) "
+                            + "removed due to the removal of\nrelevant plan(s).");
                     System.out.print(System.lineSeparator());
                 }
                 hasNoErrorsDuringLoad = false;
