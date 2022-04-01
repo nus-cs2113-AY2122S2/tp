@@ -17,16 +17,16 @@ span.box {
   display: block;
 }
 
-span.box a {
-  color: yellow;
-}
-
 .warning {
   background-color: #FAC898;
   color: black;
 }
 
 .info {
-  background-color: cornflowerblue;
+  background-color: #A7C7E7;
   color: black;
+}
+
+.info a {
+  color: #FF5733;
 }
