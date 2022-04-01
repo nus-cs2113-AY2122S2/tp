@@ -67,10 +67,9 @@ public class Message {
             + "trying to processing the system.\n"
             + "Please reboot and execute the application again.";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_1 = "Oops! It seems that your saved file "
-            + "is corrupted.";
-    public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_2 = "Would you like to start with a new save "
+            + "is corrupted.\nWould you like to start with a new save "
             + "file? (Y/N):";
-    public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_3 = "We're sorry this happened. "
+    public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_2 = "We're sorry this happened. "
             + "Please refer to the troubleshooting section in the user guide "
             + "or contact the developers for help.";
     public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"

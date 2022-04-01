@@ -95,7 +95,7 @@ public class TimerLogic implements WindowListener {
 
 
     private void executeMark(Storage storage, String parsedInput) {
-        Command c = TaskParser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
+        Command c = TaskParser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD);
         if (c != null) {
             c.execute(taskList, ui, storage);
             printAvailableCommands();
