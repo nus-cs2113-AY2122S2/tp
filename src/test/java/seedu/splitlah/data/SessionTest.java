@@ -398,12 +398,20 @@ class SessionTest {
         assertEquals(expectedActivityListTable, activityListSummaryString);
     }
 
+    /**
+     * Checks if a negative integer is returned when a Session object with a smaller session unique identifier
+     * is compared against a Session object with a larger session unique identifier.
+     */
     @Test
     void compareTo_sessionComparedToHasBiggerId_negativeInteger() {
         int comparisonValue = sessionOne.compareTo(sessionTwo);
         assertTrue(comparisonValue < 0);
     }
 
+    /**
+     * Checks if a positive integer is returned when a Session object with a larger session unique identifier
+     * is compared against a Session object with a smaller session unique identifier.
+     */
     @Test
     void compareTo_sessionComparedToHasSmallerId_positiveInteger() {
         int comparisonValue = sessionTwo.compareTo(sessionOne);
