@@ -24,7 +24,7 @@ public class TotalParser extends CommandParser{
             System.out.printf("There are %d goods in total.\n", totalOrders);
         } else if (matches.get("flag").equals("g")) {
             // get total goods with flag "g/"
-            warehouse.totalInventoryVol();
+            warehouse.getCapacityOccupied();
         } else {
             // wrong command exception
             throw new WrongCommandException("total", true);
