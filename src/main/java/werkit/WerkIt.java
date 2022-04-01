@@ -1,8 +1,6 @@
 package werkit;
 
-import commands.Command;
-import commands.ExitCommand;
-import commands.InvalidCommandException;
+import commands.*;
 import data.exercises.ExerciseList;
 import data.plans.PlanList;
 import data.schedule.DayList;
@@ -15,6 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
 
 /**
  * This class initiates the various classes/components of WerkIt! and contains the logic code for
@@ -29,6 +29,8 @@ public class WerkIt {
     private PlanList planList;
     private DayList dayList;
     private static Logger logger = Logger.getLogger(WerkIt.class.getName());
+
+    private static final String CASCADE_KEYWORD = "/delete";
 
     /**
      * Initialises the components of the WerkIt! application, greets the user, and loads the
@@ -169,6 +171,15 @@ public class WerkIt {
                 }
 
                 newCommand.execute();
+                if (newCommand instanceof WorkoutCommand) {
+                    if (newCommand.getUserAction().equals(CASCADE_KEYWORD)) {
+                        reloadScheduleFile();
+                    }
+                }   else if (newCommand instanceof PlanCommand) {
+                    if (newCommand.getUserAction().equals(CASCADE_KEYWORD)) {
+                        reloadScheduleFile();
+                    }
+                }
 
             } catch (InvalidCommandException e) {
                 System.out.println(e.getMessage());
@@ -272,5 +283,35 @@ public class WerkIt {
         }
 
         logger.log(Level.INFO, "Schedule file data loaded.");
+    }
+
+    /**
+     * Reloads the schedule file to capture the effects in Daylist due to the deletion of workout and plan.
+     * @throws IOException  If the application is unable to open the schedule file.
+     */
+    private void reloadScheduleFile() throws IOException {
+        boolean isScheduleFileLoadSuccessful;
+        String[] schedule = dayList.getPrintSchedule();
+        this.dayList.clearAllSchedule();
+        String[] updatedSchedule;
+        for (int i = 0; i < schedule.length; i++) {
+            if (schedule[i] == null) {
+                schedule[i] = "rest day";
+            }
+        }
+        isScheduleFileLoadSuccessful = fileManager.reloadScheduleFromFile(getDayList());
+        if (!isScheduleFileLoadSuccessful) {
+            fileManager.deleteAndRecreateScheduleFile();
+            fileManager.rewriteAllDaysScheduleToFile(getDayList());
+            updatedSchedule = dayList.getPrintSchedule();
+            for (int i = 0; i < schedule.length; i++) {
+                if (!updatedSchedule[i].equals(schedule[i])) {
+                    var dayNum = i + 1;
+                    System.out.println("Schedule '" + schedule[i] + "' on " + dayList.covertDayNumberToDay(dayNum)
+                            + " has been removed.");
+                }
+            }
+            logger.log(Level.INFO, "Schedule file data updated due to deletion on workout/plan.");
+        }
     }
 }
