@@ -364,12 +364,22 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if a String object containing an error message corresponding to an empty activity list in the session
+     * is returned when the getActivityListSummaryString method is called and the Session object does not contain
+     * any Activity objects.
+     */
     @Test
     void getActivityListSummaryString_emptyActivityList_emptyActivityListErrorMessage() {
         String activityListSummaryString = sessionOne.getActivityListSummaryString();
         assertEquals(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST, activityListSummaryString);
     }
 
+    /**
+     * Checks if a String object containing a properly formatted table that summarises the activity list of a session
+     * is returned when the getActivityListSummaryString method is called and the Session object contains at least one
+     * Activity objects.
+     */
     @Test
     void getActivityListSummaryString_populatedActivityList_activityListTable() {
         final String expectedActivityListTable =
