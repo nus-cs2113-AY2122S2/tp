@@ -4,11 +4,8 @@
 participant "werkIt:WerkIt" AS WerkIt
 participant "ui:UI" AS UI
 
-
-group sd Obtain user input
 WerkIt -> UI : getUserInput()
 activate UI
 return userInputTrimmed:String
-end
 
 @enduml
