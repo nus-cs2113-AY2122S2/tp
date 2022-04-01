@@ -14,17 +14,17 @@ public class AddStaffCommand extends Command  {
     private ArrayList<String> invalidFields = new ArrayList<>();
 
     private static final String SUCCESS_MESSAGE = "OK! The following new staff is added: ";
-    private static final String DUPLICATE_MESSAGE = "The Id number already exits. This staff cannot be added.";
+    private static final String DUPLICATE_MESSAGE = "The id number already exits. This staff cannot be added.";
     private static final String EMPTY_FIELD_MESSAGE = "These necessary fields are not specified:";
-    private static final String INVALID_FIELD_MESSAGE = "These fields are invalid:";
+    private static final String INVALid_FIELD_MESSAGE = "These fields are invalid:";
 
-    public AddStaffCommand(String Id, String password, String name, String job, String phone, String email) {
-        checkEmptyField(Id, password,name, job,phone, email);
+    public AddStaffCommand(String id, String password, String name, String job, String phone, String email) {
+        checkEmptyField(id, password,name, job,phone, email);
         if (emptyFields.isEmpty()) {
-            checkInvalidField(Id, phone, email);
+            checkInvalidField(id, phone, email);
         }
         if (emptyFields.isEmpty() && invalidFields.isEmpty()) {
-            toAdd = new Staff(Id,  password,name, job,phone, email);
+            toAdd = new Staff(id,  password,name, job,phone, email);
         }
     }
 
@@ -34,7 +34,7 @@ public class AddStaffCommand extends Command  {
             return new CommandResult(EMPTY_FIELD_MESSAGE, emptyFields);
         }
         if (!invalidFields.isEmpty()) {
-            return new CommandResult(INVALID_FIELD_MESSAGE, invalidFields);
+            return new CommandResult(INVALid_FIELD_MESSAGE, invalidFields);
         }
 
         try {
@@ -46,10 +46,10 @@ public class AddStaffCommand extends Command  {
         }
     }
 
-    public void checkEmptyField(String Id, String password, String name, String job, String phone, String email) {
+    public void checkEmptyField(String id, String password, String name, String job, String phone, String email) {
 
-        if (Id == null || Id.isEmpty()) {
-            emptyFields.add("Id");
+        if (id == null || id.isEmpty()) {
+            emptyFields.add("id");
         }
         if (name == null || name.isEmpty()) {
             emptyFields.add("Name");
@@ -68,10 +68,10 @@ public class AddStaffCommand extends Command  {
         }
     }
 
-    public void checkInvalidField(String Id, String phone, String email) {
-        assert Id != null && phone != null && email != null : "staff field is null.";
-        if (!Staff.isValidId(Id)) {
-            invalidFields.add("Id");
+    public void checkInvalidField(String id, String phone, String email) {
+        assert id != null && phone != null && email != null : "staff field is null.";
+        if (!Staff.isValidId(id)) {
+            invalidFields.add("id");
         }
         if (!Staff.isValidPhone(phone)) {
             invalidFields.add("Phone number");

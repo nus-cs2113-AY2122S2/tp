@@ -18,8 +18,8 @@ public class StaffManager {
     }
 
     public boolean hasDuplicateIc(String id) {
-        for (Staff Staff: staffs) {
-            if (id.equals(Staff.getId())) {
+        for (Staff staff: staffs) {
+            if (id.equals(staff.getId())) {
                 return true;
             }
         }
@@ -54,9 +54,9 @@ public class StaffManager {
         if (!Staff.isValidId(id)) {
             throw new ArcsException("Id number is invalid.");
         }
-        for (Staff Staff: staffs) {
-            if (id.equals(Staff.getId())) {
-                return Staff;
+        for (Staff staff: staffs) {
+            if (id.equals(staff.getId())) {
+                return staff;
             }
         }
         return null;

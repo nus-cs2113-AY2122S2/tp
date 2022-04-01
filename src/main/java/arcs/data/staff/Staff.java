@@ -78,14 +78,14 @@ public class Staff {
 
     @Override
     public String toString() {
-        String str = id + " / " + name + " / " +job + " / "
+        String str = id + " / " + name + " / " + job + " / "
                 + phone + " / " + email;
 
         return str;
     }
 
     public String getStaffInfo() {
-        String info = "ID: " + id+ System.lineSeparator()
+        String info = "ID: " + id + System.lineSeparator()
                 + "Name: " + name + System.lineSeparator()
                 + "job: " + name + System.lineSeparator()
                 + "Phone number: " + phone + System.lineSeparator()
