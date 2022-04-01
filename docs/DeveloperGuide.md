@@ -23,8 +23,7 @@ implementation, and other technical and non-technical aspects of the application
 When reading this document, there are several icons that you may encounter. 
 Below are the icons and their meanings:
 
-<span class='warning-box'>⚠️**Warning** : Information that you may want to pay attention to in order
-to prevent possible issues from arising when using the application.</span>
+<span class='warning-box'>⚠️**Warning** : Information that you may want to pay attention to in order to prevent possible issues from arising when using the application.</span>
 
 > ⚠️**Warning** : Information that you may want to pay attention to in order
 > to prevent possible issues from arising when using the application.
