@@ -11,7 +11,7 @@ import static data.schedule.InvalidScheduleException.INVALID_DAY;
 
 public class DayList {
     private static final int FIXED_LENGTH = 30;
-    private static final int NUMBER_OF_SCHEDULE_DAYS = 7;
+    public static final int NUMBER_OF_SCHEDULE_DAYS = 7;
 
     private PlanList planList;
     private String[] scheduleList = new String[NUMBER_OF_SCHEDULE_DAYS]; 
@@ -234,5 +234,21 @@ public class DayList {
             System.out.println(e.getMessage());
         }
         return day;
+    }
+
+    /**
+     * Returns array of plans with non-null values.
+     * @return  array of plans with non-null values.
+     */
+    public String[] getPrintSchedule() {
+        String[] weeklySchedule = new String[NUMBER_OF_SCHEDULE_DAYS];
+        for (int i = 0; i < NUMBER_OF_SCHEDULE_DAYS; i++) {
+            if (getScheduleList()[i] == null) {
+                weeklySchedule[i] = "rest day";
+            } else {
+                weeklySchedule[i] = getScheduleList()[i];
+            }
+        }
+        return weeklySchedule;
     }
 }
