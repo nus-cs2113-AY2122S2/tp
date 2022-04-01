@@ -44,7 +44,12 @@ class StorageTest {
         writeSaveData_oneTask_expectFileCreated();
         try {
             Storage storage = new Storage("data/test.json");
-            TaskList actualList = new TaskList(storage.load());
+            TaskList actualList = new TaskList();
+            try {
+                storage.load(actualList);
+            } catch (TimeClashException e) {
+                e.printStackTrace();
+            }
             Task task = actualList.getTasks().get(0);
             assertEquals(task.getDescription(), "task_one");
             assertEquals(task.getByDate(), null);
