@@ -31,13 +31,11 @@ public class StorageParser {
             String frequencyString = taskData.getString("frequency");
             int index = taskData.getInt("index");
 
-            Frequency repeatFrequency = frequencyString.isBlank()
-                    ? null : Frequency.valueOf(frequencyString);
+            Frequency repeatFrequency = Frequency.valueOf(frequencyString);
             LocalDateTime byDate = (byDateString.isBlank()
                     ? null : LocalDateTime.parse(byDateString, inputWithTimeFormat));
             LocalDateTime doOnStartDateTime = LocalDateTime.parse(doOnStartDateString, inputWithTimeFormat);
             LocalDateTime doOnEndDateTime = LocalDateTime.parse(doOnEndDateString, inputWithTimeFormat);
-
 
             parsedTask = new Task(identifier, description, byDate, doOnStartDateTime,
                     doOnEndDateTime, repeatFrequency, index);
@@ -46,7 +44,7 @@ public class StorageParser {
                 parsedTask.markAsDone();
             }
             return parsedTask;
-        } catch (JSONException | DateTimeParseException | NumberFormatException exception) {
+        } catch (JSONException | DateTimeParseException | IllegalArgumentException exception) {
             throw new InvalidInputException(exception.getMessage());
         }
     }

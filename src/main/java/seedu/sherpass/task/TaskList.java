@@ -7,15 +7,13 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
+import static seedu.sherpass.constant.Message.*;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -136,7 +134,6 @@ public class TaskList {
         if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
-        identifierList.add(newTask.getIdentifier());
         LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(newTask.getDoOnStartDateTime(),
                 newTask.getRepeatFrequency());
         ArrayList<Task> taskListToAdd = new ArrayList<>();
@@ -146,6 +143,26 @@ public class TaskList {
             newTask = prepareNextTask(newTask);
         } while (newTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
         tasks.addAll(taskListToAdd);
+        updateIndex();
+    }
+
+    /**
+     * Adds a task from the save file to the current array of tasks.
+     *
+     * @param newTask The loaded task to be added to the array.
+     */
+    public void importTask(Task newTask) throws InvalidInputException {
+        if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
+            throw new InvalidInputException(newTask + "\n" + ERROR_START_AFTER_END_TIME_MESSAGE);
+        } else if (!newTask.getRepeatFrequency().equals(Frequency.SINGLE) && newTask.getByDate() != null) {
+            throw new InvalidInputException(newTask + "\n" + ERROR_RECURRING_HAS_BY_DATE_MESSAGE);
+        }
+        try {
+            checkDateTimeClash(tasks, newTask);
+        } catch (TimeClashException exception) {
+            throw new InvalidInputException(ERROR_SCHEDULE_CLASH_MESSAGE + "\n" + exception.getMessage());
+        }
+        tasks.add(newTask);
         updateIndex();
     }
 
@@ -298,7 +315,7 @@ public class TaskList {
         Task taskToBeRemoved = tasks.get(deleteIndex);
         if (!isRepeat) {
             tasks.remove(deleteIndex);
-        } else if (taskToBeRemoved.getRepeatFrequency() != Frequency.SINGLE) {
+        } else {
             int identifier = taskToBeRemoved.getIdentifier();
             tasks.removeIf(task -> task.getIdentifier() == identifier && task.getIndex() >= taskToBeRemoved.getIndex());
         }

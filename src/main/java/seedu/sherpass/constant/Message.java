@@ -45,6 +45,7 @@ public class Message {
     public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
     public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank and must be before "
             + "the date and time add commands";
+    public static final String ERROR_RECURRING_HAS_BY_DATE_MESSAGE = "A recurring task cannot have a by date!";
     public static final String ERROR_EMPTY_TASK_LIST_MESSAGE = "The task list is empty!";
     public static final String ERROR_MISSING_EDIT_ARGUMENT_MESSAGE = "Missing task description or date argument!";
     public static final String ERROR_INVALID_FREQUENCY_MESSAGE = "Invalid frequency!";
