@@ -29,6 +29,10 @@ public class Reservations {
         }
     }
 
+    public void initReservation(Reservation newReservation) {
+        reservations.add(newReservation);
+    }
+
     public void addReservation(Reservation newReservation) {
         if (sameContactExist(newReservation.getContactNumber())) {
             System.out.println("Reservation under this number already exists! Please try again.");

@@ -95,7 +95,10 @@ public class Parser {
 
     private static Command prepareReserve(String args) {
         try {
-            String[] argsArray = args.trim().split(","); // process the rest and split by comma
+            String[] argsArray = args.trim().split(",");
+            if (argsArray.length != 4) {
+                return new WrongFormatCommand(args);
+            }
             int packageID = Integer.parseInt(argsArray[0]);
             String name = argsArray[1];
             String number = argsArray[2];
@@ -110,6 +113,9 @@ public class Parser {
     private static Command prepareRemove(String args) {
         try {
             String[] argsArray = args.trim().split(",");
+            if (argsArray.length != 2) {
+                return new WrongFormatCommand(args);
+            }
             int packageID = Integer.parseInt(argsArray[0]);
             String number = argsArray[1];
             return new RemoveReservationCommand(packageID, number);
@@ -120,8 +126,7 @@ public class Parser {
 
     private static Command prepareInfo(String args) {
         try {
-            String[] argsArray = args.trim().split(",");
-            int packageID = Integer.parseInt(argsArray[0]);
+            int packageID = Integer.parseInt(args.trim());
             //String number = argsArray[1];
             return new InfoCommand(packageID);
         } catch (Exception e) {
