@@ -98,6 +98,14 @@ class ActivityCreateCommandTest {
         command.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
 
+        //Checks that ActivityCost of all 3 persons are updated correctly
+        Person alice = manager.getProfile().getSession(1).getPersonByName("Alice");
+        Person bob = manager.getProfile().getSession(1).getPersonByName("Bob");
+        Person charlie = manager.getProfile().getSession(1).getPersonByName("Charlie");
+        assertEquals(10, alice.getActivityCostOwed(2));
+        assertEquals(10, bob.getActivityCostOwed(2));
+        assertEquals(10, charlie.getActivityCostOwed(2));
+
         //Checks that the activityId is incremented
         int testActivityId = manager.getProfile().getActivityIdTracker();
         assertEquals(currentActivityId + 1, testActivityId);
