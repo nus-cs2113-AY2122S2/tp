@@ -187,23 +187,25 @@ class SessionTest {
 
     /**
      * Checks if an Activity object and all ActivityCost objects related it are correctly removed from the
-     * Session object when the removeActivity method is called and an Activity object with the specified
-     * activity unique identifier exists in the Session object.
+     * Session object when the removeActivity method is called, an Activity object with the specified
+     * activity unique identifier exists in the Session object and the payer is also involved in the activity.
      */
     @Test
-    void removeActivity_activityExists_activityAndActivityCostRemoved() {
+    void removeActivity_activityExistsAndPayerIsInvolved_activityAndActivityCostRemoved() {
+        // Activity 1: Payer is involved
         Command createActivityCommandOne = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
+        // Activity 2: Payer is not involved
         Command createActivityCommandTwo = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_TWO);
         createActivityCommandOne.run(manager);
         createActivityCommandTwo.run(manager);
-
+        
         try {
             sessionOne.removeActivity(TEST_ACTIVITY_ONE);
         } catch (InvalidDataException exception) {
             fail();
         }
 
-        // Check if Activity object still exists
+        // Check if Activity object still exists (Payer is involved)
         try {
             sessionOne.getActivity(TEST_ACTIVITY_ONE);
             fail();
@@ -211,13 +213,48 @@ class SessionTest {
             assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, exception.getMessage());
         }
 
-        // Check if ActivityCost objects still exists
+        // Check if ActivityCost objects still exists (Payer is involved)
         ArrayList<Person> personList = sessionOne.getPersonList();
         for (Person person : personList) {
             try {
                 person.removeActivityCost(TEST_ACTIVITY_ONE);
             } catch (InvalidDataException exception) {
                 String errorMessage = Message.ERROR_PERSON_ACTIVITY_NOT_FOUND + TEST_ACTIVITY_ONE;
+                assertEquals(errorMessage, exception.getMessage());
+            }
+        }
+    }
+
+    @Test
+    void removeActivity_activityExistsAndPayerIsNotInvolved_activityAndActivityCostRemoved() {
+        // Activity 1: Payer is involved
+        Command createActivityCommandOne = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
+        // Activity 2: Payer is not involved
+        Command createActivityCommandTwo = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_TWO);
+        createActivityCommandOne.run(manager);
+        createActivityCommandTwo.run(manager);
+
+        try {
+            sessionOne.removeActivity(TEST_ACTIVITY_TWO);
+        } catch (InvalidDataException exception) {
+            fail();
+        }
+
+        // Check if Activity object still exists (Payer is not involved)
+        try {
+            sessionOne.getActivity(TEST_ACTIVITY_TWO);
+            fail();
+        } catch (InvalidDataException exception) {
+            assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, exception.getMessage());
+        }
+
+        // Check if ActivityCost objects still exists (Payer is not involved)
+        ArrayList<Person> personList = sessionOne.getPersonList();
+        for (Person person : personList) {
+            try {
+                person.removeActivityCost(TEST_ACTIVITY_TWO);
+            } catch (InvalidDataException exception) {
+                String errorMessage = Message.ERROR_PERSON_ACTIVITY_NOT_FOUND + TEST_ACTIVITY_TWO;
                 assertEquals(errorMessage, exception.getMessage());
             }
         }
