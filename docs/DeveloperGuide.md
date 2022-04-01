@@ -1022,11 +1022,13 @@ The following sequence diagram illustrates how the `search /all` command works i
 * **Plan** - A set of workouts
     * Example:
 
+
 | Plan Name      | Contains                                                                                                               |
 |----------------|------------------------------------------------------------------------------------------------------------------------|
 | Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps)                                                          |
 | Whole Body!    | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
-<br><br>
+
+
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
 of their schedule. For instance, the user's daily schedule can look like this:
 
