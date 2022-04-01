@@ -431,6 +431,10 @@ class SessionTest {
         assertTrue(comparisonValue > 0);
     }
 
+    /**
+     * Checks if a String object representing the Session object is returned with the correct format
+     * when the toString method is called for a Session object without a Group object.
+     */
     @Test
     void toString_sessionWithoutGroup_returnsCorrectFormat() {
         String expectedFormat = "Session Id #2 --\n"
@@ -444,6 +448,10 @@ class SessionTest {
         assertEquals(expectedFormat, sessionTwo.toString());
     }
 
+    /**
+     * Checks if a String object representing the Session object is returned with the correct format
+     * when the toString method is called for a Session object with a Group object.
+     */
     @Test
     void toString_sessionWithGroup_returnsCorrectFormat() {
         Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_THREE);
