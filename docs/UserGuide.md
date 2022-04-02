@@ -70,11 +70,13 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 ## Quick Notes
 - Allowed characters for values:
     - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
-    - Decimals: `3.5`
+    - Decimals (up to 2 decimal places): `3.5`, `3.95`
     - Whitespace: `Birthday party`
 - A forward slash `/` indicates a delimiter and is used to separate commands into parts.
   Each command's documentation specifies the required delimiters and their purpose.
     - Example: `/n`, `/sid`
+    - Therefore, the forward slash `/` should **only** be used to indicate the delimiters,
+      and **never** in the arguments.
 - Parameters enclosed in `[ ]` must be supplied by the user.
     - Example: `[SESSION_ID]`
 - Parameters with an ellipsis `...` indicate that the user can supply multiple values.
