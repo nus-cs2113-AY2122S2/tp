@@ -172,6 +172,32 @@ public class SessionEditCommandTest {
     }
 
     /**
+     * Checks if session is not edited when supplied with a new session name that exists within the list of sessions.
+     *
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
+    @Test
+    public void run_invalidSessionNameDuplicate_sessionRemainsUnedited() throws InvalidDataException {
+        String newSession = "session /create /n Class Gathering /d 15-02-2022 /pl Alice Bob Charlie";
+        Command createSession = Parser.getCommand(newSession);
+        createSession.run(manager);
+
+        String validInputWithDuplicateSessionName = "session /edit /sid 1 /n Class Gathering";
+        Command commandWithSameSessionName = Parser.getCommand(validInputWithDuplicateSessionName);
+        commandWithSameSessionName.run(manager);
+
+        Session unEditedSession = manager.getProfile().getSession(1);
+        String nameInSession = unEditedSession.getSessionName();
+        String dateInSession = unEditedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
+        int personListSizeInSession = unEditedSession.getPersonArrayList().size();
+
+        assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
+        assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
+        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+    }
+
+    /**
      * Checks if session is not edited when list of persons provided after Person list delimiter
      * does not contain all persons that were originally in the session.
      *
