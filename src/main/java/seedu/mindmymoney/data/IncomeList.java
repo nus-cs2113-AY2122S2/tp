@@ -93,6 +93,7 @@ public class IncomeList {
     public static boolean isEqualIncomeCategory(IncomeList incomeList, int index, String category) {
         return incomeList.get(index).getCategory().equals(category);
     }
+    
     /**
      * Converts this IncomeList into a machine-readable format.
      * @return The serialized IncomeList
