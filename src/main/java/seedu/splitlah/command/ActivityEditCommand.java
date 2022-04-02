@@ -280,6 +280,11 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Checks for negative costs in the costlist and throws an exception if any are present.
+     *
+     * @throws InvalidDataException If any negative costs are present in the costlist.
+     */
     private void checkForNegativeCosts() throws InvalidDataException {
         for (double cost : costList) {
             if (cost < 0) {
