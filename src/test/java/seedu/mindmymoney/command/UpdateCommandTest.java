@@ -91,7 +91,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that an invalid update credit card command will throw an exception.
-     * */
+     **/
     @Test
     void updateCreditCardCommand_invalidInput_exceptionThrown() {
         CreditCard testCreditCard = new CreditCard("DBS", 2, 1000, 1000);
