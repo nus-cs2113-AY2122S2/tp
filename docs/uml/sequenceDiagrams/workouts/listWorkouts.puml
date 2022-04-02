@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+actor   User
+autonumber
+title Sequence Diagram of `workout /list` Command
+
+participant "werkIt:WerkIt" AS WerkIt
+participant "parser:Parser" AS Parser
+participant "newCommand\n:WorkoutCommand" AS newCommand
+participant "workoutList\n:WorkoutList" AS WorkoutList
+participant "workout\n:Workout" AS Workout
+
+activate WerkIt
+ref over WerkIt
+Obtain user input.
+end
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> newCommand : execute()
+activate newCommand
+
+newCommand -> WorkoutList : listAllWorkout()
+activate WorkoutList
+loop index <= workoutDisplayList.size()
+WorkoutList -> WorkoutList:getWorkoutFromIndexNum(index)
+activate WorkoutList
+return workoutObject:Workout
+WorkoutList-->Workout: toString()
+activate Workout
+return displayString:String
+WorkoutList --> User: Printed Workouts
+end
+
+
+
+destroy newCommand
+@enduml

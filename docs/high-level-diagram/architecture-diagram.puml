@@ -1,0 +1,33 @@
+@startuml
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+rectangle "<$user>\nUser" as User #DeepPink
+rectangle "<$documents>\nFiles" as Files #Lime
+
+title Architecture Diagram
+rectangle {
+rectangle UI #lightgreen
+rectangle Command #lightblue
+rectangle Parser #khaki
+rectangle WerkIt #yellow
+rectangle Main #orange
+rectangle Data #Salmon
+rectangle FileManager #MediumOrchid
+rectangle LogHandler #pink
+}
+
+UI<.-up-User
+Main-up->WerkIt
+WerkIt-up->Parser
+Parser-up.>Command
+Command-right->Data
+Command-right->FileManager
+WerkIt-right->FileManager
+Main-right->LogHandler
+WerkIt-left->UI
+FileManager-right->Files
+
+
+
+@enduml

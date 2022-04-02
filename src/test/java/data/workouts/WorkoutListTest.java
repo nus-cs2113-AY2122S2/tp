@@ -2,9 +2,12 @@ package data.workouts;
 
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
+import data.plans.InvalidPlanException;
+import data.plans.PlanList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import storage.LogHandler;
+import werkit.UI;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -80,7 +83,7 @@ class WorkoutListTest {
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);
         System.setOut(ps);
-        wl.listWorkout();
+        wl.listAllWorkout();
         System.out.flush();
         String expectedOutput = "The workout list is empty";
         assertEquals(expectedOutput, consoleOutput.toString().trim());
@@ -101,7 +104,7 @@ class WorkoutListTest {
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);
         System.setOut(ps);
-        wl.listWorkout();
+        wl.listAllWorkout();
         System.out.flush();
         String consoleOutputs = consoleOutput.toString().replaceAll("\n", "").replaceAll("\r", "");
         assertEquals(expectedOutput, consoleOutputs);
@@ -109,16 +112,19 @@ class WorkoutListTest {
 
     @Test
     void deleteWorkout_validIndexToDelete_expectDeleteWorkout() throws
-            InvalidWorkoutException, InvalidExerciseException {
+            InvalidWorkoutException, InvalidExerciseException, InvalidPlanException {
 
         wl.createAndAddWorkout("push up /reps 11");
         wl.createAndAddWorkout("sit up /reps 15");
         wl.createAndAddWorkout("lunge /reps 10");
+        PlanList planList = new PlanList(wl);
+        UI ui = new UI();
 
         int workoutNumberToDeleteInList = 2;
 
         assertEquals("sit up (15 reps)", wl.getWorkoutsDisplayList().get(workoutNumberToDeleteInList - 1).toString());
-        wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList));
+
+        wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList), planList, ui);
         assertEquals("lunge (10 reps)", wl.getWorkoutsDisplayList().get(workoutNumberToDeleteInList - 1).toString());
     }
 
@@ -130,9 +136,12 @@ class WorkoutListTest {
         wl.createAndAddWorkout("sit up /reps 15");
         wl.createAndAddWorkout("lunge /reps 10");
 
+        PlanList planList = new PlanList(wl);
+        UI ui = new UI();
+
         int workoutNumberToDeleteInList = 5;
         assertThrows(InvalidWorkoutException.class,
-            () -> wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList)));
+            () -> wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList), planList, ui));
 
     }
 
@@ -144,9 +153,12 @@ class WorkoutListTest {
         wl.createAndAddWorkout("sit up /reps 15");
         wl.createAndAddWorkout("lunge /reps 10");
 
+        PlanList planList = new PlanList(wl);
+        UI ui = new UI();
+
         String invalidArgumentSupplied = "t5";
         assertThrows(NumberFormatException.class,
-            () -> wl.deleteWorkout(invalidArgumentSupplied));
+            () -> wl.deleteWorkout(invalidArgumentSupplied, planList, ui));
 
     }
 

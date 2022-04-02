@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-!include ../Style.puml
+!include ../../Style.puml
 
 autonumber
 
@@ -8,7 +8,6 @@ title Sequence Diagram of `schedule /update` Command
 
 actor   User
 participant "werkIt:WerkIt" AS WerkIt
-participant "ui:UI" AS UI1
 participant "parser:Parser" AS Parser
 participant "newCommand\n:ScheduleCommand" AS newCommand
 participant "dayList\n:DayList" AS DayList
@@ -16,11 +15,9 @@ participant "ui:UI" AS UI2
 participant "fileManager:FileManager" as FileManager
 
 activate WerkIt
-WerkIt -> UI1 : getUserInput()
-activate UI1
-User -> UI1 : `schedule /update` command
-WerkIt <-- UI1 : userInputTrimmed:String
-deactivate UI1
+ref over WerkIt
+Obtain and parse user input
+end
 
 WerkIt -> Parser : parseUserInput(userInput)
 activate Parser
