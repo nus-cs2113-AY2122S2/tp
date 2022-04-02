@@ -70,22 +70,26 @@ public abstract class Parser {
             } catch (Exception e) {
                 parsedCommand.put(groupName.toString(), null);
             }
-        } if (groupNames.contains(INVALID)) {
+        }
+        if (groupNames.contains(INVALID)) {
             String invalidInput = parsedCommand.get(INVALID);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
                 throw new InvalidExcessArgumentException(invalidInput);
             }
-        } if (groupNames.contains(INVALID_FLAG)) {
+        }
+        if (groupNames.contains(INVALID_FLAG)) {
             String invalidInput = parsedCommand.get(INVALID_FLAG);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
                 throw new InvalidFlagException(invalidInput);
             }
-        } if (groupNames.contains(INVALID_MODULE_GRADE)) {
+        }
+        if (groupNames.contains(INVALID_MODULE_GRADE)) {
             String invalidInput = parsedCommand.get(INVALID_MODULE_GRADE);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
                 throw new InvalidModuleGradeException(invalidInput);
             }
-        } if (groupNames.contains(INVALID_NUMBER)) {
+        }
+        if (groupNames.contains(INVALID_NUMBER)) {
             String invalidInput = parsedCommand.get(INVALID_NUMBER);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
                 throw new InvalidNumberException(invalidInput);
