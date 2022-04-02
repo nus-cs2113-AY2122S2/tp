@@ -39,16 +39,36 @@ public class Housekeeper {
             return "N/A";
         }
         String availableStr = "";
-        int reachEnd = 1;
+        int incrementCounter = 1;
         for (Integer i : availableList) {
-            if (availableList.size() <= reachEnd) {
+            if (availableList.size() <= incrementCounter) {
                 availableStr += daysList[i];
             } else {
                 availableStr += daysList[i] + " ";
             }
-            reachEnd += 1;
+            incrementCounter += 1;
         }
         return availableStr;
+    }
+
+    public String getAvailabilityFile(String availability) {
+        if (availability == null) {
+            return "N/A";
+        }
+        String[] availabilitySplit = availability.split(",");
+        String availabilityForFile = "";
+        int incrementCounter = 1;
+        for (String day: availabilitySplit) {
+            String trimDay = day.trim();
+            if (!(incrementCounter == availabilitySplit.length)) {
+                availabilityForFile += trimDay;
+                availabilityForFile += ",";
+            } else {
+                availabilityForFile += trimDay;
+            }
+            incrementCounter += 1;
+        }
+        return availabilityForFile;
     }
 
     public void setAvailability(String availability) {
@@ -56,7 +76,8 @@ public class Housekeeper {
         availableList.clear();
         String[] days = availability.split(",");
         for (String day : days) {
-            int convertToCorrectDay = Integer.parseInt(day) - 1;
+            String trimDay = day.trim();
+            int convertToCorrectDay = Integer.parseInt(trimDay) - 1;
             if (!(availableList.contains(convertToCorrectDay))) {
                 availableList.add(convertToCorrectDay);
             }
@@ -85,7 +106,7 @@ public class Housekeeper {
     }
 
     public String toFileString() {
-        return getName() + " | " + getAge() + " | " + availability;
+        return getName() + " | " + getAge() + " | " + getAvailabilityFile(availability);
     }
 
     public void setNullAvailability() {
