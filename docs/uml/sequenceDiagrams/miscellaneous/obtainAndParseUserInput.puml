@@ -1,11 +1,40 @@
 @startuml
 !include ../../Style.puml
 
+title Sequence Diagram Showing Receiving and Parsing User Input
+hide footbox
+
+autonumber
+
 participant "werkIt:WerkIt" AS WerkIt
 participant "ui:UI" AS UI
+participant "parser:Parser" AS Parser
 
+activate WerkIt
 WerkIt -> UI : getUserInput()
 activate UI
 return userInputTrimmed:String
+
+WerkIt -> Parser : parseUserInput(userInputTrimmed)
+activate Parser
+ref over Parser
+Check for illegal characters
+end
+
+alt Command starts with 'workout'
+    Parser -> Parser : createWorkoutCommand(userInput)
+else Command starts with 'exit'
+    Parser -> Parser : createExitCommand(userInput)
+else Command starts with 'help'
+    Parser -> Parser : createHelpCommand(userInput)
+else Command starts with 'exercise'
+    Parser -> Parser : createExerciseCommand(userInput)
+else Command starts with 'search'
+    Parser -> Parser : createSearchCommand(userInput)
+else Command starts with 'plan'
+    Parser -> Parser : createPlanCommand(userInput)
+else Command starts with 'schedule'
+    Parser -> Parser : createScheduleCommand(userInput)
+end
 
 @enduml
