@@ -130,15 +130,15 @@ public class Storage {
      *
      * @return Reservations object
      */
-    public Reservations parseReservationFile(String str) throws InvalidInputException {
-        Reservations rList = new Reservations();
-        String[] arrayElements = str.split("%");
+    public Reservations parseReservationFile(String savedReservations) throws InvalidInputException {
+        Reservations reservationsList = new Reservations();
+        String[] arrayElements = savedReservations.split("%");
         try {
             for (String arrayElement : arrayElements) {
-                Reservation newR = parseReservation(arrayElement);
-                rList.initReservation(newR);
+                Reservation newReservation = parseReservation(arrayElement);
+                reservationsList.initReservation(newReservation);
             }
-            return rList;
+            return reservationsList;
         } catch (Exception e) {
             throw new InvalidInputException(e.getMessage());
         }

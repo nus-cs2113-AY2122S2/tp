@@ -2,8 +2,11 @@ package seedu.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 public class TravelPackage {
+    public static DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
     public static final String EXAMPLENAME = "Switzerland - Conquer Summits";
     public static final int EXAMPLEID = 999;
     public static final String EXAMPLESTART = "13/09/2022";
@@ -118,7 +121,7 @@ public class TravelPackage {
                 + this.price + "\nHotel: "
                 + this.hotel + "\nVacancies Filled: "
                 + this.numParticipants + "/" + this.maxParticipants + "\nTravel Period: "
-                + this.startDate + "-" + this.endDate;
+                + this.startDate + " to " + this.endDate;
     }
 
     @Override
@@ -160,11 +163,7 @@ public class TravelPackage {
             return false;
         }
 
-        if (cur.getMaxParticipants() != this.getMaxParticipants()) {
-            return false;
-        }
-
-        return true;
+        return cur.getMaxParticipants() == this.getMaxParticipants();
     }
 
     public String saveTravelPackage() {
@@ -176,11 +175,15 @@ public class TravelPackage {
     }
 
     public String toSave() {
-        return name + " | " + id +
-                " | " + startDate.format(Parser.PARSE_FORMAT) + " | " + endDate.format(Parser.PARSE_FORMAT) + " | " +
-                hotel + " | " + price + " | " + country + " | " +
-                maxParticipants
-                + " | " + numParticipants;
+        return name + " | " +
+                id + " | " +
+                startDate.format(Parser.PARSE_FORMAT) + " | " +
+                endDate.format(Parser.PARSE_FORMAT) + " | " +
+                hotel + " | " +
+                price + " | " +
+                country + " | " +
+                maxParticipants + " | " +
+                numParticipants;
     }
 
 }
