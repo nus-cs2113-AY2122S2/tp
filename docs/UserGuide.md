@@ -75,9 +75,6 @@ Please take note of these few terms. It is explained as below:
 your terminal, please see ["my terminal in Windows is not displaying any colours in the application"](#1-my-terminal-in-windows-is-not-displaying-any-colours-in-the-application) 
 in the FAQ section. </span>
 
-<br/>
-<br/>
-
 <span class="box info"> For Linux operating systems, our application is tested on Ubuntu Linux using the default Bash shell. </span>
 
 ---
@@ -97,8 +94,7 @@ contains two types of formatting.
 | `<condition>`    | Contents enclosed between "<>" are the inputs needed for the command to be valid. <br /> Not all commands needs input.         |
 | `/commandAction` | Content after "/" is to classify the action of the command. <br/> Such as classifying it to be list / delete / update commands |
 
-**_Heads Up!_**<br/>
-Your inputs cannot contain the pipe character `|`!
+<span class="box warning">**_Heads Up!_**<br/>Your inputs cannot contain the pipe character `|`!</span>
 
 ### Finding Your Way Around The Application
 * [Workout Commands](#workout-commands)
