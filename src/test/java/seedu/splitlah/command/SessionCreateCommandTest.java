@@ -101,7 +101,7 @@ class SessionCreateCommandTest {
         String userInput = "session /create /n Class gathering /d 15-02-2022 /pl Charlie /gid 1";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
-        int sizeOfPersonList = manager.getProfile().getSession(3).getPersonList().size();
+        int sizeOfPersonList = manager.getProfile().getSession(3).getPersonArrayList().size();
         assertEquals(3, sizeOfPersonList);
     }
 
@@ -115,7 +115,7 @@ class SessionCreateCommandTest {
         String userInput = "session /create /n Class gathering /d 15-02-2022 /pl alice Charlie /gid 1";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
-        int sizeOfPersonList = manager.getProfile().getSession(3).getPersonList().size();
+        int sizeOfPersonList = manager.getProfile().getSession(3).getPersonArrayList().size();
         assertEquals(3, sizeOfPersonList);
     }
 

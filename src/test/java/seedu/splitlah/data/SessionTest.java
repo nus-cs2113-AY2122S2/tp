@@ -227,7 +227,7 @@ class SessionTest {
         }
 
         // Check if ActivityCost objects still exists (Payer is involved)
-        ArrayList<Person> personList = sessionOne.getPersonList();
+        ArrayList<Person> personList = sessionOne.getPersonArrayList();
         for (Person person : personList) {
             try {
                 person.removeActivityCost(TEST_ACTIVITY_ONE);
@@ -267,7 +267,7 @@ class SessionTest {
         }
 
         // Check if ActivityCost objects still exists (Payer is not involved)
-        ArrayList<Person> personList = sessionOne.getPersonList();
+        ArrayList<Person> personList = sessionOne.getPersonArrayList();
         for (Person person : personList) {
             try {
                 person.removeActivityCost(TEST_ACTIVITY_TWO);

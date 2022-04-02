@@ -54,7 +54,7 @@ public class SessionEditCommandTest {
 
         String newNameInSession = editedSession.getSessionName();
         String dateInSession = editedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
-        int personListSizeInSession = editedSession.getPersonList().size();
+        int personListSizeInSession = editedSession.getPersonArrayList().size();
 
         assertEquals(EDITED_SESSION_NAME, newNameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
@@ -79,7 +79,7 @@ public class SessionEditCommandTest {
         Session editedSession = manager.getProfile().getSession(1);
         String nameInSession = editedSession.getSessionName();
         String newDateInSession = editedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
-        int personListSizeInSession = editedSession.getPersonList().size();
+        int personListSizeInSession = editedSession.getPersonArrayList().size();
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(EDITED_SESSION_DATE, newDateInSession);
@@ -115,10 +115,10 @@ public class SessionEditCommandTest {
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
 
         // Checks if newly edited person list in session has size of 3.
-        assertEquals(EDITED_SESSION_PERSONLIST_SIZE, editedSession.getPersonList().size());
+        assertEquals(EDITED_SESSION_PERSONLIST_SIZE, editedSession.getPersonArrayList().size());
 
         // Check if Person objects in session before edit is still in session after edit
-        originalPersonList.removeAll(editedSession.getPersonList());
+        originalPersonList.removeAll(editedSession.getPersonArrayList());
         assertEquals(0, originalPersonList.size());
     }
 
@@ -141,7 +141,7 @@ public class SessionEditCommandTest {
         Session editedSession = manager.getProfile().getSession(1);
         String nameInSession = editedSession.getSessionName();
         String dateInSession = editedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
-        int personListSizeInSession = editedSession.getPersonList().size();
+        int personListSizeInSession = editedSession.getPersonArrayList().size();
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
@@ -165,7 +165,7 @@ public class SessionEditCommandTest {
         Session editedSession = manager.getProfile().getSession(1);
         String nameInSession = editedSession.getSessionName();
         String dateInSession = editedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
-        int personListSizeInSession = editedSession.getPersonList().size();
+        int personListSizeInSession = editedSession.getPersonArrayList().size();
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
@@ -190,7 +190,7 @@ public class SessionEditCommandTest {
         Session editedSession = manager.getProfile().getSession(1);
         String nameInSession = editedSession.getSessionName();
         String dateInSession = editedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
-        int personListSizeInSession = editedSession.getPersonList().size();
+        int personListSizeInSession = editedSession.getPersonArrayList().size();
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
