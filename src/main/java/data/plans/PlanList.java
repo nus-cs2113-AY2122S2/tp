@@ -458,6 +458,36 @@ public class PlanList {
         return planIndexWithTargetWorkout;
     }
 
+    /**
+     * Deletes the plans which contains the deleted workouts.
+     *
+     * @param deletedWorkoutDetail The deleted workout.
+     * @throws ArrayIndexOutOfBoundsException If index .
+     * @throws InvalidPlanException For operations which involves index checking.
+     */
+    public void deletePlanContainsDeletedWorkout(String deletedWorkoutDetail) throws InvalidPlanException {
+        ArrayList<Integer> planIndexWithDeletedWorkout = findPlanContainsTargetWorkout(deletedWorkoutDetail);
+        if (planIndexWithDeletedWorkout.size() <= 0) {
+            return;
+        }
+        if (planIndexWithDeletedWorkout.size() > 0) {
+            System.out.println(deletedWorkoutDetail + " is found in:\n");
+        }
+
+        for (int planNumber : planIndexWithDeletedWorkout) {
+            System.out.println("\t" + getPlansDisplayList().get(planNumber - 1));
+            assert (checkPlanIndexIsWithinRange(planNumber)) : "Plan number is out of range.";
+        }
+        int totalNumberOfPlanToDelete = planIndexWithDeletedWorkout.size();
+        for (int i = 0; i < totalNumberOfPlanToDelete; i++) {
+            if (i == 0) {
+                System.out.println("\nThe following plan has been removed:\n");
+            }
+            System.out.println((i + 1) + ". " + getPlansDisplayList().get(planIndexWithDeletedWorkout.get(i) - i - 1));
+            deletePlan(Integer.toString(planIndexWithDeletedWorkout.get(i) - i));
+        }
+    }
+
     public void updatePlanContainsUpdatedWorkout(String workoutToCheck, Workout updatedWorkout) throws
             InvalidPlanException {
         ArrayList<Integer> planWithUpdatedWorkout = findPlanContainsTargetWorkout(workoutToCheck);

@@ -11,6 +11,7 @@ participant "werkIt:WerkIt" AS WerkIt
 participant "deleteCommand\n:WorkoutCommand" AS deleteCommand
 participant "workoutList\n:WorkoutList" AS WorkoutList
 participant "ui:UI" AS UI2
+participant "planList\n:PlanList" AS PlanList
 participant "fileManager\n:FileManager" as FileManager
 
 activate WerkIt
@@ -33,10 +34,10 @@ activate UI2
 deleteCommand <-- UI2
 deactivate UI2
 
-deleteCommand -> WorkoutList : deletePlanContainsDeletedWorkout(deletedWorkout.toString(), planList)
-activate WorkoutList
-deleteCommand <-- WorkoutList
-deactivate WorkoutList
+deleteCommand -> PlanList : deletePlanContainsDeletedWorkout(deletedWorkout.toString())
+activate PlanList
+deleteCommand <-- PlanList
+deactivate PlanList
 
 deleteCommand -> FileManager : rewriteAllWorkoutsToFile(workoutList)
 activate FileManager
