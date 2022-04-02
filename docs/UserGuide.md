@@ -63,7 +63,7 @@ when you are using the application.
 3. Copy the file to the folder you want to use as the _home folder_ for your MindMyMoney.
 4. Open a command line terminal in your _home folder_ and run `java -jar MindMyMoney.jar`.
    The startup interface similar to the one below should appear in a few seconds.  
-```
+````
     __  __ _         _ __  __      __  __
 |  \/  (_)_ _  __| |  \/  |_  _|  \/  |___ _ _  ___ _  _
 | |\/| | | ' \/ _` | |\/| | || | |\/| / _ \ ' \/ -_) || |
@@ -73,7 +73,7 @@ when you are using the application.
 
 Welcome to MindMyMoney
 What can I do for you?
-```
+````
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    show a help page. <br> Some example commands you can try: <br>
     * **`list`** : Lists all tasks.
@@ -165,10 +165,20 @@ into the account
 <br/>
 
 ### Display expenditures: `list`
-Prints your current list of expenditures. <br>
-Format:`list /e`
+Prints your current list of expenditures.  
 
-![list_expenses screenshot](./images/list_expenses.PNG)
+**Format**:`list /e`  
+
+**Expected Output**  
+```
+list /e
+-----------------------------------------------
+1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]
+2. $3000.0 was spent on Nike Shoes(Food) using Cash [30/03/2022]
+3. $3.21 was spent on For(Food) using Cash [30/01/1999]
+4. $4.5 was spent on Porridge(Food) using Cash [12/03/2022]
+-----------------------------------------------
+```
 
 <br/>
 
