@@ -13,7 +13,6 @@ public class PackagesCommand extends Command {
         for (int i = 0; i < packages.getSize(); i++) {
             System.out.println(
                     i + 1 + ". PackageID-" + packages.getPackage(i).getID() + " | " + packages.getPackage(i).getCountry() + " - " + packages.getPackage(i).getName());
-            // System.out.println(packages.getPackage(i));
         }
     }
 }

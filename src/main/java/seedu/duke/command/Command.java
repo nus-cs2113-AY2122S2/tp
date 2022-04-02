@@ -16,5 +16,4 @@ public abstract class Command {
 
     public abstract void execute(Packages packages);
 
-//    public abstract void execute(Packages packages, Reservations reservations);
 }
