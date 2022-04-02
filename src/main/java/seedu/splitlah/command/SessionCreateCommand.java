@@ -85,8 +85,6 @@ public class SessionCreateCommand extends Command {
             }
         }
 
-
-
         boolean isSessionExists = profile.hasSessionName(sessionName);
         if (isSessionExists) {
             ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);

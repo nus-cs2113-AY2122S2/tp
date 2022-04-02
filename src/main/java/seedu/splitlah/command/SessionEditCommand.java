@@ -22,7 +22,6 @@ public class SessionEditCommand extends Command {
     private static final String COMMAND_SUCCESS = "The session was edited successfully.";
     private static final String COMMAND_NO_EDITS_MADE = "The session was not edited.";
 
-
     private final int sessionId;
     private final String sessionName;
     private final String[] personNames;
@@ -76,8 +75,7 @@ public class SessionEditCommand extends Command {
                 ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
                 return;
             }
-            if (!(newPersonList.isSuperset(session.getPersonArrayList())
-                    && session.getPersonList().isSuperset(newPersonList.getPersonList()))) {
+            if (session.getPersonList().isSuperset(newPersonList.getPersonList())) {
                 isPersonNamesEdited = true;
             }
         }
