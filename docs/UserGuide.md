@@ -1170,7 +1170,7 @@ copy), delete the `werkItResources` directory and restart WerkIt! to recreate th
 ![Weird Symbols (Help Command)](images/weirdSymbols-helpCommand.png)
 
 **A**: Please ensure that you are running the application using **Windows Terminal**, as mentioned in
-the [Quick Start Guide](#quick-start-guide). [Click here][1] to install Windows Termianl via the
+the [Quick Start Guide](#quick-start-guide). If you have not installed it, [click here][1] to install it via the
 Microsoft Store.
 
 <span class="box info">🧾 **Why are these symbols appearing?** Without being too technical, these symbols are appearing 
