@@ -1,0 +1,44 @@
+@startuml random
+
+abstract class Item implements Billable{
+   {abstract} + void print()
+}
+
+class Review{
+    - Rating rating 
+    + Review()
+}
+
+class Inventory{
+    - List<Item> items
+    + int getItemCount()
+    + void generateBill()
+    + void add()
+}
+
+class StockItem extends Item{
+    - Review review
+    - String name
+    + StockItem()  
+    + void print()
+    + void bill()
+}
+
+enum Rating{
+    GOOD
+    OK
+    POOR
+}
+
+interface Billable{
+    void bill()
+}
+
+' Billable <|-- Item
+Item "0..*"<-- Inventory : contains
+' Item <|-- StockItem
+Review <-- StockItem
+Rating <-- Review
+
+
+@enduml

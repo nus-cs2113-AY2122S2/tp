@@ -1,0 +1,24 @@
+@startuml
+' !include Style.puml  '
+
+Actor ":User" as user
+participant ":UserInterface" as ui
+participant ":Regex" as regex
+participant ":Command" as command
+participant ":Good" as orderline
+
+user -> ui ++ : "add id/id n/name q/quantity d/description"
+create regex
+ui -> regex  ++: Regex(regex, input)
+ref over regex : regex matching
+ui -> regex ++ : regex.getGroupValues()
+regex --> ui -- : :HashMap
+deactivate regex
+ui -> command ++ : addGood(id, name, quantity, description, userOrderlines)
+create orderline
+command -> orderline ++ : Good(id, name, quantity, description)
+orderline --> command -- : orderline:Good
+command --> ui -- : add orderline to userOrderlines
+ui --> user : " `quantity` of `name` added "
+
+@enduml

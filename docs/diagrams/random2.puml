@@ -1,0 +1,14 @@
+@startuml random
+
+object Inventory
+object StockItem{
+    name = "opened"
+}
+object Review{
+    rating = POOR
+}
+
+Inventory --> StockItem
+StockItem --> Review
+
+@enduml
