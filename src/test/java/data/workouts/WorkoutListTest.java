@@ -124,7 +124,7 @@ class WorkoutListTest {
 
         assertEquals("sit up (15 reps)", wl.getWorkoutsDisplayList().get(workoutNumberToDeleteInList - 1).toString());
 
-        wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList), planList, ui);
+        wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList));
         assertEquals("lunge (10 reps)", wl.getWorkoutsDisplayList().get(workoutNumberToDeleteInList - 1).toString());
     }
 
@@ -141,7 +141,7 @@ class WorkoutListTest {
 
         int workoutNumberToDeleteInList = 5;
         assertThrows(InvalidWorkoutException.class,
-            () -> wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList), planList, ui));
+            () -> wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList)));
 
     }
 
@@ -158,7 +158,7 @@ class WorkoutListTest {
 
         String invalidArgumentSupplied = "t5";
         assertThrows(NumberFormatException.class,
-            () -> wl.deleteWorkout(invalidArgumentSupplied, planList, ui));
+            () -> wl.deleteWorkout(invalidArgumentSupplied));
 
     }
 
