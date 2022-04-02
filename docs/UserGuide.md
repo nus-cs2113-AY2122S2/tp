@@ -151,7 +151,7 @@ Example of usage:
 
 * Delete the person with uid = 1 from the Parents' group:
 
-  `delete /u 1 /g 1`
+  `delete /g 1 /u 1`
 
 * _Result_: The person with uid = 1 is deleted from the Parent's group 
   
@@ -233,7 +233,7 @@ Example of usage:
 
 * Edits the recurrent Salary of $2,000 from Alice's income to $200.
 
-  `editin /u 1 /g 1 /r 1 /i 200`
+  `editin /g 1 /u 1 /r 1 /i 200`
 
 * _Result_: Income entry in Alice's income list is edited.
 
@@ -259,7 +259,7 @@ Example of usage:
 * Add a monthly-recurrent expenditure on candies of $20 to Alice's expenditure. This expenditure is tagged under the "
   Food and Drinks" category.
 
-  `addout /u 1 /g 1 /e 20 /d candies /c 1 /p t`
+  `addout /g 1 /u 1 /e 20 /d candies /c 1 /p T`
 
 * _Result_: Entry for candies is added to Alice's expenditure list with an expenditure index of **1**.
 
@@ -312,7 +312,7 @@ Example of usage:
 
 * Edits the recurrent candies expenditure of $20 from Alice's expenditure to $25.
 
-  `editin /u 1 /g 1 /r 1 /i 25`
+  `editout /g 1 /u 1 /r 1 /i 25`
 
 * _Result_: Expenditure entry in Alice's expenditure list is edited.
 
