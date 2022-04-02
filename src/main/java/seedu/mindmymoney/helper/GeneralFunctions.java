@@ -32,9 +32,9 @@ public class GeneralFunctions {
     /**
      * Checks if user's input contains the correct flag formats.
      *
-     * @param input user's input.
+     * @param input        user's input.
      * @param startingFlag the flag before the interested parameter.
-     * @param endingFlag the flag after the interested parameter.
+     * @param endingFlag   the flag after the interested parameter.
      * @return true if the input contains the correct flag formats, false otherwise.
      */
     public static boolean hasCorrectFlagFormat(String input, String startingFlag, String endingFlag) {
@@ -49,9 +49,9 @@ public class GeneralFunctions {
      * For example, if user's input was: "add /i /a 3000 /c salary", this method extracts out "3000" or "salary"
      * based on the flags given.
      *
-     * @param input user's input.
+     * @param input        user's input.
      * @param startingFlag the flag before the interested parameter.
-     * @param endingFlag the flag after the interested parameter.
+     * @param endingFlag   the flag after the interested parameter.
      * @return the interested parameter.
      * @throws MindMyMoneyException when an invalid command is received, along with the corresponding error message.
      */
@@ -60,7 +60,7 @@ public class GeneralFunctions {
         try {
             if (!hasCorrectFlagFormat(input, startingFlag, endingFlag)) {
                 throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!\n"
-                        + "For eg. \"add /pm cash /c Food /d Porridge /a 4.50 /t 30/03/2022\"");
+                    + "For eg. \"add /pm cash /c Food /d Porridge /a 4.50 /t 30/03/2022\"");
             }
 
             startingFlag = startingFlag + " ";
@@ -88,34 +88,30 @@ public class GeneralFunctions {
     public static ArrayList<Expenditure> findItemsInList(String searchTerm, String fieldToSearch,
                                                          ExpenditureList itemList) throws MindMyMoneyException {
         ArrayList<Expenditure> foundItems = new ArrayList<>();
-        try {
-            ExpenditureFields fieldToSearchAsEnumType = ExpenditureFields.valueOf(fieldToSearch);
-            switch (fieldToSearchAsEnumType) {
-            case EXPENDITURE:
-                findMatchingExpenditure(searchTerm, foundItems, itemList);
-                break;
-            case CATEGORY:
-                findMatchingCategory(searchTerm, foundItems, itemList);
-                break;
-            case DESCRIPTION:
-                findMatchingDescription(searchTerm, foundItems, itemList);
-                break;
-            case AMOUNT:
-                findMatchingAmount(searchTerm, foundItems, itemList);
-                break;
-            case TIME:
-                findMatchingTime(searchTerm, foundItems, itemList);
-                break;
-            default:
-                throw new MindMyMoneyException("Input a valid search field!");
-            }
-            if (itemList.size() == 0) {
-                throw new MindMyMoneyException("The task \"" + searchTerm + "\" was not found in the list, sorry!");
-            } else {
-                return foundItems;
-            }
-        } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("AMOUNT must be a number");
+        ExpenditureFields fieldToSearchAsEnumType = ExpenditureFields.valueOf(fieldToSearch);
+        switch (fieldToSearchAsEnumType) {
+        case EXPENDITURE:
+            findMatchingExpenditure(searchTerm, foundItems, itemList);
+            break;
+        case CATEGORY:
+            findMatchingCategory(searchTerm, foundItems, itemList);
+            break;
+        case DESCRIPTION:
+            findMatchingDescription(searchTerm, foundItems, itemList);
+            break;
+        case AMOUNT:
+            findMatchingAmount(searchTerm, foundItems, itemList);
+            break;
+        case TIME:
+            findMatchingTime(searchTerm, foundItems, itemList);
+            break;
+        default:
+            throw new MindMyMoneyException("Input a valid search field!");
+        }
+        if (itemList.size() == 0) {
+            throw new MindMyMoneyException("The task \"" + searchTerm + "\" was not found in the list, sorry!");
+        } else {
+            return foundItems;
         }
     }
 
@@ -158,14 +154,14 @@ public class GeneralFunctions {
     /**
      * Searches for matching items in Category field from an arraylist and returns a list of found items.
      *
-     * @param categoryType Category type to search for
-     * @param foundItems List of expense items.
+     * @param categoryType          Category type to search for
+     * @param foundItems            List of expense items.
      * @param foundCategoryTypeList List to store items found.
      * @return The list that stores the expense items found.
      */
     public static ArrayList<Expenditure> findMatchingCategoryInArraylist(ExpenditureCategoryTypes categoryType,
-                                                                  ArrayList<Expenditure> foundItems,
-                                                                  ArrayList<Expenditure> foundCategoryTypeList) {
+                                                                         ArrayList<Expenditure> foundItems,
+                                                                         ArrayList<Expenditure> foundCategoryTypeList) {
         for (Expenditure item : foundItems) {
             if (item.getCategory().contains(capitalise(categoryType.toString()))) {
                 foundCategoryTypeList.add(item);
@@ -201,11 +197,15 @@ public class GeneralFunctions {
      * @return foundItems, updated with new items found.
      */
     public static ArrayList<Expenditure> findMatchingAmount(String searchTerm, ArrayList<Expenditure> foundItems,
-                                                            ExpenditureList itemList) {
-        for (Expenditure item : itemList.expenditureListArray) {
-            if (item.getAmount() == Float.parseFloat(searchTerm)) {
-                foundItems.add(item);
+                                                            ExpenditureList itemList) throws MindMyMoneyException {
+        try {
+            for (Expenditure item : itemList.expenditureListArray) {
+                if (item.getAmount() == Float.parseFloat(searchTerm)) {
+                    foundItems.add(item);
+                }
             }
+        } catch (NumberFormatException e) {
+            throw new MindMyMoneyException("AMOUNT must be a number");
         }
         return foundItems;
     }
@@ -242,6 +242,7 @@ public class GeneralFunctions {
 
     /**
      * Round off float to 2dp.
+     *
      * @param number float to be rounded off.
      * @return float rounded off to 2dp.
      */
