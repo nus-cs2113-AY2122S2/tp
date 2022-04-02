@@ -123,8 +123,8 @@ public class UpdateCommand extends Command {
             String newTime = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             if (isSimilarExpenditure(indexToUpdate, newPaymentMethod, newCategory, newDescription, newAmountAsFloat,
                     newTime)) {
-                throw new MindMyMoneyException("Expense fields to be updated is similar to the expense in the list.\n" +
-                        "Please make sure the field descriptions you want to change are different.");
+                throw new MindMyMoneyException("Expense fields to be updated is similar to the expense in the list.\n"
+                        + "Please make sure the field descriptions you want to change are different.");
             }
             //Create new expenditure object to substitute in
             Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,
@@ -194,8 +194,8 @@ public class UpdateCommand extends Command {
             float newCardBalanceAsFloat = Float.parseFloat(newCardBalance);
             if (isSimilarCreditCard(indexToUpdate, newCardName, newCashBackAsDouble, newCardLimitAsFloat,
                     newCardBalanceAsFloat)) {
-                throw new MindMyMoneyException("Credit Card fields to be updated is similar to the credit card in " +
-                        "the list.\n" + "Please make sure the field descriptions you want to change are different.");
+                throw new MindMyMoneyException("Credit Card fields to be updated is similar to the credit card in "
+                        + "the list.\n" + "Please make sure the field descriptions you want to change are different.");
             }
             CreditCard newCreditCard = new CreditCard(newCardName, newCashBackAsDouble,
                     newCardLimitAsFloat, newCardBalanceAsFloat);
@@ -257,8 +257,8 @@ public class UpdateCommand extends Command {
             testIncomeCategory(inputCategory);
             String newCategory = capitalise(inputCategory);
             if (isSimilarIncome(indexToUpdate, newAmountAsInt, newCategory)) {
-                throw new MindMyMoneyException("Income fields to be updated is similar to the income in the list.\n" +
-                        "Please make sure the field descriptions you want to change are different.");
+                throw new MindMyMoneyException("Income fields to be updated is similar to the income in the list.\n"
+                        + "Please make sure the field descriptions you want to change are different.");
             }
             Income newIncome = new Income(newAmountAsInt, newCategory);
             incomeList.set(indexToUpdate, newIncome);
