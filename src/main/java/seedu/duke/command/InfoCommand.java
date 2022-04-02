@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Packages;
+import seedu.duke.TravelPackage;
 
 public class InfoCommand extends Command {
 
@@ -13,13 +14,17 @@ public class InfoCommand extends Command {
     }
 
     public void execute(Packages packages) {
-        if (travelPackageID - 1 < packages.getSize()) {
-            System.out.println("Package " + travelPackageID + " found: ");
-            // System.out.println(packages.getPackage(travelPackageID-1).getCountry() + " -
-            // " + packages.getPackage(travelPackageID-1).getName());
-            System.out.println(packages.getPackage(travelPackageID - 1));
-        } else {
-            System.out.println("Package not found.");
+        if (packages.getSize() == 0) {
+            System.out.println("No packages added yet!");
         }
+        for (int i=0; i<packages.getSize(); i++) {
+            TravelPackage currentPackage = packages.getPackage(i);
+            if (travelPackageID == currentPackage.getID()){
+                System.out.println("Package " + travelPackageID + " found: ");
+                System.out.println(currentPackage);
+                return;
+            }
+        }
+        System.out.println("Package not found.");
     }
 }

@@ -71,13 +71,18 @@ public class Storage {
         try {
             ArrayList<TravelPackage> t = parseSavedFile();
             Packages p = new Packages(t);
-            System.out.println("Loaded!");
+            System.out.println("Save file loaded!");
+            return p;
+        } catch (FileNotFoundException e) {
+            Packages p = new Packages();
+            System.out.println("Save file not found!");
+            System.out.println("New save file 'data.txt' created!");
             return p;
         } catch (InvalidInputException e) {
             String errorMessage = e.getMessage();
             String errorDisplay = "ERROR  '" + errorMessage + "'";
             System.out.println(errorDisplay);
-            Boolean newFileFlag = makeNewSaveFile();
+            boolean newFileFlag = makeNewSaveFile();
             if (newFileFlag) {
                 return new Packages();
             }
@@ -94,7 +99,7 @@ public class Storage {
      *
      * @return ArrayList<TravelPackage> object for createPackages method
      */
-    public ArrayList<TravelPackage> parseSavedFile() throws InvalidInputException {
+    public ArrayList<TravelPackage> parseSavedFile() throws InvalidInputException,FileNotFoundException {
         ArrayList<TravelPackage> t = new ArrayList<>();
         File pFile = new File(filePath);
         try {
@@ -114,7 +119,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            throw new FileNotFoundException(e.getMessage());
         }
         return t;
     }
@@ -128,8 +133,8 @@ public class Storage {
         Reservations rList = new Reservations();
         String[] arrayElements = str.split("%");
         try {
-            for (int i = 0; i < arrayElements.length; i++) {
-                Reservation newR = parseReservation(arrayElements[i]);
+            for (String arrayElement : arrayElements) {
+                Reservation newR = parseReservation(arrayElement);
                 rList.initReservation(newR);
             }
             return rList;
@@ -150,8 +155,7 @@ public class Storage {
             String customerName = arrayElements[reservationCustomerNameIndex].trim();
             String customerNum = arrayElements[reservationCustomerNumberIndex].trim();
             int numPax = Integer.parseInt(arrayElements[reservationNumPaxIndex].trim());
-            Reservation r = new Reservation(packageID, customerName, customerNum, numPax);
-            return r;
+            return new Reservation(packageID, customerName, customerNum, numPax);
         } catch (Exception e) {
             throw new InvalidInputException(e.getMessage());
         }
@@ -177,8 +181,7 @@ public class Storage {
             String country = arrayElements[travelPackageCountryIndex].trim();
             int vacancies = Integer.parseInt(arrayElements[travelPackageVacanciesIndex].trim());
             int numParticipants = Integer.parseInt(arrayElements[travelPackageNumParticipantsIndex].trim());
-            TravelPackage newPackage = new TravelPackage(name, id, startDate, endDate, hotel, price, country, vacancies, numParticipants);
-            return newPackage;
+            return new TravelPackage(name, id, startDate, endDate, hotel, price, country, vacancies, numParticipants);
         } catch (Exception e) {
             throw new InvalidInputException(e.getMessage());
         }
