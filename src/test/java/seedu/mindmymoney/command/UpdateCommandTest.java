@@ -55,7 +55,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that when the update command fields are similar to the expenditure in the list, an exception is thrown.
-     * */
+     **/
     @Test
     void updateExpenditureCommand_updateFieldSimilarToExpenditureInList_exceptionThrown() {
         Expenditure testExpenditure = new Expenditure("Cash", "Food",
