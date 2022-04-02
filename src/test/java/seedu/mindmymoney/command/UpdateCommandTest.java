@@ -18,7 +18,7 @@ import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 public class UpdateCommandTest {
     /**
      * Assert that the command can update the expenditure list.
-     * */
+     */
     @Test
     void updateExpenditureCommand_updateExpenditure_listUpdated() {
         Expenditure testExpenditure = new Expenditure("Cash", "Food",
@@ -41,7 +41,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that an invalid update expenditure command will throw an exception.
-     **/
+     */
     @Test
     void updateExpenditureCommand_invalidInput_exceptionThrown() {
         Expenditure testExpenditure = new Expenditure("Cash", "Food",
@@ -56,7 +56,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that when the update command fields are similar to the expenditure in the list, an exception is thrown.
-     **/
+     */
     @Test
     void updateExpenditureCommand_updateFieldSimilarToExpenditureInList_exceptionThrown() {
         Expenditure testExpenditure = new Expenditure("Cash", "Food",
@@ -71,7 +71,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that the command can update the credit card list.
-     **/
+     */
     @Test
     void updateCreditCardCommand_updateCreditCard_listUpdated() {
         CreditCard testCreditCard = new CreditCard("DBS", 2, 1000, 1000);
@@ -92,7 +92,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that an invalid update credit card command will throw an exception.
-     **/
+     */
     @Test
     void updateCreditCardCommand_invalidInput_exceptionThrown() {
         CreditCard testCreditCard = new CreditCard("DBS", 2, 1000, 1000);
@@ -106,8 +106,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that when the update command fields are similar to the credit card in the list, an exception is thrown.
-     *
-     **/
+     */
     @Test
     void updateCreditCardCommand_updateFieldSimilarToCreditCardInList_exceptionThrown() {
         CreditCard testCreditCard = new CreditCard("DBS", 2, 1000, 1000);
@@ -121,7 +120,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that the command can update the income list.
-     **/
+     */
     @Test
     void updateIncomeCommand_updateIncome_listUpdated() {
         Income testIncome = new Income(1000, "Salary");
@@ -142,7 +141,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that an invalid update income command will throw an exception.
-     **/
+     */
     @Test
     void updateIncomeCommand_invalidInput_exceptionThrown() {
         Income testIncome = new Income(1000, "Salary");
@@ -156,8 +155,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that when the update command fields are similar to the income in the list, an exception is thrown.
-     *
-     **/
+     */
     @Test
     void updateIncomeCommand_updateFieldSimilarToIncomeInList_exceptionThrown() {
         Income testIncome = new Income(1000, "Salary");
