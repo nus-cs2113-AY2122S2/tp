@@ -5,6 +5,7 @@ import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserErrors;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -72,33 +73,30 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             activityName = Parser.parseName(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(Message.ERROR_PARSER_MISSING_ARGUMENT + "/n")) {
-                throw new InvalidFormatException("The /n delimiter was found, but no name was provided.");
-            }
-            if (exception.getMessage().equals(Message.ERROR_PARSER_DELIMITER_NOT_FOUND)) {
+            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/n"))) {
                 // activityName not provided by user.
+            } else {
+                throw new InvalidFormatException(exception.getMessage());
             }
         }
 
         try {
             payer = Parser.parsePayer(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(Message.ERROR_PARSER_MISSING_ARGUMENT + "/p")) {
-                throw new InvalidFormatException("The /p delimiter was found, but no name was provided.");
-            }
-            if (exception.getMessage().equals(Message.ERROR_PARSER_DELIMITER_NOT_FOUND)) {
+            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/p"))) {
                 // payer not provided by user.
+            } else {
+                throw new InvalidFormatException(exception.getMessage());
             }
         }
 
         try {
             involvedList = Parser.parseInvolved(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(Message.ERROR_PARSER_MISSING_ARGUMENT + "/i")) {
-                throw new InvalidFormatException("The /i delimiter was found, but no participants were provided.");
-            }
-            if (exception.getMessage().equals(Message.ERROR_PARSER_DELIMITER_NOT_FOUND)) {
+            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/i"))) {
                 // involvedList not provided by user.
+            } else {
+                throw new InvalidFormatException(exception.getMessage());
             }
         }
 
@@ -106,22 +104,20 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(Message.ERROR_PARSER_MISSING_ARGUMENT + "/co")) {
-                throw new InvalidFormatException("The /co delimiter was found, but no cost was provided.");
-            }
-            if (exception.getMessage().equals(Message.ERROR_PARSER_DELIMITER_NOT_FOUND)) {
+            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/co"))) {
                 // totalCost not provided by user.
+            } else {
+                throw new InvalidFormatException(exception.getMessage());
             }
         }
 
         try {
             costList = Parser.parseCostList(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(Message.ERROR_PARSER_MISSING_ARGUMENT + "/cl")) {
-                throw new InvalidFormatException("The /cl delimiter was found, but no costlist was provided.");
-            }
-            if (exception.getMessage().equals(Message.ERROR_PARSER_DELIMITER_NOT_FOUND)) {
+            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/cl"))) {
                 // costList not provided by user.
+            } else {
+                throw new InvalidFormatException(exception.getMessage());
             }
         }
 
@@ -134,22 +130,20 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             gst = Parser.parseGstIncludingZero(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(Message.ERROR_PARSER_MISSING_ARGUMENT + "/gst")) {
-                throw new InvalidFormatException("The /gst delimiter was found, but no gst was provided.");
-            }
-            if (exception.getMessage().equals(Message.ERROR_PARSER_DELIMITER_NOT_FOUND)) {
+            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/gst"))) {
                 // gst not provided by user.
+            } else {
+                throw new InvalidFormatException(exception.getMessage());
             }
         }
 
         try {
             serviceCharge = Parser.parseServiceChargeIncludingZero(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(Message.ERROR_PARSER_MISSING_ARGUMENT + "/sc")) {
-                throw new InvalidFormatException("The /sc delimiter was found, but no service charge was provided.");
-            }
-            if (exception.getMessage().equals(Message.ERROR_PARSER_DELIMITER_NOT_FOUND)) {
+            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/sc"))) {
                 // serviceCharge not provided by user.
+            } else {
+                throw new InvalidFormatException(exception.getMessage());
             }
         }
 
