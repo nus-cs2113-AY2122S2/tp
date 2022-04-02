@@ -7,7 +7,7 @@ import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 /**
- * Represents a command parser that is able to parse user arguments into a SessionListCommand object.
+ * Represents a command parser that parses user arguments into an ActivityListCommand object.
  *
  * @author Tianle
  */
@@ -22,10 +22,11 @@ public class ActivityListCommandParser implements CommandParser<ActivityListComm
     };
 
     /**
-     * Returns a ActivityListCommand object after parsing the input arguments from the user.
+     * Returns an ActivityListCommand object after parsing the input arguments from the user.
      *
      * @param commandArgs A String object representing arguments provided by the user.
-     * @return An ActivityListCommand object when method is called.
+     * @return An ActivityListCommand object if a valid integer representing a session's unique identifier is found
+     *         in the input arguments.
      * @throws InvalidFormatException If a valid integer representing a session's unique identifier cannot be found
      *                                in the input arguments.
      */
