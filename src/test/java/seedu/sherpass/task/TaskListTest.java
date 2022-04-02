@@ -27,7 +27,7 @@ public class TaskListTest {
                 Frequency.SINGLE);
         TaskList testMethod = new TaskList();
         assertThrows(TimeClashException.class,
-                () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
+            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class TaskListTest {
                 Frequency.SINGLE);
         TaskList testMethod = new TaskList();
         assertThrows(TimeClashException.class,
-                () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
+            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class TaskListTest {
                 Frequency.SINGLE);
         TaskList testMethod = new TaskList();
         assertThrows(TimeClashException.class,
-                () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
+            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class TaskListTest {
                 Frequency.SINGLE);
         TaskList testMethod = new TaskList();
         assertThrows(TimeClashException.class,
-                () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
+            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
     }
 
     @Test
