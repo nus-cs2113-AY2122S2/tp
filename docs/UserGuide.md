@@ -114,7 +114,7 @@ contains two types of formatting.
 | `<condition>`    | Contents enclosed between "<>" are the inputs needed for the command to be valid. <br /> Not all commands needs input.         |
 | `/commandAction` | Content after "/" is to classify the action of the command. <br/> Such as classifying it to be list / delete / update commands |
 
-<span class="box warning">**_Heads Up!_**<br/>Your inputs cannot contain the pipe character `|`!</span>
+<span class="box warning">⚠️**Heads Up!** Your inputs cannot contain the pipe character `|`!</span>
 
 ### Finding Your Way Around The Application
 * [Workout Commands](#workout-commands)
@@ -1153,7 +1153,7 @@ that you did when starting WerkIt! for the first time.
 
 <span class="box warning">⚠️**Warning:** It is highly recommended that you do not directly modify these files on your own as it may lead to
 instabilities in the application. If you do decide to modify the files, **please make a backup of the `werkItResources`
-directory** before modifying the files. </span>
+directory** before modifying the files.</span>
 
 In the event that your application becomes unstable due to accidental file modifications, please replace the
 `werkItResources` directory with your backup copy. In a worst case scenario (i.e. if you don't have a proper backup
@@ -1166,7 +1166,7 @@ copy), delete the `werkItResources` directory and restart WerkIt! to recreate th
 ### 1. My terminal in Windows is not displaying any colours in the application.
 
 **A**: Please install Microsoft's newer terminal 'Windows Terminal' from the Microsoft Store via this
-[link](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701).
+[link][1].
 
 ### 2. How do I transfer my data to another computer? 
 
@@ -1215,3 +1215,6 @@ Below is a summary of all the commands available in the WerkIt! application.
 | Search For Plan          | <br /> Format: `search /plan <plan keyword>` <br/>Example: `search /plan arms` <br /> <br />                                                                   |
 | Search For ALL           | <br /> Format: `search /all <keyword>` <br/>Example: `search /all 10` <br /> <br />                                                                            |
 | View Help                | <br /> Format: `help`<br/>Example: `help`  <br /> <br />                                                                                                       |
+
+
+[1]:https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701
