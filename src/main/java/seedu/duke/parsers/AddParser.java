@@ -54,7 +54,7 @@ public class AddParser extends Parser {
      *                                                      Any other excess inputs
      */
 
-    private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+((-m)\\s+|(?<invalidFlag>.*))(?<taskModule>\\w+))?"
+    private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+(-m\\s+)(?<taskModule>\\w+))?"
             + "(\\s+-d\\s+\\\"(?<taskDescription>[^\\\"]+)\\\")?(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?"
             + "|mod\\s+(?<moduleCode>\\w+?)(\\s+(?<modularCredit>\\d+)(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|.*$))"
             + "(\\s+(-d\\s+\\\"(?<moduleDescription>[^\\\"]+)\\\"))?)(?<invalid>.*)";

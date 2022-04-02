@@ -7,7 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.commands.Command;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.InvalidFlagException;
+import seedu.duke.exceptions.InvalidModuleGradeException;
+import seedu.duke.exceptions.InvalidCompulsoryParameterException;
+import seedu.duke.exceptions.InvalidExcessArgumentException;
+
+import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -64,28 +70,22 @@ public abstract class Parser {
             } catch (Exception e) {
                 parsedCommand.put(groupName.toString(), null);
             }
-        }
-        if (groupNames.contains(INVALID)) {
+        } if (groupNames.contains(INVALID)) {
             String invalidInput = parsedCommand.get(INVALID);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
                 throw new InvalidExcessArgumentException(invalidInput);
             }
-        }if (groupNames.contains(INVALID_FLAG)) {
+        } if (groupNames.contains(INVALID_FLAG)) {
             String invalidInput = parsedCommand.get(INVALID_FLAG);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
                 throw new InvalidFlagException(invalidInput);
             }
-        }if (groupNames.contains(INVALID_MODULE_CODE)) {
-            String invalidInput = parsedCommand.get(INVALID_MODULE_CODE);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidFlagException(invalidInput);
-            }
-        }if (groupNames.contains(INVALID_MODULE_GRADE)) {
+        } if (groupNames.contains(INVALID_MODULE_GRADE)) {
             String invalidInput = parsedCommand.get(INVALID_MODULE_GRADE);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
                 throw new InvalidModuleGradeException(invalidInput);
             }
-        }if (groupNames.contains(INVALID_NUMBER)) {
+        } if (groupNames.contains(INVALID_NUMBER)) {
             String invalidInput = parsedCommand.get(INVALID_NUMBER);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
                 throw new InvalidNumberException(invalidInput);
