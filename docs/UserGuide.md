@@ -160,7 +160,7 @@ Example of usage:
 
 ### Add an income: `addin`
 
-> Add an entry to your list of tracked incomes.
+> Adds an entry to your list of tracked incomes.
 
 Format: `addin /g GROUP_INDEX /u USER_INDEX /d DESCRIPTION /i INCOME /p <T/(any)>`
 
@@ -188,7 +188,7 @@ Example of usage:
 
 ### Delete an income: `deletein`
 
-> Delete an entry from your list of tracked incomes.
+> Deletes an entry from your list of tracked incomes.
 
 Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 
@@ -226,8 +226,8 @@ Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCR
   
 > **Note**
 >
-> **DESCRIPTION**, **INCOME_INDEX**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) are optional in this case. You
-> can just include the part(s) that you are looking to modify.
+> **DESCRIPTION**, **INCOME** and recurring setting (**<T|F>**) are optional in this case. You can just include the 
+> part(s) that you are looking to modify.
 
 Example of usage:
 
@@ -243,7 +243,7 @@ Example of usage:
 
 ### Add an expenditure: `addout`
 
-> Add an entry to your list of tracked expenditures.
+> Adds an entry to your list of tracked expenditures.
 
 Format: `addout /g GROUP_INDEX /u USER_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>`
 
@@ -269,7 +269,7 @@ Example of usage:
 
 ### Delete an expenditure: `deleteout`
 
-> Delete an entry from your list of tracked expenditure.
+> Deletes an entry from your list of tracked expenditure.
 
 Format: `deleteout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX`
 
@@ -304,9 +304,9 @@ Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITU
 * **<T/(any)>** refers to whether your expenditure is recurrent on a monthly-basis.
 
 > **Note**
-> 
-> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) is optional in this case. You
-> can just modify the part that you modify.
+>
+> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) are optional in this case. You
+> can just include the part(s) that you are looking to modify.
 
 Example of usage:
 
