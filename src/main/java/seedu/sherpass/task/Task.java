@@ -155,12 +155,12 @@ public class Task {
     @Override
     public String toString() {
         String result = index + ". [" + this.getStatusIcon() + "] " + this.getDescription();
-        if (this.byDate != null) {
-            result += " (by: " + getByDateString() + ")";
-        }
         if (this.doOnStartDateTime != null) {
             result += " (to do on: " + getDoOnDateString(false) + " - "
                     + doOnEndDateTime.toLocalTime().toString() + ")";
+        }
+        if (this.byDate != null) {
+            result += " (by: " + getByDateString() + ")";
         }
         return result;
     }
