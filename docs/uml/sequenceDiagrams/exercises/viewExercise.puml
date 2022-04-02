@@ -1,12 +1,12 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include ../../Style.puml
-
+hide footbox
 autonumber
 
 title Sequence Diagram of `exercise /list` Command
 
-actor   User
+
 participant "werkIt:WerkIt" AS WerkIt
 participant "ui:UI" AS UI1
 participant "parser:Parser" AS Parser
@@ -16,7 +16,7 @@ participant "exerciseList\n:ExerciseList" AS ExerciseList
 activate WerkIt
 WerkIt -> UI1 : getUserInput()
 activate UI1
-User -> UI1 : `exercise /list` command
+
 WerkIt <-- UI1 : userInputTrimmed:String
 deactivate UI1
 
@@ -30,7 +30,7 @@ activate newCommand
 newCommand -> ExerciseList : printExerciseList()
 activate ExerciseList
 
-User <-- ExerciseList : list of exercises
+
 deactivate ExerciseList
 
 

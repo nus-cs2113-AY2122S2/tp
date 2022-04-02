@@ -14,6 +14,7 @@ import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import werkit.UI;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -65,6 +66,39 @@ public class FileManager {
     private PlanList planList;
 
     private static Logger logger = Logger.getLogger(FileManager.class.getName());
+
+    /**
+     * Recreates the workout file.
+     * @throws IOException      If the application is unable to create the workout file.
+     */
+    public void deleteAndRecreateWorkoutFile() throws IOException {
+        File workoutFile = new File(String.valueOf(getWorkoutFilePath()));
+        workoutFile.delete();
+        logger.log(Level.INFO, "A workout file has been deleted, and will be recreated soon.");
+        createWorkoutFile();
+    }
+
+    /**
+     * Recreates the plan file.
+     * @throws IOException      If the application is unable to create the plan file.
+     */
+    public void deleteAndRecreatePlanFile() throws IOException {
+        File planFile = new File(String.valueOf(getPlanFilePath()));
+        planFile.delete();
+        logger.log(Level.INFO, "A plan file has been deleted, and will be recreated soon.");
+        createPlanFile();
+    }
+
+    /**
+     * Recreates the Schedule file.
+     * @throws IOException      If the application is unable to create the schedule file.
+     */
+    public void deleteAndRecreateScheduleFile() throws IOException {
+        File scheduleFile = new File(String.valueOf(getScheduleFilePath()));
+        scheduleFile.delete();
+        logger.log(Level.INFO, "A schedule file has been deleted, and will be recreated soon.");
+        createScheduleFile();
+    }
 
     /**
      * Constructs a FileManager object. While instantiating, Paths objects of the various URIs
@@ -428,7 +462,7 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("File data error: insufficient parameters in workout data.");
                 hasNoErrorsDuringLoad = false;
-            } catch (InvalidExerciseException | InvalidWorkoutException e) {
+            } catch (InvalidExerciseException | InvalidWorkoutException | NumberFormatException e) {
                 System.out.println("File data error: " + e.getMessage());
                 hasNoErrorsDuringLoad = false;
             }
@@ -448,7 +482,7 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("File data error: insufficient parameters in plan data.");
                 hasNoErrorsDuringLoad = false;
-            } catch (InvalidExerciseException | InvalidWorkoutException e) {
+            } catch (InvalidExerciseException | InvalidWorkoutException | NumberFormatException e) {
                 System.out.println("File data error: " + e.getMessage());
                 hasNoErrorsDuringLoad = false;
             }
@@ -477,8 +511,39 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("File data error: insufficient parameters in plan data.");
                 hasNoErrorsDuringLoad = false;
-            } catch (InvalidScheduleException | InvalidPlanException e) {
+            } catch (InvalidScheduleException | InvalidPlanException | NumberFormatException e) {
                 System.out.println("File data error: " + e.getMessage());
+                hasNoErrorsDuringLoad = false;
+            }
+        }
+
+        return hasNoErrorsDuringLoad;
+    }
+
+    /**
+     * Reloads the data from schedule file to DayList after deletion of workout/plan that is related to the schedule.
+     *
+     * @param dayList   The DayList object to store the day schedule in.
+     * @return          Returns true if the deleted workout/plan does not affect the current schedule.
+     * @throws IOException  If the method is unable to open the schedule file.
+     */
+    public boolean reloadScheduleFromFile(DayList dayList) throws IOException {
+        int deletedScheduleCount = 0;
+        boolean hasNoErrorsDuringLoad = true;
+        Scanner scheduleFileReader = new Scanner(getScheduleFilePath());
+        while (scheduleFileReader.hasNext()) {
+            try {
+                String scheduleFileDataLine = scheduleFileReader.nextLine();
+                String[] parsedScheduleFileDataLine = parseFileDataLine(scheduleFileDataLine);
+                addFileScheduleToList(dayList, parsedScheduleFileDataLine);
+            } catch (ArrayIndexOutOfBoundsException | InvalidScheduleException | InvalidPlanException e) {
+                deletedScheduleCount += 1;
+                if (deletedScheduleCount == 1) {
+                    System.out.print(System.lineSeparator());
+                    System.out.println("The following schedule(s) is(are) "
+                            + "removed due to the removal of\nrelevant plan(s).");
+                    System.out.print(System.lineSeparator());
+                }
                 hasNoErrorsDuringLoad = false;
             }
         }

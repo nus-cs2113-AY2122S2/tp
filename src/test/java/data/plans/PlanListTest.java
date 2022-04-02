@@ -213,31 +213,4 @@ class PlanListTest {
 
     }
 
-    @Test
-    void deletePlanContainsDeletedWorkout_workoutIsInPlan_expectPlanIsDeleted() throws InvalidPlanException,
-            InvalidWorkoutException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1");
-        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
-
-
-        Workout deletedWorkout = workoutList.deleteWorkout("3");
-        planList.deletePlanContainsDeletedWorkout(deletedWorkout.toString());
-        assertEquals(1, planList.getPlansDisplayList().size());
-
-    }
-
-    @Test
-    void deletePlanContainsDeletedWorkout_workoutNotInPlan_expectNoPlanIsDeleted() throws InvalidPlanException,
-            InvalidWorkoutException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1");
-        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
-
-
-        Workout deletedWorkout = workoutList.deleteWorkout("4");
-        planList.deletePlanContainsDeletedWorkout(deletedWorkout.toString());
-        assertEquals(3, planList.getPlansDisplayList().size());
-
-    }
 }
