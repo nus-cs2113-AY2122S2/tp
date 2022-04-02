@@ -230,7 +230,8 @@ public class Profile implements Serializable {
     public void removeGroup(int groupId) throws InvalidDataException {
         Group groupToBeRemoved = getGroup(groupId);
         for (Session session : sessionList) {
-            if (session.getGroup().getGroupId() == groupId) {
+            Group groupToCheck = session.getGroup();
+            if (groupToCheck != null && groupToCheck.getGroupId() == groupId) {
                 session.setGroup(null);
             }
         }
