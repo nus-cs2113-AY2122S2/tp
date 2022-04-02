@@ -65,8 +65,9 @@ public class CheckRoomByCatCommand extends Command {
         ui.printTableHeader();
         for (Room room : roomList.getRoomList()) {
             if (room.getType() == type) {
-                System.out.println(room + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
+                System.out.println(room.toString()
+                        + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+                );
             }
         }
     }

@@ -22,13 +22,13 @@ import java.util.Scanner;
 public class Ui {
     private Scanner in = new Scanner(System.in);
     private static final int ARRAY_INDEX_OFFSET = 1;
-    private static final String LINE = "======================================================================";
+    private static final String LINE = "=======================================================================";
     private static final String ITEM_LIST_HEADER = "=============== Item List =================";
     private static final String END_OF_LIST_LINE = "============ End of the list ==============";
     private static final String MESSAGE_HEADER = "================ Noted! ===================";
     private static final String END_OF_MESSAGE_LINE = "===========================================";
-    private static final String TABLE_HEADER = "Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHousekeeper Name";
-
+    private static final String TABLE_HEADER = String.format("%-15s%-15s%-15s%-15s%-15s","Type",
+            "Room Id", "Level", "Status", "Housekeeper");
     /**
      * Returns a string containing the user input.
      *

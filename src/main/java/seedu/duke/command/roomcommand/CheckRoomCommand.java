@@ -46,8 +46,9 @@ public class CheckRoomCommand extends Command {
         for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
                 ui.printTableHeader();
-                System.out.println(room + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
+                System.out.println(room.toString()
+                        + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+                );
                 return;
             }
         }

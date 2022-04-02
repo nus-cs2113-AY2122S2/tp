@@ -38,8 +38,9 @@ public class CheckInCommand extends Command {
             if (room.getRoomId() == roomId) {
                 room.checkIn();
                 ui.printTableHeader();
-                System.out.println(room + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
+                System.out.println(room.toString()
+                        + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+                );
                 roomList.save();
                 return;
             }

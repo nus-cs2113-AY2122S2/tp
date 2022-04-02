@@ -31,8 +31,9 @@ public class CheckAllRoomCommand extends Command {
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         ui.printTableHeader();
         for (Room room : roomList.getRoomList()) {
-            System.out.println(room.toString() + "\t\t\t"
-                    + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
+            System.out.println(room.toString()
+                    + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+            );
         }
     }
 

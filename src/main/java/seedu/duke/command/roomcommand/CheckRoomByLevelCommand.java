@@ -17,7 +17,8 @@ import seedu.duke.command.Command;
  */
 public class CheckRoomByLevelCommand extends Command {
     private int level;
-    private static String TABLE_HEAD = "Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHouse Keeper Name";
+    private static final String TABLE_HEADER = String.format("%-15s%-15s%-15s%-15s%-15s","Type",
+            "Room Id", "Level", "Status", "Housekeeper");
 
     /**
      * Extracts the room level from user input.
@@ -55,11 +56,12 @@ public class CheckRoomByLevelCommand extends Command {
     }
 
     private void printRoom(int level, RoomList roomList, AssignmentMap assignmentMap) {
-        System.out.println(TABLE_HEAD);
+        System.out.println(TABLE_HEADER);
         for (Room room : roomList.getRoomList()) {
             if (room.getLevel() == level) {
-                System.out.println(room.toString() + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
+                System.out.println(room.toString()
+                        + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+                );
             }
         }
     }
