@@ -170,22 +170,25 @@ public class Family {
      */
     public void overview() {
         LOGGER.log(Level.INFO, Constants.OVERVIEW_CALL_MESSAGE);
-        System.out.println("Here are your disposable incomes by group:");
+        System.out.println("Here is the overview for your family:");
+        Double sum = 0.0;
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
             String income = formatValue(personList.getTotalIncome());
             String expenditure = formatValue(personList.getTotalExpenditure());
-            String disposable = formatValue(personList.getRemain());
+            Double remain = personList.getRemain();
+            sum += remain;
+            String disposable = formatValue(remain);
             String generation = getGenerationName(i);
             System.out.println(i + ". " + generation + ":" + System.lineSeparator()
                     + Constants.INDENTATION + "Income: " + income + System.lineSeparator()
                     + Constants.INDENTATION + "Expenditure: " + expenditure + System.lineSeparator()
                     + Constants.INDENTATION + "Disposable: " + disposable);
             // Print newline between generations
-            if (i != Constants.NUM_GROUPS) {
-                System.out.println(Constants.EMPTY_STRING);
-            }
+            System.out.println(Constants.EMPTY_STRING);
         }
+        String familyDisposable = formatValue(sum);
+        System.out.println("Total disposable income in family: " + familyDisposable);
     }
 
     /**
