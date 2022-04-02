@@ -1,11 +1,19 @@
 package seedu.splitlah.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.splitlah.command.ActivityCreateCommand;
+import seedu.splitlah.command.ActivityDeleteCommand;
+import seedu.splitlah.command.ActivityEditCommand;
 import seedu.splitlah.command.Command;
+import seedu.splitlah.command.GroupEditCommand;
 import seedu.splitlah.command.HelpCommand;
 import seedu.splitlah.command.InvalidCommand;
+import seedu.splitlah.command.SessionCreateCommand;
+import seedu.splitlah.command.SessionDeleteCommand;
+import seedu.splitlah.command.SessionEditCommand;
 import seedu.splitlah.command.SessionListCommand;
 import seedu.splitlah.command.SessionSummaryCommand;
+import seedu.splitlah.command.SessionViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
@@ -24,13 +32,56 @@ class ParserTest {
     @Test
     void getCommand_validInput_validCommand() {
         // TODO: update with all Command subclasses after their CommandParser is complete
-        String sessionSummaryCommandInput = "session /summary /sid 1";
-        Command command = Parser.getCommand(sessionSummaryCommandInput);
-        assertEquals(SessionSummaryCommand.class, command.getClass());
+        String activityCreateCommandInput = "activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10";
+        Command command = Parser.getCommand(activityCreateCommandInput);
+        assertEquals(ActivityCreateCommand.class, command.getClass());
+
+        String activityDeleteCommandInput = "activity /delete /sid 2 /aid 1";
+        command = Parser.getCommand(activityDeleteCommandInput);
+        assertEquals(ActivityDeleteCommand.class, command.getClass());
+
+        String activityEditCommandInput = 
+                "activity /edit /sid 1 /aid 1 /n Dinner /p Bob /i Alice Bob /co 30 /gst 7 /sc 10";
+        command = Parser.getCommand(activityEditCommandInput);
+        assertEquals(ActivityEditCommand.class, command.getClass());
+
+        // TODO: Add missing: ActivityList, ActivityView, GroupCreate, GroupDelete
+        
+        String groupEditCommandInput = "group /edit /gid 1 /n Class gathering";
+        command = Parser.getCommand(groupEditCommandInput);
+        assertEquals(GroupEditCommand.class, command.getClass());
+
+        String groupListCommandInput = "group /list";
+        command = Parser.getCommand(groupEditCommandInput);
+        assertEquals(GroupEditCommand.class, command.getClass());
+
+        String groupViewCommandInput = "group /view /gid 1";
+        command = Parser.getCommand(groupEditCommandInput);
+        assertEquals(GroupEditCommand.class, command.getClass());
+
+        String sessionCreateCommandInput = "session /create /n Class Gathering /d 16-04-2022 /gid 1 /pl Alice";
+        command = Parser.getCommand(sessionCreateCommandInput);
+        assertEquals(SessionCreateCommand.class, command.getClass());
+
+        String sessionDeleteCommandInput = "session /delete /sid 1";
+        command = Parser.getCommand(sessionDeleteCommandInput);
+        assertEquals(SessionDeleteCommand.class, command.getClass());
+
+        String sessionEditCommandInput = "session /edit /sid 1 /n Class gathering /d 16-03-2022";
+        command = Parser.getCommand(sessionEditCommandInput);
+        assertEquals(SessionEditCommand.class, command.getClass());
         
         String sessionListCommandInput = "session /list";
         command = Parser.getCommand(sessionListCommandInput);
         assertEquals(SessionListCommand.class, command.getClass());
+
+        String sessionViewCommandInput = "session /view /sid 1";
+        command = Parser.getCommand(sessionViewCommandInput);
+        assertEquals(SessionViewCommand.class, command.getClass());
+        
+        String sessionSummaryCommandInput = "session /summary /sid 1";
+        command = Parser.getCommand(sessionSummaryCommandInput);
+        assertEquals(SessionSummaryCommand.class, command.getClass());
         
         String helpCommandInput = "help";
         command = Parser.getCommand(helpCommandInput);
