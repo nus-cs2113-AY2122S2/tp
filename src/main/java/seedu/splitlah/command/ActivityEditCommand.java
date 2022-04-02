@@ -255,6 +255,10 @@ public class ActivityEditCommand extends Command {
             retrieveDetailsFromOldActivity(oldActivity);
             validateCostListAndInvolvedList();
             updateCostAndCostList();
+            if (costList == null) {
+                throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COST_ERROR);
+            }
+            checkForNegativeCosts();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
             involvedArrayList = session.getPersonListByName(involvedList);
@@ -273,6 +277,14 @@ public class ActivityEditCommand extends Command {
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED);
         } catch (InvalidDataException exception) {
             ui.printlnMessage(exception.getMessage());
+        }
+    }
+
+    private void checkForNegativeCosts() throws InvalidDataException {
+        for (double cost : costList) {
+            if (cost < 0) {
+                throw new InvalidDataException("Costs cannot be less than zero.");
+            }
         }
     }
 

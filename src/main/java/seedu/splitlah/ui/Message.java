@@ -366,6 +366,10 @@ public abstract class Message {
             "Please include both a cost list and a participant list to split costs independently.";
     public static final String ERROR_ACTIVITYEDIT_INVOLVED_AND_COST_DIFFERENT_LENGTH =
             "There is a mismatch between persons involved and the costs for each person. Please rectify and try again.";
+    public static final String ERROR_ACTIVITYEDIT_COST_ERROR =
+            "There is an error in the cost list or total cost of this activity.";
+    public static final String ERROR_ACTIVITYEDIT_COST_NEGATIVE =
+            "The cost cannot be negative.";
 
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =
