@@ -243,10 +243,9 @@ aborted.
 **(Steps 4 to 17)** If no illegal characters and phrases are found, `Parser#parseUserInput()` will examine the first
 word in the user input. This first word should represent the command type that the user wish to execute (i.e. `exercise`,
 `workout`, `plan`, `schedule`, `search`, `help`, or `exit`). Depending on the first word of the user input, different
-methods will be invoked to create the appropriate object of the subclass of the `Command` abstract superclass (see
-example).
-However, if the first word is not a valid command type, an `InvalidCommandException` will be thrown and the parsing is
-aborted.
+methods will be invoked to create the appropriate object of the subclass of the `Command` abstract superclass (see the 
+bulleted point after this paragraph for an example). However, if the first word is not a valid command type, an 
+`InvalidCommandException` will be thrown and the parsing is aborted.
 - For example, if the user input is `workout /new push up /reps 10`, `Parser#createWorkoutCommand()` will be invoked
 and a `WorkoutCommand` object will be returned by this method.
 
