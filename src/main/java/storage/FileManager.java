@@ -75,7 +75,7 @@ public class FileManager {
         File workoutFile = new File(String.valueOf(getWorkoutFilePath()));
         workoutFile.delete();
         logger.log(Level.INFO, "A workout file has been deleted, and will be recreated soon.");
-        workoutFile.createNewFile();
+        createWorkoutFile();
     }
 
     /**
@@ -86,7 +86,7 @@ public class FileManager {
         File planFile = new File(String.valueOf(getPlanFilePath()));
         planFile.delete();
         logger.log(Level.INFO, "A plan file has been deleted, and will be recreated soon.");
-        planFile.createNewFile();
+        createPlanFile();
     }
 
     /**
@@ -97,7 +97,7 @@ public class FileManager {
         File scheduleFile = new File(String.valueOf(getScheduleFilePath()));
         scheduleFile.delete();
         logger.log(Level.INFO, "A schedule file has been deleted, and will be recreated soon.");
-        scheduleFile.createNewFile();
+        createScheduleFile();
     }
 
     /**
