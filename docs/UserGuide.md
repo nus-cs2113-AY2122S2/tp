@@ -219,11 +219,11 @@ Edits an existing session so that you can change the details of a session.<br>
 >  - Activities may have been created using participants in the list, hence the _list of participants_ can only expand
 >    and not shrink. This is to prevent any bugs when editing a session.
 >  - Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
->    and you wish to edit it to include Charlie, a valid edit command would be <br>
+>    and you wish to edit it to include Charlie, a valid edit command would be: <br>
 >    `session /edit /sid 1 /pl Alice Bob Charlie`.
 >  - Example 2: If the session with session unique identifier of 1 has been created with
 >    Alice and a group consisting of Bob and Charlie, and you wish to edit it to include Mallory,
->    a valid edit command would be <br>
+>    a valid edit command would be: <br>
 >    `session /edit /sid 1 /pl Alice Bob Charlie Mallory`.
 > 
 > **⚠️Warning:**
@@ -328,10 +328,14 @@ There are 2 ways that you can create an activity:
 >  `[SESSION_ID]`.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >  - Example: `Alice Tan` is not allowed.
->- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` can only have a maximum of 12 digits before
+>- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
 >  and 2 digits after the decimal point, if any.
->- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
+>- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that range from 0 to 100,
 >  with a maximum of 3 digits before and 2 after the decimal point, if any.
+>- If the payer is also involved in the activity, the payer's name has to be included in the list of participants
+>  - Example: Alice paid for a movie which she watched with Bob in a session with a session unique identifier of 1,
+>    costing a total of $20. The correct command format is: <br>
+>    `activity /create /sid 1 /n movie /p Alice /i Alice Bob /co 20`
 >- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
 >  in the calculations.
 
@@ -419,9 +423,9 @@ There are 2 ways that you can edit an activity:
    `[SESSION_ID]`.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >   - Example: `Alice Tan` is not allowed.
->- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` can only have a maximum of 12 digits before
+>- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
->- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
+>- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that can only range from 0 to 100,
    with a maximum of 3 digits before and 2 after the decimal point, if any.
 >- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
 >  in the calculations.
