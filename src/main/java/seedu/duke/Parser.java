@@ -1,14 +1,13 @@
 package seedu.duke;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.command.*;
+import seedu.duke.exception.InvalidInputException;
 import seedu.duke.exception.InvalidDateException;
 
 public class Parser {
@@ -28,7 +27,8 @@ public class Parser {
 
     public static final Pattern ONE_ARGS_FORMAT = Pattern.compile("(?<id>[\\d]+)");
 
-    public static DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public static Command parse(String input) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
@@ -84,20 +84,16 @@ public class Parser {
             int id = Integer.parseInt(matcher.group("id"));
             String start = matcher.group("startDate");
             String end = matcher.group("endDate");
-            boolean startDateValid = isDateValid(start);
-            boolean endDateValid = isDateValid(end);
-            if (!startDateValid){
-                throw new InvalidDateException("Start date not valid!");
-            } else if (!endDateValid) {
-                throw new InvalidDateException("End date not valid!");
-            }
             LocalDate startDate = LocalDate.from(PARSE_FORMAT.parse(start));
             LocalDate endDate = LocalDate.from(PARSE_FORMAT.parse(end));
-            if (!dateStartEndValid(startDate, endDate)){
+            if (!dateStartEndValid(startDate, endDate)) {
                 throw new InvalidDateException("End date cannot be before start date!");
             }
             String hotel = matcher.group("hotel");
             double price = Double.parseDouble(matcher.group("price"));
+            if (price <= 0) {
+                throw new InvalidInputException("Price should not be less than or equal to 0!");
+            }
             String country = matcher.group("country");
             int vacancies = Integer.parseInt(matcher.group("vacancies"));
             return new AddCommand(name, id, startDate, endDate, hotel, price, country, vacancies);
@@ -174,18 +170,6 @@ public class Parser {
             return new PrintReservationsCommand(id);
         } catch (Exception e) {
             return new WrongFormatCommand(e.getMessage());
-        }
-    }
-
-    public static boolean isDateValid(String date) {
-        String DATE_FORMAT = "dd/MM/yyyy";
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            df.setLenient(false);
-            df.parse(date);
-            return true;
-        } catch (ParseException e) {
-            return false;
         }
     }
 
