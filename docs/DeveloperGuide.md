@@ -248,7 +248,7 @@ aborted.
 and a `WorkoutCommand` object will be returned by this method.
 
 Inside each of these 'create command' methods, the following generalised procedure to create an object of the subclass 
-of `Command` is followed:
+of `Command` is carried out:
 1. (For commands that expect an action keyword (e.g. `/list`, `/new`)) The action keyword is parsed and determined.
     - If the action keyword is invalid, an `InvalidCommandException` is thrown and the parsing is aborted.
 2. Depending on the action keyword (or lack thereof), the number of arguments are checked.
