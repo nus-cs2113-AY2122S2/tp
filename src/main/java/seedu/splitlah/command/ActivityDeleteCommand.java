@@ -36,7 +36,7 @@ public class ActivityDeleteCommand extends Command {
     /**
      * Runs the command to delete an Activity object from the list of activities in a Session object
      * managed by the Profile object.
-     * Gets the Session object using a unique session identifier.
+     * Gets the Session object using a session unique identifier.
      * Requests for confirmation from user to delete the Activity object.
      * If user confirms, proceeds to remove activity from a Session object,
      * the command aborts otherwise.
