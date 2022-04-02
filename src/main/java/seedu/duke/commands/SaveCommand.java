@@ -20,7 +20,7 @@ public class SaveCommand extends Command {
     private Storage storage;
 
     /**
-     * Save the existing list of general tasks and modules.
+     * Saves the existing list of general tasks and modules.
      * @param moduleList List to be saved and loaded.
      */
 

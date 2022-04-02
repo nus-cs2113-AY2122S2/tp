@@ -48,7 +48,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Display help messages for different commands.
+     * Displays help messages for different commands.
      */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
