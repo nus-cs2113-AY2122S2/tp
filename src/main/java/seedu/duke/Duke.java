@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.io.IOException;
+import java.util.logging.LogManager;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
@@ -40,6 +41,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        LogManager.getLogManager().reset();
         new Duke().run();
     }
 }

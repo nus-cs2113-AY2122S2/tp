@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.EmptyItemPaxException;
 import seedu.duke.itemlists.Item;
 import seedu.duke.command.Command;
 import seedu.duke.command.itemcommands.UpdateItemPaxCommand;
@@ -31,7 +32,7 @@ public class UpdateItemCommandTest {
 
     @Test
     public void commandParser_updateItemPaxCommandWithEmptyItemPax_exceptionThrown() {
-        assertThrows(EmptyItemNameException.class, () -> new CommandParser().parse("Update Item "
+        assertThrows(EmptyItemPaxException.class, () -> new CommandParser().parse("Update Item "
                 + "Pax Toilet Roll /"));
     }
 

@@ -6,6 +6,7 @@ import seedu.duke.housekeeperperformancelists.HousekeeperPerformance;
 import seedu.duke.housekeeperperformancelists.HousekeeperPerformanceList;
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
+import seedu.duke.eventlists.Event;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.satisfactionlists.Satisfaction;
 import seedu.duke.satisfactionlists.SatisfactionList;

@@ -1,6 +1,5 @@
 package seedu.duke.storage;
 
-import seedu.duke.Event;
 import seedu.duke.exceptions.HotelLiteManagerException;
 
 import java.io.File;
@@ -8,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import seedu.duke.eventlists.Event;
 import java.util.Scanner;
 
 public class EventListFileManager extends FileManager {
