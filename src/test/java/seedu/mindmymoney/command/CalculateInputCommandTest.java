@@ -188,11 +188,11 @@ class CalculateInputCommandTest {
         new AddCommand(inputString, user).executeCommand();
 
         assertThrows(MindMyMoneyException.class,
-                () -> new CalculateInputCommand("/epm 34/03/2022", user).executeCommand());
+            () -> new CalculateInputCommand("/epm 34/03/2022", user).executeCommand());
         assertThrows(MindMyMoneyException.class,
-                () -> new CalculateInputCommand("/epm 30/2022", user).executeCommand());
+            () -> new CalculateInputCommand("/epm 30/2022", user).executeCommand());
         assertThrows(MindMyMoneyException.class,
-                () -> new CalculateInputCommand("/epm /2022", user).executeCommand());
+            () -> new CalculateInputCommand("/epm /2022", user).executeCommand());
     }
 
     /**
