@@ -1,5 +1,6 @@
 package seedu.duke.itemlists;
 
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.ItemNotFoundException;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class ItemList {
         if (isItemAlreadyInTheList == true) {
             return isItemAlreadyInTheList;
         }
+        String itemName = item.getName();
         listOfItems.add(item);
         return isItemAlreadyInTheList;
     }
@@ -213,5 +215,4 @@ public class ItemList {
         }
         return listOfMatchingItems;
     }
-
 }
