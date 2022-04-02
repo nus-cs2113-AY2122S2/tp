@@ -120,7 +120,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that the command can update the income list.
-     * */
+     **/
     @Test
     void updateIncomeCommand_updateIncome_listUpdated() {
         Income testIncome = new Income(1000, "Salary");
