@@ -106,7 +106,7 @@ public class UpdateCommandTest {
     /**
      * Assert that when the update command fields are similar to the credit card in the list, an exception is thrown.
      *
-     * */
+     **/
     @Test
     void updateCreditCardCommand_updateFieldSimilarToCreditCardInList_exceptionThrown() {
         CreditCard testCreditCard = new CreditCard("DBS", 2, 1000, 1000);
