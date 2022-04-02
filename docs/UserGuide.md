@@ -207,10 +207,15 @@ Edits an existing session so that you can change the details of a session.<br>
 >- There are 3 editable fields: _session name_, _session date_ and the _list of participants_ in the session.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
->- When editing the _list of participants_, existing participants must be included in the command.
->  - Example: If the session previously created had Alice and Bob with session unique identifier of 1 
->    and you wish to edit it to include Charlie, a valid edit command would be
-     `session /edit /sid 1 /pl Alice Bob Charlie`.
+>- When editing the _list of participants_, existing participants, including the group that was declared when
+>  creating the session, has to be included.
+>  - Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
+>    and you wish to edit it to include Charlie, a valid edit command would be <br>
+>    `session /edit /sid 1 /pl Alice Bob Charlie`.
+>  - Example 2: If the session with session unique identifier of 1 has been created with
+>    Alice and a group consisting of Bob and Charlie, and you wish to edit it to include Mallory,
+>    a valid edit command would be <br>
+>    `session /edit /sid 1 /pl Alice Bob Charlie Mallory`.
 > 
 > **⚠️Warning:**
 > - This action is irreversible. The session is edited immediately after entering this command.
