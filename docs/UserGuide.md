@@ -1176,7 +1176,7 @@ Microsoft Store.
 <span class="box info">🧾 **Why are these symbols appearing?** Without being too technical, these symbols are appearing 
 because the terminal you are using is unable to process a particular encoding scheme (i.e. ANSI escape codes). 
 These symbols you see are actually colour codes to colour certain texts on the terminal. Terminals that can properly 
-read these codes will not show you these symbols and instead showing you something like this:<br/><br/>
+read these codes will not show you these symbols and instead show you something like this:<br/><br/>
 ![No Weird Symbols](images/noWeirdSymbols.png) <br/><br/>
 On Windows, the default terminals are unable to process these codes, but Windows Terminal is able to. </span>
 
