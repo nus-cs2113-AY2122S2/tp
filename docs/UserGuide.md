@@ -376,7 +376,7 @@ Example of usage:
 
 * Find all the records which descriptions include _Candy_ from Category 1.
 
-  `find /d candies /c 0`
+  `find /d candies /c 1`
 
 * _Result_: The result of the search is returned and printed to the screen.
 
