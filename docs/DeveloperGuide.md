@@ -545,7 +545,6 @@ The following sequence diagram is the detailed procedure for Step 2's `PlanList#
 > 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
 > `PlanList#createAndAddPlan()` have been omitted.
 
-<br><br>
 **(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
 method is parsed to obtain the following information required to create the `Plan` object:
 1. Name of the plan.
