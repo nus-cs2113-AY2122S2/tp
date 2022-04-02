@@ -228,8 +228,8 @@ for subsequent prompts.
 <span class="box info"> 🧾 To improve the readability of the sequence diagram, the construction of the respective
 objects which are subclasses of the `Command` class between Steps 4 and 17 are not included in the diagram.</span>
 
-**(Steps 1 and 2)** When a user enters something into the terminal (when prompted), `UI#getUserInput()` will take in the user's input
-as a `String`, use `String#trim()` to remove leading and trailing whitespaces in the input.
+**(Steps 1 and 2)** When a user enters something into the terminal (when prompted), `UI#getUserInput()` will take in 
+the user's input as a `String` and call `String#trim()` to remove leading and trailing whitespaces in the input.
 Thereafter, a line is printed on the terminal to indicate that the user's input has been received
 and will be processed, before returning the user input as a `String` to the calling method (i.e. 
 `WerkIt#startContinuousUserPrompt()`).
