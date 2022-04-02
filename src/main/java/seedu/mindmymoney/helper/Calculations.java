@@ -66,17 +66,27 @@ public class Calculations {
         float othersPercentage = calculatePercentage(OTHERS, foundItems, sumOfExpenditure);
         System.out.println(System.lineSeparator() + "BREAKDOWN OF EXPENSES:");
         System.out.print(PrintStrings.LINE);
-        System.out.println("FOOD:          " + printBar(foodPercentage) + " " + foodPercentage + "%");
-        System.out.println("TRANSPORT:     " + printBar(transportPercentage) + " " + transportPercentage + "%");
-        System.out.println("UTILITIES:     " + printBar(utilitiesPercentage) + " " + utilitiesPercentage + "%");
-        System.out.println("PERSONAL:      " + printBar(personalPercentage) + " " + personalPercentage + "%");
-        System.out.println("ENTERTAINMENT: " + printBar(entertainmentPercentage) + " " + entertainmentPercentage + "%");
-        System.out.println("OTHERS:        " + printBar(othersPercentage) + " " + othersPercentage + "%");
+        System.out.println("FOOD:          " + printOutput(foodPercentage));
+        System.out.println("TRANSPORT:     " + printOutput(transportPercentage));
+        System.out.println("UTILITIES:     " + printOutput(utilitiesPercentage));
+        System.out.println("PERSONAL:      " + printOutput(personalPercentage));
+        System.out.println("ENTERTAINMENT: " + printOutput(entertainmentPercentage));
+        System.out.println("OTHERS:        " + printOutput(othersPercentage));
         System.out.println(PrintStrings.LINE);
     }
 
     /**
-     * Displays the chart for each category type.
+     * Prints the bar chart.
+     *
+     * @param percentage Percentage of each category type that is part of the expenses.
+     * @return The remaining part of string to be printed.
+     */
+    public static String printOutput(float percentage) {
+        return printBar(percentage) + " [" + percentage + "%]";
+    }
+
+    /**
+     * Fills the chart for each category type.
      *
      * @param percentage Percentage of each category type that is part of the expenses.
      * @return The 'bar' chart to be output for the category type.
@@ -84,7 +94,7 @@ public class Calculations {
     public static String printBar(float percentage) {
         String output = "";
         for (float i = 0; i < percentage; i += INTERVEL_OF_INCREMENT) {
-            output += "▇▇";
+            output += "$$";
         }
         return output;
     }
@@ -106,7 +116,7 @@ public class Calculations {
             sumOfCategoryType += item.getAmount();
         }
         sumOfCategoryType = formatFloat(sumOfCategoryType);
-        float percentage = sumOfCategoryType / sumOfExpenditure * 100;
+        float percentage = (sumOfCategoryType / sumOfExpenditure) * 100;
         percentage = formatFloat(percentage);
         return percentage;
     }
