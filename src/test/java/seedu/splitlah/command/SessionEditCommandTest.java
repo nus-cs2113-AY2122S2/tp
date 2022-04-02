@@ -123,6 +123,55 @@ public class SessionEditCommandTest {
     }
 
     /**
+     * Checks if session is not edited when supplied with same session information.
+     *
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
+    @Test
+    public void run_validCommandWithNoEdits_sessionRemainsUnedited() throws InvalidDataException {
+        // Case1: Same session name.
+        String validInputWithSameSessionName = "session /edit /sid 1 /n Class outing";
+        Command commandWithSameSessionName = Parser.getCommand(validInputWithSameSessionName);
+        commandWithSameSessionName.run(manager);
+
+        Session unEditedSession = manager.getProfile().getSession(1);
+        String nameInSession = unEditedSession.getSessionName();
+        String dateInSession = unEditedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
+        int personListSizeInSession = unEditedSession.getPersonArrayList().size();
+
+        assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
+        assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
+        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+
+        // Case2: Same session date.
+        String validInputWithSameSessionDate = "session /edit /sid 1 /d 15-02-2022";
+        Command commandWithSameSessionDate = Parser.getCommand(validInputWithSameSessionName);
+        commandWithSameSessionDate.run(manager);
+        unEditedSession = manager.getProfile().getSession(1);
+        nameInSession = unEditedSession.getSessionName();
+        dateInSession = unEditedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
+        personListSizeInSession = unEditedSession.getPersonArrayList().size();
+
+        assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
+        assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
+        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+
+        // Case3: Same person names.
+        String validInputWithSamePersonNames = "session /edit /sid 1 /p Alice Bob";
+        Command commandWithSamePersonNames = Parser.getCommand(validInputWithSamePersonNames);
+        commandWithSamePersonNames.run(manager);
+        unEditedSession = manager.getProfile().getSession(1);
+        nameInSession = unEditedSession.getSessionName();
+        dateInSession = unEditedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
+        personListSizeInSession = unEditedSession.getPersonArrayList().size();
+
+        assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
+        assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
+        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+    }
+
+    /**
      * Checks if session is not edited when list of persons provided after Person list delimiter
      * does not contain all persons that were originally in the session.
      *
