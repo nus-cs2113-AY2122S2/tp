@@ -175,10 +175,10 @@ public abstract class Message {
     public static final String ASSERT_PERSONLIST_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exist but not detected.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATESESSION =
-            "An Session object failed to be added into the list of sessions because there are duplicate names in"
+            "A Session object failed to be added into the list of sessions because there are duplicate names in"
                     + "the person list.";
     public static final String LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_CREATESESSION =
-            "An Session object failed to be added into the list of sessions because there are names in"
+            "A Session object failed to be added into the list of sessions because there are invalid names in"
                     + "the person list.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEGROUP =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
@@ -187,7 +187,7 @@ public abstract class Message {
             "An Activity object failed to be added into the list of activities because there are duplicate names in"
                     + "the involved list.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITSESSION =
-            "An Session object failed to be added into the list of sessions because there are duplicate names in"
+            "A Session object failed to be added into the list of sessions because there are duplicate names in"
                     + "the person list.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
