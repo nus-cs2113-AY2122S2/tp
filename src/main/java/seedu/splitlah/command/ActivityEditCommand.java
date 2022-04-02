@@ -154,7 +154,6 @@ public class ActivityEditCommand extends Command {
             updateCostListWithExtraCharges();
             calculateTotalCost();
         } else if (totalCost != MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
-            removeOldExtraChargesFromCost();
             updateCostWithExtraCharges();
             int numberOfPeopleInvolved = involvedList.length;
             costList = distributeCostEvenly(numberOfPeopleInvolved);
