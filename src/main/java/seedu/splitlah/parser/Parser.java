@@ -10,6 +10,7 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityViewCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.parser.commandparser.GroupListCommandParser;
@@ -360,8 +361,8 @@ public class Parser {
                 return new ActivityDeleteCommandParser().getCommand(remainingArgs);
             case ActivityListCommand.COMMAND_TEXT:
                 return ActivityListCommand.prepare(remainingArgs);
-            case ActivityViewCommand.COMMAND_TEXT:
-                return ActivityViewCommand.prepare(remainingArgs);
+            case ActivityViewCommandParser.COMMAND_TEXT:
+                return new ActivityViewCommandParser().getCommand(remainingArgs);
             case ActivityEditCommandParser.COMMAND_TEXT:
                 return new ActivityEditCommandParser().getCommand(remainingArgs);
             case GroupCreateCommand.COMMAND_TEXT:
