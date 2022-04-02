@@ -368,6 +368,7 @@ Format: `find /d USER_STRING [/c CATEGORY_INDEX]`
 > :information_source: Notes:
 > * Keywords are case-sensitive and inclusive. So a search for `brush` will successfully look for `toothbrush`.
 > * If you want to search for expenditures in all categories instead of specific ones, omit **CATEGORY_INDEX**.
+> * While searching through incomes, PlanITarium ignores the **CATEGORY_INDEX** provided.
 
 Example of usage:
 
