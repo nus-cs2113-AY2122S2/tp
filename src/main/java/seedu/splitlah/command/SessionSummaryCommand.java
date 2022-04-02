@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
- * Represents a command object that produces a summary of expenditure for a specified Session object.
+ * Represents a command that produces a summary of expenditure for a specified Session object.
  *
  * @author Warren
  */

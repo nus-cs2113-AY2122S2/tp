@@ -202,6 +202,12 @@ public abstract class Message {
             "The String object to be used to search for Person objects by name cannot be null.";
     public static final String ASSERT_SESSION_NAME_LIST_EMPTY =
             "The String array object to be used to search for Person objects by name cannot be null or empty.";
+    public static final String ASSERT_SESSION_COMPARED_SESSION_NULL =
+            "The Session object provided in the parameter of the comparison method cannot be null.";
+    public static final String LOGGER_SESSION_ACTIVITY_REMOVAL =
+            "An activity with the following id has been requested to be deleted: ";
+    public static final String LOGGER_SESSION_ACTIVITYCOST_REMOVAL =
+            "An activity cost from the following person has been requested to be deleted: ";
 
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
@@ -384,12 +390,18 @@ public abstract class Message {
             "An activity object was successfully viewed from activity Id: ";
     public static final String LOGGER_ACTIVITYVIEW_ACTIVITY_NOT_VIEWED =
             "An activity object was unable to be viewed from activity Id: ";
+    public static final String ASSERT_ACTIVITYVIEW_ACTIVITY_ID_LESS_THAN_ONE =
+            "Activity unique identifier is less than one";
+    public static final String ASSERT_ACTIVITYVIEW_SESSION_ID_LESS_THAN_ONE =
+            "Session unique identifier is less than one";
 
     // Group
     public static final String ERROR_GROUP_EMPTY_PERSON_LIST =
             "There are currently no person in this group.";
     public static final String ERROR_GROUP_PERSON_NOT_IN_LIST =
             "This person is not in the group.";
+    public static final String ASSERT_GROUP_PERSON_LIST_EMPTY =
+            "Group object cannot be constructed with a null or empty person list.";
 
     // Group Create Command
     public static final String ASSERT_GROUPCREATE_GROUP_NAME_NULL =
@@ -435,5 +447,5 @@ public abstract class Message {
 
     // Group Edit Command Parser
     public static final String ERROR_GROUPEDIT_NO_EDIT_DELIMITERS_FOUND =
-        "No delimiters were found. Please rectify and try again.";
+            "No delimiters were found. Please rectify and try again.";
 }

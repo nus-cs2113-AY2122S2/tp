@@ -10,7 +10,7 @@ import seedu.splitlah.ui.TextUI;
 import java.util.logging.Level;
 
 /**
- * Represents a command object that produces a summary of expenditure for a specified Session object.
+ * Represents a command that displays the full details of a specified Session object.
  *
  * @author Saurav
  */
@@ -19,7 +19,7 @@ public class SessionViewCommand extends Command {
     private final int sessionId;
 
     /**
-     * Initializes a SessionSummaryCommand object.
+     * Initializes a SessionViewCommand object.
      *
      * @param sessionId An integer that uniquely identifies a session.
      */
