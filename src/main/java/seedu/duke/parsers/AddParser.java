@@ -24,6 +24,7 @@ public class AddParser extends Parser {
     private static final String MODULAR_CREDIT = StringConstants.MODULAR_CREDIT;
     private static final String MODULAR_CREDIT_STR = StringConstants.ERROR_MODULAR_CREDITS_FAILED;
     private static final int MAXIMUM_MODULAR_CREDITS = NumberConstants.MAXIMUM_MODULAR_CREDITS;
+    private static final int MINIMUM_MODULAR_CREDITS = NumberConstants.MINIMUM_MODULAR_CREDITS;
 
     // Unescaped regex for testing (split across a few lines):
     // (task\s+\"(?<taskName>[^\"]+)\"(\s+-m\s+(?<taskModule>\w+))?(\s+-d\s+\"(?<taskDescription>[^\"]+)\")?(\s+-t\s+\"
@@ -50,10 +51,10 @@ public class AddParser extends Parser {
      *                                                      Does not accept " as a valid character.
      *
      * (?<invalid>.*)                                    -- matches [invalid]
-     *                                                      Any other input which do not fit in any of the above
+     *                                                      Any other excess inputs
      */
 
-    private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+-m\\s+(?<taskModule>\\w+))?"
+    private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+((-m)\\s+|(?<invalidFlag>.*))(?<taskModule>\\w+))?"
             + "(\\s+-d\\s+\\\"(?<taskDescription>[^\\\"]+)\\\")?(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?"
             + "|mod\\s+(?<moduleCode>\\w+?)(\\s+(?<modularCredit>\\d+)(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|.*$))"
             + "(\\s+(-d\\s+\\\"(?<moduleDescription>[^\\\"]+)\\\"))?)(?<invalid>.*)";
@@ -70,6 +71,7 @@ public class AddParser extends Parser {
         groupNames.add(MODULE_DESCRIPTION);
         groupNames.add(MODULAR_CREDIT);
         groupNames.add(INVALID);
+        groupNames.add(INVALID_FLAG);
     }
 
     @Override
@@ -90,7 +92,7 @@ public class AddParser extends Parser {
             int modularCredit;
             try {
                 modularCredit = Integer.parseInt(modularCreditStr);
-                if (modularCredit > MAXIMUM_MODULAR_CREDITS) {
+                if (modularCredit > MAXIMUM_MODULAR_CREDITS || modularCredit < MINIMUM_MODULAR_CREDITS) {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException e) {

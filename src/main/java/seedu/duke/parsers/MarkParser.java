@@ -4,9 +4,8 @@ import java.util.HashMap;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.MarkCommand;
-import seedu.duke.exceptions.InvalidNumberException;
-import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.GeneralParseException;
+import seedu.duke.data.Task;
+import seedu.duke.exceptions.*;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -21,8 +20,8 @@ public class MarkParser extends Parser {
     private static final String TASK_NUMBER_STR = StringConstants.ERROR_TASK_NUMBER_FAILED;
 
     // Unescaped regex for testing:
-    // (?<flag>(c|u))\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?(?<invalid>.*)
-    private static final String MARK_FORMAT = "(?<flag>(c|u))\\s+(?<taskNumber>\\d+)(\\s+-m\\s+"
+    // (?<flag>(c|u)|(?<invalidFlag>.*))\s+(?<taskNumber>\d+|(?<invalidNumber>.*))(\s+-m\s+(?<taskModule>\w+))?(?<invalid>.*)
+    private static final String MARK_FORMAT = "(?<flag>(c|u)|(?<invalidFlag>.*))\\s+(?<taskNumber>\\d+|(?<invalidNumber>.*))(\\s+-m\\s+"
             + "(?<taskModule>\\w+))?(?<invalid>.*)";
 
     public MarkParser() {
@@ -33,6 +32,8 @@ public class MarkParser extends Parser {
         groupNames.add(TASK_NUMBER);
         groupNames.add(TASK_MODULE);
         groupNames.add(INVALID);
+        groupNames.add(INVALID_FLAG);
+        groupNames.add(INVALID_NUMBER);
     }
 
     /**

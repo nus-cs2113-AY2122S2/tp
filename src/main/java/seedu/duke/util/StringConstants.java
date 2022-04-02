@@ -189,7 +189,12 @@ public class StringConstants {
     public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid compulsory parameters. "
             + "Please check and try again.";
     public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters.";
-    public static final String ERROR_PARSE_STRING = "\nError at '%s'.\nPlease check and try again.";
+    public static final String ERROR_EXCESS_ARGUMENT = "\nExcess argument '%s'.\nPlease delete it and try again.";
+    public static final String ERROR_INVALID_FLAG = "\nInvalid flag '%s'.\nPlease try again.";
+    public static final String ERROR_INVALID_MODULE_GRADE = "\nInvalid module grade '%s'.\nPlease try again.";
+    public static final String ERROR_INVALID_MODULE_CODE = "\nInvalid module code.\nPlease try again.";
+    public static final String ERROR_INVALID_NUMBER = "\nInvalid number format '%s'."
+            + "\nPlease try again using a numerical number.";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, the value \"%s\" is not supported for "
             + "configuration \"%s\".";
@@ -201,7 +206,7 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
-    public static final String ERROR_PARSE_INT_FAILED = "\nInvalid %s. Please check and try again.";
+    //public static final String ERROR_PARSE_INT_FAILED = "\nInvalid %s. Please check and try again.";
     public static final String ERROR_MODULAR_CREDITS_FAILED = "modular credits";
     public static final String ERROR_TASK_NUMBER_FAILED = "task number";
     public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
@@ -230,6 +235,10 @@ public class StringConstants {
     public static final String TAG_NAME = "tagName";
     public static final String TAG_OPERATION = "tagOperation";
     public static final String INVALID = "invalid";
+    public static final String INVALID_FLAG = "invalidFlag";
+    public static final String INVALID_MODULE_CODE = "invalidModuleCode";
+    public static final String INVALID_MODULE_GRADE = "invalidModuleGrade";
+    public static final String INVALID_NUMBER = "invalidNumber";
     public static final String COMMAND_WORD = "commandWord";
     public static final String EXIT_COMMAND_WORD = "exit";
     public static final String ADD_COMMAND_WORD = "add";
@@ -285,4 +294,5 @@ public class StringConstants {
     public static final String INDENT = "    ";
     public static final String LS = System.lineSeparator();
     public static final String LINE = "____________________________________________________________";
+
 }
