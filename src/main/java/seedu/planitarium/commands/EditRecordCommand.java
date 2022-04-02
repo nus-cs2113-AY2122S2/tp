@@ -51,7 +51,7 @@ public class EditRecordCommand extends Command {
             description = null;
         }
         assert (uid > 0) : USER_INDEX_NOT_VALID;
-        CommandFactory.logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, uid,group));
+        CommandFactory.logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, group, uid));
     }
 
     public void execute() throws PlanITariumException {

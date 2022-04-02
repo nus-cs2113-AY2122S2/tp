@@ -34,7 +34,7 @@ public class DeletePersonCommand extends Command {
     public void execute() throws PlanITariumException {
         assert (uid > 0) : Constants.USER_INDEX_NOT_VALID;
         assert (family != null) : Constants.FAMILY_NOT_NULL;
-        family.deletePerson(uid,group);
+        family.deletePerson(group, uid);
         logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, group, uid));
     }
 
