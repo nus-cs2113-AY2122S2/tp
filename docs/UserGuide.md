@@ -23,6 +23,16 @@ Please take note of these few terms. It is explained as below:
 | Plan     | A set of workouts. <br/>Example: A plan named "Arms" will contains "5 push ups, 5 pull ups"                              |
 | Schedule | Plan schedule for a day. The schedule is set for a week. <br/>Example: Arms plan will be added to Monday in the schedule |
 
+### Notations Used In This Guide
+When reading this document, there are several icons that you may encounter.
+Below are the icons and their meanings:
+
+
+<span class="box warning">⚠️**Warning**: Information that you may want to pay attention to in order to prevent
+possible issues from arising when using the application.</span>
+
+<span class="box info">🧾  **Note**: Additional information that may be useful for you.</span>
+
 ---
 
 ## Table of Contents
