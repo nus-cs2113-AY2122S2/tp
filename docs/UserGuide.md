@@ -3,19 +3,23 @@
 ## Introduction
 
 Restaurant-Information-Programme (R.I.P.) is a command line programme for restaurant owners to keep track of menus, staff information, and order management.
-
-R. I. P. features full and concise input validation through simple commands, thereby making R.I.P. a simple yet robust application for restaurant management.
+R.I.P. features full and concise input validation through simple commands, thereby making R.I.P. a simple yet robust application for restaurant management.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of the application from [here](https://github.com/AY2122S2-CS2113-T11-4/tp/releases).
+3. Run the file using the correct command: `java -jar tp.jar`.
+   1. It is recommended to create a new folder, and put the download file into this folder before running it.
 
 ## Features 
 
-{Give detailed description of each feature}
+R.I.P. allows users to manage dishes, staff information, and orders in a restaurant.
+Managers of restaurants may find this application to be very useful in keeping track of 
+administrative information about their restaurant.
+
+The application is simple to use and does not require verbose inputs. This ensures easy training and
+uptake of the application.
 
 ## Main Menu
 
