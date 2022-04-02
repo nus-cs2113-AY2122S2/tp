@@ -226,8 +226,8 @@ Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCR
   
 > **Note**
 >
-> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) is optional in this case. You
-> can just modify the part that you modify.
+> **DESCRIPTION**, **INCOME_INDEX**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) are optional in this case. You
+> can just include the part(s) that you are looking to modify.
 
 Example of usage:
 
