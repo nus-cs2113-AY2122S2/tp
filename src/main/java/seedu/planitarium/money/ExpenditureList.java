@@ -200,11 +200,21 @@ public class ExpenditureList extends MoneyList {
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
         logger.log(Level.INFO, LOG_ASSERT_PASSED);
-        editExpDesc(index, description);
-        editExpAmount(index, amount);
-        editExpCat(index, category);
-        editExpPerm(index, isPermanent);
-        System.out.println("Your Expenditure have been edited");
+        boolean isDescEdited = editExpDesc(index, description);
+        boolean isAmountEdited = editExpAmount(index, amount);
+        boolean isCatEdited = editExpCat(index, category);
+        boolean isPermEdited = editExpPerm(index, isPermanent);
+        printEditMsg(index, isDescEdited, isAmountEdited, isCatEdited, isPermEdited);
+    }
+
+    private void printEditMsg(int index, boolean isDescEdited, boolean isAmountEdited,
+                              boolean isCatEdited, boolean isPermEdited) {
+        if (isDescEdited || isAmountEdited || isCatEdited || isPermEdited) {
+            System.out.println("Your Expenditure have been edited");
+            System.out.println(expenditureArrayList.get(index - 1));
+            return;
+        }
+        System.out.println("No changes have been made.");
     }
 
     /**
@@ -212,11 +222,14 @@ public class ExpenditureList extends MoneyList {
      *
      * @param index       The expenditure's index in the list
      * @param isPermanent The expenditure's recurring status
+     * @return true if recurring status have been edited, false otherwise
      */
-    private void editExpPerm(int index, Boolean isPermanent) {
+    private boolean editExpPerm(int index, Boolean isPermanent) {
         if (isPermanent != null) {
             expenditureArrayList.get(index - 1).setPermanent(isPermanent);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -224,11 +237,14 @@ public class ExpenditureList extends MoneyList {
      *
      * @param index    The expenditure's index in the list
      * @param category The expenditure's category
+     * @return true if category have been edited, false otherwise
      */
-    private void editExpCat(int index, Integer category) {
+    private boolean editExpCat(int index, Integer category) {
         if (category != null) {
             expenditureArrayList.get(index - 1).setCategory(category);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -236,11 +252,14 @@ public class ExpenditureList extends MoneyList {
      *
      * @param index  The expenditure's index in the list
      * @param amount The expenditure's amount
+     * @return true if amount have been edited, false otherwise
      */
-    private void editExpAmount(int index, Double amount) {
+    private boolean editExpAmount(int index, Double amount) {
         if (amount != null) {
             expenditureArrayList.get(index - 1).setAmount(amount);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -248,11 +267,14 @@ public class ExpenditureList extends MoneyList {
      *
      * @param index       The expenditure's index in the list
      * @param description The expenditure's description
+     * @return true if description have been edited, false otherwise
      */
-    private void editExpDesc(int index, String description) {
+    private boolean editExpDesc(int index, String description) {
         if (description != null) {
             expenditureArrayList.get(index - 1).setDescription(description);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -309,7 +331,7 @@ public class ExpenditureList extends MoneyList {
      * Iterates through expenditure list and removes all expired expenditure.
      */
     public void updateList() {
-        for (Iterator<Expenditure> iterator = expenditureArrayList.iterator(); iterator.hasNext();){
+        for (Iterator<Expenditure> iterator = expenditureArrayList.iterator(); iterator.hasNext(); ) {
             Expenditure item = iterator.next();
             checkExpenditureDate(iterator, item);
         }

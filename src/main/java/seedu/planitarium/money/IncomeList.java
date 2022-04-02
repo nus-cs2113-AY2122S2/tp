@@ -276,7 +276,7 @@ public class IncomeList extends MoneyList {
      * Iterates through income list and removes all expired income.
      */
     public void updateList() {
-        for (Iterator<Income> iterator = incomeArrayList.iterator(); iterator.hasNext();){
+        for (Iterator<Income> iterator = incomeArrayList.iterator(); iterator.hasNext(); ) {
             Income item = iterator.next();
             checkIncomeDate(iterator, item);
         }
