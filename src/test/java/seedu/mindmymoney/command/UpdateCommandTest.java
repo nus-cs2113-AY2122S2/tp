@@ -13,6 +13,7 @@ import seedu.mindmymoney.userfinancial.User;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 
 public class UpdateCommandTest {
     /**
