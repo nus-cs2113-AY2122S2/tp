@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import static seedu.sherpass.constant.CommandParameter.BY_DATE_DELIMITER;
 import static seedu.sherpass.constant.CommandParameter.DO_DATE_DELIMITER;
@@ -121,7 +122,8 @@ public class TaskParser {
 
     private static LocalDate prepareTaskDate(String taskDate) throws InvalidInputException {
         try {
-            return LocalDate.parse(taskDate, inputDateOnlyFormat);
+            return LocalDate.parse(taskDate,
+                    inputDateOnlyFormat.withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException e) {
             throw new InvalidInputException(ERROR_INVALID_DATETIME_MESSAGE);
         }
