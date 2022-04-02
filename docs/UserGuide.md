@@ -317,16 +317,18 @@ There are 2 ways that you can create an activity:
 
 > **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
-   it.
+>  it.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
-   `[SESSION_ID]`.
+>  `[SESSION_ID]`.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
->   - Example: `Alice Tan` is not allowed.
+>  - Example: `Alice Tan` is not allowed.
 >- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` can only have a maximum of 12 digits before
-   and 2 digits after the decimal point, if any.
+>  and 2 digits after the decimal point, if any.
 >- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
-   with a maximum of 3 digits before and 2 after the decimal point, if any.
+>  with a maximum of 3 digits before and 2 after the decimal point, if any.
+>- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
+>  in the calculations.
 
 <br>
 
@@ -416,6 +418,8 @@ There are 2 ways that you can edit an activity:
    and 2 digits after the decimal point, if any.
 >- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
    with a maximum of 3 digits before and 2 after the decimal point, if any.
+>- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
+>  in the calculations.
 >
 > **⚠️Warnings:**
 >- All fields must be supplied in the command, not just the ones you wish to edit.
@@ -497,8 +501,10 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 
 <br>
 
-> **💡 Note:**
+> **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
+>- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
+>  in the calculations.
 
 <br>
 
