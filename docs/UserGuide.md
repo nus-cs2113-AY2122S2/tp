@@ -1163,10 +1163,22 @@ copy), delete the `werkItResources` directory and restart WerkIt! to recreate th
 
 ## Frequently Asked Questions (FAQ)
 
-### 1. My terminal in Windows is not displaying any colours in the application.
+### 1. My terminal in Windows is displaying weird symbols when I run the application.
 
-**A**: Please install Microsoft's newer terminal 'Windows Terminal' from the Microsoft Store via this
-[link][1].
+**Example of weird symbols:**<br/>
+![Weird Symbols (First Time Run)](images/weirdSymbols-firstTimeRun.png) <br/><br/>
+![Weird Symbols (Help Command)](images/weirdSymbols-helpCommand.png)
+
+**A**: Please ensure that you are running the application using **Windows Terminal**, as mentioned in
+the [Quick Start Guide](#quick-start-guide). [Click here][1] to install Windows Termianl via the
+Microsoft Store.
+
+<span class="box info">🧾 **Why are these symbols appearing?** Without being too technical, these symbols are appearing 
+because the terminal you are using is unable to process a particular encoding scheme (i.e. ANSI escape codes). 
+These symbols you see are actually colour codes to colour certain texts on the terminal. Terminals that can properly 
+read these codes will not show you these symbols and instead showing you something like this:<br/><br/>
+![No Weird Symbols](images/noWeirdSymbols.png) <br/><br/>
+On Windows, the default terminals are unable to process these codes, but Windows Terminal is able to. </span>
 
 ### 2. How do I transfer my data to another computer? 
 
