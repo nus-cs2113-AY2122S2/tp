@@ -74,6 +74,7 @@ public class FileManager {
     public void deleteAndRecreateWorkoutFile() throws IOException {
         File workoutFile = new File(String.valueOf(getWorkoutFilePath()));
         workoutFile.delete();
+        logger.log(Level.INFO, "A workout file has been deleted, and will be recreated soon.");
         workoutFile.createNewFile();
     }
 
@@ -84,6 +85,7 @@ public class FileManager {
     public void deleteAndRecreatePlanFile() throws IOException {
         File planFile = new File(String.valueOf(getPlanFilePath()));
         planFile.delete();
+        logger.log(Level.INFO, "A plan file has been deleted, and will be recreated soon.");
         planFile.createNewFile();
     }
 
@@ -94,6 +96,7 @@ public class FileManager {
     public void deleteAndRecreateScheduleFile() throws IOException {
         File scheduleFile = new File(String.valueOf(getScheduleFilePath()));
         scheduleFile.delete();
+        logger.log(Level.INFO, "A schedule file has been deleted, and will be recreated soon.");
         scheduleFile.createNewFile();
     }
 
