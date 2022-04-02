@@ -24,18 +24,32 @@ end
 
 alt Command starts with 'workout'
     Parser -> Parser : createWorkoutCommand(userInput)
+    activate Parser
+    return :WorkoutCommand
 else Command starts with 'exit'
     Parser -> Parser : createExitCommand(userInput)
+    activate Parser
+    return :ExitCommand
 else Command starts with 'help'
     Parser -> Parser : createHelpCommand(userInput)
+    activate Parser
+    return :HelpCommand
 else Command starts with 'exercise'
     Parser -> Parser : createExerciseCommand(userInput)
+    activate Parser
+    return :ExerciseCommand
 else Command starts with 'search'
     Parser -> Parser : createSearchCommand(userInput)
+    activate Parser
+    return :SearchCommand
 else Command starts with 'plan'
     Parser -> Parser : createPlanCommand(userInput)
+    activate Parser
+    return :PlanCommand
 else Command starts with 'schedule'
     Parser -> Parser : createScheduleCommand(userInput)
+    activate Parser
+    return :ScheduleCommand
 end
 
 return newCommand:Command
