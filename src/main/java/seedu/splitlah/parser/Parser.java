@@ -1,8 +1,7 @@
 package seedu.splitlah.parser;
 
 import seedu.splitlah.command.Command;
-import seedu.splitlah.command.ActivityListCommand;
-import seedu.splitlah.command.ActivityViewCommand;
+
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
@@ -11,6 +10,7 @@ import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityViewCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityListCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.parser.commandparser.GroupListCommandParser;
@@ -359,8 +359,8 @@ public class Parser {
                 return new ActivityCreateCommandParser().getCommand(remainingArgs);
             case ActivityDeleteCommandParser.COMMAND_TEXT:
                 return new ActivityDeleteCommandParser().getCommand(remainingArgs);
-            case ActivityListCommand.COMMAND_TEXT:
-                return ActivityListCommand.prepare(remainingArgs);
+            case ActivityListCommandParser.COMMAND_TEXT:
+                return new ActivityListCommandParser().getCommand(remainingArgs);
             case ActivityViewCommandParser.COMMAND_TEXT:
                 return new ActivityViewCommandParser().getCommand(remainingArgs);
             case ActivityEditCommandParser.COMMAND_TEXT:
