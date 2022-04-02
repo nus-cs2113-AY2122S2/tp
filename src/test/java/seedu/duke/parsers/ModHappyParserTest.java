@@ -498,7 +498,7 @@ public class ModHappyParserTest {
         final String testString = "edit task 1 blahblah";
         testParseCommand_expectInvalidExcessArgumentException(testString);
     }
-    
+
      */
 
     @Test

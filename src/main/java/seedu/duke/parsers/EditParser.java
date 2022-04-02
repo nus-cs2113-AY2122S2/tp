@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.EditCommand;
+import seedu.duke.exceptions.EmptyParamException;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.GeneralParseException;
@@ -15,10 +16,14 @@ import seedu.duke.util.StringConstants;
  */
 public class EditParser extends Parser {
 
-    private static final String MODULE_CODE = StringConstants.MODULE_CODE;
     private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
     private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION;
-    private static final String ESTIMATED_WORKING_TIME = StringConstants.TASK_WORKING_TIME;
+    private static final String TASK_ESTIMATED_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME;
+    private static final String TASK_NAME_STR = StringConstants.TASK_NAME_STR;
+    private static final String TASK_DESCRIPTION_STR = StringConstants.TASK_DESCRIPTION_STR;
+    private static final String TASK_ESTIMATED_WORKING_TIME_STR = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
+    private static final String MODULE_CODE = StringConstants.MODULE_CODE;
+    private static final String MODULE_DESCRIPTION_STR = StringConstants.MODULE_DESCRIPTION_STR;
     private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
@@ -41,7 +46,7 @@ public class EditParser extends Parser {
         groupNames.add(TASK_NUMBER);
         groupNames.add(MODULE_CODE);
         groupNames.add(TASK_DESCRIPTION);
-        groupNames.add(ESTIMATED_WORKING_TIME);
+        groupNames.add(TASK_ESTIMATED_WORKING_TIME);
         groupNames.add(MODULE_DESCRIPTION);
         groupNames.add(TASK_MODULE);
         groupNames.add(TASK_NAME);
@@ -55,10 +60,19 @@ public class EditParser extends Parser {
         String moduleCode = parsedArguments.get(MODULE_CODE);
         String taskModule = parsedArguments.get(TASK_MODULE);
         String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
-        String estimatedWorkingTime = parsedArguments.get(ESTIMATED_WORKING_TIME);
+        String estimatedWorkingTime = parsedArguments.get(TASK_ESTIMATED_WORKING_TIME);
         String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
         String taskName = parsedArguments.get(TASK_NAME);
         if (!Objects.isNull(moduleCode)) {
+            if (!Objects.isNull(moduleDescription)) {
+                try {
+                    if (moduleDescription.isBlank()) {
+                        throw new EmptyParamException(MODULE_DESCRIPTION_STR);
+                    }
+                } catch (EmptyParamException e) {
+                    throw new EmptyParamException(MODULE_DESCRIPTION_STR);
+                }
+            }
             return new EditCommand(moduleCode, moduleDescription);
         }
 
@@ -68,6 +82,33 @@ public class EditParser extends Parser {
                 taskIndex = Integer.parseInt(taskNumberString) - 1;
             } catch (NumberFormatException e) {
                 throw new InvalidNumberException(TASK_NUMBER_STR);
+            }
+            if (!Objects.isNull(taskName)) {
+                try {
+                    if (taskName.isBlank()) {
+                        throw new EmptyParamException(TASK_NAME_STR);
+                    }
+                } catch (EmptyParamException e) {
+                    throw new EmptyParamException(TASK_NAME_STR);
+                }
+            }
+            if (!Objects.isNull(taskDescription)) {
+                try {
+                    if (taskDescription.isBlank()) {
+                        throw new EmptyParamException(TASK_DESCRIPTION_STR);
+                    }
+                } catch (EmptyParamException e) {
+                    throw new EmptyParamException(TASK_DESCRIPTION_STR);
+                }
+            }
+            if (!Objects.isNull(estimatedWorkingTime)) {
+                try {
+                    if (estimatedWorkingTime.isBlank()) {
+                        throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
+                    }
+                } catch (EmptyParamException e) {
+                    throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
+                }
             }
             return new EditCommand(taskModule, taskIndex, taskDescription, estimatedWorkingTime, taskName);
         }

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
+import seedu.duke.exceptions.EmptyParamException;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.GeneralParseException;
@@ -15,12 +16,16 @@ import seedu.duke.util.StringConstants;
  * This Parser supports the "add" command.
  */
 public class AddParser extends Parser {
+    private static final String TASK_STR = StringConstants.TASK_STR;
+    private static final String TASK_DESCRIPTION_STR = StringConstants.TASK_DESCRIPTION_STR;
+    private static final String TASK_ESTIMATED_WORKING_TIME_STR = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
     private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION;
-    private static final String TASK_WORKING_TIME = StringConstants.TASK_WORKING_TIME;
+    private static final String TASK_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String MODULE_CODE = StringConstants.MODULE_CODE;
     private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
+    private static final String MODULE_DESCRIPTION_STR = StringConstants.MODULE_DESCRIPTION_STR;
     private static final String MODULAR_CREDIT = StringConstants.MODULAR_CREDIT;
     private static final String MODULAR_CREDIT_STR = StringConstants.ERROR_MODULAR_CREDITS_FAILED;
     private static final int MAXIMUM_MODULAR_CREDITS = NumberConstants.MAXIMUM_MODULAR_CREDITS;
@@ -85,6 +90,31 @@ public class AddParser extends Parser {
         final String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
         final String modularCreditStr = parsedArguments.get(MODULAR_CREDIT);
         if (!Objects.isNull(taskName)) {
+            try{
+                if (taskName.isBlank()) {
+                    throw new EmptyParamException(TASK_STR);
+                }
+            } catch (EmptyParamException e){
+                throw new EmptyParamException(TASK_STR);
+            }
+            if (!Objects.isNull(taskDescription)) {
+                try {
+                    if (taskDescription.isBlank()) {
+                        throw new EmptyParamException(TASK_DESCRIPTION_STR);
+                    }
+                } catch (EmptyParamException e) {
+                    throw new EmptyParamException(TASK_DESCRIPTION_STR);
+                }
+                if (!Objects.isNull(estimatedWorkingTime)) {
+                    try {
+                        if (estimatedWorkingTime.isBlank()) {
+                            throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
+                        }
+                    } catch (EmptyParamException e) {
+                        throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
+                    }
+                }
+            }
             return new AddCommand(AddCommand.AddObjectType.TASK, taskName, taskDescription, estimatedWorkingTime,
                     taskModule);
         }
@@ -97,6 +127,15 @@ public class AddParser extends Parser {
                 }
             } catch (NumberFormatException e) {
                 throw new InvalidNumberException(MODULAR_CREDIT_STR);
+            }
+            if (!Objects.isNull(moduleDescription)) {
+                try {
+                    if (moduleDescription.isBlank()) {
+                        throw new EmptyParamException(MODULE_DESCRIPTION_STR);
+                    }
+                } catch (EmptyParamException e) {
+                    throw new EmptyParamException(MODULE_DESCRIPTION_STR);
+                }
             }
             return new AddCommand(AddCommand.AddObjectType.MODULE, moduleCode, moduleDescription, modularCredit);
         }

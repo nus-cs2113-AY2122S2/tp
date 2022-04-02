@@ -18,7 +18,7 @@ public class EditCommand extends Command {
     private static final String EDIT_TASK_SUCCESS = StringConstants.EDIT_TASK_SUCCESS;
     private static final String EDIT_TASK_WITH_MODULE_SUCCESS = StringConstants.EDIT_TASK_WITH_MODULE_SUCCESS;
     private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION_STR;
-    private static final String ESTIMATED_WORKING_TIME = StringConstants.ESTIMATED_WORKING_TIME_STR;
+    private static final String ESTIMATED_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
     private static final String TASK_NAME = StringConstants.TASK_NAME_STR;
 
     private String moduleCode;

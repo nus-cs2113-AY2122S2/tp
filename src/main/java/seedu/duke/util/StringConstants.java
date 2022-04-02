@@ -58,9 +58,6 @@ public class StringConstants {
     public static final String EDIT_TASK_SUCCESS = "The %s of %s has been changed.";
     public static final String EDIT_MODULE_SUCCESS = "The description of %s has been changed.";
     public static final String EDIT_TASK_WITH_MODULE_SUCCESS = "The %s of %s from %s has been changed.";
-    public static final String TASK_NAME_STR = "task name";
-    public static final String TASK_DESCRIPTION_STR = "description";
-    public static final String ESTIMATED_WORKING_TIME_STR = "estimated working time";
 
     /**
      * For ExitCommand.
@@ -188,10 +185,16 @@ public class StringConstants {
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
     public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid compulsory parameters. "
             + "Please check and try again.";
-    public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters.";
+    public static final String ERROR_MISSING_PARAM = "\nMissing one or more compulsory parameters. "
+            + "Please check and try again.";
+    public static final String ERROR_EMPTY_PARAM = "\nSorry, you have entered an empty %s ._. "
+            + "\nPlease try again.";
+    public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters."
+            + "\nPlease enter only the command word.";
     public static final String ERROR_EXCESS_ARGUMENT = "\nExcess argument '%s'.\nPlease delete it and try again.";
     public static final String ERROR_INVALID_FLAG = "\nInvalid flag '%s'.\nPlease try again.";
-    public static final String ERROR_INVALID_MODULE_GRADE = "\nInvalid module grade '%s'.\nPlease try again.";
+    public static final String ERROR_INVALID_MODULE_GRADE = "\nInvalid module grade '%s'."
+            + "\nPlease try again. Accepted module grades are : A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
     public static final String ERROR_INVALID_MODULE_CODE = "\nInvalid module code.\nPlease try again.";
     public static final String ERROR_INVALID_NUMBER = "\nInvalid number format '%s'."
             + "\nPlease try again using a numerical number.";
@@ -219,13 +222,19 @@ public class StringConstants {
      */
     public static final String TASK_NAME = "taskName";
     public static final String TASK_DESCRIPTION = "taskDescription";
-    public static final String TASK_WORKING_TIME = "estimatedWorkingTime";
+    public static final String TASK_ESTIMATED_WORKING_TIME = "estimatedWorkingTime";
     public static final String TASK_MODULE = "taskModule";
+    public static final String TASK_NUMBER = "taskNumber";
+    public static final String TASK_STR = "task";
+    public static final String TASK_NAME_STR = "task name";
+    public static final String TASK_DESCRIPTION_STR = "task description";
+    public static final String TASK_ESTIMATED_WORKING_TIME_STR = "estimated working time";
     public static final String MODULE_CODE = "moduleCode";
     public static final String MODULE_DESCRIPTION = "moduleDescription";
     public static final String MODULAR_CREDIT = "modularCredit";
     public static final String MODULE_GRADE = "moduleGrade";
-    public static final String TASK_NUMBER = "taskNumber";
+    public static final String MODULE_STR = "module";
+    public static final String MODULE_DESCRIPTION_STR = "module description";
     public static final String FLAG = "flag";
     public static final String CONFIGURATION_GROUP_WORD = "configurationGroupWord";
     public static final String NEW_VALUE = "newValue";
@@ -292,6 +301,7 @@ public class StringConstants {
      * General strings.
      */
     public static final String INDENT = "    ";
+    public static final String SPACE = " ";
     public static final String LS = System.lineSeparator();
     public static final String LINE = "____________________________________________________________";
 
