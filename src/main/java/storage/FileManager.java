@@ -462,7 +462,7 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("File data error: insufficient parameters in workout data.");
                 hasNoErrorsDuringLoad = false;
-            } catch (InvalidExerciseException | InvalidWorkoutException e) {
+            } catch (InvalidExerciseException | InvalidWorkoutException | NumberFormatException e) {
                 System.out.println("File data error: " + e.getMessage());
                 hasNoErrorsDuringLoad = false;
             }
@@ -482,7 +482,7 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("File data error: insufficient parameters in plan data.");
                 hasNoErrorsDuringLoad = false;
-            } catch (InvalidExerciseException | InvalidWorkoutException e) {
+            } catch (InvalidExerciseException | InvalidWorkoutException | NumberFormatException e) {
                 System.out.println("File data error: " + e.getMessage());
                 hasNoErrorsDuringLoad = false;
             }
@@ -511,7 +511,7 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("File data error: insufficient parameters in plan data.");
                 hasNoErrorsDuringLoad = false;
-            } catch (InvalidScheduleException | InvalidPlanException e) {
+            } catch (InvalidScheduleException | InvalidPlanException | NumberFormatException e) {
                 System.out.println("File data error: " + e.getMessage());
                 hasNoErrorsDuringLoad = false;
             }
