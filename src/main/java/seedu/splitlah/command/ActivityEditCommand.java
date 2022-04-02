@@ -65,7 +65,6 @@ public class ActivityEditCommand extends Command {
                                Double totalCost, double[] costList, double gst, double serviceCharge) {
         assert sessionId > 0 : Message.ASSERT_ACTIVITYEDIT_SESSIONID_LESS_THAN_ONE;
         assert activityName != null : Message.ASSERT_ACTIVITYEDIT_ACTIVITY_NAME_MISSING;
-        assert activityId != -1 : Message.ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING;
         this.activityId = activityId;
         this.sessionId = sessionId;
         this.activityName = activityName;
@@ -217,7 +216,10 @@ public class ActivityEditCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
+        boolean hasDuplicates = false;
+        if (involvedList != MISSING_INVOLVEDLIST) {
+            hasDuplicates = PersonList.hasNameDuplicates(involvedList);
+        }
         TextUI ui = manager.getUi();
         if (hasDuplicates) {
             ui.printlnMessage(Message.ACTIVITYEDIT_DUPLICATE_NAME);
