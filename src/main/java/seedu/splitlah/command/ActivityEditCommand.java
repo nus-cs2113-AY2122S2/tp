@@ -148,6 +148,10 @@ public class ActivityEditCommand extends Command {
             updateCostWithExtraCharges();
             int numberOfPeopleInvolved = involvedList.length;
             costList = distributeCostEvenly(numberOfPeopleInvolved);
+        } else if (totalCost != MISSING_TOTALCOST) {
+            totalCost = 0;
+            updateCostListWithExtraCharges();
+            calculateTotalCost();
         }
     }
 
