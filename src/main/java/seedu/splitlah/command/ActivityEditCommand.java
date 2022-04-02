@@ -296,6 +296,7 @@ public class ActivityEditCommand extends Command {
     /**
      * Updates placeholder activityId values in new ActivityCost objects created from the edited activity to their
      * actual values: the activityId of the edited Activity object.
+     *
      * @param session A session object containing all ActivityCosts related to the Activity that is being edited.
      */
     private void updateDummyActivityIdsInActivityCosts(Session session) {
@@ -379,51 +380,4 @@ public class ActivityEditCommand extends Command {
         }
         return involvedListStringArray;
     }
-
-    /**
-    public void ru2n(Manager manager) {
-        TextUI ui = manager.getUi();
-        try {
-            ArrayList<Person> involvedListOfPersons;
-            Session session = manager.getProfile().getSession(sessionId);
-            Activity oldActivity = session.getActivity(activityId);
-            boolean hasDuplicates = false;
-            // if the user provides the person list, check for duplicates
-            // otherwise, set the person list to the existing person list
-            if (involvedList != MISSING_INVOLVEDLIST) {
-                hasDuplicates = PersonList.hasNameDuplicates(involvedList);
-                involvedListOfPersons = session.getPersonListByName(involvedList);
-            } else {
-                involvedListOfPersons = oldActivity.getInvolvedPersonList();
-            }
-            if (hasDuplicates) {
-                ui.printlnMessage(Message.ERROR_ACTIVITYEDIT_DUPLICATE_NAME);
-                Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_DUPLICATE_NAMES_IN_INVOLVED_LIST);
-                return;
-            }
-            updateCostAndCostList();
-            assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
-            assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
-
-            Person personPaid = session.getPersonByName(payer);
-            ArrayList<Person> involvedArrayList = session.getPersonListByName(involvedList);
-
-            session.removeActivity(activityId);
-
-            addAllActivityCost(involvedArrayList, personPaid, activityId);
-
-            PersonList involvedPersonList = new PersonList(involvedArrayList);
-            Activity editedActivity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
-
-            session.addActivity(editedActivity);
-            manager.saveProfile();
-            ui.printlnMessage(COMMAND_SUCCESS + editedActivity);
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED  + activityId);
-        } catch (InvalidDataException e) {
-            ui.printlnMessage(e.getMessage());
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY
-                    + "\n" + e.getMessage());
-        }
-    }
-    **/
 }
