@@ -10,6 +10,7 @@ import seedu.duke.command.AddCommand;
 import seedu.duke.command.ByeCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.HelpCommand;
+import seedu.duke.command.InvalidDateCommand;
 import seedu.duke.command.WrongFormatCommand;
 
 public class ParserTest {
@@ -62,6 +63,22 @@ public class ParserTest {
         for (String input : inputs) {
             parseAndAssertCommandType(input, WrongFormatCommand.class);
         }
+    }
+
+    @Test
+    public void parse_addCommandInvalidDateRange_errorMessage() {
+        final String endDate = "01/01/1999";
+        final String addCommandFormatString = "add %s,%s,%s,%s,%s,%s,%s,%s";
+        final String input = String.format(addCommandFormatString,
+                TravelPackage.EXAMPLENAME,
+                TravelPackage.EXAMPLEID,
+                TravelPackage.EXAMPLESTART,
+                endDate,
+                TravelPackage.EXAMPLEHOTEL,
+                TravelPackage.EXAMPLEPRICE,
+                TravelPackage.EXAMPLECOUNTRY,
+                TravelPackage.EXAMPLEMAX);
+        parseAndAssertCommandType(input, InvalidDateCommand.class);
     }
 
     /**
