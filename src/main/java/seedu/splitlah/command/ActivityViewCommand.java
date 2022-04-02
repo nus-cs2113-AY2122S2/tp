@@ -43,6 +43,8 @@ public class ActivityViewCommand extends Command {
      * @param activityId An integer that uniquely identifies an activity.
      */
     public ActivityViewCommand(int sessionId, int activityId) {
+        assert activityId > 0 : Message.ASSERT_ACTIVITYVIEW_ACTIVITY_ID_LESS_THAN_ONE;
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYVIEW_SESSION_ID_LESS_THAN_ONE;
         this.sessionId = sessionId;
         this.activityId = activityId;
     }
