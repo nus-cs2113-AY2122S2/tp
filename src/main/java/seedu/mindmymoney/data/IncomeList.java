@@ -73,6 +73,28 @@ public class IncomeList {
     }
 
     /**
+     * Checks if income amount is equal.
+     * @param incomeList List of income details.
+     * @param index Index of income detail in list.
+     * @param amount Amount to compare with.
+     * @return True if amount is equal, false otherwise.
+     */
+    public static boolean isEqualIncomeAmount(IncomeList incomeList, int index, int amount) {
+        return incomeList.get(index).getAmount() == amount;
+    }
+
+    /**
+     * Checks if income category is equal.
+     * @param incomeList List of income details.
+     * @param index Index of income detail in list.
+     * @param category Category to compare with.
+     * @return True if category is equal, false otherwise.
+     */
+    public static boolean isEqualIncomeCategory(IncomeList incomeList, int index, String category) {
+        return incomeList.get(index).getCategory().equals(category);
+    }
+    
+    /**
      * Converts this IncomeList into a machine-readable format.
      * @return The serialized IncomeList
      */

@@ -78,7 +78,62 @@ public class ExpenditureList {
      * @param item The new Expenditure entry.
      */
     public void set(int index, Expenditure item) {
-        expenditureListArray.set(index,item);
+        expenditureListArray.set(index, item);
+    }
+
+    /**
+     * Checks if payment method is equal.
+     * @param expenditureList List of expenditures.
+     * @param index Index of expenditure in list.
+     * @param paymentMethod Payment method to compare with.
+     * @return True if payment method is equal, false otherwise.
+     */
+    public static boolean isEqualPaymentMethod(ExpenditureList expenditureList, int index, String paymentMethod) {
+        return expenditureList.get(index).getPaymentMethod().equals(paymentMethod);
+    }
+
+    /**
+     * Checks if category is equal.
+     * @param expenditureList List of expenditures details.
+     * @param index Index of expenditure in list.
+     * @param category Category to compare with.
+     * @return True if category is equal, false otherwise.
+     */
+    public static boolean isEqualCategory(ExpenditureList expenditureList, int index, String category) {
+        return expenditureList.get(index).getCategory().equals(category);
+    }
+
+    /**
+     * Checks if description is equal.
+     * @param expenditureList List of expenditures details.
+     * @param index Index of expenditure in list.
+     * @param description Description to compare with.
+     * @return True if description is equal, false otherwise.
+     */
+    public static boolean isEqualDescription(ExpenditureList expenditureList, int index, String description) {
+        return expenditureList.get(index).getDescription().equals(description);
+    }
+
+    /**
+     * Checks if amount is equal.
+     * @param expenditureList List of expenditures details.
+     * @param index Index of expenditure in list.
+     * @param amount Amount to compare with.
+     * @return True if amount is equal, false otherwise.
+     */
+    public static boolean isEqualAmount(ExpenditureList expenditureList, int index, float amount) {
+        return expenditureList.get(index).getAmount() == amount;
+    }
+
+    /**
+     * Checks if time is equal.
+     * @param expenditureList List of expenditures details.
+     * @param index Index of expenditure in list.
+     * @param time Time to compare with.
+     * @return True if time is equal, false otherwise.
+     */
+    public static boolean isEqualTime(ExpenditureList expenditureList, int index, String time) {
+        return expenditureList.get(index).getTime().equals(time);
     }
 
     /**

@@ -100,6 +100,54 @@ public class CreditCardList {
     }
 
     /**
+     * Checks if card name is equal.
+     *
+     * @param creditCardList List of credit card details.
+     * @param index Index of credit card list item.
+     * @param name Card name to compare with.
+     * @return True if card name is equal, false otherwise.
+     */
+    public static boolean isEqualName(CreditCardList creditCardList, int index, String name) {
+        return creditCardList.get(index).getNameOfCard().equals(name);
+    }
+
+    /**
+     * Checks if cashback is equal.
+     *
+     * @param creditCardList List of credit card details.
+     * @param index Index of credit card list item.
+     * @param cashback Cashback to compare with.
+     * @return True if cashback is equal, false otherwise.
+     */
+    public static boolean isEqualCashback(CreditCardList creditCardList, int index, double cashback) {
+        return creditCardList.get(index).getCashback() == cashback;
+    }
+
+    /**
+     * Checks if card limit is equal.
+     *
+     * @param creditCardList List of credit card details.
+     * @param index Index of credit card list item.
+     * @param cardLimit Card limit to compare with.
+     * @return True if card limit is equal, false otherwise.
+     */
+    public static boolean isEqualCardLimit(CreditCardList creditCardList, int index, float cardLimit) {
+        return creditCardList.get(index).getMonthlyCardLimit() == cardLimit;
+    }
+
+    /**
+     * Checks if balance is equal.
+     *
+     * @param creditCardList List of credit card details.
+     * @param index Index of credit card list item.
+     * @param balance Balance to compare with.
+     * @return True if balance is equal, false otherwise.
+     */
+    public static boolean isEqualBalance(CreditCardList creditCardList, int index, float balance) {
+        return creditCardList.get(index).getBalance() == balance;
+    }
+
+    /**
      * Converts this CreditCardList into a machine-readable format.
      * @return The serialized CreditCardList
      */
