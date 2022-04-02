@@ -5,6 +5,7 @@
 autonumber
 
 title Sequence Diagram of `workout /new` Command
+hide footbox
 
 participant "werkIt:WerkIt" AS WerkIt
 participant "newCommand\n:WorkoutCommand" AS newCommand

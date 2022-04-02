@@ -154,6 +154,7 @@ is not specified, an `InvalidCommandException` will be thrown.
 ### Overview
 * [Getting User Input Continuously](#getting-user-input-continuously)
 * [Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)
+    * [Illegal Characters and Phrases](#illegal-characters-and-phrases)
 * [Exercise](#exercise)
   * [List Exercise](#list-exercise)
 * [Workout](#workout)
@@ -223,7 +224,69 @@ for subsequent prompts.
 ---
 
 ### Parsing User Input and Getting the Right Command
-**_TODO_**: Explain how the app parses user input and determines which `Command` subclass object to instantiate.
+
+![Obtain and Parse User Input](uml/sequenceDiagrams/miscellaneous/images/obtainAndParseUserInput.png)
+
+<span class="box info"> 🧾 To improve the readability of the sequence diagram, the construction of the respective
+objects which are subclasses of the `Command` class between Steps 4 and 17 are not included in the diagram.</span>
+
+**(Steps 1 and 2)** When a user enters something into the terminal (when prompted), `UI#getUserInput()` will take in 
+the user's input as a `String` and call `String#trim()` to remove leading and trailing whitespaces in the input.
+Thereafter, a line is printed on the terminal to indicate that the user's input has been received
+and will be processed, before returning the user input as a `String` to the calling method (i.e. 
+`WerkIt#startContinuousUserPrompt()`).
+
+**(Step 3)** In `WerkIt#startContinuousUserPrompt()`, the method will pass the obtained user string as a parameter into
+`Parser#parseUserInput()`. The latter method will first check if the user input contains any characters
+or symbols that are deemed as illegal (see [Illegal Characters and Phrases](#illegal-characters-and-phrases) for details).
+If at least one illegal character or phrase is found, an `InvalidCommandException` will be thrown and the parsing is
+aborted.
+
+**(Steps 4 to 17)** If no illegal characters and phrases are found, `Parser#parseUserInput()` will examine the first
+word in the user input. This first word should represent the command type that the user wish to execute (i.e. `exercise`,
+`workout`, `plan`, `schedule`, `search`, `help`, or `exit`). Depending on the first word of the user input, different
+methods will be invoked to create the appropriate object of the subclass of the `Command` abstract superclass (see the 
+bulleted point after this paragraph for an example). However, if the first word is not a valid command type, an 
+`InvalidCommandException` will be thrown and the parsing is aborted.
+- For example, if the user input is `workout /new push up /reps 10`, `Parser#createWorkoutCommand()` will be invoked
+and a `WorkoutCommand` object will be returned by this method.
+
+Inside each of these 'create command' methods, the following generalised procedure to create an object of the subclass 
+of `Command` is carried out:
+1. (For commands that expect an action keyword (e.g. `/list`, `/new`)) The action keyword is parsed and determined.
+    - If the action keyword is invalid, an `InvalidCommandException` is thrown and the parsing is aborted.
+2. Depending on the action keyword (or lack thereof), the number of arguments are checked.
+    - If insufficient or too many arguments are provided in the user input, an `InvalidCommandException` is thrown
+   and the parsing is aborted.
+3. A new object of the subclass of `Command` is created and if the object is successfully constructed with no errors,
+it is returned to `Parser#parseUserInput()`.
+
+**(Step 18)** The object created is then returned to `WerkIt#startContinuousUserInput()`.
+
+<span class="box info"> 🧾 (About the sequence diagram) Strictly speaking, the object is returned right after whichever 
+'create command' method is invoked. However, to improve the readability of the diagram, only one return line is shown,
+since all alternate paths will return an object that is a subclass of the `Command` class.</span>
+
+The final step of this section is to invoke the `Command#execute()` method, which will in turn call the
+overridden `execute()` method of the subclass of `Command`.
+- For example, if the user input is `workout /new push up /reps 10`, the created `WorkoutCommand` object is upcasted
+to `Command` when returned to `WerkIt#startContinuousUserInput()`, but when `newCommand.execute()` is called,
+`WorkoutCommand#execute()` is called.
+
+Thereafter, the appropriate procedures are taken to complete the task requested by the user. The various procedures
+are explained in later sections of this developer guide.
+
+#### Illegal Characters and Phrases
+Some symbols and phrases are reserved for use by the application and thus are not allowed to be used by the user
+in his/her inputs to avoid any potential instabilities when processing his/her inputs.
+
+| Illegal Character/Phrase | Purpose in Application                                                                                                                                                                |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| The pipe character &#124; | Used as a delimiter in the app data files to separate the various data. Allowing the user to use delimiters in their plan names may cause issues when storing them in the data files. |
+| The phrase 'rest day' | Used as an indicator that a particular day in the user's schedule does not have a plan in it. Allowing the user to name a plan as 'rest day' may cause issues when displaying the schedule. |
+
+If these characters are inputted by the user, as mentioned in Step 3 above, an `InvalidCommandException` will be thrown 
+and the parsing is aborted.
 
 ---
 
