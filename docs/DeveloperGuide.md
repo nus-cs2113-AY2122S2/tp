@@ -152,7 +152,7 @@ is not specified, an `InvalidCommandException` will be thrown.
 ### Overview
 * [Getting User Input Continuously](#getting-user-input-continuously)
 * [Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)
-    * [Illegal Characters & Phrases](#illegal-characters--phrases)
+    * [Illegal Characters and Phrases](#illegal-characters-and-phrases)
 * [Exercise](#exercise)
   * [List Exercise](#list-exercise)
 * [Workout](#workout)
@@ -233,7 +233,7 @@ and will be processed, before returning the user input as a `String` to the call
 
 **(Step 3)** In `WerkIt#startContinuousUserPrompt()`, the method will pass the obtained user string as a parameter into
 `Parser#parseUserInput()`. The latter method will first check if the user input contains any characters
-or symbols that are deemed as illegal (see [Illegal Characters & Phrases](#illegal-characterse--phrases) for details).
+or symbols that are deemed as illegal (see [Illegal Characters and Phrases](#illegal-characters-and-phrases) for details).
 If at least one illegal character or phrase is found, an `InvalidCommandException` will be thrown and the parsing is
 aborted.
 
@@ -272,7 +272,7 @@ to `Command` when returned to `WerkIt#startContinuousUserInput()`, but when `new
 Thereafter, the appropriate procedures are taken to complete the task requested by the user. The various procedures
 are explained in later sections of this developer guide.
 
-#### Illegal Characterse & Phrases
+#### Illegal Characters and Phrases
 Some symbols and phrases are reserved for use by the application and thus are not allowed to be used by the user
 in his/her inputs to avoid any potential instabilities when processing his/her inputs.
 
