@@ -250,7 +250,7 @@ public class ActivityEditCommand extends Command {
             addAllActivityCost(involvedArrayList, payerAsPerson, DUMMY_ACTIVITYID);
             PersonList involvedPersonList = new PersonList(involvedArrayList);
             session.removeActivity(activityId);
-            Activity newActivity = new Activity(activityId, activityName, totalCost, payerAsPerson, involvedPersonList);
+            Activity newActivity = new Activity(activityId, activityName, totalCost, payerAsPerson, involvedPersonList, gst, serviceCharge);
             session.addActivity(newActivity);
             updateDummyActivityIdsInActivityCosts(session);
             manager.saveProfile();
