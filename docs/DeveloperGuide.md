@@ -766,6 +766,7 @@ If `dayList[0]` contains a `Day` object, it would mean that the user scheduled a
 user were to execute the `schedule /update` command again to update the plan to be scheduled for Monday, the application
 will update the content in the Day object stored in `dayList[0]`. It will not recreate a `Day` object for Monday
 to store the new plan.
+
 ---
 
 #### View Schedule
