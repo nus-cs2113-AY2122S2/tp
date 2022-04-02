@@ -514,7 +514,7 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 
 ## _Group Management_
 > A group represents one or more individuals. The only benefit of a group is to quickly identify a group of individuals
-  without having to manually enter their details one by one when creating a session.
+> without having to manually enter their details one by one when creating a session.
 > This is mainly to improve user experience when using SplitLah.
 
 <br>
@@ -583,11 +583,14 @@ Edits an existing group so that you can change the details of a group.<br>
 <br>
 
 > **💡 Notes:**
-> - A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
-> - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
-> - There are 2 editable fields: _group name_ and the _list of individuals_ in the group.
+>- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
+>- Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
+>- There are 2 editable fields: _group name_ and the _list of individuals_ in the group.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
+>- Editing groups **does not** affect sessions.
+>  - If a session has been created with the group that you are editing,
+>    editing the group does not edit the _list of participants_ in the session.
 >
 > **⚠️Warning:**
 > - This action is irreversible. The group is edited immediately after entering this command.
