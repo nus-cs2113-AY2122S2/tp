@@ -132,12 +132,39 @@ public class TravelPackage {
 
         TravelPackage cur = (TravelPackage) obj;
 
-        return cur.getID() == this.getID() && cur.getName().equals(this.getName())
-                && cur.getStartDate().equals(this.getStartDate())
-                && cur.getEndDate().equals(this.getEndDate()) && cur.getHotel().equals(this.getHotel())
-                && cur.getPrice() == this.getPrice() &&
-                cur.getCountry().equals(this.getCountry()) && cur.getMaxParticipants() == this.getMaxParticipants();
+        if (cur.getID() != this.getID()) {
+            return false;
+        }
 
+        if (!cur.getName().equals(this.getName())) {
+            return false;
+        }
+
+        if (!cur.getStartDate().equals(this.getStartDate())) {
+            return false;
+        }
+
+        if (!cur.getEndDate().equals(this.getEndDate())) {
+            return false;
+        }
+
+        if (!cur.getHotel().equals(this.getHotel())) {
+            return false;
+        }
+
+        if (cur.getPrice() != this.getPrice()) {
+            return false;
+        }
+
+        if (!cur.getCountry().equals(this.getCountry())) {
+            return false;
+        }
+
+        if (cur.getMaxParticipants() != this.getMaxParticipants()) {
+            return false;
+        }
+
+        return true;
     }
 
     public String saveTravelPackage() {

@@ -36,31 +36,31 @@ public class Parser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-        case "bye":
+        case ByeCommand.COMMAND_WORD:
             return new ByeCommand();
 
-        case "help":
+        case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case "add":
+        case AddCommand.COMMAND_WORD:
             return prepareAdd(arguments);
 
-        case "delete":
-            // delete TravelPackage by its ID
+        case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
-        case "packages":
+
+        case PackagesCommand.COMMAND_WORD:
             return new PackagesCommand();
 
-        case "info":
+        case InfoCommand.COMMAND_WORD:
             return prepareInfo(arguments);
 
-        case "reserve":
+        case ReservationCommand.COMMAND_WORD:
             return prepareReserve(arguments);
 
-        case "remove": // delete reservation by giving travelpackage ID and contact number.
+        case RemoveReservationCommand.COMMAND_WORD:
             return prepareRemove(arguments);
 
-        case "reservations":
+        case PrintReservationsCommand.COMMAND_WORD:
             return prepareReservations(arguments);
 
         default:

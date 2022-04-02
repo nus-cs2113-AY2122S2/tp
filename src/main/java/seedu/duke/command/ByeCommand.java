@@ -1,9 +1,11 @@
 package seedu.duke.command;
 
 import seedu.duke.Packages;
-import seedu.duke.Reservations;
 
 public class ByeCommand extends Command {
+
+    public static final String COMMAND_WORD = "bye";
+
     public ByeCommand() {
         setIsExit(true);
     }

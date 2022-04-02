@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.Packages;
-import seedu.duke.Reservations;
 
 public class ErrorCommand extends Command {
     private final String input;

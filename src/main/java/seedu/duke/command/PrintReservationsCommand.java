@@ -4,6 +4,8 @@ import seedu.duke.Packages;
 import seedu.duke.TravelPackage;
 
 public class PrintReservationsCommand extends Command {
+
+    public static final String COMMAND_WORD = "reservations";
     private final int packageID;
 
     public PrintReservationsCommand(int packageID) {
