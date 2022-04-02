@@ -255,10 +255,11 @@ public class Parser {
 
     /**
      * Returns a double that represents the GST charge in percents, given the command arguments from user input,
-     * delimited by the GST delimiter.
+     * delimited by the GST delimiter. Returns -1 if the delimiter is not found.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a GST charge in percents.
+     *         -1 if the delimiter is not found.
      * @throws InvalidFormatException If no arguments representing a GST charge were provided after the
      *                                GST delimiter,
      *                                if the argument cannot be parsed as a double,
@@ -309,10 +310,11 @@ public class Parser {
 
     /**
      * Returns a double that represents the service charge in percents, given the command arguments from user input,
-     * delimited by the Service charge delimiter.
+     * delimited by the Service charge delimiter. Returns -1 if the delimiter is not found.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a service charge in percents.
+     *         -1 if the delimiter is not found.
      * @throws InvalidFormatException If no arguments representing a service charge were provided after the
      *                                Service charge delimiter,
      *                                if the argument cannot be parsed as a double,

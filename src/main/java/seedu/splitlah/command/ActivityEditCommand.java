@@ -165,12 +165,18 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Calculates the old activity's total cost without gst and service charge.
+     */
     private void removeOldExtraChargesFromCost() {
         double oldGstMultiplier = 1 + (oldGst / 100);
         double oldServiceChargeMultiplier = 1 + (oldServiceCharge / 100);
         totalCost /= (oldGstMultiplier * oldServiceChargeMultiplier);
     }
 
+    /**
+     * Calculates the old activity's cost list without gst and service charge.
+     */
     private void removeOldExtraChargesFromCostList() {
         double oldGstMultiplier = 1 + (oldGst / 100);
         double oldServiceChargeMultiplier = 1 + (oldServiceCharge / 100);
@@ -270,6 +276,11 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Updates placeholder activityId values in new ActivityCost objects created from the edited activity to their
+     * actual values: the activityId of the edited Activity object.
+     * @param session A session object containing all ActivityCosts related to the Activity that is being edited.
+     */
     private void updateDummyActivityIdsInActivityCosts(Session session) {
         ArrayList<Person> involvedPersonList = session.getPersonList();
         for (Person person : involvedPersonList) {
@@ -281,6 +292,11 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Checks to ensure that the cost list matches the list of participants, regardless of whether they are provided.
+     *
+     * @throws InvalidDataException If there is a mismatch between the list of participants and the cost list.
+     */
     private void validateCostListAndInvolvedList() throws InvalidDataException {
         if (totalCost == MISSING_TOTALCOST
                 && (involvedList != MISSING_INVOLVEDLIST
@@ -302,6 +318,12 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Retrieves details about the activity not provided by the user from the original Activity object. These details
+     * will be used to create the edited Activity object.
+     *
+     * @param oldActivity An Activity object representing the activity to be edited.
+     */
     private void retrieveDetailsFromOldActivity(Activity oldActivity) {
         oldGst = oldActivity.getGst();
         oldServiceCharge = oldActivity.getServiceCharge();
@@ -325,6 +347,13 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Extracts a String array object containing the names of the participants from an ArrayList object containing
+     * Person objects.
+     *
+     * @param involvedPersonList An ArrayList object containing Person objects.
+     * @return A String array object containing the names of the participants.
+     */
     private String[] getInvolvedListFromPersonList(ArrayList<Person> involvedPersonList) {
         int listSize = involvedPersonList.size();
         String[] involvedListStringArray = new String[listSize];
@@ -335,10 +364,6 @@ public class ActivityEditCommand extends Command {
     }
 
     /**
-     * Runs the command with the session identifier and activity identifier as provided by the user input.
-     *
-     * @param manager A Manager object that manages the TextUI, Profile and Storage objects.
-    @Override
     public void ru2n(Manager manager) {
         TextUI ui = manager.getUi();
         try {

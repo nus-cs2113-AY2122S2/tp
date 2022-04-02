@@ -91,10 +91,20 @@ public class Activity implements Serializable, Comparable<Activity> {
         return personPaid;
     }
 
+    /**
+     * Returns the gst value in percentage.
+     *
+     * @return A double representing the gst value.
+     */
     public double getGst() {
         return gst;
     }
 
+    /**
+     * Returns the service charge value in percentage.
+     *
+     * @return A double representing the service charge.
+     */
     public double getServiceCharge() {
         return serviceCharge;
     }
