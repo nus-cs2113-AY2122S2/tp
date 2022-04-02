@@ -41,7 +41,9 @@ public class ActivityEditCommand extends Command {
     private String[] involvedList = MISSING_INVOLVEDLIST;
     double[] costList = MISSING_COSTLIST;
     private double gst = MISSING_GST;
+    private double oldGst = MISSING_GST;
     private double serviceCharge = MISSING_SERVICECHARGE;
+    private double oldServiceCharge = MISSING_SERVICECHARGE;
 
     private ArrayList<Person> involvedArrayList = null;
 
@@ -142,9 +144,11 @@ public class ActivityEditCommand extends Command {
     private void updateCostAndCostList() {
         if (totalCost == MISSING_TOTALCOST && costList != MISSING_COSTLIST) {
             totalCost = 0;
+            removeOldExtraChargesFromCostList();
             updateCostListWithExtraCharges();
             calculateTotalCost();
         } else if (totalCost != MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
+            removeOldExtraChargesFromCost();
             updateCostWithExtraCharges();
             int numberOfPeopleInvolved = involvedList.length;
             costList = distributeCostEvenly(numberOfPeopleInvolved);
@@ -152,6 +156,20 @@ public class ActivityEditCommand extends Command {
             totalCost = 0;
             updateCostListWithExtraCharges();
             calculateTotalCost();
+        }
+    }
+
+    private void removeOldExtraChargesFromCost() {
+        double oldGstMultiplier = 1 + (oldGst / 100);
+        double oldServiceChargeMultiplier = 1 + (oldServiceCharge / 100);
+        totalCost /= (oldGstMultiplier * oldServiceChargeMultiplier);
+    }
+
+    private void removeOldExtraChargesFromCostList() {
+        double oldGstMultiplier = 1 + (oldGst / 100);
+        double oldServiceChargeMultiplier = 1 + (oldServiceCharge / 100);
+        for (int i = 0; i < costList.length; ++i) {
+            costList[i] /= (oldGstMultiplier * oldServiceChargeMultiplier);
         }
     }
 
@@ -237,6 +255,7 @@ public class ActivityEditCommand extends Command {
             updateDummyActivityIdsInActivityCosts(session);
             manager.saveProfile();
             ui.printlnMessage(COMMAND_SUCCESS);
+            ui.printlnMessage(newActivity.getActivitySummaryString());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED);
         } catch (InvalidDataException exception) {
             ui.printlnMessage(exception.getMessage());
@@ -276,6 +295,8 @@ public class ActivityEditCommand extends Command {
     }
 
     private void retrieveDetailsFromOldActivity(Activity oldActivity) {
+        oldGst = oldActivity.getGst();
+        oldServiceCharge = oldActivity.getServiceCharge();
         if (Objects.equals(activityName, MISSING_ACTIVITYNAME)) {
             activityName = oldActivity.getActivityName();
         }
@@ -287,6 +308,12 @@ public class ActivityEditCommand extends Command {
         }
         if (involvedList == MISSING_INVOLVEDLIST) {
             involvedList = getInvolvedListFromPersonList(oldActivity.getInvolvedPersonList());
+        }
+        if (gst == MISSING_GST) {
+            gst = oldActivity.getGst();
+        }
+        if (serviceCharge == MISSING_SERVICECHARGE) {
+            serviceCharge = oldActivity.getServiceCharge();
         }
     }
 

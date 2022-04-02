@@ -229,7 +229,7 @@ public class ActivityCreateCommand extends Command {
             addAllActivityCost(involvedArrayList, personPaid, activityId);
 
             PersonList involvedPersonList = new PersonList(involvedArrayList);
-            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
+            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList, gst, serviceCharge);
 
             session.addActivity(activity);
             manager.saveProfile();

@@ -43,6 +43,8 @@ public class Activity implements Serializable, Comparable<Activity> {
         this.totalCost = totalCost;
         this.personPaid = personPaid;
         this.involvedPersonList = involvedPersonList;
+        this.gst = 0;
+        this.serviceCharge = 0;
     }
 
     public Activity(int activityId, String activityName, double totalCost, Person personPaid,
