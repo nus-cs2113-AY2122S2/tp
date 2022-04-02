@@ -153,7 +153,7 @@ Example of usage:
 
   `delete /u 1 /g 1`
 
-*_Result_: The person with uid = 1 is deleted from the Parent's group 
+* _Result_: The person with uid = 1 is deleted from the Parent's group 
   
 <br/>
 
