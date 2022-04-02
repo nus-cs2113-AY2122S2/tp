@@ -23,8 +23,7 @@ public class TaskDuration {
     private static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = StringConstants.TO_STRING_FORMAT_WITH_HOUR_ONLY;
     private static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = StringConstants.TO_STRING_FORMAT_WITH_MINUTE_ONLY;
     private static final String DURATION_STRING_FORMAT = StringConstants.DURATION_STRING_FORMAT;
-    private static final String[] HOUR_UNIT_WORD =
-            {"h", "H", "hr", "hrs", "Hr", "Hrs", "hours", "Hours", "hour", "Hour"};
+    private static final String[] HOUR_UNIT_WORD = {"h", "H", "hr", "hrs", "Hrs", "hours", "Hours", "hour", "Hour"};
     private static final String[] MINUTE_UNIT_WORD = {"m", "M", "min", "Min", "minutes", "Minutes", "minute", "Minute"};
 
 
