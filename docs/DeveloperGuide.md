@@ -435,7 +435,6 @@ The following sequence diagram is the detailed procedure for Step 2's `WorkoutLi
 > 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
 > `WorkoutList#deleteWorkout()` have been omitted.
 
-<br><br>
 **(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
 In this case, the user argument parameter is the workout index number of the workout to be deleted from the workout list as a `String` object.
 <br><br>
