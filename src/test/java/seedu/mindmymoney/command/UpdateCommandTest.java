@@ -32,7 +32,8 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         try {
             updateCommand.executeCommand();
-            assertEquals(testUser.getExpenditureListArray().get(INDEX_OF_FIRST_ITEM).toString(), newExpenditure.toString());
+            assertEquals(testUser.getExpenditureListArray().get(INDEX_OF_FIRST_ITEM).toString(),
+                    newExpenditure.toString());
         } catch (MindMyMoneyException e) {
             System.out.println(e.getMessage());
             fail();
@@ -83,7 +84,8 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         try {
             updateCommand.executeCommand();
-            assertEquals(testUser.getCreditCardListArray().get(INDEX_OF_FIRST_ITEM).toString(), newCreditCard.toString());
+            assertEquals(testUser.getCreditCardListArray().get(INDEX_OF_FIRST_ITEM).toString(),
+                    newCreditCard.toString());
         } catch (MindMyMoneyException e) {
             System.out.println(e.getMessage());
             fail();
