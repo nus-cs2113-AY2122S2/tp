@@ -77,6 +77,13 @@ your terminal, please see ["my terminal in Windows is not displaying any colours
 in the FAQ section. </span>
 
 <span class="box info"> For Linux operating systems, our application is tested on Ubuntu Linux using the default Bash shell. </span>
+2. (For Microsoft Windows users) Download [Windows Terminal][1] from the Microsoft Store.
+3. Download the latest version of WerkIt! from [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases).
+4. Create a new directory and move the WerkIt! JAR file to that directory.
+5. Open Windows Terminal (for Microsoft Windows users) or the other recommended terminals as listed in 
+['Recommended Terminals'](#recommended-terminals) based on your operating system.
+6. Set your current working directory to the new directory.
+7. Run the WerkIt! application with the command: `java -jar WerkIt.jar`.
 
 ---
 ## Features 
