@@ -39,7 +39,7 @@ public class Family {
         assert (group <= Constants.NUM_GROUPS);
         infoString = "Index assertions passed in getList()";
         LOGGER.log(Level.INFO, infoString);
-        PersonList toReturn = null;
+        PersonList toReturn;
         switch (group) {
         case Constants.PARENTS:
             toReturn = parents;
@@ -66,7 +66,7 @@ public class Family {
         assert (group <= Constants.NUM_GROUPS);
         infoString = "Index assertions passed in getGenerationName()";
         LOGGER.log(Level.INFO, infoString);
-        String toReturn = null;
+        String toReturn;
         switch (group) {
         case Constants.PARENTS:
             toReturn = "Parents";
