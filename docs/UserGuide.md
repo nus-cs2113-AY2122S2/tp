@@ -72,7 +72,8 @@ Prints all projects in the list with their names and project deadlines
 
 Format: `listprojects` or `listproject`
 
-* The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.
+* The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.  
+
 ---
 ### Add todo to a project: `todo`
 Adds a todo task with description to a project
