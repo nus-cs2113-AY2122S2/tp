@@ -70,7 +70,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that the command can update the credit card list.
-     * */
+     **/
     @Test
     void updateCreditCardCommand_updateCreditCard_listUpdated() {
         CreditCard testCreditCard = new CreditCard("DBS", 2, 1000, 1000);
