@@ -40,7 +40,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that an invalid update expenditure command will throw an exception.
-     * */
+     **/
     @Test
     void updateExpenditureCommand_invalidInput_exceptionThrown() {
         Expenditure testExpenditure = new Expenditure("Cash", "Food",
