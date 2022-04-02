@@ -350,7 +350,7 @@ public abstract class Message {
             "Payer's name is missing.";
     public static final String ASSERT_ACTIVITYEDIT_INVOLVED_LIST_ARRAY_NULL =
             "Involved list array does not contain the list of names of the persons involved in the activity.";
-    public static final String ACTIVITYEDIT_DUPLICATE_NAME =
+    public static final String ERROR_ACTIVITYEDIT_DUPLICATE_NAME =
             "There are duplicate names in the persons involved for the activity you are trying to create. "
                     + "Please rectify and try again.";
     public static final String LOGGER_ACTIVITYEDIT_DUPLICATE_NAMES_IN_INVOLVED_LIST =
@@ -362,6 +362,10 @@ public abstract class Message {
             "Total cost is less than or equals to zero.";
     public static final String LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED =
             "An Activity object was succesfully edited in the list of activities with Id: ";
+    public static final String ERROR_ACTIVITYEDIT_COSTLIST_AND_INVOLVEDLIST_MISMATCH =
+            "Please include both a cost list and a participant list to split costs independently.";
+    public static final String ERROR_ACTIVITYEDIT_INVOLVED_AND_COST_DIFFERENT_LENGTH =
+            "There is a mismatch between persons involved and the costs for each person. Please rectify and try again.";
 
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =

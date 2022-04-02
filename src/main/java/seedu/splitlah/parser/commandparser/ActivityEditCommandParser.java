@@ -1,6 +1,7 @@
 package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.ActivityEditCommand;
+import seedu.splitlah.data.Activity;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
@@ -50,63 +51,57 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         assert commandArgs != null : Message.ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL;
         int sessionId;
         int activityId;
-        String activityName;
-        String payer;
-        String[] involvedList;
-        double totalCost = 0;
+        String activityName = null;
+        String payer = null;
+        String[] involvedList = null;
+        double totalCost = -1;
         double[] costList = null;
-        double gst;
-        double serviceCharge;
+        double gst = -1;
+        double serviceCharge = -1;
 
         try {
             sessionId = Parser.parseSessionId(commandArgs);
             activityId = Parser.parseActivityId(commandArgs);
-            activityName = Parser.parseName(commandArgs);
-            payer = Parser.parsePayer(commandArgs);
-            involvedList = Parser.parseInvolved(commandArgs);
         } catch (InvalidFormatException exception) {
             String invalidMessage = exception.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
                     + "\n\t" + COMMAND_FORMAT_SECOND;
             throw new InvalidFormatException(invalidMessage);
         }
 
+        try {
+            activityName = Parser.parseName(commandArgs);
+        } catch (InvalidFormatException exception) {
+            // activityName not provided by user.
+        }
+
+        try {
+            payer = Parser.parsePayer(commandArgs);
+        } catch (InvalidFormatException exception) {
+            // payer not provided by user.
+        }
+
+        try {
+            involvedList = Parser.parseInvolved(commandArgs);
+        } catch (InvalidFormatException exception) {
+            // involvedList not provided by user.
+        }
+
         boolean isMissingCost = false;
-        boolean isMissingCostList = false;
         boolean hasDifferentLength = false;
 
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
-        } catch (InvalidFormatException e) {
-            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.TOTAL_COST_DELIMITER)) {
-                String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND;
-                throw new InvalidFormatException(invalidMessage);
-            }
-            isMissingCost = true;
+        } catch (InvalidFormatException exception) {
+            // totalCost not provided by user.
         }
 
         try {
             costList = Parser.parseCostList(commandArgs);
-        } catch (InvalidFormatException e) {
-            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.COST_LIST_DELIMITER)) {
-                String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND;
-                throw new InvalidFormatException(invalidMessage);
-            }
-            isMissingCostList = true;
+        } catch (InvalidFormatException exception) {
+            // costList not provided by user.
         }
 
-        boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
-        if (hasMissingCostAndMissingCostList) {
-            String invalidMessage = Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND;
-            throw new InvalidFormatException(invalidMessage);
-        }
-
-        boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
-        if (hasBothCostAndCostList) {
+        if (costList != null && totalCost != -1) {
             String invalidMessage = Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
                     + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND;
             throw new InvalidFormatException(invalidMessage);
@@ -123,11 +118,14 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
 
         try {
             gst = Parser.parseGst(commandArgs);
+        } catch (InvalidFormatException exception) {
+            // gst not provided by user.
+        }
+
+        try {
             serviceCharge = Parser.parseServiceCharge(commandArgs);
-        } catch (InvalidFormatException e) {
-            String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                    + "\n\t" + COMMAND_FORMAT_SECOND;
-            throw new InvalidFormatException(invalidMessage);
+        } catch (InvalidFormatException exception) {
+            // serviceCharge not provided by user.
         }
 
         return new ActivityEditCommand(sessionId, activityId, activityName, payer, involvedList, totalCost,

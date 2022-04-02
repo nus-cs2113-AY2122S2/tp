@@ -2,13 +2,10 @@ package seedu.splitlah.command;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.logging.Level;
 
-import seedu.splitlah.data.Activity;
-import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Person;
-import seedu.splitlah.data.PersonList;
-import seedu.splitlah.data.Session;
+import seedu.splitlah.data.*;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
@@ -34,6 +31,7 @@ public class ActivityEditCommand extends Command {
     private static final String MISSING_ACTIVITYNAME = null;
     private static final String MISSING_PAYER = null;
     private static final String[] MISSING_INVOLVEDLIST = null;
+    private static final int DUMMY_ACTIVITYID = MISSING_ACTIVITYID;
 
     private int activityId = MISSING_ACTIVITYID;
     private int sessionId = MISSING_SESSIONID;
@@ -45,6 +43,7 @@ public class ActivityEditCommand extends Command {
     private double gst = MISSING_GST;
     private double serviceCharge = MISSING_SERVICECHARGE;
 
+    private ArrayList<Person> involvedArrayList = null;
 
     /**
      * Initializes an ActivityEditCommand object.
@@ -64,7 +63,7 @@ public class ActivityEditCommand extends Command {
     public ActivityEditCommand(int sessionId, int activityId, String activityName, String payer, String[] involvedList,
                                Double totalCost, double[] costList, double gst, double serviceCharge) {
         assert sessionId > 0 : Message.ASSERT_ACTIVITYEDIT_SESSIONID_LESS_THAN_ONE;
-        assert activityName != null : Message.ASSERT_ACTIVITYEDIT_ACTIVITY_NAME_MISSING;
+        assert activityId > 0 : Message.ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING;
         this.activityId = activityId;
         this.sessionId = sessionId;
         this.activityName = activityName;
@@ -209,29 +208,121 @@ public class ActivityEditCommand extends Command {
         return costList;
     }
 
+    @Override
+    public void run(Manager manager) {
+        TextUI ui = manager.getUi();
+        try {
+            assert activityId != MISSING_ACTIVITYID;
+            assert sessionId != MISSING_SESSIONID;
+
+            Profile profile = manager.getProfile();
+            Session session = profile.getSession(sessionId);
+            Activity oldActivity = session.getActivity(activityId);
+            retrieveDetailsFromOldActivity(oldActivity);
+            validateCostListAndInvolvedList();
+            updateCostAndCostList();
+            assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
+            assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
+            involvedArrayList = session.getPersonListByName(involvedList);
+            Person payerAsPerson = session.getPersonByName(payer);
+            addAllActivityCost(involvedArrayList, payerAsPerson, DUMMY_ACTIVITYID);
+            PersonList involvedPersonList = new PersonList(involvedArrayList);
+            session.removeActivity(activityId);
+            Activity newActivity = new Activity(activityId, activityName, totalCost, payerAsPerson, involvedPersonList);
+            session.addActivity(newActivity);
+            updateDummyActivityIdsInActivityCosts(session);
+            manager.saveProfile();
+            ui.printlnMessage(COMMAND_SUCCESS);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED);
+        } catch (InvalidDataException exception) {
+            ui.printlnMessage(exception.getMessage());
+        }
+    }
+
+    private void updateDummyActivityIdsInActivityCosts(Session session) {
+        ArrayList<Person> involvedPersonList = session.getPersonList();
+        for (Person person : involvedPersonList) {
+            for (ActivityCost activityCost : person.getActivityCostList()) {
+                if (activityCost.getActivityId() == MISSING_ACTIVITYID) {
+                    activityCost.setActivityId(activityId);
+                }
+            }
+        }
+    }
+
+    private void validateCostListAndInvolvedList() throws InvalidDataException {
+        if (totalCost == MISSING_TOTALCOST
+                && (involvedList != MISSING_INVOLVEDLIST
+                ^ costList == MISSING_COSTLIST)) {
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY);
+            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COSTLIST_AND_INVOLVEDLIST_MISMATCH);
+        }
+
+        if (involvedList != MISSING_INVOLVEDLIST && costList != MISSING_COSTLIST) {
+            if (involvedList.length != costList.length) {
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY);
+                throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_INVOLVED_AND_COST_DIFFERENT_LENGTH);
+            }
+        }
+
+        if (involvedList != MISSING_INVOLVEDLIST && PersonList.hasNameDuplicates(involvedList)) {
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY);
+            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_DUPLICATE_NAME);
+        }
+    }
+
+    private void retrieveDetailsFromOldActivity(Activity oldActivity) {
+        if (Objects.equals(activityName, MISSING_ACTIVITYNAME)) {
+            activityName = oldActivity.getActivityName();
+        }
+        if (totalCost == -1) {
+            totalCost = oldActivity.getTotalCost();
+        }
+        if (Objects.equals(payer, MISSING_PAYER)) {
+            payer = oldActivity.getPersonPaid().getName();
+        }
+        if (involvedList == MISSING_INVOLVEDLIST) {
+            involvedList = getInvolvedListFromPersonList(oldActivity.getInvolvedPersonList());
+        }
+    }
+
+    private String[] getInvolvedListFromPersonList(ArrayList<Person> involvedPersonList) {
+        int listSize = involvedArrayList.size();
+        String[] involvedListStringArray = new String[listSize];
+        for (int i = 0; i < listSize; ++i) {
+            involvedListStringArray[i] = involvedPersonList.get(i).getName();
+        }
+    }
+
     /**
      * Runs the command with the session identifier and activity identifier as provided by the user input.
      *
      * @param manager A Manager object that manages the TextUI, Profile and Storage objects.
-     */
     @Override
-    public void run(Manager manager) {
-        boolean hasDuplicates = false;
-        if (involvedList != MISSING_INVOLVEDLIST) {
-            hasDuplicates = PersonList.hasNameDuplicates(involvedList);
-        }
+    public void ru2n(Manager manager) {
         TextUI ui = manager.getUi();
-        if (hasDuplicates) {
-            ui.printlnMessage(Message.ACTIVITYEDIT_DUPLICATE_NAME);
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_DUPLICATE_NAMES_IN_INVOLVED_LIST);
-            return;
-        }
         try {
+            ArrayList<Person> involvedListOfPersons;
+            Session session = manager.getProfile().getSession(sessionId);
+            Activity oldActivity = session.getActivity(activityId);
+            boolean hasDuplicates = false;
+            // if the user provides the person list, check for duplicates
+            // otherwise, set the person list to the existing person list
+            if (involvedList != MISSING_INVOLVEDLIST) {
+                hasDuplicates = PersonList.hasNameDuplicates(involvedList);
+                involvedListOfPersons = session.getPersonListByName(involvedList);
+            } else {
+                involvedListOfPersons = oldActivity.getInvolvedPersonList();
+            }
+            if (hasDuplicates) {
+                ui.printlnMessage(Message.ERROR_ACTIVITYEDIT_DUPLICATE_NAME);
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_DUPLICATE_NAMES_IN_INVOLVED_LIST);
+                return;
+            }
             updateCostAndCostList();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
 
-            Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedArrayList = session.getPersonListByName(involvedList);
 
@@ -252,4 +343,5 @@ public class ActivityEditCommand extends Command {
                     + "\n" + e.getMessage());
         }
     }
+    **/
 }
