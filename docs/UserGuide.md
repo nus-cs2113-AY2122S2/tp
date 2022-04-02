@@ -40,15 +40,15 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 
 ## Features 
 
-### Add a project: `addproject`
+### Add a project: ```addproject```
 Add a project to your current list of projects
 
-Format: `addproject [project_name]`
+Format: ```addproject [project_name]```
 *The `project_name` has no restrictions; it can be of any length, number of words, and any
 types of characters.
 
 #### Example of usage
-`addproject project1`
+```addproject project1```
 
 #### Example of output
 ```project1 added.```
