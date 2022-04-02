@@ -223,9 +223,8 @@ Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCR
 * **INCOME** refers to the monetary value of your income.
 * **DESCRIPTION** refers to the name or description of your income.
 * **<T/(any)>** refers to whether your income is recurrent on a monthly-basis.
-  
-> **Note**
->
+
+> :information_source: Notes:
 > **DESCRIPTION**, **INCOME** and recurring setting (**<T|F>**) are optional in this case. You can just include the 
 > part(s) that you are looking to modify.
 
@@ -303,8 +302,7 @@ Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITU
 * **CATEGORY_INDEX** refers to the category of your expenditure.
 * **<T/(any)>** refers to whether your expenditure is recurrent on a monthly-basis.
 
-> **Note**
->
+> :information_source: Notes:
 > **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) are optional in this case. You
 > can just include the part(s) that you are looking to modify.
 
@@ -362,17 +360,16 @@ Format: `listcat`
 
 > Search for a string as provided by you throughout all your income and expenditure.
 
-Format: `find /d USER_STRING /c CATEGORY_INDEX`
+Format: `find /d USER_STRING [/c CATEGORY_INDEX]`
 
 * **USER_STRING** refers to the keyword which you want to look for.
 * **CATEGORY_INDEX** refers to the category of your expenditure.
 
 > :information_source: Notes:
 > * Keywords are case-sensitive and inclusive. So a search for `brush` will successfully look for `toothbrush`.
-> * If you want to search for expenditures in all categories instead of specific ones, set **CATEGORY_INDEX** to 0.
+> * If you want to search for expenditures in all categories instead of specific ones, omit **CATEGORY_INDEX**.
 
 Example of usage:
-
 
 * Find all the records which descriptions include _Candy_ from Category 1.
 
