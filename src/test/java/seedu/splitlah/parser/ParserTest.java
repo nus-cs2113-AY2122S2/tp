@@ -200,8 +200,24 @@ class ParserTest {
         String output = Parser.getRemainingArgument(fourInputTokensString);
         assertEquals("theLazy Dog", output);
     }
+    
+    // checkIfCommandIsValid()
+    /**
+     * Checks if an error message is returned if the user input contains any non-ASCII characters.
+     */
+    @Test
+    void checkIfCommandIsValid_nonAsciiInput_errorMessagePrinted() {
+        String commandInput = "session /create /n 予定 /d today /pl Alice Bob";
+        String commandType = Parser.getCommandType(commandInput);
+        if (commandType == null) {
+            fail();
+        }
+        String remainingArgs = Parser.getRemainingArgument(commandInput);
+        String errorMessage = ParserUtils.checkIfCommandIsValid(commandType, remainingArgs);
+        assertEquals(Message.ERROR_PARSER_NON_ASCII_ARGUMENT, errorMessage);
+    }
 
-    //  parseName()
+    // parseName()
     /**
      * Checks if an InvalidFormatException with the correct message is properly thrown
      * when the Name delimiter is not provided by the user.
