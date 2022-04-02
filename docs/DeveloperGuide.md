@@ -32,7 +32,7 @@ The design of Developer Guide is referenced from the [AB-3 Developer Guide](http
 * Handles the responses to give to user.  
 
 **Logic Component**  
-![image info](./UmlDiagrams/Logic.png)
+![image info](./UmlDiagrams/Logic(updated).png)
 How the `Logic` component works:
 * When `CommandHandler` is called upon to execute a command, it creates `XYZCommandParser` object(e.g.,`AddProjectCommandParser`) which parses the user command and create a `XYZCommand` object (e.g., `AddProjectCommand`).
 * The created `XYZCommand` object is returned as a `Command` object.
@@ -112,7 +112,7 @@ Deleting a project will follow nearly the exact same structure; the only differe
 **Step5.** the general information of a project, i.e., its title and deadline, will be displayed.
 
 #### Todo feature
-![image info](./UmlDiagrams/UpdatedTodoSequence.png)  
+![image info](./UmlDiagrams/UpdatedTodoSequence(updated).png)  
 
 **Step1.** When `CommandHandler` receives a user input starting with string “todo”, it will create a `AddTodoCommandParser` object and call `parse()`function to parse the user input.  
 
@@ -123,6 +123,7 @@ Deleting a project will follow nearly the exact same structure; the only differe
 **Step4.** `executeCommand()` will call `execute()` method of `AddTodoCommand`. `AddTodoCommand` will call `addTodoToProject()` method in order to get the target project and add todo to it.
 
 #### View a Project
+![image info](./UmlDiagrams/ViewProject.jpg)
 
 The view function makes use of ```ProjectList``` and ```CommandHandler``` classes. It is facilitated by methods within the ```Todo``` and ```Project``` classes, stored within ```ProjectList```.
 Given below is an example usage scenario and how View Project behaves at each step
@@ -139,9 +140,10 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 **Step 6.** ```printDetails()``` displays project title and deadline to the user. It iterates through the ```Todo```s in the ```todos``` attribute and prints each `Todo` by calling `Todo`’s `toString()` function
 
-![image info](./UmlDiagrams/ViewProject.jpg)
+
 
 #### Add a Deadline to a Project
+![image info](./UmlDiagrams/AddProjectDeadline.jpg)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “addprojdeadline”, it will create an `AddProjectDeadlineCommandParser` object and call its `parse()` function to parse the user input
 
@@ -161,9 +163,10 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 **Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
 
-![image info](./UmlDiagrams/AddProjectDeadline.jpg)
+
 
 #### Add a Deadline to a Todo
+![image info](./UmlDiagrams/AddTodoDeadline.jpg)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “addtododeadline”, it will create an `AddTodoDeadlineCommandParser` object and call its `parse()` function to parse the user input
 
@@ -183,7 +186,7 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 **Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
 
-![image info](./UmlDiagrams/AddTodoDeadline.jpg)
+
 
 ### Proposed Features
 

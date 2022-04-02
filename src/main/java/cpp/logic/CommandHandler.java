@@ -39,7 +39,7 @@ public class CommandHandler {
         case "deleteproject": //delete a project based on its name
             executeResult = executeCommand(projectList, new DeleteProjectCommandParser().parse(commands));
             break;
-        case "listprojects":
+        case "listprojects": //Fallthrough
         case "listproject": //view all project(s) by name
             executeResult = executeCommand(projectList, new ListProjectCommand());
             break;

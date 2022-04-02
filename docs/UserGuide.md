@@ -50,7 +50,7 @@ types of characters.
 #### Example of usage
 `addproject project1`
 
-### Example of output
+#### Example of output
 ```project1 added.```
 
 ---
@@ -63,7 +63,7 @@ Format: `deleteproject [project_name]`
 #### Example of usage
 `deleteproject project1`
 
-### Example of output
+#### Example of output
 ```project1 deleted.```
 
 ---
@@ -200,7 +200,7 @@ Exit the program
 
 Format: `exit`
 
----å
+---
 ## FAQ
 
 **Q**: How do I transter my data to another computer?
@@ -226,7 +226,6 @@ Please note that the file name should not be changed.
 | change GitHub       | `changegit [project_name] [github_URL]`  |
 | open GitHub         | `opengit [project_name]`                 |
 | add todo deadline   | `addtododeadline [project_index] [todo_index] [deadline]`|
-| view a project      | `view [project_name]`                    |
 | view a project      | `view [project_name]`                    |
 | addlanguage	      | `addlanguage [project_name] [language]`  |
 | listlanguages	      | `listlanguages`                          |

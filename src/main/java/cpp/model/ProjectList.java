@@ -74,7 +74,7 @@ public class ProjectList {
     }
 
     /**
-     * Add a todo to one project in projectList.
+     * Adds a todo to one project in projectList.
      *
      * @param indexString Index of the project
      * @param todoString The todo task the user wants to add to the project
