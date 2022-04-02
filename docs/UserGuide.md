@@ -42,7 +42,7 @@ this app is for you!
 
 ### Using the User Guide
 This guide aims to equip you with the knowledge on how to set up the application and to utilise its many features.
-Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the user guide! Along the guide you may
+Click on the hyperlinks in the [content page](#content-page) to quickly navigate the user guide! Along the guide you may
  encounter several icons. These icons will provide several useful information. 
 > **💡 Note:**
 >- This tells you that there is additional information that is useful when you are using the application.
@@ -63,20 +63,30 @@ when you are using the application.
 3. Copy the file to the folder you want to use as the _home folder_ for your MindMyMoney.
 4. Open a command line terminal in your _home folder_ and run `java -jar MindMyMoney.jar`.
    The startup interface similar to the one below should appear in a few seconds.  
-   ![M3_Start_Screen](images/start.PNG)
+```
+    __  __ _         _ __  __      __  __
+|  \/  (_)_ _  __| |  \/  |_  _|  \/  |___ _ _  ___ _  _
+| |\/| | | ' \/ _` | |\/| | || | |\/| / _ \ ' \/ -_) || |
+|_|  |_|_|_||_\__,_|_|  |_|\_, |_|  |_\___/_||_\___|\_, |
+                           |__/                     |__/
+<< Set a budget and stick to it >>
+
+Welcome to MindMyMoney
+What can I do for you?
+```
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    show a help page. <br> Some example commands you can try: <br>
     * **`list`** : Lists all tasks.
     * **`add`**`/pm cash /c Food /d Porridge /a 3 /t 12/03/2022` :
       Adds a $3 expenditure of the description 'Porridge' that was paid in cash on 12 March 2022 to your list of expenditures.
-    * **`calculate`**`/epm Mar 2022` : Calculates total expenditure in the month of March 2022.
+    * **`calculate`**`/epm 03/2022` : Calculates total expenditure in the month of March 2022.
     * **`update`**`1 /pm cash /c Food /d Chicken Rice /a 4.50 /t 12/03/2022` :
       Updates the first expenditure on your expenditure list to reflect a $4.50 expenditure of the 
    description 'Chicken Rice' that was paid in cash on 12 March 2022.
     * **`delete`**`2` : Deletes the second expenditure in your expenditure list.
     * **`bye`** : Exits the app.
     
-7. Refer to the [Features](#features) for details of each command.
+6. Refer to the [Features](#features) for details of each command.
 
 <br/>
 
@@ -89,19 +99,32 @@ Words in `[SQUARE_BRACKETS]` are the parameters.
 
 ### Display help page for expenses: `help`
 Prints a list of currently available commands for storing expenditures.   
-Format:`help /e`
 
-![help_expenses screenshot](./images/help_expenses.PNG)
+**Format**: `help /e`  
+
+**Expected Outcome**
+````
+> help /e
+---------------------------------------Expenditure Help Page---------------------------------------
+1. Listing all Expenditures: list /expenses
+2. Adding an Expenditure entry: add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [TIME]
+3. Calculating the total expenditure in a month: calculate /epm [MONTH]
+4. Updating an Expenditure: update [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [TIME]
+5. Removing an Expenditure entry: delete [INDEX]
+6. Exiting the program: bye
+---------------------------------------------------------------------------------------------------
+````
 
 <br/>
 
 ### Add an expenditure: `add`
-Adds an expenditure to your program. Only **one** expenditure can only be added per command.
-Format:`add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
+Adds an expenditure to your program. Only **one** expenditure can only be added per command.  
+
+**Format**: `add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
 * `[PAYMENT_METHOD]` refers to the method of payment used.
     * Enter `cash` or the name of a credit card you have saved.
 * `[CATEGORY]` refers to the category of the expenditure
-    * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`.⚠️Any input not in this list will be rejected.
+    * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`.
 * `[DESCRIPTION]` refers to the description of the expenditure.
     * For example `Nike shoes`.
 * `[AMOUNT]` refers to the cost of the expenditure.
@@ -114,7 +137,19 @@ Format:`add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [
 For example:`add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`
 Adds a $4.50 expenditure of the description 'Porridge' that was paid in cash in March 2022 to your expenditure list. <br>
 
-![add_expense screenshot](./images/add_expense.PNG)
+**Expected Output**
+````
+> add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022
+Successfully added: 
+
+Description: Porridge
+Amount: $4.5
+Category: Food
+Payment method: Cash
+Date: 12/03/2022
+
+into the account
+````
 
 > **💡 Note:**
 >- `[CATEGORY]` and `[PAYMENT_METHOD]` are **case-insensitive**.
@@ -123,7 +158,7 @@ Adds a $4.50 expenditure of the description 'Porridge' that was paid in cash in 
 
 
 > **⚠️Warning⚠️**
->- Input realistic values, any unrealistic values may crash the application and damage your saved file!
+>- `[CATEGORY]`: Any input not in the list will be rejected.
 >- All parameters are compulsory! Input the parameters in the order given, or the application will not be able to read your
    > input.
 
