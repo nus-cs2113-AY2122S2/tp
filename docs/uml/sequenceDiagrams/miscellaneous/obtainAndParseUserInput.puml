@@ -54,7 +54,4 @@ end
 
 return newCommand:Command
 
-WerkIt -> newCommand : execute()
-activate newCommand
-
 @enduml

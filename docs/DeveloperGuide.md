@@ -266,7 +266,7 @@ it is returned to `Parser#parseUserInput()`.
 'create command' method is invoked. However, to improve the readability of the diagram, only one return line is shown,
 since all alternate paths will return an object that is a subclass of the `Command` class.</span>
 
-**(Step 12)** The final step of this section is to invoke the `Command#execute()` method, which will in turn call the
+The final step of this section is to invoke the `Command#execute()` method, which will in turn call the
 overridden `execute()` method of the subclass of `Command`.
 - For example, if the user input is `workout /new push up /reps 10`, the created `WorkoutCommand` object is upcasted
 to `Command` when returned to `WerkIt#startContinuousUserInput()`, but when `newCommand.execute()` is called,
