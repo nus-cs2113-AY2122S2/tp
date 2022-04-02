@@ -64,7 +64,7 @@ Error! Invalid Command.
 1. Item Name: PREMIUM SPOON Item Pax: 0
 ============ End of the list ==============
 Error! Invalid Command.
-Error! PREMIUM SPOON has already been added to the item list.
+Error! The item to add already exists within the item list.
 ================ Noted! ===================
 The item and its pax has been added to the item list.
 There are currently 3 items within the item list.

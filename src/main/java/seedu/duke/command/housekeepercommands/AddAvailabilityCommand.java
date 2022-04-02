@@ -65,7 +65,8 @@ public class AddAvailabilityCommand extends Command {
         try {
             String[] splitDays = availability.split(",");
             for (String day : splitDays) {
-                String validDay = checkLengthInput(day);
+                String trimDay = day.trim();
+                String validDay = checkLengthInput(trimDay);
                 int availableDay = Integer.parseInt(validDay);
                 if (availableDay < MONDAY_INDICATE || availableDay > SUNDAY_INDICATE) {
                     logger.log(Level.WARNING, "Days given were not valid.");
