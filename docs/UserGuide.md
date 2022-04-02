@@ -148,6 +148,8 @@ amount, category and remarks of a given expense, using the delimiters of `d/` , 
 respectively.
 - The DATE field must be in the format of YYYY-MM-DD. All other formats would not be accepted.
 - The AMOUNT field must be a valid number (integer/float) and must be non-negative.
+- The usage of '/' must be enclosed with white spaces. 
+  - Example: `r/Buffet / Alacarte meal`
 
 Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
 

@@ -3,17 +3,18 @@ package seedu.allonus.expense;
 import seedu.allonus.expense.exceptions.ExpenseAmountException;
 import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
 import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
+import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class ExpenseParser {
-    public static final String DATE_DELIMITER = "d/";
-    public static final String AMOUNT_DELIMITER = "a/";
-    public static final String CATEGORY_DELIMITER = "c/";
-    public static final String REMARKS_DELIMITER = "r/";
-    public static final String ALL_DELIMITERS = "[dacr]/";
+    public static final String DATE_DELIMITER = " d/";
+    public static final String AMOUNT_DELIMITER = " a/";
+    public static final String CATEGORY_DELIMITER = " c/";
+    public static final String REMARKS_DELIMITER = " r/";
+    public static final String ALL_DELIMITERS = " [dacr]/";
     public static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
     public static final String ASSERT_DELIMITER_NOT_NULL = "Delimiter should not be null";
     public static final String ASSERT_RESULT_NOT_NULL = "Result should not be null";
@@ -33,7 +34,7 @@ public class ExpenseParser {
      */
     public static String reformatDate(String rawDate) throws DateTimeParseException {
         LocalDate dateOfExpense = LocalDate.parse(rawDate);
-        String parsedDate = dateOfExpense.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+        String parsedDate = dateOfExpense.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return parsedDate;
     }
 
@@ -60,8 +61,9 @@ public class ExpenseParser {
      */
     public static String[] parseNewExpense(String userInput) throws IndexOutOfBoundsException,
             DateTimeParseException, NumberFormatException, ExpenseAmountException, ExpenseMissingFieldException,
-            ExpenseEmptyFieldException {
+            ExpenseEmptyFieldException, ExpenseExtraFieldException {
         String rawInput = userInput.split(" ", SPLIT_IN_HALF)[EXPENSE_FIELDS].trim();
+        rawInput = " " + rawInput;
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
         if (!rawInput.contains(DATE_DELIMITER) || !rawInput.contains(AMOUNT_DELIMITER)
                 || !rawInput.contains(CATEGORY_DELIMITER) || !rawInput.contains(REMARKS_DELIMITER)) {
@@ -77,6 +79,23 @@ public class ExpenseParser {
     }
 
     /**
+     * Checks if the user has added too many delimiters in the input.
+     *
+     * @param userInput the line that is inputted by the user.
+     * @param delimiter the current field that is being checked.
+     * @throws ExpenseExtraFieldException if any extra delimiters are found in the user's input
+     */
+    public static void checkNumberOfDelimiters(String userInput, String delimiter) throws ExpenseExtraFieldException {
+        int lengthOfRawInput = userInput.length();
+        String strippedInput = userInput.replace(delimiter, "");
+        int lengthOfStrippedInput = strippedInput.length();
+        int lengthOfDelimiter = delimiter.length();
+        if (lengthOfRawInput - lengthOfStrippedInput >= lengthOfDelimiter) {
+            throw new ExpenseExtraFieldException("Duplicate fields found in input!");
+        }
+    }
+
+    /**
      * Looks for a specific delimiter within the user's input.
      *
      * @param userInput      the line that is inputted by the user
@@ -86,7 +105,7 @@ public class ExpenseParser {
      * @throws IndexOutOfBoundsException if contents supplied is missing
      */
     public static String parseKeywordExpense(String userInput, String leftDelimiter, String rightDelimiter)
-            throws ExpenseEmptyFieldException, ExpenseAmountException {
+            throws ExpenseEmptyFieldException, ExpenseAmountException, ExpenseExtraFieldException {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
         assert leftDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
         assert rightDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
@@ -97,6 +116,7 @@ public class ExpenseParser {
         } else {
             rightOfDelimiter = stripLeftOfDelimiter[LEFT_SIDE];
         }
+        checkNumberOfDelimiters(rightOfDelimiter, leftDelimiter);
         String[] stripRightOfDelimiter = rightOfDelimiter.split(rightDelimiter, SPLIT_IN_HALF);
         String result = stripRightOfDelimiter[LEFT_SIDE].trim();
         if (leftDelimiter.equals(AMOUNT_DELIMITER)) {

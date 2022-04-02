@@ -3,6 +3,7 @@ package seedu.allonus.expense;
 import org.junit.jupiter.api.Test;
 import seedu.allonus.expense.exceptions.ExpenseAmountException;
 import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
+import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
 import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
 
 import java.time.format.DateTimeParseException;
@@ -33,7 +34,7 @@ class ExpenseParserTest {
             assertEquals(category, "Movie");
             String remarks = parseKeywordExpense(testInput, "r/", "[dacr]/");
             assertEquals(remarks, "This is a remark");
-        } catch (ExpenseAmountException | ExpenseEmptyFieldException e) {
+        } catch (ExpenseAmountException | ExpenseEmptyFieldException | ExpenseExtraFieldException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -78,6 +79,8 @@ class ExpenseParserTest {
         } catch (ExpenseEmptyFieldException e) {
             System.out.println(e.getMessage());
         } catch (ExpenseMissingFieldException e) {
+            System.out.println(e.getMessage());
+        } catch (ExpenseExtraFieldException e) {
             System.out.println(e.getMessage());
         }
 

@@ -2,6 +2,7 @@ package seedu.allonus.expense;
 
 
 
+import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
 import seedu.allonus.storage.StorageFile;
 
 import seedu.allonus.expense.exceptions.ExpenseAmountException;
@@ -25,7 +26,7 @@ import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
  * The core function of the expense tracker, which executes user commands based on keywords.
  */
 public class ExpenseTracker {
-    public static final String INCORRECT_NUMBER_OF_FIELDS = "Incorrect number of fields!";
+    public static final String INVALID_INPUT = "Invalid input!";
     public static final String NEW_REMARKS_VALUE_SET = "New remarks value set!";
     private static final String EXPENSE_WELCOME_MESSAGE = "Welcome to Expense Tracker";
     private static final ArrayList<Expense> expenseList = new ArrayList<>();
@@ -57,6 +58,9 @@ public class ExpenseTracker {
     public static final String LOG_LIST_INTENT = "User wants to list all expenses made";
     public static final String LOG_INVALID_COMMANDS = "User entered invalid commands";
     public static final String MSG_INVALID_COMMANDS = "Invalid command!";
+    public static final String MSG_INVALID_EDIT_FIELD = "Invalid field to edit! Valid fields are:\nDATE, AMOUNT, "
+            +
+            "CATEGORY, REMARKS";
     public static final String LOG_RETURN_TO_MENU_INTENT = "User wants to return to the main menu";
     public static final String CHOSEN_EXPENSE_TO_EDIT = "Here is the expense record you have chosen to edit:\n";
     public static final String CHOSEN_FIELD_TO_EDIT = "Which field would you like to edit? "
@@ -196,7 +200,7 @@ public class ExpenseTracker {
                 try {
                     editField(fieldToEdit, toBeEdited);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(INCORRECT_NUMBER_OF_FIELDS);
+                    System.out.println(INVALID_INPUT);
                 }
             }
         }
@@ -212,7 +216,7 @@ public class ExpenseTracker {
      * @throws IndexOutOfBoundsException if new value is missing (without spaces)
      */
     private static void editField(String fieldToEdit, Expense toBeEdited) throws IndexOutOfBoundsException {
-        String[] newFields = fieldToEdit.split(" ");
+        String[] newFields = fieldToEdit.split(" ", 2);
         String field = newFields[0];
         String newValue = newFields[1].trim();
         if (newValue.length() == 0) {
@@ -254,7 +258,7 @@ public class ExpenseTracker {
             case ("done"):
                 return;
             default:
-                System.out.println(MSG_INVALID_COMMANDS);
+                System.out.println(MSG_INVALID_EDIT_FIELD);
                 return;
             }
         }
@@ -335,6 +339,8 @@ public class ExpenseTracker {
             System.out.println(e.getMessage());
         } catch (ExpenseEmptyFieldException e) {
             System.out.println(e.getMessage());
+        } catch (ExpenseExtraFieldException e) {
+            System.out.println(e.getMessage());
         }
 
     }
@@ -379,6 +385,7 @@ public class ExpenseTracker {
         } else {
             try {
                 index = parseEditExpense(rawInput);
+                editExpense(expenseList, index, ui);
             } catch (IndexOutOfBoundsException e) {
                 logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
                 System.out.println(MSG_EMPTY_INDEX);
@@ -386,7 +393,7 @@ public class ExpenseTracker {
                 logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
                 System.out.println(MSG_INVALID_INDEX_TYPE);
             }
-            editExpense(expenseList, index, ui);
+
         }
     }
 
