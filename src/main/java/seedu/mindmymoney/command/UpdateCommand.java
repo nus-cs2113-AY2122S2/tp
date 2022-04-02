@@ -31,6 +31,17 @@ import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
+import static seedu.mindmymoney.data.CreditCardList.isEqualName;
+import static seedu.mindmymoney.data.CreditCardList.isEqualCashback;
+import static seedu.mindmymoney.data.CreditCardList.isEqualCardLimit;
+import static seedu.mindmymoney.data.CreditCardList.isEqualBalance;
+import static seedu.mindmymoney.data.ExpenditureList.isEqualCategory;
+import static seedu.mindmymoney.data.ExpenditureList.isEqualPaymentMethod;
+import static seedu.mindmymoney.data.ExpenditureList.isEqualDescription;
+import static seedu.mindmymoney.data.ExpenditureList.isEqualAmount;
+import static seedu.mindmymoney.data.ExpenditureList.isEqualTime;
+import static seedu.mindmymoney.data.IncomeList.isEqualIncomeCategory;
+import static seedu.mindmymoney.data.IncomeList.isEqualIncomeAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
@@ -157,11 +168,11 @@ public class UpdateCommand extends Command {
      */
     public boolean isSimilarExpenditure(int index, String newPaymentMethod, String newCategory, String newDescription,
                              float newAmountAsFloat, String newTime) {
-        if (expenditureList.get(index).getPaymentMethod().equals(newPaymentMethod)
-                && expenditureList.get(index).getCategory().equals(newCategory)
-                && expenditureList.get(index).getDescription().equals(newDescription)
-                && expenditureList.get(index).getAmount() == newAmountAsFloat
-                && expenditureList.get(index).getTime().equals(newTime)) {
+        if (isEqualPaymentMethod(expenditureList, index, newPaymentMethod)
+                && isEqualCategory(expenditureList, index, newCategory)
+                && isEqualDescription(expenditureList, index, newDescription)
+                && isEqualAmount(expenditureList, index, newAmountAsFloat)
+                && isEqualTime(expenditureList, index, newTime)) {
             return true;
         }
         return false;
@@ -176,10 +187,10 @@ public class UpdateCommand extends Command {
         try {
             String[] parseUpdateInput = updateInput.split(" ");
 
-            //Get index to update
+            // Get index to update
             String indexAsString = parseUpdateInput[INDEX_OF_SECOND_ITEM];
 
-            //Parse data from input
+            // Parse data from input
             String newCardName = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_NAME,
                     FLAG_OF_CASHBACK);
             String newCashBack = parseInputWithCommandFlag(updateInput, FLAG_OF_CASHBACK,
@@ -224,10 +235,10 @@ public class UpdateCommand extends Command {
      */
     public boolean isSimilarCreditCard(int index, String newCardName, double newCashback, float newCardLimit,
                              float newCardBalance) {
-        if (creditCardList.get(index).getNameOfCard().equals(newCardName)
-                && creditCardList.get(index).getCashback() == newCashback
-                && creditCardList.get(index).getMonthlyCardLimit() == newCardLimit
-                && creditCardList.get(index).getBalance() == newCardBalance) {
+        if (isEqualName(creditCardList, index, newCardName)
+                && isEqualCashback(creditCardList, index, newCashback)
+                && isEqualCardLimit(creditCardList, index, newCardLimit)
+                && isEqualBalance(creditCardList, index, newCardBalance)) {
             return true;
         }
         return false;
@@ -284,8 +295,8 @@ public class UpdateCommand extends Command {
      * @return true if fields are similar, false otherwise.
      */
     public boolean isSimilarIncome(int index, int newAmount, String newCategory) {
-        if (incomeList.get(index).getCategory().equals(newCategory)
-                && incomeList.get(index).getAmount() == newAmount) {
+        if (isEqualIncomeCategory(incomeList, index, newCategory)
+                && isEqualIncomeAmount(incomeList, index, newAmount)) {
             return true;
         }
         return false;
