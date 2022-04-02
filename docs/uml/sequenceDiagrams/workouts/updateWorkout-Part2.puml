@@ -8,7 +8,7 @@ title Sequence Diagram of `WorkoutList#updateWorkout()`
 hide footbox
 
 participant "workoutList\n:WorkoutList" AS wl
-participant "updatedWorkout:\nWorkout" AS workout
+participant "updatedWorkout\n:Workout" AS workout
 
 activate wl
 

@@ -74,5 +74,5 @@ deactivate FileManager
 WerkIt <-- updateCommand
 deactivate updateCommand
 
-destroy deleteCommand
+destroy updateCommand
 @enduml
