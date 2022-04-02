@@ -352,7 +352,7 @@ public class ModHappyParserTest {
             fail();
         }
     }
-    
+
      */
 
     @Test
@@ -492,11 +492,14 @@ public class ModHappyParserTest {
         }
     }
 
+    /*
     @Test
     public void parse_editCommand_task_unnecessaryArgs() {
         final String testString = "edit task 1 blahblah";
         testParseCommand_expectInvalidExcessArgumentException(testString);
     }
+    
+     */
 
     @Test
     public void parse_editCommand_task_noOptionalFlags() {
