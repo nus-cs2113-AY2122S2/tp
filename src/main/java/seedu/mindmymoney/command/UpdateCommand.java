@@ -121,7 +121,11 @@ public class UpdateCommand extends Command {
             }
             LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             String newTime = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
+            if (isSimilarExpenditure(indexToUpdate, newPaymentMethod, newCategory, newDescription, newAmountAsFloat,
+                    newTime)) {
+                throw new MindMyMoneyException("Expense fields to be updated is similar to the expense in the list.\n" +
+                        "Please make sure the field descriptions you want to change are different.");
+            }
             //Create new expenditure object to substitute in
             Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,
                     newAmountAsFloat, newTime);
@@ -138,6 +142,29 @@ public class UpdateCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Please input a valid index");
         }
+    }
+
+    /**
+     * Checks if the fields in the update command is similar to the fields in the expenditure in the list.
+     *
+     * @param index index of expenditure to update.
+     * @param newPaymentMethod new payment method field to be updated.
+     * @param newCategory new category field to be updated.
+     * @param newDescription new description field to be updated.
+     * @param newAmountAsFloat new amount field to be updated.
+     * @param newTime new time field to be updated.
+     * @return true if fields are similar, false otherwise.
+     */
+    public boolean isSimilarExpenditure(int index, String newPaymentMethod, String newCategory, String newDescription,
+                             float newAmountAsFloat, String newTime) {
+        if (expenditureList.get(index).getPaymentMethod().equals(newPaymentMethod)
+                && expenditureList.get(index).getCategory().equals(newCategory)
+                && expenditureList.get(index).getDescription().equals(newDescription)
+                && expenditureList.get(index).getAmount() == newAmountAsFloat
+                && expenditureList.get(index).getTime().equals(newTime)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -162,9 +189,16 @@ public class UpdateCommand extends Command {
             String newCardBalance = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_BALANCE,
                     FLAG_END_VALUE);
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
-
-            CreditCard newCreditCard = new CreditCard(newCardName, Double.parseDouble(newCashBack),
-                    Float.parseFloat(newCardLimit), Float.parseFloat(newCardBalance));
+            double newCashBackAsDouble = Double.parseDouble(newCashBack);
+            float newCardLimitAsFloat = Float.parseFloat(newCardLimit);
+            float newCardBalanceAsFloat = Float.parseFloat(newCardBalance);
+            if (isSimilarCreditCard(indexToUpdate, newCardName, newCashBackAsDouble, newCardLimitAsFloat,
+                    newCardBalanceAsFloat)) {
+                throw new MindMyMoneyException("Credit Card fields to be updated is similar to the credit card in " +
+                        "the list.\n" + "Please make sure the field descriptions you want to change are different.");
+            }
+            CreditCard newCreditCard = new CreditCard(newCardName, newCashBackAsDouble,
+                    newCardLimitAsFloat, newCardBalanceAsFloat);
 
             creditCardList.set(indexToUpdate, newCreditCard);
             System.out.println(PrintStrings.LINE + "Successfully set credit card " + indexAsString + " to :\n"
@@ -176,6 +210,27 @@ public class UpdateCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Please input a valid index");
         }
+    }
+
+    /**
+     * Checks if the fields in the update command is similar to the fields in the credit card in the list.
+     *
+     * @param index index of credit card to update.
+     * @param newCardName new card name field to be updated.
+     * @param newCashback new cash back field to be updated.
+     * @param newCardLimit new card limit field to be updated.
+     * @param newCardBalance new card balance field to be updated.
+     * @return true if fields are similar, false otherwise.
+     */
+    public boolean isSimilarCreditCard(int index, String newCardName, double newCashback, float newCardLimit,
+                             float newCardBalance) {
+        if (creditCardList.get(index).getNameOfCard().equals(newCardName)
+                && creditCardList.get(index).getCashback() == newCashback
+                && creditCardList.get(index).getMonthlyCardLimit() == newCardLimit
+                && creditCardList.get(index).getBalance() == newCardBalance) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -201,7 +256,10 @@ public class UpdateCommand extends Command {
                     FLAG_END_VALUE);
             testIncomeCategory(inputCategory);
             String newCategory = capitalise(inputCategory);
-
+            if (isSimilarIncome(indexToUpdate, newAmountAsInt, newCategory)) {
+                throw new MindMyMoneyException("Income fields to be updated is similar to the income in the list.\n" +
+                        "Please make sure the field descriptions you want to change are different.");
+            }
             Income newIncome = new Income(newAmountAsInt, newCategory);
             incomeList.set(indexToUpdate, newIncome);
 
@@ -215,6 +273,22 @@ public class UpdateCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Please input a valid index");
         }
+    }
+
+    /**
+     * Checks if the fields in the update command is similar to the fields in the income in the list.
+     *
+     * @param index index of income to update.
+     * @param newAmount new amount to be updated.
+     * @param newCategory new category to be updated.
+     * @return true if fields are similar, false otherwise.
+     */
+    public boolean isSimilarIncome(int index, int newAmount, String newCategory) {
+        if (incomeList.get(index).getCategory().equals(newCategory)
+                && incomeList.get(index).getAmount() == newAmount) {
+            return true;
+        }
+        return false;
     }
 
     /**
