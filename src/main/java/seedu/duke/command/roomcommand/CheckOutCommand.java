@@ -2,12 +2,12 @@ package seedu.duke.command.roomcommand;
 
 import java.io.IOException;
 
-import seedu.duke.RoomList;
+import seedu.duke.roomlists.RoomList;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.AssignmentMap;
-import seedu.duke.Room;
+import seedu.duke.roomlists.Room;
 import seedu.duke.exceptions.InvalidRoomNumberException;
 import seedu.duke.command.Command;
 

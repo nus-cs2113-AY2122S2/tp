@@ -7,7 +7,8 @@ import seedu.duke.command.Command;
 import seedu.duke.command.assigncommand.AssignHousekeeperCommand;
 import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
 import seedu.duke.command.roomcommand.CheckInCommand;
-
+import seedu.duke.roomlists.Room;
+import seedu.duke.roomlists.RoomList;
 
 
 public class AssignHousekeeperTest {

@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.roomlists;
 
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.storage.RoomFileManager;

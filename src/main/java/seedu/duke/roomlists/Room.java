@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.roomlists;
 
 /**
  * Room class has the parameter of roomId, level type and vacancy status.
