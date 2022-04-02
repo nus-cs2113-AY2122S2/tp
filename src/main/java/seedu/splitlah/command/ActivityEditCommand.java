@@ -22,19 +22,29 @@ public class ActivityEditCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The activity was edited successfully.\n";
 
-    private final int activityId;
-    private final int sessionId;
-    private final String activityName;
-    private double totalCost;
-    private final String payer;
-    private final String[] involvedList;
-    double[] costList;
-    private final double gst;
-    private final double serviceCharge;
-
-    private static final double ZERO_COST_PAID = 0;
+    private final static double ZERO_COST_PAID = 0;
     public static final double ZERO_COST_OWED = 0;
     private static final int NO_COST = 0;
+    private static final int MISSING_ACTIVITYID = -1;
+    private static final int MISSING_SESSIONID = -1;
+    private static final double MISSING_TOTALCOST = -1;
+    private static final double MISSING_GST = -1;
+    private static final double MISSING_SERVICECHARGE = -1;
+    private static final double[] MISSING_COSTLIST = null;
+    private static final String MISSING_ACTIVITYNAME = null;
+    private static final String MISSING_PAYER = null;
+    private static final String[] MISSING_INVOLVEDLIST = null;
+
+    private int activityId = MISSING_ACTIVITYID;
+    private int sessionId = MISSING_SESSIONID;
+    private String activityName = MISSING_ACTIVITYNAME;
+    private double totalCost = MISSING_TOTALCOST;
+    private String payer = MISSING_PAYER;
+    private String[] involvedList = MISSING_INVOLVEDLIST;
+    double[] costList = MISSING_COSTLIST;
+    private double gst = MISSING_GST;
+    private double serviceCharge = MISSING_SERVICECHARGE;
+
 
     /**
      * Initializes an ActivityEditCommand object.
@@ -55,9 +65,6 @@ public class ActivityEditCommand extends Command {
                                Double totalCost, double[] costList, double gst, double serviceCharge) {
         assert sessionId > 0 : Message.ASSERT_ACTIVITYEDIT_SESSIONID_LESS_THAN_ONE;
         assert activityName != null : Message.ASSERT_ACTIVITYEDIT_ACTIVITY_NAME_MISSING;
-        assert payer != null : Message.ASSERT_ACTIVITYEDIT_PAYER_NAME_MISSING;
-        assert involvedList != null : Message.ASSERT_ACTIVITYEDIT_INVOLVED_LIST_ARRAY_NULL;
-        assert activityId != -1 : Message.ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING;
         this.activityId = activityId;
         this.sessionId = sessionId;
         this.activityName = activityName;
