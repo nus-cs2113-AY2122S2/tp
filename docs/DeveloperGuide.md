@@ -521,10 +521,10 @@ Subsequently, `WorkoutList#updateWorkout()` method will be called.
 
 The following sequence diagram is the detailed procedure for Step 4's `WorkoutList#updateWorkout()`:
 <br><br>
-![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/workouts/images/updateWorkout-Part2.png)
+![Update Workout Detailed Sequence Diagram](uml/sequenceDiagrams/workouts/images/updateWorkout-Part2.png)
 
-<span class="box info"> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
- `WorkoutList#deleteWorkout()` have been omitted.</span>
+<span class="box info"> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, 
+and exception throws in `WorkoutList#updateWorkout()` have been omitted.</span>
 
 **(Before Step 4.1)** Methods from the `String` and `Integer` classes are called to parse the
 argument given to `WorkoutList#updateWorkout()` to obtain the following information required to update a
