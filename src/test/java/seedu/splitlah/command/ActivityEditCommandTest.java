@@ -144,10 +144,7 @@ class ActivityEditCommandTest {
     public void run_editActivityOverallCostToInvalidCost_overallCostIsNotEdited() throws InvalidDataException {
         String userInput = "activity /edit /sid 1 /aid 1 /co -1";
         Command command = Parser.getCommand(userInput);
-        assertEquals(ActivityEditCommand.class, command.getClass());
-        command.run(manager);
-        Activity editedActivity = manager.getProfile().getSession(1).getActivity(1);
-        assertEquals(15, editedActivity.getTotalCost());
+        assertEquals(InvalidCommand.class, command.getClass());
     }
 
     /**
@@ -200,10 +197,7 @@ class ActivityEditCommandTest {
             throws InvalidDataException {
         String userInput = "activity /edit /sid 1 /aid 1 /sc -1";
         Command command = Parser.getCommand(userInput);
-        assertEquals(ActivityEditCommand.class, command.getClass());
-        command.run(manager);
-        Activity editedActivity = session.getActivity(1);
-        assertEquals(15, editedActivity.getTotalCost());
+        assertEquals(InvalidCommand.class, command.getClass());
     }
 
     /**
