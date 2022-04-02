@@ -1,6 +1,5 @@
 package seedu.splitlah.command;
 
-import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
@@ -9,11 +8,12 @@ import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
  * Represents a command which displays the details of each Activity object within a Session object.
+ *
+ * @author Tianle
  */
 public class ActivityListCommand extends Command {
 
@@ -25,10 +25,7 @@ public class ActivityListCommand extends Command {
         ParserUtils.SESSION_ID_DELIMITER
     };
 
-    private int sessionId;
-
-    private static final String LIST_HEADER_PREPEND = "List of activities (Session Id #";
-    private static final String LIST_CLOSER_POSTPEND = ")";
+    private final int sessionId;
 
     /**
      * Initializes an ActivityListCommand object.
@@ -50,9 +47,10 @@ public class ActivityListCommand extends Command {
         try {
             Session sessionToBePrinted = manager.getProfile().getSession(sessionId);
             manager.getUi().printlnMessage(sessionToBePrinted.getActivityListSummaryString());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYLIST_ACTIVITIES_LISTED + sessionId);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
-            manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND + sessionId);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND + sessionId);
         }
     }
 

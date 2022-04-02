@@ -15,7 +15,7 @@ public class Group implements Serializable {
 
     private PersonList personList;
     private String groupName;
-    private int groupId;
+    private final int groupId;
 
     private static final int OFFSET = 1;
     private static final String SEPARATOR = " | ";
@@ -70,6 +70,15 @@ public class Group implements Serializable {
     }
 
     /**
+     * Updates the PersonList of this Group object to the specified personList.
+     *
+     * @param personList A PersonList object representing the updated PersonList of the group.
+     */
+    public void setPersonList(PersonList personList) {
+        this.personList = personList;
+    }
+
+    /**
      * Checks whether the Group object has at least one participant.
      *
      * @return true if the Group object has at least one participant,
@@ -77,15 +86,6 @@ public class Group implements Serializable {
      */
     public boolean isGroupEmpty() {
         return personList.isEmpty();
-    }
-
-    /**
-     * Adds a Person object to the group.
-     *
-     * @param person A Person object to be added into the group.
-     */
-    public void addPerson(Person person) {
-        personList.addPerson(person);
     }
 
     /**
@@ -128,17 +128,6 @@ public class Group implements Serializable {
     }
 
     /**
-     * Removes a Person object from the Group object.
-     *
-     * @param personName A String object that represents the person's name.
-     * @throws InvalidDataException If the Person is not in the Group object.
-     */
-    public void removePerson(String personName) throws InvalidDataException {
-        Person personToBeRemoved = getPersonFromGroup(personName);
-        personList.removePerson(personToBeRemoved);
-    }
-
-    /**
      * Returns the number of participants in the group.
      *
      * @return An integer object that represents that total number of participants in the group.
@@ -169,12 +158,13 @@ public class Group implements Serializable {
         }
 
         StringBuilder outputString = new StringBuilder("Group Id ");
-        outputString.append("#").append(groupId).append("  --").append("\n").append("Participants: ");
+        outputString.append("#").append(groupId).append("  --").append("\n");
+        outputString.append("Name: ").append(groupName).append("\n");
+        outputString.append("Participants:");
         for (int i = 0; i < personList.getSize(); i++) {
             String personName = personList.getPerson(i).getName();
             outputString.append("\n ").append(i + OFFSET).append(". ").append(personName);
         }
         return outputString.toString();
     }
-
 }

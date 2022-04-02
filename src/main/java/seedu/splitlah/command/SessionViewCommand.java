@@ -10,7 +10,7 @@ import seedu.splitlah.ui.TextUI;
 import java.util.logging.Level;
 
 /**
- * Represents a command object that produces a summary of expenditure for a specified Session object.
+ * Represents a command that displays the full details of a specified Session object.
  *
  * @author Saurav
  */
@@ -18,12 +18,8 @@ public class SessionViewCommand extends Command {
 
     private final int sessionId;
 
-    // MISC CONSTANTS
-    private static final String VIEW_HEADER_PREPEND = "-- (Session Id #";
-    private static final String VIEW_HEADER_POSTPEND = ") --";
-
     /**
-     * Initializes a SessionSummaryCommand object.
+     * Initializes a SessionViewCommand object.
      *
      * @param sessionId An integer that uniquely identifies a session.
      */
@@ -44,15 +40,11 @@ public class SessionViewCommand extends Command {
         Session session;
         try {
             session = profile.getSession(sessionId);
-            ui.printlnMessage(VIEW_HEADER_PREPEND + sessionId + VIEW_HEADER_POSTPEND);
-            ui.printlnMessage(session.toString());
+            ui.printlnMessageWithDivider(session.toString());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONVIEW_SESSION_VIEWED + sessionId);
         } catch (InvalidDataException e) {
             ui.printlnMessage(e.getMessage());
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED + "\n"
-                    + e.getMessage());
-            return;
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED + sessionId);
         }
-
-        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONVIEW_SESSION_VIEWED + sessionId);
     }
 }

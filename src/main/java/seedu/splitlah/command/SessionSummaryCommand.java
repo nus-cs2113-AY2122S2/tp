@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
- * Represents a command object that produces a summary of expenditure for a specified Session object.
+ * Represents a command that produces a summary of expenditure for a specified Session object.
  *
  * @author Warren
  */
 public class SessionSummaryCommand extends Command {
 
-    private int sessionId;
+    private final int sessionId;
 
     // MISC CONSTANTS
     private static final String SUMMARY_HEADER_PREPEND = "Summary (Session Id #";

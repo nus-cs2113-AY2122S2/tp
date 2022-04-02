@@ -1,10 +1,8 @@
 package seedu.splitlah.command;
 
-import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.ui.Message;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
@@ -13,10 +11,6 @@ import java.util.logging.Level;
  * @author Ivan
  */
 public class GroupListCommand extends Command {
-
-    public static final String COMMAND_TEXT = "group /list";
-
-    public static final String COMMAND_FORMAT = "Syntax: group /list";
 
     /**
      * Runs the command to list all existing groups managed by the Profile Object.

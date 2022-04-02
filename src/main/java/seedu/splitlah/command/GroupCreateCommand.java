@@ -3,10 +3,14 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.PersonList;
+import seedu.splitlah.data.Profile;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
+
+import java.util.logging.Level;
 
 /**
  * Represents a command that creates a Group object from user input and stores it in the Profile object.
@@ -28,8 +32,8 @@ public class GroupCreateCommand extends Command {
         ParserUtils.PERSON_LIST_DELIMITER
     };
 
-    private String groupName;
-    private String[] personNames;
+    private final String groupName;
+    private final String[] personNames;
 
     /**
      * Initializes a GroupCreateCommand object.
@@ -38,6 +42,8 @@ public class GroupCreateCommand extends Command {
      * @param personNames An array of String objects that represents the involved persons for the group.
      */
     public GroupCreateCommand(String groupName, String[] personNames) {
+        assert groupName != null : Message.ASSERT_GROUPCREATE_GROUP_NAME_NULL;
+        assert personNames != null : Message.ASSERT_GROUPCREATE_PERSONLIST_NULL;
         this.groupName = groupName;
         this.personNames = personNames;
     }
@@ -70,26 +76,28 @@ public class GroupCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        TextUI ui = manager.getUi();
+        Profile profile = manager.getProfile();
+
         boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
         if (hasDuplicates) {
-            manager.getUi().printlnMessage(Message.ERROR_GROUPCREATE_DUPLICATE_NAMES);
+            ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEGROUP);
             return;
         }
 
-        PersonList personList = new PersonList();
-        personList.convertToPersonList(personNames);
-
-        boolean isGroupExists = manager.getProfile().hasGroupName(groupName);
-
+        boolean isGroupExists = profile.hasGroupName(groupName);
         if (isGroupExists) {
-            manager.getUi().printlnMessage(Message.ERROR_GROUPCREATE_DUPLICATE_GROUP_NAME);
+            ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_GROUP);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST);
             return;
         }
-        int newGroupId = manager.getProfile().getNewGroupId();
-
+        PersonList personList = new PersonList(personNames);
+        int newGroupId = profile.getNewGroupId();
         Group newGroup = new Group(groupName, newGroupId, personList);
-        manager.getProfile().addGroup(newGroup);
+        profile.addGroup(newGroup);
         manager.saveProfile();
-        manager.getUi().printlnMessageWithDivider(SUCCESS_MESSAGE + newGroup);
+        ui.printlnMessageWithDivider(SUCCESS_MESSAGE + newGroup);
+        Manager.getLogger().log(Level.FINEST,Message.LOGGER_GROUPCREATE_GROUP_ADDED + newGroupId);
     }
 }

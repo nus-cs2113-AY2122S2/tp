@@ -3,9 +3,11 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.PersonList;
+import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -19,10 +21,10 @@ public class SessionCreateCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The session was created successfully.";
   
-    private String sessionName;
-    private String[] personNames;
-    private LocalDate sessionDate;
-    private int groupId;
+    private final String sessionName;
+    private final String[] personNames;
+    private final LocalDate sessionDate;
+    private final int groupId;
 
     /**
      * Initializes a SessionCreateCommand object.
@@ -53,36 +55,43 @@ public class SessionCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        TextUI ui = manager.getUi();
+        Profile profile = manager.getProfile();
+
         PersonList personList = new PersonList();
         if (personNames != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
             if (hasDuplicates) {
-                manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
+                ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION);
+                Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATESESSION);
                 return;
             }
-            personList.convertToPersonList(personNames);
+            personList = new PersonList(personNames);
         }
+
         Group group = null;
         if (groupId != -1) {
             try {
-                group = manager.getProfile().getGroup(groupId);
+                group = profile.getGroup(groupId);
                 personList.mergeListOfPersons(group.getPersonList());
             } catch (InvalidDataException dataException) {
-                manager.getUi().printlnMessage(dataException.getMessage());
+                ui.printlnMessage(dataException.getMessage());
                 return;
             }
         }
 
-        boolean isSessionExists = manager.getProfile().hasSessionName(sessionName);
+        boolean isSessionExists = profile.hasSessionName(sessionName);
         if (isSessionExists) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
+            ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_DUPLICATE_NAMES_IN_SESSION_LIST);
             return;
         }
-        int newSessionId = manager.getProfile().getNewSessionId();
+
+        int newSessionId = profile.getNewSessionId();
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList, group);
-        manager.getProfile().addSession(newSession);
+        profile.addSession(newSession);
         manager.saveProfile();
-        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + newSession);
+        ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + newSession);
         Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
     }
 }

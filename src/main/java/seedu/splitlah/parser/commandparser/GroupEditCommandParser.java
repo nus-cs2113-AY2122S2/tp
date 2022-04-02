@@ -6,7 +6,6 @@ import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
-
 /**
  * Represents a command parser that is able to parse user arguments into a GroupEditCommand object.
  */
@@ -15,8 +14,7 @@ public class GroupEditCommandParser implements CommandParser<GroupEditCommand> {
     public static final String COMMAND_TEXT = "group /edit";
 
     public static final String COMMAND_FORMAT =
-        "Syntax: group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>]"
-            + "[</pl [NAME1 NAME2...]>]";
+        "Syntax: group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]";
 
     public static final String[] COMMAND_DELIMITERS = {
         ParserUtils.GROUP_ID_DELIMITER,
@@ -35,7 +33,7 @@ public class GroupEditCommandParser implements CommandParser<GroupEditCommand> {
      */
     @Override
     public GroupEditCommand getCommand(String commandArgs) throws InvalidFormatException {
-        int parsedGroupId = 0;
+        int parsedGroupId;
         try {
             parsedGroupId = Parser.parseGroupId(commandArgs);
         } catch (InvalidFormatException formatException) {
@@ -56,7 +54,7 @@ public class GroupEditCommandParser implements CommandParser<GroupEditCommand> {
         }
 
         boolean hasPersonListDelimiter = false;
-        String [] parsedNames = null;
+        String[] parsedNames = null;
         try {
             parsedNames = Parser.parsePersonList(commandArgs);
             hasPersonListDelimiter = true;
