@@ -1,4 +1,4 @@
-package seedu.sherpass.util.timetable;
+package seedu.sherpass.timetable;
 
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
@@ -28,30 +28,15 @@ import static seedu.sherpass.constant.TimetableConstant.DATE_SPACE_FULL_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.DAYS_IN_A_WEEK;
 
 public class Timetable {
-    private static Timetable timetable;
     private static LocalDate localDate;
     private static ArrayList<Task> tasks;
     private static Ui ui;
 
-    private Timetable(LocalDate localDate, ArrayList<Task> tasks, Ui ui) {
-        this.tasks = tasks;
-        this.localDate = localDate;
-        this.ui = ui;
-    }
 
-    private void setTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui userInterface) {
+    private static void setTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui userInterface) {
         localDate = dateInput;
         tasks = filteredTasks;
         ui = userInterface;
-    }
-
-    public static Timetable prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
-        if (timetable == null) {
-            timetable = new Timetable(dateInput, filteredTasks, ui);
-        } else {
-            timetable.setTimetable(dateInput, filteredTasks, ui);
-        }
-        return timetable;
     }
 
     /**
@@ -85,8 +70,8 @@ public class Timetable {
      */
     public static void showScheduleByDay(LocalDate dateInput, TaskList taskList, Ui ui) {
         ArrayList<Task> filteredTasks = taskList.getFilteredTasksByDate(dateInput);
-        Timetable timetable = prepareTimetable(dateInput, filteredTasks, ui);
-        timetable.printSchedule();
+        setTimetable(dateInput, filteredTasks, ui);
+        printSchedule();
     }
 
 
@@ -125,7 +110,7 @@ public class Timetable {
         TimetableLogic.showMonthlySchedule(taskList, ui, JANUARY);
     }
 
-    public static void showFeburarySchedule(TaskList taskList, Ui ui) {
+    public static void showFebruarySchedule(TaskList taskList, Ui ui) {
         TimetableLogic.showMonthlySchedule(taskList, ui, FEBRUARY);
     }
 
@@ -149,7 +134,7 @@ public class Timetable {
         TimetableLogic.showMonthlySchedule(taskList, ui, JULY);
     }
 
-    public static void showAuguestSchedule(TaskList taskList, Ui ui) {
+    public static void showAugustSchedule(TaskList taskList, Ui ui) {
         TimetableLogic.showMonthlySchedule(taskList, ui, AUGUST);
     }
 
@@ -169,8 +154,8 @@ public class Timetable {
         TimetableLogic.showMonthlySchedule(taskList, ui, DECEMBER);
     }
 
-    private void printSchedule() {
-        // assert localDate != null;
+    private static void printSchedule() {
+        assert localDate != null;
         String day = localDate.format(dayOnlyFormat);
         String date = localDate.format(outputDateOnlyFormat);
         long taskLength = TimetableLogic.findTaskLength(tasks);
@@ -181,25 +166,6 @@ public class Timetable {
             TimetablePrinting.printTimetable(day, date, tasks, ui, taskLength, doOnDateLength, partitionLength);
         } else {
             TimetablePrinting.printEmptyTimetable(ui, day, date, partitionLength);
-        }
-    }
-
-    /**
-     * Compare the two timetable object
-     * and whether the arrayList in the timetable are equals.
-     *
-     * @param obj To check if the obj is equals to the given Timetable object.
-     * @return boolean object.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        } else if (obj instanceof Timetable) {
-            Timetable timetable = (Timetable) obj;
-            return timetable.tasks.equals(this.tasks);
-        } else {
-            return false;
         }
     }
 }

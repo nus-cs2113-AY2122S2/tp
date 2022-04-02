@@ -13,7 +13,7 @@ import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.util.parser.TimetableParser;
-import seedu.sherpass.util.timetable.Timetable;
+import seedu.sherpass.timetable.Timetable;
 
 import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
