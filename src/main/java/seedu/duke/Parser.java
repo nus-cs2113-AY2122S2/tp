@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.duke.command.*;
 import seedu.duke.exception.InvalidInputException;
+import seedu.duke.exception.InvalidDateException;
 
 public class Parser {
 
@@ -82,9 +83,12 @@ public class Parser {
             String name = matcher.group("name");
             int id = Integer.parseInt(matcher.group("id"));
             String start = matcher.group("startDate");
-            LocalDate startDate = LocalDate.from(PARSE_FORMAT.parse(start));
             String end = matcher.group("endDate");
+            LocalDate startDate = LocalDate.from(PARSE_FORMAT.parse(start));
             LocalDate endDate = LocalDate.from(PARSE_FORMAT.parse(end));
+            if (!dateStartEndValid(startDate, endDate)) {
+                throw new InvalidDateException("End date cannot be before start date!");
+            }
             String hotel = matcher.group("hotel");
             double price = Double.parseDouble(matcher.group("price"));
             if (price <= 0) {
@@ -93,7 +97,8 @@ public class Parser {
             String country = matcher.group("country");
             int vacancies = Integer.parseInt(matcher.group("vacancies"));
             return new AddCommand(name, id, startDate, endDate, hotel, price, country, vacancies);
-
+        } catch (InvalidDateException e) {
+            return new InvalidDateCommand(e.getMessage());
         } catch (Exception e) {
             return new WrongFormatCommand(e.getMessage());
         }
@@ -166,5 +171,9 @@ public class Parser {
         } catch (Exception e) {
             return new WrongFormatCommand(e.getMessage());
         }
+    }
+
+    public static boolean dateStartEndValid(LocalDate startDate, LocalDate endDate) {
+        return endDate.isAfter(startDate);
     }
 }
