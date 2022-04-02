@@ -35,7 +35,7 @@ public class FamilyTest {
     private static final String ADD_TO_CHILDREN = "Alice has been successfully added to Children"
             + System.lineSeparator();
     private static final String EMPTY_STRING = "";
-    private static final String BASE_OVERVIEW = "Here are your disposable incomes by group:" + System.lineSeparator()
+    private static final String BASE_OVERVIEW = "Here is the overview for your family:" + System.lineSeparator()
             + "1. Parents:" + System.lineSeparator()
             + INDENTATION + "Income: $0.0" + System.lineSeparator()
             + INDENTATION + "Expenditure: $0.0" + System.lineSeparator()
@@ -49,7 +49,9 @@ public class FamilyTest {
             + "3. Children:" + System.lineSeparator()
             + INDENTATION + "Income: $0.0" + System.lineSeparator()
             + INDENTATION + "Expenditure: $0.0" + System.lineSeparator()
-            + INDENTATION + "Disposable: $0.0" + System.lineSeparator();
+            + INDENTATION + "Disposable: $0.0" + System.lineSeparator()
+            + System.lineSeparator()
+            + "Total disposable income in family: $0.0" + System.lineSeparator();
     private static final String PARENTS_LIST = "For Parents:" + System.lineSeparator();
     private static final String MY_GEN_LIST = "For My generation:" + System.lineSeparator();
     private static final String CHILDREN_LIST = "For Children:" + System.lineSeparator();
