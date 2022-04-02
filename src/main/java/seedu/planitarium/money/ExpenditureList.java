@@ -8,6 +8,7 @@ import seedu.planitarium.global.Constants;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 
 public class ExpenditureList extends MoneyList {
@@ -73,6 +74,7 @@ public class ExpenditureList extends MoneyList {
      * @return The total cost of all expenditure in the list
      */
     public Double getTotalExpenditure() {
+        updateList();
         logger.log(Level.INFO, LOG_GET_TOTAL_EXP);
         Double totalAmount = 0.0;
         for (Expenditure item : expenditureArrayList) {
@@ -85,6 +87,7 @@ public class ExpenditureList extends MoneyList {
      * Prints all expenditure entry in the person's list.
      */
     public void printExpenditureList() {
+        updateList();
         logger.log(Level.INFO, LOG_PRINT_LIST);
         int listIndex = 1;
         for (Expenditure item : expenditureArrayList) {
@@ -98,6 +101,7 @@ public class ExpenditureList extends MoneyList {
      * @return The number of expenditure entries
      */
     public int getNumberOfExpenditures() {
+        updateList();
         logger.log(Level.INFO, LOG_GET_NUM_EXP);
         return numberOfExpenditures;
     }
@@ -258,6 +262,7 @@ public class ExpenditureList extends MoneyList {
      * @param category    The user's specified category
      */
     public void find(String description, Integer category) {
+        updateList();
         logger.log(Level.INFO, LOG_FIND);
         if (category == 0) {
             matchString(description);
@@ -304,8 +309,9 @@ public class ExpenditureList extends MoneyList {
      * Iterates through expenditure list and removes all expired expenditure.
      */
     public void updateList() {
-        for (Expenditure item : expenditureArrayList) {
-            checkExpenditureDate(item);
+        for (Iterator<Expenditure> iterator = expenditureArrayList.iterator(); iterator.hasNext();){
+            Expenditure item = iterator.next();
+            checkExpenditureDate(iterator, item);
         }
     }
 
@@ -315,11 +321,11 @@ public class ExpenditureList extends MoneyList {
      *
      * @param item The expenditure object
      */
-    private void checkExpenditureDate(Expenditure item) {
-        LocalDate itemDate = item.getInitDate();
-        if (itemDate.getYear() <= LocalDate.now().getYear()
-                && itemDate.getMonthValue() < LocalDate.now().getMonthValue()) {
-            expenditureArrayList.remove(item);
+    private void checkExpenditureDate(Iterator<Expenditure> iterator, Expenditure item) {
+        int dateBefore = item.getInitDate().compareTo(LocalDate.now().withDayOfMonth(1));
+        if (dateBefore < 0 && !item.isPermanent()) {
+            iterator.remove();
+            numberOfExpenditures--;
         }
     }
 

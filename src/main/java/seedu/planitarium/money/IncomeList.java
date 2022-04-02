@@ -8,6 +8,7 @@ import seedu.planitarium.global.Constants;
 import java.lang.invoke.ConstantBootstraps;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 
 public class IncomeList extends MoneyList {
@@ -71,6 +72,7 @@ public class IncomeList extends MoneyList {
      * @return The total amount of all income in the list
      */
     public Double getTotalIncome() {
+        updateList();
         logger.log(Level.INFO, LOG_GET_TOTAL_INC);
         Double totalAmount = 0.0;
         for (Income item : incomeArrayList) {
@@ -83,6 +85,7 @@ public class IncomeList extends MoneyList {
      * Prints all income in the person's income list.
      */
     public void printIncomeList() {
+        updateList();
         logger.log(Level.INFO, LOG_PRINT_LIST);
         int listIndex = 1;
         for (Income item : incomeArrayList) {
@@ -96,6 +99,7 @@ public class IncomeList extends MoneyList {
      * @return The number of income
      */
     public int getNumberOfIncomes() {
+        updateList();
         logger.log(Level.INFO, LOG_GET_NUM_INC);
         return numberOfIncomes;
     }
@@ -229,6 +233,7 @@ public class IncomeList extends MoneyList {
      * @param description The user's search string.
      */
     public void find(String description) {
+        updateList();
         logger.log(Level.INFO, LOG_FIND);
         for (Income item : incomeArrayList) {
             matchString(description, item);
@@ -253,8 +258,9 @@ public class IncomeList extends MoneyList {
      * Iterates through income list and removes all expired income.
      */
     public void updateList() {
-        for (Income item : incomeArrayList) {
-            checkIncomeDate(item);
+        for (Iterator<Income> iterator = incomeArrayList.iterator(); iterator.hasNext();){
+            Income item = iterator.next();
+            checkIncomeDate(iterator, item);
         }
     }
 
@@ -264,11 +270,11 @@ public class IncomeList extends MoneyList {
      *
      * @param item The income object
      */
-    private void checkIncomeDate(Income item) {
-        LocalDate itemDate = item.getInitDate();
-        if (itemDate.getYear() <= LocalDate.now().getYear()
-                && itemDate.getMonthValue() < LocalDate.now().getMonthValue()) {
-            incomeArrayList.remove(item);
+    private void checkIncomeDate(Iterator<Income> iterator, Income item) {
+        int dateBefore = item.getInitDate().compareTo(LocalDate.now().withDayOfMonth(1));
+        if (dateBefore < 0 && !item.isPermanent()) {
+            iterator.remove();
+            numberOfIncomes--;
         }
     }
 
