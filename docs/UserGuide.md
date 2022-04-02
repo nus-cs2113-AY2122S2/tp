@@ -292,7 +292,7 @@ Example of usage:
 
 > Edits an entry from your list of tracked expenditures.
 
-Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>]`
+Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>]`
 
 * **GROUP_INDEX** refers to the index of the group that you belong to.
 * **USER_INDEX** refers to the index of that is tagged to you.
