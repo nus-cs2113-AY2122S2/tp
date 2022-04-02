@@ -1,7 +1,5 @@
 package seedu.duke.exceptions;
 
-import seedu.duke.exceptions.HotelLiteManagerException;
-
 /**
  * Represents an exception which would be thrown when the item that the user is searching for within the item list
  * is not found.
