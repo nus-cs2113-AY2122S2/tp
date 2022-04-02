@@ -120,6 +120,18 @@ class SessionCreateCommandTest {
     }
 
     /**
+     * Checks if session is created with invalid person names.
+     */
+    @Test
+    public void run_hasInvalidPersonName_sessionListSizeRemainsTwo() {
+        String userInput = "session /create /n Class gathering /d 15-02-2022 /pl alice Xae1vr charlie";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+
+        assertEquals(2, manager.getProfile().getSessionList().size());
+    }
+
+    /**
      * Checks if session is created with duplicated person names.
      */
     @Test

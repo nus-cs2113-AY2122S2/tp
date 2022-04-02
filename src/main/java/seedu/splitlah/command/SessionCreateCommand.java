@@ -67,6 +67,11 @@ public class SessionCreateCommand extends Command {
                 return;
             }
             personList = new PersonList(personNames);
+            if (personNames.length != personList.getSize()) {
+                ui.printlnMessage(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
+                Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_CREATESESSION);
+                return;
+            }
         }
 
         Group group = null;
@@ -79,6 +84,8 @@ public class SessionCreateCommand extends Command {
                 return;
             }
         }
+
+
 
         boolean isSessionExists = profile.hasSessionName(sessionName);
         if (isSessionExists) {

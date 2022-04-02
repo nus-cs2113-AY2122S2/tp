@@ -163,6 +163,9 @@ public abstract class Message {
     public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION =
             "There are duplicate names in the person list for the session you are trying to create. "
                     + "Please rectify and try again.";
+    public static final String ERROR_PERSONLIST_CONTAINS_INVALID_NAME =
+            "There are invalid names in the person list for the session you are trying to create. "
+                    + "Please rectify and try again.";
     public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP =
             "There are duplicate names in the person list for the group you are trying to create. "
                     + "Please rectify and try again.";
@@ -173,6 +176,9 @@ public abstract class Message {
             "Name duplicates exist but not detected.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATESESSION =
             "An Session object failed to be added into the list of sessions because there are duplicate names in"
+                    + "the person list.";
+    public static final String LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_CREATESESSION =
+            "An Session object failed to be added into the list of sessions because there are names in"
                     + "the person list.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEGROUP =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
