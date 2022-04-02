@@ -5,11 +5,12 @@ import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.EmptyItemPaxException;
 import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.InvalidItemPaxException;
+import seedu.duke.exceptions.ItemAlreadyInListException;
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
 import seedu.duke.Ui;
 import seedu.duke.ListContainer;
-import seedu.duke.exceptions.InvalidItemPaxException;
 import seedu.duke.storage.ItemListFileManager;
 
 import java.io.IOException;
@@ -119,14 +120,14 @@ public class AddItemCommand extends Command {
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
+        String nameOfItemToAdd = item.getName();
         assert (item != null) : "Assertion Failed! There is no item within the AddItemCommand object.";
-        boolean isItemAlreadyInTheList = listOfItems.addItemToList(item);
+        boolean isItemAlreadyInTheList = listOfItems.checkForItemDuplicates(nameOfItemToAdd);
         if (isItemAlreadyInTheList == true) {
-            String nameOfItemToAdd = item.getName();
-            nameOfItemToAdd = nameOfItemToAdd.toUpperCase();
-            ui.printItemAlreadyInTheListErrorMessage(nameOfItemToAdd);
-            return;
+            throw new ItemAlreadyInListException();
         }
+
+        listOfItems.addItemToList(item);
         ui.printAddItemAcknowledgementMessage(listOfItems);
         ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemListFileManager.writeItemListToFile(listOfItems);
