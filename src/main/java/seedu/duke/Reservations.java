@@ -24,8 +24,13 @@ public class Reservations {
     }
 
     public void printAllReservations() {
-        for (int i = 0; i < reservations.size(); i++) {
-            System.out.println(i + ". " + reservations.get(i).toString());
+        if (reservations.size() == 0) {
+            System.out.println("No reservations added yet!");
+        }
+        else {
+            for (int i = 0; i < reservations.size(); i++) {
+                System.out.println(i + ". " + reservations.get(i).toString());
+            }
         }
     }
 
