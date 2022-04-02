@@ -5,7 +5,13 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.logging.Level;
 
-import seedu.splitlah.data.*;
+import seedu.splitlah.data.Activity;
+import seedu.splitlah.data.ActivityCost;
+import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Profile;
+import seedu.splitlah.data.PersonList;
+import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
@@ -19,7 +25,7 @@ public class ActivityEditCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The activity was edited successfully.\n";
 
-    private final static double ZERO_COST_PAID = 0;
+    private static final double ZERO_COST_PAID = 0;
     public static final double ZERO_COST_OWED = 0;
     private static final int NO_COST = 0;
     private static final int MISSING_ACTIVITYID = -1;
@@ -250,7 +256,9 @@ public class ActivityEditCommand extends Command {
             addAllActivityCost(involvedArrayList, payerAsPerson, DUMMY_ACTIVITYID);
             PersonList involvedPersonList = new PersonList(involvedArrayList);
             session.removeActivity(activityId);
-            Activity newActivity = new Activity(activityId, activityName, totalCost, payerAsPerson, involvedPersonList, gst, serviceCharge);
+            Activity newActivity = new Activity(activityId, activityName, totalCost, payerAsPerson, involvedPersonList,
+                    (gst != MISSING_GST ? gst : oldGst),
+                    (serviceCharge != MISSING_SERVICECHARGE ? serviceCharge : oldServiceCharge));
             session.addActivity(newActivity);
             updateDummyActivityIdsInActivityCosts(session);
             manager.saveProfile();

@@ -86,9 +86,6 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
             // involvedList not provided by user.
         }
 
-        boolean isMissingCost = false;
-        boolean hasDifferentLength = false;
-
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
         } catch (InvalidFormatException exception) {
@@ -107,6 +104,9 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
             throw new InvalidFormatException(invalidMessage);
         }
 
+        boolean isMissingCost = false;
+        boolean hasDifferentLength = false;
+
         if (isMissingCost) {
             hasDifferentLength = involvedList.length != costList.length;
         }
@@ -117,13 +117,13 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
 
         try {
-            gst = Parser.parseGst(commandArgs);
+            gst = Parser.parseGstIncludingZero(commandArgs);
         } catch (InvalidFormatException exception) {
             // gst not provided by user.
         }
 
         try {
-            serviceCharge = Parser.parseServiceCharge(commandArgs);
+            serviceCharge = Parser.parseServiceChargeIncludingZero(commandArgs);
         } catch (InvalidFormatException exception) {
             // serviceCharge not provided by user.
         }
