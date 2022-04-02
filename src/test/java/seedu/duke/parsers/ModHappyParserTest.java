@@ -25,7 +25,7 @@ import seedu.duke.commands.SaveCommand;
 import seedu.duke.commands.TagCommand;
 import seedu.duke.exceptions.AdditionalParameterException;
 import seedu.duke.exceptions.InvalidNumberException;
-import seedu.duke.exceptions.InvalidExcessArgumentException;
+import seedu.duke.exceptions.ExcessArgumentException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.data.Module;
@@ -48,7 +48,7 @@ public class ModHappyParserTest {
     }
 
     private void testParseCommand_expectInvalidExcessArgumentException(String testString) {
-        assertThrows(InvalidExcessArgumentException.class, () -> {
+        assertThrows(ExcessArgumentException.class, () -> {
             parser.parseCommand(testString);
         });
     }
