@@ -519,6 +519,7 @@ public class FileManager {
 
     /**
      * Reloads the data from schedule file to DayList after deletion of workout/plan that is related to the schedule.
+     *
      * @param dayList   The DayList object to store the day schedule in.
      * @return          Returns true if the deleted workout/plan does not affect the current schedule.
      * @throws IOException  If the method is unable to open the schedule file.

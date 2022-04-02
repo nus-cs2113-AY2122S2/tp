@@ -19,7 +19,7 @@ import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
 
 /**
  * This class initiates the various classes/components of WerkIt! and contains the logic code for
@@ -35,7 +35,6 @@ public class WerkIt {
     private DayList dayList;
     private static Logger logger = Logger.getLogger(WerkIt.class.getName());
 
-    private static final String CASCADE_KEYWORD = "/delete";
 
     /**
      * Initialises the components of the WerkIt! application, greets the user, and loads the
@@ -177,11 +176,11 @@ public class WerkIt {
 
                 newCommand.execute();
                 if (newCommand instanceof WorkoutCommand) {
-                    if (newCommand.getUserAction().equals(CASCADE_KEYWORD)) {
+                    if (newCommand.getUserAction().equals(DELETE_ACTION_KEYWORD)) {
                         reloadScheduleFile();
                     }
                 }   else if (newCommand instanceof PlanCommand) {
-                    if (newCommand.getUserAction().equals(CASCADE_KEYWORD)) {
+                    if (newCommand.getUserAction().equals(DELETE_ACTION_KEYWORD)) {
                         reloadScheduleFile();
                     }
                 }
