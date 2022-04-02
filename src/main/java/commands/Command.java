@@ -39,4 +39,6 @@ public abstract class Command {
      * Executes a certain series of actions based on the implementation of the different commands.
      */
     public abstract void execute();
+
+    public abstract String getUserAction();
 }
