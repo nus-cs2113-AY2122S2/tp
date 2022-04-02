@@ -249,8 +249,8 @@ In the current exercise list, there are 13 exercises available.
 
 ---
 ### Create a Workout: `workout /new`
-Creates a new workout. Newly created workout will be stored in the workout list. You can create a plan with the workouts
-you have created. 
+Creates a new workout, which is an exercise with a specified number of repetitions. Newly created workouts are 
+stored in the workouts list. You can create plans with the workouts you have created. 
 
 Format: `workout /new <exercise name> /reps <number of repetitions>`
 
