@@ -2,8 +2,6 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
