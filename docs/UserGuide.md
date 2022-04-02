@@ -526,6 +526,7 @@ Here are all the events in your list:
 
 
 ## Room Related Commands
+This app is targeted for one hotel, thus the room has been fixed and the information of room cannot be modified.
 
 ### Check in a room: `check in`
 Checks in a room according to the room number. The status of room will change to 
@@ -592,7 +593,7 @@ Triple		203			 2			Vaccant			NA
 ```
 
 ### Check room information by level: `check level`
-Checks information of all room at target level
+Checks information of all room at target level (1-4)
 
 Format: `check level LEVEL_NUMBER`
 
@@ -613,7 +614,7 @@ Queen		204			 2			Vacant  			NA
 ```
 
 ### Check room information by category: `check category`
-Checks information of all room at target category
+Checks information of all room at target category (single, double, triple, queen, king, twin)
 
 Format: `check category CATEGORY`
 

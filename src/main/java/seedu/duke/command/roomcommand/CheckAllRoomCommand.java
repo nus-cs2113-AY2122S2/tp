@@ -2,8 +2,8 @@ package seedu.duke.command.roomcommand;
 
 import seedu.duke.AssignmentMap;
 import seedu.duke.ListContainer;
-import seedu.duke.Room;
-import seedu.duke.RoomList;
+import seedu.duke.roomlists.Room;
+import seedu.duke.roomlists.RoomList;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
 
@@ -31,8 +31,9 @@ public class CheckAllRoomCommand extends Command {
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         ui.printTableHeader();
         for (Room room : roomList.getRoomList()) {
-            System.out.println(room.toString() + "\t\t\t"
-                    + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
+            System.out.println(room.toString()
+                    + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+            );
         }
     }
 

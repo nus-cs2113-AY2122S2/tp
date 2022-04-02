@@ -11,6 +11,8 @@ import seedu.duke.itemlists.ItemList;
 import seedu.duke.eventlists.EventList;
 import seedu.duke.eventlists.Event;
 import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.roomlists.Room;
+import seedu.duke.roomlists.RoomList;
 import seedu.duke.satisfactionlists.SatisfactionList;
 import seedu.duke.storage.AssignmentListFileManager;
 import seedu.duke.storage.RoomFileManager;
