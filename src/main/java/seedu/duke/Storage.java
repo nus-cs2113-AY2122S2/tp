@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exception.InvalidDateException;
 import seedu.duke.exception.InvalidInputException;
 
 import java.io.File;
@@ -176,8 +177,14 @@ public class Storage {
             LocalDate startDate = LocalDate.from(Parser.PARSE_FORMAT.parse(start));
             String end = arrayElements[travelPackageEndDateIndex].trim();
             LocalDate endDate = LocalDate.from(Parser.PARSE_FORMAT.parse(end));
+            if (!dateStartEndValid(startDate, endDate)) {
+                throw new InvalidInputException("End date cannot be before start date!");
+            }
             String hotel = arrayElements[travelPackageHotelIndex].trim();
             double price = Double.parseDouble(arrayElements[travelPackagePriceIndex].trim());
+            if (price <= 0) {
+                throw new InvalidInputException("Price should not be less than or equal to 0!");
+            }
             String country = arrayElements[travelPackageCountryIndex].trim();
             int vacancies = Integer.parseInt(arrayElements[travelPackageVacanciesIndex].trim());
             int numParticipants = Integer.parseInt(arrayElements[travelPackageNumParticipantsIndex].trim());
@@ -201,6 +208,10 @@ public class Storage {
             System.out.println("Invalid input! Please enter 'Y' or 'N'.");
 
         }
+    }
+
+    public boolean dateStartEndValid(LocalDate startDate, LocalDate endDate) {
+        return endDate.isAfter(startDate);
     }
 
 }

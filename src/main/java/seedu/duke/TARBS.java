@@ -18,6 +18,7 @@ public class TARBS {
         Scanner sc = new Scanner(System.in);
         while (!endProgram) {
             storage.savePackageToFile(packages);
+            System.out.println();
             System.out.println("Please enter command: ");
             try {
                 Command command = Parser.parse(sc.nextLine());
