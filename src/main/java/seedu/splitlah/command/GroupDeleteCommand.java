@@ -40,22 +40,6 @@ public class GroupDeleteCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for the creation of an GroupDeleteCommand object.
-     *
-     * @param commandArgs The user's arguments.
-     * @return A GroupDeleteCommand object if necessary parameters were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        try {
-            int groupId = Parser.parseGroupId(commandArgs);
-            return new GroupDeleteCommand(groupId);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
-        }
-    }
-
-    /**
      * Runs the command to delete a Group object from the list of groups managed by a Manager Object.
      *
      * @param manager A Manager object that manages the TextUI, Profile and Storage object.
