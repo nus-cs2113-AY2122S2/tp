@@ -126,7 +126,7 @@ public class UpdateCommand extends Command {
                 throw new MindMyMoneyException("Expense fields to be updated is similar to the expense in the list.\n"
                         + "Please make sure the field descriptions you want to change are different.");
             }
-            //Create new expenditure object to substitute in
+            // Create new expenditure object to substitute in
             Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,
                     newAmountAsFloat, newTime);
             expenditureList.set(indexToUpdate, newExpenditure);
