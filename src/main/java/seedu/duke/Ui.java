@@ -27,8 +27,9 @@ public class Ui {
     private static final String END_OF_LIST_LINE = "============ End of the list ==============";
     private static final String MESSAGE_HEADER = "================ Noted! ===================";
     private static final String END_OF_MESSAGE_LINE = "===========================================";
-    private static final String TABLE_HEADER = String.format("%-15s%-15s%-15s%-15s%-15s","Type",
+    private static final String TABLE_HEADER = String.format("%-15s%-15s%-15s%-15s%-15s", "Type",
             "Room Id", "Level", "Status", "Housekeeper");
+
     /**
      * Returns a string containing the user input.
      *

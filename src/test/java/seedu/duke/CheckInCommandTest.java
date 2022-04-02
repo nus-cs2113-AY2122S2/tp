@@ -42,8 +42,8 @@ class CheckInCommandTest {
                 expectedRoom = room;
             }
         }
-        assertEquals("Queen\t\t301\t\t\t 3\t\t\tOccupied", expectedRoom.toString());
 
+        assertEquals(String.format("%-15s%-15s%-15s%-15s", "Queen", "301", "3","Occupied"), expectedRoom.toString());
     }
 
     //unhappy

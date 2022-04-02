@@ -35,7 +35,7 @@ public class CheckOutCommand extends Command {
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
-                if(room.getIsVacant()){
+                if (room.getIsVacant()) {
                     System.out.println("Error! This room is already vacant.");
                     ui.printTableHeader();
                     System.out.println(room.toString()

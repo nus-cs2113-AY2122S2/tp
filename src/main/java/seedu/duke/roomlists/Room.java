@@ -48,11 +48,9 @@ public class Room {
         isVacant = true;
     }
 
-    //"Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHousekeeper Name"
     public String toString() {
-        return String.format("%-15s%-15d%-15d%-15s",getType(),getRoomId(),getLevel(),(getIsVacant() ? "Vacant  " : "Occupied"));
-//        return getType() + "\t\t" + getRoomId() + "\t\t\t "
-//                + getLevel() + "\t\t\t" + (getIsVacant() ? "Vacant  " : "Occupied");
+        return String.format("%-15s%-15d%-15d%-15s", getType(), getRoomId(), getLevel(),
+                (getIsVacant() ? "Vacant  " : "Occupied"));
     }
 
     public String toFileString() {
