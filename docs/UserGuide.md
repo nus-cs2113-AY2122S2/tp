@@ -6,23 +6,30 @@
 * [Quick start](#quick-start)
 * [Command summary (Expenses)](#command-summary-expenses)
 * [Command summary (Credit Card)](#command-summary-credit-card)
+* [Command summary (Income)](#command-summary-income)
 * [Features](#features)
     * [Expenses](#expenses)
-        * [Display list of currently available commands for expenses: `help`](#display-a-list-of-commands-for-expenses)
-        * [Add an expenditure to your program: `add`](#add-an-expenditure-to-your-program-add)
-        * [Display current list of expenditures: `list` ](#display-current-list-of-expenditures-list)
-        * [Modify an expenditure on your list: `update`](#modify-an-expenditure-on-your-list-update)
-        * [Removing an expenditure on your list: `delete`](#removing-an-expenditure-on-your-list-delete)
-        * [Calculations that MindMyMoney provide: `calculate`](#calculations-that-MindMyMoney-provide-calculate)
+        * [Display help page for expenses: `help`](#display-help-page-for-income-help)
+        * [Add an expenditure: `add`](#add-an-expenditure-add)
+        * [Display expenditures: `list` ](#display-expenditures-list)
+        * [Modify an expenditure: `update`](#modify-an-expenditure-update)
+        * [Remove an expenditure: `delete`](#remove-an-expenditure-delete)
+        * [Calculations that MindMyMoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
           * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
-        * [Exiting MindMyMoney application: `bye`](#exiting-MindMyMoney-application-bye)
+        * [Exit MindMyMoney application: `bye`](#exit-mindmymoney-application-bye)
     * [Credit Card](#credit-card)
-        * [Display list of currently available commands for credit card: `help`](#display-list-of-currently-available-commands-for-credit-card-help)
-        * [Add a credit card to your program: `add`](#add-a-credit-card-to-your-program-add)
-        * [Display current list of credit cards: `list` ](#display-current-list-of-expenditures-list)
-        * [Modify a credit card on your list: `update`](#modify-a-credit-card-on-your-list-update)
-        * [Removing a credit card on your list: `delete`](#removing-a-credit-card-on-your-list-delete)
-    * [Saving the data](#saving-the-data)
+        * [Display help page for credit card: `help`](#display-help-page-for-credit-card-help)
+        * [Add a credit card: `add`](#add-a-credit-card-add)
+        * [Display credit cards: `list` ](#display-credit-cards-list)
+        * [Modify a credit card: `update`](#modify-a-credit-card-update)
+        * [Remove a credit card: `delete`](#remove-a-credit-card-delete)
+    * [Income](#income)
+        * [Display help page for income: `help`](#display-help-page-for-income-help)
+        * [Add income entry: `add`](#add-income-entry-add)
+        * [Display income entries: `list`](#display-income-entries-list)
+        * [Modify an income entry: `update`](#modify-an-income-entry-update)
+        * [Remove an income entry: `delete`](#remove-an-income-entry-delete)
+    * [Save the data](#save-the-data)
 * [FAQ](#faq)
   
 ## Introduction
@@ -45,12 +52,14 @@ Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate
 when you are using the application.
 
 
+<br/>
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed. Click
    [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) for the link to the Java 11
    installer.
-2. Download the latest version of `**MindMyMoney**.jar` from [here](https://github.com/AY2122S2-CS2113T-T10-4/tp/releases)).
+2. Download the latest version of `MindMyMoney.jar` from [here](https://github.com/AY2122S2-CS2113T-T10-4/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for your MindMyMoney.
 4. Open a command line terminal in your _home folder_ and run `java -jar MindMyMoney.jar`.
    The startup interface similar to the one below should appear in a few seconds.  
@@ -58,16 +67,18 @@ when you are using the application.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    show a help page. <br> Some example commands you can try: <br>
     * **`list`** : Lists all tasks.
-    * **`add`**`/e cash /c Food /d Porridge /a 3 /t 2022-03` :
-      Adds a $3 expenditure of the description 'Porridge' that was paid in cash in March 2022 to your list of expenditures.
+    * **`add`**`/pm cash /c Food /d Porridge /a 3 /t 12/03/2022` :
+      Adds a $3 expenditure of the description 'Porridge' that was paid in cash on 12 March 2022 to your list of expenditures.
     * **`calculate`**`/epm Mar 2022` : Calculates total expenditure in the month of March 2022.
-    * **`update`**`1 /pm cash /c Food /d Porridge /a 3 /t 2022-03` :
-      Updates the first expenditure on your expenditure list to reflect a $3 expenditure of the description 'Porridge' that was paid in cash on March 2022.
+    * **`update`**`1 /pm cash /c Food /d Chicken Rice /a 4.50 /t 12/03/2022` :
+      Updates the first expenditure on your expenditure list to reflect a $4.50 expenditure of the 
+   description 'Chicken Rice' that was paid in cash on 12 March 2022.
     * **`delete`**`2` : Deletes the second expenditure in your expenditure list.
     * **`bye`** : Exits the app.
     
 7. Refer to the [Features](#features) for details of each command.
 
+<br/>
 
 # Features
 The following are features of the `MindMyMoney` application.
@@ -76,15 +87,17 @@ Words in `[SQUARE_BRACKETS]` are the parameters.
 
 ## Expenses
 
-### Display a list of commands for expenses: `help`
+### Display help page for expenses: `help`
 Prints a list of currently available commands for storing expenditures.   
-Format:`help /expenses`<br>
+Format:`help /e`
+
 ![help_expenses screenshot](./images/help_expenses.PNG)
 
+<br/>
 
-### Add an expenditure to your program: `add`
+### Add an expenditure: `add`
 Adds an expenditure to your program. Only **one** expenditure can only be added per command.
-Format:`add /e [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
+Format:`add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
 * `[PAYMENT_METHOD]` refers to the method of payment used.
     * Enter `cash` or the name of a credit card you have saved.
 * `[CATEGORY]` refers to the category of the expenditure
@@ -95,18 +108,18 @@ Format:`add /e [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [D
     * Enter the amount in dollars, rounded off to the nearest cent.
     * For example, an item that cost $420 and 69 cents will be entered as `420.69`.
 * `[DATE]` refers to the date of the purchase of the expenditure.
-    * Format of the date is YYYY-MM.
-    * For example, `March 2022` will be entered as `2022-03`
+    * Format of the date is DD/MM/YYYY.
+    * For example, `12 March 2022` will be entered as `12/03/2022`
     
-For example:`add /e cash /c Food /d Porridge /a 4.50 /t 2022-03`
+For example:`add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`
 Adds a $4.50 expenditure of the description 'Porridge' that was paid in cash in March 2022 to your expenditure list. <br>
+
 ![add_expense screenshot](./images/add_expense.PNG)
 
 > **💡 Note:**
 >- `[CATEGORY]` and `[PAYMENT_METHOD]` are **case-insensitive**.
->-  Your credit card has to be [added](#add-a-credit-card-to-your-program) first before entering the name of the credit card as `[PAYMENT_METHOD]`.
+>-  Your credit card has to be [added](#add-a-credit-card-to-your-program-add) first before entering the name of the credit card as `[PAYMENT_METHOD]`.
 >- `[AMOUNT]` only accepts numbers with 2 decimal places. Any additional decimals will be rounded off or ignored
->- `[DATE]` does not require any day input.
 
 
 > **⚠️Warning⚠️**
@@ -114,26 +127,37 @@ Adds a $4.50 expenditure of the description 'Porridge' that was paid in cash in 
 >- All parameters are compulsory! Input the parameters in the order given, or the application will not be able to read your
    > input.
 
-### Display current list of expenditures: `list`
+<br/>
+
+### Display expenditures: `list`
 Prints your current list of expenditures. <br>
-Format:`list /expenses` <br>
+Format:`list /e`
+
 ![list_expenses screenshot](./images/list_expenses.PNG)
 
-### Modify an expenditure on your list: `update`
-Modifies an expenditure on your expenditure list by specifying its index. <br>
-Use the `list /expenses` command to view the indices of your expenditures.   
+<br/>
 
-Format:`update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`  
-For example: `update 1 drinks 2`  <br>
+### Modify an expenditure: `update`
+Modifies an expenditure on your expenditure list by specifying its index. <br>
+Use the `list /e` command to view the indices of your expenditures.   
+
+Format:`update [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`  
+For example: `update 1 /pm cash /c food /d chicken rice /a 5 /t 12/03/2022`
+
 ![update screenshot](./images/update.PNG)
 
-### Removing an expenditure on your list: `delete`
+<br/>
+
+### Remove an expenditure: `delete`
 Deletes an expenditure from your expenditure list by specifying its index. <br>
-Use the `list /expenses` command to view the current indices of your expenditures.   
+Use the `list /e` command to view the current indices of your expenditures.   
 
 Format:`delete`  
-For example: `delete 1` Deletes the first expenditure on your list. <br>
+For example: `delete 1` Deletes the first expenditure on your list.
+
 ![delete screenshot](./images/delete_eg.PNG)
+
+<br/>
 
 ### Calculations that MindMyMoney provide: `calculate`
 MindMyMoney provides a calculating feature. See below for more details of the feature.
@@ -142,32 +166,36 @@ MindMyMoney provides a calculating feature. See below for more details of the fe
 Shows the sum of the amounts of expenditures you have made in a month of a certain year. <br>
 Shows the percentage spent on each category of expenditure, displayed in a horizontal bar chart. <br>
 
-Format:`calculate /epm MMM YYYY`
-* Enter Month in `MMM` format, with first letter capitalised. For example `Jan`.
-* Enter Year in `YYYY` format. For example `2022`
-* Enter Month and Year seperated by a space, `MMM YYYY`. For example `Dec 2021`
-  For example: `calculate /epm Mar 2022`  <br>
-  ![epm screenshot](./images/calculate_epm.PNG) <br>
+Format:`calculate /epm [DATE]`
+* `[DATE]` can be of the format `DD/MM/YYYY`, `MM/YYYY` or `YYYY`, depending on the duration you are interested in.
+
+For example: `calculate /epm 03/2022`
+
+![epm screenshot](./images/calculate_epm.PNG) <br>
 
 > **💡 Note**
 > - If you want to search for exact month in year, enter both month and year.
 > - Month is **case-sensitive**.
 > - However, you can also use this function to search for expenditures in the year by typing `calculate /epm 2022`.
 
+<br/>
 
-### Exiting MindMyMoney application: `bye`
+### Exit MindMyMoney application: `bye`
 Shuts down the MindMyMoney application.
-Format:`bye`  <br>
+Format:`bye`
+
 ![bye screenshot](./images/bye_eg.PNG)
 
 ## Credit Card
 
-### Display list of currently available commands for credit card: `help`
+### Display help page for credit card: `help`
 Prints a list of commands for storing credit cards as a payment method.
 Format 1:`help /cc` <br>
 ![help_cc screenshot](./images/help_cc.PNG)
 
-### Add a credit card to your program: `add`
+<br/>
+
+### Add a credit card: `add`
 Adds a credit card to your program. Only **one** credit card can only be added per command.  <br>
 Format:`add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CARD_BALANCE]`
 * `[CREDIT_CARD_NAME]` refers to the name your Credit Card will be saved as
@@ -182,7 +210,9 @@ Format:`add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CAR
     * Enter the amount that is left in this card in dollars
 
 
-Example:`add /cc /n dbs /cb 2 /cl 1000 /bal 1000` Adds a credit card of the name 'DBS' with a cashback of 2%, a monthly spending limit of $1000 and a card balance of $1000. <br>
+Example:`add /cc /n dbs /cb 2 /cl 1000 /bal 1000` Adds a credit card of the name 'DBS' with a cashback of 2%, 
+a monthly spending limit of $1000 and a card balance of $1000.
+
 ![add_cc screenshot](./images/add_cc.PNG)
 > **💡 Note**
 >- `[CREDIT_CARD_NAME]` is **case-insensitive**.
@@ -193,31 +223,109 @@ Example:`add /cc /n dbs /cb 2 /cl 1000 /bal 1000` Adds a credit card of the name
 >- All parameters are compulsory! Input the parameters in the order given, or the application will not be able to read your
    > input.
 
-### Display current list of credit cards: `list`
+<br/>
+
+### Display credit cards: `list`
 Prints your current list of credit cards that you have added so far.   
-Format:`list /cc` <br>
+Format:`list /cc`
+
 ![list_cc screenshot](./images/list_cc.PNG)
 
+<br/>
 
-### Modify a credit card on your list: `update`
+### Modify a credit card: `update`
 Modifies a credit card on your credit card list by specifying its index. <br>
 Use the `list /cc` command to view the current indices of your credit cards.   
 
 Format:`update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`  
-For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000` Updates the first credit card on your list to have a name of 'OCBC' with a cashback of 1.5%, a monthly spending limit of $500 and a card balance of $1000. <br>
+For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000` Updates the first credit card on your list to have a 
+name of 'OCBC' with a cashback of 1.5%, a monthly spending limit of $500 and a card balance of $1000.
+
 ![update screenshot](./images/update_cc.PNG)
 
-### Removing a credit card on your list: `delete`
+<br/>
+
+### Remove a credit card: `delete`
 Delete a credit card from your list, by specifying the credit card's index.  
-Use the `list /cc` command to view the current indices of your credit cards.   
-Format:`delete /cc [INDEX]`
-For example: `delete /cc 1` Deletes the first credit card on your credit card list. <br>
+Use the `list /cc` command to view the current indices of your credit cards.
+
+Format:`delete /cc [INDEX]` 
+
+For example: `delete /cc 1`<br/>
+Deletes the first credit card on your credit card list.
+
 ![delete_cc screenshot](./images/delete_cc.PNG)
 
+<br/>
 
-### Saving the data:
+## Income
+Income refers to the various sources of income you might have.
+
+### Display help page for income: `help`
+Prints a list of commands relating to income.<br/>
+
+Format:`help /i`
+
+![help_i](./images/help_i.png)
+
+<br/>
+
+### Add income entry: `add`
+Adds an income entry to your program.
+
+Format: `add /i /a [AMOUNT] /c [CATEGORY]`
+* `[AMOUNT]` refers to the monthly sum received, as a whole number.
+* `[CATEGORY]` refers to the supported categories of income.
+   * These categories include: `Salary`, `Allowance`, `Investment` and `Others`.
+   * Categories are case-insensitive.
+
+Example: `add /i /a 3000 /c salary`
+<br/> Adds an income entry of '3000' under the 'Salary' category.
+
+![add_i](./images/add_i.png)
+
+<br/>
+
+### Display income entries: `list`
+Prints your current list of income entries that you have added so far.
+
+Format: `list /i`
+
+![list_i](./images/list_i.png)
+
+<br/>
+
+### Modify an income entry: `update`
+Modifies an income entry in your income list by specifying its index.
+<br/> Use the `list /i` command to view the current indices of your income entries.
+
+Format: `update /i [INDEX] /a [NEW_AMOUNT] /c [NEW_CATEGORY]`
+
+Example: `update /i 1 /a 4000 /c salary`
+<br/> Updates the first income entry on your list to an amount of '4000' under the 'Salary' category.
+
+![update_i](./images/update_i.png)
+
+<br/>
+
+### Remove an income entry: `delete`
+Deletes an income entry from your income list, by specifying its index.
+<br/> Use the `list /i` command to view the current indices of your income entries.
+
+Format: `delete /i [INDEX]`
+
+Example: `delete /i 1`
+<br/>Deletes the first income entry on your list.
+
+![delete_i](./images/delete_i.png)
+
+<br/>
+
+## Save the data
 Your MindMyMoney data is saved in the hard disk automatically after any command that changes the data.
 There is no need for you to save manually.
+
+<br/>
 
 ## FAQ
 
@@ -226,6 +334,7 @@ There is no need for you to save manually.
 **A**: MindMyMoney saves data in the current directory. To ensure all the data is saved properly,
 run MindMyMoney only in the _home folder_. 
 
+<br/>
 
 ## Command Summary (Expenses)
 
@@ -238,6 +347,7 @@ run MindMyMoney only in the _home folder_.
 | Delete    | `delete [INDEX]`<br/>e.g `delete 1` <br/> Deletes the first expenditure from your list.                                                                                     | 
 | Update    | `update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`<br/>e.g `update 2 snacks 5` <br/> Updates the second expenditure in your list.                                              |
 
+<br/>
 
 ## Command Summary (Credit Card)
 
@@ -250,3 +360,15 @@ run MindMyMoney only in the _home folder_.
 | Update    | `update /cc [INDEX] /n [NEW_CARD_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`<br/>e.g `update /cc 2 /n DBS /cb 3 /cl 10000 /bal 10000` <br/> Updates the second credit card in your list. |
 | Exit      | `bye`<br/> Ends the `MindMyMoney` application                                                                                                                                                                    |
 
+<br/>
+
+## Command Summary (Income)
+
+| Command   | Format, examples                                                                                                                              |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| Help      | `help /i` <br/> Prints a list of commands for storing income.                                                                                 |
+| Add       | `add /i /a [AMOUNT] /c [CATEGORY]`<br/> e.g `add /i /a 3000 /c salary` <br/> Adds an income entry                                             | 
+| List      | `list /i`<br/> Displays your current list of income entries.                                                                                  |
+| Delete    | `delete /i [INDEX]`<br/> e.g `delete /i 1` <br/> Deletes the first income entry from your list.                                               | 
+| Update    | `update /i [INDEX] /a [NEW_AMOUNT] /c [NEW_SALARY]`<br/> e.g `update /i /a 4000 /c salary` <br/> Updates the first income entry in your list. |
+| Exit      | `bye`<br/> Ends the `MindMyMoney` application                                                                                                 |
