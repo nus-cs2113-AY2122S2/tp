@@ -14,7 +14,7 @@ public class GroupDeleteCommandParser implements CommandParser<GroupDeleteComman
 
     public static final String COMMAND_TEXT = "group /delete";
 
-    public static final String COMMAND_FORMAT = "Syntax: group /delete /gid [SESSION_ID]";
+    public static final String COMMAND_FORMAT = "Syntax: group /delete /gid [GROUP_ID]";
 
     public static final String[] COMMAND_DELIMITERS = {
         ParserUtils.GROUP_ID_DELIMITER

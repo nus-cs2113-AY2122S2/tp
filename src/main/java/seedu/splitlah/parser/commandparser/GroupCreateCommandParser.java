@@ -1,6 +1,7 @@
 package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.GroupCreateCommand;
+import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
@@ -34,47 +35,14 @@ public class GroupCreateCommandParser implements CommandParser<GroupCreateComman
     @Override
     public GroupCreateCommand getCommand(String commandArgs) throws InvalidFormatException {
         assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
-
-        boolean hasPersonListDelimiter = false;
-        String [] parsedNames = null;
         try {
-            parsedNames = Parser.parsePersonList(commandArgs);
-            hasPersonListDelimiter = true;
-        } catch (InvalidFormatException formatException) {
-            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                + ParserUtils.PERSON_LIST_DELIMITER)) {
-                String invalidCommandMessage = formatException.getMessage() + "\n" +  COMMAND_FORMAT;
-                throw new InvalidFormatException(invalidCommandMessage);
-            }
-        }
-
-        boolean hasGroupIdDelimiter = false;
-        int groupId = -1;
-        try {
-            groupId = Parser.parseGroupId(commandArgs);
-            hasGroupIdDelimiter = true;
-        } catch (InvalidFormatException formatException) {
-            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                + ParserUtils.GROUP_ID_DELIMITER)) {
-                String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
-                throw new InvalidFormatException(invalidCommandMessage);
-            }
-        }
-
-        boolean isMissingBothDelimiters = !hasPersonListDelimiter && !hasGroupIdDelimiter;
-        if (isMissingBothDelimiters) {
-            String invalidCommandMessage = Message.ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS + "\n"
-                + COMMAND_FORMAT;
-            throw new InvalidFormatException(invalidCommandMessage);
-        }
-
-        try {
-            String parsedSessionName = Parser.parseName(commandArgs);
-            LocalDate parsedSessionDate = Parser.parseLocalDate(commandArgs);
-            return new SessionCreateCommand(parsedSessionName, parsedNames, parsedSessionDate, groupId);
+            String parsedGroupName = Parser.parseName(commandArgs);
+            String[] parsedNameList = Parser.parsePersonList(commandArgs);
+            return new GroupCreateCommand(parsedGroupName, parsedNameList);
         } catch (InvalidFormatException formatException) {
             String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
             throw new InvalidFormatException(invalidCommandMessage);
         }
     }
 }
+
