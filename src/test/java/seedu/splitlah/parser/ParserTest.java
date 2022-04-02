@@ -696,9 +696,20 @@ class ParserTest {
      */
     @Test
     void parseTotalCost_delimiterExistsArgumentNotNumeric_InvalidFormatExceptionThrown() {
+        // Standard non-numerics
         String argumentWithNonNumericArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co apple";
         try {
             double output = Parser.parseTotalCost(argumentWithNonNumericArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.TOTAL_COST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+        
+        // Double.parseDouble reserved characters
+        String argumentWithReservedCharacters = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 7.5d";
+        try {
+            double output = Parser.parseTotalCost(argumentWithReservedCharacters);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.TOTAL_COST_DELIMITER;
@@ -833,9 +844,20 @@ class ParserTest {
      */
     @Test
     void parseCostList_delimiterExistsArgumentsNotNumeric_InvalidFormatExceptionThrown() {
+        // Standard non-numerics
         String argumentWithNonNumericArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl apple orange";
         try {
             double[] output = Parser.parseCostList(argumentWithNonNumericArguments);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.COST_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+
+        // Double.parseDouble reserved characters
+        String argumentWithReservedCharacters = "/sid 3 /n Lunch /p Alice /i Alice Bob /cl 3.5 7.0d";
+        try {
+            double[] output = Parser.parseCostList(argumentWithReservedCharacters);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.COST_LIST_DELIMITER;
@@ -951,14 +973,26 @@ class ParserTest {
 
     /**
      * Checks if an InvalidFormatException with the correct message is properly thrown when the GST delimiter
-     * is provided by the user but the argument following the GST delimiter cannot be parsed as a double.
+     * is provided by the user but the argument following the GST delimiter is non-numeric.
      */
     @Test
-    void parseGst_delimiterExistsArgumentNotDouble_InvalidFormatExceptionThrown() {
+    void parseGst_delimiterExistsArgumentNotNumeric_InvalidFormatExceptionThrown() {
+        // Standard non-numerics
         String argumentWithNonDoubleArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst apple /sc 10";
         try {
             double output = Parser.parseGst(argumentWithNonDoubleArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_PERCENTAGE_ARGUMENT + ParserUtils.GST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+
+        // Double.parseDouble reserved characters
+        String argumentWithReservedCharacters =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7.0d /sc 10";
+        try {
+            double output = Parser.parseGst(argumentWithReservedCharacters);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_PERCENTAGE_ARGUMENT + ParserUtils.GST_DELIMITER;
@@ -1115,14 +1149,27 @@ class ParserTest {
 
     /**
      * Checks if an InvalidFormatException with the correct message is properly thrown when the Service charge delimiter
-     * is provided by the user but the argument following the Service charge delimiter cannot be parsed as a double.
+     * is provided by the user but the argument following the Service charge delimiter is non-numeric.
      */
     @Test
-    void parseServiceCharge_delimiterExistsArgumentNotDouble_InvalidFormatExceptionThrown() {
+    void parseServiceCharge_delimiterExistsArgumentNotNumeric_InvalidFormatExceptionThrown() {
+        // Standard non-numerics
         String argumentWithNonDoubleArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc apple";
         try {
             double output = Parser.parseServiceCharge(argumentWithNonDoubleArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage =
+                    Message.ERROR_PARSER_NON_PERCENTAGE_ARGUMENT + ParserUtils.SERVICE_CHARGE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+
+        // Double.parseDouble reserved characters
+        String argumentWithReservedCharacters =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7.0 /sc 10.0d";
+        try {
+            double output = Parser.parseServiceCharge(argumentWithReservedCharacters);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage =
