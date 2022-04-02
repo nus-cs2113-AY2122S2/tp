@@ -284,6 +284,8 @@ in his/her inputs to avoid any potential instabilities when processing his/her i
 | The pipe character &#124; | Used as a delimiter in the app data files to separate the various data. Allowing the user to use delimiters in their plan names may cause issues when storing them in the data files. |
 | The phrase 'rest day' | Used as an indicator that a particular day in the user's schedule does not have a plan in it. Allowing the user to name a plan as 'rest day' may cause issues when displaying the schedule. |
 
+If these characters are inputted by the user, as mentioned in Step 3 above, an `InvalidCommandException` will be thrown 
+and the parsing is aborted.
 
 ---
 
