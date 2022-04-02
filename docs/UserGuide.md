@@ -310,7 +310,7 @@ Example of usage:
 
 * Edits the recurrent candies expenditure of $20 from Alice's expenditure to $25.
 
-  `editout /g 1 /u 1 /r 1 /i 25`
+  `editout /g 1 /u 1 /r 1 /e 25`
 
 * _Result_: Expenditure entry in Alice's expenditure list is edited.
 
