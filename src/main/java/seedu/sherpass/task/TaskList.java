@@ -305,17 +305,6 @@ public class TaskList {
         tasks.get(markIndex).markAsUndone();
     }
 
-    /**
-     * Returns a boolean value denoting the existence of a task
-     * within the task array.
-     *
-     * @param index Index of a task. Corresponds to its placement in task array.
-     * @return Returns true if task exists in task array. False otherwise.
-     */
-    public boolean isTaskNotExist(int index) {
-        return index < 0 || index >= tasks.size();
-    }
-
     public int getSize() {
         return tasks.size();
     }
@@ -402,11 +391,9 @@ public class TaskList {
      * @param ui User interface
      */
     public void printPendingTasks(Ui ui) {
-        int printIndex = 1;
         for (Task task : tasks) {
             if (!task.isDone()) {
-                ui.showToUser(printIndex + ". " + task);
-                printIndex++;
+                ui.showToUser(task.toString());
             }
         }
     }
