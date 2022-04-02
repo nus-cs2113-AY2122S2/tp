@@ -15,8 +15,8 @@ public class HelpCommand extends Command {
                 "'packages' page Able to print out specific details of any package\n" +
                 "Format: info {package_id}\n" + "Usage: info 2\n" + SEPARATOR + "ADD PACKAGE\n" +
                 "Allows the user to add a new travel package\ninto the list of available packages\n" +
-                "Format: add {package_name},{country},{duration},{price},,{vacancies}\n" +
-                "Usage: add Skiing Trip,Sweden,15/2/2022-19/2/2022,800,100\n" + SEPARATOR +
+                "Format: add {package_name},{country},{duration},{price},{vacancies}\n" +
+                "Usage: add Skiing Trip,Sweden,15/2/2022,19/2/2022,800,100\n" + SEPARATOR +
                 "DELETE PACKAGE\nAllows the user to delete an existing travel package\nfrom the " +
                 "list of available packages\nFormat: delete {package_id}\nUsage: delete 2\n" +
                 SEPARATOR + "SHOW RESERVATIONS\nShows reservations of the user for " +
