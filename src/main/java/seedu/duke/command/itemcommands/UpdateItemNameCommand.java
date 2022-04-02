@@ -3,6 +3,8 @@ package seedu.duke.command.itemcommands;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidUpdateItemNameCommandException;
+import seedu.duke.exceptions.ItemNameAlreadyInListException;
+
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.itemlists.ItemList;
@@ -129,12 +131,16 @@ public class UpdateItemNameCommand extends Command {
         ItemList listOfItems = listContainer.getItemList();
         String oldItemName = getOldItemName();
         String newItemName = getNewItemName();
-        listOfItems.updateItemNameInList(oldItemName, newItemName);
-        oldItemName = oldItemName.toUpperCase();
-        newItemName = newItemName.toUpperCase();
         if (oldItemName.equals(newItemName)) {
             throw new DuplicateItemNameException();
         }
+        boolean isNewItemNameAlreadyInList = listOfItems.checkForItemDuplicates(newItemName);
+        if (isNewItemNameAlreadyInList == true) {
+            throw new ItemNameAlreadyInListException();
+        }
+        listOfItems.updateItemNameInList(oldItemName, newItemName);
+        oldItemName = oldItemName.toUpperCase();
+        newItemName = newItemName.toUpperCase();
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
         ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemListFileManager.writeItemListToFile(listOfItems);
