@@ -26,6 +26,7 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 * [How to use this user guide](#how-to-use-this-user-guide)
 * [Quick Notes](#quick-notes)
 * [Quick Start](#quick-start)
+* [Warnings](#warnings)
 * [How SplitLah works](#how-splitlah-works)
 * [Features](#features)
   * [Session Management](#session-management)
@@ -70,7 +71,9 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 ## Quick Notes
 - Allowed characters for values:
   - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
+    - Names of participants can only contain: `A-Z`, `a-z`
   - Decimals (up to 2 decimal places): `3.5`, `3.95`
+  - Dates (DD-MM-YYYY or today): `02-04-2022`, `today`
   - Whitespace: `Birthday party`
 - A forward slash `/` indicates a delimiter and is used to separate commands into parts.
   Each command's documentation specifies the required delimiters and their purpose.
@@ -86,6 +89,13 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 - Parameters enclosed within `{` and `}` indicates that at least one of the delimiters
   and their respective arguments have to be supplied.
   - Example: `{/pl [NAME1 NAME2 ...] /gid [GROUD_ID]}`
+
+## Warnings
+- If the save file cannot be created, **nothing will be saved** during the runtime of SplitLah.
+- The save file is **not meant to be read or edited**.
+  - If the save file is edited, the application will not be able to load the corrupted save file.
+  - A corrupted save file will then be replaced with a new save file upon running SplitLah,
+    **all previously saved information will be lost**.
 
 ## Quick Start
 
