@@ -142,7 +142,7 @@ Adds an expenditure to your program. Only **one** expenditure can only be added 
 For example:`add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`.  
 Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash in March 2022 to your expenditure list. <br>
 
-#### Expected Output:
+#### Expected Outcome:
 ````
 > add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022
 Successfully added: 
@@ -172,7 +172,7 @@ Prints your current list of expenditures.
 
 #### Format:`list /e`  
 
-#### Expected Output:  
+#### Expected Outcome:  
 ```
 list /e
 -----------------------------------------------
@@ -221,7 +221,7 @@ $5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
 >- This command is similar to the [add an expenditure](#add-an-expenditure-add) command.   
    > Field that are labeled starting with NEW follow the same restrictions base command in [add an expenditure](#add-an-expenditure-add).
    > For example `[NEW_CATEGORY]` is **case-insensitive** like `[CATEGORY]`
->- Only enter `[INDEX]` that exist in the list. For example if you have 4 items in the list, specify `[INDEX]` to be a number from 1 to 4.
+>- Only enter `[INDEX]` that exist in the expenditure list. For example if you have 4 items in the list, specify `[INDEX]` to be a number from 1 to 4.
 
 <br/>
 
@@ -233,9 +233,10 @@ Use the `list /e` command to view the current indices of your expenditures.
 * `[INDEX]` refers to the index of expenditure in list in which you want to delete.
     * Enter `1` if you want to delete the first entry in the list.  
 
-For example: `delete 1` Deletes the first expenditure on your list.  
+For example: `delete 1`  
+Deletes the first expenditure on your list.  
 
-#### Expected Output:
+#### Expected Outcome:
 ````
 > list /e
 -----------------------------------------------
@@ -257,73 +258,110 @@ I have removed Nike Shoes of $3000.0 from the account
 MindMyMoney can calculate your expenditure for you. See below for more details of the feature.
 
 #### Expenditure per month: `calculate /epm`
-Shows the sum of the amounts of expenditures you have made in a month of a certain year. <br>
+Shows the sum of the amount of expenditures you have made in a particular day, month or year. <br>
 Shows the percentage spent on each category of expenditure, displayed in a horizontal bar chart. <br>
 
-Format:`calculate /epm [DATE]`
+##### Format:`calculate /epm [DATE]`
 * `[DATE]` can be of the format `DD/MM/YYYY`, `MM/YYYY` or `YYYY`, depending on the duration you are interested in.
 
-For example: `calculate /epm 03/2022`
+For example: `calculate /epm 03/2022`  
+Shows you your total expenditure and its relevant categories on March 2022.
 
-![epm screenshot](./images/calculate_epm.PNG) <br>
+##### Expected Outcome:
+````
+TOCHANGE!
+````
 
 > **💡 Note**
-> - If you want to search for exact month in year, enter both month and year.
-> - Month is **case-sensitive**.
-> - However, you can also use this function to search for expenditures in the year by typing `calculate /epm 2022`.
+> - TOCHANGE
 
 <br/>
 
 ### Exit MindMyMoney application: `bye`
 Shuts down the MindMyMoney application.
-Format:`bye`
+#### Format:`bye`
+#### Expected Outcome:
+````
+> bye
+Bye, hope to see you again!
+````
 
-![bye screenshot](./images/bye_eg.PNG)
+> **💡 Note**
+> - Any input after the `bye` command is ignored. For example `bye Hello World` will still exit the program.
+
+<br/>
 
 ## Credit Card
 
 ### Display help page for credit card: `help`
 Prints a list of commands for storing credit cards as a payment method.
-Format 1:`help /cc` <br>
-![help_cc screenshot](./images/help_cc.PNG)
+#### Format:`help /cc`  
+
+#### Expected Outcome:
+````
+> help /cc
+---------------------------------------Credit Card Help Page---------------------------------------
+1. Listing all Credit Cards: list /cc
+2. Adding a Credit Card: add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CREDIT_LIMIT] /bal [CREDIT CARD BALANCE]
+3. Updating an Expenditure entry: update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]
+4. Removing a credit card: delete /cc [INDEX]
+5. Exiting the program: bye
+---------------------------------------------------------------------------------------------------
+````
 
 <br/>
 
 ### Add a credit card: `add`
 Adds a credit card to your program. Only **one** credit card can only be added per command.  <br>
 Format:`add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CARD_BALANCE]`
-* `[CREDIT_CARD_NAME]` refers to the name your Credit Card will be saved as
-  * Use abbreviations for ease of adding expenditures to this credit card
-     For example, storing `DBS Live Fresh Credit Card` as `DBS LV`
-* `[CASH_BACK]` refers to the amount of cash back received when spending on the credit card
-  * Enter the amount of cashback in percentage
-  * For example, a credit card with `2% cashback` can be represented as `/cb 2`
+* `[CREDIT_CARD_NAME]` refers to the name your Credit Card will be saved as.
+  * Use abbreviations for ease of adding expenditures to this credit card.
+     For example, storing `DBS Live Fresh Credit Card` as `DBS LV`.
+* `[CASH_BACK]` refers to the amount of cash back received when spending on the credit card.
+  * Enter the amount of cashback in percentage.
+  * For example, a credit card with `2% cashback` can be represented as `/cb 2`.
 * `[CARD_LIMIT]` refers to the maximum monthly expenditure on this credit card.
-    * Enter the monthly maximum amount that can be spent on the credit card in dollars
-* `[CARD_BALANCE]` refers to the amount of money left to be spent on the credit card
-    * Enter the amount that is left in this card in dollars
+    * Enter the monthly maximum amount that can be spent on the credit card in dollars.
+* `[CARD_BALANCE]` refers to the amount of money left to be spent on the credit card.
+    * Enter the amount that is left in this card in dollars.
 
 
-Example:`add /cc /n dbs /cb 2 /cl 1000 /bal 1000` Adds a credit card of the name 'DBS' with a cashback of 2%, 
-a monthly spending limit of $1000 and a card balance of $1000.
+Example:`add /cc /n dbs /cb 2 /cl 1000 /bal 1000`  
+Adds a credit card of the name 'DBS' with a cashback of 2%, a monthly spending limit of $1000 and a card balance of $1000.
 
-![add_cc screenshot](./images/add_cc.PNG)
+#### Expected Outcome:
+````
+> add /cc /n dbs /cb 2 /cl 1000 /bal 1000
+Successfully added: 
+
+Credit card: dbs
+Cash back: 2%
+Card limit: $1000
+Card balance: $1000
+
+into the account
+````
+
 > **💡 Note**
 >- `[CREDIT_CARD_NAME]` is **case-insensitive**.
 
 
 > **⚠️Warning⚠️**
->- Input realistic values, any unrealistic values can crash the system and harm your save file!
->- All parameters are compulsory! Input the parameters in the order given, or the application will not be able to read your
-   > input.
+>- TOCHANGE
 
 <br/>
 
 ### Display credit cards: `list`
 Prints your current list of credit cards that you have added so far.   
-Format:`list /cc`
+#### Format:`list /cc`
 
-![list_cc screenshot](./images/list_cc.PNG)
+#### Expected Outcome:
+````
+> list /cc
+-----------------------------------------------
+1. Name: dbs [Cashback: 2.0%] [Cashback gained: $0.0] [Card limit: $1000.0] [Card balance: $1000.0]
+-----------------------------------------------
+````
 
 <br/>
 
@@ -331,11 +369,44 @@ Format:`list /cc`
 Modifies a credit card on your credit card list by specifying its index. <br>
 Use the `list /cc` command to view the current indices of your credit cards.   
 
-Format:`update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`  
-For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000` Updates the first credit card on your list to have a 
+#### Format:`update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`  
+* `[INDEX]` refers to the index of credit card in list in which you want to update.
+    * Enter `1` if you want to update the first entry in the list.
+* `[NEW_NAME]` refers to the name your Credit Card will be updated to.
+    * Use abbreviations for ease of adding expenditures to this credit card.
+      For example, storing `DBS Live Fresh Credit Card` as `DBS LV`.
+* `[NEW_CASH_BACK]` refers to the updated amount of cash back received when spending on the credit card.
+    * Enter the amount of cashback in percentage.
+    * For example, a credit card with `2% cashback` can be represented as `/cb 2`.
+* `[NEW_CARD_LIMIT]` refers to the updated maximum monthly expenditure on this credit card.
+    * Enter the monthly maximum amount that can be spent on the credit card in dollars.
+* `[NEW_CARD_BALANCE]` refers to the updated amount of money left to be spent on the credit card.
+    * Enter the amount that is left in this card in dollars.
+
+
+For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000`  
+Updates the first credit card on your list to have a 
 name of 'OCBC' with a cashback of 1.5%, a monthly spending limit of $500 and a card balance of $1000.
 
-![update screenshot](./images/update_cc.PNG)
+#### Expected Outcome:
+````
+> list /cc
+-----------------------------------------------
+1. Name: dbs [Cashback: 2.0%] [Cashback gained: $0.0] [Card limit: $1000.0] [Card balance: $1000.0]
+-----------------------------------------------
+
+> update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000
+-----------------------------------------------
+Successfully set credit card 1 to :
+Name: OCBC [Cashback: 1.5%] [Cashback gained: $0.0] [Card limit: $500.0] [Card balance: $1000.0]
+-----------------------------------------------
+````
+
+> **💡 Note:**
+>- This command is similar to the [add a credit card](#add-a-credit-card-add) command.   
+   > Field that are labeled starting with NEW follow the same restrictions base command in [add a credit card](#add-a-credit-card-add).
+   > For example `[NEW_NAME]` can be abbreviated like `[CREDIT_CARD_NAME]`
+>- Only enter `[INDEX]` that exist in the list. For example if you have 4 items in the credit card list, specify `[INDEX]` to be a number from 1 to 4.
 
 <br/>
 
