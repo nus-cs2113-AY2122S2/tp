@@ -16,6 +16,8 @@ import seedu.allonus.ui.TextUi;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -399,7 +401,9 @@ public class StudyManager {
         //add m/CS2113 c/lec d/Thursday t/2pm-4pm
         try {
             String[] rawInput = userInput.split(" ", 2);
-            String[] parameters = rawInput[1].split(" ", 4);
+            //String[] parameters = rawInput[1].split(" ", 4);
+            //String[] parameters = rawInput[1].split("[mcdt]/ ", 4);
+            String[] parameters = getSplitParameters(rawInput[1]);
             String[] checkedParameters = validateAddInputs(parameters);
             String module = checkedParameters[0];
             String category = checkedParameters[1];
@@ -429,6 +433,20 @@ public class StudyManager {
             printMessage(e.getMessage());
             return null;
         }
+    }
+
+    private String[] getSplitParameters(String userInput) {
+        String regex = "[mcdt]/" + ".*?(?=(" + "[mcdt]/" + "|$))";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(userInput);
+
+        String[] splitParameters = new String[4];
+        int i = 0;
+        while (matcher.find()) {
+            splitParameters[i] = matcher.group().trim();
+            i++;
+        }
+        return splitParameters;
     }
 
     /**
@@ -525,7 +543,7 @@ public class StudyManager {
             } else {
                 module = parameters[0].substring(2);
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
         }
         return module;
@@ -547,7 +565,7 @@ public class StudyManager {
                 category = parameters[1].substring(2);
                 category = validateModuleCategory(category);
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
         }
         return category;
@@ -591,7 +609,7 @@ public class StudyManager {
             } else {
                 day = parameters[2].substring(2);
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
         }
         return day;
@@ -612,7 +630,7 @@ public class StudyManager {
             } else {
                 time = parameters[3].substring(2);
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
         }
         return time;
