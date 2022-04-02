@@ -126,6 +126,15 @@ public class ParserUtils {
         return idVal;
     }
 
+    /**
+     * Returns a double represented by the provided input String object.
+     * 
+     * @param input A String object that represents a numeric value.
+     * @return A double represented by the input String object.
+     * @throws NumberFormatException If the provided input String object contains characters that are either
+     *                               non-numeric, not a decimal point or not a negative sign, or
+     *                               if the provided input String object cannot be parsed as a double.
+     */
     private static double parseDoubleFromString(String input) throws NumberFormatException {
         assert input != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
         
