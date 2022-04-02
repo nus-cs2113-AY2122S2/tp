@@ -15,7 +15,7 @@ Step 2:
 The parser will call the database storing patient information to update the change.
 
 The flow is presented in the sequence diagram (will be included later after pull request is permitted):
-
+![](patient.png)
 
 ### Exit program
 Step 1: User type "bye" as input to exit the program. IHospital will call Parser#getCommand()
