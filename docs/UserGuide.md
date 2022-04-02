@@ -89,13 +89,13 @@ work.
 | Ubuntu Linux      | Ubuntu 20.04.3 (LTS) and above | Bash Terminal ([User Guide](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))          |
 
 <span class="box warning">⚠️If your operating system is not listed in the table above, it means our application has 
-not been tested on it, and we cannot guarantee that the application may work as intended. We highly encourage you to 
+not been tested on it, and we cannot guarantee that the application will work as intended. We highly encourage you to 
 use one of the recommended operating systems listed in the table above. 
 We apologise for any inconvenience caused.</span>
 
 <span class="box warning">⚠️(For Microsoft Windows users) In order for the application to display colours properly
 on your screen, Windows Terminal needs to be used. The default Command Prompt and Powershell consoles will not be able
-to display WerkIt!'s colours properly.</span>
+to display WerkIt!'s coloured texts properly.</span>
 
 ---
 ## Features 
