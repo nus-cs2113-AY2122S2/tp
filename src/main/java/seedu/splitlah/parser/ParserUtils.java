@@ -49,6 +49,7 @@ public class ParserUtils {
     private static final int TWO_DECIMAL_PLACES = 2;
     static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
     private static final String REGEX_NUMERIC_VALUE = "[0-9.-]+";
+    private static final String REGEX_PRINTABLE_ASCII_ONLY = "\\A[ -~]*\\z";
     static final int INVALID_INDEX_INDICATOR = -1;
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -577,6 +578,11 @@ public class ParserUtils {
         if (!isValidCommandType(commandType)) {
             return Message.ERROR_PARSER_INVALID_COMMAND;
         }
+        
+        if (!commandType.matches(REGEX_PRINTABLE_ASCII_ONLY) || !remainingArgs.matches(REGEX_PRINTABLE_ASCII_ONLY)) {
+            return Message.ERROR_PARSER_NON_ASCII_ARGUMENT;
+        }
+        
         return checkIfArgumentsValidForCommand(commandType, remainingArgs);
     }
 }
