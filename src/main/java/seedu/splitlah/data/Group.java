@@ -28,6 +28,9 @@ public class Group implements Serializable {
      * @param personList An ArrayList object containing Person objects
      */
     public Group(String groupName, int groupId, PersonList personList) {
+        assert personList != null : Message.ASSERT_GROUP_PERSON_LIST_EMPTY;
+        assert personList.getSize() != 0 : Message.ASSERT_GROUP_PERSON_LIST_EMPTY;
+
         this.groupName = groupName;
         this.groupId = groupId;
         this.personList = personList;
