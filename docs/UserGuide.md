@@ -517,6 +517,7 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 ## _Group Management_
 > A group represents one or more individuals. The only benefit of a group is to quickly identify a group of individuals
   without having to manually enter their details one by one when creating a session.
+> This is mainly to improve user experience when using SplitLah.
 
 <br>
 
