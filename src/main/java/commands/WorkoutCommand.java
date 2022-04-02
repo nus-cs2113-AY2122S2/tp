@@ -193,8 +193,7 @@ public class WorkoutCommand extends Command {
 
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, "A non-formattable number was received!");
-            System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n"
-                    + "number was received.");
+            System.out.println("Uh oh, the user argument supplied is invalid.");
             System.out.println("Please try again. Alternatively, type 'help' if you need\n"
                     + "more information on the commands.");
 

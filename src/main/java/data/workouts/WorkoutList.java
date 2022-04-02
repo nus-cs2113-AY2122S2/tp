@@ -4,14 +4,11 @@ import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.plans.InvalidPlanException;
-import data.plans.Plan;
 import data.plans.PlanList;
 import storage.LogHandler;
-import werkit.UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -205,10 +202,9 @@ public class WorkoutList {
      * @throws NumberFormatException If workout index number could not be parsed into an integer.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
      * @throws InvalidWorkoutException        If workout index number to delete is out of range.
-     * @throws InvalidPlanException        If plan index number to delete is out of range.
      */
     public Workout deleteWorkout(String userArgument) throws InvalidWorkoutException,
-            NumberFormatException, ArrayIndexOutOfBoundsException, InvalidPlanException {
+            NumberFormatException, ArrayIndexOutOfBoundsException {
         logger.entering(getClass().getName(), "deleteWorkout");
         int indexToDelete = Integer.parseInt(userArgument.trim());
 
