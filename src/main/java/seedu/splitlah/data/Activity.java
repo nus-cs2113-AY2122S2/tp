@@ -19,6 +19,8 @@ public class Activity implements Serializable, Comparable<Activity> {
     private double totalCost;
     private Person personPaid;
     private PersonList involvedPersonList;
+    private double gst;
+    private double serviceCharge;
 
     private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final int ZERO_INDEXING_OFFSET = 1;
@@ -41,6 +43,13 @@ public class Activity implements Serializable, Comparable<Activity> {
         this.totalCost = totalCost;
         this.personPaid = personPaid;
         this.involvedPersonList = involvedPersonList;
+    }
+
+    public Activity(int activityId, String activityName, double totalCost, Person personPaid,
+                    PersonList involvedPersonList, double gst, double sc) {
+        this(activityId, activityName, totalCost, personPaid, involvedPersonList);
+        this.gst = gst;
+        this.serviceCharge = sc;
     }
 
     /**
@@ -78,6 +87,14 @@ public class Activity implements Serializable, Comparable<Activity> {
      */
     public Person getPersonPaid() {
         return personPaid;
+    }
+
+    public double getGst() {
+        return gst;
+    }
+
+    public double getServiceCharge() {
+        return serviceCharge;
     }
 
     /**
