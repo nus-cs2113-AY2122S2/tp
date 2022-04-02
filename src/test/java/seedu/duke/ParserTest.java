@@ -10,6 +10,7 @@ import seedu.duke.command.AddCommand;
 import seedu.duke.command.ByeCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.HelpCommand;
+import seedu.duke.command.WrongFormatCommand;
 
 public class ParserTest {
 
@@ -26,11 +27,41 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addCommandValidPersonData_parsedCorrectly() {
+    public void parse_addCommandValidPackageData_parsedCorrectly() {
         final TravelPackage testPackage = generateTestTravelPackage();
         final String input = convertPersonToAddCommandString(testPackage);
         final AddCommand result = parseAndAssertCommandType(input, AddCommand.class);
         assertEquals(result.getPackage(), testPackage);
+    }
+
+    @Test
+    public void parse_addCommandInvalidPackageData_errorMessage() {
+        final double negativePrice = -99.99;
+        final String invalidDate = "31/02/2022";
+        final String addCommandFormatString = "add %s,%s,%s,%s,%s,%s,%s,%s";
+        final String[] inputs = {
+                String.format(addCommandFormatString,
+                        TravelPackage.EXAMPLENAME,
+                        TravelPackage.EXAMPLEID,
+                        TravelPackage.EXAMPLESTART,
+                        TravelPackage.EXAMPLEEND,
+                        TravelPackage.EXAMPLEHOTEL,
+                        negativePrice,
+                        TravelPackage.EXAMPLECOUNTRY,
+                        TravelPackage.EXAMPLEMAX),
+                String.format(addCommandFormatString,
+                        TravelPackage.EXAMPLENAME,
+                        TravelPackage.EXAMPLEID,
+                        invalidDate,
+                        TravelPackage.EXAMPLEEND,
+                        TravelPackage.EXAMPLEHOTEL,
+                        TravelPackage.EXAMPLEPRICE,
+                        TravelPackage.EXAMPLECOUNTRY,
+                        TravelPackage.EXAMPLEMAX)
+        };
+        for (String input : inputs) {
+            parseAndAssertCommandType(input, WrongFormatCommand.class);
+        }
     }
 
     /**
