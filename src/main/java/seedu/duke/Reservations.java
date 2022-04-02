@@ -5,7 +5,7 @@ import java.util.ArrayList;
 //arrayList of reservations
 //handle adding, deletion of reservations. Used in TravelPackage class.
 public class Reservations {
-    private ArrayList<Reservation> reservations;
+    private final ArrayList<Reservation> reservations;
 
     public Reservations() {
         this.reservations = new ArrayList<>();

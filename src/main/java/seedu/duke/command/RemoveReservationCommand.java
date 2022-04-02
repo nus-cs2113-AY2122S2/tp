@@ -5,8 +5,8 @@ import seedu.duke.Reservation;
 import seedu.duke.Reservations;
 
 public class RemoveReservationCommand extends Command{
-    private int travelPackageID;
-    private String contact;
+    private final int travelPackageID;
+    private final String contact;
 
     public RemoveReservationCommand(int id,String contact){
         this.travelPackageID = id;
