@@ -65,7 +65,7 @@ when you are using the application.
    The startup interface similar to the one below should appear in a few seconds.  
 
 ````
-    __  __ _         _ __  __      __  __
+ __  __ _         _ __  __      __  __
 |  \/  (_)_ _  __| |  \/  |_  _|  \/  |___ _ _  ___ _  _
 | |\/| | | ' \/ _` | |\/| | || | |\/| / _ \ ' \/ -_) || |
 |_|  |_|_|_||_\__,_|_|  |_|\_, |_|  |_\___/_||_\___|\_, |
