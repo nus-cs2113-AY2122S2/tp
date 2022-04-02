@@ -372,7 +372,7 @@ Format: `find /d USER_STRING [/c CATEGORY_INDEX]`
 
 Example of usage:
 
-* Find all the records which descriptions include _Candy_ from Category 1.
+* Find all the records which descriptions include _candies_ from Category 1.
 
   `find /d candies /c 1`
 
