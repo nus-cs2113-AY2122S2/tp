@@ -65,7 +65,7 @@ when you are using the application.
    The startup interface similar to the one below should appear in a few seconds.  
 
 ````
-    __  __ _         _ __  __      __  __
+ __  __ _         _ __  __      __  __
 |  \/  (_)_ _  __| |  \/  |_  _|  \/  |___ _ _  ___ _  _
 | |\/| | | ' \/ _` | |\/| | || | |\/| / _ \ ' \/ -_) || |
 |_|  |_|_|_||_\__,_|_|  |_|\_, |_|  |_\___/_||_\___|\_, |
@@ -101,9 +101,9 @@ Words in `[SQUARE_BRACKETS]` are the parameters.
 ### Display help page for expenses: `help`
 Prints a list of currently available commands for storing expenditures.   
 
-**Format**: `help /e`  
+#### Format: `help /e`  
 
-**Expected Outcome**
+#### Expected Outcome:
 ````
 > help /e
 ---------------------------------------Expenditure Help Page---------------------------------------
@@ -121,7 +121,7 @@ Prints a list of currently available commands for storing expenditures.
 ### Add an expenditure: `add`
 Adds an expenditure to your program. Only **one** expenditure can only be added per command.  
 
-**Format**: `add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
+#### Format: `add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
 * `[PAYMENT_METHOD]` refers to the method of payment used.
     * Enter `cash` or the name of a credit card you have saved.
 * `[CATEGORY]` refers to the category of the expenditure
@@ -138,7 +138,7 @@ Adds an expenditure to your program. Only **one** expenditure can only be added 
 For example:`add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`
 Adds a $4.50 expenditure of the description 'Porridge' that was paid in cash in March 2022 to your expenditure list. <br>
 
-**Expected Output**
+#### Expected Output:
 ````
 > add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022
 Successfully added: 
@@ -168,9 +168,9 @@ into the account
 ### Display expenditures: `list`
 Prints your current list of expenditures.  
 
-**Format**:`list /e`  
+#### Format:`list /e`  
 
-**Expected Output**  
+#### Expected Output:  
 ```
 list /e
 -----------------------------------------------
