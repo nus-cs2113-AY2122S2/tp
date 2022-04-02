@@ -23,66 +23,97 @@ class CalculateInputCommandTest {
     }
 
     /**
-     * Asserts if user is able to calculate expenditure per month.
+     * Asserts if user is able to calculate expenditure by date.
      */
     @Test
-    void calculateInputCommand_oneInput_expectCorrectOutput() throws MindMyMoneyException {
+    void calculateInputCommand_calculateByDate_expectCorrectOutput() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/pm cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
+        inputString = "/pm cash /c Food /d Coke /a 20 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/pm cash /c Personal /d Nike Shoes /a 1000 /t 30/04/2022";
+        inputString = "/pm cash /c Entertainment /d Movie /a 10 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
         inputString = "/pm cash /c Personal /d Nike Shoes /a 200 /t 30/03/2021";
         new AddCommand(inputString, user).executeCommand();
 
         setUp();
-        new CalculateInputCommand("/epm 03/2022", user).executeCommand();
+        new CalculateInputCommand("/epm 30/03/2022", user).executeCommand();
         tearDown();
-        String expectedOutput = "Total expenditure in 03/2022 is $3300.0." + System.lineSeparator()
+        String expectedOutput = "Total expenditure in 30/03/2022 is $330.0." + System.lineSeparator()
                 + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
                 + "-----------------------------------------------" + System.lineSeparator()
-                + "FOOD:           0.0%" + System.lineSeparator()
-                + "TRANSPORT:      0.0%" + System.lineSeparator()
-                + "UTILITIES:      0.0%" + System.lineSeparator()
-                + "PERSONAL:      ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 100.0%" + System.lineSeparator()
-                + "ENTERTAINMENT:  0.0%" + System.lineSeparator()
-                + "OTHERS:         0.0%" + System.lineSeparator()
+                + "FOOD:          $$$$ [6.06%]" + System.lineSeparator()
+                + "TRANSPORT:      [0.0%]" + System.lineSeparator()
+                + "UTILITIES:      [0.0%]" + System.lineSeparator()
+                + "PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [90.91%]" + System.lineSeparator()
+                + "ENTERTAINMENT: $$ [3.03%]" + System.lineSeparator()
+                + "OTHERS:         [0.0%]" + System.lineSeparator()
                 + "-----------------------------------------------"
                 ;
         assertEquals(expectedOutput, capturedOut.toString().trim());
     }
 
     /**
-     * Asserts if user is able to input a case-insensitive Month.
+     * Asserts if user is able to calculate expenditure by month.
      */
     @Test
-    void calculateInputCommand_caseInsensitiveMonth_expectCorrectOutput() throws MindMyMoneyException {
+    void calculateInputCommand_calculateByMonth_expectCorrectOutput() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cash /c Personal /d Nike Shoes /a 0.5 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/pm cash /c Personal /d Nike Shoes /a 0.10 /t 30/03/2022";
+        inputString = "/pm cash /c Food /d Coke /a 20 /t 30/04/2022";
         new AddCommand(inputString, user).executeCommand();
 
         setUp();
-        new CalculateInputCommand("/epm 30/03/2022", user).executeCommand();
+        new CalculateInputCommand("/epm 03/2022", user).executeCommand();
         tearDown();
-        String expectedOutput = "Total expenditure in 30/03/2022 is $0.6." + System.lineSeparator()
+        String expectedOutput = "Total expenditure in 03/2022 is $300.0." + System.lineSeparator()
                 + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
                 + "-----------------------------------------------" + System.lineSeparator()
-                + "FOOD:           0.0%" + System.lineSeparator()
-                + "TRANSPORT:      0.0%" + System.lineSeparator()
-                + "UTILITIES:      0.0%" + System.lineSeparator()
-                + "PERSONAL:      ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 100.0%" + System.lineSeparator()
-                + "ENTERTAINMENT:  0.0%" + System.lineSeparator()
-                + "OTHERS:         0.0%" + System.lineSeparator()
+                + "FOOD:           [0.0%]" + System.lineSeparator()
+                + "TRANSPORT:      [0.0%]" + System.lineSeparator()
+                + "UTILITIES:      [0.0%]" + System.lineSeparator()
+                + "PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [100.0%]" + System.lineSeparator()
+                + "ENTERTAINMENT:  [0.0%]" + System.lineSeparator()
+                + "OTHERS:         [0.0%]" + System.lineSeparator()
+                + "-----------------------------------------------"
+                ;
+        assertEquals(expectedOutput, capturedOut.toString().trim());
+    }
+
+    /**
+     * Asserts if user is able to calculate expenditure by Year.
+     */
+    @Test
+    void calculateInputCommand_calculateByYear_expectCorrectOutput() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        new AddCommand(inputString, user).executeCommand();
+        inputString = "/pm cash /c Food /d Coke /a 20 /t 30/04/2021";
+        new AddCommand(inputString, user).executeCommand();
+
+        setUp();
+        new CalculateInputCommand("/epm 2022", user).executeCommand();
+        tearDown();
+        String expectedOutput = "Total expenditure in 2022 is $300.0." + System.lineSeparator()
+                + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
+                + "-----------------------------------------------" + System.lineSeparator()
+                + "FOOD:           [0.0%]" + System.lineSeparator()
+                + "TRANSPORT:      [0.0%]" + System.lineSeparator()
+                + "UTILITIES:      [0.0%]" + System.lineSeparator()
+                + "PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [100.0%]" + System.lineSeparator()
+                + "ENTERTAINMENT:  [0.0%]" + System.lineSeparator()
+                + "OTHERS:         [0.0%]" + System.lineSeparator()
                 + "-----------------------------------------------"
                 ;
         assertEquals(expectedOutput, capturedOut.toString().trim());
@@ -140,6 +171,28 @@ class CalculateInputCommandTest {
 
         assertThrows(MindMyMoneyException.class,
             () -> new CalculateInputCommand("30/03/2022", user).executeCommand());
+    }
+
+    /**
+     * Asserts if user is able to input an improper date input.
+     */
+    @Test
+    void calculateInputCommand_wrongDateInput_expectException() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        new AddCommand(inputString, user).executeCommand();
+        inputString = "/pm cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
+        new AddCommand(inputString, user).executeCommand();
+
+        assertThrows(MindMyMoneyException.class,
+                () -> new CalculateInputCommand("/epm 34/03/2022", user).executeCommand());
+        assertThrows(MindMyMoneyException.class,
+                () -> new CalculateInputCommand("/epm 30/2022", user).executeCommand());
+        assertThrows(MindMyMoneyException.class,
+                () -> new CalculateInputCommand("/epm /2022", user).executeCommand());
     }
 
     /**
