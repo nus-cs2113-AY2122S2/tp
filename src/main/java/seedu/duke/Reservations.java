@@ -29,7 +29,7 @@ public class Reservations {
         }
         else {
             for (int i = 0; i < reservations.size(); i++) {
-                System.out.println(i + ". " + reservations.get(i).toString());
+                System.out.println(i + 1 + ". " + reservations.get(i).toString());
             }
         }
     }
