@@ -63,6 +63,7 @@ when you are using the application.
 3. Copy the file to the folder you want to use as the _home folder_ for your MindMyMoney.
 4. Open a command line terminal in your _home folder_ and run `java -jar MindMyMoney.jar`.
    The startup interface similar to the one below should appear in a few seconds.  
+
 ````
     __  __ _         _ __  __      __  __
 |  \/  (_)_ _  __| |  \/  |_  _|  \/  |___ _ _  ___ _  _
