@@ -515,8 +515,8 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <hr>
 
 ## _Group Management_
-> A group represents one or more individuals. Several commands use groups to quickly identify a group of individuals
-  without having to manually enter their details one by one.
+> A group represents one or more individuals. The only benefit of a group is to quickly identify a group of individuals
+  without having to manually enter their details one by one when creating a session.
 
 <br>
 
