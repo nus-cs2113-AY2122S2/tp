@@ -225,6 +225,9 @@ for subsequent prompts.
 
 ![Obtain and Parse User Input](uml/sequenceDiagrams/miscellaneous/images/obtainAndParseUserInput.png)
 
+<span class="box info"> 🧾 To improve the readability of the sequence diagram, the construction of the respective
+objects which are subclasses of the `Command` class between Steps 4 and 17 are not included in the diagram.</span>
+
 **(Steps 1 and 2)** When a user enters something into the terminal (when prompted), `UI#getUserInput()` will take in the user's input
 as a `String`, use `String#trim()` to remove leading and trailing whitespaces in the input.
 Thereafter, a line is printed on the terminal to indicate that the user's input has been received
@@ -237,7 +240,7 @@ or symbols that are deemed as illegal (see [Illegal Characters and Phrases](#ill
 If at least one illegal character or phrase is found, an `InvalidCommandException` will be thrown and the parsing is
 aborted.
 
-**(Steps 4 to 10)** If no illegal characters and phrases are found, `Parser#parseUserInput()` will examine the first
+**(Steps 4 to 17)** If no illegal characters and phrases are found, `Parser#parseUserInput()` will examine the first
 word in the user input. This first word should represent the command type that the user wish to execute (i.e. `exercise`,
 `workout`, `plan`, `schedule`, `search`, `help`, or `exit`). Depending on the first word of the user input, different
 methods will be invoked to create the appropriate object of the subclass of the `Command` abstract superclass (see
@@ -257,9 +260,9 @@ of `Command` is carried out:
 3. A new object of the subclass of `Command` is created and if the object is successfully constructed with no errors,
 it is returned to `Parser#parseUserInput()`.
 
-**(Step 11)** The object created is then returned to `WerkIt#startContinuousUserInput()`.
+**(Step 18)** The object created is then returned to `WerkIt#startContinuousUserInput()`.
 
-<span class="box info"> 🧾 (About the sequence diagram) Stricly speaking, the object is returned right after whichever 
+<span class="box info"> 🧾 (About the sequence diagram) Strictly speaking, the object is returned right after whichever 
 'create command' method is invoked. However, to improve the readability of the diagram, only one return line is shown,
 since all alternate paths will return an object that is a subclass of the `Command` class.</span>
 
