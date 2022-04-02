@@ -94,8 +94,12 @@ What can I do for you?
 # Features
 The following are features of the `MindMyMoney` application.
 Please ensure that the format of commands given is accurate.  
-Words in `[SQUARE_BRACKETS]` are the parameters.
+Words in `[SQUARE_BRACKETS]` are the parameters. Words starting with a `/` are flags
 
+> **⚠️Warning⚠️**
+>- All parameters are compulsory! Input the parameters in the order given, or the application will not be able to read your
+   > input.
+>- ENTER RULES ON FORBIDDEN CHARACTERS HERE 
 ## Expenses
 
 ### Display help page for expenses: `help`
@@ -133,10 +137,10 @@ Adds an expenditure to your program. Only **one** expenditure can only be added 
     * For example, an item that cost $420 and 69 cents will be entered as `420.69`.
 * `[DATE]` refers to the date of the purchase of the expenditure.
     * Format of the date is DD/MM/YYYY.
-    * For example, `12 March 2022` will be entered as `12/03/2022`
+    * For example, `12 March 2022` will be entered as `12/03/2022`.
     
-For example:`add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`
-Adds a $4.50 expenditure of the description 'Porridge' that was paid in cash in March 2022 to your expenditure list. <br>
+For example:`add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`.  
+Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash in March 2022 to your expenditure list. <br>
 
 #### Expected Output:
 ````
@@ -160,8 +164,6 @@ into the account
 
 > **⚠️Warning⚠️**
 >- `[CATEGORY]`: Any input not in the list will be rejected.
->- All parameters are compulsory! Input the parameters in the order given, or the application will not be able to read your
-   > input.
 
 <br/>
 
@@ -187,26 +189,72 @@ list /e
 Modifies an expenditure on your expenditure list by specifying its index. <br>
 Use the `list /e` command to view the indices of your expenditures.   
 
-Format:`update [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`  
-For example: `update 1 /pm cash /c food /d chicken rice /a 5 /t 12/03/2022`
+#### Format:`update [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`
+* `[INDEX]` refers to the index of expenditure in list in which you want to edit.
+    * Enter `1` if you want to edit the first entry in the list. 
+* `[NEW_PAYMENT_METHOD]` refers to the new method of payment used.
+    * Enter `cash` or the name of a credit card you have saved.
+* `[NEW_CATEGORY]` refers to the new category of the expenditure.
+    * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`.
+* `[NEW_DESCRIPTION]` refers to the new description of the expenditure.
+    * For example `chicken rice`.
+* `[NEW_AMOUNT]` refers to the updated of the expenditure.
+    * Enter the amount in dollars, rounded off to the nearest cent.
+    * For example, an item that cost $420 and 69 cents will be entered as `420.69`.
+* `[NEW_DATE]` refers to the new date of the purchase of the expenditure.
+    * Format of the date is DD/MM/YYYY.
+    * For example, `12 March 2022` will be entered as `12/03/2022`.
 
-![update screenshot](./images/update.PNG)
+For example: `update 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022`.  
+Updates the first expenditure in the list to a $5.0 expenditure on food item 'chicken rice' that was paid in cash on 12 March 2022.
+    
+#### Expected Outcome:
+````
+> update 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022
+-----------------------------------------------
+Successfully set expenditure 1 to:
+$5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
+-----------------------------------------------
+````
+
+> **💡 Note:**
+>- This command is similar to the [add an expenditure](#add-an-expenditure-add) command.   
+   > Field that are labeled starting with NEW follow the same restrictions base command in [add an expenditure](#add-an-expenditure-add).
+   > For example `[NEW_CATEGORY]` is **case-insensitive** like `[CATEGORY]`
+>- Only enter `[INDEX]` that exist in the list. For example if you have 4 items in the list, specify `[INDEX]` to be a number from 1 to 4.
 
 <br/>
 
 ### Remove an expenditure: `delete`
-Deletes an expenditure from your expenditure list by specifying its index. <br>
+Deletes an expenditure from your expenditure list by specifying its index.  
 Use the `list /e` command to view the current indices of your expenditures.   
 
-Format:`delete`  
-For example: `delete 1` Deletes the first expenditure on your list.
+#### Format:`delete [INDEX]`  
+* `[INDEX]` refers to the index of expenditure in list in which you want to delete.
+    * Enter `1` if you want to delete the first entry in the list.  
 
-![delete screenshot](./images/delete_eg.PNG)
+For example: `delete 1` Deletes the first expenditure on your list.  
+
+#### Expected Output:
+````
+> list /e
+-----------------------------------------------
+1. $3000.0 was spent on Nike Shoes(Food) using Cash [30/03/2022]
+2. $3.21 was spent on For(Food) using Cash [30/01/1999]
+3. $4.5 was spent on Porridge(Food) using Cash [12/03/2022]
+-----------------------------------------------
+
+> delete 1
+I have removed Nike Shoes of $3000.0 from the account
+````
+> **💡 Note:**
+>- Only enter `[INDEX]` that exist in the list. For example if you have 4 items in the list, specify `[INDEX]` to be a number from 1 to 4.
+>- Do not use `delete` when the list is empty.
 
 <br/>
 
 ### Calculations that MindMyMoney provide: `calculate`
-MindMyMoney provides a calculating feature. See below for more details of the feature.
+MindMyMoney can calculate your expenditure for you. See below for more details of the feature.
 
 #### Expenditure per month: `calculate /epm`
 Shows the sum of the amounts of expenditures you have made in a month of a certain year. <br>
