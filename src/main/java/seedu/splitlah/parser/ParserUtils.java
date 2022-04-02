@@ -1,7 +1,5 @@
 package seedu.splitlah.parser;
 
-import seedu.splitlah.command.ActivityListCommand;
-import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
