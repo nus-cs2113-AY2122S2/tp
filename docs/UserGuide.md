@@ -326,8 +326,6 @@ Example of usage:
 
 Format: `overview`
 
-Example of usage:
-
 ![list-command-screenshot]() <!-- this is a placeholder -->
 
 ---
