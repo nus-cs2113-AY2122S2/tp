@@ -140,11 +140,11 @@ public class ActivityEditCommand extends Command {
      * Else, the total cost is distributed evenly.
      */
     private void updateCostAndCostList() {
-        boolean isZeroCost = (totalCost == NO_COST);
-        if (isZeroCost) {
+        if (totalCost == MISSING_TOTALCOST && costList != MISSING_COSTLIST) {
+            totalCost = 0;
             updateCostListWithExtraCharges();
             calculateTotalCost();
-        } else {
+        } else if (totalCost != MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
             updateCostWithExtraCharges();
             int numberOfPeopleInvolved = involvedList.length;
             costList = distributeCostEvenly(numberOfPeopleInvolved);
@@ -287,11 +287,12 @@ public class ActivityEditCommand extends Command {
     }
 
     private String[] getInvolvedListFromPersonList(ArrayList<Person> involvedPersonList) {
-        int listSize = involvedArrayList.size();
+        int listSize = involvedPersonList.size();
         String[] involvedListStringArray = new String[listSize];
         for (int i = 0; i < listSize; ++i) {
             involvedListStringArray[i] = involvedPersonList.get(i).getName();
         }
+        return involvedListStringArray;
     }
 
     /**
