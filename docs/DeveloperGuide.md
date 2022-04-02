@@ -435,7 +435,6 @@ The following sequence diagram is the detailed procedure for Step 2's `WorkoutLi
 > 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
 > `WorkoutList#deleteWorkout()` have been omitted.
 
-<br><br>
 **(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
 In this case, the user argument parameter is the workout index number of the workout to be deleted from the workout list as a `String` object.
 <br><br>
@@ -461,8 +460,14 @@ Alright, the following workout has been removed:
 
 ----------------------------------------------------------------------
 ```
-**(Steps 6 to 7)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
-the `workouts.txt` file according to the newly modified application's workout list.
+
+**(Steps 6 to 7)** The `WorkoutCommand#deletePlanContainsDeletedWorkout()` method will
+be called to delete any existing plan(s) that contains the workout that has been deleted.
+<br><br>
+**(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
+the `workouts.txt` file according to the newly modified application's workout list and the
+the `FileManager#rewriteAllPlansToFile(planList)` is also called to rewrite
+the `plans.txt` file according to the newly modified application's plan list.
 <br><br>
 This completes the process of deleting an existing workout in WerkIt!
 
@@ -540,7 +545,6 @@ The following sequence diagram is the detailed procedure for Step 2's `PlanList#
 > 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
 > `PlanList#createAndAddPlan()` have been omitted.
 
-<br><br>
 **(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
 method is parsed to obtain the following information required to create the `Plan` object:
 1. Name of the plan.
@@ -762,6 +766,7 @@ If `dayList[0]` contains a `Day` object, it would mean that the user scheduled a
 user were to execute the `schedule /update` command again to update the plan to be scheduled for Monday, the application
 will update the content in the Day object stored in `dayList[0]`. It will not recreate a `Day` object for Monday
 to store the new plan.
+
 ---
 
 #### View Schedule
