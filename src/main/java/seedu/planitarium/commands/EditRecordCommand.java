@@ -50,6 +50,11 @@ public class EditRecordCommand extends Command {
         } catch (PlanITariumException e) {
             description = null;
         }
+        try {
+            amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
+        } catch (PlanITariumException e) {
+            amount = null;
+        }
         assert (uid > 0) : USER_INDEX_NOT_VALID;
         CommandFactory.logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, group, uid));
     }
@@ -59,11 +64,6 @@ public class EditRecordCommand extends Command {
         assert (family != null) : FAMILY_NOT_NULL;
         switch (keyword) {
         case EDIT_INCOME_CMD:
-            try {
-                amount = Parser.getValidMoney(Parser.parseIncome(userInput));
-            } catch (PlanITariumException e) {
-                amount = null;
-            }
             index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
                     family.getNumberOfIncomes(group, uid));
             family.editIncome(group, uid, index, description, amount, isPermanent);
@@ -73,11 +73,6 @@ public class EditRecordCommand extends Command {
         case EDIT_SPENT_CMD:
             index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput),
                     family.getNumberOfExpenditures(group, uid));
-            try {
-                amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
-            } catch (PlanITariumException e) {
-                amount = null;
-            }
             try {
                 category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
             } catch (PlanITariumException e) {
