@@ -9,6 +9,7 @@ autonumber
 participant "werkIt:WerkIt" AS WerkIt
 participant "ui:UI" AS UI
 participant "parser:Parser" AS Parser
+participant "newCommand\n:Command" AS newCommand
 
 activate WerkIt
 WerkIt -> UI : getUserInput()
@@ -36,5 +37,10 @@ else Command starts with 'plan'
 else Command starts with 'schedule'
     Parser -> Parser : createScheduleCommand(userInput)
 end
+
+return newCommand:Command
+
+WerkIt -> newCommand : execute()
+activate newCommand
 
 @enduml
