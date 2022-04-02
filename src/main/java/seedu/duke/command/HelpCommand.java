@@ -1,9 +1,10 @@
 package seedu.duke.command;
 
 import seedu.duke.Packages;
-import seedu.duke.Reservations;
 
 public class HelpCommand extends Command {
+
+    public static final String COMMAND_WORD = "help";
 
     @Override
     public void execute(Packages packages) {

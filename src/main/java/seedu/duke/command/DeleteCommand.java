@@ -1,9 +1,10 @@
 package seedu.duke.command;
 
 import seedu.duke.Packages;
-import seedu.duke.Reservations;
 
 public class DeleteCommand extends Command {
+
+    public static final String COMMAND_WORD = "delete";
     private final int id;
 
     public DeleteCommand(int id) {
