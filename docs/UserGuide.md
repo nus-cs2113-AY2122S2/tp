@@ -79,6 +79,24 @@ possible issues from arising when using the application.</span>
 7. Run the WerkIt! application with the command: `java -jar WerkIt.jar`.
 
 ### Recommended Terminals
+The following table lists down the operating systems and their respective terminals that WerkIt! has been tested on to 
+work.
+
+| Operating System  | Version                        | Recommended Terminal                                                                                                |
+|:------------------|:-------------------------------|:--------------------------------------------------------------------------------------------------------------------|
+| Microsoft Windows | Windows 10 2004 and above      | Windows Terminal ([User Guide](https://docs.microsoft.com/en-us/windows/terminal/))                                 |
+| Apple macOS       | macOS 10.15 Catalina and above | Terminal ([User Guide](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac)) |
+| Ubuntu Linux      | Ubuntu 20.04.3 (LTS) and above | Bash Terminal ([User Guide](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))          |
+
+<span class="box warning">⚠️If your operating system is not listed in the table above, it means our application has 
+not been tested on it, and we cannot guarantee that the application may work as intended. We highly encourage you to 
+use one of the recommended operating systems listed in the table above. 
+We apologise for any inconvenience caused.</span>
+
+<span class="box warning">⚠️(For Microsoft Windows users) In order for the application to display colours properly
+on your screen, Windows Terminal needs to be used. The default Command Prompt and Powershell consoles will not be able
+to display WerkIt!'s colours properly.</span>
+
 ---
 ## Features 
 In this section, features of the application can be classified into 4 main categories. They are: <br>
