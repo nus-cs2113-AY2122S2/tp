@@ -316,7 +316,6 @@ There are 2 ways that you can create an activity:
 > **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
    it.
->- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
@@ -406,7 +405,6 @@ There are 2 ways that you can edit an activity:
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
      it.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
->- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
