@@ -1,11 +1,15 @@
 package seedu.duke;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.command.*;
+import seedu.duke.exception.InvalidDateException;
 
 public class Parser {
 
@@ -79,15 +83,26 @@ public class Parser {
             String name = matcher.group("name");
             int id = Integer.parseInt(matcher.group("id"));
             String start = matcher.group("startDate");
-            LocalDate startDate = LocalDate.from(PARSE_FORMAT.parse(start));
             String end = matcher.group("endDate");
+            boolean startDateValid = isDateValid(start);
+            boolean endDateValid = isDateValid(end);
+            if (!startDateValid){
+                throw new InvalidDateException("Start date not valid!");
+            } else if (!endDateValid) {
+                throw new InvalidDateException("End date not valid!");
+            }
+            LocalDate startDate = LocalDate.from(PARSE_FORMAT.parse(start));
             LocalDate endDate = LocalDate.from(PARSE_FORMAT.parse(end));
+            if (!dateStartEndValid(startDate, endDate)){
+                throw new InvalidDateException("End date cannot be before start date!");
+            }
             String hotel = matcher.group("hotel");
             double price = Double.parseDouble(matcher.group("price"));
             String country = matcher.group("country");
             int vacancies = Integer.parseInt(matcher.group("vacancies"));
             return new AddCommand(name, id, startDate, endDate, hotel, price, country, vacancies);
-
+        } catch (InvalidDateException e) {
+            return new InvalidDateCommand(e.getMessage());
         } catch (Exception e) {
             return new WrongFormatCommand(e.getMessage());
         }
@@ -160,5 +175,21 @@ public class Parser {
         } catch (Exception e) {
             return new WrongFormatCommand(e.getMessage());
         }
+    }
+
+    public static boolean isDateValid(String date) {
+        String DATE_FORMAT = "dd/MM/yyyy";
+        try {
+            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+            df.setLenient(false);
+            df.parse(date);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    public static boolean dateStartEndValid(LocalDate startDate, LocalDate endDate) {
+        return endDate.isAfter(startDate);
     }
 }
