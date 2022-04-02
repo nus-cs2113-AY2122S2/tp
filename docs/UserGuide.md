@@ -69,20 +69,23 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 
 ## Quick Notes
 - Allowed characters for values:
-    - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
-    - Decimals (up to 2 decimal places): `3.5`, `3.95`
-    - Whitespace: `Birthday party`
+  - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
+  - Decimals (up to 2 decimal places): `3.5`, `3.95`
+  - Whitespace: `Birthday party`
 - A forward slash `/` indicates a delimiter and is used to separate commands into parts.
   Each command's documentation specifies the required delimiters and their purpose.
-    - Example: `/n`, `/sid`
-    - Therefore, the forward slash `/` should **only** be used to indicate the delimiters,
-      and **never** in the arguments.
+  - Example: `/n`, `/sid`
+  - Therefore, the forward slash `/` should **only** be used to indicate the delimiters,
+    and **never** in the arguments.
 - Parameters enclosed in `[ ]` must be supplied by the user.
-    - Example: `[SESSION_ID]`
+  - Example: `[SESSION_ID]`
 - Parameters with an ellipsis `...` indicate that the user can supply multiple values.
-    - Example: `[COST1 COST2 ...]`
+  - Example: `[COST1 COST2 ...]`
 - Parameters enclosed within `[<` and `>]` indicates that the arguments are optional.
-    - Example: `[</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+  - Example: `[</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+- Parameters enclosed within `{` and `}` indicates that at least one of the delimiters
+  and their respective arguments have to be supplied.
+  - Example: `{/pl [NAME1 NAME2 ...] /gid [GROUD_ID]}`
 
 ## Quick Start
 
@@ -125,13 +128,15 @@ displayed in an easy-to-read summary.
 ### Creating a session: `session /create`
 Creates a session so that you can manage your group outings using SplitLah. <br>
 
-> Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...] [</gid [GROUD_ID]>]`
+> Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] {/pl [NAME1 NAME2 ...] /gid [GROUD_ID]}`
 >* `[SESSION_NAME]` refers to the name of the session.
 >  * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
 >  * The format of the date must be in `DD-MM-YYYY`.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
 >  * Each individual name is **case-insensitive**.
+>* `[GROUP_ID]` refers to the unique identifier of the group.
+>  * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
  
 <br>
 
@@ -167,7 +172,7 @@ Deletes an existing session so that you can remove sessions that you no longer n
 
 >Format: `session /delete /sid [SESSION_ID]`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
+>   * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 
 <br>
 
@@ -189,15 +194,15 @@ Deletes an existing session so that you can remove sessions that you no longer n
 ### Editing a session: `session /edit`
 Edits an existing session so that you can change the details of a session.<br>
 
->Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`
+>Format: `session /edit /sid [SESSION_ID] {/n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
+>  * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[SESSION_NAME]` refers to the name of the session.
-   >  * The session name is **case-insensitive**.
+>  * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
-   >  * The format of the date must be in `DD-MM-YYYY`.
+>  * The format of the date must be in `DD-MM-YYYY`.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
-   >  * Each individual name is **case-insensitive**.
+>  * Each individual name is **case-insensitive**.
 
 <br>
 
