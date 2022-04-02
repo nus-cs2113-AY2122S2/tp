@@ -1,14 +1,14 @@
 # Developer Guide
 
-- [Acknowledgements](#Acknowledgements)  
-- [Design & Implementation](#Design-&-Implementation)  
-  - [Architecture](#Architecture)
-  - [Implemented Features](#Implemented-Features)
-  - [Proposed Features](#Proposed-Features)
-- [Product scope](#Product-scope)
-- [User Stories](#User-Stories)
-- [Glossary](#Glossary)
-- [Instructions for manual testing](#Instructions-for-manual-testing)
+- [Acknowledgements](#acknowledgements)  
+- [Design & Implementation](#design-&-implementation)  
+  - [Architecture](#architecture)
+  - [Implemented Features](#implemented-Features)
+  - [Proposed Features](#proposed-features)
+- [Product scope](#product-scope)
+- [User Stories](#user-stories)
+- [Glossary](#glossary)
+- [Instructions for manual testing](#instructions-for-manual-testing)
 
 
 ## Acknowledgements
