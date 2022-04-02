@@ -152,6 +152,7 @@ is not specified, an `InvalidCommandException` will be thrown.
 ### Overview
 * [Getting User Input Continuously](#getting-user-input-continuously)
 * [Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)
+    * [Illegal Characters & Phrases](#illegal-characters--phrases)
 * [Exercise](#exercise)
   * [List Exercise](#list-exercise)
 * [Workout](#workout)
@@ -221,7 +222,26 @@ for subsequent prompts.
 ---
 
 ### Parsing User Input and Getting the Right Command
-**_TODO_**: Explain how the app parses user input and determines which `Command` subclass object to instantiate.
+
+When a user enters something into the terminal (when prompted), `UI#getUserInput()` will take in the user's input
+as a `String`, use `String#trim()` to remove leading and trailing whitespaces in the input.
+Thereafter, a line is printed on the terminal to indicate that the user's input has been received
+and will be processed, before returning the user input as a `String` to the calling method (i.e. 
+`WerkIt#startContinuousUserPrompt()`).
+
+In `WerkIt#startContinuousUserPrompt()`, the method will pass the obtained user string as a parameter into
+`Parser#parseUserInput()`.
+
+#### Illegal Characterse & Phrases
+Some symbols and phrases are reserved for use by the application and thus are not allowed to be used by the user
+in his/her inputs to avoid any potential instabilities when processing his/her inputs.
+
+| Illegal Character/Phrase | Purpose in Application                                                                                                                                                                |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| The pipe character &#124; | Used as a delimiter in the app data files to separate the various data. Allowing the user to use delimiters in their plan names may cause issues when storing them in the data files. |
+| The phrase 'rest day' | Used as an indicator that a particular day in the user's schedule does not have a plan in it. Allowing the user to name a plan as 'rest day' may cause issues when displaying the schedule. |
+
+
 
 ---
 
