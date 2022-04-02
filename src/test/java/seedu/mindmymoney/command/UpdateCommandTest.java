@@ -132,7 +132,7 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         try {
             updateCommand.executeCommand();
-            assertEquals(testUser.getIncomeListArray().get(0).toString(), newIncome.toString());
+            assertEquals(testUser.getIncomeListArray().get(INDEX_OF_FIRST_ITEM).toString(), newIncome.toString());
         } catch (MindMyMoneyException e) {
             System.out.println(e.getMessage());
             fail();
