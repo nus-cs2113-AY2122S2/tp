@@ -141,7 +141,7 @@ public class UpdateCommandTest {
 
     /**
      * Assert that an invalid update income command will throw an exception.
-     * */
+     **/
     @Test
     void updateIncomeCommand_invalidInput_exceptionThrown() {
         Income testIncome = new Income(1000, "Salary");
