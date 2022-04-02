@@ -7,8 +7,6 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -104,20 +102,58 @@ public class TaskList {
         return firstDate.toLocalDate().equals(secondDate.toLocalDate());
     }
 
-    private boolean hasTimeClash(Task currentTask, LocalDateTime doOnStartDateTime,
-                                 LocalDateTime doOnEndDateTime) {
-        return (doOnStartDateTime.isEqual(currentTask.getDoOnStartDateTime())
-                || (doOnEndDateTime.isAfter(currentTask.getDoOnStartDateTime())
-                && doOnStartDateTime.isBefore(currentTask.getDoOnStartDateTime()))
-                || (doOnStartDateTime.isBefore(currentTask.getDoOnEndDateTime())
-                && doOnEndDateTime.isAfter(currentTask.getDoOnEndDateTime()))
-                || (doOnStartDateTime.isAfter(currentTask.getDoOnStartDateTime())
-                && doOnEndDateTime.isBefore(currentTask.getDoOnEndDateTime())))
-                || (currentTask.getDoOnStartDateTime().isAfter(doOnStartDateTime)
-                && currentTask.getDoOnEndDateTime().isBefore(doOnEndDateTime));
+    private boolean isEndTimeAfterCurrentStartTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                   LocalDateTime doOnEndDateTime) {
+        return doOnEndDateTime.isAfter(currentTask.getDoOnStartDateTime())
+                && (doOnStartDateTime.isBefore(currentTask.getDoOnStartDateTime())
+                || doOnStartDateTime.equals(currentTask.getDoOnStartDateTime()));
     }
 
-    private void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck)
+    private boolean isStartTimeBeforeCurrentEndTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                    LocalDateTime doOnEndDateTime) {
+        return doOnStartDateTime.isBefore(currentTask.getDoOnEndDateTime())
+                && (doOnEndDateTime.isAfter(currentTask.getDoOnEndDateTime())
+                || doOnEndDateTime.equals(currentTask.getDoOnEndDateTime()));
+    }
+
+    private boolean isStartAndEndTimeWithinCurrentTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                       LocalDateTime doOnEndDateTime) {
+        return doOnStartDateTime.isAfter(currentTask.getDoOnStartDateTime())
+                && doOnEndDateTime.isBefore(currentTask.getDoOnEndDateTime());
+    }
+
+    private boolean isStartAndEndTimeContainCurrentTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                        LocalDateTime doOnEndDateTime) {
+        return currentTask.getDoOnStartDateTime().isAfter(doOnStartDateTime)
+                && currentTask.getDoOnEndDateTime().isBefore(doOnEndDateTime);
+    }
+
+    private boolean isStartAndEndTimeEqualsCurrentTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                       LocalDateTime doOnEndDateTime) {
+        return doOnStartDateTime.isEqual(currentTask.getDoOnStartDateTime())
+                && doOnEndDateTime.equals(currentTask.getDoOnEndDateTime());
+    }
+
+    private boolean hasTimeClash(Task currentTask, LocalDateTime doOnStartDateTime,
+                                 LocalDateTime doOnEndDateTime) {
+        return isStartAndEndTimeEqualsCurrentTime(currentTask, doOnStartDateTime, doOnEndDateTime)
+                || isEndTimeAfterCurrentStartTime(currentTask, doOnStartDateTime, doOnEndDateTime)
+                || isStartTimeBeforeCurrentEndTime(currentTask, doOnStartDateTime, doOnEndDateTime)
+                || isStartAndEndTimeWithinCurrentTime(currentTask, doOnStartDateTime, doOnEndDateTime)
+                || isStartAndEndTimeContainCurrentTime(currentTask, doOnStartDateTime, doOnEndDateTime);
+    }
+
+    /**
+     * Checks if there is any date and time clashes
+     * for a given array.
+     *
+     * @param taskList Array representation of tasks.
+     * @param taskToCheck New Task to be checked for clash.
+     * @throws TimeClashException If there is a date and time clash, i.e.
+     *                            taskToCheck has the same date and clashing of time periods
+     *                            with tasks in taskList
+     */
+    public void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck)
             throws TimeClashException {
         for (Task task : taskList) {
             if (isOnSameDay(task.getDoOnStartDateTime(), taskToCheck.getDoOnStartDateTime())
@@ -307,7 +343,6 @@ public class TaskList {
 
     /**
      * Deletes all tasks saved within the task array.
-     *
      */
     public void deleteAllTasks() {
         tasks.clear();

@@ -11,8 +11,6 @@ import seedu.sherpass.command.UnmarkCommand;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 
-import seedu.sherpass.task.TaskList;
-
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
