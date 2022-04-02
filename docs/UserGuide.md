@@ -128,11 +128,11 @@ Format: `add /n NAME /g GROUP_INDEX`
 
 Example of usage:
 
-* Add Alice to the Parent's category to be tracked.
+* Add Alice to the Parents' category to be tracked.
 
   `add /n Alice /g 1`
 
-* _Result_: Entry for Alice is added to Parent's tracking list with a user index of **1**.
+* _Result_: Entry for Alice is added to Parents' tracking list with a user index (uid) of **1**.
 
   ![add-command-screenshot]() <!-- this is a placeholder -->
 
@@ -153,7 +153,7 @@ Example of usage:
 
   `delete /g 1 /u 1`
 
-* _Result_: The person with uid = 1 is deleted from the Parent's group 
+* _Result_: The person with uid = 1 is deleted from the Parents' group 
   
 <br/>
 
@@ -176,7 +176,7 @@ Format: `addin /g GROUP_INDEX /u USER_INDEX /d DESCRIPTION /i INCOME /p <T/(any)
 
 Example of usage:
 
-* Add a monthly-recurrent Salary of $2,000 to Alice's income.
+* Add a monthly-recurrent Salary of $2,000, to Alice's income.
 
   `addin /g 1 /u 1 /d Salary /i 2000 /p T`
 
@@ -201,7 +201,7 @@ Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 
 Example of usage:
 
-* Delete the entry, recurrent Salary of $2,000, from Alice's income.
+* Delete the monthly-recurrent Salary of $2,000, from Alice's income.
 
   `deletein /g 1 /u 1 /r 1`
 
@@ -230,7 +230,7 @@ Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCR
 
 Example of usage:
 
-* Edits the recurrent Salary of $2,000 from Alice's income to $200.
+* Edits the monthly-recurrent Salary of $2,000, from Alice's income, to $200.
 
   `editin /g 1 /u 1 /r 1 /i 200`
 
@@ -255,7 +255,7 @@ Format: `addout /g GROUP_INDEX /u USER_INDEX /e EXPENDITURE /d DESCRIPTION /c CA
 
 Example of usage:
 
-* Add a monthly-recurrent expenditure on candies of $20 to Alice's expenditure. This expenditure is tagged under the "
+* Add a monthly-recurrent expenditure of $20 for candies, to Alice's expenditure. This expenditure is tagged under the "
   Food and Drinks" category.
 
   `addout /g 1 /u 1 /e 20 /d candies /c 1 /p T`
@@ -278,7 +278,7 @@ Format: `deleteout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX`
 
 Example of usage:
 
-* Delete the entry, recurrent candies of $20, from Alice's expenditure.
+* Delete the monthly-recurrent candies of $20, from Alice's expenditure.
 
   `deleteout /g 1 /u 1 /r 1`
 
@@ -308,7 +308,7 @@ Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITU
 
 Example of usage:
 
-* Edits the recurrent candies expenditure of $20 from Alice's expenditure to $25.
+* Edits the monthly-recurrent candies expenditure of $20, from Alice's expenditure, to $25.
 
   `editout /g 1 /u 1 /r 1 /e 25`
 
