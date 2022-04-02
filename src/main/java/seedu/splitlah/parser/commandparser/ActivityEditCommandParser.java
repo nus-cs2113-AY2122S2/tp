@@ -86,6 +86,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
             // involvedList not provided by user.
         }
 
+
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
         } catch (InvalidFormatException exception) {
@@ -106,7 +107,6 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
 
         boolean isMissingCost = false;
         boolean hasDifferentLength = false;
-
         if (isMissingCost) {
             hasDifferentLength = involvedList.length != costList.length;
         }
