@@ -22,6 +22,7 @@ Please take note of these few terms. It is explained as below:
 | Workout  | An exercise with a quantity/number of repetitions. <br/>Example: "5 push up", "5 pull up", "10 sit up"                   |
 | Plan     | A set of workouts. <br/>Example: A plan named "Arms" will contains "5 push ups, 5 pull ups"                              |
 | Schedule | Plan schedule for a day. The schedule is set for a week. <br/>Example: Arms plan will be added to Monday in the schedule |
+
 ---
 
 ## Table of Contents
