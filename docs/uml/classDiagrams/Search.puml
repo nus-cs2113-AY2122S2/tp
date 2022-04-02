@@ -1,19 +1,18 @@
 @startuml
 'https://plantuml.com/class-diagram
+hide circle
+title Class Diagram of `search` Command
+Main -> WerkIt
+WerkIt -> Parser
+WerkIt -> UI
+"{abstract}\nCommand" <|- SearchCommand
 
-Main - WerkIt
-WerkIt - Parser
-WerkIt - UI
-Command <|- SearchCommand
-SearchCommand - Parser
-SearchCommand - WerkIt
+
+Parser ..> "{abstract}\nCommand"
 class WerkIt {
 + startContinuousUserPrompt()
 }
 
-abstract Command {
-
-}
 
 class Main {
 
@@ -21,6 +20,10 @@ class Main {
 
 class SearchCommand {
 + execute()
++ searchWorkout()
++ searchPlan()
++ searchWorkout()
++ searchExercise()
 }
 
 class UI {

@@ -28,7 +28,6 @@ import static commands.SearchCommand.SEARCH_EXERCISE_ACTION_KEYWORD;
 import static commands.SearchCommand.SEARCH_WORKOUT_ACTION_KEYWORD;
 import static commands.SearchCommand.SEARCH_ALL_ACTION_KEYWORD;
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
-import static commands.WorkoutCommand.LIST_ALL_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
 import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.UPDATE_ACTION_KEYWORD;
@@ -47,6 +46,9 @@ public class Parser {
     private PlanList planList;
     private DayList dayList;
     private FileManager fileManager;
+    public static final String SPACE_CHARACTER = " ";
+    public static final int EXPECTED_NUMBER_OF_PARAMETERS_HELP = 1;
+    public static final int EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE = 2;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS = 2;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS = 3;
     private static Logger logger = Logger.getLogger(Parser.class.getName());
@@ -209,13 +211,6 @@ public class Parser {
                         InvalidCommandException.INVALID_WORKOUT_LIST_COMMAND_ERROR_MSG);
             }
             break;
-        case LIST_ALL_ACTION_KEYWORD:
-            if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
-                logger.log(Level.WARNING, "User has entered an invalid listall workout command action.");
-                throw new InvalidCommandException(className,
-                        InvalidCommandException.INVALID_WORKOUT_LIST_ALL_COMMAND_ERROR_MSG);
-            }
-            break;
         default:
             logger.log(Level.WARNING, "User has entered an invalid workout command action.");
             throw new InvalidCommandException(className,
@@ -267,7 +262,12 @@ public class Parser {
      * @param userInput The user's input.
      * @return A HelpCommand object.
      */
-    public HelpCommand createHelpCommand(String userInput) {
+    public HelpCommand createHelpCommand(String userInput) throws InvalidCommandException {
+        String className = this.getClass().getSimpleName();
+        if (userInput.trim().split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_HELP) {
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_HELP_COMMAND_ERROR_MSG);
+        }
         return new HelpCommand(userInput);
     }
 
@@ -311,6 +311,10 @@ public class Parser {
             arguments = userInput.split(" ", 3)[2].trim();
             return new SearchCommand(userInput, ui, workoutList, actionKeyword, arguments);
         case SEARCH_ALL_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length == EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE) {
+                arguments = SPACE_CHARACTER;
+                return new SearchCommand(userInput, ui, exerciseList, workoutList, planList, actionKeyword, arguments);
+            }
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid search all command action.");
                 throw new InvalidCommandException(className,

@@ -3,7 +3,11 @@ package data.workouts;
 import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
+import data.plans.InvalidPlanException;
+import data.plans.Plan;
+import data.plans.PlanList;
 import storage.LogHandler;
+import werkit.UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +35,6 @@ public class WorkoutList {
      */
     public WorkoutList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
-
         LogHandler.linkToFileLogger(logger);
     }
 
@@ -174,107 +177,41 @@ public class WorkoutList {
     }
 
     /**
-     * Prints all workouts stored in workout list. Display 10 workouts at a time and
-     * prompt the users if they want to view more workouts.
-     */
-    public void listWorkout() {
-        logger.entering(getClass().getName(), "listWorkout");
-        int index = 0;
-        int totalPrints = workoutsDisplayList.size();
-        String input = "";
-
-        while (totalPrints > MAX_DISPLAY) {
-            index = continuousPrinting(index, 10);
-            assert (index <= workoutsDisplayList.size());
-            totalPrints -= 10;
-            while (!isInputYesOrNo(input)) {
-                System.out.println("Do you want to view more workouts? [yes/no]");
-                Scanner in = new Scanner(System.in);
-                input = in.nextLine().toLowerCase();
-            }
-            if (!input.equals("yes")) {
-                return;
-            }
-            input = "";
-        }
-
-        if (totalPrints > 0) {
-            continuousPrinting(index, totalPrints);
-            System.out.println();
-            System.out.println("Showed all workouts in list");
-            return;
-        } else {
-            assert (workoutsDisplayList.size() == 0);
-            System.out.println("The workout list is empty");
-        }
-        logger.exiting(getClass().getName(), "listWorkout");
-    }
-
-    /**
      * Prints all workouts stored in workout list at once.
      */
     public void listAllWorkout() {
         int index = 1;
-        System.out.println("Showing workouts " + (index) + "-" + workoutsDisplayList.size()
-                + " of " + workoutsDisplayList.size() + ":");
-        while (index <= workoutsDisplayList.size()) {
-            Workout workoutObject = getWorkoutFromIndexNum(index);
-            System.out.println(index + ". " + workoutObject.toString());
-            index += 1;
+        if (workoutsDisplayList.size() <= 0) {
+            System.out.println("The workout list is empty");
+        } else {
+            System.out.println("Showing workouts " + (index) + "-" + workoutsDisplayList.size()
+                    + " of " + workoutsDisplayList.size() + ":");
+            while (index <= workoutsDisplayList.size()) {
+                Workout workoutObject = getWorkoutFromIndexNum(index);
+                System.out.println(index + ". " + workoutObject.toString());
+                index += 1;
+            }
+            System.out.println("Showed all workouts in list");
         }
-        System.out.println("Showed all workouts in list");
     }
 
-    /**
-     * Prints noOfPrints workouts stored in workout list .
-     *
-     * @param index of workouts stored in workoutList.
-     * @param noOfPrints number of workouts to be printed.
-     * @return index the next workout index to be printed.
-     */
-    public int continuousPrinting(int index, int noOfPrints) {
-        System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints)
-                + " of " + workoutsDisplayList.size() + ":");
-        System.out.println();
-        assert (noOfPrints <= workoutsDisplayList.size());
-        for (int i = 0; i < noOfPrints; i++) {
-            Workout workoutObject = getWorkoutFromIndexNum(index + 1);
-            System.out.println(index + 1 + ". " + workoutObject.toString());
-            index += 1;
-        }
-        return index;
-    }
-
-    /**
-     * Checks if the user input is "yes" or "no".
-     *
-     * @param answer input by user.
-     * @return true if input equals to "yes" or "no", else otherwise.
-     */
-    public boolean isInputYesOrNo(String answer) {
-        if (answer.equals("")) {
-            return false;
-        }
-        if (answer.equals("no") || answer.equals("yes")) {
-            return true;
-        }
-        logger.log(Level.WARNING, "User did not entered the command that was expected.");
-        return false;
-    }
 
     /**
      * This method removes the intended workout in the workout list.
      * The intended workout to delete is determined by the user who
      * will indicate the workout number to delete in the workout list.
+     * Checks whether the deleted workout is any plan. If there is a plan
+     * contains the deleted workout, the plan will also be deleted.
      *
-     * @param userArgument The argument entered by user, that is, the workout number to delete.
-     * @return deletedWorkout, the workout object that is deleted from the workoutsList.
-     * @throws NumberFormatException If workout number could not be parsed into an integer.
+     * @param userArgument The argument entered by user, that is, the workout index number to delete.
+     * @param planList An instance of the PlanList class.
+     * @throws NumberFormatException If workout index number could not be parsed into an integer.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
-     * @throws InvalidWorkoutException        If workout number to delete is out of range.
+     * @throws InvalidWorkoutException        If workout index number to delete is out of range.
+     * @throws InvalidPlanException        If plan index number to delete is out of range.
      */
-    public Workout deleteWorkout(String userArgument) throws InvalidWorkoutException,
-            NumberFormatException, ArrayIndexOutOfBoundsException {
+    public void deleteWorkout(String userArgument, PlanList planList, UI ui) throws InvalidWorkoutException,
+            NumberFormatException, ArrayIndexOutOfBoundsException, InvalidPlanException {
         logger.entering(getClass().getName(), "deleteWorkout");
         int indexToDelete = Integer.parseInt(userArgument.trim());
 
@@ -290,8 +227,35 @@ public class WorkoutList {
         workoutsDisplayList.remove(indexToDelete - 1);
         String deletedWorkoutKey = deletedWorkout.toString();
         getWorkoutsHashMapList().remove(deletedWorkoutKey);
+        ui.printDeleteWorkoutMessage(deletedWorkout);
+
+        String deletedWorkoutDetail = deletedWorkout.toString();
+        deletePlanContainsDeletedWorkout(deletedWorkoutDetail, planList);
+
         logger.exiting(getClass().getName(), "deleteWorkout");
-        return deletedWorkout;
+    }
+
+    public void deletePlanContainsDeletedWorkout(String deletedWorkoutDetail, PlanList planList) throws
+            InvalidPlanException {
+        ArrayList<Integer> planIndexWithDeletedWorkout = planList.findPlanContainsTargetWorkout(deletedWorkoutDetail);
+        if (planIndexWithDeletedWorkout.size() > 0) {
+            System.out.println(deletedWorkoutDetail + " is found in:\n");
+        }
+
+        for (int planNumber : planIndexWithDeletedWorkout) {
+            assert (planList.checkPlanIndexIsWithinRange(planNumber)) : "Plan number is out of range.";
+            System.out.println("\t" + planList.getPlansDisplayList().get(planNumber - 1));
+        }
+
+        int totalNumberOfPlanToDelete = planIndexWithDeletedWorkout.size();
+        for (int i = 0; i < totalNumberOfPlanToDelete; i++) {
+            if (i == 0) {
+                System.out.println("\nThe following plan has been removed:\n");
+            }
+            System.out.println((i + 1) + ". "
+                    + planList.getPlansDisplayList().get(planIndexWithDeletedWorkout.get(i) - i - 1));
+            planList.deletePlan(Integer.toString(planIndexWithDeletedWorkout.get(i) - i));
+        }
     }
 
     /**
@@ -383,6 +347,14 @@ public class WorkoutList {
         return false;
     }
 
+    /**
+     * Finds the workout that the user wants to update.
+     *
+     * @param userArgument The argument entered by user, which includes index of workout to update
+     *                     and new number of repetitions.
+     * @return targetWorkout The workout object which is going to be updated.
+     * @throws InvalidWorkoutException If index of workout is not valid.
+     */
     public String getTargetWorkout(String userArgument) throws InvalidWorkoutException {
         String[] updateDetails = userArgument.split(" ", 2);
         String indexToUpdateString = updateDetails[0].trim();

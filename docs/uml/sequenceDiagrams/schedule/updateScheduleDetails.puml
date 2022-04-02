@@ -1,8 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-!include ../Style.puml
+!include ../../Style.puml
 
-autonumber 7.1
+autonumber 4.1
 
 participant "dayList\n:DayList" AS DayList
 participant ":String" AS string
@@ -27,9 +27,9 @@ deactivate iee
 end
 create "Integer" AS int
 DayList -> int: parseInt(userArgument[0])
-return dayNumber:Int
+return dayNumber:int
 DayList -> int: parseInt(userArgument[1])
-return planNumber:Int
+return planNumber:int
 
 opt !isDayValid
 create ":InvalidScheduleException" AS ise
