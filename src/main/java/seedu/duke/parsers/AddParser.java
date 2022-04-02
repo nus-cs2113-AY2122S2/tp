@@ -90,27 +90,15 @@ public class AddParser extends Parser {
         final String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
         final String modularCreditStr = parsedArguments.get(MODULAR_CREDIT);
         if (!Objects.isNull(taskName)) {
-            try{
-                if (taskName.isBlank()) {
-                    throw new EmptyParamException(TASK_STR);
-                }
-            } catch (EmptyParamException e){
+            if (taskName.isBlank()) {
                 throw new EmptyParamException(TASK_STR);
             }
             if (!Objects.isNull(taskDescription)) {
-                try {
-                    if (taskDescription.isBlank()) {
-                        throw new EmptyParamException(TASK_DESCRIPTION_STR);
-                    }
-                } catch (EmptyParamException e) {
+                if (taskDescription.isBlank()) {
                     throw new EmptyParamException(TASK_DESCRIPTION_STR);
                 }
                 if (!Objects.isNull(estimatedWorkingTime)) {
-                    try {
-                        if (estimatedWorkingTime.isBlank()) {
-                            throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
-                        }
-                    } catch (EmptyParamException e) {
+                    if (estimatedWorkingTime.isBlank()) {
                         throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
                     }
                 }
@@ -129,11 +117,7 @@ public class AddParser extends Parser {
                 throw new InvalidNumberException(MODULAR_CREDIT_STR);
             }
             if (!Objects.isNull(moduleDescription)) {
-                try {
-                    if (moduleDescription.isBlank()) {
-                        throw new EmptyParamException(MODULE_DESCRIPTION_STR);
-                    }
-                } catch (EmptyParamException e) {
+                if (moduleDescription.isBlank()) {
                     throw new EmptyParamException(MODULE_DESCRIPTION_STR);
                 }
             }
