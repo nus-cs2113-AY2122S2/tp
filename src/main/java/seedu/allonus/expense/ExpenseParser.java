@@ -25,6 +25,15 @@ public class ExpenseParser {
     public static final int LEFT_SIDE = 0;
     public static final int ZERO = 0;
     public static final int INDEX_TO_BE_PARSED = 1;
+    public static final char FORWARD_SLASH = '/';
+    public static final String VALID_DATE_FORMAT = "yyyy-MM-dd";
+    public static final String ERR_NEGATIVE_AMOUNT = "Amount cannot be negative!";
+    public static final String ERR_MISSING_FIELDS = "Some fields are missing!";
+    public static final String ERR_DUPLICATE_DELIMITERS = "Duplicate fields found in input!";
+    public static final String ERR_FIRST_CHAR_SLASH = "/ as first character must be surrounded by white spaces!";
+    public static final String ERR_LAST_CHAR_SLASH = "/ is not allowed as the last non-space character!";
+    public static final String ERR_NONSPACED_SLASH = "/ must be surrounded by white spaces!";
+    public static final String ERR_EMPTY_FIELDS = "Fields cannot be empty!";
 
     /**
      * Reformats the date field into a valid date object.
@@ -35,7 +44,7 @@ public class ExpenseParser {
      */
     public static String reformatDate(String rawDate) throws DateTimeParseException {
         LocalDate dateOfExpense = LocalDate.parse(rawDate);
-        String parsedDate = dateOfExpense.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String parsedDate = dateOfExpense.format(DateTimeFormatter.ofPattern(VALID_DATE_FORMAT));
         return parsedDate;
     }
 
@@ -47,8 +56,8 @@ public class ExpenseParser {
      */
     public static void isAmountValid(String amount) throws ExpenseAmountException {
         float parsedAmount = Float.parseFloat(amount);
-        if (parsedAmount < 0) {
-            throw new ExpenseAmountException("Amount cannot be negative!");
+        if (parsedAmount < ZERO) {
+            throw new ExpenseAmountException(ERR_NEGATIVE_AMOUNT);
         }
     }
 
@@ -66,9 +75,13 @@ public class ExpenseParser {
         String rawInput = userInput.split(" ", SPLIT_IN_HALF)[EXPENSE_FIELDS].trim();
         rawInput = " " + rawInput;
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
-        if (!rawInput.contains(DATE_DELIMITER) || !rawInput.contains(AMOUNT_DELIMITER)
-                || !rawInput.contains(CATEGORY_DELIMITER) || !rawInput.contains(REMARKS_DELIMITER)) {
-            throw new ExpenseMissingFieldException("Some fields are missing!");
+        boolean containsDateDelimiter = rawInput.contains(DATE_DELIMITER);
+        boolean containsCategoryDelimiter = rawInput.contains(CATEGORY_DELIMITER);
+        boolean containsAmountDelimiter = rawInput.contains(AMOUNT_DELIMITER);
+        boolean containsRemarksDelimiter = rawInput.contains(REMARKS_DELIMITER);
+        if (!containsDateDelimiter || !containsCategoryDelimiter || !containsAmountDelimiter
+                || !containsRemarksDelimiter) {
+            throw new ExpenseMissingFieldException(ERR_MISSING_FIELDS);
         }
         String date = parseKeywordExpense(rawInput, DATE_DELIMITER, ALL_DELIMITERS);
         date = reformatDate(date);
@@ -92,35 +105,52 @@ public class ExpenseParser {
         int lengthOfStrippedInput = strippedInput.length();
         int lengthOfDelimiter = delimiter.length();
         if (lengthOfRawInput - lengthOfStrippedInput >= lengthOfDelimiter) {
-            throw new ExpenseExtraFieldException("Duplicate fields found in input!");
+            throw new ExpenseExtraFieldException(ERR_DUPLICATE_DELIMITERS);
         }
     }
 
+    /**
+     * Loops through user's input character by character looking for a slash.
+     *
+     * @param userInput the line that is inputted by the user
+     * @throws ExpenseSurroundSlashSpaceException if slash found is in an invalid position
+     */
     public static void checkContainSlash(String userInput) throws ExpenseSurroundSlashSpaceException {
         for (int i = 0; i < userInput.length(); i++) {
             lookForIndexOfSlash(userInput, i);
         }
     }
 
+    /**
+     * Checks if specific character at index position is a slash.
+     *
+     * @param userInput the line that is inputted by the user
+     * @param i the index of the character to be validated
+     * @throws ExpenseSurroundSlashSpaceException if slash found is in an invalid position
+     */
     public static void lookForIndexOfSlash(String userInput, int i) throws ExpenseSurroundSlashSpaceException {
         char c = userInput.charAt(i);
-        if (c == '/') {
+        if (c == FORWARD_SLASH) {
             checkSlashValidity(userInput, i);
         }
     }
 
+    /**
+     * Checks if slash found is in a valid position for the content to be processed.
+     * @param userInput the line that is inputted by the user
+     * @param i the index of the slash character to be validated
+     * @throws ExpenseSurroundSlashSpaceException if slash found is in an invalid position
+     */
     public static void checkSlashValidity(String userInput, int i) throws ExpenseSurroundSlashSpaceException {
         if (i == 0) {
-            throw new ExpenseSurroundSlashSpaceException("/ as first character must be surrounded by white spaces!");
-        }
-        else if (i == userInput.length() - 1) {
-            throw new ExpenseSurroundSlashSpaceException("/ is not allowed as the last non-space character!");
-        }
-        else {
+            throw new ExpenseSurroundSlashSpaceException(ERR_FIRST_CHAR_SLASH);
+        } else if (i == userInput.length() - 1) {
+            throw new ExpenseSurroundSlashSpaceException(ERR_LAST_CHAR_SLASH);
+        } else {
             char beforeSlash = userInput.charAt(i - 1);
             char afterSlash = userInput.charAt(i + 1);
             if (beforeSlash != ' ' || afterSlash != ' ') {
-                throw new ExpenseSurroundSlashSpaceException("/ must be surrounded by white spaces!");
+                throw new ExpenseSurroundSlashSpaceException(ERR_NONSPACED_SLASH);
             }
         }
     }
@@ -140,6 +170,28 @@ public class ExpenseParser {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
         assert leftDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
         assert rightDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
+        String rightOfDelimiter = getRightOfDelimiter(userInput, leftDelimiter);
+        checkNumberOfDelimiters(rightOfDelimiter, leftDelimiter);
+        String[] stripRightOfDelimiter = rightOfDelimiter.split(rightDelimiter, SPLIT_IN_HALF);
+        checkContainSlash(stripRightOfDelimiter[LEFT_SIDE]);
+        String result = stripRightOfDelimiter[LEFT_SIDE].trim();
+        if (leftDelimiter.equals(AMOUNT_DELIMITER)) {
+            isAmountValid(result);
+        }
+        assert result != null : ASSERT_RESULT_NOT_NULL;
+        if (result.length() == ZERO) {
+            throw new ExpenseEmptyFieldException(ERR_EMPTY_FIELDS);
+        }
+        return result;
+    }
+
+    /**
+     * Takes in user input and strips away the contents on the left of delimiter.
+     * @param userInput the line that is inputted by the user
+     * @param leftDelimiter denotes the field that is currently being parsed
+     * @return string with the left of delimiter stripped away
+     */
+    private static String getRightOfDelimiter(String userInput, String leftDelimiter) {
         String[] stripLeftOfDelimiter = userInput.split(leftDelimiter, SPLIT_IN_HALF);
         String rightOfDelimiter;
         if (stripLeftOfDelimiter.length == SPLIT_IN_HALF) {
@@ -147,21 +199,7 @@ public class ExpenseParser {
         } else {
             rightOfDelimiter = stripLeftOfDelimiter[LEFT_SIDE];
         }
-        checkNumberOfDelimiters(rightOfDelimiter, leftDelimiter);
-        String[] stripRightOfDelimiter = rightOfDelimiter.split(rightDelimiter, SPLIT_IN_HALF);
-        checkContainSlash(stripRightOfDelimiter[LEFT_SIDE]);
-        String result = stripRightOfDelimiter[LEFT_SIDE].trim();
-        if (leftDelimiter.equals(AMOUNT_DELIMITER)) {
-            float amountCheck = Float.parseFloat(result);
-            if (amountCheck < 0) {
-                throw new ExpenseAmountException("Amount cannot be negative!");
-            }
-        }
-        assert result != null : ASSERT_RESULT_NOT_NULL;
-        if (result.length() == ZERO) {
-            throw new ExpenseEmptyFieldException("Fields cannot be empty!");
-        }
-        return result;
+        return rightOfDelimiter;
     }
 
     /**
