@@ -227,7 +227,7 @@ Edits an existing session so that you can change the details of a session.<br>
 >- When editing the _list of participants_, existing participants, including those part of the group declared when
 >  creating the session, must be included.
 >  - Activities may have been created using participants in the list, hence the _list of participants_ can only expand
->    and not shrink. This is to prevent any inconsistencies to activities in the session.
+>    and not shrink. This is to prevent introducing any inconsistencies to activities in the session.
 >  - Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
 >    and you wish to edit it to include Charlie, a valid edit command would be: <br>
 >    `session /edit /sid 1 /pl Alice Bob Charlie`.
