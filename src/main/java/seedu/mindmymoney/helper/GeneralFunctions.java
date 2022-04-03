@@ -70,7 +70,8 @@ public class GeneralFunctions {
                 input = input.substring(0, input.indexOf(endingFlag));
             }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new MindMyMoneyException("You are missing the corresponding [PARAMETERS]");
+            throw new MindMyMoneyException("You are missing one or more of the parameters! Please check your command "
+                    + "again.\n");
         }
         return input;
     }
