@@ -118,6 +118,7 @@ The features of WerkIt! are split and grouped into 5 main features:
 Format: `exercise <userAction> <keywords>`
 
 Below is a class diagram of the exercise-related features:
+
 ![ExerciseUML](uml/classDiagrams/images/exercise.png)
 <br>
 
@@ -157,6 +158,7 @@ _to be updated_
 Format: `search <userAction> <keywords>`
 
 Below is a class diagram of the search-related features:
+
 ![SearchUML](uml/classDiagrams/images/SearchClass.png)
 <br>
 
