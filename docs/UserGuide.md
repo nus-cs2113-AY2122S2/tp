@@ -44,7 +44,7 @@ you!
 ### Using the User Guide
 
 This guide aims to equip you with the knowledge on how to set up the application and to utilise its many features. Click
-on the hyperlinks in the [content page](#content-page) to quickly navigate the user guide! Along the guide you may
+on the hyperlinks in the [Content Page](#content-page) to quickly navigate the user guide! Along the guide you may
 encounter several icons. These icons will provide several useful information.
 > **💡 Note:**
 >- This tells you that there is additional information that is useful when you are using the application.
@@ -151,7 +151,7 @@ Adds an expenditure to your program. Only **one** expenditure can only be added 
     * Format of the date is DD/MM/YYYY.
     * For example, `12 March 2022` will be entered as `12/03/2022`.
 
-For example:`add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`.  
+For Example: `add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`.  
 Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash in March 2022 to your expenditure list. <br>
 
 #### Expected Outcome:
@@ -171,7 +171,7 @@ into the account
 
 > **💡 Note:**
 >- `[CATEGORY]` and `[PAYMENT_METHOD]` are **case-insensitive**.
->- Your credit card has to be [added](#add-a-credit-card-to-your-program-add) first before entering the name of the credit card as `[PAYMENT_METHOD]`.
+>- Your credit card has to be [added](#add-a-credit-card-add) first before entering the name of the credit card as `[PAYMENT_METHOD]`.
 >- `[AMOUNT]` only accepts numbers with 2 decimal places. Any additional decimals will be rounded off or ignored
 
 
@@ -184,7 +184,7 @@ into the account
 
 Prints your current list of expenditures.
 
-#### Format:`list /e`
+#### Format: `list /e`
 
 #### Expected Outcome:
 
@@ -205,7 +205,7 @@ list /e
 Modifies an expenditure on your expenditure list by specifying its index. <br>
 Use the `list /e` command to view the indices of your expenditures.
 
-#### Format:`update [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`
+#### Format: `update [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`
 
 * `[INDEX]` refers to the index of expenditure in list in which you want to update.
     * Enter `1` if you want to update the first entry in the list.
@@ -249,7 +249,7 @@ $5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
 Deletes an expenditure from your expenditure list by specifying its index.  
 Use the `list /e` command to view the current indices of your expenditures.
 
-#### Format:`delete [INDEX]`
+#### Format: `delete [INDEX]`
 
 * `[INDEX]` refers to the index of expenditure in list in which you want to delete.
     * Enter `1` if you want to delete the first entry in the list.
@@ -286,7 +286,7 @@ MindMyMoney can calculate your expenditure for you. See below for more details o
 Shows the sum of the amount of expenditures you have made in a particular day, month or year. <br>
 Shows the percentage spent on each category of expenditure, displayed in a horizontal bar chart. <br>
 
-##### Format:`calculate /epm [DATE]`
+##### Format: `calculate /epm [DATE]`
 
 * `[DATE]` can be of the format `DD/MM/YYYY`, `MM/YYYY` or `YYYY`, depending on the duration you are interested in.
 
@@ -310,7 +310,7 @@ TOCHANGE!
 
 Prints a list of commands for storing credit cards as a payment method.
 
-#### Format:`help /cc`
+#### Format: `help /cc`
 
 #### Expected Outcome:
 
@@ -330,7 +330,7 @@ Prints a list of commands for storing credit cards as a payment method.
 ### Add a credit card: `add`
 
 Adds a credit card to your program. Only **one** credit card can only be added per command.  <br>
-Format:`add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CARD_BALANCE]`
+#### Format: `add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CARD_BALANCE]`
 
 * `[CREDIT_CARD_NAME]` refers to the name your Credit Card will be saved as.
     * Use abbreviations for ease of adding expenditures to this credit card. For example,
@@ -374,7 +374,7 @@ into the account
 
 Prints your current list of credit cards that you have added so far.
 
-#### Format:`list /cc`
+#### Format: `list /cc`
 
 #### Expected Outcome:
 
@@ -392,7 +392,7 @@ Prints your current list of credit cards that you have added so far.
 Modifies a credit card on your credit card list by specifying its index. <br>
 Use the `list /cc` command to view the current indices of your credit cards.
 
-#### Format:`update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`
+#### Format: `update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`
 
 * `[INDEX]` refers to the index of credit card in list in which you want to update.
     * Enter `1` if you want to update the first entry in the list.
@@ -439,7 +439,7 @@ Name: OCBC [Cashback: 1.5%] [Cashback gained: $0.0] [Card limit: $500.0] [Card b
 Delete a credit card from your list, by specifying the credit card's index.  
 Use the `list /cc` command to view the current indices of your credit cards.
 
-#### Format:`delete /cc [INDEX]`
+#### Format: `delete /cc [INDEX]`
 
 * `[INDEX]` refers to the index of credit card in your credit card list in which you want to delete.
     * Enter `2` if you want to delete the second credit card in the list.
@@ -472,7 +472,7 @@ Income refers to the various sources of income you might have.
 
 Prints a list of commands relating to income.
 
-#### Format:`help /i`
+#### Format: `help /i`
 
 #### Expected Outcome:
 
@@ -601,7 +601,7 @@ I have removed Salary from your list of income(s).
 
 Shuts down the MindMyMoney application.
 
-### Format:`bye`
+### Format: `bye`
 
 ### Expected Outcome:
 
