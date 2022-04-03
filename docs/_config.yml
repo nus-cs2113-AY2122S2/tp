@@ -2,3 +2,5 @@ theme: jekyll-theme-leap-day
 markdown: GFM
 plugins:
   - jemoji
+
+include             : ["/team"]
