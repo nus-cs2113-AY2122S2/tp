@@ -4,14 +4,11 @@ import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.plans.InvalidPlanException;
-import data.plans.Plan;
 import data.plans.PlanList;
 import storage.LogHandler;
-import werkit.UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -205,10 +202,9 @@ public class WorkoutList {
      * @throws NumberFormatException If workout index number could not be parsed into an integer.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
      * @throws InvalidWorkoutException        If workout index number to delete is out of range.
-     * @throws InvalidPlanException        If plan index number to delete is out of range.
      */
     public Workout deleteWorkout(String userArgument) throws InvalidWorkoutException,
-            NumberFormatException, ArrayIndexOutOfBoundsException, InvalidPlanException {
+            NumberFormatException, ArrayIndexOutOfBoundsException {
         logger.entering(getClass().getName(), "deleteWorkout");
         int indexToDelete = Integer.parseInt(userArgument.trim());
 
@@ -227,29 +223,6 @@ public class WorkoutList {
 
         logger.exiting(getClass().getName(), "deleteWorkout");
         return deletedWorkout;
-    }
-
-    public void deletePlanContainsDeletedWorkout(String deletedWorkoutDetail, PlanList planList) throws
-            InvalidPlanException {
-        ArrayList<Integer> planIndexWithDeletedWorkout = planList.findPlanContainsTargetWorkout(deletedWorkoutDetail);
-        if (planIndexWithDeletedWorkout.size() > 0) {
-            System.out.println(deletedWorkoutDetail + " is found in:\n");
-        }
-
-        for (int planNumber : planIndexWithDeletedWorkout) {
-            assert (planList.checkPlanIndexIsWithinRange(planNumber)) : "Plan number is out of range.";
-            System.out.println("\t" + planList.getPlansDisplayList().get(planNumber - 1));
-        }
-
-        int totalNumberOfPlanToDelete = planIndexWithDeletedWorkout.size();
-        for (int i = 0; i < totalNumberOfPlanToDelete; i++) {
-            if (i == 0) {
-                System.out.println("\nThe following plan has been removed:\n");
-            }
-            System.out.println((i + 1) + ". "
-                    + planList.getPlansDisplayList().get(planIndexWithDeletedWorkout.get(i) - i - 1));
-            planList.deletePlan(Integer.toString(planIndexWithDeletedWorkout.get(i) - i));
-        }
     }
 
     /**
@@ -298,8 +271,8 @@ public class WorkoutList {
             throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE_ERROR_MSG);
         }
 
-        Workout workoutToUpdate = getWorkoutFromIndexNum(indexToUpdate);
-        String exerciseName = workoutToUpdate.getExerciseName();
+        Workout updatedWorkout = getWorkoutFromIndexNum(indexToUpdate);
+        String exerciseName = updatedWorkout.getExerciseName();
         boolean isExistingWorkout = checkForExistingWorkout(exerciseName, newRepsValue);
 
         if (isExistingWorkout) {
@@ -309,11 +282,11 @@ public class WorkoutList {
         }
 
         assert (isIndexToUpdateValid && isNewRepsValueValid && !isExistingWorkout);
-        String oldWorkoutKey = workoutToUpdate.toString();
-        workoutToUpdate.setRepetitions(newRepsValue);
-        updateWorkoutsHashMapList(oldWorkoutKey, workoutToUpdate);
+        String oldWorkoutKey = updatedWorkout.toString();
+        updatedWorkout.setRepetitions(newRepsValue);
+        updateWorkoutsHashMapList(oldWorkoutKey, updatedWorkout);
         logger.exiting(getClass().getName(), "updateWorkout");
-        return workoutToUpdate;
+        return updatedWorkout;
     }
 
     /**
@@ -349,7 +322,7 @@ public class WorkoutList {
      * @return targetWorkout The workout object which is going to be updated.
      * @throws InvalidWorkoutException If index of workout is not valid.
      */
-    public String getTargetWorkout(String userArgument) throws InvalidWorkoutException {
+    public String getCurrentWorkout(String userArgument) throws InvalidWorkoutException {
         String[] updateDetails = userArgument.split(" ", 2);
         String indexToUpdateString = updateDetails[0].trim();
         int indexToUpdate = Integer.parseInt(indexToUpdateString);
@@ -361,7 +334,7 @@ public class WorkoutList {
             throw new InvalidWorkoutException(className, InvalidWorkoutException.INDEX_VALUE_OUT_OF_RANGE);
         }
 
-        String targetWorkout = workoutsDisplayList.get(indexToUpdate - 1);
-        return targetWorkout;
+        String currentWorkout = workoutsDisplayList.get(indexToUpdate - 1);
+        return currentWorkout;
     }
 }
