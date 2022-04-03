@@ -407,19 +407,19 @@ computer.
 To keep things simple, we will omit the parameter description for you. To view each command in detail, refer to
 the [features](#features) section.
 
-| Command                                                             | Format                                            |
-|---------------------------------------------------------------------|---------------------------------------------------|
-| [View all commands](#viewing-all-commands-help)                     | help                                              |
-| [Add a person](#add-a-person-add)                                   | add /n __ /g __                                   |
-| [Delete a person](#delete-a-person-delete)                          | delete /g __ /u __                                |
-| [Add an income](#add-an-income-addin)                               | addin /g__ /u __ /i __ /d __ /p __                |
-| [Delete an income](#delete-an-income-deletein)                      | deletein /g __ /u __ /r __                        |
-| [Edit an income](#edit-an-income-editin)                            | editin /g __ /u __ /r __ /i __ /d __ /p __        |
-| [Add an expenditure](#add-an-expenditure-addout)                    | addout /g__ /u __ /e __ /d __ /c __ /p __         |
-| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /g __ /u __ /r __                       |
-| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /g __ /u __ /r __ /e __ /d __ /c __ /p __ |
-| [Show financial summary](#show-financial-summary-overview)          | overview                                          |
-| [Show all records by group](#show-all-records-by-group-list)        | list /g __                                        | 
-| [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                           |
-| [Searching for details](#searching-for-details-find)                | find /d __ /c __                                  |
-| [Exit the program](#exit-bye)                                       | bye                                               |
+| Command                                                             | Format                                                |
+|---------------------------------------------------------------------|-------------------------------------------------------|
+| [View all commands](#viewing-all-commands-help)                     | help                                                  |
+| [Add a person](#add-a-person-add)                                   | add /n __ /g __                                       |
+| [Delete a person](#delete-a-person-delete)                          | delete /g __ /u __                                    |
+| [Add an income](#add-an-income-addin)                               | addin /g__ /u __ /i __ /d __ /p __                    |
+| [Delete an income](#delete-an-income-deletein)                      | deletein /g __ /u __ /r __                            |
+| [Edit an income](#edit-an-income-editin)                            | editin /g __ /u __ /r __ [ /i __ /d __ /p __ ]        |
+| [Add an expenditure](#add-an-expenditure-addout)                    | addout /g__ /u __ /e __ /d __ /c __ /p __             |
+| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /g __ /u __ /r __                           |
+| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /g __ /u __ /r __ [ /e __ /d __ /c __ /p __ ] |
+| [Show financial summary](#show-financial-summary-overview)          | overview                                              |
+| [Show all records by group](#show-all-records-by-group-list)        | list /g __                                            | 
+| [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                               |
+| [Searching for details](#searching-for-details-find)                | find /d __ [ /c __ ]                                  |
+| [Exit the program](#exit-bye)                                       | bye                                                   |
