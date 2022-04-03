@@ -15,6 +15,9 @@ nav {
   margin-left:-580px;
   text-align: left;
 
+  max-height: 500px;
+  overflow-y: auto;
+
   ul {
     list-style: none;
     list-style-image:none;
@@ -71,18 +74,4 @@ nav {
       padding-right:13px;
     }
   }
-}
-
-footer {
-  position:fixed;
-  float:right;
-  width:180px;
-  margin-right:-1630px;
-  text-align: right;
-  line-height: 16px;
-  top:220px;
-  right:50%;
-  left:auto;
-  bottom:auto;
-  width:auto;
 }
