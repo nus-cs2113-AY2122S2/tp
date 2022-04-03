@@ -49,18 +49,18 @@ public class DeleteCommand extends Command {
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         if (taskIndex < 0) {
             deleteModule(moduleList);
-        } else {
-            Module targetModule;
-            if (Objects.isNull(taskModule)) {
-                targetModule = moduleList.getGeneralTasks();
-            } else {
-                targetModule = moduleList.getModule(taskModule);
-                if (Objects.isNull(targetModule)) {
-                    throw new NoSuchModuleException();
-                }
-            }
-            deleteTaskFromModule(targetModule);
+            return new CommandResult(result);
         }
+        Module targetModule;
+        if (Objects.isNull(taskModule)) {
+            targetModule = moduleList.getGeneralTasks();
+        } else {
+            targetModule = moduleList.getModule(taskModule);
+        }
+        if (Objects.isNull(targetModule)) {
+            throw new NoSuchModuleException();
+        }
+        deleteTaskFromModule(targetModule);
         return new CommandResult(result);
     }
 

@@ -72,9 +72,9 @@ public class AddCommand extends Command {
             Module targetModule = moduleList.getGeneralTasks();
             if (!Objects.isNull(targetModuleName)) {
                 targetModule = moduleList.getModule(targetModuleName);
-                if (Objects.isNull(targetModule)) {
-                    throw new NoSuchModuleException();
-                }
+            }
+            if (Objects.isNull(targetModule)) {
+                throw new NoSuchModuleException();
             }
             TaskList taskList = targetModule.getTaskList();
             res = String.format(ADD_TASK_MESSAGE, targetModule, taskList.addTask(newTask), taskList.size());
