@@ -1152,10 +1152,10 @@ Although the users are discouraged from editing the local resource files as this
 resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
 the files. Thus, other than the warning in our [UserGuide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
 we also implemented error handling methods to handle the situation where users edited the files and caused data 
-corruptions. We could have implemented the loading of data in a more hassle-free way by simply clearing all local data. 
-However, we tried to think in the perspective of users to save the "uncorrupted data" as much as possible. Thus, we 
-decided to implement the validity checking such that only the affected data are removed while keeping all the 
-non-affected data safely.
+corruptions. We could have implemented the handling of "corrupted data" in a more hassle-free way by simply clearing 
+all local data. However, we tried to think in the perspective of users to save the "uncorrupted data" as much as 
+possible. Thus, we decided to implement the validity checking such that only the affected data are removed while 
+keeping all the non-affected data safely.
 
 
 ## Product Scope
