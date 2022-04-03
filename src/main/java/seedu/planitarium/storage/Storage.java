@@ -6,8 +6,8 @@ import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.money.Expenditure;
 import seedu.planitarium.money.Income;
-import seedu.planitarium.person.Family;
-import seedu.planitarium.person.Person;
+import seedu.planitarium.family.Family;
+import seedu.planitarium.family.Person;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -33,7 +33,7 @@ public class Storage {
     private static final String FILE_DIR = "data";
     private static final String FILE_NAME = "PlanITarium.txt";
     private static final String FILE_SEPARATOR = "/";
-    private static final String INFO_DELIMITER = "-";
+    private static final String INFO_DELIMITER = "/d";
     private static final String ADD_USER = "u";
     private static final String ADD_EXPENDITURE = "e";
     private static final String ADD_INCOME = "i";
@@ -53,7 +53,7 @@ public class Storage {
     private static String description;
     private static double amount;
     private static boolean isPermanent;
-    private static int category;
+    private static Integer category;
     private static LocalDate dataDate;
 
     /**

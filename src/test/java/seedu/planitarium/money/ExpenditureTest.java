@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,33 +17,35 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ExpenditureTest {
 
+
     public static final double VALID_AMOUNT = 1000.00;
+    public static final String VALID_DESCRIPTION = "food";
+    public static final String EXPECTED_SAVE_STRING = "e food /d 1000.0 /d false /d 1 /d " + LocalDate.now();
+    public static final String EXPECTED_TO_STRING = "food: $1000.00 - Recurring: false - Category: Others";
 
     private Expenditure testItem;
 
     @BeforeEach
     public void setUp() {
-        testItem = new Expenditure("food", 24, 1, false);
+        testItem = new Expenditure(VALID_DESCRIPTION, VALID_AMOUNT, 1, false);
     }
 
     @Test
     public void getDescription_validExpenditure_success() {
-        String expectedDescription = "food";
         String actualDescription = testItem.getDescription();
-        assertEquals(expectedDescription, actualDescription);
+        assertEquals(VALID_DESCRIPTION, actualDescription);
     }
 
     @Test
     public void getAmount_validExpenditure_success() {
-        double expectedAmount = 24;
         double actualAmount = testItem.getAmount();
-        assertEquals(expectedAmount, actualAmount);
+        assertEquals(VALID_AMOUNT, actualAmount);
     }
 
     @Test
     public void addExpenditure_nullDescription_expectAssertionError() {
         try {
-            Expenditure testNullDescription = new Expenditure(null, 24, 1, false);
+            Expenditure testNullDescription = new Expenditure(null, 24.0, 1, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -87,15 +91,13 @@ class ExpenditureTest {
 
     @Test
     public void saveString_getString_success() {
-        String expectedString = "e food - 24.0 - false - 1"
-                + " - 2022-03-30";;
         String actualString = testItem.saveString();
-        assertEquals(expectedString, actualString);
+        assertEquals(EXPECTED_SAVE_STRING, actualString);
     }
 
     @Test
     public void toString_getString_success() {
-        String expectedResult = "food: $24.00 - Recurring: false - Category: Food and Drinks";
-        assertEquals(expectedResult, testItem.toString());
+        String actualString = testItem.toString();
+        assertEquals(EXPECTED_TO_STRING, actualString);
     }
 }

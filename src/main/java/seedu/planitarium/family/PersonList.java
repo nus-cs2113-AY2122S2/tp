@@ -1,6 +1,6 @@
 //@@author teanweijun
 
-package seedu.planitarium.person;
+package seedu.planitarium.family;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
@@ -102,27 +102,27 @@ public class PersonList {
      *
      * @return The total disposable income
      */
-    public double getRemain() {
+    public Double getRemain() {
         LOGGER.log(Level.INFO, Constants.GET_REMAIN_CALL_MESSAGE);
-        double sum = 0;
+        Double sum = 0.0;
         for (Person person: getPersonList()) {
             sum += person.getDisposable();
         }
         return sum;
     }
 
-    public double getTotalIncome() {
+    public Double getTotalIncome() {
         LOGGER.log(Level.INFO, Constants.GET_TOTAL_INCOME_CALL_MESSAGE);
-        double sum = 0;
+        Double sum = 0.0;
         for (Person person: getPersonList()) {
             sum += person.getTotalIncome();
         }
         return sum;
     }
 
-    public double getTotalExpenditure() {
+    public Double getTotalExpenditure() {
         LOGGER.log(Level.INFO, Constants.GET_TOTAL_EXPEND_CALL_MESSAGE);
-        double sum = 0;
+        Double sum = 0.0;
         for (Person person: getPersonList()) {
             sum += person.getTotalExpenditure();
         }
@@ -139,6 +139,10 @@ public class PersonList {
             System.out.println(i + ". " + person.getName());
             person.listIncome();
             person.listExpenditure();
+            // Print newline between persons
+            if (i != numberOfMembers) {
+                System.out.println(Constants.EMPTY_STRING);
+            }
         }
     }
 
@@ -151,7 +155,7 @@ public class PersonList {
      * @param isPermanent Whether the income is recurring
      * @param isSilent Whether to print confirmation
      */
-    public void addIncome(int personIndex, String description, double amount, boolean isPermanent, boolean isSilent) {
+    public void addIncome(int personIndex, String description, Double amount, Boolean isPermanent, Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_INCOME_CALL_MESSAGE);
         getPerson(personIndex).addIncome(description, amount, isPermanent, isSilent);
     }
@@ -177,8 +181,8 @@ public class PersonList {
      * @param isPermanent Whether the expenditure is recurring
      * @param isSilent Whether to print confirmation
      */
-    public void addExpend(int personIndex, String description, double amount, int category, boolean isPermanent,
-                          boolean isSilent) {
+    public void addExpend(int personIndex, String description, Double amount, Integer category, Boolean isPermanent,
+                          Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_EXPEND_CALL_MESSAGE);
         getPerson(personIndex).addExpend(description, amount, category, isPermanent, isSilent);
     }
@@ -225,7 +229,7 @@ public class PersonList {
      * @param amount The value of the income
      * @param isPermanent Whether the income is recurring
      */
-    public void editIncome(int personIndex, int incomeIndex, String description, double amount, boolean isPermanent) {
+    public void editIncome(int personIndex, int incomeIndex, String description, Double amount, Boolean isPermanent) {
         LOGGER.log(Level.INFO, Constants.EDIT_INCOME_CALL_MESSAGE);
         getPerson(personIndex).editIncome(incomeIndex, description, amount, isPermanent);
     }
@@ -240,8 +244,8 @@ public class PersonList {
      * @param category The category of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      */
-    public void editExpend(int personIndex, int expendIndex, String description, double amount, int category,
-                           boolean isPermanent) {
+    public void editExpend(int personIndex, int expendIndex, String description, Double amount, Integer category,
+                           Boolean isPermanent) {
         LOGGER.log(Level.INFO, Constants.EDIT_EXPEND_CALL_MESSAGE);
         getPerson(personIndex).editExpend(expendIndex, description, amount, category, isPermanent);
     }
@@ -252,7 +256,7 @@ public class PersonList {
      * @param description The string to look for
      * @param category The category of the entry
      */
-    public void find(String description, int category) {
+    public void find(String description, Integer category) {
         LOGGER.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
         for (Person person : personList) {
             person.find(description, category);

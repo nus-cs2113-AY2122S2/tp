@@ -19,7 +19,8 @@ class IncomeListTest {
     private static int INVALID_INDEX = -1;
     private static int VALID_INDEX = 1;
     private IncomeList personOne;
-    private static final String EXPECTED_LABEL_NUMBERED = "1. Food: $20.00 - Recurring: false"
+    private static final String INDENTATION = "   ";
+    private static final String EXPECTED_LABEL_NUMBERED = INDENTATION + "1. Food: $20.00 - Recurring: false"
             + System.lineSeparator();
     private static final String EXPECTED_LABEL = "Food: $20.00 - Recurring: false"
             + System.lineSeparator();
@@ -28,14 +29,14 @@ class IncomeListTest {
     @BeforeEach
     public void setUp() {
         personOne = new IncomeList();
-        personOne.addIncome("Food", 20, false);
-        personOne.addIncome("Transport", 5, false);
+        personOne.addIncome("Food", 20.0, false);
+        personOne.addIncome("Transport", 5.0, false);
     }
 
     @Test
     public void addIncome_newIncome_existsInIncome() {
         IncomeList personTwo = new IncomeList();
-        personTwo.addIncome("clothes", 30, false);
+        personTwo.addIncome("clothes", 30.0, false);
         String description = "clothes";
         double amount = 30;
         assertEquals(description, personTwo.getDescription(VALID_INDEX));
@@ -106,7 +107,7 @@ class IncomeListTest {
     public void addIncome_nullDescription_expectAssertionError() {
         IncomeList testList = new IncomeList();
         try {
-            testList.addIncome(null, 24, false);
+            testList.addIncome(null, 24.0, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -141,7 +142,7 @@ class IncomeListTest {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
         IncomeList personTwo = new IncomeList();
-        personTwo.addIncome("Food", 20, false);
+        personTwo.addIncome("Food", 20.0, false);
         personTwo.printIncomeList();
         assertEquals(EXPECTED_LABEL_NUMBERED, newOut.toString());
         System.setOut(ORIGINAL_OUT);

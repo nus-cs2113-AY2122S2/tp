@@ -5,8 +5,7 @@ import seedu.planitarium.commands.Command;
 import seedu.planitarium.commands.CommandFactory;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Constants;
-import seedu.planitarium.global.UI;
-import seedu.planitarium.person.Family;
+import seedu.planitarium.family.Family;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

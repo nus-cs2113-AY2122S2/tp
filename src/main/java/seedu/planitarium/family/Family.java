@@ -1,6 +1,6 @@
 //@@author teanweijun
 
-package seedu.planitarium.person;
+package seedu.planitarium.family;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
@@ -39,7 +39,7 @@ public class Family {
         assert (group <= Constants.NUM_GROUPS);
         infoString = "Index assertions passed in getList()";
         LOGGER.log(Level.INFO, infoString);
-        PersonList toReturn = null;
+        PersonList toReturn;
         switch (group) {
         case Constants.PARENTS:
             toReturn = parents;
@@ -47,11 +47,8 @@ public class Family {
         case Constants.MY_GEN:
             toReturn = myGen;
             break;
-        case Constants.CHILDREN:
-            toReturn = children;
-            break;
         default:
-            LOGGER.log(Level.SEVERE, Constants.INDEX_ERROR_MESSAGE);
+            toReturn = children;
         }
         return toReturn;
     }
@@ -69,7 +66,7 @@ public class Family {
         assert (group <= Constants.NUM_GROUPS);
         infoString = "Index assertions passed in getGenerationName()";
         LOGGER.log(Level.INFO, infoString);
-        String toReturn = null;
+        String toReturn;
         switch (group) {
         case Constants.PARENTS:
             toReturn = "Parents";
@@ -77,11 +74,8 @@ public class Family {
         case Constants.MY_GEN:
             toReturn = "My generation";
             break;
-        case Constants.CHILDREN:
-            toReturn = "Children";
-            break;
         default:
-            LOGGER.log(Level.SEVERE, Constants.INDEX_ERROR_MESSAGE);
+            toReturn = "Children";
         }
         return toReturn;
     }
@@ -93,7 +87,7 @@ public class Family {
      * @param name The name of the person to be added
      * @param isSilent Whether to print confirmation
      */
-    public void addPerson(int group, String name, boolean isSilent) {
+    public void addPerson(int group, String name, Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_PERSON_CALL_MESSAGE);
         getList(group).addPerson(name);
         if (isSilent) {
@@ -124,8 +118,8 @@ public class Family {
      * @param isPermanent Whether the income is recurring
      * @param isSilent Whether to print confirmation
      */
-    public void addIncome(int group, int personIndex, String description, double amount, boolean isPermanent,
-                          boolean isSilent) {
+    public void addIncome(int group, int personIndex, String description, Double amount, Boolean isPermanent,
+                          Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_INCOME_CALL_MESSAGE);
         getList(group).addIncome(personIndex, description, amount, isPermanent, isSilent);
     }
@@ -153,8 +147,8 @@ public class Family {
      * @param isPermanent Whether the expenditure is recurring
      * @param isSilent Whether to print confirmation
      */
-    public void addExpend(int group, int personIndex, String description, double amount, int category,
-                          boolean isPermanent, boolean isSilent) {
+    public void addExpend(int group, int personIndex, String description, Double amount, Integer category,
+                          Boolean isPermanent, Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_EXPEND_CALL_MESSAGE);
         getList(group).addExpend(personIndex, description, amount, category, isPermanent, isSilent);
     }
@@ -176,18 +170,38 @@ public class Family {
      */
     public void overview() {
         LOGGER.log(Level.INFO, Constants.OVERVIEW_CALL_MESSAGE);
-        System.out.println("Here are your disposable incomes by group:");
+        System.out.println("Here is the overview for your family:");
+        Double sum = 0.0;
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
-            double income = personList.getTotalIncome();
-            double expenditure = personList.getTotalExpenditure();
-            double disposable = personList.getRemain();
+            String income = formatValue(personList.getTotalIncome());
+            String expenditure = formatValue(personList.getTotalExpenditure());
+            Double remain = personList.getRemain();
+            sum += remain;
+            String disposable = formatValue(remain);
             String generation = getGenerationName(i);
             System.out.println(i + ". " + generation + ":" + System.lineSeparator()
-                    + "Income: $" + income + System.lineSeparator()
-                    + "Expenditure: $" + expenditure + System.lineSeparator()
-                    + "Disposable: $" + disposable);
+                    + Constants.INDENTATION + "Income: " + income + System.lineSeparator()
+                    + Constants.INDENTATION + "Expenditure: " + expenditure + System.lineSeparator()
+                    + Constants.INDENTATION + "Disposable: " + disposable);
+            // Print newline between generations
+            System.out.println(Constants.EMPTY_STRING);
         }
+        String familyDisposable = formatValue(sum);
+        System.out.println("Total disposable income in family: " + familyDisposable);
+    }
+
+    /**
+     * Returns the formatting of a monetary value depending on its polarity.
+     *
+     * @param entry The monetary value
+     * @return The formatting of the value
+     */
+    public String formatValue(Double entry) {
+        if (entry < 0) {
+            return ("-$" + (-entry));
+        }
+        return ("$" + entry);
     }
 
     /**
@@ -249,8 +263,8 @@ public class Family {
      * @param amount The value of the income
      * @param isPermanent Whether the income is recurring
      */
-    public void editIncome(int group, int personIndex, int incomeIndex, String description, double amount,
-                           boolean isPermanent) {
+    public void editIncome(int group, int personIndex, int incomeIndex, String description, Double amount,
+                           Boolean isPermanent) {
         LOGGER.log(Level.INFO, Constants.EDIT_INCOME_CALL_MESSAGE);
         getList(group).editIncome(personIndex, incomeIndex, description, amount, isPermanent);
     }
@@ -266,8 +280,8 @@ public class Family {
      * @param category The category of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      */
-    public void editExpend(int group, int personIndex, int expendIndex, String description, double amount,
-                           int category, boolean isPermanent) {
+    public void editExpend(int group, int personIndex, int expendIndex, String description, Double amount,
+                           Integer category, Boolean isPermanent) {
         LOGGER.log(Level.INFO, Constants.EDIT_EXPEND_CALL_MESSAGE);
         getList(group).editExpend(personIndex, expendIndex, description, amount, category, isPermanent);
     }
@@ -278,7 +292,7 @@ public class Family {
      * @param description The string to look for
      * @param category The category of the entry
      */
-    public void find(String description, int category) {
+    public void find(String description, Integer category) {
         LOGGER.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             getList(i).find(description, category);

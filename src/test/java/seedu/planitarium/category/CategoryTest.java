@@ -68,12 +68,12 @@ class CategoryTest {
 
     @Test
     void getLabelForIndex_isExpectedLabel_success() {
-        final String output1 = Category.getLabelForIndex(0);
-        final String output2 = Category.getLabelForIndex(1);
-        final String output3 = Category.getLabelForIndex(2);
-        final String output4 = Category.getLabelForIndex(3);
-        final String output5 = Category.getLabelForIndex(4);
-        final String output6 = Category.getLabelForIndex(5);
+        final String output1 = Category.getLabelForIndex(1);
+        final String output2 = Category.getLabelForIndex(2);
+        final String output3 = Category.getLabelForIndex(3);
+        final String output4 = Category.getLabelForIndex(4);
+        final String output5 = Category.getLabelForIndex(5);
+        final String output6 = Category.getLabelForIndex(6);
 
         assertEquals(LABEL_OTHERS, output1);
         assertEquals(LABEL_FOOD_AND_DRINKS, output2);

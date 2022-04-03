@@ -7,8 +7,8 @@ import java.time.LocalDate;
 public abstract class Money {
 
     protected String description;
-    protected double amount;
-    protected boolean isPermanent;
+    protected Double amount;
+    protected Boolean isPermanent;
     protected LocalDate initDate;
 
     /**
@@ -18,7 +18,7 @@ public abstract class Money {
      * @param amount      The amount of money
      * @param isPermanent Money's recurrence
      */
-    public Money(String description, double amount, boolean isPermanent) {
+    public Money(String description, Double amount, Boolean isPermanent) {
         assert (description != null);
         assert (amount >= 0);
         this.description = description;
@@ -32,7 +32,7 @@ public abstract class Money {
      *
      * @return The amount of money
      */
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
@@ -46,11 +46,11 @@ public abstract class Money {
     }
 
     /**
-     * Returns the boolean recurring status of the money object.
+     * Returns the Boolean recurring status of the money object.
      *
-     * @return The boolean status of the object
+     * @return The Boolean status of the object
      */
-    public boolean isPermanent() {
+    public Boolean isPermanent() {
         return isPermanent;
     }
 
@@ -77,7 +77,7 @@ public abstract class Money {
      *
      * @param amount Amount of the money object
      */
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -86,7 +86,7 @@ public abstract class Money {
      *
      * @param permanent Recurring status of the money object
      */
-    public void setPermanent(boolean permanent) {
+    public void setPermanent(Boolean permanent) {
         isPermanent = permanent;
     }
 

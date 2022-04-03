@@ -15,27 +15,28 @@ import static org.junit.jupiter.api.Assertions.fail;
 class IncomeTest {
 
     public static final double VALID_AMOUNT = 1000.00;
+    public static final String VALID_DESCRIPTION = "food";
+    public static final String EXPECTED_SAVE_STRING = "i food /d 1000.0 /d false /d " + LocalDate.now();
+    public static final String EXPECTED_TO_STRING = "food: $1000.00 - Recurring: false";
 
     private Income testItem;
 
     @BeforeEach
     public void setUp() {
-        testItem = new Income("food", VALID_AMOUNT, false);
+        testItem = new Income(VALID_DESCRIPTION, VALID_AMOUNT, false);
     }
 
     @Test
     public void getDescription_validIncome_expectedDescription() {
-        String expectedDescription = "food";
         String actualDescription = testItem.getDescription();
-        assertEquals(expectedDescription, actualDescription);
+        assertEquals(VALID_DESCRIPTION, actualDescription);
     }
 
     @Test
     public void setDescription_validIncome_success() {
-        String expectedDescription = "Food";
-        testItem.setDescription("Food");
+        testItem.setDescription(VALID_DESCRIPTION);
         String actualDescription = testItem.getDescription();
-        assertEquals(expectedDescription, actualDescription);
+        assertEquals(VALID_DESCRIPTION, actualDescription);
     }
 
     @Test
@@ -69,15 +70,13 @@ class IncomeTest {
 
     @Test
     public void saveString_getString_success() {
-        String expectedString = "i food - 1000.0 - false"
-                + " - 2022-03-30";;
         String actualString = testItem.saveString();
-        assertEquals(expectedString, actualString);
+        assertEquals(EXPECTED_SAVE_STRING, actualString);
     }
 
     @Test
     public void toString_getString_success() {
-        String expectedString = "food: $1000.00 - Recurring: false";
-        assertEquals(expectedString, testItem.toString());
+        String actualString = testItem.toString();
+        assertEquals(EXPECTED_TO_STRING, actualString);
     }
 }

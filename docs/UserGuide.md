@@ -94,7 +94,7 @@ This section describes each command in detail.
 |:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `/n NAME`                         | The name of someone you would like to track.                                                                                                                                                            |
 | `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> You can find the group index from the [overview command](#show-financial-summary-overview).                                   |
-| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [overview command](#show-financial-summary-overview).                                                     |
+| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [listing records command](#show-all-records-by-group-list).                                               |
 | `/d DESCRIPTION`                  | The description (or name) of the income and expenditure you wish to track.                                                                                                                              |
 | `/c CATEGORY_INDEX`               | An index that refers to a category label such as 'Food and Drinks`.<br/>You can find the category index from the [list categories command](#show-expenditure-categories-listcat).                       |
 | `/i INCOME`                       | The monetary value of the income you wish to track.                                                                                                                                                     |
@@ -128,11 +128,11 @@ Format: `add /n NAME /g GROUP_INDEX`
 
 Example of usage:
 
-* Add Alice to the Parent's category to be tracked.
+* Add Alice to the Parents' category to be tracked.
 
   `add /n Alice /g 1`
 
-* _Result_: Entry for Alice is added to Parent's tracking list with a user index of **1**.
+* _Result_: Entry for Alice is added to Parents' tracking list with a user index (uid) of **1**.
 
   ![add-command-screenshot]() <!-- this is a placeholder -->
 
@@ -151,16 +151,16 @@ Example of usage:
 
 * Delete the person with uid = 1 from the Parents' group:
 
-  `delete /u 1 /g 1`
+  `delete /g 1 /u 1`
 
-*_Result_: The person with uid = 1 is deleted from the Parent's group 
+* _Result_: The person with uid = 1 is deleted from the Parents' group 
   
 <br/>
 
 
 ### Add an income: `addin`
 
-> Add an entry to your list of tracked incomes.
+> Adds an entry to your list of tracked incomes.
 
 Format: `addin /g GROUP_INDEX /u USER_INDEX /d DESCRIPTION /i INCOME /p <T/(any)>`
 
@@ -176,7 +176,7 @@ Format: `addin /g GROUP_INDEX /u USER_INDEX /d DESCRIPTION /i INCOME /p <T/(any)
 
 Example of usage:
 
-* Add a monthly-recurrent Salary of $2,000 to Alice's income.
+* Add a monthly-recurrent Salary of $2,000, to Alice's income.
 
   `addin /g 1 /u 1 /d Salary /i 2000 /p T`
 
@@ -188,7 +188,7 @@ Example of usage:
 
 ### Delete an income: `deletein`
 
-> Delete an entry from your list of tracked incomes.
+> Deletes an entry from your list of tracked incomes.
 
 Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 
@@ -201,7 +201,7 @@ Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 
 Example of usage:
 
-* Delete the entry, recurrent Salary of $2,000, from Alice's income.
+* Delete the monthly-recurrent Salary of $2,000, from Alice's income.
 
   `deletein /g 1 /u 1 /r 1`
 
@@ -223,17 +223,16 @@ Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCR
 * **INCOME** refers to the monetary value of your income.
 * **DESCRIPTION** refers to the name or description of your income.
 * **<T/(any)>** refers to whether your income is recurrent on a monthly-basis.
-  
-> **Note**
->
-> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) is optional in this case. You
-> can just modify the part that you modify.
+
+> :information_source: Notes:
+> **DESCRIPTION**, **INCOME** and recurring setting (**<T|F>**) are optional in this case. You can just include the 
+> part(s) that you are looking to modify.
 
 Example of usage:
 
-* Edits the recurrent Salary of $2,000 from Alice's income to $200.
+* Edits the monthly-recurrent Salary of $2,000, from Alice's income, to $200.
 
-  `editin /u 1 /g 1 /r 1 /i 200`
+  `editin /g 1 /u 1 /r 1 /i 200`
 
 * _Result_: Income entry in Alice's income list is edited.
 
@@ -243,7 +242,7 @@ Example of usage:
 
 ### Add an expenditure: `addout`
 
-> Add an entry to your list of tracked expenditures.
+> Adds an entry to your list of tracked expenditures.
 
 Format: `addout /g GROUP_INDEX /u USER_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>`
 
@@ -256,10 +255,10 @@ Format: `addout /g GROUP_INDEX /u USER_INDEX /e EXPENDITURE /d DESCRIPTION /c CA
 
 Example of usage:
 
-* Add a monthly-recurrent expenditure on candies of $20 to Alice's expenditure. This expenditure is tagged under the "
+* Add a monthly-recurrent expenditure of $20 for candies, to Alice's expenditure. This expenditure is tagged under the "
   Food and Drinks" category.
 
-  `addout /u 1 /g 1 /e 20 /d candies /c 1 /p t`
+  `addout /g 1 /u 1 /e 20 /d candies /c 1 /p T`
 
 * _Result_: Entry for candies is added to Alice's expenditure list with an expenditure index of **1**.
 
@@ -269,7 +268,7 @@ Example of usage:
 
 ### Delete an expenditure: `deleteout`
 
-> Delete an entry from your list of tracked expenditure.
+> Deletes an entry from your list of tracked expenditure.
 
 Format: `deleteout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX`
 
@@ -279,7 +278,7 @@ Format: `deleteout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX`
 
 Example of usage:
 
-* Delete the entry, recurrent candies of $20, from Alice's expenditure.
+* Delete the monthly-recurrent candies of $20, from Alice's expenditure.
 
   `deleteout /g 1 /u 1 /r 1`
 
@@ -293,7 +292,7 @@ Example of usage:
 
 > Edits an entry from your list of tracked expenditures.
 
-Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>]`
+Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>]`
 
 * **GROUP_INDEX** refers to the index of the group that you belong to.
 * **USER_INDEX** refers to the index of that is tagged to you.
@@ -303,16 +302,15 @@ Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITU
 * **CATEGORY_INDEX** refers to the category of your expenditure.
 * **<T/(any)>** refers to whether your expenditure is recurrent on a monthly-basis.
 
-> **Note**
-> 
-> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) is optional in this case. You
-> can just modify the part that you modify.
+> :information_source: Notes:
+> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) are optional in this case. You
+> can just include the part(s) that you are looking to modify.
 
 Example of usage:
 
-* Edits the recurrent candies expenditure of $20 from Alice's expenditure to $25.
+* Edits the monthly-recurrent candies expenditure of $20, from Alice's expenditure, to $25.
 
-  `editin /u 1 /g 1 /r 1 /i 25`
+  `editout /g 1 /u 1 /r 1 /e 25`
 
 * _Result_: Expenditure entry in Alice's expenditure list is edited.
 
@@ -325,8 +323,6 @@ Example of usage:
 > Shows a list of the total incomes, expenditures and disposable income of all groups.
 
 Format: `overview`
-
-Example of usage:
 
 ![list-command-screenshot]() <!-- this is a placeholder -->
 
@@ -364,21 +360,21 @@ Format: `listcat`
 
 > Search for a string as provided by you throughout all your income and expenditure.
 
-Format: `find /d USER_STRING /c CATEGORY_INDEX`
+Format: `find /d USER_STRING [/c CATEGORY_INDEX]`
 
 * **USER_STRING** refers to the keyword which you want to look for.
 * **CATEGORY_INDEX** refers to the category of your expenditure.
 
 > :information_source: Notes:
 > * Keywords are case-sensitive and inclusive. So a search for `brush` will successfully look for `toothbrush`.
-> * If you want to search for expenditures in all categories instead of specific ones, set **CATEGORY_INDEX** to 0.
+> * If you want to search for expenditures in all categories instead of specific ones, omit **CATEGORY_INDEX**.
+> * While searching through incomes, PlanITarium ignores the **CATEGORY_INDEX** provided.
 
 Example of usage:
 
+* Find all the records which descriptions include _candies_ from Category 1.
 
-* Find all the records which descriptions include _Candy_ from Category 1.
-
-  `find /d candies /c 0`
+  `find /d candies /c 1`
 
 * _Result_: The result of the search is returned and printed to the screen.
 
@@ -415,13 +411,13 @@ the [features](#features) section.
 |---------------------------------------------------------------------|---------------------------------------------------|
 | [View all commands](#viewing-all-commands-help)                     | help                                              |
 | [Add a person](#add-a-person-add)                                   | add /n __ /g __                                   |
-| [Delete a person](#delete-a-person-delete)                          | delete /u __ /g __                                |
-| [Add an income](#add-an-income-addin)                               | addin /u__ /g __ /i __ /d __ /p __                |
-| [Delete an income](#delete-an-income-deletein)                      | deletein /u __ /g __ /r __                        |
-| [Edit an income](#edit-an-income-editin)                            | editin /u __ /g __ /r __ /i __ /d __ /p __        |
-| [Add an expenditure](#add-an-expenditure-addout)                    | addout /u__ /g __ /e __ /d __ /c __ /p __         |
-| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /u __ /g __ /r __                       |
-| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /u __ /g __ /r __ /e __ /d __ /c __ /p __ |
+| [Delete a person](#delete-a-person-delete)                          | delete /g __ /u __                                |
+| [Add an income](#add-an-income-addin)                               | addin /g__ /u __ /i __ /d __ /p __                |
+| [Delete an income](#delete-an-income-deletein)                      | deletein /g __ /u __ /r __                        |
+| [Edit an income](#edit-an-income-editin)                            | editin /g __ /u __ /r __ /i __ /d __ /p __        |
+| [Add an expenditure](#add-an-expenditure-addout)                    | addout /g__ /u __ /e __ /d __ /c __ /p __         |
+| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /g __ /u __ /r __                       |
+| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /g __ /u __ /r __ /e __ /d __ /c __ /p __ |
 | [Show financial summary](#show-financial-summary-overview)          | overview                                          |
 | [Show all records by group](#show-all-records-by-group-list)        | list /g __                                        | 
 | [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                           |

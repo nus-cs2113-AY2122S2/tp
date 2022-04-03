@@ -1,17 +1,13 @@
 package seedu.planitarium.commands;
 
-import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
-import seedu.planitarium.person.Family;
+import seedu.planitarium.family.Family;
 
 import java.util.logging.Level;
 
 public class EditRecordCommand extends Command {
-    private static final String className = CommandFactory.class.getSimpleName();
-    private static final String fileName = className + ".log";
-    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
 
     protected static final String EXPEND = "expenditure";
     protected static final String INCOME = "income";
@@ -55,7 +51,7 @@ public class EditRecordCommand extends Command {
             description = null;
         }
         assert (uid > 0) : USER_INDEX_NOT_VALID;
-        logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, uid,group));
+        CommandFactory.logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, group, uid));
     }
 
     public void execute() throws PlanITariumException {
@@ -70,13 +66,13 @@ public class EditRecordCommand extends Command {
             }
             index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
                     family.getNumberOfIncomes(group, uid));
-            family.editIncome(uid, group, index, description, amount, isPermanent);
-            logger.log(Level.INFO, String.format(
-                    LOG_EXECUTE_INFO, INCOME, description, index, amount, category, uid, group));
+            family.editIncome(group, uid, index, description, amount, isPermanent);
+            CommandFactory.logger.log(Level.INFO, String.format(
+                    LOG_EXECUTE_INFO, INCOME, description, index, amount, category, group, uid));
             break;
         case EDIT_SPENT_CMD:
             index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput),
-                    family.getNumberOfExpenditures(uid, group));
+                    family.getNumberOfExpenditures(group, uid));
             try {
                 amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
             } catch (PlanITariumException e) {
@@ -88,11 +84,11 @@ public class EditRecordCommand extends Command {
                 category = null;
             }
             family.editExpend(group, uid, index, description, amount, category, isPermanent);
-            logger.log(Level.INFO, String.format(
-                    LOG_EXECUTE_INFO, EXPEND, description, index, amount, category, uid, group));
+            CommandFactory.logger.log(Level.INFO, String.format(
+                    LOG_EXECUTE_INFO, EXPEND, description, index, amount, category, group, uid));
             break;
         default:
-            logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);
+            CommandFactory.logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);
             throw new PlanITariumException(AddRecordCommand.class.getSimpleName());
         }
 

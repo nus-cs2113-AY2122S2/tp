@@ -1,6 +1,6 @@
 //@@author teanweijun
 
-package seedu.planitarium.person;
+package seedu.planitarium.family;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class PersonTest {
+    private static final PrintStream ORIGINAL_OUT = System.out;
     private static final String VALID_NAME = "Alice";
     private static final String VALID_DESCRIPTION = "Testing";
     private static final double VALID_AMOUNT = 1000;
@@ -19,7 +20,19 @@ class PersonTest {
     private static final int INVALID_INDEX = -10;
     private static final int FIRST_ENTRY = 1;
     private static final boolean SILENT = true;
+    private static final boolean NOT_SILENT = false;
     private static final boolean PERMANENT = true;
+
+    private static final String ADD_INCOME = "A recurring income of 1000.0 from Testing has been added to Alice"
+            + System.lineSeparator();
+    private static final String ADD_EXPEND = "A recurring expenditure of 1000.0 for Testing has been added to Alice"
+            + System.lineSeparator();
+
+    private ByteArrayOutputStream redirectIO() {
+        ByteArrayOutputStream newOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOut));
+        return newOut;
+    }
 
     @Test
     public void person_invalidName_assertionError() {
@@ -42,6 +55,17 @@ class PersonTest {
         Person person = new Person(VALID_NAME);
         person.addIncome(VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
         assertEquals(1, person.getNumberOfIncomes());
+    }
+
+    @Test
+    public void addIncome_notSilent_correctPrinting() {
+        ByteArrayOutputStream newOut = redirectIO();
+
+        Person person = new Person(VALID_NAME);
+        person.addIncome(VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, NOT_SILENT);
+        assertEquals(ADD_INCOME, newOut.toString());
+
+        System.setOut(ORIGINAL_OUT);
     }
 
     @Test
@@ -83,6 +107,17 @@ class PersonTest {
     }
 
     @Test
+    public void addExpend_notSilent_correctPrinting() {
+        ByteArrayOutputStream newOut = redirectIO();
+
+        Person person = new Person(VALID_NAME);
+        person.addExpend(VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, NOT_SILENT);
+        assertEquals(ADD_EXPEND, newOut.toString());
+
+        System.setOut(ORIGINAL_OUT);
+    }
+
+    @Test
     public void addExpend_invalidDescription_assertionError() {
         Person person = new Person(VALID_NAME);
         try {
@@ -119,21 +154,21 @@ class PersonTest {
         assertEquals("u " + person.getName(), person.saveName());
     }
 
-    //    @Test
-    //    public void editIncome_addThenEdit_incomeChange() {
-    //        Person person = new Person(VALID_NAME);
-    //        person.addIncome(VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
-    //        assertEquals(VALID_AMOUNT, person.getTotalIncome());
-    //        person.editIncome(FIRST_ENTRY, null, NEW_AMOUNT, null);
-    //        assertEquals(NEW_AMOUNT, person.getTotalIncome());
-    //    }
-    //
-    //    @Test
-    //    public void editExpend_addThenEdit_expendChange() {
-    //        Person person = new Person(VALID_NAME);
-    //        person.addExpend(VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
-    //        assertEquals(VALID_AMOUNT, person.getTotalExpenditure());
-    //        person.editIncome(FIRST_ENTRY, null, NEW_AMOUNT, null);
-    //        assertEquals(NEW_AMOUNT, person.getTotalExpenditure());
-    //    }
+    @Test
+    public void editIncome_addThenEdit_incomeChange() {
+        Person person = new Person(VALID_NAME);
+        person.addIncome(VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, person.getTotalIncome());
+        person.editIncome(FIRST_ENTRY, null, NEW_AMOUNT, null);
+        assertEquals(NEW_AMOUNT, person.getTotalIncome());
+    }
+
+    @Test
+    public void editExpend_addThenEdit_expendChange() {
+        Person person = new Person(VALID_NAME);
+        person.addExpend(VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, person.getTotalExpenditure());
+        person.editExpend(FIRST_ENTRY, null, NEW_AMOUNT, null, null);
+        assertEquals(NEW_AMOUNT, person.getTotalExpenditure());
+    }
 }

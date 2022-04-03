@@ -1,6 +1,6 @@
 //@@author teanweijun
 
-package seedu.planitarium.person;
+package seedu.planitarium.family;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,17 +18,18 @@ class PersonListTest {
     private static final int INVALID_INDEX = -10;
     private static final int FIRST_ENTRY = 1;
     private static final boolean SILENT = true;
-    private static final int VALID_AMOUNT = 1000;
-    private static final int NEW_AMOUNT = 500;
+    private static final Double VALID_AMOUNT = 1000.0;
+    private static final Double NEW_AMOUNT = 500.0;
     private static final String VALID_DESCRIPTION = "Testing";
     private static final boolean PERMANENT = true;
-    private static final double FIRST_AMOUNT = 10;
-    private static final double SECOND_AMOUNT = 5;
+    private static final Double FIRST_AMOUNT = 10.0;
+    private static final Double SECOND_AMOUNT = 5.0;
 
+    private static final String INDENTATION = "   ";
     private static final String EMPTY_STRING = "";
     private static final String SAMPLE_LIST = "1. Alice" + System.lineSeparator()
-            + "Here is the income list for Alice:" + System.lineSeparator()
-            + "Here is the expenditure list for Alice:" + System.lineSeparator();
+            + INDENTATION + "List of incomes:" + System.lineSeparator()
+            + INDENTATION + "List of expenditures:" + System.lineSeparator();
 
     private ByteArrayOutputStream redirectIO() {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
@@ -208,23 +209,23 @@ class PersonListTest {
         assertEquals(0, list.getNumberOfExpenditures(FIRST_ENTRY));
     }
 
-    //    @Test
-    //    public void editIncome_addThenEdit_incomeChange() {
-    //        PersonList list = new PersonList();
-    //        list.addPerson(VALID_NAME);
-    //        list.addIncome(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
-    //        assertEquals(VALID_AMOUNT, list.getTotalIncome());
-    //        list.editIncome(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null);
-    //        assertEquals(NEW_AMOUNT, list.getTotalIncome());
-    //    }
-    //
-    //    @Test
-    //    public void editExpend_addThenEdit_expendChange() {
-    //        PersonList list = new PersonList();
-    //        list.addPerson(VALID_NAME);
-    //        list.addExpend(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
-    //        assertEquals(VALID_AMOUNT, list.getTotalExpenditure());
-    //        list.editExpend(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null, null);
-    //        assertEquals(NEW_AMOUNT, list.getTotalExpenditure());
-    //    }
+    @Test
+    public void editIncome_addThenEdit_incomeChange() {
+        PersonList list = new PersonList();
+        list.addPerson(VALID_NAME);
+        list.addIncome(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, list.getTotalIncome());
+        list.editIncome(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null);
+        assertEquals(NEW_AMOUNT, list.getTotalIncome());
+    }
+
+    @Test
+    public void editExpend_addThenEdit_expendChange() {
+        PersonList list = new PersonList();
+        list.addPerson(VALID_NAME);
+        list.addExpend(FIRST_ENTRY, VALID_DESCRIPTION, VALID_AMOUNT, FIRST_ENTRY, PERMANENT, SILENT);
+        assertEquals(VALID_AMOUNT, list.getTotalExpenditure());
+        list.editExpend(FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null, null);
+        assertEquals(NEW_AMOUNT, list.getTotalExpenditure());
+    }
 }

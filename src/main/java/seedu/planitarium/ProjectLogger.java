@@ -15,7 +15,7 @@ public class ProjectLogger {
     private static final String INIT_ERROR_MESSAGE = "Oops, logger can't be initialised!";
 
     public ProjectLogger(String className, String fileName) {
-        this.logger = Logger.getLogger(className);
+        logger = Logger.getLogger(className);
         try {
             initialiseLogger(fileName);
         } catch (IOException e) {

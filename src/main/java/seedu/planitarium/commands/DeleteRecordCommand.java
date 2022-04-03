@@ -4,7 +4,7 @@ import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
-import seedu.planitarium.person.Family;
+import seedu.planitarium.family.Family;
 
 import java.util.logging.Level;
 
@@ -39,7 +39,7 @@ public class DeleteRecordCommand extends Command {
         keyword = Parser.parseKeyword(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
         assert (uid > 0) : Constants.USER_INDEX_NOT_VALID;
-        logger.log(Level.INFO, String.format(LOG_DELETEREC_INFO, uid, group));
+        logger.log(Level.INFO, String.format(LOG_DELETEREC_INFO, group, uid));
     }
 
     public void execute() throws PlanITariumException {
@@ -49,15 +49,15 @@ public class DeleteRecordCommand extends Command {
         switch (keyword) {
         case DELETE_INCOME_CMD:
             index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
-                    family.getNumberOfIncomes(uid, group));
-            family.deleteIncome(uid, group, index);
-            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, INCOME, index, uid, group));
+                    family.getNumberOfIncomes(group, uid));
+            family.deleteIncome(group, uid, index);
+            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, INCOME, index, group, uid));
             break;
         case DELETE_SPEND_CMD:
             index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput),
-                    family.getNumberOfExpenditures(uid, group));
-            family.deleteExpend(uid, group, index);
-            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, EXPEND, index, uid, group));
+                    family.getNumberOfExpenditures(group, uid));
+            family.deleteExpend(group, uid, index);
+            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, EXPEND, index, group, uid));
             break;
         default:
             logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);

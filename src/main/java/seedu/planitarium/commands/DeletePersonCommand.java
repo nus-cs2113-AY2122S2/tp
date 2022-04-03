@@ -4,7 +4,7 @@ import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
-import seedu.planitarium.person.Family;
+import seedu.planitarium.family.Family;
 
 import java.util.logging.Level;
 
@@ -28,14 +28,14 @@ public class DeletePersonCommand extends Command {
         this.type = "DeletePersonCMD";
         this.group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         this.uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
-        logger.log(Level.INFO, String.format(LOG_DELETEPERSONCMD_INFO, uid, group));
+        logger.log(Level.INFO, String.format(LOG_DELETEPERSONCMD_INFO, group, uid));
     }
 
     public void execute() throws PlanITariumException {
         assert (uid > 0) : Constants.USER_INDEX_NOT_VALID;
         assert (family != null) : Constants.FAMILY_NOT_NULL;
-        family.deletePerson(uid,group);
-        logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, uid, group));
+        family.deletePerson(group, uid);
+        logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, group, uid));
     }
 
     @Override

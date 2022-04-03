@@ -10,8 +10,6 @@ import seedu.planitarium.exceptions.InvalidMoneyException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.exceptions.EmptyStringException;
 import seedu.planitarium.global.Constants;
-import seedu.planitarium.person.Person;
-import seedu.planitarium.person.PersonList;
 
 import java.util.logging.Level;
 
@@ -184,7 +182,7 @@ public class Parser {
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      * @throws EmptyStringException        if string after the delimiter is blank.
      */
-    public static boolean parseRecurringStatus(String userInput)
+    public static Boolean parseRecurringStatus(String userInput)
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
@@ -236,10 +234,10 @@ public class Parser {
      * @return A valid double for monetary values.
      * @throws InvalidMoneyException if format of text is not a valid double, negative or more than 2 decimal places.
      */
-    public static double getValidMoney(String amount) throws InvalidMoneyException {
+    public static Double getValidMoney(String amount) throws InvalidMoneyException {
         assert (amount != null) : ASSERT_MONEY_NOT_NULL;
         try {
-            double checkMoney = Double.parseDouble(amount);
+            Double checkMoney = Double.parseDouble(amount);
             ParserUtility.checkNegativeMoney(checkMoney);
             //if (amount.contains(DELIMITER_MONEY)) {
             //    String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
@@ -330,10 +328,10 @@ public class Parser {
      * @return A valid category index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static int getValidCategoryIndex(String categoryIndex) throws InvalidIndexException {
+    public static Integer getValidCategoryIndex(String categoryIndex) throws InvalidIndexException {
         assert (categoryIndex != null) : ASSERT_CATEGORY_NOT_NULL;
         try {
-            int checkIndex = Integer.parseInt(categoryIndex);
+            Integer checkIndex = Integer.parseInt(categoryIndex);
             ParserUtility.checkTooHighIndex(checkIndex, Category.getNumberOfCategories());
             ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_CATEGORY_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));

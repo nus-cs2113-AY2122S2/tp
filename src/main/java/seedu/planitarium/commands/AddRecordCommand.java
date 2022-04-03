@@ -6,7 +6,7 @@ import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
-import seedu.planitarium.person.Family;
+import seedu.planitarium.family.Family;
 
 import java.util.logging.Level;
 
@@ -48,7 +48,7 @@ public class AddRecordCommand extends Command {
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
         this.isSilent = Constants.FOR_USER;
         assert (uid >= 1) : Constants.USER_INDEX_NOT_VALID;
-        logger.log(Level.INFO, String.format(LOG_ADDRECORD_INFO, description, uid, group));
+        logger.log(Level.INFO, String.format(LOG_ADDRECORD_INFO, description, group, uid));
     }
 
     public void execute() throws PlanITariumException {
@@ -61,14 +61,14 @@ public class AddRecordCommand extends Command {
             amount = Parser.getValidMoney(Parser.parseIncome(userInput));
             family.addIncome(group, uid, description, amount, isPermanent, isSilent);
             logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, INCOME, description, amount, category,
-                    uid, group));
+                    group, uid));
             break;
         case ADD_SPENT_CMD:
             amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
             category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
             family.addExpend(group, uid, description, amount, category, isPermanent, isSilent);
             logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, EXPEND, description, amount, category,
-                    uid, group));
+                    group, uid));
             break;
         default:
             logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);
