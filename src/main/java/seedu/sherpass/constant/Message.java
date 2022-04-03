@@ -42,7 +42,7 @@ public class Message {
 
     public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
 
-    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
+    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after/equals to end time!";
     public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank and must be before "
             + "the date and time add commands";
     public static final String ERROR_EMPTY_TASK_LIST_MESSAGE = "The task list is empty!";

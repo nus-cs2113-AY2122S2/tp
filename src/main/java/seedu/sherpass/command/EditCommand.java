@@ -1,5 +1,6 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
@@ -82,6 +83,8 @@ public class EditCommand extends Command {
             ui.showToUser("Clashing task: " + exception.getMessage());
         } catch (IndexOutOfBoundsException exception) {
             ui.showToUser(ERROR_INVALID_INDEX_MESSAGE);
+        } catch (InvalidInputException exception) {
+            ui.showToUser(exception.getMessage());
         }
     }
 }

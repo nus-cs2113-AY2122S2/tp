@@ -143,6 +143,11 @@ public class TaskList {
                 || isStartAndEndTimeContainCurrentTime(currentTask, doOnStartDateTime, doOnEndDateTime);
     }
 
+    private boolean isStartTimeClashWithEndTime(Task taskToCheck) {
+        return taskToCheck.getDoOnStartDateTime().isAfter(taskToCheck.getDoOnEndDateTime())
+                || taskToCheck.getDoOnStartDateTime().equals(taskToCheck.getDoOnEndDateTime());
+    }
+
     /**
      * Checks if there is any date and time clashes
      * for a given array.
@@ -169,7 +174,7 @@ public class TaskList {
      * @param newTask The new task to be added to the array.
      */
     public void addTask(Task newTask) throws TimeClashException, InvalidInputException {
-        if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
+        if (isStartTimeClashWithEndTime(newTask)) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
         identifierList.add(newTask.getIdentifier());
@@ -211,8 +216,11 @@ public class TaskList {
     public void editSingleTaskContent(int editIndex, String taskDescription,
                                       long startDifferenceInSeconds,
                                       long endDifferenceInSeconds,
-                                      LocalDateTime byDate) throws TimeClashException {
+                                      LocalDateTime byDate) throws TimeClashException, InvalidInputException {
         Task taskToEdit = tasks.get(editIndex);
+        if (isStartTimeClashWithEndTime(taskToEdit)) {
+            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
+        }
         ArrayList<Task> editedList = new ArrayList<>(tasks);
         editedList.remove(editIndex);
 
@@ -230,7 +238,7 @@ public class TaskList {
 
     public void editRepeatedTasks(int editIndex, String taskDescription,
                                   long startDifferenceInSeconds,
-                                  long endDifferenceInSeconds) throws TimeClashException {
+                                  long endDifferenceInSeconds) throws TimeClashException, InvalidInputException {
         ArrayList<Task> affectedTasks = getAffectedTasks(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
         editedList.removeAll(affectedTasks);
@@ -248,8 +256,11 @@ public class TaskList {
         updateIndex();
     }
 
-    public ArrayList<Task> getAffectedTasks(int index) {
+    public ArrayList<Task> getAffectedTasks(int index) throws InvalidInputException {
         Task taskToEdit = tasks.get(index);
+        if (isStartTimeClashWithEndTime(taskToEdit)) {
+            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
+        }
         ArrayList<Task> result = new ArrayList<>();
         for (Task t : tasks) {
             if (t.getIdentifier() == taskToEdit.getIdentifier() && t.getIndex() >= taskToEdit.getIndex()) {
