@@ -131,9 +131,9 @@ parse the 'exercise' base word and proceed to create exercise related command us
 constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandException` will be thrown.
 
 Currently, the exercise related feature is limited to `exercise /list` only. Therefore, the `keywords` mentioned can
-be ignored for now, and the only supported `userAction` is `/list`. However, more exciting exercise related features are
+be ignored for now, and the only supported `userAction` is `/list`. However, more exciting exercise-related features are
 expected to be delivered in future iterations, and we currently have set the framework to implement these features in
-the future. Thus, we hva a standalone section specifically kept for exercise related features.
+the future. Thus, we have this standalone section specifically kept for exercise-related features.
 
 ---
 
