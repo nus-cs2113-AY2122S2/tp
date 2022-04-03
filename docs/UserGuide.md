@@ -126,15 +126,15 @@ contains two types of formatting.
 `<condition>` must be separated by a single whitespace. Excessive whitespaces will not be accepted by the application.
 However, plan names may have more than a single whitespace in between words and numbers.<br/><br/>
 **Incorrect Examples**<br/>
-:x:  `workout /new     push up   /reps   1000`<br/>
-:x:  `plan    /list`<br/>
-:x:  `plan /new Leg Day    /workouts    1, 2, 3`
+:x: `workout /new     push up   /reps   1000`<br/>
+:x: `plan    /list`<br/>
+:x: `plan /new Leg Day    /workouts    1, 2, 3`
 <br/><br/>
 **Correct Examples**<br/>
-:white_check_mark:  `workout /new push up /reps 1000`<br/>
-:white_check_mark:  `plan /list`<br/>
-:white_check_mark:  `plan /new Leg Day /workouts 1, 2, 3`<br/>
-:white_check_mark:  `plan /new Leg     Day /workouts 1, 2, 3`
+:ballot_box_with_check: `workout /new push up /reps 1000`<br/>
+:ballot_box_with_check: `plan /list`<br/>
+:ballot_box_with_check: `plan /new Leg Day /workouts 1, 2, 3`<br/>
+:ballot_box_with_check: `plan /new Leg     Day /workouts 1, 2, 3`
 </span>
 
 #### Workout Commands
