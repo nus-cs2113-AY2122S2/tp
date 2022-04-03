@@ -1142,6 +1142,8 @@ werkItResources/        // Primary resource directory for WerkIt!
     ├── workouts.txt    // Text file containing a list of user-created workouts
     ├── plans.txt       // Text file containing a list of user-created plans
     └── schedule.txt    // Text file containing a 7-day schedule of user-assigned plans for each day
+werkItLogs/
+    └── logs.log        // Log file containing logs created by the application.
 ```
 
 Do note that the directory (and by extension, the files) will be created in your terminal's
