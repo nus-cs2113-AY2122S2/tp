@@ -23,11 +23,15 @@ public class AddPatientCommand extends Command {
     }
 
     @Override
-    public void execute(DoctorList doctorList, PatientList patientList,
+    public String execute(DoctorList doctorList, PatientList patientList,
                         AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                         PatientStorage patientStorage,
                         AppointmentStorage appointmentStorage) throws IHospitalException {
         Patient patient = new Patient(id, name, phoneNumber, email,symptom,description);
         patientList.addPatient(patient);
+        return String.format(boundary + "Noted. I've added this patient:" + "\n" +
+                patientList.getPatient(patientList.getSize() - 1) + "\n" +
+                "Now you have " + patientList.getSize()
+                + " patients recorded in the system." + System.lineSeparator() + boundary);
     }
 }

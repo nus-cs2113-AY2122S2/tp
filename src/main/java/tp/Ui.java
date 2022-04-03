@@ -18,6 +18,10 @@ public class Ui {
         System.out.print(boundary + "Bye. Hope to see you again soon!" + System.lineSeparator() + boundary);
     }
 
+    public void generateResponse(String message) {
+        System.out.println(message);
+    }
+
     public void printDoctorPage(DoctorList doctors) {
         System.out.print(boundary);
         System.out.println("Welcome to Doctor Page.");
