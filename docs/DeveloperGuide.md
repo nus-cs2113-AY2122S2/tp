@@ -47,8 +47,8 @@ is responsible for,
 
 **How the components interact with each other**
 
-The slightly simplified *Sequence Diagram* below shows how the components interact for the scenario where the user issues
-the command `add /n Alice /g 2`.
+The following Sequence Diagram, with the specific classes and methods abstracted, shows a high-level view on how the 
+components interact for the scenario where the user issues the command `add /g 2 /n Alice`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 
