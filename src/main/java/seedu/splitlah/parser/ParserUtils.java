@@ -25,6 +25,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A utility class that provides supporting parsing methods to the main Parser class.
+ * 
+ * @author Warren
+ */
 public class ParserUtils {
     
     // DELIMITERS
