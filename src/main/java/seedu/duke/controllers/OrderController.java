@@ -5,6 +5,7 @@ import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
+import seedu.duke.entities.Order;
 
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit Order Menu",
@@ -61,7 +62,14 @@ public class OrderController extends Controller {
     }
 
     private void displayAllOrdersToNBeImplemented() {
-        System.out.print("hi");
+        if (orderManager.getOrderCount() > 0) {
+            System.out.println("Printing all orders...");
+            for (int i = 0; i < orderManager.getOrderCount(); i++) {
+                System.out.printf("Order %d:\n " + orderManager.getOrder(i) + "\n", i);
+            }
+        } else {
+            System.out.println("No order now.");
+        }
     }
 
     private void addNewOrder() throws OperationTerminationException {
