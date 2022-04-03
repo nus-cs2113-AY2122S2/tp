@@ -11,8 +11,6 @@ import seedu.sherpass.command.UnmarkCommand;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 
-import seedu.sherpass.task.TaskList;
-
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
@@ -22,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import static seedu.sherpass.constant.CommandParameter.BY_DATE_DELIMITER;
+import static seedu.sherpass.constant.CommandParameter.BY_TIME_DELIMITER;
 import static seedu.sherpass.constant.CommandParameter.DO_DATE_DELIMITER;
 import static seedu.sherpass.constant.CommandParameter.END_TIME_DELIMITER;
 import static seedu.sherpass.constant.CommandParameter.FREQUENCY_DELIMITER;
@@ -142,9 +141,6 @@ public class TaskParser {
         if (argument.isBlank()) {
             throw new InvalidInputException(ERROR_EMPTY_ADD_COMMANDS_MESSAGE);
         }
-        if (argument.contains(FREQUENCY_DELIMITER) && argument.contains(BY_DATE_DELIMITER)) {
-            throw new InvalidInputException(ERROR_MULTIPLE_ARGS_MESSAGE);
-        }
         String taskDescription = parseDescription(argument);
         if (taskDescription.isBlank()) {
             throw new InvalidInputException(ERROR_EMPTY_DESCRIPTION_MESSAGE);
@@ -158,16 +154,20 @@ public class TaskParser {
     }
 
     private static void prepareAddByDate(AddCommand newCommand, String argument) throws InvalidInputException {
-        if (!argument.contains(BY_DATE_DELIMITER)) {
-            newCommand.setTaskByDate(null);
+        if (argument.contains(BY_DATE_DELIMITER) && argument.contains(BY_TIME_DELIMITER)) {
+            String byDateString = parseArgument(BY_DATE_DELIMITER, argument);
+            String byTimeString = parseArgument(BY_TIME_DELIMITER, argument);
+            if (byTimeString.isBlank() || byDateString.isBlank()) {
+                throw new InvalidInputException("Please specify the deadline datetime!");
+            }
+            newCommand.setTaskByDate(prepareTaskDateTime(byDateString + WHITESPACE,
+                    byTimeString, inputWithTimeFormat));
         } else {
-            newCommand.setTaskByDate(prepareTaskDate(parseArgument(BY_DATE_DELIMITER, argument)).atStartOfDay());
+            newCommand.setTaskByDate(null);
         }
-        newCommand.setFrequency(Frequency.SINGLE);
     }
 
     private static void prepareAddFrequency(AddCommand newCommand, String argument) throws IllegalArgumentException {
-        newCommand.setTaskByDate(null);
         newCommand.setFrequency(Frequency.valueOf(parseArgument(FREQUENCY_DELIMITER, argument).toUpperCase()));
     }
 
@@ -185,8 +185,9 @@ public class TaskParser {
             if (argument.contains(FREQUENCY_DELIMITER)) {
                 prepareAddFrequency(newCommand, argument);
             } else {
-                prepareAddByDate(newCommand, argument);
+                newCommand.setFrequency(Frequency.SINGLE);
             }
+            prepareAddByDate(newCommand, argument);
             return newCommand;
         } catch (IllegalArgumentException exception) {
             ui.showToUser(ERROR_INVALID_FREQUENCY_MESSAGE);
@@ -238,10 +239,16 @@ public class TaskParser {
     }
 
     private static void prepareEditByDate(EditCommand newCommand, String argument) throws InvalidInputException {
-        if (!argument.contains(BY_DATE_DELIMITER)) {
-            newCommand.setByDate(null);
+        if (argument.contains(BY_DATE_DELIMITER) && argument.contains(BY_TIME_DELIMITER)) {
+            String byDateString = parseArgument(BY_DATE_DELIMITER, argument);
+            String byTimeString = parseArgument(BY_TIME_DELIMITER, argument);
+            if (byTimeString.isBlank() || byDateString.isBlank()) {
+                throw new InvalidInputException("Please specify the deadline datetime!");
+            }
+            newCommand.setByDate(prepareTaskDateTime(byDateString + WHITESPACE,
+                    byTimeString, inputWithTimeFormat));
         } else {
-            newCommand.setByDate(prepareTaskDate(parseArgument(BY_DATE_DELIMITER, argument)).atStartOfDay());
+            newCommand.setByDate(null);
         }
     }
 
@@ -261,9 +268,7 @@ public class TaskParser {
             EditCommand newCommand = prepareEditTaskContent(argument);
             boolean isRepeating = argument.contains(FREQUENCY_DELIMITER);
             newCommand.setRepeating(isRepeating);
-            if (!isRepeating) {
-                prepareEditByDate(newCommand, argument);
-            }
+            prepareEditByDate(newCommand, argument);
             return newCommand;
         } catch (InvalidInputException | IndexOutOfBoundsException e) {
             ui.showToUser(e.getMessage());
@@ -289,62 +294,4 @@ public class TaskParser {
         }
         return null;
     }
-
-
-    /*
-    private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
-        // tests to make sure the byDate is before the doOnDate
-        if (fullEditInfo.contains(BY_DATE_DELIMITER) && fullEditInfo.contains(DO_DATE_DELIMITER)) {
-            if (fullEditInfo.indexOf(BY_DATE_DELIMITER) > fullEditInfo.indexOf(DO_DATE_DELIMITER)) {
-                throw new WrongEditInfoFormatException();
-            }
-        }
-        // tests to make sure the task description is the first input if it is present
-        String[] splitEditInfo = fullEditInfo.split(
-                "/by \\d{4}/\\d{2}/\\d{2}|/do_on \\d{4}/\\d{2}/\\d{2}");
-        if (splitEditInfo.length > 1) {
-            throw new WrongEditInfoFormatException();
-        }
-    }
-
-    private static Command handleEdit(int taskNumberToEdit, String fullEditInfo) throws InvalidInputException {
-
-        String[] splitEditInfo = fullEditInfo.split(" ");
-        String descriptionToEdit;
-        LocalDate parsedByDateToEdit;
-        LocalDateTime parsedDoOnDateToEdit;
-
-        if (!splitEditInfo[0].trim().equals(BY_DATE_DELIMITER)
-                && !(splitEditInfo[0].trim().equals(DO_DATE_DELIMITER))) {
-            descriptionToEdit = splitEditInfo[0];
-        } else {
-            descriptionToEdit = EMPTY_STRING;
-        }
-
-        parsedByDateToEdit = getParsedDateToEdit(fullEditInfo, BY_DATE_DELIMITER);
-        parsedDoOnDateToEdit = getParsedDateToEdit(fullEditInfo, DO_DATE_DELIMITER);
-
-        return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedDoOnDateToEdit);
-
-
-        return null;
-    }
-
-    private static LocalDateTime getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
-
-        if (fullEditInfo.contains(keyword)) {
-
-            int offsetForKeyword = keyword.length() + 1;
-            int offsetForSubstring = fullEditInfo.indexOf(keyword) + offsetForKeyword;
-
-            // gets the substring (of fullEditInfo) after the keyword (, which is either "/by" or "/do_on")
-            // splits the substring and obtains the first word (which should be the date of format yyyy/MM/dd)
-            String dateToEdit = fullEditInfo.substring(offsetForSubstring).split(" ")[0].trim();
-
-            return prepareTaskDate(dateToEdit, "00:00");
-        }
-
-
-        return null;
-    }*/
 }

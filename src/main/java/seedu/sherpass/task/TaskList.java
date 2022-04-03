@@ -176,7 +176,7 @@ public class TaskList {
             taskToUpdate.setTaskDescription(taskDescription);
         }
         if (byDate != null) {
-            taskToUpdate.setByDate(byDate);
+            taskToUpdate.setByDateTime(byDate);
         }
         if (startDifferenceInSeconds != 0) {
             taskToUpdate.setDoOnStartDateTime(taskToUpdate

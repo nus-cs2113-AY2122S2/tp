@@ -13,7 +13,7 @@ public class Task {
     protected String description;
     protected int identifier;
     protected boolean isDone;
-    protected LocalDateTime byDate;
+    protected LocalDateTime byDateTime;
     protected LocalDateTime doOnStartDateTime;
     protected LocalDateTime doOnEndDateTime;
 
@@ -30,7 +30,7 @@ public class Task {
                 LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime) {
         this.identifier = identifier;
         this.description = description;
-        this.byDate = byDate;
+        this.byDateTime = byDateTime;
         this.doOnStartDateTime = doOnStartDateTime;
         this.doOnEndDateTime = doOnEndDateTime;
         this.isDone = false;
@@ -48,7 +48,7 @@ public class Task {
                 LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime, int index) {
         this.identifier = identifier;
         this.description = description;
-        this.byDate = byDate;
+        this.byDateTime = byDateTime;
         this.doOnStartDateTime = doOnStartDateTime;
         this.doOnEndDateTime = doOnEndDateTime;
         this.isDone = false;
@@ -107,8 +107,8 @@ public class Task {
      *
      * @return White space.
      */
-    public LocalDateTime getByDate() {
-        return byDate;
+    public LocalDateTime getByDateTime() {
+        return byDateTime;
     }
 
     public LocalDateTime getDoOnStartDateTime() {
@@ -121,8 +121,8 @@ public class Task {
      * @return Returns if byDate contains a parsed date. Otherwise, returns a blank string (no whitespace).
      */
     public String getByDateString() {
-        if (byDate != null) {
-            return byDate.format(outputWithoutTimeFormat);
+        if (byDateTime != null) {
+            return byDateTime.format(outputWithoutTimeFormat);
         }
         return EMPTY_STRING;
     }
@@ -150,7 +150,7 @@ public class Task {
     @Override
     public String toString() {
         String result = index + ". [" + this.getStatusIcon() + "] " + this.getDescription();
-        if (this.byDate != null) {
+        if (this.byDateTime != null) {
             result += " (by: " + getByDateString() + ")";
         }
         if (this.doOnStartDateTime != null) {
@@ -164,8 +164,8 @@ public class Task {
         this.description = taskDescription;
     }
 
-    public void setByDate(LocalDateTime byDate) {
-        this.byDate = byDate;
+    public void setByDateTime(LocalDateTime byDateTime) {
+        this.byDateTime = byDateTime;
     }
 
     public void setDoOnStartDateTime(LocalDateTime doOnStartDateTime) {
@@ -203,6 +203,6 @@ public class Task {
                 && doOnStartDateTime.equals(t.getDoOnStartDateTime())
                 && doOnEndDateTime.equals(t.getDoOnEndDateTime())
                 && identifier == (t.getIdentifier())
-                && byDate.equals(t.getByDate());
+                && byDateTime.equals(t.getByDateTime());
     }
 }

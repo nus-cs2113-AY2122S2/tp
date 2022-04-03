@@ -28,17 +28,15 @@ public class StorageParser {
             String byDateString = taskData.getString("by_date");
             String doOnStartDateString = taskData.getString("do_date_start");
             String doOnEndDateString = taskData.getString("do_date_end");
-            String frequencyString = taskData.getString("frequency");
             int index = taskData.getInt("index");
 
-            Frequency repeatFrequency = Frequency.valueOf(frequencyString);
             LocalDateTime byDate = (byDateString.isBlank()
                     ? null : LocalDateTime.parse(byDateString, inputWithTimeFormat));
             LocalDateTime doOnStartDateTime = LocalDateTime.parse(doOnStartDateString, inputWithTimeFormat);
             LocalDateTime doOnEndDateTime = LocalDateTime.parse(doOnEndDateString, inputWithTimeFormat);
 
             parsedTask = new Task(identifier, description, byDate, doOnStartDateTime,
-                    doOnEndDateTime, repeatFrequency, index);
+                    doOnEndDateTime, index);
             String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();
