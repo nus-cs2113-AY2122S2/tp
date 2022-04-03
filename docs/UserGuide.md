@@ -147,13 +147,18 @@ Format: `delete /g GROUP_INDEX /u USER_INDEX`
 * **GROUP_INDEX** refers to the index of the group that you belong to.
 * **USER_INDEX** refers to the index of that is tagged to you.
 
+> :information_source: Notes:
+> * The user indexes that are higher than the deleted one will be **decremented** after 
+    the deletion is completed.
+>      * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
+
 Example of usage:
 
-* Delete the person with uid = 1 from the Parents' group:
+* Delete the Alice (with uid = 1) from the Parents' group.
 
   `delete /g 1 /u 1`
 
-* _Result_: The person with uid = 1 is deleted from the Parents' group 
+* _Result_: Alice deleted from the Parents' group 
   
 <br/>
 
@@ -197,15 +202,17 @@ Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 * **INCOME_INDEX** refers to the index of the income you would like to delete.
 
 > :information_source: Notes:
-> * Entries in an income list which have an income index higher than the deleted one will be **decremented** after the deletion is completed.
+> * The income indexes that are higher than the deleted one will be **decremented** after
+    the deletion is completed.
+    >      * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
 
 Example of usage:
 
-* Delete the monthly-recurrent Salary of $2,000, from Alice's income.
+* Delete the monthly-recurrent Salary of $2,000 from Alice's income.
 
   `deletein /g 1 /u 1 /r 1`
 
-* _Result_: Income entry is deleted from Alice's income list.
+* _Result_: Income entry for Salary of $2,000 is deleted from Alice's income list.
 
   ![deletein-command-screenshot]() <!-- this is a placeholder -->
 
@@ -213,15 +220,15 @@ Example of usage:
 
 ### Edit an income: `editin`
 
-> Edits an entry from your list of tracked incomes.
+> Edits an entry in your list of tracked incomes.
 
 Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCRIPTION /p <T|(any)>]`
 
 * **GROUP_INDEX** refers to the index of the group that you belong to.
 * **USER_INDEX** refers to the index of that is tagged to you.
 * **INCOME_INDEX** refers to the index of the income you would like to edit.
-* **INCOME** refers to the monetary value of your income.
-* **DESCRIPTION** refers to the name or description of your income.
+* **INCOME** refers to the new monetary value of your income.
+* **DESCRIPTION** refers to the new name or description of your income.
 * **<T/(any)>** refers to whether your income is recurrent on a monthly-basis.
 
 > :information_source: Notes:
@@ -253,12 +260,16 @@ Format: `addout /g GROUP_INDEX /u USER_INDEX /e EXPENDITURE /d DESCRIPTION /c CA
 * **CATEGORY_INDEX** refers to the category of your expenditure.
 * **<T|(any)>** refers to whether your expenditure is recurrent on a monthly-basis.
 
+> :information_source: Notes:
+> * Each person will have their expenditures recorded separately from one another.
+> * The expenditure entries will be indexed starting from 1 and **incremented** for every entry.
+
 Example of usage:
 
-* Add a monthly-recurrent expenditure of $20 for candies, to Alice's expenditure. This expenditure is tagged under the "
-  Food and Drinks" category.
+* Add a monthly-recurrent expenditure of $20 for candies to Alice's expenditure. This expenditure is tagged under the 
+  "Food and Drinks" category.
 
-  `addout /g 1 /u 1 /e 20 /d candies /c 1 /p T`
+  `addout /g 1 /u 1 /e 20 /d candies /c 2 /p T`
 
 * _Result_: Entry for candies is added to Alice's expenditure list with an expenditure index of **1**.
 
@@ -276,13 +287,18 @@ Format: `deleteout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX`
 * **USER_INDEX** refers to the index of that is tagged to you.
 * **EXPENDITURE_INDEX** refers to the index of the expenditure you would like to delete.
 
+> :information_source: Notes:
+> * The expenditure indexes that are higher than the deleted one will be **decremented** after
+    the deletion is completed.
+    >      * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
+
 Example of usage:
 
-* Delete the monthly-recurrent candies of $20, from Alice's expenditure.
+* Delete the monthly-recurrent candies of $20 from Alice's expenditure.
 
   `deleteout /g 1 /u 1 /r 1`
 
-* _Result_: Expenditure entry is deleted from Alice's expenditure list.
+* _Result_: Expenditure entry for candies of $20 is deleted from Alice's expenditure list.
 
   ![deleteout-command-screenshot]() <!-- this is a placeholder -->
 
@@ -308,7 +324,7 @@ Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/e EXPENDITU
 
 Example of usage:
 
-* Edits the monthly-recurrent candies expenditure of $20, from Alice's expenditure, to $25.
+* Edits the monthly-recurrent candies expenditure of $20 from Alice's expenditure, to $25.
 
   `editout /g 1 /u 1 /r 1 /e 25`
 
@@ -320,7 +336,7 @@ Example of usage:
 
 ### Show financial summary: `overview`
 
-> Shows a list of the total incomes, expenditures and disposable income of all groups.
+> Shows a summary of the total income, expenditure and disposable income for each group.
 
 Format: `overview`
 
@@ -330,7 +346,7 @@ Format: `overview`
 
 ### Show all records by group: `list`
 
-> Shows a list of incomes and expenditures, in a group
+> Shows a list of incomes and expenditures for each person in a given group.
 
 Format: `list /g GROUP_INDEX`
 
@@ -388,7 +404,7 @@ Example of usage:
 
 Format: `bye`
 
-<br/>
+---
 
 ## FAQ
 
