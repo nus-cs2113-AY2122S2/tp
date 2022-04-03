@@ -33,7 +33,7 @@ public class Storage {
     private static final String FILE_DIR = "data";
     private static final String FILE_NAME = "PlanITarium.txt";
     private static final String FILE_SEPARATOR = "/";
-    private static final String INFO_DELIMITER = "-";
+    private static final String INFO_DELIMITER = "/d";
     private static final String ADD_USER = "u";
     private static final String ADD_EXPENDITURE = "e";
     private static final String ADD_INCOME = "i";
