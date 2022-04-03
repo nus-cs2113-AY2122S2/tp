@@ -7,6 +7,7 @@ import seedu.duke.exceptions.ItemNameAlreadyInListException;
 
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
+import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
 import seedu.duke.storage.ItemListFileManager;
 import seedu.duke.exceptions.DuplicateItemNameException;
@@ -23,8 +24,7 @@ import java.util.logging.Logger;
  */
 public class UpdateItemNameCommand extends Command {
     private static final String DELIMITER = "/";
-    private String oldItemName;
-    private String newItemName;
+    private Item item;
     private static final int NUMBER_OF_PARTS_IN_COMMAND = 2;
     private static Logger itemLogger = Logger.getLogger("itemLogger");
 
@@ -56,8 +56,8 @@ public class UpdateItemNameCommand extends Command {
         }
         String oldItemName = extractCurrentItemName(tokens);
         String newItemName = extractNewItemName(tokens);
-        setOldItemName(oldItemName);
-        setNewItemName(newItemName);
+        Item item = new Item(oldItemName,newItemName);
+        setItem(item);
     }
 
     /**
@@ -97,20 +97,12 @@ public class UpdateItemNameCommand extends Command {
         return newItemName;
     }
 
-    public String getOldItemName() {
-        return oldItemName;
+    public Item getItem() {
+        return item;
     }
 
-    public void setOldItemName(String oldItemName) {
-        this.oldItemName = oldItemName;
-    }
-
-    public String getNewItemName() {
-        return newItemName;
-    }
-
-    public void setNewItemName(String newItemName) {
-        this.newItemName = newItemName;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     /**
@@ -129,8 +121,9 @@ public class UpdateItemNameCommand extends Command {
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         ItemList listOfItems = listContainer.getItemList();
-        String oldItemName = getOldItemName();
-        String newItemName = getNewItemName();
+        Item item = getItem();
+        String oldItemName = item.getName();
+        String newItemName = item.getUpdatedName();
         if (oldItemName.equals(newItemName)) {
             throw new DuplicateItemNameException();
         }

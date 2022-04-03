@@ -4,11 +4,10 @@ import seedu.duke.AssignmentMap;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidRoomNumberException;
 import seedu.duke.ListContainer;
-import seedu.duke.Room;
-import seedu.duke.RoomList;
+import seedu.duke.roomlists.Room;
+import seedu.duke.roomlists.RoomList;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
-import seedu.duke.command.RoomHelper;
 
 /**
  * Class that implements execution behavior to list room with corresponding
@@ -47,8 +46,9 @@ public class CheckRoomCommand extends Command {
         for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
                 ui.printTableHeader();
-                System.out.println(room + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
+                System.out.println(room.toString()
+                        + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+                );
                 return;
             }
         }

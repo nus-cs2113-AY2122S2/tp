@@ -2,6 +2,7 @@ package seedu.duke.itemlists;
 
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.ItemNotFoundException;
+import seedu.duke.exceptions.NewItemPaxSameAsCurrentPaxException;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -94,7 +95,7 @@ public class ItemList {
      *             and the new pax.
      * @throws ItemNotFoundException if the item name within the item object does not exist in the item list.
      */
-    public void updateItemPaxInList(Item item) throws ItemNotFoundException {
+    public void updateItemPaxInList(Item item) throws HotelLiteManagerException {
         String nameOfItemToUpdate = item.getName();
         int paxOfItemToUpdate = item.getPax();
         assert (paxOfItemToUpdate >= 0) : "Assertion Failed! Item to update has a pax that is lesser than 0";
@@ -102,11 +103,15 @@ public class ItemList {
         boolean isItemFound = false;
         Item currentItem;
         String currentItemName;
+        int currentItemPax;
         ArrayList<Item> listOfItems = getListOfItems();
         for (int itemIndex = 0; itemIndex < listOfItems.size(); itemIndex++) {
             currentItem = listOfItems.get(itemIndex);
             currentItemName = currentItem.getName();
-            if (currentItemName.equals(nameOfItemToUpdate)) {
+            currentItemPax = currentItem.getPax();
+            if (currentItemName.equals(nameOfItemToUpdate) && currentItemPax == paxOfItemToUpdate) {
+                throw new NewItemPaxSameAsCurrentPaxException();
+            } else if (currentItemName.equals(nameOfItemToUpdate)) {
                 currentItem.setPax(paxOfItemToUpdate);
                 isItemFound = true;
             }

@@ -1,14 +1,13 @@
 package seedu.duke.command.roomcommand;
 
-import seedu.duke.RoomList;
+import seedu.duke.roomlists.RoomList;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.AssignmentMap;
-import seedu.duke.Room;
+import seedu.duke.roomlists.Room;
 import seedu.duke.exceptions.InvalidRoomNumberException;
 import seedu.duke.command.Command;
-import seedu.duke.command.RoomHelper;
 
 import java.io.IOException;
 
@@ -37,10 +36,19 @@ public class CheckInCommand extends Command {
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
+                if (!room.getIsVacant()) {
+                    System.out.println("Error! This room is already occupied.");
+                    ui.printTableHeader();
+                    System.out.println(room
+                            + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+                    );
+                    return;
+                }
                 room.checkIn();
                 ui.printTableHeader();
-                System.out.println(room + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
+                System.out.println(room.toString()
+                        + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+                );
                 roomList.save();
                 return;
             }

@@ -11,12 +11,15 @@ import seedu.duke.itemlists.ItemList;
 import seedu.duke.eventlists.EventList;
 import seedu.duke.eventlists.Event;
 import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.roomlists.Room;
+import seedu.duke.roomlists.RoomList;
 import seedu.duke.satisfactionlists.SatisfactionList;
 import seedu.duke.storage.AssignmentListFileManager;
 import seedu.duke.storage.RoomFileManager;
 import seedu.duke.storage.EventListFileManager;
 import seedu.duke.storage.ItemListFileManager;
 import seedu.duke.storage.SatisfactionListFileManager;
+import seedu.duke.storage.HousekeeperPerformanceFileManager;
 import seedu.duke.storage.HousekeeperFileManager;
 
 public class ListContainer {
@@ -53,6 +56,9 @@ public class ListContainer {
 
         HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
         housekeeperList = housekeeperFileManager.load();
+
+        HousekeeperPerformanceFileManager housekeeperPerformanceFileManager = new HousekeeperPerformanceFileManager();
+        housekeeperPerformanceList = housekeeperPerformanceFileManager.load();
 
         SatisfactionListFileManager satisfactionListFileManager = new SatisfactionListFileManager();
         satisfactionList = satisfactionListFileManager.load();

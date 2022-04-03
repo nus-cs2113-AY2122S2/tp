@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.command.roomcommand.CheckInCommand;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidRoomNumberException;
+import seedu.duke.roomlists.Room;
+import seedu.duke.roomlists.RoomList;
 
 import java.io.IOException;
 
@@ -40,8 +42,8 @@ class CheckInCommandTest {
                 expectedRoom = room;
             }
         }
-        assertEquals("Queen\t\t301\t\t\t 3\t\t\tOccupied", expectedRoom.toString());
 
+        assertEquals(String.format("%-15s%-15s%-15s%-15s", "Queen", "301", "3","Occupied"), expectedRoom.toString());
     }
 
     //unhappy

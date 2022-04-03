@@ -3,9 +3,9 @@ package seedu.duke.command.roomcommand;
 import seedu.duke.AssignmentMap;
 import seedu.duke.exceptions.InvalidCategoryException;
 import seedu.duke.ListContainer;
-import seedu.duke.Room;
-import seedu.duke.RoomList;
-import seedu.duke.RoomType;
+import seedu.duke.roomlists.Room;
+import seedu.duke.roomlists.RoomList;
+import seedu.duke.roomlists.RoomType;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
 
@@ -65,8 +65,9 @@ public class CheckRoomByCatCommand extends Command {
         ui.printTableHeader();
         for (Room room : roomList.getRoomList()) {
             if (room.getType() == type) {
-                System.out.println(room + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
+                System.out.println(room.toString()
+                        + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
+                );
             }
         }
     }

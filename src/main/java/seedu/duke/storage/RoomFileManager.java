@@ -1,8 +1,8 @@
 package seedu.duke.storage;
 
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.Room;
-import seedu.duke.RoomType;
+import seedu.duke.roomlists.Room;
+import seedu.duke.roomlists.RoomType;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -18,6 +18,7 @@ public class RoomFileManager extends FileManager {
         File file = getFile(FILE_PATH);
         if (isNewFile) {
             createNewRoomList(roomList);
+            this.save(roomList);
             return;
         }
         Scanner scan = new Scanner(file);
@@ -43,11 +44,11 @@ public class RoomFileManager extends FileManager {
         roomList.add(r1);
         r1 = new Room(201, 2, RoomType.Double);
         roomList.add(r1);
-        r1 = new Room(201, 2, RoomType.Triple);
-        roomList.add(r1);
         r1 = new Room(202, 2, RoomType.Triple);
         roomList.add(r1);
-        r1 = new Room(203, 2, RoomType.Queen);
+        r1 = new Room(203, 2, RoomType.Triple);
+        roomList.add(r1);
+        r1 = new Room(204, 2, RoomType.Queen);
         roomList.add(r1);
         r1 = new Room(301, 3, RoomType.Queen);
         roomList.add(r1);

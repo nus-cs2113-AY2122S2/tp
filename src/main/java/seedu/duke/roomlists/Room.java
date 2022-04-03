@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.roomlists;
 
 /**
  * Room class has the parameter of roomId, level type and vacancy status.
@@ -49,8 +49,8 @@ public class Room {
     }
 
     public String toString() {
-        return getType() + "\t\t" + getRoomId() + "\t\t\t "
-                + getLevel() + "\t\t\t" + (getIsVacant() ? "Vacant  " : "Occupied");
+        return String.format("%-15s%-15d%-15d%-15s", getType(), getRoomId(), getLevel(),
+                (getIsVacant() ? "Vacant  " : "Occupied"));
     }
 
     public String toFileString() {

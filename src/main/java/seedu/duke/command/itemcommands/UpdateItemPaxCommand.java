@@ -90,6 +90,7 @@ public class UpdateItemPaxCommand extends Command {
         int itemPax;
         String itemPaxStringVersion = token.nextToken();
         itemPaxStringVersion = itemPaxStringVersion.trim();
+
         if (itemPaxStringVersion.isEmpty()) {
             itemLogger.log(Level.WARNING, "Detected an empty item pax for UpdateItemPaxCommand. "
                     + "Exception thrown.");

@@ -395,7 +395,6 @@ I have assigned susan to room number 301.
 Adds a new housekeeper performance (name of housekeeper and their performance rating from 1-5) to the list of
 housekeeper performances.
 
-
 Format: `add performance HOUSEKEEPER_NAME / PERFORMANCE_RATING`
 
 * The `HOUSEKEEPER_NAME` can be in a natural language format. It must not be the name of a
@@ -526,6 +525,7 @@ Here are all the events in your list:
 
 
 ## Room Related Commands
+This app is targeted for one hotel, thus the room has been fixed and the information of room cannot be modified.
 
 ### Check in a room: `check in`
 Checks in a room according to the room number. The status of room will change to 
@@ -592,7 +592,7 @@ Triple		203			 2			Vaccant			NA
 ```
 
 ### Check room information by level: `check level`
-Checks information of all room at target level
+Checks information of all room at target level (1-4)
 
 Format: `check level LEVEL_NUMBER`
 
@@ -613,7 +613,7 @@ Queen		204			 2			Vacant  			NA
 ```
 
 ### Check room information by category: `check category`
-Checks information of all room at target category
+Checks information of all room at target category (single, double, triple, queen, king, twin)
 
 Format: `check category CATEGORY`
 
@@ -669,9 +669,9 @@ Adds a new item (name of item and its pax) to the item list which represents all
 
 Format: `add item ITEM NAME / PAX`
 * `add item` is not case-sensitive.
-* `Item Name` can be any string of characters including numbers and symbols. 
+* `Item Name` must only contain alphabetical characters, digits, whitespaces or apostrophe  
 * `Item Name` given must not be currently present within the item list.
-* `Pax` given has a limit of 1000000.
+* `Pax` given must be from 1 to 1000000.
 
 Example of usage:
 ```
@@ -693,7 +693,8 @@ Format: `update item pax ITEM NAME / PAX`
 * `update item pax` is not case-sensitive.
 * `ITEM NAME` given must be found within the item list to be eligible to be updated.
 * `ITEM NAME` is not case-sensitive.
-* `Pax` given has a limit of 1000000.
+* `ITEM NAME` must only contain alphabetical characters, digits, whitespaces or apostrophes.
+* `Pax` given must have a range from 0 to 1000000.
 
 Example of usage:
 ```
@@ -714,9 +715,11 @@ Format: `update item name OLD ITEM NAME / NEW ITEM NAME`
 
 * `update item name` is not case-sensitive.
 * `OLD ITEM NAME` given must be found within the item list as it is the name of the item currently within the item list which we want to update. 
+* `OLD ITEM NAME` cannot be the same as `NEW ITEM NAME`.
+* `OLD ITEM NAME` must only contain alphabetical characters, digits, whitespaces or apostrophes.
 * `NEW ITEM NAME` is the new name for the updated item.
 * `NEW ITEM NAME` is not case-sensitive.
-* `OLD ITEM NAME` cannot be the same as `NEW ITEM NAME`.
+* `NEW ITEM NAME` must only contain alphabetical characters, digits, whitespaces or apostrophes.
 
 Example of usage:
 ```
@@ -737,6 +740,7 @@ Format: `delete item NAME`
 * `delete item` is not case-sensitive.
 * `NAME` given must be found within the item list to be eligible to be deleted.
 * `NAME` is not case-sensitive.
+* `NAME` must only contain alphabetical characters, digits, whitespaces or apostrophes.
 
 Example of usage:
 ```
