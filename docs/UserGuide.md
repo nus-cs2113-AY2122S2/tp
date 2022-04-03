@@ -260,12 +260,12 @@ Enter corresponding index to use the feature.
 ### Print staff (indexed as 1)
 When using `Print staff`, there is no need for input, the program will print the order and index.
 > Add some staff: (100, John, Waiter, 2000), (101, Anna, Chef, 2500)
-> Enter 1 to print staff
 ```
 Printing staff...
 1. 100     | John            | Waiter
 2. 101     | Anna            | Chef
 ```
+> Enter 1 to print staff
 
 Details of all staff will be printed.
 
@@ -291,37 +291,24 @@ Staff with the `ID` being inputted should exist.
 
 ### Add staff (indexed as 3)
 When using `Add staff`, the program pops up an input panel.
->
-```
-Adding new staff...
-ID of staff: 
-```
-> Enter the ID of the new staff
-```
-Adding new staff...
-ID of staff: 
-Name of staff:
-```
-> Enter the name of the new staff
-```
-Adding new staff...
-ID of staff: 
-Name of staff:
-Position of staff
-```
-> Enter the position of the new staff
 ```
 Adding new staff...
 ID of staff: 
 Name of staff:
 Salary of staff:
 ```
+> Enter the ID of the new staff
+
+> Enter the name of the new staff
+
+> Enter the position of the new staff
+
 > Enter the salary of the new staff
 
 Staff with the ID, name, position and salary being inputted will be created.
 
 #### Notice
-`Name` and `Position` of the staff cannot be empty, and `ID` and `salary` of the staff cannot be zero or negative.
+`Name` and `Position` of the staff cannot be empty, and `ID` and `salary` of the staff cannot be zero or negative (range: -2,147,483,648 to 2,147,483,647).
 
 ### Delete staff (indexed as 4)
 When using `Delete staff`, the program pops up an input panel.
