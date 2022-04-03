@@ -127,6 +127,9 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 
 ![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
 
+> :information_source: **Note:** The borders of the Sequence Diagram may look cut-off due to PlantUML limitations.
+> No necessary information has been omitted due to it.
+
 How the `Parser` component is used:
 
 1. When the `Commands` component receives a user input, `parseKeyword()` is called upon to parse the type of command to
