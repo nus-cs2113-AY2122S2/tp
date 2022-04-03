@@ -5,6 +5,7 @@ title Class Diagram of `exercise` Command
 Main -> WerkIt
 WerkIt -> Parser
 WerkIt -> UI
+ExerciseList <- ExerciseCommand
 "{abstract}\nCommand" <|- ExerciseCommand
 
 
@@ -31,5 +32,9 @@ class Parser {
 + ExerciseCommand createExerciseCommand(String userInput)
 }
 
+class ExerciseList {
++ exercisesList: ArrayList<String>
++ printExerciseList()
+}
 
 @enduml
