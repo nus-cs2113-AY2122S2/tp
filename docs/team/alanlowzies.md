@@ -40,7 +40,7 @@ into text files stored on the user's local filesystem
   of commands in WerkIt! (e.g. `WorkoutCommand`, `ExerciseCommand`, etc.)
 - Wrote most of the `WorkoutCommand` API, which contains a workout-related command that the user has requested
   WerkIt! to carry out.
-- Wrote some of the exception APIs for WerkIt!, including `InvalidWorkoutException`, `InvalidExcerciseException`, and
+- Wrote some of the exception APIs for WerkIt!, including `InvalidWorkoutException`, `InvalidExerciseException`, and
   `UnknownFileException`.
 - Contributed to the `ExerciseList` API, which is mainly done by my team member Haofeng, by adding
   additional functionality to the API such as populating the `exercise.txt` file with default exercises. The exercises
