@@ -37,7 +37,7 @@ public final class InputParser {
                 String line = getString(msg).toLowerCase();
                 return Integer.parseInt(line);
             } catch (NumberFormatException e) {
-                System.out.printf("Error parsing integer - %s\n", e.getMessage());
+                System.out.println("Please input a valid integer!");
             }
         }
     }
