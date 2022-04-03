@@ -62,6 +62,9 @@ prerequisites to download and the steps to get it running on the user's computer
 
 ### Contributions to Team-Based Tasks
 - Set up the team's organisation and repository on GitHub
+- Set up and maintained the team's Google Drive folder, which includes the team's project notebook
+and other documents for the co-requsuite module CS2101 Effective Communication for Computing Professionals.
+- Helped to maintain the team's GitHub repository issue tracker.
 
 ### Review/Mentoring Contributions
 
