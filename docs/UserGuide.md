@@ -2,15 +2,19 @@
 
 ## Introduction
 
-EquipmentManager is a Command Line Interface application to help with keeping track of equipment details (e.g. current user, quantity, cost, warranty duration, purchase date) for the AV club. It provides a clean and fast way to manage the inventory as compared to “traditional” methods such as an excel spreadsheet.
+EquipmentManager is a Command Line Interface application to help with keeping track of equipment details (e.g. current user, quantity, cost, warranty duration, purchase date) for an AV club. It provides a clean and fast way to manage the inventory as compared to “traditional” methods such as an Excel spreadsheet.
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `EquipmentManager` from [here](https://github.com/AY2122S2-CS2113-F12-2/tp/releases).
+3. Copy the file to the folder you want to use as the _home folder_ for your `EquipmentManager` application.
+4. Double-click the file to start the app. 
+5. Type `help` to see the list of available commands.
 
 ## Features 
 
+- [Introduction](#Introduction)
 - [Adding an equipment: `add`](#adding-an-equipment-add)
 - [Checking an equipment: `check`](#checking-an-equipment-check)
 - [Listing equipment: `list`](#listing-equipment-list)
@@ -20,10 +24,28 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 - [Getting help: `help`](#getting-help-help)
 - [Exiting the application: `bye`](#exiting-the-application-bye)
 
+
+### Introduction
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. Spaces are acceptable. <br>
+  e.g. in `check n/ITEM_NAME`, `ITEM_NAME` is a parameter which can be used as `check n/SM-57`.
+
+* Items in square brackets are optional. <br>
+  e.g. `s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] ...` can be used as `s/SM57-1 n/SM57 t/MICROPHONE...` or as `s/SM57-1 t/MICROPHONE...`.
+
+* After the command word (e.g. `add`, `update`), parameters can be in any order.<br>
+  e.g. if the command specifies `... s/SERIAL_NUMBER n/ITEM_NAME...`, `n/ITEM_NAME s/SERIAL_NUMBER` is also acceptable.
+
+* Only one attribute/value can be saved per parameter. Where multiple inputs are supplied, the last parameter will be taken instead of the first one. <br>
+  e.g. `... n/ITEM_NAME_1 n/ITEM_NAME_2` will be interpreted as `... n/ITEM_NAME_2`, omitting `n/ITEM_NAME_1` entirely.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `bye` and `save`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
 ### Adding an equipment: `add`
 Adds new Equipment to the list of Equipment.
 
-Format: `add n/ITEM_NAME sn/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`
+Format: `add n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`
 
 * The `TYPE` must be one of the following types: MICROPHONE, SPEAKER, STAND, CABLE.
 * The `COST` cannot contain any symbols.  
@@ -39,7 +61,7 @@ Check the details of the equipment that has the name specified.
 
 Format: `check n/ITEM_NAME`
 
-* Only the `ITEM_NAME` can be used to check for an equipment.
+* Only the `ITEM_NAME` can be used to check for a piece of equipment.
 
 Example of usage and output:
 
@@ -52,9 +74,11 @@ output:
 `1. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23`
 
 ### Listing equipment: `list`
-Print a list of all equipment in the inventory.
+Print a list of all equipment in the inventory. If a parameter is supplied, only the equipment matching to the parameter will be printed.
 
-Format: `list`
+Format: `list [PARAMETER_NAME]`
+
+* `PARAMETER_NAME` can only take on values of `SPEAKER`, `MICROPHONE`, `STAND`, `CABLE`.
 
 Example of usage and output:
 
@@ -64,21 +88,133 @@ output:
 
 `TOTAL QUANTITY OF EQUIPMENT: 2`
 
-`1. serialNumber=S89347971ASF,itemName=MixerC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21`
+`1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21`
 
 `2. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23`
 
-### Listing equipment by type
+Example of usage and output:
+
+`list microphone`
+
+output:
+
+`TOTAL QUANTITY OF EQUIPMENT: 1`
+
+`1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21`
 
 ### Updating an equipment: `update`
 
+Equipment can be updated with new information. Every parameter except serial number can be updated. 
+
+Format: `update s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`
+
+* The `TYPE` must be one of the following types: MICROPHONE, SPEAKER, STAND, CABLE.
+* The `COST` cannot contain any symbols.
+
+Example of usage and output:
+
+`update s/S14115ASF c/1200 pf/AVLFX`
+
+output: 
+
+`Equipment successfully updated for serial number S14115ASF,`<br>
+`Updated details are:`<br>
+`New cost: 1200.0`<br>
+`New purchased from: AVLFX`<br>
+
 ### Deleting an equipment: `delete`
+
+Removes an Equipment entry from the list of Equipment entirely. This is irreversible after the file is saved.
+
+Format: `update s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`
+
+* The `TYPE` must be one of the following types: MICROPHONE, SPEAKER, STAND, CABLE.
+* The `COST` cannot contain any symbols.
+
+Example of usage and output:
+
+`delete s/S14115ASF`
+
+output:
+
+`Equipment successfully deleted: SpeakerB, serial number S14115ASF`
 
 ### Saving application state: `save`
 
+Saves the current state of the Equipment list to the equipments.json file.
+
+Format: `save`
+
+Example of usage and output:
+
+`save`
+
+Output:
+
+`Successfully saved.`
+
 ### Getting help: `help`
 
+When `help` is called, the application will print a list of all available commands along with their usages and examples.
+
+Format: `help`
+
+Example of usage and output:
+
+`help`
+
+Output:
+
+`add: Adds a Equipment to the equipmentInventory.`<br>
+`Parameters: n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`<br>
+`Example: add n/SpeakerB s/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23`
+
+`delete: Deletes the equipment with the specified serial number.`<br>
+`Parameters: s/SERIAL_NUMBER`<br>
+`Example: delete s/SM57-1`<br>
+
+`update: Updates the equipment with the specified serial number.`<br>
+`Parameters in [square brackets] are optional.`<br>
+`Parameters: s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`<br>
+`Example: update s/SM57-1 n/SpeakerC c/2510 pd/2022-08-21`<br>
+
+`list: Prints a list of all equipment in the inventory.`<br>
+`Parameters: NIL`<br>
+`Example: list`<br>
+
+`listPrints a list of all equipment in the inventory of the specified type.`<br>
+`Parameters: t/Type`<br>
+`Example: list MICROPHONE`<br>
+
+`check: Gives details of the equipment with the specified name.`<br>
+`Parameters: n/ITEM_NAME`<br>
+`Example: check n/MixerC`<br>
+
+`save: Saves current state of application.`<br>
+`Parameters: NIL`<br>
+`Example: save`<br>
+
+`bye: Exits the application.`<br>
+`Parameters: NIL`<br>
+`Example: bye`<br>
+
+`help: Shows details of available commands to users.`<br>
+`Parameters: NIL`<br>
+`Example: help`<br>
+
 ### Exiting the application: `bye`
+
+Exits the application and saves the current state of the Equipment list to the equipments.json file.
+
+Format: `bye`
+
+Example of usage and output:
+
+`bye`
+
+Output:
+
+`Bye, See you again!`
 
 ## FAQ
 
@@ -91,10 +227,10 @@ output:
 'Cheat Sheet' of commands here
 
 * Add equipment `todo n/TODO_NAME d/DEADLINE`
-* Listing equipment: 
-* Listing equipment by type: ADD ON HERE
-* Updating an equipment: ADD ON HERE
-* Deleting an equipment: ADD ON HERE
-* Saving application state: ADD ON HERE
-* Getting help: ADD ON HERE
-* Exiting the application: ADD ON HERE
+* Listing equipment: `list`
+* Listing equipment by type: `list MICROPHONE`
+* Updating an equipment: `update s/S14115ASF c/1200 pf/AVLFX`
+* Deleting an equipment: `delete s/S14115ASF`
+* Saving application state: `save`
+* Getting help: `help`
+* Exiting the application: `bye`
