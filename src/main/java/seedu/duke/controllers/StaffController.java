@@ -175,42 +175,42 @@ public class StaffController extends Controller {
         }
         int choice;
         while (true) {
-            choice = InputParser.getInteger("1. ID of staff\n" +
-                    "2. Name of staff\n" +
-                    "3. Position of staff\n" +
-                    "4. Salary of staff\n" +
-                    "Select field to edit: ");
-            if (choice >= 1 && choice <= 4) {
-                break;
-            } else {
-                System.out.println("Input out of range, please input a number from 1 to 4...");
-            }
-        }
-        switch (choice) {
-        case 1:
-            while (true) {
-                staffId = InputParser.getInteger("New ID of staff: ");
-                staffNoClash = checkNoStaffClash(staffId);
-                if (staffNoClash == 1) {
-                    staff.setStaffId(staffId);
-                    break;
-                } else if (staffNoClash == 0) {
-                    System.out.println("Staff with the same ID already exists, use another ID...");
+            choice = InputParser.getInteger("1. ID of staff\n"
+                    + "2. Name of staff\n"
+                    + "3. Position of staff\n"
+                    + "4. Salary of staff\n"
+                    + "5. Exit\n"
+                    + "Select field to edit: ");
+            switch (choice) {
+            case 1:
+                while (true) {
+                    staffId = InputParser.getInteger("New ID of staff: ");
+                    staffNoClash = checkNoStaffClash(staffId);
+                    if (staffNoClash == 1) {
+                        staff.setStaffId(staffId);
+                        break;
+                    } else if (staffNoClash == 0) {
+                        System.out.println("Staff with the same ID already exists, use another ID...");
+                    }
                 }
+                break;
+            case 2:
+                final String staffName = InputParser.getString("New name of staff: ");
+                staff.setStaffName(staffName);
+                break;
+            case 3:
+                final String position = InputParser.getString("New position of staff: ");
+                staff.setPosition(position);
+                break;
+            case 4:
+                final double salary = InputParser.getDouble("New salary of staff: ");
+                staff.setSalary(salary);
+                break;
+            case 5:
+                return;
+            default:
+                System.out.println("Input out of range, please input a number from 1 to 5...");
             }
-            break;
-        case 2:
-            final String staffName = InputParser.getString("New name of staff: ");
-            staff.setStaffName(staffName);
-            break;
-        case 3:
-            final String position = InputParser.getString("New position of staff: ");
-            staff.setPosition(position);
-            break;
-        case 4:
-            final double salary = InputParser.getDouble("New salary of staff: ");
-            staff.setSalary(salary);
-            break;
         }
     }
 
@@ -224,10 +224,10 @@ public class StaffController extends Controller {
     }
 
     /**
-     * Check if there is no clash between input ID and ID of existing staff
+     * Check if there is no clash between input ID and ID of existing staff.
      *
-     * @param staffId ID of the staff
-     * @return integer expression if there is a clash in IDs, or if there is an exception
+     * @param staffId ID of the staff.
+     * @return integer expression if there is a clash in IDs, or if there is an exception.
      */
     private int checkNoStaffClash(int staffId) {
         try {
