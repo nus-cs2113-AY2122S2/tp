@@ -2,6 +2,7 @@ package seedu.sherpass.util;
 
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
+import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.TaskList;
@@ -30,8 +31,8 @@ class StorageTest {
             Task newTask = new Task(69, "task_one",
                     null,
                     LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat),
-                    LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat), null);
-            tasks.addTask(newTask);
+                    LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
+            tasks.addTask(newTask, Frequency.SINGLE);
             storage.writeSaveData(tasks);
         } catch (IOException | TimeClashException | InvalidInputException exception) {
             exception.printStackTrace();
@@ -47,12 +48,12 @@ class StorageTest {
             TaskList actualList = new TaskList();
             try {
                 storage.load(actualList);
-            } catch (TimeClashException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             Task task = actualList.getTasks().get(0);
             assertEquals(task.getDescription(), "task_one");
-            assertEquals(task.getByDate(), null);
+            assertEquals(task.getByDateTime(), null);
             assertEquals(task.getDoOnStartDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
             assertEquals(task.getDoOnEndDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
             assertEquals(task.getStatusIcon(), " ");
