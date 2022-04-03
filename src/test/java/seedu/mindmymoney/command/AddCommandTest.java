@@ -279,7 +279,7 @@ class AddCommandTest {
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(seventhInputString, user).executeCommand());
 
-        String eighthInputString = "/pm cash /c Food /d Porridge /a 4.50 /t 30/04/2020";
+        String eighthInputString = "/pm cash /c Food /d Porridge /a 4.50 /t 31/04/2020";
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(eighthInputString, user).executeCommand());
     }
