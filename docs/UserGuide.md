@@ -127,17 +127,17 @@ contains two types of formatting.
 However, plan names may have more than a single whitespace in between words.<br/><br/>
 **Examples**<br/><br/>
 <span class="box>
-:x: `workout /new    push up   /reps   1000`<br/><br/>
-:white_check_mark: `workout /new push up /reps 1000`
+:x:  `workout /new    push up   /reps   1000`<br/><br/>
+:white_check_mark:  `workout /new push up /reps 1000`
 </span>
 <span class="box">
-:x: `plan     /list`</span>
-:white_check_mark: `plan /list`</span>
+:x:  `plan     /list`<br/><br/>
+:white_check_mark:  `plan /list`
 </span>
 <span class="box">
-:x: `plan /new Leg Day   /workouts   1, 2, 3`<br/<br/>
-:white_check_mark: `plan /new Leg Day /workouts 1, 2, 3`<br/><br/>
-:white_check_mark: `plan /new Leg     Day /workouts 1, 2, 3`
+:x:  `plan /new Leg Day   /workouts   1, 2, 3`<br/><br/>
+:white_check_mark:  `plan /new Leg Day /workouts 1, 2, 3`<br/><br/>
+:white_check_mark:  `plan /new Leg     Day /workouts 1, 2, 3`
 </span>
 </span>
 
