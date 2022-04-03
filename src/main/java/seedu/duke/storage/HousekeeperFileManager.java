@@ -44,7 +44,7 @@ public class HousekeeperFileManager extends FileManager {
             housekeeper = new Housekeeper(name, ageNumber);
             housekeeperList.addHousekeeper(housekeeper);
             String housekeeperAvailability = splitData[2].trim();
-            if (!(housekeeperAvailability.equals("null"))) {
+            if (!(housekeeperAvailability.equals("N/A"))) {
                 housekeeperList.addAvailabilityInList(name, housekeeperAvailability);
             }
         }
