@@ -144,7 +144,7 @@ Example of usage:
 Expected outcome:
 ```
 The following meeting has been added to everyone's timetable:
-[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
+[M] TITLE: meeting		DAY: wednesday		START: 1230		END: 1330		MODE: online
 ```
 
 
