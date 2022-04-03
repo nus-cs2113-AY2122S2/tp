@@ -41,7 +41,8 @@ public class Message {
             + "7) Mark task as done: mark <task_index>";
 
     public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
-
+    public static final String ERROR_START_DATE_IN_THE_PAST_MESSAGE = "Do date cannot be in the past!";
+    public static final String ERROR_BY_DATE_BEFORE_START_DATE_MESSAGE = "By date cannot be before do date!";
     public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
     public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank and must be before "
             + "the date and time add commands";

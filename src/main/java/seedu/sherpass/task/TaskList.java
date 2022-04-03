@@ -130,8 +130,13 @@ public class TaskList {
     }
 
     private void checkTask(Task newTask) throws InvalidInputException {
-        if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
+        if (newTask.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
+            throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
+        } else if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
+        } else if (newTask.getByDateTime() != null
+                && newTask.getByDateTime().isBefore(newTask.getDoOnStartDateTime())) {
+            throw new InvalidInputException(ERROR_BY_DATE_BEFORE_START_DATE_MESSAGE);
         }
     }
 
