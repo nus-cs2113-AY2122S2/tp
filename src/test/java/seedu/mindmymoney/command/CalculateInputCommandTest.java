@@ -70,7 +70,7 @@ class CalculateInputCommandTest {
         
         String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/pm cash /c Food /d Coke /a 20 /t 30/04/2022";
+        inputString = "/pm cash /c Food /d Coke /a 20 /t 01/04/2022";
         new AddCommand(inputString, user).executeCommand();
 
         setUp();
@@ -101,7 +101,7 @@ class CalculateInputCommandTest {
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/pm cash /c Food /d Coke /a 20 /t 30/04/2021";
+        inputString = "/pm cash /c Food /d Coke /a 20 /t 01/04/2021";
         new AddCommand(inputString, user).executeCommand();
 
         setUp();
