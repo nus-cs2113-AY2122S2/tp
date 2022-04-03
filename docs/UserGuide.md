@@ -230,10 +230,8 @@ March 2022.
 
 ````
 > update 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022
------------------------------------------------
 Successfully set expenditure 1 to:
 $5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
------------------------------------------------
 ````
 
 > **💡 Note:**
@@ -420,10 +418,8 @@ $500 and a card balance of $1000.
 -----------------------------------------------
 
 > update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000
------------------------------------------------
 Successfully set credit card 1 to :
 Name: OCBC [Cashback: 1.5%] [Cashback gained: $0.0] [Card limit: $500.0] [Card balance: $1000.0]
------------------------------------------------
 ````
 
 > **💡 Note:**
@@ -560,11 +556,9 @@ Updates the first income entry on your list to an amount of '4000' under the 'Sa
 
 ````
 > update /i 1 /a 4000 /c salary
------------------------------------------------
 Successfully set income 1 to:
 Amount: $4000
 Category: Salary
------------------------------------------------
 ````
 
 > **💡 Note:**

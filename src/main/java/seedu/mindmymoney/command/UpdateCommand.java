@@ -138,11 +138,10 @@ public class UpdateCommand extends Command {
             Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,
                     newAmountAsFloat, newTime);
             expenditureList.set(indexToUpdate, newExpenditure);
-            System.out.println(PrintStrings.LINE
-                    + "Successfully set expenditure " + indexAsString + " to:\n"
+            System.out.println("Successfully set expenditure " + indexAsString + " to:\n"
                     + "$" + newExpenditure.getAmount() + " was spent on " + newExpenditure.getDescription()
                     + "(" + newExpenditure.getCategory() + ") " + "using " + newExpenditure.getPaymentMethod()
-                    + " [" + newExpenditure.getTime() + "]" + "\n" + PrintStrings.LINE);
+                    + " [" + newExpenditure.getTime() + "]");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input INDEX, DESCRIPTION or AMOUNT?");
         } catch (NumberFormatException e) {
@@ -211,8 +210,8 @@ public class UpdateCommand extends Command {
                     newCardLimitAsFloat);
 
             creditCardList.set(indexToUpdate, newCreditCard);
-            System.out.println(PrintStrings.LINE + "Successfully set credit card " + indexAsString + " to :\n"
-                    + newCreditCard + PrintStrings.LINE);
+            System.out.println("Successfully set credit card " + indexAsString + " to :\n"
+                    + newCreditCard);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input INDEX, NAME, CASHBACK, CREDIT LIMIT or BALANCE?");
         } catch (NumberFormatException e) {
@@ -268,11 +267,9 @@ public class UpdateCommand extends Command {
             Income newIncome = new Income(newAmountAsInt, newCategory);
             incomeList.set(indexToUpdate, newIncome);
 
-            System.out.print(PrintStrings.LINE
-                    + "Successfully set income " + indexAsString + " to:\n"
+            System.out.print("Successfully set income " + indexAsString + " to:\n"
                     + "Amount: $" + newAmountAsString + "\n"
                     + "Category: " + newCategory + "\n"
-                    + PrintStrings.LINE
                     + System.lineSeparator());
 
         } catch (ArrayIndexOutOfBoundsException e) {
