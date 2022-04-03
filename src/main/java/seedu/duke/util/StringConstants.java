@@ -103,8 +103,7 @@ public class StringConstants {
     /**
      * For HelpCommand.
      */
-    public static final String HELP_NOTE = "Compulsory flags start with \"/\". Optional flags start with \"-\".\n"
-            + "Compulsory parameters are fully capitalised: e.g. MODULE_CODE.\n"
+    public static final String HELP_NOTE = "Compulsory parameters are fully capitalised: e.g. MODULE_CODE.\n"
             + "Optional parameters are in square brackets: e.g. [-d MODULE_DESCRIPTION]";
     public static final String ADD_HELP = "Adds a module or task as indicated by the command input.\n"
             + "Format to add module: add mod MODULE_CODE MODULAR_CREDITS [-d \"MODULE_DESCRIPTION\"]\n"
