@@ -4,19 +4,19 @@
 Actor User USER_COLOR
 Participant Main #grey
 Participant Commands LOGIC_COLOR
-Participant "<color:maroon><<Class>>\nParser" as Parser LOGIC_COLOR_T2
+Participant "Parser" as Parser LOGIC_COLOR_T2
 Participant Family MODEL_COLOR
-Participant MoneyList MODEL_COLOR_T3
+Participant Money MODEL_COLOR_T3
 Participant UI UI_COLOR
 Participant Storage STORAGE_COLOR
 
-User -> Main : "add /n Alice /g 2"
+User -> Main : "add /g 2 /n Alice"
 
 activate Main
-Main -> Commands : getCommand("add /n Alice /g 2")
+Main -> Commands : getCommand("add /g 2 /n Alice")
 
 activate Commands
-Commands -> Parser : parseKeyword("add /n Alice /g 2")
+Commands -> Parser : parseKeyword("add /g 2 /n Alice")
 
 activate Parser
 Parser --> Commands
@@ -24,6 +24,11 @@ deactivate Parser
 
 Commands --> Main : :AddPersonCommand
 deactivate Commands
+
+Main -> UI : //print start execution line//
+activate UI
+UI --> Main
+deactivate UI
 
 Main -> Commands : execute()
 activate Commands
@@ -33,21 +38,21 @@ activate Parser
 Parser --> Commands
 deactivate Parser
 
-Commands -> Family : addMyGen("Alice")
+Commands -> Family : addPerson(2:int, "Alice":String)
 activate Family
 
-Family -> Family : Person("Alice")
+Family -> Family : addPerson("Alice")
 activate Family
 
-Family -> MoneyList : IncomeList()
-activate MoneyList
-MoneyList --> Family
-deactivate MoneyList
+Family -> Money : IncomeList()
+activate Money
+Money --> Family
+deactivate Money
 
-Family -> MoneyList : ExpenseList()
-activate MoneyList
-MoneyList --> Family
-deactivate MoneyList
+Family -> Money : ExpenseList()
+activate Money
+Money --> Family
+deactivate Money
 
 Family --> Family
 deactivate Family
@@ -55,9 +60,9 @@ deactivate Family
 Family --> Commands
 deactivate Family
 
-Commands -> UI : printMsg()
+Main -> UI : //print end execution line//
 activate UI
-UI --> Commands
+UI --> Main
 deactivate UI
 
 Commands -> Storage : saveData()
