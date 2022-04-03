@@ -24,13 +24,13 @@ hosted by the module coordinators of CS2113T.
 A summary of my code contributions are as follows:
 - Wrote most of the `FileManager` API, which allows WerkIt! to read and write application data
 into text files stored on the user's local filesystem 
-([[WIP] Developer Guide (DG)]()). 
+([[WIP] Developer Guide]()). 
 - Implemented the functionality for users to create a new workout 
-([User Guide (UG)](../UserGuide.md#create-a-workout-workout-new) | [DG](../DeveloperGuide.md#create-new-workout)).
+([User Guide](../UserGuide.md#create-a-workout-workout-new) | [Developer Guide](../DeveloperGuide.md#create-new-workout)).
 - Implemented the HashMap data structure in the `WorkoutList` API to allow `PlanList` to reference
-workouts created by the user ([DG](../DeveloperGuide.md#design-considerations-for-creating-a-new-workout)).
+workouts created by the user ([Developer Guide](../DeveloperGuide.md#design-considerations-for-creating-a-new-workout)).
 - Wrote the `LogHandler` API, which allows the various components in WerkIt! to log into a file
-stored in the user's local filesystem.
+stored in the user's local filesystem ([[WIP] Developer Guide]()).
 - Wrote JUnit test cases for WerkIt! APIs including (but not limited to) `WorkoutCommand`, `FileManager`, `Parser`, etc.
 - Created skeleton codes and packages for the project.
 
