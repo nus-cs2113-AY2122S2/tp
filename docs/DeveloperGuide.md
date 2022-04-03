@@ -14,8 +14,9 @@ project.
 
 In this project, we have referenced the following materials:
 
-* [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
-* [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html)
+* Developer Guide sample from [Address Book (Level-3)](
+https://se-education.org/addressbook-level3/DeveloperGuide.html)
+* PlantUML Tutorial at [se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html)
 * [Our individual projects](AboutUs.md)
 
 ---
@@ -43,9 +44,9 @@ is responsible for,
 
 [`UI`](#UI-Component) is responsible for the UI of PlanITarium.
 
-[`Commands`](#Commands-Component) is responsible for handling and executing of commands.
+[`Commands`](#Commands-Component) is responsible for the handling and executing of commands.
 
-[`Parser`](#Parser-Component) is responsible for parsing and validating user input.
+[`Parser`](#Parser-Component) is responsible for the parsing and validating user input.
 
 [`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
 
@@ -64,8 +65,7 @@ Each of the main components shown in the diagram above is defined and implemente
 component. The section below provides a more in-depth details on how the components interact with one another.
 
 Each component may have several other classes underneath it, belonging to the same logical grouping, to reduce coupling.
-For example, the `MoneyList` component is defined as an abstract class that is extended by `IncomeList`
-and `ExpenditureList`.
+For example, the `Money` component is defined as an abstract class that is extended by `Income` and `Expenditure`.
 
 ### UI Component
 
@@ -458,7 +458,7 @@ command object has been created by [`CommandFactory`](#Command-Execution):
 
 **Aspect: How to categorise expenses to be listed:**
 
-* **Alternative 1 (current choice):** Adding a category attribute to expenses.
+* **Alternative 1 (current proposal):** Using the category attribute for expenses.
     * Pros: Easy to implement and less memory usage.
     * Cons: May have performance issues as it needs to iterate through every person's expenditure.
 
