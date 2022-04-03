@@ -1151,13 +1151,13 @@ with the WerkIt! JAR file inside it, and run the application from the directory.
 When you launch WerkIt! in subsequent sessions, please ensure that you run it from the same directory
 that you did when starting WerkIt! for the first time.
 
-<span class="box warning">⚠️**Warning:** It is highly recommended that you do not directly modify these files on your own as it may lead to
-instabilities in the application. If you do decide to modify the files, **please make a backup of the `werkItResources`
-directory** before modifying the files.</span>
+<span class="box warning">⚠️**Important:** Please **do not** directly modify these files on your own as it will lead
+to instabilities in the application.</span>
 
-In the event that your application becomes unstable due to accidental file modifications, please replace the
-`werkItResources` directory with your backup copy. In a worst case scenario (i.e. if you don't have a proper backup
-copy), delete the `werkItResources` directory and restart WerkIt! to recreate the directory and files from fresh.
+Do make regular backups of the `werkItResources` directory. In the event of data loss, please replace the
+`werkItResources` directory with your most recent backup copy. In the worst case scenario (i.e. if you don't have a 
+proper backup copy), delete the `werkItResources` directory and restart WerkIt! to recreate the directory and files from 
+fresh.
 
 ---
 
@@ -1198,8 +1198,8 @@ directory, replace your existing `werkItResources` directory with the backup cop
 reset your local file data by deleting the `werkItResources` directory and starting up WerkIt! to recreate the
 necessary files in their default numberings.
 
-Do note that these suggestions will lead to a **loss of your saved application data** and you may need to re-enter the lost
-data.
+Do note that these suggestions will lead to a **loss of your saved application data** and you may need to re-enter the 
+lost data.
 
 ---
 
