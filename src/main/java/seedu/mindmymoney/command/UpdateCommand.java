@@ -1,7 +1,6 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
@@ -27,7 +26,8 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 
-import static seedu.mindmymoney.constants.Indexes.*;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
+import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 import static seedu.mindmymoney.data.CreditCardList.isEqualName;
 import static seedu.mindmymoney.data.CreditCardList.isEqualCashback;
 import static seedu.mindmymoney.data.CreditCardList.isEqualCardLimit;
