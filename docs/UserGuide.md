@@ -126,7 +126,7 @@ contains two types of formatting.
 `<condition>` must be separated by a single whitespace. Excessive whitespaces will not be accepted by the application.
 However, plan names may have more than a single whitespace in between words.<br/><br/>
 **Examples**<br/><br/>
-<span class="box>
+<span class="box">
 :x:  `workout /new    push up   /reps   1000`<br/><br/>
 :white_check_mark:  `workout /new push up /reps 1000`
 </span>
