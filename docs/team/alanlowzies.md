@@ -40,11 +40,11 @@ stored in the user's local filesystem.
 <br/><br/>**Screenshot:**<br/>![Info and Warning Boxes](../images/ppp/alanlowzies/infoWarningBoxes.png)
 
 ### Contributions to the UG
-- Wrote the [Quick Start Guide](../UserGuide.md#quick-start-guide) section, which guides the user on the necessary
-prerequisites to download and the steps to get it running on the user's computer.
-    - Includes a list of recommended OSes, their versions, and the terminals to use for each OS.
 - Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
 - Wrote the informational section on [WerkIt!'s local storage structure](../UserGuide.md#werkits-local-storage-information).
+- Wrote the [Quick Start Guide](../UserGuide.md#quick-start-guide) section, which guides the user on the necessary
+prerequisites to download and the steps to get it running on the user's computer.
+  - Includes a list of recommended OSes, their versions, and the terminals to use for each OS.
 - Wrote the [frequently asked questions](../UserGuide.md#frequently-asked-questions-faq) section.
 
 ### Contributions to the DG
