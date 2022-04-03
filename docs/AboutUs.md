@@ -1,9 +1,9 @@
-# About us
+# About Us
 
-| Display                                                        |     Name      |                Github Profile                 |               Portfolio                |
-|----------------------------------------------------------------|:-------------:|:---------------------------------------------:|:--------------------------------------:|
-| ![](https://avatars.githubusercontent.com/u/95752177?size=100) |  Yan Tianai   |    [Github](https://github.com/TianaiYan)     |   [Portfolio](docs/team/johndoe.md)    |
-| ![](https://avatars.githubusercontent.com/u/60375639?size=100) | Huang Haofeng |   [Github](https://github.com/a1021492980)    | [Portfolio](docs/team/HuangHaofeng.md) |
-| ![](https://avatars.githubusercontent.com/u/69451253?size=100) | Musfirah Wani | [Github](https://github.com/Musfirahe0556596) |   [Portfolio](docs/team/johndoe.md)    |
-| ![](https://avatars.githubusercontent.com/u/69447944?size=100) |   Emily Sim   |    [Github](https://github.com/emilysim00)    |    [Portfolio](docs/team/emily.md)     |
-| ![](https://avatars.githubusercontent.com/u/30099983?size=100) |   Alan Low    |   [Github](https://github.com/alanlowzies)    | [Portfolio](docs/team/alanlowzies.md)  |
+| Display                                                        |     Name      |                Github Profile                 |             Portfolio             |
+|----------------------------------------------------------------|:-------------:|:---------------------------------------------:|:---------------------------------:|
+| ![](https://avatars.githubusercontent.com/u/95752177?s=100) |  Yan Tianai   |    [GitHub](https://github.com/TianaiYan)     |  [Portfolio](team/tianaiyan.md)   |
+| ![](https://avatars.githubusercontent.com/u/60375639?s=100) | Huang Haofeng |   [GitHub](https://github.com/a1021492980)    | [Portfolio](team/a1021492980.md) |
+| ![](https://avatars.githubusercontent.com/u/69451253?s=100) | Musfirah Wani | [GitHub](https://github.com/Musfirahe0556596) |   [Portfolio](team/musfirahe0556596.md)    |
+| ![](https://avatars.githubusercontent.com/u/69447944?s=100) |   Emily Sim   |    [GitHub](https://github.com/emilysim00)    |    [Portfolio](team/emilysim00.md)     |
+| ![](https://avatars.githubusercontent.com/u/30099983?s=100) |   Alan Low    |   [GitHub](https://github.com/alanlowzies)    | [Portfolio](team/alanlowzies.md)  |
