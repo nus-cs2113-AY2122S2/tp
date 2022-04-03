@@ -30,10 +30,12 @@ workouts created by the user ([DG](../DeveloperGuide.md#design-considerations-fo
 - Wrote the `LogHandler` API, which allows the various components in WerkIt! to log into a file
 stored in the user's local filesystem.
 - Wrote JUnit test cases for WerkIt! APIs including (but not limited to) `WorkoutCommand`, `FileManager`, `Parser`, etc.
-- Created skeleton codes and packages for the project. 
+- Created skeleton codes and packages for the project.
 
 
 ### Enhancements Implemented
+- Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.<br/>**Screenshot:**<br/>
+![Info and Warning Boxes](../images/ppp/alanlowzies/infoWarningBoxes.png)
 
 ### Contributions to the UG
 
