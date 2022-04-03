@@ -43,7 +43,7 @@ should take note of to avoid application issues.</span>
 <span class="box info">🧾  This is an information box. Contains information that may be useful for
 the users.</span>
 
-### Contributions to the UG
+### Contributions to the User Guide (UG)
 - Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
 - Wrote the informational section on [WerkIt!'s local storage structure](../UserGuide.md#werkits-local-storage-information).
 - Wrote the [Quick Start Guide](../UserGuide.md#quick-start-guide) section, which guides the user on the necessary
@@ -51,7 +51,7 @@ prerequisites to download and the steps to get it running on the user's computer
   - Includes a list of recommended OSes, their versions, and the terminals to use for each OS.
 - Wrote the [frequently asked questions](../UserGuide.md#frequently-asked-questions-faq) section.
 
-### Contributions to the DG
+### Contributions to the Developer Guide (DG)
 - Wrote the following contributions to the ['Implementation'](../DeveloperGuide.md#implementation) section:
     - How WerkIt! repeatedly waits and receives user inputs ([link to part](../DeveloperGuide.md#getting-user-input-continuously)).
     - How WerkIt! parses user inputs and determines the appropriate procedures to take 
