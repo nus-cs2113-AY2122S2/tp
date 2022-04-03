@@ -372,6 +372,7 @@ Format: `find /d USER_STRING [/c CATEGORY_INDEX]`
 
 Example of usage:
 
+Find records with category:
 * Find all the records which descriptions include _candies_ from Category 1.
 
   `find /d candies /c 1`
@@ -379,6 +380,13 @@ Example of usage:
 * _Result_: The result of the search is returned and printed to the screen.
 
   ![find-command-screenshot]() <!-- this is a placeholder -->
+
+Find records without category:
+* Find all the records which descriptions include _candies_.
+  
+  `find /d candies`
+
+* _Result_:
 
 ---
 

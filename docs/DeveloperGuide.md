@@ -187,25 +187,26 @@ This section describes some noteworthy details on how certain features are imple
 In PlanITarium, a command usually has the following format:
 
 ```md
-[command type][indicator][description]
+[command type][flag][description]
 ```
 
 For example,
 
 ```md
-add \n Alice
+add /n Alice /g 1
 ```
 
-is to add a person whose name is Alice. `add` here is the command type to add a person, and `\n` is the indicator of the
-name of person.
+is to add a person whose name is Alice to Parents' group. `add` here is the command type to add a person, `/n` is 
+the flag to indicate the name of person, and `/g` is the flag to indicate the index of the group.
 
-There may be several indicators for every input, such as
+There may be several flags for every input, such as
 
 ```md
-addin \i 200 \d salary \u 1
+addin /i 200 /d salary /u 1 /g 1 /p t
 ```
 
-is to add an income for the person whose uid is 1, and the description of this income is salary.
+is to add a recurring income for the person whose uid is 1 in Parents' group, and the description of this income is 
+salary. The amount of salary is 200 dollars.
 
 When `PlanITarium` receives such input, it will pass the input to `CommandFactory`. The `CommandFactory` will call
 `Parser` to parse the input into several components according to the indicator. The `Parser` will then return the type
