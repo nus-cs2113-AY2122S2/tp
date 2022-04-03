@@ -1070,6 +1070,7 @@ resetting the text file.
 This completes the process of clearing of all plans stored in the schedule on WerkIt!
 
 ---
+
 ### Search
 
 #### Search For Exercise
@@ -1136,6 +1137,11 @@ The following sequence diagram illustrates how the `search /all` command works i
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
 
 ---
+
+### File Management
+
+#### Design Considerations
+
 
 ## Product Scope
 ### Target User Profile
