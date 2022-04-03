@@ -40,7 +40,7 @@ public class Parser {
     static final double MINIMUM_SURCHARGE_PERCENT = 0;
     static final double MAXIMUM_SURCHARGE_PERCENT = 100;
 
-    // MAIN PUBLIC PARSING FUNCTIONS
+    // MAIN PUBLIC PARSING METHODS
     /**
      * Returns a String object that represents a name, given the command arguments from user input, delimited by the
      * Name delimiter.

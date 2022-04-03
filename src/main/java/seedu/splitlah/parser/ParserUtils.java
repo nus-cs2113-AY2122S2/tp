@@ -53,7 +53,7 @@ public class ParserUtils {
     static final int INVALID_INDEX_INDICATOR = -1;
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    // SUPPORTING FUNCTIONS
+    // SUPPORTING METHODS
     /**
      * Returns a String object that represents an argument in the command that follows a specified delimiter.
      * 
