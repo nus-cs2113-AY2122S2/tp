@@ -109,11 +109,10 @@ public class Parser {
             String dummy = fullCommand.trim();
             int patientIndex = dummy.indexOf("/p");
             int descriptionIndex=dummy.indexOf("/d");
-            String patientID=dummy.substring(patientIndex,descriptionIndex);
+            int patientID = Integer.parseInt(dummy.substring(patientIndex, descriptionIndex).trim());
             descriptionIndex += 3;
             String description = dummy.substring(descriptionIndex);
-            System.out.println("test");
-            return new AddPatientDescriptionCommand(description,patientID);
+            return new AddPatientDescriptionCommand(description, patientID);
         } else if (fullCommand.contains("search doctor")){
             String dummy = fullCommand.trim();
             dummy = dummy.substring(dummy.length() - 4);

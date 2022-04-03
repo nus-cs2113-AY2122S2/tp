@@ -27,10 +27,11 @@ public class IHospital {
         while (!fullCommand.equals("bye")) {
             try {
                 Command c = parser.parse(fullCommand);
-                c.execute(doctors, patients, appointments, ui, doctorStorage, patientStorage, appointmentStorage);
+                ui.generateResponse(c.execute(doctors, patients, appointments, ui,
+                        doctorStorage, patientStorage, appointmentStorage));
                 fullCommand = Parser.getCommand();
             } catch (IHospitalException e) {
-                System.out.println(e.getMessage());
+                ui.generateResponse(e.getMessage());
                 fullCommand = Parser.getCommand();
             }
         }
