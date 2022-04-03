@@ -67,35 +67,35 @@ public class UpdateCommandTest {
         testUser.getExpenditureListArray().add(testExpenditure);
         String firstInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 30/4/2022";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(firstInputString, testUser).executeCommand());
+            () -> new AddCommand(firstInputString, testUser).executeCommand());
         String secondInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 04/2022";
 
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(secondInputString, testUser).executeCommand());
+            () -> new AddCommand(secondInputString, testUser).executeCommand());
         String thirdInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 2022";
 
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(thirdInputString, testUser).executeCommand());
+            () -> new AddCommand(thirdInputString, testUser).executeCommand());
 
         String fourthInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 38/14/2022";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(fourthInputString, testUser).executeCommand());
+            () -> new AddCommand(fourthInputString, testUser).executeCommand());
 
         String fifthInputString = "1 /pm cash /c Food /d Porridge /a 4.50 /t 31/11/2021";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(fifthInputString, testUser).executeCommand());
+            () -> new AddCommand(fifthInputString, testUser).executeCommand());
 
         String sixthInputString = "1 /pm cash /c Food /d Porridge /a 4.50 /t 29/02/2021";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(sixthInputString, testUser).executeCommand());
+            () -> new AddCommand(sixthInputString, testUser).executeCommand());
 
         String seventhInputString = "1 /pm cash /c Food /d Porridge /a 4.50 /t 30/02/2020";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(seventhInputString, testUser).executeCommand());
+            () -> new AddCommand(seventhInputString, testUser).executeCommand());
 
         String eighthInputString = "1 /pm cash /c Food /d Porridge /a 4.50 /t 30/04/2020";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(eighthInputString, testUser).executeCommand());
+            () -> new AddCommand(eighthInputString, testUser).executeCommand());
     }
 
     /**
