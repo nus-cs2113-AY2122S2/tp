@@ -16,7 +16,7 @@ class IncomeTest {
 
     public static final double VALID_AMOUNT = 1000.00;
     public static final String VALID_DESCRIPTION = "food";
-    public static final String EXPECTED_SAVE_STRING = "i food - 1000.0 - false - " + LocalDate.now();
+    public static final String EXPECTED_SAVE_STRING = "i food /d 1000.0 /d false /d " + LocalDate.now();
     public static final String EXPECTED_TO_STRING = "food: $1000.00 - Recurring: false";
 
     private Income testItem;
