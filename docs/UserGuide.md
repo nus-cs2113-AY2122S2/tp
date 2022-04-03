@@ -28,10 +28,10 @@ When reading this document, there are several icons that you may encounter.
 Below are the icons and their meanings:
 
 
-<span class="box warning">⚠️**Warning**: Information that you may want to pay attention to in order to prevent
+<span class="box warning">:warning: **Warning**: Information that you may want to pay attention to in order to prevent
 possible issues from arising when using the application.</span>
 
-<span class="box info">🧾  **Note**: Additional information that may be useful for you.</span>
+<span class="box info">:receipt: **Note**: Additional information that may be useful for you.</span>
 
 ---
 
@@ -88,12 +88,12 @@ work.
 | Apple macOS       | macOS 10.15 Catalina and above | Terminal ([User Guide](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac)) |
 | Ubuntu Linux      | Ubuntu 20.04.3 (LTS) and above | Bash Terminal ([User Guide](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))          |
 
-<span class="box warning">⚠️If your operating system is not listed in the table above, it means our application has 
+<span class="box warning">:warning: If your operating system is not listed in the table above, it means our application has 
 not been tested on it, and we cannot guarantee that the application will work as intended. We highly encourage you to 
 use one of the recommended operating systems listed in the table above. 
 We apologise for any inconvenience caused.</span>
 
-<span class="box warning">⚠️(For Microsoft Windows users) In order for the application to display colours properly
+<span class="box warning">:warning: (For Microsoft Windows users) In order for the application to display colours properly
 on your screen, Windows Terminal needs to be used. The default Command Prompt and Powershell consoles will not be able
 to display WerkIt!'s coloured texts properly.</span>
 
@@ -114,13 +114,19 @@ contains two types of formatting.
 | `<condition>`    | Contents enclosed between "<>" are the inputs needed for the command to be valid. <br /> Not all commands needs input.         |
 | `/commandAction` | Content after "/" is to classify the action of the command. <br/> Such as classifying it to be list / delete / update commands |
 
-<span class="box warning">⚠️**Heads Up!** Your inputs cannot contain the pipe character `|`!</span>
+<span class="box warning">:warning: **Heads Up!** Your inputs cannot contain the pipe character `|`!</span>
 
 ### Finding Your Way Around The Application
 * [Workout Commands](#workout-commands)
 * [Plan Commands](#plan-commands)
 * [Schedule Commands](#schedule-commands)
 * [Search Commands](#search-commands)
+
+<span class="box warning">:warning: **Heads Up!** Due to the design of WerkIt!, commands, `/commandAction`s, and
+`<conditions>` must be separated by a single whitespace. Excessive whitespaces will not be accepted by the application.
+However, plan names may have more than a single whitespace in between words.<br/><br/>
+d
+</span>
 
 #### Workout Commands
 A brief summary of all the workout commands is stated in this section. You can have a better understanding of each of the
@@ -1153,7 +1159,7 @@ with the WerkIt! JAR file inside it, and run the application from the directory.
 When you launch WerkIt! in subsequent sessions, please ensure that you run it from the same directory
 that you did when starting WerkIt! for the first time.
 
-<span class="box warning">⚠️**Important:** Please **do not** directly modify these files on your own as it will lead
+<span class="box warning">:warning: **Important:** Please **do not** directly modify these files on your own as it will lead
 to instabilities in the application.</span>
 
 Do make regular backups of the `werkItResources` directory. In the event of data loss, please replace the
@@ -1175,7 +1181,7 @@ fresh.
 the [Quick Start Guide](#quick-start-guide). If you have not installed it, [click here][1] to install it via the
 Microsoft Store.
 
-<span class="box info">🧾 **Why are these symbols appearing?** Without being too technical, these symbols are appearing 
+<span class="box info">:receipt: **Why are these symbols appearing?** Without being too technical, these symbols are appearing 
 because the terminal you are using is unable to process a particular encoding scheme (i.e. ANSI escape codes). 
 These symbols you see are actually colour codes to colour certain texts on the terminal. Terminals that can properly 
 read these codes will not show you these symbols and instead show you something like this:<br/><br/>
