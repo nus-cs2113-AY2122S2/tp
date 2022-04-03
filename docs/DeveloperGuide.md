@@ -1,12 +1,36 @@
 # PlanITarium Developer Guide
 
----
-
-# Introductions
-
 This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
-workings of PlanITarium such that engineers can understand the various implementations in detail and work on the
-project.
+workings of PlanITarium such that engineers can understand the various design and implementations in detail.
+
+--
+
+## Table of Contents
+
+* [Acknowledgements](#acknowledgements)
+* [Design](#design)
+  * [Architecture](#architecture)
+  * [UI Component](#ui-component)
+  * [Commands Component](#commands-component)
+  * [Parser Component](#parser-component)
+  * [Family Component](#family-component)
+  * [Money Component](#money-component)
+  * [Storage Component](#storage-component)
+* [Implementation](#implementation)
+  * [Command Execution](#command-execution)
+  * [Logical Grouping of Persons Added](#logical-grouping-of-persons-added)
+  * [Edit Command](#edit-values-feature)
+  * [Find Command](#find-feature)
+  * [[Proposed] Listing Categorised Expenditures](#proposed-listing-categorised-expenditures-feature)
+  * [Data Archiving](#data-archiving)
+* [Documentation](#documentation)
+  * [Logging](#logging)
+  * [Testing](#testing)
+* [Product Scope](#product-scope)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ---
 
@@ -255,7 +279,7 @@ and return this object to `PlanITarium`.
 Step 4. `PlanITarium` will then execute this command by calling `execute()`. Alice will then be added to the
 `personList`.
 
-### Logical grouping for different generation of person added
+### Logical Grouping of Persons Added
 
 #### Implementation
 
@@ -325,7 +349,7 @@ print that out.
 Maybe for Jiarong {Suggest to show the process from `parsing several delimiters` to `finding the income/expenditure`
 to `editing the value`.}
 
-### [Proposed] Find feature
+### Find feature
 
 #### Proposed Implementation
 
@@ -553,7 +577,7 @@ IO redirection testing can be performed via the following steps:
 
 ---
 
-## Product scope
+## Product Scope
 
 ### Target user profile
 
@@ -609,6 +633,6 @@ and mouse.
 
 ---
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 
-See [IO redirection testing](#IO-redirection-testing).
+See [IO redirection testing](#testing).
