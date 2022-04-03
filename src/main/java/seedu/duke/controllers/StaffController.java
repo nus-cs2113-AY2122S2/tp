@@ -6,7 +6,7 @@ import seedu.duke.loggers.MainLogger;
 
 public class StaffController extends Controller {
     private static final String[] CHOICES = {
-        "Exit Staff Menu", "Print Staff", "Find Staff", "Add Staff", "Delete Staff"
+        "Exit Staff Menu", "Print Staff", "Find Staff", "Add Staff", "Delete Staff", "Edit Staff"
     };
     private final StaffManager staffManager;
 
@@ -90,7 +90,15 @@ public class StaffController extends Controller {
     private void addStaff() throws OperationTerminationException {
         MainLogger.logInfo(this, "Adding staff");
         System.out.println("Adding new staff...");
-        final int staffId = InputParser.getInteger("ID of staff: ");
+        int staffId;
+        while (true) {
+            staffId = InputParser.getInteger("ID of staff: ");
+            if (checkNoStaffClash(staffId)) {
+                break;
+            } else {
+                System.out.println("Staff with the same ID already exists, use another ID...");
+            }
+        }
         final String staffName = InputParser.getString("Name of staff: ");
         final String position = InputParser.getString("Position of staff: ");
         final double salary = InputParser.getDouble("Salary of staff: ");
@@ -109,12 +117,70 @@ public class StaffController extends Controller {
     private void deleteStaff() throws OperationTerminationException {
         MainLogger.logInfo(this, "Deleting staff");
         System.out.println("Deleting staff...");
-        final int staffId = InputParser.getInteger("ID of staff: ");
+        if (checkStaffEmpty()) {
+            System.out.println("No staff in records to delete yet!");
+            return;
+        }
+        int staffId;
+        while (true) {
+            staffId = InputParser.getInteger("ID of staff to delete: ");
+            if (!checkNoStaffClash(staffId)) {
+                break;
+            } else {
+                System.out.println("Failed to find staff with matching ID, please try again...");
+            }
+        }
         try {
             staffManager.deleteByStaffId(staffId);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private void editStaff() throws OperationTerminationException {
+        MainLogger.logInfo(this, "Deleting staff");
+        System.out.println("Editing staff...");
+        if (checkStaffEmpty()) {
+            System.out.println("No staff in records to edit yet!");
+            return;
+        }
+        int staffId;
+        while (true) {
+            staffId = InputParser.getInteger("ID of staff to edit: ");
+            if (!checkNoStaffClash(staffId)) {
+                break;
+            } else {
+                System.out.println("Failed to find staff with matching ID, please try again...");
+            }
+        }
+        int choice = 0;
+        do {
+            if (choice < 1 || choice > 4) {
+                System.out.println("Input out of range, please input a number from 1 to 4...");
+            }
+            choice = InputParser.getInteger("1. ID of staff: \n" +
+                    "2. Name of staff\n" +
+                    "3. Position of staff\n" +
+                    "4. Salary of staff\n" +
+                    "Select field to edit: ");
+        } while (choice < 1 || choice > 4);
+        String change = InputParser.getString("New " );
+        try {
+            staffManager.deleteByStaffId(staffId);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    boolean checkStaffEmpty() {
+        return staffManager.getStaff().size() == 0;
+    }
+
+    boolean checkNoStaffClash(int staffId) {
+        if (staffManager.findByStaffId(staffId, false) == null) {
+            return true;
+        }
+        return true;
     }
 
     /**

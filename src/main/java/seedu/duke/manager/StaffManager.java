@@ -122,6 +122,18 @@ public class StaffManager extends Manager {
         }
     }
 
+//    public void editByStaffID(int staffId, int choice) throws IllegalArgumentException {
+//        Staff staff = findByStaffId(staffId, false);
+//        if (staff == null) {
+//            MainLogger.logInfo(this, "Failed to edit staff: No staff with matching ID.");
+//            throw new IllegalArgumentException("No staff from our staff records has a matching ID.");
+//        }
+//        switch (choice){
+//        case 1:
+//            staff.se
+//        }
+//    }
+
     /**
      * Return the number of staffs in Staffs.
      *
