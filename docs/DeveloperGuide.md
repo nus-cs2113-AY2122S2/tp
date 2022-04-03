@@ -1,4 +1,12 @@
-# Developer Guide
+# PlanITarium Developer Guide
+
+---
+
+# Introductions
+
+This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
+workings of PlanITarium such that engineers can understand the various implementations in detail and work on the
+project.
 
 ---
 
