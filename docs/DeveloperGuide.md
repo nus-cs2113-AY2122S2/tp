@@ -1148,13 +1148,13 @@ schedule data, `FileManager` will also check whether the plans in the `schedule.
 all the data can be matched, the files will be loaded successfully, otherwise only the unmatched data are classified as 
 "corrupted data" and will be deleted and the deletion will be cascaded. 
 
-Although the users are discouraged from editing the local resource files as this action may corrupt the stored data,
+Although the users are warned not to edit  the local resource files as this action may corrupt the stored data,
 resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
 the files. Thus, other than the warning in our [UserGuide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
 we also implemented error handling methods to handle the situation where users edited the files and caused data 
 corruptions. We could have implemented the handling of "corrupted data" in a more hassle-free way by simply clearing 
-all local data. However, we tried to think in the perspective of users to save the "uncorrupted data" as much as 
-possible. Thus, we decided to implement the validity checking such that only the affected data are removed while 
+all local data. However, in order to provide the best possible user experience by minimising the amount of data lost in 
+such situations, we decided to implement the validity checking such that only the affected data are removed while 
 keeping all the non-affected data safely.
 
 
