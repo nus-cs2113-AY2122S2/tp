@@ -80,7 +80,7 @@ public class SessionEditCommand extends Command {
                 ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
                 return;
             }
-            if (!(session.getPersonList().isSuperset(newPersonList.getPersonList()))) {
+            if (!session.getPersonList().isSuperset(newPersonList.getPersonList())) {
                 isPersonNamesEdited = true;
             }
         }
@@ -98,7 +98,7 @@ public class SessionEditCommand extends Command {
         }
         boolean isSessionDateEdited = false;
         if (sessionDate != null) {
-            if (!(session.getDateCreated().equals(sessionDate))) {
+            if (!session.getDateCreated().equals(sessionDate)) {
                 session.setDateCreated(sessionDate);
                 isSessionDateEdited = true;
             }
