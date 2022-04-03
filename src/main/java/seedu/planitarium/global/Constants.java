@@ -51,7 +51,7 @@ public class Constants {
     public static final int MIN_INCOME_INDEX = 1;
     public static final int MIN_CATEGORY_INDEX = 1;
     public static final int MIN_GROUP_INDEX = 1;
-    // public static final int LIMIT_TWO_DECIMAL = 2; // placeholder
+    public static final int LIMIT_TWO_DECIMAL = 3;
     public static final double MONEY_ZERO = 0.0;
 
     // For Help component
