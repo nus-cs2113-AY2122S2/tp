@@ -34,11 +34,14 @@ public class EditParser extends Parser {
     // \s+-d\s+\"[^\"]+\"|\s+-t\s+\"[^\"]+\")(\s+-n\s+\"((?<taskName>[^\"]+)\")?|\s+-d\s+\"
     // ((?<taskDescription>[^\"]+)\")?|(\s+-t\s+\"(?<estimatedWorkingTime>[^\"]+)\")?))|(mod\s+
     // (?<moduleCode>\w+?(?=(\s+-d\s+)))(\s+(-d\s+\"(?<moduleDescription>.+)\"))))(?<invalid>.*)
-    private static final String EDIT_FORMAT = "((task\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?"
-            + "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|\\s+-t\\s+\\\"[^\\\"]+\\\")(\\s+-n\\s+\\\""
-            + "((?<taskName>[^\\\"]+)\\\")?|\\s+-d\\s+\\\"((?<taskDescription>[^\\\"]+)\\\")?|(\\s+-t\\s+\\\""
-            + "(?<estimatedWorkingTime>[^\\\"]+)\\\")?))|(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))(\\s+(-d\\s+\\\""
-            + "(?<moduleDescription>.+)\\\"))))(?<invalid>.*)";
+    private static final String EDIT_FORMAT = "((task\\s+(?<taskNumber>\\d+|(?<invalidNumber>.*))"
+            + "(\\s+(-m|(?<invalidModFlag>.*))\\s+(?<taskModule>\\w+))?"
+            + "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|"
+            + "\\s+-t\\s+\\\"[^\\\"]+\\\")(\\s+(-n|(?<invalidTaskNameFlag>.*))\\s+\\\""
+            + "((?<taskName>[^\\\"]+)\\\")?|\\s+(-d|(?<invalidTaskDesFlag>.*))\\s+\\\""
+            + "((?<taskDescription>[^\\\"]+)\\\")?|(\\s+(-t|(?<invalidTimeFlag>.*))\\s+\\\""
+            + "(?<estimatedWorkingTime>[^\\\"]+)\\\")?))|(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))"
+            + "(\\s+((-d|(?<invalidModDesFlag>.*))\\s+\\\"(?<moduleDescription>.+)\\\"))))(?<invalid>.*)";
 
     public EditParser() {
         super();
@@ -51,6 +54,13 @@ public class EditParser extends Parser {
         groupNames.add(TASK_MODULE);
         groupNames.add(TASK_NAME);
         groupNames.add(INVALID);
+        groupNames.add(INVALID_NUMBER);
+        groupNames.add(INVALID_TASK_NAME_FLAG);
+        groupNames.add(INVALID_TASK_DES_FLAG);
+        groupNames.add(INVALID_TIME_FLAG);
+        groupNames.add(INVALID_MOD_FLAG);
+        groupNames.add(INVALID_MOD_DES_FLAG);
+
     }
 
     @Override

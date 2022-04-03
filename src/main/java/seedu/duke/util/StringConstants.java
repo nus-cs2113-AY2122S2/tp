@@ -192,9 +192,13 @@ public class StringConstants {
     public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters."
             + "\nPlease enter only the command word.";
     public static final String ERROR_EXCESS_ARGUMENT = "\nExcess argument '%s'.\nPlease delete it and try again.";
-    public static final String ERROR_INVALID_FLAG = "\nInvalid flag '%s'.\nPlease try again.";
+    public static final String ERROR_INVALID_FLAG = "\nInvalid flag '%s'."
+            + "\nPlease check and try again. "
+            + "\nYou may input 'help' followed by your command word to view the expected input format.";
+    public static final String ERROR_INVALID_TAG_COMMAND = "\nInvalid command word '%s'."
+            + "\nPlease try again. Accepted commands are: add, del.";
     public static final String ERROR_INVALID_MODULE_GRADE = "\nInvalid module grade '%s'."
-            + "\nPlease try again. Accepted module grades are : A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
+            + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
     public static final String ERROR_INVALID_MODULE_CODE = "\nInvalid module code.\nPlease try again.";
     public static final String ERROR_INVALID_NUMBER = "\nInvalid number format '%s'."
             + "\nPlease try again using a numerical number.";
@@ -244,10 +248,16 @@ public class StringConstants {
     public static final String TAG_NAME = "tagName";
     public static final String TAG_OPERATION = "tagOperation";
     public static final String INVALID = "invalid";
-    public static final String INVALID_FLAG = "invalidFlag";
+    public static final String INVALID_MOD_FLAG = "invalidModFlag";
+    public static final String INVALID_TASK_NAME_FLAG = "invalidTaskNameFlag";
+    public static final String INVALID_TASK_DES_FLAG = "invalidTaskDesFlag";
+    public static final String INVALID_MOD_DES_FLAG = "invalidModDesFlag";
+    public static final String INVALID_TIME_FLAG = "invalidTimeFlag";
+    public static final String INVALID_MARK_FLAG = "invalidMarkFlag";
     public static final String INVALID_MODULE_CODE = "invalidModuleCode";
     public static final String INVALID_MODULE_GRADE = "invalidModuleGrade";
     public static final String INVALID_NUMBER = "invalidNumber";
+    public static final String INVALID_TAG_COMMAND = "invalidTagCommand";
     public static final String COMMAND_WORD = "commandWord";
     public static final String EXIT_COMMAND_WORD = "exit";
     public static final String ADD_COMMAND_WORD = "add";

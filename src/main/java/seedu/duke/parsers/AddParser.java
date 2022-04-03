@@ -59,10 +59,13 @@ public class AddParser extends Parser {
      *                                                      Any other excess inputs
      */
 
-    private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+(-m\\s+)(?<taskModule>\\w+))?"
-            + "(\\s+-d\\s+\\\"(?<taskDescription>[^\\\"]+)\\\")?(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?"
+
+    private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+((-m|(?<invalidModFlag>.*))"
+            + "\\s+(?<taskModule>\\w+)))?(\\s+(-d|(?<invalidTaskDesFlag>.*))\\s+\\\"(?<taskDescription>[^\\\"]+)\\\")?"
+            + "(\\s+(-t|(?<invalidTimeFlag>.*))\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?"
             + "|mod\\s+(?<moduleCode>\\w+?)(\\s+(?<modularCredit>\\d+)(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|.*$))"
-            + "(\\s+(-d\\s+\\\"(?<moduleDescription>[^\\\"]+)\\\"))?)(?<invalid>.*)";
+            + "(\\s+((-d|(?<invalidModDesFlag>.*))\\s+\\\"(?<moduleDescription>[^\\\"]+)\\\"))?)(?<invalid>.*)";
+
 
     public AddParser() {
         super();
@@ -76,7 +79,10 @@ public class AddParser extends Parser {
         groupNames.add(MODULE_DESCRIPTION);
         groupNames.add(MODULAR_CREDIT);
         groupNames.add(INVALID);
-        groupNames.add(INVALID_FLAG);
+        groupNames.add(INVALID_MOD_FLAG);
+        groupNames.add(INVALID_TASK_DES_FLAG);
+        groupNames.add(INVALID_MOD_DES_FLAG);
+        groupNames.add(INVALID_TIME_FLAG);
     }
 
     @Override
