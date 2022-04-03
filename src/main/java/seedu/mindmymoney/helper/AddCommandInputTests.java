@@ -191,7 +191,7 @@ public class AddCommandInputTests {
     }
 
     /**
-     * Checks if user input for credit card limit is valid
+     * Checks if user input for credit card limit is valid.
      *
      * @param inputLimit User input of credit card limit.
      * @throws MindMyMoneyException when input credit card limit is less than or equal to 0 or null.
@@ -215,7 +215,7 @@ public class AddCommandInputTests {
     }
 
     /**
-     * Checks if user input of amount for Credit Card Balance is valid
+     * Checks if user input of amount for Credit Card Balance is valid.
      *
      * @param inputCardBalance User input of credit card balance.
      * @throws MindMyMoneyException when given credit card balance is less than or equal to 0 or null.
