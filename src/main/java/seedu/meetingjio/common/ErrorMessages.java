@@ -116,7 +116,13 @@ public class ErrorMessages {
             + "st/[StartTime]\n"
             + "et/[EndTime]\n"
             + "m/[Mode]";
-
+    public static final String ERROR_EXTRA_PARAMETERS_ADD_MEETING = "Hi you have 1 or more extra/different parameters\n"
+            + "The required parameters are:\n"
+            + "t/[Title]\n"
+            + "d/[Day]\n"
+            + "st/[StartTime]\n"
+            + "et/[EndTime]\n"
+            + "m/[Mode]";
     public static final String ERROR_MISSING_VALUES_ADD_MEETING = "Hi 1 or more parameters have missing values\n"
             + "The parameters that require values are:\n"
             + "t/[Title]\n"
