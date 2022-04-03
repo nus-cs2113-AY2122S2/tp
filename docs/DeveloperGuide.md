@@ -15,18 +15,32 @@ Step 2:
 The parser will call the database storing patient information to update the change.
 
 The flow is presented in the sequence diagram (will be included later after pull request is permitted):
-
+![](patient.png)
 
 ### Exit program
-Step 1: User type "bye" as input to exit the program. Duke will call Parser#getCommand()
+Step 1: User type "bye" as input to exit the program. IHospital will call Parser#getCommand()
 to return the user command received.
 
-Step 2: After checking the user command is "bye", Duke will
+Step 2: After checking the user command is "bye", IHospital will
 call Ui#sayGoodbye to print Goodbye message
 
 The following sequence diagram shows how the exit operation works:
 
 ![](ByeCommand.png)
+
+### Add Doctor
+Step 1: User type add command to add a doctor into the system and provide information required.
+IHospital will call Parser#getCommand() to return the user command received, it will then call
+Parser#parse to understand that User wants to add a doctor, and Parser#parse will return an 
+AddDoctorCommand object.
+
+Step 2: IHospital will call execute of the AddDoctorCommand object and AddDoctorCommand will
+create a new Doctor with the given information and add it into DoctorList using 
+DoctorList#addDoctor(doctor).
+
+The following sequence diagram shows how the add operation works:
+
+![](AddDoctor.png)
 
 ### Delete Doctor
 Step 1: User types "delete" to delete a specific doctor from the system
