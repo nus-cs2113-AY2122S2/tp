@@ -1,27 +1,35 @@
 @startuml
 'https://plantuml.com/class-diagram
+hide circle
+title Class Diagram of `exercise` Command
+Main -> WerkIt
+WerkIt -> Parser
+WerkIt -> UI
+"{abstract}\nCommand" <|- ExerciseCommand
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+Parser ..> "{abstract}\nCommand"
+class WerkIt {
++ startContinuousUserPrompt()
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+
+class Main {
+
 }
+
+class ExerciseCommand {
++ execute()
+}
+
+class UI {
++ getUserInput()
+}
+
+class Parser {
++ parseUserInput(String userInput)
++ ExerciseCommand createExerciseCommand(String userInput)
+}
+
 
 @enduml
