@@ -48,7 +48,7 @@ public class OrderController extends Controller {
             printOrder();
             break;
         case 6:
-            displayAllOrdersToNBeImplemented();
+            displayAllOrders();
             break;
         case 7:
             System.out.print(dishManager.printDishes());
@@ -61,7 +61,7 @@ public class OrderController extends Controller {
         return false;
     }
 
-    private void displayAllOrdersToNBeImplemented() {
+    private void displayAllOrders() {
         if (orderManager.getOrderCount() > 0) {
             System.out.println("Printing all orders...");
             for (int i = 0; i < orderManager.getOrderCount(); i++) {
