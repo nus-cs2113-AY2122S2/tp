@@ -146,6 +146,10 @@ public abstract class Message {
             "A number cannot have less than 0 digits before the integer position.";
     public static final String ASSERT_PARSER_PERCENTAGE_NEGATIVE =
             "A parsed percentage value cannot be negative.";
+    public static final String LOGGER_PARSER_COMMAND_TYPE =
+            "Parsed command type: ";
+    public static final String LOGGER_PARSER_REMAINING_ARGS =
+            "Parsed remaining arguments: ";
 
     // ActivityCost
     public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_DEFAULT_PARAMS =
