@@ -337,7 +337,7 @@ The general workflow of the `activity /create` command is as follows:
    - If there are duplicate names in the involved list, a message indicating that there are duplicates is printed using `TextUi#printlnMessage`
      and control is given back to `SplitLah`.
 5. The `ActivityCreateCommand` object updates the cost and cost list by invoking the `ActivityCreateCommand#updateCostAndCostList` method.
-6. The`ActivityDeleteCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
+6. The`ActivityCreateCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
 7. Then, `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to delete is stored in.
     - If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
     - Else, the `Session` object that the activity is stored in is returned.
@@ -345,7 +345,7 @@ The general workflow of the `activity /create` command is as follows:
 8. Other getter methods are then called to obtain the necessary parameters used to instantiate an Activity object. These getter methods are omitted in the sequence diagram.
 9. The `ActivityCreateCommand` object then adds the respective costs to each `Person` object involved in the activity using the `ActivityCreateCommand#addAllActivityCost` method.
 10. Using the updated details as parameters, the `ActivityCreateCommand` object instantiates an `Activity` object to represent the new activity.
-11. The `Session#addActivity` method is called to add the new `Activity` object into the list of activities.
+11. Then, the `Session#addActivity` method is called to add the new `Activity` object into the list of activities.
 12. After the activity is added to the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 13. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
 14. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully created with `TextUi#printlnMessage`.
@@ -371,7 +371,6 @@ The general workflow of the `activity /delete` command is as follows:
 6. Once the `Session` object is retrieved, the `Session#removeActivity()` method is invoked to remove the `Activity` object from the list of activities stored.
    - If the activity does not exist, a message indicating that there is no such activity is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
    - Else, the `Activity` object is removed from the list of activities.
-7. The `ActivityCreateCommand` object updates the cost and cost list by invoking the `ActivityCreateCommand#updateCostAndCostList` method.
 8. After the activity is removed from the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 9. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
 10. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUi#printlnMessage`.
