@@ -194,7 +194,6 @@ public class DeleteCommand extends Command {
 
             String getNumber = splitMessage[INDEX_OF_THIRD_ITEM];
             int positionToDelete = Integer.parseInt(getNumber) + LIST_INDEX_CORRECTION;
-            assert positionToDelete >= 0 : "Index should always be >= 0";
 
             System.out.println("I have removed "
                     + incomeList.get(positionToDelete).getCategory()

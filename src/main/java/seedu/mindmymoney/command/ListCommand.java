@@ -234,7 +234,7 @@ public class ListCommand extends Command {
     public void printIncomeList() throws MindMyMoneyException {
         if (incomeList.isEmpty()) {
             throw new MindMyMoneyException("Your income list is currently empty! "
-                    + "Please add some credit cards to your account first");
+                    + "Please add some incomes to your account first");
         } else {
             System.out.print(PrintStrings.LINE);
             System.out.print(incomeListToString());
@@ -257,7 +257,7 @@ public class ListCommand extends Command {
             printIncomeList();
         } else {
             throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
-                    + "Use 'list /expenses' to view your current list of expenses\n"
+                    + "Use 'list /e' to view your current list of expenditure\n"
                     + "Use 'list /cc' to view your current list of stored credit cards"
                     + "Use list /i to view your current list of incomes");
         }

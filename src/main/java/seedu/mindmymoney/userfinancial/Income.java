@@ -30,7 +30,7 @@ public class Income implements MindMyMoneySerializable {
      */
     @Override
     public String toString() {
-        String incomeInfo = "Amount: " + amount + "\n"
+        String incomeInfo = "Amount: $" + amount + "\n"
                 + "   Category: " + category + "\n";
         return incomeInfo;
     }

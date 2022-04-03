@@ -72,7 +72,7 @@ public class AddCommandInputTests {
      */
     public static void testPaymentMethod(String inputPaymentMethod, CreditCardList creditCardList)
             throws MindMyMoneyException {
-        if (inputPaymentMethod.equals("")) {
+        if (inputPaymentMethod.trim().equals("")) {
             throw new MindMyMoneyException("Expenditure cannot be null!");
         }
 
@@ -88,7 +88,7 @@ public class AddCommandInputTests {
      * @throws MindMyMoneyException when input is null or not a type of category.
      */
     public static void testExpenditureCategory(String inputCategory) throws MindMyMoneyException {
-        if (inputCategory.equals("")) {
+        if (inputCategory.trim().equals("")) {
             throw new MindMyMoneyException("Category cannot be null!");
         }
         if (!isExpenditureCategoryInList(inputCategory)) {
@@ -104,7 +104,7 @@ public class AddCommandInputTests {
      * @throws MindMyMoneyException when input is null.
      */
     public static void testDescription(String inputDescription) throws MindMyMoneyException {
-        if (inputDescription.equals("")) {
+        if (inputDescription.trim().equals("")) {
             throw new MindMyMoneyException("Description cannot be null!");
         }
     }
@@ -143,7 +143,7 @@ public class AddCommandInputTests {
     }
 
     public static void testIncomeCategory(String inputCategory) throws MindMyMoneyException {
-        if (inputCategory.equals("")) {
+        if (inputCategory.trim().equals("")) {
             throw new MindMyMoneyException("Category cannot be null!");
         }
 
