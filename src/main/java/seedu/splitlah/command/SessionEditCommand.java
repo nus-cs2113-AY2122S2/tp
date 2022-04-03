@@ -71,6 +71,11 @@ public class SessionEditCommand extends Command {
                 return;
             }
             newPersonList = new PersonList(personNames);
+            if (personNames.length != newPersonList.getSize()) {
+                ui.printlnMessage(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
+                Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_EDITSESSION);
+                return;
+            }
             if (!newPersonList.isSuperset(session.getPersonArrayList())) {
                 ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
                 return;

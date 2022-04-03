@@ -186,6 +186,9 @@ public abstract class Message {
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEACTIVITY =
             "An Activity object failed to be added into the list of activities because there are duplicate names in"
                     + "the involved list.";
+    public static final String LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_EDITSESSION =
+            "A Session object failed to be edited because there are invalid names in"
+                    + "the person list.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITSESSION =
             "A Session object failed to be added into the list of sessions because there are duplicate names in"
                     + "the person list.";
