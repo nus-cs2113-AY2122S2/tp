@@ -45,10 +45,10 @@ public class Expenditure extends Money {
      * @return Object attributes as string
      */
     public String saveString() {
-        return "e " + description + " - "
-                + amount + " - "
-                + isPermanent + " - "
-                + category + " - "
+        return "e " + description + " /d "
+                + amount + " /d "
+                + isPermanent + " /d "
+                + category + " /d "
                 + initDate;
     }
 
