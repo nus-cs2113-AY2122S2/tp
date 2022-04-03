@@ -70,8 +70,8 @@ public class Constants {
             + "/g GROUP_INDEX /r EXPENDITURE_INDEX";
     public static final String EDIT_EXPEND = "Edit an expenditure: editout /u USER_INDEX /g GROUP_INDEX "
             + "/r EXPENDITURE_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>";
-    public static final String LIST = "List records by person: list /g GROUP_INDEX";
-    public static final String OVERVIEW = "List records by group: overview";
+    public static final String LIST = "List records for person in group: list /g GROUP_INDEX";
+    public static final String OVERVIEW = "Show financial summary for each group: overview";
     public static final String LISTCAT = "List categories: listcat";
     public static final String FIND = "Searching for details: find /d USER_STRING [/c CATEGORY_INDEX]";
     public static final String EXIT = "Exit program: bye";
