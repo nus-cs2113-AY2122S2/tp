@@ -295,6 +295,9 @@ public abstract class Message {
             "The session is null.";
     public static final String ASSERT_SESSIONEDIT_SESSION_ID_INVALID =
             "Session ID is less than or equals to zero.";
+    public static final String LOGGER_SESSIONEDIT_DUPLICATE_NAMES_IN_SESSION_LIST =
+            "A Session object failed to be edited because there are duplicate names in"
+                    + "the session list.";
 
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
