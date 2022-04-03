@@ -54,7 +54,7 @@ public class Constants {
     // public static final int LIMIT_TWO_DECIMAL = 2; // placeholder
     public static final double MONEY_ZERO = 0.0;
 
-    // For Help component
+    // For Help
     public static final String ADD_PERSON = "Add a person: add /n NAME /g GROUP_INDEX";
     public static final String DELETE_PERSON = "Delete a person: delete /u USER_INDEX /g GROUP_INDEX";
     public static final String ADD_INCOME = "Add an income addin /u USER_INDEX /g GROUP_INDEX "
@@ -86,4 +86,9 @@ public class Constants {
 
     // For Command logging
     public static final String LOG_ERROR_INFO = "Unknown error occurred in execution";
+    public static final String ADDPERSONCMDTYPE = "AddPersonCMD";
+    public static final String DELETEPERSONCMDTYPE = "DeletePersonCMD";
+    public static final String ADDRECORDCMDTYPE = "";
+    public static final String DELETERECORDCMDTYPE = "";
+
 }
