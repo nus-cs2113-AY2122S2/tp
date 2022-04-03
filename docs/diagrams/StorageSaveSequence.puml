@@ -2,9 +2,9 @@
 !include style.puml
 
 Box
-    participant ":ExitCommand" as ExitCommand LOGIC_COLOR
+    participant ":ExitCommand" as ExitCommand COMMAND_COLOR_T1
     participant ":Storage" as Storage STORAGE_COLOR
-    participant ":PersonList" as PersonList MODEL_COLOR
+    participant ":PersonList" as PersonList MODEL_COLOR_T3
     participant PlanITarium.txt STORAGE_COLOR_T3
 end box
 

@@ -1,15 +1,16 @@
 @startuml
-autonumber
 hide footbox
+
+!include style.puml
 
 title When user calls "addin"
 
 box
-participant ":Command" as Command
-participant ":Family" as Family
-participant ":PersonList" as PersonList
-participant ":Person" as Person
-participant ":IncomeList" as IncomeList
+participant ":Command" as Command COMMAND_COLOR
+participant ":Family" as Family MODEL_COLOR
+participant ":PersonList" as PersonList MODEL_COLOR_T3
+participant ":Person" as Person MODEL_COLOR_T2
+participant ":IncomeList" as IncomeList MONEY_COLOR
 
 [-> Command : execute(addin)
 activate Command

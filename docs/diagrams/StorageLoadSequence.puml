@@ -2,11 +2,11 @@
 !include style.puml
 
 Box
-    participant Main UI_COLOR
+    participant Main #grey
     participant ":Storage" as Storage STORAGE_COLOR
     participant ":Family" as Family MODEL_COLOR
-    participant ":PersonList" as PersonList MODEL_COLOR
-    participant ":File" as File STORAGE_COLOR_T2
+    participant ":PersonList" as PersonList MODEL_COLOR_T3
+    participant ":File" as File STORAGE_COLOR_T3
 end box
 
 -> Main: initialisePlanitarium()
@@ -20,7 +20,7 @@ Main -> Storage: loadData()
 activate Storage
 Storage -> Storage : checkFileExists
 activate Storage
-opt fileDoesNotExist
+opt OPT_COLOR fileDoesNotExist
     create File
     Storage -> File : createNewFile()
     activate File
@@ -33,7 +33,7 @@ create Family
 Storage -> Family: new()
 activate Family
 create PersonList
-loop for each group
+loop LOOP_COLOR for each group
 Family -> PersonList : new()
 activate PersonList
 PersonList --> Family : :PersonList
@@ -43,7 +43,7 @@ Family --> Storage : :Family
 deactivate Family
 Storage -> Storage: readSaveFile()
 activate Storage
-    loop until all lines read
+    loop LOOP_COLOR until all lines read
     Storage -> Storage : addCorrespondingInfo()
     activate Storage
         alt user
@@ -55,7 +55,7 @@ activate Storage
             deactivate PersonList
             Family --> Storage
             deactivate Family
-        else #PINK expenditure
+        else MONEY_COLOR_T2 expenditure
             Storage -> Family : addExpend(groupID:int, personID:int, description:String, amount:double, categoryID:int, isPermanent:Boolean)
             activate Family
             Family -> PersonList : addExpend(personID:int, description:String, amount:double, categoryID:int, isPermanent:Boolean)
@@ -64,7 +64,7 @@ activate Storage
             deactivate PersonList
             Family --> Storage
             deactivate Family
-        else #GREEN income
+        else #GreenYellow income
             Storage -> Family : addIncome(groupID:int, personID:int, description:String, amount:double, isPermanent:Boolean)
             activate Family
             Family -> PersonList : addIncome(personID:int, description:String, amount:double, isPermanent:Boolean)

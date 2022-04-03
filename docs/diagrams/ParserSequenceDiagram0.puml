@@ -4,15 +4,15 @@ skinparam arrowColor #BLACK
 skinparam noteTextAlignment left
 
 
-Participant "<color:pink><<Class>>\nParser" as Parser LOGIC_COLOR_T4
-Participant "<color:pink><<Class>>\nParserUtility" as UParser LOGIC_COLOR_T2
+Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
+Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 
 [-> Parser : parseKeyword(userInput:String)
 activate Parser
 Parser -->[ : keywordString:String
 deactivate Parser
 
-loop #e6fdea for each XYZ term in command
+loop LOOP_COLOR for each XYZ term in command
     note right : XYZ is a placeholder for the terms required for a command \n\
     e.g. NAME or GROUP_INDEX for an **add** command.
 
@@ -25,7 +25,7 @@ loop #e6fdea for each XYZ term in command
     ' checkContainsOnlyOneDelimiter
     Parser -> UParser : checkContainsOnlyOneDelimiter(userInput:String, delimiterXYZ:String)
     activate UParser
-    opt #OldLace found no delimiterXYZ
+    opt OPT_COLOR found no delimiterXYZ
         UParser --> Parser : :MissingDelimiterException
         Parser -->[ : :MissingDelimiterException
     else found too many delimiterXYZ
@@ -38,7 +38,7 @@ loop #e6fdea for each XYZ term in command
     ' parseDelimitedTerm
     Parser -> UParser : parseDelimitedTerm(userInput:String, delimiterXYZ:String)
     activate UParser
-    opt #OldLace XYZ.isBlank()
+    opt OPT_COLOR XYZ.isBlank()
         UParser --> Parser : :EmptyStringException
         Parser -->[ : :EmptyStringException
     end opt
@@ -49,7 +49,7 @@ loop #e6fdea for each XYZ term in command
     deactivate Parser
 
     ' needs Validation
-    opt #eae6fd if //XYZ// needs validation checking
+    opt OPT_COLOR_T1 if //XYZ// needs validation checking
         [-> Parser : getValidXYZ(//XYZ//:String, [maxValue:int])
         note right : [maxValue:int] is only needed if //XYZ// is not Money
         activate Parser
@@ -57,14 +57,14 @@ loop #e6fdea for each XYZ term in command
         ' isMoney?
         alt //XYZ// is Money
 
-            opt #OldLace //XYZ// is not a double
+            opt OPT_COLOR //XYZ// is not a double
                 Parser -->[ : :InvalidMoneyException
             end opt
 
             ' checkNegative
             Parser -> UParser : checkNegativeMoney(//XYZ//:double)
             activate UParser
-            opt #OldLace //XYZ// is negative
+            opt OPT_COLOR //XYZ// is negative
                 UParser --> Parser : :NumberFormatException
                 Parser -->[ :InvalidMoneyException
             end opt
@@ -76,14 +76,14 @@ loop #e6fdea for each XYZ term in command
         ' notMoney
         else //XYZ// is not Money
 
-            opt #OldLace //XYZ// is an integer
+            opt OPT_COLOR //XYZ// is an integer
                 Parser -->[ : :InvalidIndexException
             end opt
 
             ' checkTooHigh
             Parser -> UParser : checkTooHighIndex(//XYZ//:int, maxValue:int)
             activate UParser
-            opt #OldLace //XYZ// > maxValue
+            opt OPT_COLOR //XYZ// > maxValue
                 UParser --> Parser : :IndexOutOfBoundsException
                 Parser -->[ :InvalidIndexException
             end opt
@@ -93,7 +93,7 @@ loop #e6fdea for each XYZ term in command
             ' checkTooLow
             Parser -> UParser : checkTooLowIndex(//XYZ//:int, 1:int)
             activate UParser
-            opt #OldLace //XYZ// < 1 //(MIN_INDEX)//
+            opt OPT_COLOR //XYZ// < 1 //(MIN_INDEX)//
                 UParser --> Parser : :IndexOutOfBoundsException
                 Parser -->[ :InvalidIndexException
             end opt

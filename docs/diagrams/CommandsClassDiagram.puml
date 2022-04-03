@@ -5,33 +5,33 @@ skinparam groupInheritance 2
 !include style.puml
 
 Package Command as C {
-    abstract class Command LOGIC_COLOR_T3
-    class CommandFactory LOGIC_COLOR_T2
-    class AddPersonCommand LOGIC_COLOR_T3
-    class DeletePersonCommand LOGIC_COLOR_T3
-    class AddRecordCommand LOGIC_COLOR_T3
-    class EditRecordCommand LOGIC_COLOR_T3
-    class DeleteRecordCommand LOGIC_COLOR_T3
-    class ExitCommand LOGIC_COLOR_T3
-    class HelpCommand LOGIC_COLOR_T3
-    class ListCategoriesCommand LOGIC_COLOR_T3
-    class ListCommand LOGIC_COLOR_T3
-    class OverviewCommand LOGIC_COLOR_T3
-    class SearchCommand LOGIC_COLOR_T3
+    abstract class Command COMMAND_COLOR_T3
+    class CommandFactory COMMAND_COLOR
+    class AddPersonCommand COMMAND_COLOR_T1
+    class DeletePersonCommand COMMAND_COLOR_T1
+    class AddRecordCommand COMMAND_COLOR_T1
+    class EditRecordCommand COMMAND_COLOR_T1
+    class DeleteRecordCommand COMMAND_COLOR_T1
+    class ExitCommand COMMAND_COLOR_T1
+    class HelpCommand COMMAND_COLOR_T1
+    class ListCategoriesCommand COMMAND_COLOR_T1
+    class ListCommand COMMAND_COLOR_T1
+    class OverviewCommand COMMAND_COLOR_T1
+    class SearchCommand COMMAND_COLOR_T1
 }
 
-Command <|-[LOGIC_COLOR_T3]- AddRecordCommand
-Command <|-[LOGIC_COLOR_T3]- DeleteRecordCommand
-Command <|-[LOGIC_COLOR_T3]-AddPersonCommand
-Command <|-[LOGIC_COLOR_T3]- DeletePersonCommand
-Command <|-[LOGIC_COLOR_T3]- EditRecordCommand
-Command <|-[LOGIC_COLOR_T3]- ExitCommand
-Command <|-[LOGIC_COLOR_T3]- ListCategoriesCommand
-Command <|-[LOGIC_COLOR_T3]- OverviewCommand
-Command <|-[LOGIC_COLOR_T3]- HelpCommand
-Command <|-[LOGIC_COLOR_T3]- ListCommand
-Command <|-[LOGIC_COLOR_T3]- SearchCommand
+Command <|-[COMMAND_COLOR_T1]- AddRecordCommand
+Command <|-[COMMAND_COLOR_T1]- DeleteRecordCommand
+Command <|-[COMMAND_COLOR_T1]-AddPersonCommand
+Command <|-[COMMAND_COLOR_T1]- DeletePersonCommand
+Command <|-[COMMAND_COLOR_T1]- EditRecordCommand
+Command <|-[COMMAND_COLOR_T1]- ExitCommand
+Command <|-[COMMAND_COLOR_T1]- ListCategoriesCommand
+Command <|-[COMMAND_COLOR_T1]- OverviewCommand
+Command <|-[COMMAND_COLOR_T1]- HelpCommand
+Command <|-[COMMAND_COLOR_T1]- ListCommand
+Command <|-[COMMAND_COLOR_T1]- SearchCommand
 
 
-CommandFactory -[LOGIC_COLOR_T3]->"0..1" Command : Returns >
+CommandFactory -[COMMAND_COLOR_T1]->"0..1" Command : Returns >
 @enduml
