@@ -334,7 +334,7 @@ and `Family`. The `Categories` is an enumeration of keys that is used as the exp
 will have an additional integer attribute that acts as an index to a category. Additionally, the following operations
 are implemented:
 
-* `Categories#getLabel(index)` -- Returns the name of the category with this index.
+* `Categories#getLabelForIndex(index)` -- Returns the name of the category with this index.
 * `Money(temp)#getCategory()` -- Returns the category index for this money object.
 * `Money(temp)#getDescription()` -- Returns the description for this money object.
 * `MoneyList(temp)#searchExpense(description, index)` -- Returns a list of expenditures having category index matching
@@ -378,7 +378,7 @@ description. The returned incomes are then appended to the temporary array list.
 ![FindIncomeExpenditure4](images/FindIncomeExpenditure4.png)
 
 Step 5. The iteration, collecting and appending to the temporary array list in step 3 and 4 is repeated until every
-person has been iterated. Finally, `Categories#getLabel(1)` is called so that an appropriate message can be displayed to
+person has been iterated. Finally, `Categories#getLabelForIndex(1)` is called so that an appropriate message can be displayed to
 the user, stating the name of the category, following by a series of print to display the expenditures in this category.
 
 > :information_source: **Note:** If the `index` provided does not map to any existing categories,
@@ -406,16 +406,15 @@ by [`CommandFactory`](#PlaceholderToCommandFactory):
 
 #### Proposed Implementation
 
-The proposed listing categorised expenditure feature is facilitated by `Categories`,
-`Expenditure`, `ExpenditureList`  and `Family`. The `Categories` is an enumeration of keys that is used as the
-expenditure categories. The `Expenditure` will have an additional integer attribute that acts as an index to a category.
-Additionally, the following operations are implemented:
+The proposed listing categorised expenditure feature is facilitated by `Categories`,`Expenditure`, `ExpenditureList`
+and `Family`. The proposed command to be called by the user is `listexp /c CATEGORY_INDEX`.
+The following additional operations will also be implemented:
 
-* `Categories#getLabel(index)` -- Returns the name of the category with this index.
-* `Expenditure#getCategory()` -- Returns the category index for this expense.
+* `Family#listExpenseOfCategory(index)` -- Lists all expenses from the category index.
+* `PersonList#listExpenseOfCategory(index)` -- Wrapper method to get the list of expenses in the category 
+from each person.
 * `ExpenditureList#getExpenseOfCategory(index)` -- Returns a list of expenditures having category index matching the
   index argument.
-* `Family#listExpenseOfCategory(index)` -- Lists all expenses from the category index.
 
 Below is an example usage scenario and how the expenses of a category will be printed.
 
@@ -426,31 +425,31 @@ initialised with two generations being tracked - parents and myGen.
 
 ![ListCategorisedExpense0](images/ListCategorisedExpense0.png)
 
-Step 2. The user executes `listcat /c 1` command to list all expenses in category `1`. The `listcat`
-command will be parsed and calls `Family#listExpenseOfCategory(1)` which would instantiate a temporary array list for
+Step 2. The user executes `listexp /c 2` command to list all expenses in category `2`. The `listexp`
+command will be parsed and calls `Family#listExpenseOfCategory(2)` which would instantiate a temporary array list for
 storing the results of the upcoming search.
 
 ![ListCategorisedExpense1](images/ListCategorisedExpense1.png)
 
-Step 3. After the temporary array list has been created, the generations being tracked will be iterated for `Person`
-objects. The `expenditureList` for a person would be retrieved during that person's iteration
-and `ExpenditureList#getExpenseOfCategory(1)` will be called as `expenditureList`
-extends `ExpenditureList`. This method then iterates through the list and calls
-`Expenditure#getCategory()` on each expenditure, collecting and returning the expenditure if its category matches the
-given index. The returned expenditures are then appended to the temporary array list.
+Step 3. After the temporary array list has been created, `PersonList#listExpenseOfCategory(2)` will be called on each
+generation grouping and each tracked `Person` will be iterated. The `expenditureList` for a person would be retrieved 
+during that person's iteration and `ExpenditureList#getExpenseOfCategory(1)` will be called. This method then iterates 
+through the retrieved expenditure list and calls `Expenditure#getCategory()` on each expenditure, collecting and 
+returning the expenditure if its category matches the target category index. 
+The returned expenditures are then appended to the temporary array list.
 
 ![ListCategorisedExpense2](images/ListCategorisedExpense2.png)
 
 Step 4. The iteration, collecting and appending to the temporary array list in step 3 is repeated until every person has
-been iterated. Finally, `Categories#getLabel(1)` is called so that an appropriate message can be displayed to the user,
+been iterated. Finally, an appropriate message can be displayed to the user,
 stating the name of the category, following by a series of print to display the expenditures in this category.
 
 > :information_source: **Note:** If the `index` provided does not map to any existing categories,
-> then it can be observed that there will never be any results returned. The `listcat` command will
+> then it can be observed that there will never be any results returned. The `listexp` command will
 > check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
 > fails, an error message will be displayed to the user instead of continuing with the execution.
 
-The following sequence diagram shows how the `listcat` operation works after a `ListCatCommand`
+The following sequence diagram shows how the `listexp` operation works after a `ListCatCommand`
 command object has been created by [`CommandFactory`](#Command-Execution):
 
 ![ListCategorisedExpenseSequence](images/ListCategorisedExpenseSequence.png)
