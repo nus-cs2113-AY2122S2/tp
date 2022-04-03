@@ -20,7 +20,7 @@ class ExpenditureTest {
 
     public static final double VALID_AMOUNT = 1000.00;
     public static final String VALID_DESCRIPTION = "food";
-    public static final String EXPECTED_SAVE_STRING = "e food - 1000.0 - false - 1 - " + LocalDate.now();
+    public static final String EXPECTED_SAVE_STRING = "e food /d 1000.0 /d false /d 1 /d " + LocalDate.now();
     public static final String EXPECTED_TO_STRING = "food: $1000.00 - Recurring: false - Category: Others";
 
     private Expenditure testItem;

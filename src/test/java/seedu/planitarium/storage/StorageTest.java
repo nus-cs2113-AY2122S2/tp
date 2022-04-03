@@ -2,6 +2,7 @@
 
 package seedu.planitarium.storage;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,17 +28,6 @@ class StorageTest {
 
     @BeforeEach
     void setUp() {
-        File file = new File(VALID_FILE_PATH);
-        try {
-            Files.deleteIfExists(file.toPath());
-        } catch (IOException e) {
-            String loggerString = "Error in deleting file";
-            logger.log(Level.SEVERE, loggerString);
-        }
-    }
-
-    @AfterEach
-    void closeDown() {
         File file = new File(VALID_FILE_PATH);
         try {
             Files.deleteIfExists(file.toPath());
@@ -100,6 +90,13 @@ class StorageTest {
         } catch (AssertionError e) {
             e.getMessage();
         }
+    }
+
+    @AfterAll
+    static void wipeData() {
+        familyTest = new Family();
+        storageSave = new Storage();
+        storageSave.saveData(familyTest);
     }
 
 }
