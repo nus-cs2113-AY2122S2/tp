@@ -187,7 +187,7 @@ class ParserTest {
     void extractArguments_validCommands_success() throws IncompleteCommandException {
         ArrayList<String> testStrings = new ArrayList<>(Arrays.asList(
                 "s/S1404115ASF n/Speaker B t/Speaker c/1000 pf/Loud Technologies pd/2022-02-23",
-                "s/S1404115ASF     c/1000",
+                "s/S1404115ASF     c/1000.3",
                 "s/S1404115ASF n/Speaker B        ",
                 "s/S1404115ASF pf/Loud Technologies n/Speaker B",
                 "t/Speaker s/S1404115ASF",
@@ -197,7 +197,7 @@ class ParserTest {
         expectedResults.add(new ArrayList<>(Arrays.asList(
                 "s/S1404115ASF", "n/Speaker B", "t/SPEAKER", "c/1000", "pf/Loud Technologies", "pd/2022-02-23")));
         expectedResults.add(new ArrayList<>(Arrays.asList(
-                "s/S1404115ASF", "c/1000")));
+                "s/S1404115ASF", "c/1000.3")));
         expectedResults.add(new ArrayList<>(Arrays.asList(
                 "s/S1404115ASF", "n/Speaker B")));
         expectedResults.add(new ArrayList<>(Arrays.asList(
