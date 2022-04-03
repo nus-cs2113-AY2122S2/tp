@@ -146,7 +146,7 @@ public class Profile implements Serializable {
             String id = Integer.toString(session.getSessionId());
             String name = session.getSessionName();
             String date = session.getDateCreated().format(ParserUtils.DATE_FORMAT);
-            String numParticipants = Integer.toString(session.getPersonList().size());
+            String numParticipants = Integer.toString(session.getPersonArrayList().size());
             String numActivities = Integer.toString(session.getActivityList().size());
             summaryTable.addRow(id, name, date, numParticipants, numActivities);
         }
@@ -230,7 +230,8 @@ public class Profile implements Serializable {
     public void removeGroup(int groupId) throws InvalidDataException {
         Group groupToBeRemoved = getGroup(groupId);
         for (Session session : sessionList) {
-            if (session.getGroup().getGroupId() == groupId) {
+            Group groupToCheck = session.getGroup();
+            if (groupToCheck != null && groupToCheck.getGroupId() == groupId) {
                 session.setGroup(null);
             }
         }

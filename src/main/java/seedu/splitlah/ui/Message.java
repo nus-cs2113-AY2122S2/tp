@@ -165,6 +165,8 @@ public abstract class Message {
     public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION =
             "There are duplicate names in the person list for the session you are trying to create. "
                     + "Please rectify and try again.";
+    public static final String ERROR_PERSONLIST_CONTAINS_INVALID_NAME =
+            "Names in the person list should only contain alphabets. Please rectify and try again.";
     public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP =
             "There are duplicate names in the person list for the group you are trying to create. "
                     + "Please rectify and try again.";
@@ -174,7 +176,10 @@ public abstract class Message {
     public static final String ASSERT_PERSONLIST_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exist but not detected.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATESESSION =
-            "An Session object failed to be added into the list of sessions because there are duplicate names in"
+            "A Session object failed to be added into the list of sessions because there are duplicate names in"
+                    + "the person list.";
+    public static final String LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_CREATESESSION =
+            "A Session object failed to be added into the list of sessions because there are invalid names in"
                     + "the person list.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEGROUP =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
@@ -182,8 +187,11 @@ public abstract class Message {
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEACTIVITY =
             "An Activity object failed to be added into the list of activities because there are duplicate names in"
                     + "the involved list.";
+    public static final String LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_EDITSESSION =
+            "A Session object failed to be edited because there are invalid names in"
+                    + "the person list.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITSESSION =
-            "An Session object failed to be added into the list of sessions because there are duplicate names in"
+            "A Session object failed to be added into the list of sessions because there are duplicate names in"
                     + "the person list.";
     public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
@@ -289,6 +297,9 @@ public abstract class Message {
             "The session is null.";
     public static final String ASSERT_SESSIONEDIT_SESSION_ID_INVALID =
             "Session ID is less than or equals to zero.";
+    public static final String LOGGER_SESSIONEDIT_DUPLICATE_NAMES_IN_SESSION_LIST =
+            "A Session object failed to be edited because there are duplicate names in"
+                    + "the session list.";
 
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =

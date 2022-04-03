@@ -216,7 +216,7 @@ public class SessionSummaryCommand extends Command {
             return;
         }
 
-        ArrayList<Person> personList = session.getPersonList();
+        ArrayList<Person> personList = session.getPersonArrayList();
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
         String output = processAllTransactions(personCostPairList, session);
         ui.printlnMessageWithDivider(output);
