@@ -12,6 +12,8 @@ schedule for them to refer to and follow. More details about the project can be 
 * [WerkIt! User Guide](../UserGuide.md)
 * [WerkIt! Developer Guide](../DeveloperGuide.md)
 
+---
+
 ## Summary of Contributions
 ### Code Contributed
 A detailed report of my code contributions to the tP can be found in the [tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=alanlowzies&breakdown=true) 
@@ -38,11 +40,22 @@ stored in the user's local filesystem.
 ![Info and Warning Boxes](../images/ppp/alanlowzies/infoWarningBoxes.png)
 
 ### Contributions to the UG
+- Wrote the [Quick Start Guide](../UserGuide.md#quick-start-guide) section, which guides the user on the necessary
+prerequisites to download and the steps to get it running on the user's computer.
+    - Includes a list of recommended OSes, their versions, and the terminals to use for each OS.
+- Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
+- Wrote the informational section on [WerkIt!'s local storage structure](../UserGuide.md#werkits-local-storage-information).
+- Wrote the [frequently asked questions](../UserGuide.md#frequently-asked-questions-faq) section.
 
 ### Contributions to the DG
 
 ### Contributions to Team-Based Tasks
+- Set up the team's organisation and repository on GitHub
 
 ### Review/Mentoring Contributions
 
 ### Contributions Beyond the Project Team
+
+---
+
+## Reflections on the Team Project (tP)
