@@ -126,13 +126,13 @@ contains two types of formatting.
 `<condition>` must be separated by a single whitespace. Excessive whitespaces will not be accepted by the application.
 However, plan names may have more than a single whitespace in between words.<br/><br/>
 **Incorrect Examples**<br/><br/>
-<span class="box" style="color:#FF6961">
+<span class="box" style="background-color:#FF6961">
 `workout /new     push up   /reps   1000`<br/><br/>
 `plan    /list`<br/><br/>
 `plan /new Leg Day    /workouts    1, 2, 3`
 </span>
 **Correct Examples**<br/><br/>
-<span class="box" style="color:#77DD77">
+<span class="box" style="background-color:#77DD77">
 `workout /new push up /reps 1000`<br/><br/>
 `plan /list`<br/><br/>
 `plan /new Leg Day /workouts 1, 2, 3`<br/><br/>
