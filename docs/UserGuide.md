@@ -532,7 +532,7 @@ Prints your current list of income entries that you have added so far.
 ````
 > list /i
 -----------------------------------------------
-1. Amount: 3000
+1. Amount: $3000
    Category: Salary
 -----------------------------------------------
 ````
@@ -560,7 +560,11 @@ Updates the first income entry on your list to an amount of '4000' under the 'Sa
 
 ````
 > update /i 1 /a 4000 /c salary
-Successfully set income 1
+-----------------------------------------------
+Successfully set income 1 to:
+Amount: $4000
+Category: Salary
+-----------------------------------------------
 ````
 
 > **💡 Note:**
