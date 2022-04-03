@@ -496,17 +496,7 @@ operations. After all lines of the files has been read and all data added, the `
 and the `Family` object of the current session will consist of the data in `Family` of `Storage`. 
 The following sequence diagram shows how the loading operation works:
 
-The following Sequence Diagram shows how `Storage` interacts with the file.
-
-![StorageLoadSequence1](images/LoadSequenceDiagram1.png)
-
-The following Sequence Diagram shows how `Storage` interacts with `Family`.
-
-![StorageLoadSequence2](images/LoadSequenceDiagram2.png)
-
-The following Sequence Diagram shows how `Family` interacts with `PersonList` to load data.
-
-![StorageLoadSequence3](images/LoadSequenceDiagram3.png)
+![StorageLoadSequence](images/StorageLoadSequence.png)
 
 Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called. All
 data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
