@@ -125,13 +125,13 @@ contains two types of formatting.
 <span class="box warning">:warning: **Heads Up!** Due to the design of WerkIt!, commands, `/commandAction`, and
 `<condition>` must be separated by a single whitespace. Excessive whitespaces will not be accepted by the application.
 However, plan names may have more than a single whitespace in between words.<br/><br/>
-**Incorrect Examples**<br/><br/>
+**Incorrect Examples**
 <span class="box" style="background-color:#FF6961">
 `workout /new     push up   /reps   1000`<br/><br/>
 `plan    /list`<br/><br/>
 `plan /new Leg Day    /workouts    1, 2, 3`
 </span>
-**Correct Examples**<br/><br/>
+**Correct Examples**
 <span class="box" style="background-color:#77DD77">
 `workout /new push up /reps 1000`<br/><br/>
 `plan /list`<br/><br/>
