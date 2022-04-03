@@ -89,13 +89,17 @@ public class TaskList {
      * @param currentTask The i-th task
      * @return The i+1 task
      */
-    private static Task prepareNextTask(Task currentTask) {
+    private static Task prepareNextTask(Task currentTask, Frequency frequency) {
         LocalDateTime newStartDate = incrementDate(currentTask.getDoOnStartDateTime(),
-                currentTask.getRepeatFrequency());
+                frequency);
         LocalDateTime newEndDate = incrementDate(currentTask.getDoOnEndDateTime(),
-                currentTask.getRepeatFrequency());
-        return new Task(currentTask.getIdentifier(), currentTask.getDescription(), null,
-                newStartDate, newEndDate, currentTask.getRepeatFrequency());
+                frequency);
+        LocalDateTime byDate = currentTask.getByDateTime();
+        if (byDate != null) {
+            byDate = incrementDate(byDate, frequency);
+        }
+        return new Task(currentTask.getIdentifier(), currentTask.getDescription(), byDate,
+                newStartDate, newEndDate);
     }
 
     private boolean isOnSameDay(LocalDateTime firstDate, LocalDateTime secondDate) {
@@ -130,17 +134,17 @@ public class TaskList {
      *
      * @param newTask The new task to be added to the array.
      */
-    public void addTask(Task newTask) throws TimeClashException, InvalidInputException {
+    public void addTask(Task newTask, Frequency frequency) throws TimeClashException, InvalidInputException {
         if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
         LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(newTask.getDoOnStartDateTime(),
-                newTask.getRepeatFrequency());
+                frequency);
         ArrayList<Task> taskListToAdd = new ArrayList<>();
         do {
             checkDateTimeClash(tasks, newTask);
             taskListToAdd.add(newTask);
-            newTask = prepareNextTask(newTask);
+            newTask = prepareNextTask(newTask, frequency);
         } while (newTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
         tasks.addAll(taskListToAdd);
         updateIndex();
@@ -154,8 +158,6 @@ public class TaskList {
     public void importTask(Task newTask) throws InvalidInputException {
         if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
             throw new InvalidInputException(newTask + "\n" + ERROR_START_AFTER_END_TIME_MESSAGE);
-        } else if (!newTask.getRepeatFrequency().equals(Frequency.SINGLE) && newTask.getByDate() != null) {
-            throw new InvalidInputException(newTask + "\n" + ERROR_RECURRING_HAS_BY_DATE_MESSAGE);
         }
         try {
             checkDateTimeClash(tasks, newTask);
@@ -201,7 +203,6 @@ public class TaskList {
         Task updatedTask = updateTask(taskToEdit, taskDescription,
                 startDifferenceInSeconds, endDifferenceInSeconds, byDate);
         updatedTask.setIdentifier(newIdentifier);
-        updatedTask.setRepeatFrequency(Frequency.SINGLE);
 
         checkDateTimeClash(editedList, updatedTask);
         tasks.remove(editIndex);

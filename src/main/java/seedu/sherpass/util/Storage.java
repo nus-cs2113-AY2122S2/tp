@@ -5,7 +5,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import seedu.sherpass.exception.InvalidInputException;
-import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.parser.StorageParser;
@@ -15,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
@@ -72,12 +70,9 @@ public class Storage {
             taskToStore.put("identifier", t.getIdentifier());
             taskToStore.put("status", t.getStatusIcon());
             taskToStore.put("by_date",
-                    (t.getByDate() == null ? " " : t.getByDate().format(inputWithTimeFormat)));
-            taskToStore.put("do_date_start",
-                    (t.getDoOnStartDateTime() == null ? " " : t.getDoOnStartDateTime().format(inputWithTimeFormat)));
-            taskToStore.put("do_date_end",
-                    (t.getDoOnStartDateTime() == null ? " " : t.getDoOnEndDateTime().format(inputWithTimeFormat)));
-            taskToStore.put("frequency", (t.getRepeatFrequency() == null ? " " : t.getRepeatFrequency().toString()));
+                    (t.getByDateTime() == null ? " " : t.getByDateTime().format(inputWithTimeFormat)));
+            taskToStore.put("do_date_start", t.getDoOnStartDateTime().format(inputWithTimeFormat));
+            taskToStore.put("do_date_end", t.getDoOnEndDateTime().format(inputWithTimeFormat));
             taskToStore.put("description", t.getDescription());
             tasks.put(taskToStore);
         }

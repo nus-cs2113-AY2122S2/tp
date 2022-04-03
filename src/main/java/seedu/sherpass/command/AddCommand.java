@@ -34,27 +34,6 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Accept parsed user input (in proper format) for preparation of adding task.
-     *
-     * @param taskDescription parsed task description.
-     * @param doOnStartDateTime parsed doOnStartDateTime.
-     * @param doOnEndDateTime parsed doOnEndDateTime.
-     * @throws InvalidInputException of start time is after end time.
-     */
-    /*
-    public void setTaskContent(String taskDescription, LocalDateTime doOnStartDateTime,
-                               LocalDateTime doOnEndDateTime) throws
-            InvalidInputException {
-        if (doOnStartDateTime.isAfter(doOnEndDateTime)) {
-            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
-        }
-        this.taskDescription = taskDescription;
-        this.doOnStartDateTime = doOnStartDateTime;
-        this.doOnEndDateTime = doOnEndDateTime;
-    }
-    */
-
-    /**
      * Accept parsed user input for by date, in proper format.
      *
      * @param byDate parsed by date.
@@ -84,9 +63,9 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
         int identifier = taskList.generateIdentifier();
-        newTask = new Task(identifier, taskDescription, byDate, doOnStartDateTime, doOnEndDateTime, frequency);
+        newTask = new Task(identifier, taskDescription, byDate, doOnStartDateTime, doOnEndDateTime);
         try {
-            taskList.addTask(newTask);
+            taskList.addTask(newTask, frequency);
             ui.showToUser("Got it! I've added this task:\n   "
                     + newTask + "\n"
                     + "Now you have " + taskList.getSize() + " task(s) in your schedule!");
