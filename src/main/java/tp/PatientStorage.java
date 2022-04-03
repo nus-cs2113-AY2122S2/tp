@@ -50,6 +50,8 @@ public class PatientStorage {
                 fw.write(currPatient.getName() + "\n");
                 fw.write(currPatient.getPhoneNumber() + "\n");
                 fw.write(currPatient.getEmail() + "\n");
+                fw.write(currPatient.getSymptom() + "\n");
+                fw.write(currPatient.getDescription() + "\n");
             }
             fw.close();
         } catch (IOException e) {
@@ -80,9 +82,9 @@ public class PatientStorage {
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
-                String symptom=scanner.nextLine();
-                String description=scanner.nextLine();
-                Patient patient = new Patient(id, name, phoneNumber, email,symptom,description);
+                String symptom = scanner.nextLine();
+                String description = scanner.nextLine();
+                Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
                 result.addPatient(patient);
             }
             return result;

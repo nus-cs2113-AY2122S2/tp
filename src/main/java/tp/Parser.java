@@ -22,15 +22,15 @@ public class Parser {
             try {
                 int idIndex = dummy.indexOf("/id") + 4;
                 int nameIndex = dummy.indexOf("/n");
-                id = dummy.substring(idIndex, nameIndex);
+                id = dummy.substring(idIndex, nameIndex).trim();
                 nameIndex += 3;
                 int phoneNumberIndex = dummy.indexOf("/ph");
-                String name = dummy.substring(nameIndex, phoneNumberIndex);
+                String name = dummy.substring(nameIndex, phoneNumberIndex).trim();
                 phoneNumberIndex += 4;
                 int emailIndex = dummy.indexOf("/e");
-                String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex);
+                String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
                 emailIndex += 3;
-                String email = dummy.substring(emailIndex);
+                String email = dummy.substring(emailIndex).trim();
                 return new AddDoctorCommand(id, name, phoneNumber, email, false);
             } catch (Exception e) {
                 System.out.println("The input format of the doctor information is wrong.");
@@ -39,7 +39,7 @@ public class Parser {
         } else if (fullCommand.contains("get") && fullCommand.contains("appointment")) {
             //get appointment /d 123456
             String dummy = fullCommand.trim();
-            String id =  dummy.substring(dummy.indexOf("/d") + 3);
+            String id =  dummy.substring(dummy.indexOf("/d") + 3).trim();
             return new GetAppointmentsOfDoctorCommand(id);
         } else if (fullCommand.contains("sort appointment")) {
             return new SortAppointmentByTimeCommand();
@@ -49,22 +49,22 @@ public class Parser {
             try {
                 int idIndex = dummy.indexOf("/id") + 4;
                 int nameIndex = dummy.indexOf("/n");
-                id = dummy.substring(idIndex, nameIndex);
+                id = dummy.substring(idIndex, nameIndex).trim();
                 nameIndex += 3;
                 int phoneNumberIndex = dummy.indexOf("/ph");
-                String name = dummy.substring(nameIndex, phoneNumberIndex);
+                String name = dummy.substring(nameIndex, phoneNumberIndex).trim();
                 phoneNumberIndex += 4;
                 int emailIndex = dummy.indexOf("/e");
-                String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex);
+                String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
                 emailIndex += 3;
                 int symptomIndex=dummy.indexOf("/s");
-                String email = dummy.substring(emailIndex,symptomIndex);
+                String email = dummy.substring(emailIndex,symptomIndex).trim();
                 symptomIndex+=3;
                 int descIndex=dummy.indexOf("/d");
-                String symptom=dummy.substring(symptomIndex,descIndex);
+                String symptom=dummy.substring(symptomIndex,descIndex).trim();
                 descIndex+=3;
-                String description=dummy.substring(descIndex);
-                return new AddPatientCommand(id, name, phoneNumber, email,symptom,description);
+                String description=dummy.substring(descIndex).trim();
+                return new AddPatientCommand(id, name, phoneNumber, email, symptom,description);
             } catch (Exception e) {
                 System.out.println("The input format of the patient information is wrong.");
             }
@@ -112,7 +112,7 @@ public class Parser {
             String patientID=dummy.substring(patientIndex,descriptionIndex);
             descriptionIndex += 3;
             String description = dummy.substring(descriptionIndex);
-            System.out.println("tesst");
+            System.out.println("test");
             return new AddPatientDescriptionCommand(description,patientID);
         } else if (fullCommand.contains("search doctor")){
             String dummy = fullCommand.trim();
@@ -132,8 +132,6 @@ public class Parser {
 
         return null;
     }
-
-
 }
 
 

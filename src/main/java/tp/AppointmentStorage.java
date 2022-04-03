@@ -76,17 +76,18 @@ public class AppointmentStorage {
                 data = scanner.nextLine();
                 String dummy = scanner.nextLine();
                 String id = dummy.substring(1, dummy.indexOf("]"));
-                String name = dummy.substring(dummy.indexOf("Name:") + 6, dummy.indexOf(" ||"));
+                String name = dummy.substring(dummy.indexOf("Name:") + 6, dummy.indexOf(" || Contact"));
                 String phoneNumber = dummy.substring(dummy.indexOf("No.:") + 5, dummy.indexOf(" || Email:"));
                 String email = dummy.substring(dummy.indexOf("Email:") + 7);
                 doctor = new Doctor(id, name, phoneNumber, email);
                 dummy = scanner.nextLine();
                 id = dummy.substring(1, dummy.indexOf("]"));
-                name = dummy.substring(dummy.indexOf("Name:") + 6, dummy.indexOf(" ||"));
+                name = dummy.substring(dummy.indexOf("Name:") + 6, dummy.indexOf(" || Contact"));
                 phoneNumber = dummy.substring(dummy.indexOf("No.:") + 5, dummy.indexOf(" || Email:"));
-                email = dummy.substring(dummy.indexOf("Email:") + 7);
-                String symptom=dummy.substring(dummy.indexOf("Symptom:")+9);
-                Patient patient = new Patient(id, name, phoneNumber, email, symptom);
+                email = dummy.substring(dummy.indexOf("Email:") + 7, dummy.indexOf(" || Symptom"));
+                String symptom = dummy.substring(dummy.indexOf("Symptom:") + 9, dummy.indexOf(" || Description"));
+                String description = dummy.substring(dummy.indexOf("Description:") + 13);
+                Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
                 String time = scanner.nextLine();
                 result.addAppointment(doctor, patient, LocalDateTime.parse(time));
             }
