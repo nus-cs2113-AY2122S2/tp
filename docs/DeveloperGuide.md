@@ -573,12 +573,23 @@ IO redirection testing can be performed via the following steps:
 
 ## User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
-| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a ... | I want to ...                                   | So that I can ...                               |
+|---------|:---------|:------------------------------------------------|:------------------------------------------------|
+| v1.0    | user     | add people                                      | keep track of individuals                       |
+| v1.0    | user     | add income                                      | keep track of income                            |
+| v1.0    | user     | add expenditure                                 | keep track of expenditure                       |
+| v1.0    | user     | list income                                     | view each individual's income                   |
+| v1.0    | user     | list expenditure                                | view each individual's expenditure              |
+| v1.0    | user     | view my disposable income                       | plan my spending                                |
+| v1.0    | user     | add my family members into different categories | have a clearer view of their finances           |
+| v2.0    | user     | add recurring fixed expenditures and incomes    | not re-add them every month                     |
+| v2.0    | user     | add tags for each record                        | clean them up into different categories         |
+| v2.0    | user     |                  |                                                 |
+| v2.0    | user     |                  |                                                 |
+| v2.0    | user     |                  |                                                 |
+| v2.0    | user     |                  |                                                 |
+| v2.0    | user     |                  |                                                 |
 
- 
 
 ---
 
