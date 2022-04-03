@@ -80,7 +80,12 @@ public class StaffController extends Controller {
         System.out.println("Finding staff...");
         int staffId = InputParser.getInteger("ID of staff: ");
         try {
-            staffManager.findByStaffId(staffId, true);
+            Staff staff = staffManager.findByStaffId(staffId);
+            if (staff != null) {
+                System.out.println("Staff found: \n" + staff);
+            } else {
+                System.out.println("Staff with ID " + staffId + " not found!");
+            }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -143,6 +148,11 @@ public class StaffController extends Controller {
         }
     }
 
+    /**
+     * Edit staff by ID.
+     *
+     * @throws OperationTerminationException When user inputs terminator.
+     */
     private void editStaff() throws OperationTerminationException {
         MainLogger.logInfo(this, "Deleting staff");
         System.out.println("Editing staff...");
@@ -157,7 +167,7 @@ public class StaffController extends Controller {
             staffId = InputParser.getInteger("ID of staff to edit: ");
             staffNoClash = checkNoStaffClash(staffId);
             if (staffNoClash == 0) {
-                staff = staffManager.findByStaffId(staffId, false);
+                staff = staffManager.findByStaffId(staffId);
                 break;
             } else if (staffNoClash == 1) {
                 System.out.println("Failed to find staff with matching ID, please try again...");
@@ -204,13 +214,24 @@ public class StaffController extends Controller {
         }
     }
 
-    boolean checkStaffEmpty() {
-        return staffManager.getStaff().size() == 0;
+    /**
+     * Check if staff records is empty.
+     *
+     * @return boolean expression if staff records is empty or not.
+     */
+    private boolean checkStaffEmpty() {
+        return staffManager.getNumOfStaffs() == 0;
     }
 
-    int checkNoStaffClash(int staffId) {
+    /**
+     * Check if there is no clash between input ID and ID of existing staff
+     *
+     * @param staffId ID of the staff
+     * @return integer expression if there is a clash in IDs, or if there is an exception
+     */
+    private int checkNoStaffClash(int staffId) {
         try {
-            if (staffManager.findByStaffId(staffId, false) == null) {
+            if (staffManager.findByStaffId(staffId) == null) {
                 return 1;
             }
             return 0;

@@ -70,7 +70,7 @@ public class StaffManager extends Manager {
      */
     public void addStaff(int staffId, String staffName, String position, double salary)
             throws IllegalArgumentException {
-        if (findByStaffId(staffId, false) != null) {
+        if (findByStaffId(staffId) != null) {
             MainLogger.logInfo(this, "Failed to add staff: Staff with same ID already exists.");
             throw new IllegalArgumentException("Staff with the same ID already exists, use another ID...");
         }
@@ -82,26 +82,19 @@ public class StaffManager extends Manager {
      * Find Staff from Staffs by ID.
      *
      * @param staffId  ID of the Staff.
-     * @param printMsg Boolean to determine if found message should be printed.
      */
-    public Staff findByStaffId(int staffId, boolean printMsg) throws IllegalArgumentException {
+    public Staff findByStaffId(int staffId) throws IllegalArgumentException {
         if (staffId <= 0) {
             MainLogger.logInfo(this, "Invalid input for ID.");
             throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
         }
         for (Staff staff : staffs) {
             if (staffId == staff.getStaffId()) {
-                if (printMsg) {
-                    MainLogger.logInfo(this, "Successful search for staff.");
-                    System.out.println("Staff found: \n" + staff);
-                }
+                MainLogger.logInfo(this, "Successful search for staff.");
                 return staff;
             }
         }
         MainLogger.logInfo(this, "Unsuccessful search for staff.");
-        if (printMsg) {
-            System.out.println("Staff with ID " + staffId + " not found!");
-        }
         return null;
     }
 
@@ -111,7 +104,7 @@ public class StaffManager extends Manager {
      * @param staffId ID of the Staff
      */
     public void deleteByStaffId(int staffId) throws IllegalArgumentException {
-        Staff staff = findByStaffId(staffId, false);
+        Staff staff = findByStaffId(staffId);
         if (staff != null) {
             staffs.remove(staff);
             MainLogger.logInfo(this, "Successful deletion of staff.");
