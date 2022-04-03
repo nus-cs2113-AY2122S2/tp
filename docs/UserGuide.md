@@ -714,6 +714,13 @@ Quits the application.<br>
 **A**: Unique identifiers uniquely identify each session, activity and group separately. Once a unique identifier
 has been allocated, it will not be changed nor reused.
 
+**Q**: Is there any way I can mark a transaction that is shown using the `session /summary` command as paid?
+
+**A**: As of now, this functionality is not supported by our SplitLah. All functionality that SplitLah currently
+supports are documented in this user guide.
+You can find a summary of all available commands can be found in the [Command Summary](#command-summary) below.
+Stay tuned to future updates from us!
+
 <br>
 
 <hr>
