@@ -709,6 +709,11 @@ Quits the application.<br>
 **A**: SplitLah 2.0 creates a save file in a folder named `data` that is created in the same directory as
 `SplitLah.jar`. All changes are saved to the save file upon exit.
 
+**Q**: How do session, activity and group unique identifiers work?
+
+**A**: Unique identifiers uniquely identify each session, activity and group separately. Once a unique identifier
+has been allocated, it will not be changed nor reused.
+
 <br>
 
 <hr>
