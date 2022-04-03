@@ -42,4 +42,16 @@ public class DeleteCommand extends Command {
 
         return new CommandResult(String.format(successMessage, equipmentName, commandStrings.get(0)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof DeleteCommand)) {
+            return false;
+        }
+        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
+        return this.commandStrings.equals(otherDeleteCommand.commandStrings);
+    }
 }

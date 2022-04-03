@@ -39,9 +39,9 @@ public class Parser {
                     + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
                     + "pd\\/(?<purchasedDate>.+)"
     );
-    public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)");
-    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)");
-    public static final Pattern TYPE_ENUM_FORMAT = Pattern.compile("[Tt]/(?<equipmentType>\\w+)");
+    public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)\\s*");
+    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)\\s*");
+    public static final Pattern TYPE_ENUM_FORMAT = Pattern.compile("[Tt]/(?<equipmentType>\\w+)\\s*");
     // ARGUMENT_FORMAT extracts first n-1 tags, for debugging: https://regex101.com/r/gwjHWD/3
     public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
             "((?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
@@ -229,7 +229,7 @@ public class Parser {
      * @throws IncompleteCommandException if no match found
      */
     protected ArrayList<String> prepareCheck(String args) throws IncompleteCommandException {
-        final Matcher matcher = VIEW_COMMAND_FORMAT.matcher(args.trim());
+        final Matcher matcher = CHECK_COMMAND_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new IncompleteCommandException("View command values are incomplete or missing!");
         }
