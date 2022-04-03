@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     }
 
     private static final String ADD_TASK_MESSAGE = StringConstants.ADD_TASK_MESSAGE_TOP + LS + "%s" + LS
-            + StringConstants.ADD_TASK_MESSAGE_BOTTOM + LS;
+            + LS;
     private static final String ADD_MODULE_MESSAGE = StringConstants.ADD_MODULE_MESSAGE_TOP + LS + "%s";
 
     private final AddObjectType typeToAdd;
@@ -77,7 +77,7 @@ public class AddCommand extends Command {
                 throw new NoSuchModuleException();
             }
             TaskList taskList = targetModule.getTaskList();
-            res = String.format(ADD_TASK_MESSAGE, targetModule, taskList.addTask(newTask), taskList.size());
+            res = String.format(ADD_TASK_MESSAGE, targetModule, taskList.addTask(newTask));
         } else {
             assert typeToAdd == AddObjectType.MODULE;
             if (!moduleList.isModuleExists(newModule.getModuleCode())) {

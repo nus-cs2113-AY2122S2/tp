@@ -37,7 +37,6 @@ public class StringConstants {
      * For AddCommand.
      */
     public static final String ADD_TASK_MESSAGE_TOP = "Hey! I have added this task under %s!";
-    public static final String ADD_TASK_MESSAGE_BOTTOM = "Now you have %d task(s) in your list!";
     public static final String ADD_MODULE_MESSAGE_TOP = "Hey! I have added this module!";
     public static final String MODULE_ALREADY_EXISTS = "A module with that name already exists...";
     public static final String ESTIMATED_WORKING_TIME = "Estimated working time: ";
