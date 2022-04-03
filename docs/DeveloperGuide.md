@@ -1140,7 +1140,22 @@ The following sequence diagram illustrates how the `search /all` command works i
 
 ### File Management
 
-#### Design Considerations
+#### Design Considerations For Inconsistent Data Between Resource Files
+
+The first step of loading local files to the app involves the checking of validity of data. That is, before loading plan
+data, `FileManager` will check whether the workouts in the plan exist in the `workouts.txt` file, and before loading
+schedule data, `FileManager` will also check whether the plans in the `schedule.txt` could be found in `plan.txt`. If 
+all the data can be matched, the files will be loaded successfully, otherwise only the unmatched data are classified as 
+"corrupted data" and will be deleted and the deletion will be cascaded. 
+
+Although the users are discouraged from  editing the local resource files as this action may corrupt the stored data,
+resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
+the files. Thus, other than the warning in our UserGuide, we also implemented
+error handling methods to handle the situation where users edited the files and caused data corruptions.
+We could have implemented the loading of data in a more hassle-free way by simply clearing all local data. However, we
+tried to think in the perspective of users to save the "uncorrupted data" as much as possible. Thus, we decided to
+implement the validity checking such that only the affected data are removed while keeping all the non-affected data
+safely.
 
 
 ## Product Scope
