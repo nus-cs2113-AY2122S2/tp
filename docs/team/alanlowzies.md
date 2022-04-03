@@ -85,7 +85,7 @@ and other documents for the co-requsuite module CS2101 Effective Communication f
 - Helped to maintain the team's GitHub repository issue tracker.
 
 ### Review/Mentoring Contributions
-- Reviewed fellow team members' pull requests (PRs), including (but no limited to):
+- Reviewed fellow team members' pull requests (PRs), including (but not limited to):
   - [PR #71 - Add logging and assertion for update workout](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/71#pullrequestreview-910244404)
   - [PR #97 - Add Create Plan Feature](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/97#pullrequestreview-914977219)
   - [PR #123 - Branch search workout](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/123#pullrequestreview-919593971)
