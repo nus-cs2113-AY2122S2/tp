@@ -120,7 +120,7 @@ public class UpdateCommand extends Command {
             testDescription(newDescription);
 
             String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-            testExpenditureAmount(newAmountAsString ,newPaymentMethod, creditCardList);
+            testExpenditureAmount(newAmountAsString, newPaymentMethod, creditCardList);
             float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
 
             String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
