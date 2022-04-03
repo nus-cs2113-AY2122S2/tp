@@ -73,6 +73,17 @@ nav {
   }
 }
 
-.site-footer {
-  display:none;
+
+footer {
+  position:fixed;
+  float:right;
+  width:180px;
+  margin-right:-1630px;
+  text-align: right;
+  line-height: 16px;
+  top:220px;
+  right:50%;
+  left:auto;
+  bottom:auto;
+  width:auto;
 }
