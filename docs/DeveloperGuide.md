@@ -22,11 +22,13 @@ implementation, and other technical and non-technical aspects of the application
 ### Notations Used In This Guide
 When reading this document, there are several icons that you may encounter. 
 Below are the icons and their meanings:
-> ⚠️**Warning** : Information that you may want to pay attention to in order
-> to prevent possible issues from arising when using the application.
 
-> 🧾  **Note** : Additional information that may be useful for you.
-️
+
+<span class="box warning">⚠️**Warning**: Information that you may want to pay attention to in order to prevent 
+possible issues from arising when using the application.</span>
+
+<span class="box info">🧾  **Note**: Additional information that may be useful for you.</span>
+
 
 ## Acknowledgements
 The following websites and codebases were referenced and adapted for our project:
@@ -43,7 +45,7 @@ The following websites and codebases were referenced and adapted for our project
 - [X] An IDE of your choice, though IntelliJ IDEA is recommended as this project is developed
 with this IDE.
 
-> 🧾 IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA. 
+<span class="box info"> 🧾 IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA.</span>
 
 ### Setting Up
 1. Fork the [WerkIt! GitHub repository](https://github.com/AY2122S2-CS2113T-T09-2/tp).
@@ -152,6 +154,7 @@ is not specified, an `InvalidCommandException` will be thrown.
 ### Overview
 * [Getting User Input Continuously](#getting-user-input-continuously)
 * [Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)
+    * [Illegal Characters and Phrases](#illegal-characters-and-phrases)
 * [Exercise](#exercise)
   * [List Exercise](#list-exercise)
 * [Workout](#workout)
@@ -160,7 +163,7 @@ is not specified, an `InvalidCommandException` will be thrown.
   * [List All Workouts](#list-workout)
   * [Delete Existing Workout](#delete-existing-workout)
     * [Design Considerations](#design-considerations-for-deleting-existing-workout)
-  * [Update Workout](#update-workout)
+  * [Update Exisiting Workout](#update-existing-workout)
 * [Plan](#plan)
   * [Create A New Plan](#create-a-new-plan)
   * [List Plans](#list-plans)
@@ -190,8 +193,8 @@ the user's input as a `String` object to `WerkIt#startContinuousUserPrompt()`. T
 object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
 this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()`.
 
-> A detailed implementation of the parsing and creation of subclass-of-`Command` object process can be found in
-'[Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)'.
+<span class="box info">A detailed implementation of the parsing and creation of subclass-of-`Command` object process can be found in
+<span>'[Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)'.</span>
 
 Next, `WerkIt#startContinuousUserPrompt()` calls on the `execute()` method of the subclass-of-`Command` object to
 perform the user's requested action. If the execution goes smoothly, this completes the user's inputted command.
@@ -221,7 +224,69 @@ for subsequent prompts.
 ---
 
 ### Parsing User Input and Getting the Right Command
-**_TODO_**: Explain how the app parses user input and determines which `Command` subclass object to instantiate.
+
+![Obtain and Parse User Input](uml/sequenceDiagrams/miscellaneous/images/obtainAndParseUserInput.png)
+
+<span class="box info"> 🧾 To improve the readability of the sequence diagram, the construction of the respective
+objects which are subclasses of the `Command` class between Steps 4 and 17 are not included in the diagram.</span>
+
+**(Steps 1 and 2)** When a user enters something into the terminal (when prompted), `UI#getUserInput()` will take in 
+the user's input as a `String` and call `String#trim()` to remove leading and trailing whitespaces in the input.
+Thereafter, a line is printed on the terminal to indicate that the user's input has been received
+and will be processed, before returning the user input as a `String` to the calling method (i.e. 
+`WerkIt#startContinuousUserPrompt()`).
+
+**(Step 3)** In `WerkIt#startContinuousUserPrompt()`, the method will pass the obtained user string as a parameter into
+`Parser#parseUserInput()`. The latter method will first check if the user input contains any characters
+or symbols that are deemed as illegal (see [Illegal Characters and Phrases](#illegal-characters-and-phrases) for details).
+If at least one illegal character or phrase is found, an `InvalidCommandException` will be thrown and the parsing is
+aborted.
+
+**(Steps 4 to 17)** If no illegal characters and phrases are found, `Parser#parseUserInput()` will examine the first
+word in the user input. This first word should represent the command type that the user wish to execute (i.e. `exercise`,
+`workout`, `plan`, `schedule`, `search`, `help`, or `exit`). Depending on the first word of the user input, different
+methods will be invoked to create the appropriate object of the subclass of the `Command` abstract superclass (see the 
+bulleted point after this paragraph for an example). However, if the first word is not a valid command type, an 
+`InvalidCommandException` will be thrown and the parsing is aborted.
+- For example, if the user input is `workout /new push up /reps 10`, `Parser#createWorkoutCommand()` will be invoked
+and a `WorkoutCommand` object will be returned by this method.
+
+Inside each of these 'create command' methods, the following generalised procedure to create an object of the subclass 
+of `Command` is carried out:
+1. (For commands that expect an action keyword (e.g. `/list`, `/new`)) The action keyword is parsed and determined.
+    - If the action keyword is invalid, an `InvalidCommandException` is thrown and the parsing is aborted.
+2. Depending on the action keyword (or lack thereof), the number of arguments are checked.
+    - If insufficient or too many arguments are provided in the user input, an `InvalidCommandException` is thrown
+   and the parsing is aborted.
+3. A new object of the subclass of `Command` is created and if the object is successfully constructed with no errors,
+it is returned to `Parser#parseUserInput()`.
+
+**(Step 18)** The object created is then returned to `WerkIt#startContinuousUserInput()`.
+
+<span class="box info"> 🧾 (About the sequence diagram) Strictly speaking, the object is returned right after whichever 
+'create command' method is invoked. However, to improve the readability of the diagram, only one return line is shown,
+since all alternate paths will return an object that is a subclass of the `Command` class.</span>
+
+The final step of this section is to invoke the `Command#execute()` method, which will in turn call the
+overridden `execute()` method of the subclass of `Command`.
+- For example, if the user input is `workout /new push up /reps 10`, the created `WorkoutCommand` object is upcasted
+to `Command` when returned to `WerkIt#startContinuousUserInput()`, but when `newCommand.execute()` is called,
+`WorkoutCommand#execute()` is called.
+
+Thereafter, the appropriate procedures are taken to complete the task requested by the user. The various procedures
+are explained in later sections of this developer guide.
+
+#### Illegal Characters and Phrases
+Some symbols and phrases are reserved for use by the application and thus are not allowed to be used by the user
+in his/her inputs to avoid any potential instabilities when processing his/her inputs.
+
+| Illegal Character/Phrase | Purpose in Application                                                                                                                                                                |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| The pipe character &#124; | Used as a delimiter in the app data files to separate the various data. Allowing the user to use delimiters in their plan names may cause issues when storing them in the data files. |
+| The phrase 'rest day' | Used as an indicator that a particular day in the user's schedule does not have a plan in it. Allowing the user to name a plan as 'rest day' may cause issues when displaying the schedule. |
+
+If these characters are inputted by the user, as mentioned in Step 3 above, an `InvalidCommandException` will be thrown 
+and the parsing is aborted.
 
 ---
 
@@ -253,17 +318,18 @@ A summary of the general procedure of a new workout being inputted and stored in
 4. The new `Workout` object data is written to the resource file `workouts.txt`.
 
 The following sequence diagram illustrates how the `workout /new` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that are deemed to be trivial 
-> have been removed from the sequence diagram. Some reference frames will be elaborated further 
-> down this section. Reference frames that will not be elaborated on will be made known.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that are deemed to be trivial 
+have been removed from the sequence diagram. Some reference frames will be elaborated further 
+down this section. Reference frames that will not be elaborated on will be made known.</span>
 
 ![Create Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/CreateWorkout.png)
 
 **(Before Step 1)** The user's input (in this case will be a `workout /new` command) is obtained and parsed to obtain
 a `WorkoutCommand` object that contains the user's input.
 
-> **Note:** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+<span class="box info"> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When `WorkoutCommand#execute()` is called, because this is a `workout /new` command, the method will call
 `WorkoutList#createAndAddWorkout()`.
@@ -271,8 +337,8 @@ a `WorkoutCommand` object that contains the user's input.
 The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createAndAddWorkout()`:
 ![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout.png)
 
-> **Note:** To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in 
-> `WorkoutList#createAndAddWorkout()` have been omitted. 
+<span class="box info"> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and 
+exception throws in `WorkoutList#createAndAddWorkout()` have been omitted.</span> 
 
 **(Before Step 2.1)** Methods from the `String` and `Integer` classes are called to parse the
 argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the
@@ -283,14 +349,14 @@ argument given to `WorkoutList#createAndAddWorkout()` to obtain the following in
 Next, validity checks of the user input are carried out to ensure that the data entered is valid as a
 new `Workout` object. The requirements for a valid new `Workout` object are as follows:
 1. The exercise name must exist in `ExerciseList`'s `exerciseList`, which is an `ArrayList<String>` of exercise 
-names. An `InvalidExceptionException` is thrown if this requirement is not met. 
+names. An `InvalidExerciseException` is thrown if this requirement is not met. 
 2. The repetition value must be a non-negative integer greater than 0.
 3. The (exercise name, repetition value)-pair must not already exist in the list of workouts maintained in
 `WorkoutList`. For example, if a workout of 20 reps of push-ups is already stored in the list,
 it cannot be created again.
 
 If any of the three requirements are not met, the entire workout creation process is aborted.
-If requirement 1 is not met, an `InvalidExceptionException` will be thrown. If requirements 2 and/or 3 are not met, an 
+If requirement 1 is not met, an `InvalidExerciseException` will be thrown. If requirements 2 and/or 3 are not met, an 
 `InvalidWorkoutException` will be thrown.
 
 Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability of the 
@@ -408,22 +474,23 @@ the workouts which is being displayed on the terminal to the user.
 #### Delete Existing Workout
 A summary of the general procedure of an existing workout being removed from WerkIt! is as follows:
 1. User enters the command `workout /delete <workout index number in workout list>`.
-2. The workout with the corresponding workout number in the workout list (can be determined by entering `workout /list`) is removed from the application's workout list.
+2. The workout with the corresponding workout index number in the workout list (can be determined by entering `workout /list`) is removed from the application's workout list.
 3. The success response is printed to the user through the terminal.
 4. The resource file, `workouts.txt`, is rewritten according to the application's workout list that has been modified.
 
 The following sequence diagram illustrates how the `workout /delete` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![Delete Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/deleteWorkout-Part1.png)
 <br><br>
 **(Before Step 1)** The user's input (in this case will be a `workout /delete` command) is obtained and parsed to obtain
 a `WorkoutCommand` object that contains the user's input.
 
-> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+<span class="box info"> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+ ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `WorkoutCommand#execute()` method is called, it will identify
 that the workout action is of type `delete`. Thus, it will subsequently call the 
@@ -432,8 +499,9 @@ that the workout action is of type `delete`. Thus, it will subsequently call the
 The following sequence diagram is the detailed procedure for Step 2's `WorkoutList#deleteWorkout()`:
 <br><br>
 ![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/workouts/images/deleteWorkout-Part2.png)
-> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
-> `WorkoutList#deleteWorkout()` have been omitted.
+
+<span class="box info"> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
+ `WorkoutList#deleteWorkout()` have been omitted.</span>
 
 **(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
 In this case, the user argument parameter is the workout index number of the workout to be deleted from the workout list as a `String` object.
@@ -486,30 +554,96 @@ rewrite all workouts to the resource file whenever a workout is deleted.
 
 ---
 
-#### Update Workout
-![Update Workout Class Diagram](uml/classDiagrams/images/updateWorkout.png)
-<br><br>
-When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
-`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
-class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to identify the
-user's command. If the user's command type is to update an existing workout, 
-i.e. `workout /update <index of workout> <new number of repetitions>`, the `Parser#parseUserInput(String userInput)` 
-method will parse the 'workout' base word and proceed to create workout related command using 
-`Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the workout action,
-in this case, `/update` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
-WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. 
-If either `<index of workout>` or `<new number of repetitions>` parameter is also not specified, the same 
-InvalidCommandException is thrown. Once the workout command is created, this workout command is executed 
-via the `WorkoutCommand#execute()` method. As it is executed, the method will check the type of action to be executed, 
-in this case, update. It will then update the existing workout using the `WorkoutList#updateWorkout(getUserArguments())` 
-method. The updateWorkout method in addition, checks whether the given index of workout is a valid integer
-and is within the range of the workout list. It also checks whether the workout to update exists in the current workout 
-list. If either check is failed, `WorkoutOutOfRangeException` or `InvalidWorkoutException` will be thrown 
-correspondingly. Otherwise, workout will be updated successfully. Then, `UI` will print a success message and call 
-the `FileManager#rewriteAllWorkoutsToFile(getWorkoutList())` method to save the changes.
+#### Update Existing Workout
+A summary of the general procedure of an existing workout from WerkIt! being updated to new number of repetitions
+is as follows:<br><br>
+1. User enters the command `workout /update <workout index number> <new number of repetitions>`.
+2. The workout with the corresponding workout index number in the workout list 
+(can be determined by entering `workout /list`) is updated to the number of repetitions that user specified.
+3. The success response is printed to the user through the terminal.
+4. The resource file, `workouts.txt`, is rewritten according to the application's workout list that has been modified.
 
-##### Update workouts command
-Format: `workout /update`
+The following sequence diagram illustrates how the `workout /update` command works in greater detail:
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial 
+have been removed from the sequence diagram. Some reference frames will be elaborated further down this section.</span>
+
+![Update Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/updateWorkout-Part1.png)
+<br><br>
+**(Before Step 1)** The user's input (in this case will be a `workout /update` command) is obtained and parsed to obtain
+a `WorkoutCommand` object that contains the user's input.
+
+<span class="box info"> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+ ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+**(Step 1 to 3)** When the `WorkoutCommand#execute()` method is called, 'workout /update' command is identified, and
+`WorkoutList#getCurrentWorkout()` will be called to get the name of the workout which will be updated later.
+
+Subsequently, `WorkoutList#updateWorkout()` method will be called.
+<br><br>
+
+The following sequence diagram is the detailed procedure for Step 4's `WorkoutList#updateWorkout()`:
+<br><br>
+![Update Workout Detailed Sequence Diagram](uml/sequenceDiagrams/workouts/images/updateWorkout-Part2.png)
+
+<span class="box info"> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, 
+and exception throws in `WorkoutList#updateWorkout()` have been omitted.</span>
+
+**(Before Step 4.1)** Methods from the `String` and `Integer` classes are called to parse the
+argument given to `WorkoutList#updateWorkout()` to obtain the following information required to update a
+workout:
+1. Workout index number in list
+2. New number of repetitions assigned to the workout in (1).
+
+Next, validity checks of the user input are carried out to ensure that the data entered is valid. 
+The requirements for a valid input are as follows:
+1. Workout index number is the number shown before the exercise name when calling `workout /list`. 
+Workout index number must be a positive integer smaller than the total number of workouts in list.
+2. New repetition value must be a non-negative integer greater than 0.
+
+If any of the two requirements are not met, an `InvalidWorkoutException` will be thrown and 
+the entire update process is aborted.
+
+Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability of the
+sequence diagram.
+
+**(Steps 4.1 to 4.2)** With the workout index number to update, the `WorkoutList#updateWorkout()` method 
+will then fetch the `Workout` object to be updated by calling method `WorkoutList#getWorkoutFromIndexNum()`.
+After the `Workout` object is fetched, a check will be conducted to ensure that the 
+(exercise name of the workout, new repetition value)-pair is not exist in the list of workouts maintained 
+in `WorkoutList`. For example, if a workout of 20 reps of push-ups is already stored in the list, a workout of 
+push up with 15 reps cannot be updated to push up with 20 reps.
+
+If this check fails, an `InvalidWorkoutException` exception is thrown.
+<br><br>
+**(Steps 4.3 to 4.6)** The `Workout` object to be updated is modified to new number of reps and `workoutsHashMapLis` 
+is subsequently updated.
+
+This is the end of `WorkoutList#updateWorkout()` method.
+<br><br>
+**(Step 5)** The `WorkoutList#updateWorkout()` method returns the updated `Workout` object to `WorkoutCommand`.
+<br><br>
+**(Steps 6 to 7)** Upon returning to the `WorkoutCommand` object, the `UI#printUpdateWorkoutMessage()` is called
+to display the workout that has been updated to the user via the terminal. The following is an example
+of a success update message after a valid workout is updated from the workout list:
+```
+----------------------------------------------------------------------
+Alright, the following workout has been updated:
+
+	push up (10 reps)
+
+----------------------------------------------------------------------
+```
+
+**(Steps 8 to 9)** The `WorkoutCommand#updatePlanContainsUpdatedWorkout()` method will
+be called to update any existing plan(s) that contains the workout that has been updated.
+<br><br>
+**(Steps 10 to 13)** The `FileManager#rewriteAllWorkoutsToFile()` is called to rewrite
+the `workouts.txt` file according to the modified workout list and the
+the `FileManager#rewriteAllPlansToFile()` is also called to rewrite
+the `plans.txt` file according to the newly modified plan list.
+<br><br>
+This completes the process of updating an existing workout in WerkIt!
 
 ---
 
@@ -523,17 +657,18 @@ A summary of the general procedure of a new plan being created and stored in Wer
 4. The new `Plan` object data is written to the resource file `plans.txt`.
 
 The following sequence diagram illustrates how the `plan /new` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![Create Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part1.png)
 <br><br>
 **(Before Step 1)** The user's input (in this case will be a `plan /new` command) is obtained and parsed to obtain
 a `PlanCommand` object that contains the user's input.
 
-> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+<span class="info box"> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+ ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
 that the plan action is of type `new`. Thus, it will subsequently call the
@@ -542,8 +677,9 @@ that the plan action is of type `new`. Thus, it will subsequently call the
 The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan(userArgument)`:
 <br><br>
 ![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
-> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
-> `PlanList#createAndAddPlan()` have been omitted.
+
+<span class="box info"> 🧾 To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
+ `PlanList#createAndAddPlan()` have been omitted.</span>
 
 **(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
 method is parsed to obtain the following information required to create the `Plan` object:
@@ -607,17 +743,18 @@ A summary of the general procedure of listing all plans in the application is as
 2. A list of plan names is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `plan /list` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![List Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/listPlan.png)
 <br><br>
 **(Before Step 1)** The user's input (in this case will be a `plan /list` command) is obtained and parsed to obtain
 a `PlanCommand` object that contains the user's input.
 
-> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-> ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
+<span class="box info"> 🧾 For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+ ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Steps 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify
 that the plan action is of type `list`. Thus, it will subsequently call the
@@ -693,9 +830,10 @@ A summary of the general procedure of updating a plan for a particular day to th
 4. The Day object data is written to the resource file `schedule.txt`.
 
 The following sequence illustrates how the schedule /update command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![Update Schedule Sequence Diagram](uml/sequenceDiagrams/schedule/images/updateSchedule.png)
 <br><br>
@@ -779,9 +917,10 @@ can be schedule on Monday by the command of `schedule /upate 1 1`. To view the p
 command `schedule /list`.
 
 The following sequence illustrates how the `schedule /list` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![ListSchedule](uml/sequenceDiagrams/schedule/images/listSchedule.png)
 <br><br>
@@ -839,9 +978,10 @@ A summary of the general procedure of clearing a plan scheduled for a particular
 5. The `schedule.txt` will also be rewritten to reflect the changes. 
 
 The following sequence illustrates how the `schedule /clear` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearSchedule.png) 
 <br><br>
@@ -891,9 +1031,10 @@ A summary of the general procedure of clearing all the plans stored in the sched
 4. The `schedule.txt` will also be rewritten to reflect the changes.
 
 The following sequence illustrates how the `schedule /clearall` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="box info"> 🧾 To simplify the sequence diagram, some method invocations that deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearAllSchedule.png)
 <br><br>
@@ -929,6 +1070,7 @@ resetting the text file.
 This completes the process of clearing of all plans stored in the schedule on WerkIt!
 
 ---
+
 ### Search
 
 #### Search For Exercise
@@ -995,6 +1137,11 @@ The following sequence diagram illustrates how the `search /all` command works i
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
 
 ---
+
+### File Management
+
+#### Design Considerations
+
 
 ## Product Scope
 ### Target User Profile

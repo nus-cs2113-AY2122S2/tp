@@ -3,6 +3,7 @@
 !include ../../Style.puml
 
 title Sequence Diagram of `WorkoutList#createAndAddWorkout()`
+hide footbox
 
 autonumber 2.1
 
