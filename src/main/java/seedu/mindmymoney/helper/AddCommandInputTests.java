@@ -165,4 +165,76 @@ public class AddCommandInputTests {
         return false;
 
     }
+
+    /**
+     * Checks if user input of cashback is a positive number more than 0.
+     *
+     * @param inputCashback User input of Cash back.
+     * @throws MindMyMoneyException when input cashback is less than 0 or null.
+     */
+    public static void testCashbackAmount(String inputCashback) throws MindMyMoneyException {
+        double inputAmountAsDouble;
+        if (inputCashback == null) {
+            throw new MindMyMoneyException("Cashback cannot be empty!");
+        }
+
+        try {
+            inputAmountAsDouble =  Double.parseDouble(inputCashback);
+        } catch (NumberFormatException e) {
+            throw new MindMyMoneyException("Cashback must be a number");
+        }
+
+        if (inputAmountAsDouble < 0) {
+            throw new MindMyMoneyException("Cashback must be more than or equals to 0");
+        }
+        assert inputAmountAsDouble >= 0 : "Cashback should have a non-negative value";
+    }
+
+    /**
+     * Checks if user input for credit card limit is valid.
+     *
+     * @param inputLimit User input of credit card limit.
+     * @throws MindMyMoneyException when input credit card limit is less than or equal to 0 or null.
+     */
+    public static void testCreditCardLimit(String inputLimit) throws MindMyMoneyException {
+        float inputAmountAsDouble;
+        if (inputLimit == null) {
+            throw new MindMyMoneyException("Limit amount cannot be empty!");
+        }
+
+        try {
+            inputAmountAsDouble =  Float.parseFloat(inputLimit);
+        } catch (NumberFormatException e) {
+            throw new MindMyMoneyException("Limit amount must be a number");
+        }
+
+        if (inputAmountAsDouble <= 0) {
+            throw new MindMyMoneyException("Limit amount must be more than 0");
+        }
+        assert inputAmountAsDouble > 0 : "Limit amount should have a positive value";
+    }
+
+    /**
+     * Checks if user input of amount for Credit Card Balance is valid.
+     *
+     * @param inputCardBalance User input of credit card balance.
+     * @throws MindMyMoneyException when given credit card balance is less than or equal to 0 or null.
+     */
+    public static void testCreditCardBalance(String inputCardBalance) throws MindMyMoneyException {
+        float inputAmountAsDouble;
+        if (inputCardBalance == null) {
+            throw new MindMyMoneyException("Credit card balance cannot be empty!");
+        }
+
+        try {
+            inputAmountAsDouble =  Float.parseFloat(inputCardBalance);
+        } catch (NumberFormatException e) {
+            throw new MindMyMoneyException("Credit card balance must be a number");
+        }
+
+        if (inputAmountAsDouble <= 0) {
+            throw new MindMyMoneyException("Credit card balance must be more than 0");
+        }
+        assert inputAmountAsDouble > 0 : "Credit card balance should have a positive value";
+    }
 }

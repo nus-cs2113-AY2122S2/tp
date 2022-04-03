@@ -117,11 +117,11 @@ public class ListCommand extends Command {
      * @return String of expenditures
      */
     public String listStringWithDate(int count, String listInString, String[] inputArray) {
-        for (Expenditure i : expenditureList.expenditureListArray) {
-            if (i.getTime().contains(inputArray[INDEX_OF_SECOND_ITEM])) {
-                listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription()
-                        + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod()
-                        + " [" + i.getTime() + "]" + "\n";
+        for (Expenditure expenditure : expenditureList.expenditureListArray) {
+            if (expenditure.getTime().contains(inputArray[INDEX_OF_SECOND_ITEM])) {
+                listInString += count + ". $" + expenditure.getAmount() + " was spent on "
+                        + expenditure.getDescription() + "(" + expenditure.getCategory() + ") " + "using "
+                        + expenditure.getPaymentMethod() + " [" + expenditure.getTime() + "]" + "\n";
                 count++;
             }
         }
@@ -136,9 +136,10 @@ public class ListCommand extends Command {
      * @return String of expenditures
      */
     public String listString(int count, String listInString) {
-        for (Expenditure i : expenditureList.expenditureListArray) {
-            listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription()
-                    + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod() + " [" + i.getTime() + "]" + "\n";
+        for (Expenditure expenditure : expenditureList.expenditureListArray) {
+            listInString += count + ". $" + expenditure.getAmount() + " was spent on " + expenditure.getDescription()
+                    + "(" + expenditure.getCategory() + ") " + "using " + expenditure.getPaymentMethod()
+                    + " [" + expenditure.getTime() + "]" + "\n";
             count++;
         }
         return listInString;
@@ -183,8 +184,8 @@ public class ListCommand extends Command {
     public String creditCardListToString() {
         int indexOfList = 1;
         String listInString = "";
-        for (CreditCard i : creditCardList.creditCardListArray) {
-            listInString += indexOfList + ". " + i.toString();
+        for (CreditCard creditCard : creditCardList.creditCardListArray) {
+            listInString += indexOfList + ". " + creditCard.toString();
             indexOfList++;
         }
 

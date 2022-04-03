@@ -110,7 +110,6 @@ public class UpdateCommand extends Command {
 
             String newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
             String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
-
             testExpenditureCategory(inputCategory);
             final String newCategory = capitalise(inputCategory);
 
