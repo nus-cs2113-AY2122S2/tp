@@ -56,18 +56,18 @@ activate Storage
             Family --> Storage
             deactivate Family
         else #PINK expenditure
-            Storage -> Family : addExpend(groupID:int, personID:int, description:String, amount:double, categoryID:int, isPermanent:Boolean)
+            Storage -> Family : addExpend(groupID:int, personID:int, \ndescription:String, amount:double, \ncategoryID:int, isPermanent:Boolean)
             activate Family
-            Family -> PersonList : addExpend(personID:int, description:String, amount:double, categoryID:int, isPermanent:Boolean)
+            Family -> PersonList : addExpend(personID:int, description:String, \namount:double, categoryID:int, \nisPermanent:Boolean)
             activate PersonList
             PersonList --> Family
             deactivate PersonList
             Family --> Storage
             deactivate Family
         else #GREEN income
-            Storage -> Family : addIncome(groupID:int, personID:int, description:String, amount:double, isPermanent:Boolean)
+            Storage -> Family : addIncome(groupID:int, personID:int, \ndescription:String, amount:double, \nisPermanent:Boolean)
             activate Family
-            Family -> PersonList : addIncome(personID:int, description:String, amount:double, isPermanent:Boolean)
+            Family -> PersonList : addIncome(personID:int, description:String, \namount:double, isPermanent:Boolean)
             activate PersonList
             PersonList --> Family
             deactivate PersonList
