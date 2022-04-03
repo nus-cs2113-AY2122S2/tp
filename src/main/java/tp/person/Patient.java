@@ -2,21 +2,26 @@ package tp.person;
 
 public class Patient extends tp.person.Person {
     protected String symptom;
-    protected String description=" ";
-    public Patient(String id, String name, String phoneNumber, String email,String symptom) {
+    protected String description;
+
+    public Patient(String id, String name, String phoneNumber, String email, String symptom) {
         super(id, name, phoneNumber, email);
-        this.symptom=symptom;
+        this.symptom = symptom;
     }
 
-    public Patient(String id, String name, String phoneNumber, String email,String symptom,String description) {
+    public Patient(String id, String name, String phoneNumber, String email, String symptom, String description) {
         super(id, name, phoneNumber, email);
-        this.symptom=symptom;
-        this.description=description;
+        this.description = description;
+        this.symptom = symptom;
     }
 
 
     public String getSymptom() {
         return symptom;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setSymptom(String symptom) {
@@ -25,10 +30,10 @@ public class Patient extends tp.person.Person {
 
     @Override
     public String toString() {
-        return "* PATIENT " + super.toString()+" || Symptom: " + symptom+" || Description: " +description;
+        return "* PATIENT " + super.toString() + " || Symptom: " + symptom + " || Description: " + description;
     }
 
     public void addDescription(String description) {
-        this.description= description;
+        this.description = description;
     }
 }
