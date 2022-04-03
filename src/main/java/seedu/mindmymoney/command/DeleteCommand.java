@@ -10,8 +10,8 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.User;
 
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_THIRD_ITEM;
 import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 import static seedu.mindmymoney.constants.Indexes.MINIMUM_CREDIT_CARD_COMMAND_LENGTH;
@@ -42,6 +42,15 @@ public class DeleteCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Indicates whether the delete command is to delete a credit card by looking for the /cc flag.
+     *
+     * @return true if the /cc flag is present, false otherwise.
+     */
+    private boolean hasExpenditureFlag() {
+        return input.contains(FLAG_OF_EXPENSES);
     }
 
     /**
@@ -102,11 +111,11 @@ public class DeleteCommand extends Command {
 
             String[] splitMessage = input.split(" ");
             if (splitMessage.length != MINIMUM_EXPENDITURE_COMMAND_LENGTH) {
-                throw new MindMyMoneyException(System.lineSeparator() + "Please input a number\n"
-                        + "For eg. 'delete 2'\n");
+                throw new MindMyMoneyException(System.lineSeparator() + "Please check your input parameters\n"
+                        + "Enter 'delete /e [INDEX]' to remove an expenditure from your list.\n");
             }
 
-            String getNumber = splitMessage[INDEX_OF_SECOND_ITEM];
+            String getNumber = splitMessage[INDEX_OF_THIRD_ITEM];
             int positionToDelete = Integer.parseInt(getNumber) + LIST_INDEX_CORRECTION;
             Expenditure expenditure = expenditureList.get(positionToDelete);
 
@@ -206,12 +215,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void executeCommand() throws MindMyMoneyException {
-        if (hasCreditCardFlag()) {
+        if (hasExpenditureFlag()) {
+            deleteExpenditure();
+        } else if (hasCreditCardFlag()) {
             deleteCreditCard();
         } else if (hasIncomeFlag()) {
             deleteIncome();
         } else {
-            deleteExpenditure();
+            throw new MindMyMoneyException("You are missing a flag in your command\n"
+                    + "Type \"help /e\" to view the list of supported expenditure commands\n"
+                    + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
+                    + "Type \"help /i\" to view the list of supported income commands\n");
         }
     }
 }

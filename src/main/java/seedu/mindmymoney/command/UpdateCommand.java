@@ -13,24 +13,21 @@ import seedu.mindmymoney.userfinancial.User;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_AMOUNT;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 import static seedu.mindmymoney.constants.Flags.FLAG_END_VALUE;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_AMOUNT;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_LIMIT;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_NAME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_LIMIT;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 
-import static seedu.mindmymoney.constants.Indexes.SPLIT_LIMIT;
-import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
-
+import static seedu.mindmymoney.constants.Indexes.*;
 import static seedu.mindmymoney.data.CreditCardList.isEqualName;
 import static seedu.mindmymoney.data.CreditCardList.isEqualCashback;
 import static seedu.mindmymoney.data.CreditCardList.isEqualCardLimit;
@@ -80,6 +77,15 @@ public class UpdateCommand extends Command {
     }
 
     /**
+     * Indicates whether the help command is for expenses by looking for the /e flag.
+     *
+     * @return true if the /e flag is present, false otherwise.
+     */
+    private boolean hasExpensesFlag() {
+        return updateInput.contains(FLAG_OF_EXPENSES);
+    }
+
+    /**
      * Indicates whether the update command is to update a credit card by looking for the /cc flag.
      *
      * @return true if the /cc flag is present, false otherwise.
@@ -104,8 +110,8 @@ public class UpdateCommand extends Command {
      */
     public void updateExpenditure() throws MindMyMoneyException {
         try {
-            String[] parseUpdateInput = updateInput.split(" ", SPLIT_LIMIT);
-            String indexAsString = parseUpdateInput[INDEX_OF_FIRST_ITEM];
+            String[] parseUpdateInput = updateInput.split(" ");
+            String indexAsString = parseUpdateInput[INDEX_OF_SECOND_ITEM];
             final int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
             String newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
@@ -308,12 +314,17 @@ public class UpdateCommand extends Command {
      */
     @Override
     public void executeCommand() throws MindMyMoneyException {
-        if (hasCreditCardFlag()) {
+        if (hasExpensesFlag()) {
+            updateExpenditure();
+        } else if (hasCreditCardFlag()) {
             updateCreditCard();
         } else if (hasIncomeFlag()) {
             updateIncome();
         } else {
-            updateExpenditure();
+            throw new MindMyMoneyException("You are missing a flag in your command\n"
+                    + "Type \"help /e\" to view the list of supported expenditure commands\n"
+                    + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
+                    + "Type \"help /i\" to view the list of supported income commands\n");
         }
     }
 }

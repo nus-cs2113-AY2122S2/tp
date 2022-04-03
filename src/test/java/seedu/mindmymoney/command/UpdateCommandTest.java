@@ -28,7 +28,7 @@ public class UpdateCommandTest {
         User testUser = new User();
         testUser.setExpenditureListArray(new ExpenditureList());
         testUser.getExpenditureListArray().add(testExpenditure);
-        String input = "1 /pm cash /c Others /d chicken rice /a 4.50 /t 01/05/2021";
+        String input = "/e 1 /pm cash /c Others /d chicken rice /a 4.50 /t 01/05/2021";
         UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         try {
             updateCommand.executeCommand();
@@ -65,7 +65,7 @@ public class UpdateCommandTest {
         User testUser = new User();
         testUser.setExpenditureListArray(new ExpenditureList());
         testUser.getExpenditureListArray().add(testExpenditure);
-        String input = "1 /pm cash /c food /d porridge /a 5 /t 01/04/2022";
+        String input = "/e 1 /pm cash /c food /d porridge /a 5 /t 01/04/2022";
         UpdateCommand updateCommand = new UpdateCommand(input,testUser);
         assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
     }

@@ -13,8 +13,7 @@ import seedu.mindmymoney.userfinancial.User;
 
 import static seedu.mindmymoney.constants.Flags.EMPTY_PARAMETER;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
+import static seedu.mindmymoney.constants.Indexes.*;
 
 /**
  * Represents the input parser and deals with making sense of user commands.

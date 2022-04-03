@@ -29,13 +29,13 @@ public class HelpCommandTest {
     void helpCommand_fromUser_expectHelpPage() throws MindMyMoneyException {
         String helpPage = "---------------------------------------Expenditure Help Page------------------------"
                 + "---------------\n"
-                + "1. Listing all Expenditures: list /expenses\n"
-                + "2. Adding an Expenditure entry: add /pm [PAYMENT_METHOD] /c [CATEGORY] "
+                + "1. Listing all Expenditures: list /e\n"
+                + "2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] "
                 + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
                 + "3. Calculating the total expenditure in a month: calculate /epm [MONTH]\n"
-                + "4. Updating an Expenditure: update [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] "
+                + "4. Updating an Expenditure: update /e [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] "
                 + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
-                + "5. Removing an Expenditure entry: delete [INDEX]\n"
+                + "5. Removing an Expenditure entry: delete /e [INDEX]\n"
                 + "6. Exiting the program: bye\n"
                 + "----------------------------------------------------------------------------------------------"
                 + "-----\n";
