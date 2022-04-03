@@ -233,7 +233,7 @@ public class ListCommand extends Command {
     public void printIncomeList() throws MindMyMoneyException {
         if (incomeList.isEmpty()) {
             throw new MindMyMoneyException("Your income list is currently empty! "
-                    + "Please add some credit cards to your account first");
+                    + "Please add some incomes to your account first");
         } else {
             System.out.print(PrintStrings.LINE);
             System.out.print(incomeListToString());
