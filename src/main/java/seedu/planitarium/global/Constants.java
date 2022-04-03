@@ -75,6 +75,16 @@ public class Constants {
     public static final String LISTCAT = "List categories: listcat";
     public static final String FIND = "Searching for details: find /d USER_STRING [/c CATEGORY_INDEX]";
     public static final String EXIT = "Exit program: bye";
+    public static final String PARAMETER_NAME = "/n NAME refers to your name";
+    public static final String PARAMETER_GID = "/g GROUP_INDEX refers to a group index found in 'overview'";
+    public static final String PARAMETER_UID = "/u USER_INDEX refer a user index found in 'list'";
+    public static final String PARAMETER_DESC = "/d DESCRIPTION refers to a description string input";
+    public static final String PARAMETER_CID = "/c CATEGORY_INDEX refers to a category index found in 'listcat'";
+    public static final String PARAMETER_INCOME = "/i INCOME refers to an income monetary value";
+    public static final String PARAMETER_EXPENDITURE = "/e EXPENDITURE refers to an expenditure monetary value";
+    public static final String PARAMETER_RECORDS = "/r X_INDEX refers to an index for income/expenditure found in"
+            + "'list'";
+    public static final String PARAMETER_RECURRING = "/p <T/(any)> refers to 'T' for recurring, or any input otherwise";
 
     // For Command assertion
     public static final String NAME_NOT_NULL = "Name should not be null";
