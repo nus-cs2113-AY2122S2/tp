@@ -23,8 +23,6 @@ public class AddParser extends CommandParser {
         this.matches = regexMatch.getGroupValues();
     }
 
-    ;
-
     protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType {
         if (matches.get("flag").equals("g")) {
             String regexGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) up/(?<up>.*)"
@@ -38,9 +36,7 @@ public class AddParser extends CommandParser {
                 System.out.println("Unit Good does not exist. Please add a Unit Good first");
             }
         } else if (matches.get("flag").equals("ug")) {
-            String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) up/(?<up>.*)"
-                    + " ui/(?<ui>.*) wu/(?<isWholeUnit>.*) ba/(?<ba>.*)"
-                    + " v/(?<v>.*) ip/(?<ip>.*)";
+            String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) cap/(?<capacity>.*)";
             HashMap<String, String> regexUnitGoodMatch = new
                     Regex(userInput, regexUnitGood).getGroupValues();
             try {

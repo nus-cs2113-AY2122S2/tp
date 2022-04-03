@@ -12,7 +12,7 @@ public class ListParser extends CommandParser {
     protected void init_extract_params() {
         Regex regexMatch;
         String regex;
-        regex = "(?<flag>[og])/";
+        regex = "(?<flag>[uog]{1,2})/";
         regexMatch = new Regex(this.userInput, regex);
         this.matches = regexMatch.getGroupValues();
     }
@@ -24,6 +24,8 @@ public class ListParser extends CommandParser {
         } else if (matches.get("flag").equals("g")) {
             // list goods with flag "g/"
             this.warehouse.listGoods(); // refers to inventory goods
+        } else if (matches.get("flag").equals("ug")) {
+            this.warehouse.listUnitGoods();
         } else {
             // wrong command exception
             throw new WrongCommandException("list", true);

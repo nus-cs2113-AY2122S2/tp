@@ -73,18 +73,34 @@ public class Display {
 
     // Command related
 
+    public static void helpUnitGood() {
+        System.out.println("------------------------- Unit Good Commands -------------------------");
+        System.out.println("Add Command");
+        System.out.println("\tFormat: add ug/ sku/[SKU] n/[NAME] d/[DESCRIPTION] cap/[CAPACITY]");
+        System.out.println("\tExample: add ug/ sku/WC1 n/Wooden Chair " +
+                "d/Chair made of oak from Europe cap/Medium\n");
+        System.out.println("Remove Command");
+        System.out.println("\tFormat: remove ug/ sku/[SKU]");
+        System.out.println("\tExample: remove ug/ sku/WC1\n");
+        System.out.println("List Command");
+        System.out.println("\tFormat: list ug/\n");
+        System.out.println("View Command");
+        System.out.println("\tFormat: view ug/ sku/[SKU]");
+        System.out.println("\tExample: view ug/ sku/WC1\n");
+    }
+
+    public static void helpGood() {
+        return;
+    }
+
+    public static void helpOrder() {
+        return;
+    }
+
     public static void help() {
-        System.out.println("* Add order `add o/ id/ID r/RECEIVER a/SHIPPING_ADDRESS`\n"
-                + "* Add good `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`\n"
-                + "* Remove order: `remove o/ i/ID`\n"
-                + "* Remove good: `remove g/ i/ID q/QUANTITY`\n"
-                + "* List all orders: `list o/`\n"
-                + "* List all goods: `list g/`\n"
-                + "* View order: `view o/ id/ORDER_ID`\n"
-                + "* View good: `view g/ id/GOOD_ID`\n"
-                + "* Total quantity of goods: `total g/`\n"
-                + "* Total quantity of orders: `total o/`\n"
-                + "* Storage capacity of warehouse: `storage-capacity`");
+        helpUnitGood();
+        helpGood();
+        helpOrder();
     }
 
     public static void tryCommandAgain() {

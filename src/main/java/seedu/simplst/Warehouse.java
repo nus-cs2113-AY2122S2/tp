@@ -60,6 +60,10 @@ public class Warehouse {
 
     }
 
+    public boolean doesUnitGoodExist(String sku) {
+        return unitGoodHashMap.containsKey(sku);
+    }
+
     public boolean isSkuInInventory(String sku) {
         return goodList.containsKey(sku);
     }
@@ -85,6 +89,14 @@ public class Warehouse {
         return uniqueGoods.size();
     }
 
+    public void viewUnitGood(String sku) {
+        if (doesUnitGoodExist(sku)) {
+            System.out.println(unitGoodHashMap.get(sku));
+            System.out.println("Size of good: " + unitGoodHashMap.get(sku).getCapacity());
+        } else {
+            System.out.println("Could not find unit good with given SKU! Please check input SKU!");
+        }
+    }
 
     public void viewOrderById(String orderId) {
         try {
@@ -191,6 +203,17 @@ public class Warehouse {
         }
     }
 
+    public void listUnitGoods() {
+        if (unitGoodHashMap.isEmpty()) {
+            System.out.println("No unit goods have been added for this warehouse!");
+            return;
+        }
+        System.out.println("List of unit goods (in no order):");
+        unitGoodHashMap.forEach((SKU,unitGood) -> {
+            System.out.println(unitGood);
+        });
+    }
+
     public int totalOrder() {
         return orderLists.size();
     }
@@ -215,11 +238,12 @@ public class Warehouse {
         throw new ItemDoesNotExistException();
     }
 
-    public void removeGoodFromInventory(String unitGoodId) throws ItemDoesNotExistException {
-        if (!goodList.containsKey(unitGoodId)) {
+    public void removeGoodFromInventory(String unitGoodSKU) throws ItemDoesNotExistException {
+        if (!unitGoodHashMap.containsKey(unitGoodSKU)) {
             throw new ItemDoesNotExistException();
         }
-        goodList.remove(unitGoodId);
+        unitGoodHashMap.remove(unitGoodSKU);
+        goodList.remove(unitGoodSKU);
     }
 
     public void removeQtyGoodFromInventory(String sku, String qty) throws
@@ -231,12 +255,13 @@ public class Warehouse {
         goodList.get(sku).removeQuantity(qtyNum);
     }
 
+
     /**
      * Removes the entire good.
      *
      * @param sku sku of good to remove
      */
-    public void removeGoods(String sku) {
+    public void removeUnitGood(String sku) {
         try {
             this.removeGoodFromInventory(sku);
         } catch (ItemDoesNotExistException e2) {

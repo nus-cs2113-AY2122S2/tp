@@ -14,7 +14,7 @@ public class RemoveParser extends CommandParser {
     protected void init_extract_params() {
         Regex regexMatch;
         String regex;
-        regex = "(?<flag>[og])/ id/(?<id>\\d*)";
+        regex = "(?<flag>[uog]{1,2})/";
         regexMatch = new Regex(this.userInput, regex);
         this.matches = regexMatch.getGroupValues();
     }
@@ -22,19 +22,13 @@ public class RemoveParser extends CommandParser {
     protected void extract_params() throws WrongCommandException {
         if (matches.get("flag").equals("o")) {
             warehouse.removeOrder(matches.get("id"));
-        } else if (matches.get("flag").equals("g")) {
-            String regexGood = "id/(?<id>\\d*) q/(?<qty>\\d*)";
+        } else if (matches.get("flag").equals("ug")) {
+            String regexGood = "sku/(?<sku>.*)";
             HashMap<String, String> regexGoodMatch = new
                     Regex(userInput, regexGood).getGroupValues();
 
-            String id = regexGoodMatch.get("id");
-            if (regexGoodMatch.containsKey("qty")) {
-                warehouse.removeGoods(id, regexGoodMatch.get("qty"));
-            } else {
-                warehouse.removeGoods(id);
-            }
-
-
+            String sku = regexGoodMatch.get("sku");
+            warehouse.removeUnitGood(sku);
         } else {
             throw new WrongCommandException("remove", true);
         }
