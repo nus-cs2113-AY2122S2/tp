@@ -90,6 +90,7 @@ public class SessionEditCommand extends Command {
             boolean hasSameSessionName = sessionName.equalsIgnoreCase(session.getSessionName());
             if (!hasSameSessionName && isSessionExists) {
                 ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
+                Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONEDIT_DUPLICATE_NAMES_IN_SESSION_LIST);
                 return;
             }
             if (!hasSameSessionName) {
