@@ -22,13 +22,7 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 
-import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
-import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
+import static seedu.mindmymoney.helper.AddCommandInputTests.*;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
@@ -106,21 +100,28 @@ public class AddCommand extends Command {
         if (capitalise(paymentMethod).equals("Cash")) {
             paymentMethod = capitalise(paymentMethod);
         }
+
         String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
         testExpenditureCategory(inputCategory);
+
         String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
         testDescription(description);
+
         String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
         testExpenditureAmount(amountAsString);
+
         String category = capitalise(inputCategory);
+
         float amountAsFloat = Float.parseFloat(amountAsString);
         float amountInt = formatFloat(amountAsFloat);
+
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
         if (!isValidInput(inputTime)) {
             throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
         }
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String time = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
         expenditureList.add(new Expenditure(paymentMethod, category, description, amountInt, time));
 
         if (!paymentMethod.equals("Cash")) {
@@ -146,12 +147,19 @@ public class AddCommand extends Command {
         //Parse data from input
         String cardName = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_NAME,
                 FLAG_OF_CASHBACK);
+
         String cashBack = parseInputWithCommandFlag(addInput, FLAG_OF_CASHBACK,
                 FLAG_OF_CARD_LIMIT);
+        testCashbackAmount(cashBack);
+
         String cardLimit = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_LIMIT,
                 FLAG_OF_CARD_BALANCE);
+        testCreditCardLimit(cardLimit);
+
         String cardBalance = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_BALANCE,
                 FLAG_END_VALUE);
+        testCreditCardBalance(cardBalance);
+
         creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit),
                 Float.parseFloat(cardBalance)));
 
