@@ -2,12 +2,8 @@ package seedu.allonus.expense;
 
 
 
-import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
+import seedu.allonus.expense.exceptions.*;
 import seedu.allonus.storage.StorageFile;
-
-import seedu.allonus.expense.exceptions.ExpenseAmountException;
-import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
-import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
 
 import seedu.allonus.ui.TextUi;
 import java.time.format.DateTimeParseException;
@@ -15,12 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import static seedu.allonus.expense.ExpenseParser.reformatDate;
-import static seedu.allonus.expense.ExpenseParser.isAmountValid;
-import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
-import static seedu.allonus.expense.ExpenseParser.parseFindExpense;
-import static seedu.allonus.expense.ExpenseParser.parseEditExpense;
-import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
+import static seedu.allonus.expense.ExpenseParser.*;
 
 /**
  * The core function of the expense tracker, which executes user commands based on keywords.
@@ -237,7 +228,7 @@ public class ExpenseTracker {
             case ("amount"):
                 try {
                     isAmountValid(newFields[1]);
-                    toBeEdited.setAmount(newFields[1]);
+                    toBeEdited.setAmount(newFields[1].trim());
                     System.out.println(NEW_AMOUNT_VALUE_SET);
                     break;
                 } catch (ExpenseAmountException e) {
@@ -248,10 +239,20 @@ public class ExpenseTracker {
                     break;
                 }
             case ("category"):
+                try {
+                    checkContainSlash(newFields[1].trim());
+                } catch (ExpenseSurroundSlashSpaceException e) {
+                    System.out.println(e.getMessage());
+                }
                 toBeEdited.setCategory(newFields[1]);
                 System.out.println(NEW_CATEGORY_VALUE_SET);
                 break;
             case ("remarks"):
+                try {
+                    checkContainSlash(newFields[1]);
+                } catch (ExpenseSurroundSlashSpaceException e) {
+                    System.out.println(e.getMessage());
+                }
                 toBeEdited.setRemark(newFields[1]);
                 System.out.println(NEW_REMARKS_VALUE_SET);
                 break;
@@ -340,6 +341,8 @@ public class ExpenseTracker {
         } catch (ExpenseEmptyFieldException e) {
             System.out.println(e.getMessage());
         } catch (ExpenseExtraFieldException e) {
+            System.out.println(e.getMessage());
+        } catch (ExpenseSurroundSlashSpaceException e) {
             System.out.println(e.getMessage());
         }
 

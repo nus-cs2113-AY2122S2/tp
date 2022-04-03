@@ -4,6 +4,7 @@ import seedu.allonus.expense.exceptions.ExpenseAmountException;
 import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
 import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
 import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
+import seedu.allonus.expense.exceptions.ExpenseSurroundSlashSpaceException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -61,7 +62,7 @@ public class ExpenseParser {
      */
     public static String[] parseNewExpense(String userInput) throws IndexOutOfBoundsException,
             DateTimeParseException, NumberFormatException, ExpenseAmountException, ExpenseMissingFieldException,
-            ExpenseEmptyFieldException, ExpenseExtraFieldException {
+            ExpenseEmptyFieldException, ExpenseExtraFieldException, ExpenseSurroundSlashSpaceException {
         String rawInput = userInput.split(" ", SPLIT_IN_HALF)[EXPENSE_FIELDS].trim();
         rawInput = " " + rawInput;
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
@@ -95,6 +96,35 @@ public class ExpenseParser {
         }
     }
 
+    public static void checkContainSlash(String userInput) throws ExpenseSurroundSlashSpaceException {
+        for (int i = 0; i < userInput.length(); i++) {
+            lookForIndexOfSlash(userInput, i);
+        }
+    }
+
+    public static void lookForIndexOfSlash(String userInput, int i) throws ExpenseSurroundSlashSpaceException {
+        char c = userInput.charAt(i);
+        if (c == '/') {
+            checkSlashValidity(userInput, i);
+        }
+    }
+
+    public static void checkSlashValidity(String userInput, int i) throws ExpenseSurroundSlashSpaceException {
+        if (i == 0) {
+            throw new ExpenseSurroundSlashSpaceException("/ as first character must be surrounded by white spaces!");
+        }
+        else if (i == userInput.length() - 1) {
+            throw new ExpenseSurroundSlashSpaceException("/ is not allowed as the last non-space character!");
+        }
+        else {
+            char beforeSlash = userInput.charAt(i - 1);
+            char afterSlash = userInput.charAt(i + 1);
+            if (beforeSlash != ' ' || afterSlash != ' ') {
+                throw new ExpenseSurroundSlashSpaceException("/ must be surrounded by white spaces!");
+            }
+        }
+    }
+
     /**
      * Looks for a specific delimiter within the user's input.
      *
@@ -105,7 +135,8 @@ public class ExpenseParser {
      * @throws IndexOutOfBoundsException if contents supplied is missing
      */
     public static String parseKeywordExpense(String userInput, String leftDelimiter, String rightDelimiter)
-            throws ExpenseEmptyFieldException, ExpenseAmountException, ExpenseExtraFieldException {
+            throws ExpenseEmptyFieldException, ExpenseAmountException, ExpenseExtraFieldException,
+            ExpenseSurroundSlashSpaceException {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
         assert leftDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
         assert rightDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
@@ -118,6 +149,7 @@ public class ExpenseParser {
         }
         checkNumberOfDelimiters(rightOfDelimiter, leftDelimiter);
         String[] stripRightOfDelimiter = rightOfDelimiter.split(rightDelimiter, SPLIT_IN_HALF);
+        checkContainSlash(stripRightOfDelimiter[LEFT_SIDE]);
         String result = stripRightOfDelimiter[LEFT_SIDE].trim();
         if (leftDelimiter.equals(AMOUNT_DELIMITER)) {
             float amountCheck = Float.parseFloat(result);
