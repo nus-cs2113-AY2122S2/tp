@@ -88,8 +88,7 @@ public class OrderController extends Controller {
         System.out.println("Deleting an order...");
         if (orderManager.getOrderCount() == 0) {
             System.out.println("No order now.");
-        }
-        else {
+        } else {
             try {
                 int userInputInt = InputParser.getInteger("Enter the order you want to delete: ") - 1;
                 orderManager.deleteOrder(userInputInt);
@@ -116,8 +115,7 @@ public class OrderController extends Controller {
         System.out.println("Getting total price of all orders in the list...");
         if (orderManager.getOrderCount() == 0) {
             System.out.println("No order now.");
-        }
-        else {
+        } else {
             System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
         }
     }
