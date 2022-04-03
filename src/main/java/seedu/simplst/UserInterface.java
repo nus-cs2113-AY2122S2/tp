@@ -1,6 +1,12 @@
 package seedu.simplst;
 
-import seedu.simplst.parsers.*;
+import seedu.simplst.parsers.AddParser;
+import seedu.simplst.parsers.ListParser;
+import seedu.simplst.parsers.RemoveParser;
+import seedu.simplst.parsers.ViewParser;
+import seedu.simplst.parsers.TotalParser;
+import seedu.simplst.parsers.FindParser;
+import seedu.simplst.parsers.HelpParser;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
 import util.exceptions.NullException;

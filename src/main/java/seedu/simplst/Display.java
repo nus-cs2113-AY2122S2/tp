@@ -77,8 +77,8 @@ public class Display {
         System.out.println("------------------------- Unit Good Commands -------------------------");
         System.out.println("Add Command");
         System.out.println("\tFormat: add ug/ sku/[SKU] n/[NAME] d/[DESCRIPTION] cap/[CAPACITY]");
-        System.out.println("\tExample: add ug/ sku/WC1 n/Wooden Chair " +
-                "d/Chair made of oak from Europe cap/Medium\n");
+        System.out.println("\tExample: add ug/ sku/WC1 n/Wooden Chair "
+                + "d/Chair made of oak from Europe cap/Medium\n");
         System.out.println("Remove Command");
         System.out.println("\tFormat: remove ug/ sku/[SKU]");
         System.out.println("\tExample: remove ug/ sku/WC1\n");

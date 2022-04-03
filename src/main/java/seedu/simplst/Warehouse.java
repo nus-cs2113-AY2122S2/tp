@@ -209,7 +209,7 @@ public class Warehouse {
             return;
         }
         System.out.println("List of unit goods (in no order):");
-        unitGoodHashMap.forEach((SKU,unitGood) -> {
+        unitGoodHashMap.forEach((sku,unitGood) -> {
             System.out.println(unitGood);
         });
     }
@@ -238,12 +238,12 @@ public class Warehouse {
         throw new ItemDoesNotExistException();
     }
 
-    public void removeGoodFromInventory(String unitGoodSKU) throws ItemDoesNotExistException {
-        if (!unitGoodHashMap.containsKey(unitGoodSKU)) {
+    public void removeGoodFromInventory(String sku) throws ItemDoesNotExistException {
+        if (!unitGoodHashMap.containsKey(sku)) {
             throw new ItemDoesNotExistException();
         }
-        unitGoodHashMap.remove(unitGoodSKU);
-        goodList.remove(unitGoodSKU);
+        unitGoodHashMap.remove(sku);
+        goodList.remove(sku);
     }
 
     public void removeQtyGoodFromInventory(String sku, String qty) throws
