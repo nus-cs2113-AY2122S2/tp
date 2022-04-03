@@ -12,6 +12,7 @@ import seedu.splitlah.parser.ParserUtils;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class SessionEditCommandTest {
 
@@ -19,11 +20,11 @@ public class SessionEditCommandTest {
 
     private static final String ORIGINAL_SESSION_NAME = "Class outing";
     private static final String ORIGINAL_SESSION_DATE = "15-02-2022";
-    private static final int ORIGINAL_SESSION_PERSONLIST_SIZE = 2;
+    private static final int ORIGINAL_SESSION_PERSON_LIST_SIZE = 2;
 
     private static final String EDITED_SESSION_NAME = "Class gathering";
     private static final String EDITED_SESSION_DATE = "17-02-2022";
-    private static final int EDITED_SESSION_PERSONLIST_SIZE = 3;
+    private static final int EDITED_SESSION_PERSON_LIST_SIZE = 3;
 
     /**
      * Creates a session that is stored and managed by the Manager object.
@@ -58,7 +59,7 @@ public class SessionEditCommandTest {
 
         assertEquals(EDITED_SESSION_NAME, newNameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
-        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
     }
 
     /**
@@ -83,7 +84,7 @@ public class SessionEditCommandTest {
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(EDITED_SESSION_DATE, newDateInSession);
-        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
     }
 
     /**
@@ -115,7 +116,7 @@ public class SessionEditCommandTest {
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
 
         // Checks if newly edited person list in session has size of 3.
-        assertEquals(EDITED_SESSION_PERSONLIST_SIZE, editedSession.getPersonArrayList().size());
+        assertEquals(EDITED_SESSION_PERSON_LIST_SIZE, editedSession.getPersonArrayList().size());
 
         // Check if Person objects in session before edit is still in session after edit
         originalPersonList.removeAll(editedSession.getPersonArrayList());
@@ -142,7 +143,7 @@ public class SessionEditCommandTest {
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
-        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
 
         // Case2: Same session date.
         String validInputWithSameSessionDate = "session /edit /sid 1 /d 15-02-2022";
@@ -155,7 +156,7 @@ public class SessionEditCommandTest {
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
-        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
 
         // Case3: Same person names.
         String validInputWithSamePersonNames = "session /edit /sid 1 /p Alice Bob";
@@ -168,7 +169,20 @@ public class SessionEditCommandTest {
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
-        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
+
+        // Case4: All editable fields remain the same.
+        String validInputWithAllSameFields = "session /edit /sid /n Class outing /d 15-02-2022 /pl Alice Bob";
+        Command commandWithAllSameFields = Parser.getCommand(validInputWithAllSameFields);
+        commandWithAllSameFields.run(manager);
+        unEditedSession = manager.getProfile().getSession(1);
+        nameInSession = unEditedSession.getSessionName();
+        dateInSession = unEditedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
+        personListSizeInSession = unEditedSession.getPersonArrayList().size();
+
+        assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
+        assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
     }
 
     /**
@@ -194,7 +208,7 @@ public class SessionEditCommandTest {
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
-        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
     }
 
     /**
@@ -220,7 +234,7 @@ public class SessionEditCommandTest {
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
-        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
     }
 
     /**
@@ -244,7 +258,33 @@ public class SessionEditCommandTest {
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
-        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
+    }
+
+    /**
+     * Checks if session is not edited when there were invalid names in Person list delimiter.
+     *
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
+    @Test
+    public void run_hasOneInvalidName_sessionRemainsUnedited() throws InvalidDataException {
+        String invalidInput  = "session /edit /sid 1 /pl Alice Bob Charlie Xae4";
+        Command command = Parser.getCommand(invalidInput);
+
+        // Check if a SessionEditCommand instance was returned.
+        assertEquals(SessionEditCommand.class, command.getClass());
+        command.run(manager);
+        Session editedSession = manager.getProfile().getSession(1);
+        String nameInSession = editedSession.getSessionName();
+        String dateInSession = editedSession.getDateCreated().format(ParserUtils.DATE_FORMAT);
+        int personListSizeInSession = editedSession.getPersonArrayList().size();
+
+        assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
+        assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
+        // Charlie should not be added to the list of persons
+        assertFalse(editedSession.getPersonArrayList().contains(Person.createPersonFromString("Charlie")));
     }
 
     /**
@@ -269,6 +309,6 @@ public class SessionEditCommandTest {
 
         assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
-        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
+        assertEquals(ORIGINAL_SESSION_PERSON_LIST_SIZE, personListSizeInSession);
     }
 }
