@@ -28,7 +28,6 @@ public class StorageParser {
             String byDateString = taskData.getString("by_date");
             String doOnStartDateString = taskData.getString("do_date_start");
             String doOnEndDateString = taskData.getString("do_date_end");
-            int index = taskData.getInt("index");
 
             LocalDateTime byDate = (byDateString.isBlank()
                     ? null : LocalDateTime.parse(byDateString, inputWithTimeFormat));
@@ -36,7 +35,7 @@ public class StorageParser {
             LocalDateTime doOnEndDateTime = LocalDateTime.parse(doOnEndDateString, inputWithTimeFormat);
 
             parsedTask = new Task(identifier, description, byDate, doOnStartDateTime,
-                    doOnEndDateTime, index);
+                    doOnEndDateTime);
             String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();

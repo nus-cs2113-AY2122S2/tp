@@ -67,7 +67,6 @@ public class Storage {
         JSONArray tasks = new JSONArray();
         for (Task t : taskList.getTasks()) {
             JSONObject taskToStore = new JSONObject();
-            taskToStore.put("index", t.getIndex());
             taskToStore.put("identifier", t.getIdentifier());
             taskToStore.put("status", t.getStatusIcon());
             taskToStore.put("by_date",
@@ -119,5 +118,6 @@ public class Storage {
                 taskList.importTask(StorageParser.parseSaveData(taskData));
             }
         }
+        writeSaveData(taskList);
     }
 }
