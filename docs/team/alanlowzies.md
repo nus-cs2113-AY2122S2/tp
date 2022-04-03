@@ -75,6 +75,10 @@ and other documents for the co-requsuite module CS2101 Effective Communication f
   - [PR #218 - Branch file bug](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/218#pullrequestreview-929510891)
 
 ### Contributions Beyond the Project Team
+- Provided feedback and potential bug reports to another team's project (CS2113T-T10-3's Mod Happy) as part
+of the Practical Exam Dry-Run (PED).
+<br/><br/>**Screenshot of One of the Bug Reports Given**<br/>![PED Bug Report](../images/ppp/alanlowzies/pedBugReport.png)
+<br/><br/>([Link to the issue on GitHub](https://github.com/alanlowzies/ped/issues/3))
 
 ---
 
