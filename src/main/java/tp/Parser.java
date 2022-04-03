@@ -19,22 +19,24 @@ public class Parser {
         if (fullCommand.contains("add doctor")) {
             String id;
             String dummy = fullCommand.trim();
-            try {
-                int idIndex = dummy.indexOf("/id") + 4;
-                int nameIndex = dummy.indexOf("/n");
-                id = dummy.substring(idIndex, nameIndex).trim();
-                nameIndex += 3;
-                int phoneNumberIndex = dummy.indexOf("/ph");
-                String name = dummy.substring(nameIndex, phoneNumberIndex).trim();
-                phoneNumberIndex += 4;
-                int emailIndex = dummy.indexOf("/e");
-                String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
-                emailIndex += 3;
-                String email = dummy.substring(emailIndex).trim();
-                return new AddDoctorCommand(id, name, phoneNumber, email, false);
-            } catch (Exception e) {
-                System.out.println("The input format of the doctor information is wrong.");
+            if(dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
+                || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
+                    || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
+                throw new IHospitalException("The format of input is wrong, can check the order");
             }
+
+            int idIndex = dummy.indexOf("/id") + 4;
+            int nameIndex = dummy.indexOf("/n");
+            id = dummy.substring(idIndex, nameIndex).trim();
+            nameIndex += 3;
+            int phoneNumberIndex = dummy.indexOf("/ph");
+            String name = dummy.substring(nameIndex, phoneNumberIndex).trim();
+            phoneNumberIndex += 4;
+            int emailIndex = dummy.indexOf("/e");
+            String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
+            emailIndex += 3;
+            String email = dummy.substring(emailIndex).trim();
+            return new AddDoctorCommand(id, name, phoneNumber, email, false);
 
         } else if (fullCommand.contains("get") && fullCommand.contains("appointment")) {
             //get appointment /d 123456
