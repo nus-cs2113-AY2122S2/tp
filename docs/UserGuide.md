@@ -224,10 +224,10 @@ Edits an existing session so that you can change the details of a session.<br>
 >- There are 3 editable fields: _session name_, _session date_ and the _list of participants_ in the session.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
->- When editing the _list of participants_, existing participants, including the group that was declared when
->  creating the session, has to be included.
+>- When editing the _list of participants_, existing participants, including those part of the group declared when
+>  creating the session, must be included.
 >  - Activities may have been created using participants in the list, hence the _list of participants_ can only expand
->    and not shrink. This is to prevent any bugs when editing a session.
+>    and not shrink. This is to prevent any inconsistencies to activities in the session.
 >  - Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
 >    and you wish to edit it to include Charlie, a valid edit command would be: <br>
 >    `session /edit /sid 1 /pl Alice Bob Charlie`.
@@ -346,8 +346,7 @@ There are 2 ways that you can create an activity:
 >  - Example: Alice paid for a movie which she watched with Bob in a session with a session unique identifier of 1,
 >    costing a total of $20. The correct command format is: <br>
 >    `activity /create /sid 1 /n movie /p Alice /i Alice Bob /co 20`
->- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
->  in the calculations.
+>- All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 
 <br>
 
@@ -540,9 +539,8 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <hr>
 
 ## _Group Management_
-> A group represents one or more individuals. The only benefit of a group is to quickly identify a group of individuals
+> A group represents one or more individuals. The only purpose of a group is to quickly identify a group of individuals
 > without having to manually enter their details one by one when creating a session.
-> This is mainly to improve user experience when using SplitLah.
 
 <br>
 
