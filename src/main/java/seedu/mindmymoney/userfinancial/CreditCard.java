@@ -15,14 +15,12 @@ public class CreditCard implements MindMyMoneySerializable {
     private float monthlyCardLimit;
     private double cashback;
     private String nameOfCard;
-    private float balance;
     private float totalExpenditure = 0;
 
-    public CreditCard(String nameOfCard, double cashback, float monthlyCardLimit, float balance) {
+    public CreditCard(String nameOfCard, double cashback, float monthlyCardLimit) {
         setNameOfCard(nameOfCard);
         setCashback(cashback);
         setMonthlyCardLimit(monthlyCardLimit);
-        setBalance(balance);
     }
 
     public void setNameOfCard(String nameOfCard) {
@@ -49,12 +47,12 @@ public class CreditCard implements MindMyMoneySerializable {
         return monthlyCardLimit;
     }
 
-    public void setBalance(float balance) {
-        this.balance = balance;
+    public float getTotalExpenditure() {
+        return totalExpenditure;
     }
 
-    public float getBalance() {
-        return balance;
+    public float getBalanceLeft() {
+        return monthlyCardLimit - totalExpenditure;
     }
 
     public void addExpenditure(float amount) {
@@ -72,8 +70,7 @@ public class CreditCard implements MindMyMoneySerializable {
     @Override
     public String toString() {
         return "Name: " + getNameOfCard() + " [Cashback: " + getCashback() +  "%] [Cashback gained: $"
-                + getTotalCashback() + "] [Card limit: $" + getMonthlyCardLimit() + "] [Card balance: $" + getBalance()
-                + "]\n";
+                + getTotalCashback() + "] [Card limit: $" + getMonthlyCardLimit() + "]\n";
     }
 
     /**
@@ -85,7 +82,6 @@ public class CreditCard implements MindMyMoneySerializable {
         plist.addProperty("monthlyCardLimit", Float.toString(monthlyCardLimit));
         plist.addProperty("cashback", Double.toString(cashback));
         plist.addProperty("nameOfCard", nameOfCard);
-        plist.addProperty("balance", Float.toString(balance));
         plist.addProperty("totalExpenditure", Float.toString(totalExpenditure));
         return plist.serialize();
     }
@@ -101,8 +97,7 @@ public class CreditCard implements MindMyMoneySerializable {
         try {
             CreditCard cc = new CreditCard(plist.getValue("nameOfCard"),
                     Double.parseDouble(plist.getValue("cashback")),
-                    Float.parseFloat(plist.getValue("monthlyCardLimit")),
-                    Float.parseFloat(plist.getValue("balance")));
+                    Float.parseFloat(plist.getValue("monthlyCardLimit")));
             cc.totalExpenditure = Float.parseFloat(plist.getValue("totalExpenditure"));
             return cc;
         } catch (NumberFormatException e) {

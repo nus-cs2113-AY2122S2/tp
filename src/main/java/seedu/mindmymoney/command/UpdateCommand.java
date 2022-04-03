@@ -24,7 +24,6 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_NAME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_LIMIT;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
 
 import static seedu.mindmymoney.constants.Indexes.SPLIT_LIMIT;
 import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
@@ -34,7 +33,6 @@ import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 import static seedu.mindmymoney.data.CreditCardList.isEqualName;
 import static seedu.mindmymoney.data.CreditCardList.isEqualCashback;
 import static seedu.mindmymoney.data.CreditCardList.isEqualCardLimit;
-import static seedu.mindmymoney.data.CreditCardList.isEqualBalance;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualCategory;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualPaymentMethod;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualDescription;
@@ -122,7 +120,7 @@ public class UpdateCommand extends Command {
             testDescription(newDescription);
 
             String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-            testExpenditureAmount(newAmountAsString);
+            testExpenditureAmount(newAmountAsString ,newPaymentMethod, creditCardList);
             float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
 
             String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
@@ -195,20 +193,22 @@ public class UpdateCommand extends Command {
             String newCashBack = parseInputWithCommandFlag(updateInput, FLAG_OF_CASHBACK,
                     FLAG_OF_CARD_LIMIT);
             String newCardLimit = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_LIMIT,
-                    FLAG_OF_CARD_BALANCE);
-            String newCardBalance = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_BALANCE,
                     FLAG_END_VALUE);
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
+
             double newCashBackAsDouble = Double.parseDouble(newCashBack);
             float newCardLimitAsFloat = Float.parseFloat(newCardLimit);
-            float newCardBalanceAsFloat = Float.parseFloat(newCardBalance);
-            if (isSimilarCreditCard(indexToUpdate, newCardName, newCashBackAsDouble, newCardLimitAsFloat,
-                    newCardBalanceAsFloat)) {
+
+            CreditCard oldCreditCard = creditCardList.get(indexToUpdate);
+            if (oldCreditCard.getTotalExpenditure() > newCardLimitAsFloat) {
+                throw new MindMyMoneyException("Current spending has already exceeded the new limit!");
+            }
+            if (isSimilarCreditCard(indexToUpdate, newCardName, newCashBackAsDouble, newCardLimitAsFloat)) {
                 throw new MindMyMoneyException("Credit Card fields to be updated is similar to the credit card in "
                         + "the list.\n" + "Please make sure the field descriptions you want to change are different.");
             }
             CreditCard newCreditCard = new CreditCard(newCardName, newCashBackAsDouble,
-                    newCardLimitAsFloat, newCardBalanceAsFloat);
+                    newCardLimitAsFloat);
 
             creditCardList.set(indexToUpdate, newCreditCard);
             System.out.println(PrintStrings.LINE + "Successfully set credit card " + indexAsString + " to :\n"
@@ -229,15 +229,12 @@ public class UpdateCommand extends Command {
      * @param newCardName new card name field to be updated.
      * @param newCashback new cash back field to be updated.
      * @param newCardLimit new card limit field to be updated.
-     * @param newCardBalance new card balance field to be updated.
      * @return true if fields are similar, false otherwise.
      */
-    public boolean isSimilarCreditCard(int index, String newCardName, double newCashback, float newCardLimit,
-                             float newCardBalance) {
+    public boolean isSimilarCreditCard(int index, String newCardName, double newCashback, float newCardLimit) {
         if (isEqualName(creditCardList, index, newCardName)
                 && isEqualCashback(creditCardList, index, newCashback)
-                && isEqualCardLimit(creditCardList, index, newCardLimit)
-                && isEqualBalance(creditCardList, index, newCardBalance)) {
+                && isEqualCardLimit(creditCardList, index, newCardLimit)) {
             return true;
         }
         return false;

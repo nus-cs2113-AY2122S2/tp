@@ -11,7 +11,6 @@ import seedu.mindmymoney.userfinancial.User;
 
 import static seedu.mindmymoney.constants.Flags.FLAG_END_VALUE;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_AMOUNT;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_LIMIT;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_NAME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
@@ -75,18 +74,21 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Updates the total expenditure field in the credit card specified in the expenditure item.
+     * Updates the total expenditure field in the credit card specified in the expenditure item and returns
+     * the balance left.
      *
      * @param cardName Name of credit card to be updated.
      * @param amount amount of new expenditure.
+     * @return The credit card balance left.
      * @throws MindMyMoneyException when the card is not found in user's credit card list.
      */
-    private void updateCreditCardTotalExpenditure(String cardName, float amount) throws MindMyMoneyException {
+    private float updateCreditCardTotalExpenditure(String cardName, float amount) throws MindMyMoneyException {
         CreditCard creditCard = creditCardList.get(cardName);
         if (creditCard == null) {
             throw new MindMyMoneyException("Invalid Card Name!");
         }
         creditCard.addExpenditure(amount);
+        return creditCard.getBalanceLeft();
     }
 
     /**
@@ -117,12 +119,12 @@ public class AddCommand extends Command {
         testDescription(description);
 
         String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-        testExpenditureAmount(amountAsString);
+        testExpenditureAmount(amountAsString, paymentMethod, creditCardList);
 
         String category = capitalise(inputCategory);
 
         float amountAsFloat = Float.parseFloat(amountAsString);
-        float amountInt = formatFloat(amountAsFloat);
+        float amountFloat = formatFloat(amountAsFloat);
 
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
         if (!isValidInput(inputTime)) {
@@ -131,19 +133,20 @@ public class AddCommand extends Command {
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String time = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        expenditureList.add(new Expenditure(paymentMethod, category, description, amountInt, time));
-
-        if (!paymentMethod.equals("Cash")) {
-            updateCreditCardTotalExpenditure(paymentMethod, amountInt);
-        }
+        expenditureList.add(new Expenditure(paymentMethod, category, description, amountFloat, time));
 
         System.out.println("Successfully added: \n\n"
-            + "Description: " + description + "\n"
-            + "Amount: $" + amountInt + "\n"
-            + "Category: " + category + "\n"
-            + "Payment method: " + paymentMethod + "\n"
-            + "Date: " + time + "\n\n"
-            + "into the account");
+                + "Description: " + description + "\n"
+                + "Amount: $" + amountFloat + "\n"
+                + "Category: " + category + "\n"
+                + "Payment method: " + paymentMethod + "\n"
+                + "Date: " + time + "\n\n"
+                + "into the account\n");
+
+        if (!paymentMethod.equals("Cash")) {
+            float balanceLeft = updateCreditCardTotalExpenditure(paymentMethod, amountFloat);
+            System.out.printf(paymentMethod + " has a balance of $%.2f left%n", balanceLeft);
+        }
         System.out.print(System.lineSeparator());
     }
 
@@ -162,21 +165,15 @@ public class AddCommand extends Command {
         testCashbackAmount(cashBack);
 
         final String cardLimit = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_LIMIT,
-                FLAG_OF_CARD_BALANCE);
+                FLAG_END_VALUE);
         testCreditCardLimit(cardLimit);
 
-        final String cardBalance = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_BALANCE,
-                FLAG_END_VALUE);
-        testCreditCardBalance(cardBalance);
-
-        creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit),
-                Float.parseFloat(cardBalance)));
+        creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit)));
 
         System.out.println("Successfully added: \n\n"
                 + "Credit card: " + cardName + "\n"
                 + "Cash back: " + cashBack + "%\n"
-                + "Card limit: $" + cardLimit + "\n"
-                + "Card balance: $" + cardBalance + "\n\n"
+                + "Card limit: $" + cardLimit + "\n\n"
                 + "into the account");
         System.out.print(System.lineSeparator());
     }

@@ -2,7 +2,6 @@ package seedu.mindmymoney.data;
 
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.userfinancial.CreditCard;
-import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -133,18 +132,6 @@ public class CreditCardList {
      */
     public static boolean isEqualCardLimit(CreditCardList creditCardList, int index, float cardLimit) {
         return creditCardList.get(index).getMonthlyCardLimit() == cardLimit;
-    }
-
-    /**
-     * Checks if balance is equal.
-     *
-     * @param creditCardList List of credit card details.
-     * @param index Index of credit card list item.
-     * @param balance Balance to compare with.
-     * @return True if balance is equal, false otherwise.
-     */
-    public static boolean isEqualBalance(CreditCardList creditCardList, int index, float balance) {
-        return creditCardList.get(index).getBalance() == balance;
     }
 
     /**
