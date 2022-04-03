@@ -26,6 +26,7 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 * [How to use this user guide](#how-to-use-this-user-guide)
 * [Quick Notes](#quick-notes)
 * [Quick Start](#quick-start)
+* [Warnings](#warnings)
 * [How SplitLah works](#how-splitlah-works)
 * [Features](#features)
   * [Session Management](#session-management)
@@ -69,18 +70,32 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 
 ## Quick Notes
 - Allowed characters for values:
-    - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
-    - Decimals: `3.5`
-    - Whitespace: `Birthday party`
+  - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
+    - Names of participants can only contain: `A-Z`, `a-z`
+  - Decimals (up to 2 decimal places): `3.5`, `3.95`
+  - Dates (DD-MM-YYYY or today): `02-04-2022`, `today`
+  - Whitespace: `Birthday party`
 - A forward slash `/` indicates a delimiter and is used to separate commands into parts.
   Each command's documentation specifies the required delimiters and their purpose.
-    - Example: `/n`, `/sid`
+  - Example: `/n`, `/sid`
+  - Therefore, the forward slash `/` should **only** be used to indicate the delimiters,
+    and **never** in the arguments.
 - Parameters enclosed in `[ ]` must be supplied by the user.
-    - Example: `[SESSION_ID]`
+  - Example: `[SESSION_ID]`
 - Parameters with an ellipsis `...` indicate that the user can supply multiple values.
-    - Example: `[COST1 COST2 ...]`
+  - Example: `[COST1 COST2 ...]`
 - Parameters enclosed within `[<` and `>]` indicates that the arguments are optional.
-    - Example: `[</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+  - Example: `[</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+- Parameters enclosed within `{` and `}` indicates that at least one of the delimiters
+  and their respective arguments have to be supplied.
+  - Example: `{/pl [NAME1 NAME2 ...] /gid [GROUD_ID]}`
+
+## Warnings
+- If the save file cannot be created, **nothing will be saved** during the runtime of SplitLah.
+- The save file is **not meant to be read or edited**.
+  - If the save file is edited, the application will not be able to load the corrupted save file.
+  - A corrupted save file will then be replaced with a new save file upon running SplitLah,
+    **all previously saved information will be lost**.
 
 ## Quick Start
 
@@ -123,13 +138,15 @@ displayed in an easy-to-read summary.
 ### Creating a session: `session /create`
 Creates a session so that you can manage your group outings using SplitLah. <br>
 
-> Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...] [</gid [GROUD_ID]>]`
+> Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] {/pl [NAME1 NAME2 ...] /gid [GROUD_ID]}`
 >* `[SESSION_NAME]` refers to the name of the session.
 >  * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
 >  * The format of the date must be in `DD-MM-YYYY`.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
 >  * Each individual name is **case-insensitive**.
+>* `[GROUP_ID]` refers to the unique identifier of the group.
+>  * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
  
 <br>
 
@@ -165,7 +182,7 @@ Deletes an existing session so that you can remove sessions that you no longer n
 
 >Format: `session /delete /sid [SESSION_ID]`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
+>   * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 
 <br>
 
@@ -187,15 +204,15 @@ Deletes an existing session so that you can remove sessions that you no longer n
 ### Editing a session: `session /edit`
 Edits an existing session so that you can change the details of a session.<br>
 
->Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`
+>Format: `session /edit /sid [SESSION_ID] {/n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
+>  * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[SESSION_NAME]` refers to the name of the session.
-   >  * The session name is **case-insensitive**.
+>  * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
-   >  * The format of the date must be in `DD-MM-YYYY`.
+>  * The format of the date must be in `DD-MM-YYYY`.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
-   >  * Each individual name is **case-insensitive**.
+>  * Each individual name is **case-insensitive**.
 
 <br>
 
@@ -207,10 +224,17 @@ Edits an existing session so that you can change the details of a session.<br>
 >- There are 3 editable fields: _session name_, _session date_ and the _list of participants_ in the session.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
->- When editing the _list of participants_, existing participants must be included in the command.
->  - Example: If the session previously created had Alice and Bob with session unique identifier of 1 
->    and you wish to edit it to include Charlie, a valid edit command would be
-     `session /edit /sid 1 /pl Alice Bob Charlie`.
+>- When editing the _list of participants_, existing participants, including those part of the group declared when
+>  creating the session, must be included.
+>  - Activities may have been created using participants in the list, hence the _list of participants_ can only expand
+>    and not shrink. This is to prevent introducing any inconsistencies to activities in the session.
+>  - Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
+>    and you wish to edit it to include Charlie, a valid edit command would be: <br>
+>    `session /edit /sid 1 /pl Alice Bob Charlie`.
+>  - Example 2: If the session with session unique identifier of 1 has been created with
+>    Alice and a group consisting of Bob and Charlie, and you wish to edit it to include Mallory,
+>    a valid edit command would be: <br>
+>    `session /edit /sid 1 /pl Alice Bob Charlie Mallory`.
 > 
 > **⚠️Warning:**
 > - This action is irreversible. The session is edited immediately after entering this command.
@@ -308,17 +332,21 @@ There are 2 ways that you can create an activity:
 
 > **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
-   it.
->- The `[ACTIVITY_NAME]` should be unique across all activities.
+>  it.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
-   `[SESSION_ID]`.
+>  `[SESSION_ID]`.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
->   - Example: `Alice Tan` is not allowed.
->- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` can only have a maximum of 12 digits before
-   and 2 digits after the decimal point, if any.
->- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
-   with a maximum of 3 digits before and 2 after the decimal point, if any.
+>  - Example: `Alice Tan` is not allowed.
+>- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
+>  and 2 digits after the decimal point, if any.
+>- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that range from 0 to 100,
+>  with a maximum of 3 digits before and 2 after the decimal point, if any.
+>- If the payer is also involved in the activity, the payer's name has to be included in the list of participants
+>  - Example: Alice paid for a movie which she watched with Bob in a session with a session unique identifier of 1,
+>    costing a total of $20. The correct command format is: <br>
+>    `activity /create /sid 1 /n movie /p Alice /i Alice Bob /co 20`
+>- All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 
 <br>
 
@@ -399,16 +427,17 @@ There are 2 ways that you can edit an activity:
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
      it.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
->- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >   - Example: `Alice Tan` is not allowed.
->- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` can only have a maximum of 12 digits before
+>- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
->- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
+>- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that can only range from 0 to 100,
    with a maximum of 3 digits before and 2 after the decimal point, if any.
+>- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
+>  in the calculations.
 >
 > **⚠️Warnings:**
 >- All fields must be supplied in the command, not just the ones you wish to edit.
@@ -490,8 +519,10 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 
 <br>
 
-> **💡 Note:**
+> **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
+>- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
+>  in the calculations.
 
 <br>
 
@@ -508,8 +539,8 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <hr>
 
 ## _Group Management_
-> A group represents one or more individuals. Several commands use groups to quickly identify a group of individuals
-  without having to manually enter their details one by one.
+> A group represents one or more individuals. The only purpose of a group is to quickly identify a group of individuals
+> without having to manually enter their details one by one when creating a session.
 
 <br>
 
@@ -577,11 +608,14 @@ Edits an existing group so that you can change the details of a group.<br>
 <br>
 
 > **💡 Notes:**
-> - A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
-> - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
-> - There are 2 editable fields: _group name_ and the _list of individuals_ in the group.
+>- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
+>- Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
+>- There are 2 editable fields: _group name_ and the _list of individuals_ in the group.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
+>- Editing groups **does not** affect sessions.
+>  - If a session has been created with the group that you are editing,
+>    editing the group does not edit the _list of participants_ in the session.
 >
 > **⚠️Warning:**
 > - This action is irreversible. The group is edited immediately after entering this command.
@@ -678,9 +712,9 @@ Quits the application.<br>
 
 | Action                                  | Format                                                                                                                                                                                                                                  |
 |-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Create a new session                    | Format: `session /create /n [SESSION_NAME] /d [DATE] /pl [NAME1 NAME2 …] [</gid [GROUP_ID]>]`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Warren Ivan Roy`                                                            |
+| Create a new session                    | Format: `session /create /n [SESSION_NAME] /d [DATE] {/pl [NAME1 NAME2 …] /gid [GROUP_ID]}`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Warren Ivan Roy`                                                              |
 | Delete an existing session              | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                                                    |
-| Edit an existing session                | Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`<br><br> Example: `session /edit /sid 1 /n Class gathering /d 16-03-2022 /pl Alice Bob Charlie`                           |
+| Edit an existing session                | Format: `session /edit /sid [SESSION_ID] {/n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}`<br><br> Example: `session /edit /sid 1 /n Class gathering /d 16-03-2022 /pl Alice Bob Charlie`                                     |
 | View an existing session                | Format: `session /view /sid [SESSION_ID]`<br><br>Example: `session /view /sid 1`                                                                                                                                                        |
 | List all sessions                       | Format: `session /list`                                                                                                                                                                                                                 |
 | Create activity (split costs evenly)    | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /co [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /co 7.5`                               |
