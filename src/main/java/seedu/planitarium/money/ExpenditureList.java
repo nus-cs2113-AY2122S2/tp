@@ -8,6 +8,7 @@ import seedu.planitarium.global.Constants;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 
 public class ExpenditureList extends MoneyList {
@@ -73,6 +74,7 @@ public class ExpenditureList extends MoneyList {
      * @return The total cost of all expenditure in the list
      */
     public Double getTotalExpenditure() {
+        updateList();
         logger.log(Level.INFO, LOG_GET_TOTAL_EXP);
         Double totalAmount = 0.0;
         for (Expenditure item : expenditureArrayList) {
@@ -85,6 +87,7 @@ public class ExpenditureList extends MoneyList {
      * Prints all expenditure entry in the person's list.
      */
     public void printExpenditureList() {
+        updateList();
         logger.log(Level.INFO, LOG_PRINT_LIST);
         int listIndex = 1;
         for (Expenditure item : expenditureArrayList) {
@@ -98,6 +101,7 @@ public class ExpenditureList extends MoneyList {
      * @return The number of expenditure entries
      */
     public int getNumberOfExpenditures() {
+        updateList();
         logger.log(Level.INFO, LOG_GET_NUM_EXP);
         return numberOfExpenditures;
     }
@@ -196,11 +200,21 @@ public class ExpenditureList extends MoneyList {
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
         logger.log(Level.INFO, LOG_ASSERT_PASSED);
-        editExpDesc(index, description);
-        editExpAmount(index, amount);
-        editExpCat(index, category);
-        editExpPerm(index, isPermanent);
-        System.out.println("Your Expenditure have been edited");
+        boolean isDescEdited = editExpDesc(index, description);
+        boolean isAmountEdited = editExpAmount(index, amount);
+        boolean isCatEdited = editExpCat(index, category);
+        boolean isPermEdited = editExpPerm(index, isPermanent);
+        printEditMsg(index, isDescEdited, isAmountEdited, isCatEdited, isPermEdited);
+    }
+
+    private void printEditMsg(int index, boolean isDescEdited, boolean isAmountEdited,
+                              boolean isCatEdited, boolean isPermEdited) {
+        if (isDescEdited || isAmountEdited || isCatEdited || isPermEdited) {
+            System.out.println("Your Expenditure have been edited");
+            System.out.println(expenditureArrayList.get(index - 1));
+            return;
+        }
+        System.out.println("No changes have been made.");
     }
 
     /**
@@ -208,11 +222,14 @@ public class ExpenditureList extends MoneyList {
      *
      * @param index       The expenditure's index in the list
      * @param isPermanent The expenditure's recurring status
+     * @return true if recurring status have been edited, false otherwise
      */
-    private void editExpPerm(int index, Boolean isPermanent) {
+    private boolean editExpPerm(int index, Boolean isPermanent) {
         if (isPermanent != null) {
             expenditureArrayList.get(index - 1).setPermanent(isPermanent);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -220,11 +237,14 @@ public class ExpenditureList extends MoneyList {
      *
      * @param index    The expenditure's index in the list
      * @param category The expenditure's category
+     * @return true if category have been edited, false otherwise
      */
-    private void editExpCat(int index, Integer category) {
+    private boolean editExpCat(int index, Integer category) {
         if (category != null) {
             expenditureArrayList.get(index - 1).setCategory(category);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -232,11 +252,14 @@ public class ExpenditureList extends MoneyList {
      *
      * @param index  The expenditure's index in the list
      * @param amount The expenditure's amount
+     * @return true if amount have been edited, false otherwise
      */
-    private void editExpAmount(int index, Double amount) {
+    private boolean editExpAmount(int index, Double amount) {
         if (amount != null) {
             expenditureArrayList.get(index - 1).setAmount(amount);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -244,11 +267,14 @@ public class ExpenditureList extends MoneyList {
      *
      * @param index       The expenditure's index in the list
      * @param description The expenditure's description
+     * @return true if description have been edited, false otherwise
      */
-    private void editExpDesc(int index, String description) {
+    private boolean editExpDesc(int index, String description) {
         if (description != null) {
             expenditureArrayList.get(index - 1).setDescription(description);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -258,6 +284,7 @@ public class ExpenditureList extends MoneyList {
      * @param category    The user's specified category
      */
     public void find(String description, Integer category) {
+        updateList();
         logger.log(Level.INFO, LOG_FIND);
         if (category == 0) {
             matchString(description);
@@ -304,8 +331,9 @@ public class ExpenditureList extends MoneyList {
      * Iterates through expenditure list and removes all expired expenditure.
      */
     public void updateList() {
-        for (Expenditure item : expenditureArrayList) {
-            checkExpenditureDate(item);
+        for (Iterator<Expenditure> iterator = expenditureArrayList.iterator(); iterator.hasNext(); ) {
+            Expenditure item = iterator.next();
+            checkExpenditureDate(iterator, item);
         }
     }
 
@@ -315,11 +343,11 @@ public class ExpenditureList extends MoneyList {
      *
      * @param item The expenditure object
      */
-    private void checkExpenditureDate(Expenditure item) {
-        LocalDate itemDate = item.getInitDate();
-        if (itemDate.getYear() <= LocalDate.now().getYear()
-                && itemDate.getMonthValue() < LocalDate.now().getMonthValue()) {
-            expenditureArrayList.remove(item);
+    private void checkExpenditureDate(Iterator<Expenditure> iterator, Expenditure item) {
+        int dateBefore = item.getInitDate().compareTo(LocalDate.now().withDayOfMonth(1));
+        if (dateBefore < 0 && !item.isPermanent()) {
+            iterator.remove();
+            numberOfExpenditures--;
         }
     }
 

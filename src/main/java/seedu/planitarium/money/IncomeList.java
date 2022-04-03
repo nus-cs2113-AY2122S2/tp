@@ -8,6 +8,7 @@ import seedu.planitarium.global.Constants;
 import java.lang.invoke.ConstantBootstraps;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 
 public class IncomeList extends MoneyList {
@@ -71,6 +72,7 @@ public class IncomeList extends MoneyList {
      * @return The total amount of all income in the list
      */
     public Double getTotalIncome() {
+        updateList();
         logger.log(Level.INFO, LOG_GET_TOTAL_INC);
         Double totalAmount = 0.0;
         for (Income item : incomeArrayList) {
@@ -83,6 +85,7 @@ public class IncomeList extends MoneyList {
      * Prints all income in the person's income list.
      */
     public void printIncomeList() {
+        updateList();
         logger.log(Level.INFO, LOG_PRINT_LIST);
         int listIndex = 1;
         for (Income item : incomeArrayList) {
@@ -96,6 +99,7 @@ public class IncomeList extends MoneyList {
      * @return The number of income
      */
     public int getNumberOfIncomes() {
+        updateList();
         logger.log(Level.INFO, LOG_GET_NUM_INC);
         return numberOfIncomes;
     }
@@ -181,10 +185,19 @@ public class IncomeList extends MoneyList {
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
         logger.log(Level.INFO, LOG_ASSERT_PASSED);
-        editIncDesc(index, description);
-        editIncAmount(index, amount);
-        editIncPerm(index, isPermanent);
-        System.out.println("Your Income have been edited");
+        boolean isDescEdited = editIncDesc(index, description);
+        boolean isAmountEdited = editIncAmount(index, amount);
+        boolean isPermEdited = editIncPerm(index, isPermanent);
+        printEditMsg(index, isDescEdited, isAmountEdited, isPermEdited);
+    }
+
+    private void printEditMsg(int index, boolean isDescEdited, boolean isAmountEdited, boolean isPermEdited) {
+        if (isDescEdited || isAmountEdited || isPermEdited) {
+            System.out.println("Your Income have been edited");
+            System.out.println(incomeArrayList.get(index - 1));
+            return;
+        }
+        System.out.println("No changes have been made.");
     }
 
     /**
@@ -192,11 +205,14 @@ public class IncomeList extends MoneyList {
      *
      * @param index       The income's index in the list
      * @param isPermanent The income's recurring status
+     * @return true if recurring status have been edited, false otherwise
      */
-    private void editIncPerm(int index, Boolean isPermanent) {
+    private boolean editIncPerm(int index, Boolean isPermanent) {
         if (isPermanent != null) {
             incomeArrayList.get(index - 1).setPermanent(isPermanent);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -204,11 +220,14 @@ public class IncomeList extends MoneyList {
      *
      * @param index  The income's index in the list
      * @param amount The income's amount
+     * @return true if amount have been edited, false otherwise
      */
-    private void editIncAmount(int index, Double amount) {
+    private boolean editIncAmount(int index, Double amount) {
         if (amount != null) {
             incomeArrayList.get(index - 1).setAmount(amount);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -216,11 +235,14 @@ public class IncomeList extends MoneyList {
      *
      * @param index       The income's index in the list
      * @param description The income's description.
+     * @return true if description have been edited, false otherwise
      */
-    private void editIncDesc(int index, String description) {
+    private boolean editIncDesc(int index, String description) {
         if (description != null) {
             incomeArrayList.get(index - 1).setDescription(description);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -229,6 +251,7 @@ public class IncomeList extends MoneyList {
      * @param description The user's search string.
      */
     public void find(String description) {
+        updateList();
         logger.log(Level.INFO, LOG_FIND);
         for (Income item : incomeArrayList) {
             matchString(description, item);
@@ -253,8 +276,9 @@ public class IncomeList extends MoneyList {
      * Iterates through income list and removes all expired income.
      */
     public void updateList() {
-        for (Income item : incomeArrayList) {
-            checkIncomeDate(item);
+        for (Iterator<Income> iterator = incomeArrayList.iterator(); iterator.hasNext(); ) {
+            Income item = iterator.next();
+            checkIncomeDate(iterator, item);
         }
     }
 
@@ -264,11 +288,11 @@ public class IncomeList extends MoneyList {
      *
      * @param item The income object
      */
-    private void checkIncomeDate(Income item) {
-        LocalDate itemDate = item.getInitDate();
-        if (itemDate.getYear() <= LocalDate.now().getYear()
-                && itemDate.getMonthValue() < LocalDate.now().getMonthValue()) {
-            incomeArrayList.remove(item);
+    private void checkIncomeDate(Iterator<Income> iterator, Income item) {
+        int dateBefore = item.getInitDate().compareTo(LocalDate.now().withDayOfMonth(1));
+        if (dateBefore < 0 && !item.isPermanent()) {
+            iterator.remove();
+            numberOfIncomes--;
         }
     }
 

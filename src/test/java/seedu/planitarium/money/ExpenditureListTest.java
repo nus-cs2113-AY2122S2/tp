@@ -169,5 +169,4 @@ class ExpenditureListTest {
         double expectedExp = 25.0;
         assertEquals(expectedExp, totalExp);
     }
-
 }

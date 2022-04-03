@@ -55,6 +55,7 @@ public class Constants {
     public static final double MONEY_ZERO = 0.0;
 
     // For Help component
+    public static final String HELP = "Show all commands: help";
     public static final String ADD_PERSON = "Add a person: add /n NAME /g GROUP_INDEX";
     public static final String DELETE_PERSON = "Delete a person: delete /u USER_INDEX /g GROUP_INDEX";
     public static final String ADD_INCOME = "Add an income addin /u USER_INDEX /g GROUP_INDEX "
@@ -72,7 +73,7 @@ public class Constants {
     public static final String LIST = "List records by person: list /g GROUP_INDEX";
     public static final String OVERVIEW = "List records by group: overview";
     public static final String LISTCAT = "List categories: listcat";
-    public static final String HELP = "Show all commands: help";
+    public static final String FIND = "Searching for details: find /d USER_STRING [/c CATEGORY_INDEX]";
     public static final String EXIT = "Exit program: bye";
 
     // For Command assertion
