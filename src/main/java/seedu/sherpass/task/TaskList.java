@@ -124,8 +124,14 @@ public class TaskList {
         for (Task task : taskList) {
             if (isOnSameDay(task.getDoOnStartDateTime(), taskToCheck.getDoOnStartDateTime())
                     && hasTimeClash(task, taskToCheck.getDoOnStartDateTime(), taskToCheck.getDoOnEndDateTime())) {
-                throw new TimeClashException(task);
+                throw new TimeClashException(ERROR_SCHEDULE_CLASH_MESSAGE + "\nClashing task: " + task);
             }
+        }
+    }
+
+    private void checkTask(Task newTask) throws InvalidInputException {
+        if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
+            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
     }
 
@@ -134,10 +140,8 @@ public class TaskList {
      *
      * @param newTask The new task to be added to the array.
      */
-    public void addTask(Task newTask, Frequency frequency) throws TimeClashException, InvalidInputException {
-        if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
-            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
-        }
+    public void addTask(Task newTask, Frequency frequency) throws InvalidInputException, TimeClashException {
+        checkTask(newTask);
         LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(newTask.getDoOnStartDateTime(),
                 frequency);
         ArrayList<Task> taskListToAdd = new ArrayList<>();
@@ -155,20 +159,15 @@ public class TaskList {
      *
      * @param newTask The loaded task to be added to the array.
      */
-    public void importTask(Task newTask) throws InvalidInputException {
-        if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
-            throw new InvalidInputException(newTask + "\n" + ERROR_START_AFTER_END_TIME_MESSAGE);
-        }
-        try {
-            checkDateTimeClash(tasks, newTask);
-        } catch (TimeClashException exception) {
-            throw new InvalidInputException(ERROR_SCHEDULE_CLASH_MESSAGE + "\n" + exception.getMessage());
-        }
+    public void importTask(Task newTask) throws InvalidInputException, TimeClashException {
+        checkTask(newTask);
+        checkDateTimeClash(tasks, newTask);
+
         tasks.add(newTask);
         updateIndex();
     }
 
-    public Task updateTask(Task taskToUpdate, String taskDescription,
+    private Task updateTask(Task taskToUpdate, String taskDescription,
                            long startDifferenceInSeconds,
                            long endDifferenceInSeconds,
                            LocalDateTime byDate) {

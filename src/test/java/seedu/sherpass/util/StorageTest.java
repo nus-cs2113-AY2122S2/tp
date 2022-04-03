@@ -48,7 +48,7 @@ class StorageTest {
             TaskList actualList = new TaskList();
             try {
                 storage.load(actualList);
-            } catch (IOException e) {
+            } catch (IOException | TimeClashException e) {
                 e.printStackTrace();
             }
             Task task = actualList.getTasks().get(0);

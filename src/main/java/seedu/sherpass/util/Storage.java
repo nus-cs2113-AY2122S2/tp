@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.parser.StorageParser;
@@ -107,7 +108,7 @@ public class Storage {
      * @throws InvalidInputException If the data has missing fields for a task
      * @throws JSONException         If the data file has an invalid JSON format
      */
-    public void load(TaskList taskList) throws IOException, InvalidInputException, JSONException {
+    public void load(TaskList taskList) throws IOException, InvalidInputException, JSONException, TimeClashException {
         List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
         if (dataLines.size() > 0) {
             String dataString = String.join("\n", dataLines);

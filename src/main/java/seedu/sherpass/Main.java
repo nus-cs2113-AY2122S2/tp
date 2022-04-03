@@ -21,8 +21,8 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
-import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_SAVED_FILE_MESSAGE_1;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_SAVED_FILE_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 public class Main {
@@ -47,14 +47,14 @@ public class Main {
         } catch (IOException e) {
             ui.showToUser(ERROR_IO_FAILURE_MESSAGE);
             System.exit(1);
-        } catch (InvalidInputException | JSONException e) {
+        } catch (InvalidInputException | JSONException | TimeClashException e) {
             ui.showToUser(e.getMessage());
-            boolean shouldWipeFile = ui.readYesNoCommand(ERROR_CORRUPT_SAVED_FILE_MESSAGE_1);
+            boolean shouldWipeFile = ui.readYesNoCommand(ERROR_INVALID_SAVED_FILE_MESSAGE_1);
             if (shouldWipeFile) {
                 storage.wipeSaveData();
                 taskList = new TaskList();
             } else {
-                ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_2);
+                ui.showToUser(ERROR_INVALID_SAVED_FILE_MESSAGE_2);
                 System.exit(1);
             }
         }

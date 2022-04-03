@@ -70,12 +70,8 @@ public class AddCommand extends Command {
                     + newTask + "\n"
                     + "Now you have " + taskList.getSize() + " task(s) in your schedule!");
             storage.writeSaveData(taskList);
-        } catch (TimeClashException exception) {
-            ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
-            ui.showLine();
+        } catch (TimeClashException | InvalidInputException exception) {
             ui.showToUser("Clashing task: " + exception.getMessage());
-        } catch (InvalidInputException exception) {
-            ui.showToUser(exception.getMessage());
         }
     }
 }
