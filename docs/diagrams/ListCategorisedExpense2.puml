@@ -18,27 +18,27 @@ package " " {
     class List2 as "__:ExpenditureList__"
     class Exp0 as "__:Expenditure__" #LIGHTGREEN {
         description = "Lunch"
-        category = 1
+        category = 2
     }
     class Exp1 as "__:Expenditure__" #LIGHTGREEN {
         description = "Dinner"
-        category = 1
+        category = 2
     }
     class Exp2 as "__:Expenditure__" #LIGHTGREEN {
         description = "Movies"
-        category = 5
+        category = 6
     }
     class Exp3 as "__:Expenditure__" #LIGHTGREEN {
         description = "Electric Bills"
-        category = 2
+        category = 3
     }
     class Exp4 as "__:Expenditure__" #LIGHTGREEN {
         description = "Lunch"
-        category = 1
+        category = 2
     }
     class Exp5 as "__:Expenditure__" #LIGHTGREEN {
         description = "Dinner"
-        category = 1
+        category = 2
     }
 }
 

@@ -1,4 +1,12 @@
-# Developer Guide
+# PlanITarium Developer Guide
+
+---
+
+# Introductions
+
+This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
+workings of PlanITarium such that engineers can understand the various implementations in detail and work on the
+project.
 
 ---
 
@@ -6,8 +14,9 @@
 
 In this project, we have referenced the following materials:
 
-* [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
-* [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html)
+* Developer Guide sample from [Address Book (Level-3)](
+https://se-education.org/addressbook-level3/DeveloperGuide.html)
+* PlantUML Tutorial at [se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html)
 * [Our individual projects](AboutUs.md)
 
 ---
@@ -35,9 +44,9 @@ is responsible for,
 
 [`UI`](#UI-Component) is responsible for the UI of PlanITarium.
 
-[`Commands`](#Commands-Component) is responsible for handling and executing of commands.
+[`Commands`](#Commands-Component) is responsible for the handling and executing of commands.
 
-[`Parser`](#Parser-Component) is responsible for parsing and validating user input.
+[`Parser`](#Parser-Component) is responsible for the parsing and validating user input.
 
 [`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
 
@@ -47,8 +56,8 @@ is responsible for,
 
 **How the components interact with each other**
 
-The slightly simplified *Sequence Diagram* below shows how the components interact for the scenario where the user issues
-the command `add /n Alice /g 2`.
+The following Sequence Diagram, with the specific classes and methods abstracted, shows a high-level view on how the 
+components interact for the scenario where the user issues the command `add /g 2 /n Alice`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 
@@ -56,8 +65,7 @@ Each of the main components shown in the diagram above is defined and implemente
 component. The section below provides a more in-depth details on how the components interact with one another.
 
 Each component may have several other classes underneath it, belonging to the same logical grouping, to reduce coupling.
-For example, the `MoneyList` component is defined as an abstract class that is extended by `IncomeList`
-and `ExpenditureList`.
+For example, the `Money` component is defined as an abstract class that is extended by `Income` and `Expenditure`.
 
 ### UI Component
 
@@ -118,6 +126,9 @@ required.
 The following Sequence Diagram shows how the classes of the `Parser` component interacts for each user command.
 
 ![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
+
+> :information_source: **Note:** The borders of the Sequence Diagram may look cut-off due to PlantUML limitations.
+> No necessary information has been omitted due to it.
 
 How the `Parser` component is used:
 
@@ -324,7 +335,7 @@ and `Family`. The `Categories` is an enumeration of keys that is used as the exp
 will have an additional integer attribute that acts as an index to a category. Additionally, the following operations
 are implemented:
 
-* `Categories#getLabel(index)` -- Returns the name of the category with this index.
+* `Categories#getLabelForIndex(index)` -- Returns the name of the category with this index.
 * `Money(temp)#getCategory()` -- Returns the category index for this money object.
 * `Money(temp)#getDescription()` -- Returns the description for this money object.
 * `MoneyList(temp)#searchExpense(description, index)` -- Returns a list of expenditures having category index matching
@@ -368,7 +379,7 @@ description. The returned incomes are then appended to the temporary array list.
 ![FindIncomeExpenditure4](images/FindIncomeExpenditure4.png)
 
 Step 5. The iteration, collecting and appending to the temporary array list in step 3 and 4 is repeated until every
-person has been iterated. Finally, `Categories#getLabel(1)` is called so that an appropriate message can be displayed to
+person has been iterated. Finally, `Categories#getLabelForIndex(1)` is called so that an appropriate message can be displayed to
 the user, stating the name of the category, following by a series of print to display the expenditures in this category.
 
 > :information_source: **Note:** If the `index` provided does not map to any existing categories,
@@ -396,16 +407,15 @@ by [`CommandFactory`](#PlaceholderToCommandFactory):
 
 #### Proposed Implementation
 
-The proposed listing categorised expenditure feature is facilitated by `Categories`,
-`Expenditure`, `ExpenditureList`  and `Family`. The `Categories` is an enumeration of keys that is used as the
-expenditure categories. The `Expenditure` will have an additional integer attribute that acts as an index to a category.
-Additionally, the following operations are implemented:
+The proposed listing categorised expenditure feature is facilitated by `Categories`,`Expenditure`, `ExpenditureList`
+and `Family`. The proposed command to be called by the user is `listexp /c CATEGORY_INDEX`.
+The following additional operations will also be implemented:
 
-* `Categories#getLabel(index)` -- Returns the name of the category with this index.
-* `Expenditure#getCategory()` -- Returns the category index for this expense.
+* `Family#listExpenseOfCategory(index)` -- Lists all expenses from the category index.
+* `PersonList#listExpenseOfCategory(index)` -- Wrapper method to get the list of expenses in the category 
+from each person.
 * `ExpenditureList#getExpenseOfCategory(index)` -- Returns a list of expenditures having category index matching the
   index argument.
-* `Family#listExpenseOfCategory(index)` -- Lists all expenses from the category index.
 
 Below is an example usage scenario and how the expenses of a category will be printed.
 
@@ -416,31 +426,31 @@ initialised with two generations being tracked - parents and myGen.
 
 ![ListCategorisedExpense0](images/ListCategorisedExpense0.png)
 
-Step 2. The user executes `listcat /c 1` command to list all expenses in category `1`. The `listcat`
-command will be parsed and calls `Family#listExpenseOfCategory(1)` which would instantiate a temporary array list for
+Step 2. The user executes `listexp /c 2` command to list all expenses in category `2`. The `listexp`
+command will be parsed and calls `Family#listExpenseOfCategory(2)` which would instantiate a temporary array list for
 storing the results of the upcoming search.
 
 ![ListCategorisedExpense1](images/ListCategorisedExpense1.png)
 
-Step 3. After the temporary array list has been created, the generations being tracked will be iterated for `Person`
-objects. The `expenditureList` for a person would be retrieved during that person's iteration
-and `ExpenditureList#getExpenseOfCategory(1)` will be called as `expenditureList`
-extends `ExpenditureList`. This method then iterates through the list and calls
-`Expenditure#getCategory()` on each expenditure, collecting and returning the expenditure if its category matches the
-given index. The returned expenditures are then appended to the temporary array list.
+Step 3. After the temporary array list has been created, `PersonList#listExpenseOfCategory(2)` will be called on each
+generation grouping and each tracked `Person` will be iterated. The `expenditureList` for a person would be retrieved 
+during that person's iteration and `ExpenditureList#getExpenseOfCategory(1)` will be called. This method then iterates 
+through the retrieved expenditure list and calls `Expenditure#getCategory()` on each expenditure, collecting and 
+returning the expenditure if its category matches the target category index. 
+The returned expenditures are then appended to the temporary array list.
 
 ![ListCategorisedExpense2](images/ListCategorisedExpense2.png)
 
 Step 4. The iteration, collecting and appending to the temporary array list in step 3 is repeated until every person has
-been iterated. Finally, `Categories#getLabel(1)` is called so that an appropriate message can be displayed to the user,
+been iterated. Finally, an appropriate message can be displayed to the user,
 stating the name of the category, following by a series of print to display the expenditures in this category.
 
 > :information_source: **Note:** If the `index` provided does not map to any existing categories,
-> then it can be observed that there will never be any results returned. The `listcat` command will
+> then it can be observed that there will never be any results returned. The `listexp` command will
 > check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
 > fails, an error message will be displayed to the user instead of continuing with the execution.
 
-The following sequence diagram shows how the `listcat` operation works after a `ListCatCommand`
+The following sequence diagram shows how the `listexp` operation works after a `ListCatCommand`
 command object has been created by [`CommandFactory`](#Command-Execution):
 
 ![ListCategorisedExpenseSequence](images/ListCategorisedExpenseSequence.png)
@@ -449,7 +459,7 @@ command object has been created by [`CommandFactory`](#Command-Execution):
 
 **Aspect: How to categorise expenses to be listed:**
 
-* **Alternative 1 (current choice):** Adding a category attribute to expenses.
+* **Alternative 1 (current proposal):** Using the category attribute for expenses.
     * Pros: Easy to implement and less memory usage.
     * Cons: May have performance issues as it needs to iterate through every person's expenditure.
 
@@ -558,23 +568,39 @@ IO redirection testing can be performed via the following steps:
 
 ### Target user profile
 
-The target user profile for PlanITarium is young adults who have a family to support.
+* Individuals who are young adults  looking for a fast and easy financial tracker.
+* Individuals who needs a monthly overview on their financial status.
+* Individuals who wish to track the financial status of their family members.
+* Individuals who are experienced typists that can operate the application on a terminal.
 
 ### Value proposition
 
-PlanITarium offers ease of financial tracking for the entire family. It features a single input process for performing 
-tasks, and users will be able to neatly categorise their family members as well as expenditures.
+* Able to track family member's income and expenditure
+* Able to obtain a monthly summary of the family's financial status
+* Able to logically group family members for better management
+* Able to categorise expenditure to assist with financial planning
 
 ---
 
 ## User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
-| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a ... | I want to ...                                   | So that I can ...                               |
+|---------|:---------|:------------------------------------------------|:------------------------------------------------|
+| v1.0    | user     | add people                                      | keep track of individuals                       |
+| v1.0    | user     | add income                                      | keep track of income                            |
+| v1.0    | user     | add expenditure                                 | keep track of expenditure                       |
+| v1.0    | user     | list income                                     | view each individual's income                   |
+| v1.0    | user     | list expenditure                                | view each individual's expenditure              |
+| v1.0    | user     | view my disposable income                       | plan my spending                                |
+| v1.0    | user     | add my family members into different categories | have a clearer view of their finances           |
+| v2.0    | user     | add recurring fixed expenditures and incomes    | not re-add them every month                     |
+| v2.0    | user     | add tags for each record                        | clean them up into different categories         |
+| v2.0    | user     |                  |                                                 |
+| v2.0    | user     |                  |                                                 |
+| v2.0    | user     |                  |                                                 |
+| v2.0    | user     |                  |                                                 |
+| v2.0    | user     |                  |                                                 |
 
- 
 
 ---
 
