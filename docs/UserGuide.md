@@ -61,16 +61,16 @@ The following table describes the **formats** used in this User Guide.
 | Format              | Description                                                                                                                                              |
 |:--------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `/x`                | A forward slash that is appended by a letter denotes a delimiter that should be accompanied by a block term e.g. `/n NAME`.                              |
-| `BLOCK_TERM`        | The terms in upper casing are placeholders parameters for details to be supplied by you e.g. `add /n Alice` instead of `add /n NAME`.                    |
-| `/x BLOCK_TERM`     | The delimiter-term pairs not enclosed in any brackets are compulsory inputs to be supplied by you.                                                       |
-| `[/x BLOCK_TERM]`   | The delimiter-term pairs enclosed in square brackets are optional inputs that you may choose not to provide.                                             |
+| `PARAMETER`         | The parameters in upper casing are placeholders parameters for details to be supplied by you e.g. `add /n Alice` instead of `add /n NAME`.               |
+| `/x PARAMETER`      | The delimiter-parameter pairs not enclosed in any brackets are compulsory inputs to be supplied by you.                                                  |
+| `[/x PARAMETER]`    | The delimiter-parameter pairs enclosed in square brackets are optional inputs that you may choose not to provide.                                        |
 | <code>/p <T&#124;F> | The parameters enclosed in angle brackets indicates that they have fixed values. You may choose any of the values that are separated by a vertical pipe. |
 
 Some additional points to take note of:
 
 * You may provide delimiter-parameter pair in any preferred order.
     * Example: `add /n Alice /g 2`, `add /g 2 /n Alice`
-* If you wish to use a forward slash `/` in any parameters, enclose in whitespaces.
+* If you wish to use a forward slash `/` in any parameters, enclose them in whitespaces.
     * Example: `Bought on / off switch` as a description
 * You need not include any currency symbols and monetary values are in at most 2 decimal places.
 * You may provide duplicate entries such as when you have two family members with the same name. PlanITarium will track
@@ -90,17 +90,17 @@ This section describes each command in detail.
 * Sub-points with :information_source: indicates details that you should take note of.
 * Refer to the following table for more details on the parameters that you need to provide.
 
-| Pair                              | Description                                                                                                                                                                                             |
-|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/n NAME`                         | The name of someone you would like to track.                                                                                                                                                            |
-| `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> You can find the group index from the [overview command](#show-financial-summary-overview).                                   |
-| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [listing records command](#show-all-records-by-group-list).                                               |
-| `/d DESCRIPTION`                  | The description (or name) of the income and expenditure you wish to track.                                                                                                                              |
-| `/c CATEGORY_INDEX`               | An index that refers to a category label such as 'Food and Drinks`.<br/>You can find the category index from the [list categories command](#show-expenditure-categories-listcat).                       |
-| `/i INCOME`                       | The monetary value of the income you wish to track.                                                                                                                                                     |
-| `/e EXPENDITURE`                  | The monetary value of the expenditure that you have made.                                                                                                                                               |
-| `/r (INCOME / EXPENDITURE)_INDEX` | An index that refers to an income or expenditure that you have recorded previously.<br/>You can find this index from the [listing records command](#show-all-records-by-group-list).                    |
-| <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent. |
+| Parameter Glossary                | Description                                                                                                                                                                                                                              |
+|:----------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/n NAME`                         | The name of someone you would like to track.                                                                                                                                                                                             |
+| `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> There are currently three group indexes, numbered from 1 to 3.<br/>You can find the group names from the [overview command](#show-financial-summary-overview). |
+| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [listing records command](#show-all-records-by-group-list).                                                                                |
+| `/d DESCRIPTION`                  | The description (or name) of the income and expenditure you wish to track.                                                                                                                                                               |
+| `/c CATEGORY_INDEX`               | An index that refers to a category label such as 'Food and Drinks`.<br/>You can find the category index from the [list categories command](#show-expenditure-categories-listcat).                                                        |
+| `/i INCOME`                       | The monetary value of the income you wish to track.                                                                                                                                                                                      |
+| `/e EXPENDITURE`                  | The monetary value of the expenditure that you have made.                                                                                                                                                                                |
+| `/r (INCOME / EXPENDITURE)_INDEX` | An index that refers to an income or expenditure that you have recorded previously.<br/>You can find this index from the [listing records command](#show-all-records-by-group-list).                                                     |
+| <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent.                                  |
 
 ---
 
