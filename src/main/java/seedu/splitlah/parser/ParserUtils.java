@@ -48,6 +48,8 @@ public class ParserUtils {
     private static final int PERCENTAGE_ALLOWED_INTEGER_PLACES = 3;
     private static final int TWO_DECIMAL_PLACES = 2;
     static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
+    private static final String REGEX_NUMERIC_VALUE = "[0-9.-]+";
+    private static final String REGEX_PRINTABLE_ASCII_ONLY = "\\A[ -~]*\\z";
     static final int INVALID_INDEX_INDICATOR = -1;
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -126,6 +128,24 @@ public class ParserUtils {
     }
 
     /**
+     * Returns a double represented by the provided input String object.
+     * 
+     * @param input A String object that represents a numeric value.
+     * @return A double represented by the input String object.
+     * @throws NumberFormatException If the provided input String object contains characters that are either
+     *                               non-numeric, not a decimal point or not a negative sign, or
+     *                               if the provided input String object cannot be parsed as a double.
+     */
+    private static double parseDoubleFromString(String input) throws NumberFormatException {
+        assert input != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
+        
+        if (!input.matches(REGEX_NUMERIC_VALUE)) {
+            throw new NumberFormatException();
+        }
+        return Double.parseDouble(input);
+    }
+
+    /**
      * Checks if the given String object representing a real number has at most two decimal places.
      * 
      * @param input A String object representing a real number.
@@ -137,7 +157,7 @@ public class ParserUtils {
         assert input != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
         
         try {
-            double value = Double.parseDouble(input);
+            double value = parseDoubleFromString(input);
         } catch (NumberFormatException exception) {
             return false;
         }
@@ -166,7 +186,7 @@ public class ParserUtils {
         assert places >= 0 : Message.ASSERT_PARSER_PLACES_NEGATIVE;
         
         try {
-            double value = Double.parseDouble(input);
+            double value = parseDoubleFromString(input);
         } catch (NumberFormatException exception) {
             return false;
         }
@@ -211,7 +231,7 @@ public class ParserUtils {
         
         double cost;
         try {
-            cost = Double.parseDouble(input);
+            cost = parseDoubleFromString(input);
         } catch (NumberFormatException exception) {
             throw new InvalidFormatException(ParserErrors.getNonMonetaryErrorMessage(delimiter));
         }
@@ -248,7 +268,7 @@ public class ParserUtils {
 
         double percentage;
         try {
-            percentage = Double.parseDouble(input);
+            percentage = parseDoubleFromString(input);
         } catch (NumberFormatException exception) {
             throw new InvalidFormatException(ParserErrors.getNonPercentageErrorMessage(delimiter));
         }
@@ -558,6 +578,11 @@ public class ParserUtils {
         if (!isValidCommandType(commandType)) {
             return Message.ERROR_PARSER_INVALID_COMMAND;
         }
+        
+        if (!commandType.matches(REGEX_PRINTABLE_ASCII_ONLY) || !remainingArgs.matches(REGEX_PRINTABLE_ASCII_ONLY)) {
+            return Message.ERROR_PARSER_NON_ASCII_ARGUMENT;
+        }
+        
         return checkIfArgumentsValidForCommand(commandType, remainingArgs);
     }
 }

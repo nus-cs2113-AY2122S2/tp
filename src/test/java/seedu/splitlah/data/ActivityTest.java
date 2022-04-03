@@ -63,8 +63,8 @@ class ActivityTest {
     }
 
     /**
-     * Checks if a negative integer is returned when an Activity object with a smaller unique activity identifier
-     * is compared against an Activity object with a larger unique activity identifier.
+     * Checks if a negative integer is returned when an Activity object with a smaller activity unique identifier
+     * is compared against an Activity object with a larger activity unique identifier.
      */
     @Test
     void compareTo_smallerActivityIdInput_returnsNegative() {
@@ -73,8 +73,8 @@ class ActivityTest {
     }
 
     /**
-     * Checks if a positive integer is returned when an Activity object with a smaller unique activity identifier
-     * is compared against an Activity object with a larger unique activity identifier.
+     * Checks if a positive integer is returned when an Activity object with a smaller activity unique identifier
+     * is compared against an Activity object with a larger activity unique identifier.
      */
     @Test
     void compareTo_smallerActivityIdInput_returnsPositive() {
