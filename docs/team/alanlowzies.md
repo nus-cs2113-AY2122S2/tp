@@ -29,7 +29,7 @@ into text files stored on the user's local filesystem
 ([User Guide](../UserGuide.md#create-a-workout-workout-new) | [Developer Guide](../DeveloperGuide.md#create-new-workout)).
 - Wrote most of the `UI` API, which contains UI-related elements, including WerkIt!'s banner logo and response messages.
 - Wrote most of the `WerkIt` API, which contains the code to start up WerkIt!, load its components, load saved file data
-  (if any), and finally receives and processes user inputs until the user wishes to exit the program.
+  (if any), and finally receive and process user inputs until the user exits the program.
 - Wrote parts the `Parser` API, which parses user inputs into the appropriate `Command` class types as well
   as check for invalid characters in the user inputs ([Developer Guide](../DeveloperGuide.md#parsing-user-input-and-getting-the-right-command)).
 - Implemented the HashMap data structure in the `WorkoutList` API to allow `PlanList` to reference
@@ -43,7 +43,8 @@ into text files stored on the user's local filesystem
 - Wrote some of the exception APIs for WerkIt!, including `InvalidWorkoutException`, `InvalidExcerciseException`, and
   `UnknownFileException`.
 - Contributed to the `ExerciseList` API, which is mainly done by my team member Haofeng, by adding
-additional functionality to the API such as populating the `exercise.txt` file with default exercises.
+  additional functionality to the API such as populating the `exercise.txt` file with default exercises. The exercises
+  were thought of by Haofeng :)
 - Wrote JUnit test cases for WerkIt! APIs including (but not limited to) `WorkoutCommand`, `FileManager`, `Parser`, etc.
 - Created skeleton codes and packages for the project.
 
