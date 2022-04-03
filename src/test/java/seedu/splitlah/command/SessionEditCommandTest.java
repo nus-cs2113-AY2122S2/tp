@@ -146,7 +146,7 @@ public class SessionEditCommandTest {
 
         // Case2: Same session date.
         String validInputWithSameSessionDate = "session /edit /sid 1 /d 15-02-2022";
-        Command commandWithSameSessionDate = Parser.getCommand(validInputWithSameSessionName);
+        Command commandWithSameSessionDate = Parser.getCommand(validInputWithSameSessionDate);
         commandWithSameSessionDate.run(manager);
         unEditedSession = manager.getProfile().getSession(1);
         nameInSession = unEditedSession.getSessionName();
