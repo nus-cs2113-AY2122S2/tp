@@ -37,7 +37,11 @@ stored in the user's local filesystem ([[WIP] Developer Guide]()).
 
 ### Enhancements Implemented
 - (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.
-<br/><br/>**Screenshot:**<br/>![Info and Warning Boxes](../images/ppp/alanlowzies/infoWarningBoxes.png)
+  <br/><br/>**Sample:**<br/>
+<span class="box warning">⚠️This is an example of a warning box. Contains advice or instructions that users
+should take note of to avoid application issues.</span><br/><br/>
+<span class="box info">🧾  This is an information box. Contains information that may be useful for
+the users.</span>
 
 ### Contributions to the UG
 - Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
