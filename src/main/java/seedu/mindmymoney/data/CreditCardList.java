@@ -63,9 +63,9 @@ public class CreditCardList {
      * @return CreditCard object with matching name as parameter.
      */
     public CreditCard get(String name) {
-        for (CreditCard i : creditCardListArray) {
-            if (i.getNameOfCard().toLowerCase().equals(name.toLowerCase())) {
-                return i;
+        for (CreditCard creditCard : creditCardListArray) {
+            if (creditCard.getNameOfCard().equalsIgnoreCase(name.toLowerCase())) {
+                return creditCard;
             }
         }
         return null;
