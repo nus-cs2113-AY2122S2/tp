@@ -164,8 +164,7 @@ public abstract class Message {
             "There are duplicate names in the person list for the session you are trying to create. "
                     + "Please rectify and try again.";
     public static final String ERROR_PERSONLIST_CONTAINS_INVALID_NAME =
-            "There are invalid names in the person list for the session you are trying to create. "
-                    + "Please rectify and try again.";
+            "Names in the person list should only contain alphabets. Please rectify and try again.";
     public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP =
             "There are duplicate names in the person list for the group you are trying to create. "
                     + "Please rectify and try again.";
