@@ -557,12 +557,17 @@ IO redirection testing can be performed via the following steps:
 
 ### Target user profile
 
-The target user profile for PlanITarium is young adults who have a family to support.
+* Individuals who are young adults  looking for a fast and easy financial tracker.
+* Individuals who needs a monthly overview on their financial status.
+* Individuals who wish to track the financial status of their family members.
+* Individuals who are experienced typists that can operate the application on a terminal.
 
 ### Value proposition
 
-PlanITarium offers ease of financial tracking for the entire family. It features a single input process for performing 
-tasks, and users will be able to neatly categorise their family members as well as expenditures.
+* Able to track family member's income and expenditure
+* Able to obtain a monthly summary of the family's financial status
+* Able to logically group family members for better management
+* Able to categorise expenditure to assist with financial planning
 
 ---
 
