@@ -1148,7 +1148,7 @@ schedule data, `FileManager` will also check whether the plans in the `schedule.
 all the data can be matched, the files will be loaded successfully, otherwise only the unmatched data are classified as 
 "corrupted data" and will be deleted and the deletion will be cascaded. 
 
-Although the users are discouraged from  editing the local resource files as this action may corrupt the stored data,
+Although the users are discouraged from editing the local resource files as this action may corrupt the stored data,
 resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
 the files. Thus, other than the warning in our UserGuide, we also implemented
 error handling methods to handle the situation where users edited the files and caused data corruptions.
