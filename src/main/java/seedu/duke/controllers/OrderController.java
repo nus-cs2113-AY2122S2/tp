@@ -7,10 +7,10 @@ import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
 
 public class OrderController extends Controller {
-    private static final String[] CHOICES = {"Exit",
+    private static final String[] CHOICES = {"Exit Order Menu",
         "Create an order", "Delete an order",
         "Get total price of an order",
-        "Get total price of all orders", "Print receipt"
+        "Get total price of all orders", "Print receipt", "Display order list", "Display dish menu"
     };
     private final OrderManager orderManager = OrderManager.getInstance();
     private final DishManager dishManager = DishManager.getInstance();
@@ -46,12 +46,22 @@ public class OrderController extends Controller {
         case 5:
             printOrder();
             break;
+        case 6:
+            displayAllOrdersToNBeImplemented();
+            break;
+        case 7:
+            System.out.print(dishManager.printDishes());
+            break;
         default:
             System.out.println("Unknown choice!");
             break;
         }
         System.out.println(this);
         return false;
+    }
+
+    private void displayAllOrdersToNBeImplemented() {
+        System.out.print("hi");
     }
 
     private void addNewOrder() throws OperationTerminationException {
@@ -76,12 +86,17 @@ public class OrderController extends Controller {
     private void deleteOrder() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is deleting an order");
         System.out.println("Deleting an order...");
-        try {
-            int userInputInt = InputParser.getInteger("Enter the order you want to delete: ") - 1;
-            orderManager.deleteOrder(userInputInt);
-            System.out.println("Deleted successfully!");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please enter a valid order index.");
+        if (orderManager.getOrderCount() == 0) {
+            System.out.println("No order now.");
+        }
+        else {
+            try {
+                int userInputInt = InputParser.getInteger("Enter the order you want to delete: ") - 1;
+                orderManager.deleteOrder(userInputInt);
+                System.out.println("Deleted successfully!");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Please enter a valid order index.");
+            }
         }
     }
 
@@ -99,7 +114,12 @@ public class OrderController extends Controller {
     private void displayAllOrderPrice() {
         MainLogger.logInfo(this, "User is displaying the total price of all orders");
         System.out.println("Getting total price of all orders in the list...");
-        System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
+        if (orderManager.getOrderCount() == 0) {
+            System.out.println("No order now.");
+        }
+        else {
+            System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
+        }
     }
 
     private void printOrder() throws OperationTerminationException {
