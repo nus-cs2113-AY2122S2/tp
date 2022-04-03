@@ -36,10 +36,10 @@ public class AddMeetingCommand extends Command {
         // check all timetables, see if start or end time of each event/lesson is equal to each other
         try {
             Meeting meeting = new Meeting(title, day, startTime, endTime, mode);
-            if (masterTimetable.checkIfClash(meeting)) {
-                return ERROR_OVERLAPPING_MEETING;
-            } else if (masterTimetable.checkIfMeetingExistsAlready(meeting)) {
+            if (masterTimetable.checkIfMeetingExistsAlready(meeting)) {
                 return ERROR_DUPLICATE_MEETING;
+            } else if (masterTimetable.checkIfClash(meeting)) {
+                return ERROR_OVERLAPPING_MEETING;
             } else {
                 return masterTimetable.addMeetingToEveryoneTimetable(meeting);
             }
