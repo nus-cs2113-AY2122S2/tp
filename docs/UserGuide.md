@@ -523,6 +523,11 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 >- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
 >  in the calculations.
+>- SplitLah will aim to simplify transactions to minimise the number of transactions you have to make.
+>  - Example: In the same session, _Alice_ paid for _Bob_'s lunch which costs $10 and _Bob_ paid for _Charlie_'s
+>    movie ticket which costs $10. 
+>  - Instead of having _Bob_ pay _Alice_ $10 and having _Charlie_ pay _Bob_ $10, SplitLah simplifies this
+>    and has _Charlie_ pay $10 directly to _Alice_, settling all debts in a single transaction.
 
 <br>
 
