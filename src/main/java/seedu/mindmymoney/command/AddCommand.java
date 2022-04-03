@@ -200,7 +200,7 @@ public class AddCommand extends Command {
             incomeList.add(new Income(amountAsInt, category));
 
             System.out.print("Successfully added: \n\n"
-                    + "Amount: " + amountAsInt + "\n"
+                    + "Amount: $" + amountAsInt + "\n"
                     + "Category: " + category + "\n\n"
                     + "into the account");
             System.out.println(System.lineSeparator());

@@ -252,11 +252,9 @@ public class UpdateCommand extends Command {
         try {
             String[] parseUpdateInput = updateInput.split(" ");
 
-            //Get index to update
             String indexAsString = parseUpdateInput[INDEX_OF_SECOND_ITEM];
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
-            //Parse data from input
             String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT,
                     FLAG_OF_CATEGORY);
             int newAmountAsInt = Integer.parseInt(newAmountAsString);
@@ -273,8 +271,12 @@ public class UpdateCommand extends Command {
             Income newIncome = new Income(newAmountAsInt, newCategory);
             incomeList.set(indexToUpdate, newIncome);
 
-            System.out.printf("Successfully set income %d\n" + System.lineSeparator(),
-                    indexToUpdate - LIST_INDEX_CORRECTION);
+            System.out.print(PrintStrings.LINE
+                    + "Successfully set income " + indexAsString + " to:\n"
+                    + "Amount: $" + newAmountAsString + "\n"
+                    + "Category: " + newCategory + "\n"
+                    + PrintStrings.LINE
+                    + System.lineSeparator());
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input AMOUNT or CATEGORY?");
