@@ -2,6 +2,7 @@ package seedu.sherpass.task;
 
 import org.junit.jupiter.api.Test;
 import seedu.sherpass.enums.Frequency;
+import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
 
 import java.time.LocalDateTime;
@@ -82,7 +83,7 @@ public class TaskListTest {
     }
 
     @Test
-    void checkDateTimeClash_validInput_expectSuccess() throws TimeClashException {
+    void checkDateTimeClash_validInput_expectSuccess() throws TimeClashException, InvalidInputException {
         Task testTaskOne = new Task(1, "blah", null,
                 LocalDateTime.parse("31/3/2022 10:00", inputWithTimeFormat),
                 LocalDateTime.parse("31/3/2022 12:00", inputWithTimeFormat),
