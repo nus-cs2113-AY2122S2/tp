@@ -34,10 +34,7 @@ public class Ui {
         System.out.print(patients);
     }
 
-    public void printHelpPage() {
-        System.out.print(boundary);
-        System.out.println("Do not remember the command format? Here are some commands you can try:");
-
+    public void printAddHelp() {
         String addDoctor = "add doctor /id ID /n NAME /ph PHONE /e EMAIL" + System.lineSeparator();
         String addPatient = "add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS"
                                     + System.lineSeparator();
@@ -45,7 +42,9 @@ public class Ui {
                                         + System.lineSeparator();
         System.out.println("1. To add something:" + System.lineSeparator()
                                    + addDoctor + addPatient + addAppointment);
+    }
 
+    public void printListHelp() {
         String listDoctor = "list doctor" + System.lineSeparator();
         String listPatient = "list patient" + System.lineSeparator();
         String sortAppointment = "sort appointment according to appointment time"
@@ -53,18 +52,38 @@ public class Ui {
         String listAppointment = "list appointment" + System.lineSeparator();
         System.out.println("2. To list something:" + System.lineSeparator()
                                    + listDoctor + listPatient + sortAppointment + listAppointment);
+    }
 
+    public void printDeleteHelp() {
         String deleteDoctor = "delete doctor DOCTOR_NO" + System.lineSeparator();
         String deletePatient = "delete patient PATIENT_NO" + System.lineSeparator();
         String deleteAppointment = "delete appointment APPOINTMENT_NO." + System.lineSeparator();
         System.out.println("3. To delete something:" + System.lineSeparator()
                                    + deleteDoctor + deletePatient + deleteAppointment);
+    }
 
+    public void printSearchHelp() {
         String searchDoctor = "search doctor DOCTOR_NO" + System.lineSeparator();
         String searchPatient = "search patient PATIENT_NO" + System.lineSeparator();
         String searchAppointment = "search appointment DATETIME" + System.lineSeparator();
         System.out.println("4. To search for something:" + System.lineSeparator()
                                    + searchDoctor + searchPatient + searchAppointment);
+    }
+
+    public void printSortHelp() {
+        String sortAppointment = "sort appointment" + System.lineSeparator();
+        System.out.println("5. To sort something:" + System.lineSeparator() + sortAppointment);
+    }
+
+    public void printHelpPage() {
+        System.out.print(boundary);
+        System.out.println("Do not remember the command format? Here are some commands you can try:");
+
+        printAddHelp();
+        printListHelp();
+        printDeleteHelp();
+        printSearchHelp();
+        printSortHelp();
 
         System.out.println("Hope they are helpful to you~");
         System.out.print(boundary);
