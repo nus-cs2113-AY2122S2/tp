@@ -7,7 +7,7 @@ import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 /**
- * Represents a command parser that views an Activity object.
+ * Represents a command parser that is able to parse user arguments into an ActivityViewCommand object.
  *
  * @author Tianle
  */
