@@ -177,7 +177,8 @@ The edit feature allows the user to change a parameter of a task/module. The par
 
 The following sequence diagram illustrates the process:
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/Edit.puml)
+![Sequence Diagra
+m](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/Edit.puml)
 
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/GetModule.puml)
 
