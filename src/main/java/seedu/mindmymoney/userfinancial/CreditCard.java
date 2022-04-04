@@ -82,7 +82,7 @@ public class CreditCard implements MindMyMoneySerializable {
         }
         CreditCard creditCard = (CreditCard) object;
         return nameOfCard.equals(creditCard.nameOfCard) && (cashback == creditCard.cashback)
-                && (monthlyCardLimit == creditCard.monthlyCardLimit) && (balance == creditCard.balance);
+                && (monthlyCardLimit == creditCard.monthlyCardLimit);
     }
 
     /**
