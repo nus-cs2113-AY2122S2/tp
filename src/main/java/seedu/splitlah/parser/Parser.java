@@ -4,8 +4,6 @@ import seedu.splitlah.command.Command;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.InvalidCommand;
-import seedu.splitlah.command.GroupCreateCommand;
-import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
@@ -14,6 +12,8 @@ import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.parser.commandparser.GroupListCommandParser;
+import seedu.splitlah.parser.commandparser.GroupCreateCommandParser;
+import seedu.splitlah.parser.commandparser.GroupDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
@@ -369,10 +369,10 @@ public class Parser {
                 return ActivityViewCommand.prepare(remainingArgs);
             case ActivityEditCommandParser.COMMAND_TEXT:
                 return new ActivityEditCommandParser().getCommand(remainingArgs);
-            case GroupCreateCommand.COMMAND_TEXT:
-                return GroupCreateCommand.prepare(remainingArgs);
-            case GroupDeleteCommand.COMMAND_TEXT:
-                return GroupDeleteCommand.prepare(remainingArgs);
+            case GroupCreateCommandParser.COMMAND_TEXT:
+                return new GroupCreateCommandParser().getCommand(remainingArgs);
+            case GroupDeleteCommandParser.COMMAND_TEXT:
+                return new GroupDeleteCommandParser().getCommand(remainingArgs);
             case GroupListCommandParser.COMMAND_TEXT:
                 return new GroupListCommandParser().getCommand(remainingArgs);
             case GroupEditCommandParser.COMMAND_TEXT:
