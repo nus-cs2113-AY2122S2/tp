@@ -15,7 +15,7 @@ public class ReservationCommand extends Command {
     }
 
     public void execute(Packages packages) {
-        boolean foundID = false;
+        boolean isFoundID = false;
         for (int i = 0; i < packages.getSize(); i++) {
             if (packages.getPackage(i).getID() == newReservation.getPackageID()) {
                 // handle participant overflow
@@ -27,12 +27,12 @@ public class ReservationCommand extends Command {
                     packages.getPackage(i).getReservationList().addReservation(this.newReservation);
                     packages.getPackage(i).addParticipants(newReservation.getNumOfPax());
                 }
-                foundID = true;
+                isFoundID = true;
                 break;
 
             }
         }
-        if (!foundID) {
+        if (!isFoundID) {
             System.out.println("Travel Package ID not found. Please try again.");
         }
 
