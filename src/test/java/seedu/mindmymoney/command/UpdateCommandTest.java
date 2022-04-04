@@ -32,8 +32,8 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         try {
             updateCommand.executeCommand();
-            assertEquals(testUser.getExpenditureListArray().get(INDEX_OF_FIRST_ITEM).toString(),
-                    newExpenditure.toString());
+            assertEquals(testUser.getExpenditureListArray().get(INDEX_OF_FIRST_ITEM),
+                    newExpenditure);
         } catch (MindMyMoneyException e) {
             System.out.println(e.getMessage());
             fail();
@@ -53,6 +53,49 @@ public class UpdateCommandTest {
         String input = "invalid input";
         UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
+    }
+
+    /**
+     * Assert that an invalid update expenditure command will throw an exception.
+     */
+    @Test
+    void updateExpenditureCommand_invalidDate_exceptionThrown() {
+        Expenditure testExpenditure = new Expenditure("Cash", "Food",
+                "porridge", 5, "01/03/2022");
+        User testUser = new User();
+        testUser.setExpenditureListArray(new ExpenditureList());
+        testUser.getExpenditureListArray().add(testExpenditure);
+        String firstInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 30/4/2022";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(firstInputString, testUser).executeCommand());
+        String secondInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 04/2022";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(secondInputString, testUser).executeCommand());
+        String thirdInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 2022";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(thirdInputString, testUser).executeCommand());
+
+        String fourthInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 38/14/2022";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(fourthInputString, testUser).executeCommand());
+
+        String fifthInputString = "1 /pm cash /c Food /d Porridge /a 4.50 /t 31/11/2021";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(fifthInputString, testUser).executeCommand());
+
+        String sixthInputString = "1 /pm cash /c Food /d Porridge /a 4.50 /t 29/02/2021";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(sixthInputString, testUser).executeCommand());
+
+        String seventhInputString = "1 /pm cash /c Food /d Porridge /a 4.50 /t 30/02/2020";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(seventhInputString, testUser).executeCommand());
+
+        String eighthInputString = "1 /pm cash /c Food /d Porridge /a 4.50 /t 31/04/2020";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(eighthInputString, testUser).executeCommand());
     }
 
     /**
@@ -84,8 +127,8 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         try {
             updateCommand.executeCommand();
-            assertEquals(testUser.getCreditCardListArray().get(INDEX_OF_FIRST_ITEM).toString(),
-                    newCreditCard.toString());
+            assertEquals(testUser.getCreditCardListArray().get(INDEX_OF_FIRST_ITEM),
+                    newCreditCard);
         } catch (MindMyMoneyException e) {
             System.out.println(e.getMessage());
             fail();
@@ -134,7 +177,7 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         try {
             updateCommand.executeCommand();
-            assertEquals(testUser.getIncomeListArray().get(INDEX_OF_FIRST_ITEM).toString(), newIncome.toString());
+            assertEquals(testUser.getIncomeListArray().get(INDEX_OF_FIRST_ITEM), newIncome);
         } catch (MindMyMoneyException e) {
             System.out.println(e.getMessage());
             fail();
