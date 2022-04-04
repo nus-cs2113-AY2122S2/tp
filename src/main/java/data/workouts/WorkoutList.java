@@ -192,7 +192,7 @@ public class WorkoutList {
         }
     }
 
-
+    //@@author Musfirahe0556596
     /**
      * This method removes the intended workout in the workout list.
      * The intended workout to delete is determined by the user who
@@ -235,6 +235,7 @@ public class WorkoutList {
     private boolean checkIndexIsWithinRange(int index) {
         return index > 0 && index <= workoutsDisplayList.size();
     }
+    //@@author
 
     /**
      * Updates the number of repetitions of an existing workout.
