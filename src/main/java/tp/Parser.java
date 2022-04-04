@@ -49,7 +49,6 @@ public class Parser {
         String id;
         String dummy = fullCommand.trim();
         String name;
-        String phoneNumber;
         int idIndex = dummy.indexOf("/id") + 4;
         int nameIndex = dummy.indexOf("/n");
         id = dummy.substring(idIndex, nameIndex).trim();
@@ -58,16 +57,17 @@ public class Parser {
         name = dummy.substring(nameIndex, phoneNumberIndex).trim();
         phoneNumberIndex += 4;
         int emailIndex = dummy.indexOf("/e");
-        phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
+        String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
         emailIndex += 3;
         int symptomIndex = dummy.indexOf("/s");
         String email = dummy.substring(emailIndex,symptomIndex).trim();
         symptomIndex += 3;
+        String phone = phoneNumber;
         int descIndex = dummy.indexOf("/d");
         String symptom = dummy.substring(symptomIndex,descIndex).trim();
         descIndex += 3;
         String description = dummy.substring(descIndex).trim();
-        return new AddPatientCommand(id, name, phoneNumber, email, symptom,description);
+        return new AddPatientCommand(id, name, phone, email, symptom,description);
     }
 
     public Command parseAddAppointment(String fullCommand) throws IHospitalException {
