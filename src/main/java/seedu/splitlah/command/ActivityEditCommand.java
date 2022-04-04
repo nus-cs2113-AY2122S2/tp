@@ -153,9 +153,16 @@ public class ActivityEditCommand extends Command {
         costList = new double[listLength];
         double firstCost = involvedListPersonArray.get(0).getActivityCostOwed(activityId);
         for (int i = 0; i < listLength; ++i) {
-            double costOwedForThisActivity = involvedListPersonArray.get(i).getActivityCostOwed(activityId);
+            double costOwedForThisActivity = 0;
+            try {
+                costOwedForThisActivity = involvedListPersonArray.get(i).getActivityCostOwed(activityId);
+            } catch (InvalidDataException exception) {
+                if (exception.getMessage().equals(Message.ERROR_PERSON_NO_ACTIVITIES)) {
+                    costOwedForThisActivity = 0;
+                }
+            }
             costList[i] = costOwedForThisActivity;
-            if (costOwedForThisActivity != firstCost) {
+            if (costOwedForThisActivity != firstCost && costOwedForThisActivity != 0) {
                 activityType = TYPE_COSTLIST;
             }
         }
@@ -244,16 +251,6 @@ public class ActivityEditCommand extends Command {
         for (double cost : costList) {
             totalCost += cost;
         }
-    }
-
-    /**
-     * Updates total cost by including the extra charges.
-     * Extra charges may include GST and service charge.
-     * Assumption: GST and service charge are non-negative values.
-     */
-    private void updateCostWithExtraCharges() {
-        double extraCharges = getExtraCharges();
-        totalCost *= extraCharges;
     }
 
     /**
