@@ -112,7 +112,6 @@ and their interactions.
 #### Main components of the architecture
 - `Main`: The main component that starts the application upon launch of the applicaiton.
 - `WerkIt`: Initializes other components in the correct sequence, and connects them up with each other.
-- `LogHandler`: Handles logging within the application.
 - `Storage`: Reads data from, and writes data to the user's local storage.
 - `UI`: The UI of the application that deals with interaction with the user.
 - `Parser`: Parses user input to make sense of the command supplied by the user.
@@ -1264,7 +1263,7 @@ keeping all the non-affected data safely.
 
 ## Glossary
 
-* **Reps** - The process of repeating an exercise. Often abbreviated to 'reps'.
+* **Repetitions** - The process of repeating an exercise. Often abbreviated to 'reps'.
 * **Exercise** - A single 'unit' of exercise. A type of exercise.
     * e.g. push up, jumping jacks, sit-ups
 * **Workout** - A single 'unit' of exercise with a number of repetitions associated with it.
