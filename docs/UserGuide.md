@@ -114,7 +114,7 @@ Some Mod Happy commands require you to provide a duration. You can specify these
 
 ### 4.1. Accessing help: `help`
 
-- If no COMMAND_WORD is given, a generic help message is displayed.
+- If no "COMMAND_WORD" is given, a generic help message is displayed.
   #### Format: `help`
   ##### Example 1:
   ```
@@ -409,9 +409,9 @@ The following configuration options currently exist:
 <br>
 
 ### 4.6. Marking a task: `mark`
-- Allows you to mark the [specified task](#32-specifying-tasks) as completed or uncompleted.
+Allows you to mark the [specified task](#32-specifying-tasks) as completed or uncompleted.
 
-  The `c` flag indicates that the task will be marked as completed, while the `u` flag marks the task as uncompleted.
+&nbsp;&nbsp; The `c` flag indicates that the task will be marked as completed, while the `u` flag marks the task as uncompleted.
 
   #### Format: `mark (c | u) TASK_NUMBER [-m MODULE_CODE]`<br><br>
   - `TASK_NUMBER`: The number of the task to be marked. Must be a positive integer.
