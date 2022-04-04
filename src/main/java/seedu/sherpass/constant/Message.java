@@ -56,6 +56,8 @@ public class Message {
             + "description and/or date details!\n(and possibly a repeat frequency if you intend to add it in)";
     public static final String ERROR_MULTIPLE_ARGS_MESSAGE = "Add command has both /by and /repeat commands.\n"
             + "Please choose one of them.";
+    public static final String ERROR_DELETE_REPEATED_TASK = "Please exclude the '/repeat' delimiter "
+            + "\nwhen deleting a single task";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;

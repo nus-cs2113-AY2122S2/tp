@@ -2,6 +2,7 @@ package seedu.sherpass.task;
 
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.util.Ui;
 
@@ -13,6 +14,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static seedu.sherpass.constant.Message.ERROR_DELETE_REPEATED_TASK;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 
 public class TaskList {
@@ -330,13 +332,15 @@ public class TaskList {
      *
      * @param deleteIndex Index of a task to search for.
      */
-    public void removeTask(int deleteIndex, boolean isRepeat) {
+    public void removeTask(int deleteIndex, boolean isRepeat) throws InvalidInputException {
         Task taskToBeRemoved = tasks.get(deleteIndex);
         if (!isRepeat) {
             tasks.remove(deleteIndex);
-        } else if (taskToBeRemoved.getRepeatFrequency() != Frequency.SINGLE) {
+        } else if (!taskToBeRemoved.getRepeatFrequency().equals(Frequency.SINGLE)) {
             int identifier = taskToBeRemoved.getIdentifier();
             tasks.removeIf(task -> task.getIdentifier() == identifier && task.getIndex() >= taskToBeRemoved.getIndex());
+        } else {
+            throw new InvalidInputException(ERROR_DELETE_REPEATED_TASK);
         }
         updateIndex();
     }
