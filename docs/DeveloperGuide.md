@@ -114,7 +114,27 @@ The features of WerkIt! are split and grouped into 5 main features:
 5. [Search-related features](#search-related-features)
 
 ### Exercise-related features
-_to be updated_
+
+Format: `exercise <userAction> <keywords>`
+
+Below is a class diagram of the exercise-related features:
+
+![ExerciseUML](uml/classDiagrams/images/exercise.png)
+<br>
+
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
+user's command. If the user's command type is `exercise`, the `Parser#parseUserInput(String userInput)` method will 
+parse the 'exercise' base word and proceed to create exercise related command using 
+`Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
+`<userAction>` and call the constructor of `ExerciseCommand` class by passing relevant parameters related
+to the constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandException` will be thrown.
+
+Currently, the exercise related feature is limited to `exercise /list` only. Therefore, the `keywords` mentioned can
+be ignored for now, and the only supported `userAction` is `/list`. However, more exciting exercise-related features are
+expected to be delivered in future iterations, and we currently have set the framework to implement these features in
+the future. Thus, we have this standalone section specifically kept for exercise-related features.
 
 ---
 
@@ -135,7 +155,10 @@ _to be updated_
 
 ### Search-related features
 
+Format: `search <userAction> <keywords>`
+
 Below is a class diagram of the search-related features:
+
 ![SearchUML](uml/classDiagrams/images/SearchClass.png)
 <br>
 
