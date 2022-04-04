@@ -43,6 +43,8 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `bye` and `save`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* The maximum cost supported is up to $10 million, any specified cost equal or greater than that will be displayed incorrectly.
+
 ### Adding an equipment: `add`
 Adds new Equipment to the list of Equipment.
 
