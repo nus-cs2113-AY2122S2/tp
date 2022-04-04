@@ -123,10 +123,10 @@ public class EquipmentManager {
             case "cost":
                 updatedEquipment.setCost((Double) updates.getValue());
                 break;
-            case "purchaseDate":
+            case "purchasedDate":
                 updatedEquipment.setPurchasedDate((String) updates.getValue());
                 break;
-            case "purchaseFrom":
+            case "purchasedFrom":
                 updatedEquipment.setPurchasedFrom((String) updates.getValue());
                 break;
             default:
