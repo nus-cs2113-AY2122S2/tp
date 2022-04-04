@@ -213,14 +213,16 @@ _to be updated_
 
 ---
 
+
 ### Search-related features
 
 Format: `search <commandAction> <keywords>`
 
 Below is a class diagram of the search-related features:
 
+
 ![SearchUML](uml/classDiagrams/images/SearchClass.png)
-<br>
+
 
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
 `WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
@@ -228,8 +230,8 @@ class will catch the user input, and it will be sent to `Parser#parseUserInput(S
 user's command. If the user's command type is search, i.e. `search <commandAction> <keywords>`, the
 `Parser#parseUserInput(String userInput)` method will parse the 'search' base word and proceed to create search related
 command using `Parser#createSearchCommand(String userInput)` method. This method will further evaluate the
-`<commandAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to 
-the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If 
+`<commandAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to
+the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If
 the `<keywords>` is not specified, an `InvalidCommandException` will be thrown.
 
 ---
