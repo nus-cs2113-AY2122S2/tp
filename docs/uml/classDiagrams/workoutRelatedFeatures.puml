@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+
+skinparam classAttributeIconSize 0
+title Class Diagram of Workout Component
+
+Parser .r.> "{abstract}\nCommand"
+"{abstract}\nCommand" <|- WorkoutCommand
+WorkoutCommand --> WorkoutList
+WorkoutCommand --> FileManager
+WorkoutCommand --> UI
+WorkoutCommand -r-> PlanList
+
+class PlanList {
++ deletePlanContainsDeletedWorkout(String deletedWorkoutDetail):void
++ updatePlanContainsUpdatedWorkout(String workoutToCheck, Workout updatedWorkout):void
+}
+
+class FileManager {
++ writeNewWorkoutToFile(Workout newWorkout):void
++ rewriteAllWorkoutsToFile(WorkoutList workoutList):void
++ rewriteAllPlansToFile(PlanList planList):void
+}
+
+class "{abstract}\nCommand" {
+}
+
+class WorkoutCommand {
++ execute():void
+}
+
+class WorkoutList {
++ createAndAddWorkout(String userArgument):Workout
++ listAllWorkout():void
++ deleteWorkout(String userArgument):Workout
++ updateWorkout(String userArgument):Workout
+}
+
+class UI {
++ printNewWorkoutCreatedMessage(Workout newWorkout):void
++ printDeleteWorkoutMessage(Workout deletedWorkout):void
++ printUpdateWorkoutMessage(Workout updatedWorkout):void
+}
+
+class Parser {
++ parseUserInput(String userInput):Command
++ createWorkoutCommand(String userInput):WorkoutCommand
+}
+
+
+@enduml

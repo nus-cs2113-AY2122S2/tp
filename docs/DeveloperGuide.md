@@ -112,7 +112,6 @@ and their interactions.
 #### Main components of the architecture
 - `Main`: The main component that starts the application upon launch of the applicaiton.
 - `WerkIt`: Initializes other components in the correct sequence, and connects them up with each other.
-- `LogHandler`: Handles logging within the application.
 - `Storage`: Reads data from, and writes data to the user's local storage.
 - `UI`: The UI of the application that deals with interaction with the user.
 - `Parser`: Parses user input to make sense of the command supplied by the user.
@@ -170,7 +169,37 @@ the future. Thus, we have this standalone section specifically kept for exercise
 ---
 
 ### Workout-related features
-_to be updated_
+
+Format: `workout /commandAction <condition>`
+
+Below is a class diagram of the workout-related features:
+
+![WorkoutUML](uml/classDiagrams/images/workoutRelatedFeatures.png)
+<br>
+
+The `Parser` class will call the `Parser#parseUserInput(userInput)` method
+to analyse the user's command. If the user's command is of type 
+`workout`, the `Parser#parseUserInput(userInput)` method
+will parse the `workout` base word and proceed to create a `WorkoutCommand` object via the
+`Parser#createWorkoutCommand(userInput)` method. 
+<br><br>
+Once the `WorkoutCommand` object is created, the `WorkoutCommand#execute()` method
+is called. Depending on the type of command action, this method will
+call the appropriate operations from the `WorkoutList` class. For instance, if the command action
+is `/create`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout(userArgument)`
+to create a new workout in the application. 
+To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
+<br><br>
+When all methods except the `listAllWorkout()` method is executed, the appropriate
+`FileManager` and `UI` classes will call the appropriate methods depending on the command action.
+From the previous example, the `/create` workout action will call the 
+`FileManager#writeNewWorkoutToFile(newWorkout)` and also the `UI#printNewCreatedMessage(newWorkout)`
+methods after the new workout has been created.
+<br><br>
+Finally, methods in the `PlanList` class is only called when the `/delete` and `/update`
+workout actions are executed. These methods are used to modify the application's plans list
+as the `/delete` and `/update` actions are cascading actions 
+(i.e. deleting a workout will delete plan(s) containing that deleted workout).
 
 ---
 
@@ -1234,7 +1263,7 @@ keeping all the non-affected data safely.
 
 ## Glossary
 
-* **Reps** - The process of repeating an exercise. Often abbreviated to 'reps'.
+* **Repetitions** - The process of repeating an exercise. Often abbreviated to 'reps'.
 * **Exercise** - A single 'unit' of exercise. A type of exercise.
     * e.g. push up, jumping jacks, sit-ups
 * **Workout** - A single 'unit' of exercise with a number of repetitions associated with it.
