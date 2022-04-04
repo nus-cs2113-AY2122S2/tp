@@ -55,7 +55,7 @@ into text files stored on the user's local filesystem
   <br/><br/>**Sample:**<br/>
 <span class="box warning">:warning: This is an example of a warning box. Contains advice or instructions that users
 should take note of to avoid issues in the application.</span>
-<span class="box info">:memo: This is an information box. Contains information that may be useful for
+<span class="box info">:memo: This is an example of an information box. Contains information that may be useful for
 the users.</span>
 
 ### Contributions to the User Guide (UG)
