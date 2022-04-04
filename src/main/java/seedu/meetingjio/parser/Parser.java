@@ -204,7 +204,7 @@ public class Parser {
             return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_MEETING);
         } catch (ArrayIndexOutOfBoundsException aioube) {
             return new CommandResult(ERROR_EXTRA_PARAMETERS_ADD_MEETING);
-        }catch (MissingValueException mve) {
+        } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_MEETING);
         } catch (InvalidTimeException | NumberFormatException ite) {
             return new CommandResult(ERROR_INVALID_TIME);

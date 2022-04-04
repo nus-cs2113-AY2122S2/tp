@@ -35,7 +35,7 @@ public class AddMeetingCommand extends Command {
     @Override
     public String execute(MasterTimetable masterTimetable) {
         // check all timetables, see if start or end time of each event/lesson is equal to each other
-        if (masterTimetable.getSize() == 0){
+        if (masterTimetable.getSize() == 0) {
             return ERROR_NO_USER_TO_ADD_MEETING;
         }
         try {

@@ -28,7 +28,8 @@ public class Messages {
             + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
     public static final String MESSAGE_ADD_MEETING_FORMAT = "To add a meeting: add_meeting t/[Meeting title] "
             + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
-    public static final String MESSAGE_DELETE_FORMAT = "To delete an event from specific user: delete n/[Name] i/ [Index]\n";
+    public static final String MESSAGE_DELETE_FORMAT = "To delete an event from specific user:"
+            + "delete n/[Name] i/ [Index]\n";
     public static final String MESSAGE_LIST_ALL_EVENTS = "To list all events: list all\n";
     public static final String MESSAGE_LIST_ALL_LESSONS = "To list all lessons: list_lesson all\n";
     public static final String MESSAGE_LIST_ALL_MEETINGS = "To list all meetings: list_meeting all\n";

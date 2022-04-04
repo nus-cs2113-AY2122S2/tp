@@ -79,7 +79,8 @@ public class ErrorMessages {
             + "some of the members cannot make it";
     public static final String ERROR_DUPLICATE_MEETING = "This meeting already exists. "
             + "This meeting will not be not added to the timetable.";
-    public static final String ERROR_NO_USER_TO_ADD_MEETING = "No users exist so meeting cannot be added to anyone's timetable";
+    public static final String ERROR_NO_USER_TO_ADD_MEETING = "No users exist so meeting cannot be added"
+            + " to anyone's timetable";
 
     // Free Command
     public static final String ERROR_FREE_INPUT_INVALID = "Please specify the minimum duration for everyone to be free "
