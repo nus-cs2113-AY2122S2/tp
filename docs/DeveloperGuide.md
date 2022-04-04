@@ -3,7 +3,7 @@
 This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
 workings of PlanITarium such that engineers can understand the various design and implementations in detail.
 
---
+---
 
 ## Table of Contents
 
@@ -279,6 +279,8 @@ and return this object to `PlanITarium`.
 Step 4. `PlanITarium` will then execute this command by calling `execute()`. Alice will then be added to the
 `personList`.
 
+---
+
 ### Logical Grouping of Persons Added
 
 #### Implementation
@@ -344,14 +346,18 @@ print that out.
     * Pros: Only 1 command is required to show all information.
     * Cons: If the user only wants a high level overview, the user could be hit with information overload.
 
+---
+
 ### Edit Values Feature
 
 Maybe for Jiarong {Suggest to show the process from `parsing several delimiters` to `finding the income/expenditure`
 to `editing the value`.}
 
+---
+
 ### Find feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed find feature is facilitated by `Categories`, `Money(temp)`, `MoneyList(temp)`
 and `Family`. The `Categories` is an enumeration of keys that is used as the expenditure categories. The `Money(temp)`
@@ -426,6 +432,8 @@ by [`CommandFactory`](#PlaceholderToCommandFactory):
     * Pros: Easy to implement and less memory usage.
     * Cons: Additional logic check is needed to print the income and expenditure in a well formatted way
 
+---
+
 ### [Proposed] Listing Categorised Expenditures Feature
 
 #### Proposed Implementation
@@ -489,6 +497,8 @@ command object has been created by [`CommandFactory`](#Command-Execution):
 * **Alternative 2:** Maintain an array list for each category and store a copy of expenses.
     * Pros: Fast to print expenses in a category, no unnecessary look-ups.
     * Cons: Poor memory management, needs to store twice as many expenditures.
+
+---
 
 ### Data Archiving
 
