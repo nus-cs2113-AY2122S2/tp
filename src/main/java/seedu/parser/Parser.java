@@ -33,7 +33,9 @@ public class Parser {
     public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)\\s*");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)\\s*");
     public static final Pattern TYPE_ENUM_FORMAT = Pattern.compile("[Tt]/(?<equipmentType>\\w+)\\s*");
-    // ARGUMENT_FORMAT extracts first n-1 tags, for debugging: https://regex101.com/r/7rho4H/1
+    /**
+     * Extracts first n-1 tags for debugging and assumes that the last tag contains the whole string, refer to:
+     * <a href="https://regex101.com/r/7rho4H/1"> Regex101</a> for demo.*/
     public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
             "((?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
                     + "\\/" // argument delimiter
@@ -41,7 +43,10 @@ public class Parser {
                     + "\\s+" // argument space before next delimiter
                     + "(?=[sntcSNTC]|[pP][fF]|[pP][dD])" // next delimiter
     );
-    // ARGUMENT_TRAILING_FORMAT extracts last tag
+    /**
+     * Extracts last tag for debugging.
+     *
+     * <p>See also {@link Parser#MODIFICATION_ARGUMENT_FORMAT} for Regex demonstration.*/
     public static final Pattern MODIFICATION_ARGUMENT_TRAILING_FORMAT = Pattern.compile(
             "(?<!\\w)" // require a previous pattern
                     + "(?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
