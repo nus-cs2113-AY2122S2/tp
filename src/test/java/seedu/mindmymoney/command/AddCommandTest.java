@@ -82,14 +82,14 @@ class AddCommandTest {
     }
 
     /**
-     * Asserts if user is able to add an input with creditcard.
+     * Asserts if user is able to add an input with credit card.
      */
     @Test
     void addCommand_creditCardInput_expectListUpdated() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
-        creditCardTestList.add(new CreditCard("posb",0.05,500,500));
+        creditCardTestList.add(new CreditCard("posb",0.05,500));
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         String inputString = "/pm posb /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
 
@@ -266,6 +266,22 @@ class AddCommandTest {
         String fourthInputString = "/pm cash /c Person /d Nike Shoes /a 500 /t 38/14/2022";
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(fourthInputString, user).executeCommand());
+
+        String fifthInputString = "/pm cash /c Food /d Porridge /a 4.50 /t 31/11/2021";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(fifthInputString, user).executeCommand());
+
+        String sixthInputString = "/pm cash /c Food /d Porridge /a 4.50 /t 29/02/2021";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(sixthInputString, user).executeCommand());
+
+        String seventhInputString = "/pm cash /c Food /d Porridge /a 4.50 /t 30/02/2020";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(seventhInputString, user).executeCommand());
+
+        String eighthInputString = "/pm cash /c Food /d Porridge /a 4.50 /t 31/04/2020";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(eighthInputString, user).executeCommand());
     }
 
     /**

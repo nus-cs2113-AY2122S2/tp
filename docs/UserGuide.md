@@ -330,7 +330,7 @@ Prints a list of commands for storing credit cards as a payment method.
 ### Add a credit card: `add`
 
 Adds a credit card to your program. Only **one** credit card can only be added per command.  <br>
-#### Format: `add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CARD_BALANCE]`
+#### Format: `add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT]`
 
 * `[CREDIT_CARD_NAME]` refers to the name your Credit Card will be saved as.
     * Use abbreviations for ease of adding expenditures to this credit card. For example,
@@ -340,23 +340,19 @@ Adds a credit card to your program. Only **one** credit card can only be added p
     * For example, a credit card with `2% cashback` can be represented as `/cb 2`.
 * `[CARD_LIMIT]` refers to the maximum monthly expenditure on this credit card.
     * Enter the monthly maximum amount that can be spent on the credit card in dollars.
-* `[CARD_BALANCE]` refers to the amount of money left to be spent on the credit card.
-    * Enter the amount that is left in this card in dollars.
 
-Example:`add /cc /n dbs /cb 2 /cl 1000 /bal 1000`  
-Adds a credit card of the name 'DBS' with a cashback of 2%, a monthly spending limit of $1000 and a card balance of
-$1000.
+Example:`add /cc /n dbs /cb 2 /cl 1000`  
+Adds a credit card of the name 'DBS' with a cashback of 2% and a monthly spending limit of $1000.
 
 #### Expected Outcome:
 
 ````
-> add /cc /n dbs /cb 2 /cl 1000 /bal 1000
+> add /cc /n dbs /cb 2 /cl 1000
 Successfully added: 
 
 Credit card: dbs
 Cash back: 2%
 Card limit: $1000
-Card balance: $1000
 
 into the account
 ````
@@ -381,7 +377,7 @@ Prints your current list of credit cards that you have added so far.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: dbs [Cashback: 2.0%] [Cashback gained: $0.0] [Card limit: $1000.0] [Card balance: $1000.0]
+1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00] [Balance left: $1000.00]
 -----------------------------------------------
 ````
 
@@ -392,36 +388,34 @@ Prints your current list of credit cards that you have added so far.
 Modifies a credit card on your credit card list by specifying its index. <br>
 Use the `list /cc` command to view the current indices of your credit cards.
 
-#### Format: `update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`
+#### Format: `update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CARD_LIMIT]`
 
 * `[INDEX]` refers to the index of credit card in list in which you want to update.
     * Enter `1` if you want to update the first entry in the list.
 * `[NEW_NAME]` refers to the name your Credit Card will be updated to.
     * Use abbreviations for ease of adding expenditures to this credit card. For example,
       storing `DBS Live Fresh Credit Card` as `DBS LV`.
-* `[NEW_CASH_BACK]` refers to the updated amount of cash back received when spending on the credit card.
+* `[NEW_CASHBACK]` refers to the updated amount of cash back received when spending on the credit card.
     * Enter the amount of cashback in percentage.
     * For example, a credit card with `2% cashback` can be represented as `/cb 2`.
 * `[NEW_CARD_LIMIT]` refers to the updated maximum monthly expenditure on this credit card.
     * Enter the monthly maximum amount that can be spent on the credit card in dollars.
-* `[NEW_CARD_BALANCE]` refers to the updated amount of money left to be spent on the credit card.
-    * Enter the amount that is left in this card in dollars.
 
-For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000`  
-Updates the first credit card on your list to have a name of 'OCBC' with a cashback of 1.5%, a monthly spending limit of
-$500 and a card balance of $1000.
+For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500`  
+Updates the first credit card on your list to have a name of 'OCBC' with a cashback of 1.5% and a monthly spending limit of
+$500.
 
 #### Expected Outcome:
 
 ````
 > list /cc
 -----------------------------------------------
-1. Name: dbs [Cashback: 2.0%] [Cashback gained: $0.0] [Card limit: $1000.0] [Card balance: $1000.0]
+1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00] [Card balance: $1000.00]
 -----------------------------------------------
 
-> update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000
+> update /cc 1 /n OCBC /cb 1.5 /cl 500
 Successfully set credit card 1 to :
-Name: OCBC [Cashback: 1.5%] [Cashback gained: $0.0] [Card limit: $500.0] [Card balance: $1000.0]
+Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $1000.00]
 ````
 
 > **💡 Note:**
@@ -429,6 +423,13 @@ Name: OCBC [Cashback: 1.5%] [Cashback gained: $0.0] [Card limit: $500.0] [Card b
    > Field that are labeled starting with NEW follow the same restrictions base command in [add a credit card](#add-a-credit-card-add).
    > For example `[NEW_NAME]` can be abbreviated like `[CREDIT_CARD_NAME]`.
 >- Only enter `[INDEX]` that exist in the list. For example if you have 4 items in the credit card list, specify `[INDEX]` to be a number from 1 to 4.
+>- You are **not allowed** to update the spending limit to an amount below what you have already spent using this card.
+>  - E.g: You have already spent $500 using the card. You will not be allowed to update the spending limit to a 
+> number less than $500.
+
+> **⚠️Warning⚠️**
+>- Updating a credit card would cause its cashback earned to **reset to 0**. Similarly, its balance left will also
+> be **reset to the spending limit**.
 
 <br/>
 
@@ -450,7 +451,7 @@ Deletes the first credit card on your credit card list.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: OCBC [Cashback: 1.5%] [Cashback gained: $0.0] [Card limit: $500.0] [Card balance: $1000.0]
+1. Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $1000.00]
 -----------------------------------------------
 
 > delete /cc 1
