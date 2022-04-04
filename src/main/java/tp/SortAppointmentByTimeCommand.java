@@ -7,10 +7,11 @@ public class SortAppointmentByTimeCommand extends Command {
     }
 
     @Override
-    public void execute(DoctorList doctorList, PatientList patientList,
+    public String execute(DoctorList doctorList, PatientList patientList,
                         AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                         PatientStorage patientStorage,
                         AppointmentStorage appointmentStorage) throws IHospitalException {
         appointmentList.sortByTime();
+        return String.format("Sorted already !" + "\n");
     }
 }
