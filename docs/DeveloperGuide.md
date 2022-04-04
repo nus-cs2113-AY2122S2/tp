@@ -101,10 +101,41 @@ output in your terminal:
 You are now ready to begin developing!
 
 ## Design 
-### Overview
-### Architecture Diagram
+### Architecture Overview
 
 ![Architecture-Diagram](high-level-diagram/architecture_diagram.png)
+
+The _Architecture Diagram_ above shows the high-level design of the application.
+Given below is a quick overview of the main components of the application
+and their interactions.
+
+#### Main components of the architecture
+- `Main`: The main component that starts the application upon launch of the applicaiton.
+- `WerkIt`: Initializes other components in the correct sequence, and connects them up with each other.
+- `LogHandler`: Handles logging within the application.
+- `Storage`: Reads data from, and writes data to the user's local storage.
+- `UI`: The UI of the application that deals with interaction with the user.
+- `Parser`: Parses user input to make sense of the command supplied by the user.
+- `Command`: Holds the different types of commands available in the application.
+
+#### How the components interact with each other
+[Sequence diagram]
+
+### Component Overview
+
+#### Storage component
+[Writeup]
+#### UI component
+[Writeup]
+#### Parser component
+[Writeup]
+#### Command component
+[Writeup]<br>
+Each command is a feature in the WerkIt! application.
+Thus, the next section will explain the design of each
+features in detail.
+
+### Feature Overview
 
 The features of WerkIt! are split and grouped into 5 main features:
 1. [Exercise-related features](#exercise-related-features)
@@ -1165,6 +1196,7 @@ The following sequence diagram illustrates how the `search /all` command works i
 
 ## Glossary
 
+* **Reps** - The process of repeating an exercise. Often abbreviated to 'reps'.
 * **Exercise** - A single 'unit' of exercise. A type of exercise.
     * e.g. push up, jumping jacks, sit-ups
 * **Workout** - A single 'unit' of exercise with a number of repetitions associated with it.
