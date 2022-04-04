@@ -113,33 +113,44 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Tests if the input parameters from the user are valid.
+     *
+     * @param paymentMethod The payment method used, either as cash or the credit card.
+     * @param inputCategory The category as indicated by the user.
+     * @param description The description of the expenditure.
+     * @param amountAsString Price of the expenditure.
+     * @param inputTime Date of when the expenditure was bought.
+     * @throws MindMyMoneyException when the parameters are invalid.
+     */
+    public void testExpenditureParameters(String paymentMethod, String inputCategory, String description,
+                String amountAsString, String inputTime) throws MindMyMoneyException {
+        testPaymentMethod(paymentMethod, creditCardList);
+        testExpenditureCategory(inputCategory);
+        testDescription(description);
+        testExpenditureAmount(amountAsString, paymentMethod, creditCardList);
+        checkValidDate(inputTime);
+    }
+
+    /**
      * Inserts an Expenditure object into user's list of expenditure(s).
      *
      * @throws MindMyMoneyException when inputs are invalid or flags are missing.
      */
     public void addExpenditure() throws MindMyMoneyException {
         String paymentMethod = parseInputWithCommandFlag(addInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
-        testPaymentMethod(paymentMethod, creditCardList);
+        String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
+        String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
+        String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
+        String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
+
+        testExpenditureParameters(paymentMethod, inputCategory, description, amountAsString, inputTime);
+
         if (capitalise(paymentMethod).equals("Cash")) {
             paymentMethod = capitalise(paymentMethod);
         }
-
-        String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
-        testExpenditureCategory(inputCategory);
-
-        String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
-        testDescription(description);
-
-        String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-        testExpenditureAmount(amountAsString, paymentMethod, creditCardList);
-
         String category = capitalise(inputCategory);
-
         float amountAsFloat = Float.parseFloat(amountAsString);
         float amountFloat = formatFloat(amountAsFloat);
-
-        String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
-        checkValidDate(inputTime);
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         checkAfterCurrentDate(date);
         String time = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
