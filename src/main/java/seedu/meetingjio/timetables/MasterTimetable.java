@@ -196,6 +196,7 @@ public class MasterTimetable {
         for (Timetable timetable : timetables) {
             try {
                 timetable.add(meeting);
+                meetingList.add(meeting);
             } catch (DuplicateEventException dee) {
                 return ERROR_DUPLICATE_EVENT;
             } catch (OverlappingEventException oee) {

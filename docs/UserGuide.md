@@ -2,7 +2,7 @@
 
 ## Introduction
 
-MeetingJio is a program for **finding potential time slots for team meetings based on everyone’s availability** via a *Command Line Interface (CLI)*.
+MeetingJio is a program for **finding potential time slots for team meetings based on** everyone’s **availability** via a *Command Line Interface (CLI)*.
 If you can type fast, MeetingJio can get your meeting management tasks done faster than manually eyeballing your timetable.
 
 ## Quick Start
@@ -14,6 +14,16 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 6. Refer to the *Features* below for the details of the commands.
 
 ## Features
+
+### Add Lessons to your own timetable and others timetable
+
+### See slots for possible meetings based on duration
+
+### Book meetings based on availability of **all users**
+
+### View everyone's timetable and availability
+
+### Save your timetable details to storage and retrieve accordingly
 
 ### Viewing help: `help`
 Shows a list of commands available.
@@ -43,7 +53,7 @@ ________________________________________________________________________________
 12. To clear all entries: clear all
 13. To clear all entries: clear [Name]
 14. To exit the application: exit
-__________________________________________________________________________________________________________
+_________________________________________________________________________________________________________
 ```
 
 
@@ -154,6 +164,7 @@ Adds a new meeting that will be synced with everyone
 * The `START_TIME` and `END_TIME` have to be in 24-hour time format.
 * The accepted options of `MODE` are _online_ and _physical_.
 * All users added need to be free at the specified meeting day and time for the meeting to be successfully added and synced.
+* **_<TOEDIT>If new users are added, pre-existing meetings will be deleted because logically_** 
 
 Example of usage:
 
@@ -162,7 +173,7 @@ Example of usage:
 Expected outcome:
 ```
 The following meeting has been added to everyone's timetable:
-[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
+[M] TITLE: meeting		DAY: wednesday		START: 1230		END: 1330		MODE: online
 ```
 
 
@@ -172,8 +183,10 @@ Deletes an event from the user's specified timetable
 **Format:** ` delete n/NAME`
 
 * Deletes from the timetable of user
-* Deletes the lesson at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed list.
+
+* Deletes the event at the specified `INDEX`.
+* The `INDEX` refers to the index number shown of the specified user's timetable.
+* If a meeting event is deleted, the meeting will be deleted from all users.
 
 Example of usage:
 
@@ -230,8 +243,9 @@ Friday 1800 2359
 Saturday 0800 2359
 Sunday 0800 2359
 ```
-### Clearing all lessons from user: `clear`
-Deletes all the lessons from specified user if any.
+### Clearing all events from user: `clear`
+Deletes all the events from specified user if any. 
+Note that in this, case if a meeting event for this user exists, it will only be deleted for this user. 
 
 Format: `clear USER`
 
@@ -246,7 +260,7 @@ john's timetable has been cleared
 
 Alternatively you can clear all the events from everyone's timetable
 
-### Clearing all lessons from all users: `clear all`
+### Clearing all events from all users: `clear all`
 
 Format: `clear all`
 
@@ -278,15 +292,16 @@ See you again!
 ## Command summary
 
 
-| Action       | Format                                                                     |
-|--------------|----------------------------------------------------------------------------|
-| Help         | `help`                                                                     |
-| Add lesson   | `add_lesson n/NAME t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
-| Add Meeting  | `add_meeting t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`       |
-| Delete Event | `delete n/NAME i/INDEX`                                                    |
-| Free         | `free`                                                               |
-| List         | `list`                                                                     |
-| Clear        | `clear`                                                                    |
-| Exit         | `exit`                                                                     |
+| Action                           | Format                                                                     |
+|----------------------------------|----------------------------------------------------------------------------|
+| Help                             | `help`                                                                     |
+| Add lesson                       | `add_lesson n/NAME t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
+| Add Meeting                      | `add_meeting t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`       |
+| Delete Event                     | `delete n/NAME i/INDEX`                                                    |
+| Free                             | `free`                                                                     |
+| List                             | `list`                                                                     |
+| Clear events from user           | `clear USER`                                                               |
+| Clear all events from everyone   | `clear all`                                                                |
+| Exit                             | `exit`                                                                     |
 
 
