@@ -186,8 +186,10 @@ will parse the `workout` base word and proceed to create a `WorkoutCommand` obje
 <br><br>
 Once the `WorkoutCommand` object is created, the `WorkoutCommand#execute()` method
 is called. Depending on the type of command action, this method will
-call different operations from the `WorkoutList` class. For instance, if the command action
-is `/create`, this method will call the appropriate method, in this case, `WorkoutList#createAndAddWorkout(userArgument)`.
+call the appropriate operations from the `WorkoutList` class. For instance, if the command action
+is `/create`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout(userArgument)`
+to create a new workout in the application. 
+To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
 <br><br>
 When all methods except the `listAllWorkout()` method is executed, the appropriate
 `FileManager` and `UI` classes will call the appropriate methods depending on the command action.
