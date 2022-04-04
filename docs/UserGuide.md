@@ -16,12 +16,13 @@ that WerkIt have.
 ### Terminology 
 Please take note of these few terms. It is explained as below:
 
-| Term     | Description                                                                                                              |
-|----------|--------------------------------------------------------------------------------------------------------------------------|
-| Exercise | A single unit of exercise. <br/>Example: "push up", "pull up", "sit up"                                                  |
-| Workout  | An exercise with a quantity/number of repetitions. <br/>Example: "5 push up", "5 pull up", "10 sit up"                   |
-| Plan     | A set of workouts. <br/>Example: A plan named "Arms" will contains "5 push ups, 5 pull ups"                              |
-| Schedule | Plan schedule for a day. The schedule is set for a week. <br/>Example: Arms plan will be added to Monday in the schedule |
+| Term       | Description                                                                                                              |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| Exercise   | A single unit of exercise. <br/>Example: "push up", "pull up", "sit up"                                                  |
+| Repetition | The process of repeating an exercise. Often abbreviated to 'reps'.                                                       |
+| Workout    | An exercise with a quantity/number of repetitions. <br/>Example: "5 push up", "5 pull up", "10 sit up"                   |
+| Plan       | A set of workouts. <br/>Example: A plan named "Arms" will contains "5 push ups, 5 pull ups"                              |
+| Schedule   | Plan schedule for a day. The schedule is set for a week. <br/>Example: Arms plan will be added to Monday in the schedule |
 
 ### Notations Used In This Guide
 When reading this document, there are several icons that you may encounter.
