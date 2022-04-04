@@ -613,7 +613,6 @@ The following configuration options currently exist:
 
 **A**: Your task and module data are stored in the `data` folder, located in the same folder as Mod Happy's JAR file. To transfer data to another computer, simply copy this folder to the new machine. Make sure to place the folder in the same location as the Mod Happy application itself!
 
-
 ## 6. Command summary
 
 |                  Command                   | Format                                                                                                                                                                                   |

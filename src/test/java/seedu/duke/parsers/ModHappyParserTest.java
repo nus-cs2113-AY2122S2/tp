@@ -36,27 +36,19 @@ public class ModHappyParserTest {
 
 
     private void testParseCommand_expectAdditionalParameterException(String testString) {
-        assertThrows(AdditionalParameterException.class, () -> {
-            parser.parseCommand(testString);
-        });
+        assertThrows(AdditionalParameterException.class, () -> parser.parseCommand(testString));
     }
 
     private void testParseCommand_expectInvalidCompulsoryParameterException(String testString) {
-        assertThrows(InvalidCompulsoryParameterException.class, () -> {
-            parser.parseCommand(testString);
-        });
+        assertThrows(InvalidCompulsoryParameterException.class, () -> parser.parseCommand(testString));
     }
 
     private void testParseCommand_expectInvalidInputException(String testString) {
-        assertThrows(InvalidInputException.class, () -> {
-            parser.parseCommand(testString);
-        });
+        assertThrows(InvalidInputException.class, () -> parser.parseCommand(testString));
     }
 
     private void testParseCommand_expectInvalidNumberException(String testString) {
-        assertThrows(InvalidNumberException.class, () -> {
-            parser.parseCommand(testString);
-        });
+        assertThrows(InvalidNumberException.class, () -> parser.parseCommand(testString));
     }
 
     @BeforeEach
@@ -741,12 +733,41 @@ public class ModHappyParserTest {
     }
 
     @Test
+    public void parse_tagCommand_addTag_withoutTargetModule_parsedCorrectly() {
+        final String testString = "tag add 1 tag";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof TagCommand);
+            assertEquals("add", ((TagCommand) c).getTagOperation());
+            assertEquals(0, ((TagCommand) c).getTaskIndex());
+            assertEquals("tag", ((TagCommand) c).getTagDescription());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_tagCommand_delTag_withoutTargetModule_parsedCorrectly() {
+        final String testString = "tag del 1 tag";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof TagCommand);
+            assertEquals("del", ((TagCommand) c).getTagOperation());
+            assertEquals(0, ((TagCommand) c).getTaskIndex());
+            assertEquals("tag", ((TagCommand) c).getTagDescription());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_tagCommand_addTag_withTargetModule_parsedCorrectly() {
         final String testString = "tag add 1 -m cs2113t tag";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof TagCommand);
             assertEquals("add", ((TagCommand) c).getTagOperation());
+            assertEquals(0, ((TagCommand) c).getTaskIndex());
             assertEquals("cs2113t", ((TagCommand) c).getTaskModule());
             assertEquals("tag", ((TagCommand) c).getTagDescription());
         } catch (Exception e) {
@@ -755,7 +776,28 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_tagCommand_invalidTagOperation_throwsParseException() {
+    public void parse_tagCommand_delTag_withTargetModule_parsedCorrectly() {
+        final String testString = "tag del 1 -m cs2113t tag";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof TagCommand);
+            assertEquals("del", ((TagCommand) c).getTagOperation());
+            assertEquals(0, ((TagCommand) c).getTaskIndex());
+            assertEquals("cs2113t", ((TagCommand) c).getTaskModule());
+            assertEquals("tag", ((TagCommand) c).getTagDescription());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_tagCommand_invalidFlag_throwsException() {
+        final String testString = "tag add 1 -f cs2113t tag";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+    }
+
+    @Test
+    public void parse_tagCommand_invalidTagOperation_throwsException() {
         final String testString = "tag invalidOp 1 tagDescription";
         testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }

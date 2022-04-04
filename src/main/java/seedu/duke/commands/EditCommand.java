@@ -101,8 +101,11 @@ public class EditCommand extends Command {
      *
      * @param moduleList List from which the module's description is to be edited.
      */
-    public void editModuleDescription(ModuleList moduleList) {
+    public void editModuleDescription(ModuleList moduleList) throws NoSuchModuleException {
         Module targetModule = moduleList.getModule(moduleCode);
+        if (Objects.isNull(targetModule)) {
+            throw new NoSuchModuleException();
+        }
         targetModule.setModuleDescription(changedParameter);
         result = String.format(EDIT_MODULE_SUCCESS, targetModule.getModuleCode());
     }
