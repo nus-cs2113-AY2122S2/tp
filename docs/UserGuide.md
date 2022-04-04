@@ -9,8 +9,9 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `EquipmentManager` from [here](https://github.com/AY2122S2-CS2113-F12-2/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for your `EquipmentManager` application.
-4. Double-click the file to start the app. 
-5. Type `help` to see the list of available commands.
+4. Open the command line and go to the folder mentioned above.
+5. Run java -jar tp.jar
+6. Type `help` to see the list of available commands.
 
 ## Features 
 
