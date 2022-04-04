@@ -29,9 +29,9 @@ public class StudyManagerTest {
      */
     @BeforeAll
     public void setUp() {
-        cs2113 = new Module("CS2113", "Lecture", "Friday", "4pm-6pm");
-        cs3244 = new Module("CS3244", "Tutorial", "Monday", "2pm-3pm");
-        ee4204 = new Module("EE4204", "Exam", "Monday", "10am-12pm");
+        cs2113 = new Module("CS2113", "Lecture", "Friday", "4:00pm-6:00pm");
+        cs3244 = new Module("CS3244", "Tutorial", "Monday", "2:00pm-3:00pm");
+        ee4204 = new Module("EE4204", "Exam", "Monday", "10:00am-12:00pm");
 
         testList.add(cs2113);
         testList.add(cs3244);
@@ -48,9 +48,9 @@ public class StudyManagerTest {
     public void testAddModule() {
 
 
-        String userInputCs2113 = "add m/CS2113 c/lec d/Friday t/4pm-6pm";
-        String userInputCs3244 = "add m/CS3244 c/tut d/Monday t/2pm-3pm";
-        String userInputEe4204 = "add m/EE4204 c/exam d/Monday t/10am-12pm";
+        String userInputCs2113 = "add m/CS2113 c/lec d/Friday t/4:00pm-6:00pm";
+        String userInputCs3244 = "add m/CS3244 c/tut d/Monday t/2:00pm-3:00pm";
+        String userInputEe4204 = "add m/EE4204 c/exam d/Monday t/10:00am-12:00pm";
 
         studyManager.addModule(userInputCs2113, true);
         studyManager.addModule(userInputCs3244, true);
