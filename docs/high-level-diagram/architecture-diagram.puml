@@ -2,32 +2,29 @@
 !include <office/Concepts/documents>
 !include <office/Users/user>
 
-rectangle "<$user>\nUser" as User #DeepPink
-rectangle "<$documents>\nFiles" as Files #Lime
+rectangle "<$user>\nUser" as User #Pink
+rectangle "<$documents>\nFiles" as Files #Snow
 
-title Architecture Diagram
+title Architecture Diagram for WerkIt!
 rectangle {
-rectangle UI #lightgreen
-rectangle Command #lightblue
-rectangle Parser #khaki
-rectangle WerkIt #yellow
-rectangle Main #orange
-rectangle Data #Salmon
-rectangle FileManager #MediumOrchid
-rectangle LogHandler #pink
+rectangle UI #YellowGreen
+rectangle Command #LightSkyBlue
+rectangle Parser #Gold
+rectangle WerkIt #Sandybrown
+rectangle Main #Cornsilk
+rectangle Storage #IndianRed
+rectangle LogHandler #Orchid
 }
 
 UI<.-up-User
 Main-up->WerkIt
 WerkIt-up->Parser
 Parser-up.>Command
-Command-right->Data
-Command-right->FileManager
-WerkIt-right->FileManager
+Command-right->Storage
+WerkIt-right->Storage
 Main-right->LogHandler
 WerkIt-left->UI
-FileManager-right->Files
-
-
+Storage-right.>Files
+Files-left.>Storage
 
 @enduml
