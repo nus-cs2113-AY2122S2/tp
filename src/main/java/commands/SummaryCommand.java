@@ -58,26 +58,30 @@ public class SummaryCommand extends Command {
             System.out.println("-------------------------------------------------------------------------------------");
             switch(type){
                 case "fashion":
-                    System.out.printf("%66s %13s", "Total: ",ExpenseManager.getFashionExpense());
+                    System.out.printf("%66s %13s", "Total for fashion: ",ExpenseManager.getFashionExpense());
                     break;
                 case "food":
-                    System.out.printf("%66s %13s", "Total: ",ExpenseManager.getFoodExpense());
+                    System.out.printf("%66s %13s", "Total for food: ",ExpenseManager.getFoodExpense());
                     break;
                 case "accessory":
-                    System.out.printf("%66s %13s", "Total: ",ExpenseManager.getAccessoryExpense());
+                    System.out.printf("%66s %13s", "Total for accessory: ",ExpenseManager.getAccessoryExpense());
                     break;
                 case "others":
-                    System.out.printf("%66s %13s", "Total: ",ExpenseManager.getOtherExpense());
+                    System.out.printf("%66s %13s", "Total for others: ",ExpenseManager.getOtherExpense());
                     break;
             }
             System.out.println();
         }
-        System.out.println("-------------------------------------------------------------------------------------");
-        System.out.printf("%20s %20s %13s %13s %13s", "Type: subscription", "Name", "Price", "Date", "Renewal");
-        System.out.println();
-        System.out.println("-------------------------------------------------------------------------------------");
+        int flag=0;
         for(Record record:allRecords){
             if (record instanceof Subscription) {
+                if (flag==0){
+                    System.out.println("-------------------------------------------------------------------------------------");
+                    System.out.printf("%20s %20s %13s %13s %13s", "Type: subscription", "Name", "Price", "Date", "Renewal");
+                    System.out.println();
+                    System.out.println("-------------------------------------------------------------------------------------");
+                }
+                flag=1;
                 Subscription s = (Subscription) record;
                 System.out.printf("%20s %20s %13s %13s %13s", " ", s.getName(),
                         s.getPrice(), s.getDate(), s.getRenewal());
@@ -86,7 +90,7 @@ public class SummaryCommand extends Command {
             }
         }
         System.out.println("-------------------------------------------------------------------------------------");
-        System.out.printf("%66s %13s", "Total: ",ExpenseManager.getSubscriptionExpense());
+        System.out.printf("%66s %13s", "Total for subscription: ",ExpenseManager.getSubscriptionExpense());
         System.out.println();
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.printf("%66s %13s", "Overall Total: ",ExpenseManager.calculateTotalExpense());
