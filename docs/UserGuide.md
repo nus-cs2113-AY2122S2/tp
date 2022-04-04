@@ -15,7 +15,6 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 
 ## Features
 
-<<<<<<< HEAD
 ### Add Lessons to your own timetable and others timetable
 
 ### See slots for possible meetings based on duration
@@ -26,8 +25,6 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 
 ### Save your timetable details to storage and retrieve accordingly
 
-=======
->>>>>>> master
 ### Viewing help: `help`
 Shows a list of commands available.
 
@@ -42,13 +39,6 @@ Expected outcome:
 ```
 Here is the list of commands available:
 __________________________________________________________________________________________________________
-<<<<<<< HEAD
-1. To add a lesson: add n/[Name] l/[Lesson] d/[day] st/[StartTime] et/[EndTime] m/[Mode]
-2. To delete a lesson: delete n/[Name] i/[Index]
-3. To list all lessons: list
-4. To clear all entries: clear
-5. To exit the application: exit
-=======
 1. To add a user: add_user [Name]
 2. To add a lesson: add_lesson n/[Name] t/[Title] d/[Day] st/[StartTime] et/[EndTime] m/[Mode]
 3. To add a meeting: add_meeting t/[Title] d/[Day] st/[StartTime] et/[EndTime] m/[Mode]
@@ -63,8 +53,7 @@ ________________________________________________________________________________
 12. To clear all entries: clear all
 13. To clear all entries: clear [Name]
 14. To exit the application: exit
->>>>>>> master
-__________________________________________________________________________________________________________
+_________________________________________________________________________________________________________
 ```
 
 
@@ -194,14 +183,10 @@ Deletes an event from the user's specified timetable
 **Format:** ` delete n/NAME`
 
 * Deletes from the timetable of user
-<<<<<<< HEAD
+
 * Deletes the event at the specified `INDEX`.
 * The `INDEX` refers to the index number shown of the specified user's timetable.
 * If a meeting event is deleted, the meeting will be deleted from all users.
-=======
-* Deletes the lesson at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed list.
->>>>>>> master
 
 Example of usage:
 
