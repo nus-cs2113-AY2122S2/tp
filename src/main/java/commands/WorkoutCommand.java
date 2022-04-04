@@ -164,7 +164,7 @@ public class WorkoutCommand extends Command {
             case UPDATE_ACTION_KEYWORD:
                 String currentWorkout = getWorkoutList().getCurrentWorkout(getUserArguments());
                 Workout updatedWorkout = getWorkoutList().updateWorkout(getUserArguments());
-                getUI().printUpdateWorkoutMessage(updatedWorkout);
+                getUI().printUpdateWorkoutMessage(currentWorkout, updatedWorkout);
                 getPlanList().updatePlanContainsUpdatedWorkout(currentWorkout, updatedWorkout);
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 getFileManager().rewriteAllPlansToFile(getPlanList());
