@@ -1,0 +1,48 @@
+@startuml
+hide footbox
+
+participant "Unspecified" as none
+participant ":AddLessonCommand" as Command
+participant ":Lesson" as Lesson
+participant ":MasterTimetable" as Master
+participant ":Timetable" as Timetable
+
+create Command
+none -> Command : AddLessonCommand(name, title, day, startTime, endTime, mode)
+activate Command
+none <-- Command :
+deactivate Command
+
+none -> Command : execute(masterTimetable :MasterTimetable)
+activate Command
+create Lesson
+Command -> Lesson : Lesson(title, day, startTime, endTime, mode)
+activate Lesson
+Command <-- Lesson
+deactivate Lesson
+
+Command ->  Master : addLesson(lesson :Lesson, name :String)
+activate Master
+Master -> Master : getByName(name :String)
+activate Master
+Master --> Master : :Timetable
+deactivate Master
+
+Master -> Timetable : add(lesson :Lesson)
+activate Timetable
+Master <-- Timetable
+deactivate Timetable
+
+Command <-- Master
+deactivate Master
+
+Command -> Command : addConfirmation(lesson :Lesson, name :String)
+activate Command
+Command --> Command : :String
+deactivate Command
+
+none <-- Command : :String
+deactivate Command
+destroy Command
+
+@enduml
