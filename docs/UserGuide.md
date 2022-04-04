@@ -85,7 +85,7 @@ Some Mod Happy commands require you to provide a duration. You can specify these
 
 Format: `DURATION_AMOUNT DURATION_UNIT`
 
-- `DURATION_AMOUNT`: Any positive number less than one billion (1000000000), including decimals.
+- `DURATION_AMOUNT`: Any positive number less than or equal to one billion (1000000000), including decimals.
 - `DURATION_UNIT`: The time unit that `DURATION_AMOUNT` is specified in. Mod Happy supports the following units:
   - Hours: `h`, `H`, `hour`, `Hour`, `hours`, `Hours`
   - Minutes: `m`, `M`, `min`, `Min`, `minutes`, `Minutes`
@@ -327,7 +327,6 @@ Format: `save`
 
 **A**: Your task and module data are stored in the `data` folder, located in the same folder as Mod Happy's JAR file. To transfer data to another computer, simply copy this folder to the new machine. Make sure to place the folder in the same location as the Mod Happy application itself!
 
-<<<<<<< HEAD
 ## 6. Command summary
 
 |                  Command                   | Format                                                                                                                                                                                   |

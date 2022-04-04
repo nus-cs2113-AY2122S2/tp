@@ -47,20 +47,20 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        if (taskIndex < 0) {
+        if (taskIndex < 0) { //If invalid task number or no task number was provided
             deleteModule(moduleList);
-        } else {
-            Module targetModule;
-            if (Objects.isNull(taskModule)) {
-                targetModule = moduleList.getGeneralTasks();
-            } else {
-                targetModule = moduleList.getModule(taskModule);
-                if (Objects.isNull(targetModule)) {
-                    throw new NoSuchModuleException();
-                }
-            }
-            deleteTaskFromModule(targetModule);
+            return new CommandResult(result);
         }
+        Module targetModule;
+        if (Objects.isNull(taskModule)) {
+            targetModule = moduleList.getGeneralTasks();
+        } else {
+            targetModule = moduleList.getModule(taskModule);
+        }
+        if (Objects.isNull(targetModule)) {
+            throw new NoSuchModuleException();
+        }
+        deleteTaskFromModule(targetModule);
         return new CommandResult(result);
     }
 
@@ -71,6 +71,9 @@ public class DeleteCommand extends Command {
      */
     public void deleteModule(ModuleList moduleList) throws NoSuchModuleException {
         Module targetModule = moduleList.getModule(moduleCode);
+        if (Objects.isNull(targetModule)) {
+            throw new NoSuchModuleException();
+        }
         if (targetModule.getTaskList().size() > 0) {
             Boolean hasDeleteConfirmation = getUserConfirmation(targetModule);
             if (!hasDeleteConfirmation) {
