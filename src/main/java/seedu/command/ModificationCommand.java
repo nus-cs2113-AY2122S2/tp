@@ -3,6 +3,7 @@ package seedu.command;
 import seedu.equipment.EquipmentType;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -81,7 +82,7 @@ public class ModificationCommand extends Command {
                 setPurchasedDate(argValue);
                 break;
             case "t":
-                setEquipmentType(EquipmentType.valueOf(argValue));
+                setEquipmentType(EquipmentType.valueOf(argValue.toUpperCase(Locale.ROOT)));
                 break;
             case "pf":
                 setPurchasedFrom(argValue);

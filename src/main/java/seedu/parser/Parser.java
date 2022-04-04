@@ -30,29 +30,43 @@ public class Parser {
      * passed into arguments.
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
-    public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)\\s*");
-    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)\\s*");
-    public static final Pattern TYPE_ENUM_FORMAT = Pattern.compile("[Tt]/(?<equipmentType>\\w+)\\s*");
+    public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)");
+    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)");
+
+    /**
+     * Defines regex used to match argument pairs in the command line.
+     *
+     * <p>An argument pair is defined as an argument tag, a slash "/", minimally a backtick "`",
+     * an argument value and minimally a final backtick "`".
+     *
+     * <p>See also {@link Parser#MODIFICATION_ARGUMENT_FORMAT} for Regex use and demonstration.
+     */
+    private static final String ARGUMENT_PAIR_REGEX =
+            "(?:[sntcSNTC]|[pP][fF]|[pP][dD])" // non-capturing group for argument tag
+                    + "\\/" // argument delimiter
+                    + "`+" //  backticks to enclose string
+                    + "[\\w\\s\\-\\.]+" // actual argument value
+                    + "`+"; //  backticks to enclose string
     /**
      * Extracts first n-1 tags for debugging and assumes that the last tag contains the whole string, refer to:
-     * <a href="https://regex101.com/r/7rho4H/1"> Regex101</a> for demo.*/
+     * <a href="https://regex101.com/r/7rho4H/1"> Regex101</a> for demo.
+     */
     public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
-            "((?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
-                    + "\\/" // argument delimiter
-                    + "[\\w\\s\\-\\.]+)" // actual argument value
+            "(" + ARGUMENT_PAIR_REGEX + ")"
                     + "\\s+" // argument space before next delimiter
-                    + "(?=[sntcSNTC]|[pP][fF]|[pP][dD])" // next delimiter
+                    + "(?=[sntcSNTC]|[pP][fF]|[pP][dD])" // positive lookahead to mandate next delimiter
     );
     /**
      * Extracts last tag for debugging.
      *
-     * <p>See also {@link Parser#MODIFICATION_ARGUMENT_FORMAT} for Regex demonstration.*/
+     * <p>See also {@link Parser#MODIFICATION_ARGUMENT_FORMAT} for Regex use and demonstration.
+     */
     public static final Pattern MODIFICATION_ARGUMENT_TRAILING_FORMAT = Pattern.compile(
-            "(?<!\\w)" // require a previous pattern
-                    + "(?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
-                    + "\\/" // argument delimiter
-                    + "([\\w\\s\\-\\.]+)" // last argument value
+            "(?<![\\w`])" // require a previous pattern
+                    + ARGUMENT_PAIR_REGEX
+                    + "$" // require end of string
     );
+
     public static final String INCORRECT_COMMAND_FORMAT = "Command word not recognised. " + System.lineSeparator()
             + "Please use one of the following: "
             + AddCommand.COMMAND_WORD + ", " + UpdateCommand.COMMAND_WORD + ", " + ListCommand.COMMAND_WORD + ", "
@@ -78,7 +92,10 @@ public class Parser {
 
         // only arguments is trimmed because commandWord is split on the first space
         String commandWord = commandAndArgument.get(0);
-        String arguments = commandAndArgument.get(1).trim();
+        String arguments = commandAndArgument.get(1);
+        if (arguments != null) {
+            arguments = arguments.trim();
+        }
 
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
@@ -230,35 +247,26 @@ public class Parser {
             Matcher matcher = MODIFICATION_ARGUMENT_FORMAT.matcher(args);
             while (matcher.find()) {
                 argument = matcher.group();
-                argumentToAdd = setArgumentTagsToLower(argument.trim());
+                argumentToAdd = reformatArgumentPair(argument.trim());
                 splitArguments.add(argumentToAdd);
                 lastIndex = matcher.end();
             }
             matcher.usePattern(MODIFICATION_ARGUMENT_TRAILING_FORMAT);
             matcher.find(lastIndex);
             argument = matcher.group();
-            argumentToAdd = setArgumentTagsToLower(argument.trim());
+            argumentToAdd = reformatArgumentPair(argument.trim());
             splitArguments.add(argumentToAdd);
         } catch (IllegalStateException e) {
-            throw new IncompleteCommandException("No parameters found!");
-        }
-
-        for (int i = splitArguments.size() - 1; i >= 0; i--) {
-            String argumentPair = splitArguments.get(i);
-            Matcher matcher = TYPE_ENUM_FORMAT.matcher(argumentPair);
-            if (matcher.matches()) {
-                splitArguments.remove(argumentPair);
-                splitArguments.add("t/" + matcher.group("equipmentType").toUpperCase(Locale.ROOT));
-                return splitArguments;
-            }
+            throw new IncompleteCommandException(IncompleteCommandException.NO_PARAMETERS_FOUND);
         }
 
         return splitArguments;
     }
 
-    private static String setArgumentTagsToLower(String argument) {
+    private static String reformatArgumentPair(String argument) {
         int slashIndex = argument.indexOf("/");
-        return argument.substring(0, slashIndex).toLowerCase(Locale.ROOT) + argument.substring(slashIndex);
+        String newString = argument.substring(0, slashIndex).toLowerCase(Locale.ROOT) + argument.substring(slashIndex);
+        return newString.replace("`", "");
     }
 
     @Deprecated
