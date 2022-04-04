@@ -36,7 +36,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_EDIT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_EDIT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_NAME_CANNOT_BE_ALL;
 
 
@@ -200,8 +200,10 @@ public class Parser {
             String title = eventDescription[TITLE_INDEX - 1];
             return new AddMeetingCommand(title, day, startTime, endTime, mode);
 
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
+        } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_MEETING);
+        } catch (ArrayIndexOutOfBoundsException aioube) {
+            return new CommandResult(ERROR_EXTRA_PARAMETERS_ADD_MEETING);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_MEETING);
         } catch (InvalidTimeException | NumberFormatException ite) {
