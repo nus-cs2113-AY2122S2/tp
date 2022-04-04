@@ -126,10 +126,7 @@ output:
 
 Removes an Equipment entry from the list of Equipment entirely. This is irreversible after the file is saved.
 
-Format: `update s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`
-
-* The `TYPE` must be one of the following types: MICROPHONE, SPEAKER, STAND, CABLE.
-* The `COST` cannot contain any symbols.
+Format: `delete s/SERIAL_NUMBER`
 
 Example of usage and output:
 
@@ -226,11 +223,12 @@ Output:
 
 'Cheat Sheet' of commands here
 
-* Add equipment `todo n/TODO_NAME d/DEADLINE`
+* Add equipment `add n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`
+* Check equipment `check n/ITEM_NAME`
 * Listing equipment: `list`
-* Listing equipment by type: `list MICROPHONE`
-* Updating an equipment: `update s/S14115ASF c/1200 pf/AVLFX`
-* Deleting an equipment: `delete s/S14115ASF`
+* Listing equipment by type: `list t/TYPE`
+* Updating an equipment: `update s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`
+* Deleting an equipment: `delete s/SERIAL_NUMBER`
 * Saving application state: `save`
 * Getting help: `help`
 * Exiting the application: `bye`
