@@ -232,10 +232,7 @@ public class TimerLogic implements WindowListener {
         if (!timer.isTimerRunning()) {
             return true;
         }
-        if (timer.isTimerPaused()) {
-            return true;
-        }
-        return false;
+        return timer.isTimerPaused();
     }
 
     /**
