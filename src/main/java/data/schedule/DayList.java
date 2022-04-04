@@ -14,7 +14,7 @@ public class DayList {
     public static final int NUMBER_OF_SCHEDULE_DAYS = 7;
 
     private PlanList planList;
-    private String[] scheduleList = new String[NUMBER_OF_SCHEDULE_DAYS]; 
+    private String[] scheduleList = new String[NUMBER_OF_SCHEDULE_DAYS];
     private String[] schedulePrintList = new String[NUMBER_OF_SCHEDULE_DAYS];
     private Day[] dayList = new Day[NUMBER_OF_SCHEDULE_DAYS]; //store all created day object
 
@@ -172,8 +172,12 @@ public class DayList {
             logger.log(Level.WARNING, "User entered an invalid day number.");
             throw new InvalidScheduleException(className, InvalidScheduleException.DAY_NUMBER_OUT_OF_RANGE);
         }
-        scheduleList[dayNumber - 1] = null;
-        dayList[dayNumber - 1] = null;
+        if (dayList[dayNumber-1] == null) {
+            System.out.println("No plan is being scheduled, hence no plan is cleared.");
+            return;
+        }
+
+        clearPlan(dayNumber-1);
         System.out.println("Plan had been cleared for " + covertDayNumberToDay(dayNumber) + ".");
     }
 
@@ -183,11 +187,18 @@ public class DayList {
      */
     public void clearAllSchedule() {
         for (int i = 0; i < NUMBER_OF_SCHEDULE_DAYS; i += 1) {
-            scheduleList[i] = null;
-            dayList[i] = null;
+            clearPlan(i);
             assert (scheduleList[i] == null);
             assert (dayList[i] == null);
         }
+    }
+
+    /**
+     * Remove plan on the stated day.
+     */
+    public void clearPlan(int dayNumber) {
+        scheduleList[dayNumber] = null;
+        dayList[dayNumber] = null;
     }
 
     /**
