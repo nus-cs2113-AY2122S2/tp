@@ -150,7 +150,31 @@ _to be updated_
 ---
 
 ### Workout-related features
-_to be updated_
+Below is a class diagram of the workout-related features:
+![WorkoutUML](uml/classDiagrams/images/workoutRelatedFeatures.png)
+<br>
+
+The `Parser` class will call the `Parser#parseUserInput(userInput)` method
+to analyse the user's command. If the user's command is of type 
+`workout`, i.e. `workout /commandAction <condition>`, the `Parser#parseUserInput(userInput)` method
+will parse the `workout` base word and proceed to create a `WorkoutCommand` object via the
+`Parser#createWorkoutCommand(userInput)` method. 
+<br><br>
+Once the `WorkoutCommand` object is created, the `WorkoutCommand#execute()` method
+is called. Depending on the type of command action, this method will
+call different operations from the `WorkoutList` class. For instance, if the command action
+is `/create`, this method will call the appropriate method, in this case, `WorkoutList#createAndAddWorkout(userArgument)`.
+<br><br>
+When all methods except the `listAllWorkout()` method is executed, the appropriate
+`FileManager` and `UI` classes will call the appropriate methods depending on the command action.
+From the previous example, the `/create` workout action will call the 
+`FileManager#writeNewWorkoutToFile(newWorkout)` and also the `UI#printNewCreatedMessage(newWorkout)`
+methods after the new workout has been created.
+<br><br>
+Finally, methods in the `PlanList` class is only called when the `/delete` and `/update`
+workout actions are executed. These methods are used to modify the application's plans list
+as the `/delete` and `/update` actions are cascading actions 
+(i.e. deleting a workout will delete plan(s) containing that deleted workout).
 
 ---
 
