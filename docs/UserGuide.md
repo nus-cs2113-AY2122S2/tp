@@ -40,7 +40,7 @@ possible issues from arising when using the application.</span>
 * [Quick Start Guide](#quick-start-guide)
     * [Recommended Terminals](#recommended-terminals) 
 * [Features](#features)
-  * [Application Flow](#) 
+  * [Application Flow](#features) 
   * [Finding Your Way Around The Application](#finding-your-way-around-the-application)
   * [Exercise And Workout Features](#exercise-and-workout-features)
     * [Show All Exercises: `exercise /list`](#show-all-exercises-exercise-list)
