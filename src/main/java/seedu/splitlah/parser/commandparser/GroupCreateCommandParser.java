@@ -11,7 +11,7 @@ import seedu.splitlah.ui.Message;
 /**
  * Represents a command parser that is able to parse user arguments into a GroupCreateCommand object.
  *
- * @author Roy
+ * @author Tianle
  */
 public class GroupCreateCommandParser implements CommandParser<GroupCreateCommand> {
 
