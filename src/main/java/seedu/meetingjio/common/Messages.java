@@ -28,14 +28,15 @@ public class Messages {
             + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
     public static final String MESSAGE_ADD_MEETING_FORMAT = "To add a meeting: add_meeting t/[Meeting title] "
             + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
-    public static final String MESSAGE_DELETE_FORMAT = "To delete a lesson: delete [Index]\n";
+    public static final String MESSAGE_DELETE_FORMAT = "To delete an event from specific user: delete n/[Name] i/ [Index]\n";
     public static final String MESSAGE_LIST_ALL_EVENTS = "To list all events: list all\n";
     public static final String MESSAGE_LIST_ALL_LESSONS = "To list all lessons: list_lesson all\n";
     public static final String MESSAGE_LIST_ALL_MEETINGS = "To list all meetings: list_meeting all\n";
     public static final String MESSAGE_LIST_USER_EVENTS = "To list a user's events: list [user]\n";
     public static final String MESSAGE_LIST_USER_LESSONS = "To list a user's lessons: list_lesson [user]\n";
     public static final String MESSAGE_LIST_USER_MEETINGS = "To list a user's meetings: list_meeting [user]\n";
-    public static final String MESSAGE_CLEAR_FORMAT = "To clear all entries: clear\n";
+    public static final String MESSAGE_CLEAR_USER_EVENTS = "To clear a user's events: clear [user]\n";
+    public static final String MESSAGE_CLEAR_ALL_EVENTS = "To clear all entries: clear all\n";
     public static final String MESSAGE_FREE_GENERIC_FORMAT = "To find free timeslots: free\n";
     public static final String MESSAGE_FREE_SPECIFIC_FORMAT = "To find free timeslots given a minimum duration: free "
             + "[duration]\n";
@@ -55,8 +56,9 @@ public class Messages {
             + "9. " + MESSAGE_LIST_USER_MEETINGS
             + "10. " + MESSAGE_FREE_GENERIC_FORMAT
             + "11. " + MESSAGE_FREE_SPECIFIC_FORMAT
-            + "12. " + MESSAGE_CLEAR_FORMAT
-            + "13. " + MESSAGE_EXIT_FORMAT
+            + "12. " + MESSAGE_CLEAR_USER_EVENTS
+            + "13. " + MESSAGE_CLEAR_ALL_EVENTS
+            + "14. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
 
     public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully";
