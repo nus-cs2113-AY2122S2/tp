@@ -4,12 +4,12 @@
 box
 Actor User USER_COLOR
 Participant Main #grey
-Participant Commands COMMAND_COLOR
-Participant "Parser" as Parser LOGIC_COLOR
-Participant Family MODEL_COLOR
-Participant Money MONEY_COLOR
-Participant UI UI_COLOR
-Participant Storage STORAGE_COLOR
+Participant "Commands\nComponent" as Commands COMMAND_COLOR
+Participant "Parser\nComponent" as Parser LOGIC_COLOR
+Participant "Family\nComponent" as Family MODEL_COLOR
+Participant "Money\nComponent" as Money MONEY_COLOR
+Participant "UI\nComponent" as UI UI_COLOR
+Participant "Storage\nComponent" as Storage STORAGE_COLOR
 end box
 
 User -> Main : "add /g 2 /n Alice"
@@ -27,7 +27,7 @@ deactivate Parser
 Commands --> Main : :AddPersonCommand
 deactivate Commands
 
-Main -> UI : //print start execution line//
+Main -> UI : printHoriLine()
 activate UI
 UI --> Main
 deactivate UI
@@ -35,9 +35,18 @@ deactivate UI
 Main -> Commands : execute()
 activate Commands
 
-Commands -> Parser : //parse various details//
+Commands -> Parser : parseName(\n"add /g 2 /n Alice")
 activate Parser
-Parser --> Commands
+Parser --> Commands : "Alice":String
+deactivate Parser
+
+Commands -> Parser : parseGroupIndex(\n"add /g 2 /n Alice")
+activate Parser
+Parser --> Commands : "2":String
+deactivate Parser
+Commands -> Parser : getValidGroupIndex(\n"2":String)
+activate Parser
+Parser --> Commands : 2:int
 deactivate Parser
 
 Commands -> Family : addPerson(2:int, "Alice":String)
@@ -46,12 +55,12 @@ activate Family
 Family -> Family : addPerson("Alice")
 activate Family
 
-Family -> Money : IncomeList()
+Family -> Money : new IncomeList()
 activate Money
 Money --> Family
 deactivate Money
 
-Family -> Money : ExpenseList()
+Family -> Money : new ExpenseList()
 activate Money
 Money --> Family
 deactivate Money
@@ -62,7 +71,7 @@ deactivate Family
 Family --> Commands
 deactivate Family
 
-Main -> UI : //print end execution line//
+Main -> UI : printHoriLine()
 activate UI
 UI --> Main
 deactivate UI
