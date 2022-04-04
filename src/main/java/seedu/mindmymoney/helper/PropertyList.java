@@ -158,9 +158,20 @@ public class PropertyList {
      * @return The index, after having been moved forward.
      */
     private static int consumeWhitespace(String string, int propertyStart) {
-        while (propertyStart < string.length() && string.charAt(propertyStart) == ' ')  {
+        while (isStartAtWhitespace(string, propertyStart))  {
             propertyStart++;
         }
         return propertyStart;
+    }
+
+    /**
+     * Checks if an index into a string points to whitespace.
+     * @param string The string
+     * @param propertyStart The index
+     * @return Whether or not the index is in range of the string, and produces a valid index.
+     */
+
+    private static boolean isStartAtWhitespace(String string, int propertyStart) {
+        return propertyStart < string.length() && string.charAt(propertyStart) == ' ';
     }
 }
