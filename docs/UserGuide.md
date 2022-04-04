@@ -136,6 +136,7 @@ Adds a new meeting that will be synced with everyone
 * The `START_TIME` and `END_TIME` have to be in 24-hour time format.
 * The accepted options of `MODE` are _online_ and _physical_.
 * All users added need to be free at the specified meeting day and time for the meeting to be successfully added and synced.
+* **_<TOEDIT>If new users are added, pre-existing meetings will be deleted because logically_** 
 
 Example of usage:
 
@@ -155,8 +156,9 @@ Deletes an event from the user's specified timetable
 **Format:** ` delete n/NAME i/INDEX`
 
 * Deletes from the timetable of user
-* Deletes the lesson at the specified `INDEX`.
+* Deletes the event at the specified `INDEX`.
 * The `INDEX` refers to the index number shown of the specified user's timetable.
+* If a meeting event is deleted, the meeting will be deleted from all users.
 
 Example of usage:
 
@@ -191,8 +193,9 @@ Friday 1800 2359
 Saturday 0800 2359
 Sunday 0800 2359
 ```
-### Clearing all lessons from user: `clear`
-Deletes all the lessons from specified user if any.
+### Clearing all events from user: `clear`
+Deletes all the events from specified user if any. 
+Note that in this, case if a meeting event for this user exists, it will only be deleted for this user. 
 
 Format: `clear USER`
 
@@ -207,7 +210,7 @@ john's timetable has been cleared
 
 Alternatively you can clear all the events from everyone's timetable
 
-### Clearing all lessons from all users: `clear all`
+### Clearing all events from all users: `clear all`
 
 Format: `clear all`
 
