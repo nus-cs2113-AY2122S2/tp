@@ -65,7 +65,7 @@ public class UpdateCommandTest {
         User testUser = new User();
         testUser.setExpenditureListArray(new ExpenditureList());
         testUser.getExpenditureListArray().add(testExpenditure);
-        String firstInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 30/4/2022";
+        String firstInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 01/4/2022";
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(firstInputString, testUser).executeCommand());
         String secondInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 04/2022";
