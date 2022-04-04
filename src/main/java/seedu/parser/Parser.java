@@ -53,9 +53,13 @@ public class Parser {
                     + "\\/" // argument delimiter
                     + "([\\w\\s\\-\\.]+)" // last argument value
     );
-    public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
-            "Please split your command into arguments with each argument seperated by spaces!";
-    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format! Enter help for more information.";
+    public static final String INCORRECT_COMMAND_FORMAT = "Command word not recognised. " + System.lineSeparator()
+            + "Please use one of the following: "
+            + AddCommand.COMMAND_WORD + ", " + UpdateCommand.COMMAND_WORD + ", " + ListCommand.COMMAND_WORD + ", "
+            + CheckCommand.COMMAND_WORD + ", " + DeleteCommand.COMMAND_WORD + ", " + HelpCommand.COMMAND_WORD + ", "
+            + SaveCommand.COMMAND_WORD + ", " + ByeCommand.COMMAND_WORD + ".";
+    public static final String MISSING_COMMAND_WORD_DELIMITER = INCORRECT_COMMAND_FORMAT + System.lineSeparator()
+            + "If including additional arguments, please separate them with a space.";
 
     /**
      * Interpret the command requested by the user and returns a corresponding Command object.
@@ -69,7 +73,7 @@ public class Parser {
         try {
             commandAndArgument = splitCommandTerm(userInput);
         } catch (IncompleteCommandException e) {
-            return new IncorrectCommand(MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER);
+            return new IncorrectCommand(MISSING_COMMAND_WORD_DELIMITER);
         }
 
         // only arguments is trimmed because commandWord is split on the first space
