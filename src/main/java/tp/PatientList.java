@@ -31,11 +31,6 @@ public class PatientList {
     public void addPatient(Patient patient) {
         patients.add(patient);
         countPatient++;
-//
-//        System.out.println(boundary + "Noted. I've added this patient:");
-//        System.out.println(patients.get(countPatient - 1));
-//        System.out.print("Now you have " + countPatient
-//                                 + " patients recorded in the system." + System.lineSeparator() + boundary);
     }
 
     /**
@@ -44,19 +39,15 @@ public class PatientList {
      * @param index Index of the patient to be deleted.
      */
     public Patient deletePatient(int index) {
-//        System.out.println(boundary + "Noted. I've removed this patient:");
-//        System.out.println(patients.get(index - 1));
-//        System.out.print("Now you have " + (countPatient - 1)
-//                                 + " patients recorded in the system." + System.lineSeparator() + boundary);
         Patient curr = patients.get(index - 1);
         patients.remove(index - 1);
         countPatient -= 1;
         return curr;
     }
 
-    public Patient searchPatient(String id){
-        for (int i = 0; i < patients.size(); i++){
-            if (patients.get(i).getId().trim().equals(id)){
+    public Patient searchPatient(String id) {
+        for (int i = 0; i < patients.size(); i++) {
+            if (patients.get(i).getId().trim().equals(id)) {
                 return  patients.get(i);
             }
         }

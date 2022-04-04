@@ -23,10 +23,6 @@ public class DoctorList {
     public void addDoctor(Doctor doctor) {
         doctors.add(doctor);
         size++;
-//        System.out.println(boundary + "Noted. I've added this doctor:");
-//        System.out.println(doctors.get(size - 1));
-//        System.out.print("Now you have " + size
-//                                 + " doctors recorded in the system." + System.lineSeparator() + boundary);
     }
 
     public int getSize() {
@@ -34,18 +30,14 @@ public class DoctorList {
     }
 
     public Doctor deleteDoctor(int index) {
-//        System.out.println(boundary + "Noted. I've removed this doctor:");
-//        System.out.println(doctors.get(index - 1));
-//        System.out.print("Now you have " + (size - 1)
-//                                 + " doctors in the system." + System.lineSeparator() + boundary);
         Doctor curr = doctors.get(index - 1);
         size -= 1;
         return curr;
     }
 
-    public Doctor searchDoctor(String id){
-        for (int i = 0; i < doctors.size(); i++){
-            if (doctors.get(i).getId().trim().equals(id)){
+    public Doctor searchDoctor(String id) {
+        for (int i = 0; i < doctors.size(); i++) {
+            if (doctors.get(i).getId().trim().equals(id)) {
                 return doctors.get(i);
             }
         }

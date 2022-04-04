@@ -17,8 +17,8 @@ public class DeleteAppointmentCommand extends Command {
                         PatientStorage patientStorage,
                         AppointmentStorage appointmentStorage) throws IHospitalException {
         Appointment curr = appointmentList.deleteAppointment(index);
-        return String.format(boundary + "Noted. I've removed this appointment:" + curr +
-                "\n" + "Now you have " + (appointmentList.getSize())
+        return String.format(boundary + "Noted. I've removed this appointment:" + curr
+                + "\n" + "Now you have " + (appointmentList.getSize())
                 + " appointments recorded in the system." + System.lineSeparator() + boundary);
     }
 }

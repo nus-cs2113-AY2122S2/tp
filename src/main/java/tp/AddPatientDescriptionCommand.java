@@ -1,12 +1,12 @@
 package tp;
 
-public class AddPatientDescriptionCommand extends Command{
+public class AddPatientDescriptionCommand extends Command {
     protected static String description;
     protected static int index;
 
 
     public AddPatientDescriptionCommand(String description, int index) {
-        this.description=description;
+        this.description = description;
         this.index = index;
     }
 
