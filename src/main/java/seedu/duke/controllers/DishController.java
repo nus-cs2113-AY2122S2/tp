@@ -10,7 +10,7 @@ import seedu.duke.manager.DishManager;
  */
 public class DishController extends Controller {
     private static final String[] CHOICES = {"Exit Menu", "List Dish", "Add Dish",
-        "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
+            "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
     private final DishManager dishManager;
 
     public DishController() {
@@ -67,6 +67,10 @@ public class DishController extends Controller {
     }
 
     private void changeName() throws OperationTerminationException {
+        if (dishManager.getNumOfDishes() == 0) {
+            System.out.println("You haven't added a dish!");
+            return;
+        }
         MainLogger.logInfo(this, "User is changing the name of dish");
         System.out.println("Changing name...");
         int index = InputParser.getInteger("The index of dish: ");
@@ -81,6 +85,10 @@ public class DishController extends Controller {
     }
 
     private void changePrice() throws OperationTerminationException {
+        if (dishManager.getNumOfDishes() == 0) {
+            System.out.println("You haven't added a dish!");
+            return;
+        }
         MainLogger.logInfo(this, "User is changing the price of dish");
         System.out.println("Changing price...");
         int index = InputParser.getInteger("The index of dish: ");
@@ -95,6 +103,10 @@ public class DishController extends Controller {
     }
 
     private void deleteDish() throws OperationTerminationException {
+        if (dishManager.getNumOfDishes() == 0) {
+            System.out.println("You haven't added a dish!");
+            return;
+        }
         MainLogger.logInfo(this, "User is deleting dish");
         System.out.println("Deleting dish...");
         int index = InputParser.getInteger("The index of dish: ");
