@@ -175,13 +175,15 @@ public class StaffController extends Controller {
         }
         int choice;
         while (true) {
-            choice = InputParser.getInteger("1. ID of staff\n"
+            choice = InputParser.getInteger("0. Exit\n"
+                    + "1. ID of staff\n"
                     + "2. Name of staff\n"
                     + "3. Position of staff\n"
                     + "4. Salary of staff\n"
-                    + "5. Exit\n"
                     + "Select field to edit: ");
             switch (choice) {
+            case 0:
+                return;
             case 1:
                 while (true) {
                     staffId = InputParser.getInteger("New ID of staff: ");
@@ -206,8 +208,6 @@ public class StaffController extends Controller {
                 final double salary = InputParser.getDouble("New salary of staff: ");
                 staff.setSalary(salary);
                 break;
-            case 5:
-                return;
             default:
                 System.out.println("Input out of range, please input a number from 1 to 5...");
             }
