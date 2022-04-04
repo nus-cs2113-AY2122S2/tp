@@ -28,7 +28,7 @@ A summary of my code contributions are as follows:
   in the `WorkoutCommand` class was added.
 - Contributed to some parts of the `UI` such as the
   `printDeleteWorkoutMessage()` and `printNewPlanCreatedMessage()` methods.
-- Contributed to some code in exception related files such as 
+- Contributed to some code in exception-related files such as 
 `InvalidCommandException` and mostly in `InvalidPlanException`.
 - Contributed mostly to the creation of `Plan` related classes such as
 `Plan`, `PlanCommand` and `PlanList`. For `PlanList`, contributed to small methods
