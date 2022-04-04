@@ -51,7 +51,7 @@ public class ActivityEditCommand extends Command {
     private double totalCost = MISSING_TOTALCOST;
     private String payer = MISSING_PAYER;
     private String[] involvedListStringArray = MISSING_INVOLVEDLIST;
-    double[] costList = MISSING_COSTLIST;
+    private double[] costList = MISSING_COSTLIST;
     private double activityType = TYPE_UNSET;
     private double editMode = MODE_UNSET;
     private double gst = MISSING_GST;
