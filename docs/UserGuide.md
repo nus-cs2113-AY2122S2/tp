@@ -252,6 +252,7 @@ When using `Staff Management`, the program pops up a select panel to ask for act
 (2) Find Staff
 (3) Add Staff
 (4) Delete Staff
+(5) Edit Staff
 ******************************
 Enter choice: 
 ```
@@ -295,6 +296,7 @@ When using `Add staff`, the program pops up an input panel.
 Adding new staff...
 ID of staff: 
 Name of staff:
+Position of staff:
 Salary of staff:
 ```
 > Enter the ID of the new staff
@@ -308,13 +310,13 @@ Salary of staff:
 Staff with the ID, name, position and salary being inputted will be created.
 
 #### Notice
-`Name` and `Position` of the staff cannot be empty, and `ID` and `salary` of the staff cannot be zero or negative (range: -2,147,483,648 to 2,147,483,647).
+`Name` and `Position` of the staff cannot be empty, and `ID` and `salary` of the staff cannot be zero or negative (range: -2,147,483,648 to 2,147,483,647). `ID` of the staff should also not already be in use by an existing staff.
 
 ### Delete staff (indexed as 4)
 When using `Delete staff`, the program pops up an input panel.
 ```
 Deleting staff...
-ID of staff: 
+ID of staff to delete: 
 ```
 > Enter ID of staff
 
@@ -322,6 +324,54 @@ Staff with the ID being inputted will be deleted.
 
 #### Notice
 Staff with the `ID` being inputted should exist.
+
+### Edit staff (indexed as 5)
+When using `Edit staff`, the program pops up an input panel.
+```
+Editing staff...
+ID of staff to edit: 
+0. Exit
+1. ID of staff
+2. Name of staff
+3. Position of staff
+4. Salary of staff
+Select field to edit: 
+```
+> Enter ID of staff
+
+> Enter field of staff to edit
+
+Enter corresponding index to edit the attribute.
+
+If option 1 (ID) is chosen:
+```
+New ID of staff:
+```
+> Enter new ID of staff
+
+
+If option 2 (name) is chosen:
+```
+New name of staff:
+```
+> Enter new name of staff
+
+
+If option 3 (position) is chosen:
+```
+New position of staff:
+```
+> Enter new position of staff
+
+
+If option 4 (salary) is chosen:
+```
+New salary of staff:
+```
+> Enter new salary of staff
+
+#### Notice
+Staff with the `ID` being inputted should exist. `Name` and `Position` of the staff cannot be empty, and `ID` and `salary` of the staff cannot be zero or negative (range: -2,147,483,648 to 2,147,483,647). New `ID` of the staff should also not already be in use by an existing staff.
 
 ## FAQ
 
