@@ -23,8 +23,8 @@ public class EquipmentManagerTest {
         updates.add(new Pair<>("itemName", "Speaker A"));
         updates.add(new Pair<>("type", EquipmentType.STAND));
         updates.add(new Pair<>("cost", 2000.0));
-        updates.add(new Pair<>("purchaseDate", "2022-03-17"));
-        updates.add(new Pair<>("purchaseFrom", "Louder Technologies"));
+        updates.add(new Pair<>("purchasedDate", "2022-03-17"));
+        updates.add(new Pair<>("purchasedFrom", "Louder Technologies"));
         equipmentManager.updateEquipment("S1404115ASF", updates);
         HashMap<String, Equipment> equipments = equipmentManager.getEquipmentList();
         Equipment expectedEquipment = new Equipment("Speaker A",
