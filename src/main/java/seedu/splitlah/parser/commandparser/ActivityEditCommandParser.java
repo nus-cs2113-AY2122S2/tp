@@ -73,9 +73,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             activityName = Parser.parseName(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/n"))) {
-                // activityName not provided by user.
-            } else {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/n"))) {
                 throw new InvalidFormatException(exception.getMessage());
             }
         }
@@ -83,9 +81,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             payer = Parser.parsePayer(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/p"))) {
-                // payer not provided by user.
-            } else {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/p"))) {
                 throw new InvalidFormatException(exception.getMessage());
             }
         }
@@ -93,9 +89,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             involvedList = Parser.parseInvolved(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/i"))) {
-                // involvedList not provided by user.
-            } else {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/i"))) {
                 throw new InvalidFormatException(exception.getMessage());
             }
         }
@@ -104,9 +98,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/co"))) {
-                // totalCost not provided by user.
-            } else {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/co"))) {
                 throw new InvalidFormatException(exception.getMessage());
             }
         }
@@ -114,9 +106,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             costList = Parser.parseCostList(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/cl"))) {
-                // costList not provided by user.
-            } else {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/cl"))) {
                 throw new InvalidFormatException(exception.getMessage());
             }
         }
@@ -130,9 +120,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             gst = Parser.parseGstIncludingZero(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/gst"))) {
-                // gst not provided by user.
-            } else {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/gst"))) {
                 throw new InvalidFormatException(exception.getMessage());
             }
         }
@@ -140,9 +128,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         try {
             serviceCharge = Parser.parseServiceChargeIncludingZero(commandArgs);
         } catch (InvalidFormatException exception) {
-            if (exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/sc"))) {
-                // serviceCharge not provided by user.
-            } else {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/sc"))) {
                 throw new InvalidFormatException(exception.getMessage());
             }
         }

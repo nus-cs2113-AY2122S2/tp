@@ -414,7 +414,6 @@ public class ActivityEditCommand extends Command {
             retrieveDetailsFromOldActivity(oldActivity);
             updateCostAndCostList();
             validateCostListAndInvolvedList();
-            checkForNegativeCosts();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
             Person payerAsPerson = session.getPersonByName(payer);
