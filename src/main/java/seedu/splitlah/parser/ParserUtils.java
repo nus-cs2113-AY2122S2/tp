@@ -1,11 +1,11 @@
 package seedu.splitlah.parser;
 
-import seedu.splitlah.command.ActivityListCommand;
-import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityViewCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityListCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.parser.commandparser.GroupListCommandParser;
@@ -436,11 +436,11 @@ public class ParserUtils {
         case ActivityEditCommandParser.COMMAND_TEXT:
             delimiterList = ActivityEditCommandParser.COMMAND_DELIMITERS;
             break;
-        case ActivityListCommand.COMMAND_TEXT:
-            delimiterList = ActivityListCommand.COMMAND_DELIMITERS;
+        case ActivityListCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityListCommandParser.COMMAND_DELIMITERS;
             break;
-        case ActivityViewCommand.COMMAND_TEXT:
-            delimiterList = ActivityViewCommand.COMMAND_DELIMITERS;
+        case ActivityViewCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityViewCommandParser.COMMAND_DELIMITERS;
             break;
         case SessionCreateCommandParser.COMMAND_TEXT:
             delimiterList = SessionCreateCommandParser.COMMAND_DELIMITERS;
@@ -512,9 +512,9 @@ public class ParserUtils {
             // Fallthrough
         case ActivityEditCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ActivityListCommand.COMMAND_TEXT:
+        case ActivityListCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ActivityViewCommand.COMMAND_TEXT:
+        case ActivityViewCommandParser.COMMAND_TEXT:
             // Fallthrough
         case GroupCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
