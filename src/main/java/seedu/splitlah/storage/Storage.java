@@ -15,24 +15,6 @@ public class Storage {
     private static final String FILE_NAME = "SplitLah.data";
     private static final String FILE_FULL_PATH = FILE_DIRECTORY + FILE_NAME;
 
-    private Profile profile;
-
-    /**
-     * Initializes a Storage object.
-     */
-    public Storage() {
-        profile = new Profile();
-    }
-
-    /**
-     * Returns a Profile object.
-     *
-     * @return A Project object.
-     */
-    public Profile getProfile() {
-        return profile;
-    }
-
     /**
      * Checks to see if file directory for save file exists.
      *
@@ -81,14 +63,16 @@ public class Storage {
     /**
      * Saves the data from the save file into the Profile object.
      *
-     * @throws IOException            if an I/O error occurs while reading from the save file.
-     * @throws ClassNotFoundException if Class of a serialized object cannot be found
+     * @return A Profile object that represents the data that was previously saved.
+     * @throws IOException            If an I/O error occurs while reading from the save file.
+     * @throws ClassNotFoundException If Class of a serialized object cannot be found.
      */
-    public void loadStorage() throws IOException, ClassNotFoundException {
+    public Profile loadStorage() throws IOException, ClassNotFoundException {
         FileInputStream file = new FileInputStream(FILE_FULL_PATH);
         ObjectInputStream in = new ObjectInputStream(file);
-        profile = (Profile) in.readObject();
+        Profile profile = (Profile) in.readObject();
         in.close();
         file.close();
+        return profile;
     }
 }

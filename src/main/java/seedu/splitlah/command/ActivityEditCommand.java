@@ -220,12 +220,18 @@ public class ActivityEditCommand extends Command {
             updateCostAndCostList();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
+
             Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
-            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
+            ArrayList<Person> involvedArrayList = session.getPersonListByName(involvedList);
+
             session.removeActivity(activityId);
-            addAllActivityCost(involvedPersonList, personPaid, activityId);
+
+            addAllActivityCost(involvedArrayList, personPaid, activityId);
+
+            PersonList involvedPersonList = new PersonList(involvedArrayList);
             Activity editedActivity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
+
             session.addActivity(editedActivity);
             manager.saveProfile();
             ui.printlnMessage(COMMAND_SUCCESS + editedActivity);
