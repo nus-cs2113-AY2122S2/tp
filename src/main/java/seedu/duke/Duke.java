@@ -14,6 +14,7 @@ public class Duke {
     private TextUi ui;
     private static EquipmentManager equipmentInventory = new EquipmentManager();
     private static Storage storage = new Storage();
+    private static int commandCount = 0;
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -46,6 +47,12 @@ public class Duke {
             command = parser.parseCommand(userCommand);
             result = executeCommand(command);
             ui.showResultToUser(result);
+            commandCount++;
+            if (commandCount % 5 == 0) {
+                storage.saveData(equipmentInventory);
+                System.out.print(System.lineSeparator());
+                System.out.println("Auto-saved");
+            }
         } while (!userCommand.equals("bye"));
     }
 
