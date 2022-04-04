@@ -6,7 +6,7 @@ Software Engineering & Object-Oriented Programming module offered by the School 
 Singapore.
 
 ### About the Project
-WerkIt! is a command line interface (CLI) application written in Java hat allows users to create a weekly workout 
+WerkIt! is a command line interface (CLI) application written in Java that allows users to create a weekly workout 
 schedule for them to refer to and follow. More details about the project can be found in the following locations:
 * [GitHub Repository](../../)
 * [WerkIt! User Guide](../UserGuide.md)
