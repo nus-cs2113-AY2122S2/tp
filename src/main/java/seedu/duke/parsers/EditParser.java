@@ -34,14 +34,48 @@ public class EditParser extends Parser {
     // \s+-d\s+\"[^\"]+\"|\s+-t\s+\"[^\"]+\")(\s+-n\s+\"((?<taskName>[^\"]+)\")?|\s+-d\s+\"
     // ((?<taskDescription>[^\"]+)\")?|(\s+-t\s+\"(?<estimatedWorkingTime>[^\"]+)\")?))|(mod\s+
     // (?<moduleCode>\w+?(?=(\s+-d\s+)))(\s+(-d\s+\"(?<moduleDescription>.+)\"))))(?<invalid>.*)
-    private static final String EDIT_FORMAT = "((task\\s+(?<taskNumber>\\d+|(?<invalidNumber>.*))"
+
+    /* Explanation for regex:
+     * ((task\s+(?<taskNumber>\d+|(?<invalidNumber>.*))      -- matches [task taskNumber].
+     *
+     * (\s+(-m|(?<invalidModFlag>.*))\s+(?<taskModule>\w+))? -- matches [-m taskModule] if present. Optional
+     *                                                          Note that taskModule does not require "", but must be a
+     *                                                          single word composed of [a-zA-Z0-9_].
+     *
+     * (?=\s+-n\s+\"[^\"]+\"|\s+-d\s+\"[^\"]+\"              -- matches flags -n, -d, -t.
+     * |\s+-t\s+\"[^\"]+\")
+     *
+     * (\s+(-n|(?<invalidTaskNameFlag>.*))                   -- matches [-n "taskName"] or
+     * \s+\"(?<taskName>[^\"]+)\")?                             [<invalidTaskNameFlag> "taskName"] if present. Optional
+     *
+     *
+     *
+     * (\s+(-d|(?<invalidTaskDesFlag>.*))                    -- matches [-d "taskDescription"] or
+     * \s+\"(?<taskDescription>[^\"]+)\")?                      [<invalidTaskDesFlag> "taskDescription"] if present.
+     *                                                          Optional
+     *
+     * (\s+(-t|(?<invalidTimeFlag>.*))                       -- matches [-t "estimatedWorkingTime"] if present. Optional
+     * \s+\"(?<estimatedWorkingTime>[^\"]+)\")?)
+     *
+     *                                                       -- None of the above fields accept " as a valid character.
+     *
+     * (mod\s+(?<moduleCode>\w+?(?=(\s+-d\s+)))              -- matches [mod moduleCode], matches flag -d
+     *
+     * (\s+(-d|(?<invalidModDesFlag>.*))                     -- matches [-d "taskDescription"] or
+     * \s+\"(?<moduleDescription>.+)\")?)                       [<invalidTaskDesFlag> "taskDescription"] if present.
+     *
+     * (?<invalid>.*)                                        -- matches [invalid]
+     *                                                          Any other excess inputs
+
+     */
+    private static final String EDIT_FORMAT = "(task\\s+(?<taskNumber>\\d+|(?<invalidNumber>.*))"
             + "(\\s+(-m|(?<invalidModFlag>.*))\\s+(?<taskModule>\\w+))?"
-            + "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|"
-            + "\\s+-t\\s+\\\"[^\\\"]+\\\")(\\s+(-n|(?<invalidTaskNameFlag>.*))\\s+\\\""
-            + "((?<taskName>[^\\\"]+)\\\")?|\\s+(-d|(?<invalidTaskDesFlag>.*))\\s+\\\""
-            + "((?<taskDescription>[^\\\"]+)\\\")?|(\\s+(-t|(?<invalidTimeFlag>.*))\\s+\\\""
-            + "(?<estimatedWorkingTime>[^\\\"]+)\\\")?))|(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))"
-            + "(\\s+((-d|(?<invalidModDesFlag>.*))\\s+\\\"(?<moduleDescription>.+)\\\"))))(?<invalid>.*)";
+            + "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|\\s+-t\\s+\\\"[^\\\"]+\\\")"
+            + "(\\s+(-n|(?<invalidTaskNameFlag>.*))\\s+\\\""
+            + "(?<taskName>[^\\\"]+)\\\")?|(\\s+(-d|(?<invalidTaskDesFlag>.*))\\s+\\\""
+            + "(?<taskDescription>[^\\\"]+)\\\")?|(\\s+(-t|(?<invalidTimeFlag>.*))\\s+\\\""
+            + "(?<estimatedWorkingTime>[^\\\"]+)\\\")?)|(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))"
+            + "(\\s+(-d|(?<invalidModDesFlag>.*))\\s+\\\"(?<moduleDescription>.+)\\\")?)(?<invalid>.*)";
 
     public EditParser() {
         super();
