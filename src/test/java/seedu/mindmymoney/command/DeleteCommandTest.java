@@ -31,14 +31,14 @@ class DeleteCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("cash", "Personal", "Nike Shoes",
                 300, "30/03/2022"));
 
-        String deleteInputString = "delete 1";
+        String deleteInputString = "delete /e 1";
         new DeleteCommand(deleteInputString, user).executeCommand();
         testList.remove(0);
 
@@ -79,13 +79,13 @@ class DeleteCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
 
         new AddCommand(inputString, user).executeCommand();
-        String deleteInputString = "delete 0";
+        String deleteInputString = "delete /e 0";
         assertThrows(MindMyMoneyException.class,
             () -> new DeleteCommand(deleteInputString, user).executeCommand());
-        String delInputString2 = "delete 5";
+        String delInputString2 = "delete /e 5";
         assertThrows(MindMyMoneyException.class,
             () -> new DeleteCommand(delInputString2, user).executeCommand());
     }
@@ -99,7 +99,7 @@ class DeleteCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String delInputString = "delete ONE";
+        String delInputString = "delete /e ONE";
 
         assertThrows(MindMyMoneyException.class,
             () -> new DeleteCommand(delInputString, user).executeCommand());
@@ -114,8 +114,8 @@ class DeleteCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String deleteInputString = "delete";
-        String delInputString2 = "delete ";
+        String deleteInputString = "delete /e";
+        String delInputString2 = "delete /e";
 
         assertThrows(MindMyMoneyException.class,
             () -> new DeleteCommand(deleteInputString, user).executeCommand());
@@ -132,7 +132,7 @@ class DeleteCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String deleteInputString = "delete 1";
+        String deleteInputString = "delete /e 1";
 
         assertThrows(MindMyMoneyException.class,
             () -> new DeleteCommand(deleteInputString, user).executeCommand());

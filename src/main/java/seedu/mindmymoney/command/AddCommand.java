@@ -17,13 +17,13 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_THIRD_ITEM;
-
 import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testCashbackAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testCreditCardLimit;
@@ -68,9 +68,18 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Indicates whether the add command is to add a credit card by looking for the /cc flag.
+     * Indicates whether the add command is to add an expenditure by checking for the expenditure flag.
      *
-     * @return true if the /cc flag is present, false otherwise.
+     * @return true if the /e flag is present, false otherwise.
+     */
+    private boolean hasExpenditureFlag() {
+        return addInput.contains(FLAG_OF_EXPENSES);
+    }
+
+    /**
+     * Indicates whether the add command is to add a credit card by looking for the credit card flag.
+     *
+     * @return true if the credit card flag is present, false otherwise.
      */
     private boolean hasCreditCardFlag() {
         return addInput.contains(FLAG_OF_CREDIT_CARD);
@@ -253,12 +262,17 @@ public class AddCommand extends Command {
      */
     @Override
     public void executeCommand() throws MindMyMoneyException {
-        if (hasCreditCardFlag()) {
+        if (hasExpenditureFlag()) {
+            addExpenditure();
+        } else if (hasCreditCardFlag()) {
             addCreditCard();
         } else if (hasIncomeFlag()) {
             addIncome();
         } else {
-            addExpenditure();
+            throw new MindMyMoneyException("You are missing a flag in your command\n"
+                + "Type \"help /e\" to view the list of supported expenditure commands\n"
+                + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
+                + "Type \"help /i\" to view the list of supported income commands\n");
         }
     }
 }

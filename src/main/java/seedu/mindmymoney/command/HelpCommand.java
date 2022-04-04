@@ -31,12 +31,12 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Indicates whether the help command is for expenses by looking for the /expenses flag.
+     * Indicates whether the help command is for expenses by looking for the /e flag.
      *
-     * @return true if the /expenses flag is present, false otherwise.
+     * @return true if the /e flag is present, false otherwise.
      */
     private boolean hasExpensesFlag() {
-        return FLAG_OF_EXPENSES.equals(helpInput);
+        return helpInput.equals(FLAG_OF_EXPENSES);
     }
 
     /**
@@ -66,12 +66,12 @@ public class HelpCommand extends Command {
             String helpPage = "---------------------------------------Expenditure Help Page------------------------"
                     + "---------------\n"
                     + "1. Listing all Expenditures: list /e\n"
-                    + "2. Adding an Expenditure entry: add /pm [PAYMENT_METHOD] /c [CATEGORY] "
+                    + "2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] "
                     + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
                     + "3. Calculating the total expenditure in a month: calculate /epm [MONTH]\n"
-                    + "4. Updating an Expenditure: update [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] "
+                    + "4. Updating an Expenditure: update /e [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] "
                     + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
-                    + "5. Removing an Expenditure entry: delete [INDEX]\n"
+                    + "5. Removing an Expenditure entry: delete /e [INDEX]\n"
                     + "6. Exiting the program: bye\n"
                     + "----------------------------------------------------------------------------------------------"
                     + "-----\n";

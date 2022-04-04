@@ -50,7 +50,7 @@ encounter several icons. These icons will provide several useful information.
 >- This tells you that there is additional information that is useful when you are using the application.
 
 > **⚠️Warning⚠️**
-> - This tells you that there is some **important** information you should take note of to prevent issues from arising when you are using the application.
+>- This tells you that there is some **important** information you should take note of to prevent issues from arising when you are using the application.
 
 
 <br/>
@@ -79,18 +79,18 @@ What can I do for you?
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    show a help page. <br> Some example commands you can try: <br>
-    * **`list`** : Lists all tasks.
-    * **`add`**`/pm cash /c Food /d Porridge /a 3 /t 12/03/2022` :
+    * **`add`**`/e /pm cash /c Food /d Porridge /a 3 /t 12/03/2022` :
       Adds a $3 expenditure of the description 'Porridge' that was paid in cash on 12 March 2022 to your list of
       expenditures.
-    * **`calculate`**`/epm 03/2022` : Calculates total expenditure in the month of March 2022.
-    * **`update`**`1 /pm cash /c Food /d Chicken Rice /a 4.50 /t 12/03/2022` :
+    * **`list /e`** : Lists all expenditures.
+    * **`calculate`**`/epm 03/2022` : Calculates the total expenditure in the month of March 2022.
+    * **`update`**`/e 1 /pm cash /c Food /d Chicken Rice /a 4.50 /t 12/03/2022` :
       Updates the first expenditure on your expenditure list to reflect a $4.50 expenditure of the description 'Chicken
       Rice' that was paid in cash on 12 March 2022.
-    * **`delete`**`2` : Deletes the second expenditure in your expenditure list.
+    * **`delete`**`/e 1` : Deletes the first expenditure in your expenditure list.
     * **`bye`** : Exits the app.
 
-6. Refer to the [Features](#features) for details of each command.
+6. Refer to the [Features](#features) for more details of each command.
 
 <br/>
 
@@ -101,10 +101,10 @@ accurate.
 Words in `[SQUARE_BRACKETS]` are the parameters. Words starting with a `/` are flags
 
 > **💡 Note:**
->- Commands are space separated. For example `list/cc` is not a valid command while `list /cc` is valid.
+>- Parameters and flags are space-separated. For example: `list/e` is not a valid command while `list /e` is valid.
 
 > **⚠️Warning⚠️**
->- All parameters are compulsory! Input the parameters in the order given, or the application will not be able to read your
+>- All parameters are compulsory! Input the parameters in the order shown, or the application will not be able to read your
    > input.
 >- ENTER RULES ON FORBIDDEN CHARACTERS HERE
 
@@ -112,7 +112,7 @@ Words in `[SQUARE_BRACKETS]` are the parameters. Words starting with a `/` are f
 
 ### Display help page for expenditures: `help`
 
-Prints a list of currently available commands for storing expenditures.
+Prints a list of currently available expenditure-related commands.
 
 #### Format: `help /e`
 
@@ -122,10 +122,10 @@ Prints a list of currently available commands for storing expenditures.
 > help /e
 ---------------------------------------Expenditure Help Page---------------------------------------
 1. Listing all Expenditures: list /e
-2. Adding an Expenditure entry: add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [TIME]
+2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]
 3. Calculating the total expenditure in a month: calculate /epm [MONTH]
-4. Updating an Expenditure: update [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [TIME]
-5. Removing an Expenditure entry: delete [INDEX]
+4. Updating an Expenditure: update /e [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]
+5. Removing an Expenditure entry: delete /e [INDEX]
 6. Exiting the program: bye
 ---------------------------------------------------------------------------------------------------
 ````
@@ -136,28 +136,28 @@ Prints a list of currently available commands for storing expenditures.
 
 Adds an expenditure to your program. Only **one** expenditure can only be added per command.
 
-#### Format: `add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
+#### Format: `add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
 
 * `[PAYMENT_METHOD]` refers to the method of payment used.
     * Enter `cash` or the name of a credit card you have saved.
 * `[CATEGORY]` refers to the category of the expenditure
     * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`.
 * `[DESCRIPTION]` refers to the description of the expenditure.
-    * For example `Nike shoes`.
+    * For example: `Nike shoes`.
 * `[AMOUNT]` refers to the cost of the expenditure.
     * Enter the amount in dollars, rounded off to the nearest cent.
-    * For example, an item that cost $420 and 69 cents will be entered as `420.69`.
+    * For example: an item that cost $420 and 69 cents will be entered as `420.69`.
 * `[DATE]` refers to the date of the purchase of the expenditure.
     * Format of the date is DD/MM/YYYY.
-    * For example, `12 March 2022` will be entered as `12/03/2022`.
+    * For example: `12 March 2022` will be entered as `12/03/2022`.
 
-For Example: `add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`.  
-Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash in March 2022 to your expenditure list. <br>
+For example: `add /e /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`.  
+Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash on 12 March 2022 to your expenditure list. <br>
 
 #### Expected Outcome:
 
 ````
-> add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022
+> add /e /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022
 Successfully added: 
 
 Description: Porridge
@@ -177,6 +177,8 @@ into the account
 
 > **⚠️Warning⚠️**
 >- `[CATEGORY]`: Any input not in the list will be rejected.
+>- `[DATE]`: Any input not in the format of DD/MM/YYYY will be rejected.  
+>- `[Date]`: Any input date later than the current date will be rejected.
 
 <br/>
 
@@ -205,24 +207,24 @@ list /e
 Modifies an expenditure on your expenditure list by specifying its index. <br>
 Use the `list /e` command to view the indices of your expenditures.
 
-#### Format: `update [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`
+#### Format: `update /e [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`
 
 * `[INDEX]` refers to the index of expenditure in list in which you want to update.
-    * Enter `1` if you want to update the first entry in the list.
+    * For example: `1` if you want to update the first expenditure in your list.
 * `[NEW_PAYMENT_METHOD]` refers to the new method of payment used.
     * Enter `cash` or the name of a credit card you have saved.
 * `[NEW_CATEGORY]` refers to the new category of the expenditure.
     * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`.
 * `[NEW_DESCRIPTION]` refers to the new description of the expenditure.
-    * For example `chicken rice`.
+    * For example: `chicken rice`.
 * `[NEW_AMOUNT]` refers to the updated of the expenditure.
     * Enter the amount in dollars, rounded off to the nearest cent.
-    * For example, an item that cost $420 and 69 cents will be entered as `420.69`.
+    * For example: an item that cost 420 dollars and 69 cents will be entered as `420.69`.
 * `[NEW_DATE]` refers to the new date of the purchase of the expenditure.
     * Format of the date is DD/MM/YYYY.
-    * For example, `12 March 2022` will be entered as `12/03/2022`.
+    * For example: `12 March 2022` will be entered as `12/03/2022`.
 
-For example: `update 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022`.  
+For example: `update /e 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022`.  
 Updates the first expenditure in the list to a $5.0 expenditure on food item 'chicken rice' that was paid in cash on 12
 March 2022.
 
