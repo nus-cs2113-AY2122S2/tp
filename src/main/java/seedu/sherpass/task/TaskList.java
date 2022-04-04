@@ -7,13 +7,17 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static seedu.sherpass.constant.Message.*;
+import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_START_DATE_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_START_DATE_IN_THE_PAST_MESSAGE;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -173,59 +177,87 @@ public class TaskList {
     }
 
     private Task updateTask(Task taskToUpdate, String taskDescription,
-                           long startDifferenceInSeconds,
-                           long endDifferenceInSeconds,
-                           LocalDateTime byDate) {
+                           long startDateOffset,
+                           long endDateOffset,
+                           long byDateOffset) {
         if (!taskDescription.isBlank()) {
             taskToUpdate.setTaskDescription(taskDescription);
         }
-        if (byDate != null) {
-            taskToUpdate.setByDateTime(byDate);
-        }
-        if (startDifferenceInSeconds != 0) {
+        if (startDateOffset != 0) {
             taskToUpdate.setDoOnStartDateTime(taskToUpdate
                     .getDoOnStartDateTime()
-                    .plusSeconds(startDifferenceInSeconds));
+                    .plusSeconds(startDateOffset));
         }
-        if (endDifferenceInSeconds != 0) {
+        if (endDateOffset != 0) {
             taskToUpdate.setDoOnEndDateTime(taskToUpdate
                     .getDoOnEndDateTime()
-                    .plusSeconds(endDifferenceInSeconds));
+                    .plusSeconds(endDateOffset));
+        }
+        if (byDateOffset != 0) {
+            taskToUpdate.setByDateTime(taskToUpdate
+                    .getDoOnStartDateTime()
+                    .plusSeconds(byDateOffset));
         }
         return taskToUpdate;
     }
 
+    private long calculateOffsetOfDate(LocalDateTime oldDateTime, LocalDateTime newDateTime) {
+        if (oldDateTime != null && newDateTime != null) {
+            return oldDateTime.until(newDateTime, ChronoUnit.SECONDS);
+        }
+        return 0;
+    }
+
     public void editSingleTaskContent(int editIndex, String taskDescription,
-                                      long startDifferenceInSeconds,
-                                      long endDifferenceInSeconds,
-                                      LocalDateTime byDate) throws TimeClashException {
+                                      LocalDateTime doOnStartDateTime,
+                                      LocalDateTime doOnEndDateTime,
+                                      LocalDateTime byDateTime) throws TimeClashException, InvalidInputException {
         Task taskToEdit = tasks.get(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
         editedList.remove(editIndex);
 
-        int newIdentifier = generateIdentifier();
-        Task updatedTask = updateTask(taskToEdit, taskDescription,
-                startDifferenceInSeconds, endDifferenceInSeconds, byDate);
-        updatedTask.setIdentifier(newIdentifier);
+        long startDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnStartDateTime(), doOnStartDateTime);
+        long endDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnEndDateTime(), doOnEndDateTime);
 
+        taskToEdit.setIdentifier(generateIdentifier());
+        Task updatedTask = updateTask(taskToEdit, taskDescription,
+                startDateOffset, endDateOffset, 0);
+        if (byDateTime != null) {
+            updatedTask.setByDateTime(byDateTime);
+        }
+
+        checkTask(updatedTask);
         checkDateTimeClash(editedList, updatedTask);
+
         tasks.remove(editIndex);
         tasks.add(updatedTask);
         updateIndex();
     }
 
     public void editRepeatedTasks(int editIndex, String taskDescription,
-                                  long startDifferenceInSeconds,
-                                  long endDifferenceInSeconds) throws TimeClashException {
+                                  LocalDateTime doOnStartDateTime,
+                                  LocalDateTime doOnEndDateTime,
+                                  LocalDateTime byDateTime) throws TimeClashException, InvalidInputException {
+        Task firstTask = getTask(editIndex);
         ArrayList<Task> affectedTasks = getAffectedTasks(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
         editedList.removeAll(affectedTasks);
 
+        long startDateOffset = calculateOffsetOfDate(firstTask.getDoOnStartDateTime(), doOnStartDateTime);
+        long endDateOffset = calculateOffsetOfDate(firstTask.getDoOnEndDateTime(), doOnEndDateTime);
+        long byDateOffset;
+        if (doOnStartDateTime == null) {
+            byDateOffset = calculateOffsetOfDate(firstTask.getDoOnStartDateTime(), byDateTime);
+        } else {
+            byDateOffset = calculateOffsetOfDate(doOnStartDateTime, byDateTime);
+        }
+
         int newIdentifier = generateIdentifier();
         for (Task t : affectedTasks) {
             Task newTask = updateTask(t, taskDescription,
-                    startDifferenceInSeconds, endDifferenceInSeconds, null);
+                    startDateOffset, endDateOffset, byDateOffset);
             newTask.setIdentifier(newIdentifier);
+            checkTask(newTask);
             checkDateTimeClash(editedList, newTask);
             editedList.add(newTask);
         }

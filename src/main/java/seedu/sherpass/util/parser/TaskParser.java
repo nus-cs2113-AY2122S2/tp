@@ -154,7 +154,7 @@ public class TaskParser {
     }
 
     private static void prepareAddByDate(AddCommand newCommand, String argument) throws InvalidInputException {
-        if (argument.contains(BY_DATE_DELIMITER) && argument.contains(BY_TIME_DELIMITER)) {
+        if (argument.contains(BY_DATE_DELIMITER) || argument.contains(BY_TIME_DELIMITER)) {
             String byDateString = parseArgument(BY_DATE_DELIMITER, argument);
             String byTimeString = parseArgument(BY_TIME_DELIMITER, argument);
             if (byTimeString.isBlank() || byDateString.isBlank()) {
@@ -239,11 +239,11 @@ public class TaskParser {
     }
 
     private static void prepareEditByDate(EditCommand newCommand, String argument) throws InvalidInputException {
-        if (argument.contains(BY_DATE_DELIMITER) && argument.contains(BY_TIME_DELIMITER)) {
+        if (argument.contains(BY_DATE_DELIMITER) || argument.contains(BY_TIME_DELIMITER)) {
             String byDateString = parseArgument(BY_DATE_DELIMITER, argument);
             String byTimeString = parseArgument(BY_TIME_DELIMITER, argument);
             if (byTimeString.isBlank() || byDateString.isBlank()) {
-                throw new InvalidInputException("Please specify the deadline datetime!");
+                throw new InvalidInputException("Please specify both date and time for by date!");
             }
             newCommand.setByDate(prepareTaskDateTime(byDateString + WHITESPACE,
                     byTimeString, inputWithTimeFormat));

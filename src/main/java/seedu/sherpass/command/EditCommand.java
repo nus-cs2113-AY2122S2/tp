@@ -1,5 +1,6 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
@@ -10,7 +11,6 @@ import seedu.sherpass.util.Ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
@@ -57,22 +57,14 @@ public class EditCommand extends Command {
         try {
             Task taskToEdit = taskList.getTask(editIndex);
             String repeated = "";
-            long startDifferenceInSeconds = 0;
-            long endDifferenceInSeconds = 0;
-            if (doOnStartDateTime != null && doOnEndDateTime != null) {
-                startDifferenceInSeconds = taskToEdit.getDoOnStartDateTime().until(doOnStartDateTime,
-                        ChronoUnit.SECONDS);
-                endDifferenceInSeconds = taskToEdit.getDoOnEndDateTime().until(doOnEndDateTime,
-                        ChronoUnit.SECONDS);
-            }
 
             if (isRepeating) {
                 taskList.editRepeatedTasks(editIndex, taskDescription,
-                        startDifferenceInSeconds, endDifferenceInSeconds);
+                        doOnStartDateTime, doOnEndDateTime, byDate);
                 repeated = " repeated";
             } else {
                 taskList.editSingleTaskContent(editIndex, taskDescription,
-                        startDifferenceInSeconds, endDifferenceInSeconds, byDate);
+                        doOnStartDateTime, doOnEndDateTime, byDate);
             }
             ui.showToUser("Okay! I've edited this" + repeated + " task as such:\n\t" + taskToEdit);
             storage.writeSaveData(taskList);
@@ -82,6 +74,8 @@ public class EditCommand extends Command {
             ui.showToUser("Clashing task: " + exception.getMessage());
         } catch (IndexOutOfBoundsException exception) {
             ui.showToUser(ERROR_INVALID_INDEX_MESSAGE);
+        } catch (InvalidInputException exception) {
+            ui.showToUser(exception.getMessage());
         }
     }
 }

@@ -102,7 +102,6 @@ public class Storage {
     /**
      * Loads back the save file onto the program.
      *
-     * @return ArrayList containing the tasks saved in the data file
      * @throws IOException           If an I/O error occurs while reading the data file
      * @throws InvalidInputException If the data has missing fields for a task
      * @throws JSONException         If the data file has an invalid JSON format
