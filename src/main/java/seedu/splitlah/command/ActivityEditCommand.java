@@ -299,7 +299,7 @@ public class ActivityEditCommand extends Command {
      * @param session A session object containing all ActivityCosts related to the Activity that is being edited.
      */
     private void updateDummyActivityIdsInActivityCosts(Session session) {
-        ArrayList<Person> involvedPersonList = session.getPersonList();
+        ArrayList<Person> involvedPersonList = session.getPersonList().getPersonList();
         for (Person person : involvedPersonList) {
             updateAllDummyActivityIdsInPerson(person);
         }
