@@ -115,7 +115,7 @@ The features of WerkIt! are split and grouped into 5 main features:
 
 ### Exercise-related features
 
-Format: `exercise <userAction> <keywords>`
+Format: `exercise <commandAction> <condition>`
 
 Below is a class diagram of the exercise-related features:
 
@@ -128,13 +128,13 @@ class will catch the user input, and it will be sent to `Parser#parseUserInput(S
 user's command. If the user's command type is `exercise`, the `Parser#parseUserInput(String userInput)` method will 
 parse the 'exercise' base word and proceed to create exercise related command using 
 `Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
-`<userAction>` and call the constructor of `ExerciseCommand` class by passing relevant parameters related
-to the constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandException` will be thrown.
+`<commandAction>` and call the constructor of `ExerciseCommand` class by passing relevant parameters related
+to the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown.
 
-Currently, the exercise related feature is limited to `exercise /list` only. Therefore, the `keywords` mentioned can
-be ignored for now, and the only supported `userAction` is `/list`. However, more exciting exercise-related features are
-expected to be delivered in future iterations, and we currently have set the framework to implement these features in
-the future. Thus, we have this standalone section specifically kept for exercise-related features.
+Currently, the exercise related feature is limited to `exercise /list` only. Therefore, the `condition` mentioned can
+be ignored for now, and the only supported `commandAction` is `/list`. However, more exciting exercise-related features 
+are expected to be delivered in future iterations, and we currently have set the framework to implement these features 
+in the future. Thus, we have this standalone section specifically kept for exercise-related features.
 
 ---
 
@@ -155,7 +155,7 @@ _to be updated_
 
 ### Search-related features
 
-Format: `search <userAction> <keywords>`
+Format: `search <commandAction> <keywords>`
 
 Below is a class diagram of the search-related features:
 
@@ -165,12 +165,12 @@ Below is a class diagram of the search-related features:
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
 `WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
 class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
-user's command. If the user's command type is search, i.e. `search <userAction> <keywords>`, the
+user's command. If the user's command type is search, i.e. `search <commandAction> <keywords>`, the
 `Parser#parseUserInput(String userInput)` method will parse the 'search' base word and proceed to create search related
 command using `Parser#createSearchCommand(String userInput)` method. This method will further evaluate the
-`<userAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to the
-constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If the `<keywords>`
-is not specified, an `InvalidCommandException` will be thrown.
+`<commandAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to 
+the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If 
+the `<keywords>` is not specified, an `InvalidCommandException` will be thrown.
 
 ---
 ## Implementation
