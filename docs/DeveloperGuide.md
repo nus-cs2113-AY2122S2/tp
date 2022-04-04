@@ -145,7 +145,27 @@ The features of WerkIt! are split and grouped into 5 main features:
 5. [Search-related features](#search-related-features)
 
 ### Exercise-related features
-_to be updated_
+
+Format: `exercise <userAction> <keywords>`
+
+Below is a class diagram of the exercise-related features:
+
+![ExerciseUML](uml/classDiagrams/images/exercise.png)
+<br>
+
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
+user's command. If the user's command type is `exercise`, the `Parser#parseUserInput(String userInput)` method will 
+parse the 'exercise' base word and proceed to create exercise related command using 
+`Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
+`<userAction>` and call the constructor of `ExerciseCommand` class by passing relevant parameters related
+to the constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandException` will be thrown.
+
+Currently, the exercise related feature is limited to `exercise /list` only. Therefore, the `keywords` mentioned can
+be ignored for now, and the only supported `userAction` is `/list`. However, more exciting exercise-related features are
+expected to be delivered in future iterations, and we currently have set the framework to implement these features in
+the future. Thus, we have this standalone section specifically kept for exercise-related features.
 
 ---
 
@@ -190,7 +210,10 @@ _to be updated_
 
 ### Search-related features
 
+Format: `search <userAction> <keywords>`
+
 Below is a class diagram of the search-related features:
+
 ![SearchUML](uml/classDiagrams/images/SearchClass.png)
 <br>
 
@@ -1196,7 +1219,22 @@ The following sequence diagram illustrates how the `search /all` command works i
 
 ### File Management
 
-#### Design Considerations
+#### Design Considerations For Inconsistent Data Between Resource Files
+
+The first step of loading local files to the app involves the checking of validity of data. That is, before loading plan
+data, `FileManager` will check whether the workouts in the plan exist in the `workouts.txt` file, and before loading
+schedule data, `FileManager` will also check whether the plans in the `schedule.txt` could be found in `plan.txt`. If 
+all the data can be matched, the files will be loaded successfully, otherwise only the unmatched data are classified as 
+"corrupted data" and will be deleted and the deletion will be cascaded. 
+
+Although the users are warned not to edit  the local resource files as this action may corrupt the stored data,
+resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
+the files. Thus, other than the warning in our [UserGuide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
+we also implemented error handling methods to handle the situation where users edited the files and caused data 
+corruptions. We could have implemented the handling of "corrupted data" in a more hassle-free way by simply clearing 
+all local data. However, in order to provide the best possible user experience by minimising the amount of data lost in 
+such situations, we decided to implement the validity checking such that only the affected data are removed while 
+keeping all the non-affected data safely.
 
 
 ## Product Scope

@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+title Class Diagram of `exercise` Command
+Main -> WerkIt
+WerkIt -> Parser
+WerkIt -> UI
+ExerciseList <- ExerciseCommand
+"{abstract}\nCommand" <|- ExerciseCommand
+
+
+Parser ..> "{abstract}\nCommand"
+class WerkIt {
++ startContinuousUserPrompt()
+}
+
+
+class Main {
+
+}
+
+class ExerciseCommand {
++ execute()
+}
+
+class UI {
++ getUserInput()
+}
+
+class Parser {
++ parseUserInput(String userInput)
++ ExerciseCommand createExerciseCommand(String userInput)
+}
+
+class ExerciseList {
++ exercisesList: ArrayList<String>
++ printExerciseList()
+}
+
+@enduml
