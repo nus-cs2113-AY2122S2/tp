@@ -4,7 +4,6 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -63,7 +62,7 @@ public class ActivityListCommand extends Command {
      */
     public static Command prepare(String commandArgs) {
         try {
-            int sessionId = Parser.parseSessionId(commandArgs);
+            int sessionId = ParserUtils.parseSessionId(commandArgs);
             return new ActivityListCommand(sessionId);
         } catch (InvalidFormatException e) {
             String invalidCommandMessage = e.getMessage() + "\n" + COMMAND_FORMAT;

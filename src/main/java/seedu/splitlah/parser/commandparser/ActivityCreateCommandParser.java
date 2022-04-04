@@ -2,7 +2,6 @@ package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.ActivityCreateCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -56,10 +55,10 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
         double serviceCharge;
 
         try {
-            sessionId = Parser.parseSessionId(commandArgs);
-            activityName = Parser.parseName(commandArgs);
-            payer = Parser.parsePayer(commandArgs);
-            involvedList = Parser.parseInvolved(commandArgs);
+            sessionId = ParserUtils.parseSessionId(commandArgs);
+            activityName = ParserUtils.parseName(commandArgs);
+            payer = ParserUtils.parsePayer(commandArgs);
+            involvedList = ParserUtils.parseInvolved(commandArgs);
         } catch (InvalidFormatException e) {
             String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t"
                     + COMMAND_FORMAT_SECOND;
@@ -71,7 +70,7 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
         boolean hasDifferentLength = false;
 
         try {
-            totalCost = Parser.parseTotalCost(commandArgs);
+            totalCost = ParserUtils.parseTotalCost(commandArgs);
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
                     + ParserUtils.TOTAL_COST_DELIMITER)) {
@@ -83,7 +82,7 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
         }
 
         try {
-            costList = Parser.parseCostList(commandArgs);
+            costList = ParserUtils.parseCostList(commandArgs);
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
                     + ParserUtils.COST_LIST_DELIMITER)) {
@@ -118,8 +117,8 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
         }
 
         try {
-            gst = Parser.parseGst(commandArgs);
-            serviceCharge = Parser.parseServiceCharge(commandArgs);
+            gst = ParserUtils.parseGst(commandArgs);
+            serviceCharge = ParserUtils.parseServiceCharge(commandArgs);
         } catch (InvalidFormatException e) {
             String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
                     + "\n\t" + COMMAND_FORMAT_SECOND;

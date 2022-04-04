@@ -277,7 +277,7 @@ class ParserTest {
     void parseName_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutNameDelimiter = "n Class outing /d 23-02-2022 /pl Alice Alice Bob";
         try {
-            String output = Parser.parseName(argumentWithoutNameDelimiter);
+            String output = ParserUtils.parseName(argumentWithoutNameDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.NAME_DELIMITER;
@@ -293,7 +293,7 @@ class ParserTest {
     void parseName_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutNameArgument = "/n /d 23-02-2022 /pl Alice Alice Bob";
         try {
-            String output = Parser.parseName(argumentWithoutNameArgument);
+            String output = ParserUtils.parseName(argumentWithoutNameArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.NAME_DELIMITER;
@@ -309,7 +309,7 @@ class ParserTest {
     void parseName_delimiterAndArgumentExists_argumentString() {
         String argumentWithDelimiterAndArgument = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
         try {
-            String output = Parser.parseName(argumentWithDelimiterAndArgument);
+            String output = ParserUtils.parseName(argumentWithDelimiterAndArgument);
             assertEquals("Class outing", output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -325,7 +325,7 @@ class ParserTest {
     void parsePersonList_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutPersonListDelimiter = "/n Class outing /d 23-02-2022 pl Alice Alice Bob";
         try {
-            String[] output = Parser.parsePersonList(argumentWithoutPersonListDelimiter);
+            String[] output = ParserUtils.parsePersonList(argumentWithoutPersonListDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.PERSON_LIST_DELIMITER;
@@ -341,7 +341,7 @@ class ParserTest {
     void parsePersonList_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutPersonListArgument = "/n Class outing /d 23-02-2022 /pl";
         try {
-            String[] output = Parser.parsePersonList(argumentWithoutPersonListArgument);
+            String[] output = ParserUtils.parsePersonList(argumentWithoutPersonListArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.PERSON_LIST_DELIMITER;
@@ -357,7 +357,7 @@ class ParserTest {
     void parsePersonList_delimiterAndArgumentExists_personList() {
         String argumentWithDelimiterAndArgument = "/n Class outing /d 23-02-2022 /pl Alice Charles Bob";
         try {
-            String[] output = Parser.parsePersonList(argumentWithDelimiterAndArgument);
+            String[] output = ParserUtils.parsePersonList(argumentWithDelimiterAndArgument);
             assertEquals(3, output.length);
             assertEquals("Alice", output[0]);
             assertEquals("Charles", output[1]);
@@ -376,7 +376,7 @@ class ParserTest {
     void parseInvolved_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutInvolvedDelimiter = "/sid 1 /n Lunch /p Alice i Alice Bob Charlie /co 15";
         try {
-            String[] output = Parser.parseInvolved(argumentWithoutInvolvedDelimiter);
+            String[] output = ParserUtils.parseInvolved(argumentWithoutInvolvedDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.INVOLVED_DELIMITER;
@@ -392,7 +392,7 @@ class ParserTest {
     void parseInvolved_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutInvolvedArgument = "/sid 1 /n Lunch /p Alice /i /co 15";
         try {
-            String[] output = Parser.parseInvolved(argumentWithoutInvolvedArgument);
+            String[] output = ParserUtils.parseInvolved(argumentWithoutInvolvedArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.INVOLVED_DELIMITER;
@@ -408,7 +408,7 @@ class ParserTest {
     void parseInvolved_delimiterAndArgumentExists_personList() {
         String argumentWithDelimiterAndArgument = "/sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            String[] output = Parser.parseInvolved(argumentWithDelimiterAndArgument);
+            String[] output = ParserUtils.parseInvolved(argumentWithDelimiterAndArgument);
             assertEquals(3, output.length);
             assertEquals("Alice", output[0]);
             assertEquals("Bob", output[1]);
@@ -427,7 +427,7 @@ class ParserTest {
     void parsePayer_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutPayerDelimiter = "/sid 1 /n Lunch p Alice /i Alice Bob Charlie /co 15";
         try {
-            String output = Parser.parsePayer(argumentWithoutPayerDelimiter);
+            String output = ParserUtils.parsePayer(argumentWithoutPayerDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.PAYER_DELIMITER;
@@ -443,7 +443,7 @@ class ParserTest {
     void parsePayer_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p /i Alice Bob Charlie /co 15";
         try {
-            String output = Parser.parsePayer(argumentWithoutPayerArgument);
+            String output = ParserUtils.parsePayer(argumentWithoutPayerArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.PAYER_DELIMITER;
@@ -459,7 +459,7 @@ class ParserTest {
     void parsePayer_delimiterExistsMultiplePayers_InvalidFormatExceptionThrown() {
         String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p Alice Bob /i Alice Bob Charlie /co 15";
         try {
-            String output = Parser.parsePayer(argumentWithoutPayerArgument);
+            String output = ParserUtils.parsePayer(argumentWithoutPayerArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MORE_THAN_ONE_PAYER;
@@ -475,7 +475,7 @@ class ParserTest {
     void parsePayer_delimiterExistsSinglePayer_argumentString() {
         String argumentWithDelimiterAndArgument = "/sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            String output = Parser.parsePayer(argumentWithDelimiterAndArgument);
+            String output = ParserUtils.parsePayer(argumentWithDelimiterAndArgument);
             assertEquals("Alice", output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -491,7 +491,7 @@ class ParserTest {
     void parseSessionId_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutSessionIdDelimiter = "sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            int output = Parser.parseSessionId(argumentWithoutSessionIdDelimiter);
+            int output = ParserUtils.parseSessionId(argumentWithoutSessionIdDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.SESSION_ID_DELIMITER;
@@ -507,7 +507,7 @@ class ParserTest {
     void parseSessionId_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutSessionIdArgument = "/sid  /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            int output = Parser.parseSessionId(argumentWithoutSessionIdArgument);
+            int output = ParserUtils.parseSessionId(argumentWithoutSessionIdArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.SESSION_ID_DELIMITER;
@@ -523,7 +523,7 @@ class ParserTest {
     void parseSessionId_delimiterExistsArgumentNotInteger_InvalidFormatExceptionThrown() {
         String argumentWithNonIntArgument = "/sid a1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            int output = Parser.parseSessionId(argumentWithNonIntArgument);
+            int output = ParserUtils.parseSessionId(argumentWithNonIntArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + ParserUtils.SESSION_ID_DELIMITER;
@@ -539,7 +539,7 @@ class ParserTest {
     void parseSessionId_delimiterExistsArgumentNegativeInteger_InvalidFormatExceptionThrown() {
         String argumentWithNegativeIntArgument = "/sid -9 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            int output = Parser.parseSessionId(argumentWithNegativeIntArgument);
+            int output = ParserUtils.parseSessionId(argumentWithNegativeIntArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_ID_VALUE_NOT_POSITIVE;
@@ -555,7 +555,7 @@ class ParserTest {
     void parseSessionId_delimiterExistsArgumentPositiveInteger_sessionId() {
         String argumentWithDelimiterAndPositiveInt = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            int output = Parser.parseSessionId(argumentWithDelimiterAndPositiveInt);
+            int output = ParserUtils.parseSessionId(argumentWithDelimiterAndPositiveInt);
             assertEquals(3, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -571,7 +571,7 @@ class ParserTest {
     void parseActivityId_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutActivityIdDelimiter = "/sid 1 aid 5";
         try {
-            int output = Parser.parseActivityId(argumentWithoutActivityIdDelimiter);
+            int output = ParserUtils.parseActivityId(argumentWithoutActivityIdDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.ACTIVITY_ID_DELIMITER;
@@ -587,7 +587,7 @@ class ParserTest {
     void parseActivityId_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutActivityIdArgument = "/sid 1 /aid ";
         try {
-            int output = Parser.parseActivityId(argumentWithoutActivityIdArgument);
+            int output = ParserUtils.parseActivityId(argumentWithoutActivityIdArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.ACTIVITY_ID_DELIMITER;
@@ -603,7 +603,7 @@ class ParserTest {
     void parseActivityId_delimiterExistsArgumentNotInteger_InvalidFormatExceptionThrown() {
         String argumentWithNonIntArgument = "/sid 1 /aid a5";
         try {
-            int output = Parser.parseActivityId(argumentWithNonIntArgument);
+            int output = ParserUtils.parseActivityId(argumentWithNonIntArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + ParserUtils.ACTIVITY_ID_DELIMITER;
@@ -619,7 +619,7 @@ class ParserTest {
     void parseActivityId_delimiterExistsArgumentNegativeInteger_InvalidFormatExceptionThrown() {
         String argumentWithNegativeIntArgument = "/sid 1 /aid -5";
         try {
-            int output = Parser.parseActivityId(argumentWithNegativeIntArgument);
+            int output = ParserUtils.parseActivityId(argumentWithNegativeIntArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_ID_VALUE_NOT_POSITIVE;
@@ -635,7 +635,7 @@ class ParserTest {
     void parseActivityId_delimiterExistsArgumentPositiveInteger_activityId() {
         String argumentWithDelimiterAndPositiveInt = "/sid 1 /aid 5";
         try {
-            int output = Parser.parseActivityId(argumentWithDelimiterAndPositiveInt);
+            int output = ParserUtils.parseActivityId(argumentWithDelimiterAndPositiveInt);
             assertEquals(5, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -651,7 +651,7 @@ class ParserTest {
     void parseLocalDate_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutDateDelimiter = "/n Class outing d 23-02-2022 /pl Alice Alice Bob";
         try {
-            LocalDate output = Parser.parseLocalDate(argumentWithoutDateDelimiter);
+            LocalDate output = ParserUtils.parseLocalDate(argumentWithoutDateDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.DATE_DELIMITER;
@@ -667,7 +667,7 @@ class ParserTest {
     void parseLocalDate_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutDateArgument = "/n Class outing /d /pl Alice Alice Bob";
         try {
-            LocalDate output = Parser.parseLocalDate(argumentWithoutDateArgument);
+            LocalDate output = ParserUtils.parseLocalDate(argumentWithoutDateArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.DATE_DELIMITER;
@@ -683,7 +683,7 @@ class ParserTest {
     void parseLocalDate_invalidDateFormatting_InvalidFormatExceptionThrown() {
         String argumentWithInvalidDateFormatting = "/n Class outing /d 2022-03-04 /pl Alice Alice Bob";
         try {
-            LocalDate output = Parser.parseLocalDate(argumentWithInvalidDateFormatting);
+            LocalDate output = ParserUtils.parseLocalDate(argumentWithInvalidDateFormatting);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_INVALID_DATE_FORMAT;
@@ -699,7 +699,7 @@ class ParserTest {
     void parseLocalDate_validDateFormatting_validDate() {
         String argumentWithValidDateFormatting = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
         try {
-            LocalDate output = Parser.parseLocalDate(argumentWithValidDateFormatting);
+            LocalDate output = ParserUtils.parseLocalDate(argumentWithValidDateFormatting);
             assertEquals(23, output.getDayOfMonth());
             assertEquals(2, output.getMonthValue());
             assertEquals(2022, output.getYear());
@@ -716,7 +716,7 @@ class ParserTest {
     void parseLocalDate_todayAsInput_validDate() {
         String argumentWithTodayAsDate = "/n Class outing /d today /pl Alice Alice Bob";
         try {
-            LocalDate output = Parser.parseLocalDate(argumentWithTodayAsDate);
+            LocalDate output = ParserUtils.parseLocalDate(argumentWithTodayAsDate);
             LocalDate today = LocalDate.now();
             assertEquals(today, output);
         } catch (InvalidFormatException exception) {
@@ -733,7 +733,7 @@ class ParserTest {
     void parseTotalCost_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutTotalCostDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie co 15";
         try {
-            double output = Parser.parseTotalCost(argumentWithoutTotalCostDelimiter);
+            double output = ParserUtils.parseTotalCost(argumentWithoutTotalCostDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.TOTAL_COST_DELIMITER;
@@ -749,7 +749,7 @@ class ParserTest {
     void parseTotalCost_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutTotalCostArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co ";
         try {
-            double output = Parser.parseTotalCost(argumentWithoutTotalCostArgument);
+            double output = ParserUtils.parseTotalCost(argumentWithoutTotalCostArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.TOTAL_COST_DELIMITER;
@@ -766,7 +766,7 @@ class ParserTest {
         // Standard non-numerics
         String argumentWithNonNumericArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co apple";
         try {
-            double output = Parser.parseTotalCost(argumentWithNonNumericArgument);
+            double output = ParserUtils.parseTotalCost(argumentWithNonNumericArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.TOTAL_COST_DELIMITER;
@@ -776,7 +776,7 @@ class ParserTest {
         // Double.parseDouble reserved characters
         String argumentWithReservedCharacters = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 7.5d";
         try {
-            double output = Parser.parseTotalCost(argumentWithReservedCharacters);
+            double output = ParserUtils.parseTotalCost(argumentWithReservedCharacters);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.TOTAL_COST_DELIMITER;
@@ -792,7 +792,7 @@ class ParserTest {
     void parseTotalCost_delimiterExistsArgumentNegative_InvalidFormatExceptionThrown() {
         String argumentWithNegativeArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co -1.24";
         try {
-            double output = Parser.parseTotalCost(argumentWithNegativeArgument);
+            double output = ParserUtils.parseTotalCost(argumentWithNegativeArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_COST_NOT_POSITIVE;
@@ -808,7 +808,7 @@ class ParserTest {
     void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_InvalidFormatExceptionThrown() {
         String argumentWithPositiveArgumentMoreThan2DP = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 1.2444";
         try {
-            double output = Parser.parseTotalCost(argumentWithPositiveArgumentMoreThan2DP);
+            double output = ParserUtils.parseTotalCost(argumentWithPositiveArgumentMoreThan2DP);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_COST_NOT_TWO_DP;
@@ -826,7 +826,7 @@ class ParserTest {
         String argumentWithPositiveArgumentMoreThan12DigitsBeforeDP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 1234567890123.1";
         try {
-            double output = Parser.parseTotalCost(argumentWithPositiveArgumentMoreThan12DigitsBeforeDP);
+            double output = ParserUtils.parseTotalCost(argumentWithPositiveArgumentMoreThan12DigitsBeforeDP);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP;
@@ -845,7 +845,7 @@ class ParserTest {
         String argumentWithDelimiterAndValidArgumentTestLimit =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 123456789012.99";
         try {
-            double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestLimit);
+            double output = ParserUtils.parseTotalCost(argumentWithDelimiterAndValidArgumentTestLimit);
             assertEquals(123456789012.99, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -855,7 +855,7 @@ class ParserTest {
         String argumentWithDelimiterAndValidArgumentTestNoDecimal =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 123456789012";
         try {
-            double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestNoDecimal);
+            double output = ParserUtils.parseTotalCost(argumentWithDelimiterAndValidArgumentTestNoDecimal);
             assertEquals(123456789012.0, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -865,7 +865,7 @@ class ParserTest {
         String argumentWithDelimiterAndValidArgumentTestNormal =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 10.70";
         try {
-            double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestNormal);
+            double output = ParserUtils.parseTotalCost(argumentWithDelimiterAndValidArgumentTestNormal);
             assertEquals(10.70, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -881,7 +881,7 @@ class ParserTest {
     void parseCostList_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutCostListDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie cl 10 10 10";
         try {
-            double[] output = Parser.parseCostList(argumentWithoutCostListDelimiter);
+            double[] output = ParserUtils.parseCostList(argumentWithoutCostListDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.COST_LIST_DELIMITER;
@@ -897,7 +897,7 @@ class ParserTest {
     void parseCostList_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutCostListArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl ";
         try {
-            double[] output = Parser.parseCostList(argumentWithoutCostListArguments);
+            double[] output = ParserUtils.parseCostList(argumentWithoutCostListArguments);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.COST_LIST_DELIMITER;
@@ -914,7 +914,7 @@ class ParserTest {
         // Standard non-numerics
         String argumentWithNonNumericArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl apple orange";
         try {
-            double[] output = Parser.parseCostList(argumentWithNonNumericArguments);
+            double[] output = ParserUtils.parseCostList(argumentWithNonNumericArguments);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.COST_LIST_DELIMITER;
@@ -924,7 +924,7 @@ class ParserTest {
         // Double.parseDouble reserved characters
         String argumentWithReservedCharacters = "/sid 3 /n Lunch /p Alice /i Alice Bob /cl 3.5 7.0d";
         try {
-            double[] output = Parser.parseCostList(argumentWithReservedCharacters);
+            double[] output = ParserUtils.parseCostList(argumentWithReservedCharacters);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.COST_LIST_DELIMITER;
@@ -941,7 +941,7 @@ class ParserTest {
         String argumentWithNegativeArguments =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 10 -10 10";
         try {
-            double[] output = Parser.parseCostList(argumentWithNegativeArguments);
+            double[] output = ParserUtils.parseCostList(argumentWithNegativeArguments);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_COST_NOT_POSITIVE;
@@ -958,7 +958,7 @@ class ParserTest {
         String argumentWithPositiveArgumentsMoreThan2DP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 1.2444 15.30 20";
         try {
-            double[] output = Parser.parseCostList(argumentWithPositiveArgumentsMoreThan2DP);
+            double[] output = ParserUtils.parseCostList(argumentWithPositiveArgumentsMoreThan2DP);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_COST_NOT_TWO_DP;
@@ -976,7 +976,7 @@ class ParserTest {
         String argumentWithPositiveArgumentsMoreThan12DigitsBeforeDP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 1234567890123.1 15.30 20";
         try {
-            double[] output = Parser.parseCostList(argumentWithPositiveArgumentsMoreThan12DigitsBeforeDP);
+            double[] output = ParserUtils.parseCostList(argumentWithPositiveArgumentsMoreThan12DigitsBeforeDP);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP;
@@ -994,7 +994,7 @@ class ParserTest {
         String argumentWithDelimiterAndValidArguments =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 123456789012.34 123456789012 10.70";
         try {
-            double[] output = Parser.parseCostList(argumentWithDelimiterAndValidArguments);
+            double[] output = ParserUtils.parseCostList(argumentWithDelimiterAndValidArguments);
             assertEquals(3, output.length);
             assertEquals(123456789012.34, output[0]);
             assertEquals(123456789012.0, output[1]);
@@ -1014,7 +1014,7 @@ class ParserTest {
         String argumentWithoutGstDelimiter =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            double output = Parser.parseGst(argumentWithoutGstDelimiter);
+            double output = ParserUtils.parseGst(argumentWithoutGstDelimiter);
             assertEquals(0, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -1030,7 +1030,7 @@ class ParserTest {
         String argumentWithoutGstArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithoutGstArgument);
+            double output = ParserUtils.parseGst(argumentWithoutGstArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.GST_DELIMITER;
@@ -1048,7 +1048,7 @@ class ParserTest {
         String argumentWithNonDoubleArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst apple /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithNonDoubleArgument);
+            double output = ParserUtils.parseGst(argumentWithNonDoubleArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_PERCENTAGE_ARGUMENT + ParserUtils.GST_DELIMITER;
@@ -1059,7 +1059,7 @@ class ParserTest {
         String argumentWithReservedCharacters =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7.0d /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithReservedCharacters);
+            double output = ParserUtils.parseGst(argumentWithReservedCharacters);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_NON_PERCENTAGE_ARGUMENT + ParserUtils.GST_DELIMITER;
@@ -1077,7 +1077,7 @@ class ParserTest {
         String argumentWithDoubleArgumentMoreThan3DigitsBeforeDP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 1000 /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithDoubleArgumentMoreThan3DigitsBeforeDP);
+            double output = ParserUtils.parseGst(argumentWithDoubleArgumentMoreThan3DigitsBeforeDP);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_PERCENTAGE_MORE_THAN_THREE_DIGITS_BEFORE_DP;
@@ -1094,7 +1094,7 @@ class ParserTest {
         String argumentWithDoubleArgumentMoreThan2DP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 10.123 /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithDoubleArgumentMoreThan2DP);
+            double output = ParserUtils.parseGst(argumentWithDoubleArgumentMoreThan2DP);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_PERCENTAGE_NOT_TWO_DP;
@@ -1113,7 +1113,7 @@ class ParserTest {
         String argumentWithDoubleArgumentUnderRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst -1 /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithDoubleArgumentUnderRange);
+            double output = ParserUtils.parseGst(argumentWithDoubleArgumentUnderRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_PERCENTAGE_NEGATIVE;
@@ -1124,7 +1124,7 @@ class ParserTest {
         String argumentWithDoubleArgumentAboveRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 101 /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithDoubleArgumentAboveRange);
+            double output = ParserUtils.parseGst(argumentWithDoubleArgumentAboveRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + ParserUtils.GST_DELIMITER;
@@ -1135,7 +1135,7 @@ class ParserTest {
         String argumentWithDoubleArgumentNearRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 100.01 /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithDoubleArgumentNearRange);
+            double output = ParserUtils.parseGst(argumentWithDoubleArgumentNearRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + ParserUtils.GST_DELIMITER;
@@ -1153,7 +1153,7 @@ class ParserTest {
         String argumentWithDoubleArgumentInRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithDoubleArgumentInRange);
+            double output = ParserUtils.parseGst(argumentWithDoubleArgumentInRange);
             assertEquals(7, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -1163,8 +1163,8 @@ class ParserTest {
         String argumentWithMinPercentageArgument = 
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 0 /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithMinPercentageArgument);
-            assertEquals(Parser.MINIMUM_SURCHARGE_PERCENT, output);
+            double output = ParserUtils.parseGst(argumentWithMinPercentageArgument);
+            assertEquals(ParserUtils.MINIMUM_SURCHARGE_PERCENT, output);
         } catch (InvalidFormatException exception) {
             fail();
         }
@@ -1173,8 +1173,8 @@ class ParserTest {
         String argumentWithMaxPercentageArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 100 /sc 10";
         try {
-            double output = Parser.parseGst(argumentWithMaxPercentageArgument);
-            assertEquals(Parser.MAXIMUM_SURCHARGE_PERCENT, output);
+            double output = ParserUtils.parseGst(argumentWithMaxPercentageArgument);
+            assertEquals(ParserUtils.MAXIMUM_SURCHARGE_PERCENT, output);
         } catch (InvalidFormatException exception) {
             fail();
         }
@@ -1190,7 +1190,7 @@ class ParserTest {
         String argumentWithoutServiceChargeDelimiter =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            double output = Parser.parseServiceCharge(argumentWithoutServiceChargeDelimiter);
+            double output = ParserUtils.parseServiceCharge(argumentWithoutServiceChargeDelimiter);
             assertEquals(0, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -1206,7 +1206,7 @@ class ParserTest {
         String argumentWithoutServiceChargeArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc ";
         try {
-            double output = Parser.parseServiceCharge(argumentWithoutServiceChargeArgument);
+            double output = ParserUtils.parseServiceCharge(argumentWithoutServiceChargeArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.SERVICE_CHARGE_DELIMITER;
@@ -1224,7 +1224,7 @@ class ParserTest {
         String argumentWithNonDoubleArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc apple";
         try {
-            double output = Parser.parseServiceCharge(argumentWithNonDoubleArgument);
+            double output = ParserUtils.parseServiceCharge(argumentWithNonDoubleArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage =
@@ -1236,7 +1236,7 @@ class ParserTest {
         String argumentWithReservedCharacters =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7.0 /sc 10.0d";
         try {
-            double output = Parser.parseServiceCharge(argumentWithReservedCharacters);
+            double output = ParserUtils.parseServiceCharge(argumentWithReservedCharacters);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage =
@@ -1255,7 +1255,7 @@ class ParserTest {
         String argumentWithDoubleArgumentMoreThan3DigitsBeforeDP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 1000";
         try {
-            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentMoreThan3DigitsBeforeDP);
+            double output = ParserUtils.parseServiceCharge(argumentWithDoubleArgumentMoreThan3DigitsBeforeDP);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_PERCENTAGE_MORE_THAN_THREE_DIGITS_BEFORE_DP;
@@ -1272,7 +1272,7 @@ class ParserTest {
         String argumentWithDoubleArgumentMoreThan2DP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10.123";
         try {
-            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentMoreThan2DP);
+            double output = ParserUtils.parseServiceCharge(argumentWithDoubleArgumentMoreThan2DP);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_PERCENTAGE_NOT_TWO_DP;
@@ -1291,7 +1291,7 @@ class ParserTest {
         String argumentWithDoubleArgumentUnderRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc -1";
         try {
-            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentUnderRange);
+            double output = ParserUtils.parseServiceCharge(argumentWithDoubleArgumentUnderRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_PERCENTAGE_NEGATIVE;
@@ -1302,7 +1302,7 @@ class ParserTest {
         String argumentWithDoubleArgumentAboveRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 101";
         try {
-            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentAboveRange);
+            double output = ParserUtils.parseServiceCharge(argumentWithDoubleArgumentAboveRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + ParserUtils.SERVICE_CHARGE_DELIMITER;
@@ -1313,7 +1313,7 @@ class ParserTest {
         String argumentWithDoubleArgumentNearRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 100.01";
         try {
-            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentNearRange);
+            double output = ParserUtils.parseServiceCharge(argumentWithDoubleArgumentNearRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + ParserUtils.SERVICE_CHARGE_DELIMITER;
@@ -1332,7 +1332,7 @@ class ParserTest {
         String argumentWithDoubleArgumentInRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10";
         try {
-            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentInRange);
+            double output = ParserUtils.parseServiceCharge(argumentWithDoubleArgumentInRange);
             assertEquals(10, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -1342,8 +1342,8 @@ class ParserTest {
         String argumentWithMinPercentageArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 0";
         try {
-            double output = Parser.parseServiceCharge(argumentWithMinPercentageArgument);
-            assertEquals(Parser.MINIMUM_SURCHARGE_PERCENT, output);
+            double output = ParserUtils.parseServiceCharge(argumentWithMinPercentageArgument);
+            assertEquals(ParserUtils.MINIMUM_SURCHARGE_PERCENT, output);
         } catch (InvalidFormatException exception) {
             fail();
         }
@@ -1352,8 +1352,8 @@ class ParserTest {
         String argumentWithMaxPercentageArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 100";
         try {
-            double output = Parser.parseServiceCharge(argumentWithMaxPercentageArgument);
-            assertEquals(Parser.MAXIMUM_SURCHARGE_PERCENT, output);
+            double output = ParserUtils.parseServiceCharge(argumentWithMaxPercentageArgument);
+            assertEquals(ParserUtils.MAXIMUM_SURCHARGE_PERCENT, output);
         } catch (InvalidFormatException exception) {
             fail();
         }

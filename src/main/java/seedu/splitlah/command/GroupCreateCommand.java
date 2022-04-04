@@ -5,7 +5,6 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Profile;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
@@ -57,8 +56,8 @@ public class GroupCreateCommand extends Command {
      */
     public static Command prepare(String commandArgs) {
         try {
-            String parsedGroupName = Parser.parseName(commandArgs);
-            String[] parsedNameList = Parser.parsePersonList(commandArgs);
+            String parsedGroupName = ParserUtils.parseName(commandArgs);
+            String[] parsedNameList = ParserUtils.parsePersonList(commandArgs);
             return new GroupCreateCommand(parsedGroupName, parsedNameList);
         } catch (InvalidFormatException formatException) {
             String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;

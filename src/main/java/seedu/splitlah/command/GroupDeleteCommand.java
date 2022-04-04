@@ -3,7 +3,6 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
@@ -48,7 +47,7 @@ public class GroupDeleteCommand extends Command {
      */
     public static Command prepare(String commandArgs) {
         try {
-            int groupId = Parser.parseGroupId(commandArgs);
+            int groupId = ParserUtils.parseGroupId(commandArgs);
             return new GroupDeleteCommand(groupId);
         } catch (InvalidFormatException e) {
             return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
