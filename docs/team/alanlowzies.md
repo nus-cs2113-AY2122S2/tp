@@ -6,7 +6,7 @@ Software Engineering & Object-Oriented Programming module offered by the School 
 Singapore.
 
 ### About the Project
-WerkIt! is a command line interface (CLI) application written in Java hat allows users to create a weekly workout 
+WerkIt! is a command line interface (CLI) application written in Java that allows users to create a weekly workout 
 schedule for them to refer to and follow. More details about the project can be found in the following locations:
 * [GitHub Repository](../../)
 * [WerkIt! User Guide](../UserGuide.md)
@@ -46,15 +46,16 @@ into text files stored on the user's local filesystem
   additional functionality to the API such as populating the `exercise.txt` file with default exercises. The exercises
   were thought of by Haofeng :)
 - Wrote JUnit test cases for WerkIt! APIs including (but not limited to) `WorkoutCommand`, `FileManager`, `Parser`, etc.
+- Wrote JavaDocs for most of the classes and methods that I have created.
 - Created skeleton codes and packages for the project.
 
 
 ### Enhancements Implemented
 - (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.
   <br/><br/>**Sample:**<br/>
-<span class="box warning">⚠️This is an example of a warning box. Contains advice or instructions that users
+<span class="box warning">:warning: This is an example of a warning box. Contains advice or instructions that users
 should take note of to avoid issues in the application.</span>
-<span class="box info">🧾  This is an information box. Contains information that may be useful for
+<span class="box info">:memo: This is an example of an information box. Contains information that may be useful for
 the users.</span>
 
 ### Contributions to the User Guide (UG)
