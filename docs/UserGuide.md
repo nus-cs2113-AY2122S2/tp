@@ -2,7 +2,7 @@
 
 ## Introduction
 
-MeetingJio is a program for **finding potential time slots for team meetings based on everyone’s availability** via a *Command Line Interface (CLI)*.
+MeetingJio is a program for **finding potential time slots for team meetings based on** everyone’s **availability** via a *Command Line Interface (CLI)*.
 If you can type fast, MeetingJio can get your meeting management tasks done faster than manually eyeballing your timetable.
 
 ## Quick Start
@@ -19,7 +19,7 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 
 ### See slots for possible meetings based on duration
 
-### Book meetings based on availability of all users
+### Book meetings based on availability of **all users**
 
 ### View everyone's timetable and availability
 
