@@ -74,11 +74,13 @@ public class DishController extends Controller {
         MainLogger.logInfo(this, "User is changing the name of dish");
         System.out.println("Changing name...");
         int index = InputParser.getInteger("The index of dish: ");
+        if (index < 0 || index >= dishManager.getNumOfDishes()) {
+            System.out.println("Please make sure the index is valid");
+            return;
+        }
         String name = InputParser.getString("The new name of dish: ");
         try {
             dishManager.setName(index, name);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please make sure the index is valid");
         } catch (IllegalArgumentException e) {
             System.out.println("Please make sure the name is not empty");
         }
@@ -92,11 +94,13 @@ public class DishController extends Controller {
         MainLogger.logInfo(this, "User is changing the price of dish");
         System.out.println("Changing price...");
         int index = InputParser.getInteger("The index of dish: ");
+        if (index < 0 || index >= dishManager.getNumOfDishes()) {
+            System.out.println("Please make sure the index is valid");
+            return;
+        }
         double newPrice = InputParser.getDouble("The new price of dish: ");
         try {
             dishManager.setPrice(index, newPrice);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please make sure the index is valid");
         } catch (IllegalArgumentException e) {
             System.out.println("Please make sure the price is not negative");
         }
