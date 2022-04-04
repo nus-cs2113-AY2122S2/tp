@@ -3,6 +3,7 @@ package seedu.command;
 import seedu.equipment.Equipment;
 import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.EquipmentType;
+import seedu.parser.MissingAttributeException;
 
 import java.util.ArrayList;
 
@@ -20,18 +21,24 @@ public class AddCommand extends ModificationCommand {
     public static final String DUPLICATE_ITEM_ERROR = "There is already an item with this serial number: %1$s";
     public static final String ATTRIBUTE_NOT_SET_ERROR = "Unable to add. "
             + "One or more than one of the attributes of Equipment is not specified.";
+    private static final int EXPECTED_NUMBER_OF_TAGS = 6;
 
     /**
      * constructor for AddCommand. Initialises successMessage and usageReminder from Command
      *
      * @param commandStrings parsed user input which contains details of equipment to be added
      */
-    public AddCommand(ArrayList<String> commandStrings) {
+    public AddCommand(ArrayList<String> commandStrings) throws MissingAttributeException {
         super(commandStrings);
         successMessage = "Equipment successfully added: %1$s, serial number %2$s";
         usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
 
-        prepareModification();
+        if (commandStrings.size() < EXPECTED_NUMBER_OF_TAGS) {
+            throw new MissingAttributeException(ATTRIBUTE_NOT_SET_ERROR);
+        } else {
+            prepareModification();
+        }
+
     }
 
     /**

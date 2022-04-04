@@ -87,6 +87,8 @@ public class Parser {
                 return new IncorrectCommand(ModificationCommand.INVALID_COST_MESSAGE);
             } catch (IllegalArgumentException e) {
                 return new IncorrectCommand(ModificationCommand.INVALID_TYPE_MESSAGE);
+            } catch (MissingAttributeException e) {
+                return new IncorrectCommand(e.getMessage());
             }
         case CheckCommand.COMMAND_WORD:
             try {
