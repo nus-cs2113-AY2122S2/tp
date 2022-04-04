@@ -49,7 +49,6 @@ public class Parser {
         String id;
         String dummy = fullCommand.trim();
         String name;
-        String phoneNumber;
         int idIndex = dummy.indexOf("/id") + 4;
         int nameIndex = dummy.indexOf("/n");
         id = dummy.substring(idIndex, nameIndex).trim();
@@ -58,16 +57,17 @@ public class Parser {
         name = dummy.substring(nameIndex, phoneNumberIndex).trim();
         phoneNumberIndex += 4;
         int emailIndex = dummy.indexOf("/e");
-        phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
+        String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
         emailIndex += 3;
         int symptomIndex = dummy.indexOf("/s");
         String email = dummy.substring(emailIndex,symptomIndex).trim();
         symptomIndex += 3;
+        String phone = phoneNumber;
         int descIndex = dummy.indexOf("/d");
         String symptom = dummy.substring(symptomIndex,descIndex).trim();
         descIndex += 3;
         String description = dummy.substring(descIndex).trim();
-        return new AddPatientCommand(id, name, phoneNumber, email, symptom,description);
+        return new AddPatientCommand(id, name, phone, email, symptom,description);
     }
 
     public Command parseAddAppointment(String fullCommand) throws IHospitalException {
@@ -133,18 +133,18 @@ public class Parser {
     }
 
     public Command parseSearchCommand(String fullCommand) throws IHospitalException {
-        if (fullCommand.contains("search doctor")) {
+        if (fullCommand.contains("doctor")) {
             String dummy = fullCommand.trim();
-            dummy = dummy.substring(dummy.length() - 4);
-            return new SearchDoctorCommand(dummy);
-        } else if (fullCommand.contains("search patient")) {
+            String index = dummy.substring(dummy.indexOf("doctor ") + 7);
+            return new SearchDoctorCommand(index);
+        } else if (fullCommand.contains("patient")) {
             String dummy = fullCommand.trim();
-            dummy = dummy.substring(dummy.length() - 4);
-            return new SearchPatientCommand(dummy);
-        } else if (fullCommand.contains("search appointment")) {
+            String index = dummy.substring(dummy.indexOf("patient ") + 8);
+            return new SearchPatientCommand(index);
+        } else if (fullCommand.contains("appointment")) {
             String dummy = fullCommand.trim();
-            dummy = dummy.substring(17);
-            return new SearchAppointmentCommand(dummy);
+            String time = dummy.substring(dummy.indexOf("appointment ") + 12).trim();
+            return new SearchAppointmentCommand(time);
         }
         return null;
     }
