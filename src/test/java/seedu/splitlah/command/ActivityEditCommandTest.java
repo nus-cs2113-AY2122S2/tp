@@ -141,7 +141,7 @@ class ActivityEditCommandTest {
      *
      */
     @Test
-    public void run_editActivityOverallCostToInvalidCost_overallCostIsNotEdited() throws InvalidDataException {
+    public void run_editActivityOverallCostToInvalidCost_overallCostIsNotEdited() {
         String userInput = "activity /edit /sid 1 /aid 1 /co -1";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
