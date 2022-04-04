@@ -30,7 +30,7 @@ public class AddPatientCommand extends Command {
         Patient patient = new Patient(id, name, phoneNumber, email,symptom,description);
         patientList.addPatient(patient);
         return String.format(boundary + "Noted. I've added this patient:" + "\n" +
-                patientList.getPatient(patientList.getSize() - 1) + "\n" +
+                patientList.getPatient(patientList.getSize()) + "\n" +
                 "Now you have " + patientList.getSize()
                 + " patients recorded in the system." + System.lineSeparator() + boundary);
     }

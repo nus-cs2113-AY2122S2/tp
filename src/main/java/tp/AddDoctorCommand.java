@@ -27,7 +27,7 @@ public class AddDoctorCommand extends Command {
                         AppointmentStorage appointmentStorage) throws IHospitalException {
         Doctor doctor = new Doctor(id, name, phoneNumber, email);
         doctorList.addDoctor(doctor);
-        return String.format(boundary + "Noted. I've added this doctor:" + "\n" + doctorList.getDoctor(doctorList.getSize() - 1) +
+        return String.format(boundary + "Noted. I've added this doctor:" + "\n" + doctorList.getDoctor(doctorList.getSize()) +
                 "\n" + "Now you have " + doctorList.getSize()
                 + " doctors recorded in the system." + System.lineSeparator() + boundary);
     }
