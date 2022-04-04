@@ -105,7 +105,7 @@ You are now ready to begin developing!
 
 ![Architecture-Diagram](high-level-diagram/architecture_diagram.png)
 
-The _Architecture Diagram_ above shows the high-level design of the application.
+The architecture diagram above shows the high-level design of the application.
 Given below is a quick overview of the main components of the application
 and their interactions.
 
