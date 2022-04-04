@@ -304,10 +304,20 @@ public class ActivityEditCommand extends Command {
     private void updateDummyActivityIdsInActivityCosts(Session session) {
         ArrayList<Person> involvedPersonList = session.getPersonList();
         for (Person person : involvedPersonList) {
-            for (ActivityCost activityCost : person.getActivityCostList()) {
-                if (activityCost.getActivityId() == MISSING_ACTIVITYID) {
-                    activityCost.setActivityId(activityId);
-                }
+            updateAllDummyActivityIdsInPerson(person);
+        }
+    }
+
+    /**
+     * Updates placeholder activityId values in all ActivityCost objects associated with a Person object to their
+     * actual values: the activityId of the edited Activity object.
+     *
+     * @param person A Person object containing all ActivityCosts related to the Activity that is being edited.
+     */
+    private void updateAllDummyActivityIdsInPerson(Person person) {
+        for (ActivityCost activityCost : person.getActivityCostList()) {
+            if (activityCost.getActivityId() == DUMMY_ACTIVITYID) {
+                activityCost.setActivityId(activityId);
             }
         }
     }
