@@ -53,9 +53,9 @@ into text files stored on the user's local filesystem
 ### Enhancements Implemented
 - (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.
   <br/><br/>**Sample:**<br/>
-<span class="box warning">⚠️This is an example of a warning box. Contains advice or instructions that users
+<span class="box warning">:warning: This is an example of a warning box. Contains advice or instructions that users
 should take note of to avoid issues in the application.</span>
-<span class="box info">🧾  This is an information box. Contains information that may be useful for
+<span class="box info">:memo: This is an information box. Contains information that may be useful for
 the users.</span>
 
 ### Contributions to the User Guide (UG)
