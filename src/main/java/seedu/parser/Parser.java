@@ -51,15 +51,6 @@ public class Parser {
     public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
             "Please split your command into arguments with each argument seperated by spaces!";
     public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format! Enter help for more information.";
-    @Deprecated
-    public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
-            "n\\/(?<itemName>.+)" + "\\s+"
-                    + "s\\/(?<serialNumber>.+)" + "\\s+"
-                    + "t\\/(?<equipmentType>.+)" + "\\s+"
-                    + "c\\/(?<cost>.+)" + "\\s+"
-                    + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
-                    + "pd\\/(?<purchasedDate>.+)"
-    );
 
     /**
      * Interpret the command requested by the user and returns a corresponding Command object.
@@ -181,47 +172,6 @@ public class Parser {
     }
 
     /**
-     * Prepare arguments for AddCommand by splitting up the arguments into different parts.
-     *
-     * <p>Index:
-     *
-     * <p>0. <code> equipmentName </code>: String of equipment name
-     *
-     * <p>1. <code> serialNumber </code>: String of unique serial number
-     *
-     * <p>2. <code> type </code>: String representation of enumerated class
-     *
-     * <p>3. <code> cost </code>: String representation of double value, "$" optional but "," delimiter forbidden
-     *
-     * <p>4. <code> purchasedFrom </code>: String of vendor name, suggest adhering to one consistent naming scheme
-     *
-     * <p>5. <code> purchasedDate </code>: String representation for now, possibility for future support
-     *
-     * @param args String to be split into substrings
-     * @return ArrayList of arguments
-     * @throws IncompleteCommandException if no match found
-     * @deprecated Use extractArguments as it is more robust in conjunction with subclasses of ModificationCommand
-     */
-    @Deprecated
-    protected ArrayList<String> prepareAdd(String args) throws IncompleteCommandException {
-        final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
-        // validate arg string format
-        int matchCount = matcher.groupCount();
-        if (!matcher.matches()) {
-            throw new IncompleteCommandException("Add command values are incomplete or missing!");
-        }
-        ArrayList<String> results = new ArrayList<>();
-        for (int i = 1; i <= matchCount; i++) {
-            String result = matcher.group(i);
-            if (hasSlashDelimiter(result)) {
-                throw new IncompleteCommandException("Use of '/' for purposes other than delimiter is forbidden!");
-            }
-            results.add(result);
-        }
-        return results;
-    }
-
-    /**
      * Prepare argument for CheckCommand by removing the preceding "n/" prefix.
      *
      * @param args String to be split into substrings
@@ -293,13 +243,67 @@ public class Parser {
         return splitArguments;
     }
 
-    private static boolean hasSlashDelimiter(String argument) {
-        return argument.contains("/");
-    }
-
     private static String setArgumentTagsToLower(String argument) {
         int slashIndex = argument.indexOf("/");
         return argument.substring(0, slashIndex).toLowerCase(Locale.ROOT) + argument.substring(slashIndex);
     }
+
+    @Deprecated
+    public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
+            "n\\/(?<itemName>.+)" + "\\s+"
+                    + "s\\/(?<serialNumber>.+)" + "\\s+"
+                    + "t\\/(?<equipmentType>.+)" + "\\s+"
+                    + "c\\/(?<cost>.+)" + "\\s+"
+                    + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
+                    + "pd\\/(?<purchasedDate>.+)"
+    );
+
+    /**
+     * Prepare arguments for AddCommand by splitting up the arguments into different parts.
+     *
+     * <p>Index:
+     *
+     * <p>0. <code> equipmentName </code>: String of equipment name
+     *
+     * <p>1. <code> serialNumber </code>: String of unique serial number
+     *
+     * <p>2. <code> type </code>: String representation of enumerated class
+     *
+     * <p>3. <code> cost </code>: String representation of double value, "$" optional but "," delimiter forbidden
+     *
+     * <p>4. <code> purchasedFrom </code>: String of vendor name, suggest adhering to one consistent naming scheme
+     *
+     * <p>5. <code> purchasedDate </code>: String representation for now, possibility for future support
+     *
+     * @param args String to be split into substrings
+     * @return ArrayList of arguments
+     * @throws IncompleteCommandException if no match found
+     * @deprecated Use extractArguments as it is more robust in conjunction with subclasses of ModificationCommand
+     */
+    @Deprecated
+    protected ArrayList<String> prepareAdd(String args) throws IncompleteCommandException {
+        final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
+        // validate arg string format
+        int matchCount = matcher.groupCount();
+        if (!matcher.matches()) {
+            throw new IncompleteCommandException("Add command values are incomplete or missing!");
+        }
+        ArrayList<String> results = new ArrayList<>();
+        for (int i = 1; i <= matchCount; i++) {
+            String result = matcher.group(i);
+            if (hasSlashDelimiter(result)) {
+                throw new IncompleteCommandException("Use of '/' for purposes other than delimiter is forbidden!");
+            }
+            results.add(result);
+        }
+        return results;
+    }
+
+    @Deprecated
+    private static boolean hasSlashDelimiter(String argument) {
+        return argument.contains("/");
+    }
+
+
 
 }
