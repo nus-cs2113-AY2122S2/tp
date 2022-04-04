@@ -64,8 +64,8 @@ public class DayList {
             throw new InvalidScheduleException(className, InvalidScheduleException.INVALID_PLAN);
         }
         assert (isPlanValid(planNumber) && isDayValid(dayNumber));
-        String planToAddKey = planList.getPlansDisplayList().get(planNumber - 1); //plan name
-        Plan planToAdd = planList.getPlanFromKey(planToAddKey); //plan hash value
+        String planToAddKey = planList.getPlansDisplayList().get(planNumber - 1);
+        Plan planToAdd = planList.getPlanFromKey(planToAddKey);
         Day newDay;
         if (scheduleList[dayNumber - 1] == null) {
             newDay = new Day(dayNumber, planToAdd);
