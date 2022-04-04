@@ -71,7 +71,22 @@ Wrote JUnit test cases for WerkIt! The summary of the test cases I have written 
 * Wrote [command summary](../UserGuide.md#command-summary) for search and schedule features.
 
 ### Contributions to the Developer Guide (DG)
-[To be updated]
+* Creating the [Architecture Diagram](../DeveloperGuide.md#architecture-diagram) under the Design Section.
+* Wrote the design section on [UI component](../DeveloperGuide.md#ui-component).
+* Wrote the design section on [Schedule related features](../DeveloperGuide.md#schedule-related-features).
+* Wrote the following contributions to the [Implementation](../DeveloperGuide.md#implementation) section:
+  * [Schedule Features](../DeveloperGuide.md#schedule)
+    * [How a plan is being updated/added into the schedule](../DeveloperGuide.md#update-schedule)
+      * Includes sequence diagrams to visualise the process.
+      * Includes the design consideration for this feature. 
+    * [How to view the schedule](../DeveloperGuide.md#view-schedule)
+      * Includes sequence diagrams to visualise the process.
+    * [How to remove a scheduled workout plan](../DeveloperGuide.md#clear-schedule-for-a-day)
+      * Includes sequence diagrams to visualise the process.
+    * [How to reset the workout plan schedule](../DeveloperGuide.md#clear-schedule-for-the-week)
+      * Includes sequence diagrams to visualise the process.
+* Wrote part of [user stories](../DeveloperGuide.md#user-stories)
+      
 
 ### Contributions to Team-Based Tasks
 [To be updated]
