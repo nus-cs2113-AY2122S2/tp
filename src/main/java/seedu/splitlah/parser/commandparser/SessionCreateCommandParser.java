@@ -18,8 +18,7 @@ public class SessionCreateCommandParser implements CommandParser<SessionCreateCo
     public static final String COMMAND_TEXT = "session /create";
 
     public static final String COMMAND_FORMAT =
-            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...] "
-                    + "[</gid [GROUP_ID]>]";
+            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] {/pl [NAME1 NAME2...] /gid [GROUP_ID]}";
 
     public static final String[] COMMAND_DELIMITERS = {
         ParserUtils.NAME_DELIMITER,

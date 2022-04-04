@@ -1,7 +1,5 @@
 package seedu.splitlah.parser;
 
-import seedu.splitlah.command.GroupCreateCommand;
-import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
@@ -12,6 +10,8 @@ import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.parser.commandparser.GroupListCommandParser;
 import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
+import seedu.splitlah.parser.commandparser.GroupCreateCommandParser;
+import seedu.splitlah.parser.commandparser.GroupDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
@@ -25,6 +25,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A utility class that provides supporting parsing methods to the main Parser class.
+ * 
+ * @author Warren
+ */
 public class ParserUtils {
     
     // DELIMITERS
@@ -48,10 +53,12 @@ public class ParserUtils {
     private static final int PERCENTAGE_ALLOWED_INTEGER_PLACES = 3;
     private static final int TWO_DECIMAL_PLACES = 2;
     static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
+    private static final String REGEX_NUMERIC_VALUE = "[0-9.-]+";
+    private static final String REGEX_PRINTABLE_ASCII_ONLY = "\\A[ -~]*\\z";
     static final int INVALID_INDEX_INDICATOR = -1;
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    // SUPPORTING FUNCTIONS
+    // SUPPORTING METHODS
     /**
      * Returns a String object that represents an argument in the command that follows a specified delimiter.
      * 
@@ -126,6 +133,24 @@ public class ParserUtils {
     }
 
     /**
+     * Returns a double represented by the provided input String object.
+     * 
+     * @param input A String object that represents a numeric value.
+     * @return A double represented by the input String object.
+     * @throws NumberFormatException If the provided input String object contains characters that are either
+     *                               non-numeric, not a decimal point or not a negative sign, or
+     *                               if the provided input String object cannot be parsed as a double.
+     */
+    private static double parseDoubleFromString(String input) throws NumberFormatException {
+        assert input != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
+        
+        if (!input.matches(REGEX_NUMERIC_VALUE)) {
+            throw new NumberFormatException();
+        }
+        return Double.parseDouble(input);
+    }
+
+    /**
      * Checks if the given String object representing a real number has at most two decimal places.
      * 
      * @param input A String object representing a real number.
@@ -137,7 +162,7 @@ public class ParserUtils {
         assert input != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
         
         try {
-            double value = Double.parseDouble(input);
+            double value = parseDoubleFromString(input);
         } catch (NumberFormatException exception) {
             return false;
         }
@@ -166,7 +191,7 @@ public class ParserUtils {
         assert places >= 0 : Message.ASSERT_PARSER_PLACES_NEGATIVE;
         
         try {
-            double value = Double.parseDouble(input);
+            double value = parseDoubleFromString(input);
         } catch (NumberFormatException exception) {
             return false;
         }
@@ -211,7 +236,7 @@ public class ParserUtils {
         
         double cost;
         try {
-            cost = Double.parseDouble(input);
+            cost = parseDoubleFromString(input);
         } catch (NumberFormatException exception) {
             throw new InvalidFormatException(ParserErrors.getNonMonetaryErrorMessage(delimiter));
         }
@@ -248,7 +273,7 @@ public class ParserUtils {
 
         double percentage;
         try {
-            percentage = Double.parseDouble(input);
+            percentage = parseDoubleFromString(input);
         } catch (NumberFormatException exception) {
             throw new InvalidFormatException(ParserErrors.getNonPercentageErrorMessage(delimiter));
         }
@@ -432,11 +457,11 @@ public class ParserUtils {
         case SessionSummaryCommandParser.COMMAND_TEXT:
             delimiterList = SessionSummaryCommandParser.COMMAND_DELIMITERS;
             break;
-        case GroupCreateCommand.COMMAND_TEXT:
-            delimiterList = GroupCreateCommand.COMMAND_DELIMITERS;
+        case GroupCreateCommandParser.COMMAND_TEXT:
+            delimiterList = GroupCreateCommandParser.COMMAND_DELIMITERS;
             break;
-        case GroupDeleteCommand.COMMAND_TEXT:
-            delimiterList = GroupDeleteCommand.COMMAND_DELIMITERS;
+        case GroupDeleteCommandParser.COMMAND_TEXT:
+            delimiterList = GroupDeleteCommandParser.COMMAND_DELIMITERS;
             break;
         case GroupEditCommandParser.COMMAND_TEXT:
             delimiterList = GroupEditCommandParser.COMMAND_DELIMITERS;
@@ -491,9 +516,9 @@ public class ParserUtils {
             // Fallthrough
         case ActivityViewCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case GroupCreateCommand.COMMAND_TEXT:
+        case GroupCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case GroupDeleteCommand.COMMAND_TEXT:
+        case GroupDeleteCommandParser.COMMAND_TEXT:
             // Fallthrough
         case GroupEditCommandParser.COMMAND_TEXT:
             // Fallthrough
@@ -558,6 +583,11 @@ public class ParserUtils {
         if (!isValidCommandType(commandType)) {
             return Message.ERROR_PARSER_INVALID_COMMAND;
         }
+        
+        if (!commandType.matches(REGEX_PRINTABLE_ASCII_ONLY) || !remainingArgs.matches(REGEX_PRINTABLE_ASCII_ONLY)) {
+            return Message.ERROR_PARSER_NON_ASCII_ARGUMENT;
+        }
+        
         return checkIfArgumentsValidForCommand(commandType, remainingArgs);
     }
 }
