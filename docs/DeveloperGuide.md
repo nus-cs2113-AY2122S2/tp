@@ -1,10 +1,10 @@
 # Developer Guide
 
 - [Acknowledgements](#acknowledgements)  
-- [Design & Implementation](#design-&-implementation)  
-  - [Architecture](#architecture)
-  - [Implemented Features](#implemented-features)
-  - [Proposed Features](#proposed-features)
+- [Design & Implementation](#design-&-implementation)
+- [Architecture](#architecture)
+- [Implemented Features](#implemented-features)
+- [Proposed Features](#proposed-features)
 - [Product scope](#product-scope)
 - [User Stories](#user-stories)
 - [Glossary](#glossary)

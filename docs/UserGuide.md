@@ -128,12 +128,6 @@ Format: `opengit [project_name]`
 #### Example of usage
 `opengit project1`
 
-#### Example of usage
-`addprojdeadline nextProject 2022-05-22`
-
-#### Example of output
-```Deadline added to nextProject: 2022-05-22```
-
 ---
 ### add a deadline to a todo: `addtododeadline`
 Adds a deadline date to a todo
@@ -180,9 +174,9 @@ java language added.
 ---
 ### list languages of a project: `listlanguages`
 Lists languages of a project  
-Format: `listlanguages`
+Format: `listlanguages [project_title]`
 #### Example of usage
-`listlanguages`  
+`listlanguages cs2113`  
 #### Example of output
 ```
 Programming languages for cs2113:
