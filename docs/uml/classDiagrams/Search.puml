@@ -41,15 +41,15 @@ class Parser {
 }
 
 class ExerciseList {
-
++ exercisesList: ArrayList<String>
 }
 
 class WorkoutList {
-
++ workoutsDisplayList: ArrayList<String>
 }
 
 class PlanList {
-+ exercisesList: ArrayList<String>
++ plansDisplayList: ArrayList<String>
 }
 
 @enduml
