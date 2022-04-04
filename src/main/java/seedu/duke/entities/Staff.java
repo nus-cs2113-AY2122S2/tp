@@ -74,6 +74,7 @@ public class Staff implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%-5s | %-15s | %s", this.getStaffId(), this.getStaffName(), this.getPosition());
+        return String.format("%-5s | %-15s | %-10s | %s",
+                this.getStaffId(), this.getStaffName(), this.getPosition(), this.getSalary());
     }
 }
