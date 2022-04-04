@@ -54,17 +54,35 @@ Wrote JUnit test cases for WerkIt! The summary of the test cases I have written 
 | DayListTest.java         | updateSchedule_expectSuccess() <br> updateSchedule_expectInvalidUpdate() <br> clearSchedule_expectInvalidUpdate() <br> clearSchedule_expectSuccess() <br> clearAllSchedule_expectSuccess()                                             |                  
 
 ### Enhancements Implemented
+[To be updated]
 
 ### Contributions to the User Guide (UG)
+* Wrote the [Introduction and Terminology](../UserGuide.md) section in the User Guide.
+* Wrote guide on [listing all workouts](../UserGuide.md#show-all-workouts-workout-list)
+* Wrote guide on all the Schedule features of WerkIt:
+  * [Adding/Updating a plan to a particular day](../UserGuide.md#update-schedule-schedule-update)
+  * [Viewing the 7-days workout plan schedule](../UserGuide.md#view-schedule-schedule-list)
+  * [Removing of a plan scheduled on a particular day](../UserGuide.md#clear-schedule-for-a-day-schedule-clear)
+  * [Resetting the workout plan schedule](../UserGuide.md#clear-schedule-for-the-week-schedule-clearall)
+* Wrote the informational sector of WerkIt's features
+  * [Overview of the all WerkIt's features](../UserGuide.md#features)
+  * [Explanation on how the different features link with one another](../UserGuide.md#features)
+  * [Explanation of the command syntax for each of the features](../UserGuide.md#finding-your-way-around-the-application)
+* Wrote [command summary](../UserGuide.md#command-summary) for search and schedule features.
 
 ### Contributions to the Developer Guide (DG)
+[To be updated]
 
 ### Contributions to Team-Based Tasks
+[To be updated]
 
 ### Review/Mentoring Contributions
+[To be updated]
 
 ### Contributions Beyond the Project Team
+[To be updated]
 
 ---
 
 ## Reflections on the Team Project (tP)
+[To be updated]
