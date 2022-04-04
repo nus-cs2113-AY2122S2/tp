@@ -179,7 +179,7 @@ Output:
 `Parameters: NIL`<br>
 `Example: list`<br>
 
-`listPrints a list of all equipment in the inventory of the specified type.`<br>
+`list: Prints a list of all equipment in the inventory of the specified type.`<br>
 `Parameters: t/Type`<br>
 `Example: list MICROPHONE`<br>
 
