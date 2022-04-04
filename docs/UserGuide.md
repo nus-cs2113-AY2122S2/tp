@@ -32,7 +32,7 @@ Below are the icons and their meanings:
 <span class="box warning">:warning: **Warning**: Information that you may want to pay attention to in order to prevent
 possible issues from arising when using the application.</span>
 
-<span class="box info">:receipt: **Note**: Additional information that may be useful for you.</span>
+<span class="box info">:memo: **Note**: Additional information that may be useful for you.</span>
 
 ---
 
@@ -1191,7 +1191,7 @@ fresh.
 the [Quick Start Guide](#quick-start-guide). If you have not installed it, [click here][1] to install it via the
 Microsoft Store.
 
-<span class="box info">:receipt: **Why are these symbols appearing?** Without being too technical, these symbols are appearing 
+<span class="box info">:memo: **Why are these symbols appearing?** Without being too technical, these symbols are appearing 
 because the terminal you are using is unable to process a particular encoding scheme (i.e. ANSI escape codes). 
 These symbols you see are actually colour codes to colour certain texts on the terminal. Terminals that can properly 
 read these codes will not show you these symbols and instead show you something like this:<br/><br/>
