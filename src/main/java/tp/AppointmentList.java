@@ -33,10 +33,6 @@ public class AppointmentList {
     public void addAppointment(Doctor doctor, Patient patient, LocalDateTime time) {
         appointments.add(new Appointment(doctor, patient, time));
         countAppointment++;
-//        System.out.println(boundary + "Noted. I've added this appointment:");
-//        System.out.println(appointments.get(countAppointment - 1));
-//        System.out.print("Now you have " + countAppointment
-//                                 + " appointments recorded in the system." + System.lineSeparator() + boundary);
     }
 
     public void addAppointment(Appointment appointment) {
@@ -49,10 +45,6 @@ public class AppointmentList {
      * @param index Index of the appointment to be deleted.
      */
     public Appointment deleteAppointment(int index) {
-//        System.out.println(boundary + "Noted. I've removed this appointment:");
-//        System.out.println(appointments.get(index - 1));
-//        System.out.print("Now you have " + (countAppointment - 1)
-//                                 + " appointments recorded in the system." + System.lineSeparator() + boundary);
         Appointment curr = appointments.get(index - 1);
         appointments.remove(index - 1);
         countAppointment -= 1;
@@ -69,9 +61,9 @@ public class AppointmentList {
         return res;
     }
 
-    public Appointment searchAppointmentByTime(String time){
-        for (int i = 0; i < appointments.size(); i++){
-            if (appointments.get(i).getTime().equals(LocalDateTime.parse(time))){
+    public Appointment searchAppointmentByTime(String time) {
+        for (int i = 0; i < appointments.size(); i++) {
+            if (appointments.get(i).getTime().equals(LocalDateTime.parse(time))) {
                 return appointments.get(i);
             }
         }

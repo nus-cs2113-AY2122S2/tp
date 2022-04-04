@@ -13,7 +13,7 @@ public class SearchAppointmentCommand extends Command {
                         PatientStorage patientStorage,
                         AppointmentStorage appointmentStorage) throws IHospitalException {
         Appointment curr = appointmentList.searchAppointmentByTime(time);
-        if(curr == null) {
+        if (curr == null) {
             return String.format("There is no appointment at " + time + "\n");
         }
         return String.format("The appointments founded are here" + curr + "\n");

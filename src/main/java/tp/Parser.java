@@ -19,7 +19,7 @@ public class Parser {
         if (fullCommand.contains("add doctor")) {
             String id;
             String dummy = fullCommand.trim();
-            if(dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
+            if (dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
                 || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
                     || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
                 throw new IHospitalException("The format of input is wrong, can check the order");
@@ -48,24 +48,26 @@ public class Parser {
         } else if (fullCommand.contains("add patient")) {
             String id;
             String dummy = fullCommand.trim();
+            String name;
+            String phoneNumber;
             try {
                 int idIndex = dummy.indexOf("/id") + 4;
                 int nameIndex = dummy.indexOf("/n");
                 id = dummy.substring(idIndex, nameIndex).trim();
                 nameIndex += 3;
                 int phoneNumberIndex = dummy.indexOf("/ph");
-                String name = dummy.substring(nameIndex, phoneNumberIndex).trim();
+                name = dummy.substring(nameIndex, phoneNumberIndex).trim();
                 phoneNumberIndex += 4;
                 int emailIndex = dummy.indexOf("/e");
-                String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
+                phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
                 emailIndex += 3;
-                int symptomIndex=dummy.indexOf("/s");
+                int symptomIndex = dummy.indexOf("/s");
                 String email = dummy.substring(emailIndex,symptomIndex).trim();
-                symptomIndex+=3;
-                int descIndex=dummy.indexOf("/d");
-                String symptom=dummy.substring(symptomIndex,descIndex).trim();
-                descIndex+=3;
-                String description=dummy.substring(descIndex).trim();
+                symptomIndex += 3;
+                int descIndex = dummy.indexOf("/d");
+                String symptom = dummy.substring(symptomIndex,descIndex).trim();
+                descIndex += 3;
+                String description = dummy.substring(descIndex).trim();
                 return new AddPatientCommand(id, name, phoneNumber, email, symptom,description);
             } catch (Exception e) {
                 System.out.println("The input format of the patient information is wrong.");
@@ -107,15 +109,15 @@ public class Parser {
             return new ListPatientListCommand();
         } else if (fullCommand.contains("help")) {
             return new HelpCommand();
-        } else if(fullCommand.contains("add patient description")) {
+        } else if (fullCommand.contains("add patient description")) {
             String dummy = fullCommand.trim();
             int patientIndex = dummy.indexOf("/p");
-            int descriptionIndex=dummy.indexOf("/d");
+            int descriptionIndex = dummy.indexOf("/d");
             int patientID = Integer.parseInt(dummy.substring(patientIndex, descriptionIndex).trim());
             descriptionIndex += 3;
             String description = dummy.substring(descriptionIndex);
             return new AddPatientDescriptionCommand(description, patientID);
-        } else if (fullCommand.contains("search doctor")){
+        } else if (fullCommand.contains("search doctor")) {
             String dummy = fullCommand.trim();
             dummy = dummy.substring(dummy.length() - 4);
             return new SearchDoctorCommand(dummy);
