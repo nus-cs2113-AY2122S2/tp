@@ -134,7 +134,7 @@ class ParserTest {
     }
 
     @Test
-    void prepareView_viewStringWithSpaces_success() throws IncompleteCommandException {
+    void prepareCheck_viewStringWithSpaces_success() throws IncompleteCommandException {
         ArrayList<String> expectedResult = new ArrayList<>(
                 Arrays.asList("Speaker   B")
         );
@@ -144,7 +144,7 @@ class ParserTest {
     }
 
     @Test
-    void prepareView_wrongArgumentTag_exceptionThrown() {
+    void prepareCheck_wrongArgumentTag_exceptionThrown() {
         ArrayList<String> expectedResult = new ArrayList<>(
                 Arrays.asList("Speaker   B")
         );
@@ -154,7 +154,7 @@ class ParserTest {
             assertEquals(expectedResult, actualResult);
             fail();
         } catch (IncompleteCommandException e) {
-            assertEquals("View command values are incomplete or missing!", e.getMessage());
+            assertEquals("Check command values are incomplete or missing!", e.getMessage());
         }
     }
 

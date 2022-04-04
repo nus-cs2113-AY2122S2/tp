@@ -181,7 +181,7 @@ public class Parser {
     protected ArrayList<String> prepareCheck(String args) throws IncompleteCommandException {
         final Matcher matcher = CHECK_COMMAND_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            throw new IncompleteCommandException("View command values are incomplete or missing!");
+            throw new IncompleteCommandException("Check command values are incomplete or missing!");
         }
         return new ArrayList<>(Collections.singleton(matcher.group("itemName")));
     }
