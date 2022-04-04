@@ -20,6 +20,9 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_THIRD_ITEM;
 
 import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testCashbackAmount;
@@ -46,6 +49,7 @@ public class AddCommand extends Command {
     public ExpenditureList expenditureList;
     public CreditCardList creditCardList;
     public IncomeList incomeList;
+    private static final int LEAP_YEAR_NUMBER = 4;
 
     public AddCommand(String addInput, User user) {
         this.addInput = addInput;
@@ -127,10 +131,9 @@ public class AddCommand extends Command {
         float amountFloat = formatFloat(amountAsFloat);
 
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
-        if (!isValidInput(inputTime)) {
-            throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
-        }
+        checkValidDate(inputTime);
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        checkAfterCurrentDate(date);
         String time = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         expenditureList.add(new Expenditure(paymentMethod, category, description, amountFloat, time));
@@ -148,6 +151,44 @@ public class AddCommand extends Command {
             System.out.printf(paymentMethod + " has a balance of $%.2f left%n", balanceLeft);
         }
         System.out.print(System.lineSeparator());
+    }
+
+    /**
+     * Checks if parsed date is after the current date.
+     *
+     * @param date date that is parsed in.
+     * @throws MindMyMoneyException throws an exception when the date parsed is after current date.
+     */
+    public static void checkAfterCurrentDate(LocalDate date) throws MindMyMoneyException {
+        LocalDate currentDate = LocalDate.now();
+        if (date.isAfter(currentDate)) {
+            throw new MindMyMoneyException("Please enter a valid date that is before today or today's date itself.");
+        }
+    }
+
+    /**
+     * Checks is parsed date is a valid date in the calendar.
+     *
+     * @param inputTime date that is parsed in.
+     * @throws MindMyMoneyException throws an exception when the date parsed is in not in the calendar.
+     */
+    public static void checkValidDate(String inputTime) throws MindMyMoneyException {
+        String[] date = inputTime.split("/");
+        String day = date[INDEX_OF_FIRST_ITEM];
+        int dayInInt = Integer.parseInt(day);
+        String month = date[INDEX_OF_SECOND_ITEM];
+        String year = date[INDEX_OF_THIRD_ITEM];
+        int yearInInt = Integer.parseInt(year);
+        if (!isValidInput(inputTime)) {
+            throw new MindMyMoneyException("Date has to be valid and in this format \"dd/mm/yyyy\"");
+        } else if (!(yearInInt % LEAP_YEAR_NUMBER == 0) && month.equals("02") && (dayInInt > 28)) {
+            throw new MindMyMoneyException(day + "/" + month + " is not a valid dd/mm in a non leap year!");
+        } else if ((yearInInt % LEAP_YEAR_NUMBER == 0) && month.equals("02") && (dayInInt > 29)) {
+            throw new MindMyMoneyException(day + "/" + month + " is not a valid dd/mm in a leap year!");
+        } else if ((month.equals("04") || month.equals("06") || month.equals("09") || month.equals("11"))
+                && dayInInt > 30) {
+            throw new MindMyMoneyException(day + "/" + month + " is not a valid dd/mm in this month!");
+        }
     }
 
     /**

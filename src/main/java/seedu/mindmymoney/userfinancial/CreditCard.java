@@ -75,6 +75,16 @@ public class CreditCard implements MindMyMoneySerializable {
                 + "] [Balance left: $" + String.format("%.2f", getBalanceLeft()) + "]\n";
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof CreditCard)) {
+            return false;
+        }
+        CreditCard creditCard = (CreditCard) object;
+        return nameOfCard.equals(creditCard.nameOfCard) && (cashback == creditCard.cashback)
+                && (monthlyCardLimit == creditCard.monthlyCardLimit) && (balance == creditCard.balance);
+    }
+
     /**
      * Returns a String representation of this credit card, in a machine-readable format.
      * @return The serialized CreditCard.

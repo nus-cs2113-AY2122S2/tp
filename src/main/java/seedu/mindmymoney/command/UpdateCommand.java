@@ -13,6 +13,8 @@ import seedu.mindmymoney.userfinancial.User;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static seedu.mindmymoney.command.AddCommand.checkAfterCurrentDate;
+import static seedu.mindmymoney.command.AddCommand.checkValidDate;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
@@ -124,10 +126,9 @@ public class UpdateCommand extends Command {
             float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
 
             String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
-            if (!isValidInput(inputTime)) {
-                throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
-            }
+            checkValidDate(inputTime);
             LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            checkAfterCurrentDate(date);
             String newTime = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             if (isSimilarExpenditure(indexToUpdate, newPaymentMethod, newCategory, newDescription, newAmountAsFloat,
                     newTime)) {
