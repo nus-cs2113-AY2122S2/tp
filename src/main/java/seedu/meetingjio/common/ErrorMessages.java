@@ -64,8 +64,12 @@ public class ErrorMessages {
     public static final String ERROR_DELETE_COMMAND_FAILED = "Failed to delete element";
     public static final String ERROR_INVALID_USER = "User does not exist";
     public static final String ERROR_UNSPECIFIED_LIST = "Please specify which timetable to print. Accepted inputs are\n"
-            + "1. list [user]\n"
-            + "2. list all";
+            + "1. list_meeting [user]\n"
+            + "2. list_meeting all\n"
+            + "3. list_lesson [user]\n"
+            + "4. list_lesson all\n"
+            + "5. list [user]\n"
+            + "6. list all";
     public static final String ERROR_EMPTY_MASTER_TIMETABLE = "The Master Timetable has no populated timetables!";
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";

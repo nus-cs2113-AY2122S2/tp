@@ -9,21 +9,11 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `MeetingJio` from [here](https://github.com/AY2122S2-CS2113-T11-3/tp/releases/tag/v1.0).
-3. Run `java -jar MeetingJio.jar` at the terminal.
-4. Type the command in the terminal and press Enter to execute it.
-5. Refer to the *Features* below for the details of the commands.
+4. Run `java -jar MeetingJio.jar` at the terminal.
+5. Type the command in the terminal and press Enter to execute it.
+6. Refer to the *Features* below for the details of the commands.
 
 ## Features
-
-### Add Lessons to your own timetable and others timetable
-
-### See slots for possible meetings based on duration
-
-### Book meetings based on availability of all users
-
-### View everyone's timetable and availability
-
-### Save your timetable details to storage and retrieve accordingly
 
 ### Viewing help: `help`
 Shows a list of commands available.
@@ -39,31 +29,59 @@ Expected outcome:
 ```
 Here is the list of commands available:
 __________________________________________________________________________________________________________
-1. To add a lesson: add n/[Name] l/[Lesson] d/[day] st/[StartTime] et/[EndTime] m/[Mode]
-2. To delete a lesson: delete [Index]
-3. To list all lessons: list
-4. To clear all entries: clear
-5. To exit the application: exit
+1. To add a user: add_user [Name]
+2. To add a lesson: add_lesson n/[Name] t/[Title] d/[Day] st/[StartTime] et/[EndTime] m/[Mode]
+3. To add a meeting: add_meeting t/[Title] d/[Day] st/[StartTime] et/[EndTime] m/[Mode]
+4. To delete a lesson: delete n/[Name] i/[Index]
+5. To list all events: list all
+6. To list a user's events: list [Name]
+7. To list all lessons: list_lesson all
+8. To list a user's lessons: list_lesson [Name]
+9. To list all meetings: list_meeting all
+10. To find free timeslots: free
+11. To find free timeslots given a minimum duration: free [duration]
+12. To clear all entries: clear all
+13. To clear all entries: clear [Name]
+14. To exit the application: exit
 __________________________________________________________________________________________________________
 ```
 
-### Adding a lesson: `add`
+
+### Adding a user: `add_user`
+Adds a new user and his or her timetable to the master timetable.
+
+**Format:** `add_user NAME`
+
+* Duplicate user will not be added.
+
+Example of usage:
+
+`add_user John`
+
+Expected outcome:
+```
+john's timetable is created and added to the master timetable
+```
+
+
+### Adding a lesson: `add_lesson`
 Adds a new lesson to the list.
 
-**Format:** `add n/NAME l/LESSON d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`
+**Format:** `add_lesson n/NAME t/TITLE d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`
 
 * The `START_TIME` and `END_TIME` have to be in 24-hour time format.
 * The accepted options of `MODE` are _online_ and _physical_.
 * Duplicate lesson will not be added.
+* Lesson that conflicts with other events will not be added
 
 Example of usage:
 
-`add n/John Doe l/CS2113 d/Friday st/1230 et/1330 m/online`
+`add_lesson n/John t/CS2113 d/Friday st/1230 et/1330 m/online`
 
 Expected outcome:
 ```
-The following event has been added to your timetable:
-NAME: John Doe		TITLE: CS2113		DAY: friday		START: 1230		END: 1330		MODE: online
+The following event has been added to john's timetable:
+[L] TITLE: cs2113		DAY: friday		START: 1230		END: 1330		MODE: online
 ```
 
 ### Listing all events: `list`
@@ -148,15 +166,14 @@ The following meeting has been added to everyone's timetable:
 ```
 
 
-
-### Deleting a lesson: `delete`
+### Deleting an event: `delete`
 Deletes an event from the user's specified timetable
 
-**Format:** ` delete n/NAME i/INDEX`
+**Format:** ` delete n/NAME`
 
 * Deletes from the timetable of user
 * Deletes the lesson at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed lesson list.
+* The `INDEX` refers to the index number shown in the displayed list.
 
 Example of usage:
 
@@ -167,6 +184,28 @@ Expected outcome:
 The following event has been deleted from your timetable:
 [L] TITLE: CS2113		DAY: friday		START: 1230		END: 1330		MODE: online
 ```
+
+
+### Editing an event: `edit`
+Edits an event from the user's specified timetable based on the user input 
+
+**Format:** ` edit n/NAME i/INDEX t/TITLE d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`
+
+* Required parameters: `NAME` and `INDEX`
+* Optional parameters: `TITLE`, `DAY_OF_WEEK`, `START_TIME`, `END_TIME`, `MODE`
+* Provide at least one optional parameter.
+* The `INDEX` refers to the index number shown in the displayed user specified list.
+
+Example of usage:
+
+`edit n/John i/1 t/CS2040 d/Monday m/physical`
+
+Expected outcome:
+```
+The event has been updated to the following:
+[L] TITLE: cs2040		DAY: monday		START: 1230		END: 1330		MODE: physical
+```
+
 
 ### Finding common timeslots: `free`
 Shows a list of timeslots where everyone is free. 

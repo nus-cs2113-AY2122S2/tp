@@ -1,19 +1,20 @@
 @startuml
 hide footbox
-actor user
-participant ":Command" as Main
-participant ":Parser" as Parser
-participant ":AddLessonCommand" as AddCommand
 
-activate Main
-user -> Main : "add_lesson..."
+actor user
+participant ":Ui" as Ui
+participant ":Parser" as Parser
+participant ":AddCommand" as AddCommand
+
+activate Ui
+user -> Ui : "add..."
 create Parser
-Main -> Parser : Parser("add_lesson ...")
+Ui -> Parser : Parser("add...")
 activate Parser
-Main <-- Parser : parser:Parser
+Ui <-- Parser : parser :Parser
 deactivate Parser
 
-Main --> Parser : parseCommand()
+Ui --> Parser : parseCommand()
 activate Parser
 
 Parser -> Parser : prepareAdd()
@@ -27,13 +28,13 @@ deactivate AddCommand
 
 Parser --> Parser : :Command
 deactivate Parser
-Main <-- Parser : parsedCommand:Command
+Ui <-- Parser : parsedCommand :Command
 deactivate Parser
 destroy Parser
 
-Main -> AddCommand : execute(masterTimetable:MasterTimetable)
+Ui -> AddCommand : execute(masterTimetable :MasterTimetable)
 activate AddCommand
-Main <-- AddCommand : feedback:String
+Ui <-- AddCommand : feedback :String
 deactivate AddCommand
 
 destroy AddCommand
