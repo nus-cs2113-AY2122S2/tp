@@ -115,7 +115,7 @@ public class AppointmentList {
         }
         toPrint += ("Now you have " + countAppointment
                             + " appointments recorded in the system." + System.lineSeparator()
-                            + boundary + System.lineSeparator());
+                            + boundary);
         return toPrint;
     }
 }
