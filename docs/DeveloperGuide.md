@@ -128,7 +128,7 @@ class will catch the user input, and it will be sent to `Parser#parseUserInput(S
 user's command. If the user's command type is `exercise`, the `Parser#parseUserInput(String userInput)` method will 
 parse the 'exercise' base word and proceed to create exercise related command using 
 `Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
-`<userAction>` and call the constructor of `ExerciseCommand` class by passing relevant parameters related to search 
+`<userAction>` and call the constructor of `ExerciseCommand` class by passing relevant parameters related
 to the constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandException` will be thrown.
 
 Currently, the exercise related feature is limited to `exercise /list` only. Therefore, the `keywords` mentioned can
