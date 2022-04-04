@@ -27,7 +27,7 @@ Below are the icons and their meanings:
 <span class="box warning">:warning: **Warning**: Information that you may want to pay attention to in order to prevent 
 possible issues from arising when using the application.</span>
 
-<span class="box info">:receipt: **Note**: Additional information that may be useful for you.</span>
+<span class="box info">:memo: **Note**: Additional information that may be useful for you.</span>
 
 
 ## Acknowledgements
@@ -45,7 +45,7 @@ The following websites and codebases were referenced and adapted for our project
 - [X] An IDE of your choice, though IntelliJ IDEA is recommended as this project is developed
 with this IDE.
 
-<span class="box info">:receipt: IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA.</span>
+<span class="box info">:memo: IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA.</span>
 
 ### Setting Up
 1. Fork the [WerkIt! GitHub repository](https://github.com/AY2122S2-CS2113T-T09-2/tp).
@@ -193,7 +193,7 @@ the user's input as a `String` object to `WerkIt#startContinuousUserPrompt()`. T
 object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
 this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()`.
 
-<span class="box info">:receipt: A detailed implementation of the parsing and creation of subclass-of-`Command` 
+<span class="box info">:memo: A detailed implementation of the parsing and creation of subclass-of-`Command` 
 object process can be found in 
 '[Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)'.</span>
 
@@ -228,7 +228,7 @@ for subsequent prompts.
 
 ![Obtain and Parse User Input](uml/sequenceDiagrams/miscellaneous/images/obtainAndParseUserInput.png)
 
-<span class="box info">:receipt: To improve the readability of the sequence diagram, the construction of the respective
+<span class="box info">:memo: To improve the readability of the sequence diagram, the construction of the respective
 objects which are subclasses of the `Command` class between Steps 4 and 17 are not included in the diagram.</span>
 
 **(Steps 1 and 2)** When a user enters something into the terminal (when prompted), `UI#getUserInput()` will take in 
@@ -264,7 +264,7 @@ it is returned to `Parser#parseUserInput()`.
 
 **(Step 18)** The object created is then returned to `WerkIt#startContinuousUserInput()`.
 
-<span class="box info">:receipt: (About the sequence diagram) Strictly speaking, the object is returned right after whichever 
+<span class="box info">:memo: (About the sequence diagram) Strictly speaking, the object is returned right after whichever 
 'create command' method is invoked. However, to improve the readability of the diagram, only one return line is shown,
 since all alternate paths will return an object that is a subclass of the `Command` class.</span>
 
@@ -320,7 +320,7 @@ A summary of the general procedure of a new workout being inputted and stored in
 
 The following sequence diagram illustrates how the `workout /new` command works in greater detail:
 
-<span class="box info">:receipt: To simplify the sequence diagram, some method invocations that are deemed to be trivial 
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial 
 have been removed from the sequence diagram. Some reference frames will be elaborated further 
 down this section. Reference frames that will not be elaborated on will be made known.</span>
 
@@ -329,7 +329,7 @@ down this section. Reference frames that will not be elaborated on will be made 
 **(Before Step 1)** The user's input (in this case will be a `workout /new` command) is obtained and parsed to obtain
 a `WorkoutCommand` object that contains the user's input.
 
-<span class="box info">:receipt: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When `WorkoutCommand#execute()` is called, because this is a `workout /new` command, the method will call
@@ -338,7 +338,7 @@ a `WorkoutCommand` object that contains the user's input.
 The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createAndAddWorkout()`:
 ![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout.png)
 
-<span class="box info">:receipt: To improve the diagram's readability, logging-related and input-checking method calls, and 
+<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and 
 exception throws in `WorkoutList#createAndAddWorkout()` have been omitted.</span> 
 
 **(Before Step 2.1)** Methods from the `String` and `Integer` classes are called to parse the
@@ -481,7 +481,7 @@ A summary of the general procedure of an existing workout being removed from Wer
 
 The following sequence diagram illustrates how the `workout /delete` command works in greater detail:
 
-<span class="box info">:receipt: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
  down this section.</span>
 
@@ -490,7 +490,7 @@ The following sequence diagram illustrates how the `workout /delete` command wor
 **(Before Step 1)** The user's input (in this case will be a `workout /delete` command) is obtained and parsed to obtain
 a `WorkoutCommand` object that contains the user's input.
 
-<span class="box info">:receipt: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `WorkoutCommand#execute()` method is called, it will identify
@@ -501,7 +501,7 @@ The following sequence diagram is the detailed procedure for Step 2's `WorkoutLi
 <br><br>
 ![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/workouts/images/deleteWorkout-Part2.png)
 
-<span class="box info">:receipt: To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
+<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
  `WorkoutList#deleteWorkout()` have been omitted.</span>
 
 **(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
@@ -566,7 +566,7 @@ is as follows:<br><br>
 
 The following sequence diagram illustrates how the `workout /update` command works in greater detail:
 
-<span class="box info">:receipt: To simplify the sequence diagram, some method invocations that deemed to be trivial 
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial 
 have been removed from the sequence diagram. Some reference frames will be elaborated further down this section.</span>
 
 ![Update Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/updateWorkout-Part1.png)
@@ -574,7 +574,7 @@ have been removed from the sequence diagram. Some reference frames will be elabo
 **(Before Step 1)** The user's input (in this case will be a `workout /update` command) is obtained and parsed to obtain
 a `WorkoutCommand` object that contains the user's input.
 
-<span class="box info">:receipt: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1 to 3)** When the `WorkoutCommand#execute()` method is called, 'workout /update' command is identified, and
@@ -587,7 +587,7 @@ The following sequence diagram is the detailed procedure for Step 4's `WorkoutLi
 <br><br>
 ![Update Workout Detailed Sequence Diagram](uml/sequenceDiagrams/workouts/images/updateWorkout-Part2.png)
 
-<span class="box info">:receipt: To improve the diagram's readability, logging-related and input-checking method calls, 
+<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, 
 and exception throws in `WorkoutList#updateWorkout()` have been omitted.</span>
 
 **(Before Step 4.1)** Methods from the `String` and `Integer` classes are called to parse the
@@ -659,7 +659,7 @@ A summary of the general procedure of a new plan being created and stored in Wer
 
 The following sequence diagram illustrates how the `plan /new` command works in greater detail:
 
-<span class="box info">:receipt: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
  down this section.</span>
 
@@ -668,7 +668,7 @@ The following sequence diagram illustrates how the `plan /new` command works in 
 **(Before Step 1)** The user's input (in this case will be a `plan /new` command) is obtained and parsed to obtain
 a `PlanCommand` object that contains the user's input.
 
-<span class="info box">:receipt: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+<span class="info box">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
@@ -679,7 +679,7 @@ The following sequence diagram is the detailed procedure for Step 2's `PlanList#
 <br><br>
 ![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
 
-<span class="box info">:receipt: To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
+<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
  `PlanList#createAndAddPlan()` have been omitted.</span>
 
 **(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
@@ -745,7 +745,7 @@ A summary of the general procedure of listing all plans in the application is as
 
 The following sequence diagram illustrates how the `plan /list` command works in greater detail:
 
-<span class="box info">:receipt: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
  down this section.</span>
 
@@ -754,7 +754,7 @@ The following sequence diagram illustrates how the `plan /list` command works in
 **(Before Step 1)** The user's input (in this case will be a `plan /list` command) is obtained and parsed to obtain
 a `PlanCommand` object that contains the user's input.
 
-<span class="box info">:receipt: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Steps 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify
@@ -832,7 +832,7 @@ A summary of the general procedure of updating a plan for a particular day to th
 
 The following sequence illustrates how the schedule /update command works in greater detail:
 
-<span class="box info">:receipt: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
  down this section.</span>
 
@@ -919,7 +919,7 @@ command `schedule /list`.
 
 The following sequence illustrates how the `schedule /list` command works in greater detail:
 
-<span class="box info">:receipt: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
  down this section.</span>
 
@@ -980,7 +980,7 @@ A summary of the general procedure of clearing a plan scheduled for a particular
 
 The following sequence illustrates how the `schedule /clear` command works in greater detail:
 
-<span class="box info">:receipt: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
  down this section.</span>
 
@@ -1033,7 +1033,7 @@ A summary of the general procedure of clearing all the plans stored in the sched
 
 The following sequence illustrates how the `schedule /clearall` command works in greater detail:
 
-<span class="box info">:receipt: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
  down this section.</span>
 
