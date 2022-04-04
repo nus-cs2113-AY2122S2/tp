@@ -239,15 +239,16 @@ See you again!
 ## Command summary
 
 
-| Action       | Format                                                                     |
-|--------------|----------------------------------------------------------------------------|
-| Help         | `help`                                                                     |
-| Add lesson   | `add_lesson n/NAME t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
-| Add Meeting  | `add_meeting t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`       |
-| Delete Event | `delete n/NAME i/INDEX`                                                    |
-| Free         | `free`                                                               |
-| List         | `list`                                                                     |
-| Clear        | `clear`                                                                    |
-| Exit         | `exit`                                                                     |
+| Action                           | Format                                                                     |
+|----------------------------------|----------------------------------------------------------------------------|
+| Help                             | `help`                                                                     |
+| Add lesson                       | `add_lesson n/NAME t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
+| Add Meeting                      | `add_meeting t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`       |
+| Delete Event                     | `delete n/NAME i/INDEX`                                                    |
+| Free                             | `free`                                                                     |
+| List                             | `list`                                                                     |
+| Clear events from user           | `clear USER`                                                               |
+| Clear all events from everyone   | `clear all`                                                                |
+| Exit                             | `exit`                                                                     |
 
 
