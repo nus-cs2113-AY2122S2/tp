@@ -72,6 +72,7 @@ public class StudyManager {
     /**
      * Edit module messages.
      */
+    public static final String EDIT_MODULE_DONE_COMMAND = "done";
     private static final String EDIT_MODULE_OPENING_MESSAGE = "Here is the module that you have chosen to edit:";
     private static final String EDIT_MODULE_CHOOSE_MESSAGE = "Choose the part that you would like to edit:";
     private static final String EDIT_MODULE_SUCCESS_MESSAGE = "Your Module was successfully edited! "
@@ -243,6 +244,8 @@ public class StudyManager {
             String moduleIndexString = userInput.replace(DELETE_COMMAND + " ",EMPTY_STRING);
             int moduleIndex = Integer.parseInt(moduleIndexString) - 1;
             if (modulesList.get(moduleIndex) != null) {
+                assert moduleIndex <= modulesList.size();
+                assert moduleIndex >= 0;
                 Module removedModule = modulesList.get(moduleIndex);
                 modulesList.remove(moduleIndex);
                 printMessage(DELETE_MODULE_SUCCESS_MESSAGE);
@@ -294,6 +297,8 @@ public class StudyManager {
     }
 
     private void editModuleRunner(TextUi ui, int moduleIndex) {
+        assert moduleIndex <= modulesList.size();
+        assert moduleIndex >= 0;
         Module moduleToEdit = modulesList.get(moduleIndex);
         printEditWelcomeMessage(moduleToEdit);
         boolean isEditFinished = false;
@@ -308,7 +313,7 @@ public class StudyManager {
                 editModuleDay(moduleToEdit, editUserInput);
             } else if (editUserInput.startsWith(MODULE_TIME_DELIMITER)) {
                 editModuleTime(moduleToEdit, editUserInput);
-            } else if (editUserInput.equals("done")) {
+            } else if (editUserInput.equals(EDIT_MODULE_DONE_COMMAND)) {
                 printMessage(EDIT_MODULE_SUCCESS_MESSAGE);
                 printMessage(moduleToEdit.toString());
                 isEditFinished = true;
@@ -603,6 +608,8 @@ public class StudyManager {
             } else {
                 category = parameters[1].substring(2);
                 category = validateModuleCategory(category);
+                assert category.equals(MODULE_CATEGORY_LEC) || category.equals(MODULE_CATEGORY_TUT)
+                        || category.equals(MODULE_CATEGORY_EXAM) || category.equals(MODULE_CATEGORY_LAB);
             }
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
@@ -611,9 +618,6 @@ public class StudyManager {
     }
 
     private String validateModuleCategory(String category) throws ModuleCategoryException {
-        assert (category.equals(CATEGORY_LECTURE_SHORTHAND) || category.equals(CATEGORY_TUTORIAL_SHORTHAND)
-                || category.equals(CATEGORY_EXAM_SHORTHAND) || category.equals(CATEGORY_LAB_SHORTHAND))
-                : WRONG_CATEGORY_FORMAT_MESSAGE;
         switch (category) {
         case CATEGORY_LECTURE_SHORTHAND:
             category = MODULE_CATEGORY_LEC;
