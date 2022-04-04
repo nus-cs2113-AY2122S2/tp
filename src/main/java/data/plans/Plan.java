@@ -24,14 +24,6 @@ public class Plan {
         return listOfWorkouts;
     }
 
-    public void setPlanName() {
-        this.planName = planName;
-    }
-
-    public void setWorkoutsInPlanList() {
-        this.listOfWorkouts = listOfWorkouts;
-    }
-
     public String toString() {
         String displayString = getPlanName();
         return displayString;

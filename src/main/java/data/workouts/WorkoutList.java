@@ -3,8 +3,6 @@ package data.workouts;
 import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
-import data.plans.InvalidPlanException;
-import data.plans.PlanList;
 import storage.LogHandler;
 
 import java.util.ArrayList;
@@ -18,8 +16,6 @@ import java.util.logging.Level;
  * create, modify, and delete workouts.
  */
 public class WorkoutList {
-    public static final int MAX_DISPLAY = 10;
-
     private ExerciseList exerciseList;
     private HashMap<String, Workout> workoutsHashMapList = new HashMap<>();
     private ArrayList<String> workoutsDisplayList = new ArrayList<>();
