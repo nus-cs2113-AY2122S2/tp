@@ -172,12 +172,12 @@ public class DayList {
             logger.log(Level.WARNING, "User entered an invalid day number.");
             throw new InvalidScheduleException(className, InvalidScheduleException.DAY_NUMBER_OUT_OF_RANGE);
         }
-        if (dayList[dayNumber-1] == null) {
+        if (dayList[dayNumber - 1] == null) {
             System.out.println("No plan is being scheduled, hence no plan is cleared.");
             return;
         }
 
-        clearPlan(dayNumber-1);
+        clearPlan(dayNumber - 1);
         System.out.println("Plan had been cleared for " + covertDayNumberToDay(dayNumber) + ".");
     }
 
