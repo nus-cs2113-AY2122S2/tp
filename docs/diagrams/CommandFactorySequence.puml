@@ -22,7 +22,7 @@ end Box
 activate Main
 Main -> CommandFactory: getCommand(userInput, family)
 activate CommandFactory
-CommandFactory -> Parser: parseKeywords(userInput)
+CommandFactory -> Parser: parseCommandTypes(userInput)
 activate Parser
 Parser --> CommandFactory: return
 deactivate Parser

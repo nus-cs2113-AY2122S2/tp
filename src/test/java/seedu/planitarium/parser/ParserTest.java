@@ -116,18 +116,18 @@ class ParserTest {
     }
 
     @Test
-    void parseKeyword_keywordExist_success() {
-        String output1 = Parser.parseKeyword(EMPTY_INPUT);
+    void parseCommandType_keywordExist_success() {
+        String output1 = Parser.parseCommandType(EMPTY_INPUT);
         assertEquals(EMPTY_INPUT, output1);
 
-        String output2 = Parser.parseKeyword(ADD_N_ALICE);
+        String output2 = Parser.parseCommandType(ADD_N_ALICE);
         assertEquals(ADD, output2);
     }
 
     @Test
-    void parseKeyword_keywordIsNull_assertThrown() {
+    void parseCommandType_keywordIsNull_assertThrown() {
         try {
-            Parser.parseKeyword(null);
+            Parser.parseCommandType(null);
             fail();
         } catch (AssertionError e) {
             assertEquals(USER_INPUT_NOT_NULL, e.getMessage());

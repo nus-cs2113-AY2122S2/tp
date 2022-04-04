@@ -7,7 +7,7 @@ skinparam noteTextAlignment left
 Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
 Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 
-[-> Parser : parseKeyword(userInput:String)
+[-> Parser : parseCommandType(userInput:String)
 activate Parser
 Parser -->[ : keywordString:String
 deactivate Parser

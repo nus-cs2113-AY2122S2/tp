@@ -141,7 +141,7 @@ The `Command` class is an abstract class that has abstract method ``
 The `Parser` component consists of the `Parser` class, `ParserUtility` class and several `Exception` classes.
 
 The `Parser` class provides the `parseXYZ()` and `getValidXYZ()` methods where `XYZ` is a placeholder for the type of
-term (e.g. `parseKeyword()` and `getValidUserIndex`). The methods prepended by **parse** assists in parsing the user
+term (e.g. `parseCommandType()` and `getValidUserIndex`). The methods prepended by **parse** assists in parsing the user
 input into its respective terms and the method prepended by **getValid** assists in validating the parsed terms and
 returning an appropriately typed object to the `Commands` component. The `Parser` class interacts with the
 `ParserUtility` class which provides supporting methods for parsing and validating. Both classes throws exceptions as
@@ -156,7 +156,7 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 
 How the `Parser` component is used:
 
-1. When the `Commands` component receives a user input, `parseKeyword()` is called upon to parse the type of command to
+1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command to
    be executed.
 2. This will result in the keyword of the command to be returned as a string.
 3. When necessary, the `parseXYZ()` methods will be called upon to parse more terms for the `Commands`
@@ -269,7 +269,7 @@ add \n Alice
 and this string will be passed to `CommandFactory` together with `personList` that contains all the people who had been
 added previously by calling `getCommand()`.
 
-Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseKeywords`, and
+Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseCommandTypes`, and
 the `Parser` should return `add` as keyword.
 
 Step 3. The `CommandFactory` will then match the keyword to the type of command. In this case, `add` is corresponding

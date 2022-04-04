@@ -63,7 +63,7 @@ public class Parser {
      * @param userInput The user's full input text.
      * @return The command keyword issued.
      */
-    public static String parseKeyword(String userInput) {
+    public static String parseCommandType(String userInput) {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         String keyword = userInput.split(DELIMITER_SPACE)[Constants.INDEX_KEYWORD].trim();
         logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, keyword));

@@ -41,7 +41,7 @@ public class AddRecordCommand extends Command {
     public AddRecordCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
         this.type = "AddRecordCMD";
-        keyword = Parser.parseKeyword(userInput);
+        keyword = Parser.parseCommandType(userInput);
         description = Parser.parseDescription(userInput);
         isPermanent = Parser.parseRecurringStatus(userInput);
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));

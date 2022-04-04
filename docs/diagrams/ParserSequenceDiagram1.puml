@@ -10,7 +10,7 @@ box
     Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 end box
 
-[-> Parser : parseKeyword(userInput:String)
+[-> Parser : parseCommandType(userInput:String)
 activate Parser
 Parser -->[ : "deletein":String
 deactivate Parser
