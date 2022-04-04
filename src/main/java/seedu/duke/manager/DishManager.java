@@ -142,7 +142,7 @@ public class DishManager extends Manager {
         return new ArrayList<>(dishes);
     }
 
-    public boolean isNameExist(String name) {
+    public boolean checkNameExistence(String name) {
         name = name.toUpperCase(Locale.ROOT);
         for (int i = 0; i < dishes.size(); i++) {
             if (dishes.get(i).getName().toUpperCase().equals(name)) {

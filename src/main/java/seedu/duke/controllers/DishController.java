@@ -83,7 +83,7 @@ public class DishController extends Controller {
             System.out.println("Please make sure the name is not empty and price is non-negative");
             return;
         }
-        if (dishManager.isNameExist(name)) {
+        if (dishManager.checkNameExistence(name)) {
             System.out.println("Ooops, this dish already exists in your menu");
             return;
         }
@@ -133,7 +133,7 @@ public class DishController extends Controller {
             System.out.println("Please make sure the name is not empty and price is non-negative");
             return;
         }
-        if (dishManager.isNameExist(name)) {
+        if (dishManager.checkNameExistence(name)) {
             System.out.println("Ooops, this dish already exists in your menu");
             return;
         }
