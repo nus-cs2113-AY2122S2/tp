@@ -1,3 +1,4 @@
+'@@author tjiarong
 @startuml
 !include style.puml
 skinparam ClassFontColor #000000
@@ -8,30 +9,30 @@ hide empty members
 title After command "find /d Bills /c 1"
 
 package " " {
-    class temp as "__tempExpList:MoneyList(temp)__"
-    class temp2 as "__tempIncList:MoneyList(temp)__"
+    class temp as "__tempExpList:ExpenditureList__"
+    class temp2 as "__tempIncList:IncomeList__"
     class Fam as "__family:Family__"
     class MyGen as "__myGen:PersonList__"
     class Alice as "__Alice:Person__"
-    class List as "__ExpenditureList:MoneyList(temp)__"
-    class List2 as "__IncomeList:MoneyList(temp)__"
-    class Exp0 as "__Expenditure0:Money(temp)__" #LIGHTGREEN {
+    class List as "__ExpenditureList:ExpenditureList__"
+    class List2 as "__IncomeList:IncomeList__"
+    class Exp0 as "__Expenditure0:Expenditure__" #LIGHTGREEN {
         description = "Lunch"
         category = 2
     }
-    class Exp1 as "__Expenditure1:Money(temp)__" #LIGHTGREEN {
+    class Exp1 as "__Expenditure1:Expenditure__" #LIGHTGREEN {
         description = "Dinner"
         category = 2
     }
-    class Exp2 as "__Expenditure2:Money(temp)__" #LIGHTGREEN {
+    class Exp2 as "__Expenditure2:Expenditure__" #LIGHTGREEN {
         description = "Movies"
-        category = 5
+        category = 6
     }
-    class Exp3 as "__Expenditure3:Money(temp)__" #LIGHTGREEN {
+    class Exp3 as "__Expenditure3:Expenditure__" #LIGHTGREEN {
         description = "Electric Bills"
         category = 1
     }
-    class Inc0 as "__Income0:Money(temp)__" #LIGHTGREEN {
+    class Inc0 as "__Income0:Income__" #LIGHTGREEN {
         description = "Bills Rebate"
     }
 }
@@ -43,14 +44,15 @@ MyGen -> Alice
 Alice -down-> List
 Alice -down-> List2
 
-Exp0 -up[#GREEN]-> List
-Exp1 -up[#GREEN]-> List
-Exp2 -up[#GREEN]-> List
-Exp3 -up[#GREEN]-> List
-Inc0 -up[#GREEN]-> List2
+List  -d[#GREEN]-> Exp0
+List  -d[#GREEN]-> Exp1
+List  -d[#GREEN]-> Exp2
+List  -d[#GREEN]-> Exp3
+List2  -d[#GREEN]-> Inc0
 
 Exp0 -right[HIDDEN]> Exp1
 Exp1 -right[HIDDEN]> Exp2
 Exp2 -right[HIDDEN]> Exp3
+List2 -right[HIDDEN]->List
 
 @end

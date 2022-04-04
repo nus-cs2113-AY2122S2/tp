@@ -1,12 +1,11 @@
 @startuml
 
 !include style.puml
-skinparam arrowColor LOGIC_COLOR_T3
 
 Package "Parser" as P {
-    Class Parser LOGIC_COLOR_T4
-    Class ParserUtility LOGIC_COLOR_T2
-    Class Exceptions #7aa6c2
+    Class Parser LOGIC_COLOR
+    Class ParserUtility LOGIC_COLOR_T1
+    Class Exceptions LOGIC_COLOR_T2
 }
 
 package Commands as "**Commands**\n**Component**" {

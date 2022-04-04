@@ -1,12 +1,36 @@
 # PlanITarium Developer Guide
 
----
-
-# Introductions
-
 This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
-workings of PlanITarium such that engineers can understand the various implementations in detail and work on the
-project.
+workings of PlanITarium such that engineers can understand the various design and implementations in detail.
+
+--
+
+## Table of Contents
+
+* [Acknowledgements](#acknowledgements)
+* [Design](#design)
+  * [Architecture](#architecture)
+  * [UI Component](#ui-component)
+  * [Commands Component](#commands-component)
+  * [Parser Component](#parser-component)
+  * [Family Component](#family-component)
+  * [Money Component](#money-component)
+  * [Storage Component](#storage-component)
+* [Implementation](#implementation)
+  * [Command Execution](#command-execution)
+  * [Logical Grouping of Persons Added](#logical-grouping-of-persons-added)
+  * [Edit Command](#edit-values-feature)
+  * [Find Command](#find-feature)
+  * [[Proposed] Listing Categorised Expenditures](#proposed-listing-categorised-expenditures-feature)
+  * [Data Archiving](#data-archiving)
+* [Documentation](#documentation)
+  * [Logging](#logging)
+  * [Testing](#testing)
+* [Product Scope](#product-scope)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ---
 
@@ -255,7 +279,7 @@ and return this object to `PlanITarium`.
 Step 4. `PlanITarium` will then execute this command by calling `execute()`. Alice will then be added to the
 `personList`.
 
-### Logical grouping for different generation of person added
+### Logical Grouping of Persons Added
 
 #### Implementation
 
@@ -325,7 +349,7 @@ print that out.
 Maybe for Jiarong {Suggest to show the process from `parsing several delimiters` to `finding the income/expenditure`
 to `editing the value`.}
 
-### [Proposed] Find feature
+### Find feature
 
 #### Proposed Implementation
 
@@ -553,7 +577,7 @@ IO redirection testing can be performed via the following steps:
 
 ---
 
-## Product scope
+## Product Scope
 
 ### Target user profile
 
@@ -573,29 +597,33 @@ IO redirection testing can be performed via the following steps:
 
 ## User Stories
 
-| Version | As a ... | I want to ...                                   | So that I can ...                               |
-|---------|:---------|:------------------------------------------------|:------------------------------------------------|
-| v1.0    | user     | add people                                      | keep track of individuals                       |
-| v1.0    | user     | add income                                      | keep track of income                            |
-| v1.0    | user     | add expenditure                                 | keep track of expenditure                       |
-| v1.0    | user     | list income                                     | view each individual's income                   |
-| v1.0    | user     | list expenditure                                | view each individual's expenditure              |
-| v1.0    | user     | view my disposable income                       | plan my spending                                |
-| v1.0    | user     | add my family members into different categories | have a clearer view of their finances           |
-| v2.0    | user     | add recurring fixed expenditures and incomes    | not re-add them every month                     |
-| v2.0    | user     | add tags for each record                        | clean them up into different categories         |
-| v2.0    | user     |                  |                                                 |
-| v2.0    | user     |                  |                                                 |
-| v2.0    | user     |                  |                                                 |
-| v2.0    | user     |                  |                                                 |
-| v2.0    | user     |                  |                                                 |
-
+| Version | As a ... | I want to ...                                  | So that I can ...                         |
+|---------|:---------|:-----------------------------------------------|:------------------------------------------|
+| v1.0    | user     | add people                                     | keep track of individuals                 |
+| v1.0    | user     | add income                                     | keep track of income                      |
+| v1.0    | user     | add expenditure                                | keep track of expenditure                 |
+| v1.0    | user     | list income                                    | view each individual's income             |
+| v1.0    | user     | list expenditure                               | view each individual's expenditure        |
+| v1.0    | user     | view my disposable income                      | plan my spending                          |
+| v2.0    | user     | add recurring fixed expenditures and incomes   | not re-add them every month               |
+| v2.0    | user     | be able to edit my income and expenditure      | avoid re-adding records for minor changes |
+| v2.0    | user     | add tags for each expenditure                  | clean them up into different categories   |
+| v2.0    | user     | search for saved records                       | easily keep track of my finances          |
+| v2.0    | user     | narrow down my expenditure search              | avoid irrelevant results                  |
+| v2.0    | user     | see a summary of my family's finances          | better manage my family's spendings       |
+| v2.0    | user     | be able to see the commands in the application | avoid referring to the user guide         |
 
 ---
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any _mainstream_ operating systems that has **Java 11** or above.
+2. Should be able to hold up to 1000 combined entries without a noticeable degrade in performance for typical 
+usage.
+3. A user with above average typing speed for regular English text, that are neither programming code nor system
+administrator commands, should be able to accomplish most of the tasks faster using commands than using the keyboard
+and mouse.
+4. Users should be able to load and use the saved application data on _any_ operating systems that fulfils point 1.
 
 ---
 
@@ -605,6 +633,6 @@ IO redirection testing can be performed via the following steps:
 
 ---
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 
-See [IO redirection testing](#IO-redirection-testing).
+See [IO redirection testing](#testing).

@@ -21,6 +21,7 @@ class ParserUtilityTest {
     private static final double POSITIVE_MONEY = 1.0;
     private static final int NEGATIVE_MONEY = -1;
     private static final String MONEY_IS_NEGATIVE = "Money is negative";
+    private static final String MONEY_NOT_2DP = "Money is not 2dp";
 
     @Test
     void parseDelimitedTerm_delimitedTerm_success() throws EmptyStringException {
@@ -56,6 +57,34 @@ class ParserUtilityTest {
             ParserUtility.checkNegativeMoney(NEGATIVE_MONEY);
         } catch (NumberFormatException e) {
             assertEquals(MONEY_IS_NEGATIVE, e.getMessage());
+        }
+    }
+
+    @Test
+    void checkTwoDecimalPlace_withinTwoDecimalPlaces_success() {
+        try {
+            ParserUtility.checkTwoDecimalPlace("1");
+            ParserUtility.checkTwoDecimalPlace("1.1");
+            ParserUtility.checkTwoDecimalPlace("1.11");
+            ParserUtility.checkTwoDecimalPlace("12345312432.32");
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void checkTwoDecimalPlace_notWithinTwoDecimalPlaces_exceptionThrown() {
+        try {
+            ParserUtility.checkTwoDecimalPlace("3.142");
+            fail();
+        } catch (NumberFormatException e) {
+            assertEquals(MONEY_NOT_2DP, e.getMessage());
+        }
+        try {
+            ParserUtility.checkTwoDecimalPlace("31423.1415926535");
+            fail();
+        } catch (NumberFormatException e) {
+            assertEquals(MONEY_NOT_2DP, e.getMessage());
         }
     }
 }

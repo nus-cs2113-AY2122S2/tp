@@ -3,10 +3,10 @@
 
 Actor User USER_COLOR
 Participant Main #grey
-Participant Commands LOGIC_COLOR
-Participant "Parser" as Parser LOGIC_COLOR_T2
+Participant Commands COMMAND_COLOR
+Participant "Parser" as Parser LOGIC_COLOR
 Participant Family MODEL_COLOR
-Participant Money MODEL_COLOR_T3
+Participant Money MONEY_COLOR
 Participant UI UI_COLOR
 Participant Storage STORAGE_COLOR
 

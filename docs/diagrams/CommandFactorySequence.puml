@@ -3,19 +3,19 @@
 !include style.puml
 
 Box " "#WHITE
-    participant Main LOGIC_COLOR_T1
-    participant ":CommandFactory" as CommandFactory LOGIC_COLOR_T2
-    participant ":Parser" as Parser LOGIC_COLOR_T3
-    participant ":AddPersonCommand" as AddPersonCommand LOGIC_COLOR_T4
-    participant ":DeletePersonCommand" as DeletePersonCommand LOGIC_COLOR_T4
-    participant ":AddRecordCommand" as AddRecordCommand LOGIC_COLOR_T4
-    participant ":DeleteREcordCommand" as DeleteRecordCommand LOGIC_COLOR_T4
-    participant ":EditRecordCommand" as EditRecordCommand LOGIC_COLOR_T4
-    participant ":ListCommand" as ListCommand LOGIC_COLOR_T4
-    participant ":ListCategoriesCommand" as ListCategoriesCommand LOGIC_COLOR_T4
-    participant ":SearchCommand" as SearchCommand LOGIC_COLOR_T4
-    participant ":ExitCommand" as ExitCommand LOGIC_COLOR_T4
-    participant ":Command" as Command LOGIC_COLOR_T4
+    participant Main #grey
+    participant ":CommandFactory" as CommandFactory COMMAND_COLOR
+    participant ":Parser" as Parser LOGIC_COLOR
+    participant ":AddPersonCommand" as AddPersonCommand COMMAND_COLOR_T1
+    participant ":DeletePersonCommand" as DeletePersonCommand COMMAND_COLOR_T1
+    participant ":AddRecordCommand" as AddRecordCommand COMMAND_COLOR_T1
+    participant ":DeleteREcordCommand" as DeleteRecordCommand COMMAND_COLOR_T1
+    participant ":EditRecordCommand" as EditRecordCommand COMMAND_COLOR_T1
+    participant ":ListCommand" as ListCommand COMMAND_COLOR_T1
+    participant ":ListCategoriesCommand" as ListCategoriesCommand COMMAND_COLOR_T1
+    participant ":SearchCommand" as SearchCommand COMMAND_COLOR_T1
+    participant ":ExitCommand" as ExitCommand COMMAND_COLOR_T1
+    participant ":Command" as Command COMMAND_COLOR_T3
 end Box
 
 -> Main: userInput

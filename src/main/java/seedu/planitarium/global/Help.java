@@ -27,5 +27,15 @@ public class Help {
         CommandSummary.add(Constants.LISTCAT);
         CommandSummary.add(Constants.FIND);
         CommandSummary.add(Constants.EXIT);
+        CommandSummary.add(Constants.EMPTY_STRING);
+        CommandSummary.add(Constants.PARAMETER_NAME);
+        CommandSummary.add(Constants.PARAMETER_GID);
+        CommandSummary.add(Constants.PARAMETER_UID);
+        CommandSummary.add(Constants.PARAMETER_DESC);
+        CommandSummary.add(Constants.PARAMETER_CID);
+        CommandSummary.add(Constants.PARAMETER_INCOME);
+        CommandSummary.add(Constants.PARAMETER_EXPENDITURE);
+        CommandSummary.add(Constants.PARAMETER_RECORDS);
+        CommandSummary.add(Constants.PARAMETER_RECURRING);
     }
 }
