@@ -228,6 +228,7 @@ class ActivityEditCommandTest {
     public void run_editActivityCostListWithInvalidCostList_costListIsNotEdited() throws InvalidDataException {
         String userInput = "activity /edit /sid 1 /aid 1 /cl -1 10 15";
         Command command = Parser.getCommand(userInput);
+        command.run(manager);
         Activity editedActivity = manager.getProfile().getSession(1).getActivity(1);
         assertEquals(15, editedActivity.getTotalCost());
         assertEquals(3, editedActivity.getInvolvedPersonList().size());
