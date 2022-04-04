@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import seedu.command.Command;
+import seedu.command.DeleteCommand;
+import seedu.command.IncorrectCommand;
 import seedu.command.ListCommand;
 
 import java.util.ArrayList;
@@ -185,7 +187,7 @@ class ParserTest {
     void extractArguments_validCommands_success() throws IncompleteCommandException {
         ArrayList<String> testStrings = new ArrayList<>(Arrays.asList(
                 "s/S1404115ASF n/Speaker B t/Speaker c/1000 pf/Loud Technologies pd/2022-02-23",
-                "s/S1404115ASF     c/1000",
+                "s/S1404115ASF     c/1000.3",
                 "s/S1404115ASF n/Speaker B        ",
                 "s/S1404115ASF pf/Loud Technologies n/Speaker B",
                 "t/Speaker s/S1404115ASF",
@@ -195,7 +197,7 @@ class ParserTest {
         expectedResults.add(new ArrayList<>(Arrays.asList(
                 "s/S1404115ASF", "n/Speaker B", "t/SPEAKER", "c/1000", "pf/Loud Technologies", "pd/2022-02-23")));
         expectedResults.add(new ArrayList<>(Arrays.asList(
-                "s/S1404115ASF", "c/1000")));
+                "s/S1404115ASF", "c/1000.3")));
         expectedResults.add(new ArrayList<>(Arrays.asList(
                 "s/S1404115ASF", "n/Speaker B")));
         expectedResults.add(new ArrayList<>(Arrays.asList(
@@ -260,20 +262,39 @@ class ParserTest {
     }
 
     @Test
-    void extractArguments_wrongArgTypesUsed_exceptionThrown() throws IncompleteCommandException {
+    void extractArguments_wrongArgTypesUsed_exceptionThrown() {
         Throwable exception = assertThrows(IncompleteCommandException.class, () -> parser.extractArguments(
                 "x/Speaker B a/Speaker b/1000 d/Loud Technologies e/2022-02-23"));
         assertEquals("No parameters found!", exception.getMessage());
     }
 
     @Test
-    void parseCommand_listEnumTypeConvertedToUpper_success() throws IncompleteCommandException {
+    void parseCommand_listEnumTypeConvertedToUpper_success() {
         Command testCommand = parser.parseCommand("list spEAker");
         Command expectedCommand = new ListCommand(new ArrayList<>(Collections.singleton("SPEAKER")));
         assertEquals(expectedCommand, testCommand);
     }
 
+    @Test
+    void parseCommand_deleteCommand_success() {
+        Command testCommand = parser.parseCommand("delete s/S1234567E");
+        Command expectedCommand = new DeleteCommand(new ArrayList<>(Collections.singleton("S1234567E")));
+        assertEquals(expectedCommand, testCommand);
+    }
 
+    @Test
+    void parseCommand_trailingWhiteSpace_success() {
+        Command testCommand = parser.parseCommand("delete s/S1234567E         ");
+        Command expectedCommand = new DeleteCommand(new ArrayList<>(Collections.singleton("S1234567E")));
+        assertEquals(expectedCommand, testCommand);
+    }
 
+    @Test
+    void parseCommand_deleteCommand_wrongArgType_exceptionThrown() {
+        Command expectedCommand = new IncorrectCommand(DeleteCommand.COMMAND_WORD
+                + DeleteCommand.COMMAND_DESCRIPTION);
+        Command testCommand = parser.parseCommand("delete x/S1234567E");
+        assertEquals(expectedCommand, testCommand);
+    }
 
 }

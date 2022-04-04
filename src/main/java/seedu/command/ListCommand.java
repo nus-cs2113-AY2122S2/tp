@@ -18,7 +18,7 @@ public class ListCommand extends Command {
             + "Example: "
             + "list";
     public static final String COMMAND_DESCRIPTION_WITH_TYPE =
-            "Prints a list of all equipment in the inventory of the specified type. "
+            ": Prints a list of all equipment in the inventory of the specified type. "
             + System.lineSeparator()
             + "Parameters: t/Type" + System.lineSeparator()
             + "Example: "

@@ -30,6 +30,27 @@ public class Parser {
      * passed into arguments.
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
+    public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)\\s*");
+    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)\\s*");
+    public static final Pattern TYPE_ENUM_FORMAT = Pattern.compile("[Tt]/(?<equipmentType>\\w+)\\s*");
+    // ARGUMENT_FORMAT extracts first n-1 tags, for debugging: https://regex101.com/r/7rho4H/1
+    public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
+            "((?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
+                    + "\\/" // argument delimiter
+                    + "[\\w\\s\\-\\.]+)" // actual argument value
+                    + "\\s+" // argument space before next delimiter
+                    + "(?=[sntcSNTC]|[pP][fF]|[pP][dD])" // next delimiter
+    );
+    // ARGUMENT_TRAILING_FORMAT extracts last tag
+    public static final Pattern MODIFICATION_ARGUMENT_TRAILING_FORMAT = Pattern.compile(
+            "(?<!\\w)" // require a previous pattern
+                    + "(?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
+                    + "\\/" // argument delimiter
+                    + "([\\w\\s\\-\\.]+)" // last argument value
+    );
+    public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
+            "Please split your command into arguments with each argument seperated by spaces!";
+    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format! Enter help for more information.";
     @Deprecated
     public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
             "n\\/(?<itemName>.+)" + "\\s+"
@@ -39,27 +60,6 @@ public class Parser {
                     + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
                     + "pd\\/(?<purchasedDate>.+)"
     );
-    public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)");
-    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)");
-    public static final Pattern TYPE_ENUM_FORMAT = Pattern.compile("[Tt]/(?<equipmentType>\\w+)");
-    // ARGUMENT_FORMAT extracts first n-1 tags, for debugging: https://regex101.com/r/gwjHWD/3
-    public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
-            "((?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
-                    + "\\/" // argument delimiter
-                    + "[\\w\\s\\-]+)" // actual argument value
-                    + "\\s+" // argument space before next delimiter
-                    + "(?=[sntcSNTC]|[pP][fF]|[pP][dD])" // next delimiter
-    );
-    // ARGUMENT_TRAILING_FORMAT extracts last tag
-    public static final Pattern MODIFICATION_ARGUMENT_TRAILING_FORMAT = Pattern.compile(
-            "(?<!\\w)" // require a previous pattern
-                    + "(?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
-                    + "\\/" // argument delimiter
-                    + "([\\w\\s\\-]+)" // last argument value
-    );
-    public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
-            "Please split your command into arguments with each argument seperated by spaces!";
-    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format! Enter help for more information.";
 
     /**
      * Interpret the command requested by the user and returns a corresponding Command object.
@@ -229,7 +229,7 @@ public class Parser {
      * @throws IncompleteCommandException if no match found
      */
     protected ArrayList<String> prepareCheck(String args) throws IncompleteCommandException {
-        final Matcher matcher = VIEW_COMMAND_FORMAT.matcher(args.trim());
+        final Matcher matcher = CHECK_COMMAND_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new IncompleteCommandException("View command values are incomplete or missing!");
         }
