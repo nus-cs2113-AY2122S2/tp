@@ -79,11 +79,15 @@ public class DishController extends Controller {
             return;
         }
         String name = InputParser.getString("The new name of dish: ");
-        try {
-            dishManager.setName(index, name);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Please make sure the name is not empty");
+        if(name.isEmpty()) {
+            System.out.println("Please make sure the name is not empty and price is non-negative");
+            return;
         }
+        if(dishManager.isNameExist(name)) {
+            System.out.println("Ooops, this dish already exists in your menu");
+            return;
+        }
+        dishManager.setName(index, name);
     }
 
     private void changePrice() throws OperationTerminationException {
@@ -94,16 +98,16 @@ public class DishController extends Controller {
         MainLogger.logInfo(this, "User is changing the price of dish");
         System.out.println("Changing price...");
         int index = InputParser.getInteger("The index of dish: ");
-        if (index < 0 || index >= dishManager.getNumOfDishes()) {
+        if (index <= 0 || index > dishManager.getNumOfDishes()) {
             System.out.println("Please make sure the index is valid");
             return;
         }
         double newPrice = InputParser.getDouble("The new price (will be rounded into 1 decimal place) of dish: ");
-        try {
-            dishManager.setPrice(index, newPrice);
-        } catch (IllegalArgumentException e) {
+        if (newPrice < 0) {
             System.out.println("Please make sure the price is not negative");
+            return;
         }
+        dishManager.setPrice(index, newPrice);
     }
 
     private void deleteDish() throws OperationTerminationException {
@@ -114,23 +118,31 @@ public class DishController extends Controller {
         MainLogger.logInfo(this, "User is deleting dish");
         System.out.println("Deleting dish...");
         int index = InputParser.getInteger("The index of dish: ");
-        try {
-            dishManager.deleteDish(index);
-        } catch (IndexOutOfBoundsException e) {
+        if(index <= 0 || index > dishManager.getNumOfDishes()) {
             System.out.println("Please make sure the index is valid");
+            return;
         }
+        dishManager.deleteDish(index);
     }
 
     private void addDish() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is adding dish");
         System.out.println("Adding new dish...");
         String name = InputParser.getString("The name of dish: ");
-        double price = InputParser.getDouble("The price (will be rounded into 1 decimal place) of dish: ");
-        try {
-            dishManager.addDish(new Dish(name, price));
-        } catch (IllegalArgumentException e) {
+        if(name.isEmpty()) {
             System.out.println("Please make sure the name is not empty and price is non-negative");
+            return;
         }
+        if(dishManager.isNameExist(name)) {
+            System.out.println("Ooops, this dish already exists in your menu");
+            return;
+        }
+        double price = InputParser.getDouble("The price (will be rounded into 1 decimal place) of dish: ");
+        if (price < 0) {
+            System.out.println("Please make sure the price is not negative");
+            return;
+        }
+        dishManager.addDish(new Dish(name, price));
     }
 
     public DishManager getDishManager() {

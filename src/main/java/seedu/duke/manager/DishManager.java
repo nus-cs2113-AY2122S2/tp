@@ -5,6 +5,7 @@ import seedu.duke.loggers.MainLogger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * DishManager.
@@ -139,5 +140,15 @@ public class DishManager extends Manager {
      */
     public ArrayList<Dish> getDishes() {
         return new ArrayList<>(dishes);
+    }
+
+    public boolean isNameExist(String name) {
+        name = name.toUpperCase(Locale.ROOT);
+        for (int i = 0; i < dishes.size(); i++) {
+            if (dishes.get(i).getName().toUpperCase().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
