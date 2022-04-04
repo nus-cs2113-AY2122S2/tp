@@ -10,7 +10,7 @@ import seedu.duke.manager.DishManager;
  */
 public class DishController extends Controller {
     private static final String[] CHOICES = {"Exit Dish Menu", "List Dish", "Add Dish",
-            "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
+        "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
     private final DishManager dishManager;
 
     public DishController() {
@@ -79,11 +79,11 @@ public class DishController extends Controller {
             return;
         }
         String name = InputParser.getString("The new name of dish: ");
-        if(name.isEmpty()) {
+        if (name.isEmpty()) {
             System.out.println("Please make sure the name is not empty and price is non-negative");
             return;
         }
-        if(dishManager.isNameExist(name)) {
+        if (dishManager.isNameExist(name)) {
             System.out.println("Ooops, this dish already exists in your menu");
             return;
         }
@@ -118,7 +118,7 @@ public class DishController extends Controller {
         MainLogger.logInfo(this, "User is deleting dish");
         System.out.println("Deleting dish...");
         int index = InputParser.getInteger("The index of dish: ");
-        if(index <= 0 || index > dishManager.getNumOfDishes()) {
+        if (index <= 0 || index > dishManager.getNumOfDishes()) {
             System.out.println("Please make sure the index is valid");
             return;
         }
@@ -129,11 +129,11 @@ public class DishController extends Controller {
         MainLogger.logInfo(this, "User is adding dish");
         System.out.println("Adding new dish...");
         String name = InputParser.getString("The name of dish: ");
-        if(name.isEmpty()) {
+        if (name.isEmpty()) {
             System.out.println("Please make sure the name is not empty and price is non-negative");
             return;
         }
-        if(dishManager.isNameExist(name)) {
+        if (dishManager.isNameExist(name)) {
             System.out.println("Ooops, this dish already exists in your menu");
             return;
         }
