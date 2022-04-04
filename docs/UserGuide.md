@@ -114,7 +114,7 @@ Some Mod Happy commands require you to provide a duration. You can specify these
 
 ### 4.1. Accessing help: `help`
 
-- Shows you a generic help message instead.
+- If no COMMAND_WORD is given, a generic help message is displayed.
   #### Format: `help`
   ##### Example 1:
   ```
@@ -127,7 +127,6 @@ Some Mod Happy commands require you to provide a duration. You can specify these
   Format to display help for specific command: help COMMAND
   Available commands: exit, add, del, edit, grade, gpa, help, list, mark, option, reset, save, tag
 
-  Compulsory flags start with "/". Optional flags start with "-".
   Compulsory parameters are fully capitalised: e.g. MODULE_CODE.
   Optional parameters are in square brackets: e.g. [-d MODULE_DESCRIPTION]
   ____________________________________________________________
