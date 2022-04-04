@@ -55,7 +55,8 @@ public class EditParser extends Parser {
      *                                                          Optional
      *
      * (\s+(-t|(?<invalidTimeFlag>.*))                       -- matches [-t "estimatedWorkingTime"] if present. Optional
-     * \s+\"(?<estimatedWorkingTime>[^\"]+)\")?)
+     * \s+\"(?<estimatedWorkingTime>[^\"]+)\")?)                [<invalidTimeFlag> "estimatedWorkingTime"] if present.
+     *                                                          Optional
      *
      *                                                       -- None of the above fields accept " as a valid character.
      *
