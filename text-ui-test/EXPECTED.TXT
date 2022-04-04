@@ -11,7 +11,7 @@ $$\   $$ |$$ |  $$ |$$ |$$ |  $$ |$$\ $$ |$$  __$$ |$$ |  $$ |
           $$ |
           $$ |
           \__|
-Welcome to Splitlah!
+Welcome to SplitLah!
 ============================================================
 > Invalid command
 Please enter a valid command.

@@ -25,6 +25,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A utility class that provides supporting parsing methods to the main Parser class.
+ * 
+ * @author Warren
+ */
 public class ParserUtils {
     
     // DELIMITERS
@@ -53,7 +58,7 @@ public class ParserUtils {
     static final int INVALID_INDEX_INDICATOR = -1;
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    // SUPPORTING FUNCTIONS
+    // SUPPORTING METHODS
     /**
      * Returns a String object that represents an argument in the command that follows a specified delimiter.
      * 

@@ -6,6 +6,7 @@ import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
+import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
@@ -25,6 +26,7 @@ import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.logging.Level;
 
 /**
  * Represents a parser that interprets the user input into data that can be understood by the program.
@@ -40,7 +42,7 @@ public class Parser {
     static final double MINIMUM_SURCHARGE_PERCENT = 0;
     static final double MAXIMUM_SURCHARGE_PERCENT = 100;
 
-    // MAIN PUBLIC PARSING FUNCTIONS
+    // MAIN PUBLIC PARSING METHODS
     /**
      * Returns a String object that represents a name, given the command arguments from user input, delimited by the
      * Name delimiter.
@@ -334,6 +336,9 @@ public class Parser {
         if (commandType == null) {
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
         }
+        
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_PARSER_COMMAND_TYPE + commandType);
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_PARSER_REMAINING_ARGS + remainingArgs);
 
         String errorMessage = ParserUtils.checkIfCommandIsValid(commandType, remainingArgs);
         if (!errorMessage.isEmpty()) {

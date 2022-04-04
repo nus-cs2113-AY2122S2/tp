@@ -30,7 +30,7 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
    $$ |                                                     
    $$ |                                                     
    \__|
-   Welcome to Splitlah!
+   Welcome to SplitLah!
    ============================================================
    >
    ```
