@@ -18,8 +18,15 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
 
+    private static final String TYPE_USER_INDEX = "user";
+    private static final String TYPE_GROUP_INDEX = "group";
+    private static final String TYPE_EXPENDITURE_INDEX = "expenditure";
+    private static final String TYPE_INCOME_INDEX = "income";
+    private static final String TYPE_CATEGORY_INDEX = "category";
+
     // error messages
     private static final String ERROR_MSG = "Unknown error is detected from '%s', please check again.";
+    private static final String ERROR_INDEX_MSG = "Invalid %s index `%s`";
     private static final String USER_INPUT_NOT_NULL = "User input should not be null";
     private static final String MONEY_INPUT_SHOULD_NOT_BE_NULL = "Money input should not be null";
     private static final String USER_INDEX_SHOULD_NOT_BE_NULL = "User index should not be null";
@@ -50,9 +57,6 @@ class ParserTest {
 
     private static final String INVALID_MONEY_NEGATIVE_VALUE = "Invalid money value `-10.50`";
     private static final String INVALID_MONEY_NOT_DOUBLE = "Invalid money value `hundred`";
-    private static final String INVALID_INDEX_TOO_LOW = "Invalid index `0`";
-    private static final String INVALID_INDEX_TOO_HIGH = "Invalid index `7`";
-    private static final String INVALID_INDEX_NOT_NUMBER = "Invalid index `Alice`";
 
     // misc values
     private static final String EMPTY_INPUT = "";
@@ -69,13 +73,13 @@ class ParserTest {
     private static final String FOOD = "Food";
     private static final String GIFT = "Gift";
     private static final String INCOME_HUNDRED = "100";
-    
+
     // method test cases
     private static final String ADD_N_ALICE = "add /n Alice";
     private static final String ADD = "add";
     private static final String ADD_NO_DELIMITER = "add alice";
     private static final String ADD_MANY_DELIMITER = "add /n alice /n alice";
-    
+
     private static final String ADDIN_U_1_D_GIFT_I_100 = "addin /u 1 /d Gift /i 100";
     private static final String ADDIN_U_NO_DELIMITER = "addin 1 /d Gift /i 100";
     private static final String ADDIN_U_MANY_DELIMITER = "addin /u 1 /u 2 /d Gift /i 100";
@@ -105,6 +109,11 @@ class ParserTest {
 
     private static final String ADD_N_ALICE_G_2 = "add /n Alice /g 2";
     private static final String ADD_N_MANY_DELIMITER = "add /n Alice /g 2 /g 3";
+
+    private String getIndexError(String type, String index) {
+        String indexError = String.format(ERROR_INDEX_MSG, type, index);
+        return String.format(ERROR_MSG, indexError);
+    }
 
     @Test
     void parseKeyword_keywordExist_success() {
@@ -553,7 +562,7 @@ class ParserTest {
             Parser.getValidUserIndex(ALICE, personList.getNumberOfMembers());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
+            assertEquals(getIndexError(TYPE_USER_INDEX, ALICE), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -567,7 +576,7 @@ class ParserTest {
             Parser.getValidUserIndex(TOO_LOW_INDEX, personList.getNumberOfMembers());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
+            assertEquals(getIndexError(TYPE_USER_INDEX, TOO_LOW_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -575,7 +584,7 @@ class ParserTest {
             Parser.getValidUserIndex(TOO_HIGH_INDEX, personList.getNumberOfMembers());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
+            assertEquals(getIndexError(TYPE_USER_INDEX, TOO_HIGH_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -617,7 +626,7 @@ class ParserTest {
             Parser.getValidExpenditureIndex(ALICE, person.getNumberOfExpenditures());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
+            assertEquals(getIndexError(TYPE_EXPENDITURE_INDEX, ALICE), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -633,7 +642,7 @@ class ParserTest {
             Parser.getValidExpenditureIndex(TOO_LOW_INDEX, person.getNumberOfExpenditures());
 
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
+            assertEquals(getIndexError(TYPE_EXPENDITURE_INDEX, TOO_LOW_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -641,7 +650,7 @@ class ParserTest {
             Parser.getValidExpenditureIndex(TOO_HIGH_INDEX, person.getNumberOfExpenditures());
 
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
+            assertEquals(getIndexError(TYPE_EXPENDITURE_INDEX, TOO_HIGH_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -683,7 +692,7 @@ class ParserTest {
             Parser.getValidIncomeIndex(ALICE, person.getNumberOfIncomes());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
+            assertEquals(getIndexError(TYPE_INCOME_INDEX, ALICE), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -699,7 +708,7 @@ class ParserTest {
             Parser.getValidIncomeIndex(TOO_LOW_INDEX, person.getNumberOfIncomes());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
+            assertEquals(getIndexError(TYPE_INCOME_INDEX, TOO_LOW_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -707,7 +716,7 @@ class ParserTest {
             Parser.getValidIncomeIndex(TOO_HIGH_INDEX, person.getNumberOfIncomes());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
+            assertEquals(getIndexError(TYPE_INCOME_INDEX, TOO_HIGH_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -737,7 +746,7 @@ class ParserTest {
             Parser.getValidCategoryIndex(ALICE);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
+            assertEquals(getIndexError(TYPE_CATEGORY_INDEX, ALICE), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -749,7 +758,7 @@ class ParserTest {
             Parser.getValidCategoryIndex(TOO_LOW_INDEX);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
+            assertEquals(getIndexError(TYPE_CATEGORY_INDEX, TOO_LOW_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -757,7 +766,7 @@ class ParserTest {
             Parser.getValidCategoryIndex(TOO_HIGH_INDEX);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
+            assertEquals(getIndexError(TYPE_CATEGORY_INDEX, TOO_HIGH_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -787,7 +796,7 @@ class ParserTest {
             Parser.getValidGroupIndex(ALICE);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
+            assertEquals(getIndexError(TYPE_GROUP_INDEX, ALICE), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -799,7 +808,7 @@ class ParserTest {
             Parser.getValidGroupIndex(TOO_LOW_INDEX);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
+            assertEquals(getIndexError(TYPE_GROUP_INDEX, TOO_LOW_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -807,7 +816,7 @@ class ParserTest {
             Parser.getValidGroupIndex(TOO_HIGH_INDEX);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
+            assertEquals(getIndexError(TYPE_GROUP_INDEX, TOO_HIGH_INDEX), e.toString());
         } catch (Exception e) {
             fail();
         }
