@@ -150,6 +150,13 @@ constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandExcep
 is not specified, an `InvalidCommandException` will be thrown.
 
 ---
+
+### File Manager Component
+
+![FileManager Class Diagram](uml/classDiagrams/images/FileManager.png)
+
+
+---
 ## Implementation
 ### Overview
 * [Getting User Input Continuously](#getting-user-input-continuously)

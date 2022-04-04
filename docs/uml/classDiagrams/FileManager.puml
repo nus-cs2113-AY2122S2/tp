@@ -1,0 +1,64 @@
+@startuml
+!include ../style.puml
+
+title Class Diagram of the File Manager
+
+skinparam classAttributeIconSize 0
+skinparam classFontsize 14
+skinparam classAttributeFontSize 13
+skinparam arrowThickness 2
+skinparam noteFontSize 13
+
+class FileManager
+class LogHandler
+class UI
+class WerkIt
+package commands <<folder>> {
+    class WorkoutCommand
+    class PlanCommand
+    class ScheduleCommand
+}
+
+'Associations
+LogHandler ..> FileManager
+FileManager ..> LogHandler
+
+FileManager --> UI
+UI ..> FileManager
+
+WerkIt --> FileManager
+
+WorkoutCommand --> FileManager
+PlanCommand --> FileManager
+ScheduleCommand --> FileManager
+
+
+
+'FileManager Class
+FileManager : - directoryPath: Path
+FileManager : - exerciseFilePath: Path
+
+FileManager : + createDataDirectory() : void
+
+FileManager : + createExerciseFile() : void
+FileManager : + loadExercisesFromFile(ExerciseList) : void
+
+FileManager : + addFileWorkoutToList(WorkoutList, String[]) : void
+
+FileManager : + writeNewWorkoutToFile(Workout) : void
+FileManager : + rewriteAllWorkoutsToFile(WorkoutList) : void
+
+FileManager : + convertWorkoutToFileDataFormat(String) : String
+
+note right of FileManager #LightSalmon : Not all fields and methods are listed as\nmany are similar methods called to\noperate on the other applicaiton files.
+
+
+'UI Class
+UI : + printDirectoryNotFoundMessage() : void
+UI : + printDirectoryCreatedMessage() : void
+
+UI : + printExerciseFileNotFoundMessage() : void
+UI : + printExerciseFileCreatedMessage() : void
+
+
+@enduml
