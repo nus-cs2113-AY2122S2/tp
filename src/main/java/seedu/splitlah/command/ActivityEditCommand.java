@@ -18,8 +18,6 @@ import seedu.splitlah.ui.TextUI;
 
 /**
  * Represents a command object that edits an Activity object.
- *
- * @author Saurav
  */
 public class ActivityEditCommand extends Command {
 
@@ -27,7 +25,6 @@ public class ActivityEditCommand extends Command {
 
     private static final double ZERO_COST_PAID = 0;
     public static final double ZERO_COST_OWED = 0;
-    private static final int NO_COST = 0;
     private static final int MISSING_ACTIVITYID = -1;
     private static final int MISSING_SESSIONID = -1;
     private static final double MISSING_TOTALCOST = -1;
@@ -38,20 +35,30 @@ public class ActivityEditCommand extends Command {
     private static final String MISSING_PAYER = null;
     private static final String[] MISSING_INVOLVEDLIST = null;
     private static final int DUMMY_ACTIVITYID = MISSING_ACTIVITYID;
+    private static final int TYPE_UNSET = -1;
+    private static final int TYPE_COSTLIST = 1;
+    private static final int TYPE_COSTOVERALL = 0;
+    private static final int MODE_UNSET = -1;
+    private static final int MODE_OVERWRITE = 0;
+    private static final int MODE_PRESERVE = 1;
+
 
     private int activityId = MISSING_ACTIVITYID;
     private int sessionId = MISSING_SESSIONID;
+    private Activity oldActivity = null;
+    private Session session = null;
     private String activityName = MISSING_ACTIVITYNAME;
     private double totalCost = MISSING_TOTALCOST;
     private String payer = MISSING_PAYER;
-    private String[] involvedList = MISSING_INVOLVEDLIST;
+    private String[] involvedListStringArray = MISSING_INVOLVEDLIST;
     double[] costList = MISSING_COSTLIST;
+    private double activityType = TYPE_UNSET;
+    private double editMode = MODE_UNSET;
     private double gst = MISSING_GST;
     private double oldGst = MISSING_GST;
     private double serviceCharge = MISSING_SERVICECHARGE;
     private double oldServiceCharge = MISSING_SERVICECHARGE;
-
-    private ArrayList<Person> involvedArrayList = null;
+    private ArrayList<Person> involvedListPersonArray = null;
 
     /**
      * Initializes an ActivityEditCommand object.
@@ -77,7 +84,7 @@ public class ActivityEditCommand extends Command {
         this.activityName = activityName;
         this.totalCost = totalCost;
         this.payer = payer;
-        this.involvedList = involvedList;
+        this.involvedListStringArray = involvedList;
         this.costList = costList;
         this.gst = gst;
         this.serviceCharge = serviceCharge;
@@ -86,7 +93,7 @@ public class ActivityEditCommand extends Command {
     /**
      * Adds all relevant activity costs to each involved person's list of activity costs.
      *
-     * @param involvedPersonList An ArrayList object containing Person objects
+     * @param involvedPersonList An ArrayList object of Person objects
      *                           each representing a person involved in the activity.
      * @param personPaid         A Person object representing the person who paid for the activity.
      * @param activityId         An integer that uniquely identifies an activity.
@@ -141,6 +148,22 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    private void updateCostListFromActivity() throws InvalidDataException {
+        int listLength = involvedListPersonArray.size();
+        costList = new double[listLength];
+        double firstCost = involvedListPersonArray.get(0).getActivityCostOwed(activityId);
+        for (int i = 0; i < listLength; ++i) {
+            double costOwedForThisActivity = involvedListPersonArray.get(i).getActivityCostOwed(activityId);
+            costList[i] = costOwedForThisActivity;
+            if (costOwedForThisActivity != firstCost) {
+                activityType = TYPE_COSTLIST;
+            }
+        }
+        if (activityType == TYPE_UNSET) {
+            activityType = TYPE_COSTOVERALL;
+        }
+    }
+
     /**
      * Updates cost and list of costs by adding the extra charges and
      * checks if cost list or cost was provided by the user.
@@ -148,20 +171,38 @@ public class ActivityEditCommand extends Command {
      * Else, the total cost is distributed evenly.
      */
     private void updateCostAndCostList() {
-        if (totalCost == MISSING_TOTALCOST && costList != MISSING_COSTLIST) {
-            totalCost = 0;
-            removeOldExtraChargesFromCostList();
-            updateCostListWithExtraCharges();
-            calculateTotalCost();
-        } else if (totalCost != MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
-            updateCostWithExtraCharges();
-            int numberOfPeopleInvolved = involvedList.length;
-            costList = distributeCostEvenly(numberOfPeopleInvolved);
-        } else if (totalCost != MISSING_TOTALCOST) {
-            totalCost = 0;
-            updateCostListWithExtraCharges();
-            calculateTotalCost();
+        // If the original activity's costlist/cost must be preserved, gst/sc are removed from the costs and added
+        // back in using the current gst/sc values (either provided by the user or retrieved from the activity).
+        // If the original activity's costlist/cost must be overwritten by user-specified costs, the old costs are
+        // set to zero to wipe them clean and overwritten with the new costs using the current gst/sc values (either
+        // provided by the user or retrieved from the activity).
+        if (editMode == MODE_PRESERVE) {
+            if (activityType == TYPE_COSTLIST) {
+                removeOldExtraChargesFromCostList();
+                resetTotalCostToZero();
+                updateCostListWithExtraCharges();
+                calculateTotalCost();
+            } else if (activityType == TYPE_COSTOVERALL) {
+                removeOldExtraChargesFromCostList();
+                resetTotalCostToZero();
+                updateCostListWithExtraCharges();
+                calculateTotalCost();
+            }
+        } else if (editMode == MODE_OVERWRITE) {
+            if (activityType == TYPE_COSTLIST) {
+                resetTotalCostToZero();
+                updateCostListWithExtraCharges();
+                calculateTotalCost();
+            } else if (activityType == TYPE_COSTOVERALL) {
+                resetTotalCostToZero();
+                updateCostListWithExtraCharges();
+                calculateTotalCost();
+            }
         }
+    }
+
+    private void resetTotalCostToZero() {
+        totalCost = 0;
     }
 
     /**
@@ -236,47 +277,9 @@ public class ActivityEditCommand extends Command {
      */
     private double[] distributeCostEvenly(int numberOfPeopleInvolved) {
         double dividedCost = totalCost / numberOfPeopleInvolved;
-        double[] costList = new double[numberOfPeopleInvolved];
-        Arrays.fill(costList, dividedCost);
-        return costList;
-    }
-
-    @Override
-    public void run(Manager manager) {
-        TextUI ui = manager.getUi();
-        try {
-            assert activityId != MISSING_ACTIVITYID;
-            assert sessionId != MISSING_SESSIONID;
-
-            Profile profile = manager.getProfile();
-            Session session = profile.getSession(sessionId);
-            Activity oldActivity = session.getActivity(activityId);
-            retrieveDetailsFromOldActivity(oldActivity);
-            validateCostListAndInvolvedList();
-            updateCostAndCostList();
-            if (costList == null) {
-                throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COST_ERROR);
-            }
-            checkForNegativeCosts();
-            assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
-            assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
-            involvedArrayList = session.getPersonListByName(involvedList);
-            Person payerAsPerson = session.getPersonByName(payer);
-            addAllActivityCost(involvedArrayList, payerAsPerson, DUMMY_ACTIVITYID);
-            PersonList involvedPersonList = new PersonList(involvedArrayList);
-            session.removeActivity(activityId);
-            Activity newActivity = new Activity(activityId, activityName, totalCost, payerAsPerson, involvedPersonList,
-                    (gst != MISSING_GST ? gst : oldGst),
-                    (serviceCharge != MISSING_SERVICECHARGE ? serviceCharge : oldServiceCharge));
-            session.addActivity(newActivity);
-            updateDummyActivityIdsInActivityCosts(session);
-            manager.saveProfile();
-            ui.printlnMessage(COMMAND_SUCCESS);
-            ui.printlnMessage(newActivity.getActivitySummaryString());
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED);
-        } catch (InvalidDataException exception) {
-            ui.printlnMessage(exception.getMessage());
-        }
+        double[] equallyDistributedCostList = new double[numberOfPeopleInvolved];
+        Arrays.fill(equallyDistributedCostList, dividedCost);
+        return equallyDistributedCostList;
     }
 
     /**
@@ -315,21 +318,14 @@ public class ActivityEditCommand extends Command {
      * @throws InvalidDataException If there is a mismatch between the list of participants and the cost list.
      */
     private void validateCostListAndInvolvedList() throws InvalidDataException {
-        if (totalCost == MISSING_TOTALCOST
-                && (involvedList != MISSING_INVOLVEDLIST
-                ^ costList == MISSING_COSTLIST)) {
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY);
-            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COSTLIST_AND_INVOLVEDLIST_MISMATCH);
-        }
-
-        if (involvedList != MISSING_INVOLVEDLIST && costList != MISSING_COSTLIST) {
-            if (involvedList.length != costList.length) {
+        if (involvedListStringArray != MISSING_INVOLVEDLIST) {
+            if (involvedListStringArray.length != costList.length) {
                 Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY);
                 throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_INVOLVED_AND_COST_DIFFERENT_LENGTH);
             }
         }
 
-        if (involvedList != MISSING_INVOLVEDLIST && PersonList.hasNameDuplicates(involvedList)) {
+        if (involvedListStringArray != MISSING_INVOLVEDLIST && PersonList.hasNameDuplicates(involvedListStringArray)) {
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY);
             throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_DUPLICATE_NAME);
         }
@@ -341,34 +337,59 @@ public class ActivityEditCommand extends Command {
      *
      * @param oldActivity An Activity object representing the activity to be edited.
      */
-    private void retrieveDetailsFromOldActivity(Activity oldActivity) {
+    private void retrieveDetailsFromOldActivity(Activity oldActivity) throws InvalidDataException {
+        // retrieves gst and service charge from old activity
         oldGst = oldActivity.getGst();
         oldServiceCharge = oldActivity.getServiceCharge();
+        // retrieves activity name if no name is provided
         if (Objects.equals(activityName, MISSING_ACTIVITYNAME)) {
             activityName = oldActivity.getActivityName();
         }
-        if (totalCost == -1) {
-            totalCost = oldActivity.getTotalCost();
+        // retrieves list of participants if no list is provided
+        if (involvedListStringArray == MISSING_INVOLVEDLIST) {
+            involvedListStringArray = getInvolvedListFromPersonList(oldActivity.getInvolvedPersonList());
         }
+        // sets involvedListPersonArray to contain the participants
+        involvedListPersonArray = session.getPersonListByName(involvedListStringArray);
+        // retrieves cost details from old activity only if no overall cost or costlist is provided by the user.
+        if (totalCost == MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
+            editMode = MODE_PRESERVE;
+            updateCostListFromActivity();
+        } else if (totalCost != MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
+            editMode = MODE_OVERWRITE;
+            activityType = TYPE_COSTOVERALL;
+            updateCostListFromUserInput();
+        } else if (totalCost == MISSING_TOTALCOST && costList != MISSING_COSTLIST) {
+            editMode = MODE_OVERWRITE;
+            activityType = TYPE_COSTLIST;
+        } else {
+            // throws exception if both costlist and overall cost are specified.
+            throw new InvalidDataException("Both cost list and cost were specified.");
+        }
+        // retrieves payer name if no payer is provided
         if (Objects.equals(payer, MISSING_PAYER)) {
             payer = oldActivity.getPersonPaid().getName();
         }
-        if (involvedList == MISSING_INVOLVEDLIST) {
-            involvedList = getInvolvedListFromPersonList(oldActivity.getInvolvedPersonList());
-        }
+        // sets new gst to old gst if no gst is provided
         if (gst == MISSING_GST) {
             gst = oldActivity.getGst();
         }
+        // sets new service charge to old service charge if no service charge is provided
         if (serviceCharge == MISSING_SERVICECHARGE) {
             serviceCharge = oldActivity.getServiceCharge();
         }
     }
 
+    private void updateCostListFromUserInput() throws InvalidDataException {
+        int listLength = involvedListPersonArray.size();
+        costList = distributeCostEvenly(listLength);
+    }
+
     /**
-     * Extracts a String array object containing the names of the participants from an ArrayList object containing
+     * Extracts a String array object containing the names of the participants from an ArrayList of
      * Person objects.
      *
-     * @param involvedPersonList An ArrayList object containing Person objects.
+     * @param involvedPersonList An ArrayList object of Person objects.
      * @return A String array object containing the names of the participants.
      */
     private String[] getInvolvedListFromPersonList(ArrayList<Person> involvedPersonList) {
@@ -378,5 +399,41 @@ public class ActivityEditCommand extends Command {
             involvedListStringArray[i] = involvedPersonList.get(i).getName();
         }
         return involvedListStringArray;
+    }
+
+    @Override
+    public void run(Manager manager) {
+        TextUI ui = manager.getUi();
+        try {
+            assert activityId != MISSING_ACTIVITYID;
+            assert sessionId != MISSING_SESSIONID;
+
+            Profile profile = manager.getProfile();
+            session = profile.getSession(sessionId);
+            oldActivity = session.getActivity(activityId);
+            retrieveDetailsFromOldActivity(oldActivity);
+            updateCostAndCostList();
+            validateCostListAndInvolvedList();
+            checkForNegativeCosts();
+            assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
+            assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
+            Person payerAsPerson = session.getPersonByName(payer);
+            addAllActivityCost(involvedListPersonArray, payerAsPerson, DUMMY_ACTIVITYID);
+            PersonList involvedPersonList = new PersonList(involvedListPersonArray);
+            session.removeActivity(activityId);
+            Activity newActivity = new Activity(activityId, activityName, totalCost, payerAsPerson, involvedPersonList,
+                    (gst != MISSING_GST ? gst : oldGst),
+                    (serviceCharge != MISSING_SERVICECHARGE ? serviceCharge : oldServiceCharge));
+            session.addActivity(newActivity);
+            updateDummyActivityIdsInActivityCosts(session);
+            manager.saveProfile();
+            ui.printlnMessage(COMMAND_SUCCESS + newActivity);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED);
+        } catch (InvalidDataException exception) {
+            ui.printlnMessage(exception.getMessage());
+        } catch (Exception exception) {
+            ui.printlnMessage(exception.getMessage());
+            exception.printStackTrace();
+        }
     }
 }
