@@ -15,15 +15,12 @@ public class PatientList {
         countPatient = 0;
     }
 
-    public static void addPatientDescription(String description, String index) {
-        for (Patient patient : patients) {
-            System.out.println(" check");
-            if (patient.getId().trim().equals(index))
-                patient.addDescription(description);
-        }
+    public static void addPatientDescription(String description, int index) {
+        Patient patient = patients.get(index - 1);
+        patient.addDescription(description);
     }
 
-    public Person getPatient(int index) {
+    public Patient getPatient(int index) {
         return patients.get(index - 1);
     }
 
@@ -34,11 +31,11 @@ public class PatientList {
     public void addPatient(Patient patient) {
         patients.add(patient);
         countPatient++;
-
-        System.out.println(boundary + "Noted. I've added this patient:");
-        System.out.println(patients.get(countPatient - 1));
-        System.out.print("Now you have " + countPatient
-                                 + " patients recorded in the system." + System.lineSeparator() + boundary);
+//
+//        System.out.println(boundary + "Noted. I've added this patient:");
+//        System.out.println(patients.get(countPatient - 1));
+//        System.out.print("Now you have " + countPatient
+//                                 + " patients recorded in the system." + System.lineSeparator() + boundary);
     }
 
     /**
@@ -46,29 +43,24 @@ public class PatientList {
      *
      * @param index Index of the patient to be deleted.
      */
-    public void deletePatient(int index) {
-        System.out.println(boundary + "Noted. I've removed this patient:");
-        System.out.println(patients.get(index - 1));
-        System.out.print("Now you have " + (countPatient - 1)
-                                 + " patients recorded in the system." + System.lineSeparator() + boundary);
+    public Patient deletePatient(int index) {
+//        System.out.println(boundary + "Noted. I've removed this patient:");
+//        System.out.println(patients.get(index - 1));
+//        System.out.print("Now you have " + (countPatient - 1)
+//                                 + " patients recorded in the system." + System.lineSeparator() + boundary);
+        Patient curr = patients.get(index - 1);
         patients.remove(index - 1);
         countPatient -= 1;
+        return curr;
     }
 
-    public void searchPatient(String id){
-        boolean found = false;
+    public Patient searchPatient(String id){
         for (int i = 0; i < patients.size(); i++){
             if (patients.get(i).getId().trim().equals(id)){
-                System.out.println(boundary + "Here is the patient found:");
-                System.out.println(patients.get(i));
-                System.out.print(boundary);
-                found = true;
+                return  patients.get(i);
             }
         }
-        if (!found) {
-            System.out.print(boundary + "Patient not found."
-                                     + System.lineSeparator() + boundary);
-        }
+        return null;
     }
 
     @Override

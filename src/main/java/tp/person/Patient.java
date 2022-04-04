@@ -2,7 +2,7 @@ package tp.person;
 
 public class Patient extends tp.person.Person {
     protected String symptom;
-    protected String description;
+    protected String description = " ";
 
     public Patient(String id, String name, String phoneNumber, String email, String symptom) {
         super(id, name, phoneNumber, email);

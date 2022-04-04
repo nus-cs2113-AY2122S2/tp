@@ -23,39 +23,33 @@ public class DoctorList {
     public void addDoctor(Doctor doctor) {
         doctors.add(doctor);
         size++;
-        System.out.println(boundary + "Noted. I've added this doctor:");
-        System.out.println(doctors.get(size - 1));
-        System.out.print("Now you have " + size
-                                 + " doctors recorded in the system." + System.lineSeparator() + boundary);
+//        System.out.println(boundary + "Noted. I've added this doctor:");
+//        System.out.println(doctors.get(size - 1));
+//        System.out.print("Now you have " + size
+//                                 + " doctors recorded in the system." + System.lineSeparator() + boundary);
     }
 
     public int getSize() {
         return size;
     }
 
-    public void deleteDoctor(int index) {
-        System.out.println(boundary + "Noted. I've removed this doctor:");
-        System.out.println(doctors.get(index - 1));
-        System.out.print("Now you have " + (size - 1)
-                                 + " doctors in the system." + System.lineSeparator() + boundary);
-        doctors.remove(index - 1);
+    public Doctor deleteDoctor(int index) {
+//        System.out.println(boundary + "Noted. I've removed this doctor:");
+//        System.out.println(doctors.get(index - 1));
+//        System.out.print("Now you have " + (size - 1)
+//                                 + " doctors in the system." + System.lineSeparator() + boundary);
+        Doctor curr = doctors.get(index - 1);
         size -= 1;
+        return curr;
     }
 
-    public void searchDoctor(String id){
-        boolean found = false;
+    public Doctor searchDoctor(String id){
         for (int i = 0; i < doctors.size(); i++){
             if (doctors.get(i).getId().trim().equals(id)){
-                System.out.println(boundary + "Here is the doctor found:");
-                System.out.println(doctors.get(i));
-                System.out.print(boundary);
-                found = true;
+                return doctors.get(i);
             }
         }
-        if (!found) {
-            System.out.print(boundary + "Doctor not found."
-                                     + System.lineSeparator() + boundary);
-        }
+        return null;
     }
 
     @Override
