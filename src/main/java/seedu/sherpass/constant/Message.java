@@ -54,10 +54,11 @@ public class Message {
             + "it has some clashes\nwith your schedule :(";
     public static final String ERROR_EMPTY_ADD_COMMANDS_MESSAGE = "Add command is missing "
             + "description and/or date details!\n(and possibly a repeat frequency if you intend to add it in)";
-    public static final String ERROR_MULTIPLE_ARGS_MESSAGE = "Add command has both /by and /repeat commands.\n"
+    public static final String ERROR_REPEAT_BY_CLASH_MESSAGE = "Command has both /by and /repeat commands.\n"
             + "Please choose one of them.";
     public static final String ERROR_DELETE_REPEATED_TASK = "Please exclude the '/repeat' delimiter "
             + "\nwhen deleting a single task";
+    public static final String ERROR_BY_DATE_BEFORE_DO_ON_DATE = "Your deadline cannot be before your do on date!";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;

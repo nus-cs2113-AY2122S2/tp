@@ -2,7 +2,6 @@ package seedu.sherpass.task;
 
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
-import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.util.Ui;
 
@@ -14,6 +13,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_DO_ON_DATE;
 import static seedu.sherpass.constant.Message.ERROR_DELETE_REPEATED_TASK;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 
@@ -150,6 +150,14 @@ public class TaskList {
                 || taskToCheck.getDoOnStartDateTime().equals(taskToCheck.getDoOnEndDateTime());
     }
 
+    private boolean isByDateBeforeDoOnDate(Task taskToCheck) {
+        if (taskToCheck.getByDate() == null) {
+            return false;
+        }
+        return taskToCheck.getByDate().toLocalDate()
+                .isBefore(taskToCheck.getDoOnStartDateTime().toLocalDate());
+    }
+
     /**
      * Checks if there is any date and time clashes
      * for a given array.
@@ -161,7 +169,13 @@ public class TaskList {
      *                            with tasks in taskList
      */
     public void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck)
-            throws TimeClashException {
+            throws TimeClashException, InvalidInputException {
+        if (isStartTimeClashWithEndTime(taskToCheck)) {
+            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
+        }
+        if (isByDateBeforeDoOnDate(taskToCheck)) {
+            throw new InvalidInputException(ERROR_BY_DATE_BEFORE_DO_ON_DATE);
+        }
         for (Task task : taskList) {
             if (isOnSameDay(task.getDoOnStartDateTime(), taskToCheck.getDoOnStartDateTime())
                     && hasTimeClash(task, taskToCheck.getDoOnStartDateTime(), taskToCheck.getDoOnEndDateTime())) {
@@ -176,9 +190,6 @@ public class TaskList {
      * @param newTask The new task to be added to the array.
      */
     public void addTask(Task newTask) throws TimeClashException, InvalidInputException {
-        if (isStartTimeClashWithEndTime(newTask)) {
-            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
-        }
         identifierList.add(newTask.getIdentifier());
         LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(newTask.getDoOnStartDateTime(),
                 newTask.getRepeatFrequency());
@@ -192,10 +203,14 @@ public class TaskList {
         updateIndex();
     }
 
-    public Task updateTask(Task taskToUpdate, String taskDescription,
+    public Task updateTask(Task oldTask, String taskDescription,
                            long startDifferenceInSeconds,
                            long endDifferenceInSeconds,
                            LocalDateTime byDate) {
+        Task taskToUpdate = new Task(oldTask.getIdentifier(),
+                oldTask.getDescription(), oldTask.getByDate(), oldTask.getDoOnStartDateTime(),
+                oldTask.getDoOnEndDateTime(), oldTask.getRepeatFrequency());
+
         if (!taskDescription.isBlank()) {
             taskToUpdate.setTaskDescription(taskDescription);
         }
@@ -220,9 +235,6 @@ public class TaskList {
                                       long endDifferenceInSeconds,
                                       LocalDateTime byDate) throws TimeClashException, InvalidInputException {
         Task taskToEdit = tasks.get(editIndex);
-        if (isStartTimeClashWithEndTime(taskToEdit)) {
-            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
-        }
         ArrayList<Task> editedList = new ArrayList<>(tasks);
         editedList.remove(editIndex);
 
@@ -258,11 +270,8 @@ public class TaskList {
         updateIndex();
     }
 
-    public ArrayList<Task> getAffectedTasks(int index) throws InvalidInputException {
+    public ArrayList<Task> getAffectedTasks(int index) {
         Task taskToEdit = tasks.get(index);
-        if (isStartTimeClashWithEndTime(taskToEdit)) {
-            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
-        }
         ArrayList<Task> result = new ArrayList<>();
         for (Task t : tasks) {
             if (t.getIdentifier() == taskToEdit.getIdentifier() && t.getIndex() >= taskToEdit.getIndex()) {

@@ -44,7 +44,7 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_MULTIPLE_ARGS_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_REPEAT_BY_CLASH_MESSAGE;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 import static seedu.sherpass.constant.Message.WHITESPACE;
 
@@ -143,7 +143,7 @@ public class TaskParser {
             throw new InvalidInputException(ERROR_EMPTY_ADD_COMMANDS_MESSAGE);
         }
         if (argument.contains(FREQUENCY_DELIMITER) && argument.contains(BY_DATE_DELIMITER)) {
-            throw new InvalidInputException(ERROR_MULTIPLE_ARGS_MESSAGE);
+            throw new InvalidInputException(ERROR_REPEAT_BY_CLASH_MESSAGE);
         }
         String taskDescription = parseDescription(argument);
         if (taskDescription.isBlank()) {
@@ -227,6 +227,9 @@ public class TaskParser {
     private static EditCommand prepareEditTaskContent(String argument) throws InvalidInputException {
         String[] splitInput = argument.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
         int editIndex = Integer.parseInt(splitInput[EDIT_INDEX]) - INDEX_OFFSET;
+        if (argument.contains(FREQUENCY_DELIMITER) && argument.contains(BY_DATE_DELIMITER)) {
+            throw new InvalidInputException(ERROR_REPEAT_BY_CLASH_MESSAGE);
+        }
         String taskDescription = parseDescription(splitInput[EDIT_TASK_CONTENT]);
         String doOnDateString = parseArgument(DO_DATE_DELIMITER, splitInput[EDIT_TASK_CONTENT]);
         String startTimeString = parseArgument(START_TIME_DELIMITER, splitInput[EDIT_TASK_CONTENT]);
