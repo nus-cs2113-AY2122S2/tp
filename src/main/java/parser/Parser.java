@@ -273,6 +273,6 @@ public class Parser {
         if (args.isEmpty()) {
             throw new ParseException("Could not find index number to parse");
         }
-        return Integer.parseInt(args.split(" ")[0]);
+        return Long.parseLong(args.split(" ")[0]);
     }
 }
