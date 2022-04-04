@@ -1,3 +1,4 @@
+'@@author tjiarong
 @startuml
 !include style.puml
 skinparam ClassFontColor #000000
@@ -27,9 +28,9 @@ MyGen -> Alice
 
 Alice -down-> List
 
-Inc0 -up[#GREEN]-> List
-Inc1 -up[#GREEN]-> temp
+List -d[#GREEN]-> Inc0
+temp -d[#GREEN]> Inc1
 
-temp-[HIDDEN]>Fam
+temp-l[HIDDEN]>Fam
 
 @end

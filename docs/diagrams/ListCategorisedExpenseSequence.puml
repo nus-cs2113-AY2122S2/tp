@@ -12,20 +12,20 @@ box " "
     participant "<<Class>>\nUI" as UI UI_COLOR
 end box
 
-[-> Commands : execute(listexp /c 2)
+[-> Commands : execute("listexp /c 2")
 activate Commands
 
-Commands -> Parser : parseCategory(listexp /c 2)
+Commands -> Parser : parseCategory(\n"listexp /c 2":String)
 activate Parser
 Parser --> Commands : 2:int
 deactivate Parser
 
 
-Commands -> Family : listExpenseOfCategory(2)
+Commands -> Family : listExpenseOfCategory(2:int)
 activate Family
 
 loop for each Generation
-    Family -> PList : listExpense-\nOfCategory(2)
+    Family -> PList : listExpenseOf-\nCategory(2:int)
     activate PList
 
     loop LOOP_COLOR for each Person p
@@ -34,7 +34,7 @@ loop for each Generation
         Person --> PList : :Person
         deactivate Person
 
-        PList -> MList : getExpenseOfCategory(2)
+        PList -> MList : getExpenseOfCategory(2:int)
         activate MList
 
         loop for each expense
