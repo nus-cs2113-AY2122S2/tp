@@ -114,7 +114,7 @@ Some Mod Happy commands require you to provide a duration. You can specify these
 
 ### 4.1. Accessing help: `help`
 
-- If no "COMMAND_WORD" is given, a generic help message is displayed.
+- If no ``COMMAND_WORD`` is given, a generic help message is displayed.
   #### Format: `help`
   ##### Example 1:
   ```
