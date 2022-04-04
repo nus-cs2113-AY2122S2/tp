@@ -69,8 +69,10 @@ public class CreditCard implements MindMyMoneySerializable {
 
     @Override
     public String toString() {
-        return "Name: " + getNameOfCard() + " [Cashback: " + getCashback() +  "%] [Cashback gained: $"
-                + getTotalCashback() + "] [Card limit: $" + getMonthlyCardLimit() + "]\n";
+        return "Name: " + getNameOfCard() + " [Cashback: " + String.format("%.2f", getCashback())
+                + "%] [Cashback gained: $" + String.format("%.2f", getTotalCashback())
+                + "] [Card limit: $" + String.format("%.2f", getMonthlyCardLimit())
+                + "] [Balance left: $" + String.format("%.2f", getBalanceLeft()) + "]\n";
     }
 
     /**
