@@ -116,6 +116,10 @@ contains two types of formatting.
 
 <span class="box warning">⚠️**Heads Up!** Your inputs cannot contain the pipe character `|`!</span>
 
+Also please do take note of the following:
+
+![Application Flow](high-level-diagram/application_flow.png)
+
 ### Finding Your Way Around The Application
 * [Workout Commands](#workout-commands)
 * [Plan Commands](#plan-commands)
