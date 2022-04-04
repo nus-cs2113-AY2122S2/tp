@@ -14,4 +14,5 @@ public class Indexes {
     public static final int MINIMUM_INCOME_COMMAND_LENGTH = 3;
     public static final int MIN_STUDENT_INCOME = 0;
     public static final int MAX_STUDENT_INCOME = 1000000;
+    public static final int MIN_EXPENDITURE_AMOUNT = 0;
 }

@@ -50,7 +50,7 @@ encounter several icons. These icons will provide several useful information.
 >- This tells you that there is additional information that is useful when you are using the application.
 
 > **⚠️Warning⚠️**
-> - This tells you that there is some **important** information you should take note of to prevent issues from arising when you are using the application.
+>- This tells you that there is some **important** information you should take note of to prevent issues from arising when you are using the application.
 
 
 <br/>
@@ -79,18 +79,18 @@ What can I do for you?
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    show a help page. <br> Some example commands you can try: <br>
-    * **`list`** : Lists all tasks.
-    * **`add`**`/pm cash /c Food /d Porridge /a 3 /t 12/03/2022` :
+    * **`add`**`/e /pm cash /c Food /d Porridge /a 3 /t 12/03/2022` :
       Adds a $3 expenditure of the description 'Porridge' that was paid in cash on 12 March 2022 to your list of
       expenditures.
-    * **`calculate`**`/epm 03/2022` : Calculates total expenditure in the month of March 2022.
-    * **`update`**`1 /pm cash /c Food /d Chicken Rice /a 4.50 /t 12/03/2022` :
+    * **`list /e`** : Lists all expenditures.
+    * **`calculate`**`/epm 03/2022` : Calculates the total expenditure in the month of March 2022.
+    * **`update`**`/e 1 /pm cash /c Food /d Chicken Rice /a 4.50 /t 12/03/2022` :
       Updates the first expenditure on your expenditure list to reflect a $4.50 expenditure of the description 'Chicken
       Rice' that was paid in cash on 12 March 2022.
-    * **`delete`**`2` : Deletes the second expenditure in your expenditure list.
+    * **`delete`**`/e 1` : Deletes the first expenditure in your expenditure list.
     * **`bye`** : Exits the app.
 
-6. Refer to the [Features](#features) for details of each command.
+6. Refer to the [Features](#features) for more details of each command.
 
 <br/>
 
@@ -101,10 +101,10 @@ accurate.
 Words in `[SQUARE_BRACKETS]` are the parameters. Words starting with a `/` are flags
 
 > **💡 Note:**
->- Commands are space separated. For example `list/cc` is not a valid command while `list /cc` is valid.
+>- Parameters and flags are space-separated. For example: `list/e` is not a valid command while `list /e` is valid.
 
 > **⚠️Warning⚠️**
->- All parameters are compulsory! Input the parameters in the order given, or the application will not be able to read your
+>- All parameters are compulsory! Input the parameters in the order shown, or the application will not be able to read your
    > input.
 >- ENTER RULES ON FORBIDDEN CHARACTERS HERE
 
@@ -112,7 +112,7 @@ Words in `[SQUARE_BRACKETS]` are the parameters. Words starting with a `/` are f
 
 ### Display help page for expenditures: `help`
 
-Prints a list of currently available commands for storing expenditures.
+Prints a list of currently available expenditure-related commands.
 
 #### Format: `help /e`
 
@@ -122,10 +122,10 @@ Prints a list of currently available commands for storing expenditures.
 > help /e
 ---------------------------------------Expenditure Help Page---------------------------------------
 1. Listing all Expenditures: list /e
-2. Adding an Expenditure entry: add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [TIME]
+2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]
 3. Calculating the total expenditure in a month: calculate /epm [MONTH]
-4. Updating an Expenditure: update [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [TIME]
-5. Removing an Expenditure entry: delete [INDEX]
+4. Updating an Expenditure: update /e [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]
+5. Removing an Expenditure entry: delete /e [INDEX]
 6. Exiting the program: bye
 ---------------------------------------------------------------------------------------------------
 ````
@@ -136,28 +136,28 @@ Prints a list of currently available commands for storing expenditures.
 
 Adds an expenditure to your program. Only **one** expenditure can only be added per command.
 
-#### Format: `add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
+#### Format: `add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
 
 * `[PAYMENT_METHOD]` refers to the method of payment used.
     * Enter `cash` or the name of a credit card you have saved.
 * `[CATEGORY]` refers to the category of the expenditure
     * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`.
 * `[DESCRIPTION]` refers to the description of the expenditure.
-    * For example `Nike shoes`.
+    * For example: `Nike shoes`.
 * `[AMOUNT]` refers to the cost of the expenditure.
     * Enter the amount in dollars, rounded off to the nearest cent.
-    * For example, an item that cost $420 and 69 cents will be entered as `420.69`.
+    * For example: an item that cost $420 and 69 cents will be entered as `420.69`.
 * `[DATE]` refers to the date of the purchase of the expenditure.
     * Format of the date is DD/MM/YYYY.
-    * For example, `12 March 2022` will be entered as `12/03/2022`.
+    * For example: `12 March 2022` will be entered as `12/03/2022`.
 
-For Example: `add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`.  
-Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash in March 2022 to your expenditure list. <br>
+For example: `add /e /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`.  
+Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash on 12 March 2022 to your expenditure list. <br>
 
 #### Expected Outcome:
 
 ````
-> add /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022
+> add /e /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022
 Successfully added: 
 
 Description: Porridge
@@ -177,6 +177,8 @@ into the account
 
 > **⚠️Warning⚠️**
 >- `[CATEGORY]`: Any input not in the list will be rejected.
+>- `[DATE]`: Any input not in the format of DD/MM/YYYY will be rejected.  
+>- `[Date]`: Any input date later than the current date will be rejected.
 
 <br/>
 
@@ -205,24 +207,24 @@ list /e
 Modifies an expenditure on your expenditure list by specifying its index. <br>
 Use the `list /e` command to view the indices of your expenditures.
 
-#### Format: `update [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`
+#### Format: `update /e [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`
 
 * `[INDEX]` refers to the index of expenditure in list in which you want to update.
-    * Enter `1` if you want to update the first entry in the list.
+    * For example: `1` if you want to update the first expenditure in your list.
 * `[NEW_PAYMENT_METHOD]` refers to the new method of payment used.
     * Enter `cash` or the name of a credit card you have saved.
 * `[NEW_CATEGORY]` refers to the new category of the expenditure.
     * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`.
 * `[NEW_DESCRIPTION]` refers to the new description of the expenditure.
-    * For example `chicken rice`.
+    * For example: `chicken rice`.
 * `[NEW_AMOUNT]` refers to the updated of the expenditure.
     * Enter the amount in dollars, rounded off to the nearest cent.
-    * For example, an item that cost $420 and 69 cents will be entered as `420.69`.
+    * For example: an item that cost 420 dollars and 69 cents will be entered as `420.69`.
 * `[NEW_DATE]` refers to the new date of the purchase of the expenditure.
     * Format of the date is DD/MM/YYYY.
-    * For example, `12 March 2022` will be entered as `12/03/2022`.
+    * For example: `12 March 2022` will be entered as `12/03/2022`.
 
-For example: `update 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022`.  
+For example: `update /e 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022`.  
 Updates the first expenditure in the list to a $5.0 expenditure on food item 'chicken rice' that was paid in cash on 12
 March 2022.
 
@@ -328,7 +330,7 @@ Prints a list of commands for storing credit cards as a payment method.
 ### Add a credit card: `add`
 
 Adds a credit card to your program. Only **one** credit card can only be added per command.  <br>
-#### Format: `add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CARD_BALANCE]`
+#### Format: `add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT]`
 
 * `[CREDIT_CARD_NAME]` refers to the name your Credit Card will be saved as.
     * Use abbreviations for ease of adding expenditures to this credit card. For example,
@@ -338,23 +340,19 @@ Adds a credit card to your program. Only **one** credit card can only be added p
     * For example, a credit card with `2% cashback` can be represented as `/cb 2`.
 * `[CARD_LIMIT]` refers to the maximum monthly expenditure on this credit card.
     * Enter the monthly maximum amount that can be spent on the credit card in dollars.
-* `[CARD_BALANCE]` refers to the amount of money left to be spent on the credit card.
-    * Enter the amount that is left in this card in dollars.
 
-Example:`add /cc /n dbs /cb 2 /cl 1000 /bal 1000`  
-Adds a credit card of the name 'DBS' with a cashback of 2%, a monthly spending limit of $1000 and a card balance of
-$1000.
+Example:`add /cc /n dbs /cb 2 /cl 1000`  
+Adds a credit card of the name 'DBS' with a cashback of 2% and a monthly spending limit of $1000.
 
 #### Expected Outcome:
 
 ````
-> add /cc /n dbs /cb 2 /cl 1000 /bal 1000
+> add /cc /n dbs /cb 2 /cl 1000
 Successfully added: 
 
 Credit card: dbs
 Cash back: 2%
 Card limit: $1000
-Card balance: $1000
 
 into the account
 ````
@@ -379,7 +377,7 @@ Prints your current list of credit cards that you have added so far.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: dbs [Cashback: 2.0%] [Cashback gained: $0.0] [Card limit: $1000.0] [Card balance: $1000.0]
+1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00] [Balance left: $1000.00]
 -----------------------------------------------
 ````
 
@@ -390,36 +388,34 @@ Prints your current list of credit cards that you have added so far.
 Modifies a credit card on your credit card list by specifying its index. <br>
 Use the `list /cc` command to view the current indices of your credit cards.
 
-#### Format: `update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`
+#### Format: `update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CARD_LIMIT]`
 
 * `[INDEX]` refers to the index of credit card in list in which you want to update.
     * Enter `1` if you want to update the first entry in the list.
 * `[NEW_NAME]` refers to the name your Credit Card will be updated to.
     * Use abbreviations for ease of adding expenditures to this credit card. For example,
       storing `DBS Live Fresh Credit Card` as `DBS LV`.
-* `[NEW_CASH_BACK]` refers to the updated amount of cash back received when spending on the credit card.
+* `[NEW_CASHBACK]` refers to the updated amount of cash back received when spending on the credit card.
     * Enter the amount of cashback in percentage.
     * For example, a credit card with `2% cashback` can be represented as `/cb 2`.
 * `[NEW_CARD_LIMIT]` refers to the updated maximum monthly expenditure on this credit card.
     * Enter the monthly maximum amount that can be spent on the credit card in dollars.
-* `[NEW_CARD_BALANCE]` refers to the updated amount of money left to be spent on the credit card.
-    * Enter the amount that is left in this card in dollars.
 
-For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000`  
-Updates the first credit card on your list to have a name of 'OCBC' with a cashback of 1.5%, a monthly spending limit of
-$500 and a card balance of $1000.
+For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500`  
+Updates the first credit card on your list to have a name of 'OCBC' with a cashback of 1.5% and a monthly spending limit of
+$500.
 
 #### Expected Outcome:
 
 ````
 > list /cc
 -----------------------------------------------
-1. Name: dbs [Cashback: 2.0%] [Cashback gained: $0.0] [Card limit: $1000.0] [Card balance: $1000.0]
+1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00] [Card balance: $1000.00]
 -----------------------------------------------
 
-> update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000
+> update /cc 1 /n OCBC /cb 1.5 /cl 500
 Successfully set credit card 1 to :
-Name: OCBC [Cashback: 1.5%] [Cashback gained: $0.0] [Card limit: $500.0] [Card balance: $1000.0]
+Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $1000.00]
 ````
 
 > **💡 Note:**
@@ -427,6 +423,13 @@ Name: OCBC [Cashback: 1.5%] [Cashback gained: $0.0] [Card limit: $500.0] [Card b
    > Field that are labeled starting with NEW follow the same restrictions base command in [add a credit card](#add-a-credit-card-add).
    > For example `[NEW_NAME]` can be abbreviated like `[CREDIT_CARD_NAME]`.
 >- Only enter `[INDEX]` that exist in the list. For example if you have 4 items in the credit card list, specify `[INDEX]` to be a number from 1 to 4.
+>- You are **not allowed** to update the spending limit to an amount below what you have already spent using this card.
+>  - E.g: You have already spent $500 using the card. You will not be allowed to update the spending limit to a 
+> number less than $500.
+
+> **⚠️Warning⚠️**
+>- Updating a credit card would cause its cashback earned to **reset to 0**. Similarly, its balance left will also
+> be **reset to the spending limit**.
 
 <br/>
 
@@ -448,7 +451,7 @@ Deletes the first credit card on your credit card list.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: OCBC [Cashback: 1.5%] [Cashback gained: $0.0] [Card limit: $500.0] [Card balance: $1000.0]
+1. Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $1000.00]
 -----------------------------------------------
 
 > delete /cc 1

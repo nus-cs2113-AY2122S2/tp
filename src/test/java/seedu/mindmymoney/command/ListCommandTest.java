@@ -57,7 +57,11 @@ class ListCommandTest {
         String secondInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(secondInputString, user).executeCommand();
 
+<<<<<<< HEAD
         String inputString3 = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/04/2022";
+=======
+        String inputString3 = "/pm cash /c Food /d Cream Pie /a 69 /t 01/04/2022";
+>>>>>>> master
         new AddCommand(inputString3, user).executeCommand();
         listInString = new ListCommand("/e 30/03/2022", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
@@ -83,7 +87,11 @@ class ListCommandTest {
         String secondInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(secondInputString, user).executeCommand();
 
+<<<<<<< HEAD
         String thirdInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/04/2022";
+=======
+        String thirdInputString = "/pm cash /c Food /d Cream Pie /a 69 /t 01/04/2022";
+>>>>>>> master
         new AddCommand(thirdInputString, user).executeCommand();
         listInString = new ListCommand("/e 03/2022", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
@@ -109,7 +117,11 @@ class ListCommandTest {
         String secondInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(secondInputString, user).executeCommand();
 
+<<<<<<< HEAD
         String thirdInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/04/2021";
+=======
+        String thirdInputString = "/pm cash /c Food /d Cream Pie /a 69 /t 01/04/2021";
+>>>>>>> master
         new AddCommand(thirdInputString, user).executeCommand();
         listInString = new ListCommand("/e 2022", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
