@@ -139,21 +139,51 @@ class ParserTest {
     @Test
     void prepareCheck_viewStringWithSpaces_success() throws IncompleteCommandException {
         ArrayList<String> expectedResult = new ArrayList<>(
-                Arrays.asList("Speaker   B")
+                Arrays.asList("n/Speaker   B")
         );
         ArrayList<String> actualResult = parser.prepareCheck(
-                "n/Speaker   B");
+                "n/`Speaker   B`");
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     void prepareCheck_wrongArgumentTag_exceptionThrown() {
         ArrayList<String> expectedResult = new ArrayList<>(
-                Arrays.asList("Speaker   B")
+                Arrays.asList("s/Speaker   B")
         );
         try {
             ArrayList<String> actualResult = parser.prepareCheck(
-                    "s/Speaker   B");
+                    "s/`Speaker   B`");
+            assertEquals(expectedResult, actualResult);
+            fail();
+        } catch (IncompleteCommandException e) {
+            assertEquals("Check command values are incomplete or missing!", e.getMessage());
+        }
+    }
+
+    @Test
+    void prepareCheck_missingFrontBackTick_exceptionThrown() {
+        ArrayList<String> expectedResult = new ArrayList<>(
+                Arrays.asList("n/Speaker   B")
+        );
+        try {
+            ArrayList<String> actualResult = parser.prepareCheck(
+                    "n/`Speaker   B");
+            assertEquals(expectedResult, actualResult);
+            fail();
+        } catch (IncompleteCommandException e) {
+            assertEquals("Check command values are incomplete or missing!", e.getMessage());
+        }
+    }
+
+    @Test
+    void prepareCheck_missingBackBackTick_exceptionThrown() {
+        ArrayList<String> expectedResult = new ArrayList<>(
+                Arrays.asList("n/Speaker   B")
+        );
+        try {
+            ArrayList<String> actualResult = parser.prepareCheck(
+                    "n/Speaker   B`");
             assertEquals(expectedResult, actualResult);
             fail();
         } catch (IncompleteCommandException e) {
@@ -164,21 +194,51 @@ class ParserTest {
     @Test
     void prepareDelete_deleteStringWithSpaces_success() throws IncompleteCommandException {
         ArrayList<String> expectedResult = new ArrayList<>(
-                Arrays.asList("SM58-1")
+                Arrays.asList("s/SM58 - 1")
         );
         ArrayList<String> actualResult = parser.prepareDelete(
-                "s/SM58-1");
+                "s/`SM58 - 1`");
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
     void prepareDelete_wrongArgumentTag_exceptionThrown() {
         ArrayList<String> expectedResult = new ArrayList<>(
-                Arrays.asList("Speaker   B")
+                Arrays.asList("n/Speaker   B")
         );
         try {
             ArrayList<String> actualResult = parser.prepareDelete(
                     "n/Speaker   B");
+            assertEquals(expectedResult, actualResult);
+            fail();
+        } catch (IncompleteCommandException e) {
+            assertEquals("Delete command values are incomplete or missing!", e.getMessage());
+        }
+    }
+
+    @Test
+    void prepareDelete_missingFrontBackTick_exceptionThrown() {
+        ArrayList<String> expectedResult = new ArrayList<>(
+                Arrays.asList("s/Speaker   B")
+        );
+        try {
+            ArrayList<String> actualResult = parser.prepareDelete(
+                    "s/`Speaker   B");
+            assertEquals(expectedResult, actualResult);
+            fail();
+        } catch (IncompleteCommandException e) {
+            assertEquals("Delete command values are incomplete or missing!", e.getMessage());
+        }
+    }
+
+    @Test
+    void prepareDelete_missingBackBackTick_exceptionThrown() {
+        ArrayList<String> expectedResult = new ArrayList<>(
+                Arrays.asList("s/Speaker   B")
+        );
+        try {
+            ArrayList<String> actualResult = parser.prepareDelete(
+                    "s/Speaker   B`");
             assertEquals(expectedResult, actualResult);
             fail();
         } catch (IncompleteCommandException e) {
@@ -291,15 +351,15 @@ class ParserTest {
 
     @Test
     void parseCommand_deleteCommand_success() {
-        Command testCommand = parser.parseCommand("delete s/S1234567E");
-        Command expectedCommand = new DeleteCommand(new ArrayList<>(Collections.singleton("S1234567E")));
+        Command testCommand = parser.parseCommand("delete s/`S1234567E`");
+        Command expectedCommand = new DeleteCommand(new ArrayList<>(Collections.singleton("s/S1234567E")));
         assertEquals(expectedCommand, testCommand);
     }
 
     @Test
     void parseCommand_trailingWhiteSpace_success() {
-        Command testCommand = parser.parseCommand("delete s/S1234567E         ");
-        Command expectedCommand = new DeleteCommand(new ArrayList<>(Collections.singleton("S1234567E")));
+        Command testCommand = parser.parseCommand("delete s/`S1234567E`         ");
+        Command expectedCommand = new DeleteCommand(new ArrayList<>(Collections.singleton("s/S1234567E")));
         assertEquals(expectedCommand, testCommand);
     }
 

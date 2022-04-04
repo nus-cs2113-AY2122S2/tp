@@ -30,8 +30,8 @@ public class Parser {
      * passed into arguments.
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
-    public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)");
-    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)");
+    public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("^(?<itemName>[Nn]/`.+`)$");
+    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("^(?<serialNumber>[Ss]/`.+`)$");
 
     /**
      * Defines regex used to match argument pairs in the command line.
@@ -202,7 +202,8 @@ public class Parser {
     }
 
     /**
-     * Prepare argument for CheckCommand by removing the preceding "n/" prefix.
+     * Prepare argument for CheckCommand by matching the preceding "n/" prefix, setting it to lowercase and verifying
+     * that there are no additional tags.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is item name)
@@ -213,11 +214,13 @@ public class Parser {
         if (!matcher.matches()) {
             throw new IncompleteCommandException("Check command values are incomplete or missing!");
         }
-        return new ArrayList<>(Collections.singleton(matcher.group("itemName")));
+        String argumentPair = reformatArgumentPair(matcher.group("itemName"));
+        return new ArrayList<>(Collections.singleton(argumentPair));
     }
 
     /**
-     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix.
+     * Prepare argument for DeleteCommand by matching the preceding "s/" prefix, setting it to lowercase and verifying
+     * that there are no additional tags.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is serial number)
@@ -228,7 +231,8 @@ public class Parser {
         if (!matcher.matches()) {
             throw new IncompleteCommandException("Delete command values are incomplete or missing!");
         }
-        return new ArrayList<>(Collections.singleton(matcher.group("serialNumber")));
+        String argumentPair = reformatArgumentPair(matcher.group("serialNumber"));
+        return new ArrayList<>(Collections.singleton(argumentPair));
     }
 
     /**
