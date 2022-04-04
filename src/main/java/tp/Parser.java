@@ -133,18 +133,18 @@ public class Parser {
     }
 
     public Command parseSearchCommand(String fullCommand) throws IHospitalException {
-        if (fullCommand.contains("search doctor")) {
+        if (fullCommand.contains("doctor")) {
             String dummy = fullCommand.trim();
-            dummy = dummy.substring(dummy.length() - 4);
-            return new SearchDoctorCommand(dummy);
-        } else if (fullCommand.contains("search patient")) {
+            String index = dummy.substring(dummy.indexOf("doctor ") + 7);
+            return new SearchDoctorCommand(index);
+        } else if (fullCommand.contains("patient")) {
             String dummy = fullCommand.trim();
-            dummy = dummy.substring(dummy.length() - 4);
-            return new SearchPatientCommand(dummy);
-        } else if (fullCommand.contains("search appointment")) {
+            String index = dummy.substring(dummy.indexOf("patient ") + 8);
+            return new SearchPatientCommand(index);
+        } else if (fullCommand.contains("appointment")) {
             String dummy = fullCommand.trim();
-            dummy = dummy.substring(17);
-            return new SearchAppointmentCommand(dummy);
+            String time = dummy.substring(dummy.indexOf("appointment ") + 12).trim();
+            return new SearchAppointmentCommand(time);
         }
         return null;
     }
