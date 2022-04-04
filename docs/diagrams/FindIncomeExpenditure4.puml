@@ -1,3 +1,4 @@
+'@@author tjiarong
 @startuml
 !include style.puml
 skinparam ClassFontColor #000000
@@ -8,15 +9,15 @@ hide empty members
 title After iterating Alice's IncomeList
 
 package " " {
-    class temp as "__tempIncList:MoneyList(temp)__"
+    class temp as "__tempIncList:IncomeList__"
     class Fam as "__family:Family__"
     class MyGen as "__myGen:PersonList__"
     class Alice as "__Alice:Person__"
-    class List as "__IncomeList:MoneyList(temp)__"
-    class Inc0 as "__Income0:Money(temp)__" #LIGHTGREEN {
+    class List as "__IncomeList:IncomeList__"
+    class Inc0 as "__Income0:Income__" #LIGHTGREEN {
         description = "Bills Rebate"
     }
-    class Inc1 as "__Income0:Money(temp)__" #LIGHTGREEN {
+    class Inc1 as "__Income0:Income__" #LIGHTGREEN {
         description = "Bills Rebate"
     }
 }
@@ -27,9 +28,9 @@ MyGen -> Alice
 
 Alice -down-> List
 
-Inc0 -up[#GREEN]-> List
-Inc1 -up[#GREEN]-> temp
+List -d[#GREEN]-> Inc0
+temp -d[#GREEN]> Inc1
 
-temp-[HIDDEN]>Fam
+temp-l[HIDDEN]>Fam
 
 @end

@@ -18,23 +18,22 @@ public class Parser {
     protected static final String fileName = className + ".log";
     protected static final ProjectLogger logger = new ProjectLogger(className, fileName);
 
-    public static final String DELIMITER_SPACE = " ";
-    public static final String DELIMITER_NAME = "/n";
-    public static final String DELIMITER_USER_INDEX = "/u";
-    public static final String DELIMITER_DESCRIPTION = "/d";
-    public static final String DELIMITER_INCOME = "/i";
-    public static final String DELIMITER_EXPENDITURE = "/e";
-    public static final String DELIMITER_RECORD_INDEX = "/r";
-    public static final String DELIMITER_RECURRING_STATUS = "/p";
-    public static final String DELIMITER_CATEGORY_INDEX = "/c";
-    public static final String DELIMITER_GROUP_INDEX = "/g";
-    public static final String DELIMITER_BACK = "/[cringedup]";
-    public static final String EMPTY_STRING = "";
-    // public static final String DELIMITER_MONEY = ".";
+    protected static final String DELIMITER_SPACE = " ";
+    protected static final String DELIMITER_NAME = "/n";
+    protected static final String DELIMITER_USER_INDEX = "/u";
+    protected static final String DELIMITER_DESCRIPTION = "/d";
+    protected static final String DELIMITER_INCOME = "/i";
+    protected static final String DELIMITER_EXPENDITURE = "/e";
+    protected static final String DELIMITER_RECORD_INDEX = "/r";
+    protected static final String DELIMITER_RECURRING_STATUS = "/p";
+    protected static final String DELIMITER_CATEGORY_INDEX = "/c";
+    protected static final String DELIMITER_GROUP_INDEX = "/g";
+    protected static final String DELIMITER_BACK = "/[cringedup]";
+    protected static final String EMPTY_STRING = "";
+    protected static final String DELIMITER_MONEY = ".";
 
     protected static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
     protected static final String ASSERT_MONEY_NOT_NULL = "Money input should not be null";
-    // protected static final String ASSERT_MONEY_NON_NEGATIVE = "Money output should be non-negative";
     protected static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
     protected static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
     protected static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
@@ -239,13 +238,7 @@ public class Parser {
         try {
             Double checkMoney = Double.parseDouble(amount);
             ParserUtility.checkNegativeMoney(checkMoney);
-            //if (amount.contains(DELIMITER_MONEY)) {
-            //    String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
-            //    if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
-            //        to be caught immediately within this method
-            //        throw new NumberFormatException();
-            //    }
-            //}
+            ParserUtility.checkTwoDecimalPlace(amount);
             logger.log(Level.INFO, String.format(LOG_VALID_MONEY, amount, checkMoney));
             return checkMoney;
         } catch (NumberFormatException e) {

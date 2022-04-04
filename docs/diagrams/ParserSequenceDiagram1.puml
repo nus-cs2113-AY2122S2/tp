@@ -5,8 +5,8 @@ skinparam noteTextAlignment left
 
 Title : Execute() for command "deletein /u 1 /g 2 /r 1"
 
-Participant "<color:pink><<Class>>\nParser" as Parser LOGIC_COLOR_T4
-Participant "<color:pink><<Class>>\nParserUtility" as UParser LOGIC_COLOR_T2
+Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
+Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 
 [-> Parser : parseKeyword(userInput:String)
 activate Parser

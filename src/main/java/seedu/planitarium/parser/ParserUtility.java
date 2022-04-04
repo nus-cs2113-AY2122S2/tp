@@ -10,8 +10,9 @@ import seedu.planitarium.global.Constants;
 import java.util.logging.Level;
 
 public class ParserUtility {
-    // this static string is solely for JUnit testing
+    // these static strings are solely for JUnit testing
     private static final String THROW_NEGATIVE_MONEY = "Money is negative";
+    private static final String THROW_NOT_TWO_DP = "Money is not 2dp";
 
     /**
      * Returns the term surrounded by two delimiters.
@@ -47,6 +48,22 @@ public class ParserUtility {
     protected static void checkNegativeMoney(double checkMoney) throws NumberFormatException {
         if (Double.compare(checkMoney, Constants.MONEY_ZERO) < 0) {
             throw new NumberFormatException(THROW_NEGATIVE_MONEY);
+        }
+    }
+
+    /**
+     * Returns without exception if the value provided is at most 2 decimal places.
+     *
+     * @param amount The amount to be checked for 2 decimal placing.
+     * @throws NumberFormatException if the value provided has more than 2 decimal places.
+     */
+    protected static void checkTwoDecimalPlace(String amount) throws NumberFormatException {
+        if (amount.contains(Parser.DELIMITER_MONEY)) {
+            int lengthWithDot = amount.length();
+            int positionOfDot = amount.indexOf(Parser.DELIMITER_MONEY);
+            if ((lengthWithDot - positionOfDot) > Constants.LIMIT_TWO_DECIMAL) {
+                throw new NumberFormatException(THROW_NOT_TWO_DP);
+            }
         }
     }
 

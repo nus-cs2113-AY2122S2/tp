@@ -6,26 +6,26 @@
 
 Package " "<<Rectangle>>{
     Class UI UI_COLOR
-    Class Commands LOGIC_COLOR
+    Class Commands COMMAND_COLOR
     Class Storage STORAGE_COLOR
     Class Family MODEL_COLOR
-    Class MoneyList MODEL_COLOR_T3
+    Class MoneyList MONEY_COLOR
     Class Main #grey
-    Class Parser LOGIC_COLOR_T2
+    Class Parser LOGIC_COLOR
 }
 
 Class "<$user>\nUser" as User MODEL_COLOR_T2
-Class "<$documents>\nSaved Data" as File UI_COLOR_T2
+Class "<$documents>\nSaved Data" as File STORAGE_COLOR_T3
 
 Main -right[#grey]->UI
 Main -down[#grey]->Family
 Main -right[#grey]->Commands
 Main -down[#grey]->Storage
 
-Commands -up[#blue]->UI
-Commands -left[#blue]->Family
-Commands -down[#blue].>Storage
-Commands -down[#blue].>Parser
+Commands -up[COMMAND_COLOR]->UI
+Commands -left[COMMAND_COLOR]->Family
+Commands -down[COMMAND_COLOR].>Storage
+Commands -down[COMMAND_COLOR].>Parser
 
 Family -down[MODEL_COLOR]->MoneyList
 

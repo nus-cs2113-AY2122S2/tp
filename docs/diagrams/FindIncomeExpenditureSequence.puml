@@ -1,17 +1,17 @@
 @startuml
 !include style.puml
 
-box " " #WHITE
-    participant "c:FindCommand" as Commands LOGIC_COLOR
-    participant "<color:coral><<class>>\nParser" as Parser LOGIC_COLOR_T4
+box " "
+    participant "c:FindCommand" as Commands COMMAND_COLOR_T1
+    participant "<<Class>>\nParser" as Parser LOGIC_COLOR
     participant ":Family" as Family MODEL_COLOR
-    participant ":PersonList" as PList MODEL_COLOR
-    participant ":Person" as Person MODEL_COLOR
-    participant ":ExpenditureList" as EList MODEL_COLOR_T3
-    participant ":Expense" as Exp MODEL_COLOR_T3
-    participant ":IncomeList" as IList MODEL_COLOR_T3
-    participant ":Income" as Inc MODEL_COLOR_T3
-    participant "<color:coral><<class>>\nUI" as UI UI_COLOR_T3
+    participant ":PersonList" as PList MODEL_COLOR_T3
+    participant ":Person" as Person MODEL_COLOR_T2
+    participant ":ExpenditureList" as EList MONEY_COLOR
+    participant ":Expense" as Exp MONEY_COLOR_T1
+    participant ":IncomeList" as IList MONEY_COLOR
+    participant ":Income" as Inc MONEY_COLOR_T1
+    participant "<<Class>>\nUI" as UI UI_COLOR
 end box
 
 [-> Commands : execute(find /d Bills /c 1)
@@ -32,7 +32,7 @@ loop for each Generation
     PList --> Family
     deactivate PList
 
-    loop for each Person
+    loop LOOP_COLOR for each Person
         Family -> Person : getPerson()
         activate Person
         Person --> Family : p

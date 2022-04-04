@@ -51,7 +51,7 @@ public class Constants {
     public static final int MIN_INCOME_INDEX = 1;
     public static final int MIN_CATEGORY_INDEX = 1;
     public static final int MIN_GROUP_INDEX = 1;
-    // public static final int LIMIT_TWO_DECIMAL = 2; // placeholder
+    public static final int LIMIT_TWO_DECIMAL = 3;
     public static final double MONEY_ZERO = 0.0;
 
     // For Help component
@@ -70,11 +70,21 @@ public class Constants {
             + "/g GROUP_INDEX /r EXPENDITURE_INDEX";
     public static final String EDIT_EXPEND = "Edit an expenditure: editout /u USER_INDEX /g GROUP_INDEX "
             + "/r EXPENDITURE_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|(any)>";
-    public static final String LIST = "List records by person: list /g GROUP_INDEX";
-    public static final String OVERVIEW = "List records by group: overview";
+    public static final String LIST = "List records for person in group: list /g GROUP_INDEX";
+    public static final String OVERVIEW = "Show financial summary for each group: overview";
     public static final String LISTCAT = "List categories: listcat";
     public static final String FIND = "Searching for details: find /d USER_STRING [/c CATEGORY_INDEX]";
     public static final String EXIT = "Exit program: bye";
+    public static final String PARAMETER_NAME = "/n NAME refers to your name";
+    public static final String PARAMETER_GID = "/g GROUP_INDEX refers to a group index found in 'overview'";
+    public static final String PARAMETER_UID = "/u USER_INDEX refer a user index found in 'list'";
+    public static final String PARAMETER_DESC = "/d DESCRIPTION refers to a description string input";
+    public static final String PARAMETER_CID = "/c CATEGORY_INDEX refers to a category index found in 'listcat'";
+    public static final String PARAMETER_INCOME = "/i INCOME refers to an income monetary value";
+    public static final String PARAMETER_EXPENDITURE = "/e EXPENDITURE refers to an expenditure monetary value";
+    public static final String PARAMETER_RECORDS = "/r X_INDEX refers to an index for income/expenditure found in"
+            + "'list'";
+    public static final String PARAMETER_RECURRING = "/p <T/(any)> refers to 'T' for recurring, or any input otherwise";
 
     // For Command assertion
     public static final String NAME_NOT_NULL = "Name should not be null";

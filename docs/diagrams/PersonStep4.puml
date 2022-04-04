@@ -1,13 +1,13 @@
 @startuml
-autonumber
-hide footbox
+
+!include style.puml
 
 title When user calls "list"
 
 box
-participant ":Command" as Command
-participant ":Family" as Family
-participant ":PersonList" as PersonList
+participant ":Command" as Command COMMAND_COLOR
+participant ":Family" as Family MODEL_COLOR
+participant ":PersonList" as PersonList MODEL_COLOR_T3
 
 [-> Command : execute(list)
 activate Command
