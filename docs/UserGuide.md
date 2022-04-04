@@ -99,10 +99,10 @@ Some Mod Happy commands require you to provide a duration. You can specify these
 
 #### Format: `DURATION_AMOUNT DURATION_UNIT`
 
-- `DURATION_AMOUNT`: Any positive number less than one billion (1000000000), including decimals.
+- `DURATION_AMOUNT`: Any positive number less than or equal to one billion (1000000000), including decimals.
 - `DURATION_UNIT`: The time unit that `DURATION_AMOUNT` is specified in. Mod Happy supports the following units:
   - Hours: `h`, `H`, `hour`, `Hour`, `hours`, `Hours`
-  - Minutes: `m`, `M`, `min`, `Min`, `minutes`, `Minutes`
+  - Minutes: `m`, `M`, `min`, `Min`,`mins`, `Mins`, `minute`, `Minute`, `minutes`, `Minutes`
   
 > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
 >
@@ -114,12 +114,8 @@ Some Mod Happy commands require you to provide a duration. You can specify these
 
 ### 4.1. Accessing help: `help`
 
-Shows you help text for the command word supplied. If no command word is supplied, you will be shown a generic help message instead.
-
-#### Format: `help [COMMAND_WORD]`
-
-- `COMMAND_WORD`: The command you wish to view the help message for.
-
+- Shows you a generic help message instead.
+  #### Format: `help`
   ##### Example 1:
   ```
   > help
@@ -136,7 +132,13 @@ Shows you help text for the command word supplied. If no command word is supplie
   Optional parameters are in square brackets: e.g. [-d MODULE_DESCRIPTION]
   ____________________________________________________________
   ```
-  ##### Example 2:
+- Shows you help text for the command word supplied. 
+ 
+  #### Format: `help [COMMAND_WORD]`
+
+  - `COMMAND_WORD`: The command you wish to view the help message for.
+  
+  ##### Example:
   ```
   > help add
   ```
@@ -616,15 +618,15 @@ The following configuration options currently exist:
 
 |                  Command                   | Format                                                                                                                                                                                   |
 |:------------------------------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|      [help](#41-accessing-help-help)       | `help [COMMAND_WORD]`                                                                                                                                                                    |
-|   [option](#42-accessing-options-option)   | `option`<br>`option CONFIG_NAME`<br>`option CONFIG_NAME=NEW_VALUE`                                                                                                                       |
-|     [add](#43-adding-a-taskmodule-add)     | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`                         |
-|    [del](#44-deleting-a-taskmodule-del)    | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`                                                                                                                         |
-|   [edit](#45-editing-a-taskmodule-edit)    | <code>edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME")</code> <br> `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` |
-|      [mark](#46-marking-a-task-mark)       | <code>mark (c &#124; u) TASK_NUMBER [-m MODULE_CODE]</code>                                                                                                                              |
-|    [tag](#47-managing-custom-tags-tag)     | <code>tag (add &#124; del) [-m MODULE_CODE] TAG_NAME</code>                                                                                                                              |
-|     [list](#48-listing-all-tasks-list)     | `list [TAG_NAME]`                                                                                                                                                                        |
-| [grade](#49-setting-a-modules-grade-grade) | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                         |
-|        [gpa](#410-viewing-gpa-gpa)         | `gpa`                                                                                                                                                                                    |
-| [reset](#411-resetting-the-program-reset)  | `reset`                                                                                                                                                                                  |
-|     [save](#412-saving-your-data-save)     | `save`                                                                                                                                                                                   |
+|      [help](#41-accessing-help-help)       | `help [COMMAND_WORD]`<br> <br> e.g: <pre> > help <br> > help add</pre>
+|   [option](#42-accessing-options-option)   | `option`<br>`option CONFIG_NAME`<br>`option CONFIG_NAME=NEW_VALUE`  <br> <br> e.g: <pre> > option <br> > option SHOW_COMPLETED_TASKS <br> > option SHOW_COMPLETED_TASKS=true </pre>                                                                                                                     |
+|     [add](#43-adding-a-taskmodule-add)     | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`  <br> <br> e.g: <pre> > add mod CS2101 4 <br> > add mod CS2113T 4 -d "Software Engineering" <br> > add task "Review PR"<br> > add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour" </pre>                      |
+|    [del](#44-deleting-a-taskmodule-del)    | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`     <br> <br> e.g: <pre> > del task 1 <br> > del task 1 -m CS2113T</pre>                                                                                                                    |
+|   [edit](#45-editing-a-taskmodule-edit)    | <code>edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME")</code> <br> `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` <br> <br> e.g: <pre> > edit task 1 -m CS2113T -n "CS2113T Tutorial 2" </pre>       |
+|      [mark](#46-marking-a-task-mark)       | <code>mark (c &#124; u) TASK_NUMBER [-m MODULE_CODE]</code>       <br> <br> e.g: <pre> > mark c 1  <br> > mark u 1 -m CS2113T </pre>                                                                                                                          |
+|    [tag](#47-managing-custom-tags-tag)     | <code>tag (add &#124; del) [-m MODULE_CODE] TAG_NAME</code>    <br> <br> e.g: <pre> > tag add 1 -m CS2113T project </pre>                                                                                                                            |
+|     [list](#48-listing-all-tasks-list)     | `list [TAG_NAME]`     <br> <br> e.g: <pre> > list <br> list project </pre>                                                                                                                                                                    |
+| [grade](#49-setting-a-modules-grade-grade) | `grade MODULE_CODE MODULE_GRADE`        <br> <br> e.g: <pre> > grade CS2113T A+ </pre>                                                                                                                                                        |
+|        [gpa](#410-viewing-gpa-gpa)         | `gpa`      <br> <br> e.g: <pre> > gpa </pre>                                                                                                                                                                                |
+| [reset](#411-resetting-the-program-reset)  | `reset`     <br> <br> e.g: <pre> > reset </pre>                                                                                                                                                                               |
+|     [save](#412-saving-your-data-save)     | `save`        <br> <br> e.g: <pre> > save </pre>                                                                                                                                                                             |
