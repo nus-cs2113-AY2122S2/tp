@@ -53,7 +53,7 @@ public class Dish implements Serializable {
     }
 
     public String toString() {
-        return String.format("%-30s $%.2f", name, price);
+        return String.format("%-30s $%.1f", name, price);
     }
 
     public boolean isValid() {

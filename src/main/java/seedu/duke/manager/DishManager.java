@@ -59,9 +59,11 @@ public class DishManager extends Manager {
             return "You haven't got a dish in menu!";
         }
         StringBuilder builder = new StringBuilder();
+        builder.append("----------------------------------------------\n");
         for (int i = 0; i < dishes.size(); i++) {
             builder.append(String.format("%d. %s\n", i + 1, dishes.get(i)));
         }
+        builder.append("----------------------------------------------\n");
         builder.deleteCharAt(builder.length() - 1);
         return builder.toString();
     }

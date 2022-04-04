@@ -98,7 +98,7 @@ public class DishController extends Controller {
             System.out.println("Please make sure the index is valid");
             return;
         }
-        double newPrice = InputParser.getDouble("The new price of dish: ");
+        double newPrice = InputParser.getDouble("The new price (will be rounded into 1 decimal place) of dish: ");
         try {
             dishManager.setPrice(index, newPrice);
         } catch (IllegalArgumentException e) {
@@ -125,7 +125,7 @@ public class DishController extends Controller {
         MainLogger.logInfo(this, "User is adding dish");
         System.out.println("Adding new dish...");
         String name = InputParser.getString("The name of dish: ");
-        double price = InputParser.getDouble("The price of dish: ");
+        double price = InputParser.getDouble("The price (will be rounded into 1 decimal place) of dish: ");
         try {
             dishManager.addDish(new Dish(name, price));
         } catch (IllegalArgumentException e) {
