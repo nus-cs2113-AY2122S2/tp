@@ -170,13 +170,17 @@ the future. Thus, we have this standalone section specifically kept for exercise
 ---
 
 ### Workout-related features
+
+Format: `workout /commandAction <condition>`
+
 Below is a class diagram of the workout-related features:
+
 ![WorkoutUML](uml/classDiagrams/images/workoutRelatedFeatures.png)
 <br>
 
 The `Parser` class will call the `Parser#parseUserInput(userInput)` method
 to analyse the user's command. If the user's command is of type 
-`workout`, i.e. `workout /commandAction <condition>`, the `Parser#parseUserInput(userInput)` method
+`workout`, the `Parser#parseUserInput(userInput)` method
 will parse the `workout` base word and proceed to create a `WorkoutCommand` object via the
 `Parser#createWorkoutCommand(userInput)` method. 
 <br><br>
