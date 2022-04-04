@@ -95,7 +95,17 @@ Wrote JUnit test cases for WerkIt! The summary of the test cases I have written 
 [To be updated]
 
 ### Contributions Beyond the Project Team
-[To be updated]
+Provided feedback and potential bug reports to another team's project 
+[(CS2113T-T11-1's HotelLite Manager)](https://ay2122s2-cs2113-t11-1.github.io/tp/UserGuide.html) 
+as part of the Practical Exam Dry-Run (PED). 
+* Screenshot of one of the high severity bug reported ![Severe Bug](../images/ppp/emilysim00/severeBug1.png)
+The application is unable to remove the housekeeper if they are being assigned to a hotel room. The programs terminate
+straight without proper exception handling. Click [here](https://github.com/emilysim00/ped/issues/8) to view the issues in GitHub.
+
+* Another high severity bug reported is on the file management of one of its feature. To find out more details on this 
+bug, click [here](https://github.com/emilysim00/ped/issues/10).
+
+More reported bugs can be found [here](https://github.com/emilysim00/ped/issues)
 
 ---
 
