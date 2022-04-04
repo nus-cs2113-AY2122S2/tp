@@ -129,7 +129,7 @@ public class DishController extends Controller {
         try {
             dishManager.addDish(new Dish(name, price));
         } catch (IllegalArgumentException e) {
-            System.out.println("Please make sure the name is not empty and price is positive");
+            System.out.println("Please make sure the name is not empty and price is non-negative");
         }
     }
 
