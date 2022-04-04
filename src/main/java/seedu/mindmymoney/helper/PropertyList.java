@@ -42,12 +42,18 @@ public class PropertyList {
     }
 
     /**
-     * Retrieves the value associated with the given property.
+     * Retrieves the value associated with the given property. If the property does not exist,
+     * throw a MindMyMoneyException whose message is the property.
      * @param property The property whose value to retrieve.
      * @return The value.
+     * @throws MindMyMoneyException if the property is not in the PropertyList.
      */
-    public String getValue(String property) {
-        return properties.get(property);
+    public String getValue(String property) throws MindMyMoneyException {
+        String value = properties.get(property);
+        if (value == null) {
+            throw new MindMyMoneyException(property);
+        }
+        return value;
     }
 
     /**

@@ -68,6 +68,10 @@ public class Income implements MindMyMoneySerializable {
                     plist.getValue("category"));
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Invalid number for amount during deserialization of " + serialized);
+        } catch (MindMyMoneyException e) {
+            String missingProperty = e.getMessage();
+            throw new MindMyMoneyException("Line [" + serialized + "] does not contain required value "
+                    + missingProperty);
         }
     }
 }
