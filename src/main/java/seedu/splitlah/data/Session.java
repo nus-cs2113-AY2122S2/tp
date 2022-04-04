@@ -95,8 +95,12 @@ public class Session implements Serializable, Comparable<Session> {
      *
      * @return An ArrayList object containing Person objects that are part of the session.
      */
-    public ArrayList<Person> getPersonList() {
+    public ArrayList<Person> getPersonArrayList() {
         return personList.getPersonList();
+    }
+
+    public PersonList getPersonList() {
+        return personList;
     }
 
     /**
