@@ -1,6 +1,7 @@
 @startuml
 !include style.puml
 
+box
 Actor User USER_COLOR
 Participant Main #grey
 Participant Commands COMMAND_COLOR
@@ -9,6 +10,7 @@ Participant Family MODEL_COLOR
 Participant Money MONEY_COLOR
 Participant UI UI_COLOR
 Participant Storage STORAGE_COLOR
+end box
 
 User -> Main : "add /g 2 /n Alice"
 
@@ -16,7 +18,7 @@ activate Main
 Main -> Commands : getCommand("add /g 2 /n Alice")
 
 activate Commands
-Commands -> Parser : parseKeyword("add /g 2 /n Alice")
+Commands -> Parser : parseKeyword(\n"add /g 2 /n Alice")
 
 activate Parser
 Parser --> Commands
