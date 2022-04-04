@@ -48,7 +48,9 @@ public class AddCommand extends ModificationCommand {
      */
     public CommandResult execute() {
         if (!checkAttributes()) {
-            return new CommandResult(ATTRIBUTE_NOT_SET_ERROR);
+            return new CommandResult(ATTRIBUTE_NOT_SET_ERROR
+                    + System.lineSeparator()
+                    + usageReminder);
         }
 
         try {
