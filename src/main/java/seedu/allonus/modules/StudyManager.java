@@ -24,9 +24,6 @@ import java.util.regex.Pattern;
  * Represents the class that will handle Modules created by the user.
  */
 public class StudyManager {
-
-
-
     private static ArrayList<Module> modulesList = new ArrayList<>();
 
     /**
@@ -56,6 +53,21 @@ public class StudyManager {
             + "classes.";
     public static final String STRING_SPACE_CHARACTER = " ";
     public static final String EMPTY_STRING = "";
+    public static final String REGEX_MODULE_CODE = "^[a-zA-Z0-9]+$";
+    public static final String REGEX_MODULE_DAY = "([sS]unday|[mM]onday|[tT]uesday|[wW]ednesday|[tT]hursday"
+            + "|[fF]riday|[sS]aturday)";
+    public static final String REGEX_MODULE_TIME = "(0?[1-9]|1[0-2]):([0-5]?\\d)\\s*([pa]m)\\s*"
+            + "-\\s*(0?[1-9]|1[0-2]):([0-5]?\\d)\\s*([pa]m)";
+    public static final String REGEX_MODULE_DATE = "^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$";
+    public static final String WRONG_DAY_FORMAT_MESSAGE = "Accepted module day inputs are either a day of "
+            + "the week or a valid date of type DD-MM-YYYY";
+    public static final String WRONG_CODE_FORMAT_MESSAGE = "Your module code must be an alphanumeric parameter!";
+
+
+    public static final String INVALID_DATE_MESSAGE = "You have entered an invalid date";
+    public static final String INVALID_WEEKDAY_MESSAGE = "You have entered an invalid day of the week";
+    public static final String WRONG_TIME_FORMAT_MESSAGE = "Accepted module time slot input is"
+            + " a valid timeslot of type HH:MMam/pm - HH:MMam/pm";
 
     /**
      * Edit module messages.
@@ -63,8 +75,10 @@ public class StudyManager {
     private static final String EDIT_MODULE_OPENING_MESSAGE = "Here is the module that you have chosen to edit:";
     private static final String EDIT_MODULE_CHOOSE_MESSAGE = "Choose the part that you would like to edit:";
     private static final String EDIT_MODULE_SUCCESS_MESSAGE = "Your Module was successfully edited! "
-            + "Here are the changes";
+            + "Here are the changes:";
     private static final String EDIT_MODULE_EXIT_MESSAGE = "Exiting the edit mode";
+    public static final String EDIT_MODULE_CHANGES_MESSAGE = "Here are the changes so far. "
+            + "You can edit more module parameters or you can enter 'done' to stop editing!";
     private static final String EDIT_NO_MODULES_ERROR = "There are no modules to edit!";
     private static final String EDIT_NO_INDEX_ERROR = "Please enter the index of the module you would like to edit";
     private static final String LOGGER_WRONG_EDIT_INDEX = "wrong index for edit";
@@ -97,6 +111,9 @@ public class StudyManager {
     private static final String FIND_NO_MATCHES_MESSAGE = "There are no modules that match";
     private static final String FIND_LIST_MATCHES_MESSAGE = "Here are the matching modules in your list:";
     private static final String LOGGER_NO_FIND_QUERY = "no search query was entered for find";
+    public static final String FIND_MISSING_QUERY_MESSAGE = "You have not entered a search keyword to find modules!";
+    public static final String FIND_SPECIAL_CHARACTERS_MESSAGE = "You have entered a special character."
+            + " Please refine your search query!";
 
     /**
      * List modules messages.
@@ -315,8 +332,11 @@ public class StudyManager {
             if (moduleTime.equals("")) {
                 throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
             }
+            moduleTime = validateModuleTime(moduleTime);
             moduleToEdit.setTimeSlot(moduleTime);
+            printMessage(EDIT_MODULE_CHANGES_MESSAGE);
             printMessage(moduleToEdit.toString());
+
         } catch (ModuleTimeException e) {
             printMessage(e.getMessage());
         }
@@ -328,8 +348,11 @@ public class StudyManager {
             if (moduleDay.equals("")) {
                 throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
             }
+            moduleDay = validateModuleDay(moduleDay);
             moduleToEdit.setDay(moduleDay);
+            printMessage(EDIT_MODULE_CHANGES_MESSAGE);
             printMessage(moduleToEdit.toString());
+
         } catch (ModuleDayException e) {
             printMessage(e.getMessage());
         }
@@ -342,7 +365,9 @@ public class StudyManager {
             if (moduleCode.equals("")) {
                 throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
             }
+            moduleCode = validateModuleCode(moduleCode);
             moduleToEdit.setModuleCode(moduleCode);
+            printMessage(EDIT_MODULE_CHANGES_MESSAGE);
             printMessage(moduleToEdit.toString());
         } catch (ModuleCodeException e) {
             printMessage(e.getMessage());
@@ -357,6 +382,7 @@ public class StudyManager {
             }
             moduleCategory = validateModuleCategory(moduleCategory);
             moduleToEdit.setCategory(moduleCategory);
+            printMessage(EDIT_MODULE_CHANGES_MESSAGE);
             printMessage(moduleToEdit.toString());
         } catch (ModuleCategoryException e) {
             printMessage(e.getMessage());
@@ -490,11 +516,10 @@ public class StudyManager {
         String moduleKeyword = userInput.replace(FIND_COMMAND + STRING_SPACE_CHARACTER, EMPTY_STRING);
         if (moduleKeyword.equals(STRING_SPACE_CHARACTER) || moduleKeyword.equals(EMPTY_STRING)
                 || !userInput.contains(" ")) {
-            throw new InvalidFindInputException("You have not entered a search keyword to find modules!");
+            throw new InvalidFindInputException(FIND_MISSING_QUERY_MESSAGE);
         } else if (moduleKeyword.equals(":") || moduleKeyword.equals("[") || moduleKeyword.equals("]")
                 || moduleKeyword.equals(",") || moduleKeyword.equals("-")) {
-            throw new InvalidFindInputException("You have entered a special character."
-                    + " Please refine your search query!");
+            throw new InvalidFindInputException(FIND_SPECIAL_CHARACTERS_MESSAGE);
         }
         return moduleKeyword;
     }
@@ -542,11 +567,25 @@ public class StudyManager {
                 throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
             } else {
                 module = parameters[0].substring(2);
+                module = validateModuleCode(module);
             }
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
         }
         return module;
+    }
+
+    private String validateModuleCode(String code) throws ModuleCodeException {
+        String regexModuleCode = REGEX_MODULE_CODE;
+        Pattern pattern = Pattern.compile(regexModuleCode);
+        Matcher matcher = pattern.matcher(code);
+        String moduleCode = null;
+        if (matcher.find()) {
+            moduleCode = matcher.group().trim();
+            return moduleCode;
+        } else {
+            throw new ModuleCodeException(WRONG_CODE_FORMAT_MESSAGE);
+        }
     }
 
     /**
@@ -608,11 +647,49 @@ public class StudyManager {
                 throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
             } else {
                 day = parameters[2].substring(2);
+                day = validateModuleDay(day);
             }
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
+        } catch (IllegalArgumentException e) {
+            throw new ModuleDayException(e.getMessage());
         }
         return day;
+    }
+
+    private String validateModuleDay(String day) throws ModuleDayException {
+        //accepts either day of the week or, day of the week and a day'
+        String regexDay = REGEX_MODULE_DAY;
+        String regexDate = REGEX_MODULE_DATE;
+
+        Pattern pattern = Pattern.compile(regexDay);
+        Matcher matcher = pattern.matcher(day);
+
+        Pattern patternDate = Pattern.compile(regexDate);
+        Matcher matcherDate = patternDate.matcher(day);
+
+        String dayOfWeek = null;
+        String date = null;
+        if (matcher.find()) {
+            dayOfWeek = matcher.group().trim();
+        }
+        if (matcherDate.find()) {
+            date = matcherDate.group().trim();
+        }
+
+        if (date != null && dayOfWeek == null) {
+            return date;
+        }
+        if (date == null && dayOfWeek != null) {
+            return dayOfWeek;
+        } else {
+            if (day.matches(".*\\d.*")) {
+                printMessage(INVALID_DATE_MESSAGE);
+            } else {
+                printMessage(INVALID_WEEKDAY_MESSAGE);
+            }
+            throw new ModuleDayException(WRONG_DAY_FORMAT_MESSAGE);
+        }
     }
 
     /**
@@ -629,12 +706,28 @@ public class StudyManager {
                 throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
             } else {
                 time = parameters[3].substring(2);
+                time = validateModuleTime(time);
             }
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
         }
         return time;
     }
+
+    private String validateModuleTime(String time) throws ModuleTimeException {
+        String regexTimeSlot = REGEX_MODULE_TIME;
+        Pattern pattern = Pattern.compile(regexTimeSlot);
+        Matcher matcher = pattern.matcher(time);
+        String timeSlot = null;
+        if (matcher.find()) {
+            timeSlot = matcher.group().trim();
+            return timeSlot;
+        } else {
+            throw new ModuleTimeException(WRONG_TIME_FORMAT_MESSAGE);
+        }
+
+    }
+
 
 }
 
