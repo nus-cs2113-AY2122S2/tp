@@ -2,10 +2,9 @@ package seedu.duke.commands;
 
 import java.util.Objects;
 
-import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
+import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.Grades;
@@ -32,7 +31,7 @@ public class GradeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws NoSuchModuleException {
         Module targetModule = moduleList.getModule(moduleCode);
         addGradeToModule(targetModule);
         return new CommandResult(result);
@@ -41,10 +40,7 @@ public class GradeCommand extends Command {
     /**
      * Sets grade of the specified module.
      */
-    public void addGradeToModule(Module m) throws ModHappyException {
-        if (Objects.isNull(m)) {
-            throw new NoSuchModuleException();
-        }
+    public void addGradeToModule(Module m) {
         boolean hasGrade = !Objects.equals(m.getModuleGrade(), Grades.NOT_ENTERED);
         if (hasGrade) {
             result = String.format(GRADE_CHANGED_MESSAGE, moduleCode);
