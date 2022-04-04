@@ -1,7 +1,6 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;

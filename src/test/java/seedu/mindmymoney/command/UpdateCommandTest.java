@@ -118,12 +118,12 @@ public class UpdateCommandTest {
      */
     @Test
     void updateCreditCardCommand_updateCreditCard_listUpdated() {
-        CreditCard testCreditCard = new CreditCard("DBS", 2, 1000, 1000);
-        CreditCard newCreditCard = new CreditCard("DBS", 5, 2000, 2000);
+        CreditCard testCreditCard = new CreditCard("DBS", 2, 1000);
+        CreditCard newCreditCard = new CreditCard("DBS", 5, 2000);
         User testUser = new User();
         testUser.setCreditCardListArray(new CreditCardList());
         testUser.getCreditCardListArray().add(testCreditCard);
-        String input = "/cc 1 /n DBS /cb 5 /cl 2000 /bal 2000";
+        String input = "/cc 1 /n DBS /cb 5 /cl 2000";
         UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         try {
             updateCommand.executeCommand();
@@ -140,7 +140,7 @@ public class UpdateCommandTest {
      */
     @Test
     void updateCreditCardCommand_invalidInput_exceptionThrown() {
-        CreditCard testCreditCard = new CreditCard("DBS", 2, 1000, 1000);
+        CreditCard testCreditCard = new CreditCard("DBS", 2, 1000);
         User testUser = new User();
         testUser.setCreditCardListArray(new CreditCardList());
         testUser.getCreditCardListArray().add(testCreditCard);
@@ -154,7 +154,7 @@ public class UpdateCommandTest {
      */
     @Test
     void updateCreditCardCommand_updateFieldSimilarToCreditCardInList_exceptionThrown() {
-        CreditCard testCreditCard = new CreditCard("DBS", 2, 1000, 1000);
+        CreditCard testCreditCard = new CreditCard("DBS", 2, 1000);
         User testUser = new User();
         testUser.setCreditCardListArray(new CreditCardList());
         testUser.getCreditCardListArray().add(testCreditCard);

@@ -89,7 +89,7 @@ class AddCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
-        creditCardTestList.add(new CreditCard("posb",0.05,500,500));
+        creditCardTestList.add(new CreditCard("posb",0.05,500));
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         String inputString = "/pm posb /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
 
