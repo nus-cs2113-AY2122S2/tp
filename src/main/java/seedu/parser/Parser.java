@@ -72,10 +72,14 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER);
         }
 
-        switch (commandAndArgument.get(0)) {
+        // only arguments is trimmed because commandWord is split on the first space
+        String commandWord = commandAndArgument.get(0);
+        String arguments = commandAndArgument.get(1).trim();
+
+        switch (commandWord) {
         case AddCommand.COMMAND_WORD:
             try {
-                args = extractArguments(commandAndArgument.get(1));
+                args = extractArguments(arguments);
                 return new AddCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(AddCommand.COMMAND_WORD + AddCommand.COMMAND_DESCRIPTION);
@@ -86,21 +90,21 @@ public class Parser {
             }
         case CheckCommand.COMMAND_WORD:
             try {
-                args = prepareCheck(commandAndArgument.get(1));
+                args = prepareCheck(arguments);
                 return new CheckCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(CheckCommand.COMMAND_WORD + CheckCommand.COMMAND_DESCRIPTION);
             }
         case DeleteCommand.COMMAND_WORD:
             try {
-                args = prepareDelete(commandAndArgument.get(1));
+                args = prepareDelete(arguments);
                 return new DeleteCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(DeleteCommand.COMMAND_WORD + DeleteCommand.COMMAND_DESCRIPTION);
             }
         case UpdateCommand.COMMAND_WORD:
             try {
-                args = extractArguments(commandAndArgument.get(1));
+                args = extractArguments(arguments);
                 return new UpdateCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
@@ -110,10 +114,10 @@ public class Parser {
                 return new IncorrectCommand(ModificationCommand.INVALID_TYPE_MESSAGE);
             }
         case ListCommand.COMMAND_WORD:
-            if (commandAndArgument.get(1) == null) {
+            if (arguments == null) {
                 return new ListCommand();
             } else {
-                args = new ArrayList<>(Collections.singleton(commandAndArgument.get(1).toUpperCase(Locale.ROOT)));
+                args = new ArrayList<>(Collections.singleton(arguments.toUpperCase(Locale.ROOT)));
                 return new ListCommand(args);
             }
         case HelpCommand.COMMAND_WORD:
@@ -184,7 +188,7 @@ public class Parser {
      * @throws IncompleteCommandException if no match found
      */
     protected ArrayList<String> prepareCheck(String args) throws IncompleteCommandException {
-        final Matcher matcher = CHECK_COMMAND_FORMAT.matcher(args.trim());
+        final Matcher matcher = CHECK_COMMAND_FORMAT.matcher(args);
         if (!matcher.matches()) {
             throw new IncompleteCommandException("Check command values are incomplete or missing!");
         }
@@ -199,7 +203,7 @@ public class Parser {
      * @throws IncompleteCommandException if no match found
      */
     protected ArrayList<String> prepareDelete(String args) throws IncompleteCommandException {
-        final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
+        final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args);
         if (!matcher.matches()) {
             throw new IncompleteCommandException("Delete command values are incomplete or missing!");
         }
@@ -219,7 +223,7 @@ public class Parser {
         String argument;
         ArrayList<String> splitArguments = new ArrayList<>();
         try {
-            Matcher matcher = MODIFICATION_ARGUMENT_FORMAT.matcher(args.trim());
+            Matcher matcher = MODIFICATION_ARGUMENT_FORMAT.matcher(args);
             while (matcher.find()) {
                 argument = matcher.group();
                 argumentToAdd = setArgumentTagsToLower(argument.trim());
