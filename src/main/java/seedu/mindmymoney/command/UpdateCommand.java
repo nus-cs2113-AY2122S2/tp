@@ -1,7 +1,6 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
@@ -42,7 +41,6 @@ import static seedu.mindmymoney.data.ExpenditureList.isEqualAmount;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualTime;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeCategory;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;

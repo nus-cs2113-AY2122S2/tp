@@ -26,7 +26,6 @@ import static seedu.mindmymoney.constants.Indexes.INDEX_OF_THIRD_ITEM;
 
 import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testCashbackAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testCreditCardBalance;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testCreditCardLimit;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
