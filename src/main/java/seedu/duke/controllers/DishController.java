@@ -9,7 +9,7 @@ import seedu.duke.manager.DishManager;
  * DishController (or MenuController if you like).
  */
 public class DishController extends Controller {
-    private static final String[] CHOICES = {"Exit Menu", "List Dish", "Add Dish",
+    private static final String[] CHOICES = {"Exit Dish Menu", "List Dish", "Add Dish",
             "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
     private final DishManager dishManager;
 
