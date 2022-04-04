@@ -38,6 +38,9 @@ public class IHospital {
         doctorStorage.saveDoctorList(doctors);
         patientStorage.savePatientList(patients);
         appointmentStorage.saveAppointmentList(appointments);
+        Command c = new ExitCommand();
+        c.execute(doctors, patients, appointments, ui,
+                doctorStorage, patientStorage, appointmentStorage);
         ui.sayGoodbye();
     }
 
