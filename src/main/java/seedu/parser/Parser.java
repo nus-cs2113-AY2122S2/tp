@@ -135,7 +135,7 @@ public class Parser {
     /**
      * Break down a command into the command term to be parsed and the remainder of the arguments.
      * Assumes command term and remainder arguments are delimited by minimally one space.
-     * If first element is "list", remainder arguments can be empty, in which case a null
+     * If first element is "list", "help", "save" or "bye" remainder arguments can be empty, in which case a null
      * second object will be passed in.
      *
      * @param userInput String to be split into substrings
