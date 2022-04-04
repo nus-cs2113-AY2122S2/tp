@@ -139,7 +139,7 @@ class ParserTest {
                 Arrays.asList("Speaker   B")
         );
         ArrayList<String> actualResult = parser.prepareCheck(
-                "   n/Speaker   B ");
+                "n/Speaker   B");
         assertEquals(expectedResult, actualResult);
     }
 
@@ -161,10 +161,10 @@ class ParserTest {
     @Test
     void prepareDelete_deleteStringWithSpaces_success() throws IncompleteCommandException {
         ArrayList<String> expectedResult = new ArrayList<>(
-                Arrays.asList("SM58-1")
+                Arrays.asList("SM58 - 1")
         );
         ArrayList<String> actualResult = parser.prepareDelete(
-                "   s/SM58-1 ");
+                "s/SM58 - 1");
         assertEquals(expectedResult, actualResult);
     }
 
@@ -175,7 +175,7 @@ class ParserTest {
         );
         try {
             ArrayList<String> actualResult = parser.prepareDelete(
-                    "   n/Speaker   B ");
+                    "n/Speaker   B");
             assertEquals(expectedResult, actualResult);
             fail();
         } catch (IncompleteCommandException e) {
