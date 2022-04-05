@@ -21,6 +21,7 @@ public class GroupEditCommandTest {
 
     private static final String EDITED_GROUP_NAME = "grp_edited";
     private static final int EDITED_GROUP_PERSON_LIST_SIZE = 3;
+
     /**
      * Creates a group that is stored and managed by the Manager object.
      */
