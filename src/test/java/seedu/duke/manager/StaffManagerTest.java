@@ -34,6 +34,7 @@ public class StaffManagerTest {
         assertEquals("Ben", staffManager.findByStaffId(2).getStaffName());
         assertEquals("Waiter", staffManager.findByStaffId(3).getPosition());
         assertEquals("Chef", staffManager.findByStaffId(4).getPosition());
+        assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(-1));
     }
 
     @Test
@@ -51,8 +52,6 @@ public class StaffManagerTest {
         assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(0));
         assertDoesNotThrow(() -> staffManager.deleteByStaffId(1));
         assertDoesNotThrow(() -> staffManager.deleteByStaffId(2));
-        assertThrows(IllegalArgumentException.class, () -> staffManager.deleteByStaffId(-1));
-        assertThrows(IllegalArgumentException.class, () -> staffManager.deleteByStaffId(5));
     }
 
     @Test

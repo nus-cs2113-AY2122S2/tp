@@ -65,7 +65,11 @@ public class StaffController extends Controller {
             System.out.println("No staff in records to print!");
             return;
         }
-        staffManager.printStaff();
+        try {
+            staffManager.printStaff();
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
