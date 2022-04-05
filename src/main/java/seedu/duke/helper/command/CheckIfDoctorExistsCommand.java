@@ -9,7 +9,7 @@ import seedu.duke.status.Status;
 
 import java.util.ArrayList;
 
-public class CheckIfDoctorExistsCommand extends Command{
+public class CheckIfDoctorExistsCommand extends Command {
     public CheckIfDoctorExistsCommand(String[] parameterArray) {
         super(parameterArray);
     }

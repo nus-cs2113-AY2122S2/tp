@@ -1,7 +1,31 @@
 package seedu.duke.helper;
 
 import seedu.duke.exception.HalpmiException;
-import seedu.duke.helper.command.*;
+import seedu.duke.helper.command.AddAppointmentCommand;
+import seedu.duke.helper.command.AddDoctorCommand;
+import seedu.duke.helper.command.AddMedicineCommand;
+import seedu.duke.helper.command.AddPatientCommand;
+import seedu.duke.helper.command.CheckIfDoctorExistsCommand;
+import seedu.duke.helper.command.CheckIfPatientExistsCommand;
+import seedu.duke.helper.command.ClearExpiredMedicineCommand;
+import seedu.duke.helper.command.Command;
+import seedu.duke.helper.command.DeleteAppointmentCommand;
+import seedu.duke.helper.command.DeleteDoctorCommand;
+import seedu.duke.helper.command.DeleteMedicineCommand;
+import seedu.duke.helper.command.DeletePatientCommand;
+import seedu.duke.helper.command.EditAppointmentCommand;
+import seedu.duke.helper.command.EditDoctorCommand;
+import seedu.duke.helper.command.EditMedicineCommand;
+import seedu.duke.helper.command.EditPatientCommand;
+import seedu.duke.helper.command.FindAppointmentCommand;
+import seedu.duke.helper.command.FindDoctorCommand;
+import seedu.duke.helper.command.FindMedicineCommand;
+import seedu.duke.helper.command.FindPatientCommand;
+import seedu.duke.helper.command.UpdateMedicineInventoryCommand;
+import seedu.duke.helper.command.ViewAppointmentCommand;
+import seedu.duke.helper.command.ViewDoctorCommand;
+import seedu.duke.helper.command.ViewMedicineCommand;
+import seedu.duke.helper.command.ViewPatientCommand;
 
 
 public class Parser {
