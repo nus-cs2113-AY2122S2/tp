@@ -1271,7 +1271,6 @@ create a new directory to put the WerkIt! JAR file in and to set his/her current
 application. This is to ensure that the resource directories and files are created in the same location as the WerkIt!
 JAR file to ensure cleanliness on the user's local filesystem.
 
-#### Design Considerations For Inconsistent Data Between Resource Files
 #### Writing a New Line of Data to the Resource File
 Writing a new line of data to the respective resource files is done when the user creates a new workout or plan.
 See [this design consideration](#design-considerations-for-how-data-is-written-or-updated-to-a-resource-file)
@@ -1324,6 +1323,30 @@ The following sequence diagram shows how `workouts.txt` is rewritten when the us
 <span class="info box">The procedures for rewriting the entire file for plan and schedule data sets are largely similar 
 to the above sequence diagram.</span>
 
+#### Design Considerations for How Data Is Written or Updated to a Resource File
+While writing newly created workout or plan data to its respective resource file is a trivial task, updating or deleting
+existing data is more complex. When we want to update the data in the resource file, we need to find a way to traverse
+through the file and find the exact part of the file where the data that needs to be updated or deleted is at. While it
+is doable and can potentially be more efficient than rewriting the entire file, it is currently too complex and 
+time-consuming for the development team to work on. Thus, we have decided to take the less difficult route of rewriting 
+the entire file with the most recent set of data when an existing data is updated or deleted.
+
+The following table shows whether a certain operation writes a new line of data or rewrites the entire resource file:
+
+**Legend**<br/>
+:large_blue_diamond:: Only write the new line of data to the resource file<br/>
+:large_orange_diamond:: Rewrite the entire resource file with the most recent set of data
+
+| Data Type \ Operation | Create | Update | Delete |
+|:---:|:---:|:---:|:---:|
+| Workout | :large_blue_diamond: | :large_orange_diamond: | :large_orange_diamond: |
+| Plans | :large_blue_diamond: | :large_orange_diamond: | :large_orange_diamond: |
+| Schedule | _N.A._ | :large_orange_diamond: | :large_orange_diamond: |
+
+<span class="info box">:memo: The delete operations for schedule commands is the `schedule /clear` and `schedule /clearall`
+commands.</span>
+
+#### Design Considerations for Inconsistent Data Between Resource Files
 
 The first step of loading local files to the app involves the checking of validity of data. That is, before loading plan
 data, `FileManager` will check whether the workouts in the plan exist in the `workouts.txt` file, and before loading
