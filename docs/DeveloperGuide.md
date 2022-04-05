@@ -100,11 +100,27 @@ The `Commands` component consists following classes: [`CommandFactory.java`
 [`ExitCommand.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/ExitCommand.java)
 
-The `CommandFactory` provides a `getCommand()` function to get different commands according to the keywords of 
-user's instructions. This keyword is parsed by `Parser`. There're 11 cases, and it would throw an exception called 
-`UnknownInputException` if the keyword from user input is neither of the 11 cases provided. 
+![CommandsClassDiagram](images/CommandsClassDiagram.png)
 
-The `Command` class is an abstract class that has abstract method ``
+> **Note**: the diagram may look messy due to the limit of PlantUML.
+
+The `CommandFactory` provides a `getCommand()` function to get different commands according to the keywords of 
+user's instructions. `getCommand()` accepts user input as a `String` object and a `Family` object for input. The keyword
+is parsed by `Parser`. There're 11 cases, and it would throw an exception called `UnknownInputException` if the keyword 
+from user input is neither of the 11 cases provided. `CommandFactory` will only
+hold at most one command at one time. When `getCommand()` is called, the command that `CommandFactory` holds will be 
+updated. 
+
+Following sequence diagram has illustrated how the `CommandFactory` return a command when `getCommand()` is called.
+
+![CommandFactorySequenceDiagram](images/CommandFactorySequence2.png)
+
+The `Command` class is an abstract class that has abstract method `execute()`. All the subclasses of `Command` inherit 
+this method. `Command` class also has a methods called `getType()`. This method is mainly for testing, it will return 
+`null` if it is called. All the subclasses have overridden this method.
+
+Each subclass contains some customize variables, depends on the type of the command. These variables are from user 
+input after parsing by `Parser` according to user input.
 <!-- {For Huilin} -->
 
 ### Parser Component
@@ -240,7 +256,7 @@ Below is and example usage scenario and how Alice is added to the `PersonList`
 Step 1. given that user input is
 
 ```md
-add \n Alice
+add /n Alice /g 1
 ```
 
 and this string will be passed to `CommandFactory` together with `personList` that contains all the people who had been

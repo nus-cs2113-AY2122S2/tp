@@ -5,33 +5,13 @@ skinparam groupInheritance 2
 !include style.puml
 
 Package Command as C {
+    class XYZCommand LOGIC_COLOR_T3
     abstract class Command LOGIC_COLOR_T3
     class CommandFactory LOGIC_COLOR_T2
-    class AddPersonCommand LOGIC_COLOR_T3
-    class DeletePersonCommand LOGIC_COLOR_T3
-    class AddRecordCommand LOGIC_COLOR_T3
-    class EditRecordCommand LOGIC_COLOR_T3
-    class DeleteRecordCommand LOGIC_COLOR_T3
-    class ExitCommand LOGIC_COLOR_T3
-    class HelpCommand LOGIC_COLOR_T3
-    class ListCategoriesCommand LOGIC_COLOR_T3
-    class ListCommand LOGIC_COLOR_T3
-    class OverviewCommand LOGIC_COLOR_T3
-    class SearchCommand LOGIC_COLOR_T3
+
 }
 
-Command <|-[LOGIC_COLOR_T3]- AddRecordCommand
-Command <|-[LOGIC_COLOR_T3]- DeleteRecordCommand
-Command <|-[LOGIC_COLOR_T3]-AddPersonCommand
-Command <|-[LOGIC_COLOR_T3]- DeletePersonCommand
-Command <|-[LOGIC_COLOR_T3]- EditRecordCommand
-Command <|-[LOGIC_COLOR_T3]- ExitCommand
-Command <|-[LOGIC_COLOR_T3]- ListCategoriesCommand
-Command <|-[LOGIC_COLOR_T3]- OverviewCommand
-Command <|-[LOGIC_COLOR_T3]- HelpCommand
-Command <|-[LOGIC_COLOR_T3]- ListCommand
-Command <|-[LOGIC_COLOR_T3]- SearchCommand
-
-
+XYZCommand -[LOGIC_COLOR_T3]-|> Command
 CommandFactory -[LOGIC_COLOR_T3]->"0..1" Command : Returns >
+
 @enduml
