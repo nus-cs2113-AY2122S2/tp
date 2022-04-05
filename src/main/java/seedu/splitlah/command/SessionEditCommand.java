@@ -43,6 +43,15 @@ public class SessionEditCommand extends Command {
         this.sessionDate = date;
     }
 
+    /**
+     * Returns the new list of persons if all checks are passed.
+     *
+     * @param oldPersonList A PersonList object that represents the existing session's PersonList.
+     * @return A PersonList object represents the new PersonList for a session.
+     * @throws InvalidDataException If there were duplicates in the new personNames,
+     *                              if there were invalid names in the new personNames,
+     *                              if personNames did not contain the existing names in the session.
+     */
     private PersonList getNewPersonList(PersonList oldPersonList) throws InvalidDataException {
         boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
         if (hasDuplicates) {
@@ -57,6 +66,15 @@ public class SessionEditCommand extends Command {
         }
         return newPersonList;
     }
+
+    /**
+     * Returns the new session name if all checks are passed.
+     *
+     * @param oldSessionName A String that represents the existing session's name.
+     * @param profile A Profile object that contains the list of session.
+     * @return A String that represents the new session name.
+     * @throws InvalidDataException If the new session name exists within the list of session other than itself.
+     */
     private String getNewSessionName(String oldSessionName, Profile profile) throws InvalidDataException {
         boolean isSessionExists = profile.hasSessionName(sessionName);
         boolean hasSameSessionName = oldSessionName.equalsIgnoreCase(sessionName);
@@ -65,6 +83,14 @@ public class SessionEditCommand extends Command {
         }
         return sessionName;
     }
+
+    /**
+     * Checks if there were edits to the existing session.
+     *
+     * @param session A Session object that represents the session to be edited.
+     * @return true if any of the editable fields were edited,
+     *         false otherwise.
+     */
     private boolean hasSessionEdited(Session session) {
         if (sessionName != null && !sessionName.equalsIgnoreCase(session.getSessionName())) {
             return true;
