@@ -42,7 +42,7 @@ class GeneralFunctionsTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
-        creditCardTestList.add(new CreditCard("dbs",0.05,50000));
+        creditCardTestList.add(new CreditCard("dbs", 0.05, 50000));
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         String inputStringOne = "/e /pm dbs /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputStringOne, user).executeCommand();
@@ -79,6 +79,7 @@ class GeneralFunctionsTest {
         assertEquals(expenditureTestList.get(INDEX_OF_FIRST_ITEM), result.get(INDEX_OF_FIRST_ITEM));
         assertEquals(expenditureTestList.get(INDEX_OF_SECOND_ITEM), result.get(INDEX_OF_SECOND_ITEM));
     }
+
     /**
      * Tests if findItemInList is able to search with invalid input.
      */

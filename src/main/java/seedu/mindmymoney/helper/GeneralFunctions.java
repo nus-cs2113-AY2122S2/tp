@@ -71,7 +71,7 @@ public class GeneralFunctions {
             }
         } catch (StringIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("You are missing one or more of the parameters! Please check your command "
-                    + "again.\n");
+                + "again.\n");
         }
         return input;
     }
