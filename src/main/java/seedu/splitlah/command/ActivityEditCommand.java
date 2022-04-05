@@ -387,6 +387,9 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Updates the cost list using the cost specified by the user.
+     */
     private void updateCostListFromUserInput() {
         int listLength = involvedListPersonArray.size();
         costList = distributeCostEvenly(listLength);
