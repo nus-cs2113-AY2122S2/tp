@@ -40,8 +40,22 @@ class ModificationCommandTest {
         ModificationCommand expectedCommand = new ModificationCommand(new ArrayList<>(
                 Arrays.asList("s/S1404115ASF", "n/Speaker A")
         ));
+        expectedCommand.prepareModification();
         ModificationCommand actualCommand = new ModificationCommand(testArrayList);
         actualCommand.prepareModification();
         assertEquals(expectedCommand, actualCommand);
     }
+
+    @Test
+    void prepareModification_typeEnumsChangedToCaps_success() throws IncompleteCommandException {
+        ArrayList<String> testArrayList = new ArrayList<>(Arrays.asList(
+                "s/S1404115ASF", "t/sPEAker", "n/Speaker A"));
+        ModificationCommand expectedCommand = new ModificationCommand(new ArrayList<>(
+                Arrays.asList("s/S1404115ASF", "t/SPEAKER", "n/Speaker A")
+        ));
+        ModificationCommand actualCommand = new ModificationCommand(testArrayList);
+        actualCommand.prepareModification();
+        assertEquals(expectedCommand, actualCommand);
+    }
+
 }
