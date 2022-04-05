@@ -7,7 +7,6 @@ import java.util.Arrays;
 public class ValidMenuItemTypeChecker implements RawInputChecker {
     @Override
     public boolean isValid(String menuItemType) {
-        System.out.println("inside valid menu item");
         if (menuItemType == null) {
             return false;
         }

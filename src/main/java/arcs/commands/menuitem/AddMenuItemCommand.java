@@ -32,7 +32,6 @@ public class AddMenuItemCommand extends Command {
         } catch (NullPointerException e) {
             System.out.println("Invalid command");
         }
-        System.out.println("reach here");
     }
 
     private void checkFieldValidity(String type, String price) {

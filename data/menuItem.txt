@@ -1,0 +1,3 @@
+DRINKS/coke/0.9
+MAIN/chicken wing/2.50
+DESSERT/chocolate cake/6
