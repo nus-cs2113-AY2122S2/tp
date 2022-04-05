@@ -5,7 +5,15 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import seedu.duke.ListContainer;
-import seedu.duke.exceptions.*;
+import seedu.duke.ParsingUtils;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.DuplicateCommandException;
+import seedu.duke.exceptions.EmptySatisfactionValueException;
+import seedu.duke.exceptions.EmptySatisfactionCustomerException;
+import seedu.duke.exceptions.InvalidSatisfactionValueException;
+import seedu.duke.exceptions.InvalidSatisfactionCustomerNameException;
+import seedu.duke.exceptions.RepeatCustomerException;
 import seedu.duke.satisfactionlists.Satisfaction;
 import seedu.duke.satisfactionlists.SatisfactionList;
 import seedu.duke.Ui;
@@ -28,6 +36,7 @@ public class AddSatisfactionCommand extends Command {
     private Satisfaction satisfaction;
     private static Logger logger = Logger.getLogger("satisfactionLogger");
     private static final String ADD_SATISFACTION_COMMAND = "add satisfaction";
+    private ParsingUtils parsingUtils = new ParsingUtils();
 
     /**
      * Extracts the customer name and satisfaction value from user input,
@@ -47,7 +56,7 @@ public class AddSatisfactionCommand extends Command {
                     + "from their rating.");
             throw new InvalidCommandException();
         }
-        if (countSlashes(userInput) > 1) {
+        if (parsingUtils.countSlashes(userInput) > 1) {
             logger.log(Level.WARNING, "More than one '/' character detected. There should only be a single '/'"
                     + " that separates the customer's name from their rating.");
             throw new InvalidCommandException();
@@ -65,20 +74,6 @@ public class AddSatisfactionCommand extends Command {
         setSatisfaction(satisfaction);
     }
 
-    private int countSlashes(String userInput) {
-        int slashCount = 0;
-        for (int i = 0; i < userInput.length(); i++) {
-            String curChar = Character.toString(userInput.charAt(i));
-            if (curChar.equals(DELIMITER)) {
-                slashCount += 1;
-            }
-        }
-        return slashCount;
-    }
-
-    public boolean isAlpha(String name) {
-        return name.matches("[a-zA-Z]+");
-    }
 
     /**
      * Helper method for AddSatisfactionCommand. Extracts the customer's name
@@ -96,7 +91,7 @@ public class AddSatisfactionCommand extends Command {
             if (customerName.isEmpty()) {
                 throw new EmptySatisfactionCustomerException();
             }
-            if (!isAlpha(customerName)) {
+            if (!parsingUtils.isAlpha(customerName)) {
                 throw new InvalidSatisfactionCustomerNameException();
             }
         } catch (IndexOutOfBoundsException e) {
