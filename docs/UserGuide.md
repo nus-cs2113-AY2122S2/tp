@@ -395,31 +395,52 @@ Deletes an existing activity from a particular session so that you can remove ac
 ### Editing an activity: `activity /edit`
 Edits an existing activity so that you can change the details of an activity.<br>
 
-There are 2 ways that you can edit an activity:
-1. Record the total cost to be split amongst everyone involved
-2. Record each person's individual cost
-
-> Format 1: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] /p [PAYER] /i
-> [NAME1 NAME2...] /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+You only have to supply delimiters for the details you wish to edit. However, the `/sid` and `/aid` 
+delimiters are compulsory to identify the activity you wish to edit.
+> Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] [</n [ACTIVITY_NAME]>] [</p [PAYER]>]
+  [</i [NAME1 NAME2...]>] [</cl [COST1 COST2...]>] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 > 
-> Format 2: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] p [PAYER]
-  /i [NAME1 NAME2...] /cl [COST1 COST2...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
-> 
+> Compulsory arguments:
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
 >    * The unique identifier for an activity can be retrieved with the [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
+> 
+> Optional arguments:
+> 
 >* `[ACTIVITY_NAME]` refers to the name of the activity.
->    * The activity name is **case-insensitive**.
+>     * The activity name is **case-insensitive**.
+>     * If one is not provided, the original activity name is left unchanged.
 >* `[PERSON_PAID]` refers to the person who paid for the activity.
 >    * The person's name is **case-insensitive**.
+>    * If one is not provided, the original payer is left unchanged.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
 >    * Each individual name is **case-insensitive**.
->* `[TOTAL_COST]` refers to the total cost of the activity.
+>    * If a list is not provided, the original participants are left unchanged.
+>* `[TOTAL_COST]` refers to the overall cost of the activity.
+>    * If one is not provided, the original overall cost is left unchanged. If a cost list is provided, that will be used to 
+> edit the activity instead. You cannot supply both a total cost and a cost list.
+>    * You can use this even if the activity was originally created using a cost list. The new overall cost will be evenly 
+distributed amongst all participants.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
->    * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
->* `[GST_PERCENTAGE]` refers to the additional percentage gst that may be charged during your activity.
->* `[SERVICE_CHARGE]` refers to the additional percentage service charge that may be charged during your activity.
+>    * If a list is not provided, the original overall cost list is left unchanged. If an overall cost is provided, that will
+>be used to edit the activity instead. You cannot supply both a total cost and a cost list.
+>    * You can use this even if the activity was originally created using an overall cost. The new cost list will be assigned 
+>to the existing participants in the order displayed when viewing the activity.
+>    * You are encouraged to provide a participant list with `/i` together with the cost list to confirm the order in which 
+the costs are distributed.
+>* `[GST_PERCENTAGE]` refers to the additional GST that may be charged during your activity.
+>    * If one is not provided, the original GST is left unchanged and will be applied to any changes to the overall cost or
+>cost list.
+>    * Changing the GST percentage will automatically recalculate all costs associated with this activity to reflect the new
+>GST value.
+>    * To remove the GST entirely, you must explicitly specify `/gst 0`.
+>* `[SERVICE_CHARGE]` refers to the additional service charge that may be charged during your activity.
+>    * If one is not provided, the original service charge is left unchanged and will be applied to any changes to the
+>overall cost or cost list.
+>    * Changing the service charge will automatically recalculate all costs associated with this activity to reflect the new
+>service charge.
+>    * To remove the service charge entirely, you must explicitly specify `/sc 0`.
 
 <br>
 
@@ -440,7 +461,6 @@ There are 2 ways that you can edit an activity:
 >  in the calculations.
 >
 > **⚠️Warnings:**
->- All fields must be supplied in the command, not just the ones you wish to edit.
 >- This action is irreversible. The activity is edited immediately after entering this command.
 
 <br>
