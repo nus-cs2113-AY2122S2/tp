@@ -43,6 +43,20 @@ public class SessionEditCommand extends Command {
         this.sessionDate = date;
     }
 
+    private PersonList getNewPersonList(PersonList oldPersonList) throws InvalidDataException {
+        boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
+        if (hasDuplicates) {
+            throw new InvalidDataException(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION);
+        }
+        PersonList newPersonList = new PersonList(personNames);
+        if (personNames.length != newPersonList.getSize()) {
+            throw new InvalidDataException(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
+        }
+        if (!newPersonList.isSuperset(oldPersonList.getPersonList())) {
+            throw new InvalidDataException(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
+        }
+        return newPersonList;
+    }
     /**
      * Runs the command to edit an existing Session object from the list of sessions managed by a Manager Object.
      *
