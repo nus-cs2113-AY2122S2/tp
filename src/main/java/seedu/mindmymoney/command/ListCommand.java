@@ -119,7 +119,7 @@ public class ListCommand extends Command {
     public String listStringWithDate(int count, String listInString, String[] inputArray) {
         for (Expenditure expenditure : expenditureList.expenditureListArray) {
             if (expenditure.getTime().contains(inputArray[INDEX_OF_SECOND_ITEM])) {
-                listInString += count + ". $" + expenditure.getAmount() + " was spent on "
+                listInString += count + ". $" + String.format("%.2f", expenditure.getAmount()) + " was spent on "
                         + expenditure.getDescription() + "(" + expenditure.getCategory() + ") " + "using "
                         + expenditure.getPaymentMethod() + " [" + expenditure.getTime() + "]" + "\n";
                 count++;
@@ -137,7 +137,7 @@ public class ListCommand extends Command {
      */
     public String listString(int count, String listInString) {
         for (Expenditure expenditure : expenditureList.expenditureListArray) {
-            listInString += count + ". $" + expenditure.getAmount() + " was spent on " + expenditure.getDescription()
+            listInString += count + ". $" + String.format("%.2f", expenditure.getAmount()) + " was spent on " + expenditure.getDescription()
                     + "(" + expenditure.getCategory() + ") " + "using " + expenditure.getPaymentMethod()
                     + " [" + expenditure.getTime() + "]" + "\n";
             count++;

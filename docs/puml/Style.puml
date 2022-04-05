@@ -3,3 +3,11 @@
 !define LOGIC_COLOR_T2 #5252CE
 !define LOGIC_COLOR_T3 #1616B0
 !define LOGIC_COLOR_T4 #101086
+!define MMM #dddddd
+!define PARSER #00b0f0
+!define UI #92d050
+!define COMMANDS #ff5050
+!define STORAGE #ffc000
+!define HELPER #c000ff
+!define USERFINANCIAL #ff00be
+!define DATA #aeed00

@@ -139,7 +139,7 @@ public class AddCommand extends Command {
 
         System.out.println("Successfully added: \n\n"
             + "Description: " + description + "\n"
-            + "Amount: $" + amountInt + "\n"
+            + "Amount: $" + String.format("%.2f", amountInt) + "\n"
             + "Category: " + category + "\n"
             + "Payment method: " + paymentMethod + "\n"
             + "Date: " + time + "\n\n"

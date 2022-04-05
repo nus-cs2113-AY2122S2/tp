@@ -51,7 +51,7 @@ Along the guide you may encounter several icons. These icons will provide severa
 > - This tells you that there is some **important** information you should take note of to prevent issues from arising
     when you are using the application.  
 
-Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the developer's guide.
+Click on the hyperlinks in the [content page](#content-page) to quickly navigate the developer's guide.
 
 ## Design
 ### Technologies used
@@ -222,6 +222,12 @@ The `AddCommand.addExpenditure()` command is facilitated by the `AddCommand`. By
    into the `ExpenditureList`.
 4. The `AddCommand.addExpenditure()` object prints a list to show the user what it has saved.
 5. The `AddCommand.addExpenditure()` returns to `AddCommand`.
+
+#### Add Income Command
+MindMyMoney allow users to track their sources of income. A user can add a new income through the
+`AddCommand.addCreditCard()` command by specifying the credit card name, cash back, card limit and balance.
+
+
 
 #### AddCommand Design Considerations
 Aspect: How to ask user for the fields of input.
