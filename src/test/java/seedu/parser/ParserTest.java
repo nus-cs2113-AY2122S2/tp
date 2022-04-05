@@ -147,18 +147,13 @@ class ParserTest {
     }
 
     @Test
-    void prepareCheck_wrongArgumentTag_exceptionThrown() {
+    void prepareCheck_checkUsingSerialNum_success() throws IncompleteCommandException {
         ArrayList<String> expectedResult = new ArrayList<>(
                 Arrays.asList("s/Speaker   B")
         );
-        try {
-            ArrayList<String> actualResult = parser.prepareCheck(
-                    "s/`Speaker   B`");
-            assertEquals(expectedResult, actualResult);
-            fail();
-        } catch (IncompleteCommandException e) {
-            assertEquals("Check command values are incomplete or missing!", e.getMessage());
-        }
+        ArrayList<String> actualResult = parser.prepareCheck(
+                "s/`Speaker   B`");
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
