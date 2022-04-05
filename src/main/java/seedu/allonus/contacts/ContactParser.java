@@ -21,6 +21,10 @@ public class ContactParser {
             "Invalid contact field(s)!";
     private static final String CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE =
             "Invalid contact fieldString: %s";
+    private static final String CONTACTS_PARSER_ADD_EMPTY_FIELDS_MESSAGE =
+            "Adding a contact with all empty fields!";
+    private static final String CONTACTS_PARSER_ADD_INVALID_FIELDS_MESSAGE =
+            "Adding a contact with missing field(s)!";
 
     private static final String CONTACTS_DELIMITERS = "[nfetd]/";
     private static final char NAME_DELIMITER = 'n';
@@ -123,7 +127,19 @@ public class ContactParser {
         Contact contact = new Contact(name, faculty, email, description);
 
         ArrayList<String> fieldStrings = getFieldStrings(userInput);
+        if (fieldStrings.isEmpty()) {
+            throw new InvalidContactField(CONTACTS_PARSER_ADD_EMPTY_FIELDS_MESSAGE);
+        }
         setContactFields(contact, fieldStrings);
+
+        boolean isValidName = name.isValidField();
+        boolean isValidFaculty = faculty.isValidField();
+        boolean isValidEmail = email.isValidField();
+        boolean isValidDescription = description.isValidField();
+        boolean hasAllValidFields = isValidName && isValidFaculty && isValidEmail && isValidDescription;
+        if (!hasAllValidFields) {
+            throw new InvalidContactField(CONTACTS_PARSER_ADD_INVALID_FIELDS_MESSAGE);
+        }
         return contact;
     }
 

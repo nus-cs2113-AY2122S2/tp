@@ -6,7 +6,7 @@ package seedu.allonus.contacts.entry;
  */
 public abstract class Field {
 
-    private String field;
+    protected String field;
 
     /**
      * Initializes a new Field object.
@@ -20,6 +20,8 @@ public abstract class Field {
     public void setField(String field) {
         this.field = field;
     }
+
+    public abstract boolean isValidField();
 
     @Override
     public String toString() {

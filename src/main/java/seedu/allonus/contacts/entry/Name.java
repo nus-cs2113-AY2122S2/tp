@@ -15,4 +15,9 @@ public class Name extends Field {
         super(field);
     }
 
+    @Override
+    public boolean isValidField() {
+        String currVal = this.field;
+        return !currVal.isBlank();
+    }
 }

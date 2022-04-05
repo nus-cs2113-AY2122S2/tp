@@ -164,6 +164,7 @@ public class ContactsManager {
             printFormat(e.getMessage());
             return;
         }
+
         listOfContacts.add(contact);
         if (fromCommandLine) {
             printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact
