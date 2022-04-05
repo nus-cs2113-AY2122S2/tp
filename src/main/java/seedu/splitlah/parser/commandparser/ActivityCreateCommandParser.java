@@ -107,7 +107,7 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
     /**
      * Checks if both the total cost and the cost list are provided by the user.
      *
-     * @param hasCost A boolean representing whether the total cost was not provided by the user.
+     * @param hasCost     A boolean representing whether the total cost was not provided by the user.
      * @param hasCostList A boolean representing whether the cost list was not provided by the user.
      * @throws InvalidFormatException If both the total cost and cost list are provided by the user.
      */
@@ -123,7 +123,7 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
     /**
      * Checks if both the total cost and the cost list are not provided by the user.
      *
-     * @param hasCost A boolean representing whether the total cost was not provided by the user.
+     * @param hasCost     A boolean representing whether the total cost was not provided by the user.
      * @param hasCostList A boolean representing whether the cost list was not provided by the user.
      * @throws InvalidFormatException If both the total cost and cost list are not provided by the user.
      */
