@@ -8,6 +8,7 @@ import arcs.commands.customer.ListCustomerCommand;
 import arcs.commands.flightbooking.BookCommand;
 import arcs.commands.flightbooking.DeleteBookingCommand;
 import arcs.commands.flightbooking.ListBookingCommand;
+import arcs.commands.mealreservation.AddMealReservationCommand;
 import arcs.commands.menuitem.FindMenuItemTypeCommand;
 import arcs.commands.menuitem.FindMenuItemNameCommand;
 import arcs.commands.menuitem.AddMenuItemCommand;
@@ -84,6 +85,9 @@ public class Parser {
             break;
         case DeleteBookingCommand.COMMAND_WORD:
             command = FlightBookingParser.prepareDeleteBookingCommand(argumentLine);
+            break;
+        case AddMealReservationCommand.COMMAND_WORD:
+            command = MealReservationParser.prepareMealReservationCommand(argumentLine);
             break;
         default:
             command = new UndefinedCommand();
@@ -231,7 +235,6 @@ public class Parser {
                 break;
             }
         }
-        System.out.println("here..");
         return new AddMenuItemCommand(menuItemName,menuItemType,menuItemPrice);
     }
 
