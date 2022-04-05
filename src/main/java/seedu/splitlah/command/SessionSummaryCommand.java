@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
- * Represents a command object that produces a summary of expenditure for a specified Session object.
+ * Represents a command that produces a summary of expenditure for a specified Session object.
  *
  * @author Warren
  */
@@ -216,7 +216,7 @@ public class SessionSummaryCommand extends Command {
             return;
         }
 
-        ArrayList<Person> personList = session.getPersonList();
+        ArrayList<Person> personList = session.getPersonArrayList();
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
         String output = processAllTransactions(personCostPairList, session);
         ui.printlnMessageWithDivider(output);

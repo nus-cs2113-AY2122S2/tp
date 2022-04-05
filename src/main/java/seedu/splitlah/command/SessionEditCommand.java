@@ -3,6 +3,7 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
+import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
@@ -19,6 +20,7 @@ import java.util.logging.Level;
 public class SessionEditCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The session was edited successfully.";
+    private static final String COMMAND_NO_EDITS_MADE = "The session was not edited.";
 
     private final int sessionId;
     private final String sessionName;
@@ -49,16 +51,18 @@ public class SessionEditCommand extends Command {
     @Override
     public void run(Manager manager) {
         TextUI ui = manager.getUi();
+        Profile profile = manager.getProfile();
         Session session;
         try {
-            session = manager.getProfile().getSession(sessionId);
+            session = profile.getSession(sessionId);
         } catch (InvalidDataException invalidDataException) {
             ui.printlnMessageWithDivider(invalidDataException.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_PROFILE_SESSION_NOT_IN_LIST);
             return;
         }
         assert session != null : Message.ASSERT_SESSIONEDIT_SESSION_IS_NULL;
-
+        PersonList newPersonList = null;
+        boolean isPersonNamesEdited = false;
         if (personNames != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
             if (hasDuplicates) {
@@ -66,25 +70,54 @@ public class SessionEditCommand extends Command {
                 Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITSESSION);
                 return;
             }
-            PersonList newPersonList = new PersonList();
-            newPersonList.convertToPersonList(personNames);
-            if (!newPersonList.isSuperset(session.getPersonList())) {
+            newPersonList = new PersonList(personNames);
+            if (personNames.length != newPersonList.getSize()) {
+                ui.printlnMessage(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
+                Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_EDITSESSION);
+                return;
+            }
+            if (!newPersonList.isSuperset(session.getPersonArrayList())) {
                 ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
                 return;
-            } else {
-                for (Person person : newPersonList.getPersonList()) {
-                    session.addPerson(person);
-                }
+            }
+            if (!session.getPersonList().isSuperset(newPersonList.getPersonList())) {
+                isPersonNamesEdited = true;
             }
         }
+        boolean isSessionNameEdited = false;
         if (sessionName != null) {
+            boolean isSessionExists = profile.hasSessionName(sessionName);
+            boolean hasSameSessionName = sessionName.equalsIgnoreCase(session.getSessionName());
+            if (!hasSameSessionName && isSessionExists) {
+                ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
+                Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONEDIT_DUPLICATE_NAMES_IN_SESSION_LIST);
+                return;
+            }
+            if (!hasSameSessionName) {
+                isSessionNameEdited = true;
+            }
+        }
+        boolean isSessionDateEdited = false;
+        if (sessionDate != null) {
+            if (!session.getDateCreated().equals(sessionDate)) {
+                session.setDateCreated(sessionDate);
+                isSessionDateEdited = true;
+            }
+        }
+        if (isPersonNamesEdited) {
+            for (Person person : newPersonList.getPersonList()) {
+                session.addPerson(person);
+            }
+        }
+        if (isSessionNameEdited) {
             session.setSessionName(sessionName);
         }
-        if (sessionDate != null) {
-            session.setDateCreated(sessionDate);
-        }
         manager.saveProfile();
-        ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + session);
+        if (isPersonNamesEdited || isSessionNameEdited || isSessionDateEdited) {
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + session);
+        } else {
+            ui.printlnMessageWithDivider(COMMAND_NO_EDITS_MADE);
+        }
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONEDIT_SESSION_EDITED);
     }
 }

@@ -2,8 +2,6 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
@@ -37,22 +35,6 @@ public class GroupDeleteCommand extends Command {
     public GroupDeleteCommand(int groupId) {
         assert groupId > 0 : Message.ASSERT_GROUPDELETE_GROUP_ID_NOT_INITIALIZED;
         this.groupId = groupId;
-    }
-
-    /**
-     * Prepares user arguments for the creation of an GroupDeleteCommand object.
-     *
-     * @param commandArgs The user's arguments.
-     * @return A GroupDeleteCommand object if necessary parameters were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        try {
-            int groupId = Parser.parseGroupId(commandArgs);
-            return new GroupDeleteCommand(groupId);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
-        }
     }
 
     /**

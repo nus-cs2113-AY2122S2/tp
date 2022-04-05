@@ -50,7 +50,7 @@ public class TextUI {
     public void printWelcome() {
         printDivider();
         out.println(Message.ASCII_TEXTUI_LOGO);
-        out.println("Welcome to Splitlah!");
+        out.println("Welcome to SplitLah!");
         printDivider();
     }
 

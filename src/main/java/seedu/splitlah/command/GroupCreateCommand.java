@@ -49,24 +49,6 @@ public class GroupCreateCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for the creation of a GroupCreateCommand object.
-     *
-     * @param commandArgs A String object that represents the user's arguments.
-     * @return A GroupCreateCommand object if group name and person list were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        try {
-            String parsedGroupName = Parser.parseName(commandArgs);
-            String[] parsedNameList = Parser.parsePersonList(commandArgs);
-            return new GroupCreateCommand(parsedGroupName, parsedNameList);
-        } catch (InvalidFormatException formatException) {
-            String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
-        }
-    }
-
-    /**
      * Runs the command to create a Group object to be stored in the list of groups managed by the Profile Object.
      * Checks if array of names has duplicates and if group name exists.
      * If check fails, no group will be created and prints error message.
@@ -92,8 +74,7 @@ public class GroupCreateCommand extends Command {
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST);
             return;
         }
-        PersonList personList = new PersonList();
-        personList.convertToPersonList(personNames);
+        PersonList personList = new PersonList(personNames);
         int newGroupId = profile.getNewGroupId();
         Group newGroup = new Group(groupName, newGroupId, personList);
         profile.addGroup(newGroup);

@@ -8,6 +8,7 @@ import seedu.splitlah.ui.TableFormatter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  * Represents a group outing session which contains a list of activities and is participated by a group of participants.
@@ -94,8 +95,12 @@ public class Session implements Serializable, Comparable<Session> {
      *
      * @return An ArrayList object containing Person objects that are part of the session.
      */
-    public ArrayList<Person> getPersonList() {
+    public ArrayList<Person> getPersonArrayList() {
         return personList.getPersonList();
+    }
+
+    public PersonList getPersonList() {
+        return personList;
     }
 
     /**
@@ -185,6 +190,7 @@ public class Session implements Serializable, Comparable<Session> {
      *                              if activityList does not contain an Activity object with the specified activityId
      */
     public void removeActivity(int activityId) throws InvalidDataException {
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITY_REMOVAL + activityId);
         if (activityList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST);
         }
@@ -206,9 +212,11 @@ public class Session implements Serializable, Comparable<Session> {
         if (involvedPersonList != null) {
             boolean isPayerInParticipantList = involvedPersonList.contains(payer);
             for (Person person : involvedPersonList) {
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + person.getName());
                 person.removeActivityCost(activityId);
             }
             if (!isPayerInParticipantList) {
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + payer.getName());
                 payer.removeActivityCost(activityId);
             }
         }
@@ -337,6 +345,7 @@ public class Session implements Serializable, Comparable<Session> {
      */
     @Override
     public int compareTo(Session session) {
+        assert session != null : Message.ASSERT_SESSION_COMPARED_SESSION_NULL;
         return Integer.compare(sessionId, session.getSessionId());
     }
     
