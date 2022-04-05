@@ -180,7 +180,7 @@ _to be updated_
 ---
 
 ### Schedule-related features
-_to be updated_
+![ScheduleUML](uml/classDiagrams/images/scheduleComponent.png)
 
 ---
 
