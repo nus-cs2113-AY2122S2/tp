@@ -300,6 +300,12 @@ the `<keywords>` is not specified, an `InvalidCommandException` will be thrown.
   * [Search for Plan](#search-for-plan)
   * [Search for All](#search-for-all)
 * [File Management](#file-management)
+  * [About the Location of Directories and Files Created](#about-the-location-of-directories-and-files-created)
+  * [Storage Format for Each Resource File](#storage-format-for-each-resource-file)
+  * [Loading Resource File Data Into WerkIt!](#loading-resource-file-data-into-werkit)
+  * [Writing a New Line of Data to the Resource File](#writing-a-new-line-of-data-to-the-resource-file)
+  * [Rewriting the Resource Entire File With the Most Recent Set of Data](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data)
+  * [About the `LogHandler` Class](#about-the-loghandler-class)
   * [Design Considerations](#design-considerations-for-file-management)
 
 ---
