@@ -1273,6 +1273,23 @@ create a new directory to put the WerkIt! JAR file in and to set his/her current
 application. This is to ensure that the resource directories and files are created in the same location as the WerkIt!
 JAR file to ensure cleanliness on the user's local filesystem.
 
+#### Storage Format for Each Resource File
+There are four resource files in total: `exercises.txt`, `workouts.txt`, `plans.txt`, and `schedule.txt`. For all
+four resource files, each line in the file represents one entry of data.
+
+The data format for a line in each file is as follows:
+
+| File            | Data Format                               | Example             |
+|-----------------|-------------------------------------------|---------------------|
+| `exercises.txt` | `<exercise name>`                         | `push up`           |
+| `workouts.txt`  | `<exercise name>  \| <repetition value>` | `push up \| 10` |
+| `plans.txt`     | `<plan name> <workout 1>,<workout 2>,...` | `Plan 1 \| push up \| 10,pull up \| 10` |
+| `schedule.txt`  | `<day number of the week> \| <plan name>` | `1 \| Plan 1` |
+
+<span class="info box">:memo: In our application, the week starts on a Monday. Thus, in `schedule.txt`, if the day number
+is `1`, it means that plan is meant for Monday, `2` for Tuesday, and so on...</span>
+
+
 #### Writing a New Line of Data to the Resource File
 Writing a new line of data to the respective resource files is done when the user creates a new workout or plan.
 See [this design consideration](#design-considerations-for-how-data-is-written-or-updated-to-a-resource-file)
@@ -1376,11 +1393,11 @@ The following table shows whether a certain operation writes a new line of data 
 :large_blue_diamond:: Only write the new line of data to the resource file<br/>
 :large_orange_diamond:: Rewrite the entire resource file with the most recent set of data
 
-| Data Type \ Operation | Create | Update | Delete |
-|:---:|:---:|:---:|:---:|
-| Workout | :large_blue_diamond: | :large_orange_diamond: | :large_orange_diamond: |
-| Plans | :large_blue_diamond: | :large_orange_diamond: | :large_orange_diamond: |
-| Schedule | _N.A._ | :large_orange_diamond: | :large_orange_diamond: |
+| Data Type \ Operation |        Create        |         Update          |         Delete         |
+|:---------------------:|:--------------------:|:-----------------------:|:----------------------:|
+|        Workout        | :large_blue_diamond: | :large_orange_diamond:  | :large_orange_diamond: |
+|         Plans         | :large_blue_diamond: | :large_orange_diamond:  | :large_orange_diamond: |
+|       Schedule        |        _N.A._        | :large_orange_diamond:  | :large_orange_diamond: |
 
 <span class="info box">:memo: The delete operations for schedule commands is the `schedule /clear` and `schedule /clearall`
 commands.</span>
@@ -1395,13 +1412,12 @@ all the data can be matched, the files will be loaded successfully, otherwise on
 
 Although the users are warned not to edit the local resource files as this action may corrupt the stored data,
 resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
-the files. Thus, other than the warning in our [UserGuide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
+the files. Thus, other than the warning in our [User Guide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
 we also implemented error handling methods to handle the situation where users edited the files and caused data 
 corruptions. We could have implemented the handling of "corrupted data" in a more hassle-free way by simply clearing 
 all local data. However, in order to provide the best possible user experience by minimising the amount of data lost in 
 such situations, we decided to implement the validity checking such that only the affected data are removed while 
 keeping all the non-affected data safely.
-
 
 
 
