@@ -53,11 +53,11 @@ public class ModHappyParserTest {
         });
     }
 
-    private void testParseCommand_expectInvalidNumberException(String testString) {
+    /*private void testParseCommand_expectInvalidNumberException(String testString) {
         assertThrows(InvalidNumberException.class, () -> {
             parser.parseCommand(testString);
         });
-    }
+    }*/
 
     @BeforeEach
     public void setUp() {
@@ -413,11 +413,11 @@ public class ModHappyParserTest {
         }
     }
 
-    @Test
+    /*@Test
     public void parse_deleteCommand_withTaskOnly_integerOverflow() {
         final String testString = "del task 2147483648";
         testParseCommand_expectInvalidNumberException(testString);
-    }
+    }*/
 
     @Test
     public void parse_deleteCommand_withModuleOnly_parsedCorrectly() {
