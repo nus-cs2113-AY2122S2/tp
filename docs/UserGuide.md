@@ -40,15 +40,16 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 
 ## Features 
 
-### Add a project: `addproject`
+### Add a project: ```addproject```
 Add a project to your current list of projects
 
 Format: `addproject [project_name]`
 *The `project_name` can be of any length, number of words, and any types of characters.  
 *The `project_name` cannot be pure whitespace.
 
+
 #### Example of usage
-`addproject project1`
+```addproject project1```
 
 #### Example of output
 ```project1 added.```
@@ -72,7 +73,8 @@ Prints all projects in the list with their names and project deadlines
 
 Format: `listprojects` or `listproject`
 
-* The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.
+* The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.  
+
 ---
 ### Add todo to a project: `todo`
 Adds a todo task with description to a project
@@ -206,7 +208,7 @@ Format: `exit`
 ---
 ## FAQ
 
-**Q**: How do I transter my data to another computer?
+**Q**: How do I transfer my data to another computer?
 
 **A**: Copy the data file named `projectList.txt` through `your working directory/src/data/`, then send it to another computer.
 
