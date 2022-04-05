@@ -180,7 +180,7 @@ The following meeting has been added to everyone's timetable:
 ### Deleting an event: `delete`
 Deletes an event from the user's specified timetable
 
-**Format:** ` delete n/NAME`
+**Format:** ` delete n/NAME i/INDEX`
 
 * Deletes from the timetable of user
 
