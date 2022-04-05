@@ -1,5 +1,6 @@
 package data.exercises;
 
+import data.plans.InvalidPlanException;
 import textcolors.TextColor;
 import werkit.UI;
 
@@ -104,5 +105,25 @@ public class ExerciseList {
         defaultExerciseList.add("burpee");
 
         return defaultExerciseList;
+    }
+
+    /**
+     * Retrieves the index number of a plan based on its position in the exerciseList
+     * ArrayList.
+     *
+     * @param exerciseName The name of the exercise whose index number this method has to find.
+     * @return An integer representing the index number the exercise is listed in the exerciseList
+     *         ArrayList.
+     * @throws InvalidExerciseException If the given plan name was not found in exerciseList.
+     */
+    public int getIndexNumFromExerciseName(String exerciseName) throws InvalidExerciseException {
+        for (int i = 0; i < getExerciseList().size(); i += 1) {
+            if (getExerciseList().get(i).equals(exerciseName)) {
+                return (i + 1);
+            }
+        }
+
+        String className = this.getClass().getSimpleName();
+        throw new InvalidExerciseException(className, InvalidExerciseException.INVALID_EXERCISE_NAME_ERROR_MSG);
     }
 }
