@@ -5,6 +5,7 @@ box AddCommand
 participant ":Parser" as Parser LOGIC_COLOR_T1
 participant "Command:AddCommand" as AddCommand LOGIC_COLOR_T1
 end box
+hide footbox
 
 Parser -> AddCommand: AddCommand.executeCommand()
 activate AddCommand
