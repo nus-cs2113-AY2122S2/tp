@@ -46,11 +46,11 @@ public class SessionEditCommand extends Command {
     /**
      * Returns the new list of persons if all checks are passed.
      *
-     * @param oldPersonList A PersonList object that represents the existing session's PersonList.
+     * @param oldPersonList A PersonList object that represents the PersonList of the session to be edited.
      * @return A PersonList object represents the new PersonList for a session.
      * @throws InvalidDataException If there were duplicates in the new personNames,
      *                              if there were invalid names in the new personNames,
-     *                              if personNames did not contain the existing names in the session.
+     *                              if there were missing existing names in the new personList.
      */
     private PersonList getNewPersonList(PersonList oldPersonList) throws InvalidDataException {
         boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
@@ -70,7 +70,7 @@ public class SessionEditCommand extends Command {
     /**
      * Returns the new session name if all checks are passed.
      *
-     * @param oldSessionName A String that represents the existing session's name.
+     * @param oldSessionName A String that represents the name of the session to be edited.
      * @param profile        A Profile object that contains the list of session.
      * @return A String that represents the new session name.
      * @throws InvalidDataException If the new session name exists within the list of session other than itself.
