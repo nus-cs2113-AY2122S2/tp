@@ -167,12 +167,11 @@ to write all the data stored in the `Profile` component into the save file witho
 <br>
 The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class,
 as well as the `CommandParser` class and its subclasses.<br>
-* The `Parser` class provides utility methods to parse commands and arguments from the user and
+* The `Parser` class provides methods to parse commands from the user and
   return a `Command` object representing an instruction that the user has for SplitLah.<br>
-  `Parser` class is the only class in the `Parser` component that other external classes actively interact with.<br>
-* The `ParserUtils` class provide supporting methods for `Parser` class to properly run,
+* The `ParserUtils` class provide supporting methods to parse individual arguments from the user input,
   and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.<br>
-* The subclasses of `CommandParser` then serve to parse all arguments of a user input to create an object of a specific
+* The subclasses of `CommandParser` serve to parse all arguments of a user input to create an object of a corresponding
   subclass of the `Command` class.
 
 The general workflow of the `Parser` component is as follows:
@@ -181,9 +180,9 @@ The general workflow of the `Parser` component is as follows:
 2. `Parser` class instantiates a new `XYZCommandParser` object corresponding to the user input 
    and passes the user input to it.
    (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
-3. The `XYZCommandParser` object then uses parse methods from `Parser` class to extract all the
+3. The `XYZCommandParser` object then uses parse methods from `ParserUtils` class to extract all the
    arguments from the user input.
-   * Each of these parse methods in `Parser` class then calls utility methods from `ParserUtils` class 
+   * Each of these parse methods in `ParserUtils` class then calls other utility methods within the class 
      to return a parsed value.
 4. All relevant arguments that are parsed are then used to create a new `XYZCommand `object to be
    returned to the `Parser` class.
@@ -231,46 +230,36 @@ the Command component when any user input is provided to SplitLah.
 <br>
 1. When `SplitLah` reads a user input, `SplitLah` calls the `Parser#getCommand` method and passes the
    user input as the argument.
-2. Given the user input, `Parser` class first decomposes the user input into two separate components, the _command type_
+2. `Parser` class decomposes the user input into two separate components, the _command type_
    and the _remaining arguments_.
-   This is done using the two methods `Parser#getCommandType` and `Parser#getRemainingArguments` respectively.<br>
-   Where the input is `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`, the _command type_ is parsed as
-   `session /create` and the _remaining arguments_ is parsed as `/n Class Outing /d 15-03-2022 /pl Alice Bob`.
-   1. If the _command type_ is of invalid syntax, the method `Parser#getCommandType` returns null.
-      When null is returned, `Parser` class creates and returns an `InvalidCommand` object to `SplitLah`.
-   2. Next, to check whether the _command type_ and _remaining arguments_ are valid, `Parser` class calls the method
+   With the two methods `Parser#getCommandType` and `Parser#getRemainingArguments`,
+   `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` is parsed separately as
+   `session /create` and `/n Class Outing /d 15-03-2022 /pl Alice Bob`.
+   1. If the _command type_ is invalid, the method `Parser#getCommandType` returns null to `Parser` class.
+      An `InvalidCommand` object is then created and returned to `SplitLah`.
+   2. `Parser` class then validates the _command type_ and the _remaining arguments_ with
       `Parser#checkIfCommandIsValid`. If either the _command type_ or the _remaining arguments_ are invalid, an error
       message is returned by the method, which is then used to return an `InvalidCommand` object to `SplitLah`.
-3. Depending on the _command type_, `Parser` class instantiates an appropriate `XYZCommandParser` object. For example,
+3. `Parser` class creates the `XYZCommandParser` object for a `XYZCommand`. For example,
    for a _command type_ of `"session /create"`, a `SessionCreateCommandParser` object is instantiated.
    If `Parser` class does not recognise the _command type_, an `InvalidCommand` object is created and returned immediately.
-4. With the corresponding `XYZCommandParser` object instantiated, `Parser` class calls the `getCommand` method
-   of `XYZCommandParser`. This process is explained in further detail in the sequence diagrams below.
 
    ![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
 
-   ![Reference Frame ParseABC Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefParseABC.drawio.png)
-
-   ![Reference Frame InvalidCommand Instantiation Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefInvalidCommand.drawio.png)
-
-5. After `XYZCommandParser#getCommand` is called, `XYZCommandParser` prepares to create a `XYZCommand` object. 
-   To begin with, it parses all the _remaining arguments_ using `ParseABC` methods from the `Parser` class.
-   (`ParseABC` is a placeholder for specific methods in `Parser` class, 
-   e.g. `Parser#parseName` and `Parser#parseSessionId`)
-   * For example, `SessionCreateCommandParser` has to call `parsePersonList`, `parseGroupId`, `parseName` and
-     `parseLocalDate` from `Parser` class in order to get the details to create a `Session` object.
+4. `Parser` class calls the `getCommand` method of `XYZCommandParser`.
+5. `XYZCommandParser` parses all _remaining arguments_ using `parseABC` methods from the `ParserUtils` class.
+   (`parseABC` is a placeholder for specific methods in `ParserUtils` class, 
+   e.g. `ParserUtils#parseName` and `ParserUtils#parseSessionId`)
+   * For example, `SessionCreateCommandParser` has to call the `parsePersonList`, `parseGroupId`, `parseName` and
+     `parseLocalDate` methods from `ParserUtils` class.
    * If an exception is encountered, `XYZCommandParser` handles the exception accordingly, and if necessary,
      throws an exception back to `Parser` class, resulting in an `InvalidCommand` object being created and returned.
-6. In detail, when `Parser#parseABC` is called, `Parser` class calls the method `getArgumentFromDelimiter` from
-   `ParserUtils` class, which returns the respective object being parsed.
-   * For example, when `SessionCreateCommandParser` calls `Parser#parsePersonList`,
-     `ParserUtils#getArgumentFromDelimiter` is called. After returning a `String` object containing the arguments to
-     `Parser` class, `Parser` class returns a `String[]` object to `SessionCreateCommandParser` after processing the
-     arguments.
-   * Any exception encountered by `ParserUtils` class is propagated back to `XYZCommandParser` to be handled.
-7. After all necessary information is parsed, `XYZCommandParser` instantiates a new `XYZCommand` object and passes
-   all parsed information to it through the constructor.
-8. The newly instantiated `XYZCommand` object is then returned from `XYZCommandParser` to `Parser` class,
+6. `ParseUtils#parseABC` then calls `ParserUtils#getArgumentFromDelimiter` to extract the relevant argument from
+   the _remaining arguments_ and returns a corresponding parsed object.
+   * For example, `ParserUtils#parseName` returns a `String` object representing a name.
+7. After all necessary information is parsed, `XYZCommandParser` instantiates a new `XYZCommand` object with
+   all the parsed information.
+8. The `XYZCommand` object is then returned from `XYZCommandParser` to `Parser` class,
    and finally back to `SplitLah` to be run.
 
 ## Session Commands
