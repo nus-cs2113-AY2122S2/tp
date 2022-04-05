@@ -431,19 +431,30 @@ computer.
 To keep things simple, we will omit the parameter description for you. To view each command in detail, refer to
 the [features](#features) section.
 
-| Command                                                             | Format                                                |
-|---------------------------------------------------------------------|-------------------------------------------------------|
-| [View all commands](#viewing-all-commands-help)                     | help                                                  |
-| [Add a person](#add-a-person-add)                                   | add /n __ /g __                                       |
-| [Delete a person](#delete-a-person-delete)                          | delete /g __ /u __                                    |
-| [Add an income](#add-an-income-addin)                               | addin /g__ /u __ /i __ /d __ /p __                    |
-| [Delete an income](#delete-an-income-deletein)                      | deletein /g __ /u __ /r __                            |
-| [Edit an income](#edit-an-income-editin)                            | editin /g __ /u __ /r __ [ /i __ /d __ /p __ ]        |
-| [Add an expenditure](#add-an-expenditure-addout)                    | addout /g__ /u __ /e __ /d __ /c __ /p __             |
-| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /g __ /u __ /r __                           |
-| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /g __ /u __ /r __ [ /e __ /d __ /c __ /p __ ] |
-| [Show financial summary](#show-financial-summary-overview)          | overview                                              |
-| [Show all records by group](#show-all-records-by-group-list)        | list /g __                                            | 
-| [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                               |
-| [Searching for details](#searching-for-details-find)                | find /d __ [ /c __ ]                                  |
-| [Exit the program](#exit-bye)                                       | bye                                                   |
+| Command                                                             | Format                                                                                                                                                              |
+|---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [View all commands](#viewing-all-commands-help)                     | help                                                                                                                                                                |
+| [Add a person](#add-a-person-add)                                   | add /n __ /g __ <br/>e.g.<br/> `> add /n Alice /g 1`                                                                                                                |
+| [Delete a person](#delete-a-person-delete)                          | delete /g __ /u __ <br/>e.g.<br/> `> delete /g 1 /u 2`                                                                                                              |
+| [Add an income](#add-an-income-addin)                               | addin /g__ /u __ /i __ /d __ /p __ <br/>e.g.<br/>f`> addin /g 2 /u 3 /i 2000 /d salary /p t`                                                                        |
+| [Delete an income](#delete-an-income-deletein)                      | deletein /g __ /u __ /r __ <br/>e.g.<br/> `> deletein /g 2 /u 1 /r 5`                                                                                               |
+| [Edit an income](#edit-an-income-editin)                            | editin /g __ /u __ /r __ [ /i __ /d __ /p __ ] <br/>e.g.<br/> `> editin /g 3 /u 1 /r 5 /i 10 /d stationary` <br/>f`> editin /g 2 /u 4 /r 1 /d red pack /p f`        |
+| [Add an expenditure](#add-an-expenditure-addout)                    | addout /g__ /u __ /e __ /d __ /c __ /p __ <br/>e.g.<br/> `> addout /g 2 /u 3 /e 400 /d books /c 1 /p f`                                                             |
+| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /g __ /u __ /r __ <br/>e.g.<br/> `> deleteout /g 2 /u 1 /r 1`                                                                                             |
+| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /g __ /u __ /r __ [ /e __ /d __ /c __ /p __ ] <br/>e.g.<br/> `> editout /g 2 /u 1 /r 2 /e 400 /d dinner /c 3` <br/> `> editout /g 1 /u 2 /r 6 /d misc /p t` |
+| [Show financial summary](#show-financial-summary-overview)          | overview                                                                                                                                                            |
+| [Show all records by group](#show-all-records-by-group-list)        | list /g __ <br/>e.g.<br/> `> list /g 1`                                                                                                                             | 
+| [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                                                                                                                                             |
+| [Searching for details](#searching-for-details-find)                | find /d __ [ /c __ ] <br/>e.g.<br/> `> find salary` <br/> `> find sugar /c 4`                                                                                       |
+| [Exit the program](#exit-bye)                                       | bye                                                                                                                                                                 |
+
+[**Categoty Summary**](#show-expenditure-categories-listcat)
+
+| Index | Name                  |
+|-------|-----------------------|
+| 0     | Others                |
+| 1     | Food and Drinks       |
+| 2     | Home and Utilities    |
+| 3     | Health and Medical    |
+| 4     | Transportation        |
+| 5     | Fun and Entertainment |
