@@ -50,8 +50,6 @@ public class StaffManagerTest {
         assertDoesNotThrow(() -> staffManager.findByStaffId(2));
         assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(-1));
         assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(0));
-        assertDoesNotThrow(() -> staffManager.deleteByStaffId(1));
-        assertDoesNotThrow(() -> staffManager.deleteByStaffId(2));
     }
 
     @Test
