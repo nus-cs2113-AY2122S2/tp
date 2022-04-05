@@ -3,8 +3,6 @@ package data.workouts;
 import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
-import data.plans.InvalidPlanException;
-import data.plans.PlanList;
 import storage.LogHandler;
 
 import java.util.ArrayList;
@@ -18,8 +16,6 @@ import java.util.logging.Level;
  * create, modify, and delete workouts.
  */
 public class WorkoutList {
-    public static final int MAX_DISPLAY = 10;
-
     private ExerciseList exerciseList;
     private HashMap<String, Workout> workoutsHashMapList = new HashMap<>();
     private ArrayList<String> workoutsDisplayList = new ArrayList<>();
@@ -192,7 +188,7 @@ public class WorkoutList {
         }
     }
 
-
+    //@@author Musfirahe0556596
     /**
      * This method removes the intended workout in the workout list.
      * The intended workout to delete is determined by the user who
@@ -235,6 +231,7 @@ public class WorkoutList {
     private boolean checkIndexIsWithinRange(int index) {
         return index > 0 && index <= workoutsDisplayList.size();
     }
+    //@@author
 
     /**
      * Updates the number of repetitions of an existing workout.
