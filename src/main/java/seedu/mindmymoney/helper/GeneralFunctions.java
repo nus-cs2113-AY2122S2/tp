@@ -107,6 +107,9 @@ public class GeneralFunctions {
             case TIME:
                 findMatchingTime(searchTerm, foundItems, itemList);
                 break;
+            default:
+                throw new MindMyMoneyException("Search term that have yet to be implemented! "
+                    + "Look out for our future updates");
             }
             if (foundItems.size() == 0) {
                 throw new MindMyMoneyException("The task \"" + searchTerm + "\" was not found in the list, sorry!");
