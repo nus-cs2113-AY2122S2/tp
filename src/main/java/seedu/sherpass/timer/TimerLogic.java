@@ -13,7 +13,7 @@ import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.util.parser.TimetableParser;
-import seedu.sherpass.util.timetable.Timetable;
+import seedu.sherpass.timetable.Timetable;
 
 import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
@@ -33,7 +33,7 @@ public class TimerLogic implements WindowListener {
     private static Ui ui;
     private static Timer timer;
     private static TaskList taskList;
-    protected volatile boolean isTimerInitialised = false;
+    protected static volatile boolean isTimerInitialised = false;
     private final JFrame jframe;
     private final JLabel jlabel;
     private final ActionListener actionListenerPause = actionEvent -> {
@@ -49,9 +49,19 @@ public class TimerLogic implements WindowListener {
         ui.showLine();
     };
 
-    private void setWindowParameters() {
-        jframe.setLayout(new BorderLayout());
+    /**
+     * Creates a constructor for TimerLogic.
+     *
+     * @param ui       UI
+     * @param taskList taskList
+     */
+    public TimerLogic(TaskList taskList, Ui ui) {
+        TimerLogic.taskList = taskList;
+        TimerLogic.ui = ui;
+        jframe = new JFrame();
         jframe.setBounds(500, 300, 300, 100);
+        jlabel = new JLabel(EMPTY_STRING, SwingConstants.CENTER);
+        jframe.setLayout(new BorderLayout());
         jframe.add(jlabel, BorderLayout.NORTH);
         jframe.addWindowListener(this);
         JToggleButton pauseButton = new JToggleButton("Pause");
@@ -63,20 +73,6 @@ public class TimerLogic implements WindowListener {
         JToggleButton stopButton = new JToggleButton("stop");
         stopButton.addActionListener(actionListenerStop);
         jframe.add(stopButton, BorderLayout.EAST);
-    }
-
-    /**
-     * Creates a constructor for TimerLogic.
-     *
-     * @param ui       UI
-     * @param taskList taskList
-     */
-    public TimerLogic(TaskList taskList, Ui ui) {
-        TimerLogic.taskList = taskList;
-        TimerLogic.ui = ui;
-        jframe = new JFrame();
-        jlabel = new JLabel(EMPTY_STRING, SwingConstants.CENTER);
-        setWindowParameters();
     }
 
     /**
@@ -95,7 +91,7 @@ public class TimerLogic implements WindowListener {
 
 
     private void executeMark(Storage storage, String parsedInput) {
-        Command c = TaskParser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
+        Command c = TaskParser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD);
         if (c != null) {
             c.execute(taskList, ui, storage);
             printAvailableCommands();
@@ -113,7 +109,7 @@ public class TimerLogic implements WindowListener {
     }
 
     public void showTasks(Storage storage, String[] parsedInput) {
-        if (!isTimerInitialised) {
+        if (isTimerPausedOrStopped()) {
             executeShow(storage, parsedInput);
         } else {
             ui.showToUser("You can't show tasks while timer is running!");
@@ -195,8 +191,12 @@ public class TimerLogic implements WindowListener {
         ui.showToUser("You don't have a timer running!");
     }
 
-    private boolean updateIsTimerRunning() {
+    private static boolean updateIsTimerRunning() {
         return timer.isTimerRunning();
+    }
+
+    public static void resetIsTimerInitialised() {
+        isTimerInitialised = false;
     }
 
     private String selectStudyTimer(String[] parsedInput) {
@@ -227,6 +227,9 @@ public class TimerLogic implements WindowListener {
      */
     public boolean isTimerPausedOrStopped() {
         if (!isTimerInitialised) {
+            return true;
+        }
+        if (!timer.isTimerRunning()) {
             return true;
         }
         return timer.isTimerPaused();

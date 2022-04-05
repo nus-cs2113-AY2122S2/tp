@@ -1,7 +1,7 @@
 package seedu.sherpass.util;
 
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.util.timetable.Timetable;
+import seedu.sherpass.timetable.Timetable;
 
 import java.util.Scanner;
 
@@ -118,5 +118,22 @@ public class Ui {
             output.append(character);
         }
         return output.toString();
+    }
+
+    public boolean readYesNoCommand(String message) {
+        System.out.println(message);
+        while (true) {
+            String input = readCommand();
+            showLine();
+            if (input.trim().equalsIgnoreCase("Y")
+                    || input.trim().equalsIgnoreCase("Yes")) {
+                return true;
+            } else if (input.trim().equalsIgnoreCase("N")
+                    || input.trim().equalsIgnoreCase("No")) {
+                return false;
+            }
+            showToUser("Please confirm your choice with either Y (Yes) or N (No).");
+            showLine();
+        }
     }
 }

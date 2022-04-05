@@ -1,9 +1,12 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.constant.Index;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.task.TaskList;
+
+import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
 
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
@@ -20,12 +23,8 @@ public class UnmarkCommand extends Command {
      * Saves index of task to mark.
      *
      * @param markIndex Task index to mark.
-     * @param taskList  Task array.
      */
-    public UnmarkCommand(int markIndex, TaskList taskList) throws IndexOutOfBoundsException {
-        if (taskList.isTaskNotExist(markIndex)) {
-            throw new IndexOutOfBoundsException();
-        }
+    public UnmarkCommand(int markIndex) {
         this.markIndex = markIndex;
     }
 
@@ -38,11 +37,16 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        if (!taskList.isTaskDone(markIndex)) {
-            ui.showToUser("This task was already unmarked!");
-            return;
+        try {
+            if (!taskList.isTaskDone(markIndex)) {
+                ui.showToUser("This task was already unmarked!");
+                return;
+            }
+            taskList.unmarkTask(markIndex);
+            storage.writeSaveData(taskList);
+            ui.showToUser("Ok, I've marked this task as" + " not done yet:\n  " + taskList.getTask(markIndex));
+        } catch (IndexOutOfBoundsException exception) {
+            ui.showToUser(ERROR_INVALID_MARKING_INDEX_MESSAGE);
         }
-        taskList.unmarkTask(markIndex, ui);
-        storage.writeSaveData(taskList);
     }
 }

@@ -2,7 +2,7 @@ package seedu.sherpass.timer;
 
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
-import seedu.sherpass.util.timetable.Timetable;
+import seedu.sherpass.timetable.Timetable;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -78,7 +78,8 @@ public class Countdown extends Timer  {
             jframe.setVisible(false);
             assert timeLeft <= NO_TIME_LEFT;
             isTimerRunning = false;
-            ui.showToUser("Time is up!\n "
+            TimerLogic.resetIsTimerInitialised();
+            ui.showToUser("Time is up!\n"
                     + "Would you like to start another timer, mark a task as done, or leave the study session?");
             Timetable.showTodaySchedule(taskList, ui);
             ui.showLine();

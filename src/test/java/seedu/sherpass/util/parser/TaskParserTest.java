@@ -13,7 +13,6 @@ import java.time.Month;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_ADD_COMMANDS_MESSAGE;
@@ -23,7 +22,7 @@ import static seedu.sherpass.constant.Message.WHITESPACE;
 public class TaskParserTest {
 
     @Test
-    void parseArgument_byParameter_expectDateTime() throws InvalidInputException {
+    void parseArgument_byParameter_expectDateTime() {
         String date = "foo /by 21/12/2022 /start 09:00";
         String expected = "21/12/2022";
         String result = TaskParser.parseArgument("/by", date);
@@ -31,7 +30,7 @@ public class TaskParserTest {
     }
 
     @Test
-    void parseArgument_invalidParameter_expectEmptyString() throws InvalidInputException {
+    void parseArgument_invalidParameter_expectEmptyString() {
         String date = "foo /by 21/12/2022 09:00";
         String actualOutput = TaskParser.parseArgument("/do", date);
         assertEquals(EMPTY_STRING, actualOutput);
@@ -43,7 +42,7 @@ public class TaskParserTest {
         String input = "foo /by 21/12/2022";
         String expected = "foo";
         String result = TaskParser.parseDescription(input);
-        assertEquals(result, expected);
+        assertEquals(expected, result);
     }
 
     @Test
@@ -51,28 +50,6 @@ public class TaskParserTest {
         String input = "/by 21/12/2022";
         String actualOutput = TaskParser.parseDescription(input);
         assertEquals(EMPTY_STRING, actualOutput);
-    }
-
-
-
-    @Test
-    void removeRecurringDelimiter_noDelimiter_expectIdenticalString() {
-        /*
-        String input = "foo";
-        String actualOutput = TaskParser.removeRecurringDelimiter(input);
-        assertEquals(input, actualOutput);
-
-         */
-        assertTrue(true);
-    }
-
-    @Test
-    void removeRecurringDelimiter_haveDelimiter_expectFoo() {
-        /*String input = "foo /repeat";
-        String actualOutput = TaskParser.removeRecurringDelimiter(input);
-        String expectedOutput = "foo";
-        assertEquals(expectedOutput, actualOutput);*/
-        assertTrue(true);
     }
 
     @Test
