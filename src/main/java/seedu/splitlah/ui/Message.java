@@ -370,6 +370,8 @@ public abstract class Message {
             "There is an error in the cost list or total cost of this activity.";
     public static final String ERROR_ACTIVITYEDIT_COST_NEGATIVE =
             "The cost cannot be negative.";
+    public static final String ERROR_ACTIVITYEDIT_COSTLIST_AND_COSTOVERALL_SUPPLIED =
+            "Either a cost list or overall cost may be supplied, but not both.";
 
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =

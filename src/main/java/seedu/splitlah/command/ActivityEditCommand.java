@@ -371,7 +371,7 @@ public class ActivityEditCommand extends Command {
             activityType = TYPE_COSTLIST;
         } else {
             // throws exception if both costlist and overall cost are specified.
-            throw new InvalidDataException("Both cost list and cost were specified.");
+            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COSTLIST_AND_COSTOVERALL_SUPPLIED);
         }
         // retrieves payer name if no payer is provided
         if (Objects.equals(payer, MISSING_PAYER)) {
