@@ -1,7 +1,9 @@
 package seedu.duke.eventlists;
 
+import seedu.duke.exceptions.EventDoesNotExist;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidDateException;
+import seedu.duke.exceptions.InvalidDeleteEventException;
 import seedu.duke.storage.EventListFileManager;
 
 import java.io.IOException;
@@ -37,14 +39,14 @@ public class EventList {
         }
     }
 
-    public void delete(String n) throws InvalidDateException {
+    public void delete(String n) throws EventDoesNotExist {
         try {
             int j = Integer.parseInt(n) - 1;
             Event deleted = eventList.get(j);
             eventList.remove(j);
             ui.printEventDeleted(deleted);
         } catch (Exception e) {
-            throw new InvalidDateException();
+            throw new EventDoesNotExist();
         }
     }
 

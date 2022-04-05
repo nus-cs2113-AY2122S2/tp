@@ -55,7 +55,7 @@ public class AddEventCommand extends Command {
     private String[] extractInput(String commandStringWithoutCommand) throws HotelLiteManagerException {
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(EVENT_INDICATE);
         if (isSymbolIncorrect) {
-            throw new InvalidAvailabilityException();
+            throw new InvalidEventException();
         }
         String[] input = commandStringWithoutCommand.split(EVENT_INDICATE);
         return input;

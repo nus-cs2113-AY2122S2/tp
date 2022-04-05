@@ -6,6 +6,7 @@ import seedu.duke.command.Command;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.eventlists.EventList;
+import seedu.duke.exceptions.InvalidDeleteEventException;
 import seedu.duke.exceptions.InvalidEventException;
 
 import java.io.IOException;
@@ -21,13 +22,13 @@ public class DeleteEventCommand extends Command {
     public DeleteEventCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         if (commandStringWithoutCommand.isEmpty()) {
             logger.log(Level.INFO, "empty string");
-            throw new InvalidEventException();
+            throw new InvalidDeleteEventException();
         }
         String[] input = extractInput(commandStringWithoutCommand);
         String n = input[0].trim();
         if (input.length != ONLY_ONE_FIELD_ENTERED) {
             logger.log(Level.INFO, "more than one field entered");
-            throw new InvalidEventException();
+            throw new InvalidDeleteEventException();
         }
 
         setIndex(n);
