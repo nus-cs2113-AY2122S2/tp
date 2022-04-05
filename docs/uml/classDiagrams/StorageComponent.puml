@@ -1,23 +1,27 @@
 @startuml
 !include ../style.puml
 
-title Class Diagram of the File Manager
-
 skinparam classAttributeIconSize 0
 skinparam classFontsize 14
 skinparam classAttributeFontSize 13
 skinparam arrowThickness 2
 skinparam noteFontSize 13
 
-class FileManager
-class LogHandler
+hide circle
+
 class UI
 class WerkIt
-package commands <<folder>> {
+package "Command Component" <<rectangle>> {
     class WorkoutCommand
     class PlanCommand
     class ScheduleCommand
 }
+package "Storage Component" <<rectangle>> {
+    class FileManager
+    class LogHandler
+}
+
+
 
 'Associations
 LogHandler ..> FileManager
@@ -26,7 +30,7 @@ FileManager ..> LogHandler
 FileManager --> UI
 UI ..> FileManager
 
-WerkIt --> FileManager
+WerkIt -r-> "1" FileManager
 
 WorkoutCommand --> FileManager
 PlanCommand --> FileManager
