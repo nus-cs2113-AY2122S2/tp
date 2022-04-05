@@ -99,7 +99,7 @@ output in your terminal:
 
 You are now ready to begin developing!
 
-<a class="button" href="#">Back to Top</a> 
+<div class="button-container"><a class="button" href="#">Back to Top</a></div> 
 
 ## Design 
 ### Architecture Overview
