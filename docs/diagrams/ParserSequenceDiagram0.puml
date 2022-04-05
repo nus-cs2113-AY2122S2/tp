@@ -76,7 +76,7 @@ loop LOOP_COLOR for each XYZ term in command
         ' notMoney
         else //XYZ// is not Money
 
-            opt OPT_COLOR //XYZ// is an integer
+            opt OPT_COLOR //XYZ// is not an integer
                 Parser -->[ : :InvalidIndexException
             end opt
 

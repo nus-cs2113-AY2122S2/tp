@@ -138,7 +138,11 @@ The `Command` class is an abstract class that has abstract method ``
 
 ![ParserClassDiagram](images/ParserClassDiagram.png)
 
-The `Parser` component consists of the `Parser` class, `ParserUtility` class and several `Exception` classes.
+The `Parser` component consists of the 
+[`Parser`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java) 
+class, 
+[`ParserUtility`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/ParserUtility.java)
+class and several `Exception` classes.
 
 The `Parser` class provides the `parseXYZ()` and `getValidXYZ()` methods where `XYZ` is a placeholder for the type of
 term (e.g. `parseCommandType()` and `getValidUserIndex`). The methods prepended by **parse** assists in parsing the user
@@ -146,13 +150,6 @@ input into its respective terms and the method prepended by **getValid** assists
 returning an appropriately typed object to the `Commands` component. The `Parser` class interacts with the
 `ParserUtility` class which provides supporting methods for parsing and validating. Both classes throws exceptions as
 required.
-
-The following Sequence Diagram shows how the classes of the `Parser` component interacts for each user command.
-
-![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
-
-> :information_source: **Note:** The borders of the Sequence Diagram may look cut-off due to PlantUML limitations.
-> No necessary information has been omitted due to it.
 
 How the `Parser` component is used:
 
@@ -166,11 +163,41 @@ How the `Parser` component is used:
    used for the command execution (e.g. `getValidGroupIndex(indexString)` to check that the index provided corresponds
    to an existing group). The `ParserUtility` is also called here to assist with the validation process.
 
-The Sequence Diagram below illustrates the interactions in the `Parser` component for a command execution.
-Let `userInput` be the command string `deletein /u 1 /g 2 /r 1` and the minimum index `MIN_INDEX` be the constant that
-is supported by PlanITarium to be `1`.
+The following Sequence Diagram shows how the classes of the `Parser` component interacts for each user command.
 
-![ParserSequenceDiagramExecute](images/ParserSequenceDiagram1.png)
+![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
+
+> :information_source: **Note:** The following are the ranges of index deemed valid:
+<table>
+    <thead>
+        <tr>
+            <th>Index</th>
+            <th>Range</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Group</td>
+            <td>[1, ..., 3]</td>
+        </tr>
+        <tr>
+            <td>User</td>
+            <td>[1, ..., MAX_UID], where MAX_UID is the number of people in the given group</td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>[1, ..., 6]</td>
+        </tr>
+        <tr>
+            <td>Income</td>
+            <td>[1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person</td>
+        </tr>
+        <tr>
+            <td>Expenditure</td>
+            <td>[1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person</td>
+        </tr>
+    </tbody>
+</table>
 
 ### Family Component
 
