@@ -6,7 +6,7 @@ import tp.person.Patient;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppointmentTest {
     private final Doctor doctor = new Doctor("1234", "john",

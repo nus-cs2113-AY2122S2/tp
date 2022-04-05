@@ -2,7 +2,7 @@ package tp.person;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PersonTest {
     private final Person person = new Person("1234", "john",
@@ -30,7 +30,7 @@ class PersonTest {
 
     @Test
     void testToString() {
-        assertEquals("[1234] || Name: john " +
-                "|| Contact No.: 12341234 || Email: 3600@gmail.com", person.toString());
+        assertEquals("[1234] || Name: john "
+                + "|| Contact No.: 12341234 || Email: 3600@gmail.com", person.toString());
     }
 }

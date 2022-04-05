@@ -1,6 +1,23 @@
 package tp;
 
-import tp.Command.*;
+import tp.command.AddDoctorCommand;
+import tp.command.AddPatientCommand;
+import tp.command.Command;
+import tp.command.GetAppointmentsOfDoctorCommand;
+import tp.command.DeleteDoctorCommand;
+import tp.command.SearchAppointmentCommand;
+import tp.command.AddPatientDescriptionCommand;
+import tp.command.ListAppointmentListCommand;
+import tp.command.ListPatientListCommand;
+import tp.command.HelpCommand;
+import tp.command.SearchPatientCommand;
+import tp.command.AddAppointmentCommand;
+import tp.command.SearchDoctorCommand;
+import tp.command.DeletePatientCommand;
+import tp.command.DeleteAppointmentCommand;
+import tp.command.EditDoctorCommand;
+import tp.command.ListDoctorListCommand;
+import tp.command.SortAppointmentByTimeCommand;
 
 import java.util.Scanner;
 

@@ -1,7 +1,14 @@
-package tp.Command;
+package tp.command;
 
-import tp.*;
+import tp.AppointmentList;
+import tp.DoctorList;
+import tp.PatientList;
+import tp.Ui;
 import tp.person.Patient;
+import tp.DoctorStorage;
+import tp.PatientStorage;
+import tp.IHospitalException;
+import tp.AppointmentStorage;
 
 public class AddPatientCommand extends Command {
     protected String id;

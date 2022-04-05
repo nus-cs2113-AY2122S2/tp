@@ -1,8 +1,15 @@
-package tp.Command;
+package tp.command;
 
-import tp.*;
+import tp.AppointmentList;
+import tp.DoctorList;
+import tp.DoctorStorage;
+import tp.PatientList;
 import tp.person.Doctor;
 import tp.person.Patient;
+import tp.Ui;
+import tp.PatientStorage;
+import tp.AppointmentStorage;
+import tp.IHospitalException;
 
 import java.time.LocalDateTime;
 
