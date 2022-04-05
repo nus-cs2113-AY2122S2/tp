@@ -30,6 +30,9 @@ public class CommandHandler {
      */
     public String handleUserInput(ProjectList projectList, String userInput) throws IllegalCommandException {
         String[] commands = userInput.split(" ");
+        if (commands.length == 0) {
+            throw new IllegalCommandException(Constants.NO_COMMAND_ENTERED);
+        }
         String executeResult = "Default Result";
 
         switch (commands[0].toLowerCase()) {

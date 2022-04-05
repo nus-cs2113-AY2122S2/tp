@@ -44,8 +44,8 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 Add a project to your current list of projects
 
 Format: `addproject [project_name]`
-*The `project_name` has no restrictions; it can be of any length, number of words, and any
-types of characters.
+*The `project_name` can be of any length, number of words, and any types of characters.  
+*The `project_name` cannot be pure whitespace.
 
 #### Example of usage
 `addproject project1`
@@ -101,15 +101,24 @@ Todo has been marked as done successfully:
 [X] buy textbooks
 ```
 ---
-### add a deadline to a project: `addprojdeadline`
+### Add a deadline to a project: `addprojdeadline`
 Adds a deadline date to a project
 
 Format: `addprojdeadline [project_name] [deadline]`
 * deadline must be entered in the following format "yyyy-mm-dd"
 * Alternatively, entering a day of the week also works (i.e. Thursday)
 
+#### Example of usage  
+```
+addprojdeadline project1 2022-04-03
+```
+
+#### Example of output  
+```
+Deadline added to project1: 2022-04-03
+```
 ---
-### change the GitHub repo of a project
+### Change the GitHub repo of a project
 Changes the GitHub repository link for your project
 
 Format: `changegit [project_name] [github_URL]`
@@ -120,7 +129,7 @@ Format: `changegit [project_name] [github_URL]`
 `changegit project1 http://github.com/project1`
 
 ---
-### open the GitHub repo of a project
+### Open the GitHub repo of a project
 Opens the GitHub repository in your default browser
 
 Format: `opengit [project_name]`
@@ -129,7 +138,7 @@ Format: `opengit [project_name]`
 `opengit project1`
 
 ---
-### add a deadline to a todo: `addtododeadline`
+### Add a deadline to a todo: `addtododeadline`
 Adds a deadline date to a todo
 
 Format: `addtododeadline [project_index] [todo_index] [deadline]`
@@ -143,7 +152,7 @@ Format: `addtododeadline [project_index] [todo_index] [deadline]`
 ```Deadline added to Complete Diagrams: 2022-05-22```
 
 ---
-### view details of a project: `view`
+### View details of a project: `view`
 View details of a project: Name, deadline, todos
 
 Format: `view [project_name]`
@@ -155,12 +164,12 @@ Format: `view [project_name]`
 
 ```
 Project Name: cs2113
-Deadline: 17/03/2022
+Deadline: 2022-03-17
 	[1]. [X] complete addproject command
 	[2]. [ ] complete deleteproject command
 ```
 ---
-### add language to a project: `addlanguage`  
+### Add language to a project: `addlanguage`  
 Adds language to a project  
 Format: `addlanguage [project_name] [language]`  
 #### Example of usage
@@ -172,7 +181,7 @@ java language added.
 ```
 
 ---
-### list languages of a project: `listlanguages`
+### List languages of a project: `listlanguages`
 Lists languages of a project  
 Format: `listlanguages [project_title]`
 #### Example of usage
@@ -183,13 +192,13 @@ Programming languages for cs2113:
 	[1]. java
 ```
 ---
-### help: `help`
+### Help: `help`
 List out all available commands
 
 Format: `help`
 
 ---
-### exit: `exit`
+### Exit: `exit`
 Exit the program
 
 Format: `exit`

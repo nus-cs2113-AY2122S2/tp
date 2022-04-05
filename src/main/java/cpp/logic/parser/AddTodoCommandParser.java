@@ -27,7 +27,7 @@ public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
         try {
             index = Integer.parseInt(indexString);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandException(Constants.NON_INTEGER_INDEX);
+            throw new IllegalCommandException(Constants.INVALID_INDEX);
         }
         return new AddTodoCommand(index,todoString);
     }

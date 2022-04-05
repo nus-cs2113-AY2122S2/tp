@@ -17,6 +17,7 @@ public class MarkCommand extends Command {
         try {
             projectList.markTodoAsDone(projectIndex, todoIndex);
         } catch (IndexOutOfBoundsException e) {
+            System.out.println(Response.markTodoUnsuccessfully());
             return Response.markTodoUnsuccessfully();
         }
         return Response.markTodoSuccessfully();
