@@ -40,7 +40,7 @@ public class TaskParserTest {
 
     @Test
     void parseDescription_validDescription_expectFoo() {
-        String input = "foo /by 21/12/2022";
+        String input = "foo /bydate 21/12/2022";
         String expected = "foo";
         String result = TaskParser.parseDescription(input);
         assertEquals(expected, result);
@@ -48,7 +48,7 @@ public class TaskParserTest {
 
     @Test
     void parseDescription_emptyDescription_expectEmptyString() {
-        String input = "/by 21/12/2022";
+        String input = "/bydate 21/12/2022";
         String actualOutput = TaskParser.parseDescription(input);
         assertEquals(EMPTY_STRING, actualOutput);
     }
