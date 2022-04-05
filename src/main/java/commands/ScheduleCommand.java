@@ -147,14 +147,14 @@ public class ScheduleCommand extends Command {
                 getFileManager().rewriteAllDaysScheduleToFile(getScheduleList());
                 break;
             case LIST_ACTION_KEYWORD:
-                scheduleList.printSchedule();
+                getScheduleList().printSchedule();
                 break;
             case CLEAR_ACTION_KEYWORD:
-                scheduleList.clearDayPlan(getUserArguments());
+                getScheduleList().clearDayPlan(getUserArguments());
                 getFileManager().rewriteAllDaysScheduleToFile(getScheduleList());
                 break;
             case CLEAR_ALL_ACTION_KEYWORD:
-                scheduleList.clearAllSchedule();
+                getScheduleList().clearAllSchedule();
                 getUI().printClearedScheduleMessage();
                 getFileManager().rewriteAllDaysScheduleToFile(getScheduleList());
                 break;
