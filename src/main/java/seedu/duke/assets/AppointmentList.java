@@ -12,6 +12,13 @@ import java.util.ArrayList;
 public class AppointmentList extends List {
     private ArrayList<Appointment> appointments = new ArrayList<>();
     private ArrayList<Appointment> returnedFinderArray = new ArrayList<>();
+    private PatientList referencePatientList;
+    private MedicineList referenceMedicineList;
+
+    public AppointmentList(PatientList patientList,MedicineList medicineList) {
+        this.referencePatientList = patientList;
+        this.referenceMedicineList = medicineList;
+    }
 
     public Appointment getAppointment(String appointmentId) {
         for (Appointment appointment : appointments) {
