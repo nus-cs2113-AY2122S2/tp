@@ -1,7 +1,6 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
@@ -13,6 +12,8 @@ import seedu.mindmymoney.userfinancial.User;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static seedu.mindmymoney.command.AddCommand.checkAfterCurrentDate;
+import static seedu.mindmymoney.command.AddCommand.checkValidDate;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
@@ -20,21 +21,17 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_AMOUNT;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 import static seedu.mindmymoney.constants.Flags.FLAG_END_VALUE;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_LIMIT;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_NAME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_LIMIT;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 
-import static seedu.mindmymoney.constants.Indexes.SPLIT_LIMIT;
-import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
-
+import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 import static seedu.mindmymoney.data.CreditCardList.isEqualName;
 import static seedu.mindmymoney.data.CreditCardList.isEqualCashback;
 import static seedu.mindmymoney.data.CreditCardList.isEqualCardLimit;
-import static seedu.mindmymoney.data.CreditCardList.isEqualBalance;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualCategory;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualPaymentMethod;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualDescription;
@@ -42,7 +39,6 @@ import static seedu.mindmymoney.data.ExpenditureList.isEqualAmount;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualTime;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeCategory;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
@@ -80,6 +76,15 @@ public class UpdateCommand extends Command {
     }
 
     /**
+     * Indicates whether the help command is for expenses by looking for the /e flag.
+     *
+     * @return true if the /e flag is present, false otherwise.
+     */
+    private boolean hasExpensesFlag() {
+        return updateInput.contains(FLAG_OF_EXPENSES);
+    }
+
+    /**
      * Indicates whether the update command is to update a credit card by looking for the /cc flag.
      *
      * @return true if the /cc flag is present, false otherwise.
@@ -104,8 +109,8 @@ public class UpdateCommand extends Command {
      */
     public void updateExpenditure() throws MindMyMoneyException {
         try {
-            String[] parseUpdateInput = updateInput.split(" ", SPLIT_LIMIT);
-            String indexAsString = parseUpdateInput[INDEX_OF_FIRST_ITEM];
+            String[] parseUpdateInput = updateInput.split(" ");
+            String indexAsString = parseUpdateInput[INDEX_OF_SECOND_ITEM];
             final int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
             String newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
@@ -122,14 +127,13 @@ public class UpdateCommand extends Command {
             testDescription(newDescription);
 
             String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-            testExpenditureAmount(newAmountAsString);
+            testExpenditureAmount(newAmountAsString, newPaymentMethod, creditCardList);
             float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
 
             String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
-            if (!isValidInput(inputTime)) {
-                throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
-            }
+            checkValidDate(inputTime);
             LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            checkAfterCurrentDate(date);
             String newTime = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             if (isSimilarExpenditure(indexToUpdate, newPaymentMethod, newCategory, newDescription, newAmountAsFloat,
                     newTime)) {
@@ -194,20 +198,22 @@ public class UpdateCommand extends Command {
             String newCashBack = parseInputWithCommandFlag(updateInput, FLAG_OF_CASHBACK,
                     FLAG_OF_CARD_LIMIT);
             String newCardLimit = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_LIMIT,
-                    FLAG_OF_CARD_BALANCE);
-            String newCardBalance = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_BALANCE,
                     FLAG_END_VALUE);
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
+
             double newCashBackAsDouble = Double.parseDouble(newCashBack);
             float newCardLimitAsFloat = Float.parseFloat(newCardLimit);
-            float newCardBalanceAsFloat = Float.parseFloat(newCardBalance);
-            if (isSimilarCreditCard(indexToUpdate, newCardName, newCashBackAsDouble, newCardLimitAsFloat,
-                    newCardBalanceAsFloat)) {
+
+            CreditCard oldCreditCard = creditCardList.get(indexToUpdate);
+            if (oldCreditCard.getTotalExpenditure() > newCardLimitAsFloat) {
+                throw new MindMyMoneyException("Current spending has already exceeded the new limit!");
+            }
+            if (isSimilarCreditCard(indexToUpdate, newCardName, newCashBackAsDouble, newCardLimitAsFloat)) {
                 throw new MindMyMoneyException("Credit Card fields to be updated is similar to the credit card in "
                         + "the list.\n" + "Please make sure the field descriptions you want to change are different.");
             }
             CreditCard newCreditCard = new CreditCard(newCardName, newCashBackAsDouble,
-                    newCardLimitAsFloat, newCardBalanceAsFloat);
+                    newCardLimitAsFloat);
 
             creditCardList.set(indexToUpdate, newCreditCard);
             System.out.println("Successfully set credit card " + indexAsString + " to :\n"
@@ -228,15 +234,12 @@ public class UpdateCommand extends Command {
      * @param newCardName new card name field to be updated.
      * @param newCashback new cash back field to be updated.
      * @param newCardLimit new card limit field to be updated.
-     * @param newCardBalance new card balance field to be updated.
      * @return true if fields are similar, false otherwise.
      */
-    public boolean isSimilarCreditCard(int index, String newCardName, double newCashback, float newCardLimit,
-                             float newCardBalance) {
+    public boolean isSimilarCreditCard(int index, String newCardName, double newCashback, float newCardLimit) {
         if (isEqualName(creditCardList, index, newCardName)
                 && isEqualCashback(creditCardList, index, newCashback)
-                && isEqualCardLimit(creditCardList, index, newCardLimit)
-                && isEqualBalance(creditCardList, index, newCardBalance)) {
+                && isEqualCardLimit(creditCardList, index, newCardLimit)) {
             return true;
         }
         return false;
@@ -307,12 +310,17 @@ public class UpdateCommand extends Command {
      */
     @Override
     public void executeCommand() throws MindMyMoneyException {
-        if (hasCreditCardFlag()) {
+        if (hasExpensesFlag()) {
+            updateExpenditure();
+        } else if (hasCreditCardFlag()) {
             updateCreditCard();
         } else if (hasIncomeFlag()) {
             updateIncome();
         } else {
-            updateExpenditure();
+            throw new MindMyMoneyException("You are missing a flag in your command\n"
+                    + "Type \"help /e\" to view the list of supported expenditure commands\n"
+                    + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
+                    + "Type \"help /i\" to view the list of supported income commands\n");
         }
     }
 }

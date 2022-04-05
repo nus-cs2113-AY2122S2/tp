@@ -1,8 +1,6 @@
 package seedu.mindmymoney;
 
 import seedu.mindmymoney.command.Command;
-import seedu.mindmymoney.data.CreditCardList;
-import seedu.mindmymoney.data.IncomeList;
 import seedu.mindmymoney.userfinancial.User;
 
 import java.io.File;

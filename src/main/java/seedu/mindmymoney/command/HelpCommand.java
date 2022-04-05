@@ -31,12 +31,12 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Indicates whether the help command is for expenses by looking for the /expenses flag.
+     * Indicates whether the help command is for expenses by looking for the /e flag.
      *
-     * @return true if the /expenses flag is present, false otherwise.
+     * @return true if the /e flag is present, false otherwise.
      */
     private boolean hasExpensesFlag() {
-        return FLAG_OF_EXPENSES.equals(helpInput);
+        return helpInput.equals(FLAG_OF_EXPENSES);
     }
 
     /**
@@ -65,13 +65,13 @@ public class HelpCommand extends Command {
         if (isFromUser) {
             String helpPage = "---------------------------------------Expenditure Help Page------------------------"
                     + "---------------\n"
-                    + "1. Listing all Expenditures: list /expenses\n"
-                    + "2. Adding an Expenditure entry: add /pm [PAYMENT_METHOD] /c [CATEGORY] "
+                    + "1. Listing all Expenditures: list /e\n"
+                    + "2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] "
                     + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
                     + "3. Calculating the total expenditure in a month: calculate /epm [MONTH]\n"
-                    + "4. Updating an Expenditure: update [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] "
+                    + "4. Updating an Expenditure: update /e [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] "
                     + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
-                    + "5. Removing an Expenditure entry: delete [INDEX]\n"
+                    + "5. Removing an Expenditure entry: delete /e [INDEX]\n"
                     + "6. Exiting the program: bye\n"
                     + "----------------------------------------------------------------------------------------------"
                     + "-----\n";
@@ -93,10 +93,9 @@ public class HelpCommand extends Command {
         String helpPage = "---------------------------------------Credit Card Help Page--------------------------"
                 + "-------------\n"
                 + "1. Listing all Credit Cards: list /cc\n"
-                + "2. Adding a Credit Card: add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CREDIT_LIMIT] "
-                + "/bal [CREDIT CARD BALANCE]\n"
-                + "3. Updating an Expenditure entry: update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] "
-                + "/cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]\n"
+                + "2. Adding a Credit Card: add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CREDIT_LIMIT]\n"
+                + "3. Updating a Credit Card: update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] "
+                + "/cl [NEW_CREDIT_LIMIT]\n"
                 + "4. Removing a credit card: delete /cc [INDEX]\n"
                 + "5. Exiting the program: bye\n"
                 + "-----------------------------------------------------------------------------------------------"

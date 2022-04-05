@@ -35,6 +35,15 @@ public class Income implements MindMyMoneySerializable {
         return incomeInfo;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Income)) {
+            return false;
+        }
+        Income income = (Income) object;
+        return (amount == income.amount) && (category.equals(income.category));
+    }
+
     /**
      * Returns a String representation of this income source, in a machine-readable format.
      * @return The serialized Income.
