@@ -67,12 +67,12 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
             throw new InvalidFormatException(invalidMessage);
         }
 
-        boolean isMissingCost = isMissingCost(commandArgs);
-        boolean isMissingCostList = isMissingCostList(commandArgs);
+        boolean hasCost = hasCost(commandArgs);
+        boolean hasCostList = hasCostList(commandArgs);
         boolean hasDifferentLength = false;
-        checkIfMissingBothCostAndCostList(isMissingCost, isMissingCostList);
-        checkIfHasBothCostAndCostList(isMissingCost, isMissingCostList);
-        checkIfHasDifferentLength(isMissingCost, hasDifferentLength);
+        checkIfMissingBothCostAndCostList(hasCost, hasCostList);
+        checkIfHasBothCostAndCostList(hasCost, hasCostList);
+        checkIfHasDifferentLength(hasCost, hasDifferentLength);
 
         try {
             gst = Parser.parseGst(commandArgs);
@@ -90,12 +90,12 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
     /**
      * Checks if the cost list and the involved list provided by the user have different lengths.
      *
-     * @param isMissingCost A boolean representing whether the total cost was not provided by the user.
+     * @param hasCost A boolean representing whether the total cost was not provided by the user.
      * @throws InvalidFormatException If the cost list and the involved list have different lengths.
      */
-    private void checkIfHasDifferentLength(boolean isMissingCost, boolean hasDifferentLength)
+    private void checkIfHasDifferentLength(boolean hasCost, boolean hasDifferentLength)
             throws InvalidFormatException {
-        if (isMissingCost) {
+        if (!hasCost) {
             hasDifferentLength = involvedList.length != costList.length;
         }
         if (hasDifferentLength) {
@@ -108,13 +108,13 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
     /**
      * Checks if both the total cost and the cost list are provided by the user.
      *
-     * @param isMissingCost A boolean representing whether the total cost was not provided by the user.
-     * @param isMissingCostList A boolean representing whether the cost list was not provided by the user.
+     * @param hasCost A boolean representing whether the total cost was not provided by the user.
+     * @param hasCostList A boolean representing whether the cost list was not provided by the user.
      * @throws InvalidFormatException If both the total cost and cost list are provided by the user.
      */
-    private void checkIfHasBothCostAndCostList(boolean isMissingCost, boolean isMissingCostList)
+    private void checkIfHasBothCostAndCostList(boolean hasCost, boolean hasCostList)
             throws InvalidFormatException {
-        boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
+        boolean hasBothCostAndCostList = hasCost && hasCostList;
         if (hasBothCostAndCostList) {
             String invalidMessage = Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
                     + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND;
@@ -125,13 +125,13 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
     /**
      * Checks if both the total cost and the cost list are not provided by the user.
      *
-     * @param isMissingCost A boolean representing whether the total cost was not provided by the user.
-     * @param isMissingCostList A boolean representing whether the cost list was not provided by the user.
+     * @param hasCost A boolean representing whether the total cost was not provided by the user.
+     * @param hasCostList A boolean representing whether the cost list was not provided by the user.
      * @throws InvalidFormatException If both the total cost and cost list are not provided by the user.
      */
-    private void checkIfMissingBothCostAndCostList(boolean isMissingCost, boolean isMissingCostList)
+    private void checkIfMissingBothCostAndCostList(boolean hasCost, boolean hasCostList)
             throws InvalidFormatException {
-        boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
+        boolean hasMissingCostAndMissingCostList = !hasCost && !hasCostList;
         if (hasMissingCostAndMissingCostList) {
             String invalidMessage = Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
                     + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND;
@@ -140,17 +140,17 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
     }
 
     /**
-     * Checks if the cost list of the activity is not provided by the user.
+     * Checks if the cost list of the activity is provided by the user.
      *
      * @param commandArgs A String object representing arguments provided by the user.
-     * @return true if the user did not indicate the cost list using the cost list delimiter,
-     *         false if the cost list is successfully parsed from user input.
+     * @return true if the cost list is successfully parsed from user input
+     *         false if the user did not indicate the cost list using the cost list delimiter.
      * @throws InvalidFormatException If the cost list argument cannot be found in the input arguments.
      */
-    private boolean isMissingCostList(String commandArgs) throws InvalidFormatException {
+    private boolean hasCostList(String commandArgs) throws InvalidFormatException {
         try {
             costList = Parser.parseCostList(commandArgs);
-            return false;
+            return true;
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
                     + ParserUtils.COST_LIST_DELIMITER)) {
@@ -158,22 +158,22 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
                         + "\n\t" + COMMAND_FORMAT_SECOND;
                 throw new InvalidFormatException(invalidMessage);
             }
-            return true;
+            return false;
         }
     }
 
     /**
-     * Checks if the total cost of the activity is not provided by the user.
+     * Checks if the total cost of the activity is provided by the user.
      *
      * @param commandArgs A String object representing arguments provided by the user.
-     * @return true if the user did not indicate the total cost using the total cost delimiter,
-     *         false if the total cost is successfully parsed from user input.
+     * @return true if the total cost is successfully parsed from user input,
+     *         false if the user did not indicate the total cost using the total cost delimiter.
      * @throws InvalidFormatException If the total cost argument cannot be found in the input arguments.
      */
-    private boolean isMissingCost(String commandArgs) throws InvalidFormatException {
+    private boolean hasCost(String commandArgs) throws InvalidFormatException {
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
-            return false;
+            return true;
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
                     + ParserUtils.TOTAL_COST_DELIMITER)) {
@@ -181,7 +181,7 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
                         + "\n\t" + COMMAND_FORMAT_SECOND;
                 throw new InvalidFormatException(invalidMessage);
             }
-            return true;
+            return false;
         }
     }
 }
