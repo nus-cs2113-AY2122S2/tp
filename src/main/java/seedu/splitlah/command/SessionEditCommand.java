@@ -53,71 +53,38 @@ public class SessionEditCommand extends Command {
         TextUI ui = manager.getUi();
         Profile profile = manager.getProfile();
         Session session;
+        PersonList newPersonList = null;
+        String newSessionName = null;
         try {
             session = profile.getSession(sessionId);
+            if (personNames != null) {
+                newPersonList = getNewPersonList(session.getPersonList());
+            }
+            if (sessionName != null) {
+                newSessionName = getNewSessionName(session.getSessionName(), profile);
+            }
+            if (sessionDate != null) {
+                session.setDateCreated(sessionDate);
+            }
         } catch (InvalidDataException invalidDataException) {
             ui.printlnMessageWithDivider(invalidDataException.getMessage());
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_PROFILE_SESSION_NOT_IN_LIST);
             return;
         }
-        assert session != null : Message.ASSERT_SESSIONEDIT_SESSION_IS_NULL;
-        PersonList newPersonList = null;
-        boolean isPersonNamesEdited = false;
-        if (personNames != null) {
-            boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
-            if (hasDuplicates) {
-                ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION);
-                Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITSESSION);
-                return;
-            }
-            newPersonList = new PersonList(personNames);
-            if (personNames.length != newPersonList.getSize()) {
-                ui.printlnMessage(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
-                Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_EDITSESSION);
-                return;
-            }
-            if (!newPersonList.isSuperset(session.getPersonArrayList())) {
-                ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
-                return;
-            }
-            if (!session.getPersonList().isSuperset(newPersonList.getPersonList())) {
-                isPersonNamesEdited = true;
-            }
-        }
-        boolean isSessionNameEdited = false;
-        if (sessionName != null) {
-            boolean isSessionExists = profile.hasSessionName(sessionName);
-            boolean hasSameSessionName = sessionName.equalsIgnoreCase(session.getSessionName());
-            if (!hasSameSessionName && isSessionExists) {
-                ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
-                Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONEDIT_DUPLICATE_NAMES_IN_SESSION_LIST);
-                return;
-            }
-            if (!hasSameSessionName) {
-                isSessionNameEdited = true;
-            }
-        }
-        boolean isSessionDateEdited = false;
-        if (sessionDate != null) {
-            if (!session.getDateCreated().equals(sessionDate)) {
-                session.setDateCreated(sessionDate);
-                isSessionDateEdited = true;
-            }
-        }
-        if (isPersonNamesEdited) {
+        boolean isSessionEdited = hasSessionEdited(session);
+        if (newPersonList != null) {
             for (Person person : newPersonList.getPersonList()) {
                 session.addPerson(person);
             }
         }
-        if (isSessionNameEdited) {
-            session.setSessionName(sessionName);
+        if (newSessionName != null) {
+            session.setSessionName(newSessionName);
         }
-        manager.saveProfile();
-        if (isPersonNamesEdited || isSessionNameEdited || isSessionDateEdited) {
-            ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + session);
+        if (isSessionEdited) {
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS);
         } else {
             ui.printlnMessageWithDivider(COMMAND_NO_EDITS_MADE);
         }
+        manager.saveProfile();
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONEDIT_SESSION_EDITED);
     }
 }
