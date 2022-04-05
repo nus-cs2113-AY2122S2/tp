@@ -2,12 +2,26 @@
 
 - [Acknowledgements](#acknowledgements)  
 - [Design & Implementation](#design-&-implementation)
-- [Architecture](#architecture)
+    - [Architecture](#architecture)
 - [Implemented Features](#implemented-features)
+  - [Add a Project](#add-a-project)
+  - [Delete a Project](#delete-a-project)
+  - [Print Project List](#print-project-list)
+  - [Todo feature](#todo-feature)
+  - [View a Project](#view-a-project)
+  - [Add a Deadline to a Project](#add-a-deadline-to-a-project)
+  - [Add a Deadline to a Todo](#add-a-deadline-to-a-todo)
 - [Proposed Features](#proposed-features)
+  - [Tasks Due Soon Feature](#tasks-due-soon-feature)
+- [Previous project structure](#previous-project-structure)
+  - [Add a Project (previous)](#add-a-project-previous)
+  - [Delete a Project (previous)](#delete-a-project-previous) 
 - [Product scope](#product-scope)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
 - [User Stories](#user-stories)
 - [Glossary](#glossary)
+- [Non-Functional Requirements](#non-functional-requirements)
 - [Instructions for manual testing](#instructions-for-manual-testing)
 
 
@@ -217,7 +231,7 @@ During v2.0, CSProjPlanner underwent a structure change to make it more OOP orie
 
 Because of this, many sequence diagrams look similar in the current version. The following sequence diagrams and explanations show what some of our features looked like at the end of v1.0:
 
-#### Add a Project
+#### Add a Project (previous)
 ![image info](./UmlDiagrams/addProject.png)
 
 **Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
@@ -228,7 +242,7 @@ Because of this, many sequence diagrams look similar in the current version. The
 
 **Step4.** This new `Project` object is returned to the ProjectList, added, and the output "[projectName] added." is given to the user.
 
-#### Delete a Project
+#### Delete a Project (previous)
 ![image info](./UmlDiagrams/deleteProject.png)
 
 The previous deletion of a project functions very similarly to Adding a project.
