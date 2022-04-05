@@ -405,6 +405,98 @@ class AddCommandTest {
     }
 
     /**
+     * Asserts if user is able to add an improper flag.
+     */
+    @Test
+    void addCommand_notProperFlag_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/asdf";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+    }
+
+    /**
+     * Asserts if user is able to an invalid time.
+     */
+    @Test
+    void addCommand_notValidTime_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 30/032022";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+
+    }
+
+    /**
+     * Asserts if user is able to add a day larger than 29 feb.
+     */
+    @Test
+    void addCommand_wrongDateForLeapYear_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 30/02/2020";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+
+    }
+
+    /**
+     * Asserts if user is able to add a day larger than 30 for months with only 30 days.
+     */
+    @Test
+    void addCommand_wrongDateForMonthWithThirtyDays_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 31/09/2018";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+
+    }
+
+    /**
+     * Asserts if user is able to add a larger than 28 feb on a non leap year.
+     */
+    @Test
+    void addCommand_wrongDateForNonLeapYear_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 29/02/2018";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+
+    }
+
+    /**
+     * Test if program is able to exit
+     */
+    @Test
+    void addCommand_isExit_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 29/02/2018";
+
+        assertEquals(false, new AddCommand(inputString, user).isExit());
+
+    }
+    /**
      * Gets the last expenditure entry in the expenditure list and formats it to a string.
      *
      * @param list is the expenditure list.
