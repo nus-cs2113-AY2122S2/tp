@@ -539,7 +539,6 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException | InvalidScheduleException | InvalidPlanException e) {
                 deletedScheduleCount += 1;
                 if (deletedScheduleCount == 1) {
-                    System.out.print(System.lineSeparator());
                     System.out.println("The following schedule(s) is(are) "
                             + "removed due to the removal of\nrelevant plan(s).");
                     System.out.print(System.lineSeparator());
