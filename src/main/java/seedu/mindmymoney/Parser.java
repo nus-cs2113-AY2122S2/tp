@@ -26,7 +26,7 @@ public class Parser {
      * the said command.
      *
      * @param input The command to be parsed.
-     * @param user The user object, which contains income, expenditure and credit card list.
+     * @param user  The user object, which contains income, expenditure and credit card list.
      * @return Command object with respect to user's input.
      */
     public static Command parseCommand(String input, User user) {

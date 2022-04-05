@@ -44,7 +44,7 @@ class ParserTest {
 
         assertTrue(testParser.parseCommand(testInput, user) instanceof HelpCommand);
         assert testParser.parseCommand(testInput, user)
-                instanceof HelpCommand : "testParser should return an " + "instance of HelpCommand";
+            instanceof HelpCommand : "testParser should return an " + "instance of HelpCommand";
 
         testInput = "add description " + TEST_PRICE;
         assertTrue(testParser.parseCommand(testInput, user) instanceof AddCommand);
@@ -85,7 +85,7 @@ class ParserTest {
      * and print an invalid command message.
      */
     @Test
-    void parseCommand_helpWithParameters_expectHelpCommand() throws MindMyMoneyException{
+    void parseCommand_helpWithParameters_expectHelpCommand() throws MindMyMoneyException {
         Parser testParser = new Parser();
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
@@ -94,15 +94,15 @@ class ParserTest {
         setUp();
         String expectedOutput =
             "---------------------------------------Credit Card Help Page--------------------------"
-            + "-------------\n"
-            + "1. Listing all Credit Cards: list /cc\n"
-            + "2. Adding a Credit Card: add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CREDIT_LIMIT]\n"
-            + "3. Updating a Credit Card: update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] "
-            + "/cl [NEW_CREDIT_LIMIT]\n"
-            + "4. Removing a credit card: delete /cc [INDEX]\n"
-            + "5. Exiting the program: bye\n"
-            + "-----------------------------------------------------------------------------------------------"
-            + "----";
+                + "-------------\n"
+                + "1. Listing all Credit Cards: list /cc\n"
+                + "2. Adding a Credit Card: add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CREDIT_LIMIT]\n"
+                + "3. Updating a Credit Card: update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] "
+                + "/cl [NEW_CREDIT_LIMIT]\n"
+                + "4. Removing a credit card: delete /cc [INDEX]\n"
+                + "5. Exiting the program: bye\n"
+                + "-----------------------------------------------------------------------------------------------"
+                + "----";
         (testParser.parseCommand("help /cc", user)).executeCommand();
         tearDown();
         assertEquals(expectedOutput, capturedOut.toString().trim());
@@ -113,14 +113,14 @@ class ParserTest {
      * and print an invalid command message.
      */
     @Test
-    void parseCommand_addWithoutParameters_expectException() throws MindMyMoneyException{
+    void parseCommand_addWithoutParameters_expectException() throws MindMyMoneyException {
         Parser testParser = new Parser();
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeTestList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeTestList);
         setUp();
-        String expectedOutput ="Invalid command! \n"
+        String expectedOutput = "Invalid command! \n"
             + "Type \"help /e\" to view the list of supported expenditure commands\n"
             + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
             + "Type \"help /i\" to view the list of supported income commands";
