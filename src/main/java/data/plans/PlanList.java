@@ -419,10 +419,12 @@ public class PlanList {
     /**
      * Checks whether the workout is in the plan.
      *
-     * @param workoutToCheck The workout to look for in the plan.
-     * @param plan An instance of the Plan class.
-     * @return True if workout is found in the plan, else false if the workout is not in the plan.
-     * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
+     * @param workoutToCheck        The workout to look for in the plan.
+     * @param updatedWorkoutToCheck The updated workout to look for in the plan.
+     * @param plan                  An instance of the Plan class.
+     * @return                      True if either workout or updated workout is found in the plan,
+     *                              else false if the workout is not in the plan.
+     * @throws ArrayIndexOutOfBoundsException   For operations which involves index checking.
      */
     public boolean checkWorkoutInPlan(String workoutToCheck, String updatedWorkoutToCheck, Plan plan)
             throws ArrayIndexOutOfBoundsException {
@@ -437,6 +439,14 @@ public class PlanList {
         return false;
     }
 
+    /**
+     * Checks whether the workout is in the plan.
+     *
+     * @param workoutToCheck The workout to look for in the plan.
+     * @param plan An instance of the Plan class.
+     * @return True if workout is found in the plan, else false if the workout is not in the plan.
+     * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
+     */
     public boolean checkWorkoutInPlan(String workoutToCheck, Plan plan) throws ArrayIndexOutOfBoundsException {
         ArrayList<Workout> workoutsInPlanList = plan.getWorkoutsInPlanList();
         String workoutInPlanDetails;
@@ -450,12 +460,12 @@ public class PlanList {
     }
 
     /**
-     * Gets the number of plans which includes the deleted workout.
-     *
-     * @param workoutToCheck The workout to look for in the plan.
-     * @return An Arraylist of integer which includes the number of the
-     *         plan that includes the deleted workout.
-     * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
+     * Gets the index number of plans which includes the updated workout.
+     * @param workoutToCheck        The workout to look for in the plan.
+     * @param updatedWorkoutToCheck The updated workout to look for in the plan.
+     * @return                      An Arraylist of integer which includes the index number of the
+     *                              plan that includes the updated workout.
+     * @throws ArrayIndexOutOfBoundsException   For operations which involves index checking.
      */
     public ArrayList<Integer> findPlanContainsTargetWorkout(String workoutToCheck, String updatedWorkoutToCheck) throws
              ArrayIndexOutOfBoundsException {
@@ -472,6 +482,14 @@ public class PlanList {
         return planIndexWithTargetWorkout;
     }
 
+    /**
+     * Gets the number of plans which includes the deleted workout.
+     *
+     * @param workoutToCheck The workout to look for in the plan.
+     * @return An Arraylist of integer which includes the number of the
+     *         plan that includes the deleted workout.
+     * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
+     */
     public ArrayList<Integer> findPlanContainsTargetWorkout(String workoutToCheck) throws
             ArrayIndexOutOfBoundsException {
         Plan planObject;
