@@ -5,7 +5,6 @@ hide circle
 skinparam classAttributeIconSize 0
 title Class Diagram of Schedule Component
 
-Main -> WerkIt
 WerkIt -> Parser
 WerkIt -> UI
 Parser .r.> "{abstract}\nCommand"
@@ -16,10 +15,6 @@ ScheduleCommand -r-> DayList
 
 class WerkIt {
 + startContinuousUserPrompt()
-}
-
-class Main {
-
 }
 
 class DayList {
