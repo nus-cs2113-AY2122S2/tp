@@ -185,4 +185,9 @@ public class Task {
                 && identifier == (t.getIdentifier())
                 && byDateTime.equals(t.getByDateTime());
     }
+
+    public Task clone() {
+        return new Task(this.identifier, this.description, this.byDateTime,
+                this.doOnStartDateTime, this.doOnEndDateTime);
+    }
 }

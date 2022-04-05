@@ -279,9 +279,11 @@ public class TaskList {
         long startDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnStartDateTime(), doOnStartDateTime);
         long endDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnEndDateTime(), doOnEndDateTime);
 
-        taskToEdit.setIdentifier(generateIdentifier());
-        Task updatedTask = updateTask(taskToEdit, taskDescription,
+        Task updatedTask = taskToEdit.clone();
+        updateTask(updatedTask, taskDescription,
                 startDateOffset, endDateOffset, 0);
+        updatedTask.setIdentifier(generateIdentifier());
+
         if (byDateTime != null) {
             updatedTask.setByDateTime(byDateTime);
         }
@@ -309,12 +311,13 @@ public class TaskList {
 
         int newIdentifier = generateIdentifier();
         for (Task t : affectedTasks) {
-            Task newTask = updateTask(t, taskDescription,
+            Task updatedTask = t.clone();
+            updateTask(updatedTask, taskDescription,
                     startDateOffset, endDateOffset, byDateOffset);
-            newTask.setIdentifier(newIdentifier);
-            checkTask(newTask);
-            checkDateTimeClash(editedList, newTask);
-            editedList.add(newTask);
+            updatedTask.setIdentifier(newIdentifier);
+            checkTask(updatedTask);
+            checkDateTimeClash(editedList, updatedTask);
+            editedList.add(updatedTask);
         }
 
         tasks = editedList;
