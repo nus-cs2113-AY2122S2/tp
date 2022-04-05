@@ -218,19 +218,19 @@ public class SearchCommand extends Command {
                 Integer.parseInt(userArguments);
                 System.out.println("The " + category + "(s) with "
                         + ui.getColorText(TextColor.COLOR_YELLOW, "reps = " + userArguments)
-                        + " is(are) listed below.");
+                        + " is(are) listed below together\nwith its(their) original index number(s).");
                 ui.printLine();
             } catch (NumberFormatException e) {
-                System.out.println("The " + category + "(s)" + " containing keywords"
+                System.out.println("The " + category + "(s)" + " containing keyword(s)"
                         + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
-                        + "is(are) listed below.");
+                        + "is(are) listed below together\nwith its(their) original index number(s).");
                 ui.printLine();
             }
             break;
         default:
-            System.out.println("The " + category + "(s)" + " containing keywords"
+            System.out.println("The " + category + "(s)" + " containing keyword(s)"
                     + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
-                    + "is(are) listed below.");
+                    + "is(are) listed below together\nwith its(their) original index number(s).");
             ui.printLine();
         }
     }
