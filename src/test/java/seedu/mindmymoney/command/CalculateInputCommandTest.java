@@ -18,6 +18,7 @@ class CalculateInputCommandTest {
     private final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
     private final PrintStream stdout = System.out;
 
+
     public void setUp() {
         System.setOut(new PrintStream(capturedOut));
     }

@@ -56,7 +56,7 @@ public class Parser {
                 return new HelpCommand(false, FLAG_OF_EXPENSES);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("");
+            System.out.print("");
         }
         return new HelpCommand(false, FLAG_OF_EXPENSES);
     }
