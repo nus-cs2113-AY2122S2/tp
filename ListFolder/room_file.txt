@@ -5,7 +5,7 @@ Double | 201 | 2 | Vacant
 Triple | 202 | 2 | Vacant
 Triple | 203 | 2 | Vacant
 Queen | 204 | 2 | Vacant
-Queen | 301 | 3 | Vacant
+Queen | 301 | 3 | Occupied
 King | 302 | 3 | Vacant
 King | 303 | 3 | Vacant
 Twin | 401 | 4 | Vacant
