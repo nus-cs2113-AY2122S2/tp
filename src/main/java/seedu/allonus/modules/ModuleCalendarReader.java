@@ -19,7 +19,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
@@ -67,10 +66,8 @@ public class ModuleCalendarReader {
     public ArrayList<Module> readIcsFile(String fileName) {
         logger.setLevel(Level.WARNING);
         String directoryPath = PROJECT_PATH + File.separator + fileName;
-        // File icsFile = new File(fileName);
         File icsFile = new File(directoryPath);
         if (icsFile.isFile()) {
-            // icsFilePath = fileName;
             icsFilePath = directoryPath;
             return parseIcsCalendar();
         } else {
@@ -91,13 +88,11 @@ public class ModuleCalendarReader {
     Date dateEnd;
     CalendarBuilder builder;
     SimpleDateFormat dateFormat;
-    SimpleDateFormat timeFormat;
     Calendar calendar;
-    TimeZone sgTimeZone = TimeZone.getTimeZone(SINGAPORE_TIMEZONE_KEYWORD);
     TimeZone utcTimeZone = TimeZone.getTimeZone(UTC_TIMEZONE_KEYWORD);
     ZoneId sgZoneId = ZoneId.of(SINGAPORE_TIMEZONE_KEYWORD);
     DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-            .appendPattern("h:mm a")
+            .appendPattern(TIME_FORMAT_WITH_AMPM)
             .toFormatter();
 
     public ArrayList<Module> parseIcsCalendar() {
@@ -106,7 +101,7 @@ public class ModuleCalendarReader {
             builder = new CalendarBuilder();
             dateFormat = new SimpleDateFormat(ICS_DATE_FORMAT);
 
-            // initially the data comes in utc timezone, we would later be converting it to sg timezone
+            // Initially the data comes in utc timezone, we would later be converting it to sg timezone
             dateFormat.setTimeZone(utcTimeZone);
             final UnfoldingReader unfoldingReader = new UnfoldingReader(new FileReader(icsFilePath), true);
 
@@ -116,7 +111,7 @@ public class ModuleCalendarReader {
             for (final Object componentObject : calendar.getComponents()) {
                 Component calendarComponent = (Component)componentObject;
                 timeSlot = new StringBuilder();
-                // read through the components of ics file and only take the necessary properties
+                // Iterates through all the components of ics file and only take the necessary properties
                 for (final Object propertyObject : calendarComponent.getProperties()) {
                     Property property = (Property)propertyObject;
                     switch (property.getName()) {
@@ -173,9 +168,8 @@ public class ModuleCalendarReader {
 
     private void getExamDate() {
         if (moduleCategory.startsWith(MODULE_CATEGORY_EXAM)) {
-            //If category = exam then we also add the exam date to the module day.
+            //If category = exam then change the module day to include the exam date instead
             assert (dateStart != null) : DATE_WAS_NULL_MESSAGE;
-            // moduleDay += "," + new SimpleDateFormat(STANDARD_DATE_FORMAT).format(dateStart);
             moduleDay = new SimpleDateFormat(STANDARD_DATE_FORMAT).format(dateStart);
         }
     }
@@ -185,9 +179,6 @@ public class ModuleCalendarReader {
         dateEnd = dateFormat.parse(endTime);
         Instant instant = dateEnd.toInstant();
         ZonedDateTime zonedDateEnd = instant.atZone(sgZoneId);
-        // timeFormat = new SimpleDateFormat(TIME_FORMAT_WITH_AMPM);
-        // timeFormat.setTimeZone(sgTimeZone);
-
         timeSlot.append("-" +  zonedDateEnd.format(formatter));
     }
 
@@ -196,8 +187,6 @@ public class ModuleCalendarReader {
         dateStart = dateFormat.parse(startTime);
         Instant instant = dateStart.toInstant();
         ZonedDateTime zonedDateStart = instant.atZone(sgZoneId);
-        //        timeFormat = new SimpleDateFormat(TIME_FORMAT_WITH_AMPM);
-        //        timeFormat.setTimeZone(sgTimeZone);
         timeSlot.append(zonedDateStart.format(formatter));
 
         java.util.Calendar calendarNew = java.util.Calendar.getInstance();
@@ -210,7 +199,6 @@ public class ModuleCalendarReader {
         summary = property.getValue().split(" ",2);
         moduleCode = summary[0];
         moduleCategory = summary[1];
-        // System.out.printf("Module code: %s \nModule Category: %s\n",summary[0],summary[1]);
     }
 
 
