@@ -13,8 +13,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StorageTest {
     private static final DateTimeFormatter parseWithTimeFormat = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
@@ -53,8 +54,10 @@ class StorageTest {
             }
             Task task = actualList.getTasks().get(0);
             assertEquals(task.getDescription(), "task_one");
-            assertEquals(task.getByDateTime(), null);
+
+            assertNull(task.getByDateTime());
             assertEquals(task.getDoOnStartDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
+
             assertEquals(task.getDoOnEndDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
             assertEquals(task.getStatusIcon(), " ");
         } catch (InvalidInputException | IOException | JSONException exception) {

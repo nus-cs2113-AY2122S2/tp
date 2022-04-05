@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import static seedu.sherpass.constant.CommandParameter.BY_DATE_DELIMITER;
 import static seedu.sherpass.constant.CommandParameter.BY_TIME_DELIMITER;
@@ -44,7 +45,7 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_MULTIPLE_ARGS_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_REPEAT_BY_CLASH_MESSAGE;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 import static seedu.sherpass.constant.Message.WHITESPACE;
 
@@ -122,7 +123,8 @@ public class TaskParser {
 
     private static LocalDate prepareTaskDate(String taskDate) throws InvalidInputException {
         try {
-            return LocalDate.parse(taskDate, inputDateOnlyFormat);
+            return LocalDate.parse(taskDate,
+                    inputDateOnlyFormat.withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException e) {
             throw new InvalidInputException(ERROR_INVALID_DATETIME_MESSAGE);
         }

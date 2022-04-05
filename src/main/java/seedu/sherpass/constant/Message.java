@@ -43,7 +43,7 @@ public class Message {
     public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
     public static final String ERROR_START_DATE_IN_THE_PAST_MESSAGE = "Do date cannot be in the past!";
     public static final String ERROR_BY_DATE_BEFORE_START_DATE_MESSAGE = "By date cannot be before do date!";
-    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
+    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after/equals to end time!";
     public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank and must be before "
             + "the date and time add commands";
     public static final String ERROR_RECURRING_HAS_BY_DATE_MESSAGE = "A recurring task cannot have a by date!";
@@ -56,8 +56,11 @@ public class Message {
             + "it has some clashes\nwith your schedule :(";
     public static final String ERROR_EMPTY_ADD_COMMANDS_MESSAGE = "Add command is missing "
             + "description and/or date details!\n(and possibly a repeat frequency if you intend to add it in)";
-    public static final String ERROR_MULTIPLE_ARGS_MESSAGE = "Add command has both /by and /repeat commands.\n"
+    public static final String ERROR_REPEAT_BY_CLASH_MESSAGE = "Command has both /by and /repeat commands.\n"
             + "Please choose one of them.";
+    public static final String ERROR_DELETE_REPEATED_TASK = "Please exclude the '/repeat' delimiter "
+            + "\nwhen deleting a single task";
+    public static final String ERROR_BY_DATE_BEFORE_DO_ON_DATE = "Your deadline cannot be before your do on date!";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;

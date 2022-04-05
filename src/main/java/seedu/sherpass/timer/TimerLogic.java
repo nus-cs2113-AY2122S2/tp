@@ -13,7 +13,7 @@ import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.util.parser.TimetableParser;
-import seedu.sherpass.util.timetable.Timetable;
+import seedu.sherpass.timetable.Timetable;
 
 import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
@@ -49,9 +49,19 @@ public class TimerLogic implements WindowListener {
         ui.showLine();
     };
 
-    private void setWindowParameters() {
-        jframe.setLayout(new BorderLayout());
+    /**
+     * Creates a constructor for TimerLogic.
+     *
+     * @param ui       UI
+     * @param taskList taskList
+     */
+    public TimerLogic(TaskList taskList, Ui ui) {
+        TimerLogic.taskList = taskList;
+        TimerLogic.ui = ui;
+        jframe = new JFrame();
         jframe.setBounds(500, 300, 300, 100);
+        jlabel = new JLabel(EMPTY_STRING, SwingConstants.CENTER);
+        jframe.setLayout(new BorderLayout());
         jframe.add(jlabel, BorderLayout.NORTH);
         jframe.addWindowListener(this);
         JToggleButton pauseButton = new JToggleButton("Pause");
@@ -63,20 +73,6 @@ public class TimerLogic implements WindowListener {
         JToggleButton stopButton = new JToggleButton("stop");
         stopButton.addActionListener(actionListenerStop);
         jframe.add(stopButton, BorderLayout.EAST);
-    }
-
-    /**
-     * Creates a constructor for TimerLogic.
-     *
-     * @param ui       UI
-     * @param taskList taskList
-     */
-    public TimerLogic(TaskList taskList, Ui ui) {
-        TimerLogic.taskList = taskList;
-        TimerLogic.ui = ui;
-        jframe = new JFrame();
-        jlabel = new JLabel(EMPTY_STRING, SwingConstants.CENTER);
-        setWindowParameters();
     }
 
     /**
@@ -236,10 +232,7 @@ public class TimerLogic implements WindowListener {
         if (!timer.isTimerRunning()) {
             return true;
         }
-        if (timer.isTimerPaused()) {
-            return true;
-        }
-        return false;
+        return timer.isTimerPaused();
     }
 
     /**

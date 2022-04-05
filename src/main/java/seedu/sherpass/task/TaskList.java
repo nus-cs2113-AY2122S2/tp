@@ -8,6 +8,7 @@ import seedu.sherpass.util.Ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 
 import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_START_DATE_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_DO_ON_DATE;
+import static seedu.sherpass.constant.Message.ERROR_DELETE_REPEATED_TASK;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_START_DATE_IN_THE_PAST_MESSAGE;
 
@@ -31,7 +34,6 @@ public class TaskList {
     public TaskList(ArrayList<Task> savedTasks) {
         tasks = savedTasks;
         identifierList = new HashSet<>();
-        refreshIdentifier();
     }
 
     public TaskList() {
@@ -110,21 +112,78 @@ public class TaskList {
         return firstDate.toLocalDate().equals(secondDate.toLocalDate());
     }
 
-    private boolean hasTimeClash(Task currentTask, LocalDateTime doOnStartDateTime,
-                                 LocalDateTime doOnEndDateTime) {
-        return (doOnStartDateTime.isEqual(currentTask.getDoOnStartDateTime())
-                || (doOnEndDateTime.isAfter(currentTask.getDoOnStartDateTime())
-                && doOnStartDateTime.isBefore(currentTask.getDoOnStartDateTime()))
-                || (doOnStartDateTime.isBefore(currentTask.getDoOnEndDateTime())
-                && doOnEndDateTime.isAfter(currentTask.getDoOnEndDateTime()))
-                || (doOnStartDateTime.isAfter(currentTask.getDoOnStartDateTime())
-                && doOnEndDateTime.isBefore(currentTask.getDoOnEndDateTime())))
-                || (currentTask.getDoOnStartDateTime().isAfter(doOnStartDateTime)
-                && currentTask.getDoOnEndDateTime().isBefore(doOnEndDateTime));
+    private boolean isEndTimeAfterCurrentStartTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                   LocalDateTime doOnEndDateTime) {
+        return doOnEndDateTime.isAfter(currentTask.getDoOnStartDateTime())
+                && (doOnStartDateTime.isBefore(currentTask.getDoOnStartDateTime())
+                || doOnStartDateTime.equals(currentTask.getDoOnStartDateTime()));
     }
 
-    private void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck)
-            throws TimeClashException {
+    private boolean isStartTimeBeforeCurrentEndTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                    LocalDateTime doOnEndDateTime) {
+        return doOnStartDateTime.isBefore(currentTask.getDoOnEndDateTime())
+                && (doOnEndDateTime.isAfter(currentTask.getDoOnEndDateTime())
+                || doOnEndDateTime.equals(currentTask.getDoOnEndDateTime()));
+    }
+
+    private boolean isStartAndEndTimeWithinCurrentTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                       LocalDateTime doOnEndDateTime) {
+        return doOnStartDateTime.isAfter(currentTask.getDoOnStartDateTime())
+                && doOnEndDateTime.isBefore(currentTask.getDoOnEndDateTime());
+    }
+
+    private boolean isStartAndEndTimeContainCurrentTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                        LocalDateTime doOnEndDateTime) {
+        return currentTask.getDoOnStartDateTime().isAfter(doOnStartDateTime)
+                && currentTask.getDoOnEndDateTime().isBefore(doOnEndDateTime);
+    }
+
+    private boolean isStartAndEndTimeEqualsCurrentTime(Task currentTask, LocalDateTime doOnStartDateTime,
+                                                       LocalDateTime doOnEndDateTime) {
+        return doOnStartDateTime.isEqual(currentTask.getDoOnStartDateTime())
+                && doOnEndDateTime.equals(currentTask.getDoOnEndDateTime());
+    }
+
+    private boolean hasTimeClash(Task currentTask, LocalDateTime doOnStartDateTime,
+                                 LocalDateTime doOnEndDateTime) {
+        return isStartAndEndTimeEqualsCurrentTime(currentTask, doOnStartDateTime, doOnEndDateTime)
+                || isEndTimeAfterCurrentStartTime(currentTask, doOnStartDateTime, doOnEndDateTime)
+                || isStartTimeBeforeCurrentEndTime(currentTask, doOnStartDateTime, doOnEndDateTime)
+                || isStartAndEndTimeWithinCurrentTime(currentTask, doOnStartDateTime, doOnEndDateTime)
+                || isStartAndEndTimeContainCurrentTime(currentTask, doOnStartDateTime, doOnEndDateTime);
+    }
+
+    private boolean isStartTimeClashWithEndTime(Task taskToCheck) {
+        return taskToCheck.getDoOnStartDateTime().isAfter(taskToCheck.getDoOnEndDateTime())
+                || taskToCheck.getDoOnStartDateTime().equals(taskToCheck.getDoOnEndDateTime());
+    }
+
+    private boolean isByDateBeforeDoOnDate(Task taskToCheck) {
+        if (taskToCheck.getByDateTime() == null) {
+            return false;
+        }
+        return taskToCheck.getByDateTime().toLocalDate()
+                .isBefore(taskToCheck.getDoOnStartDateTime().toLocalDate());
+    }
+
+    /**
+     * Checks if there is any date and time clashes
+     * for a given array.
+     *
+     * @param taskList Array representation of tasks.
+     * @param taskToCheck New Task to be checked for clash.
+     * @throws TimeClashException If there is a date and time clash, i.e.
+     *                            taskToCheck has the same date and clashing of time periods
+     *                            with tasks in taskList
+     */
+    public void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck)
+            throws TimeClashException, InvalidInputException {
+        if (isStartTimeClashWithEndTime(taskToCheck)) {
+            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
+        }
+        if (isByDateBeforeDoOnDate(taskToCheck)) {
+            throw new InvalidInputException(ERROR_BY_DATE_BEFORE_DO_ON_DATE);
+        }
         for (Task task : taskList) {
             if (isOnSameDay(task.getDoOnStartDateTime(), taskToCheck.getDoOnStartDateTime())
                     && hasTimeClash(task, taskToCheck.getDoOnStartDateTime(), taskToCheck.getDoOnEndDateTime())) {
@@ -212,6 +271,7 @@ public class TaskList {
                                       LocalDateTime doOnStartDateTime,
                                       LocalDateTime doOnEndDateTime,
                                       LocalDateTime byDateTime) throws TimeClashException, InvalidInputException {
+
         Task taskToEdit = tasks.get(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
         editedList.remove(editIndex);
@@ -245,12 +305,7 @@ public class TaskList {
 
         long startDateOffset = calculateOffsetOfDate(firstTask.getDoOnStartDateTime(), doOnStartDateTime);
         long endDateOffset = calculateOffsetOfDate(firstTask.getDoOnEndDateTime(), doOnEndDateTime);
-        long byDateOffset;
-        if (doOnStartDateTime == null) {
-            byDateOffset = calculateOffsetOfDate(firstTask.getDoOnStartDateTime(), byDateTime);
-        } else {
-            byDateOffset = calculateOffsetOfDate(doOnStartDateTime, byDateTime);
-        }
+        long byDateOffset = calculateOffsetOfDate(doOnStartDateTime, byDateTime);
 
         int newIdentifier = generateIdentifier();
         for (Task t : affectedTasks) {
@@ -323,17 +378,6 @@ public class TaskList {
         tasks.get(markIndex).markAsUndone();
     }
 
-    /**
-     * Returns a boolean value denoting the existence of a task
-     * within the task array.
-     *
-     * @param index Index of a task. Corresponds to its placement in task array.
-     * @return Returns true if task exists in task array. False otherwise.
-     */
-    public boolean isTaskNotExist(int index) {
-        return index < 0 || index >= tasks.size();
-    }
-
     public int getSize() {
         return tasks.size();
     }
@@ -348,7 +392,7 @@ public class TaskList {
      *
      * @param deleteIndex Index of a task to search for.
      */
-    public void removeTask(int deleteIndex, boolean isRepeat) {
+    public void removeTask(int deleteIndex, boolean isRepeat) throws InvalidInputException {
         Task taskToBeRemoved = tasks.get(deleteIndex);
         if (!isRepeat) {
             tasks.remove(deleteIndex);
@@ -361,7 +405,6 @@ public class TaskList {
 
     /**
      * Deletes all tasks saved within the task array.
-     *
      */
     public void deleteAllTasks() {
         tasks.clear();
@@ -421,11 +464,9 @@ public class TaskList {
      * @param ui User interface
      */
     public void printPendingTasks(Ui ui) {
-        int printIndex = 1;
         for (Task task : tasks) {
             if (!task.isDone()) {
-                ui.showToUser(printIndex + ". " + task);
-                printIndex++;
+                ui.showToUser(task.toString());
             }
         }
     }

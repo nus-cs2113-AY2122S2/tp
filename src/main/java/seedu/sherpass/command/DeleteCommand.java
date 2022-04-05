@@ -1,5 +1,6 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 import seedu.sherpass.task.TaskList;
@@ -43,6 +44,8 @@ public class DeleteCommand extends Command {
             storage.writeSaveData(taskList);
         } catch (IndexOutOfBoundsException exception) {
             ui.showToUser(ERROR_INVALID_INDEX_MESSAGE);
+        } catch (InvalidInputException exception) {
+            ui.showToUser(exception.getMessage());
         }
     }
 }

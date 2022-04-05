@@ -1,7 +1,5 @@
 package seedu.sherpass.task;
 
-import seedu.sherpass.enums.Frequency;
-
 import java.time.LocalDateTime;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
@@ -132,12 +130,12 @@ public class Task {
     @Override
     public String toString() {
         String result = index + ". [" + this.getStatusIcon() + "] " + this.getDescription();
-        if (this.byDateTime != null) {
-            result += " (by: " + getByDateString() + ")";
-        }
         if (this.doOnStartDateTime != null) {
             result += " (to do on: " + getDoOnDateString(false) + " - "
                     + doOnEndDateTime.toLocalTime().toString() + ")";
+        }
+        if (this.byDateTime != null) {
+            result += " (by: " + getByDateString() + ")";
         }
         return result;
     }
