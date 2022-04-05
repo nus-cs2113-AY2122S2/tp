@@ -204,8 +204,8 @@ public class TaskList {
     }
 
     public Task updateTask(Task oldTask, String taskDescription,
-                           long startDifferenceInSeconds,
-                           long endDifferenceInSeconds,
+                           LocalDateTime doOnStartDateTime,
+                           LocalDateTime doOnEndDateTime,
                            LocalDateTime byDate) {
         Task taskToUpdate = new Task(oldTask.getIdentifier(),
                 oldTask.getDescription(), oldTask.getByDate(), oldTask.getDoOnStartDateTime(),
@@ -217,22 +217,14 @@ public class TaskList {
         if (byDate != null) {
             taskToUpdate.setByDate(byDate);
         }
-        if (startDifferenceInSeconds != 0) {
-            taskToUpdate.setDoOnStartDateTime(taskToUpdate
-                    .getDoOnStartDateTime()
-                    .plusSeconds(startDifferenceInSeconds));
-        }
-        if (endDifferenceInSeconds != 0) {
-            taskToUpdate.setDoOnEndDateTime(taskToUpdate
-                    .getDoOnEndDateTime()
-                    .plusSeconds(endDifferenceInSeconds));
-        }
+        taskToUpdate.setDoOnStartDateTime(doOnStartDateTime);
+        taskToUpdate.setDoOnEndDateTime(doOnEndDateTime);
         return taskToUpdate;
     }
 
     public void editSingleTaskContent(int editIndex, String taskDescription,
-                                      long startDifferenceInSeconds,
-                                      long endDifferenceInSeconds,
+                                      LocalDateTime doOnStartDateTime,
+                                      LocalDateTime doOnEndDateTime,
                                       LocalDateTime byDate) throws TimeClashException, InvalidInputException {
         Task taskToEdit = tasks.get(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
@@ -240,7 +232,7 @@ public class TaskList {
 
         int newIdentifier = generateIdentifier();
         Task updatedTask = updateTask(taskToEdit, taskDescription,
-                startDifferenceInSeconds, endDifferenceInSeconds, byDate);
+                doOnStartDateTime, doOnEndDateTime, byDate);
         updatedTask.setIdentifier(newIdentifier);
         updatedTask.setRepeatFrequency(Frequency.SINGLE);
 
@@ -251,8 +243,8 @@ public class TaskList {
     }
 
     public void editRepeatedTasks(int editIndex, String taskDescription,
-                                  long startDifferenceInSeconds,
-                                  long endDifferenceInSeconds) throws TimeClashException, InvalidInputException {
+                                  LocalDateTime doOnStartDateTime,
+                                  LocalDateTime doOnEndDateTime) throws TimeClashException, InvalidInputException {
         ArrayList<Task> affectedTasks = getAffectedTasks(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
         editedList.removeAll(affectedTasks);
@@ -260,7 +252,7 @@ public class TaskList {
         int newIdentifier = generateIdentifier();
         for (Task t : affectedTasks) {
             Task newTask = updateTask(t, taskDescription,
-                    startDifferenceInSeconds, endDifferenceInSeconds, null);
+                    doOnStartDateTime, doOnEndDateTime, null);
             newTask.setIdentifier(newIdentifier);
             checkDateTimeClash(editedList, newTask);
             editedList.add(newTask);

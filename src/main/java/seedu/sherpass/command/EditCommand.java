@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
 
@@ -29,14 +30,18 @@ public class EditCommand extends Command {
     private LocalDateTime doOnStartDateTime;
     private LocalDateTime doOnEndDateTime;
     private LocalDateTime byDate;
+    private LocalDate doOnDate;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private boolean isRepeating;
 
     public EditCommand(int editIndex, String taskDescription,
                        LocalDate doOnDate, LocalTime startTime, LocalTime endTime) {
         this.editIndex = editIndex;
         this.taskDescription = taskDescription;
-        this.doOnStartDateTime = (doOnDate == null ? null : LocalDateTime.of(doOnDate, startTime));
-        this.doOnEndDateTime = (doOnDate == null ? null : LocalDateTime.of(doOnDate, endTime));
+        this.doOnDate = doOnDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public void setRepeating(boolean repeating) {
@@ -45,6 +50,14 @@ public class EditCommand extends Command {
 
     public void setByDate(LocalDateTime byDate) {
         this.byDate = byDate;
+    }
+
+    private void setDoOnDateStartEndTime(Task taskToEdit) {
+        doOnDate = (doOnDate == null) ? taskToEdit.getDoOnStartDateTime().toLocalDate() : doOnDate;
+        startTime = (startTime == null) ? taskToEdit.getDoOnStartDateTime().toLocalTime() : startTime;
+        endTime = (endTime == null) ? taskToEdit.getDoOnEndDateTime().toLocalTime() : endTime;
+        doOnStartDateTime = LocalDateTime.of(doOnDate, startTime);
+        doOnEndDateTime = LocalDateTime.of(doOnDate, endTime);
     }
 
     /**
@@ -57,25 +70,17 @@ public class EditCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task taskToEdit = taskList.getTask(editIndex);
-            String repeated = "";
-            long startDifferenceInSeconds = 0;
-            long endDifferenceInSeconds = 0;
-            if (doOnStartDateTime != null && doOnEndDateTime != null) {
-                startDifferenceInSeconds = taskToEdit.getDoOnStartDateTime().until(doOnStartDateTime,
-                        ChronoUnit.SECONDS);
-                endDifferenceInSeconds = taskToEdit.getDoOnEndDateTime().until(doOnEndDateTime,
-                        ChronoUnit.SECONDS);
-            }
-
+            setDoOnDateStartEndTime(taskToEdit);
+            String repeated = EMPTY_STRING;
             if (isRepeating) {
                 taskList.editRepeatedTasks(editIndex, taskDescription,
-                        startDifferenceInSeconds, endDifferenceInSeconds);
+                        doOnStartDateTime, doOnEndDateTime);
                 repeated = " repeated";
             } else {
                 taskList.editSingleTaskContent(editIndex, taskDescription,
-                        startDifferenceInSeconds, endDifferenceInSeconds, byDate);
+                        doOnStartDateTime, doOnEndDateTime, byDate);
             }
-            ui.showToUser("Okay! I've edited this" + repeated + " task as such:\n\t" + taskToEdit);
+            ui.showToUser("Okay! I've edited this" + repeated + " task:\n\t" + taskToEdit);
             storage.writeSaveData(taskList);
         } catch (TimeClashException exception) {
             ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
