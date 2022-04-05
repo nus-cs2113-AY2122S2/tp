@@ -87,6 +87,12 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
                 serviceCharge);
     }
 
+    /**
+     * Checks if the cost list and the involved list provided by the user have different lengths.
+     *
+     * @param isMissingCost A boolean representing whether the total cost was not provided by the user.
+     * @throws InvalidFormatException If the cost list and the involved list have different lengths.
+     */
     private void checkIfHasDifferentLength(boolean isMissingCost, boolean hasDifferentLength)
             throws InvalidFormatException {
         if (isMissingCost) {
