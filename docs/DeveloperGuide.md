@@ -874,7 +874,7 @@ A summary of the general procedure of listing all workouts in a plan is as follo
 1. User enters the command `plan /details <plan index number>`.
 2. A list of workouts that user specified is displayed through the terminal.
 
-The following sequence diagram illustrates how the `plan /details` command works in greater detail:
+The following sequence diagram illustrates how the `plan /details` command works:
 
 <span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
 have been removed from the sequence diagram.</span>
