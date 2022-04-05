@@ -156,16 +156,16 @@ public class WorkoutCommand extends Command {
                 break;
             case DELETE_ACTION_KEYWORD:
                 Workout deletedWorkout = getWorkoutList().deleteWorkout(getUserArguments());
-                ui.printDeleteWorkoutMessage(deletedWorkout);
-                planList.deletePlanContainsDeletedWorkout(deletedWorkout.toString());
+                getUI().printDeleteWorkoutMessage(deletedWorkout);
+                getPlanList().deletePlanContainsDeletedWorkout(deletedWorkout.toString());
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 getFileManager().rewriteAllPlansToFile(getPlanList());
                 break;
             case UPDATE_ACTION_KEYWORD:
                 String currentWorkout = getWorkoutList().getCurrentWorkout(getUserArguments());
                 Workout updatedWorkout = getWorkoutList().updateWorkout(getUserArguments());
-                getUI().printUpdateWorkoutMessage(updatedWorkout);
-                planList.updatePlanContainsUpdatedWorkout(currentWorkout, updatedWorkout);
+                getUI().printUpdateWorkoutMessage(currentWorkout, updatedWorkout);
+                getPlanList().updatePlanContainsUpdatedWorkout(currentWorkout, updatedWorkout);
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 getFileManager().rewriteAllPlansToFile(getPlanList());
                 break;
