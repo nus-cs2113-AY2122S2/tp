@@ -39,8 +39,9 @@ public class MealReservationManager {
         return mealReservations;
     }
 
-    public void reserveMeal(Customer customer, Route route, ArrayList<MenuItem> reservedMenuItems) throws ArcsException {
-        if(!flightBookingManager.checkFlightBookingValidity(customer.getIc(),route.getFlightID())) {
+    public void reserveMeal(Customer customer, Route route,
+            ArrayList<MenuItem> reservedMenuItems) throws ArcsException {
+        if (!flightBookingManager.checkFlightBookingValidity(customer.getIc(),route.getFlightID())) {
             throw new ArcsException(NO_FLIGHT_BOOKED_MESSAGE);
         }
         mealReservations.add(new MealReservation(customer,route,reservedMenuItems));
