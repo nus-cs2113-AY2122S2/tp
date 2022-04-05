@@ -16,6 +16,9 @@ public class User {
     private IncomeList incomeListArray;
 
     public User() {
+        setExpenditureListArray(new ExpenditureList());
+        setCreditCardListArray(new CreditCardList());
+        setIncomeListArray(new IncomeList());
     }
 
     public User(ExpenditureList expenditureListArray, CreditCardList creditCardListArray,
