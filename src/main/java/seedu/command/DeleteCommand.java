@@ -35,7 +35,8 @@ public class DeleteCommand extends Command {
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute() {
-        String equipmentName, serialNumber;
+        String equipmentName;
+        String serialNumber;
 
         try {
             serialNumber = prepareDelete();
@@ -65,6 +66,7 @@ public class DeleteCommand extends Command {
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return this.commandStrings.equals(otherDeleteCommand.commandStrings);
     }
+
 
     protected String prepareDelete() throws AssertionError {
         String argString = commandStrings.get(0);

@@ -41,4 +41,33 @@ class DeleteCommandTest {
 
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    void execute_invalidSerialNumber_fail() {
+        deleteCommand = new DeleteCommand(new ArrayList<>(
+                Arrays.asList("s/S123445ASF")
+        ));
+        deleteCommand.setEquipmentManager(new EquipmentManager());
+
+        CommandResult actualResult = deleteCommand.execute();
+        CommandResult expectedResult =
+                new CommandResult("No such serial number, please enter an existing "
+                        + "serial number");
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void execute_notSerialNumber_fail() {
+        deleteCommand = new DeleteCommand(new ArrayList<>(
+                Arrays.asList("n/Speaker3")
+        ));
+        deleteCommand.setEquipmentManager(new EquipmentManager());
+
+        CommandResult actualResult = deleteCommand.execute();
+        CommandResult expectedResult =
+                new CommandResult("Only serial number accepted for deleting equipment");
+
+        assertEquals(expectedResult, actualResult);
+    }
 }
