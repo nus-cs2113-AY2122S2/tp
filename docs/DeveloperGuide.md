@@ -283,7 +283,7 @@ user's command. If the user's command type is search, i.e. `search <commandActio
 command using `Parser#createSearchCommand(String userInput)` method. This method will further evaluate the
 `<commandAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to
 the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If
-the `<keywords>` is not specified, an `InvalidCommandException` will be thrown.
+the `<keywords>` is not specified, it will be deemed as searching for spacing.
 
 ---
 ## Implementation

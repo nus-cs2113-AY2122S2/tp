@@ -154,8 +154,8 @@ class ParserTest {
         assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /delete"));
         assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /update"));
         assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /test"));
-        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /exercise"));
-        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /plan"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /OMG"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /upgrade"));
         assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search fasdjaks"));
         assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search -1"));
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> parser.createSearchCommand("search"));
