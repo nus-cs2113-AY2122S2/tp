@@ -415,8 +415,9 @@ delimiters are compulsory to identify the activity you wish to edit.
 >    * The person's name is **case-insensitive**.
 >    * If one is not provided, the original payer is left unchanged.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
->    * Each individual name is **case-insensitive**.
+>* Each individual name is **case-insensitive**.
 >    * If a list is not provided, the original participants are left unchanged.
+>    * You **must** supply a costlist or overall cost if you wish to edit the list of participants.
 >* `[TOTAL_COST]` refers to the overall cost of the activity.
 >    * If one is not provided, the original overall cost is left unchanged. If a cost list is provided, that will be used to 
 > edit the activity instead. You cannot supply both a total cost and a cost list.
@@ -427,8 +428,7 @@ distributed amongst all participants.
 >be used to edit the activity instead. You cannot supply both a total cost and a cost list.
 >    * You can use this even if the activity was originally created using an overall cost. The new cost list will be assigned 
 >to the existing participants in the order displayed when viewing the activity.
->    * You are encouraged to provide a participant list with `/i` together with the cost list to confirm the order in which 
-the costs are distributed.
+>    * You are encouraged to additionallly provide a participant list with `/i` to confirm the distribution of costs.
 >* `[GST_PERCENTAGE]` refers to the additional GST that may be charged during your activity.
 >    * If one is not provided, the original GST is left unchanged and will be applied to any changes to the overall cost or
 >cost list.
