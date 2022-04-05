@@ -254,6 +254,7 @@ public class StringConstants {
     public static final String INVALID_MOD_DES_FLAG = "invalidModDesFlag";
     public static final String INVALID_TIME_FLAG = "invalidTimeFlag";
     public static final String INVALID_MARK_FLAG = "invalidMarkFlag";
+    public static final String INVALID_FLAG = "invalidFlag";
     public static final String INVALID_MODULE_CODE = "invalidModuleCode";
     public static final String INVALID_MODULE_GRADE = "invalidModuleGrade";
     public static final String INVALID_NUMBER = "invalidNumber";

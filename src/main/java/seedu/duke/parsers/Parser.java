@@ -42,6 +42,7 @@ public abstract class Parser {
     protected static final String INVALID_MOD_DES_FLAG = StringConstants.INVALID_MOD_DES_FLAG;
     protected static final String INVALID_TIME_FLAG = StringConstants.INVALID_TIME_FLAG;
     protected static final String INVALID_MARK_FLAG = StringConstants.INVALID_MARK_FLAG;
+    protected static final String INVALID_FLAG = StringConstants.INVALID_FLAG;
     protected static final String INVALID_MODULE_CODE = StringConstants.INVALID_MODULE_CODE;
     protected static final String INVALID_MODULE_GRADE = StringConstants.INVALID_MODULE_GRADE;
     protected static final String INVALID_NUMBER = StringConstants.INVALID_NUMBER;

@@ -48,8 +48,6 @@ public class EditParser extends Parser {
      * (\s+(-n|(?<invalidTaskNameFlag>.*))                   -- matches [-n "taskName"] or
      * \s+\"(?<taskName>[^\"]+)\")?                             [<invalidTaskNameFlag> "taskName"] if present. Optional
      *
-     *
-     *
      * (\s+(-d|(?<invalidTaskDesFlag>.*))                    -- matches [-d "taskDescription"] or
      * \s+\"(?<taskDescription>[^\"]+)\")?                      [<invalidTaskDesFlag> "taskDescription"] if present.
      *                                                          Optional
@@ -69,14 +67,15 @@ public class EditParser extends Parser {
      *                                                          Any other excess inputs
 
      */
-    private static final String EDIT_FORMAT = "(task\\s+(?<taskNumber>\\d+|(?<invalidNumber>.*))"
-            + "(\\s+(-m|(?<invalidModFlag>.*))\\s+(?<taskModule>\\w+))?"
-            + "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|\\s+-t\\s+\\\"[^\\\"]+\\\")"
-            + "(\\s+(-n|(?<invalidTaskNameFlag>.*))\\s+\\\""
-            + "(?<taskName>[^\\\"]+)\\\")?|(\\s+(-d|(?<invalidTaskDesFlag>.*))\\s+\\\""
-            + "(?<taskDescription>[^\\\"]+)\\\")?|(\\s+(-t|(?<invalidTimeFlag>.*))\\s+\\\""
-            + "(?<estimatedWorkingTime>[^\\\"]+)\\\")?)|(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))"
-            + "(\\s+(-d|(?<invalidModDesFlag>.*))\\s+\\\"(?<moduleDescription>.+)\\\")?)(?<invalid>.*)";
+    private static final String EDIT_FORMAT = "((task\\s+(?<taskNumber>\\d+)"
+            +  "(\\s+-m\\s+(?<taskModule>\\w+))?"
+            //+ "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|\\s+-t\\s+\\\"[^\\\"]+\\\")"
+            + "(?=\\s+(-n|-d|-t)\\s+\\\"[^\\\"]+\\\")"
+            + "(\\s+-n\\s+\\\"((?<taskName>[^\\\"]+)\\\")?"
+            + "|\\s+-d\\s+\\\"((?<taskDescription>[^\\\"]+)\\\")?"
+            + "|(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?))"
+            + "|(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))))"
+            + "(?<invalid>.*)";
 
     public EditParser() {
         super();
@@ -95,6 +94,7 @@ public class EditParser extends Parser {
         groupNames.add(INVALID_TIME_FLAG);
         groupNames.add(INVALID_MOD_FLAG);
         groupNames.add(INVALID_MOD_DES_FLAG);
+        groupNames.add(INVALID_FLAG);
 
     }
 
