@@ -32,7 +32,7 @@ class StorageTest {
             Task newTask = new Task(69, "task_one",
                     null,
                     LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat),
-                    LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
+                    LocalDateTime.parse("12/12/2022 12:10", parseWithTimeFormat));
             tasks.addTask(newTask, Frequency.SINGLE);
             storage.writeSaveData(tasks);
         } catch (IOException | TimeClashException | InvalidInputException exception) {
@@ -52,13 +52,13 @@ class StorageTest {
             } catch (IOException | TimeClashException e) {
                 e.printStackTrace();
             }
-            Task task = actualList.getTasks().get(0);
+            Task task = actualList.getTask(0);
             assertEquals(task.getDescription(), "task_one");
 
             assertNull(task.getByDateTime());
             assertEquals(task.getDoOnStartDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
 
-            assertEquals(task.getDoOnEndDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
+            assertEquals(task.getDoOnEndDateTime(), LocalDateTime.parse("12/12/2022 12:10", parseWithTimeFormat));
             assertEquals(task.getStatusIcon(), " ");
         } catch (InvalidInputException | IOException | JSONException exception) {
             exception.printStackTrace();

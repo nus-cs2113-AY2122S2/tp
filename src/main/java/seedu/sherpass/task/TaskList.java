@@ -34,6 +34,7 @@ public class TaskList {
     public TaskList(ArrayList<Task> savedTasks) {
         tasks = savedTasks;
         identifierList = new HashSet<>();
+        updateIndex();
     }
 
     public TaskList() {
