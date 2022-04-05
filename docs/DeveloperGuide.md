@@ -922,7 +922,6 @@ This completes the process of displaying all plans in WerkIt!.
 ### Schedule
 The overview of the design on schedule features can be found [here](#schedule-related-features). 
 
-
 #### Update Schedule
 A summary of the general procedure of updating a plan for a particular day to the schedule in WerkIt! is as follows:
 1. User enters the command `schedule /update <day number> <plan number>`.
@@ -1272,9 +1271,26 @@ keeping all the non-affected data safely.
 
 ## User Stories
 
-| Version | As a ... | I want to ...    | So that I can ...                                                      |
-|---------|----------|------------------|------------------------------------------------------------------------|
-| v1.0    | user     | create a workout | keep track of how many repetitions I would like to do with an exercise |
+| Version | As a ... | I want to ...                                        | So that I can ...                                                      |
+|---------|----------|------------------------------------------------------|------------------------------------------------------------------------|
+| v1.0    | user     | view exercises                                       | create my workout                                                      |
+| v1.0    | user     | create a workout                                     | keep track of how many repetitions I would like to do with an exercise |
+| v1.0    | user     | view workouts                                        | see what are the workouts I can add into my workout plan               |
+| v1.0    | user     | delete workout                                       | remove any workouts that I will not be doing                           |
+| v1.0    | user     | update workout                                       | make modification to my workouts after I got stronger                  |
+| v1.0    | user     | work on the workouts/plans I have created previously | use those workouts in my current workout sessions                      |
+| v2.0    | user     | create a workout plan                                | perform multiple workouts at a time                                    |
+| v2.0    | user     | search for the plan I have created                   | follow the workouts listed in it                                       |
+| v2.0    | user     | view all plans I have created                        | see what plans I have already created                                  |
+| v2.0    | user     | be able to delete a plan I have created              | remove the plans that I will not be doing                              |
+| v2.0    | user     | schedule a plan on a particular day                  | plan my workout routine                                                |
+| v2.0    | user     | view my schedule                                     | see what plans I have scheduled for the week                           |
+| v2.0    | user     | remove the plan scheduled on a particular day        | change the workout plan that I want to do                              |
+| v2.0    | user     | reset my workout plan schedule                       | easily re-schedule the plans that I want to do                         |
+| v2.0    | user     | search for exercise                                  | find the exercises that I am interested                                |
+| v2.0    | user     | search for workouts that I have created              | find the workouts that I am interested                                 |
+| v2.0    | user     | search for plans that I have created                 | find the plans that I am interested                                    |
+| v2.0    | user     | view the summary of what I can do in the application | know which command to use to perform the actions I want                |
 
 ## Non-Functional Requirements
 
