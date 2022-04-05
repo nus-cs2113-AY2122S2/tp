@@ -61,11 +61,11 @@ public class StaffController extends Controller {
     private void printStaff() {
         MainLogger.logInfo(this, "Printing staff");
         System.out.println("Printing staff...");
-        try {
-            staffManager.printStaff();
-        } catch (IllegalStateException e) {
-            System.out.println(e.getMessage());
+        if (checkStaffEmpty()) {
+            System.out.println("No staff in records to print!");
+            return;
         }
+        staffManager.printStaff();
     }
 
     /**
@@ -76,6 +76,10 @@ public class StaffController extends Controller {
     private void findStaff() throws OperationTerminationException {
         MainLogger.logInfo(this, "Finding staff");
         System.out.println("Finding staff...");
+        if (checkStaffEmpty()) {
+            System.out.println("No staff in records to find!");
+            return;
+        }
         int staffId = InputParser.getInteger("ID of staff: ");
         while (true) {
             try {
@@ -141,7 +145,7 @@ public class StaffController extends Controller {
         MainLogger.logInfo(this, "Deleting staff");
         System.out.println("Deleting staff...");
         if (checkStaffEmpty()) {
-            System.out.println("No staff in records to delete yet!");
+            System.out.println("No staff in records to delete!");
             return;
         }
         int staffId;
@@ -158,11 +162,7 @@ public class StaffController extends Controller {
                 System.out.println(e.getMessage());
             }
         }
-        try {
-            staffManager.deleteByStaffId(staffId);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        staffManager.deleteByStaffId(staffId);
     }
 
     /**
@@ -174,7 +174,7 @@ public class StaffController extends Controller {
         MainLogger.logInfo(this, "Deleting staff");
         System.out.println("Editing staff...");
         if (checkStaffEmpty()) {
-            System.out.println("No staff in records to edit yet!");
+            System.out.println("No staff in records to edit!");
             return;
         }
         int staffId;
@@ -230,8 +230,15 @@ public class StaffController extends Controller {
                 staff.setPosition(position);
                 break;
             case 4:
-                final double salary = InputParser.getDouble("New salary of staff: ");
-                staff.setSalary(salary);
+                while (true) {
+                    try {
+                        double salary = InputParser.getDouble("New salary of staff: ");
+                        staff.setSalary(salary);
+                        break;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
                 break;
             default:
                 System.out.println("Input out of range, please input a number from 0 to 4...");

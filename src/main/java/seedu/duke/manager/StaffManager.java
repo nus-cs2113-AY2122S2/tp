@@ -51,12 +51,8 @@ public class StaffManager extends Manager {
     /**
      * Print all the Staffs.
      *
-     * @throws IllegalArgumentException If there are no staff.
      */
-    public void printStaff() throws IllegalStateException {
-        if (staffs.size() == 0) {
-            throw new IllegalStateException("There is no staff.");
-        }
+    public void printStaff() {
         for (int i = 0; i < staffs.size(); i++) {
             System.out.println((i + 1) + ". " + staffs.get(i));
         }
