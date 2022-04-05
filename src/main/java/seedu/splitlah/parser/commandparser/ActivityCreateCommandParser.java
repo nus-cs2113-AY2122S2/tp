@@ -119,6 +119,14 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
         }
     }
 
+    /**
+     * Checks if the cost list of the activity is not provided by the user.
+     *
+     * @param commandArgs A String object representing arguments provided by the user.
+     * @return true if the user did not indicate the cost list using the cost list delimiter,
+     *         false if the cost list is successfully parsed from user input.
+     * @throws InvalidFormatException If the cost list argument cannot be found in the input arguments.
+     */
     private boolean isMissingCostList(String commandArgs) throws InvalidFormatException {
         try {
             costList = Parser.parseCostList(commandArgs);
