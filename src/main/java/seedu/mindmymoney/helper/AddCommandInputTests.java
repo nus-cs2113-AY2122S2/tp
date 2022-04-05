@@ -7,7 +7,9 @@ import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
+import static seedu.mindmymoney.constants.Indexes.MAX_CASHBACK_AMOUNT;
 import static seedu.mindmymoney.constants.Indexes.MAX_STUDENT_INCOME;
+import static seedu.mindmymoney.constants.Indexes.MIN_CASHBACK_AMOUNT;
 import static seedu.mindmymoney.constants.Indexes.MIN_EXPENDITURE_AMOUNT;
 import static seedu.mindmymoney.constants.Indexes.MIN_STUDENT_INCOME;
 import static seedu.mindmymoney.constants.PaymentMethod.CASH;
@@ -197,6 +199,7 @@ public class AddCommandInputTests {
 
     /**
      * Checks if user input of cashback is a positive number more than 0.
+     * Cashback also cannot be more than 100%.
      *
      * @param inputCashback User input of Cash back.
      * @throws MindMyMoneyException when input cashback is less than 0 or null.
@@ -213,10 +216,12 @@ public class AddCommandInputTests {
             throw new MindMyMoneyException("Cashback must be a number");
         }
 
-        if (inputAmountAsDouble < 0) {
+        if (inputAmountAsDouble < MIN_CASHBACK_AMOUNT) {
             throw new MindMyMoneyException("Cashback must be more than or equals to 0");
+        } else if (inputAmountAsDouble >= MAX_CASHBACK_AMOUNT) {
+            throw new MindMyMoneyException("Cashback cannot be more than 100%!");
         }
-        assert inputAmountAsDouble >= 0 : "Cashback should have a non-negative value";
+        assert inputAmountAsDouble >= MIN_CASHBACK_AMOUNT : "Cashback should have a non-negative value";
     }
 
     /**
@@ -243,27 +248,5 @@ public class AddCommandInputTests {
         assert inputAmountAsDouble > 0 : "Limit amount should have a positive value";
     }
 
-    /**
-     * Checks if user input of amount for Credit Card Balance is valid.
-     *
-     * @param inputCardBalance User input of credit card balance.
-     * @throws MindMyMoneyException when given credit card balance is less than or equal to 0 or null.
-     */
-    public static void testCreditCardBalance(String inputCardBalance) throws MindMyMoneyException {
-        float inputAmountAsDouble;
-        if (inputCardBalance == null) {
-            throw new MindMyMoneyException("Credit card balance cannot be empty!");
-        }
 
-        try {
-            inputAmountAsDouble =  Float.parseFloat(inputCardBalance);
-        } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("Credit card balance must be a number");
-        }
-
-        if (inputAmountAsDouble <= 0) {
-            throw new MindMyMoneyException("Credit card balance must be more than 0");
-        }
-        assert inputAmountAsDouble > 0 : "Credit card balance should have a positive value";
-    }
 }
