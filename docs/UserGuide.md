@@ -9,8 +9,9 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `EquipmentManager` from [here](https://github.com/AY2122S2-CS2113-F12-2/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for your `EquipmentManager` application.
-4. Double-click the file to start the app. 
-5. Type `help` to see the list of available commands.
+4. Open the command line and go to the folder mentioned above.
+5. Run java -jar tp.jar
+6. Type `help` to see the list of available commands.
 
 ## Features 
 
@@ -41,6 +42,8 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `bye` and `save`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* The maximum cost supported is up to $10 million, any specified cost equal or greater than that will be displayed incorrectly.
 
 ### Adding an equipment: `add`
 Adds new Equipment to the list of Equipment.
@@ -179,7 +182,7 @@ Output:
 `Parameters: NIL`<br>
 `Example: list`<br>
 
-`listPrints a list of all equipment in the inventory of the specified type.`<br>
+`list: Prints a list of all equipment in the inventory of the specified type.`<br>
 `Parameters: t/Type`<br>
 `Example: list MICROPHONE`<br>
 

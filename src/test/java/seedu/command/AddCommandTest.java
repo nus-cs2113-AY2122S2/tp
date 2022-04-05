@@ -8,6 +8,7 @@ import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentManager;
 import seedu.equipment.EquipmentType;
 import seedu.parser.IncompleteCommandException;
+import seedu.parser.MissingAttributeException;
 import seedu.parser.Parser;
 
 import java.util.ArrayList;
@@ -32,7 +33,8 @@ class AddCommandTest {
     );
 
     @Test
-    void execute_duplicateSerialNumber_exceptionThrown() throws DuplicateSerialNumberException {
+    void execute_duplicateSerialNumber_exceptionThrown() throws DuplicateSerialNumberException,
+            MissingAttributeException {
         addCommand = new AddCommand(userInput);
         addCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = addCommand.equipmentManager;
@@ -74,7 +76,7 @@ class AddCommandTest {
     }
 
     @Test
-    void addEquipment_validArrayListString_success() throws DuplicateSerialNumberException {
+    void addEquipment_validArrayListString_success() throws DuplicateSerialNumberException, MissingAttributeException {
         addCommand = new AddCommand(userInput);
         addCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = addCommand.equipmentManager;
@@ -94,7 +96,7 @@ class AddCommandTest {
     }
 
     @Test
-    void checkAttributes_allAttributesSet_true() {
+    void checkAttributes_allAttributesSet_true() throws MissingAttributeException {
         addCommand = new AddCommand(userInput);
         boolean actualResult = addCommand.checkAttributes();
 
@@ -102,12 +104,9 @@ class AddCommandTest {
     }
 
     @Test
-    void checkAttributes_oneOrMoreNulls_false() {
-        addCommand = new AddCommand(new ArrayList<>(
+    void checkAttributes_oneOrMoreNulls_false_exceptionThrown() {
+        assertThrows(MissingAttributeException.class, () -> new AddCommand(new ArrayList<>(
                 Arrays.asList("n/Speaker B", "s/S1404115ASF", "t/SPEAKER", "pf/Loud Technologies")
-        ));
-        boolean actualResult = addCommand.checkAttributes();
-
-        assertFalse(actualResult);
+        )));
     }
 }
