@@ -93,7 +93,7 @@ public class ParserTest {
      * when certain parameters are missing from the user's input.
      */
     @Test
-    public void prepareAdd_missingParameters_throwException() {
+    public void prepareAddLesson_missingParameters_throwException() {
         String inputString = "add_lesson n/john t/cs2113 d/monday st/1600 et/1800";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -105,7 +105,7 @@ public class ParserTest {
      * when the values of certain parameters are missing from the user's input.
      */
     @Test
-    public void prepareAdd_parametersMissingValues_throwException() {
+    public void prepareAddMeeting_parametersMissingValues_throwException() {
         String inputString = "add_lesson n/john t/cs2113 d/ st/1600 et/1800 m/online";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
