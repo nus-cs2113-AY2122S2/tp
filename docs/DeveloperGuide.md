@@ -1591,6 +1591,7 @@ where there are many other day-to-day things being kept too.
 |---------|----------|------------------|------------------------------------------------------------------------|
 | v1.0    | user     | create a workout | keep track of how many repetitions I would like to do with an exercise |
 
+<br/>
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
 
 ## Non-Functional Requirements
