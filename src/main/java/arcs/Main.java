@@ -8,7 +8,11 @@ import arcs.data.flightbooking.FlightBookingManager;
 import arcs.data.menuitems.MenuItemManager;
 import arcs.data.staff.StaffManager;
 import arcs.parser.Parser;
-import arcs.storage.*;
+import arcs.storage.CustomerFileManager;
+import arcs.storage.MealReservationFileManager;
+import arcs.storage.MenuItemFileManager;
+import arcs.storage.FlightBookingFileManager;
+import arcs.storage.RouteFileManager;
 import arcs.commands.Command;
 import arcs.ui.MainUi;
 
@@ -80,7 +84,8 @@ public class Main {
             menuItemManager = new MenuItemManager(menuItemFileManager.loadData());
             customerManager = new CustomerManager(customerFileManager.loadData());
             flightBookingManager = new FlightBookingManager(flightBookingFileManager.loadData());
-            mealReservationManager = new MealReservationManager(mealReservationFileManager.loadData(), flightBookingManager);
+            mealReservationManager = new MealReservationManager(mealReservationFileManager.loadData(),
+                    flightBookingManager);
 
         } catch (IOException e) {
             mainUi.displayMessages(e.getMessage());
