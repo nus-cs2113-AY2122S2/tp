@@ -5,11 +5,7 @@ import seedu.meetingjio.parser.Parser;
 import seedu.meetingjio.timetables.MasterTimetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_EVENT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.*;
 
 public class ParserTest {
 
@@ -111,8 +107,61 @@ public class ParserTest {
         assertEquals(ERROR_MISSING_VALUES_ADD_EVENT, command.execute(masterTimetable));
     }
 
+    @Test
+    public void prepareAddMeetingMissingParameter() {
+        String inputString = "add_meeting d/Thursday st/1230 et/1330 m/online";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_PARAMETERS_ADD_MEETING, command.execute(masterTimetable));
+    }
 
+    @Test
+    public void prepareAddMeetingMissingParameterValuesGeneral() {
+        String inputString = "add_meeting t/ d/Thursday st/1230 et/1330 m/online";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_VALUES_ADD_MEETING, command.execute(masterTimetable));
+    }
 
+    @Test
+    public void prepareAddMeetingMissingParameterDay() {
+        String inputString = "add_meeting t/meeting st/1230 et/1330 m/online";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_PARAMETERS_ADD_MEETING, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareAddMeetingMissingParameterValuesTwo() {
+        String inputString = "add_meeting t/ d/ st/1230 et/1330 m/online";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        //should check parameters too
+        assertEquals(ERROR_MISSING_VALUES_ADD_MEETING, command.execute(masterTimetable));
+    }
+    @Test
+    public void prepareAddMeetingMissingParameterValuesDay() {
+        String inputString = "add_meeting t/t d/ st/1230 et/1330 m/online";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_VALUES_ADD_MEETING, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareAddMeetingInvalidDay() {
+        String inputString = "add_meeting t/meeting d/myday st/1230 et/1330 m/online";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_INVALID_DAY, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareAddMeetingInvalidDay() {
+        String inputString = "add_meeting t/meeting d/myday st/1230 et/1330 m/online";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_INVALID_DAY, command.execute(masterTimetable));
+    }
 
     /*
     @Test
