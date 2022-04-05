@@ -43,8 +43,8 @@ public class AddParser extends Parser {
      *                                                      Same as above, note that moduleCode does not require "",
      *                                                      but must also be a single word composed of [a-zA-Z0-9_].
      *
-     * (\s+(?<modularCredit>\d+)(?=(\s+-d\s+\"[^\"]+\")|$)) -- matches [modularCredit]
-     *                                                         Must be a number
+     * (\s+(?<modularCredit>-?\d+)(?=(\s+-d\s+\"[^\"]+\")|$)) -- matches [modularCredit]
+     *                                                         Must be an integer.
      *
      * (\s+(-d\s+\"(?<moduleDescription>[^\"]+)\"))?)    -- matches [-d "moduleDescription"] if present. Optional
      *                                                      Does not accept " as a valid character.
@@ -55,7 +55,7 @@ public class AddParser extends Parser {
 
     private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+-m\\s+(?<taskModule>\\w+))?"
             + "(\\s+-d\\s+\\\"(?<taskDescription>[^\\\"]+)\\\")?(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?"
-            + "|mod\\s+(?<moduleCode>\\w+?)(\\s+(?<modularCredit>\\d+)(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|.*$))"
+            + "|mod\\s+(?<moduleCode>\\w+?)(\\s+(?<modularCredit>-?\\d+)(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|.*$))"
             + "(\\s+(-d\\s+\\\"(?<moduleDescription>[^\\\"]+)\\\"))?)(?<invalid>.*)";
 
     public AddParser() {
@@ -90,7 +90,7 @@ public class AddParser extends Parser {
             int modularCredit;
             try {
                 modularCredit = Integer.parseInt(modularCreditStr);
-                if (modularCredit > MAXIMUM_MODULAR_CREDITS) {
+                if (modularCredit > MAXIMUM_MODULAR_CREDITS || modularCredit < 0) {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException e) {
