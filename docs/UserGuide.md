@@ -1,5 +1,10 @@
-# User Guide
+<div align="center">
 
+![logo](team/Logo/Beige%20Elegant%20and%20Minimal%20Logo%20(1).png)
+
+</div>
+
+# User Guide
 ## Introduction
 
 Hotel Lite is a convenient tool for hotel owners to manage their businesses. 
@@ -167,12 +172,14 @@ Numbers from 1 to 7 are map to a day in a week by: <br/>
 Format: `availability NAME / DAY(S)`
 * `NAME` given must be in the records of housekeeper list to be eligible to add availability.
 * `DAY(S)` given must be between 1 and 7. Multiple days can be represented using commas.
+* `DAY(S)` given can be duplicated as long as it is an integer between 1 and 7. The duplicated days will be recorded only
+once in the list
 
 Example of usage:
 
 `availability sally / 1`
 
-`availability jane / 1,3,5,7`
+`availability jane / 1,3,5,7,3`
 
 `availability susan / 1,3,5,`
 
@@ -184,12 +191,12 @@ Added sally availability into records
 ```
 
 
-### View Recorded Housekeeper List : `view recorded housekeeper`
+### View Recorded Housekeeper List : `view recorded housekeepers`
 
 View all housekeeper in the list with their name, age and availability. Availability will not be shown if user
 have not entered it yet.
 
-Format: `view recorded housekeeper`
+Format: `view recorded housekeepers`
 
 Example of usage:
 ```
@@ -197,7 +204,7 @@ add housekeeper susan / 46
 add housekeeper jane / 33
 add housekeeper sally / 33
 availability sally / 1,7,
-view recorded housekeeper
+view recorded housekeepers
 ```
 
 Expected output:
@@ -226,7 +233,7 @@ Added sally availability into records
 ```
 
 ### Delete Housekeeper : `delete housekeeper `
-When a housekeeper resigns, the delete housekeeper command removes the resigning housekeeper from the list of 
+When a housekeeper resigns, the deleted housekeeper command removes the resigning housekeeper from the list of 
 housekeepers. This command will also display the number of housekeepers remaining in the housekeeper list.
 
 
@@ -854,7 +861,7 @@ Expected output:
 | --- | --- |
 | add housekeeper | ```add housekeeper NAME / AGE```<br/>eg. ```add housekeeper susan / 46```|
 | availability | ```availability NAME / DAY(S)```<br/>eg.```availability jane / 1,3,5,7```|
-| view recorded housekeeper | ```view recorded housekeeper```|
+| view recorded housekeepers | ```view recorded housekeepers```|
 | delete | ```delete housekeeper NAME``` <br/>eg. ```delete housekeeper sally```|
 | get available on | ```get available on DAY ```<br/>eg.```get available on 1``` |
 | is a new week | ```is a new week ```|
