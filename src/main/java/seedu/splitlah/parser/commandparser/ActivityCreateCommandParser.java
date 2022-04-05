@@ -93,8 +93,7 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
      * @param hasCost A boolean representing whether the total cost was not provided by the user.
      * @throws InvalidFormatException If the cost list and the involved list have different lengths.
      */
-    private void checkIfHasDifferentLength(boolean hasCost, boolean hasDifferentLength)
-            throws InvalidFormatException {
+    private void checkIfHasDifferentLength(boolean hasCost, boolean hasDifferentLength) throws InvalidFormatException {
         if (!hasCost) {
             hasDifferentLength = involvedList.length != costList.length;
         }
@@ -112,8 +111,7 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
      * @param hasCostList A boolean representing whether the cost list was not provided by the user.
      * @throws InvalidFormatException If both the total cost and cost list are provided by the user.
      */
-    private void checkIfHasBothCostAndCostList(boolean hasCost, boolean hasCostList)
-            throws InvalidFormatException {
+    private void checkIfHasBothCostAndCostList(boolean hasCost, boolean hasCostList) throws InvalidFormatException {
         boolean hasBothCostAndCostList = hasCost && hasCostList;
         if (hasBothCostAndCostList) {
             String invalidMessage = Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
@@ -129,8 +127,7 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
      * @param hasCostList A boolean representing whether the cost list was not provided by the user.
      * @throws InvalidFormatException If both the total cost and cost list are not provided by the user.
      */
-    private void checkIfMissingBothCostAndCostList(boolean hasCost, boolean hasCostList)
-            throws InvalidFormatException {
+    private void checkIfMissingBothCostAndCostList(boolean hasCost, boolean hasCostList) throws InvalidFormatException {
         boolean hasMissingCostAndMissingCostList = !hasCost && !hasCostList;
         if (hasMissingCostAndMissingCostList) {
             String invalidMessage = Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
