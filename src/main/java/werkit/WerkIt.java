@@ -148,6 +148,8 @@ public class WerkIt {
         if (getFileManager().isWasScheduleFileAlreadyMade()) {
             loadScheduleFile();
         }
+        getFileManager().rewriteAllExercisesToFile(getExerciseList());
+        getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
         getFileManager().rewriteAllPlansToFile(getPlanList());
         getFileManager().rewriteAllDaysScheduleToFile(getDayList());
     }
