@@ -1,17 +1,17 @@
 package seedu.splitlah.parser;
 
-import seedu.splitlah.command.ActivityListCommand;
-import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.GroupCreateCommand;
-import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityViewCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityListCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.parser.commandparser.GroupListCommandParser;
 import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
+import seedu.splitlah.parser.commandparser.GroupCreateCommandParser;
+import seedu.splitlah.parser.commandparser.GroupDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
@@ -441,11 +441,11 @@ public class ParserUtils {
         case ActivityEditCommandParser.COMMAND_TEXT:
             delimiterList = ActivityEditCommandParser.COMMAND_DELIMITERS;
             break;
-        case ActivityListCommand.COMMAND_TEXT:
-            delimiterList = ActivityListCommand.COMMAND_DELIMITERS;
+        case ActivityListCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityListCommandParser.COMMAND_DELIMITERS;
             break;
-        case ActivityViewCommand.COMMAND_TEXT:
-            delimiterList = ActivityViewCommand.COMMAND_DELIMITERS;
+        case ActivityViewCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityViewCommandParser.COMMAND_DELIMITERS;
             break;
         case SessionCreateCommandParser.COMMAND_TEXT:
             delimiterList = SessionCreateCommandParser.COMMAND_DELIMITERS;
@@ -462,11 +462,11 @@ public class ParserUtils {
         case SessionSummaryCommandParser.COMMAND_TEXT:
             delimiterList = SessionSummaryCommandParser.COMMAND_DELIMITERS;
             break;
-        case GroupCreateCommand.COMMAND_TEXT:
-            delimiterList = GroupCreateCommand.COMMAND_DELIMITERS;
+        case GroupCreateCommandParser.COMMAND_TEXT:
+            delimiterList = GroupCreateCommandParser.COMMAND_DELIMITERS;
             break;
-        case GroupDeleteCommand.COMMAND_TEXT:
-            delimiterList = GroupDeleteCommand.COMMAND_DELIMITERS;
+        case GroupDeleteCommandParser.COMMAND_TEXT:
+            delimiterList = GroupDeleteCommandParser.COMMAND_DELIMITERS;
             break;
         case GroupEditCommandParser.COMMAND_TEXT:
             delimiterList = GroupEditCommandParser.COMMAND_DELIMITERS;
@@ -517,13 +517,13 @@ public class ParserUtils {
             // Fallthrough
         case ActivityEditCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ActivityListCommand.COMMAND_TEXT:
+        case ActivityListCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ActivityViewCommand.COMMAND_TEXT:
+        case ActivityViewCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case GroupCreateCommand.COMMAND_TEXT:
+        case GroupCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case GroupDeleteCommand.COMMAND_TEXT:
+        case GroupDeleteCommandParser.COMMAND_TEXT:
             // Fallthrough
         case GroupEditCommandParser.COMMAND_TEXT:
             // Fallthrough

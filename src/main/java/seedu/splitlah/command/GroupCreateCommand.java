@@ -4,8 +4,6 @@ import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Profile;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
@@ -18,18 +16,8 @@ import java.util.logging.Level;
  */
 public class GroupCreateCommand extends Command {
 
-    public static final String COMMAND_TEXT = "group /create";
-
-    public static final String COMMAND_FORMAT =
-        "Syntax: group /create /n [GROUP_NAME] /pl [NAME1 NAME2...]";
-
     private static final String SUCCESS_MESSAGE =
         "The group was created successfully.\n";
-
-    public static final String[] COMMAND_DELIMITERS = {
-        ParserUtils.NAME_DELIMITER,
-        ParserUtils.PERSON_LIST_DELIMITER
-    };
 
     private final String groupName;
     private final String[] personNames;
@@ -45,24 +33,6 @@ public class GroupCreateCommand extends Command {
         assert personNames != null : Message.ASSERT_GROUPCREATE_PERSONLIST_NULL;
         this.groupName = groupName;
         this.personNames = personNames;
-    }
-
-    /**
-     * Prepares user arguments for the creation of a GroupCreateCommand object.
-     *
-     * @param commandArgs A String object that represents the user's arguments.
-     * @return A GroupCreateCommand object if group name and person list were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        try {
-            String parsedGroupName = ParserUtils.parseName(commandArgs);
-            String[] parsedNameList = ParserUtils.parsePersonList(commandArgs);
-            return new GroupCreateCommand(parsedGroupName, parsedNameList);
-        } catch (InvalidFormatException formatException) {
-            String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
-        }
     }
 
     /**

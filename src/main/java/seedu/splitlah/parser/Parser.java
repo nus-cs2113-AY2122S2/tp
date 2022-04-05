@@ -1,19 +1,19 @@
 package seedu.splitlah.parser;
 
 import seedu.splitlah.command.Command;
-import seedu.splitlah.command.ActivityListCommand;
-import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.InvalidCommand;
-import seedu.splitlah.command.GroupCreateCommand;
-import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityViewCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityListCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.parser.commandparser.GroupListCommandParser;
+import seedu.splitlah.parser.commandparser.GroupCreateCommandParser;
+import seedu.splitlah.parser.commandparser.GroupDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
@@ -117,16 +117,16 @@ public class Parser {
                 return new ActivityCreateCommandParser().getCommand(remainingArgs);
             case ActivityDeleteCommandParser.COMMAND_TEXT:
                 return new ActivityDeleteCommandParser().getCommand(remainingArgs);
-            case ActivityListCommand.COMMAND_TEXT:
-                return ActivityListCommand.prepare(remainingArgs);
-            case ActivityViewCommand.COMMAND_TEXT:
-                return ActivityViewCommand.prepare(remainingArgs);
+            case ActivityListCommandParser.COMMAND_TEXT:
+                return new ActivityListCommandParser().getCommand(remainingArgs);
+            case ActivityViewCommandParser.COMMAND_TEXT:
+                return new ActivityViewCommandParser().getCommand(remainingArgs);
             case ActivityEditCommandParser.COMMAND_TEXT:
                 return new ActivityEditCommandParser().getCommand(remainingArgs);
-            case GroupCreateCommand.COMMAND_TEXT:
-                return GroupCreateCommand.prepare(remainingArgs);
-            case GroupDeleteCommand.COMMAND_TEXT:
-                return GroupDeleteCommand.prepare(remainingArgs);
+            case GroupCreateCommandParser.COMMAND_TEXT:
+                return new GroupCreateCommandParser().getCommand(remainingArgs);
+            case GroupDeleteCommandParser.COMMAND_TEXT:
+                return new GroupDeleteCommandParser().getCommand(remainingArgs);
             case GroupListCommandParser.COMMAND_TEXT:
                 return new GroupListCommandParser().getCommand(remainingArgs);
             case GroupEditCommandParser.COMMAND_TEXT:

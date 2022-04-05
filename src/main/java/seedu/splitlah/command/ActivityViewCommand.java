@@ -4,8 +4,6 @@ import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
@@ -18,15 +16,6 @@ import java.util.logging.Level;
  * @author Tianle
  */
 public class ActivityViewCommand extends Command {
-
-    public static final String COMMAND_TEXT = "activity /view";
-
-    public static final String COMMAND_FORMAT = "Syntax: activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]";
-
-    public static final String[] COMMAND_DELIMITERS = { 
-        ParserUtils.SESSION_ID_DELIMITER,
-        ParserUtils.ACTIVITY_ID_DELIMITER
-    };
 
     private final int sessionId;
     private final int activityId;
@@ -67,24 +56,6 @@ public class ActivityViewCommand extends Command {
         } catch (InvalidDataException e) {
             ui.printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYVIEW_ACTIVITY_NOT_VIEWED + logMessage);
-        }
-    }
-
-    /**
-     * Prepares user argument for activity view command.
-     *
-     * @param  commandArgs  A String object that represents the user's arguments.
-     * @return An ActivityViewCommand object if sessionId and activityId were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        try {
-            int sessionId = ParserUtils.parseSessionId(commandArgs);
-            int activityId = ParserUtils.parseActivityId(commandArgs);
-            return new ActivityViewCommand(sessionId, activityId);
-        } catch (InvalidFormatException e) {
-            String invalidCommandMessage = e.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
         }
     }
 }
