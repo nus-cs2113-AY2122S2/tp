@@ -149,7 +149,7 @@ The two ways to add modules are illustrated in the sequence diagram below:
 ![](images/StudyManagerSequenceDiagram.png)
 
 
-### Expense Component
+### Expense Tracker Component
 
 ![](images/ExpenseClassDiagram.png)
 
