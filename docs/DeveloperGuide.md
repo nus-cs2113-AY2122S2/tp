@@ -299,6 +299,8 @@ the `<keywords>` is not specified, an `InvalidCommandException` will be thrown.
   * [Search for Workout](#search-for-workout)
   * [Search for Plan](#search-for-plan)
   * [Search for All](#search-for-all)
+* [File Management](#file-management)
+  * [Design Considerations](#design-considerations-for-file-management)
 
 ---
 
@@ -1290,8 +1292,8 @@ similar to the above sequence diagram.</span>
 **(Step 1)** After a new workout has been created, the `WorkoutCommand` object calls `FileManager#writeNewWorkoutToFile()`,
 passing the newly created `Workout` object as the argument.
 
-**(Step 2)** `FileManager#convertWorkoutToFileDataFormat()` is called, passing the newly created `Workout` object as the
-argument. In this method, the newly created `Workout` object's data is converted into a `String` format that will be
+**(Steps 2 and 3)** `FileManager#convertWorkoutToFileDataFormat()` is called, passing the newly created `Workout` object as the
+argument. In this method, the newly created `Workout` object's data is converted into a specified `String` format that will be
 stored in `workouts.txt`. The format of a workout data when stored in the file will look something like this:
 
 ```
@@ -1316,14 +1318,51 @@ file, rewriting the respective entire resource file is done with the user update
 schedule. See [this design consideration](#design-considerations-for-how-data-is-written-or-updated-to-a-resource-file)
 for more details.
 
-The following sequence diagram shows how `workouts.txt` is rewritten when the user updates a workout:
+The following sequence diagram shows how `workouts.txt` is rewritten when the user updates or deletes a workout:
 
-
+![Rewrite Resource File](uml/sequenceDiagrams/storage/images/rewriteResourceFile.png)
 
 <span class="info box">The procedures for rewriting the entire file for plan and schedule data sets are largely similar 
 to the above sequence diagram.</span>
 
-#### Design Considerations for How Data Is Written or Updated to a Resource File
+**(Step 1)** After an existing workout is updated or deleted, the `WorkoutCommand` object calls
+`FileManager#rewriteAllWorkoutsToFile()`, passing an instance of `WorkoutList` as the argument.
+
+**(Steps 2 and 3)** In `FileManager#rewriteAllWorkoutsToFile()`, `workoutsDisplayList` is obtained from the `WorkoutList`
+instance. `workoutsDisplayList` is an ArrayList of `String` objects where each `String` represents a key that is
+mapped to a `Workout` object stored in a HashMap object in `WorkoutList`. (More information about the HashMap
+implementation for `Workout` objects can be found [here](#hashmaps---motivation)).
+
+The ArrayList of keys is iterated through using an enhanced for loop.
+
+**(Steps 4 and 5)** For each key iterated, the actual `Workout` object mapped to the key is obtained via the
+`WorkoutList#getWorkoutFromKey()` method.
+
+**(Steps 5 and 6)** `FileManager#convertWorkoutToFileDataFormat()` is called, with the `Workout` object obtained in Step
+5 as the parameter. This method will convert the `Workout` object's data into a specified `String` format that will be
+stored in `workouts.txt`. The format of a workout data when stored in the file will look something like this:
+
+```
+<exercise name> | <repetition value>
+```
+
+For example, a workout of 10 reps of push ups will look like this in `workouts.txt`:
+
+```
+push up | 10
+```
+
+Thereafter, the 'file-formatted' workout data is returned to `FileManager#rewriteAllWorkoutsToFile()` and the method
+will write the data into `workouts.txt` with the help of the `FileWriter` class that is built into Java. Each line of
+`workouts.txt` will represent one workout.
+
+Steps 4 to 7 (as well as the reference frame) is repeated until all keys in `workoutsDisplayList` has been iterated
+through.
+
+This finishes the process of rewriting the entire `workouts.txt` and control is returned to `WorkoutCommand#execute()`.
+
+#### Design Considerations for File Management
+##### How Data Is Written or Updated to a Resource File
 While writing newly created workout or plan data to its respective resource file is a trivial task, updating or deleting
 existing data is more complex. When we want to update the data in the resource file, we need to find a way to traverse
 through the file and find the exact part of the file where the data that needs to be updated or deleted is at. While it
@@ -1346,7 +1385,7 @@ The following table shows whether a certain operation writes a new line of data 
 <span class="info box">:memo: The delete operations for schedule commands is the `schedule /clear` and `schedule /clearall`
 commands.</span>
 
-#### Design Considerations for Inconsistent Data Between Resource Files
+##### Inconsistent Data Between Resource Files
 
 The first step of loading local files to the app involves the checking of validity of data. That is, before loading plan
 data, `FileManager` will check whether the workouts in the plan exist in the `workouts.txt` file, and before loading
@@ -1354,7 +1393,7 @@ schedule data, `FileManager` will also check whether the plans in the `schedule.
 all the data can be matched, the files will be loaded successfully, otherwise only the unmatched data are classified as 
 "corrupted data" and will be deleted and the deletion will be cascaded. 
 
-Although the users are warned not to edit  the local resource files as this action may corrupt the stored data,
+Although the users are warned not to edit the local resource files as this action may corrupt the stored data,
 resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
 the files. Thus, other than the warning in our [UserGuide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
 we also implemented error handling methods to handle the situation where users edited the files and caused data 
@@ -1362,6 +1401,8 @@ corruptions. We could have implemented the handling of "corrupted data" in a mor
 all local data. However, in order to provide the best possible user experience by minimising the amount of data lost in 
 such situations, we decided to implement the validity checking such that only the affected data are removed while 
 keeping all the non-affected data safely.
+
+
 
 
 ## Product Scope
