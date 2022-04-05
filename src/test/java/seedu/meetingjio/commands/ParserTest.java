@@ -5,7 +5,11 @@ import seedu.meetingjio.parser.Parser;
 import seedu.meetingjio.timetables.MasterTimetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_EVENT;
 
 public class ParserTest {
 
@@ -108,51 +112,7 @@ public class ParserTest {
     }
 
 
-    @Test
-    public void prepareAddMeetingNoUsers() {
-        ClearCommand clearCommand = new ClearCommand("all");
-        clearCommand.execute(masterTimetable);
-        AddMeetingCommand addMeetingCommand = new AddMeetingCommand("meeting", "Thursday",
-                1230, 1330, "online"
-        );
-        assertEquals(ERROR_NO_USER_TO_ADD_MEETING, addMeetingCommand.execute(masterTimetable));
-    }
-    @Test
-    public void prepareAddDuplicateMeetings() {
-        ClearCommand clearCommand = new ClearCommand("all");
-        clearCommand.execute(masterTimetable);
-        AddUserCommand addUserOne = new AddUserCommand("john");
-        addUserOne.execute(masterTimetable);
-        AddMeetingCommand addMeetingCommandOne = new AddMeetingCommand("meeting", "Thursday",
-                1230, 1330, "online"
-        );
-        AddMeetingCommand addMeetingCommandTwo = new AddMeetingCommand("meeting", "Thursday",
-                1230, 1330, "online"
-        );
-        addMeetingCommandOne.execute(masterTimetable);
-        assertEquals(ERROR_DUPLICATE_MEETING, addMeetingCommandTwo.execute(masterTimetable));
-    }
 
-    @Test
-    public void prepareAddOverlappingMeetings() {
-        ClearCommand clearCommand = new ClearCommand("all");
-        clearCommand.execute(masterTimetable);
-        AddUserCommand addUserOne = new AddUserCommand("john");
-        addUserOne.execute(masterTimetable);
-        AddLessonCommand addCommand = new AddLessonCommand(
-                "John", "CS2113", "Monday",
-                1200, 1300, "online"
-        );
-        addCommand.execute(masterTimetable);
-        AddMeetingCommand addMeetingCommandOne = new AddMeetingCommand("meeting", "Monday",
-                1230, 1330, "online"
-        );
-        AddMeetingCommand addMeetingCommandTwo = new AddMeetingCommand("meeting", "Monday",
-                1230, 1330, "online"
-        );
-        addMeetingCommandOne.execute(masterTimetable);
-        assertEquals(ERROR_OVERLAPPING_MEETING, addMeetingCommandTwo.execute(masterTimetable));
-    }
 
     /*
     @Test
