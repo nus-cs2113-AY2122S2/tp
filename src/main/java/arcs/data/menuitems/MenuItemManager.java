@@ -56,6 +56,7 @@ public class MenuItemManager {
         }
         return result;
     }
+
     //check validity of a reserved item, return true if valid, if not false
     public boolean menuItemChecker(MenuItem reservedItem) {
         for (MenuItem menuItem: menuItems) {
