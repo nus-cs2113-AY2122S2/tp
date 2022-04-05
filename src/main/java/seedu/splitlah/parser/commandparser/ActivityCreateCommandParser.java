@@ -134,6 +134,14 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
         }
     }
 
+    /**
+     * Checks if the total cost of the activity is not provided by the user.
+     *
+     * @param commandArgs A String object representing arguments provided by the user.
+     * @return true if the user did not indicate the total cost using the total cost delimiter,
+     *         false if the total cost is successfully parsed from user input.
+     * @throws InvalidFormatException If the total cost argument cannot be found in the input arguments.
+     */
     private boolean isMissingCost(String commandArgs) throws InvalidFormatException {
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
