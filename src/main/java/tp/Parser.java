@@ -162,6 +162,43 @@ public class Parser {
         return null;
     }
 
+    public Command parseEditDoctorCommand(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /d") + 8,
+                dummy.indexOf("edit /d") + 9));
+        if (fullCommand.contains("/ph")) {
+            String newInformation = dummy.substring(dummy.indexOf("/ph") + 4);
+            return new EditDoctorCommand(index, "ph", newInformation);
+        } else if (fullCommand.contains("/e")) {
+            String newInformation = dummy.substring(dummy.indexOf("/e") + 3);
+            System.out.println("qwq" + newInformation);
+            return new EditDoctorCommand(index, "e", newInformation);
+        } else if (fullCommand.contains("/n")) {
+            String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
+            return new EditDoctorCommand(index, "n", newInformation);
+        } else {
+            throw new IHospitalException("Wrong format detected\n");
+        }
+    }
+
+    public Command parseEditPatientCommand(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /p") + 8,
+                dummy.indexOf("edit /p") + 9));
+        if (fullCommand.contains("/ph")) {
+            String newInformation = dummy.substring(dummy.indexOf("/ph") + 4);
+            return new EditDoctorCommand(index, "ph", newInformation);
+        } else if (fullCommand.contains("/e")) {
+            String newInformation = dummy.substring(dummy.indexOf("/e") + 3);
+            return new EditDoctorCommand(index, "e", newInformation);
+        } else if (fullCommand.contains("/n")) {
+            String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
+            return new EditDoctorCommand(index, "n", newInformation);
+        } else {
+            throw new IHospitalException("Wrong format detected\n");
+        }
+    }
+
     public Command parse(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("add")) {
             return parseAddCommand(fullCommand);
@@ -177,6 +214,10 @@ public class Parser {
             return new HelpCommand();
         } else if (fullCommand.contains("search")) {
             return parseSearchCommand(fullCommand);
+        } else if (fullCommand.contains("edit /d")) {
+            return parseEditDoctorCommand(fullCommand);
+        } else if (fullCommand.contains("edit /p")) {
+            return parseEditPatientCommand(fullCommand);
         } else {
             throw new IHospitalException("Invalid command given\n");
         }
