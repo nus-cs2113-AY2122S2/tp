@@ -1,5 +1,6 @@
 package seedu.mindmymoney.helper;
 
+import seedu.mindmymoney.MindMyMoney;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
 import seedu.mindmymoney.constants.IncomeCategoryTypes;
@@ -195,6 +196,15 @@ public class AddCommandInputTests {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Checks if user input of credit card name is valid. Currently, we do not accept Credit Card name to be "Cash"
+     */
+    public static void testCreditCardName(String inputCreditCardName) throws MindMyMoneyException {
+        if (inputCreditCardName.equalsIgnoreCase("cash")) {
+            throw new MindMyMoneyException("Credit card name cannot be abbreviated as `Cash`.");
+        }
     }
 
     /**
