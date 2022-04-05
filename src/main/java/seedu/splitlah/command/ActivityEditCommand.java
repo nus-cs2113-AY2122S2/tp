@@ -414,9 +414,7 @@ public class ActivityEditCommand extends Command {
         try {
             assert activityId != MISSING_ACTIVITYID;
             assert sessionId != MISSING_SESSIONID;
-
-            Profile profile = manager.getProfile();
-            session = profile.getSession(sessionId);
+            session = manager.getProfile().getSession(sessionId);
             oldActivity = session.getActivity(activityId);
             retrieveDetailsFromOldActivity(oldActivity);
             updateCostAndCostList();
