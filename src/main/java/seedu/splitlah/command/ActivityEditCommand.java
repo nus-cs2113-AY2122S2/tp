@@ -151,7 +151,6 @@ public class ActivityEditCommand extends Command {
     private void updateCostListFromActivity() throws InvalidDataException {
         int listLength = involvedListPersonArray.size();
         costList = new double[listLength];
-        double firstCost = involvedListPersonArray.get(0).getActivityCostOwed(activityId);
         for (int i = 0; i < listLength; ++i) {
             double costOwedForThisActivity = 0;
             try {
@@ -162,13 +161,33 @@ public class ActivityEditCommand extends Command {
                 }
             }
             costList[i] = costOwedForThisActivity;
-            if (costOwedForThisActivity != firstCost && costOwedForThisActivity != 0) {
+            if (checkCostListForDifferentCosts(costList)) {
                 activityType = TYPE_COSTLIST;
             }
         }
         if (activityType == TYPE_UNSET) {
             activityType = TYPE_COSTOVERALL;
         }
+    }
+
+    /**
+     * Checks if the double array object provided contains different costs.
+     *
+     * @param costList A double array object containing the costs.
+     * @return true if the double array object only consists of the same cost in each index.
+     *         false if the double array object has different costs.
+     */
+    private boolean checkCostListForDifferentCosts(double[] costList) {
+        if (costList.length == 1) {
+            return true;
+        }
+        double firstCost = costList[0];
+        for (int i = 0; i < costList.length; ++i) {
+            if (costList[i] != firstCost) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -425,7 +444,9 @@ public class ActivityEditCommand extends Command {
             updateCostAndCostList();
             validateCostListAndInvolvedList();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
-            assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
+            if (totalCost <= 0) {
+                throw new InvalidDataException(Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE);
+            }
             Person payerAsPerson = session.getPersonByName(payer);
             addAllActivityCost(involvedListPersonArray, payerAsPerson, DUMMY_ACTIVITYID);
             PersonList involvedPersonList = new PersonList(involvedListPersonArray);
