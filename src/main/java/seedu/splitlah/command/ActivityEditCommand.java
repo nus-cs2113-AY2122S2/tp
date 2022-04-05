@@ -9,7 +9,6 @@ import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.ActivityCost;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
-import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
@@ -148,7 +147,7 @@ public class ActivityEditCommand extends Command {
         }
     }
 
-    private void updateCostListFromActivity() throws InvalidDataException {
+    private void updateCostListFromActivity() {
         int listLength = involvedListPersonArray.size();
         costList = new double[listLength];
         for (int i = 0; i < listLength; ++i) {

@@ -392,6 +392,10 @@ public abstract class Message {
     public static final String ERROR_ACTIVITYEDIT_TOTALCOST_BECAME_ZERO =
             "Editing this activity will cause the total cost to become zero. Please specify a cost or costlist for"
                     + " this activity.";
+    public static final String ERROR_ACTIVITYEDIT_COST_NOT_PROVIDED =
+            "Please provide an overall cost or costlist if you wish to edit the participants or payer.";
+    public static final String ERROR_ACTIVITYEDIT_NO_CHANGE_TO_ACTIVITY =
+            "No changes were made to the activity.";
 
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =

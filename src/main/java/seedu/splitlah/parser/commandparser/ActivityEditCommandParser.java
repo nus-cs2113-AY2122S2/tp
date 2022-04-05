@@ -1,8 +1,6 @@
 package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.ActivityEditCommand;
-import seedu.splitlah.command.InvalidCommand;
-import seedu.splitlah.data.Activity;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserErrors;
@@ -29,17 +27,48 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
                     + "/cl [COST1 COST2...] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
     public static final String[] COMMAND_DELIMITERS = {
-        ParserUtils.SESSION_ID_DELIMITER,
-        ParserUtils.ACTIVITY_ID_DELIMITER,
-        ParserUtils.NAME_DELIMITER,
-        ParserUtils.PAYER_DELIMITER,
-        ParserUtils.INVOLVED_DELIMITER,
-        ParserUtils.TOTAL_COST_DELIMITER,
-        ParserUtils.COST_LIST_DELIMITER,
-        ParserUtils.GST_DELIMITER,
-        ParserUtils.SERVICE_CHARGE_DELIMITER
+            ParserUtils.SESSION_ID_DELIMITER,
+            ParserUtils.ACTIVITY_ID_DELIMITER,
+            ParserUtils.NAME_DELIMITER,
+            ParserUtils.PAYER_DELIMITER,
+            ParserUtils.INVOLVED_DELIMITER,
+            ParserUtils.TOTAL_COST_DELIMITER,
+            ParserUtils.COST_LIST_DELIMITER,
+            ParserUtils.GST_DELIMITER,
+            ParserUtils.SERVICE_CHARGE_DELIMITER
     };
 
+    private int sessionId;
+    private int activityId;
+    private String activityName = null;
+    private String payer = null;
+    private String[] involvedList = null;
+    private double totalCost = -1;
+    private double[] costList = null;
+    private double gst = -1;
+    private double serviceCharge = -1;
+
+    /**
+     * Validates the list of supplied delimiters, to check if any invalid permutations of delimiters are supplied
+     * or if insufficient delimiters are supplied.
+     *
+     * @throws InvalidFormatException If both a costlist and total cost are supplied, which is invalid.
+     *                                If no activity details are supplied.
+     */
+    private void checkIfRequiredDelimitersExist() throws InvalidFormatException {
+        // Check if no delimiters at all are supplied.
+        if (activityName == null && payer == null && involvedList == null && totalCost == -1 && costList == null
+                && gst == -1 && serviceCharge == -1) {
+            throw new InvalidFormatException(Message.ERROR_ACTIVITYEDIT_NO_CHANGE_TO_ACTIVITY);
+        }
+        // Check if a costlist or total cost is required.
+        if (involvedList == null) {
+            return;
+        }
+        if (costList == null && totalCost == -1) {
+            throw new InvalidFormatException(Message.ERROR_ACTIVITYEDIT_COST_NOT_PROVIDED);
+        }
+    }
     /**
      * Returns an ActivityEditCommand object from the supplied command arguments.
      *
@@ -50,17 +79,8 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
      */
     @Override
     public ActivityEditCommand getCommand(String commandArgs) throws InvalidFormatException {
-        assert commandArgs != null : Message.ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL;
-        int sessionId;
-        int activityId;
-        String activityName = null;
-        String payer = null;
-        String[] involvedList = null;
-        double totalCost = -1;
-        double[] costList = null;
-        double gst = -1;
-        double serviceCharge = -1;
 
+        assert commandArgs != null : Message.ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL;
         try {
             sessionId = Parser.parseSessionId(commandArgs);
             activityId = Parser.parseActivityId(commandArgs);
@@ -133,7 +153,11 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
             }
         }
 
+        checkIfRequiredDelimitersExist();
         return new ActivityEditCommand(sessionId, activityId, activityName, payer, involvedList, totalCost,
                 costList, gst, serviceCharge);
+
     }
+
+
 }
