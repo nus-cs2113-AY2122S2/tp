@@ -114,6 +114,10 @@ public class CreditCard implements MindMyMoneySerializable {
             return cc;
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Invalid number during deserialization of " + serialized);
+        } catch (MindMyMoneyException e) {
+            String missingProperty = e.getMessage();
+            throw new MindMyMoneyException("Line [" + serialized + "] does not contain required value "
+                + missingProperty);
         }
     }
 }

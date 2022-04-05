@@ -58,8 +58,8 @@ public class SerializerFunctions {
         if (!scanner.hasNextLine()) {
             return list;
         }
-        String nextLine;
-        if (!(nextLine = scanner.nextLine()).equals(startMarker)) {
+        String nextLine = scanner.nextLine();
+        if (!nextLine.equals(startMarker)) {
             throw new MindMyMoneyException("Expected " + startMarker + ", got " + nextLine);
         }
         while (true) {
