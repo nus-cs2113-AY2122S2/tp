@@ -461,7 +461,7 @@ Adds an event inside the list on a given date.
 
 Format: `add event DESCRIPTION / DATE`
 
-The date has to strictly be in the format `yyyy-mm-dd` or the command wound not run.
+The date has to strictly be in the format `yyyy-mm-dd` or the command will not go through.
 
 Sample input:
 
@@ -883,6 +883,6 @@ Expected output:
 
 | Event Command | Format, Example |
 | --- | --- |
-| add an event | ```add event DESCRIPTION / DATE```<br/>eg. ```check in 301```|
-| delete an event | ```delete event INDEX```<br/>eg. ```add event read / 2022-03-30```|
+| add an event | ```add event DESCRIPTION / DATE```<br/>eg. ```add event Submit TP / 2022-04-11```|
+| delete an event | ```delete event INDEX```<br/>eg. ```delete event 1```|
 | view all events | ```list events```|
