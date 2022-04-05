@@ -310,7 +310,8 @@ public class ActivityEditCommand extends Command {
      * Updates placeholder activityId values in all ActivityCost objects associated with a Person object to their
      * actual values: the activityId of the edited Activity object.
      *
-     * @param person A Person object containing all ActivityCosts related to the Activity that is being edited.
+     * @param person A Person object containing all ActivityCost objects related to the Activity object that is
+     *               being edited.
      */
     private void updateAllDummyActivityIdsInPerson(Person person) {
         for (ActivityCost activityCost : person.getActivityCostList()) {
