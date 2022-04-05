@@ -18,6 +18,7 @@ class CalculateInputCommandTest {
     private final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
     private final PrintStream stdout = System.out;
 
+
     public void setUp() {
         System.setOut(new PrintStream(capturedOut));
     }
@@ -31,7 +32,7 @@ class CalculateInputCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        
+
         String inputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
         inputString = "/e /pm cash /c Food /d Coke /a 20 /t 30/03/2022";
@@ -45,16 +46,15 @@ class CalculateInputCommandTest {
         new CalculateInputCommand("/epm 30/03/2022", user).executeCommand();
         tearDown();
         String expectedOutput = "Total expenditure in 30/03/2022 is $330.0." + System.lineSeparator()
-                + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
-                + "-----------------------------------------------" + System.lineSeparator()
-                + "FOOD:          $$$$ [6.06%]" + System.lineSeparator()
-                + "TRANSPORT:      [0.0%]" + System.lineSeparator()
-                + "UTILITIES:      [0.0%]" + System.lineSeparator()
-                + "PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [90.91%]" + System.lineSeparator()
-                + "ENTERTAINMENT: $$ [3.03%]" + System.lineSeparator()
-                + "OTHERS:         [0.0%]" + System.lineSeparator()
-                + "-----------------------------------------------"
-                ;
+            + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
+            + "-----------------------------------------------" + System.lineSeparator()
+            + "FOOD:          $$$$ [6.06%]" + System.lineSeparator()
+            + "TRANSPORT:      [0.0%]" + System.lineSeparator()
+            + "UTILITIES:      [0.0%]" + System.lineSeparator()
+            + "PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [90.91%]" + System.lineSeparator()
+            + "ENTERTAINMENT: $$ [3.03%]" + System.lineSeparator()
+            + "OTHERS:         [0.0%]" + System.lineSeparator()
+            + "-----------------------------------------------";
         assertEquals(expectedOutput, capturedOut.toString().trim());
     }
 
@@ -67,7 +67,7 @@ class CalculateInputCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        
+
         String inputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
@@ -79,16 +79,15 @@ class CalculateInputCommandTest {
         new CalculateInputCommand("/epm 03/2022", user).executeCommand();
         tearDown();
         String expectedOutput = "Total expenditure in 03/2022 is $300.0." + System.lineSeparator()
-                + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
-                + "-----------------------------------------------" + System.lineSeparator()
-                + "FOOD:           [0.0%]" + System.lineSeparator()
-                + "TRANSPORT:      [0.0%]" + System.lineSeparator()
-                + "UTILITIES:      [0.0%]" + System.lineSeparator()
-                + "PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [100.0%]" + System.lineSeparator()
-                + "ENTERTAINMENT:  [0.0%]" + System.lineSeparator()
-                + "OTHERS:         [0.0%]" + System.lineSeparator()
-                + "-----------------------------------------------"
-                ;
+            + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
+            + "-----------------------------------------------" + System.lineSeparator()
+            + "FOOD:           [0.0%]" + System.lineSeparator()
+            + "TRANSPORT:      [0.0%]" + System.lineSeparator()
+            + "UTILITIES:      [0.0%]" + System.lineSeparator()
+            + "PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [100.0%]" + System.lineSeparator()
+            + "ENTERTAINMENT:  [0.0%]" + System.lineSeparator()
+            + "OTHERS:         [0.0%]" + System.lineSeparator()
+            + "-----------------------------------------------";
         assertEquals(expectedOutput, capturedOut.toString().trim());
     }
 
@@ -112,16 +111,15 @@ class CalculateInputCommandTest {
         new CalculateInputCommand("/epm 2022", user).executeCommand();
         tearDown();
         String expectedOutput = "Total expenditure in 2022 is $300.0." + System.lineSeparator()
-                + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
-                + "-----------------------------------------------" + System.lineSeparator()
-                + "FOOD:           [0.0%]" + System.lineSeparator()
-                + "TRANSPORT:      [0.0%]" + System.lineSeparator()
-                + "UTILITIES:      [0.0%]" + System.lineSeparator()
-                + "PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [100.0%]" + System.lineSeparator()
-                + "ENTERTAINMENT:  [0.0%]" + System.lineSeparator()
-                + "OTHERS:         [0.0%]" + System.lineSeparator()
-                + "-----------------------------------------------"
-                ;
+            + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
+            + "-----------------------------------------------" + System.lineSeparator()
+            + "FOOD:           [0.0%]" + System.lineSeparator()
+            + "TRANSPORT:      [0.0%]" + System.lineSeparator()
+            + "UTILITIES:      [0.0%]" + System.lineSeparator()
+            + "PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [100.0%]" + System.lineSeparator()
+            + "ENTERTAINMENT:  [0.0%]" + System.lineSeparator()
+            + "OTHERS:         [0.0%]" + System.lineSeparator()
+            + "-----------------------------------------------";
         assertEquals(expectedOutput, capturedOut.toString().trim());
     }
 
@@ -213,6 +211,35 @@ class CalculateInputCommandTest {
 
         assertThrows(MindMyMoneyException.class,
             () -> new CalculateInputCommand("30/03/2022", user).executeCommand());
+    }
+
+    /**
+     * Asserts if user is able to add in a flag without date.
+     */
+    @Test
+    void calculateInputCommand_noDate_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new CalculateInputCommand("/epm", user).executeCommand());
+    }
+
+    /**
+     * Asserts if command is able to exit.
+     */
+    @Test
+    void calculateInputCommand_isExit_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/epm 29/02/2020";
+
+        assertEquals(false, new CalculateInputCommand(inputString, user).isExit());
+
     }
 
     public void tearDown() {

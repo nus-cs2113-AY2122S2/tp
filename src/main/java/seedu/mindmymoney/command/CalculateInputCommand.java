@@ -51,7 +51,7 @@ public class CalculateInputCommand extends Command {
                 throw new MindMyMoneyException("Remember to use a proper flag!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Missing input after command!");
+            throw new MindMyMoneyException("Missing input after command!");
         }
     }
 }
