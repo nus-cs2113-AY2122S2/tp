@@ -15,8 +15,13 @@ public class DeleteDoctorCommand extends Command {
                         PatientStorage patientStorage,
                         AppointmentStorage appointmentStorage) throws IHospitalException {
         Doctor curr = doctorList.deleteDoctor(index);
-        return String.format(boundary + "Noted. I've removed this doctor:" + curr
-                + "\n" + "Now you have " + doctorList.getSize()
-                + " doctors in the system." + System.lineSeparator() + boundary);
+        if (curr == null){
+            return String.format("The index " + index + " is not valid in the doctor list");
+        }
+        else {
+            return String.format(boundary + "Noted. I've removed this doctor:" + curr
+                    + "\n" + "Now you have " + doctorList.getSize()
+                    + " doctors in the system." + System.lineSeparator() + boundary);
+        }
     }
 }

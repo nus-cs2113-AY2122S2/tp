@@ -18,6 +18,6 @@ public class SearchPatientCommand extends Command {
         if (curr == null) {
             return String.format("There is no patient id is " + id + "\n");
         }
-        return String.format("The patient found is here" + curr + "\n");
+        return String.format("The patient found is here" + System.lineSeparator() + curr + "\n");
     }
 }
