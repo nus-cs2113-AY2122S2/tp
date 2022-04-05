@@ -5,12 +5,7 @@ import seedu.meetingjio.parser.Parser;
 import seedu.meetingjio.timetables.MasterTimetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_EVENT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.*;
 
 public class ParserTest {
 
@@ -105,11 +100,37 @@ public class ParserTest {
      * when the values of certain parameters are missing from the user's input.
      */
     @Test
-    public void prepareAddMeeting_parametersMissingValues_throwException() {
+    public void prepareAddLesson_parametersMissingValues_throwException() {
         String inputString = "add_lesson n/john t/cs2113 d/ st/1600 et/1800 m/online";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
         assertEquals(ERROR_MISSING_VALUES_ADD_EVENT, command.execute(masterTimetable));
+    }
+
+
+    @Test
+    public void prepareAddMeetingNoUsers() {
+        ClearCommand clearCommand = new ClearCommand("all");
+        clearCommand.execute(masterTimetable);
+        AddMeetingCommand addMeetingCommand = new AddMeetingCommand("meeting", "Thursday",
+                1230, 1330, "online"
+        );
+        assertEquals(ERROR_NO_USER_TO_ADD_MEETING, addMeetingCommand.execute(masterTimetable));
+    }
+
+    public void prepareAddDuplicateMeetings() {
+        ClearCommand clearCommand = new ClearCommand("all");
+        clearCommand.execute(masterTimetable);
+        AddUserCommand addUserOne = new AddUserCommand("john");
+        addUserOne.execute(masterTimetable);
+        AddMeetingCommand addMeetingCommandOne = new AddMeetingCommand("meeting", "Thursday",
+                1230, 1330, "online"
+        );
+        AddMeetingCommand addMeetingCommandTwo = new AddMeetingCommand("meeting", "Thursday",
+                1230, 1330, "online"
+        );
+        addMeetingCommandOne.execute(masterTimetable);
+        assertEquals(ERROR_NO_USER_TO_ADD_MEETING, addMeetingCommandTwo.execute(masterTimetable));
     }
 
     /*
