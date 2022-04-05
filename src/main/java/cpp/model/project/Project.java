@@ -123,14 +123,6 @@ public class Project {
         return this.languages;
     }
 
-    /**
-     * Gets the list of all weblinks in the project.
-     *
-     * @return List of all weblinks
-     */
-    public ArrayList<String> getWebLinks() {
-        return this.webLinks;
-    }
 
     /**
      * Gets the gitHub repo link for this project.

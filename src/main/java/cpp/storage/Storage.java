@@ -1,20 +1,28 @@
 package cpp.storage;
 
+import cpp.exceptions.DataConversionException;
 import cpp.model.ProjectList;
 import cpp.model.project.Project;
 import cpp.model.project.Todo;
+import cpp.ui.Constants;
+import cpp.ui.Response;
 
 
-import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class Storage {
+
+    private static final String dataPath = "./src/data/projectList.txt";
 
     /**
      * save the data based on certain style.
@@ -38,11 +46,24 @@ public class Storage {
             projectList = readData();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (DataConversionException e) {
+            System.out.println("The file data is corrupted. The system is recreating the file...");
+            try {
+                clearData();
+            } catch (FileNotFoundException fileNotFoundException) {
+                System.out.println("The file data cannot be cleared.");
+            }
         }
         return projectList;
     }
 
-    private static ProjectList readData() throws IOException {
+    private static void clearData() throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(dataPath);
+        writer.print("");
+        writer.close();
+    }
+
+    private static ProjectList readData() throws IOException, DataConversionException {
         try {
             BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
         } catch (IOException e) {
@@ -55,7 +76,9 @@ public class Storage {
         while ((projectLine = in.readLine()) != null) {
             String[] details = projectLine.split("`");
             int indexTodo = 1;
-            assert (details.length == 5) : "Unable to load data! Data is incomplete!";
+            if (details.length < 5) {
+                throw new DataConversionException();
+            }
 
             String title = details[0];
             String todos = details[1];
@@ -66,34 +89,10 @@ public class Storage {
             //add project to list
             projectList.addProject(title);
 
-            String[] todoInfo = todos.split(",");
-            //add todo to project
-            for (int i = 0; i < (todoInfo.length) / 3; i++) {
-                String todoDescrip = todoInfo[3 * i];
-                String todoStatus = todoInfo[3 * i + 1];
-                String todoDeadline = todoInfo[3 * i + 2];
-                projectList.addTodoToProject(indexProject, todoDescrip);
-                if (!todoDeadline.equalsIgnoreCase("No deadline specified")) {
-                    projectList.addTodoDeadline(indexProject, i + 1, todoDeadline);
-                }
-                //mark todo as done
-                if (todoStatus.equalsIgnoreCase("true")) { //this todo is marked as done
-                    projectList.markTodoAsDone(indexProject, indexTodo);
-                }
-                indexTodo++;
-            }
-            //add deadline to project if deadline is specified
-            if (!deadline.equalsIgnoreCase("No deadline specified")) {
-                projectList.addProjectDeadline(title, deadline);
-            }
-
+            readTodo(todos, projectList, indexProject, indexTodo);
+            readProjectDeadline(title, deadline, projectList);
             projectList.addGithubLink(title, gitHubLink);
-
-            //add languages to project
-            String[] languageInfo = languages.split(",");
-            for (int i = 0; i < languageInfo.length; i++) {
-                projectList.addLanguages(title, languageInfo[i]);
-            }
+            readLanguages(languages, title, projectList);
 
             indexProject++;
         }
@@ -130,7 +129,7 @@ public class Storage {
             String todoInfo = getTodoInfo(project.getTodos());
             String languageInfo = getLanguageInfo(project.getLanguages());
             String projectInfo = project.getTitle() + "`" + todoInfo + "`" + project.getDeadline()
-                    + "`" + project.getGitHubLink() + "`" + languageInfo;
+                    + "`" + project.getGitHubLink() + "`" + languageInfo + "`";
 
             writer.write(projectInfo + System.lineSeparator());
         }
@@ -160,7 +159,7 @@ public class Storage {
     }
 
     private static String getLanguageInfo(ArrayList<String> languages) {
-        String languageInfo = "";
+        String languageInfo = " ";
         if (languages.size() == 0) {
             return languageInfo;
         }
@@ -169,5 +168,42 @@ public class Storage {
         }
         languageInfo = languageInfo.substring(1);
         return languageInfo;
+    }
+
+    private static void readTodo(String todos, ProjectList projectList, int indexProject, int indexTodo) {
+
+        String[] todoInfo = todos.split(",");
+        //add todo to project
+        for (int i = 0; i < (todoInfo.length) / 3; i++) {
+            String todoDescrip = todoInfo[3 * i];
+            String todoStatus = todoInfo[3 * i + 1];
+            String todoDeadline = todoInfo[3 * i + 2];
+            projectList.addTodoToProject(indexProject, todoDescrip);
+            if (!todoDeadline.equalsIgnoreCase("No deadline specified")) {
+                projectList.addTodoDeadline(indexProject, i + 1, todoDeadline);
+            }
+            //mark todo as done
+            if (todoStatus.equalsIgnoreCase("true")) { //this todo is marked as done
+                projectList.markTodoAsDone(indexProject, indexTodo);
+            }
+            indexTodo++;
+        }
+    }
+
+    private static void readProjectDeadline(String title, String deadline, ProjectList projectList) {
+        //add deadline to project if deadline is specified
+        if (!deadline.equalsIgnoreCase("No deadline specified")) {
+            projectList.addProjectDeadline(title, deadline);
+        }
+    }
+
+    private static void readLanguages(String languages, String title, ProjectList projectList) {
+        //add languages to project
+        if (languages != " ") {
+            String[] languageInfo = languages.split(",");
+            for (int i = 0; i < languageInfo.length; i++) {
+                projectList.addLanguages(title, languageInfo[i]);
+            }
+        }
     }
 }

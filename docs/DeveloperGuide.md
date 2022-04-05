@@ -1,13 +1,27 @@
 # Developer Guide
 
 - [Acknowledgements](#acknowledgements)  
-- [Design & Implementation](#design-&-implementation)  
-  - [Architecture](#architecture)
-  - [Implemented Features](#implemented-Features)
-  - [Proposed Features](#proposed-features)
+- [Design & Implementation](#design-&-implementation)
+    - [Architecture](#architecture)
+- [Implemented Features](#implemented-features)
+  - [Add a Project](#add-a-project)
+  - [Delete a Project](#delete-a-project)
+  - [Print Project List](#print-project-list)
+  - [Todo feature](#todo-feature)
+  - [View a Project](#view-a-project)
+  - [Add a Deadline to a Project](#add-a-deadline-to-a-project)
+  - [Add a Deadline to a Todo](#add-a-deadline-to-a-todo)
+- [Proposed Features](#proposed-features)
+  - [Tasks Due Soon Feature](#tasks-due-soon-feature)
+- [Previous project structure](#previous-project-structure)
+  - [Add a Project (previous)](#add-a-project-previous)
+  - [Delete a Project (previous)](#delete-a-project-previous) 
 - [Product scope](#product-scope)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
 - [User Stories](#user-stories)
 - [Glossary](#glossary)
+- [Non-Functional Requirements](#non-functional-requirements)
 - [Instructions for manual testing](#instructions-for-manual-testing)
 
 
@@ -32,7 +46,7 @@ The design of Developer Guide is referenced from the [AB-3 Developer Guide](http
 * Handles the responses to give to user.  
 
 **Logic Component**  
-![image info](./UmlDiagrams/Logic.png)
+![image info](./UmlDiagrams/Logic(updated).png)
 How the `Logic` component works:
 * When `CommandHandler` is called upon to execute a command, it creates `XYZCommandParser` object(e.g.,`AddProjectCommandParser`) which parses the user command and create a `XYZCommand` object (e.g., `AddProjectCommand`).
 * The created `XYZCommand` object is returned as a `Command` object.
@@ -112,7 +126,7 @@ Deleting a project will follow nearly the exact same structure; the only differe
 **Step5.** the general information of a project, i.e., its title and deadline, will be displayed.
 
 #### Todo feature
-![image info](./UmlDiagrams/UpdatedTodoSequence.png)  
+![image info](./UmlDiagrams/UpdatedTodoSequence(updated).png)  
 
 **Step1.** When `CommandHandler` receives a user input starting with string “todo”, it will create a `AddTodoCommandParser` object and call `parse()`function to parse the user input.  
 
@@ -123,6 +137,7 @@ Deleting a project will follow nearly the exact same structure; the only differe
 **Step4.** `executeCommand()` will call `execute()` method of `AddTodoCommand`. `AddTodoCommand` will call `addTodoToProject()` method in order to get the target project and add todo to it.
 
 #### View a Project
+![image info](./UmlDiagrams/ViewProject.jpg)
 
 The view function makes use of ```ProjectList``` and ```CommandHandler``` classes. It is facilitated by methods within the ```Todo``` and ```Project``` classes, stored within ```ProjectList```.
 Given below is an example usage scenario and how View Project behaves at each step
@@ -139,9 +154,10 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 **Step 6.** ```printDetails()``` displays project title and deadline to the user. It iterates through the ```Todo```s in the ```todos``` attribute and prints each `Todo` by calling `Todo`’s `toString()` function
 
-![image info](./UmlDiagrams/ViewProject.jpg)
+
 
 #### Add a Deadline to a Project
+![image info](./UmlDiagrams/AddProjectDeadline.jpg)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “addprojdeadline”, it will create an `AddProjectDeadlineCommandParser` object and call its `parse()` function to parse the user input
 
@@ -161,9 +177,10 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 **Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
 
-![image info](./UmlDiagrams/AddProjectDeadline.jpg)
+
 
 #### Add a Deadline to a Todo
+![image info](./UmlDiagrams/AddTodoDeadline.jpg)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “addtododeadline”, it will create an `AddTodoDeadlineCommandParser` object and call its `parse()` function to parse the user input
 
@@ -183,7 +200,7 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 **Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
 
-![image info](./UmlDiagrams/AddTodoDeadline.jpg)
+
 
 ### Proposed Features
 
@@ -214,7 +231,7 @@ During v2.0, CSProjPlanner underwent a structure change to make it more OOP orie
 
 Because of this, many sequence diagrams look similar in the current version. The following sequence diagrams and explanations show what some of our features looked like at the end of v1.0:
 
-#### Add a Project
+#### Add a Project (previous)
 ![image info](./UmlDiagrams/addProject.png)
 
 **Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
@@ -225,7 +242,7 @@ Because of this, many sequence diagrams look similar in the current version. The
 
 **Step4.** This new `Project` object is returned to the ProjectList, added, and the output "[projectName] added." is given to the user.
 
-#### Delete a Project
+#### Delete a Project (previous)
 ![image info](./UmlDiagrams/deleteProject.png)
 
 The previous deletion of a project functions very similarly to Adding a project.

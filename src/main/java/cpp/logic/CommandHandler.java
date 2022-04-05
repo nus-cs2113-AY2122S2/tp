@@ -30,6 +30,9 @@ public class CommandHandler {
      */
     public String handleUserInput(ProjectList projectList, String userInput) throws IllegalCommandException {
         String[] commands = userInput.split(" ");
+        if (commands.length == 0) {
+            throw new IllegalCommandException(Constants.NO_COMMAND_ENTERED);
+        }
         String executeResult = "Default Result";
 
         switch (commands[0].toLowerCase()) {
@@ -39,7 +42,7 @@ public class CommandHandler {
         case "deleteproject": //delete a project based on its name
             executeResult = executeCommand(projectList, new DeleteProjectCommandParser().parse(commands));
             break;
-        case "listprojects":
+        case "listprojects": //Fallthrough
         case "listproject": //view all project(s) by name
             executeResult = executeCommand(projectList, new ListProjectCommand());
             break;
