@@ -112,7 +112,6 @@ and their interactions.
 #### Main components of the architecture
 - `Main`: The main component that starts the application upon launch of the applicaiton.
 - `WerkIt`: Initializes other components in the correct sequence, and connects them up with each other.
-- `LogHandler`: Handles logging within the application.
 - `Storage`: Reads data from, and writes data to the user's local storage.
 - `UI`: The UI of the application that deals with interaction with the user.
 - `Parser`: Parses user input to make sense of the command supplied by the user.
@@ -146,7 +145,7 @@ The features of WerkIt! are split and grouped into 5 main features:
 
 ### Exercise-related features
 
-Format: `exercise <userAction> <keywords>`
+Format: `exercise <commandAction> <condition>`
 
 Below is a class diagram of the exercise-related features:
 
@@ -159,18 +158,48 @@ class will catch the user input, and it will be sent to `Parser#parseUserInput(S
 user's command. If the user's command type is `exercise`, the `Parser#parseUserInput(String userInput)` method will 
 parse the 'exercise' base word and proceed to create exercise related command using 
 `Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
-`<userAction>` and call the constructor of `ExerciseCommand` class by passing relevant parameters related
-to the constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandException` will be thrown.
+`<commandAction>` and call the constructor of `ExerciseCommand` class by passing relevant parameters related
+to the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown.
 
-Currently, the exercise related feature is limited to `exercise /list` only. Therefore, the `keywords` mentioned can
-be ignored for now, and the only supported `userAction` is `/list`. However, more exciting exercise-related features are
-expected to be delivered in future iterations, and we currently have set the framework to implement these features in
-the future. Thus, we have this standalone section specifically kept for exercise-related features.
+Currently, the exercise related feature is limited to `exercise /list` only. Therefore, the `condition` mentioned can
+be ignored for now, and the only supported `commandAction` is `/list`. However, more exciting exercise-related features 
+are expected to be delivered in future iterations, and we currently have set the framework to implement these features 
+in the future. Thus, we have this standalone section specifically kept for exercise-related features.
 
 ---
 
 ### Workout-related features
-_to be updated_
+
+Format: `workout /commandAction <condition>`
+
+Below is a class diagram of the workout-related features:
+
+![WorkoutUML](uml/classDiagrams/images/workoutRelatedFeatures.png)
+<br>
+
+The `Parser` class will call the `Parser#parseUserInput(userInput)` method
+to analyse the user's command. If the user's command is of type 
+`workout`, the `Parser#parseUserInput(userInput)` method
+will parse the `workout` base word and proceed to create a `WorkoutCommand` object via the
+`Parser#createWorkoutCommand(userInput)` method. 
+<br><br>
+Once the `WorkoutCommand` object is created, the `WorkoutCommand#execute()` method
+is called. Depending on the type of command action, this method will
+call the appropriate operations from the `WorkoutList` class. For instance, if the command action
+is `/create`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout(userArgument)`
+to create a new workout in the application. 
+To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
+<br><br>
+When all methods except the `listAllWorkout()` method is executed, the appropriate
+`FileManager` and `UI` classes will call the appropriate methods depending on the command action.
+From the previous example, the `/create` workout action will call the 
+`FileManager#writeNewWorkoutToFile(newWorkout)` and also the `UI#printNewCreatedMessage(newWorkout)`
+methods after the new workout has been created.
+<br><br>
+Finally, methods in the `PlanList` class is only called when the `/delete` and `/update`
+workout actions are executed. These methods are used to modify the application's plans list
+as the `/delete` and `/update` actions are cascading actions 
+(i.e. deleting a workout will delete plan(s) containing that deleted workout).
 
 ---
 
@@ -184,24 +213,26 @@ _to be updated_
 
 ---
 
+
 ### Search-related features
 
-Format: `search <userAction> <keywords>`
+Format: `search <commandAction> <keywords>`
 
 Below is a class diagram of the search-related features:
 
+
 ![SearchUML](uml/classDiagrams/images/SearchClass.png)
-<br>
+
 
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
 `WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
 class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
-user's command. If the user's command type is search, i.e. `search <userAction> <keywords>`, the
+user's command. If the user's command type is search, i.e. `search <commandAction> <keywords>`, the
 `Parser#parseUserInput(String userInput)` method will parse the 'search' base word and proceed to create search related
 command using `Parser#createSearchCommand(String userInput)` method. This method will further evaluate the
-`<userAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to the
-constructor. If the `<userAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If the `<keywords>`
-is not specified, an `InvalidCommandException` will be thrown.
+`<commandAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to
+the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If
+the `<keywords>` is not specified, an `InvalidCommandException` will be thrown.
 
 ---
 ## Implementation
@@ -1234,7 +1265,7 @@ keeping all the non-affected data safely.
 
 ## Glossary
 
-* **Reps** - The process of repeating an exercise. Often abbreviated to 'reps'.
+* **Repetitions** - The process of repeating an exercise. Often abbreviated to 'reps'.
 * **Exercise** - A single 'unit' of exercise. A type of exercise.
     * e.g. push up, jumping jacks, sit-ups
 * **Workout** - A single 'unit' of exercise with a number of repetitions associated with it.

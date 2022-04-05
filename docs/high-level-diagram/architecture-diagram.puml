@@ -13,7 +13,6 @@ rectangle Parser #Gold
 rectangle WerkIt #Sandybrown
 rectangle Main #Cornsilk
 rectangle Storage #IndianRed
-rectangle LogHandler #Orchid
 }
 
 UI<.-up-User
@@ -22,7 +21,6 @@ WerkIt-up->Parser
 Parser-up.>Command
 Command-right->Storage
 WerkIt-right->Storage
-Main-right->LogHandler
 WerkIt-left->UI
 Storage-right.>Files
 Files-left.>Storage
