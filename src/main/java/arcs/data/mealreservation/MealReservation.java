@@ -70,8 +70,8 @@ public class MealReservation {
 
     @Override
     public String toString() {
-        assert customer != null: "Customer is null.";
-        assert route != null: "Route is null";
+        assert customer != null : "Customer is null.";
+        assert route != null : "Route is null";
         return customer.getIc() + "/" + customer.getName() + "/"
                 + customer.getPhone() + "/" + customer.getEmail() + "/"
                 + route.getFlightID() + "/" + route.getDate() + "/"
