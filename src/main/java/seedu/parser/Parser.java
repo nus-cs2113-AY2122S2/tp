@@ -30,7 +30,6 @@ public class Parser {
      * passed into arguments.
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
-    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("^(?<serialNumber>[Ss]/`.+`)$");
 
     /**
      * Defines regex used to match argument pairs in the command line.
@@ -67,6 +66,12 @@ public class Parser {
     );
 
     public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("^(?<itemName>" + ARGUMENT_PAIR_REGEX + ")$");
+    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("^(?<serialNumber>" + "[Ss]"
+            + "\\/" // argument delimiter
+            + "`+" //  backticks to enclose string
+            + "[\\w\\s\\-\\.]+" // actual argument value
+            + "`+" //  backticks to enclose string
+            + ")$");
     public static final String INCORRECT_COMMAND_FORMAT = "Command word not recognised. " + System.lineSeparator()
             + "Please use one of the following: "
             + AddCommand.COMMAND_WORD + ", " + UpdateCommand.COMMAND_WORD + ", " + ListCommand.COMMAND_WORD + ", "
