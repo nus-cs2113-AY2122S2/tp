@@ -117,7 +117,7 @@ public class ParserTest {
         );
         assertEquals(ERROR_NO_USER_TO_ADD_MEETING, addMeetingCommand.execute(masterTimetable));
     }
-
+    @Test
     public void prepareAddDuplicateMeetings() {
         ClearCommand clearCommand = new ClearCommand("all");
         clearCommand.execute(masterTimetable);
@@ -130,7 +130,28 @@ public class ParserTest {
                 1230, 1330, "online"
         );
         addMeetingCommandOne.execute(masterTimetable);
-        assertEquals(ERROR_NO_USER_TO_ADD_MEETING, addMeetingCommandTwo.execute(masterTimetable));
+        assertEquals(ERROR_DUPLICATE_MEETING, addMeetingCommandTwo.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareAddOverlappingMeetings() {
+        ClearCommand clearCommand = new ClearCommand("all");
+        clearCommand.execute(masterTimetable);
+        AddUserCommand addUserOne = new AddUserCommand("john");
+        addUserOne.execute(masterTimetable);
+        AddLessonCommand addCommand = new AddLessonCommand(
+                "John", "CS2113", "Monday",
+                1200, 1300, "online"
+        );
+        addCommand.execute(masterTimetable);
+        AddMeetingCommand addMeetingCommandOne = new AddMeetingCommand("meeting", "Monday",
+                1230, 1330, "online"
+        );
+        AddMeetingCommand addMeetingCommandTwo = new AddMeetingCommand("meeting", "Monday",
+                1230, 1330, "online"
+        );
+        addMeetingCommandOne.execute(masterTimetable);
+        assertEquals(ERROR_OVERLAPPING_MEETING, addMeetingCommandTwo.execute(masterTimetable));
     }
 
     /*
