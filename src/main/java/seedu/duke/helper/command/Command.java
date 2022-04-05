@@ -16,8 +16,6 @@ public abstract class Command {
 
     public abstract Status execute(List list) throws DuplicateEntryException, NotFoundException,
             HalpmiException;
-
-
 }
 
 

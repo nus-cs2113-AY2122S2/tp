@@ -227,7 +227,7 @@ public class Validator {
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
         if (type.equals("appointment") && newDate.isBefore(today)) {
             throw new HalpmiException("Date must be in YYYY-MM-DD format. "
-                    + "New appointments date must be today and after.");
+                    + "New appointment dates must be today and after.");
         } else if (type.equals("patient") && newDate.isAfter(admissionDateLimit)
                 && newDate.isBefore(today)) {
             throw new HalpmiException("Date must be in YYYY-MM-DD format. "
@@ -245,12 +245,9 @@ public class Validator {
     }
 
     public static void validateAddAppointment(String[] parameters) throws HalpmiException {
+        validateNric(parameters[0]);
         validateNric(parameters[1]);
-        validateFullName(parameters[2]);
-        validateNric(parameters[3]);
-        validateFullName(parameters[4]);
-        validateDate(parameters[5], "appointment");
-        validateAppointmentDetails(parameters[6]);
+        validateDate(parameters[2], "appointment");
     }
 
     public static void validateEditAppointment(String[] parameters) throws HalpmiException {
