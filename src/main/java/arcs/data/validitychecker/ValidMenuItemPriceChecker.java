@@ -15,11 +15,16 @@ public class ValidMenuItemPriceChecker implements RawInputChecker {
         }
         Matcher matcher = pattern.matcher(price);
         if (matcher.matches()) {
-            double priceAsFloat = Double.parseDouble(price);
-            return !(priceAsFloat <= 0);
+            try {
+                double priceAsFloat = Double.parseDouble(price);
+                return !(priceAsFloat <= 0);
+            } catch (NumberFormatException e) {
+                System.out.println("Price is invalid");
+            }
         } else {
             return false;
         }
+        return false;
     }
 }
 
