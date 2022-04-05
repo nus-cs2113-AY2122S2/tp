@@ -1438,6 +1438,26 @@ through.
 
 This finishes the process of rewriting the entire `workouts.txt` and control is returned to `WorkoutCommand#execute()`.
 
+#### About the `LogHandler` Class
+Logging in WerkIt! is mainly handled by the `Logger` class that is built into Java. The `LogHandler` class is created
+as a custom utility class to help WerkIt!'s various components log to a designated log file in an easier manner.
+Whenever a class wants to log information, besides creating a `Logger` object, the object must be 'linked' to a
+log file handler that has been configured in the `LogHandler` class.
+
+The log file, `logs.log`, is stored in the `werkItLogs` directory, which is in the same directory as the `werkItResources`
+directory. Each log entry has the following format:
+
+```
+<timestamp> <package.ClassName> <methodName>
+<log level>: <log message>
+```
+
+Here's a sample log entry that you may find in `logs.log`:
+```
+Mar 17, 2022 7:24:43 PM data.workouts.WorkoutList createAndAddWorkout
+INFO: New workout created.
+```
+
 #### Design Considerations for File Management
 ##### How Data Is Written or Updated to a Resource File
 While writing newly created workout or plan data to its respective resource file is a trivial task, updating or deleting
@@ -1463,7 +1483,6 @@ The following table shows whether a certain operation writes a new line of data 
 commands.</span>
 
 ##### Inconsistent Data Between Resource Files
-
 The first step of loading local files to the app involves the checking of validity of data. That is, before loading plan
 data, `FileManager` will check whether the workouts in the plan exist in the `workouts.txt` file, and before loading
 schedule data, `FileManager` will also check whether the plans in the `schedule.txt` could be found in `plan.txt`. If 
@@ -1472,13 +1491,20 @@ all the data can be matched, the files will be loaded successfully, otherwise on
 
 Although the users are warned not to edit the local resource files as this action may corrupt the stored data,
 resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
-the files. Thus, other than the warning in our [User Guide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
+the files. Thus, other than the warning in our [user guide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
 we also implemented error handling methods to handle the situation where users edited the files and caused data 
 corruptions. We could have implemented the handling of "corrupted data" in a more hassle-free way by simply clearing 
 all local data. However, in order to provide the best possible user experience by minimising the amount of data lost in 
 such situations, we decided to implement the validity checking such that only the affected data are removed while 
 keeping all the non-affected data safely.
 
+
+##### `LogHandler` Managing Its Own Log File Instead of `FileManager` Class
+The development team decided to let the `LogHandler` class manage its own log file instead of the `FileManager` class,
+which is already managing the other resource files and directories. Specifically, managing its own log file also includes
+checking if the log directory exists. This is because logging is done in the `Main` class, and when the application first 
+starts, `WerkIt` has yet to be instantiated, which is responsible for creating the `FileManager` object. Thus, to avoid 
+the risk of further complicating the solution, it was decided to just let `LogHandler`manage its own log file.
 
 
 ## Product Scope
