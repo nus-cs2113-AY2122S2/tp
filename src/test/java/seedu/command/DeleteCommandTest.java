@@ -17,7 +17,7 @@ class DeleteCommandTest {
     @Test
     void execute_validSerialNumber_success() {
         deleteCommand = new DeleteCommand(new ArrayList<>(
-                Arrays.asList("S1404115ASF")
+                Arrays.asList("s/S1404115ASF")
         ));
         deleteCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = deleteCommand.equipmentManager;
