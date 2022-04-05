@@ -27,6 +27,7 @@ import static seedu.mindmymoney.constants.Indexes.INDEX_OF_THIRD_ITEM;
 import static seedu.mindmymoney.helper.AddCommandInputTests.isValidInput;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testCashbackAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testCreditCardLimit;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testCreditCardName;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
@@ -219,6 +220,7 @@ public class AddCommand extends Command {
         //Parse data from input
         final String cardName = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_NAME,
                 FLAG_OF_CASHBACK);
+        testCreditCardName(cardName);
 
         final String cashBack = parseInputWithCommandFlag(addInput, FLAG_OF_CASHBACK,
                 FLAG_OF_CARD_LIMIT);
