@@ -1408,11 +1408,15 @@ keeping all the non-affected data safely.
 ## Product Scope
 ### Target User Profile
 
-{Describe the target user profile}
+Generally, our target user profile are people who are interested in exercising and want a simple and quick way to 
+plan their exercise routines. In addition, it would help that they are comfortable with a command-line interface (CLI) 
+and can type fast, since WerkIt! is currently CLI-based.
 
 ### Value Proposition
 
-{Describe the value proposition: what problem does it solve?}
+WerkIt! aims to be the one-stop application for our target users to put their workout routines in a simple and quick manner,
+instead of memorising it in their heads or using a conventional note-taking app to keep track of their workout routines,
+where there are many other day-to-day things being kept too.
 
 ## User Stories
 
