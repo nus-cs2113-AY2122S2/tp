@@ -287,6 +287,10 @@ public class Parser {
         String className = this.getClass().getSimpleName();
         switch (actionKeyword) {
         case SEARCH_EXERCISE_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length == EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE) {
+                arguments = SPACE_CHARACTER;
+                return new SearchCommand(userInput, ui, exerciseList, actionKeyword, arguments);
+            }
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid search exercise command action.");
                 throw new InvalidCommandException(className,
@@ -295,6 +299,10 @@ public class Parser {
             arguments = userInput.split(" ", 3)[2].trim();
             return new SearchCommand(userInput, ui, exerciseList, actionKeyword, arguments);
         case SEARCH_PLAN_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length == EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE) {
+                arguments = SPACE_CHARACTER;
+                return new SearchCommand(userInput, ui, planList, actionKeyword, arguments);
+            }
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid search plan command action.");
                 throw new InvalidCommandException(className,
@@ -303,6 +311,10 @@ public class Parser {
             arguments = userInput.split(" ", 3)[2].trim();
             return new SearchCommand(userInput, ui, planList, actionKeyword, arguments);
         case SEARCH_WORKOUT_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length == EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE) {
+                arguments = SPACE_CHARACTER;
+                return new SearchCommand(userInput, ui, workoutList, actionKeyword, arguments);
+            }
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid search workout command action.");
                 throw new InvalidCommandException(className,
