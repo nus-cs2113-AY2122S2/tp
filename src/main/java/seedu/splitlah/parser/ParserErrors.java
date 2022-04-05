@@ -2,6 +2,11 @@ package seedu.splitlah.parser;
 
 import seedu.splitlah.ui.Message;
 
+/**
+ * A utility class that provides supporting methods for printing error messages used in the Parser component.
+ * 
+ * @author Warren
+ */
 public class ParserErrors {
 
     // ERROR REPORTING FUNCTIONS

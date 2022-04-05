@@ -3,8 +3,6 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -51,23 +49,6 @@ public class ActivityListCommand extends Command {
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND + sessionId);
-        }
-    }
-
-    /**
-     * Prepares user arguments for the creation of an ActivityListCommand object.
-     *
-     * @param  commandArgs A String object that represents the user's arguments.
-     * @return An ActivityListCommand object if sessionId was found in user argument,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            return new ActivityListCommand(sessionId);
-        } catch (InvalidFormatException e) {
-            String invalidCommandMessage = e.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
         }
     }
 }
