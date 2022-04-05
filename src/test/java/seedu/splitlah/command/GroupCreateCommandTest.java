@@ -3,11 +3,9 @@ package seedu.splitlah.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 class GroupCreateCommandTest {
 
@@ -25,33 +23,20 @@ class GroupCreateCommandTest {
 
     /**
      * Checks if the group is created successfully with Person List delimiter
-     * and added into list of groups.
-     */
-    @Test
-    public void run_validCommandWithPersonListDelimiter_groupListSizeBecomesTwo() {
-        String userInput = "group /create /n grp2 /pl Cindy David";
-        Command command = Parser.getCommand(userInput);
-
-        // Check if a GroupCreateCommand instance was returned.
-        assertEquals(GroupCreateCommand.class, command.getClass());
-        command.run(manager);
-
-        // Check if the group was successfully added into the list of groups.
-        assertEquals(2, manager.getProfile().getGroupList().size());
-    }
-
-    /**
-     * Checks if the group is created successfully with Person List delimiter
      * and group unique identifier tracker in Profile object is incremented.
      */
     @Test
-    public void run_validCommandWithPersonListDelimiter_groupIdIncremented() {
+    public void run_validCommand_groupSuccessfullyCreated() {
         String userInput = "group /create /n grp2 /pl Cindy David";
         Command command = Parser.getCommand(userInput);
         int currentGroupId = manager.getProfile().getGroupIdTracker();
         command.run(manager);
         int testGroupId = manager.getProfile().getGroupIdTracker();
         assertEquals(currentGroupId + 1, testGroupId);
+
+        assertEquals(GroupCreateCommand.class, command.getClass());
+        command.run(manager);
+        assertEquals(2, manager.getProfile().getGroupList().size());
     }
 
     /**
