@@ -13,7 +13,7 @@ and contact management tasks done faster than traditional GUI apps.
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `AlloNUS` from [here](http://link.to/duke).
+1. Down the latest version of `AlloNUS` from [here](https://github.com/AY2122S2-CS2113-F10-4/tp/releases).
 
 ## Features 
 
@@ -456,11 +456,6 @@ Example of usage:
 
 `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215`
 
-OR 
-
-`add n/Jane Doe d/group mate for CS4215 e/e0334987@u.nus.edu f/SoC`
-
-
 Expected outcome:
 
 ```
@@ -569,17 +564,19 @@ data. However, do not tamper with the load and save files.
 
 ## Command Summary
 
-| Action         | Format, Examples                                                                                                            |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------|
-| Add (Expense)  | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/15/02/2022 a/500 c/Food r/At Supper Stretch`                     |
-| Add (Module)   | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
-| Add (Contact)  | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |
-| Find (Module)  | `find <query>`                                                                                                              |
-| Edit (Module)  | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                      |
-| Read from .ics (Module) | `read ics` |
-| Remove         | `rm INDEX`                                                                                                                  |
-| List           | `list`                                                                                                                      |
-| Return to Menu | `menu`                                                                                                                      |
-| Help           | `help`                                                                                                                      |
-| Navigate       | `goto m/SECTION`                                                                                                            |
-| Exit           | `exit`                                                                                                                      |
+| Action                  | Format, Examples                                                                                                            |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Add (Expense)           | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/15/02/2022 a/500 c/Food r/At Supper Stretch`                     |
+| Add (Module)            | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
+| Add (Contact)           | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |
+| Find (Module)           | `find <query>`                                                                                                              |
+| Find (Contact)          | `find KEYWORD`                                                                                                              |
+| Edit (Module)           | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                      |
+| Edit (Contact)          | `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`                                                                 |
+| Read from .ics (Module) | `read ics`                                                                                                                  |
+| Remove                  | `rm INDEX`                                                                                                                  |
+| List                    | `list`                                                                                                                      |
+| Return to Menu          | `menu`                                                                                                                      |
+| Help                    | `help`                                                                                                                      |
+| Navigate                | `goto m/SECTION`                                                                                                            |
+| Exit                    | `exit`                                                                                                                      |

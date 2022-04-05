@@ -18,6 +18,21 @@ Got it. I've added this contact:
 Now you have 2 contacts in the list.
 ---------------------------------------------------
 ---------------------------------------------------
+Adding a contact with all empty fields!
+---------------------------------------------------
+---------------------------------------------------
+Adding a contact with missing field(s)!
+---------------------------------------------------
+---------------------------------------------------
+Adding a contact with missing field(s)!
+---------------------------------------------------
+---------------------------------------------------
+Adding a contact with missing field(s)!
+---------------------------------------------------
+---------------------------------------------------
+Adding a contact with missing field(s)!
+---------------------------------------------------
+---------------------------------------------------
 Here are the contacts in your list:
  1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
  2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
@@ -57,6 +72,9 @@ You can only edit with a valid number that's in the list :')
 ---------------------------------------------------
 ---------------------------------------------------
 You need to specify the contact field(s) you want to edit!
+---------------------------------------------------
+---------------------------------------------------
+Invalid contact field(s)!
 ---------------------------------------------------
 ---------------------------------------------------
 Okay, I've updated the information of this contact:

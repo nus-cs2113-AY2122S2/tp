@@ -2,6 +2,11 @@ goto m/Contacts_Manager
 invalid contacts command
 add n/Lucy Koh f/SoC e/email@u.nus.edu d/group mate from cs2113
 add n/Daniela Koh d/met at SoC canteen e/other_email@u.nus.edu f/FoS
+add
+add n/Name f/Faculty e/email@legit.com
+add n/Name f/Faculty d/some description
+add n/Name e/email@legit.com d/some description
+add f/Faculty e/email@legit.com d/some description
 list
 find Daniela
 find Koh
@@ -13,6 +18,7 @@ edit 0
 edit 9
 edit not_a_number
 edit 2
+edit 1 n/
 edit 2 e/new_email@gmail.com f/FoE n/Daniela Sim
 find Koh
 list
