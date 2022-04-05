@@ -71,7 +71,7 @@ public class SessionEditCommand extends Command {
      * Returns the new session name if all checks are passed.
      *
      * @param oldSessionName A String that represents the existing session's name.
-     * @param profile A Profile object that contains the list of session.
+     * @param profile        A Profile object that contains the list of session.
      * @return A String that represents the new session name.
      * @throws InvalidDataException If the new session name exists within the list of session other than itself.
      */
