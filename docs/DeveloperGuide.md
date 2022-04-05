@@ -1279,12 +1279,12 @@ four resource files, each line in the file represents one entry of data.
 
 The data format for a line in each file is as follows:
 
-| File            | Data Format                               | Example             |
-|-----------------|-------------------------------------------|---------------------|
-| `exercises.txt` | `<exercise name>`                         | `push up`           |
-| `workouts.txt`  | `<exercise name>  \| <repetition value>` | `push up \| 10` |
-| `plans.txt`     | `<plan name> <workout 1>,<workout 2>,...` | `Plan 1 \| push up \| 10,pull up \| 10` |
-| `schedule.txt`  | `<day number of the week> \| <plan name>` | `1 \| Plan 1` |
+| File            | Data Format                             | Example            |
+|-----------------|-----------------------------------------|--------------------|
+| `exercises.txt` | `<exercise name>`                       | `push up`          |
+| `workouts.txt`  | `<exercise name>  | <repetition value>` | `push up | 10` |
+| `plans.txt`     | `<plan name> <workout 1>,<workout 2>,...` | `Plan 1 | push up | 10,pull up | 10` |
+| `schedule.txt`  | `<day number of the week> | <plan name>` | `1 | Plan 1` |
 
 <span class="info box">:memo: In our application, the week starts on a Monday. Thus, in `schedule.txt`, if the day number
 is `1`, it means that plan is meant for Monday, `2` for Tuesday, and so on...</span>
