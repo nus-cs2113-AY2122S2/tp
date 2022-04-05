@@ -39,7 +39,7 @@ public class MenuItem {
 
     @Override
     public String toString() {
-        String str = "[" + this.menuItemType.name() + "]" + "/"
+        String str = this.menuItemType.name() + "/"
                 + this.menuItemName + "/" + this.menuItemPrice;
         return str;
     }
