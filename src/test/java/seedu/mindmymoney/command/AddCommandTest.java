@@ -89,7 +89,7 @@ class AddCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
-        creditCardTestList.add(new CreditCard("posb",0.05,500));
+        creditCardTestList.add(new CreditCard("posb", 0.05, 500));
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         String inputString = "/e /pm posb /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
 
@@ -483,7 +483,7 @@ class AddCommandTest {
     }
 
     /**
-     * Test if program is able to exit
+     * Test if program is able to exit.
      */
     @Test
     void addCommand_isExit_expectException() {
@@ -496,6 +496,7 @@ class AddCommandTest {
         assertEquals(false, new AddCommand(inputString, user).isExit());
 
     }
+
     /**
      * Gets the last expenditure entry in the expenditure list and formats it to a string.
      *
@@ -522,7 +523,7 @@ class AddCommandTest {
     public String getIncomeOutput(ArrayList<Income> list) {
         if (!list.isEmpty()) {
             return list.get(list.size() + LIST_INDEX_CORRECTION).getAmount()
-                    + list.get(list.size() + LIST_INDEX_CORRECTION).getCategory();
+                + list.get(list.size() + LIST_INDEX_CORRECTION).getCategory();
         }
         return "";
     }

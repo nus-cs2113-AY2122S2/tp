@@ -1,11 +1,6 @@
 package seedu.mindmymoney.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.data.CreditCardList;
-import seedu.mindmymoney.data.ExpenditureList;
-import seedu.mindmymoney.data.IncomeList;
-import seedu.mindmymoney.userfinancial.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -21,7 +16,7 @@ class ByeCommandTest {
     }
 
     /**
-     * Asserts if command is able to exit
+     * Asserts if command is able to exit.
      */
     @Test
     void byeCommand_isExit_expectByeMessage() {

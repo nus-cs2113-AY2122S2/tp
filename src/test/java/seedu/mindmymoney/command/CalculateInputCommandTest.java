@@ -227,7 +227,7 @@ class CalculateInputCommandTest {
     }
 
     /**
-     * Asserts if command is able to exit
+     * Asserts if command is able to exit.
      */
     @Test
     void calculateInputCommand_isExit_expectException() {
