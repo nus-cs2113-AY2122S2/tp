@@ -239,7 +239,7 @@ $5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
 > **💡 Note:**
 >- This command is similar to the [add an expenditure](#add-an-expenditure-add) command.   
    > Fields that are labeled starting with NEW follow the same restrictions base command in [add an expenditure](#add-an-expenditure-add).
-   > For example `[NEW_CATEGORY]` is **case-insensitive** like `[CATEGORY]`
+   > For example: `[NEW_CATEGORY]` is **case-insensitive** like `[CATEGORY]`
 >- Only enter `[INDEX]` that exist in the expenditure list. For example: if you have 4 expenditures in your list, specify `[INDEX]` to be a number from 1 to 4.
 
 <br/>
@@ -341,15 +341,15 @@ Adds a credit card to your program. Only **one** credit card can only be added p
 #### Format: `add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CARD_LIMIT]`
 
 * `[CREDIT_CARD_NAME]` refers to the name your Credit Card will be saved as.
-    * Use abbreviations for ease of adding expenditures to this credit card. For example,
+    * Use abbreviations for ease of adding expenditures to this credit card. For example:
       storing `DBS Live Fresh Credit Card` as `DBS LF`.
 * `[CASHBACK]` refers to the amount of cash back received when spending on the credit card.
     * Enter the amount of cashback in percentage.
-    * For example, a credit card with `2% cashback` can be represented as `/cb 2`.
+    * For example: a credit card with `2% cashback` can be represented as `/cb 2`.
 * `[CARD_LIMIT]` refers to the maximum monthly expenditure on this credit card.
     * Enter the monthly maximum amount that can be spent on the credit card in dollars.
 
-Example:`add /cc /n dbs /cb 2 /cl 1000`  
+For example:`add /cc /n dbs /cb 2 /cl 1000`  
 Adds a credit card of the name 'DBS' with a cashback of 2% and a monthly spending limit of $1000.
 
 #### Expected Outcome:
@@ -370,6 +370,7 @@ into the account
 
 
 > **⚠️Warning⚠️**
+>- `[CREDIT_CARD_NAME]` cannot be `cash`, `CASH`, or a combination of either.
 >- `[CASHBACK]` cannot be more than 100%.
 
 <br/>
@@ -467,7 +468,7 @@ I have removed OCBC from your list of credit card(s).
 ````
 
 > **💡 Note:**
->- Only enter `[INDEX]` that exist in your list. For example if you have 4 credit cards in your list, specify `[INDEX]` to be a number from 1 to 4.
+>- Only enter `[INDEX]` that exist in your list. For example: if you have 4 credit cards in your list, specify `[INDEX]` to be a number from 1 to 4.
 >- Do not use `delete` when your credit card list is empty.
    <br/>
 
@@ -604,7 +605,7 @@ I have removed Salary from your list of income(s).
 ````
 
 > **💡 Note:**
->- Only enter `[INDEX]` that exist in your list. For example if you have 4 incomes in your income list, specify `[INDEX]` to be a number from 1 to 4.
+>- Only enter `[INDEX]` that exist in your list. For example: if you have 4 incomes in your income list, specify `[INDEX]` to be a number from 1 to 4.
 >- Do not use `delete` when your income list is empty.
 
 <br/>
@@ -623,7 +624,7 @@ Bye, hope to see you again!
 ````
 
 > **💡 Note**
-> - Any input after the `bye` command is ignored. For example `bye Hello World` will still exit the program.
+> - Any input after the `bye` command is ignored. For example: `bye Hello World` will still exit the program.
 
 <br/>
 
