@@ -15,7 +15,7 @@ public class EditPatientCommand extends Command {
     private String type;
     private String newInformation;
 
-    public EditPatientCommand (int index, String type, String newInformation) {
+    public EditPatientCommand(int index, String type, String newInformation) {
         this.index = index;
         this.type = type;
         this.newInformation = newInformation;
@@ -26,7 +26,7 @@ public class EditPatientCommand extends Command {
                           AppointmentList appointmentList, Ui ui,
                           DoctorStorage doctorStorage, PatientStorage patientStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        if(index > patientList.getSize()) {
+        if (index > patientList.getSize()) {
             throw new IHospitalException("The patient is not exist\n");
         }
 
