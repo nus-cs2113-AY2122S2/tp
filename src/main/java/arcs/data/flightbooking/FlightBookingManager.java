@@ -61,7 +61,7 @@ public class FlightBookingManager {
         return route.getEmptySeats() > 0;
     }
 
-    public boolean checkFlightBookingValidity (String ic, String fid) {
+    public boolean checkFlightBookingValidity(String ic, String fid) {
         for (FlightBooking flightBooking: flightBookings) {
             Customer customer = flightBooking.getCustomer();
             Route route = flightBooking.getRoute();
