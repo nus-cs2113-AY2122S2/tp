@@ -117,7 +117,8 @@ public class PlanList {
      */
     public Plan createAndAddPlan(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, InvalidPlanException {
-        String userPlanNameInput = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[0].trim().toLowerCase();
+        String userPlanNameInput
+                = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[0].trim().toLowerCase();
         String userWorkoutIndexNumbersString = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[1].trim();
         String className = this.getClass().getSimpleName();
         checkPlanNameValidity(userPlanNameInput, className);

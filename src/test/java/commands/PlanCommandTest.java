@@ -114,7 +114,7 @@ class PlanCommandTest {
         String expectedOutput =
                 "Here are all your plan(s).\n"
                         + "To view each plan in detail, enter\n'plan /details <plan number in list>'.\n"
-                        + "1. Plan A\n";
+                        + "1. plan a\n";
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);
