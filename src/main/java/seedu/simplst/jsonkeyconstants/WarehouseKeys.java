@@ -1,4 +1,4 @@
-package seedu.duke.JsonKeyConstants;
+package seedu.simplst.jsonkeyconstants;
 
 public class WarehouseKeys {
     public static String capacityOccupied = "CP";

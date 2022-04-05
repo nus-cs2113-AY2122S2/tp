@@ -1,6 +1,12 @@
-package seedu.duke;
+package seedu.simplst;
 
-import seedu.duke.CommandParsers.*;
+import seedu.simplst.parsers.AddParser;
+import seedu.simplst.parsers.ListParser;
+import seedu.simplst.parsers.RemoveParser;
+import seedu.simplst.parsers.ViewParser;
+import seedu.simplst.parsers.TotalParser;
+import seedu.simplst.parsers.FindParser;
+import seedu.simplst.parsers.HelpParser;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
 import util.exceptions.NullException;
@@ -11,12 +17,13 @@ import java.util.Scanner;
 public class UserInterface {
     private Warehouse warehouse;
 
-    private ListParser  listParser;
+    private ListParser listParser;
     private ViewParser viewParser;
     private AddParser addParser;
     private RemoveParser removeParser;
     private TotalParser totalParser;
     private FindParser findParser;
+    private HelpParser helpParser;
 
 
     public UserInterface(Warehouse warehouse) {
@@ -27,6 +34,7 @@ public class UserInterface {
         this.addParser = new AddParser(warehouse);
         this.removeParser = new RemoveParser(warehouse);
         this.totalParser = new TotalParser(warehouse);
+        this.helpParser = new HelpParser(warehouse);
     }
 
     public void run() {
@@ -69,7 +77,7 @@ public class UserInterface {
                     totalParser.parse(userInput);
                     break;
                 case "help":
-                    Display.help();
+                    helpParser.parse(userInput);
                     break;
                 case "storage-capacity":
                     warehouse.getPercentOccupied();
@@ -93,7 +101,7 @@ public class UserInterface {
                 Display.tryCommandAgain();
             } catch (InvalidFileException e) {
                 e.printStackTrace();
-            } catch (InvalidObjectType e){
+            } catch (InvalidObjectType e) {
                 Display.tryCommandAgain();
             }
             System.out.println("Another command?");

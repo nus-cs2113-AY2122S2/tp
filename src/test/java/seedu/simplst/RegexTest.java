@@ -1,7 +1,6 @@
-package seedu.duke;
+package seedu.simplst;
 
 import org.junit.jupiter.api.Test;
-import util.exceptions.WrongCommandException;
 
 import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;

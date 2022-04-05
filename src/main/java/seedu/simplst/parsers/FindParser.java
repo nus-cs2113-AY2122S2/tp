@@ -1,10 +1,7 @@
-package seedu.duke.CommandParsers;
+package seedu.simplst.parsers;
 
-import seedu.duke.Regex;
-import seedu.duke.Warehouse;
-import util.exceptions.InvalidFileException;
-import util.exceptions.InvalidObjectType;
-import util.exceptions.NullException;
+import seedu.simplst.Regex;
+import seedu.simplst.Warehouse;
 import util.exceptions.WrongCommandException;
 
 public class FindParser extends CommandParser {

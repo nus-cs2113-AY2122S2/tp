@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.simplst;
 
 /*
  * Class to handle the Goods information
@@ -10,15 +10,15 @@ public class Orderline extends Good {
     private int quantityFulfilled = 0;
     private Boolean isCheckedOff = false;
 
-    public Orderline() {
+    public Orderline(UnitGood unitGood, int id, int quantity) {
+        super(unitGood, id, quantity);
     }
 
-
-    public void checkOff(){
+    public void checkOff() {
         this.isCheckedOff = true;
     }
 
-    public int getQuantityFulfilled(){
+    public int getQuantityFulfilled() {
         return quantityFulfilled;
     }
 
@@ -27,7 +27,7 @@ public class Orderline extends Good {
     }
 
     //    public void setUnitGoodByName(String name){
-//
-//    }
+    //
+    //    }
 
 }
