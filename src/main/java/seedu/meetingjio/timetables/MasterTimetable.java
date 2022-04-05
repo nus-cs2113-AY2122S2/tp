@@ -143,7 +143,7 @@ public class MasterTimetable {
      *
      * @return boolean true if there is another event at the same time as the meeting
      */
-    public boolean checkIfClash(Meeting meeting) {
+    public boolean isMeetingClash(Meeting meeting) {
         for (Timetable timetable : timetables) {
             if (checkMeetingOverlap(timetable, meeting)) {
                 return true;
@@ -176,7 +176,7 @@ public class MasterTimetable {
      *
      * @return boolean True false if there meeting already exists
      */
-    public boolean checkIfMeetingExistsAlready(Meeting meeting) {
+    public boolean isExistingMeeting(Meeting meeting) {
         for (Event event : meetingList) {
             if (meeting.equals(event)) {
                 return true;
