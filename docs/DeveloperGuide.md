@@ -167,12 +167,11 @@ to write all the data stored in the `Profile` component into the save file witho
 <br>
 The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class,
 as well as the `CommandParser` class and its subclasses.<br>
-* The `Parser` class provides utility methods to parse commands and arguments from the user and
+* The `Parser` class provides methods to parse commands from the user and
   return a `Command` object representing an instruction that the user has for SplitLah.<br>
-  `Parser` class is the only class in the `Parser` component that other external classes actively interact with.<br>
-* The `ParserUtils` class provide supporting methods for `Parser` class to properly run,
+* The `ParserUtils` class provide supporting methods to parse individual arguments from the user input,
   and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.<br>
-* The subclasses of `CommandParser` then serve to parse all arguments of a user input to create an object of a specific
+* The subclasses of `CommandParser` serve to parse all arguments of a user input to create an object of a corresponding
   subclass of the `Command` class.
 
 The general workflow of the `Parser` component is as follows:
@@ -181,9 +180,9 @@ The general workflow of the `Parser` component is as follows:
 2. `Parser` class instantiates a new `XYZCommandParser` object corresponding to the user input 
    and passes the user input to it.
    (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
-3. The `XYZCommandParser` object then uses parse methods from `Parser` class to extract all the
+3. The `XYZCommandParser` object then uses parse methods from `ParserUtils` class to extract all the
    arguments from the user input.
-   * Each of these parse methods in `Parser` class then calls utility methods from `ParserUtils` class 
+   * Each of these parse methods in `ParserUtils` class then calls other utility methods within the class 
      to return a parsed value.
 4. All relevant arguments that are parsed are then used to create a new `XYZCommand `object to be
    returned to the `Parser` class.
