@@ -1,7 +1,8 @@
 package seedu.simplst;
 
 /*
- * Class to handle the Goods information
+ * Specific good that is in the Order.
+ * This will have its own quantity
  *
  * FOR NOW id we can manually input?
  * Ideas - id can track and give to the goods we add automatically
@@ -26,8 +27,17 @@ public class Orderline extends Good {
         this.quantityFulfilled = quantityFulfilled;
     }
 
-    //    public void setUnitGoodByName(String name){
-    //
-    //    }
+    private String isDone() {
+        if (isCheckedOff) {
+            return " (Done)";
+        }
+        return " (Not Done)";
+    }
 
+    @Override
+    public String toString() {
+        return String.format("%d of %s - %s needed",
+                quantityFulfilled, super.getSku(), super.getName())
+                + isDone();
+    }
 }

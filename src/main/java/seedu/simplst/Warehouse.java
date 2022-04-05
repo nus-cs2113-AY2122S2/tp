@@ -60,8 +60,38 @@ public class Warehouse {
 
     }
 
-    public boolean doesUnitGoodExist(String sku) {
+    public void addOrderline(String oid, String sku, String qty) throws WrongCommandException {
+        try {
+            int id = Integer.parseInt(oid);
+            Order order = findOrder(id);
+            addGoodToOrder(order, sku, qty);
+            System.out.printf("%s of %s is added to order number %d\n",
+                    qty, sku, order.getId());
+        } catch (NumberFormatException e) {
+            throw new WrongCommandException("add", true);
+        } catch (ItemDoesNotExistException e) {
+            System.out.println("Order does not exist in the warehouse");
+            System.out.println("Try adding an order first");
+            throw new WrongCommandException("add", true);
+        }
+    }
+
+    private void addGoodToOrder(Order order, String sku, String qty) throws WrongCommandException {
+        if (isSkuInInventory(sku)) {
+            System.out.println("Good does not exist in the warehouse");
+            System.out.println("Try adding a good first");
+            throw new WrongCommandException("add", true);
+        }
+
+        order.addOrderline(getUnitGoodBySku(sku), qty);
+    }
+
+    public boolean hasUnitGood(String sku) {
         return unitGoodHashMap.containsKey(sku);
+    }
+
+    private UnitGood getUnitGoodBySku(String sku) {
+        return unitGoodHashMap.get(sku);
     }
 
     public boolean isSkuInInventory(String sku) {
@@ -90,7 +120,7 @@ public class Warehouse {
     }
 
     public void viewUnitGood(String sku) {
-        if (doesUnitGoodExist(sku)) {
+        if (hasUnitGood(sku)) {
             System.out.println(unitGoodHashMap.get(sku));
             System.out.println("Size of good: " + unitGoodHashMap.get(sku).getCapacity());
         } else {
@@ -180,8 +210,24 @@ public class Warehouse {
         System.out.println("List of orders:");
         int counter = 0;
         for (Order order : orderLists) {
-            System.out.println("\t" + (counter + 1) + ". " + order);
+            System.out.println("\t" + (counter + 1) + ": " + order);
             counter++;
+        }
+    }
+
+    public void listOrderlines(String oid) {
+        try {
+            int id = Integer.parseInt(oid);
+            Order order = findOrder(id);
+            ArrayList<Orderline> orderLines = order.getOrderlines();
+            for (Orderline orderline:orderLines) {
+                System.out.println(orderline);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("OID field must be an order id which is"
+                    + " currently in the warehouse");
+        } catch (ItemDoesNotExistException e) {
+            System.out.printf("No order with oid: %s found in the warehouse", oid);
         }
     }
 
@@ -371,6 +417,29 @@ public class Warehouse {
         }
     }
 
+    /**
+     * Add the base details of an order.
+     * This will add the order to orderLists in the warehouse
+     * @param oid order id
+     * @param recv receiver name
+     * @param addr shipping address
+     * @throws WrongCommandException when input for either field is wrong or empty
+     */
+    public void addOrder(String oid, String recv, String addr) throws WrongCommandException {
+        if (oid.isBlank() || recv.isBlank() || addr.isBlank()) {
+            throw new WrongCommandException("add", true);
+        }
+
+        try {
+            int id = Integer.parseInt(oid);
+            Order order = new Order(id, recv, addr);
+            orderLists.add(order);
+        } catch (NumberFormatException e) {
+            System.out.println("oid must be a positive number");
+            throw new WrongCommandException("add", true);
+        }
+    }
+
     // batch adding
     private void addOrder(int id, Object orderObject) throws
             WrongCommandException, InvalidFileException, InvalidObjectType {
@@ -387,7 +456,7 @@ public class Warehouse {
         }
 
         try {
-            Order order = new Order(id, receiver, shippingAddress, toFulfilBy, comments);
+            Order order = new Order(id, receiver, shippingAddress);
             orderLists.add(order);
             System.out.println("Order " + id + " is added");
         } catch (NumberFormatException e) {

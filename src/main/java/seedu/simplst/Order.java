@@ -14,18 +14,12 @@ public class Order {
     private String receiver;
     private String shippingAddress;
     private ArrayList<Orderline> orderlines = new ArrayList<>();
-    private Float totalCost = 0F;
-    private String toFulfilBy;
-    private String fulfilledBy;
     private Boolean isFulfilled = false;
-    private String comments;
 
-    public Order(int orderId, String receiver, String shippingAddress, String toFulfilBy, String comments) {
+    public Order(int orderId, String receiver, String shippingAddress) {
         this.orderId = orderId;
         this.receiver = receiver;
         this.shippingAddress = shippingAddress;
-        this.toFulfilBy = toFulfilBy;
-        this.comments = comments;
     }
 
     public int getId() {
@@ -55,8 +49,18 @@ public class Order {
         return null;
     }
 
-    public void addOrderline() {
-
+    public void addOrderline(UnitGood unitGood, String qty)
+            throws WrongCommandException {
+        try {
+            int quantity = Integer.parseInt(qty);
+            Orderline orderline = new Orderline(unitGood,
+                    orderlines.size() + 1, quantity);
+            orderlines.add(orderline);
+            System.out.printf("");
+        } catch (NumberFormatException e) {
+            System.out.println("Quantity must be positive number");
+            throw new WrongCommandException("add", true);
+        }
     }
 
     //    public void addOrderline(String idStr, String name, String qtyStr,
@@ -202,37 +206,6 @@ public class Order {
     //        }
     //    }
 
-
-    public String getToFulfilBy() {
-        return this.toFulfilBy;
-    }
-
-
-    public String getFulfilledBy() {
-        return this.fulfilledBy;
-    }
-
-    public void setFulfilledBy(String fulfilledBy) {
-        this.fulfilledBy = fulfilledBy;
-    }
-
-    public String getComments() {
-        return this.comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    public void addToComments(String comments) {
-        this.comments += '\n';
-        this.comments += comments;
-    }
-
-    public Float getTotalCost() {
-        return this.totalCost;
-    }
-
     public String toString() {
         return String.format("%d - %s (%s)", orderId, receiver, shippingAddress);
     }
@@ -249,11 +222,11 @@ public class Order {
         jo.put(OrderKeys.orderId, this.orderId);
         jo.put(OrderKeys.receiver, this.receiver);
         jo.put(OrderKeys.shippingAddress, this.shippingAddress);
-        jo.put(OrderKeys.totalCost, this.totalCost);
-        jo.put(OrderKeys.toFulfilBy, this.toFulfilBy);
-        jo.put(OrderKeys.fulfilledBy, this.fulfilledBy);
         jo.put(OrderKeys.isFulfilled, this.isFulfilled);
-        jo.put(OrderKeys.comments, this.comments);
+        // jo.put(OrderKeys.totalCost, this.totalCost);
+        // jo.put(OrderKeys.toFulfilBy, this.toFulfilBy);
+        // jo.put(OrderKeys.fulfilledBy, this.fulfilledBy);
+        // jo.put(OrderKeys.comments, this.comments);
         JSONArray jaol = this.serializeOrderlines();
         if (jaol == null) {
             return null;

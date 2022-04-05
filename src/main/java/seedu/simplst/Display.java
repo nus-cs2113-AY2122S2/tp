@@ -94,7 +94,22 @@ public class Display {
     }
 
     public static void helpOrder() {
-        return;
+        System.out.println("------------------------- Order Commands -------------------------");
+        System.out.println("Add order detail Command");
+        System.out.println("\tFormat: add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]");
+        System.out.println("\tExample: add o/ oid/1 r/Danny Phantom "
+                + "addr/Amity Park\n");
+        System.out.println("Add good to order Command");
+        System.out.println("\tFormat: add og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_NEEDED_FOR_ORDER]");
+        System.out.println("\tExample: add o/ oid/1 sku/WC1 q/10");
+        System.out.println("Remove Command");
+        System.out.println("\tFormat: remove ug/ sku/[SKU]");
+        System.out.println("\tExample: remove ug/ sku/WC1\n");
+        System.out.println("List Command");
+        System.out.println("\tFormat: list ug/\n");
+        System.out.println("View Command");
+        System.out.println("\tFormat: view ug/ sku/[SKU]");
+        System.out.println("\tExample: view ug/ sku/WC1\n");
     }
 
     public static void help() {
