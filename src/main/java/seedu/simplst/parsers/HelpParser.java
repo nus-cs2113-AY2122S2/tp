@@ -1,11 +1,8 @@
 package seedu.simplst.parsers;
 
 import seedu.simplst.Display;
-import seedu.simplst.Regex;
+import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
-import util.exceptions.InvalidFileException;
-import util.exceptions.InvalidObjectType;
-import util.exceptions.NullException;
 import util.exceptions.WrongCommandException;
 
 public class HelpParser extends CommandParser {
@@ -16,11 +13,11 @@ public class HelpParser extends CommandParser {
 
     @Override
     protected void init_extract_params() {
-        Regex regexMatch;
+        MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[uog]{1,2})";
-        regexMatch = new Regex(this.userInput, regex);
-        this.matches = regexMatch.getGroupValues();
+        matchKeywordsMatch = new MatchKeywords(this.userInput, regex);
+        this.matches = matchKeywordsMatch.getGroupValues();
     }
 
     @Override

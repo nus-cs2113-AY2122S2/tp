@@ -1,6 +1,6 @@
 package seedu.simplst.parsers;
 
-import seedu.simplst.Regex;
+import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
 import util.exceptions.WrongCommandException;
 
@@ -12,11 +12,11 @@ public class FindParser extends CommandParser {
 
     @Override
     protected void init_extract_params() {
-        Regex regexMatch;
+        MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "n/(?<name>.*)";
-        regexMatch = new Regex(this.userInput, regex);
-        this.matches = regexMatch.getGroupValues();
+        matchKeywordsMatch = new MatchKeywords(this.userInput, regex);
+        this.matches = matchKeywordsMatch.getGroupValues();
     }
 
     @Override
