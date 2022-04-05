@@ -438,7 +438,7 @@ public class FileManager {
     public void loadExercisesFromFile(ExerciseList exerciseList) throws IOException {
         Scanner scanner = new Scanner(getExerciseFilePath());
         while (scanner.hasNextLine()) {
-            var exercise = scanner.nextLine();
+            var exercise = scanner.nextLine().toLowerCase();
             exerciseList.addExerciseToList(exercise);
         }
     }
@@ -585,7 +585,7 @@ public class FileManager {
      */
     public void addFileWorkoutToList(WorkoutList workoutList, String[] workoutFileDataLine)
             throws ArrayIndexOutOfBoundsException, InvalidExerciseException, InvalidWorkoutException {
-        String workoutName = workoutFileDataLine[0];
+        String workoutName = workoutFileDataLine[0].toLowerCase();
         String workoutReps = workoutFileDataLine[1];
 
         String userArguments = workoutName + " " + WorkoutCommand.CREATE_ACTION_REPS_KEYWORD + " " + workoutReps;
@@ -595,7 +595,7 @@ public class FileManager {
     public void addFilePlanToList(PlanList planList, String[] planFileDataLine)
             throws ArrayIndexOutOfBoundsException, InvalidExerciseException, InvalidWorkoutException {
         String planName = planFileDataLine[0].trim().toLowerCase();
-        String workoutsInPlan = planFileDataLine[1].trim();
+        String workoutsInPlan = planFileDataLine[1].trim().toLowerCase();
         String[] individualWorkout = workoutsInPlan.split(FILE_DATA_DELIMITER_PLAN, -1);
         ArrayList<Workout> workoutsToAddInPlanList = new ArrayList<Workout>();
         for (int i = 0; i < individualWorkout.length; i++) {
@@ -731,6 +731,18 @@ public class FileManager {
             assert (planObject != null) : "Plan object is NULL";
             String planInFileFormat = convertPlanToFileDataFormat(planObject);
             fileWriter.append(planInFileFormat);
+            fileWriter.append(System.lineSeparator());
+        }
+        fileWriter.close();
+    }
+
+    public void rewriteAllExercisesToFile(ExerciseList exerciseList) throws IOException, NullPointerException {
+        ArrayList<String> listOfExercises = exerciseList.getExerciseList();
+
+        FileWriter fileWriter = new FileWriter(getExerciseFilePath().toString());
+        for (String exerciseKey : listOfExercises) {
+            assert (exerciseKey != null) : "Exercise object is NULL";
+            fileWriter.append(exerciseKey);
             fileWriter.append(System.lineSeparator());
         }
         fileWriter.close();
