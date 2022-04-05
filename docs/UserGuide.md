@@ -570,7 +570,7 @@ new session that is participated by the same group of individuals.
 
 **Example**:
 - Adds a new group named _Uni Friends_, consisting of Alice and Bob.<br><br>
-  `group /create /n Uni Friends /pl Alice Bob` <br><br>
+  `group /create /n Uni Friends /pl Charlie Mike` <br><br>
   ![Group create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupCreateCommand.png)
   <br>
   <br>
