@@ -33,7 +33,7 @@ public class MenuItemFileManager {
         }
         return decodeData(records);
     }
-    
+
     public void saveData(ArrayList<MenuItem> menuItems) throws IOException {
         FileWriter fw = new FileWriter(DIR_PATH + File.separator + fileName);
         ArrayList<String> records = encodeData(menuItems);
