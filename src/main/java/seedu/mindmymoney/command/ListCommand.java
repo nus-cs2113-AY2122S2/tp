@@ -136,9 +136,9 @@ public class ListCommand extends Command {
      */
     public String listString(int count, String listInString) {
         for (Expenditure expenditure : expenditureList.expenditureListArray) {
-            listInString += count + ". $" + String.format("%.2f", expenditure.getAmount()) + " was spent on " + expenditure.getDescription()
-                    + "(" + expenditure.getCategory() + ") " + "using " + expenditure.getPaymentMethod()
-                    + " [" + expenditure.getTime() + "]" + "\n";
+            listInString += count + ". $" + String.format("%.2f", expenditure.getAmount()) + " was spent on " 
+                + expenditure.getDescription() + "(" + expenditure.getCategory() + ") " + "using " 
+                + expenditure.getPaymentMethod() + " [" + expenditure.getTime() + "]" + "\n";
             count++;
         }
         return listInString;
