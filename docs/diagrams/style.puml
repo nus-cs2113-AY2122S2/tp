@@ -10,6 +10,7 @@
 !define UI_COLOR #BlueViolet
 !define UI_COLOR_T1 #DarkMagenta
 !define UI_COLOR_T2 #MediumOrchid
+!define UI_COLOR_T3 #THISTLE
 
 !define COMMAND_COLOR #SteelBlue
 !define COMMAND_COLOR_T1 #RoyalBlue
@@ -31,6 +32,7 @@
 !define MONEY_COLOR #Green
 !define MONEY_COLOR_T1 #SeaGreen
 !define MONEY_COLOR_T2 #LimeGreen
+!define MONEY_COLOR_T3 #TECHNOLOGY
 
 
 !define STORAGE_COLOR #A38300

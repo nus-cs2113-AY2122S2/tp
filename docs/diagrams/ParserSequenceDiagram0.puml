@@ -3,11 +3,12 @@
 skinparam arrowColor #BLACK
 skinparam noteTextAlignment left
 
-
+group **sd**  Parser Component parse and validate
 Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
 Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 
-[-> Parser : parseKeyword(userInput:String)
+
+[-> Parser : parseCommandType(userInput:String)
 activate Parser
 Parser -->[ : keywordString:String
 deactivate Parser
@@ -76,7 +77,7 @@ loop LOOP_COLOR for each XYZ term in command
         ' notMoney
         else //XYZ// is not Money
 
-            opt OPT_COLOR //XYZ// is an integer
+            opt OPT_COLOR //XYZ// is not an integer
                 Parser -->[ : :InvalidIndexException
             end opt
 
@@ -104,8 +105,7 @@ loop LOOP_COLOR for each XYZ term in command
             deactivate Parser
         end opt
     end opt
-
 end loop
-
+end
 @enduml
 

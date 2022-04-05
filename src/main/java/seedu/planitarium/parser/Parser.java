@@ -51,13 +51,19 @@ public class Parser {
     protected static final String LOG_MISSING_DELIMITER = "User input '%s' is missing delimiter '%s'";
     protected static final String LOG_TOO_MANY_DELIMITER = "User input '%s' has too many delimiters '%s'";
 
+    protected static final String TYPE_USER_INDEX = "user";
+    protected static final String TYPE_GROUP_INDEX = "group";
+    protected static final String TYPE_EXPENDITURE_INDEX = "expenditure";
+    protected static final String TYPE_INCOME_INDEX = "income";
+    protected static final String TYPE_CATEGORY_INDEX = "category";
+
     /**
      * Returns command keyword from user input.
      *
      * @param userInput The user's full input text.
      * @return The command keyword issued.
      */
-    public static String parseKeyword(String userInput) {
+    public static String parseCommandType(String userInput) {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         String keyword = userInput.split(DELIMITER_SPACE)[Constants.INDEX_KEYWORD].trim();
         logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, keyword));
@@ -265,7 +271,7 @@ public class Parser {
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, userIndex));
-            throw new InvalidIndexException(userIndex);
+            throw new InvalidIndexException(TYPE_USER_INDEX,userIndex);
         }
     }
 
@@ -288,7 +294,7 @@ public class Parser {
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, expenditureIndex));
-            throw new InvalidIndexException(expenditureIndex);
+            throw new InvalidIndexException(TYPE_EXPENDITURE_INDEX, expenditureIndex);
         }
     }
 
@@ -310,7 +316,7 @@ public class Parser {
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, incomeIndex));
-            throw new InvalidIndexException(incomeIndex);
+            throw new InvalidIndexException(TYPE_INCOME_INDEX, incomeIndex);
         }
     }
 
@@ -331,7 +337,7 @@ public class Parser {
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, categoryIndex));
-            throw new InvalidIndexException(categoryIndex);
+            throw new InvalidIndexException(TYPE_CATEGORY_INDEX, categoryIndex);
         }
     }
 
@@ -352,7 +358,7 @@ public class Parser {
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, groupIndex));
-            throw new InvalidIndexException(groupIndex);
+            throw new InvalidIndexException(TYPE_GROUP_INDEX, groupIndex);
         }
     }
 }

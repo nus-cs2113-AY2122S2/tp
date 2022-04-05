@@ -138,25 +138,22 @@ The `Command` class is an abstract class that has abstract method ``
 
 ![ParserClassDiagram](images/ParserClassDiagram.png)
 
-The `Parser` component consists of the `Parser` class, `ParserUtility` class and several `Exception` classes.
+The `Parser` component consists of the 
+[`Parser`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java) 
+class, 
+[`ParserUtility`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/ParserUtility.java)
+class and several `Exception` classes.
 
 The `Parser` class provides the `parseXYZ()` and `getValidXYZ()` methods where `XYZ` is a placeholder for the type of
-term (e.g. `parseKeyword()` and `getValidUserIndex`). The methods prepended by **parse** assists in parsing the user
+term (e.g. `parseCommandType()` and `getValidUserIndex`). The methods prepended by **parse** assists in parsing the user
 input into its respective terms and the method prepended by **getValid** assists in validating the parsed terms and
 returning an appropriately typed object to the `Commands` component. The `Parser` class interacts with the
 `ParserUtility` class which provides supporting methods for parsing and validating. Both classes throws exceptions as
 required.
 
-The following Sequence Diagram shows how the classes of the `Parser` component interacts for each user command.
-
-![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
-
-> :information_source: **Note:** The borders of the Sequence Diagram may look cut-off due to PlantUML limitations.
-> No necessary information has been omitted due to it.
-
 How the `Parser` component is used:
 
-1. When the `Commands` component receives a user input, `parseKeyword()` is called upon to parse the type of command to
+1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command to
    be executed.
 2. This will result in the keyword of the command to be returned as a string.
 3. When necessary, the `parseXYZ()` methods will be called upon to parse more terms for the `Commands`
@@ -166,11 +163,41 @@ How the `Parser` component is used:
    used for the command execution (e.g. `getValidGroupIndex(indexString)` to check that the index provided corresponds
    to an existing group). The `ParserUtility` is also called here to assist with the validation process.
 
-The Sequence Diagram below illustrates the interactions in the `Parser` component for a command execution.
-Let `userInput` be the command string `deletein /u 1 /g 2 /r 1` and the minimum index `MIN_INDEX` be the constant that
-is supported by PlanITarium to be `1`.
+The following Sequence Diagram shows how the classes of the `Parser` component interacts for each user command.
 
-![ParserSequenceDiagramExecute](images/ParserSequenceDiagram1.png)
+![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
+
+> :information_source: **Note:** The following are the ranges of index deemed valid:
+<table>
+    <thead>
+        <tr>
+            <th>Index</th>
+            <th>Range</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Group</td>
+            <td>[1, ..., 3]</td>
+        </tr>
+        <tr>
+            <td>User</td>
+            <td>[1, ..., MAX_UID], where MAX_UID is the number of people in the given group</td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>[1, ..., 6]</td>
+        </tr>
+        <tr>
+            <td>Income</td>
+            <td>[1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person</td>
+        </tr>
+        <tr>
+            <td>Expenditure</td>
+            <td>[1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person</td>
+        </tr>
+    </tbody>
+</table>
 
 ### Family Component
 
@@ -269,7 +296,7 @@ add \n Alice
 and this string will be passed to `CommandFactory` together with `personList` that contains all the people who had been
 added previously by calling `getCommand()`.
 
-Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseKeywords`, and
+Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseCommandTypes`, and
 the `Parser` should return `add` as keyword.
 
 Step 3. The `CommandFactory` will then match the keyword to the type of command. In this case, `add` is corresponding
@@ -431,72 +458,6 @@ by [`CommandFactory`](#PlaceholderToCommandFactory):
 * **Alternative 2 :** Maintain a single array list for both found income and expenditure
     * Pros: Easy to implement and less memory usage.
     * Cons: Additional logic check is needed to print the income and expenditure in a well formatted way
-
----
-
-### [Proposed] Listing Categorised Expenditures Feature
-
-#### Proposed Implementation
-
-The proposed listing categorised expenditure feature is facilitated by `Categories`,`Expenditure`, `ExpenditureList`
-and `Family`. The proposed command to be called by the user is `listexp /c CATEGORY_INDEX`.
-The following additional operations will also be implemented:
-
-* `Family#listExpenseOfCategory(index)` -- Lists all expenses from the category index.
-* `PersonList#listExpenseOfCategory(index)` -- Wrapper method to get the list of expenses in the category 
-from each person.
-* `ExpenditureList#getExpenseOfCategory(index)` -- Returns a list of expenditures having category index matching the
-  index argument.
-
-Below is an example usage scenario and how the expenses of a category will be printed.
-
-Step 1. Given that the application already has existing data and there are two people being tracked, Alice and Bob, and
-only Alice's expenses were added and categorised. Suppose that Alice is the main user and Bob is her father, then Alice
-would belong to the current generation and Bob would belong to the parent generation. In this case `Family` would be
-initialised with two generations being tracked - parents and myGen.
-
-![ListCategorisedExpense0](images/ListCategorisedExpense0.png)
-
-Step 2. The user executes `listexp /c 2` command to list all expenses in category `2`. The `listexp`
-command will be parsed and calls `Family#listExpenseOfCategory(2)` which would instantiate a temporary array list for
-storing the results of the upcoming search.
-
-![ListCategorisedExpense1](images/ListCategorisedExpense1.png)
-
-Step 3. After the temporary array list has been created, `PersonList#listExpenseOfCategory(2)` will be called on each
-generation grouping and each tracked `Person` will be iterated. The `expenditureList` for a person would be retrieved 
-during that person's iteration and `ExpenditureList#getExpenseOfCategory(1)` will be called. This method then iterates 
-through the retrieved expenditure list and calls `Expenditure#getCategory()` on each expenditure, collecting and 
-returning the expenditure if its category matches the target category index. 
-The returned expenditures are then appended to the temporary array list.
-
-![ListCategorisedExpense2](images/ListCategorisedExpense2.png)
-
-Step 4. The iteration, collecting and appending to the temporary array list in step 3 is repeated until every person has
-been iterated. Finally, an appropriate message can be displayed to the user,
-stating the name of the category, following by a series of print to display the expenditures in this category.
-
-> :information_source: **Note:** If the `index` provided does not map to any existing categories,
-> then it can be observed that there will never be any results returned. The `listexp` command will
-> check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
-> fails, an error message will be displayed to the user instead of continuing with the execution.
-
-The following sequence diagram shows how the `listexp` operation works after a `ListCatCommand`
-command object has been created by [`CommandFactory`](#Command-Execution):
-
-![ListCategorisedExpenseSequence](images/ListCategorisedExpenseSequence.png)
-
-#### Design considerations:
-
-**Aspect: How to categorise expenses to be listed:**
-
-* **Alternative 1 (current proposal):** Using the category attribute for expenses.
-    * Pros: Easy to implement and less memory usage.
-    * Cons: May have performance issues as it needs to iterate through every person's expenditure.
-
-* **Alternative 2:** Maintain an array list for each category and store a copy of expenses.
-    * Pros: Fast to print expenses in a category, no unnecessary look-ups.
-    * Cons: Poor memory management, needs to store twice as many expenditures.
 
 ---
 

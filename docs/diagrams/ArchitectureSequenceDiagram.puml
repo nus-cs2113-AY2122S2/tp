@@ -1,79 +1,116 @@
 @startuml
 !include style.puml
 
-Actor User USER_COLOR
+box
 Participant Main #grey
-Participant Commands COMMAND_COLOR
-Participant "Parser" as Parser LOGIC_COLOR
-Participant Family MODEL_COLOR
-Participant Money MONEY_COLOR
-Participant UI UI_COLOR
-Participant Storage STORAGE_COLOR
+end box
+box COMMAND_COLOR_T2
+Participant ":CommandFactory" as Commands COMMAND_COLOR
+Participant ":AddPersonCommand" as Commands2 COMMAND_COLOR_T1
+end box
+box LOGIC_COLOR_T3
+Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
+Participant "<<Class>>\nParserUtility" as Parser2 LOGIC_COLOR_T1
+end box
+box #PINK
+Participant ":Family" as Family MODEL_COLOR
+Participant ":PersonList" as Family2 MODEL_COLOR_T3
+Participant ":Person" as Family3 MODEL_COLOR_T2
+end box
+box MONEY_COLOR_T3
+Participant ":IncomeList" as Money MONEY_COLOR
+Participant ":ExpenditureList" as Money2 MONEY_COLOR
+box UI_COLOR_T3
+Participant ":UI" as UI UI_COLOR
+end box
+box STORAGE_COLOR_T1
+Participant ":Storage" as Storage STORAGE_COLOR
+end box
 
-User -> Main : "add /g 2 /n Alice"
+[-> Main : "add /g 2\n /n Alice"
 
 activate Main
-Main -> Commands : getCommand("add /g 2 /n Alice")
+Main -> Commands : getCommand(\n      "add /g 2\n        /n Alice")
 
 activate Commands
-Commands -> Parser : parseKeyword("add /g 2 /n Alice")
-
+Commands -> Parser : parseCommandType("add /g 2 /n Alice")
 activate Parser
-Parser --> Commands
+Parser --> Commands : "add":String
 deactivate Parser
 
-Commands --> Main : :AddPersonCommand
+
+create Commands2
+Commands -> Commands2
+activate Commands2
+Commands2 --> Commands
+deactivate Commands2
+
+Commands --> Main : :AddPerson\n      Command
 deactivate Commands
 
-Main -> UI : //print start execution line//
+Main -> UI : printHoriLine()
 activate UI
 UI --> Main
 deactivate UI
 
-Main -> Commands : execute()
-activate Commands
+Main -> Commands2 : execute()
+activate Commands2
 
-Commands -> Parser : //parse various details//
-activate Parser
-Parser --> Commands
-deactivate Parser
+ref over Commands2, Parser, Parser2
+Parser Component parse and validate
+end ref
 
-Commands -> Family : addPerson(2:int, "Alice":String)
+Commands2 -> Family : addPerson(2:int, "Alice":String)
 activate Family
 
-Family -> Family : addPerson("Alice")
+Family -> Family : getList(2)
 activate Family
-
-Family -> Money : IncomeList()
-activate Money
-Money --> Family
-deactivate Money
-
-Family -> Money : ExpenseList()
-activate Money
-Money --> Family
-deactivate Money
-
 Family --> Family
 deactivate Family
 
-Family --> Commands
+
+Family -> Family2 : addPerson\n("Alice")
+activate Family2
+
+create Family3
+Family2 -> Family3
+activate Family3
+
+create Money
+Family3 -> Money
+activate Money
+Money --> Family3
+deactivate Money
+
+create Money2
+Family3 -> Money2
+activate Money2
+Money2 --> Family3
+deactivate Money2
+
+Family3 --> Family2
+deactivate Family3
+
+Family2 --> Family
+deactivate Family2
+
+Family --> Commands2
 deactivate Family
 
-Main -> UI : //print end execution line//
+Commands2 --> Main
+Destroy Commands2
+
+Main -> UI : printHoriLine()
 activate UI
 UI --> Main
 deactivate UI
 
-Commands -> Storage : saveData()
+Main -> Storage : saveData(:Family)
 activate Storage
-Storage --> Commands
+Storage --> Main
 deactivate Storage
 
-Commands --> Main
-deactivate Commands
-
-Main --> User
+Main -->[
 
 @enduml
 
