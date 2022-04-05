@@ -1272,6 +1272,58 @@ application. This is to ensure that the resource directories and files are creat
 JAR file to ensure cleanliness on the user's local filesystem.
 
 #### Design Considerations For Inconsistent Data Between Resource Files
+#### Writing a New Line of Data to the Resource File
+Writing a new line of data to the respective resource files is done when the user creates a new workout or plan.
+See [this design consideration](#design-considerations-for-how-data-is-written-or-updated-to-a-resource-file)
+for more details.
+
+Currently, a new line of data is written to the respective resource files when creating a [new workout](#create-new-workout)
+or a [new plan](#create-a-new-plan).
+
+The following sequence diagram shows how a new workout is written to `workouts.txt` when the user enters a `workout /new`
+command:
+
+![Write New Line Of Data](uml/sequenceDiagrams/storage/images/writeNewLineOfData.png)
+
+<span class="info box">:memo: The procedure for writing a new line of data when the user creates a new plan is largely 
+similar to the above sequence diagram.</span>
+
+**(Step 1)** After a new workout has been created, the `WorkoutCommand` object calls `FileManager#writeNewWorkoutToFile()`,
+passing the newly created `Workout` object as the argument.
+
+**(Step 2)** `FileManager#convertWorkoutToFileDataFormat()` is called, passing the newly created `Workout` object as the
+argument. In this method, the newly created `Workout` object's data is converted into a `String` format that will be
+stored in `workouts.txt`. The format of a workout data when stored in the file will look something like this:
+
+```
+<exercise name> | <repetition value>
+```
+
+For example, a workout of 10 reps of push ups will look like this in `workouts.txt`:
+
+```
+push up | 10
+```
+
+**(Step 3 and beyond)** The 'file-formatted' workout data is returned to `FileManager#writeNewWorkoutToFile()` and thereafter
+written to `workouts.txt` with the help of the `FileWriter` class that is built into Java. Each line of `workouts.txt` 
+represents one workout.
+
+This finishes the writing of the new workout to the resource file and control is returned to `WorkoutCommand#execute()`.
+
+#### Rewriting the Resource Entire File With the Most Recent Set of Data
+In contrast to the previous section which covers the scenarios when only the new data is written as a new line to the 
+file, rewriting the respective entire resource file is done with the user updates or deletes a workout, plan, or
+schedule. See [this design consideration](#design-considerations-for-how-data-is-written-or-updated-to-a-resource-file)
+for more details.
+
+The following sequence diagram shows how `workouts.txt` is rewritten when the user updates a workout:
+
+
+
+<span class="info box">The procedures for rewriting the entire file for plan and schedule data sets are largely similar 
+to the above sequence diagram.</span>
+
 
 The first step of loading local files to the app involves the checking of validity of data. That is, before loading plan
 data, `FileManager` will check whether the workouts in the plan exist in the `workouts.txt` file, and before loading
