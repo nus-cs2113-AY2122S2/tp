@@ -1261,8 +1261,15 @@ The following sequence diagram illustrates how the `search /all` command works i
 ---
 
 ### File Management
+#### About the Location of Directories and Files Created
 Ideally, the `werkItResources` and `werkItLogs` directories should be in the same directory as the `WerkIt.jar` file,
-but the creation of the directories and files depends on where the user starts WerkIt! from. Thus, in the
+but the creation of the directories and files depends on where the user starts WerkIt! from. Specifically, it depends
+on the working directory that the user is in when he/she runs WerkIt! In the user guide's 
+[quick start guide](UserGuide.md#quick-start-guide) as well as the section regarding 
+[information about the app's local storage](UserGuide.md#werkits-local-storage-information), the user has been told to
+create a new directory to put the WerkIt! JAR file in and to set his/her current working directory before starting the
+application. This is to ensure that the resource directories and files are created in the same location as the WerkIt!
+JAR file to ensure cleanliness on the user's local filesystem.
 
 #### Design Considerations For Inconsistent Data Between Resource Files
 
