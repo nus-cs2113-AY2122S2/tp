@@ -445,7 +445,7 @@ public class ActivityEditCommand extends Command {
             validateCostListAndInvolvedList();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
             if (totalCost <= 0) {
-                throw new InvalidDataException(Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE);
+                throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_TOTALCOST_BECAME_ZERO);
             }
             Person payerAsPerson = session.getPersonByName(payer);
             addAllActivityCost(involvedListPersonArray, payerAsPerson, DUMMY_ACTIVITYID);

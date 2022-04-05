@@ -389,6 +389,8 @@ public abstract class Message {
             "The cost cannot be negative.";
     public static final String ERROR_ACTIVITYEDIT_COSTLIST_AND_COSTOVERALL_SUPPLIED =
             "Either a cost list or overall cost may be supplied, but not both.";
+    public static final String ERROR_ACTIVITYEDIT_TOTALCOST_BECAME_ZERO =
+            "Editing this activity will cause the total cost to become zero. Please specify a cost or costlist for this activity.";
 
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =
