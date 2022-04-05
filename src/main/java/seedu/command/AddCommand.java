@@ -14,10 +14,10 @@ public class AddCommand extends ModificationCommand {
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_DESCRIPTION = ": Adds a Equipment to the equipmentInventory. "
             + System.lineSeparator()
-            + "Parameters: n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE"
+            + "Parameters: n/`ITEM NAME` s/`SERIAL NUMBER` t/`TYPE` c/`COST` pf/`PURCHASED FROM` pd/`PURCHASED DATE`"
             + System.lineSeparator()
             + "Example: "
-            + "add n/SpeakerB s/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23";
+            + "add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23`";
     public static final String DUPLICATE_ITEM_ERROR = "There is already an item with this serial number: %1$s";
     public static final String ATTRIBUTE_NOT_SET_ERROR = "Unable to add. "
             + "One or more than one of the attributes of Equipment is not specified.";

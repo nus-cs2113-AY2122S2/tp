@@ -12,10 +12,11 @@ public class UpdateCommand extends ModificationCommand {
             + System.lineSeparator()
             + "Parameters in [square brackets] are optional."
             + System.lineSeparator()
-            + "Parameters: s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]"
+            + "Parameters: s/`SERIAL NUMBER` [n/`ITEM NAME`] [t/`TYPE`] [c/`COST`] [pf/`PURCHASED FROM`] "
+            + "[pd/`PURCHASED DATE`]"
             + System.lineSeparator()
             + "Example: "
-            + "update s/SM57-1 n/SpeakerC c/2510 pd/2022-08-21";
+            + "update s/`SM57-1` n/`SpeakerC` c/`2510` pd/`2022-08-21`";
 
 
     /**
