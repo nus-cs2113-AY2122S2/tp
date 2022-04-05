@@ -1371,8 +1371,8 @@ The following sequence diagram shows the procedure of how data in `workouts.txt`
 <span class="info box">:memo: To simplify the sequence diagram, some method calls have been omitted as they are
 irrelevant to the loading of `workouts.txt` or they do not add significant value to the diagram.</span>
 
-<span class="info box">:memo: Due to the limitations of PlantUML and that I want to show the construction activation
-bar of `WerkIt`, I have to show the `Main` object. Apologies for the inconvenience caused.</span>
+<span class="info box">:memo: Due to the limitations of PlantUML and in order to show the construction activation
+bar of `WerkIt`, the `Main` object needs to be shown in the sequence diagram. Apologies for the inconvenience caused.</span>
 
 <span class="info box">:memo: The procedures for reading and loading the data for exericse, plan, and schedule data sets are 
 largely similar to the above sequence diagram.</span>
