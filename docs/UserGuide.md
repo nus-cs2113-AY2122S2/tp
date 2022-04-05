@@ -288,6 +288,10 @@ ________________________________________________________________________________
 See you again!
 ```
 
+## Current Limitation of app
+- Meeting cannot span across multiple days/past midnight. If that is the case, please create 2 separate meetings.
+e.g. if I want to have a meeting from 11pm - 3am, create one for today 11pm - 2359 and another from 0000 - 0300 
+for the next day. We will fix this in the next version.
 
 ## Command summary
 
