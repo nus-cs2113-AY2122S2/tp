@@ -14,9 +14,9 @@ public class StringConstants {
     /**
      * For start and exit of program.
      */
-    public static final String HELLO_MESSAGE = "Hello, welcome to Mod Happy!";
-    public static final String GOOD_BYE_MESSAGE = "See you later!";
-    public static final String INIT_FAILED_MESSAGE = "Failed to start Mod Happy...";
+    public static final String MESSAGE_HELLO = "Hello, welcome to Mod Happy!";
+    public static final String MESSAGE_GOODBYE = "See you later!";
+    public static final String MESSAGE_INIT_FAILED = "Failed to start Mod Happy...";
 
     /**
      * For loading of data.

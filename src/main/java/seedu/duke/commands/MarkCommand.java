@@ -48,7 +48,7 @@ public class MarkCommand extends Command {
             }
         }
         TaskList taskList = targetModule.getTaskList();
-        if (taskIndex < 0 || taskIndex >= taskList.size()) {
+        if (taskIndex < 0 || taskIndex >= taskList.getSize()) {
             throw new NoSuchTaskException();
         }
         Task target = taskList.getTask(taskIndex);

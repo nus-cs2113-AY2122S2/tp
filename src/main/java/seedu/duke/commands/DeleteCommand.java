@@ -74,7 +74,7 @@ public class DeleteCommand extends Command {
         if (Objects.isNull(targetModule)) {
             throw new NoSuchModuleException();
         }
-        if (targetModule.getTaskList().size() > 0) {
+        if (targetModule.getTaskList().getSize() > 0) {
             Boolean hasDeleteConfirmation = getUserConfirmation(targetModule);
             if (!hasDeleteConfirmation) {
                 result = DELETE_ABORT;

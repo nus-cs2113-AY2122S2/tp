@@ -30,15 +30,10 @@ public class AddCommand extends Command {
      */
     public AddCommand(AddObjectType type, String taskName, String taskDescription, String estimatedWorkingTime,
                       String taskModule) throws ModHappyException {
-        try {
-            assert type == AddObjectType.TASK;
-            typeToAdd = type;
-            newTask = new Task(taskName, taskDescription, estimatedWorkingTime);
-            targetModuleName = taskModule;
-        } catch (ModHappyException e) {
-            throw e;
-        }
-
+        assert type == AddObjectType.TASK;
+        typeToAdd = type;
+        newTask = new Task(taskName, taskDescription, estimatedWorkingTime);
+        targetModuleName = taskModule;
     }
 
     /**

@@ -10,7 +10,7 @@ public class ResetCommand extends Command {
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         moduleList.reset();
         assert (moduleList.getModuleList().size() == 0);
-        assert (moduleList.getGeneralTasks().getTaskList().size() == 0);
+        assert (moduleList.getGeneralTasks().getTaskList().getSize() == 0);
         return new CommandResult(StringConstants.RESET_MESSAGE);
     }
 }
