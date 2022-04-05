@@ -891,7 +891,7 @@ a `PlanCommand` object that contains the user's input.
 `details`. Thus, `PlanList#listPlanDetails(userArgument, ui)` will be called to display all the workouts in the plan
 which user specified.
 
-<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls,
+<span class="box info">:memo: To improve the diagram's readability, logging-related, input-checking method calls,
 and exception throws in `PlanList#listPlanDetails()` have been omitted.</span>
 
 **(Before Step 3)** Methods from the `String` and `Integer` classes are called to parse the
@@ -902,8 +902,7 @@ Plan index number must be a positive integer and smaller than the total number o
 in order to pass the check. Otherwise, an `InvalidPlanException` will be thrown and
 the entire process is aborted.
 
-Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability of the
-sequence diagram.
+Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability.
 
 **(Steps 3 to 4)** With the plan index number, a `Plan` object which user want to view details 
 will be fetched by calling method `PlanList#getPlanFromIndexNum()`.
@@ -912,8 +911,8 @@ will be fetched by calling method `PlanList#getPlanFromIndexNum()`.
 in the previous step.
 
 **(Step 7 to 9)** The `PlanList#listPlanDetails()` method will then loop through the workout list which we get in the 
-previous step and show the names of the workout with number of repetitions to the user. The following is an example of what 
-will be displayed to the user when the `plan /details` command is entered:
+previous step and show the name of the workouts with number of repetitions to the user. 
+The following is an example of what will be displayed to the user when the `plan /details` command is entered:
 
 ```
 ----------------------------------------------------------------------
