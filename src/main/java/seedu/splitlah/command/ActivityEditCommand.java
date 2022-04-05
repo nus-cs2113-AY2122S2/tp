@@ -387,7 +387,7 @@ public class ActivityEditCommand extends Command {
         }
     }
 
-    private void updateCostListFromUserInput() throws InvalidDataException {
+    private void updateCostListFromUserInput() {
         int listLength = involvedListPersonArray.size();
         costList = distributeCostEvenly(listLength);
     }
