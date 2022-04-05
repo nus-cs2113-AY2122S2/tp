@@ -1176,7 +1176,7 @@ When you launch WerkIt! in subsequent sessions, please ensure that you run it fr
 that you did when starting WerkIt! for the first time.
 
 <span class="box warning">:warning: **Important:** Please **do not** directly modify these files on your own as it will lead
-to instabilities in the application.</span>
+to instabilities in the application and possible loss of your data.</span>
 
 Do make regular backups of the `werkItResources` directory. In the event of data loss, please replace the
 `werkItResources` directory with your most recent backup copy. In the worst case scenario (i.e. if you don't have a 
