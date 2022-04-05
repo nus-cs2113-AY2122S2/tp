@@ -19,17 +19,18 @@ public class ContactParser {
 
     private static final String CONTACTS_PARSER_INVALID_FIELD_MESSAGE =
             "Invalid contact field(s)!";
-    public static final String CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE =
+    private static final String CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE =
             "Invalid contact fieldString: %s";
 
     private static final String CONTACTS_DELIMITERS = "[nfetd]/";
-    public static final char NAME_DELIMITER = 'n';
-    public static final char FACULTY_DELIMITER = 'f';
-    public static final char EMAIL_DELIMITER = 'e';
-    public static final char DESCRIPTION_DELIMITER = 'd';
+    private static final char NAME_DELIMITER = 'n';
+    private static final char FACULTY_DELIMITER = 'f';
+    private static final char EMAIL_DELIMITER = 'e';
+    private static final char DESCRIPTION_DELIMITER = 'd';
 
     private static Logger logger = Logger.getLogger("");
     private static final int MAX_NUMBER_OF_FIELDS = 5;
+    private static final int LENGTH_FIELD_AFTER_SPLIT = 2;
 
     /**
      * Returns index of item in the list using number given by user.
@@ -55,14 +56,16 @@ public class ContactParser {
         ArrayList<String> fieldStrings = new ArrayList<>(MAX_NUMBER_OF_FIELDS);
 
         while (matcher.find()) {
-            fieldStrings.add(matcher.group().trim());
+            String currString = matcher.group().trim();
+            fieldStrings.add(currString);
         }
         return fieldStrings;
     }
 
     private static void isValidFieldString(String fieldString) throws InvalidContactField {
-        if (fieldString.split(CONTACTS_DELIMITERS).length != 2) {
-            logger.log(Level.FINE, String.format(CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE, fieldString));
+        if (fieldString.split(CONTACTS_DELIMITERS).length != LENGTH_FIELD_AFTER_SPLIT) {
+            String loggerMessage = String.format(CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE, fieldString);
+            logger.log(Level.FINE, loggerMessage);
             throw new InvalidContactField(CONTACTS_PARSER_INVALID_FIELD_MESSAGE);
         }
     }
@@ -82,19 +85,24 @@ public class ContactParser {
 
             switch (fieldType) {
             case NAME_DELIMITER:
-                contact.getName().setField(fieldContent);
+                Name name = contact.getName();
+                name.setField(fieldContent);
                 break;
             case FACULTY_DELIMITER:
-                contact.getFaculty().setField(fieldContent);
+                Faculty faculty = contact.getFaculty();
+                faculty.setField(fieldContent);
                 break;
             case EMAIL_DELIMITER:
-                contact.getEmail().setField(fieldContent);
+                Email email = contact.getEmail();
+                email.setField(fieldContent);
                 break;
             case DESCRIPTION_DELIMITER:
-                contact.getDescription().setField(fieldContent);
+                Description description = contact.getDescription();
+                description.setField(fieldContent);
                 break;
             default:
-                logger.log(Level.FINE, String.format(CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE, fieldString));
+                String loggerMessage = String.format(CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE, fieldString);
+                logger.log(Level.FINE, loggerMessage);
                 throw new InvalidContactField(CONTACTS_PARSER_INVALID_FIELD_MESSAGE);
             }
         }
@@ -108,8 +116,12 @@ public class ContactParser {
      * @throws InvalidContactField If user input contains invalid fields.
      */
     static Contact parseContact(String userInput) throws InvalidContactField {
-        Contact contact = new Contact(new Name(""), new Faculty(""),
-                new Email(""), new Description(""));
+        Name name = new Name("");
+        Faculty faculty = new Faculty("");
+        Email email = new Email("");
+        Description description = new Description("");
+        Contact contact = new Contact(name, faculty, email, description);
+
         ArrayList<String> fieldStrings = getFieldStrings(userInput);
         setContactFields(contact, fieldStrings);
         return contact;
