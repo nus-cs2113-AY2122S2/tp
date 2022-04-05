@@ -1,11 +1,12 @@
-package tp;
+package tp.Command;
 
-import tp.person.Doctor;
+import tp.*;
+import tp.person.Patient;
 
-public class SearchDoctorCommand extends Command {
+public class SearchPatientCommand extends Command {
     protected String id;
 
-    public SearchDoctorCommand(String id) {
+    public SearchPatientCommand(String id) {
         this.id = id;
     }
 
@@ -14,10 +15,10 @@ public class SearchDoctorCommand extends Command {
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                           PatientStorage patientStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Doctor curr = doctorList.searchDoctor(id);
+        Patient curr = patientList.searchPatient(id);
         if (curr == null) {
-            return String.format("There is no doctor id is " + id + "\n");
+            return String.format("There is no patient id is " + id + "\n");
         }
-        return String.format("The doctor found is here" + curr + "\n");
+        return String.format("The patient found is here" + curr + "\n");
     }
 }

@@ -1,4 +1,6 @@
-package tp;
+package tp.Command;
+
+import tp.*;
 
 public abstract class Command {
     public static String boundary = "____________________________________________________________\n";
@@ -9,6 +11,6 @@ public abstract class Command {
 
     public abstract String execute(DoctorList doctorList, PatientList patientList,
                                    AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                                    PatientStorage patientStorage,
-                                    AppointmentStorage appointmentStorage) throws IHospitalException;
+                                   PatientStorage patientStorage,
+                                   AppointmentStorage appointmentStorage) throws IHospitalException;
 }

@@ -1,4 +1,6 @@
-package tp;
+package tp.Command;
+
+import tp.*;
 
 public class DeleteAppointmentCommand extends Command {
     int index;

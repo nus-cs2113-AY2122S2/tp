@@ -1,5 +1,7 @@
 package tp;
 
+import tp.Command.*;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -176,7 +178,7 @@ public class Parser {
         } else if (fullCommand.contains("search")) {
             return parseSearchCommand(fullCommand);
         } else {
-            throw new IHospitalException("Invalid command given");
+            throw new IHospitalException("Invalid command given\n");
         }
     }
 }

@@ -1,5 +1,6 @@
-package tp;
+package tp.Command;
 
+import tp.*;
 import tp.person.Patient;
 
 public class AddPatientCommand extends Command {
@@ -25,9 +26,9 @@ public class AddPatientCommand extends Command {
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList,
-                        AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                        PatientStorage patientStorage,
-                        AppointmentStorage appointmentStorage) throws IHospitalException {
+                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
+                          PatientStorage patientStorage,
+                          AppointmentStorage appointmentStorage) throws IHospitalException {
         Patient patient = new Patient(id, name, phoneNumber, email,symptom,description);
         patientList.addPatient(patient);
         return String.format(boundary + "Noted. I've added this patient:" + "\n"

@@ -1,6 +1,7 @@
 package tp.person;
 
-import  org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +11,6 @@ class DoctorTest {
     @Test
     void testToString() {
         assertEquals("* DOCTOR " + "[1234] || Name: john " +
-                             "|| Contact No.: 12341234 || Email: 3600@gmail.com", doctor.toString());
+                "|| Contact No.: 12341234 || Email: 3600@gmail.com", doctor.toString());
     }
 }

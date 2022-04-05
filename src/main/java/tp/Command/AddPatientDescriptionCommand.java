@@ -1,4 +1,6 @@
-package tp;
+package tp.Command;
+
+import tp.*;
 
 public class AddPatientDescriptionCommand extends Command {
     protected static String description;
@@ -13,9 +15,9 @@ public class AddPatientDescriptionCommand extends Command {
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList,
-                        AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                        PatientStorage patientStorage,
-                        AppointmentStorage appointmentStorage) throws IHospitalException {
+                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
+                          PatientStorage patientStorage,
+                          AppointmentStorage appointmentStorage) throws IHospitalException {
         PatientList.addPatientDescription(description,index);
         return String.format("Already add description for patient " + index + " \n");
     }

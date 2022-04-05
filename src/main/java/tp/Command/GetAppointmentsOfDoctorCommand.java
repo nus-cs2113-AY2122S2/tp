@@ -1,4 +1,6 @@
-package tp;
+package tp.Command;
+
+import tp.*;
 
 public class GetAppointmentsOfDoctorCommand extends Command {
     private final String id;
@@ -9,9 +11,9 @@ public class GetAppointmentsOfDoctorCommand extends Command {
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList,
-                        AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                        PatientStorage patientStorage,
-                        AppointmentStorage appointmentStorage) throws IHospitalException {
+                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
+                          PatientStorage patientStorage,
+                          AppointmentStorage appointmentStorage) throws IHospitalException {
         return appointmentList.getAppointmentListOfDoctorById(id).toString();
     }
 }

@@ -31,6 +31,6 @@ class PersonTest {
     @Test
     void testToString() {
         assertEquals("[1234] || Name: john " +
-                             "|| Contact No.: 12341234 || Email: 3600@gmail.com", person.toString());
+                "|| Contact No.: 12341234 || Email: 3600@gmail.com", person.toString());
     }
 }
