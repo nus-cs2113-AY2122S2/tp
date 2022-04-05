@@ -123,7 +123,42 @@ and their interactions.
 ### Component Overview
 
 #### Storage component
-[Writeup]
+
+This component of WerkIt! is mainly responsible for reading and writing application data from and to files
+stored on the user's filesystem. This is to allow the user to retain the data he/she has entered into WerkIt! and be
+able to continue using the data when he/she starts WerkIt! the next time.
+
+The following class diagram shows how the storage component's classes and how it interacts with some other
+components and classes in WerkIt!:
+
+![FileManager Class Diagram](uml/classDiagrams/images/StorageComponent.png)
+
+The storage component consists of two classes: `FileManager` and `LogHandler`.
+
+| Class Name | Description |
+| --- | --- |
+| `FileManager` | - Loads saved data (if any) from the user's local filesystem.<br/>- Writes new/updated data into the user's local filesystem. |
+| `LogHandler` | - Utility class to direct log messages to a file that is stored on the user's local filesystem. |
+
+`WerkIt` is responsible for creating an instance of `FileManager` when the application is started. This same instance
+will be used by commands in the command component that requires writing data to the user's filesystem when the user (for
+example, when the user creates a new workout). Specifically, classes in the command component that requires this are 
+`WorkoutCommand`, `PlanCommand`, and `ScheduleCommand`.
+
+`LogHandler` was deliberately grouped in the storage component as this class merely provides functionality to allow
+whichever class in WerkIt! to write the logs to a designated log file.
+
+On the user's local filesystem, the organisation of the application files are as follows:
+```
+werkItResources/        // Primary resource directory for WerkIt!
+    ├── exercises.txt   // Text file containing a list of exercises
+    ├── workouts.txt    // Text file containing a list of user-created workouts
+    ├── plans.txt       // Text file containing a list of user-created plans
+    └── schedule.txt    // Text file containing a 7-day schedule of user-assigned plans for each day
+werkItLogs/
+    └── logs.log        // Log file containing logs created by the application.
+```
+
 #### UI component
 [Writeup]
 #### Parser component
@@ -236,12 +271,6 @@ the `<keywords>` is not specified, an `InvalidCommandException` will be thrown.
 
 ---
 
-### File Manager Component
-
-![FileManager Class Diagram](uml/classDiagrams/images/FileManager.png)
-
-
----
 ## Implementation
 ### Overview
 * [Getting User Input Continuously](#getting-user-input-continuously)
@@ -1232,6 +1261,8 @@ The following sequence diagram illustrates how the `search /all` command works i
 ---
 
 ### File Management
+Ideally, the `werkItResources` and `werkItLogs` directories should be in the same directory as the `WerkIt.jar` file,
+but the creation of the directories and files depends on where the user starts WerkIt! from. Thus, in the
 
 #### Design Considerations For Inconsistent Data Between Resource Files
 
