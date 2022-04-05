@@ -9,16 +9,42 @@ skinparam noteFontSize 13
 
 hide circle
 
-class UI
+class UI {
+    + printDirectoryNotFoundMessage() : void
+    + printDirectoryCreatedMessage() : void
+    + printExerciseFileNotFoundMessage() : void
+    + printExerciseFileCreatedMessage() : void
+}
+
 class WerkIt
+
 package "Command Component" <<rectangle>> {
     class WorkoutCommand
     class PlanCommand
     class ScheduleCommand
 }
 package "Storage Component" <<rectangle>> {
-    class FileManager
-    class LogHandler
+    class FileManager {
+        - directoryPath: Path
+        - exerciseFilePath: Path
+
+        + createDataDirectory() : void
+        + createExerciseFile() : void
+        + loadExercisesFromFile(ExerciseList) : void
+        + addFileWorkoutToList(WorkoutList, String[]) : void
+        + writeNewWorkoutToFile(Workout) : void
+        + rewriteAllWorkoutsToFile(WorkoutList) : void
+        + convertWorkoutToFileDataFormat(String) : String
+    }
+
+    class LogHandler {
+        - {static} logFileDirectory: Path
+        - {static} logFilePath: Path
+
+        + {static} startLogHandler() : void
+        + {static} linkToFileLogger(Logger) : void
+        + {static} checkAndCreateLogsDirectory(): void
+    }
 }
 
 
@@ -36,41 +62,6 @@ WorkoutCommand --> FileManager
 PlanCommand --> FileManager
 ScheduleCommand --> FileManager
 
-
-'FileManager Class
-FileManager : - directoryPath: Path
-FileManager : - exerciseFilePath: Path
-
-FileManager : + createDataDirectory() : void
-
-FileManager : + createExerciseFile() : void
-FileManager : + loadExercisesFromFile(ExerciseList) : void
-
-FileManager : + addFileWorkoutToList(WorkoutList, String[]) : void
-
-FileManager : + writeNewWorkoutToFile(Workout) : void
-FileManager : + rewriteAllWorkoutsToFile(WorkoutList) : void
-
-FileManager : + convertWorkoutToFileDataFormat(String) : String
-
 note right of FileManager #LightSalmon : Not all fields and methods are listed as\nmany are similar methods called to\noperate on the other applicaiton files.
-
-
-'LogHandler Class
-LogHandler : - logFileDirectory: Path
-LogHandler : - logFilePath: Path
-
-LogHandler : + startLogHandler() : void
-LogHandler : + linkToFileLogger(Logger) : void
-LogHandler : + checkAndCreateLogsDirectory(): void
-
-
-'UI Class
-UI : + printDirectoryNotFoundMessage() : void
-UI : + printDirectoryCreatedMessage() : void
-
-UI : + printExerciseFileNotFoundMessage() : void
-UI : + printExerciseFileCreatedMessage() : void
-
 
 @enduml
