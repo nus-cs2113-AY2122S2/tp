@@ -89,30 +89,32 @@ public class GeneralFunctions {
     public static ArrayList<Expenditure> findItemsInList(String searchTerm, String fieldToSearch,
                                                          ExpenditureList itemList) throws MindMyMoneyException {
         ArrayList<Expenditure> foundItems = new ArrayList<>();
-        ExpenditureFields fieldToSearchAsEnumType = ExpenditureFields.valueOf(fieldToSearch);
-        switch (fieldToSearchAsEnumType) {
-        case EXPENDITURE:
-            findMatchingExpenditure(searchTerm, foundItems, itemList);
-            break;
-        case CATEGORY:
-            findMatchingCategory(searchTerm, foundItems, itemList);
-            break;
-        case DESCRIPTION:
-            findMatchingDescription(searchTerm, foundItems, itemList);
-            break;
-        case AMOUNT:
-            findMatchingAmount(searchTerm, foundItems, itemList);
-            break;
-        case TIME:
-            findMatchingTime(searchTerm, foundItems, itemList);
-            break;
-        default:
-            throw new MindMyMoneyException("Input a valid search field!");
-        }
-        if (itemList.size() == 0) {
-            throw new MindMyMoneyException("The task \"" + searchTerm + "\" was not found in the list, sorry!");
-        } else {
-            return foundItems;
+        try {
+            ExpenditureFields fieldToSearchAsEnumType = ExpenditureFields.valueOf(fieldToSearch);
+            switch (fieldToSearchAsEnumType) {
+            case EXPENDITURE:
+                findMatchingExpenditure(searchTerm, foundItems, itemList);
+                break;
+            case CATEGORY:
+                findMatchingCategory(searchTerm, foundItems, itemList);
+                break;
+            case DESCRIPTION:
+                findMatchingDescription(searchTerm, foundItems, itemList);
+                break;
+            case AMOUNT:
+                findMatchingAmount(searchTerm, foundItems, itemList);
+                break;
+            case TIME:
+                findMatchingTime(searchTerm, foundItems, itemList);
+                break;
+            }
+            if (foundItems.size() == 0) {
+                throw new MindMyMoneyException("The task \"" + searchTerm + "\" was not found in the list, sorry!");
+            } else {
+                return foundItems;
+            }
+        } catch (IllegalArgumentException e) {
+            throw new MindMyMoneyException("Input a valid search term!");
         }
     }
 
