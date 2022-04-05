@@ -82,6 +82,7 @@ public class ClearCommand extends Command {
             clearTimetable(timetable);
             masterTimetable.removeByIndex(0);
         }
+        masterTimetable.deleteAllMeetings();
         return printAllClearConfirmation();
     }
 

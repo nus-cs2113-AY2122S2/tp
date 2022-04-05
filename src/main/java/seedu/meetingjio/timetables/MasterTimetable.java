@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
+
 import static seedu.meetingjio.common.Messages.NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
 
 public class MasterTimetable {
@@ -177,11 +179,14 @@ public class MasterTimetable {
      * @return boolean True false if there meeting already exists
      */
     public boolean isExistingMeeting(Meeting meeting) {
-        for (Event event : meetingList) {
-            if (meeting.equals(event)) {
-                return true;
+        for (Timetable timetable : timetables) {
+            for (int i = 0; i < timetable.size(); i++) {
+                if (timetable.get(i).equals(meeting)) {
+                    return true;
+                }
             }
         }
+
         return false;
     }
 
@@ -289,7 +294,7 @@ public class MasterTimetable {
         for (int i = 0; i < meetingList.size(); i++) {
             meetingList.remove(0);
         }
-
+        assert meetingList.size() == 0 : ERROR_NON_EMPTY_LIST;
         return NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
     }
 
