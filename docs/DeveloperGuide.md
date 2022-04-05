@@ -4,20 +4,14 @@
 
 * [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 * [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html)
+* [NUSMods](https://nusmods.com/)
 * [Our individual projects](AboutUs.md)
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
-
-
-
-
 ## Product scope
 ### Target user profile
+* NUS undergraduate students
 * has a need to manage their academic schedule 
 * has a need to manage their expenses as a student
 * has a need to manage a significant number of contacts
@@ -26,12 +20,14 @@
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-
-{Describe the target user profile}
-
 ### Value proposition
 
-It solves the basic needs of a student such as managing academic schedule, expenses and contacts faster than a typical mouse driven or GUI driven apps.
+This product helps NUS students who are struggling to keep track of their classes, 
+expenses and networking centrally. It is a standalone product that works solely 
+on data provided by the user. It also allows for parsing `.ics` files downloaded from NUSMods.
+
+It solves the basic needs of a student such as managing academic schedule, expenses and contacts 
+faster than a typical mouse driven or GUI driven apps.
 
 ## User Stories
 
@@ -55,6 +51,8 @@ It solves the basic needs of a student such as managing academic schedule, expen
 |v2.0|user|edit a contact|change details for my existing contacts|
 |v2.0|user|parse modules from NUSMods|easily add all my modules with a single command|
 |v2.0|user|save and load entries from a session|reload my entries from the previous session|
+
+## Design & implementation
 
 ### Main Menu
 This section describes the implementation of core main menu features.
