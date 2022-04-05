@@ -24,6 +24,9 @@ import arcs.commands.UndefinedCommand;
 
 public class Parser {
 
+    private static final String MENU_ITEM_TYPE_COMMAND_WORD = "type";
+    private static final String MENU_ITEM_NAME_COMMAND_WORD = "name";
+    private static final String MENU_ITEM_PRICE_COMMAND_WORD = "price";
 
     public Command parseCommand(String userInput) {
 
@@ -220,15 +223,15 @@ public class Parser {
             String field = argSplit[0].trim();
             String value = argSplit[1].trim();
             switch (field) {
-            case "name":
+            case MENU_ITEM_NAME_COMMAND_WORD:
                 menuItemName = value;
                 //replace underscore separator with space
                 menuItemName = menuItemName.replace("_", " ");
                 break;
-            case "type":
+            case MENU_ITEM_TYPE_COMMAND_WORD:
                 menuItemType = value;
                 break;
-            case "price":
+            case MENU_ITEM_PRICE_COMMAND_WORD:
                 menuItemPrice = value;
                 break;
             default:
