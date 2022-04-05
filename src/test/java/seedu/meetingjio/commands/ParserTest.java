@@ -5,14 +5,7 @@ import seedu.meetingjio.parser.Parser;
 import seedu.meetingjio.timetables.MasterTimetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_EVENT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_MEETING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEETING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.*;
 
 public class ParserTest {
 
@@ -169,6 +162,22 @@ public class ParserTest {
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
         assertEquals(ERROR_INVALID_MODE, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareAddMeetingExtraParameters() {
+        String inputString = "add_meeting l/ t/funny d/Thursday st/1230 et/1330 m/ONLINE";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        ClearCommand clearCommand = new ClearCommand("all");
+        clearCommand.execute(masterTimetable);
+        AddUserCommand addUser = new AddUserCommand("john");
+        addUser.execute(masterTimetable);
+        AddLessonCommand addCommand = new AddLessonCommand(
+                "John", "CS2113", "Monday",
+                1200, 1300, "online"
+        );
+        assertEquals(ERROR_EXTRA_PARAMETERS_ADD_MEETING, command.execute(masterTimetable));
     }
 
     @Test
