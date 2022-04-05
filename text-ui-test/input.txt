@@ -52,15 +52,15 @@ list
 menu
 goto m/Study_Manager
 list
-add m/CS2113 c/lec d/Thursday t/2pm-4pm
-add m/EE4204 d/Wednesday t/1pm-2pm
-add c/tut d/Wednesday t/1pm-2pm
-add m/EE4204 c/tut t/1pm-2pm
+add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm
+add m/EE4204 d/Wednesday t/1:00pm-2:00pm
+add c/tut d/Wednesday t/1:00pm-2:00pm
+add m/EE4204 c/tut t/1:00pm-2:00pm
 add m/EE4204 c/tut d/Wednesday
 add
-add m/EE4204 c/tut d/Wednesday t/1pm-2pm
+add m/EE4204 c/tut d/Wednesday t/1:00pm-2:00pm
 list
-find 2pm
+find 2:00pm
 edit 1
 c/tut
 c/
@@ -76,5 +76,18 @@ find cs
 list
 rm 1
 list
+add m/---+= c/lec d/Thursday t/2:00pm-4:00pm
+add m/CS2113 c/lec d/yoyoyo t/2:00pm-4:00pm
+add m/CS2113 c/lec d/12345 t/2:00pm-4:00pm
+add m/CS2113 c/lec d/Thursday t/tangotime
+add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm
+edit 1
+d/yoyoyo
+d/12345
+m/]epf\
+c/Tutorial
+t/2pm-4pm
+t/03:00pm - 05:00pm
+done
 menu
 exit

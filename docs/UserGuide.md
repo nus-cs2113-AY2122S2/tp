@@ -258,23 +258,23 @@ Adds a new module to the list of modules.
 
 Format: `add m/<MODULE_CODE> c/<CATEGORY> d/<DAY> t/<TIME>`
 
-| Parameter            | Description                          |
-|----------------------|--------------------------------------|
-| ```<MODULE_CODE> ``` | Code for the module                  |
-| ```<CATEGORY> ```    | Category of the module               |
-| ```<DAY> ```         | Class day of the week for the module |
-| ```<TIME> ```        | Class timing for the module          |
+| Parameter            | Description                          | Constraints |
+|----------------------|--------------------------------------| --------------------------------------|
+| ```<MODULE_CODE> ``` | Code for the module                  | Accepted inputs are alphanumeric parameters |
+| ```<CATEGORY> ```    | Category of the module| Accepts shorthand notations `lec`,`tut`,`lab` and `exam` |
+| ```<DAY> ```         | Class day of the week for the module<br><br>OR<br><br>Date of a one-off event like exam or a non recurring class| Accepted inputs are valid days of the week <br> E.g. `thursday` or `Thursday`<br><br>OR<br><br>Alternatively a valid date of type DD-MM-YYYY can be specified<br>E.g. `12-12-2022`   |
+| ```<TIME> ```        | Class timeslot for the module |  Accepted inputs are timeslots with a start and end time of the form `HH:MMam/pm - HH:MMam/pm`  <br>E.g. `2:00pm - 4:00pm` |
 
 Example of usage:
 
-    add m/CS2113 c/lec d/Friday t/4pm-6pm
-    add m/CG2271 c/tut d/Thursday t/3pm-4pm
-    add m/CS2113 c/exam d/10-04-2021 t/10am-12pm
+    add m/CS2113 c/lec d/Friday t/4:00pm-6:00pm
+    add m/CG2271 c/tut d/Thursday t/3:00pm-4:00pm
+    add m/CS2113 c/exam d/10-04-2021 t/10:00am-12:00pm
 
 Expected outcome:
 
     Okay, I have added a new module to the schedule
-    [Module] CS2113 Lecture: Friday, 4pm-6pm
+    [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm
 
 A new module has been added to the schedule with the specified module code, category, day and time.
 
@@ -290,8 +290,8 @@ Example of usage:
 Expected outcome:
 
     Here are the modules in your schedule:
-    1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
-    2: [Module] CS3244 Tutorial: Monday, 1pm-2pm
+    1: [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm
+    2: [Module] CS3244 Tutorial: Monday, 1:00pm-2:00pm
 
 #### Deleting a module: `rm`
 Deletes the specified module from the schedule.
@@ -310,10 +310,11 @@ Example of usage:
 Expected outcome:
 
     Noted I have removed this module from your schedule:
-    [Module] CS2113 Lecture: Thursday, 2pm-4pm
+    [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm
 
 #### Editing a module: `edit`
-Edits an existing module in the schedule.
+Edits an existing module in the schedule. The user can specify a module parameter to edit individually. 
+Once all edits are finished the user enters done to exit the edit mode.
 
 Format: `edit <index>`
 
@@ -343,14 +344,16 @@ Example of usage:
 
 Expected outcome:
 
+    edit 1
     Here is the module that you have chosen to edit:
-    [Module] CS2113 Lecture: Thursday, 2pm-4pm
+    [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm
     Choose the part that you would like to edit:
     m/CS3244
-    [Module] CS3244 Lecture: Thursday, 2pm-4pm
+    Here are the changes so far. You can edit more module parameters or you can enter 'done' to stop editing!
+    [Module] CS3244 Lecture: Friday, 4:00pm-6:00pm
     done
-    Your Module was successfully edited! Here are the changes
-    [Module] CS3244 Lecture: Thursday, 2pm-4pm
+    Your Module was successfully edited! Here are the changes:
+    [Module] CS3244 Lecture: Friday, 4:00pm-6:00pm
     Exiting the edit mode
 
 The existing module has been edited to change the module code from CS2113 to CS3244.
@@ -374,18 +377,18 @@ Expected outcome:
 
     list
     Here are the modules in your schedule:
-    1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
-    2: [Module] EE4204 Lecture: Wednesday, 2pm-4pm
+    1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+    2: [Module] EE4204 Lecture: Wednesday, 2:00pm-4:00pm
     find CS
     Here are the matching modules in your list:
-    1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
+    1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
     find Wednesday
     Here are the matching modules in your list:
-    1: [Module] EE4204 Lecture: Wednesday, 2pm-4pm
+    1: [Module] EE4204 Lecture: Wednesday, 2:00pm-4:00pm
     find 2pm
     Here are the matching modules in your list:
-    1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
-    2: [Module] EE4204 Lecture: Wednesday, 2pm-4pm
+    1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+    2: [Module] EE4204 Lecture: Wednesday, 2:00pm-4:00pm
 
 #### Reading from .ics file: `read ics`
 Creates a list of your modules by reading from .ics calendar file that can be downloaded from nusmods.com.
@@ -411,23 +414,23 @@ Expected outcome:
     nusmods_calendar.ics
     
     I have found these modules from your ics file:
-    
+
     1: [Module] EG2401A Lecture: Wednesday, 6:00 pm-8:00 pm
     2: [Module] EG2401A Tutorial: Friday, 9:00 am-10:00 am
     3: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
     4: [Module] CS2113 Tutorial: Friday, 10:00 am-11:00 am
-    5: [Module] CS2113 Exam: Thursday 05-05-2022, 1:00 pm-3:00 pm
+    5: [Module] CS2113 Exam: 05-05-2022, 1:00 pm-3:00 pm
     6: [Module] CG2271 Tutorial: Wednesday, 4:00 pm-5:00 pm
     7: [Module] CG2271 Lecture: Wednesday, 10:00 am-12:00 pm
     8: [Module] CG2271 Laboratory: Friday, 2:00 pm-4:00 pm
-    9: [Module] CG2271 Exam: Thursday 28-04-2022, 9:00 am-11:00 am
+    9: [Module] CG2271 Exam: 28-04-2022, 9:00 am-11:00 am
     10: [Module] CS3244 Lecture: Thursday, 12:00 pm-2:00 pm
     11: [Module] CS3244 Lecture: Monday, 2:00 pm-3:00 pm
     12: [Module] CS3244 Tutorial: Monday, 5:00 pm-6:00 pm
-    13: [Module] CS3244 Exam: Saturday 23-04-2022, 9:00 am-11:00 am
+    13: [Module] CS3244 Exam: 23-04-2022, 9:00 am-11:00 am
     14: [Module] EE4204 Lecture: Monday, 10:00 am-12:00 pm
     15: [Module] EE4204 Tutorial: Wednesday, 1:00 pm-2:00 pm
-    16: [Module] EE4204 Exam: Friday 29-04-2022, 9:00 am-11:00 am
+    16: [Module] EE4204 Exam: 29-04-2022, 9:00 am-11:00 am
     
     I have added these to your existing schedule!
     Exiting read ics mode
