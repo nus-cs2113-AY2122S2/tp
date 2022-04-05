@@ -1,5 +1,24 @@
 package tp;
 
+import tp.command.AddDoctorCommand;
+import tp.command.AddPatientCommand;
+import tp.command.Command;
+import tp.command.GetAppointmentsOfDoctorCommand;
+import tp.command.DeleteDoctorCommand;
+import tp.command.SearchAppointmentCommand;
+import tp.command.AddPatientDescriptionCommand;
+import tp.command.ListAppointmentListCommand;
+import tp.command.ListPatientListCommand;
+import tp.command.HelpCommand;
+import tp.command.SearchPatientCommand;
+import tp.command.AddAppointmentCommand;
+import tp.command.SearchDoctorCommand;
+import tp.command.DeletePatientCommand;
+import tp.command.DeleteAppointmentCommand;
+import tp.command.EditDoctorCommand;
+import tp.command.ListDoctorListCommand;
+import tp.command.SortAppointmentByTimeCommand;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -160,6 +179,43 @@ public class Parser {
         return null;
     }
 
+    public Command parseEditDoctorCommand(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /d") + 8,
+                dummy.indexOf("edit /d") + 9));
+        if (fullCommand.contains("/ph")) {
+            String newInformation = dummy.substring(dummy.indexOf("/ph") + 4);
+            return new EditDoctorCommand(index, "ph", newInformation);
+        } else if (fullCommand.contains("/e")) {
+            String newInformation = dummy.substring(dummy.indexOf("/e") + 3);
+            System.out.println("qwq" + newInformation);
+            return new EditDoctorCommand(index, "e", newInformation);
+        } else if (fullCommand.contains("/n")) {
+            String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
+            return new EditDoctorCommand(index, "n", newInformation);
+        } else {
+            throw new IHospitalException("Wrong format detected\n");
+        }
+    }
+
+    public Command parseEditPatientCommand(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /p") + 8,
+                dummy.indexOf("edit /p") + 9));
+        if (fullCommand.contains("/ph")) {
+            String newInformation = dummy.substring(dummy.indexOf("/ph") + 4);
+            return new EditDoctorCommand(index, "ph", newInformation);
+        } else if (fullCommand.contains("/e")) {
+            String newInformation = dummy.substring(dummy.indexOf("/e") + 3);
+            return new EditDoctorCommand(index, "e", newInformation);
+        } else if (fullCommand.contains("/n")) {
+            String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
+            return new EditDoctorCommand(index, "n", newInformation);
+        } else {
+            throw new IHospitalException("Wrong format detected\n");
+        }
+    }
+
     public Command parse(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("add")) {
             return parseAddCommand(fullCommand);
@@ -175,8 +231,12 @@ public class Parser {
             return new HelpCommand();
         } else if (fullCommand.contains("search")) {
             return parseSearchCommand(fullCommand);
+        } else if (fullCommand.contains("edit /d")) {
+            return parseEditDoctorCommand(fullCommand);
+        } else if (fullCommand.contains("edit /p")) {
+            return parseEditPatientCommand(fullCommand);
         } else {
-            throw new IHospitalException("Invalid command given");
+            throw new IHospitalException("Invalid command given\n");
         }
     }
 }

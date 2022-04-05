@@ -90,6 +90,19 @@ Example of usage:
 
 `search appointment 2007-12-03T10:15:30`
 
+### Editing a person's information
+Editing an existing person's information
+
+Format: `edit /d or /p INDEX /ph or /e or /n`
+
+Example of usage:
+
+`edit /d 1 /ph 12341234`
+
+`edit /p 1 /n Mike`
+
+`edit /d 1 /e 123489@gmail.com`
+
 ### Deleting a person or an appointment: `delete`
 Removes a person or an appointment from the system.
 
