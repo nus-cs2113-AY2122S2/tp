@@ -34,3 +34,8 @@ span.box {
 div.page-break {
   page-break-after: always;
 }
+
+body {
+  display: grid;
+  grid-template-columns: auto auto;
+}

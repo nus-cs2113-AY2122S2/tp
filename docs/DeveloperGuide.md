@@ -1,5 +1,5 @@
 # WerkIt! Developer Guide
-
+<a class="top-button" href="#">Back to top</a>
 ## Table of Contents
 * [About this Guide](#about-this-guide)
 * [Acknowledgements](#acknowledgements)
