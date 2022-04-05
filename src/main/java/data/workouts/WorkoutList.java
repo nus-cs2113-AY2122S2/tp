@@ -3,6 +3,7 @@ package data.workouts;
 import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
+import data.plans.InvalidPlanException;
 import storage.LogHandler;
 
 import java.util.ArrayList;
@@ -73,6 +74,26 @@ public class WorkoutList {
         String keyValue = getWorkoutsDisplayList().get(elementNum);
         Workout workoutObject = workoutsHashMapList.get(keyValue);
         return workoutObject;
+    }
+
+    /**
+     * Retrieves the index number of a workout based on its position in the workoutsDisplayList
+     * ArrayList.
+     *
+     * @param workoutName The name of the workout whose index number this method has to find.
+     * @return An integer representing the index number the workout is listed in the workoutDisplayList
+     *         ArrayList.
+     * @throws InvalidPlanException If the given workout name was not found in workoutsDisplayList.
+     */
+    public int getIndexNumFromWorkoutName(String workoutName) throws InvalidWorkoutException {
+        for (int i = 0; i < getWorkoutsDisplayList().size(); i += 1) {
+            if (getWorkoutsDisplayList().get(i).equalsIgnoreCase(workoutName)) {
+                return (i + 1);
+            }
+        }
+
+        String className = this.getClass().getSimpleName();
+        throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_WORKOUT_ERROR_MSG);
     }
 
     /**
