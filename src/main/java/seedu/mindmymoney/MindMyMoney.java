@@ -13,7 +13,7 @@ public class MindMyMoney {
     private final Ui ui;
     private User user;
     private final Storage storage;
-    private static final String STORAGE_FILENAME = "list.txt";
+    private static final String STORAGE_FILENAME = "data.txt";
 
     public MindMyMoney() {
         Storage savedStorage;
