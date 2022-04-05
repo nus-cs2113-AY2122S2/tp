@@ -1,5 +1,4 @@
 # WerkIt! Developer Guide
-<a class="top-button" href="#">Back to top</a>
 ## Table of Contents
 * [About this Guide](#about-this-guide)
 * [Acknowledgements](#acknowledgements)
@@ -99,6 +98,8 @@ output in your terminal:
 5. Type `exit` to exit the program.
 
 You are now ready to begin developing!
+
+<a class="button" href="#table-of-contents">Back to top</a> 
 
 ## Design 
 ### Architecture Overview
