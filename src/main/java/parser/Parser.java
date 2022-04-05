@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static common.Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX;
+import static common.Messages.MESSAGE_INVALID_NEGATIVE_LIMIT;
 
 import static constants.ParserConstants.PARAMETER_DELIMITER_DATE;
 import static constants.ParserConstants.PARAMETER_DELIMITER_ITEM_NAME;
@@ -253,7 +254,8 @@ public class Parser {
     private Command setLimitCommand(String args) {
         try {
             double targetLimit = parseArgsAsDisplayedIndex(args);
-            return new LimitCommand(targetLimit);
+            if (targetLimit<0) return new IncorrectCommand(MESSAGE_INVALID_NEGATIVE_LIMIT);
+            else return new LimitCommand(targetLimit);
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
