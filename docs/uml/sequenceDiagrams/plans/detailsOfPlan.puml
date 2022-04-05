@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber
+
+title Sequence Diagram of `plan /details` Command
+hide footbox
+
+participant "werkIt:WerkIt" AS WerkIt
+participant "newCommand\n:PlanCommand" AS newCommand
+participant "planList\n:PlanList" AS PlanList
+participant "plan\n:Plan" AS Plan
+participant "workout\n:Workout" AS Workout
+
+activate WerkIt
+ref over WerkIt
+Obtain and parse user input.
+end
+
+WerkIt -> newCommand : execute()
+activate newCommand
+newCommand -> PlanList : listPlanDetails(userArguments, ui)
+activate PlanList
+ref over PlanList
+Check which plan user would
+like to view and whether user
+input is valid.
+end
+
+PlanList -> PlanList : getPlanFromIndexNum(indexOfPlan)
+activate PlanList
+return planToViewDetails : Plan
+
+PlanList -> Plan : getWorkoutsInPlanList()
+activate Plan
+return workoutsInPlanList : ArrayList<Workout>
+
+loop index < numberOfWorkoutsInPlan
+PlanList -> Plan : get(index)
+activate Plan
+Plan -> Workout : toString()
+activate Workout
+return workoutDetails:String
+deactivate Plan
+end
+
+newCommand <-- PlanList
+deactivate PlanList
+
+WerkIt <-- newCommand
+deactivate newCommand
+
+destroy newCommand
+@enduml

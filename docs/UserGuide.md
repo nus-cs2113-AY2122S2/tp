@@ -475,7 +475,7 @@ To create a new plan, enter the following command:
 ----------------------------------------------------------------------
 Alright, the following plan has been created:
 
-	Grow My Muscles
+	grow my muscles
 
 ----------------------------------------------------------------------
 ```
@@ -499,9 +499,9 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. Plan A
-2. Plan B
-3. Grow My Muscles
+1. plan a
+2. plan b
+3. grow my muscles
 ----------------------------------------------------------------------
 ```
 In the current plans list above, there are 3 plans available.
@@ -527,27 +527,27 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. plan A
-2. plan B
-3. Grow My Muscles
+1. plan a
+2. plan b
+3. grow my muscles
 ----------------------------------------------------------------------
 ```
 To view details of plan with index number 3 from the list, enter the following command:<br/>
-*Plan number 3 is created by the command in [Create A Plan](#create-a-plan-plan-new).*
+*Plan with index number 3 is created by the command in [Create A Plan](#create-a-plan-plan-new).*
 ```
 > plan /details 3
 ```
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
-Here are the 4 workouts in [Grow My Muscles].
+Here are the 4 workouts in [grow my muscles].
 1. push up (10 reps)
 2. sit up (10 reps)
 3. pull up (10 reps)
 4. push up (10 reps)
 ----------------------------------------------------------------------
 ```
-All workouts in the [Grow My Muscles] plan will be displayed.
+All workouts in the [grow my muscles] plan will be displayed.
 
 ---
 ### Delete a Plan: `plan /delete`
@@ -569,9 +569,9 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. plan A
-2. plan B
-3. Grow My Muscles
+1. plan a
+2. plan b
+3. grow my muscles
 ----------------------------------------------------------------------
 ```
 Plan is scheduled as follows:
@@ -582,7 +582,7 @@ Plan is scheduled as follows:
 ----------------------------------------------------------------------
      Day       |            Plan Name
 ----------------------------------------------------------------------
-      Monday   |        Grow My Muscles               
+      Monday   |        grow my muscles               
      Tuesday   |            rest day                      
    Wednesday   |            rest day                      
     Thursday   |            rest day                      
@@ -602,7 +602,7 @@ To remove plan with index number 3 from the list, enter the following command:
 
 ![Expected Outcome For Delete Plan](images/expectedMessageForDeletePlan.png)<br/>
 
-Now, plan with index number 3 (Grow My Muscles) is removed from the plan list. If Grow My Muscles
+Now, plan with index number 3 (grow my muscles) is removed from the plan list. If plan with index number 3
 is not scheduled for any day, content in the red box will not be shown.
 
 Now, running the `plan /list` command will show the plan list as follows:
