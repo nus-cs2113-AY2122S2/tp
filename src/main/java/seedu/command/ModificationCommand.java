@@ -25,7 +25,6 @@ public class ModificationCommand extends Command {
 
     public ModificationCommand(ArrayList<String> commandStrings) {
         this.commandStrings = commandStrings;
-        prepareModification();
     }
 
     public CommandResult execute() {
