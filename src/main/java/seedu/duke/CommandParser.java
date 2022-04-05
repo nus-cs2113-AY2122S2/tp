@@ -63,7 +63,7 @@ public class CommandParser {
     private static final String CHECK_ROOM_BY_LEVEL = "check level ";
     private static final String CHECK_BY_CATEGORY = "check category ";
     private static final String ASSIGN_HOUSEKEEPER = "assign ";
-    private static final String VIEW_HOUSEKEEPER_COMMAND = "view recorded housekeeper";
+    private static final String VIEW_HOUSEKEEPER_COMMAND = "view recorded housekeepers";
     private static final String VIEW_AVAILABLE_HOUSEKEEPER_DAY = "get available on ";
     private static final String RESET_AVAILABILITY = "is a new week";
     private static final String DELETE_PROFILE = "delete housekeeper ";

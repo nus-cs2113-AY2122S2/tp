@@ -8,7 +8,7 @@ import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.command.Command;
 
 public class ViewHousekeeperListCommand extends Command {
-    private static final String VIEW_HOUSEKEEPER_COMMAND = "view recorded housekeeper";
+    private static final String VIEW_HOUSEKEEPER_COMMAND = "view recorded housekeepers";
 
     public ViewHousekeeperListCommand(String input) throws HotelLiteManagerException {
         if (!input.equals(VIEW_HOUSEKEEPER_COMMAND)) {
