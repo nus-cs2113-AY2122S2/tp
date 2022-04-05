@@ -57,6 +57,14 @@ public class SessionEditCommand extends Command {
         }
         return newPersonList;
     }
+    private String getNewSessionName(String oldSessionName, Profile profile) throws InvalidDataException {
+        boolean isSessionExists = profile.hasSessionName(sessionName);
+        boolean hasSameSessionName = oldSessionName.equalsIgnoreCase(sessionName);
+        if (!hasSameSessionName && isSessionExists) {
+            throw new InvalidDataException(Message.ERROR_PROFILE_DUPLICATE_SESSION);
+        }
+        return sessionName;
+    }
     /**
      * Runs the command to edit an existing Session object from the list of sessions managed by a Manager Object.
      *
