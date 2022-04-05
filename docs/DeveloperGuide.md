@@ -99,7 +99,7 @@ output in your terminal:
 
 You are now ready to begin developing!
 
-<a class="button" href="#table-of-contents">Back to top</a> 
+<a class="button" href="#">Back to Top</a> 
 
 ## Design 
 ### Architecture Overview
@@ -160,15 +160,25 @@ werkItLogs/
     └── logs.log        // Log file containing logs created by the application.
 ```
 
+<a class="button" href="#design">Back to 'Design'</a>
+
 #### UI component
 [Writeup]
+
+<a class="button" href="#design">Back to 'Design'</a>
+
 #### Parser component
 [Writeup]
+
+<a class="button" href="#design">Back to 'Design'</a>
+
 #### Command component
 [Writeup]<br>
 Each command is a feature in the WerkIt! application.
 Thus, the next section will explain the design of each
 features in detail.
+
+<a class="button" href="#design">Back to 'Design'</a>
 
 ### Feature Overview
 
@@ -201,6 +211,8 @@ Currently, the exercise related feature is limited to `exercise /list` only. The
 be ignored for now, and the only supported `commandAction` is `/list`. However, more exciting exercise-related features 
 are expected to be delivered in future iterations, and we currently have set the framework to implement these features 
 in the future. Thus, we have this standalone section specifically kept for exercise-related features.
+
+<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
 
 ---
 
@@ -237,15 +249,21 @@ workout actions are executed. These methods are used to modify the application's
 as the `/delete` and `/update` actions are cascading actions 
 (i.e. deleting a workout will delete plan(s) containing that deleted workout).
 
+<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
+
 ---
 
 ### Plan-related features
 _to be updated_
 
+<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
+
 ---
 
 ### Schedule-related features
 _to be updated_
+
+<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
 
 ---
 
@@ -269,6 +287,8 @@ command using `Parser#createSearchCommand(String userInput)` method. This method
 `<commandAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to
 the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If
 the `<keywords>` is not specified, an `InvalidCommandException` will be thrown.
+
+<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
 
 ---
 
@@ -352,6 +372,8 @@ for subsequent prompts.
   >
   ```
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ---
 
 ### Parsing User Input and Getting the Right Command
@@ -419,6 +441,8 @@ in his/her inputs to avoid any potential instabilities when processing his/her i
 If these characters are inputted by the user, as mentioned in Step 3 above, an `InvalidCommandException` will be thrown 
 and the parsing is aborted.
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ---
 
 ### Exercise
@@ -436,6 +460,8 @@ type of action to be executed, in this case, list. It will then list the exercis
 The following sequence diagram illustrates how the `exercise /list` command works in greater detail:
 
 ![List Exercise Sequence Diagram](uml/sequenceDiagrams/exercises/images/viewExercise.png)
+
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 ---
 
@@ -523,6 +549,8 @@ Alright, the following workout has been created:
 
 This completes the process of adding a new workout to WerkIt!
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ##### Design Considerations for Creating a New Workout
 ###### HashMaps - Motivation
 Back in Version 1.0 of WerkIt!, workouts were stored in an ArrayList of `Workout` objects. In that version, plans
@@ -571,6 +599,8 @@ objects. Now, to manipulate the `Workout` object (e.g. `workout /update`),
 Note that the user will not have any direct interactions with the HashMap implementation and it should be transparent
 to him/her.
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ---
 
 #### List Workout
@@ -599,6 +629,8 @@ number of repetitions of that exercise set by the user.
 
 (Steps 7 to 9) Upon obtaining the `workout` object, `Workout#toString()` method is called to formulate and print 
 the workouts which is being displayed on the terminal to the user. 
+
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 ---
 
@@ -682,6 +714,8 @@ way the workout data are formatted and stored in the `workouts.txt` file.
 <br><br>
 Hence, to simplify the implementation, the team decided to simply
 rewrite all workouts to the resource file whenever a workout is deleted.
+
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 ---
 
@@ -775,6 +809,8 @@ the `FileManager#rewriteAllPlansToFile()` is also called to rewrite
 the `plans.txt` file according to the newly modified plan list.
 <br><br>
 This completes the process of updating an existing workout in WerkIt!
+
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 ---
 
