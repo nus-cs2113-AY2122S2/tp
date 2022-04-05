@@ -65,6 +65,20 @@ public class SessionEditCommand extends Command {
         }
         return sessionName;
     }
+    private boolean hasSessionEdited(Session session) {
+        if (sessionName != null && !sessionName.equalsIgnoreCase(session.getSessionName())) {
+            return true;
+        }
+        if (sessionDate != null && !sessionDate.equals(session.getDateCreated())) {
+            return true;
+        }
+        if (personNames != null) {
+            PersonList newPersonList = new PersonList(personNames);
+            return !session.getPersonList().isSuperset(newPersonList.getPersonList());
+        }
+        return false;
+    }
+
     /**
      * Runs the command to edit an existing Session object from the list of sessions managed by a Manager Object.
      *
