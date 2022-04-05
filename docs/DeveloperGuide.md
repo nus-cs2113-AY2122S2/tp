@@ -901,6 +901,8 @@ object's data into `plans.txt`, which is stored on the user's local filesystem.
 <br><br>
 This completes the process of creating and adding a new plan to WerkIt!.
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ---
 
 #### List Plans
@@ -948,6 +950,8 @@ and the `PlanCommand` object returns to the `WerkIt` object.
 <br><br>
 This completes the process of displaying all plans in WerkIt!.
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ---
 ### Schedule
 User are able to create a 7-day workout plan schedule using the WerkIt application. For each day, user are only allowed
@@ -985,6 +989,8 @@ This method will further evaluate the `<userAction>` and call the constructor of
 passing relevant parameters related to schedule to the constructor. If the `<userAction>` is null or incorrect, 
 an `InvalidCommandException` will be thrown.
 If the `<parameters>` of certain commands are not specified or met, an `InvalidScheduleException` will be thrown.
+
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 ---
 #### Update Schedule
@@ -1072,6 +1078,8 @@ user were to execute the `schedule /update` command again to update the plan to 
 will update the content in the Day object stored in `dayList[0]`. It will not recreate a `Day` object for Monday
 to store the new plan.
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ---
 
 #### View Schedule
@@ -1132,6 +1140,8 @@ will be display on the console to the user. An expected outcome of the `schedule
 
 By default, if no plan is being scheduled for any of the day, the day is to be considered as a rest day for the user.
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ---
 #### Clear Schedule For A Day
 A summary of the general procedure of clearing a plan scheduled for a particular day of the schedule in WerkIt! is as follows:
@@ -1189,6 +1199,8 @@ in the dayList into `schedule.txt` which is stored on the user's local filesyste
 
 This completes the process of clearing a plan on a particular day of the schedule on WerkIt!
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ---
 #### Clear Schedule For The Week
 A summary of the general procedure of clearing all the plans stored in the schedule in WerkIt! is as follows:
@@ -1235,6 +1247,8 @@ Since all Day objects are deleted, the writing of data into `schedule.txt` would
 resetting the text file. 
 
 This completes the process of clearing of all plans stored in the schedule on WerkIt!
+
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 ---
 
@@ -1303,6 +1317,8 @@ The following sequence diagram illustrates how the `search /all` command works i
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+
 ---
 
 ### File Management
@@ -1337,6 +1353,7 @@ is `1`, it means that plan is meant for Monday, `2` for Tuesday, and so on...</s
 <span class="warning box">In the [user guide](UserGuide.md#werkits-local-storage-information), users have been warned
 not to directly modify the file data in order to avoid application instability and data loss.</span>
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 #### Loading Resource File Data Into WerkIt!
 When WerkIt! is launched for the first time, WerkIt! will create the required resource directories and files. Alternatively,
@@ -1392,6 +1409,7 @@ This will finish the loading of the data in `workouts.txt` into WerkIt!
 are also processed and loaded in `WerkIt#loadRequiredDirectoryAndFiles()`. Once all the other resource files have been
 loaded, the constructor for `WerkIt` will finish.</span>
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 #### Writing a New Line of Data to the Resource File
 Writing a new line of data to the respective resource files is done when the user creates a new workout or plan.
@@ -1431,6 +1449,8 @@ written to `workouts.txt` with the help of the `FileWriter` class that is built 
 represents one workout.
 
 This finishes the writing of the new workout to the resource file and control is returned to `WorkoutCommand#execute()`.
+
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 #### Rewriting the Resource Entire File With the Most Recent Set of Data
 In contrast to the previous section which covers the scenarios when only the new data is written as a new line to the 
@@ -1480,6 +1500,8 @@ Steps 4 to 7 (as well as the reference frame) is repeated until all keys in `wor
 through.
 
 This finishes the process of rewriting the entire `workouts.txt` and control is returned to `WorkoutCommand#execute()`.
+
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 #### About the `LogHandler` Class
 Logging in WerkIt! is mainly handled by the `Logger` class that is built into Java. The `LogHandler` class is created
@@ -1541,7 +1563,6 @@ all local data. However, in order to provide the best possible user experience b
 such situations, we decided to implement the validity checking such that only the affected data are removed while 
 keeping all the non-affected data safely.
 
-
 ##### `LogHandler` Managing Its Own Log File Instead of `FileManager` Class
 The development team decided to let the `LogHandler` class manage its own log file instead of the `FileManager` class,
 which is already managing the other resource files and directories. Specifically, managing its own log file also includes
@@ -1549,6 +1570,7 @@ checking if the log directory exists. This is because logging is done in the `Ma
 starts, `WerkIt` has yet to be instantiated, which is responsible for creating the `FileManager` object. Thus, to avoid 
 the risk of further complicating the solution, it was decided to just let `LogHandler`manage its own log file.
 
+<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
 
 ## Product Scope
 ### Target User Profile
@@ -1568,6 +1590,8 @@ where there are many other day-to-day things being kept too.
 | Version | As a ... | I want to ...    | So that I can ...                                                      |
 |---------|----------|------------------|------------------------------------------------------------------------|
 | v1.0    | user     | create a workout | keep track of how many repetitions I would like to do with an exercise |
+
+<a class="button" href="#">Back to Top</a>
 
 ## Non-Functional Requirements
 
@@ -1607,3 +1631,5 @@ of their schedule. For instance, the user's daily schedule can look like this:
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+<a class="button" href="#">Back to Top</a>
