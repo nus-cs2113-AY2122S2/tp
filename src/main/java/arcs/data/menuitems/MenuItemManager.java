@@ -56,5 +56,28 @@ public class MenuItemManager {
         }
         return result;
     }
+    //check validity of a reserved item, return true if valid, if not false
+    public boolean menuItemChecker(MenuItem reservedItem) {
+        for (MenuItem menuItem: menuItems) {
+            if (reservedItem.getMenuItemName().equalsIgnoreCase(menuItem.getMenuItemName())) {
+                if (reservedItem.getMenuItemType().equalsIgnoreCase(menuItem.getMenuItemType())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public MenuItem getMenuItemByNameAndType(String menuItemType, String menuItemName) {
+        for (MenuItem menuItem: menuItems) {
+            if (menuItem.getMenuItemName().equals(menuItemName)) {
+                if (menuItem.getMenuItemType().equalsIgnoreCase(menuItemType)) {
+                    return menuItem;
+                }
+            }
+        }
+        return null;
+    }
+
 
 }
