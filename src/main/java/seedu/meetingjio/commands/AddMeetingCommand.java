@@ -5,9 +5,11 @@ package seedu.meetingjio.commands;
 import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.timetables.MasterTimetable;
 
-import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_MEETING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_MEETING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_USER_TO_ADD_MEETING;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.parser.Parser.logger;
 
 public class AddMeetingCommand extends Command {
     public static final String COMMAND_WORD = "add_meeting";
@@ -40,15 +42,16 @@ public class AddMeetingCommand extends Command {
         }
         try {
             Meeting meeting = new Meeting(title, day, startTime, endTime, mode);
-            if (masterTimetable.checkIfMeetingExistsAlready(meeting)) {
+            if (masterTimetable.isExistingMeeting(meeting)) {
                 return ERROR_DUPLICATE_MEETING;
-            } else if (masterTimetable.checkIfClash(meeting)) {
+            } else if (masterTimetable.IsMeetingClash(meeting)) {
                 return ERROR_OVERLAPPING_MEETING;
             } else {
                 return masterTimetable.addMeetingToEveryoneTimetable(meeting);
             }
         } catch (Exception e) {
-            return "ERROR DETECTED";
+            logger.log(Level.INFO, "Unhandled Exception : " +  e.getMessage());
+            return ERROR_EXCEPTION_NOT_HANDLED;
         }
 
     }
