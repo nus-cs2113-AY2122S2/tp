@@ -430,6 +430,9 @@ public abstract class Message {
     public static final String LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
                     + "the group list.";
+    public static final String LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_CREATEGROUP =
+            "A group object failed to be added into the list of groups because there are invalid names in"
+                    + "the person list.";
 
     // Group Delete Command
     public static final String ASSERT_GROUPDELETE_GROUP_ID_NOT_INITIALIZED =

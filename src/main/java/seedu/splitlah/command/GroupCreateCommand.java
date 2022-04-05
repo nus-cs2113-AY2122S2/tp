@@ -61,7 +61,14 @@ public class GroupCreateCommand extends Command {
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST);
             return;
         }
+
         PersonList personList = new PersonList(personNames);
+        if (personNames.length != personList.getSize()) {
+            ui.printlnMessage(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_CREATEGROUP);
+            return;
+        }
+
         int newGroupId = profile.getNewGroupId();
         Group newGroup = new Group(groupName, newGroupId, personList);
         profile.addGroup(newGroup);
