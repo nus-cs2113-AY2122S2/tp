@@ -8,7 +8,6 @@ import seedu.duke.commands.EditCommand;
 import seedu.duke.exceptions.EmptyParamException;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.util.StringConstants;
 
 /**
