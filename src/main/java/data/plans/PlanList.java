@@ -424,6 +424,19 @@ public class PlanList {
      * @return True if workout is found in the plan, else false if the workout is not in the plan.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
      */
+    public boolean checkWorkoutInPlan(String workoutToCheck, String updatedWorkoutToCheck, Plan plan)
+            throws ArrayIndexOutOfBoundsException {
+        ArrayList<Workout> workoutsInPlanList = plan.getWorkoutsInPlanList();
+        String workoutInPlanDetails;
+        for (Workout workoutsInPlan : workoutsInPlanList) {
+            workoutInPlanDetails = workoutsInPlan.toString();
+            if (workoutToCheck.equals(workoutInPlanDetails) || updatedWorkoutToCheck.equals(workoutInPlanDetails)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean checkWorkoutInPlan(String workoutToCheck, Plan plan) throws ArrayIndexOutOfBoundsException {
         ArrayList<Workout> workoutsInPlanList = plan.getWorkoutsInPlanList();
         String workoutInPlanDetails;
@@ -444,8 +457,23 @@ public class PlanList {
      *         plan that includes the deleted workout.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
      */
-    public ArrayList<Integer> findPlanContainsTargetWorkout(String workoutToCheck) throws
+    public ArrayList<Integer> findPlanContainsTargetWorkout(String workoutToCheck, String updatedWorkoutToCheck) throws
              ArrayIndexOutOfBoundsException {
+        Plan planObject;
+        boolean isWorkoutInPlan = false;
+        ArrayList<Integer> planIndexWithTargetWorkout = new ArrayList<Integer>();
+        for (int i = 1; i <= getPlansDisplayList().size(); i++) {
+            planObject = getPlanFromIndexNum(i);
+            isWorkoutInPlan = checkWorkoutInPlan(workoutToCheck, updatedWorkoutToCheck, planObject);
+            if (isWorkoutInPlan) {
+                planIndexWithTargetWorkout.add(i);
+            }
+        }
+        return planIndexWithTargetWorkout;
+    }
+
+    public ArrayList<Integer> findPlanContainsTargetWorkout(String workoutToCheck) throws
+            ArrayIndexOutOfBoundsException {
         Plan planObject;
         boolean isWorkoutInPlan = false;
         ArrayList<Integer> planIndexWithTargetWorkout = new ArrayList<Integer>();
@@ -489,9 +517,11 @@ public class PlanList {
         }
     }
 
-    public void updatePlanContainsUpdatedWorkout(String workoutToCheck, Workout updatedWorkout) throws
+    public void updatePlanContainsUpdatedWorkout(String workoutToCheck,
+                                                 String updatedWorkoutToCheck, Workout updatedWorkout) throws
             InvalidPlanException {
-        ArrayList<Integer> planWithUpdatedWorkout = findPlanContainsTargetWorkout(workoutToCheck);
+        ArrayList<Integer> planWithUpdatedWorkout
+                = findPlanContainsTargetWorkout(workoutToCheck, updatedWorkoutToCheck);
 
         if (planWithUpdatedWorkout.size() <= 0) {
             return;
