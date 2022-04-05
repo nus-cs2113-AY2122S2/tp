@@ -97,7 +97,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns an integer represented by the provided input String object.
+     * Extracts an integer from an input string.
      * 
      * @param input     A String object that contains numeric characters only and represents an integer.
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
@@ -117,7 +117,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns an integer representing a unique identifier number, represented by the provided input String object.
+     * Extracts a unique identifier from an input string.
      * 
      * @param input     A String object that contains numeric characters only and represents a unique identifier number.
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
@@ -138,7 +138,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double represented by the provided input String object.
+     * Extracts a real number from an input string.
      * 
      * @param input A String object that represents a numeric value.
      * @return A double represented by the input String object.
@@ -222,7 +222,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double representing a cost value, represented by the provided input String object.
+     * Extracts a cost value from an input string.
      *
      * @param input     A String object that contains numeric characters or a single decimal point character,
      *                  representing a cost value.
@@ -259,7 +259,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double representing a percentage value, represented by the provided input String object.
+     * Extracts a percentage value from an input string.
      *
      * @param input     A String object that contains numeric characters or a single decimal point character,
      *                  representing a percentage value.
