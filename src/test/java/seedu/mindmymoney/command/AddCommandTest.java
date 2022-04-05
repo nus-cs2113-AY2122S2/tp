@@ -443,25 +443,6 @@ class AddCommandTest {
     }
 
     /**
-     * Tests for insertion of credit card with valid parameters.
-     */
-    @Test
-    void addCommand_validAddCreditCardInput_expectCreditCardListUpdate() throws MindMyMoneyException {
-        ExpenditureList expenditureTestList = new ExpenditureList();
-        CreditCardList creditCardTestList = new CreditCardList();
-        IncomeList incomeList = new IncomeList();
-        User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/cc /n DBS /cb 1.5 /cl 500";
-        new AddCommand(inputString, user).executeCommand();
-        ArrayList<CreditCard> testList = new ArrayList<>();
-        testList.add(new CreditCard("DBS", 1.5, 500));
-        String expectedOutput = testList.get(0).toString();
-        String actualOutput = user.getCreditCardListArray().get(0).toString();
-        assertEquals(expectedOutput, actualOutput);
-        testList.clear();
-    }
-
-    /**
      * Tests for exception thrown when an invalid Credit Card name is given.
      */
     @Test
