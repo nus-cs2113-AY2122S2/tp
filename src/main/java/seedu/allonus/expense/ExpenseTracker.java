@@ -2,11 +2,13 @@ package seedu.allonus.expense;
 
 
 
-import seedu.allonus.storage.StorageFile;
-
-import seedu.allonus.expense.exceptions.ExpenseAmountException;
+import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
 import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
+import seedu.allonus.expense.exceptions.ExpenseAmountException;
+import seedu.allonus.expense.exceptions.ExpenseSurroundSlashSpaceException;
 import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
+
+import seedu.allonus.storage.StorageFile;
 
 import seedu.allonus.ui.TextUi;
 import java.time.format.DateTimeParseException;
@@ -15,17 +17,18 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import static seedu.allonus.expense.ExpenseParser.reformatDate;
-import static seedu.allonus.expense.ExpenseParser.isAmountValid;
+import static seedu.allonus.expense.ExpenseParser.checkContainSlash;
 import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
 import static seedu.allonus.expense.ExpenseParser.parseFindExpense;
-import static seedu.allonus.expense.ExpenseParser.parseEditExpense;
 import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
+import static seedu.allonus.expense.ExpenseParser.parseEditExpense;
+import static seedu.allonus.expense.ExpenseParser.isAmountValid;
 
 /**
  * The core function of the expense tracker, which executes user commands based on keywords.
  */
 public class ExpenseTracker {
-    public static final String INCORRECT_NUMBER_OF_FIELDS = "Incorrect number of fields!";
+    public static final String INVALID_INPUT = "Invalid input!";
     public static final String NEW_REMARKS_VALUE_SET = "New remarks value set!";
     private static final String EXPENSE_WELCOME_MESSAGE = "Welcome to Expense Tracker";
     private static final ArrayList<Expense> expenseList = new ArrayList<>();
@@ -57,11 +60,12 @@ public class ExpenseTracker {
     public static final String LOG_LIST_INTENT = "User wants to list all expenses made";
     public static final String LOG_INVALID_COMMANDS = "User entered invalid commands";
     public static final String MSG_INVALID_COMMANDS = "Invalid command!";
+    public static final String MSG_INVALID_EDIT_FIELD = "Invalid field to edit! Valid fields are:\nDATE, AMOUNT, "
+            + "CATEGORY, REMARKS";
     public static final String LOG_RETURN_TO_MENU_INTENT = "User wants to return to the main menu";
     public static final String CHOSEN_EXPENSE_TO_EDIT = "Here is the expense record you have chosen to edit:\n";
     public static final String CHOSEN_FIELD_TO_EDIT = "Which field would you like to edit? "
-            +
-            "Enter [field] [newValue] or enter 'DONE' when you have finished editing:";
+            + "Enter [field] [newValue] or enter 'DONE' when you have finished editing:";
     public static final String EDITING_COMPLETE = "Editing complete!";
     public static final String NEWLY_EDITED_EXPENSE_RECORD = "Here is the newly edited expense record:\n";
     public static final String NEW_DATE_VALUE_SET = "New date value set!";
@@ -71,12 +75,28 @@ public class ExpenseTracker {
     public static final String NO_TASKS_FOUND = "No tasks found!";
     public static final String MSG_MATCHING_EXPENSES = "Here are the matching expense records:\n";
     public static final String MENU_STRING = "menu";
-    public static final String MSG_INCORRECT_DATE_FORMAT = "Date field is of incorrect format! Type in YYYY-MM-DD";
+    public static final String MSG_INCORRECT_DATE_FORMAT = "Date field is of incorrect format! Type in YYYY-MM-DD and"
+            + " make sure valid values of months are used!";
     public static final String LOG_INCORRECT_DATE_FIELD = "User entered invalid date format";
     public static final String LOG_INVALID_AMOUNT = "User tried entering invalid amount";
     public static final String MSG_NUMBERS_ONLY_AMOUNT = "Please enter only numbers for the Amount field!";
     public static final String LOG_NEGATIVE_AMOUNT = "User tried entering negative amount";
     private static final String LOG_FIELDS_BECAME_EMPTY = "User tampered with some fields, making them blank";
+    public static final String MSG_NO_EDITS_MADE = "No changes were made to expense record! "
+            + "Returning to Expense Tracker...";
+    public static final String SAME_NEW_DATE_VALUE = "New date value is the same as current date value!";
+    public static final String SAME_NEW_AMOUNT_VALUE = "New amount value is the same as current amount value!";
+    public static final String SAME_NEW_CATEGORY_VALUE = "New category value is the same as current category value!";
+    public static final String SAME_NEW_REMARKS_SET = "New remarks value is the same as current remarks value!";
+    public static final String MSG_NONEMPTY_KEYWORD = "Keyword cannot be empty!";
+    public static final int INDEX_OF_NEW_VALUE = 1;
+    public static final String EDIT_DONE = "done";
+    public static final String KEYWORD_LIST = "list";
+    public static final String KEYWORD_REMOVE = "rm";
+    public static final String KEYWORD_ADD = "add";
+    public static final String KEYWORD_EDIT = "edit";
+    public static final String KEYWORD_FIND = "find";
+    public static final String KEYWORD_BLANK = "";
 
     private static void expenseWelcome() {
         System.out.println(EXPENSE_WELCOME_MESSAGE);
@@ -104,7 +124,8 @@ public class ExpenseTracker {
         for (int i = ZERO; i < noOfItems; i++) {
             Expense curr = expenseList.get(i);
             assert curr != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
-            listAsString = listAsString.concat(String.format(" %d. %s\n", i + EXPENSE_INDEX, curr));
+            String expenseRecord = String.format(" %d. %s\n", i + EXPENSE_INDEX, curr);
+            listAsString = listAsString.concat(expenseRecord);
         }
         System.out.println(LIST_EXPENSE_OUTPUT + listAsString);
     }
@@ -156,18 +177,18 @@ public class ExpenseTracker {
      * Adds a record into the list of expenses.
      *
      * @param list list of expenses itself
-     * @param e    the expense object itself to be added
+     * @param expense    the expense object itself to be added
      */
-    private static void addExpense(ArrayList<Expense> list, Expense e, boolean fromCommandLine) {
+    private static void addExpense(ArrayList<Expense> list, Expense expense, boolean fromCommandLine) {
         if (fromCommandLine) {
             logger.log(Level.INFO, LOG_ADD_INTENT);
         } else {
             logger.log(Level.INFO, LOG_ADD_INTENT_FROM_FILE);
         }
-        assert e != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
-        list.add(e);
+        assert expense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
+        list.add(expense);
         if (fromCommandLine) {
-            System.out.println("Added " + e);
+            System.out.println("Added " + expense);
         }
         Expense.setNoOfItems(Expense.getNoOfItems() + EXPENSE_INDEX);
         isModified = true;
@@ -182,21 +203,30 @@ public class ExpenseTracker {
      */
     private static void editExpense(ArrayList<Expense> list, int index, TextUi ui) {
         Expense toBeEdited = list.get(index - 1);
+        boolean isEdited = false;
+        boolean isFieldEdited = false;
         System.out.println(CHOSEN_EXPENSE_TO_EDIT + toBeEdited);
         System.out.println(CHOSEN_FIELD_TO_EDIT);
         String fieldToEdit;
         boolean isFinishedEditing = false;
         while (!isFinishedEditing) {
+            if (isFieldEdited) {
+                isEdited = true;
+            }
             fieldToEdit = ui.getUserInput();
-            if (fieldToEdit.trim().equalsIgnoreCase("done")) {
+            if (fieldToEdit.trim().equalsIgnoreCase(EDIT_DONE)) {
                 isFinishedEditing = true;
-                System.out.println(EDITING_COMPLETE);
-                System.out.println(NEWLY_EDITED_EXPENSE_RECORD + toBeEdited);
+                if (isEdited) {
+                    System.out.println(EDITING_COMPLETE);
+                    System.out.println(NEWLY_EDITED_EXPENSE_RECORD + toBeEdited);
+                } else {
+                    System.out.println(MSG_NO_EDITS_MADE);
+                }
             } else {
                 try {
-                    editField(fieldToEdit, toBeEdited);
+                    isFieldEdited = editField(fieldToEdit, toBeEdited);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(INCORRECT_NUMBER_OF_FIELDS);
+                    System.out.println(INVALID_INPUT);
                 }
             }
         }
@@ -211,52 +241,134 @@ public class ExpenseTracker {
      * @param toBeEdited  the expense record object to be edited
      * @throws IndexOutOfBoundsException if new value is missing (without spaces)
      */
-    private static void editField(String fieldToEdit, Expense toBeEdited) throws IndexOutOfBoundsException {
-        String[] newFields = fieldToEdit.split(" ");
-        String field = newFields[0];
-        String newValue = newFields[1].trim();
+    private static boolean editField(String fieldToEdit, Expense toBeEdited) throws IndexOutOfBoundsException {
+        boolean isEdited = false;
+        String[] newFields = fieldToEdit.split(" ", 2);
+        String field = newFields[ZERO];
+        String newValue = newFields[INDEX_OF_NEW_VALUE].trim();
         if (newValue.length() == 0) {
             System.out.println(MSG_NEW_VALUE_CANNOT_BE_EMPTY);
-            return;
+            return isEdited;
         } else {
             switch (field) {
             case ("date"):
-                try {
-                    String newDate = reformatDate(newFields[1]);
-                    toBeEdited.setDate(newDate);
-                    System.out.println(NEW_DATE_VALUE_SET);
-                    break;
-                } catch (DateTimeParseException e) {
-                    System.out.println(MSG_INCORRECT_DATE_FORMAT);
-                    break;
-                }
+                isEdited = editDateField(toBeEdited, isEdited, newValue);
+                break;
             case ("amount"):
-                try {
-                    isAmountValid(newFields[1]);
-                    toBeEdited.setAmount(newFields[1]);
-                    System.out.println(NEW_AMOUNT_VALUE_SET);
-                    break;
-                } catch (ExpenseAmountException e) {
-                    System.out.println(e.getMessage());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println(MSG_NUMBERS_ONLY_AMOUNT);
-                    break;
-                }
+                isEdited = editAmountField(toBeEdited, isEdited, newValue);
+                break;
             case ("category"):
-                toBeEdited.setCategory(newFields[1]);
-                System.out.println(NEW_CATEGORY_VALUE_SET);
+                isEdited = editCategoryField(toBeEdited, isEdited, newValue);
                 break;
             case ("remarks"):
-                toBeEdited.setRemark(newFields[1]);
-                System.out.println(NEW_REMARKS_VALUE_SET);
+                isEdited = editRemarksField(toBeEdited, isEdited, newValue);
                 break;
             case ("done"):
-                return;
+                return isEdited;
             default:
-                System.out.println(MSG_INVALID_COMMANDS);
-                return;
+                System.out.println(MSG_INVALID_EDIT_FIELD);
+                return isEdited;
             }
+        }
+        return isEdited;
+    }
+
+    /**
+     * Modifies the Edit field of a specific expense record.
+     * @param toBeEdited the expense record to be edited
+     * @param isEdited boolean variable to check if new value is the same as original value
+     * @param newValue the content to replace original value in expense record
+     * @return True if record has been edited, false otherwise
+     */
+    private static boolean editRemarksField(Expense toBeEdited, boolean isEdited, String newValue) {
+        try {
+            checkContainSlash(newValue);
+        } catch (ExpenseSurroundSlashSpaceException e) {
+            System.out.println(e.getMessage());
+            return isEdited;
+        }
+        if (toBeEdited.getRemark().equals(newValue)) {
+            System.out.println(SAME_NEW_REMARKS_SET);
+        } else {
+            toBeEdited.setRemark(newValue);
+            isEdited = true;
+            System.out.println(NEW_REMARKS_VALUE_SET);
+        }
+        return isEdited;
+    }
+
+    /**
+     * Modifies the Category field of a specific expense record.
+     * @param toBeEdited the expense record to be edited
+     * @param isEdited boolean variable to check if new value is the same as original value
+     * @param newValue the content to replace original value in expense record
+     * @return True if record has been edited, false otherwise
+     */
+    private static boolean editCategoryField(Expense toBeEdited, boolean isEdited, String newValue) {
+        try {
+            checkContainSlash(newValue);
+        } catch (ExpenseSurroundSlashSpaceException e) {
+            System.out.println(e.getMessage());
+            return isEdited;
+        }
+        if (toBeEdited.getCategory().equals(newValue)) {
+            System.out.println(SAME_NEW_CATEGORY_VALUE);
+        } else {
+            toBeEdited.setCategory(newValue);
+            isEdited = true;
+            System.out.println(NEW_CATEGORY_VALUE_SET);
+        }
+        return isEdited;
+    }
+
+    /**
+     * Modifies the Amount field of a specific expense record.
+     * @param toBeEdited the expense record to be edited
+     * @param isEdited boolean variable to check if new value is the same as original value
+     * @param newValue the content to replace original value in expense record
+     * @return True if record has been edited, false otherwise
+     */
+    private static boolean editAmountField(Expense toBeEdited, boolean isEdited, String newValue) {
+        try {
+            isAmountValid(newValue);
+            if (toBeEdited.getAmount().equals(newValue)) {
+                System.out.println(SAME_NEW_AMOUNT_VALUE);
+            } else {
+                toBeEdited.setAmount(newValue);
+                System.out.println(NEW_AMOUNT_VALUE_SET);
+                isEdited = true;
+            }
+            return isEdited;
+        } catch (ExpenseAmountException e) {
+            System.out.println(e.getMessage());
+            return isEdited;
+        } catch (NumberFormatException e) {
+            System.out.println(MSG_NUMBERS_ONLY_AMOUNT);
+            return isEdited;
+        }
+    }
+
+    /**
+     * Modifies the Date field of a specific expense record.
+     * @param toBeEdited the expense record to be edited
+     * @param isEdited boolean variable to check if new value is the same as original value
+     * @param newValue the content to replace original value in expense record
+     * @return True if record has been edited, false otherwise
+     */
+    private static boolean editDateField(Expense toBeEdited, boolean isEdited, String newValue) {
+        try {
+            String newDate = reformatDate(newValue);
+            if (toBeEdited.getDate().equals(newValue)) {
+                System.out.println(SAME_NEW_DATE_VALUE);
+            } else {
+                toBeEdited.setDate(newDate);
+                System.out.println(NEW_DATE_VALUE_SET);
+                isEdited = true;
+            }
+            return isEdited;
+        } catch (DateTimeParseException e) {
+            System.out.println(MSG_INCORRECT_DATE_FORMAT);
+            return isEdited;
         }
     }
 
@@ -273,8 +385,10 @@ public class ExpenseTracker {
             String expenseCategory = expense.getCategory().toLowerCase();
             String expenseDate = expense.getDate().toLowerCase();
             String expenseRemark = expense.getRemark().toLowerCase();
-            if (expenseCategory.contains(stringToFind) || expenseDate.contains(stringToFind)
-                    || expenseRemark.contains(stringToFind)) {
+            boolean isFoundInCategory = expenseCategory.contains(stringToFind);
+            boolean isFoundInDate = expenseDate.contains(stringToFind);
+            boolean isFoundInRemarks = expenseRemark.contains(stringToFind);
+            if (isFoundInDate || isFoundInCategory || isFoundInRemarks) {
                 isFound = true;
                 System.out.println(MSG_MATCHING_EXPENSES + expense);
             }
@@ -318,9 +432,9 @@ public class ExpenseTracker {
         try {
             String[] newExpense = parseNewExpense(rawInput);
             assert newExpense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
-            Expense e = new Expense(newExpense[DATE_INDEX], newExpense[AMOUNT_INDEX],
+            Expense expense = new Expense(newExpense[DATE_INDEX], newExpense[AMOUNT_INDEX],
                     newExpense[CATEGORY_INDEX], newExpense[REMARKS_INDEX]);
-            addExpense(expenseList, e, fromCommandLine);
+            addExpense(expenseList, expense, fromCommandLine);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_EMPTY_FIELDS);
             System.out.println(MSG_EMPTY_FIELDS);
@@ -334,6 +448,10 @@ public class ExpenseTracker {
             logger.log(Level.WARNING, LOG_NEGATIVE_AMOUNT);
             System.out.println(e.getMessage());
         } catch (ExpenseEmptyFieldException e) {
+            System.out.println(e.getMessage());
+        } catch (ExpenseExtraFieldException e) {
+            System.out.println(e.getMessage());
+        } catch (ExpenseSurroundSlashSpaceException e) {
             System.out.println(e.getMessage());
         }
 
@@ -359,7 +477,7 @@ public class ExpenseTracker {
             stringToFind = parseFindExpense(rawInput);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
-            System.out.println("Keyword cannot be empty!");
+            System.out.println(MSG_NONEMPTY_KEYWORD);
         }
         findExpense(expenseList, stringToFind);
     }
@@ -372,13 +490,13 @@ public class ExpenseTracker {
      */
     private static void executeEdit(TextUi ui, String rawInput) {
         int index;
-        index = -1;
         int noOfItems = Expense.getNoOfItems();
         if (noOfItems == 0) {
             System.out.println(MSG_EMPTY_LIST);
         } else {
             try {
                 index = parseEditExpense(rawInput);
+                editExpense(expenseList, index, ui);
             } catch (IndexOutOfBoundsException e) {
                 logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
                 System.out.println(MSG_EMPTY_INDEX);
@@ -386,7 +504,6 @@ public class ExpenseTracker {
                 logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
                 System.out.println(MSG_INVALID_INDEX_TYPE);
             }
-            editExpense(expenseList, index, ui);
         }
     }
 
@@ -400,26 +517,27 @@ public class ExpenseTracker {
         expenseWelcome();
         String rawInput = ui.getUserInput();
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
-        String keyWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX].trim().toLowerCase();
+        String firstWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX];
+        String keyWord = firstWord.trim().toLowerCase();
         while (!(keyWord.equals(MENU_STRING))) {
             isModified = false;
             switch (keyWord) {
-            case ("list"):
+            case KEYWORD_LIST:
                 listExpenses();
                 break;
-            case ("rm"):
+            case KEYWORD_REMOVE:
                 executeRemove(rawInput);
                 break;
-            case ("add"):
+            case KEYWORD_ADD:
                 executeAdd(rawInput, true);
                 break;
-            case ("edit"):
+            case KEYWORD_EDIT:
                 executeEdit(ui, rawInput);
                 break;
-            case ("find"):
+            case KEYWORD_FIND:
                 executeFind(rawInput);
                 break;
-            case (""):
+            case KEYWORD_BLANK:
                 break;
             default:
                 logger.log(Level.WARNING, LOG_INVALID_COMMANDS);

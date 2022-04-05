@@ -122,7 +122,7 @@ Welcome to Expense Tracker
 You haven't added any expenses to your list yet!
 Added 2022-03-25 | $18.00 | Category | This is a remark
 Added 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
-Date field is of incorrect format! Type in YYYY-MM-DD
+Date field is of incorrect format! Type in YYYY-MM-DD and make sure valid values of months are used!
 Please enter only numbers for the Amount field!
 Fields cannot be empty!
 Some fields are missing!
@@ -136,7 +136,7 @@ Here is the expense record you have chosen to edit:
 Which field would you like to edit? Enter [field] [newValue] or enter 'DONE' when you have finished editing:
 New amount value set!
 Amount cannot be negative!
-Date field is of incorrect format! Type in YYYY-MM-DD
+Date field is of incorrect format! Type in YYYY-MM-DD and make sure valid values of months are used!
 Editing complete!
 Here is the newly edited expense record:
 2022-03-25 | $20.00 | Category | This is a remark
