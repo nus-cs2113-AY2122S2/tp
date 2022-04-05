@@ -74,6 +74,9 @@ You can only edit with a valid number that's in the list :')
 You need to specify the contact field(s) you want to edit!
 ---------------------------------------------------
 ---------------------------------------------------
+Invalid contact field(s)!
+---------------------------------------------------
+---------------------------------------------------
 Okay, I've updated the information of this contact:
   Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
 ---------------------------------------------------

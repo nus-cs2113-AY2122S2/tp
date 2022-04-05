@@ -18,6 +18,7 @@ edit 0
 edit 9
 edit not_a_number
 edit 2
+edit 1 n/
 edit 2 e/new_email@gmail.com f/FoE n/Daniela Sim
 find Koh
 list

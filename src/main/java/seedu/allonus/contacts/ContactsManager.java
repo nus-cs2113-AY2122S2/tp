@@ -239,6 +239,7 @@ public class ContactsManager {
             setContactFields(curr, fieldStrings);
         } catch (InvalidContactField e) {
             printFormat(e.getMessage());
+            return;
         }
         printFormat(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
         isModified = true;
