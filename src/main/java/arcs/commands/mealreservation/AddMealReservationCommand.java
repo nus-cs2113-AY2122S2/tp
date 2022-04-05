@@ -61,8 +61,7 @@ public class AddMealReservationCommand extends Command {
             MenuItem menuItem = menuItemManager.getMenuItemByNameAndType(menuItemType,mealsReserved.get(menuItemType));
             if (menuItem != null) {
                 menuItemsToReserve.add(menuItem);
-            }
-            else if (menuItem == null) {
+            } else if (menuItem == null) {
                 System.out.println("There was an invalid Menu Item");
             }
         }
@@ -83,7 +82,7 @@ public class AddMealReservationCommand extends Command {
     }
 
     public void checkEmptyField() {
-        if(ic == null || ic.isEmpty()) {
+        if (ic == null || ic.isEmpty()) {
             emptyFields.add("IC");
         }
         if (fid == null || fid.isEmpty()) {
