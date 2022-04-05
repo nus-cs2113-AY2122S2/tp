@@ -3,7 +3,7 @@
 skinparam arrowColor #BLACK
 skinparam noteTextAlignment left
 
-
+group **sd**  Parser Component parse and validate
 Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
 Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 
@@ -106,6 +106,6 @@ loop LOOP_COLOR for each XYZ term in command
     end opt
 
 end loop
-
+end
 @enduml
 
