@@ -1,6 +1,5 @@
 package seedu.sherpass.util;
 
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
@@ -13,8 +12,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StorageTest {
@@ -39,29 +36,5 @@ class StorageTest {
             exception.printStackTrace();
         }
         assertTrue(testFile.exists());
-    }
-
-    @Test
-    public void load_oneTask_expectTaskList() {
-        writeSaveData_oneTask_expectFileCreated();
-        try {
-            Storage storage = new Storage("data/test.json");
-            TaskList actualList = new TaskList();
-            try {
-                storage.load(actualList);
-            } catch (IOException | TimeClashException e) {
-                e.printStackTrace();
-            }
-            Task task = actualList.getTask(0);
-            assertEquals(task.getDescription(), "task_one");
-
-            assertNull(task.getByDateTime());
-            assertEquals(task.getDoOnStartDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
-
-            assertEquals(task.getDoOnEndDateTime(), LocalDateTime.parse("12/12/2022 12:10", parseWithTimeFormat));
-            assertEquals(task.getStatusIcon(), " ");
-        } catch (InvalidInputException | IOException | JSONException exception) {
-            exception.printStackTrace();
-        }
     }
 }
