@@ -1,23 +1,6 @@
 package tp;
 
-import tp.command.AddDoctorCommand;
-import tp.command.AddPatientCommand;
-import tp.command.Command;
-import tp.command.GetAppointmentsOfDoctorCommand;
-import tp.command.DeleteDoctorCommand;
-import tp.command.SearchAppointmentCommand;
-import tp.command.AddPatientDescriptionCommand;
-import tp.command.ListAppointmentListCommand;
-import tp.command.ListPatientListCommand;
-import tp.command.HelpCommand;
-import tp.command.SearchPatientCommand;
-import tp.command.AddAppointmentCommand;
-import tp.command.SearchDoctorCommand;
-import tp.command.DeletePatientCommand;
-import tp.command.DeleteAppointmentCommand;
-import tp.command.EditDoctorCommand;
-import tp.command.ListDoctorListCommand;
-import tp.command.SortAppointmentByTimeCommand;
+import tp.command.*;
 
 import java.util.Scanner;
 
@@ -204,13 +187,13 @@ public class Parser {
                 dummy.indexOf("edit /p") + 9));
         if (fullCommand.contains("/ph")) {
             String newInformation = dummy.substring(dummy.indexOf("/ph") + 4);
-            return new EditDoctorCommand(index, "ph", newInformation);
+            return new EditPatientCommand(index, "ph", newInformation);
         } else if (fullCommand.contains("/e")) {
             String newInformation = dummy.substring(dummy.indexOf("/e") + 3);
-            return new EditDoctorCommand(index, "e", newInformation);
+            return new EditPatientCommand(index, "e", newInformation);
         } else if (fullCommand.contains("/n")) {
             String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
-            return new EditDoctorCommand(index, "n", newInformation);
+            return new EditPatientCommand(index, "n", newInformation);
         } else {
             throw new IHospitalException("Wrong format detected\n");
         }

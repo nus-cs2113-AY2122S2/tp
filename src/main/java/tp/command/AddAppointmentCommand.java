@@ -38,7 +38,7 @@ public class AddAppointmentCommand extends Command {
             throw new IHospitalException("The doctor is not existed\n");
         }
         if(patientIndex > patientList.getSize()) {
-            throw new IHospitalException("The patient is not existed\n");
+            throw new IHospitalException("The patient is not exist\n");
         }
 
         Doctor doctor = (Doctor) doctorList.getDoctor(doctorIndex);
