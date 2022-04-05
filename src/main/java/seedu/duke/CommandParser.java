@@ -72,7 +72,6 @@ public class CommandParser {
     private static final String VIEW_EVENTS = "list events";
     private static final String DELETE_EVENT = "delete event ";
 
-
     /**
      * Parses the user-provided command and creates the relevant Command object.
      *
@@ -90,7 +89,7 @@ public class CommandParser {
         } else if (userInputLowerCase.equals(BYE)) {
             userCommand = new ExitCommand();
         } else if (userInputLowerCase.startsWith(ADD_SATISFACTION_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_SATISFACTION_COMMAND, "").trim();
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_SATISFACTION_COMMAND, "").trim();
             userCommand = new AddSatisfactionCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.trim().equals(VIEW_SATISFACTIONS_COMMAND)) {
             userCommand = new ViewSatisfactionsCommand();

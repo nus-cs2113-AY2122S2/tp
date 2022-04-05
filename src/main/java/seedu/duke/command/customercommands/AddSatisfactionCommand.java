@@ -5,16 +5,11 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import seedu.duke.ListContainer;
+import seedu.duke.exceptions.*;
 import seedu.duke.satisfactionlists.Satisfaction;
 import seedu.duke.satisfactionlists.SatisfactionList;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
-import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.exceptions.InvalidCommandException;
-import seedu.duke.exceptions.EmptySatisfactionCustomerException;
-import seedu.duke.exceptions.EmptySatisfactionValueException;
-import seedu.duke.exceptions.InvalidSatisfactionValueException;
-import seedu.duke.exceptions.RepeatCustomerException;
 import seedu.duke.storage.SatisfactionListFileManager;
 
 
@@ -32,6 +27,7 @@ public class AddSatisfactionCommand extends Command {
     private static final String DELIMITER = "/";
     private Satisfaction satisfaction;
     private static Logger logger = Logger.getLogger("satisfactionLogger");
+    private static final String ADD_SATISFACTION_COMMAND = "add satisfaction";
 
     /**
      * Extracts the customer name and satisfaction value from user input,
@@ -43,6 +39,9 @@ public class AddSatisfactionCommand extends Command {
      */
     public AddSatisfactionCommand(String userInput) throws HotelLiteManagerException {
         userInput = userInput.toLowerCase();
+        if (userInput.contains(ADD_SATISFACTION_COMMAND)) {
+            throw new DuplicateCommandException();
+        }
         if (!userInput.contains(DELIMITER)) {
             logger.log(Level.WARNING, "A '/' character is needed to separate the customer's name "
                     + "from their rating.");
@@ -77,6 +76,10 @@ public class AddSatisfactionCommand extends Command {
         return slashCount;
     }
 
+    public boolean isAlpha(String name) {
+        return name.matches("[a-zA-Z]+");
+    }
+
     /**
      * Helper method for AddSatisfactionCommand. Extracts the customer's name
      * from the user input.
@@ -92,6 +95,9 @@ public class AddSatisfactionCommand extends Command {
             customerName = splitInput[0].trim();
             if (customerName.isEmpty()) {
                 throw new EmptySatisfactionCustomerException();
+            }
+            if (!isAlpha(customerName)) {
+                throw new InvalidSatisfactionCustomerNameException();
             }
         } catch (IndexOutOfBoundsException e) {
             throw new EmptySatisfactionValueException();
