@@ -12,10 +12,13 @@ public class DeleteAppointmentCommand extends Command {
     }
 
     @Override
-    public void execute(DoctorList doctorList, PatientList patientList,
-                        AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                        PatientStorage patientStorage,
-                        AppointmentStorage appointmentStorage) throws IHospitalException {
-        appointmentList.deleteAppointment(index);
+    public String execute(DoctorList doctorList, PatientList patientList,
+                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
+                          PatientStorage patientStorage,
+                          AppointmentStorage appointmentStorage) throws IHospitalException {
+        Appointment curr = appointmentList.deleteAppointment(index);
+        return String.format(boundary + "Noted. I've removed this appointment:\n" + curr
+                                     + "\n" + "Now you have " + (appointmentList.getSize())
+                                     + " appointments recorded in the system." + System.lineSeparator() + boundary);
     }
 }

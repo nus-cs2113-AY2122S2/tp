@@ -8,14 +8,19 @@ import java.util.ArrayList;
 public class PatientList {
     public static String boundary = "____________________________________________________________"
                                             + System.lineSeparator();
-    protected ArrayList<Patient> patients = new ArrayList<>();
+    protected static ArrayList<Patient> patients = new ArrayList<>();
     protected int countPatient;
 
     public PatientList() {
         countPatient = 0;
     }
 
-    public Person getPatient(int index) {
+    public static void addPatientDescription(String description, int index) {
+        Patient patient = patients.get(index - 1);
+        patient.addDescription(description);
+    }
+
+    public Patient getPatient(int index) {
         return patients.get(index - 1);
     }
 
@@ -26,11 +31,6 @@ public class PatientList {
     public void addPatient(Patient patient) {
         patients.add(patient);
         countPatient++;
-
-        System.out.println(boundary + "Noted. I've added this patient:");
-        System.out.println(patients.get(countPatient - 1));
-        System.out.print("Now you have " + countPatient
-                                 + " patients recorded in the system." + System.lineSeparator() + boundary);
     }
 
     /**
@@ -38,22 +38,20 @@ public class PatientList {
      *
      * @param index Index of the patient to be deleted.
      */
-    public void deletePatient(int index) {
-        System.out.println(boundary + "Noted. I've removed this patient:");
-        System.out.println(patients.get(index - 1));
-        System.out.print("Now you have " + (countPatient - 1)
-                                 + " patients recorded in the system." + System.lineSeparator() + boundary);
+    public Patient deletePatient(int index) {
+        Patient curr = patients.get(index - 1);
         patients.remove(index - 1);
         countPatient -= 1;
+        return curr;
     }
 
-    public void searchPatient(String id){
-        for (int i = 0; i < patients.size(); i++){
-            if (patients.get(i).getId().trim().equals(id)){
-                System.out.println("Here is the patient found:");
-                System.out.println(patients.get(i));
+    public Patient searchPatient(String id) {
+        for (int i = 0; i < patients.size(); i++) {
+            if (patients.get(i).getId().trim().equals(id)) {
+                return  patients.get(i);
             }
         }
+        return null;
     }
 
     @Override

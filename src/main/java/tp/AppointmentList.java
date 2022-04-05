@@ -33,10 +33,6 @@ public class AppointmentList {
     public void addAppointment(Doctor doctor, Patient patient, LocalDateTime time) {
         appointments.add(new Appointment(doctor, patient, time));
         countAppointment++;
-        System.out.println(boundary + "Noted. I've added this appointment:");
-        System.out.println(appointments.get(countAppointment - 1));
-        System.out.print("Now you have " + countAppointment
-                                 + " appointments recorded in the system." + System.lineSeparator() + boundary);
     }
 
     public void addAppointment(Appointment appointment) {
@@ -48,13 +44,11 @@ public class AppointmentList {
      *
      * @param index Index of the appointment to be deleted.
      */
-    public void deleteAppointment(int index) {
-        System.out.println(boundary + "Noted. I've removed this appointment:");
-        System.out.println(appointments.get(index - 1));
-        System.out.print("Now you have " + (countAppointment - 1)
-                                 + " appointments recorded in the system." + System.lineSeparator() + boundary);
+    public Appointment deleteAppointment(int index) {
+        Appointment curr = appointments.get(index - 1);
         appointments.remove(index - 1);
         countAppointment -= 1;
+        return curr;
     }
 
     public AppointmentList getAppointmentListOfDoctorById(String id) {
@@ -67,13 +61,13 @@ public class AppointmentList {
         return res;
     }
 
-    public void searchAppointment(String id){
-        for (int i = 0; i < appointments.size(); i++){
-            if (appointments.get(i).getTime().equals(LocalDateTime.parse(id))){
-                System.out.println("Here is the appointment found:");
-                System.out.println(appointments.get(i));
+    public Appointment searchAppointmentByTime(String time) {
+        for (int i = 0; i < appointments.size(); i++) {
+            if (appointments.get(i).getTime().equals(LocalDateTime.parse(time))) {
+                return appointments.get(i);
             }
         }
+        return null;
     }
 
     public int getSize() {
@@ -104,7 +98,7 @@ public class AppointmentList {
             return -1;
         }
     }
-    ;
+            ;
 
     public int myComparator(LocalDateTime t1, LocalDateTime t2) {
         if (t1.isBefore(t2)) {
@@ -121,7 +115,7 @@ public class AppointmentList {
         }
         toPrint += ("Now you have " + countAppointment
                             + " appointments recorded in the system." + System.lineSeparator()
-                            + boundary + System.lineSeparator());
+                            + boundary);
         return toPrint;
     }
 }
