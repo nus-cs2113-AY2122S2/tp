@@ -296,7 +296,8 @@ public class ActivityEditCommand extends Command {
      * Updates placeholder activityId values in new ActivityCost objects created from the edited activity to their
      * actual values: the activityId of the edited Activity object.
      *
-     * @param session A session object containing all ActivityCosts related to the Activity that is being edited.
+     * @param session A Session object containing all ActivityCost objects related to the Activity object that is
+     *                being edited.
      */
     private void updateDummyActivityIdsInActivityCosts(Session session) {
         ArrayList<Person> involvedPersonList = session.getPersonList().getPersonList();
