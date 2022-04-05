@@ -1,37 +1,29 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.exception.InvalidInputException;
 
-import static seedu.sherpass.constant.Index.DELETE_INDEX;
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 
 public class DeleteCommand extends Command {
     private int deleteIndex;
+    private boolean isRepeat;
 
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = "Delete: Deletes a task in the task list.\n"
-            + "To delete a specific task, enter 'delete <list_index>'.\n\n Here, "
-            + "'list_index' denotes the index of a task \n based on the task list under the command 'list'.\n"
-            + "\nE.g., 'delete 2' deletes the second task in the task list.\n\n"
-            + "Note: You can only delete one task per command input.";
-
+            + "Usage: delete TASK_NUMBER [/repeat]";
 
     /**
      * Creates constructor for delete command.
      *
-     * @param parsedInput Contains task description to search for
-     * @param taskList    Task array.
-     * @throws InvalidInputException If input task description is empty.
+     * @param deleteIndex Contains task description to search for
      */
-    public DeleteCommand(String[] parsedInput, TaskList taskList) throws InvalidInputException {
-        if (parsedInput[DELETE_INDEX].isBlank()) {
-            throw new InvalidInputException();
-        }
-        if (taskList.isTaskExist(Integer.parseInt(parsedInput[DELETE_INDEX]) - 1)) {
-            deleteIndex = Integer.parseInt(parsedInput[DELETE_INDEX]) - 1;
-        }
+    public DeleteCommand(int deleteIndex, boolean isRepeat) {
+        this.deleteIndex = deleteIndex;
+        this.isRepeat = isRepeat;
     }
 
     /**
@@ -43,7 +35,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.removeTask(deleteIndex);
-        storage.writeSaveData(taskList);
+        try {
+            String taskToBeRemoved = taskList.getTask(deleteIndex).toString();
+            String repeatKeyWord = (isRepeat ? " repeated" : EMPTY_STRING);
+            taskList.removeTask(deleteIndex, isRepeat);
+            ui.showToUser("Okay. I've removed this" + repeatKeyWord + " task:\n  "
+                    + taskToBeRemoved + "\nNow you have " + taskList.getSize() + " task(s) in the list.");
+            storage.writeSaveData(taskList);
+        } catch (IndexOutOfBoundsException exception) {
+            ui.showToUser(ERROR_INVALID_INDEX_MESSAGE);
+        } catch (InvalidInputException exception) {
+            ui.showToUser(exception.getMessage());
+        }
     }
 }

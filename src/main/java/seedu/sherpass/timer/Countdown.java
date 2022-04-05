@@ -1,37 +1,62 @@
-package seedu.sherpass.util;
+package seedu.sherpass.timer;
+
+import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.Ui;
+import seedu.sherpass.timetable.Timetable;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 
-import static seedu.sherpass.constant.TimerConstant.TIME_INTERVAL;
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
 import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
 import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 
-public class Timer extends Thread {
+public class Countdown extends Timer  {
 
-    private boolean isTimerRunning = false;
-    private volatile boolean isTimerPaused = false;
-    private boolean forcedStop = false;
     private boolean hasTimeLeft = false;
-    private static Ui ui;
     protected int timeLeft;
+
+    private final JFrame jframe;
+    private final JLabel jlabel;
 
     /**
      * Creates a constructor for timer. Initialises the parameters needed for the countdown timer.
      *
      * @param ui UI
      */
-    public Timer(Ui ui) {
+    public Countdown(TaskList taskList, Ui ui, JFrame jframe, JLabel jlabel) {
+        super(taskList, ui);
         timeLeft = NO_TIME_LEFT;
-        Timer.ui = ui;
+        this.jframe = jframe;
+        this.jlabel = jlabel;
     }
 
-    /**
-     * Returns timer running status.
-     *
-     * @return Returns true if timer has started. False otherwise.
-     */
-    public boolean isTimerRunning() {
-        return isTimerRunning;
+    private String convertTimeToString() {
+        long hour;
+        long minute;
+        long second;
+        if ((timeLeft / ONE_HOUR) > 0) {
+            hour = timeLeft / ONE_HOUR;
+            minute = (long) ((timeLeft * 1.0) / ONE_HOUR) * 60;
+            second = timeLeft - (hour * ONE_HOUR) - (minute * ONE_MINUTE);
+            String zeroStringHour = (hour > 9) ? EMPTY_STRING : "0";
+            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
+            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
+            return zeroStringHour + hour + " hour(s) " + zeroStringMinute + minute
+                    + " minute(s) " + zeroStringSecond + second + " second(s)";
+        } else if ((timeLeft / ONE_MINUTE) > 0) {
+            minute = timeLeft / ONE_MINUTE;
+            second = timeLeft - (minute * ONE_MINUTE);
+            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
+            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
+            return zeroStringMinute + minute + " minute(s) " + zeroStringSecond + second + " second(s)";
+        } else {
+            second = timeLeft;
+            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
+            return zeroStringSecond + second + " second(s)";
+        }
     }
 
     /**
@@ -42,15 +67,21 @@ public class Timer extends Thread {
     public void run() {
         isTimerRunning = true;
         printTimerStart();
+        jframe.setVisible(true);
         while (hasTimeLeft) {
             assert timeLeft > NO_TIME_LEFT;
-            printTimeLeft();
+            String timeShownToUser = convertTimeToString();
+            jlabel.setText("Time left: " + timeShownToUser);
             update();
         }
         if (timerRanOutOfTime()) {
+            jframe.setVisible(false);
             assert timeLeft <= NO_TIME_LEFT;
             isTimerRunning = false;
-            ui.showToUser("Time is up!");
+            TimerLogic.resetIsTimerInitialised();
+            ui.showToUser("Time is up!\n"
+                    + "Would you like to start another timer, mark a task as done, or leave the study session?");
+            Timetable.showTodaySchedule(taskList, ui);
             ui.showLine();
         }
         this.interrupt();
@@ -60,7 +91,7 @@ public class Timer extends Thread {
      * Updates the timer by letting the thread sleep for 1 second, then updating timeLeft. The timer will not update
      * if it is paused and will instead wait for the user to resume the timer.
      */
-    private void update() {
+    protected void update() {
         try {
             Thread.sleep(1000);
             timeLeft -= 1;
@@ -73,21 +104,26 @@ public class Timer extends Thread {
         }
     }
 
-    private void updateHasTimeLeft() {
-        if (timeLeft <= NO_TIME_LEFT) {
+    /**
+     * Stops the timer if it is running, else prints an error message.
+     */
+    public void stopTimer() {
+        if (isTimerRunning) {
+            jframe.setVisible(false);
+            ui.showToUser("Alright, I've stopped the timer.");
+            isTimerRunning = false;
+            forcedStop = true;
+            timeLeft = NO_TIME_LEFT;
             hasTimeLeft = false;
+            this.interrupt();
+        } else {
+            ui.showToUser("The timer has already stopped.");
         }
     }
 
-    /**
-     * Method causes the thread which the timer is running on to wait when it is paused, until the user resumes the
-     * timer.
-     */
-    private void waitForTimerToResume() throws InterruptedException {
-        synchronized (this) {
-            while (isTimerPaused) {
-                wait();
-            }
+    private void updateHasTimeLeft() {
+        if (timeLeft <= NO_TIME_LEFT) {
+            hasTimeLeft = false;
         }
     }
 
@@ -101,27 +137,9 @@ public class Timer extends Thread {
     }
 
     /**
-     * Prints the time left on the timer at certain intervals.
-     * When timer has more than a minute remaining, it prints time remaining every minute (X min:00s).
-     * It will print out the time remaining every TIME_INTERVAL seconds when less than a minute remains.
-     */
-    public void printTimeLeft() {
-        if (timeLeft > ONE_MINUTE) {
-            if (timeLeft % ONE_MINUTE == 0) {
-                int minutesLeft = timeLeft / ONE_MINUTE;
-                ui.showToUser(minutesLeft + " minutes left.");
-            }
-            return;
-        }
-        if (timeLeft % TIME_INTERVAL == 0) {
-            ui.showToUser(timeLeft + " seconds left.");
-        }
-    }
-
-    /**
      * Prints the timer selected by the user.
      */
-    public void printTimerStart() {
+    protected void printTimerStart() {
         int hours;
         int minutes;
         int seconds;
@@ -151,18 +169,6 @@ public class Timer extends Thread {
         hasTimeLeft = true;
     }
 
-    public boolean getHasTimeLeft() {
-        return hasTimeLeft;
-    }
-
-    public boolean isTimerPaused() {
-        return isTimerPaused;
-    }
-
-    public int getTimeLeft() {
-        return timeLeft;
-    }
-
     /**
      * Resumes the timer by calling notify() on the waiting thread.
      */
@@ -173,27 +179,4 @@ public class Timer extends Thread {
         }
         ui.showToUser("Okay! I've resumed the timer. You have " + timeLeft + " seconds left.");
     }
-
-    public void pauseTimer() {
-        ui.showToUser("Got it! I've paused the timer.\n"
-                + "Feel free to resume whenever you're ready.");
-        isTimerPaused = true;
-    }
-
-    /**
-     * Stops the timer if it is running, else prints an error message.
-     */
-    public void stopTimer() {
-        if (isTimerRunning) {
-            ui.showToUser("Alright, I've stopped the timer.");
-            isTimerRunning = false;
-            forcedStop = true;
-            timeLeft = NO_TIME_LEFT;
-            hasTimeLeft = false;
-            this.interrupt();
-        } else {
-            ui.showToUser("The timer has already stopped.");
-        }
-    }
-
 }
