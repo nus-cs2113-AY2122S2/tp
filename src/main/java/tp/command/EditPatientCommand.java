@@ -10,12 +10,12 @@ import tp.PatientStorage;
 import tp.IHospitalException;
 import tp.AppointmentStorage;
 
-public class EditDoctorCommand extends Command {
+public class EditPatientCommand extends Command {
     private int index;
     private String type;
     private String newInformation;
 
-    public EditDoctorCommand(int index, String type, String newInformation) {
+    public EditPatientCommand(int index, String type, String newInformation) {
         this.index = index;
         this.type = type;
         this.newInformation = newInformation;
@@ -26,19 +26,19 @@ public class EditDoctorCommand extends Command {
                           AppointmentList appointmentList, Ui ui,
                           DoctorStorage doctorStorage, PatientStorage patientStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        if (index > doctorList.getSize()) {
-            throw new IHospitalException("The doctor is not exist\n");
+        if (index > patientList.getSize()) {
+            throw new IHospitalException("The patient is not exist\n");
         }
 
         if (type.contains("e")) {
-            doctorList.getDoctor(index).editEmail(newInformation);
-            return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
+            patientList.getPatient(index).editEmail(newInformation);
+            return String.format(boundary + "Updated already!\n" + patientList.getPatient(index) + "\n" + boundary);
         } else if (type.contains("ph")) {
-            doctorList.getDoctor(index).editPhoneNumber(newInformation);
-            return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
+            patientList.getPatient(index).editPhoneNumber(newInformation);
+            return String.format(boundary + "Updated already!\n" + patientList.getPatient(index) + "\n" + boundary);
         } else {
-            doctorList.getDoctor(index).editName(newInformation);
-            return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
+            patientList.getPatient(index).editName(newInformation);
+            return String.format(boundary + "Updated already!\n" + patientList.getPatient(index) + "\n" + boundary);
         }
     }
 }
