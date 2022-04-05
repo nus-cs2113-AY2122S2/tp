@@ -33,7 +33,9 @@ public class Parser {
     public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)\\s*");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)\\s*");
     public static final Pattern TYPE_ENUM_FORMAT = Pattern.compile("[Tt]/(?<equipmentType>\\w+)\\s*");
-    // ARGUMENT_FORMAT extracts first n-1 tags, for debugging: https://regex101.com/r/7rho4H/1
+    /**
+     * Extracts first n-1 tags for debugging and assumes that the last tag contains the whole string, refer to:
+     * <a href="https://regex101.com/r/7rho4H/1"> Regex101</a> for demo.*/
     public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
             "((?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
                     + "\\/" // argument delimiter
@@ -41,25 +43,23 @@ public class Parser {
                     + "\\s+" // argument space before next delimiter
                     + "(?=[sntcSNTC]|[pP][fF]|[pP][dD])" // next delimiter
     );
-    // ARGUMENT_TRAILING_FORMAT extracts last tag
+    /**
+     * Extracts last tag for debugging.
+     *
+     * <p>See also {@link Parser#MODIFICATION_ARGUMENT_FORMAT} for Regex demonstration.*/
     public static final Pattern MODIFICATION_ARGUMENT_TRAILING_FORMAT = Pattern.compile(
             "(?<!\\w)" // require a previous pattern
                     + "(?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
                     + "\\/" // argument delimiter
                     + "([\\w\\s\\-\\.]+)" // last argument value
     );
-    public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
-            "Please split your command into arguments with each argument seperated by spaces!";
-    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format! Enter help for more information.";
-    @Deprecated
-    public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
-            "n\\/(?<itemName>.+)" + "\\s+"
-                    + "s\\/(?<serialNumber>.+)" + "\\s+"
-                    + "t\\/(?<equipmentType>.+)" + "\\s+"
-                    + "c\\/(?<cost>.+)" + "\\s+"
-                    + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
-                    + "pd\\/(?<purchasedDate>.+)"
-    );
+    public static final String INCORRECT_COMMAND_FORMAT = "Command word not recognised. " + System.lineSeparator()
+            + "Please use one of the following: "
+            + AddCommand.COMMAND_WORD + ", " + UpdateCommand.COMMAND_WORD + ", " + ListCommand.COMMAND_WORD + ", "
+            + CheckCommand.COMMAND_WORD + ", " + DeleteCommand.COMMAND_WORD + ", " + HelpCommand.COMMAND_WORD + ", "
+            + SaveCommand.COMMAND_WORD + ", " + ByeCommand.COMMAND_WORD + ".";
+    public static final String MISSING_COMMAND_WORD_DELIMITER = INCORRECT_COMMAND_FORMAT + System.lineSeparator()
+            + "If including additional arguments, please separate them with a space.";
 
     /**
      * Interpret the command requested by the user and returns a corresponding Command object.
@@ -73,13 +73,17 @@ public class Parser {
         try {
             commandAndArgument = splitCommandTerm(userInput);
         } catch (IncompleteCommandException e) {
-            return new IncorrectCommand(MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER);
+            return new IncorrectCommand(MISSING_COMMAND_WORD_DELIMITER);
         }
 
-        switch (commandAndArgument.get(0)) {
+        // only arguments is trimmed because commandWord is split on the first space
+        String commandWord = commandAndArgument.get(0);
+        String arguments = commandAndArgument.get(1).trim();
+
+        switch (commandWord) {
         case AddCommand.COMMAND_WORD:
             try {
-                args = extractArguments(commandAndArgument.get(1));
+                args = extractArguments(arguments);
                 return new AddCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(AddCommand.COMMAND_WORD + AddCommand.COMMAND_DESCRIPTION);
@@ -95,21 +99,21 @@ public class Parser {
             }
         case CheckCommand.COMMAND_WORD:
             try {
-                args = prepareCheck(commandAndArgument.get(1));
+                args = prepareCheck(arguments);
                 return new CheckCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(CheckCommand.COMMAND_WORD + CheckCommand.COMMAND_DESCRIPTION);
             }
         case DeleteCommand.COMMAND_WORD:
             try {
-                args = prepareDelete(commandAndArgument.get(1));
+                args = prepareDelete(arguments);
                 return new DeleteCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(DeleteCommand.COMMAND_WORD + DeleteCommand.COMMAND_DESCRIPTION);
             }
         case UpdateCommand.COMMAND_WORD:
             try {
-                args = extractArguments(commandAndArgument.get(1));
+                args = extractArguments(arguments);
                 return new UpdateCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
@@ -119,10 +123,10 @@ public class Parser {
                 return new IncorrectCommand(ModificationCommand.INVALID_TYPE_MESSAGE);
             }
         case ListCommand.COMMAND_WORD:
-            if (commandAndArgument.get(1) == null) {
+            if (arguments == null) {
                 return new ListCommand();
             } else {
-                args = new ArrayList<>(Collections.singleton(commandAndArgument.get(1).toUpperCase(Locale.ROOT)));
+                args = new ArrayList<>(Collections.singleton(arguments.toUpperCase(Locale.ROOT)));
                 return new ListCommand(args);
             }
         case HelpCommand.COMMAND_WORD:
@@ -140,7 +144,7 @@ public class Parser {
     /**
      * Break down a command into the command term to be parsed and the remainder of the arguments.
      * Assumes command term and remainder arguments are delimited by minimally one space.
-     * If first element is "list", remainder arguments can be empty, in which case a null
+     * If first element is "list", "help", "save" or "bye" remainder arguments can be empty, in which case a null
      * second object will be passed in.
      *
      * @param userInput String to be split into substrings
@@ -186,6 +190,93 @@ public class Parser {
     }
 
     /**
+     * Prepare argument for CheckCommand by removing the preceding "n/" prefix.
+     *
+     * @param args String to be split into substrings
+     * @return ArrayList of one element (assumes rest of string is item name)
+     * @throws IncompleteCommandException if no match found
+     */
+    protected ArrayList<String> prepareCheck(String args) throws IncompleteCommandException {
+        final Matcher matcher = CHECK_COMMAND_FORMAT.matcher(args);
+        if (!matcher.matches()) {
+            throw new IncompleteCommandException("Check command values are incomplete or missing!");
+        }
+        return new ArrayList<>(Collections.singleton(matcher.group("itemName")));
+    }
+
+    /**
+     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix.
+     *
+     * @param args String to be split into substrings
+     * @return ArrayList of one element (assumes rest of string is serial number)
+     * @throws IncompleteCommandException if no match found
+     */
+    protected ArrayList<String> prepareDelete(String args) throws IncompleteCommandException {
+        final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args);
+        if (!matcher.matches()) {
+            throw new IncompleteCommandException("Delete command values are incomplete or missing!");
+        }
+        return new ArrayList<>(Collections.singleton(matcher.group("serialNumber")));
+    }
+
+    /**
+     * Splits main arguments into split tags with each substring.
+     *
+     * @param args String to be split into substrings
+     * @return ArrayList of two elements
+     * @throws IncompleteCommandException if no parameters found
+     */
+    protected ArrayList<String> extractArguments(String args) throws IncompleteCommandException {
+        int lastIndex = 0;
+        String argumentToAdd;
+        String argument;
+        ArrayList<String> splitArguments = new ArrayList<>();
+        try {
+            Matcher matcher = MODIFICATION_ARGUMENT_FORMAT.matcher(args);
+            while (matcher.find()) {
+                argument = matcher.group();
+                argumentToAdd = setArgumentTagsToLower(argument.trim());
+                splitArguments.add(argumentToAdd);
+                lastIndex = matcher.end();
+            }
+            matcher.usePattern(MODIFICATION_ARGUMENT_TRAILING_FORMAT);
+            matcher.find(lastIndex);
+            argument = matcher.group();
+            argumentToAdd = setArgumentTagsToLower(argument.trim());
+            splitArguments.add(argumentToAdd);
+        } catch (IllegalStateException e) {
+            throw new IncompleteCommandException("No parameters found!");
+        }
+
+        for (int i = splitArguments.size() - 1; i >= 0; i--) {
+            String argumentPair = splitArguments.get(i);
+            Matcher matcher = TYPE_ENUM_FORMAT.matcher(argumentPair);
+            if (matcher.matches()) {
+                splitArguments.remove(argumentPair);
+                splitArguments.add("t/" + matcher.group("equipmentType").toUpperCase(Locale.ROOT));
+                return splitArguments;
+            }
+        }
+
+        return splitArguments;
+    }
+
+    private static String setArgumentTagsToLower(String argument) {
+        int slashIndex = argument.indexOf("/");
+        return argument.substring(0, slashIndex).toLowerCase(Locale.ROOT) + argument.substring(slashIndex);
+    }
+
+    @Deprecated
+    public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
+            "n\\/(?<itemName>.+)" + "\\s+"
+                    + "s\\/(?<serialNumber>.+)" + "\\s+"
+                    + "t\\/(?<equipmentType>.+)" + "\\s+"
+                    + "c\\/(?<cost>.+)" + "\\s+"
+                    + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
+                    + "pd\\/(?<purchasedDate>.+)"
+    );
+
+    /**
      * Prepare arguments for AddCommand by splitting up the arguments into different parts.
      *
      * <p>Index:
@@ -226,85 +317,11 @@ public class Parser {
         return results;
     }
 
-    /**
-     * Prepare argument for CheckCommand by removing the preceding "n/" prefix.
-     *
-     * @param args String to be split into substrings
-     * @return ArrayList of one element (assumes rest of string is item name)
-     * @throws IncompleteCommandException if no match found
-     */
-    protected ArrayList<String> prepareCheck(String args) throws IncompleteCommandException {
-        final Matcher matcher = CHECK_COMMAND_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            throw new IncompleteCommandException("View command values are incomplete or missing!");
-        }
-        return new ArrayList<>(Collections.singleton(matcher.group("itemName")));
-    }
-
-    /**
-     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix.
-     *
-     * @param args String to be split into substrings
-     * @return ArrayList of one element (assumes rest of string is serial number)
-     * @throws IncompleteCommandException if no match found
-     */
-    protected ArrayList<String> prepareDelete(String args) throws IncompleteCommandException {
-        final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            throw new IncompleteCommandException("Delete command values are incomplete or missing!");
-        }
-        return new ArrayList<>(Collections.singleton(matcher.group("serialNumber")));
-    }
-
-    /**
-     * Splits main arguments into split tags with each substring.
-     *
-     * @param args String to be split into substrings
-     * @return ArrayList of two elements
-     * @throws IncompleteCommandException if no parameters found
-     */
-    protected ArrayList<String> extractArguments(String args) throws IncompleteCommandException {
-        int lastIndex = 0;
-        String argumentToAdd;
-        String argument;
-        ArrayList<String> splitArguments = new ArrayList<>();
-        try {
-            Matcher matcher = MODIFICATION_ARGUMENT_FORMAT.matcher(args.trim());
-            while (matcher.find()) {
-                argument = matcher.group();
-                argumentToAdd = setArgumentTagsToLower(argument.trim());
-                splitArguments.add(argumentToAdd);
-                lastIndex = matcher.end();
-            }
-            matcher.usePattern(MODIFICATION_ARGUMENT_TRAILING_FORMAT);
-            matcher.find(lastIndex);
-            argument = matcher.group();
-            argumentToAdd = setArgumentTagsToLower(argument.trim());
-            splitArguments.add(argumentToAdd);
-        } catch (IllegalStateException e) {
-            throw new IncompleteCommandException("No parameters found!");
-        }
-
-        for (int i = splitArguments.size() - 1; i >= 0; i--) {
-            String argumentPair = splitArguments.get(i);
-            Matcher matcher = TYPE_ENUM_FORMAT.matcher(argumentPair);
-            if (matcher.matches()) {
-                splitArguments.remove(argumentPair);
-                splitArguments.add("t/" + matcher.group("equipmentType").toUpperCase(Locale.ROOT));
-                return splitArguments;
-            }
-        }
-
-        return splitArguments;
-    }
-
+    @Deprecated
     private static boolean hasSlashDelimiter(String argument) {
         return argument.contains("/");
     }
 
-    private static String setArgumentTagsToLower(String argument) {
-        int slashIndex = argument.indexOf("/");
-        return argument.substring(0, slashIndex).toLowerCase(Locale.ROOT) + argument.substring(slashIndex);
-    }
+
 
 }
