@@ -174,19 +174,30 @@ public class Parser {
         return null;
     }
 
+    public Command parseSearchDoctor(String fullCommand) throws IHospitalException{
+        String dummy = fullCommand.trim();
+        String index = dummy.substring(dummy.indexOf("doctor ") + 7);
+        return new SearchDoctorCommand(index);
+    }
+    public Command parseSearchPatient(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        String index = dummy.substring(dummy.indexOf("patient ") + 8);
+        return new SearchPatientCommand(index);
+    }
+
+    public Command parseSearchAppointment(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        String time = dummy.substring(dummy.indexOf("appointment ") + 12).trim();
+        return new SearchAppointmentCommand(time);
+    }
+
     public Command parseSearchCommand(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("doctor")) {
-            String dummy = fullCommand.trim();
-            String index = dummy.substring(dummy.indexOf("doctor ") + 7);
-            return new SearchDoctorCommand(index);
+            return parseSearchDoctor(fullCommand);
         } else if (fullCommand.contains("patient")) {
-            String dummy = fullCommand.trim();
-            String index = dummy.substring(dummy.indexOf("patient ") + 8);
-            return new SearchPatientCommand(index);
+            return parseSearchPatient(fullCommand);
         } else if (fullCommand.contains("appointment")) {
-            String dummy = fullCommand.trim();
-            String time = dummy.substring(dummy.indexOf("appointment ") + 12).trim();
-            return new SearchAppointmentCommand(time);
+            return parseSearchAppointment(fullCommand);
         }
         else{
             throw new IHospitalException("Please enter whether you want to search for a doctor, patient or appointment");
