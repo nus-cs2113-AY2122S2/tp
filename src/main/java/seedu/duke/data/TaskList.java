@@ -96,7 +96,10 @@ public class TaskList {
      * Returns the task stored at the given index in the task list.
      * @param index The index of the task.
      */
-    public Task getTask(int index) {
+    public Task getTask(int index) throws NoSuchTaskException {
+        if (index >= taskList.size() || index < 0) {
+            throw new NoSuchTaskException();
+        }
         return taskList.get(index);
     }
 
