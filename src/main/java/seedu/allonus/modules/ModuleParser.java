@@ -52,7 +52,7 @@ public class ModuleParser {
      * Add module messages.
      */
     private static final String ADD_WRONG_FORMAT_MESSAGE = "Please ensure that your input follows the form:";
-    private static final String ADD_SAMPLE_FORMAT_MESSAGE = "add m/CS2113 c/lec d/Thursday t/2pm-4pm";
+    private static final String ADD_SAMPLE_FORMAT_MESSAGE = "add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm";
     private static final String LOGGER_WRONG_ADD_FORMAT = "Wrong format for add module";
     private static final String LOGGER_MISSING_DAY_IN_ADD = "Day was not specified for add module";
     private static final String LOGGER_MISSING_CAT_IN_ADD = "Category was not specified for add module";
