@@ -32,6 +32,7 @@ class StaffController {
 -findStaff() : void
 -addStaff() : void
 -deleteStaff() : void
+-editStaff(): void
 }
 
 class Staff {

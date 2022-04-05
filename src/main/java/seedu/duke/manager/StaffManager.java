@@ -50,6 +50,8 @@ public class StaffManager extends Manager {
 
     /**
      * Print all the Staffs.
+     *
+     * @throws IllegalArgumentException If there is no staff.
      */
     public void printStaff() throws IllegalStateException {
         if (staffs.size() == 0) {
@@ -68,12 +70,7 @@ public class StaffManager extends Manager {
      * @param position  Job position of the Staff.
      * @param salary    Salary of the Staff.
      */
-    public void addStaff(int staffId, String staffName, String position, double salary)
-            throws IllegalArgumentException {
-        if (findByStaffId(staffId) != null) {
-            MainLogger.logInfo(this, "Failed to add staff: Staff with same ID already exists.");
-            throw new IllegalArgumentException("Staff with the same ID already exists, use another ID...");
-        }
+    public void addStaff(int staffId, String staffName, String position, double salary) {
         MainLogger.logInfo(this, "Successful addition of staff");
         staffs.add(new Staff(staffId, staffName, position, salary));
     }
@@ -82,6 +79,7 @@ public class StaffManager extends Manager {
      * Find Staff from Staffs by ID.
      *
      * @param staffId  ID of the Staff.
+     * @throws IllegalArgumentException If ID is zero or negative.
      */
     public Staff findByStaffId(int staffId) throws IllegalArgumentException {
         if (staffId <= 0) {
@@ -103,16 +101,11 @@ public class StaffManager extends Manager {
      *
      * @param staffId ID of the Staff
      */
-    public void deleteByStaffId(int staffId) throws IllegalArgumentException {
+    public void deleteByStaffId(int staffId) {
         Staff staff = findByStaffId(staffId);
-        if (staff != null) {
-            staffs.remove(staff);
-            MainLogger.logInfo(this, "Successful deletion of staff.");
-            System.out.println(staff + " had been deleted from our staff records.");
-        } else {
-            MainLogger.logInfo(this, "Failed to delete staff: No staff with matching ID.");
-            throw new IllegalArgumentException("No staff from our staff records has a matching ID.");
-        }
+        staffs.remove(staff);
+        MainLogger.logInfo(this, "Successful deletion of staff.");
+        System.out.println(staff + " had been deleted from our staff records.");
     }
 
     /**

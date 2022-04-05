@@ -57,12 +57,14 @@ public class StaffController extends Controller {
 
     /**
      * Prints out every staff in the records.
-     *
-     * @throws OperationTerminationException When user inputs terminator.
      */
-    private void printStaff() throws OperationTerminationException {
+    private void printStaff() {
         MainLogger.logInfo(this, "Printing staff");
         System.out.println("Printing staff...");
+        if (checkStaffEmpty()) {
+            System.out.println("No staff in records to print!");
+            return;
+        }
         try {
             staffManager.printStaff();
         } catch (IllegalStateException e) {
@@ -78,16 +80,23 @@ public class StaffController extends Controller {
     private void findStaff() throws OperationTerminationException {
         MainLogger.logInfo(this, "Finding staff");
         System.out.println("Finding staff...");
+        if (checkStaffEmpty()) {
+            System.out.println("No staff in records to find!");
+            return;
+        }
         int staffId = InputParser.getInteger("ID of staff: ");
-        try {
-            Staff staff = staffManager.findByStaffId(staffId);
-            if (staff != null) {
-                System.out.println("Staff found: \n" + staff);
-            } else {
-                System.out.println("Staff with ID " + staffId + " not found!");
+        while (true) {
+            try {
+                Staff staff = staffManager.findByStaffId(staffId);
+                if (staff != null) {
+                    System.out.println("Staff found: \n" + staff);
+                } else {
+                    System.out.println("Staff with ID " + staffId + " not found!");
+                }
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
         }
     }
 
@@ -102,16 +111,28 @@ public class StaffController extends Controller {
         int staffId;
         while (true) {
             staffId = InputParser.getInteger("ID of staff: ");
-            int staffNoClash = checkNoStaffClash(staffId);
-            if (staffNoClash == 1) {
-                break;
-            } else if (staffNoClash == 0) {
-                System.out.println("Staff with the same ID already exists, use another ID...");
+            try {
+                boolean staffNoClash = checkNoStaffClash(staffId);
+                if (staffNoClash) {
+                    break;
+                } else {
+                    System.out.println("Staff with the same ID already exists, use another ID...");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
         final String staffName = InputParser.getString("Name of staff: ");
         final String position = InputParser.getString("Position of staff: ");
-        final double salary = InputParser.getDouble("Salary of staff: ");
+        double salary;
+        while (true) {
+            salary = InputParser.getDouble("Salary of staff: ");
+            if (salary <= 0) {
+                System.out.println("Salary cannot be zero or negative.");
+                continue;
+            }
+            break;
+        }
         try {
             staffManager.addStaff(staffId, staffName, position, salary);
         } catch (IllegalArgumentException e) {
@@ -128,24 +149,24 @@ public class StaffController extends Controller {
         MainLogger.logInfo(this, "Deleting staff");
         System.out.println("Deleting staff...");
         if (checkStaffEmpty()) {
-            System.out.println("No staff in records to delete yet!");
+            System.out.println("No staff in records to delete!");
             return;
         }
         int staffId;
         while (true) {
             staffId = InputParser.getInteger("ID of staff to delete: ");
-            int staffNoClash = checkNoStaffClash(staffId);
-            if (staffNoClash == 0) {
-                break;
-            } else if (staffNoClash == 1) {
-                System.out.println("Failed to find staff with matching ID, please try again...");
+            try {
+                boolean staffNoClash = checkNoStaffClash(staffId);
+                if (!staffNoClash) {
+                    break;
+                } else {
+                    System.out.println("Failed to find staff with matching ID, please try again...");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
-        try {
-            staffManager.deleteByStaffId(staffId);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        staffManager.deleteByStaffId(staffId);
     }
 
     /**
@@ -157,20 +178,24 @@ public class StaffController extends Controller {
         MainLogger.logInfo(this, "Deleting staff");
         System.out.println("Editing staff...");
         if (checkStaffEmpty()) {
-            System.out.println("No staff in records to edit yet!");
+            System.out.println("No staff in records to edit!");
             return;
         }
         int staffId;
         Staff staff;
-        int staffNoClash;
+        boolean staffNoClash;
         while (true) {
             staffId = InputParser.getInteger("ID of staff to edit: ");
-            staffNoClash = checkNoStaffClash(staffId);
-            if (staffNoClash == 0) {
-                staff = staffManager.findByStaffId(staffId);
-                break;
-            } else if (staffNoClash == 1) {
-                System.out.println("Failed to find staff with matching ID, please try again...");
+            try {
+                staffNoClash = checkNoStaffClash(staffId);
+                if (!staffNoClash) {
+                    staff = staffManager.findByStaffId(staffId);
+                    break;
+                } else {
+                    System.out.println("Failed to find staff with matching ID, please try again...");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
         int choice;
@@ -187,12 +212,16 @@ public class StaffController extends Controller {
             case 1:
                 while (true) {
                     staffId = InputParser.getInteger("New ID of staff: ");
-                    staffNoClash = checkNoStaffClash(staffId);
-                    if (staffNoClash == 1) {
-                        staff.setStaffId(staffId);
-                        break;
-                    } else if (staffNoClash == 0) {
-                        System.out.println("Staff with the same ID already exists, use another ID...");
+                    try {
+                        staffNoClash = checkNoStaffClash(staffId);
+                        if (staffNoClash) {
+                            staff.setStaffId(staffId);
+                            break;
+                        } else {
+                            System.out.println("Staff with the same ID already exists, use another ID...");
+                        }
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
                     }
                 }
                 break;
@@ -205,11 +234,18 @@ public class StaffController extends Controller {
                 staff.setPosition(position);
                 break;
             case 4:
-                final double salary = InputParser.getDouble("New salary of staff: ");
-                staff.setSalary(salary);
+                while (true) {
+                    try {
+                        double salary = InputParser.getDouble("New salary of staff: ");
+                        staff.setSalary(salary);
+                        break;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
                 break;
             default:
-                System.out.println("Input out of range, please input a number from 1 to 5...");
+                System.out.println("Input out of range, please input a number from 0 to 4...");
             }
         }
     }
@@ -227,18 +263,14 @@ public class StaffController extends Controller {
      * Check if there is no clash between input ID and ID of existing staff.
      *
      * @param staffId ID of the staff.
-     * @return integer expression if there is a clash in IDs, or if there is an exception.
+     * @return boolean expression if there is a clash in IDs, or if there is an exception.
+     * @throws IllegalArgumentException If ID is zero or negative.
      */
-    private int checkNoStaffClash(int staffId) {
-        try {
-            if (staffManager.findByStaffId(staffId) == null) {
-                return 1;
-            }
-            return 0;
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return -1;
+    private boolean checkNoStaffClash(int staffId) throws IllegalArgumentException {
+        if (staffManager.findByStaffId(staffId) == null) {
+            return true;
         }
+        return false;
     }
 
     /**

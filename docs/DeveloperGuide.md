@@ -137,6 +137,7 @@ Both methods `getOrderPrice(int)` and `getAllOrderValue()` call `getTotalPrice()
 
 ### Staff Management
 
+I/O for staff is being handled by `StaffController`.
 The management of staff is handled by `StaffManager`, which implements following methods:
 
 - `void printStaff()` -- print all staffs.
@@ -146,14 +147,27 @@ The management of staff is handled by `StaffManager`, which implements following
 - `int getNumOfStaffs(` -- change the name of a dish using its menu index.
 
 `StaffManager` manages `ArrayList<Staff>` and the above functions help to update the collection of `Staff`.
+The sequence diagrams for each feature of staff handling is attached below.
 
-For example `addStaff(int staffId, String staffName, String position, double salary)` calls `add(Staff)` to add a `Staff` from `ArrayList<Staff>`:
+Sequence diagram for `printStaff()`:
 
-![](diagrams/sqeuence/StaffManager_addStaff.png)
+<img src="diagrams/sqeuence/StaffManager_printStaff.png" width=50% height=50%>
 
-And `deleteStaff(int)` calls `remove(int)` to remove a `Staff` from `ArrayList<Staff>`:
+Sequence diagram for `findStaff()`:
 
-![](diagrams/sqeuence/StaffManager_deleteStaff.png)
+<img src="diagrams/sqeuence/StaffManager_findStaff.png" width=50% height=50%>
+
+Sequence diagram for `addStaff()`:
+
+<img src="diagrams/sqeuence/StaffManager_addStaff.png" width=80% height=80%>
+
+Sequence diagram for `deleteStaff()`:
+
+<img src="diagrams/sqeuence/StaffManager_deleteStaff.png" width=50% height=50%>
+
+Sequence diagram for `edittStaff()`:
+
+<img src="diagrams/sqeuence/StaffManager_editStaff.png" width=40% height=40%>
 
 
 ## Product scope

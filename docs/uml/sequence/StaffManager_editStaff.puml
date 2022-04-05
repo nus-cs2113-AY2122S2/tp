@@ -1,0 +1,70 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+actor user
+participant ":StaffController" as staffcontroller
+participant ":StaffManager" as staffmanager
+participant ":Staff" as staff
+
+
+user -> staffcontroller: editStaff()
+activate staffcontroller
+
+staffcontroller -> staffcontroller: isEmpty = checkStaffEmpty()
+activate staffcontroller
+staffcontroller --> staffcontroller
+deactivate staffcontroller
+
+alt staff records empty
+staffcontroller --> user
+
+else staff records not empty
+group loop [while staff with inputted ID does not exist]
+staffcontroller -> staffcontroller: checkNoStaffClash(int staffId)
+activate staffcontroller
+staffcontroller -> staffmanager: staff = findByStaffId(int staffId)
+activate staffmanager
+staffmanager --> staffcontroller
+deactivate staffmanager
+staffcontroller --> staffcontroller
+deactivate staffcontroller
+end
+
+alt option 1: id
+group loop [while staff with inputted ID already exists]
+staffcontroller -> staffcontroller: checkNoStaffClash(int staffId)
+activate staffcontroller
+staffcontroller -> staffmanager: findByStaffId(int staffId)
+activate staffmanager
+staffmanager --> staffcontroller
+deactivate staffmanager
+staffcontroller --> staffcontroller
+deactivate staffcontroller
+end
+staffcontroller -> staff: setStaffId(int staffId)
+activate staff
+deactivate staff
+
+else option 2: name
+staffcontroller -> staff: setStaffName(String staffName)
+activate staff
+deactivate staff
+
+else option 3: position
+staffcontroller -> staff: setPosition(String position)
+activate staff
+deactivate staff
+
+else option 4: salary
+group loop [while salary is negative or zero]
+staffcontroller -> staff: setSalary(double salary)
+activate staff
+end
+
+else option 0: exit
+
+end
+@enduml

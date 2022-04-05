@@ -9,7 +9,7 @@ participant ":StaffController" as staffcontroller
 participant ":StaffManager" as staffmanager
 
 
-user -> staffcontroller: deleteStaff()
+user -> staffcontroller: findStaff()
 activate staffcontroller
 
 staffcontroller -> staffcontroller: isEmpty = checkStaffEmpty()
@@ -21,19 +21,9 @@ alt staff records empty
 staffcontroller --> user
 
 else staff records not empty
-group loop [while staff with inputted ID does not exist]
-staffcontroller -> staffcontroller: checkNoStaffClash(int staffId)
-activate staffcontroller
-staffcontroller -> staffmanager: findByStaffId(int staffId)
+staffcontroller -> staffmanager: staff  = findByStaffId(int staffId)
 activate staffmanager
 staffmanager --> staffcontroller
-deactivate staffmanager
-staffcontroller --> staffcontroller
-deactivate staffcontroller
-end
-
-staffcontroller -> staffmanager: deleteByStaffId(int staffId)
-activate staffmanager
 
 end
 @enduml
