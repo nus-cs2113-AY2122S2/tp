@@ -439,6 +439,7 @@ public class Warehouse {
             throw new WrongCommandException("add", true);
         }
     }
+
     // batch adding
     private void addOrder(int id, Object orderObject) throws
             WrongCommandException, InvalidFileException, InvalidObjectType {
