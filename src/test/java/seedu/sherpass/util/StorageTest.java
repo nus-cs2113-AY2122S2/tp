@@ -29,7 +29,7 @@ class StorageTest {
             TaskList tasks = new TaskList();
             Task newTask = new Task(69, "task_one",
                     null,
-                    LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat),
+                    LocalDateTime.parse("12/12/2022 10:00", parseWithTimeFormat),
                     LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat), null);
             tasks.addTask(newTask);
             storage.writeSaveData(tasks);
@@ -48,7 +48,7 @@ class StorageTest {
             Task task = actualList.getTasks().get(0);
             assertEquals(task.getDescription(), "task_one");
             assertEquals(task.getByDate(), null);
-            assertEquals(task.getDoOnStartDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
+            assertEquals(task.getDoOnStartDateTime(), LocalDateTime.parse("12/12/2022 10:00", parseWithTimeFormat));
             assertEquals(task.getDoOnEndDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
             assertEquals(task.getStatusIcon(), " ");
         } catch (InvalidInputException | IOException | JSONException exception) {

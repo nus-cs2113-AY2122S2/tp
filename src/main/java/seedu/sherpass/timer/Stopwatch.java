@@ -2,7 +2,6 @@ package seedu.sherpass.timer;
 
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
-import seedu.sherpass.util.timetable.Timetable;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
