@@ -2,6 +2,7 @@ package seedu.allonus.expense;
 
 
 
+import seedu.allonus.AllOnUs;
 import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
 import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
 import seedu.allonus.expense.exceptions.ExpenseAmountException;
@@ -97,6 +98,7 @@ public class ExpenseTracker {
     public static final String KEYWORD_EDIT = "edit";
     public static final String KEYWORD_FIND = "find";
     public static final String KEYWORD_BLANK = "";
+    public static final String ALREADY_IN_EXPENSE_TRACKER_MESSAGE = "You are already in the Expense Tracker.";
 
     private static void expenseWelcome() {
         System.out.println(EXPENSE_WELCOME_MESSAGE);
@@ -508,14 +510,52 @@ public class ExpenseTracker {
     }
 
     /**
+     * Prints a message to inform user they are already in the Expense Tracker.
+     */
+    private static void printAlreadyInExpenseTrackerMessage(TextUi ui) {
+        ui.showToUser(ALREADY_IN_EXPENSE_TRACKER_MESSAGE);
+    }
+
+    /**
+     * Returns mode of study or contacts manager if the command pertaining to these managers
+     * is contained in <code>userInput</code> else returns an unchanged <code>mode</code> value.
+     * @param ui instance of TextUi used for displaying messages to user.
+     * @param mode contains the current value of mode.
+     * @param userInput String containing input from user.
+     * @return new value of mode.
+     */
+    public static int getMode(TextUi ui, int mode, String userInput) {
+        if (AllOnUs.isContactsManagerCommand(userInput)) {
+            return AllOnUs.MODE_CONTACTS_MANAGER;
+        } else if (AllOnUs.isStudyManagerCommand(userInput)) {
+            return AllOnUs.MODE_STUDY_MANAGER;
+        } else if (AllOnUs.isExpenseTrackerCommand(userInput)) {
+            printAlreadyInExpenseTrackerMessage(ui);
+            return AllOnUs.MODE_EXPENSE_TRACKER;
+        }
+        return mode;
+    }
+
+    /**
      * Determines which command to execute depending on the keyword supplied.
      *
      * @param ui ui object to collect user's inputs
+     * @return mode value pertaining to either menu, study or contact manager.
      */
-    public static void expenseRunner(TextUi ui) {
+    public static int expenseRunner(TextUi ui) {
         logger.setLevel(Level.SEVERE);
         expenseWelcome();
         String rawInput = ui.getUserInput();
+
+        int mode = AllOnUs.MODE_MENU;
+        boolean isFirstGotoExpenseCommand = false;
+        mode = getMode(ui, mode, rawInput);
+        if ((mode == AllOnUs.MODE_CONTACTS_MANAGER) || (mode == AllOnUs.MODE_STUDY_MANAGER)) {
+            return mode;
+        } else if (mode == AllOnUs.MODE_EXPENSE_TRACKER) {
+            isFirstGotoExpenseCommand = true;
+        }
+
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
         String firstWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX];
         String keyWord = firstWord.trim().toLowerCase();
@@ -540,6 +580,10 @@ public class ExpenseTracker {
             case KEYWORD_BLANK:
                 break;
             default:
+                if (isFirstGotoExpenseCommand) {
+                    isFirstGotoExpenseCommand = false;
+                    break;
+                }
                 logger.log(Level.WARNING, LOG_INVALID_COMMANDS);
                 System.out.println(MSG_INVALID_COMMANDS);
             }
@@ -548,8 +592,13 @@ public class ExpenseTracker {
             if (isModified) {
                 storageFile.saveData();
             }
+
+            mode = getMode(ui, mode, rawInput);
+            if ((mode == AllOnUs.MODE_CONTACTS_MANAGER) || (mode == AllOnUs.MODE_STUDY_MANAGER)) {
+                return mode;
+            }
         }
         logger.log(Level.INFO, LOG_RETURN_TO_MENU_INTENT);
-        return;
+        return mode;
     }
 }

@@ -1,5 +1,6 @@
 package seedu.allonus.contacts;
 
+import seedu.allonus.AllOnUs;
 import seedu.allonus.contacts.entry.Contact;
 import seedu.allonus.contacts.entry.Name;
 import seedu.allonus.storage.StorageFile;
@@ -71,7 +72,7 @@ public class ContactsManager {
     private static final String MENU_COMMAND_STRING = "menu";
     private static final String LIST_COMMAND_STRING = "list";
     private static final String DELETE_COMMAND_STRING = "rm";
-    private static final String ADD_COMMAND_STRING = "add";
+    public static final String ADD_COMMAND_STRING = "add";
     private static final String FIND_COMMAND_STRING = "find";
     private static final String EDIT_COMMAND_STRING = "edit";
     private static final int LENGTH_COMMAND_ONLY = 1;
@@ -246,12 +247,20 @@ public class ContactsManager {
     }
 
     /**
+     * Prints a message to inform user they are already in the study manager.
+     */
+    private static void printAlreadyInContactsManagerMessage(TextUi ui) {
+        ui.showToUser("You are already in Contacts Manager.");
+    }
+
+    /**
      * Handles user inputs and calls methods corresponding
      * to the relevant commands.
      *
      * @param ui An TextUi object for getting user input.
+     * @return mode value pertaining to either menu, expense tracker or study manager.
      */
-    public static void contactsRunner(TextUi ui) {
+    public static int contactsRunner(TextUi ui) {
         contactsWelcome();
         String userInput;
         while (true) {
@@ -259,7 +268,13 @@ public class ContactsManager {
             userInput = ui.getUserInput();
             if (userInput.equals(MENU_COMMAND_STRING)) {
                 logger.log(Level.FINER, CONTACTS_EXIT_LOG_MESSAGE);
-                return;
+                return AllOnUs.MODE_MENU;
+            } else if (AllOnUs.isExpenseTrackerCommand(userInput)) {
+                return AllOnUs.MODE_EXPENSE_TRACKER;
+            } else if (AllOnUs.isStudyManagerCommand(userInput)) {
+                return AllOnUs.MODE_STUDY_MANAGER;
+            } else if (AllOnUs.isContactsManagerCommand(userInput)) {
+                printAlreadyInContactsManagerMessage(ui);
             } else if (userInput.equals(LIST_COMMAND_STRING)) {
                 listContacts();
             } else if (userInput.startsWith(DELETE_COMMAND_STRING)) {
