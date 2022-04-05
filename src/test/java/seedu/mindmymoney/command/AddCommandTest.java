@@ -453,12 +453,10 @@ class AddCommandTest {
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
         String inputString = "/cc /n cash /cb 1.5 /cl 500";
-        assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, user).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString, user).executeCommand());
 
         String inputString2 = "/cc /n CASH /cb 1.5 /cl 500";
-        assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString2, user).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString2, user).executeCommand());
     }
 
     /**
@@ -472,12 +470,10 @@ class AddCommandTest {
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
         String inputString = "/cc /n cash /cb 101 /cl 500";
-        assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, user).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString, user).executeCommand());
 
         String inputString2 = "/cc /n cash /cb -1 /cl 500";
-        assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString2, user).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString2, user).executeCommand());
     }
 
     /**
@@ -491,12 +487,10 @@ class AddCommandTest {
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
         String inputString = "/cc /n cash /cb 1.5 /cl 0";
-        assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, user).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString, user).executeCommand());
 
         String inputString2 = "/cc /n cash /cb 1.5 /cl -1";
-        assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString2, user).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString2, user).executeCommand());
     }
 
     /**
