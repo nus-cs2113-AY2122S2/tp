@@ -3,7 +3,6 @@ package commands;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.plans.InvalidPlanException;
-import data.plans.Plan;
 import data.plans.PlanList;
 import data.schedule.DayList;
 import data.workouts.InvalidWorkoutException;
@@ -14,12 +13,9 @@ import storage.FileManager;
 import storage.LogHandler;
 import werkit.Parser;
 import werkit.UI;
-import werkit.WerkIt;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,7 +23,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlanCommandTest {
     ExerciseList exerciseList;

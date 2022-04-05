@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WorkoutCommandTest {
     @BeforeEach
@@ -214,7 +216,6 @@ public class WorkoutCommandTest {
         FileManager fm = new FileManager(pl);
         DayList dl = new DayList(pl);
         UI ui = new UI();
-        Parser parser = new Parser(ui, el, wl, fm, pl, dl);
 
         //Check for existence of workouts.txt file. If none, create it.
         fm.checkAndCreateDirectoriesAndFiles();
@@ -246,6 +247,7 @@ public class WorkoutCommandTest {
             }
         }
 
+        Parser parser = new Parser(ui, el, wl, fm, pl, dl);
         //Add plans to file so it doesn't get lost as delete method also depends on plans
         Scanner planFileReader = new Scanner(fm.getPlanFilePath());
         while (planFileReader.hasNext()) {
