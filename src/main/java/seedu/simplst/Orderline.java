@@ -26,4 +26,18 @@ public class Orderline extends Good {
     public void setQuantityFulfilled(int quantityFulfilled) {
         this.quantityFulfilled = quantityFulfilled;
     }
+
+    private String isDone() {
+        if (isCheckedOff) {
+            return " (Done)";
+        }
+        return " (Not Done)";
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d of %s - %s needed",
+                quantityFulfilled, super.getSku(), super.getName())
+                + isDone();
+    }
 }
