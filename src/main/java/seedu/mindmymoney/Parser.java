@@ -26,7 +26,7 @@ public class Parser {
      * the said command.
      *
      * @param input The command to be parsed.
-     * @param user The user object, which contains income, expenditure and credit card list.
+     * @param user  The user object, which contains income, expenditure and credit card list.
      * @return Command object with respect to user's input.
      */
     public static Command parseCommand(String input, User user) {
@@ -56,7 +56,7 @@ public class Parser {
                 return new HelpCommand(false, FLAG_OF_EXPENSES);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("");
+            System.out.print("");
         }
         return new HelpCommand(false, FLAG_OF_EXPENSES);
     }

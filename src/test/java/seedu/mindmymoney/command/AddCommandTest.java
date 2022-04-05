@@ -109,7 +109,7 @@ class AddCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
-        creditCardTestList.add(new CreditCard("posb",0.05,500));
+        creditCardTestList.add(new CreditCard("posb", 0.05, 500));
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         String inputString = "/e /pm posb /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
 
@@ -443,6 +443,25 @@ class AddCommandTest {
     }
 
     /**
+     * Tests for insertion of credit card with valid parameters.
+     */
+    @Test
+    void addCommand_validAddCreditCardInput_expectCreditCardListUpdate() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/cc /n DBS /cb 1.5 /cl 500";
+        new AddCommand(inputString, user).executeCommand();
+        ArrayList<CreditCard> testList = new ArrayList<>();
+        testList.add(new CreditCard("DBS", 1.5, 500));
+        String expectedOutput = testList.get(0).toString();
+        String actualOutput = user.getCreditCardListArray().get(0).toString();
+        assertEquals(expectedOutput, actualOutput);
+        testList.clear();
+    }
+
+    /**
      * Tests for exception thrown when an invalid Credit Card name is given.
      */
     @Test
@@ -451,7 +470,6 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
         String inputString = "/cc /n cash /cb 1.5 /cl 500";
         assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString, user).executeCommand());
 
@@ -468,7 +486,6 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
         String inputString = "/cc /n cash /cb 101 /cl 500";
         assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString, user).executeCommand());
 
@@ -485,12 +502,105 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
+      
         String inputString = "/cc /n cash /cb 1.5 /cl 0";
         assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString, user).executeCommand());
 
         String inputString2 = "/cc /n cash /cb 1.5 /cl -1";
         assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString2, user).executeCommand());
+    }
+  
+    /**
+     * Asserts if user is able to add an improper flag.
+     */
+    @Test
+    void addCommand_notProperFlag_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/asdf";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+    }
+
+    /**
+     * Asserts if user is able to an invalid time.
+     */
+    @Test
+    void addCommand_notValidTime_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 30/032022";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+
+    }
+
+    /**
+     * Asserts if user is able to add a day larger than 29 feb.
+     */
+    @Test
+    void addCommand_wrongDateForLeapYear_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 30/02/2020";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+
+    }
+
+    /**
+     * Asserts if user is able to add a day larger than 30 for months with only 30 days.
+     */
+    @Test
+    void addCommand_wrongDateForMonthWithThirtyDays_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 31/09/2018";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+
+    }
+
+    /**
+     * Asserts if user is able to add a larger than 28 feb on a non leap year.
+     */
+    @Test
+    void addCommand_wrongDateForNonLeapYear_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 29/02/2018";
+
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, user).executeCommand());
+
+    }
+
+    /**
+     * Test if program is able to exit.
+     */
+    @Test
+    void addCommand_isExit_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Person /d Nike Shoes /a 500 /t 29/02/2018";
+
+        assertEquals(false, new AddCommand(inputString, user).isExit());
+
     }
 
     /**
@@ -519,7 +629,7 @@ class AddCommandTest {
     public String getIncomeOutput(ArrayList<Income> list) {
         if (!list.isEmpty()) {
             return list.get(list.size() + LIST_INDEX_CORRECTION).getAmount()
-                    + list.get(list.size() + LIST_INDEX_CORRECTION).getCategory();
+                + list.get(list.size() + LIST_INDEX_CORRECTION).getCategory();
         }
         return "";
     }
