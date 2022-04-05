@@ -1279,15 +1279,75 @@ four resource files, each line in the file represents one entry of data.
 
 The data format for a line in each file is as follows:
 
-| File            | Data Format                             | Example            |
-|-----------------|-----------------------------------------|--------------------|
-| `exercises.txt` | `<exercise name>`                       | `push up`          |
-| `workouts.txt`  | `<exercise name>  | <repetition value>` | `push up | 10` |
-| `plans.txt`     | `<plan name> <workout 1>,<workout 2>,...` | `Plan 1 | push up | 10,pull up | 10` |
-| `schedule.txt`  | `<day number of the week> | <plan name>` | `1 | Plan 1` |
+| File            | Data Format      | Example      |
+|-----------------|------------------|--------------|
+| `exercises.txt` | `<exercise name>` | `push up`    |
+| `workouts.txt`  | `<exercise name> | <repetition value>` | `push up | 10` |
+| `plans.txt`     | `<plan name> <workout 1>,<workout 2>,...` | `plan 1 | push up | 10,pull up | 10` |
+| `schedule.txt`  | `<day number of the week> | <plan name>` | `1 | plan 1` |
 
 <span class="info box">:memo: In our application, the week starts on a Monday. Thus, in `schedule.txt`, if the day number
 is `1`, it means that plan is meant for Monday, `2` for Tuesday, and so on...</span>
+
+<span class="info box">To maintain simplicity, WerkIt! only stores words in lower case.</span>
+
+<span class="warning box">In the [user guide](UserGuide.md#werkits-local-storage-information), users have been warned
+not to directly modify the file data in order to avoid application instability and data loss.</span>
+
+
+#### Loading Resource File Data Into WerkIt!
+When WerkIt! is launched for the first time, WerkIt! will create the required resource directories and files. Alternatively,
+if the user has deleted some resource files for whatever reason (e.g. data reset), WerkIt! will recreate the missing
+files (and directories, if necessary). In either case, the application will not attempt to load the data in any of these
+files since they are just created.
+
+On subsequent launches, if the application discovers the existence of these resource files, it will attempt to load the
+data stored in the files.
+
+The following sequence diagram shows the procedure of how data in `workouts.txt` is read and loaded into WerkIt!:
+
+![Load workouts.txt](uml/sequenceDiagrams/storage/images/loadWorkoutsTxt.png)
+
+<span class="info box">:memo: To simplify the sequence diagram, some method calls have been omitted as they are
+irrelevant to the loading of `workouts.txt` or they do not add significant value to the diagram.</span>
+
+<span class="info box">:memo: Due to the limitations of PlantUML and that I want to show the construction activation
+bar of `WerkIt`, I have to show the `Main` object. Apologies for the inconvenience caused.</span>
+
+<span class="info box">:memo: The procedures for reading and loading the data for exericse, plan, and schedule data sets are 
+largely similar to the above sequence diagram.</span>
+
+**(Steps 1 to 3)** When the `WerkIt` object is instantiated, in the constructor, `WerkIt#loadRequiredDirectoryAndFiles()`
+is called. This method is responsible for checking if the necessary resource files and directories are present. In this
+case, we assume that all resource files are in place and since we are only interested in `workouts.txt`, `WerkIt#loadWorkoutFile()`
+is called (not shown in the sequence diagram to simplify the diagram), which will in turn call `WerkIt#loadWorkoutsFromFile()`.
+
+**(Before Step 4)** With the aid of the `Scanner` class that is built into Java, the first line of `workouts.txt` is
+read into the application and stored as a `String`.  The data is then parsed into a `String` array and sent to
+`FileManager#addFileWorkoutToList()`.
+
+**(Step 4)** In `FileManager#addFileWorkoutToList()`, a `String` is crafted to follow a format that is a truncated
+version of the `workout /new` command that is accepted by `WorkoutList#createAndAddWorkout()`. 
+
+| Original Command                | Truncated `String` |
+|---------------------------------|--------------------|
+| `workout /new push up /reps 10` | `push up /reps 10` |
+
+
+**(Step 5)** The crafted `String` is passed to `WorkoutList#createAndAddWorkout()` to properly add the workout data
+into WerkIt!
+
+Steps 4 to 7 is repeated until all the lines in `workouts.txt` have been read.
+
+**(Step 8)** A boolean value that indicates whether the loading of `workouts.txt` went without any issues. True means
+no issues were encountered and false means otherwise. This boolean will be used to print to the terminal the status
+of the loading of `workouts.txt`.
+
+This will finish the loading of the data in `workouts.txt` into WerkIt!
+
+<span class="info box">In practice, the other resource files (i.e. `exercises.txt`, `plans.txt`, and `schedule.txt`)
+are also processed and loaded in `WerkIt#loadRequiredDirectoryAndFiles()`. Once all the other resource files have been
+loaded, the constructor for `WerkIt` will finish.</span>
 
 
 #### Writing a New Line of Data to the Resource File
