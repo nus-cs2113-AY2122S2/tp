@@ -539,7 +539,6 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException | InvalidScheduleException | InvalidPlanException e) {
                 deletedScheduleCount += 1;
                 if (deletedScheduleCount == 1) {
-                    System.out.print(System.lineSeparator());
                     System.out.println("The following schedule(s) is(are) "
                             + "removed due to the removal of\nrelevant plan(s).");
                     System.out.print(System.lineSeparator());
@@ -595,7 +594,7 @@ public class FileManager {
 
     public void addFilePlanToList(PlanList planList, String[] planFileDataLine)
             throws ArrayIndexOutOfBoundsException, InvalidExerciseException, InvalidWorkoutException {
-        String planName = planFileDataLine[0].trim();
+        String planName = planFileDataLine[0].trim().toLowerCase();
         String workoutsInPlan = planFileDataLine[1].trim();
         String[] individualWorkout = workoutsInPlan.split(FILE_DATA_DELIMITER_PLAN, -1);
         ArrayList<Workout> workoutsToAddInPlanList = new ArrayList<Workout>();
@@ -680,7 +679,7 @@ public class FileManager {
         }
 
         StringBuilder planInFileFormat = new StringBuilder();
-        planInFileFormat.append(plan.getPlanName());
+        planInFileFormat.append(plan.getPlanName().toLowerCase());
         planInFileFormat.append(FILE_DATA_DELIMITER);
         var workoutInPlan = plan.getWorkoutsInPlanList();
         for (int i = 0; i < workoutInPlan.size(); i++) {
