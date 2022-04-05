@@ -5,11 +5,22 @@ hide circle
 skinparam classAttributeIconSize 0
 title Class Diagram of Schedule Component
 
+Main -> WerkIt
+WerkIt -> Parser
+WerkIt -> UI
 Parser .r.> "{abstract}\nCommand"
 "{abstract}\nCommand" <|-- ScheduleCommand
-ScheduleCommand -l-> FileManager
 ScheduleCommand --> UI
+ScheduleCommand -d-> FileManager
 ScheduleCommand -r-> DayList
+
+class WerkIt {
++ startContinuousUserPrompt()
+}
+
+class Main {
+
+}
 
 class DayList {
 + updateDay(String userArgument):Day
@@ -34,6 +45,7 @@ class ScheduleCommand {
 
 
 class UI {
++ getUserInput()
 + printScheduleFileNotFoundMessage():void
 + printScheduleFileCreatedMessage():void
 + printNewScheduleCreatedMessage(Day newDay):void

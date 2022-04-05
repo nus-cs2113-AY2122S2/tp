@@ -211,6 +211,57 @@ _to be updated_
 ### Schedule-related features
 ![ScheduleUML](uml/classDiagrams/images/scheduleComponent.png)
 
+User are able to create and make changes to a 7-day workout plan schedule using the WerkIt application. For each day, user are only allowed
+to schedule 1 workout plan. Click [here](#glossary) to have a better understanding of what `workout`, `plan` and `schedule`
+means.
+
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
+user's command.
+
+If the user's command type is schedule, the `Parser#parseUserInput(String userInput)` method will parse the 'schedule'
+base word and proceed to create schedule related command using `Parser#createScheduleCommand(String userInput)` method.
+The following table shows the schedule commands that WerkIt! are able to process by calling the `ScheduleCommand#execute()`
+method.
+
+| Command                                                             | `<commandAction>` | Parameters                                                                                                                                           | Method Called                               |
+|---------------------------------------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| [schedule /update `<day number>` `<plan number>`](#update-schedule) | update            | `<day number>` Number representing the day. <br/>`<plan number>` Index of the plan stored in planList. This is the plan to be scheduled for the day. | `DayList#updateDay(String userArgument)`    |
+| [schedule /list](#view-schedule)                                    | list              |                                                                                                                                                      | `DayList#printSchedule() `                  |
+| [schedule /clear `<day number>`](#clear-schedule-for-a-day)         | clear             | `<day number>` Number representing the day.                                                                                                          | `DayList#clearDayPlan(String userArgument)` |
+| [schedule /clearall](#clear-schedule-for-the-week)                  | clearall          |                                                                                                                                                      | `DayList#clearAllSchedule()`                |
+To view the details of the `ScheduleCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/ScheduleCommand.java).
+
+
+The `<day number>` range from 1 to 7. The meaning of each day number is explained in the table below.
+
+| Day Number | Meaning   |
+|------------|-----------|
+| 1          | Monday    |
+| 2          | Tuesday   |
+| 3          | Wednesday |
+| 4          | Thursday  |
+| 5          | Friday    |
+| 6          | Saturday  |
+| 7          | Sunday    |
+
+The `ScheduleCommand#execute()` will further evaluate the `<commandAction>` and depending on the type of command action, 
+this method will call the appropriate methods from the `DayList` class. If the `<commandAction>` is null or incorrect,
+an `InvalidCommandException` will be thrown. If the `<parameters>` of certain commands are not specified or met, 
+an `InvalidScheduleException` will be thrown.
+
+For `commandAction` such as `/update`, `/clear` and `/clearall`, the method that was called to perform such commands will
+modify the application's schedule list. Hence, appropriate methods in the `FileManager` will be called to manage the data 
+and save them to the local file, `schedule.txt`. For more information on `FileManager` class, you can refer to this 
+[section](#file-management).
+
+Furthermore, when methods such as `DayList#updateDay()` and `DayList#clearAllSchedule` are being successfully executed, 
+for the former method `UI#printNewScheduleCreatedMessage(Day newDay)` method will be called to display a message 
+to indicate that the plan had been successfully scheduled on a day and for the latter method, 
+`UI#printClearedScheduleMessage()` method will be called to display a message to indicate that the 
+schedule list has successfully been reset.
+
 ---
 
 
@@ -869,43 +920,9 @@ This completes the process of displaying all plans in WerkIt!.
 
 ---
 ### Schedule
-User are able to create a 7-day workout plan schedule using the WerkIt application. For each day, user are only allowed
-to schedule 1 workout plan. 
+The overview of the design on schedule features can be found [here](#schedule-related-features). 
 
-When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
-`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
-class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
-user's command. 
 
-If the user's command type is schedule, the `Parser#parseUserInput(String userInput)` method will parse the 'schedule' 
-base word and proceed to create schedule related command using `Parser#createScheduleCommand(String userInput)` method.
-The following table shows the schedule commands that WerkIt! are able to process
-
-| Command                                                             | `<userAction>` | Parameters Meaning                                                                                                                                   |
-|---------------------------------------------------------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [schedule /update `<day number>` `<plan number>`](#update-schedule) | update         | `<day number>` Number representing the day. <br/>`<plan number>` Index of the plan stored in planList. This is the plan to be scheduled for the day. |
-| [schedule /list](#view-schedule)                                    | list           |                                                                                                                                                      |
-| [schedule /clear `<day number>`](#clear-schedule-for-a-day)         | clear          | `<day number>` Number representing the day.                                                                                                          |
-| [schedule /clearall](#clear-schedule-for-the-week)                  | clearall       |                                                                                                                                                      |
-
-The `<day number>` range from 1 to 7. The meaning of each day number is explained in the table below.
-
-| Day Number | Meaning   |
-|------------|-----------|
-| 1          | Monday    |
-| 2          | Tuesday   |
-| 3          | Wednesday |
-| 4          | Thursday  |
-| 5          | Friday    |
-| 6          | Saturday  |
-| 7          | Sunday    |
-
-This method will further evaluate the `<userAction>` and call the constructor of `ScheduleCommand` class by 
-passing relevant parameters related to schedule to the constructor. If the `<userAction>` is null or incorrect, 
-an `InvalidCommandException` will be thrown.
-If the `<parameters>` of certain commands are not specified or met, an `InvalidScheduleException` will be thrown.
-
----
 #### Update Schedule
 A summary of the general procedure of updating a plan for a particular day to the schedule in WerkIt! is as follows:
 1. User enters the command `schedule /update <day number> <plan number>`.
