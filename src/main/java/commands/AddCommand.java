@@ -67,10 +67,13 @@ public class AddCommand extends Command {
 
         String newTotalExpense = "\nTotal expense: " + ExpenseManager.getTotalExpense();
 
+        String limitSet = "\nLimit set: " + limitMgr.getLimit();
+
         if (limitMgr.isExceedLimit(ExpenseManager.getTotalExpense())) {
             String warning = "\nWARNING: You have exceeded the spending limit of " + limitMgr.getLimit() + "!!";
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + newTotalExpense + warning);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + newTotalExpense + limitSet+
+                    warning);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + newTotalExpense);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + newTotalExpense + limitSet);
     }
 }
