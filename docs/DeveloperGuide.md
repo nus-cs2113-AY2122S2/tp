@@ -99,7 +99,7 @@ output in your terminal:
 
 You are now ready to begin developing!
 
-<div class="button-container"><a class="button" href="#">Back to Top</a></div> 
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>
 
 ## Design 
 ### Architecture Overview
@@ -160,17 +160,17 @@ werkItLogs/
     └── logs.log        // Log file containing logs created by the application.
 ```
 
-<a class="button" href="#design">Back to 'Design'</a>
+<div class="button-container"><a class="button" href="#design">Back to 'Design'</a></div>
 
 #### UI component
 [Writeup]
 
-<a class="button" href="#design">Back to 'Design'</a>
+<div class="button-container"><a class="button" href="#design">Back to 'Design'</a></div>
 
 #### Parser component
 [Writeup]
 
-<a class="button" href="#design">Back to 'Design'</a>
+<div class="button-container"><a class="button" href="#design">Back to 'Design'</a></div>
 
 #### Command component
 [Writeup]<br>
@@ -178,7 +178,7 @@ Each command is a feature in the WerkIt! application.
 Thus, the next section will explain the design of each
 features in detail.
 
-<a class="button" href="#design">Back to 'Design'</a>
+<div class="button-container"><a class="button" href="#design">Back to 'Design'</a></div>
 
 ### Feature Overview
 
@@ -212,7 +212,7 @@ be ignored for now, and the only supported `commandAction` is `/list`. However, 
 are expected to be delivered in future iterations, and we currently have set the framework to implement these features 
 in the future. Thus, we have this standalone section specifically kept for exercise-related features.
 
-<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
+<div class="button-container"><a class="button" href="#feature-overview">Back to 'Feature Overview'</a></div>
 
 ---
 
@@ -249,21 +249,21 @@ workout actions are executed. These methods are used to modify the application's
 as the `/delete` and `/update` actions are cascading actions 
 (i.e. deleting a workout will delete plan(s) containing that deleted workout).
 
-<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
+<div class="button-container"><a class="button" href="#feature-overview">Back to 'Feature Overview'</a></div>
 
 ---
 
 ### Plan-related features
 _to be updated_
 
-<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
+<div class="button-container"><a class="button" href="#feature-overview">Back to 'Feature Overview'</a></div>
 
 ---
 
 ### Schedule-related features
 _to be updated_
 
-<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
+<div class="button-container"><a class="button" href="#feature-overview">Back to 'Feature Overview'</a></div>
 
 ---
 
@@ -288,7 +288,7 @@ command using `Parser#createSearchCommand(String userInput)` method. This method
 the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If
 the `<keywords>` is not specified, an `InvalidCommandException` will be thrown.
 
-<a class="button" href="#feature-overview">Back to 'Feature Overview'</a>
+<div class="button-container"><a class="button" href="#feature-overview">Back to 'Feature Overview'</a></div>
 
 ---
 
@@ -372,7 +372,7 @@ for subsequent prompts.
   >
   ```
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -441,7 +441,7 @@ in his/her inputs to avoid any potential instabilities when processing his/her i
 If these characters are inputted by the user, as mentioned in Step 3 above, an `InvalidCommandException` will be thrown 
 and the parsing is aborted.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -461,7 +461,7 @@ The following sequence diagram illustrates how the `exercise /list` command work
 
 ![List Exercise Sequence Diagram](uml/sequenceDiagrams/exercises/images/viewExercise.png)
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -549,7 +549,7 @@ Alright, the following workout has been created:
 
 This completes the process of adding a new workout to WerkIt!
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ##### Design Considerations for Creating a New Workout
 ###### HashMaps - Motivation
@@ -599,7 +599,7 @@ objects. Now, to manipulate the `Workout` object (e.g. `workout /update`),
 Note that the user will not have any direct interactions with the HashMap implementation and it should be transparent
 to him/her.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -630,7 +630,7 @@ number of repetitions of that exercise set by the user.
 (Steps 7 to 9) Upon obtaining the `workout` object, `Workout#toString()` method is called to formulate and print 
 the workouts which is being displayed on the terminal to the user. 
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -715,7 +715,7 @@ way the workout data are formatted and stored in the `workouts.txt` file.
 Hence, to simplify the implementation, the team decided to simply
 rewrite all workouts to the resource file whenever a workout is deleted.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -810,7 +810,7 @@ the `plans.txt` file according to the newly modified plan list.
 <br><br>
 This completes the process of updating an existing workout in WerkIt!
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -901,7 +901,7 @@ object's data into `plans.txt`, which is stored on the user's local filesystem.
 <br><br>
 This completes the process of creating and adding a new plan to WerkIt!.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -950,7 +950,7 @@ and the `PlanCommand` object returns to the `WerkIt` object.
 <br><br>
 This completes the process of displaying all plans in WerkIt!.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 ### Schedule
@@ -990,7 +990,7 @@ passing relevant parameters related to schedule to the constructor. If the `<use
 an `InvalidCommandException` will be thrown.
 If the `<parameters>` of certain commands are not specified or met, an `InvalidScheduleException` will be thrown.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 #### Update Schedule
@@ -1078,7 +1078,7 @@ user were to execute the `schedule /update` command again to update the plan to 
 will update the content in the Day object stored in `dayList[0]`. It will not recreate a `Day` object for Monday
 to store the new plan.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -1140,7 +1140,7 @@ will be display on the console to the user. An expected outcome of the `schedule
 
 By default, if no plan is being scheduled for any of the day, the day is to be considered as a rest day for the user.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 #### Clear Schedule For A Day
@@ -1199,7 +1199,7 @@ in the dayList into `schedule.txt` which is stored on the user's local filesyste
 
 This completes the process of clearing a plan on a particular day of the schedule on WerkIt!
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 #### Clear Schedule For The Week
@@ -1248,7 +1248,7 @@ resetting the text file.
 
 This completes the process of clearing of all plans stored in the schedule on WerkIt!
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -1317,7 +1317,7 @@ The following sequence diagram illustrates how the `search /all` command works i
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ---
 
@@ -1353,7 +1353,7 @@ is `1`, it means that plan is meant for Monday, `2` for Tuesday, and so on...</s
 <span class="warning box">In the [user guide](UserGuide.md#werkits-local-storage-information), users have been warned
 not to directly modify the file data in order to avoid application instability and data loss.</span>
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 #### Loading Resource File Data Into WerkIt!
 When WerkIt! is launched for the first time, WerkIt! will create the required resource directories and files. Alternatively,
@@ -1409,7 +1409,7 @@ This will finish the loading of the data in `workouts.txt` into WerkIt!
 are also processed and loaded in `WerkIt#loadRequiredDirectoryAndFiles()`. Once all the other resource files have been
 loaded, the constructor for `WerkIt` will finish.</span>
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 #### Writing a New Line of Data to the Resource File
 Writing a new line of data to the respective resource files is done when the user creates a new workout or plan.
@@ -1450,7 +1450,7 @@ represents one workout.
 
 This finishes the writing of the new workout to the resource file and control is returned to `WorkoutCommand#execute()`.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 #### Rewriting the Resource Entire File With the Most Recent Set of Data
 In contrast to the previous section which covers the scenarios when only the new data is written as a new line to the 
@@ -1501,7 +1501,7 @@ through.
 
 This finishes the process of rewriting the entire `workouts.txt` and control is returned to `WorkoutCommand#execute()`.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 #### About the `LogHandler` Class
 Logging in WerkIt! is mainly handled by the `Logger` class that is built into Java. The `LogHandler` class is created
@@ -1570,7 +1570,7 @@ checking if the log directory exists. This is because logging is done in the `Ma
 starts, `WerkIt` has yet to be instantiated, which is responsible for creating the `FileManager` object. Thus, to avoid 
 the risk of further complicating the solution, it was decided to just let `LogHandler`manage its own log file.
 
-<a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a>
+<div class="button-container"><a class="button" href="#implementation-overview">Back to 'Implementation Overview'</a></div>
 
 ## Product Scope
 ### Target User Profile
@@ -1591,7 +1591,7 @@ where there are many other day-to-day things being kept too.
 |---------|----------|------------------|------------------------------------------------------------------------|
 | v1.0    | user     | create a workout | keep track of how many repetitions I would like to do with an exercise |
 
-<a class="button" href="#">Back to Top</a>
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>
 
 ## Non-Functional Requirements
 
@@ -1632,4 +1632,4 @@ of their schedule. For instance, the user's daily schedule can look like this:
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
-<a class="button" href="#">Back to Top</a>
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>
