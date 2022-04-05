@@ -8,7 +8,13 @@ import cpp.ui.Constants;
 import cpp.ui.Response;
 
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -16,7 +22,7 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private final static String dataPath = "./src/data/projectList.txt";
+    private static final String dataPath = "./src/data/projectList.txt";
 
     /**
      * save the data based on certain style.
@@ -56,6 +62,7 @@ public class Storage {
         writer.print("");
         writer.close();
     }
+
     private static ProjectList readData() throws IOException, DataConversionException {
         try {
             BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
