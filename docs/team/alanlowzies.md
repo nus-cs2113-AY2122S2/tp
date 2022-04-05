@@ -74,6 +74,7 @@ prerequisites to download and the steps to get it running on the user's computer
     - How WerkIt! processes and creates a new workout when requested by the user
       ([link to part](../DeveloperGuide.md#create-new-workout)).
       - Includes sequence diagrams to visualise the process.
+- Wrote the 'Design - Storage Component' section ([link to part](../DeveloperGuide.md#storage-component)).
 - Wrote the instructions on 
 [how to set up the development environment](../DeveloperGuide.md#setting-up-your-development-environment).
 - Wrote part of the [glossary](../DeveloperGuide.md#glossary)
