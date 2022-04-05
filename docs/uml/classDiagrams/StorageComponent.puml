@@ -37,7 +37,6 @@ PlanCommand --> FileManager
 ScheduleCommand --> FileManager
 
 
-
 'FileManager Class
 FileManager : - directoryPath: Path
 FileManager : - exerciseFilePath: Path
@@ -55,6 +54,15 @@ FileManager : + rewriteAllWorkoutsToFile(WorkoutList) : void
 FileManager : + convertWorkoutToFileDataFormat(String) : String
 
 note right of FileManager #LightSalmon : Not all fields and methods are listed as\nmany are similar methods called to\noperate on the other applicaiton files.
+
+
+'LogHandler Class
+LogHandler : - logFileDirectory: Path
+LogHandler : - logFilePath: Path
+
+LogHandler : + startLogHandler() : void
+LogHandler : + linkToFileLogger(Logger) : void
+LogHandler : + checkAndCreateLogsDirectory(): void
 
 
 'UI Class
