@@ -80,8 +80,7 @@ public class ModuleCalendarReader {
     /**
      * Reads a .ics file based on a given filename.
      * @param fileName Name of the .ics file from nusmods.com that contains NUS module details.
-     * @return modulesList ArrayList<Module> that contains the modules parsed from .ics file or null if there was a
-     * parse error
+     * @return modulesList that contains the modules parsed from .ics file or null if there was a parse error
      */
     public ArrayList<Module> readIcsFile(String fileName) {
         logger.setLevel(Level.WARNING);
@@ -108,7 +107,7 @@ public class ModuleCalendarReader {
 
     /**
      * Parses the .ics file based on icsFileName
-     * @return modulesList of type ArrayList<Module> that contains the modules parsed from the .ics file.
+     * @return modulesList that contains the modules parsed from the .ics file.
      */
     public ArrayList<Module> parseIcsCalendar() {
         try {
