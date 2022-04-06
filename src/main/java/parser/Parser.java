@@ -127,7 +127,7 @@ public class Parser {
 
         // extracts item name
         extractedParameters = extractParameter(parameters, PARAMETER_PATTERN_ITEM_NAME);
-        String name = extractedParameters[0].replace("i/","");
+        String name = extractedParameters[0].replace("i/","").trim();
         parameters = extractedParameters[1];
         if (name.equals("")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "Product name cannot be empty."));
@@ -152,7 +152,7 @@ public class Parser {
 
         // extracts date
         extractedParameters = extractParameter(parameters, PARAMETER_PATTERN_DATE);
-        String date = extractedParameters[0].replace("d/","");
+        String date = extractedParameters[0].replace("d/","").trim();
         parameters = extractedParameters[1];
 
         AddCommand addCmd;
@@ -194,7 +194,7 @@ public class Parser {
 
             // extracts renewal date
             extractedParameters = extractParameter(parameters, PARAMETER_PATTERN_RENEWAL);
-            String renewalDate = extractedParameters[0].replace("r/","");
+            String renewalDate = extractedParameters[0].replace("r/","").trim();
 
             addCmd = new AddCommand();
             try {
