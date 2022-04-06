@@ -378,17 +378,12 @@ public class ActivityEditCommand extends Command {
     public void run(Manager manager) {
         TextUI ui = manager.getUi();
         try {
-            assert activityId != MISSING_ACTIVITYID;
-            assert sessionId != MISSING_SESSIONID;
             session = manager.getProfile().getSession(sessionId);
             oldActivity = session.getActivity(activityId);
             retrieveDetailsFromOldActivity(oldActivity);
             updateCostAndCostList();
             validateCostListAndInvolvedList();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
-            if (totalCost <= 0) {
-                throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_TOTALCOST_BECAME_ZERO);
-            }
             Person payerAsPerson = session.getPersonByName(payer);
             addAllActivityCost(involvedListPersonArray, payerAsPerson, DUMMY_ACTIVITYID);
             PersonList involvedPersonList = new PersonList(involvedListPersonArray);
