@@ -1,6 +1,6 @@
 <div align="center">
 
-![logo](team/Logo/Beige%20Elegant%20and%20Minimal%20Logo%20(1).png)
+![logo](team/Logo/logo.jpg)
 
 </div>
 

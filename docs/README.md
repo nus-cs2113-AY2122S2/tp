@@ -6,6 +6,7 @@ recording customer satisfaction ratings, assigning housekeepers to rooms, adding
 and keeping track of checked-in/checked-out rooms.
 
 Useful links:
-* [User Guide](UserGuide.md)
-* [Developer Guide](DeveloperGuide.md)
-* [About Us](AboutUs.md)
+* [User Guide](https://ay2122s2-cs2113-t11-1.github.io/tp/UserGuide.html)
+* [Developer Guide](https://ay2122s2-cs2113-t11-1.github.io/tp/DeveloperGuide.html)
+* [About Us](https://ay2122s2-cs2113-t11-1.github.io/tp/AboutUs.html)
+
