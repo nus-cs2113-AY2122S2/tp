@@ -57,6 +57,6 @@ public class Appointment {
     }
 
     public String saveString() {
-        return patientNric + "," + doctorNric + ","+ appointmentDate + "," + appointmentDetails;
+        return patientNric + "," + doctorNric + "," + appointmentDate + "," + appointmentDetails;
     }
 }

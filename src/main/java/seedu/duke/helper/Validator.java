@@ -25,7 +25,7 @@ public class Validator {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
         Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
         if (!fullNameMatcher.matches()) {
-            throw new HalpmiException("Full name must contain only alphabets and no special characters.");
+            throw new HalpmiException("Full name must contain only alphabets, no special characters or numbers.");
         }
     }
 
