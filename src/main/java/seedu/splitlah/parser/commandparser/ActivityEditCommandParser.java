@@ -81,61 +81,14 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
     public ActivityEditCommand getCommand(String commandArgs) throws InvalidFormatException {
 
         assert commandArgs != null : Message.ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL;
-        try {
-            sessionId = ParserUtils.parseSessionId(commandArgs);
-            activityId = ParserUtils.parseActivityId(commandArgs);
-        } catch (InvalidFormatException exception) {
-            String invalidMessage = exception.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                    + "\n\t" + COMMAND_FORMAT_SECOND;
-            throw new InvalidFormatException(invalidMessage);
-        }
+        getSessionIdAndActivityId(commandArgs);
+        getActivityNameIfSupplied(commandArgs);
+        getPayerNameIfSupplied(commandArgs);
+        getInvolvedListIfSupplied(commandArgs);
+        getTotalCostIfSupplied(commandArgs);
+        getCostListIfSupplied(commandArgs);
 
-        try {
-            activityName = ParserUtils.parseName(commandArgs);
-        } catch (InvalidFormatException exception) {
-            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/n"))) {
-                throw new InvalidFormatException(exception.getMessage());
-            }
-        }
-
-        try {
-            payer = ParserUtils.parsePayer(commandArgs);
-        } catch (InvalidFormatException exception) {
-            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/p"))) {
-                throw new InvalidFormatException(exception.getMessage());
-            }
-        }
-
-        try {
-            involvedList = ParserUtils.parseInvolved(commandArgs);
-        } catch (InvalidFormatException exception) {
-            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/i"))) {
-                throw new InvalidFormatException(exception.getMessage());
-            }
-        }
-
-
-        try {
-            totalCost = ParserUtils.parseTotalCost(commandArgs);
-        } catch (InvalidFormatException exception) {
-            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/co"))) {
-                throw new InvalidFormatException(exception.getMessage());
-            }
-        }
-
-        try {
-            costList = ParserUtils.parseCostList(commandArgs);
-        } catch (InvalidFormatException exception) {
-            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/cl"))) {
-                throw new InvalidFormatException(exception.getMessage());
-            }
-        }
-
-        if (costList != null && totalCost != -1) {
-            String invalidMessage = Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND;
-            throw new InvalidFormatException(invalidMessage);
-        }
+        checkIfBothCostListAndTotalCostSupplied();
 
         try {
             gst = ParserUtils.parseGstIncludingZero(commandArgs);
@@ -157,6 +110,75 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         return new ActivityEditCommand(sessionId, activityId, activityName, payer, involvedList, totalCost,
                 costList, gst, serviceCharge);
 
+    }
+
+    private void checkIfBothCostListAndTotalCostSupplied() throws InvalidFormatException {
+        if (costList != null && totalCost != -1) {
+            String invalidMessage = Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND;
+            throw new InvalidFormatException(invalidMessage);
+        }
+    }
+
+    private void getCostListIfSupplied(String commandArgs) throws InvalidFormatException {
+        try {
+            costList = ParserUtils.parseCostList(commandArgs);
+        } catch (InvalidFormatException exception) {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/cl"))) {
+                throw new InvalidFormatException(exception.getMessage());
+            }
+        }
+    }
+
+    private void getTotalCostIfSupplied(String commandArgs) throws InvalidFormatException {
+        try {
+            totalCost = ParserUtils.parseTotalCost(commandArgs);
+        } catch (InvalidFormatException exception) {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/co"))) {
+                throw new InvalidFormatException(exception.getMessage());
+            }
+        }
+    }
+
+    private void getInvolvedListIfSupplied(String commandArgs) throws InvalidFormatException {
+        try {
+            involvedList = ParserUtils.parseInvolved(commandArgs);
+        } catch (InvalidFormatException exception) {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/i"))) {
+                throw new InvalidFormatException(exception.getMessage());
+            }
+        }
+    }
+
+    private void getPayerNameIfSupplied(String commandArgs) throws InvalidFormatException {
+        try {
+            payer = ParserUtils.parsePayer(commandArgs);
+        } catch (InvalidFormatException exception) {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/p"))) {
+                throw new InvalidFormatException(exception.getMessage());
+            }
+        }
+    }
+
+    private void getActivityNameIfSupplied(String commandArgs) throws InvalidFormatException {
+        try {
+            activityName = ParserUtils.parseName(commandArgs);
+        } catch (InvalidFormatException exception) {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/n"))) {
+                throw new InvalidFormatException(exception.getMessage());
+            }
+        }
+    }
+
+    private void getSessionIdAndActivityId(String commandArgs) throws InvalidFormatException {
+        try {
+            sessionId = ParserUtils.parseSessionId(commandArgs);
+            activityId = ParserUtils.parseActivityId(commandArgs);
+        } catch (InvalidFormatException exception) {
+            String invalidMessage = exception.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                    + "\n\t" + COMMAND_FORMAT_SECOND;
+            throw new InvalidFormatException(invalidMessage);
+        }
     }
 
 

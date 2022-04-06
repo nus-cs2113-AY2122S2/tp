@@ -154,9 +154,8 @@ public class ActivityEditCommand extends Command {
             try {
                 costOwedForThisActivity = involvedListPersonArray.get(i).getActivityCostOwed(activityId);
             } catch (InvalidDataException exception) {
-                if (exception.getMessage().equals(Message.ERROR_PERSON_NO_ACTIVITIES)) {
+                assert exception.getMessage().equals(Message.ERROR_PERSON_NO_ACTIVITIES);
                     costOwedForThisActivity = 0;
-                }
             }
             costList[i] = costOwedForThisActivity;
             if (checkCostListForDifferentCosts(costList)) {
