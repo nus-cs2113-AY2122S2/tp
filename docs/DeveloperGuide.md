@@ -61,10 +61,13 @@ Therefore, airlines counter staff need a fast an efficient way to manage the man
 
 ## User Stories
 
-| Version | As a ... | I want to ... | So that I can ...|
+| Version | As a ... | I want to ... | So that I can ... |
 |--------|----------|---------------|------------------|
 |v1.0|Counter Staff|Add in flight menu item|Add menu items available for in-flight meals|
 |v1.0|Counter Staff|Remove in flight menu item|Remove menu items that can be reserved for in-flight meals|
+|v1.0|Counter Staff|Find Menu Item by Name|Find all Menu Items corresponding to a certain name|
+|v1.0|Counter Staff|Find Menu Item by Category|Find all Menu Items corresponding to a certain category|
+|v1.0|Counter Staff|List All Menu Items|View all Menu Items|
 |v1.0|Counter Staff|Add in flight meal reservation|Manage in-flight meal reservation request from customers|
 |v1.0|Counter Staff|Remove in flight meal reservation|Manage in-flight meal reservation request from customers|
 |v1.0|Counter Staff|List all in flight menu items|To answer customer queries on the menu items available|
@@ -72,6 +75,10 @@ Therefore, airlines counter staff need a fast an efficient way to manage the man
 |v1.0|Counter Staff|Remove Flight route|Remove the flight routes the airline will no longer offer|
 |v1.0|Counter Staff|List all flight route|Have an overview of available flight routes|
 |v1.0|Counter Staff|Find flight route|To answer customer's query on whether a flight route exists|
+|v2.1|Counter Staff|Add in-flight meal reservation|Reserve in-flight meals for customers|
+|v2.1|Counter Staff|Remove in-flight meal reservation|Remove in-flight meal reservations for customers|
+|v2.1|Counter Staff|Check in-flight meal reservation|Check for a customer's specific meal reservation|
+|v2.1|Counter Staff|List all in-flight meal reservation|View all in-flight meal reservations|
 ## Non-Functional Requirements
 
 1. The program should not crash under any circumstances.
