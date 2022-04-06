@@ -497,6 +497,9 @@ The general workflow of the `activity /delete` command is as follows:
 10. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUi#printlnMessage`.
 
 ### Edit an activity
+**API reference:** [`ActivityEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java)
+
+The sequence diagram below models the interactions between various entities 
 
 ### View an activity
 
