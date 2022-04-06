@@ -248,10 +248,12 @@ the `<keywords>` is not specified, it will be deemed as searching for spacing.
   * [List All Workouts](#list-workout)
   * [Delete Existing Workout](#delete-existing-workout)
     * [Design Considerations](#design-considerations-for-deleting-existing-workout)
-  * [Update Exisiting Workout](#update-existing-workout)
+  * [Update Existing Workout](#update-existing-workout)
 * [Plan](#plan)
   * [Create A New Plan](#create-a-new-plan)
   * [List Plans](#list-plans)
+  * [List Workouts In A Plan](#list-workouts-in-a-plan)
+  * [Delete Existing Plan](#delete-existing-plan)
 * [Schedule](#schedule)
   * [Update Schedule](#update-schedule)
     * [Design Considerations](#design-considerations-for-update-schedule)
@@ -378,7 +380,6 @@ and the parsing is aborted.
 
 ### Exercise
 #### List Exercise
-
 
 If the user's command type is to list the exercises available, i.e. `exercise /list`, the
 `Parser#parseUserInput(String userInput)` method will parse the 'exercise' base word and proceed to create exercise related
@@ -678,13 +679,12 @@ and exception throws in `WorkoutList#updateWorkout()` have been omitted.</span>
 **(Before Step 4.1)** Methods from the `String` and `Integer` classes are called to parse the
 argument given to `WorkoutList#updateWorkout()` to obtain the following information required to update a
 workout:
-1. Workout index number in list
+1. Workout index number in list.
 2. New number of repetitions assigned to the workout in (1).
 
 Next, validity checks of the user input are carried out to ensure that the data entered is valid. 
 The requirements for a valid input are as follows:
-1. Workout index number is the number shown before the exercise name when calling `workout /list`. 
-Workout index number must be a positive integer smaller than the total number of workouts in list.
+1. Workout index number must be a positive integer smaller than the total number of workouts in list.
 2. New repetition value must be a non-negative integer greater than 0.
 
 If any of the two requirements are not met, an `InvalidWorkoutException` will be thrown and 
@@ -811,7 +811,7 @@ of a success plan creation message (new plan is called "Grow My Muscles"):
 ----------------------------------------------------------------------
 Alright, the following plan has been created:
 
-	Grow My Muscles
+	grow my muscles
 
 ----------------------------------------------------------------------
 ```
@@ -866,6 +866,68 @@ To view each plan in detail, enter
 and the `PlanCommand` object returns to the `WerkIt` object.
 <br><br>
 This completes the process of displaying all plans in WerkIt!.
+
+---
+
+#### List Workouts In A Plan
+A summary of the general procedure of listing all workouts in a plan is as follows:
+1. User enters the command `plan /details <plan index number>`.
+2. A list of workouts that user specified is displayed through the terminal.
+
+The following sequence diagram illustrates how the `plan /details` command works:
+
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
+have been removed from the sequence diagram.</span>
+
+![Details Of Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/detailsOfPlan.png)
+<br><br>
+**(Before Step 1)** The user's input (in this case will be a `plan /details` command) is obtained and parsed to obtain
+a `PlanCommand` object that contains the user's input.
+
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+**(Step 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify that the plan action is of type 
+`details`. Thus, `PlanList#listPlanDetails(userArgument, ui)` will be called to display all the workouts in the plan
+which user specified.
+
+<span class="box info">:memo: To improve the diagram's readability, logging-related, input-checking method calls,
+and exception throws in `PlanList#listPlanDetails()` have been omitted.</span>
+
+**(Before Step 3)** Methods from the `String` and `Integer` classes are called to parse the
+argument given to `PlanList#listPlanDetails()` to obtain the plan index number in list.
+
+Next, validity checks of the user input are carried out to ensure that the data entered is valid.
+Plan index number must be a positive integer and smaller than the total number of plan in list 
+in order to pass the check. Otherwise, an `InvalidPlanException` will be thrown and
+the entire process is aborted.
+
+Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability.
+
+**(Steps 3 to 4)** With the plan index number, a `Plan` object which user want to view details 
+will be fetched by calling method `PlanList#getPlanFromIndexNum()`.
+
+**(Steps 5 to 6)** An ArrayList of `Workout` object is created to store the workouts in the `Plan` object we get 
+in the previous step.
+
+**(Step 7 to 9)** The `PlanList#listPlanDetails()` method will then loop through the workout list which we get in the 
+previous step and show the name of the workouts with number of repetitions to the user. 
+The following is an example of what will be displayed to the user when the `plan /details` command is entered:
+
+```
+----------------------------------------------------------------------
+Here are the 3 workouts in [grow my muscles].
+1. push up (20 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+----------------------------------------------------------------------
+```
+This completes the process of displaying all workouts in a plan in WerkIt!
+
+---
+
+#### Delete Existing Plan
+
 
 ---
 ### Schedule
