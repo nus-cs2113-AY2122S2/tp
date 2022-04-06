@@ -61,7 +61,7 @@ class DeleteCommandTest {
         new AddCommand(inputStringCC, user).executeCommand();
         String inputStringExpenditure = "/e /pm DBS /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputStringExpenditure, user).executeCommand();
-        assertEquals(200.0,creditCardTestList.get(0).getBalanceLeft());
+        assertEquals(200.0, creditCardTestList.get(0).getBalanceLeft());
         String deleteInputString = "delete /e 1";
         new DeleteCommand(deleteInputString, user).executeCommand();
         assertEquals(500.0, creditCardTestList.get(0).getBalanceLeft());
@@ -136,7 +136,7 @@ class DeleteCommandTest {
      * Asserts if the index input is in the correct number format.
      */
     @Test
-    void deleteCommand_wrongExpenditureInputFormat_expectException() throws MindMyMoneyException{
+    void deleteCommand_wrongExpenditureInputFormat_expectException() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
@@ -153,7 +153,7 @@ class DeleteCommandTest {
      * Asserts if there is a missing index input in the command.
      */
     @Test
-    void deleteCommand_missingExpenditureInput_expectException() throws MindMyMoneyException{
+    void deleteCommand_missingExpenditureInput_expectException() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
@@ -214,7 +214,7 @@ class DeleteCommandTest {
      * Asserts if there is a missing index input in the command.
      */
     @Test
-    void deleteCommand_missingCreditCardInput_expectException() throws MindMyMoneyException{
+    void deleteCommand_missingCreditCardInput_expectException() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
@@ -231,7 +231,7 @@ class DeleteCommandTest {
      * Asserts if there is a missing index input in the command.
      */
     @Test
-    void deleteCommand_missingIncomeInput_expectException() throws MindMyMoneyException{
+    void deleteCommand_missingIncomeInput_expectException() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
@@ -329,7 +329,7 @@ class DeleteCommandTest {
      * Test if program is able to exit.
      */
     @Test
-    void addCommand_isExit_expectFalse() throws MindMyMoneyException {
+    void deleteCommand_isExit_expectFalse() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
