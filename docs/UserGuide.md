@@ -330,13 +330,13 @@ To find a doctor you would have to provide one of these parameters:
 
 Format: `find doctor /info [parameter], [keyword to find]`
 
-Example 1: `find doctor /info name, Jimmy`
-Example 2: `find doctor /info nric, S1234567X`
-Example 3: `find doctor /info age, 23`
-Example 4: `find doctor /info gender, M`
-Example 5: `find doctor /info address, 15 King's Avenue`
-Example 6: `find doctor /info dob, 1999-12-31`
-Example 7: `find doctor /info specialization, Dermatology`
+Example 1: `find doctor /info name, Jimmy` <br>
+Example 2: `find doctor /info nric, S1234567X` <br>
+Example 3: `find doctor /info age, 23` <br>
+Example 4: `find doctor /info gender, M` <br>
+Example 5: `find doctor /info address, 15 King's Avenue` <br>
+Example 6: `find doctor /info dob, 1999-12-31` <br>
+Example 7: `find doctor /info specialization, Dermatology` 
 
 
 #### FIND PATIENT
@@ -355,13 +355,13 @@ To find a patient you would have to provide one of these parameters using the gi
 
 Format: `find patient /info [parameter], [keyword to find]`
 
-Example 1: `find patient /info name, Steven Oz`
-Example 2: `find patient /info nric, S1234567X`
-Example 3: `find patient /info age, 54`
-Example 4: `find patient /info gender, M`
-Example 5: `find patient /info address, 15 King's Avenue`
-Example 6: `find patient /info dob, 1999-12-31`
-Example 7: `find patient /info admissiondate, 2022-03-11`
+Example 1: `find patient /info name, Steven Oz` <br>
+Example 2: `find patient /info nric, S1234567X` <br>
+Example 3: `find patient /info age, 54` <br>
+Example 4: `find patient /info gender, M` <br>
+Example 5: `find patient /info address, 15 King's Avenue` <br>
+Example 6: `find patient /info dob, 1999-12-31` <br>
+Example 7: `find patient /info admissiondate, 2022-03-11` <br>
 
 #### FIND MEDICINE
 
@@ -377,11 +377,11 @@ To find a medicine you would have to provide one of these parameters using the g
 
 Format: `find medicine /info [parameter], [keyword to find]`
 
-Example 1: `find medicine /info name, Paracetamol`
-Example 2: `find medicine /info id, S125`
-Example 3: `find medicine /info dosage, 500`
-Example 4: `find medicine /info expiry, 2022-06-30`
-Example 5: `find medicine /info sideeffects, Headache`
+Example 1: `find medicine /info name, Paracetamol` <br>
+Example 2: `find medicine /info id, S125` <br>
+Example 3: `find medicine /info dosage, 500` <br>
+Example 4: `find medicine /info expiry, 2022-06-30` <br>
+Example 5: `find medicine /info sideeffects, Headache` <br>
 Example 6: `find medicine /info quantity, 10`
 
 ### Additional Features
