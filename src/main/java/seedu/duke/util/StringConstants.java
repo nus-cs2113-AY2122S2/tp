@@ -193,8 +193,8 @@ public class StringConstants {
     public static final String ERROR_INVALID_FLAG = "\nInvalid flag '%s'."
             + "\nPlease check and try again. "
             + "\nYou may input 'help' followed by your command word to view the expected input format.";
-    public static final String ERROR_INVALID_TAG_COMMAND = "\nInvalid command word '%s'."
-            + "\nPlease try again. Accepted commands are: add, del.";
+    public static final String ERROR_INVALID_TAG_OPERATION = "\nInvalid operation '%s'."
+            + "\nPlease try again. Accepted operations are: add, del.";
     public static final String ERROR_INVALID_MODULE_GRADE = "\nInvalid module grade '%s'."
             + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
     public static final String ERROR_INVALID_MODULE_CODE = "\nInvalid module code.\nPlease try again.";
