@@ -14,7 +14,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 public class StorageParser {
 
     /**
-     * Returns a task object parsed from the data file.
+     * Returns a task object from a JSON object.
      *
      * @param taskData The data of a task in JSON.
      * @return Task containing the saved data for adding into program's task array.
@@ -28,25 +28,20 @@ public class StorageParser {
             String byDateString = taskData.getString("by_date");
             String doOnStartDateString = taskData.getString("do_date_start");
             String doOnEndDateString = taskData.getString("do_date_end");
-            String frequencyString = taskData.getString("frequency");
-            int index = taskData.getInt("index");
 
-            Frequency repeatFrequency = frequencyString.isBlank()
-                    ? null : Frequency.valueOf(frequencyString);
             LocalDateTime byDate = (byDateString.isBlank()
                     ? null : LocalDateTime.parse(byDateString, inputWithTimeFormat));
             LocalDateTime doOnStartDateTime = LocalDateTime.parse(doOnStartDateString, inputWithTimeFormat);
             LocalDateTime doOnEndDateTime = LocalDateTime.parse(doOnEndDateString, inputWithTimeFormat);
 
-
             parsedTask = new Task(identifier, description, byDate, doOnStartDateTime,
-                    doOnEndDateTime, repeatFrequency, index);
+                    doOnEndDateTime);
             String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();
             }
             return parsedTask;
-        } catch (JSONException | DateTimeParseException | NumberFormatException exception) {
+        } catch (JSONException | DateTimeParseException | IllegalArgumentException exception) {
             throw new InvalidInputException(exception.getMessage());
         }
     }

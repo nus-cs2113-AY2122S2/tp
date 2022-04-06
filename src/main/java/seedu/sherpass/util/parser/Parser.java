@@ -48,9 +48,9 @@ public class Parser {
                 ? splitInput[COMMAND_CONTENT_INDEX].trim() : EMPTY_STRING;
         switch (commandWord) {
         case MarkCommand.COMMAND_WORD:
-            return TaskParser.prepareMarkOrUnmark(argument, MarkCommand.COMMAND_WORD);
+            // Fallthrough
         case UnmarkCommand.COMMAND_WORD:
-            return TaskParser.prepareMarkOrUnmark(argument, UnmarkCommand.COMMAND_WORD);
+            return TaskParser.prepareMarkOrUnmark(argument, commandWord, ui);
         case AddCommand.COMMAND_WORD:
             return TaskParser.prepareAdd(argument, ui);
         case EditCommand.COMMAND_WORD:

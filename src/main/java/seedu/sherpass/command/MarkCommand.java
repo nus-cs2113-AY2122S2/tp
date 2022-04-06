@@ -6,6 +6,8 @@ import seedu.sherpass.util.Ui;
 import seedu.sherpass.task.TaskList;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.MARK_TASK_RESULT_MESSAGE;
+import static seedu.sherpass.constant.Message.TAB_INDENT;
 
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
@@ -38,15 +40,12 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            if (taskList.isTaskDone(markIndex)) {
-                ui.showToUser("This task has already been marked!");
-                return;
-            }
             taskList.markTask(markIndex);
             storage.writeSaveData(taskList);
-            ui.showToUser("Nice! I've marked this task as done:\n\t" + taskList.getTask(markIndex));
+            ui.showToUser(MARK_TASK_RESULT_MESSAGE);
+            ui.showToUser(TAB_INDENT + taskList.getTask(markIndex));
         } catch (IndexOutOfBoundsException exception) {
-            ui.showToUser(ERROR_INVALID_MARKING_INDEX_MESSAGE);
+            ui.showError(ERROR_INVALID_MARKING_INDEX_MESSAGE);
         }
     }
 }
