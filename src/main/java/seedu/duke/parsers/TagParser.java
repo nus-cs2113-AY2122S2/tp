@@ -24,8 +24,8 @@ public class TagParser extends Parser {
     private String userInput;
 
     // Unescaped Regex for testing:
-    // ((?<tagOperation>\b(add|del)\b)?)(\s+(?<taskNumber>\d+))((\s+-m\s+(?<taskModule>\w+))?)
-    // (\s+\"(?<tagName>\w+)\")(?<invalid>.*)
+    // ((?<tagOperation>\b(add|del)|(?<invalidTagCommand>.*)\b)?)(\s+(?<taskNumber>\d+))((\s+(-m|(?<invalidModFlag>.*))
+    // \s+(?<taskModule>\w+))?)(\s+(?<tagName>\w+))(?<invalid>.*)
     private static final String TAG_FORMAT = "((?<tagOperation>\\b(add|del)|(?<invalidTagCommand>.*)\\b)?)"
             + "(\\s+(?<taskNumber>\\d+))((\\s+(-m|(?<invalidModFlag>.*))\\s+(?<taskModule>\\w+))?)"
             + "(\\s+(?<tagName>\\w+))(?<invalid>.*)";
@@ -52,7 +52,14 @@ public class TagParser extends Parser {
      */
     @Override
     public void determineError() throws ModHappyException {
-        String tagOperation, taskNumber, tagName;
+        determineErrorInTagOperation();
+        determineErrorInTaskNumber();
+        determineErrorInTagName();
+        throw new InvalidCompulsoryParameterException();
+    }
+
+    private void determineErrorInTagOperation() throws InvalidTagOperationException {
+        String tagOperation;
         try {
             tagOperation = userInput.split(SPACE)[ZEROTH_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -61,6 +68,10 @@ public class TagParser extends Parser {
         if (!tagOperation.matches(TAG_COMMAND_FLAGS)) {
             throw new InvalidTagOperationException(tagOperation);
         }
+    }
+
+    private void determineErrorInTaskNumber() throws ModHappyException {
+        String taskNumber;
         try {
             taskNumber = userInput.split(SPACE)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -69,6 +80,10 @@ public class TagParser extends Parser {
         if (!taskNumber.matches(POSITIVE_INT)) {
             throw new InvalidNumberException(TASK_NUMBER_STR);
         }
+    }
+
+    private void determineErrorInTagName() throws ModHappyException {
+        String tagName;
         try {
             if (userInput.contains(TASK_MODULE_FLAG)) {
                 tagName = userInput.split(SPACE)[FOURTH_INDEX];
@@ -81,7 +96,6 @@ public class TagParser extends Parser {
         if (!tagName.matches(WORD_CHAR_ONLY)) {
             throw new InvalidCompulsoryParameterException(TAG_NAME_STR);
         }
-        throw new InvalidCompulsoryParameterException();
     }
 
     @Override

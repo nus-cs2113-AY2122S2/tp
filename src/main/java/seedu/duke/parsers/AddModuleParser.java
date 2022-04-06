@@ -48,8 +48,9 @@ public class AddModuleParser extends Parser {
      *                                                      Any other excess inputs
      */
 
-    private static final String ADD_FORMAT = "(mod\\s+(?<moduleCode>\\w+)(\\s+(?<modularCredit>-?\\d+)(?=(\\s+-d\\s+\\\""
-        + "[^\\\"]+\\\")|.*$))(\\s+(-d\\s+\\\"(?<moduleDescription>[^\\\"]+)\\\"))?)(?<invalid>.*)";
+    private static final String ADD_FORMAT = "(mod\\s+(?<moduleCode>\\w+)(\\s+(?<modularCredit>-?\\d+)"
+            + "(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|.*$))(\\s+(-d\\s+\\\""
+            + "(?<moduleDescription>[^\\\"]+)\\\"))?)(?<invalid>.*)";
     private static final String WORD_CHAR_ONLY = StringConstants.WORD_CHAR_ONLY;
     private static final String UNRESTRICTED_INT = StringConstants.UNRESTRICTED_INT;
 

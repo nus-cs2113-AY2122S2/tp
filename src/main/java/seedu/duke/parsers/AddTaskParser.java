@@ -42,10 +42,6 @@ public class AddTaskParser extends Parser {
      *                                                      Any other excess inputs
      */
 
-    /*
-       (task\s+\"(?<taskName>[^\"]+)\"(\s+((-m|(?<invalidModFlag>.*))\s+(?<taskModule>\w+)))?(\s+(-d|(?<invalidTaskDesFlag>.*))\s+\"(?<taskDescription>[^\"]+)\")?(\s+(-t|(?<invalidTimeFlag>.*))\s+\"(?<estimatedWorkingTime>[^\"]+)\")?|mod\s+(?<moduleCode>\w+?)(\s+(?<modularCredit>\d+)(?=(\s+-d\s+\"[^\"]+\")|.*$))(\s+((-d|(?<invalidModDesFlag>.*))\s+\"(?<moduleDescription>[^\"]+)\"))?)(?<invalid>.*)
-     */
-
     private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+(-m\\s+(?<taskModule>\\w+)))?"
             + "(\\s+-d\\s+\\\"(?<taskDescription>[^\\\"]+)\\\")?"
             + "(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?)(?<invalid>.*)";
