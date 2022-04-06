@@ -123,7 +123,9 @@ public class WerkIt {
 
     /**
      * Checks if the required resource directory and files already exists in the user's filesystem. If not,
-     * call the relevant method(s) to create the required directory and/or file(s).
+     * call the relevant method(s) to create the required directory and/or file(s). In addition, once all the
+     * data is loaded into the respective data structures, all resource files will be re-written to ensure
+     * that the data in the files are of a correct format (e.g. lower-case formatting).
      *
      * @throws IOException If the application is unable to create the required directory and/or file(s).
      */
