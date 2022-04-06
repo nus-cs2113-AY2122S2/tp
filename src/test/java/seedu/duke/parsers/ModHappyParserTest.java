@@ -27,6 +27,7 @@ import seedu.duke.exceptions.AdditionalParameterException;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ExcessArgumentException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
+import seedu.duke.exceptions.InvalidTagOperationException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.data.Module;
 import seedu.duke.data.Task;
@@ -51,6 +52,9 @@ public class ModHappyParserTest {
 
     }
 
+    private void testParseCommand_expectInvalidTagOperationException(String testString) {
+        assertThrows(InvalidTagOperationException.class, () -> parser.parseCommand(testString));
+    }
 
     /*private void testParseCommand_expectInvalidNumberException(String testString) {
         assertThrows(InvalidNumberException.class, () -> {
@@ -863,25 +867,15 @@ public class ModHappyParserTest {
         }
     }
 
-    /*@Test
-<<<<<<< HEAD
-=======
-
->>>>>>> f6b005ac49897d5c8b3f3e93a513bc849b093402
+    @Test
     public void parse_tagCommand_invalidFlag_throwsException() {
         final String testString = "tag add 1 -f cs2113t tag";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectInvalidFlagException(testString);
     }
 
     @Test
     public void parse_tagCommand_invalidTagOperation_throwsException() {
-<<<<<<< HEAD
-=======
-
->>>>>>> f6b005ac49897d5c8b3f3e93a513bc849b093402
         final String testString = "tag invalidOp 1 tagDescription";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectInvalidTagOperationException(testString);
     }
-
-     */
 }
