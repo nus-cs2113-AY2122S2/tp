@@ -75,8 +75,8 @@ public class ParserArguments {
             // not applies to EditCommand
         }
 
-        if (!attributes.containsKey(HEADINGS_NAME_INDEX[NAME_INDEX]) ||
-                !attributes.containsKey(HEADINGS_NAME_INDEX[INDEX_INDEX])) {
+        if (!attributes.containsKey(HEADINGS_NAME_INDEX[NAME_INDEX]) 
+            || !attributes.containsKey(HEADINGS_NAME_INDEX[INDEX_INDEX])) {
             throw new MissingParameterException();
         }
 
