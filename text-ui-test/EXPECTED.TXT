@@ -1,5 +1,9 @@
+---------------------------------------------------
 Welcome to the AllOnUs life management suite. How can we help you today?
-Menu:
+---------------------------------------------------
+---------------------------------------------------
+MENU:
+---------------------------------------------------
 ---------------------------------------------------
 Welcome to Contacts Manager
 ---------------------------------------------------
@@ -134,8 +138,12 @@ Invalid contact field(s)!
 ---------------------------------------------------
 You haven't added any contacts to your list yet!
 ---------------------------------------------------
+---------------------------------------------------
 Welcome back to the main menu
-Menu:
+---------------------------------------------------
+---------------------------------------------------
+MENU:
+---------------------------------------------------
 Welcome to Expense Tracker
 You haven't added any expenses to your list yet!
 Added 2022-03-25 | $18.00 | Category | This is a remark
@@ -168,8 +176,12 @@ Deleted entry: 2022-03-25 | $20.00 | Category | This is a remark
 Here are the expenses you have made so far:
  1. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
 
+---------------------------------------------------
 Welcome back to the main menu
-Menu:
+---------------------------------------------------
+---------------------------------------------------
+MENU:
+---------------------------------------------------
 Welcome to Modules Tracker, where you can track all your classes.
 There are no modules in your list yet!
 Okay, I have added a new module to the schedule
@@ -238,6 +250,12 @@ Here are the changes so far. You can edit more module parameters or you can ente
 Your Module was successfully edited! Here are the changes:
 [Module] CS2113 Lecture: Thursday, 03:00pm - 05:00pm
 Exiting the edit mode
+---------------------------------------------------
 Welcome back to the main menu
-Menu:
+---------------------------------------------------
+---------------------------------------------------
+MENU:
+---------------------------------------------------
+---------------------------------------------------
 Goodbye! Hope to see you again...
+---------------------------------------------------
