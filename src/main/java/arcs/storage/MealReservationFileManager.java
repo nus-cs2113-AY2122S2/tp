@@ -68,7 +68,7 @@ public class MealReservationFileManager {
                         menuItemData[PRICE_INDEX]);
                 reservedMenuItems.add(menuItem);
                 index++;
-                if (index == record_length) {
+                if (index == recordLength) {
                     break;
                 }
             }
