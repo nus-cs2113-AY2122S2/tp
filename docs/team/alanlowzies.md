@@ -57,6 +57,10 @@ into text files stored on the user's local filesystem
 should take note of to avoid issues in the application.</span>
 <span class="box info">:memo: This is an example of an information box. Contains information that may be useful for
 the users.</span>
+- (Developer and User Guides) Inserted 'buttons' throughout the guides to allow users to click and navigate back to the
+  guides' tables of contents for easier navigation. 
+  <br/><br/>**Demo:**<br/>
+  ![Back to Top Button Demo](../images/ppp/alanlowzies/BackToToCDemo.gif)
 
 ### Contributions to the User Guide (UG)
 - Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
@@ -74,8 +78,12 @@ prerequisites to download and the steps to get it running on the user's computer
     - How WerkIt! processes and creates a new workout when requested by the user
       ([link to part](../DeveloperGuide.md#create-new-workout)).
       - Includes sequence diagrams to visualise the process.
+    - Most of the section on [File Management](../DeveloperGuide.md#file-management).
+- Wrote the 'Design - Storage Component' section ([link to part](../DeveloperGuide.md#storage-component)).
 - Wrote the instructions on 
 [how to set up the development environment](../DeveloperGuide.md#setting-up-your-development-environment).
+- Wrote the [target user profile](../DeveloperGuide.md#target-user-profile) of WerkIt!
+- Wrote the [value proposition](../DeveloperGuide.md#value-proposition) of WerkIt!
 - Wrote part of the [glossary](../DeveloperGuide.md#glossary)
 - Wrote the [table of contents](../DeveloperGuide.md#table-of-contents).
 
