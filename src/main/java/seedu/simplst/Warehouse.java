@@ -514,6 +514,15 @@ public class Warehouse {
         }
     }
 
+    private boolean hasOrderId(int oid) {
+        for (Order order:orderLists) {
+            if (order.getId() == oid) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Add the base details of an order.
      * This will add the order to orderLists in the warehouse
@@ -529,8 +538,16 @@ public class Warehouse {
 
         try {
             int id = Integer.parseInt(oid);
+
+            if (hasOrderId(id)) {
+                System.out.printf("Order id %d already exists, please choose another id",
+                        id);
+                return;
+            }
+
             Order order = new Order(id, recv, addr);
             orderLists.add(order);
+            System.out.printf("Order %d added to the warehouse", i);
         } catch (NumberFormatException e) {
             System.out.println("oid must be a positive number");
             throw new WrongCommandException("add", true);
