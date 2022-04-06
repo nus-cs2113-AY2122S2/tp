@@ -164,11 +164,6 @@ public class ActivityEditCommand extends Command {
      * Else, the total cost is distributed evenly.
      */
     private void updateCostAndCostList() {
-        // If the original activity's costlist/cost must be preserved, gst/sc are removed from the costs and added
-        // back in using the current gst/sc values (either provided by the user or retrieved from the activity).
-        // If the original activity's costlist/cost must be overwritten by user-specified costs, the old costs are
-        // set to zero to wipe them clean and overwritten with the new costs using the current gst/sc values (either
-        // provided by the user or retrieved from the activity).
         if (editMode == MODE_PRESERVE) {
             removeOldExtraChargesFromCostList();
             resetTotalCostToZero();
