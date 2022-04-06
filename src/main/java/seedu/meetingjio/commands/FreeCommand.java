@@ -10,7 +10,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_FREE_TIMESLOT;
 public class FreeCommand extends Command {
 
     public static final int NUM_DAYS = 7;
-    public static final int NUM_MINS = 960;
+    public static final int NUM_MINS = 1440;
     public static final int OFFSET = 480;
     public static final int HOUR_PARAMETER_IN_24_HOURS = 100;
     public static final int MINS_IN_1_HOUR = 60;
@@ -64,7 +64,7 @@ public class FreeCommand extends Command {
     /**
      * Given the finalised busySlots array and the minimum duration, find the timeslots where everyone is free and the
      * duration meets the minimum duration.
-     * Each row in busySlots contains 960 0s and 1s, where free timeslots are represented by consecutive 0s.
+     * Each row in busySlots contains 1440 0s and 1s, where free timeslots are represented by consecutive 0s.
      * 2 strings are initialised: freeSlotsString to store free slots and newEntry to store each new entry.
      * An integer count and a boolean isStart is also initialised as 0 and true respectively.
      * For each day, iterating from left to right, when a 0 (FREE) is encountered, the respective day and time is added
@@ -74,7 +74,7 @@ public class FreeCommand extends Command {
      * duration. If it does, the time is added to newEntry, and newEntry is added to freeSlotsString.
      * Subsequently, newEntry and count will reset until the next 0 is encountered, and the process repeats itself.
      *
-     * @param busySlots 7 x 960 array representing the timeframe from 0800 to 2359 for each day. 1 indicates BUSY and 0
+     * @param busySlots 7 x 1440 array representing the timeframe from 0000 to 2359 for each day. 1 indicates BUSY and 0
      *                  indicates FREE
      * @param duration Minimum time required for the free time slot
      * @return truncateString(freeSlotsString) freeSlotsString but truncated without the last newline character
@@ -164,13 +164,12 @@ public class FreeCommand extends Command {
     }
 
     /**
-     * Convert the number of minutes starting from 0800 to 24-hour format.
+     * Convert the number of minutes starting from 0000 to 24-hour format.
      *
      * @param mins The number of minutes starting from 0800
      * @return timeIn24Hour The corresponding time in 24-hour format
      */
     private static String convertFreeArrayIndexToTime(int mins) {
-        mins += OFFSET;
         int hours = mins / MINS_IN_1_HOUR;
         int minutes = mins % MINS_IN_1_HOUR;
         int timeInt = hours * HOUR_IN_24_HOUR + minutes;
@@ -179,7 +178,7 @@ public class FreeCommand extends Command {
     }
 
     /**
-     * This helper method takes in a time in 24-hour format, and convert it to the number of minutes starting from 0800.
+     * This helper method takes in a time in 24-hour format, and convert it to the number of minutes starting from 0000.
      *
      * @param time Time to be converted
      * @return timeInMinutes The number of minutes converted from time
@@ -188,8 +187,7 @@ public class FreeCommand extends Command {
         int hours = time / HOUR_PARAMETER_IN_24_HOURS;
         int minutes = time % HOUR_PARAMETER_IN_24_HOURS;
         int timeInMinutes = hours * MINS_IN_1_HOUR + minutes;
-        int index = timeInMinutes - OFFSET;
-        return index;
+        return timeInMinutes;
     }
 
 }
