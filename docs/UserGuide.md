@@ -25,6 +25,7 @@ and maintaining the state of checked-in/checked-out rooms.
 1. [Customer Satisfaction Related Commands](#Customer-Satisfaction-Related-Commands)
     * Add Customer Satisfaction 
     * View All Customer Satisfactions
+    * Calculate Average Satisfaction
 2. [Housekeeper Related Commands](#Housekeeper-Related-Commands)
    * Add Housekeeper Profile
    * Add/Update Availability of Housekeeper
@@ -68,6 +69,7 @@ Format: `add satisfaction CUSTOMER_NAME / SATISFACTION_RATING`
 
 * The `CUSTOMER_NAME` can be in a natural language format. It must not be 
 the name of a customer whose satisfaction rating was already recorded. 
+It must not contain any non-alphabetical characters (aside from spaces). 
 * The `SATISFACTION_RATING` must be an integer from 1 to 5, inclusive. 
 
 Example of usage:
@@ -121,6 +123,39 @@ There are currently 3 recorded customer satisfactions.
 3. [ CHRIS ROCK ]: 4
 ============= End of the list =============
 ```
+
+### Calculate average satisfaction: `average satisfaction`
+Calculates the mean customer satisfaction. 
+
+Format: `average satisfaction`
+
+Example of usage:
+
+`add satisfaction Will Smith / 3`  <br />
+`add satisfaction Bob / 5`  <br />
+`add satisfaction Chris Rock / 4`  <br />
+`average satisfaction`
+
+Expected output:
+```
+========== Noted ! ==========
+The Satisfaction instance WILL SMITH: 3 has been added to the list of Satisfactions.
+There are currently 1 recorded customer satisfactions.
+=============================
+
+========== Noted ! ==========
+The Satisfaction instance BOB: 5 has been added to the list of Satisfactions.
+There are currently 2 recorded customer satisfactions.
+=============================
+
+========== Noted ! ==========
+The Satisfaction instance CHRIS ROCK: 4 has been added to the list of Satisfactions.
+There are currently 3 recorded customer satisfactions.
+=============================
+
+Average customer satisfaction: 4.0
+```
+
 
 ## Housekeeper Related Commands
 
@@ -406,7 +441,8 @@ Format: `add performance HOUSEKEEPER_NAME / PERFORMANCE_RATING`
 
 * The `HOUSEKEEPER_NAME` can be in a natural language format. It must not be the name of a
   housekeeper who already has a recorded performance rating, and it must be the name of a
-  housekeeper who has a corresponding record in the list of housekeepers.
+  housekeeper who has a corresponding record in the list of housekeepers. It must not contain any 
+  non-alphabetical characters (aside from spaces).
 * The `PERFORMANCE_RATING` must be an integer from 1-5, inclusive.
 
 Example of usage:
