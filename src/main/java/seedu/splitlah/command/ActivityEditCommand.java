@@ -41,7 +41,6 @@ public class ActivityEditCommand extends Command {
     private static final int MODE_OVERWRITE = 0;
     private static final int MODE_PRESERVE = 1;
 
-
     private int activityId = MISSING_ACTIVITYID;
     private int sessionId = MISSING_SESSIONID;
     private Activity oldActivity = null;
