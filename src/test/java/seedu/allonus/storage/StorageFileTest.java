@@ -23,9 +23,9 @@ public class StorageFileTest {
 
     public static final String TEST_DATA_FILE = "allonusTestData.txt";
 
-    StudyManager studyManager;
-    ContactsManager contactsManager;
-    ExpenseTracker expenseTracker;
+    StudyManagerStub studyManager;
+    ContactsManagerStub contactsManager;
+    ExpenseTrackerStub expenseTracker;
 
     StorageFile storageFile;
 
@@ -34,14 +34,14 @@ public class StorageFileTest {
     String module3 = "add m/EE4204 c/exam d/Monday t/10:00am-12:00pm";
     String[] modules = new String[]{ module1, module2, module3 };
 
-    String expense1 = "add d/2022-03-15 a/9.50 c/Movie r/Spiderman: No Way Home";
+    String expense1 = "add d/2022-03-15 a/9.50 c/Movie r/Spiderman";
     String expense2 = "add d/2022-02-17 a/2.40 c/Food r/Popcorn";
     String expense3 = "add d/2022-03-18 a/9.50 c/Movie r/Matrix";
     String[] expenses = new String[]{ expense1, expense2, expense3 };
 
-    String contact1 = "add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215";
-    String contact2 = "add n/Ryan Briggs f/FoE e/e1122334@u.nus.edu d/friend";
-    String contact3 = "add n/Benjamin f/SoC e/e0000127@u.nus.edu d/best friend";
+    String contact1 = "add n/Jane f/SoC e/e0334987@u.nus.edu d/groupmate";
+    String contact2 = "add n/Ryan f/FoE e/e1122334@u.nus.edu d/friend";
+    String contact3 = "add n/Benjamin f/SoC e/e0000127@u.nus.edu d/bestfriend";
     String[] contacts = new String[]{ contact1, contact2, contact3 };
 
     /**
@@ -49,14 +49,11 @@ public class StorageFileTest {
      */
     @BeforeAll
     public void setUp() {
-        studyManager = new StudyManager();
-        contactsManager = new ContactsManager();
-        expenseTracker = new ExpenseTracker();
+        studyManager = new StudyManagerStub();
+        contactsManager = new ContactsManagerStub();
+        expenseTracker = new ExpenseTrackerStub();
         StorageFile.setFields(contactsManager, expenseTracker, studyManager, TEST_DATA_FILE);
         storageFile = new StorageFile();
-        expenseTracker.getLogger().setLevel(Level.SEVERE);
-        studyManager.getLogger().setLevel(Level.WARNING);
-        contactsManager.getLogger().setLevel(Level.SEVERE);
         storageFile.getLogger().setLevel(Level.WARNING);
 
         File f = new File(storageFile.getDatafileRelativePath());
