@@ -436,6 +436,7 @@ the `<keywords>` is not specified, it will be deemed as searching for spacing.
   * [Update Existing Workout](#update-existing-workout)
 * [Plan](#plan)
   * [Create A New Plan](#create-a-new-plan)
+    * [Design Considerations](#design-considerations-for-creating-a-new-plan)
   * [List Plans](#list-plans)
   * [List Workouts In A Plan](#list-workouts-in-a-plan)
   * [Delete Existing Plan](#delete-existing-plan)
@@ -844,6 +845,12 @@ way the workout data are formatted and stored in the `workouts.txt` file.
 Hence, to simplify the implementation, the team decided to simply
 rewrite all workouts to the resource file whenever a workout is deleted.
 
+###### Deleting a workout will cause a cascade delete action
+When an existing workout is deleted from the application, plans that contain that workout
+should also be deleted. In addition, affected plans in the schedule should also be removed. This
+cascade delete action from `workout -> plan -> schedule` must be done so that 
+the data in the `workouts.txt`, `plans.txt` and `schedule.txt` files matches
+
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
@@ -1028,6 +1035,21 @@ Alright, the following plan has been created:
 object's data into `plans.txt`, which is stored on the user's local filesystem.
 <br><br>
 This completes the process of creating and adding a new plan to WerkIt!.
+
+##### Design Considerations for Creating a New Plan
+###### Validity checks for new plans to be inserted
+The following are the validity checks done for new plans to be inserted into the application
+and the reasons why these checks are done:
+
+|       Type of validity checks       |                                                                                                                                                         Reason for creating the validity checks                                                                                                                                                         |
+|:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|          Unique plan name           |                                                                                                            All plan names within the application should be <br/> unique as it makes no sense for users to create plans with the same names.                                                                                                             |
+|     No plans called "rest day"      |                                              "rest day" is used to identify the days in the <br/> schedule that do not have a plan assigned to it. <br/> If a plan called "rest day" is allowed, users might not be able to <br/> differentiate a rest day from days that they actually need to work out.                                               |
+|    Character limit for plan name    |                                                                                                                 Currently, the maximum character limit set for all plan names is 30 characters. <br/> This is for UI printing purposes.                                                                                                                 |
+|     Maximum number of workouts      |                                           Currently, a plan only supports a maximum of 10 workouts as it makes no sense for <br/> a plan to have many different workouts in the real-life context. <br/> In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                            |
+| Check plans with same workout order | All plans within the application should have different workout order sequence. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. <br/> This check is done as it makes no sense to create two plans with different plan names, but same workout sequences. |
+
+
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
