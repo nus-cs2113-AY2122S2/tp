@@ -177,13 +177,15 @@ public class TaskList {
      *                            taskToCheck has the same date and clashing of time periods
      *                            with tasks in taskList
      */
-    public void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck)
+    public void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck, boolean fromFile)
             throws TimeClashException, InvalidInputException {
         if (isStartTimeClashWithEndTime(taskToCheck)) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
-        if (!taskToCheck.isDone() && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
-            throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
+        if (!fromFile) {
+            if (!taskToCheck.isDone() && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
+                throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
+            }
         }
         if (isByDateBeforeDoOnDate(taskToCheck)) {
             throw new InvalidInputException(ERROR_BY_DATE_BEFORE_DO_ON_DATE);
@@ -202,12 +204,13 @@ public class TaskList {
      *
      * @param newTask The new task to be added to the array.
      */
-    public void addTask(Task newTask, Frequency frequency) throws InvalidInputException, TimeClashException {
+    public void addTask(Task newTask, Frequency frequency, boolean fromFile) throws InvalidInputException,
+            TimeClashException {
         LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(newTask.getDoOnStartDateTime(),
                 frequency);
         ArrayList<Task> taskListToAdd = new ArrayList<>();
         do {
-            checkDateTimeClash(tasks, newTask);
+            checkDateTimeClash(tasks, newTask, fromFile);
             taskListToAdd.add(newTask);
             newTask = prepareNextTask(newTask, frequency);
         } while (newTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
@@ -287,7 +290,7 @@ public class TaskList {
             updatedTask.setByDateTime(byDateTime);
         }
 
-        checkDateTimeClash(editedList, updatedTask);
+        checkDateTimeClash(editedList, updatedTask, false);
 
         tasks.remove(editIndex);
         tasks.add(updatedTask);
@@ -324,7 +327,7 @@ public class TaskList {
             updateTask(updatedTask, taskDescription,
                     startDateOffset, endDateOffset, byDateOffset);
             updatedTask.setIdentifier(newIdentifier);
-            checkDateTimeClash(editedList, updatedTask);
+            checkDateTimeClash(editedList, updatedTask, false);
             editedList.add(updatedTask);
         }
 

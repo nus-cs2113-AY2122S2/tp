@@ -26,7 +26,7 @@ public class TaskListTest {
                 LocalDateTime.parse("31/3/2023 13:00", inputWithTimeFormat));
         TaskList testMethod = new TaskList();
         assertThrows(TimeClashException.class,
-            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
+            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo, false));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TaskListTest {
                 LocalDateTime.parse("31/3/2023 12:00", inputWithTimeFormat));
         TaskList testMethod = new TaskList();
         assertThrows(TimeClashException.class,
-            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
+            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo, false));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class TaskListTest {
                 LocalDateTime.parse("31/3/2023 11:00", inputWithTimeFormat));
         TaskList testMethod = new TaskList();
         assertThrows(TimeClashException.class,
-            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
+            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo, false));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class TaskListTest {
                 LocalDateTime.parse("31/3/2023 13:00", inputWithTimeFormat));
         TaskList testMethod = new TaskList();
         assertThrows(TimeClashException.class,
-            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo));
+            () -> testMethod.checkDateTimeClash(dummyList, testTaskTwo, false));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class TaskListTest {
                 LocalDateTime.parse("31/3/2023 12:00", inputWithTimeFormat),
                 LocalDateTime.parse("31/3/2023 13:00", inputWithTimeFormat));
         TaskList testMethod = new TaskList();
-        testMethod.checkDateTimeClash(dummyList, testTaskTwo);
+        testMethod.checkDateTimeClash(dummyList, testTaskTwo, false);
         assertTrue(true);
     }
 
