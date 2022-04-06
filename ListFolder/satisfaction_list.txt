@@ -1,3 +1,3 @@
-fred|5
-joestar|2
-bob jones|3
+bob|3
+joe|4
+john|5
