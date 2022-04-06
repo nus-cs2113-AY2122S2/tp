@@ -12,7 +12,7 @@
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ## About this Guide
-This developer guide serves a documentation of the development of WerkIt!, an application that was created to help
+This developer guide serves as a documentation of the development of WerkIt!, an application that was created to help
 prospective users to plan their exercise routines.
 
 This technical document is meant for current and future developers of WerkIt! as a reference point on the design,
@@ -40,7 +40,7 @@ The following websites and codebases were referenced and adapted for our project
 
 ## Setting Up your Development Environment
 ### Requirements
-- [X] Java JDK version 11
+- [X] Java JDK version 11.
 - [X] An IDE of your choice, though IntelliJ IDEA is recommended as this project is developed
 with this IDE.
 
@@ -102,6 +102,18 @@ You are now ready to begin developing!
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
 
 ## Design 
+
+### Table of Contents
+- [Architecture Overview](#architecture-overview)
+  - [Main Components of the Architecture](#main-components-of-the-architecture)
+  - [How the Components Interact with Each Other](#how-the-components-interact-with-each-other)
+- [Component Overview](#component-overview)
+  - [Storage Component](#storage-component)
+  - [UI Component](#ui-component)
+  - [Parser Component](#parser-component)
+  - [Logic Component](#logic-component)
+- [Feature Overview](#feature-overview)
+
 ### Architecture Overview
 
 ![Architecture-Diagram](high-level-diagram/architecture_diagram.png)
@@ -110,7 +122,7 @@ The architecture diagram above shows the high-level design of the application.
 Given below is a quick overview of the main components of the application
 and their interactions.
 
-#### Main components of the architecture
+#### Main Components of the Architecture
 - `Main`: The main component that starts the application upon launch of the applicaiton.
 - `WerkIt`: Initializes other components in the correct sequence, and connects them up with each other.
 - `Storage`: Reads data from, and writes data to the user's local storage.
@@ -118,12 +130,12 @@ and their interactions.
 - `Parser`: Parses user input to make sense of the command supplied by the user.
 - `Logic`: Executes the appropriate command as intended by the user.
 
-#### How the components interact with each other
+#### How the Components Interact with Each Other
 [Sequence diagram]
 
 ### Component Overview
 
-#### Storage component
+#### Storage Component
 
 This component of WerkIt! is mainly responsible for reading and writing application data from and to files
 stored on the user's filesystem. This is to allow the user to retain the data he/she has entered into WerkIt! and be
@@ -162,7 +174,7 @@ werkItLogs/
 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
-#### UI component
+#### UI Component
 UI component consists of a single [UI class](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/werkit/UI.java)
 which manages interaction (prompting for user input and displaying results
 of commands/methods being called) between the user and the application.
@@ -185,7 +197,7 @@ user has successfully exited the program.
 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
-#### Parser component
+#### Parser Component
 
 The [Parser class](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/werkit/Parser.java) 
 of WerkIt! is mainly responsible for making sense of the user commands.
@@ -214,7 +226,7 @@ type of `Command` will be called to create the appropriate `Command` object and 
 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
-#### Logic component
+#### Logic Component
 Below is a class diagram of the `Logic` component:
 ![LogicUML](uml/classDiagrams/images/logicComponent.png)
 <span class="box info">:memo: This is a high level overview of the `Logic` component, thus,
@@ -260,13 +272,13 @@ features in detail.
 ### Feature Overview
 
 The features of WerkIt! are split and grouped into 5 **main** features:
-1. [Exercise-related features](#exercise-related-features)
-2. [Workout-related features](#workout-related-features)
-3. [Plan-related features](#plan-related-features)
-4. [Schedule-related features](#schedule-related-features)
-5. [Search-related features](#search-related-features)
+1. [Exercise-Related Features](#exercise-related-features)
+2. [Workout-Related Features](#workout-related-features)
+3. [Plan-Related Features](#plan-related-features)
+4. [Schedule-Related Features](#schedule-related-features)
+5. [Search-Related Features](#search-related-features)
 
-### Exercise-related features
+### Exercise-Related Features
 
 Format: `exercise <commandAction> <condition>`
 
@@ -293,7 +305,7 @@ in the future. Thus, we have this standalone section specifically kept for exerc
 
 ---
 
-### Workout-related features
+### Workout-Related Features
 
 Format: `workout /commandAction <condition>`
 
@@ -330,7 +342,7 @@ as the `/delete` and `/update` actions are cascading actions
 
 ---
 
-### Plan-related features
+### Plan-Related Features
 ![PlanUML](uml/classDiagrams/images/PlanRelatedFeatures.png)
 <br>
 
@@ -365,7 +377,7 @@ application’s day list.
 
 ---
 
-### Schedule-related features
+### Schedule-Related Features
 ![ScheduleUML](uml/classDiagrams/images/scheduleComponent.png)
 
 Users are able to create and make changes to a 7-day workout plan schedule using the WerkIt application. For each day, users are only allowed
@@ -427,7 +439,7 @@ schedule list has successfully been reset.
 ---
 
 
-### Search-related features
+### Search-Related Features
 
 Format: `search <commandAction> <keywords>`
 
