@@ -473,16 +473,16 @@ The date has to strictly be in the format `yyyy-mm-dd` or the command will not g
 Sample input:
 
 ```
-add event read / 2022-03-30
+add event study / 2022-12-13
 ```
 
 Expected output:
 
 ```
-======================================================================
+=================== Noted! ======================
 I have added the following event in your list:
-Event read (at: Mar 30 2022)
-======================================================================
+	Event study (at: Dec 13 2022)
+=================================================
 ```
 
 ### View the list of events: `list events`
@@ -496,11 +496,10 @@ Format: `list events`
 Expected output:
 
 ```
-======================================================================
+=================== Noted! ======================
 Here are all the events in your list:
-	1. Event something (at: Feb 2 2022)
-	2. Event cry (at: Mar 30 2022)
-======================================================================
+	1. Event study (at: Dec 12 2022)
+=================================================
 ```
 
 ### Delete an event: `delete event `
@@ -511,23 +510,15 @@ Format: `delete event INDEX`
 
 Make sure that you put the correct index for the event to be removed. Indexes can be seen when the list of events is printed.
 
-Sample input: `delete event 2`
+Sample input: `delete event 1`
 
 Expected output:
 
 ```
-======================================================================
+=================== Noted! ======================
 I have deleted the following event from your list:
-	Event cry (at: Mar 30 2022)
-======================================================================
-```
-
-The list after deleting this event:
-```
-======================================================================
-Here are all the events in your list:
-	1. Event something (at: Feb 2 2022)
-======================================================================
+	Event study (at: Dec 12 2022)
+=================================================
 ```
 
 
