@@ -20,7 +20,7 @@ public class Messages {
     public static final String MESSAGE_WELCOME = "Welcome to MeetingJio!";
     public static final String MESSAGE_QUESTION_NAME = "How do I address you?";
     public static final String MESSAGE_HINT = "If you are unfamiliar with MeetingJio, "
-            + "you can view the list of commands available using the command 'help'.";
+            + "you can view the list of commands available using the command 'help'";
     public static final String MESSAGE_DIVIDER = "________________________________________________________"
             + "__________________________________________________";
     public static final String MESSAGE_GOODBYE = "See you again!";
