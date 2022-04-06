@@ -1,23 +1,26 @@
 package tp.command;
 
 import tp.*;
-import tp.person.Doctor;
+import tp.person.Nurse;
+import tp.NurseList;
 
-public class AddDoctorCommand extends Command {
+public class AddNurseCommand extends Command{
     protected String id;
     protected String name;
     protected String phoneNumber;
     protected String email;
+    protected String title;
     protected boolean isOnDuty;
 
-    public AddDoctorCommand() {
+    public AddNurseCommand() {
     }
 
-    public AddDoctorCommand(String id, String name, String phoneNumber, String email, boolean isOnDuty) {
+    public AddNurseCommand(String id, String name, String phoneNumber, String email, String title, boolean isOnDuty) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.title=title;
         this.isOnDuty = isOnDuty;
     }
 
@@ -26,11 +29,11 @@ public class AddDoctorCommand extends Command {
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                           PatientStorage patientStorage,NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Doctor doctor = new Doctor(id, name, phoneNumber, email);
-        doctorList.addDoctor(doctor);
+        Nurse nurse = new Nurse(id, name, phoneNumber, email,title);
+        nurseList.addNurse(nurse);
         return String.format(boundary + "Noted. I've added this doctor:"
-                + "\n" + doctorList.getDoctor(doctorList.getSize())
-                + "\n" + "Now you have " + doctorList.getSize()
+                + "\n" + nurseList.getNurse(nurseList.getSize())
+                + "\n" + "Now you have " + nurseList.getSize()
                 + " doctors recorded in the system." + System.lineSeparator() + boundary);
     }
 }

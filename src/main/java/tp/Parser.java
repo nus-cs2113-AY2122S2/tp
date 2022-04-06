@@ -1,25 +1,7 @@
 package tp;
 
-import tp.command.AddDoctorCommand;
-import tp.command.AddPatientCommand;
-import tp.command.Command;
-import tp.command.GetAppointmentsOfDoctorCommand;
-import tp.command.DeleteDoctorCommand;
-import tp.command.SearchAppointmentCommand;
-import tp.command.AddPatientDescriptionCommand;
-import tp.command.ListAppointmentListCommand;
-import tp.command.ListPatientListCommand;
-import tp.command.HelpCommand;
-import tp.command.SearchPatientCommand;
-import tp.command.AddAppointmentCommand;
-import tp.command.SearchDoctorCommand;
-import tp.command.DeletePatientCommand;
-import tp.command.DeleteAppointmentCommand;
-import tp.command.EditDoctorCommand;
-import tp.command.ListDoctorListCommand;
-import tp.command.SortAppointmentByTimeCommand;
-import tp.command.EditPatientCommand;
-import tp.command.EditAppointmentCommand;
+import tp.command.*;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -66,9 +48,43 @@ public class Parser {
         return new GetAppointmentsOfDoctorCommand(id);
     }
 
+    public AddNurseCommand parseAddNurse(String fullCommand) throws IHospitalException {
+        String id;
+        String dummy = fullCommand.trim();
+        if (dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
+                || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
+                || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
+            throw new IHospitalException("The format of input is incorrect, "
+                    + "you may type `help` to view the command format.");
+        }
+
+        int idIndex = dummy.indexOf("/id") + 4;
+        int nameIndex = dummy.indexOf("/n");
+        id = dummy.substring(idIndex, nameIndex).trim();
+        nameIndex += 3;
+        int phoneNumberIndex = dummy.indexOf("/ph");
+        String name = dummy.substring(nameIndex, phoneNumberIndex).trim();
+        phoneNumberIndex += 4;
+        int emailIndex = dummy.indexOf("/e");
+        String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
+        emailIndex += 3;
+        int titleIndex = dummy.indexOf("/t");
+        String email = dummy.substring(emailIndex,titleIndex).trim();
+        titleIndex +=3;
+        String title=dummy.substring(titleIndex).trim();
+
+        return new AddNurseCommand(id, name, phoneNumber, email, title, false);
+    }
+
     public Command parseAddPatient(String fullCommand) throws IHospitalException {
         String id;
         String dummy = fullCommand.trim();
+        if (dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
+                || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
+                || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
+            throw new IHospitalException("The format of input is incorrect, "
+                    + "you may type `help` to view the command format.");
+        }
         String name;
         int idIndex = dummy.indexOf("/id") + 4;
         int nameIndex = dummy.indexOf("/n");
