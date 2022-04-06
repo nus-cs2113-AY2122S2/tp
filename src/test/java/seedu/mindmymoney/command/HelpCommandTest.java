@@ -33,17 +33,17 @@ public class HelpCommandTest {
     @Test
     void helpCommand_fromUser_expectExpenditureHelpPage() throws MindMyMoneyException {
         String helpPage = "---------------------------------------Expenditure Help Page------------------------"
-                + "---------------\n"
-                + "1. Listing all Expenditures: list /e\n"
-                + "2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] "
-                + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
-                + "3. Calculating the total expenditure in a month: calculate /epm [MONTH]\n"
-                + "4. Updating an Expenditure: update /e [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] "
-                + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
-                + "5. Removing an Expenditure entry: delete /e [INDEX]\n"
-                + "6. Exiting the program: bye\n"
-                + "----------------------------------------------------------------------------------------------"
-                + "-----\n";
+            + "---------------\n"
+            + "1. Listing all Expenditures: list /e\n"
+            + "2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] "
+            + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
+            + "3. Calculating the total expenditure in a month: calculate /epm [MONTH]\n"
+            + "4. Updating an Expenditure: update /e [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] "
+            + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
+            + "5. Removing an Expenditure entry: delete /e [INDEX]\n"
+            + "6. Exiting the program: bye\n"
+            + "----------------------------------------------------------------------------------------------"
+            + "-----\n";
 
         new HelpCommand(true, "/e").executeCommand();
         assertEquals(helpPage.trim(), capturedOut.toString().trim());
@@ -55,9 +55,9 @@ public class HelpCommandTest {
     @Test
     void helpCommand_notFromUser_expectErrorMessage() throws MindMyMoneyException {
         String errorMessage = "Invalid command! \n"
-                + "Type \"help /e\" to view the list of supported expenditure commands\n"
-                + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
-                + "Type \"help /i\" to view the list of supported income commands\n";
+            + "Type \"help /e\" to view the list of supported expenditure commands\n"
+            + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
+            + "Type \"help /i\" to view the list of supported income commands\n";
 
         new HelpCommand(false, "/e").executeCommand();
         assertEquals(errorMessage.trim(), capturedOut.toString().trim());
@@ -114,7 +114,7 @@ public class HelpCommandTest {
      */
     @Test
     void helpCommand_isExit_expectFalse() {
-        assertEquals(false, new HelpCommand(true, ""  ).isExit());
+        assertEquals(false, new HelpCommand(true, "").isExit());
 
     }
 
