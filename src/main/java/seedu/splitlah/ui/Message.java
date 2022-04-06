@@ -1,13 +1,13 @@
 package seedu.splitlah.ui;
 
-import seedu.splitlah.command.ActivityListCommand;
-import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.GroupCreateCommand;
-import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityListCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityViewCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
+import seedu.splitlah.parser.commandparser.GroupCreateCommandParser;
+import seedu.splitlah.parser.commandparser.GroupDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.parser.commandparser.GroupListCommandParser;
 import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
@@ -65,15 +65,15 @@ public abstract class Message {
                     + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_FIRST + "\n"
                     + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_SECOND + "\n"
                     + "9.  View an existing activity's details\n"
-                    + "        " + ActivityViewCommand.COMMAND_FORMAT + "\n"
+                    + "        " + ActivityViewCommandParser.COMMAND_FORMAT + "\n"
                     + "10.  List all existing activities\n"
-                    + "        " + ActivityListCommand.COMMAND_FORMAT + "\n"
+                    + "        " + ActivityListCommandParser.COMMAND_FORMAT + "\n"
                     + "11.  Show the summary of an existing session\n"
                     + "        " + SessionSummaryCommandParser.COMMAND_FORMAT + "\n"
                     + "12.  Create a new group\n"
-                    + "        " + GroupCreateCommand.COMMAND_FORMAT + "\n"
+                    + "        " + GroupCreateCommandParser.COMMAND_FORMAT + "\n"
                     + "13. Delete an existing group\n"
-                    + "        " + GroupDeleteCommand.COMMAND_FORMAT + "\n"
+                    + "        " + GroupDeleteCommandParser.COMMAND_FORMAT + "\n"
                     + "14.  Edit an existing group\n"
                     + "         " + GroupEditCommandParser.COMMAND_FORMAT + "\n"
                     + "15. View an existing group's details\n"
@@ -430,6 +430,9 @@ public abstract class Message {
     public static final String LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST =
             "A Group object failed to be added into the list of groups because there are duplicate names in"
                     + "the group list.";
+    public static final String LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_CREATEGROUP =
+            "A group object failed to be added into the list of groups because there are invalid names in"
+                    + "the person list.";
 
     // Group Delete Command
     public static final String ASSERT_GROUPDELETE_GROUP_ID_NOT_INITIALIZED =
