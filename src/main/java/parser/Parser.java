@@ -82,6 +82,10 @@ public class Parser {
             return new SummaryCommand();
 
         case FindCommand.COMMAND_WORD:
+            if (arguments == null) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+            assert arguments != null : "arguments cannot be null";
             return new FindCommand(arguments);
 
         default:

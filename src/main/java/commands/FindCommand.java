@@ -18,7 +18,7 @@ public class FindCommand extends Command {
     /** Help message for find command. */
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays all records in the RecordManager that contains keyword."
-            + "\nExample: " + COMMAND_WORD + "<keyword>";
+            + "\nExample: " + COMMAND_WORD + " <keyword>";
 
     private final String keyword;
     /**
