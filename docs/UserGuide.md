@@ -382,9 +382,9 @@ bye
 
 ## Command Summary
 
-| Action                  | Format                                                 | Examples                                           |
-|-------------------------|--------------------------------------------------------|----------------------------------------------------|
-| List                    | `list`                                                 ||
-| List current borrowings | `list -cb`                                             ||
-| Borrow                  | `borrow INDEX s/START_DATE e/END_DATE p/BORROWER_NAME` | `borrow 23 s/21-03-2021 e/23-03-2021 p/John Smith` |
-| Description             | `desc INDEX`                                           | `desc 1`                                           |
+| Action                  | Format                                                   | Examples                                            |
+|-------------------------|----------------------------------------------------------|-----------------------------------------------------|
+| List                    | `list`                                                   ||
+| List current borrowings | `listcb`                                                 ||
+| Borrow                  | `borrow i/INDEX s/START_DATE e/END_DATE p/BORROWER_NAME` | `borrow i/1 s/2021-03-21 e/2021-03-25 p/John Smith` |
+| Description             | `desc INDEX`                                             | `desc 1`                                            |
