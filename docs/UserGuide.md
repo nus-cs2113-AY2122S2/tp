@@ -551,7 +551,6 @@ To view each plan in detail, enter
 ----------------------------------------------------------------------
 ```
 To view details of plan with index number 3 from the list, enter the following command:<br/>
-*Plan with index number 3 is created by the command in [Create A Plan](#create-a-plan-plan-new).*
 ```
 > plan /details 3
 ```
@@ -565,7 +564,7 @@ Here are the 4 workouts in [grow my muscles].
 4. push up (10 reps)
 ----------------------------------------------------------------------
 ```
-All workouts in the [grow my muscles] plan will be displayed.
+All workouts in the "grow my muscles" plan will be displayed.
 
 ---
 ### Delete a Plan: `plan /delete`
@@ -574,9 +573,9 @@ remove it from the days that it has been assigned to in your 7-day workout sched
 
 Format: `plan /delete <plan index number>`
 
-| Parameters           | Description                                                   |
-|----------------------|---------------------------------------------------------------|
-| `<plan index number` | The number index of the plan in the plan list to be removed.  |
+| Parameters            | Description                                                  |
+|-----------------------|--------------------------------------------------------------|
+| `<plan index number>` | The index number of the plan in the plan list to be removed. |
 
 Click [here](#plan-commands) to have a better understanding of the parameters stated.
 
@@ -631,8 +630,8 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. plan A
-2. plan B
+1. plan a
+2. plan b
 ----------------------------------------------------------------------
 ```
 
@@ -641,19 +640,19 @@ To view each plan in detail, enter
 ---
 ## Schedule Features
 ### Update Schedule: `schedule /update`
-This feature allows you to schedule a plan for a particular day in the 7-days workout schedule. For example, if you have 
-created a plan named, "More muscles", you can schedule this plan on a Monday. 
+This feature allows you to schedule a plan for a particular day in the 7-day workout schedule. For example, if you have 
+created a plan named "more muscles", you can schedule this plan on a Monday. 
 
-One thing to take note of is that the current version of WerkIt only supports 1 plan to be scheduled for a day. If you 
+One thing to take note of is that the current version of WerkIt! only allows you to schedule 1 plan for each day. If you 
 want to have multiple plans, you can simply create a new plan using the `plan /new` command to include all the workouts
 stated in those plans.
 
 Format: `schedule /update <day number> <plan index number>`
 
-| Parameters            | Description                                                                                                        |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------|
-| `<day number>`        | Day number is within the range of 1 to 7. Day number 1 represent Monday, day number 2 represent Tuesday and so on. |
-| `<plan index number>` | Plan index number indicates the plan in the plan list to be added for the stated day.                              |
+| Parameters            | Description                                                                                                          |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------|
+| `<day number>`        | Day number is within the range of 1 to 7. Day number 1 represents Monday, day number 2 represents Tuesday and so on. |
+| `<plan index number>` | Plan index number indicates the plan in the plan list to be assigned to the stated day.                              |
 
 Click [here](#schedule-commands) to have a better understanding of the parameters stated.
 
@@ -684,8 +683,8 @@ Alright, the following plan schedule has been created:
 ```
 ---
 ### View Schedule: `schedule /list`
-WerkIt offers a 7-days workout plan schedule feature for you to schedule your desired plan for a particular day of the 
-week. The schedule displayed shows the plans that had been scheduled by you starting from the first day of the week, 
+WerkIt! offers a 7-day workout plan schedule feature for you to schedule your desired plan for a particular day of the 
+week. The schedule displayed shows the plans that have been scheduled by you starting from the first day of the week, 
 Monday, to the last day of the week, Sunday. 
 
 Format: `schedule /list`
@@ -714,8 +713,8 @@ To view all the plans scheduled for the week, enter the following command:
 
 ----------------------------------------------------------------------
 ```
-By default, if no plan is being scheduled for the day it is a rest day. From the expected outcome, 
-only arms workout plan is scheduled for Monday.
+By default, if no plan is being scheduled for the day, it is a rest day. From the expected outcome, 
+only the "arms" plan is scheduled for Monday.
 
 ---
 
@@ -724,9 +723,9 @@ Remove a plan for a particular day of the week.
 
 Format: `schedule /clear <day number>`
 
-| Parameters      | Description                                                                                                        |
-|-----------------|--------------------------------------------------------------------------------------------------------------------|
-| `<day number>`  | Day number is within the range of 1 to 7. Day number 1 represent Monday, day number 2 represent Tuesday and so on. |                                                                    |
+| Parameters      | Description                                                                                                          |
+|-----------------|----------------------------------------------------------------------------------------------------------------------|
+| `<day number>`  | Day number is within the range of 1 to 7. Day number 1 represents Monday, day number 2 represents Tuesday and so on. |
 
 Click [here](#schedule-commands) to have a better understanding of the parameters stated.
 
@@ -750,7 +749,7 @@ Assume, the schedule for the week contains the following plans:
 
 ----------------------------------------------------------------------
 ```
-To clear the plans scheduled for Monday, enter the following command:
+To clear the plan scheduled on Monday, enter the following command:
 ```
 > schedule /clear 1
 ```
@@ -760,7 +759,7 @@ To clear the plans scheduled for Monday, enter the following command:
 Plan had been cleared for Monday.
 ----------------------------------------------------------------------
 ```
-After a plan had been cleared for a particular day, the day will be reset to be a rest day.
+After a plan has been cleared for a particular day, the day will be shown as a rest day.
 To view the changes enter command ```schedule /list```. 
 ```
 ----------------------------------------------------------------------
@@ -818,7 +817,7 @@ To add plan for any day, enter:
 schedule /update <day number [1-7]> <plan number>
 ----------------------------------------------------------------------
 ```
-After a plan had been cleared for a particular day, the day will be reset to be a rest day.
+After all the plans have been cleared, all days will be shown as rest days.
 To view the changes enter command ```schedule /list```.
 ```
 ----------------------------------------------------------------------
@@ -1160,7 +1159,7 @@ Format: `help`
  	 following plans:
 	 1. arms
 	 2. stronger arms
-	 3. Grow My Muscles
+	 3. grow my muscles
 	 To update the plan schedule for Monday with plan 1, enter the
  	 following command:
 	 schedule /update 1 1
@@ -1224,7 +1223,7 @@ werkItResources/        // Primary resource directory for WerkIt!
     ├── plans.txt       // Text file containing a list of user-created plans
     └── schedule.txt    // Text file containing a 7-day schedule of user-assigned plans for each day
 werkItLogs/
-    └── logs.log        // Log file containing logs created by the application.
+    └── logs.log        // Log file containing logs created by the application
 ```
 
 Do note that the directory (and by extension, the files) will be created in your terminal's
@@ -1300,8 +1299,8 @@ Below is a summary of all the commands available in the WerkIt! application.
 | Create Workout           | <br /> Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new bicep curl /reps 1`  <br /> <br />                      |
 | Delete Workout           | <br /> Format: `workout /delete <workout index number>` <br />Example: `workout /delete 2`  <br /> <br />                                                      |
 | Update Workout           | <br /> Format: `workout /update <workout index number> <new number of repetitions>`<br/>Example: `workout /update 1 15`   <br /> <br />                        |
-| List Workouts            | <br /> Format: `workout /list` <br/>Example: `workout /list` <br /> <br />                                                                                     |
-| Create Plan              | <br /> Format: `plan /new <plan name> /workouts <workout index number(s) separated by comma>`<br />Example: `plan /new Plan A /workouts 1, 2, 3` <br /> <br /> |
+| List Workouts            | <br /> Format: `workout /list` <br /> <br />                                                                                                                   |
+| Create Plan              | <br /> Format: `plan /new <plan name> /workouts <workout index number(s) separated by comma>`<br />Example: `plan /new plan a /workouts 1, 2, 3` <br /> <br /> |
 | List Plan                | <br /> Format: `plan /list` <br /> <br />                                                                                                                      |
 | List Details Of Plan     | <br /> Format: `plan /details <plan index number>` <br />Example: `plan /details 3` <br /> <br />                                                              |
 | Delete Plan              | <br /> Format: `plan /delete <plan index number>`<br />Example: `plan /delete 3`  <br /> <br />                                                                |
@@ -1313,7 +1312,7 @@ Below is a summary of all the commands available in the WerkIt! application.
 | Search For Workout       | <br /> Format: `search /workout <exercise keyword or number of reps>`  <br/>Example: `search /workout push` <br /> <br />                                      |
 | Search For Plan          | <br /> Format: `search /plan <plan keyword>` <br/>Example: `search /plan arms` <br /> <br />                                                                   |
 | Search For ALL           | <br /> Format: `search /all <keyword>` <br/>Example: `search /all 10` <br /> <br />                                                                            |
-| View Help                | <br /> Format: `help`<br/>Example: `help`  <br /> <br />                                                                                                       |
+| View Help                | <br /> Format: `help` <br /> <br />                                                                                                                            |
 
 <br/>
 <div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
