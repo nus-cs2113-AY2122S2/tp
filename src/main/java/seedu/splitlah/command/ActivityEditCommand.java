@@ -276,12 +276,10 @@ public class ActivityEditCommand extends Command {
             if (involvedListStringArray.length != costList.length) {
                 Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY);
                 throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_INVOLVED_AND_COST_DIFFERENT_LENGTH);
+            } else if (PersonList.hasNameDuplicates(involvedListStringArray)) {
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY);
+                throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_DUPLICATE_NAME);
             }
-        }
-
-        if (involvedListStringArray != MISSING_INVOLVEDLIST && PersonList.hasNameDuplicates(involvedListStringArray)) {
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY);
-            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_DUPLICATE_NAME);
         }
     }
 
