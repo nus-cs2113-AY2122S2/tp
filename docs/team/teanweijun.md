@@ -37,3 +37,10 @@ about 9k LoC.
 * Wrote the documentation for [Logging](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#logging)
 * Wrote the documentation for [Testing](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#testing)
 * Wrote the documentation for [Manual testing](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing)
+
+### Team-Based tasks contribution
+
+* Set up the team GitHub org/repo
+* Helping to tag teammate's PR to the relevant milestones
+* Finalised and released `v1.0` on GitHub during a team meeting
+* Coming up with a to-do list every team meeting
