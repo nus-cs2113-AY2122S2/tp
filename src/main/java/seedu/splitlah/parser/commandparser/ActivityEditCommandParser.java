@@ -2,7 +2,6 @@ package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.ActivityEditCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -59,11 +58,11 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         double serviceCharge;
 
         try {
-            sessionId = Parser.parseSessionId(commandArgs);
-            activityId = Parser.parseActivityId(commandArgs);
-            activityName = Parser.parseName(commandArgs);
-            payer = Parser.parsePayer(commandArgs);
-            involvedList = Parser.parseInvolved(commandArgs);
+            sessionId = ParserUtils.parseSessionId(commandArgs);
+            activityId = ParserUtils.parseActivityId(commandArgs);
+            activityName = ParserUtils.parseName(commandArgs);
+            payer = ParserUtils.parsePayer(commandArgs);
+            involvedList = ParserUtils.parseInvolved(commandArgs);
         } catch (InvalidFormatException exception) {
             String invalidMessage = exception.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
                     + "\n\t" + COMMAND_FORMAT_SECOND;
@@ -75,7 +74,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         boolean hasDifferentLength = false;
 
         try {
-            totalCost = Parser.parseTotalCost(commandArgs);
+            totalCost = ParserUtils.parseTotalCost(commandArgs);
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
                     + ParserUtils.TOTAL_COST_DELIMITER)) {
@@ -87,7 +86,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
 
         try {
-            costList = Parser.parseCostList(commandArgs);
+            costList = ParserUtils.parseCostList(commandArgs);
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
                     + ParserUtils.COST_LIST_DELIMITER)) {
@@ -122,8 +121,8 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
 
         try {
-            gst = Parser.parseGst(commandArgs);
-            serviceCharge = Parser.parseServiceCharge(commandArgs);
+            gst = ParserUtils.parseGst(commandArgs);
+            serviceCharge = ParserUtils.parseServiceCharge(commandArgs);
         } catch (InvalidFormatException e) {
             String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
                     + "\n\t" + COMMAND_FORMAT_SECOND;
