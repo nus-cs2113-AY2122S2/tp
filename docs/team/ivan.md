@@ -16,3 +16,7 @@ Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 #### New Features
 - Activity Create
 - Activity Delete
+
+#### Enhanced Features
+- Group View
+- Group List
