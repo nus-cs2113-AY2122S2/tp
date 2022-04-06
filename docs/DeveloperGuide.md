@@ -331,7 +331,35 @@ as the `/delete` and `/update` actions are cascading actions
 ---
 
 ### Plan-related features
-_to be updated_
+![PlanUML](uml/classDiagrams/images/PlanRelatedFeatures.png)
+<br>
+
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command,
+the `UI#getUserInput()` method in `UI` class will catch the user input,
+and it will be sent to `Parser` class. Then, the `Parser#parseUserInput(userInput)`
+method will be called to analyse the user's command.
+
+If the user's command is of type `plan`, the `Parser#parseUserInput(userInput)` method
+will parse the `plan` base word and proceed to create a `PlanCommand` object through
+`Parser#createPlanCommand(userInput)` method.
+
+Once the `PlanCommand` object is created, the `PlanCommand#execute()` method
+is called. Depending on the type of command action, this method will
+call the appropriate operations from the `PlanList` class. For instance, if the command action
+is `/create`, `PlanList#createAndAddPlan(userArgument)` will be called to create a new plan.
+To view the details of the `PlanCommand#execute()`,s
+click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/PlanCommand.java).
+
+When `createAndAddPlan()` and  `deletePlan()` method in `PlanList` class are executed, the
+`FileManager` and `UI` classes will call its appropriate methods depending on the command action.
+From the previous example, the `/create` workout command action will call
+the `UI#printNewPlanCreatedMessage()` and also the `FileManager#writeNewPlanToFile()`
+methods after the new plan has been created.
+
+Lastly, `WerkIt#startContinuousUserPrompt()` will check whether the command is of type `delete`.
+If so, `reloadScheduleFile()` method in the `WerkIt` class will be executed to modify the
+application’s day list.
 
 <div class="button-container"><a class="button" href="#feature-overview">Back to Feature Overview</a></div>
 
