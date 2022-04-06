@@ -158,26 +158,6 @@ public class ActivityEditCommand extends Command {
     }
 
     /**
-     * Checks if the double array object provided contains different costs.
-     *
-     * @param costList A double array object containing the costs.
-     * @return true if the double array object only consists of the same cost in each index.
-     *         false if the double array object has different costs.
-     */
-    private boolean checkCostListForDifferentCosts(double[] costList) {
-        if (costList.length == 1) {
-            return true;
-        }
-        double firstCost = costList[0];
-        for (int i = 0; i < costList.length; ++i) {
-            if (costList[i] != firstCost) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Updates cost and list of costs by adding the extra charges and
      * checks if cost list or cost was provided by the user.
      * If cost was not provided by the user, the list of costs is summed up to get the total cost of the activity.
