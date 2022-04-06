@@ -97,7 +97,10 @@ The `UI` component consists following classes: [`UI.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/global/UI.java)
 
 The UI component standarizes the output. It provides customized output for `PlanITarium` with `static` method, including
-printing welcome message and exit message as well as chatbox pattern. 
+printing welcome message and exit message as well as chatbox pattern. UI is created when initializing and is called by 
+main during execution. 
+
+![UIClass](images/UIClass.png)
 
 ### Commands Component
 
