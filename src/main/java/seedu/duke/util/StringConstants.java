@@ -178,12 +178,13 @@ public class StringConstants {
     /**
      * For exceptions.
      */
+    public static final String COMPULSORY_PARAMETERS = "compulsory parameters";
     public static final String ERROR_NO_SUCH_MODULE = "Sorry, no such module exists ._.";
     public static final String ERROR_NO_SUCH_TASK = "Sorry, no such task exists ._.";
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
-    public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid compulsory parameters. "
+    public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid %s. "
             + "Please check and try again.";
-    public static final String ERROR_MISSING_PARAM = "\nMissing one or more compulsory parameters. "
+    public static final String ERROR_PARSE_MISSING_PARAM = "\nMissing %s. "
             + "Please check and try again.";
     public static final String ERROR_EMPTY_PARAM = "\nSorry, you have entered an empty %s ._. "
             + "\nPlease try again.";
@@ -193,12 +194,20 @@ public class StringConstants {
     public static final String ERROR_INVALID_FLAG = "\nInvalid flag '%s'."
             + "\nPlease check and try again. "
             + "\nYou may input 'help' followed by your command word to view the expected input format.";
+    public static final String ERROR_MISSING_FLAG = "\nMissing flag."
+            + "\nPlease check and try again. "
+            + "\nYou may input 'help' followed by your command word to view the expected input format.";
     public static final String ERROR_INVALID_TAG_COMMAND = "\nInvalid command word '%s'."
+            + "\nPlease try again. Accepted commands are: add, del.";
+    public static final String ERROR_MISSING_TAG_COMMAND = "\nMissing command word."
             + "\nPlease try again. Accepted commands are: add, del.";
     public static final String ERROR_INVALID_MODULE_GRADE = "\nInvalid module grade '%s'."
             + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
-    public static final String ERROR_INVALID_MODULE_CODE = "\nInvalid module code.\nPlease try again.";
-    public static final String ERROR_INVALID_NUMBER = "\nInvalid number format '%s'."
+    public static final String ERROR_MISSING_MODULE_GRADE = "\nMissing module grade."
+            + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
+    public static final String ERROR_INVALID_NUMBER = "\nInvalid number format for %s."
+            + "\nPlease try again using a numerical number.";
+    public static final String ERROR_MISSING_NUMBER = "\nMissing %s."
             + "\nPlease try again using a numerical number.";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, the value \"%s\" is not supported for "
@@ -211,9 +220,6 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
-    //public static final String ERROR_PARSE_INT_FAILED = "\nInvalid %s. Please check and try again.";
-    public static final String ERROR_MODULAR_CREDITS_FAILED = "modular credits";
-    public static final String ERROR_TASK_NUMBER_FAILED = "task number";
     public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
     public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with identical module codes found. "
             + "Aborting load...";
@@ -222,21 +228,25 @@ public class StringConstants {
     /**
      * For parsers.
      */
+    public static final String TASK_PARAMETER_STR = "task parameter";
     public static final String TASK_NAME = "taskName";
     public static final String TASK_DESCRIPTION = "taskDescription";
     public static final String TASK_ESTIMATED_WORKING_TIME = "estimatedWorkingTime";
     public static final String TASK_MODULE = "taskModule";
     public static final String TASK_NUMBER = "taskNumber";
+    public static final String TASK_NUMBER_STR = "task number";
     public static final String TASK_STR = "task";
     public static final String TASK_NAME_STR = "task name";
     public static final String TASK_DESCRIPTION_STR = "task description";
     public static final String TASK_ESTIMATED_WORKING_TIME_STR = "estimated working time";
     public static final String MODULE_CODE = "moduleCode";
+    public static final String MODULE_CODE_STR = "module code";
     public static final String MODULE_DESCRIPTION = "moduleDescription";
-    public static final String MODULAR_CREDIT = "modularCredit";
-    public static final String MODULE_GRADE = "moduleGrade";
-    public static final String MODULE_STR = "module";
     public static final String MODULE_DESCRIPTION_STR = "module description";
+    public static final String MODULAR_CREDIT = "modularCredit";
+    public static final String MODULAR_CREDIT_STR = "modular credits";
+    public static final String MODULE_GRADE = "moduleGrade";
+    public static final String MODULE_STR = "mod";
     public static final String FLAG = "flag";
     public static final String CONFIGURATION_GROUP_WORD = "configurationGroupWord";
     public static final String NEW_VALUE = "newValue";
@@ -244,7 +254,9 @@ public class StringConstants {
     public static final String UNCOMPLETED_FLAG = "u";
     public static final String ARGUMENT = "arguments";
     public static final String TAG_NAME = "tagName";
+    public static final String TAG_NAME_STR = "tag name";
     public static final String TAG_OPERATION = "tagOperation";
+    public static final String TAG_OPERATION_STR = "tag operation";
     public static final String INVALID = "invalid";
     public static final String INVALID_MOD_FLAG = "invalidModFlag";
     public static final String INVALID_TASK_NAME_FLAG = "invalidTaskNameFlag";
@@ -272,6 +284,20 @@ public class StringConstants {
     public static final String TAG_COMMAND_WORD = "tag";
     public static final String OPTION_COMMAND_WORD = "option";
 
+
+    /**
+     * For regex constants.
+     */
+    public static final String WORD_CHAR_ONLY = "\\w+";
+    public static final String UNRESTRICTED_INT = "-?\\d+";
+    public static final String POSITIVE_INT = "\\d+";
+    public static final String TASK_PARAMETERS_FLAG = "\\s+(-d|-n|-t)\\s+";
+    public static final String DESCRIPTION_FLAG = "\\s+-d\\s+";
+    public static final String QUOTED_UNRESTRICTED_STR = "\"[^\"]+\"";
+    public static final String MODULE_GRADES_MATCH = "(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U)";
+    public static final String MARK_COMMAND_FLAGS = "(c|u)";
+    public static final String TAG_COMMAND_FLAGS = "(add|del)";
+    public static final String TASK_MODULE_FLAG = "-m";
 
     /**
      * For grades.

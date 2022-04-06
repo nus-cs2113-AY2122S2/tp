@@ -25,8 +25,11 @@ import seedu.duke.commands.SaveCommand;
 import seedu.duke.commands.TagCommand;
 import seedu.duke.exceptions.AdditionalParameterException;
 import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.ExcessArgumentException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
+import seedu.duke.exceptions.MissingCompulsoryParameterException;
+import seedu.duke.exceptions.MissingNumberException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.data.Module;
 import seedu.duke.data.Task;
@@ -39,8 +42,28 @@ public class ModHappyParserTest {
         assertThrows(AdditionalParameterException.class, () -> parser.parseCommand(testString));
     }
 
+    private void testParseCommand_expectInvalidFlagException(String testString) {
+        assertThrows(InvalidFlagException.class, () -> parser.parseCommand(testString));
+    }
+
+    private void testParseCommand_expectInvalidNumberException(String testString) {
+        assertThrows(InvalidNumberException.class, () -> parser.parseCommand(testString));
+    }
+
     private void testParseCommand_expectInvalidCompulsoryParameterException(String testString) {
         assertThrows(InvalidCompulsoryParameterException.class, () -> parser.parseCommand(testString));
+    }
+
+    private void testParseCommand_expectMissingCompulsoryParameterException(String testString) {
+        assertThrows(MissingCompulsoryParameterException.class, () -> parser.parseCommand(testString));
+    }
+
+    private void testParseCommand_expectMissingNumberException(String testString) {
+        assertThrows(MissingNumberException.class, () -> parser.parseCommand(testString));
+    }
+
+    private void testParseCommand_expectUnknownCommandException(String testString) {
+        assertThrows(UnknownCommandException.class, () -> parser.parseCommand(testString));
     }
 
 
@@ -335,13 +358,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_module_invalidModularCredit() {
         final String testString = "add  \t mod modulecode four \t\t    ";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectInvalidNumberException(testString);
     }
 
     @Test
     public void parse_addCommand_module_noDescription_invalidModuleCode() {
         final String testString = "add  \t mod module code /c 4 \t\t    ";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectInvalidNumberException(testString);
     }
 
     /*
@@ -367,7 +390,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_module_withDescription_invalidModuleCode() {
         final String testString = "add  \t mod module code \t\t  4  -d \t\t  \t \"i am a descrip\t -d-d tion\t \"\t  ";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectInvalidNumberException(testString);
     }
 
     @Test
@@ -379,25 +402,25 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_invalidFlag() {
         final String testString = "add /a \"blahblah\" -d \"blahblahblah\"";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectUnknownCommandException(testString);
     }
 
     @Test
     public void parse_addCommand_noFlagProvided() {
         final String testString = "add cs2113t";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectUnknownCommandException(testString);
     }
 
     @Test
     public void parse_addCommand_withModuleOnly_noModuleProvided() {
         final String testString = "add mod";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectMissingCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_addCommand_withTaskOnly_noTaskProvided() {
         final String testString = "add task";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectMissingCompulsoryParameterException(testString);
     }
 
     @Test
@@ -464,13 +487,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_deleteCommand_withModuleOnly_noModuleProvided() {
         final String testString = "del mod";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectMissingCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_deleteCommand_withTaskOnly_noIndexProvided() {
         final String testString = "del task";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectMissingNumberException(testString);
     }
 
     /*
@@ -516,13 +539,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_editCommand_task_noOptionalFlags() {
         final String testString = "edit task 1";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectMissingCompulsoryParameterException(testString);
     }
 
     @Test
     public void parse_editCommand_module_wrongFlag() {
         final String testString = "edit mod cs2113t -t \"111\"";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectMissingCompulsoryParameterException(testString);
     }
 
     /*
@@ -717,13 +740,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_markCommand_noFlagProvided() {
         final String testString = "mark 1";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectInvalidFlagException(testString);
     }
 
     @Test
     public void parse_markCommand_noIndexProvided() {
         final String testString = "mark c";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectMissingNumberException(testString);
     }
 
     /*@Test
