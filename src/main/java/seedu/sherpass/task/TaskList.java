@@ -182,6 +182,9 @@ public class TaskList {
         if (isStartTimeClashWithEndTime(taskToCheck)) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
+        if (taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
+            throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
+        }
         if (isByDateBeforeDoOnDate(taskToCheck)) {
             throw new InvalidInputException(ERROR_BY_DATE_BEFORE_DO_ON_DATE);
         }
@@ -193,24 +196,12 @@ public class TaskList {
         }
     }
 
-    private void checkTask(Task newTask) throws InvalidInputException {
-        if (newTask.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
-            throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
-        } else if (newTask.getDoOnStartDateTime().isAfter(newTask.getDoOnEndDateTime())) {
-            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
-        } else if (newTask.getByDateTime() != null
-                && newTask.getByDateTime().isBefore(newTask.getDoOnStartDateTime())) {
-            throw new InvalidInputException(ERROR_BY_DATE_BEFORE_START_DATE_MESSAGE);
-        }
-    }
-
     /**
      * Adds a new task to the current array of tasks.
      *
      * @param newTask The new task to be added to the array.
      */
     public void addTask(Task newTask, Frequency frequency) throws InvalidInputException, TimeClashException {
-        checkTask(newTask);
         LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(newTask.getDoOnStartDateTime(),
                 frequency);
         ArrayList<Task> taskListToAdd = new ArrayList<>();
@@ -229,14 +220,13 @@ public class TaskList {
      * @param newTask The loaded task to be added to the array.
      */
     public void importTask(Task newTask) throws InvalidInputException, TimeClashException {
-        checkTask(newTask);
         checkDateTimeClash(tasks, newTask);
 
         tasks.add(newTask);
         updateIndex();
     }
 
-    private Task updateTask(Task taskToUpdate, String taskDescription,
+    private void updateTask(Task taskToUpdate, String taskDescription,
                            long startDateOffset,
                            long endDateOffset,
                            long byDateOffset) {
@@ -258,7 +248,6 @@ public class TaskList {
                     .getDoOnStartDateTime()
                     .plusSeconds(byDateOffset));
         }
-        return taskToUpdate;
     }
 
     private long calculateOffsetOfDate(LocalDateTime oldDateTime, LocalDateTime newDateTime) {
@@ -289,7 +278,6 @@ public class TaskList {
             updatedTask.setByDateTime(byDateTime);
         }
 
-        checkTask(updatedTask);
         checkDateTimeClash(editedList, updatedTask);
 
         tasks.remove(editIndex);
@@ -316,7 +304,6 @@ public class TaskList {
             updateTask(updatedTask, taskDescription,
                     startDateOffset, endDateOffset, byDateOffset);
             updatedTask.setIdentifier(newIdentifier);
-            checkTask(updatedTask);
             checkDateTimeClash(editedList, updatedTask);
             editedList.add(updatedTask);
         }
@@ -413,12 +400,6 @@ public class TaskList {
     public void deleteAllTasks() {
         tasks.clear();
         identifierList.clear();
-    }
-
-    private void refreshIdentifier() {
-        for (Task t : tasks) {
-            identifierList.add(t.getIdentifier());
-        }
     }
 
     public int generateIdentifier() {
