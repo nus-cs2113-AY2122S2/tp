@@ -397,8 +397,8 @@ Edits an existing activity so that you can change the details of an activity.<br
 
 You only have to supply delimiters for the details you wish to edit. However, the `/sid` and `/aid` 
 delimiters are compulsory to identify the activity you wish to edit.
-> Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] [</n [ACTIVITY_NAME]>] [</p [PAYER]>]
-  [</i [NAME1 NAME2...]>] [</cl [COST1 COST2...]>] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+> Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] </p [PAYER]>
+  /i [NAME1 NAME2...] /cl [COST1 COST2...] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE]}`
 > 
 > Compulsory arguments:
 >* `[SESSION_ID]` refers to the unique identifier of the session.
@@ -445,8 +445,6 @@ distributed amongst all participants.
 <br>
 
 > **💡 Notes:**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
-     it.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
@@ -457,8 +455,7 @@ distributed amongst all participants.
    and 2 digits after the decimal point, if any.
 >- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that can only range from 0 to 100,
    with a maximum of 3 digits before and 2 after the decimal point, if any.
->- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
->  in the calculations.
+>- All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 >
 > **⚠️Warnings:**
 >- This action is irreversible. The activity is edited immediately after entering this command.
