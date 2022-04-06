@@ -1,7 +1,7 @@
 # Daryl - Project Portfolio Page
 
 ## Overview
-Sherpass is a command interface desktop application to help students manage their academic workloads
+Sherpass is a command line interface desktop application to help students manage their academic workloads
 by preparing them a timetable to plan their activities, as well as encouraging them to
 complete the activities with the use of the study session.
 
@@ -47,3 +47,4 @@ Summary of code contributions:
 - Labelled bugs that were reported after PE-D and closed duplicate bugs.
 
 #### Review/mentoring contributions:
+- TBD
