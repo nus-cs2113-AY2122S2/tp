@@ -182,10 +182,8 @@ public class TaskList {
         if (isStartTimeClashWithEndTime(taskToCheck)) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
-        if (!isFromFile) {
-            if (!taskToCheck.isDone() && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
-                throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
-            }
+        if (!isFromFile && !taskToCheck.isDone() && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
+            throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
         }
         if (isByDateBeforeDoOnDate(taskToCheck)) {
             throw new InvalidInputException(ERROR_BY_DATE_BEFORE_DO_ON_DATE);
