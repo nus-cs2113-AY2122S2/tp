@@ -67,6 +67,9 @@ public class MainUi {
         System.out.println(result.getFeedbackToUser());
         // Show information if it exists
         showCommandInfo(result);
+        if (!(result.getCommandInfoString() == null) && !result.getCommandInfoString().isEmpty()) {
+            System.out.println(result.getCommandInfoString());
+        }
     }
 
     private void showCommandInfo(CommandResult commandResult) {
