@@ -9,6 +9,7 @@ import arcs.commands.flightbooking.BookCommand;
 import arcs.commands.flightbooking.DeleteBookingCommand;
 import arcs.commands.flightbooking.ListBookingCommand;
 import arcs.commands.mealreservation.AddMealReservationCommand;
+import arcs.commands.mealreservation.FindMealReservationCommand;
 import arcs.commands.menuitem.FindMenuItemTypeCommand;
 import arcs.commands.menuitem.FindMenuItemNameCommand;
 import arcs.commands.menuitem.AddMenuItemCommand;
@@ -106,6 +107,9 @@ public class Parser {
                 command = new UndefinedCommand(e.getMessage());
                 break;
             }
+        case FindMealReservationCommand.COMMAND_WORD:
+            command = MealReservationParser.prepareFindMealReservation(argumentLine);
+            break;
         default:
             command = new UndefinedCommand();
             break;
