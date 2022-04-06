@@ -455,7 +455,7 @@ Format: `plan /new <plan name> /workouts <workout number(s) separated by comma>`
 
 Click [here](#plan-commands) to have a better understanding of the parameters stated.
 
-<span class="info box">:memo: Plan names in WerkIt! will be stored in lower case, regardless of whether you have entered
+<span class="info box">:memo: Plan names in WerkIt! will be stored in lowercase, regardless of whether you have entered
 them in title casing.</span>
 
 **Example**<br>
