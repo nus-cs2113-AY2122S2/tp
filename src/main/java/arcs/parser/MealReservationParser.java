@@ -2,6 +2,7 @@ package arcs.parser;
 
 import arcs.commands.Command;
 import arcs.commands.mealreservation.AddMealReservationCommand;
+import arcs.commands.mealreservation.DeleteMealReservationCommand;
 import arcs.commands.mealreservation.FindMealReservationCommand;
 import arcs.data.exception.ArcsException;
 
@@ -102,6 +103,38 @@ public class MealReservationParser {
             }
         }
         return new FindMealReservationCommand(cid, fid);
+    }
+
+    public static Command prepareDeleteMealReservation(String argumentLine) {
+        if (argumentLine == null || argumentLine.isEmpty()) {
+            return new DeleteMealReservationCommand(null, null);
+        }
+        String[] args = argumentLine.split(" ");
+        String cid = null;
+        String fid = null;
+        for (String arg: args) {
+            arg = arg.trim();
+            if (arg.isEmpty()) {
+                continue;
+            }
+            String[] argSplit = arg.split("/", 2);
+            if (argSplit.length < 2) {
+                continue;
+            }
+            String field = argSplit[0].trim().toLowerCase();
+            String value = argSplit[1].trim();
+            switch (field) {
+            case CUSTOMER_IC_COMMAND:
+                cid = value;
+                break;
+            case FLIGHT_ID_COMMAND:
+                fid = value;
+                break;
+            default:
+                break;
+            }
+        }
+        return new DeleteMealReservationCommand(cid, fid);
     }
 }
 
