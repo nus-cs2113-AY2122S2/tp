@@ -97,7 +97,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns an integer represented by the provided input String object.
+     * Extracts an integer from an input string.
      * 
      * @param input     A String object that contains numeric characters only and represents an integer.
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
@@ -117,7 +117,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns an integer representing a unique identifier number, represented by the provided input String object.
+     * Extracts a unique identifier from an input string.
      * 
      * @param input     A String object that contains numeric characters only and represents a unique identifier number.
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
@@ -138,7 +138,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double represented by the provided input String object.
+     * Extracts a real number from an input string.
      * 
      * @param input A String object that represents a numeric value.
      * @return A double represented by the input String object.
@@ -222,7 +222,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double representing a cost value, represented by the provided input String object.
+     * Extracts a cost value from an input string.
      *
      * @param input     A String object that contains numeric characters or a single decimal point character,
      *                  representing a cost value.
@@ -259,7 +259,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double representing a percentage value, represented by the provided input String object.
+     * Extracts a percentage value from an input string.
      *
      * @param input     A String object that contains numeric characters or a single decimal point character,
      *                  representing a percentage value.
@@ -598,8 +598,7 @@ public class ParserUtils {
 
     // MAIN PUBLIC PARSING METHODS
     /**
-     * Returns a String object that represents a name, given the command arguments from user input, delimited by the
-     * Name delimiter.
+     * Extracts a name from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String object that represents a name.
@@ -611,8 +610,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a String array object that represents a list of names separated by whitespaces,
-     * given the command arguments from user input, delimited by the Person list delimiter.
+     * Extracts a list of names of participants in a session or a group from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String array object that represents a list of names.
@@ -626,8 +624,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a String array object that represents a list of names of involved persons separated by whitespaces,
-     * given the command arguments from user input, delimited by the Involved delimiter.
+     * Extracts a list of names of involved persons in an activity from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String array object that represents a list of names of involved persons.
@@ -641,8 +638,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a String object that represents a name of a payer, given the command arguments from user input,
-     * delimited by the Payer delimiter.
+     * Extracts a name of a payer from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String object that represents a name of a payer.
@@ -659,8 +655,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns an integer that represents a session unique identifier, given the command arguments from user input,
-     * delimited by the Session ID delimiter.
+     * Extracts a session unique identifier from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a session unique identifier.
@@ -676,8 +671,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns an integer that represents an activity unique identifier, given the command arguments from user input,
-     * delimited by the Activity ID delimiter.
+     * Extracts an activity unique identifier from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents an activity unique identifier.
@@ -693,8 +687,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns an integer that represents a group unique identifier, given the command arguments from user input,
-     * delimited by the Group ID delimiter.
+     * Extracts a group unique identifier from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a group unique identifier.
@@ -710,8 +703,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a LocalDate object that represents a date, given the command arguments from user input,
-     * delimited by the Date delimiter.
+     * Extracts a date from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A LocalDate object that represents a date specified by the argument in the format of 'DD-MM-YYYY' or
@@ -740,8 +732,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double that represents a single total cost, given the command arguments from user input,
-     * delimited by the Total cost delimiter.
+     * Extracts a total cost of an activity from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a single total cost.
@@ -759,8 +750,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double array object that represents a list of cost values, given the command arguments from
-     * user input, delimited by the Cost list delimiter.
+     * Extracts a list of costs for an activity from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double array object that represents a list of cost values.
@@ -783,8 +773,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double that represents the GST charge in percents, given the command arguments from user input,
-     * delimited by the GST delimiter.
+     * Extracts a GST percentage from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a GST charge in percents.
@@ -810,8 +799,8 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double that represents the GST charge in percents, given the command arguments from user input,
-     * delimited by the GST delimiter. Returns -1 if the delimiter is not found.
+     * Extracts a GST percentage from a user input. This method can differentiate between no GST being provided
+     * and a value of 0 GST being explicitly provided.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a GST charge in percents if the GST delimiter is found,
@@ -838,8 +827,7 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double that represents the service charge in percents, given the command arguments from user input,
-     * delimited by the Service charge delimiter.
+     * Extracts a service charge percentage from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a service charge in percents.
@@ -865,8 +853,8 @@ public class ParserUtils {
     }
 
     /**
-     * Returns a double that represents the service charge in percents, given the command arguments from user input,
-     * delimited by the Service charge delimiter. Returns -1 if the delimiter is not found.
+     * Extracts a service charge percentage from a user input. This method can differentiate between no service charge
+     * being provided and a value of 0 GST being explicitly provided.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a service charge in percents if the service charge delimiter is found,
