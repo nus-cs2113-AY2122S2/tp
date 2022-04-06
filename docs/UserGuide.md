@@ -461,6 +461,9 @@ Format: `plan /new <plan name> /workouts <workout number(s) separated by comma>`
 
 Click [here](#plan-commands) to have a better understanding of the parameters stated.
 
+<span class="info box">:memo: Plan names in WerkIt! will be stored in lowercase, regardless of whether you have entered
+them in title casing.</span>
+
 **Example**<br>
 The workout list upon entering `workout /list`, contains the following workouts:
 ```
@@ -829,6 +832,9 @@ To view the changes enter command ```schedule /list```.
 
 ---
 ## Search Features
+
+<span class="info box">:memo: **Heads Up!** Your search keywords are case insensitive.</span>
+
 ### Search For Exercise: `search /exercise`
 Find all exercises containing the specified keywords.
 
