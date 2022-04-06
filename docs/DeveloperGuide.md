@@ -36,12 +36,20 @@ Command Line Interface (CLI). With the application, users can track their expens
 calculate monthly expenditure, and set financial goals. The application is targeted at students looking to start
 managing their personal finances.
 
+<br/>
+
 ### Purpose
 This document specifies the architecture and software design decisions for the application, MindMyMoney. 
 The intended audience of this document is the developers, designers, and software testers of MindMyMoney.
+
+<br/>
+
 ### Acknowledgements
 We would like to thank [AddressBook-3](https://se-education.org/addressbook-level3/) for assisting us in developing
 MindMyMoney.
+
+<br/>
+
 ### Using the Developer Guide
 Along the guide you may encounter several icons. These icons will provide several useful information.
 > **💡 Note:**
@@ -53,14 +61,18 @@ Along the guide you may encounter several icons. These icons will provide severa
 
 Click on the hyperlinks in the [content page](#content-page) to quickly navigate the developer's guide.
 
+<br/>
+
 ## Design
 ### Technologies used
 **MindMyMoney** is written fully in **Java 11** using  Object-Oriented Programming (OOP) paradigm to help structure and
 organise the code. This enables the efficiency of future improvements and revisions.
 Data stored in the application is saved into text files locally on the user's device.  
 
+<br/>
+
 ### Architecture Overview
-![architecture diagram](images/architecture_diagram.png)  
+![architecture diagram](images/ArchitectureDiagram.png)  
 Fig 1 - Architecture Diagram for MindMyMoney
 
 The Architecture Diagram above shows the high-level design of the application. The **main components**
@@ -73,14 +85,13 @@ expenditures in memory.
 - `Storage`: Reads data from, and writes data to the hard disk.
 
 By abstracting out closely related code into classes, it allows `MMM` to deal at a higher level, without worrying
-about the lower level details. Higher cohesion is also achieved and coupling is minimized as each component is
-only coupled to the main class, `MMM`.
+about the lower level details. Higher cohesion is also achieved and coupling is minimized.
 
 The Sequence Diagram below shows an example of how the components interact with each other for the scenario 
-where the user issues the command`add shoes 100`.
+where the user issues the command `add /e /pm cash /c food /d Porridge /t 04/04/2022` to add an expenditure.
 
-![sequence_diagram](images/sequence_diagram.png)
-<br/> Fig 2 - Sequence Diagram for MindMyMoney
+![sequence_diagram](images/ComponentsSequenceDiagram.png)
+<br/> Fig 2 - Sequence Diagram showing the Add Command
 
 ### Component Overview 
 The major code is broken down into components for better abstraction. 
@@ -89,7 +100,7 @@ The sections below give more details for each component.
 ### UI component
 The source code can be found in [`Ui.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Ui.java)
 
-![ui_diagram](images/ui_diagram.png)
+![ui_diagram](images/UiClassDiagram.png)
 <br/> Fig 3 - Ui Class Diagram
 
 The UI component consists of a `Ui` and `PrintStrings` class.
@@ -105,18 +116,19 @@ application.
 ### Parser component
 The source code can be found in [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Parser.java)
 
-![parser_diagram](images/parser_diagram.png)
+![parser_diagram](images/ParserClassDiagram.png)
 <br/> Fig 4 - Parser Class Diagram
 
-The Parser component consists of a `Parser`, `Functions`, `ExpenditureList` and `Expenditure` class
+The Parser component consists of a `Parser` and `User` class. The `User` class further consists of an `ExpenditureList`, 
+`CreditCardList` and `IncomeList` class, which makes use of the `Expenditure`, `CreditCard` and `Income` class respectively.
 
 The Parser component:
-- Receives user's input and splits it into the Command Type and Description using the `Functions` class.
-- Uses the `itemList`, which is an `ExpenditureList` object, to instantiate a `Command` object based on the Command Type.
+- Receives user's input and splits it into the Command Type and Description using the `GeneralFunctions` class.
+- Uses the `User` class and user's input to instantiate a `Command` object based on the Command Type.
 - Returns the `Command` object that can then be executed.
 
-We pass in the `itemList` to the `Command` object instead of using a global variable to ease testing. This way, we can 
-add, delete and update `Expenditure` entries in a new `itemList` during testing without affecting the actual`itemList`.
+We pass in the `User` class to the `Command` object instead of using a global variable to ease testing. This way, we can 
+add, delete and update entries in a new `User` during testing without affecting the actual `User`.
 
 ### Command component 
 The source can be found in [`command`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command)
@@ -147,28 +159,30 @@ The Storage component:
 - Concurrently, `MMM` will call the `Storage.load()` method and load any data that is stored on the hard disk.
 - `MMM` calls the `Storage.save()` method and stores remaining data onto the hard disk when the program exits.
 
+<br/>
 
 ## Implementation
 This section describes some noteworthy details on how certain features of MindMyMoney are implemented.
 
-### AddCommand Feature
+<br/>
+
+### AddCommand
 The source code can be found in [`AddCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/AddCommand.java)
 
-The AddCommand feature allows users to add in an expenditure, a new credit card or their income using a single command. 
-This component provides speed and ease of use by only requiring a single line of input.
+The AddCommand feature allows users to add expenditures, credit cards or their income using a single command. 
+This provides speed and ease of use by only requiring a single line of input.
 
-#### AddCommand Subcomponents
-The AddCommand component consists of 3 subcomponents. These features are differentiated by their flags.
-- Add expenditure component.
-- Add credit card component.
-- Add income component.
+The AddCommand has 3 parts. These parts are differentiated by their flags:
+- Add expenditure `/e`.
+- Add credit card `/cc`.
+- Add income `/i`.
 
-The sequence diagram below shows the interactions of when an `AddCommand` is parsed.  
+The sequence diagram below shows the interactions when an `AddCommand` is executed.  
 
 ![add_command_sequence_diagram](images/Add_Command_Sequence_Diagram.png)  
 Fig 7 - AddCommand Sequence Diagram  
 
-Below is an example scenario showing how the AddCommand behaves at each step.
+Below is an example showing how the AddCommand behaves at each step.
 1. The `Parser` component parses user input and returns the new `AddCommand` object to the
    `MindMyMoney`.
 2. `AddCommand` instantiates `addInput`, `expenditureList`, `creditCardList`, `incomeList`.
@@ -178,41 +192,19 @@ Below is an example scenario showing how the AddCommand behaves at each step.
 6. Else the application executes `AddCommand.addExpenditure()`.
 7. The application then returns to the Parser component.
 
-#### Add Credit Card Command
-MindMyMoney allow users to track their different credit cards. A user can add a new credit card through the 
-`AddCommand.addCreditCard()` command by specifying the credit card name, cash back, card limit and balance.
+<br/>
 
-##### Current Implementation
-The sequence diagram below shows the interactions of different subcomponents of the system when adding a credit card
-to the list.
+#### Add Expenditure `/e`
+A key functionality of MindMyMoney is the ability to add and track user expenditure. Expenditures are added through
+the `AddCommand.addExpenditure()` method, invoked when using the `/e` flag. Additional parameters `PAYMENT_METHOD`, 
+`CATEGORY`, `DESCRIPTION`, `AMOUNT` and `TIME` are also required.
 
-![add_credit_card_command_sequence_diagram](images/Add_Credit_Card_Command_Sequence_Diagram.png)   
-Fig 8 - Add Credit Card Command Sequence Diagram  
-
-The `AddCommand.addCreditCard()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags,
-`Parser` will construct a new `AddCommand` which will be used to execute users input.
-
-1. During the execution, `AddCommand.addCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`,
-   `CASH_BACK`, `CARD_LIMIT` and `CARD_BALANCE` fields.
-2. Once all the fields are obtained, `AddCommand.addCreditCard()` object instantiates a new `CreditCard` 
-   object with the aforementioned 5 fields and adds them into the `CreditCardList`.
-3. The `AddCommand.addCreditCard()` object prints a list to show the user what it has saved.
-4. The `AddCommand.addCreditCard()` returns to `AddCommand`.
-
-#### Add Expenditure Command
-A key functionality of MindMyMoney is the ability to add and track user expenditure. A user can add in a new expenditure
-through the `AddCommand.addExpenditure()` command by specifying the payment method, the category, the description of the item, the cost of the item and the date of 
-purchase.
-
-##### Current Implementation
-The sequence diagram below shows the interactions of different subcomponents of the system when adding an expenditure
-to the list.  
 
 ![add_expenditure_command_sequence_diagram](images/Add_Expenditure_Command_Sequence_Diagram.png)  
 Fig 9 - Add Expenditure Command Sequence Diagram  
 
-The `AddCommand.addExpenditure()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags, 
-`Parser` will construct a new `AddCommand` which will be used to execute users input.
+The sequence diagram above shows the interactions of different classes when adding an expenditure
+to the list.
 
 1. During the execution, `AddCommand.addExpenditure()` will parse through user input to obtain the `PAYMENT_METHOD`, `CATEGORY`,
    `DESCRIPTION`, `AMOUNT` and `TIME` fields.
@@ -223,11 +215,41 @@ The `AddCommand.addExpenditure()` command is facilitated by the `AddCommand`. By
 4. The `AddCommand.addExpenditure()` object prints a list to show the user what it has saved.
 5. The `AddCommand.addExpenditure()` returns to `AddCommand`.
 
-#### Add Income Command
-MindMyMoney allow users to track their sources of income. A user can add a new income through the
-`AddCommand.addCreditCard()` command by specifying the credit card name, cash back, card limit and balance.
+<br/>
 
+#### Add Credit Card `/cc`
+MindMyMoney allows users to track their different credit cards. Credit cards are added through the `AddCommand.addCreditCard()`
+method, invoked when using the `/cc` flag. Additional parameters `CREDIT_CARD_NAME`, `CASHBACK` and `CARD_LIMIT` are also
+required.
 
+![add_credit_card_command_sequence_diagram](images/Add_Credit_Card_Command_Sequence_Diagram.png)   
+Fig 8 - Add Credit Card Command Sequence Diagram
+
+The sequence diagram above shows the interactions of different classes when adding a credit card to the list.
+
+1. During the execution, `AddCommand.addCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`,
+   `CASH_BACK`, `CARD_LIMIT` and `CARD_BALANCE` fields.
+2. Once all the fields are obtained, `AddCommand.addCreditCard()` object instantiates a new `CreditCard`
+   object with the aforementioned 5 fields and adds them into the `CreditCardList`.
+3. The `AddCommand.addCreditCard()` object prints a list to show the user what it has saved.
+4. The `AddCommand.addCreditCard()` returns to `AddCommand`.
+
+<br/>
+
+#### Add Income `/i`
+MindMyMoney allows users to track their sources of income. Incomes are added through the `AddCommand.addIncome()`
+method, invoked when using the `/i` flag. Additional parameters `AMOUNT` and `CATEGORY` are also required.
+
+![add_income_sequence_diagram](images/AddIncomeSequenceDiagram.png)
+The sequence diagram above shows the interactions of different classes when adding an income to the list.
+
+1. After receiving the `AddCommand` object from `Parser`, `MMM` calls the `AddCommand.executeCommand()` method.
+2. `AddCommand.addIncome()` method is invoked as the `/i` flag is present. It parses through the user's input to obtain 
+`AMOUNT` and `CATEGORY` fields. It also runs tests on these fields to ensure the inputs are valid.
+3. An `Income` object is instantiated using the aforementioned fields and is added into the `IncomeList`.
+4. Control is returned to `MMM`.
+
+<br/>
 
 #### AddCommand Design Considerations
 Aspect: How to ask user for the fields of input.
@@ -238,6 +260,8 @@ Aspect: How to ask user for the fields of input.
 * Alternative 2: User is asked iteratively to put in all fields, prompted by a message after each input.
     * Pros: Beginner friendly, easily understandable, no need to remember flags.
     * Cons: Slower, implementation when user is familiar with the application.
+
+<br/>
 
 ### CalculateCommand feature
 

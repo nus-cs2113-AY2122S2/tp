@@ -1,0 +1,66 @@
+@startuml
+!include Style.puml
+
+hide footbox
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+}
+
+participant ":MMM" as MMM MMM_COLOUR
+participant "commandType:Command" as C COMMANDS_COLOUR
+participant ":GeneralFunctions" as GF HELPER_COLOUR
+participant ":AddCommandInputTests" as IT HELPER_COLOUR
+participant ":Income" as I USERFINANCIAL_COLOUR
+participant ":IncomeList" as IL USERFINANCIAL_COLOUR
+
+activate MMM MMM_COLOUR
+MMM -> C: executeCommand()
+
+activate C COMMANDS_COLOUR
+C -> C: addIncome()
+activate C COMMANDS_COLOUR
+
+C -> GF: parseInputWithCommandFlag()
+activate GF HELPER_COLOUR
+GF --> C: amountAsString
+deactivate GF
+
+C -> IT: testIncomeAmount()
+activate IT HELPER_COLOUR
+IT --> C
+deactivate IT
+
+C -> GF: parseInputWithCommandFlag()
+activate GF HELPER_COLOUR
+GF --> C: inputCategory
+deactivate GF
+
+C -> IT: testIncomeCategory()
+activate IT HELPER_COLOUR
+IT --> C
+deactivate IT
+
+create I
+C -> I: Income()
+activate I USERFINANCIAL_COLOUR
+I --> C
+deactivate
+
+C -> IL: add()
+activate IL USERFINANCIAL_COLOUR
+IL --> C
+deactivate
+
+C --> C
+deactivate
+
+C --> MMM
+deactivate
+
+deactivate MMM
+
+@enduml

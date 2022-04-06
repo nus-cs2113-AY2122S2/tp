@@ -11,7 +11,7 @@
         * [Display expenditures: `list` ](#display-expenditures-list)
         * [Modify an expenditure: `update`](#modify-an-expenditure-update)
         * [Remove an expenditure: `delete`](#remove-an-expenditure-delete)
-        * [Calculations that MindMyMoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
+        * [Calculations that MindMyMoney provide: `calculate`](#calculate-expenditures-calculate)
             * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
     * [Credit Card](#credit-card)
         * [Display help page for credit cards: `help`](#display-help-page-for-credit-cards-help)
@@ -282,7 +282,7 @@ I have removed Nike Shoes of $300.0 from the account
 
 <br/>
 
-### Calculations expenditure per month: `calculate`
+### Calculate expenditures: `calculate`
 
 #### Expenditure per month: `calculate /epm`
 
@@ -433,7 +433,7 @@ $500.
 
 > update /cc 1 /n OCBC /cb 1.5 /cl 500
 Successfully set credit card 1 to :
-Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Balance left: $500.00]
+Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $500.00]
 ````
 
 > **💡 Note:**
