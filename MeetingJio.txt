@@ -1,2 +1,3 @@
 j
-1.[M] TITLE: m1		DAY: friday		START: 0000		END: 0800		MODE: online
+1.[L] TITLE: l1		DAY: monday		START: 1200		END: 1300		MODE: online
+2.[M] TITLE: m1		DAY: friday		START: 0000		END: 0800		MODE: online

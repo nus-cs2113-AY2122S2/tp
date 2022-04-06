@@ -147,6 +147,8 @@ public class Parser {
 
             String name = newValues.get(HEADINGS_NAME_INDEX[NAME_INDEX]);
             String indexStr = newValues.get(HEADINGS_NAME_INDEX[INDEX_INDEX]);
+            newValues.remove(HEADINGS_NAME_INDEX[NAME_INDEX]);
+            newValues.remove(HEADINGS_NAME_INDEX[INDEX_INDEX]);
             int index = Integer.parseInt(indexStr);
 
             return new EditCommand(name, index, newValues);

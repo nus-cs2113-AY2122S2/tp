@@ -79,10 +79,8 @@ public class ParserArguments {
                 !attributes.containsKey(HEADINGS_NAME_INDEX[INDEX_INDEX])) {
             throw new MissingParameterException();
         }
-        attributes.remove(HEADINGS_NAME_INDEX[NAME_INDEX]);
-        attributes.remove(HEADINGS_NAME_INDEX[INDEX_INDEX]);
 
-        if (attributes.isEmpty()) {
+        if (attributes.size() < 3) {
             throw new MissingParameterException();
         }
         return attributes;
