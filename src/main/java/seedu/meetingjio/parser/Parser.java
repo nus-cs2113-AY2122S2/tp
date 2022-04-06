@@ -112,8 +112,6 @@ public class Parser {
             String[] eventDescription = ParserArguments.splitArgumentsAll(arguments);
             ParserHelperMethods.checkNonNullValues(eventDescription);
 
-            String name = eventDescription[NAME_INDEX];
-            String title = eventDescription[TITLE_INDEX];
             String day = eventDescription[DAY_INDEX];
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
@@ -123,6 +121,9 @@ public class Parser {
             ParserHelperMethods.checkTime(startTime, endTime);
             ParserHelperMethods.checkMode(mode);
 
+            String name = eventDescription[NAME_INDEX];
+            String title = eventDescription[TITLE_INDEX];
+            
             return new AddLessonCommand(name, title, day, startTime, endTime, mode);
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
