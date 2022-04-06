@@ -27,3 +27,13 @@ about 9k LoC.
 * Wrote the guide for [`overview`](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html#show-financial-summary-overview),
 [`list`](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html#show-all-records-by-group-list) and 
 [`find`](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html#searching-for-details-find) commands
+
+### Developer Guide contribution
+
+* Wrote the [Family component](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#family-component)
+* Added every UML diagram under Family component
+* Wrote the implementation of [Logical grouping](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#logical-grouping-of-persons-added)
+* Added every UML diagram under Logical grouping
+* Wrote the documentation for [Logging](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#logging)
+* Wrote the documentation for [Testing](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#testing)
+* Wrote the documentation for [Manual testing](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing)
