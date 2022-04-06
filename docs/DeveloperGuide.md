@@ -49,9 +49,9 @@ As such, we referenced AddressBook to segment the program into `Parser`, `Comman
 `Parser` is the first filter for text inputs read to the user. 
 As alluded to prior, one major consideration was to build it in a manner that can parse text input as effectively as possible. In considering text input, we divided the parsing into the following segments:
 
-<p align="center"><code>commandWord [argumentTag/argumentValue] [...]</code></p>
+<p align="center"><code>commandWord [argumentType/`argumentValue`] [...]</code></p>
 
-To dispatch `argumentTag/argumentValue` strings to the correct `Command` class, the following logic is employed throughout `Parser` by `parseCommand`.
+To dispatch <code>argumentType/\`argumentValue\`</code> strings to the correct `Command` class, the following logic is employed throughout `Parser` by `parseCommand`.
 
 **1. Parse the correct Command Word**
 
@@ -61,12 +61,12 @@ In the case where a second substring is not required, as in the case of `help` a
 
 **2. Split Arguments**
 
-For simpler command words such as `delete` and `check`, only one pair of `argumentType` and `argumentValue` were required. 
+For simpler command words such as `delete` and `check`, only one pair of `argumentType` and <code>\`argumentValue\`</code> are required. 
 As such, these will be passed in directly to their `Command` classes without a `argumentType` pair.
 
 More complex command words such as `add` and `update` necessitated multiple arguments.
 To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` was implemented. 
-Without specifically explaining the main regular expression ([details here](https://regex101.com/r/gwjHWD/3)), the approach sought to match `argumentTag/argumentValue` pairs with a positive lookahead. 
+Without specifically explaining the main regular expression ([details here](https://regex101.com/r/gwjHWD/3)), the approach sought to match `argumentType` and <code>\`argumentValue\`</code> pairs with a positive lookahead.
 The final argument pair will then be extracted using a separate regex. 
 Together, this ensured that all argument pairs can be effectively parsed and dispatched to each `Command` class.
 
