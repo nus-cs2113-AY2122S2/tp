@@ -11,6 +11,7 @@ import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.exceptions.DuplicateTimetableException;
+import seedu.meetingjio.parser.Parser;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
@@ -55,10 +56,11 @@ public class MasterTimetable {
      * @param name Name
      */
     public void removeByName(String name) {
-        for (int i = 0; i < timetables.size(); i++) {
-            if (name.equalsIgnoreCase(timetables.get(i).getName())) {
-                timetables.remove(i);
-            }
+        try {
+            Timetable timetable = getByName(name);
+            timetables.remove(timetable);
+        } catch (TimetableNotFoundException tnfe) {
+            return;
         }
     }
 
