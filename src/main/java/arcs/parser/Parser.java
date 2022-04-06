@@ -9,6 +9,7 @@ import arcs.commands.flightbooking.BookCommand;
 import arcs.commands.flightbooking.DeleteBookingCommand;
 import arcs.commands.flightbooking.ListBookingCommand;
 import arcs.commands.mealreservation.AddMealReservationCommand;
+import arcs.commands.mealreservation.DeleteMealReservationCommand;
 import arcs.commands.mealreservation.FindMealReservationCommand;
 import arcs.commands.menuitem.FindMenuItemTypeCommand;
 import arcs.commands.menuitem.FindMenuItemNameCommand;
@@ -25,12 +26,6 @@ import arcs.commands.UndefinedCommand;
 import arcs.data.exception.ArcsException;
 
 public class Parser {
-
-    private static final String MENU_ITEM_TYPE_COMMAND_WORD = "type";
-    private static final String MENU_ITEM_NAME_COMMAND_WORD = "name";
-    private static final String MENU_ITEM_PRICE_COMMAND_WORD = "price";
-    private static final String INVALID_PARAMETER_MESSAGE = "Spaces for menu item name and type"
-            + " must be separated by '_'";
 
 
     public Command parseCommand(String userInput) {
@@ -57,14 +52,14 @@ public class Parser {
             break;
         case AddMenuItemCommand.COMMAND_WORD:
             try {
-                command = prepareAddMenuItem(argumentLine);
+                command = MenuItemParser.prepareAddMenuItem(argumentLine);
                 break;
             } catch (ArcsException e) {
                 command = new UndefinedCommand(e.getMessage());
                 break;
             }
         case DeleteMenuItemCommand.COMMAND_WORD:
-            command = prepareDeleteMenuItemCommand(argumentLine);
+            command = MenuItemParser.prepareDeleteMenuItemCommand(argumentLine);
             break;
         case ListMenuItemsCommand.COMMAND_WORD:
             command = new ListMenuItemsCommand();
@@ -109,6 +104,9 @@ public class Parser {
             }
         case FindMealReservationCommand.COMMAND_WORD:
             command = MealReservationParser.prepareFindMealReservation(argumentLine);
+            break;
+        case DeleteMealReservationCommand.COMMAND_WORD:
+            command = MealReservationParser.prepareDeleteMealReservation(argumentLine);
             break;
         default:
             command = new UndefinedCommand();
@@ -219,58 +217,6 @@ public class Parser {
             }
         }
         return new FindRouteCommand(date, to, from, time);
-    }
-
-    public Command prepareAddMenuItem(String argumentLine) throws ArcsException {
-        if (argumentLine == null || argumentLine.isEmpty()) {
-            return new AddMenuItemCommand(null,null,null);
-        }
-        String[] args = argumentLine.split(" ");
-        String menuItemName = null;
-        String menuItemType = null;
-        String menuItemPrice = null;
-        for (String arg: args) {
-            arg = arg.trim();
-            if (arg.isEmpty()) {
-                continue;
-            }
-            String[] argSplit = arg.split("/", 2);
-            if (argSplit.length < 2) {
-                throw new ArcsException(INVALID_PARAMETER_MESSAGE);
-            }
-            String field = argSplit[0].trim();
-            String value = argSplit[1].trim();
-            switch (field) {
-            case MENU_ITEM_NAME_COMMAND_WORD:
-                menuItemName = value;
-                //replace underscore separator with space
-                menuItemName = menuItemName.replace("_", " ");
-                break;
-            case MENU_ITEM_TYPE_COMMAND_WORD:
-                menuItemType = value;
-                break;
-            case MENU_ITEM_PRICE_COMMAND_WORD:
-                menuItemPrice = value;
-                break;
-            default:
-                break;
-            }
-        }
-        return new AddMenuItemCommand(menuItemName,menuItemType,menuItemPrice);
-    }
-
-    public Command prepareDeleteMenuItemCommand(String argumentLine) {
-        if (argumentLine == null || argumentLine.isEmpty()) {
-            return new UndefinedCommand("Index is not specified");
-        }
-        Command result;
-        try {
-            int index = Integer.parseInt(argumentLine);
-            result = new DeleteMenuItemCommand(index);
-        } catch (NumberFormatException e) {
-            result = new UndefinedCommand("Index should be an integer.");
-        }
-        return result;
     }
 
 }
