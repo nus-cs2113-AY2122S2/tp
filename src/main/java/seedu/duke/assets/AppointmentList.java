@@ -56,7 +56,7 @@ public class AppointmentList extends List {
 
         for (Appointment appointment : appointments) {
             if (appointment.getAppointmentId().equals(id)) {
-                throw new DuplicateEntryException("There is already an appointment between this doctor and patient"
+                throw new DuplicateEntryException("There is already an appointment between this doctor and patient "
                         + "on the given date!");
             }
         }

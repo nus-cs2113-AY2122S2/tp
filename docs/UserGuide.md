@@ -140,20 +140,16 @@ Example: `add medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache,
 
 To add a new appointment into your application you can use the `add appointment` command when prompted by HALPMI for your input.
 To add an appointment there are some parameters that you would have to provide:
-1. Appointment ID
-2. Patient name
-3. Patient NRIC
-4. Doctor name
-5. Doctor NRIC
-6. Appointment Date
-7. Appointment Details
+1. Patient NRIC
+2. Doctor NRIC
+3. Appointment Date
+4. Appointment Details
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add appointment /info [appointment id],[patient nric],[patient name],[doctor nric],[doctor name],
-        [appointment date], [appointment details]`
+Format: `add appointment /info [patient nric],[doctor nric],[appointment date], [appointment details]`
 
-Example: `add appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Regular knee checkup`
+Example: `add appointment /info S1234567A,S7654321A,2022-10-15,Regular knee checkup`
 
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients and medicine.

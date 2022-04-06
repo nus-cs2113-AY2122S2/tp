@@ -3,6 +3,9 @@
 class AppointmentList {
 -appointments : Arraylist<appointment> = null
 -returnedFinderArray : Arraylist<appointment> = null
+-referencePatientList : PatientList = null
+-referenceDoctorList : DoctorList = null
++AppointmentList(PatientList, DoctorList) : void
 +getAppointment(String) : Appointment
 +getList() : Arraylist<appointment>
 +add(String[]) : void
