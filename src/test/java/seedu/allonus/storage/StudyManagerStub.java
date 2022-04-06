@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import static seedu.allonus.storage.StorageFile.ASSERT_CATEGORY_IS_ACCOUNTED_FOR;
 
+/**
+ * Stub class for StudyManager for unit testing.
+ */
 public class StudyManagerStub extends StudyManager {
     private ArrayList<Module> list = new ArrayList<Module>();
     private static int number;

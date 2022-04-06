@@ -9,6 +9,9 @@ import seedu.allonus.contacts.entry.Description;
 
 import java.util.ArrayList;
 
+/**
+ * Stub class for ContactsManager for unit testing.
+ */
 public class ContactsManagerStub extends ContactsManager {
     private ArrayList<Contact> list = new ArrayList<Contact>();
     private static int number;

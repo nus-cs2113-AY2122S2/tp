@@ -4,9 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import seedu.allonus.contacts.ContactsManager;
-import seedu.allonus.expense.ExpenseTracker;
-import seedu.allonus.modules.StudyManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;

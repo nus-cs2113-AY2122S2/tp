@@ -5,6 +5,9 @@ import seedu.allonus.expense.ExpenseTracker;
 
 import java.util.ArrayList;
 
+/**
+ * Stub class for ExpenseTracker for unit testing.
+ */
 public class ExpenseTrackerStub extends ExpenseTracker {
     private ArrayList<Expense> list = new ArrayList<Expense>();
     private static int number;
