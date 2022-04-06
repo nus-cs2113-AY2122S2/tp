@@ -852,7 +852,7 @@ rewrite all workouts to the resource file whenever a workout is deleted.
 When an existing workout is deleted from the application, plans that contain that workout
 should also be deleted. In addition, affected plans in the schedule should also be removed. This
 cascade delete action from `workout -> plan -> schedule` must be done so that 
-the data in the `workouts.txt`, `plans.txt` and `schedule.txt` files matches
+the data in the `workouts.txt`, `plans.txt` and `schedule.txt` files matches.
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
@@ -880,7 +880,7 @@ a `WorkoutCommand` object that contains the user's input.
 <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
-**(Step 1 to 3)** When the `WorkoutCommand#execute()` method is called, 'workout /update' command is identified, and
+**(Step 1 to 3)** When the `WorkoutCommand#execute()` method is called, `workout /update` command is identified, and
 `WorkoutList#getCurrentWorkout()` will be called to get the name of the workout which will be updated later.
 
 Subsequently, `WorkoutList#updateWorkout()` method will be called.
@@ -947,6 +947,12 @@ the `FileManager#rewriteAllPlansToFile()` is also called to rewrite
 the `plans.txt` file according to the newly modified plan list.
 <br><br>
 This completes the process of updating an existing workout in WerkIt!
+
+##### Design Considerations for Updating Existing Workout
+###### Update a workout will cause a cascade update action
+When an existing workout is updated, plans that contain that workout
+should also be updated. This cascade update action from `workout -> plan` must be done so that
+the data in the `workouts.txt`, `plans.txt` files matches.
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
@@ -1132,7 +1138,7 @@ which user specified.
 <span class="box info">:memo: To improve the diagram's readability, logging-related, input-checking method calls,
 and exception throws in `PlanList#listPlanDetails()` have been omitted.</span>
 
-**(Before Step 3)** Methods from the `String` and `Integer` classes are called to parse the
+**(Before Step 3)** Methods from the `Integer` class is called to parse the
 argument given to `PlanList#listPlanDetails()` to obtain the plan index number in list.
 
 Next, validity checks of the user input are carried out to ensure that the data entered is valid.
@@ -1162,10 +1168,96 @@ Here are the 3 workouts in [grow my muscles].
 ```
 This completes the process of displaying all workouts in a plan in WerkIt!
 
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ---
 
 #### Delete Existing Plan
+A summary of the general procedure of listing all workouts in a plan is as follows:
+1. User enters the command `plan /delete <plan index number>`.
+2. The plan with corresponding plan index number (can be determined by entering plan /list) is removed from
+   the application’s plan list.
+3. The success response is printed to the user through the terminal.
+4. The resource file, `plans.txt`, is rewritten according to the application’s plan list that has been modified.
 
+The following sequence diagram illustrates how the `plan /delete` command works in greater detail:
+
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
+have been removed from the sequence diagram. Reference frames will be elaborated further
+down this section.</span>
+
+![Delete Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/deletePlan-Part1.png)
+<br><br>
+**(Before Step 1)** The user's input (in this case will be a `plan /delete` command) is obtained and parsed to obtain
+a `PlanCommand` object that contains the user's input.
+
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+**(Step 1)** When the `PlanCommand#execute()` method is called,  it will identify that the workout action is
+of type `delete`. `PlanList#deletePlan()` will be called to perform the deletion of plan.
+
+The following sequence diagram is the detailed procedure for Step 2's `PlanList#deletePlan()`:
+<br><br>
+![Delete Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/deletePlan-Part2.png)
+
+<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls,
+and exception throws in `planList#deletePlan()` have been omitted.</span>
+
+**(Before Step 2.1)** Method from `Integer` class is called to parse the user argument parameter given to
+`PlanList#deletePlan()` to obtain the plan index number.
+
+Next, validity checks of the user input are carried out to ensure that the data entered is valid.
+Plan index number must be a positive integer and smaller than the total number of plan in list
+in order to pass the check. Otherwise, an `InvalidPlanException` will be thrown and
+the entire process is aborted.
+
+Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability.
+
+
+**(Steps 2.1 to 2.2)** With the plan index number, a `Plan` object which user want to delete
+will be fetched by calling method `PlanList#getPlanFromIndexNum()`.
+<br><br>
+**(Steps 2.3 to 2.8)** The `Plan` object to be deleted is subsequently removed from the ArrayList and HashMap
+which stores the application’s workout list.
+
+This is the end of `PlanLtis#deletePlan()` method.
+<br><br>
+**(Step 3)** The `PlanList#deletePlan()` method returns the deleted `Plan` object to `PlanCommand`.
+<br><br>
+**(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printDeletePlanMessage()` is called
+to display the plan name that has been deleted to the user through the terminal. The following is an example
+of a success deletion message after a valid plan is deleted from the workout list:
+```
+----------------------------------------------------------------------
+Alright, the following plan has been removed:
+
+	grow my muscles
+
+----------------------------------------------------------------------
+```
+**(Steps 6 to 7)** The `FileManager#rewriteAllPlansToFile()` is called to rewrite
+the `plans.txt` file according to the modified plan list.
+<br><br>
+This completes the process of deleting an existing plan in WerkIt!
+
+##### Design Considerations for Deleting Existing Workout
+###### Rewrite All Workout To File
+Currently, when delete plan function is executed, the WerkIt! program will rewrite all plans to the resource file, 
+`plans.txt`. Such implementation may have performance issues as the program needs to rewrite the whole
+file with the modified workout list whenever a workout is deleted in the application.
+
+An alternative considered was to find the plan to be deleted in the resource file, and then
+remove that plan. While this is a more efficient implementation, it is more complex due to the
+way the plan data are formatted and stored in the `plans.txt` file.
+
+Hence, to simplify the implementation, the team decided to simply
+rewrite all plans to the resource file whenever a plan is deleted.
+
+###### Deleting a plan will cause a cascade delete action
+When an existing workout is deleted from the application, days which is scheduled with that plan 
+should also be cleared. This cascade delete action from `plan -> schedule` must be done so that
+the data in the `plans.txt`, `schedule.txt` files matches.
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
