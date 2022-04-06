@@ -49,8 +49,8 @@ public class AddParser extends Parser {
      *                                                      Same as above, note that moduleCode does not require "",
      *                                                      but must also be a single word composed of [a-zA-Z0-9_].
      *
-     * (\s+(?<modularCredit>\d+)(?=(\s+-d\s+\"[^\"]+\")|$)) -- matches [modularCredit]
-     *                                                         Must be a number
+     * (\s+(?<modularCredit>-?\d+)(?=(\s+-d\s+\"[^\"]+\")|$)) -- matches [modularCredit]
+     *                                                         Must be an integer.
      *
      * (\s+(-d\s+\"(?<moduleDescription>[^\"]+)\"))?)    -- matches [-d "moduleDescription"] if present. Optional
      *                                                      Does not accept " as a valid character.
@@ -59,13 +59,11 @@ public class AddParser extends Parser {
      *                                                      Any other excess inputs
      */
 
-
     private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+((-m|(?<invalidModFlag>.*))"
             + "\\s+(?<taskModule>\\w+)))?(\\s+(-d|(?<invalidTaskDesFlag>.*))\\s+\\\"(?<taskDescription>[^\\\"]+)\\\")?"
             + "(\\s+(-t|(?<invalidTimeFlag>.*))\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?"
-            + "|mod\\s+(?<moduleCode>\\w+?)(\\s+(?<modularCredit>\\d+)(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|.*$))"
+            + "|mod\\s+(?<moduleCode>\\w+?)(\\s+(?<modularCredit>-?\\d+)(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|.*$))"
             + "(\\s+((-d|(?<invalidModDesFlag>.*))\\s+\\\"(?<moduleDescription>[^\\\"]+)\\\"))?)(?<invalid>.*)";
-
 
     public AddParser() {
         super();
