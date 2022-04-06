@@ -88,7 +88,7 @@ public class ParserArguments {
         if (spaceIndex != -1) {
             str = input.substring(spaceIndex + 1).trim();
         }
-        return str;
+        return str.trim().toLowerCase();
     }
 
     protected static String getCommandFromInput(String input) {

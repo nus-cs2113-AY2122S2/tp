@@ -64,8 +64,12 @@ public class ErrorMessages {
     public static final String ERROR_DELETE_COMMAND_FAILED = "Failed to delete element";
     public static final String ERROR_INVALID_USER = "User does not exist";
     public static final String ERROR_UNSPECIFIED_LIST = "Please specify which timetable to print. Accepted inputs are\n"
-            + "1. list [user]\n"
-            + "2. list all";
+            + "1. list_meeting [user]\n"
+            + "2. list_meeting all\n"
+            + "3. list_lesson [user]\n"
+            + "4. list_lesson all\n"
+            + "5. list [user]\n"
+            + "6. list all";
     public static final String ERROR_EMPTY_MASTER_TIMETABLE = "The Master Timetable has no populated timetables!";
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";
@@ -75,7 +79,8 @@ public class ErrorMessages {
             + "some of the members cannot make it";
     public static final String ERROR_DUPLICATE_MEETING = "This meeting already exists. "
             + "This meeting will not be not added to the timetable.";
-    public static final String ERROR_MEETING_DOES_NOT_EXIST = "This meeting does not exist";
+    public static final String ERROR_NO_USER_TO_ADD_MEETING = "No users exist so meeting cannot be added"
+            + " to anyone's timetable";
 
     // Free Command
     public static final String ERROR_FREE_INPUT_INVALID = "Please specify the minimum duration for everyone to be free "
@@ -112,7 +117,13 @@ public class ErrorMessages {
             + "st/[StartTime]\n"
             + "et/[EndTime]\n"
             + "m/[Mode]";
-
+    public static final String ERROR_EXTRA_PARAMETERS_ADD_MEETING = "Hi you have 1 or more extra/different parameters\n"
+            + "The required parameters are:\n"
+            + "t/[Title]\n"
+            + "d/[Day]\n"
+            + "st/[StartTime]\n"
+            + "et/[EndTime]\n"
+            + "m/[Mode]";
     public static final String ERROR_MISSING_VALUES_ADD_MEETING = "Hi 1 or more parameters have missing values\n"
             + "The parameters that require values are:\n"
             + "t/[Title]\n"

@@ -5,8 +5,13 @@ package seedu.meetingjio.commands;
 import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.timetables.MasterTimetable;
 
+import java.util.logging.Level;
+
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_USER_TO_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_MEETING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
+import static seedu.meetingjio.parser.Parser.logger;
 
 public class AddMeetingCommand extends Command {
     public static final String COMMAND_WORD = "add_meeting";
@@ -34,17 +39,21 @@ public class AddMeetingCommand extends Command {
     @Override
     public String execute(MasterTimetable masterTimetable) {
         // check all timetables, see if start or end time of each event/lesson is equal to each other
+        if (masterTimetable.getSize() == 0) {
+            return ERROR_NO_USER_TO_ADD_MEETING;
+        }
         try {
             Meeting meeting = new Meeting(title, day, startTime, endTime, mode);
-            if (masterTimetable.checkIfClash(meeting)) {
-                return ERROR_OVERLAPPING_MEETING;
-            } else if (masterTimetable.checkIfMeetingExistsAlready(meeting)) {
+            if (masterTimetable.isExistingMeeting(meeting)) {
                 return ERROR_DUPLICATE_MEETING;
+            } else if (masterTimetable.isMeetingClash(meeting)) {
+                return ERROR_OVERLAPPING_MEETING;
             } else {
                 return masterTimetable.addMeetingToEveryoneTimetable(meeting);
             }
         } catch (Exception e) {
-            return "ERROR DETECTED";
+            logger.log(Level.INFO, "Unhandled Exception : " +  e.getMessage());
+            return ERROR_EXCEPTION_NOT_HANDLED;
         }
 
     }

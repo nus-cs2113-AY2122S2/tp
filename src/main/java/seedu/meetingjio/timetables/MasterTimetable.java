@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
+
 import static seedu.meetingjio.common.Messages.NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
 
 public class MasterTimetable {
@@ -103,6 +105,7 @@ public class MasterTimetable {
             throws TimetableNotFoundException, DuplicateEventException, OverlappingEventException {
         Timetable timetable = getByName(name);
         timetable.add(lesson);
+        timetable.sort();
     }
 
     /**
@@ -143,7 +146,7 @@ public class MasterTimetable {
      *
      * @return boolean true if there is another event at the same time as the meeting
      */
-    public boolean checkIfClash(Meeting meeting) {
+    public boolean isMeetingClash(Meeting meeting) {
         for (Timetable timetable : timetables) {
             if (checkMeetingOverlap(timetable, meeting)) {
                 return true;
@@ -176,12 +179,15 @@ public class MasterTimetable {
      *
      * @return boolean True false if there meeting already exists
      */
-    public boolean checkIfMeetingExistsAlready(Meeting meeting) {
-        for (Event event : meetingList) {
-            if (meeting.equals(event)) {
-                return true;
+    public boolean isExistingMeeting(Meeting meeting) {
+        for (Timetable timetable : timetables) {
+            for (int i = 0; i < timetable.size(); i++) {
+                if (timetable.get(i).equals(meeting)) {
+                    return true;
+                }
             }
         }
+
         return false;
     }
 
@@ -196,6 +202,8 @@ public class MasterTimetable {
         for (Timetable timetable : timetables) {
             try {
                 timetable.add(meeting);
+                meetingList.add(meeting);
+                timetable.sort();
             } catch (DuplicateEventException dee) {
                 return ERROR_DUPLICATE_EVENT;
             } catch (OverlappingEventException oee) {
@@ -288,7 +296,7 @@ public class MasterTimetable {
         for (int i = 0; i < meetingList.size(); i++) {
             meetingList.remove(0);
         }
-
+        assert meetingList.size() == 0 : ERROR_NON_EMPTY_LIST;
         return NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
     }
 
