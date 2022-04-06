@@ -24,14 +24,9 @@ deactivate Parser
 create AddPersonCommand
 CommandFactory --> AddPersonCommand
 activate AddPersonCommand
-AddPersonCommand --> Parser: parseName(userInput)
-activate Parser
-Parser --> AddPersonCommand: name: String
-AddPersonCommand --> AddPersonCommand
-AddPersonCommand --> Parser: getValidGroupIndex(parseGroupIndex(userInput))
-Parser --> AddPersonCommand: index: Integer
-AddPersonCommand --> AddPersonCommand
-deactivate Parser
+ref over Parser, AddPersonCommand
+Parser Component parse and validate
+end ref
 AddPersonCommand --> CommandFactory: :AddPersonCommand
 deactivate AddPersonCommand
 CommandFactory --> Main: :AddPersonCommand

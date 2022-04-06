@@ -22,6 +22,9 @@ deactivate Parser
 create XYZCommand
 CommandFactory --> XYZCommand
 activate XYZCommand
+ref over Parser, XYZCommand
+Parser Component parse and validate
+end ref
 XYZCommand --> CommandFactory: :XYZCommand
 deactivate XYZCommand
 CommandFactory --> Main: :XYZCommand
