@@ -26,14 +26,13 @@ public class DeleteAppointmentCommand extends Command {
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                           PatientStorage patientStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
+        if (index > appointmentList.getSize()) {
+            throw new IHospitalException("The appointment does not exist.\n");
+        }
+
         Appointment curr = appointmentList.deleteAppointment(index);
-        if (curr == null){
-            return String.format("The index " + index + " is not valid in the appointment list");
-        }
-        else {
-            return String.format(boundary + "Noted. I've removed this appointment:\n" + curr
-                    + "\n" + "Now you have " + (appointmentList.getSize())
-                    + " appointments recorded in the system." + System.lineSeparator() + boundary);
-        }
+        return String.format(boundary + "Noted. I've removed this appointment:\n" + curr
+                                     + "\n" + "Now you have " + (appointmentList.getSize())
+                                     + " appointments recorded in the system." + System.lineSeparator() + boundary);
     }
 }

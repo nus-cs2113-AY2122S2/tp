@@ -4,6 +4,7 @@ import tp.AppointmentList;
 import tp.DoctorList;
 import tp.PatientList;
 import tp.Ui;
+import tp.person.Doctor;
 import tp.DoctorStorage;
 import tp.PatientStorage;
 import tp.IHospitalException;
@@ -22,14 +23,13 @@ public class DeletePatientCommand extends Command {
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                           PatientStorage patientStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
+        if (index > patientList.getSize()) {
+            throw new IHospitalException("The patient does not exist.\n");
+        }
+
         Patient curr = patientList.deletePatient(index);
-        if (curr == null){
-            return String.format("The index " + index + " is not valid in the patient list");
-        }
-        else {
-            return String.format(boundary + "Noted. I've removed this patient:" + "\n" + curr
-                    + "\n" + "Now you have " + patientList.getSize()
-                    + " patients in the system." + System.lineSeparator() + boundary);
-        }
+        return String.format(boundary + "Noted. I've removed this patient:" + curr
+                                     + "\n" + "Now you have " + patientList.getSize()
+                                     + " patients in the system." + System.lineSeparator() + boundary);
     }
 }
