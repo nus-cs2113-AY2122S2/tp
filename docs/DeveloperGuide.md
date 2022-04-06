@@ -310,8 +310,8 @@ For manual testing, developers can follow the instructions listed out in the [Us
   * Adds a new patient with the specified parameters into the system
 3. `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`
   * Adds a new medicine with the specified parameters into the system
-4. `view doctor` or `view doctor /info [nric]`
-  * View records of all doctors or a specific doctor with the given nric
+4. `view doctor` or `view doctor /info [criteria],[input]`
+  * View records of all doctors or specific doctors fulfilling the criteria
 5. `view patient` or `view patient /info [nric]`
   * View records of all patients or a specific patient with the given nric.
 6. `view medicine` or `view medicine /info [name]`

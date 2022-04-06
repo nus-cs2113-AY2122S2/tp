@@ -157,11 +157,16 @@ Allows user to view existing records of doctors, patients and medicine.
 #### VIEW DOCTOR
 
 To view the records of all doctors in the application, you can simply call `view doctor` without any additional
-parameters. You could also give the NRIC as an additional parameter if you want to view a single doctor only.
+parameters. You could also give a specific criteria as listed below and the input value if you want to
+search and view by a specific criteria.
 
-Format: `view doctor` or `view doctor /info [nric]`
+Format: `view doctor` or `view doctor /info [criteria],[input]`
 
-Example: `view doctor /info S1234567A`
+Accepted Criteria: `nric`,`name`,`age`,`address`,`gender`,`dob`,'specialization'
+
+Examples: `view doctor /info nric,S1234567A`, `view doctor /info name,John Doe`,
+`view doctor /info age,25`, `view doctor /info address,Baker Street`,
+`view doctor /info gender,M`,`view doctor /info dob,1997-03-23`,`view doctor /info specialization, Cardiology`
 
 #### VIEW PATIENT
 
@@ -184,10 +189,10 @@ Example: `view medicine /info Paracetamol`
 #### VIEW APPOINTMENT
 
 To view the records of all appointments in the application, you can simply call `view appointment` without any
-additional parameters. You could also give a specific criteria as listed below and the input value if you want to
+additional parameters. You could also give a specific criteria as listed below and the input if you want to
 search and view by a specific criteria.
 
-Format: `view appointment` or `view appointment /info [criteria],[input value]`
+Format: `view appointment` or `view appointment /info [criteria],[input]`
 
 Accepted Criteria: `appointment id`,`patient nric`,`patient name`,`doctor name`,`doctor nric`,`date`
 

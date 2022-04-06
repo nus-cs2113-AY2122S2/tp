@@ -200,8 +200,8 @@ public class DoctorList extends List {
             for (int i = 0; i < returnedFinderArray.size(); i++) {
 
                 findPatientTable.setShowVerticalLines(true);
-                findPatientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                        "Specilization");
+                findPatientTable.setHeaders("Nric", "Full Name", "Age", "Address", "Gender", "Dob",
+                        "Specialization");
                 findPatientTable.addRow(returnedFinderArray.get(i).getNric(),
                         returnedFinderArray.get(i).getFullName(),
                         String.valueOf(returnedFinderArray.get(i).getAge()),
