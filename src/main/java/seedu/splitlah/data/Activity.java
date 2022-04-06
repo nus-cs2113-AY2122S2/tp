@@ -53,29 +53,14 @@ public class Activity implements Serializable, Comparable<Activity> {
         return activityId;
     }
 
-    /**
-     * Returns a String object representing the activity's name.
-     *
-     * @return A String object containing the name of the activity.
-     */
     public String getActivityName() {
         return activityName;
     }
 
-    /**
-     * Returns a double representing the activity's total cost.
-     *
-     * @return A double representing the total cost spent in the activity.
-     */
     public double getTotalCost() {
         return totalCost;
     }
 
-    /**
-     * Returns a Person object representing the activity's payer.
-     *
-     * @return A Person object representing the person who paid for the activity.
-     */
     public Person getPersonPaid() {
         return personPaid;
     }
