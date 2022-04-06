@@ -20,7 +20,7 @@ public class AddMenuItemCommand extends Command {
     private ArrayList<String> incorrectFields = new ArrayList<>();
 
     /**
-     * Messages to output to user
+     * Messages to output to user.
      */
     private static final String SUCCESS_MESSAGE = "OK! This menu item has been added: ";
     private static final String EMPTY_FIELD_MESSAGE = "These necessary fields are not specified: ";
