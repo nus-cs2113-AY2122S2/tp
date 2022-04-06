@@ -142,7 +142,7 @@ public class ScheduleCommand extends Command {
         try {
             switch (getUserAction()) {
             case UPDATE_ACTION_KEYWORD:
-                Day newDay = scheduleList.updateDay(getUserArguments());
+                Day newDay = getScheduleList().updateDay(getUserArguments());
                 getUI().printNewScheduleCreatedMessage(newDay);
                 getFileManager().rewriteAllDaysScheduleToFile(getScheduleList());
                 break;
@@ -150,7 +150,8 @@ public class ScheduleCommand extends Command {
                 getScheduleList().printSchedule();
                 break;
             case CLEAR_ACTION_KEYWORD:
-                getScheduleList().clearDayPlan(getUserArguments());
+                String dayName = getScheduleList().clearDayPlan(getUserArguments());
+                getUI().printClearedScheduleOnADay(dayName);
                 getFileManager().rewriteAllDaysScheduleToFile(getScheduleList());
                 break;
             case CLEAR_ALL_ACTION_KEYWORD:

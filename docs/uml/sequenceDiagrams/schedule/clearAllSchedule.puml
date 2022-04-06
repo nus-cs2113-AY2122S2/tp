@@ -8,10 +8,9 @@ title Sequence Diagram of `schedule /clearall` Command
 
 actor   User
 participant "werkIt:WerkIt" AS WerkIt
-participant "parser:Parser" AS Parser
+participant "ui:UI" AS UI
 participant "newCommand\n:ScheduleCommand" AS newCommand
 participant "dayList\n:DayList" AS DayList
-participant "ui:UI" AS UI
 
 
 activate WerkIt
@@ -19,21 +18,21 @@ ref over WerkIt
 Obtain and parse user input
 end
 
-WerkIt -> Parser : parseUserInput(userInput)
-activate Parser
-WerkIt <-- Parser : :Command
-deactivate Parser
-
 WerkIt -> newCommand : execute()
 activate newCommand
 
 newCommand -> DayList : clearAllSchedule()
 activate DayList
+loop 7 times
+DayList -> DayList : clearPlan(dayNumber)
+activate DayList
+return
+end
 deactivate DayList
 
-newCommand -> UI : printClearedScheduleMessage();
+newCommand -> UI : printClearedScheduleMessage()
 activate UI
-UI --> User: Display a message to indicate the process is completed
+UI --> User: Display a message to \nindicate the process is completed
 deactivate UI
 
 participant "fileManager:FileManager" as FileManager

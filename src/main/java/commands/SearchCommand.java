@@ -1,7 +1,10 @@
 package commands;
 
 import data.exercises.ExerciseList;
+import data.exercises.InvalidExerciseException;
+import data.plans.InvalidPlanException;
 import data.plans.PlanList;
+import data.workouts.InvalidWorkoutException;
 import data.workouts.WorkoutList;
 import storage.LogHandler;
 import werkit.UI;
@@ -215,19 +218,19 @@ public class SearchCommand extends Command {
                 Integer.parseInt(userArguments);
                 System.out.println("The " + category + "(s) with "
                         + ui.getColorText(TextColor.COLOR_YELLOW, "reps = " + userArguments)
-                        + " is(are) listed below.");
+                        + " is(are) listed below together\nwith its(their) original index number(s).");
                 ui.printLine();
             } catch (NumberFormatException e) {
-                System.out.println("The " + category + "(s)" + " containing keywords"
+                System.out.println("The " + category + "(s)" + " containing keyword(s)"
                         + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
-                        + "is(are) listed below.");
+                        + "is(are) listed below together\nwith its(their) original index number(s).");
                 ui.printLine();
             }
             break;
         default:
-            System.out.println("The " + category + "(s)" + " containing keywords"
+            System.out.println("The " + category + "(s)" + " containing keyword(s)"
                     + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
-                    + "is(are) listed below.");
+                    + "is(are) listed below together\nwith its(their) original index number(s).");
             ui.printLine();
         }
     }
@@ -279,13 +282,14 @@ public class SearchCommand extends Command {
      *
      * @throws InvalidCommandException If the action specified by the user is invalid.
      */
-    public void searchExercise() throws InvalidCommandException {
+    public void searchExercise() throws InvalidCommandException, InvalidExerciseException {
         ArrayList<String> exerciseListToSearch = exerciseList.getExerciseList();
         for (String exerciseToSearch : exerciseListToSearch) {
             if (isMatch(exerciseToSearch.toLowerCase())) {
                 incrementMatchCount();
                 printSearchHeading();
-                ui.printColorText(TextColor.COLOR_YELLOW, matchCount + ". " + exerciseToSearch);
+                ui.printColorText(TextColor.COLOR_YELLOW,
+                        exerciseList.getIndexNumFromExerciseName(exerciseToSearch) + ". " + exerciseToSearch);
             }
         }
         if (isZeroMatch()) {
@@ -319,14 +323,16 @@ public class SearchCommand extends Command {
      *
      * @throws InvalidCommandException If the action specified by the user is invalid.
      */
-    public void searchPlan() throws InvalidCommandException {
+    public void searchPlan() throws InvalidCommandException, InvalidPlanException {
         var planListToSearch = planList.getPlansDisplayList();
         for (String planToSearch : planListToSearch) {
             String planToBeCompared = planToSearch.toLowerCase();
             if (isMatch(planToBeCompared)) {
                 incrementMatchCount();
                 printSearchHeading();
-                ui.printColorText(TextColor.COLOR_YELLOW, matchCount + ". " + planToBeCompared);
+                ui.printColorText(TextColor.COLOR_YELLOW,
+                        planList.getIndexNumFromPlanName(planToBeCompared)
+                                + ". " + planToBeCompared);
             }
         }
         if (isZeroMatch()) {
@@ -365,7 +371,7 @@ public class SearchCommand extends Command {
      *
      * @throws InvalidCommandException If the action specified by the user is invalid.
      */
-    public void searchWorkout() throws InvalidCommandException {
+    public void searchWorkout() throws InvalidCommandException, InvalidWorkoutException {
         var workoutListToSearch = workoutList.getWorkoutsDisplayList();
         for (String workoutToSearch : workoutListToSearch) {
             String workoutToBeCompared = workoutToSearch.toLowerCase();
@@ -376,14 +382,20 @@ public class SearchCommand extends Command {
                 if (isMatchQuantity(reps)) {
                     incrementMatchCount();
                     printSearchHeading();
-                    ui.printColorText(TextColor.COLOR_YELLOW, matchCount + ". " + workoutToBeCompared);
+                    ui.printColorText(TextColor.COLOR_YELLOW,
+                            workoutList.getIndexNumFromWorkoutName(workoutToBeCompared)
+                                    + ". " + workoutToBeCompared);
                 }
             } catch (NumberFormatException e) {
                 if (isMatch(exerciseName)) {
                     incrementMatchCount();
                     printSearchHeading();
-                    ui.printColorText(TextColor.COLOR_YELLOW, matchCount + ". " + workoutToBeCompared);
+                    ui.printColorText(TextColor.COLOR_YELLOW,
+                            workoutList.getIndexNumFromWorkoutName(workoutToBeCompared)
+                                    + ". " + workoutToBeCompared);
                 }
+            } catch (InvalidWorkoutException e) {
+                e.printStackTrace();
             }
         }
         if (isZeroMatch()) {
@@ -397,7 +409,8 @@ public class SearchCommand extends Command {
      *
      * @throws InvalidCommandException  If the action specified by the user is invalid.
      */
-    public void searchAll() throws InvalidCommandException {
+    public void searchAll() throws InvalidCommandException, InvalidPlanException,
+            InvalidWorkoutException, InvalidExerciseException {
         setUserAction(SEARCH_EXERCISE_ACTION_KEYWORD);
         searchExercise();
         ui.printLine();
@@ -436,7 +449,8 @@ public class SearchCommand extends Command {
                 String className = this.getClass().getSimpleName();
                 throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
             }
-        } catch (InvalidCommandException e) {
+        } catch (InvalidCommandException | InvalidPlanException
+                | InvalidWorkoutException | InvalidExerciseException e) {
             System.out.println(e.getMessage());
             System.out.println("Please try again");
         }
