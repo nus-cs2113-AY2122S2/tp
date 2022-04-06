@@ -211,7 +211,7 @@ _to be updated_
 ### Schedule-related features
 ![ScheduleUML](uml/classDiagrams/images/scheduleComponent.png)
 
-User are able to create and make changes to a 7-day workout plan schedule using the WerkIt application. For each day, user are only allowed
+Users are able to create and make changes to a 7-day workout plan schedule using the WerkIt application. For each day, user are only allowed
 to schedule 1 workout plan. Click [here](#glossary) to have a better understanding of what `workout`, `plan` and `schedule`
 means.
 
