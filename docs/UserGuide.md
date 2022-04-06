@@ -9,9 +9,9 @@ have an application to keep track of your workouts, plans and workout routines f
 You will be able to create, view, update and delete the workouts and plans you have created and store them in the application.
 You will also be able to schedule your workout plans for a week (7 days). 
 
-This user guide is design to help you to understand what WerkIt can offer you. You can also follow this guide closely 
-to understand how WerkIt works, such as knowing the commands to perform the different functions 
-that WerkIt have. 
+This user guide is designed to help you understand what WerkIt! can offer you. You can also follow this guide closely 
+to understand how WerkIt! works, such as knowing the commands to perform the different functions 
+that WerkIt! has. 
 
 ### Terminology 
 Please take note of these few terms. It is explained as below:
@@ -21,8 +21,8 @@ Please take note of these few terms. It is explained as below:
 | Exercise   | A single unit of exercise. <br/>Example: "push up", "pull up", "sit up"                                                  |
 | Repetition | The process of repeating an exercise. Often abbreviated to 'reps'.                                                       |
 | Workout    | An exercise with a quantity/number of repetitions. <br/>Example: "5 push up", "5 pull up", "10 sit up"                   |
-| Plan       | A set of workouts. <br/>Example: A plan named "Arms" will contains "5 push ups, 5 pull ups"                              |
-| Schedule   | Plan schedule for a day. The schedule is set for a week. <br/>Example: Arms plan will be added to Monday in the schedule |
+| Plan       | A set of workouts. <br/>Example: A plan named "arms" will contains "5 push up, 5 pull up"                                |
+| Schedule   | Plan schedule for a day. The schedule is set for a week. <br/>Example: "arms" plan will be added to Monday in the schedule |
 
 ### Notations Used In This Guide
 When reading this document, there are several icons that you may encounter.
