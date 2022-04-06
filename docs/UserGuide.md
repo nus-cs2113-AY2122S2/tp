@@ -337,7 +337,8 @@ The workout list is empty
 ---
 
 ### Delete a Workout: `workout /delete`
-Removes an existing workout from the workout list.
+Removes an existing workout from the workout list. Deleting
+a workout will also delete plans containing the deleted workout.
 
 Format: `workout /delete <workout index number>`
 
@@ -560,7 +561,8 @@ All workouts in the [grow my muscles] plan will be displayed.
 
 ---
 ### Delete a Plan: `plan /delete`
-Removes an existing plan from the plan list.
+Removes an existing plan from the plan list. Deleting a plan will also
+remove it from the days that it has been assigned to in your 7-day workout schedule.
 
 Format: `plan /delete <plan index number>`
 
