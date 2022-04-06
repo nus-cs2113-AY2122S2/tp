@@ -41,8 +41,8 @@ public class Parser {
         if (dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
                     || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
                     || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
-            throw new IHospitalException("The format of input is incorrect, " +
-                                                 "you may type `help` to view the command format.");
+            throw new IHospitalException("The format of input is incorrect, "
+                                                 + "you may type `help` to view the command format.");
         }
 
         int idIndex = dummy.indexOf("/id") + 4;
