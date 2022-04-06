@@ -76,7 +76,7 @@ Format: `addRoute  fid/FLIGHT_ID fd/FLIGHT_DATE ft/FLIGHT_TIME d/DESTINATION s/S
 * The `FLIGHT_ID` needs to be unique. If the 'FLIGHT_ID' is already registered, the system should generate an error message and require new input.
 * The flight route can be searched out by `FLIGHT_DATE` `DESTINATION` `SOURCE` `[FLIGHT_TIME]`.
 * The flight capacity must be a positive integer.
-* The flight ID, date, time, destination and source can be in any format.
+* The flight ID, date, time destination and source can be a single word in any format (whitespace is not allowed).
 
 Example of usage:
 * `addRoute fid/Bu3037 fd/02172022 ft/11:10 d/singapore s/china c/100`
@@ -127,7 +127,7 @@ Format: `addCustomer ic/IC n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Example of usage:
 * `addCustomer ic/W9248013B n/Eddie p/38201843 e/eddie1238@123.com`
-* `addCustomer ic/A09465022C n/Alice White p/97640183 e/alicewhite010@gmail.com`
+* `addCustomer ic/A0946502C n/Alice White p/97640183 e/alicewhite010@gmail.com`
 
 ### Delete a customer: `deleteCustomer`
 Remove a customer from the system.
@@ -154,7 +154,7 @@ Find the  customer with the specified ic.
 Format: `findCustomer IC`
 
 * List the customer information with the `IC`.
-* If customer is found “No customer found.” will be displayed.
+* If no customer is found “No customer found.” will be displayed.
 
 Example of usage:
 * `findCustomer A9470034C`
