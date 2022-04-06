@@ -47,7 +47,7 @@ public class FreeCommand extends Command {
                 duration = 0;
             } else {
                 duration = Integer.parseInt(this.time);
-                if (duration < 0 || duration > 23) {
+                if (duration < 0 || duration > 24) {
                     throw new NumberFormatException();
                 }
             }
@@ -94,6 +94,7 @@ public class FreeCommand extends Command {
                     count++;
                 }
                 if (busySlots[i][j] == BUSY && !isStart) {
+                    count++;
                     if (count >= duration * MINS_IN_1_HOUR) {
                         newEntry += " ";
                         newEntry += convertFreeArrayIndexToTime(j);

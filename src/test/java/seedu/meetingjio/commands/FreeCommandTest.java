@@ -82,7 +82,8 @@ public class FreeCommandTest {
                 + "Saturday 0000 2359\n"
                 + "Sunday 0000 2359";
 
-        answerBelowMinimum = "Tuesday 0000 2359\n"
+        answerBelowMinimum = "Monday 1100 2359\n"
+                + "Tuesday 0000 2359\n"
                 + "Wednesday 0000 2359\n"
                 + "Thursday 0000 2359\n"
                 + "Friday 0000 1600\n"
