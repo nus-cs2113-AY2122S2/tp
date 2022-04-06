@@ -91,9 +91,11 @@ Example of usage:
 `search appointment 2007-12-03T10:15:30`
 
 ### Editing a person's information
-Editing an existing person's information
+Editing an existing person's information.
 
-Format: `edit /d or /p INDEX /ph or /e or /n`
+Format: `edit /d OR /p INDEX /ph OR /e OR /n`
+
+* Note that you can only edit one information at a time.
 
 Example of usage:
 
@@ -102,6 +104,13 @@ Example of usage:
 `edit /p 1 /n Mike`
 
 `edit /d 1 /e 123489@gmail.com`
+
+### Editing an appointment
+Editing the details of an appointment.
+
+Format: `edit /a APPOINTMENT_INDEX /doctor DOCTOR_INDEX` OR `edit /a APPOINTMENT_INDEX /patient PATIENT_INDEX` OR `edit /a APPOINTMENT_INDEX /time DATETIME`
+
+* Note that you can only edit one information at a time.
 
 ### Deleting a person or an appointment: `delete`
 Removes a person or an appointment from the system.

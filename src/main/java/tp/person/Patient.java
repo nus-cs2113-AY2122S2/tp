@@ -1,6 +1,6 @@
 package tp.person;
 
-public class Patient extends tp.person.Person {
+public class Patient extends Person {
     protected String symptom;
     protected String description = " ";
 
@@ -15,7 +15,6 @@ public class Patient extends tp.person.Person {
         this.symptom = symptom;
     }
 
-
     public String getSymptom() {
         return symptom;
     }
@@ -24,9 +23,7 @@ public class Patient extends tp.person.Person {
         return description;
     }
 
-    public void setSymptom(String symptom) {
-        this.symptom = symptom;
-    }
+
 
     @Override
     public String toString() {

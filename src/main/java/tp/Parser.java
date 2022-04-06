@@ -19,6 +19,7 @@ import tp.command.EditDoctorCommand;
 import tp.command.ListDoctorListCommand;
 import tp.command.SortAppointmentByTimeCommand;
 import tp.command.EditPatientCommand;
+import tp.command.EditAppointmentCommand;
 
 import java.util.Scanner;
 
@@ -217,6 +218,24 @@ public class Parser {
         }
     }
 
+    public Command parseEditAppointmentCommand(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /a") + 8,
+                dummy.indexOf("edit /a") + 9));
+        if (fullCommand.contains("/doctor")) {
+            String newInformation = dummy.substring(dummy.indexOf("/doctor") + 8);
+            return new EditAppointmentCommand(index, "d", newInformation);
+        } else if (fullCommand.contains("/patient")) {
+            String newInformation = dummy.substring(dummy.indexOf("/patient") + 9);
+            return new EditAppointmentCommand(index, "p", newInformation);
+        } else if (fullCommand.contains("/time")) {
+            String newInformation = dummy.substring(dummy.indexOf("/time") + 6);
+            return new EditAppointmentCommand(index, "t", newInformation);
+        } else {
+            throw new IHospitalException("Wrong format detected\n");
+        }
+    }
+
     public Command parse(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("add")) {
             return parseAddCommand(fullCommand);
@@ -236,6 +255,8 @@ public class Parser {
             return parseEditDoctorCommand(fullCommand);
         } else if (fullCommand.contains("edit /p")) {
             return parseEditPatientCommand(fullCommand);
+        } else if (fullCommand.contains("edit /a")) {
+            return parseEditAppointmentCommand(fullCommand);
         } else {
             throw new IHospitalException("Invalid command given\n");
         }

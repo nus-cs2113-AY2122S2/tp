@@ -75,6 +75,12 @@ public class Ui {
         System.out.println("5. To sort something:" + System.lineSeparator() + sortAppointment);
     }
 
+    public void printGetHelp() {
+        String getAppointment = "get appointment DOCTOR_ID" + System.lineSeparator();
+        System.out.println("6. To get appointments of a doctor: "
+                                   + System.lineSeparator() + getAppointment);
+    }
+
     public void printHelpPage() {
         System.out.print(boundary);
         System.out.println("Do not remember the command format? Here are some commands you can try:");
@@ -84,6 +90,7 @@ public class Ui {
         printDeleteHelp();
         printSearchHelp();
         printSortHelp();
+        printGetHelp();
 
         System.out.println("Hope they are helpful to you~");
         System.out.print(boundary);

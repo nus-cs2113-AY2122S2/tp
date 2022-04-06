@@ -51,6 +51,12 @@ public class AppointmentList {
         return curr;
     }
 
+    /**
+     * Get the list of appointment of a given doctor.
+     *
+     * @param id ID of the doctor.
+     * @return Appointment list of the given doctor.
+     */
     public AppointmentList getAppointmentListOfDoctorById(String id) {
         AppointmentList res = new AppointmentList();
         for (Appointment appointment : appointments) {
