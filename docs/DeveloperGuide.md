@@ -119,7 +119,10 @@ and their interactions.
 - `Logic`: Executes the appropriate command as intended by the user.
 
 #### How the components interact with each other
-[Sequence diagram]
+The *Component Interaction Diagram* shows the inner workings of how each component in WerkIt interacts.
+The diagram depicts a scenario where a user attempts to create a workout, `workout /new sit up /reps 5`.
+
+![Architecture Sequence Diagram](uml/sequenceDiagrams/miscellaneous/images/ArchitectureSequenceDiagram.png)
 
 ### Component Overview
 
