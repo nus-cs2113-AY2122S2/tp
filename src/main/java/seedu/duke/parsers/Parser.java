@@ -11,7 +11,7 @@ import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.InvalidModuleGradeException;
 import seedu.duke.exceptions.ExcessArgumentException;
-import seedu.duke.exceptions.InvalidTagCommandException;
+import seedu.duke.exceptions.InvalidTagOperationException;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
@@ -106,7 +106,7 @@ public abstract class Parser {
      * Checks for strings that are parsed into groups based on commandFormat, but are essentially invalid.
      */
     private void checkForInvalidStrings() throws ExcessArgumentException, InvalidFlagException,
-            InvalidModuleGradeException, InvalidNumberException, InvalidTagCommandException {
+            InvalidModuleGradeException, InvalidNumberException, InvalidTagOperationException {
         checksForExcessArg();
         checksForInvalidMarkFlag();
         checksForInvalidModFlag();
@@ -128,11 +128,11 @@ public abstract class Parser {
         }
     }
 
-    private void checksForInvalidTagCommand() throws InvalidTagCommandException {
+    private void checksForInvalidTagCommand() throws InvalidTagOperationException {
         if (groupNames.contains(INVALID_TAG_COMMAND)) {
             String invalidInput = parsedCommand.get(INVALID_TAG_COMMAND);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidTagCommandException(invalidInput);
+                throw new InvalidTagOperationException(invalidInput);
             }
         }
     }

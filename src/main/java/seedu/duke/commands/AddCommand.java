@@ -30,15 +30,10 @@ public class AddCommand extends Command {
      */
     public AddCommand(AddObjectType type, String taskName, String taskDescription, String estimatedWorkingTime,
                       String taskModule) throws ModHappyException {
-        try {
-            assert type == AddObjectType.TASK;
-            typeToAdd = type;
-            newTask = new Task(taskName, taskDescription, estimatedWorkingTime);
-            targetModuleName = taskModule;
-        } catch (ModHappyException e) {
-            throw e;
-        }
-
+        assert type == AddObjectType.TASK;
+        typeToAdd = type;
+        newTask = new Task(taskName, taskDescription, estimatedWorkingTime);
+        targetModuleName = taskModule;
     }
 
     /**
@@ -72,9 +67,6 @@ public class AddCommand extends Command {
             Module targetModule = moduleList.getGeneralTasks();
             if (!Objects.isNull(targetModuleName)) {
                 targetModule = moduleList.getModule(targetModuleName);
-            }
-            if (Objects.isNull(targetModule)) {
-                throw new NoSuchModuleException();
             }
             TaskList taskList = targetModule.getTaskList();
             res = String.format(ADD_TASK_MESSAGE, targetModule, taskList.addTask(newTask));

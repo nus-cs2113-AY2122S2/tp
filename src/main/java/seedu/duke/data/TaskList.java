@@ -21,7 +21,7 @@ public class TaskList {
     /**
      * Returns the size of the task list.
      */
-    public int size() {
+    public int getSize() {
         return taskList.size();
     }
 
@@ -143,12 +143,14 @@ public class TaskList {
         StringBuilder res = new StringBuilder();
         int numHiddenTasks = 0;
         for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).getTagList().contains(tag)) {
-                if (showCompletedTasks || !taskList.get(i).getTaskDone()) {
-                    res.append(indent).append(String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i)));
-                } else {
-                    numHiddenTasks++;
-                }
+            if (!taskList.get(i).getTagList().contains(tag)) {
+                // Skip this task as it does not contain the tag we want
+                continue;
+            }
+            if (showCompletedTasks || !taskList.get(i).getTaskDone()) {
+                res.append(indent).append(String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i)));
+            } else {
+                numHiddenTasks++;
             }
 
         }

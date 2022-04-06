@@ -78,9 +78,6 @@ public class EditCommand extends Command {
             targetModule = moduleList.getGeneralTasks();
         } else {
             targetModule = moduleList.getModule(taskModule);
-            if (Objects.isNull(targetModule)) {
-                throw new NoSuchModuleException();
-            }
         }
         return targetModule;
     }
@@ -103,9 +100,6 @@ public class EditCommand extends Command {
      */
     public void editModuleDescription(ModuleList moduleList) throws NoSuchModuleException {
         Module targetModule = moduleList.getModule(moduleCode);
-        if (Objects.isNull(targetModule)) {
-            throw new NoSuchModuleException();
-        }
         targetModule.setModuleDescription(changedParameter);
         result = String.format(EDIT_MODULE_SUCCESS, targetModule.getModuleCode());
     }

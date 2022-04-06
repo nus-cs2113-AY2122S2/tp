@@ -14,9 +14,9 @@ public class StringConstants {
     /**
      * For start and exit of program.
      */
-    public static final String HELLO_MESSAGE = "Hello, welcome to Mod Happy!";
-    public static final String GOOD_BYE_MESSAGE = "See you later!";
-    public static final String INIT_FAILED_MESSAGE = "Failed to start Mod Happy...";
+    public static final String MESSAGE_HELLO = "Hello, welcome to Mod Happy!";
+    public static final String MESSAGE_GOODBYE = "See you later!";
+    public static final String MESSAGE_INIT_FAILED = "Failed to start Mod Happy...";
 
     /**
      * For loading of data.
@@ -194,13 +194,15 @@ public class StringConstants {
     public static final String ERROR_INVALID_FLAG = "\nInvalid flag '%s'."
             + "\nPlease check and try again. "
             + "\nYou may input 'help' followed by your command word to view the expected input format.";
+
     public static final String ERROR_MISSING_FLAG = "\nMissing flag."
             + "\nPlease check and try again. "
             + "\nYou may input 'help' followed by your command word to view the expected input format.";
-    public static final String ERROR_INVALID_TAG_COMMAND = "\nInvalid command word '%s'."
+    public static final String ERROR_INVALID_TAG_OPERATION = "\nInvalid operation '%s'."
             + "\nPlease try again. Accepted commands are: add, del.";
-    public static final String ERROR_MISSING_TAG_COMMAND = "\nMissing command word."
+    public static final String ERROR_MISSING_TAG_OPERATION = "\nMissing operation."
             + "\nPlease try again. Accepted commands are: add, del.";
+
     public static final String ERROR_INVALID_MODULE_GRADE = "\nInvalid module grade '%s'."
             + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
     public static final String ERROR_MISSING_MODULE_GRADE = "\nMissing module grade."
@@ -220,9 +222,14 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
+
+    public static final String ERROR_MODULAR_CREDITS_FAILED = "modular credits (accepted range: 0 to 100)";
+    public static final String ERROR_TASK_NUMBER_FAILED = "task number";
+
     public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
-    public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with identical module codes found. "
+    public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with module code \"%s\" found. "
             + "Aborting load...";
+    public static final String ERROR_INVALID_MODULE = "Invalid module credits found (%s had %d MCs). Aborting load...";
 
 
     /**
@@ -264,8 +271,6 @@ public class StringConstants {
     public static final String INVALID_MOD_DES_FLAG = "invalidModDesFlag";
     public static final String INVALID_TIME_FLAG = "invalidTimeFlag";
     public static final String INVALID_MARK_FLAG = "invalidMarkFlag";
-    public static final String INVALID_FLAG = "invalidFlag";
-    public static final String INVALID_MODULE_CODE = "invalidModuleCode";
     public static final String INVALID_MODULE_GRADE = "invalidModuleGrade";
     public static final String INVALID_NUMBER = "invalidNumber";
     public static final String INVALID_TAG_COMMAND = "invalidTagCommand";
@@ -339,5 +344,5 @@ public class StringConstants {
     public static final String SPACE = " ";
     public static final String LS = System.lineSeparator();
     public static final String LINE = "____________________________________________________________";
-
+    public static final String COMMAND_PROMPT = "> ";
 }
