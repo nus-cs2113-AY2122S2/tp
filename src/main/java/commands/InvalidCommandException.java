@@ -9,9 +9,9 @@ public class InvalidCommandException extends Exception {
     public static final String ILLEGAL_CHARACTER_USED_ERROR_MSG = "Uh oh, an illegal character was found "
             + "in your input.";
     public static final String INVALID_WORKOUT_LIST_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
-            + "Do you mean 'workout /list?'";
+            + "Do you mean 'workout /list'?";
     public static final String INVALID_EXERCISE_LIST_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
-            + "Do you mean 'exercise /list?'";
+            + "Do you mean 'exercise /list'?";
     public static final String INVALID_NEW_WORKOUT_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'workout /new <exercise name> /reps <number of reps>'?";
     public static final String INVALID_DELETE_WORKOUT_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
@@ -29,19 +29,19 @@ public class InvalidCommandException extends Exception {
     public static final String INVALID_NEW_PLAN_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'plan /new <plan name> /workouts <workout number(s) to add, separated by comma>'?";
     public static final String INVALID_PLAN_LIST_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
-            + "Do you mean 'plan /list?'";
+            + "Do you mean 'plan /list'?";
     public static final String INVALID_DELETE_PLAN_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'plan /delete <plan number to delete>'?";
     public static final String INVALID_PLAN_DETAILS_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'plan /details <plan number to view details>'?";
     public static final String INVALID_SCHEDULE_UPDATE_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
-            + "Do you mean 'schedule /update <day number [1-7]> <plan number>'";
+            + "Do you mean 'schedule /update <day number [1-7]> <plan number>'?";
     public static final String INVALID_SCHEDULE_LIST_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
-            + "Do you mean 'schedule /list?'";
+            + "Do you mean 'schedule /list'?";
     public static final String INVALID_SCHEDULE_CLEAR_ALL_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
-            + "Do you mean 'schedule /clearall?'";
+            + "Do you mean 'schedule /clearall'?";
     public static final String INVALID_SCHEDULE_CLEAR_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
-            + "Do you mean 'schedule /clear <day number [1-7]>?'";
+            + "Do you mean 'schedule /clear <day number [1-7]>'?";
     public static final String INVALID_HELP_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'help'?";
     public static final String INVALID_EXIT_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
