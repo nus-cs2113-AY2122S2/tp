@@ -140,6 +140,10 @@ public class Parser {
         } else {
             price = Double.parseDouble(priceString.replaceAll(STRING_PATTERN_PRICE, ""));
         }
+        if (price < 0) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "Invalid price. Price cannot" +
+                    " be negative."));
+        }
         parameters = extractedParameters[1];
 
         // extracts date

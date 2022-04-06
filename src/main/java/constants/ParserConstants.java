@@ -33,5 +33,5 @@ public class ParserConstants {
     public static final String PARAMETER_PATTERN_RENEWAL = "r/.*?(?=( [ipdtr]/)|$)";
 
     /** Regex pattern of prices given in user command. */
-    public static final String STRING_PATTERN_PRICE = "[^\\d.]";
+    public static final String STRING_PATTERN_PRICE = "[^-\\d.]";
 }
