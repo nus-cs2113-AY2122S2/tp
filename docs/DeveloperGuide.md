@@ -155,16 +155,22 @@ CCA Clubs that require assistance in inventory management, especially for fast t
 
 ## User Stories
 
-| Version | As a ...                               | I want to ...                                   | So that I can ...                                            |
-|---------|----------------------------------------|-------------------------------------------------|--------------------------------------------------------------|
-| v1.0    | Manager                                | Add a new item to the inventory                 | Update my inventory                                          |
-| v1.0    | Manager                                | Remove an item from the inventory               | Update my inventory                                          |
-| v1.0    | Stocktaker                             | list out all my items                           | View all my items at a glance                                |
-| v1.0    | New user                               | List out all possible commands                  | I can familiarise myself with using the system               |
-| v1.0    | User who has not seen items physically | Get the description of a particular item        | I can visualise the item better to know if it is what i need |
-| v1.0    | As a frequent/first time user          | Write to a file containing the entire inventory | Save my inventory data to a file                             |
-| v1.0    | Stocktaker                             | Read from and load an inventory file data       | To work on and view the data                                 |
-
+| Version | As a ...                               | I want to ...                                   | So that I can ...                                                   |
+|---------|----------------------------------------|-------------------------------------------------|---------------------------------------------------------------------|
+| v1.0    | Manager                                | Add a new item to the inventory                 | Update my inventory                                                 |
+| v1.0    | Manager                                | Remove an item from the inventory               | Update my inventory                                                 |
+| v1.0    | Stocktaker                             | list out all my items                           | View all my items at a glance                                       |
+| v1.0    | New user                               | List out all possible commands                  | I can familiarise myself with using the system                      |
+| v1.0    | User who has not seen items physically | Get the description of a particular item        | I can visualise the item better to know if it is what i need        |
+| v1.0    | As a frequent/first time user          | Write to a file containing the entire inventory | Save my inventory data to a file                                    |
+| v1.0    | Stocktaker                             | Read from and load an inventory file data       | To work on and view the data                                        |
+| v2.0    | User                                   | Search for an item in the inventory             | To check if the item exists in the inventory                        |
+| v2.0    | User                                   | Edit an item in the inventory                   | Update/Make changes to the item attributes                          |
+| v2.0    | User                                   | Borrow an item in the inventory                 | Add a borrow record in the inventory                                |
+| v2.0    | User                                   | List all current borrowings                     | View which item is currently being borrowed                         |
+| v2.0    | User                                   | List all future borrowings                      | View which item will be borrowed in the future and plan accordingly |
+| v2.0    | User                                   | List all past borrowings                        | View which item has been borrowed in the past                       |
+| v2.0    | User                                   | List all available borrowings                   | View which item is available for borrowing now                      |
 
 ## Non-Functional Requirements
 
