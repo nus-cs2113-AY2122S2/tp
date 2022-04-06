@@ -162,7 +162,7 @@ search and view by a specific criteria.
 
 Format: `view doctor` or `view doctor /info [criteria],[input]`
 
-Accepted Criteria: `nric`,`name`,`age`,`address`,`gender`,`dob`,'specialization'
+Accepted Criteria: `nric`,`name`,`age`,`address`,`gender`,`dob`,`specialization`
 
 Examples: `view doctor /info nric,S1234567A`, `view doctor /info name,John Doe`,
 `view doctor /info age,25`, `view doctor /info address,Baker Street`,
@@ -171,11 +171,16 @@ Examples: `view doctor /info nric,S1234567A`, `view doctor /info name,John Doe`,
 #### VIEW PATIENT
 
 To view the records of all patients in the application, you can simply call `view patient` without any additional
-parameters. You could also give the NRIC as an additional parameter if you want to view a single patient only.
+parameters. You could also give a specific criteria as listed below and the input value if you want to
+search and view by a specific criteria.
 
-Format: `view patient` or `view patient /info [nric]`
+Format: `view patient` or `view patient /info [criteria],[input]`
 
-Example: `view doctor /info S1234567A`
+Accepted Criteria: `nric`,`name`,`age`,`address`,`gender`,`dob`,`admissiondate`
+
+Example: `view patient /info nric,S7654321A`, `view patient /info name,John Doe`,
+`view patient /info age,25`, `view patient /info address,10 Baker Street`,
+`view patient /info gender,M`,`view patient /info dob,1997-03-23`, `view patient /info admissiondate,2022-01-01`
 
 #### VIEW MEDICINE
 
