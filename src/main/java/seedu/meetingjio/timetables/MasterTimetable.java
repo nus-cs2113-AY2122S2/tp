@@ -23,7 +23,7 @@ public class MasterTimetable {
     private final ArrayList<Meeting> meetingList;
 
     public static final int NUM_DAYS = 7;
-    public static final int NUM_MINS = 960;
+    public static final int NUM_MINS = 1440;
     public static final int BUSY = 1;
 
     public MasterTimetable() {
@@ -316,12 +316,12 @@ public class MasterTimetable {
     }
 
     /**
-     * Initialise a 7 x 960 array, with the 7 rows indicating each day of the week and the 960 columns indicating the
-     * minutes starting from 0800 to 2359 (Constraint here is that free timeslots from 0000 to 0759 are not included).
+     * Initialise a 7 x 1440 array, with the 7 rows indicating each day of the week and the 1440 columns indicating the
+     * minutes starting from 0000 to 2359.
      * For the last minute (2359) of each day, it will be initialised to 1 (BUSY).
      * For each timetable stored, the method populateBusySlots will be called.
      *
-     * @return busySlots A 7 x 960 array containing 0s and 1s whereby 0 indicates a time when all users are free
+     * @return busySlots A 7 x 1440 array containing 0s and 1s whereby 0 indicates a time when all users are free
      */
     public int[][] listBusy() {
         int[][] busySlots = new int[NUM_DAYS][NUM_MINS];
