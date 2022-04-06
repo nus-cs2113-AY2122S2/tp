@@ -233,11 +233,11 @@ Below is a class diagram of the `Logic` component:
 other components have been omitted from the diagram above.</span>
 
 The `Logic` component consists of:
-- `Command` abstract class. The `ExerciseCommand`, `SearchCommand`, `WorkoutCommand`, `ScheduleCommand`,
+- **`Command` abstract class**. The `ExerciseCommand`, `SearchCommand`, `WorkoutCommand`, `ScheduleCommand`,
 `PlanCommand`, `HelpCommand` and `ExitCommand` extends the `Command` class. These classes
 identify the command action type supplied by the user and also executes the command.
 The source of these classes can be found [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/tree/master/src/main/java/commands).
-- The `[command name]List` classes. It includes `ExerciseList`,
+- **`[command name]List` classes**. It includes `ExerciseList`,
 `WorkoutList`,`PlanList` and `DayList`. These classes hold the methods
 to perform the command action desired by the user. Examples of command actions
 are create, delete, update and listing of the objects. The source of these classes
