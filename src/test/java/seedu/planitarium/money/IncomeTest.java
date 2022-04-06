@@ -70,7 +70,7 @@ class IncomeTest {
 
     @Test
     public void saveString_getString_success() {
-        String actualString = testItem.saveString();
+        String actualString = testItem.getSaveString();
         assertEquals(EXPECTED_SAVE_STRING, actualString);
     }
 

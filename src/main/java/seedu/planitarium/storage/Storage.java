@@ -190,7 +190,8 @@ public class Storage {
         dataDate = parseInfoGetExpendDate(info);
         familyData.addExpend(groupNumber, numberOfPerson, description, amount,
                 category, isPermanent, Constants.FOR_STORAGE);
-        familyData.getList(groupNumber).getPerson(numberOfPerson).setExpenditureDate(expendNumber, dataDate);
+        Person personToAddTo = familyData.getList(groupNumber).getPerson(numberOfPerson);
+        personToAddTo.setExpenditureDate(expendNumber, dataDate);
         expendNumber++;
     }
 
@@ -209,7 +210,8 @@ public class Storage {
         isPermanent = parseInfoGetPermanent(info);
         dataDate = parseInfoGetIncomeDate(info);
         familyData.addIncome(groupNumber, numberOfPerson, description, amount, isPermanent, Constants.FOR_STORAGE);
-        familyData.getList(groupNumber).getPerson(numberOfPerson).setIncomeDate(incomeNumber, dataDate);
+        Person personToAddTo = familyData.getList(groupNumber).getPerson(numberOfPerson);
+        personToAddTo.setIncomeDate(incomeNumber, dataDate);
         incomeNumber++;
     }
 
@@ -377,7 +379,7 @@ public class Storage {
     private static void storePersonListData(FileWriter writeToFile, Person person) throws IOException {
         String loggerString = "Method storePersonListData() called";
         logger.log(Level.INFO, loggerString);
-        writeToFile.write(String.valueOf(person.saveName()) + System.lineSeparator());
+        writeToFile.write(String.valueOf(person.getSaveName()) + System.lineSeparator());
         storeIncomeData(writeToFile, person);
         storeExpenditureData(writeToFile, person);
     }
@@ -395,7 +397,7 @@ public class Storage {
         String loggerString = "Method storeExpenditureData() called";
         logger.log(Level.INFO, loggerString);
         for (Expenditure expenditure : person.getExpenditureList()) {
-            writeToFile.write(String.valueOf(expenditure.saveString()) + System.lineSeparator());
+            writeToFile.write(String.valueOf(expenditure.getSaveString()) + System.lineSeparator());
         }
     }
 
@@ -412,7 +414,7 @@ public class Storage {
         String loggerString = "Method storeIncomeData() called";
         logger.log(Level.INFO, loggerString);
         for (Income income : person.getIncomeList()) {
-            writeToFile.write(String.valueOf(income.saveString()) + System.lineSeparator());
+            writeToFile.write(String.valueOf(income.getSaveString()) + System.lineSeparator());
         }
     }
 
@@ -428,9 +430,13 @@ public class Storage {
     public static Family loadData() {
         String loggerString = "Method loadData() called";
         logger.log(Level.INFO, loggerString);
-        checkFileExists();
-        readSaveFile();
-        return familyData;
+        try {
+            checkFileExists();
+            readSaveFile();
+            return familyData;
+        } catch (Exception e) {
+            return familyData;
+        }
     }
 
 }
