@@ -183,7 +183,6 @@ public class WerkIt {
                 newCommand.execute();
                 if (newCommand instanceof WorkoutCommand) {
                     if (newCommand.getUserAction().equals(DELETE_ACTION_KEYWORD)) {
-                        System.out.print(System.lineSeparator());
                         reloadScheduleFile();
                     }
                 }   else if (newCommand instanceof PlanCommand) {

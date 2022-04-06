@@ -534,6 +534,7 @@ public class PlanList {
             System.out.println((i + 1) + ". " + getPlansDisplayList().get(planIndexWithDeletedWorkout.get(i) - i - 1));
             deletePlan(Integer.toString(planIndexWithDeletedWorkout.get(i) - i));
         }
+        System.out.println();
     }
 
     public void updatePlanContainsUpdatedWorkout(String oldWorkoutToCheck, Workout updatedWorkout) throws
@@ -563,6 +564,7 @@ public class PlanList {
             System.out.println((i + 1) + ". " + getPlansDisplayList().get(planWithUpdatedWorkout.get(i) - 1));
             updatePlanDetails((planWithUpdatedWorkout.get(i)), oldWorkoutToCheck, updatedWorkout);
         }
+        System.out.println();
     }
 
     public void updatePlanDetails(int planIndexToUpdate, String oldWorkoutToCheck, Workout updatedWorkout) throws
