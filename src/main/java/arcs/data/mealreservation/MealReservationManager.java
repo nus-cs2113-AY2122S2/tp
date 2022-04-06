@@ -59,4 +59,14 @@ public class MealReservationManager {
         return false;
     }
 
+    public String getSpecificCustomerMealReservation(String ic, String fid) {
+        for (MealReservation mealReservation : mealReservations) {
+            if (ic.equals(mealReservation.getCustomer().getIc())
+                    && fid.equals(mealReservation.getRoute().getFlightID())) {
+                return mealReservation.getMealReservationInfo();
+            }
+        }
+        return "";
+    }
+
 }
