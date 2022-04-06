@@ -8,13 +8,15 @@
     2. [Search for Items](#search-for-items-search)
     3. [List All Items](#list-all-items-list)
     4. [List Current Borrowings](#list-current-borrowings-listcb)
-    5. [List Future Borrowings](#list-future-borrowings-list--fb)
-    6. [List Overdue Borrowings](#list-overdue-borrowings-list--ob)
-    7. [Borrow an Item](#borrow-an-item-borrow)
-    8. [Get Description of Item](#get-description-of-item-desc)
-    9. [Delete an Item](#delete-an-item-delete)
-    10. [Edit an Item](#edit-an-item-edit)
-    11. [Exit](#exit-exit)
+    5. [List Future Borrowings](#list-future-borrowings-listfb)
+    6. [List Overdue Borrowings](#list-overdue-borrowings-listob)
+    7. [List Available Borrowings](#list-available-borrowings-listab)
+    8. [Borrow an Item](#borrow-an-item-borrow)
+    9. [Get Description of Item](#get-description-of-item-desc)
+    10. [Delete an Item](#delete-an-item-delete)
+    11. [Edit an Item](#edit-an-item-edit)
+    12. [Cancel a future borrowing](#cancel-a-future-borrowing-cancel)
+    12. [Exit](#exit-exit)
 ## Introduction
 
 ClubInvMgr is a desktop CLI app for inventory management for CCA clubs, especially for fast typists who can accomplish tasks quickly by typing out commands.
@@ -262,7 +264,7 @@ There are no overdue borrowings for David.
 
 
 ### List Available Borrowings: `listab`
-List all items that is available between a start date and an end date. 
+List all items that is available all the time between a start date and an end date. 
 
 Format:   
 `listab s/START_DATE e/END_DATE`: List all available borrowings between `START_DATE` and `END_DATE`.  
@@ -357,6 +359,40 @@ Item at index 0 has been modified.
 Before: Markers | 8
 After: Markers | 3
 ```
+
+
+### Cancel a future borrowing: `cancel`
+Cancels future borrowing made by a specific person. It is only possible to cancel a borrowing with a person name and the index of his future borrowings.
+
+Format:
+`cancel p/BORROWER_NAME i/INDEX`
+
+The arguments:
+1. `BORROWER_NAME` - name of the borrower
+2. `INDEX` - index of the future borrowing made by `BORROWER_NAME`. Index are based off the result of the command `listfb p/BORROWER_NAME`.
+
+Examples of usage:
+```
+> listfb p/Tom
+Here is a list of future borrowings for Tom: 
+1) Name of Item: Chalkboard
+Name of Borrower: Tom
+Borrow Duration: 2022-05-05 to 2022-05-06
+
+2) Name of Item: pencil
+Name of Borrower: Tom
+Borrow Duration: 2022-05-06 to 2022-05-06
+
+> cancel p/Tom i/1
+Future borrowing of Chalkboard | 1 from 2022-05-05 to 2022-05-06 by Tom has been removed
+
+> listfb p/Tom
+Here is a list of future borrowings for Tom: 
+1) Name of Item: pencil
+Name of Borrower: Tom
+Borrow Duration: 2022-05-06 to 2022-05-06
+```
+
 
 ### Exit: `exit`
 
