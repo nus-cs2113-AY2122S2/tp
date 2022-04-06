@@ -28,9 +28,26 @@ public class PatientList {
         return countPatient;
     }
 
-    public void addPatient(Patient patient) {
-        patients.add(patient);
-        countPatient++;
+    /**
+     * Add a patient to the list.
+     *
+     * @param patient Patient to be added.
+     * @throws IHospitalException If ID is the same as other patients.
+     */
+    public void addPatient(Patient patient) throws IHospitalException {
+        boolean isDuplicate = false;
+        for (int i = 0; i < patients.size(); i++) {
+            if (patients.get(i).getId().trim().equals(patient.getId())) {
+                isDuplicate = true;
+            }
+        }
+
+        if (isDuplicate) {
+            throw new IHospitalException("Patient with this ID already exists.\n");
+        } else {
+            patients.add(patient);
+            countPatient++;
+        }
     }
 
     /**

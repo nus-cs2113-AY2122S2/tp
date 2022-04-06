@@ -20,9 +20,26 @@ public class DoctorList {
         return doctors.get(index - 1);
     }
 
-    public void addDoctor(Doctor doctor) {
-        doctors.add(doctor);
-        size++;
+    /**
+     * Add a doctor to the list.
+     *
+     * @param doctor Doctor to be added.
+     * @throws IHospitalException If ID of the doctor is the same as other doctors.
+     */
+    public void addDoctor(Doctor doctor) throws IHospitalException {
+        boolean isDuplicate = false;
+        for (int i = 0; i < doctors.size(); i++) {
+            if (doctors.get(i).getId().trim().equals(doctor.getId())) {
+                isDuplicate = true;
+            }
+        }
+
+        if (isDuplicate) {
+            throw new IHospitalException("Doctor with this ID already exists.\n");
+        } else {
+            doctors.add(doctor);
+            size++;
+        }
     }
 
     public int getSize() {
