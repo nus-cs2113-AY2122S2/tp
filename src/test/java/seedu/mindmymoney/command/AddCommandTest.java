@@ -573,7 +573,7 @@ class AddCommandTest {
      * Test if program is able to exit.
      */
     @Test
-    void addCommand_isExit_expectException() {
+    void addCommand_isExit_expectFalse() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
