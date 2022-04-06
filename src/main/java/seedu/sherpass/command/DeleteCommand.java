@@ -1,12 +1,14 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 import seedu.sherpass.task.TaskList;
 
-import static seedu.sherpass.constant.Message.EMPTY_STRING;
+import static seedu.sherpass.constant.Message.DELETE_TASK_RESULT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.TAB_INDENT;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_1;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_2;
 
 public class DeleteCommand extends Command {
     private int deleteIndex;
@@ -37,15 +39,13 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             String taskToBeRemoved = taskList.getTask(deleteIndex).toString();
-            String repeatKeyWord = (isRepeat ? " repeated" : EMPTY_STRING);
             taskList.removeTask(deleteIndex, isRepeat);
-            ui.showToUser("Okay. I've removed this" + repeatKeyWord + " task:\n  "
-                    + taskToBeRemoved + "\nNow you have " + taskList.getSize() + " task(s) in the list.");
+            ui.showToUser(DELETE_TASK_RESULT_MESSAGE);
+            ui.showToUser(TAB_INDENT + taskToBeRemoved);
+            ui.showToUser(TASK_COUNT_MESSAGE_1 + taskList.getSize() + TASK_COUNT_MESSAGE_2);
             storage.writeSaveData(taskList);
         } catch (IndexOutOfBoundsException exception) {
-            ui.showToUser(ERROR_INVALID_INDEX_MESSAGE);
-        } catch (InvalidInputException exception) {
-            ui.showToUser(exception.getMessage());
+            ui.showError(ERROR_INVALID_INDEX_MESSAGE);
         }
     }
 }

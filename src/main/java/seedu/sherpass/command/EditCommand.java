@@ -12,9 +12,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import static seedu.sherpass.constant.Message.EMPTY_STRING;
+import static seedu.sherpass.constant.Message.EDIT_TASK_RESULT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
+import static seedu.sherpass.constant.Message.TAB_INDENT;
 
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
@@ -70,25 +70,20 @@ public class EditCommand extends Command {
         try {
             Task taskToEdit = taskList.getTask(editIndex);
             setDoOnDateStartEndTime(taskToEdit);
-            String repeated = EMPTY_STRING;
             if (isRepeating) {
                 taskList.editRepeatedTasks(editIndex, taskDescription,
                         doOnStartDateTime, doOnEndDateTime, byDate);
-                repeated = " repeated";
             } else {
                 taskList.editSingleTaskContent(editIndex, taskDescription,
                         doOnStartDateTime, doOnEndDateTime, byDate);
             }
-            ui.showToUser("Okay! I've edited this" + repeated + " task:\n\t" + taskToEdit);
             storage.writeSaveData(taskList);
-        } catch (TimeClashException exception) {
-            ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
-            ui.showLine();
-            ui.showToUser("Clashing task: " + exception.getMessage());
+            ui.showToUser(EDIT_TASK_RESULT_MESSAGE);
+            ui.showToUser(TAB_INDENT + taskToEdit);
+        } catch (TimeClashException | InvalidInputException exception) {
+            ui.showToUser(exception.getMessage());
         } catch (IndexOutOfBoundsException exception) {
             ui.showToUser(ERROR_INVALID_INDEX_MESSAGE);
-        } catch (InvalidInputException exception) {
-            ui.showToUser(exception.getMessage());
         }
     }
 }

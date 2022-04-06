@@ -10,6 +10,11 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
 
+import static seedu.sherpass.constant.Message.ADD_TASK_RESULT_MESSAGE;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_1;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_2;
+import static seedu.sherpass.constant.Message.TAB_INDENT;
+
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = "Add: Adds a task into the task list.\n"
@@ -64,10 +69,10 @@ public class AddCommand extends Command {
         newTask = new Task(identifier, taskDescription, byDate, doOnStartDateTime, doOnEndDateTime);
         try {
             taskList.addTask(newTask, frequency);
-            ui.showToUser("Got it! I've added this task:\n   "
-                    + newTask + "\n"
-                    + "Now you have " + taskList.getSize() + " task(s) in your schedule!");
             storage.writeSaveData(taskList);
+            ui.showToUser(ADD_TASK_RESULT_MESSAGE);
+            ui.showToUser(TAB_INDENT + newTask);
+            ui.showToUser(TASK_COUNT_MESSAGE_1 + taskList.getSize() + TASK_COUNT_MESSAGE_2);
         } catch (TimeClashException | InvalidInputException exception) {
             ui.showError(exception.getMessage());
         }

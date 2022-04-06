@@ -15,10 +15,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_START_DATE_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_DO_ON_DATE;
-import static seedu.sherpass.constant.Message.ERROR_DELETE_REPEATED_TASK;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_START_DATE_IN_THE_PAST_MESSAGE;
 
@@ -409,7 +407,7 @@ public class TaskList {
      *
      * @param deleteIndex Index of a task to search for.
      */
-    public void removeTask(int deleteIndex, boolean isRepeat) throws InvalidInputException {
+    public void removeTask(int deleteIndex, boolean isRepeat) {
         Task taskToBeRemoved = tasks.get(deleteIndex);
         if (!isRepeat) {
             tasks.remove(deleteIndex);
