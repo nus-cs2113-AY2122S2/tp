@@ -2,11 +2,16 @@ package arcs.parser;
 
 import arcs.commands.Command;
 import arcs.commands.UndefinedCommand;
-import arcs.commands.customer.DeleteCustomerCommand;
 import arcs.commands.flightbooking.BookCommand;
 import arcs.commands.flightbooking.DeleteBookingCommand;
 
 public class FlightBookingParser {
+    /**
+     * Parses user input string into a BookCommand.
+     *
+     * @param argumentLine the user input string
+     * @return a BookCommand.
+     */
     public static Command prepareBookCommand(String argumentLine) {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new BookCommand(null, null);
@@ -37,6 +42,11 @@ public class FlightBookingParser {
         return argumentLine.substring(startIdx + field.length(), endIdx);
     }
 
+    /**
+     * Parses the user input string into a DeleteBookingCommand.
+     * @param argumentLine use input string
+     * @return a DeleteBookingCommand
+     */
     public static Command prepareDeleteBookingCommand(String argumentLine) {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new UndefinedCommand("Index is not specified");

@@ -25,6 +25,9 @@ public class FindRouteCommand extends Command {
         checkEmptyField();
     }
 
+    /**
+     * Checks whether the input fields are empty.
+     */
     private void checkEmptyField() {
         if (date == null || date.isEmpty()) {
             emptyFields.add("Flight date");

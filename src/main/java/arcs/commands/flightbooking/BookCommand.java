@@ -60,6 +60,9 @@ public class BookCommand extends Command {
                 + System.lineSeparator() + "Flight:" + System.lineSeparator() + route.getFlightInfo());
     }
 
+    /**
+     * Checks whether the input fields are null or empty.
+     */
     public void checkEmptyField() {
         if (ic == null || ic.isEmpty()) {
             emptyFields.add("IC");

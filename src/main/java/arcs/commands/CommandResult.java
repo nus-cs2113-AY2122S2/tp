@@ -10,7 +10,11 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
     }
-
+    
+    /**
+     * Gets the feedback from the command result.
+     * @return
+     */
     public CommandResult(String feedbackToUser, ArrayList<String> commandInfo) {
         this.feedbackToUser = feedbackToUser;
         this.commandInfo = commandInfo;
@@ -25,6 +29,10 @@ public class CommandResult {
         return feedbackToUser;
     }
 
+    /**
+     * Gets additional command result information.
+     * @return additional information of the command result.
+     */
     public ArrayList<String> getCommandInfo() {
         return commandInfo;
     }
