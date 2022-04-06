@@ -33,7 +33,7 @@ public class Warehouse {
      * @param name The name of the unit good
      * @param description Short description of the unit good
      * @param capacity Represents the size of the good using arbitrary units
-     * @throws UnitTestException
+     * @throws UnitTestException Exception when entering an invalid capacity
      */
     public void addUnitGoodToInventory(String sku, String name, String description, String capacity)
             throws UnitTestException {
@@ -44,12 +44,12 @@ public class Warehouse {
     }
 
     /**
-     * Adds a quantity of a good that currently exists in the goodList
+     * Adds a quantity of a good that currently exists in the goodList.
      *
      * @param sku The Stock Keeping Unit of the good
      * @param qty The quantity to be added to the warehouse for this good
-     * @throws WrongCommandException
-     * @throws ItemDoesNotExistException
+     * @throws WrongCommandException Exception when the command is not properly used
+     * @throws ItemDoesNotExistException Exception when the sku cannot be found in the unitGoodHashMap
      */
     public void addQuantityOfGoodToInventory(String sku, String qty)
             throws WrongCommandException, ItemDoesNotExistException {
@@ -251,7 +251,7 @@ public class Warehouse {
     }
 
     /**
-     * Prints to the user all the unit goods the warehouse can take
+     * Prints to the user all the unit goods the warehouse can take.
      */
     public void listUnitGoods() {
         if (unitGoodHashMap.isEmpty()) {
