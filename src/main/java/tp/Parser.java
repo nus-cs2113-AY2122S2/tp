@@ -119,8 +119,7 @@ public class Parser {
         String dummy[] = fullCommand.split(" ");
         if (dummy.length <= 2) {
             throw new IHospitalException("Please enter the id of the doctor you want to delete");
-        }
-        else{
+        } else{
             int index = Integer.parseInt(dummy[2]);
             return new DeleteDoctorCommand(index);
         }
@@ -130,8 +129,7 @@ public class Parser {
         String dummy[] = fullCommand.split(" ");
         if (dummy.length <= 2) {
             throw new IHospitalException("Please enter the id of the patient you want to delete");
-        }
-        else{
+        } else{
             int index = Integer.parseInt(dummy[2]);
             return new DeletePatientCommand(index);
         }
@@ -141,8 +139,7 @@ public class Parser {
         String dummy[] = fullCommand.split(" ");
         if (dummy.length <= 2) {
             throw new IHospitalException("Please enter the id of the appointment you want to delete");
-        }
-        else{
+        } else{
             int index = Integer.parseInt(dummy[2]);
             return new DeleteAppointmentCommand(index);
         }
@@ -198,8 +195,7 @@ public class Parser {
             return parseSearchPatient(fullCommand);
         } else if (fullCommand.contains("appointment")) {
             return parseSearchAppointment(fullCommand);
-        }
-        else{
+        } else{
             throw new IHospitalException("Please enter whether you want to search for a doctor, patient or appointment");
         }
     }
