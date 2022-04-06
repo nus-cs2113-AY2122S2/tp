@@ -399,13 +399,6 @@ print that out.
 
 ---
 
-### Edit Values Feature
-
-Maybe for Jiarong {Suggest to show the process from `parsing several delimiters` to `finding the income/expenditure`
-to `editing the value`.}
-
----
-
 ### Find feature
 
 #### Implementation
