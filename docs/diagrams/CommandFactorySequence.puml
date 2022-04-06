@@ -1,12 +1,11 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include style.puml
-
+participant Main LOGIC_COLOR_T1
 Box " "#WHITE
-    participant Main LOGIC_COLOR_T1
-    participant ":CommandFactory" as CommandFactory LOGIC_COLOR_T2
-    participant ":Parser" as Parser LOGIC_COLOR_T3
-    participant ":XYZCommand" as XYZCommand LOGIC_COLOR_T4
+    participant ":CommandFactory" as CommandFactory COMMAND_COLOR
+    participant ":Parser" as Parser LOGIC_COLOR_T2
+    participant ":XYZCommand" as XYZCommand COMMAND_COLOR_T2
 end Box
 
 -> Main: userInput
@@ -15,14 +14,14 @@ Main -> CommandFactory: getCommand(userInput, family)
 activate CommandFactory
 CommandFactory -> Parser: parseCommandTypes(userInput)
 activate Parser
-Parser --> CommandFactory: return
+Parser --> CommandFactory: keyword
 deactivate Parser
 create XYZCommand
 CommandFactory --> XYZCommand
 activate XYZCommand
 XYZCommand --> CommandFactory: :XYZCommand
 deactivate XYZCommand
-CommandFactory --> Main: return
+CommandFactory --> Main: return :XYZCommand
 deactivate CommandFactory
 Main -> XYZCommand: execute()
 activate XYZCommand

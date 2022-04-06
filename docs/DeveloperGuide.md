@@ -93,7 +93,8 @@ For example, the `Money` component is defined as an abstract class that is exten
 
 ### UI Component
 
-<!-- {For Huilin as she is most familiar} -->
+The `UI` component consists following classes: [`UI.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/global/UI.java)
 
 ### Commands Component
 
@@ -126,8 +127,6 @@ The `Commands` component consists following classes: [`CommandFactory.java`
 
 ![CommandsClassDiagram](images/CommandsClassDiagram.png)
 
-> **Note**: the diagram may look messy due to the limit of PlantUML.
-
 The `CommandFactory` provides a `getCommand()` function to get different commands according to the keywords of 
 user's instructions. `getCommand()` accepts user input as a `String` object and a `Family` object for input. The keyword
 is parsed by `Parser`. There're 11 cases, and it would throw an exception called `UnknownInputException` if the keyword 
@@ -137,7 +136,7 @@ updated.
 
 Following sequence diagram has illustrated how the `CommandFactory` return a command when `getCommand()` is called.
 
-![CommandFactorySequenceDiagram](images/CommandFactorySequence2.png)
+![CommandFactorySequenceDiagram](images/CommandFactorySequence4.png)
 
 The `Command` class is an abstract class that has abstract method `execute()`. All the subclasses of `Command` inherit 
 this method. `Command` class also has a methods called `getType()`. This method is mainly for testing, it will return 
@@ -288,19 +287,15 @@ salary. The amount of salary is 200 dollars.
 
 When `PlanITarium` receives such input, it will pass the input to `CommandFactory`. The `CommandFactory` will call
 `Parser` to parse the input into several components according to the indicator. The `Parser` will then return the type
-of command to `CommandFactory`. According to the type, `CommandFactory` will return a command object to `PlanITarium`.
-After receiving the command, `PlanITarium` will call `execute()` of command object to execute the command.
-
-The following diagram is the sequence diagram of this entire process.
-
-![CommandFactorySequence](images/CommandFactorySequence.png)
+of command to `CommandFactory`. According to the type, `CommandFactory` will return a `XYZCommand` object to `PlanITarium`.
+After receiving the command, `PlanITarium` will call `execute()` of `XYZCommand` to execute the command.
 
 Following operations are implemented:
 
-* `CommandFactory#getCommand(userInput, personList)` -- Return the command that is needed to be executed corresponding
+* `CommandFactory#getCommand(userInput, family)` -- Return the command that is needed to be executed corresponding
   to the user input
 * `Parser#getKeyword(userInput)` -- Return the keyword of the type of command
-* `Command#execute()` -- Execute the command
+* `XYZCommand#execute()` -- Execute the command
 
 Below is and example usage scenario and how Alice is added to the `PersonList`
 
@@ -313,15 +308,21 @@ add /n Alice /g 1
 and this string will be passed to `CommandFactory` together with `personList` that contains all the people who had been
 added previously by calling `getCommand()`.
 
-Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseCommandTypes`, and
+Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseKeyword()`, and
 the `Parser` should return `add` as keyword.
 
 Step 3. The `CommandFactory` will then match the keyword to the type of command. In this case, `add` is corresponding
-to `AddPersonCommand`. The `CommandFactory` will then create a new `AddPersonCommand` with `userInput` and `personList`,
+to `AddPersonCommand`. The `CommandFactory` will then create a new `AddPersonCommand` with `userInput` and `family`,
 and return this object to `PlanITarium`.
 
 Step 4. `PlanITarium` will then execute this command by calling `execute()`. Alice will then be added to the
-`personList`.
+`family`.
+
+The following diagram is the sequence diagram of this entire process.
+
+![CommandFactorySequence](images/CommandFactorySequence3.png)
+
+The rest of the commands follow the similar flow as `AddPersonCommand`.
 
 ---
 

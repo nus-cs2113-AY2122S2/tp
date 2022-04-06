@@ -134,7 +134,9 @@ Example of usage:
 
 * _Result_: Entry for Alice is added to Parents' tracking list with a user index (uid) of **1**.
 
-  ![add-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![add-command-screenshot](images/AddPerosn.png) <!-- this is a placeholder -->
 
 ---
 
@@ -162,6 +164,7 @@ Example of usage:
   
 <br/>
 
+---
 
 ### Add an income: `addin`
 
@@ -186,8 +189,10 @@ Example of usage:
   `addin /g 1 /u 1 /d Salary /i 2000 /p T`
 
 * _Result_: Entry for Salary is added to Alice's income list with an income index of **1**.
-
-  ![addin-command-screenshot]() <!-- this is a placeholder -->
+  
+  <br/>
+  
+  ![addin-command-screenshot](images/AddIncome.png) <!-- this is a placeholder -->
 
 ---
 
@@ -214,7 +219,9 @@ Example of usage:
 
 * _Result_: Income entry for Salary of $2,000 is deleted from Alice's income list.
 
-  ![deletein-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![deletein-command-screenshot](images/DeleteIncome.png) <!-- this is a placeholder -->
 
 ---
 
@@ -243,7 +250,9 @@ Example of usage:
 
 * _Result_: Income entry in Alice's income list is edited.
 
-  ![editin-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![editin-command-screenshot](images/EditIncome.png) <!-- this is a placeholder -->
 
 ---
 
@@ -273,7 +282,9 @@ Example of usage:
 
 * _Result_: Entry for candies is added to Alice's expenditure list with an expenditure index of **1**.
 
-  ![addout-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![addout-command-screenshot](images/AddExpend.png) <!-- this is a placeholder -->
 
 ---
 
@@ -300,7 +311,9 @@ Example of usage:
 
 * _Result_: Expenditure entry for candies of $20 is deleted from Alice's expenditure list.
 
-  ![deleteout-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![deleteout-command-screenshot](images/DeleteExpend.png) <!-- this is a placeholder -->
 
 ---
 
@@ -330,7 +343,9 @@ Example of usage:
 
 * _Result_: Expenditure entry in Alice's expenditure list is edited.
 
-  ![editout-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![editout-command-screenshot](images/EditExpend.png) <!-- this is a placeholder -->
 
 ---
 
@@ -340,7 +355,7 @@ Example of usage:
 
 Format: `overview`
 
-![list-command-screenshot]() <!-- this is a placeholder -->
+![list-command-screenshot](images/Overview.png) <!-- this is a placeholder -->
 
 ---
 
@@ -356,9 +371,11 @@ Example of usage:
 
 * List all the members from Parents' group.
 
-`list /g 1`
-
-![detail_list-command-screenshot]() <!-- this is a placeholder -->
+  `list /g 1`
+  
+  <br/>
+  
+  ![detail_list-command-screenshot](images/List.png) <!-- this is a placeholder -->
 
 ---
 
@@ -368,7 +385,7 @@ Example of usage:
 
 Format: `listcat`
 
-![listcat-command-screenshot]() <!-- this is a placeholder -->
+![listcat-command-screenshot](images/Listcat.png) <!-- this is a placeholder -->
 
 ---
 
@@ -395,7 +412,7 @@ Find records with category:
 
 * _Result_: The result of the search is returned and printed to the screen.
 
-  ![find-command-screenshot]() <!-- this is a placeholder -->
+  ![find-command-screenshot](images/FindWithCat.png) <!-- this is a placeholder -->
 
 Find records without category:
 * Find all the records which descriptions include _candies_.
@@ -403,6 +420,8 @@ Find records without category:
   `find /d candies`
 
 * _Result_:
+
+  ![find-command-screenshot](images/FindWithoutCat.png)
 
 ---
 
