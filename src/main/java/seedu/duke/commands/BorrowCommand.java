@@ -28,6 +28,7 @@ public class BorrowCommand extends Command {
     private final BorrowStatus borrowStatus;
 
     public BorrowCommand(int itemIndex, LocalDate startDate, LocalDate endDate, String borrowerName) {
+        // itemIndex is parsed in as zero-based indexing.
         this.itemIndex = itemIndex;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -46,17 +47,18 @@ public class BorrowCommand extends Command {
 
     @Override
     public void execute(ItemList itemList, Ui ui) throws InvMgrException {
-        BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName, borrowStatus);
-
-        try {
-            Item item = itemList.addBorrowRecord(itemIndex, newRecord);
-            ui.showMessages("Item has been successfully borrowed!",
-                    "Name of Item: " + item.getName(),
-                    "Name of Borrower: " + newRecord.getBorrowerName(),
-                    "Borrow Duration: " + newRecord.getBorrowDuration());
-        } catch (IndexOutOfBoundsException e) {
+        // Check if index is within itemList, otherwise throw Exception
+        if (itemIndex > itemList.getSize() - 1) {
             throw new InvMgrException(Messages.INVALID_INDEX);
         }
+        
+        // Create a new borrow record and add to item
+        BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName, borrowStatus);
+        Item item = itemList.addBorrowRecord(itemIndex, newRecord);
+        ui.showMessages("Item has been successfully borrowed!",
+                "Name of Item: " + item.getName(),
+                "Name of Borrower: " + newRecord.getBorrowerName(),
+                "Borrow Duration: " + newRecord.getBorrowDuration());
     }
 
     @Override
