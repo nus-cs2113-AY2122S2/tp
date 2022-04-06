@@ -186,7 +186,31 @@ user has successfully exited the program.
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
 #### Parser component
-[Writeup]
+
+The [Parser class](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/werkit/Parser.java) 
+of WerkIt! is mainly responsible for making sense of the user commands.
+This is to allow WerkIt to breakdown user's command into components of different type, and proceed to create
+appropriate `Command` object to be executed in `WerkIt`.
+
+How does the `Parser` class works:
+<br><br>
+1. After the user has entered a string(userInput) containing command to `WerkIt`, `WerkIt` will call
+`Parser#parseUserInput()` to parse the string.
+2. Upon calling `parseUserInput()`, this method will first check the first non-null component of userInput, and based on
+this component, `parseUserInput()` will call one of `createWorkoutCommand()`, `createExitCommand()`,
+`createHelpCommand()`, `createExerciseCommand()`, `createSearchCommand()`, `createPlanCommand()`,
+`createScheduleCommand()` or throw a `InvalidCommandException`.
+3. If the `InvalidCommandException` is thrown, `parseUserInput()` will be terminated and `WerkIt` will continue on
+`startContinuousUserPrompt()` to this process from step 1.
+4. If one of the `createExitCommand()`, `createHelpCommand()` is called. In the case that the userInput contains any 
+non-spacing characters, `InvalidCommandException` will be thrown. Otherwise, the constructor of `HelpCommand` or
+`ExitCommand` will be called to create the `Command` object and return to `WerkIt`.
+5. If one of the `createExerciseCommand()`, `createWorkoutCommand()`, `createPlanCommand()`, `createScheduleCommand()`,
+`createSearchCommand()` is called. The method will check the validity of the remaining userInput, if any component of
+the userInput is invalid, an `InvalidCommandException` will be thrown. Otherwise, the constructor of the appropriate
+type of `Command` will be called to create the appropriate `Command` object and return to `WerkIt`.
+
+<div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
 #### Logic component
 Below is a class diagram of the `Logic` component:
