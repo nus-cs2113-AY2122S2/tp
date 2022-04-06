@@ -128,8 +128,7 @@ class PlanCommandTest {
     void execute_invalidCreatePlan_expectCatchNumberFormatException() throws InvalidCommandException {
         PlanCommand createInvalidPlanCommand = parser.createPlanCommand("plan /new Plan A /workouts abc");
         String expectedOutput =
-                "Uh oh, a number was expected in your input, but a non-formattable\n"
-                        + "number was received."
+                "Uh oh, the user argument supplied is invalid.\n"
                         + "Please try again. Alternatively, type 'help' if you need\n"
                         + "more information on the commands.";
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
