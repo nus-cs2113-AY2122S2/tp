@@ -1,6 +1,7 @@
 //@@author angyongming
 
 package seedu.meetingjio.commands;
+
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
