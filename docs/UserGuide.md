@@ -100,6 +100,8 @@ We apologise for any inconvenience caused.</span>
 on your screen, Windows Terminal needs to be used. The default Command Prompt and Powershell consoles will not be able
 to display WerkIt!'s coloured texts properly.</span>
 
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
+
 ---
 ## Features 
 In this section, features of the application can be classified into 4 main categories. They are: <br>
@@ -226,6 +228,8 @@ possible `workout keyword`.
 `plan keyword` meant any characters or words that can be found in the plan list. The screenshot below shows the
 possible `plan keyword`.
 ![](images/planList.png)
+
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
 
 ---
 ## Exercise And Workout Features
@@ -441,6 +445,8 @@ Showed all workouts in list
 ----------------------------------------------------------------------
 ```
 
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
+
 ---
 ## Plan Features
 ### Create a Plan: `plan /new`
@@ -616,6 +622,9 @@ To view each plan in detail, enter
 2. plan B
 ----------------------------------------------------------------------
 ```
+
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
+
 ---
 ## Schedule Features
 ### Update Schedule: `schedule /update`
@@ -815,6 +824,9 @@ To view the changes enter command ```schedule /list```.
 
 ----------------------------------------------------------------------
 ```
+
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
+
 ---
 ## Search Features
 ### Search For Exercise: `search /exercise`
@@ -1049,6 +1061,8 @@ Sorry, no matching plan found.
 ----------------------------------------------------------------------
 ```
 
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
+
 ---
 ## Help Feature
 ### View Help: `help`
@@ -1180,6 +1194,8 @@ Format: `help`
 
 This will show a complete guide to use WerkIt.
 
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
+
 ---
 
 ## WerkIt!'s Local Storage Information
@@ -1209,6 +1225,8 @@ Do make regular backups of the `werkItResources` directory. In the event of data
 `werkItResources` directory with your most recent backup copy. In the worst case scenario (i.e. if you don't have a 
 proper backup copy), delete the `werkItResources` directory and restart WerkIt! to recreate the directory and files from 
 fresh.
+
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
 
 ---
 
@@ -1252,6 +1270,8 @@ necessary files in their default numberings.
 Do note that these suggestions will lead to a **loss of your saved application data** and you may need to re-enter the 
 lost data.
 
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
+
 ---
 
 ## Command Summary
@@ -1279,5 +1299,7 @@ Below is a summary of all the commands available in the WerkIt! application.
 | Search For ALL           | <br /> Format: `search /all <keyword>` <br/>Example: `search /all 10` <br /> <br />                                                                            |
 | View Help                | <br /> Format: `help`<br/>Example: `help`  <br /> <br />                                                                                                       |
 
+<br/>
+<div class="button-container"><a class="button" href="#table-of-contents">Back to Table of Contents</a></div>
 
 [1]:https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701
