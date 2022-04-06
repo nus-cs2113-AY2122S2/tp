@@ -2,9 +2,13 @@
 
 ## Overview
 
-Sherpass is a command line desktop application to help students manage their academic workloads
+Sherpass is a command line interface desktop application to help students manage their academic workloads
 by preparing them a timetable to plan their activities, as well as encouraging them to
 complete the activities with the use of the study session.
+
+- [Sherpass Github](https://github.com/AY2122S2-CS2113T-T09-1/tp)
+- [Sherpass User Guide](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html)
+- [Sherpass Developer Guide](https://ay2122s2-cs2113t-t09-1.github.io/tp/DeveloperGuide.html)
 
 ## Summary of Contributions
 
