@@ -219,9 +219,9 @@ public class UpdateCommand extends Command {
             System.out.println("Successfully set credit card " + indexAsString + " to :\n"
                     + newCreditCard);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MindMyMoneyException("Did you forget to input INDEX, NAME, CASHBACK, CREDIT LIMIT or BALANCE?");
+            throw new MindMyMoneyException("Did you forget to input INDEX, NAME, CASHBACK or CREDIT LIMIT?");
         } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("INDEX, CASHBACK, CREDIT LIMIT and BALANCE must be a number");
+            throw new MindMyMoneyException("INDEX, CASHBACK and CREDIT LIMIT must be a number");
         } catch (IndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Please input a valid index");
         }

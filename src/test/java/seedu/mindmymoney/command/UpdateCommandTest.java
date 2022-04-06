@@ -22,9 +22,9 @@ public class UpdateCommandTest {
     @Test
     void updateExpenditureCommand_updateExpenditure_listUpdated() {
         Expenditure testExpenditure = new Expenditure("Cash", "Food",
-                "porridge", 5, "01/04/2022");
+            "porridge", 5, "01/04/2022");
         Expenditure newExpenditure = new Expenditure("Cash", "Others",
-                "chicken rice", (float)4.50, "01/05/2021");
+            "chicken rice", (float) 4.50, "01/05/2021");
         User testUser = new User();
         testUser.setExpenditureListArray(new ExpenditureList());
         testUser.getExpenditureListArray().add(testExpenditure);
@@ -33,7 +33,7 @@ public class UpdateCommandTest {
         try {
             updateCommand.executeCommand();
             assertEquals(testUser.getExpenditureListArray().get(INDEX_OF_FIRST_ITEM),
-                    newExpenditure);
+                newExpenditure);
         } catch (MindMyMoneyException e) {
             System.out.println(e.getMessage());
             fail();
@@ -46,7 +46,7 @@ public class UpdateCommandTest {
     @Test
     void updateExpenditureCommand_invalidInput_exceptionThrown() {
         Expenditure testExpenditure = new Expenditure("Cash", "Food",
-                "porridge", 5, "01/03/2022");
+            "porridge", 5, "01/03/2022");
         User testUser = new User();
         testUser.setExpenditureListArray(new ExpenditureList());
         testUser.getExpenditureListArray().add(testExpenditure);
@@ -61,23 +61,23 @@ public class UpdateCommandTest {
     @Test
     void updateExpenditureCommand_invalidDate_exceptionThrown() {
         Expenditure testExpenditure = new Expenditure("Cash", "Food",
-                "porridge", 5, "01/03/2022");
+            "porridge", 5, "01/03/2022");
         User testUser = new User();
         testUser.setExpenditureListArray(new ExpenditureList());
         testUser.getExpenditureListArray().add(testExpenditure);
-        String firstInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 01/4/2022";
+        String firstInputString = "1 /pm cash /c Personal /d Nike Shoes /a 500 /t 01/4/2022";
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(firstInputString, testUser).executeCommand());
-        String secondInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 04/2022";
+        String secondInputString = "1 /pm cash /c Personal /d Nike Shoes /a 500 /t 04/2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(secondInputString, testUser).executeCommand());
-        String thirdInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 2022";
+        String thirdInputString = "1 /pm cash /c Personal /d Nike Shoes /a 500 /t 2022";
 
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(thirdInputString, testUser).executeCommand());
 
-        String fourthInputString = "1 /pm cash /c Person /d Nike Shoes /a 500 /t 38/14/2022";
+        String fourthInputString = "1 /pm cash /c Personal /d Nike Shoes /a 500 /t 38/14/2022";
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(fourthInputString, testUser).executeCommand());
 
@@ -104,12 +104,12 @@ public class UpdateCommandTest {
     @Test
     void updateExpenditureCommand_updateFieldSimilarToExpenditureInList_exceptionThrown() {
         Expenditure testExpenditure = new Expenditure("Cash", "Food",
-                "porridge", 5, "01/04/2022");
+            "porridge", 5, "01/04/2022");
         User testUser = new User();
         testUser.setExpenditureListArray(new ExpenditureList());
         testUser.getExpenditureListArray().add(testExpenditure);
         String input = "/e 1 /pm cash /c food /d porridge /a 5 /t 01/04/2022";
-        UpdateCommand updateCommand = new UpdateCommand(input,testUser);
+        UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
     }
 
@@ -128,7 +128,7 @@ public class UpdateCommandTest {
         try {
             updateCommand.executeCommand();
             assertEquals(testUser.getCreditCardListArray().get(INDEX_OF_FIRST_ITEM),
-                    newCreditCard);
+                newCreditCard);
         } catch (MindMyMoneyException e) {
             System.out.println(e.getMessage());
             fail();
@@ -158,8 +158,26 @@ public class UpdateCommandTest {
         User testUser = new User();
         testUser.setCreditCardListArray(new CreditCardList());
         testUser.getCreditCardListArray().add(testCreditCard);
-        String input = "/cc 1 /n DBS /cb 2 /cl 1000 /bal 1000";
-        UpdateCommand updateCommand = new UpdateCommand(input,testUser);
+        String input = "/cc 1 /n DBS /cb 2 /cl 1000";
+        UpdateCommand updateCommand = new UpdateCommand(input, testUser);
+        assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
+    }
+
+    /**
+     * Assert that when the update command credit card limit is smaller than total expenditure on card,
+     * an exception is thrown.
+     */
+    @Test
+    void updateCreditCardCommand_newCreditCardLimitSmallerThanExpenditure_exceptionThrown()
+        throws MindMyMoneyException {
+        CreditCard testCreditCard = new CreditCard("DBS", 2, 1000);
+        User testUser = new User();
+        testUser.setCreditCardListArray(new CreditCardList());
+        testUser.getCreditCardListArray().add(testCreditCard);
+        String inputStringExpenditure = "/e /pm DBS /c Personal /d Nike Shoes /a 500 /t 28/02/2018";
+        new AddCommand(inputStringExpenditure, testUser).executeCommand();
+        String input = "/cc 1 /n DBS /cb 2 /cl 200";
+        UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
     }
 
@@ -199,6 +217,102 @@ public class UpdateCommandTest {
     }
 
     /**
+     * Assert that an update expenditure command with invalid index will throw an exception.
+     */
+    @Test
+    void updateIncomeCommand_invalidIndexExpenditure_exceptionThrown() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputStringExpenditure = "/e /pm cash /c Personal /d Nike Shoes /a 500 /t 28/02/2018";
+        String inputStringUpdate = "/e 2 /pm cash /c Personal /d Nike Shoes /a 10 /t 28/02/2018";
+        new AddCommand(inputStringExpenditure, user).executeCommand();
+        UpdateCommand updateCommand = new UpdateCommand(inputStringUpdate, user);
+        assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
+    }
+
+    /**
+     * Assert that an update expenditure command with non-numerical amount will throw an exception.
+     */
+    @Test
+    void updateIncomeCommand_nonNumericalAmountExpenditure_exceptionThrown() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputStringExpenditure = "/e /pm cash /c Personal /d Nike Shoes /a 500 /t 28/02/2018";
+        String inputStringUpdate = "/e 1 /pm cash /c Personal /d Nike Shoes /a asd /t 28/02/2018";
+        new AddCommand(inputStringExpenditure, user).executeCommand();
+        UpdateCommand updateCommand = new UpdateCommand(inputStringUpdate, user);
+        assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
+    }
+
+    /**
+     * Assert that an update credit card command with invalid index will throw an exception.
+     */
+    @Test
+    void updateIncomeCommand_invalidIndexCreditCard_exceptionThrown() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputStringExpenditure = "/cc /n DBS /cb 2 /cl 1000";
+        String inputStringUpdate = "/cc 2 /n DBS /cb 2 /cl 13000";
+        new AddCommand(inputStringExpenditure, user).executeCommand();
+        UpdateCommand updateCommand = new UpdateCommand(inputStringUpdate, user);
+        assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
+    }
+
+    /**
+     * Assert that an update credit card command with non-numerical Cashback will throw an exception.
+     */
+    @Test
+    void updateIncomeCommand_nonNumericalCashback_exceptionThrown() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputStringExpenditure = "/cc /n DBS /cb 2 /cl 1000";
+        String inputStringUpdate = "/cc 1 /n DBS /cb asd /cl 13000";
+        new AddCommand(inputStringExpenditure, user).executeCommand();
+        UpdateCommand updateCommand = new UpdateCommand(inputStringUpdate, user);
+        assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
+    }
+
+    /**
+     * Assert that an update income command with invalid index will throw an exception.
+     */
+    @Test
+    void updateIncomeCommand_invalidIndexIncome_exceptionThrown() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputStringExpenditure = "/i /a 1000 /c salary";
+        String inputStringUpdate = "/i 2 /a 100 /c salary";
+        new AddCommand(inputStringExpenditure, user).executeCommand();
+        UpdateCommand updateCommand = new UpdateCommand(inputStringUpdate, user);
+        assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
+    }
+
+    /**
+     * Assert that an update income command with non numerical amount will throw an exception.
+     */
+    @Test
+    void updateIncomeCommand_nonNumericalAmountIncome_exceptionThrown() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputStringExpenditure = "/i /a 1000 /c salary";
+        String inputStringUpdate = "/i 1 /a asd /c salary";
+        new AddCommand(inputStringExpenditure, user).executeCommand();
+        UpdateCommand updateCommand = new UpdateCommand(inputStringUpdate, user);
+        assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
+    }
+
+    /**
      * Assert that when the update command fields are similar to the income in the list, an exception is thrown.
      */
     @Test
@@ -208,7 +322,23 @@ public class UpdateCommandTest {
         testUser.setIncomeListArray(new IncomeList());
         testUser.getIncomeListArray().add(testIncome);
         String input = "/i 1 /a 1000 /c salary";
-        UpdateCommand updateCommand = new UpdateCommand(input,testUser);
+        UpdateCommand updateCommand = new UpdateCommand(input, testUser);
         assertThrows(MindMyMoneyException.class, updateCommand::executeCommand);
+    }
+
+    /**
+     * Test if program is able to exit.
+     */
+    @Test
+    void updateCommand_isExit_expectFalse() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputStringExpenditure = "/e /pm cash /c Personal /d Nike Shoes /a 500 /t 12/02/2018";
+        String inputStringUpdate = "/e 1 /pm cash /c Personal /d Nike Shoes /a 500 /t 12/02/2022";
+        new AddCommand(inputStringExpenditure, user).executeCommand();
+        assertEquals(false, new UpdateCommand(inputStringUpdate, user).isExit());
+
     }
 }
