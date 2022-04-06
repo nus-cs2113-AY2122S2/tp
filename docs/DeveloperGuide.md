@@ -207,8 +207,9 @@ non-spacing characters other than the first non-null component mentioned in step
 thrown. Otherwise, the constructor of `HelpCommand` or `ExitCommand` will be called to create the `Command` object and 
 return to `WerkIt`.
 5. If one of the `createExerciseCommand()`, `createWorkoutCommand()`, `createPlanCommand()`, `createScheduleCommand()`,
-`createSearchCommand()` is called. The method will check the validity of the remaining userInput, if any component of
-the userInput is invalid, an `InvalidCommandException` will be thrown. Otherwise, the constructor of the appropriate
+`createSearchCommand()` is called. The method will check the validity of the remaining components of userInput, 
+if any component of the userInput is invalid, an `InvalidCommandException` will be thrown. 
+Otherwise, the constructor of the appropriate
 type of `Command` will be called to create the appropriate `Command` object and return to `WerkIt`.
 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
