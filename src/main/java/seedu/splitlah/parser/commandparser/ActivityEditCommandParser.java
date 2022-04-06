@@ -69,35 +69,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
     }
 
-    /**
-     * Returns an ActivityEditCommand object from the supplied command arguments.
-     *
-     * @param commandArgs A String object representing arguments provided by the user.
-     * @return An ActivityEditCommand object if all necessary parameters required are found in the input arguments.
-     * @throws InvalidFormatException If at least one of the necessary parameters cannot be found
-     *                                in the input arguments.
-     */
-    @Override
-    public ActivityEditCommand getCommand(String commandArgs) throws InvalidFormatException {
-
-        assert commandArgs != null : Message.ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL;
-        getSessionIdAndActivityId(commandArgs);
-        getActivityNameIfSupplied(commandArgs);
-        getPayerNameIfSupplied(commandArgs);
-        getInvolvedListIfSupplied(commandArgs);
-        getTotalCostIfSupplied(commandArgs);
-        getCostListIfSupplied(commandArgs);
-
-        checkIfBothCostListAndTotalCostSupplied();
-
-        try {
-            gst = ParserUtils.parseGstIncludingZero(commandArgs);
-        } catch (InvalidFormatException exception) {
-            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/gst"))) {
-                throw new InvalidFormatException(exception.getMessage());
-            }
-        }
-
+    private void getServiceChargeIfSupplied(String commandArgs) throws InvalidFormatException {
         try {
             serviceCharge = ParserUtils.parseServiceChargeIncludingZero(commandArgs);
         } catch (InvalidFormatException exception) {
@@ -105,11 +77,16 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
                 throw new InvalidFormatException(exception.getMessage());
             }
         }
+    }
 
-        checkIfRequiredDelimitersExist();
-        return new ActivityEditCommand(sessionId, activityId, activityName, payer, involvedList, totalCost,
-                costList, gst, serviceCharge);
-
+    private void getGstIfSupplied(String commandArgs) throws InvalidFormatException {
+        try {
+            gst = ParserUtils.parseGstIncludingZero(commandArgs);
+        } catch (InvalidFormatException exception) {
+            if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/gst"))) {
+                throw new InvalidFormatException(exception.getMessage());
+            }
+        }
     }
 
     private void checkIfBothCostListAndTotalCostSupplied() throws InvalidFormatException {
@@ -181,5 +158,29 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
     }
 
+    /**
+     * Returns an ActivityEditCommand object from the supplied command arguments.
+     *
+     * @param commandArgs A String object representing arguments provided by the user.
+     * @return An ActivityEditCommand object if all necessary parameters required are found in the input arguments.
+     * @throws InvalidFormatException If at least one of the necessary parameters cannot be found
+     *                                in the input arguments.
+     */
+    @Override
+    public ActivityEditCommand getCommand(String commandArgs) throws InvalidFormatException {
 
+        assert commandArgs != null : Message.ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL;
+        getSessionIdAndActivityId(commandArgs);
+        getActivityNameIfSupplied(commandArgs);
+        getPayerNameIfSupplied(commandArgs);
+        getInvolvedListIfSupplied(commandArgs);
+        getTotalCostIfSupplied(commandArgs);
+        getCostListIfSupplied(commandArgs);
+        checkIfBothCostListAndTotalCostSupplied();
+        getGstIfSupplied(commandArgs);
+        getServiceChargeIfSupplied(commandArgs);
+        checkIfRequiredDelimitersExist();
+        return new ActivityEditCommand(sessionId, activityId, activityName, payer, involvedList, totalCost,
+                costList, gst, serviceCharge);
+    }
 }
