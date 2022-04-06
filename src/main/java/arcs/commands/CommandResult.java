@@ -25,6 +25,11 @@ public class CommandResult {
         this.commandInfoString = commandInfoString;
     }
 
+    /**
+     * Getting the feedback message as a string.
+     *
+     * @return Feedback to user message as a String.
+     */
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -37,6 +42,11 @@ public class CommandResult {
         return commandInfo;
     }
 
+    /**
+     * Getting the result from the command as a string.
+     *
+     * @return Command info to user message as a String.
+     */
     public String getCommandInfoString() {
         return commandInfoString;
     }

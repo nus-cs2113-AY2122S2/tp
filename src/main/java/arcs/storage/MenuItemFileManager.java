@@ -22,6 +22,11 @@ public class MenuItemFileManager {
         DIR_PATH = System.getProperty("user.dir") + File.separator + "data";
     }
 
+    /**
+     * Load the data of Menu Items from text file.
+     * @return ArrayList of Menu Items loaded.
+     * @throws IOException If text file failed to load.
+     */
     public ArrayList<MenuItem> loadData() throws IOException {
         File dir = new File(DIR_PATH);
         if (!dir.exists()) {
@@ -39,6 +44,11 @@ public class MenuItemFileManager {
         return decodeData(records);
     }
 
+    /**
+     * Saves the Menu Items data into a text file.
+     * @param menuItems ArrayList of Menu Items to save.
+     * @throws IOException If file failed to save.
+     */
     public void saveData(ArrayList<MenuItem> menuItems) throws IOException {
         FileWriter fw = new FileWriter(DIR_PATH + File.separator + fileName);
         ArrayList<String> records = encodeData(menuItems);
@@ -49,6 +59,11 @@ public class MenuItemFileManager {
         fw.close();
     }
 
+    /**
+     * Format the raw data into correct format.
+     * @param records Raw input records.
+     * @return ArrayList of Menu Items.
+     */
     private ArrayList<MenuItem> decodeData(ArrayList<String> records) {
         ArrayList<MenuItem> menuItems = new ArrayList<>();
 
@@ -63,6 +78,11 @@ public class MenuItemFileManager {
         return menuItems;
     }
 
+    /**
+     * Formats the data into the correct format to store in.
+     * @param menuItems ArrayList of Menu Items to store.
+     * @return Formatted ArrayList of Menu Items to store.
+     */
     private ArrayList<String> encodeData(ArrayList<MenuItem> menuItems) {
         ArrayList<String> records = new ArrayList<>();
         for (MenuItem menuItem: menuItems) {

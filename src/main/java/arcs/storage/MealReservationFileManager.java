@@ -1,7 +1,6 @@
 package arcs.storage;
 
 import arcs.data.customer.Customer;
-import arcs.data.flightbooking.FlightBooking;
 import arcs.data.mealreservation.MealReservation;
 import arcs.data.menuitems.MenuItem;
 import arcs.data.route.Route;
@@ -25,6 +24,11 @@ public class MealReservationFileManager {
         dirPath = System.getProperty("user.dir") + File.separator + "data";
     }
 
+    /**
+     * Loads user Data from file.
+     * @return ArrayList of Meal Reservations loaded.
+     * @throws IOException If File cannot be loaded.
+     */
     public ArrayList<MealReservation> loadData() throws IOException {
         File dir = new File(dirPath);
         if (!dir.exists()) {
@@ -43,6 +47,11 @@ public class MealReservationFileManager {
         return decodeData(records);
     }
 
+    /**
+     * Saves the Meal Reservation Data into a text file.
+     * @param mealReservations Array of Meal Reservations to save.
+     * @throws IOException If saving failed.
+     */
     public void saveData(ArrayList<MealReservation> mealReservations) throws IOException {
         FileWriter fw = new FileWriter(dirPath + File.separator + FILE_NAME);
         ArrayList<String> records = encodeData(mealReservations);
@@ -53,6 +62,11 @@ public class MealReservationFileManager {
         fw.close();
     }
 
+    /**
+     * To format the Meal Reservation Data into the correct format to load.
+     * @param records Record of Meal Reservations from the text file.
+     * @return ArrayList of Meal Reservations.
+     */
     public ArrayList<MealReservation> decodeData(ArrayList<String> records) {
         ArrayList<MealReservation> mealReservations = new ArrayList<>();
         ArrayList<MenuItem> reservedMenuItems = new ArrayList<>();
@@ -77,6 +91,11 @@ public class MealReservationFileManager {
         return mealReservations;
     }
 
+    /**
+     * Format Meal Reservations into the proper format for storing.
+     * @param mealReservations ArrayList of Meal Reservations to Store.
+     * @return ArrayList of Meal Reservations in correct format to store.
+     */
     public ArrayList<String> encodeData(ArrayList<MealReservation> mealReservations) {
         ArrayList<String> records = new ArrayList<>();
         for (MealReservation mealReservation: mealReservations) {
