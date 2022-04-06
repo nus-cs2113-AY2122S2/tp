@@ -5,7 +5,6 @@ import arcs.data.customer.Customer;
 import arcs.data.mealreservation.MealReservation;
 import arcs.data.route.Route;
 
-import java.util.ArrayList;
 
 public class FlightBooking {
     private Customer customer;
@@ -29,7 +28,10 @@ public class FlightBooking {
         return route;
     }
 
-
+    /**
+     * Gets information of a flight.
+     * @return a string containing the description of the flight booking.
+     */
     public String getFlightBookingInfo() {
         String info = "Customer name: " + customer.getName() + System.lineSeparator()
                 + "Customer IC: " + customer.getIc() + System.lineSeparator()

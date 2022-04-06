@@ -16,6 +16,12 @@ public class RouteFileManager {
         DIR_PATH = System.getProperty("user.dir") + File.separator + "data";
     }
 
+    /**
+     * Loads routes data from storage file.
+     *
+     * @return a list of routes
+     * @throws IOException if file reading exception occurs.
+     */
     public ArrayList<Route> loadData() throws IOException {
         File dir = new File(DIR_PATH);
         if (!dir.exists()) {
@@ -34,6 +40,12 @@ public class RouteFileManager {
         return decodeData(records);
     }
 
+    /**
+     * Saves routes data into the storage file.
+     *
+     * @param routes the list of routes to be stored
+     * @throws IOException if errors occur when writing into the storage file.
+     */
     public void saveData(ArrayList<Route> routes) throws IOException {
         FileWriter fw = new FileWriter(DIR_PATH + File.separator + fileName);
         ArrayList<String> records = encodeData(routes);

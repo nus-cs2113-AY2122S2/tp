@@ -16,6 +16,12 @@ public class CustomerFileManager {
         DIR_PATH = System.getProperty("user.dir") + File.separator + "data";
     }
 
+    /**
+     * Loads customer data from storage file.
+     *
+     * @return a list of customers.
+     * @throws IOException if file reading exception occurs.
+     */
     public ArrayList<Customer> loadData() throws IOException  {
         File dir = new File(DIR_PATH);
         if (!dir.exists()) {
@@ -34,7 +40,12 @@ public class CustomerFileManager {
         return decodeData(records);
     }
 
-
+    /**
+     * Saves customer data into the storage file.
+     *
+     * @param customers the list of customers to be stored
+     * @throws IOException if errors occur when writing into the storage file.
+     */
     public void saveData(ArrayList<Customer> customers) throws IOException {
         FileWriter fw = new FileWriter(DIR_PATH + File.separator + FILE_NAME);
         ArrayList<String> records = encodeData(customers);

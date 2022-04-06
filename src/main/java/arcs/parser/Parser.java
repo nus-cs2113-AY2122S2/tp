@@ -28,6 +28,14 @@ public class Parser {
     private static final String MENU_ITEM_NAME_COMMAND_WORD = "name";
     private static final String MENU_ITEM_PRICE_COMMAND_WORD = "price";
 
+    /**
+     * Parses the user input string into a command.
+     * The command type is determined by the command word specified in the input string.
+     * The command word is the first single word in the input string.
+     *
+     * @param userInput full user input string
+     * @return a command.
+     */
     public Command parseCommand(String userInput) {
 
 
@@ -161,6 +169,12 @@ public class Parser {
         return new AddRouteCommand(flightId, date, time, from, to, capacity);
     }
 
+    /**
+     * Parses the user input string into a DeleteRouteCommand.
+     *
+     * @param argumentLine user input string
+     * @return a DeleteRouteCommand
+     */
     public Command prepareDeleteRouteCommand(String argumentLine) {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new UndefinedCommand("Index is not specified");
@@ -176,6 +190,12 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Parses the user input string into a FindRouteCommand.
+     *
+     * @param argumentLine user input string
+     * @return a FindRouteCommand.
+     */
     public Command prepareFindRouteCommand(String argumentLine) {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new FindRouteCommand(null, null, null, null);

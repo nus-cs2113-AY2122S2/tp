@@ -6,6 +6,12 @@ import arcs.commands.customer.AddCustomerCommand;
 import arcs.commands.customer.DeleteCustomerCommand;
 
 public class CustomerParser {
+    /**
+     * Parses the input string into an AddCustomerCommand.
+     *
+     * @param argumentLine the user input string
+     * @return an AddCustomerCommand
+     */
     public static Command prepareAddCustomerCommand(String argumentLine) {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new AddCustomerCommand(null, null, null, null);
@@ -44,7 +50,12 @@ public class CustomerParser {
         return value;
     }
 
-
+    /**
+     * Parses the user input string into a DeleteCustomerCommand.
+     *
+     * @param argumentLine the user input string
+     * @return a DeleteCustomerCommand
+     */
     public static Command prepareDeleteCustomerCommand(String argumentLine) {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new UndefinedCommand("Index is not specified");
