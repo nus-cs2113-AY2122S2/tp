@@ -71,6 +71,7 @@ Format: `addRoute  fid/FLIGHT_ID fd/FLIGHT_DATE ft/FLIGHT_TIME d/DESTINATION s/S
 
 * The `FLIGHT_ID` needs to be unique. If the 'FLIGHT_ID' is already registered, the system should generate an error message and require new input.
 * The flight route can be searched out by `FLIGHT_DATE` `DESTINATION` `SOURCE` `[FLIGHT_TIME]`.
+* The flight capacity must be a positive integer.
 
 Example of usage:
 * `addRoute fid/Bu3037 fd/02172022 ft/11:10 d/singapore s/china c/100`

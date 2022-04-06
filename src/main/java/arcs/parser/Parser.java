@@ -103,6 +103,13 @@ public class Parser {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new AddRouteCommand(null, null, null, null, null, 0);
         }
+        final String fid = "fid";
+        final String fd = "fd";
+        final String ft = "ft";
+        final String d = "d";
+        final String s = "s";
+        final String c = "c";
+        final String invalid_capacity = "The capacity must be a positive integer.";
         String[] args = argumentLine.split(" ");
         String flightId = null;
         String date = null;
@@ -122,23 +129,30 @@ public class Parser {
             String field = argSplit[0].trim();
             String value = argSplit[1].trim();
             switch (field) {
-            case "fid":
+            case fid:
                 flightId = value;
                 break;
-            case "fd":
+            case fd:
                 date = value;
                 break;
-            case "ft":
+            case ft:
                 time = value;
                 break;
-            case "d":
+            case d:
                 to = value;
                 break;
-            case "s":
+            case s:
                 from = value;
                 break;
-            case "c":
-                capacity = Integer.parseInt(value);
+            case c:
+                try {
+                    capacity = Integer.parseInt(value);
+                } catch (NumberFormatException e) {
+                    return new UndefinedCommand(invalid_capacity);
+                }
+                if (capacity < 0) {
+                    return new UndefinedCommand(invalid_capacity);
+                }
                 break;
             default:
                 break;
