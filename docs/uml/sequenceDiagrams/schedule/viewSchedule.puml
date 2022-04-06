@@ -8,7 +8,6 @@ title Sequence Diagram of `schedule /list` Command
 
 actor   User
 participant "werkIt:WerkIt" AS WerkIt
-participant "parser:Parser" AS Parser
 participant "newCommand\n:ScheduleCommand" AS newCommand
 participant "dayList\n:DayList" AS DayList
 
@@ -17,11 +16,6 @@ activate WerkIt
 ref over WerkIt
 Obtain and parse user input
 end
-
-WerkIt -> Parser : parseUserInput(userInput)
-activate Parser
-WerkIt <-- Parser : :Command
-deactivate Parser
 
 WerkIt -> newCommand : execute()
 activate newCommand

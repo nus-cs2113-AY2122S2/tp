@@ -1,0 +1,57 @@
+@startuml
+'https://plantuml.com/class-diagram'
+hide circle
+
+skinparam classAttributeIconSize 0
+title Class Diagram of Schedule Component
+
+WerkIt -> Parser
+WerkIt -> UI
+Parser .r.> "{abstract}\nCommand"
+"{abstract}\nCommand" <|-- ScheduleCommand
+ScheduleCommand --> UI
+ScheduleCommand -d-> FileManager
+ScheduleCommand -r-> DayList
+UI <. FileManager
+
+class WerkIt {
++ startContinuousUserPrompt()
+}
+
+class DayList {
++ updateDay(String userArgument):Day
++ printSchedule()
++ clearDayPlan(String userArgument)
++ clearAllSchedule()
+}
+
+class FileManager {
++ addFileScheduleToList(DayList dayList, String[] scheduleFileDataLine):void
++ rewriteAllDaysScheduleToFile(DayList dayList):void
++ convertDayScheduleToFileDataFormat(Day day):String
+}
+
+class "{abstract}\nCommand" {
+}
+
+class ScheduleCommand {
++ execute():void
+}
+
+
+
+class UI {
++ getUserInput()
++ printScheduleFileNotFoundMessage():void
++ printScheduleFileCreatedMessage():void
++ printNewScheduleCreatedMessage(Day newDay):void
++ printClearedScheduleMessage():void
+}
+
+class Parser {
++ parseUserInput(String userInput):Command
++ createScheduleCommand(String userInput):ScheduleCommand
+}
+
+
+@enduml
