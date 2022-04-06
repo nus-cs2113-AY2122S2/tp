@@ -10,6 +10,11 @@ import java.util.Scanner;
 
 
 public class MenuItemFileManager {
+
+    private static final int TYPE_INDEX = 0;
+    private static final int NAME_INDEX = 1;
+    private static final int PRICE_INDEX = 2;
+
     private static String DIR_PATH = "data";
     private static final String fileName = "menuItem.txt";
 
@@ -52,7 +57,7 @@ public class MenuItemFileManager {
             if (data.length != 3) {
                 continue;
             }
-            menuItems.add(new MenuItem(data[0], data[1], data[2]));
+            menuItems.add(new MenuItem(data[NAME_INDEX], data[TYPE_INDEX], data[PRICE_INDEX]));
         }
 
         return menuItems;
