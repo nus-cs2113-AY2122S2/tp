@@ -140,7 +140,7 @@ public class WerkIt {
         assert (Files.exists(fileManager.getScheduleFilePath())) : "Schedule file does not exist.";
 
         getUI().printLoadingFileDataMessage();
-        loadExerciseFile();
+        populateExercises();
         if (getFileManager().isWasWorkoutsFileAlreadyMade()) {
             loadWorkoutFile();
         }
@@ -209,21 +209,10 @@ public class WerkIt {
     }
 
     /**
-     * Loads the exercise file's data that is stored in the user's filesystem into the current
-     * session's list of exercises.
-     *
-     * @throws IOException If the application is unable to open the exercise file.
+     * Populates a set of exercises to exerciseList.
      */
-    private void loadExerciseFile() throws IOException {
-        fileManager.loadExercisesFromFile(getExerciseList());
-        try {
-            getUI().printFileLoadStatusMessage(FileManager.EXERCISE_FILENAME, true);
-        } catch (UnknownFileException e) {
-            System.out.println(e.getMessage());
-            logger.log(Level.WARNING, "Unknown file name was encountered.");
-        }
-
-        logger.log(Level.INFO, "Exercise file data loaded.");
+    public void populateExercises() {
+        getExerciseList().populateExerciseToList();
     }
 
     /**
