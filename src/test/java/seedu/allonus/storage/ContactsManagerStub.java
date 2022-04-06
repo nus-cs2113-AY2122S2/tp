@@ -1,7 +1,11 @@
 package seedu.allonus.storage;
 
 import seedu.allonus.contacts.ContactsManager;
-import seedu.allonus.contacts.entry.*;
+import seedu.allonus.contacts.entry.Contact;
+import seedu.allonus.contacts.entry.Email;
+import seedu.allonus.contacts.entry.Faculty;
+import seedu.allonus.contacts.entry.Name;
+import seedu.allonus.contacts.entry.Description;
 
 import java.util.ArrayList;
 
