@@ -77,7 +77,7 @@ public class Warehouse {
     }
 
     private void addGoodToOrder(Order order, String sku, String qty) throws WrongCommandException {
-        if (isSkuInInventory(sku)) {
+        if (!isSkuInInventory(sku)) {
             System.out.println("Good does not exist in the warehouse");
             System.out.println("Try adding a good first");
             throw new WrongCommandException("add", true);
@@ -260,7 +260,11 @@ public class Warehouse {
         });
     }
 
-    public int totalOrder() {
+    /**
+     * Gives the total number of orders.
+     * @return total number of orders
+     */
+    public int totalNumberOfOrder() {
         return orderLists.size();
     }
 
@@ -274,9 +278,9 @@ public class Warehouse {
         throw new ItemDoesNotExistException();
     }
 
-    private Order findOrderContainsGood(int goodId) throws ItemDoesNotExistException {
+    private Order findOrderContainsGood(String sku) throws ItemDoesNotExistException {
         for (Order order : orderLists) {
-            if (order.doesGoodExist(goodId)) {
+            if (order.hasGood(sku)) {
                 return order;
             }
         }
@@ -303,7 +307,7 @@ public class Warehouse {
 
 
     /**
-     * Removes the entire good.
+     * Removes the unit good.
      *
      * @param sku sku of good to remove
      */
@@ -333,21 +337,41 @@ public class Warehouse {
         }
     }
 
-    public void removeOrder(String id) throws WrongCommandException {
-        if (id.isBlank()) {
+    /**
+     * Removes an order in the warehouse.
+     * @param oid order id
+     * @throws WrongCommandException remove command is wrong
+     */
+    public void removeOrder(String oid) throws WrongCommandException {
+        if (oid.isBlank()) {
             throw new WrongCommandException("remove", true);
         }
 
         try {
-            int orderId = Integer.parseInt(id);
+            int orderId = Integer.parseInt(oid);
             orderLists.remove(findOrder(orderId));
-            System.out.println("Order " + id + " has been removed.");
+            System.out.println("Order " + oid + " has been removed.");
         } catch (ItemDoesNotExistException e1) {
             System.out.println("The order you are trying to remove are not on the current list. "
                     + "Please try another id.");
         } catch (NumberFormatException e2) {
             throw new WrongCommandException("remove", true);
         }
+    }
+
+    public void removeOrderline(String oid, String sku, String qty) throws WrongCommandException {
+        try {
+            int orderID = Integer.parseInt(oid);
+            Order order = findOrder(orderID);
+            order.removeOrderlineByQty(sku, qty);
+
+        } catch (NumberFormatException e) {
+            System.out.println("order ID must be a positive number");
+            throw new WrongCommandException("remove", true);
+        } catch (ItemDoesNotExistException e1) {
+            System.out.printf("Order id: %s does not exist.", oid);
+        }
+
     }
 
     // Related to saving state outside program

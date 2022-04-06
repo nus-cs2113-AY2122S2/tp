@@ -13,6 +13,7 @@ public class Orderline extends Good {
 
     public Orderline(UnitGood unitGood, int id, int quantity) {
         super(unitGood, id, quantity);
+        quantityFulfilled = quantity;
     }
 
     public void checkOff() {
