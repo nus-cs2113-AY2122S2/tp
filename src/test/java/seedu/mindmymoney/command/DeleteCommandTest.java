@@ -37,13 +37,34 @@ class DeleteCommandTest {
 
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("cash", "Personal", "Nike Shoes",
-                300, "30/03/2022"));
+            300, "30/03/2022"));
 
         String deleteInputString = "delete /e 1";
         new DeleteCommand(deleteInputString, user).executeCommand();
         testList.remove(0);
 
         assertEquals(testList.size(), expenditureTestList.size());
+    }
+
+    /**
+     * Asserts that the credit card balance will be updated upon successful deletion.
+     *
+     * @throws MindMyMoneyException if incorrect item has been deleted.
+     */
+    @Test
+    void deleteCommand_creditCardAndExpenditureInput_expectOriginalCreditBalance() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputStringCC = "/cc /n DBS /cb 1.5 /cl 500";
+        new AddCommand(inputStringCC, user).executeCommand();
+        String inputStringExpenditure = "/e /pm DBS /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        new AddCommand(inputStringExpenditure, user).executeCommand();
+        assertEquals(200.0,creditCardTestList.get(0).getBalanceLeft());
+        String deleteInputString = "delete /e 1";
+        new DeleteCommand(deleteInputString, user).executeCommand();
+        assertEquals(500.0, creditCardTestList.get(0).getBalanceLeft());
     }
 
     /**
@@ -115,11 +136,14 @@ class DeleteCommandTest {
      * Asserts if the index input is in the correct number format.
      */
     @Test
-    void deleteCommand_wrongExpenditureInputFormat_expectException() {
+    void deleteCommand_wrongExpenditureInputFormat_expectException() throws MindMyMoneyException{
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+
+        new AddCommand(inputString, user).executeCommand();
         String delInputString = "delete /e ONE";
 
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(delInputString, user).executeCommand());
@@ -129,16 +153,19 @@ class DeleteCommandTest {
      * Asserts if there is a missing index input in the command.
      */
     @Test
-    void deleteCommand_missingExpenditureInput_expectException() {
+    void deleteCommand_missingExpenditureInput_expectException() throws MindMyMoneyException{
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+
+        new AddCommand(inputString, user).executeCommand();
         String deleteInputString = "delete /e";
-        String delInputString2 = "delete /e";
+        String deleteInputString2 = "delete /e";
 
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, user).executeCommand());
-        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(delInputString2, user).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2, user).executeCommand());
     }
 
     /**
@@ -187,11 +214,14 @@ class DeleteCommandTest {
      * Asserts if there is a missing index input in the command.
      */
     @Test
-    void deleteCommand_missingCreditCardInput_expectException() {
+    void deleteCommand_missingCreditCardInput_expectException() throws MindMyMoneyException{
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/cc /n DBS /cb 1.5 /cl 500";
+
+        new AddCommand(inputString, user).executeCommand();
         String deleteInputString = "delete /cc";
 
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, user).executeCommand());
@@ -201,18 +231,20 @@ class DeleteCommandTest {
      * Asserts if there is a missing index input in the command.
      */
     @Test
-    void deleteCommand_missingIncomeInput_expectException() {
+    void deleteCommand_missingIncomeInput_expectException() throws MindMyMoneyException{
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         String deleteInputString = "delete /i";
+        String inputString = "/i /a 3000 /c salary";
+        new AddCommand(inputString, user).executeCommand();
 
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, user).executeCommand());
     }
 
     /**
-     * Asserts if the index input is out of bounds.
+     * Asserts if the credit card index input is out of bounds.
      */
     @Test
     void deleteCommand_wrongCreditCardInputValue_expectException() throws MindMyMoneyException {
@@ -230,7 +262,23 @@ class DeleteCommandTest {
     }
 
     /**
-     * Asserts if the index input is out of bounds.
+     * Asserts if the credit card index input can be non-numerical.
+     */
+    @Test
+    void deleteCommand_nonNumericalCreditCardIndexInput_expectException() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/cc /n DBS /cb 1.5 /cl 500";
+
+        new AddCommand(inputString, user).executeCommand();
+        String deleteInputString = "delete /cc asd";
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, user).executeCommand());
+    }
+
+    /**
+     * Asserts if the income index input is out of bounds.
      */
     @Test
     void deleteCommand_wrongIncomeInputValue_expectException() throws MindMyMoneyException {
@@ -260,4 +308,38 @@ class DeleteCommandTest {
 
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, user).executeCommand());
     }
+
+    /**
+     * Asserts if the income index input can be not a number.
+     */
+    @Test
+    void deleteCommand_nonNumericalIncomeIndexInput_expectException() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/i /a 3000 /c salary";
+        new AddCommand(inputString, user).executeCommand();
+
+        String deleteInputString = "delete /i abc";
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, user).executeCommand());
+    }
+
+    /**
+     * Test if program is able to exit.
+     */
+    @Test
+    void addCommand_isExit_expectFalse() throws MindMyMoneyException {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        String inputString = "/i /a 3000 /c salary";
+        new AddCommand(inputString, user).executeCommand();
+
+        String deleteInputString = "delete /i 1";
+        assertEquals(false, new DeleteCommand(deleteInputString, user).isExit());
+
+    }
+
 }
