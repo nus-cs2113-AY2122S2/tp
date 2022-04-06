@@ -20,6 +20,7 @@ public class Timetable {
     public static final int LESSONS_ONLY = 1;
     public static final int MEETINGS_ONLY = 2;
 
+    public static final int NUM_MINS = 960;
 
     public Timetable(String name) {
         this.name = name;
@@ -205,6 +206,12 @@ public class Timetable {
             int numericDay = event.getDayInInt();
             int numericStartTime = FreeCommand.convertTimeToFreeArrayIndex(event.getStartTime());
             int numericEndTime = FreeCommand.convertTimeToFreeArrayIndex(event.getEndTime());
+            if (numericStartTime < 0) {
+                if (numericEndTime < 0) {
+                    continue;
+                }
+                numericStartTime = 0;
+            }
             for (int j = numericStartTime; j < numericEndTime; j++) {
                 busySlots[numericDay - 1][j] = BUSY;
             }
