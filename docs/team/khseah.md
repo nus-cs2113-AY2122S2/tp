@@ -5,6 +5,8 @@
 Interface (CLI). You can use it to track your expenditures across multiple payment methods, calculate monthly
 expenditure, and set financial goals.
 
+<br/>
+
 ## Contribution Summary
 
 ### Code Contribution
@@ -116,6 +118,9 @@ changes.
 <br/>
 
 ### Miscellaneous Contribution
-PR reviews can be viewed [here](https://github.com/AY2122S2-CS2113T-T10-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me).
+PR reviews (with non-trivial comments):
+[#39](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/39), [#46](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/46), 
+[#72](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/72), [#86](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/86), 
+[#87](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/87), [#143](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/143)
 
 Bugs found during PE-Dry testing for `Spendvelope` can be viewed [here](https://github.com/khseah/ped/issues).
