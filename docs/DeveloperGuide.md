@@ -353,6 +353,7 @@ If the user's command type is `schedule`, the `Parser#parseUserInput(String user
 base word and proceed to create schedule related command using `Parser#createScheduleCommand(String userInput)` method.
 The following table shows the schedule commands that WerkIt! are able to process by calling the `ScheduleCommand#execute()`
 method.
+<br>
 
 | Command                                                             | `<commandAction>` | Parameters                                                                                                                                           | Method Called                               |
 |---------------------------------------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
@@ -360,6 +361,8 @@ method.
 | [schedule /list](#view-schedule)                                    | list              |                                                                                                                                                      | `DayList#printSchedule() `                  |
 | [schedule /clear `<day number>`](#clear-schedule-for-a-day)         | clear             | `<day number>` Number representing the day.                                                                                                          | `DayList#clearDayPlan(String userArgument)` |
 | [schedule /clearall](#clear-schedule-for-the-week)                  | clearall          |                                                                                                                                                      | `DayList#clearAllSchedule()`                |
+
+
 To view the details of the `ScheduleCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/ScheduleCommand.java).
 
 
