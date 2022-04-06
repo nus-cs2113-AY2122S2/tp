@@ -1,9 +1,11 @@
 package seedu.duke.commands;
 
+import seedu.duke.common.Messages;
 import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
+import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -43,13 +45,18 @@ public class BorrowCommand extends Command {
     }
 
     @Override
-    public void execute(ItemList itemList, Ui ui) {
+    public void execute(ItemList itemList, Ui ui) throws InvMgrException {
         BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName, borrowStatus);
-        Item item = itemList.addBorrowRecord(itemIndex, newRecord);
-        ui.showMessages("Item has been successfully borrowed!",
-                "Name of Item: " + item.getName(),
-                "Name of Borrower: " + newRecord.getBorrowerName(),
-                "Borrow Duration: " + newRecord.getBorrowDuration());
+
+        try {
+            Item item = itemList.addBorrowRecord(itemIndex, newRecord);
+            ui.showMessages("Item has been successfully borrowed!",
+                    "Name of Item: " + item.getName(),
+                    "Name of Borrower: " + newRecord.getBorrowerName(),
+                    "Borrow Duration: " + newRecord.getBorrowDuration());
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvMgrException(Messages.INVALID_INDEX);
+        }
     }
 
     @Override
