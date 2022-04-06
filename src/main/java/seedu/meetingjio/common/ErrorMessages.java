@@ -84,7 +84,7 @@ public class ErrorMessages {
 
     // Free Command
     public static final String ERROR_FREE_INPUT_INVALID = "Please specify the minimum duration for everyone to be free "
-            + "where duration is an integer indicating the minimum number of hours: free [duration]\n"
+            + "where duration is a positive integer indicating the minimum number of hours: free [duration]\n"
             + "If there is no such constraint for the duration, just input 'free'.";
     public static final String ERROR_NO_FREE_TIMESLOT = "Sorry, there is no timeslot that fits your requirement.";
 

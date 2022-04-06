@@ -46,6 +46,9 @@ public class FreeCommand extends Command {
                 duration = 0;
             } else {
                 duration = Integer.parseInt(this.time);
+                if (duration < 0) {
+                    throw new NumberFormatException();
+                }
             }
         } catch (NumberFormatException nfe) {
             return ERROR_FREE_INPUT_INVALID;
