@@ -1,12 +1,11 @@
 package seedu.duke.parsers;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.TagCommand;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
-import seedu.duke.exceptions.InvalidTagCommandException;
+import seedu.duke.exceptions.InvalidTagOperationException;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.MissingNumberException;
@@ -57,10 +56,10 @@ public class TagParser extends Parser {
         try {
             tagOperation = userInput.split(SPACE)[ZEROTH_INDEX];
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTagCommandException();
+            throw new InvalidTagOperationException();
         }
         if (!tagOperation.matches(TAG_COMMAND_FLAGS)) {
-            throw new InvalidTagCommandException(tagOperation);
+            throw new InvalidTagOperationException(tagOperation);
         }
         try {
             taskNumber = userInput.split(SPACE)[FIRST_INDEX];
