@@ -48,7 +48,7 @@ class GroupCreateCommandTest {
         Command command = Parser.getCommand(userInput);
         command.run(manager);
 
-        assertEquals(2, manager.getProfile().getGroupList().size());
+        assertEquals(1, manager.getProfile().getGroupList().size());
     }
 
     /**
