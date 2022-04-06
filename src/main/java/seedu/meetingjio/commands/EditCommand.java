@@ -1,12 +1,9 @@
 //@@author yanjie1017
 
 package seedu.meetingjio.commands;
-
 import seedu.meetingjio.events.Event;
-
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
-
 import seedu.meetingjio.parser.ParserHelperMethods;
 
 import seedu.meetingjio.exceptions.TimetableNotFoundException;

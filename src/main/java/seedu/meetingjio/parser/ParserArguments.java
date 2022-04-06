@@ -8,6 +8,8 @@ import static seedu.meetingjio.parser.Parser.HEADINGS_ALL;
 import static seedu.meetingjio.parser.Parser.HEADINGS_WITHOUT_NAME;
 import static seedu.meetingjio.parser.Parser.HEADINGS_NAME_INDEX;
 import static seedu.meetingjio.parser.Parser.HEADINGS_ALL_WITH_INDEX;
+import static seedu.meetingjio.parser.Parser.NAME_INDEX;
+import static seedu.meetingjio.parser.Parser.INDEX_INDEX;
 
 import seedu.meetingjio.exceptions.MissingParameterException;
 
@@ -31,13 +33,13 @@ public class ParserArguments {
             }
         }
 
-        if (checkAllParams && checkMissinglParams(count)) {
+        if (checkAllParams && checkMissingParams(count)) {
             throw new MissingParameterException();
         }
         return eventDescription;
     }
 
-    private static boolean checkMissinglParams(int count) {
+    private static boolean checkMissingParams(int count) {
         return count > 0;
     }
 
@@ -73,10 +75,14 @@ public class ParserArguments {
             // not applies to EditCommand
         }
 
-        if (!attributes.containsKey("n") || !attributes.containsKey("i")) {
+        if (!attributes.containsKey(HEADINGS_NAME_INDEX[NAME_INDEX]) ||
+                !attributes.containsKey(HEADINGS_NAME_INDEX[INDEX_INDEX])) {
             throw new MissingParameterException();
         }
-        if (attributes.size() < 3) {
+        attributes.remove(HEADINGS_NAME_INDEX[NAME_INDEX]);
+        attributes.remove(HEADINGS_NAME_INDEX[INDEX_INDEX]);
+
+        if (attributes.isEmpty()) {
             throw new MissingParameterException();
         }
         return attributes;
@@ -95,7 +101,7 @@ public class ParserArguments {
         return input.split(" ")[0].trim().toLowerCase();
     }
 
-    protected static int isHeadings(String str, String[] headings) {
+    private static int isHeadings(String str, String[] headings) {
         for (int i = 0; i < headings.length; i++) {
             if (str.equals(headings[i])) {
                 return i;
