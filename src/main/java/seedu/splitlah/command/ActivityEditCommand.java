@@ -37,6 +37,8 @@ public class ActivityEditCommand extends Command {
     private static final int MODE_UNSET = -1;
     private static final int MODE_OVERWRITE = 0;
     private static final int MODE_PRESERVE = 1;
+    private static final double PERCENT = 0.01;
+    private static final double DEFAULT_MULTIPLIER_1 = 1;
 
     private int activityId = MISSING_ACTIVITYID;
     private int sessionId = MISSING_SESSIONID;
@@ -146,7 +148,7 @@ public class ActivityEditCommand extends Command {
         int listLength = involvedListPersonArray.size();
         costList = new double[listLength];
         for (int i = 0; i < listLength; ++i) {
-            double costOwedForThisActivity = 0;
+            double costOwedForThisActivity;
             try {
                 costOwedForThisActivity = involvedListPersonArray.get(i).getActivityCostOwed(activityId);
             } catch (InvalidDataException exception) {
@@ -181,8 +183,8 @@ public class ActivityEditCommand extends Command {
      * Calculates the old activity's cost list without gst and service charge.
      */
     private void removeOldExtraChargesFromCostList() {
-        double oldGstMultiplier = 1 + (oldGst / 100);
-        double oldServiceChargeMultiplier = 1 + (oldServiceCharge / 100);
+        double oldGstMultiplier = DEFAULT_MULTIPLIER_1 + (oldGst * PERCENT);
+        double oldServiceChargeMultiplier = DEFAULT_MULTIPLIER_1 + (oldServiceCharge * PERCENT);
         for (int i = 0; i < costList.length; ++i) {
             costList[i] /= (oldGstMultiplier * oldServiceChargeMultiplier);
         }
@@ -215,8 +217,8 @@ public class ActivityEditCommand extends Command {
      * @return A double representing the extra charges.
      */
     private double getExtraCharges() {
-        double gstMultiplier = 1 + gst / 100;
-        double serviceChargeMultiplier = 1 + serviceCharge / 100;
+        double gstMultiplier = DEFAULT_MULTIPLIER_1 + (gst * PERCENT);
+        double serviceChargeMultiplier = DEFAULT_MULTIPLIER_1 + (serviceCharge * PERCENT);
         return gstMultiplier * serviceChargeMultiplier;
     }
 
