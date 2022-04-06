@@ -66,7 +66,7 @@ As such, these will be passed in directly to their `Command` classes without a `
 
 More complex command words such as `add` and `update` necessitated multiple arguments.
 To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` was implemented. 
-Without specifically explaining the main regular expression ([details here](https://regex101.com/r/dMwMWw/1)), the approach sought to match `argumentTag/argumentValue` pairs with a positive lookahead. 
+Without specifically explaining the main regular expression ([details here](https://regex101.com/r/gwjHWD/3)), the approach sought to match `argumentTag/argumentValue` pairs with a positive lookahead. 
 The final argument pair will then be extracted using a separate regex. 
 Together, this ensured that all argument pairs can be effectively parsed and dispatched to each `Command` class.
 
