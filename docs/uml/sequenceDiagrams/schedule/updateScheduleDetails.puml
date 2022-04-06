@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 !include ../../Style.puml
 
-autonumber 4.1
+autonumber 2.1
 
 participant "dayList\n:DayList" AS DayList
 participant ":String" AS string

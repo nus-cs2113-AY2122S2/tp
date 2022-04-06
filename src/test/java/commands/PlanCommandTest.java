@@ -14,11 +14,18 @@ import storage.LogHandler;
 import werkit.Parser;
 import werkit.UI;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlanCommandTest {
     ExerciseList exerciseList;
@@ -30,7 +37,7 @@ class PlanCommandTest {
     DayList dayList;
 
     @BeforeEach
-    void setUp() throws InvalidWorkoutException, InvalidExerciseException {
+    void setUp() throws InvalidWorkoutException, InvalidExerciseException, IOException {
         LogHandler.startLogHandler();
         exerciseList = new ExerciseList();
         workoutList = new WorkoutList(exerciseList);
@@ -54,6 +61,67 @@ class PlanCommandTest {
         assertThrows(InvalidCommandException.class,
             () -> new PlanCommand("plan /test", fileManager,
                     planList, "/test", ""));
+    }
+
+    @Test
+    void execute_validCreatePlan_expectSuccess() throws InvalidCommandException, IOException {
+        //Check for existence of plans.txt file. If none, create it.
+        fileManager.checkAndCreateDirectoriesAndFiles();
+
+        //Create random plan name for test case
+        Random rand = new Random();
+        int upperbound = Integer.MAX_VALUE;
+        int randomInteger = rand.nextInt(upperbound);
+        String createTestPlanName = "t" + randomInteger;
+
+        //Read from current plans.txt for existing plan names.
+        //If plan name exist already, recreate a new random plan name.
+        Scanner planFileReader = new Scanner(fileManager.getPlanFilePath());
+        while (planFileReader.hasNext()) {
+            try {
+                String planFileDataLine = planFileReader.nextLine();
+                if (planFileDataLine.contains(createTestPlanName)) {
+                    createTestPlanName = "t" + rand.nextInt(upperbound);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("File data error: insufficient parameters in plan data.");
+            } catch (NumberFormatException e) {
+                System.out.println("File data error: " + e.getMessage());
+            }
+        }
+
+        //Create and add new plan with the random plan name
+        String commandInput = "plan /new " + createTestPlanName + " /workouts 1,2,1";
+        PlanCommand createValidPlanCommand = parser.createPlanCommand(commandInput);
+        createValidPlanCommand.execute();
+
+        //Assert that new plan with random plan name has been created
+        //and inserted into plans.txt. Afterwhich, remove that new plan from plans.txt.
+        boolean hasNewTestPlan = false;
+        ArrayList<String> linesInFile = new ArrayList<String>();
+        Scanner planCheckFileReader = new Scanner(fileManager.getPlanFilePath());
+        while (planCheckFileReader.hasNext()) {
+            try {
+                String planCheckFileDataLine = planCheckFileReader.nextLine();
+                if (planCheckFileDataLine.contains(createTestPlanName)) {
+                    hasNewTestPlan = true;
+                    continue;
+                }
+                linesInFile.add(planCheckFileDataLine);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("File data error: insufficient parameters in plan data.");
+            } catch (NumberFormatException e) {
+                System.out.println("File data error: " + e.getMessage());
+            }
+        }
+
+        FileWriter fileWriter = new FileWriter(fileManager.getPlanFilePath().toString());
+        for (int i = 0; i < linesInFile.size(); i += 1) {
+            fileWriter.append(linesInFile.get(i));
+            fileWriter.append(System.lineSeparator());
+        }
+        fileWriter.close();
+        assertTrue(hasNewTestPlan);
     }
 
     @Test
@@ -114,7 +182,7 @@ class PlanCommandTest {
         String expectedOutput =
                 "Here are all your plan(s).\n"
                         + "To view each plan in detail, enter\n'plan /details <plan number in list>'.\n"
-                        + "1. Plan A\n";
+                        + "1. plan a\n";
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);

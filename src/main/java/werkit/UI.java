@@ -491,6 +491,17 @@ public class UI {
     }
 
     /**
+     * Prints a message when a plan scheduled on a particular day is removed.
+     */
+    public void printClearedScheduleOnADay(String dayName) {
+        if (dayName == " ") {
+            System.out.println("No plan is being scheduled, hence no plan is cleared.");
+        } else {
+            System.out.println("Plan had been cleared for " + dayName + ".");
+        }
+    }
+
+    /**
      * Prints a message when all day schedule had been cleared.
      */
     public void printClearedScheduleMessage() {

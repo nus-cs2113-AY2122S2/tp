@@ -69,9 +69,9 @@ class PlanListTest {
         String expectedOutput =
                 "Here are all your plan(s).\n"
                         + "To view each plan in detail, enter\n'plan /details <plan number in list>'.\n"
-                        + "1. Plan 1\n"
-                        + "2. Plan 2\n"
-                        + "3. Plan 3\n";
+                        + "1. plan 1\n"
+                        + "2. plan 2\n"
+                        + "3. plan 3\n";
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);
@@ -90,7 +90,7 @@ class PlanListTest {
         planList.createAndAddPlan("Plan 4 /workouts 1,1, 5,2");
 
         for (int i = 0; i < planList.getPlansDisplayList().size(); i += 1) {
-            assertEquals("Plan " + (i + 1), planList.getPlansDisplayList().get(i).toString());
+            assertEquals("plan " + (i + 1), planList.getPlansDisplayList().get(i).toString());
         }
     }
 
@@ -136,7 +136,7 @@ class PlanListTest {
     void listPlanDetails_validPlanNumber_expectThreeWorkouts() throws InvalidPlanException {
         planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
         String expectedOutput =
-                "Here are the 3 workouts in [" + ui.getColorText(TextColor.COLOR_YELLOW, "Plan 1")
+                "Here are the 3 workouts in [" + ui.getColorText(TextColor.COLOR_YELLOW, "plan 1")
                         + "].\n"
                         + "1. push up (10 reps)\n"
                         + "2. sit up (15 reps)\n"
@@ -184,9 +184,9 @@ class PlanListTest {
 
         int planNumberToDelete = 2;
 
-        assertEquals("Plan 2", planList.getPlansDisplayList().get(planNumberToDelete - 1).toString());
+        assertEquals("plan 2", planList.getPlansDisplayList().get(planNumberToDelete - 1).toString());
         planList.deletePlan(Integer.toString(planNumberToDelete));
-        assertEquals("Plan 3", planList.getPlansDisplayList().get(planNumberToDelete - 1).toString());
+        assertEquals("plan 3", planList.getPlansDisplayList().get(planNumberToDelete - 1).toString());
     }
 
     @Test

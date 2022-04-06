@@ -57,8 +57,8 @@ public class FileManagerTest {
         listOfWorkouts2.add(testWorkoutSample3);
         Plan testPlanSample1 = new Plan("coolMan", listOfWorkouts1);
         Plan testPlanSample2 = new Plan("hotMan", listOfWorkouts2);
-        String expectedOutput1 = "coolMan | push up | 1,russian twist | 1000,swimming | 20";
-        String expectedOutput2 = "hotMan | push up | 1,swimming | 20";
+        String expectedOutput1 = "coolman | push up | 1,russian twist | 1000,swimming | 20";
+        String expectedOutput2 = "hotman | push up | 1,swimming | 20";
         FileManager fm = new FileManager(pl);
 
         assertEquals(expectedOutput1, fm.convertPlanToFileDataFormat(testPlanSample1));

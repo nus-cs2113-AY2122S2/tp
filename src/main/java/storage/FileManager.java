@@ -438,7 +438,7 @@ public class FileManager {
     public void loadExercisesFromFile(ExerciseList exerciseList) throws IOException {
         Scanner scanner = new Scanner(getExerciseFilePath());
         while (scanner.hasNextLine()) {
-            var exercise = scanner.nextLine();
+            var exercise = scanner.nextLine().toLowerCase();
             exerciseList.addExerciseToList(exercise);
         }
     }
@@ -471,6 +471,14 @@ public class FileManager {
         return hasNoErrorsDuringLoad;
     }
 
+    /**
+     * Reads the plans from the local plan file and stores them into a PlanList object.
+     *
+     * @param planList An instance of the PlanList class.
+     * @return Returns true if all plans have been loaded into the application successfully.
+     *         Otherwise, returns false.
+     * @throws IOException If the method is unable to open the plan file.
+     */
     public boolean loadPlansFromFile(PlanList planList) throws IOException {
         boolean hasNoErrorsDuringLoad = true;
         Scanner planFileReader = new Scanner(getPlanFilePath());
@@ -539,7 +547,6 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException | InvalidScheduleException | InvalidPlanException e) {
                 deletedScheduleCount += 1;
                 if (deletedScheduleCount == 1) {
-                    System.out.print(System.lineSeparator());
                     System.out.println("The following schedule(s) is(are) "
                             + "removed due to the removal of\nrelevant plan(s).");
                     System.out.print(System.lineSeparator());
@@ -586,17 +593,28 @@ public class FileManager {
      */
     public void addFileWorkoutToList(WorkoutList workoutList, String[] workoutFileDataLine)
             throws ArrayIndexOutOfBoundsException, InvalidExerciseException, InvalidWorkoutException {
-        String workoutName = workoutFileDataLine[0];
+        String workoutName = workoutFileDataLine[0].toLowerCase();
         String workoutReps = workoutFileDataLine[1];
 
         String userArguments = workoutName + " " + WorkoutCommand.CREATE_ACTION_REPS_KEYWORD + " " + workoutReps;
         workoutList.createAndAddWorkout(userArguments);
     }
 
+    /**
+     * Adds a parsed workout data that is read from the resource file 'plans.txt' into
+     * the current application session's list of plans.
+     *
+     * @param planList         An instance of the PlanList class.
+     * @param planFileDataLine An array of the parsed plan data read from the resource file.
+     * @throws ArrayIndexOutOfBoundsException If the parsed data contains insufficient information.
+     * @throws InvalidExerciseException       If the parsed data contains an invalid exercise name.
+     * @throws InvalidWorkoutException        If the parsed data contains invalid or insufficient information needed
+     *                                        to create a Plan object based on the given workouts.
+     */
     public void addFilePlanToList(PlanList planList, String[] planFileDataLine)
             throws ArrayIndexOutOfBoundsException, InvalidExerciseException, InvalidWorkoutException {
-        String planName = planFileDataLine[0].trim();
-        String workoutsInPlan = planFileDataLine[1].trim();
+        String planName = planFileDataLine[0].trim().toLowerCase();
+        String workoutsInPlan = planFileDataLine[1].trim().toLowerCase();
         String[] individualWorkout = workoutsInPlan.split(FILE_DATA_DELIMITER_PLAN, -1);
         ArrayList<Workout> workoutsToAddInPlanList = new ArrayList<Workout>();
         for (int i = 0; i < individualWorkout.length; i++) {
@@ -665,6 +683,13 @@ public class FileManager {
         return workoutInFileFormat.toString();
     }
 
+    /**
+     * Writes a newly-created Plan object into the plan resource file with the correct data format.
+     *
+     * @param newPlan The newly-created Plan object to be added into the resource file.
+     * @throws IOException          If the plan resource file cannot be opened.
+     * @throws NullPointerException If the Plan parameter is null.
+     */
     public void writeNewPlanToFile(Plan newPlan) throws IOException, NullPointerException {
         String planInFileFormat = convertPlanToFileDataFormat(newPlan);
 
@@ -674,13 +699,21 @@ public class FileManager {
         fileWriter.close();
     }
 
+    /**
+     * Converts the data stored in the Plan object into a string that will be written to the
+     * plan resource file.
+     *
+     * @param plan The plan object whose data will be written to the resource file.
+     * @return The string that will be written to the resource file.
+     * @throws NullPointerException If the Plan parameter is null.
+     */
     public String convertPlanToFileDataFormat(Plan plan) throws NullPointerException {
         if (plan == null) {
             throw new NullPointerException("Plan object inputted into convertPlanToFileDataFormat() is null.");
         }
 
         StringBuilder planInFileFormat = new StringBuilder();
-        planInFileFormat.append(plan.getPlanName());
+        planInFileFormat.append(plan.getPlanName().toLowerCase());
         planInFileFormat.append(FILE_DATA_DELIMITER);
         var workoutInPlan = plan.getWorkoutsInPlanList();
         for (int i = 0; i < workoutInPlan.size(); i++) {
@@ -732,6 +765,26 @@ public class FileManager {
             assert (planObject != null) : "Plan object is NULL";
             String planInFileFormat = convertPlanToFileDataFormat(planObject);
             fileWriter.append(planInFileFormat);
+            fileWriter.append(System.lineSeparator());
+        }
+        fileWriter.close();
+    }
+
+    /**
+     * Rewrites the entire list of exercises stored in the ExerciseList object into the exercise resource file.
+     *
+     * @param exerciseList An instance of the ExerciseList class.
+     * @throws IOException          If the application is unable to open the exercise resource file.
+     * @throws NullPointerException If a null object is given as a parameter for any of the methods called
+     *                              by this method.
+     */
+    public void rewriteAllExercisesToFile(ExerciseList exerciseList) throws IOException, NullPointerException {
+        ArrayList<String> listOfExercises = exerciseList.getExerciseList();
+
+        FileWriter fileWriter = new FileWriter(getExerciseFilePath().toString());
+        for (String exerciseKey : listOfExercises) {
+            assert (exerciseKey != null) : "Exercise object is NULL";
+            fileWriter.append(exerciseKey);
             fileWriter.append(System.lineSeparator());
         }
         fileWriter.close();
