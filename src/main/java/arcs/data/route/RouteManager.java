@@ -55,8 +55,11 @@ public class RouteManager {
     public ArrayList<Route> findRoute(String date, String to, String from, String time) {
         ArrayList<Route> result = new ArrayList<>();
         for (Route route: routes) {
-            if (route.getDate().equals(date) && route.getTo().equals(to)
-                    && route.getFrom().equals(from) && route.getTime().equals(time)) {
+            Boolean dateMatch = route.getDate().equals(date);
+            Boolean toMatch = route.getTo().equals(to);
+            Boolean fromMatch = route.getFrom().equals(from);
+            Boolean timeMatch = route.getTime().equals(time);
+            if (dateMatch && toMatch && fromMatch && timeMatch) {
                 result.add(route);
             }
         }
