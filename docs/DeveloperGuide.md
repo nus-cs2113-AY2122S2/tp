@@ -246,7 +246,7 @@ can be found [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/tree/master/src
 
 <br><br>
 How the `Logic` component works:
-<br><br>
+<br>
 1. The `Parser` class parses the user command and identifies the command type (e.g. plan/schedule/workout/exercise).
 2. Depending on the command type, it creates the appropriate `Command` subclass object.
 3. This subclass-of-`Command` object is executed by the `WerkIt` class, which calls the `execute()` method of that subclass-of-`Command` object.
@@ -259,13 +259,13 @@ in the sequence diagram below. The example given is for the creation of new work
 
 ![logicComponentUML](uml/sequenceDiagrams/miscellaneous/images/logicComponentSD.png)
 <br><br>
-<span class="box info">:memo: This is a high level overview of how the creation of workouts
+<span class="box info">:memo: This is a high-level overview of how the creation of workouts
 is done. To improve readability, some classes and methods have been omitted from the diagram above.</span>
 
-<br><br>
-Each command types is a feature of the WerkIt! application.
-Thus, the next section will explain the design of each
-features in detail.
+<br>
+Each command type is a feature of the WerkIt! application.
+The next section will explain the design of each
+feature in detail.
 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
@@ -280,24 +280,24 @@ The features of WerkIt! are split and grouped into 5 **main** features:
 
 ### Exercise-Related Features
 
-Format: `exercise <commandAction> <condition>`
+Format: `exercise /commandAction <condition>`
 
 Below is a class diagram of the exercise-related features:
 
 ![ExerciseUML](uml/classDiagrams/images/exercise.png)
 <br>
 
-When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+When WerkIt! is running, the `WerkIt` class will keep prompting the user to enter command through the
 `WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
 class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
 user's command. If the user's command type is `exercise`, the `Parser#parseUserInput(String userInput)` method will 
 parse the 'exercise' base word and proceed to create exercise related command using 
 `Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
-`<commandAction>` and call the constructor of `ExerciseCommand` class by passing relevant parameters related
-to the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown.
+`/commandAction` and call the constructor of `ExerciseCommand` class by passing relevant parameters related
+to the constructor. If the `/commandAction` is null or incorrect, an `InvalidCommandException` will be thrown.
 
-Currently, the exercise related feature is limited to `exercise /list` only. Therefore, the `condition` mentioned can
-be ignored for now, and the only supported `commandAction` is `/list`. However, more exciting exercise-related features 
+Currently, the exercise-related feature is limited to `exercise /list` only. Therefore, the `condition` mentioned can
+be ignored for now, and the only supported `/commandAction` is `/list`. However, more exciting exercise-related features 
 are expected to be delivered in future iterations, and we currently have set the framework to implement these features 
 in the future. Thus, we have this standalone section specifically kept for exercise-related features.
 
@@ -323,18 +323,18 @@ will parse the `workout` base word and proceed to create a `WorkoutCommand` obje
 Once the `WorkoutCommand` object is created, the `WorkoutCommand#execute()` method
 is called. Depending on the type of command action, this method will
 call the appropriate operations from the `WorkoutList` class. For instance, if the command action
-is `/create`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout(userArgument)`
+is `/new`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout(userArgument)`
 to create a new workout in the application. 
 To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
 <br><br>
 When all methods except the `listAllWorkout()` method are executed, the
 `FileManager` and `UI` classes will call its appropriate methods depending on the command action.
-From the previous example, the `/create` workout command action will call the 
+From the previous example, the `/new` workout command action will call the 
 `FileManager#writeNewWorkoutToFile(newWorkout)` and also the `UI#printNewCreatedMessage(newWorkout)`
 methods after the new workout has been created.
 <br><br>
 Finally, methods in the `PlanList` class is only called when the `/delete` and `/update`
-workout command actions are executed. These methods are used to modify the application's plans list
+workout command actions are executed. These methods are used to modify the application's plan list
 as the `/delete` and `/update` actions are cascading actions 
 (i.e. deleting a workout will delete plan(s) containing that deleted workout).
 
@@ -343,12 +343,17 @@ as the `/delete` and `/update` actions are cascading actions
 ---
 
 ### Plan-Related Features
+
+Format: `plan /commandAction <condition>`
+
+Below is a class diagram of the plan-related features:
+
 ![PlanUML](uml/classDiagrams/images/PlanRelatedFeatures.png)
 <br>
 
-When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
-`WerkIt#startContinuousUserPrompt()` method. After the user has entered command,
-the `UI#getUserInput()` method in `UI` class will catch the user input,
+When WerkIt! is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered a command,
+the `UI#getUserInput()` method will catch the user input,
 and it will be sent to `Parser` class. Then, the `Parser#parseUserInput(userInput)`
 method will be called to analyse the user's command.
 
@@ -359,13 +364,13 @@ will parse the `plan` base word and proceed to create a `PlanCommand` object thr
 Once the `PlanCommand` object is created, the `PlanCommand#execute()` method
 is called. Depending on the type of command action, this method will
 call the appropriate operations from the `PlanList` class. For instance, if the command action
-is `/create`, `PlanList#createAndAddPlan(userArgument)` will be called to create a new plan.
-To view the details of the `PlanCommand#execute()`,s
+is `/new`, `PlanList#createAndAddPlan(userArgument)` will be called to create a new plan.
+To view the details of the `PlanCommand#execute()`,
 click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/PlanCommand.java).
 
 When `createAndAddPlan()` and  `deletePlan()` method in `PlanList` class are executed, the
 `FileManager` and `UI` classes will call its appropriate methods depending on the command action.
-From the previous example, the `/create` workout command action will call
+From the previous example, the `/new` workout command action will call
 the `UI#printNewPlanCreatedMessage()` and also the `FileManager#writeNewPlanToFile()`
 methods after the new plan has been created.
 
@@ -378,35 +383,40 @@ application’s day list.
 ---
 
 ### Schedule-Related Features
+
+Format: `schedule /commandAction <condition>`
+
+Below is a class diagram of the schedule-related features:
+
 ![ScheduleUML](uml/classDiagrams/images/scheduleComponent.png)
 
 Users are able to create and make changes to a 7-day workout plan schedule using the WerkIt application. For each day, users are only allowed
-to schedule 1 workout plan. Click [here](#glossary) to have a better understanding of what `workout`, `plan` and `schedule`
+to schedule 1 workout plan. Click [here](#glossary) to get a better understanding of what `workout`, `plan` and `schedule`
 means.
 
-When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+When WerkIt! is running, the `WerkIt` class will continuously prompt the user to enter a command via the
 `WerkIt#startContinuousUserPrompt()` method. After the user has entered command, the `UI#getUserInput()` method in `UI`
 class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
 user's command.
 
 If the user's command type is `schedule`, the `Parser#parseUserInput(String userInput)` method will parse the `schedule`
-base word and proceed to create schedule related command using `Parser#createScheduleCommand(String userInput)` method.
-The following table shows the schedule commands that WerkIt! are able to process by calling the `ScheduleCommand#execute()`
+base word and proceed to create a schedule-related command using `Parser#createScheduleCommand(String userInput)` method.
+The following table shows the schedule commands that WerkIt! is able to process by calling the `ScheduleCommand#execute()`
 method.
 <br>
 
-| Command                                                             | `<commandAction>` | Parameters                                                                                                                                           | Method Called                               |
-|---------------------------------------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
-| [schedule /update `<day number>` `<plan number>`](#update-schedule) | update            | `<day number>` Number representing the day. <br/>`<plan number>` Index of the plan stored in planList. This is the plan to be scheduled for the day. | `DayList#updateDay(String userArgument)`    |
-| [schedule /list](#view-schedule)                                    | list              |                                                                                                                                                      | `DayList#printSchedule() `                  |
-| [schedule /clear `<day number>`](#clear-schedule-for-a-day)         | clear             | `<day number>` Number representing the day.                                                                                                          | `DayList#clearDayPlan(String userArgument)` |
-| [schedule /clearall](#clear-schedule-for-the-week)                  | clearall          |                                                                                                                                                      | `DayList#clearAllSchedule()`                |
+| Command                                                             | `/commandAction` | Parameters                                                                                                                                                  | Method Called                               |
+|---------------------------------------------------------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| [schedule /update `<day number>` `<plan number>`](#update-schedule) | update           | `<day number>`: Number representing the day. <br/><br/>`<plan number>`: Index of the plan stored in planList. This is the plan to be scheduled for the day. | `DayList#updateDay(String userArgument)`    |
+| [schedule /list](#view-schedule)                                    | list             |                                                                                                                                                             | `DayList#printSchedule() `                  |
+| [schedule /clear `<day number>`](#clear-schedule-for-a-day)         | clear            | `<day number>`: Number representing the day.                                                                                                                | `DayList#clearDayPlan(String userArgument)` |
+| [schedule /clearall](#clear-schedule-for-the-week)                  | clearall         |                                                                                                                                                             | `DayList#clearAllSchedule()`                |
 
 
 To view the details of the `ScheduleCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/ScheduleCommand.java).
 
 
-The `<day number>` range from 1 to 7. The meaning of each day number is explained in the table below.
+The `<day number>` ranges from 1 to 7. The meaning of each day number is explained in the table below.
 
 | Day Number | Meaning   |
 |------------|-----------|
@@ -418,8 +428,8 @@ The `<day number>` range from 1 to 7. The meaning of each day number is explaine
 | 6          | Saturday  |
 | 7          | Sunday    |
 
-The `ScheduleCommand#execute()` will further evaluate the `<commandAction>` and depending on the type of command action, 
-this method will call the appropriate methods from the `DayList` class. If the `<commandAction>` is null or incorrect,
+The `ScheduleCommand#execute()` will further evaluate the `/commandAction` and depending on the type of command action, 
+this method will call the appropriate methods from the `DayList` class. If the `/commandAction` is null or incorrect,
 an `InvalidCommandException` will be thrown. If the `<parameters>` of certain commands are not specified or met, 
 an `InvalidScheduleException` will be thrown.
 
@@ -428,11 +438,11 @@ modify the application's schedule list. Hence, appropriate methods in the `FileM
 and save them to the local file, `schedule.txt`. For more information on `FileManager` class, you can refer to this 
 [section](#file-management).
 
-Furthermore, when methods such as `DayList#updateDay()` and `DayList#clearAllSchedule` are being successfully executed, 
-for the former method `UI#printNewScheduleCreatedMessage(Day newDay)` method will be called to display a message 
-to indicate that the plan had been successfully scheduled on a day and for the latter method, 
+Furthermore, when methods such as `DayList#updateDay()` and `DayList#clearAllSchedule` are successfully executed, 
+for the former method, `UI#printNewScheduleCreatedMessage(Day newDay)` method will be called to display a message 
+to indicate that the plan has been successfully scheduled on a day and for the latter method, 
 `UI#printClearedScheduleMessage()` method will be called to display a message to indicate that the 
-schedule list has successfully been reset.
+schedule list has been successfully reset.
 
 <div class="button-container"><a class="button" href="#feature-overview">Back to Feature Overview</a></div>
 
@@ -441,7 +451,7 @@ schedule list has successfully been reset.
 
 ### Search-Related Features
 
-Format: `search <commandAction> <keywords>`
+Format: `search /commandAction <keywords>`
 
 Below is a class diagram of the search-related features:
 
@@ -449,14 +459,16 @@ Below is a class diagram of the search-related features:
 ![SearchUML](uml/classDiagrams/images/SearchClass.png)
 
 
-When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
-`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+When WerkIt! is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered a command, The `UI#getUserInput()` method in `UI`
 class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
-user's command. If the user's command type is search, i.e. `search <commandAction> <keywords>`, the
+user's command. 
+
+If the user's command type is search, i.e. `search /commandAction <keywords>`, the
 `Parser#parseUserInput(String userInput)` method will parse the 'search' base word and proceed to create search related
 command using `Parser#createSearchCommand(String userInput)` method. This method will further evaluate the
-`<commandAction>` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to
-the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If
+`/commandAction` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to
+the constructor. If the `/commandAction` is null or incorrect, an `InvalidCommandException` will be thrown. If
 the `<keywords>` is not specified, it will be deemed as searching for spacing.
 
 <div class="button-container"><a class="button" href="#feature-overview">Back to Feature Overview</a></div>
