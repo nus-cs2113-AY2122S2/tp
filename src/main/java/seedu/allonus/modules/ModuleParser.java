@@ -11,6 +11,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents the class that will parse and validate user inputs for module parameters.
+ */
 public class ModuleParser {
     /**
      * ModuleParser messages, commands and constants.

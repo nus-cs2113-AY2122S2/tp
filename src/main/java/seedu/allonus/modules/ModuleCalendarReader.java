@@ -77,7 +77,12 @@ public class ModuleCalendarReader {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat(ICS_DATE_FORMAT);
 
 
-
+    /**
+     * Reads a .ics file based on a given filename.
+     * @param fileName Name of the .ics file from nusmods.com that contains NUS module details.
+     * @return modulesList ArrayList<Module> that contains the modules parsed from .ics file or null if there was a
+     * parse error
+     */
     public ArrayList<Module> readIcsFile(String fileName) {
         logger.setLevel(Level.WARNING);
         String directoryPath = PROJECT_PATH + File.separator + fileName;
@@ -101,7 +106,10 @@ public class ModuleCalendarReader {
     Date dateStart = null;
 
 
-
+    /**
+     * Parses the .ics file based on icsFileName
+     * @return modulesList of type ArrayList<Module> that contains the modules parsed from the .ics file.
+     */
     public ArrayList<Module> parseIcsCalendar() {
         try {
             logger.setLevel(Level.WARNING);
