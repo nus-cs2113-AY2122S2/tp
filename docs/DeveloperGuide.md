@@ -201,7 +201,7 @@ this component, `parseUserInput()` will call one of `createWorkoutCommand()`, `c
 `createHelpCommand()`, `createExerciseCommand()`, `createSearchCommand()`, `createPlanCommand()`,
 `createScheduleCommand()` or throw a `InvalidCommandException`.
 3. If the `InvalidCommandException` is thrown, `parseUserInput()` will be terminated and `WerkIt` will continue on
-`startContinuousUserPrompt()` to this process from step 1.
+`startContinuousUserPrompt()` to process from step 1.
 4. If one of the `createExitCommand()`, `createHelpCommand()` is called. In the case that the userInput contains any 
 non-spacing characters, `InvalidCommandException` will be thrown. Otherwise, the constructor of `HelpCommand` or
 `ExitCommand` will be called to create the `Command` object and return to `WerkIt`.
