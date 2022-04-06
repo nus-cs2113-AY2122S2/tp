@@ -13,7 +13,6 @@ public class Orderline extends Good {
 
     public Orderline(UnitGood unitGood, int id, int quantity) {
         super(unitGood, id, quantity);
-        quantityFulfilled = quantity;
     }
 
     public void checkOff() {
@@ -26,6 +25,9 @@ public class Orderline extends Good {
 
     public void setQuantityFulfilled(int quantityFulfilled) {
         this.quantityFulfilled = quantityFulfilled;
+        if (quantityFulfilled == super.getQuantity()) {
+            checkOff();
+        }
     }
 
     private String isDone() {
@@ -35,10 +37,14 @@ public class Orderline extends Good {
         return " (Not Done)";
     }
 
+    public Boolean getCheckedOff() {
+        return isCheckedOff;
+    }
+
     @Override
     public String toString() {
         return String.format("%d of %s - %s needed",
-                quantityFulfilled, super.getSku(), super.getName())
+                super.getQuantity(), super.getSku(), super.getName())
                 + isDone();
     }
 }

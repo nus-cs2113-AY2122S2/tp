@@ -255,6 +255,85 @@ public class Warehouse {
     }
 
     /**
+     * FulFills order.
+     *
+     * @param oid order id to fulfill
+     * @throws WrongCommandException when oid is not a positive integer
+     */
+    public void fulfillOrder(String oid) throws WrongCommandException {
+        try {
+            int orderID = Integer.parseInt(oid);
+            Order order = findOrder(orderID);
+            ArrayList<Orderline> orderlines = order.getOrderlines();
+            for (Orderline orderline:orderlines) {
+                Good good = goodList.get(orderline.getSku());
+                assert good != null;
+                fulfillOrderline(orderline, good);
+            }
+
+            if (checkOrderComplete(order, orderlines)) {
+                System.out.printf("Order %d completed", orderID);
+            } else {
+                System.out.printf("Order %d not completed", orderID);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("order ID must be a positive number");
+            throw new WrongCommandException("fulfill", true);
+        } catch (ItemDoesNotExistException e1) {
+            System.out.printf("No order with oid: %s found in the warehouse", oid);
+        }
+    }
+
+    /**
+     * Fulfill individual orderline in the order.
+     * Checks off orderline if it is fulfilled
+     *
+     * @param orderline orderline to fulfill
+     * @param good good with matching sku as orderline in warehouse
+     */
+    private void fulfillOrderline(Orderline orderline, Good good) {
+        int qtyToFulfill = orderline.getQuantity();
+        int currentQtyInWarehouse = good.getQuantity();
+        try {
+            if (currentQtyInWarehouse < qtyToFulfill) {
+                throw new LargeQuantityException();
+            }
+
+            orderline.setQuantityFulfilled(qtyToFulfill);
+            good.removeQuantity(qtyToFulfill);
+            assert currentQtyInWarehouse > good.getQuantity();
+
+            if (good.getQuantity() == 0) {
+                System.out.println("Orderline fulfilled");
+                System.out.printf("No more %s in the warehouse", good.getName());
+            } else {
+                System.out.println("Orderline fulfilled");
+                System.out.printf("%d %s left in the warehouse",
+                        good.getQuantity(), good.getName());
+            }
+        } catch (LargeQuantityException e) {
+            System.out.printf("Not enough %s in the warehouse", good.getName());
+            System.out.println("Orderline not fulfilled");
+        }
+    }
+
+    /**
+     * Checks off the order if all orderlines are checked off.
+     * @param order order to check
+     * @param orderlines orderlines in the order to check
+     * @return true if all orderlines are checked off, false if any orderline is not checked off
+     */
+    private boolean checkOrderComplete(Order order, ArrayList<Orderline> orderlines) {
+        for (Orderline orderline:orderlines) {
+            if (!orderline.getCheckedOff()) {
+                return false;
+            }
+        }
+        order.setFulfilled(true);
+        return true;
+    }
+
+    /**
      * Gives the total number of orders.
      * @return total number of orders
      */

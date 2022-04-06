@@ -54,16 +54,16 @@ public class Order {
             if (hasGood(unitGood.getSku())) {
                 Orderline orderline = getOrderline(unitGood.getSku());
                 assert orderline != null;
-                orderline.setQuantityFulfilled(quantity);
+                orderline.setQuantity(quantity);
                 System.out.printf("%s already exists in order. %d now required to fulfill",
-                        orderline.getName(), orderline.getQuantityFulfilled());
+                        orderline.getName(), orderline.getQuantity());
                 return;
             }
             Orderline orderline = new Orderline(unitGood,
                     orderlines.size() + 1, quantity);
             orderlines.add(orderline);
             System.out.printf("%s is added to order. %d required to fulfill",
-                    orderline.getName(), orderline.getQuantityFulfilled());
+                    orderline.getName(), orderline.getQuantity());
         } catch (NumberFormatException e) {
             System.out.println("Quantity must be positive number");
             throw new WrongCommandException("add", true);
@@ -132,17 +132,24 @@ public class Order {
 
         Orderline orderline = getOrderline(sku);
         assert orderline != null;
-        if (qty > orderline.getQuantityFulfilled()) {
+        if (qty > orderline.getQuantity()) {
             throw new LargeQuantityException();
         }
-        orderline.setQuantityFulfilled(orderline.getQuantityFulfilled() - qty);
+        orderline.setQuantity(orderline.getQuantity() - qty);
         System.out.println(qty + " " + orderline.getName()
-                + checkPlural(orderline.getQuantityFulfilled()) + " removed.");
+                + checkPlural(orderline.getQuantity()) + " removed.");
         if (orderline.getQuantity() == 0) {
             orderlines.remove(orderline);
         }
     }
 
+    public Boolean getFulfilled() {
+        return isFulfilled;
+    }
+
+    public void setFulfilled(Boolean fulfilled) {
+        isFulfilled = fulfilled;
+    }
 
     public boolean hasGood(String sku) {
         for (Orderline orderline : orderlines) {
@@ -168,8 +175,16 @@ public class Order {
     //        }
     //    }
 
+    private String completed() {
+        if (isFulfilled) {
+            return "completed";
+        }
+        return "not completed";
+    }
+
     public String toString() {
-        return String.format("%d - %s (%s)", orderId, receiver, shippingAddress);
+        return String.format("%d - %s (%s) : ", orderId, receiver, shippingAddress)
+                + completed();
     }
 
 
