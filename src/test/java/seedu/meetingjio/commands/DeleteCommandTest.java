@@ -8,7 +8,9 @@ import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
+
 
 public class DeleteCommandTest {
 
@@ -24,20 +26,46 @@ public class DeleteCommandTest {
         clearCommand.execute(masterTimetable);
         AddUserCommand addUserOne = new AddUserCommand("john");
         addUserOne.execute(masterTimetable);
+        AddUserCommand addUserTwo = new AddUserCommand("peter");
+        addUserOne.execute(masterTimetable);
+        addUserTwo.execute(masterTimetable);
         AddLessonCommand addLessonCommandOne = new AddLessonCommand(
-                "John", "CS2113", "Monday",
+                "John", "cs2113", "monday",
                 1200, 1300, "online"
         );
         AddLessonCommand addLessonCommandTwo = new AddLessonCommand(
-                "John", "CS2113", "Friday",
+                "John", "cs2113", "friday",
+                1300, 1400, "online"
+        );
+        addLessonCommandOne.execute(masterTimetable);
+        addLessonCommandTwo.execute(masterTimetable);
+
+        AddLessonCommand addLessonCommandThree = new AddLessonCommand(
+                "Peter", "cs2102", "saturday",
                 1200, 1300, "online"
         );
-        AddMeetingCommand addMeetingCommandOne = new AddMeetingCommand("meeting", "Thursday",
+        AddLessonCommand addLessonCommandFour = new AddLessonCommand(
+                "Peter", "cs2102", "wednesday",
+                1200, 1300, "online"
+        );
+        addLessonCommandThree.execute(masterTimetable);
+        addLessonCommandFour.execute(masterTimetable);
+
+        AddMeetingCommand addMeetingCommandOne = new AddMeetingCommand("meeting", "thursday",
                 1230, 1330, "online"
         );
-        AddMeetingCommand addMeetingCommandTwo = new AddMeetingCommand("meeting", "Thursday",
-                1230, 1330, "online"
-        );
+        addMeetingCommandOne.execute(masterTimetable);
+
+        String listAllOutput = "john\n"
+               + "1.[L] TITLE: cs2113\t\tDAY: monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n"
+               + "2.[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online\n"
+               + "3.[L] TITLE: cs2113\t\tDAY: friday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n"
+               + "peter\n"
+               + "1.[L] TITLE: cs2102\t\tDAY: wednesday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n"
+               + "2.[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online\n"
+               + "3.[L] TITLE: cs2102\t\tDAY: saturday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
+        ListCommand listCommand = new ListCommand("all",0);
+        assertEquals(listAllOutput,listCommand.execute(masterTimetable));
     }
 
     /**
@@ -73,13 +101,43 @@ public class DeleteCommandTest {
     @Test
     public void deleteCommand_ValidUserInvalidIndex_throwException() {
         //delete index that is not found in list
-        ClearCommand clearCommand = new ClearCommand("all");
-        clearCommand.execute(masterTimetable);
-        AddUserCommand addUserOne = new AddUserCommand("john");
-        addUserOne.execute(masterTimetable);
-        DeleteCommand deleteCommand = new DeleteCommand("john",3);
+        DeleteCommand deleteCommand = new DeleteCommand("john",100);
         deleteCommand.execute(masterTimetable);
         assertEquals(ERROR_INDEX_OUT_OF_BOUND, deleteCommand.execute(masterTimetable));
     }
 
+
+    /*
+    @Test
+    public void deleteCommand_deleteMeetingFromEveryone_throwException() {
+        //delete meeting which is id 2 from john, should delete from everyone
+        String listAllOutput = "john\n" +
+                "1.[L] TITLE: cs2113\t\tDAY: monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
+                "2.[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online\n" +
+                "3.[L] TITLE: cs2113\t\tDAY: friday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n" +
+                "peter\n" +
+                "1.[L] TITLE: cs2102\t\tDAY: wednesday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
+                "2.[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online\n" +
+                "3.[L] TITLE: cs2102\t\tDAY: saturday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
+        ListCommand listCommand = new ListCommand("all",0);
+        assertEquals(listAllOutput,listCommand.execute(masterTimetable));
+
+        DeleteCommand deleteCommand = new DeleteCommand("john",2);
+        deleteCommand.execute(masterTimetable);
+        String deleteConfirmation = "The following meeting event has been deleted from everyone's timetable:\n" +
+                "[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online";
+        assertEquals(deleteConfirmation, deleteCommand.execute(masterTimetable));
+
+        String listAllPostDelete = "john\n" +
+                "1.[L] TITLE: cs2113\t\tDAY: monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
+                "2.[L] TITLE: cs2113\t\tDAY: friday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n" +
+                "peter\n" +
+                "1.[L] TITLE: cs2102\t\tDAY: wednesday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
+                "2.[L] TITLE: cs2102\t\tDAY: saturday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
+
+        ListCommand listCommandOutput = new ListCommand("all",0);
+        assertEquals(listAllPostDelete, listCommandOutput.execute(masterTimetable));
+
+    }
+    */
 }

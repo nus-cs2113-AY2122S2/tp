@@ -1,15 +1,4 @@
-ibra
-1.[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
-2.[L] TITLE: cs2113		DAY: friday		START: 1230		END: 1330		MODE: online
-3.[L] TITLE: cs2113		DAY: friday		START: 1430		END: 1530		MODE: online
-ym
-1.[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
-2.[L] TITLE: cs2113		DAY: friday		START: 1230		END: 1330		MODE: online
-3.[L] TITLE: cs2113		DAY: friday		START: 1430		END: 1530		MODE: online
-john
-1.[L] TITLE: cs2113		DAY: monday		START: 1200		END: 1300		MODE: online
-2.[L] TITLE: cs2102		DAY: monday		START: 1300		END: 1400		MODE: online
-3.[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
 peter
-1.[L] TITLE: cs2113		DAY: monday		START: 1200		END: 1300		MODE: online
+1.[L] TITLE: cs2113		DAY: wednesday		START: 1200		END: 1300		MODE: online
 2.[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
+3.[L] TITLE: cs2113		DAY: saturday		START: 1200		END: 1300		MODE: online
