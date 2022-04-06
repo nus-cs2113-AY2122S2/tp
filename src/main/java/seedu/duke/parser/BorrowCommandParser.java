@@ -37,6 +37,10 @@ public class BorrowCommandParser implements Parser<BorrowCommand> {
         LocalDate endDate = ParserUtils.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
         String borrowerName = argMultimap.getValue(PREFIX_BORROWER_NAME).get();
 
+        if (startDate.isAfter(endDate)) {
+            throw new InvMgrException(Messages.INVALID_START_END_DATE);
+        }
+
         return new BorrowCommand(itemIndex, startDate, endDate, borrowerName);
     }
 

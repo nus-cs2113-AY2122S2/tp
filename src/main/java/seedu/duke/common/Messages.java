@@ -22,4 +22,5 @@ public class Messages {
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would be negative! "
             + "Your command has been terminated; no changes were made.";
+    public static final String INVALID_START_END_DATE = "Please ensure that start date is before or same as end date.";
 }
