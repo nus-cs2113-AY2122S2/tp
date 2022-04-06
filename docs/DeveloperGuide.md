@@ -125,7 +125,26 @@ and their interactions.
 #### Storage component
 [Writeup]
 #### UI component
-[Writeup]
+
+UI component consists of a single [UI class](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/werkit/UI.java)
+which manages interaction (prompting for user input and displaying results
+of commands/methods being called) between the user and the application.
+
+How the UI class works:
+* Upon the launch of `WerkIt`, the `UI class` will called on `printGreetings()` method to display the greeting messages to
+  the user.
+* Additionally, local files storing the data of previous session of `WerkIt` will also be loaded into the program. Hence,
+  the loading status of these files are also display by calling the`printFileLoadStatusMessage()`method.
+* `UI class` is responsible for getting the user input by calling the `getUserInput(String filename, boolean isLoadSuccessful)`
+  method which will then parsed the input received from the user to `Parser class` for it to process and
+  called on other relevant methods to execute the command.
+* `UI class` also display messages when a
+    * workout has been successfully created, updated and deleted.
+    * plan has been successfully created and deleted.
+    * schedule has been successfully created and removed.
+* Help messages are also printed in the UI class by calling `printHelpMessage()` method.
+* Lastly, when the user exits the program, the `printGoodBye()` method will be called to send the user away.
+
 #### Parser component
 [Writeup]
 #### Command component
