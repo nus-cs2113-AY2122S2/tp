@@ -1,5 +1,14 @@
-package tp;
+package tp.command;
 
+import tp.AppointmentList;
+import tp.DoctorList;
+import tp.PatientList;
+import tp.Ui;
+import tp.person.Doctor;
+import tp.DoctorStorage;
+import tp.PatientStorage;
+import tp.IHospitalException;
+import tp.AppointmentStorage;
 import tp.person.Doctor;
 
 public class SearchDoctorCommand extends Command {
@@ -16,7 +25,7 @@ public class SearchDoctorCommand extends Command {
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         Doctor curr = doctorList.searchDoctor(id);
         if (curr == null) {
-            return String.format("There is no doctor id is " + id + "\n");
+            return String.format("There is no doctor with the id: "+  id + " in the doctor list");
         }
         return String.format("The doctor found is here" + curr + "\n");
     }

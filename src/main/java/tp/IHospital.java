@@ -1,6 +1,7 @@
 package tp;
 
-import tp.person.Patient;
+import tp.command.Command;
+import tp.command.ExitCommand;
 
 public class IHospital {
     private static final Ui ui = new Ui();

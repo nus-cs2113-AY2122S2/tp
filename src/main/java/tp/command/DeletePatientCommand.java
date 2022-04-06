@@ -1,5 +1,13 @@
-package tp;
+package tp.command;
 
+import tp.AppointmentList;
+import tp.DoctorList;
+import tp.PatientList;
+import tp.Ui;
+import tp.DoctorStorage;
+import tp.PatientStorage;
+import tp.IHospitalException;
+import tp.AppointmentStorage;
 import tp.person.Patient;
 
 public class DeletePatientCommand extends Command {
@@ -11,9 +19,9 @@ public class DeletePatientCommand extends Command {
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList,
-                        AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                        PatientStorage patientStorage,
-                        AppointmentStorage appointmentStorage) throws IHospitalException {
+                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
+                          PatientStorage patientStorage,
+                          AppointmentStorage appointmentStorage) throws IHospitalException {
         Patient curr = patientList.deletePatient(index);
         if (curr == null){
             return String.format("The index " + index + " is not valid in the patient list");
