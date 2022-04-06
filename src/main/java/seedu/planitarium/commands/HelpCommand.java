@@ -3,6 +3,7 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.global.UI;
 import seedu.planitarium.family.Family;
 
@@ -18,7 +19,7 @@ public class HelpCommand extends Command {
 
     public HelpCommand(String userInput, Family family) {
         super(userInput, family);
-        this.type = "HelpCMD";
+        this.type = Constants.HELPCMDTYPE;
         logger.log(Level.INFO, LOG_HELP_INFO);
     }
 

@@ -38,7 +38,7 @@ public class EditRecordCommand extends Command {
 
     public EditRecordCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
-        this.type = "EditRecordCMD";
+        this.type = Constants.EDITRECORDCMDTYPE;
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         keyword = Parser.parseCommandType(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));

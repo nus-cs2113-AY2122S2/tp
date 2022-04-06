@@ -99,7 +99,14 @@ public class Constants {
     public static final String LOG_ERROR_INFO = "Unknown error occurred in execution";
     public static final String ADDPERSONCMDTYPE = "AddPersonCMD";
     public static final String DELETEPERSONCMDTYPE = "DeletePersonCMD";
-    public static final String ADDRECORDCMDTYPE = "";
-    public static final String DELETERECORDCMDTYPE = "";
+    public static final String ADDRECORDCMDTYPE = "AddRecordCMD";
+    public static final String DELETERECORDCMDTYPE = "DeleteRecordCMD";
+    public static final String EDITRECORDCMDTYPE = "EditRecordCMD";
+    public static final String EXITCMDTYPE = "ExitCMD";
+    public static final String HELPCMDTYPE = "HelpCMD";
+    public static final String LISTCATCMDTYPE = "ListcatCMD";
+    public static final String LISTCMDTYPE = "ListCMD";
+    public static final String OVERVIEWCMDTYPE = "OverviewCMD";
+    public static final String SEARCHCMDTYPE = "SearchCMD";
 
 }

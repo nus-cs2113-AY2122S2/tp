@@ -3,6 +3,7 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.global.UI;
 import seedu.planitarium.family.Family;
 import seedu.planitarium.storage.Storage;
@@ -22,7 +23,7 @@ public class ExitCommand extends Command {
 
     public ExitCommand(String userInput, Family family) {
         super(userInput, family);
-        this.type = "ExitCMD";
+        this.type = Constants.EXITCMDTYPE;
         logger.log(Level.INFO, LOG_EXIT_INFO);
     }
 
