@@ -53,3 +53,8 @@ about 9k LoC.
   * [Pull request 50](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/50)
   * [Pull request 116](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/116)
   * [Pull request 167](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/167)
+
+### Beyond team contribution
+
+* Above average bugs reported in iP PR peer review
+* Above average bugs found in PE-D
