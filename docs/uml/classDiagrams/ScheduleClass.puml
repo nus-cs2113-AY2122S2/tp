@@ -12,6 +12,7 @@ Parser .r.> "{abstract}\nCommand"
 ScheduleCommand --> UI
 ScheduleCommand -d-> FileManager
 ScheduleCommand -r-> DayList
+UI <. FileManager
 
 class WerkIt {
 + startContinuousUserPrompt()
