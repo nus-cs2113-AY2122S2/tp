@@ -51,7 +51,8 @@ public class MealReservation {
     public String getMealReservationInfo() {
         return "Customer name: " + customer.getName() + System.lineSeparator()
                 + "Flight ID: " + route.getFlightID() + System.lineSeparator()
-                + "In-flight Meal Reserved: " + this.getReservedMenuItemsInfoAsString();
+                + "In-flight Meal Reserved: " + System.lineSeparator()
+                + this.getReservedMenuItemsInfoAsString();
 
     }
 
