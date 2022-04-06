@@ -34,9 +34,6 @@ public class ActivityEditCommand extends Command {
     private static final String MISSING_PAYER = null;
     private static final String[] MISSING_INVOLVEDLIST = null;
     private static final int DUMMY_ACTIVITYID = MISSING_ACTIVITYID;
-    private static final int TYPE_UNSET = -1;
-    private static final int TYPE_COSTLIST = 1;
-    private static final int TYPE_COSTOVERALL = 0;
     private static final int MODE_UNSET = -1;
     private static final int MODE_OVERWRITE = 0;
     private static final int MODE_PRESERVE = 1;
@@ -50,7 +47,6 @@ public class ActivityEditCommand extends Command {
     private String payer = MISSING_PAYER;
     private String[] involvedListStringArray = MISSING_INVOLVEDLIST;
     private double[] costList = MISSING_COSTLIST;
-    private double activityType = TYPE_UNSET;
     private double editMode = MODE_UNSET;
     private double gst = MISSING_GST;
     private double oldGst = MISSING_GST;
@@ -155,15 +151,9 @@ public class ActivityEditCommand extends Command {
                 costOwedForThisActivity = involvedListPersonArray.get(i).getActivityCostOwed(activityId);
             } catch (InvalidDataException exception) {
                 assert exception.getMessage().equals(Message.ERROR_PERSON_NO_ACTIVITIES);
-                    costOwedForThisActivity = 0;
+                costOwedForThisActivity = 0;
             }
             costList[i] = costOwedForThisActivity;
-            if (checkCostListForDifferentCosts(costList)) {
-                activityType = TYPE_COSTLIST;
-            }
-        }
-        if (activityType == TYPE_UNSET) {
-            activityType = TYPE_COSTOVERALL;
         }
     }
 
@@ -200,41 +190,19 @@ public class ActivityEditCommand extends Command {
         // set to zero to wipe them clean and overwritten with the new costs using the current gst/sc values (either
         // provided by the user or retrieved from the activity).
         if (editMode == MODE_PRESERVE) {
-            if (activityType == TYPE_COSTLIST) {
-                removeOldExtraChargesFromCostList();
-                resetTotalCostToZero();
-                updateCostListWithExtraCharges();
-                calculateTotalCost();
-            } else if (activityType == TYPE_COSTOVERALL) {
-                removeOldExtraChargesFromCostList();
-                resetTotalCostToZero();
-                updateCostListWithExtraCharges();
-                calculateTotalCost();
-            }
+            removeOldExtraChargesFromCostList();
+            resetTotalCostToZero();
+            updateCostListWithExtraCharges();
+            calculateTotalCost();
         } else if (editMode == MODE_OVERWRITE) {
-            if (activityType == TYPE_COSTLIST) {
-                resetTotalCostToZero();
-                updateCostListWithExtraCharges();
-                calculateTotalCost();
-            } else if (activityType == TYPE_COSTOVERALL) {
-                resetTotalCostToZero();
-                updateCostListWithExtraCharges();
-                calculateTotalCost();
-            }
+            resetTotalCostToZero();
+            updateCostListWithExtraCharges();
+            calculateTotalCost();
         }
     }
 
     private void resetTotalCostToZero() {
         totalCost = 0;
-    }
-
-    /**
-     * Calculates the old activity's total cost without gst and service charge.
-     */
-    private void removeOldExtraChargesFromCost() {
-        double oldGstMultiplier = 1 + (oldGst / 100);
-        double oldServiceChargeMultiplier = 1 + (oldServiceCharge / 100);
-        totalCost /= (oldGstMultiplier * oldServiceChargeMultiplier);
     }
 
     /**
@@ -296,19 +264,6 @@ public class ActivityEditCommand extends Command {
     }
 
     /**
-     * Checks for negative costs in the costlist and throws an exception if any are present.
-     *
-     * @throws InvalidDataException If any negative costs are present in the costlist.
-     */
-    private void checkForNegativeCosts() throws InvalidDataException {
-        for (double cost : costList) {
-            if (cost < 0) {
-                throw new InvalidDataException("Costs cannot be less than zero.");
-            }
-        }
-    }
-
-    /**
      * Updates placeholder activityId values in new ActivityCost objects created from the edited activity to their
      * actual values: the activityId of the edited Activity object.
      *
@@ -363,43 +318,33 @@ public class ActivityEditCommand extends Command {
      * @param oldActivity An Activity object representing the activity to be edited.
      */
     private void retrieveDetailsFromOldActivity(Activity oldActivity) throws InvalidDataException {
-        // retrieves gst and service charge from old activity
         oldGst = oldActivity.getGst();
         oldServiceCharge = oldActivity.getServiceCharge();
-        // retrieves activity name if no name is provided
         if (Objects.equals(activityName, MISSING_ACTIVITYNAME)) {
             activityName = oldActivity.getActivityName();
         }
-        // retrieves list of participants if no list is provided
         if (involvedListStringArray == MISSING_INVOLVEDLIST) {
             involvedListStringArray = getInvolvedListFromPersonList(oldActivity.getInvolvedPersonList());
         }
-        // sets involvedListPersonArray to contain the participants
         involvedListPersonArray = session.getPersonListByName(involvedListStringArray);
-        // retrieves cost details from old activity only if no overall cost or costlist is provided by the user.
+        if (totalCost != MISSING_TOTALCOST && costList != MISSING_COSTLIST) {
+            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COSTLIST_AND_COSTOVERALL_SUPPLIED);
+        }
         if (totalCost == MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
             editMode = MODE_PRESERVE;
             updateCostListFromActivity();
-        } else if (totalCost != MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
+        } else if (totalCost != MISSING_TOTALCOST) {
             editMode = MODE_OVERWRITE;
-            activityType = TYPE_COSTOVERALL;
             updateCostListFromUserInput();
-        } else if (totalCost == MISSING_TOTALCOST && costList != MISSING_COSTLIST) {
-            editMode = MODE_OVERWRITE;
-            activityType = TYPE_COSTLIST;
         } else {
-            // throws exception if both costlist and overall cost are specified.
-            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COSTLIST_AND_COSTOVERALL_SUPPLIED);
+            editMode = MODE_OVERWRITE;
         }
-        // retrieves payer name if no payer is provided
         if (Objects.equals(payer, MISSING_PAYER)) {
             payer = oldActivity.getPersonPaid().getName();
         }
-        // sets new gst to old gst if no gst is provided
         if (gst == MISSING_GST) {
             gst = oldActivity.getGst();
         }
-        // sets new service charge to old service charge if no service charge is provided
         if (serviceCharge == MISSING_SERVICECHARGE) {
             serviceCharge = oldActivity.getServiceCharge();
         }
