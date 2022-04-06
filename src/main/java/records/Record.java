@@ -1,11 +1,15 @@
 package records;
 
+import parser.DateTimeHandler;
+
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public abstract class Record {
     protected final BigDecimal price;
     protected final String name;
-    protected final String date;
+    protected final LocalDate date;
 
     /**
      * Constructs a <code>Record</code> object.
@@ -14,10 +18,10 @@ public abstract class Record {
      * @param price Price to record
      * @param date Date of the record
      */
-    public Record(String name, double price, String date){
+    public Record(String name, double price, String date) throws DateTimeParseException {
         this.name = name;
         this.price = BigDecimal.valueOf(price);
-        this.date = date;
+        this.date = DateTimeHandler.dateParse(date);
     }
 
     /** Returns price of the record
@@ -33,7 +37,7 @@ public abstract class Record {
 
     /** Returns date of the record */
     public String getDate() {
-        return date;
+        return DateTimeHandler.toString(date);
     }
 
     /**

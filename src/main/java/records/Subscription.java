@@ -1,5 +1,7 @@
 package records;
 
+import java.time.format.DateTimeParseException;
+
 /** Record of subscription to services. */
 public class Subscription extends Record {
     private final String renewal;
@@ -12,7 +14,7 @@ public class Subscription extends Record {
      * @param date Date of purchase of the subscription
      * @param renewal Date of renewal of the subscription
      */
-    public Subscription (String name, double price, String date, String renewal){
+    public Subscription (String name, double price, String date, String renewal) throws DateTimeParseException {
         super(name, price, date);
         this.renewal = renewal;
     }

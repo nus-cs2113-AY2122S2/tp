@@ -1,6 +1,7 @@
 package records;
 
 import java.math.BigDecimal;
+import java.time.format.DateTimeParseException;
 
 public class Product extends Record {
     private final String productType;
@@ -13,7 +14,7 @@ public class Product extends Record {
      * @param date Date of purchase of the product
      * @param productType Type of the product
      */
-    public Product (String name, double price, String date, String productType){
+    public Product (String name, double price, String date, String productType) throws DateTimeParseException {
         super( name, price, date);
         this.productType = productType;
     }

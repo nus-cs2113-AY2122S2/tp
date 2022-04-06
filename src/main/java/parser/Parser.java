@@ -5,6 +5,7 @@ import commands.*;
 import exception.IllegalValueException;
 import exception.ParseException;
 
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -183,6 +184,8 @@ public class Parser {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             } catch (IllegalValueException e) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            } catch (DateTimeParseException e) {
+                return new IncorrectCommand("Input date in dd/mm/yyyy format.");
             }
             break;
 
@@ -206,6 +209,8 @@ public class Parser {
                 addCmd.AddSubscriptionCommand(name, price, date, renewalDate);
             } catch (IllegalValueException e) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            } catch (DateTimeParseException e) {
+                return new IncorrectCommand("Input date in dd/mm/yyyy format.");
             }
             break;
 

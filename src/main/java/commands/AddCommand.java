@@ -22,9 +22,9 @@ public class AddCommand extends Command {
             + "Parameters: i/ITEM_NAME p/PRICE d/DATE t/CATEGORY (if product) r/RENEWAL (if subscription)\n"
             + "Note: There are only FOUR categories in product: fashion, food, accessory and others.\n"
             + "Example: " + COMMAND_WORD
-            + " product i/handphone cover p/$10 t/accessory d/14022022\n"
+            + " product i/handphone cover p/$10 t/accessory d/14/02/2022\n"
             +  "Example: " + COMMAND_WORD
-            + " subscription i/Netflips p/$10 d/14022022 r/14032022";
+            + " subscription i/Netflips p/$10 d/14/02/2022 r/14/03/2022";
 
     /** Success message for add command. */
     private static final String MESSAGE_SUCCESS = "New record added: %1$s";
