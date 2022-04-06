@@ -106,15 +106,17 @@ public class Display {
         System.out.println("\tFormat: remove o/ oid/[ORDER_ID]");
         System.out.println("\tExample: remove o/ oid/1\n");
         System.out.println("Remove a specific quantity of orderline in an order");
-        System.out.println("\tFormat: remove og/ oid/[ORDER_ID] sku/[SKU]");
-        System.out.println("\tExample: remove og/ oid/1 sku/WC1\n");
+        System.out.println("\tFormat: remove og/ oid/[ORDER_ID] sku/[SKU]"
+                + " q/[QUANTITY_TO_REMOVE]");
+        System.out.println("\tExample: remove og/ oid/1 sku/WC1 q/1\n");
         System.out.println("Listing all orders");
         System.out.println("\tFormat: list o/\n");
         System.out.println("Listing orderlines in a specific order");
         System.out.println("\tFormat: list og/ oid/[OID]\n");
+        System.out.println("\tExample: list og/ oid/1\n");
         System.out.println("View Command");
-        System.out.println("\tFormat: view ug/ sku/[SKU]");
-        System.out.println("\tExample: view ug/ sku/WC1\n");
+        System.out.println("\tFormat: view o/ oid/[ORDER_ID]");
+        System.out.println("\tExample: view ug/ oid/1\n");
     }
 
     public static void help() {

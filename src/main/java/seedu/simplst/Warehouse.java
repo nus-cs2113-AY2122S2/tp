@@ -133,23 +133,17 @@ public class Warehouse {
             Integer idToBeViewed = Integer.parseInt(orderId);
             for (Order order : orderLists) {
                 if (idToBeViewed.equals(order.getId())) {
-                    System.out.println("Viewing order with id " + order.getId());
+                    System.out.println("Viewing order with sku " + order.getId());
                     System.out.println("Receiver: " + order.getReceiver());
                     System.out.println("Shipping address:" + order.getShippingAddress());
                     System.out.println("Items in the order:");
-
-                    ArrayList<Orderline> userOrderlines = order.getOrderlines();
-                    int i = 1;
-                    for (Orderline orderline : userOrderlines) {
-                        System.out.println("\t" + i + ". " + orderline);
-                        i++;
-                    }
+                    listOrderlines(String.valueOf(order.getId()));
                     return;
                 }
             }
-            System.out.println("Could not find item with given id!");
+            System.out.println("Could not find order with given id!");
         } catch (NumberFormatException e) {
-            System.out.println("Invalid format entered! Check format and try again!");
+            System.out.println("Invalid order id format entered! Check format and try again!");
         }
     }
 
