@@ -61,6 +61,10 @@ public class ModHappyParserTest {
             parser.parseCommand(testString);
         });
     }*/
+    private void testParseCommand_expectInvalidFlagException(String testString) {
+        assertThrows(InvalidFlagException.class, () -> parser.parseCommand(testString));
+    }
+
 
     @BeforeEach
     public void setUp() {
