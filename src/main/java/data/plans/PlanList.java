@@ -536,9 +536,9 @@ public class PlanList {
         }
     }
 
-    public void updatePlanContainsUpdatedWorkout(String oldWorkoutToCheck,
-                                                 String updatedWorkoutToCheck, Workout updatedWorkout) throws
+    public void updatePlanContainsUpdatedWorkout(String oldWorkoutToCheck, Workout updatedWorkout) throws
             InvalidPlanException {
+        String updatedWorkoutToCheck = updatedWorkout.toString();
         ArrayList<Integer> planWithUpdatedWorkout
                 = findPlanContainsTargetWorkout(oldWorkoutToCheck, updatedWorkoutToCheck);
 

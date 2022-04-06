@@ -165,8 +165,7 @@ public class WorkoutCommand extends Command {
                 String currentWorkout = getWorkoutList().getCurrentWorkout(getUserArguments());
                 Workout updatedWorkout = getWorkoutList().updateWorkout(getUserArguments());
                 getUI().printUpdateWorkoutMessage(currentWorkout, updatedWorkout);
-                getPlanList().updatePlanContainsUpdatedWorkout(currentWorkout,
-                        updatedWorkout.toString(), updatedWorkout);
+                getPlanList().updatePlanContainsUpdatedWorkout(currentWorkout, updatedWorkout);
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 getFileManager().rewriteAllPlansToFile(getPlanList());
                 break;
