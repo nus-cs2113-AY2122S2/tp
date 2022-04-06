@@ -20,3 +20,10 @@ text-ui-test/EXPECTED-UNIX.TXT
 # WerkIt! application resources
 werkItResources/
 werkItLogs/
+
+# Jekyll Local Site Testing Resources
+.bundle/
+.sass-cache/
+Gemfile*
+_site/
+vendor/
