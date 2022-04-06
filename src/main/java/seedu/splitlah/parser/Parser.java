@@ -24,8 +24,6 @@ import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
 import seedu.splitlah.ui.Message;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 
 /**

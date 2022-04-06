@@ -267,7 +267,7 @@ public class ActivityEditCommand extends Command {
     }
 
     /**
-     * Checks to ensure that the cost list matches the list of participants, regardless of whether they are provided.
+     * Checks to ensure that the cost list matches the list of participants.
      *
      * @throws InvalidDataException If there is a mismatch between the list of participants and the cost list.
      */

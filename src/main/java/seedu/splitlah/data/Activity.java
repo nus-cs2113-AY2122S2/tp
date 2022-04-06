@@ -76,29 +76,14 @@ public class Activity implements Serializable, Comparable<Activity> {
         return personPaid;
     }
 
-    /**
-     * Returns the gst value in percentage.
-     *
-     * @return A double representing the gst value.
-     */
     public double getGst() {
         return gst;
     }
 
-    /**
-     * Returns the service charge value in percentage.
-     *
-     * @return A double representing the service charge.
-     */
     public double getServiceCharge() {
         return serviceCharge;
     }
 
-    /**
-     * Returns an ArrayList object of Person objects representing the persons involved in the activity.
-     *
-     * @return An ArrayList object containing Person objects each representing a person involved in the activity.
-     */
     public ArrayList<Person> getInvolvedPersonList() {
         return involvedPersonList.getPersonList();
     }
