@@ -10,8 +10,6 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
 
-import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
-
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = "Add: Adds a task into the task list.\n"
@@ -71,7 +69,7 @@ public class AddCommand extends Command {
                     + "Now you have " + taskList.getSize() + " task(s) in your schedule!");
             storage.writeSaveData(taskList);
         } catch (TimeClashException | InvalidInputException exception) {
-            ui.showToUser("Clashing task: " + exception.getMessage());
+            ui.showError(exception.getMessage());
         }
     }
 }

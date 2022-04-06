@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.Task;
@@ -46,6 +47,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Wipes the existing save file.
+     */
     public void wipeSaveData() {
         try {
             FileWriter fw = new FileWriter(saveFilePath);
@@ -85,7 +89,7 @@ public class Storage {
      *
      * @param taskList Array of tasks that are to be saved.
      */
-    public JSONObject writeSaveData(TaskList taskList) {
+    public void writeSaveData(TaskList taskList) {
         JSONObject taskJson = convertTaskListToJson(taskList);
         String taskString = taskJson.toString(INDENT_FACTOR);
         assert taskString != null;
@@ -96,11 +100,10 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(ERROR_IO_FAILURE_MESSAGE);
         }
-        return taskJson;
     }
 
     /**
-     * Loads back the save file onto the program.
+     * Loads the save file into the task list.
      *
      * @throws IOException           If an I/O error occurs while reading the data file
      * @throws InvalidInputException If the data has missing fields for a task
@@ -114,7 +117,7 @@ public class Storage {
 
             for (int i = 0; i < taskArray.length(); i++) {
                 JSONObject taskData = taskArray.getJSONObject(i);
-                taskList.importTask(StorageParser.parseSaveData(taskData));
+                taskList.addTask(StorageParser.parseSaveData(taskData), Frequency.SINGLE);
             }
         }
         writeSaveData(taskList);

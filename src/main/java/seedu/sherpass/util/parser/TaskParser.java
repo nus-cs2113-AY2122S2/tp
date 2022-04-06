@@ -54,7 +54,7 @@ public class TaskParser {
     /**
      * Returns the value for a specific parameter.
      *
-     * @param parameter The parameter to retrieve values from (e.g /by, /do)
+     * @param parameter The parameter to retrieve values from (e.g /start, /do)
      * @param argument  The full argument given by the user
      * @return The value given by the user for a particular parameter
      */
@@ -138,6 +138,14 @@ public class TaskParser {
         }
     }
 
+    /**
+     * Returns an AddCommand object with the task description and do datetime given in the user input.
+     * @param argument The argument given by the user
+     * @return AddCommand object
+     * @throws IllegalArgumentException
+     * @throws InvalidInputException If the argument is blank or the task description is empty
+     * @throws ArrayIndexOutOfBoundsException If the parameter was specified but no value was given
+     */
     private static AddCommand prepareAddTaskContent(String argument) throws IllegalArgumentException,
             InvalidInputException, ArrayIndexOutOfBoundsException {
         if (argument.isBlank()) {
@@ -155,6 +163,12 @@ public class TaskParser {
                 prepareTaskDateTime(doOnDateString + WHITESPACE, endTimeString, inputWithTimeFormat));
     }
 
+    /**
+     * Parses the by date and time of the task given in the user input.
+     * @param newCommand The newCommand object that is being prepared
+     * @param argument The user input
+     * @throws InvalidInputException If the date and time in the user input is invalid
+     */
     private static void prepareAddByDate(AddCommand newCommand, String argument) throws InvalidInputException {
         if (argument.contains(BY_DATE_DELIMITER) || argument.contains(BY_TIME_DELIMITER)) {
             String byDateString = parseArgument(BY_DATE_DELIMITER, argument);
@@ -169,6 +183,12 @@ public class TaskParser {
         }
     }
 
+    /**
+     * Parses the frequency of recurrence of the task given in the user input.
+     * @param newCommand The newCommand object that is being prepared
+     * @param argument The user input
+     * @throws IllegalArgumentException If the frequency specified is invalid
+     */
     private static void prepareAddFrequency(AddCommand newCommand, String argument) throws IllegalArgumentException {
         newCommand.setFrequency(Frequency.valueOf(parseArgument(FREQUENCY_DELIMITER, argument).toUpperCase()));
     }

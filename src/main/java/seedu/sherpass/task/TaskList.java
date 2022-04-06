@@ -91,7 +91,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the next occurrence of a recurring task.
+     * Returns the next occurrence of a repeating task.
      *
      * @param currentTask The i-th task
      * @return The i+1 task
@@ -171,7 +171,7 @@ public class TaskList {
      * Checks if there is any date and time clashes
      * for a given array.
      *
-     * @param taskList Array representation of tasks.
+     * @param taskList    Array representation of tasks.
      * @param taskToCheck New Task to be checked for clash.
      * @throws TimeClashException If there is a date and time clash, i.e.
      *                            taskToCheck has the same date and clashing of time periods
@@ -182,7 +182,7 @@ public class TaskList {
         if (isStartTimeClashWithEndTime(taskToCheck)) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
-        if (taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
+        if (!taskToCheck.isDone() && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
             throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
         }
         if (isByDateBeforeDoOnDate(taskToCheck)) {
@@ -191,7 +191,8 @@ public class TaskList {
         for (Task task : taskList) {
             if (isOnSameDay(task.getDoOnStartDateTime(), taskToCheck.getDoOnStartDateTime())
                     && hasTimeClash(task, taskToCheck.getDoOnStartDateTime(), taskToCheck.getDoOnEndDateTime())) {
-                throw new TimeClashException(ERROR_SCHEDULE_CLASH_MESSAGE + "\nClashing task: " + task);
+                throw new TimeClashException(ERROR_SCHEDULE_CLASH_MESSAGE
+                        + "\n\t-> " + task.printTask() + "\n\t-> " + taskToCheck.printTask());
             }
         }
     }
@@ -215,21 +216,18 @@ public class TaskList {
     }
 
     /**
-     * Adds a task from the save file to the current array of tasks.
+     * Updates the attribute of a task with the new values.
      *
-     * @param newTask The loaded task to be added to the array.
+     * @param taskToUpdate    The task to be edited
+     * @param taskDescription The new task description
+     * @param startDateOffset The offset between the new and old start date and time of the task
+     * @param endDateOffset   The offset between the new and old end date and time of the task
+     * @param byDateOffset    The offset between the new and old by date and time of the task
      */
-    public void importTask(Task newTask) throws InvalidInputException, TimeClashException {
-        checkDateTimeClash(tasks, newTask);
-
-        tasks.add(newTask);
-        updateIndex();
-    }
-
     private void updateTask(Task taskToUpdate, String taskDescription,
-                           long startDateOffset,
-                           long endDateOffset,
-                           long byDateOffset) {
+                            long startDateOffset,
+                            long endDateOffset,
+                            long byDateOffset) {
         if (!taskDescription.isBlank()) {
             taskToUpdate.setTaskDescription(taskDescription);
         }
@@ -257,6 +255,17 @@ public class TaskList {
         return 0;
     }
 
+    /**
+     * Edits a task in the task list with the updated details
+     *
+     * @param editIndex         The task specified by the user
+     * @param taskDescription   The new task description
+     * @param doOnStartDateTime The new start date and time of the task
+     * @param doOnEndDateTime   The new end date and time of the task
+     * @param byDateTime        The new by date and time of the task
+     * @throws TimeClashException    if the new do date has is clashing with other tasks
+     * @throws InvalidInputException if the dates are invalid e.g. start date after end date
+     */
     public void editSingleTaskContent(int editIndex, String taskDescription,
                                       LocalDateTime doOnStartDateTime,
                                       LocalDateTime doOnEndDateTime,
@@ -285,6 +294,17 @@ public class TaskList {
         updateIndex();
     }
 
+    /**
+     * Edits a task and its future occurrence with the updated details
+     *
+     * @param editIndex         The task specified by the user
+     * @param taskDescription   The new task description
+     * @param doOnStartDateTime The new start date and time of the task
+     * @param doOnEndDateTime   The new end date and time of the task
+     * @param byDateTime        The new by date and time of the task
+     * @throws TimeClashException    if any one of the occurrence with the new date has a time clash with other tasks
+     * @throws InvalidInputException if any of the dates are invalid e.g. start date after end date
+     */
     public void editRepeatedTasks(int editIndex, String taskDescription,
                                   LocalDateTime doOnStartDateTime,
                                   LocalDateTime doOnEndDateTime,
@@ -312,6 +332,12 @@ public class TaskList {
         updateIndex();
     }
 
+    /**
+     * Returns an ArrayList of tasks that are going to be edited.
+     *
+     * @param index The index of the task specified by the user
+     * @return ArrayList of task that will be edited
+     */
     public ArrayList<Task> getAffectedTasks(int index) {
         Task taskToEdit = tasks.get(index);
         ArrayList<Task> result = new ArrayList<>();

@@ -14,7 +14,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 public class StorageParser {
 
     /**
-     * Returns a task object parsed from the data file.
+     * Returns a task object from a JSON object.
      *
      * @param taskData The data of a task in JSON.
      * @return Task containing the saved data for adding into program's task array.
