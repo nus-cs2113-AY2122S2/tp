@@ -134,6 +134,14 @@ public class Session implements Serializable, Comparable<Session> {
         throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
     }
 
+    /**
+     * Removes all ActivityCost objects from all Person objects in and paying for the activity.
+     * 
+     * @param activity An Activity object in which all involved Person objects should have their ActivityCost objects
+     *                 with the same activity unique identifier removed.
+     * @throws InvalidDataException If any Person object involved in the Activity object does not have any ActivityCost
+     *                              objects with the same activity unique identifier.
+     */
     private void removeActivityCosts(Activity activity) throws InvalidDataException {
         int activityId = activity.getActivityId();
         ArrayList<Person> involvedPersonList = activity.getInvolvedPersonList();
@@ -154,7 +162,7 @@ public class Session implements Serializable, Comparable<Session> {
     /**
      * Removes an Activity object specified by a numerical identifier that uniquely identifies the activity
      * from the Session. Additionally, removes all ActivityCost objects with the same activityId from all Person
-     * objects involved in the activity.
+     * objects involved in and paying for the activity.
      *
      * @param activityId An integer that uniquely identifies an activity.
      * @throws InvalidDataException If activityList is empty or
