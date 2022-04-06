@@ -2,7 +2,7 @@
 
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
-- [Features](#features)
+- [Summary of Main Features](#features)
     * [Create a new flight route: `addRoute`](#create-a-new-flight-route---addroute-)
     * [Find availability on existing flight route: `findRoute`](#find-availability-on-existing-flight-route---findroute-)
     * [List all flight routes: `listRoute`](#list-all-flight-routes---listroute-)
@@ -14,19 +14,17 @@
     * [Create new flight booking: `book`](#create-new-flight-booking---book-)
     * [Remove flight booking: `deleteBooking`](#remove-flight-booking---deletebooking-)
     * [View all existing flight booking: `listBooking`](#view-all-existing-flight-booking---listbooking-)
-    * [Add a new Menu Item:  `addMenuItem`](#add-a-new-menu-item----addmenuitem-)
-    * [Delete menu item:  `deleteMenuItem`](#delete-menu-item----deletemenuitem-)
-    * [Listing all menu items: `listMenuItems`](#listing-all-menu-items---listmenuitems-)
-    * [Find menu items by name: `findMenuItemName`](#find-menu-items-by-name---findmenuitemname-)
-    * [Find menu items by type: `findMenuItemType`](#find-menu-items-by-type---findmenuitemtype-)
-    * [Exit the system: `bye`](#exit-the-system---bye-)
+    * [Menu Item Functionalities](#MENU ITEM FUNCTIONALITIES)
+    * [Meal Reservation Functionalities](#IN-FLIGHT-MEAL-RESERVATIONS)
+    * [Exit the system](#Exit the System)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
 
 ## Introduction
 
-ARCS aims to provide a dynamic and concise interface for staff to create, view and cancel flight routes and bookings, create in-flight meal reservations, a streamlined interface to check in customers, a payment interface to manage payments and the ability to generate a sales report for different periods for management purposes.
+Airline Check-in and Reservation System(ARCS) aims to provide a dynamic and concise interface for staff to create, view
+and cancel flight routes and bookings, create in-flight meal reservations and add Menu Items.
 
 ## Quick Start
 
@@ -40,10 +38,10 @@ ARCS aims to provide a dynamic and concise interface for staff to create, view a
 
     * **`listRoute`** : Lists all existing flight routes.
 
-    * **`addMenuItem`**`addMenuItem name/chocolate cake type/MENU_ITEM_TYPE price/MENU_ITEM_PRICE
+    * **`addMenuItem`**`addMenuItem name/chocolate_cake type/dessert price/4.50
       ` : Adds a Menu Item named `chocolate cake` to the in-flight menu.
 
-    * **`deleteMenuItem`**`3` : Deletes the 3rd menu item shown in the current list.
+    * **`deleteMenuItem 3`** : Deletes the 3rd menu item shown in the current list.
 
     * **`findMenuItemName`** `findMenuItemName coke` : Returns all in-flight menu item that contains the word coke. 
 
@@ -194,6 +192,7 @@ Example of usage:
 
 * `listBooking`
 
+## MENU ITEM FUNCTIONALITIES
 
 ### Add a new Menu Item:  `addMenuItem`
 Add a new in-flight menu item to the system.
@@ -201,6 +200,7 @@ Add a new in-flight menu item to the system.
 Format: `addMenuItem name/MENU_ITEM_NAME type/MENU_ITEM_TYPE price/MENU_ITEM_PRICE`
 
 * The `MENU_ITEM_NAME` If the menu item name has a space it must be separated using an underscore: _
+* The `MENU_ITEM_NAME` is case-sensitive. Meaning Coke and coke will be 2 different items.
 * The `MENU_ITEM_TYPE` must be either APPETIZER/MAIN/SIDE/DESSERT/DRINKS (not case-sensitive) 
 * The `MENU_ITEM_PRICE` must be a price > 0.
 * The `MENU_ITEM_PRICE` must be an in SGD and in an acceptable value: 2.50, 2.05, 2.5, 2, 0.9, 0.10, 0.01
@@ -239,7 +239,12 @@ Example of usage: <br>
 
 List out all available menu item which contains the name given.
 
-Format: `findMenuItemName NAME`
+Format: `findMenuItemName MENU ITEM NAME`
+
+* The Menu Item Name should not have an underscore to separate spaces.
+* If there is a menu item called "Chocolate Cake", finding "Chocolate Cake" will yield a
+correct result but "Chocolate_Cake" will not.
+* The Menu Item Name is case-sensitive.
 
 Example of usage: <br>
 * `findMenuItemName chocolate cake` <br>
@@ -249,13 +254,76 @@ Example of usage: <br>
 
 List out all available menu items by type specified
 
-Format: `findMenuItemType MENU_ITEM_TYPE`
+Format: `findMenuItemType MENUITEMTYPE`
 
-* The `MENU_ITEM_TYPE` either APPETIZER/MAIN/SIDE/DESSERT/DRINKS (not case-sensitive)
+* The `MENUITEMTYPE` either APPETIZER/MAIN/SIDE/DESSERT/DRINKS (not case-sensitive)
 
 Example of usage: <br>
-* `findMenuItemType drinks` <br>
+* `findMenuItemType DRINKS` <br>
 * `findMenuItemType dessert` <br>
+
+## IN FLIGHT MEAL RESERVATIONS
+
+### Add in-flight meal reservation: `reserveMeal`
+
+Adds an in-flight meal reservation for a customer on a specific flight route.
+
+Format: `reserveMeal ic/CUSTOMERID fid/FLIGHTID MENUITEMTYPE/MENU_ITEM_NAME [MENUITEMTYPE/MENU_ITEM_NAME]`
+
+* Customer must exist.
+* Flight Route must exist.
+* Customer must have already booked a flight on the route.
+* The Menu Item must exist.
+* At least 1 Menu Item to be added must be valid. 
+* If all menu items to be added is invalid, no menu items will be added.
+* If there are some valid and invalid menu items, only valid menu items will be added.
+* Menu Item Names must be separated with "_". Example: If the Menu Item Name is "Chocolate Cake", the
+user must specify "Chocolate_Cake"
+* Menu Item Names are case-sensitive.
+* If the user had already reserved a meal before, user cannot reserve again.
+* Menu Item Type is not case-sensitive.
+
+Example of usage: <br>
+* `reserveMeal fid/MU8401 ic/W6235354B drinks/coke` <br>
+* `reserveMeal fid/MU1234 ic/W6235354B dessert/chocolate_cake main/chicken_wing` <br>
+* `reserveMeal fid/MU3456 ic/W6235354B appetizer/SALAD main/chicken_chop DRINKS/pepsi` <br>
+
+### Remove in-flight meal reservation: `deleteMealReservation`
+
+Removes an in-flight meal reservation for a customer on a specific flight route.
+
+Format: `deleteMealReservation ic/CUSTOMERID fid/FLIGHTID`
+
+* Customer must exist.
+* Flight route must exist.
+* Customer must have booked a flight route.
+* Customer must have booked a meal.
+
+Example of usage: <br>
+* `deleteMealReservation fid/MU8401 ic/W6235354B` <br>
+* `deleteMealReservation ic/W6235354B fid/MU8401` <br>
+
+### Find in-flight meal reservation: `findMealReservation`
+
+Find in-flight meal reservation for a customer on a specific flight route.
+
+Format: `findMealReservation ic/CUSTOMERID fid/FLIGHTID`
+
+* Customer must exist.
+* Flight route must exist.
+
+Example of usage: <br>
+* `findMealReservation fid/MU8401 ic/W6235354B` <br>
+* `findMealReservation ic/W6235354B fid/MU8401` <br>
+
+### List all existing meal reservations: `listMealReservations`
+
+List all existing meal reservations made by all customers on all flight routes.
+
+Format: `listMealReservations`
+
+Example of usage: <br>
+* `listMealReservations`
 
 ## Staff 
 ### Add staff object: `addStaff`
@@ -277,6 +345,8 @@ Format: `deleteStaff  id/ID pw/PW L`
 Example of usage: <br>
 * `deleteStaff id/1 pw/123wer ` <br>
 
+
+## Exit the System
 
 ### Exit the system: `bye`
 
@@ -308,9 +378,13 @@ Action | Format| Examples
 **Create flight booking**| `book ic/IC fid/FLIGHT_ID` | `book ic/W9848113C fid/SQ123`
 **Remove flight booking**| `deleteBooking INDEX` | `deleteBooking 2`
 **List all flight bookings**| `listBooking` | `listBooking`
-**Add Menu Item**| `addMenuItem name/MENU_ITEM_NAME type/MENU_ITEM_TYPE price/MENU_ITEM_PRICE`| `addMenuItem name/coke type/drinks price/0.9`
+**Add Menu Item**| `addMenuItem name/MENU_ITEM_NAME type/MENUITEMTYPE price/MENUITEMPRICE`| `addMenuItem name/coke type/drinks price/0.9`
 **Delete menu item**| `deleteMenuItem INDEX` | `deleteMenuItem 4`
 **List all menu items**| `listMenuItems`| `listMenuItems`
-**Find menu items by name**| `findMenuItemName NAME` | `findMenuItemName coke`
-**Find menu items by type**| `findMenuItemType MENU_ITEM_TYPE` | `findMenuItemType drinks`
+**Find menu items by name**| `findMenuItemName MENU_ITEM_NAME` | `findMenuItemName coke`
+**Find menu items by type**| `findMenuItemType MENUITEMTYPE` | `findMenuItemType drinks`
+**Add Meal Reservation**| `reserveMeal ic/CUSTOMERID fid/FLIGHTID MENUITEMTYPE/MENU_ITEM_NAME [MENUITEMTYPE/MENU_ITEM_NAME]` | `reserveMeal fid/MU8401 ic/W6235354B drinks/coke`
+**Remove Meal Reservation**| `deleteMealReservation ic/CUSTOMERID fid/FLIGHTID` | `deleteMealReservation fid/MU8401 ic/W6235354B`
+**Find Meal Reservation**| `findMealReservation ic/CUSTOMERID fid/FLIGHTID` |  `findMealReservation fid/MU8401 ic/W6235354B`
+**List all Meal Reservation**| `listMealReservations` | `listMealReservations`
 **Exit the system**| `bye` | `bye` 
