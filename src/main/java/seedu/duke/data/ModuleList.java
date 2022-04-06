@@ -1,5 +1,7 @@
 package seedu.duke.data;
 
+import seedu.duke.exceptions.NoSuchModuleException;
+
 import java.util.ArrayList;
 
 public class ModuleList {
@@ -26,7 +28,7 @@ public class ModuleList {
      * @param moduleCode the module code to be removed
      */
 
-    public Module removeModule(String moduleCode) {
+    public Module removeModule(String moduleCode) throws NoSuchModuleException {
         Module module = getModule(moduleCode);
         list.remove(module);
         return module;
@@ -34,16 +36,17 @@ public class ModuleList {
 
     /**
      * Returns the module in the module list with the given module code.
-     * @param moduleCode The module code to search for
-     * @return the associated module if it exists, or null if it does not.
+     * @param moduleCode The module code to search for.
+     * @return The associated module if it exists.
+     * @throws NoSuchModuleException If the module does not exist.
      */
-    public Module getModule(String moduleCode) {
+    public Module getModule(String moduleCode) throws NoSuchModuleException {
         for (Module m : list) {
             if (m.getModuleCode().equals(moduleCode)) {
                 return m;
             }
         }
-        return null;
+        throw new NoSuchModuleException();
     }
 
     public ArrayList<Module> getModuleList() {
@@ -73,6 +76,11 @@ public class ModuleList {
      * @return true if a module in the module list already has that module code, or false otherwise.
      */
     public boolean isModuleExists(String moduleCode) {
-        return (getModule(moduleCode) != null);
+        try {
+            getModule(moduleCode);
+            return true;
+        } catch (NoSuchModuleException e) {
+            return false;
+        }
     }
 }
