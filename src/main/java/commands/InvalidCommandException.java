@@ -44,6 +44,8 @@ public class InvalidCommandException extends Exception {
             + "Do you mean 'schedule /clear <day number [1-7]>?'";
     public static final String INVALID_HELP_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'help'?";
+    public static final String INVALID_EXIT_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
+            + "Do you mean 'exit'?";
 
     private String throwingClass;
 
