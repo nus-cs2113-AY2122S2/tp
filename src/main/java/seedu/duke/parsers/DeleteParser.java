@@ -10,6 +10,9 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.util.StringConstants;
 
+/**
+ * This Parser supports the "del" command.
+ */
 public class DeleteParser extends Parser {
     private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
@@ -17,9 +20,10 @@ public class DeleteParser extends Parser {
     private static final String TASK_NUMBER_STR = StringConstants.ERROR_TASK_NUMBER_FAILED;
 
     // Unescaped regex for testing:
-    // (task\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?|mod\s+(?<moduleCode>\w+))(?<invalid>.*)
-    private static final String DELETE_FORMAT = "(task\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?|"
-            + "mod\\s+(?<moduleCode>\\w+))(?<invalid>.*)";
+    // (task\s+(?<taskNumber>\d+)(\s+(-m|(?<invalidModFlag>.*))\s+(?<taskModule>\w+))?
+    // |mod\s+(?<moduleCode>\w+))(?<invalid>.*)
+    private static final String DELETE_FORMAT = "(task\\s+(?<taskNumber>\\d+|(?<invalidNumber>.*))"
+            + "(\\s+(-m|(?<invalidModFlag>.*))\\s+(?<taskModule>\\w+))?|mod\\s+(?<moduleCode>\\w+))(?<invalid>.*)";
 
     public DeleteParser() {
         super();
@@ -28,6 +32,8 @@ public class DeleteParser extends Parser {
         groupNames.add(TASK_MODULE);
         groupNames.add(MODULE_CODE);
         groupNames.add(INVALID);
+        groupNames.add(INVALID_MOD_FLAG);
+        groupNames.add(INVALID_NUMBER);
     }
 
     @Override
