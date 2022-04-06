@@ -1,13 +1,14 @@
 package seedu.duke.eventlists;
 
+import seedu.duke.exceptions.EventExistsException;
+import seedu.duke.exceptions.InvalidDateException;
 import seedu.duke.exceptions.EventDoesNotExist;
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.exceptions.InvalidDateException;
-import seedu.duke.exceptions.InvalidDeleteEventException;
 import seedu.duke.storage.EventListFileManager;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import seedu.duke.Ui;
 
@@ -28,15 +29,19 @@ public class EventList {
         return this.eventList;
     }
 
-    public void add(String description, String atString) throws InvalidDateException {
+    public void add(String description, String atString) throws InvalidDateException, EventExistsException {
+        LocalDate at;
         try {
-            LocalDate at = LocalDate.parse(atString);
-            Event event = new Event(description, at);
-            eventList.add(event);
-            ui.printEventAdded(event);
+            at = LocalDate.parse(atString);
         } catch (Exception e) {
             throw new InvalidDateException();
         }
+        if (eventExists(description, at)) {
+            throw new EventExistsException();
+        }
+        Event event = new Event(description, at);
+        eventList.add(event);
+        ui.printEventAdded(event);
     }
 
     public void delete(String n) throws EventDoesNotExist {
@@ -48,6 +53,18 @@ public class EventList {
         } catch (Exception e) {
             throw new EventDoesNotExist();
         }
+    }
+
+    public boolean eventExists(String description, LocalDate at) {
+        String atString = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        for (Event e : eventList) {
+            String d = e.getDescription();
+            String a = e.getAt();
+            if (d.equals(description) && a.equals(atString)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void save() throws IOException, HotelLiteManagerException {

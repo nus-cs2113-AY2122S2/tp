@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event {
-    protected LocalDate at;
+    public LocalDate at;
     public String description;
 
     public Event(String description, LocalDate at) {

@@ -17,7 +17,7 @@ public class AddEventCommand extends Command {
     private String description;
     private String at;
     private static final String EVENT_INDICATE = "/";
-    private static final int ONLY_ONE_FIELD_ENTERED = 1;
+    private static final int NUMBER_OF_FIELDS = 2;
     private static Logger logger = Logger.getLogger("Add Event");
 
     public AddEventCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
@@ -27,7 +27,7 @@ public class AddEventCommand extends Command {
         }
         String[] input = extractInput(commandStringWithoutCommand);
         String description = input[0].trim();
-        if (input.length == ONLY_ONE_FIELD_ENTERED) {
+        if (input.length != NUMBER_OF_FIELDS) {
             logger.log(Level.INFO, "only one field entered");
             throw new InvalidEventException();
         }
