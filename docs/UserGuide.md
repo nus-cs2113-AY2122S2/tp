@@ -326,8 +326,8 @@ Prints a list of commands for storing credit cards as a payment method.
 > help /cc
 ---------------------------------------Credit Card Help Page---------------------------------------
 1. Listing all Credit Cards: list /cc
-2. Adding a Credit Card: add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CREDIT_LIMIT] /bal [CREDIT CARD BALANCE]
-3. Updating an Expenditure entry: update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]
+2. Adding a Credit Card: add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CREDIT_LIMIT]
+3. Updating a Credit Card: update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT]
 4. Removing a credit card: delete /cc [INDEX]
 5. Exiting the program: bye
 ---------------------------------------------------------------------------------------------------
@@ -424,7 +424,7 @@ $500.
 
 > update /cc 1 /n OCBC /cb 1.5 /cl 500
 Successfully set credit card 1 to :
-Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00]
+Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $500.00]
 ````
 
 > **💡 Note:**
