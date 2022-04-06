@@ -49,7 +49,7 @@ As such, we referenced AddressBook to segment the program into `Parser`, `Comman
 `Parser` is the first filter for text inputs read to the user. 
 As alluded to prior, one major consideration was to build it in a manner that can parse text input as effectively as possible. In considering text input, we divided the parsing into the following segments:
 
-<p align="center"> <code>`commandWord` `argumentTag/argumentValue` `[argumentTag/argumentValue]` `[...]`<\code>  </p>
+<p align="center"> <code>commandWord argumentTag/argumentValue [argumentTag/argumentValue] [...] <\code> <\p>
 
 To dispatch `argumentTag/argumentValue` strings to the correct `Command` class, the following logic is employed throughout `Parser` by `parseCommand`.
 
