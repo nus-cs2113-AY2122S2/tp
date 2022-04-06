@@ -178,12 +178,13 @@ How the `Logic` component works:
 Illustration of the interactions within the `Logic` component can be found
 in the sequence diagram below. The example given is for the creation of new workouts (`workout /new`):
 <br><br>
+
 ![logicComponentUML](uml/sequenceDiagrams/miscellaneous/images/logicComponentSD.png)
 <br><br>
 <span class="box info">:memo: This is a high level overview of how the creation of workouts
 is done. To improve readability, some classes and methods have been omitted from the diagram above.</span>
 
-<br>
+<br><br>
 Each command types is a feature of the WerkIt! application.
 Thus, the next section will explain the design of each
 features in detail.
