@@ -16,24 +16,37 @@ Enhancements implemented:
    - `Ui` class to print welcome message and read user's input.
    - `Parser` class to make sense of user's input.
    - `Command` abstract class for Commands to inherit from.
+   - Allows the team to have a common foundation to build upon and sets the architecture structure.
+   - Crucial to get the design right as it affects the way future features are implemented.
 
 
 2. Added the `Ui` class.
+   - Prints welcome message and reads user's input.
    - Implemented the `>` prompt to help the user differentiate between their input and the program's output.
-   - Sourced for 49 financial tips to be printed on startup.
+   - Sourced for 49 financial tips, of which 1 would be randomly chosen to be printed on startup.
+   - Financial tips can educate the user and make the startup page more interactive.
 
 
 3. Set up the `HelpCommand` class.
-   - Outline the initial design for the help page.
+   - Prints a list of supported commands formats for reference.
+   - Outlined the initial design for the help page.
+   - Provides the user a convenient way to view command formats should they forget.
 
 
-4. Added the `User` class.
+4. Added Add, Delete, Update and List functionalities for `Income`.
+   - Users are now able to track their sources of income.
+   - As a Personal Finance app, it is imperative that income can be tracked, so that users can monitor their income
+inflow and outflow.
+   - Affected existing Add, Delete, Update and List commands as these commands were also used to add `Expenditure` and
+`CreditCard`.
+
+
+5. Added the `User` class.
    - Abstracts out `ExpenditureList`, `CreditCardList` and `IncomeList` classes into 1 class, increasing OOP.
-
-
-5. Added Add, Delete, Update and List functionalities for `Income`.
-   - User is now able to track their sources of income.
-
+   - Improves the code as instead of passing 3 lists into the method, only the `User` class is needed.
+   - Affected a majority of existing code as previous methods had the 3 lists as parameters, and required significant 
+changes.
+   
 
 6. Miscellaneous
    - Added JUnit tests for `HelpCommand`, `AddCommand` and `DeleteCommand`.
@@ -58,20 +71,20 @@ Enhancements implemented:
 <br/>
 
 ### DG Contribution
-1. Wrote the Architecture overview portion.
+1. Wrote the `Architecture overview` portion.
    - Added Fig 1 - Architecture Diagram.
    - Added Fig 2 - Sequence Diagram.
 
 
-2. Wrote the Ui and Parser Component overview portion.
+2. Wrote the `Ui` and `Parser Component overview` portion.
    - Added Fig 3 - Ui Class Diagram.
    - Added Fig 4 - Parser Class Diagram.
 
 
-3. Refined the Add Command implementation portion.
+3. Refined the `Add Command implementation` portion.
 
 
-4. Wrote the Add Income implementation portion.
+4. Wrote the `Add Income implementation` portion.
    - Added Fig 10 - Add Income Sequence Diagram.
 
 <br/>
