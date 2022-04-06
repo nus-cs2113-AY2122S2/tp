@@ -116,12 +116,14 @@ The price of dish:
 ## Usage
 When using `Order Management`, the program pops up a select panel to ask for action:
 ```aidl
-(0) Exit
+(0) Exit Order Menu
 (1) Create an order
 (2) Delete an order
 (3) Get total price of an order
 (4) Get total price of all orders
 (5) Print receipt
+(6) Display order list
+(7) Display dish menu
 ******************************
 Enter choice: 
 ```
@@ -238,6 +240,31 @@ If the user input is invalid, the program issues an error.
 Printing receipt...
 Invalid order index.
 ```
+
+## Display order list (indexed as 6)
+When using `Display order list`, the user checks the order list.
+
+> Enter `6` in `Order Menu` 
+
+```aidl
+Enter choice: 6
+Printing all orders...
+Order 1:
+Chicken Rice ---- $3.5
+Mala Hotpot Set A ---- $10.0
+Total Price: 13.5
+Order 2:
+Chicken Rice ---- $3.5
+Mala Hotpot Set A ---- $10.0
+Total Price: 13.5
+```
+
+## Display dish menu (indexed as 7)
+When using `Display dish menu`, the user checks the dish menu for reference. The function is the same as `List dish`.
+> Enter `7` in `Order Menu` 
+
+
+
 ## Staff Management
 
 ### Introduction
