@@ -1,6 +1,7 @@
 //@@author yanjie1017
 
 package seedu.meetingjio.commands;
+
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.timetables.MasterTimetable;
@@ -112,6 +113,8 @@ public class EditCommand extends Command {
                 throw new InvalidAttributeValueException();
             }
             break;
+        default:
+            return;    
         }
     }
 
