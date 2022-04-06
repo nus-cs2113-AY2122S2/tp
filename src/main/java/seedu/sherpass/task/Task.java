@@ -140,6 +140,15 @@ public class Task {
         return result;
     }
 
+    public String printTask() {
+        String result = this.getDescription() + " (to do on: " + getDoOnDateString(false) + " - "
+                + doOnEndDateTime.toLocalTime().toString() + ")";
+        if (this.byDateTime != null) {
+            result += " (by: " + getByDateString() + ")";
+        }
+        return result;
+    }
+
     public void setTaskDescription(String taskDescription) {
         this.description = taskDescription;
     }

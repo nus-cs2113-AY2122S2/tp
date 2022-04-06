@@ -120,6 +120,10 @@ public class Ui {
         return output.toString();
     }
 
+    public void showError(String message) {
+        System.out.println("Command error: " + message);
+    }
+
     public boolean readYesNoCommand(String message) {
         System.out.println(message);
         while (true) {
