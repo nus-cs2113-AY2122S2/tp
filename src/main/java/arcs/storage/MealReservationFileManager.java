@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MealReservationFileManager {
+
+    private static final int TYPE_INDEX = 0;
+    private static final int NAME_INDEX = 1;
+    private static final int PRICE_INDEX = 2;
+
     private String dirPath = "data";
     private static final String FILE_NAME = "mealReservation.txt";
 
@@ -53,14 +58,19 @@ public class MealReservationFileManager {
         ArrayList<MenuItem> reservedMenuItems = new ArrayList<>();
         for (String record: records) {
             String[] data = record.split("/");
+            int record_length = data.length;
             Customer customer = new Customer(data[0], data[1], data[2], data[3]);
             Route route = new Route(data[4], data[5], data[6], data[7], data[8], Integer.parseInt(data[9]));
-            int index = 10;
+            int index = 11;
             while (data[index] != null) {
                 String[] menuItemData = data[index].split("\\|");
-                MenuItem menuItem = new MenuItem(menuItemData[0], menuItemData[1],menuItemData[2]);
+                MenuItem menuItem = new MenuItem(menuItemData[NAME_INDEX], menuItemData[TYPE_INDEX],
+                        menuItemData[PRICE_INDEX]);
                 reservedMenuItems.add(menuItem);
                 index++;
+                if (index == record_length) {
+                    break;
+                }
             }
             mealReservations.add(new MealReservation(customer,route,reservedMenuItems));
         }
