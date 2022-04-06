@@ -63,7 +63,7 @@ public class CommandParser {
     private static final String CHECK_ROOM_BY_LEVEL = "check level ";
     private static final String CHECK_BY_CATEGORY = "check category ";
     private static final String ASSIGN_HOUSEKEEPER = "assign ";
-    private static final String VIEW_HOUSEKEEPER_COMMAND = "view recorded housekeeper";
+    private static final String VIEW_HOUSEKEEPER_COMMAND = "view recorded housekeepers";
     private static final String VIEW_AVAILABLE_HOUSEKEEPER_DAY = "get available on ";
     private static final String RESET_AVAILABILITY = "is a new week";
     private static final String DELETE_PROFILE = "delete housekeeper ";
@@ -71,7 +71,6 @@ public class CommandParser {
     private static final String ADD_EVENT = "add event ";
     private static final String VIEW_EVENTS = "list events";
     private static final String DELETE_EVENT = "delete event ";
-
 
     /**
      * Parses the user-provided command and creates the relevant Command object.
@@ -90,7 +89,7 @@ public class CommandParser {
         } else if (userInputLowerCase.equals(BYE)) {
             userCommand = new ExitCommand();
         } else if (userInputLowerCase.startsWith(ADD_SATISFACTION_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_SATISFACTION_COMMAND, "").trim();
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_SATISFACTION_COMMAND, "").trim();
             userCommand = new AddSatisfactionCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.trim().equals(VIEW_SATISFACTIONS_COMMAND)) {
             userCommand = new ViewSatisfactionsCommand();
@@ -114,7 +113,7 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_HOUSEKEEPER_COMMAND, "");
             userCommand = new AddHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(ADD_PERFORMANCE_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_PERFORMANCE_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_PERFORMANCE_COMMAND, "");
             userCommand = new AddHousekeeperPerformanceCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.trim().equals(VIEW_PERFORMANCES_COMMAND)) {
             userCommand = new ViewHousekeeperPerformancesCommand();

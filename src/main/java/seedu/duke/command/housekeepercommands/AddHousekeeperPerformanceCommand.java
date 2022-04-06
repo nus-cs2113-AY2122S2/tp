@@ -4,20 +4,23 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.duke.ParsingUtils;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.DuplicateCommandException;
+import seedu.duke.exceptions.EmptyHousekeeperPerformanceRatingException;
+import seedu.duke.exceptions.EmptyHousekeeperPerformanceNameException;
+import seedu.duke.exceptions.InvalidHousekeeperPerformanceNameException;
+import seedu.duke.exceptions.InvalidHousekeeperPerformanceRatingException;
+import seedu.duke.exceptions.RepeatHousekeeperPerformanceNameException;
+import seedu.duke.exceptions.NonexistentHousekeeperException;
 import seedu.duke.housekeeperperformancelists.HousekeeperPerformanceList;
 import seedu.duke.housekeeperperformancelists.HousekeeperPerformance;
 import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.ListContainer;
 
 import seedu.duke.command.Command;
-import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.exceptions.InvalidCommandException;
-import seedu.duke.exceptions.EmptyHousekeeperPerformanceNameException;
-import seedu.duke.exceptions.EmptyHousekeeperPerformanceRatingException;
-import seedu.duke.exceptions.InvalidHousekeeperPerformanceRatingException;
-import seedu.duke.exceptions.RepeatHousekeeperPerformanceNameException;
-import seedu.duke.exceptions.NonexistentHousekeeperException;
 import seedu.duke.storage.HousekeeperPerformanceFileManager;
 
 
@@ -29,7 +32,9 @@ import seedu.duke.storage.HousekeeperPerformanceFileManager;
 public class AddHousekeeperPerformanceCommand extends Command {
     private static Logger logger = Logger.getLogger("housekeeperPerformanceLogger");
     private static final String DELIMITER = "/";
+    private static final String ADD_PERFORMANCE_COMMAND = "add performance";
     private HousekeeperPerformance housekeeperPerformance;
+    private ParsingUtils parsingUtils = new ParsingUtils();
 
     /**
      * Takes in the user input and checks if the formatting of the command for
@@ -43,12 +48,15 @@ public class AddHousekeeperPerformanceCommand extends Command {
      *                                   the rating is invalid (not an integer from 1-5 inclusive).
      */
     public AddHousekeeperPerformanceCommand(String userInput) throws HotelLiteManagerException {
+        if (userInput.contains(ADD_PERFORMANCE_COMMAND)) {
+            throw new DuplicateCommandException();
+        }
         if (!userInput.contains(DELIMITER)) {
             logger.log(Level.WARNING, "A '/' character is needed to separate the housekeeper's name "
                     + "from their rating.");
             throw new InvalidCommandException();
         }
-        if (countSlashes(userInput) > 1) {
+        if (parsingUtils.countSlashes(userInput) > 1) {
             logger.log(Level.WARNING, "More than one '/' character detected. There should only be a single '/'"
                     + " that separates the housekeeper's name from their performance.");
             throw new InvalidCommandException();
@@ -61,17 +69,6 @@ public class AddHousekeeperPerformanceCommand extends Command {
         int housekeeperRating = extractHousekeeperRating(userInput);
         HousekeeperPerformance housekeeperPerformance = new HousekeeperPerformance(housekeeperName, housekeeperRating);
         setHousekeeperPerformance(housekeeperPerformance);
-    }
-
-    public int countSlashes(String userInput) {
-        int slashCount = 0;
-        for (int i = 0; i < userInput.length(); i++) {
-            String curChar = Character.toString(userInput.charAt(i));
-            if (curChar.equals(DELIMITER)) {
-                slashCount += 1;
-            }
-        }
-        return slashCount;
     }
 
     /**
@@ -88,6 +85,9 @@ public class AddHousekeeperPerformanceCommand extends Command {
             housekeeperName = splitInput[0].trim();
             if (housekeeperName.isEmpty()) {
                 throw new EmptyHousekeeperPerformanceNameException();
+            }
+            if (!parsingUtils.isAlpha(housekeeperName)) {
+                throw new InvalidHousekeeperPerformanceNameException();
             }
         } catch (IndexOutOfBoundsException e) {
             throw new EmptyHousekeeperPerformanceNameException();
