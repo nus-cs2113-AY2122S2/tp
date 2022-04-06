@@ -20,7 +20,6 @@ public class Timetable {
     public static final int LESSONS_ONLY = 1;
     public static final int MEETINGS_ONLY = 2;
 
-
     public Timetable(String name) {
         this.name = name;
         this.list = new ArrayList<>();
@@ -173,8 +172,9 @@ public class Timetable {
     public String listTimetable(int constraint) {
         String str = "";
         for (int i = 0; i < list.size(); i++) {
-            if ((constraint == LESSONS_ONLY && list.get(i) instanceof Meeting)
-                    || (constraint == MEETINGS_ONLY && list.get(i) instanceof Lesson)) {
+            boolean isMeetingGivenListLessons = constraint == LESSONS_ONLY && list.get(i) instanceof Meeting;
+            boolean isLessonGivenListMeetings = constraint == MEETINGS_ONLY && list.get(i) instanceof Lesson;
+            if (isMeetingGivenListLessons || isLessonGivenListMeetings) {
                 continue;
             }
             int listIndex = i + 1;
@@ -196,7 +196,7 @@ public class Timetable {
      * For each event in the timetable, obtain its corresponding day, start time and end time in the appropriate format.
      * Indicate 1 (BUSY) for every minute that the user is attending an event.
      *
-     * @param busySlots 7 x 960 array representing the timeframe from 0800 to 2359 for each day. 1 indicates BUSY and 0
+     * @param busySlots 7 x 1440 array representing the timeframe from 0000 to 2359 for each day. 1 indicates BUSY and 0
      *                  indicates FREE
      */
     public void populateBusySlots(int[][] busySlots) {

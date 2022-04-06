@@ -224,9 +224,10 @@ The event has been updated to the following:
 Shows a list of timeslots where everyone is free. 
 
 Format: `free [DURATION]`
-- If `DURATION` is specified, only timeslots which are longer than the duration will be shown.
+- If `DURATION` is specified, only timeslots which are longer than or equal the duration will be shown.
 - Else, all common timeslots will be shown.
-- Common timeslots are kept from 0800 to 2359.
+- `DURATION` is interpreted in hours, and it has to be a positive integer not more than 24.
+- Common timeslots are kept from 0000 to 2359 for each day, so `free 24` essentially identifies common free days.
 
 Example of usage:
 
