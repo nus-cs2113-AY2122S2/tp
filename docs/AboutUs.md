@@ -6,4 +6,4 @@
 | ![](https://via.placeholder.com/100.png?text=Photo)                                                           |  Lim Shi Han   |     [Github](https://github.com/Lim-Shi-Han)     | [Portfolio](team/lim-shi-han.md)  |
 | ![](https://via.placeholder.com/100.png?text=Photo)                                                           |    Ron John    |     [Github](https://github.com/)     | [Portfolio](team/johndoe.md)  |
 | ![](https://via.placeholder.com/100.png?text=Photo)                                                           |  Wang Haoxuan  |  [Github](https://github.com/BotBw)   | [Portfolio](team/johndoe.md)  |
-| ![](https://hk.portal-pokemon.com/play/resources/pokedex/img/pm/e724713a13271ef531f5410da782e24f729cb6d6.png) |   Wang Ziyan   | [Github](https://github.com/wang1351) | [Portfolio](team/johndoe.md)  |
+| ![](https://hk.portal-pokemon.com/play/resources/pokedex/img/pm/e724713a13271ef531f5410da782e24f729cb6d6.png) |   Wang Ziyan   | [Github](https://github.com/wang1351) | [Portfolio](team/wang1351.md)  |
