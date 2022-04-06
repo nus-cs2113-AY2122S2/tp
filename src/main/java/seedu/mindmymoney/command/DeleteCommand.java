@@ -72,16 +72,6 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Checks if the position to delete is within the bounds of the credit card list.
-     *
-     * @param positionToDelete position of index to delete.
-     * @return true if position is within the bounds, false otherwise.
-     */
-    public boolean isOutOfCreditCardListBounds(int positionToDelete) {
-        return (positionToDelete + 1 <= 0 || positionToDelete + 1 > creditCardList.size());
-    }
-
-    /**
      * Updates the total expenditure field in the credit card specified in the expenditure item.
      *
      * @param cardName Name of credit card to be updated.
@@ -159,12 +149,12 @@ public class DeleteCommand extends Command {
 
             String getNumber = splitMessage[INDEX_OF_THIRD_ITEM];
             int positionToDelete = Integer.parseInt(getNumber) + LIST_INDEX_CORRECTION;
-            assert positionToDelete >= 0 : "Index should always be >= 0";
 
             System.out.println("I have removed "
                     + creditCardList.get(positionToDelete).getNameOfCard()
                     + " from your list of credit card(s)." + System.lineSeparator());
             creditCardList.delete(positionToDelete);
+            assert positionToDelete >= 0 : "Index should always be >= 0";
 
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("INDEX must be a number");

@@ -15,4 +15,6 @@ public class Indexes {
     public static final int MIN_STUDENT_INCOME = 0;
     public static final int MAX_STUDENT_INCOME = 1000000;
     public static final int MIN_EXPENDITURE_AMOUNT = 0;
+    public static final int MIN_CASHBACK_AMOUNT = 0;
+    public static final int MAX_CASHBACK_AMOUNT = 100;
 }

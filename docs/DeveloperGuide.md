@@ -1,33 +1,33 @@
 # Developer Guide
 
 ## Content Page
-* [Content Page](#Content-Page)
+* [Content Page](#content-page)
 * [Introduction](#introduction)
     * [Purpose](#purpose)
-    * [Acknowledgements](#Acknowledgements)
-    * [Using the Developer Guide](#Using-the-Developer-Guide)
-* [Design](#Design)
-    * [Technologies used](#Technologies-used)
-    * [Architecture Overview](#Architecture-Overview)
-    * [Component Overview ](#Component-Overview )
-    * [UI component](#UI-component)
-    * [Parser component](#Parser-component)
-    * [Command component](#Command-component)
-    * [Storage component](#Storage-component)
-* [Implementation](#Implementation)
-    * [AddCommand Feature](#AddCommand-Feature)
-        * [AddCommand Subcomponents](#AddCommand-Subcomponents)
-        * [Add Credit Card Command](#Add-Credit-Card-Command)
-        * [Add Expenditure Command](#Add-Expenditure-Command)
-        * [AddCommand Design Considerations](#AddCommand-Design-Considerations)
-    * [CalculateCommand feature](#CalculateCommand-feature)
-    * [ListCommand feature ](#ListCommand-feature)
-* [Appendix Requirements](#Appendix-Requirements)
-  * [Product scope](#Product-scope)
-  * [User Stories](#User-Stories)
-  * [Non-Functional Requirements](#Non-Functional-Requirements)
-  * [Glossary](#Glossary)
-* [Instructions for manual testing](#Instructions-for-manual-testing)
+    * [Acknowledgements](#acknowledgements)
+    * [Using the Developer Guide](#using-the-developer-guide)
+* [Design](#design)
+    * [Technologies used](#technologies-used)
+    * [Architecture Overview](#architecture-overview)
+    * [Component Overview ](#component-overview )
+    * [UI component](#ui-component)
+    * [Parser component](#parser-component)
+    * [Command component](#command-component)
+    * [Storage component](#storage-component)
+* [Implementation](#implementation)
+    * [AddCommand Feature](#addCommand-feature)
+        * [AddCommand Subcomponents](#addcommand-subcomponents)
+        * [Add Credit Card Command](#add-credit-card-command)
+        * [Add Expenditure Command](#add-expenditure-command)
+        * [AddCommand Design Considerations](#addCommand-design-considerations)
+    * [CalculateCommand feature](#calculatecommand-feature)
+    * [ListCommand feature ](#listcommand-feature)
+* [Appendix Requirements](#appendix-requirements)
+  * [Product scope](#product-scope)
+  * [User Stories](#user-stories)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Introduction
 
@@ -51,7 +51,7 @@ Along the guide you may encounter several icons. These icons will provide severa
 > - This tells you that there is some **important** information you should take note of to prevent issues from arising
     when you are using the application.  
 
-Click on the hyperlinks in the [content page](#Content-Page) to quickly navigate the developer's guide.
+Click on the hyperlinks in the [content page](#content-page) to quickly navigate the developer's guide.
 
 ## Design
 ### Technologies used
@@ -222,6 +222,12 @@ The `AddCommand.addExpenditure()` command is facilitated by the `AddCommand`. By
    into the `ExpenditureList`.
 4. The `AddCommand.addExpenditure()` object prints a list to show the user what it has saved.
 5. The `AddCommand.addExpenditure()` returns to `AddCommand`.
+
+#### Add Income Command
+MindMyMoney allow users to track their sources of income. A user can add a new income through the
+`AddCommand.addCreditCard()` command by specifying the credit card name, cash back, card limit and balance.
+
+
 
 #### AddCommand Design Considerations
 Aspect: How to ask user for the fields of input.

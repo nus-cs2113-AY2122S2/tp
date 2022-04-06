@@ -25,17 +25,17 @@ class ListCommandTest {
         String firstInputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(firstInputString, user).executeCommand();
         String listInString = new ListCommand("/e", user).expenditureListToString();
-        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
+        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
 
         String secondInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(secondInputString, user).executeCommand();
         listInString = new ListCommand("/e", user).expenditureListToString();
-        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
-                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
+        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.00 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
 
         String listInString2 = new ListCommand("/e ", user).expenditureListToString();
-        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
-                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString2);
+        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.00 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString2);
     }
 
     /**
@@ -52,7 +52,7 @@ class ListCommandTest {
         String firstInputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(firstInputString, user).executeCommand();
         String listInString = new ListCommand("/e 30/03/2022", user).expenditureListToString();
-        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
+        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
 
         String secondInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(secondInputString, user).executeCommand();
@@ -61,8 +61,8 @@ class ListCommandTest {
 
         new AddCommand(inputString3, user).executeCommand();
         listInString = new ListCommand("/e 30/03/2022", user).expenditureListToString();
-        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
-                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
+        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.00 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
     }
 
     /**
@@ -79,7 +79,7 @@ class ListCommandTest {
         String inputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
         String listInString = new ListCommand("/e 03/2022", user).expenditureListToString();
-        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
+        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
 
         String secondInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(secondInputString, user).executeCommand();
@@ -88,8 +88,8 @@ class ListCommandTest {
 
         new AddCommand(thirdInputString, user).executeCommand();
         listInString = new ListCommand("/e 03/2022", user).expenditureListToString();
-        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
-                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
+        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.00 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
     }
 
     /**
@@ -106,7 +106,7 @@ class ListCommandTest {
         String inputString = "/e /pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
         String listInString = new ListCommand("/e 2022", user).expenditureListToString();
-        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
+        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
 
         String secondInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(secondInputString, user).executeCommand();
@@ -115,8 +115,8 @@ class ListCommandTest {
 
         new AddCommand(thirdInputString, user).executeCommand();
         listInString = new ListCommand("/e 2022", user).expenditureListToString();
-        assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
-                + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
+        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "2. $69.00 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
     }
 
     /**

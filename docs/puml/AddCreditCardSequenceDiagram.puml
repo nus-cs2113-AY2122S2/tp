@@ -2,12 +2,11 @@
 !include Style.puml
 
 box addCreditCard()
-participant ":Parser" as Parser LOGIC_COLOR_T1
-participant "Command:AddCommand" as AddCommand LOGIC_COLOR_T1
-participant ":GeneralFunctions" as GeneralFunctions LOGIC_COLOR_T1
-'participant ":AddCommandInputTest" as AddCommandInputTest LOGIC_COLOR_T1
-participant ":CreditCard" as CreditCard LOGIC_COLOR_T1
-participant ":creditCardList" as CreditCardList LOGIC_COLOR_T1
+participant ":Parser" as Parser PARSER
+participant "AddCommand:Command" as AddCommand COMMANDS
+participant ":GeneralFunctions" as GeneralFunctions HELPER
+participant ":CreditCard" as CreditCard USERFINANCIAL
+participant ":CreditCardList" as CreditCardList DATA
 end box
 
 Parser -> AddCommand: AddCommand.executeCommand()

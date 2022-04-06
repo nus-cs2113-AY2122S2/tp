@@ -42,12 +42,18 @@ public class PropertyList {
     }
 
     /**
-     * Retrieves the value associated with the given property.
+     * Retrieves the value associated with the given property. If the property does not exist,
+     * throw a MindMyMoneyException whose message is the property.
      * @param property The property whose value to retrieve.
      * @return The value.
+     * @throws MindMyMoneyException if the property is not in the PropertyList.
      */
-    public String getValue(String property) {
-        return properties.get(property);
+    public String getValue(String property) throws MindMyMoneyException {
+        String value = properties.get(property);
+        if (value == null) {
+            throw new MindMyMoneyException(property);
+        }
+        return value;
     }
 
     /**
@@ -152,9 +158,20 @@ public class PropertyList {
      * @return The index, after having been moved forward.
      */
     private static int consumeWhitespace(String string, int propertyStart) {
-        while (propertyStart < string.length() && string.charAt(propertyStart) == ' ')  {
+        while (isStartAtWhitespace(string, propertyStart))  {
             propertyStart++;
         }
         return propertyStart;
+    }
+
+    /**
+     * Checks if an index into a string points to whitespace.
+     * @param string The string
+     * @param propertyStart The index
+     * @return Whether or not the index is in range of the string, and produces a valid index.
+     */
+
+    private static boolean isStartAtWhitespace(String string, int propertyStart) {
+        return propertyStart < string.length() && string.charAt(propertyStart) == ' ';
     }
 }

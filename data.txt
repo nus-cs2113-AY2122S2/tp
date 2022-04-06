@@ -1,0 +1,7 @@
+# BEGIN EXPENDITURES
+# END EXPENDITURES
+# BEGIN CREDIT CARDS
+ "totalExpenditure": "0.0"  "monthlyCardLimit": "500.0"  "nameOfCard": "OCBC"  "cashback": "1.5" 
+# END CREDIT CARDS
+# BEGIN INCOME SOURCES
+# END INCOME SOURCES
