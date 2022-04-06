@@ -129,8 +129,7 @@ public class StorageFileTest {
             for (int i = 0; i < expenseTracker.getExpenseList().size(); i++) {
                 if (fileReader.hasNext()) {
                     assertEquals("E," + expenses[i], fileReader.nextLine());
-                }
-                else {
+                } else {
                     assertEquals(0, 1);
                 }
             }
@@ -138,8 +137,7 @@ public class StorageFileTest {
             for (int i = 0; i < studyManager.getModulesList().size(); i++) {
                 if (fileReader.hasNext()) {
                     assertEquals("S," + modules[i], fileReader.nextLine());
-                }
-                else {
+                } else {
                     assertEquals(0, 1);
                 }
             }
@@ -147,13 +145,11 @@ public class StorageFileTest {
             for (int i = 0; i < contactsManager.getContactsList().size(); i++) {
                 if (fileReader.hasNext()) {
                     assertEquals("C," + contacts[i], fileReader.nextLine());
-                }
-                else {
+                } else {
                     assertEquals(0, 1);
                 }
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
 
