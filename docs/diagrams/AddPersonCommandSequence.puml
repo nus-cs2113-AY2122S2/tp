@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+participant Main LOGIC_COLOR_T1
+Box " "#WHITE
+    participant ":CommandFactory" as CommandFactory COMMAND_COLOR
+    participant ":Parser" as Parser LOGIC_COLOR_T2
+    participant ":AddPersonCommand" as AddPersonCommand COMMAND_COLOR_T2
+end Box
+
+participant ":Family" as Family MODEL_COLOR
+
+-> Main: userInput
+activate Main
+Main -> CommandFactory: getCommand(userInput, family)
+activate CommandFactory
+CommandFactory -> Parser: parseCommandTypes(userInput)
+activate Parser
+Parser --> CommandFactory: keyword
+deactivate Parser
+create AddPersonCommand
+CommandFactory --> AddPersonCommand
+activate AddPersonCommand
+AddPersonCommand --> Parser: parseName(userInput)
+activate Parser
+Parser --> AddPersonCommand: name
+AddPersonCommand --> AddPersonCommand
+AddPersonCommand --> Parser: getValidGroupIndex(parseGroupIndex(userInput))
+Parser --> AddPersonCommand: index
+AddPersonCommand --> AddPersonCommand
+deactivate Parser
+AddPersonCommand --> CommandFactory: :AddPersonCommand
+deactivate AddPersonCommand
+CommandFactory --> Main: return :AddPersonCommand
+deactivate CommandFactory
+Main -> AddPersonCommand: execute()
+activate AddPersonCommand
+AddPersonCommand --> Family: addPerson(name, index)
+activate Family
+@enduml

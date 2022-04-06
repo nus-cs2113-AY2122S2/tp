@@ -5,9 +5,9 @@ skinparam groupInheritance 2
 !include style.puml
 
 Package Command as C {
-    class XYZCommand LOGIC_COLOR_T3
-    abstract class Command LOGIC_COLOR_T3
-    class CommandFactory LOGIC_COLOR_T2
+    class XYZCommand COMMAND_COLOR
+    abstract class Command COMMAND_COLOR
+    class CommandFactory COMMAND_COLOR_T1
 
 }
 
