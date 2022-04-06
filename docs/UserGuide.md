@@ -406,8 +406,8 @@ Format: `workout /update <workout index number> <new number of repetitions>`
 <span class = "warning box">:warning: Due to the limitation of the system, the maximum number of repetitions you can set
 is `2,147,483,647`.</span>
 
-<span class = "warning box">:warning: You are not allowed to create another workout with the same exercise name and
-repetition value as existing workouts.</span>
+<span class = "warning box">:warning: You are not allowed to update a workout's repetition value such that it will be
+identical to an existing workout. .</span>
 
 Click [here](#workout-commands) to have a better understanding of the parameters stated.
 
