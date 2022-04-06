@@ -1,0 +1,2 @@
+j
+1.[M] TITLE: m1		DAY: friday		START: 0000		END: 0800		MODE: online

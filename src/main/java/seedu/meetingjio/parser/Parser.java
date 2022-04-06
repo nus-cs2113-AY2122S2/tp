@@ -29,7 +29,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_MEETING;
@@ -153,7 +153,7 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
         } catch (NumberFormatException nfe) {
-            return new CommandResult(ERROR_INDEX_OUT_OF_BOUND);
+            return new CommandResult(ERROR_INVALID_INDEX);
         } catch (AssertionError ae) {
             logger.log(Level.INFO, "Assertion Error");
             return new CommandResult(ae.getMessage());
@@ -176,7 +176,7 @@ public class Parser {
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_DELETE);
         } catch (NumberFormatException nfe) {
-            return new CommandResult(ERROR_INDEX_OUT_OF_BOUND);
+            return new CommandResult(ERROR_INVALID_INDEX);
         } catch (AssertionError ae) {
             logger.log(Level.INFO, "Assertion Error");
             return new CommandResult(ae.getMessage());

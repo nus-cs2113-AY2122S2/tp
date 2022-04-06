@@ -15,7 +15,7 @@ import seedu.meetingjio.exceptions.InvalidTimeException;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_ATTRIBUTE_VALUE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,7 +66,7 @@ public class EditCommand extends Command {
         } catch (TimetableNotFoundException tnfe) {
             return editAbort(ERROR_INVALID_USER);
         } catch (IndexOutOfBoundsException ioe) {
-            return editAbort(ERROR_INDEX_OUT_OF_BOUND);
+            return editAbort(ERROR_INVALID_INDEX);
         }
     }
 
@@ -161,7 +161,7 @@ public class EditCommand extends Command {
      * Inform user that edit is aborted.
      *
      * @attribute
-     *event Event that user intends to edit
+     * event Event that user intends to edit
      */
     private String editAbort(String error) {
         return String.format("%s Edit aborted.", error);

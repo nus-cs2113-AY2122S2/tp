@@ -20,7 +20,7 @@ public class Messages {
     public static final String MESSAGE_WELCOME = "Welcome to MeetingJio!";
     public static final String MESSAGE_QUESTION_NAME = "How do I address you?";
     public static final String MESSAGE_HINT = "If you are unfamiliar with MeetingJio, "
-            + "you can view the list of commands available using the command 'help'";
+            + "you can view the list of commands available using the command 'help'.";
     public static final String MESSAGE_DIVIDER = "________________________________________________________"
             + "__________________________________________________";
     public static final String MESSAGE_GOODBYE = "See you again!";
@@ -43,7 +43,7 @@ public class Messages {
     public static final String MESSAGE_LIST_USER_MEETINGS = "To list a user's meetings: list_meeting [Name]\n";
     public static final String MESSAGE_FREE_GENERIC_FORMAT = "To find free timeslots: free\n";
     public static final String MESSAGE_FREE_SPECIFIC_FORMAT = "To find free timeslots given a minimum duration: free "
-            + "[duration]\n";
+            + "[Duration]\n";
     public static final String NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED = "New user added so all meetings "
             + "added so far will be deleted";
     public static final String MESSAGE_EXIT_FORMAT = "To exit the application: exit\n";
@@ -67,5 +67,5 @@ public class Messages {
             + "16. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
 
-    public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully";
+    public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully.";
 }

@@ -13,7 +13,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_DELETE;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS_ADD_MEETING;
 
@@ -269,7 +269,7 @@ public class ParserTest {
         String inputString = "delete n/john i/5";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
-        assertEquals(ERROR_INDEX_OUT_OF_BOUND, command.execute(masterTimetable));
+        assertEquals(ERROR_INVALID_INDEX, command.execute(masterTimetable));
     }
 
 }
