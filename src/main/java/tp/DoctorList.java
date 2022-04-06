@@ -16,7 +16,7 @@ public class DoctorList {
         size = 0;
     }
 
-    public Person getDoctor(int index) {
+    public Doctor getDoctor(int index) {
         return doctors.get(index - 1);
     }
 
@@ -58,7 +58,7 @@ public class DoctorList {
 
         }
         toPrint += ("You have " + size + " doctors recorded in the system."
-                            + System.lineSeparator() + boundary + System.lineSeparator());
+                            + System.lineSeparator() + boundary);
         return toPrint;
     }
 }

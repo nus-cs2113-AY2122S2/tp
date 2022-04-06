@@ -1,24 +1,6 @@
 package tp;
 
-import tp.command.AddDoctorCommand;
-import tp.command.AddPatientCommand;
-import tp.command.Command;
-import tp.command.GetAppointmentsOfDoctorCommand;
-import tp.command.DeleteDoctorCommand;
-import tp.command.SearchAppointmentCommand;
-import tp.command.AddPatientDescriptionCommand;
-import tp.command.ListAppointmentListCommand;
-import tp.command.ListPatientListCommand;
-import tp.command.HelpCommand;
-import tp.command.SearchPatientCommand;
-import tp.command.AddAppointmentCommand;
-import tp.command.SearchDoctorCommand;
-import tp.command.DeletePatientCommand;
-import tp.command.DeleteAppointmentCommand;
-import tp.command.EditDoctorCommand;
-import tp.command.ListDoctorListCommand;
-import tp.command.SortAppointmentByTimeCommand;
-import tp.command.EditPatientCommand;
+import tp.command.*;
 
 import java.util.Scanner;
 
@@ -217,6 +199,24 @@ public class Parser {
         }
     }
 
+    public Command parseEditAppointmentCommand(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /a") + 8,
+                dummy.indexOf("edit /a") + 9));
+        if (fullCommand.contains("/doctor")) {
+            String newInformation = dummy.substring(dummy.indexOf("/doctor") + 8);
+            return new EditAppointmentCommand(index, "d", newInformation);
+        } else if (fullCommand.contains("/patient")) {
+            String newInformation = dummy.substring(dummy.indexOf("/patient") + 9);
+            return new EditAppointmentCommand(index, "p", newInformation);
+        } else if (fullCommand.contains("/time")) {
+            String newInformation = dummy.substring(dummy.indexOf("/time") + 6);
+            return new EditAppointmentCommand(index, "t", newInformation);
+        } else {
+            throw new IHospitalException("Wrong format detected\n");
+        }
+    }
+
     public Command parse(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("add")) {
             return parseAddCommand(fullCommand);
@@ -236,6 +236,8 @@ public class Parser {
             return parseEditDoctorCommand(fullCommand);
         } else if (fullCommand.contains("edit /p")) {
             return parseEditPatientCommand(fullCommand);
+        } else if (fullCommand.contains("edit /a")) {
+            return parseEditAppointmentCommand(fullCommand);
         } else {
             throw new IHospitalException("Invalid command given\n");
         }
