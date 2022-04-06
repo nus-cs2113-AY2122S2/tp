@@ -33,7 +33,7 @@ public class AddLessonCommand extends Command {
     }
 
     /**
-     * Add lesson to the user's timetable
+     * Add lesson to the user's timetable.
      *
      * @param masterTimetable The collection of everyone's timetable
      * @return String Add confirmation showing that the lesson is added
