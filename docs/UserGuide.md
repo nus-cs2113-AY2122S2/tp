@@ -167,12 +167,13 @@ Allows you to view and change various user preferences which can affect other as
 
 - **Viewing available configuration options**
   
-  Lists the names of all available configuration options, as well as what you have them currently set to.<br><br>
+  Lists the names of all available configuration options, as well as what you have them currently set to.
+
   #### Format: `option`
 
   ##### Example:
   ```
-  >  option
+  > option
   
   ____________________________________________________________
   Available config settings:
@@ -191,7 +192,7 @@ Allows you to view and change various user preferences which can affect other as
   
   ##### Example: 
   ```
-  >  option SHOW_COMPLETED_TASKS
+  > option SHOW_COMPLETED_TASKS
   
   ____________________________________________________________
   SHOW_COMPLETED_TASKS
@@ -212,13 +213,13 @@ Allows you to view and change various user preferences which can affect other as
   
   ##### Example:
   ```
-  >  option SHOW_COMPLETED_TASKS=true
+  > option SHOW_COMPLETED_TASKS=true
   
   ____________________________________________________________
   Preferences updated: SHOW_COMPLETED_TASKS=true
   ____________________________________________________________
   ```
-<br>
+  <br>
 
   > 📔 <span style="color:#3333ff">**NOTE:**</span>
   >
@@ -252,7 +253,7 @@ The following configuration options currently exist:
   
   ##### Example 1:
   ```
-  >  add mod CS2101 4
+  > add mod CS2101 4
   
   ____________________________________________________________
   Hey! I have added this module!
@@ -262,7 +263,7 @@ The following configuration options currently exist:
 
   ##### Example 2:
   ```
-  >  add mod CS2113T 4 -d "Software Engineering"
+  > add mod CS2113T 4 -d "Software Engineering"
   ____________________________________________________________
   Hey! I have added this module!
   CS2113T (Software Engineering) (4MC, Grade: -)
@@ -291,7 +292,7 @@ The following configuration options currently exist:
   
   ##### Example 1:
   ```
-  >  add task "Review PR"
+  > add task "Review PR"
   ____________________________________________________________
   Hey! I have added this task under General tasks!
   ( ) Review PR []
@@ -300,7 +301,7 @@ The following configuration options currently exist:
   
   ##### Example 2:
   ```
-  >  add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour"
+  > add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour"
   ____________________________________________________________
   Hey! I have added this task under CS2113T (Software Engineering) (4MC, Grade: -)!
   ( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hours) []
@@ -347,7 +348,7 @@ The following configuration options currently exist:
 
   ##### Example 1:
   ```
-  >  del task 1
+  > del task 1
 
   ____________________________________________________________
   ( ) Review PR [] has been deleted.
@@ -356,7 +357,7 @@ The following configuration options currently exist:
   
   ##### Example 2:
   ```
-  >  del task 1 -m CS2113T
+  > del task 1 -m CS2113T
 
   ____________________________________________________________
   ( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hours) [] has been deleted.
@@ -378,7 +379,7 @@ The following configuration options currently exist:
 
   ##### Example:
   ```
-  >  edit mod CS2113T -d "Software Engineering & OOP"
+  > edit mod CS2113T -d "Software Engineering & OOP"
 
   ____________________________________________________________
   The description of CS2113T has been changed.
@@ -400,7 +401,7 @@ The following configuration options currently exist:
 
   ##### Example:
   ```
-  >  edit task 1 -m CS2113T -n "CS2113T Tutorial 2"
+  > edit task 1 -m CS2113T -n "CS2113T Tutorial 2"
 
   ____________________________________________________________
   The task name of Prepare for tutorial from CS2113T has been changed.
@@ -429,7 +430,7 @@ The `c` flag indicates that the task will be marked as completed, while the `u` 
 
 ##### Example 1:
 ```
->  mark c 1
+> mark c 1
 
 ____________________________________________________________
 Nice! I have marked this task as completed!
@@ -439,7 +440,7 @@ ____________________________________________________________
 
 ##### Example 2:
 ```
->  mark u 1 -m CS2113T
+> mark u 1 -m CS2113T
 ____________________________________________________________
 Ok! I have marked this task for you as uncompleted!
 ( ) CS2113T Tutorial 2 []
@@ -464,7 +465,7 @@ Allows you to add or delete a tag from the [specified task](#32-specifying-tasks
 
 ##### Example:
 ```
->  tag add 1 -m CS2113T project
+> tag add 1 -m CS2113T project
 
 ____________________________________________________________
 Tag "project" added:
@@ -490,7 +491,7 @@ If a [tag name](#47-managing-custom-tags-tag) is provided, only tasks with the a
 
 ##### Example 1:
 ```
->  list
+> list
 
 ____________________________________________________________
 Ok! Here are the task(s) in your list:
@@ -507,7 +508,7 @@ ____________________________________________________________
 
 ##### Example 2:
 ```
->  list project
+> list project
 
 ____________________________________________________________
 Ok! Here are the task(s) in your list:
@@ -527,7 +528,7 @@ ____________________________________________________________
 
 ### 4.9. Setting a module's grade: `grade`
 
-- Assigns a grade to a module of your choice.
+Assigns a grade to a module of your choice.
 
 #### Format: `grade MODULE_CODE MODULE_GRADE`
 
@@ -542,7 +543,7 @@ ____________________________________________________________
   
 ##### Example:
 ```
->  grade CS2113T A+
+> grade CS2113T A+
 
 ____________________________________________________________
 Your grade for CS2113T has been added.
@@ -559,7 +560,7 @@ Computes your GPA based the [inputted grades](#49-setting-a-modules-grade-grade)
 
 ##### Example:
 ```
->  gpa
+> gpa
 
 ____________________________________________________________
 Your GPA is 5.00! :)
@@ -576,7 +577,7 @@ Removes all your tasks and modules.
 
 ##### Example:
 ```
->  reset
+> reset
 
 ____________________________________________________________
 All modules and tasks have been removed.
@@ -593,7 +594,7 @@ Saves all your tasks and modules to the data file.
 
 ##### Example:
 ```
->  save
+> save
 
 ____________________________________________________________
 General tasks written to file.
