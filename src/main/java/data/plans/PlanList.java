@@ -419,20 +419,20 @@ public class PlanList {
     /**
      * Checks whether the workout is in the plan.
      *
-     * @param workoutToCheck        The workout to look for in the plan.
+     * @param oldWorkoutToCheck        The workout to look for in the plan.
      * @param updatedWorkoutToCheck The updated workout to look for in the plan.
      * @param plan                  An instance of the Plan class.
      * @return                      True if either workout or updated workout is found in the plan,
      *                              else false if the workout is not in the plan.
      * @throws ArrayIndexOutOfBoundsException   For operations which involves index checking.
      */
-    public boolean checkWorkoutInPlan(String workoutToCheck, String updatedWorkoutToCheck, Plan plan)
+    public boolean checkWorkoutInPlan(String oldWorkoutToCheck, String updatedWorkoutToCheck, Plan plan)
             throws ArrayIndexOutOfBoundsException {
         ArrayList<Workout> workoutsInPlanList = plan.getWorkoutsInPlanList();
         String workoutInPlanDetails;
         for (Workout workoutsInPlan : workoutsInPlanList) {
             workoutInPlanDetails = workoutsInPlan.toString();
-            if (workoutToCheck.equals(workoutInPlanDetails) || updatedWorkoutToCheck.equals(workoutInPlanDetails)) {
+            if (oldWorkoutToCheck.equals(workoutInPlanDetails) || updatedWorkoutToCheck.equals(workoutInPlanDetails)) {
                 return true;
             }
         }
@@ -461,20 +461,21 @@ public class PlanList {
 
     /**
      * Gets the index number of plans which includes the updated workout.
-     * @param workoutToCheck        The workout to look for in the plan.
+     *
+     * @param oldWorkoutToCheck        The workout to look for in the plan.
      * @param updatedWorkoutToCheck The updated workout to look for in the plan.
      * @return                      An Arraylist of integer which includes the index number of the
      *                              plan that includes the updated workout.
      * @throws ArrayIndexOutOfBoundsException   For operations which involves index checking.
      */
-    public ArrayList<Integer> findPlanContainsTargetWorkout(String workoutToCheck, String updatedWorkoutToCheck) throws
-             ArrayIndexOutOfBoundsException {
+    public ArrayList<Integer> findPlanContainsTargetWorkout(String oldWorkoutToCheck, String updatedWorkoutToCheck)
+            throws ArrayIndexOutOfBoundsException {
         Plan planObject;
         boolean isWorkoutInPlan = false;
         ArrayList<Integer> planIndexWithTargetWorkout = new ArrayList<Integer>();
         for (int i = 1; i <= getPlansDisplayList().size(); i++) {
             planObject = getPlanFromIndexNum(i);
-            isWorkoutInPlan = checkWorkoutInPlan(workoutToCheck, updatedWorkoutToCheck, planObject);
+            isWorkoutInPlan = checkWorkoutInPlan(oldWorkoutToCheck, updatedWorkoutToCheck, planObject);
             if (isWorkoutInPlan) {
                 planIndexWithTargetWorkout.add(i);
             }
@@ -535,18 +536,18 @@ public class PlanList {
         }
     }
 
-    public void updatePlanContainsUpdatedWorkout(String workoutToCheck,
+    public void updatePlanContainsUpdatedWorkout(String oldWorkoutToCheck,
                                                  String updatedWorkoutToCheck, Workout updatedWorkout) throws
             InvalidPlanException {
         ArrayList<Integer> planWithUpdatedWorkout
-                = findPlanContainsTargetWorkout(workoutToCheck, updatedWorkoutToCheck);
+                = findPlanContainsTargetWorkout(oldWorkoutToCheck, updatedWorkoutToCheck);
 
         if (planWithUpdatedWorkout.size() <= 0) {
             return;
         }
 
         if (planWithUpdatedWorkout.size() > 0) {
-            System.out.println(workoutToCheck + " is found in:\n");
+            System.out.println(oldWorkoutToCheck + " is found in:\n");
         }
 
         for (int planNumber : planWithUpdatedWorkout) {
@@ -560,11 +561,11 @@ public class PlanList {
                 System.out.println("\nThe following plan has been updated:\n");
             }
             System.out.println((i + 1) + ". " + getPlansDisplayList().get(planWithUpdatedWorkout.get(i) - 1));
-            updatePlanDetails((planWithUpdatedWorkout.get(i)), workoutToCheck, updatedWorkout);
+            updatePlanDetails((planWithUpdatedWorkout.get(i)), oldWorkoutToCheck, updatedWorkout);
         }
     }
 
-    public void updatePlanDetails(int planIndexToUpdate, String workoutToCheck, Workout updatedWorkout) throws
+    public void updatePlanDetails(int planIndexToUpdate, String oldWorkoutToCheck, Workout updatedWorkout) throws
             NumberFormatException, InvalidPlanException {
         String className = this.getClass().getSimpleName();
 
@@ -579,7 +580,7 @@ public class PlanList {
         int totalNumberOfWorkoutsInPlan = workoutsInPlanList.size();
 
         for (int i = 0; i < totalNumberOfWorkoutsInPlan; i++) {
-            if (workoutToCheck.equals(workoutsInPlanList.get(i).toString())) {
+            if (oldWorkoutToCheck.equals(workoutsInPlanList.get(i).toString())) {
                 workoutsInPlanList.set(i, updatedWorkout);
             }
         }
