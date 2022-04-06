@@ -116,6 +116,7 @@ Format: `addCustomer ic/IC n/NAME p/PHONE_NUMBER e/EMAIL`
 * A customer needs to be added in the system before any flight can be booked for this customer.
 * Each customer is uniquely identified by the IC. If the customer IC number is already existing in the system, an error will be raised and the new customer cannot be added.
 * The IC must have 9 characters with the first and last characters being letters.
+* The phone number must have 8 digits.
 * The email should be in proper email format, i.e. the email must contain "@".
 
 Example of usage:
