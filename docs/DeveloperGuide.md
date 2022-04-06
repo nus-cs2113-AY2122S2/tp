@@ -520,6 +520,11 @@ The general workflow of the `activity /list` command is as follows:
 ### Add a group
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
 
+The sequence diagram for GroupCreateCommand is omitted as it bears many similarities with [`SessionCreateCommand`](#add-a-session).
+The interactions of GroupCreateCommand with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed.
+The `GroupCreateCommand` parses only the name and list of persons to store as compared to `SessionCreateCommand` and it creates a new `Group`
+object to be added into the list of groups managed by the `Profile` class.
+
 The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `group /create` command.
 <br>
