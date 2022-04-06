@@ -19,6 +19,7 @@ import tp.command.EditDoctorCommand;
 import tp.command.ListDoctorListCommand;
 import tp.command.SortAppointmentByTimeCommand;
 import tp.command.EditPatientCommand;
+import tp.command.EditAppointmentCommand;
 
 import java.util.Scanner;
 
