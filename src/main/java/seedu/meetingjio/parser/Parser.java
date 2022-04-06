@@ -12,6 +12,7 @@ import seedu.meetingjio.commands.FreeCommand;
 import seedu.meetingjio.commands.CommandResult;
 import seedu.meetingjio.commands.HelpCommand;
 
+import seedu.meetingjio.exceptions.InvalidNameException;
 import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.InvalidModeException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
@@ -36,7 +37,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEE
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_EDIT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS_ADD_MEETING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_NAME_CANNOT_BE_ALL;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_NAME;
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 
@@ -97,8 +98,11 @@ public class Parser {
     private Command prepareAddUser() {
         if (arguments.isEmpty()) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_USER);
-        } else if (arguments.equalsIgnoreCase("all")) {
-            return new CommandResult(ERROR_NAME_CANNOT_BE_ALL);
+        }
+        try {
+            ParserHelperMethods.checkName(arguments);
+        } catch (InvalidNameException ine) {
+            return new CommandResult(ERROR_INVALID_NAME);
         }
         return new AddUserCommand(arguments);
     }
@@ -108,6 +112,8 @@ public class Parser {
             String[] eventDescription = ParserArguments.splitArgumentsAll(arguments);
             ParserHelperMethods.checkNonNullValues(eventDescription);
 
+            String name = eventDescription[NAME_INDEX];
+            String title = eventDescription[TITLE_INDEX];
             String day = eventDescription[DAY_INDEX];
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
@@ -117,8 +123,6 @@ public class Parser {
             ParserHelperMethods.checkTime(startTime, endTime);
             ParserHelperMethods.checkMode(mode);
 
-            String name = eventDescription[NAME_INDEX];
-            String title = eventDescription[TITLE_INDEX];
             return new AddLessonCommand(name, title, day, startTime, endTime, mode);
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {

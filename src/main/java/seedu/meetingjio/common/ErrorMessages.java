@@ -19,7 +19,6 @@ public class ErrorMessages {
             + "st/[StartTime]\n"
             + "et/[EndTime]\n"
             + "m/[Mode]";
-
     public static final String ERROR_MISSING_VALUES_ADD_EVENT = "Hi 1 or more parameters have missing values\n"
             + "The parameters that require values are:\n"
             + "n/[Name]\n"
@@ -45,7 +44,8 @@ public class ErrorMessages {
     public static final String ERROR_INVALID_MODE = "Hi please input a valid mode\n"
             + "Accepted inputs are: online or physical";
     public static final String ERROR_INVALID_ATTRIBUTE_VALUE = "Invalid attribute value.";
-    public static final String ERROR_NAME_CANNOT_BE_ALL = "Sorry, the user's name cannot be 'all'";
+    public static final String ERROR_INVALID_NAME = "Sorry, the user's name cannot be 'all' " +
+            "or contains special characters.";
 
     // List Command
     public static final String ERROR_EMPTY_LIST = "There are no events in your timetable yet!";
