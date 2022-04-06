@@ -68,20 +68,39 @@ public class OrderManager extends Manager {
      * @param dish dish element.
      * @param orderIdx index of the order.
      */
-    public void addDishToOrder(Dish dish, int orderIdx) {
+    public void addToOrder(Dish dish, int orderIdx) {
         if (orderIdx == this.orders.size()) {
-            Order order = null;
-            order = new Order(Arrays.asList(new Dish(dish.getName(), dish.getPrice())));
-            this.orders.add(order);
+            addToExistingOrder(dish);
         } else {
-            Order order = new Order();
-            for (Dish existingDish : this.orders.get(orderIdx).getDishes()) {
-                order.addDish(new Dish(existingDish.getName(), existingDish.getPrice()));
-            }
-            order.addDish(dish);
-            this.orders.set(orderIdx, order);
+            addToNewOrder(dish, orderIdx);
         }
         System.out.println("Added successfully!");
+    }
+
+    /**
+     * Order is already created.
+     *
+     * @param dish
+     */
+    public void addToExistingOrder(Dish dish) {
+        Order order;
+        order = new Order(Arrays.asList(dish));
+        this.orders.add(order);
+    }
+
+    /**
+     * Order need to be initialized.
+     *
+     * @param dish
+     * @param orderIdx
+     */
+    public void addToNewOrder(Dish dish, int orderIdx) {
+        Order order = new Order();
+        for (Dish existingDish : this.orders.get(orderIdx).getDishes()) {
+            order.addDish(existingDish);
+        }
+        order.addDish(dish);
+        this.orders.set(orderIdx, order);
     }
 
     public Order getOrder(int orderIndex) throws IndexOutOfBoundsException {
@@ -106,7 +125,7 @@ public class OrderManager extends Manager {
      * @param userInputInt user input index.
      * @return total value of this order.
      */
-    public double getOrderPrice(int userInputInt) {
+    public double getPrice(int userInputInt) {
         return this.orders.get(userInputInt).getTotalPrice();
     }
 
@@ -115,7 +134,7 @@ public class OrderManager extends Manager {
      *
      * @return total value of all orders.
      */
-    public double getAllOrderValue() {
+    public double getAllValue() {
         double total = 0;
         for (int i = 0; i < this.orders.size(); i++) {
             total += this.orders.get(i).getTotalPrice();
@@ -136,7 +155,7 @@ public class OrderManager extends Manager {
             }
             System.out.println("Total price:" + order.getTotalPrice());
         }
-        System.out.println("Total revenue:" + this.getAllOrderValue());
+        System.out.println("Total revenue:" + this.getAllValue());
     }
 
     /**
@@ -154,7 +173,7 @@ public class OrderManager extends Manager {
      * @param orderIdx user input: order index.
      * @return
      */
-    public ArrayList<Dish> getDishesFromOrder(int orderIdx) {
+    public ArrayList<Dish> getDishes(int orderIdx) {
         return new ArrayList<>(orders.get(orderIdx).getDishes());
     }
 
