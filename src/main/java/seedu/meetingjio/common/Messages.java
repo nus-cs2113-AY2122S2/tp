@@ -67,5 +67,5 @@ public class Messages {
             + "16. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
 
-    public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully.";
+    public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully";
 }
