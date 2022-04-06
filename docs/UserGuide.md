@@ -64,6 +64,10 @@ ARCS aims to provide a dynamic and concise interface for staff to create, view a
 * Parameters can be in any order.<br>
   e.g. if the command specifies `addMenuItem name/MENU_ITEM_NAME type/MENU_ITEM_TYPE`, `type/MENU_ITEM_TYPE addMenuItem name/MENU_ITEM_NAME` is also acceptable.
 
+* Redundant words in the command are ignored.<br>
+e.g. in `findRoute fd/01232011 d/Singapore s/US c/120`, `c/120` is ignored since this field is not required.
+
+
 ### Create a new flight route: `addRoute`
 Create a new flight route.
 
@@ -72,6 +76,7 @@ Format: `addRoute  fid/FLIGHT_ID fd/FLIGHT_DATE ft/FLIGHT_TIME d/DESTINATION s/S
 * The `FLIGHT_ID` needs to be unique. If the 'FLIGHT_ID' is already registered, the system should generate an error message and require new input.
 * The flight route can be searched out by `FLIGHT_DATE` `DESTINATION` `SOURCE` `[FLIGHT_TIME]`.
 * The flight capacity must be a positive integer.
+* The flight ID, date, time, destination and source can be in any format.
 
 Example of usage:
 * `addRoute fid/Bu3037 fd/02172022 ft/11:10 d/singapore s/china c/100`
