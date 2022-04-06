@@ -142,8 +142,8 @@ The storage component consists of two classes: `FileManager` and `LogHandler`.
 | `LogHandler` | - Utility class to direct log messages to a file that is stored on the user's local filesystem. |
 
 `WerkIt` is responsible for creating an instance of `FileManager` when the application is started. This same instance
-will be used by commands in the command component that requires writing data to the user's filesystem when the user (for
-example, when the user creates a new workout). Specifically, classes in the command component that requires this are 
+will be used by commands in the logic component that requires writing data to the user's filesystem when the user (for
+example, when the user creates a new workout). Specifically, classes in the logic component that requires this are 
 `WorkoutCommand`, `PlanCommand`, and `ScheduleCommand`.
 
 `LogHandler` was deliberately grouped in the storage component as this class merely provides functionality to allow
