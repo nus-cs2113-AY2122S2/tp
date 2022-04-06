@@ -465,11 +465,11 @@ class will catch the user input, and it will be sent to `Parser#parseUserInput(S
 user's command. 
 
 If the user's command type is search, i.e. `search /commandAction <keywords>`, the
-`Parser#parseUserInput(String userInput)` method will parse the 'search' base word and proceed to create search related
+`Parser#parseUserInput(String userInput)` method will parse the 'search' base word and proceed to create search-related
 command using `Parser#createSearchCommand(String userInput)` method. This method will further evaluate the
 `/commandAction` and call the constructor of `SearchCommand` class by passing relevant parameters related to search to
 the constructor. If the `/commandAction` is null or incorrect, an `InvalidCommandException` will be thrown. If
-the `<keywords>` is not specified, it will be deemed as searching for spacing.
+the `<keywords>` is not specified, it will be deemed as searching for whitespaces.
 
 <div class="button-container"><a class="button" href="#feature-overview">Back to Feature Overview</a></div>
 
