@@ -1,5 +1,7 @@
 package records;
 
+import java.math.BigDecimal;
+
 public class Product extends Record {
     private final String productType;
 

@@ -8,6 +8,8 @@ import records.Product;
 import records.Record;
 import records.Subscription;
 
+import java.math.BigDecimal;
+
 /**
  * Adds a record to the RecordManager.
  */

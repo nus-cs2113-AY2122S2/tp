@@ -1,5 +1,5 @@
-S | Netflips | 10.0 | 14022022 | 14032022
-P | handphone cover | 30.0 | 14022022 | accessory
-S | Netflips | 10.0 | 14022022 | 14032022
 P | handphone cover | 10.0 | 14022022 | accessory
-P | handphone cover | 3000.0 | 14022022 | accessory
+P | handphone cover | 10.0 | 14022022 | accessory
+P | handphone cover | 10.0 | 14022022 | accessory
+P | handphone cover | 10.0 | 14022022 | accessory
+P | handphone cover | 10.0 | 14022022 | accessory

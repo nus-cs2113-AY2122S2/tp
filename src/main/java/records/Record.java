@@ -1,7 +1,9 @@
 package records;
 
+import java.math.BigDecimal;
+
 public abstract class Record {
-    protected final double price;
+    protected final BigDecimal price;
     protected final String name;
     protected final String date;
 
@@ -14,13 +16,14 @@ public abstract class Record {
      */
     public Record(String name, double price, String date){
         this.name = name;
-        this.price = price;
+        this.price = BigDecimal.valueOf(price);
         this.date = date;
     }
 
-    /** Returns price of the record */
+    /** Returns price of the record
+     * @return*/
     public double getPrice() {
-        return price;
+        return price.doubleValue();
     }
 
     /** Returns name of the record */

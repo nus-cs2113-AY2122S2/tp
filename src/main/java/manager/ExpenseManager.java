@@ -1,6 +1,7 @@
 package manager;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 public class ExpenseManager {
     private Storage storage;
@@ -12,65 +13,79 @@ public class ExpenseManager {
             e.printStackTrace();
         }
     }
-    private static double totalExpense = 0;
-    private static double fashionExpense = 0;
-    private static double foodExpense = 0;
-    private static double accessoryExpense = 0;
-    private static double otherExpense = 0;
-    private static double subscriptionExpense = 0;
+    private static BigDecimal totalExpense = BigDecimal.valueOf(0);
+    private static BigDecimal fashionExpense = BigDecimal.valueOf(0);
+    private static BigDecimal foodExpense = BigDecimal.valueOf(0);
+    private static BigDecimal accessoryExpense = BigDecimal.valueOf(0);
+    private static BigDecimal otherExpense = BigDecimal.valueOf(0);
+    private static BigDecimal subscriptionExpense = BigDecimal.valueOf(0);
 
     public static void addToExpense(double value) {
-        totalExpense += value;
+        totalExpense = totalExpense.add(BigDecimal.valueOf(value));
     }
     public static void addToFashionExpense(double value) {
-        fashionExpense += value;
+        fashionExpense = fashionExpense.add(BigDecimal.valueOf(value));
     }
 
     public static void addToFoodExpense(double value) {
-        foodExpense += value;
+        foodExpense = foodExpense.add(BigDecimal.valueOf(value));
     }
 
     public static void addToAccessoryExpense(double value) {
-        accessoryExpense += value;
+        accessoryExpense = accessoryExpense.add(BigDecimal.valueOf(value));
     }
 
     public static void addToOtherExpense(double value) {
-        otherExpense += value;
+        otherExpense = otherExpense.add(BigDecimal.valueOf(value));
     }
 
     public static void addToSubscriptionExpense(double value) {
-        subscriptionExpense += value;
+        subscriptionExpense = subscriptionExpense.add(BigDecimal.valueOf(value));
     }
 
     public static void subtractFromExpense(double value) {
-        totalExpense -= value;
+        totalExpense = totalExpense.subtract(BigDecimal.valueOf(value));
     }
 
     public static double getTotalExpense() {
-        return totalExpense;
+        return totalExpense.doubleValue();
     }
 
     public static double getFashionExpense() {
-        return fashionExpense;
+        return fashionExpense.doubleValue();
     }
 
-    public static double getFoodExpense() {return foodExpense;}
+    public static double getFoodExpense() {
+        return foodExpense.doubleValue();
+    }
 
-    public static double getAccessoryExpense() {return accessoryExpense;}
+    public static double getAccessoryExpense() {
+        return accessoryExpense.doubleValue();
+    }
 
-    public static double getOtherExpense() {return otherExpense;}
+    public static double getOtherExpense() {
+        return otherExpense.doubleValue();
+    }
 
-    public static double getSubscriptionExpense() {return subscriptionExpense;}
+    public static double getSubscriptionExpense() {
+        return subscriptionExpense.doubleValue();
+    }
 
-    public static double calculateTotalExpense() {return subscriptionExpense+
-            otherExpense+accessoryExpense+foodExpense+fashionExpense;}
+    public static double calculateTotalExpense() {
+        return subscriptionExpense.
+                add(otherExpense).
+                add(accessoryExpense).
+                add(foodExpense).
+                add(fashionExpense).
+                doubleValue();
+    }
 
     public static void resetExpenses() {
-        fashionExpense = 0;
-        foodExpense = 0;
-        accessoryExpense = 0;
-        otherExpense = 0;
-        subscriptionExpense = 0;
+        fashionExpense = BigDecimal.valueOf(0);
+        foodExpense = BigDecimal.valueOf(0);
+        accessoryExpense = BigDecimal.valueOf(0);
+        otherExpense = BigDecimal.valueOf(0);
+        subscriptionExpense = BigDecimal.valueOf(0);
     }
 
     /**
@@ -80,7 +95,7 @@ public class ExpenseManager {
      */
     public void loadTotalExpense() throws IOException {
         try {
-            totalExpense = storage.loadTotalExpenseFile();
+            totalExpense = BigDecimal.valueOf(storage.loadTotalExpenseFile());
         } catch (IOException e) {
             throw e;
         }
@@ -91,7 +106,7 @@ public class ExpenseManager {
      */
     public void saveTotalExpense() {
         try {
-            storage.saveTotalExpenseFile(totalExpense);
+            storage.saveTotalExpenseFile(totalExpense.doubleValue());
         } catch (IOException e) {
             System.out.println("Saving failed.");
         }
