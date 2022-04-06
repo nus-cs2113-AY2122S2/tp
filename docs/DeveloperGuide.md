@@ -125,7 +125,27 @@ and their interactions.
 #### Storage component
 [Writeup]
 #### UI component
-[Writeup]
+
+UI component consists of a single [UI class](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/werkit/UI.java)
+which manages interaction (prompting for user input and displaying results
+of commands/methods being called) between the user and the application.
+
+How the UI class works:
+* Upon the initialization of `WerkIt`, the `UI class` will called the `printGreetings()` method to display the greeting messages to
+  the user.
+* Additionally, local files storing the data of previous session of `WerkIt` will also be loaded into the program. Hence,
+  the loading status of these files are also display by calling the `printFileLoadStatusMessage()` method.
+* `UI class` is also responsible for getting the user input by calling the `getUserInput(String filename, boolean isLoadSuccessful)`
+  method, which will then parse the input by sending it to the `Parser class`. The `Paser class` will process
+  the input and call other relevant methods to execute the command.
+* `UI class` also display messages when a
+    * workout has been successfully created, updated and deleted.
+    * plan has been successfully created and deleted.
+    * schedule has been successfully created and removed.
+* Help messages are also printed in the UI class by calling `printHelpMessage()` method.
+* Lastly, when the user exits the program, the `printGoodBye()` method will be called to indicate that the 
+user has successfully exited the program. 
+
 #### Parser component
 [Writeup]
 #### Command component
@@ -211,16 +231,16 @@ _to be updated_
 ### Schedule-related features
 ![ScheduleUML](uml/classDiagrams/images/scheduleComponent.png)
 
-Users are able to create and make changes to a 7-day workout plan schedule using the WerkIt application. For each day, user are only allowed
+Users are able to create and make changes to a 7-day workout plan schedule using the WerkIt application. For each day, users are only allowed
 to schedule 1 workout plan. Click [here](#glossary) to have a better understanding of what `workout`, `plan` and `schedule`
 means.
 
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
-`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, the `UI#getUserInput()` method in `UI`
 class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
 user's command.
 
-If the user's command type is schedule, the `Parser#parseUserInput(String userInput)` method will parse the 'schedule'
+If the user's command type is `schedule`, the `Parser#parseUserInput(String userInput)` method will parse the `schedule`
 base word and proceed to create schedule related command using `Parser#createScheduleCommand(String userInput)` method.
 The following table shows the schedule commands that WerkIt! are able to process by calling the `ScheduleCommand#execute()`
 method.
@@ -299,10 +319,12 @@ the `<keywords>` is not specified, it will be deemed as searching for spacing.
   * [List All Workouts](#list-workout)
   * [Delete Existing Workout](#delete-existing-workout)
     * [Design Considerations](#design-considerations-for-deleting-existing-workout)
-  * [Update Exisiting Workout](#update-existing-workout)
+  * [Update Existing Workout](#update-existing-workout)
 * [Plan](#plan)
   * [Create A New Plan](#create-a-new-plan)
   * [List Plans](#list-plans)
+  * [List Workouts In A Plan](#list-workouts-in-a-plan)
+  * [Delete Existing Plan](#delete-existing-plan)
 * [Schedule](#schedule)
   * [Update Schedule](#update-schedule)
     * [Design Considerations](#design-considerations-for-update-schedule)
@@ -429,7 +451,6 @@ and the parsing is aborted.
 
 ### Exercise
 #### List Exercise
-
 
 If the user's command type is to list the exercises available, i.e. `exercise /list`, the
 `Parser#parseUserInput(String userInput)` method will parse the 'exercise' base word and proceed to create exercise related
@@ -729,13 +750,12 @@ and exception throws in `WorkoutList#updateWorkout()` have been omitted.</span>
 **(Before Step 4.1)** Methods from the `String` and `Integer` classes are called to parse the
 argument given to `WorkoutList#updateWorkout()` to obtain the following information required to update a
 workout:
-1. Workout index number in list
+1. Workout index number in list.
 2. New number of repetitions assigned to the workout in (1).
 
 Next, validity checks of the user input are carried out to ensure that the data entered is valid. 
 The requirements for a valid input are as follows:
-1. Workout index number is the number shown before the exercise name when calling `workout /list`. 
-Workout index number must be a positive integer smaller than the total number of workouts in list.
+1. Workout index number must be a positive integer smaller than the total number of workouts in list.
 2. New repetition value must be a non-negative integer greater than 0.
 
 If any of the two requirements are not met, an `InvalidWorkoutException` will be thrown and 
@@ -862,7 +882,7 @@ of a success plan creation message (new plan is called "Grow My Muscles"):
 ----------------------------------------------------------------------
 Alright, the following plan has been created:
 
-	Grow My Muscles
+	grow my muscles
 
 ----------------------------------------------------------------------
 ```
@@ -917,6 +937,68 @@ To view each plan in detail, enter
 and the `PlanCommand` object returns to the `WerkIt` object.
 <br><br>
 This completes the process of displaying all plans in WerkIt!.
+
+---
+
+#### List Workouts In A Plan
+A summary of the general procedure of listing all workouts in a plan is as follows:
+1. User enters the command `plan /details <plan index number>`.
+2. A list of workouts that user specified is displayed through the terminal.
+
+The following sequence diagram illustrates how the `plan /details` command works:
+
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
+have been removed from the sequence diagram.</span>
+
+![Details Of Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/detailsOfPlan.png)
+<br><br>
+**(Before Step 1)** The user's input (in this case will be a `plan /details` command) is obtained and parsed to obtain
+a `PlanCommand` object that contains the user's input.
+
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+**(Step 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify that the plan action is of type 
+`details`. Thus, `PlanList#listPlanDetails(userArgument, ui)` will be called to display all the workouts in the plan
+which user specified.
+
+<span class="box info">:memo: To improve the diagram's readability, logging-related, input-checking method calls,
+and exception throws in `PlanList#listPlanDetails()` have been omitted.</span>
+
+**(Before Step 3)** Methods from the `String` and `Integer` classes are called to parse the
+argument given to `PlanList#listPlanDetails()` to obtain the plan index number in list.
+
+Next, validity checks of the user input are carried out to ensure that the data entered is valid.
+Plan index number must be a positive integer and smaller than the total number of plan in list 
+in order to pass the check. Otherwise, an `InvalidPlanException` will be thrown and
+the entire process is aborted.
+
+Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability.
+
+**(Steps 3 to 4)** With the plan index number, a `Plan` object which user want to view details 
+will be fetched by calling method `PlanList#getPlanFromIndexNum()`.
+
+**(Steps 5 to 6)** An ArrayList of `Workout` object is created to store the workouts in the `Plan` object we get 
+in the previous step.
+
+**(Step 7 to 9)** The `PlanList#listPlanDetails()` method will then loop through the workout list which we get in the 
+previous step and show the name of the workouts with number of repetitions to the user. 
+The following is an example of what will be displayed to the user when the `plan /details` command is entered:
+
+```
+----------------------------------------------------------------------
+Here are the 3 workouts in [grow my muscles].
+1. push up (20 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+----------------------------------------------------------------------
+```
+This completes the process of displaying all workouts in a plan in WerkIt!
+
+---
+
+#### Delete Existing Plan
+
 
 ---
 ### Schedule
