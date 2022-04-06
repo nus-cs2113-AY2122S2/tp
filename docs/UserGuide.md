@@ -97,7 +97,7 @@ To add a doctor there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`
+Format: `add doctor /info [nric], [name], [age], [gender], [address], [DOB], [Specialisation]`
 
 Example: `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
@@ -115,7 +115,7 @@ To add a patient there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`
+Format: `add patient /info [nric], [name], [age], [gender], [address], [DOB], [DOA]`
 
 Example: `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
@@ -132,9 +132,9 @@ To add a medicine there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`
+Format: `add medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`
 
-Example: `add medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`
+Example: `add medicine /info A123, Paracetamol, 500, 2023-06-11, Slight headache, 10`
 
 #### ADD APPOINTMENT
 
@@ -150,10 +150,10 @@ To add an appointment there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add appointment /info [appointment id],[patient nric],[patient name],[doctor nric],[doctor name],
+Format: `add appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name],
         [appointment date], [appointment details]`
 
-Example: `add appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Regular knee checkup`
+Example: `add appointment /info A123,S1234567A, Don, S7654321A, John, 2022-10-15, Regular knee checkup`
 
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients and medicine.
@@ -257,7 +257,7 @@ To edit a doctor there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`
+Format: `edit doctor /info [nric], [name], [age], [gender], [address], [DOB], [Specialisation]`
 
 Example: `edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
@@ -275,7 +275,7 @@ To edit a patient there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`
+Format: `edit patient /info [nric], [name], [age], [gender], [address], [DOB], [DOA]`
 
 Example: `edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
@@ -292,9 +292,9 @@ To edit a medicine there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`
+Format: `edit medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`
 
-Example: `edit medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`
+Example: `edit medicine /info A123, Paracetamol, 500, 2023-06-11, Slight headache, 10`
 
 #### EDIT APPOINTMENT
 
@@ -310,10 +310,10 @@ To edit an appointment there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `edit appointment /info [appointment id],[patient nric],[patient name],[doctor nric],[doctor name],
+Format: `edit appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name],
 [appointment date], [appointment details]`
 
-Example: `edit appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Regular knee checkup`
+Example: `edit appointment /info A123, S1234567A, Don, S7654321A, John, 2022-10-15, Regular knee checkup`
 
 
 ### Finding: `find`
