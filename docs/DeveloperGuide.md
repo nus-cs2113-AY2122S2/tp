@@ -163,7 +163,6 @@ The `Storage` component is responsible for the saving and loading of program dat
 Storage is an interface supporting write/read data to/from computer storage:
 * Storage interface is implemented by JsonStorage in Mod Happy, which will read and load data to and from json format.
 * ListStorage can save a ArrayList of any class that extends Object in json format, and read them back into corresponding objects. (E.g. ModuleListStorage, TaskListStorage inherit from ListStorage)
-* There are navigability to Storage from Main and SaveCommand, which handles the load and write data to/from disk respectively.
   <br><br><br>
 
 ## 6. Implementation
@@ -177,7 +176,8 @@ The edit feature allows the user to change a parameter of a task/module. The par
 
 The following sequence diagram illustrates the process:
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/Edit.puml)
+![Sequence Diagra
+m](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/Edit.puml)
 
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/GetModule.puml)
 
@@ -262,6 +262,7 @@ Several type-specific classes exist, each overseeing the storage of a different 
 * `TaskListStorage` handles the saving and loading of the General Tasks list as an `ArrayList<Task>` instance. This data is stored in the `data/tasks.json` file.
 * `ModuleListStorage` handles the saving and loading of all user-created modules as well as the tasks associated with them as an `ArrayList<Module>` instance. This data is stored in the `data/modules.json` file.
 
+Implementation of JsonStorage applies [Gson](https://sites.google.com/site/gson/gson-user-guide), which is a Java library that can be used to convert Java Objects into their JSON representation and back. The Gson object tasks a specific class to wrap  JSON string to an equivalent Java object, which is why the load method for each class should be implemented independently.
 <br><br><br>
 
 ## 7. User Stories

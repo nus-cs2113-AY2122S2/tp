@@ -37,7 +37,6 @@ public class StringConstants {
      * For AddCommand.
      */
     public static final String ADD_TASK_MESSAGE_TOP = "Hey! I have added this task under %s!";
-    public static final String ADD_TASK_MESSAGE_BOTTOM = "Now you have %d task(s) in your list!";
     public static final String ADD_MODULE_MESSAGE_TOP = "Hey! I have added this module!";
     public static final String MODULE_ALREADY_EXISTS = "A module with that name already exists...";
     public static final String ESTIMATED_WORKING_TIME = "Estimated working time: ";
@@ -103,8 +102,7 @@ public class StringConstants {
     /**
      * For HelpCommand.
      */
-    public static final String HELP_NOTE = "Compulsory flags start with \"/\". Optional flags start with \"-\".\n"
-            + "Compulsory parameters are fully capitalised: e.g. MODULE_CODE.\n"
+    public static final String HELP_NOTE = "Compulsory parameters are fully capitalised: e.g. MODULE_CODE.\n"
             + "Optional parameters are in square brackets: e.g. [-d MODULE_DESCRIPTION]";
     public static final String ADD_HELP = "Adds a module or task as indicated by the command input.\n"
             + "Format to add module: add mod MODULE_CODE MODULAR_CREDITS [-d \"MODULE_DESCRIPTION\"]\n"

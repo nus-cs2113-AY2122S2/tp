@@ -25,6 +25,10 @@ public class TagCommand extends Command {
     private final String tagDescription;
     private String result;
 
+    public int getTaskIndex() {
+        return taskIndex;
+    }
+
     public String getTagOperation() {
         return tagOperation;
     }
