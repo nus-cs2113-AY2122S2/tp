@@ -77,6 +77,9 @@ public class Main {
         mainUi.displayExitMessage();
     }
 
+    /**
+     * Loads data from storage files.
+     */
     public void loadData() {
 
         try {
@@ -97,6 +100,9 @@ public class Main {
         }
     }
 
+    /**
+     * Saves data into storage files.
+     */
     public void saveData() {
         try {
             routeFileManager.saveData(routeManager.getAllRoutes());

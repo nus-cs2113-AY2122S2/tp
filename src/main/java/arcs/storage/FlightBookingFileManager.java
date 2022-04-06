@@ -19,6 +19,12 @@ public class FlightBookingFileManager {
         dirPath = System.getProperty("user.dir") + File.separator + "data";
     }
 
+    /**
+     * Loads customer data from storage file.
+     *
+     * @return a list of flight bookings.
+     * @throws IOException if file reading exception occurs.
+     */
     public ArrayList<FlightBooking> loadData() throws IOException {
         File dir = new File(dirPath);
         if (!dir.exists()) {
@@ -37,6 +43,12 @@ public class FlightBookingFileManager {
         return decodeData(records);
     }
 
+    /**
+     * Saves flight booking data into the storage file.
+     *
+     * @param bookings the list of flight bookings to be stored
+     * @throws IOException if errors occur when writing into the storage file.
+     */
     public void saveData(ArrayList<FlightBooking> bookings) throws IOException {
         FileWriter fw = new FileWriter(dirPath + File.separator + FILE_NAME);
         ArrayList<String> records = encodeData(bookings);
