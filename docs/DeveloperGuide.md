@@ -7,19 +7,18 @@
     * [Acknowledgements](#acknowledgements)
     * [Using the Developer Guide](#using-the-developer-guide)
 * [Design](#design)
-    * [Technologies used](#technologies-used)
     * [Architecture Overview](#architecture-overview)
     * [Component Overview ](#component-overview )
-    * [UI component](#ui-component)
-    * [Parser component](#parser-component)
-    * [Command component](#command-component)
-    * [Storage component](#storage-component)
+      * [UI component](#ui-component)
+      * [Parser component](#parser-component)
+      * [Command component](#command-component)
+      * [Storage component](#storage-component)
 * [Implementation](#implementation)
-    * [AddCommand Feature](#addCommand-feature)
-        * [AddCommand Subcomponents](#addcommand-subcomponents)
-        * [Add Credit Card Command](#add-credit-card-command)
-        * [Add Expenditure Command](#add-expenditure-command)
-        * [AddCommand Design Considerations](#addCommand-design-considerations)
+    * [Add Command](#add-command)
+      * [Add Expenditure](#add-expenditure-e)
+      * [Add Credit Card](#add-credit-card-cc)
+      * [Add Income](#add-income-i)
+      * [Design Considerations](#addCommand-design-considerations)
     * [CalculateCommand feature](#calculatecommand-feature)
     * [ListCommand feature ](#listcommand-feature)
 * [Appendix Requirements](#appendix-requirements)
@@ -64,7 +63,6 @@ Click on the hyperlinks in the [content page](#content-page) to quickly navigate
 <br/>
 
 ## Design
-### Technologies used
 **MindMyMoney** is written fully in **Java 11** using  Object-Oriented Programming (OOP) paradigm to help structure and
 organise the code. This enables the efficiency of future improvements and revisions.
 Data stored in the application is saved into text files locally on the user's device.  
@@ -87,15 +85,21 @@ expenditures in memory.
 By abstracting out closely related code into classes, it allows `MMM` to deal at a higher level, without worrying
 about the lower level details. Higher cohesion is also achieved and coupling is minimized.
 
+<br/>
+
 The Sequence Diagram below shows an example of how the components interact with each other for the scenario 
 where the user issues the command `add /e /pm cash /c food /d Porridge /t 04/04/2022` to add an expenditure.
 
 ![sequence_diagram](images/ComponentsSequenceDiagram.png)
 <br/> Fig 2 - Sequence Diagram showing the Add Command
 
+<br/>
+
 ### Component Overview 
 The major code is broken down into components for better abstraction. 
 The sections below give more details for each component.
+
+<br/>
 
 ### UI component
 The source code can be found in [`Ui.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Ui.java)
@@ -130,6 +134,8 @@ The Parser component:
 We pass in the `User` class to the `Command` object instead of using a global variable to ease testing. This way, we can 
 add, delete and update entries in a new `User` during testing without affecting the actual `User`.
 
+<br/>
+
 ### Command component 
 The source can be found in [`command`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command)
 
@@ -144,6 +150,8 @@ The Command component:
 executed. Only 1 Command object can be created.
 - Includes a `Command.executeCommand()` method in each Command classes which performs the relevant command and throws 
 exceptions if an error is encountered. The error is then handled.
+
+<br/>
 
 ### Storage component 
 The source can be found in [`Storage.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Storage.java)
@@ -166,7 +174,7 @@ This section describes some noteworthy details on how certain features of MindMy
 
 <br/>
 
-### AddCommand
+### Add Command
 The source code can be found in [`AddCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/AddCommand.java)
 
 The AddCommand feature allows users to add expenditures, credit cards or their income using a single command. 
@@ -201,7 +209,7 @@ the `AddCommand.addExpenditure()` method, invoked when using the `/e` flag. Addi
 
 
 ![add_expenditure_command_sequence_diagram](images/Add_Expenditure_Command_Sequence_Diagram.png)  
-Fig 9 - Add Expenditure Command Sequence Diagram  
+Fig 8 - Add Expenditure Command Sequence Diagram  
 
 The sequence diagram above shows the interactions of different classes when adding an expenditure
 to the list.
@@ -223,7 +231,7 @@ method, invoked when using the `/cc` flag. Additional parameters `CREDIT_CARD_NA
 required.
 
 ![add_credit_card_command_sequence_diagram](images/Add_Credit_Card_Command_Sequence_Diagram.png)   
-Fig 8 - Add Credit Card Command Sequence Diagram
+Fig 9 - Add Credit Card Command Sequence Diagram
 
 The sequence diagram above shows the interactions of different classes when adding a credit card to the list.
 
@@ -241,6 +249,8 @@ MindMyMoney allows users to track their sources of income. Incomes are added thr
 method, invoked when using the `/i` flag. Additional parameters `AMOUNT` and `CATEGORY` are also required.
 
 ![add_income_sequence_diagram](images/AddIncomeSequenceDiagram.png)
+<br/> Fig 10 - Add Income Sequence Diagram
+
 The sequence diagram above shows the interactions of different classes when adding an income to the list.
 
 1. After receiving the `AddCommand` object from `Parser`, `MMM` calls the `AddCommand.executeCommand()` method.
