@@ -61,14 +61,19 @@ In the case where a second substring is not required, as in the case of `help` a
 
 **2. Split Arguments**
 
-For simpler command words such as `delete` and `check`, only one pair of `argumentType` and <code>\`argumentValue\`</code> are required. 
-As such, these will be passed in directly to their `Command` classes without a `argumentType` pair.
-
-More complex command words such as `add` and `update` necessitated multiple arguments.
-To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` was implemented. 
+Complex commands such as `add` and `update` necessitate multiple arguments.
+To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` is implemented. 
 Without specifically explaining the main regular expression ([details here](https://regex101.com/r/gwjHWD/3)), the approach sought to match `argumentType` and <code>\`argumentValue\`</code> pairs with a positive lookahead.
 The final argument pair will then be extracted using a separate regex. 
 Together, this ensured that all argument pairs can be effectively parsed and dispatched to each `Command` class.
+
+<details><summary><b>Special <code>delete</code> implementation</b></summary>
+<p>
+
+For added safeguards in equipment deletion, the delete command implements a more stringent regex to match one argument pair of <code>s/\`SERIAL_NUMBER\`</code>.  
+
+</p>
+</details>
 
 Throughout the `Parser` implementation, exceptions were used to return `IncorrectCommand` classes that can be used to pass error messages to the user. These will be discussed in the following segments.
 
