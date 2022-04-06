@@ -224,7 +224,7 @@ public class Person {
      *
      * @return The name with delimiter
      */
-    public String saveName() {
+    public String getSaveName() {
         LOGGER.log(Level.INFO, Constants.SAVE_NAME_CALL_MESSAGE);
         return "u " + name;
     }
