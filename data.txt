@@ -1,0 +1,7 @@
+# BEGIN EXPENDITURES
+ "amount": "3.4"  "description": "Chicken Cice"  "paymentMethod": "Cash"  "time": "01/04/2022"  "category": "Food" 
+# END EXPENDITURES
+# BEGIN CREDIT CARDS
+# END CREDIT CARDS
+# BEGIN INCOME SOURCES
+# END INCOME SOURCES
