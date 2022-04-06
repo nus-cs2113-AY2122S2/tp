@@ -81,9 +81,11 @@ is responsible for,
 **How the components interact with each other**
 
 The following Sequence Diagram, with the specific classes and methods abstracted, shows a high-level view on how the 
-components interact for the scenario where the user issues the command `add /g 2 /n Alice`.
+components interact for the scenario where the user types `add /g 2 /n Alice`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
+> :information_source: **Note:** The lifeline for `AddPersonCommand` ends at the destroy marker :x:
+> but due to the limiations of PlantUML, the lifeline eraches the end of the diagram.
 
 Each of the main components shown in the diagram above is defined and implemented in a class with the same name as its
 component. The section below provides a more in-depth details on how the components interact with one another.
