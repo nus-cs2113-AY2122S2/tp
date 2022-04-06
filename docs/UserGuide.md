@@ -9,8 +9,9 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `EquipmentManager` from [here](https://github.com/AY2122S2-CS2113-F12-2/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for your `EquipmentManager` application.
-4. Double-click the file to start the app. 
-5. Type `help` to see the list of available commands.
+4. Open the command line and go to the folder mentioned above.
+5. Run java -jar tp.jar
+6. Type `help` to see the list of available commands.
 
 ## Features 
 
@@ -42,30 +43,32 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `bye` and `save`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* The maximum cost supported is up to $10 million, any specified cost equal or greater than that will be displayed incorrectly.
+
 ### Adding an equipment: `add`
 Adds new Equipment to the list of Equipment.
 
-Format: `add n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`
+Format: ``add n/`ITEM_NAME` s/`SERIAL_NUMBER` t/`TYPE c/COST` pf/`PURCHASED_FROM` pd/`PURCHASED_DATE` ``
 
 * The `TYPE` must be one of the following types: MICROPHONE, SPEAKER, STAND, CABLE.
 * The `COST` cannot contain any symbols.  
 
 Example of usage and output: 
 
-`add n/SpeakerB s/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23`
+``add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
 
 output: `Equipment successfully added: SpeakerB, serial number S1404115ASF`
 
 ### Checking an equipment: `check`
 Check the details of the equipment that has the name specified.
 
-Format: `check n/ITEM_NAME`
+Format: ``check n/`ITEM_NAME` ``
 
 * Only the `ITEM_NAME` can be used to check for a piece of equipment.
 
 Example of usage and output:
 
-`check n/SpeakerB`
+``check n/`SpeakerB` ``
 
 output: 
 
@@ -106,14 +109,14 @@ output:
 
 Equipment can be updated with new information. Every parameter except serial number can be updated. 
 
-Format: `update s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`
+Format: ``update s/`SERIAL_NUMBER` [n/`ITEM_NAME`] [t/`TYPE`] [c/`COST`] [pf/`PURCHASED_FROM`] [pd/`PURCHASED_DATE`]``
 
 * The `TYPE` must be one of the following types: MICROPHONE, SPEAKER, STAND, CABLE.
 * The `COST` cannot contain any symbols.
 
 Example of usage and output:
 
-`update s/S14115ASF c/1200 pf/AVLFX`
+``update s/`S14115ASF` c/`1200` pf/`AVLFX` ``
 
 output: 
 
@@ -126,11 +129,11 @@ output:
 
 Removes an Equipment entry from the list of Equipment entirely. This is irreversible after the file is saved.
 
-Format: `delete s/SERIAL_NUMBER`
+Format: ``delete s/`SERIAL_NUMBER` ``
 
 Example of usage and output:
 
-`delete s/S14115ASF`
+``delete s/`S14115ASF` ``
 
 output:
 
@@ -163,29 +166,29 @@ Example of usage and output:
 Output:
 
 `add: Adds a Equipment to the equipmentInventory.`<br>
-`Parameters: n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`<br>
-`Example: add n/SpeakerB s/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23`
+``Parameters: n/`ITEM NAME` s/`SERIAL NUMBER` t/`TYPE` c/`COST` pf/`PURCHASED FROM` pd/`PURCHASED DATE` ``<br>
+``Example: add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``<br>
 
 `delete: Deletes the equipment with the specified serial number.`<br>
-`Parameters: s/SERIAL_NUMBER`<br>
-`Example: delete s/SM57-1`<br>
+``Parameters: s/`SERIAL_NUMBER` ``<br>
+``Example: delete s/`SM57-1` ``<br>
 
 `update: Updates the equipment with the specified serial number.`<br>
 `Parameters in [square brackets] are optional.`<br>
-`Parameters: s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`<br>
-`Example: update s/SM57-1 n/SpeakerC c/2510 pd/2022-08-21`<br>
+``Parameters: s/`SERIAL NUMBER` [n/`ITEM NAME`] [t/`TYPE`] [c/`COST`] [pf/`PURCHASED FROM`] [pd/`PURCHASED DATE`]``<br>
+``Example: update s/`SM57-1` n/`SpeakerC` c/`2510` pd/`2022-08-21` ``<br>
 
 `list: Prints a list of all equipment in the inventory.`<br>
 `Parameters: NIL`<br>
 `Example: list`<br>
 
-`listPrints a list of all equipment in the inventory of the specified type.`<br>
-`Parameters: t/Type`<br>
+`list: Prints a list of all equipment in the inventory of the specified type.`<br>
+``Parameters: `Type` ``<br>
 `Example: list MICROPHONE`<br>
 
 `check: Gives details of the equipment with the specified name.`<br>
-`Parameters: n/ITEM_NAME`<br>
-`Example: check n/MixerC`<br>
+``Parameters: n/`ITEM_NAME` ``<br>
+``Example: check n/`MixerC` ``<br>
 
 `save: Saves current state of application.`<br>
 `Parameters: NIL`<br>
@@ -223,12 +226,12 @@ Output:
 
 'Cheat Sheet' of commands here
 
-* Add equipment `add n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE`
-* Check equipment `check n/ITEM_NAME`
+* Add equipment ``add n/`ITEM_NAME` s/`SERIAL_NUMBER` t/`TYPE` c/`COST` pf/`PURCHASED_FROM` pd/`PURCHASED_DATE` ``
+* Check equipment ``check n/`ITEM_NAME` ``
 * Listing equipment: `list`
-* Listing equipment by type: `list t/TYPE`
-* Updating an equipment: `update s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] [c/COST] [pf/PURCHASED_FROM] [pd/PURCHASED_DATE]`
-* Deleting an equipment: `delete s/SERIAL_NUMBER`
+* Listing equipment by type: ``list t/`TYPE` ``
+* Updating an equipment: ``update s/`SERIAL_NUMBER` [n/`ITEM_NAME`] [t/`TYPE`] [c/`COST`] [pf/`PURCHASED_FROM`] [pd/`PURCHASED_DATE`]``
+* Deleting an equipment: ``delete s/`SERIAL_NUMBER` ``
 * Saving application state: `save`
 * Getting help: `help`
 * Exiting the application: `bye`
