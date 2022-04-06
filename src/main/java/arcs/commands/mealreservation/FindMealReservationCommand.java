@@ -23,6 +23,9 @@ public class FindMealReservationCommand extends Command {
         checkEmptyField();
     }
 
+    /**
+     * Stores empty field in an array for empty fields.
+     */
     private void checkEmptyField() {
         if (cid == null || cid.isEmpty()) {
             emptyFields.add("Customer IC");
@@ -33,6 +36,11 @@ public class FindMealReservationCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to find meal reservation.
+     *
+     * @return CommandResult result of the executed command.
+     */
     @Override
     public CommandResult execute() {
         if (!emptyFields.isEmpty()) {

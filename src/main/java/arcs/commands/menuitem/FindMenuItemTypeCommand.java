@@ -28,12 +28,20 @@ public class FindMenuItemTypeCommand extends Command {
         checkValidType();
     }
 
+    /**
+     * Stores empty field in an array for empty fields.
+     *
+     */
     private void checkEmptyField() {
         if (type == null || type.isEmpty()) {
             emptyFields.add("Menu Item Type");
         }
     }
 
+    /**
+     * Stores invalid field types in an array for incorrect fields.
+     *
+     */
     private void checkValidType() {
         ValidMenuItemTypeChecker validMenuItemTypeChecker = new ValidMenuItemTypeChecker();
         if (!validMenuItemTypeChecker.isValid(type)) {
@@ -41,6 +49,11 @@ public class FindMenuItemTypeCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command to find menu item by type.
+     *
+     * @return CommandResult result of the executed command.
+     */
     @Override
     public CommandResult execute() {
         if (!emptyFields.isEmpty()) {

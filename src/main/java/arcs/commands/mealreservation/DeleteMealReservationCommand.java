@@ -6,6 +6,7 @@ import arcs.commands.CommandResult;
 import java.util.ArrayList;
 
 public class DeleteMealReservationCommand extends Command {
+
     public static final String COMMAND_WORD = "deleteMealReservation";
 
     private String cid;
@@ -23,6 +24,10 @@ public class DeleteMealReservationCommand extends Command {
         checkEmptyField();
     }
 
+    /**
+     * Stores empty field in an array for empty fields.
+     *
+     */
     private void checkEmptyField() {
         if (cid == null || cid.isEmpty()) {
             emptyFields.add("Customer IC");
@@ -33,6 +38,11 @@ public class DeleteMealReservationCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command delete meal reservation.
+     *
+     * @return CommandResult result of the executed command.
+     */
     @Override
     public CommandResult execute() {
         if (!emptyFields.isEmpty()) {
@@ -51,6 +61,11 @@ public class DeleteMealReservationCommand extends Command {
         return commandResult;
     }
 
+    /**
+     * Executes the command to delete the meal reservation.
+     *
+     * @return CommandResult of the executed command.
+     */
     private CommandResult deleteMealReservationObject(String mealReservationInfoString) {
         CommandResult commandResult;
         if (mealReservationManager.deleteSpecificCustomerMealReservation(cid, fid)) {

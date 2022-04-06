@@ -14,6 +14,12 @@ public class MenuItemParser {
     private static final String INVALID_PARAMETER_MESSAGE = "Spaces for menu item name and type"
             + " must be separated by '_'";
 
+    /**
+     * Parses the User Input into a proper format for the Add Menu Item Command.
+     * @param argumentLine Raw User Input.
+     * @return Add Menu Item Command.
+     * @throws ArcsException If user does not use "_" to separate its Menu Item name and type.
+     */
     public static Command prepareAddMenuItem(String argumentLine) throws ArcsException {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new AddMenuItemCommand(null,null,null);
@@ -52,6 +58,11 @@ public class MenuItemParser {
         return new AddMenuItemCommand(menuItemName,menuItemType,menuItemPrice);
     }
 
+    /**
+     * Parses the user input into a correct format for Delete Menu Item Command.
+     * @param argumentLine Raw User Input.
+     * @return Delete Menu Item Command.
+     */
     public static Command prepareDeleteMenuItemCommand(String argumentLine) {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new UndefinedCommand("Index is not specified");

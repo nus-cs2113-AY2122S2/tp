@@ -10,6 +10,11 @@ public class ListMealReservationsCommand extends Command {
     public static final String COMMAND_WORD = "listMealReservations";
     private static final String FEEDBACK = "Existing Meal Reservations: ";
 
+    /**
+     * Executes the command to list out all meal reservations.
+     *
+     * @return CommandResult result of the executed command.
+     */
     @Override
     public CommandResult execute() {
         ArrayList<MealReservation> mealReservations = mealReservationManager.getAllMealReservations();
