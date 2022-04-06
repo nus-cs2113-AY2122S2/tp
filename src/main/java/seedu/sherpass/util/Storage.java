@@ -20,9 +20,6 @@ import java.util.List;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
 import static seedu.sherpass.constant.Index.INDENT_FACTOR;
-import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
-import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
-import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 public class Storage {
@@ -49,8 +46,7 @@ public class Storage {
         }
     }
 
-    // Wipes the existing file
-    private void wipeSaveData() {
+    public void wipeSaveData() {
         try {
             FileWriter fw = new FileWriter(saveFilePath);
             fw.close();
@@ -129,33 +125,4 @@ public class Storage {
         }
         return taskList;
     }
-
-    /**
-     * Creates a new save file or exits the program.
-     * <p>
-     * When the save file fails to load, the user decides if the program creates new save file
-     * or the user can manually inspect the save file.
-     * </p>
-     *
-     * @param ui Ui for printing messages
-     */
-    public void handleCorruptedSave(Ui ui) {
-        ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_1);
-        String response = "";
-
-        while (!response.equalsIgnoreCase("y") && !response.equalsIgnoreCase("n")) {
-            ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_2);
-            response = ui.readCommand().trim();
-        }
-
-        assert response.equalsIgnoreCase("y") || response.equalsIgnoreCase("n");
-
-        if (response.equalsIgnoreCase("y")) {
-            wipeSaveData();
-        } else {
-            ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
-            System.exit(0);
-        }
-    }
-
 }

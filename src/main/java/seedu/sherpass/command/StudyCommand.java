@@ -28,7 +28,7 @@ public class StudyCommand extends Command {
         ui.showToUser(WELCOME_MESSAGE_STUDY);
         ui.showLine();
         String userInput = ui.readCommand();
-        while (!userInput.contains("leave")) {
+        while (!userInput.equals("leave")) {
             ui.showLine();
             try {
                 parseStudyMode(ui, storage, userInput, timerLogic);
@@ -42,9 +42,10 @@ public class StudyCommand extends Command {
 
 
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
-        if (timerLogic.getIsTimerRunning()) {
+        if (!timerLogic.isTimerPausedOrStopped()) {
             timerLogic.callStopTimer();
         }
+        timerLogic.destroyFrame();
         ui.showLine();
         ui.showToUser(GOODBYE_MESSAGE_STUDY);
     }

@@ -1,0 +1,34 @@
+@startuml
+
+hide footbox
+participant "c:ShowCommand" as ShowCommand
+participant "<font color=red>**<<class>>** \nTimetable" as Timetable
+
+ShowCommand -> Timetable: showScheduleByDay(dateInput: LocalDate, filteredtasks: ArrayList<Task>, ui: Ui)
+activate Timetable
+
+Timetable -> TaskList: getFilteredTasksByDate(dateInput: LocalDate)
+activate TaskList
+TaskList --> Timetable: filteredTasks: ArrayList<Task>
+deactivate TaskList
+destroy TaskList
+
+Timetable -> Timetable: prepareTimetable(dateInput: LocalDate, filtererdTasks: ArrayList<Task>, ui: Ui)
+activate Timetable
+Timetable -> Timetable: printTimetable(day: String, date: String, filteredTasks: ArrayList<Task>, ui: Ui, taskLength: long, doOnDateLength: long, partitionLength: long)
+activate Timetable
+Timetable -> Timetable: printRow(colOne: String, colTwo: String, colThree: String, colFour: String, colFive: String, taskLength: long, doOnDateLength: long, i: int, ui: Ui)
+activate Timetable
+deactivate Timetable
+Timetable --> Timetable
+deactivate Timetable
+Timetable --> Timetable
+deactivate Timetable
+Timetable --> Timetable
+
+Timetable --> ShowCommand
+deactivate Timetable
+destroy Timetable
+
+
+@enduml

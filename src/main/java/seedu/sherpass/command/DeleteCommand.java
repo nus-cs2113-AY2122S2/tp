@@ -1,12 +1,16 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.exception.InvalidInputException;
+
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 
 public class DeleteCommand extends Command {
     private int deleteIndex;
+    private boolean isRepeat;
 
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = "Delete: Deletes a task in the task list.\n"
@@ -16,15 +20,10 @@ public class DeleteCommand extends Command {
      * Creates constructor for delete command.
      *
      * @param deleteIndex Contains task description to search for
-     * @param taskList    Task array.
-     * @throws InvalidInputException If there is no task present in task list
-     *                               that corresponds to given delete index.
      */
-    public DeleteCommand(int deleteIndex, TaskList taskList) throws InvalidInputException {
-        if (taskList.isTaskNotExist(deleteIndex)) {
-            throw new InvalidInputException();
-        }
+    public DeleteCommand(int deleteIndex, boolean isRepeat) {
         this.deleteIndex = deleteIndex;
+        this.isRepeat = isRepeat;
     }
 
     /**
@@ -36,7 +35,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.removeTask(deleteIndex, ui);
-        storage.writeSaveData(taskList);
+        try {
+            String taskToBeRemoved = taskList.getTask(deleteIndex).toString();
+            String repeatKeyWord = (isRepeat ? " repeated" : EMPTY_STRING);
+            taskList.removeTask(deleteIndex, isRepeat);
+            ui.showToUser("Okay. I've removed this" + repeatKeyWord + " task:\n  "
+                    + taskToBeRemoved + "\nNow you have " + taskList.getSize() + " task(s) in the list.");
+            storage.writeSaveData(taskList);
+        } catch (IndexOutOfBoundsException exception) {
+            ui.showToUser(ERROR_INVALID_INDEX_MESSAGE);
+        } catch (InvalidInputException exception) {
+            ui.showToUser(exception.getMessage());
+        }
     }
 }

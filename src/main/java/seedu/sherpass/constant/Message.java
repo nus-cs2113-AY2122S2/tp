@@ -13,7 +13,8 @@ public class Message {
             + "3) 1.5 hours\n\n"
             + "For testing purposes, you may start a 30s timer\nwith mode number 0.\n"
             + "Feel free to choose your own timer with\n'start /custom <timer_duration>'.\n"
-            + "Otherwise, you can start a stopwatch with 'start stopwatch'.";
+            + "Otherwise, you can start a stopwatch with 'start stopwatch'.\n"
+            + "You can also use the \"show today\" command to\nsee what tasks you have planned to complete.";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
     public static final String GOODBYE_MESSAGE_STUDY = "Leaving study session...\n"
             + "Welcome back to the main session! How can I help you?";
@@ -41,7 +42,7 @@ public class Message {
 
     public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
 
-    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
+    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after/equals to end time!";
     public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank and must be before "
             + "the date and time add commands";
     public static final String ERROR_EMPTY_TASK_LIST_MESSAGE = "The task list is empty!";
@@ -53,8 +54,11 @@ public class Message {
             + "it has some clashes\nwith your schedule :(";
     public static final String ERROR_EMPTY_ADD_COMMANDS_MESSAGE = "Add command is missing "
             + "description and/or date details!\n(and possibly a repeat frequency if you intend to add it in)";
-    public static final String ERROR_MULTIPLE_ARGS_MESSAGE = "Add command has both /by and /repeat commands.\n"
+    public static final String ERROR_REPEAT_BY_CLASH_MESSAGE = "Command has both /by and /repeat commands.\n"
             + "Please choose one of them.";
+    public static final String ERROR_DELETE_REPEATED_TASK = "Please exclude the '/repeat' delimiter "
+            + "\nwhen deleting a single task";
+    public static final String ERROR_BY_DATE_BEFORE_DO_ON_DATE = "Your deadline cannot be before your do on date!";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;
@@ -66,15 +70,13 @@ public class Message {
             + "trying to processing the system.\n"
             + "Please reboot and execute the application again.";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_1 = "Oops! It seems that your saved file "
-            + "is corrupted.";
-    public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_2 = "Would you like to start with a new save "
+            + "is corrupted.\nWould you like to start with a new save "
             + "file? (Y/N):";
-    public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_3 = "We're sorry this happened. "
+    public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_2 = "We're sorry this happened. "
             + "Please refer to the troubleshooting section in the user guide "
             + "or contact the developers for help.";
     public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"
-            + " key in a valid task number to mark/unmark your task."
-            + HELP_MESSAGE_SPECIFIC_COMMAND;
+            + " key in a valid task number to mark/unmark your task.";
     public static final String ERROR_INVALID_TIMER_INPUT_MESSAGE = "Oops! Your timer input "
             + "does not seem to be correct.\n\n"
             + "Please select one of the three default modes with\n"

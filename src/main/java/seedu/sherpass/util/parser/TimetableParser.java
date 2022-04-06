@@ -6,6 +6,7 @@ import seedu.sherpass.exception.InvalidInputException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithoutTimeFormat;
 import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
@@ -28,7 +29,8 @@ public class TimetableParser {
             throw new InvalidInputException();
         }
         try {
-            LocalDate dayInput = LocalDate.parse(selection, inputWithoutTimeFormat);
+            LocalDate dayInput = LocalDate.parse(selection,
+                    inputWithoutTimeFormat.withResolverStyle(ResolverStyle.STRICT));
             return new ShowCommand(dayInput, null);
         } catch (DateTimeParseException e) {
             return new ShowCommand(null, selection);
