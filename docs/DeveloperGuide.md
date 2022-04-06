@@ -115,7 +115,7 @@ and their interactions.
 - `Storage`: Reads data from, and writes data to the user's local storage.
 - `UI`: The UI of the application that deals with interaction with the user.
 - `Parser`: Parses user input to make sense of the command supplied by the user.
-- `Logic`: Executes the intended command of the user.
+- `Logic`: Executes the appropriate command as intended by the user.
 
 #### How the components interact with each other
 [Sequence diagram]
@@ -245,7 +245,7 @@ is `/create`, the `WorkoutCommand#execute()` method will call `WorkoutList#creat
 to create a new workout in the application. 
 To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
 <br><br>
-When all methods except the `listAllWorkout()` method is executed, the
+When all methods except the `listAllWorkout()` method are executed, the
 `FileManager` and `UI` classes will call its appropriate methods depending on the command action.
 From the previous example, the `/create` workout command action will call the 
 `FileManager#writeNewWorkoutToFile(newWorkout)` and also the `UI#printNewCreatedMessage(newWorkout)`
