@@ -11,6 +11,7 @@ import arcs.commands.flightbooking.ListBookingCommand;
 import arcs.commands.mealreservation.AddMealReservationCommand;
 import arcs.commands.mealreservation.DeleteMealReservationCommand;
 import arcs.commands.mealreservation.FindMealReservationCommand;
+import arcs.commands.mealreservation.ListMealReservationsCommand;
 import arcs.commands.menuitem.FindMenuItemTypeCommand;
 import arcs.commands.menuitem.FindMenuItemNameCommand;
 import arcs.commands.menuitem.AddMenuItemCommand;
@@ -115,6 +116,9 @@ public class Parser {
             break;
         case DeleteMealReservationCommand.COMMAND_WORD:
             command = MealReservationParser.prepareDeleteMealReservation(argumentLine);
+            break;
+        case ListMealReservationsCommand.COMMAND_WORD:
+            command = new ListMealReservationsCommand();
             break;
         default:
             command = new UndefinedCommand();
