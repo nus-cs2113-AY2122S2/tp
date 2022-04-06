@@ -7,82 +7,80 @@ small {
   font-size:12px;
 }
 
-nav {
-  width: 230px;
-  position: fixed;
-  top: 220px;
-  left:50%;
-  margin-left:-580px;
-  text-align: left;
+@media(min-height: 100px) {
+    nav {
+      width: 230px;
+      position: fixed;
+      top: 220px;
+      left:50%;
+      margin-left:-580px;
+      text-align: left;
 
-  ul {
-    list-style: none;
-    list-style-image:none;
-    font-size: 14px;
-    line-height:24px;
+      max-height: 600px;
+      height: 70%;
+      overflow-y: auto;
 
-    li {
-      padding: 5px 0px;
-      line-height: 16px;
-      // padding-right:17px;
-      // position:relative;
-      // right:-12px;
+      ul {
+        list-style: none;
+        list-style-image:none;
+        font-size: 14px;
+        line-height:24px;
 
-      &.tag-h1 {
-        font-size: 1.2em;
+        height: 70%;
+
+        li {
+          padding: 5px 0px;
+          line-height: 16px;
+          // padding-right:17px;
+          // position:relative;
+          // right:-12px;
+
+          &.tag-h1 {
+            font-size: 1.2em;
+
+            a {
+              font-weight: bold;
+              color: #333;
+            }
+
+            + .tag-h2 {
+
+            }
+          }
+
+          &.tag-h2 {
+
+            + .tag-h1 {
+              margin-top:10px;
+            }
+          }
+
+           &.tag-h3 {
+            font-size: 0.9em;
+            padding-left:13px;
+            line-height: 1.0em;
+
+            // + .tag-h1 {
+            //  margin-top:10px;
+            // }
+          }
+
+       }
 
         a {
-          font-weight: bold;
-          color: #333;
+          color: #666;
+
+          &:hover { color: #1c1c1c; }
         }
 
-        + .tag-h2 {
-
+        .active {
+          border-right:solid 4px #39C;
+          padding-right:13px;
         }
       }
-
-      &.tag-h2 {
-
-        + .tag-h1 {
-          margin-top:10px;
-        }
-      }
-
-       &.tag-h3 {
-        font-size: 0.9em;
-        padding-left:13px;
-        line-height: 1.0em;
-
-        // + .tag-h1 {
-        //  margin-top:10px;
-        // }
-      }
-
-   }
-
-    a {
-      color: #666;
-
-      &:hover { color: #1c1c1c; }
     }
-
-    .active {
-      border-right:solid 4px #39C;
-      padding-right:13px;
-    }
-  }
 }
 
 footer {
-  position:fixed;
-  float:right;
-  width:180px;
-  margin-right:-630px;
-  text-align: right;
-  line-height: 16px;
-  top:220px;
-  right:50%;
-  left:auto;
-  bottom:auto;
-  width:auto;
+  display: none;
 }

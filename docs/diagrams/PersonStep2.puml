@@ -7,9 +7,9 @@ title After user adds a person
 
 package " " {
     class family as "__family:Family__" MODEL_COLOR
-    class parents as "__parents:PersonList__" MODEL_COLOR_T1
-    class myGen as "__myGen:PersonList__" MODEL_COLOR_T1
-    class children as "__children:PersonList__" MODEL_COLOR_T1
+    class parents as "__parents:PersonList__" MODEL_COLOR_T3
+    class myGen as "__myGen:PersonList__" MODEL_COLOR_T3
+    class children as "__children:PersonList__" MODEL_COLOR_T3
     class john as "__:Person__" MODEL_COLOR_T2 {
         name = "John Doe"
     }

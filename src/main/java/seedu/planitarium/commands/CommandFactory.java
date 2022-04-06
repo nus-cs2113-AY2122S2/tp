@@ -46,7 +46,7 @@ public class CommandFactory {
     public Command getCommand(String userInput, Family family) throws PlanITariumException {
         assert (userInput != null) : Constants.INPUT_NOT_NULL;
         assert (family != null) : Constants.FAMILY_NOT_NULL;
-        switch (Parser.parseKeyword(userInput)) {
+        switch (Parser.parseCommandType(userInput)) {
         case ADD_PERSON_CMD:
             newCommand = new AddPersonCommand(userInput, family);
             break;

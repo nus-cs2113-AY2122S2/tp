@@ -1,12 +1,36 @@
 # PlanITarium Developer Guide
 
+This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
+workings of PlanITarium such that engineers can understand the various design and implementations in detail.
+
 ---
 
-# Introductions
+## Table of Contents
 
-This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
-workings of PlanITarium such that engineers can understand the various implementations in detail and work on the
-project.
+* [Acknowledgements](#acknowledgements)
+* [Design](#design)
+  * [Architecture](#architecture)
+  * [UI Component](#ui-component)
+  * [Commands Component](#commands-component)
+  * [Parser Component](#parser-component)
+  * [Family Component](#family-component)
+  * [Money Component](#money-component)
+  * [Storage Component](#storage-component)
+* [Implementation](#implementation)
+  * [Command Execution](#command-execution)
+  * [Logical Grouping of Persons Added](#logical-grouping-of-persons-added)
+  * [Edit Command](#edit-values-feature)
+  * [Find Command](#find-feature)
+  * [[Proposed] Listing Categorised Expenditures](#proposed-listing-categorised-expenditures-feature)
+  * [Data Archiving](#data-archiving)
+* [Documentation](#documentation)
+  * [Logging](#logging)
+  * [Testing](#testing)
+* [Product Scope](#product-scope)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ---
 
@@ -130,25 +154,22 @@ input after parsing by `Parser` according to user input.
 
 ![ParserClassDiagram](images/ParserClassDiagram.png)
 
-The `Parser` component consists of the `Parser` class, `ParserUtility` class and several `Exception` classes.
+The `Parser` component consists of the 
+[`Parser`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java) 
+class, 
+[`ParserUtility`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/ParserUtility.java)
+class and several `Exception` classes.
 
 The `Parser` class provides the `parseXYZ()` and `getValidXYZ()` methods where `XYZ` is a placeholder for the type of
-term (e.g. `parseKeyword()` and `getValidUserIndex`). The methods prepended by **parse** assists in parsing the user
+term (e.g. `parseCommandType()` and `getValidUserIndex`). The methods prepended by **parse** assists in parsing the user
 input into its respective terms and the method prepended by **getValid** assists in validating the parsed terms and
 returning an appropriately typed object to the `Commands` component. The `Parser` class interacts with the
 `ParserUtility` class which provides supporting methods for parsing and validating. Both classes throws exceptions as
 required.
 
-The following Sequence Diagram shows how the classes of the `Parser` component interacts for each user command.
-
-![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
-
-> :information_source: **Note:** The borders of the Sequence Diagram may look cut-off due to PlantUML limitations.
-> No necessary information has been omitted due to it.
-
 How the `Parser` component is used:
 
-1. When the `Commands` component receives a user input, `parseKeyword()` is called upon to parse the type of command to
+1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command to
    be executed.
 2. This will result in the keyword of the command to be returned as a string.
 3. When necessary, the `parseXYZ()` methods will be called upon to parse more terms for the `Commands`
@@ -158,11 +179,41 @@ How the `Parser` component is used:
    used for the command execution (e.g. `getValidGroupIndex(indexString)` to check that the index provided corresponds
    to an existing group). The `ParserUtility` is also called here to assist with the validation process.
 
-The Sequence Diagram below illustrates the interactions in the `Parser` component for a command execution.
-Let `userInput` be the command string `deletein /u 1 /g 2 /r 1` and the minimum index `MIN_INDEX` be the constant that
-is supported by PlanITarium to be `1`.
+The following Sequence Diagram shows how the classes of the `Parser` component interacts for each user command.
 
-![ParserSequenceDiagramExecute](images/ParserSequenceDiagram1.png)
+![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
+
+> :information_source: **Note:** The following are the ranges of index deemed valid:
+<table>
+    <thead>
+        <tr>
+            <th>Index</th>
+            <th>Range</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Group</td>
+            <td>[1, ..., 3]</td>
+        </tr>
+        <tr>
+            <td>User</td>
+            <td>[1, ..., MAX_UID], where MAX_UID is the number of people in the given group</td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>[1, ..., 6]</td>
+        </tr>
+        <tr>
+            <td>Income</td>
+            <td>[1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person</td>
+        </tr>
+        <tr>
+            <td>Expenditure</td>
+            <td>[1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person</td>
+        </tr>
+    </tbody>
+</table>
 
 ### Family Component
 
@@ -262,7 +313,7 @@ add /n Alice /g 1
 and this string will be passed to `CommandFactory` together with `personList` that contains all the people who had been
 added previously by calling `getCommand()`.
 
-Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseKeywords`, and
+Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseCommandTypes`, and
 the `Parser` should return `add` as keyword.
 
 Step 3. The `CommandFactory` will then match the keyword to the type of command. In this case, `add` is corresponding
@@ -272,7 +323,9 @@ and return this object to `PlanITarium`.
 Step 4. `PlanITarium` will then execute this command by calling `execute()`. Alice will then be added to the
 `personList`.
 
-### Logical grouping for different generation of person added
+---
+
+### Logical Grouping of Persons Added
 
 #### Implementation
 
@@ -337,14 +390,18 @@ print that out.
     * Pros: Only 1 command is required to show all information.
     * Cons: If the user only wants a high level overview, the user could be hit with information overload.
 
+---
+
 ### Edit Values Feature
 
 Maybe for Jiarong {Suggest to show the process from `parsing several delimiters` to `finding the income/expenditure`
 to `editing the value`.}
 
-### [Proposed] Find feature
+---
 
-#### Proposed Implementation
+### Find feature
+
+#### Implementation
 
 The proposed find feature is facilitated by `Categories`, `Money(temp)`, `MoneyList(temp)`
 and `Family`. The `Categories` is an enumeration of keys that is used as the expenditure categories. The `Money(temp)`
@@ -419,69 +476,7 @@ by [`CommandFactory`](#PlaceholderToCommandFactory):
     * Pros: Easy to implement and less memory usage.
     * Cons: Additional logic check is needed to print the income and expenditure in a well formatted way
 
-### [Proposed] Listing Categorised Expenditures Feature
-
-#### Proposed Implementation
-
-The proposed listing categorised expenditure feature is facilitated by `Categories`,`Expenditure`, `ExpenditureList`
-and `Family`. The proposed command to be called by the user is `listexp /c CATEGORY_INDEX`.
-The following additional operations will also be implemented:
-
-* `Family#listExpenseOfCategory(index)` -- Lists all expenses from the category index.
-* `PersonList#listExpenseOfCategory(index)` -- Wrapper method to get the list of expenses in the category 
-from each person.
-* `ExpenditureList#getExpenseOfCategory(index)` -- Returns a list of expenditures having category index matching the
-  index argument.
-
-Below is an example usage scenario and how the expenses of a category will be printed.
-
-Step 1. Given that the application already has existing data and there are two people being tracked, Alice and Bob, and
-only Alice's expenses were added and categorised. Suppose that Alice is the main user and Bob is her father, then Alice
-would belong to the current generation and Bob would belong to the parent generation. In this case `Family` would be
-initialised with two generations being tracked - parents and myGen.
-
-![ListCategorisedExpense0](images/ListCategorisedExpense0.png)
-
-Step 2. The user executes `listexp /c 2` command to list all expenses in category `2`. The `listexp`
-command will be parsed and calls `Family#listExpenseOfCategory(2)` which would instantiate a temporary array list for
-storing the results of the upcoming search.
-
-![ListCategorisedExpense1](images/ListCategorisedExpense1.png)
-
-Step 3. After the temporary array list has been created, `PersonList#listExpenseOfCategory(2)` will be called on each
-generation grouping and each tracked `Person` will be iterated. The `expenditureList` for a person would be retrieved 
-during that person's iteration and `ExpenditureList#getExpenseOfCategory(1)` will be called. This method then iterates 
-through the retrieved expenditure list and calls `Expenditure#getCategory()` on each expenditure, collecting and 
-returning the expenditure if its category matches the target category index. 
-The returned expenditures are then appended to the temporary array list.
-
-![ListCategorisedExpense2](images/ListCategorisedExpense2.png)
-
-Step 4. The iteration, collecting and appending to the temporary array list in step 3 is repeated until every person has
-been iterated. Finally, an appropriate message can be displayed to the user,
-stating the name of the category, following by a series of print to display the expenditures in this category.
-
-> :information_source: **Note:** If the `index` provided does not map to any existing categories,
-> then it can be observed that there will never be any results returned. The `listexp` command will
-> check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
-> fails, an error message will be displayed to the user instead of continuing with the execution.
-
-The following sequence diagram shows how the `listexp` operation works after a `ListCatCommand`
-command object has been created by [`CommandFactory`](#Command-Execution):
-
-![ListCategorisedExpenseSequence](images/ListCategorisedExpenseSequence.png)
-
-#### Design considerations:
-
-**Aspect: How to categorise expenses to be listed:**
-
-* **Alternative 1 (current proposal):** Using the category attribute for expenses.
-    * Pros: Easy to implement and less memory usage.
-    * Cons: May have performance issues as it needs to iterate through every person's expenditure.
-
-* **Alternative 2:** Maintain an array list for each category and store a copy of expenses.
-    * Pros: Fast to print expenses in a category, no unnecessary look-ups.
-    * Cons: Poor memory management, needs to store twice as many expenditures.
+---
 
 ### Data Archiving
 
@@ -513,17 +508,7 @@ operations. After all lines of the files has been read and all data added, the `
 and the `Family` object of the current session will consist of the data in `Family` of `Storage`. 
 The following sequence diagram shows how the loading operation works:
 
-The following Sequence Diagram shows how `Storage` interacts with the file.
-
-![StorageLoadSequence1](images/LoadSequenceDiagram1.png)
-
-The following Sequence Diagram shows how `Storage` interacts with `Family`.
-
-![StorageLoadSequence2](images/LoadSequenceDiagram2.png)
-
-The following Sequence Diagram shows how `Family` interacts with `PersonList` to load data.
-
-![StorageLoadSequence3](images/LoadSequenceDiagram3.png)
+![StorageLoadSequence](images/StorageLoadSequence.png)
 
 Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called. All
 data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
@@ -580,7 +565,7 @@ IO redirection testing can be performed via the following steps:
 
 ---
 
-## Product scope
+## Product Scope
 
 ### Target user profile
 
@@ -600,29 +585,33 @@ IO redirection testing can be performed via the following steps:
 
 ## User Stories
 
-| Version | As a ... | I want to ...                                   | So that I can ...                               |
-|---------|:---------|:------------------------------------------------|:------------------------------------------------|
-| v1.0    | user     | add people                                      | keep track of individuals                       |
-| v1.0    | user     | add income                                      | keep track of income                            |
-| v1.0    | user     | add expenditure                                 | keep track of expenditure                       |
-| v1.0    | user     | list income                                     | view each individual's income                   |
-| v1.0    | user     | list expenditure                                | view each individual's expenditure              |
-| v1.0    | user     | view my disposable income                       | plan my spending                                |
-| v1.0    | user     | add my family members into different categories | have a clearer view of their finances           |
-| v2.0    | user     | add recurring fixed expenditures and incomes    | not re-add them every month                     |
-| v2.0    | user     | add tags for each record                        | clean them up into different categories         |
-| v2.0    | user     |                  |                                                 |
-| v2.0    | user     |                  |                                                 |
-| v2.0    | user     |                  |                                                 |
-| v2.0    | user     |                  |                                                 |
-| v2.0    | user     |                  |                                                 |
-
+| Version | As a ... | I want to ...                                  | So that I can ...                         |
+|---------|:---------|:-----------------------------------------------|:------------------------------------------|
+| v1.0    | user     | add people                                     | keep track of individuals                 |
+| v1.0    | user     | add income                                     | keep track of income                      |
+| v1.0    | user     | add expenditure                                | keep track of expenditure                 |
+| v1.0    | user     | list income                                    | view each individual's income             |
+| v1.0    | user     | list expenditure                               | view each individual's expenditure        |
+| v1.0    | user     | view my disposable income                      | plan my spending                          |
+| v2.0    | user     | add recurring fixed expenditures and incomes   | not re-add them every month               |
+| v2.0    | user     | be able to edit my income and expenditure      | avoid re-adding records for minor changes |
+| v2.0    | user     | add tags for each expenditure                  | clean them up into different categories   |
+| v2.0    | user     | search for saved records                       | easily keep track of my finances          |
+| v2.0    | user     | narrow down my expenditure search              | avoid irrelevant results                  |
+| v2.0    | user     | see a summary of my family's finances          | better manage my family's spendings       |
+| v2.0    | user     | be able to see the commands in the application | avoid referring to the user guide         |
 
 ---
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any _mainstream_ operating systems that has **Java 11** or above.
+2. Should be able to hold up to 1000 combined entries without a noticeable degrade in performance for typical 
+usage.
+3. A user with above average typing speed for regular English text, that are neither programming code nor system
+administrator commands, should be able to accomplish most of the tasks faster using commands than using the keyboard
+and mouse.
+4. Users should be able to load and use the saved application data on _any_ operating systems that fulfils point 1.
 
 ---
 
@@ -632,6 +621,6 @@ IO redirection testing can be performed via the following steps:
 
 ---
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 
-See [IO redirection testing](#IO-redirection-testing).
+See [IO redirection testing](#testing).

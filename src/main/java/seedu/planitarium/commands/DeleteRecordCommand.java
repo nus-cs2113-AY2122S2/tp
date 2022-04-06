@@ -38,7 +38,7 @@ public class DeleteRecordCommand extends Command {
         super(userInput, family);
         this.type = "DeleteRecordCMD";
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
-        keyword = Parser.parseKeyword(userInput);
+        keyword = Parser.parseCommandType(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
         assert (uid > 0) : Constants.USER_INDEX_NOT_VALID;
         logger.log(Level.INFO, String.format(LOG_DELETEREC_INFO, group, uid));

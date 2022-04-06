@@ -40,7 +40,7 @@ public class EditRecordCommand extends Command {
         super(userInput, family);
         this.type = "EditRecordCMD";
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
-        keyword = Parser.parseKeyword(userInput);
+        keyword = Parser.parseCommandType(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
         try {
             isPermanent = Parser.parseRecurringStatus(userInput);
