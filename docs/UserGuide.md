@@ -134,7 +134,7 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `add medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`
 
-Example: `add medicine /info A123, Paracetamol, 500, 2023-06-11, Slight headache, 10`
+Example: `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
 
 #### ADD APPOINTMENT
 
@@ -320,7 +320,7 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `edit medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`
 
-Example: `edit medicine /info A123, Paracetamol, 500, 2023-06-11, Slight headache, 10`
+Example: `edit medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
 
 #### EDIT APPOINTMENT
 
@@ -510,7 +510,7 @@ TO BE UPDATED
 |----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `add doctor`         | `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g. `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                            |
 | `add patient`        | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                                    |
-| `add medicine`       | `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g. `add medicine /info Paracetamol, 500, 2023-06-11, Slight headache, 10`                                                                                               |
+| `add medicine`       | `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g. `add medicine /info Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                                                        |
 | `add appointment`    | `add appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name], [appointment date], [appointment details]`<br />e.g. `add appointment /info A123, S1234567A, Don, S7654321A, John, 2022-10-15, Regular knee checkup` |
 | `view doctor`        | `view doctor` or `view doctor /info [criteria], [input value]`<br />e.g. `view doctor /info name, Jimmy`                                                                                                                                                    |
 | `view patient`       | `view patient` or `view patient /info [criteria], [input value]`<br />e.g. `view patient /info name, Steven`                                                                                                                                                |
@@ -526,7 +526,7 @@ TO BE UPDATED
 | `find appointment`   | `find appointment /info [parameter], [keyword to find]`<br />e.g.`find appointment /info id, A123` <br />e.g.parameter must be one of the six (appointment id, patient nric, patient name, doctor nric, doctor name, appointment date)                      |
 | `edit doctor`        | `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g.`edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                           |
 | `edit patient`       | `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g.`edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                                   |
-| `edit medicine`      | `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g.`edit medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`                                                                              |
+| `edit medicine`      | `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g.`edit medicine /info A123,Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                                       |
 | `help`               | view the help function for all the commands required                                                                                                                                                                                                        |
 | `bye`                | exit the programme                                                                                                                                                                                                                                          |
 | `to be updated`      | `to be updated`                                                                                                                                                                                                                                             |
