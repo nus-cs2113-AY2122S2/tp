@@ -71,15 +71,15 @@ Example of usage:
 `list appointment`
 
 ### Searching a person: `search`
-Searches existing doctors/patients with their numbers in the list.
+Searches existing doctors/patients with their ids
 
-Format: `search ROLE NO`
+Format: `search ROLE ID`
 
 Example of usage:
 
-`search doctor 1`
+`search doctor 1234`
 
-`search patient 3`
+`search patient 3456`
 
 ### Searching an appointment: `search`
 Searches existing appointments with appointment time.
