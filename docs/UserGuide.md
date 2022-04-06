@@ -2,37 +2,42 @@
 
 ## Introduction
 
-*Simplst* is a Warehouse Management System (WMS) for managing warehouse inventory and processes, optimzed for use view a Command Line Interface
-(CLI) for warehouse management workers and warehouse management managers.
+*Simplst* is a Warehouse Management System (WMS) for managing warehouse inventory and order management, optimzed for use 
+via a Command Line Interface (CLI) for warehouse management workers and managers.
 
-Simplst aims to improve efficiency and optimise standard warehouse tasks by having a CLI app which is simple to setup and quick to use.
-Simplst will mainly be used to add, remove, list and view orders and goods for the warehouse.
+Simplst aims to improve efficiency and optimise standard warehouse tasks by having a CLI app which is simple to 
+setup and quick to use. Simplst will mainly be used to add, remove, list and view goods and orders for the warehouse.
 
-### What is a Good?
-In the context for Simplst, a Good contains:
-* unique id as a number
-* name
-* quantity for the goods as a number
-* description of orderline
-
-### What is an Order?
-In this context for Simplst, an order is a collection of goods that is for one reciepient and one address:
-* unique id as a number
-* reciever name
-* address
-* list of goods
-
-An order should be first added to Simplst, then add the goods related to that order after.
-
-This User Guide is meant for both workers and managers to learn how to use Simplst and the features to improve efficiency 
-
+##Contents page
+* [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
 * [Quick start](#quick-start)
 * [Features](#features)
-  * [Adding inventory items:](#adding-inventory-items-add) `add` 
-  * [Removing inventory items:](#removing-inventory-items-remove) `remove`
-  * [Getting a list of total inventory:](#getting-a-list-of-total-inventory-list) `list` 
-  * [Getting a view of inventory:](#getting-a-description-of-inventory-view) `view`
-  * [Getting the total number of inventory in the warehouse:](#getting-the-total-number-of-inventory-in-the-warehouse-total) `total` 
+  * [Unit Good Commands](#unit-good-commands)
+    * [Adding a Unit Good:](#adding-a-unit-good) `add ug/`
+    * [Removing a Unit Good:](#removing-a-unit-good) `remove ug/`
+    * [Listing Unit Goods:](#listing-unit-goods) `list ug/`
+  * [Good Commands](#good-commands)
+    * [Adding quantity of a Unit Good:](#adding-quantity-of-a-unit-good) `add g/`
+    * [Removing quantity of a Unit Good:](#removing-quantity-of-a-unit-good) `remove g/`
+    * [Listing available Goods:](#listing-available-goods) `list g/`
+    * [Viewing a Good:](#viewing-a-good) `view g/`
+    * [Finding a Good:](#finding-a-good) `find`
+  * [Order Commands](#order-commands)
+
+##Explanation of key terms or symbols
+| Terms or Symbols used | Further Explanation                                                                                                               |  
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| Unit Good            | A Unit Good contains:  <br/>-unique SKU <br/>-name <br/>-description of unit good <br/>-capacity                                  |
+| SKU                  | Stands for Stock-Keeping Unit. It is the unique unit number for a specific warehouse item. It can contain characters and numbers. |
+| Capacity             | Defined as Small, Medium and Large.<br/> SMALL: <br/>Medium: <br/>Large:                                                          |
+| Good                 | Contains all the details of a Unit Good. A Good contains: <br/>-quantity of the Unit Good                                         |
+| Order                | To be confirmed                                                                                                                   |             
+| `Words in MarkUp`    | Used to highlight keywords used for commands and commands themself.                                                               |
+| Icon                 | Used to denote features for warehouse managers.                                                                                   |
+
+This User Guide is meant for both warehouse workers and managers to learn how to use Simplst and the features to 
+improve efficiency in managing warehouse inventory and orders. 
+
 
 ## Quick Start
 
@@ -52,6 +57,28 @@ ____________________________________________________________
     available in Simplst and how to type the command into the command line.
 
 ## Features
+
+### Unit Good Commands
+
+#### Adding a Unit Good `add ug/`
+
+#### Removing a Unit Good `remove ug/`
+
+#### Listing Unit Goods `list ug/`
+
+
+### Good Commands
+
+#### Adding quantity of a Unit Good `add g/`
+
+#### Removing quantity of a Unit Good `remove g/`
+
+#### Listing available Goods `list g/`
+
+#### Finding a Good `find`
+
+
+### Order Commands
 
 ### Adding inventory items: `add`
 Add a new orderline or order into Simplst.
