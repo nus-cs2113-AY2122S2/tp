@@ -165,7 +165,7 @@ public class DayList {
      * @param userArgument Day number to be reset/cleared.
      * @throws InvalidScheduleException If the day number specified in userArgument is invalid.
      */
-    public void clearDayPlan(String userArgument) throws InvalidScheduleException {
+    public String clearDayPlan(String userArgument) throws InvalidScheduleException {
         int dayNumber = Integer.parseInt(userArgument);
         String className = this.getClass().getSimpleName();
         if (!isDayValid(dayNumber)) {
@@ -173,12 +173,12 @@ public class DayList {
             throw new InvalidScheduleException(className, InvalidScheduleException.DAY_NUMBER_OUT_OF_RANGE);
         }
         if (dayList[dayNumber - 1] == null) {
-            System.out.println("No plan is being scheduled, hence no plan is cleared.");
-            return;
+            return " ";
         }
 
         clearPlan(dayNumber - 1);
-        System.out.println("Plan had been cleared for " + covertDayNumberToDay(dayNumber) + ".");
+        String dayName = covertDayNumberToDay(dayNumber);
+        return dayName;
     }
 
     /**
