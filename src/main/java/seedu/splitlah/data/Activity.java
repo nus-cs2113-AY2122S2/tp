@@ -89,20 +89,6 @@ public class Activity implements Serializable, Comparable<Activity> {
     }
 
     /**
-     * Returns a String object which summarises the activity, including the activity's unique identifier,
-     * the name of the activity, the total cost spent in the activity
-     * and the name of the person who paid for the activity.
-     *
-     * @return A String object which summarises the activity.
-     */
-    public String getActivitySummaryString() {
-        String costInString = "$" + String.format("%.2f", totalCost);
-        String personName = personPaid.getName();
-        return activityId + SUMMARY_STRING_SEPARATOR + activityName + SUMMARY_STRING_SEPARATOR + costInString
-                + SUMMARY_STRING_SEPARATOR + personName;
-    }
-
-    /**
      * Returns a String object of the persons involved in the activity and their respective costs for the activity.
      *
      * @return A String object representing persons involved and their respective costs owed.
