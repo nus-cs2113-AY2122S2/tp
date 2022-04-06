@@ -174,10 +174,12 @@ How the `Logic` component works:
 3. This subclass-of-`Command` object is executed by the `WerkIt` class, which calls the `execute()` method of that subclass-of-`Command` object.
 4. Depending on the command action (e.g. create/delete/update/list), the `execute()` method will identify and perform the appropriate actions.
 
-<br><br>
+<br>
 Illustration of the interactions within the `Logic` component can be found
 in the sequence diagram below. The example given is for the creation of new workouts (`workout /new`):
+<br><br>
 ![logicComponentUML](uml/sequenceDiagrams/miscellaneous/images/logicComponentSD.png)
+<br><br>
 <span class="box info">:memo: This is a high level overview of how the creation of workouts
 is done. To improve readability, some classes and methods have been omitted from the diagram above.</span>
 
