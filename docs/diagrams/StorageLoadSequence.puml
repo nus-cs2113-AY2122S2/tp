@@ -12,7 +12,7 @@ end box
 -> Main: initialisePlanitarium()
 activate Main
 create Storage
-Main -> Storage: new()
+Main -> Storage: Storage()
 activate Storage
 Storage --> Main: :Storage
 deactivate Storage
@@ -30,11 +30,11 @@ end
 Storage --> Storage
 deactivate Storage
 create Family
-Storage -> Family: new()
+Storage -> Family: Family()
 activate Family
 create PersonList
 loop LOOP_COLOR for each group
-Family -> PersonList : new()
+Family -> PersonList : PersonList()
 activate PersonList
 PersonList --> Family : :PersonList
 deactivate PersonList
