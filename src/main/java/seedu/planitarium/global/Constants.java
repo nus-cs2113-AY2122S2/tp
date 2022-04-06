@@ -97,4 +97,7 @@ public class Constants {
 
     // For Command logging
     public static final String LOG_ERROR_INFO = "Unknown error occurred in execution";
+
+    // For general string or loop manipulation
+    public static final int ZERO = 0;
 }
