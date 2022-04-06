@@ -90,6 +90,38 @@ VGA Cable | 1
 HDMI Cable | 2
 ```
 
+### Borrow an Item: `borrow`
+Borrow the item that you want for the duration between the start date and end date.
+
+Format: `borrow i/ITEM_INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
+* `ITEM_INDEX` should be within one of the index for ItemList.
+* The `START_DATE` and `END_DATE` must be in YYYY-MM-DD format.
+* `END_DATE` must be either the same as `START_DATE` or a later date.
+* Borrower will start borrowing the item at `START_DATE` 00:01 HRS.
+* Borrower will return the item at `END_DATE` 2359 HRS.
+* The next borrower can only borrow after `END_DATE` + 1 day or `START_DATE` - 1 day.
+* A borrower will not be able to borrow if his/her borrow timeframe overlaps
+  with a borrow record in the system.
+* The `BORROWER_NAME` cannot contain punctuations.
+
+Examples of usage:
+```
+> borrow i/1 s/2021-03-21 e/2021-03-25 p/John Smith
+You have successfully borrowed the following item:
+Name of Item: JBLFlip5
+Name of Borrower: John Smith
+Borrow Duration: 2021-03-21 to 2021-03-23
+```
+
+```
+> borrow i/1 s/2021-03-25 e/2021-03-21 p/John Smith
+Error: Incorrect start and end date order. Please ensure that end date >= start date.
+```
+
+```
+> borrow i/28 s/2021-03-21 e/2021-03-21 p/John Smith
+Sorry. This item does not exist in the current inventory.
+```
 
 ### List Current Borrowings: `listcb`
 List all items that are currently being borrowed. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
@@ -250,43 +282,7 @@ Sorry. There are no items available for borrowings.
 ```
 
 
-### Borrow an Item: `borrow`
-Borrow the item that you want for the duration between the start date and end date.
 
-Format: `borrow i/ITEM_INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
-* `ITEM_INDEX` should be within one of the index for ItemList.
-* The `START_DATE` and `END_DATE` must be in YYYY-MM-DD format.
-* `END_DATE` must be either the same as `START_DATE` or a later date.
-* Borrower will start borrowing the item at `START_DATE` 00:01 HRS.
-* Borrower will return the item at `END_DATE` 2359 HRS.
-* The next borrower can only borrow after `END_DATE` + 1 day or `START_DATE` - 1 day.
-* A borrower will not be able to borrow if his/her borrow timeframe overlaps 
-with a borrow record in the system.
-* The `BORROWER_NAME` cannot contain punctuations.
-
-Examples of usage:
-```
-> borrow i/1 s/2021-03-21 e/2021-03-25 p/John Smith
-You have successfully borrowed the following item:
-Name of Item: JBLFlip5
-Name of Borrower: John Smith
-Borrow Duration: 2021-03-21 to 2021-03-23
-```
-
-```
-> borrow i/1 s/2021-03-25 e/2021-03-21 p/John Smith
-Error: Incorrect start and end date order. Please ensure that end date >= start date.
-```
-
-```
-> borrow i/1 s/2021-03-21 e/2021-03-25 p/Alex Mitten
-Sorry. The item is not avaiable for borrowing during this duration.
-```
-
-```
-> borrow i/28 s/2021-03-21 e/2021-03-21 p/John Smith
-Sorry. This item does not exist in the current inventory.
-```
 
 ### Get Description of Item: `desc`
 Retrieve the details of a particular item of your interest from the current inventory by entering the index (1-based indexing).
