@@ -2,7 +2,6 @@ package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.ActivityEditCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserErrors;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
@@ -27,15 +26,15 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
                     + "/cl [COST1 COST2...] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
     public static final String[] COMMAND_DELIMITERS = {
-            ParserUtils.SESSION_ID_DELIMITER,
-            ParserUtils.ACTIVITY_ID_DELIMITER,
-            ParserUtils.NAME_DELIMITER,
-            ParserUtils.PAYER_DELIMITER,
-            ParserUtils.INVOLVED_DELIMITER,
-            ParserUtils.TOTAL_COST_DELIMITER,
-            ParserUtils.COST_LIST_DELIMITER,
-            ParserUtils.GST_DELIMITER,
-            ParserUtils.SERVICE_CHARGE_DELIMITER
+        ParserUtils.SESSION_ID_DELIMITER,
+        ParserUtils.ACTIVITY_ID_DELIMITER,
+        ParserUtils.NAME_DELIMITER,
+        ParserUtils.PAYER_DELIMITER,
+        ParserUtils.INVOLVED_DELIMITER,
+        ParserUtils.TOTAL_COST_DELIMITER,
+        ParserUtils.COST_LIST_DELIMITER,
+        ParserUtils.GST_DELIMITER,
+        ParserUtils.SERVICE_CHARGE_DELIMITER
     };
 
     private int sessionId;
@@ -69,6 +68,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
             throw new InvalidFormatException(Message.ERROR_ACTIVITYEDIT_COST_NOT_PROVIDED);
         }
     }
+
     /**
      * Returns an ActivityEditCommand object from the supplied command arguments.
      *
@@ -82,8 +82,8 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
 
         assert commandArgs != null : Message.ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL;
         try {
-            sessionId = Parser.parseSessionId(commandArgs);
-            activityId = Parser.parseActivityId(commandArgs);
+            sessionId = ParserUtils.parseSessionId(commandArgs);
+            activityId = ParserUtils.parseActivityId(commandArgs);
         } catch (InvalidFormatException exception) {
             String invalidMessage = exception.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
                     + "\n\t" + COMMAND_FORMAT_SECOND;
@@ -91,7 +91,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
 
         try {
-            activityName = Parser.parseName(commandArgs);
+            activityName = ParserUtils.parseName(commandArgs);
         } catch (InvalidFormatException exception) {
             if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/n"))) {
                 throw new InvalidFormatException(exception.getMessage());
@@ -99,7 +99,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
 
         try {
-            payer = Parser.parsePayer(commandArgs);
+            payer = ParserUtils.parsePayer(commandArgs);
         } catch (InvalidFormatException exception) {
             if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/p"))) {
                 throw new InvalidFormatException(exception.getMessage());
@@ -107,7 +107,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
 
         try {
-            involvedList = Parser.parseInvolved(commandArgs);
+            involvedList = ParserUtils.parseInvolved(commandArgs);
         } catch (InvalidFormatException exception) {
             if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/i"))) {
                 throw new InvalidFormatException(exception.getMessage());
@@ -116,7 +116,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
 
 
         try {
-            totalCost = Parser.parseTotalCost(commandArgs);
+            totalCost = ParserUtils.parseTotalCost(commandArgs);
         } catch (InvalidFormatException exception) {
             if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/co"))) {
                 throw new InvalidFormatException(exception.getMessage());
@@ -124,7 +124,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
 
         try {
-            costList = Parser.parseCostList(commandArgs);
+            costList = ParserUtils.parseCostList(commandArgs);
         } catch (InvalidFormatException exception) {
             if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/cl"))) {
                 throw new InvalidFormatException(exception.getMessage());
@@ -138,7 +138,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
 
         try {
-            gst = Parser.parseGstIncludingZero(commandArgs);
+            gst = ParserUtils.parseGstIncludingZero(commandArgs);
         } catch (InvalidFormatException exception) {
             if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/gst"))) {
                 throw new InvalidFormatException(exception.getMessage());
@@ -146,7 +146,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
         }
 
         try {
-            serviceCharge = Parser.parseServiceChargeIncludingZero(commandArgs);
+            serviceCharge = ParserUtils.parseServiceChargeIncludingZero(commandArgs);
         } catch (InvalidFormatException exception) {
             if (!exception.getMessage().equals(ParserErrors.getMissingDelimiterErrorMessage("/sc"))) {
                 throw new InvalidFormatException(exception.getMessage());

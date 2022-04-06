@@ -810,6 +810,34 @@ public class ParserUtils {
     }
 
     /**
+     * Returns a double that represents the GST charge in percents, given the command arguments from user input,
+     * delimited by the GST delimiter. Returns -1 if the delimiter is not found.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A double that represents a GST charge in percents if the GST delimiter is found,
+     *         a double value of -1 otherwise.
+     * @throws InvalidFormatException If no arguments representing a GST charge were provided after the
+     *                                GST delimiter,
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
+     */
+    public static double parseGstIncludingZero(String commandArgs) throws InvalidFormatException {
+        if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.GST_DELIMITER)) {
+            return -1;
+        }
+
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.GST_DELIMITER);
+        double gst = ParserUtils.parsePercentageFromString(argument, ParserUtils.GST_DELIMITER);
+        assert gst >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
+        if (gst > MAXIMUM_SURCHARGE_PERCENT) {
+            throw new InvalidFormatException(ParserErrors.getInvalidGstErrorMessage());
+        }
+        return gst;
+    }
+
+    /**
      * Returns a double that represents the service charge in percents, given the command arguments from user input,
      * delimited by the Service charge delimiter.
      *
@@ -829,6 +857,34 @@ public class ParserUtils {
 
         String argument = getArgumentFromDelimiter(commandArgs, SERVICE_CHARGE_DELIMITER);
         double serviceCharge = parsePercentageFromString(argument, SERVICE_CHARGE_DELIMITER);
+        assert serviceCharge >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
+        if (serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
+            throw new InvalidFormatException(ParserErrors.getInvalidServiceChargeErrorMessage());
+        }
+        return serviceCharge;
+    }
+
+    /**
+     * Returns a double that represents the service charge in percents, given the command arguments from user input,
+     * delimited by the Service charge delimiter. Returns -1 if the delimiter is not found.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A double that represents a service charge in percents if the service charge delimiter is found,
+     *         a double value of -1 otherwise.
+     * @throws InvalidFormatException If no arguments representing a service charge were provided after the
+     *                                Service charge delimiter,
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
+     */
+    public static double parseServiceChargeIncludingZero(String commandArgs) throws InvalidFormatException {
+        if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER)) {
+            return -1;
+        }
+
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER);
+        double serviceCharge = ParserUtils.parsePercentageFromString(argument, ParserUtils.SERVICE_CHARGE_DELIMITER);
         assert serviceCharge >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
         if (serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidServiceChargeErrorMessage());

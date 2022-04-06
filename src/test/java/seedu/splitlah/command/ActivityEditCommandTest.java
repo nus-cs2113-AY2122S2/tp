@@ -84,22 +84,15 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if a participant is removed from the activity when the participant list supplied no longer includes
-     * the removed participant.
+     * Checks if the activity is not edited when a participant list is provided without a cost list.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
     @Test
-    public void run_editActivityPersonList_PersonListIsEdited() throws InvalidDataException {
+    public void run_editActivityPersonList_withoutCostList() throws InvalidDataException {
         String userInput = "activity /edit /sid 1 /aid 1 /i Alice Bob";
         Command command = Parser.getCommand(userInput);
-        assertEquals(ActivityEditCommand.class, command.getClass());
-        command.run(manager);
-        ArrayList<Person> involvedPersonList =
-                session.getActivity(ACTIVITY_ID).getInvolvedPersonList();
-        assertEquals(2, involvedPersonList.size());
-        assertEquals("Alice", involvedPersonList.get(0).getName());
-        assertEquals("Bob", involvedPersonList.get(1).getName());
+        assertEquals(InvalidCommand.class, command.getClass());
     }
 
     /**
@@ -110,7 +103,7 @@ class ActivityEditCommandTest {
      */
     @Test
     public void run_editActivityPersonListWithPersonNotInSession_PersonListIsNotEdited() throws InvalidDataException {
-        String userInput = "activity /edit /sid 1 /aid 1 /i Michael Bob";
+        String userInput = "activity /edit /sid 1 /aid 1 /i Michael Bob /cl 20 30";
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityEditCommand.class, command.getClass());
         command.run(manager);
