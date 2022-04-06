@@ -93,7 +93,7 @@ public class PlanList {
      */
     public int getIndexNumFromPlanName(String planName) throws InvalidPlanException {
         for (int i = 0; i < getPlansDisplayList().size(); i += 1) {
-            if (getPlansDisplayList().get(i).equals(planName)) {
+            if (getPlansDisplayList().get(i).equalsIgnoreCase(planName)) {
                 return (i + 1);
             }
         }
@@ -117,7 +117,8 @@ public class PlanList {
      */
     public Plan createAndAddPlan(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, InvalidPlanException {
-        String userPlanNameInput = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[0].trim();
+        String userPlanNameInput
+                = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[0].trim().toLowerCase();
         String userWorkoutIndexNumbersString = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[1].trim();
         String className = this.getClass().getSimpleName();
         checkPlanNameValidity(userPlanNameInput, className);

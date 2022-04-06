@@ -381,7 +381,8 @@ Showed all workouts in list
 ```
 ---
 ### Update a Workout: `workout /update`
-Modifies an existing workout from the workout list.<br>
+Modifies an existing workout from the workout list. If the modified workout is included in
+any plans, workout stored in these plan will also be modified. <br/>
 *Noted: Only the number of repetition can be changed.*
 
 Format: `workout /update <workout index number> <new number of repetitions>`
@@ -404,22 +405,30 @@ Showing workouts 1-3 of 3:
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
+Plan 1 contains the following workouts:
+```
+----------------------------------------------------------------------
+Here are the 3 workouts in [Plan 1].
+1. push up (10 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+----------------------------------------------------------------------
+```
+Command to see the workouts in the plan is explained in [here](#list-details-of-a-plan-plan-details).
+
 To update workout number 1 (push up with 10 reps) 
 to 15 reps, enter the following command:
 ```
 > workout /update 1 15
 ```
 **Expected Outcome**
-```
-----------------------------------------------------------------------
-Alright, the following workout has been updated:
 
-	push up (15 reps)
+![Expected Outcome For Update Workout](images/expectedMessageForUpdateWorkout.png)<br/>
 
-----------------------------------------------------------------------
-```
-Workout number 1 (push up with 10 reps) is updated to push up with 15 reps.
-Running the `workout /list` command again will show the workout list as follows:
+Workout number 1 (push up with 10 reps) is updated to push up with 15 reps. 
+If no plan contains the updated workout, content in the red box will not be displayed.
+
+Now, running the `workout /list` command again will show the workout list as follows:
 ```
 ----------------------------------------------------------------------
 Showing workouts 1-3 of 3:
@@ -431,6 +440,7 @@ Showing workouts 1-3 of 3:
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
+
 ---
 ## Plan Features
 ### Create a Plan: `plan /new`
@@ -465,7 +475,7 @@ To create a new plan, enter the following command:
 ----------------------------------------------------------------------
 Alright, the following plan has been created:
 
-	Grow My Muscles
+	grow my muscles
 
 ----------------------------------------------------------------------
 ```
@@ -489,9 +499,9 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. Plan A
-2. Plan B
-3. Grow My Muscles
+1. plan a
+2. plan b
+3. grow my muscles
 ----------------------------------------------------------------------
 ```
 In the current plans list above, there are 3 plans available.
@@ -517,27 +527,27 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. plan A
-2. plan B
-3. Grow My Muscles
+1. plan a
+2. plan b
+3. grow my muscles
 ----------------------------------------------------------------------
 ```
-To view details of plan number 3 from the list, enter the following command:<br/>
-*Plan number 3 is created by the command in [Create A Plan](#create-a-plan-plan-new).*
+To view details of plan with index number 3 from the list, enter the following command:<br/>
+*Plan with index number 3 is created by the command in [Create A Plan](#create-a-plan-plan-new).*
 ```
 > plan /details 3
 ```
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
-Here are the 4 workouts in [Grow My Muscles].
+Here are the 4 workouts in [grow my muscles].
 1. push up (10 reps)
 2. sit up (10 reps)
 3. pull up (10 reps)
 4. push up (10 reps)
 ----------------------------------------------------------------------
 ```
-All workouts in the [Grow My Muscles] plan will be displayed.
+All workouts in the [grow my muscles] plan will be displayed.
 
 ---
 ### Delete a Plan: `plan /delete`
@@ -559,26 +569,43 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. plan A
-2. plan B
-3. Grow My Muscles
+1. plan a
+2. plan b
+3. grow my muscles
 ----------------------------------------------------------------------
 ```
-To remove plan number 3 from the list, enter the following command:
+Plan is scheduled as follows:
+```
+----------------------------------------------------------------------
+
+                         WORKOUT SCHEDULE
+----------------------------------------------------------------------
+     Day       |            Plan Name
+----------------------------------------------------------------------
+      Monday   |        grow my muscles               
+     Tuesday   |            rest day                      
+   Wednesday   |            rest day                      
+    Thursday   |            rest day                      
+      Friday   |            rest day                      
+    Saturday   |            rest day                      
+      Sunday   |            rest day                      
+
+----------------------------------------------------------------------
+```
+Command to see the schedule is explained in [here](#view-schedule-schedule-list).
+
+To remove plan with index number 3 from the list, enter the following command:
 ```
 > plan /delete 3
 ```
 **Expected Outcome**
-```
-----------------------------------------------------------------------
-Alright, the following plan has been removed:
 
-	Grow My Muscles
+![Expected Outcome For Delete Plan](images/expectedMessageForDeletePlan.png)<br/>
 
-----------------------------------------------------------------------
-```
-Now, plan number 3 (Grow My Muscles) is removed from the plan list.
-Running the `plan /list` command will show the plan list as follows:
+Now, plan with index number 3 (grow my muscles) is removed from the plan list. If plan with index number 3
+is not scheduled for any day, content in the red box will not be shown.
+
+Now, running the `plan /list` command will show the plan list as follows:
 ```
 ----------------------------------------------------------------------
 Here are all your plan(s).
@@ -599,7 +626,7 @@ One thing to take note of is that the current version of WerkIt only supports 1 
 want to have multiple plans, you can simply create a new plan using the `plan /new` command to include all the workouts
 stated in those plans.
 
-Format: `schedule /update <day number> <plan number>`
+Format: `schedule /update <day number> <plan index number>`
 
 | Parameters            | Description                                                                                                        |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------|
