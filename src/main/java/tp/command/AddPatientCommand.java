@@ -1,14 +1,7 @@
 package tp.command;
 
-import tp.AppointmentList;
-import tp.DoctorList;
-import tp.PatientList;
-import tp.Ui;
+import tp.*;
 import tp.person.Patient;
-import tp.DoctorStorage;
-import tp.PatientStorage;
-import tp.IHospitalException;
-import tp.AppointmentStorage;
 
 public class AddPatientCommand extends Command {
     protected String id;
@@ -32,9 +25,9 @@ public class AddPatientCommand extends Command {
     }
 
     @Override
-    public String execute(DoctorList doctorList, PatientList patientList,
+    public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                          PatientStorage patientStorage,
+                          PatientStorage patientStorage,NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         Patient patient = new Patient(id, name, phoneNumber, email,symptom,description);
         patientList.addPatient(patient);

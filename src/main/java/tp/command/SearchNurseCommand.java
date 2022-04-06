@@ -1,24 +1,24 @@
 package tp.command;
 
 import tp.*;
-import tp.person.Doctor;
+import tp.person.Nurse;
 
-public class SearchDoctorCommand extends Command {
+public class SearchNurseCommand extends Command{
     protected String id;
 
-    public SearchDoctorCommand(String id) {
+    public SearchNurseCommand(String id) {
         this.id = id;
     }
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                          PatientStorage patientStorage,NurseStorage nurseStorage,
+                          PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Doctor curr = doctorList.searchDoctor(id);
-        if (curr == null) {
+        Nurse cur = nurseList.searchNurse(id);
+        if (cur == null) {
             return String.format("There is no doctor with ID: " + id + "\n");
         }
-        return String.format("Here's the doctor found: \n" + curr + "\n");
+        return String.format("Here's the doctor found: \n" + cur + "\n");
     }
 }
