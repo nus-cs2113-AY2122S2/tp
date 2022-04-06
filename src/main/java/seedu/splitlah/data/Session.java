@@ -134,6 +134,23 @@ public class Session implements Serializable, Comparable<Session> {
         throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
     }
 
+    private void removeActivityCosts(Activity activity) throws InvalidDataException {
+        int activityId = activity.getActivityId();
+        ArrayList<Person> involvedPersonList = activity.getInvolvedPersonList();
+        Person payer = activity.getPersonPaid();
+        if (involvedPersonList != null) {
+            boolean isPayerInParticipantList = involvedPersonList.contains(payer);
+            for (Person person : involvedPersonList) {
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + person.getName());
+                person.removeActivityCost(activityId);
+            }
+            if (!isPayerInParticipantList) {
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + payer.getName());
+                payer.removeActivityCost(activityId);
+            }
+        }
+    }
+
     /**
      * Removes an Activity object specified by a numerical identifier that uniquely identifies the activity
      * from the Session. Additionally, removes all ActivityCost objects with the same activityId from all Person
@@ -161,19 +178,7 @@ public class Session implements Serializable, Comparable<Session> {
             throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
         }
 
-        ArrayList<Person> involvedPersonList = deleteTarget.getInvolvedPersonList();
-        Person payer = deleteTarget.getPersonPaid();
-        if (involvedPersonList != null) {
-            boolean isPayerInParticipantList = involvedPersonList.contains(payer);
-            for (Person person : involvedPersonList) {
-                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + person.getName());
-                person.removeActivityCost(activityId);
-            }
-            if (!isPayerInParticipantList) {
-                Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSION_ACTIVITYCOST_REMOVAL + payer.getName());
-                payer.removeActivityCost(activityId);
-            }
-        }
+        removeActivityCosts(deleteTarget);
         activityList.remove(deleteTarget);
     }
 
