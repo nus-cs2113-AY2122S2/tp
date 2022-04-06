@@ -108,11 +108,7 @@ public class EditParser extends Parser {
         String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
         String taskName = parsedArguments.get(TASK_NAME);
         if (!Objects.isNull(moduleCode)) {
-            if (!Objects.isNull(moduleDescription)) {
-                if (moduleDescription.isBlank()) {
-                    throw new EmptyParamException(MODULE_DESCRIPTION_STR);
-                }
-            }
+            checkModuleDescription(moduleDescription);
             return new EditCommand(moduleCode, moduleDescription);
         }
         if (!Objects.isNull(taskNumberString)) {
@@ -122,23 +118,43 @@ public class EditParser extends Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidNumberException(TASK_NUMBER_STR);
             }
-            if (!Objects.isNull(taskName)) {
-                if (taskName.isBlank()) {
-                    throw new EmptyParamException(TASK_NAME_STR);
-                }
-            }
-            if (!Objects.isNull(taskDescription)) {
-                if (taskDescription.isBlank()) {
-                    throw new EmptyParamException(TASK_DESCRIPTION_STR);
-                }
-            }
-            if (!Objects.isNull(estimatedWorkingTime)) {
-                if (estimatedWorkingTime.isBlank()) {
-                    throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
-                }
-            }
+            checkTaskName(taskName);
+            checkTaskDescription(taskDescription);
+            checkEstimatedWorkingTime(estimatedWorkingTime);
             return new EditCommand(taskModule, taskIndex, taskDescription, estimatedWorkingTime, taskName);
         }
         throw new ModHappyException();
+    }
+
+    private void checkEstimatedWorkingTime(String estimatedWorkingTime) throws EmptyParamException {
+        if (!Objects.isNull(estimatedWorkingTime)) {
+            if (estimatedWorkingTime.isBlank()) {
+                throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
+            }
+        }
+    }
+
+    private void checkTaskDescription(String taskDescription) throws EmptyParamException {
+        if (!Objects.isNull(taskDescription)) {
+            if (taskDescription.isBlank()) {
+                throw new EmptyParamException(TASK_DESCRIPTION_STR);
+            }
+        }
+    }
+
+    private void checkTaskName(String taskName) throws EmptyParamException {
+        if (!Objects.isNull(taskName)) {
+            if (taskName.isBlank()) {
+                throw new EmptyParamException(TASK_NAME_STR);
+            }
+        }
+    }
+
+    private void checkModuleDescription(String moduleDescription) throws EmptyParamException {
+        if (!Objects.isNull(moduleDescription)) {
+            if (moduleDescription.isBlank()) {
+                throw new EmptyParamException(MODULE_DESCRIPTION_STR);
+            }
+        }
     }
 }
