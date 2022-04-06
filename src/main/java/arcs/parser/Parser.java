@@ -21,12 +21,16 @@ import arcs.commands.route.ListRouteCommand;
 import arcs.commands.Command;
 import arcs.commands.ExitCommand;
 import arcs.commands.UndefinedCommand;
+import arcs.data.exception.ArcsException;
 
 public class Parser {
 
     private static final String MENU_ITEM_TYPE_COMMAND_WORD = "type";
     private static final String MENU_ITEM_NAME_COMMAND_WORD = "name";
     private static final String MENU_ITEM_PRICE_COMMAND_WORD = "price";
+    private static final String INVALID_PARAMETER_MESSAGE = "Spaces for menu item name and type"
+            + " must be separated by '_'";
+
 
     public Command parseCommand(String userInput) {
 
@@ -51,8 +55,13 @@ public class Parser {
             command = prepareFindRouteCommand(argumentLine);
             break;
         case AddMenuItemCommand.COMMAND_WORD:
-            command = prepareAddMenuItem(argumentLine);
-            break;
+            try {
+                command = prepareAddMenuItem(argumentLine);
+                break;
+            } catch (ArcsException e) {
+                command = new UndefinedCommand(e.getMessage());
+                break;
+            }
         case DeleteMenuItemCommand.COMMAND_WORD:
             command = prepareDeleteMenuItemCommand(argumentLine);
             break;
@@ -90,8 +99,13 @@ public class Parser {
             command = FlightBookingParser.prepareDeleteBookingCommand(argumentLine);
             break;
         case AddMealReservationCommand.COMMAND_WORD:
-            command = MealReservationParser.prepareMealReservationCommand(argumentLine);
-            break;
+            try {
+                command = MealReservationParser.prepareMealReservationCommand(argumentLine);
+                break;
+            } catch (ArcsException e) {
+                command = new UndefinedCommand(e.getMessage());
+                break;
+            }
         default:
             command = new UndefinedCommand();
             break;
@@ -203,7 +217,7 @@ public class Parser {
         return new FindRouteCommand(date, to, from, time);
     }
 
-    public Command prepareAddMenuItem(String argumentLine) {
+    public Command prepareAddMenuItem(String argumentLine) throws ArcsException {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new AddMenuItemCommand(null,null,null);
         }
@@ -218,7 +232,7 @@ public class Parser {
             }
             String[] argSplit = arg.split("/", 2);
             if (argSplit.length < 2) {
-                continue;
+                throw new ArcsException(INVALID_PARAMETER_MESSAGE);
             }
             String field = argSplit[0].trim();
             String value = argSplit[1].trim();

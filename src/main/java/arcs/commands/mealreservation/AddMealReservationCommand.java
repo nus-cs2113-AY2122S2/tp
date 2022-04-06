@@ -62,7 +62,7 @@ public class AddMealReservationCommand extends Command {
             if (menuItem != null) {
                 menuItemsToReserve.add(menuItem);
             } else if (menuItem == null) {
-                System.out.println("There was an invalid Menu Item");
+                System.out.println("There was an invalid Menu Item, only the valid ones were reserved");
             }
         }
         if (menuItemsToReserve.isEmpty()) {

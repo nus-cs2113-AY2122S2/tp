@@ -11,11 +11,10 @@ import java.util.ArrayList;
 
 public class MealReservationManager {
 
-    private static final String INVALID_MENU_ITEM_MESSAGE = "This Menu Item does not exist. "
-            + "Please ensure you have entered the correct name and type. ";
-
     private static final String NO_FLIGHT_BOOKED_MESSAGE = "You have to book a seat on this flight, "
             + "before you can reserve a meal.";
+
+    private static final String MEAL_ALREADY_RESERVED_MESSAGE = "A meal was already reserved for this customer";
 
     //array list of ALL reserved items by each customer
     //within it each customer itself has a list of menu items reserved.
@@ -44,19 +43,20 @@ public class MealReservationManager {
         if (!flightBookingManager.checkFlightBookingValidity(customer.getIc(),route.getFlightID())) {
             throw new ArcsException(NO_FLIGHT_BOOKED_MESSAGE);
         }
+        if (checkExistingMealReservation(customer.getIc(), route.getFlightID())) {
+            throw new ArcsException(MEAL_ALREADY_RESERVED_MESSAGE);
+        }
         mealReservations.add(new MealReservation(customer,route,reservedMenuItems));
     }
 
-    //check validity of all reserved items, if all valid return true.
-    /*private boolean reservedItemsValidity(ArrayList<MenuItem> reservedMenuItems) {
-        for (MenuItem reservedItem: reservedMenuItems) {
-            //check whether item to be reserved is valid
-            boolean isValidMenuItem = menuItemManager.menuItemChecker(reservedItem);
-            if (!isValidMenuItem) {
-                return false;
+    public boolean checkExistingMealReservation(String ic, String fid) {
+        for (MealReservation mealReservation : mealReservations) {
+            if (ic.equals(mealReservation.getCustomer().getIc())
+                    && fid.equals(mealReservation.getRoute().getFlightID())) {
+                return true;
             }
         }
-        return true;
-    }*/
+        return false;
+    }
 
 }

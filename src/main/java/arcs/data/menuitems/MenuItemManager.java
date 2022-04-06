@@ -80,5 +80,14 @@ public class MenuItemManager {
         return null;
     }
 
+    //check if menu item & type already exist.
+    public boolean checkExistingMenuItem(String name, String type) {
+        for (MenuItem menuItem: menuItems) {
+            if (menuItem.getMenuItemName().equals(name) && menuItem.getMenuItemType().equalsIgnoreCase(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
