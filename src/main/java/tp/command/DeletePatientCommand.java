@@ -25,8 +25,7 @@ public class DeletePatientCommand extends Command {
         Patient curr = patientList.deletePatient(index);
         if (curr == null){
             return String.format("The index " + index + " is not valid in the patient list");
-        }
-        else {
+        } else {
             return String.format(boundary + "Noted. I've removed this patient:" + "\n" + curr
                     + "\n" + "Now you have " + patientList.getSize()
                     + " patients in the system." + System.lineSeparator() + boundary);

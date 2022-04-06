@@ -35,12 +35,12 @@ public class AddAppointmentCommand extends Command {
                           PatientStorage patientStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         if (doctorIndex <= 0 || doctorIndex > doctorList.getSize()) {
-            throw new IHospitalException("The doctor does not exist in the doctor list.\n" +
-                    "Please ensure you enter a valid doctor index or add a doctor first");
+            throw new IHospitalException("The doctor does not exist in the doctor list.\n"
+                    + "Please ensure you enter a valid doctor index or add a doctor first");
         }
         if (patientIndex <= 0 || patientIndex > patientList.getSize()) {
-            throw new IHospitalException("The patient does not exist in the patient list.\n" +
-                    "Please ensure you enter a valid patient index or add a patient first");
+            throw new IHospitalException("The patient does not exist in the patient list.\n"
+                    + "Please ensure you enter a valid patient index or add a patient first");
         }
 
         Doctor doctor = (Doctor) doctorList.getDoctor(doctorIndex);

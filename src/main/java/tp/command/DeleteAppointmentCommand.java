@@ -29,8 +29,7 @@ public class DeleteAppointmentCommand extends Command {
         Appointment curr = appointmentList.deleteAppointment(index);
         if (curr == null){
             return String.format("The index " + index + " is not valid in the appointment list");
-        }
-        else {
+        } else {
             return String.format(boundary + "Noted. I've removed this appointment:\n" + curr
                     + "\n" + "Now you have " + (appointmentList.getSize())
                     + " appointments recorded in the system." + System.lineSeparator() + boundary);
