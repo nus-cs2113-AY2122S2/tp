@@ -33,7 +33,7 @@ public abstract class Money {
      * @return The amount of money
      */
     public Double getAmount() {
-        return amount;
+        return Double.parseDouble(String.format("%.2f", amount));
     }
 
     /**
