@@ -1,22 +1,68 @@
 # Alina Zheng - Project Portfolio Page
 
 ## Overview
-I was responsible for implementing the functionality to add
-customer satisfaction ratings and housekeeper performance ratings. 
+I was one of the developers of Hotel Lite, an application to help hotel managers easily
+manage their businesses. This application offers functionalities for keeping track of hotel inventory,
+managing housekeeper staff records, recording customer satisfaction ratings,
+assigning housekeepers to rooms, adding, deleting, viewing events happening in the hotel,
+and maintaining the state of checked-in/checked-out rooms.
+
 
 
 ### Summary of Contributions
 #### Code contributed
 [Alina Zheng: tP code dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=zhenster&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
+<br>
+I was responsible for implementing the functionality to add and view 
+customer satisfaction ratings and housekeeper performance ratings.
+<br>
+<br>
+The customer satisfaction ratings required the implementation of the following classes: a `Satisfaction` object 
+representing a single customer satisfaction rating, and a `SatisfactionList` which stored the list of Satisfactions. 
+The `AddSatisfactionCommand` class parses the user's input when they invoke the "add satisfaction" command, turns that 
+input into a `Satisfaction` object, and adds the `Satisfaction` object to the `SatisfactionList`. When parsing user
+input, I considered the following edge cases/possible user errors. 
+* User inputs empty customer name and/or empty satisfaction value.
+* User inputs customer name with non-alphabetical characters. We assume that names only contain alphabetical characters
+and spaces. 
+* User inputs an invalid satisfaction value (i.e. not an integer between 1 and 5, inclusive). We assume that
+satisfaction ratings follow the conventional "5 star" rating system.
+* User fails to include the "/" delimiter separating the customer's name from their satisfaction value. 
+* User includes too many "/" delimiters in their command. 
+* User types in duplicate commands, i.e. "add satisfaction add satisfaction Bob / 5".
+
+Specific exception classes (that inherited from the parent exception class, `HotelLiteManagerException`) were created for 
+most of the edge cases above. One edge case that did not have a specific corresponding exception class was the 
+"too many '/' delimiters" case, which corresponded to the more general `InvalidCommandException` class. 
+<br>
+<br>
+The housekeeper performance ratings were implemented similarly to the customer satisfaction ratings. Like the 
+`Satisfaction`, `SatisfactionList`, and `AddSatisfactionCommand` classes, I created the 
+`HousekeeperPerformance`, `HousekeeperPerformanceList`, and `AddHousekeeperPerformanceCommand` classes. 
+A `HousekeeperPerformance` object contains the housekeeper's name and their corresponding performance rating, (like
+how a `Satisfaction` object contains the customer's name and their satisfaction rating), so 
+the structure of the "add performance" command is very similar to that of the "add satisfaction" command. 
+As such, the edge cases for the "add satisfaction" command listed above are very similar to those implemented
+for the "add performance" command as well. The additional special edge case for "add performance" was checking whether 
+the housekeeper for which the user wants to add a rating for is in `HousekeeperList`; the user should not be able 
+to record a performance for a housekeeper that does not exist in the records. 
+<br>
+<br>
+Additionally, the `ViewSatisfactionsCommand` and `ViewHousekeeperPerformanceCommand` classes were created to 
+allow the user to view all customer satisfactions and housekeeper performances, respectively, that they've recorded so
+far. While the satisfactions are simply listed in the order that the user recorded them (from oldest to most recent), 
+the housekeeper performances are listed from highest to lowest rating. This helps the hotel 
+manager easily distinguish the highest- and lowest-performing housekeepers. 
+
 #### Contributions to the UG
 I wrote the instructions for the "Adding a customer satisfaction: `add satifaction`", 
 "View all customer satisfactions: `view satisfactions`", "Adding a housekeeper's performance: `add performance`", 
-and "View all housekeeper performances: `view performances`" sections. Additionally, I wrote a short description
-of our application under the "Introduction" section. 
+and "View all housekeeper performances: `view performances`" sections. 
 #### Contributions to the DG
 I wrote the documentation for how the `Add Satisfaction` command is executed (under the "Adding a customer's 
 satisfaction rating" section. 
 #### Contributions to team-based tasks
+I helped maintain the issue tracker and also wrote the "Introduction" section of the User Guide. 
 #### Reviewing/mentoring contributions
 I often reviewed and approved the pull requests of other members of my team. Below is a list of these pull requests. 
 * [Update room vacancy](https://github.com/AY2122S2-CS2113-T11-1/tp/pull/32)
