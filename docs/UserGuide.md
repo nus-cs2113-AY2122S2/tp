@@ -314,7 +314,7 @@ The following configuration options currently exist:
 
 - **Delete module: `del mod`**
 
-  Deletes the specified module from your module list.
+  Deletes the specified module from your module list. You will be prompted for confirmation if the module has tasks assigned to it.
 
   #### Format: `del mod MODULE_CODE`
 

@@ -24,6 +24,7 @@ public class TextUi {
      * @return user input
      */
     public static String getUserCommand() {
+        out.print(StringConstants.COMMAND_PROMPT);
         return in.nextLine();
     }
 

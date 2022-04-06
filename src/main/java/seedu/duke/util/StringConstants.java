@@ -284,4 +284,5 @@ public class StringConstants {
     public static final String INDENT = "    ";
     public static final String LS = System.lineSeparator();
     public static final String LINE = "____________________________________________________________";
+    public static final String COMMAND_PROMPT = "> ";
 }
