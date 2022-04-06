@@ -203,8 +203,9 @@ this component, `parseUserInput()` will call one of `createWorkoutCommand()`, `c
 3. If the `InvalidCommandException` is thrown, `parseUserInput()` will be terminated and `WerkIt` will continue on
 `startContinuousUserPrompt()` and to process from step 1 again once a new userInput is received.
 4. If one of the `createExitCommand()`, `createHelpCommand()` is called. In the case that the userInput contains any 
-non-spacing characters other than the first non-null component, `InvalidCommandException` will be thrown. Otherwise,
-the constructor of `HelpCommand` or `ExitCommand` will be called to create the `Command` object and return to `WerkIt`.
+non-spacing characters other than the first non-null component mentioned in step 2, `InvalidCommandException` will be
+thrown. Otherwise, the constructor of `HelpCommand` or `ExitCommand` will be called to create the `Command` object and 
+return to `WerkIt`.
 5. If one of the `createExerciseCommand()`, `createWorkoutCommand()`, `createPlanCommand()`, `createScheduleCommand()`,
 `createSearchCommand()` is called. The method will check the validity of the remaining userInput, if any component of
 the userInput is invalid, an `InvalidCommandException` will be thrown. Otherwise, the constructor of the appropriate
