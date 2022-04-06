@@ -29,3 +29,9 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 - Activity Delete
 - Group View
 - Group List
+
+#### Developer Guide
+- Activity Create
+- Activity Delete
+- Group View
+- Group List
