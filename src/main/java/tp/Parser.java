@@ -20,7 +20,6 @@ import tp.command.ListDoctorListCommand;
 import tp.command.SortAppointmentByTimeCommand;
 import tp.command.EditPatientCommand;
 import tp.command.EditAppointmentCommand;
-
 import java.util.Scanner;
 
 public class Parser {
@@ -42,7 +41,8 @@ public class Parser {
         if (dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
                     || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
                     || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
-            throw new IHospitalException("The format of input is wrong, can check the order");
+            throw new IHospitalException("The format of input is incorrect, " +
+                                                 "you may type `help` to view the command format.");
         }
 
         int idIndex = dummy.indexOf("/id") + 4;
@@ -139,15 +139,15 @@ public class Parser {
     public Command parseDeleteCommand(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("delete doctor")) {
             String dummy = fullCommand.trim();
-            int index = Integer.parseInt(dummy.substring(dummy.length() - 1));
+            int index = Integer.parseInt(dummy.substring(dummy.indexOf("doctor") + 7).trim());
             return new DeleteDoctorCommand(index);
         } else if (fullCommand.contains("delete patient")) {
             String dummy = fullCommand.trim();
-            int index = Integer.parseInt(dummy.substring(dummy.length() - 1));
+            int index = Integer.parseInt(dummy.substring(dummy.indexOf("patient") + 8).trim());
             return new DeletePatientCommand(index);
         } else if (fullCommand.contains("delete appointment")) {
             String dummy = fullCommand.trim();
-            int index = Integer.parseInt(dummy.substring(dummy.length() - 1));
+            int index = Integer.parseInt(dummy.substring(dummy.indexOf("appointment") + 12).trim());
             return new DeleteAppointmentCommand(index);
         }
         return null;
@@ -262,5 +262,3 @@ public class Parser {
         }
     }
 }
-
-

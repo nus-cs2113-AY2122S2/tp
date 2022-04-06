@@ -140,7 +140,7 @@ Example of usage:
 * View Help `help`
 * Add Doctor `add doctor /id ID /n NAME /ph PHONE /e EMAIL`
 * Add Patient `add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS`
-* Add Appointment `add appointment /t 2022-03-19T15:16:00 /d DOCTOR_ID /p PATIENT_ID`
+* Add Appointment `add appointment /t 2022-03-19T15:16:00 /d DOCTOR_NO /p PATIENT_NO`
 * Delete Doctor `delete doctor DOCTOR_ID`
 * Delete Patient `delete patient PATIENT_ID`
 * Delete Appointment `delete appointment APPOINTMENT_NO.`

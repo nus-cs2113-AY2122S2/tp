@@ -27,7 +27,7 @@ public class EditDoctorCommand extends Command {
                           DoctorStorage doctorStorage, PatientStorage patientStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         if (index > doctorList.getSize()) {
-            throw new IHospitalException("The doctor is not exist\n");
+            throw new IHospitalException("The doctor does not exist\n");
         }
 
         if (type.contains("e")) {
