@@ -151,7 +151,7 @@ class PersonTest {
     @Test
     public void saveName_call_returnName() {
         Person person = new Person(VALID_NAME);
-        assertEquals("u " + person.getName(), person.saveName());
+        assertEquals("u " + person.getName(), person.getSaveName());
     }
 
     @Test
