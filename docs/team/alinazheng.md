@@ -13,8 +13,8 @@ and maintaining the state of checked-in/checked-out rooms.
 #### Code contributed
 [Alina Zheng: tP code dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=zhenster&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 <br>
-I was responsible for implementing the functionality to add and view 
-customer satisfaction ratings and housekeeper performance ratings.
+**New feature** Implemented functionality for managing customer satisfaction ratings, including adding, 
+viewing, and calculating the average ratings.
 <br>
 <br>
 The customer satisfaction ratings required the implementation of the following classes: a `Satisfaction` object 
@@ -36,12 +36,14 @@ for most of the edge cases above. One edge case that did not have a specific cor
 "too many '/' delimiters" case, which corresponded to the more general `InvalidCommandException` class.
 <br>
 <br>
-A behavior unique to the "add satisfaction" command is the ability to calculate the average customer satisfaction, 
-which is implemented via the `AverageSatisfactionCommand`. 
+The user may view all the satisfactions they've recorded with the "view satisfactions" command (implemented via 
+the `ViewSatisfactionsCommand` class). The user can also calculate the average customer satisfaction, 
+which is implemented via the `AverageSatisfactionCommand` class. 
 <br>
 <br>
-The housekeeper performance ratings were implemented similarly to the customer satisfaction ratings. Like the 
-`Satisfaction`, `SatisfactionList`, and `AddSatisfactionCommand` classes, I created the 
+**New feature**: Implemented functionality for managing housekeeper performance ratings, including adding and
+viewing ratings. The housekeeper performance ratings were implemented similarly to the customer satisfaction ratings. 
+Like the `Satisfaction`, `SatisfactionList`, and `AddSatisfactionCommand` classes, I created the 
 `HousekeeperPerformance`, `HousekeeperPerformanceList`, and `AddHousekeeperPerformanceCommand` classes. 
 A `HousekeeperPerformance` object contains the housekeeper's name and their corresponding performance rating, (like
 how a `Satisfaction` object contains the customer's name and their satisfaction rating), so 
@@ -52,15 +54,14 @@ the housekeeper for which the user wants to add a rating for is in `HousekeeperL
 to record a performance for a housekeeper that does not exist in the records. 
 <br>
 <br>
-Additionally, the `ViewSatisfactionsCommand` and `ViewHousekeeperPerformanceCommand` classes were created to 
-allow the user to view all customer satisfactions and housekeeper performances, respectively, that they've recorded so
-far. While the satisfactions are simply listed in the order that the user recorded them (from oldest to most recent), 
-the housekeeper performances are listed from highest to lowest rating. This helps the hotel 
+Additionally, the "view performances" command (implemented via the `ViewHousekeeperPerformanceCommand` class)
+allows the user to view all housekeeper performances, respectively, that they've recorded so
+far. The housekeeper performances are sorted from highest to lowest rating. This helps the hotel 
 manager easily distinguish the highest- and lowest-performing housekeepers. 
 <br>
 <br>
-Finally, saving the satisfactions and housekeeper performance ratings required the implementation of the 
-`SatisfactionListFileManager` and `HousekeeperPerformanceFileManager` classes. 
+**New Feature**: Satisfactions and housekeeper performance ratings are automatically saved. This behavior is 
+implemented through the `SatisfactionListFileManager` and `HousekeeperPerformanceFileManager` classes. 
 
 #### Contributions to the UG
 I wrote the instructions for the "Adding a customer satisfaction: `add satifaction`",
