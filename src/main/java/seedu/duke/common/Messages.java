@@ -24,4 +24,6 @@ public class Messages {
             + "Your command has been terminated; no changes were made.";
     public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. "
             + "Please ensure that end date >= start date.";
+    public static final String INVALID_DATES_CONCLICT = "Sorry. The item is not available on this date, "
+            + "please try other dates.";
 }

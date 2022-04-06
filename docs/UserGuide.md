@@ -257,6 +257,11 @@ Format: `borrow i/ITEM_INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
 * `ITEM_INDEX` should be within one of the index for ItemList.
 * The `START_DATE` and `END_DATE` must be in YYYY-MM-DD format.
 * `END_DATE` must be either the same as `START_DATE` or a later date.
+* Borrower will start borrowing the item at `START_DATE` 00:01 HRS.
+* Borrower will return the item at `END_DATE` 2359 HRS.
+* The next borrower can only borrow after `END_DATE` + 1 day or `START_DATE` - 1 day.
+* A borrower will not be able to borrow if his/her borrow timeframe overlaps 
+with a borrow record in the system.
 * The `BORROWER_NAME` cannot contain punctuations.
 
 Examples of usage:

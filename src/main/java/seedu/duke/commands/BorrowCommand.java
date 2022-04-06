@@ -51,7 +51,7 @@ public class BorrowCommand extends Command {
         if (itemIndex > itemList.getSize() - 1) {
             throw new InvMgrException(Messages.INVALID_INDEX);
         }
-        
+
         // Create a new borrow record and add to item
         BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName, borrowStatus);
         Item item = itemList.addBorrowRecord(itemIndex, newRecord);
