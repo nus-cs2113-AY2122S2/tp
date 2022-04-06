@@ -123,7 +123,7 @@ Prints a list of currently available expenditure-related commands.
 ---------------------------------------Expenditure Help Page---------------------------------------
 1. Listing all Expenditures: list /e
 2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]
-3. Calculating the total expenditure in a month: calculate /epm [MONTH]
+3. Calculating the total expenditure in a month: calculate /epm [DATE]
 4. Updating an Expenditure: update /e [INDEX] /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]
 5. Removing an Expenditure entry: delete /e [INDEX]
 6. Exiting the program: bye
@@ -178,7 +178,7 @@ into the account
 > **⚠️Warning⚠️**
 >- `[CATEGORY]`: Any input not in the list will be rejected.
 >- `[DATE]`: Any input not in the format of DD/MM/YYYY will be rejected.  
->- `[Date]`: Any input date later than the current date will be rejected.
+>- `[DATE]`: Any input date later than the current date will be rejected.
 
 <br/>
 
@@ -194,8 +194,8 @@ Prints your current list of expenditures.
 list /e
 -----------------------------------------------
 1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]
-2. $3000.0 was spent on Nike Shoes(Food) using Cash [30/03/2022]
-3. $3.21 was spent on For(Food) using Cash [30/01/1999]
+2. $20.0 was spent on Grab(Transport) using Cash [30/03/2022]
+3. $3.21 was spent on Bubble Tea(Food) using Cash [30/01/1999]
 4. $4.5 was spent on Porridge(Food) using Cash [12/03/2022]
 -----------------------------------------------
 ```
@@ -216,7 +216,7 @@ Use the `list /e` command to view the indices of your expenditures.
 * `[NEW_CATEGORY]` refers to the new category of the expenditure.
     * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`.
 * `[NEW_DESCRIPTION]` refers to the new description of the expenditure.
-    * For example: `chicken rice`.
+    * For example: `Chicken rice`.
 * `[NEW_AMOUNT]` refers to the updated of the expenditure.
     * Enter the amount in dollars, rounded off to the nearest cent.
     * For example: an item that cost 420 dollars and 69 cents will be entered as `420.69`.
@@ -231,7 +231,7 @@ March 2022.
 #### Expected Outcome:
 
 ````
-> update 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022
+> update /e 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022
 Successfully set expenditure 1 to:
 $5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
 ````
@@ -241,6 +241,11 @@ $5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
    > Field that are labeled starting with NEW follow the same restrictions base command in [add an expenditure](#add-an-expenditure-add).
    > For example `[NEW_CATEGORY]` is **case-insensitive** like `[CATEGORY]`
 >- Only enter `[INDEX]` that exist in the expenditure list. For example if you have 4 items in the list, specify `[INDEX]` to be a number from 1 to 4.
+
+> **⚠️Warning⚠️**
+>- `[NEW_CATEGORY]`: Any input not in the list will be rejected.
+>- `[NEW_DATE]`: Any input not in the format of DD/MM/YYYY will be rejected.
+>- `[NEW_DATE]`: Any input date later than the current date will be rejected.
 
 <br/>
 
@@ -262,13 +267,14 @@ Deletes the first expenditure on your list.
 ````
 > list /e
 -----------------------------------------------
-1. $3000.0 was spent on Nike Shoes(Food) using Cash [30/03/2022]
-2. $3.21 was spent on For(Food) using Cash [30/01/1999]
-3. $4.5 was spent on Porridge(Food) using Cash [12/03/2022]
+1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]
+2. $20.0 was spent on Grab(Transport) using Cash [30/03/2022]
+3. $3.21 was spent on Bubble Tea(Food) using Cash [30/01/1999]
+4. $4.5 was spent on Porridge(Food) using Cash [12/03/2022]
 -----------------------------------------------
 
-> delete 1
-I have removed Nike Shoes of $3000.0 from the account
+> delete /e 1
+I have removed Nike Shoes of $300.0 from the account
 ````
 
 > **💡 Note:**
@@ -296,11 +302,22 @@ Shows you your total expenditure and its relevant categories on March 2022.
 ##### Expected Outcome:
 
 ````
-TOCHANGE!
+> calculate /epm 03/2022
+Total expenditure in 03/2022 is $24.5.
+
+BREAKDOWN OF EXPENSES:
+-----------------------------------------------
+FOOD:          $$$$$$$$ [18.37%]
+TRANSPORT:     $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [81.63%]
+UTILITIES:      [0.0%]
+PERSONAL:       [0.0%]
+ENTERTAINMENT:  [0.0%]
+OTHERS:         [0.0%]
+-----------------------------------------------
 ````
 
 > **💡 Note**
-> - TOCHANGE
+> - `calculate` will not work if a date that you would like to calculate by is not found in the entry.
 
 <br/>
 
@@ -318,8 +335,8 @@ Prints a list of commands for storing credit cards as a payment method.
 > help /cc
 ---------------------------------------Credit Card Help Page---------------------------------------
 1. Listing all Credit Cards: list /cc
-2. Adding a Credit Card: add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CREDIT_LIMIT] /bal [CREDIT CARD BALANCE]
-3. Updating an Expenditure entry: update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]
+2. Adding a Credit Card: add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CREDIT_LIMIT]
+3. Updating a Credit Card: update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT]
 4. Removing a credit card: delete /cc [INDEX]
 5. Exiting the program: bye
 ---------------------------------------------------------------------------------------------------
@@ -415,7 +432,7 @@ $500.
 
 > update /cc 1 /n OCBC /cb 1.5 /cl 500
 Successfully set credit card 1 to :
-Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $1000.00]
+Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Balance left: $500.00]
 ````
 
 > **💡 Note:**
@@ -451,7 +468,7 @@ Deletes the first credit card on your credit card list.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $1000.00]
+1. Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Balance left: $500.00]
 -----------------------------------------------
 
 > delete /cc 1
@@ -642,15 +659,15 @@ copy `list.txt` found in the current directory into the folder where you want to
 
 ## Command Summary (Expenditure)
 
-| Command   | Format, examples                                                                                                                                                                                                                                                                                                     |
-|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help      | `help /e` <br/> Prints a list of commands for storing expenditures.                                                                                                                                                                                                                                                  |
-| Add       | `add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`<br/>e.g `add /pm cash /c Food /d Porridge /a 4.5 /t 03/2022` <br/> Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash in March 2022 to your expenditure list.                                                    |
-| List      | `list /e` <br/> Displays your current list of expenditures.                                                                                                                                                                                                                                                          |
-| Calculate | `calculate /epm [DATE]` <br/> e.g `calculate /epm 03/2022` <br/> Calculates the total expenditures in March 2022 and prints the percentage of expenditures grouped by categories.                                                                                                                                    |
-| Delete    | `delete [INDEX]`<br/>e.g `delete 1` <br/> Deletes the first expenditure from your list.                                                                                                                                                                                                                              | 
-| Update    | `update [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`<br/>e.g `update 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022` <br/> Updates the first expenditure in the list to a $5.0 expenditure on food item 'chicken rice' that was paid in cash on 12. |
-| Exit      | `bye`<br/> Ends the `MindMyMoney` application.                                                                                                                                                                                                                                                                       |
+| Command   | Format, examples                                                                                                                                                                                                                                                                                                                      |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help      | `help /e` <br/> Prints a list of commands for storing expenditures.                                                                                                                                                                                                                                                                   |
+| Add       | `add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`<br/>e.g `add /e /pm cash /c Food /d Porridge /a 4.5 /t 03/2022` <br/> Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash in March 2022 to your expenditure list.                                                               |
+| List      | `list /e` <br/> Displays your current list of expenditures.                                                                                                                                                                                                                                                                           |
+| Calculate | `calculate /epm [DATE]` <br/> e.g `calculate /epm 03/2022` <br/> Calculates the total expenditures in March 2022 and prints the percentage of expenditures grouped by categories.                                                                                                                                                     |
+| Delete    | `delete [INDEX]`<br/>e.g `delete 1` <br/> Deletes the first expenditure from your list.                                                                                                                                                                                                                                               | 
+| Update    | `update /e [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`<br/>e.g `update /e 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022` <br/> Updates the first expenditure in the list to a $5.0 expenditure on food item 'chicken rice' that was paid in cash on 12 March 2022. |
+| Exit      | `bye`<br/> Ends the `MindMyMoney` application.                                                                                                                                                                                                                                                                                        |
 
 
 <br/>
