@@ -91,10 +91,8 @@ public class UserInterface {
                     String wrongCommand = wrongCommandException.getCommand();
                     System.out.printf("%s command was used wrongly. Type help to see examples\n",
                             wrongCommand);
-                    Display.help();
                 } else {
                     System.out.println("No such command. Type help to see examples");
-                    Display.help();
                 }
             } catch (NullException nullException) {
                 //catch null exception here

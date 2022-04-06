@@ -10,15 +10,13 @@ import util.exceptions.LargeQuantityException;
  * This is crucial as a heuristic for calculating space in the warehouse.
  */
 public class Good extends UnitGood {
-    private int id;
     private int quantity;
 
-    public Good(UnitGood unitGood, int id, int quantity) {
+    public Good(UnitGood unitGood, int quantity) {
         super(unitGood.getSku(),
                 unitGood.getName(),
                 unitGood.getDescription(),
                 unitGood.getCapacity().toString());
-        this.id = id;
         this.quantity = quantity;
     }
 
@@ -73,7 +71,8 @@ public class Good extends UnitGood {
         return capacityUnit * quantity;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public String toString() {
+        return super.toString() + " [Qty: " + getQuantity() + "]";
     }
 }
