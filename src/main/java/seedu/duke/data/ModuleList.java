@@ -36,8 +36,9 @@ public class ModuleList {
 
     /**
      * Returns the module in the module list with the given module code.
-     * @param moduleCode The module code to search for
-     * @return the associated module if it exists, or null if it does not.
+     * @param moduleCode The module code to search for.
+     * @return The associated module if it exists.
+     * @throws NoSuchModuleException If the module does not exist.
      */
     public Module getModule(String moduleCode) throws NoSuchModuleException {
         for (Module m : list) {
@@ -76,7 +77,8 @@ public class ModuleList {
      */
     public boolean isModuleExists(String moduleCode) {
         try {
-            return list.contains(getModule(moduleCode));
+            getModule(moduleCode);
+            return true;
         } catch (NoSuchModuleException e) {
             return false;
         }
