@@ -154,9 +154,9 @@ The storage component consists of two classes: `FileManager` and `LogHandler`.
 | `LogHandler` | - Utility class to direct log messages to a file that is stored on the user's local filesystem. |
 
 `WerkIt` is responsible for creating an instance of `FileManager` when the application is started. This same instance
-will be used by commands in the logic component that requires writing data to the user's filesystem when the user (for
-example, when the user creates a new workout). Specifically, classes in the logic component that requires this are 
-`WorkoutCommand`, `PlanCommand`, and `ScheduleCommand`.
+will be used by commands in the logic component that requires writing of data to the user's filesystem when the user
+executes an action (for example, creating a new workout). Specifically, classes in the logic component that requires 
+this are `WorkoutCommand`, `PlanCommand`, and `ScheduleCommand`.
 
 `LogHandler` was deliberately grouped in the storage component as this class merely provides functionality to allow
 whichever class in WerkIt! to write the logs to a designated log file.
@@ -169,7 +169,7 @@ werkItResources/        // Primary resource directory for WerkIt!
     ├── plans.txt       // Text file containing a list of user-created plans
     └── schedule.txt    // Text file containing a 7-day schedule of user-assigned plans for each day
 werkItLogs/
-    └── logs.log        // Log file containing logs created by the application.
+    └── logs.log        // Log file containing logs created by the application
 ```
 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
@@ -180,18 +180,18 @@ which manages interaction (prompting for user input and displaying results
 of commands/methods being called) between the user and the application.
 
 How the UI class works:
-* Upon the initialization of `WerkIt`, the `UI class` will called the `printGreetings()` method to display the greeting messages to
+* Upon the initialization of `WerkIt`, the `UI` class will call the `printGreetings()` method to display the greeting messages to
   the user.
-* Additionally, local files storing the data of previous session of `WerkIt` will also be loaded into the program. Hence,
-  the loading status of these files are also display by calling the `printFileLoadStatusMessage()` method.
-* `UI class` is also responsible for getting the user input by calling the `getUserInput(String filename, boolean isLoadSuccessful)`
-  method, which will then parse the input by sending it to the `Parser class`. The `Paser class` will process
+* Additionally, local files storing the data of previous sessions of `WerkIt` will also be loaded into the program. Thereafter,
+  the loading statuses of these files are also displayed by calling the `printFileLoadStatusMessage()` method.
+* `UI` class is also responsible for getting the user input by calling the `getUserInput(String filename, boolean isLoadSuccessful)`
+  method, which will then parse the input by sending it to the `Parser` class. The `Parser` class will process
   the input and call other relevant methods to execute the command.
-* `UI class` also display messages when a
-    * workout has been successfully created, updated and deleted.
-    * plan has been successfully created and deleted.
-    * schedule has been successfully created and removed.
-* Help messages are also printed in the UI class by calling `printHelpMessage()` method.
+* `UI` class also displays messages when a
+    * workout has been successfully created, updated or deleted.
+    * plan has been successfully created or deleted.
+    * schedule has been successfully created/updated or cleared.
+* Help messages are also printed in the `UI` class by calling `printHelpMessage()` method.
 * Lastly, when the user exits the program, the `printGoodBye()` method will be called to indicate that the 
 user has successfully exited the program. 
 
@@ -201,26 +201,26 @@ user has successfully exited the program.
 
 The [Parser class](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/werkit/Parser.java) 
 of WerkIt! is mainly responsible for making sense of the user commands.
-This is to allow WerkIt to breakdown user's command into components of different type, and proceed to create
+This is to allow WerkIt! to breakdown user's command into components of different types, and proceed to create the
 appropriate `Command` object to be executed in `WerkIt`.
 
-How does the `Parser` class works:
-<br><br>
-1. After the user has entered a string(userInput) containing command to `WerkIt`, `WerkIt` will call
+How the `Parser` class works:
+<br>
+1. After the user has entered a string containing the user's command to `WerkIt`, `WerkIt` will call
 `Parser#parseUserInput()` to parse the string.
-2. Upon calling `parseUserInput()`, this method will first check the first non-null component of userInput, and based on
+2. Upon calling `parseUserInput()`, this method will first check the first non-null component of user input, and based on
 this component, `parseUserInput()` will call one of `createWorkoutCommand()`, `createExitCommand()`,
 `createHelpCommand()`, `createExerciseCommand()`, `createSearchCommand()`, `createPlanCommand()`,
 `createScheduleCommand()` or throw an `InvalidCommandException`.
 3. If the `InvalidCommandException` is thrown, `parseUserInput()` will be terminated and `WerkIt` will continue on
-`startContinuousUserPrompt()` and to proceed from step 1 again once a new userInput is received.
-4. If one of the `createExitCommand()`, `createHelpCommand()` is called. In the case that the userInput contains any 
+`startContinuousUserPrompt()` and repeat from step 1 again once a new user input is received.
+4. If one of the `createExitCommand()`, `createHelpCommand()` is called. In the case that the user input contains any 
 non-spacing characters other than the first non-null component mentioned in step 2, an `InvalidCommandException` will be
 thrown. Otherwise, the constructor of `HelpCommand` or `ExitCommand` will be called to create the `Command` object and 
 return to `WerkIt` for execution.
 5. If one of the `createExerciseCommand()`, `createWorkoutCommand()`, `createPlanCommand()`, `createScheduleCommand()`,
-`createSearchCommand()` is called. The method will check the validity of the remaining components of userInput, 
-if any component of the userInput is invalid, an `InvalidCommandException` will be thrown. 
+`createSearchCommand()` is called. The method will check the validity of the remaining components of user input, 
+if any component of the user input is invalid, an `InvalidCommandException` will be thrown. 
 Otherwise, the constructor of the appropriate
 type of `Command` will be called to create the appropriate `Command` object and return to `WerkIt` for execution.
 
@@ -229,7 +229,7 @@ type of `Command` will be called to create the appropriate `Command` object and 
 #### Logic Component
 Below is a class diagram of the `Logic` component:
 ![LogicUML](uml/classDiagrams/images/logicComponent.png)
-<span class="box info">:memo: This is a high level overview of the `Logic` component, thus,
+<span class="box info">:memo: This is a high-level overview of the `Logic` component, thus,
 other components have been omitted from the diagram above.</span>
 
 The `Logic` component consists of:
