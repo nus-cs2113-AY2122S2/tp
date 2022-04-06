@@ -116,7 +116,7 @@ and their interactions.
 - `Storage`: Reads data from, and writes data to the user's local storage.
 - `UI`: The UI of the application that deals with interaction with the user.
 - `Parser`: Parses user input to make sense of the command supplied by the user.
-- `Command`: Holds the different types of commands available in the application.
+- `Logic`: Executes the appropriate command as intended by the user.
 
 #### How the components interact with each other
 [Sequence diagram]
@@ -188,11 +188,44 @@ user has successfully exited the program.
 #### Parser component
 [Writeup]
 
-<div class="button-container"><a class="button" href="#design">Back to Design</a></div>
+#### Logic component
+Below is a class diagram of the `Logic` component:
+![LogicUML](uml/classDiagrams/images/logicComponent.png)
+<span class="box info">:memo: This is a high level overview of the `Logic` component, thus,
+other components have been omitted from the diagram above.</span>
 
-#### Command component
-[Writeup]<br>
-Each command is a feature in the WerkIt! application.
+The `Logic` component consists of:
+- `Command` abstract class. The `ExerciseCommand`, `SearchCommand`, `WorkoutCommand`, `ScheduleCommand`,
+`PlanCommand`, `HelpCommand` and `ExitCommand` extends the `Command` class. These classes
+identify the command action type supplied by the user and also executes the command.
+The source of these classes can be found [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/tree/master/src/main/java/commands).
+- The `[command name]List` classes. It includes `ExerciseList`,
+`WorkoutList`,`PlanList` and `DayList`. These classes hold the methods
+to perform the command action desired by the user. Examples of command actions
+are create, delete, update and listing of the objects. The source of these classes
+can be found [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/tree/master/src/main/java/data) 
+(each class is grouped in packages according to their command name).
+
+<br><br>
+How the `Logic` component works:
+<br><br>
+1. The `Parser` class parses the user command and identifies the command type (e.g. plan/schedule/workout/exercise).
+2. Depending on the command type, it creates the appropriate `Command` subclass object.
+3. This subclass-of-`Command` object is executed by the `WerkIt` class, which calls the `execute()` method of that subclass-of-`Command` object.
+4. Depending on the command action (e.g. create/delete/update/list), the `execute()` method will identify and perform the appropriate actions.
+
+<br>
+Illustration of the interactions within the `Logic` component can be found
+in the sequence diagram below. The example given is for the creation of new workouts (`workout /new`):
+<br><br>
+
+![logicComponentUML](uml/sequenceDiagrams/miscellaneous/images/logicComponentSD.png)
+<br><br>
+<span class="box info">:memo: This is a high level overview of how the creation of workouts
+is done. To improve readability, some classes and methods have been omitted from the diagram above.</span>
+
+<br><br>
+Each command types is a feature of the WerkIt! application.
 Thus, the next section will explain the design of each
 features in detail.
 
@@ -200,7 +233,7 @@ features in detail.
 
 ### Feature Overview
 
-The features of WerkIt! are split and grouped into 5 main features:
+The features of WerkIt! are split and grouped into 5 **main** features:
 1. [Exercise-related features](#exercise-related-features)
 2. [Workout-related features](#workout-related-features)
 3. [Plan-related features](#plan-related-features)
@@ -256,14 +289,14 @@ is `/create`, the `WorkoutCommand#execute()` method will call `WorkoutList#creat
 to create a new workout in the application. 
 To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
 <br><br>
-When all methods except the `listAllWorkout()` method is executed, the appropriate
-`FileManager` and `UI` classes will call the appropriate methods depending on the command action.
-From the previous example, the `/create` workout action will call the 
+When all methods except the `listAllWorkout()` method are executed, the
+`FileManager` and `UI` classes will call its appropriate methods depending on the command action.
+From the previous example, the `/create` workout command action will call the 
 `FileManager#writeNewWorkoutToFile(newWorkout)` and also the `UI#printNewCreatedMessage(newWorkout)`
 methods after the new workout has been created.
 <br><br>
 Finally, methods in the `PlanList` class is only called when the `/delete` and `/update`
-workout actions are executed. These methods are used to modify the application's plans list
+workout command actions are executed. These methods are used to modify the application's plans list
 as the `/delete` and `/update` actions are cascading actions 
 (i.e. deleting a workout will delete plan(s) containing that deleted workout).
 
