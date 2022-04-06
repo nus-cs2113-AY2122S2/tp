@@ -11,7 +11,7 @@
         * [Display expenditures: `list` ](#display-expenditures-list)
         * [Modify an expenditure: `update`](#modify-an-expenditure-update)
         * [Remove an expenditure: `delete`](#remove-an-expenditure-delete)
-        * [Calculations that MindMyMoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
+        * [Calculations that MindMyMoney provide: `calculate`](#calculate-expenditures-calculate)
             * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
     * [Credit Card](#credit-card)
         * [Display help page for credit cards: `help`](#display-help-page-for-credit-cards-help)
@@ -123,7 +123,7 @@ Prints a list of currently available expenditure-related commands.
 ---------------------------------------Expenditure Help Page---------------------------------------
 1. Listing all Expenditures: list /e
 2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]
-3. Calculating the total expenditure in a month: calculate /epm [MONTH]
+3. Calculating the total expenditure in a month: calculate /epm [DATE]
 4. Updating an Expenditure: update /e [NEW_INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]
 5. Removing an Expenditure entry: delete /e [INDEX]
 6. Exiting the program: bye
@@ -178,7 +178,7 @@ into the account
 > **⚠️Warning⚠️**
 >- `[CATEGORY]`: Any input that is not `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others` will be rejected.
 >- `[DATE]`: Any input not in the format of DD/MM/YYYY will be rejected.  
->- `[Date]`: Any input date later than the current date will be rejected.
+>- `[DATE]`: Any input date later than the current date will be rejected.
 
 <br/>
 
@@ -194,8 +194,8 @@ Prints your current list of expenditures.
 list /e
 -----------------------------------------------
 1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]
-2. $3000.0 was spent on Nike Shoes(Food) using Cash [30/03/2022]
-3. $3.21 was spent on For(Food) using Cash [30/01/1999]
+2. $20.0 was spent on Grab(Transport) using Cash [30/03/2022]
+3. $3.21 was spent on Bubble Tea(Food) using Cash [30/01/1999]
 4. $4.5 was spent on Porridge(Food) using Cash [12/03/2022]
 -----------------------------------------------
 ```
@@ -216,7 +216,7 @@ Use the `list /e` command to view the indices of your expenditures.
 * `[NEW_CATEGORY]` refers to the new category of the expenditure.
     * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`.
 * `[NEW_DESCRIPTION]` refers to the new description of the expenditure.
-    * For example: `chicken rice`.
+    * For example: `Chicken rice`.
 * `[NEW_AMOUNT]` refers to the updated of the expenditure.
     * Enter the amount in dollars, rounded off to the nearest cent.
     * For example: an item that cost 420 dollars and 69 cents will be entered as `420.69`.
@@ -242,6 +242,11 @@ $5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
    > For example: `[NEW_CATEGORY]` is **case-insensitive** like `[CATEGORY]`
 >- Only enter `[INDEX]` that exist in the expenditure list. For example: if you have 4 expenditures in your list, specify `[INDEX]` to be a number from 1 to 4.
 
+> **⚠️Warning⚠️**
+>- `[NEW_CATEGORY]`: Any input not in the list will be rejected.
+>- `[NEW_DATE]`: Any input not in the format of DD/MM/YYYY will be rejected.
+>- `[NEW_DATE]`: Any input date later than the current date will be rejected.
+
 <br/>
 
 ### Remove an expenditure: `delete`
@@ -261,13 +266,14 @@ Deletes the first expenditure on your list.
 ````
 > list /e
 -----------------------------------------------
-1. $3000.0 was spent on Nike Shoes(Food) using Cash [30/03/2022]
-2. $3.21 was spent on Rice(Food) using Cash [30/01/1999]
-3. $4.5 was spent on Porridge(Food) using Cash [12/03/2022]
+1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]
+2. $20.0 was spent on Grab(Transport) using Cash [30/03/2022]
+3. $3.21 was spent on Bubble Tea(Food) using Cash [30/01/1999]
+4. $4.5 was spent on Porridge(Food) using Cash [12/03/2022]
 -----------------------------------------------
 
 > delete /e 1
-I have removed Nike Shoes of $3000.0 from the account
+I have removed Nike Shoes of $300.0 from the account
 ````
 
 > **💡 Note:**
@@ -276,7 +282,7 @@ I have removed Nike Shoes of $3000.0 from the account
 
 <br/>
 
-### Calculations expenditure per month: `calculate`
+### Calculate expenditures: `calculate`
 
 #### Expenditure per month: `calculate /epm`
 
@@ -293,22 +299,25 @@ Shows you your total expenditure and its relevant categories on March 2022.
 ##### Expected Outcome:
 
 ````
-Total expenditure in 01/2022 is $1400.0.
+> calculate /epm 03/2022
+Total expenditure in 03/2022 is $24.5.
 
 BREAKDOWN OF EXPENSES:
 -----------------------------------------------
-FOOD:          $$$$$$$$$$$$$$$$ [35.71%]
-TRANSPORT:      [0.0%]
+FOOD:          $$$$$$$$ [18.37%]
+TRANSPORT:     $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ [81.63%]
 UTILITIES:      [0.0%]
-PERSONAL:      $$$$$$$$$$$$$$$$$$$$$$$$$$ [64.29%]
+PERSONAL:       [0.0%]
 ENTERTAINMENT:  [0.0%]
 OTHERS:         [0.0%]
 -----------------------------------------------
 ````
 
 > **💡 Note**
-> - Use the calculate command only for days/months/year contain at least 1 expenditure
-> 
+
+> - `calculate` will not work if a date that you would like to calculate by is not found in the entry.
+> - Use the `calculate` only if the day/month/year contain at least 1 expenditure
+
 
 <br/>
 
@@ -460,7 +469,7 @@ Deletes the first credit card on your credit card list.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00]
+1. Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Balance left: $500.00]
 -----------------------------------------------
 
 > delete /cc 1
@@ -653,6 +662,7 @@ copy the `list.txt` file found in the current directory into a new folder where 
 <br/>
 
 ## Command Summary (Expenditure)
+
 
 | Command   | Format, examples                                                                                                                                                                                                                                                                                                                                           |
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
