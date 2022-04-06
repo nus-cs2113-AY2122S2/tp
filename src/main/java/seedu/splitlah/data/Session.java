@@ -197,7 +197,7 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
-     * Returns a Person object with a name that matches the queried name.
+     * Returns a Person object with a name that matches the queried name, ignoring case.
      *
      * @param name A String object that represents a query name used to search for a Person object.
      * @return A Person object in the Session class that has a matching name.
@@ -214,7 +214,7 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
-     * Returns an ArrayList of Person objects with names that match the provided name list.
+     * Returns an ArrayList of Person objects with names that match the provided name list, ignoring case.
      *
      * @param nameList An array of String objects that represent names of people in the session.
      * @return An ArrayList object containing Person objects with matching names.
