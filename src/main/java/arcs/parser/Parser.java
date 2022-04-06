@@ -180,6 +180,10 @@ public class Parser {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new FindRouteCommand(null, null, null, null);
         }
+        final String fd = "fd";
+        final String ft = "ft";
+        final String d = "d";
+        final String s = "s";
         String[] args = argumentLine.split(" ");
         String date = null;
         String to = null;
@@ -198,16 +202,16 @@ public class Parser {
             String field = argSplit[0].trim();
             String value = argSplit[1].trim();
             switch (field) {
-            case "fd":
+            case fd:
                 date = value;
                 break;
-            case "ft":
+            case ft:
                 time = value;
                 break;
-            case "d":
+            case d:
                 to = value;
                 break;
-            case "s":
+            case s:
                 from = value;
                 break;
             default:

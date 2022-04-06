@@ -66,7 +66,7 @@ public class Route {
 
     public void decrementSold() {
         sold--;
-        assert sold >= 0: "Sold is less than 0.";
+        assert sold >= 0 : "Sold is less than 0.";
     }
 
     public String getFlightInfo() {
