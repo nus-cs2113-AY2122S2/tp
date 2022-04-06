@@ -11,10 +11,8 @@ public class FreeCommand extends Command {
 
     public static final int NUM_DAYS = 7;
     public static final int NUM_MINS = 1440;
-    public static final int OFFSET = 480;
     public static final int HOUR_PARAMETER_IN_24_HOURS = 100;
     public static final int MINS_IN_1_HOUR = 60;
-    public static final int HOUR_IN_24_HOUR = 100;
     public static final int BUSY = 1;
     public static final int FREE = 0;
 
@@ -49,7 +47,7 @@ public class FreeCommand extends Command {
                 duration = 0;
             } else {
                 duration = Integer.parseInt(this.time);
-                if (duration < 0) {
+                if (duration < 0 || duration > 23) {
                     throw new NumberFormatException();
                 }
             }
@@ -172,7 +170,7 @@ public class FreeCommand extends Command {
     private static String convertFreeArrayIndexToTime(int mins) {
         int hours = mins / MINS_IN_1_HOUR;
         int minutes = mins % MINS_IN_1_HOUR;
-        int timeInt = hours * HOUR_IN_24_HOUR + minutes;
+        int timeInt = hours * HOUR_PARAMETER_IN_24_HOURS + minutes;
         String timeIn24Hour = String.format("%04d", timeInt);
         return timeIn24Hour;
     }

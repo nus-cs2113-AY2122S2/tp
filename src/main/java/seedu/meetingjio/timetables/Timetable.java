@@ -20,8 +20,6 @@ public class Timetable {
     public static final int LESSONS_ONLY = 1;
     public static final int MEETINGS_ONLY = 2;
 
-    public static final int NUM_MINS = 960;
-
     public Timetable(String name) {
         this.name = name;
         this.list = new ArrayList<>();
@@ -197,7 +195,7 @@ public class Timetable {
      * For each event in the timetable, obtain its corresponding day, start time and end time in the appropriate format.
      * Indicate 1 (BUSY) for every minute that the user is attending an event.
      *
-     * @param busySlots 7 x 1440 array representing the timeframe from 0800 to 2359 for each day. 1 indicates BUSY and 0
+     * @param busySlots 7 x 1440 array representing the timeframe from 0000 to 2359 for each day. 1 indicates BUSY and 0
      *                  indicates FREE
      */
     public void populateBusySlots(int[][] busySlots) {
