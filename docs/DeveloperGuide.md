@@ -314,8 +314,8 @@ For manual testing, developers can follow the instructions listed out in the [Us
   * View records of all doctors or specific doctors fulfilling the criteria.
 5. `view patient` or `view patient /info [criteria],[input]`
   * View records of all patients or specific patients fulfilling the criteria.
-6. `view medicine` or `view medicine /info [name]`
-  * View records of all medicines or a specific medicine with the given id.
+6. `view medicine` or `view medicine /info [criteria],[input]`
+  * View records of all medicines or specific medicines fulfilling the criteria.
 7. `delete doctor /info [nric]`
   * deletes the record of the doctor with the specified nric
 8. `delete patient /info [nric]`
