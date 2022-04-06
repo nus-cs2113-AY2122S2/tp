@@ -65,7 +65,7 @@ public class OrderController extends Controller {
         if (orderManager.getOrderCount() > 0) {
             System.out.println("Printing all orders...");
             for (int i = 0; i < orderManager.getOrderCount(); i++) {
-                System.out.printf("Order %d:\n" + orderManager.getOrder(i) + "\n", i+1);
+                System.out.printf("Order %d:\n" + orderManager.getOrder(i) + "\n", i + 1);
             }
         } else {
             System.out.println("No order now.");

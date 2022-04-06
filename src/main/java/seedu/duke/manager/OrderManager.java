@@ -80,7 +80,7 @@ public class OrderManager extends Manager {
     /**
      * Order is already created.
      *
-     * @param dish
+     * @param dish dish to be added.
      */
     public void addToExistingOrder(Dish dish) {
         Order order;
@@ -91,8 +91,8 @@ public class OrderManager extends Manager {
     /**
      * Order need to be initialized.
      *
-     * @param dish
-     * @param orderIdx
+     * @param dish dish to be added.
+     * @param orderIdx expected position of the new order.
      */
     public void addToNewOrder(Dish dish, int orderIdx) {
         Order order = new Order();
