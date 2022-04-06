@@ -18,3 +18,12 @@ about 9k LoC.
 * **New Feature**: Added Family component to act as bridge between Command and Money components
 * **Aesthetics**: Implemented most of the UI and what is shown to the user on commands
 * **Code defensiveness**: Implemented a logger to log the execution of PlanITarium
+
+### User Guide contribution
+
+* Created command summary seen [here](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html#command-summary)
+* Fix most grammatical errors and language use 
+* Standardised the format of UG factors such as order of parameters in usage examples and their description
+* Wrote the guide for [`overview`](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html#show-financial-summary-overview),
+[`list`](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html#show-all-records-by-group-list) and 
+[`find`](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html#searching-for-details-find) commands
