@@ -31,9 +31,13 @@ satisfaction ratings follow the conventional "5 star" rating system.
 * User includes too many "/" delimiters in their command. 
 * User types in duplicate commands, i.e. "add satisfaction add satisfaction Bob / 5".
 
-Specific exception classes (that inherited from the parent exception class, `HotelLiteManagerException`) were created for 
-most of the edge cases above. One edge case that did not have a specific corresponding exception class was the 
-"too many '/' delimiters" case, which corresponded to the more general `InvalidCommandException` class. 
+Specific exception classes (that inherited from the parent exception class, `HotelLiteManagerException`) were created 
+for most of the edge cases above. One edge case that did not have a specific corresponding exception class was the 
+"too many '/' delimiters" case, which corresponded to the more general `InvalidCommandException` class.
+<br>
+<br>
+A behavior unique to the "add satisfaction" command is the ability to calculate the average customer satisfaction, 
+which is implemented via the `AverageSatisfactionCommand`. 
 <br>
 <br>
 The housekeeper performance ratings were implemented similarly to the customer satisfaction ratings. Like the 
