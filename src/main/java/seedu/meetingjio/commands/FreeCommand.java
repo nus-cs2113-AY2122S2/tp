@@ -33,6 +33,9 @@ public class FreeCommand extends Command {
      * The Free Command has an attribute 'time', which is extracted from the user input. Time is an integer that
      * indicates the user's desired duration (in hours) for a meeting. Thus, if a user inputs time 2, the algorithm
      * searches for free timeslots that are at least 2 hours long.
+     * If time is not given by the user, the programme will assume that time = 0, meaning to say any free timeslots will
+     * be part of the output since there is no minimum duration to adhere to.
+     * If time is negative, the programme should inform the user accordingly and continue running smoothly.
      *
      * @param masterTimetable The collection of everyone's timetable
      * @return freeTimeSlots A string containing the common timeslots where everyone is free

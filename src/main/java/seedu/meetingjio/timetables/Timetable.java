@@ -196,6 +196,9 @@ public class Timetable {
     /**
      * For each event in the timetable, obtain its corresponding day, start time and end time in the appropriate format.
      * Indicate 1 (BUSY) for every minute that the user is attending an event.
+     * If there is an event that starts before 0800, such that numericStartTime is negative, this may lead to an
+     * ArrayIndexOutOfBoundsException, so if this is the case, check first if the event ends before 0800. If it ends
+     * before 0800, we can simply move on to the next event. Otherwise, set the numericStartTime to 0.
      *
      * @param busySlots 7 x 960 array representing the timeframe from 0800 to 2359 for each day. 1 indicates BUSY and 0
      *                  indicates FREE
