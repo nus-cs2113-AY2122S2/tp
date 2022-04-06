@@ -51,8 +51,8 @@ public class MealReservationManager {
 
     public boolean checkExistingMealReservation(String ic, String fid) {
         for (MealReservation mealReservation : mealReservations) {
-            if (ic.equals(mealReservation.getCustomer().getIc()) &&
-                    fid.equals(mealReservation.getRoute().getFlightID())) {
+            if (ic.equals(mealReservation.getCustomer().getIc())
+                    && fid.equals(mealReservation.getRoute().getFlightID())) {
                 return true;
             }
         }
