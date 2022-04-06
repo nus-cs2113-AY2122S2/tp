@@ -261,7 +261,7 @@ Format: `borrow i/ITEM_INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
 
 Examples of usage:
 ```
-> borrow i/23 s/2021-03-21 e/2021-03-21 p/John Smith
+> borrow i/1 s/2021-03-21 e/2021-03-21 p/John Smith
 You have successfully borrowed the following item:
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
@@ -269,7 +269,7 @@ Borrow Duration: 2021-03-21 to 2021-03-23
 ```
 
 ```
-> borrow i/12 s/2021-03-21 e/2021-03-21 p/John Smith
+> borrow i/1 s/2021-03-21 e/2021-03-21 p/John Smith
 Sorry. The item is not avaiable for borrowing during this duration.
 ```
 

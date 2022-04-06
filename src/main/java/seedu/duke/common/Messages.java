@@ -17,10 +17,10 @@ public class Messages {
             + "Only '+' and '-' is allowed.\n";
     public static final String INVALID_RELATIVE_WITHOUT_QUANTITY = "The relative multiplier must be used in "
             + "conjunction with a quantity!";
-    public static final String INVALID_DATE_FORMAT = "Incorrect date format. Please enter "
+    public static final String INVALID_DATE_FORMAT = "Error: Incorrect date format. Please enter "
             + "dates in YYYY-MM-DD format.";
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would be negative! "
             + "Your command has been terminated; no changes were made.";
-    public static final String INVALID_START_END_DATE = "Please ensure that start date is before or same as end date.";
+    public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. Please ensure that end date >= start date.";
 }
