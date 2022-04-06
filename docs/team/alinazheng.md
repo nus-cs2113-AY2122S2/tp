@@ -53,6 +53,10 @@ allow the user to view all customer satisfactions and housekeeper performances, 
 far. While the satisfactions are simply listed in the order that the user recorded them (from oldest to most recent), 
 the housekeeper performances are listed from highest to lowest rating. This helps the hotel 
 manager easily distinguish the highest- and lowest-performing housekeepers. 
+<br>
+<br>
+Finally, saving the satisfactions and housekeeper performance ratings required the implementation of the 
+`SatisfactionListFileManager` and `HousekeeperPerformanceFileManager` classes. 
 
 #### Contributions to the UG
 I wrote the instructions for the "Adding a customer satisfaction: `add satifaction`", 
