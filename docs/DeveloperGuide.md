@@ -153,9 +153,6 @@ track of time
 
 The **TimeTable** component prints the daily or weekly schedule that the user wishes to see. 
 
-It contains the following subclasses which will be called for logic handling or printing of output:
-- TimetableLogic
-- TimetablePrinting
 
 The functionalities of the timetable include:
 - Prints a schedule specific to the date the user inputs 
@@ -182,6 +179,10 @@ The **Timetable** is a class which interacts with the following components:
 1. Parser (includes TimetableParser)
 2. ShowCommand
 3. TaskList
+
+It also contains the following subclasses which will be called for logic handling or printing of output:
+- TimetableLogic
+- TimetablePrinting
 
 #### Parser Component
 
