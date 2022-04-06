@@ -53,7 +53,7 @@ public class Parser {
     protected static final int START_TIME_INDEX = 3;
     protected static final int END_TIME_INDEX = 4;
     protected static final int MODE_INDEX = 5;
-    protected static final int INDEX_INDEX =1;
+    protected static final int INDEX_INDEX = 1;
 
     protected static final String[] HEADINGS_ALL = {"n", "t", "d", "st", "et", "m"};
     protected static final String[] HEADINGS_WITHOUT_NAME = {"t", "d", "st", "et", "m"};
