@@ -135,7 +135,7 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
-     * Removes all ActivityCost objects from all Person objects in and paying for the activity.
+     * Removes all ActivityCost objects from all Person objects involved in and paying for the activity.
      * 
      * @param activity An Activity object in which all involved Person objects should have their ActivityCost objects
      *                 with the same activity unique identifier removed.
