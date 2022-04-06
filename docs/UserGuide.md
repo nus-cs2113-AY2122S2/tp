@@ -71,15 +71,15 @@ Example of usage:
 `list appointment`
 
 ### Searching a person: `search`
-Searches existing doctors/patients with their numbers in the list.
+Searches existing doctors/patients with their ids
 
-Format: `search ROLE NO`
+Format: `search ROLE ID`
 
 Example of usage:
 
-`search doctor 1`
+`search doctor 1234`
 
-`search patient 3`
+`search patient 3456`
 
 ### Searching an appointment: `search`
 Searches existing appointments with appointment time.
@@ -89,6 +89,19 @@ Format: `search appointment DATETIME`
 Example of usage: 
 
 `search appointment 2007-12-03T10:15:30`
+
+### Editing a person's information
+Editing an existing person's information
+
+Format: `edit /d or /p INDEX /ph or /e or /n`
+
+Example of usage:
+
+`edit /d 1 /ph 12341234`
+
+`edit /p 1 /n Mike`
+
+`edit /d 1 /e 123489@gmail.com`
 
 ### Deleting a person or an appointment: `delete`
 Removes a person or an appointment from the system.

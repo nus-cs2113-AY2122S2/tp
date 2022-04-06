@@ -1,5 +1,25 @@
 package tp;
 
+import tp.command.AddDoctorCommand;
+import tp.command.AddPatientCommand;
+import tp.command.Command;
+import tp.command.GetAppointmentsOfDoctorCommand;
+import tp.command.DeleteDoctorCommand;
+import tp.command.SearchAppointmentCommand;
+import tp.command.AddPatientDescriptionCommand;
+import tp.command.ListAppointmentListCommand;
+import tp.command.ListPatientListCommand;
+import tp.command.HelpCommand;
+import tp.command.SearchPatientCommand;
+import tp.command.AddAppointmentCommand;
+import tp.command.SearchDoctorCommand;
+import tp.command.DeletePatientCommand;
+import tp.command.DeleteAppointmentCommand;
+import tp.command.EditDoctorCommand;
+import tp.command.ListDoctorListCommand;
+import tp.command.SortAppointmentByTimeCommand;
+import tp.command.EditPatientCommand;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -49,7 +69,6 @@ public class Parser {
         String id;
         String dummy = fullCommand.trim();
         String name;
-        String phoneNumber;
         int idIndex = dummy.indexOf("/id") + 4;
         int nameIndex = dummy.indexOf("/n");
         id = dummy.substring(idIndex, nameIndex).trim();
@@ -58,16 +77,17 @@ public class Parser {
         name = dummy.substring(nameIndex, phoneNumberIndex).trim();
         phoneNumberIndex += 4;
         int emailIndex = dummy.indexOf("/e");
-        phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
+        String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
         emailIndex += 3;
         int symptomIndex = dummy.indexOf("/s");
         String email = dummy.substring(emailIndex,symptomIndex).trim();
         symptomIndex += 3;
+        String phone = phoneNumber;
         int descIndex = dummy.indexOf("/d");
         String symptom = dummy.substring(symptomIndex,descIndex).trim();
         descIndex += 3;
         String description = dummy.substring(descIndex).trim();
-        return new AddPatientCommand(id, name, phoneNumber, email, symptom,description);
+        return new AddPatientCommand(id, name, phone, email, symptom,description);
     }
 
     public Command parseAddAppointment(String fullCommand) throws IHospitalException {
@@ -115,38 +135,89 @@ public class Parser {
         return null;
     }
 
+    public Command parseDeleteDoctor(String fullCommand) throws IHospitalException{
+        String dummy[] = fullCommand.split(" ");
+        if (dummy.length <= 2) {
+            throw new IHospitalException("Please enter the id of the doctor you want to delete");
+        } else{
+            int index = Integer.parseInt(dummy[2]);
+            return new DeleteDoctorCommand(index);
+        }
+    }
+
+    public Command parseDeletePatient(String fullCommand) throws IHospitalException{
+        String dummy[] = fullCommand.split(" ");
+        if (dummy.length <= 2) {
+            throw new IHospitalException("Please enter the id of the patient you want to delete");
+        } else{
+            int index = Integer.parseInt(dummy[2]);
+            return new DeletePatientCommand(index);
+        }
+    }
+
+    public Command parseDeleteAppointment(String fullCommand) throws IHospitalException{
+        String dummy[] = fullCommand.split(" ");
+        if (dummy.length <= 2) {
+            throw new IHospitalException("Please enter the id of the appointment you want to delete");
+        } else{
+            int index = Integer.parseInt(dummy[2]);
+            return new DeleteAppointmentCommand(index);
+        }
+    }
+
+
     public Command parseDeleteCommand(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("delete doctor")) {
-            String dummy = fullCommand.trim();
-            int index = Integer.parseInt(dummy.substring(dummy.length() - 1));
-            return new DeleteDoctorCommand(index);
+            try {
+                return parseDeleteDoctor(fullCommand);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         } else if (fullCommand.contains("delete patient")) {
-            String dummy = fullCommand.trim();
-            int index = Integer.parseInt(dummy.substring(dummy.length() - 1));
-            return new DeletePatientCommand(index);
+            try {
+                return parseDeletePatient(fullCommand);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         } else if (fullCommand.contains("delete appointment")) {
-            String dummy = fullCommand.trim();
-            int index = Integer.parseInt(dummy.substring(dummy.length() - 1));
-            return new DeleteAppointmentCommand(index);
+            try {
+                return parseDeleteAppointment(fullCommand);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }else{
+            throw new IHospitalException("Please enter whether you want to delete a doctor, patient or appointment");
         }
         return null;
     }
 
+    public Command parseSearchDoctor(String fullCommand) throws IHospitalException{
+        String dummy = fullCommand.trim();
+        String index = dummy.substring(dummy.indexOf("doctor ") + 7);
+        return new SearchDoctorCommand(index);
+    }
+    public Command parseSearchPatient(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        String index = dummy.substring(dummy.indexOf("patient ") + 8);
+        return new SearchPatientCommand(index);
+    }
+
+    public Command parseSearchAppointment(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        String time = dummy.substring(dummy.indexOf("appointment ") + 12).trim();
+        return new SearchAppointmentCommand(time);
+    }
+
     public Command parseSearchCommand(String fullCommand) throws IHospitalException {
-        if (fullCommand.contains("search doctor")) {
-            String dummy = fullCommand.trim();
-            dummy = dummy.substring(dummy.length() - 4);
-            return new SearchDoctorCommand(dummy);
-        } else if (fullCommand.contains("search patient")) {
-            String dummy = fullCommand.trim();
-            dummy = dummy.substring(dummy.length() - 4);
-            return new SearchPatientCommand(dummy);
-        } else if (fullCommand.contains("search appointment")) {
-            String dummy = fullCommand.trim();
-            dummy = dummy.substring(17);
-            return new SearchAppointmentCommand(dummy);
+        if (fullCommand.contains("doctor")) {
+            return parseSearchDoctor(fullCommand);
+        } else if (fullCommand.contains("patient")) {
+            return parseSearchPatient(fullCommand);
+        } else if (fullCommand.contains("appointment")) {
+            return parseSearchAppointment(fullCommand);
+        } else{
+            throw new IHospitalException("Please enter whether you want to search for a doctor, patient or appointment");
         }
-        return null;
     }
 
     public Command parseListCommand(String fullCommand) throws IHospitalException {
@@ -158,6 +229,43 @@ public class Parser {
             return new ListPatientListCommand();
         }
         return null;
+    }
+
+    public Command parseEditDoctorCommand(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /d") + 8,
+                dummy.indexOf("edit /d") + 9));
+        if (fullCommand.contains("/ph")) {
+            String newInformation = dummy.substring(dummy.indexOf("/ph") + 4);
+            return new EditDoctorCommand(index, "ph", newInformation);
+        } else if (fullCommand.contains("/e")) {
+            String newInformation = dummy.substring(dummy.indexOf("/e") + 3);
+            System.out.println("qwq" + newInformation);
+            return new EditDoctorCommand(index, "e", newInformation);
+        } else if (fullCommand.contains("/n")) {
+            String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
+            return new EditDoctorCommand(index, "n", newInformation);
+        } else {
+            throw new IHospitalException("Wrong format detected\n");
+        }
+    }
+
+    public Command parseEditPatientCommand(String fullCommand) throws IHospitalException {
+        String dummy = fullCommand.trim();
+        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /p") + 8,
+                dummy.indexOf("edit /p") + 9));
+        if (fullCommand.contains("/ph")) {
+            String newInformation = dummy.substring(dummy.indexOf("/ph") + 4);
+            return new EditPatientCommand(index, "ph", newInformation);
+        } else if (fullCommand.contains("/e")) {
+            String newInformation = dummy.substring(dummy.indexOf("/e") + 3);
+            return new EditPatientCommand(index, "e", newInformation);
+        } else if (fullCommand.contains("/n")) {
+            String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
+            return new EditPatientCommand(index, "n", newInformation);
+        } else {
+            throw new IHospitalException("Wrong format detected\n");
+        }
     }
 
     public Command parse(String fullCommand) throws IHospitalException {
@@ -175,8 +283,12 @@ public class Parser {
             return new HelpCommand();
         } else if (fullCommand.contains("search")) {
             return parseSearchCommand(fullCommand);
+        } else if (fullCommand.contains("edit /d")) {
+            return parseEditDoctorCommand(fullCommand);
+        } else if (fullCommand.contains("edit /p")) {
+            return parseEditPatientCommand(fullCommand);
         } else {
-            throw new IHospitalException("Invalid command given");
+            throw new IHospitalException("Invalid command given\n");
         }
     }
 }
