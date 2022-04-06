@@ -2,6 +2,7 @@
 
 package seedu.meetingjio.commands;
 
+import seedu.meetingjio.exceptions.EmptyMasterTimetableException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
@@ -52,12 +53,16 @@ public class ListCommand extends Command {
     public String execute(MasterTimetable masterTimetable) {
         String user = this.name;
 
-        if (user.length() == 0) {
-            return ERROR_UNSPECIFIED_LIST;
-        } else if (user.equalsIgnoreCase("all")) {
-            return listAll(masterTimetable, constraint);
-        } else {
-            return listUser(user, masterTimetable, constraint);
+        try {
+            if (user.length() == 0) {
+                return ERROR_UNSPECIFIED_LIST;
+            } else if (user.equalsIgnoreCase("all")) {
+                return listAll(masterTimetable, constraint);
+            } else {
+                return listUser(user, masterTimetable, constraint);
+            }
+        } catch (EmptyMasterTimetableException e) {
+            return ERROR_EMPTY_MASTER_TIMETABLE;
         }
 
     }
@@ -73,10 +78,10 @@ public class ListCommand extends Command {
      *     character at the end. If the string has no contents, an error message is shown to inform the user
      *     accordingly.
      */
-    public static String listAll(MasterTimetable masterTimetable, int constraint) {
+    public static String listAll(MasterTimetable masterTimetable, int constraint) throws EmptyMasterTimetableException {
         String str = masterTimetable.collateAll(masterTimetable, constraint);
         if (str.length() == 0) {
-            return ERROR_EMPTY_MASTER_TIMETABLE;
+            throw new EmptyMasterTimetableException();
         }
         assert str.length() - 1 >= 0 : ERROR_EMPTY_MASTER_TIMETABLE;
         String truncatedString = str.substring(0, str.length() - 1);

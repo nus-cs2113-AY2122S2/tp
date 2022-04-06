@@ -172,8 +172,9 @@ public class Timetable {
     public String listTimetable(int constraint) {
         String str = "";
         for (int i = 0; i < list.size(); i++) {
-            if ((constraint == LESSONS_ONLY && list.get(i) instanceof Meeting)
-                    || (constraint == MEETINGS_ONLY && list.get(i) instanceof Lesson)) {
+            boolean isMeetingGivenListLessons = constraint == LESSONS_ONLY && list.get(i) instanceof Meeting;
+            boolean isLessonGivenListMeetings = constraint == MEETINGS_ONLY && list.get(i) instanceof Lesson;
+            if (isMeetingGivenListLessons || isLessonGivenListMeetings) {
                 continue;
             }
             int listIndex = i + 1;
