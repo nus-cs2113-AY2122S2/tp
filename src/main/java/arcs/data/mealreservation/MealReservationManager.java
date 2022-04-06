@@ -20,7 +20,6 @@ public class MealReservationManager {
     //within it each customer itself has a list of menu items reserved.
     private ArrayList<MealReservation> mealReservations;
 
-    private MenuItemManager menuItemManager;
     private FlightBookingManager flightBookingManager;
 
 
