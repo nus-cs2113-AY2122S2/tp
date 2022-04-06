@@ -9,6 +9,7 @@ import seedu.allonus.expense.exceptions.ExpenseAmountException;
 import seedu.allonus.expense.exceptions.ExpenseSurroundSlashSpaceException;
 import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
 
+import seedu.allonus.mode.Mode;
 import seedu.allonus.storage.StorageFile;
 
 import seedu.allonus.ui.TextUi;
@@ -524,14 +525,14 @@ public class ExpenseTracker {
      * @param userInput String containing input from user.
      * @return new value of mode.
      */
-    public static int getMode(TextUi ui, int mode, String userInput) {
+    public static Mode getMode(TextUi ui, Mode mode, String userInput) {
         if (AllOnUs.isContactsManagerCommand(userInput)) {
-            return AllOnUs.MODE_CONTACTS_MANAGER;
+            return Mode.CONTACTS_MANAGER;
         } else if (AllOnUs.isStudyManagerCommand(userInput)) {
-            return AllOnUs.MODE_STUDY_MANAGER;
+            return Mode.STUDY_MANAGER;
         } else if (AllOnUs.isExpenseTrackerCommand(userInput)) {
             printAlreadyInExpenseTrackerMessage(ui);
-            return AllOnUs.MODE_EXPENSE_TRACKER;
+            return Mode.EXPENSE_TRACKER;
         }
         return mode;
     }
@@ -542,17 +543,17 @@ public class ExpenseTracker {
      * @param ui ui object to collect user's inputs
      * @return mode value pertaining to either menu, study or contact manager.
      */
-    public static int expenseRunner(TextUi ui) {
+    public static Mode expenseRunner(TextUi ui) {
         logger.setLevel(Level.SEVERE);
         expenseWelcome();
         String rawInput = ui.getUserInput();
 
-        int mode = AllOnUs.MODE_MENU;
+        Mode mode = Mode.MENU;
         boolean isFirstGotoExpenseCommand = false;
         mode = getMode(ui, mode, rawInput);
-        if ((mode == AllOnUs.MODE_CONTACTS_MANAGER) || (mode == AllOnUs.MODE_STUDY_MANAGER)) {
+        if ((mode == Mode.CONTACTS_MANAGER) || (mode == Mode.STUDY_MANAGER)) {
             return mode;
-        } else if (mode == AllOnUs.MODE_EXPENSE_TRACKER) {
+        } else if (mode == Mode.EXPENSE_TRACKER) {
             isFirstGotoExpenseCommand = true;
         }
 
@@ -594,7 +595,7 @@ public class ExpenseTracker {
             }
 
             mode = getMode(ui, mode, rawInput);
-            if ((mode == AllOnUs.MODE_CONTACTS_MANAGER) || (mode == AllOnUs.MODE_STUDY_MANAGER)) {
+            if ((mode == Mode.CONTACTS_MANAGER) || (mode == Mode.STUDY_MANAGER)) {
                 return mode;
             }
         }

@@ -5,6 +5,7 @@ package seedu.allonus;
 import seedu.allonus.contacts.ContactsManager;
 import seedu.allonus.expense.ExpenseTracker;
 
+import seedu.allonus.mode.Mode;
 import seedu.allonus.storage.StorageFile;
 
 import seedu.allonus.ui.TextUi;
@@ -60,10 +61,6 @@ public class AllOnUs {
     public static final String LOG_MENU_COMMAND_IN_MENU = "User entered menu command while within menu.";
     public static final String ALREADY_IN_MENU_MESSAGE = "You are already in the menu. Please try another command.";
     public static final String MENU_COMMAND = "menu";
-    public static final int MODE_MENU = 0;
-    public static final int MODE_CONTACTS_MANAGER = 1;
-    public static final int MODE_STUDY_MANAGER = 2;
-    public static final int MODE_EXPENSE_TRACKER = 3;
     public static final String LOG_DIRECT_ACCESS_TO_CONTACTS_MANAGER = "Accessing ContactsManager Runner through a tracker or manager, not from menu.";
     public static final String LOG_DIRECT_ACCESS_TO_STUDY_MANAGER = "Accessing StudyManager Runner through a tracker or manager, not from menu.";
     public static final String LOG_DIRECT_ACCESS_TO_EXPENSE_TRACKER = "Accessing ExpenseTracker Runner through a tracker or manager, not from menu.";
@@ -188,8 +185,8 @@ public class AllOnUs {
      * @return <code>true</code> if <code>mode</code> is mode for contacts manager
      * else <code>false</code>.
      */
-    public static boolean isContactsManagerMode(int mode) {
-        return mode == MODE_CONTACTS_MANAGER;
+    public static boolean isContactsManagerMode(Mode mode) {
+        return mode == Mode.CONTACTS_MANAGER;
     }
 
     /**
@@ -199,8 +196,8 @@ public class AllOnUs {
      * @return <code>true</code> if <code>mode</code> is mode for contacts manager
      * else <code>false</code>.
      */
-    public static boolean isStudyManagerMode(int mode) {
-        return mode == MODE_STUDY_MANAGER;
+    public static boolean isStudyManagerMode(Mode mode) {
+        return mode == Mode.STUDY_MANAGER;
     }
 
     /**
@@ -210,8 +207,8 @@ public class AllOnUs {
      * @return <code>true</code> if <code>mode</code> is mode for contacts manager
      * else <code>false</code>.
      */
-    public static boolean isExpenseTrackerMode(int mode) {
-        return mode == MODE_EXPENSE_TRACKER;
+    public static boolean isExpenseTrackerMode(Mode mode) {
+        return mode == Mode.EXPENSE_TRACKER;
     }
 
     /**
@@ -240,7 +237,7 @@ public class AllOnUs {
         storageFile.loadData();
 
         logger.log(Level.INFO, LOG_FIRST_ENTRY_TO_MENU);
-        int mode = MODE_MENU;
+        Mode mode = Mode.MENU;
 
         while (true) {
 
@@ -260,7 +257,7 @@ public class AllOnUs {
                 printMainMenuMessage(mode);
                 continue;
             }
-            assert mode == MODE_MENU : ASSERT_MODE_MENU;
+            assert mode == Mode.MENU : ASSERT_MODE_MENU;
 
             ui.showToUser(MENU_HEADER);
             try {
@@ -331,8 +328,8 @@ public class AllOnUs {
      * @param mode contains value pertaining to whether current mode is for menu, for either
      * of the managers or for the tracker.
      */
-    private void printMainMenuMessage(int mode) {
-        if (mode == MODE_MENU) {
+    private void printMainMenuMessage(Mode mode) {
+        if (mode == Mode.MENU) {
             ui.showToUser(RETURN_TO_MENU_MESSAGE);
         }
     }

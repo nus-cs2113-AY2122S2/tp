@@ -5,6 +5,7 @@ import seedu.allonus.AllOnUs;
 import seedu.allonus.contacts.ContactsManager;
 import seedu.allonus.expense.Expense;
 import seedu.allonus.expense.ExpenseTracker;
+import seedu.allonus.mode.Mode;
 import seedu.allonus.modules.exceptions.ModuleCodeException;
 import seedu.allonus.modules.exceptions.ModuleCategoryException;
 import seedu.allonus.modules.exceptions.ModuleDayException;
@@ -153,13 +154,13 @@ public class StudyManager {
      * @param ui Contains the input by the user.
      * @return mode value pertaining to either menu, expense tracker or contact manager.
      */
-    public int studyManagerRunner(TextUi ui) {
+    public Mode studyManagerRunner(TextUi ui) {
         ModuleCalendarReader icsParser = new ModuleCalendarReader();
         logger.setLevel(Level.WARNING);
         printWelcomeMessage();
         String userInput;
         boolean isRunning = true;
-        int mode = AllOnUs.MODE_MENU;
+        Mode mode = Mode.MENU;
         while (isRunning) {
             isModified = false;
             userInput = ui.getUserInput();
@@ -178,10 +179,10 @@ public class StudyManager {
             } else if (userInput.startsWith(READ_ICS_COMMAND)) {
                 openIcsFile(ui, icsParser);
             } else if (AllOnUs.isContactsManagerCommand(userInput)) {
-                mode = AllOnUs.MODE_CONTACTS_MANAGER;
+                mode = Mode.CONTACTS_MANAGER;
                 isRunning = false;
             } else if (AllOnUs.isExpenseTrackerCommand(userInput)) {
-                mode = AllOnUs.MODE_EXPENSE_TRACKER;
+                mode = Mode.EXPENSE_TRACKER;
                 isRunning = false;
             } else if (AllOnUs.isStudyManagerCommand(userInput)) {
                 printAlreadyInStudyManagerMessage(ui);
