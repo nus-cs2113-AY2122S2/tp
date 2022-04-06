@@ -8,7 +8,9 @@ import seedu.duke.commands.GradeCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
-
+/**
+ * This Parser supports the "grade" command.
+ */
 public class GradeParser extends Parser {
     public static final String MODULE_CODE = StringConstants.MODULE_CODE;
     public static final String MODULE_GRADE = StringConstants.MODULE_GRADE;
@@ -16,7 +18,7 @@ public class GradeParser extends Parser {
     // Unescaped regex for testing:
     // ((?<moduleCode>\w+)(\s+(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U))))(?<invalid>.*)
     private static final String GRADE_FORMAT = "((?<moduleCode>\\w+)(\\s+"
-            + "(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U))))(?<invalid>.*)";
+            + "(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U)|(?<invalidModuleGrade>.*))))(?<invalid>.*)";
 
     public GradeParser() {
         super();
@@ -24,6 +26,7 @@ public class GradeParser extends Parser {
         groupNames.add(MODULE_CODE);
         groupNames.add(MODULE_GRADE);
         groupNames.add(INVALID);
+        groupNames.add(INVALID_MODULE_GRADE);
     }
 
     @Override

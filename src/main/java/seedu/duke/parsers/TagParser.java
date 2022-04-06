@@ -10,7 +10,9 @@ import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.util.StringConstants;
 
 
-
+/**
+ * This Parser supports the "tag" command.
+ */
 public class TagParser extends Parser {
     public static final String TAG_OPERATION = StringConstants.TAG_OPERATION;
     public static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
@@ -21,8 +23,9 @@ public class TagParser extends Parser {
     // Unescaped Regex for testing:
     // ((?<tagOperation>\b(add|del)\b)?)(\s+(?<taskNumber>\d+))((\s+-m\s+(?<taskModule>\w+))?)
     // (\s+\"(?<tagName>\w+)\")(?<invalid>.*)
-    private static final String TAG_FORMAT = "((?<tagOperation>\\b(add|del)\\b)?)(\\s+(?<taskNumber>\\d+))"
-            + "((\\s+-m\\s+(?<taskModule>\\w+))?)(\\s+(?<tagName>\\w+))(?<invalid>.*)";
+    private static final String TAG_FORMAT = "((?<tagOperation>\\b(add|del)|(?<invalidTagCommand>.*)\\b)?)"
+            + "(\\s+(?<taskNumber>\\d+))((\\s+(-m|(?<invalidModFlag>.*))\\s+(?<taskModule>\\w+))?)"
+            + "(\\s+(?<tagName>\\w+))(?<invalid>.*)";
 
 
     public TagParser() {
@@ -33,6 +36,8 @@ public class TagParser extends Parser {
         groupNames.add(TASK_MODULE);
         groupNames.add(TAG_NAME);
         groupNames.add(INVALID);
+        groupNames.add(INVALID_MOD_FLAG);
+        groupNames.add(INVALID_TAG_COMMAND);
     }
 
     @Override

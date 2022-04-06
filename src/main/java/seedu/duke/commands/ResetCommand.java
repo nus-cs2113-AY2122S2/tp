@@ -6,6 +6,10 @@ import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
 public class ResetCommand extends Command {
+
+    /**
+     * Resets the program.
+     */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         moduleList.reset();
