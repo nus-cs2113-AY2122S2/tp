@@ -58,7 +58,7 @@ public class MealReservationFileManager {
         ArrayList<MenuItem> reservedMenuItems = new ArrayList<>();
         for (String record: records) {
             String[] data = record.split("/");
-            int record_length = data.length;
+            int recordLength = data.length;
             Customer customer = new Customer(data[0], data[1], data[2], data[3]);
             Route route = new Route(data[4], data[5], data[6], data[7], data[8], Integer.parseInt(data[9]));
             int index = 11;
