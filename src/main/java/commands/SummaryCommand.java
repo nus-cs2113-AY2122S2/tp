@@ -1,9 +1,10 @@
 package commands;
 
-import records.*;
 import java.util.*;
-import manager.ExpenseManager;
 
+import records.*;
+
+import manager.ExpenseManager;
 
 public class SummaryCommand extends Command {
     /** Keyword to trigger summary command. */
@@ -50,7 +51,11 @@ public class SummaryCommand extends Command {
                                 ExpenseManager.addToOtherExpense(p.getPrice());
                                 break;
                         }
-                        System.out.printf("%20s %20s %13s %13s", " ", p.getName(), p.getPrice(), p.getDate());
+                        if (p.getName().length()>20) {
+                            System.out.printf("%20s %20s %13s %13s", " ", p.getName().substring(0,17) + "...", p.getPrice(), p.getDate());
+                        } else {
+                            System.out.printf("%20s %20s %13s %13s", " ", p.getName(), p.getPrice(), p.getDate());
+                        }
                         System.out.println();
                     }
                 }
@@ -83,8 +88,11 @@ public class SummaryCommand extends Command {
                 }
                 flag=1;
                 Subscription s = (Subscription) record;
-                System.out.printf("%20s %20s %13s %13s %13s", " ", s.getName(),
-                        s.getPrice(), s.getDate(), s.getRenewal());
+                if (s.getName().length()>20) {
+                    System.out.printf("%20s %20s %13s %13s", " ", s.getName().substring(0,17) + "...", s.getPrice(), s.getDate());
+                } else {
+                    System.out.printf("%20s %20s %13s %13s", " ", s.getName(), s.getPrice(), s.getDate());
+                }
                 System.out.println();
                 ExpenseManager.addToSubscriptionExpense(s.getPrice());
             }
