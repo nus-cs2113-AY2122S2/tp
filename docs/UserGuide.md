@@ -1,6 +1,6 @@
 <div align="center">
 
-![logo](team/Logo/Beige%20Elegant%20and%20Minimal%20Logo%20(1).png)
+![logo](https://github.com/AY2122S2-CS2113-T11-1/tp/blob/master/docs/team/Logo/Beige%20Elegant%20and%20Minimal%20Logo%20(1).png)
 
 </div>
 
