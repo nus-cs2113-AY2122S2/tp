@@ -17,6 +17,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_ADD_COMMANDS_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_PREFIX;
 import static seedu.sherpass.constant.Message.WHITESPACE;
 
 public class TaskParserTest {
@@ -39,7 +40,7 @@ public class TaskParserTest {
 
     @Test
     void parseDescription_validDescription_expectFoo() {
-        String input = "foo /by 21/12/2022";
+        String input = "foo /bydate 21/12/2022";
         String expected = "foo";
         String result = TaskParser.parseDescription(input);
         assertEquals(expected, result);
@@ -47,7 +48,7 @@ public class TaskParserTest {
 
     @Test
     void parseDescription_emptyDescription_expectEmptyString() {
-        String input = "/by 21/12/2022";
+        String input = "/bydate 21/12/2022";
         String actualOutput = TaskParser.parseDescription(input);
         assertEquals(EMPTY_STRING, actualOutput);
     }
@@ -116,7 +117,7 @@ public class TaskParserTest {
         Ui ui = new Ui();
         String input = "add foo /do 26/3/2022 /start 14:00 /end 16:00 /repeat";
         TaskParser.prepareAdd(input, ui);
-        assertEquals(ERROR_EMPTY_ADD_COMMANDS_MESSAGE
+        assertEquals(ERROR_PREFIX + ERROR_EMPTY_ADD_COMMANDS_MESSAGE
                 + System.lineSeparator() + ui.getRepeatedCharacters("_", 60)
                 + System.lineSeparator(), outContent.toString());
     }
@@ -128,7 +129,7 @@ public class TaskParserTest {
         Ui ui = new Ui();
         String input = "add foo /do 26/3/2022 /start 14:00 /end 16:00 /repeat  ";
         TaskParser.prepareAdd(input, ui);
-        assertEquals(ERROR_INVALID_FREQUENCY_MESSAGE
+        assertEquals(ERROR_PREFIX + ERROR_INVALID_FREQUENCY_MESSAGE
                 + System.lineSeparator() + ui.getRepeatedCharacters("_", 60)
                 + System.lineSeparator(), outContent.toString());
     }

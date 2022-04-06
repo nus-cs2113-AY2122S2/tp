@@ -5,10 +5,10 @@ import seedu.sherpass.timetable.Timetable;
 
 import java.util.Scanner;
 
+import static seedu.sherpass.constant.Message.ERROR_PREFIX;
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_ONE;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
-
 
 public class Ui {
     private static final Scanner in = new Scanner(System.in);
@@ -118,6 +118,10 @@ public class Ui {
             output.append(character);
         }
         return output.toString();
+    }
+
+    public void showError(String message) {
+        System.out.println(ERROR_PREFIX + message);
     }
 
     public boolean readYesNoCommand(String message) {

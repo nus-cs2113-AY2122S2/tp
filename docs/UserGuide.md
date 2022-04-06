@@ -89,7 +89,7 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by D
 
 |    Parameters    | Description                     | Accepted inputs                                   | Optional |
 |:----------------:|---------------------------------|---------------------------------------------------|----------|
-| TASK_DESCRIPTION | Description for the task        | Any sentence without the character '/'            | No       |
+| TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                          | No       |
 |     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | No       |
 |    START_TIME    | Time to start working on a task | HH:mm format (e.g 18:00), must be before END_TIME | No       |
 |     END_TIME     | Time to stop working on a task  | HH:mm format (e.g 19:00)                          | No       |
@@ -110,7 +110,7 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME /repea
 
 |    Parameters    | Description                     | Accepted inputs                              | Optional |
 |:----------------:|---------------------------------|----------------------------------------------|----------|
-| TASK_DESCRIPTION | Description for the task        | Any sentence without the character '/'       | No       |
+| TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                     | No       |
 |     DO_DATE      | Date to work on the task        | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022) | No       |
 |    START_TIME    | Time to start working on a task | HH:mm (e.g 18:00), must be before END_TIME   | No       |
 |     END_TIME     | Time to stop working on a task  | HH:mm (e.g 19:00)                            | No       |
@@ -122,9 +122,6 @@ Examples:
 
 ### Deleting your tasks: `delete`
 
-**_Note: Be careful when deleting a recurring task. Entering the TASK_NUMBER
-of a recurring task will all instances of that task to be removed permanently._**
-
 Format: `delete TASK_NUMBER`
 
 | Parameters  | Description                                         | Accepted inputs       | Optional |
@@ -135,6 +132,8 @@ Example:
 - `delete 1`
 
 ### Deleting your recurring tasks
+- The specified task and all its future occurrence will be deleted.
+- Occurrences earlier than the specified task will not be affected.
 
 Format: `delete TASK_NUMBER /repeat`
 
