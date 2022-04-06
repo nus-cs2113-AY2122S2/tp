@@ -1,32 +1,33 @@
 @startuml
-!include Style.puml
+!include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor STORAGE_COLOR
-skinparam classBackgroundColor STORAGE_COLOR
+skinparam arrowColor black
+skinparam classBackgroundColor LOGIC_COLOR
 
 package Expense{
-
-    package "Parser" #F4F6F6{
-        Class "ExpenseParser" as ExpenseParser
-    }
-
-    package "Command" #lightblue {
-        Class "Expense Tracker" as ExpenseTracker
-    }
-
-    package "Internal" #grey {
-        Class "Expense" as Expense
-    }
-    package "Storage" #F4F6F6{
-        Class "ExpenseStorage" as ExpenseStorage
-
-    }
+    Class ExpenseTracker
+    Class ExpenseParser #RED
+    Class Expense
+}
+package Exceptions{
+    Class ExpenseAmountException
+    Class ExpenseEmptyFieldException
+    Class ExpenseExtraFieldException
+    Class ExpenseMissingFieldException
+    Class ExpenseSurroundSlashSpaceException
+}
+package MainMenu as "Main Menu Component" {
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> ExpenseTracker
-ExpenseTracker -down--> "*" Expense
-ExpenseTracker -right-> "ExpenseParser"
-ExpenseTracker -left-> "ExpenseStorage"
+ExpenseTracker -down-> ExpenseAmountException : "<<throws>>"
+ExpenseTracker -down-> ExpenseExtraFieldException : "<<throws>>"
+ExpenseTracker -down-> ExpenseEmptyFieldException : "<<throws>>"
+ExpenseTracker -down-> ExpenseMissingFieldException : "<<throws>>"
+ExpenseTracker -down-> ExpenseSurroundSlashSpaceException : "<<throws>>"
+MainMenu ..> ExpenseTracker : Enters Expense module >
+ExpenseTracker -left--> "*" Expense
+ExpenseTracker -right-> "ExpenseParser" : Parses input >
+
 
 @enduml

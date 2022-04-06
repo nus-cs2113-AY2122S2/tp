@@ -44,12 +44,18 @@ add d/Invalid Date Field a/9.50 c/Movie r/Jujutsu Kaisen
 add d/2022-03-24 a/Invalid Amount Field c/Movie r/Jujutsu Kaisen
 add d/ a/ c/ r/
 add m/
+add d/2022-03-24 a/500 c/Car r//Slash in front
+add d/2022-03-24 a/500 c/Car r/Slash /in middle
+add d/2022-03-24 a/500 c/Car r/Slash at back /
+add d/2022-03-24 a/500 c/Car r/ Valid / Slash
 list
 rm -1
 edit 1
 amount 20.00
 amount -5
 date INVALID DATE
+remarks /invalid slash
+remarks valid / slash
 done
 list
 find juju

@@ -46,7 +46,7 @@ public class ExpenseTracker {
     public static final int REMARKS_INDEX = 3;
     public static final int SPLIT_INTO_HALF = 2;
     public static final int EXPENSE_INDEX = 1;
-    public static final String LOG_EMPTY_FIELDS = "User possibly entered empty fields";
+    public static final String LOG_MISSING_PARAMETERS = "User possibly entered missing parameters";
     public static final String MSG_EMPTY_FIELDS = "Some fields are empty! Try again!";
     public static final String LOG_INDEX_OUT_OF_BOUNDS = "User entered an index out of bounds";
     public static final String MSG_ITEM_NOT_FOUND = "Selected item does not exist in the list";
@@ -97,6 +97,9 @@ public class ExpenseTracker {
     public static final String KEYWORD_EDIT = "edit";
     public static final String KEYWORD_FIND = "find";
     public static final String KEYWORD_BLANK = "";
+    public static final String LOG_EMPTY_FIELD = "User input is missing a field";
+    public static final String LOG_EXTRA_FIELDS = "User enter multiple copies of the same delimiter";
+    public static final String LOG_INVALID_SLASH = "User entered slash in incorrect format";
 
     private static void expenseWelcome() {
         System.out.println(EXPENSE_WELCOME_MESSAGE);
@@ -436,7 +439,7 @@ public class ExpenseTracker {
                     newExpense[CATEGORY_INDEX], newExpense[REMARKS_INDEX]);
             addExpense(expenseList, expense, fromCommandLine);
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, LOG_EMPTY_FIELDS);
+            logger.log(Level.WARNING, LOG_MISSING_PARAMETERS);
             System.out.println(MSG_EMPTY_FIELDS);
         } catch (DateTimeParseException e) {
             logger.log(Level.WARNING, LOG_INCORRECT_DATE_FIELD);
@@ -444,14 +447,20 @@ public class ExpenseTracker {
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, LOG_INVALID_AMOUNT);
             System.out.println(MSG_NUMBERS_ONLY_AMOUNT);
-        } catch (ExpenseAmountException | ExpenseMissingFieldException e) {
+        } catch (ExpenseAmountException e) {
             logger.log(Level.WARNING, LOG_NEGATIVE_AMOUNT);
             System.out.println(e.getMessage());
+        } catch (ExpenseMissingFieldException e) {
+            logger.log(Level.WARNING, LOG_EMPTY_FIELD);
+            System.out.println(e.getMessage());
         } catch (ExpenseEmptyFieldException e) {
+            logger.log(Level.WARNING, LOG_EMPTY_FIELD);
             System.out.println(e.getMessage());
         } catch (ExpenseExtraFieldException e) {
+            logger.log(Level.WARNING, LOG_EXTRA_FIELDS);
             System.out.println(e.getMessage());
         } catch (ExpenseSurroundSlashSpaceException e) {
+            logger.log(Level.WARNING, LOG_INVALID_SLASH);
             System.out.println(e.getMessage());
         }
 
