@@ -1,7 +1,4 @@
----
-layout: page
-title: Joshua Khoo's Project Portfolio Page
----
+# Joshua Khoo - Project Portfolio Page
 
 ## Project: Airline Reservation Check in System (ARCS)
 
