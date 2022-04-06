@@ -10,7 +10,10 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
 
-import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
+import static seedu.sherpass.constant.Message.ADD_TASK_RESULT_MESSAGE;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_1;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_2;
+import static seedu.sherpass.constant.Message.TAB_INDENT;
 
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
@@ -32,27 +35,6 @@ public class AddCommand extends Command {
         this.doOnStartDateTime = doOnStartDateTime;
         this.doOnEndDateTime = doOnEndDateTime;
     }
-
-    /**
-     * Accept parsed user input (in proper format) for preparation of adding task.
-     *
-     * @param taskDescription parsed task description.
-     * @param doOnStartDateTime parsed doOnStartDateTime.
-     * @param doOnEndDateTime parsed doOnEndDateTime.
-     * @throws InvalidInputException of start time is after end time.
-     */
-    /*
-    public void setTaskContent(String taskDescription, LocalDateTime doOnStartDateTime,
-                               LocalDateTime doOnEndDateTime) throws
-            InvalidInputException {
-        if (doOnStartDateTime.isAfter(doOnEndDateTime)) {
-            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
-        }
-        this.taskDescription = taskDescription;
-        this.doOnStartDateTime = doOnStartDateTime;
-        this.doOnEndDateTime = doOnEndDateTime;
-    }
-    */
 
     /**
      * Accept parsed user input for by date, in proper format.
@@ -84,19 +66,15 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
         int identifier = taskList.generateIdentifier();
-        newTask = new Task(identifier, taskDescription, byDate, doOnStartDateTime, doOnEndDateTime, frequency);
+        newTask = new Task(identifier, taskDescription, byDate, doOnStartDateTime, doOnEndDateTime);
         try {
-            taskList.addTask(newTask);
-            ui.showToUser("Got it! I've added this task:\n   "
-                    + newTask + "\n"
-                    + "Now you have " + taskList.getSize() + " task(s) in your schedule!");
+            taskList.addTask(newTask, frequency);
             storage.writeSaveData(taskList);
-        } catch (TimeClashException exception) {
-            ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
-            ui.showLine();
-            ui.showToUser("Clashing task: " + exception.getMessage());
-        } catch (InvalidInputException exception) {
-            ui.showToUser(exception.getMessage());
+            ui.showToUser(ADD_TASK_RESULT_MESSAGE);
+            ui.showToUser(TAB_INDENT + newTask);
+            ui.showToUser(TASK_COUNT_MESSAGE_1 + taskList.getSize() + TASK_COUNT_MESSAGE_2);
+        } catch (TimeClashException | InvalidInputException exception) {
+            ui.showError(exception.getMessage());
         }
     }
 }

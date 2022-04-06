@@ -1,7 +1,5 @@
 package seedu.sherpass.task;
 
-import seedu.sherpass.enums.Frequency;
-
 import java.time.LocalDateTime;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
@@ -13,10 +11,9 @@ public class Task {
     protected String description;
     protected int identifier;
     protected boolean isDone;
-    protected LocalDateTime byDate;
+    protected LocalDateTime byDateTime;
     protected LocalDateTime doOnStartDateTime;
     protected LocalDateTime doOnEndDateTime;
-    protected Frequency repeatFrequency;
 
     protected int index;
 
@@ -27,37 +24,15 @@ public class Task {
      * @param identifier  Identity number of a repeated task.
      * @param description Description of task.
      */
-    public Task(int identifier, String description, LocalDateTime byDate,
-                LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime,
-                Frequency repeatFrequency) {
+    public Task(int identifier, String description, LocalDateTime byDateTime,
+                LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime) {
         this.identifier = identifier;
         this.description = description;
-        this.byDate = byDate;
+        this.byDateTime = byDateTime;
         this.doOnStartDateTime = doOnStartDateTime;
         this.doOnEndDateTime = doOnEndDateTime;
         this.isDone = false;
-        this.repeatFrequency = repeatFrequency;
         this.index = 0;
-    }
-
-    /**
-     * Creates a constructor for the parent class of tasks, 'Task'.
-     * Accepts only task description
-     *
-     * @param identifier  Identity number of a repeated task.
-     * @param description Description of task.
-     */
-    public Task(int identifier, String description, LocalDateTime byDate,
-                LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime,
-                Frequency repeatFrequency, int index) {
-        this.identifier = identifier;
-        this.description = description;
-        this.byDate = byDate;
-        this.doOnStartDateTime = doOnStartDateTime;
-        this.doOnEndDateTime = doOnEndDateTime;
-        this.isDone = false;
-        this.repeatFrequency = repeatFrequency;
-        this.index = index;
     }
 
     public int getIndex() {
@@ -112,8 +87,8 @@ public class Task {
      *
      * @return White space.
      */
-    public LocalDateTime getByDate() {
-        return byDate;
+    public LocalDateTime getByDateTime() {
+        return byDateTime;
     }
 
     public LocalDateTime getDoOnStartDateTime() {
@@ -126,8 +101,8 @@ public class Task {
      * @return Returns if byDate contains a parsed date. Otherwise, returns a blank string (no whitespace).
      */
     public String getByDateString() {
-        if (byDate != null) {
-            return byDate.format(outputWithoutTimeFormat);
+        if (byDateTime != null) {
+            return byDateTime.format(outputWithoutTimeFormat);
         }
         return EMPTY_STRING;
     }
@@ -159,7 +134,16 @@ public class Task {
             result += " (to do on: " + getDoOnDateString(false) + " - "
                     + doOnEndDateTime.toLocalTime().toString() + ")";
         }
-        if (this.byDate != null) {
+        if (this.byDateTime != null) {
+            result += " (by: " + getByDateString() + ")";
+        }
+        return result;
+    }
+
+    public String printTask() {
+        String result = this.getDescription() + " (to do on: " + getDoOnDateString(false) + " - "
+                + doOnEndDateTime.toLocalTime().toString() + ")";
+        if (this.byDateTime != null) {
             result += " (by: " + getByDateString() + ")";
         }
         return result;
@@ -169,8 +153,8 @@ public class Task {
         this.description = taskDescription;
     }
 
-    public void setByDate(LocalDateTime byDate) {
-        this.byDate = byDate;
+    public void setByDateTime(LocalDateTime byDateTime) {
+        this.byDateTime = byDateTime;
     }
 
     public void setDoOnStartDateTime(LocalDateTime doOnStartDateTime) {
@@ -193,14 +177,6 @@ public class Task {
         this.identifier = identifier;
     }
 
-    public Frequency getRepeatFrequency() {
-        return repeatFrequency;
-    }
-
-    public void setRepeatFrequency(Frequency repeatFrequency) {
-        this.repeatFrequency = repeatFrequency;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -215,8 +191,12 @@ public class Task {
         return description.equals(t.getDescription())
                 && doOnStartDateTime.equals(t.getDoOnStartDateTime())
                 && doOnEndDateTime.equals(t.getDoOnEndDateTime())
-                && repeatFrequency.equals(t.getRepeatFrequency())
                 && identifier == (t.getIdentifier())
-                && byDate.equals(t.getByDate());
+                && byDateTime.equals(t.getByDateTime());
+    }
+
+    public Task clone() {
+        return new Task(this.identifier, this.description, this.byDateTime,
+                this.doOnStartDateTime, this.doOnEndDateTime);
     }
 }

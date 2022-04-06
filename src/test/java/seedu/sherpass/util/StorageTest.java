@@ -1,7 +1,7 @@
 package seedu.sherpass.util;
 
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
+import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.TaskList;
@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StorageTest {
     private static final DateTimeFormatter parseWithTimeFormat = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
@@ -29,30 +28,13 @@ class StorageTest {
             TaskList tasks = new TaskList();
             Task newTask = new Task(69, "task_one",
                     null,
-                    LocalDateTime.parse("12/12/2022 10:00", parseWithTimeFormat),
-                    LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat), null);
-            tasks.addTask(newTask);
+                    LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat),
+                    LocalDateTime.parse("12/12/2022 12:10", parseWithTimeFormat));
+            tasks.addTask(newTask, Frequency.SINGLE);
             storage.writeSaveData(tasks);
         } catch (IOException | TimeClashException | InvalidInputException exception) {
             exception.printStackTrace();
         }
         assertTrue(testFile.exists());
-    }
-
-    @Test
-    public void load_oneTask_expectTaskList() {
-        writeSaveData_oneTask_expectFileCreated();
-        try {
-            Storage storage = new Storage("data/test.json");
-            TaskList actualList = new TaskList(storage.load());
-            Task task = actualList.getTasks().get(0);
-            assertEquals(task.getDescription(), "task_one");
-            assertEquals(task.getByDate(), null);
-            assertEquals(task.getDoOnStartDateTime(), LocalDateTime.parse("12/12/2022 10:00", parseWithTimeFormat));
-            assertEquals(task.getDoOnEndDateTime(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
-            assertEquals(task.getStatusIcon(), " ");
-        } catch (InvalidInputException | IOException | JSONException exception) {
-            exception.printStackTrace();
-        }
     }
 }

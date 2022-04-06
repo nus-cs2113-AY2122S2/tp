@@ -4,9 +4,11 @@ import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.task.Task;
 
-import java.util.ArrayList;
+import static seedu.sherpass.constant.Message.CLEAR_COMMAND_CANCEL_MESSAGE;
+import static seedu.sherpass.constant.Message.CLEAR_COMMAND_CONFIRMATION_MESSAGE;
+import static seedu.sherpass.constant.Message.CLEAR_COMMAND_CONFIRMED_MESSAGE;
+import static seedu.sherpass.constant.Message.CLEAR_COMMAND_RESULT_MESSAGE;
 
 public class ClearCommand extends Command {
 
@@ -23,17 +25,15 @@ public class ClearCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        boolean shouldExecute = ui.readYesNoCommand("Are you sure you want to delete all tasks?\n"
-                + "You will not be able to recover them after deleting (Y/N): ");
+        boolean shouldExecute = ui.readYesNoCommand(CLEAR_COMMAND_CONFIRMATION_MESSAGE);
         if (shouldExecute) {
-            ui.showToUser("Understood. Proceeding to delete"
-                    + "\nall current tasks in the list..........");
+            ui.showToUser(CLEAR_COMMAND_CONFIRMED_MESSAGE);
             taskList.deleteAllTasks();
-            ui.showLine();
-            ui.showToUser("Done! Now you have 0 task in the list.");
             storage.writeSaveData(taskList);
+            ui.showLine();
+            ui.showToUser(CLEAR_COMMAND_RESULT_MESSAGE);
         } else {
-            ui.showToUser("Okay, we'll keep it as it is.");
+            ui.showToUser(CLEAR_COMMAND_CANCEL_MESSAGE);
         }
     }
 }
