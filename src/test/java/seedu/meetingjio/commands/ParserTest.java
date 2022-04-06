@@ -108,7 +108,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingMissingParameter() {
+    public void prepareAddMeeting_MissingParameter_throwException() {
         String inputString = "add_meeting d/Thursday st/1230 et/1330 m/online";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -116,7 +116,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingMissingParameterValuesGeneral() {
+    public void prepareAddMeeting_missingParameterValuesGeneral_throwException() {
         String inputString = "add_meeting t/ d/Thursday st/1230 et/1330 m/online";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -124,7 +124,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingMissingParameterDay() {
+    public void prepareAddMeeting_missingParameterDay_throwException() {
         String inputString = "add_meeting t/meeting st/1230 et/1330 m/online";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -132,7 +132,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingMissingParameterValuesTwo() {
+    public void prepareAddMeeting_missingParameterValuesTwo_throwException() {
         String inputString = "add_meeting t/ d/ st/1230 et/1330 m/online";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -141,7 +141,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingMissingParameterValuesDay() {
+    public void prepareAddMeeting_missingParameterValuesDay_throwException() {
         String inputString = "add_meeting t/t d/ st/1230 et/1330 m/online";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -149,7 +149,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingInvalidDay() {
+    public void prepareAddMeeting_invalidDay_throwException() {
         String inputString = "add_meeting t/meeting d/myday st/1230 et/1330 m/online";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -157,7 +157,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingInvalidMode() {
+    public void prepareAddMeeting_invalidMode_throwException() {
         String inputString = "add_meeting t/meeting d/Thursday st/1230 et/1330 m/ONLINE fdhxg";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -165,7 +165,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingExtraParameters() {
+    public void prepareAddMeeting_extraParameters_throwException() {
         String inputString = "add_meeting l/ t/funny d/Thursday st/1230 et/1330 m/ONLINE";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -181,7 +181,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingTestUpperCaseMode() {
+    public void prepareAddMeeting_testUpperCaseMode_throwException() {
         String inputString = "add_meeting t/meeting d/Thursday st/1230 et/1330 m/ONLINE";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -204,20 +204,28 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddMeetingTrailingSpaces() {
+    public void prepareAddMeeting_trailingSpaces_throwException() {
         String inputString = "ADD_MEETING t/meeting d/Thursday st/1230 et/1330 m/online hjzgfxhgjk";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
         assertEquals(ERROR_INVALID_MODE, command.execute(masterTimetable));
     }
 
-    /*
+
     @Test
-    public void prepareDeleteCommand_invalidIndex_throwException() {
-        String inputString = "delete hello";
+    public void prepareDeleteCommand_missingParametersIndex_throwException() {
+        String inputString = "delete n/john";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
-        assertEquals(ERROR_INVALID_INDEX_FORMAT, command.execute(masterTimetable));
+        assertEquals(ERROR_MISSING_PARAMETERS_DELETE, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareDeleteCommand_missingParametersName_throwException() {
+        String inputString = "delete i/3";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_PARAMETERS_DELETE, command.execute(masterTimetable));
     }
 
     @Test
@@ -225,7 +233,33 @@ public class ParserTest {
         String inputString = "delete";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
-        assertEquals(ERROR_INVALID_INDEX_FORMAT, command.execute(masterTimetable));
+        assertEquals(ERROR_MISSING_PARAMETERS_DELETE, command.execute(masterTimetable));
     }
-    */
+
+    @Test
+    public void prepareDeleteCommand_missingValues_throwException() {
+        String inputString = "delete n/ i/3";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_VALUES_DELETE, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareDeleteCommand_IndexOutOfBounds_throwException() {
+        ClearCommand clearCommand = new ClearCommand("all");
+        clearCommand.execute(masterTimetable);
+        AddUserCommand addUserOne = new AddUserCommand("john");
+        addUserOne.execute(masterTimetable);
+        AddMeetingCommand addMeetingCommandOne = new AddMeetingCommand("meeting", "Thursday",
+                1230, 1330, "online"
+        );
+        AddMeetingCommand addMeetingCommandTwo = new AddMeetingCommand("meeting", "Thursday",
+                1230, 1330, "online"
+        );
+        String inputString = "delete n/john i/5";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_INDEX_OUT_OF_BOUND, command.execute(masterTimetable));
+    }
+
 }
