@@ -64,6 +64,11 @@ public class Route {
         sold++;
     }
 
+    public void decrementSold() {
+        sold--;
+        assert sold >= 0: "Sold is less than 0.";
+    }
+
     public String getFlightInfo() {
         String flightInfo = "Flight ID: " + flightID + System.lineSeparator()
                 + "Departure Date: " + date + System.lineSeparator()

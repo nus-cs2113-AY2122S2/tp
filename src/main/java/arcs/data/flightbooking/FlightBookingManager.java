@@ -42,6 +42,8 @@ public class FlightBookingManager {
         }
         FlightBooking deleted = flightBookings.get(index - 1);
         flightBookings.remove(index - 1);
+        Route route = deleted.getRoute();
+        route.decrementSold();
         return deleted;
     }
 
