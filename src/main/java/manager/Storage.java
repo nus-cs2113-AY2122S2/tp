@@ -45,13 +45,43 @@ public class Storage {
             while (s.hasNext()) {
                 String message = s.nextLine();
                 String[] splitMessage = message.split(" \\| ");
+
+                // skips invalid lines
+                if (splitMessage.length != 5) {
+                    continue;
+                }
+
+                if (splitMessage[0] == null) {
+                    continue;
+                }
                 char type = splitMessage[0].charAt(0);
+
+                if (splitMessage[1] == null || splitMessage[1].isBlank()){
+                    continue;
+                }
                 String name = splitMessage[1];
-                double price= Double.parseDouble(splitMessage[2]);
-                String date = splitMessage[3];
+
+                double price;
+                if (splitMessage[2] == null) {
+                    price = 0;
+                } else {
+                    price = Double.parseDouble(splitMessage[2]);
+                }
+
+                String date;
+                if (splitMessage[3] == null) {
+                    date = "";
+                } else {
+                    date = splitMessage[3];
+                }
+
                 switch (type) {
                     case PRODUCT:
                         String productType = splitMessage[4];
+                        if (productType == null || (!productType.equals("fashion") && !productType.equals("food") &&
+                                !productType.equals("accessory"))) {
+                            productType = "others";
+                        }
                         listArray.add(new Product(name, price, date, productType));
                         break;
                     case SUBSCRIPTION:
