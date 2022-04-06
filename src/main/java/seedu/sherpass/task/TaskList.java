@@ -177,12 +177,12 @@ public class TaskList {
      *                            taskToCheck has the same date and clashing of time periods
      *                            with tasks in taskList
      */
-    public void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck, boolean fromFile)
+    public void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck, boolean isFromFile)
             throws TimeClashException, InvalidInputException {
         if (isStartTimeClashWithEndTime(taskToCheck)) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
-        if (!fromFile) {
+        if (!isFromFile) {
             if (!taskToCheck.isDone() && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
                 throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
             }
@@ -204,13 +204,13 @@ public class TaskList {
      *
      * @param newTask The new task to be added to the array.
      */
-    public void addTask(Task newTask, Frequency frequency, boolean fromFile) throws InvalidInputException,
+    public void addTask(Task newTask, Frequency frequency, boolean isFromFile) throws InvalidInputException,
             TimeClashException {
         LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(newTask.getDoOnStartDateTime(),
                 frequency);
         ArrayList<Task> taskListToAdd = new ArrayList<>();
         do {
-            checkDateTimeClash(tasks, newTask, fromFile);
+            checkDateTimeClash(tasks, newTask, isFromFile);
             taskListToAdd.add(newTask);
             newTask = prepareNextTask(newTask, frequency);
         } while (newTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
