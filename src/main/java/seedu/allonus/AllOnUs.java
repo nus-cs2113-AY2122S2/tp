@@ -23,7 +23,8 @@ public class AllOnUs {
     public static final String FILE_NAME = "allonusData.txt";
     public static final String MENU_LOGGER_NAME = "MenuLog";
     public static final String LOG_GREETING_MESSAGE = "Printing greeting message.";
-    public static final String GREETING_MESSAGE = "Welcome to the AllOnUs life management suite. How can we help you today?";
+    public static final String GREETING_MESSAGE = "Welcome to the AllOnUs life management suite. "
+            + "How can we help you today?";
     public static final String GOODBYE_MESSAGE = "Goodbye! Hope to see you again...";
     public static final String LOG_EXIT = "Exiting program.";
     public static final String CONTACTS_MANAGER_COMMAND = "goto m/Contacts_Manager";
@@ -44,8 +45,11 @@ public class AllOnUs {
             + "\n\n\nExiting the application:\n\nTerminates the application.\n\nFormat: exit"
             + "\n\nExample:\n\n- exit";
     public static final String MENU_HEADER = "MENU:";
-    public static final String LOG_NO_SUCH_ELEMENT_EXCEPTION = "NoSuchElementException triggered when scanning for user input. This should not happen. Investigation required.";
-    public static final String LOG_ILLEGAL_STATE_EXCEPTION = "IllegalStateException triggered when scanning for user input. Scanner object on input stream should not be closed. Investigation required.";
+    public static final String LOG_NO_SUCH_ELEMENT_EXCEPTION = "NoSuchElementException triggered when "
+            + "scanning for user input. This should not happen. Investigation required.";
+    public static final String LOG_ILLEGAL_STATE_EXCEPTION = "IllegalStateException triggered when "
+            + "scanning for user input. Scanner object on input stream should not be closed. "
+            + "Investigation required.";
     public static final String LOG_EXIT_COMMAND = "User entered exit command.";
     public static final String LOG_HELP_COMMAND = "User entered help command.";
     public static final String LOG_CONTACTS_MANAGER_COMMAND = "User entered command to navigate to Contacts Manager.";
@@ -55,15 +59,19 @@ public class AllOnUs {
     public static final String LOG_INVALID_COMMAND = "User entered invalid command.";
     public static final String LOG_EMPTY_COMMAND = "User entered empty command.";
     public static final String ASSERT_SHOULD_BE_EXIT_COMMAND = "Loop broke without an exit command from user.";
-    public static final String INVALID_COMMAND_MESSAGE = "Oops I am not sure what you mean by this command. Please retry. Enter \"help\" for guidance.";
+    public static final String INVALID_COMMAND_MESSAGE = "Oops I am not sure what you mean by this command. "
+            + "Please retry. Enter \"help\" for guidance.";
     public static final String RETURN_TO_MENU_MESSAGE = "Welcome back to the main menu";
     public static final String LOG_FIRST_ENTRY_TO_MENU = "Entering menu for the first time.";
     public static final String LOG_MENU_COMMAND_IN_MENU = "User entered menu command while within menu.";
     public static final String ALREADY_IN_MENU_MESSAGE = "You are already in the menu. Please try another command.";
     public static final String MENU_COMMAND = "menu";
-    public static final String LOG_DIRECT_ACCESS_TO_CONTACTS_MANAGER = "Accessing ContactsManager Runner through a tracker or manager, not from menu.";
-    public static final String LOG_DIRECT_ACCESS_TO_STUDY_MANAGER = "Accessing StudyManager Runner through a tracker or manager, not from menu.";
-    public static final String LOG_DIRECT_ACCESS_TO_EXPENSE_TRACKER = "Accessing ExpenseTracker Runner through a tracker or manager, not from menu.";
+    public static final String LOG_DIRECT_ACCESS_TO_CONTACTS_MANAGER = "Accessing ContactsManager Runner through a "
+            + "tracker or manager, not from menu.";
+    public static final String LOG_DIRECT_ACCESS_TO_STUDY_MANAGER = "Accessing StudyManager Runner through a "
+            + "tracker or manager, not from menu.";
+    public static final String LOG_DIRECT_ACCESS_TO_EXPENSE_TRACKER = "Accessing ExpenseTracker Runner through a "
+            + "tracker or manager, not from menu.";
     public static final String ASSERT_MODE_MENU = "The mode value should be 0 at this point.";
 
     private TextUi ui;
@@ -183,7 +191,7 @@ public class AllOnUs {
      *
      * @param mode String containing user input.
      * @return <code>true</code> if <code>mode</code> is mode for contacts manager
-     * else <code>false</code>.
+     *     else <code>false</code>.
      */
     public static boolean isContactsManagerMode(Mode mode) {
         return mode == Mode.CONTACTS_MANAGER;
@@ -194,7 +202,7 @@ public class AllOnUs {
      *
      * @param mode String containing user input.
      * @return <code>true</code> if <code>mode</code> is mode for contacts manager
-     * else <code>false</code>.
+     *     else <code>false</code>.
      */
     public static boolean isStudyManagerMode(Mode mode) {
         return mode == Mode.STUDY_MANAGER;
@@ -205,7 +213,7 @@ public class AllOnUs {
      *
      * @param mode String containing user input.
      * @return <code>true</code> if <code>mode</code> is mode for contacts manager
-     * else <code>false</code>.
+     *     else <code>false</code>.
      */
     public static boolean isExpenseTrackerMode(Mode mode) {
         return mode == Mode.EXPENSE_TRACKER;
@@ -326,7 +334,7 @@ public class AllOnUs {
     /**
      * Prints a message that represents what the users will read upon return to menu.
      * @param mode contains value pertaining to whether current mode is for menu, for either
-     * of the managers or for the tracker.
+     *     of the managers or for the tracker.
      */
     private void printMainMenuMessage(Mode mode) {
         if (mode == Mode.MENU) {
