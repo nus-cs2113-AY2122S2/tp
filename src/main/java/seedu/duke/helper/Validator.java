@@ -34,7 +34,7 @@ public class Validator {
         try {
             age = Integer.parseInt(ageString);
         } catch (NumberFormatException numberFormatException) {
-            throw new HalpmiException("Please enter a number!");
+            throw new HalpmiException("Age must be a positive number!");
         }
         //age must be within 1 and 120
         if (!(1 <= age && age <= 120)) {
