@@ -1,7 +1,10 @@
+//author @@hlwang56
+
 package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.family.Family;
+import seedu.planitarium.global.Constants;
 
 import java.util.logging.Level;
 
@@ -15,7 +18,7 @@ public class OverviewCommand extends Command {
 
     public OverviewCommand(String userInput, Family family) {
         super(userInput, family);
-        this.type = "OverviewCMD";
+        this.type = Constants.OVERVIEWCMDTYPE;
         logger.log(Level.INFO, LOG_CMD_INFO);
     }
 

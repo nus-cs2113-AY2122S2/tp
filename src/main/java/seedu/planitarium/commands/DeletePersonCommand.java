@@ -1,3 +1,5 @@
+//author @@hlwang56
+
 package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
@@ -25,7 +27,7 @@ public class DeletePersonCommand extends Command {
 
     public DeletePersonCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
-        this.type = "DeletePersonCMD";
+        this.type = Constants.DELETEPERSONCMDTYPE;
         this.group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         this.uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
         logger.log(Level.INFO, String.format(LOG_DELETEPERSONCMD_INFO, group, uid));

@@ -1,7 +1,10 @@
+//author @@hlwang56
+
 package seedu.planitarium.commands;
 
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.family.Family;
 
@@ -18,7 +21,7 @@ public class SearchCommand extends Command {
 
     public SearchCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
-        this.type = "SearchCMD";
+        this.type = Constants.SEARCHCMDTYPE;
         this.description = Parser.parseDescription(userInput);
         try {
             this.category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));

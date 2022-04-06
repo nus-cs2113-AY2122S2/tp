@@ -33,14 +33,14 @@ public class AddRecordCommand extends Command {
     protected String description;
     protected Double amount;
     protected Boolean isPermanent;
-    protected Boolean isSilent = Constants.FOR_USER;
+    protected Boolean isSilent;
     protected Integer group;
     protected Integer uid;
     protected Integer category = -1;
 
     public AddRecordCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
-        this.type = "AddRecordCMD";
+        this.type = Constants.ADDRECORDCMDTYPE;
         keyword = Parser.parseCommandType(userInput);
         description = Parser.parseDescription(userInput);
         isPermanent = Parser.parseRecurringStatus(userInput);

@@ -1,8 +1,11 @@
+//author @@hlwang56
+
 package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.category.Category;
 import seedu.planitarium.family.Family;
+import seedu.planitarium.global.Constants;
 
 
 import java.util.logging.Level;
@@ -17,7 +20,7 @@ public class ListCategoriesCommand extends Command {
 
     public ListCategoriesCommand(String userInput, Family family) {
         super(userInput, family);
-        this.type = "ListcatCMD";
+        this.type = Constants.LISTCATCMDTYPE;
         logger.log(Level.INFO, LOG_LISTCAT_INFO);
     }
 
