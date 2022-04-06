@@ -14,9 +14,9 @@
     * [Create new flight booking: `book`](#create-new-flight-booking---book-)
     * [Remove flight booking: `deleteBooking`](#remove-flight-booking---deletebooking-)
     * [View all existing flight booking: `listBooking`](#view-all-existing-flight-booking---listbooking-)
-    * [Menu Item Functionalities](#MENU ITEM FUNCTIONALITIES)
+    * [Menu Item Functionalities](#MENU-ITEM-FUNCTIONALITIES)
     * [Meal Reservation Functionalities](#IN-FLIGHT-MEAL-RESERVATIONS)
-    * [Exit the system](#Exit the System)
+    * [Exit the system](#Exit-the-System)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -378,10 +378,10 @@ Action | Format| Examples
 **Create flight booking**| `book ic/IC fid/FLIGHT_ID` | `book ic/W9848113C fid/SQ123`
 **Remove flight booking**| `deleteBooking INDEX` | `deleteBooking 2`
 **List all flight bookings**| `listBooking` | `listBooking`
-**Add Menu Item**| `addMenuItem name/MENU_ITEM_NAME type/MENUITEMTYPE price/MENUITEMPRICE`| `addMenuItem name/coke type/drinks price/0.9`
+**Add Menu Item**| `addMenuItem name/MENU_ITEM_NAME type/MENUITEMTYPE price/MENUITEMPRICE`| `addMenuItem name/fanta_grape type/drinks price/0.9`
 **Delete menu item**| `deleteMenuItem INDEX` | `deleteMenuItem 4`
 **List all menu items**| `listMenuItems`| `listMenuItems`
-**Find menu items by name**| `findMenuItemName MENU_ITEM_NAME` | `findMenuItemName coke`
+**Find menu items by name**| `findMenuItemName MENU ITEM NAME` | `findMenuItemName chocolate cake`
 **Find menu items by type**| `findMenuItemType MENUITEMTYPE` | `findMenuItemType drinks`
 **Add Meal Reservation**| `reserveMeal ic/CUSTOMERID fid/FLIGHTID MENUITEMTYPE/MENU_ITEM_NAME [MENUITEMTYPE/MENU_ITEM_NAME]` | `reserveMeal fid/MU8401 ic/W6235354B drinks/coke`
 **Remove Meal Reservation**| `deleteMealReservation ic/CUSTOMERID fid/FLIGHTID` | `deleteMealReservation fid/MU8401 ic/W6235354B`
