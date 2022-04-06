@@ -12,7 +12,7 @@
 
 ## Acknowledgements
 
-- Team member Jun Lim's individual project codebase - [Github](#https://github.com/jltha/ip)
+- Team member Jun Lim's individual project codebase - [GitHub](https://github.com/jltha/ip)
 
 ## Introduction
 
@@ -124,7 +124,7 @@ The diagram above depicts the process when user calls start and stop (in step 2 
 called by Timer are in parallel with other commands, since `Timer` is in a separate thread. For simplicity’s
 sake, parallel frames for the remainder of methods called by `Timer` are omitted.
 
-Step 2. The user executes `start 1` command to start a 30 minute timer. The input goes through `StudyCommand`, 
+Step 2. The user executes `start 1` command to start a 30-minute timer. The input goes through `StudyCommand`, 
 where the `TimerParser` is called to parse the command. After parsing, `TimerParser` calls the method corresponding to 
 the user’s command (`start`) in `TimerLogic`. `TimerLogic` then handles the logic and initialises an instance of
 `Countdown` (spawn a thread). `Countdown` then automatically updates itself while waiting for the user to issue 
@@ -153,6 +153,10 @@ track of time
 
 The **TimeTable** component prints the daily or weekly schedule that the user wishes to see. 
 
+It contains the following subclasses which will be called for logic handling or printing of output:
+- TimetableLogic
+- TimetablePrinting
+
 The functionalities of the timetable include:
 - Prints a schedule specific to the date the user inputs 
 - Prints the schedule for the week the user is at
@@ -175,7 +179,7 @@ or the date and time the user has set out to accomplish the task.
 
 
 The **Timetable** is a class which interacts with the following components:
-1. Parser
+1. Parser (includes TimetableParser)
 2. ShowCommand
 3. TaskList
 
@@ -197,18 +201,30 @@ of task by the date that is defined in the **ShowCommand** from the **TaskList**
 The filtered list represents the schedule that the user has on that given date. 
 The list is assumed to be sorted previously when the user added/edited a task.
 
-Below is a sequence diagram of what happens 
-as the user wishes to see the schedule (timetable) for 25th May 2022:
+Below are two sequence diagrams showing what happens 
+as the user enters a command to see the schedule (timetable) for 25th May 2022:
 
-![](images/showScheduleForADate.png)
+![](images/showScheduleForADateFirstPart.png)
 
-The sequence as shown above also happens in the same fashion as the user 
-requests to see the schedule for any day or the week the user is at.
+The first diagram covers the interactions between the Parser component,
+the Timetable Parser, as well as the ShowCommand that is instantiated. It details
+of how the user's input is being parsed into data that is recognised by the program.
+
+
+![](images/showScheduleForADateSecondPart.png)
+
+The second diagram shown above covers the next part of the interaction, which is after
+the ShowCommand is being executed in main. It shows the sequences of interactions between
+the ShowCommand, Timetable, and TimetablePrinting, in order to print out the timetable the user has requested to view.
+
+
+**_Note: The sequence as shown above also happens in the same fashion as the user 
+requests to see the schedule for any day or the week the user is at._**
 
 The timetable for the current day is also shown to user as the user starts up
 the program.
 
-#### Design considerations for Timetable class
+#### Design considerations for Timetable class (includes TimetableLogic and TimetablePrinting)
 - Current Implementation: Printing of timetable from scratch.
   - Pros: Easy to implement as timetable is generated based on request and input.
   - Pros: Adaptive as the timetable is only generated when needed and formatting is taken care of while generating it.
