@@ -547,7 +547,7 @@ public class Warehouse {
 
             Order order = new Order(id, recv, addr);
             orderLists.add(order);
-            System.out.printf("Order %d added to the warehouse", i);
+            System.out.printf("Order %d added to the warehouse", id);
         } catch (NumberFormatException e) {
             System.out.println("oid must be a positive number");
             throw new WrongCommandException("add", true);
