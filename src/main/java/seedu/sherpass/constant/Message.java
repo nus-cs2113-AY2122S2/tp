@@ -42,6 +42,7 @@ public class Message {
             + "6) Exit study mode: leave\n"
             + "7) Mark task as done: mark <task_index>";
 
+    public static final String ERROR_PREFIX = "Command error: ";
     public static final String EDIT_TASK_RESULT_MESSAGE = "Okay! I've edited this task:";
     public static final String DELETE_TASK_RESULT_MESSAGE = "Okay. I've removed this task:";
     public static final String ADD_TASK_RESULT_MESSAGE = "Got it! I've added this task:";

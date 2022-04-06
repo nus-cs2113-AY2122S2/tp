@@ -82,7 +82,7 @@ public class TaskParser {
         int endDelimiterIndex = fullArgument.indexOf(END_TIME_DELIMITER);
         int freqDelimiterIndex = fullArgument.indexOf(FREQUENCY_DELIMITER);
         int[] delimiterIndexes = {byDelimiterIndex, doDelimiterIndex, startDelimiterIndex,
-                endDelimiterIndex, freqDelimiterIndex};
+            endDelimiterIndex, freqDelimiterIndex};
         int min = Integer.MAX_VALUE;
         for (int delimiterIndex : delimiterIndexes) {
             if (delimiterIndex < min && delimiterIndex >= 0) {

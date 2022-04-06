@@ -17,6 +17,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_ADD_COMMANDS_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_PREFIX;
 import static seedu.sherpass.constant.Message.WHITESPACE;
 
 public class TaskParserTest {
@@ -116,7 +117,7 @@ public class TaskParserTest {
         Ui ui = new Ui();
         String input = "add foo /do 26/3/2022 /start 14:00 /end 16:00 /repeat";
         TaskParser.prepareAdd(input, ui);
-        assertEquals(ERROR_EMPTY_ADD_COMMANDS_MESSAGE
+        assertEquals(ERROR_PREFIX + ERROR_EMPTY_ADD_COMMANDS_MESSAGE
                 + System.lineSeparator() + ui.getRepeatedCharacters("_", 60)
                 + System.lineSeparator(), outContent.toString());
     }
@@ -128,7 +129,7 @@ public class TaskParserTest {
         Ui ui = new Ui();
         String input = "add foo /do 26/3/2022 /start 14:00 /end 16:00 /repeat  ";
         TaskParser.prepareAdd(input, ui);
-        assertEquals(ERROR_INVALID_FREQUENCY_MESSAGE
+        assertEquals(ERROR_PREFIX + ERROR_INVALID_FREQUENCY_MESSAGE
                 + System.lineSeparator() + ui.getRepeatedCharacters("_", 60)
                 + System.lineSeparator(), outContent.toString());
     }
