@@ -12,24 +12,28 @@ complete the activities with the use of the study session.
 
 ### Summary of Contributions
 
-- Code contributed: 
-- [code contributed](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=yuzhongng&tabRepo=AY2122S2-CS2113T-T09-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+- [Code contributed](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=yuzhongng&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
       
     
+- New features:
+  
+    
 
-- Enhancements to existing features:
+- Enhancements implemented:
 
   
 
-- Project management:
+- Contribution to Documentation:
 
     
 
-- Documentation
+- Contribution to team-based tasks
 
 
 
-- Community:
+- Review/mentoring contributions
+
+- Contributions beyond the project team
 
 
 
