@@ -89,10 +89,25 @@ Before the timetable is listed out, it will also be sorted according to day and 
 The following sequence diagram shows how the command `` is executed.
 ![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
 
+##3.2.1 Listing Lessons Feature
+Instead of listing all events in the timetable, the user can specify such that only lessons are listed out.
+
+`list_lesson [user]` displays the lessons for the particular user.
+
+`list_lesson all` displays the lessons for all users.
+
+##3.2.2 Listing Meetings Feature
+Instead of listing all events in the timetable, the user can specify such that only meetings are listed out.
+
+`list_meeting [user]` displays the meetings for the particular user.
+
+`list_meeting all` displays the meetings for all users.
+
 ## 3.3 Finding Common Free Timeslots Feature
 The `free` command is a command that the user can input in order to find timeslots where all users are free.
 
-For greater customisation, `free [duration]` displays all common timeslots which has a duration longer than specified.
+For greater customisation, `free [duration]` displays all common timeslots which has a duration longer than or equal to
+what is specified.
 
 The searching algorithm works by marking the busy slots of each timetable first.
 Timings that are not marked 'busy' are then identified as free time slots.

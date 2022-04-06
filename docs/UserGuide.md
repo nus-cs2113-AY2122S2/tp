@@ -291,22 +291,27 @@ See you again!
 
 ## Current Limitation of app
 - Meeting cannot span across multiple days/past midnight. If that is the case, please create 2 separate meetings.
-e.g. if I want to have a meeting from 11pm - 3am, create one for today 11pm - 2359 and another from 0000 - 0300 
+e.g. if I want to have a meeting from 11pm - 3am, create one for today 2300 - 2359 and another from 0000 - 0300 
 for the next day. We will fix this in the next version.
 
 ## Command summary
 
 
-| Action                           | Format                                                                     |
-|----------------------------------|----------------------------------------------------------------------------|
-| Help                             | `help`                                                                     |
-| Add lesson                       | `add_lesson n/NAME t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
-| Add Meeting                      | `add_meeting t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`       |
-| Delete Event                     | `delete n/NAME i/INDEX`                                                    |
-| Free                             | `free`                                                                     |
-| List                             | `list`                                                                     |
-| Clear events from user           | `clear USER`                                                               |
-| Clear all events from everyone   | `clear all`                                                                |
-| Exit                             | `exit`                                                                     |
+| Action                         | Format                                                                     |
+|--------------------------------|----------------------------------------------------------------------------|
+| Help                           | `help`                                                                     |
+| Add lesson                     | `add_lesson n/NAME t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
+| Add meeting                    | `add_meeting t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`       |
+| Delete event                   | `delete n/NAME i/INDEX`                                                    |
+| Free                           | `free [DURATION]`                                                          |
+| List all events                | `list all`                                                                 |
+| List user's events             | `list [USER]`                                                              |
+| List all lessons               | `list_lesson all`                                                          |
+| List user's lessons            | `list_lesson [USER]`                                                       |
+| List all meetings              | `list_meeting all`                                                         |
+| List user's meetings           | `list_meeting [USER]`                                                      |
+| Clear events from user         | `clear [USER]`                                                             |
+| Clear all events from everyone | `clear all`                                                                |
+| Exit                           | `exit`                                                                     |
 
 
