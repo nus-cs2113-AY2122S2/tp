@@ -59,4 +59,29 @@ public class MealReservationManager {
         return false;
     }
 
+    public String getSpecificCustomerMealReservation(String ic, String fid) {
+        for (MealReservation mealReservation : mealReservations) {
+            if (ic.equals(mealReservation.getCustomer().getIc())
+                    && fid.equals(mealReservation.getRoute().getFlightID())) {
+                return mealReservation.getMealReservationInfo();
+            }
+        }
+        return "";
+    }
+
+    public boolean deleteSpecificCustomerMealReservation(String ic, String fid) {
+        for (MealReservation mealReservation : mealReservations) {
+            if (ic.equals(mealReservation.getCustomer().getIc())
+                    && fid.equals(mealReservation.getRoute().getFlightID())) {
+                if (!(mealReservation instanceof MealReservation)) {
+                    return false;
+                } else {
+                    mealReservations.remove(mealReservation);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
