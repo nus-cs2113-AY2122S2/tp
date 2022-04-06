@@ -44,3 +44,12 @@ about 9k LoC.
 * Helping to tag teammate's PR to the relevant milestones
 * Finalised and released `v1.0` on GitHub during a team meeting
 * Coming up with a to-do list every team meeting
+
+### Review contribution
+
+* Many PRs reviewed, including small changes. But noticeable ones include:
+  * [Pull request 23](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/23)
+  * [Pull request 42](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/42)
+  * [Pull request 50](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/50)
+  * [Pull request 116](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/116)
+  * [Pull request 167](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/167)
