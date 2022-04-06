@@ -26,6 +26,10 @@ public class DeleteAppointmentCommand extends Command {
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                           PatientStorage patientStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
+        if (index > appointmentList.getSize()) {
+            throw new IHospitalException("The appointment does not exist.\n");
+        }
+
         Appointment curr = appointmentList.deleteAppointment(index);
         return String.format(boundary + "Noted. I've removed this appointment:\n" + curr
                                      + "\n" + "Now you have " + (appointmentList.getSize())

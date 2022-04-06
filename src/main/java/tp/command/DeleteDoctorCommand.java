@@ -23,9 +23,13 @@ public class DeleteDoctorCommand extends Command {
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                           PatientStorage patientStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
+        if (index > doctorList.getSize()) {
+            throw new IHospitalException("The doctor does not exist.\n");
+        }
+
         Doctor curr = doctorList.deleteDoctor(index);
         return String.format(boundary + "Noted. I've removed this doctor:" + curr
-                + "\n" + "Now you have " + doctorList.getSize()
-                + " doctors in the system." + System.lineSeparator() + boundary);
+                                     + "\n" + "Now you have " + doctorList.getSize()
+                                     + " doctors in the system." + System.lineSeparator() + boundary);
     }
 }
