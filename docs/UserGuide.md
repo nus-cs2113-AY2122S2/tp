@@ -195,8 +195,10 @@ Format: `view appointment` or `view appointment /info [criteria],[input value]`
 
 Accepted Criteria: `appointment id`,`patient nric`,`patient name`,`doctor name`,`doctor nric`,`date`
 
-Examples: `view appointment /info appointment id,A123`, `view appointment /info patient nric,S1234567A`,
-          `view appointment /info doctor name,John`, `view appointment /info date,2023-01-01`
+Example 1: `view appointment /info appointment id,A123` <br>
+Example 2: `view appointment /info patient nric,S1234567A` <br>
+Example 3: `view appointment /info doctor name,John` <br>
+Example 4:`view appointment /info date,2023-01-01`
 
 ### Deleting: `delete`
 Allows user to delete existing records of doctors, patients and medicine.
