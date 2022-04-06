@@ -335,14 +335,14 @@ The general workflow of the `session /edit` command is as follows:
 7. `SessionEditCommand#run` will check if there is an update for a new list of persons, new session or new session date.
    * If there is an update on the list of persons, `SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored. 
      * The method would check if the newly provided list of persons contains duplicated names.
-       * If duplicated names are detected, an exception is throw and an error message would be printed and control is returned to `SplitLah`.
-       * Else, it would call `PersonList#isSuperSet` to check if the newly supplied list of persons contain all existing persons in the session.
-       * If `PersonList#isSuperSet` returns `false`, an exception is thrown and an error message would be printed and control is returned to `SplitLah`.
-       * Else, it would return the new list of persons ready to be stored.
+       * If duplicated names are detected, an exception is thrown, an error message would be printed and control is returned to `SplitLah`.
+       * Else, it would call `PersonList#isSuperSet` to check if the newly supplied list of persons contains all existing persons in the session.
+       * If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message would be printed and control is returned to `SplitLah`.
+       * Else, a new list of persons ready to be stored in the session is returned
    * If there is an update on the session name, `SessionEditCommand#getNewSessionName` is called to return the new session name.
-     * The method would check if the new session name exist with the list of sessions.
-       * If the new session name exists within the list of sessions, an exception is thrown and an error message would be printed and control is returned to `SplitLah`.
-       * Else, it would return the new session name ready to be stored.
+     * The method checks if the provided session name already exists in the list of sessions.
+       * If the provided session name exists within the list of sessions, an exception is thrown, an error message would be printed and control is returned to `SplitLah`.
+       * Else, the provided session name is returned to be used as the updated name for the session
    * If there is an update on the session date, `Session#setDateCreated` is called to set the new session date.
    * After which, the necessary setter methods are called to update the session name and list of persons for the session that is being edited.
 8. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
