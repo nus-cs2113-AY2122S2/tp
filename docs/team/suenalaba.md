@@ -1,7 +1,4 @@
----
-layout: page
-title: Joshua Khoo's Project Portfolio Page
----
+# Joshua Khoo - Project Portfolio Page
 
 ## Project: Airline Reservation Check in System (ARCS)
 
@@ -19,6 +16,8 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to Delete Menu Item
   * What it does: allows the user to delete menu items from the in-flight menu.
   * Justification: This feature improves the product significantly because in-flight meals are always changing depending on the season. Furthermore, users make mistakes and want to remove the item.
+
+<div style="page-break-after: always;"></div>
 
 * **New Feature**: Added the ability to Find Menu Item by type
   * What it does: allows the user find menu items by category type.
@@ -51,6 +50,8 @@ Given below are my contributions to the project.
 
 
 * **Code contributed**: [My code contribution](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=suenalaba&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
+
+<div style="page-break-after: always;"></div>
 
 * **Project management**:
     * Managed releases `v2.1` on GitHub.
