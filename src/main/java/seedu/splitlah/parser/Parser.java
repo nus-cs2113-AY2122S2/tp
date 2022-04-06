@@ -1,7 +1,6 @@
 package seedu.splitlah.parser;
 
 import seedu.splitlah.command.Command;
-
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidFormatException;
@@ -25,19 +24,15 @@ import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
 import seedu.splitlah.ui.Message;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 
 /**
- * Represents a parser that interprets the user input into data that can be understood by the program.
+ * Represents a parser that interprets the user input into a command that can be run by the program.
  *
  * @author Warren
  */
 public class Parser {
 
-    // KEY CONSTANTS
-    private static final String LOCALDATE_TODAY_INDICATOR = "today";
     private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
     static final double MINIMUM_SURCHARGE_PERCENT = 0;
