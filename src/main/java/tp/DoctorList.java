@@ -35,6 +35,12 @@ public class DoctorList {
         return curr;
     }
 
+    /**
+     * Search for the doctor with a given ID.
+     *
+     * @param id ID of the doctor to find.
+     * @return Doctor with the ID given.
+     */
     public Doctor searchDoctor(String id) {
         for (int i = 0; i < doctors.size(); i++) {
             if (doctors.get(i).getId().trim().equals(id)) {
