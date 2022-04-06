@@ -96,9 +96,14 @@ For example, the `Money` component is defined as an abstract class that is exten
 The `UI` component consists following classes: [`UI.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/global/UI.java)
 
-The UI component standarizes the output. It provides customized output for `PlanITarium` with `static` method, including
-printing welcome message and exit message as well as chatbox pattern. UI is created when initializing and is called by 
-main during execution. 
+The UI component provides function to standardize the output. It provides `printWelcomeMsg()` and `printExitMsg()` 
+as well as chatbox pattern `printHoriLine()` to create chatbox styled output. 
+ 
+How the `UI` component is used:
+
+UI is created when initializing the program. During execution, UI will be called to create chatbox pattern by calling 
+`printHoriLine()`. UI also prints welcome message at the beginning of the session and print exit message at the end of 
+the session.
 
 ![UIClass](images/UIClass.png)
 
@@ -133,16 +138,14 @@ The `Commands` component consists following classes: [`CommandFactory.java`
 
 ![CommandsClassDiagram](images/CommandsClassDiagram.png)
 
+`Command` component is mainly for organizing and separating different features. Different commands refers to different features.
+
 The `CommandFactory` provides a `getCommand()` function to get different commands according to the keywords of 
 user's instructions. `getCommand()` accepts user input as a `String` object and a `Family` object for input. The keyword
-is parsed by `Parser`. There're 11 cases, and it would throw an exception called `UnknownInputException` if the keyword 
-from user input is neither of the 11 cases provided. `CommandFactory` will only
+is parsed by `Parser`. There are 11 cases, and it would throw an exception called `UnknownInputException` if the keyword 
+from user input is none of the 11 cases provided. `CommandFactory` will only
 hold at most one command at one time. When `getCommand()` is called, the command that `CommandFactory` holds will be 
-updated. 
-
-Following sequence diagram has illustrated how the `CommandFactory` return a command when `getCommand()` is called.
-
-![CommandFactorySequenceDiagram](images/CommandFactorySequence4.png)
+updated.
 
 The `Command` class is an abstract class that has abstract method `execute()`. All the subclasses of `Command` inherit 
 this method. `Command` class also has a methods called `getType()`. This method is mainly for testing, it will return 
@@ -150,7 +153,18 @@ this method. `Command` class also has a methods called `getType()`. This method 
 
 Each subclass contains some customize variables, depends on the type of the command. These variables are from user 
 input after parsing by `Parser` according to user input.
-<!-- {For Huilin} -->
+
+Following sequence diagram has illustrated how the `CommandFactory` return a command when `getCommand()` is called.
+`XYZCommand` represents the subclasses of `Command`.
+
+![CommandFactorySequenceDiagram](images/CommandFactorySequence4.png)
+
+How `Command` component is used:
+
+1. `CommandFactory` translate raw input to `XYZCommand` with varies details given by user. `Main` will get this `XYZCommand`
+by calling `getCommand()`
+2. `XYZCommand` provides `execute()` that contains several calls of lower-level methods, so that the `Main` only need to execute
+the `XYZCommand` to obtain the desired results.
 
 ### Parser Component
 
@@ -270,7 +284,7 @@ This section describes some noteworthy details on how certain features are imple
 In PlanITarium, a command usually has the following format:
 
 ```md
-[command type][flag][description]
+[command type][delimiter][description]
 ```
 
 For example,
@@ -314,7 +328,7 @@ add /n Alice /g 1
 and this string will be passed to `CommandFactory` together with `personList` that contains all the people who had been
 added previously by calling `getCommand()`.
 
-Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseKeyword()`, and
+Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseCommandTypes()`, and
 the `Parser` should return `add` as keyword.
 
 Step 3. The `CommandFactory` will then match the keyword to the type of command. In this case, `add` is corresponding
@@ -326,7 +340,7 @@ Step 4. `PlanITarium` will then execute this command by calling `execute()`. Ali
 
 The following diagram is the sequence diagram of this entire process.
 
-![CommandFactorySequence](images/CommandFactorySequence3.png)
+![CommandFactorySequence](images/AddPersonCommandSequence3.png)
 
 The rest of the commands follow the similar flow as `AddPersonCommand`.
 

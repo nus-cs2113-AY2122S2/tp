@@ -17,15 +17,16 @@ Main -> CommandFactory: getCommand(userInput, family)
 activate CommandFactory
 CommandFactory -> Parser: parseCommandTypes(userInput)
 activate Parser
-Parser --> CommandFactory: keyword
+Parser --> CommandFactory: keyword : String
 deactivate Parser
 create XYZCommand
 CommandFactory --> XYZCommand
 activate XYZCommand
 XYZCommand --> CommandFactory: :XYZCommand
 deactivate XYZCommand
-CommandFactory --> Main: return :XYZCommand
+CommandFactory --> Main: :XYZCommand
 deactivate CommandFactory
 Main -> XYZCommand: execute()
 activate XYZCommand
+XYZCommand -->
 @enduml
