@@ -205,12 +205,12 @@ this component, `parseUserInput()` will call one of `createWorkoutCommand()`, `c
 4. If one of the `createExitCommand()`, `createHelpCommand()` is called. In the case that the userInput contains any 
 non-spacing characters other than the first non-null component mentioned in step 2, an `InvalidCommandException` will be
 thrown. Otherwise, the constructor of `HelpCommand` or `ExitCommand` will be called to create the `Command` object and 
-return to `WerkIt`.
+return to `WerkIt` for execution.
 5. If one of the `createExerciseCommand()`, `createWorkoutCommand()`, `createPlanCommand()`, `createScheduleCommand()`,
 `createSearchCommand()` is called. The method will check the validity of the remaining components of userInput, 
 if any component of the userInput is invalid, an `InvalidCommandException` will be thrown. 
 Otherwise, the constructor of the appropriate
-type of `Command` will be called to create the appropriate `Command` object and return to `WerkIt`.
+type of `Command` will be called to create the appropriate `Command` object and return to `WerkIt` for execution.
 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
