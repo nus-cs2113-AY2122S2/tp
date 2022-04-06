@@ -145,6 +145,8 @@ public class ErrorMessages {
             + "\tet/[EndTime]\n"
             + "\tm/[Mode]";
 
+    public static final String ERROR_EDIT_MEETING = "Sorry, meeting is not editable.";
+
     // Load
     public static final String ERROR_MISSING_VALUES_LOAD_LESSON = "Hi 1 or more parameters have missing values "
             + "in the MeetingJio.txt\n"

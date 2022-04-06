@@ -18,10 +18,10 @@ public class AddUserCommand extends Command {
     }
 
     /**
-     * Execute AddUser command using the timetable provided.
+     * Create new user and add his/her timetable to the master timetable.
      *
      * @param masterTimetable MasterTimetable
-     *
+     * @return String Add confirmation showing that the user is added
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
@@ -38,7 +38,7 @@ public class AddUserCommand extends Command {
      * Inform user that new user and timetable has been added.
      *
      * @param name User
-     *
+     * @return String confirmation of user being added
      */
     private String addConfirmation(String name) {
         return name + "'s timetable is created and added to the master timetable";
