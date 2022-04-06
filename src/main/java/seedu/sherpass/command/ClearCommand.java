@@ -29,9 +29,9 @@ public class ClearCommand extends Command {
         if (shouldExecute) {
             ui.showToUser(CLEAR_COMMAND_CONFIRMED_MESSAGE);
             taskList.deleteAllTasks();
+            storage.writeSaveData(taskList);
             ui.showLine();
             ui.showToUser(CLEAR_COMMAND_RESULT_MESSAGE);
-            storage.writeSaveData(taskList);
         } else {
             ui.showToUser(CLEAR_COMMAND_CANCEL_MESSAGE);
         }

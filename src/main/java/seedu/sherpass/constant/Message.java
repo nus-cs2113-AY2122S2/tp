@@ -4,6 +4,7 @@ public class Message {
     public static final String EMPTY_STRING = "";
     public static final String WHITESPACE = " ";
     public static final String TAB_INDENT = "\t";
+    public static final String NEWLINE = "\n";
     public static final String WELCOME_MESSAGE_ONE = "Welcome to\n";
     public static final String WELCOME_MESSAGE_TWO = "Here is your schedule for today:";
     public static final String WELCOME_MESSAGE_STUDY = "Gotcha! Entering study mode...\n"

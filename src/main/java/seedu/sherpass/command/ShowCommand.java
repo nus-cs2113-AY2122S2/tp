@@ -8,6 +8,8 @@ import seedu.sherpass.util.Ui;
 import java.time.LocalDate;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_1;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_2;
 import static seedu.sherpass.constant.Message.WAITING_FOR_USER_NEXT_INPUT;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 
@@ -62,7 +64,7 @@ public class ShowCommand extends Command {
         switch (selection) {
         case "todo":
             ui.showToUser("Here are your pending tasks:");
-            taskList.printPendingTasks(ui);
+            ui.showToUser(taskList.getPendingTasks());
             break;
         case "today":
             ui.showToUser(WELCOME_MESSAGE_TWO);
@@ -134,7 +136,7 @@ public class ShowCommand extends Command {
             break;
         case "auguest":
         case "aug":
-            ui.showToUser("Here is your schedule for Auguest:");
+            ui.showToUser("Here is your schedule for August:");
             Timetable.showAugustSchedule(taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
@@ -163,7 +165,9 @@ public class ShowCommand extends Command {
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "all":
-            taskList.printAllTasks(ui);
+            ui.showToUser("Here are the tasks in your list:");
+            ui.showToUser(taskList.getAllTasksInString());
+            ui.showToUser(TASK_COUNT_MESSAGE_1 + taskList.getSize() + TASK_COUNT_MESSAGE_2);
             break;
         default:
             ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);

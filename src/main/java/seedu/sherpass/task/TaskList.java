@@ -15,10 +15,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_DO_ON_DATE;
-import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_START_DATE_IN_THE_PAST_MESSAGE;
+import static seedu.sherpass.constant.Message.*;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -348,29 +345,17 @@ public class TaskList {
     }
 
     /**
-     * Prints all available tasks in the task list.
+     * Returns a string listing all tasks in the list.
      *
-     * @param ui Ui class for printing of messages.
      */
-    public void printAllTasks(Ui ui) {
-        System.out.println("Here are the tasks in your list:");
+    public String getAllTasksInString() {
+        StringBuilder result = new StringBuilder();
         for (Task task : tasks) {
-            ui.showToUser(task.toString());
+            result.append("\t");
+            result.append(task);
+            result.append("\n");
         }
-        ui.showLine();
-        ui.showToUser("You have " + tasks.size() + " task(s) in your list.");
-    }
-
-
-    /**
-     * Returns a boolean value denoting the task status, i.e.
-     * whether the task has been marked or not.
-     *
-     * @param markIndex Index of a task to check for its mark status.
-     * @return Returns true if task has been marked. False otherwise.
-     */
-    public boolean isTaskDone(int markIndex) {
-        return tasks.get(markIndex).isDone();
+        return result.toString().stripTrailing();
     }
 
     /**
@@ -447,7 +432,7 @@ public class TaskList {
     }
 
     /**
-     * Return a filtered ArrayList of task according to the date specified.
+     * Returns a filtered ArrayList of task according to the date specified.
      *
      * @param dateInput The specific date.
      * @return The filtered ArrayList.
@@ -467,17 +452,20 @@ public class TaskList {
     }
 
     /**
-     * Prints tasks that are yet to be completed, i.e. marked as done.
+     * Returns
      * Printed tasks applies to non-recurring tasks.
      *
-     * @param ui User interface
      */
-    public void printPendingTasks(Ui ui) {
+    public String getPendingTasks() {
+        StringBuilder result = new StringBuilder();
         for (Task task : tasks) {
             if (!task.isDone()) {
-                ui.showToUser(task.toString());
+                result.append(TAB_INDENT);
+                result.append(task);
+                result.append(NEWLINE);
             }
         }
+        return result.toString().stripTrailing();
     }
 
     public int getPendingTasksCount() {
