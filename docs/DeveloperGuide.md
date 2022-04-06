@@ -131,19 +131,20 @@ which manages interaction (prompting for user input and displaying results
 of commands/methods being called) between the user and the application.
 
 How the UI class works:
-* Upon the launch of `WerkIt`, the `UI class` will called on `printGreetings()` method to display the greeting messages to
+* Upon the initialization of `WerkIt`, the `UI class` will called the `printGreetings()` method to display the greeting messages to
   the user.
 * Additionally, local files storing the data of previous session of `WerkIt` will also be loaded into the program. Hence,
-  the loading status of these files are also display by calling the`printFileLoadStatusMessage()`method.
-* `UI class` is responsible for getting the user input by calling the `getUserInput(String filename, boolean isLoadSuccessful)`
-  method which will then parsed the input received from the user to `Parser class` for it to process and
-  called on other relevant methods to execute the command.
+  the loading status of these files are also display by calling the `printFileLoadStatusMessage()` method.
+* `UI class` is also responsible for getting the user input by calling the `getUserInput(String filename, boolean isLoadSuccessful)`
+  method, which will then parse the input by sending it to the `Parser class`. The `Paser class` will process
+  the input and call other relevant methods to execute the command.
 * `UI class` also display messages when a
     * workout has been successfully created, updated and deleted.
     * plan has been successfully created and deleted.
     * schedule has been successfully created and removed.
 * Help messages are also printed in the UI class by calling `printHelpMessage()` method.
-* Lastly, when the user exits the program, the `printGoodBye()` method will be called to send the user away.
+* Lastly, when the user exits the program, the `printGoodBye()` method will be called to indicate that the 
+user has successfully exited the program. 
 
 #### Parser component
 [Writeup]
@@ -235,11 +236,11 @@ to schedule 1 workout plan. Click [here](#glossary) to have a better understandi
 means.
 
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
-`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, the `UI#getUserInput()` method in `UI`
 class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
 user's command.
 
-If the user's command type is schedule, the `Parser#parseUserInput(String userInput)` method will parse the 'schedule'
+If the user's command type is `schedule`, the `Parser#parseUserInput(String userInput)` method will parse the `schedule`
 base word and proceed to create schedule related command using `Parser#createScheduleCommand(String userInput)` method.
 The following table shows the schedule commands that WerkIt! are able to process by calling the `ScheduleCommand#execute()`
 method.
