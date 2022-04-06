@@ -114,7 +114,7 @@ Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
 ```
-If there are no items have been borrowed from the inventory, the `list -cb` command will return:
+If there are no items have been borrowed from the inventory, the `listcb` command will return:
 ```
 > listcb
 There are no items in the inventory being borrowed.
@@ -130,7 +130,7 @@ Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-04-24 to 2021-04-30
 ```
-If the person does not exist in the borrowings, the `list -cb p/BORROWER_NAME` will return:
+If the person does not exist in the borrowings, the `listcb p/BORROWER_NAME` will return:
 ```
 > listcb p/David
 There are no items currently borrowed by David.
