@@ -7,7 +7,6 @@ import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
 
-
 public abstract class Timer extends Thread {
     protected volatile boolean isTimerRunning = false;
     protected volatile boolean isTimerPaused = false;

@@ -1,12 +1,9 @@
 package seedu.sherpass.timer;
 
 import seedu.sherpass.command.Command;
-import seedu.sherpass.command.MarkCommand;
-import seedu.sherpass.command.ShowCommand;
 import seedu.sherpass.exception.InvalidTimeException;
 
 import seedu.sherpass.util.parser.Parser;
-import seedu.sherpass.util.parser.TaskParser;
 import seedu.sherpass.util.parser.TimerParser;
 
 import seedu.sherpass.task.TaskList;
@@ -14,7 +11,6 @@ import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
-import seedu.sherpass.util.parser.TimetableParser;
 import seedu.sherpass.timetable.Timetable;
 
 import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;

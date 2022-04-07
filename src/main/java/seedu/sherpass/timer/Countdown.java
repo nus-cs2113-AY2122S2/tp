@@ -7,10 +7,7 @@ import seedu.sherpass.timetable.Timetable;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
-import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
-import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 
 public class Countdown extends Timer  {
 

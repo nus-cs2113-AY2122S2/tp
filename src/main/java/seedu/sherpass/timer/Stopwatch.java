@@ -6,9 +6,6 @@ import seedu.sherpass.util.Ui;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import static seedu.sherpass.constant.Message.EMPTY_STRING;
-import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
-import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
 
 public class Stopwatch extends Timer {
 
