@@ -95,7 +95,19 @@ For example, the `Money` component is defined as an abstract class that is exten
 
 ### UI Component
 
-<!-- {For Huilin as she is most familiar} -->
+The `UI` component consists following classes: [`UI.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/global/UI.java)
+
+The UI component provides function to standardize the output. It provides `printWelcomeMsg()` and `printExitMsg()` 
+as well as chatbox pattern `printHoriLine()` to create chatbox styled output. 
+ 
+How the `UI` component is used:
+
+UI is created when initializing the program. During execution, UI will be called to create chatbox pattern by calling 
+`printHoriLine()`. UI also prints welcome message at the beginning of the session and print exit message at the end of 
+the session.
+
+![UIClass](images/UIClass.png)
 
 ### Commands Component
 
@@ -126,12 +138,35 @@ The `Commands` component consists following classes: [`CommandFactory.java`
 [`ExitCommand.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/commands/ExitCommand.java)
 
-The `CommandFactory` provides a `getCommand()` function to get different commands according to the keywords of 
-user's instructions. This keyword is parsed by `Parser`. There're 11 cases, and it would throw an exception called 
-`UnknownInputException` if the keyword from user input is neither of the 11 cases provided. 
+![CommandsClassDiagram](images/CommandsClassDiagram.png)
 
-The `Command` class is an abstract class that has abstract method ``
-<!-- {For Huilin} -->
+`Command` component is mainly for organizing and separating different features. Different commands refers to different features.
+
+The `CommandFactory` provides a `getCommand()` function to get different commands according to the keywords of 
+user's instructions. `getCommand()` accepts user input as a `String` object and a `Family` object for input. The keyword
+is parsed by `Parser`. There are 11 cases, and it would throw an exception called `UnknownInputException` if the keyword 
+from user input is none of the 11 cases provided. `CommandFactory` will only
+hold at most one command at one time. When `getCommand()` is called, the command that `CommandFactory` holds will be 
+updated.
+
+The `Command` class is an abstract class that has abstract method `execute()`. All the subclasses of `Command` inherit 
+this method. `Command` class also has a methods called `getType()`. This method is mainly for testing, it will return 
+`null` if it is called. All the subclasses have overridden this method.
+
+Each subclass contains some customize variables, depends on the type of the command. These variables are from user 
+input after parsing by `Parser` according to user input.
+
+Following sequence diagram has illustrated how the `CommandFactory` return a command when `getCommand()` is called.
+`XYZCommand` represents the subclasses of `Command`.
+
+![CommandFactorySequenceDiagram](images/CommandFactorySequence4.png)
+
+How `Command` component is used:
+
+1. `CommandFactory` translate raw input to `XYZCommand` with varies details given by user. `Main` will get this `XYZCommand`
+by calling `getCommand()`
+2. `XYZCommand` provides `execute()` that contains several calls of lower-level methods, so that the `Main` only need to execute
+the `XYZCommand` to obtain the desired results.
 
 ### Parser Component
 
@@ -251,62 +286,65 @@ This section describes some noteworthy details on how certain features are imple
 In PlanITarium, a command usually has the following format:
 
 ```md
-[command type][indicator][description]
+[command type][delimiter][description]
 ```
 
 For example,
 
 ```md
-add \n Alice
+add /n Alice /g 1
 ```
 
-is to add a person whose name is Alice. `add` here is the command type to add a person, and `\n` is the indicator of the
-name of person.
+is to add a person whose name is Alice to Parents' group. `add` here is the command type to add a person, `/n` is 
+the flag to indicate the name of person, and `/g` is the flag to indicate the index of the group.
 
-There may be several indicators for every input, such as
+There may be several flags for every input, such as
 
 ```md
-addin \i 200 \d salary \u 1
+addin /i 200 /d salary /u 1 /g 1 /p t
 ```
 
-is to add an income for the person whose uid is 1, and the description of this income is salary.
+is to add a recurring income for the person whose uid is 1 in Parents' group, and the description of this income is 
+salary. The amount of salary is 200 dollars.
 
 When `PlanITarium` receives such input, it will pass the input to `CommandFactory`. The `CommandFactory` will call
 `Parser` to parse the input into several components according to the indicator. The `Parser` will then return the type
-of command to `CommandFactory`. According to the type, `CommandFactory` will return a command object to `PlanITarium`.
-After receiving the command, `PlanITarium` will call `execute()` of command object to execute the command.
-
-The following diagram is the sequence diagram of this entire process.
-
-![CommandFactorySequence](images/CommandFactorySequence.png)
+of command to `CommandFactory`. According to the type, `CommandFactory` will return a `XYZCommand` object to `PlanITarium`.
+After receiving the command, `PlanITarium` will call `execute()` of `XYZCommand` to execute the command.
 
 Following operations are implemented:
 
-* `CommandFactory#getCommand(userInput, personList)` -- Return the command that is needed to be executed corresponding
+* `CommandFactory#getCommand(userInput, family)` -- Return the command that is needed to be executed corresponding
   to the user input
 * `Parser#getKeyword(userInput)` -- Return the keyword of the type of command
-* `Command#execute()` -- Execute the command
+* `XYZCommand#execute()` -- Execute the command
 
 Below is and example usage scenario and how Alice is added to the `PersonList`
 
 Step 1. given that user input is
 
 ```md
-add \n Alice
+add /n Alice /g 1
 ```
 
 and this string will be passed to `CommandFactory` together with `personList` that contains all the people who had been
 added previously by calling `getCommand()`.
 
-Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseCommandTypes`, and
+Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseCommandTypes()`, and
 the `Parser` should return `add` as keyword.
 
 Step 3. The `CommandFactory` will then match the keyword to the type of command. In this case, `add` is corresponding
-to `AddPersonCommand`. The `CommandFactory` will then create a new `AddPersonCommand` with `userInput` and `personList`,
+to `AddPersonCommand`. The `CommandFactory` will then create a new `AddPersonCommand` with `userInput` and `family`,
 and return this object to `PlanITarium`.
 
 Step 4. `PlanITarium` will then execute this command by calling `execute()`. Alice will then be added to the
-`personList`.
+`family`.
+
+The following diagram is the sequence diagram of this entire process.
+
+![CommandFactorySequence](images/AddPersonCommandSequence3.png)
+
+The rest of the commands follow the similar flow as `AddPersonCommand`.
 
 ---
 
@@ -374,13 +412,6 @@ print that out.
   and expenditures.
     * Pros: Only 1 command is required to show all information.
     * Cons: If the user only wants a high level overview, the user could be hit with information overload.
-
----
-
-### Edit Values Feature
-
-Maybe for Jiarong {Suggest to show the process from `parsing several delimiters` to `finding the income/expenditure`
-to `editing the value`.}
 
 ---
 

@@ -44,7 +44,7 @@ public class Expenditure extends Money {
      *
      * @return Object attributes as string
      */
-    public String saveString() {
+    public String getSaveString() {
         return "e " + description + " /d "
                 + amount + " /d "
                 + isPermanent + " /d "

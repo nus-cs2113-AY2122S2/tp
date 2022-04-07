@@ -134,7 +134,9 @@ Example of usage:
 
 * _Result_: Entry for Alice is added to Parents' tracking list with a user index (uid) of **1**.
 
-  ![add-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![add-command-screenshot](images/AddPerosn.png) <!-- this is a placeholder -->
 
 ---
 
@@ -162,6 +164,7 @@ Example of usage:
   
 <br/>
 
+---
 
 ### Add an income: `addin`
 
@@ -186,8 +189,10 @@ Example of usage:
   `addin /g 1 /u 1 /d Salary /i 2000 /p T`
 
 * _Result_: Entry for Salary is added to Alice's income list with an income index of **1**.
-
-  ![addin-command-screenshot]() <!-- this is a placeholder -->
+  
+  <br/>
+  
+  ![addin-command-screenshot](images/AddIncome.png) <!-- this is a placeholder -->
 
 ---
 
@@ -214,7 +219,9 @@ Example of usage:
 
 * _Result_: Income entry for Salary of $2,000 is deleted from Alice's income list.
 
-  ![deletein-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![deletein-command-screenshot](images/DeleteIncome.png) <!-- this is a placeholder -->
 
 ---
 
@@ -243,7 +250,9 @@ Example of usage:
 
 * _Result_: Income entry in Alice's income list is edited.
 
-  ![editin-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![editin-command-screenshot](images/EditIncome.png) <!-- this is a placeholder -->
 
 ---
 
@@ -273,7 +282,9 @@ Example of usage:
 
 * _Result_: Entry for candies is added to Alice's expenditure list with an expenditure index of **1**.
 
-  ![addout-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![addout-command-screenshot](images/AddExpend.png) <!-- this is a placeholder -->
 
 ---
 
@@ -300,7 +311,9 @@ Example of usage:
 
 * _Result_: Expenditure entry for candies of $20 is deleted from Alice's expenditure list.
 
-  ![deleteout-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![deleteout-command-screenshot](images/DeleteExpend.png) <!-- this is a placeholder -->
 
 ---
 
@@ -330,7 +343,9 @@ Example of usage:
 
 * _Result_: Expenditure entry in Alice's expenditure list is edited.
 
-  ![editout-command-screenshot]() <!-- this is a placeholder -->
+  <br/>
+  
+  ![editout-command-screenshot](images/EditExpend.png) <!-- this is a placeholder -->
 
 ---
 
@@ -340,7 +355,7 @@ Example of usage:
 
 Format: `overview`
 
-![list-command-screenshot]() <!-- this is a placeholder -->
+![list-command-screenshot](images/Overview.png) <!-- this is a placeholder -->
 
 ---
 
@@ -356,9 +371,11 @@ Example of usage:
 
 * List all the members from Parents' group.
 
-`list /g 1`
-
-![detail_list-command-screenshot]() <!-- this is a placeholder -->
+  `list /g 1`
+  
+  <br/>
+  
+  ![detail_list-command-screenshot](images/List.png) <!-- this is a placeholder -->
 
 ---
 
@@ -368,7 +385,7 @@ Example of usage:
 
 Format: `listcat`
 
-![listcat-command-screenshot]() <!-- this is a placeholder -->
+![listcat-command-screenshot](images/Listcat.png) <!-- this is a placeholder -->
 
 ---
 
@@ -388,13 +405,23 @@ Format: `find /d USER_STRING [/c CATEGORY_INDEX]`
 
 Example of usage:
 
+Find records with category:
 * Find all the records which descriptions include _candies_ from Category 1.
 
   `find /d candies /c 1`
 
 * _Result_: The result of the search is returned and printed to the screen.
 
-  ![find-command-screenshot]() <!-- this is a placeholder -->
+  ![find-command-screenshot](images/FindWithCat.png) <!-- this is a placeholder -->
+
+Find records without category:
+* Find all the records which descriptions include _candies_.
+  
+  `find /d candies`
+
+* _Result_:
+
+  ![find-command-screenshot](images/FindWithoutCat.png)
 
 ---
 
@@ -423,19 +450,30 @@ computer.
 To keep things simple, we will omit the parameter description for you. To view each command in detail, refer to
 the [features](#features) section.
 
-| Command                                                             | Format                                                |
-|---------------------------------------------------------------------|-------------------------------------------------------|
-| [View all commands](#viewing-all-commands-help)                     | help                                                  |
-| [Add a person](#add-a-person-add)                                   | add /n __ /g __                                       |
-| [Delete a person](#delete-a-person-delete)                          | delete /g __ /u __                                    |
-| [Add an income](#add-an-income-addin)                               | addin /g__ /u __ /i __ /d __ /p __                    |
-| [Delete an income](#delete-an-income-deletein)                      | deletein /g __ /u __ /r __                            |
-| [Edit an income](#edit-an-income-editin)                            | editin /g __ /u __ /r __ [ /i __ /d __ /p __ ]        |
-| [Add an expenditure](#add-an-expenditure-addout)                    | addout /g__ /u __ /e __ /d __ /c __ /p __             |
-| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /g __ /u __ /r __                           |
-| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /g __ /u __ /r __ [ /e __ /d __ /c __ /p __ ] |
-| [Show financial summary](#show-financial-summary-overview)          | overview                                              |
-| [Show all records by group](#show-all-records-by-group-list)        | list /g __                                            | 
-| [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                               |
-| [Searching for details](#searching-for-details-find)                | find /d __ [ /c __ ]                                  |
-| [Exit the program](#exit-bye)                                       | bye                                                   |
+| Command                                                             | Format                                                                                                                                                              |
+|---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [View all commands](#viewing-all-commands-help)                     | help                                                                                                                                                                |
+| [Add a person](#add-a-person-add)                                   | add /n __ /g __ <br/>e.g.<br/> `> add /n Alice /g 1`                                                                                                                |
+| [Delete a person](#delete-a-person-delete)                          | delete /g __ /u __ <br/>e.g.<br/> `> delete /g 1 /u 2`                                                                                                              |
+| [Add an income](#add-an-income-addin)                               | addin /g__ /u __ /i __ /d __ /p __ <br/>e.g.<br/>f`> addin /g 2 /u 3 /i 2000 /d salary /p t`                                                                        |
+| [Delete an income](#delete-an-income-deletein)                      | deletein /g __ /u __ /r __ <br/>e.g.<br/> `> deletein /g 2 /u 1 /r 5`                                                                                               |
+| [Edit an income](#edit-an-income-editin)                            | editin /g __ /u __ /r __ [ /i __ /d __ /p __ ] <br/>e.g.<br/> `> editin /g 3 /u 1 /r 5 /i 10 /d stationary` <br/>f`> editin /g 2 /u 4 /r 1 /d red pack /p f`        |
+| [Add an expenditure](#add-an-expenditure-addout)                    | addout /g__ /u __ /e __ /d __ /c __ /p __ <br/>e.g.<br/> `> addout /g 2 /u 3 /e 400 /d books /c 1 /p f`                                                             |
+| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /g __ /u __ /r __ <br/>e.g.<br/> `> deleteout /g 2 /u 1 /r 1`                                                                                             |
+| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /g __ /u __ /r __ [ /e __ /d __ /c __ /p __ ] <br/>e.g.<br/> `> editout /g 2 /u 1 /r 2 /e 400 /d dinner /c 3` <br/> `> editout /g 1 /u 2 /r 6 /d misc /p t` |
+| [Show financial summary](#show-financial-summary-overview)          | overview                                                                                                                                                            |
+| [Show all records by group](#show-all-records-by-group-list)        | list /g __ <br/>e.g.<br/> `> list /g 1`                                                                                                                             | 
+| [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                                                                                                                                             |
+| [Searching for details](#searching-for-details-find)                | find /d __ [ /c __ ] <br/>e.g.<br/> `> find salary` <br/> `> find sugar /c 4`                                                                                       |
+| [Exit the program](#exit-bye)                                       | bye                                                                                                                                                                 |
+
+[**Categoty Summary**](#show-expenditure-categories-listcat)
+
+| Index | Name                  |
+|-------|-----------------------|
+| 0     | Others                |
+| 1     | Food and Drinks       |
+| 2     | Home and Utilities    |
+| 3     | Health and Medical    |
+| 4     | Transportation        |
+| 5     | Fun and Entertainment |

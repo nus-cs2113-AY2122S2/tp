@@ -1,21 +1,14 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
 
+participant Main LOGIC_COLOR_T1
 Box " "#WHITE
-    participant Main #grey
     participant ":CommandFactory" as CommandFactory COMMAND_COLOR
-    participant ":Parser" as Parser LOGIC_COLOR
-    participant ":AddPersonCommand" as AddPersonCommand COMMAND_COLOR_T1
-    participant ":DeletePersonCommand" as DeletePersonCommand COMMAND_COLOR_T1
-    participant ":AddRecordCommand" as AddRecordCommand COMMAND_COLOR_T1
-    participant ":DeleteREcordCommand" as DeleteRecordCommand COMMAND_COLOR_T1
-    participant ":EditRecordCommand" as EditRecordCommand COMMAND_COLOR_T1
-    participant ":ListCommand" as ListCommand COMMAND_COLOR_T1
-    participant ":ListCategoriesCommand" as ListCategoriesCommand COMMAND_COLOR_T1
-    participant ":SearchCommand" as SearchCommand COMMAND_COLOR_T1
-    participant ":ExitCommand" as ExitCommand COMMAND_COLOR_T1
-    participant ":Command" as Command COMMAND_COLOR_T3
+    participant ":Parser" as Parser LOGIC_COLOR_T2
+    participant ":XYZCommand" as XYZCommand COMMAND_COLOR_T2
 end Box
 
 -> Main: userInput
@@ -24,65 +17,19 @@ Main -> CommandFactory: getCommand(userInput, family)
 activate CommandFactory
 CommandFactory -> Parser: parseCommandTypes(userInput)
 activate Parser
-Parser --> CommandFactory: return
+Parser --> CommandFactory: keyword : String
 deactivate Parser
-alt Add Person
-    create AddPersonCommand
-    CommandFactory -> AddPersonCommand: new(userInput, family)
-    activate AddPersonCommand
-    AddPersonCommand --> CommandFactory: :AddPersonCommand
-    deactivate AddPersonCommand
-else Delete Person
-     create DeletePersonCommand
-     CommandFactory -> DeletePersonCommand: new(userInput, family)
-     activate DeletePersonCommand
-     DeletePersonCommand --> CommandFactory: :DeletePersonCommand
-     deactivate DeletePersonCommand
-else Add Record
-    create AddRecordCommand
-    CommandFactory -> AddRecordCommand: new(userInput, family)
-    activate AddRecordCommand
-    AddRecordCommand --> CommandFactory: :AddRecordCommand
-    deactivate AddRecordCommand
-else Delete Record
-    create DeleteRecordCommand
-    CommandFactory -> DeleteRecordCommand: new(userInput, family)
-    activate DeleteRecordCommand
-    DeleteRecordCommand --> CommandFactory: :DeleteRecordCommand
-    deactivate DeleteRecordCommand
-else Edit Record
-    create EditRecordCommand
-    CommandFactory -> EditRecordCommand: new(userInput, family)
-    activate EditRecordCommand
-    EditRecordCommand --> CommandFactory: :EditRecordCommand
-    deactivate EditRecordCommand
-else List
-    create ListCommand
-    CommandFactory -> ListCommand: new(userInput, family)
-    activate ListCommand
-    ListCommand --> CommandFactory: :ListCommand
-    deactivate ListCommand
-else List Categories
-    create ListCategoriesCommand
-    CommandFactory -> ListCategoriesCommand: new(userInput, family)
-    activate ListCategoriesCommand
-    ListCategoriesCommand --> CommandFactory: :ListCategoriesCommand
-    deactivate ListCategoriesCommand
-else List
-    create SearchCommand
-    CommandFactory -> SearchCommand: new(userInput, family)
-    activate SearchCommand
-    SearchCommand --> CommandFactory: :SearchCommand
-    deactivate SearchCommand
-else List
-    create ExitCommand
-    CommandFactory -> ExitCommand: new(userInput, family)
-    activate ExitCommand
-    ExitCommand --> CommandFactory: :ExitCommand
-    deactivate ExitCommand
-end
-CommandFactory --> Main: return
+create XYZCommand
+CommandFactory --> XYZCommand
+activate XYZCommand
+ref over Parser, XYZCommand
+Parser Component parse and validate
+end ref
+XYZCommand --> CommandFactory: :XYZCommand
+deactivate XYZCommand
+CommandFactory --> Main: :XYZCommand
 deactivate CommandFactory
-Main -> Command: execute()
-activate Command
+Main -> XYZCommand: execute()
+activate XYZCommand
+XYZCommand -->
 @enduml

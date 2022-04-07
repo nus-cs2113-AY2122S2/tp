@@ -1,3 +1,5 @@
+//author @@hlwang56
+
 package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
@@ -34,7 +36,7 @@ public class DeleteRecordCommand extends Command {
 
     public DeleteRecordCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
-        this.type = "DeleteRecordCMD";
+        this.type = Constants.DELETERECORDCMDTYPE;
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         keyword = Parser.parseCommandType(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));

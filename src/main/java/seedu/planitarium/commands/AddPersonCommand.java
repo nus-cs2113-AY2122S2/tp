@@ -27,7 +27,7 @@ public class AddPersonCommand extends Command {
 
     public AddPersonCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
-        this.type = "AddPersonCMD";
+        this.type = Constants.ADDPERSONCMDTYPE;
         this.name = Parser.parseName(userInput);
         this.group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         this.isSilent = Constants.FOR_USER;

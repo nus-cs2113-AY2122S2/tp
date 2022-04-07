@@ -1,3 +1,5 @@
+//author @@hlwang56
+
 package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
@@ -23,7 +25,7 @@ public class ListCommand extends Command {
 
     public ListCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
-        this.type = "ListCMD";
+        this.type = Constants.LISTCMDTYPE;
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         logger.log(Level.INFO, String.format(LOG_LIST_INFO, group));
     }

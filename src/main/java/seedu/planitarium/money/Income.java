@@ -20,7 +20,7 @@ public class Income extends Money {
      *
      * @return Object attributes as string
      */
-    public String saveString() {
+    public String getSaveString() {
         return "i " + description + " /d "
                 + amount + " /d "
                 + isPermanent + " /d "

@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include style.puml
+show members
+hide empty members
+
+Package Global as G{
+class ":UI" as UI LOGIC_COLOR_T1 {
+<color: white> <u>+HORI_LINE
+<color: white> <u>+WELCOME_MSG
+<color: white> <u>+EXIT_MSG
+<color: white> <u>+LOGO
+<color: white> <u>+printHoriLine()
+<color: white> <u>+printWelcomeMsg()
+<color: white> <u>+printExitMsg()
+}
+}
+
+class ":Main" as PlanITarium LOGIC_COLOR
+
+PlanITarium -right[LOGIC_COLOR]->"1" UI
+
+@enduml
