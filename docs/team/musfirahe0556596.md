@@ -81,6 +81,9 @@ to modify files. Examples of particularly time-consuming test cases are provided
   - Wrote the `Workout-related features` under the Feature Overview of the Design section, including coming up with its diagrams ([link](../DeveloperGuide.md#workout-related-features)).
 - Wrote part of the [glossary](../DeveloperGuide.md#glossary)
 - Wrote the [table of contents](../DeveloperGuide.md#table-of-contents).
+- Wrote parts of the [Instructions for manual testing](../DeveloperGuide.md#instructions-for-manual-testing).
+  - Wrote manual test cases for [deleting a workout](../DeveloperGuide.md#deleting-an-existing-workout),
+  [creating a plan](../DeveloperGuide.md#creating-a-new-plan) and [listing of plans](../DeveloperGuide.md#listing-all-plans).
 
 ### Contributions to Team-Based Tasks
 - Maintained the team's Google Drive folder, which includes the team's project notebook

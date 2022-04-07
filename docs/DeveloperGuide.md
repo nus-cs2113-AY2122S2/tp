@@ -2026,6 +2026,7 @@ Expected: If plan list is empty, the terminal will display to the user that the 
 Else, all plan names will be listed to the user.
 2. Test case `plan /list ab`<br/>
 Expected: Nothing is listed because no additional arguments should be supplied for this method
+
 #### Listing Workouts In A Plan
 #### Deleting An Existing Plan
 
