@@ -34,6 +34,7 @@ add n/Gen f/ e/ d/
 add n/Gen f/YNC e/ d/
 add n/Gen f/ e/email@gmail.com d/
 add n/Gen f/YNC e/email@gmail.com d/
+add n/Gen f/YNC e/invalid email d/description
 list
 menu
 goto m/Expense_Tracker

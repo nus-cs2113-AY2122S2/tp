@@ -132,6 +132,9 @@ Invalid contact field(s)!
 Invalid contact field(s)!
 ---------------------------------------------------
 ---------------------------------------------------
+Note: the email you entered might not be in the correct format!
+---------------------------------------------------
+---------------------------------------------------
 You haven't added any contacts to your list yet!
 ---------------------------------------------------
 Welcome back to the main menu

@@ -25,6 +25,8 @@ public class ContactParser {
             "Adding a contact with all empty fields!";
     private static final String CONTACTS_PARSER_ADD_INVALID_FIELDS_MESSAGE =
             "Adding a contact with missing field(s)!";
+    public static final String CONTACTS_POTENTIAL_INVALID_EMAIL_MESSAGE =
+            "Note: the email you entered might not be in the correct format!";
 
     private static final String CONTACTS_DELIMITERS = "[nfetd]/";
     private static final char NAME_DELIMITER = 'n';
@@ -54,7 +56,7 @@ public class ContactParser {
      * @return An ArrayList of String objects that are the individual contact fields.
      */
     static ArrayList<String> getFieldStrings(String userInput) {
-        String regex = CONTACTS_DELIMITERS + ".*?(?=(" + CONTACTS_DELIMITERS + "|$))";
+        String regex = " " + CONTACTS_DELIMITERS + ".*?(?=( " + CONTACTS_DELIMITERS + "|$))";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userInput);
         ArrayList<String> fieldStrings = new ArrayList<>(MAX_NUMBER_OF_FIELDS);
@@ -99,6 +101,10 @@ public class ContactParser {
             case EMAIL_DELIMITER:
                 Email email = contact.getEmail();
                 email.setField(fieldContent);
+                boolean isValidEmailFormat = email.isValidFormat();
+                if (!isValidEmailFormat) {
+                    throw new InvalidContactField(CONTACTS_POTENTIAL_INVALID_EMAIL_MESSAGE);
+                }
                 break;
             case DESCRIPTION_DELIMITER:
                 Description description = contact.getDescription();
