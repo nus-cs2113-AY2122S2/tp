@@ -24,9 +24,9 @@ class TimetableTest {
     @BeforeEach
     public void setUp() {
         timetable = new Timetable("john");
-        event1 = new Lesson("cs2113", "friday", 1200 ,1330, "online");
-        event2 = new Lesson("cs2113", "friday", 1400 ,1600, "physical");
-        event3 = new Lesson("cs2113", "friday", 1300 ,1500, "physical");
+        event1 = new Lesson("cs2113", "friday", 1200, 1330, "online");
+        event2 = new Lesson("cs2113", "friday", 1400, 1600, "physical");
+        event3 = new Lesson("cs2113", "friday", 1300, 1500, "physical");
     }
 
     @Test
