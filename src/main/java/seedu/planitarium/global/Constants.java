@@ -97,6 +97,7 @@ public class Constants {
 
     // For Command logging
     public static final String LOG_ERROR_INFO = "Unknown error occurred in execution";
+
     public static final String ADDPERSONCMDTYPE = "AddPersonCMD";
     public static final String DELETEPERSONCMDTYPE = "DeletePersonCMD";
     public static final String ADDRECORDCMDTYPE = "AddRecordCMD";
@@ -108,5 +109,7 @@ public class Constants {
     public static final String LISTCMDTYPE = "ListCMD";
     public static final String OVERVIEWCMDTYPE = "OverviewCMD";
     public static final String SEARCHCMDTYPE = "SearchCMD";
-
+    
+    // For general string or loop manipulation
+    public static final int ZERO = 0;
 }

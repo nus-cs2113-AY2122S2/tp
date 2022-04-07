@@ -5,7 +5,7 @@ show members
 hide empty members
 
 Package Global as G{
-class ":UI" as UI LOGIC_COLOR_T1 {
+class ":UI" as UI UI_COLOR {
 <color: white> <u>+HORI_LINE
 <color: white> <u>+WELCOME_MSG
 <color: white> <u>+EXIT_MSG
@@ -16,7 +16,7 @@ class ":UI" as UI LOGIC_COLOR_T1 {
 }
 }
 
-class ":Main" as PlanITarium LOGIC_COLOR
+class ":Main" as PlanITarium #grey
 
 PlanITarium -right[LOGIC_COLOR]->"1" UI
 
