@@ -108,7 +108,6 @@ public class MasterTimetable {
             throws TimetableNotFoundException, DuplicateEventException, OverlappingEventException {
         Timetable timetable = getByName(name);
         timetable.add(lesson);
-        timetable.sort();
     }
 
     /**
@@ -206,7 +205,6 @@ public class MasterTimetable {
             try {
                 timetable.add(meeting);
                 meetingList.add(meeting);
-                timetable.sort();
             } catch (DuplicateEventException dee) {
                 return ERROR_DUPLICATE_EVENT;
             } catch (OverlappingEventException oee) {
