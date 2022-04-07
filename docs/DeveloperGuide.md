@@ -633,7 +633,10 @@ they engage in during the outings.
 | v2.0    | User with a lot of friends | list groups                          | view all groups previously created                                                 |
 
 ## Non-Functional Requirements
-1. The application should be able to work in any operating systems with `Java 11` installed.
+1. The application should be able to work on any operating systems with `Java 11` installed.
+2. The application should be responsive.
+3. The application should be usable by a novice who may not be well versed with a Command Line Interface (CLI).
+4. Ths application should be usable by a novice who has never used an application to split bills.
 
 ## Glossary
 
