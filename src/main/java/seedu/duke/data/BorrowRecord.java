@@ -46,5 +46,19 @@ public class BorrowRecord {
 
     public boolean getReturnStatus() {
         return isReturned;
+
+    /**
+     * Returns true if otherRecord has overlapping dates with this borrow record.
+     *
+     * @param otherRecord Other borrow record you want to compare with.
+     * @return True if there are dates overlapping between the 2 records.
+     */
+    public boolean isConflict(BorrowRecord otherRecord) {
+        if (startDate.compareTo(otherRecord.endDate) > 0
+                || endDate.compareTo(otherRecord.startDate) < 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
