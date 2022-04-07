@@ -3,12 +3,12 @@
 !include style.puml
 
 
-participant Main LOGIC_COLOR_T1
+participant Main #grey
 
 Box " "#WHITE
     participant ":CommandFactory" as CommandFactory COMMAND_COLOR
-    participant ":Parser" as Parser LOGIC_COLOR_T2
-    participant ":AddPersonCommand" as AddPersonCommand COMMAND_COLOR_T2
+    participant ":Parser" as Parser LOGIC_COLOR
+    participant ":AddPersonCommand" as AddPersonCommand COMMAND_COLOR_T1
 end Box
 
 participant ":Family" as Family MODEL_COLOR
