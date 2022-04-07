@@ -38,6 +38,7 @@ public class StudyCommand extends Command {
             ui.showLine();
             userInput = ui.readCommand();
         }
+        timerLogic.resetIsTimerInitialised();
     }
 
 

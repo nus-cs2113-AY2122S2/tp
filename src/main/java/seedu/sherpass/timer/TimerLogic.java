@@ -33,7 +33,7 @@ import java.awt.event.WindowListener;
 public class TimerLogic implements WindowListener {
 
     private static Ui ui;
-    private static Timer timer;
+    private Timer timer;
     private static TaskList taskList;
     protected static volatile boolean isTimerInitialised = false;
     private final JFrame jframe;
@@ -78,7 +78,7 @@ public class TimerLogic implements WindowListener {
     }
 
     /**
-     * Marks a task as done, as specified in parsedInput.
+     * Checks if the timer is paused or stopped, then executes the mark, unmark or show command.
      *
      * @param storage     Storage.
      * @param parsedInput parsedInput.
@@ -175,7 +175,7 @@ public class TimerLogic implements WindowListener {
         ui.showToUser("You don't have a timer running!");
     }
 
-    private static boolean updateIsTimerRunning() {
+    private boolean updateIsTimerRunning() {
         return timer.isTimerRunning();
     }
 
