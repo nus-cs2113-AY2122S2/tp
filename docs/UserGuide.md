@@ -58,12 +58,16 @@ Adds a product record to the record list.
 
 Format: `add product i/ITEM_NAME p/PRICE d/DATE t/CATEGORY`
 
-* The `ITEM_NAME`, `PRICE`, and `DATE` can be in a natural language format.
+* The `ITEM_NAME` can be in a natural language format. Should not be left empty.
+* The `PRICE` should be a double value, i.e "xx.yy" or "xx" where x and y are digits.
+  * Default `PRICE` value is 0 if no double value is given.
+  * The first double value is taken if multiple double values are given.
+* The `DATE` must be of format "dd/mm/yyyy".
 * The `CATEGORY` should be of fashion, food, accessory, or others.  
 
 Examples of usage: 
 
-`add product i/handphone cover p/$10 t/accessory d/14022022`
+`add product i/handphone cover p/$10 t/accessory d/14/02/2022`
 
 `add product i/burger p/$5.25 t/food d/14/02/2022`
 
@@ -72,7 +76,12 @@ Adds a subscription record to the record list.
 
 Format: `add subscription i/ITEM_NAME p/PRICE d/DATE r/RENEWAL`
 
-* The `ITEM_NAME`, `PRICE`, `DATE`, and `RENEWAL` can be in a natural language format.
+* The `ITEM_NAME` can be in a natural language format. Should not be left empty.
+* The `PRICE` can be any double value, i.e "xx.yy" or "xx" where x and y are digits.
+  * Default `PRICE` value is 0 if no double value is given.
+  * The first double value is taken if multiple double values are given.
+* The `DATE` must be of format "dd/mm/yyyy".
+* The `RENEWAL` can be in a natural language format.
 
 Examples of usage:
 
@@ -96,7 +105,7 @@ Displays all records in the RecordManager as a list with their index numbers.
 
 Format: `list`
 
-### Show record list: `Find`
+### Show record list: `find`
 filter all the records in the RecordManager and display it as a list.
 
 Format: `find <KeyWord>`
