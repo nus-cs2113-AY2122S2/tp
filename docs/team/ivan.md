@@ -24,6 +24,14 @@ Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
   * Allows users to view all previously created groups.
 
 #### Enhanced Features
+* Activity Create Command Parser
+    * Parses the necessary attributes required to run the Activity Create Command.
+* Activity Delete Command Parser
+    * Parses the necessary attributes required to run the Activity Delete Command.
+* Group View Command Parser
+    * Parses the necessary attributes required to run the Group View Command.
+* Group List Command Parser
+    * Parses the necessary attributes required to run the Group List Command.
 
 ### Documentation Contributions
 Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=ivanaitzliddat&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
