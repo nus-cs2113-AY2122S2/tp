@@ -27,6 +27,15 @@ Example of usage:
 
 `add Skiing Trip,1,23/02/2022,24/02/2022,hotelName,90.99,Singapore,20`
 
+### Viewing a package: `info`
+View a specified Travel Package from the list of Packages based on the package ID.
+
+Format: `info {package_id}`
+
+Example of usage:
+
+`info 2`
+
 ### Deleting a package: `delete`
 Delete a Travel Package from the list of Packages based on the package ID.
 
@@ -71,15 +80,15 @@ Example of usage:
 
 ## Command Summary
 
-| Command | Syntax                                                                |
-| --- |:----------------------------------------------------------------------|
-| packages | packages                                                              |
-| info | info {num}                                                            |
-| add | add {package_name} {country} {duration} {price} {vacancies}           |
-| delete | delete {package_number}                                               |
-| reserve  | reserve {package_number} {contact_name} {contact_number} {number_pax} |
-| remove | remove {reservation_id}                                               |
-| reservations | reservations {package_number}                                         |
+| Command | Syntax                                                                   |
+| --- |:-------------------------------------------------------------------------|
+| packages | packages                                                                 |
+| info | info {num}                                                               |
+| add | add {package_name} {country} {start_date} {end_date] {price} {vacancies} |
+| delete | delete {package_number}                                                  |
+| reserve  | reserve {package_number} {contact_name} {contact_number} {number_pax}    |
+| remove | remove {reservation_id} {contact_number}                                 |
+| reservations | reservations {package_number}                                            |
 
 
 

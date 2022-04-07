@@ -11,10 +11,9 @@ public class HelpCommand extends Command {
         final String SEPARATOR = "---------------------------------------------" +
                 "--------------------------\n";
         System.out.println(SEPARATOR + "SHOW ALL PACKAGES\nView a list of all available packages\n" +
-                "Usage: packages\n" + SEPARATOR + "SHOW CHOSEN PACKAGE\nDisplays the " +
-                "detailed information of a specific travel " + "package from\nthe " +
-                "'packages' page Able to print out specific details of any package\n" +
-                "Format: info {package_id}\n" + "Usage: info 2\n" + SEPARATOR + "ADD PACKAGE\n" +
+                "Usage: packages\n" + SEPARATOR + "VIEW PACKAGE\nView a specified Travel Package from " +
+                "the list of Packages based on the package ID\nFormat: info {package_id}\nUsage: info 2\n" +
+                SEPARATOR + "ADD PACKAGE\n" +
                 "Allows the user to add a new travel package\ninto the list of available packages\n" +
                 "Format: add {package_name},{package_id},{startDate},{endDate},{hotel},{price}," +
                 "{country},{vacancies}\n" +
