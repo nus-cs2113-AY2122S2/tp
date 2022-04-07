@@ -71,7 +71,8 @@ public class Item {
     }
 
     /**
-     * Add a new borrow record to the item.
+     * Adds a new borrow record to the item.
+     *
      * @param newRecord A borrow record.
      * @return This item that has been added with a new borrow record.
      */
