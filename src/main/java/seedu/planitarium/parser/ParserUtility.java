@@ -142,10 +142,19 @@ public class ParserUtility {
      */
     protected static void warnIfNotSpacedForwardSlash(String text) {
         if (text.contains(FORWARD_SLASH)) {
-            Matcher matcher = PATTERN.matcher(text);
-            if (matcher.find()) {
-                System.out.printf(FORWARD_SLASH_WARNING, text);
-            }
+            warnIfMatch(text);
+        }
+    }
+
+    /**
+     * Prints a warning if text contains a forward slash that is not enclosed by spaces.
+     *
+     * @param text The text to be checked.
+     */
+    private static void warnIfMatch(String text) {
+        Matcher matcher = PATTERN.matcher(text);
+        if (matcher.find()) {
+            System.out.printf(FORWARD_SLASH_WARNING, text);
         }
     }
 }
