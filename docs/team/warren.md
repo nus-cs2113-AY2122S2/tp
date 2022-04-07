@@ -41,6 +41,9 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
  * Maintained the `Command Summary`
 
 #### Developer Guide
+ * Added description for `Profile`
+ * Added section for `Parser` component and `Command` component
+ * Added section under `Implementations` for `Parsing of Commands` and `Settle a session`
 
 ### Miscellaneous Contributions
 
