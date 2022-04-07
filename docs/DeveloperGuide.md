@@ -1378,9 +1378,23 @@ keeping all the non-affected data safely.
 | v2.0    | user     | view the summary of what I can do in the application | know which command to use to perform the actions I want                |
 
 ## Non-Functional Requirements
+#### Data Requirements
+For `workout /new` command, the maximum number of repetitions a user can set is `2,147,483,647`. This limit is 
+restricted by `int` data type. The size of `int` is 4 bytes which is 32 bits, therefore, the maximum value for a 
+variable of type `int` will be `2,147,483,647`. If user set the number of repetitions larger than `2,147,483,647`, an `Exception` 
+will be thrown to indicate that the value entered is not allowed. 
 
-{Give non-functional requirements}
+It is expected that `2,147.483.647` repetitions of any exercise is not achievable by humans hence, using `int` as the data type to hold 
+the value of repetitions is more than sufficient. 
 
+#### Technical/Environment Requirements
+This application is developed using Java JDK 11 hence to run this application, please ensure that you 
+are running this application on a 64-bit operating system and with a minimum of 8 GB of RAM. 
+
+#### Performance Requirements 
+Each command entered by the user should respond within two seconds.
+
+---
 ## Glossary
 
 * **Repetitions** - The process of repeating an exercise. Often abbreviated to 'reps'.
