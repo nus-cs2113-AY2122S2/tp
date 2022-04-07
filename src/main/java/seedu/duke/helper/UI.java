@@ -54,7 +54,11 @@ public class UI {
         printAddDoctorMessage();
         printAddPatientMessage();
         printAddMedicineMessage();
-
+        printAddAppointmentMessage();
+        printViewDoctorMessage();
+        printViewPatientMessage();
+        printViewMedicineMessage();
+        printViewAppointmentMessage();
         printNewLineSeparator();
     }
 
@@ -83,6 +87,47 @@ public class UI {
         System.out.println("[expiry date],[side effects],[quantity]");
         System.out.print("Example: add medicine /info A123, Paracetamol, ");
         System.out.println("500, 2023-06-11, Drowsiness, 10");
+    }
+
+    public static void printAddAppointmentMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: ADD APPOINTMENT");
+        System.out.print("Format: add appointment /info [appointment id],[patient nric],");
+        System.out.println("[patient name],[doctor nric],[doctor name],[appointment date],[appointment details]");
+        System.out.print("Example: add appointment /info A123,S1234567A,Don,");
+        System.out.println("S7654321A,John,2022-10-15,Regular knee checkup");
+    }
+
+    public static void printViewDoctorMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: VIEW DOCTOR");
+        System.out.println("Format: view doctor");
+        System.out.println("Example: view doctor");
+    }
+
+    public static void printViewPatientMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: VIEW PATIENT");
+        System.out.println("Format: view patient");
+        System.out.println("Example: view patient");
+    }
+
+    public static void printViewMedicineMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: VIEW MEDICINE");
+        System.out.println("Format: view medicine");
+        System.out.println("Example: view medicine");
+    }
+
+    public static void printViewAppointmentMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: VIEW APPOINTMENT");
+        System.out.println("Format: view appointment or view appointment /info [criteria],[input value]");
+        System.out.println("Accepted Criteria: appointment id, patient nric, ");
+        System.out.println("Example 1: view appointment /info appointment id, A123");
+        System.out.println("Example 2: view appointment /info patient nric, S1234567A");
+        System.out.println("Example 3: view appointment /info doctor name, John");
+        System.out.println("Example 4: view appointment /info patient date, 2023-01-01");
     }
 
     public int getSize() {
