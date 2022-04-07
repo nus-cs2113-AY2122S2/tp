@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ListCommand;
+import seedu.duke.exceptions.GeneralParseException;
+import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
@@ -13,7 +15,7 @@ import seedu.duke.util.StringConstants;
 public class ListParser extends Parser {
     private static final String TAG = StringConstants.TAG_COMMAND_WORD;
     // Unescaped Regex for testing:
-    // ((?<listArgument>\w+))?(?<invalid>.*)
+    // ((?<tag>\w+))?(?<invalid>.*)
     private static final String LIST_FORMAT = "((?<tag>\\w+))?(?<invalid>.*)";
 
     public ListParser() {
@@ -21,6 +23,15 @@ public class ListParser extends Parser {
         this.commandFormat = LIST_FORMAT;
         groupNames.add(TAG);
         groupNames.add(INVALID);
+    }
+
+    /**
+     * Throws GeneralParseException as the user input does not match the regex.
+     * @throws GeneralParseException as it has no compulsory parameters.
+     */
+    @Override
+    public void determineError() throws GeneralParseException {
+        throw new GeneralParseException();
     }
 
     @Override

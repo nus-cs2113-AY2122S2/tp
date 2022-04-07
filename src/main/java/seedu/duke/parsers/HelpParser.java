@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.HelpCommand;
+import seedu.duke.exceptions.GeneralParseException;
+import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
@@ -22,6 +24,15 @@ public class HelpParser extends Parser {
         this.commandFormat = HELP_FORMAT;
         groupNames.add(COMMAND_AS_HELP_ARGUMENT);
         groupNames.add(INVALID);
+    }
+
+    /**
+     * Throws GeneralParseException as the user input does not match the regex.
+     * @throws GeneralParseException as it has no compulsory parameters.
+     */
+    @Override
+    public void determineError() throws GeneralParseException {
+        throw new GeneralParseException();
     }
 
     @Override

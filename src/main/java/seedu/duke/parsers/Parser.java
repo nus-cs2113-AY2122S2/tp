@@ -10,12 +10,12 @@ import seedu.duke.commands.Command;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.InvalidModuleGradeException;
-import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.ExcessArgumentException;
 import seedu.duke.exceptions.InvalidTagOperationException;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
+import seedu.duke.util.NumberConstants;
 
 /**
  * Represents a Parser that parse a {@code Command}.
@@ -42,11 +42,25 @@ public abstract class Parser {
     protected static final String INVALID_MOD_DES_FLAG = StringConstants.INVALID_MOD_DES_FLAG;
     protected static final String INVALID_TIME_FLAG = StringConstants.INVALID_TIME_FLAG;
     protected static final String INVALID_MARK_FLAG = StringConstants.INVALID_MARK_FLAG;
-    protected static final String INVALID_FLAG = StringConstants.INVALID_FLAG;
-    protected static final String INVALID_MODULE_CODE = StringConstants.INVALID_MODULE_CODE;
     protected static final String INVALID_MODULE_GRADE = StringConstants.INVALID_MODULE_GRADE;
     protected static final String INVALID_NUMBER = StringConstants.INVALID_NUMBER;
     protected static final String INVALID_TAG_COMMAND = StringConstants.INVALID_TAG_COMMAND;
+
+    protected static final String SPACE = StringConstants.SPACE;
+    protected static final String TASK = StringConstants.TASK_STR;
+    protected static final String MODULE = StringConstants.MODULE_STR;
+    protected static final String TASK_NAME_STR = StringConstants.TASK_NAME_STR;
+    protected static final String TASK_NUMBER_STR = StringConstants.TASK_NUMBER_STR;
+    protected static final String MODULAR_CREDIT_STR = StringConstants.MODULAR_CREDIT_STR;
+    protected static final String MODULE_CODE_STR = StringConstants.MODULE_CODE_STR;
+    protected static final String MODULE_DESCRIPTION_STR = StringConstants.MODULE_DESCRIPTION_STR;
+    protected static final String TASK_PARAMETER_STR = StringConstants.TASK_PARAMETER_STR;
+    protected static final String TAG_NAME_STR = StringConstants.TAG_NAME_STR;
+    protected static final int ZEROTH_INDEX = NumberConstants.ZEROTH_INDEX;
+    protected static final int FIRST_INDEX = NumberConstants.FIRST_INDEX;
+    protected static final int SECOND_INDEX = NumberConstants.SECOND_INDEX;
+    protected static final int FOURTH_INDEX = NumberConstants.FOURTH_INDEX;
+
 
     protected String commandFormat;
     protected HashMap<String, String> parsedCommand;
@@ -63,6 +77,11 @@ public abstract class Parser {
     public abstract Command parseCommand(String userInput) throws ModHappyException;
 
     /**
+     * Parses the provided user input and returns the relevant Command object.
+     */
+    public abstract void determineError() throws ModHappyException;
+
+    /**
      * Parses string into groups based on commandFormat.
      * @throws ModHappyException if the provided string does not match the pattern
      */
@@ -70,7 +89,7 @@ public abstract class Parser {
         final Pattern commandPattern = Pattern.compile(commandFormat);
         final Matcher matcher = commandPattern.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new InvalidCompulsoryParameterException();
+            determineError();
         }
         for (Object groupName : groupNames) {
             try {
@@ -97,17 +116,8 @@ public abstract class Parser {
         checksForInvalidTimeFlag();
         checksForInvalidTagCommand();
         checksForInvalidModuleGrade();
-        checksForInvalidNumberFormat();
     }
 
-    private void checksForInvalidNumberFormat() throws InvalidNumberException {
-        if (groupNames.contains(INVALID_NUMBER)) {
-            String invalidInput = parsedCommand.get(INVALID_NUMBER);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidNumberException(invalidInput);
-            }
-        }
-    }
 
     private void checksForInvalidModuleGrade() throws InvalidModuleGradeException {
         if (groupNames.contains(INVALID_MODULE_GRADE)) {

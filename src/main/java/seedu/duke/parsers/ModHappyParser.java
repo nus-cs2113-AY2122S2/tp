@@ -10,6 +10,7 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.exceptions.UnsupportedResultTypeException;
 import seedu.duke.exceptions.WrongDurationFormatException;
+import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -29,6 +30,15 @@ public class ModHappyParser extends Parser {
         parsedCommand = new HashMap<>();
         groupNames.add(COMMAND_WORD);
         groupNames.add(ARGUMENT);
+    }
+
+    /**
+     * Throws GeneralParseException as the user input does not match the regex.
+     * @throws GeneralParseException as it has no compulsory parameters.
+     */
+    @Override
+    public void determineError() throws GeneralParseException {
+        throw new GeneralParseException();
     }
 
     /**
@@ -73,13 +83,13 @@ public class ModHappyParser extends Parser {
         case (LIST_COMMAND_WORD):
             return new ListParser();
         case (ADD_COMMAND_WORD):
-            return new AddParser();
+            return AddParser.getParser(parsedCommand.get(ARGUMENT).split(SPACE)[0]);
         case (DELETE_COMMAND_WORD):
             return new DeleteParser();
         case (MARK_COMMAND_WORD):
             return new MarkParser();
         case (EDIT_COMMAND_WORD):
-            return new EditParser();
+            return EditParser.getParser(parsedCommand.get(ARGUMENT).split(SPACE)[0]);
         case (HELP_COMMAND_WORD):
             return new HelpParser();
         case (TAG_COMMAND_WORD):
