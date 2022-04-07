@@ -32,7 +32,7 @@ public class ReturnCommand extends Command {
     /**
      * Prepares the return command for execution by extracting the task number of the task to be marked.
      *
-     * @param itemIndex Index of item to be returned
+     * @param itemIndex    Index of item to be returned
      * @param borrowerName Name of student who borrowed the item and now wishes to return it
      */
     public ReturnCommand(int itemIndex, String borrowerName) {
@@ -52,7 +52,7 @@ public class ReturnCommand extends Command {
      * Updates a current borrow record of item in ItemList.itemArrayList as returned
      *
      * @param itemList Manages the user's task list
-     * @param ui Displays messages to the user
+     * @param ui       Displays messages to the user
      */
     @Override
     public void execute(ItemList itemList, Ui ui) {
@@ -72,8 +72,10 @@ public class ReturnCommand extends Command {
             return;
         }
         ArrayList<BorrowRecord> itemBorrowRecords = returnedItem.getBorrowRecords();
+        boolean isValidReturnRequest = false;
         for (BorrowRecord record : itemBorrowRecords) {
-            if (record.getBorrowStatus() == BorrowStatus.PRESENT) {
+            boolean isOverdue = (record.getBorrowStatus() == BorrowStatus.PAST) && (record.getReturnStatus() == false);
+            if (record.getBorrowStatus() == BorrowStatus.PRESENT || isOverdue) {
                 record.setReturnStatus(true);
                 record.setEndDate();
                 ui.showMessages(Messages.RETURNED_MESSAGE);
@@ -81,8 +83,12 @@ public class ReturnCommand extends Command {
                         "Name of Borrower: " + record.getBorrowerName(),
                         "Borrow Duration: " + record.getBorrowDuration() + "\n");
                 ui.showDivider();
+                isValidReturnRequest = true;
                 break;
             }
+        }
+        if (!isValidReturnRequest) {
+            ui.showMessages(Messages.RETURN_ERROR_MESSAGE);
         }
     }
 }

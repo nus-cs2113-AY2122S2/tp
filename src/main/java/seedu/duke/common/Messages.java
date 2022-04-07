@@ -30,4 +30,6 @@ public class Messages {
     public static final String EMPTY_ITEM_LIST_MESSAGE = "Your inventory is currently empty. Please add an item first!";
     public static final String ITEM_NUMBER_OUT_OF_RANGE_MESSAGE = "Sorry, the item number is out of range. "
             + "Please enter a different item number!";
+    public static final String RETURN_ERROR_MESSAGE = "There are no outstanding loans on this item. "
+            + "Please select a different item to return!";
 }
