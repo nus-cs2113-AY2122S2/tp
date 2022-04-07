@@ -5,7 +5,6 @@ import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /** Performs case insensitive search of an Item's name, or description, or both. */
@@ -18,7 +17,6 @@ public class SearchCommand extends Command {
             + "[Command Format] " + COMMAND_FORMAT + "\n";
     public static final String SEARCH_RESULT_PREAMBLE = "Here are the items matching your search terms: ";
     public static final String SEARCH_RESULT_ENTRY_FORMAT = "%d. %s";
-    public static final String FOUND_ITEM_FORMAT = "%s | %d | %s";
 
     private final Optional<String> name;
     private final Optional<String> description;
