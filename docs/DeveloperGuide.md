@@ -2021,7 +2021,11 @@ workout with index 1 in the workout list.
    i. `plan /new [plan name] /workouts [11 ones separated by comma]` (A plan cannot contain more than 10 workouts)
 
 #### Listing All Plans
-1. Test case
+1. Test case: `plan /list` <br/>
+Expected: If plan list is empty, the terminal will display to the user that the plan list is empty.
+Else, all plan names will be listed to the user.
+2. Test case `plan /list ab`<br/>
+Expected: Nothing is listed because no additional arguments should be supplied for this method
 #### Listing Workouts In A Plan
 #### Deleting An Existing Plan
 
