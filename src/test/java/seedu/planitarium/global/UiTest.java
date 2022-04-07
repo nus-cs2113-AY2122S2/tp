@@ -5,7 +5,7 @@ import seedu.planitarium.family.Family;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UITest {
+public class UiTest {
     private static final Double VALID_AMOUNT = 1000.0;
     private static final Double NEGATIVE_AMOUNT = -1000.0;
     private static final Double THREE_DP_AMOUNT = 123.456;
