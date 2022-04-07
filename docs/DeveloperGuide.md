@@ -1008,12 +1008,12 @@ The overview of the design on schedule features can be found [here](#schedule-re
 A summary of the general procedure of updating a plan for a particular day to the schedule in WerkIt! is as follows:
 1. User enters the command `schedule /update <day number> <plan number>`.
 2. If there is no plan being scheduled for the day, a new Day object is created and stored in the application.
-   If there is an existing plan scheduled for that particular day, the `Day` object that has already been created,
+   If there is an existing plan scheduled for that particular day, the `Day` object that has already been created
    will then be updated to store the latest plan scheduled for the day.
 3. The success response is displayed via the terminal.
 4. The `Day` object data is written to the resource file `schedule.txt`.
 
-The following sequence illustrates how the schedule /update command works in greater details:
+The following sequence illustrates how the `schedule /update` command works in greater detail:
 
 <span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
@@ -1038,7 +1038,7 @@ Steps 2 and 3 are explained in greater details in the following sequence diagram
 day in the schedule stated by the user. It will fist call the `String#split(" ")` method 
 to separate out the `userArgument` given by the user. Upon, splitting of the whitespaces in `userArgument`, 
 it will then check if the `userArgument` is valid. If it is invalid, an 
-`ArrayOutOfBoundException` would be thrown to the user and following the termination of the process (step 2.3).
+`ArrayIndexOutOfBoundsException` would be thrown to the user and following the termination of the process (step 2.3).
 
 (Steps 2.5 to 2.8) After splitting and checking the validity of `userArgument`, variables `userArgument[0]` representing
 `dayNumber` and `userArgument[1]` representing `planNumber`, the plan index of the plan stored in the planList are obtained. Both the 
@@ -1102,7 +1102,7 @@ can be added into the schedule by entering `schedule /update <day number> <plan 
 can be schedule on Monday by the command of `schedule /upate 1 1`. To view the plans in the schedule, user can enter the
 command `schedule /list`.
 
-The following sequence illustrates how the `schedule /list` command works in greater details:
+The following sequence illustrates how the `schedule /list` command works in greater detail:
 
 <span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
@@ -1160,7 +1160,7 @@ A summary of the general procedure of clearing a plan scheduled for a particular
 4. The success response is printed to the user through the terminal.
 5. The `schedule.txt` will also be rewritten to reflect the changes. 
 
-The following sequence illustrates how the `schedule /clear` command works in greater details:
+The following sequence illustrates how the `schedule /clear` command works in greater detail:
 
 <span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
@@ -1215,7 +1215,7 @@ A summary of the general procedure of clearing all the plans stored in the sched
 3. The success response is printed to the user through the terminal. 
 4. The `schedule.txt` will also be rewritten to reflect the changes.
 
-The following sequence illustrates how the `schedule /clearall` command works in greater details:
+The following sequence illustrates how the `schedule /clearall` command works in greater detail:
 
 <span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
@@ -1383,7 +1383,7 @@ keeping all the non-affected data safely.
 For `workout /new` and `workout /update` commands, the maximum number of repetitions a user can set is `2,147,483,647`. 
 This limit is restricted by `int` data type. The size of `int` is 4 bytes which is 32 bits, therefore, the maximum value 
 for a variable of type `int` will be `2,147,483,647`. If user set the number of repetitions larger than `2,147,483,647`, 
-an `Exception` will be thrown to indicate that the value entered is not allowed. 
+an `NumberFormatException` will be thrown to indicate that the value entered is not allowed. 
 
 It is expected that `2,147.483.647` repetitions of any exercise is not achievable by humans hence, 
 using `int` as the data type to hold the value of repetitions is more than sufficient. 

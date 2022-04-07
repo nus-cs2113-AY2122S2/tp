@@ -470,6 +470,10 @@ To create a new plan, enter the following command:
 ```
 > plan /new Grow My Muscles /workouts 1, 2, 3, 1
 ```
+or
+```
+> plan /new Grow My Muscles /workouts 1, 2, 3, 1,
+```
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
