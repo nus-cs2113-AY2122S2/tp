@@ -69,6 +69,7 @@ public class Task {
     public void setWorkingTime(String workingTime) throws ModHappyException {
         try {
             this.workingTime = new TaskDuration(workingTime);
+            taskParameters = getTaskParameterStatus();
         } catch (ModHappyException e) {
             throw e;
         }
@@ -76,6 +77,7 @@ public class Task {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
+        taskParameters = getTaskParameterStatus();
     }
 
     /**.
