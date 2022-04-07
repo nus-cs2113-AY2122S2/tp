@@ -26,6 +26,7 @@ class ExpenditureListTest {
     private static final double EXPECTED_AMOUNT = 35.00;
     private static final String VALID_DESC = "clothes";
     private static final String VALID_DESC_2 = "Transport";
+    private static final String VALID_DESC_3 = "utility";
     private static final String INDENTATION = "   ";
     private static final String EXPECTED_LABELS = VALID_DESC + ": $30.00 - Recurring: false - "
             + "Category: Food and Drinks" + System.lineSeparator();
@@ -141,11 +142,11 @@ class ExpenditureListTest {
     }
 
     @Test
-    public void findExpenditure_allCat_Success() {
+    public void findExpenditure_NonExistentString_Succcess() {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
-        personOne.find(VALID_DESC, VALID_CAT);
-        assertEquals(EXPECTED_LABELS, newOut.toString());
+        personOne.find(VALID_DESC_3, VALID_CAT);
+        assertEquals("", newOut.toString());
         System.setOut(ORIGINAL_OUT);
     }
 
