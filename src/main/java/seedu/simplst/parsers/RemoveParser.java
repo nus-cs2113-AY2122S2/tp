@@ -21,7 +21,16 @@ public class RemoveParser extends CommandParser {
 
     protected void extract_params() throws WrongCommandException {
         if (matches.get("flag").equals("o")) {
-            warehouse.removeOrder(matches.get("id"));
+            String regexOrder = "oid/(?<oid>)\\d";
+            HashMap<String, String> regexOrderMatch = new
+                    MatchKeywords(userInput, regexOrder).getGroupValues();
+            warehouse.removeOrder(regexOrderMatch.get("oid"));
+        } else if (matches.get("flag").equals("og")) {
+            String regexOrderline = "oid/(?<oid>)\\d sku/(?<sku>.*) q/(?<qty>\\d*)";
+            HashMap<String, String> regexOrderlineMatch = new
+                    MatchKeywords(userInput, regexOrderline).getGroupValues();
+            warehouse.removeOrderline(regexOrderlineMatch.get("oid"),
+                    regexOrderlineMatch.get("sku"), regexOrderlineMatch.get("qty"));
         } else if (matches.get("flag").equals("ug")) {
             String regexGood = "sku/(?<sku>.*)";
             HashMap<String, String> regexGoodMatch = new

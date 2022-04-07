@@ -21,7 +21,7 @@ public class TotalParser extends CommandParser {
     protected void extract_params() throws WrongCommandException, NullException {
         if (matches.get("flag").equals("o")) {
             // get total orders with flag "o/"
-            int totalOrders = warehouse.totalOrder();
+            int totalOrders = warehouse.totalNumberOfOrder();
             System.out.printf("There are %d goods in total.\n", totalOrders);
         } else if (matches.get("flag").equals("g")) {
             // get total goods with flag "g/"
