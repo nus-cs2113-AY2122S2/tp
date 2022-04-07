@@ -39,7 +39,7 @@ public class CheckCommand extends Command {
         Pair<String, ?> checkPair = generateCheckPair();
         ArrayList<Equipment> equipment = equipmentManager.checkEquipment(checkPair);
 
-        return new CommandResult(String.format(successMessage, checkPair.getValue()), equipment);
+        return new CommandResult(String.format(successMessage, commandStrings.get(0)), equipment);
     }
 
     /**
@@ -48,7 +48,7 @@ public class CheckCommand extends Command {
      * By using pair, we are able to specify the attribute to be checked.
      * @return Pair of value to be checked and its matching attribute.
      */
-    public Pair<String, ?> generateCheckPair() {
+    public Pair<String, ?> generateCheckPair() throws AssertionError, NumberFormatException, IllegalArgumentException {
         Pair<String, ?> pair = null;
 
         for (String s : commandStrings) {
@@ -66,13 +66,13 @@ public class CheckCommand extends Command {
                 pair = new Pair<>("purchasedDate", argValue);
                 break;
             case "t":
-                pair = new Pair<>("type", argValue);
+                pair = new Pair<>("type", EquipmentType.valueOf(argValue.toUpperCase(Locale.ROOT)));
                 break;
             case "pf":
                 pair = new Pair<>("purchasedFrom", argValue);
                 break;
             case "c":
-                pair = new Pair<>("cost", argValue);
+                pair = new Pair<>("cost", Double.valueOf(argValue));
                 break;
             case "s":
                 pair = new Pair<>("serialNumber", argValue);

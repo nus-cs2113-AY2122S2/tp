@@ -54,20 +54,20 @@ public class EquipmentManager {
      * @param checkParam Name of Equipment in String.
      * @return An ArrayList of Equipments with the same item name as the parameter.
      */
-    public ArrayList<Equipment> checkEquipment(Pair<String, ?> checkParam){
+    public ArrayList<Equipment> checkEquipment(Pair<String, ?> checkParam) {
         ArrayList<Equipment> listOfEquipments = new ArrayList<>();
         String arg = checkParam.getKey();
         switch (arg) {
         case "itemName":
             for (Equipment equipment : equipmentList.values()) {
-                if (equipment.getItemName().equals(checkParam.getValue())) {
+                if (equipment.getItemName().contains((String) checkParam.getValue())) {
                     listOfEquipments.add(equipment);
                 }
             }
             break;
         case "serialNumber":
             for (Equipment equipment : equipmentList.values()) {
-                if (equipment.getSerialNumber().equals(checkParam.getValue())) {
+                if (equipment.getSerialNumber().contains((String) checkParam.getValue())) {
                     listOfEquipments.add(equipment);
                 }
             }
@@ -88,14 +88,14 @@ public class EquipmentManager {
             break;
         case "purchasedFrom":
             for (Equipment equipment : equipmentList.values()) {
-                if (equipment.getPurchasedFrom().equals(checkParam.getValue())) {
+                if (equipment.getPurchasedFrom().contains((String) checkParam.getValue())) {
                     listOfEquipments.add(equipment);
                 }
             }
             break;
         case "purchasedDate":
             for (Equipment equipment : equipmentList.values()) {
-                if (equipment.getPurchasedDate().equals(checkParam.getValue())) {
+                if (equipment.getPurchasedDate().contains((String) checkParam.getValue())) {
                     listOfEquipments.add(equipment);
                 }
             }
