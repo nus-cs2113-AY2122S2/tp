@@ -87,7 +87,7 @@ Wrote JUnit test cases for WerkIt! The summary of the test cases I have written 
       
 
 ### Contributions to Team-Based Tasks
-[To be updated]
+- Helped in release management of WerkIt! (for v1.0 and v2.0)
 
 ### Review/Mentoring Contributions
 Reviewed teammates' pull requests, including (but not limited to):
