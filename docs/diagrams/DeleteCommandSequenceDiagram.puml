@@ -12,19 +12,26 @@ create ":DeleteCommand"
 ":Parser" --> ":Ui" --: deleteCommand:DeleteCommand
 ":Ui" -> ":DeleteCommand" ++: execute(masterTimetable)
 ":DeleteCommand" -> ":MasterTimetable" ++: getByName("John")
-":MasterTimetable" --> ":DeleteCommand" ++ : timetable: Timetable
+":MasterTimetable" --> ":DeleteCommand" -- : timetable: Timetable
 ":DeleteCommand" -> ":Timetable" ++: get(index - 1)
 ":Timetable" --> ":DeleteCommand" -- : event: Event
 alt event is type meeting
-":MasterTimetable" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
-":MasterTimetable" -> ":MasterTimetable" --: deleteMeetingFromMeetingList(meeting:Meeting)
-":MasterTimetable" -> ":DeleteCommand" --: deleteMeetingFromAllTimetableConfirmation(meeting:Meeting)
-":DeleteCommand" --> ":Ui" --: deleteMeetingFromEveryoneTimetable(): String
+":DeleteCommand" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
+":MasterTimetable" -> ":MasterTimetable" : deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
+":MasterTimetable" -> ":DeleteCommand" --: deleteMeetingFromAllTimetableConfirmation :String
+":DeleteCommand" --> ":Ui" --: deleteMeetingFromEveryoneTimetable: String
+":Ui" --> "user" : deleteMeetingFromEveryoneTimetable: String
+
 else non-meeting types
-":DeleteCommand" -> ":Timetable" ++: remove(index - 1)
-":Timetable" --> ":DeleteCommand" ++:
-":DeleteCommand" -> ":DeleteCommand" ++: deleteConfirmation(event: Event )
-":DeleteCommand" --> ":Ui" --: deleteConfirmation(): String
+activate ":DeleteCommand"
+":DeleteCommand" -> ":Timetable" : remove(index - 1)
+":Timetable" --> ":DeleteCommand" --:
+":DeleteCommand" -> ":DeleteCommand" : deleteConfirmation(event: Event )
+":DeleteCommand" --> ":Ui" --: deleteConfirmation: String
+":Ui" --> "user" --: deleteConfirmation: String
 end
-":Ui" -->  user
+destroy ":DeleteCommand"
+destroy ":Parser"
+destroy ":Timetable"
+destroy ":Ui"
 @enduml
