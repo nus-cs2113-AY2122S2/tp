@@ -46,7 +46,8 @@ public class EditCommand extends Command {
         this.changedParameter = description;
     }
 
-    public EditCommand(String taskModule, int taskIndex, String description, String taskEstimatedWorkingTime, String taskName) {
+    public EditCommand(String taskModule, int taskIndex, String description,
+                       String taskEstimatedWorkingTime, String taskName) {
         this.taskModule = taskModule;
         this.taskIndex = taskIndex;
         if (!Objects.isNull(description)) {
@@ -84,7 +85,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        if(!Objects.isNull(moduleCode)){
+        if (!Objects.isNull(moduleCode)) {
             editModuleDescription(moduleList);
         } else {
             Module targetModule = getTargetModule(moduleList);

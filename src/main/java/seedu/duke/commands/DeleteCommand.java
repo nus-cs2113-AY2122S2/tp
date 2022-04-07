@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        if(!Objects.isNull(moduleCode)){
+        if (!Objects.isNull(moduleCode)) {
             deleteModule(moduleList);
             return new CommandResult(result);
         }
