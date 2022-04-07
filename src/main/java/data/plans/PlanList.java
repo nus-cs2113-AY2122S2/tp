@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class PlanList {
     public static final int MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN = 10;
-    public static final String RESERVED_PLAN_NAME = "rest day";
+    public static final String PLAN_NAME_RESERVED = "rest day";
     public static final int PLAN_NAME_CHARACTER_LIMIT = 30;
     private WorkoutList workoutList;
     private HashMap<String, Plan> plansHashMapList = new HashMap<>();
@@ -171,8 +171,8 @@ public class PlanList {
         }
 
         if (userPlanNameInput.trim().equals("")) {
-            logger.log(Level.WARNING, "Plan name is just whitespaces.");
-            throw new InvalidPlanException(className, InvalidPlanException.PLAN_NAME_WHITESPACES_ONLY);
+            logger.log(Level.WARNING, "Plan name is just whitespaces, or keyboard shortcuts (e.g. ctrl Z) entered.");
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_NAME_INVALID);
         }
 
         for (int i = 0; i < plansDisplayList.size(); i += 1) {
@@ -184,9 +184,9 @@ public class PlanList {
             }
         }
 
-        if (userPlanNameInputLowerCase.trim().equals(RESERVED_PLAN_NAME)) {
+        if (userPlanNameInputLowerCase.trim().equals(PLAN_NAME_RESERVED)) {
             logger.log(Level.WARNING, "Plan name cannot be 'rest day'.");
-            throw new InvalidPlanException(className, InvalidPlanException.RESERVED_PLAN_NAME);
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_NAME_RESERVED);
         }
     }
 
