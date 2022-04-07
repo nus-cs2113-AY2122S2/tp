@@ -8,7 +8,7 @@ R.I.P. features full and concise input validation through simple commands, there
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of the application from [here](https://github.com/AY2122S2-CS2113-T11-4/tp/releases).
+2. Download the latest version of the application from [here](https://github.com/AY2122S2-CS2113-T11-4/tp/releases).
 3. Run the file using the correct command: `java -jar tp.jar`.
    1. It is recommended to create a new folder, and put the download file into this folder before running it.
 
