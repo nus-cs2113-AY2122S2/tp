@@ -17,7 +17,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEE
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_DELETE;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS_ADD_MEETING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_NAME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_EDIT;
@@ -192,7 +192,7 @@ public class ParserTest {
                 "John", "CS2113", "Monday",
                 1200, 1300, "online"
         );
-        assertEquals(ERROR_EXTRA_PARAMETERS_ADD_MEETING, command.execute(masterTimetable));
+        assertEquals(ERROR_EXTRA_PARAMETERS, command.execute(masterTimetable));
     }
 
     @Test
