@@ -53,11 +53,15 @@ To dispatch <code>argumentType/\`argumentValue\`</code> strings to the correct `
 
 **1. Parse the correct Command Word**
 
+<p align="center"><code>commandWord</code></p>
+
 `splitCommandTerm` splits the input string upon the first space. 
 The first substring is used to decide which `Command` to dispatch while the second is used for its arguments.
-In the case where a second substring is not required, as in the case of `help` and `list`, a null String is used.
+In the case where a second substring is not required, as in the case of `help` and `list`, a null String is used and the following step is skipped entirely.
 
 **2. Split Arguments**
+
+<p align="center"><code>[argumentType/`argumentValue`] [...]</code></p>
 
 Complex commands such as `add` and `update` necessitate multiple arguments.
 To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` is implemented. 
@@ -79,7 +83,7 @@ Throughout the `Parser` implementation, exceptions were used to return `Incorrec
 
 #### Current Design and Implementation
 
-Command classes are largely similar to each other. The most complex command 'update' will be explained here.
+`Command` classes are largely similar to each other. The most complex command, `UpdateCommand` will be explained here.
 
 The update feature is facilitated by `UpdateCommand`. It extends `ModificationCommand` and implements the following operations:
 
