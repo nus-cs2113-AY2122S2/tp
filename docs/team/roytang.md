@@ -42,4 +42,15 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 * Explained how the `Storage` Component works in the application [#403](https://github.com/AY2122S2-CS2113T-T10-1/tp/pull/403/files).
 
 #### Project Management
+* Setup Organization & Team Repository.
+* Managed `Issue Tracker` to ensure no task is left out & all pending task are tracked.
+* Managed Milestones (`v1.0`, `v2.0`, `v2.1`)
+* Managed `v2.0` release.
+* Listed out objectives to be met for each team meeting.
+* Ensured the team's progress was on schedule.
 
+#### Miscellaneous Contributions
+* Set up a Telegram channel for sending pull request messages.
+    * This is to ensure all PRs are reviewed in a timely fashion.
+    * Also ensures that important PRs are reviewed by at least 2 parties before merging.
+* Bugs found for other team during PED [Bugs found](https://github.com/froststein/ped/issues)
