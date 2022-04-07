@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Storage {
@@ -24,6 +26,7 @@ public class Storage {
     static final String PATH_PAT = "data/patient.txt";
     static final String PATH_MED = "data/medicine.txt";
     static final String PATH_APT = "data/appointment.txt";
+    static final String PATH_APT_MEDS = "data/appointment_meds.txt";
     public DoctorList doctors = new DoctorList();
     public PatientList patients = new PatientList();
     public MedicineList medicines = new MedicineList();
@@ -90,12 +93,25 @@ public class Storage {
         }
     }
 
+    private void loadAppointmentMedData() throws FileNotFoundException {
+        File data = new File(PATH_APT_MEDS);
+        Scanner reader = new Scanner(data);
+        while (reader.hasNext()) {
+            String line = reader.nextLine();
+            String[] parameters = line.split(",");
+            appointments.loadMedicine(parameters);
+        }
+    }
+
+
+
     public void loadData() {
         try {
             loadDoctorData();
             loadPatientData();
             loadMedicineData();
             loadAppointmentData();
+            loadAppointmentMedData();
         } catch (FileNotFoundException f) {
             UI.printParagraph("No saved data found!");
         }
@@ -165,6 +181,27 @@ public class Storage {
         }
     }
 
+    private void saveAppointmentMedData() {
+        File appointmentMedFile = new File(PATH_APT_MEDS);
+        if (!appointmentMedFile.exists()) {
+            try {
+                appointmentMedFile.createNewFile();
+            } catch (IOException ioException) {
+                UI.printParagraph("appointment_meds.txt cannot be created");
+                return;
+            }
+        }
+        try {
+            FileWriter dataWrite = new FileWriter(PATH_APT_MEDS,false);
+            for (Appointment appointment : appointments.getList()) {
+                dataWrite.write(appointment.saveMedicineString() + "\n");
+            }
+            dataWrite.close();
+        } catch (IOException e) {
+            UI.printParagraph("Unable to save data...");
+        }
+    }
+
     private void saveDoctorData() {
         File doctorFile = new File(PATH_DOC);
         if (!doctorFile.exists()) {
@@ -197,5 +234,6 @@ public class Storage {
         savePatientData();
         saveMedicineData();
         saveAppointmentData();
+        saveAppointmentMedData();
     }
 }
