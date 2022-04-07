@@ -41,10 +41,10 @@ The following sequence diagram shows how the `add` operation generally works.
 
 This is a condensed diagram. Several terms in the sequence diagram above have been substituted by a common term.
 
-Common Term | User-specific term | Lesson-specific term | Meeting-specific term      |
-------------|-------------------|----------------------|----------------------------|        
-add | `"add_user ..."`  | `"add_lesson ..."`   | `"add_meeting ..."`     
-AddCommand | `AddUserCommand`  | `AddLessonCommand`   | `AddMeetingCommand`  
+| Common Term | User-specific term | Lesson-specific term | Meeting-specific term      |
+|-------------|-------------------|----------------------|----------------------------|
+| add         | `"add_user ..."`  | `"add_lesson ..."`   | `"add_meeting ..."`|
+| AddCommand  | `AddUserCommand`  | `AddLessonCommand`   | `AddMeetingCommand`|
 
 
 ## 3.1.1 Add User Feature
@@ -71,7 +71,14 @@ Given below is the steps on how the `add_lesson` operation works.
 The following sequence diagram shows how the `add_meeting` operation works in detail.
 ![AddMeetingCommandSequence](diagrams/AddMeetingCommandSequence.png)
 
-Given below is the steps on how the `add_meeting` operation works.
+The above diagram shows the sequence diagram of an addition of a meeting  which is normally after a few users 
+and some of their lessons have been added and the free command is executed to see the free slots.
+
+1. User inputs add_meeting with appropriate parameters which is passed to the UI.
+2. Ui then provides user input to the Parser class which parses it and retrieves the respective meeting comman.
+3. Ui subsequently executes the command on the masterTimetable for the whole application.
+4. The AddMeetingCommand will create a new meeting object from Meeting and will add to every user's timetable.
+5. Subsequently a addMeeting confirmation message will be shown to user upon successful addition.
 
 >To be added
 > 
@@ -89,10 +96,25 @@ Before the timetable is listed out, it will also be sorted according to day and 
 The following sequence diagram shows how the command `` is executed.
 ![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
 
+##3.2.1 Listing Lessons Feature
+Instead of listing all events in the timetable, the user can specify such that only lessons are listed out.
+
+`list_lesson [user]` displays the lessons for the particular user.
+
+`list_lesson all` displays the lessons for all users.
+
+##3.2.2 Listing Meetings Feature
+Instead of listing all events in the timetable, the user can specify such that only meetings are listed out.
+
+`list_meeting [user]` displays the meetings for the particular user.
+
+`list_meeting all` displays the meetings for all users.
+
 ## 3.3 Finding Common Free Timeslots Feature
 The `free` command is a command that the user can input in order to find timeslots where all users are free.
 
-For greater customisation, `free [duration]` displays all common timeslots which has a duration longer than specified.
+For greater customisation, `free [duration]` displays all common timeslots which has a duration longer than or equal to
+what is specified.
 
 The searching algorithm works by marking the busy slots of each timetable first.
 Timings that are not marked 'busy' are then identified as free time slots.
@@ -105,15 +127,24 @@ Deletes an event from the user's specified timetable
 
 **Format:** ` delete n/NAME i/INDEX`
 
-* Deletes from the timetable of user
-* Deletes the lesson at the specified `INDEX`.
-* The `INDEX` refers to the index number shown in the displayed lesson list.
+
+The above diagram shows the sequence diagram of a meeting deletion.
+
+1. User inputs delete with appropriate parameters which is passed to the UI.
+2. Ui then provides user input to the Parser class which parses it and retrieves the respective delete command.
+3. Ui subsequently executes the command on the masterTimetable for the whole application.
+4. For a normal event(non-meeting) the DeleteCommand will get the user's timetable from `MasterTimetable` 
+and perform the deletion of that event.
+6. If it is a meeting that the user is trying to delete, the DeleteCommand will find that meeting in 
+everyone's timetable and delete it.
+
 
 Example of usage:
 
 `delete n/John i/1`
 
-If the event is a meeting, it will delete this event from all users
+If the event is a meeting, it will delete this meeting from all users.
+Else it will delete that specific lesson from the user's timetable.
 
 The following sequence diagram shows how the `delete` command works:
 ![DeleteCommandSequenceDiagram](diagrams/DeleteCommandSequenceDiagram.png)
@@ -167,7 +198,7 @@ The `clear` command is a command that the user can clear a certain user's timeta
 
 `clear [user]` clears the timetable for the particular user.
 
-`clear all` clearss the timetable for all users.
+`clear all` clears the timetable for all users.
 
 ## 3.7 Edit events feature
 

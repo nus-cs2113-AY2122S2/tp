@@ -30,9 +30,10 @@ public class Messages {
             + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
     public static final String MESSAGE_ADD_MEETING_FORMAT = "To add a meeting: add_meeting t/[Title] "
             + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
-
-    public static final String MESSAGE_DELETE_FORMAT = "To delete a lesson: delete n/[Name] i/[Index]\n";
-    public static final String MESSAGE_CLEAR_USER_EVENTS = "To clear a user's events: clear [user]\n";
+    public static final String MESSAGE_EDIT_LESSON_FORMAT = "To edit a lesson: edit n/[Name] i[Index] "
+            + "t/[Title] d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
+    public static final String MESSAGE_DELETE_FORMAT = "To delete an event: delete n/[Name] i/[Index]\n";
+    public static final String MESSAGE_CLEAR_USER_EVENTS = "To clear a user's timetable: clear [Name]\n";
     public static final String MESSAGE_CLEAR_ALL_EVENTS = "To clear all entries: clear all\n";
     public static final String MESSAGE_LIST_ALL_EVENTS = "To list all events: list all\n";
     public static final String MESSAGE_LIST_ALL_LESSONS = "To list all lessons: list_lesson all\n";
@@ -42,7 +43,7 @@ public class Messages {
     public static final String MESSAGE_LIST_USER_MEETINGS = "To list a user's meetings: list_meeting [Name]\n";
     public static final String MESSAGE_FREE_GENERIC_FORMAT = "To find free timeslots: free\n";
     public static final String MESSAGE_FREE_SPECIFIC_FORMAT = "To find free timeslots given a minimum duration: free "
-            + "[duration]\n";
+            + "[Duration]\n";
     public static final String NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED = "New user added so all meetings "
             + "added so far will be deleted";
     public static final String MESSAGE_EXIT_FORMAT = "To exit the application: exit\n";
@@ -52,16 +53,18 @@ public class Messages {
             + "2. " + MESSAGE_ADD_LESSON_FORMAT
             + "3. " + MESSAGE_ADD_MEETING_FORMAT
             + "4. " + MESSAGE_DELETE_FORMAT
-            + "5. " + MESSAGE_LIST_ALL_EVENTS
-            + "6. " + MESSAGE_LIST_USER_EVENTS
-            + "7. " + MESSAGE_LIST_ALL_LESSONS
-            + "8. " + MESSAGE_LIST_USER_LESSONS
-            + "9. " + MESSAGE_LIST_ALL_MEETINGS
-            + "10. " + MESSAGE_FREE_GENERIC_FORMAT
-            + "11. " + MESSAGE_FREE_SPECIFIC_FORMAT
-            + "12. " + MESSAGE_CLEAR_USER_EVENTS
-            + "13. " + MESSAGE_CLEAR_ALL_EVENTS
-            + "14. " + MESSAGE_EXIT_FORMAT
+            + "5. " + MESSAGE_EDIT_LESSON_FORMAT
+            + "6. " + MESSAGE_LIST_ALL_EVENTS
+            + "7. " + MESSAGE_LIST_USER_EVENTS
+            + "8. " + MESSAGE_LIST_ALL_LESSONS
+            + "9. " + MESSAGE_LIST_USER_LESSONS
+            + "10. " + MESSAGE_LIST_ALL_MEETINGS
+            + "11. " + MESSAGE_LIST_USER_MEETINGS
+            + "12. " + MESSAGE_FREE_GENERIC_FORMAT
+            + "13. " + MESSAGE_FREE_SPECIFIC_FORMAT
+            + "14. " + MESSAGE_CLEAR_USER_EVENTS
+            + "15. " + MESSAGE_CLEAR_ALL_EVENTS
+            + "16. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
 
     public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully";

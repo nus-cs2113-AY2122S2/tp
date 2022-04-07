@@ -1,0 +1,15 @@
+@startuml
+object "__newMeeting:Meeting__" as Meeting
+Meeting : title: "meeting1"
+Meeting : day: "Thursday"
+Meeting : startTime: 1230
+Meeting : endTime: 1330
+Meeting : mode: "online"
+
+
+object "newMeetingCommand:AddMeetingCommand__" as cmd
+cmd : args = {title:"meeting1", day: "Thursday",startTime: 1230,endTime: 1330,mode: "online"}
+
+cmd -up-> Meeting
+
+@enduml
