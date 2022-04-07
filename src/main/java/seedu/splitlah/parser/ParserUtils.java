@@ -776,7 +776,7 @@ public class ParserUtils {
      * Extracts a GST percentage from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return A double that represents a GST charge in percents.
+     * @return A double that represents a GST charge in percentage.
      * @throws InvalidFormatException If no arguments representing a GST charge were provided after the
      *                                GST delimiter,
      *                                if the argument cannot be parsed as a double,
@@ -799,10 +799,38 @@ public class ParserUtils {
     }
 
     /**
+     * Extracts a GST percentage from a user input. This method can differentiate between no GST being provided
+     * and a value of 0 GST being explicitly provided.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A double that represents a GST charge in percentage if the GST delimiter is found,
+     *         a double value of -1 otherwise.
+     * @throws InvalidFormatException If no arguments representing a GST charge were provided after the
+     *                                GST delimiter,
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
+     */
+    public static double parseGstIncludingZero(String commandArgs) throws InvalidFormatException {
+        if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.GST_DELIMITER)) {
+            return -1;
+        }
+
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.GST_DELIMITER);
+        double gst = ParserUtils.parsePercentageFromString(argument, ParserUtils.GST_DELIMITER);
+        assert gst >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
+        if (gst > MAXIMUM_SURCHARGE_PERCENT) {
+            throw new InvalidFormatException(ParserErrors.getInvalidGstErrorMessage());
+        }
+        return gst;
+    }
+
+    /**
      * Extracts a service charge percentage from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return A double that represents a service charge in percents.
+     * @return A double that represents a service charge in percentage.
      * @throws InvalidFormatException If no arguments representing a service charge were provided after the
      *                                Service charge delimiter,
      *                                if the argument cannot be parsed as a double,
@@ -817,6 +845,34 @@ public class ParserUtils {
 
         String argument = getArgumentFromDelimiter(commandArgs, SERVICE_CHARGE_DELIMITER);
         double serviceCharge = parsePercentageFromString(argument, SERVICE_CHARGE_DELIMITER);
+        assert serviceCharge >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
+        if (serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
+            throw new InvalidFormatException(ParserErrors.getInvalidServiceChargeErrorMessage());
+        }
+        return serviceCharge;
+    }
+
+    /**
+     * Extracts a service charge percentage from a user input. This method can differentiate between no service charge
+     * being provided and a value of 0 GST being explicitly provided.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A double that represents a service charge in percentage if the service charge delimiter is found,
+     *         a double value of -1 otherwise.
+     * @throws InvalidFormatException If no arguments representing a service charge were provided after the
+     *                                Service charge delimiter,
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
+     */
+    public static double parseServiceChargeIncludingZero(String commandArgs) throws InvalidFormatException {
+        if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER)) {
+            return -1;
+        }
+
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER);
+        double serviceCharge = ParserUtils.parsePercentageFromString(argument, ParserUtils.SERVICE_CHARGE_DELIMITER);
         assert serviceCharge >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
         if (serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidServiceChargeErrorMessage());
