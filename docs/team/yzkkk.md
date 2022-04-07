@@ -8,7 +8,7 @@ The section below lists my contributions to this project.
 
 ### Summary of Contributions
 
-You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=Yzkkk&breakdown=true).
+You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=yzkkk&breakdown=true).
 
 ### Code Contributions
 - **New Features**
