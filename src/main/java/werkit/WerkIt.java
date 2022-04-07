@@ -123,7 +123,9 @@ public class WerkIt {
 
     /**
      * Checks if the required resource directory and files already exists in the user's filesystem. If not,
-     * call the relevant method(s) to create the required directory and/or file(s).
+     * call the relevant method(s) to create the required directory and/or file(s). In addition, once all the
+     * data is loaded into the respective data structures, all resource files will be re-written to ensure
+     * that the data in the files are of a correct format (e.g. lower-case formatting).
      *
      * @throws IOException If the application is unable to create the required directory and/or file(s).
      */
@@ -138,7 +140,7 @@ public class WerkIt {
         assert (Files.exists(fileManager.getScheduleFilePath())) : "Schedule file does not exist.";
 
         getUI().printLoadingFileDataMessage();
-        loadExerciseFile();
+        populateExercises();
         if (getFileManager().isWasWorkoutsFileAlreadyMade()) {
             loadWorkoutFile();
         }
@@ -181,7 +183,6 @@ public class WerkIt {
                 newCommand.execute();
                 if (newCommand instanceof WorkoutCommand) {
                     if (newCommand.getUserAction().equals(DELETE_ACTION_KEYWORD)) {
-                        System.out.print(System.lineSeparator());
                         reloadScheduleFile();
                     }
                 }   else if (newCommand instanceof PlanCommand) {
@@ -207,21 +208,10 @@ public class WerkIt {
     }
 
     /**
-     * Loads the exercise file's data that is stored in the user's filesystem into the current
-     * session's list of exercises.
-     *
-     * @throws IOException If the application is unable to open the exercise file.
+     * Populates a set of exercises to exerciseList.
      */
-    private void loadExerciseFile() throws IOException {
-        fileManager.loadExercisesFromFile(getExerciseList());
-        try {
-            getUI().printFileLoadStatusMessage(FileManager.EXERCISE_FILENAME, true);
-        } catch (UnknownFileException e) {
-            System.out.println(e.getMessage());
-            logger.log(Level.WARNING, "Unknown file name was encountered.");
-        }
-
-        logger.log(Level.INFO, "Exercise file data loaded.");
+    public void populateExercises() {
+        getExerciseList().populateExerciseToList();
     }
 
     /**
