@@ -21,7 +21,7 @@ public class AddTaskParser extends AddParser {
     private static final String TASK_ESTIMATED_WORKING_TIME_STR = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
     private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION;
-    private static final String TASK_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME;
+    private static final String TASK_ESTIMATED_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private String userInput;
 
@@ -54,7 +54,7 @@ public class AddTaskParser extends AddParser {
         groupNames.add(TASK_NAME);
         groupNames.add(TASK_DESCRIPTION);
         groupNames.add(TASK_MODULE);
-        groupNames.add(TASK_WORKING_TIME);
+        groupNames.add(TASK_ESTIMATED_WORKING_TIME);
         groupNames.add(INVALID);
     }
 
@@ -82,7 +82,7 @@ public class AddTaskParser extends AddParser {
         HashMap<String, String> parsedArguments = parseString(userInput);
         final String taskName = parsedArguments.get(TASK_NAME);
         final String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
-        final String estimatedWorkingTime = parsedArguments.get(TASK_WORKING_TIME);
+        final String estimatedWorkingTime = parsedArguments.get(TASK_ESTIMATED_WORKING_TIME);
         final String taskModule = parsedArguments.get(TASK_MODULE);
         if (!Objects.isNull(taskName)) {
             if (taskName.isBlank()) {

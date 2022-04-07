@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        if (taskIndex < 0) { //If invalid task number or no task number was provided
+        if(!Objects.isNull(moduleCode)){
             deleteModule(moduleList);
             return new CommandResult(result);
         }

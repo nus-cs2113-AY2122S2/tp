@@ -18,7 +18,7 @@ public class EditCommand extends Command {
     private static final String EDIT_TASK_SUCCESS = StringConstants.EDIT_TASK_SUCCESS;
     private static final String EDIT_TASK_WITH_MODULE_SUCCESS = StringConstants.EDIT_TASK_WITH_MODULE_SUCCESS;
     private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION_STR;
-    private static final String ESTIMATED_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
+    private static final String TASK_ESTIMATED_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
     private static final String TASK_NAME = StringConstants.TASK_NAME_STR;
 
     private String moduleCode;
@@ -46,17 +46,17 @@ public class EditCommand extends Command {
         this.changedParameter = description;
     }
 
-    public EditCommand(String taskModule, int taskIndex, String description, String workingTime, String taskName) {
+    public EditCommand(String taskModule, int taskIndex, String description, String taskEstimatedWorkingTime, String taskName) {
         this.taskModule = taskModule;
         this.taskIndex = taskIndex;
         if (!Objects.isNull(description)) {
             this.taskParameter = TASK_DESCRIPTION;
             this.changedParameter = description;
-            assert Objects.isNull(workingTime);
+            assert Objects.isNull(taskEstimatedWorkingTime);
             assert Objects.isNull(taskName);
-        } else if (!Objects.isNull(workingTime)) {
-            this.taskParameter = ESTIMATED_WORKING_TIME;
-            this.changedParameter = workingTime;
+        } else if (!Objects.isNull(taskEstimatedWorkingTime)) {
+            this.taskParameter = TASK_ESTIMATED_WORKING_TIME;
+            this.changedParameter = taskEstimatedWorkingTime;
             assert Objects.isNull(taskName);
         } else {
             this.taskParameter = TASK_NAME;
@@ -84,7 +84,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        if (taskIndex < 0) {
+        if(!Objects.isNull(moduleCode)){
             editModuleDescription(moduleList);
         } else {
             Module targetModule = getTargetModule(moduleList);
@@ -105,7 +105,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Changes task parameter (either task description or estimated working time) of the target task.
+     * Changes task parameter (either task name, description or estimated working time) of the target task.
      *
      * @param targetModule The module (or General Tasks) the target task belongs to.
      */
@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         String targetTaskName = targetTask.getTaskName();
         if (taskParameter.equals(TASK_DESCRIPTION)) {
             targetTask.setTaskDescription(changedParameter);
-        } else if (taskParameter.equals(ESTIMATED_WORKING_TIME)) {
+        } else if (taskParameter.equals(TASK_ESTIMATED_WORKING_TIME)) {
             try {
                 targetTask.setWorkingTime(changedParameter);
             } catch (ModHappyException e) {
