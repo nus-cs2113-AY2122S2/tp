@@ -7,21 +7,21 @@ autonumber
 title Sequence Diagram of `plan /new` Command
 hide footbox
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "newCommand\n:PlanCommand" AS newCommand
-participant "planList\n:PlanList" AS PlanList
-participant "ui:UI" AS UI2
-participant "fileManager:FileManager" as FileManager
+participant "werkIt:WerkIt" AS WerkIt #Sandybrown
+participant "newCommand\n:PlanCommand" AS newCommand #LightSkyBlue
+participant "planList\n:PlanList" AS PlanList #LightSkyBlue
+participant "ui:UI" AS UI2 #YellowGreen
+participant "fileManager:FileManager" as FileManager #IndianRed
 
-activate WerkIt
+activate WerkIt #Sandybrown
 ref over WerkIt
 Obtain and parse user input.
 end
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand #LightSkyBlue
 newCommand -> PlanList : createAndAddPlan(userArgument)
-activate PlanList
+activate PlanList #LightSkyBlue
 ref over PlanList
 Create new Plan
 and add it to list.
@@ -30,12 +30,12 @@ newCommand <-- PlanList : newPlan:Plan
 deactivate PlanList
 
 newCommand -> UI2 : printNewPlanCreatedMessage(newPlan)
-activate UI2
+activate UI2 #YellowGreen
 newCommand <-- UI2
 deactivate UI2
 
 newCommand -> FileManager : writeNewPlanToFile(newPlan)
-activate FileManager
+activate FileManager #IndianRed
 ref over FileManager
 Write new Plan data
 into file on user's system.

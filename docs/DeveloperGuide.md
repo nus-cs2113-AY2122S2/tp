@@ -304,6 +304,8 @@ Below is a class diagram of the workout-related features:
 
 ![WorkoutUML](uml/classDiagrams/images/workoutRelatedFeatures.png)
 <br>
+<span class="box info">:memo: To improve readability, some classes and methods have been omitted from the diagram above.
+The diagram shows the main classes and methods the workout-related features uses. </span>
 
 The `Parser` class will call the `Parser#parseUserInput(userInput)` method
 to analyse the user's command. If the user's command is of type 
@@ -820,7 +822,7 @@ a `WorkoutCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `WorkoutCommand#execute()` method is called, it will identify
-that the workout action is of type `delete`. Thus, it will subsequently call the 
+that the workout action is of type `delete`. Subsequently, it will call the 
 `WorkoutList#deleteWorkout()` method to perform the deletion of the workout.
 <br><br>
 The following sequence diagram is the detailed procedure for Step 2's `WorkoutList#deleteWorkout()`:
@@ -857,7 +859,7 @@ Alright, the following workout has been removed:
 ```
 
 **(Steps 6 to 7)** The `WorkoutCommand#deletePlanContainsDeletedWorkout()` method will
-be called to delete any existing plan(s) that contains the workout that has been deleted.
+be called to delete any existing plan(s) that contains that deleted workout.
 <br><br>
 **(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list and the
@@ -1013,7 +1015,7 @@ a `PlanCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
-that the plan action is of type `new`. Thus, it will subsequently call the
+that the plan action is of type `new`. Subsequently, it will call the
 `PlanList#createAndAddPlan(userArgument)` method to perform the creation of the plan.
 <br><br>
 The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan(userArgument)`:
@@ -1026,10 +1028,11 @@ The following sequence diagram is the detailed procedure for Step 2's `PlanList#
 **(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
 method is parsed to obtain the following information required to create the `Plan` object:
 1. Name of the plan.
-2. Workout index numbers in the workout list separated by comma.<br><br>
+2. Workout index numbers in the workout list separated by comma.
+<br><br>
 
 Once the information are obtained, the name of the plan to be created will be validated.
-This is to ensure all plan names are acceptable and unique in the application.
+This is to ensure all plan names are valid and unique in the application.
 If the plan name is invalid, an `InvalidPlanException` exception will be thrown.
 <br><br>
 Subsequently, this `PlanList#createAndAddPlan()` method will find out the number of workouts
@@ -1038,7 +1041,7 @@ does not exceed 10 workouts, and there should minimally
 be 1 workout in a plan. If the new plan does not meet the minimum and maximum workout number requirement,
 an `InvalidPlanException` will be thrown.
 <br><br>
-**(Steps 2.1 to 2.2)** An ArrayList of Workout object is created to store the workouts to be added into the new plan.
+**(Steps 2.1 to 2.2)** An `ArrayList` of `Workout` object is created to store the workouts to be added into the new plan.
 <br><br>
 **(Steps 2.3 to 2.4)** As the workout indexes in the user argument parameter (e.g. "1, 2, 3") is of type `String`, 
 the loop will split (by comma) and convert each number string into an `Integer`. 
@@ -1050,9 +1053,9 @@ on the workout index and then added into the `ArrayList` that was created in the
 The loop will continue until all workouts to be added in the new plan is added into that `ArrayList`.
 <br><br>
 **(Steps 2.5 to 2.10)** With the valid plan name and the `ArrayList` containing the workouts to be added into the new plan, 
-a new `Plan` object can be created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
-check that the new plan to be created does not contain the same workout order as any existing plans. If it does contain
-the same workout order as any existing plan, an `InvalidPlanException` exception will be thrown.
+a new `Plan` object is created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
+check that the new plan to be created does not contain the same workout order as any existing plans. If it does, 
+an `InvalidPlanException` exception will be thrown.
 <br><br>
 If it is confirmed that the new plan does not contain
 the same workout order as any existing plan, a new `Plan` object is created.
@@ -1062,7 +1065,7 @@ This new `Plan` object is then added to the application's plan list.
 <br><br>
 **(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage(newPlan)` is called
 to display the plan that has been created to the user via the terminal. The following is an example
-of a success plan creation message (new plan is called "Grow My Muscles"):
+of a success plan creation message (new plan is called "grow my muscles"):
 ```
 ----------------------------------------------------------------------
 Alright, the following plan has been created:
@@ -1078,16 +1081,16 @@ This completes the process of creating and adding a new plan to WerkIt!.
 
 ##### Design Considerations for Creating a New Plan
 ###### Validity checks for new plans to be inserted
-The following are the validity checks done for new plans to be inserted into the application
+The following are the validity checks done before a new plan can be inserted into the application's plan list,
 and the reasons why these checks are done:
 
-|       Type of validity checks       |                                                                                                                                                         Reason for creating the validity checks                                                                                                                                                         |
-|:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|          Unique plan name           |                                                                                                            All plan names within the application should be <br/> unique as it makes no sense for users to create plans with the same names.                                                                                                             |
-|     No plans called "rest day"      |                                              "rest day" is used to identify the days in the <br/> schedule that do not have a plan assigned to it. <br/> If a plan called "rest day" is allowed, users might not be able to <br/> differentiate a rest day from days that they actually need to work out.                                               |
-|    Character limit for plan name    |                                                                                                                 Currently, the maximum character limit set for all plan names is 30 characters. <br/> This is for UI printing purposes.                                                                                                                 |
-|     Maximum number of workouts      |                                           Currently, a plan only supports a maximum of 10 workouts as it makes no sense for <br/> a plan to have many different workouts in the real-life context. <br/> In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                            |
-| Check plans with same workout order | All plans within the application should have different workout order sequence. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. <br/> This check is done as it makes no sense to create two plans with different plan names, but same workout sequences. |
+|       Type of validity checks       |                                                                                                                                                   Reason for creating the validity checks                                                                                                                                                    |
+|:-----------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|          Unique plan name           |                                                                                                       All plan names within the application should be <br/> unique as it makes no sense for users to create plans with the same names.                                                                                                       |
+|     No plans called "rest day"      |                                         "rest day" is used to identify the days in the <br/> schedule that do not have a plan assigned to it. <br/> If a plan called "rest day" is allowed, users might not be able to <br/> differentiate a rest day from days that they actually need to work out.                                         |
+|    Character limit for plan name    |                                                                                                           Currently, the maximum character limit set for all plan names is 30 characters. <br/> This is for UI printing purposes.                                                                                                            |
+|     Maximum number of workouts      |                                      Currently, a plan only supports a maximum of 10 workouts as it makes no sense for <br/> a plan to have many different workouts in the real-life context. <br/> In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                      |
+| Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. <br/> This check is done as it makes no sense to create two plans with different plan names, but same workout orders. |
 
 
 
@@ -1104,8 +1107,7 @@ A summary of the general procedure of listing all plans in the application is as
 The following sequence diagram illustrates how the `plan /list` command works in greater detail:
 
 <span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
- have been removed from the sequence diagram. Reference frames will be elaborated further
- down this section.</span>
+ have been removed from the sequence diagram. </span>
 
 ![List Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/listPlan.png)
 <br><br>
@@ -1116,7 +1118,7 @@ a `PlanCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Steps 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify
-that the plan action is of type `list`. Thus, it will subsequently call the
+that the plan action is of type `list`. Subsequently, it will call the
 `PlanList#listAllPlan()` method to display all available plan names.
 <br><br>
 **(Step 3)** The `PlanList#listAllPlan()` method will first check if the application's plan list is empty.
@@ -1131,8 +1133,8 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. Test
-2. Grow My Muscles
+1. test
+2. grow my muscles
 ----------------------------------------------------------------------
 ```
 **(Steps 5 to 6)** The `PlanList#listAllPlan()` method returns to the `PlanCommand` object
