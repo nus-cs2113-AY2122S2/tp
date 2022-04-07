@@ -20,8 +20,6 @@ import static java.time.Month.NOVEMBER;
 import static java.time.Month.OCTOBER;
 import static java.time.Month.SEPTEMBER;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_1;
-import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_2;
 import static seedu.sherpass.constant.Message.WAITING_FOR_USER_NEXT_INPUT;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 
