@@ -54,14 +54,6 @@ class Staff {
     +toString(): String
 }
 
-class InputParser {
-+{static}TERMINATOR : String = "-"
--{static}scanner : Scanner
-+{static}getString(msg : String) : String
-+{static}getInteger(msg : String) : int
-+{static}getDouble(msg : String) : double
-}
-
 class Dish {
     -name: String
     -price: double
@@ -101,30 +93,6 @@ class DishController {
     +takeControl(): void
 }
 
-class MainLogger {
-    -{static}instance
-    -logger: Logger
-    -MainLogger()
-    -{static}getInstance: MainLogger
-    +{static}logInfo(o: Object, msg : String)
-    +{static}logWarning(o: Object, msg : String)
-}
-
-class OperationTerminationException {
-    +OperationTerminationException()
-}
-
-'Exception
-OperationTerminationException ---|> Java.lang.Exception
-InputParser ..> OperationTerminationException
-Controller ..> OperationTerminationException
-StaffController ..> OperationTerminationException
-DishController ..> OperationTerminationException
-
-'Logger
-DishController ..> MainLogger
-StaffController ..> MainLogger
-
 class Order {
     +Order(List<Dish>)
     +Order()
@@ -163,16 +131,15 @@ class OrderController {
 }
 
 'Staff relations
-Manager <|--- StaffManager
+Manager <|-- StaffManager
 StaffManager <--* StaffController
-Controller <|--- StaffController
-Controller ..> InputParser
+Controller <|-- StaffController
 StaffManager --> "0..*" Staff : staffs
 
 'Dish relations
 Manager <|-- DishManager
 Controller <|-- DishController
-Dish "0..*\ndishes" <-- DishManager: manages <
+Dish "0..*\ndishes" <- DishManager: manages <
 DishManager "1\ndishManager" <--* DishController
 DishController .-> Dish
 
@@ -181,7 +148,7 @@ Manager <|-- OrderManager
 Controller <|-- OrderController
 Order "0..*\norders" <-- OrderManager: manages <
 OrderManager "1\norderManager" <--* OrderController
-OrderManager .. DishManager
-Order .. Dish
+OrderManager .> DishManager
+Order ..> Dish
 
 @enduml
