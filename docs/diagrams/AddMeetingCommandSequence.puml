@@ -20,9 +20,9 @@ create ":AddMeetingCommand"
 ":MasterTimetable" -> ":Timetable" ++ : add(meeting:Meeting)
 ":Timetable" -> ":Timetable": addMeetingConfirmation(meeting:Meeting)
 ":Timetable" --> ":MasterTimetable" --: addMeetingConfirmation:String
-":MasterTimetable" --> ":AddMeetingCommand" -- : addMeetingConfirmation :String
-":AddMeetingCommand" --> ":Ui" --: addMeetingConfirmation: String
-":Ui" --> "user" --: addMeetingConfirmation: String
+":MasterTimetable" --> ":AddMeetingCommand" -- :
+":AddMeetingCommand" --> ":Ui" --:
+":Ui" --> "user" --:
 destroy ":AddMeetingCommand"
 destroy ":Parser"
 destroy ":Meeting"
