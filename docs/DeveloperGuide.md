@@ -1958,7 +1958,90 @@ of their schedule. For instance, the user's daily schedule can look like this:
 
 
 ## Instructions for manual testing
+This section includes instructions to test WerkIt! manually.
+<br/>
+<span class = "info box">:memo: These test instructions covers the basic testing of the WerkIt! features. 
+Testers are expected to do more testing.
+</span> 
+<br/>
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and shutdown
+#### Initial Launch
+1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases/tag/Jar-V2.0) and copy it into an empty folder.
+2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
+`WerkIt.jar` file.
+3. On your terminal, type the command `java -jar WerkIt.jar` to launch WerkIt!
+4. WerkIt! will display a welcome message and file loading-related messages.
+
+#### Shutdown
+1. Enter the `exit` command to exit WerkIt!
+
+### Test on Exercise Features
+#### Listing All Exercises
+
+### Test on Workout Features
+#### Creating A New Workout
+#### Listing All Workouts
+
+#### Deleting An Existing Workout
+1. Prerequisites: Workout list should be populated with
+workout(s) before an existing workout can be deleted. 
+See [this section](#creating-a-new-workout) to view how you can populate your workout list. 
+2. User can enter `workout /list` to see the workout list before the deletion occurs. This is for comparison purposes.
+3. Test case: `workout /delete 1`<br/>
+Expected: The first workout is deleted from the workout list. Details of the deleted workout will be shown 
+to the terminal.<br/>
+Addition: If you have any existing plans containing the deleted workout, that plan
+will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list
+if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are
+affected by the deletion of this workout will display their delete messages accordingly.
+4. Other incorrect commands to try:<br/>
+   a. `workout /delete` (Missing workout index to delete)<br/>
+   b. `workout /delete 0` (Index 0 is invalid) <br/>
+   c. `workout /delete X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
+
+#### Updating An Existing Workout
+
+### Test on Plan Features
+#### Creating A New Plan 
+1. Prerequisites: The workout list should be populated before a new plan can be created as
+plans contains workout(s). See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+2. Test case: `plan /new first plan /workouts 1,1,1`<br/>
+Expected: A new plan called "first plan" will be created. This plan contains 3 instances of 
+workout with index 1 in the workout list.
+3. Other incorrect commands to try:<br/>
+   a. `plan /new` (Missing plan name and workouts) <br/>
+   b. `plan /new [plan name]` (Missing workouts)<br/>
+   c. `plan /new /workouts 1,1` (Missing plan name)<br/>
+   d. `plan /new [plan name] /workouts 0,1` (Workout index 0 is invalid) <br/>
+   e. `plan /new rest day /workouts 1,1` (A plan called "rest day" cannot be created) <br/>
+   f. `plan /new [existing plan name] /workouts 1,1` (Plan name must be unique within the application)<br/>
+   g. `plan /new [plan name] /workouts [same order as an existing plan]` (All plans must have a unique workout order)<br/>
+   h. `plan /new [plan name] /workouts X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
+   i. `plan /new [plan name] /workouts [11 ones separated by comma]` (A plan cannot contain more than 10 workouts)
+
+#### Listing All Plans
+1. Test case: `plan /list` <br/>
+Expected: If plan list is empty, the terminal will display to the user that the plan list is empty.
+Else, all plan names will be listed to the user.
+2. Test case `plan /list ab`<br/>
+Expected: Nothing is listed because no additional arguments should be supplied for this method
+
+#### Listing Workouts In A Plan
+#### Deleting An Existing Plan
+
+### Test on Schedule Features
+#### Updating The Schedule
+#### Viewing The Schedule
+#### Clearing Plan Schedule For A Day
+#### Clearing All Plans In The Schedule
+
+### Test on Search Features
+#### Searching For Exercise
+#### Searching For Workout
+#### Searching For Plan
+#### Searching For All
+
+### Test on Data Saving 
 
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
