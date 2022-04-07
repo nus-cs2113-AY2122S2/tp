@@ -2,6 +2,7 @@ package seedu.duke.stubs;
 
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
+import seedu.duke.exceptions.InvMgrException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,12 +49,16 @@ public class CommandStubs {
     }
 
     private static ItemList generateItemListWithRecords(ItemList itemList) {
-        itemList.addBorrowRecord(0, BorrowRecordStubs.PRESENTRECORD_A);
-        itemList.addBorrowRecord(0, BorrowRecordStubs.PRESENTRECORD_B);
-        itemList.addBorrowRecord(1, BorrowRecordStubs.PASTRECORD_A);
-        itemList.addBorrowRecord(1, BorrowRecordStubs.PASTRECORD_B);
-        itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_A);
-        itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_B);
+        try {
+            itemList.addBorrowRecord(0, BorrowRecordStubs.PRESENTRECORD_A);
+            itemList.addBorrowRecord(0, BorrowRecordStubs.PRESENTRECORD_B);
+            itemList.addBorrowRecord(1, BorrowRecordStubs.PASTRECORD_A);
+            itemList.addBorrowRecord(1, BorrowRecordStubs.PASTRECORD_B);
+            itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_A);
+            itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_B);
+        } catch (InvMgrException e) {
+            System.out.println(e);
+        }
         return itemList;
     }
 

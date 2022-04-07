@@ -1,5 +1,7 @@
 package seedu.duke.data;
 
+import seedu.duke.exceptions.InvMgrException;
+
 import java.util.List;
 
 public class ItemList {
@@ -42,7 +44,7 @@ public class ItemList {
      * @param newRecord A borrow record
      * @return The item that has been added with the new borrow record.
      */
-    public Item addBorrowRecord(int itemIndex, BorrowRecord newRecord) {
+    public Item addBorrowRecord(int itemIndex, BorrowRecord newRecord) throws InvMgrException {
         Item item = this.itemArrayList.get(itemIndex).addBorrowRecord(newRecord);
         return item;
     }
