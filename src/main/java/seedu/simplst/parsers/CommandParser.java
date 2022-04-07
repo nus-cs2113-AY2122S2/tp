@@ -32,11 +32,5 @@ public abstract class CommandParser {
         } catch (InvalidObjectType e1) {
             return;
         }
-
     }
-
-    public void paramRegexFormer() {
-
-    }
-
 }

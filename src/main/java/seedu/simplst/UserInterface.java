@@ -1,12 +1,13 @@
 package seedu.simplst;
 
 import seedu.simplst.parsers.AddParser;
-import seedu.simplst.parsers.ListParser;
-import seedu.simplst.parsers.RemoveParser;
-import seedu.simplst.parsers.ViewParser;
-import seedu.simplst.parsers.TotalParser;
 import seedu.simplst.parsers.FindParser;
 import seedu.simplst.parsers.HelpParser;
+import seedu.simplst.parsers.ListParser;
+import seedu.simplst.parsers.RemoveParser;
+import seedu.simplst.parsers.TotalParser;
+import seedu.simplst.parsers.ViewParser;
+import seedu.simplst.parsers.FulfillParser;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
 import util.exceptions.NullException;
@@ -24,6 +25,7 @@ public class UserInterface {
     private TotalParser totalParser;
     private FindParser findParser;
     private HelpParser helpParser;
+    private FulfillParser fulfillParser;
 
 
     public UserInterface(Warehouse warehouse) {
@@ -35,6 +37,7 @@ public class UserInterface {
         this.removeParser = new RemoveParser(warehouse);
         this.totalParser = new TotalParser(warehouse);
         this.helpParser = new HelpParser(warehouse);
+        this.fulfillParser = new FulfillParser(warehouse);
     }
 
     public void run() {
@@ -76,6 +79,9 @@ public class UserInterface {
                 case "total":
                     totalParser.parse(userInput);
                     break;
+                case "fulfill":
+                    fulfillParser.parse(userInput);
+                    break;
                 case "help":
                     helpParser.parse(userInput);
                     break;
@@ -91,10 +97,8 @@ public class UserInterface {
                     String wrongCommand = wrongCommandException.getCommand();
                     System.out.printf("%s command was used wrongly. Type help to see examples\n",
                             wrongCommand);
-                    Display.help();
                 } else {
                     System.out.println("No such command. Type help to see examples");
-                    Display.help();
                 }
             } catch (NullException nullException) {
                 //catch null exception here

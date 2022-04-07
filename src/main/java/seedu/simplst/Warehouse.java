@@ -24,15 +24,34 @@ public class Warehouse {
     private LinkedHashMap<String, Good> goodList = new LinkedHashMap<>();
 
 
-    // In the case where they want to mass add a bunch of goods as part of setup
+    /**
+     * Adds a unit good object into the unitGoodHashMap as well as a goods object
+     * into the goodList since the warehouse should now include this good but quantity
+     * is set to 0 as at this point the good is not in the warehouse yet.
+     *
+     * @param sku The Stock Keeping Unit of the unit good
+     * @param name The name of the unit good
+     * @param description Short description of the unit good
+     * @param capacity Represents the size of the good using arbitrary units
+     * @throws UnitTestException Exception when entering an invalid capacity
+     */
     public void addUnitGoodToInventory(String sku, String name, String description, String capacity)
             throws UnitTestException {
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
+        Good newGood = new Good(unitGood, 0);
         unitGoodHashMap.put(sku, unitGood);
+        goodList.put(sku, newGood);
     }
 
-    // In the case where they want add single/multiple of new/existing type of good
-    public void addGoodToInventory(String sku, String qty)
+    /**
+     * Adds a quantity of a good that currently exists in the goodList.
+     *
+     * @param sku The Stock Keeping Unit of the good
+     * @param qty The quantity to be added to the warehouse for this good
+     * @throws WrongCommandException Exception when the command is not properly used
+     * @throws ItemDoesNotExistException Exception when the sku cannot be found in the unitGoodHashMap
+     */
+    public void addQuantityOfGoodToInventory(String sku, String qty)
             throws WrongCommandException, ItemDoesNotExistException {
         UnitGood unitGood = unitGoodHashMap.get(sku);
 
@@ -47,8 +66,7 @@ public class Warehouse {
 
         try {
             int quantity = Integer.parseInt(qty);
-            Good good = new Good(unitGood, goodList.size() + 1, quantity);
-            goodList.put(sku, good);
+            goodList.get(sku).addQuantity(quantity);
         } catch (NumberFormatException e1) {
             // quantity was not a number
             throw new WrongCommandException("add", true);
@@ -77,7 +95,7 @@ public class Warehouse {
     }
 
     private void addGoodToOrder(Order order, String sku, String qty) throws WrongCommandException {
-        if (isSkuInInventory(sku)) {
+        if (!isSkuInInventory(sku)) {
             System.out.println("Good does not exist in the warehouse");
             System.out.println("Try adding a good first");
             throw new WrongCommandException("add", true);
@@ -119,10 +137,10 @@ public class Warehouse {
         return uniqueGoods.size();
     }
 
-    public void viewUnitGood(String sku) {
+    public void viewGood(String sku) {
         if (hasUnitGood(sku)) {
-            System.out.println(unitGoodHashMap.get(sku));
-            System.out.println("Size of good: " + unitGoodHashMap.get(sku).getCapacity());
+            System.out.println(goodList.get(sku));
+            System.out.println("Unit size of good: " + unitGoodHashMap.get(sku).getCapacity());
         } else {
             System.out.println("Could not find unit good with given SKU! Please check input SKU!");
         }
@@ -133,71 +151,40 @@ public class Warehouse {
             Integer idToBeViewed = Integer.parseInt(orderId);
             for (Order order : orderLists) {
                 if (idToBeViewed.equals(order.getId())) {
-                    System.out.println("Viewing order with id " + order.getId());
+                    System.out.println("Viewing order with sku " + order.getId());
                     System.out.println("Receiver: " + order.getReceiver());
                     System.out.println("Shipping address:" + order.getShippingAddress());
                     System.out.println("Items in the order:");
-
-                    ArrayList<Orderline> userOrderlines = order.getOrderlines();
-                    int i = 1;
-                    for (Orderline orderline : userOrderlines) {
-                        System.out.println("\t" + i + ". " + orderline);
-                        i++;
-                    }
+                    listOrderlines(String.valueOf(order.getId()));
                     return;
                 }
             }
-            System.out.println("Could not find item with given id!");
+            System.out.println("Could not find order with given id!");
         } catch (NumberFormatException e) {
-            System.out.println("Invalid format entered! Check format and try again!");
+            System.out.println("Invalid order id format entered! Check format and try again!");
         }
     }
 
-    public void viewGoodBySku(String sku) {
-        try {
-            //            Integer idToBeViewed = Integer.parseInt(SKU);
-            //            for (Order order : orderLists) {
-            //                for (Orderline orderline : order.getOrderlines()) {
-            //                    if (idToBeViewed.equals(orderline.getId())) {
-            //                        System.out.println("Viewing item with id " + orderline.getId());
-            //                        System.out.println("Item name: " + orderline.getName());
-            //                        System.out.println("Item description: " + orderline.getDescription());
-            //                        System.out.println("Item quantity: " + orderline.getQuantity());
-            //                        return;
-            //                    }
-            //                }
-            //            }
-            if (isSkuInInventory(sku)) {
-                Good curGood = getInventoryGoodBySku(sku);
-                UnitGood curUG = unitGoodHashMap.get(sku);
-                System.out.println("Viewing item with SKU " + sku);
-                System.out.println("Item name: " + curUG.getName());
-                System.out.println("Item description: " + curUG.getDescription());
-                System.out.println("Item quantity: " + curGood.getQuantity());
-            } else {
-                System.out.println("Could not find item with given id!");
-            }
-
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid format entered! Check format and try again!");
-        }
-    }
-
+    /**
+     * Searches for goods based on the user input name and views each good
+     * if the user input can be found in the name of the good.
+     *
+     * @param name Name to searched for in the goodList
+     */
     public void findGoods(String name) {
         AtomicInteger counter = new AtomicInteger();
-        goodList.forEach((sku, good) -> {
-            if (good.getName().toLowerCase().contains(name.toLowerCase())) {
-                System.out.println("Viewing item with SKU " + sku);
-                System.out.println("Item name: " + good.getName());
-                System.out.println("Item description: " + good.getDescription());
-                System.out.println("Item quantity: " + good.getQuantity());
-                System.out.println("");
+        for (Map.Entry<String, Good> goodEntry : goodList.entrySet()) {
+            String sku = goodEntry.getKey();
+            Good good = goodEntry.getValue();
+            boolean isContainedInGoodName = good.getName().toLowerCase().contains(name.toLowerCase());
+            if (isContainedInGoodName) {
+                viewGood(sku);
                 counter.getAndIncrement();
             }
-        });
+        }
 
         if (counter.get() == 0) {
-            System.out.println("Could not find any item containing " + name + " in the inventory!");
+            System.out.println("Could not find any item containing '" + name + "' in the inventory!");
         }
     }
 
@@ -231,36 +218,131 @@ public class Warehouse {
         }
     }
 
-    // Prints all inventory in a numbered list in order of input
+    /**
+     * Prints to the user the current available goods in the warehouse.
+     * Goods with 0 quantity are not shown as they are not available in the warehouse.
+     */
     public void listGoods() {
-        //int numberOfUserGoods = userGoods.size();
-        if (orderLists.isEmpty()) {
-            System.out.println("There are no inventory in the warehouse.");
+        LinkedHashMap<String, Good> availableGoods = new LinkedHashMap<>();
+        for (Map.Entry<String, Good> goodsEntry : goodList.entrySet()) {
+            String key = goodsEntry.getKey();
+            Good value = goodsEntry.getValue();
+            boolean isAvailable = (value.getQuantity() > 0);
+            if (isAvailable) {
+                availableGoods.put(key, value);
+            }
+        }
+
+        if (availableGoods.isEmpty()) {
+            System.out.println("No available goods found in this warehouse!");
             return;
         }
-        System.out.println("List of goods:");
-        System.out.println("id | name");
-        int counter = 0;
-        for (Order order : orderLists) {
-            for (Orderline orderline : order.getOrderlines()) {
-                System.out.println("\t" + (counter + 1) + ". " + orderline);
-                counter++;
-            }
+        System.out.println("List of available goods with its quantity:");
+        for (Map.Entry<String, Good> availableGoodsEntry : availableGoods.entrySet()) {
+            Good good = availableGoodsEntry.getValue();
+            System.out.println(good);
         }
     }
 
+    /**
+     * Prints to the user all the unit goods the warehouse can take.
+     */
     public void listUnitGoods() {
         if (unitGoodHashMap.isEmpty()) {
             System.out.println("No unit goods have been added for this warehouse!");
             return;
         }
         System.out.println("List of unit goods (in no order):");
-        unitGoodHashMap.forEach((sku,unitGood) -> {
+        for (Map.Entry<String, UnitGood> unitGoodEntry : unitGoodHashMap.entrySet()) {
+            UnitGood unitGood = unitGoodEntry.getValue();
             System.out.println(unitGood);
-        });
+        }
     }
 
-    public int totalOrder() {
+    /**
+     * FulFills order.
+     *
+     * @param oid order id to fulfill
+     * @throws WrongCommandException when oid is not a positive integer
+     */
+    public void fulfillOrder(String oid) throws WrongCommandException {
+        try {
+            int orderID = Integer.parseInt(oid);
+            Order order = findOrder(orderID);
+            ArrayList<Orderline> orderlines = order.getOrderlines();
+            for (Orderline orderline:orderlines) {
+                Good good = goodList.get(orderline.getSku());
+                assert good != null;
+                fulfillOrderline(orderline, good);
+            }
+
+            if (checkOrderComplete(order, orderlines)) {
+                System.out.printf("Order %d completed", orderID);
+            } else {
+                System.out.printf("Order %d not completed", orderID);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("order ID must be a positive number");
+            throw new WrongCommandException("fulfill", true);
+        } catch (ItemDoesNotExistException e1) {
+            System.out.printf("No order with oid: %s found in the warehouse", oid);
+        }
+    }
+
+    /**
+     * Fulfill individual orderline in the order.
+     * Checks off orderline if it is fulfilled
+     *
+     * @param orderline orderline to fulfill
+     * @param good good with matching sku as orderline in warehouse
+     */
+    private void fulfillOrderline(Orderline orderline, Good good) {
+        int qtyToFulfill = orderline.getQuantity();
+        int currentQtyInWarehouse = good.getQuantity();
+        try {
+            if (currentQtyInWarehouse < qtyToFulfill) {
+                throw new LargeQuantityException();
+            }
+
+            orderline.setQuantityFulfilled(qtyToFulfill);
+            good.removeQuantity(qtyToFulfill);
+            assert currentQtyInWarehouse > good.getQuantity();
+
+            if (good.getQuantity() == 0) {
+                System.out.println("Orderline fulfilled");
+                System.out.printf("No more %s in the warehouse", good.getName());
+            } else {
+                System.out.println("Orderline fulfilled");
+                System.out.printf("%d %s left in the warehouse",
+                        good.getQuantity(), good.getName());
+            }
+        } catch (LargeQuantityException e) {
+            System.out.printf("Not enough %s in the warehouse", good.getName());
+            System.out.println("Orderline not fulfilled");
+        }
+    }
+
+    /**
+     * Checks off the order if all orderlines are checked off.
+     * @param order order to check
+     * @param orderlines orderlines in the order to check
+     * @return true if all orderlines are checked off, false if any orderline is not checked off
+     */
+    private boolean checkOrderComplete(Order order, ArrayList<Orderline> orderlines) {
+        for (Orderline orderline:orderlines) {
+            if (!orderline.getCheckedOff()) {
+                return false;
+            }
+        }
+        order.setFulfilled(true);
+        return true;
+    }
+
+    /**
+     * Gives the total number of orders.
+     * @return total number of orders
+     */
+    public int totalNumberOfOrder() {
         return orderLists.size();
     }
 
@@ -274,9 +356,9 @@ public class Warehouse {
         throw new ItemDoesNotExistException();
     }
 
-    private Order findOrderContainsGood(int goodId) throws ItemDoesNotExistException {
+    private Order findOrderContainsGood(String sku) throws ItemDoesNotExistException {
         for (Order order : orderLists) {
-            if (order.doesGoodExist(goodId)) {
+            if (order.hasGood(sku)) {
                 return order;
             }
         }
@@ -284,7 +366,20 @@ public class Warehouse {
         throw new ItemDoesNotExistException();
     }
 
-    public void removeGoodFromInventory(String sku) throws ItemDoesNotExistException {
+    /**
+     * Removes the entire good from both unitGoodHashMap and goodList.
+     *
+     * @param sku The Stock Keeping Unit of the good to be removed
+     */
+    public void removeUnitGood(String sku) {
+        try {
+            this.removeUnitGoodFromInventory(sku);
+        } catch (ItemDoesNotExistException e2) {
+            Display.goodDontExistException();
+        }
+    }
+
+    public void removeUnitGoodFromInventory(String sku) throws ItemDoesNotExistException {
         if (!unitGoodHashMap.containsKey(sku)) {
             throw new ItemDoesNotExistException();
         }
@@ -292,37 +387,14 @@ public class Warehouse {
         goodList.remove(sku);
     }
 
-    public void removeQtyGoodFromInventory(String sku, String qty) throws
-            ItemDoesNotExistException, LargeQuantityException {
-        if (!goodList.containsKey(sku)) {
-            throw new ItemDoesNotExistException();
-        }
-        int qtyNum = Integer.parseInt(qty);
-        goodList.get(sku).removeQuantity(qtyNum);
-    }
-
-
     /**
-     * Removes the entire good.
+     * Removes a specific quantity of specified good in the goodList.
      *
-     * @param sku sku of good to remove
+     * @param sku The Stock Keeping Unit of the good to have some quantity removed
      */
-    public void removeUnitGood(String sku) {
+    public void removeQuantityOfGoods(String sku, String qty) throws WrongCommandException {
         try {
-            this.removeGoodFromInventory(sku);
-        } catch (ItemDoesNotExistException e2) {
-            Display.goodDontExistException();
-        }
-    }
-
-    /**
-     * Removes a specific quantity of specified good.
-     *
-     * @param sku sku of good to remove
-     */
-    public void removeGoods(String sku, String qty) throws WrongCommandException {
-        try {
-            removeQtyGoodFromInventory(sku, qty);
+            removeQuantityOfGoodFromInventory(sku, qty);
         } catch (NumberFormatException e1) {
             throw new WrongCommandException("remove", true);
         } catch (ItemDoesNotExistException e2) {
@@ -332,22 +404,51 @@ public class Warehouse {
             throw new WrongCommandException("remove", true);
         }
     }
+    
+    public void removeQuantityOfGoodFromInventory(String sku, String qty) throws
+            ItemDoesNotExistException, LargeQuantityException {
+        if (!goodList.containsKey(sku)) {
+            throw new ItemDoesNotExistException();
+        }
+        int qtyNum = Integer.parseInt(qty);
+        goodList.get(sku).removeQuantity(qtyNum);
+    }
 
-    public void removeOrder(String id) throws WrongCommandException {
-        if (id.isBlank()) {
+    /**
+     * Removes an order in the warehouse.
+     * @param oid order id
+     * @throws WrongCommandException remove command is wrong
+     */
+    public void removeOrder(String oid) throws WrongCommandException {
+        if (oid.isBlank()) {
             throw new WrongCommandException("remove", true);
         }
 
         try {
-            int orderId = Integer.parseInt(id);
+            int orderId = Integer.parseInt(oid);
             orderLists.remove(findOrder(orderId));
-            System.out.println("Order " + id + " has been removed.");
+            System.out.println("Order " + oid + " has been removed.");
         } catch (ItemDoesNotExistException e1) {
             System.out.println("The order you are trying to remove are not on the current list. "
                     + "Please try another id.");
         } catch (NumberFormatException e2) {
             throw new WrongCommandException("remove", true);
         }
+    }
+
+    public void removeOrderline(String oid, String sku, String qty) throws WrongCommandException {
+        try {
+            int orderID = Integer.parseInt(oid);
+            Order order = findOrder(orderID);
+            order.removeOrderlineByQty(sku, qty);
+
+        } catch (NumberFormatException e) {
+            System.out.println("order ID must be a positive number");
+            throw new WrongCommandException("remove", true);
+        } catch (ItemDoesNotExistException e1) {
+            System.out.printf("Order id: %s does not exist.", oid);
+        }
+
     }
 
     // Related to saving state outside program
@@ -417,6 +518,15 @@ public class Warehouse {
         }
     }
 
+    private boolean hasOrderId(int oid) {
+        for (Order order:orderLists) {
+            if (order.getId() == oid) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Add the base details of an order.
      * This will add the order to orderLists in the warehouse
@@ -432,8 +542,16 @@ public class Warehouse {
 
         try {
             int id = Integer.parseInt(oid);
+
+            if (hasOrderId(id)) {
+                System.out.printf("Order id %d already exists, please choose another id",
+                        id);
+                return;
+            }
+
             Order order = new Order(id, recv, addr);
             orderLists.add(order);
+            System.out.printf("Order %d added to the warehouse", id);
         } catch (NumberFormatException e) {
             System.out.println("oid must be a positive number");
             throw new WrongCommandException("add", true);
