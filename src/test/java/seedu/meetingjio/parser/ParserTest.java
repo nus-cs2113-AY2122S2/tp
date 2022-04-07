@@ -1,10 +1,12 @@
 package seedu.meetingjio.commands;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import seedu.meetingjio.parser.Parser;
 import seedu.meetingjio.timetables.MasterTimetable;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
@@ -16,6 +18,9 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS_ADD_MEETING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_USER;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_NAME;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_EDIT;
 
 public class ParserTest {
 
@@ -267,6 +272,62 @@ public class ParserTest {
                 1230, 1330, "online"
         );
         String inputString = "delete n/john i/5";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_INVALID_INDEX, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareAddUser_emptyName_throwExceptionn() {
+        String inputString = "add_user";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_VALUES_ADD_USER, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareAddUser_allName_throwExceptionn() {
+        String inputString = "add_user all";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_INVALID_NAME, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareAddUser_nameWithSpecialChar_throwExceptionn() {
+        String inputString = "add_user john@1";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_INVALID_NAME, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareEdit_missingRequiredParamsIndex_throwExceptionn() {
+        String inputString = "edit n/john t/cs2030";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_PARAMETERS_EDIT, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareEdit_missingRequiredParamsName_throwExceptionn() {
+        String inputString = "edit i/1 t/cs2030";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_PARAMETERS_EDIT, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareEdit_missingOptionalParams_throwExceptionn() {
+        String inputString = "edit n/john i/1";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(ERROR_MISSING_PARAMETERS_EDIT, command.execute(masterTimetable));
+    }
+
+    @Test
+    public void prepareEdit_invalidIndex_throwExceptionn() {
+        String inputString = "edit n/john i/a t/cs2030";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
         assertEquals(ERROR_INVALID_INDEX, command.execute(masterTimetable));

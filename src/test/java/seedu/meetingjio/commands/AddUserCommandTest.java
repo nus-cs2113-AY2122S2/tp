@@ -22,7 +22,7 @@ class AddUserCommandTest {
     }
 
     @Test
-    public void addUserCommand_newUser_throwException() {
+    public void addUserCommand_duplicateUser_throwException() {
         addUserJohn.execute(masterTimetable);
         assertEquals(ERROR_DUPLICATE_USER, addUserJohn.execute(masterTimetable));
     }
