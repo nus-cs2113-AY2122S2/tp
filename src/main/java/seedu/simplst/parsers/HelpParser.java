@@ -3,7 +3,6 @@ package seedu.simplst.parsers;
 import seedu.simplst.Display;
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
-import util.exceptions.WrongCommandException;
 
 public class HelpParser extends CommandParser {
 
@@ -21,7 +20,7 @@ public class HelpParser extends CommandParser {
     }
 
     @Override
-    protected void extract_params() throws WrongCommandException {
+    protected void extract_params() {
         String flag = matches.get("flag");
         switch (flag) {
         case "ug":

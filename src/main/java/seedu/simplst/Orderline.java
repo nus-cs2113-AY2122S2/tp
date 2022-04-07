@@ -12,7 +12,7 @@ public class Orderline extends Good {
     private Boolean isCheckedOff = false;
 
     public Orderline(UnitGood unitGood, int id, int quantity) {
-        super(unitGood, id, quantity);
+        super(unitGood, quantity);
     }
 
     public void checkOff() {
@@ -46,5 +46,9 @@ public class Orderline extends Good {
         return String.format("%d of %s - %s needed",
                 super.getQuantity(), super.getSku(), super.getName())
                 + isDone();
+    }
+
+    public int getId() {
+        return 0;
     }
 }

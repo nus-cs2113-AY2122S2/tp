@@ -38,6 +38,14 @@ public class RemoveParser extends CommandParser {
 
             String sku = regexGoodMatch.get("sku");
             warehouse.removeUnitGood(sku);
+        } else if (matches.get("flag").equals("g")) {
+            String regexGood = "sku/(?<sku>.*) qty/(?<quantity>.*)";
+            HashMap<String, String> regexGoodMatch = new
+                    MatchKeywords(userInput, regexGood).getGroupValues();
+
+            String sku = regexGoodMatch.get("sku");
+            String quantity = regexGoodMatch.get("quantity");
+            warehouse.removeQuantityOfGoods(sku, quantity);
         } else {
             throw new WrongCommandException("remove", true);
         }
