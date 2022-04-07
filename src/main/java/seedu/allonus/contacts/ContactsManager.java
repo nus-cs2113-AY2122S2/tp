@@ -271,12 +271,12 @@ public class ContactsManager {
             return;
         }
 
-        ArrayList<String> fieldStrings = getFieldStrings(userInput);
-        if (fieldStrings.isEmpty()) {
-            printFormat(CONTACTS_EDIT_NO_FIELDS_MESSAGE);
-            return;
-        }
         try {
+            ArrayList<String> fieldStrings = getFieldStrings(userInput);
+            if (fieldStrings.isEmpty()) {
+                printFormat(CONTACTS_EDIT_NO_FIELDS_MESSAGE);
+                return;
+            }
             setContactFields(curr, fieldStrings);
             addHash(curr);
             assert nameHashes.size() == getContactsCount();

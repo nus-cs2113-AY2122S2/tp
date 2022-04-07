@@ -7,6 +7,7 @@ import seedu.allonus.contacts.entry.Faculty;
 import seedu.allonus.contacts.entry.Name;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -19,6 +20,8 @@ import static seedu.allonus.contacts.ContactsManager.checkUniqueName;
  */
 public class ContactParser {
 
+    private static final String CONTACTS_PARSER_DUPLICATE_DELIMITERS_MESSAGE =
+            "You provided the same delimiter(s) more than once!";
     private static final String CONTACTS_PARSER_INVALID_FIELD_MESSAGE =
             "Invalid contact field(s)!";
     private static final String CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE =
@@ -37,7 +40,7 @@ public class ContactParser {
     private static final char DESCRIPTION_DELIMITER = 'd';
 
     private static final Logger logger = Logger.getLogger("");
-    private static final int MAX_NUMBER_OF_FIELDS = 5;
+    private static final int MAX_NUMBER_OF_FIELDS = 4;
     private static final int LENGTH_FIELD_AFTER_SPLIT = 2;
 
     /**
@@ -57,15 +60,22 @@ public class ContactParser {
      * @param userInput String of original user input.
      * @return An ArrayList of String objects that are the individual contact fields.
      */
-    static ArrayList<String> getFieldStrings(String userInput) {
+    static ArrayList<String> getFieldStrings(String userInput) throws InvalidContactField {
         String regex = " " + CONTACTS_DELIMITERS + ".*?(?=( " + CONTACTS_DELIMITERS + "|$))";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userInput);
         ArrayList<String> fieldStrings = new ArrayList<>(MAX_NUMBER_OF_FIELDS);
+        HashSet<Character> delimiters = new HashSet<>(MAX_NUMBER_OF_FIELDS);
 
         while (matcher.find()) {
             String currString = matcher.group().trim();
+            Character currDelimiter = currString.charAt(0);
+            if (delimiters.contains(currDelimiter)) {
+                throw new InvalidContactField(CONTACTS_PARSER_DUPLICATE_DELIMITERS_MESSAGE);
+            }
             fieldStrings.add(currString);
+            delimiters.add(currDelimiter);
+            assert fieldStrings.size() == delimiters.size();
         }
         return fieldStrings;
     }

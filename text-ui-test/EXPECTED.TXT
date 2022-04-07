@@ -37,6 +37,15 @@ Adding a contact with missing field(s)!
 A contact with the same name already exists!
 ---------------------------------------------------
 ---------------------------------------------------
+You provided the same delimiter(s) more than once!
+---------------------------------------------------
+---------------------------------------------------
+You provided the same delimiter(s) more than once!
+---------------------------------------------------
+---------------------------------------------------
+Invalid contact field(s)!
+---------------------------------------------------
+---------------------------------------------------
 Here are the contacts in your list:
  1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
  2. Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
@@ -86,10 +95,17 @@ A contact with the same name already exists!
 ---------------------------------------------------
 A contact with the same name already exists!
 ---------------------------------------------------
+---------------------------------------------------
+You provided the same delimiter(s) more than once!
+---------------------------------------------------
+---------------------------------------------------
+Okay, I've updated the information of this contact:
+  Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: CS3234 classmate / met at SoC canteen
+---------------------------------------------------
 *** Note: You didn't update this name / only updated casing! ***
 ---------------------------------------------------
 Okay, I've updated the information of this contact:
-  Name: daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
+  Name: daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: CS3234 classmate / met at SoC canteen
 ---------------------------------------------------
 *** Note: the email you entered might not be in the correct format! ***
 ---------------------------------------------------
@@ -98,7 +114,7 @@ Okay, I've updated the information of this contact:
 ---------------------------------------------------
 ---------------------------------------------------
 Okay, I've updated the information of this contact:
-  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: CS3234 classmate / met at SoC canteen
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the matching contacts in your list:
@@ -108,7 +124,7 @@ Here are the matching contacts in your list:
 ---------------------------------------------------
 Here are the contacts in your list:
  1. Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
- 2. Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+ 2. Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: CS3234 classmate / met at SoC canteen
 
 ---------------------------------------------------
 ---------------------------------------------------
@@ -133,7 +149,7 @@ You can only delete with a valid number that's in the list :')
 ---------------------------------------------------
 ---------------------------------------------------
 Noted. I've removed this contact:
-  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: CS3234 classmate / met at SoC canteen
 Now you have 0 contacts in the list.
 ---------------------------------------------------
 ---------------------------------------------------

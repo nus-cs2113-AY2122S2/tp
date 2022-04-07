@@ -45,8 +45,15 @@ class ContactParserTest {
 
     @Test
     void getFieldStringsWorks() {
-        ArrayList<String> parsedFieldsOfAlice = getFieldStrings(aliceString);
-        ArrayList<String> parsedFieldsOfBob = getFieldStrings(bobString);
+        ArrayList<String> parsedFieldsOfAlice = null;
+        ArrayList<String> parsedFieldsOfBob = null;
+        try {
+            parsedFieldsOfAlice = getFieldStrings(aliceString);
+            parsedFieldsOfBob = getFieldStrings(bobString);
+        } catch (InvalidContactField e) {
+            // This outcome shouldn't be possible for these inputs
+            assertTrue(false);
+        }
 
         for (String field : parsedFieldsOfAlice) {
             assertTrue(aliceFields.contains(field));

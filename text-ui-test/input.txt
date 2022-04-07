@@ -8,6 +8,9 @@ add n/Name f/Faculty d/some description
 add n/Name e/email@legit.com d/some description
 add f/Faculty e/email@legit.com d/some description
 add n/dANIELA kOH f/YNC e/valid@gmail.com d/description
+add n/Name n/Name again
+add n/Name f/Faculty e/email@u.nus.edu n/Name again
+add n/Name f/Faculty e/email@u.nus.edu d/classmate/friend
 list
 find Daniela
 find Koh
@@ -22,6 +25,8 @@ edit 2
 edit 1 n/
 edit 2 n/Lucy Koh
 edit 2 n/lucy koh
+edit 2 n/daniela Koh n/daniela Koh
+edit 2 d/CS3234 classmate / met at SoC canteen
 edit 2 n/daniela Koh
 edit 1 e/placeholder (she changed her email)
 edit 2 e/new_email@gmail.com f/FoE n/Daniela Sim
