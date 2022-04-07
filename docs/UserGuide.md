@@ -71,15 +71,15 @@ Example of usage:
 
 ## Command Summary
 
-| Command | Syntax |
-| --- | :---  |
-| packages | packages |
-| info | info {num} |
-| add | add {package_name} {country} {duration} {price} {vacancies} |
-| delete | delete {num} |
+| Command | Syntax                                                                |
+| --- |:----------------------------------------------------------------------|
+| packages | packages                                                              |
+| info | info {num}                                                            |
+| add | add {package_name} {country} {duration} {price} {vacancies}           |
+| delete | delete {package_number}                                               |
 | reserve  | reserve {package_number} {contact_name} {contact_number} {number_pax} |
-| remove | remove {reservation_id} |
-| reservations | reservations {package_number} |
+| remove | remove {reservation_id}                                               |
+| reservations | reservations {package_number}                                         |
 
 
 
