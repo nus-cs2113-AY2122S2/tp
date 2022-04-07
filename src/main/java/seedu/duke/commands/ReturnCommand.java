@@ -15,12 +15,10 @@ import static seedu.duke.parser.CliSyntax.*;
 
 public class ReturnCommand extends Command {
     private final int itemIndex;
-    private final String borrowerName;
-    protected int itemNumber = -1;
     public static final String COMMAND_WORD = "return";
     public static final String COMMAND_NAME = "Return an item:";
     public static final String USAGE_MESSAGE = "Marks item as returned";
-    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + PREFIX_ITEM_INDEX + "[item number] " + PREFIX_BORROWER_NAME + "[Student Name]";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + PREFIX_ITEM_INDEX + "[item number]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n"
             + "[Function] "
             + USAGE_MESSAGE
@@ -33,10 +31,8 @@ public class ReturnCommand extends Command {
      * Prepares the return command for execution by extracting the task number of the task to be marked.
      *
      * @param itemIndex    Index of item to be returned
-     * @param borrowerName Name of student who borrowed the item and now wishes to return it
      */
-    public ReturnCommand(int itemIndex, String borrowerName) {
-        this.borrowerName = borrowerName;
+    public ReturnCommand(int itemIndex) {
         this.itemIndex = itemIndex;
     }
 
@@ -65,7 +61,7 @@ public class ReturnCommand extends Command {
         }
         Item returnedItem = null;
         try {
-            returnedItem = itemList.getItem(itemIndex - 1);
+            returnedItem = itemList.getItem(itemIndex);
         } catch (IndexOutOfBoundsException e) {
             ui.showMessages(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
             ui.showDivider();

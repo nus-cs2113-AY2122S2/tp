@@ -16,13 +16,12 @@ public class ReturnCommandParser implements Parser<ReturnCommand> {
      * @throws InvMgrException if the user's input does not adhere to the expected command format
      */
     public ReturnCommand parse(String args) throws InvMgrException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM_INDEX, PREFIX_BORROWER_NAME);
-        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM_INDEX, PREFIX_BORROWER_NAME)) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM_INDEX);
+        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM_INDEX)) {
             throw new InvMgrException(Messages.INVALID_SYNTAX);
         }
         int itemIndex = ParserUtils.parseIndex(argMultimap.getValue(PREFIX_ITEM_INDEX).get()) - 1;
-        String borrowerName = argMultimap.getValue(PREFIX_BORROWER_NAME).get();
-        return new ReturnCommand(itemIndex, borrowerName);
+        return new ReturnCommand(itemIndex);
     }
 
     /**
