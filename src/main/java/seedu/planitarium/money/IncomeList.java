@@ -208,7 +208,8 @@ public class IncomeList extends MoneyList {
      * @return true if recurring status have been edited, false otherwise
      */
     private boolean editIncPerm(int index, Boolean isPermanent) {
-        if (isPermanent != null) {
+        Boolean itemPerm = incomeArrayList.get(index - 1).isPermanent();
+        if (isPermanent != null && itemPerm != isPermanent) {
             incomeArrayList.get(index - 1).setPermanent(isPermanent);
             return true;
         }
@@ -223,7 +224,8 @@ public class IncomeList extends MoneyList {
      * @return true if amount have been edited, false otherwise
      */
     private boolean editIncAmount(int index, Double amount) {
-        if (amount != null) {
+        Double itemAmount = incomeArrayList.get(index - 1).getAmount();
+        if (amount != null && itemAmount != amount) {
             incomeArrayList.get(index - 1).setAmount(amount);
             return true;
         }
@@ -238,7 +240,8 @@ public class IncomeList extends MoneyList {
      * @return true if description have been edited, false otherwise
      */
     private boolean editIncDesc(int index, String description) {
-        if (description != null) {
+        String oldDesc = incomeArrayList.get(index - 1).getDescription();
+        if (description != null && !oldDesc.equals(description)) {
             incomeArrayList.get(index - 1).setDescription(description);
             return true;
         }
