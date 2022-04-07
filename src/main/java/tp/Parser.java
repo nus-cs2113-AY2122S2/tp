@@ -45,6 +45,7 @@ public class Parser {
         //get appointment /d 123456
         String dummy = fullCommand.trim();
         String id =  dummy.substring(dummy.indexOf("/d") + 3).trim();
+        System.out.println("qwqw" + id);
         return new GetAppointmentsOfDoctorCommand(id);
     }
 
