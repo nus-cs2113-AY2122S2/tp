@@ -23,7 +23,7 @@ deactivate ":ClearCommand"
 end
 end
 
-":ClearCommand" --> ":Ui" --: printAllClearConfirmation: String
+":ClearCommand" --> ":Ui" --: 
 ":Ui" --> user
 destroy ":ClearCommand"
 destroy ":Parser"
