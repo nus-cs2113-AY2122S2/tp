@@ -1,9 +1,11 @@
 package seedu.duke.commands;
 
+import seedu.duke.common.Messages;
 import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
+import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -15,7 +17,7 @@ public class BorrowCommand extends Command {
     public static final String COMMAND_WORD = "borrow";
     public static final String COMMAND_NAME = "Borrow an Item";
     public static final String USAGE_MESSAGE = "Borrows an item from the inventory list";
-    public static final String COMMAND_FORMAT = COMMAND_WORD + " [item number] [start date] [end date] [name]";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " i/[item number] s/[start date] e/[end date] p/[name]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
             + "[Command Format] " + COMMAND_FORMAT + "\n";
 
@@ -26,6 +28,7 @@ public class BorrowCommand extends Command {
     private final BorrowStatus borrowStatus;
 
     public BorrowCommand(int itemIndex, LocalDate startDate, LocalDate endDate, String borrowerName) {
+        // itemIndex is parsed in as zero-based indexing.
         this.itemIndex = itemIndex;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -43,7 +46,13 @@ public class BorrowCommand extends Command {
     }
 
     @Override
-    public void execute(ItemList itemList, Ui ui) {
+    public void execute(ItemList itemList, Ui ui) throws InvMgrException {
+        // Check if index is within itemList, otherwise throw Exception
+        if (itemIndex > itemList.getSize() - 1) {
+            throw new InvMgrException(Messages.INVALID_INDEX);
+        }
+
+        // Create a new borrow record and add to item
         BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName, borrowStatus);
         Item item = itemList.addBorrowRecord(itemIndex, newRecord);
         ui.showMessages("Item has been successfully borrowed!",
