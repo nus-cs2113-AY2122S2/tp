@@ -130,6 +130,34 @@ public class UI {
         System.out.println("Example 4: view appointment /info patient date, 2023-01-01");
     }
 
+    public static void printDeleteDoctorMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: DELETE DOCTOR");
+        System.out.println("Format: delete doctor /info [nric]");
+        System.out.println("Example: delete doctor /info S1234567A");
+    }
+
+    public static void printDeletePatientMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: DELETE PATIENT");
+        System.out.println("Format: delete patient /info [nric]");
+        System.out.println("Example: delete patient /info S1234567A");
+    }
+
+    public static void printDeleteMedicineMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: DELETE MEDICINE");
+        System.out.println("Format: delete medicine /info [batch id]");
+        System.out.println("Example: delete medicine /info S234");
+    }
+
+    public static void printDeleteAppointmentMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: DELETE APPOINTMENT");
+        System.out.println("Format: delete appointment /info [appointment id]");
+        System.out.println("Example: delete appointment /info S234");
+    }
+
     public int getSize() {
         return patients.size();
     }
