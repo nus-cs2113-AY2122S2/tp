@@ -96,6 +96,13 @@ Reviewed teammates' pull requests, including (but not limited to):
 * Review 2: [Reviewed teammate's PPP write up and suggested improvements to consider](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/239)
 * Review 3: [Reviewed and gave suggestions on sequence diagram](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/220)
 
+Bugs captured, including (but not limited to):
+* Spotted a bug on `schedule /clear` and `schedule /clearall` features. 
+More details on the bug can be viewed in this [issue](https://github.com/AY2122S2-CS2113T-T09-2/tp/issues/165).
+* Spotted a bug on `plan /delete` feature. 
+More details on the bug can be viewed in this [issue](https://github.com/AY2122S2-CS2113T-T09-2/tp/issues/170).
+
+
 ### Contributions Beyond the Project Team
 Provided feedback and potential bug reports to another team's project 
 [(CS2113T-T11-1's HotelLite Manager)](https://ay2122s2-cs2113-t11-1.github.io/tp/UserGuide.html) 
