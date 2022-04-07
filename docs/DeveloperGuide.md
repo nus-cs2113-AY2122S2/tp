@@ -16,8 +16,6 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
 Our project could not have been possible without the prior work of the following:
 
 - [SE-EDU project team](https://se-education.org/docs/team.html) for their work on [AddressBook Level 3](https://github.com/se-edu/addressbook-level3), for which we referenced ideas as well as code snippets.
@@ -34,47 +32,58 @@ This section describes some noteworthy details on how certain features are desig
 Our design draws significant inspiration from the implementation of AddressBook Level 3 (henceforth AddressBook). 
 As the program was initially conceptualised to be a text-based command-line interface, heavy consideration was given
 to the design and user interactions when it came to the text input to be parsed by the user. 
-As such, we referenced AddressBook to segment the program into **`Parser`**, **`Command`** and **`Equipment`** classes.
+As such, we referenced AddressBook to segment the program into `Parser`, `Command` and `Equipment` classes.
 
 **Main components of the architecture**
 
-- **`Duke`** is the Main class and entry-point for the program. 
-- **`Parser`** serves as the first filter to split raw text input and pass in arguments to the **`Command`** for further processing.
-- **`Command`**, together with its various subclasses serve as specific implementations to pass the arguments taken in to the various methods of the **`EquipmentManager`** class.
-- **`EquipmentManager`** keeps track of actual **`Equipment`** instances created by our program.
-- **`Storage`** performs File I/O functions.
+- `Duke` is the Main class and entry-point for the program. 
+- `Parser` serves as the first filter to split raw text input and pass in arguments to the `Command` for further processing.
+- `Command`, together with its various subclasses serve as specific implementations to pass the arguments taken in to the various methods of the `EquipmentManager` class.
+- `EquipmentManager` keeps track of actual `Equipment` instances created by our program.
+- `Storage` performs File I/O functions.
 
 ### Parser
 
-**`Parser`** is the first filter for text inputs read to the user. 
+`Parser` is the first filter for text inputs read to the user. 
 As alluded to prior, one major consideration was to build it in a manner that can parse text input as effectively as possible. In considering text input, we divided the parsing into the following segments:
 
-#### `commandWord` `argumentTag/argumentValue` `argumentTag/argumentValue` `...`
+<p align="center"><code>commandWord [argumentType/`argumentValue`] [...]</code></p>
 
-To dispatch `argumentTag/argumentValue` strings to the correct **`Command`** class, the following logic is employed throughout **`Parser`** by **`parseCommand`**.
+To dispatch <code>argumentType/\`argumentValue\`</code> strings to the correct `Command` class, the following logic is employed throughout `Parser` by `parseCommand`.
 
 **1. Parse the correct Command Word**
 
-**`splitCommandTerm`** splits the input string upon the first space. 
-The first substring is used to decide which **`Command`** to dispatch while the second is used for its arguments.
-In the case where a second substring is not required, as in the case of **`help`** and **`list`**, a null String is used.
+<p align="center"><code>commandWord</code></p>
+
+`splitCommandTerm` splits the input string upon the first space. 
+The first substring is used to decide which `Command` to dispatch while the second is used for its arguments.
+In the case where a second substring is not required, as in the case of `help` and `list`, a null String is used and the following step is skipped entirely.
 
 **2. Split Arguments**
 
-For simpler command words such as **`delete`** and **`check`**, only one pair of **`argumentType`** and **`argumentValue`** were required. 
-As such, these will be passed in directly to their **`Command`** classes without a **`argumentType`** pair.
+<p align="center"><code>[argumentType/`argumentValue`] [...]</code></p>
 
-More complex command words such as **`add`** and **`update`** necessitated multiple arguments.
-To implement this while ensuring that multi-word strings are acceptable input, **`extractArguments`** was implemented. 
-Without specifically explaining the main regular expression ([details here](https://regex101.com/r/gwjHWD/3)), the approach sought to match **`argumentTag/argumentValue`** pairs with a positive lookahead. 
+Complex commands such as `add` and `update` necessitate multiple arguments.
+To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` is implemented. 
+Without specifically explaining the main regular expression ([details here](https://regex101.com/r/gwjHWD/3)), the approach sought to match `argumentType` and <code>\`argumentValue\`</code> pairs with a positive lookahead. 
 The final argument pair will then be extracted using a separate regex. 
-Together, this ensured that all argument pairs can be effectively parsed and dispatched to each **`Command`** class.
+Together, this ensured that all argument pairs can be effectively parsed and dispatched to each `Command` class.
+
+<details><summary><b>Special <code>delete</code> implementation</b></summary>
+<p>
+
+For added safeguards in equipment deletion, the delete command implements a more stringent regex to match one argument pair of <code>s/\`SERIAL_NUMBER\`</code>.  
+
+</p>
+</details>
 
 Throughout the `Parser` implementation, exceptions were used to return `IncorrectCommand` classes that can be used to pass error messages to the user. These will be discussed in the following segments.
 
-### Update feature
+### Command classes
 
 #### Current Design and Implementation
+
+`Command` classes are largely similar to each other. The most complex command, `UpdateCommand` will be explained here.
 
 The update feature is facilitated by `UpdateCommand`. It extends `ModificationCommand` and implements the following operations:
 
@@ -105,27 +114,29 @@ Step 6. It is not shown in the sequence diagram but ultimately when the CommandR
 
 ### EquipmentManager
 
-The **`EquipmentManager`**, as the name suggests, manages all the equipment that the user has.
-When initialised, it creates a HashMap called **`equipmentList`** which is used to save the equipment with their serial numbers as their keys.
-The **`EquipmentManager`** has several methods which allow manipulation to said HashMap such as **`addEquipment`**, **`checkEquipment`**, **`listEquipment`**, **`updateEquipment`**, and **`deleteEquipment`**.
-These methods are used during the execution of each of the **`Command`** class.
-* **`addEquipment`** — Adds an **`Equipment`** to the **`equipmentList`**.
-* **`checkEquipment`** — Returns the **`Equipment`** in **`equipmentList`** that has the given **`itemName`**.
-* **`listEquipment`** — Returns an ArrayList of all the **`Equipment`** in **`equipmentList`**.
-* **`updateEquipment`** — Updates the specified **`Equipment`** with the corresponding updates given in the ArrayList of pairs.
-* **`deleteEquipment`** — Deletes the specified **`Equipment`**.
+The `EquipmentManager`, as the name suggests, manages all the equipment that the user has.
+When initialised, it creates a HashMap called `equipmentList` which is used to save the equipment with their serial numbers as their keys.
+The `EquipmentManager` has several methods which allow manipulation to said HashMap such as `addEquipment`, `checkEquipment`, `listEquipment`, `updateEquipment`, and `deleteEquipment`.
+These methods are used during the execution of each of the `Command` class.
+* `addEquipment` — Adds an `Equipment` to the `equipmentList`.
+* `checkEquipment` — Returns the `Equipment` in `equipmentList` that has the given `itemName`.
+* `listEquipment` — Returns an ArrayList of all the `Equipment` in `equipmentList`.
+* `updateEquipment` — Updates the specified `Equipment` with the corresponding updates given in the ArrayList of pairs.
+* `deleteEquipment` — Deletes the specified `Equipment`.
 
-The **`EquipmentManager`** is implemented as the main storage unit of all the equipments during the execution of the program.
+The `EquipmentManager` is implemented as the main storage unit of all the equipments during the execution of the program.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+The target user is the logistics chief of an event support club. He is responsible for the logistics of the club and the equipment that is used during events. 
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Equipment for the club differ in terms of shape and size. Owing to the climate-sensitive and fragile nature of some of these equipment, they are often stored in opaque containers, which may not be easily accessible given space constraints. By keeping records of this information on our application, the logistics chief can easily access and retrieve this information without having to make a physical trip down to the storeroom.
+
+Further, maintaining a record of the equipment is a time-consuming task given that they often need to be referred to by both the model number and a short alias used by club members. As the post of logistics chief is changed every year when passed down to a new member, this member will need to be acquainted with both the common name and the model number of the relevant equipment. Our application thus provides a convenient way to search by both specifications. 
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Stories

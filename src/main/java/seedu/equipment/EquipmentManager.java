@@ -51,15 +51,57 @@ public class EquipmentManager {
     /**
      * Searches the equipmentList for Equipments with the item name given.
      *
-     * @param itemName Name of Equipment in String.
+     * @param checkParam Name of Equipment in String.
      * @return An ArrayList of Equipments with the same item name as the parameter.
      */
-    public ArrayList<Equipment> checkEquipment(String itemName) {
+    public ArrayList<Equipment> checkEquipment(Pair<String, ?> checkParam){
         ArrayList<Equipment> listOfEquipments = new ArrayList<>();
-        for (Equipment equipment : equipmentList.values()) {
-            if (equipment.getItemName().equals(itemName)) {
-                listOfEquipments.add(equipment);
+        String arg = checkParam.getKey();
+        switch (arg) {
+        case "itemName":
+            for (Equipment equipment : equipmentList.values()) {
+                if (equipment.getItemName().equals(checkParam.getValue())) {
+                    listOfEquipments.add(equipment);
+                }
             }
+            break;
+        case "serialNumber":
+            for (Equipment equipment : equipmentList.values()) {
+                if (equipment.getSerialNumber().equals(checkParam.getValue())) {
+                    listOfEquipments.add(equipment);
+                }
+            }
+            break;
+        case "type":
+            for (Equipment equipment : equipmentList.values()) {
+                if (equipment.getType().equals(checkParam.getValue())) {
+                    listOfEquipments.add(equipment);
+                }
+            }
+            break;
+        case "cost":
+            for (Equipment equipment : equipmentList.values()) {
+                if (equipment.getCost() == (double) checkParam.getValue()) {
+                    listOfEquipments.add(equipment);
+                }
+            }
+            break;
+        case "purchasedFrom":
+            for (Equipment equipment : equipmentList.values()) {
+                if (equipment.getPurchasedFrom().equals(checkParam.getValue())) {
+                    listOfEquipments.add(equipment);
+                }
+            }
+            break;
+        case "purchasedDate":
+            for (Equipment equipment : equipmentList.values()) {
+                if (equipment.getPurchasedDate().equals(checkParam.getValue())) {
+                    listOfEquipments.add(equipment);
+                }
+            }
+            break;
+        default:
+            break;
         }
         return listOfEquipments;
     }

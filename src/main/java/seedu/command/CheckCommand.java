@@ -1,8 +1,11 @@
 package seedu.command;
 
+import seedu.Pair;
 import seedu.equipment.Equipment;
+import seedu.equipment.EquipmentType;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Subclass of Command. Handles checking of details of a specified equipment from equipmentInventory.
@@ -33,8 +36,52 @@ public class CheckCommand extends Command {
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute() {
-        ArrayList<Equipment> equipment = equipmentManager.checkEquipment(commandStrings.get(0));
+        Pair<String, ?> checkPair = generateCheckPair();
+        ArrayList<Equipment> equipment = equipmentManager.checkEquipment(checkPair);
 
-        return new CommandResult(String.format(successMessage, commandStrings.get(0)), equipment);
+        return new CommandResult(String.format(successMessage, checkPair.getValue()), equipment);
+    }
+
+    /**
+     * Generates a Pair containing the attribute for the check to be based on.
+     * Pair is a class that was implemented to match each attribute to its value.
+     * By using pair, we are able to specify the attribute to be checked.
+     * @return Pair of value to be checked and its matching attribute.
+     */
+    public Pair<String, ?> generateCheckPair() {
+        Pair<String, ?> pair = null;
+
+        for (String s : commandStrings) {
+            int delimiterPos = s.indexOf('/');
+            // the case where delimiterPos = -1 is impossible as
+            // ARGUMENT_FORMAT and ARGUMENT_TRAILING_FORMAT regex requires a '/'
+            assert delimiterPos != -1 : "Each args will need to include minimally a '/' to split arg and value upon";
+            String argType = s.substring(0, delimiterPos);
+            String argValue = s.substring(delimiterPos + 1);
+            switch (argType) {
+            case "n":
+                pair = new Pair<>("itemName", argValue);
+                break;
+            case "pd":
+                pair = new Pair<>("purchasedDate", argValue);
+                break;
+            case "t":
+                pair = new Pair<>("type", argValue);
+                break;
+            case "pf":
+                pair = new Pair<>("purchasedFrom", argValue);
+                break;
+            case "c":
+                pair = new Pair<>("cost", argValue);
+                break;
+            case "s":
+                pair = new Pair<>("serialNumber", argValue);
+                break;
+            default:
+                System.out.println("`" + argValue + "` not accepted for type " + argType + ": Unrecognised Tag");
+            }
+        }
+
+        return pair;
     }
 }
