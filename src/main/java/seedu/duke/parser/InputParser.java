@@ -83,7 +83,7 @@ public class InputParser {
             return new HelpCommand();
 
         case LostCommand.COMMAND_WORD:
-            return new LostCommand(arguments);
+            return new LostCommandParser().parse(arguments);
 
         default:
             throw new InvMgrException(Messages.INVALID_COMMAND);

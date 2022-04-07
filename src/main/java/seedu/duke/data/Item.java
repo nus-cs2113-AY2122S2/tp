@@ -50,7 +50,7 @@ public class Item {
         this.isLost = isLost;
     }
 
-    public void markTaskAsLost() {
+    public void markItemAsLost() {
         this.setLost(true);
     }
 
