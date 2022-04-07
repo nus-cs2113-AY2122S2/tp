@@ -2,7 +2,9 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Huge thanks to all members of the team for chipping in for this project! As always, teamwork is what makes the magic happen :)
+
+Thank you to all professors and student teachers who have helped us along the way!
 
 ## Design & implementation
 
