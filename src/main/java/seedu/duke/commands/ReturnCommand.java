@@ -6,17 +6,17 @@ import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
-
 import java.util.ArrayList;
-
 import static java.lang.Integer.parseInt;
+import static seedu.duke.parser.CliSyntax.PREFIX_NAME;
+
 
 public class ReturnCommand extends Command {
     protected int itemNumber = -1;
     public static final String COMMAND_WORD = "return";
     public static final String COMMAND_NAME = "Return an item:";
     public static final String USAGE_MESSAGE = "Marks item as returned";
-    public static final String COMMAND_FORMAT = COMMAND_WORD + " [item number]";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " [item number] " + PREFIX_NAME + "[Student Name]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n"
             + "[Function] "
             + USAGE_MESSAGE
