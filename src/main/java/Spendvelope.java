@@ -5,15 +5,13 @@ import commands.ExitCommand;
 import manager.ExpenseManager;
 import manager.LimitManager;
 import manager.RecordManager;
-
 import manager.Storage;
-import records.Record;
+
 import ui.TextUi;
 
 import parser.Parser;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static constants.SpendvelopeConstants.VERSION;
 
