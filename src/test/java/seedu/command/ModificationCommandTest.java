@@ -54,6 +54,7 @@ class ModificationCommandTest {
                 Arrays.asList("s/S1404115ASF", "t/SPEAKER", "n/Speaker A")
         ));
         ModificationCommand actualCommand = new ModificationCommand(testArrayList);
+        expectedCommand.prepareModification();
         actualCommand.prepareModification();
         assertEquals(expectedCommand, actualCommand);
     }
