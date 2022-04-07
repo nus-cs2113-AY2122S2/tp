@@ -39,7 +39,7 @@ public class CheckCommand extends Command {
         Pair<String, ?> checkPair = generateCheckPair();
         ArrayList<Equipment> equipment = equipmentManager.checkEquipment(checkPair);
 
-        return new CommandResult(String.format(successMessage, commandStrings.get(0)), equipment);
+        return new CommandResult(String.format(successMessage, checkPair.getValue()), equipment);
     }
 
     /**
@@ -60,22 +60,22 @@ public class CheckCommand extends Command {
             String argValue = s.substring(delimiterPos + 1);
             switch (argType) {
             case "n":
-                pair = new Pair<>("itemName", commandStrings.get(0));
+                pair = new Pair<>("itemName", argValue);
                 break;
             case "pd":
-                pair = new Pair<>("purchasedDate", commandStrings.get(0));
+                pair = new Pair<>("purchasedDate", argValue);
                 break;
             case "t":
-                pair = new Pair<>("type", commandStrings.get(0));
+                pair = new Pair<>("type", argValue);
                 break;
             case "pf":
-                pair = new Pair<>("purchasedFrom", commandStrings.get(0));
+                pair = new Pair<>("purchasedFrom", argValue);
                 break;
             case "c":
-                pair = new Pair<>("cost", commandStrings.get(0));
+                pair = new Pair<>("cost", argValue);
                 break;
             case "s":
-                pair = new Pair<>("serialNumber", commandStrings.get(0));
+                pair = new Pair<>("serialNumber", argValue);
                 break;
             default:
                 System.out.println("`" + argValue + "` not accepted for type " + argType + ": Unrecognised Tag");
