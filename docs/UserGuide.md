@@ -2,14 +2,14 @@
 
 ## Introduction
 
-{Give a product intro}
+{Travel Agency Reservation Booking System (TARBS) is a desktop app for managing reservations for travel packages and tourist attractions, optimised for use via a Command Line Interface (CLI). If you can type fast, TARBS can help to improve efficiency of adding and editing reservations, amongst many other features.}
 
 ## Quick Start
 
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Down the latest version of `TARBS` from [here](https://github.com/AY2122S2-CS2113-F10-3/tp/releases).
 
 ## Features 
 
