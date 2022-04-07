@@ -117,7 +117,7 @@ public class Storage {
 
             for (int i = 0; i < taskArray.length(); i++) {
                 JSONObject taskData = taskArray.getJSONObject(i);
-                taskList.addTask(StorageParser.parseSaveData(taskData), Frequency.SINGLE);
+                taskList.addTask(StorageParser.parseSaveData(taskData), Frequency.SINGLE, true);
             }
         }
         writeSaveData(taskList);
