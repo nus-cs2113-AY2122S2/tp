@@ -9,6 +9,7 @@
     - [Add subscription record](#adding-subscription-record-add-subscription)
   - [Delete a record](#delete-a-record-delete)
   - [Show record list](#show-record-list-list)
+  - [Find records](#find-records-find)
   - [Setting limit](#setting-limit-set)
   - [Showing summary](#showing-summary-summary)
   - [Exit the program](#exit-the-program-exit)
@@ -105,7 +106,7 @@ Displays all records in the RecordManager as a list with their index numbers.
 
 Format: `list`
 
-### Show record list: `find`
+### Find records: `find`
 filter all the records in the RecordManager and display it as a list.
 
 Format: `find <KeyWord>`
@@ -114,7 +115,6 @@ Format: `find <KeyWord>`
 * The `KeyWord` is used to filter the name of the records in RecordManager.
 
 Example of usage: `find handphone`
-`
 
 ### Setting limit: `set`
 Set a total spending limit for a month and display the warning
