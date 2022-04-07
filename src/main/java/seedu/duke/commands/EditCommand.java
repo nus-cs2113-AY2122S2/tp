@@ -43,9 +43,7 @@ public class EditCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new InvMgrException(Messages.INVALID_INDEX);
         }
-
-        Item placeholderItem = new Item(targetedItem.getName(),
-                targetedItem.getQuantity(), targetedItem.getDescription());
+        Item placeholderItem = (Item) targetedItem.clone();
 
         if (this.name.isPresent()) {
             placeholderItem.setName(this.name.get());
@@ -67,7 +65,7 @@ public class EditCommand extends Command {
         if (this.description.isPresent()) {
             placeholderItem.setDescription(this.description.get());
         }
-        ui.showMessages(String.format(EDIT_RESULT_FORMAT, this.index, targetedItem.toDetailedString(),
+        ui.showMessages(String.format(EDIT_RESULT_FORMAT, this.index+1, targetedItem.toDetailedString(),
                 placeholderItem.toDetailedString()));
         itemList.set(index, placeholderItem);
 

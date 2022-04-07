@@ -3,7 +3,7 @@ package seedu.duke.data;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Item {
+public class Item implements Cloneable {
 
     private static final String NON_ZERO_QUANTITY = "quantity must be non-zero positive integer!";
     private static final String NOT_NULL_NAME = "name must not be null!";
@@ -106,5 +106,16 @@ public class Item {
                 && this.name.equals(((Item) other).name)
                 && this.description.equals(((Item) other).description)
                 && (this.quantity == ((Item) other).quantity));
+    }
+
+    public Object clone() {
+        Item cloneObj;
+        try {
+            cloneObj = (Item)super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+        cloneObj.borrowRecords = new ArrayList<>(this.borrowRecords);
+        return cloneObj;
     }
 }
