@@ -35,3 +35,6 @@ Given below are my contributions to the project.
     * Developer Guide (DG):
         * Added sections on `Money` design.
         * Added UML diagrams for `Money` component and `Find` implementation.
+
+* **Community-based Contribution**:
+    * Above average number of bugs found for [PE-D](https://github.com/tjiarong/ped/issues).
