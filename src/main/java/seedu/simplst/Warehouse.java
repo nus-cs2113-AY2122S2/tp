@@ -68,6 +68,8 @@ public class Warehouse {
         try {
             int quantity = Integer.parseInt(qty);
             goodList.get(sku).addQuantity(quantity);
+            System.out.printf("%d Good of SKU: %s added to warehouse\n",
+                    quantity, sku);
         } catch (NumberFormatException e1) {
             // quantity was not a number
             throw new WrongCommandException("add", true);
