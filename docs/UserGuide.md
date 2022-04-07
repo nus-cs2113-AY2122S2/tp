@@ -15,19 +15,53 @@
 
 {Give detailed description of each feature}
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Adding a package: `add`
+Adds a new Travel Package to the list of Packages.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `add {package_name},{package_id},{startDate},{endDate},{hotel},{price},{country},{vacancies}`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* The `startDate` and `endDate` must be in the format DD/MM/YYYY.
+* The `price` can only contain numbers or decimal points.  
 
 Example of usage: 
 
-`todo n/Write the rest of the User Guide d/next week`
+`add Skiing Trip,1,23/02/2022,24/02/2022,hotelName,90.99,Singapore,20`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+### Deleting a package: `delete`
+Delete a Travel Package from the list of Packages based on the package ID.
+
+Format: `delete {package_id}`
+
+Example of usage: 
+
+`delete 2`
+
+### Placing a reservation: `reserve`
+Add a reservation to a Travel Package.
+
+Format: `reserve {package_id},{contact_name},{contact_number},{number_pax}`
+
+Example of usage: 
+
+`reserve 3,John,91234567,3`
+
+### Removing a reservation: `remove`
+Remove a reservation from a Travel Package.
+
+Format: `remove {package_id},{contact_number}`
+
+Example of usage: 
+
+`remove 1,8888888`
+
+### View reservations: `reservations`
+View reservations booked in a Travel Package.
+
+Format: `reservations {package_id}`
+
+Example of usage: 
+
+`reservations 2`
 
 ## FAQ
 
@@ -37,6 +71,15 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+| Command | Syntax |
+| --- | :---  |
+| packages | packages |
+| info | info {num} |
+| add | add {package_name} {country} {duration} {price} {vacancies} |
+| delete | delete {num} |
+| reserve  | reserve {package_number} {contact_name} {contact_number} {number_pax} |
+| remove | remove {reservation_id} |
+| reservations | reservations {package_number} |
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+
+

@@ -1,20 +1,35 @@
 package seedu.duke.command;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import seedu.duke.Packages;
 import seedu.duke.TravelPackage;
 
+//creates a TravelPackage and adds to packages
 public class AddCommand extends Command {
-    private TravelPackage newPackage;
 
-    public AddCommand(String name, int date1, int date2, String hotel, double price, String country,
+    public static final String COMMAND_WORD = "add";
+
+    private final TravelPackage newPackage;
+
+    public AddCommand(String name, int id, LocalDate date1, LocalDate date2, String hotel, double price,
+            String country,
             int maxVacancies) {
-        this.newPackage = new TravelPackage(name, new Date(date1), new Date(date2), hotel, price, country,
+        this.newPackage = new TravelPackage(name, id, date1, date2, hotel, price, country,
                 maxVacancies);
     }
 
+    public TravelPackage getPackage() {
+        return this.newPackage;
+    }
+
     public void execute(Packages packages) {
-        packages.addPackage(newPackage);
+        // handle existing ID
+        if (packages.idExists(newPackage.getID())) {
+            System.out.println("Package with this ID already exists! Please try again.");
+        } else {
+            packages.addPackage(newPackage);
+            System.out.println("Package successfully added!");
+        }
     }
 }

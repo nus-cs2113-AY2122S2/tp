@@ -3,7 +3,7 @@ package seedu.duke.command;
 import seedu.duke.Packages;
 
 public class ErrorCommand extends Command {
-    private String input;
+    private final String input;
 
     public ErrorCommand(String input) {
         this.input = input;
@@ -12,6 +12,5 @@ public class ErrorCommand extends Command {
     public void execute(Packages packages) {
         System.out.println("Input not recognized: " + this.input);
         System.out.println("Use the help command to find out the valid commands.");
-
     }
 }

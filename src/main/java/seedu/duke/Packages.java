@@ -4,12 +4,14 @@ import java.util.ArrayList;
 //Packages include arrayList packages to hold all TravelPackages
 
 public class Packages {
-    private ArrayList<TravelPackage> packages;
-    private ArrayList<Reservation> reservations;
+    private final ArrayList<TravelPackage> packages;
 
     public Packages() {
-        packages = new ArrayList<>();
-        reservations = new ArrayList<>();
+        this.packages = new ArrayList<>();
+    }
+
+    public Packages(ArrayList<TravelPackage> t) {
+        this.packages = t;
     }
 
     public int getSize() {
@@ -20,6 +22,15 @@ public class Packages {
         return packages.get(index);
     }
 
+    public TravelPackage getPackageByID(int id) {
+        for (TravelPackage travelPackage : packages) {
+            if (travelPackage.getID() == id) {
+                return travelPackage;
+            }
+        }
+        return null;
+    }
+
     public void addPackage(TravelPackage newPackage) {
         packages.add(newPackage);
     }
@@ -28,21 +39,16 @@ public class Packages {
         packages.remove(index);
     }
 
-    public Reservation getReservation(int index) {
-        return reservations.get(index);
+    // check if packageID already exists. return true if already exists - unique IDs
+    // only!
+    public boolean idExists(int id) {
+        for (int i = 0; i < packages.size(); i++) {
+            if (packages.get(i).getID() == id) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    public int getReservationSize() {
-        return reservations.size();
-    }
-
-    public void addReservation(Reservation newReservation) {
-        reservations.add(newReservation);
-        System.out.println("RESERVATION ADDED");
-
-    }
-
-    public void removeReservation(int index) {
-        reservations.remove(index);
-    }
 }
