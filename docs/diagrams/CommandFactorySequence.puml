@@ -4,11 +4,11 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-participant Main LOGIC_COLOR_T1
+participant Main #grey
 Box " "#WHITE
     participant ":CommandFactory" as CommandFactory COMMAND_COLOR
-    participant ":Parser" as Parser LOGIC_COLOR_T2
-    participant ":XYZCommand" as XYZCommand COMMAND_COLOR_T2
+    participant ":Parser" as Parser LOGIC_COLOR
+    participant ":XYZCommand" as XYZCommand COMMAND_COLOR_T1
 end Box
 
 -> Main: userInput

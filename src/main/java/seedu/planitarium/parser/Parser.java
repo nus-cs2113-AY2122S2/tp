@@ -85,6 +85,7 @@ public class Parser {
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_NAME);
         String name = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_NAME).trim();
         logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, name));
+        ParserUtility.warnIfNotSpacedForwardSlash(name);
         return name;
     }
 
@@ -121,6 +122,7 @@ public class Parser {
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_DESCRIPTION);
         String description = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION).trim();
         logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, description));
+        ParserUtility.warnIfNotSpacedForwardSlash(description);
         return description;
     }
 
