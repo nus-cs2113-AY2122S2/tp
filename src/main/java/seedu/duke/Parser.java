@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
@@ -110,7 +111,7 @@ public class Parser {
             return new WrongFormatCommand(args);
         }
         try {
-            int id = Integer.parseInt(matcher.group("id"));
+            int id = new BigInteger(matcher.group("id")).intValueExact();
             return new DeleteCommand(id);
         } catch (Exception e) {
             return new WrongFormatCommand(e.getMessage());
