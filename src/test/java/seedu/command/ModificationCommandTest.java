@@ -55,6 +55,7 @@ class ModificationCommandTest {
         ));
         expectedCommand.prepareModification();
         ModificationCommand actualCommand = new ModificationCommand(testArrayList);
+        expectedCommand.prepareModification();
         actualCommand.prepareModification();
         assertEquals(expectedCommand, actualCommand);
     }
