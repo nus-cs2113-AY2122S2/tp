@@ -1966,6 +1966,15 @@ Testers are expected to do more testing.
 <br/>
 
 ### Launch and shutdown
+#### Initial Launch
+1. Download the JAR file of WerkIt! [here]() and copy it into an empty folder.
+2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
+`WerkIt.jar` file.
+3. On your terminal, type the command `java -jar WerkIt.jar` to launch WerkIt!
+4. WerkIt! will display a welcome message and file loading-related messages.
+
+#### Shutdown
+1. Enter the `exit` command to exit WerkIt!
 
 ### Test on Exercise Features
 #### Listing All Exercises
