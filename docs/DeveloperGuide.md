@@ -709,3 +709,21 @@ Given below are instructions to test the app manually.
 2. Deleting an expenditure
    1. Prerequisite: Similar to previous, but existing expenditure instead of income.
    2. Testing similar to previous, but with `deleteout` instead.
+
+### Editing incomes and expenditures
+
+1. Editing an income
+   1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the
+      person resides in to get his user index as well as the income index of interest.
+   2. Test case: `editin /g 1 /u 1 /r 1 /i 50`
+      Expected: In-place editing of the first income record of the first person in `Parents`. Upon `list /g 1`, first 
+      income under the first person will be edited to have an income value of $50.00.
+   3. Test case: `editin /g 1 /u 1 /r 1 /i 100 /d Stocks /p t`
+      Expected: Similar in-place editing of the income value, description, and recurrence.
+   4. Test case: `editin`
+      Expected: No income is edited. Error details shown in the error message.
+   5. Other incorrect editin commands to try: `editin /g 1 /u 1 /r 1`, `editin /g 1 /u 1 /r 1 /i notDouble`
+      Expected: Similar to previous.
+2. Editing an expenditure
+   1. Prerequisite: Similar to previous, but existing expenditure instead of income.
+   2. Testing similar to previous, but with `editin` instead and additional delimiter of `/c` can be added for category.
