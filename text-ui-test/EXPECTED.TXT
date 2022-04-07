@@ -1,52 +1,7 @@
 ____________________________________________________________
-Noted. I've added this doctor:
-* DOCTOR [1234] || Name: john || Contact No.: 12341234 || Email: 1234@gmail.com4
-Now you have 1 doctors recorded in the system.
+Hello! This is IHospital.
+What can I do for you?
 ____________________________________________________________
-
-____________________________________________________________
-Noted. I've added this patient:
-* PATIENT [4321] || Name: Tom || Contact No.: 93333333 || Email: 3233@qq.com || Symptom: symptom || Description: descriptions
-Now you have 1 patients recorded in the system.
-____________________________________________________________
-
-____________________________________________________________
-Noted. I've added this appointment:
-Doctor: john || Patient: Tom || Appointment time: 2007-12-03T10:15:30
-Now you have 1 appointments recorded in the system.
-____________________________________________________________
-
-Sorted already !
-
-The appointments found are hereDoctor: john || Patient: Tom || Appointment time: 2007-12-03T10:15:30
-
-____________________________________________________________
-Here are the doctors in this hospital:
-1. * DOCTOR [1234] || Name: john || Contact No.: 12341234 || Email: 1234@gmail.com
-You have 1 doctors recorded in the system.
-____________________________________________________________
-
-
-____________________________________________________________
-Here are the patients recorded:
-1. * PATIENT [4321] || Name: Tom || Contact No.: 93333333 || Email: 3233@qq.com || Symptom: symptom || Description: descriptions
-You have 1 patients recorded in the system.
-____________________________________________________________
-
-
-____________________________________________________________
-Here are the existing appointments:
-1. Doctor: john || Patient: Tom || Appointment time: 2007-12-03T10:15:30
-Now you have 1 appointments recorded in the system.
-____________________________________________________________
-
-____________________________________________________________
-Noted. I've removed this doctor:* DOCTOR [1234] || Name: john || Contact No.: 12341234 || Email: 1234@gmail.com
-Now you have 0 doctors in the system.
-____________________________________________________________
-
-There is no doctor id is 1
-
 ____________________________________________________________
 Bye. Hope to see you again soon!
 ____________________________________________________________

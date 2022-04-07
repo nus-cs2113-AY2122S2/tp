@@ -52,6 +52,17 @@ Example of usage:
 
 `add appointment /t 2007-12-03T10:15:30 /d 1 /p 1`
 
+
+### Adding a nurse: `add nurse`
+Adds a new nurse to the system.
+
+Format: `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE`
+
+Example of usage:
+
+`add nurse /id 1234 /n john /ph 12341234 /e 1234@gmail.com /t staff nurse`
+
+
 ### Sorting appointment list: 'sort'
 Sorts existing appointments in the system (but does not print out).
 
@@ -91,9 +102,11 @@ Example of usage:
 `search appointment 2007-12-03T10:15:30`
 
 ### Editing a person's information
-Editing an existing person's information
+Editing an existing person's information.
 
-Format: `edit /d or /p INDEX /ph or /e or /n`
+Format: `edit /d OR /p INDEX /ph OR /e OR /n`
+
+* Note that you can only edit one information at a time.
 
 Example of usage:
 
@@ -102,6 +115,13 @@ Example of usage:
 `edit /p 1 /n Mike`
 
 `edit /d 1 /e 123489@gmail.com`
+
+### Editing an appointment
+Editing the details of an appointment.
+
+Format: `edit /a APPOINTMENT_INDEX /doctor DOCTOR_INDEX` OR `edit /a APPOINTMENT_INDEX /patient PATIENT_INDEX` OR `edit /a APPOINTMENT_INDEX /time DATETIME`
+
+* Note that you can only edit one information at a time.
 
 ### Deleting a person or an appointment: `delete`
 Removes a person or an appointment from the system.
@@ -131,7 +151,7 @@ Example of usage:
 * View Help `help`
 * Add Doctor `add doctor /id ID /n NAME /ph PHONE /e EMAIL`
 * Add Patient `add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS`
-* Add Appointment `add appointment /t 2022-03-19T15:16:00 /d DOCTOR_ID /p PATIENT_ID`
+* Add Appointment `add appointment /t 2022-03-19T15:16:00 /d DOCTOR_NO /p PATIENT_NO`
 * Delete Doctor `delete doctor DOCTOR_ID`
 * Delete Patient `delete patient PATIENT_ID`
 * Delete Appointment `delete appointment APPOINTMENT_NO.`
@@ -142,3 +162,6 @@ Example of usage:
 * Search Doctor `search doctor DOCTOR_NO`
 * Search Patient `search patient PATIENT_NO`
 * Search Appointment `search appointment DATETIME`
+* Edit Doctor Info `edit /d DOCTOR_NO /ph PHONE` OR `edit /d DOCTOR_NO /n NAME` OR `edit /d DOCTOR_NO /e EMAIL`
+* Edit Patient Info `edit /p PATIENT_NO /ph PHONE` OR `edit /p PATIENT_NO /n NAME` OR `edit /p PATIENT_NO /e EMAIL`
+* Edit Appointment `edit /a APPOINTMENT_NO /doctor DOCTOR_NO` OR `edit /a APPOINTMENT_NO /patient PATIENT_NO` OR `edit /a APPOINTMENT_NO /time TIME`
