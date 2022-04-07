@@ -52,4 +52,5 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
    * Set up a documentation for the sorting of bugs and allocation of duties
 
 #### Project Management
-
+* Worked on pre-planning and ideation of project
+  * Drafted sketches of class diagrams and visualisation of goals
