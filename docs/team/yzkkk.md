@@ -41,4 +41,5 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
 ### Community
 - Pull Requests Reviewed:
   [#110](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/110),
-  [#176](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/176)
+  [#176](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/176),
+  [#180](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/180)
