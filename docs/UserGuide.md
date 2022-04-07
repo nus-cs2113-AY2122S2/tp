@@ -3,17 +3,17 @@
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Summary of Main Features](#features)
-    * [Create a new flight route: `addRoute`](#create-a-new-flight-route---addroute-)
-    * [Find availability on existing flight route: `findRoute`](#find-availability-on-existing-flight-route---findroute-)
-    * [List all flight routes: `listRoute`](#list-all-flight-routes---listroute-)
-    * [Delete a flight route: `deleteRoute`](#delete-a-flight-route---deleteroute-)
-    * [Add a customer: `addCustomer`](#add-a-customer---addcustomer-)
-    * [Delete a customer: `deleteCustomer`](#delete-a-customer---deletecustomer-)
-    * [List all customers: `listCustomer`](#list-all-customers---listcustomer-)
-    * [Find a customer by IC: `findCustomer`](#find-a-customer-by-ic---findcustomer-)
-    * [Create new flight booking: `book`](#create-new-flight-booking---book-)
-    * [Remove flight booking: `deleteBooking`](#remove-flight-booking---deletebooking-)
-    * [View all existing flight booking: `listBooking`](#view-all-existing-flight-booking---listbooking-)
+    * [Create a new flight route: `addRoute`](#create-a-new-flight-route-addroute)
+    * [Find availability on existing flight route: `findRoute`](#find-availability-on-existing-flight-route-findroute)
+    * [List all flight routes: `listRoute`](#list-all-flight-routes-listroute)
+    * [Delete a flight route: `deleteRoute`](#delete-a-flight-route-deleteroute)
+    * [Add a customer: `addCustomer`](#add-a-customer-addcustomer)
+    * [Delete a customer: `deleteCustomer`](#delete-a-customer-deletecustomer)
+    * [List all customers: `listCustomer`](#list-all-customers-listcustomer)
+    * [Find a customer by IC: `findCustomer`](#find-a-customer-by-ic-findcustomer)
+    * [Create new flight booking: `book`](#create-new-flight-booking-book)
+    * [Remove flight booking: `deleteBooking`](#remove-flight-booking-deletebooking)
+    * [View all existing flight booking: `listBooking`](#view-all-existing-flight-booking-listbooking)
     * [Menu Item Functionalities](#MENU-ITEM-FUNCTIONALITIES)
     * [Meal Reservation Functionalities](#IN-FLIGHT-MEAL-RESERVATIONS)
     * [Exit the system](#Exit-the-System)
@@ -57,7 +57,7 @@ and cancel flight routes and bookings, create in-flight meal reservations and ad
   e.g. in `addMenuItem name/MENU_ITEM_NAME`, `MENU_ITEM_NAME` is a parameter which can be used as `add name/chocolate cake`.
 
 * Items in square brackets are optional.<br>
-  e.g `findRoute fd/FLIGHT_DATE d/DESTINATION s/SOURCE [ ft/FLIGHT_TIME ]` can be used as `findRoute fd/07112029 d/India s/singapore` or as `findRoute fd/02172022 d/singapore s/china ft/15:30`.
+  e.g. `findRoute fd/FLIGHT_DATE d/DESTINATION s/SOURCE [ ft/FLIGHT_TIME ]` can be used as `findRoute fd/07112029 d/India s/singapore` or as `findRoute fd/02172022 d/singapore s/china ft/15:30`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `addMenuItem name/MENU_ITEM_NAME type/MENU_ITEM_TYPE`, `type/MENU_ITEM_TYPE addMenuItem name/MENU_ITEM_NAME` is also acceptable.
@@ -365,26 +365,26 @@ Example of usage: <br>
 
 ## Command Summary
 
-Action | Format| Examples
---------|----------------------------------------------|-------------------------------------------------------
-**Create flight route**| `addRoute  fid/FLIGHT_ID fd/FLIGHT_DATE ft/FLIGHT_TIME d/DESTINATION s/SOURCE c/CAPACITY` | `addRoute fid/Bu3037 fd/02172022 ft/11:10 d/singapore s/china c/100`
-**Find flight route**| `findRoute fd/FLIGHT_DATE d/DESTINATION s/SOURCE [ft/FLIGHT_TIME]` | `findRoute fd/02172022 d/singapore s/china ft/15:30`
-**List all flight routes**| `listRoute` | `listRoute`
-**Delete flight route**| `deleteRoute INDEX` | `deleteRoute 3`
-**Add customer**| `addCustomer` | `addCustomer ic/IC n/NAME p/PHONE_NUMBER e/EMAIL` | `addCustomer ic/W9248013B n/Eddie p/38201843 e/eddie1238@123.com`
-**Delete a customer**| `deleteCustomer INDEX` | `deleteCustomer 2`
-**List all customers**| `listCustomer` | `listCustomer`
-**Find customer by IC**| `findCustomer IC` | `findCustomer A9470034C`
-**Create flight booking**| `book ic/IC fid/FLIGHT_ID` | `book ic/W9848113C fid/SQ123`
-**Remove flight booking**| `deleteBooking INDEX` | `deleteBooking 2`
-**List all flight bookings**| `listBooking` | `listBooking`
-**Add Menu Item**| `addMenuItem name/MENU_ITEM_NAME type/MENUITEMTYPE price/MENUITEMPRICE`| `addMenuItem name/fanta_grape type/drinks price/0.9`
-**Delete menu item**| `deleteMenuItem INDEX` | `deleteMenuItem 4`
-**List all menu items**| `listMenuItems`| `listMenuItems`
-**Find menu items by name**| `findMenuItemName MENU ITEM NAME` | `findMenuItemName chocolate cake`
-**Find menu items by type**| `findMenuItemType MENUITEMTYPE` | `findMenuItemType drinks`
-**Add Meal Reservation**| `reserveMeal ic/CUSTOMERID fid/FLIGHTID MENUITEMTYPE/MENU_ITEM_NAME [MENUITEMTYPE/MENU_ITEM_NAME]` | `reserveMeal fid/MU8401 ic/W6235354B drinks/coke`
-**Remove Meal Reservation**| `deleteMealReservation ic/CUSTOMERID fid/FLIGHTID` | `deleteMealReservation fid/MU8401 ic/W6235354B`
-**Find Meal Reservation**| `findMealReservation ic/CUSTOMERID fid/FLIGHTID` |  `findMealReservation fid/MU8401 ic/W6235354B`
-**List all Meal Reservation**| `listMealReservations` | `listMealReservations`
-**Exit the system**| `bye` | `bye` 
+| Action                        | Format                                                                                             | Examples                                                             |
+|-------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| **Create flight route**       | `addRoute  fid/FLIGHT_ID fd/FLIGHT_DATE ft/FLIGHT_TIME d/DESTINATION s/SOURCE c/CAPACITY`          | `addRoute fid/Bu3037 fd/02172022 ft/11:10 d/singapore s/china c/100` |
+| **Find flight route**         | `findRoute fd/FLIGHT_DATE d/DESTINATION s/SOURCE [ft/FLIGHT_TIME]`                                 | `findRoute fd/02172022 d/singapore s/china ft/15:30`                 |
+| **List all flight routes**    | `listRoute`                                                                                        | `listRoute`                                                          |
+| **Delete flight route**       | `deleteRoute INDEX`                                                                                | `deleteRoute 3`                                                      |
+| **Add customer**              | `addCustomer`                                                                                      | `addCustomer ic/IC n/NAME p/PHONE_NUMBER e/EMAIL`                    | `addCustomer ic/W9248013B n/Eddie p/38201843 e/eddie1238@123.com`
+| **Delete a customer**         | `deleteCustomer INDEX`                                                                             | `deleteCustomer 2`                                                   |
+| **List all customers**        | `listCustomer`                                                                                     | `listCustomer`                                                       |
+| **Find customer by IC**       | `findCustomer IC`                                                                                  | `findCustomer A9470034C`                                             |
+| **Create flight booking**     | `book ic/IC fid/FLIGHT_ID`                                                                         | `book ic/W9848113C fid/SQ123`                                        |
+| **Remove flight booking**     | `deleteBooking INDEX`                                                                              | `deleteBooking 2`                                                    |
+| **List all flight bookings**  | `listBooking`                                                                                      | `listBooking`                                                        |
+| **Add Menu Item**             | `addMenuItem name/MENU_ITEM_NAME type/MENUITEMTYPE price/MENUITEMPRICE`                            | `addMenuItem name/fanta_grape type/drinks price/0.9`                 |
+| **Delete menu item**          | `deleteMenuItem INDEX`                                                                             | `deleteMenuItem 4`                                                   |
+| **List all menu items**       | `listMenuItems`                                                                                    | `listMenuItems`                                                      |
+| **Find menu items by name**   | `findMenuItemName MENU ITEM NAME`                                                                  | `findMenuItemName chocolate cake`                                    |
+| **Find menu items by type**   | `findMenuItemType MENUITEMTYPE`                                                                    | `findMenuItemType drinks`                                            |
+| **Add Meal Reservation**      | `reserveMeal ic/CUSTOMERID fid/FLIGHTID MENUITEMTYPE/MENU_ITEM_NAME [MENUITEMTYPE/MENU_ITEM_NAME]` | `reserveMeal fid/MU8401 ic/W6235354B drinks/coke`                    |
+| **Remove Meal Reservation**   | `deleteMealReservation ic/CUSTOMERID fid/FLIGHTID`                                                 | `deleteMealReservation fid/MU8401 ic/W6235354B`                      |
+| **Find Meal Reservation**     | `findMealReservation ic/CUSTOMERID fid/FLIGHTID`                                                   | `findMealReservation fid/MU8401 ic/W6235354B`                        |
+| **List all Meal Reservation** | `listMealReservations`                                                                             | `listMealReservations`                                               |
+| **Exit the system**           | `bye`                                                                                              | `bye`                                                                |
