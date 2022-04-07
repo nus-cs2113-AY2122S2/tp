@@ -46,6 +46,10 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
  * Added section under `Implementations` for `Parsing of Commands` and `Settle a session`
 
 ### Miscellaneous Contributions
+ * Spearheaded replacement of `XYZCommand#prepare` method with a `XYZCommandParser` class
+   * Encouraged following of separation of concerns principle to improve code quality
+ * Headed the fixing of bugs found by other teams during the PE dry run
+   * Set up a documentation for the sorting of bugs and allocation of duties
 
 #### Project Management
 
