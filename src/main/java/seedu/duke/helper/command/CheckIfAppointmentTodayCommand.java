@@ -7,7 +7,7 @@ import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.status.Status;
 
-public class CheckIfAppointmentTodayCommand extends Command{
+public class CheckIfAppointmentTodayCommand extends Command {
 
     public CheckIfAppointmentTodayCommand(String[] parameterArray) {
         super(parameterArray);

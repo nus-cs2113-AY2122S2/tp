@@ -368,7 +368,7 @@ public class Validator {
 
         for (int i = 1; i < dispenseMedicineParameters.length; i += 2) {
             String medicineName = dispenseMedicineParameters[i];
-            String medicineQuantity = dispenseMedicineParameters[i+1];
+            String medicineQuantity = dispenseMedicineParameters[i + 1];
             validateMedicineName(medicineName);
             validateQuantity(medicineQuantity);
         }

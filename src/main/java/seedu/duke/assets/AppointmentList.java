@@ -233,11 +233,11 @@ public class AppointmentList extends List {
         }
     }
 
-    public void dispenseMedicine(String patientNRIC, String[] medicines) {
+    public void dispenseMedicine(String patientNric, String[] medicines) {
         for (Appointment a : appointments) {
             LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
-            if(appointmentDate.equals(LocalDate.now()) && a.patientNric.equals(patientNRIC)) {
-                for (int i = 0; i < medicines.length; i+=2) {
+            if (appointmentDate.equals(LocalDate.now()) && a.patientNric.equals(patientNric)) {
+                for (int i = 0; i < medicines.length; i += 2) {
                     a.addMedicine(medicines[i], medicines[i + 1]);
                 }
                 break;
@@ -248,8 +248,8 @@ public class AppointmentList extends List {
     public void loadMedicine(String[] parameters) {
         String appointmentId = parameters[0];
         for (Appointment a : appointments) {
-            if( a.appointmentId.equals(appointmentId)) {
-                for (int i = 1; i < parameters.length; i+=2) {
+            if (a.appointmentId.equals(appointmentId)) {
+                for (int i = 1; i < parameters.length; i += 2) {
                     a.addMedicine(parameters[i], parameters[i + 1]);
                 }
                 break;

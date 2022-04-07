@@ -23,7 +23,7 @@ public class Appointment {
         this.appointmentDetails = appointmentDetails;
     }
 
-    public void addMedicine (String medicineName, String quantity) {
+    public void addMedicine(String medicineName, String quantity) {
         dispensedMedicines.add(medicineName + "," + quantity);
     }
 

@@ -10,7 +10,7 @@ import seedu.duke.status.Status;
 
 import java.util.Arrays;
 
-public class CheckForMedicineStockCommand extends Command{
+public class CheckForMedicineStockCommand extends Command {
 
     public CheckForMedicineStockCommand(String[] parameterArray) {
         super(parameterArray);

@@ -10,7 +10,6 @@ import seedu.duke.helper.finder.MedicineFinder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class MedicineList extends List {
 
@@ -176,7 +175,7 @@ public class MedicineList extends List {
 
         for (int i = 0; i < medicines.length; i += 2) {
             String medicineName = medicines[i];
-            int quantity = Integer.parseInt(medicines[i+1]);
+            int quantity = Integer.parseInt(medicines[i + 1]);
             for (Medicine a : this.medicines) {
                 if (a.getMedicineName().equals(medicineName)) {
                     quantity -= a.getQuantity();
@@ -186,14 +185,15 @@ public class MedicineList extends List {
                 }
             }
             if (quantity > 0) {
-                medicineTable.addRow(medicineName,medicines[i+1]);
+                medicineTable.addRow(medicineName,medicines[i + 1]);
                 hasShortage = true;
             }
         }
 
         if (hasShortage) {
             medicineTable.print();
-            throw new HalpmiException("The medicines mentioned on the table above do not have enough stock to dispense!");
+            throw new HalpmiException("The medicines mentioned on the table"
+                    + "above do not have enough stock to dispense!");
         }
     }
 
@@ -281,7 +281,7 @@ public class MedicineList extends List {
         CommandLineTable medicineTable = new CommandLineTable();
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Expiry", "Quantity");
-        medicines.sort(new expiryComparator());
+        medicines.sort(new ExpiryComparator());
         for (int i = 0; i < medicineArray.length; i += 2) {
             String medicineName = medicineArray[i];
             int quantity = Integer.parseInt(medicineArray[i + 1]);
@@ -302,14 +302,4 @@ public class MedicineList extends List {
         }
     }
 }
-
-class expiryComparator implements Comparator<Medicine> {
-
-    // override the compare() method
-    public int compare(Medicine m1, Medicine m2)
-    {
-        return m1.getExpiry().compareTo(m2.getExpiry());
-    }
-}
-
 
