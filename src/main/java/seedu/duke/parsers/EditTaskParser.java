@@ -83,7 +83,6 @@ public class EditTaskParser extends EditParser {
     public void determineError() throws ModHappyException {
         String taskNumber;
         String taskParameter;
-        String moduleCode;
         try {
             taskNumber = userInput.split(SPACE)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -100,8 +99,8 @@ public class EditTaskParser extends EditParser {
         if (!taskParameter.matches(QUOTED_UNRESTRICTED_STR)) {
             throw new InvalidCompulsoryParameterException(TASK_PARAMETER_STR, taskParameter);
         }
-
-        assert(userInput.contains(TASK_MODULE_FLAG));
+        String moduleCode;
+        assert (userInput.contains(TASK_MODULE_FLAG));
         moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }

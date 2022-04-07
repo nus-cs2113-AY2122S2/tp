@@ -99,7 +99,7 @@ public class TagParser extends Parser {
     }
 
     private void assertErrorInModuleCode() throws ModHappyException {
-        assert(userInput.contains(TASK_MODULE_FLAG));
+        assert (userInput.contains(TASK_MODULE_FLAG));
         String moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
