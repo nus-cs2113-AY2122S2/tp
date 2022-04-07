@@ -21,4 +21,10 @@ public class Email extends Field {
         return !currVal.isBlank();
     }
 
+    public boolean isValidFormat() {
+        String currVal = this.field;
+        String emailFormatLenient = "(.+?)(@.+?)(\\.)(.+)";
+        return currVal.matches(emailFormatLenient);
+    }
+
 }

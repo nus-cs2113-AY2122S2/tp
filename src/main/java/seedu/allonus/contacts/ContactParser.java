@@ -7,16 +7,21 @@ import seedu.allonus.contacts.entry.Faculty;
 import seedu.allonus.contacts.entry.Name;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static seedu.allonus.contacts.ContactsManager.checkUniqueName;
 
 /**
  * A class of methods related to the parsing of user input into a Contact object.
  */
 public class ContactParser {
 
+    private static final String CONTACTS_PARSER_DUPLICATE_DELIMITERS_MESSAGE =
+            "You provided the same delimiter(s) more than once!";
     private static final String CONTACTS_PARSER_INVALID_FIELD_MESSAGE =
             "Invalid contact field(s)!";
     private static final String CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE =
@@ -25,6 +30,8 @@ public class ContactParser {
             "Adding a contact with all empty fields!";
     private static final String CONTACTS_PARSER_ADD_INVALID_FIELDS_MESSAGE =
             "Adding a contact with missing field(s)!";
+    private static final String CONTACTS_PARSER_INVALID_EMAIL_MESSAGE =
+            "*** Note: the email you entered might not be in the correct format! ***";
 
     private static final String CONTACTS_DELIMITERS = "[nfetd]/";
     public static final char NAME_DELIMITER = 'n';
@@ -32,8 +39,8 @@ public class ContactParser {
     public static final char EMAIL_DELIMITER = 'e';
     public static final char DESCRIPTION_DELIMITER = 'd';
 
-    private static Logger logger = Logger.getLogger("");
-    private static final int MAX_NUMBER_OF_FIELDS = 5;
+    private static final Logger logger = Logger.getLogger("");
+    private static final int MAX_NUMBER_OF_FIELDS = 4;
     private static final int LENGTH_FIELD_AFTER_SPLIT = 2;
 
     /**
@@ -53,15 +60,22 @@ public class ContactParser {
      * @param userInput String of original user input.
      * @return An ArrayList of String objects that are the individual contact fields.
      */
-    static ArrayList<String> getFieldStrings(String userInput) {
-        String regex = CONTACTS_DELIMITERS + ".*?(?=(" + CONTACTS_DELIMITERS + "|$))";
+    static ArrayList<String> getFieldStrings(String userInput) throws InvalidContactField {
+        String regex = " " + CONTACTS_DELIMITERS + ".*?(?=( " + CONTACTS_DELIMITERS + "|$))";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userInput);
         ArrayList<String> fieldStrings = new ArrayList<>(MAX_NUMBER_OF_FIELDS);
+        HashSet<Character> delimiters = new HashSet<>(MAX_NUMBER_OF_FIELDS);
 
         while (matcher.find()) {
             String currString = matcher.group().trim();
+            Character currDelimiter = currString.charAt(0);
+            if (delimiters.contains(currDelimiter)) {
+                throw new InvalidContactField(CONTACTS_PARSER_DUPLICATE_DELIMITERS_MESSAGE);
+            }
             fieldStrings.add(currString);
+            delimiters.add(currDelimiter);
+            assert fieldStrings.size() == delimiters.size();
         }
         return fieldStrings;
     }
@@ -90,6 +104,8 @@ public class ContactParser {
             switch (fieldType) {
             case NAME_DELIMITER:
                 Name name = contact.getName();
+                String prevName = name.toString();
+                checkUniqueName(fieldContent, prevName);
                 name.setField(fieldContent);
                 break;
             case FACULTY_DELIMITER:
@@ -99,6 +115,10 @@ public class ContactParser {
             case EMAIL_DELIMITER:
                 Email email = contact.getEmail();
                 email.setField(fieldContent);
+                boolean isValidEmailFormat = email.isValidFormat();
+                if (!isValidEmailFormat) {
+                    System.out.println(CONTACTS_PARSER_INVALID_EMAIL_MESSAGE);
+                }
                 break;
             case DESCRIPTION_DELIMITER:
                 Description description = contact.getDescription();

@@ -21,13 +21,13 @@ import static seedu.allonus.contacts.ContactParser.setContactFields;
 
 class ContactParserTest {
 
-    private static final String aliceString = "n/Alice f/FOS e/e1@u.nus.edu d/AB";
-    private static final String bobString = "n/Bob f/FASS e/e2@u.nus.edu d/BC";
-    private static final String charlieString = "f/SDE d/CD n/Charlie e/e3@u.nus.edu";
-    private static final String davidString = "e/e4@u.nus.edu f/SoC d/DE n/David";
+    private static final String aliceString = "add n/Alice f/FOS e/e1@u.nus.edu d/AB";
+    private static final String bobString = "add n/Bob f/FASS e/e2@u.nus.edu d/BC";
+    private static final String charlieString = "add f/SDE d/CD n/Charlie e/e3@u.nus.edu";
+    private static final String davidString = "add e/e4@u.nus.edu f/SoC d/DE n/David";
 
-    private static final String invalidNameString = "n/ f/valid e/valid d/valid";
-    private static final String invalidFacultyString = "n/valid e/valid d/valid f/";
+    private static final String invalidNameString = "add n/ f/valid e/valid@email.com d/valid";
+    private static final String invalidFacultyString = "add n/valid e/valid@email.com d/valid f/";
 
     Contact charlie = new Contact(new Name("Charlie"),
             new Faculty("SDE"),
@@ -45,8 +45,15 @@ class ContactParserTest {
 
     @Test
     void getFieldStringsWorks() {
-        ArrayList<String> parsedFieldsOfAlice = getFieldStrings(aliceString);
-        ArrayList<String> parsedFieldsOfBob = getFieldStrings(bobString);
+        ArrayList<String> parsedFieldsOfAlice = null;
+        ArrayList<String> parsedFieldsOfBob = null;
+        try {
+            parsedFieldsOfAlice = getFieldStrings(aliceString);
+            parsedFieldsOfBob = getFieldStrings(bobString);
+        } catch (InvalidContactField e) {
+            // This outcome shouldn't be possible for these inputs
+            assertTrue(false);
+        }
 
         for (String field : parsedFieldsOfAlice) {
             assertTrue(aliceFields.contains(field));
