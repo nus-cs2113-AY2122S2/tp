@@ -402,9 +402,13 @@ Staff with the `ID` being inputted should exist. `Name` and `Position` of the st
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I transfer my data to another computer?
+- **A**: You may simply copy the `data` folder to the other computer.
 
-**A**: {your answer here}
+**Q**: Hmm, the data does not seem to be saved correctly!
+- **A**: Note that this application is *transaction-based*. This means that any changes to the data
+will not be saved unless the application is exited gracefully. Any other means of abruptly exiting the programme (such as Ctrl+C)
+will not save the data (because they are not taken to be typical exit commands, but rather interrupts).
 
 ## Command Summary
 
