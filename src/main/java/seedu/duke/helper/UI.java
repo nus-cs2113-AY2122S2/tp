@@ -59,6 +59,10 @@ public class UI {
         printViewPatientMessage();
         printViewMedicineMessage();
         printViewAppointmentMessage();
+        printDeleteDoctorMessage();
+        printDeletePatientMessage();
+        printDeleteMedicineMessage();
+        printDeleteAppointmentMessage();
         printNewLineSeparator();
     }
 
