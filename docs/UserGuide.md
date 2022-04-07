@@ -470,10 +470,6 @@ To create a new plan, enter the following command:
 ```
 > plan /new Grow My Muscles /workouts 1, 2, 3, 1
 ```
-or
-```
-> plan /new Grow My Muscles /workouts 1, 2, 3, 1,
-```
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
@@ -484,6 +480,10 @@ Alright, the following plan has been created:
 ----------------------------------------------------------------------
 ```
 A new plan containing the workouts you had specified earlier will be created and added to the application's list of plans.
+
+<span class="box info">:memo: **Note**: If user accidentally add a comma after the last workout number such as 
+`plan /new Grow My Muscles /workouts 1, 2, 3, 1,`, the program will process it normally. This is by design and 
+not an abnormal behaviour.</span>
 
 ---
 ### List a Plan: `plan /list`
