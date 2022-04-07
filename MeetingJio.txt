@@ -1,4 +1,5 @@
-peter
-1.[L] TITLE: cs2113		DAY: wednesday		START: 1200		END: 1300		MODE: online
-2.[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
-3.[L] TITLE: cs2113		DAY: saturday		START: 1200		END: 1300		MODE: online
+j
+1.[L] TITLE: l1		DAY: monday		START: 1200		END: 1300		MODE: online
+2.[M] TITLE: m2		DAY: monday		START: 1400		END: 1500		MODE: online
+3.[M] TITLE: m1		DAY: friday		START: 0000		END: 0800		MODE: online
+4.[M] TITLE: c s		DAY: friday		START: 1200		END: 1300		MODE: online

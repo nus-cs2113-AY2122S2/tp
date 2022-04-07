@@ -11,6 +11,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_USER_TO_ADD_MEETING
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
+
 import static seedu.meetingjio.parser.Parser.logger;
 
 public class AddMeetingCommand extends Command {

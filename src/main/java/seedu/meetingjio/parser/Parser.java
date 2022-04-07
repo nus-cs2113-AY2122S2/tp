@@ -12,13 +12,14 @@ import seedu.meetingjio.commands.FreeCommand;
 import seedu.meetingjio.commands.CommandResult;
 import seedu.meetingjio.commands.HelpCommand;
 
+import seedu.meetingjio.exceptions.InvalidNameException;
 import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.InvalidModeException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.MissingParameterException;
+import seedu.meetingjio.exceptions.ExtraParametersException;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,16 +30,15 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_EDIT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS_ADD_MEETING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_NAME_CANNOT_BE_ALL;
-
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_NAME;
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 
@@ -48,12 +48,13 @@ public class Parser {
     private final String arguments;
     public static Logger logger = Logger.getLogger(Parser.class.getName());
 
-    private static final int NAME_INDEX = 0;
-    private static final int TITLE_INDEX = 1;
-    private static final int DAY_INDEX = 2;
-    private static final int START_TIME_INDEX = 3;
-    private static final int END_TIME_INDEX = 4;
-    private static final int MODE_INDEX = 5;
+    protected static final int NAME_INDEX = 0;
+    protected static final int TITLE_INDEX = 1;
+    protected static final int DAY_INDEX = 2;
+    protected static final int START_TIME_INDEX = 3;
+    protected static final int END_TIME_INDEX = 4;
+    protected static final int MODE_INDEX = 5;
+    protected static final int INDEX_INDEX = 1;
 
     protected static final String[] HEADINGS_ALL = {"n", "t", "d", "st", "et", "m"};
     protected static final String[] HEADINGS_WITHOUT_NAME = {"t", "d", "st", "et", "m"};
@@ -98,8 +99,11 @@ public class Parser {
     private Command prepareAddUser() {
         if (arguments.isEmpty()) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_USER);
-        } else if (arguments.equalsIgnoreCase("all")) {
-            return new CommandResult(ERROR_NAME_CANNOT_BE_ALL);
+        }
+        try {
+            ParserHelperMethods.checkName(arguments);
+        } catch (InvalidNameException ine) {
+            return new CommandResult(ERROR_INVALID_NAME);
         }
         return new AddUserCommand(arguments);
     }
@@ -122,8 +126,10 @@ public class Parser {
             String title = eventDescription[TITLE_INDEX];
             return new AddLessonCommand(name, title, day, startTime, endTime, mode);
 
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
+        } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_EVENT);
+        } catch (ArrayIndexOutOfBoundsException | ExtraParametersException epe) {
+            return new CommandResult(ERROR_EXTRA_PARAMETERS);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_EVENT);
         } catch (InvalidTimeException | NumberFormatException ite) {
@@ -142,17 +148,17 @@ public class Parser {
         try {
             Map<String, String> newValues = ParserArguments.getAttributesMap(arguments);
 
-            String name = newValues.get("n");
-            String indexStr = newValues.get("i");
-            newValues.remove("n");
-            newValues.remove("i");
+            String name = newValues.get(HEADINGS_NAME_INDEX[NAME_INDEX]);
+            String indexStr = newValues.get(HEADINGS_NAME_INDEX[INDEX_INDEX]);
+            newValues.remove(HEADINGS_NAME_INDEX[NAME_INDEX]);
+            newValues.remove(HEADINGS_NAME_INDEX[INDEX_INDEX]);
             int index = Integer.parseInt(indexStr);
 
             return new EditCommand(name, index, newValues);
         } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
         } catch (NumberFormatException nfe) {
-            return new CommandResult(ERROR_INDEX_OUT_OF_BOUND);
+            return new CommandResult(ERROR_INVALID_INDEX);
         } catch (AssertionError ae) {
             logger.log(Level.INFO, "Assertion Error");
             return new CommandResult(ae.getMessage());
@@ -167,15 +173,17 @@ public class Parser {
             String[] eventDescription = ParserArguments.splitArgumentsNameIndex(arguments);
             ParserHelperMethods.checkNonNullValues(eventDescription);
 
-            String name = eventDescription[0];
-            int index = Integer.parseInt(eventDescription[1]);
+            String name = eventDescription[NAME_INDEX];
+            int index = Integer.parseInt(eventDescription[INDEX_INDEX]);
             return new DeleteCommand(name, index);
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
+        } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_DELETE);
+        } catch (ArrayIndexOutOfBoundsException | ExtraParametersException epe) {
+            return new CommandResult(ERROR_EXTRA_PARAMETERS);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_DELETE);
         } catch (NumberFormatException nfe) {
-            return new CommandResult(ERROR_INDEX_OUT_OF_BOUND);
+            return new CommandResult(ERROR_INVALID_INDEX);
         } catch (AssertionError ae) {
             logger.log(Level.INFO, "Assertion Error");
             return new CommandResult(ae.getMessage());
@@ -202,8 +210,8 @@ public class Parser {
 
         } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_MEETING);
-        } catch (ArrayIndexOutOfBoundsException aioube) {
-            return new CommandResult(ERROR_EXTRA_PARAMETERS_ADD_MEETING);
+        } catch (ArrayIndexOutOfBoundsException | ExtraParametersException epe) {
+            return new CommandResult(ERROR_EXTRA_PARAMETERS);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_MEETING);
         } catch (InvalidTimeException | NumberFormatException ite) {

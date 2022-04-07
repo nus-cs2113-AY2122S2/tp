@@ -3,13 +3,15 @@ package seedu.meetingjio.timetables;
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.events.Lesson;
 import seedu.meetingjio.events.Meeting;
+import seedu.meetingjio.commands.ListCommand;
+
+import java.util.ArrayList;
+
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.exceptions.DuplicateTimetableException;
-import seedu.meetingjio.commands.ListCommand;
-
-import java.util.ArrayList;
+import seedu.meetingjio.parser.Parser;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
@@ -54,10 +56,11 @@ public class MasterTimetable {
      * @param name Name
      */
     public void removeByName(String name) {
-        for (int i = 0; i < timetables.size(); i++) {
-            if (name.equalsIgnoreCase(timetables.get(i).getName())) {
-                timetables.remove(i);
-            }
+        try {
+            Timetable timetable = getByName(name);
+            timetables.remove(timetable);
+        } catch (TimetableNotFoundException tnfe) {
+            return;
         }
     }
 
@@ -105,7 +108,6 @@ public class MasterTimetable {
             throws TimetableNotFoundException, DuplicateEventException, OverlappingEventException {
         Timetable timetable = getByName(name);
         timetable.add(lesson);
-        timetable.sort();
     }
 
     /**
@@ -203,7 +205,6 @@ public class MasterTimetable {
             try {
                 timetable.add(meeting);
                 meetingList.add(meeting);
-                timetable.sort();
             } catch (DuplicateEventException dee) {
                 return ERROR_DUPLICATE_EVENT;
             } catch (OverlappingEventException oee) {
