@@ -5,6 +5,7 @@ import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
+import java.lang.Math;
 
 import java.util.Optional;
 
@@ -52,11 +53,13 @@ public class EditCommand extends Command {
         if (this.quantity.isPresent() && this.relativeAdd.isPresent()) {
             int currentQuantity = placeholderItem.getQuantity();
             int multiplier = this.relativeAdd.get() ? 1 : -1;
-            int newQuantity = currentQuantity + multiplier * this.quantity.get();
             try {
+                int newQuantity = Math.addExact(currentQuantity, multiplier * this.quantity.get());
                 placeholderItem.setQuantity(newQuantity);
             } catch (IllegalArgumentException e) {
                 throw new InvMgrException(Messages.NEGATIVE_QUANTITY_MESSAGE, e);
+            } catch (ArithmeticException e) {
+                throw new InvMgrException(Messages.OVERFLOW_QUANTITY_MESSAGE, e);
             }
         } else if (this.quantity.isPresent() && !this.relativeAdd.isPresent()) {
             placeholderItem.setQuantity(quantity.get());
