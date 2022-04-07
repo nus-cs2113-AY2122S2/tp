@@ -8,6 +8,37 @@ optimized for use via a Command Line Interface (CLI).
 If you can type fast, AlloNUS can get your schedule, expenses,
 and contact management tasks done faster than traditional GUI apps.
 
+##Table of Contents
+* [Quick Start](#quick-start)
+* [Features](#features)
+* [Main Menu Features](#main-menu-features)
+  * [Navigating from menu to section of interest](#navigating-from-menu-to-section-of-interest-goto)
+  * [Going back to menu](#going-back-to-menu-menu)
+  * [Main Menu help](#getting-guidance-on-the-usage-of-the-application-help)
+  * [Exiting the app](#exiting-the-application-exit)
+* [Expense Tracker Features](#expense-tracker-features)
+  * [List out expenses](#list-out-all-expenses-list)
+  * [Adding an expense](#adding-an-expense-add)
+  * [Delete an expense](#delete-an-expense-rm)
+  * [Edit an expense](#editing-an-expense-edit)
+  * [Look for an expense](#look-for-an-expense-find)
+* [Study Manager Features](#study-manager-features)
+  * [Adding a module](#adding-a-module-add)
+  * [List out modules](#listing-modules-list)
+  * [Deleting a module](#deleting-a-module-rm)
+  * [Editing a module](#editing-a-module-edit)
+  * [Finding a module](#finding-a-module-find)
+  * [Reading from .ics file](#reading-from-ics-file-read-ics)
+* [Contacts Tracker Features](#contacts-tracker-features)
+  * [Adding a contact](#adding-a-contact-add)
+  * [List out contacts](#list-all-contacts-list)
+  * [Deleting a contact](#deleting-a-contact-rm)
+  * [Editing a contact](#editing-a-contact-edit)
+  * [Finding a contact](#finding-a-contact-find)
+* [Load and Save](#load-and-save)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+
 ## Quick Start
 
 {Give steps to get started quickly}
@@ -247,12 +278,12 @@ Format:
 
 **Example of usage:**
 
-`find juju`
+`find fast`
 
 **Expected outcome:**
 ```
 Here are the matching expense records:
-2022-03-22 | $9.50 | Movie | Jujutsu Kaisen
+2022-03-22 | $9.50 | Movie | Fast and Furious
 ```
 
 ### Study Manager Features
@@ -566,14 +597,13 @@ data. However, do not tamper with the load and save files.
 
 | Action                  | Format, Examples                                                                                                            |
 |-------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| Add (Expense)           | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/15/02/2022 a/500 c/Food r/At Supper Stretch`                     |
+| Add (Expense)           | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/2022-04-03 a/500 c/Food r/At Supper Stretch`                     |
 | Add (Module)            | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
-| Add (Contact)           | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |
-| Find (Module)           | `find <query>`                                                                                                              |
-| Find (Contact)          | `find KEYWORD`                                                                                                              |
+| Add (Contact)           | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |                                                                                                             |
 | Edit (Module)           | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                      |
 | Edit (Contact)          | `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`                                                                 |
 | Read from .ics (Module) | `read ics`                                                                                                                  |
+| Find                    | `find KEYWORD`                                                                                                              |
 | Remove                  | `rm INDEX`                                                                                                                  |
 | List                    | `list`                                                                                                                      |
 | Return to Menu          | `menu`                                                                                                                      |

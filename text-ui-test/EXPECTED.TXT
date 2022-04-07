@@ -12,9 +12,10 @@ Got it. I've added this contact:
   Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
 Now you have 1 contacts in the list.
 ---------------------------------------------------
+*** Note: the email you entered might not be in the correct format! ***
 ---------------------------------------------------
 Got it. I've added this contact:
-  Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+  Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
 Now you have 2 contacts in the list.
 ---------------------------------------------------
 ---------------------------------------------------
@@ -33,20 +34,32 @@ Adding a contact with missing field(s)!
 Adding a contact with missing field(s)!
 ---------------------------------------------------
 ---------------------------------------------------
+A contact with the same name already exists!
+---------------------------------------------------
+---------------------------------------------------
+You provided the same delimiter(s) more than once!
+---------------------------------------------------
+---------------------------------------------------
+You provided the same delimiter(s) more than once!
+---------------------------------------------------
+---------------------------------------------------
+Invalid contact field(s)!
+---------------------------------------------------
+---------------------------------------------------
 Here are the contacts in your list:
  1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
- 2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+ 2. Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
 
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the matching contacts in your list:
- 2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+ 2. Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
 
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the matching contacts in your list:
  1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
- 2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+ 2. Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
 
 ---------------------------------------------------
 ---------------------------------------------------
@@ -77,23 +90,46 @@ You need to specify the contact field(s) you want to edit!
 Invalid contact field(s)!
 ---------------------------------------------------
 ---------------------------------------------------
+A contact with the same name already exists!
+---------------------------------------------------
+---------------------------------------------------
+A contact with the same name already exists!
+---------------------------------------------------
+---------------------------------------------------
+You provided the same delimiter(s) more than once!
+---------------------------------------------------
+---------------------------------------------------
 Okay, I've updated the information of this contact:
-  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+  Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: CS3234 classmate / met at SoC canteen
+---------------------------------------------------
+*** Note: You didn't update this name / only updated casing! ***
+---------------------------------------------------
+Okay, I've updated the information of this contact:
+  Name: daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: CS3234 classmate / met at SoC canteen
+---------------------------------------------------
+*** Note: the email you entered might not be in the correct format! ***
+---------------------------------------------------
+Okay, I've updated the information of this contact:
+  Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
+---------------------------------------------------
+---------------------------------------------------
+Okay, I've updated the information of this contact:
+  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: CS3234 classmate / met at SoC canteen
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the matching contacts in your list:
- 1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+ 1. Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
 
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the contacts in your list:
- 1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
- 2. Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+ 1. Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
+ 2. Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: CS3234 classmate / met at SoC canteen
 
 ---------------------------------------------------
 ---------------------------------------------------
 Noted. I've removed this contact:
-  Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+  Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
 Now you have 1 contacts in the list.
 ---------------------------------------------------
 ---------------------------------------------------
@@ -113,7 +149,7 @@ You can only delete with a valid number that's in the list :')
 ---------------------------------------------------
 ---------------------------------------------------
 Noted. I've removed this contact:
-  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: CS3234 classmate / met at SoC canteen
 Now you have 0 contacts in the list.
 ---------------------------------------------------
 ---------------------------------------------------
@@ -132,42 +168,115 @@ Invalid contact field(s)!
 Invalid contact field(s)!
 ---------------------------------------------------
 ---------------------------------------------------
+Got it. I've added this contact:
+  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+Now you have 1 contacts in the list.
+---------------------------------------------------
+---------------------------------------------------
+Noted. I've removed this contact:
+  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+Now you have 0 contacts in the list.
+---------------------------------------------------
+---------------------------------------------------
 You haven't added any contacts to your list yet!
 ---------------------------------------------------
 Welcome back to the main menu
 Menu:
+---------------------------------------------------
 Welcome to Expense Tracker
+---------------------------------------------------
+---------------------------------------------------
 You haven't added any expenses to your list yet!
+---------------------------------------------------
+---------------------------------------------------
 Added 2022-03-25 | $18.00 | Category | This is a remark
+---------------------------------------------------
+---------------------------------------------------
 Added 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+---------------------------------------------------
+---------------------------------------------------
 Date field is of incorrect format! Type in YYYY-MM-DD and make sure valid values of months are used!
+---------------------------------------------------
+---------------------------------------------------
 Please enter only numbers for the Amount field!
+---------------------------------------------------
+---------------------------------------------------
 Fields cannot be empty!
+---------------------------------------------------
+---------------------------------------------------
 Some fields are missing!
+---------------------------------------------------
+---------------------------------------------------
+/ as first character must be surrounded by white spaces!
+---------------------------------------------------
+---------------------------------------------------
+/ must be surrounded by white spaces!
+---------------------------------------------------
+---------------------------------------------------
+/ is not allowed as the last non-space character!
+---------------------------------------------------
+---------------------------------------------------
+Added 2022-03-24 | $500 | Car | Valid / Slash
+---------------------------------------------------
+---------------------------------------------------
 Here are the expenses you have made so far:
  1. 2022-03-25 | $18.00 | Category | This is a remark
  2. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+ 3. 2022-03-24 | $500 | Car | Valid / Slash
 
+---------------------------------------------------
+---------------------------------------------------
 Selected item does not exist in the list
+---------------------------------------------------
+---------------------------------------------------
 Here is the expense record you have chosen to edit:
 2022-03-25 | $18.00 | Category | This is a remark
+---------------------------------------------------
+---------------------------------------------------
 Which field would you like to edit? Enter [field] [newValue] or enter 'DONE' when you have finished editing:
+---------------------------------------------------
+---------------------------------------------------
 New amount value set!
+---------------------------------------------------
+---------------------------------------------------
 Amount cannot be negative!
+---------------------------------------------------
+---------------------------------------------------
 Date field is of incorrect format! Type in YYYY-MM-DD and make sure valid values of months are used!
+---------------------------------------------------
+---------------------------------------------------
+/ as first character must be surrounded by white spaces!
+---------------------------------------------------
+---------------------------------------------------
+New remarks value set!
+---------------------------------------------------
+---------------------------------------------------
 Editing complete!
+---------------------------------------------------
+---------------------------------------------------
 Here is the newly edited expense record:
-2022-03-25 | $20.00 | Category | This is a remark
+2022-03-25 | $20.00 | Category | valid / slash
+---------------------------------------------------
+---------------------------------------------------
 Here are the expenses you have made so far:
- 1. 2022-03-25 | $20.00 | Category | This is a remark
+ 1. 2022-03-25 | $20.00 | Category | valid / slash
  2. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+ 3. 2022-03-24 | $500 | Car | Valid / Slash
 
+---------------------------------------------------
+---------------------------------------------------
 Here are the matching expense records:
 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
-Deleted entry: 2022-03-25 | $20.00 | Category | This is a remark
+---------------------------------------------------
+---------------------------------------------------
+Deleted entry: 2022-03-25 | $20.00 | Category | valid / slash
+---------------------------------------------------
+---------------------------------------------------
 Here are the expenses you have made so far:
  1. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+ 2. 2022-03-24 | $500 | Car | Valid / Slash
 
+---------------------------------------------------
 Welcome back to the main menu
 Menu:
 Welcome to Modules Tracker, where you can track all your classes.
