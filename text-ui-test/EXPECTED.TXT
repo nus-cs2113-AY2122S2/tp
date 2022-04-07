@@ -194,7 +194,10 @@ MENU:
 Welcome to Expense Tracker
 ---------------------------------------------------
 ---------------------------------------------------
-You haven't added any expenses to your list yet!
+Here are the expenses you have made so far:
+ 1. 2022-03-25 | $18.00 | Category | This is a remark
+ 2. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+
 ---------------------------------------------------
 ---------------------------------------------------
 Added 2022-03-25 | $18.00 | Category | This is a remark
@@ -230,7 +233,9 @@ Added 2022-03-24 | $500 | Car | Valid / Slash
 Here are the expenses you have made so far:
  1. 2022-03-25 | $18.00 | Category | This is a remark
  2. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
- 3. 2022-03-24 | $500 | Car | Valid / Slash
+ 3. 2022-03-25 | $18.00 | Category | This is a remark
+ 4. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+ 5. 2022-03-24 | $500 | Car | Valid / Slash
 
 ---------------------------------------------------
 ---------------------------------------------------
@@ -269,8 +274,14 @@ Here is the newly edited expense record:
 Here are the expenses you have made so far:
  1. 2022-03-25 | $20.00 | Category | valid / slash
  2. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
- 3. 2022-03-24 | $500 | Car | Valid / Slash
+ 3. 2022-03-25 | $18.00 | Category | This is a remark
+ 4. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+ 5. 2022-03-24 | $500 | Car | Valid / Slash
 
+---------------------------------------------------
+---------------------------------------------------
+Here are the matching expense records:
+2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the matching expense records:
@@ -282,8 +293,11 @@ Deleted entry: 2022-03-25 | $20.00 | Category | valid / slash
 ---------------------------------------------------
 Here are the expenses you have made so far:
  1. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
- 2. 2022-03-24 | $500 | Car | Valid / Slash
+ 2. 2022-03-25 | $18.00 | Category | This is a remark
+ 3. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+ 4. 2022-03-24 | $500 | Car | Valid / Slash
 
+---------------------------------------------------
 ---------------------------------------------------
 Welcome back to the main menu
 ---------------------------------------------------
@@ -291,7 +305,9 @@ Welcome back to the main menu
 MENU:
 ---------------------------------------------------
 Welcome to Modules Tracker, where you can track all your classes.
-There are no modules in your list yet!
+Here are the modules in your schedule:
+1: [Module] EE4204 Tutorial: Wednesday, 03:00pm - 05:00pm
+2: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 Okay, I have added a new module to the schedule
 [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 Please enter the category of your module
@@ -303,38 +319,49 @@ add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm
 Okay, I have added a new module to the schedule
 [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
 Here are the modules in your schedule:
-1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
-2: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
+1: [Module] EE4204 Tutorial: Wednesday, 03:00pm - 05:00pm
+2: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+3: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+4: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
 Here are the matching modules in your list:
 1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
-2: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
+2: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+3: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
 Here is the module that you have chosen to edit:
-[Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+[Module] EE4204 Tutorial: Wednesday, 03:00pm - 05:00pm
 Choose the part that you would like to edit:
 Here are the changes so far. You can edit more module parameters or you can enter 'done' to stop editing!
-[Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+[Module] EE4204 Tutorial: Wednesday, 03:00pm - 05:00pm
 Please enter the category of your module
 Please enter the code for your module
 Please enter the day of your module
 Please enter the time of your module's class
 Your Module was successfully edited! Here are the changes:
-[Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+[Module] EE4204 Tutorial: Wednesday, 03:00pm - 05:00pm
 Exiting the edit mode
 Here are the matching modules in your list:
-1: [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+1: [Module] EE4204 Tutorial: Wednesday, 03:00pm - 05:00pm
 2: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
 Here are the matching modules in your list:
-1: [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+2: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 Here are the matching modules in your list:
-1: [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+2: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 Noted I have removed this module from your schedule:
-[Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
-There are no modules that match "cs"
+[Module] EE4204 Tutorial: Wednesday, 03:00pm - 05:00pm
+Here are the matching modules in your list:
+1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+2: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 Here are the modules in your schedule:
-1: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
+1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+2: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+3: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
 Noted I have removed this module from your schedule:
-[Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
-There are no modules in your list yet!
+[Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+Here are the modules in your schedule:
+1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+2: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
 Your module code must be an alphanumeric parameter!
 You have entered an invalid day of the week
 Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY
