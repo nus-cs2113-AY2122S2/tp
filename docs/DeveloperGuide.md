@@ -650,3 +650,16 @@ Given below are instructions to test the app manually.
 2. Shutdown
    1. Upon request for input, type `bye` and press [Enter].
 
+### Deleting a person
+
+1. Deleting a person 
+   1. Use the `list` command on the group which a person should be deleted from.
+   2. Prerequisite: At least 1 person in the group.
+   3. Test case: `delete /g 1 /u 1`
+      Expected: First person is deleted from the `Parents` group. Upon `list /g 1`, other persons have their index decremented.
+   4. Test case: `delete /g 0 /u 1`
+      Expected: No person is deleted. Error details shown in the error message.
+   5. Other incorrect delete commands to try: `delete`, `delete /g 1`, `delete /g 1 /u 0`, `delete /g x /u y` (where y is larger
+   than the number of members in group x)
+      Expected: Similar to previous
+
