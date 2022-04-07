@@ -663,3 +663,18 @@ Given below are instructions to test the app manually.
    than the number of members in group x)
       Expected: Similar to previous
 
+### Adding an income
+
+1. Adding a non-recurring income
+   1. Prerequisite: The person in which the income will be added to exists, then use the `list` command on the group 
+      which the person resides in to get his user index.
+   2. Test case: `addin /g 1 /u 1 /d Donations /i 6000 /p f`
+      Expected: A non-recurring income entry worth $6000 from Donations is added to the first person of `Parents`.
+   3. Test case: `addin /g 1 /u 1 /d Donations /i 6000.123 /p f`
+      Expected: No income is added. Error details shown in the error message.
+   4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`
+      Expected: Similar to previous
+2. Adding a recurring income
+   1. Prerequisite: Similar to previous
+   2. Testing similar to previous, but with `/p t` instead.
+
