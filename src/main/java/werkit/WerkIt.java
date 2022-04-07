@@ -139,7 +139,7 @@ public class WerkIt {
         assert (Files.exists(getFileManager().getPlanFilePath())) : "Plan file does not exist.";
         assert (Files.exists(getFileManager().getScheduleFilePath())) : "Schedule file does not exist.";
 
-        if(getFileManager().checkIfAtLeastOneFileExists()) {
+        if (getFileManager().checkIfAtLeastOneFileExists()) {
             getUI().printLoadingFileDataMessage();
         }
         populateExercises();
