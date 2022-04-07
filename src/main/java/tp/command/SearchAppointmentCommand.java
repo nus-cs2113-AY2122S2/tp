@@ -19,6 +19,6 @@ public class SearchAppointmentCommand extends Command {
         if (curr == null) {
             return String.format("There is no appointment at " + time + "\n");
         }
-        return String.format("The appointments found are here" + curr + "\n");
+        return String.format("The appointments found are here \n" + curr + "\n");
     }
 }

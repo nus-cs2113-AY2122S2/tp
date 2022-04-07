@@ -1,0 +1,8 @@
+1
+1. Patient:
+4321
+Tom
+93333333
+3233@qq.com
+symptom
+descriptions

@@ -56,6 +56,9 @@ public class PatientList {
      * @param index Index of the patient to be deleted.
      */
     public Patient deletePatient(int index) {
+        if (index <= 0 || index > patients.size()) {
+            return null;
+        }
         Patient curr = patients.get(index - 1);
         patients.remove(index - 1);
         countPatient -= 1;

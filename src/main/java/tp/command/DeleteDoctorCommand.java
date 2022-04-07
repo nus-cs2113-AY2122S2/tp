@@ -16,10 +16,10 @@ public class DeleteDoctorCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        if (index > doctorList.getSize()) {
+
+        if (index <=0 || index > doctorList.getSize()) {
             throw new IHospitalException("The doctor does not exist.\n");
         }
-
         Doctor curr = doctorList.deleteDoctor(index);
         return String.format(boundary + "Noted. I've removed this doctor:" + curr
                                      + "\n" + "Now you have " + doctorList.getSize()
