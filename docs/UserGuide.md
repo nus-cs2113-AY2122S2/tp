@@ -395,7 +395,7 @@ Edits an existing activity so that you can change the details of an activity.<br
 
 You only have to supply delimiters for the details you wish to edit. However, the `/sid` and `/aid` 
 delimiters are compulsory to identify the activity you wish to edit.
-> Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] </p [PAYER]>
+> Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER]
   /i [NAME1 NAME2...] /cl [COST1 COST2...] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE]}`
 > 
 > Compulsory arguments:
