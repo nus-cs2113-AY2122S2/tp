@@ -1,4 +1,5 @@
 @startuml
+skinparam classAttributeIconSize 0
 abstract class Controller {
 #choices : String[]
 +Controller(choices : String[])

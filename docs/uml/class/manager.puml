@@ -1,4 +1,5 @@
 @startuml
+skinparam classAttributeIconSize 0
 abstract class Manager {
 -{static}DATABASE_DIRECTORY : String
 -file : String
