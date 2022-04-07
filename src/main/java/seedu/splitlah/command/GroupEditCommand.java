@@ -60,8 +60,7 @@ public class GroupEditCommand extends Command {
                 Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP);
                 return;
             }
-            PersonList newPersonList = new PersonList();
-            newPersonList.convertToPersonList(involvedList);
+            PersonList newPersonList = new PersonList(involvedList);
             group.setPersonList(newPersonList);
         }
         if (groupName != null) {

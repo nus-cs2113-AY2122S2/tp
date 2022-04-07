@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ActivityDeleteCommandTest {
 
@@ -38,7 +40,12 @@ class ActivityDeleteCommandTest {
     @Test
     public void run_sessionDoesNotExists_activityListSizeRemainsTwo() throws InvalidDataException {
         String userInput = "activity /delete /sid 3 /aid 1";
+
+        //Checks that command returned is an ActivityDeleteCommand object
         Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityDeleteCommand.class, command.getClass());
+
+        //Checks that the number of activities stored remains the same
         command.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
     }
@@ -52,7 +59,12 @@ class ActivityDeleteCommandTest {
     @Test
     public void run_activityDoesNotExists_activityListSizeRemainsTwo() throws InvalidDataException {
         String userInput = "activity /delete /sid 1 /aid 3";
+
+        //Checks that command returned is an ActivityDeleteCommand object
         Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityDeleteCommand.class, command.getClass());
+
+        //Checks that the number of activities stored remains the same
         command.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
     }
@@ -64,11 +76,24 @@ class ActivityDeleteCommandTest {
      *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_validCommand_activityListsSizeBecomesOne() throws InvalidDataException {
+    public void run_validCommand_activitySuccessfullyDeleted() throws InvalidDataException {
         String userInput = "activity /delete /sid 1 /aid 1";
+
+        //Checks that command returned is an ActivityDeleteCommand object
         Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityDeleteCommand.class, command.getClass());
+
+        //Checks that the number of activities stored decrease by 1
         command.run(manager);
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+
+        //Checks that the activity with the specified id still exists
+        try {
+            manager.getProfile().getSession(1).getActivity(1);
+            fail();
+        } catch (InvalidDataException e) {
+            assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, e.getMessage());
+        }
     }
 
 }

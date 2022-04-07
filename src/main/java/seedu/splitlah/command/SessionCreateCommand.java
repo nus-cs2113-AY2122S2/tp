@@ -66,7 +66,12 @@ public class SessionCreateCommand extends Command {
                 Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATESESSION);
                 return;
             }
-            personList.convertToPersonList(personNames);
+            personList = new PersonList(personNames);
+            if (personNames.length != personList.getSize()) {
+                ui.printlnMessage(Message.ERROR_PERSONLIST_CONTAINS_INVALID_NAME);
+                Manager.getLogger().log(Level.FINEST,Message.LOGGER_PERSONLIST_INVALID_NAME_EXISTS_IN_CREATESESSION);
+                return;
+            }
         }
 
         Group group = null;
@@ -91,7 +96,7 @@ public class SessionCreateCommand extends Command {
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList, group);
         profile.addSession(newSession);
         manager.saveProfile();
-        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + newSession);
+        ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + newSession);
         Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
     }
 }
