@@ -8,12 +8,19 @@
 [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=timchang27&tabRepo=AY2122S2-CS2113-F10-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code&authorshipIsBinaryFileTypeChecked=false)
 
 #### Enhancements Implemented
-Implementation of `Reservation` Class in and after v1.0 
+- Implementation of `Reservation` Class in and after v1.0 
 
-Implemented `Help` Feature in TARBS
--  `Help` and `HelpCommand` Class  
+- Implemented `Help` Feature in TARBS
+  - `Help` and `HelpCommand` Class  
+
+- Added Improvements in Formatting for Help messages
+- Improved Readability of Interface 
+
 
 #### Contributions to the UG
+
+- Writeup on Project Introduction
+- Writeup on some Project Features
 
 #### Contributions to the DG
 - Charted out User Stories discussed in v.10
