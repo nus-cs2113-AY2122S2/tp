@@ -46,7 +46,8 @@ public class EditCommand extends Command {
         this.changedParameter = description;
     }
 
-    public EditCommand(String taskModule, int taskIndex, String description, String estimatedWorkingTime, String taskName) {
+    public EditCommand(String taskModule, int taskIndex,
+                        String description, String estimatedWorkingTime, String taskName) {
         this.taskModule = taskModule;
         this.taskIndex = taskIndex;
         if (!Objects.isNull(description)) {

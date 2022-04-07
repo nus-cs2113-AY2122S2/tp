@@ -20,7 +20,6 @@ public class Task {
     private String taskName;
     private String taskDescription;
     private TaskDuration workingTime;
-    private TaskParameters taskParameters;
     private ArrayList<String> tags;
 
     public Task(String taskName, String taskDescription, String workingTime) throws ModHappyException {
@@ -33,7 +32,6 @@ public class Task {
                 this.workingTime = null;
             }
             isTaskDone = false;
-            taskParameters = getTaskParameterStatus();
             tags = new ArrayList<>();
         } catch (ModHappyException e) {
             throw e;
@@ -63,13 +61,11 @@ public class Task {
 
     public void setTaskDescription(String description) {
         taskDescription = description;
-        taskParameters = getTaskParameterStatus();
     }
 
     public void setWorkingTime(String workingTime) throws ModHappyException {
         try {
             this.workingTime = new TaskDuration(workingTime);
-            taskParameters = getTaskParameterStatus();
         } catch (ModHappyException e) {
             throw e;
         }
@@ -77,7 +73,6 @@ public class Task {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
-        taskParameters = getTaskParameterStatus();
     }
 
     /**.
@@ -117,6 +112,7 @@ public class Task {
     @Override
     public String toString() {
         String taskStatusString = isTaskDone ? ICON_COMPLETED : ICON_UNCOMPLETED;
+        TaskParameters taskParameters = getTaskParameterStatus();
         switch (taskParameters) {
         case DESCRIPTION_AND_WORKING_TIME:
             return String.format(TASK_STRING_WITH_DESC_WITH_TIME, taskStatusString, taskName,
