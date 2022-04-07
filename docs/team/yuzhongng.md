@@ -49,8 +49,7 @@ complete the activities with the use of the study session.
     - Add User Guide for `delete recurring` task
     - Add User Guide for `Timetable`
       - All the display method for Timetable such as show,
-        
-      - today, tomorrow, any date, current week, next week, current Month, any Month.
+        today, tomorrow, any date, current week, next week, current Month, any Month.
 
   - **Documentation Guide**
     - Documentation related to showing of monthly Timetable schedule.  
