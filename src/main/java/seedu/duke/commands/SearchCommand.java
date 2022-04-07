@@ -81,6 +81,10 @@ public class SearchCommand extends Command {
     private boolean caseInsensitiveContains(String str1, String str2) {
         String lowerStr1 = str1.toLowerCase();
         String lowerStr2 = str2.toLowerCase();
+        // fail silently
+        if (lowerStr2.equals("")) {
+            return false;
+        }
         return lowerStr1.contains(lowerStr2);
     }
 
