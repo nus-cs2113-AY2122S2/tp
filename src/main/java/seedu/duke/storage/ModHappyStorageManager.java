@@ -3,6 +3,8 @@ package seedu.duke.storage;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
+import seedu.duke.exceptions.DuplicateModuleException;
+import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
@@ -10,6 +12,8 @@ import seedu.duke.util.StringConstants;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import static seedu.duke.util.NumberConstants.MAXIMUM_MODULAR_CREDITS;
 
 public class ModHappyStorageManager {
 
@@ -19,6 +23,7 @@ public class ModHappyStorageManager {
     private static final String configurationLoadSuccessMessage = StringConstants.CONFIGURATION_DATA_LOAD_SUCCESS;
     private static final String configurationLoadErrorMessage = StringConstants.CONFIGURATION_DATA_LOAD_FAILED;
     private static final String noConfigFileMessage = StringConstants.NO_CONFIG_DATA_FILE;
+
 
     private static Storage modHappyStorage;
 
@@ -77,7 +82,18 @@ public class ModHappyStorageManager {
         if (moduleDataFile.exists()) {
             modHappyStorage = new ModuleListStorage();
             try {
-                moduleList.setModuleList((ArrayList<Module>) modHappyStorage.loadData(modulePath));
+                ArrayList<String> moduleCodes = new ArrayList<>();
+                ArrayList<Module> arrayListModule = (ArrayList<Module>) modHappyStorage.loadData(modulePath);
+                for (Module m : arrayListModule) {
+                    if (moduleCodes.contains(m.getModuleCode())) {
+                        throw new DuplicateModuleException(m.getModuleCode());
+                    }
+                    if (m.getModularCredit() > MAXIMUM_MODULAR_CREDITS || m.getModularCredit() < 0) {
+                        throw new InvalidModuleException(m.getModuleCode(), m.getModularCredit());
+                    }
+                    moduleCodes.add(m.getModuleCode());
+                }
+                moduleList.setModuleList(arrayListModule);
                 TextUi.showUnformattedMessage(StringConstants.MODULE_DATA_LOAD_SUCCESS);
             } catch (ModHappyException e) {
                 TextUi.showUnformattedMessage(e);

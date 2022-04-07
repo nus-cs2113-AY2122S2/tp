@@ -48,16 +48,6 @@ public class ModuleListStorage extends ListStorage<Module> {
         } catch (Exception e) {
             throw new ReadException();
         }
-        ArrayList<String> moduleCodes = new ArrayList<>();
-        for (Module m : arrayList) {
-            if (moduleCodes.contains(m.getModuleCode())) {
-                throw new DuplicateModuleException(m.getModuleCode());
-            }
-            if (m.getModularCredit() > MAXIMUM_MODULAR_CREDITS || m.getModularCredit() < 0) {
-                throw new InvalidModuleException(m.getModuleCode(), m.getModularCredit());
-            }
-            moduleCodes.add(m.getModuleCode());
-        }
         return arrayList;
     }
 
