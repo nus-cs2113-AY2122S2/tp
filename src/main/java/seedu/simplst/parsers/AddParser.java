@@ -25,23 +25,21 @@ public class AddParser extends CommandParser {
 
     protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType {
         if (matches.get("flag").equals("g")) {
-            String regexGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) up/(?<up>.*)"
-                    + " ui/(?<ui>.*) wu/(?<isWholeUnit>.*) ba/(?<ba>.*)"
-                    + " v/(?<v>.*) ip/(?<ip>.*) qty/(?<qty>.*)";
+            String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
             HashMap<String, String> regexGoodMatch = new MatchKeywords(userInput, regexGood).getGroupValues();
             try {
-                warehouse.addGoodToInventory(regexGoodMatch.get("sku"), regexGoodMatch.get("qty"));
+                warehouse.addQuantityOfGoodToInventory(regexGoodMatch.get("sku"), regexGoodMatch.get("qty"));
             } catch (ItemDoesNotExistException e) {
                 // Can change to automatically add a unit good
                 System.out.println("Unit Good does not exist. Please add a Unit Good first");
             }
         } else if (matches.get("flag").equals("ug")) {
-            String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) cap/(?<capacity>.*)";
+            String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) size/(?<size>.*)";
             HashMap<String, String> regexUnitGoodMatch = new
                     MatchKeywords(userInput, regexUnitGood).getGroupValues();
             try {
                 warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
-                        regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("capacity"));
+                        regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
             } catch (UnitTestException e) {
                 System.out.println("Capacity Added is not either Small, Medium, Large. "
                         + "Default set to Medium");
