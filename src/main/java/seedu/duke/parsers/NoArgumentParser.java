@@ -20,6 +20,11 @@ public class NoArgumentParser extends Parser {
     }
 
     @Override
+    public void determineError() throws GeneralParseException {
+        throw new GeneralParseException();
+    }
+
+    @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         // NoArgumentParser commands strictly take no input.
         if (userInput.length() != 0) {

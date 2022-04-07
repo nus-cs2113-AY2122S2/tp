@@ -4,10 +4,12 @@ import java.util.HashMap;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.MarkCommand;
-import seedu.duke.data.Task;
-import seedu.duke.exceptions.GeneralParseException;
-import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.InvalidFlagException;
+import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.MissingNumberException;
+import seedu.duke.exceptions.InvalidCompulsoryParameterException;
+import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -19,13 +21,17 @@ public class MarkParser extends Parser {
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String COMPLETED_FLAG = StringConstants.COMPLETED_FLAG;
     private static final String UNCOMPLETED_FLAG = StringConstants.UNCOMPLETED_FLAG;
-    private static final String TASK_NUMBER_STR = StringConstants.ERROR_TASK_NUMBER_FAILED;
+    private static final String TASK_NUMBER_STR = StringConstants.TASK_NUMBER_STR;
+    private String userInput;
 
     // Unescaped regex for testing:
-    // (?<flag>(c|u)|(?<invalidFlag>.*))\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?(?<invalid>.*)
+    // (?<flag>(c|u)|(?<invalidMarkFlag>.*))\s+(?<taskNumber>\d+|(?<invalidNumber>.*))
+    // (\s+-m\s+(?<taskModule>\w+))?(?<invalid>.*)
     private static final String MARK_FORMAT = "(?<flag>(c|u)|(?<invalidMarkFlag>.*))\\s+"
             + "(?<taskNumber>\\d+|(?<invalidNumber>.*))(\\s+-m\\s+"
             + "(?<taskModule>\\w+))?(?<invalid>.*)";
+    private static final String MARK_COMMAND_FLAGS = StringConstants.MARK_COMMAND_FLAGS;
+    private static final String POSITIVE_INT = StringConstants.POSITIVE_INT;
 
     public MarkParser() {
         super();
@@ -40,6 +46,33 @@ public class MarkParser extends Parser {
     }
 
     /**
+     * Determines the error that the user made in its command.
+     * @throws ModHappyException based on the type of error made.
+     */
+    @Override
+    public void determineError() throws ModHappyException {
+        String flag;
+        String taskNumber;
+        try {
+            flag = userInput.split(SPACE)[ZEROTH_INDEX];
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidFlagException();
+        }
+        if (!flag.matches(MARK_COMMAND_FLAGS)) {
+            throw new InvalidFlagException(flag);
+        }
+        try {
+            taskNumber = userInput.split(SPACE)[FIRST_INDEX];
+        } catch (IndexOutOfBoundsException e) {
+            throw new MissingNumberException(TASK_NUMBER_STR);
+        }
+        if (!taskNumber.matches(POSITIVE_INT)) {
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumber);
+        }
+        throw new InvalidCompulsoryParameterException();
+    }
+
+    /**
      * Parses user's input for "mark" command.
      *
      * @param userInput User input of completed flag or uncompleted flag, task index and task module.
@@ -47,6 +80,7 @@ public class MarkParser extends Parser {
      */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
+        this.userInput = userInput;
         HashMap<String, String> parsedArguments = parseString(userInput);
         final String commandFlag = parsedArguments.get(FLAG);
         final String taskModule = parsedArguments.get(TASK_MODULE);
@@ -62,7 +96,7 @@ public class MarkParser extends Parser {
                 throw new GeneralParseException();
             }
         } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR);
+            throw new InvalidNumberException(TASK_NUMBER_STR, parsedArguments.get(TASK_NUMBER));
         }
     }
 }
