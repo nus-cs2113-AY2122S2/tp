@@ -678,3 +678,18 @@ Given below are instructions to test the app manually.
    1. Prerequisite: Similar to previous
    2. Testing similar to previous, but with `/p t` instead.
 
+### Adding an expenditure
+
+1. Adding a non-recurring expenditure
+   1. Prerequisite: The person in which the expenditure will be added to exists, then use the `list` command on the group
+      which the person resides in to get his user index.
+   2. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 2 /p f`
+      Expected: A non-recurring expenditure entry worth $50 for Food, in the category *Food and Drinks*, is added to
+      the first person of `Parents`.
+   3. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 7 /p f`
+      Expected: No expenditure is added. Error details shown in the error message.
+   4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), but include `/c`
+      Expected: Similar to previous
+2. Adding a recurring expenditure
+   1. Prerequisite: Similar to previous
+   2. Testing similar to previous, but with `/p t` instead.
