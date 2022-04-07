@@ -332,9 +332,9 @@ public class StringConstants {
      */
     public static final String DURATION_GROUP_WORD = "duration";
     public static final String DURATION_UNIT_GROUP_WORD = "durationUnit";
-    public static final String TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE = "%d hours %d minutes";
-    public static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = "%d hours";
-    public static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = "%d minutes";
+    public static final String TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE = "%d hour(s) %d minute(s)";
+    public static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = "%d hour(s)";
+    public static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = "%d minute(s)";
     public static final String DURATION_STRING_FORMAT = "(?<duration>[1-9]\\d*\\.?\\d*|0\\.\\d*[1-9])"
             + "\\s*(?<durationUnit>.*)";
 
