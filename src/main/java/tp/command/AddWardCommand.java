@@ -16,7 +16,7 @@ import tp.person.Doctor;
 import tp.person.Nurse;
 import tp.person.Patient;
 
-public class AddWardCommand extends Command{
+public class AddWardCommand extends Command {
     protected int doctorIndex;
     protected int patientIndex;
     protected int nurseIndex;
@@ -44,10 +44,10 @@ public class AddWardCommand extends Command{
         if (patientIndex <= 0 || patientIndex > patientList.getSize()) {
             throw new IHospitalException("The patient does not exist\n");
         }
-        if(doctorIndex <= 0 || doctorIndex > doctorList.getSize()) {
+        if (doctorIndex <= 0 || doctorIndex > doctorList.getSize()) {
             throw new IHospitalException("The doctor does not exist\n");
         }
-        if(nurseIndex <= 0 || nurseIndex > nurseList.getSize()) {
+        if (nurseIndex <= 0 || nurseIndex > nurseList.getSize()) {
             throw new IHospitalException("The nurse does not exist\n");
         }
 

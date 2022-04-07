@@ -13,6 +13,7 @@ public class Doctor extends tp.person.Person {
         this.department = department;
         this.wardNumber = wardNumber;
     }
+
     public Doctor(String id, String name, String phoneNumber, String email,String department) {
         super(id, name, phoneNumber, email);
         isOnDuty = false;
@@ -30,7 +31,7 @@ public class Doctor extends tp.person.Person {
 
     @Override
     public String toString() {
-        return "* DOCTOR " + super.toString()+" || Department: " + department + " || Ward: " + wardNumber;
+        return "* DOCTOR " + super.toString() + " || Department: " + department + " || Ward: " + wardNumber;
     }
 
 }

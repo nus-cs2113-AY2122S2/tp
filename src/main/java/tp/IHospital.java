@@ -26,10 +26,10 @@ public class IHospital {
         NurseStorage nurseStorage = new NurseStorage();
         WardStorage wardStorage = new WardStorage();
         doctors = doctorStorage.loadDoctorList();
-        patients = patientStorage.loadPatientList();
-        appointments = appointmentStorage.loadAppointmentList();
         nurses = nurseStorage.loadNurseList();
         wards = wardStorage.loadWardList();
+        patients = patientStorage.loadPatientList();
+        appointments = appointmentStorage.loadAppointmentList();
 
         while (!fullCommand.equals("bye")) {
             try {

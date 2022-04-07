@@ -85,25 +85,25 @@ public class WardStorage {
 
             for (int i = 0; i < n; i++) {
                 data = scanner.nextLine();
+                String dId = scanner.nextLine();
+                String dName = scanner.nextLine();
+                String dPhoneNumber = scanner.nextLine();
+                String dEmail = scanner.nextLine();
+                String dWardNumber = scanner.nextLine();
                 String id = scanner.nextLine();
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
-                String wardNumber = scanner.nextLine();
-                Doctor doctor = new Doctor(id, name, phoneNumber, email, wardNumber);
-                id = scanner.nextLine();
-                name = scanner.nextLine();
-                phoneNumber = scanner.nextLine();
-                email = scanner.nextLine();
                 String symptom = scanner.nextLine();
                 String description = scanner.nextLine();
+                Doctor doctor = new Doctor(dId, dName, dPhoneNumber, dEmail, dWardNumber);
                 Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
                 id = scanner.nextLine();
                 name = scanner.nextLine();
                 phoneNumber = scanner.nextLine();
                 email = scanner.nextLine();
                 String title = scanner.nextLine();
-                wardNumber = scanner.nextLine();
+                String wardNumber = scanner.nextLine();
                 Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
                 wardNumber = scanner.nextLine();
                 result.addWard(doctor, patient, nurse, wardNumber);

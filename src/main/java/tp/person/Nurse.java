@@ -1,6 +1,6 @@
 package tp.person;
 
-public class Nurse extends Person{
+public class Nurse extends Person {
     protected boolean isOnDuty;
     protected String title;
     protected String wardNumber;
@@ -38,7 +38,7 @@ public class Nurse extends Person{
 
     @Override
     public String toString() {
-        return "* NURSE " + super.toString()+" || TITLE: " + title + " || WardNumber: " + wardNumber;
+        return "* NURSE " + super.toString() + " || TITLE: " + title + " || WardNumber: " + wardNumber;
     }
 
 }

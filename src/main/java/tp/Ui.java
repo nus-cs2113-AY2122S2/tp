@@ -25,6 +25,7 @@ public class Ui {
         System.out.println("Welcome to Doctor Page.");
         System.out.print(doctors);
     }
+
     public void printNursePage(NurseList nurses) {
         System.out.print(boundary);
         System.out.println("Welcome to Nurse Page.");
@@ -65,7 +66,7 @@ public class Ui {
         String deleteAppointment = "delete appointment APPOINTMENT_NO." + System.lineSeparator();
         String deleteNurse = "delete nurse NURSE_NO." + System.lineSeparator();
         System.out.println("3. To delete something:" + System.lineSeparator()
-                                   + deleteDoctor + deletePatient + deleteAppointment+deleteNurse);
+                                   + deleteDoctor + deletePatient + deleteAppointment + deleteNurse);
     }
 
     public void printSearchHelp() {

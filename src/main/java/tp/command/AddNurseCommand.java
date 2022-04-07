@@ -14,7 +14,7 @@ import tp.WardList;
 import tp.WardStorage;
 import tp.person.Nurse;
 
-public class AddNurseCommand extends Command{
+public class AddNurseCommand extends Command {
     protected String id;
     protected String name;
     protected String phoneNumber;
@@ -26,7 +26,8 @@ public class AddNurseCommand extends Command{
     public AddNurseCommand() {
     }
 
-    public AddNurseCommand(String id, String name, String phoneNumber, String email, String title, String wardNumber, boolean isOnDuty) {
+    public AddNurseCommand(String id, String name, String phoneNumber, String email, String title,
+                           String wardNumber, boolean isOnDuty) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -42,7 +43,7 @@ public class AddNurseCommand extends Command{
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Nurse nurse = new Nurse(id, name, phoneNumber, email , title , wardNumber);
+        Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
         nurseList.addNurse(nurse);
         return String.format(boundary + "Noted. I've added this nurse:"
                 + "\n" + nurseList.getNurse(nurseList.getSize())

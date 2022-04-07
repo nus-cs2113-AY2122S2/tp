@@ -1,9 +1,20 @@
 package tp.command;
 
-import tp.*;
+import tp.AppointmentList;
+import tp.AppointmentStorage;
+import tp.DoctorList;
+import tp.DoctorStorage;
+import tp.IHospitalException;
+import tp.NurseList;
+import tp.NurseStorage;
+import tp.PatientList;
+import tp.PatientStorage;
+import tp.Ui;
+import tp.WardList;
+import tp.WardStorage;
 import tp.person.Nurse;
 
-public class SearchNurseCommand extends Command{
+public class SearchNurseCommand extends Command {
     protected String id;
 
     public SearchNurseCommand(String id) {

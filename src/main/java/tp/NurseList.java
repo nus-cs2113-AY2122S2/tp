@@ -66,9 +66,9 @@ public class NurseList {
     }
 
     public Nurse searchNurseByName(String name) {
-    for (int i = 0; i < nurses.size(); i++) {
-        if (nurses.get(i).getName().trim().equals(name)) {
-            return nurses.get(i);
+        for (int i = 0; i < nurses.size(); i++) {
+            if (nurses.get(i).getName().trim().equals(name)) {
+                return nurses.get(i);
             }
         }
         return null;
@@ -76,9 +76,9 @@ public class NurseList {
 
     public NurseList getNurseListOfWardById(String id) throws IHospitalException {
         NurseList warNur = new NurseList();
-        for(Nurse nurse:nurses){
+        for (Nurse nurse:nurses) {
             if (nurse.getWardNumber().equals(id)) {
-                    warNur.addNurse(nurse);
+                warNur.addNurse(nurse);
             }
         }
         return warNur;
