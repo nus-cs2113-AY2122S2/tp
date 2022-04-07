@@ -3,47 +3,48 @@
 hide circle
 
 skinparam classAttributeIconSize 0
-title Class Diagram of Workout Component
+skinparam classFontSize 16
+title Class Diagram of Workout-related Features
 
-Parser .r.> "{abstract}\nCommand"
+Parser .r.> "{abstract}\nCommand":creates >
 "{abstract}\nCommand" <|- WorkoutCommand
-WorkoutCommand --> WorkoutList
+WorkoutCommand -r-> WorkoutList
 WorkoutCommand --> FileManager
 WorkoutCommand --> UI
-WorkoutCommand -r-> PlanList
+WorkoutCommand -u-> PlanList
 
-class PlanList {
+class PlanList #LightSkyBlue {
 + deletePlanContainsDeletedWorkout(String deletedWorkoutDetail):void
 + updatePlanContainsUpdatedWorkout(String workoutToCheck, Workout updatedWorkout):void
 }
 
-class FileManager {
+class FileManager #IndianRed {
 + writeNewWorkoutToFile(Workout newWorkout):void
 + rewriteAllWorkoutsToFile(WorkoutList workoutList):void
 + rewriteAllPlansToFile(PlanList planList):void
 }
 
-class "{abstract}\nCommand" {
+class "{abstract}\nCommand" #LightSkyBlue {
 }
 
-class WorkoutCommand {
+class WorkoutCommand #LightSkyBlue {
 + execute():void
 }
 
-class WorkoutList {
+class WorkoutList #LightSkyBlue {
 + createAndAddWorkout(String userArgument):Workout
 + listAllWorkout():void
 + deleteWorkout(String userArgument):Workout
 + updateWorkout(String userArgument):Workout
 }
 
-class UI {
+class UI #YellowGreen{
 + printNewWorkoutCreatedMessage(Workout newWorkout):void
 + printDeleteWorkoutMessage(Workout deletedWorkout):void
 + printUpdateWorkoutMessage(Workout updatedWorkout):void
 }
 
-class Parser {
+class Parser #Gold {
 + parseUserInput(String userInput):Command
 + createWorkoutCommand(String userInput):WorkoutCommand
 }

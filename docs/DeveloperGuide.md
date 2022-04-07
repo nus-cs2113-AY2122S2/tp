@@ -304,6 +304,8 @@ Below is a class diagram of the workout-related features:
 
 ![WorkoutUML](uml/classDiagrams/images/workoutRelatedFeatures.png)
 <br>
+<span class="box info">:memo: To improve readability, some classes and methods have been omitted from the diagram above.
+The diagram shows the main classes and methods the workout-related features uses. </span>
 
 The `Parser` class will call the `Parser#parseUserInput(userInput)` method
 to analyse the user's command. If the user's command is of type 
