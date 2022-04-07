@@ -24,8 +24,9 @@ public class AddAppointmentCommand extends Command {
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
-                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                          PatientStorage patientStorage,NurseStorage nurseStorage,
+                          WardList wardList, AppointmentList appointmentList, Ui ui,
+                          DoctorStorage doctorStorage, WardStorage wardStorage,
+                          PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
 
         if (doctorIndex <= 0 || doctorIndex > doctorList.getSize()) {
