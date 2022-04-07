@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.command.DeleteCommand.ONLY_SN_ACCEPTED;
 
 class DeleteCommandTest {
     DeleteCommand deleteCommand;
@@ -17,7 +18,7 @@ class DeleteCommandTest {
     @Test
     void execute_validSerialNumber_success() {
         deleteCommand = new DeleteCommand(new ArrayList<>(
-                Arrays.asList("S1404115ASF")
+                Arrays.asList("s/S1404115ASF")
         ));
         deleteCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = deleteCommand.equipmentManager;
@@ -38,6 +39,35 @@ class DeleteCommandTest {
         CommandResult actualResult = deleteCommand.execute();
         CommandResult expectedResult =
                 new CommandResult("Equipment successfully deleted: Speaker B, serial number S1404115ASF");
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void execute_invalidSerialNumber_fail() {
+        deleteCommand = new DeleteCommand(new ArrayList<>(
+                Arrays.asList("s/S123445ASF")
+        ));
+        deleteCommand.setEquipmentManager(new EquipmentManager());
+
+        CommandResult actualResult = deleteCommand.execute();
+        CommandResult expectedResult =
+                new CommandResult("No such serial number, please enter an existing "
+                        + "serial number");
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void execute_notSerialNumber_fail() {
+        deleteCommand = new DeleteCommand(new ArrayList<>(
+                Arrays.asList("n/Speaker3")
+        ));
+        deleteCommand.setEquipmentManager(new EquipmentManager());
+
+        CommandResult actualResult = deleteCommand.execute();
+        CommandResult expectedResult =
+                new CommandResult(ONLY_SN_ACCEPTED);
 
         assertEquals(expectedResult, actualResult);
     }

@@ -13,6 +13,7 @@ public class DeleteCommand extends Command {
             + "Parameters: s/`SERIAL_NUMBER`" + System.lineSeparator()
             + "Example: "
             + "delete s/`SM57-1`";
+    public static final String ONLY_SN_ACCEPTED = "Only serial number accepted for deleting equipment";
 
     /**
      * constructor for DeleteCommand. Initialises successMessage and usageReminder from Command.
@@ -32,15 +33,20 @@ public class DeleteCommand extends Command {
      */
     public CommandResult execute() {
         String equipmentName;
+        String serialNumber;
+
         try {
-            equipmentName = equipmentManager.getEquipmentList().get(commandStrings.get(0)).getItemName();
+            serialNumber = prepareDelete();
+            equipmentName = equipmentManager.getEquipmentList().get(serialNumber).getItemName();
         } catch (NullPointerException e) {
             return new CommandResult(INVALID_SERIAL_NUMBER);
+        } catch (AssertionError e) {
+            return new CommandResult(ONLY_SN_ACCEPTED);
         }
 
-        equipmentManager.deleteEquipment(commandStrings.get(0));
+        equipmentManager.deleteEquipment(serialNumber);
 
-        return new CommandResult(String.format(successMessage, equipmentName, commandStrings.get(0)));
+        return new CommandResult(String.format(successMessage, equipmentName, serialNumber));
     }
 
     @Override
@@ -53,5 +59,19 @@ public class DeleteCommand extends Command {
         }
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return this.commandStrings.equals(otherDeleteCommand.commandStrings);
+    }
+
+
+    protected String prepareDelete() throws AssertionError {
+        String argString = commandStrings.get(0);
+        int delimiterPos = argString.indexOf('/');
+        // the case where delimiterPos = -1 is impossible as
+        // ARGUMENT_FORMAT and ARGUMENT_TRAILING_FORMAT regex requires a '/'
+        assert delimiterPos != -1 : "Each args will need to include minimally a '/' to split arg and value upon";
+        String argType = argString.substring(0, delimiterPos);
+        String argValue = argString.substring(delimiterPos + 1);
+        assert argType.equals("s") : ONLY_SN_ACCEPTED;
+
+        return argValue;
     }
 }
