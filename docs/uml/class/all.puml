@@ -1,154 +1,160 @@
 @startuml
 skinparam classAttributeIconSize 0
-abstract class Manager {
--{static}DATABASE_DIRECTORY : String
--file : String
-#Manager(file : String)
--ensureDatabaseDirectoryExists() : void
-#load() : Object
-#save(o : Object) : void
-#{abstract}loadData() : void
-+{abstract}saveData() : void
+
+namespace Controllers {
+    abstract class Controller {
+    #choices : String[]
+    +Controller(choices : String[])
+    +takeControl() : void
+    #getChoice() : int
+    #{abstract}optionSwitcher() : bool
+    }
+
+    class StaffController {
+    -{static}CHOICES : String[]
+    -staffManager : StaffManager
+    +StaffController()
+    #optionSwitcher() : bool
+    -findStaff() : void
+    -addStaff() : void
+    -deleteStaff() : void
+    -editStaff(): void
+    }
+
+    class DishController {
+        -{static}CHOICES: String[]
+        -dishManager: DishManager
+        #loadData(): void
+        +saveData(): void
+        +DishController()
+        -addDish(): void
+        -changeName(): void
+        -changePrice(): void
+        -deleteDish(): void
+        -listDishes(): void
+        #optionSwicher(int): boolean
+        +takeControl(): void
+    }
+
+    class OrderController {
+        -{static}CHOICES: String[]
+        -orderManager: OrderManager
+        -dishManager: DishManager
+        +OrderController()
+        -addNewOrder(): void
+        -deleteOrder(): void
+        -displayOrderPrice(): void
+        -displayAllOrderPrice(): void
+        -printReceipt(): void
+        #optionSwicher(int): boolean
+        +takeControl(): void
+    }
+}
+namespace Managers {
+    abstract class Manager {
+    -{static}DATABASE_DIRECTORY : String
+    -file : String
+    #Manager(file : String)
+    -ensureDatabaseDirectoryExists() : void
+    #load() : Object
+    #save(o : Object) : void
+    #{abstract}loadData() : void
+    +{abstract}saveData() : void
+    }
+
+    class StaffManager {
+    +StaffManager()
+    #loadData() : void
+    +saveData() : void
+    }
+
+    class DishManager {
+        +DishManager()
+        +addDish(Dish): void
+        +deleteDish(int): void
+        +printDishes(): void
+        +setName(int, String): void
+        +setPrice(int, double): void
+        +getNumOfDishes(): int
+        -throwIfIndexNotValid(int): void
+    }
+
+    class OrderManager {
+        +OrderManager()
+        +addDishToOrder(Dish, int): void
+        +deleteOrder(int): void
+        +getOrderPrice(int): double
+        +getAllOrderValue(): double
+        +printReceipt(): void
+        +getOrders(): ArrayList<Order>
+        +getDishesFromOrder(int): ArrayList<Dish>
+        +getOrderCount(): int
+    }
 }
 
-class StaffManager {
-+StaffManager()
-#loadData() : void
-+saveData() : void
+namespace Entities {
+    class Staff {
+        -staffId: int
+        -staffName: String
+        -position: String
+        -salary: double
+        +Staff(int, String, String, double)
+        +isValidName(String): boolean
+        +getStaffId(): int
+        +setStaffId(int): void
+        +getStaffName(): String
+        +setStaffName(String): void
+        +getPosition(): String
+        +setPosition(String): void
+        +getSalary(): double
+        +setSalary(double): void
+        +toString(): String
+    }
+
+    class Dish {
+        -name: String
+        -price: double
+        +Dish(String, double)
+        +getName(): String
+        +setName(): void
+        +getPrice(): double
+        +setPrice(double): void
+        +toString(): String
+        -isValidName(String): boolean
+        -toTitleCase(String): String
+    }
+
+    class Order {
+        +Order(List<Dish>)
+        +Order()
+        +removeDishFromOrderByIndex(int): void
+        +getTotalPrice(): double
+        +getDishes(): List<Dish>
+        +addDish(Dish): void
+        +getDishCount(): int
+    }
 }
 
-abstract class Controller {
-#choices : String[]
-+Controller(choices : String[])
-+takeControl() : void
-#getChoice() : int
-#{abstract}optionSwitcher() : bool
-}
-
-class StaffController {
--{static}CHOICES : String[]
--staffManager : StaffManager
-+StaffController()
-#optionSwitcher() : bool
--findStaff() : void
--addStaff() : void
--deleteStaff() : void
--editStaff(): void
-}
-
-class Staff {
-    -staffId: int
-    -staffName: String
-    -position: String
-    -salary: double
-    +Staff(int, String, String, double)
-    +isValidName(String): boolean
-    +getStaffId(): int
-    +setStaffId(int): void
-    +getStaffName(): String
-    +setStaffName(String): void
-    +getPosition(): String
-    +setPosition(String): void
-    +getSalary(): double
-    +setSalary(double): void
-    +toString(): String
-}
-
-class Dish {
-    -name: String
-    -price: double
-    +Dish(String, double)
-    +getName(): String
-    +setName(): void
-    +getPrice(): double
-    +setPrice(double): void
-    +toString(): String
-    -isValidName(String): boolean
-    -toTitleCase(String): String
-}
-
-class DishManager {
-    +DishManager()
-    +addDish(Dish): void
-    +deleteDish(int): void
-    +printDishes(): void
-    +setName(int, String): void
-    +setPrice(int, double): void
-    +getNumOfDishes(): int
-    -throwIfIndexNotValid(int): void
-}
-
-class DishController {
-    -{static}CHOICES: String[]
-    -dishManager: DishManager
-    #loadData(): void
-    +saveData(): void
-    +DishController()
-    -addDish(): void
-    -changeName(): void
-    -changePrice(): void
-    -deleteDish(): void
-    -listDishes(): void
-    #optionSwicher(int): boolean
-    +takeControl(): void
-}
-
-class Order {
-    +Order(List<Dish>)
-    +Order()
-    +removeDishFromOrderByIndex(int): void
-    +getTotalPrice(): double
-    +getDishes(): List<Dish>
-    +addDish(Dish): void
-    +getDishCount(): int
-}
-
-class OrderManager {
-    -orders: List<Order>
-    +OrderManager()
-    +addDishToOrder(Dish, int): void
-    +deleteOrder(int): void
-    +getOrderPrice(int): double
-    +getAllOrderValue(): double
-    +printReceipt(): void
-    +getOrders(): ArrayList<Order>
-    +getDishesFromOrder(int): ArrayList<Dish>
-    +getOrderCount(): int
-}
-
-class OrderController {
-    -{static}CHOICES: String[]
-    -orderManager: OrderManager
-    -dishManager: DishManager
-    +OrderController()
-    -addNewOrder(): void
-    -deleteOrder(): void
-    -displayOrderPrice(): void
-    -displayAllOrderPrice(): void
-    -printReceipt(): void
-    #optionSwicher(int): boolean
-    +takeControl(): void
-}
 
 'Staff relations
-Manager <|-- StaffManager
-StaffManager <--* StaffController
-Controller <|-- StaffController
-StaffManager --> "0..*" Staff : staffs
+Managers.Manager <|-- Managers.StaffManager
+Managers.StaffManager <--* Controllers.StaffController
+Controllers.Controller <|-- Controllers.StaffController
+Managers.StaffManager --> "0..*" Entities.Staff : staffs
 
 'Dish relations
-Manager <|-- DishManager
-Controller <|-- DishController
-Dish "0..*\ndishes" <- DishManager: manages <
-DishManager "1\ndishManager" <--* DishController
-DishController .-> Dish
+Managers.Manager <|-- Managers.DishManager
+Controllers.Controller <|-- Controllers.DishController
+Entities.Dish "0..*\ndishes" <- Managers.DishManager: manages <
+Managers.DishManager "1\ndishManager" <--* Controllers.DishController
+Controllers.DishController .-> Entities.Dish
 
 'Order relations
-Manager <|-- OrderManager
-Controller <|-- OrderController
-Order "0..*\norders" <-- OrderManager: manages <
-OrderManager "1\norderManager" <--* OrderController
-OrderManager .> DishManager
-Order ..> Dish
+Managers.Manager <|-- Managers.OrderManager
+Controllers.Controller <|-- Controllers.OrderController
+Entities.Order "0..*\norders" <-- Managers.OrderManager: manages <
+Managers.OrderManager "1\norderManager" <--* Controllers.OrderController
+Managers.OrderManager ..> Managers.DishManager
+Entities.Order ..> Entities.Dish
 
 @enduml
