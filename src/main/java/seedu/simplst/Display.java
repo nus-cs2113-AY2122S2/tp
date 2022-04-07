@@ -129,6 +129,9 @@ public class Display {
         System.out.println("View Command");
         System.out.println("\tFormat: view o/ oid/[ORDER_ID]");
         System.out.println("\tExample: view ug/ oid/1\n");
+        System.out.println("Fulfill Command");
+        System.out.println("\tFormat: fulfill oid/[ORDER_ID]");
+        System.out.println("\tExample: fulfill oid/1\n");
     }
 
     public static void help() {
