@@ -34,6 +34,7 @@ public class ExpenseParser {
     public static final String ERR_LAST_CHAR_SLASH = "/ is not allowed as the last non-space character!";
     public static final String ERR_NONSPACED_SLASH = "/ must be surrounded by white spaces!";
     public static final String ERR_EMPTY_FIELDS = "Fields cannot be empty!";
+    public static final String ASSERT_INPUT_LENGTH_NOT_0 = "Length of user input should not be 0";
 
     /**
      * Reformats the date field into a valid date object.
@@ -101,8 +102,10 @@ public class ExpenseParser {
      */
     public static void checkNumberOfDelimiters(String userInput, String delimiter) throws ExpenseExtraFieldException {
         int lengthOfRawInput = userInput.length();
+        assert lengthOfRawInput != 0 : ASSERT_INPUT_LENGTH_NOT_0;
         String strippedInput = userInput.replace(delimiter, "");
         int lengthOfStrippedInput = strippedInput.length();
+        assert lengthOfStrippedInput != 0 : ASSERT_INPUT_LENGTH_NOT_0;
         int lengthOfDelimiter = delimiter.length();
         if (lengthOfRawInput - lengthOfStrippedInput >= lengthOfDelimiter) {
             throw new ExpenseExtraFieldException(ERR_DUPLICATE_DELIMITERS);
@@ -129,6 +132,7 @@ public class ExpenseParser {
      * @throws ExpenseSurroundSlashSpaceException if slash found is in an invalid position
      */
     public static void lookForIndexOfSlash(String userInput, int i) throws ExpenseSurroundSlashSpaceException {
+        assert userInput != null : ASSERT_INPUT_NOT_NULL;
         char c = userInput.charAt(i);
         if (c == FORWARD_SLASH) {
             checkSlashValidity(userInput, i);
@@ -137,11 +141,13 @@ public class ExpenseParser {
 
     /**
      * Checks if slash found is in a valid position for the content to be processed.
+     *
      * @param userInput the line that is inputted by the user
      * @param i the index of the slash character to be validated
      * @throws ExpenseSurroundSlashSpaceException if slash found is in an invalid position
      */
     public static void checkSlashValidity(String userInput, int i) throws ExpenseSurroundSlashSpaceException {
+        assert userInput.length() != 0 : ASSERT_INPUT_LENGTH_NOT_0;
         if (i == 0) {
             throw new ExpenseSurroundSlashSpaceException(ERR_FIRST_CHAR_SLASH);
         } else if (i == userInput.length() - 1) {

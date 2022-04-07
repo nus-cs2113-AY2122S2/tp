@@ -1,6 +1,24 @@
 # Developer Guide
 
+## Table of Contents 
+* [Acknowledgements](#acknowledgements)
+* [Product Scope](#product-scope)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
+* [User Stories](#user-stories)
+* [Design & Implementation](#design--implementation)
+  * [Main Menu component](#main-menu)
+  * [Study Manager component](#study-manager-component)
+  * [Expense Tracker component](#expense-tracker-component)
+  * [Contacts Manager component](#contacts-manager-component)
+  * [Load and Store](#load-and-store)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
+
+
 ## Acknowledgements
+In this project, we have referenced the following list of materials:
 
 * [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 * [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html)
@@ -52,7 +70,14 @@ faster than a typical mouse driven or GUI driven apps.
 |v2.0|user|parse modules from NUSMods|easily add all my modules with a single command|
 |v2.0|user|save and load entries from a session|reload my entries from the previous session|
 
-## Design & implementation
+## Non-Functional Requirements
+1. Application should work on any mainstream operating system that has **Java 11** or above
+2. Application should work ideally for users who type fast, yet no need for users to have prior
+programming background
+3. Application should be able to perform load and store operations on any mainstream operating
+system without difficulty.
+
+## Design & Implementation
 
 ### Main Menu
 This section describes the implementation of core main menu features.
@@ -149,18 +174,37 @@ The two ways to add modules are illustrated in the sequence diagram below:
 ![](images/StudyManagerSequenceDiagram.png)
 
 
-### Expense Component
+### Expense Tracker Component
+API:[`ExpenseTracker.java`](https://github.com/AY2122S2-CS2113-F10-4/tp/blob/master/src/main/java/seedu/allonus/expense/ExpenseTracker.java)
+
+The `ExpenseTracker` component consists of the ExpenseTracker class, ExpenseParser class and multiple
+custom Exception classes.
 
 ![](images/ExpenseClassDiagram.png)
 
-How the Expense Tracker component works:
+The `ExpenseTracker` class provides the main runner for the `Expense` module of AlloNUS. `expenserunner()` reads 
+in user commands and interacts with the `ExpenseParser` class depending on what the user has typed in. The 
+`ExpenseParser` class either returns with the parsed result or with a custom exception, in which the 
+`ExpenseTracker` class continues validating the inputs of the user before executing the user's commands.
+
+How the Expense Tracker component is used:
 1. From the Main Menu, if the user decides to run `goto m/Expense_Tracker`, the `ExpenseTracker` class takes over.
-2. The `expenseRunner` method begins by taking in user inputs depending on the user's requirements.
+2. The `expenseRunner()` method begins by taking in user inputs depending on the user's requirements. Some examples
+of valid commands include add, delete, list, edit and find.
 3. Depending on the user's input, the `ExpenseParser` class calls 
 `parseXYZExpense` where `XYZ` is a placeholder for the specific command name (eg. `parseDeleteExpense`).
-4. After parsing, the command is executed accordingly within the `ExpenseTracker` class.
+4. If the parsing is valid (i.e. user followed the structure of the command properly), the appropriate field values
+are returned to the `ExpenseTracker` class.
+5. The `ExpenseTracker` class takes these fields and validates them depending on the type of command entered by the user
+in Step 2. (eg. if an `add` command is issued, the `ExpenseTracker` class checks if the Date is formatted properly)
+6. After validating all checks, the command is executed accordingly within the `ExpenseTracker` class.
 
-#### [Proposed] Budgeting Reminder Feature
+The Sequence Diagram below illustrates how the ExpenseTracker class operates if the user decides to add a new expense
+record:
+
+![](images/ExpenseTrackerSequenceDiagram.png)
+
+### [Proposed] Budgeting Reminder Feature
 
 The proposed budgeting reminder feature is facilitated by `ExpenseTracker` and `Expense` class, which adds a 
 private variable kept within the `Expense` class called `budget`. Additionally, it implements the following
@@ -199,8 +243,6 @@ addition will not be processed.
 The following sequence diagram shows how the budget is checked upon every new addition of expense records:
 
 ![](images/BudgetingReminderSequenceDiagram.png)
-
-
 
 ### Contacts
 
@@ -304,9 +346,7 @@ Similar operations occur for entries of type module and contact.
 
 Once all the entries have been loaded and there are no more lines to be read, the loop breaks and control returns to 
 the `run()` method of AllOnUs, so that interactions with the user can begin. 
-## Non-Functional Requirements
 
-{Give non-functional requirements}
 
 ## Glossary
 

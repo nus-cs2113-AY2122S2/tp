@@ -1,0 +1,87 @@
+@startuml
+!include style.puml
+
+box LOGIC_COLOR_T1
+participant ":ExpenseTracker" as ExpenseTracker LOGIC_COLOR
+participant ":Expense" as Expense LOGIC_COLOR
+end box
+
+box  MODEL_COLOR_T1
+participant ":ExpenseParser" as ExpenseParser MODEL_COLOR
+end box
+
+[-> ExpenseTracker : expenseRunner()
+activate ExpenseTracker
+
+loop keep taking in user inputs for Expense module
+    ExpenseTracker -> ExpenseTracker : executeAdd(rawInput:String)
+    activate ExpenseTracker
+    deactivate ExpenseTracker
+
+    ExpenseTracker -> ExpenseParser : parseNewExpense(String)
+
+    activate ExpenseParser
+    opt Missing Delimiters
+        ExpenseParser --> ExpenseTracker : :ExpenseMissingFieldException
+    end opt
+    loop for each field in user input
+        ExpenseParser -> ExpenseParser : parseKeywordExpense(rawInput:String, \n delimiterXYZ:String)
+
+        activate ExpenseParser
+        note bottom : delimiterXYZ refers to either "d/", "a/", "c/" or "r/"
+
+        ExpenseParser -> ExpenseParser : checkNumberOfDelimiters(rawInput:String, \n delimiterXYZ:String)
+        activate ExpenseParser
+        opt Extra Delimiters
+            ExpenseParser --> ExpenseTracker : :ExpenseExtraFieldException
+        end opt
+        deactivate ExpenseParser
+
+        ExpenseParser -> ExpenseParser : checkContainSlash(rawInput:String)
+        activate ExpenseParser
+        opt Slash found in invalid position
+            ExpenseParser --> ExpenseTracker : :ExpenseSurroundSlashSpaceException
+        end opt
+        deactivate ExpenseParser
+
+        opt is Amount field
+        ExpenseParser -> ExpenseParser : isAmountValid(result:String)
+        activate ExpenseParser
+        opt Amount is invalid
+        ExpenseParser --> ExpenseTracker : :ExpenseAmountException
+        end opt
+        deactivate ExpenseParser
+        end opt
+
+        opt Result is empty
+        ExpenseParser --> ExpenseTracker : :ExpenseEmptyFieldException
+
+        ExpenseParser --> ExpenseParser : result:String
+        deactivate ExpenseParser
+    end loop
+
+    ExpenseParser --> ExpenseTracker : result:String
+    deactivate ExpenseParser
+
+    create Expense
+    ExpenseTracker -> Expense
+    activate Expense
+
+    ExpenseTracker -> ExpenseTracker : addExpense(expenseList:List<Expense>,\n expense:Object)
+    activate ExpenseTracker
+    ExpenseTracker -> Expense : add(expense:Object)
+    activate Expense
+    deactivate Expense
+    ExpenseTracker -> Expense : getNoOfItems()
+    activate Expense
+    return noOfItems:int
+    ExpenseTracker -> Expense : setNoOfItems(noOfItems+1:int)
+    activate Expense
+    return
+    deactivate Expense
+    deactivate ExpenseTracker
+end loop
+
+deactivate ExpenseTracker
+end
+@enduml
