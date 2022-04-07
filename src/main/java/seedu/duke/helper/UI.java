@@ -63,6 +63,10 @@ public class UI {
         printDeletePatientMessage();
         printDeleteMedicineMessage();
         printDeleteAppointmentMessage();
+        printEditDoctorMessage();
+        printEditPatientMessage();
+        printEditMedicineMessage();
+        printEditAppointmentMessage();
         printNewLineSeparator();
     }
 
@@ -160,6 +164,42 @@ public class UI {
         System.out.println("Feature: DELETE APPOINTMENT");
         System.out.println("Format: delete appointment /info [appointment id]");
         System.out.println("Example: delete appointment /info S234");
+    }
+
+    public static void printEditDoctorMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: EDIT DOCTOR");
+        System.out.print("Format: edit doctor /info [nric],[name],[age],[gender], ");
+        System.out.println("[address],[DOB],[Specialisation]");
+        System.out.print("Example: edit doctor /info S1234567A, John Cena, ");
+        System.out.println("23, M, 10 Baker Street, 1999-12-31, Urinology");
+    }
+
+    public static void printEditPatientMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: Edit PATIENT");
+        System.out.print("Format: edit patient /info [nric], [name], [age], [gender], ");
+        System.out.println("[address], [DOB], [Date of Admission]");
+        System.out.print("Example: edit patient /info S1234567A, John Cena, 23, ");
+        System.out.println("M, 10 Baker Street, 1999-12-31, 2021-02-15");
+    }
+
+    public static void printEditMedicineMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: EDIT MEDICINE");
+        System.out.print("Format: edit medicine /info [batch id], [name], [dosage], ");
+        System.out.println("[expiry date],[side effects],[quantity]");
+        System.out.print("Example: edit medicine /info A123, Paracetamol, ");
+        System.out.println("500, 2023-06-11, Drowsiness, 10");
+    }
+
+    public static void printEditAppointmentMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: EDIT APPOINTMENT");
+        System.out.print("Format: edit appointment /info [appointment id],[patient nric],");
+        System.out.println("[patient name],[doctor nric],[doctor name],[appointment date],[appointment details]");
+        System.out.print("Example: edit appointment /info A123,S1234567A,Don,");
+        System.out.println("S1234567A,John,2022-10-15,Regular knee checkup");
     }
 
     public int getSize() {
