@@ -762,7 +762,7 @@ To clear the plan scheduled on Monday, enter the following command:
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
-Plan had been cleared for Monday.
+Plan has been cleared for Monday.
 ----------------------------------------------------------------------
 ```
 After a plan has been cleared for a particular day, the day will be shown as a rest day.
@@ -817,7 +817,7 @@ To clear all plans scheduled for the week, enter the following command:
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
-Schedule had been cleared and reset.
+Schedule has been cleared and reset.
 There is no plan scheduled for any day.
 To add plan for any day, enter:
 schedule /update <day number [1-7]> <plan number>
