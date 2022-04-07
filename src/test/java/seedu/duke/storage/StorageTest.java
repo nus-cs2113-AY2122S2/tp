@@ -97,11 +97,6 @@ public class StorageTest {
      * @param actualList the list to check against
      */
     private void assertListEquals(ArrayList<Item> expectedList, ArrayList<Item> actualList) {
-        HashSet<String> checker = new HashSet<String>();
-        for (int i = 0; i < actualList.size(); i++) {
-            checker.add(expectedList.get(i).saveString());
-            checker.add(actualList.get(i).saveString());
-        }
-        assertEquals(checker.size(), actualList.size());
+        assertEquals(true, actualList.containsAll(expectedList));
     }
 }
