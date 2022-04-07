@@ -43,8 +43,11 @@ Summary of code contributions:
 
 #### Contributions to team-based tasks:
 - Set up the initial format for user guide
-- Designed the tables in user guide to explain parameters in command guide
+- Formatted the tables in user guide to explain parameters in command guide
 - Labelled bugs that were reported after PE-D and closed duplicate bugs.
 
 #### Review/mentoring contributions:
-- TBD
+- [Pull Request #31](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/31#pullrequestreview-906699693)
+- [Pull Request #40](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/40#pullrequestreview-911017528)
+- [Pull Request #36](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/36#discussion_r825325236)
+- [Pull Request #53](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/53#discussion_r830723256)
