@@ -727,3 +727,15 @@ Given below are instructions to test the app manually.
 2. Editing an expenditure
    1. Prerequisite: Similar to previous, but existing expenditure instead of income.
    2. Testing similar to previous, but with `editin` instead and additional delimiter of `/c` can be added for category.
+
+### Finding entries
+
+1. Finding incomes and general expenditures
+   1. Test case: `find /d Test`
+      Expected: All incomes and expenditures whose description contains `Test` will be printed out.
+2. Finding expenditures in a category
+   1. Test case: `find /d Test /c 1`
+      Expected: All incomes, and expenditures in the category of `Others`, whose description contains `Test` will be 
+      printed out.
+   2. Test case: `find /d Test /c 7`
+      Expected: No entries are printed. Error details shown in the error message.
