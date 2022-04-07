@@ -37,7 +37,7 @@ public class ShowCommand extends Command {
             + "5) `show <date>`, where date is in the format d/M/YYYY.%n"
             + "6) `show month`%n"
             + "7) `show <month>`, where month can be the full spelling or%n"
-            + "                   the abrreviation of the specfic months%n"
+            + "                   the abbreviation of the specific months%n"
             + "                   E.g. `show sep` or `show september`%n"
             + "E.g. show 23/5/2022 to show timetable for 23th May 2022.%n%n"
             + ""
@@ -110,7 +110,7 @@ public class ShowCommand extends Command {
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "feb":
-            ui.showToUser("Here is your schedule for Feburary:");
+            ui.showToUser("Here is your schedule for February:");
             Timetable.showScheduleByMonth(FEBRUARY, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
