@@ -24,9 +24,9 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 * Name
     * This class represents a name. It sanitises the name used to instantiate it by stripping whitespace from it, and 
       includes a method that checks if the name is valid (contains only alphabetical characters).
-    * 
+     
 #### Enhanced Features
-* Separated dependency of parser class from command class by creating `ActivityEditCommandParser` and 
+* Separated dependency of the `Parser` class from the `Command` class by creating `ActivityEditCommandParser` and 
   `SessionViewCommandParser`.
 * Table Formatter
     * A `TableFormatter` object creates a table that can be modified with new data at any time. When printed, it
@@ -36,7 +36,7 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 * TableFormatterRow
     * A helper class for `TableFormatter`. It represents a single row of the table.
 * Message
-    * A class that contains all hardcoded strings used by all classes in SplitLah, such as error or logger messages.
+    * Set up this class so other developers can store their hardcoded strings in it, such as error and logging messages.
 
 #### Testing
 * Added JUnit tests for `ActivityEditCommand` and `ActivityEditCommandParser`.
