@@ -259,49 +259,59 @@ public class Validator {
         validateAppointmentDetails(parameters[6]);
     }
 
-    public static boolean validateFindPerson(String[] parameters) throws HalpmiException {
+    public static void validateFindDoctor(String[] parameters) throws HalpmiException {
         switch (parameters[0]) {
         case "nric":
             validateNric(parameters[1]);
-            return true;
+            break;
         case "name":
             validateFullName(parameters[1]);
-            return true;
+            break;
         case "age":
             validateAge(parameters[1]);
-            return true;
+            break;
         case "gender":
             validateGender(parameters[1]);
-            return true;
+            break;
         case "address":
             validateAddress(parameters[1]);
-            return true;
+            break;
         case "dob":
             validateDob(parameters[1]);
+            break;
+        case "specialization":
+            validateSpecialization(parameters[1]);
+            break;
         default:
-            return false;
-        }
-    }
-
-    public static void validateFindDoctor(String[] parameters) throws HalpmiException {
-        boolean isValidPerson = validateFindPerson(parameters);
-        if (!isValidPerson) {
-            if (parameters[0].equals("specialization")) {
-                validateSpecialization(parameters[1]);
-            } else {
-                throw new HalpmiException("Input must be an attribute of Doctor");
-            }
+            throw new HalpmiException("Input must be an attribute of Doctor");
         }
     }
 
     public static void validateFindPatient(String[] parameters) throws HalpmiException {
-        boolean isValidPerson = validateFindPerson(parameters);
-        if (!isValidPerson) {
-            if (parameters[0].equals("admissiondate")) {
-                validateAdmissionDate(parameters[1]);
-            } else {
-                throw new HalpmiException("Input must be an attribute of Patient");
-            }
+        switch (parameters[0]) {
+        case "nric":
+            validateNric(parameters[1]);
+            break;
+        case "name":
+            validateFullName(parameters[1]);
+            break;
+        case "age":
+            validateAge(parameters[1]);
+            break;
+        case "gender":
+            validateGender(parameters[1]);
+            break;
+        case "address":
+            validateAddress(parameters[1]);
+            break;
+        case "dob":
+            validateDob(parameters[1]);
+            break;
+        case "admissiondate":
+            validateAdmissionDate(parameters[1]);
+            break;
+        default:
+            throw new HalpmiException("Input must be an attribute of Patient");
         }
     }
 
