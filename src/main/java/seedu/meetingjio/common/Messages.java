@@ -32,8 +32,8 @@ public class Messages {
             + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
     public static final String MESSAGE_EDIT_LESSON_FORMAT = "To edit a lesson: edit n/[Name] i[Index] "
             + "t/[Title] d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
-    public static final String MESSAGE_DELETE_FORMAT = "To delete a lesson: delete n/[Name] i/[Index]\n";
-    public static final String MESSAGE_CLEAR_USER_EVENTS = "To clear a user's events: clear [user]\n";
+    public static final String MESSAGE_DELETE_FORMAT = "To delete an event: delete n/[Name] i/[Index]\n";
+    public static final String MESSAGE_CLEAR_USER_EVENTS = "To clear a user's timetable: clear [Name]\n";
     public static final String MESSAGE_CLEAR_ALL_EVENTS = "To clear all entries: clear all\n";
     public static final String MESSAGE_LIST_ALL_EVENTS = "To list all events: list all\n";
     public static final String MESSAGE_LIST_ALL_LESSONS = "To list all lessons: list_lesson all\n";
