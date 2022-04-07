@@ -41,7 +41,7 @@ public class Parser {
         if (dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
                     || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
                     || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
-            throw new IHospitalException("The format of input is wrong, can check the order");
+            throw new IHospitalException("The format of input is wrong, can check the order\n");
         }
 
         int idIndex = dummy.indexOf("/id") + 4;
@@ -62,6 +62,7 @@ public class Parser {
         //get appointment /d 123456
         String dummy = fullCommand.trim();
         String id =  dummy.substring(dummy.indexOf("/d") + 3).trim();
+        System.out.println("qwqw" + id);
         return new GetAppointmentsOfDoctorCommand(id);
     }
 
