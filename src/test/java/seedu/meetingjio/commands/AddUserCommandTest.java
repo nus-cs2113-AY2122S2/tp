@@ -13,12 +13,13 @@ import seedu.meetingjio.timetables.MasterTimetable;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_USER;
 
 class AddUserCommandTest {
-    private MasterTimetable masterTimetable;
-    private static Command addUserJohn = new AddUserCommand("john");
+    MasterTimetable masterTimetable;
+    Command addUserJohn;
 
     @BeforeEach
     public void setUp() {
         masterTimetable = new MasterTimetable();
+        addUserJohn = new AddUserCommand("john");
     }
 
     @Test
