@@ -60,9 +60,9 @@ Examples of usage:
 ```
 > search d/Draw
 Here are the items matching your search terms: 
-0. Markers | 3
-1. Whiteboard | 1
-2. Chalkboard | 1
+1. Markers | 3
+2. Whiteboard | 1
+3. Chalkboard | 1
 ```
 
 ```
