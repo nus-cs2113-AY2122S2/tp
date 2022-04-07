@@ -320,6 +320,7 @@ Below are instructions to perform manual testing of the application. Please refe
 1. Download the jar file and copy the file to an empty folder.
 2. Launch a command terminal and start the application by typing `java -jar tp.jar`.
 3. Exit the application by typing `exit`.
+
 <br>
 
 ### Adding a module
@@ -329,6 +330,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: No new module is added. Error details in the message shows that a module of the same name already exists.
 3. Test Case: `add mod CS2101` <br>
    Expected: No new module is added. Error details in the message shows that there are missing modular credits.
+
 <br>
 
 ### Adding a task
@@ -338,6 +340,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: A task with name `start PE` is added under the module CS2113T.
 4. Test Case: `add task Invalid Name` <br>
    Expected: No task is added. Error details in the message shows that the task name is invalid.
+
 <br>
 
 ### Deleting a module
@@ -347,7 +350,8 @@ Below are instructions to perform manual testing of the application. Please refe
 4. Test Case: `del mod CS2113T` <br>
    Expected: The module CS2113T is deleted.
 5. Test Case: `del mod CS2101` <br>
-   Expected: If CS2101 does not exist, no module is deleted. Error details in the message shows that there are no such module. 
+   Expected: No module is deleted. Error details in the message shows that there are no such module. 
+
 <br>
 
 ### Deleting a task
@@ -357,6 +361,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: If there exists a module CS2113T, and it has at least one task, the first task will be deleted.
 4. Test Case: `del task -1` <br>
    Expected: No task is deleted. Error details in the message shows that the task number is invalid.
+
 <br>
 
 ### Editing a module
@@ -366,6 +371,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: The description of CS2113T is set to `Changed`.
 4. Test Case: `edit mod CS2113T -t "2 hours"` <br>
    Expected: The module remains unchanged. Error details in the message shows that the module description is missing.
+
 <br>
 
 ### Editing a task
@@ -375,6 +381,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: The description of the first task in `General Tasks` is set to `Changed`.
 4. Test Case: `edit task 1 -d "Changed" -t "2 hours"` <br>
    Expected: The task remains unchanged. Error details in the message shows that there is an excess argument of `-t "2 hours"`.
+
 <br>
 
 ### Setting grade for a module
@@ -384,6 +391,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: The grade of `CS2113T` has been set to `A+`.
 4. Test Case: `grade CS2113T E` <br>
    Expected: No grade is set. Error details in the message shows that `E` is an invalid module grade.
+
 <br>
 
 ### Calculating GPA
@@ -391,6 +399,7 @@ Below are instructions to perform manual testing of the application. Please refe
 2. Assumption: You have a module `CS2113T` of `4` modular credits and grade `A+` and a module `CS2101` of `4` modular credits and grade `B`.
 3. Test Case: `gpa` <br>
    Expected: Your `gpa` is calculated as `4.25`.
+
 <br>
 
 ### Showing Help
@@ -398,6 +407,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: A message for format of the `help` command is shown.
 2. Test Case: `help add"` <br>
    Expected: A message for the format of the `add` command is shown.
+
 <br>
 
 ### Setting options
@@ -407,6 +417,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: An error message is shown detailing that there is no configuration called `INVALID_CONFIG`.
 3. Test Case: `option SHOW_COMPLETED_TASKS=invalid` <br>
    Expected: No configuration is changed. Error details in the message shows that the value `invalid` is not supported for configuration `SHOW_COMPLETED_TASKS`.
+
 <br>
 
 ### Adding tags to a task
@@ -416,6 +427,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: The tag `IMPT` is added to your first task in `General Tasks`.
 4. Test Case: `tag add 1 .invalid` <br>
    Expected: No tag is added. Error details in the message shows that `.invalid` is an invalid tag name.
+
 <br>
 
 ### Deleting tags to a task
@@ -425,6 +437,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: The tag `IMPT` is removed from the first task in `General Tasks`.
 4. Test Case: `tag del 1 OTHERS` <br>
    Expected: No tag is deleted. Error details in the message shows that no such tag exists
+
 <br>
 
 ### Listing all modules and tasks
@@ -434,6 +447,7 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: All of your modules and tasks are shown.
 4. Test Case: `list IMPT` <br>
    Expected: Only tasks tagged as `IMPT` are shown. All of your modules are still shown regardless.
+
 <br>
 
 ### Marking and unmarking a task as completed
@@ -445,16 +459,19 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: The first task in `General Tasks` is unmarked.
 5. Test Case: `mark t 1` <br>
    Expected: No tasks is marked/unmarked. Error details in the message shows that `t` is an invalid flag.
+
 <br>
 
 ### Saving the data in the application
 1. Prerequisite: There are data (module, tasks and options) created in the application. 
 2. Test Case: `save` <br>
    Expected: Your data will be saved. You can view them directly as `json` files in the `data` directory.
+
 <br>
 
 ### Resetting the modules and tasks in the application
 1. Prerequisite: There are modules and tasks added in the application.
 2. Test Case: `reset` <br>
    Expected: All of your modules and tasks will be removed.
+
 <br>
