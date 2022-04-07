@@ -23,9 +23,9 @@ class PersonTest {
     private static final boolean NOT_SILENT = false;
     private static final boolean PERMANENT = true;
 
-    private static final String ADD_INCOME = "A recurring income of 1000.0 from Testing has been added to Alice"
+    private static final String ADD_INCOME = "A recurring income of $1000.00 from Testing has been added to Alice"
             + System.lineSeparator();
-    private static final String ADD_EXPEND = "A recurring expenditure of 1000.0 for Testing has been added to Alice"
+    private static final String ADD_EXPEND = "A recurring expenditure of $1000.00 for Testing has been added to Alice"
             + System.lineSeparator();
 
     private ByteArrayOutputStream redirectIO() {

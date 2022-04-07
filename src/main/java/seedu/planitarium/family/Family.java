@@ -4,6 +4,7 @@ package seedu.planitarium.family;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
+import seedu.planitarium.global.UI;
 
 import java.util.logging.Level;
 
@@ -184,15 +185,15 @@ public class Family {
         Double sum = 0.0;
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
-            String income = formatValue(personList.getTotalIncome());
-            String expenditure = formatValue(personList.getTotalExpenditure());
+            String income = UI.formatValue(personList.getTotalIncome());
+            String expenditure = UI.formatValue(personList.getTotalExpenditure());
             Double remain = personList.getRemain();
             sum += remain;
-            String disposable = formatValue(remain);
+            String disposable = UI.formatValue(remain);
             String generation = getGenerationName(i);
             printFormattedOverview(i, income, expenditure, disposable, generation);
         }
-        String familyDisposable = formatValue(sum);
+        String familyDisposable = UI.formatValue(sum);
         System.out.println("Total disposable income in family: " + familyDisposable);
     }
 
@@ -211,25 +212,6 @@ public class Family {
                 + Constants.INDENTATION + "Income: " + income + System.lineSeparator()
                 + Constants.INDENTATION + "Expenditure: " + expenditure + System.lineSeparator()
                 + Constants.INDENTATION + "Disposable: " + disposable + System.lineSeparator());
-    }
-
-    /**
-     * Returns the formatting of a monetary value depending on its polarity.
-     *
-     * @param entry The monetary value
-     * @return The formatting of the value
-     */
-    public String formatValue(Double entry) {
-        boolean isNegative = false;
-        if (entry < 0) {
-            isNegative = true;
-            entry = (-entry);
-        }
-        String strDouble = String.format("%.2f", entry);
-        if (isNegative) {
-            return ("-$" + strDouble);
-        }
-        return ("$" + strDouble);
     }
 
     /**

@@ -23,8 +23,6 @@ public class FamilyTest {
     private static final int FIRST_ENTRY = 1;
     private static final Double VALID_AMOUNT = 1000.0;
     private static final Double NEW_AMOUNT = 500.0;
-    private static final Double NEGATIVE_AMOUNT = -1000.0;
-    private static final Double THREE_DP_AMOUNT = 123.456;
     private static final String VALID_DESCRIPTION = "Testing";
     private static final boolean PERMANENT = true;
 
@@ -233,25 +231,5 @@ public class FamilyTest {
         family.editExpend(PARENTS_INDEX, FIRST_ENTRY, FIRST_ENTRY, null, NEW_AMOUNT, null,
                 null);
         assertEquals(NEW_AMOUNT, family.getList(PARENTS_INDEX).getTotalExpenditure());
-    }
-
-    @Test
-    public void formatValue_negativeValue_minusInFrontOfDollar() {
-        Family family = new Family();
-        Double value = NEGATIVE_AMOUNT;
-        assertEquals("-$1000.00", family.formatValue(value));
-    }
-
-    @Test
-    public void formatValue_notNegativeValue_noMinusInFrontOfDollar() {
-        Family family = new Family();
-        Double value = VALID_AMOUNT;
-        assertEquals("$1000.00", family.formatValue(value));
-    }
-
-    @Test void formatValue_moreThan2DecimalPointValue_print2DP() {
-        Family family = new Family();
-        Double value = THREE_DP_AMOUNT;
-        assertEquals("$123.46", family.formatValue(value));
     }
 }
