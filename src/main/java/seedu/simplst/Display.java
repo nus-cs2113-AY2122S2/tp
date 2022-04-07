@@ -76,9 +76,10 @@ public class Display {
     public static void helpUnitGood() {
         System.out.println("------------------------- Unit Good Commands -------------------------");
         System.out.println("Add new Unit Good Command");
-        System.out.println("\tFormat: add ug/ sku/[SKU] n/[NAME] d/[DESCRIPTION] cap/[CAPACITY]");
+        System.out.println("\tFormat: add ug/ sku/[SKU] n/[NAME] d/[DESCRIPTION]"
+                + " size/[ESTIMATED_SIZE]");
         System.out.println("\tExample: add ug/ sku/WC1 n/Wooden Chair "
-                + "d/Chair made of oak from Europe cap/Medium\n");
+                + "d/Chair made of oak from Europe size/Medium\n");
         System.out.println("Remove Unit Good Command");
         System.out.println("\tFormat: remove ug/ sku/[SKU]");
         System.out.println("\tExample: remove ug/ sku/WC1\n");
