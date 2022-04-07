@@ -7,10 +7,10 @@ autonumber 2.1
 title Sequence Diagram of `PlanList#createAndAddPlan()`
 hide footbox
 
-participant "planList\n:PlanList" AS pl
-participant "workoutList\n:WorkoutList" AS wl
+participant "planList\n:PlanList" AS pl #LightSkyBlue
+participant "workoutList\n:WorkoutList" AS wl #LightSkyBlue
 
-activate pl
+activate pl #LightSkyBlue
 group sd Write new Plan data into file on user's system.
 
 ref over pl
