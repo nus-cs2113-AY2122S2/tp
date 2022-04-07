@@ -1,6 +1,11 @@
 package seedu.allonus.modules;
 
 
+import seedu.allonus.AllOnUs;
+import seedu.allonus.contacts.ContactsManager;
+import seedu.allonus.expense.Expense;
+import seedu.allonus.expense.ExpenseTracker;
+import seedu.allonus.mode.Mode;
 import seedu.allonus.modules.exceptions.ModuleCodeException;
 import seedu.allonus.modules.exceptions.ModuleCategoryException;
 import seedu.allonus.modules.exceptions.ModuleDayException;
@@ -23,6 +28,7 @@ import java.util.logging.Logger;
  * Represents the class that will handle Modules created by the user.
  */
 public class StudyManager {
+    public static final String ALREADY_IN_STUDY_MANAGER_MESSAGE = "You are already in Study Manager.";
     private static ArrayList<Module> modulesList = new ArrayList<>();
 
     /**
@@ -32,14 +38,23 @@ public class StudyManager {
     private static final String MENU_COMMAND = "menu";
     private static final String LIST_COMMAND = "list";
     private static final String DELETE_COMMAND = "rm";
-    private static final String ADD_COMMAND = "add";
+    public static final String ADD_COMMAND = "add";
     private static final String EDIT_COMMAND = "edit";
     private static final String FIND_COMMAND = "find";
     public static final String READ_ICS_COMMAND = "read ics";
-    private static final String MODULE_TIME_DELIMITER = "t/";
-    private static final String MODULE_DAY_DELIMITER = "d/";
-    private static final String MODULE_CODE_DELIMITER = "m/";
-    private static final String MODULE_CATEGORY_DELIMITER = "c/";
+
+    public static final String MODULE_TIME_DELIMITER = "t/";
+    public static final String MODULE_DAY_DELIMITER = "d/";
+    public static final String MODULE_CODE_DELIMITER = "m/";
+    public static final String MODULE_CATEGORY_DELIMITER = "c/";
+    public static final String MODULE_CATEGORY_LEC = "Lecture";
+    public static final String MODULE_CATEGORY_TUT = "Tutorial";
+    public static final String MODULE_CATEGORY_EXAM = "Exam";
+    public static final String MODULE_CATEGORY_LAB = "Laboratory";
+    public static final String CATEGORY_LECTURE_SHORTHAND = "lec";
+    public static final String CATEGORY_TUTORIAL_SHORTHAND = "tut";
+    public static final String CATEGORY_EXAM_SHORTHAND = "exam";
+    public static final String CATEGORY_LAB_SHORTHAND = "lab";
 
     private static final String WELCOME_MESSAGE = "Welcome to Modules Tracker, where you can track all your "
             + "classes.";
@@ -105,6 +120,7 @@ public class StudyManager {
 
     private static ModuleParser moduleParser = new ModuleParser();
 
+
     public ArrayList<Module> getModulesList() {
         return modulesList;
     }
@@ -112,13 +128,15 @@ public class StudyManager {
     /**
      * Runs the Study Manager to manage the modules.
      * @param ui Contains the input by the user.
+     * @return mode value pertaining to either menu, expense tracker or contact manager.
      */
-    public void studyManagerRunner(TextUi ui) {
+    public Mode studyManagerRunner(TextUi ui) {
         ModuleCalendarReader icsParser = new ModuleCalendarReader();
         logger.setLevel(Level.WARNING);
         printWelcomeMessage();
         String userInput;
         boolean isRunning = true;
+        Mode mode = Mode.MENU;
         while (isRunning) {
             isModified = false;
             userInput = ui.getUserInput();
@@ -136,6 +154,14 @@ public class StudyManager {
                 findModule(userInput);
             } else if (userInput.startsWith(READ_ICS_COMMAND)) {
                 openIcsFile(ui, icsParser);
+            } else if (AllOnUs.isContactsManagerCommand(userInput)) {
+                mode = Mode.CONTACTS_MANAGER;
+                isRunning = false;
+            } else if (AllOnUs.isExpenseTrackerCommand(userInput)) {
+                mode = Mode.EXPENSE_TRACKER;
+                isRunning = false;
+            } else if (AllOnUs.isStudyManagerCommand(userInput)) {
+                printAlreadyInStudyManagerMessage(ui);
             } else {
                 printMessage(UNKNOWN_INPUT_MESSAGE);
             }
@@ -143,6 +169,14 @@ public class StudyManager {
                 storageFile.saveData();
             }
         }
+        return mode;
+    }
+
+    /**
+     * Prints a message to inform user they are already in the study manager.
+     */
+    private void printAlreadyInStudyManagerMessage(TextUi ui) {
+        ui.showToUser(ALREADY_IN_STUDY_MANAGER_MESSAGE);
     }
 
     private void openIcsFile(TextUi ui, ModuleCalendarReader icsParser) {

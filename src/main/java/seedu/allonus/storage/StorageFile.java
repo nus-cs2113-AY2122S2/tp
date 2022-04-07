@@ -1,8 +1,10 @@
 package seedu.allonus.storage;
 
+import seedu.allonus.contacts.ContactParser;
 import seedu.allonus.contacts.ContactsManager;
 import seedu.allonus.contacts.entry.Contact;
 import seedu.allonus.expense.Expense;
+import seedu.allonus.expense.ExpenseParser;
 import seedu.allonus.expense.ExpenseTracker;
 import seedu.allonus.modules.Module;
 import seedu.allonus.modules.StudyManager;
@@ -47,6 +49,17 @@ public class StorageFile {
     public static final String LOG_FILE_NOT_FOUND = "File not found and will now attempt to create.";
     public static final String LOG_UNABLE_TO_WRITE_TO_FILE = "Unable to write data to file. IOException occurred.";
     public static final String ASSERT_FILE_EXISTS = "File f should exist.";
+    public static final String FILE_ENTRY_DELIMITER = ",";
+    public static final String EXPENSE_ENTRY_IDENTIFIER = "E";
+    public static final String MODULE_ENTRY_IDENTIFIER = "S";
+    public static final String CONTACT_ENTRY_IDENTIFIER = "C";
+    public static final int NUMBER_OF_SEGMENTS_TO_SPLIT_INTO = 2;
+    public static final int INDEX_OF_IDENTIFIER_SEGMENT = 0;
+    public static final int INDEX_OF_DATA_SEGMENT = 1;
+    public static final String EMPTY_STRING = "";
+    public static final int INDEX_OF_FIRST_ELEMENT = 0;
+    public static final String WHITESPACE = " ";
+    public static final String FORWARD_SLASH = "/";
 
     private static ContactsManager contactsManager;
     private static StudyManager studyManager;
@@ -77,7 +90,7 @@ public class StorageFile {
      * @param studyManagerParam instance of class <code>StudyManager</code>.
      */
     public static void setFields(ContactsManager contactsManagerParam, ExpenseTracker expenseTrackerParam,
-                                 StudyManager studyManagerParam, String fileNameParam) {
+            StudyManager studyManagerParam, String fileNameParam) {
         contactsManager = contactsManagerParam;
         expenseTracker = expenseTrackerParam;
         studyManager = studyManagerParam;
@@ -169,16 +182,16 @@ public class StorageFile {
         Scanner fileReader = new Scanner(f);
         while (fileReader.hasNext()) {
             String fileRow = fileReader.nextLine();
-            String[] dataEntry = fileRow.split(",", 2);
-            if (dataEntry[0].equals("E")) {
+            String[] dataEntry = fileRow.split(FILE_ENTRY_DELIMITER, NUMBER_OF_SEGMENTS_TO_SPLIT_INTO);
+            if (dataEntry[INDEX_OF_IDENTIFIER_SEGMENT].equals(EXPENSE_ENTRY_IDENTIFIER)) {
                 logger.log(Level.INFO, LOG_ADD_EXPENSE_ENTRY);
-                loadExpense(dataEntry[1]);
-            } else if (dataEntry[0].equals("S")) {
+                loadExpense(dataEntry[INDEX_OF_DATA_SEGMENT]);
+            } else if (dataEntry[INDEX_OF_IDENTIFIER_SEGMENT].equals(MODULE_ENTRY_IDENTIFIER)) {
                 logger.log(Level.INFO, LOG_ADD_MODULE_ENTRY);
-                loadModule(dataEntry[1]);
-            } else if (dataEntry[0].equals("C")) {
+                loadModule(dataEntry[INDEX_OF_DATA_SEGMENT]);
+            } else if (dataEntry[INDEX_OF_IDENTIFIER_SEGMENT].equals(CONTACT_ENTRY_IDENTIFIER)) {
                 logger.log(Level.INFO, LOG_ADD_CONTACT_ENTRY);
-                loadContact(dataEntry[1]);
+                loadContact(dataEntry[INDEX_OF_DATA_SEGMENT]);
             } else {
                 logger.log(Level.WARNING, LOG_CORRUPTED_ENTRY);
                 continue;
@@ -196,8 +209,11 @@ public class StorageFile {
     public String getExpenseInFileFormat(int listIndex) {
         logger.log(Level.INFO, LOG_CONVERT_EXPENSE_TO_FILE_FORMAT);
         Expense expense = (expenseTracker.getExpenseList()).get(listIndex);
-        return "E,add d/" + expense.getDate() + " a/" + expense.getAmount() + " c/"
-                + expense.getCategory() + " r/" + expense.getRemark();
+        return EXPENSE_ENTRY_IDENTIFIER + FILE_ENTRY_DELIMITER + ExpenseTracker.KEYWORD_ADD
+                + ExpenseParser.DATE_DELIMITER + expense.getDate()
+                + ExpenseParser.AMOUNT_DELIMITER + expense.getAmount()
+                + ExpenseParser.CATEGORY_DELIMITER + expense.getCategory()
+                + ExpenseParser.REMARKS_DELIMITER + expense.getRemark();
     }
 
     /**
@@ -210,25 +226,28 @@ public class StorageFile {
     public String getModuleInFileFormat(int listIndex) {
         logger.log(Level.INFO, LOG_CONVERT_MODULE_TO_FILE_FORMAT);
         Module module = (studyManager.getModulesList()).get(listIndex);
-        String category = "";
+        String category = EMPTY_STRING;
         switch (module.getCategory()) {
-        case "Lecture":
-            category = "lec";
+        case StudyManager.MODULE_CATEGORY_LEC:
+            category = StudyManager.CATEGORY_LECTURE_SHORTHAND;
             break;
-        case "Exam":
-            category = "exam";
+        case StudyManager.MODULE_CATEGORY_EXAM:
+            category = StudyManager.CATEGORY_EXAM_SHORTHAND;
             break;
-        case "Tutorial":
-            category = "tut";
+        case StudyManager.MODULE_CATEGORY_TUT:
+            category = StudyManager.CATEGORY_TUTORIAL_SHORTHAND;
             break;
-        case "Laboratory":
-            category = "lab";
+        case StudyManager.MODULE_CATEGORY_LAB:
+            category = StudyManager.CATEGORY_LAB_SHORTHAND;
             break;
         default:
             assert false : ASSERT_CATEGORY_IS_ACCOUNTED_FOR;
         }
-        return "S,add m/" + module.getModuleCode() + " c/" + category + " d/"
-                + module.getDay() + " t/" + module.getTimeSlot();
+        return MODULE_ENTRY_IDENTIFIER + FILE_ENTRY_DELIMITER + StudyManager.ADD_COMMAND
+                + WHITESPACE + StudyManager.MODULE_CODE_DELIMITER + module.getModuleCode()
+                + WHITESPACE + StudyManager.MODULE_CATEGORY_DELIMITER + category
+                + WHITESPACE + StudyManager.MODULE_DAY_DELIMITER + module.getDay()
+                + WHITESPACE + StudyManager.MODULE_TIME_DELIMITER + module.getTimeSlot();
     }
 
     /**
@@ -241,8 +260,11 @@ public class StorageFile {
     public String getContactInFileFormat(int listIndex) {
         logger.log(Level.INFO, LOG_CONVERT_CONTACT_TO_FILE_FORMAT);
         Contact contact = (contactsManager.getContactsList()).get(listIndex);
-        return "C,add n/" + contact.getName() + " f/" + contact.getFaculty() + " e/"
-                + contact.getEmail() + " d/" + contact.getDescription();
+        return CONTACT_ENTRY_IDENTIFIER + FILE_ENTRY_DELIMITER + ContactsManager.ADD_COMMAND_STRING
+                + WHITESPACE + ContactParser.NAME_DELIMITER + FORWARD_SLASH + contact.getName()
+                + WHITESPACE + ContactParser.FACULTY_DELIMITER + FORWARD_SLASH + contact.getFaculty()
+                + WHITESPACE + ContactParser.EMAIL_DELIMITER + FORWARD_SLASH + contact.getEmail()
+                + WHITESPACE + ContactParser.DESCRIPTION_DELIMITER + FORWARD_SLASH + contact.getDescription();
     }
 
     /**
@@ -257,24 +279,24 @@ public class StorageFile {
 
         logger.log(Level.INFO, LOG_SAVING_EXPENSE_ENTRIES);
         if (expenseTracker.getExpenseCount() == 0) {
-            fileWrite.write("");
+            fileWrite.write(EMPTY_STRING);
             fileWrite.close();
         } else {
-            fileWrite.write(getExpenseInFileFormat(0) + "\n");
+            fileWrite.write(getExpenseInFileFormat(INDEX_OF_FIRST_ELEMENT) + "\n");
             fileWrite.close();
         }
         fileWrite = new FileWriter(datafileRelativePath, true);
-        for (int i = 1; i < expenseTracker.getExpenseCount(); i++) {
+        for (int i = INDEX_OF_FIRST_ELEMENT + 1; i < expenseTracker.getExpenseCount(); i++) {
             fileWrite.write(getExpenseInFileFormat(i) + "\n");
         }
 
         logger.log(Level.INFO, LOG_SAVING_MODULE_ENTRIES);
-        for (int i = 0; i < studyManager.getModuleCount(); i++) {
+        for (int i = INDEX_OF_FIRST_ELEMENT; i < studyManager.getModuleCount(); i++) {
             fileWrite.write(getModuleInFileFormat(i) + "\n");
         }
 
         logger.log(Level.INFO, LOG_SAVING_CONTACT_ENTRIES);
-        for (int i = 0; i < contactsManager.getContactsCount(); i++) {
+        for (int i = INDEX_OF_FIRST_ELEMENT; i < contactsManager.getContactsCount(); i++) {
             fileWrite.write(getContactInFileFormat(i) + "\n");
         }
         fileWrite.close();

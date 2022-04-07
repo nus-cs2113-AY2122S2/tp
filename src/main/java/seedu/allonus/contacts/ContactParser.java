@@ -34,10 +34,10 @@ public class ContactParser {
             "*** Note: the email you entered might not be in the correct format! ***";
 
     private static final String CONTACTS_DELIMITERS = "[nfetd]/";
-    private static final char NAME_DELIMITER = 'n';
-    private static final char FACULTY_DELIMITER = 'f';
-    private static final char EMAIL_DELIMITER = 'e';
-    private static final char DESCRIPTION_DELIMITER = 'd';
+    public static final char NAME_DELIMITER = 'n';
+    public static final char FACULTY_DELIMITER = 'f';
+    public static final char EMAIL_DELIMITER = 'e';
+    public static final char DESCRIPTION_DELIMITER = 'd';
 
     private static final Logger logger = Logger.getLogger("");
     private static final int MAX_NUMBER_OF_FIELDS = 4;
