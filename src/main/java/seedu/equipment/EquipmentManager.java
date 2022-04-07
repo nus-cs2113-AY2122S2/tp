@@ -54,7 +54,7 @@ public class EquipmentManager {
      * @param checkParam Name of Equipment in String.
      * @return An ArrayList of Equipments with the same item name as the parameter.
      */
-    public ArrayList<Equipment> checkEquipment(Pair<String, ?> checkParam){
+    public ArrayList<Equipment> checkEquipment(Pair<String, ?> checkParam) {
         ArrayList<Equipment> listOfEquipments = new ArrayList<>();
         String arg = checkParam.getKey();
         switch (arg) {
