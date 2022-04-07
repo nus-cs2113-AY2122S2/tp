@@ -46,6 +46,7 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_NO_VALUE_FOR_PARAMETER_MESSAGE;
 import static seedu.sherpass.constant.Message.WHITESPACE;
 
 public class TaskParser {
@@ -57,14 +58,18 @@ public class TaskParser {
      * @param argument  The full argument given by the user
      * @return The value given by the user for a particular parameter
      */
-    public static String parseArgument(String parameter, String argument) {
+    public static String parseArgument(String parameter, String argument) throws InvalidInputException {
         if (!argument.contains(parameter)) {
             return EMPTY_STRING;
         }
-        int indexAfterParameter = argument.indexOf(parameter) + parameter.length() + WHITESPACE_OFFSET;
-        String stringAfterParameter = argument.substring(indexAfterParameter);
-        String[] splitArguments = stringAfterParameter.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
-        return splitArguments[SPLIT_FIRST_PART_INDEX];
+        try {
+            int indexAfterParameter = argument.indexOf(parameter) + parameter.length() + WHITESPACE_OFFSET;
+            String stringAfterParameter = argument.substring(indexAfterParameter);
+            String[] splitArguments = stringAfterParameter.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
+            return splitArguments[SPLIT_FIRST_PART_INDEX];
+        } catch (IndexOutOfBoundsException exception) {
+            throw new InvalidInputException(ERROR_NO_VALUE_FOR_PARAMETER_MESSAGE);
+        }
     }
 
     /**
@@ -133,7 +138,7 @@ public class TaskParser {
         try {
             return LocalTime.parse(taskTime, timeOnlyFormat);
         } catch (DateTimeParseException e) {
-            throw new InvalidInputException();
+            throw new InvalidInputException(ERROR_INVALID_DATETIME_MESSAGE);
         }
     }
 
@@ -190,7 +195,8 @@ public class TaskParser {
      * @param argument   The user input
      * @throws IllegalArgumentException If the frequency specified is invalid
      */
-    private static void prepareAddFrequency(AddCommand newCommand, String argument) throws IllegalArgumentException {
+    private static void prepareAddFrequency(AddCommand newCommand, String argument) throws IllegalArgumentException,
+            InvalidInputException {
         newCommand.setFrequency(Frequency.valueOf(parseArgument(FREQUENCY_DELIMITER, argument).toUpperCase()));
     }
 
@@ -218,10 +224,6 @@ public class TaskParser {
             return new HelpCommand(AddCommand.COMMAND_WORD);
         } catch (InvalidInputException e) {
             ui.showError(e.getMessage());
-            ui.showLine();
-            return new HelpCommand(AddCommand.COMMAND_WORD);
-        } catch (IndexOutOfBoundsException e) {
-            ui.showError(ERROR_EMPTY_ADD_COMMANDS_MESSAGE);
             ui.showLine();
             return new HelpCommand(AddCommand.COMMAND_WORD);
         }
@@ -255,10 +257,14 @@ public class TaskParser {
     private static EditCommand prepareEditTaskContent(String argument) throws InvalidInputException {
         String[] splitInput = argument.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
         int editIndex = Integer.parseInt(splitInput[EDIT_INDEX]) - INDEX_OFFSET;
-        String taskDescription = parseDescription(splitInput[EDIT_TASK_CONTENT]);
-        String doOnDateString = parseArgument(DO_DATE_DELIMITER, splitInput[EDIT_TASK_CONTENT]);
-        String startTimeString = parseArgument(START_TIME_DELIMITER, splitInput[EDIT_TASK_CONTENT]);
-        String endTimeString = parseArgument(END_TIME_DELIMITER, splitInput[EDIT_TASK_CONTENT]);
+        String editTaskContent = EMPTY_STRING;
+        if (splitInput.length > 1) {
+            editTaskContent = splitInput[EDIT_TASK_CONTENT];
+        }
+        String taskDescription = parseDescription(editTaskContent);
+        String doOnDateString = parseArgument(DO_DATE_DELIMITER, editTaskContent);
+        String startTimeString = parseArgument(START_TIME_DELIMITER, editTaskContent);
+        String endTimeString = parseArgument(END_TIME_DELIMITER, editTaskContent);
         LocalDate doOnDate = (doOnDateString.isBlank()) ? null : prepareTaskDate(doOnDateString);
         LocalTime startTime = (startTimeString.isBlank()) ? null : prepareTaskTime(startTimeString);
         LocalTime endTime = (endTimeString.isBlank()) ? null : prepareTaskTime(endTimeString);
@@ -296,8 +302,9 @@ public class TaskParser {
             boolean isRepeating = argument.contains(FREQUENCY_DELIMITER);
             newCommand.setRepeating(isRepeating);
             prepareEditByDate(newCommand, argument);
+            newCommand.checkValidCommand();
             return newCommand;
-        } catch (InvalidInputException | IndexOutOfBoundsException e) {
+        } catch (InvalidInputException e) {
             ui.showError(e.getMessage());
             ui.showLine();
             return new HelpCommand(EditCommand.COMMAND_WORD);
