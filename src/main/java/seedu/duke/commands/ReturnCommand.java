@@ -6,17 +6,21 @@ import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
-import static seedu.duke.parser.CliSyntax.PREFIX_NAME;
+import static seedu.duke.parser.CliSyntax.*;
 
 
 public class ReturnCommand extends Command {
+    private final int itemIndex;
+    private final String borrowerName;
     protected int itemNumber = -1;
     public static final String COMMAND_WORD = "return";
     public static final String COMMAND_NAME = "Return an item:";
     public static final String USAGE_MESSAGE = "Marks item as returned";
-    public static final String COMMAND_FORMAT = COMMAND_WORD + " [item number] " + PREFIX_NAME + "[Student Name]";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + PREFIX_ITEM_INDEX + "[item number] " + PREFIX_BORROWER_NAME + "[Student Name]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n"
             + "[Function] "
             + USAGE_MESSAGE
@@ -28,19 +32,12 @@ public class ReturnCommand extends Command {
     /**
      * Prepares the return command for execution by extracting the task number of the task to be marked.
      *
-     * @param userInput User's input string
+     * @param itemIndex Index of item to be returned
+     * @param borrowerName Name of student who borrowed the item and now wishes to return it
      */
-    public ReturnCommand(String userInput) {
-        Ui ui = new Ui();
-        try {
-            itemNumber = parseInt(userInput.trim());
-        } catch (NumberFormatException e) {
-            ui.showMessages(Messages.MISSING_ITEM_NUMBER_MESSAGE);
-            ui.showDivider();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ui.showMessages(Messages.INVALID_ITEM_NUMBER_MESSAGE);
-            ui.showDivider();
-        }
+    public ReturnCommand(int itemIndex, String borrowerName) {
+        this.borrowerName = borrowerName;
+        this.itemIndex = itemIndex;
     }
 
     protected static boolean checkItemListSize(ItemList itemList) {
@@ -59,10 +56,8 @@ public class ReturnCommand extends Command {
      */
     @Override
     public void execute(ItemList itemList, Ui ui) {
+        // If the item list is empty, then no item can be returned.
         boolean isEmptyItemList = checkItemListSize(itemList);
-        if (itemNumber == -1) {
-            return;
-        }
         if (isEmptyItemList) {
             ui.showMessages(Messages.EMPTY_ITEM_LIST_MESSAGE);
             ui.showDivider();
@@ -70,7 +65,7 @@ public class ReturnCommand extends Command {
         }
         Item returnedItem = null;
         try {
-            returnedItem = itemList.getItem(itemNumber - 1);
+            returnedItem = itemList.getItem(itemIndex - 1);
         } catch (IndexOutOfBoundsException e) {
             ui.showMessages(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
             ui.showDivider();

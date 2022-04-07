@@ -1,19 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.BorrowCommand;
-import seedu.duke.commands.Command;
-import seedu.duke.commands.DescCommand;
-import seedu.duke.commands.EditCommand;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.HelpCommand;
-import seedu.duke.commands.ListCurrentBorrowingsCommand;
-import seedu.duke.commands.SearchCommand;
-import seedu.duke.commands.ListOverdueBorrowingsCommand;
-import seedu.duke.commands.ListFutureBorrowingsCommand;
-import seedu.duke.commands.ListAvailableBorrowingsCommand;
+import seedu.duke.commands.*;
 
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
@@ -75,6 +62,9 @@ public class InputParser {
 
         case ListFutureBorrowingsCommand.COMMAND_WORD:
             return new ListFutureBorrowingsParser().parse(arguments);
+
+        case ReturnCommand.COMMAND_WORD:
+            return new ReturnCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
