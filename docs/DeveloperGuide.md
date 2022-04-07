@@ -1958,7 +1958,42 @@ of their schedule. For instance, the user's daily schedule can look like this:
 
 
 ## Instructions for manual testing
+This section includes instructions to test WerkIt! manually.
+<br/>
+<span class = "info box">:memo: These test instructions covers the basic testing of the WerkIt! features. 
+Testers are expected to do more testing.
+</span> 
+<br/>
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and shutdown
+
+### Test on Exercise Features
+#### Listing All Exercises
+
+### Test on Workout Features
+#### Creating A New Workout
+#### Listing All Workouts
+#### Deleting An Existing Workout
+#### Updating An Existing Workout
+
+### Test on Plan Features
+#### Creating A New Plan 
+#### Listing All Plans
+#### Listing Workouts In A Plan
+#### Deleting An Existing Plan
+
+### Test on Schedule Features
+#### Updating The Schedule
+#### Viewing The Schedule
+#### Clearing Plan Schedule For A Day
+#### Clearing All Plans In The Schedule
+
+### Test on Search Features
+#### Searching For Exercise
+#### Searching For Workout
+#### Searching For Plan
+#### Searching For All
+
+### Test on Data Saving 
 
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
