@@ -304,7 +304,7 @@ public class ContactsManager {
      * @param ui An TextUi object for getting user input.
      * @return mode value pertaining to either menu, expense tracker or study manager.
      */
-    public static Mode contactsRunner(TextUi ui) {
+    public Mode contactsRunner(TextUi ui) {
         contactsWelcome();
         String userInput;
         while (true) {
