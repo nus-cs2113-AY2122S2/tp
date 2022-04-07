@@ -1967,7 +1967,7 @@ Testers are expected to do more testing.
 
 ### Launch and shutdown
 #### Initial Launch
-1. Download the JAR file of WerkIt! [here]() and copy it into an empty folder.
+1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases/tag/Jar-V2.0) and copy it into an empty folder.
 2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
 `WerkIt.jar` file.
 3. On your terminal, type the command `java -jar WerkIt.jar` to launch WerkIt!
