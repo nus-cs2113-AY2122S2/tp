@@ -9,6 +9,8 @@ public class ErrorMessages {
     public static final String ERROR_INIT_FAILED = "Failed to initialise MeetingJio application. Exiting...";
     public static final String ERROR_INVALID_COMMAND = "Hi please input a valid command.";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this.";
+    public static final String ERROR_EXTRA_PARAMETERS = "Hi you may have 1 or more extra/different parameters\n"
+            + "or have '/' character in some of your parameters' value.";
 
     // Add Event Command
     public static final String ERROR_MISSING_PARAMETERS_ADD_EVENT = "Hi 1 or more parameters are missing\n"
@@ -104,11 +106,11 @@ public class ErrorMessages {
     public static final String ERROR_MISSING_PARAMETERS_DELETE = "Hi 1 or more parameters are missing\n"
             + "The required parameters are:\n"
             + "n/[Name]\n"
-            + "i/[Index]\n";
+            + "i/[Index]";
     public static final String ERROR_MISSING_VALUES_DELETE = "Hi 1 or more parameters have missing values\n"
             + "The parameters that require values are:\n"
             + "n/[Name]\n"
-            + "i/[Index]\n";
+            + "i/[Index]";
 
     // Add Meeting Command
     public static final String ERROR_MISSING_PARAMETERS_ADD_MEETING = "Hi 1 or more parameters are missing\n"
@@ -118,13 +120,7 @@ public class ErrorMessages {
             + "st/[StartTime]\n"
             + "et/[EndTime]\n"
             + "m/[Mode]";
-    public static final String ERROR_EXTRA_PARAMETERS_ADD_MEETING = "Hi you have 1 or more extra/different parameters\n"
-            + "The required parameters are:\n"
-            + "t/[Title]\n"
-            + "d/[Day]\n"
-            + "st/[StartTime]\n"
-            + "et/[EndTime]\n"
-            + "m/[Mode]";
+
     public static final String ERROR_MISSING_VALUES_ADD_MEETING = "Hi 1 or more parameters have missing values\n"
             + "The parameters that require values are:\n"
             + "t/[Title]\n"
@@ -136,14 +132,14 @@ public class ErrorMessages {
     // Edit Command
     public static final String ERROR_MISSING_PARAMETERS_EDIT = "Hi 1 or more parameters are missing\n"
             + "The required parameters are:\n"
-            + "\tn/[Name]\n"
-            + "\ti/[Index]\n"
+            + "n/[Name]\n"
+            + "i/[Index]\n"
             + "The optional (at least one) parameters are:\n"
-            + "\tt/[Title]\n"
-            + "\td/[Day]\n"
-            + "\tst/[StartTime]\n"
-            + "\tet/[EndTime]\n"
-            + "\tm/[Mode]";
+            + "t/[Title]\n"
+            + "d/[Day]\n"
+            + "st/[StartTime]\n"
+            + "et/[EndTime]\n"
+            + "m/[Mode]";
 
     public static final String ERROR_EDIT_MEETING = "Sorry, meeting is not editable.";
 

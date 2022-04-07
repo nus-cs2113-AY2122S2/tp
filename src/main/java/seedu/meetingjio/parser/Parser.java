@@ -18,6 +18,7 @@ import seedu.meetingjio.exceptions.InvalidModeException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.MissingParameterException;
+import seedu.meetingjio.exceptions.ExtraParametersException;
 
 import java.util.Map;
 import java.util.logging.Level;
@@ -36,7 +37,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_EDIT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS_ADD_MEETING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EXTRA_PARAMETERS;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_NAME;
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
@@ -123,11 +124,12 @@ public class Parser {
 
             String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
-            
             return new AddLessonCommand(name, title, day, startTime, endTime, mode);
 
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
+        } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_EVENT);
+        } catch (ArrayIndexOutOfBoundsException | ExtraParametersException epe) {
+            return new CommandResult(ERROR_EXTRA_PARAMETERS);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_EVENT);
         } catch (InvalidTimeException | NumberFormatException ite) {
@@ -174,8 +176,10 @@ public class Parser {
             String name = eventDescription[NAME_INDEX];
             int index = Integer.parseInt(eventDescription[INDEX_INDEX]);
             return new DeleteCommand(name, index);
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
+        } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_DELETE);
+        } catch (ArrayIndexOutOfBoundsException | ExtraParametersException epe) {
+            return new CommandResult(ERROR_EXTRA_PARAMETERS);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_DELETE);
         } catch (NumberFormatException nfe) {
@@ -206,8 +210,8 @@ public class Parser {
 
         } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_MEETING);
-        } catch (ArrayIndexOutOfBoundsException aioube) {
-            return new CommandResult(ERROR_EXTRA_PARAMETERS_ADD_MEETING);
+        } catch (ArrayIndexOutOfBoundsException | ExtraParametersException epe) {
+            return new CommandResult(ERROR_EXTRA_PARAMETERS);
         } catch (MissingValueException mve) {
             return new CommandResult(ERROR_MISSING_VALUES_ADD_MEETING);
         } catch (InvalidTimeException | NumberFormatException ite) {
