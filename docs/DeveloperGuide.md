@@ -650,7 +650,7 @@ Given below are instructions to test the app manually.
 2. Shutdown
    1. Upon request for input, type `bye` and press [Enter].
 
-### Deleting a person
+### Deleting persons
 
 1. Deleting a person 
    1. Use the `list` command on the group which a person should be deleted from.
@@ -661,9 +661,9 @@ Given below are instructions to test the app manually.
       Expected: No person is deleted. Error details shown in the error message.
    5. Other incorrect delete commands to try: `delete`, `delete /g 1`, `delete /g 1 /u 0`, `delete /g x /u y` (where y is larger
    than the number of members in group x)
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
-### Adding an income
+### Adding incomes
 
 1. Adding a non-recurring income
    1. Prerequisite: The person in which the income will be added to exists, then use the `list` command on the group 
@@ -673,12 +673,12 @@ Given below are instructions to test the app manually.
    3. Test case: `addin /g 1 /u 1 /d Donations /i 6000.123 /p f`
       Expected: No income is added. Error details shown in the error message.
    4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`
-      Expected: Similar to previous
+      Expected: Similar to previous.
 2. Adding a recurring income
-   1. Prerequisite: Similar to previous
+   1. Prerequisite: Similar to previous.
    2. Testing similar to previous, but with `/p t` instead.
 
-### Adding an expenditure
+### Adding expenditures
 
 1. Adding a non-recurring expenditure
    1. Prerequisite: The person in which the expenditure will be added to exists, then use the `list` command on the group
@@ -688,8 +688,24 @@ Given below are instructions to test the app manually.
       the first person of `Parents`.
    3. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 7 /p f`
       Expected: No expenditure is added. Error details shown in the error message.
-   4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), but include `/c`
-      Expected: Similar to previous
+   4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`
+      Expected: Similar to previous.
 2. Adding a recurring expenditure
-   1. Prerequisite: Similar to previous
+   1. Prerequisite: Similar to previous.
    2. Testing similar to previous, but with `/p t` instead.
+
+### Deleting incomes and expenditures
+
+1. Deleting an income
+   1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the 
+      person resides in to get his user index as well as the income index of interest.
+   2. Test case: `deletein /g 1 /u 1 /r 1`
+      Expected: First income entry of the first person in `Parents` group is deleted. Upon `list /g 1`, other income entries
+      under the first person is decremented.
+   3. Test case: `deletein /g 1 /u 1 /r 0`
+      Expected: No income is deleted. Error details shown in the error message.
+   4. Other incorrect deletein commands to try: `deletein`, `deletein /u 1 /r 1`, `deletein /g 1 /u 1 /r first`
+      Expected: Similar to previous.
+2. Deleting an expenditure
+   1. Prerequisite: Similar to previous, but existing expenditure instead of income.
+   2. Testing similar to previous, but with `deleteout` instead.
