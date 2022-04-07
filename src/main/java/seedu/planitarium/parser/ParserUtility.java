@@ -15,8 +15,9 @@ public class ParserUtility {
     protected static final String FORWARD_SLASH_WARNING = "Warning: '%s' contains a forward slash that is not "
             + "surrounded by a space.\nUse ` / ` or `\\` instead to avoid potential unintended outcomes."
             + System.lineSeparator();
-    protected static final String SPACED_FORWARD_SLASH = " +/ +";
     protected static final String FORWARD_SLASH = "/";
+    protected static final String NOT_SPACED_FORWARD_SLASH = "(?:^/|/$|\\S+/|/\\S+)";
+    protected static final Pattern PATTERN = Pattern.compile(NOT_SPACED_FORWARD_SLASH);
 
     // these static strings are solely for JUnit testing
     private static final String THROW_NEGATIVE_MONEY = "Money is negative";
@@ -139,9 +140,8 @@ public class ParserUtility {
      */
     protected static void warnIfNotSpacedForwardSlash(String text) {
         if (text.contains(FORWARD_SLASH)) {
-            Pattern pattern = Pattern.compile(SPACED_FORWARD_SLASH);
-            Matcher matcher = pattern.matcher(text);
-            if (!matcher.find()) {
+            Matcher matcher = PATTERN.matcher(text);
+            if (matcher.find()) {
                 System.out.printf(FORWARD_SLASH_WARNING, text);
             }
         }

@@ -34,8 +34,10 @@ class ParserUtilityTest {
     public static final String SPACED_FORWARD_SLASH = " / ";
     public static final String S_SPACE_SLASH_SPACE_O = "S / O";
     public static final String S_SLASH_O = "S/O";
-    public static final String SLASH_SPACE_O = "/ O";
-    public static final String S_SPACE_SLASH = "S /";
+    public static final String START_WITH_SLASH = "/ O";
+    public static final String END_WITH_SLASH = "S /";
+    public static final String NO_LEFT_SPACE_SLASH = "S/ ";
+    public static final String NO_RIGHT_SPACE_SLASH = " /O";
 
     @Test
     void parseDelimitedTerm_delimitedTerm_success() throws EmptyStringException {
@@ -118,12 +120,20 @@ class ParserUtilityTest {
         assertEquals(String.format(ParserUtility.FORWARD_SLASH_WARNING, S_SLASH_O), newOut.toString());
         newOut.reset();
 
-        ParserUtility.warnIfNotSpacedForwardSlash(SLASH_SPACE_O);
-        assertEquals(String.format(ParserUtility.FORWARD_SLASH_WARNING, SLASH_SPACE_O), newOut.toString());
+        ParserUtility.warnIfNotSpacedForwardSlash(START_WITH_SLASH);
+        assertEquals(String.format(ParserUtility.FORWARD_SLASH_WARNING, START_WITH_SLASH), newOut.toString());
         newOut.reset();
 
-        ParserUtility.warnIfNotSpacedForwardSlash(S_SPACE_SLASH);
-        assertEquals(String.format(ParserUtility.FORWARD_SLASH_WARNING, S_SPACE_SLASH), newOut.toString());
+        ParserUtility.warnIfNotSpacedForwardSlash(END_WITH_SLASH);
+        assertEquals(String.format(ParserUtility.FORWARD_SLASH_WARNING, END_WITH_SLASH), newOut.toString());
+        newOut.reset();
+
+        ParserUtility.warnIfNotSpacedForwardSlash(NO_LEFT_SPACE_SLASH);
+        assertEquals(String.format(ParserUtility.FORWARD_SLASH_WARNING, NO_LEFT_SPACE_SLASH), newOut.toString());
+        newOut.reset();
+
+        ParserUtility.warnIfNotSpacedForwardSlash(NO_RIGHT_SPACE_SLASH);
+        assertEquals(String.format(ParserUtility.FORWARD_SLASH_WARNING, NO_RIGHT_SPACE_SLASH), newOut.toString());
         newOut.reset();
 
         System.setOut(ORIGINAL_OUT);
