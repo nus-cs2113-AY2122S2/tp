@@ -13,8 +13,6 @@ import java.util.logging.Logger;
 
 import seedu.meetingjio.exceptions.DuplicateTimetableException;
 
-import java.util.logging.Level;
-
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_USER;
 
 public class AddUserCommand extends Command {
