@@ -109,19 +109,14 @@ public class Parser {
         nameIndex += 3;
         int phoneNumberIndex = dummy.indexOf("/ph");
         String name = dummy.substring(nameIndex, phoneNumberIndex).trim();
-        phoneNumberIndex += 4;
         int emailIndex = dummy.indexOf("/e");
-        String phoneNumber = dummy.substring(phoneNumberIndex, emailIndex).trim();
-        emailIndex += 3;
+        String phoneNumber = dummy.substring(phoneNumberIndex + 4, emailIndex).trim();
         int symptomIndex = dummy.indexOf("/s");
-        String email = dummy.substring(emailIndex,symptomIndex).trim();
-        symptomIndex += 3;
-        String phone = phoneNumber;
+        String email = dummy.substring(emailIndex + 3,symptomIndex).trim();
         int descIndex = dummy.indexOf("/d");
-        String symptom = dummy.substring(symptomIndex,descIndex).trim();
-        descIndex += 3;
-        String description = dummy.substring(descIndex).trim();
-        return new AddPatientCommand(id, name, phone, email, symptom, description);
+        String symptom = dummy.substring(symptomIndex + 3,descIndex).trim();
+        String description = dummy.substring(descIndex + 3).trim();
+        return new AddPatientCommand(id, name, phoneNumber, email, symptom, description);
     }
 
     public Command parseAddWard(String fullCommand) throws IHospitalException {

@@ -96,15 +96,15 @@ public class WardStorage {
                 String email = scanner.nextLine();
                 String symptom = scanner.nextLine();
                 String description = scanner.nextLine();
-                Doctor doctor = new Doctor(did, dname, dphoneNumber, demail, dwardNumber);
-                Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
-                id = scanner.nextLine();
-                name = scanner.nextLine();
-                phoneNumber = scanner.nextLine();
-                email = scanner.nextLine();
+                String nid = scanner.nextLine();
+                String nname = scanner.nextLine();
+                String nphoneNumber = scanner.nextLine();
+                String nemail = scanner.nextLine();
                 String title = scanner.nextLine();
                 String wardNumber = scanner.nextLine();
-                Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
+                Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
+                Doctor doctor = new Doctor(did, dname, dphoneNumber, demail, dwardNumber);
+                Nurse nurse = new Nurse(nid, nname, nphoneNumber, nemail, title, wardNumber);
                 wardNumber = scanner.nextLine();
                 result.addWard(doctor, patient, nurse, wardNumber);
             }

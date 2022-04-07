@@ -21,14 +21,14 @@ public class IHospital {
         String fullCommand;
         fullCommand = Parser.getCommand();
         DoctorStorage doctorStorage = new DoctorStorage();
-        PatientStorage patientStorage = new PatientStorage();
-        AppointmentStorage appointmentStorage = new AppointmentStorage();
         NurseStorage nurseStorage = new NurseStorage();
         WardStorage wardStorage = new WardStorage();
         doctors = doctorStorage.loadDoctorList();
         nurses = nurseStorage.loadNurseList();
         wards = wardStorage.loadWardList();
+        PatientStorage patientStorage = new PatientStorage();
         patients = patientStorage.loadPatientList();
+        AppointmentStorage appointmentStorage = new AppointmentStorage();
         appointments = appointmentStorage.loadAppointmentList();
 
         while (!fullCommand.equals("bye")) {
