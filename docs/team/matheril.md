@@ -31,7 +31,7 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 * Table Formatter
     * A `TableFormatter` object creates a table that can be modified with new data at any time. When printed, it
       produces a neatly formatted and decorated table that automatically aligns its borders to the data stored within.
-      Other classes can create TableFormatter objects, edit them and pass them to `TextUI` to be printed to the user 
+      Other classes can create `TableFormatter` objects, edit them and pass them to `TextUI` to be printed to the user 
       interface.
 * TableFormatterRow
     * A helper class for `TableFormatter`. It represents a single row of the table.
