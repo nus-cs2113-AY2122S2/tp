@@ -17,9 +17,7 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
   - Added the ability to compute GPA based on modular credits and grades.
   [#117](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/107)
 - **Enhancements**
-  - Standardised util 
-  [#87](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/87)
-  - Added Junit tests.
+  - Added significant number of Junit test cases in `ModHappyParserTest`.
   [#82](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/82),
   [#114](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/114)
   - Expanded exceptions, fixed bugs and added more descriptive error messages.
@@ -33,10 +31,14 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
   [#95](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/95)
 
 - **Developer Guide**
-  - Added explanation and sequence diagrams for `gpa`.
+  - Added explanation and sequence diagram for `gpa`.
   [#112](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/112)
+  
 ### Team Tasks
+  - Fixed formatting inconsistencies in the User guide.
+  [#179](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/179)
 
 ### Community
 - Pull Requests Reviewed:
+  [#110](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/110),
   [#176](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/176)
