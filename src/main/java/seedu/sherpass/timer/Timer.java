@@ -84,5 +84,4 @@ public abstract class Timer extends Thread {
         return isTimerPaused;
     }
 
-
 }

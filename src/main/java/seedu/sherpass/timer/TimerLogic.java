@@ -198,6 +198,14 @@ public class TimerLogic implements WindowListener {
         timer = new Countdown(taskList, ui, jframe, jlabel);
     }
 
+    public void killTimer() {
+        if (!isTimerInitialised) {
+            return;
+        } else {
+            timer.interrupt();
+        }
+    }
+
     /**
      * Returns if a timer is paused or stopped, so that mark or show command can be called.
      * It first checks if timer is initialised. If initialised, it then calls the isTimerPaused() method to check the

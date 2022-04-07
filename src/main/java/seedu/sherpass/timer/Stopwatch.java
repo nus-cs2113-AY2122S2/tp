@@ -32,6 +32,7 @@ public class Stopwatch extends Timer {
         while (!forcedStop) {
             update();
         }
+        this.interrupt();
     }
 
     /**
@@ -48,7 +49,9 @@ public class Stopwatch extends Timer {
                 waitForTimerToResume();
             }
         } catch (InterruptedException e) {
-            return;
+            ui.showToUser("Alright, I've stopped the stopwatch.");
+            forcedStop = true;
+            this.interrupt();
         }
     }
 
@@ -58,7 +61,6 @@ public class Stopwatch extends Timer {
     public void stopTimer() {
         if (isTimerRunning) {
             jframe.setVisible(false);
-            ui.showToUser("Alright, I've stopped the stopwatch.");
             isTimerRunning = false;
             forcedStop = true;
             this.interrupt();

@@ -70,7 +70,9 @@ public class Countdown extends Timer  {
                 waitForTimerToResume();
             }
         } catch (InterruptedException e) {
-            return;
+            hasTimeLeft = false;
+            forcedStop = true;
+            this.interrupt();
         }
     }
 
