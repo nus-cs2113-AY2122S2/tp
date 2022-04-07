@@ -128,7 +128,7 @@ Some Mod Happy commands require you to provide a duration. You can specify these
   ##### Example:
   ```
   > help
-  
+
   ____________________________________________________________
   Displays help and format for selected command.
   Format to display help for specific command: help COMMAND
@@ -178,6 +178,7 @@ Allows you to view and change various user preferences which can affect other as
   ____________________________________________________________
   Available config settings:
   SHOW_COMPLETED_TASKS: false
+  
   ____________________________________________________________
   ```
   <br>
@@ -198,6 +199,7 @@ Allows you to view and change various user preferences which can affect other as
   SHOW_COMPLETED_TASKS
   false: Hide completed tasks
   true: Show completed tasks
+  
   ____________________________________________________________
   ```
   <br>
@@ -264,6 +266,7 @@ The following configuration options currently exist:
   ##### Example 2:
   ```
   > add mod CS2113T 4 -d "Software Engineering"
+  
   ____________________________________________________________
   Hey! I have added this module!
   CS2113T (Software Engineering) (4MC, Grade: -)
@@ -293,18 +296,24 @@ The following configuration options currently exist:
   ##### Example 1:
   ```
   > add task "Review PR"
+
   ____________________________________________________________
   Hey! I have added this task under General tasks!
   ( ) Review PR []
+  
+  
   ____________________________________________________________
   ```
   
   ##### Example 2:
   ```
   > add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour"
+  
   ____________________________________________________________
   Hey! I have added this task under CS2113T (Software Engineering) (4MC, Grade: -)!
-  ( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hours) []
+  ( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hour(s)) []
+  
+  
   ____________________________________________________________
   ```
 
@@ -323,14 +332,13 @@ The following configuration options currently exist:
   ##### Example:
   ```
   > del mod CS2113T
-
+  
   ____________________________________________________________
   CS2113T (Software Engineering) (4MC, Grade: -) contains task(s).
   Are you sure you want to delete this? (yes/no)
   ____________________________________________________________
-  
   > no
-
+  
   ____________________________________________________________
   Deletion has been cancelled.
   ____________________________________________________________
@@ -349,7 +357,7 @@ The following configuration options currently exist:
   ##### Example 1:
   ```
   > del task 1
-
+  
   ____________________________________________________________
   ( ) Review PR [] has been deleted.
   ____________________________________________________________
@@ -358,9 +366,9 @@ The following configuration options currently exist:
   ##### Example 2:
   ```
   > del task 1 -m CS2113T
-
+  
   ____________________________________________________________
-  ( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hours) [] has been deleted.
+  ( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hour(s)) [] has been deleted.
   ____________________________________________________________
   ```
 
@@ -419,195 +427,195 @@ The following configuration options currently exist:
 
 ### 4.6. Marking a task: `mark`
 
-Allows you to mark the [specified task](#32-specifying-tasks) as completed or uncompleted.
+- Allows you to mark the [specified task](#32-specifying-tasks) as completed or uncompleted.
 
-The `c` flag indicates that the task will be marked as completed, while the `u` flag marks the task as uncompleted.
+  The `c` flag indicates that the task will be marked as completed, while the `u` flag marks the task as uncompleted.
 
-#### Format: `mark (c | u) TASK_NUMBER [-m MODULE_CODE]`
+  #### Format: `mark (c | u) TASK_NUMBER [-m MODULE_CODE]`
 
-- `TASK_NUMBER`: The number of the task to be marked. Must be a positive integer.
-- `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+  - `TASK_NUMBER`: The number of the task to be marked. Must be a positive integer.
+  - `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
 
-##### Example 1:
-```
-> mark c 1
-
-____________________________________________________________
-Nice! I have marked this task as completed!
-(X) Reply to emails []
-____________________________________________________________
-```
-
-##### Example 2:
-```
-> mark u 1 -m CS2113T
-____________________________________________________________
-Ok! I have marked this task for you as uncompleted!
-( ) CS2113T Tutorial 2 []
-____________________________________________________________
-```
-
-<br>
+  ##### Example 1:
+  ```
+  > mark c 1
+  
+  ____________________________________________________________
+  Nice! I have marked this task as completed!
+  (X) Reply to emails []
+  ____________________________________________________________
+  ```
+  
+  ##### Example 2:
+  ```
+  > mark u 1 -m CS2113T
+  ____________________________________________________________
+  Ok! I have marked this task for you as uncompleted!
+  ( ) CS2113T Tutorial 2 []
+  ____________________________________________________________
+  ```
+  
+  <br>
 
 ### 4.7. Managing custom tags: `tag`
 
-Allows you to add or delete a tag from the [specified task](#32-specifying-tasks).
+- Allows you to add or delete a tag from the [specified task](#32-specifying-tasks).
 
-#### Format: `tag (add | del) TASK_NUMBER [-m MODULE_CODE] TAG_NAME`
-
-- `TASK_NUMBER`: The number of the task to be deleted. Must be a positive integer.
-- `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
-- `TAG_NAME`: The name of the tag to be added or deleted. Only alphanumeric characters and underscore `_` are allowed.
-
-> ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
->
-> The tag name cannot contain whitespace; it must be a single word.
-
-##### Example:
-```
-> tag add 1 -m CS2113T project
-
-____________________________________________________________
-Tag "project" added:
-( ) CS2113T Tutorial 2 [project].
-____________________________________________________________
-```
-
-<br>
+  #### Format: `tag (add | del) TASK_NUMBER [-m MODULE_CODE] TAG_NAME`
+  
+  - `TASK_NUMBER`: The number of the task to be deleted. Must be a positive integer.
+  - `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+  - `TAG_NAME`: The name of the tag to be added or deleted. Only alphanumeric characters and underscore `_` are allowed.
+  
+  > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
+  >
+  > The tag name cannot contain whitespace; it must be a single word.
+  
+  ##### Example:
+  ```
+  > tag add 1 -m CS2113T project
+  
+  ____________________________________________________________
+  Tag "project" added:
+  ( ) CS2113T Tutorial 2 [project].
+  ____________________________________________________________
+  ```
+  
+  <br>
 
 ### 4.8. Listing all tasks: `list`
 
-Shows you your tasks, grouped by module code. General tasks are displayed separately.
+- Shows you your tasks, grouped by module code. General tasks are displayed separately.
 
-If a [tag name](#47-managing-custom-tags-tag) is provided, only tasks with the associated tag will be shown.
+  If a [tag name](#47-managing-custom-tags-tag) is provided, only tasks with the associated tag will be shown.
 
-> 📔 <span style="color:#3333ff">**NOTE:**</span>
-> 
-> If the [`SHOW_COMPLETED_TASKS` option](#42-accessing-options-option) is set to `false`, you will only be shown your outstanding tasks. The number of tasks that were hidden will be indicated at the bottom of each group.
+  > 📔 <span style="color:#3333ff">**NOTE:**</span>
+  > 
+  > If the [`SHOW_COMPLETED_TASKS` option](#42-accessing-options-option) is set to `false`, you will only be shown your outstanding tasks. The number of tasks that were hidden will be indicated at the bottom of each group.
 
-#### Format: `list [TAG_NAME]`
+  #### Format: `list [TAG_NAME]`
 
-- `TAG_NAME`: The name of the tag to be filtered for. Must be a single word containing only alphanumeric characters and underscore `_`.
+  - `TAG_NAME`: The name of the tag to be filtered for. Must be a single word containing only alphanumeric characters and underscore `_`.
 
-##### Example 1:
-```
-> list
+  ##### Example 1:
+  ```
+  > list
 
-____________________________________________________________
-Ok! Here are the task(s) in your list:
-CS2113T (Software Engineering & OOP) (4MC, Grade: -)
+  ____________________________________________________________
+  Ok! Here are the task(s) in your list:
+  CS2113T (Software Engineering & OOP) (4MC, Grade: -)
+      1. ( ) CS2113T Tutorial 2 [project]
+
+  CS2101 (4MC, Grade: -)
+      1. ( ) Write user guide peer review []
+  
+  General tasks
+     1. (X) Reply emails []
+  ____________________________________________________________
+  ```
+
+  ##### Example 2:
+  ```
+  > list project
+  
+  ____________________________________________________________
+  Ok! Here are the task(s) in your list:
+  CS2113T (Software Engineering & OOP) (4MC, Grade: -)
     1. ( ) CS2113T Tutorial 2 [project]
-
-CS2101 (4MC, Grade: -)
-    1. ( ) Write user guide peer review []
-
-General tasks
-    1. (X) Reply emails []
-____________________________________________________________
-```
-
-##### Example 2:
-```
-> list project
-
-____________________________________________________________
-Ok! Here are the task(s) in your list:
-CS2113T (Software Engineering & OOP) (4MC, Grade: -)
-  1. ( ) CS2113T Tutorial 2 [project]
+    
+  CS2101 (4MC, Grade: -)
+    (empty)
+    
+  General tasks
+    (empty)
+    
+  ____________________________________________________________
+  ```
   
-CS2101 (4MC, Grade: -)
-  (empty)
-  
-General tasks
-  (empty)
-
-____________________________________________________________
-```
-
-<br>
+  <br>
 
 ### 4.9. Setting a module's grade: `grade`
 
-Assigns a grade to a module of your choice.
+- Assigns a grade to a module of your choice.
 
-#### Format: `grade MODULE_CODE MODULE_GRADE`
+  #### Format: `grade MODULE_CODE MODULE_GRADE`
 
-- `MODULE_CODE`: The module code of the module to be assigned the grade. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
-- `MODULE_GRADE`: The grade to be assigned to the module.
-
-> 📔 <span style="color:#3333ff">**NOTE:**</span>
->
-> Only the following grades are supported (case-insensitive):
-> 
-> A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU
+  - `MODULE_CODE`: The module code of the module to be assigned the grade. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+  - `MODULE_GRADE`: The grade to be assigned to the module.
   
-##### Example:
-```
-> grade CS2113T A+
-
-____________________________________________________________
-Your grade for CS2113T has been added.
-____________________________________________________________
-```
-
-<br>
+  > 📔 <span style="color:#3333ff">**NOTE:**</span>
+  >
+  > Only the following grades are supported (case-insensitive):
+  > 
+  > A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU
+    
+  ##### Example:
+  ```
+  > grade CS2113T A+
+  
+  ____________________________________________________________
+  Your grade for CS2113T has been added.
+  ____________________________________________________________
+  ```
+  
+  <br>
 
 ### 4.10. Viewing GPA: `gpa`
 
-Computes your GPA based the [inputted grades](#49-setting-a-modules-grade-grade) of all currently stored modules, and displays it. Modules for which you have not inputted any grade are not factored into the calculation.
+- Computes your GPA based the [inputted grades](#49-setting-a-modules-grade-grade) of all currently stored modules, and displays it. Modules for which you have not inputted any grade are not factored into the calculation.
 
-#### Format: `gpa`
+  #### Format: `gpa`
 
-##### Example:
-```
-> gpa
-
-____________________________________________________________
-Your GPA is 5.00! :)
-____________________________________________________________
-```
-
-<br>
+  ##### Example:
+  ```
+  > gpa
+  
+  ____________________________________________________________
+  Your GPA is 5.00! :)
+  ____________________________________________________________
+  ```
+  
+  <br>
 
 ### 4.11. Resetting the program: `reset`
 
-Removes all your tasks and modules.
+- Removes all your tasks and modules.
 
-#### Format: `reset`
+  #### Format: `reset`
 
-##### Example:
-```
-> reset
-
-____________________________________________________________
-All modules and tasks have been removed.
-____________________________________________________________
-```
+  ##### Example:
+  ```
+  > reset
+  
+  ____________________________________________________________
+  All modules and tasks have been removed.
+  ____________________________________________________________
+  ```
 
 <br>
 
 ### 4.12. Saving your data: `save`
 
-Saves all your tasks and modules to the data file.
+- Saves all your tasks and modules to the data file.
 
-#### Format: `save`
+  #### Format: `save`
+  
+  ##### Example:
+  ```
+  > save
+  
+  ____________________________________________________________
+  General tasks written to file.
+  Module data written to file.
+  Config options written to file.
+  ____________________________________________________________
+  ```
 
-##### Example:
-```
-> save
-
-____________________________________________________________
-General tasks written to file.
-Module data written to file.
-Config options written to file.
-____________________________________________________________
-```
-
-> ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
->
-> Mod Happy does **not** auto-save your changes! Do remember to save your work at regular intervals, or before exiting the program.
-
-<br><br><br>
+  > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
+  >
+  > Mod Happy does **not** auto-save your changes! Do remember to save your work at regular intervals, or before exiting the program.
+  
+  <br><br><br>
 
 ## 5. FAQ
 
