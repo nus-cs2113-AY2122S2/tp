@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.command.DeleteCommand.ONLY_SN_ACCEPTED;
 
 class DeleteCommandTest {
     DeleteCommand deleteCommand;
@@ -66,7 +67,7 @@ class DeleteCommandTest {
 
         CommandResult actualResult = deleteCommand.execute();
         CommandResult expectedResult =
-                new CommandResult("Only serial number accepted for deleting equipment");
+                new CommandResult(ONLY_SN_ACCEPTED);
 
         assertEquals(expectedResult, actualResult);
     }

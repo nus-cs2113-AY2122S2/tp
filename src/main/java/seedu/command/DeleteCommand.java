@@ -1,9 +1,6 @@
 package seedu.command;
 
-import seedu.equipment.EquipmentType;
-
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Subclass of Command. Handles deleting of equipment from equipmentInventory.
@@ -40,9 +37,6 @@ public class DeleteCommand extends Command {
 
         try {
             serialNumber = prepareDelete();
-            if (serialNumber.equals("")) {
-                return new CommandResult(ONLY_SN_ACCEPTED);
-            }
             equipmentName = equipmentManager.getEquipmentList().get(serialNumber).getItemName();
         } catch (NullPointerException e) {
             return new CommandResult(INVALID_SERIAL_NUMBER);
@@ -77,9 +71,7 @@ public class DeleteCommand extends Command {
         String argType = argString.substring(0, delimiterPos);
         String argValue = argString.substring(delimiterPos + 1);
         assert argType.equals("s") : ONLY_SN_ACCEPTED;
-        if (argType.equals("s")) {
-            return argValue;
-        }
-        return "";
+
+        return argValue;
     }
 }
