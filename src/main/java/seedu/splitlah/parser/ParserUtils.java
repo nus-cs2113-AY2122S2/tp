@@ -776,7 +776,7 @@ public class ParserUtils {
      * Extracts a GST percentage from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return A double that represents a GST charge in percents.
+     * @return A double that represents a GST charge in percentage.
      * @throws InvalidFormatException If no arguments representing a GST charge were provided after the
      *                                GST delimiter,
      *                                if the argument cannot be parsed as a double,
@@ -803,7 +803,7 @@ public class ParserUtils {
      * and a value of 0 GST being explicitly provided.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return A double that represents a GST charge in percents if the GST delimiter is found,
+     * @return A double that represents a GST charge in percentage if the GST delimiter is found,
      *         a double value of -1 otherwise.
      * @throws InvalidFormatException If no arguments representing a GST charge were provided after the
      *                                GST delimiter,
@@ -830,7 +830,7 @@ public class ParserUtils {
      * Extracts a service charge percentage from a user input.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return A double that represents a service charge in percents.
+     * @return A double that represents a service charge in percentage.
      * @throws InvalidFormatException If no arguments representing a service charge were provided after the
      *                                Service charge delimiter,
      *                                if the argument cannot be parsed as a double,
@@ -857,7 +857,7 @@ public class ParserUtils {
      * being provided and a value of 0 GST being explicitly provided.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return A double that represents a service charge in percents if the service charge delimiter is found,
+     * @return A double that represents a service charge in percentage if the service charge delimiter is found,
      *         a double value of -1 otherwise.
      * @throws InvalidFormatException If no arguments representing a service charge were provided after the
      *                                Service charge delimiter,
