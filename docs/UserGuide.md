@@ -17,7 +17,21 @@ Travel agencies often have to manage multiple customers and their respective boo
 ### Quick Help: `help`
 Print detailed instructions on the available commands that users may input
 
-Format: `help`
+Usage: `help`
+
+### Show all packages: `packages`
+
+View a list of all available packages
+
+Usage: `packages`
+
+### Get info on a specific package: `info`
+
+Displays the detailed information of a specific travel package
+
+Format: `info {num}`
+
+Usage: `info 2`
 
 ### Adding a package: `add`
 Adds a new Travel Package to the list of Packages.
