@@ -17,7 +17,7 @@ public class InvalidPlanException extends Exception {
             + "workout sequence already exists.";
     public static final String PLAN_NAME_EXCEED_LIMIT = "Uh oh, the plan name exceeds the character limit (30).";
     public static final String PLAN_NAME_INVALID = "Uh oh, the plan name is invalid.";
-    public static final String RESERVED_PLAN_NAME = "Uh oh, this plan name is reserved for use.";
+    public static final String PLAN_NAME_RESERVED = "Uh oh, this plan name is reserved for use.";
 
     private String throwingClass;
 
