@@ -6,14 +6,16 @@ import seedu.planitarium.exceptions.DuplicateDelimiterException;
 import seedu.planitarium.exceptions.EmptyStringException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.global.Constants;
+import seedu.planitarium.global.UI;
 
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParserUtility {
-    protected static final String FORWARD_SLASH_WARNING = "Warning: '%s' contains a forward slash that is not "
-            + "surrounded by a space.\nUse ` / ` or `\\` instead to avoid potential unintended outcomes."
+    protected static final String FORWARD_SLASH_WARNING = UI.HORI_LINE + System.lineSeparator()
+            + ">\tWarning: '%s' contains a forward slash that is not "
+            + "surrounded by a space.\n>\tUse ` / ` or `\\` instead to avoid potential unintended outcomes."
             + System.lineSeparator();
     protected static final String FORWARD_SLASH = "/";
     protected static final String NOT_SPACED_FORWARD_SLASH = "(?:^/|/$|\\S+/|/\\S+)";
