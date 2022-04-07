@@ -330,7 +330,7 @@ public class FileManager {
         assert (Files.exists(getDirectoryPath())) : "Directory does not exist, but it should.";
         assert (Files.exists(getExerciseFilePath())) : "Exercise file does not exist, but it should.";
         assert (Files.exists(getWorkoutFilePath())) : "Workout file does not exist, but it should.";
-        // TODO: assert for plans (Haofeng?)
+        assert (Files.exists(getPlanFilePath())) : "Plan file does not exist, but it should.";
         assert (Files.exists(getScheduleFilePath())) : "Schedule file does not exist, but it should.";
     }
 
