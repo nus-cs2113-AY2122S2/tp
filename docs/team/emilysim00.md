@@ -51,10 +51,7 @@ Wrote JUnit test cases for WerkIt! The summary of the test cases I have written 
 |--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | WorkoutListTest.java     | listWorkout_expectThreePrints() <br> void listWorkout_expectNoPrints()                                                                                                                                                                 |                    
 | ScheduleCommandTest.java | setUserAction_createInvalidAction_expectInvalidCommandException() <br>scheduleCommand_validScheduleUpdateConstruction() <br> scheduleCommand_validScheduleClearConstruction() <br> scheduleCommand_validScheduleClearAllConstruction() |                    
-| DayListTest.java         | updateSchedule_expectSuccess() <br> updateSchedule_expectInvalidUpdate() <br> clearSchedule_expectInvalidUpdate() <br> clearSchedule_expectSuccess() <br> clearAllSchedule_expectSuccess()                                             |                  
-
-### Enhancements Implemented
-[To be updated]
+| DayListTest.java         | updateSchedule_expectSuccess() <br> updateSchedule_expectInvalidUpdate() <br> clearSchedule_expectInvalidUpdate() <br> clearSchedule_expectSuccess() <br> clearAllSchedule_expectSuccess()                                             |
 
 ### Contributions to the User Guide (UG)
 * Wrote the [Introduction and Terminology](../UserGuide.md) section in the User Guide.
@@ -85,14 +82,18 @@ Wrote JUnit test cases for WerkIt! The summary of the test cases I have written 
       * Includes sequence diagrams to visualise the process.
     * [How to reset the workout plan schedule](../DeveloperGuide.md#clear-schedule-for-the-week)
       * Includes sequence diagrams to visualise the process.
-* Wrote part of [user stories](../DeveloperGuide.md#user-stories)
+* Wrote part of [user stories](../DeveloperGuide.md#user-stories).
+* Wrote the [non-functional requirements](../DeveloperGuide.md#non-functional-requirements) section. 
       
 
 ### Contributions to Team-Based Tasks
 [To be updated]
 
 ### Review/Mentoring Contributions
-[To be updated]
+Reviewed teammates' pull requests, including (but not limited to):
+* Review 1: [Suggests teammate on the naming convention in DG](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/240)
+* Review 2: [Reviewed teammate's PPP write up and suggested improvements to consider](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/239)
+* Review 3: [Reviewed and gave suggestions on sequence diagram](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/220)
 
 ### Contributions Beyond the Project Team
 Provided feedback and potential bug reports to another team's project 
