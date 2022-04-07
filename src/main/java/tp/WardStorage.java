@@ -1,7 +1,8 @@
-
 package tp;
 
+import tp.person.Doctor;
 import tp.person.Nurse;
+import tp.person.Patient;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,8 +12,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-//@@author   DemonShaha
-public class NurseStorage {
+
+
+public class WardStorage {
     private static final String root = System.getProperty("user.dir");
     private static final Path filePath = Paths.get(root, "data", "IHospitalDoctors.txt");
     private static final Path dirPath = Paths.get(root, "data");
@@ -23,7 +25,7 @@ public class NurseStorage {
      *
      */
     //@@author   DemonShaha
-    public NurseStorage() throws IHospitalException {
+    public WardStorage() throws IHospitalException {
         try {
             File fileDirectory = new File(dirPath.toString());
             if (!fileDirectory.exists()) {
@@ -39,25 +41,23 @@ public class NurseStorage {
 
     /**
      * The function to save Nurse list.
-     * @param nurses nurse list
+     * @param wards new ward
      * @throws IHospitalException IHospitalException
      */
     //@@author  DemonShaha
-    public void saveNurseList(NurseList nurses) throws IHospitalException {
+    public void saveWardList(WardList wards) throws IHospitalException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
-            int amount = nurses.getSize();
+            int amount = wards.getSize();
             fw.write(String.format("%d\n", amount));
             for (int i = 1; i <= amount; i++) {
-                Nurse curNurse =  nurses.getNurse(i);
+                Ward curWard =  wards.getWard(i);
                 fw.write(String.format("%d. Nurse:\n", i));
-                fw.write(curNurse.getId() + "\n");
-                fw.write(curNurse.getName() + "\n");
-                fw.write(curNurse.getPhoneNumber() + "\n");
-                fw.write(curNurse.getEmail() + "\n");
                 //@@ author  DolphXty
-                fw.write(curNurse.getTitle() + "\n");
-                fw.write(curNurse.getWardNumber() + "\n");
+                fw.write(curWard.getDoctor() + "\n");
+                fw.write(curWard.getPatient() + "\n");
+                fw.write(curWard.getNurse() + "\n");
+                fw.write(curWard.getNumber() + "\n");
             }
             fw.close();
         } catch (IOException e) {
@@ -70,11 +70,11 @@ public class NurseStorage {
      * @throws IHospitalException IHospitalException
      */
     //@@author DemonShaha
-    public NurseList loadNurseList() throws IHospitalException {
+    public WardList loadWardList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
             Scanner scanner = new Scanner(dataFile);
-            NurseList result = new NurseList();
+            WardList result = new WardList();
             if (!scanner.hasNext()) {
                 return result;
             }
@@ -88,10 +88,24 @@ public class NurseStorage {
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
+                String wardNumber= scanner.nextLine();
+                Doctor doctor = new Doctor(id, name, phoneNumber, email, wardNumber);
+                id = scanner.nextLine();
+                name = scanner.nextLine();
+                phoneNumber = scanner.nextLine();
+                email = scanner.nextLine();
+                String symptom = scanner.nextLine();
+                String description = scanner.nextLine();
+                Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
+                id = scanner.nextLine();
+                name = scanner.nextLine();
+                phoneNumber = scanner.nextLine();
+                email = scanner.nextLine();
                 String title=scanner.nextLine();
-                String wardNumber=scanner.nextLine();
+                wardNumber=scanner.nextLine();
                 Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
-                result.addNurse(nurse);
+                wardNumber = scanner.nextLine();
+                result.addWard(doctor, patient, nurse, wardNumber);
             }
             return result;
         } catch (FileNotFoundException e) {

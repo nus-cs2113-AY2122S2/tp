@@ -11,6 +11,7 @@ public class IHospital {
     private static PatientList patients = new PatientList();
     private static AppointmentList appointments = new AppointmentList();
     private static NurseList nurses= new NurseList();
+    private static WardList wards = new WardList();
 
     public IHospital() {
     }
@@ -23,16 +24,18 @@ public class IHospital {
         PatientStorage patientStorage = new PatientStorage();
         AppointmentStorage appointmentStorage = new AppointmentStorage();
         NurseStorage nurseStorage = new NurseStorage();
+        WardStorage wardStorage = new WardStorage();
         doctors = doctorStorage.loadDoctorList();
         patients = patientStorage.loadPatientList();
         appointments = appointmentStorage.loadAppointmentList();
         nurses=nurseStorage.loadNurseList();
+        wards = wardStorage.loadWardList();
 
         while (!fullCommand.equals("bye")) {
             try {
                 Command c = parser.parse(fullCommand);
-                ui.generateResponse(c.execute(doctors, patients, nurses,appointments, ui,
-                        doctorStorage, patientStorage, nurseStorage,appointmentStorage));
+                ui.generateResponse(c.execute(doctors, patients, nurses, wards, appointments, ui,
+                        doctorStorage, wardStorage, patientStorage, nurseStorage,appointmentStorage));
                 fullCommand = Parser.getCommand();
             } catch (IHospitalException e) {
                 ui.generateResponse(e.getMessage());
@@ -44,8 +47,8 @@ public class IHospital {
         appointmentStorage.saveAppointmentList(appointments);
         nurseStorage.saveNurseList(nurses);
         Command c = new ExitCommand();
-        c.execute(doctors, patients, nurses,appointments, ui,
-                doctorStorage, patientStorage, nurseStorage,appointmentStorage);
+        c.execute(doctors, patients, nurses, wards, appointments, ui,
+                doctorStorage, wardStorage, patientStorage, nurseStorage,appointmentStorage);
         ui.sayGoodbye();
     }
 

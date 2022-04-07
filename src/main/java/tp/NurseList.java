@@ -8,7 +8,7 @@ public class NurseList {
         public static String boundary = "____________________________________________________________"
                 + System.lineSeparator();
         protected ArrayList<Nurse> nurses = new ArrayList<>();
-        protected int size = 0;
+        protected int size;
 
         public NurseList() {
             size = 0;
@@ -26,8 +26,8 @@ public class NurseList {
          */
         public void addNurse(Nurse nurse) throws IHospitalException {
             boolean isDuplicate = false;
-            for (int i = 0; i < nurses.size(); i++) {
-                if (nurses.get(i).getId().trim().equals(nurse.getId())) {
+            for (Nurse nurs : nurses) {
+                if (nurs.getId().trim().equals(nurse.getId())) {
                     isDuplicate = true;
                 }
             }
@@ -72,6 +72,16 @@ public class NurseList {
                 }
             }
             return null;
+        }
+
+        public NurseList getNurseListOfWardById(String id) throws IHospitalException {
+            NurseList warNur = new NurseList();
+            for(Nurse nurse:nurses){
+                if (nurse.getWardNumber().equals(id)) {
+                        warNur.addNurse(nurse);
+                }
+            }
+            return warNur;
         }
 
         @Override
