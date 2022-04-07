@@ -1,5 +1,6 @@
 package seedu.equipment;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Equipment {
@@ -8,11 +9,10 @@ public class Equipment {
     private EquipmentType type;
     private double cost;
     private String purchasedFrom;
-    private String purchasedDate;
+    private LocalDate purchasedDate;
 
     /**
      * Constructor for the Equipment object.
-     *
      * @param itemName Name of the equipment in String.
      * @param serialNumber Unique serial number of equipment in String.
      * @param type Type of the equipment in EquipmentType enum.
@@ -21,7 +21,7 @@ public class Equipment {
      * @param purchasedDate When the equipment was purchased in String.
      */
     public Equipment(String itemName, String serialNumber, EquipmentType type, double cost, String purchasedFrom,
-                     String purchasedDate) {
+                     LocalDate purchasedDate) {
         this.itemName = itemName;
         this.serialNumber = serialNumber;
         this.type = type;
@@ -70,11 +70,11 @@ public class Equipment {
         this.purchasedFrom = purchasedFrom;
     }
 
-    public String getPurchasedDate() {
+    public LocalDate getPurchasedDate() {
         return this.purchasedDate;
     }
 
-    public void setPurchasedDate(String purchasedDate) {
+    public void setPurchasedDate(LocalDate purchasedDate) {
         this.purchasedDate = purchasedDate;
     }
 

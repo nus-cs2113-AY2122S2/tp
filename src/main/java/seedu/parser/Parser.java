@@ -1,5 +1,6 @@
 package seedu.parser;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import seedu.command.AddCommand;
@@ -118,6 +119,8 @@ public class Parser {
                         + System.lineSeparator()
                         + AddCommand.COMMAND_WORD
                         + AddCommand.COMMAND_DESCRIPTION);
+            } catch (DateTimeParseException e) {
+                return new IncorrectCommand(ModificationCommand.INVALID_DATE_MESSAGE);
             }
         case CheckCommand.COMMAND_WORD:
             try {

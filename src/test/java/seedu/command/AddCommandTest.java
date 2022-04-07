@@ -11,6 +11,7 @@ import seedu.parser.IncompleteCommandException;
 import seedu.parser.MissingAttributeException;
 import seedu.parser.Parser;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,7 +44,7 @@ class AddCommandTest {
                 EquipmentType.valueOf("SPEAKER"),
                 1000,
                 "Loud Technologies",
-                "2022-02-23");
+                LocalDate.parse("2022-02-23"));
 
         CommandResult expectedResult =
                 new CommandResult("There is already an item with this serial number: S1404115ASF");
@@ -86,7 +87,7 @@ class AddCommandTest {
                 EquipmentType.valueOf("SPEAKER"),
                 1000,
                 "Loud Technologies",
-                "2022-02-23");
+                LocalDate.parse("2022-02-23"));
 
         addCommand.addEquipment(userInput);
         Equipment actualEquipment = equipmentManager.listEquipment().get(equipmentListOriginalSize);
