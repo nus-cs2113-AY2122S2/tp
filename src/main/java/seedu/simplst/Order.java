@@ -91,11 +91,12 @@ public class Order {
         }
     }
 
-    /**
+    /*
      * FOR DEV ONLY.
      *
      * @param orderlineId orderline id
      */
+    /*
     public void removeOrderline(int orderlineId) {
         for (int idx = 0; idx < orderlines.size(); idx++) {
             if (orderlineId == orderlines.get(idx).getId()) {
@@ -104,14 +105,8 @@ public class Order {
             }
         }
     }
+    */
 
-    // public void checkOffOrderline(int orderlineId) {
-    //     Orderline curOrderline = getOrderline(orderlineId);
-    //     if (curOrderline == null) {
-    //         return;
-    //     }
-    //     curOrderline.checkOff();
-    // }
 
     // Function to print grammar for statements to print
     private String checkPlural(int numberOfGoods) {
