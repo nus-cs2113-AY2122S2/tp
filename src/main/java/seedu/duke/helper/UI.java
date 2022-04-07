@@ -67,6 +67,12 @@ public class UI {
         printEditPatientMessage();
         printEditMedicineMessage();
         printEditAppointmentMessage();
+        printFindDoctorMessage();
+        printFindPatientMessage();
+        printFindMedicineMessage();
+        printUpdateMedicineMessage();
+        printClearMedicineMessage();
+        printByeMessage();
         printNewLineSeparator();
     }
 
@@ -131,7 +137,8 @@ public class UI {
         printNewLineSeparator();
         System.out.println("Feature: VIEW APPOINTMENT");
         System.out.println("Format: view appointment or view appointment /info [criteria],[input value]");
-        System.out.println("Accepted Criteria: appointment id, patient nric, ");
+        System.out.print("Accepted Criteria: appointment id, patient nric, ");
+        System.out.println("patient name, doctor name, doctor nric, date");
         System.out.println("Example 1: view appointment /info appointment id, A123");
         System.out.println("Example 2: view appointment /info patient nric, S1234567A");
         System.out.println("Example 3: view appointment /info doctor name, John");
@@ -200,6 +207,65 @@ public class UI {
         System.out.println("[patient name],[doctor nric],[doctor name],[appointment date],[appointment details]");
         System.out.print("Example: edit appointment /info A123,S1234567A,Don,");
         System.out.println("S1234567A,John,2022-10-15,Regular knee checkup");
+    }
+
+    public static void printFindDoctorMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: FIND DOCTOR");
+        System.out.println("Format: find doctor /info [parameter], [keyword to find]");
+        System.out.println("Example 1: find doctor /info name, Bruce Lee");
+        System.out.println("Example 2: find doctor /info nric, S1234567X");
+        System.out.println("Example 3: find doctor /info age, 23");
+        System.out.println("Example 4: find doctor /info gender, M");
+        System.out.println("Example 5: find doctor /info address, 15 King's Avenue");
+        System.out.println("Example 6: find doctor /info dob, 1999-12-31");
+        System.out.println("Example 7: find doctor /info specialization, Dermatology");
+    }
+
+    public static void printFindPatientMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: FIND PATIENT");
+        System.out.println("Format: find patient /info [parameter], [keyword to find]");
+        System.out.println("Example 1: find patient /info name, Bruce Lee");
+        System.out.println("Example 2: find patient /info nric, S1234567X");
+        System.out.println("Example 3: find patient /info age, 23");
+        System.out.println("Example 4: find patient /info gender, M");
+        System.out.println("Example 5: find patient /info address, 15 King's Avenue");
+        System.out.println("Example 6: find patient /info dob, 1999-12-31");
+        System.out.println("Example 7: find patient /info admissiondate, 2021-02-15");
+    }
+
+    public static void printFindMedicineMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: FIND MEDICINE");
+        System.out.println("Format: find medicine /info [parameter], [keyword to find]");
+        System.out.println("Example 1: find medicine /info id, S123");
+        System.out.println("Example 2: find medicine /info name, Paracetamol");
+        System.out.println("Example 3: find medicine /info dosage, 500");
+        System.out.println("Example 4: find medicine /info expiry, 2023-06-11");
+        System.out.println("Example 5: find medicine /info sideeffects, headache");
+        System.out.println("Example 6: find medicine /info quantity, 10");
+    }
+
+    public static void printUpdateMedicineMessage() {
+        printNewLineSeparator();
+        System.out.println("Additional feature: UPDATE MEDICINE");
+        System.out.println("Format: update medicines");
+        System.out.println("Example: update medicines");
+    }
+
+    public static void printClearMedicineMessage() {
+        printNewLineSeparator();
+        System.out.println("Additional feature: CLEAR MEDICINE");
+        System.out.println("Format: clear medicines");
+        System.out.println("Example: clear medicines");
+    }
+
+    public static void printByeMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: BYE (to exit & save the programme)");
+        System.out.println("Format: bye");
+        System.out.println("Example: bye");
     }
 
     public int getSize() {
