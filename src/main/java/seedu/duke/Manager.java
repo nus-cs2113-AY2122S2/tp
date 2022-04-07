@@ -138,6 +138,17 @@ public class Manager {
             command = Parser.parseFindMedicine(parameters);
             status = command.execute(storage.medicines);
             break;
+        case "dispense medicine":
+            command = Parser.parseDispenseMedicine(parameters);
+
+            Command helperCommand = Parser.parseCheckForPatientAppointment(parameters);
+            helperCommand.execute(storage.appointments);
+            helperCommand = Parser.parseCheckMedicineStock(parameters);
+            helperCommand.execute(storage.medicines);
+
+            command.execute(storage.appointments);
+            status = command.execute(storage.medicines);
+            break;
         case "help":
             status = Status.PRINT_HELP;
             break;
