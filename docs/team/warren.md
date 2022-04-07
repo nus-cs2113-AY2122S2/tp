@@ -37,7 +37,7 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 
 #### User Guide
  * Added documentation for `Settling all transactions for a session` and `Listing all available commands`
- * Added questions under Frequently asked questions section.
+ * Added questions under Frequently Asked Questions (FAQ) section.
  * Maintained the `Command Summary`
 
 #### Developer Guide
