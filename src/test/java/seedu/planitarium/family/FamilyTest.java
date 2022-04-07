@@ -249,7 +249,7 @@ public class FamilyTest {
         assertEquals("$1000.00", family.formatValue(value));
     }
 
-    @Test void formatValue_moreThan2DPValue_print2DP() {
+    @Test void formatValue_moreThan2DecimalPointValue_print2DP() {
         Family family = new Family();
         Double value = THREE_DP_AMOUNT;
         assertEquals("$123.46", family.formatValue(value));
