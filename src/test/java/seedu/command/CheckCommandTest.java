@@ -18,7 +18,7 @@ class CheckCommandTest {
     @Test
     void execute_validEquipmentName_success() {
         checkCommand = new CheckCommand(new ArrayList<>(
-                Arrays.asList("Speaker B")
+                Arrays.asList("n/Speaker B")
         ));
         checkCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = checkCommand.equipmentManager;
