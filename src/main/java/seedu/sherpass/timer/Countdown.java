@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
+import java.time.LocalDate;
+
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
 import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
@@ -81,7 +83,7 @@ public class Countdown extends Timer  {
             TimerLogic.resetIsTimerInitialised();
             ui.showToUser("Time is up!\n"
                     + "Would you like to start another timer, mark a task as done, or leave the study session?");
-            Timetable.showTodaySchedule(taskList, ui);
+            Timetable.showScheduleByDay(LocalDate.now(), taskList, ui);
             ui.showLine();
         }
         this.interrupt();
