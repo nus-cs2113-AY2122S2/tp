@@ -1,5 +1,8 @@
 package seedu.duke.data;
 
+import seedu.duke.common.Messages;
+import seedu.duke.exceptions.InvMgrException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -72,7 +75,15 @@ public class Item {
      * @param newRecord A borrow record.
      * @return This item that has been added with a new borrow record.
      */
-    public Item addBorrowRecord(BorrowRecord newRecord) {
+    public Item addBorrowRecord(BorrowRecord newRecord) throws InvMgrException {
+        // Iterate through each borrow records.
+        // Throw exception if newRecord conflicts with existing records.
+        for (BorrowRecord record : borrowRecords) {
+            if (newRecord.isConflict(record)) {
+                throw new InvMgrException(Messages.INVALID_DATES_CONCLICT);
+            }
+        }
+
         this.borrowRecords.add(newRecord);
         return this;
     }

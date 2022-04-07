@@ -23,6 +23,7 @@ public class HelpCommand extends Command {
                 + AddCommand.HELP_MESSAGE + Messages.DIVIDER
                 + DeleteCommand.HELP_MESSAGE + Messages.DIVIDER
                 + DescCommand.HELP_MESSAGE + Messages.DIVIDER
+                + BorrowCommand.HELP_MESSAGE + Messages.DIVIDER
                 + ExitCommand.HELP_MESSAGE + Messages.DIVIDER
                 + HelpCommand.HELP_MESSAGE + Messages.DIVIDER);
     }
