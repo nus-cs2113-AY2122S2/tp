@@ -178,11 +178,12 @@ public class StringConstants {
     /**
      * For exceptions.
      */
-    public static final String COMPULSORY_PARAMETERS = "compulsory parameters";
     public static final String ERROR_NO_SUCH_MODULE = "Sorry, no such module exists ._.";
     public static final String ERROR_NO_SUCH_TASK = "Sorry, no such task exists ._.";
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
-    public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid %s. "
+    public static final String ERROR_PARSE_INVALID_PARAM_GENERAL = "\nInvalid compulsory parameters. "
+            + "Please check and try again.";
+    public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid %s '%s'. "
             + "Please check and try again.";
     public static final String ERROR_PARSE_MISSING_PARAM = "\nMissing %s. "
             + "Please check and try again.";
@@ -207,7 +208,7 @@ public class StringConstants {
             + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
     public static final String ERROR_MISSING_MODULE_GRADE = "\nMissing module grade."
             + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
-    public static final String ERROR_INVALID_NUMBER = "\nInvalid number format for %s."
+    public static final String ERROR_INVALID_NUMBER = "\nInvalid number format for %s '%s'."
             + "\nPlease try again using a numerical number.";
     public static final String ERROR_MISSING_NUMBER = "\nMissing %s."
             + "\nPlease try again using a numerical number.";
@@ -223,7 +224,7 @@ public class StringConstants {
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
 
-    public static final String ERROR_MODULAR_CREDITS_FAILED = "modular credits (accepted range: 0 to 100)";
+    public static final String ERROR_MODULAR_CREDITS_HELP = " (Accepted range: 0 to 20)";
     public static final String ERROR_TASK_NUMBER_FAILED = "task number";
 
     public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
@@ -302,7 +303,7 @@ public class StringConstants {
     public static final String MODULE_GRADES_MATCH = "(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U)";
     public static final String MARK_COMMAND_FLAGS = "(c|u)";
     public static final String TAG_COMMAND_FLAGS = "(add|del)";
-    public static final String TASK_MODULE_FLAG = "-m";
+    public static final String TASK_MODULE_FLAG = " -m ";
 
     /**
      * For grades.

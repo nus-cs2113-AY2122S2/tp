@@ -13,7 +13,7 @@ import java.util.Objects;
 /**
  * This Parser supports the "edit" command.
  */
-public class EditModuleParser extends Parser {
+public class EditModuleParser extends EditParser {
 
     private static final String MODULE_CODE = StringConstants.MODULE_CODE;
     private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
@@ -60,7 +60,7 @@ public class EditModuleParser extends Parser {
             throw new MissingCompulsoryParameterException(MODULE_CODE_STR);
         }
         if (!moduleCode.matches(WORD_CHAR_ONLY)) {
-            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR);
+            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
         try {
             moduleDescription = userInput.split(DESCRIPTION_FLAG)[FIRST_INDEX];
@@ -68,7 +68,7 @@ public class EditModuleParser extends Parser {
             throw new MissingCompulsoryParameterException(MODULE_DESCRIPTION_STR);
         }
         if (!moduleDescription.matches(QUOTED_UNRESTRICTED_STR)) {
-            throw new InvalidCompulsoryParameterException(MODULE_DESCRIPTION_STR);
+            throw new InvalidCompulsoryParameterException(MODULE_DESCRIPTION_STR, moduleDescription);
         }
         throw new InvalidCompulsoryParameterException();
     }

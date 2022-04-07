@@ -83,27 +83,13 @@ public class ModHappyParser extends Parser {
         case (LIST_COMMAND_WORD):
             return new ListParser();
         case (ADD_COMMAND_WORD):
-            switch (parsedCommand.get(ARGUMENT).split(SPACE)[0]) {
-            case TASK:
-                return new AddTaskParser();
-            case MODULE:
-                return new AddModuleParser();
-            default:
-                throw new UnknownCommandException();
-            }
+            return AddParser.getParser(parsedCommand.get(ARGUMENT).split(SPACE)[0]);
         case (DELETE_COMMAND_WORD):
             return new DeleteParser();
         case (MARK_COMMAND_WORD):
             return new MarkParser();
         case (EDIT_COMMAND_WORD):
-            switch (parsedCommand.get(ARGUMENT).split(SPACE)[0]) {
-            case TASK:
-                return new EditTaskParser();
-            case MODULE:
-                return new EditModuleParser();
-            default:
-                throw new UnknownCommandException();
-            }
+            return EditParser.getParser(parsedCommand.get(ARGUMENT).split(SPACE)[0]);
         case (HELP_COMMAND_WORD):
             return new HelpParser();
         case (TAG_COMMAND_WORD):

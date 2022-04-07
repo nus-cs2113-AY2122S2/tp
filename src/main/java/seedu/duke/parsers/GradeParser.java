@@ -50,7 +50,7 @@ public class GradeParser extends Parser {
             throw new MissingCompulsoryParameterException(MODULE_CODE_STR);
         }
         if (!moduleCode.matches(WORD_CHAR_ONLY)) {
-            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR);
+            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
         try {
             moduleGrade = userInput.split(SPACE)[FIRST_INDEX];

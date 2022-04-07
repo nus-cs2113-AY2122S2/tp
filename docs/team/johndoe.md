@@ -1,4 +1,4 @@
-# Bang Hee Kit - Project Portfolio Page
+# John Doe - Project Portfolio Page
 
 ## Overview
 

@@ -6,7 +6,6 @@ import seedu.duke.commands.GpaCommand;
 import seedu.duke.commands.ResetCommand;
 import seedu.duke.commands.SaveCommand;
 import seedu.duke.exceptions.AdditionalParameterException;
-import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.GeneralParseException;
 
@@ -21,8 +20,8 @@ public class NoArgumentParser extends Parser {
     }
 
     @Override
-    public void determineError() throws InvalidCompulsoryParameterException {
-        throw new InvalidCompulsoryParameterException();
+    public void determineError() throws GeneralParseException {
+        throw new GeneralParseException();
     }
 
     @Override

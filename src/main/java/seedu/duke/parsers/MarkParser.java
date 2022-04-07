@@ -67,7 +67,7 @@ public class MarkParser extends Parser {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }
         if (!taskNumber.matches(POSITIVE_INT)) {
-            throw new InvalidNumberException(TASK_NUMBER_STR);
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumber);
         }
         throw new InvalidCompulsoryParameterException();
     }
@@ -96,7 +96,7 @@ public class MarkParser extends Parser {
                 throw new GeneralParseException();
             }
         } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR);
+            throw new InvalidNumberException(TASK_NUMBER_STR, parsedArguments.get(TASK_NUMBER));
         }
     }
 }

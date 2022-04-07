@@ -18,11 +18,12 @@ import java.util.Objects;
 /**
  * This Parser supports the "add" command.
  */
-public class AddModuleParser extends Parser {
+public class AddModuleParser extends AddParser {
     private static final String MODULE_CODE = StringConstants.MODULE_CODE;
     private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
     private static final String MODULE_DESCRIPTION_STR = StringConstants.MODULE_DESCRIPTION_STR;
     private static final String MODULAR_CREDIT = StringConstants.MODULAR_CREDIT;
+    private static final String ERROR_MODULAR_CREDIT_HELP = StringConstants.ERROR_MODULAR_CREDITS_HELP;
     private static final int MAXIMUM_MODULAR_CREDITS = NumberConstants.MAXIMUM_MODULAR_CREDITS;
     private static final int MINIMUM_MODULAR_CREDITS = NumberConstants.MINIMUM_MODULAR_CREDITS;
     private String userInput;
@@ -79,7 +80,7 @@ public class AddModuleParser extends Parser {
             throw new MissingCompulsoryParameterException(MODULE_CODE_STR);
         }
         if (!moduleCode.matches(WORD_CHAR_ONLY)) {
-            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR);
+            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
         try {
             modularCredit = userInput.split(SPACE)[SECOND_INDEX];
@@ -87,7 +88,7 @@ public class AddModuleParser extends Parser {
             throw new MissingNumberException(MODULAR_CREDIT_STR);
         }
         if (!modularCredit.matches(UNRESTRICTED_INT)) {
-            throw new InvalidNumberException(MODULAR_CREDIT_STR);
+            throw new InvalidNumberException(MODULAR_CREDIT_STR, modularCredit, ERROR_MODULAR_CREDIT_HELP);
         }
         throw new InvalidCompulsoryParameterException();
     }
@@ -108,7 +109,7 @@ public class AddModuleParser extends Parser {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException e) {
-                throw new InvalidNumberException(MODULAR_CREDIT_STR);
+                throw new InvalidNumberException(MODULAR_CREDIT_STR, modularCreditStr, ERROR_MODULAR_CREDIT_HELP);
             }
             if (!Objects.isNull(moduleDescription)) {
                 if (moduleDescription.isBlank()) {

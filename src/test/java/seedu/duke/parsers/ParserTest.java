@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import seedu.duke.exceptions.InvalidCompulsoryParameterException;
+import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.commands.Command;
 
 
@@ -31,8 +31,8 @@ public class ParserTest extends Parser {
     }
 
     @Override
-    public void determineError() throws InvalidCompulsoryParameterException {
-        throw new InvalidCompulsoryParameterException(TASK_NAME_STR);
+    public void determineError() throws GeneralParseException {
+        throw new GeneralParseException();
     }
 
     @Override

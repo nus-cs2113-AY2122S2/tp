@@ -55,7 +55,7 @@ public class TagParser extends Parser {
         determineErrorInTagOperation();
         determineErrorInTaskNumber();
         determineErrorInTagName();
-        throw new InvalidCompulsoryParameterException();
+        assertErrorInModuleCode();
     }
 
     private void determineErrorInTagOperation() throws InvalidTagOperationException {
@@ -78,7 +78,7 @@ public class TagParser extends Parser {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }
         if (!taskNumber.matches(POSITIVE_INT)) {
-            throw new InvalidNumberException(TASK_NUMBER_STR);
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumber);
         }
     }
 
@@ -94,8 +94,14 @@ public class TagParser extends Parser {
             throw new MissingCompulsoryParameterException(TAG_NAME_STR);
         }
         if (!tagName.matches(WORD_CHAR_ONLY)) {
-            throw new InvalidCompulsoryParameterException(TAG_NAME_STR);
+            throw new InvalidCompulsoryParameterException(TAG_NAME_STR, tagName);
         }
+    }
+
+    private void assertErrorInModuleCode() throws ModHappyException {
+        assert(userInput.contains(TASK_MODULE_FLAG));
+        String moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
+        throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
 
     @Override
@@ -110,7 +116,7 @@ public class TagParser extends Parser {
         try {
             taskIndex = Integer.parseInt(taskNumberString) - 1;
         } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR);
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
         }
         return new TagCommand(tagOperationString, taskIndex, taskModuleString, tagDescription);
     }

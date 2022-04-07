@@ -139,6 +139,108 @@ public class ModHappyParserTest {
         }
     }
 
+    @Test
+    public void parse_addCommand_mod_unknownCommand() {
+        final String testString = "add . mod 1 4";
+        testParseCommand_expectUnknownCommandException(testString);
+    }
+
+    @Test
+    public void parse_addCommand_mod_invalidModuleCode() {
+        final String testString = "add mod . 1 4";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+    }
+
+    @Test
+    public void parse_addCommand_mod_invalidModularCredits() {
+        final String testString = "add mod 1  .4";
+        testParseCommand_expectInvalidNumberException(testString);
+    }
+
+    @Test
+    public void parse_addCommand_mod_excessArguments() {
+        final String testString = "add mod 1 4 .";
+        testParseCommand_expectInvalidExcessArgumentException(testString);
+    }
+
+    @Test
+    public void parse_addCommand_task_invalidCommand() {
+        final String testString = "add . task \"test\" -m cs2113t -d \"desc\" -t \"2 hours\"";
+        testParseCommand_expectUnknownCommandException(testString);
+    }
+
+    @Test
+    public void parse_addCommand_task_invalidTaskName() {
+        final String testString = "add task . \"test\" -m cs2113t -d \"desc\" -t \"2 hours\"";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+    }
+
+    @Test
+    public void parse_addCommand_task_invalidModuleCode() {
+        final String testString = "add task \"test\" -m . cs2113t -d \"desc\" -t \"2 hours\"";
+        testParseCommand_expectInvalidExcessArgumentException(testString);
+    }
+
+    @Test
+    public void parse_addCommand_task_invalidDescription() {
+        final String testString = "add task \"test\" -m cs2113t -d .\"desc\" -t \"2 hours\"";
+        testParseCommand_expectInvalidExcessArgumentException(testString);
+    }
+
+    @Test
+    public void parse_addCommand_task_invalidTime() {
+        final String testString = "add task \"test\" -m cs2113t -d .\"desc\" -t .\"2 hours\"";
+        testParseCommand_expectInvalidExcessArgumentException(testString);
+    }
+
+    @Test
+    public void parse_addCommand_task_wrongOrder() {
+        final String testString = "add task \"test\" -m cs2113t -t .\"2 hours\" -d .\"desc\" ";
+        testParseCommand_expectInvalidExcessArgumentException(testString);
+    }
+
+    @Test
+    public void parse_editCommand_mod_invalidCommand() {
+        final String testString = "edit . mod cs2113t  -d \"changed\"";
+        testParseCommand_expectUnknownCommandException(testString);
+    }
+
+    @Test
+    public void parse_editCommand_mod_invalidModule() {
+        final String testString = "edit mod . cs2113t  -d \"changed\"";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+    }
+
+    @Test
+    public void parse_editCommand_mod_invalidDescription() {
+        final String testString = "edit mod  cs2113t  -d .\"changed\"";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+    }
+
+    @Test
+    public void parse_editCommand_task_invalidCommand() {
+        final String testString = "edit .task 1 -m CS2113T  -d \"changed\"";
+        testParseCommand_expectUnknownCommandException(testString);
+    }
+
+    @Test
+    public void parse_editCommand_task_invalidTaskNumber() {
+        final String testString = "edit task .1 -m CS2113T  -d \"changed\"";
+        testParseCommand_expectInvalidNumberException(testString);
+    }
+
+    @Test
+    public void parse_editCommand_task_invalidModuleCode() {
+        final String testString = "edit task 1 -m .CS2113T  -d \"changed\"";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+    }
+
+    @Test
+    public void parse_editCommand_task_invalidDescription() {
+        final String testString = "edit task 1 -m CS2113T  -d .\"changed\"";
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+    }
+
     /*
     @Test
     public void parse_addCommand_task_withWorkingTime_parsedCorrectly() {

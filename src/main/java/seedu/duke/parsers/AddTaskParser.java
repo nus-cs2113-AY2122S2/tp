@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * This Parser supports the "add" command.
  */
-public class AddTaskParser extends Parser {
+public class AddTaskParser extends AddParser {
     private static final String TASK_STR = StringConstants.TASK_STR;
     private static final String TASK_DESCRIPTION_STR = StringConstants.TASK_DESCRIPTION_STR;
     private static final String TASK_ESTIMATED_WORKING_TIME_STR = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
@@ -71,9 +71,9 @@ public class AddTaskParser extends Parser {
             throw new MissingCompulsoryParameterException(TASK_NAME_STR);
         }
         if (!taskName.matches(QUOTED_UNRESTRICTED_STR)) {
-            throw new InvalidCompulsoryParameterException(TASK_PARAMETER_STR);
+            throw new InvalidCompulsoryParameterException(TASK_PARAMETER_STR, taskName);
         }
-        throw new InvalidCompulsoryParameterException(TASK_NAME_STR);
+        throw new InvalidCompulsoryParameterException();
     }
 
     @Override

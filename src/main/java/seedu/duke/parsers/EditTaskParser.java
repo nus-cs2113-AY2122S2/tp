@@ -16,7 +16,7 @@ import java.util.Objects;
 /**
  * This Parser supports the "edit" command.
  */
-public class EditTaskParser extends Parser {
+public class EditTaskParser extends EditParser {
 
     private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
     private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION;
@@ -62,6 +62,7 @@ public class EditTaskParser extends Parser {
     private static final String POSITIVE_INT = StringConstants.POSITIVE_INT;
     private static final String QUOTED_UNRESTRICTED_STR = StringConstants.QUOTED_UNRESTRICTED_STR;
     private static final String TASK_PARAMETERS_FLAGS = StringConstants.TASK_PARAMETERS_FLAG;
+    private static final String TASK_MODULE_FLAG = StringConstants.TASK_MODULE_FLAG;
 
     public EditTaskParser() {
         super();
@@ -82,13 +83,14 @@ public class EditTaskParser extends Parser {
     public void determineError() throws ModHappyException {
         String taskNumber;
         String taskParameter;
+        String moduleCode;
         try {
             taskNumber = userInput.split(SPACE)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }
         if (!taskNumber.matches(POSITIVE_INT)) {
-            throw new InvalidNumberException(TASK_NUMBER_STR);
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumber);
         }
         try {
             taskParameter = userInput.split(TASK_PARAMETERS_FLAGS)[FIRST_INDEX];
@@ -96,9 +98,12 @@ public class EditTaskParser extends Parser {
             throw new MissingCompulsoryParameterException(TASK_PARAMETER_STR);
         }
         if (!taskParameter.matches(QUOTED_UNRESTRICTED_STR)) {
-            throw new InvalidCompulsoryParameterException(TASK_PARAMETER_STR);
+            throw new InvalidCompulsoryParameterException(TASK_PARAMETER_STR, taskParameter);
         }
-        throw new InvalidCompulsoryParameterException();
+
+        assert(userInput.contains(TASK_MODULE_FLAG));
+        moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
+        throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
 
     @Override
@@ -115,7 +120,7 @@ public class EditTaskParser extends Parser {
             try {
                 taskIndex = Integer.parseInt(taskNumberString) - 1;
             } catch (NumberFormatException e) {
-                throw new InvalidNumberException(TASK_NUMBER_STR);
+                throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
             }
             checkTaskName(taskName);
             checkTaskDescription(taskDescription);

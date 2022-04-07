@@ -64,7 +64,7 @@ public class DeleteParser extends Parser {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }
         if (!taskNumber.matches(POSITIVE_INT)) {
-            throw new InvalidNumberException(TASK_NUMBER_STR);
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumber);
         }
     }
 
@@ -76,7 +76,7 @@ public class DeleteParser extends Parser {
             throw new MissingCompulsoryParameterException(MODULE_CODE_STR);
         }
         if (!moduleCode.matches(WORD_CHAR_ONLY)) {
-            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR);
+            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
     }
 
@@ -95,7 +95,7 @@ public class DeleteParser extends Parser {
             try {
                 taskIndex = Integer.parseInt(taskNumberString) - 1;
             } catch (NumberFormatException e) {
-                throw new InvalidNumberException(TASK_NUMBER_STR);
+                throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
             }
             return new DeleteCommand(taskIndex, taskModuleString);
         }
