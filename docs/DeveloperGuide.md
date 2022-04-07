@@ -637,4 +637,16 @@ and mouse.
 
 ## Instructions for Manual Testing
 
-See [IO redirection testing](#testing).
+Given below are instructions to test the app manually.
+
+> :information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are 
+> expected to do more *exploratory* testing.
+
+### Launch and shutdown
+
+1. Initial launch
+   1. Download the jar file from [here](https://github.com/AY2122S2-CS2113T-T10-2/tp/releases) and copy it into an empty folder.
+   2. Open a terminal in the folder and run `java -jar PlanITarium.jar`. Expected: Shows the welcome message.
+2. Shutdown
+   1. Upon request for input, type `bye` and press [Enter].
+
