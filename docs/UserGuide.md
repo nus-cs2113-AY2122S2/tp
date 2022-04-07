@@ -1,5 +1,4 @@
 # User Guide
-
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -17,16 +16,12 @@
 - [Command Summary](#command-summary)
 
 ## Introduction
-
 As online shopping becomes more convenient and transactions become easier, people tend to overshoot their budget
 because they are not aware of their accumulated expenditure.
 Spendvelope is designed to regularly remind the buyer of their preset spending limit for each month.
 
 
 ## Quick Start
-
-{Give steps to get started quickly}
-
 1. Ensure that you are running Java 11.
 2. Download the latest version of `Spendvelope` from [here](https://github.com/AY2122S2-CS2113-F12-1/tp/releases/tag/v1.0).
 Place it in a folder of your choice.
