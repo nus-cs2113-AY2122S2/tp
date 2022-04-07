@@ -58,7 +58,7 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return TaskParser.prepareDelete(argument, ui);
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommand(argument);
         case StudyCommand.COMMAND_WORD:
             return new StudyCommand();
         case ShowCommand.COMMAND_WORD:

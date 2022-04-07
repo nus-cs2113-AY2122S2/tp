@@ -1,7 +1,7 @@
 package seedu.sherpass.util.parser;
 
-import seedu.sherpass.command.AddCommand;
 import seedu.sherpass.command.Command;
+import seedu.sherpass.command.AddCommand;
 import seedu.sherpass.command.DeleteCommand;
 import seedu.sherpass.command.EditCommand;
 import seedu.sherpass.command.HelpCommand;
@@ -46,6 +46,7 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_CLEAR_MESSAGE;
 import static seedu.sherpass.constant.Message.WHITESPACE;
 
 public class TaskParser {
