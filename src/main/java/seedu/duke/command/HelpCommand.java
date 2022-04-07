@@ -27,6 +27,6 @@ public class HelpCommand extends Command {
                 "reserve {package_id},{contact_name},{contact_number},{pax}\nUsage: reserve 3," +
                 "John Doe,91234567,3\n" + SEPARATOR + "REMOVE RESERVATION\nDeletes a reservation " +
                 "for a travel package from the packages page\nFormat: remove {package_id},{contact_number}" +
-                "\nUsage: remove 2,98765432\n" + SEPARATOR);
+                "\nUsage: remove 2,98765432\n" + SEPARATOR + "EXIT PROGRAM\nFormat/Usage: bye\n" + SEPARATOR);
     }
 }
