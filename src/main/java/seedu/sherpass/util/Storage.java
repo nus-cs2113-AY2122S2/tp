@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.parser.StorageParser;
@@ -14,15 +16,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
 import static seedu.sherpass.constant.Index.INDENT_FACTOR;
-import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
-import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
-import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 public class Storage {
@@ -49,8 +47,10 @@ public class Storage {
         }
     }
 
-    // Wipes the existing file
-    private void wipeSaveData() {
+    /**
+     * Wipes the existing save file.
+     */
+    public void wipeSaveData() {
         try {
             FileWriter fw = new FileWriter(saveFilePath);
             fw.close();
@@ -71,16 +71,12 @@ public class Storage {
         JSONArray tasks = new JSONArray();
         for (Task t : taskList.getTasks()) {
             JSONObject taskToStore = new JSONObject();
-            taskToStore.put("index", t.getIndex());
             taskToStore.put("identifier", t.getIdentifier());
             taskToStore.put("status", t.getStatusIcon());
             taskToStore.put("by_date",
-                    (t.getByDate() == null ? " " : t.getByDate().format(inputWithTimeFormat)));
-            taskToStore.put("do_date_start",
-                    (t.getDoOnStartDateTime() == null ? " " : t.getDoOnStartDateTime().format(inputWithTimeFormat)));
-            taskToStore.put("do_date_end",
-                    (t.getDoOnStartDateTime() == null ? " " : t.getDoOnEndDateTime().format(inputWithTimeFormat)));
-            taskToStore.put("frequency", (t.getRepeatFrequency() == null ? " " : t.getRepeatFrequency().toString()));
+                    (t.getByDateTime() == null ? " " : t.getByDateTime().format(inputWithTimeFormat)));
+            taskToStore.put("do_date_start", t.getDoOnStartDateTime().format(inputWithTimeFormat));
+            taskToStore.put("do_date_end", t.getDoOnEndDateTime().format(inputWithTimeFormat));
             taskToStore.put("description", t.getDescription());
             tasks.put(taskToStore);
         }
@@ -93,7 +89,7 @@ public class Storage {
      *
      * @param taskList Array of tasks that are to be saved.
      */
-    public JSONObject writeSaveData(TaskList taskList) {
+    public void writeSaveData(TaskList taskList) {
         JSONObject taskJson = convertTaskListToJson(taskList);
         String taskString = taskJson.toString(INDENT_FACTOR);
         assert taskString != null;
@@ -104,58 +100,26 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(ERROR_IO_FAILURE_MESSAGE);
         }
-        return taskJson;
     }
 
     /**
-     * Loads back the save file onto the program.
+     * Loads the save file into the task list.
      *
-     * @return ArrayList containing the tasks saved in the data file
      * @throws IOException           If an I/O error occurs while reading the data file
      * @throws InvalidInputException If the data has missing fields for a task
      * @throws JSONException         If the data file has an invalid JSON format
      */
-    public ArrayList<Task> load() throws IOException, InvalidInputException, JSONException {
-        ArrayList<Task> taskList = new ArrayList<>();
+    public void load(TaskList taskList) throws IOException, InvalidInputException, JSONException, TimeClashException {
         List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
         if (dataLines.size() > 0) {
-            String dataString = String.join("", dataLines);
+            String dataString = String.join("\n", dataLines);
             JSONArray taskArray = new JSONObject(dataString).getJSONArray("tasks");
 
             for (int i = 0; i < taskArray.length(); i++) {
                 JSONObject taskData = taskArray.getJSONObject(i);
-                taskList.add(StorageParser.parseSaveData(taskData));
+                taskList.addTask(StorageParser.parseSaveData(taskData), Frequency.SINGLE);
             }
         }
-        return taskList;
+        writeSaveData(taskList);
     }
-
-    /**
-     * Creates a new save file or exits the program.
-     * <p>
-     * When the save file fails to load, the user decides if the program creates new save file
-     * or the user can manually inspect the save file.
-     * </p>
-     *
-     * @param ui Ui for printing messages
-     */
-    public void handleCorruptedSave(Ui ui) {
-        ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_1);
-        String response = "";
-
-        while (!response.equalsIgnoreCase("y") && !response.equalsIgnoreCase("n")) {
-            ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_2);
-            response = ui.readCommand().trim();
-        }
-
-        assert response.equalsIgnoreCase("y") || response.equalsIgnoreCase("n");
-
-        if (response.equalsIgnoreCase("y")) {
-            wipeSaveData();
-        } else {
-            ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
-            System.exit(0);
-        }
-    }
-
 }

@@ -2,12 +2,14 @@ package seedu.sherpass.command;
 
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Storage;
-import seedu.sherpass.util.timetable.Timetable;
+import seedu.sherpass.timetable.Timetable;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_1;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_2;
 import static seedu.sherpass.constant.Message.WAITING_FOR_USER_NEXT_INPUT;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 
@@ -62,7 +64,7 @@ public class ShowCommand extends Command {
         switch (selection) {
         case "todo":
             ui.showToUser("Here are your pending tasks:");
-            taskList.printPendingTasks(ui);
+            ui.showToUser(taskList.getPendingTasks());
             break;
         case "today":
             ui.showToUser(WELCOME_MESSAGE_TWO);
@@ -100,7 +102,7 @@ public class ShowCommand extends Command {
         case "feburary":
         case "feb":
             ui.showToUser("Here is your schedule for Feburary:");
-            Timetable.showFeburarySchedule(taskList, ui);
+            Timetable.showFebruarySchedule(taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "march":
@@ -134,8 +136,8 @@ public class ShowCommand extends Command {
             break;
         case "auguest":
         case "aug":
-            ui.showToUser("Here is your schedule for Auguest:");
-            Timetable.showAuguestSchedule(taskList, ui);
+            ui.showToUser("Here is your schedule for August:");
+            Timetable.showAugustSchedule(taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "september":
@@ -163,7 +165,9 @@ public class ShowCommand extends Command {
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "all":
-            taskList.printAllTasks(ui);
+            ui.showToUser("Here are the tasks in your list:");
+            ui.showToUser(taskList.getAllTasksInString());
+            ui.showToUser(TASK_COUNT_MESSAGE_1 + taskList.getSize() + TASK_COUNT_MESSAGE_2);
             break;
         default:
             ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);

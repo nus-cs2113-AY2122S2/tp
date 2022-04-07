@@ -2,16 +2,18 @@ package seedu.sherpass.command;
 
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
-import seedu.sherpass.util.parser.TaskParser;
 
 import java.time.LocalDateTime;
 
-
-import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
+import static seedu.sherpass.constant.Message.ADD_TASK_RESULT_MESSAGE;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_1;
+import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_2;
+import static seedu.sherpass.constant.Message.TAB_INDENT;
 
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
@@ -28,21 +30,7 @@ public class AddCommand extends Command {
     private LocalDateTime byDate;
     private Frequency frequency;
 
-
-    /**
-     * Accept parsed user input (in proper format) for preparation of adding task.
-     *
-     * @param taskDescription parsed task description.
-     * @param doOnStartDateTime parsed doOnStartDateTime.
-     * @param doOnEndDateTime parsed doOnEndDateTime.
-     * @throws InvalidInputException of start time is after end time.
-     */
-    public void setTaskContent(String taskDescription, LocalDateTime doOnStartDateTime,
-                               LocalDateTime doOnEndDateTime) throws
-            InvalidInputException {
-        if (doOnStartDateTime.isAfter(doOnEndDateTime)) {
-            throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
-        }
+    public AddCommand(String taskDescription, LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime) {
         this.taskDescription = taskDescription;
         this.doOnStartDateTime = doOnStartDateTime;
         this.doOnEndDateTime = doOnEndDateTime;
@@ -67,27 +55,26 @@ public class AddCommand extends Command {
         this.frequency = frequency;
     }
 
-
     /**
      * Executes the adding of a task or multiple tasks.
      *
      * @param taskList Array representation of tasks.
-     * @param ui User Interface.
-     * @param storage Overwrites the save file data.
+     * @param ui       User Interface.
+     * @param storage  Overwrites the save file data.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
-        if (TaskParser.isValidFreq(frequency)) {
-            int identifier = taskList.generateIdentifier();
-            newTask = new Task(identifier, taskDescription, null,
-                    doOnStartDateTime, doOnEndDateTime, frequency, 0);
-            taskList.addTask(newTask, true, ui);
-        } else {
-            newTask = new Task(-1, taskDescription, byDate,
-                    doOnStartDateTime, doOnEndDateTime, null, 0);
-            taskList.addTask(newTask, false, ui);
+        int identifier = taskList.generateIdentifier();
+        newTask = new Task(identifier, taskDescription, byDate, doOnStartDateTime, doOnEndDateTime);
+        try {
+            taskList.addTask(newTask, frequency);
+            storage.writeSaveData(taskList);
+            ui.showToUser(ADD_TASK_RESULT_MESSAGE);
+            ui.showToUser(TAB_INDENT + newTask);
+            ui.showToUser(TASK_COUNT_MESSAGE_1 + taskList.getSize() + TASK_COUNT_MESSAGE_2);
+        } catch (TimeClashException | InvalidInputException exception) {
+            ui.showError(exception.getMessage());
         }
-        storage.writeSaveData(taskList);
     }
 }

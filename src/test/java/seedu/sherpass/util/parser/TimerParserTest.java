@@ -10,6 +10,19 @@ import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
 public class TimerParserTest {
 
     @Test
+    void selectDefaultTimer_stringInput_InvalidTimeExceptionThrown() {
+        String timerChoiceInput = "two";
+        assertThrows(InvalidTimeException.class, () -> TimerParser.selectDefaultTimer(timerChoiceInput));
+    }
+
+    @Test
+    void selectDefaultTimer_validInput_InvalidTimeExceptionThrown() throws InvalidTimeException {
+        String timerChoiceInput = "2";
+        int result = TimerParser.selectDefaultTimer(timerChoiceInput);
+        assertEquals(DEFAULT_TIMER_TWO, result);
+    }
+
+    @Test
     void parseTimerInput_noInput_InvalidTimeExceptionThrown() {
         String studyCommandInput = "start ";
         String[] timerInput = studyCommandInput.split(" ", 2);

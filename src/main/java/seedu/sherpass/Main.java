@@ -7,13 +7,12 @@ import seedu.sherpass.command.ExitCommand;
 
 import seedu.sherpass.exception.InvalidInputException;
 
+import seedu.sherpass.exception.TimeClashException;
 import seedu.sherpass.util.parser.Parser;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.task.TaskList;
-
-import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
@@ -21,6 +20,10 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
+import static seedu.sherpass.constant.Message.ERROR_INVALID_SAVED_FILE_MESSAGE_1;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_SAVED_FILE_MESSAGE_2;
+import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 public class Main {
 
@@ -39,14 +42,21 @@ public class Main {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
-            taskList = new TaskList(storage.load());
+            taskList = new TaskList();
+            storage.load(taskList);
         } catch (IOException e) {
             ui.showToUser(ERROR_IO_FAILURE_MESSAGE);
             System.exit(1);
-        } catch (InvalidInputException | JSONException e) {
+        } catch (InvalidInputException | JSONException | TimeClashException e) {
             ui.showToUser(e.getMessage());
-            storage.handleCorruptedSave(ui);
-            taskList = new TaskList();
+            boolean shouldWipeFile = ui.readYesNoCommand(ERROR_INVALID_SAVED_FILE_MESSAGE_1);
+            if (shouldWipeFile) {
+                storage.wipeSaveData();
+                taskList = new TaskList();
+            } else {
+                ui.showToUser(ERROR_INVALID_SAVED_FILE_MESSAGE_2);
+                System.exit(1);
+            }
         }
     }
 
@@ -76,11 +86,11 @@ public class Main {
         ui.showWelcomeMessage(taskList, ui);
 
         boolean isExit = false;
-        while (!isExit) {
+        while (!isExit && ui.hasInput()) {
             String fullCommand = ui.readCommand();
             ui.showLine();
 
-            Command c = Parser.parseCommand(fullCommand, taskList, ui);
+            Command c = Parser.parseCommand(fullCommand, ui);
             if (c != null) {
                 c.execute(taskList, ui, storage);
                 isExit = ExitCommand.isExit(c);

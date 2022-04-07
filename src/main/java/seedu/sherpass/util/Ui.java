@@ -1,14 +1,14 @@
 package seedu.sherpass.util;
 
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.util.timetable.Timetable;
+import seedu.sherpass.timetable.Timetable;
 
 import java.util.Scanner;
 
+import static seedu.sherpass.constant.Message.ERROR_PREFIX;
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_ONE;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
-
 
 public class Ui {
     private static final Scanner in = new Scanner(System.in);
@@ -39,6 +39,18 @@ public class Ui {
      */
     public String readCommand() {
         return in.nextLine().trim();
+    }
+
+    /**
+     * Returns a boolean value to see if there is any more
+     * user inputs.
+     *
+     * @return Returns true if there is still user inputs. Method may
+     *         be blocked while waiting for user inputs and scanner does
+     *         not continue scanning for inputs when it is waiting.
+     */
+    public boolean hasInput() {
+        return in.hasNext();
     }
 
     /**
@@ -106,5 +118,26 @@ public class Ui {
             output.append(character);
         }
         return output.toString();
+    }
+
+    public void showError(String message) {
+        System.out.println(ERROR_PREFIX + message);
+    }
+
+    public boolean readYesNoCommand(String message) {
+        System.out.println(message);
+        while (true) {
+            String input = readCommand();
+            showLine();
+            if (input.trim().equalsIgnoreCase("Y")
+                    || input.trim().equalsIgnoreCase("Yes")) {
+                return true;
+            } else if (input.trim().equalsIgnoreCase("N")
+                    || input.trim().equalsIgnoreCase("No")) {
+                return false;
+            }
+            showToUser("Please confirm your choice with either Y (Yes) or N (No).");
+            showLine();
+        }
     }
 }

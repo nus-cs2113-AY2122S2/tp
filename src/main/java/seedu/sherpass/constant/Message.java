@@ -3,6 +3,8 @@ package seedu.sherpass.constant;
 public class Message {
     public static final String EMPTY_STRING = "";
     public static final String WHITESPACE = " ";
+    public static final String TAB_INDENT = "\t";
+    public static final String NEWLINE = "\n";
     public static final String WELCOME_MESSAGE_ONE = "Welcome to\n";
     public static final String WELCOME_MESSAGE_TWO = "Here is your schedule for today:";
     public static final String WELCOME_MESSAGE_STUDY = "Gotcha! Entering study mode...\n"
@@ -13,7 +15,8 @@ public class Message {
             + "3) 1.5 hours\n\n"
             + "For testing purposes, you may start a 30s timer\nwith mode number 0.\n"
             + "Feel free to choose your own timer with\n'start /custom <timer_duration>'.\n"
-            + "Otherwise, you can start a stopwatch with 'start stopwatch'.";
+            + "Otherwise, you can start a stopwatch with 'start stopwatch'.\n"
+            + "You can also use the \"show today\" command to\nsee what tasks you have planned to complete.";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
     public static final String GOODBYE_MESSAGE_STUDY = "Leaving study session...\n"
             + "Welcome back to the main session! How can I help you?";
@@ -39,42 +42,54 @@ public class Message {
             + "6) Exit study mode: leave\n"
             + "7) Mark task as done: mark <task_index>";
 
-    public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
+    public static final String ERROR_PREFIX = "Command error: ";
+    public static final String EDIT_TASK_RESULT_MESSAGE = "Okay! I've edited this task:";
+    public static final String DELETE_TASK_RESULT_MESSAGE = "Okay. I've removed this task:";
+    public static final String ADD_TASK_RESULT_MESSAGE = "Got it! I've added this task:";
 
-    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
+    public static final String TASK_COUNT_MESSAGE_1 = "You now have ";
+    public static final String TASK_COUNT_MESSAGE_2 = " task(s) in your schedule!";
+
+    public static final String UNMARK_TASK_RESULT_MESSAGE = "Ok, I've marked this task as not done yet:";
+    public static final String MARK_TASK_RESULT_MESSAGE = "Nice! I've marked this task as done:";
+    public static final String CLEAR_COMMAND_CONFIRMATION_MESSAGE = "Are you sure you want to delete all tasks?\n"
+            + "You will not be able to recover them after deleting (Y/N): ";
+    public static final String CLEAR_COMMAND_CONFIRMED_MESSAGE = "Understood. Proceeding to delete"
+            + " all tasks in the list..........";
+    public static final String CLEAR_COMMAND_RESULT_MESSAGE = "Done! Now you have 0 task in the list.";
+    public static final String CLEAR_COMMAND_CANCEL_MESSAGE = "Okay, we'll keep it as it is.";
+    public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
+    public static final String ERROR_START_DATE_IN_THE_PAST_MESSAGE = "Do date cannot be in the past!";
+    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after/equals to end time!";
     public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank and must be before "
             + "the date and time add commands";
-    public static final String ERROR_EMPTY_TASK_LIST_MESSAGE = "The task list is empty!";
-    public static final String ERROR_MISSING_EDIT_ARGUMENT_MESSAGE = "Missing task description or date argument!";
     public static final String ERROR_INVALID_FREQUENCY_MESSAGE = "Invalid frequency!";
     public static final String ERROR_INVALID_INDEX_MESSAGE = "Invalid index!";
     public static final String ERROR_INVALID_DATETIME_MESSAGE = "Invalid date and/or time format!";
-    public static final String ERROR_SCHEDULE_CLASH_MESSAGE = "Oops! I am unable to add this task as "
+    public static final String ERROR_SCHEDULE_CLASH_MESSAGE = "I am unable to add this task as "
             + "it has some clashes\nwith your schedule :(";
     public static final String ERROR_EMPTY_ADD_COMMANDS_MESSAGE = "Add command is missing "
             + "description and/or date details!\n(and possibly a repeat frequency if you intend to add it in)";
-    public static final String ERROR_MULTIPLE_ARGS_MESSAGE = "Add command has both /by and /repeat commands.\n"
-            + "Please choose one of them.";
+    public static final String ERROR_BY_DATE_TIME_MISSING_MESSAGE = "Please specify both date and time for by date!";
+    public static final String ERROR_BY_DATE_BEFORE_DO_ON_DATE = "Your deadline cannot be before your do date!";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;
     public static final String ERROR_INVALID_STUDY_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE_STUDY;
-    public static final String ERROR_INVALID_DELETE_INDEX_MESSAGE = "Oops! It seems that you've given\n"
+    public static final String ERROR_INVALID_DELETE_INDEX_MESSAGE = "It seems that you've given\n"
             + "an invalid index to delete the task.";
     public static final String ERROR_IO_FAILURE_MESSAGE = "Oh no! We've encountered an error \nwhile "
             + "trying to processing the system.\n"
             + "Please reboot and execute the application again.";
-    public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_1 = "Oops! It seems that your saved file "
-            + "is corrupted.";
-    public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_2 = "Would you like to start with a new save "
+    public static final String ERROR_INVALID_SAVED_FILE_MESSAGE_1 = "Oops! It seems that your saved file "
+            + "contains invalid data.\nWould you like to start with a new save "
             + "file? (Y/N):";
-    public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_3 = "We're sorry this happened. "
+    public static final String ERROR_INVALID_SAVED_FILE_MESSAGE_2 = "We're sorry this happened. "
             + "Please refer to the troubleshooting section in the user guide "
             + "or contact the developers for help.";
-    public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"
-            + " key in a valid task number to mark/unmark your task."
-            + HELP_MESSAGE_SPECIFIC_COMMAND;
+    public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Please"
+            + " key in a valid task number to mark/unmark your task.";
     public static final String ERROR_INVALID_TIMER_INPUT_MESSAGE = "Oops! Your timer input "
             + "does not seem to be correct.\n\n"
             + "Please select one of the three default modes with\n"

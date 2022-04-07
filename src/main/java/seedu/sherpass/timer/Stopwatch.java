@@ -3,16 +3,25 @@ package seedu.sherpass.timer;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
+import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
-import static seedu.sherpass.constant.TimerConstant.STOPWATCH_TIME_INTERVAL;
 
 public class Stopwatch extends Timer {
 
     private int timeElapsed;
 
-    public Stopwatch(TaskList taskList, Ui ui) {
+    private final JFrame jframe;
+    private final JLabel jlabel;
+
+    public Stopwatch(TaskList taskList, Ui ui, JFrame jframe, JLabel jlabel) {
         super(taskList, ui);
         timeElapsed = 0;
+        this.jframe = jframe;
+        this.jlabel = jlabel;
     }
 
     /**
@@ -22,8 +31,35 @@ public class Stopwatch extends Timer {
     public void run() {
         isTimerRunning = true;
         printTimerStart();
+        jframe.setVisible(true);
         while (!forcedStop) {
             update();
+        }
+    }
+
+    private String convertTimeToString() {
+        long hour;
+        long minute;
+        long second;
+        if ((timeElapsed / ONE_HOUR) > 0) {
+            hour = timeElapsed / ONE_HOUR;
+            minute = (long) ((timeElapsed * 1.0) / ONE_HOUR) * 60;
+            second = timeElapsed - (hour * ONE_HOUR) - (minute * ONE_MINUTE);
+            String zeroStringHour = (hour > 9) ? EMPTY_STRING : "0";
+            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
+            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
+            return zeroStringHour + hour + " hour(s) " + zeroStringMinute + minute
+                    + " minute(s) " + zeroStringSecond + second + " second(s)";
+        } else if ((timeElapsed / ONE_MINUTE) > 0) {
+            minute = timeElapsed / ONE_MINUTE;
+            second = timeElapsed - (minute * ONE_MINUTE);
+            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
+            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
+            return zeroStringMinute + minute + " minute(s) " + zeroStringSecond + second + " second(s)";
+        } else {
+            second = timeElapsed;
+            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
+            return zeroStringSecond + second + " second(s)";
         }
     }
 
@@ -35,7 +71,8 @@ public class Stopwatch extends Timer {
         try {
             Thread.sleep(1000);
             timeElapsed += 1;
-            printTimeElapsed();
+            String timeShownToUser = convertTimeToString();
+            jlabel.setText("Elapsed time: " + timeShownToUser);
             if (isTimerPaused) {
                 waitForTimerToResume();
             }
@@ -49,25 +86,13 @@ public class Stopwatch extends Timer {
      */
     public void stopTimer() {
         if (isTimerRunning) {
+            jframe.setVisible(false);
             ui.showToUser("Alright, I've stopped the timer.");
             isTimerRunning = false;
             forcedStop = true;
             this.interrupt();
         } else {
             ui.showToUser("The timer has already stopped.");
-        }
-    }
-
-    private void printTimeElapsed() {
-        if (timeElapsed > ONE_MINUTE) {
-            if (timeElapsed % ONE_MINUTE == 0) {
-                int minutesLeft = timeElapsed / ONE_MINUTE;
-                ui.showToUser(minutesLeft + " minutes have passed.");
-            }
-            return;
-        }
-        if (timeElapsed % STOPWATCH_TIME_INTERVAL == 0) {
-            ui.showToUser(timeElapsed + " seconds have passed.");
         }
     }
 

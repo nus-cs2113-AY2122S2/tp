@@ -1,4 +1,4 @@
-package seedu.sherpass.util.timetable;
+package seedu.sherpass.timetable;
 
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import static seedu.sherpass.Main.LOGGER;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
-
 import static seedu.sherpass.constant.TimetableConstant.PARTITION_PIPE_LINE_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.PARTITION_SPACE_OFFSET_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_COMPARE_LENGTH;

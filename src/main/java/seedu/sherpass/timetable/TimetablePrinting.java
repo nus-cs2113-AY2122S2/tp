@@ -1,4 +1,4 @@
-package seedu.sherpass.util.timetable;
+package seedu.sherpass.timetable;
 
 import seedu.sherpass.task.Task;
 import seedu.sherpass.util.Ui;

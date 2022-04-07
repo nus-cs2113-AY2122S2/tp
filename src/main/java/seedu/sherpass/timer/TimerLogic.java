@@ -13,31 +13,72 @@ import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.util.parser.TimetableParser;
+import seedu.sherpass.timetable.Timetable;
 
 import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 
-public class TimerLogic {
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class TimerLogic implements WindowListener {
 
     private static Ui ui;
     private static Timer timer;
     private static TaskList taskList;
-    protected boolean isTimerInitialised = false;
+    protected static volatile boolean isTimerInitialised = false;
+    private final JFrame jframe;
+    private final JLabel jlabel;
+    private final ActionListener actionListenerPause = actionEvent -> {
+        callPauseTimer();
+        ui.showLine();
+    };
+    private final ActionListener actionListenerResume = actionEvent -> {
+        callResumeTimer();
+        ui.showLine();
+    };
+    private final ActionListener actionListenerStop = actionEvent -> {
+        callStopTimer();
+        ui.showLine();
+    };
 
     /**
      * Creates a constructor for TimerLogic.
      *
-     * @param ui UI
+     * @param ui       UI
      * @param taskList taskList
      */
     public TimerLogic(TaskList taskList, Ui ui) {
         TimerLogic.taskList = taskList;
         TimerLogic.ui = ui;
+        jframe = new JFrame();
+        jframe.setBounds(500, 300, 300, 100);
+        jlabel = new JLabel(EMPTY_STRING, SwingConstants.CENTER);
+        jframe.setLayout(new BorderLayout());
+        jframe.add(jlabel, BorderLayout.NORTH);
+        jframe.addWindowListener(this);
+        JToggleButton pauseButton = new JToggleButton("Pause");
+        pauseButton.addActionListener(actionListenerPause);
+        jframe.add(pauseButton, BorderLayout.WEST);
+        JToggleButton resumeButton = new JToggleButton("Resume");
+        resumeButton.addActionListener(actionListenerResume);
+        jframe.add(resumeButton, BorderLayout.CENTER);
+        JToggleButton stopButton = new JToggleButton("stop");
+        stopButton.addActionListener(actionListenerStop);
+        jframe.add(stopButton, BorderLayout.EAST);
     }
 
     /**
      * Marks a task as done, as specified in parsedInput.
-     * @param storage Storage.
+     *
+     * @param storage     Storage.
      * @param parsedInput parsedInput.
      */
     public void markTask(Storage storage, String parsedInput) {
@@ -50,7 +91,7 @@ public class TimerLogic {
 
 
     private void executeMark(Storage storage, String parsedInput) {
-        Command c = TaskParser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
+        Command c = TaskParser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, ui);
         if (c != null) {
             c.execute(taskList, ui, storage);
             printAvailableCommands();
@@ -68,7 +109,7 @@ public class TimerLogic {
     }
 
     public void showTasks(Storage storage, String[] parsedInput) {
-        if (!isTimerInitialised) {
+        if (isTimerPausedOrStopped()) {
             executeShow(storage, parsedInput);
         } else {
             ui.showToUser("You can't show tasks while timer is running!");
@@ -142,7 +183,7 @@ public class TimerLogic {
         if (isTimerInitialised) {
             timer.stopTimer();
             isTimerInitialised = updateIsTimerRunning();
-            taskList.printAllTasks(ui);
+            Timetable.showTodaySchedule(taskList, ui);
             ui.showToUser("Would you like to start another timer, mark a task as done, "
                     + "or leave the study session?");
             return;
@@ -150,10 +191,13 @@ public class TimerLogic {
         ui.showToUser("You don't have a timer running!");
     }
 
-    private boolean updateIsTimerRunning() {
+    private static boolean updateIsTimerRunning() {
         return timer.isTimerRunning();
     }
 
+    public static void resetIsTimerInitialised() {
+        isTimerInitialised = false;
+    }
 
     private String selectStudyTimer(String[] parsedInput) {
         if (parsedInput[STUDY_PARAMETER_INDEX].trim().equals("stopwatch")) {
@@ -164,30 +208,110 @@ public class TimerLogic {
 
     /**
      * Resets the timer by creating a new timer object, which can then be started by the user.
-     *
      */
     public void callResetTimer(String[] parsedInput) {
         String parameter = selectStudyTimer(parsedInput);
         if (parameter.equals("stopwatch")) {
-            timer = new Stopwatch(taskList, ui);
+            timer = new Stopwatch(taskList, ui, jframe, jlabel);
             return;
         }
-        timer = new Countdown(taskList, ui);
+        timer = new Countdown(taskList, ui, jframe, jlabel);
     }
 
-
-
-    private boolean isTimerPausedOrStopped() {
+    /**
+     * Returns if a timer is paused or stopped, so that mark or show command can be called.
+     * It first checks if timer is initialised. If initialised, it then calls the isTimerPaused() method to check the
+     * static variable isTimerPaused in abstract class Timer.
+     *
+     * @return Returns if timer is paused or stopped.
+     */
+    public boolean isTimerPausedOrStopped() {
         if (!isTimerInitialised) {
+            return true;
+        }
+        if (!timer.isTimerRunning()) {
             return true;
         }
         return timer.isTimerPaused();
     }
 
-    public boolean getIsTimerRunning() {
-        if (!isTimerInitialised) {
-            return false;
-        }
-        return timer.isTimerRunning;
+    /**
+     * Destroy the jframe that was created.
+     */
+    public void destroyFrame() {
+        jframe.dispose();
+    }
+
+
+    /**
+     * Call method when window is opened.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    /**
+     * Call method as window is closing.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
+    @Override
+    public void windowClosing(WindowEvent e) {
+        callStopTimer();
+        ui.showLine();
+    }
+
+    /**
+     * Call method when window is closed.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+
+    /**
+     * Call method when window is minimised.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    /**
+     * Call method when window is set from minimised to normal size.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    /**
+     * Call method when window is set to be the active (current viewing) window.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+
+    /**
+     * Call method when window is not set to be the active (current viewing) window.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }

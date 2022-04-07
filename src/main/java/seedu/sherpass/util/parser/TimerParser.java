@@ -96,7 +96,7 @@ public class TimerParser {
             timerLogic.callStopTimer();
             break;
         case "mark":
-            timerLogic.markTask(storage, parsedInput[1]);
+            timerLogic.markTask(storage, rawUserInput);
             break;
         case "show":
             timerLogic.showTasks(storage, parsedInput);

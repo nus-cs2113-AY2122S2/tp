@@ -2,9 +2,34 @@
 
 ## Introduction
 
-Sherpass is a desktop application for students to manage their academic schedules.
+Sherpass is a desktop application for students to manage their academic schedules and also provide a platform for them
+to focus on their academic tasks.
 Optimised for use via a Command Line Interface (CLI),
 users who can type fast will be able to plan out their tasks in a much quicker fashion compared to traditional GUI apps.
+
+### Managing your time
+You can add your tasks into Sherpass and get a detailed outline of your schedule. Using this schedule, you won't
+have to worry ever again about forgetting tasks and missing deadlines!
+
+Sherpass also allows you to easily add recurring tasks (e.g. classes). Simply refer to the command details for
+more information.
+
+### Study sessions
+Having trouble focusing while studying? Sherpass's study sessions allow you to select study timers, inspired by the
+increasingly popular [Pomodoro study sessions](https://examstudyexpert.com/pomodoro-study-method/), to help you keep track of the time whilst completing your tasks.
+
+#### During Study sessions
+Starting the study session will show you the tasks that you have planned to do for the day. You can then choose to
+start one of a few default timers provided by us, or start your own custom timer. You can also choose to start a
+stopwatch to keep track of how long you've been studying for, if you're unsure of how long you will need.
+
+#### After Study sessions
+After your study session, you will be prompted to mark the tasks you've completed as done. If you're still not done with
+certain tasks, feel free to start another productive session!
+
+### User Guide Target Audience
+New and inexperienced users who want to use Sherpass, as well as non-users who want to know more about what Sherpass
+can do.
 
 ## Table of Content
 - [Quick Start](#quick-start)
@@ -27,6 +52,8 @@ users who can type fast will be able to plan out their tasks in a much quicker f
     - Exit study session: [`leave`](#leave-the-study-session-leave)
   - Exit program: [`exit`]()
   - [Saving your tasks](#saving-your-tasks)
+- [FAQ](#faq)
+- [Glossary](#faq)
 - [Command Summary](#command-summary)
 
 ## Quick Start
@@ -38,34 +65,14 @@ from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Relea
 4. Open a terminal and navigate to the folder containing the jar file.
 5. Start the application on the terminal using `java -jar Sherpass.jar`
 
-## Features 
-
-### Managing your time
-You can add your tasks into Sherpass and get a detailed outline of your schedule. Using this schedule, you won't
-have to worry ever again about forgetting tasks and missing deadlines!
-
-Sherpass also allows you to easily add recurring tasks (e.g. classes). Simply refer to the command details for
-more information.
-
-### Study sessions
-Having trouble focusing while studying? Sherpass's study sessions allow you to select study timers, inspired by the
-increasingly popular Pomodoro study sessions, to help you keep track of the time whilst completing your tasks.
-
-#### During Study sessions
-Starting the study session will show you the tasks that you have planned to do for the day. You can then choose to
-start one of a few default timers provided by us, or start your own custom timer. You can also choose to start a 
-stopwatch to keep track of how long you've been studying for, if you're unsure of how long you will need.
-
-#### After Study sessions
-After your study session, you will be prompted to mark the tasks you've completed as done. If you're still not done with
-certain tasks, feel free to start another productive session!
+## Features
 
 ## Command Guide
 
 ### Notes on command input format:
-- Words in UPPER_CASE are the parameters to be supplied by the user.
+- Words in UPPER_CASE are the [parameters](#glossary) to be supplied by the user.
 - Items in square brackets are optional
-- Extraneous parameters for commands that do not take in parameters (such as show, stop, exit) will be ignored
+- [Extraneous](#glossary) parameters for commands that do not take in parameters (such as show, stop, exit) will be ignored
 
 ### Notes on task number format:
 - Each task added to your schedule is assigned a task number. You can see what number a task is assigned via
@@ -82,7 +89,7 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by D
 
 |    Parameters    | Description                     | Accepted inputs                                   | Optional |
 |:----------------:|---------------------------------|---------------------------------------------------|----------|
-| TASK_DESCRIPTION | Description for the task        | Any sentence without the character '/'            | No       |
+| TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                          | No       |
 |     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | No       |
 |    START_TIME    | Time to start working on a task | HH:mm format (e.g 18:00), must be before END_TIME | No       |
 |     END_TIME     | Time to stop working on a task  | HH:mm format (e.g 19:00)                          | No       |
@@ -94,6 +101,7 @@ Examples:
 
 #### Adding a recurring task
 - All tasks will have the same task description.
+- You can easily add your lecture and tutorial classes into your schedule with this command.
 - For a **daily** recurring task, a **month's** worth of task will be added.
 - For a **weekly** recurring task, **2 months'** worth of task will be added.
 - For a **monthly** recurring task, a **year's** worth of task will be added.
@@ -102,7 +110,7 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME /repea
 
 |    Parameters    | Description                     | Accepted inputs                              | Optional |
 |:----------------:|---------------------------------|----------------------------------------------|----------|
-| TASK_DESCRIPTION | Description for the task        | Any sentence without the character '/'       | No       |
+| TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                     | No       |
 |     DO_DATE      | Date to work on the task        | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022) | No       |
 |    START_TIME    | Time to start working on a task | HH:mm (e.g 18:00), must be before END_TIME   | No       |
 |     END_TIME     | Time to stop working on a task  | HH:mm (e.g 19:00)                            | No       |
@@ -114,9 +122,6 @@ Examples:
 
 ### Deleting your tasks: `delete`
 
-**_Note: Be careful when deleting a recurring task. Entering the TASK_NUMBER
-of a recurring task will all instances of that task to be removed permanently._**
-
 Format: `delete TASK_NUMBER`
 
 | Parameters  | Description                                         | Accepted inputs       | Optional |
@@ -125,6 +130,19 @@ Format: `delete TASK_NUMBER`
 
 Example:
 - `delete 1`
+
+### Deleting your recurring tasks
+- The specified task and all its future occurrence will be deleted.
+- Occurrences earlier than the specified task will not be affected.
+
+Format: `delete TASK_NUMBER /repeat`
+
+| Parameters  | Description                                         | Accepted inputs       | Optional |
+|:-----------:|-----------------------------------------------------|-----------------------|----------|
+| TASK_NUMBER | The index of the task as seen in the `show` command | Any valid task number | No       |
+
+Example:
+- `delete 1 /repeat`
 
 
 ### Editing your tasks: `edit`
@@ -151,7 +169,7 @@ Examples:
 - Occurrences earlier than the specified task will not be affected.
 - To change frequency, delete and add the recurring task with the new frequency using the `delete` and `add` command respectively.
 
-Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME]`
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME] /repeat`
 
 |    Parameters    | Description                                         | Accepted inputs                                   | Optional               |
 |:----------------:|-----------------------------------------------------|---------------------------------------------------|------------------------|
@@ -166,7 +184,7 @@ Before edit command:
 
 ![beforeedit](images/beforeedit.png)
 
-After command: `edit 1 /do 25/3/2022 /start 18:00 /end 20:00`
+After command: `edit 1 /do 25/3/2022 /start 18:00 /end 20:00 /repeat`
 
 ![afteredit](images/afteredit.png)
 
@@ -194,7 +212,7 @@ Upon startup, Sherpass also shows your schedule for the day.
 
 Format:
 - To see the schedule for the day: `show today`
-- To see the schedule for tomorrow: `show today` or `show tmr`
+- To see the schedule for tomorrow: `show tomorrow` or `show tmr`
 - To see the schedule for a specific day: `show DATE`, where the date is in the format `d/M/YYYY`.
   
    E.g. `show 25/3/2022` shows the schedule for 25th March 2022
@@ -277,7 +295,7 @@ Format: `study`
 
 Example:
 
-![image](https://user-images.githubusercontent.com/69501969/160329257-cf6fcbf7-9b2a-4c2a-bdfe-17b6c7517f9d.png)
+![image](https://user-images.githubusercontent.com/69501969/160783109-3187d5df-06f1-4fa4-a407-18a87a67c770.png)
 
 ### Starting a timer: `start`
 
@@ -290,10 +308,8 @@ to pause/resume/stop the timer quickly.
 command line interface instead.
 
 #### Starting a default timer: `start MODE_NUMBER`
-_Note: To be improved with study and rest timers - similar to pomodoro sessions._
 
-
-Start a study timer from our list of default timers.
+Jump right into a study session by starting a study timer from our list of default timers.
 
 **_Note:_**
 
@@ -327,9 +343,10 @@ In the pop-up window:
 ![](images/startDefaultOne.png)
 
 ### Starting a custom timer: `start`
-Start a custom study timer.
+Need something else rather than what is provided by our default timers? You can start your own custom timer to suit 
+your own needs.
 
-- Start a custom timer suited to your specific needs
+- Start a custom timer with `DURATION` set by you
 
 Format: `start /custom DURATION`
 
@@ -337,7 +354,7 @@ Format: `start /custom DURATION`
 |:----------------:|-----------------------------------------------------------|-------------------|----------|
 |     DURATION     | Duration of the timer (in seconds) that you wish to start | Any valid integer | No       |
 
-- Timer `DURATION` is in seconds (To be improved to provide more options)
+- Timer `DURATION` is in seconds
 - `/custom` flag is mandatory to start a custom timer
 
 Example:
@@ -353,8 +370,9 @@ In the pop-up window:
 ![](images/customTimer60sec.JPG)
 
 ### Starting a stopwatch: `start stopwatch`
-Start a stopwatch to track how long you've been studying.
-- Stopwatch tracks time elapsed and prints time elapsed.
+Not sure how long you'll need to complete your academic tasks? You can start a stopwatch to keep track of how long 
+you've been studying.
+- Stopwatch tracks and prints time elapsed.
 
 Format: `start stopwatch`
 
@@ -369,13 +387,16 @@ In the pop-up window:
 ![](images/stopWatch.png)
 
 ### Pausing a timer/stopwatch: `pause`
-Pauses a study timer/stopwatch that is currently running.
+Pauses a study timer/stopwatch that is currently running. Useful for when you want a quick toilet break, double check
+your tasks for the day, or mark a task as done.
 
 Format: `pause` or clicking the pause button in the pop-up window.
 
 Example:
 
 In the terminal:
+
+![](images/pauseTimer.png)
 
 ![image](https://user-images.githubusercontent.com/69501969/160329512-3a74d513-d95c-4aa2-9d88-a29ca3f93459.png)
 
@@ -385,7 +406,9 @@ Time left in the window will not change until the user enters `resume`
 in the terminal or clicks on the resume button.
 
 ### Resuming a timer/stopwatch: `resume`
-Resume a timer/stopwatch that has been paused.
+You can resume a paused timer/stopwatch when you're ready to work on your tasks again.
+
+- Resume a timer/stopwatch that has been paused.
 
 Format: `resume` or clicking the resume button in the pop-up window.
 
@@ -397,10 +420,14 @@ In the terminal:
 
 In the pop-up window:
 
-Time left/ Elapsed time will continue to run.
+![](images/resumeTimer.png)
+
+Time left/elapsed time will continue to run.
 
 ### Stopping a timer/stopwatch: `stop`
-Stop a timer/stopwatch that has been started.
+Finished your task earlier than expected, or something more urgent came up? You can stop a timer/stopwatch at any time.
+
+- Stop a timer/stopwatch that has been started.
 
 Format: 
 - Entering `stop` in the terminal
@@ -415,17 +442,21 @@ In the terminal:
 
 In the pop-up window:
 
+![](images/stopTimer.png)
+
 The window will disappear immediately after stopping the timer.
 
 ### Show your tasks: `show`
-Shows your list of tasks that you have planned to do for the day.
-- `show` can only be called when timer is paused or stopped.
+The show feature is also supported in the study session. 
+Simply follow the format from the [show feature](#show-your-tasks-show)
+to show your tasks.
 
-Format: `show all`
+**_Note:_**
+- You can only show tasks while the timer is paused or stopped.
 
 Example:
 
-![image](https://user-images.githubusercontent.com/69501969/160330233-43da64f3-4ccb-4780-a790-3f02c09052de.png)
+![image](https://user-images.githubusercontent.com/69501969/160788279-c38a7611-e1e9-4aef-87b7-6a06b6d96c9e.png)
 
 ### Mark your tasks as done: `mark`
 
@@ -462,6 +493,10 @@ rectify the problem or allow Sherpass to create a new save file
 
 **A**: Transfer a copy of your save file to your other device and place it in `[JAR FILE LOCATION]/data/Sherpass.json`
 
+## Glossary
+
+* *Parameter* - A parameter is the means by which a value is passed to the command processing program.
+* *Extraneous* - Something that is unnecessary or irrelevant.
 ## Command Summary
 
 | Action                        | Format, Examples                                                                                                                                                             |

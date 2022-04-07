@@ -3,12 +3,14 @@ package seedu.sherpass.timer;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
 
+
 public abstract class Timer extends Thread {
     protected volatile boolean isTimerRunning = false;
     protected volatile boolean isTimerPaused = false;
     protected boolean forcedStop = false;
     protected static Ui ui;
     protected static TaskList taskList;
+
 
 
     /**
@@ -58,4 +60,6 @@ public abstract class Timer extends Thread {
     public boolean isTimerPaused() {
         return isTimerPaused;
     }
+
+
 }
