@@ -14,6 +14,8 @@ the activities they participated in, for a particular session.
 Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=ivanaitzliddat&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 #### New Features
+* Activity
+  * This feature was implemented so that details about an activity can be stored in an object.
 * Activity Create
   * Allows users to create activities in the application.
 * Activity Delete
@@ -25,22 +27,20 @@ Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 
 #### Enhanced Features
 * Activity Create Command Parser
-    * Parses the necessary attributes required to run the Activity Create Command.
+  * Parses the necessary attributes required to run the Activity Create Command.
 * Activity Delete Command Parser
-    * Parses the necessary attributes required to run the Activity Delete Command.
+  * Parses the necessary attributes required to run the Activity Delete Command.
 * Group View Command Parser
-    * Parses the necessary attributes required to run the Group View Command.
+  * Parses the necessary attributes required to run the Group View Command.
 * Group List Command Parser
-    * Parses the necessary attributes required to run the Group List Command.
+  * Parses the necessary attributes required to run the Group List Command.
 
 ### Documentation Contributions
 Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=ivanaitzliddat&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
 
 #### User Guide
-- Activity Create
-- Activity Delete
-- Group View
-- Group List
+* Added documentation for `ActivityCreateCommand`, `ActivityDeleteCommand`, `GroupViewCommand` and `GroupListCommand`.
+* Made the first round of edits to the User Guide to ensure that feedbacks from the PE Dry Run were well acknowledged.
 
 #### Developer Guide
 - Activity Create
