@@ -1380,16 +1380,16 @@ keeping all the non-affected data safely.
 
 ## Non-Functional Requirements
 #### Data Requirements
-For `workout /new` command, the maximum number of repetitions a user can set is `2,147,483,647`. This limit is 
-restricted by `int` data type. The size of `int` is 4 bytes which is 32 bits, therefore, the maximum value for a 
-variable of type `int` will be `2,147,483,647`. If user set the number of repetitions larger than `2,147,483,647`, an `Exception` 
-will be thrown to indicate that the value entered is not allowed. 
+For `workout /new` and `workout /update` commands, the maximum number of repetitions a user can set is `2,147,483,647`. 
+This limit is restricted by `int` data type. The size of `int` is 4 bytes which is 32 bits, therefore, the maximum value 
+for a variable of type `int` will be `2,147,483,647`. If user set the number of repetitions larger than `2,147,483,647`, 
+an `Exception` will be thrown to indicate that the value entered is not allowed. 
 
-It is expected that `2,147.483.647` repetitions of any exercise is not achievable by humans hence, using `int` as the data type to hold 
-the value of repetitions is more than sufficient. 
+It is expected that `2,147.483.647` repetitions of any exercise is not achievable by humans hence, 
+using `int` as the data type to hold the value of repetitions is more than sufficient. 
 
 #### Technical/Environment Requirements
-This application is developed using Java JDK 11 hence to run this application, please ensure that you 
+This application is developed using Java JDK 11, hence to run this application, please ensure that you 
 are running this application on a 64-bit operating system and with a minimum of 8 GB of RAM. 
 
 #### Performance Requirements 
@@ -1409,22 +1409,22 @@ Each command entered by the user should respond within two seconds.
 
 | Plan Name      | Contains                                                                                                               |
 |----------------|------------------------------------------------------------------------------------------------------------------------|
-| Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps)                                                          |
-| Whole Body!    | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
+| grow my biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps)                                                          |
+| whole body!    | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
 
 
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
 of their schedule. For instance, the user's daily schedule can look like this:
 
-| Day   | Plan Name      |
-|-------|----------------|
-| Day 1 | Grow my Biceps |
-| Day 2 | Rest Day       |
-| Day 3 | Whole Body!    |
-| Day 4 | Leg Day        |
-| Day 5 | Grow my Biceps |
-| Day 6 | Whole Body!    |
-| Day 7 | Rest Day       |
+| Day       | Plan Name      |
+|-----------|----------------|
+| Monday    | grow my biceps |
+| Tuesday   | rest day       |
+| Wednesday | whole body!    |
+| Thursday  | leg day        |
+| Friday    | grow my biceps |
+| Saturday  | whole body!    |
+| Sunday    | rest day       |
 
 
 ## Instructions for manual testing
