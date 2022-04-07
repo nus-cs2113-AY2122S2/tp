@@ -28,7 +28,10 @@ public class ViewParser extends CommandParser {
             warehouse.viewOrderById(regexOrderMatch.get("oid"));
         } else if (matches.get("flag").equals("g")) {
             // view inventory good with flag "g/"
-            warehouse.viewGood(matches.get("sku"));
+            String regexGood = "sku/(?<sku>.*)";
+            HashMap<String, String> regexGoodMatch = new
+                    MatchKeywords(userInput, regexGood).getGroupValues();
+            warehouse.viewGood(regexGoodMatch.get("sku"));
         } else {
             // wrong command exception
             throw new WrongCommandException("view", true);
