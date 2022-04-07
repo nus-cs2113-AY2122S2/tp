@@ -13,23 +13,38 @@ Given below are my contributions to the project.
   Contributed**: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=T10&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=1szheng&tabRepo=AY2122S2-CS2113T-T10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 * **New Feature**: Added user input parsing.
-    * Functionality: The parser methods helps to retrieve the delimited parameters in the user input. These methods
-      ensure that the user's input format is correct by providing feedback messages and warnings.
-    * Justification: 
-    * Highlights:
+    * Functionality: The parser methods that helps to retrieve the delimited parameters in the user input. These methods
+      try to ensure that the user's input format is correct by providing feedback messages and warnings.
+    * Justification: This feature improves the product significantly as a user can make mistakes when entering commands.
+      The application should provide understandable and descriptive feedback to assist in the corrections.
+    * Highlights: This feature required an in-depth analysis on the user's possible undesirable inputs and deciding if
+      such input should be blocked or given a warning. Its implementation then required much research and testing (e.g.
+      learning regex) as there exists methods provided by Java that are misleading in its description and usage.
 
 * **New Feature**: Added user input validation.
-    * Functionality:
-    * Highlights:
+    * Functionality: The parser methods that helps to validate the previously retrieved parameters from the user input.
+      These methods ensure that the user's inputs are valid such that their dependent methods need not perform excessive
+      validation.
+    * Justification: This feature improves the product as a user can make mistakes when entering commands. The
+      application should provide feedback in such scenarios. Such methods are consolidated in the Parser class for ease
+      of access, modification and addition by developers.
+    * Highlights: This feature requires input and cooperation from the various command implementations, and affects
+      future implementations in the same manner.
 
 * **New Feature**: Added category enumeration.
-    * Functionality:
-    * Highlights:
+    * Functionality: The enumeration of expenditure categories that users can tag their expenditures to. This feature
+      allows for both the users and developers to refer to the categories using the respective number labels.
+    * Justification: This feature improves the product as it allows advanced users to better manage their expenditure by
+      categorizing them. Enumeration as the application currently does not allow for customized categories.
+    * Highlights: This enhancement affects future commands or features that wish to extend the usage for the
+      categorizing of expenditures.
 
 * **Enhancements to Existing Features**:
     * Researched and implemented method for testing prints via IO redirection:
       [#136](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/136/files#diff-caeba67935d0d3100de8785480552427170cb99b6af6c254616486b0bb870335)
-    * Suggested JUnit tests for features implemented by team members to increase test coverage.
+    * Updated error messages to be more descriptive:
+      [#231](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/231/files#diff-f409e5bd3cb2421cd456383eaacbf733bb6e8663452dacc719d717a7b809f240)
+    * Suggested tests for features implemented by team members to increase test coverage.
 
 * **Documentation**:
     * User Guide (UG):
@@ -52,13 +67,13 @@ Given below are my contributions to the project.
           [#218](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/218/files),
           [#222](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/222/files)
         * Added documentation for
-          the [Architecture](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#architecture)
-          section under Design:
+          the [Architecture Design](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#architecture)
+          section:
           [#109](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/109/files),
           [#131](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/131/files)
         * Added documentation for
-          the [Parser Component](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#parser-component)
-          section under Design:
+          the [Parser Component Design](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#parser-component)
+          section:
           [#131](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/131/files),
           [#145](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/145/files),
           [#231](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/231/files)
