@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static seedu.allonus.contacts.ContactsManager.checkUniqueName;
+
 /**
  * A class of methods related to the parsing of user input into a Contact object.
  */
@@ -25,7 +27,7 @@ public class ContactParser {
             "Adding a contact with all empty fields!";
     private static final String CONTACTS_PARSER_ADD_INVALID_FIELDS_MESSAGE =
             "Adding a contact with missing field(s)!";
-    public static final String CONTACTS_POTENTIAL_INVALID_EMAIL_MESSAGE =
+    private static final String CONTACTS_PARSER_INVALID_EMAIL_MESSAGE =
             "Note: the email you entered might not be in the correct format!";
 
     private static final String CONTACTS_DELIMITERS = "[nfetd]/";
@@ -34,7 +36,7 @@ public class ContactParser {
     private static final char EMAIL_DELIMITER = 'e';
     private static final char DESCRIPTION_DELIMITER = 'd';
 
-    private static Logger logger = Logger.getLogger("");
+    private static final Logger logger = Logger.getLogger("");
     private static final int MAX_NUMBER_OF_FIELDS = 5;
     private static final int LENGTH_FIELD_AFTER_SPLIT = 2;
 
@@ -92,6 +94,8 @@ public class ContactParser {
             switch (fieldType) {
             case NAME_DELIMITER:
                 Name name = contact.getName();
+                String prevName = name.toString();
+                checkUniqueName(fieldContent, prevName);
                 name.setField(fieldContent);
                 break;
             case FACULTY_DELIMITER:
@@ -103,7 +107,8 @@ public class ContactParser {
                 email.setField(fieldContent);
                 boolean isValidEmailFormat = email.isValidFormat();
                 if (!isValidEmailFormat) {
-                    throw new InvalidContactField(CONTACTS_POTENTIAL_INVALID_EMAIL_MESSAGE);
+                    // Should make this a message instead of an error, maybe
+                    throw new InvalidContactField(CONTACTS_PARSER_INVALID_EMAIL_MESSAGE);
                 }
                 break;
             case DESCRIPTION_DELIMITER:

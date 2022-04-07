@@ -77,6 +77,17 @@ You need to specify the contact field(s) you want to edit!
 Invalid contact field(s)!
 ---------------------------------------------------
 ---------------------------------------------------
+A contact with the same name already exists!
+---------------------------------------------------
+---------------------------------------------------
+A contact with the same name already exists!
+---------------------------------------------------
+*** Note: You didn't update this name / only updated casing! ***
+---------------------------------------------------
+Okay, I've updated the information of this contact:
+  Name: daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+---------------------------------------------------
+---------------------------------------------------
 Okay, I've updated the information of this contact:
   Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
 ---------------------------------------------------
@@ -133,6 +144,9 @@ Invalid contact field(s)!
 ---------------------------------------------------
 ---------------------------------------------------
 Note: the email you entered might not be in the correct format!
+---------------------------------------------------
+---------------------------------------------------
+A contact with the same name already exists!
 ---------------------------------------------------
 ---------------------------------------------------
 You haven't added any contacts to your list yet!
