@@ -3,19 +3,22 @@
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Summary of Main Features](#features)
-    * [Create a new flight route: `addRoute`](#create-a-new-flight-route-addroute)
-    * [Find availability on existing flight route: `findRoute`](#find-availability-on-existing-flight-route-findroute)
-    * [List all flight routes: `listRoute`](#list-all-flight-routes-listroute)
-    * [Delete a flight route: `deleteRoute`](#delete-a-flight-route-deleteroute)
-    * [Add a customer: `addCustomer`](#add-a-customer-addcustomer)
-    * [Delete a customer: `deleteCustomer`](#delete-a-customer-deletecustomer)
-    * [List all customers: `listCustomer`](#list-all-customers-listcustomer)
-    * [Find a customer by IC: `findCustomer`](#find-a-customer-by-ic-findcustomer)
-    * [Create new flight booking: `book`](#create-new-flight-booking-book)
-    * [Remove flight booking: `deleteBooking`](#remove-flight-booking-deletebooking)
-    * [View all existing flight booking: `listBooking`](#view-all-existing-flight-booking-listbooking)
-    * [Menu Item Functionalities](#MENU-ITEM-FUNCTIONALITIES)
-    * [Meal Reservation Functionalities](#IN-FLIGHT-MEAL-RESERVATIONS)
+    * [Route Functionalities](#Route-Functionalities)
+      * [Create a new flight route: `addRoute`](#create-a-new-flight-route-addroute)
+      * [Find availability on existing flight route: `findRoute`](#find-availability-on-existing-flight-route-findroute)
+      * [List all flight routes: `listRoute`](#list-all-flight-routes-listroute)
+      * [Delete a flight route: `deleteRoute`](#delete-a-flight-route-deleteroute)
+    * [Customer Functionalities](#Customer-Functionalities)
+      * [Add a customer: `addCustomer`](#add-a-customer-addcustomer)
+      * [Delete a customer: `deleteCustomer`](#delete-a-customer-deletecustomer)
+      * [List all customers: `listCustomer`](#list-all-customers-listcustomer)
+      * [Find a customer by IC: `findCustomer`](#find-a-customer-by-ic-findcustomer)
+    * [Booking Functionalities](#Booking-Functionalities)
+      * [Create new flight booking: `book`](#create-new-flight-booking-book)
+      * [Remove flight booking: `deleteBooking`](#remove-flight-booking-deletebooking)
+      * [View all existing flight booking: `listBooking`](#view-all-existing-flight-booking-listbooking)
+    * [Menu Item Functionalities](#Menu-Item-Functionalities)
+    * [Meal Reservation Functionalities](#In-Flight-Meal-Reservations)
     * [Exit the system](#Exit-the-System)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
@@ -65,7 +68,7 @@ and cancel flight routes and bookings, create in-flight meal reservations and ad
 * Redundant words in the command are ignored.<br>
 e.g. in `findRoute fd/01232011 d/Singapore s/US c/120`, `c/120` is ignored since this field is not required.
 
-
+## Route Functionalities
 ### Create a new flight route: `addRoute`
 Create a new flight route.
 
@@ -112,7 +115,7 @@ Format: `deleteRoute INDEX`
 Example of usage:
 * `deleteRoute 3` The third route in the route list will be deleted.
 
-
+## Customer Functionalities
 ### Add a customer: `addCustomer`
 Add a new customer into the system.
 
@@ -157,6 +160,7 @@ Format: `findCustomer IC`
 Example of usage:
 * `findCustomer A9470034C`
 
+## Booking Functionalities
 ### Create new flight booking: `book`
 Add a flight booking to book a flight for a passenger.
 
@@ -192,7 +196,7 @@ Example of usage:
 
 * `listBooking`
 
-## MENU ITEM FUNCTIONALITIES
+## Menu Item Functionalities
 
 ### Add a new Menu Item:  `addMenuItem`
 Add a new in-flight menu item to the system.
@@ -262,7 +266,7 @@ Example of usage: <br>
 * `findMenuItemType DRINKS` <br>
 * `findMenuItemType dessert` <br>
 
-## IN FLIGHT MEAL RESERVATIONS
+## In Flight Meal Reservations
 
 ### Add in-flight meal reservation: `reserveMeal`
 
@@ -325,7 +329,7 @@ Format: `listMealReservations`
 Example of usage: <br>
 * `listMealReservations`
 
-## Staff 
+## Staff Functionalities
 ### Add staff object: `addStaff`
  
 Add a new staff with required staff information
