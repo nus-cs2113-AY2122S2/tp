@@ -68,15 +68,15 @@ Here are the items matching your search terms:
 ```
 > search n/board
 Here are the items matching your search terms: 
-0. Whiteboard | 1
-1. Chalkboard | 1
+1. Whiteboard | 1
+2. Chalkboard | 1
 Enter command: 
 ```
 
 ```
 > search d/chalk n/board
 Here are the items matching your search terms: 
-0. Chalkboard | 1
+1. Chalkboard | 1
 ```
 
 ### List All Items: `list`
