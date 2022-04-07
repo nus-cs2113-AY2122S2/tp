@@ -14,7 +14,7 @@ import tp.WardList;
 import tp.WardStorage;
 import tp.person.Nurse;
 
-public class DeleteNurseCommand extends Command{
+public class DeleteNurseCommand extends Command {
     private final int index;
 
     public DeleteNurseCommand(int index) {

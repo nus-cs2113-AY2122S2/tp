@@ -20,6 +20,7 @@ public class Nurse extends Person {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getWardNumber() {
         return wardNumber;
     }

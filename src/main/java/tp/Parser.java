@@ -138,7 +138,7 @@ public class Parser {
         nurseIndex = Integer.parseInt(s);
         s = dummy.substring(wardIndex + 3).trim();
         wardIndex = Integer.parseInt(s);
-        return new AddWardCommand(doctorIndex, patientIndex, nurseIndex ,wardIndex);
+        return new AddWardCommand(doctorIndex, patientIndex, nurseIndex, wardIndex);
     }
 
     public Command parseAddAppointment(String fullCommand) throws IHospitalException {
@@ -181,8 +181,7 @@ public class Parser {
 
         } else if (fullCommand.contains("add nurse")) {
             return parseAddNurse(fullCommand);
-        }
-        else if (fullCommand.contains("add appointment")) {
+        } else if (fullCommand.contains("add appointment")) {
             return parseAddAppointment(fullCommand);
         } else if (fullCommand.contains("add patient description")) {
             return parseAddPatientDescription(fullCommand);
@@ -193,8 +192,7 @@ public class Parser {
     }
 
 
-    public Command parseDeleteDoctor(String fullCommand) throws IHospitalException
-    {
+    public Command parseDeleteDoctor(String fullCommand) throws IHospitalException {
         String[] dummy = fullCommand.split(" ");
         if (dummy.length <= 2) {
             throw new IHospitalException("Please enter the id of the doctor you want to delete");
@@ -204,7 +202,7 @@ public class Parser {
         }
     }
 
-    public Command parseDeletePatient(String fullCommand) throws IHospitalException{
+    public Command parseDeletePatient(String fullCommand) throws IHospitalException {
         String[] dummy = fullCommand.split(" ");
         if (dummy.length <= 2) {
             throw new IHospitalException("Please enter the id of the patient you want to delete");
@@ -244,8 +242,8 @@ public class Parser {
                 System.out.println(e);
             }
         } else {
-            throw new IHospitalException("Please enter whether you want to delete a doctor, " +
-                    "patient, nurse or appointment");
+            throw new IHospitalException("Please enter whether you want to delete a doctor, "
+                    + "patient, nurse or appointment");
         }
         return null;
     }
