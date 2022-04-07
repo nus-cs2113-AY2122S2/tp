@@ -37,32 +37,6 @@ public class Stopwatch extends Timer {
         }
     }
 
-    private String convertTimeToString() {
-        long hour;
-        long minute;
-        long second;
-        if ((timeElapsed / ONE_HOUR) > 0) {
-            hour = timeElapsed / ONE_HOUR;
-            minute = (long) ((timeElapsed * 1.0) / ONE_HOUR) * 60;
-            second = timeElapsed - (hour * ONE_HOUR) - (minute * ONE_MINUTE);
-            String zeroStringHour = (hour > 9) ? EMPTY_STRING : "0";
-            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
-            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
-            return zeroStringHour + hour + " hour(s) " + zeroStringMinute + minute
-                    + " minute(s) " + zeroStringSecond + second + " second(s)";
-        } else if ((timeElapsed / ONE_MINUTE) > 0) {
-            minute = timeElapsed / ONE_MINUTE;
-            second = timeElapsed - (minute * ONE_MINUTE);
-            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
-            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
-            return zeroStringMinute + minute + " minute(s) " + zeroStringSecond + second + " second(s)";
-        } else {
-            second = timeElapsed;
-            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
-            return zeroStringSecond + second + " second(s)";
-        }
-    }
-
     /**
      * Updates the timer by letting the thread sleep for 1 second, then updating timeLeft. The timer will not update
      * if it is paused and will instead wait for the user to resume the timer.
@@ -71,7 +45,7 @@ public class Stopwatch extends Timer {
         try {
             Thread.sleep(1000);
             timeElapsed += 1;
-            String timeShownToUser = convertTimeToString();
+            String timeShownToUser = convertTimeToString(timeElapsed);
             jlabel.setText("Elapsed time: " + timeShownToUser);
             if (isTimerPaused) {
                 waitForTimerToResume();

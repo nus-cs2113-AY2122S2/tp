@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
-import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
 import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
 import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
@@ -33,32 +32,6 @@ public class Countdown extends Timer  {
         this.jlabel = jlabel;
     }
 
-    private String convertTimeToString() {
-        long hour;
-        long minute;
-        long second;
-        if ((timeLeft / ONE_HOUR) > 0) {
-            hour = timeLeft / ONE_HOUR;
-            minute = (long) ((timeLeft * 1.0) / ONE_HOUR) * 60;
-            second = timeLeft - (hour * ONE_HOUR) - (minute * ONE_MINUTE);
-            String zeroStringHour = (hour > 9) ? EMPTY_STRING : "0";
-            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
-            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
-            return zeroStringHour + hour + " hour(s) " + zeroStringMinute + minute
-                    + " minute(s) " + zeroStringSecond + second + " second(s)";
-        } else if ((timeLeft / ONE_MINUTE) > 0) {
-            minute = timeLeft / ONE_MINUTE;
-            second = timeLeft - (minute * ONE_MINUTE);
-            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
-            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
-            return zeroStringMinute + minute + " minute(s) " + zeroStringSecond + second + " second(s)";
-        } else {
-            second = timeLeft;
-            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
-            return zeroStringSecond + second + " second(s)";
-        }
-    }
-
     /**
      * Creates a new thread to run the timer. The timer will continue to run until it has run out of time, or has been
      * stopped by the user.
@@ -70,7 +43,7 @@ public class Countdown extends Timer  {
         jframe.setVisible(true);
         while (hasTimeLeft) {
             assert timeLeft > NO_TIME_LEFT;
-            String timeShownToUser = convertTimeToString();
+            String timeShownToUser = convertTimeToString(timeLeft);
             jlabel.setText("Time left: " + timeShownToUser);
             update();
         }
