@@ -5,7 +5,7 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 
 ## Summary of Contributions
 ### Code Contributed
-[Click to view code contribution on RepoSense](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=cheshire-doge&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=cheshire_doge&tabRepo=AY2122S2-CS2113-F10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false)
+[Click to view code contribution on RepoSense](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=cheshire-doge&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 ### Enhancements Implemented
 1. Implemented `ListCommand` class to list all items in the inventory
@@ -18,8 +18,8 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 1. Wrote the user guide for `cancel`, `list`, `listab`.
 
 ### Contributions to the Developer Guide
-1. Created the `Parser Component` and it's class diagram.
-2. Created `List Command` and it's sequence diagram.
+1. Created the `Parser Component` and its class diagram.
+2. Created `List Command` and its sequence diagram.
 
 ### Contributions to team-based-tasks
 1. Delivered code enhancements.
