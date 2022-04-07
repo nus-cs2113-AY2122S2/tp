@@ -89,11 +89,21 @@ public class Family {
      */
     public void addPerson(int group, String name, Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_PERSON_CALL_MESSAGE);
-        getList(group).addPerson(name);
         if (isSilent) {
             return;
         }
+        getList(group).addPerson(name);
         String generation = getGenerationName(group);
+        printPersonAdded(name, generation);
+    }
+
+    /**
+     * Prints the name of the person added, and to which array list.
+     *
+     * @param name The name of the person added
+     * @param generation The group the person is added to
+     */
+    private void printPersonAdded(String name, String generation) {
         System.out.println(name + " has been successfully added to " + generation);
     }
 
@@ -180,15 +190,27 @@ public class Family {
             sum += remain;
             String disposable = formatValue(remain);
             String generation = getGenerationName(i);
-            System.out.println(i + ". " + generation + ":" + System.lineSeparator()
-                    + Constants.INDENTATION + "Income: " + income + System.lineSeparator()
-                    + Constants.INDENTATION + "Expenditure: " + expenditure + System.lineSeparator()
-                    + Constants.INDENTATION + "Disposable: " + disposable);
-            // Print newline between generations
-            System.out.println(Constants.EMPTY_STRING);
+            printFormattedOverview(i, income, expenditure, disposable, generation);
         }
         String familyDisposable = formatValue(sum);
         System.out.println("Total disposable income in family: " + familyDisposable);
+    }
+
+    /**
+     * Prints the total income, expenditure, and disposable income of the generation.
+     *
+     * @param index The generation number
+     * @param income The income for the generation
+     * @param expenditure The expenditure for the generation
+     * @param disposable The disposable income of the generation
+     * @param generation The generation name
+     */
+    private void printFormattedOverview(int index, String income, String expenditure, String disposable,
+                                        String generation) {
+        System.out.println(index + ". " + generation + ":" + System.lineSeparator()
+                + Constants.INDENTATION + "Income: " + income + System.lineSeparator()
+                + Constants.INDENTATION + "Expenditure: " + expenditure + System.lineSeparator()
+                + Constants.INDENTATION + "Disposable: " + disposable + System.lineSeparator());
     }
 
     /**
