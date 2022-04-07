@@ -12,9 +12,10 @@ Got it. I've added this contact:
   Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
 Now you have 1 contacts in the list.
 ---------------------------------------------------
+*** Note: the email you entered might not be in the correct format! ***
 ---------------------------------------------------
 Got it. I've added this contact:
-  Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+  Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
 Now you have 2 contacts in the list.
 ---------------------------------------------------
 ---------------------------------------------------
@@ -33,20 +34,23 @@ Adding a contact with missing field(s)!
 Adding a contact with missing field(s)!
 ---------------------------------------------------
 ---------------------------------------------------
+A contact with the same name already exists!
+---------------------------------------------------
+---------------------------------------------------
 Here are the contacts in your list:
  1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
- 2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+ 2. Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
 
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the matching contacts in your list:
- 2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+ 2. Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
 
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the matching contacts in your list:
  1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
- 2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+ 2. Name: Daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
 
 ---------------------------------------------------
 ---------------------------------------------------
@@ -85,7 +89,12 @@ A contact with the same name already exists!
 *** Note: You didn't update this name / only updated casing! ***
 ---------------------------------------------------
 Okay, I've updated the information of this contact:
-  Name: daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+  Name: daniela Koh, Faculty: FoS, Email: invalid placeholder email, Description: met at SoC canteen
+---------------------------------------------------
+*** Note: the email you entered might not be in the correct format! ***
+---------------------------------------------------
+Okay, I've updated the information of this contact:
+  Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
 ---------------------------------------------------
 ---------------------------------------------------
 Okay, I've updated the information of this contact:
@@ -93,18 +102,18 @@ Okay, I've updated the information of this contact:
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the matching contacts in your list:
- 1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+ 1. Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
 
 ---------------------------------------------------
 ---------------------------------------------------
 Here are the contacts in your list:
- 1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+ 1. Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
  2. Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
 
 ---------------------------------------------------
 ---------------------------------------------------
 Noted. I've removed this contact:
-  Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+  Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
 Now you have 1 contacts in the list.
 ---------------------------------------------------
 ---------------------------------------------------
@@ -143,10 +152,14 @@ Invalid contact field(s)!
 Invalid contact field(s)!
 ---------------------------------------------------
 ---------------------------------------------------
-Note: the email you entered might not be in the correct format!
+Got it. I've added this contact:
+  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+Now you have 1 contacts in the list.
 ---------------------------------------------------
 ---------------------------------------------------
-A contact with the same name already exists!
+Noted. I've removed this contact:
+  Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: met at SoC canteen
+Now you have 0 contacts in the list.
 ---------------------------------------------------
 ---------------------------------------------------
 You haven't added any contacts to your list yet!

@@ -28,7 +28,7 @@ public class ContactParser {
     private static final String CONTACTS_PARSER_ADD_INVALID_FIELDS_MESSAGE =
             "Adding a contact with missing field(s)!";
     private static final String CONTACTS_PARSER_INVALID_EMAIL_MESSAGE =
-            "Note: the email you entered might not be in the correct format!";
+            "*** Note: the email you entered might not be in the correct format! ***";
 
     private static final String CONTACTS_DELIMITERS = "[nfetd]/";
     private static final char NAME_DELIMITER = 'n';
@@ -107,8 +107,7 @@ public class ContactParser {
                 email.setField(fieldContent);
                 boolean isValidEmailFormat = email.isValidFormat();
                 if (!isValidEmailFormat) {
-                    // Should make this a message instead of an error, maybe
-                    throw new InvalidContactField(CONTACTS_PARSER_INVALID_EMAIL_MESSAGE);
+                    System.out.println(CONTACTS_PARSER_INVALID_EMAIL_MESSAGE);
                 }
                 break;
             case DESCRIPTION_DELIMITER:

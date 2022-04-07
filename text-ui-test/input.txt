@@ -1,12 +1,13 @@
 goto m/Contacts_Manager
 invalid contacts command
 add n/Lucy Koh f/SoC e/email@u.nus.edu d/group mate from cs2113
-add n/Daniela Koh d/met at SoC canteen e/other_email@u.nus.edu f/FoS
+add n/Daniela Koh d/met at SoC canteen e/invalid placeholder email f/FoS
 add
 add n/Name f/Faculty e/email@legit.com
 add n/Name f/Faculty d/some description
 add n/Name e/email@legit.com d/some description
 add f/Faculty e/email@legit.com d/some description
+add n/dANIELA kOH f/YNC e/valid@gmail.com d/description
 list
 find Daniela
 find Koh
@@ -22,6 +23,7 @@ edit 1 n/
 edit 2 n/Lucy Koh
 edit 2 n/lucy koh
 edit 2 n/daniela Koh
+edit 1 e/placeholder (she changed her email)
 edit 2 e/new_email@gmail.com f/FoE n/Daniela Sim
 find Koh
 list
@@ -37,8 +39,8 @@ add n/Gen f/ e/ d/
 add n/Gen f/YNC e/ d/
 add n/Gen f/ e/email@gmail.com d/
 add n/Gen f/YNC e/email@gmail.com d/
-add n/Gen f/YNC e/invalid email d/description
-add n/dANIELA sIM f/YNC e/valid@gmail.com d/description
+add n/Daniela Sim f/FoE e/new_email@gmail.com d/met at SoC canteen
+rm 1
 list
 menu
 goto m/Expense_Tracker

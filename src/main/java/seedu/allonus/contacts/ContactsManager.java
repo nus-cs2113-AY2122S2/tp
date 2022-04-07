@@ -157,10 +157,16 @@ public class ContactsManager {
         nameHashes.remove(oldNameHash);
     }
 
-    public static void addNewHash(Contact updatedContact) {
+    public static void addHash(Contact updatedContact) {
         String contactName = updatedContact.getName().toString();
         int nameHash = contactName.toLowerCase().hashCode();
         nameHashes.add(nameHash);
+    }
+
+    public static void deleteHash(Contact deletedContact) {
+        String contactName = deletedContact.getName().toString();
+        int nameHash = contactName.toLowerCase().hashCode();
+        nameHashes.remove(nameHash);
     }
 
     private void listContacts() {
@@ -185,6 +191,8 @@ public class ContactsManager {
             curr = listOfContacts.get(taskInd);
             assert taskInd < getContactsCount();
             listOfContacts.remove(taskInd);
+            deleteHash(curr);
+            assert nameHashes.size() == getContactsCount();
             assert taskInd >= 0;
             assert taskInd < CONTACTS_LIST_MAX_SIZE;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -206,7 +214,7 @@ public class ContactsManager {
         }
 
         listOfContacts.add(contact);
-        addNewHash(contact);
+        addHash(contact);
         assert nameHashes.size() == getContactsCount();
         if (fromCommandLine) {
             printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact
@@ -270,7 +278,7 @@ public class ContactsManager {
         }
         try {
             setContactFields(curr, fieldStrings);
-            addNewHash(curr);
+            addHash(curr);
             assert nameHashes.size() == getContactsCount();
         } catch (InvalidContactField e) {
             printFormat(e.getMessage());
