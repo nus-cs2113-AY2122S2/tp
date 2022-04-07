@@ -2,7 +2,7 @@ package tp.person;
 
 public class Nurse extends Person{
     protected boolean isOnDuty;
-    protected String title;
+    protected String title = " ";
 
     public Nurse(String id, String name, String phoneNumber, String email,String title) {
         super(id, name, phoneNumber, email);
@@ -28,7 +28,7 @@ public class Nurse extends Person{
 
     @Override
     public String toString() {
-        return "* NURSE " + super.toString();
+        return "* NURSE " + super.toString() + " || Title: " + title;
     }
 
 }

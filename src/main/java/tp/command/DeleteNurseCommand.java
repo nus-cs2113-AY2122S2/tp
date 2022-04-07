@@ -15,10 +15,9 @@ public class DeleteNurseCommand extends Command{
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        if (index > nurseList.getSize()) {
+        if (index <= 0 || index > nurseList.getSize()) {
             throw new IHospitalException("The nurse does not exist.\n");
         }
-
         Nurse cur = nurseList.deleteNurse(index);
         return String.format(boundary + "Noted. I've removed this nurse:" + cur
                 + "\n" + "Now you have " + nurseList.getSize()

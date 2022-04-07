@@ -47,7 +47,11 @@ public class DoctorList {
     }
 
     public Doctor deleteDoctor(int index) {
+        if (index <= 0 || index > doctors.size()) {
+            return null;
+        }
         Doctor curr = doctors.get(index - 1);
+        doctors.remove((index - 1));
         size -= 1;
         return curr;
     }

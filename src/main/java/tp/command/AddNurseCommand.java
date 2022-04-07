@@ -31,9 +31,9 @@ public class AddNurseCommand extends Command{
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         Nurse nurse = new Nurse(id, name, phoneNumber, email,title);
         nurseList.addNurse(nurse);
-        return String.format(boundary + "Noted. I've added this doctor:"
+        return String.format(boundary + "Noted. I've added this nurse:"
                 + "\n" + nurseList.getNurse(nurseList.getSize())
                 + "\n" + "Now you have " + nurseList.getSize()
-                + " doctors recorded in the system." + System.lineSeparator() + boundary);
+                + " nurses recorded in the system." + System.lineSeparator() + boundary);
     }
 }

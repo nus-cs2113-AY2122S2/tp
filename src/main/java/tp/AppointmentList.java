@@ -45,6 +45,9 @@ public class AppointmentList {
      * @param index Index of the appointment to be deleted.
      */
     public Appointment deleteAppointment(int index) {
+        if (index <= 0 || index > appointments.size()) {
+            return null;
+        }
         Appointment curr = appointments.get(index - 1);
         appointments.remove(index - 1);
         countAppointment -= 1;
