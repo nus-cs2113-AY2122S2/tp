@@ -94,6 +94,13 @@ public class Countdown extends Timer  {
         }
     }
 
+    public void pauseTimer() {
+        isTimerPaused = true;
+        ui.showToUser("Got it! I've paused the timer.\n"
+                + "You have " + convertTimeToString(timeLeft) + " left.\n"
+                + "Feel free to resume whenever you're ready.");
+    }
+
     private void updateHasTimeLeft() {
         if (timeLeft <= NO_TIME_LEFT) {
             hasTimeLeft = false;
@@ -113,23 +120,7 @@ public class Countdown extends Timer  {
      * Prints the timer selected by the user.
      */
     protected void printTimerStart() {
-        int hours;
-        int minutes;
-        int seconds;
-        if (timeLeft >= ONE_HOUR) {
-            hours = timeLeft / ONE_HOUR;
-            minutes = (timeLeft - hours * ONE_HOUR) / ONE_MINUTE;
-            seconds = timeLeft - hours * ONE_HOUR - minutes * ONE_MINUTE;
-            ui.showToUser("Timer of " + hours + " hours " + minutes + " minutes "
-                    + seconds + " seconds started.");
-        } else if (timeLeft >= ONE_MINUTE) {
-            minutes = timeLeft / ONE_MINUTE;
-            seconds = timeLeft - (minutes * ONE_MINUTE);
-            ui.showToUser("Timer of " + minutes + " minutes "
-                    + seconds + " seconds started.");
-        } else {
-            ui.showToUser("Timer of " + timeLeft + " seconds started.");
-        }
+        ui.showToUser("Timer of " + convertTimeToString(timeLeft) + " started.");
     }
 
     /**
@@ -146,10 +137,11 @@ public class Countdown extends Timer  {
      * Resumes the timer by calling notify() on the waiting thread.
      */
     public void resumeTimer() {
+        ui.showToUser("Okay! I've resumed the timer.\n"
+                + "You have " + convertTimeToString(timeLeft + 1) + " seconds left.");
         synchronized (this) {
             isTimerPaused = false;
             notify();
         }
-        ui.showToUser("Okay! I've resumed the timer. You have " + timeLeft + " seconds left.");
     }
 }

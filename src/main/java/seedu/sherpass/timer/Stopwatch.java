@@ -61,31 +61,39 @@ public class Stopwatch extends Timer {
     public void stopTimer() {
         if (isTimerRunning) {
             jframe.setVisible(false);
-            ui.showToUser("Alright, I've stopped the timer.");
+            ui.showToUser("Alright, I've stopped the stopwatch.");
             isTimerRunning = false;
             forcedStop = true;
             this.interrupt();
         } else {
-            ui.showToUser("The timer has already stopped.");
+            ui.showToUser("The stopwatch has already stopped.");
         }
+    }
+
+    public void pauseTimer() {
+        isTimerPaused = true;
+        ui.showToUser("Got it! I've paused the stopwatch.\n"
+                + convertTimeToString(timeElapsed) + " have elapsed.\n"
+                + "Feel free to resume whenever you're ready.");
     }
 
     /**
      * Prints the timer selected by the user.
      */
     protected void printTimerStart() {
-        ui.showToUser("Alright, your timer is started. Feel free to pause or stop the timer whenever you're ready.");
+        ui.showToUser("Alright, your stopwatch is started. Feel free to pause "
+                + "or stop the stopwatch whenever you're ready.");
     }
 
     /**
      * Resumes the timer by calling notify() on the waiting thread.
      */
     public void resumeTimer() {
+        ui.showToUser("Okay! I've resumed the stopwatch.\n"
+                + "Elapsed time: " + convertTimeToString(timeElapsed - 1));
         synchronized (this) {
             isTimerPaused = false;
             notify();
         }
-        ui.showToUser("Okay! I've resumed the timer.");
     }
-
 }

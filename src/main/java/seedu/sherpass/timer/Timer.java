@@ -15,10 +15,8 @@ public abstract class Timer extends Thread {
     protected static Ui ui;
     protected static TaskList taskList;
 
-
-
     /**
-     * Creates a constructor for timer. Initialises the parameters needed for the countdown timer.
+     * Creates a constructor for timer. Initialises the parameters needed.
      *
      * @param ui UI
      */
@@ -33,7 +31,7 @@ public abstract class Timer extends Thread {
         long second;
         if ((time / ONE_HOUR) > 0) {
             hour = time / ONE_HOUR;
-            minute = (long) ((time * 1.0) / ONE_HOUR) * 60;
+            minute = (time - (hour * ONE_HOUR)) / ONE_MINUTE;
             second = time - (hour * ONE_HOUR) - (minute * ONE_MINUTE);
             String zeroStringHour = (hour > 9) ? EMPTY_STRING : "0";
             String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
@@ -65,11 +63,7 @@ public abstract class Timer extends Thread {
         return forcedStop;
     }
 
-    public void pauseTimer() {
-        ui.showToUser("Got it! I've paused the timer.\n"
-                + "Feel free to resume whenever you're ready.");
-        isTimerPaused = true;
-    }
+    public abstract void pauseTimer();
 
     /**
      * Method causes the thread which the timer is running on to wait when it is paused, until the user resumes the
