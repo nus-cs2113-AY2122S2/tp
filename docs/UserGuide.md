@@ -224,9 +224,10 @@ The event has been updated to the following:
 Shows a list of timeslots where everyone is free. 
 
 Format: `free [DURATION]`
-- If `DURATION` is specified, only timeslots which are longer than the duration will be shown.
+- If `DURATION` is specified, only timeslots which are longer than or equal the duration will be shown.
 - Else, all common timeslots will be shown.
-- Common timeslots are kept from 0800 to 2359.
+- `DURATION` is interpreted in hours, and it has to be a positive integer not more than 24.
+- Common timeslots are kept from 0000 to 2359 for each day, so `free 24` essentially identifies common free days.
 
 Example of usage:
 
@@ -288,20 +289,29 @@ ________________________________________________________________________________
 See you again!
 ```
 
+## Current Limitation of app
+- Meeting cannot span across multiple days/past midnight. If that is the case, please create 2 separate meetings.
+e.g. if I want to have a meeting from 11pm - 3am, create one for today 2300 - 2359 and another from 0000 - 0300 
+for the next day. We will fix this in the next version.
 
 ## Command summary
 
 
-| Action                           | Format                                                                     |
-|----------------------------------|----------------------------------------------------------------------------|
-| Help                             | `help`                                                                     |
-| Add lesson                       | `add_lesson n/NAME t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
-| Add Meeting                      | `add_meeting t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`       |
-| Delete Event                     | `delete n/NAME i/INDEX`                                                    |
-| Free                             | `free`                                                                     |
-| List                             | `list`                                                                     |
-| Clear events from user           | `clear USER`                                                               |
-| Clear all events from everyone   | `clear all`                                                                |
-| Exit                             | `exit`                                                                     |
+| Action                         | Format                                                                     |
+|--------------------------------|----------------------------------------------------------------------------|
+| Help                           | `help`                                                                     |
+| Add lesson                     | `add_lesson n/NAME t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
+| Add meeting                    | `add_meeting t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`       |
+| Delete event                   | `delete n/NAME i/INDEX`                                                    |
+| Free                           | `free [DURATION]`                                                          |
+| List all events                | `list all`                                                                 |
+| List user's events             | `list [USER]`                                                              |
+| List all lessons               | `list_lesson all`                                                          |
+| List user's lessons            | `list_lesson [USER]`                                                       |
+| List all meetings              | `list_meeting all`                                                         |
+| List user's meetings           | `list_meeting [USER]`                                                      |
+| Clear events from user         | `clear [USER]`                                                             |
+| Clear all events from everyone | `clear all`                                                                |
+| Exit                           | `exit`                                                                     |
 
 

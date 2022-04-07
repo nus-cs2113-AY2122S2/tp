@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
+
 import static seedu.meetingjio.common.Messages.NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
 
 public class MasterTimetable {
@@ -21,7 +23,7 @@ public class MasterTimetable {
     private final ArrayList<Meeting> meetingList;
 
     public static final int NUM_DAYS = 7;
-    public static final int NUM_MINS = 960;
+    public static final int NUM_MINS = 1440;
     public static final int BUSY = 1;
 
     public MasterTimetable() {
@@ -103,6 +105,7 @@ public class MasterTimetable {
             throws TimetableNotFoundException, DuplicateEventException, OverlappingEventException {
         Timetable timetable = getByName(name);
         timetable.add(lesson);
+        timetable.sort();
     }
 
     /**
@@ -177,11 +180,14 @@ public class MasterTimetable {
      * @return boolean True false if there meeting already exists
      */
     public boolean isExistingMeeting(Meeting meeting) {
-        for (Event event : meetingList) {
-            if (meeting.equals(event)) {
-                return true;
+        for (Timetable timetable : timetables) {
+            for (int i = 0; i < timetable.size(); i++) {
+                if (timetable.get(i).equals(meeting)) {
+                    return true;
+                }
             }
         }
+
         return false;
     }
 
@@ -197,6 +203,7 @@ public class MasterTimetable {
             try {
                 timetable.add(meeting);
                 meetingList.add(meeting);
+                timetable.sort();
             } catch (DuplicateEventException dee) {
                 return ERROR_DUPLICATE_EVENT;
             } catch (OverlappingEventException oee) {
@@ -289,7 +296,7 @@ public class MasterTimetable {
         for (int i = 0; i < meetingList.size(); i++) {
             meetingList.remove(0);
         }
-
+        assert meetingList.size() == 0 : ERROR_NON_EMPTY_LIST;
         return NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
     }
 
@@ -309,12 +316,12 @@ public class MasterTimetable {
     }
 
     /**
-     * Initialise a 7 x 960 array, with the 7 rows indicating each day of the week and the 960 columns indicating the
-     * minutes starting from 0800 to 2359 (Constraint here is that free timeslots from 0000 to 0759 are not included).
+     * Initialise a 7 x 1440 array, with the 7 rows indicating each day of the week and the 1440 columns indicating the
+     * minutes starting from 0000 to 2359.
      * For the last minute (2359) of each day, it will be initialised to 1 (BUSY).
      * For each timetable stored, the method populateBusySlots will be called.
      *
-     * @return busySlots A 7 x 960 array containing 0s and 1s whereby 0 indicates a time when all users are free
+     * @return busySlots A 7 x 1440 array containing 0s and 1s whereby 0 indicates a time when all users are free
      */
     public int[][] listBusy() {
         int[][] busySlots = new int[NUM_DAYS][NUM_MINS];
