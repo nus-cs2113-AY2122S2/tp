@@ -37,6 +37,8 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
         - Added supported system explaining the operating systems that the app are well tested on. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added expected output to all sample input and keep the output of the user guide updated when the app is updated. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added sample input in the command summary. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
+      
+    - Developer guide:
         - Added section explaining the format and usage of estimated time. [#118](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/118)
         - Added explanation of the overview of the app and created the relevant class diagrams within that section. [#99](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/99),  [#109](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/109)
         - Added explanations of the parsers and created the relevant class diagrams within that section.  [#109](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/109), [#118](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/118)
