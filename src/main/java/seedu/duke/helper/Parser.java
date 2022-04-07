@@ -5,6 +5,8 @@ import seedu.duke.helper.command.AddAppointmentCommand;
 import seedu.duke.helper.command.AddDoctorCommand;
 import seedu.duke.helper.command.AddMedicineCommand;
 import seedu.duke.helper.command.AddPatientCommand;
+import seedu.duke.helper.command.CheckIfDoctorExistsCommand;
+import seedu.duke.helper.command.CheckIfPatientExistsCommand;
 import seedu.duke.helper.command.ClearExpiredMedicineCommand;
 import seedu.duke.helper.command.Command;
 import seedu.duke.helper.command.DeleteAppointmentCommand;
@@ -140,9 +142,21 @@ public class Parser {
     }
 
     public static Command parseAddAppointment(String parameters) throws HalpmiException {
-        String[] addAppointmentParameters = minParameterCheck(parameters, 7);
+        String[] addAppointmentParameters = minParameterCheck(parameters, 4);
         Validator.validateAddAppointment(addAppointmentParameters);
         return new AddAppointmentCommand(addAppointmentParameters);
+    }
+
+    public static Command checkIfPatientExists(String parameters) throws HalpmiException {
+        String[] checkIfPatientExistsParameters = minParameterCheck(parameters, 4);
+        Validator.validateAddAppointment(checkIfPatientExistsParameters);
+        return new CheckIfPatientExistsCommand(checkIfPatientExistsParameters);
+    }
+
+    public static Command checkIfDoctorExists(String parameters) throws HalpmiException {
+        String[] checkIfDoctorExistsParameters = minParameterCheck(parameters, 4);
+        Validator.validateAddAppointment(checkIfDoctorExistsParameters);
+        return new CheckIfDoctorExistsCommand(checkIfDoctorExistsParameters);
     }
 
     public static Command parseViewAppointment(String parameters) throws HalpmiException {
