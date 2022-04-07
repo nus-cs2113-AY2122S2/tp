@@ -55,14 +55,14 @@ public class Order {
                 Orderline orderline = getOrderline(unitGood.getSku());
                 assert orderline != null;
                 orderline.setQuantity(quantity);
-                System.out.printf("%s already exists in order. %d now required to fulfill",
+                System.out.printf("%s already exists in order. %d now required to fulfill\n",
                         orderline.getName(), orderline.getQuantity());
                 return;
             }
             Orderline orderline = new Orderline(unitGood,
                     orderlines.size() + 1, quantity);
             orderlines.add(orderline);
-            System.out.printf("%s is added to order. %d required to fulfill",
+            System.out.printf("%s is added to order. %d required to fulfill\n",
                     orderline.getName(), orderline.getQuantity());
         } catch (NumberFormatException e) {
             System.out.println("Quantity must be positive number");

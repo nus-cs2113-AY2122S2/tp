@@ -41,6 +41,7 @@ public class Warehouse {
         Good newGood = new Good(unitGood, 0);
         unitGoodHashMap.put(sku, unitGood);
         goodList.put(sku, newGood);
+        System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
     }
 
     /**
@@ -214,7 +215,7 @@ public class Warehouse {
             System.out.println("OID field must be an order id which is"
                     + " currently in the warehouse");
         } catch (ItemDoesNotExistException e) {
-            System.out.printf("No order with oid: %s found in the warehouse", oid);
+            System.out.printf("No order with oid: %s found in the warehouse\n", oid);
         }
     }
 
@@ -277,15 +278,15 @@ public class Warehouse {
             }
 
             if (checkOrderComplete(order, orderlines)) {
-                System.out.printf("Order %d completed", orderID);
+                System.out.printf("Order %d completed\n", orderID);
             } else {
-                System.out.printf("Order %d not completed", orderID);
+                System.out.printf("Order %d not completed\n", orderID);
             }
         } catch (NumberFormatException e) {
             System.out.println("order ID must be a positive number");
             throw new WrongCommandException("fulfill", true);
         } catch (ItemDoesNotExistException e1) {
-            System.out.printf("No order with oid: %s found in the warehouse", oid);
+            System.out.printf("No order with oid: %s found in the warehouse\n", oid);
         }
     }
 
@@ -310,14 +311,14 @@ public class Warehouse {
 
             if (good.getQuantity() == 0) {
                 System.out.println("Orderline fulfilled");
-                System.out.printf("No more %s in the warehouse", good.getName());
+                System.out.printf("No more %s in the warehouse\n", good.getName());
             } else {
                 System.out.println("Orderline fulfilled");
-                System.out.printf("%d %s left in the warehouse",
+                System.out.printf("%d %s left in the warehouse\n",
                         good.getQuantity(), good.getName());
             }
         } catch (LargeQuantityException e) {
-            System.out.printf("Not enough %s in the warehouse", good.getName());
+            System.out.printf("Not enough %s in the warehouse\n", good.getName());
             System.out.println("Orderline not fulfilled");
         }
     }
@@ -446,7 +447,7 @@ public class Warehouse {
             System.out.println("order ID must be a positive number");
             throw new WrongCommandException("remove", true);
         } catch (ItemDoesNotExistException e1) {
-            System.out.printf("Order id: %s does not exist.", oid);
+            System.out.printf("Order id: %s does not exist.\n", oid);
         }
 
     }
@@ -544,14 +545,14 @@ public class Warehouse {
             int id = Integer.parseInt(oid);
 
             if (hasOrderId(id)) {
-                System.out.printf("Order id %d already exists, please choose another id",
+                System.out.printf("Order id %d already exists, please choose another id\n",
                         id);
                 return;
             }
 
             Order order = new Order(id, recv, addr);
             orderLists.add(order);
-            System.out.printf("Order %d added to the warehouse", id);
+            System.out.printf("Order %d added to the warehouse\n", id);
         } catch (NumberFormatException e) {
             System.out.println("oid must be a positive number");
             throw new WrongCommandException("add", true);
