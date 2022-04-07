@@ -477,7 +477,7 @@ public class ExpenseTracker {
      *
      * @param savedExpense the saved expense entry
      */
-    public static void loadAdd(String savedExpense) {
+    public void loadAdd(String savedExpense) {
         executeAdd(savedExpense, false);
     }
 

@@ -1,9 +1,9 @@
-E,add d/2022-03-15 a/9.50 c/Movie r/Spiderman: No Way Home
+E,add d/2022-03-15 a/9.50 c/Movie r/Spiderman
 E,add d/2022-02-17 a/2.40 c/Food r/Popcorn
 E,add d/2022-03-18 a/9.50 c/Movie r/Matrix
-S,add m/CS2113 c/lec d/Friday t/4pm-6pm
-S,add m/CS3244 c/tut d/Monday t/2pm-3pm
-S,add m/EE4204 c/exam d/Monday t/10am-12pm
-C,add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215
-C,add n/Ryan Briggs f/FoE e/e1122334@u.nus.edu d/friend
-C,add n/Benjamin f/SoC e/e0000127@u.nus.edu d/best friend
+S,add m/CS2113 c/lec d/Friday t/4:00pm-6:00pm
+S,add m/CS3244 c/tut d/Monday t/2:00pm-3:00pm
+S,add m/EE4204 c/exam d/Monday t/10:00am-12:00pm
+C,add n/Jane f/SoC e/e0334987@u.nus.edu d/groupmate
+C,add n/Ryan f/FoE e/e1122334@u.nus.edu d/friend
+C,add n/Benjamin f/SoC e/e0000127@u.nus.edu d/bestfriend
