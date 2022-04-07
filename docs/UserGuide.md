@@ -419,13 +419,13 @@ delimiters are compulsory to identify the activity you wish to edit.
 >    * If a list is not provided, the original participants are left unchanged.
 >    * You **must** supply a costlist or overall cost if you wish to edit the list of participants.
 >* `[TOTAL_COST]` refers to the overall cost of the activity.
->    * If one is not provided, the original overall cost is left unchanged. If a cost list is provided, that will be used to 
-> edit the activity instead. You cannot supply both a total cost and a cost list.
+>    * If one is not provided, the original overall cost is left unchanged.
+>      You cannot supply both a total cost and a cost list.
 >    * You can use this even if the activity was originally created using a cost list. The new overall cost will be evenly 
 distributed amongst all participants.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
->    * If a list is not provided, the original overall cost list is left unchanged. If an overall cost is provided, that will
->be used to edit the activity instead. You cannot supply both a total cost and a cost list.
+>    * If a list is not provided, the original overall cost list is left unchanged. 
+>      You cannot supply both a total cost and a cost list.
 >    * You can use this even if the activity was originally created using an overall cost. The new cost list will be assigned 
 >to the existing participants in the order displayed when viewing the activity.
 >    * You are encouraged to additionallly provide a participant list with `/i` to confirm the distribution of costs.
