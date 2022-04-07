@@ -328,7 +328,7 @@ public class Validator {
             validateNric(parameters[1]);
             break;
         case "date":
-            validateDate(parameters[1],"find appointment");
+            validateDate(parameters[1], "find appointment");
             break;
         default:
             throw new HalpmiException("Input must be an attribute of Appointment");

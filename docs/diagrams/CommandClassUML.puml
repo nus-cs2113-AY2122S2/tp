@@ -1,6 +1,9 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+hide circle
+skinparam classAttributeIconSize 0
+
 abstract class Command {
     +parameterArray: String[]
     +Command(parameterArray: String[])

@@ -245,7 +245,7 @@ This command requires an additional parameter which is the appointment id of the
 
 Format: `delete appointment /info [appointment id]`
 
-Example: `delete medicine /info S234`
+Example: `delete appointment /info S234`
 
 ### Editing: `edit`
 
