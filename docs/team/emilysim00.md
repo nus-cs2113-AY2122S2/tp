@@ -15,7 +15,8 @@ schedule for them to refer to and follow. More details about the project can be 
 
 ### Summary of Contributions
 ### Code Contributed
-A detailed report of my code contributions to the tP can be found in the [tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=emilysim00&breakdown=true)
+A detailed report of my code contributions to the tP can be found in the 
+[tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=emilysim00&breakdown=true)
 hosted by the module coordinators of CS2113T.
 
 ![tP Code Dashboard](../images/ppp/emilysim00/tPCodeDashboard.png)
@@ -31,8 +32,8 @@ hosted by the module coordinators of CS2113T.
 | Remove plan scheduled on a particular day   | Allows users to remove the plan scheduled on a particular day. | `clearPlan()`           | `isDayValid()` <br> `clearPlan()`                |
 | Reset the 7-days workout plan schedule      | Allows user to reset his/her workout plan schedule.            | `clearAllSchedule()`    | `clearPlan()`                                    |
 
-* Wrote the majority of the code in `Day.java`, `ScheduleCommand.java` and `InvalidScheduleException.java`.
-* Contributed to some code in exception-related files such as `InvalidCommandException`. 
+* Wrote the majority of the codes in `Day.java`, `ScheduleCommand.java` and `InvalidScheduleException.java`.
+* Contributed to some codes in exception-related files such as `InvalidCommandException`. 
 * Contributed to some parts of the `UI` such as the `printNewScheduleCreatedMessage(Day newDay)` and 
 `printClearedScheduleMessage()` methods. The former method will print a successful message to indicate 
 that a plan has been successfully scheduled on the day stated. While the latter method will print a successful message to indicate
@@ -99,9 +100,10 @@ Reviewed teammates' pull requests, including (but not limited to):
 Provided feedback and potential bug reports to another team's project 
 [(CS2113T-T11-1's HotelLite Manager)](https://ay2122s2-cs2113-t11-1.github.io/tp/UserGuide.html) 
 as part of the Practical Exam Dry-Run (PED). 
-* Screenshot of one of the high severity bug reported ![Severe Bug](../images/ppp/emilysim00/severeBug1.png)
-The application is unable to remove the housekeeper if they are being assigned to a hotel room. The programs terminate
-straight without proper exception handling. Click [here](https://github.com/emilysim00/ped/issues/8) to view the issues in GitHub.
+* Screenshot of one of the high severity bugs reported ![Severe Bug](../images/ppp/emilysim00/severeBug1.png)
+The application is unable to remove the housekeeper if they are being assigned to a hotel room. The program get terminated
+straight without proper exception handling. 
+Click [here](https://github.com/emilysim00/ped/issues/8) to view the issues in GitHub.
 
 * Another high severity bug reported is on the file management of one of its feature. To find out more details on this 
 bug, click [here](https://github.com/emilysim00/ped/issues/10).
