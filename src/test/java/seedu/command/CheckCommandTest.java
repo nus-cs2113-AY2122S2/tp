@@ -18,7 +18,7 @@ class CheckCommandTest {
     @Test
     void execute_validEquipmentName_success() {
         checkCommand = new CheckCommand(new ArrayList<>(
-                Arrays.asList("Speaker B")
+                Arrays.asList("n/Speaker B")
         ));
         checkCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = checkCommand.equipmentManager;
@@ -42,7 +42,7 @@ class CheckCommandTest {
 
         CommandResult actualResult = checkCommand.execute();
         CommandResult expectedResult = new CommandResult(
-                "Here are the equipment matching to 'Speaker B':" + System.lineSeparator(),
+                "Here are the equipment matching to 'n/Speaker B':" + System.lineSeparator(),
                 listOfEquipments);
 
         assertEquals(expectedResult, actualResult);
