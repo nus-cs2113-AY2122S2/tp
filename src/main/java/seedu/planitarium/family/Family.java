@@ -220,10 +220,16 @@ public class Family {
      * @return The formatting of the value
      */
     public String formatValue(Double entry) {
+        boolean isNegative = false;
         if (entry < 0) {
-            return ("-$" + (-entry));
+            isNegative = true;
+            entry = (-entry);
         }
-        return ("$" + entry);
+        String strDouble = String.format("%.2f", entry);
+        if (isNegative) {
+            return ("-$" + strDouble);
+        }
+        return ("$" + strDouble);
     }
 
     /**
