@@ -341,6 +341,8 @@ Exits the application.
 
 **Expected outcome:**
 ```
+Data saved to local successfully
+__________________________________________________________________________________________________________
 See you again!
 ```
 
