@@ -10,10 +10,10 @@ public class OrderManagerTest {
     void deleteDish_IndexNotValid_ThrowIllegalArgumentException() {
         OrderManager.resetInstance();
         OrderManager orderManager = OrderManager.getInstance();
-        orderManager.addDishToOrder(new Dish("hamburger", 5), 0);
-        orderManager.addDishToOrder(new Dish("beef", 10), 0);
-        orderManager.addDishToOrder(new Dish("hamburger", 5), 1);
-        orderManager.addDishToOrder(new Dish("hamburger", 5), 1);
-        assertEquals(25, orderManager.getAllOrderValue());
+        orderManager.addToOrder(new Dish("hamburger", 5), 0);
+        orderManager.addToOrder(new Dish("beef", 10), 0);
+        orderManager.addToOrder(new Dish("hamburger", 5), 1);
+        orderManager.addToOrder(new Dish("hamburger", 5), 1);
+        assertEquals(25, orderManager.getAllValue());
     }
 }

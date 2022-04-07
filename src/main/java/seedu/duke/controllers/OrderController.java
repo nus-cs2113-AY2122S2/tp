@@ -39,16 +39,16 @@ public class OrderController extends Controller {
             deleteOrder();
             break;
         case 3:
-            displayOrderPrice();
+            displayPrice();
             break;
         case 4:
-            displayAllOrderPrice();
+            displayAllPrice();
             break;
         case 5:
             printOrder();
             break;
         case 6:
-            displayAllOrders();
+            displayOrders();
             break;
         case 7:
             System.out.print(dishManager.printDishes());
@@ -61,11 +61,11 @@ public class OrderController extends Controller {
         return false;
     }
 
-    private void displayAllOrders() {
+    private void displayOrders() {
         if (orderManager.getOrderCount() > 0) {
             System.out.println("Printing all orders...");
             for (int i = 0; i < orderManager.getOrderCount(); i++) {
-                System.out.printf("Order %d:\n " + orderManager.getOrder(i) + "\n", i);
+                System.out.printf("Order %d:\n" + orderManager.getOrder(i) + "\n", i + 1);
             }
         } else {
             System.out.println("No order now.");
@@ -80,7 +80,7 @@ public class OrderController extends Controller {
         try {
             while (index >= 1) {
                 Dish dish = dishManager.getDishes().get(index - 1);
-                orderManager.addDishToOrder(dish, createdOrderIdx);
+                orderManager.addToOrder(dish, createdOrderIdx);
                 index = InputParser.getInteger("You have "
                         + orderManager.getOrders().get(createdOrderIdx).getDishCount()
                         + " dish(es), some more: \n");
@@ -107,24 +107,24 @@ public class OrderController extends Controller {
         }
     }
 
-    private void displayOrderPrice() throws OperationTerminationException {
+    private void displayPrice() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is displaying the price of an order");
         System.out.println("Getting total price of an order...");
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to get price: ") - 1;
-            System.out.printf("Total value of this order: %f. \n", orderManager.getOrderPrice(userInputInt));
+            System.out.printf("Total value of this order: %f. \n", orderManager.getPrice(userInputInt));
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please enter a valid order index.");
         }
     }
 
-    private void displayAllOrderPrice() {
+    private void displayAllPrice() {
         MainLogger.logInfo(this, "User is displaying the total price of all orders");
         System.out.println("Getting total price of all orders in the list...");
         if (orderManager.getOrderCount() == 0) {
             System.out.println("No order now.");
         } else {
-            System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
+            System.out.printf("Total value of all orders: %f. \n", orderManager.getAllValue());
         }
     }
 

@@ -27,7 +27,7 @@ To create a new `Controller`, the new class simply extends from the `Controller`
 a list of strings indicating the choices available to the user. **Note that the first choice is always to exit the current controller.** 
 The user will then select these choices using integers (the implementation is handled by the base class, including
 input loops). The new class then implements this abstract method at the least:
-- `protected abstract boolean optionSwitcher(int choice) throws OperationTerminationException`
+- `optionSwitcher(int choice)`
   - This method is responsible for selecting the corresponding action to the user's selected choice.
   For more information and examples, refer to the `Controller` class' documentation, and `MainController` class for an
   example implementation.
@@ -49,17 +49,17 @@ saving data from the filesystem. A derived `Manager` must pass the name of the f
 to the `Manager` superclass.
 
 The base class provides two methods for simple read/write operations:
-- `protected Object load() throws Exception`
+- `load()`
   - This method returns a simple `Object` read from the specified file. The class makes no assumption as to the
   type of object being read. As such, further processing must be done, which will be touched on below.
-- `protected void save(Object o) throws Exception`
+- `save(Object o)`
   - This method saves the provided object into the specified file. It is capable of saving **any** type of Java object,
   on the condition that it **must be serializable**. For saving complex data structures such as `ArrayLists`, it is generally
   a good idea to also make sure that any contained objects are also serializable.
 
 Because the `load()` and `save(Object o)` methods are simple, they are generally not useful without further processing.
 As such, the `Manager` class has two other abstract methods, which extended managers must implement:
-- `protected abstract void loadData() throws Exception`
+- `loadData()`
   - Extended managers must override this method to deserialize any read objects properly. This is to ensure that
   corrupted data is found at this phase of the programme to prevent any future errors. A good example is listed below.
   Note that it makes use of the provided `load()` function to first read the simple `Object`, then does further
@@ -74,7 +74,7 @@ As such, the `Manager` class has two other abstract methods, which extended mana
         }
     }
   ```
-- `public abstract void saveData() throws Exception`
+- `saveData()`
   - This is a convenience method for doing any pre- / post-processing on any data you may want to save. Of course, you should
   also call the `save(Object o)` method finally.
 
@@ -90,11 +90,11 @@ Here is the typical design of a manager:
 
 The management of menu is handled by `DishManager`, which implements following methods:
 
-- `void printDishes()` -- print all dishes and their menu index in current menu.
-- `void addDish(Dish dish)` -- add a new dish.
-- `void deleteDish(int menuIndex)` -- delete a dish using its menu index.
-- `void setPrice(int menuIndex, double newPrice)` -- change the price of a dish using its menu index.
-- `void setName(int menuIndex, String newName)` -- change the name of a dish using its menu index.
+- `printDishes()` -- print all dishes and their menu index in current menu.
+- `addDish(Dish dish)` -- add a new dish.
+- `deleteDish(int menuIndex)` -- delete a dish using its menu index.
+- `setPrice(int menuIndex, double newPrice)` -- change the price of a dish using its menu index.
+- `setName(int menuIndex, String newName)` -- change the name of a dish using its menu index.
 
 These functions are "delegated" to `ArrayList<Dish>`, which is associated with `DishManager`.
 
@@ -115,11 +115,11 @@ For example, `printDishes()`, iterates through `dishes` and calls `get(int)` met
 ### Order Management
 
 The management of menu is functioned by `OrderManager`, which implements following methods:
-- `void addDishToOrder(Dish dish, int orderIdx)` -- add dishes in to an order.
-- `void deleteOrder(int orderIndex)` -- delete an order using its order index.
-- `Order getOrder(int orderIndex)` -- get an order using its order index.
-- `double getOrderPrice(int orderIndex)` -- get the total price of an order using its order index.
-- `double getAllOrderValue()` -- get the total price of all orders.
+- `addDishToOrder(Dish dish, int orderIdx)` -- add dishes in to an order.
+- `deleteOrder(int orderIndex)` -- delete an order using its order index.
+- `getOrder(int orderIndex)` -- get an order using its order index.
+- `getOrderPrice(int orderIndex)` -- get the total price of an order using its order index.
+- `getAllOrderValue()` -- get the total price of all orders.
 
 These functions are "delegated" to `ArrayList<Order>`, which is associated with `OrderManager`. 
 
@@ -140,34 +140,34 @@ Both methods `getOrderPrice(int)` and `getAllOrderValue()` call `getTotalPrice()
 I/O for staff is being handled by `StaffController`.
 The management of staff is handled by `StaffManager`, which implements following methods:
 
-- `void printStaff()` -- print all staffs.
-- `void addStaff(int staffId, String staffName, String position, double salary)` -- add a new staff with the arguments as its attributes.
-- `Staff findByStaffId(int staffId, boolean printMsg)` -- find a staff using staff id, and print message if boolean variable printMsg is true.
-- `void deleteByStaffId(int staffId)` -- delete a staff using staff id.
-- `int getNumOfStaffs(` -- change the name of a dish using its menu index.
+- `printStaff()` -- print all staffs.
+- `addStaff(int staffId, String staffName, String position, double salary)` -- add a new staff with the arguments as its attributes.
+- `findByStaffId(int staffId, boolean printMsg)` -- find a staff using staff id, and print message if boolean variable printMsg is true.
+- `deleteByStaffId(int staffId)` -- delete a staff using staff id.
+- `getNumOfStaffs(` -- change the name of a dish using its menu index.
 
 `StaffManager` manages `ArrayList<Staff>` and the above functions help to update the collection of `Staff`.
 The sequence diagrams for each feature of staff handling is attached below.
 
 Sequence diagram for `printStaff()`:
 
-<img src="diagrams/sqeuence/StaffManager_printStaff.png" width=50% height=50%>
+![](diagrams/sqeuence/StaffManager_printStaff.png)
 
 Sequence diagram for `findStaff()`:
 
-<img src="diagrams/sqeuence/StaffManager_findStaff.png" width=50% height=50%>
+![](diagrams/sqeuence/StaffManager_findStaff.png)
 
 Sequence diagram for `addStaff()`:
 
-<img src="diagrams/sqeuence/StaffManager_addStaff.png" width=80% height=80%>
+![](diagrams/sqeuence/StaffManager_addStaff.png)
 
 Sequence diagram for `deleteStaff()`:
 
-<img src="diagrams/sqeuence/StaffManager_deleteStaff.png" width=50% height=50%>
+![](diagrams/sqeuence/StaffManager_deleteStaff.png)
 
 Sequence diagram for `edittStaff()`:
 
-<img src="diagrams/sqeuence/StaffManager_editStaff.png" width=40% height=40%>
+![](diagrams/sqeuence/StaffManager_editStaff.png)
 
 
 ## Product scope

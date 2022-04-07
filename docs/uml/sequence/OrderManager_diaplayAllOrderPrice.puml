@@ -1,7 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
 hide footbox
 
 actor user
@@ -9,15 +8,14 @@ participant ":OrderController" as ordercontroller
 participant ":OrderManager" as ordermanager
 participant ":Order" as order
 
-activate ordercontroller
-activate ordermanager
-activate order
-
 user -> ordercontroller: displayAllOrderPrice()
+activate ordercontroller
 
 ordercontroller -> ordermanager: getAllOrderValue()
+activate ordermanager
 
 ordermanager -> order : getTotalPrice()
+activate order
 
 order --> ordermanager : double
 ordermanager --> ordercontroller : double

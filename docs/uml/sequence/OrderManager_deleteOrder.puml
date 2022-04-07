@@ -1,7 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
 hide footbox
 
 actor user
@@ -9,22 +8,20 @@ participant ":OrderController" as ordercontroller
 participant ":OrderManager" as ordermanager
 participant ":Order" as order
 
-activate ordercontroller
-activate ordermanager
-activate order
 user -> ordercontroller: deleteOrder()
+activate ordercontroller
 
 ordercontroller -> ordermanager: deleteOrder(int orderIdx)
+activate ordermanager
 
 
 ordermanager -> ordermanager: getOrderCount()
+activate ordermanager
 
 opt orderIdx >= number of existing orders
 ordermanager --> ordercontroller : IndexOutOfBoundsException
 end
-
-deactivate order
+deactivate ordermanager
 destroy order
 
-ordermanager --> ordercontroller
 @enduml
