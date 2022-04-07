@@ -77,6 +77,7 @@ public class ShowCommand extends Command {
         case "todo":
             ui.showToUser("Here are your pending tasks:");
             Timetable.showPendingTasks(taskList, ui);
+            ui.showToUser("You have a total of " + taskList.getPendingTasksCount() + " pending task(s)");
             break;
         case "today":
             ui.showToUser(WELCOME_MESSAGE_TWO);
@@ -168,7 +169,7 @@ public class ShowCommand extends Command {
         case "all":
             ui.showToUser("Here are the tasks in your list:");
             Timetable.showCondensedTimetable(taskList.getTasks(), ui);
-            ui.showToUser(TASK_COUNT_MESSAGE_1 + taskList.getSize() + TASK_COUNT_MESSAGE_2);
+            ui.showToUser("You have a total of " + taskList.getSize() + " task(s)!");
             break;
         default:
             ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
