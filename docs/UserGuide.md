@@ -106,8 +106,8 @@ Some Mod Happy commands require you to provide a duration. You can specify these
 
 - `DURATION_AMOUNT`: Any positive number less than or equal to one billion (1000000000), including decimals.
 - `DURATION_UNIT`: The time unit that `DURATION_AMOUNT` is specified in. Mod Happy supports the following units:
-  - Hours: `h`, `H`, `hour`, `Hour`, `hours`, `Hours`
-  - Minutes: `m`, `M`, `min`, `Min`,`mins`, `Mins`, `minute`, `Minute`, `minutes`, `Minutes`
+  - Hours: `h`, `H`, `hr`, `Hr`, `hrs`, `Hrs`, `hour`, `Hour`, `hours`, `Hours`
+  - Minutes: `m`, `M`, `min`, `Min`, `mins`, `Mins`, `minute`, `Minute`, `minutes`, `Minutes`
   
 > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
 >
