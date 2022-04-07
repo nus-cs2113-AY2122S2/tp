@@ -1,14 +1,6 @@
 package tp.command;
 
-import tp.AppointmentList;
-import tp.DoctorList;
-import tp.PatientList;
-import tp.Ui;
-import tp.person.Doctor;
-import tp.DoctorStorage;
-import tp.PatientStorage;
-import tp.IHospitalException;
-import tp.AppointmentStorage;
+import tp.*;
 import tp.person.Patient;
 
 public class SearchPatientCommand extends Command {
@@ -19,14 +11,14 @@ public class SearchPatientCommand extends Command {
     }
 
     @Override
-    public String execute(DoctorList doctorList, PatientList patientList,
+    public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                          PatientStorage patientStorage,
+                          PatientStorage patientStorage,NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         Patient curr = patientList.searchPatient(id);
         if (curr == null) {
-            return String.format("There is no patient with the id: " +  id + " in the patient list");
+            return String.format("There is no patient with ID: " + id + "\n");
         }
-        return String.format("The patient found is here" + System.lineSeparator() + curr + "\n");
+        return String.format("Here's the patient found: \n" + curr + "\n");
     }
 }

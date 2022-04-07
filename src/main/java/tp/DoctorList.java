@@ -16,13 +16,30 @@ public class DoctorList {
         size = 0;
     }
 
-    public Person getDoctor(int index) {
+    public Doctor getDoctor(int index) {
         return doctors.get(index - 1);
     }
 
-    public void addDoctor(Doctor doctor) {
-        doctors.add(doctor);
-        size++;
+    /**
+     * Add a doctor to the list.
+     *
+     * @param doctor Doctor to be added.
+     * @throws IHospitalException If ID of the doctor is the same as other doctors.
+     */
+    public void addDoctor(Doctor doctor) throws IHospitalException {
+        boolean isDuplicate = false;
+        for (int i = 0; i < doctors.size(); i++) {
+            if (doctors.get(i).getId().trim().equals(doctor.getId())) {
+                isDuplicate = true;
+            }
+        }
+
+        if (isDuplicate) {
+            throw new IHospitalException("Doctor with this ID already exists.\n");
+        } else {
+            doctors.add(doctor);
+            size++;
+        }
     }
 
     public int getSize() {
@@ -39,6 +56,12 @@ public class DoctorList {
         return curr;
     }
 
+    /**
+     * Search for the doctor with a given ID.
+     *
+     * @param id ID of the doctor to find.
+     * @return Doctor with the ID given.
+     */
     public Doctor searchDoctor(String id) {
         for (int i = 0; i < doctors.size(); i++) {
             if (doctors.get(i).getId().trim().equals(id)) {
@@ -56,7 +79,7 @@ public class DoctorList {
 
         }
         toPrint += ("You have " + size + " doctors recorded in the system."
-                            + System.lineSeparator() + boundary + System.lineSeparator());
+                            + System.lineSeparator() + boundary);
         return toPrint;
     }
 }

@@ -28,6 +28,18 @@ public class Appointment {
         return time;
     }
 
+    public void editDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public void editPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public void editTime(LocalDateTime time) {
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "Doctor: " + doctor.getName() + " || Patient: "

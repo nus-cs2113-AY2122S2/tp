@@ -1,14 +1,6 @@
 package tp.command;
 
-import tp.AppointmentList;
-import tp.DoctorList;
-import tp.PatientList;
-import tp.Ui;
-import tp.person.Doctor;
-import tp.DoctorStorage;
-import tp.PatientStorage;
-import tp.IHospitalException;
-import tp.AppointmentStorage;
+import tp.*;
 
 public class EditPatientCommand extends Command {
     private int index;
@@ -22,12 +14,12 @@ public class EditPatientCommand extends Command {
     }
 
     @Override
-    public String execute(DoctorList doctorList, PatientList patientList,
-                          AppointmentList appointmentList, Ui ui,
-                          DoctorStorage doctorStorage, PatientStorage patientStorage,
+    public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
+                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
+                          PatientStorage patientStorage,NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         if (index > patientList.getSize()) {
-            throw new IHospitalException("The patient is not exist\n");
+            throw new IHospitalException("The patient does not exist\n");
         }
 
         if (type.contains("e")) {

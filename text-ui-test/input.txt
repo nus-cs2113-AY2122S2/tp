@@ -1,11 +1,1 @@
-add doctor /id 1234 /n john /ph 12341234 /e 1234@gmail.com
-add patient /id 4321 /n Tom /ph 93333333 /e 3233@qq.com /s symptom /d descriptions
-add appointment /t 2007-12-03T10:15:30 /d 1 /p 1
-sort appointment
-search appointment 2007-12-03T10:15:30
-list doctor
-list patient
-list appointment
-delete doctor 1
-search doctor 1
 bye

@@ -1,13 +1,6 @@
 package tp.command;
 
-import tp.AppointmentList;
-import tp.DoctorList;
-import tp.PatientList;
-import tp.Ui;
-import tp.DoctorStorage;
-import tp.PatientStorage;
-import tp.IHospitalException;
-import tp.AppointmentStorage;
+import tp.*;
 import tp.person.Patient;
 
 public class DeletePatientCommand extends Command {
@@ -18,17 +11,16 @@ public class DeletePatientCommand extends Command {
     }
 
     @Override
-    public String execute(DoctorList doctorList, PatientList patientList,
+    public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
                           AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                          PatientStorage patientStorage,
+                          PatientStorage patientStorage,NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Patient curr = patientList.deletePatient(index);
-        if (curr == null){
-            return String.format("The index " + index + " is not valid in the patient list");
-        } else {
-            return String.format(boundary + "Noted. I've removed this patient:" + "\n" + curr
-                    + "\n" + "Now you have " + patientList.getSize()
-                    + " patients in the system." + System.lineSeparator() + boundary);
+        if (index <= 0 || index > patientList.getSize()) {
+            throw new IHospitalException("The patient does not exist.\n");
         }
+        Patient curr = patientList.deletePatient(index);
+        return String.format(boundary + "Noted. I've removed this patient:" + curr
+                                     + "\n" + "Now you have " + patientList.getSize()
+                                     + " patients in the system." + System.lineSeparator() + boundary);
     }
 }
