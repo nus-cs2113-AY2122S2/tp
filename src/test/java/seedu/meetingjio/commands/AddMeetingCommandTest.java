@@ -11,7 +11,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_USER_TO_ADD_MEETING
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_MEETING;
 
-public class AddMeetingTest {
+public class AddMeetingCommandTest {
     public static Logger logger = Logger.getLogger(Parser.class.getName());
     MasterTimetable masterTimetable = new MasterTimetable();
 
