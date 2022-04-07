@@ -20,7 +20,7 @@ alt event is type meeting
 ":MasterTimetable" -> ":MasterTimetable" : deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
 ":MasterTimetable" -> ":DeleteCommand" --: deleteMeetingFromAllTimetableConfirmation :String
 ":DeleteCommand" --> ":Ui" --: deleteMeetingFromEveryoneTimetable: String
-":Ui" --> "user" --: deleteMeetingFromEveryoneTimetable: String
+":Ui" --> "user" : deleteMeetingFromEveryoneTimetable: String
 
 else non-meeting types
 activate ":DeleteCommand"
