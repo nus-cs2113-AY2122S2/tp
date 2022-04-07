@@ -349,7 +349,7 @@ public abstract class Message {
     public static final String ASSERT_ACTIVITYEDIT_SESSIONID_LESS_THAN_ONE =
             "Session ID is less than or equals to zero.";
     public static final String ERROR_ACTIVITYEDIT_DUPLICATE_NAME =
-            "There are duplicate names in the persons involved for the activity you are trying to create. "
+            "There are duplicate names in the persons involved for the activity you are trying to edit. "
                     + "Please rectify and try again.";
     public static final String ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL =
             "Cost list array does not contain the respective costs of the persons involved in the activity.";

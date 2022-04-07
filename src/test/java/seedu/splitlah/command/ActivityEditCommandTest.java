@@ -181,7 +181,6 @@ class ActivityEditCommandTest {
 
     /**
      * Checks if the cost list remains unchanged when an invalid cost list is supplied.
-     *
      */
     @Test
     public void run_editActivityCostListWithInvalidCostList_costListIsNotEdited() throws InvalidDataException {
@@ -195,7 +194,6 @@ class ActivityEditCommandTest {
 
     /**
      * Checks if the cost list remains unchanged when an invalid cost list is supplied.
-     *
      */
     @Test
     public void run_editActivityCostListWithIncompleteCostList_costListIsNotEdited() throws InvalidDataException {
