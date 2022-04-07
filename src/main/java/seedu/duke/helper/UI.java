@@ -52,16 +52,37 @@ public class UI {
 
     public static void printHelp() {
         printAddDoctorMessage();
+        printAddPatientMessage();
+        printAddMedicineMessage();
+
         printNewLineSeparator();
     }
 
     public static void printAddDoctorMessage() {
         printNewLineSeparator();
         System.out.println("Feature: ADD DOCTOR");
-        System.out.print("Format: add doctor /info [nric],[name],[age],[gender],");
+        System.out.print("Format: add doctor /info [nric],[name],[age],[gender], ");
         System.out.println("[address],[DOB],[Specialisation]");
-        System.out.print("Example: add doctor /info S1234567A, John Doe,");
+        System.out.print("Example: add doctor /info S1234567A, John Doe, ");
         System.out.println("23, M, 10 Baker Street, 1999-12-31, Urinology");
+    }
+
+    public static void printAddPatientMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: ADD PATIENT");
+        System.out.print("Format: add patient /info [nric], [name], [age], [gender], ");
+        System.out.println("[address], [DOB], [Date of Admission]");
+        System.out.print("Example: add patient /info S1234567A, John Doe, 23, ");
+        System.out.println("M, 10 Baker Street, 1999-12-31, 2021-02-15");
+    }
+
+    public static void printAddMedicineMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: ADD MEDICINE");
+        System.out.print("Format: add medicine /info [batch id], [name], [dosage], ");
+        System.out.println("[expiry date],[side effects],[quantity]");
+        System.out.print("Example: add medicine /info A123, Paracetamol, ");
+        System.out.println("500, 2023-06-11, Drowsiness, 10");
     }
 
     public int getSize() {
