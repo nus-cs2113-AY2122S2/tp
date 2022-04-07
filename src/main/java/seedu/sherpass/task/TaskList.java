@@ -279,7 +279,7 @@ public class TaskList {
         long startDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnStartDateTime(), doOnStartDateTime);
         long endDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnEndDateTime(), doOnEndDateTime);
 
-        Task updatedTask = taskToEdit.clone();
+        Task updatedTask = taskToEdit.copy();
         updateTask(updatedTask, taskDescription,
                 startDateOffset, endDateOffset, 0);
         updatedTask.setIdentifier(generateIdentifier());
@@ -321,7 +321,7 @@ public class TaskList {
 
         int newIdentifier = generateIdentifier();
         for (Task t : affectedTasks) {
-            Task updatedTask = t.clone();
+            Task updatedTask = t.copy();
             updateTask(updatedTask, taskDescription,
                     startDateOffset, endDateOffset, byDateOffset);
             updatedTask.setIdentifier(newIdentifier);
@@ -350,19 +350,6 @@ public class TaskList {
         return result;
     }
 
-    /**
-     * Returns a string listing all tasks in the list.
-     *
-     */
-    public String getAllTasksInString() {
-        StringBuilder result = new StringBuilder();
-        for (Task task : tasks) {
-            result.append("\t");
-            result.append(task);
-            result.append("\n");
-        }
-        return result.toString().stripTrailing();
-    }
 
     /**
      * Marks a task given the index of the task.
@@ -458,20 +445,17 @@ public class TaskList {
     }
 
     /**
-     * Returns
-     * Printed tasks applies to non-recurring tasks.
+     * Returns an array of tasks that have not been marked as complete.
      *
      */
-    public String getPendingTasks() {
-        StringBuilder result = new StringBuilder();
+    public ArrayList<Task> getPendingTasks() {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (!task.isDone()) {
-                result.append(TAB_INDENT);
-                result.append(task);
-                result.append(NEWLINE);
+                filteredTasks.add(task);
             }
         }
-        return result.toString().stripTrailing();
+        return filteredTasks;
     }
 
     public int getPendingTasksCount() {
