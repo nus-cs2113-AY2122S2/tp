@@ -2,18 +2,22 @@
 
 ## Introduction
 
-{Give a product intro}
+Travel Agency Reservation Booking System (TARBS) is a system for employees of travel agencies to track and record customers’ booking of travel packages. 
+
+### Why do we need TARBS?
+Travel agencies often have to manage multiple customers and their respective bookings or plans.
 
 ## Quick Start
-
-{Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Features 
 
-{Give detailed description of each feature}
+### Quick Help: `help`
+Print detailed instructions on the available commands that users may input
+
+Format: `help`
 
 ### Adding a package: `add`
 Adds a new Travel Package to the list of Packages.
@@ -73,6 +77,7 @@ Example of usage:
 
 | Command | Syntax |
 | --- | :---  |
+| help | help |
 | packages | packages |
 | info | info {num} |
 | add | add {package_name} {country} {duration} {price} {vacancies} |
