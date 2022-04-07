@@ -14,19 +14,32 @@ end box
 activate ExpenseTracker
 
 ExpenseTracker -> ExpenseTracker : enable(int)
+activate ExpenseTracker
+deactivate ExpenseTracker
 create Expense
 ExpenseTracker -> Expense : setBudget(int)
 activate Expense
-deactivate Expense
+
 
 ExpenseTracker -> ExpenseParser : parseNewExpense(String)
 activate ExpenseParser
 ExpenseParser -> ExpenseParser : checkBudget()
+activate ExpenseParser
+deactivate ExpenseParser
+
 ExpenseParser -> Expense : getBudget()
+activate Expense
+
 Expense --> ExpenseParser : budget(int)
+deactivate Expense
+
 ExpenseParser --> ExpenseTracker : Expense Object
 deactivate ExpenseParser
 
-ExpenseTracker -> ExpenseTracker : addExpense(Expense)
+
+ExpenseTracker -> ExpenseTracker :  addExpense(Expense)
+activate ExpenseTracker
+
+deactivate ExpenseTracker
 
 @enduml

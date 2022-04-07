@@ -46,7 +46,7 @@ public class ExpenseTracker {
     public static final int REMARKS_INDEX = 3;
     public static final int SPLIT_INTO_HALF = 2;
     public static final int EXPENSE_INDEX = 1;
-    public static final String LOG_EMPTY_FIELDS = "User possibly entered empty fields";
+    public static final String LOG_MISSING_PARAMETERS = "User possibly entered missing parameters";
     public static final String MSG_EMPTY_FIELDS = "Some fields are empty! Try again!";
     public static final String LOG_INDEX_OUT_OF_BOUNDS = "User entered an index out of bounds";
     public static final String MSG_ITEM_NOT_FOUND = "Selected item does not exist in the list";
@@ -97,9 +97,12 @@ public class ExpenseTracker {
     public static final String KEYWORD_EDIT = "edit";
     public static final String KEYWORD_FIND = "find";
     public static final String KEYWORD_BLANK = "";
+    public static final String LOG_EMPTY_FIELD = "User input is missing a field";
+    public static final String LOG_EXTRA_FIELDS = "User enter multiple copies of the same delimiter";
+    public static final String LOG_INVALID_SLASH = "User entered slash in incorrect format";
 
     private static void expenseWelcome() {
-        System.out.println(EXPENSE_WELCOME_MESSAGE);
+        TextUi.showToUser(EXPENSE_WELCOME_MESSAGE);
     }
 
     private static Logger logger = Logger.getLogger("expenseLogger");
@@ -116,7 +119,7 @@ public class ExpenseTracker {
         int noOfItems = Expense.getNoOfItems();
         assert noOfItems >= ZERO : ASSERT_NUMBER_OF_ITEMS_NON_NEGATIVE;
         if (noOfItems == ZERO) {
-            System.out.println(MSG_EMPTY_LIST);
+            TextUi.showToUser(MSG_EMPTY_LIST);
             return;
         }
         String listAsString = "";
@@ -127,7 +130,7 @@ public class ExpenseTracker {
             String expenseRecord = String.format(" %d. %s\n", i + EXPENSE_INDEX, curr);
             listAsString = listAsString.concat(expenseRecord);
         }
-        System.out.println(LIST_EXPENSE_OUTPUT + listAsString);
+        TextUi.showToUser(LIST_EXPENSE_OUTPUT + listAsString);
     }
 
     /**
@@ -169,7 +172,7 @@ public class ExpenseTracker {
         Expense toBeDeleted = list.get(index - EXPENSE_INDEX);
         list.remove(index - EXPENSE_INDEX);
         Expense.setNoOfItems(Expense.getNoOfItems() - 1);
-        System.out.println("Deleted entry: " + toBeDeleted);
+        TextUi.showToUser("Deleted entry: " + toBeDeleted);
         isModified = true;
     }
 
@@ -188,7 +191,7 @@ public class ExpenseTracker {
         assert expense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
         list.add(expense);
         if (fromCommandLine) {
-            System.out.println("Added " + expense);
+            TextUi.showToUser("Added " + expense);
         }
         Expense.setNoOfItems(Expense.getNoOfItems() + EXPENSE_INDEX);
         isModified = true;
@@ -205,8 +208,8 @@ public class ExpenseTracker {
         Expense toBeEdited = list.get(index - 1);
         boolean isEdited = false;
         boolean isFieldEdited = false;
-        System.out.println(CHOSEN_EXPENSE_TO_EDIT + toBeEdited);
-        System.out.println(CHOSEN_FIELD_TO_EDIT);
+        TextUi.showToUser(CHOSEN_EXPENSE_TO_EDIT + toBeEdited);
+        TextUi.showToUser(CHOSEN_FIELD_TO_EDIT);
         String fieldToEdit;
         boolean isFinishedEditing = false;
         while (!isFinishedEditing) {
@@ -217,16 +220,16 @@ public class ExpenseTracker {
             if (fieldToEdit.trim().equalsIgnoreCase(EDIT_DONE)) {
                 isFinishedEditing = true;
                 if (isEdited) {
-                    System.out.println(EDITING_COMPLETE);
-                    System.out.println(NEWLY_EDITED_EXPENSE_RECORD + toBeEdited);
+                    TextUi.showToUser(EDITING_COMPLETE);
+                    TextUi.showToUser(NEWLY_EDITED_EXPENSE_RECORD + toBeEdited);
                 } else {
-                    System.out.println(MSG_NO_EDITS_MADE);
+                    TextUi.showToUser(MSG_NO_EDITS_MADE);
                 }
             } else {
                 try {
                     isFieldEdited = editField(fieldToEdit, toBeEdited);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(INVALID_INPUT);
+                    TextUi.showToUser(INVALID_INPUT);
                 }
             }
         }
@@ -247,7 +250,7 @@ public class ExpenseTracker {
         String field = newFields[ZERO];
         String newValue = newFields[INDEX_OF_NEW_VALUE].trim();
         if (newValue.length() == 0) {
-            System.out.println(MSG_NEW_VALUE_CANNOT_BE_EMPTY);
+            TextUi.showToUser(MSG_NEW_VALUE_CANNOT_BE_EMPTY);
             return isEdited;
         } else {
             switch (field) {
@@ -266,7 +269,7 @@ public class ExpenseTracker {
             case ("done"):
                 return isEdited;
             default:
-                System.out.println(MSG_INVALID_EDIT_FIELD);
+                TextUi.showToUser(MSG_INVALID_EDIT_FIELD);
                 return isEdited;
             }
         }
@@ -284,15 +287,16 @@ public class ExpenseTracker {
         try {
             checkContainSlash(newValue);
         } catch (ExpenseSurroundSlashSpaceException e) {
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
             return isEdited;
         }
         if (toBeEdited.getRemark().equals(newValue)) {
-            System.out.println(SAME_NEW_REMARKS_SET);
+            TextUi.showToUser(SAME_NEW_REMARKS_SET);
         } else {
             toBeEdited.setRemark(newValue);
             isEdited = true;
-            System.out.println(NEW_REMARKS_VALUE_SET);
+            
+            TextUi.showToUser(NEW_REMARKS_VALUE_SET);
         }
         return isEdited;
     }
@@ -308,15 +312,15 @@ public class ExpenseTracker {
         try {
             checkContainSlash(newValue);
         } catch (ExpenseSurroundSlashSpaceException e) {
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
             return isEdited;
         }
         if (toBeEdited.getCategory().equals(newValue)) {
-            System.out.println(SAME_NEW_CATEGORY_VALUE);
+            TextUi.showToUser(SAME_NEW_CATEGORY_VALUE);
         } else {
             toBeEdited.setCategory(newValue);
             isEdited = true;
-            System.out.println(NEW_CATEGORY_VALUE_SET);
+            TextUi.showToUser(NEW_CATEGORY_VALUE_SET);
         }
         return isEdited;
     }
@@ -332,18 +336,18 @@ public class ExpenseTracker {
         try {
             isAmountValid(newValue);
             if (toBeEdited.getAmount().equals(newValue)) {
-                System.out.println(SAME_NEW_AMOUNT_VALUE);
+                TextUi.showToUser(SAME_NEW_AMOUNT_VALUE);
             } else {
                 toBeEdited.setAmount(newValue);
-                System.out.println(NEW_AMOUNT_VALUE_SET);
+                TextUi.showToUser(NEW_AMOUNT_VALUE_SET);
                 isEdited = true;
             }
             return isEdited;
         } catch (ExpenseAmountException e) {
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
             return isEdited;
         } catch (NumberFormatException e) {
-            System.out.println(MSG_NUMBERS_ONLY_AMOUNT);
+            TextUi.showToUser(MSG_NUMBERS_ONLY_AMOUNT);
             return isEdited;
         }
     }
@@ -359,15 +363,15 @@ public class ExpenseTracker {
         try {
             String newDate = reformatDate(newValue);
             if (toBeEdited.getDate().equals(newValue)) {
-                System.out.println(SAME_NEW_DATE_VALUE);
+                TextUi.showToUser(SAME_NEW_DATE_VALUE);
             } else {
                 toBeEdited.setDate(newDate);
-                System.out.println(NEW_DATE_VALUE_SET);
+                TextUi.showToUser(NEW_DATE_VALUE_SET);
                 isEdited = true;
             }
             return isEdited;
         } catch (DateTimeParseException e) {
-            System.out.println(MSG_INCORRECT_DATE_FORMAT);
+            TextUi.showToUser(MSG_INCORRECT_DATE_FORMAT);
             return isEdited;
         }
     }
@@ -390,11 +394,12 @@ public class ExpenseTracker {
             boolean isFoundInRemarks = expenseRemark.contains(stringToFind);
             if (isFoundInDate || isFoundInCategory || isFoundInRemarks) {
                 isFound = true;
-                System.out.println(MSG_MATCHING_EXPENSES + expense);
+                TextUi.showToUser(MSG_MATCHING_EXPENSES + expense);
             }
         }
         if (!isFound) {
-            System.out.println(NO_TASKS_FOUND);
+
+            TextUi.showToUser(NO_TASKS_FOUND);
         }
     }
 
@@ -409,16 +414,16 @@ public class ExpenseTracker {
             index = parseDeleteExpense(rawInput);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_EMPTY_INDEX);
-            System.out.println(MSG_EMPTY_INDEX);
+            TextUi.showToUser(MSG_EMPTY_INDEX);
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
-            System.out.println(MSG_INVALID_INDEX_TYPE);
+            TextUi.showToUser(MSG_INVALID_INDEX_TYPE);
         }
         try {
             deleteExpense(expenseList, index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
-            System.out.println(MSG_ITEM_NOT_FOUND);
+            TextUi.showToUser(MSG_ITEM_NOT_FOUND);
         }
     }
 
@@ -436,23 +441,29 @@ public class ExpenseTracker {
                     newExpense[CATEGORY_INDEX], newExpense[REMARKS_INDEX]);
             addExpense(expenseList, expense, fromCommandLine);
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, LOG_EMPTY_FIELDS);
-            System.out.println(MSG_EMPTY_FIELDS);
+            logger.log(Level.WARNING, LOG_MISSING_PARAMETERS);
+            TextUi.showToUser(MSG_EMPTY_FIELDS);
         } catch (DateTimeParseException e) {
             logger.log(Level.WARNING, LOG_INCORRECT_DATE_FIELD);
-            System.out.println(MSG_INCORRECT_DATE_FORMAT);
+            TextUi.showToUser(MSG_INCORRECT_DATE_FORMAT);
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, LOG_INVALID_AMOUNT);
-            System.out.println(MSG_NUMBERS_ONLY_AMOUNT);
-        } catch (ExpenseAmountException | ExpenseMissingFieldException e) {
+            TextUi.showToUser(MSG_NUMBERS_ONLY_AMOUNT);
+        } catch (ExpenseAmountException e) {
             logger.log(Level.WARNING, LOG_NEGATIVE_AMOUNT);
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
+        } catch (ExpenseMissingFieldException e) {
+            logger.log(Level.WARNING, LOG_EMPTY_FIELD);
+            TextUi.showToUser(e.getMessage());
         } catch (ExpenseEmptyFieldException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, LOG_EMPTY_FIELD);
+            TextUi.showToUser(e.getMessage());
         } catch (ExpenseExtraFieldException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, LOG_EXTRA_FIELDS);
+            TextUi.showToUser(e.getMessage());
         } catch (ExpenseSurroundSlashSpaceException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, LOG_INVALID_SLASH);
+            TextUi.showToUser(e.getMessage());
         }
 
     }
@@ -477,7 +488,7 @@ public class ExpenseTracker {
             stringToFind = parseFindExpense(rawInput);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
-            System.out.println(MSG_NONEMPTY_KEYWORD);
+            TextUi.showToUser(MSG_NONEMPTY_KEYWORD);
         }
         findExpense(expenseList, stringToFind);
     }
@@ -492,17 +503,17 @@ public class ExpenseTracker {
         int index;
         int noOfItems = Expense.getNoOfItems();
         if (noOfItems == 0) {
-            System.out.println(MSG_EMPTY_LIST);
+            TextUi.showToUser(MSG_EMPTY_LIST);
         } else {
             try {
                 index = parseEditExpense(rawInput);
                 editExpense(expenseList, index, ui);
             } catch (IndexOutOfBoundsException e) {
                 logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
-                System.out.println(MSG_EMPTY_INDEX);
+                TextUi.showToUser(MSG_EMPTY_INDEX);
             } catch (NumberFormatException e) {
                 logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
-                System.out.println(MSG_INVALID_INDEX_TYPE);
+                TextUi.showToUser(MSG_INVALID_INDEX_TYPE);
             }
         }
     }
@@ -541,7 +552,7 @@ public class ExpenseTracker {
                 break;
             default:
                 logger.log(Level.WARNING, LOG_INVALID_COMMANDS);
-                System.out.println(MSG_INVALID_COMMANDS);
+                TextUi.showToUser(MSG_INVALID_COMMANDS);
             }
             rawInput = ui.getUserInput();
             keyWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX].trim();
