@@ -89,10 +89,10 @@ public class Family {
      */
     public void addPerson(int group, String name, Boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_PERSON_CALL_MESSAGE);
+        getList(group).addPerson(name);
         if (isSilent) {
             return;
         }
-        getList(group).addPerson(name);
         String generation = getGenerationName(group);
         printPersonAdded(name, generation);
     }
