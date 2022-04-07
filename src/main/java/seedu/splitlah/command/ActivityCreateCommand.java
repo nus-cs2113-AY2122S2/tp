@@ -219,13 +219,18 @@ public class ActivityCreateCommand extends Command {
             updateCostAndCostList();
             assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE;
+
             Profile profile = manager.getProfile();
             Session session = profile.getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
-            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
+            ArrayList<Person> involvedArrayList = session.getPersonListByName(involvedList);
             int activityId = profile.getNewActivityId();
-            addAllActivityCost(involvedPersonList, personPaid, activityId);
+
+            addAllActivityCost(involvedArrayList, personPaid, activityId);
+
+            PersonList involvedPersonList = new PersonList(involvedArrayList);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
+
             session.addActivity(activity);
             manager.saveProfile();
             ui.printlnMessage(COMMAND_SUCCESS + activity);

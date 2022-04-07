@@ -2,7 +2,6 @@ package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
@@ -18,8 +17,7 @@ public class SessionCreateCommandParser implements CommandParser<SessionCreateCo
     public static final String COMMAND_TEXT = "session /create";
 
     public static final String COMMAND_FORMAT =
-            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...] "
-                    + "[</gid [GROUP_ID]>]";
+            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] {/pl [NAME1 NAME2...] /gid [GROUP_ID]}";
 
     public static final String[] COMMAND_DELIMITERS = {
         ParserUtils.NAME_DELIMITER,
@@ -43,7 +41,7 @@ public class SessionCreateCommandParser implements CommandParser<SessionCreateCo
         boolean hasPersonListDelimiter = false;
         String [] parsedNames = null;
         try {
-            parsedNames = Parser.parsePersonList(commandArgs);
+            parsedNames = ParserUtils.parsePersonList(commandArgs);
             hasPersonListDelimiter = true;
         } catch (InvalidFormatException formatException) {
             if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
@@ -56,7 +54,7 @@ public class SessionCreateCommandParser implements CommandParser<SessionCreateCo
         boolean hasGroupIdDelimiter = false;
         int groupId = -1;
         try {
-            groupId = Parser.parseGroupId(commandArgs);
+            groupId = ParserUtils.parseGroupId(commandArgs);
             hasGroupIdDelimiter = true;
         } catch (InvalidFormatException formatException) {
             if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
@@ -74,8 +72,8 @@ public class SessionCreateCommandParser implements CommandParser<SessionCreateCo
         }
 
         try {
-            String parsedSessionName = Parser.parseName(commandArgs);
-            LocalDate parsedSessionDate = Parser.parseLocalDate(commandArgs);
+            String parsedSessionName = ParserUtils.parseName(commandArgs);
+            LocalDate parsedSessionDate = ParserUtils.parseLocalDate(commandArgs);
             return new SessionCreateCommand(parsedSessionName, parsedNames, parsedSessionDate, groupId);
         } catch (InvalidFormatException formatException) {
             String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
