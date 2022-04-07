@@ -40,7 +40,7 @@ public class WardStorage {
     }
 
     /**
-     * The function to save Nurse list.
+     * The function to save Ward list.
      * @param wards new ward
      * @throws IHospitalException IHospitalException
      */
@@ -66,7 +66,8 @@ public class WardStorage {
     }
 
     /**
-     * @return The nurseList of the IHospitalDoctors.txt
+     * The method is to load ward list.
+     * @return The wardList of the IHospitalWard.txt
      * @throws IHospitalException IHospitalException
      */
     //@@author DemonShaha
@@ -88,7 +89,7 @@ public class WardStorage {
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
-                String wardNumber= scanner.nextLine();
+                String wardNumber = scanner.nextLine();
                 Doctor doctor = new Doctor(id, name, phoneNumber, email, wardNumber);
                 id = scanner.nextLine();
                 name = scanner.nextLine();
@@ -101,8 +102,8 @@ public class WardStorage {
                 name = scanner.nextLine();
                 phoneNumber = scanner.nextLine();
                 email = scanner.nextLine();
-                String title=scanner.nextLine();
-                wardNumber=scanner.nextLine();
+                String title = scanner.nextLine();
+                wardNumber = scanner.nextLine();
                 Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
                 wardNumber = scanner.nextLine();
                 result.addWard(doctor, patient, nurse, wardNumber);

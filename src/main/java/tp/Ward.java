@@ -15,8 +15,8 @@ public class Ward {
     public Ward(Doctor doctor, Patient patient, Nurse nurse , String wardNumber) {
         this.doctor = doctor;
         this.patient = patient;
-        this.nurse=nurse;
-        this.wardNumber=wardNumber;
+        this.nurse = nurse;
+        this.wardNumber = wardNumber;
     }
 
     public Doctor getDoctor() {

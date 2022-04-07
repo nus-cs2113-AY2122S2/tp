@@ -80,7 +80,7 @@ public class DoctorStorage {
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
-                String wardNumber= scanner.nextLine();
+                String wardNumber = scanner.nextLine();
                 Doctor doctor = new Doctor(id, name, phoneNumber, email, wardNumber);
                 result.addDoctor(doctor);
             }

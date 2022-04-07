@@ -9,15 +9,15 @@ public class Doctor extends tp.person.Person {
     public Doctor(String id, String name, String phoneNumber, String email,String department, int wardNumber) {
         super(id, name, phoneNumber, email);
         isOnDuty = false;
-        assignedWard=true;
-        this.department=department;
-        this.wardNumber=wardNumber;
+        assignedWard = true;
+        this.department = department;
+        this.wardNumber = wardNumber;
     }
     public Doctor(String id, String name, String phoneNumber, String email,String department) {
         super(id, name, phoneNumber, email);
         isOnDuty = false;
-        assignedWard=false;
-        this.department=department;
+        assignedWard = false;
+        this.department = department;
     }
 
     public void markOnDuty() {

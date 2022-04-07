@@ -66,7 +66,8 @@ public class NurseStorage {
     }
 
     /**
-     * @return The nurseList of the IHospitalDoctors.txt
+     * The function to load Nurse list.
+     * @return The nurseList of the IHospitalNurses.txt
      * @throws IHospitalException IHospitalException
      */
     //@@author DemonShaha
@@ -88,8 +89,8 @@ public class NurseStorage {
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
-                String title=scanner.nextLine();
-                String wardNumber=scanner.nextLine();
+                String title = scanner.nextLine();
+                String wardNumber = scanner.nextLine();
                 Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
                 result.addNurse(nurse);
             }

@@ -1,6 +1,17 @@
 package tp.command;
 
-import tp.*;
+import tp.AppointmentList;
+import tp.AppointmentStorage;
+import tp.DoctorList;
+import tp.DoctorStorage;
+import tp.IHospitalException;
+import tp.NurseList;
+import tp.NurseStorage;
+import tp.PatientList;
+import tp.PatientStorage;
+import tp.Ui;
+import tp.WardList;
+import tp.WardStorage;
 import tp.person.Doctor;
 
 public class AddDoctorCommand extends Command {
@@ -14,12 +25,13 @@ public class AddDoctorCommand extends Command {
     public AddDoctorCommand() {
     }
 
-    public AddDoctorCommand(String id, String name, String phoneNumber, String email,String wardNumber, boolean isOnDuty) {
+    public AddDoctorCommand(String id, String name, String phoneNumber, String email,
+                            String wardNumber, boolean isOnDuty) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.wardNumber=wardNumber;
+        this.wardNumber = wardNumber;
         this.isOnDuty = isOnDuty;
     }
 
