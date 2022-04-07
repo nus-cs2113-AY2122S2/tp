@@ -34,11 +34,12 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 ### Documentation Contributions
 Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=froststein&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
 #### User Guide
-
+* Added documentation for `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand` and `SessionListCommand`
 
 #### Developer Guide
-
-### Miscellaneous Contributions
+* Added the introduction and a how to use section.
+* Added the application's architecture diagram and component interaction diagram to show how each internal component of the application works together.
+* Explained how the `Storage` Component works in the application [#403](https://github.com/AY2122S2-CS2113T-T10-1/tp/pull/403/files).
 
 #### Project Management
 
