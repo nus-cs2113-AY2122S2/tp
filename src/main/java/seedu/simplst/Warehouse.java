@@ -272,6 +272,12 @@ public class Warehouse {
         try {
             int orderID = Integer.parseInt(oid);
             Order order = findOrder(orderID);
+
+            if (order.getFulfilled()) {
+                System.out.printf("Order %d already completed\n", orderID);
+                return;
+            }
+
             ArrayList<Orderline> orderlines = order.getOrderlines();
             for (Orderline orderline:orderlines) {
                 Good good = goodList.get(orderline.getSku());

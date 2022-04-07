@@ -8,4 +8,5 @@ list g/
 fulfill oid/1
 list o/
 list g/
+fulfill oid/1
 bye
