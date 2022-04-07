@@ -417,7 +417,7 @@ an `InvalidScheduleException` will be thrown.
 For `commandAction` such as `/update`, `/clear` and `/clearall`, the method that was called to perform such commands will
 modify the application's schedule list. Hence, appropriate methods in the `FileManager` will be called to manage the data 
 and save them to the local file, `schedule.txt`. For more information on `FileManager` class, you can refer to this 
-[section](#file-management).
+[section](#how-data-is-written-or-updated-to-a-resource-file).
 
 Furthermore, when methods such as `DayList#updateDay()` and `DayList#clearAllSchedule` are being successfully executed, 
 for the former method `UI#printNewScheduleCreatedMessage(Day newDay)` method will be called to display a message 
@@ -1364,7 +1364,8 @@ Monday -- arms
 ----------------------------------------------------------------------
 ```
 (Step 6) Lastly, before the `ScheduleCommand` object is discarded, the `FileManager#rewriteAllDaysScheduleToFile(dayList)`
-is called to rewrite the `schedule.txt` file according to the newly modified application's day list.
+is called to rewrite the `schedule.txt` file according to the newly modified application's day list. For more information
+on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
 
 This completes the process of scheduling a plan for a particular day in WerkIt!
 
@@ -1498,7 +1499,9 @@ Plan had been cleared for Monday.
 ```
 
 (Step 13) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
-in the dayList into `schedule.txt` which is stored on the user's local filesystem.
+in the dayList into `schedule.txt` which is stored on the user's local filesystem. For more information
+on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
+
 
 This completes the process of clearing a plan on a particular day of the schedule on WerkIt!
 
@@ -1550,7 +1553,9 @@ schedule /update <day number [1-7]> <plan number>
 (Step 7) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
 in the dayList into `schedule.txt` which is stored on the user's local filesystem. 
 Since all Day objects are deleted, the writing of data into `schedule.txt` would be an equivalent of 
-resetting the text file. 
+resetting the text file. For more information on the file management, 
+refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
+
 
 This completes the process of clearing of all plans stored in the schedule on WerkIt!
 
