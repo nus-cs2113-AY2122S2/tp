@@ -41,10 +41,10 @@ The following sequence diagram shows how the `add` operation generally works.
 
 This is a condensed diagram. Several terms in the sequence diagram above have been substituted by a common term.
 
-Common Term | User-specific term | Lesson-specific term | Meeting-specific term      |
-------------|-------------------|----------------------|----------------------------|        
-add | `"add_user ..."`  | `"add_lesson ..."`   | `"add_meeting ..."`     
-AddCommand | `AddUserCommand`  | `AddLessonCommand`   | `AddMeetingCommand`  
+| Common Term | User-specific term | Lesson-specific term | Meeting-specific term      |
+|-------------|-------------------|----------------------|----------------------------|
+| add         | `"add_user ..."`  | `"add_lesson ..."`   | `"add_meeting ..."`|
+| AddCommand  | `AddUserCommand`  | `AddLessonCommand`   | `AddMeetingCommand`|
 
 
 ## 3.1.1 Add User Feature
