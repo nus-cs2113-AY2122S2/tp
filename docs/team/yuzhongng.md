@@ -56,10 +56,15 @@ complete the activities with the use of the study session.
     - Documentation related to showing of monthly Timetable schedule.  
   
   - **Contribution to team-based tasks**
+    - Refractor Parser Class
+    - Refractor Timetable Class.
 
 #### Review/mentoring contributions
+- Leave comments and improvement PR [#37](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/37)
 
 #### Contributions beyond the project team
+Review another team application during PE dry run.
+[link](https://github.com/yuzhongng/ped/issues)
 
 
 
