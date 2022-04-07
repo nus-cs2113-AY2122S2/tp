@@ -89,7 +89,7 @@ public class ShowCommand extends Command {
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "month":
-            ui.showToUser("Here is your schedule for the Month:");
+            ui.showToUser("Here is your schedule for the current Month:");
             Timetable.showMonthlySchedule(taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
