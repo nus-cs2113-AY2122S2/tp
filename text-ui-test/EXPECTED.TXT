@@ -288,7 +288,7 @@ Please enter the code for your module
 Please enter the day of your module
 Please enter the time of your module's class
 Please ensure that your input follows the form:
-add m/CS2113 c/lec d/Thursday t/2pm-4pm
+add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm
 Okay, I have added a new module to the schedule
 [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
 Here are the modules in your schedule:

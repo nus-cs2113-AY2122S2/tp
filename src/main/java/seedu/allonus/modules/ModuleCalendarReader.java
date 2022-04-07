@@ -19,14 +19,20 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Reads a .ics file from nusmods.com which represents an NUS student's academic schedule.
+ * Parses the module parameters from this file for each module and creates a module list.
+ */
 public class ModuleCalendarReader {
+    static String icsFilePath;
+
+    //Constant messages and strings
     private static final String LOGGER_IDENTIFIER = "mylogger";
     private static final String FILE_NOT_FOUND_MESSAGE = "No such file found! Please ensure you have the correct name."
             + "\nThen place the file in the same directory as AllOnUs.jar.";
@@ -59,18 +65,28 @@ public class ModuleCalendarReader {
     private static final String SATURDAY = "Saturday";
     private static final String MODULE_CATEGORY_EXAM = "Exam";
     public static final String UTC_TIMEZONE_KEYWORD = "UTC";
+
     private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
     public static final String PROJECT_PATH = System.getProperty("user.dir");
+    private static final TimeZone UTC_TIME_ZONE = TimeZone.getTimeZone(UTC_TIMEZONE_KEYWORD);
+    private static final ZoneId SG_ZONE_ID = ZoneId.of(SINGAPORE_TIMEZONE_KEYWORD);
+    private static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern(TIME_FORMAT_WITH_AMPM)
+            .toFormatter();
+    private static final CalendarBuilder  builder = new CalendarBuilder();
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat(ICS_DATE_FORMAT);
 
-    static String icsFilePath;
 
+    /**
+     * Reads a .ics file based on a given filename.
+     * @param fileName Name of the .ics file from nusmods.com that contains NUS module details.
+     * @return modulesList that contains the modules parsed from .ics file or null if there was a parse error
+     */
     public ArrayList<Module> readIcsFile(String fileName) {
         logger.setLevel(Level.WARNING);
         String directoryPath = PROJECT_PATH + File.separator + fileName;
-        // File icsFile = new File(fileName);
         File icsFile = new File(directoryPath);
         if (icsFile.isFile()) {
-            // icsFilePath = fileName;
             icsFilePath = directoryPath;
             return parseIcsCalendar();
         } else {
@@ -80,81 +96,83 @@ public class ModuleCalendarReader {
         }
     }
 
+    //Class level variables used by multiple functions
     ArrayList<Module> modulesList = new ArrayList<>();
     String moduleCode = "";
     String moduleCategory = "";
     String moduleDay = "";
     String moduleTime;
-    String[] summary;
-    StringBuilder timeSlot;
     Date dateStart = null;
-    Date dateEnd;
-    CalendarBuilder builder;
-    SimpleDateFormat dateFormat;
-    SimpleDateFormat timeFormat;
-    Calendar calendar;
-    TimeZone sgTimeZone = TimeZone.getTimeZone(SINGAPORE_TIMEZONE_KEYWORD);
-    TimeZone utcTimeZone = TimeZone.getTimeZone(UTC_TIMEZONE_KEYWORD);
-    ZoneId sgZoneId = ZoneId.of(SINGAPORE_TIMEZONE_KEYWORD);
-    DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-            .appendPattern("h:mm a")
-            .toFormatter();
 
+
+    /**
+     * Parses the .ics file based on icsFileName
+     * @return modulesList that contains the modules parsed from the .ics file.
+     */
     public ArrayList<Module> parseIcsCalendar() {
         try {
             logger.setLevel(Level.WARNING);
-            builder = new CalendarBuilder();
-            dateFormat = new SimpleDateFormat(ICS_DATE_FORMAT);
-
-            // initially the data comes in utc timezone, we would later be converting it to sg timezone
-            dateFormat.setTimeZone(utcTimeZone);
-            final UnfoldingReader unfoldingReader = new UnfoldingReader(new FileReader(icsFilePath), true);
-
-
-            calendar = builder.build(unfoldingReader);
-
-            for (final Object componentObject : calendar.getComponents()) {
-                Component calendarComponent = (Component)componentObject;
-                timeSlot = new StringBuilder();
-                // read through the components of ics file and only take the necessary properties
-                for (final Object propertyObject : calendarComponent.getProperties()) {
-                    Property property = (Property)propertyObject;
-                    switch (property.getName()) {
-                    case ICS_COMPONENT_SUMMARY:
-                        getModuleSummary(property);
-                        break;
-                    case ICS_COMPONENT_START_DATE:
-                        getModuleStartTime(property);
-                        break;
-                    case ICS_COMPONENT_END_DATE:
-                        getModuleEndTime(property);
-                        break;
-                    default:
-                        continue;
-                    }
-                }
-                moduleTime = timeSlot.toString().toLowerCase();
-                getExamDate();
-                standardizeModuleCategory();
-                modulesList.add(new Module(moduleCode,moduleCategory,moduleDay,moduleTime));
-
-            }
+            // Initially the data comes in utc timezone, we would later be converting it to sg timezone
+            dateFormat.setTimeZone(UTC_TIME_ZONE);
+            iterateThroughCalendar();
             System.out.println(PARSE_SUCCESS_MESSAGE);
             listIcsModules();
 
         } catch (ParseException | ParserException e) {
-            if (!icsFilePath.contains(ICS_FILE_FORMAT)) {
-                System.out.println(NOT_ICS_ERROR_MESSAGE);
-                System.out.println(CHECK_DIRECTORY_ERROR_MESSAGE);
-            } else {
-                System.out.println(PARSE_FAILURE_MESSAGE);
-            }
+            handleParseException();
         } catch (FileNotFoundException e) {
             System.out.printf(FILE_NOT_FOUND_ERROR, icsFilePath);
         } catch (IOException e) {
             System.out.println(PARSE_FAILURE_MESSAGE);
         }
         return modulesList;
+    }
+
+    private void iterateThroughCalendar() throws IOException, ParserException, ParseException {
+        final UnfoldingReader unfoldingReader = new UnfoldingReader(new FileReader(icsFilePath), true);
+        Calendar calendar = builder.build(unfoldingReader);
+
+        for (final Object componentObject : calendar.getComponents()) {
+            Component calendarComponent = (Component)componentObject;
+            StringBuilder timeSlot = new StringBuilder();
+            iterateEachCalendarComponent(calendarComponent, timeSlot);
+            moduleTime = timeSlot.toString().toLowerCase();
+            getExamDate();
+            standardizeModuleCategory();
+            modulesList.add(new Module(moduleCode,moduleCategory,moduleDay,moduleTime));
+
+        }
+    }
+
+    private void iterateEachCalendarComponent(Component calendarComponent, StringBuilder timeSlot)
+            throws ParseException {
+        // Iterates through all the components of ics file and only take the necessary properties
+        for (final Object propertyObject : calendarComponent.getProperties()) {
+            Property property = (Property)propertyObject;
+            switch (property.getName()) {
+            case ICS_COMPONENT_SUMMARY:
+                getModuleSummary(property);
+                break;
+            case ICS_COMPONENT_START_DATE:
+                getModuleStartTime(property, timeSlot);
+                break;
+            case ICS_COMPONENT_END_DATE:
+                getModuleEndTime(property, timeSlot);
+                break;
+            default:
+                continue;
+            }
+        }
+    }
+
+
+    private void handleParseException() {
+        if (!icsFilePath.contains(ICS_FILE_FORMAT)) {
+            System.out.println(NOT_ICS_ERROR_MESSAGE);
+            System.out.println(CHECK_DIRECTORY_ERROR_MESSAGE);
+        } else {
+            System.out.println(PARSE_FAILURE_MESSAGE);
+        }
     }
 
     private void listIcsModules() {
@@ -173,32 +191,26 @@ public class ModuleCalendarReader {
 
     private void getExamDate() {
         if (moduleCategory.startsWith(MODULE_CATEGORY_EXAM)) {
-            //If category = exam then we also add the exam date to the module day.
+            //If category = exam then change the module day to include the exam date instead
             assert (dateStart != null) : DATE_WAS_NULL_MESSAGE;
-            // moduleDay += "," + new SimpleDateFormat(STANDARD_DATE_FORMAT).format(dateStart);
             moduleDay = new SimpleDateFormat(STANDARD_DATE_FORMAT).format(dateStart);
         }
     }
 
-    private void getModuleEndTime(Property property) throws ParseException {
+    private void getModuleEndTime(Property property, StringBuilder timeSlot) throws ParseException {
         String endTime = property.getValue();
-        dateEnd = dateFormat.parse(endTime);
+        Date dateEnd = dateFormat.parse(endTime);
         Instant instant = dateEnd.toInstant();
-        ZonedDateTime zonedDateEnd = instant.atZone(sgZoneId);
-        // timeFormat = new SimpleDateFormat(TIME_FORMAT_WITH_AMPM);
-        // timeFormat.setTimeZone(sgTimeZone);
-
-        timeSlot.append("-" +  zonedDateEnd.format(formatter));
+        ZonedDateTime zonedDateEnd = instant.atZone(SG_ZONE_ID);
+        timeSlot.append("-" +  zonedDateEnd.format(TIME_FORMATTER));
     }
 
-    private void getModuleStartTime(Property property) throws ParseException {
+    private void getModuleStartTime(Property property, StringBuilder timeSlot) throws ParseException {
         String startTime = property.getValue();
         dateStart = dateFormat.parse(startTime);
         Instant instant = dateStart.toInstant();
-        ZonedDateTime zonedDateStart = instant.atZone(sgZoneId);
-        //        timeFormat = new SimpleDateFormat(TIME_FORMAT_WITH_AMPM);
-        //        timeFormat.setTimeZone(sgTimeZone);
-        timeSlot.append(zonedDateStart.format(formatter));
+        ZonedDateTime zonedDateStart = instant.atZone(SG_ZONE_ID);
+        timeSlot.append(zonedDateStart.format(TIME_FORMATTER));
 
         java.util.Calendar calendarNew = java.util.Calendar.getInstance();
         calendarNew.setTime(dateStart);
@@ -207,10 +219,9 @@ public class ModuleCalendarReader {
     }
 
     private void getModuleSummary(Property property) {
-        summary = property.getValue().split(" ",2);
+        String[] summary = property.getValue().split(" ",2);
         moduleCode = summary[0];
         moduleCategory = summary[1];
-        // System.out.printf("Module code: %s \nModule Category: %s\n",summary[0],summary[1]);
     }
 
 
