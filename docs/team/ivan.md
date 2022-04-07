@@ -43,10 +43,8 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 * Made the first round of edits to the User Guide to ensure that feedbacks from the PE Dry Run were well acknowledged.
 
 #### Developer Guide
-- Activity Create
-- Activity Delete
-- Group View
-- Group List
+* Added the sequence diagrams and workflow for `ActivityCreateCommand`, `ActivityDeleteCommand`, `GroupViewCommand` and `GroupListCommand`.
+* Assisted in ensuring that diagrams were correct and followed the logic of the application.
 
 ### Miscellaneous Contributions
 
