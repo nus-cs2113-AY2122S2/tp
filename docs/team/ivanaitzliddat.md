@@ -37,7 +37,7 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 
 #### User Guide
 * Added documentation for `ActivityCreateCommand`, `ActivityDeleteCommand`, `GroupViewCommand` and `GroupListCommand`.
-* Made the first round of edits to the User Guide to ensure that feedbacks from the PE Dry Run were well acknowledged.
+* Made the first round of edits to the User Guide to ensure that feedbacks from the PE Dry Run were well acknowledged. [#391](https://github.com/AY2122S2-CS2113T-T10-1/tp/pull/391/files)
 
 #### Developer Guide
 * Added the sequence diagrams and workflow for `ActivityCreateCommand`, `ActivityDeleteCommand`, `GroupViewCommand` and `GroupListCommand`.
