@@ -139,7 +139,7 @@ public class TimetablePrinting {
                         colOne, TimetableLogic.calcOffset(colOne.equals("Task Number"))));
         String taskMarkStatusColumnBackWhiteSpace = ui.getRepeatedCharacters(WHITESPACE,
                 TimetableLogic.calculateColBackWhiteSpace(TASK_MARK_STATUS_SPACE_LENGTH,
-                        colTwo, TimetableLogic.calcOffset(colTwo.equals(WHITESPACE) || colTwo.equals("X"))));
+                        colTwo, TimetableLogic.calcOffset(!colTwo.equals(WHITESPACE) && !colTwo.equals("X"))));
         String taskDescriptionColumnBackWhiteSpace = ui.getRepeatedCharacters(WHITESPACE,
                 TimetableLogic.calculateColBackWhiteSpace(taskDescriptionLength,
                         colThree, WHITE_SPACE_FRONT_OFFSET_LENGTH_ONE));
