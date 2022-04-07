@@ -1962,16 +1962,15 @@ This section includes instructions to test WerkIt! manually.
 <br/>
 <span class = "info box">:memo: These test instructions covers the basic testing of the WerkIt! features. 
 Testers are expected to do more testing.
-</span> 
-<br/>
+</span>
 
 ### Launch and shutdown
 #### Initial Launch
 1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases/tag/Jar-V2.0) and copy it into an empty folder.
 2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
 `WerkIt.jar` file.
-3. On your terminal, type the command `java -jar WerkIt.jar` to launch WerkIt!
-4. WerkIt! will display a welcome message and file loading-related messages.
+3. On your terminal, type the command `java -jar WerkIt.jar` to launch WerkIt!.
+4. Upon successful launch, WerkIt! will display a welcome message and also file loading-related messages on the terminal.
 
 #### Shutdown
 1. Enter the `exit` command to exit WerkIt!
@@ -1988,13 +1987,13 @@ Testers are expected to do more testing.
 workout(s) before an existing workout can be deleted. 
 See [this section](#creating-a-new-workout) to view how you can populate your workout list. 
 2. User can enter `workout /list` to see the workout list before the deletion occurs. This is for comparison purposes.
-3. Test case: `workout /delete 1`<br/>
+3. Test case: `workout /delete 1`<br/><br/>
 Expected: The first workout is deleted from the workout list. Details of the deleted workout will be shown 
-to the terminal.<br/>
+to the terminal.<br/><br/>
 Addition: If you have any existing plans containing the deleted workout, that plan
 will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list
 if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are
-affected by the deletion of this workout will display their delete messages accordingly.
+affected by the deletion of this workout will display their delete messages accordingly.<br/><br/>
 4. Other incorrect commands to try:<br/>
    a. `workout /delete` (Missing workout index to delete)<br/>
    b. `workout /delete 0` (Index 0 is invalid) <br/>
@@ -2006,9 +2005,9 @@ affected by the deletion of this workout will display their delete messages acco
 #### Creating A New Plan 
 1. Prerequisites: The workout list should be populated before a new plan can be created as
 plans contains workout(s). See [this section](#creating-a-new-workout) to view how you can populate your workout list.
-2. Test case: `plan /new first plan /workouts 1,1,1`<br/>
+2. Test case: `plan /new first plan /workouts 1,1,1`<br/><br/>
 Expected: A new plan called "first plan" will be created. This plan contains 3 instances of 
-workout with index 1 in the workout list.
+workout with index 1 in the workout list.<br/><br/>
 3. Other incorrect commands to try:<br/>
    a. `plan /new` (Missing plan name and workouts) <br/>
    b. `plan /new [plan name]` (Missing workouts)<br/>
@@ -2021,10 +2020,10 @@ workout with index 1 in the workout list.
    i. `plan /new [plan name] /workouts [11 ones separated by comma]` (A plan cannot contain more than 10 workouts)
 
 #### Listing All Plans
-1. Test case: `plan /list` <br/>
+1. Test case: `plan /list` <br/><br/>
 Expected: If plan list is empty, the terminal will display to the user that the plan list is empty.
-Else, all plan names will be listed to the user.
-2. Test case `plan /list ab`<br/>
+Else, all plan names will be listed to the user.<br/><br/>
+2. Test case `plan /list ab`<br/><br/>
 Expected: Nothing is listed because no additional arguments should be supplied for this method
 
 #### Listing Workouts In A Plan
