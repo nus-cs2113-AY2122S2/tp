@@ -11,7 +11,7 @@ class MatchKeywordsTest {
 
     @Test
     void getGroupValues() throws MissingFlagException, EmptyFieldException {
-        String regex = "(?<flag>[og])/ oid/(?<oid>\\d*) sku/(?<sku>\\d*) r/(?<r>.*) a/(?<address>.*)";
+        String regex = "(?<flag>[og])/ oid/(?<oid>\\d*) sku/(?<sku>.*) r/(?<recv>.*) addr/(?<addr>.*)";
         String test1 = "add o/ oid/12 sku/156 r/receiver a/address";
         MatchKeywords matchKeywords1 = new MatchKeywords(test1, regex);
         HashMap<String, String> matches = matchKeywords1.getGroupValues();
@@ -21,8 +21,8 @@ class MatchKeywordsTest {
         assertEquals("o", matches.get("flag"));
         assertEquals("12", matches.get("oid"));
         assertEquals("156", matches.get("sku"));
-        assertEquals("receiver", matches.get("r"));
-        assertEquals("address", matches.get("address"));
+        assertEquals("receiver", matches.get("recv"));
+        assertEquals("address", matches.get("addr"));
 
 
         String regex2 = "(?<flag>[og])/ oid/(?<oid>\\d*)";
