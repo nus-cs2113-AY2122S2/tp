@@ -1,7 +1,7 @@
 # PlanITarium Developer Guide
 
 This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
-workings of PlanITarium such that engineers can understand the various design and implementations in detail.
+workings of PlanITarium such that developers can understand the various design and implementations in detail.
 
 ---
 
@@ -19,9 +19,7 @@ workings of PlanITarium such that engineers can understand the various design an
 * [Implementation](#implementation)
   * [Command Execution](#command-execution)
   * [Logical Grouping of Persons Added](#logical-grouping-of-persons-added)
-  * [Edit Command](#edit-values-feature)
   * [Find Command](#find-feature)
-  * [[Proposed] Listing Categorised Expenditures](#proposed-listing-categorised-expenditures-feature)
   * [Data Archiving](#data-archiving)
 * [Documentation](#documentation)
   * [Logging](#logging)
@@ -70,7 +68,7 @@ is responsible for,
 
 [`Commands`](#Commands-Component) is responsible for the handling and executing of commands.
 
-[`Parser`](#Parser-Component) is responsible for the parsing and validating user input.
+[`Parser`](#Parser-Component) is responsible for the parsing and validating of user input.
 
 [`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
 
@@ -80,17 +78,17 @@ is responsible for,
 
 **How the components interact with each other**
 
-The following Sequence Diagram, with the specific classes and methods abstracted, shows a high-level view on how the 
-components interact for the scenario where the user types `add /g 2 /n Alice`.
+The following Sequence Diagram shows a high-level view on how the components interact when the user enters the command
+`add /g 2 /n Alice`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 > :information_source: **Note:** The lifeline for `AddPersonCommand` ends at the destroy marker :x:
-> but due to the limiations of PlantUML, the lifeline eraches the end of the diagram.
+> but due to the limitations of PlantUML, the lifeline reaches the end of the diagram.
 
-Each of the main components shown in the diagram above is defined and implemented in a class with the same name as its
-component. The section below provides a more in-depth details on how the components interact with one another.
+Each of the components are defined and implemented as a class with the same name. The section below provides 
+more in-depth details on how the components interact with one another.
 
-Each component may have several other classes underneath it, belonging to the same logical grouping, to reduce coupling.
+Each component may have several other classes underneath it, belonging to the same logical grouping.
 For example, the `Money` component is defined as an abstract class that is extended by `Income` and `Expenditure`.
 
 ### UI Component
@@ -205,36 +203,14 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 ![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
 
 > :information_source: **Note:** The following are the ranges of index deemed valid:
-<table>
-    <thead>
-        <tr>
-            <th>Index</th>
-            <th>Range</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Group</td>
-            <td>[1, ..., 3]</td>
-        </tr>
-        <tr>
-            <td>User</td>
-            <td>[1, ..., MAX_UID], where MAX_UID is the number of people in the given group</td>
-        </tr>
-        <tr>
-            <td>Category</td>
-            <td>[1, ..., 6]</td>
-        </tr>
-        <tr>
-            <td>Income</td>
-            <td>[1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person</td>
-        </tr>
-        <tr>
-            <td>Expenditure</td>
-            <td>[1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person</td>
-        </tr>
-    </tbody>
-</table>
+
+| Index       | Range                                                                              |
+|-------------|------------------------------------------------------------------------------------|
+| Group       | [1, ..., 3]                                                                        |
+| User        | [1, ..., MAX_UID], where MAX_UID is the number of people in the given group        |
+| Category    | [1, ..., 6]                                                                        |
+| Income      | [1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person |
+| Expenditure | [1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person |
 
 ### Family Component
 
