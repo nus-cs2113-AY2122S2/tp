@@ -1,6 +1,9 @@
 @startuml
+'https://plantuml.com/sequence-diagram
 skinparam groupInheritance 2
 skinparam classFontSize 15
+skinparam arrowColor #Black
+skinparam classBorderColor #Black
 hide circle
 hide empty methods
 hide empty attribute
@@ -26,7 +29,7 @@ PlanList <-u- SearchCommand
 }
 
 Parser-.>Command:creates >
-WerkIt-r.>Command: execute >
+WerkIt-r.>Command: executes >
 
 class "{abstract}\nCommand" as Command #LightSkyBlue {
 }

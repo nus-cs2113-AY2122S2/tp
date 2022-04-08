@@ -234,7 +234,7 @@ The logic component is mainly responsible for executing the command.
 In addition, the respective commands will operate on the appropriate data
 structure objects to create, manipulate and delete data based on the user's requests.
 
-Below is a class diagram of the `Logic` component:
+Below is a class diagram of the `Logic` component:<br/><br/>
 ![LogicUML](uml/classDiagrams/images/logicComponent.png)
 <span class="box info">:memo: This is a high-level overview of the `Logic` component, thus,
 other components have been omitted from the diagram above.</span>
@@ -242,7 +242,7 @@ other components have been omitted from the diagram above.</span>
 The `Logic` component consists of:
 - **`Command` abstract class**. The `ExerciseCommand`, `SearchCommand`, `WorkoutCommand`, `ScheduleCommand`,
 `PlanCommand`, `HelpCommand` and `ExitCommand` extends the `Command` class. These classes
-identify the command action type supplied by the user and also executes the command.
+identify the command action (i.e. create, update, delete and list) supplied by the user and also executes the command.
 The source of these classes can be found [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/tree/master/src/main/java/commands).
 - **`[command name]List` classes**. It includes `ExerciseList`,
 `WorkoutList`,`PlanList` and `DayList`. These classes hold the methods
@@ -259,7 +259,8 @@ How the `Logic` component works:
 3. This subclass-of-`Command` object is executed by the `WerkIt` class, which calls the `execute()` method of that subclass-of-`Command` object.
 4. Depending on the command action (e.g. create/delete/update/list), the `execute()` method will identify and perform the appropriate actions.
 
-<br>
+<br/>
+
 Illustration of the interactions within the `Logic` component can be found
 in the sequence diagram below. The example given is for the creation of new workouts (`workout /new`):
 <br><br>
