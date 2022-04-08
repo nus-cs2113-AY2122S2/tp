@@ -197,7 +197,8 @@ public class StudyManagerTest {
         outContent.reset();
         String module = "[Module] GEH1049 Tutorial: Sunday, 11:00am-9:00pm";
         String outputMessage = "You have entered an invalid day of the week" + System.lineSeparator()
-                + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY" + System.lineSeparator();
+                + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY"
+                + System.lineSeparator();
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleDay(moduleToEdit, "Anyday");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
@@ -205,7 +206,8 @@ public class StudyManagerTest {
 
         outContent.reset();
         outputMessage = "You have entered an invalid date" + System.lineSeparator()
-                + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY" + System.lineSeparator();
+                + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY"
+                + System.lineSeparator();
         studyManager.editModuleDay(moduleToEdit, "1234556");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
         assertEquals(outputMessage, outContent.toString());
@@ -217,7 +219,8 @@ public class StudyManagerTest {
                 "Friday", "4:00pm-6:00pm");
 
         outContent.reset();
-        String outputMessage = "Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm" + System.lineSeparator();
+        String outputMessage = "Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm"
+                + System.lineSeparator();
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleTime(moduleToEdit, "2pm-4pm");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
