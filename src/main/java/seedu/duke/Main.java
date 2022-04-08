@@ -1,19 +1,12 @@
 package seedu.duke;
 
-import java.io.File;
-import java.util.ArrayList;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
-import seedu.duke.data.Module;
-import seedu.duke.data.Task;
-import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.parsers.ModHappyParser;
-import seedu.duke.storage.ConfigurationStorage;
-import seedu.duke.storage.ModuleListStorage;
+import seedu.duke.storage.ModHappyStorageManager;
 import seedu.duke.storage.Storage;
-import seedu.duke.storage.TaskListStorage;
 import seedu.duke.data.ModuleList;
 import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
@@ -24,13 +17,7 @@ public class Main {
     private final String modulePath = StringConstants.MODULE_PATH;
     private final String taskPath = StringConstants.TASK_PATH;
     private final String configurationPath = StringConstants.CONFIGURATION_PATH;
-    private final String moduleLoadErrorMessage = StringConstants.MODULE_DATA_LOAD_FAILED;
-    private final String moduleLoadSuccessMessage = StringConstants.MODULE_DATA_LOAD_SUCCESS;
-    private final String taskLoadErrorMessage = StringConstants.TASK_DATA_LOAD_FAILED;
-    private final String taskLoadSuccessMessage = StringConstants.TASK_DATA_LOAD_SUCCESS;
-    private final String configurationLoadSuccessMessage = StringConstants.CONFIGURATION_DATA_LOAD_SUCCESS;
-    private final String configurationLoadErrorMessage = StringConstants.CONFIGURATION_DATA_LOAD_FAILED;
-    private final String noConfigFileMessage = StringConstants.NO_CONFIG_DATA_FILE;
+
 
     private ModHappyParser modHappyParser;
     private ModuleList moduleList;
@@ -74,42 +61,9 @@ public class Main {
      * If a data file is not found or contains invalid data, the file will be treated as blank instead.
      */
     private void loadDataFromFile() {
-        File moduleDataFile = new File(modulePath);
-        if (moduleDataFile.exists()) {
-            modHappyStorage = new ModuleListStorage();
-            try {
-                moduleList.setModuleList((ArrayList<Module>) modHappyStorage.loadData(modulePath));
-                TextUi.showUnformattedMessage(moduleLoadSuccessMessage);
-            } catch (ModHappyException e) {
-                TextUi.showUnformattedMessage(e);
-                TextUi.showUnformattedMessage(moduleLoadErrorMessage);
-            }
-        }
-        File taskDataFile = new File(taskPath);
-        if (taskDataFile.exists()) {
-            modHappyStorage = new TaskListStorage();
-            try {
-                moduleList.initialiseGeneralTasksFromTaskList((ArrayList<Task>) modHappyStorage.loadData(taskPath));
-                TextUi.showUnformattedMessage(taskLoadSuccessMessage);
-            } catch (ModHappyException e) {
-                TextUi.showUnformattedMessage(e);
-                TextUi.showUnformattedMessage(taskLoadErrorMessage);
-            }
-        }
-        File configurationDataFile = new File(configurationPath);
-        if (configurationDataFile.exists()) {
-            modHappyStorage = new ConfigurationStorage();
-            try {
-                configuration = (Configuration) modHappyStorage.loadData(configurationPath);
-                TextUi.showUnformattedMessage(configurationLoadSuccessMessage);
-            } catch (ModHappyException e) {
-                TextUi.showUnformattedMessage(e);
-                TextUi.showUnformattedMessage(configurationLoadErrorMessage);
-            }
-        } else {
-            configuration = new Configuration();
-            TextUi.showUnformattedMessage(noConfigFileMessage);
-        }
+        ModHappyStorageManager.loadTaskList(moduleList,taskPath);
+        ModHappyStorageManager.loadModuleList(moduleList, modulePath);
+        configuration = ModHappyStorageManager.loadConfiguration(configurationPath);
     }
 
     /**

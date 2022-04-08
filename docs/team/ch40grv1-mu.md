@@ -21,14 +21,13 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
 
 - **New features:**
     - Added the ability to save, which will save the state of the program(modules, tasks, user options) and significant enhance the usability of the app, because it enables users to access the data across multiple usage sessions. [#91](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/91)
-    - Partially implemented the loading of serialised user data from storage. [#91](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/91)
-        - I handled the serialisation and deserialization functions, while instantiation of the relevant data objects in the program based on the data loaded were written by a teammate.
+
+    - Partially implemented the loading of serialised user data from storage. [#91](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/91). I handled the serialisation and deserialization functions, while instantiation of the relevant data objects in the program based on the data loaded were written by a teammate.
     - Added the ability to check and set customized options (e.g.always hide completed tasks). This feature enhances the usability of the app and is an extendable skeleton for user model in MVC. [#102](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/102)
     - Wrote `ExitCommand` that will execute pre-ending operations and end the process.  [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
 
 - **Enhancements:**
-    - Significantly refactoring the estimated time feature of tasks. I made `Duration`, which accepted flexible format of string representing time duration from users, store the task duration as a `java.time.Duration` and display the time in unified format. [#124](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/124)
-        - The updated implementation of this feature significant enhance the linguistic and logical meaning of "time" in the app and make it possible for the future features (e.g.sorting by time).
+    - Significantly refactoring the estimated time feature of tasks. I made `Duration`, which accepted flexible format of string representing time duration from users, store the task duration as a `java.time.Duration` and display the time in unified format. [#124](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/124). The updated implementation of this feature significant enhance the linguistic and logical meaning of "time" in the app and make it possible for the future features (e.g.sorting by time).
     - Contributed the majority of test cases for `TaskDuration`,`Parser`,`OptionParser` and class of storages. [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
 
 
@@ -37,6 +36,9 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
         - Added supported system explaining the operating systems that the app are well tested on. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added expected output to all sample input and keep the output of the user guide updated when the app is updated. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added sample input in the command summary. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
+
+      
+    - Developer guide:
         - Added section explaining the format and usage of estimated time. [#118](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/118)
         - Added explanation of the overview of the app and created the relevant class diagrams within that section. [#99](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/99),  [#109](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/109)
         - Added explanations of the parsers and created the relevant class diagrams within that section.  [#109](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/109), [#118](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/118)
