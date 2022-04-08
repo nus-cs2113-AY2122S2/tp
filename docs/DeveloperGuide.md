@@ -520,7 +520,7 @@ the `<keywords>` is not specified, it will be deemed as searching for whitespace
   * [Storage Format for Each Resource File](#storage-format-for-each-resource-file)
   * [Loading Resource File Data Into WerkIt!](#loading-resource-file-data-into-werkit)
   * [Writing a New Line of Data to the Resource File](#writing-a-new-line-of-data-to-the-resource-file)
-  * [Rewriting the Resource Entire File With the Most Recent Set of Data](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data)
+  * [Rewriting the Resource Entire File With the Most Recent Set of Data](#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data)
   * [About the `LogHandler` Class](#about-the-loghandler-class)
   * [Design Considerations](#design-considerations-for-file-management)
 
@@ -1410,7 +1410,7 @@ Monday -- arms
 ```
 **(Step 6)** Lastly, before the `ScheduleCommand` object is marked for disposal, the `FileManager#rewriteAllDaysScheduleToFile()`
 is called to rewrite the `schedule.txt` file according to the newly modified application's day list. For more information
-on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
+on the file management, refer to this [section](#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
 
 This completes the process of scheduling a plan for a particular day in WerkIt!.
 
@@ -1544,7 +1544,7 @@ Plan had been cleared for Monday.
 
 **(Step 13)** `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
 in the `dayList` into `schedule.txt` which is stored on the user's local filesystem. For more information
-on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
+on the file management, refer to this [section](#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
 
 This completes the process of clearing a plan on a particular day of the schedule on WerkIt!.
 
@@ -1596,7 +1596,7 @@ schedule /update <day number [1-7]> <plan number>
 **(Step 7)** Lastly, `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
 in the `dayList` into `schedule.txt` which is stored on the user's local filesystem. 
 Since all `Day` objects are deleted, the `schedule.txt` file is essentially cleared. For more information on the file 
-management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
+management, refer to this [section](#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
 
 This completes the process of clearing of all plans stored in the schedule on WerkIt!.
 
@@ -1681,10 +1681,10 @@ Ideally, the `werkItResources` and `werkItLogs` directories should be in the sam
 but the creation of the directories and files depends on where the user starts WerkIt! from. Specifically, it depends
 on the working directory that the user is in when he/she runs WerkIt!. In the user guide's 
 [quick start guide](UserGuide.md#quick-start-guide) as well as the section regarding 
-[information about the app's local storage](UserGuide.md#werkits-local-storage-information), the user has been told to
-create a new directory to put the WerkIt! JAR file in and to set his/her current working directory before starting the
-application. This is to ensure that the resource directories and files are created in the same location as the WerkIt!
-JAR file to ensure cleanliness on the user's local filesystem.
+[information about the app's local storage](UserGuide.md#werkits-local-storage-information), the user has been 
+instructed to create a new directory to put the WerkIt! JAR file in and to set his/her current working directory to that 
+new folder before starting the application. This is to ensure that the resource directories and files are created in the 
+same location as the WerkIt! JAR file as well as to maintain cleanliness on the user's local filesystem.
 
 #### Storage Format for Each Resource File
 There are four resource files in total: `exercises.txt`, `workouts.txt`, `plans.txt`, and `schedule.txt`. For all
@@ -1725,14 +1725,11 @@ The following sequence diagram shows the procedure of how data in `workouts.txt`
 <span class="info box">:memo: To simplify the sequence diagram, some method calls have been omitted as they are
 irrelevant to the loading of `workouts.txt` or they do not add significant value to the diagram.</span>
 
-<span class="info box">:memo: Due to the limitations of PlantUML and in order to show the construction activation
-bar of `WerkIt`, the `Main` object needs to be shown in the sequence diagram. Apologies for the inconvenience caused.</span>
+<span class="info box">:memo: The procedures for reading and loading the data for plan and schedule data sets are 
+largely similar to the above sequence diagram. Thus, the sequence diagrams for these data sets are not shown.</span>
 
-<span class="info box">:memo: The procedures for reading and loading the data for exericse, plan, and schedule data sets are 
-largely similar to the above sequence diagram. Thus, sequence diagrams for these data sets are not shown.</span>
-
-**(Steps 1 to 3)** When the `WerkIt` object is instantiated, in the constructor, `WerkIt#loadRequiredDirectoryAndFiles()`
-is called. This method is responsible for checking if the necessary resource files and directories are present. In this
+**(Steps 1 to 3)** When the `WerkIt` object is instantiated, `WerkIt#loadRequiredDirectoryAndFiles()` is called in the
+constructor. This method is responsible for checking if the necessary resource files and directories are present. In this
 case, we assume that all resource files are in place and since we are only interested in `workouts.txt`, `WerkIt#loadWorkoutFile()`
 is called (not shown in the sequence diagram to simplify the diagram), which will in turn call `WerkIt#loadWorkoutsFromFile()`.
 
@@ -1749,19 +1746,20 @@ version of the `workout /new` command that is accepted by `WorkoutList#createAnd
 
 
 **(Step 5)** The crafted `String` is passed to `WorkoutList#createAndAddWorkout()` to properly add the workout data
-into WerkIt!
+into WerkIt!.
 
 Steps 4 to 7 is repeated until all the lines in `workouts.txt` have been read.
 
-**(Step 8)** A boolean value that indicates whether the loading of `workouts.txt` went without any issues. True means
-no issues were encountered and false means otherwise. This boolean will be used to print to the terminal the status
-of the loading of `workouts.txt`.
+**(Step 8)** A boolean value that indicates whether the loading of `workouts.txt` went without any issues is returned
+from `WerkIt#loadWorkoutsFromFile()`. A value of `true` means that no issues were encountered and `false` means otherwise. 
+This boolean will be used to determine the status message of the loading of `workouts.txt`. This status message will then 
+be printed to the terminal.
 
 This will finish the loading of the data in `workouts.txt` into WerkIt!
 
-<span class="info box">In practice, the other resource files (i.e. `exercises.txt`, `plans.txt`, and `schedule.txt`)
+<span class="info box">In practice, the other resource files (i.e. `plans.txt` and `schedule.txt`)
 are also processed and loaded in `WerkIt#loadRequiredDirectoryAndFiles()`. Once all the other resource files have been
-loaded, the constructor for `WerkIt` will finish.</span>
+loaded, the constructor for `WerkIt` will end.</span>
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
@@ -1779,7 +1777,7 @@ command:
 ![Write New Line Of Data](uml/sequenceDiagrams/storage/images/writeNewLineOfData.png)
 
 <span class="info box">:memo: The procedure for writing a new line of data when the user creates a new plan is largely 
-similar to the above sequence diagram. Thus, sequence diagrams for these data sets are not shown.</span>
+similar to the above sequence diagram. Thus, the sequence diagram for the plan data set is not shown.</span>
 
 **(Step 1)** After a new workout has been created, the `WorkoutCommand` object calls `FileManager#writeNewWorkoutToFile()`,
 passing the newly created `Workout` object as the argument.
@@ -1807,8 +1805,8 @@ This finishes the writing of the new workout to the resource file and control is
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 #### Rewriting the Entire Resource File With the Most Recent Set of Data
-In contrast to the previous section which covers the scenarios when only the new data is written as a new line to the 
-file, rewriting the respective entire resource file is done with the user updates or deletes a workout, plan, or
+In contrast to the previous section which covers the scenarios where only the new data is written as a new line to the 
+file, rewriting the respective entire resource file is done when the user updates or deletes a workout, plan, or
 schedule. See [this design consideration](#design-considerations-for-how-data-is-written-or-updated-to-a-resource-file)
 for more details.
 
@@ -1816,7 +1814,7 @@ The following sequence diagram shows how `workouts.txt` is rewritten when the us
 
 ![Rewrite Resource File](uml/sequenceDiagrams/storage/images/rewriteResourceFile.png)
 
-<span class="info box">The procedures for rewriting the entire file for plan and schedule data sets are largely similar 
+<span class="info box">:memo: The procedures for rewriting the entire file for plan and schedule data sets are largely similar 
 to the above sequence diagram.</span>
 
 **(Step 1)** After an existing workout is updated or deleted, the `WorkoutCommand` object calls
@@ -1880,11 +1878,12 @@ INFO: New workout created.
 #### Design Considerations for File Management
 ##### How Data Is Written or Updated to a Resource File
 While writing newly created workout or plan data to its respective resource file is a trivial task, updating or deleting
-existing data is more complex. When we want to update the data in the resource file, we need to find a way to traverse
-through the file and find the exact part of the file where the data that needs to be updated or deleted is at. While it
-is doable and can potentially be more efficient than rewriting the entire file, it is currently too complex and 
-time-consuming for the development team to work on. Thus, we have decided to take the less difficult route of rewriting 
-the entire file with the most recent set of data when an existing data is updated or deleted.
+existing data is more complex. When we want to update or delete the data in the resource file (including `schedule.txt`)
+, we need to find a way to traverse through the file and find the exact part of the file where the data that needs to be 
+updated or deleted is at. While it
+is doable and can potentially be more efficient than rewriting the entire file, it is currently too complex for the
+development team to work on, considering the limited time given. Thus, we have decided to take the less difficult route 
+of rewriting the entire file with the most recent set of data when an existing data is updated or deleted.
 
 The following table shows whether a certain operation writes a new line of data or rewrites the entire resource file:
 
@@ -1894,7 +1893,7 @@ The following table shows whether a certain operation writes a new line of data 
 
 | Data Type \ Operation |        Create        |         Update          |         Delete         |
 |:---------------------:|:--------------------:|:-----------------------:|:----------------------:|
-|        Workout        | :large_blue_diamond: | :large_orange_diamond:  | :large_orange_diamond: |
+|       Workouts        | :large_blue_diamond: | :large_orange_diamond:  | :large_orange_diamond: |
 |         Plans         | :large_blue_diamond: | :large_orange_diamond:  | :large_orange_diamond: |
 |       Schedule        |        _N.A._        | :large_orange_diamond:  | :large_orange_diamond: |
 
@@ -1902,20 +1901,20 @@ The following table shows whether a certain operation writes a new line of data 
 commands.</span>
 
 ##### Inconsistent Data Between Resource Files
-The first step of loading local files to the app involves the checking of validity of data. That is, before loading plan
-data, `FileManager` will check whether the workouts in the plan exist in the `workouts.txt` file, and before loading
-schedule data, `FileManager` will also check whether the plans in the `schedule.txt` could be found in `plan.txt`. If 
+The first step of loading local files to WerkIt! involves the checking of the validity of data. That is, before loading plan
+data, `FileManager` will check whether the workouts in the plan exist in the `workouts.txt` file, and before loading the
+schedule data, `FileManager` will also check whether the plans in `schedule.txt` can be found in `plans.txt`. If 
 all the data can be matched, the files will be loaded successfully, otherwise only the unmatched data are classified as 
 "corrupted data" and will be deleted and the deletion will be cascaded. 
 
 Although the users are warned not to edit the local resource files as this action may corrupt the stored data,
-resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
-the files. Thus, other than the warning in our [user guide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
-we also implemented error handling methods to handle the situation where users edited the files and caused data 
-corruptions. We could have implemented the handling of "corrupted data" in a more hassle-free way by simply clearing 
+resulting in WerkIt! being unable to load the data properly, there may still be scenarios where the users may accidentally edit 
+the files. Thus, other than the warning in our [user guide](UserGuide.md#werkits-local-storage-information),
+we have also implemented error handling methods to handle the situation where users edited the files, resulting in data 
+corruption. We could have implemented the handling of "corrupted data" in a more hassle-free way by simply clearing 
 all local data. However, in order to provide the best possible user experience by minimising the amount of data lost in 
-such situations, we decided to implement the validity checking such that only the affected data are removed while 
-keeping all the non-affected data safely.
+such situations, we have decided to implement the validity checking such that only the affected data are removed while 
+keeping all the non-affected data safe.
 
 ##### `LogHandler` Managing Its Own Log File Instead of `FileManager` Class
 The development team decided to let the `LogHandler` class manage its own log file instead of the `FileManager` class,
@@ -1926,6 +1925,8 @@ the risk of further complicating the solution, it was decided to just let `LogHa
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
+---
+
 ## Product Scope
 ### Target User Profile
 
@@ -1935,8 +1936,8 @@ and can type fast, since WerkIt! is currently CLI-based.
 
 ### Value Proposition
 
-WerkIt! aims to be the one-stop application for our target users to put their workout routines in a simple and quick manner,
-instead of memorising it in their heads or using a conventional note-taking app to keep track of their workout routines,
+WerkIt! aims to be a one-stop application for our target users to manage their workout routines in a simple and quick manner,
+instead of memorising it in their heads or using a conventional note-taking application to keep track of their workout routines,
 where there are many other day-to-day things being kept too.
 
 ## User Stories
@@ -1950,7 +1951,6 @@ where there are many other day-to-day things being kept too.
 | v1.0    | user     | update workout                                       | make modification to my workouts after I got stronger                  |
 | v1.0    | user     | work on the workouts/plans I have created previously | use those workouts in my current workout sessions                      |
 | v2.0    | user     | create a workout plan                                | perform multiple workouts at a time                                    |
-| v2.0    | user     | search for the plan I have created                   | follow the workouts listed in it                                       |
 | v2.0    | user     | view all plans I have created                        | see what plans I have already created                                  |
 | v2.0    | user     | be able to delete a plan I have created              | remove the plans that I will not be doing                              |
 | v2.0    | user     | schedule a plan on a particular day                  | plan my workout routine                                                |
@@ -1968,16 +1968,16 @@ where there are many other day-to-day things being kept too.
 ## Non-Functional Requirements
 #### Data Requirements
 For `workout /new` and `workout /update` commands, the maximum number of repetitions a user can set is `2,147,483,647`. 
-This limit is restricted by `int` data type. The size of `int` is 4 bytes which is 32 bits, therefore, the maximum value 
-for a variable of type `int` will be `2,147,483,647`. If user set the number of repetitions larger than `2,147,483,647`, 
-an `NumberFormatException` will be thrown to indicate that the value entered is not allowed. 
+This limit is restricted by the `int` data type. The size of `int` is 4 bytes which is 32 bits, therefore, the maximum value 
+for a variable of type `int` will be `2,147,483,647`. If the user set the number of repetitions larger than `2,147,483,647`, 
+a `NumberFormatException` will be thrown to indicate that the value entered is not allowed. 
 
-It is expected that `2,147.483.647` repetitions of any exercise is not achievable by humans hence, 
+It is expected that `2,147,483,647` repetitions of any exercise is not achievable by humans. Hence, 
 using `int` as the data type to hold the value of repetitions is more than sufficient. 
 
 #### Technical/Environment Requirements
-This application is developed using Java JDK 11, hence to run this application, please ensure that you 
-are running this application on a 64-bit operating system and with a minimum of 8 GB of RAM. 
+This application is developed using Java JDK 11. Hence to run this application, please ensure that you 
+are running it on a 64-bit operating system and with a minimum of 8 GB of RAM. 
 
 #### Performance Requirements 
 Each command entered by the user should respond within two seconds.
@@ -2005,15 +2005,15 @@ Each command entered by the user should respond within two seconds.
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
 of their schedule. For instance, the user's daily schedule can look like this:
 
-| Day       | Plan Name      |
-|-----------|----------------|
-| Monday    | grow my biceps |
-| Tuesday   | rest day       |
-| Wednesday | whole body!    |
-| Thursday  | leg day        |
-| Friday    | grow my biceps |
-| Saturday  | whole body!    |
-| Sunday    | rest day       |
+| Day            | Plan Name                                 |
+|----------------|-------------------------------------------|
+| Monday         | grow my biceps                            |
+| Tuesday        | rest day                                  |
+| Wednesday      | whole body!                               |
+| Thursday       | leg day                                   |
+| Friday         | grow my biceps                            |
+| Saturday       | whole body!                               |
+| Sunday         | rest day                                  |
 
 
 ## Instructions for Manual Testing
