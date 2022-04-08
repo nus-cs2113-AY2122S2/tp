@@ -251,10 +251,9 @@ public class ParserLocalData {
         boolean isFound = false;
         for (String str : HEADINGS) {
             isFound = data.contains(str);
-            if (isFound == false) {
+            if (!isFound) {
                 throw new MissingParameterException();
             }
         }
-        return;
     }
 }

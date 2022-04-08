@@ -155,8 +155,10 @@ public class Parser {
             int index = Integer.parseInt(indexStr);
 
             return new EditCommand(name, index, newValues);
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
+        } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
+        } catch (ArrayIndexOutOfBoundsException | ExtraParametersException epe) {
+            return new CommandResult(ERROR_EXTRA_PARAMETERS);
         } catch (NumberFormatException nfe) {
             return new CommandResult(ERROR_INVALID_INDEX);
         } catch (AssertionError ae) {
