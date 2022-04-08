@@ -139,7 +139,7 @@ public class Parser {
         int patientIndex = dummy.indexOf("/p");
         int nurseIndex = dummy.indexOf("/n");
         String s = dummy.substring(doctorIndex + 3, patientIndex).trim();
-        String[] strings=s.replaceAll("\\[","").replaceAll("]","").split(",");
+        String[] strings = s.replaceAll("\\[","").replaceAll("]","").split(",");
         int[] docIndexes = new int[strings.length];
         for (int i = 0; i < strings.length; i++) {
             docIndexes[i] = Integer.parseInt(strings[i]);
