@@ -21,6 +21,7 @@ Code contribution can be found [here](https://nus-cs2113-ay2122s2.github.io/tp-d
 ### Contributions to DG
 * Wrote explanation for the implementation of Command classes.
 * Added object and sequence diagrams used in explaining flow of updating equipment.
+* Wrote instructions for manual testing.
 
 ### Contributions to team-based tasks
 * Took meeting minutes and tracked to-do tasks for the team.
