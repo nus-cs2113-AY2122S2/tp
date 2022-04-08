@@ -5,6 +5,7 @@ import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentType;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -38,8 +39,17 @@ public class CheckCommand extends Command {
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute() {
-        Pair<String, ?> checkPair = generateCheckPair();
-        ArrayList<Equipment> equipment = equipmentManager.checkEquipment(checkPair);
+        ArrayList<Equipment> equipment;
+        try {
+            Pair<String, ?> checkPair = generateCheckPair();
+            equipment = equipmentManager.checkEquipment(checkPair);
+        } catch (DateTimeParseException e) {
+            return new CommandResult(INVALID_DATE_MESSAGE);
+        } catch (NumberFormatException e) {
+            return new CommandResult(INCORRECT_COST_FORMAT);
+        } catch (IllegalArgumentException e) {
+            return new CommandResult(INCORRECT_ENUM_TYPE);
+        }
 
         return new CommandResult(String.format(successMessage, commandStrings.get(0)), equipment);
     }
@@ -49,8 +59,12 @@ public class CheckCommand extends Command {
      * Pair is a class that was implemented to match each attribute to its value.
      * By using pair, we are able to specify the attribute to be checked.
      * @return Pair of value to be checked and its matching attribute.
+     *
+     * @throws NumberFormatException if cost is invalid
+     * @throws IllegalArgumentException if EquipmentType is invalid
      */
-    public Pair<String, ?> generateCheckPair() throws AssertionError, NumberFormatException, IllegalArgumentException {
+    public Pair<String, ?> generateCheckPair() throws AssertionError, NumberFormatException, IllegalArgumentException
+    , DateTimeParseException {
         Pair<String, ?> pair = null;
       
         String s = commandStrings.get(0);

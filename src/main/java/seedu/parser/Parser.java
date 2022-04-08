@@ -127,10 +127,6 @@ public class Parser {
                 return new CheckCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(CheckCommand.COMMAND_WORD + CheckCommand.COMMAND_DESCRIPTION);
-            } catch (NumberFormatException e) {
-                return new IncorrectCommand(Command.INCORRECT_ENUM_TYPE);
-            } catch (IllegalArgumentException e) {
-                return new IncorrectCommand(Command.INCORRECT_COST_FORMAT);
             }
         case DeleteCommand.COMMAND_WORD:
             try {
