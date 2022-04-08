@@ -47,6 +47,7 @@ public class SatisfactionListFileManager extends FileManager {
         return satisfactionList;
     }
 
+    // Change to save
     public void writeSatisfactionListToFile(SatisfactionList satisfactionList) throws IOException {
         clearFileContents();
         FileWriter fw = new FileWriter(FILE_PATH, true);
