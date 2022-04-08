@@ -2042,6 +2042,20 @@ The following are some test cases for you to try:
 | Exercise name that does not exist in the list of exercises and valid repetition value. | `workout /new somersault /reps 20` | Error response (exercise name does not exist), workout not added. |
 
 #### Listing All Workouts
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#show-all-workouts-workout-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                   | Command         | Expected result                                |
+|:----------------------------|:----------------|:-----------------------------------------------|
+| Valid list workout command. | `workout /list` | List down all workouts stored in workout list. |
+
+##### Negative Test Cases
+| Test Case                                     | Command                   | Expected result                                                 |
+|:----------------------------------------------|:--------------------------|:----------------------------------------------------------------|
+| Valid list command with extra arguments.      | `workout /list extraline` | Error response (invalid user argument), workouts not displayed. |
+| Extra whitespaces between commands arguments. | `workout         /list`   | Error response (invalid user action), schedule not displayed.   |
 
 #### Deleting An Existing Workout
 1. Prerequisites: Workout list should be populated with
@@ -2101,9 +2115,77 @@ Expected: Nothing is listed because no additional arguments should be supplied f
 
 ### Test on Schedule Features
 #### Updating The Schedule
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#update-schedule-schedule-update).)
+
+**Prerequisites: ** Ensure that you have created some plans, at least one, before you to test the
+`schedule /update` command.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                      | Command                | Expected result                      |
+|:-------------------------------|:-----------------------|:-------------------------------------|
+| Valid update schedule command. | `schedule /update 1 3` | Plan number 3 is schedule on Monday. |
+
+##### Negative Test Cases
+| Test Case                                     | Command                            | Expected result                                                                         |
+|:----------------------------------------------|:-----------------------------------|:----------------------------------------------------------------------------------------|
+| Update schedule with extra arguments.         | `schedule /update 1 3 extraline`   | Error response (too many arguments entered), plan is not added/updated to the schedule. |
+| Update schedule with missing plan number.     | `schedule /update 1`               | Error response (too few arguments entered), plan is not added/updated to the schedule.  |
+| Schedule a plan on an invalid day.            | `schedule /update 8 1`             | Error response (invalid day number), plan is not added/updated to the schedule.         |
+| Schedule an invalid plan.                     | `schedule /update 1 1222`          | Error response (invalid plan number), plan is not added/updated to the schedule.        |
+| Extra whitespaces between commands arguments. | `schedule         /update 1 2`     | Error response (invalid user action), plan is not added/updated to the schedule.        |
+| Extra whitespaces between command parameters. | `schedule /update     1         2` | Error response (invalid user action), plan is not added/updated to the schedule.        |
+
+
 #### Viewing The Schedule
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#view-schedule-schedule-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                    | Command          | Expected result                                      |
+|:-----------------------------|:-----------------|:-----------------------------------------------------|
+| Valid list schedule command. | `schedule /list` | List down all plans scheduled in the 7-day schedule. |
+
+##### Negative Test Cases
+| Test Case                                     | Command                    | Expected result                                                 |
+|:----------------------------------------------|:---------------------------|:----------------------------------------------------------------|
+| List schedule with extra arguments.           | `schedule /list extraline` | Error response (wrong command entered), schedule not displayed. |
+| Extra whitespaces between commands arguments. | `schedule         /list`   | Error response (invalid user action), schedule not displayed.   |
+
 #### Clearing Plan Schedule For A Day
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#clear-schedule-for-a-day-schedule-clear).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                      | Command             | Expected result                                                                   |
+|:-------------------------------|:--------------------|:----------------------------------------------------------------------------------|
+| Valid clear scheduled command. | `schedule /clear 1` | If there is a plan scheduled on Monday, it will be cleared and set to `rest day`. |
+
+##### Negative Test Cases
+| Test Case                                     | Command                       | Expected result                                                                 |
+|:----------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------|
+| Day Number exceed the range of 1 to 7.        | `schedule /clear 9`           | Error response (invalid day number), no plan in the schedule is being cleared.  |
+| Clear scheduled command with extra arguments. | `schedule /clear 1 extraline` | Error response (invalid command), no plan in the schedule is being cleared.     |
+| Extra whitespaces between commands arguments. | `schedule         /clear 1`   | Error response (invalid user action), no plan in the schedule is being cleared. |
+
 #### Clearing All Plans In The Schedule
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#clear-schedule-for-the-week-schedule-clearall).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                         | Command              | Expected result                             |
+|:----------------------------------|:---------------------|:--------------------------------------------|
+| Valid clear all schedule command. | `schedule /clearall` | All plans added to the schedule is removed. |
+
+##### Negative Test Cases
+| Test Case                                               | Command                        | Expected result                                                                                 |
+|:--------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------|
+| Clear all plans scheduled command with extra arguments. | `schedule /clearall extraline` | Error response (wrong command entered), plans not removed from schedule and schedule not reset. |
+| Extra whitespaces between commands arguments.           | `schedule         /clearall`   | Error response (invalid user action), plans not removed from schedule and schedule not reset.   |
 
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
