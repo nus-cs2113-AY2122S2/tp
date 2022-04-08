@@ -84,9 +84,11 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 
 ### Miscellaneous Contributions
  * Spearheaded replacement of `XYZCommand#prepare` method with a `XYZCommandParser` class
-   * Encouraged following of separation of concerns principle to improve code quality
+   * Previously, `XYZCommand#prepare` was used instead to process the user input and create a `XYZCommand` object.
+   * Encouraged other developers to follow separation of concerns principle to improve code quality by replacing
+     `XYZCommand#prepare` with `XYZCommandParser` class.
  * Headed the fixing of bugs found by other teams during the PE dry run
-   * Set up a documentation for the sorting of bugs and allocation of duties
+   * Set up a collaborative document for the sorting of bugs, allocation of duties and tracking of progress
 
 #### Project Management
 * Worked on pre-planning and ideation of project
