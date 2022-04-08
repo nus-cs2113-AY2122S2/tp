@@ -5,11 +5,11 @@ package data.plans;
  */
 public class InvalidPlanException extends Exception {
     // Pre-defined error messages
-    public static final String DUPLICATE_PLAN_NAME_ERROR_MSG = "Uh oh, the plan name already exists.";
-    public static final String UNKNOWN_PLAN_NAME_ERROR_MSG = "Uh oh, the plan name given does not exist.";
-    public static final String WORKOUT_NUMBER_OUT_OF_RANGE = "Uh oh, the index specified is out of range.\n"
+    public static final String PLAN_DUPLICATE_NAME = "Uh oh, the plan name already exists.";
+    public static final String PLAN_NAME_UNKNOWN = "Uh oh, the plan name given does not exist.";
+    public static final String PLAN_WORKOUT_NUMBER_OUT_OF_RANGE = "Uh oh, the index specified is out of range.\n"
             + "(Index specified needs to be within the number of workouts)";
-    public static final String MIN_MAX_WORKOUTS_IN_A_PLAN = "Uh oh, number of workouts specified is out of range.\n"
+    public static final String PLAN_MIN_MAX_WORKOUTS = "Uh oh, number of workouts specified is out of range.\n"
             + "(A plan should minimally have 1 workout and 10 workouts at most.)";
     public static final String PLAN_INDEX_OUT_OF_RANGE = "Uh oh, the index specified is out of range.\n"
             + "(Index specified needs to be within the number of plans)";
