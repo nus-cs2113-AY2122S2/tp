@@ -173,6 +173,13 @@ public class CommandParser {
         return userCommand;
     }
 
+    /**
+     * Parses the user-provided delete-related command and creates the relevant Command object.
+     * @param userInputLowerCase User input to be parsed and turned into a delete-related Command object.
+     * @return The relevant Command object created based on the user input.
+     * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
+     *      *                            the relevant Command object.
+     */
     public Command parseDelete(String userInputLowerCase) throws HotelLiteManagerException {
         Command userCommand = null;
         String userInputLowerCaseWithoutCommand;
