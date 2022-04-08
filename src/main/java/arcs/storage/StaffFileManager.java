@@ -35,9 +35,9 @@ public class StaffFileManager {
     }
 
 
-    public void saveData(ArrayList<Staff> Staffs) throws IOException {
+    public void saveData(ArrayList<Staff> staffs) throws IOException {
         FileWriter fw = new FileWriter(DIR_PATH + File.separator + FILE_NAME);
-        ArrayList<String> records = encodeData(Staffs);
+        ArrayList<String> records = encodeData(staffs);
         for (String record: records) {
             fw.write(record);
             fw.write(System.lineSeparator());
@@ -46,23 +46,24 @@ public class StaffFileManager {
     }
 
     private ArrayList<Staff> decodeData(ArrayList<String> records) {
-        ArrayList<Staff> Staffs = new ArrayList<>();
+        ArrayList<Staff> staffs = new ArrayList<>();
         for (String record: records) {
             String[] data = record.split("/");
             if (data.length != 6) {
                 continue;
             }
 
-            Staffs.add(new Staff(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim(),data[4].trim(),data[5].trim()));
+            staffs.add(new Staff(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim(),
+                       data[4].trim(),data[5].trim()));
         }
 
-        return Staffs;
+        return staffs;
     }
 
-    private ArrayList<String> encodeData(ArrayList<Staff> Staffs) {
+    private ArrayList<String> encodeData(ArrayList<Staff> staffs) {
         ArrayList<String> records = new ArrayList<>();
-        for (Staff Staff: Staffs) {
-            records.add(Staff.toStringStore());
+        for (Staff staff: staffs) {
+            records.add(staff.toStringStore());
         }
         return records;
     }

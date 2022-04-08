@@ -12,12 +12,12 @@ public class ListStaffCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        ArrayList<Staff> Staffs = staffManager.getAllStaffs();
-        ArrayList<String> StaffsInfo = new ArrayList<>();
-        for (Staff Staff: Staffs) {
-            StaffsInfo.add(Staff.getStaffInfo());
+        ArrayList<Staff> staffs = staffManager.getAllStaffs();
+        ArrayList<String> staffsInfo = new ArrayList<>();
+        for (Staff staff: staffs) {
+            staffsInfo.add(staff.getStaffInfo());
         }
-        return new CommandResult(FEEDBACK, StaffsInfo);
+        return new CommandResult(FEEDBACK, staffsInfo);
     }
 }
 
