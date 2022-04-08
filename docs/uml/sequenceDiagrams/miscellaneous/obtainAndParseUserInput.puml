@@ -6,48 +6,48 @@ hide footbox
 
 autonumber
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "ui:UI" AS UI
-participant "parser:Parser" AS Parser
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "ui:UI" AS UI COLOR_UI
+participant "parser:Parser" AS Parser COLOR_PARSER
 
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 WerkIt -> UI : getUserInput()
-activate UI
+activate UI COLOR_UI
 return userInputTrimmed:String
 
 WerkIt -> Parser : parseUserInput(userInputTrimmed)
-activate Parser
+activate Parser COLOR_PARSER
 ref over Parser
 Check for illegal characters
 end
 
 alt Command starts with 'workout'
     Parser -> Parser : createWorkoutCommand(userInput)
-    activate Parser
+    activate Parser COLOR_PARSER
     return :WorkoutCommand
 else Command starts with 'exit'
     Parser -> Parser : createExitCommand(userInput)
-    activate Parser
+    activate Parser COLOR_PARSER
     return :ExitCommand
 else Command starts with 'help'
     Parser -> Parser : createHelpCommand(userInput)
-    activate Parser
+    activate Parser COLOR_PARSER
     return :HelpCommand
 else Command starts with 'exercise'
     Parser -> Parser : createExerciseCommand(userInput)
-    activate Parser
+    activate Parser COLOR_PARSER
     return :ExerciseCommand
 else Command starts with 'search'
     Parser -> Parser : createSearchCommand(userInput)
-    activate Parser
+    activate Parser COLOR_PARSER
     return :SearchCommand
 else Command starts with 'plan'
     Parser -> Parser : createPlanCommand(userInput)
-    activate Parser
+    activate Parser COLOR_PARSER
     return :PlanCommand
 else Command starts with 'schedule'
     Parser -> Parser : createScheduleCommand(userInput)
-    activate Parser
+    activate Parser COLOR_PARSER
     return :ScheduleCommand
 end
 

@@ -2,34 +2,34 @@
 'https://plantuml.com/sequence-diagram
 !include ../../Style.puml
 
+hide footbox
 autonumber
 
 title Sequence Diagram of `schedule /list` Command
 
-actor   User
-participant "werkIt:WerkIt" AS WerkIt
-participant "newCommand\n:ScheduleCommand" AS newCommand
-participant "dayList\n:DayList" AS DayList
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:ScheduleCommand" AS newCommand COLOR_LOGIC
+participant "dayList\n:DayList" AS DayList COLOR_LOGIC
 
 
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 ref over WerkIt
 Obtain and parse user input
 end
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand COLOR_LOGIC
 
 newCommand -> DayList : printSchedule()
-activate DayList
+activate DayList COLOR_LOGIC
 loop 7 times
 
 DayList -> DayList : padWithSpaces(planForDay)
-activate DayList
+activate DayList COLOR_LOGIC
 return planForDayWithPadding:string
 
 end
-User <-- DayList : Display plans scheduled for the week
+WerkIt <-- DayList : Display plans scheduled for the week
 return
 destroy newCommand
 @enduml

@@ -9,22 +9,22 @@ skinparam noteFontSize 13
 
 hide circle
 
-class UI {
+class UI COLOR_UI {
     + printDirectoryNotFoundMessage() : void
     + printDirectoryCreatedMessage() : void
     + printExerciseFileNotFoundMessage() : void
     + printExerciseFileCreatedMessage() : void
 }
 
-class WerkIt
+class WerkIt COLOR_WERKIT
 
 package "Logic Component" <<rectangle>> {
-    class WorkoutCommand
-    class PlanCommand
-    class ScheduleCommand
+    class WorkoutCommand COLOR_LOGIC
+    class PlanCommand COLOR_LOGIC
+    class ScheduleCommand COLOR_LOGIC
 }
 package "Storage Component" <<rectangle>> {
-    class FileManager {
+    class FileManager COLOR_STORAGE {
         - directoryPath: Path
         - exerciseFilePath: Path
 
@@ -37,7 +37,7 @@ package "Storage Component" <<rectangle>> {
         + convertWorkoutToFileDataFormat(String) : String
     }
 
-    class LogHandler {
+    class LogHandler COLOR_STORAGE {
         - {static} logFileDirectory: Path
         - {static} logFilePath: Path
 

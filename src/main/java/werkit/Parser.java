@@ -20,8 +20,10 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import static commands.PlanCommand.ACTION_KEYWORD_DETAILS;
-import static commands.ScheduleCommand.CLEAR_ACTION_KEYWORD;
-import static commands.ScheduleCommand.CLEAR_ALL_ACTION_KEYWORD;
+import static commands.ScheduleCommand.ACTION_KEYWORD_LIST;
+import static commands.ScheduleCommand.ACTION_KEYWORD_UPDATE;
+import static commands.ScheduleCommand.ACTION_KEYWORD_CLEAR_ALL;
+import static commands.ScheduleCommand.ACTION_KEYWORD_CLEAR;
 import static commands.SearchCommand.SEARCH_PLAN_ACTION_KEYWORD;
 import static commands.SearchCommand.SEARCH_EXERCISE_ACTION_KEYWORD;
 import static commands.SearchCommand.SEARCH_WORKOUT_ACTION_KEYWORD;
@@ -138,7 +140,7 @@ public class Parser {
             return createSearchCommand(userInput);
         case PlanCommand.KEYWORD_BASE:
             return createPlanCommand(userInput);
-        case ScheduleCommand.BASE_KEYWORD:
+        case ScheduleCommand.KEYWORD_BASE:
             return createScheduleCommand(userInput);
         default:
             logger.log(Level.WARNING, "Unknown command entered by user.");
@@ -417,7 +419,7 @@ public class Parser {
         String arguments = null;
         String className = this.getClass().getSimpleName();
         switch (actionKeyword) {
-        case UPDATE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_UPDATE:
             if (userInput.split(" ", -1).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid update schedule command action.");
                 throw new InvalidCommandException(className,
@@ -425,14 +427,14 @@ public class Parser {
             }
             arguments = userInput.split(" ", 3)[2];
             break;
-        case LIST_ACTION_KEYWORD:
+        case ACTION_KEYWORD_LIST:
             if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid list schedule command action.");
                 throw new InvalidCommandException(className,
                         InvalidCommandException.INVALID_SCHEDULE_LIST_COMMAND_ERROR_MSG);
             }
             break;
-        case CLEAR_ACTION_KEYWORD:
+        case ACTION_KEYWORD_CLEAR:
             if (userInput.split(" ", -1).length != EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid clear schedule command action.");
                 throw new InvalidCommandException(className,
@@ -440,7 +442,7 @@ public class Parser {
             }
             arguments = userInput.split(" ", 3)[2];
             break;
-        case CLEAR_ALL_ACTION_KEYWORD:
+        case ACTION_KEYWORD_CLEAR_ALL:
             if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid clear all schedule command action.");
                 throw new InvalidCommandException(className,
