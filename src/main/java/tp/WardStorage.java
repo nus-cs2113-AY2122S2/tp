@@ -13,10 +13,10 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 
-
+//@@author Demonshaha
 public class WardStorage {
     private static final String root = System.getProperty("user.dir");
-    private static final Path filePath = Paths.get(root, "data", "IHospitalDoctors.txt");
+    private static final Path filePath = Paths.get(root, "data", "IHospitalWards.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
     /**
@@ -24,7 +24,7 @@ public class WardStorage {
      * @throws IHospitalException IHospitalException
      *
      */
-    //@@author   DemonShaha
+    //@@author Demonshaha
     public WardStorage() throws IHospitalException {
         try {
             File fileDirectory = new File(dirPath.toString());
@@ -44,7 +44,7 @@ public class WardStorage {
      * @param wards new ward
      * @throws IHospitalException IHospitalException
      */
-    //@@author  DemonShaha
+    //@@author Demonshaha
     public void saveWardList(WardList wards) throws IHospitalException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
@@ -70,7 +70,7 @@ public class WardStorage {
      * @return The wardList of the IHospitalWard.txt
      * @throws IHospitalException IHospitalException
      */
-    //@@author DemonShaha
+    //@@author Demonshaha
     public WardList loadWardList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());

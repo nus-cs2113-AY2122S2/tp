@@ -14,6 +14,7 @@ import tp.WardList;
 import tp.WardStorage;
 import tp.person.Patient;
 
+//@@author Demonshaha
 public class SearchPatientCommand extends Command {
     protected String id;
 

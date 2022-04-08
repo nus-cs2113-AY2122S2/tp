@@ -14,6 +14,7 @@ import tp.WardList;
 import tp.WardStorage;
 import tp.person.Patient;
 
+//@@author Demonshaha
 public class DeletePatientCommand extends Command {
     private final int index;
 

@@ -13,6 +13,7 @@ import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
 
+//@@author Demonshaha
 public class EditPatientCommand extends Command {
     private int index;
     private String type;

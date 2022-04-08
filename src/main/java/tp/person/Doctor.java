@@ -29,6 +29,10 @@ public class Doctor extends tp.person.Person {
         isOnDuty = false;
     }
 
+    public int getWardNumber() {
+        return wardNumber;
+    }
+
     @Override
     public String toString() {
         return "* DOCTOR " + super.toString() + " || Department: " + department + " || Ward: " + wardNumber;
