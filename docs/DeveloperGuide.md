@@ -1286,8 +1286,8 @@ the `plans.txt` file according to the modified plan list.
 <br><br>
 This completes the process of deleting an existing plan in WerkIt!
 
-##### Design Considerations for Deleting Existing Workout
-###### Rewrite All Workout To File
+##### Design Considerations for Deleting Existing Plan
+###### Rewrite All Plan To File
 Currently, when delete plan function is executed, the WerkIt! program will rewrite all plans to the resource file, 
 `plans.txt`. Such implementation may have performance issues as the program needs to rewrite the whole
 file with the modified workout list whenever a workout is deleted in the application.
