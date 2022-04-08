@@ -15,6 +15,9 @@ public class InvalidScheduleException extends Exception {
     public static final String INDEX_OUT_OF_BOUND = "Uh oh, it seems like too few arguments were entered.\n"
             + "Please try again. Alternatively, type 'help' if you need\n"
             + "more information on the commands.";
+    public static final String TOO_MANY_ARGUMENTS = "Uh oh, it seems like too many arguments were entered.\n"
+            + "Please try again. Alternatively, type 'help' if you need\n"
+            + "more information on the commands.";
 
 
     private String throwingClass;
