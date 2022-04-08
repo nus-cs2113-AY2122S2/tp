@@ -261,10 +261,11 @@ public class TaskList {
      * @param doOnStartDateTime The new start date and time of the task
      * @param doOnEndDateTime   The new end date and time of the task
      * @param byDateTime        The new by date and time of the task
+     * @return The edited task specified by editIndex
      * @throws TimeClashException    if the new do date has is clashing with other tasks
      * @throws InvalidInputException if the dates are invalid e.g. start date after end date
      */
-    public void editSingleTaskContent(int editIndex, String taskDescription,
+    public Task editSingleTaskContent(int editIndex, String taskDescription,
                                       LocalDateTime doOnStartDateTime,
                                       LocalDateTime doOnEndDateTime,
                                       LocalDateTime byDateTime) throws TimeClashException, InvalidInputException {
@@ -290,6 +291,7 @@ public class TaskList {
         tasks.remove(editIndex);
         tasks.add(updatedTask);
         updateIndex();
+        return updatedTask;
     }
 
     /**
@@ -300,16 +302,19 @@ public class TaskList {
      * @param doOnStartDateTime The new start date and time of the task
      * @param doOnEndDateTime   The new end date and time of the task
      * @param byDateTime        The new by date and time of the task
+     * @return The edited task specified by editIndex
      * @throws TimeClashException    if any one of the occurrence with the new date has a time clash with other tasks
      * @throws InvalidInputException if any of the dates are invalid e.g. start date after end date
      */
-    public void editRepeatedTasks(int editIndex, String taskDescription,
+    public Task editRepeatedTasks(int editIndex, String taskDescription,
                                   LocalDateTime doOnStartDateTime,
                                   LocalDateTime doOnEndDateTime,
                                   LocalDateTime byDateTime) throws TimeClashException, InvalidInputException {
         Task firstTask = getTask(editIndex);
         ArrayList<Task> affectedTasks = getAffectedTasks(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
+        ArrayList<Task> newTasks = new ArrayList<>();
+        assert (affectedTasks.size() > 0);
         editedList.removeAll(affectedTasks);
 
         long startDateOffset = calculateOffsetOfDate(firstTask.getDoOnStartDateTime(), doOnStartDateTime);
@@ -323,11 +328,13 @@ public class TaskList {
                     startDateOffset, endDateOffset, byDateOffset);
             updatedTask.setIdentifier(newIdentifier);
             checkDateTimeClash(editedList, updatedTask, false);
+            newTasks.add(updatedTask);
             editedList.add(updatedTask);
         }
 
         tasks = editedList;
         updateIndex();
+        return newTasks.get(0);
     }
 
     /**
@@ -346,7 +353,6 @@ public class TaskList {
         }
         return result;
     }
-
 
     /**
      * Marks a task given the index of the task.
