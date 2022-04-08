@@ -321,10 +321,25 @@ Manage finances containing multiple payment methods faster than a typical mouse/
 
 ### User Stories
 
-| Version | As a ...  | I want to ...             | So that I can ...                                           |
-|---------|-----------|---------------------------|-------------------------------------------------------------|
-| v1.0    | new user  | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user      | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a ... | I want to ...                                                           | So that I can ...                                                          |
+|---------|----------|-------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| v1.0    | new user | have a 'help' command that lists the functions of the program           | view implemented features of the program                                   |
+| v1.0    | user     | create an entry for expenditure                                         | -                                                                          |
+| v1.0    | user     | list existing entries                                                   | view my expenses                                                           |
+| v1.0    | user     | update existing entries                                                 | edit details of entries I have previously deleted                          |
+| v1.0    | user     | remove existing entries                                                 | delete wrongly added entries                                               |
+| v1.0    | user     | know if my command entered is invalid                                   | not expect a successful operation with bad inputs                          |
+| v1.0    | user     | exit the application                                                    | -                                                                          |
+| v1.0    | user     | see a welcome page after running the application                        | have a better user experience and know the application loaded successfully |
+| v2.0    | user     | add a date to expenditure                                               | track my expenditure daily, monthly or yearly                              |
+| v2.0    | user     | add my credit cards, with the credit card limits, cashback              | track my expenditure on my credit card                                     |
+| v2.0    | user     | allocate my expenditure into categories                                 | know which main categories I spent the most on                             |
+| v2.0    | user     | see a graph of my expenditures for each category                        | know the breakdown of my expenditures                                      |
+| v2.0    | user     | add my income                                                           | see if I am spending beyond my income                                      |
+| v2.0    | user     | list my income, credit card and expenditure separately                  | better visualise the separate lists instead of seeing all at once          |
+| v2.0    | user     | see the help page for my income, credit card and expenditure separately | refer to the the specific help page that I need                            |
+| v2.1    | user     | save and load my data                                                   | I am able to close and re run the applcation without losing data           |
+
 
 ### Non Functional Requirements
 
@@ -332,7 +347,7 @@ Manage finances containing multiple payment methods faster than a typical mouse/
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-
+  
 ### Glossary
 
 * Mainstream OS: Windows, Linux, Unix, OS-X  
