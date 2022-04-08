@@ -183,7 +183,7 @@ public class Task {
             doOnEndDateTime = doOnEndDateTime.plusSeconds(endDateOffset);
         }
         if (byDateOffset != 0) {
-            byDateTime = byDateTime.plusSeconds(byDateOffset);
+            byDateTime = doOnStartDateTime.plusSeconds(byDateOffset);
         }
     }
 
