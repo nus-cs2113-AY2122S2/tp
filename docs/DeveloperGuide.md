@@ -96,19 +96,18 @@ Step 1. The user adds an equipment to the system with the help of the `add` comm
 
 ![equipment0](images/equipment0.png)
 
+![sequenceDiagram1](images/sequenceDiagram1.png)
+
 Step 2. The user executes `update s/S1404115ASF n/SpeakerC c/2000 pd/2022-01-29` to update equipment with serial number S1404115ASF. `Parser#parseCommand` is called from `Duke` to parse the user's input.
 
 Step 3. The parser recognises that an `UpdateCommand` is required, and the UpdateCommand is prepared to return to `Duke`. In the constructor of `UpdateCommand`, `prepareModification` is called to set the values of the attributes to be updated. The other attributes are set to null by default.
 
+![sequenceDiagramExecute](images/sequenceDiagramExecute.png)
 Step 4. `UpdateCommand#execute` is run to process the update. If the serialNumber attribute is null, a `CommandResult` with a `MISSING_SERIAL_NUMBER` output string will be returned. Otherwise, `EquipmentManager#updateEquipment` is called.
 
 Step 5. If the update was successful, a `CommandResult` with success message will be returned, else a `CommandResult` with `UPDATE_FAILURE_MESSAGE` will be returned. Upon successful update, the object should be updated with the new attributes as shown in the diagram below.
 
 ![equipment1](images/equipment1.png)
-
-The *Sequence Diagram* below shows how the objects/classes interact with each other in the case of an update command being issued by the user.
-
-![sequenceDiagram](images/sequenceDiagram.png)
 
 Step 6. It is not shown in the sequence diagram but ultimately when the CommandResult is returned to `Duke`, the output of the `CommandResult` gets printed out and displayed to the user.
 
