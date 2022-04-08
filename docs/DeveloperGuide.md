@@ -1128,7 +1128,7 @@ object's data into `plans.txt`, which is stored on the user's local filesystem.
 For more information on the file management,
 refer to this [section](DeveloperGuide.md#writing-a-new-line-of-data-to-the-resource-file).
 
-<br/><br/>
+<br/>
 This completes the process of creating and adding a new plan to WerkIt!.
 
 ##### Design Considerations for Creating a New Plan
