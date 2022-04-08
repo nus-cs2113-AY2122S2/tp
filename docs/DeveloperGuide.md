@@ -6,7 +6,7 @@ This developer guide follows the suggested format given in [AddressBook-Level3 d
 
 ## Design
 ### Architecture
-![Architecture diagram](Architecture_diagram.jpg)
+![Architecture diagram](diagrams/Architecture_diagram.jpg)
 The architecture diagram given above explains the high-level design of the App.
 
 Given below is an overview of the main components and how they interact with each other.
@@ -39,7 +39,7 @@ This section describes how certain features are implemented. Only part of the fe
 
 ### 1. Bye command
 1.1 The following sequence diagram shows how the Bye Command works.
-![](ByeCommand.png)
+![](diagrams/ByeCommand.png)
 
 ### 2. Add Menu Item Command
 2.1 The following sequence diagram shows how the Add Menu Item command works.
