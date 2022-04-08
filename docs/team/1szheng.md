@@ -57,15 +57,17 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide (UG):
         * Added documentation for `addin` and `deletein` beyond the base skeleton:
-          [#136](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/136/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
-        * Added administrative
-          descriptions: [#136](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/136/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
+          [#136](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/136/files),
+          [#161](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/161/files)
+        * Added administrative descriptions: [#136](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/136/files)
         * Added aesthetic changes for format and styling:
-          [#136](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/136/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
-          , [#161](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/161)
-          , [#218](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/218/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
+          [#136](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/136/files),
+          [#161](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/161/files),
+          [#218](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/218/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
         * Added parameters glossary under Features section:
-          [#161](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/161/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)
+          [#161](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/161/files)
+
+    <p></p>
 
     * Developer Guide (DG):
         * Added base format for `Design` and `Implementation` sections:
@@ -78,7 +80,8 @@ Given below are my contributions to the project.
           the [Architecture Design](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#architecture)
           section:
           [#109](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/109/files),
-          [#131](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/131/files)
+          [#131](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/131/files),
+          [#231](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/231/files)
         * Added documentation for
           the [Parser Component Design](https://ay2122s2-cs2113t-t10-2.github.io/tp/DeveloperGuide.html#parser-component)
           section:
