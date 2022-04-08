@@ -4,9 +4,6 @@ import cpp.exceptions.DataConversionException;
 import cpp.model.ProjectList;
 import cpp.model.project.Project;
 import cpp.model.project.Todo;
-import cpp.ui.Constants;
-import cpp.ui.Response;
-
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,7 +14,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class Storage {

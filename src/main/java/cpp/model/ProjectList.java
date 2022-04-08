@@ -69,26 +69,9 @@ public class ProjectList {
     /**
      * Adds a todo to one project in projectList.
      *
-     * @param indexString Index of the project
+     * @param index Index of the project
      * @param todoString The todo task the user wants to add to the project
      */
-    public void addTodoToProject(String indexString, String todoString) {
-        assert (todoString != null && !todoString.equals("")) : "Cannot add todo string to a project.";
-        int index;
-        try {
-            index = Integer.parseInt(indexString);
-        } catch (NumberFormatException e) {
-            System.out.println("The project index is not an integer!");
-            return;
-        }
-
-        Project targetProject;
-        targetProject = projectList.get(index - 1);
-        assert targetProject != null : "The target project does not exist!";
-        targetProject.addTodo(todoString);
-
-    }
-
     public void addTodoToProject(int index, String todoString) throws IndexOutOfBoundsException {
         assert (todoString != null && !todoString.equals("")) : "Cannot add todo string to a project.";
         if (index > projectList.size()) {
@@ -103,32 +86,9 @@ public class ProjectList {
     /**
      * Marks a todo in a project as done.
      *
-     * @param indexStringProj Index of the project.
-     * @param indexStringTodo Index of the todo.
+     * @param indexProj Index of the project.
+     * @param indexTodo Index of the todo.
      */
-    public void markTodoAsDone(String indexStringProj, String indexStringTodo) throws NegativeIndexException {
-        int indexProj;
-        int indexTodo;
-        try {
-            indexProj = Integer.parseInt(indexStringProj);
-            indexTodo = Integer.parseInt(indexStringTodo);
-        } catch (NumberFormatException e) {
-            System.out.println("The input is not an integer!");
-            return;
-        }
-        if (indexProj <= 0 || indexTodo <= 0) {
-            throw new NegativeIndexException();
-        }
-        Project targetProject = projectList.get(indexProj - 1);
-
-        try {
-            targetProject.markTodoAsDone(indexTodo);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("The index is out or range.");
-        }
-
-    }
-
     public void markTodoAsDone(int indexProj, int indexTodo) throws IndexOutOfBoundsException {
         if (indexProj > projectList.size()) {
             throw new IndexOutOfBoundsException();

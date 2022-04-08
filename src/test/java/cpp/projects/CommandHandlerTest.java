@@ -27,8 +27,8 @@ class CommandHandlerTest {
         defaultCommandHandler = new CommandHandler();
         defaultProjectList = new ProjectList();
         defaultProjectList.addProject(PROJECT1NAME);
-        defaultProjectList.addTodoToProject("1",TODO1);
-        defaultProjectList.addTodoToProject("1",TODO2);
+        defaultProjectList.addTodoToProject(1, TODO1);
+        defaultProjectList.addTodoToProject(1, TODO2);
     }
 
     @Test
@@ -78,7 +78,7 @@ class CommandHandlerTest {
     @Test
     public void testDeadline() throws IllegalCommandException {
         String status = defaultCommandHandler.handleUserInput(
-                    defaultProjectList, "addprojdeadline CS2113tP 2024-12-12");
+                    defaultProjectList, "projdeadline 1 2024-12-12");
         assertEquals(status, response.addProjectDeadlineSuccessfully(PROJECT1NAME, "2024-12-12"));
     }
 

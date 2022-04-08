@@ -25,8 +25,8 @@ public class CommandsTest {
     void setUp() {
         defaultProjectList = new ProjectList();
         defaultProjectList.addProject(PROJECT1NAME);
-        defaultProjectList.addTodoToProject("1",TODO1);
-        defaultProjectList.addTodoToProject("1",TODO2);
+        defaultProjectList.addTodoToProject(1, TODO1);
+        defaultProjectList.addTodoToProject(1, TODO2);
     }
 
     @Test
