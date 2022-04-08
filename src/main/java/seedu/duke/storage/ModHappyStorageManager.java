@@ -89,7 +89,8 @@ public class ModHappyStorageManager {
                     if (moduleCodes.contains(m.getModuleCode())) {
                         throw new DuplicateModuleException(m.getModuleCode());
                     }
-                    if (m.getModularCredit() > MAXIMUM_MODULAR_CREDITS || m.getModularCredit() < MINIMUM_MODULAR_CREDITS) {
+                    if (m.getModularCredit() > MAXIMUM_MODULAR_CREDITS
+                            || m.getModularCredit() < MINIMUM_MODULAR_CREDITS) {
                         throw new InvalidModuleException(m.getModuleCode(), m.getModularCredit());
                     }
                     moduleCodes.add(m.getModuleCode());
