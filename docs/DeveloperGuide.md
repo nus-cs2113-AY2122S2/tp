@@ -372,4 +372,30 @@ to block out pockets of time for studying, so that they can better focus during 
 
 ## Instructions for manual testing
 
-- To be updated
+### Task managements
+#### Adding and editing single tasks
+Test inputs:
+
+`add task1 /do 8/8/2023 /start 13:00 /end 14:00`
+
+`add task2 /do 8/8/2023 /start 14:00 /end 15:00`
+
+`edit 1 /start 12:00 /end 13:00`
+
+`show all`
+
+#### Trying to add clashing tasks
+Test inputs:
+
+`add task1 /do 8/8/2023 /start 13:00 /end 14:00`
+
+`add task2 /do 8/8/2023 /start 13:00 /end 15:00`
+
+#### Adding and editing recurring tasks
+Test inputs:
+
+`add task1 /do 8/8/2023 /start 13:00 /end 14:00 /repeat weekly`
+
+`show all`
+
+`edit 4 /start 12:00 /bydate 8/8/2024 /bytime 23:59 /repeat`
