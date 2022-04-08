@@ -24,6 +24,8 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
   * Allows users to view all previously created sessions.
 * [Manager](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Manager.java)
 * [Profile](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Profile.java)
+  * The `Profile` class serves as a container and holds a list of all `Session` and `Group` objects created by the user.
+  * It also keeps track of and issues new _unique identifiers_ for the creation of `Session`, `Activity` and `Group` objects.
 * [Storage](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/storage/Storage.java)
   * This feature was implemented so that data entered by the user during the lifetime of the application would be stored.
   * This is done by using the `Serializable` class in `java`.
