@@ -18,7 +18,6 @@ public class WrongFormatCommand extends Command {
         System.out.println("Input in wrong format: ");
         System.out.println(this.feedback);
         System.out.println("Use the help command to find out the valid commands.");
-
     }
 
 }

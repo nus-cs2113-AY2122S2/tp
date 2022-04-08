@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 //Packages include arrayList packages to hold all TravelPackages
 
@@ -42,12 +43,26 @@ public class Packages {
     // check if packageID already exists. return true if already exists - unique IDs
     // only!
     public boolean idExists(int id) {
-        for (int i = 0; i < packages.size(); i++) {
-            if (packages.get(i).getID() == id) {
+        for (TravelPackage aPackage : packages) {
+            if (aPackage.getID() == id) {
                 return true;
             }
         }
+        return false;
+    }
 
+    public boolean isContainSamePackage(TravelPackage newPackage) {
+        for (TravelPackage aPackage : packages) {
+            if (aPackage.getName().equals(newPackage.getName()) &&
+                    aPackage.getStartDate().equals(newPackage.getStartDate()) &&
+                    aPackage.getEndDate().equals(newPackage.getEndDate()) &&
+                    aPackage.getHotel().equals(newPackage.getHotel()) &&
+                    aPackage.getPrice() == newPackage.getPrice() &&
+                    aPackage.getCountry().equals(newPackage.getCountry()) &&
+                    aPackage.getMaxParticipants() == newPackage.getMaxParticipants()) {
+                return true;
+            }
+        }
         return false;
     }
 

@@ -2,7 +2,8 @@
 
 ## Introduction
 
-Travel Agency Reservation Booking System (TARBS) is a system for employees of travel agencies to track and record customers’ booking of travel packages. 
+{Travel Agency Reservation Booking System (TARBS) is a desktop app for managing reservations for travel packages and tourist attractions, optimised for use via a Command Line Interface (CLI). If you can type fast, TARBS can help to improve efficiency of adding and editing reservations, amongst many other features.}
+
 
 ### Why do we need TARBS?
 Travel agencies often have to manage multiple customers and their respective bookings or plans.
@@ -10,7 +11,7 @@ Travel agencies often have to manage multiple customers and their respective boo
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Down the latest version of `TARBS` from [here](https://github.com/AY2122S2-CS2113-F10-3/tp/releases).
 
 ## Features 
 
@@ -44,6 +45,15 @@ Format: `add {package_name},{package_id},{startDate},{endDate},{hotel},{price},{
 Example of usage: 
 
 `add Skiing Trip,1,23/02/2022,24/02/2022,hotelName,90.99,Singapore,20`
+
+### Viewing a package: `info`
+View a specified Travel Package from the list of Packages based on the package ID.
+
+Format: `info {package_id}`
+
+Example of usage:
+
+`info 2`
 
 ### Deleting a package: `delete`
 Delete a Travel Package from the list of Packages based on the package ID.
@@ -89,13 +99,14 @@ Example of usage:
 
 ## Command Summary
 
+
 | Command | Syntax |
 | --- | :---  |
 | help | help |
 | packages | packages |
-| info | info {num} |
+| info | info {package_number} |
 | add | add {package_name} {country} {duration} {price} {vacancies} |
-| delete | delete {num} |
+| delete | delete {package_number} |
 | reserve  | reserve {package_number} {contact_name} {contact_number} {number_pax} |
 | remove | remove {reservation_id} |
 | reservations | reservations {package_number} |
