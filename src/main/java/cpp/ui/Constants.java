@@ -11,9 +11,9 @@ public class Constants {
     public static final String SEPARATOR = "____________________________________________________________";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n";
     public static final String NO_COMMAND_ENTERED = "No command is entered.";
-    public static final String NEGATIVE_INDEX = "The index is a negative number!\n";
-    public static final String NON_INTEGER_INDEX = "The index is not an integer!\n";
-    public static final String INDEX_OUT_OF_RANGE = "The target index is not found in the list.\n";
+    public static final String NEGATIVE_INDEX = "The index is a negative number!";
+    public static final String NON_INTEGER_INDEX = "The index is not an integer!";
+    public static final String INDEX_OUT_OF_RANGE = "The target index is not found in the list.";
     public static final String NO_LANGUAGES_ADDED = "No languages have been added to this project.\n";
     public static final String UNKNOWN_COMMAND = "Unknown Command.";
     public static final String INVALID_INDEX = "The entered index is invalid.\n";
@@ -25,32 +25,32 @@ public class Constants {
             + "mark [project_index] [todo_index]";
     public static final String MESSAGE_INVALID_ADDPROJECT_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
-            + "addproject [project_title]";
+            + "addproject [project_name]";
     public static final String MESSAGE_INVALID_DELETEPROJECT_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
-            + "deleteproject [project_title]";
+            + "deleteproject [project_name]";
     public static final String INVALID_PROJECT_NAME = "Sorry! There was no project with that name.";
-    public static final String MESSAGE_INVALID_ADDPROJDEADLINE_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
+    public static final String MESSAGE_INVALID_PROJDEADLINE_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
-            + "addprojdeadline [project_title] [deadline]";
-    public static final String MESSAGE_INVALID_ADDTODODEADLINE_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
+            + "projdeadline [project_index] [deadline]";
+    public static final String MESSAGE_INVALID_TODODEADLINE_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
-            + "addtododeadline [project_index] [todo_index] [deadline]";
+            + "tododeadline [project_index] [todo_index] [deadline]";
     public static final String MESSAGE_INVALID_ADDLANGUAGE_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
-            + "addlanguage [project_title] [language_name]";
+            + "addlanguage [project_name] [language_name]";
     public static final String MESSAGE_INVALID_LISTLANGUAGE_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
-            + "listlanguages [project_title]";
-    public static final String MESSAGE_INVALID_ADDMEMBER_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
-            + "The correct format should be:\n"
-            + "addmember [project_title] [member_name] /c[contact_number] /e[email]";
+            + "listlanguages [project_name]";
     public static final String MESSAGE_INVALID_CHANGEGITHUBLINK_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
-            + "changegit [project_title] [website URL]";
+            + "changegit [project_index] [website URL]";
     public static final String MESSAGE_INVALID_LINK_FORMAT =
             "Please make sure your link begins with the following:\n"
             + "http:// or https://";
+    public static final String MESSAGE_INVALID_OPENGIT_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
+            + "The correct format should be:\n"
+            + "opengit [project_name]";
 
     public static final int PROJECT_NOT_FOUND = -1;
     public static final int TWO_ARGUMENTS = 2;

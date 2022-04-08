@@ -22,7 +22,7 @@ public class OpenGitCommandParser implements CommandParser<OpenGitCommand> {
     @Override
     public OpenGitCommand parse(String[] userInput) throws IllegalCommandException {
         if (userInput.length < Constants.TWO_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new IllegalCommandException(Constants.MESSAGE_INVALID_OPENGIT_COMMAND_FORMAT);
         }
         String projectTitle = getProjectTitle(userInput);
         return new OpenGitCommand(projectTitle);

@@ -29,6 +29,9 @@ public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
         } catch (NumberFormatException e) {
             throw new IllegalCommandException(Constants.INVALID_INDEX);
         }
+        if (index <= 0) {
+            throw new IllegalCommandException(Constants.NEGATIVE_INDEX);
+        }
         return new AddTodoCommand(index,todoString);
     }
 
@@ -39,7 +42,7 @@ public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
             todoString = strings[2];
         } else {
             for (int i = 2; i < strings.length; i++) {
-                todoString = todoString + " " + strings[i];
+                todoString = todoString + strings[i] + " ";
             }
         }
         return todoString;

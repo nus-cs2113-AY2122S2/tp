@@ -33,7 +33,7 @@ public class ParsersTest {
     public void testAddDeadlineCommandParser() throws IllegalCommandException {
         String[] input = new String[1];
         input[0] = "dummy";
-        AddProjectDeadlineCommandParser addProjectDeadlineCommandParser = new AddProjectDeadlineCommandParser();
+        ProjectDeadlineCommandParser addProjectDeadlineCommandParser = new ProjectDeadlineCommandParser();
         assertThrows(IllegalCommandException.class, () ->
                 addProjectDeadlineCommandParser.parse(input)
         );

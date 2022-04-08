@@ -3,6 +3,7 @@ package cpp;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.CommandHandler;
 import cpp.model.ProjectList;
+import cpp.ui.Constants;
 import cpp.ui.Response;
 import cpp.storage.Storage;
 
@@ -37,12 +38,14 @@ public class CsProjPlanner {
         while (!input.equalsIgnoreCase("exit")) {
             assert (projectList != null) : "List of projects does not exist.";
             assert (commandHandler != null) : "Command Handler does not exist.";
+            System.out.println(Constants.SEPARATOR);
             try {
                 result = commandHandler.handleUserInput(projectList, input);
             } catch (IllegalCommandException e) {
                 result = e.getMessage();
                 System.out.println("Execution result: " + result);
             }
+            System.out.println(Constants.SEPARATOR);
             Response.displayNext();
             input = in.nextLine(); //fetch next input from the user
         }

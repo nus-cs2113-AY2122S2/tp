@@ -19,6 +19,15 @@ public class ChangeGitHubLinkCommandParser implements CommandParser<ChangeGitHub
         if (userInput.length != Constants.THREE_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_CHANGEGITHUBLINK_COMMAND_FORMAT);
         }
-        return new ChangeGitHubLinkCommand(userInput[1], userInput[2]);
+        int index;
+        try {
+            index = Integer.parseInt(userInput[1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalCommandException(Constants.NON_INTEGER_INDEX);
+        }
+        if (index <= 0) {
+            throw new IllegalCommandException(Constants.NEGATIVE_INDEX);
+        }
+        return new ChangeGitHubLinkCommand(index, userInput[2]);
     }
 }

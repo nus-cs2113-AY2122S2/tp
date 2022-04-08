@@ -31,22 +31,20 @@ public class Response {
 
     public static void printHelp() {
         int count = 1;
-        System.out.println(Constants.SEPARATOR);
         System.out.println("Here are all the possible commands:");
         System.out.println(count++ + ". addproject [Project Name]");
         System.out.println(count++ + ". deleteproject [Project Name]");
-        System.out.println(count++ + ". changegit [Project Name] [GitHub URL]");
+        System.out.println(count++ + ". changegit [Project Index] [GitHub URL]");
         System.out.println(count++ + ". opengit [Project Name]");
-        System.out.println(count++ + ". addprojdeadline [Project Name] [Date]");
-        System.out.println(count++ + ". addtododeadline [Project Index] [Todo Index] [Date]");
+        System.out.println(count++ + ". projdeadline [Project Index] [Date]");
+        System.out.println(count++ + ". tododeadline [Project Index] [Todo Index] [Date]");
         System.out.println(count++ + ". todo [Project Index] [Description]");
         System.out.println(count++ + ". mark [Project Index] [Todo Index]");
         System.out.println(count++ + ". listprojects/listproject");
-        System.out.println(count++ + ". addlanguage [project_name] [language]");
-        System.out.println(count++ + ". listlanguages");
+        System.out.println(count++ + ". addlanguage [Project Index] [Language]");
+        System.out.println(count++ + ". listlanguages [Project Name]");
         System.out.println(count++ + ". view [Project Name]");
         System.out.println(count++ + ". exit");
-        System.out.println(Constants.SEPARATOR);
     }
 
 

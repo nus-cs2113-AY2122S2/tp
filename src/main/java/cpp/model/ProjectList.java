@@ -27,7 +27,6 @@ public class ProjectList {
      * @param title Name of the Project
      */
     public void addProject(String title) {
-        System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index == Constants.PROJECT_NOT_FOUND) { //this is a new project
             projectList.add(new Project(title));
@@ -35,7 +34,6 @@ public class ProjectList {
         } else {
             System.out.println("Failed to add " + title + ". You have added this project before!");
         }
-        System.out.println(Constants.SEPARATOR);
     }
 
     /**
@@ -44,24 +42,20 @@ public class ProjectList {
      * @param title Name of the project
      */
     public void deleteProject(String title) throws IndexOutOfBoundsException {
-        System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index > projectList.size() || index < 0) {
             throw new IndexOutOfBoundsException(Constants.INDEX_OUT_OF_RANGE);
         }
         projectList.remove(index);
         System.out.println(title + " deleted.");
-        System.out.println(Constants.SEPARATOR);
     }
 
     /**
      * prints all projects in the projectList.
      */
     public void printProject() {
-        System.out.println(Constants.SEPARATOR);
         if (projectList.size() == 0) { //no project in the list, print another message
             System.out.println("You have not added any projects yet!");
-            System.out.println(Constants.SEPARATOR);
             return;
         }
         int count = 1;
@@ -70,7 +64,6 @@ public class ProjectList {
             System.out.println("[" + count + "] " + project.getTitle() + " (" + project.getDeadline() + ")");
             count++;
         }
-        System.out.println(Constants.SEPARATOR);
     }
 
     /**
@@ -85,9 +78,7 @@ public class ProjectList {
         try {
             index = Integer.parseInt(indexString);
         } catch (NumberFormatException e) {
-            System.out.println(Constants.SEPARATOR);
             System.out.println("The project index is not an integer!");
-            System.out.println(Constants.SEPARATOR);
             return;
         }
 
@@ -122,9 +113,7 @@ public class ProjectList {
             indexProj = Integer.parseInt(indexStringProj);
             indexTodo = Integer.parseInt(indexStringTodo);
         } catch (NumberFormatException e) {
-            System.out.println(Constants.SEPARATOR);
             System.out.println("The input is not an integer!");
-            System.out.println(Constants.SEPARATOR);
             return;
         }
         if (indexProj <= 0 || indexTodo <= 0) {
@@ -152,54 +141,49 @@ public class ProjectList {
     /**
      * Adds a deadline to a specified Project.
      *
-     * @param title Name of the project
+     * @param index Index of the project.
      * @param deadline Deadline for the project
      */
-    public void addProjectDeadline(String title, String deadline) {
-        assert (title != null && !title.equals("")
-                && deadline != null && !deadline.equals("")) : "Cannot add deadline.";
-        System.out.println(Constants.SEPARATOR);
-        int index = findProjectIndex(title);
+    public void addProjectDeadline(int index, String deadline) throws IndexOutOfBoundsException{
+        assert (deadline != null && !deadline.equals("")) : "Cannot add deadline.";
+        if (index > projectList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
         if (index != Constants.PROJECT_NOT_FOUND) {
-            Project project = projectList.get(index);
+            Project project = projectList.get(index - 1);
             try {
                 project.setDeadline(deadline);
-                System.out.println("Deadline added to " + title + ": " + deadline);
+                System.out.println("Deadline added to " + project.getTitle() + ": " + deadline);
             } catch (DateTimeParseException e) {
                 System.out.println("Improper format. Please type it in yyyy-mm-dd format.");
             }
         } else {
             System.out.println("Sorry! There was no project with that name.");
         }
-        System.out.println(Constants.SEPARATOR);
     }
 
     /**
      * Changes the GitHub repo link of a Project.
      *
-     * @param title Name of the project
+     * @param index Index of the project
      * @param githubLink New GitHub repo link for the project
      */
-    public void addGithubLink(String title, String githubLink) {
-        assert (title != null && title != "" && githubLink != null && githubLink != "") : "Cannot add deadline.";
-        System.out.println(Constants.SEPARATOR);
-        int index = findProjectIndex(title);
+    public void addGithubLink(int index, String githubLink) {
+        assert (githubLink != null && githubLink.equals("")) : "Cannot add deadline.";
         if (index != Constants.PROJECT_NOT_FOUND) {
-            Project project = projectList.get(index);
+            Project project = projectList.get(index - 1);
             try {
                 if ((!githubLink.startsWith("http://") && !githubLink.startsWith("https://"))) {
                     throw new URISyntaxException(githubLink, "invalid format");
                 }
                 project.setGitHubLink(githubLink);
-                System.out.println("The Github Repo for " + title + " has been changed to: " + githubLink);
+                System.out.println("The Github Repo for " + project.getTitle() + " has been changed to: " + githubLink);
             } catch (URISyntaxException e) {
                 System.out.println(Constants.MESSAGE_INVALID_LINK_FORMAT);
             }
         } else {
-            System.out.println(title + " -- " + index);
             System.out.println("Sorry! There was no project with that name.");
         }
-        System.out.println(Constants.SEPARATOR);
 
     }
     
@@ -210,7 +194,6 @@ public class ProjectList {
      */
     public void openGit(String title) {
         assert (title != null && !title.equals("")) : "Cannot view the project.";
-        System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index == Constants.PROJECT_NOT_FOUND) { //project not found
             System.out.println("Sorry! There was no project with that name.");
@@ -218,7 +201,6 @@ public class ProjectList {
             Project project = projectList.get(index);
             project.openGit();
         }
-        System.out.println(Constants.SEPARATOR);
     }
 
     /**
@@ -234,7 +216,6 @@ public class ProjectList {
         }
         Project targetProject = projectList.get(indexProj - 1);
 
-        System.out.println(Constants.SEPARATOR);
         try {
             targetProject.addTodoDeadline(indexTodo, deadline);
             String todoString = targetProject.getTodos().get(indexTodo - 1).getDescription();
@@ -242,7 +223,6 @@ public class ProjectList {
         } catch (DateTimeParseException e) {
             System.out.println("Improper format. Please type it in yyyy-mm-dd format.");
         }
-        System.out.println(Constants.SEPARATOR);
     }
 
     /**
@@ -262,22 +242,10 @@ public class ProjectList {
      */
     public Project getProject(int index) {
         assert (index >= 0 && index < projectList.size()) : "Index out of range!";
-        return projectList.get(index);
-    }
-
-    /**
-     * Gets the project of a given name.
-     *
-     * @param projectName name of the given project
-     * @return target project with given name
-     */
-    public Project getProject(String projectName) {
-        assert (projectName != null) : "Invalid name";
-        int index = findProjectIndex(projectName);
-        if (index == Constants.PROJECT_NOT_FOUND) {
+        if (index > projectList.size()) {
             return null;
         }
-        return getProject(index);
+        return projectList.get(index);
     }
 
     private int findProjectIndex(String name) {
@@ -300,7 +268,6 @@ public class ProjectList {
      */
     public void view(String title) {
         assert (title != null && !title.equals("")) : "Cannot view the project.";
-        System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index == Constants.PROJECT_NOT_FOUND) { //project not found
             System.out.println("Sorry! There was no project with that name.");
@@ -310,7 +277,6 @@ public class ProjectList {
             listLanguages(title);
         }
 
-        System.out.println(Constants.SEPARATOR);
     }
 
     /**
@@ -320,7 +286,6 @@ public class ProjectList {
      */
     public void listLanguages(String title) {
         assert (title != null && !title.equals("")) : "Cannot list languages for this project.";
-        System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index == Constants.PROJECT_NOT_FOUND) { //project not found
             System.out.println("Sorry! There was no project with that name.");
@@ -328,21 +293,17 @@ public class ProjectList {
             Project project = projectList.get(index);
             project.printLanguages();
         }
-        System.out.println(Constants.SEPARATOR);
     }
 
-    public void addLanguages(String projectName, String language) {
+    public void addLanguages(int index, String language) {
         assert (language != null && !language.equals("")) : "Cannot list languages for this project.";
-        System.out.println(Constants.SEPARATOR);
-        int index = findProjectIndex(projectName);
         if (index == Constants.PROJECT_NOT_FOUND) {
             System.out.println(Constants.INVALID_PROJECT_NAME);
         } else {
-            Project project = projectList.get(index);
+            Project project = projectList.get(index - 1);
             project.addLanguage(language);
             System.out.println(language + " language added.");
         }
-        System.out.println(Constants.SEPARATOR);
     }
 
 }
