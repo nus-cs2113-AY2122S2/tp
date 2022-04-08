@@ -33,10 +33,18 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 #### Enhancements to existing features
  * [CommandParser interface](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/CommandParser.java)
    * To isolate Parser component related dependencies from Command classes.
+   * Set up to encourage other developers to separate the dependency of the `Parser` component from the `Command`
+     subclasses that they are working on.
  * [ParserUtils](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserUtils.java)
+   * Separated the handling of argument parsing from `Parser` class into `ParserUtils` class, allowing `Parser` class to
+     have the sole purpose of returning an `XYZCommand` object corresponding to the given user input.
  * [ParserErrors](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserErrors.java)
+   * Separated the handling of `Parser` component related error messages to `ParserError` class.
  * Integration of [`TableFormatter`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TableFormatter.java) class to 
    [`Session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Session.java) class
+   * Improve the readability of details of a `Session` object when printed.
+ * Add support and future-proofing to parsing GST and Service charge percentages in [`ParserUtils`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserUtils.java) class
+   * Allow the use of up to two decimal points to support potential changes and variability in charges.
 
 #### Testing
  * Added comprehensive JUnit tests for `Parser`, `ParserUtils` and `Session` classes
