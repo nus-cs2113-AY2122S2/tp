@@ -148,7 +148,7 @@ public class AddSatisfactionCommand extends Command {
         satisfactionList.addSatisfaction(satisfaction);
         ui.printAddSatisfactionAcknowledgementMessage(satisfactionList, satisfaction);
         SatisfactionListFileManager satisfactionListFileManager = new SatisfactionListFileManager();
-        satisfactionListFileManager.writeSatisfactionListToFile(satisfactionList);
+        satisfactionListFileManager.save(satisfactionList);
 
     }
 

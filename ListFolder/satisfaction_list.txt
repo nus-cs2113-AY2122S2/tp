@@ -1,3 +1,4 @@
 bob|3
 joe|4
 john|5
+susan|3
