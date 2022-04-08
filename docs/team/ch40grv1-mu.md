@@ -21,6 +21,7 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
 
 - **New features:**
     - Added the ability to save, which will save the state of the program(modules, tasks, user options) and significant enhance the usability of the app, because it enables users to access the data across multiple usage sessions. [#91](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/91)
+
     - Partially implemented the loading of serialised user data from storage. [#91](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/91). I handled the serialisation and deserialization functions, while instantiation of the relevant data objects in the program based on the data loaded were written by a teammate.
     - Added the ability to check and set customized options (e.g.always hide completed tasks). This feature enhances the usability of the app and is an extendable skeleton for user model in MVC. [#102](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/102)
     - Wrote `ExitCommand` that will execute pre-ending operations and end the process.  [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
@@ -35,6 +36,7 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
         - Added supported system explaining the operating systems that the app are well tested on. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added expected output to all sample input and keep the output of the user guide updated when the app is updated. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added sample input in the command summary. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
+
       
     - Developer guide:
         - Added section explaining the format and usage of estimated time. [#118](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/118)

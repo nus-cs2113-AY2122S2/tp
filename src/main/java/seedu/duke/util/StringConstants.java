@@ -195,7 +195,6 @@ public class StringConstants {
     public static final String ERROR_INVALID_FLAG = "\nInvalid flag '%s'."
             + "\nPlease check and try again. "
             + "\nYou may input 'help' followed by your command word to view the expected input format.";
-
     public static final String ERROR_MISSING_FLAG = "\nMissing flag."
             + "\nPlease check and try again. "
             + "\nYou may input 'help' followed by your command word to view the expected input format.";
@@ -203,13 +202,12 @@ public class StringConstants {
             + "\nPlease try again. Accepted commands are: add, del.";
     public static final String ERROR_MISSING_TAG_OPERATION = "\nMissing operation."
             + "\nPlease try again. Accepted commands are: add, del.";
-
     public static final String ERROR_INVALID_MODULE_GRADE = "\nInvalid module grade '%s'."
             + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
     public static final String ERROR_MISSING_MODULE_GRADE = "\nMissing module grade."
             + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
     public static final String ERROR_INVALID_NUMBER = "\nInvalid number format for %s '%s'."
-            + "\nPlease try again using a numerical number.";
+            + "\nPlease try again using a positive integer.";
     public static final String ERROR_MISSING_NUMBER = "\nMissing %s."
             + "\nPlease try again using a numerical number.";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
@@ -223,10 +221,7 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
-
     public static final String ERROR_MODULAR_CREDITS_HELP = " (Accepted range: 0 to 20)";
-    public static final String ERROR_TASK_NUMBER_FAILED = "task number";
-
     public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
     public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with module code \"%s\" found. "
             + "Aborting load...";
