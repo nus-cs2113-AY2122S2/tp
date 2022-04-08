@@ -81,6 +81,14 @@ class ActivityTest {
     }
 
     /**
+     * Checks if the correct activity total cost is returned.
+     */
+    @Test
+    void getActivityName_activityOne_correctActivityTotalCost() {
+        assertEquals(15, activityOne.getTotalCost());
+    }
+
+    /**
      * Checks if a negative integer is returned when an Activity object with a smaller activity unique identifier
      * is compared against an Activity object with a larger activity unique identifier.
      */
