@@ -25,6 +25,9 @@ back into the lists.
 **Help Command**
 - Wrote the code to display a list of commands when user enters `help`.
 
+**JUnit Testing for ParserLocalDataTest**
+- Wrote the code to ensure that it informs on the specified error in the MeetingJio.txt.
+
 ###Enhancements Implemented
 **Parser for Local Data**
 - Users can edit the data from the data file. The new data will be parsed and added into the lists
@@ -48,6 +51,6 @@ Specified error will be shown to the user so that he can correct it.
 - Wrote the Loading Data Feature section in the Developer Guide.
 - Designed the Sequence Diagram for the feature.
 
-**Contributions to team-based tasks**
+###Contributions to team-based tasks
 - In charge of defining, assigning, and tracking project tasks.
 
