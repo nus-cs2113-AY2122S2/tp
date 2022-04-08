@@ -154,7 +154,10 @@ Further, maintaining a record of the equipment is a time-consuming task given th
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
-* *glossary item* - Definition
+* *Equipment* - Each entity that is being stored/manipulated in the application
+* *Inventory* - Refers to the whole of the Equipment stored in the application
+* *Command* - Keywords that users use to tell the application to perform certain actions
+* *CommandResult* - Results that are produced from the execution of Commands.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Instructions for manual testing
