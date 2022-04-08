@@ -65,6 +65,14 @@ class ActivityTest {
     }
 
     /**
+     * Checks if the correct activity unique identifier is returned.
+     */
+    @Test
+    void getActivityId_activityOne_activityIdOfOne() throws InvalidDataException {
+        assertEquals(1, activityOne.getActivityId());
+    }
+
+    /**
      * Checks if a negative integer is returned when an Activity object with a smaller activity unique identifier
      * is compared against an Activity object with a larger activity unique identifier.
      */
