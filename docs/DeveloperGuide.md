@@ -1696,7 +1696,7 @@ irrelevant to the loading of `workouts.txt` or they do not add significant value
 bar of `WerkIt`, the `Main` object needs to be shown in the sequence diagram. Apologies for the inconvenience caused.</span>
 
 <span class="info box">:memo: The procedures for reading and loading the data for exericse, plan, and schedule data sets are 
-largely similar to the above sequence diagram.</span>
+largely similar to the above sequence diagram. Thus, sequence diagrams for these data sets are not shown.</span>
 
 **(Steps 1 to 3)** When the `WerkIt` object is instantiated, in the constructor, `WerkIt#loadRequiredDirectoryAndFiles()`
 is called. This method is responsible for checking if the necessary resource files and directories are present. In this
@@ -1746,7 +1746,7 @@ command:
 ![Write New Line Of Data](uml/sequenceDiagrams/storage/images/writeNewLineOfData.png)
 
 <span class="info box">:memo: The procedure for writing a new line of data when the user creates a new plan is largely 
-similar to the above sequence diagram.</span>
+similar to the above sequence diagram. Thus, sequence diagrams for these data sets are not shown.</span>
 
 **(Step 1)** After a new workout has been created, the `WorkoutCommand` object calls `FileManager#writeNewWorkoutToFile()`,
 passing the newly created `Workout` object as the argument.
@@ -1949,6 +1949,8 @@ are running this application on a 64-bit operating system and with a minimum of 
 #### Performance Requirements 
 Each command entered by the user should respond within two seconds.
 
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+
 ---
 ## Glossary
 
@@ -1981,14 +1983,23 @@ of their schedule. For instance, the user's daily schedule can look like this:
 | Sunday    | rest day       |
 
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 This section includes instructions to test WerkIt! manually.
 <br/>
 <span class = "info box">:memo: These test instructions covers the basic testing of the WerkIt! features. 
-Testers are expected to do more testing.
+Testers are welcome conduct more extensive and rigorous testing.
 </span>
 
-### Launch and shutdown
+### Overview
+- [Launch and Shutdown](#launch-and-shutdown)
+- [Test on Exercise Features](#test-on-exercise-features)
+- [Test on Workout Features](#test-on-workout-features)
+- [Test on Plan Features](#test-on-plan-features)
+- [Test on Schedule Features](#test-on-schedule-features)
+- [Test on Search Features](#test-on-search-features)
+- [Test on Data Saving](#test-on-data-saving)
+
+### Launch and Shutdown
 #### Initial Launch
 1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases/tag/Jar-V2.0) and copy it into an empty folder.
 2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
@@ -1999,11 +2010,37 @@ Testers are expected to do more testing.
 #### Shutdown
 1. Enter the `exit` command to exit WerkIt!
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+---
+
 ### Test on Exercise Features
 #### Listing All Exercises
 
+---
+
 ### Test on Workout Features
 #### Creating A New Workout
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#create-a-workout-workout-new).)
+
+**Prerequisites: ** Ensure that your list of exercises is populated with at least one exercise for you to test the
+`workout` command on.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                                                  | Command                               | Expected result                    |
+|:-----------------------------------------------------------|:--------------------------------------|:-----------------------------------|
+| Valid exercise name and repetition value.                  | `workout /new russian twist /reps 20` | New workout is added successfully. |
+| Valid exercise name and highest possible repetition value. | `workout /new sit up /reps 2147483647` | New workout is added successfully. |
+
+##### Negative Test Cases
+| Test Case                                                                              | Command                                       | Expected result                                                |
+|:---------------------------------------------------------------------------------------|:----------------------------------------------|:---------------------------------------------------------------|
+| Valid exercise name and repetition value that exceeds upper bound for `int` data type. | `workout /new russian twist /reps 2147483648` | Error response (invalid user argument), workout not added.     |
+| Valid exercise name and repetition value that is 0.                                    | `workout /new push up /reps 0`                | Error response (reps specified is invalid), workout not added. |
+| Exercise name that does not exist in the list of exercises and valid repetition value. | `workout /new somersault /reps 20` | Error response (exercise name does not exist), workout not added. |
+
 #### Listing All Workouts
 
 #### Deleting An Existing Workout
@@ -2024,6 +2061,11 @@ affected by the deletion of this workout will display their delete messages acco
    c. `workout /delete X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
 
 #### Updating An Existing Workout
+
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+
+---
 
 ### Test on Plan Features
 #### Creating A New Plan 
@@ -2053,11 +2095,20 @@ Expected: Nothing is listed because no additional arguments should be supplied f
 #### Listing Workouts In A Plan
 #### Deleting An Existing Plan
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+---
+
 ### Test on Schedule Features
 #### Updating The Schedule
 #### Viewing The Schedule
 #### Clearing Plan Schedule For A Day
 #### Clearing All Plans In The Schedule
+
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+
+---
 
 ### Test on Search Features
 #### Searching For Exercise
@@ -2065,6 +2116,40 @@ Expected: Nothing is listed because no additional arguments should be supplied f
 #### Searching For Plan
 #### Searching For All
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+---
+
 ### Test on Data Saving 
+
+The following are some test cases for you to try:
+
+<span class="info box">:memo: **Important!** These test cases are done on the following assumptions:
+1. Resource files `workouts.txt`, `plans.txt`, and `schedule.txt` are empty. 
+2. `exercise.txt` is populated with its default exercises.
+
+If you have some data written into these files or modified `exercises.txt`, please do the following
+prior to conducting the test cases mentioned below:
+1. If WerkIt! is running, exit the application.
+2. Backup your existing `werkItResources` directory.
+3. Delete the `werkItResources` directory (not your backup!)
+4. Start WerkIt! to generate a fresh set of `werkItResources` directory and its resource files.
+</span>
+
+<span class="warning box">:warning: Please follow the test cases and its commands in sequence as subsequent test cases 
+rely on former test cases.</span>
+
+| Test Case                                                                  | Command                                                                                                                                | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|:---------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1. Write new data into `workouts.txt`.                                     | (a) `workout /new sit up /reps 10`<br/><br/>(b) `workout /new push up /reps 20`<br/><br/>(c)`workout /new russian twist /reps 30`      | The following three lines are added to `workouts.txt`:<br/><br/>![workouts.txt](images/workoutsTxtNewWorkouts.png)                                                                                                                                                                                                                                                                                                                                                                                             |
+| 2. Update data in `workouts.txt`.                                          | `workout /update 2 40`                                                                                                                 | Workout (push up, 20 reps) is updated to 40 reps. `workouts.txt` should look something like this:<br/><br/>![workouts.txt Update Workout](images/workoutsTxtUpdateWorkout.png)                                                                                                                                                                                                                                                                                                                                 |
+| 3. Write new data into `plans.txt`.                                        | (a) `plan /new plan a  /workouts 1, 2`<br/><br/>(b) `plan /new plan b /workouts 2, 3`<br/><br/>(c) `plan /new plan c /workouts 1, 3`   | The following lines are added to `plans.txt`:<br/><br/>![plans.txt](images/plansTxtNewPlans.png)                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 4. Write new data into `schedule.txt`.                                     | (a) `schedule /update 1 1`<br/><br/>(b) `schedule /update 3 2`<br/><br/>(c) `schedule /update 5 3`<br/><br/>(d) `schedule /update 6 3` | The following lines are added to `schedule.txt`:<br/><br/>![schedule.txt](images/scheduleTxtNewDays.png)                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 5. Delete data from `schedule.txt`.                                        | `schedule /clear 5` | `schedule.txt` will be updated the following:<br/><br/>![schedule.txt day deleted](images/scheduleTxtDeleteDay.png)                                                                                                                                                                                                                                                                                                                                                                                            |
+| 6. Delete data from `plans.txt` and `schedule.txt` is updated accordingly. | `plans /delete 3` | `plans.txt` will be updated to the following:<br/><br/>![plans.txt delete plan](images/plansTxtDeletePlan.png)<br/><br/>`schedule.txt` will also be updated as one of the days has the deleted plan:<br/><br/>![schedule.txt plan delete](images/scheduleTxtPlanDeleteCascade.png)                                                                                                                                                                                                                             |
+| 7. Delete workout from `workouts.txt` and `plans.txt` and `schedule.txt` are updated accordingly. | `workout /delete 1` | `workout.txt` will be updated to the following:<br/><br/>![workout.txt workout delete](images/workoutsTxtDeleteWorkout.png)<br/><br/>`plans.txt` will also be updated as some plans with the deleted workout are affected:<br/><br/>![plans.txt workout delete cascasde](images/plansTxtWorkoutDeleteCascade.png)<br/><br/>Likewise, `schedule.txt` is also updated as a plan assigned to a day has been affected:<br/><br/>![schedule.txt workout delete cascade](images/scheduleTxtWorkoutDeleteCascade.png) |                                    
+
+
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
