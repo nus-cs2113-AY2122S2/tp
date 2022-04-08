@@ -137,13 +137,13 @@ However, plan names may have more than a single whitespace in between words.<br/
 **Examples of Incorrect Usage**<br/>
 :x: `workout /new     push up   /reps   1000`<br/>
 :x: `plan    /list`<br/>
-:x: `plan /new Leg Day    /workouts    1, 2, 3`
+:x: `plan  /new leg day    /workouts    1, 2, 3`
 <br/><br/>
 **Examples of Correct Usage**<br/>
 :heavy_check_mark: `workout /new push up /reps 1000`<br/>
 :heavy_check_mark: `plan /list`<br/>
-:heavy_check_mark: `plan /new Leg Day /workouts 1, 2, 3`<br/>
-:heavy_check_mark: `plan /new Leg     Day /workouts 1, 2, 3`
+:heavy_check_mark: `plan /new leg day /workouts 1, 2, 3`<br/>
+:heavy_check_mark: `plan /new leg     day /workouts 1, 2, 3`
 </span>
 
 #### Workout Commands
