@@ -40,7 +40,7 @@ public class StudyManager {
     private static final String DELETE_COMMAND = "rm";
     public static final String ADD_COMMAND = "add";
     private static final String EDIT_COMMAND = "edit";
-    private static final String FIND_COMMAND = "find";
+    public static final String FIND_COMMAND = "find";
     public static final String READ_ICS_COMMAND = "read ics";
 
     public static final String MODULE_TIME_DELIMITER = "t/";

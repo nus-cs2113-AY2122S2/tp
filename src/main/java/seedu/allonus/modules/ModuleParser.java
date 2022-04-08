@@ -11,27 +11,14 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
  * Represents the class that will parse and validate user inputs for module parameters.
  */
 public class ModuleParser {
     /**
-     * ModuleParser messages, commands and constants.
+     * ModuleParser messages and constants.
      */
-
-    private static final String FIND_COMMAND = "find";
-    private static final String MODULE_TIME_DELIMITER = "t/";
-    private static final String MODULE_DAY_DELIMITER = "d/";
-    private static final String MODULE_CODE_DELIMITER = "m/";
-    private static final String MODULE_CATEGORY_DELIMITER = "c/";
-    private static final String MODULE_CATEGORY_LEC = "Lecture";
-    private static final String MODULE_CATEGORY_TUT = "Tutorial";
-    private static final String MODULE_CATEGORY_EXAM = "Exam";
-    private static final String MODULE_CATEGORY_LAB = "Laboratory";
-    private static final String CATEGORY_LECTURE_SHORTHAND = "lec";
-    private static final String CATEGORY_TUTORIAL_SHORTHAND = "tut";
-    private static final String CATEGORY_EXAM_SHORTHAND = "exam";
-    private static final String CATEGORY_LAB_SHORTHAND = "lab";
     public static final String STRING_SPACE_CHARACTER = " ";
     public static final String EMPTY_STRING = "";
     public static final String REGEX_MODULE_CODE = "^[a-zA-Z0-9]+$";
@@ -80,6 +67,7 @@ public class ModuleParser {
     private static final String WRONG_CATEGORY_FORMAT_MESSAGE = "Category has to be one of lec, tut, lab or exam";
 
     public static final String LOGGER_IDENTIFIER = "mylogger";
+    public static final String REGEX_ALL_MODULE_PARAMETERS = "[mcdt]/";
 
     private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
 
@@ -131,7 +119,7 @@ public class ModuleParser {
     }
 
     private String[] getSplitParameters(String userInput) {
-        String regex = "[mcdt]/" + ".*?(?=(" + "[mcdt]/" + "|$))";
+        String regex = REGEX_ALL_MODULE_PARAMETERS + ".*?(?=(" + REGEX_ALL_MODULE_PARAMETERS + "|$))";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userInput);
 
@@ -176,7 +164,7 @@ public class ModuleParser {
         String module;
         try {
             if (parameters[0].substring(2).equals(EMPTY_STRING)
-                    || !parameters[0].substring(0, 2).equals(MODULE_CODE_DELIMITER)) {
+                    || !parameters[0].substring(0, 2).equals(StudyManager.MODULE_CODE_DELIMITER)) {
                 throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
             } else {
                 module = parameters[0].substring(2);
@@ -218,13 +206,15 @@ public class ModuleParser {
         String category;
         try {
             if (parameters[1].substring(2).equals(EMPTY_STRING)
-                    || !parameters[1].substring(0, 2).equals(MODULE_CATEGORY_DELIMITER)) {
+                    || !parameters[1].substring(0, 2).equals(StudyManager.MODULE_CATEGORY_DELIMITER)) {
                 throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
             } else {
                 category = parameters[1].substring(2);
                 category = validateModuleCategory(category);
-                assert category.equals(MODULE_CATEGORY_LEC) || category.equals(MODULE_CATEGORY_TUT)
-                        || category.equals(MODULE_CATEGORY_EXAM) || category.equals(MODULE_CATEGORY_LAB);
+                assert category.equals(StudyManager.MODULE_CATEGORY_LEC)
+                        || category.equals(StudyManager.MODULE_CATEGORY_TUT)
+                        || category.equals(StudyManager.MODULE_CATEGORY_EXAM)
+                        || category.equals(StudyManager.MODULE_CATEGORY_LAB);
             }
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
@@ -240,17 +230,17 @@ public class ModuleParser {
      */
     public String validateModuleCategory(String category) throws ModuleCategoryException {
         switch (category) {
-        case CATEGORY_LECTURE_SHORTHAND:
-            category = MODULE_CATEGORY_LEC;
+        case StudyManager.CATEGORY_LECTURE_SHORTHAND:
+            category = StudyManager.MODULE_CATEGORY_LEC;
             break;
-        case CATEGORY_TUTORIAL_SHORTHAND:
-            category = MODULE_CATEGORY_TUT;
+        case StudyManager.CATEGORY_TUTORIAL_SHORTHAND:
+            category = StudyManager.MODULE_CATEGORY_TUT;
             break;
-        case CATEGORY_EXAM_SHORTHAND:
-            category = MODULE_CATEGORY_EXAM;
+        case StudyManager.CATEGORY_EXAM_SHORTHAND:
+            category = StudyManager.MODULE_CATEGORY_EXAM;
             break;
-        case CATEGORY_LAB_SHORTHAND:
-            category = MODULE_CATEGORY_LAB;
+        case StudyManager.CATEGORY_LAB_SHORTHAND:
+            category = StudyManager.MODULE_CATEGORY_LAB;
             break;
         default:
             throw new ModuleCategoryException(WRONG_CATEGORY_FORMAT_MESSAGE);
@@ -269,7 +259,7 @@ public class ModuleParser {
         String day;
         try {
             if (parameters[2].substring(2).equals(EMPTY_STRING)
-                    || !parameters[2].substring(0, 2).equals(MODULE_DAY_DELIMITER)) {
+                    || !parameters[2].substring(0, 2).equals(StudyManager.MODULE_DAY_DELIMITER)) {
                 throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
             } else {
                 day = parameters[2].substring(2);
@@ -335,7 +325,7 @@ public class ModuleParser {
         String time;
         try {
             if (parameters[3].substring(2).equals(EMPTY_STRING)
-                    || !parameters[3].substring(0, 2).equals(MODULE_TIME_DELIMITER)) {
+                    || !parameters[3].substring(0, 2).equals(StudyManager.MODULE_TIME_DELIMITER)) {
                 throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
             } else {
                 time = parameters[3].substring(2);
@@ -373,7 +363,7 @@ public class ModuleParser {
      * @throws InvalidFindInputException for empty spaces and special characters in find query.
      */
     public String validateFindQuery(String userInput) throws InvalidFindInputException {
-        String moduleKeyword = userInput.replace(FIND_COMMAND + STRING_SPACE_CHARACTER, EMPTY_STRING);
+        String moduleKeyword = userInput.replace(StudyManager.FIND_COMMAND + STRING_SPACE_CHARACTER, EMPTY_STRING);
         if (moduleKeyword.equals(STRING_SPACE_CHARACTER) || moduleKeyword.equals(EMPTY_STRING)
                 || !userInput.contains(" ")) {
             throw new InvalidFindInputException(FIND_MISSING_QUERY_MESSAGE);
