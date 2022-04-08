@@ -70,7 +70,9 @@ public class Parser {
         int wardNumberIndex = dummy.indexOf("/w");
         String email = dummy.substring(emailIndex + 3, wardNumberIndex).trim();
         int wardNumber = Integer.parseInt(dummy.substring(wardNumberIndex + 3).trim());
-        return new AddDoctorCommand(id, name, phoneNumber, email, wardNumber, false);
+        int departmentIndex = dummy.indexOf("/dep");
+        String department = dummy.substring(departmentIndex + 5, wardNumberIndex).trim();
+        return new AddDoctorCommand(id, name, phoneNumber, email, department, wardNumber, false);
     }
 
     //@@author Demonshaha
