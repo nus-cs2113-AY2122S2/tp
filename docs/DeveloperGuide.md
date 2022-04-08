@@ -765,9 +765,11 @@ Given below are instructions to test the app manually.
    2. Execute the command `bye` to save the data to `PlanITarium.txt`.
    3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
       added above.
-   4. Test case: Remove delimiters `/d`, `i Donations 200.0 false 2022-04-08`.
+   4. Test case: Remove delimiters `/d` in save file. The corrupted record should look like this 
+      `i Donations 200.0 false 2022-04-08`.
       Expected: Upon starting up the program again, `Storage` will load valid data until it encounters a
-      corrupted entry as seen in the test case. Execute command `list /g 1` and only `Alice` is printed without
-      the corrupted income entry.
-   5. Test case: Edit task type `i` to `e`.
+      corrupted entry as seen in the test case. We can check the loaded data by executing the command `list /g 1` 
+      and only `Alice` is printed without the corrupted income entry.
+   5. Test case: Edit task type `i` to `e` in save file. The corrupted record should look like this
+      `e Donations 200.0 false 2022-04-08`.
       Expected: Similar to the above expected outcome. 
