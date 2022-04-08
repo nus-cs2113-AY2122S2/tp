@@ -913,7 +913,7 @@ the `plans.txt` file according to the newly modified application's plan list.
 For more information on the file management, 
 refer to this [section](DeveloperGuide.md#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
 
-<br/><br/>
+<br/>
 This completes the process of deleting an existing workout in WerkIt!
 
 ##### Design Considerations for Deleting Existing Workout
@@ -1128,7 +1128,7 @@ object's data into `plans.txt`, which is stored on the user's local filesystem.
 For more information on the file management,
 refer to this [section](DeveloperGuide.md#writing-a-new-line-of-data-to-the-resource-file).
 
-<br/><br/>
+<br/>
 This completes the process of creating and adding a new plan to WerkIt!.
 
 ##### Design Considerations for Creating a New Plan
