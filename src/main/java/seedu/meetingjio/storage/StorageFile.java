@@ -24,6 +24,8 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_DATA_SAVE_FAILED;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_ROW;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INCORRECT_INDEX;
 import static seedu.meetingjio.parser.ParserLocalData.checkEventType;
+import static seedu.meetingjio.parser.ParserLocalData.MEETING_SYMBOL;
+import static seedu.meetingjio.parser.ParserLocalData.LESSON_SYMBOL;
 
 
 /**
@@ -88,12 +90,12 @@ public class StorageFile {
                     ParserLocalData.prepareLoadName(name, masterTimetable);
                 } else {
                     if (!isNoTimetableMessage(data)) {
-                        if (checkIndex(data, listNum)) {
+                        if (isExpectedIndex(data, listNum)) {
                             eventType = ParserLocalData.getEventType(data);
                             checkEventType(eventType);
-                            if (eventType.equals("L")) {
+                            if (eventType.equals(LESSON_SYMBOL)) {
                                 ParserLocalData.prepareLoadLesson(name, data, masterTimetable);
-                            } else if (eventType.equals("M") && personCount == 1) {
+                            } else if (eventType.equals(MEETING_SYMBOL) && personCount == 1) {
                                 meetingList.add(data);
                                 hasMeeting = true;
                             }
@@ -125,7 +127,7 @@ public class StorageFile {
      * @param expectedIndex the expected number
      * @return true if the index is in correct sequence and false otherwise
      */
-    private static boolean checkIndex(String data, int expectedIndex) {
+    private static boolean isExpectedIndex(String data, int expectedIndex) {
         String index = getFirstChar(data);
         int i = Integer.parseInt(index);
         if (i == expectedIndex) {
