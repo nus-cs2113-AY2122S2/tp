@@ -272,8 +272,7 @@ is done. To improve readability, some classes and methods have been omitted from
 
 <br>
 Each command type is a feature of the WerkIt! application.
-The next section will explain the design of each
-feature in detail.
+The next section will explain the design of each feature in detail.
 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
@@ -324,23 +323,23 @@ Below is a class diagram of the workout-related features:
 <span class="box info">:memo: To improve readability, some classes and methods have been omitted from the diagram above.
 The diagram shows the main classes and methods the workout-related features uses. </span>
 
-The `Parser` class will call the `Parser#parseUserInput(userInput)` method
+The `Parser` class will call the `Parser#parseUserInput()` method
 to analyse the user's command. If the user's command is of type 
-`workout`, the `Parser#parseUserInput(userInput)` method
+`workout`, the `Parser#parseUserInput()` method
 will parse the `workout` base word and proceed to create a `WorkoutCommand` object via the
-`Parser#createWorkoutCommand(userInput)` method. 
+`Parser#createWorkoutCommand()` method. 
 <br><br>
 Once the `WorkoutCommand` object is created, the `WorkoutCommand#execute()` method
 is called. Depending on the type of command action, this method will
 call the appropriate operations from the `WorkoutList` class. For instance, if the command action
-is `/new`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout(userArgument)`
+is `/new`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout()`
 to create a new workout in the application. 
 To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
 <br><br>
 When all methods except the `listAllWorkout()` method are executed, the
 `FileManager` and `UI` classes will call its appropriate methods depending on the command action.
 From the previous example, the `/new` workout command action will call the 
-`FileManager#writeNewWorkoutToFile(newWorkout)` and also the `UI#printNewCreatedMessage(newWorkout)`
+`FileManager#writeNewWorkoutToFile()` and also the `UI#printNewCreatedMessage()`
 methods after the new workout has been created.
 <br><br>
 Finally, methods in the `PlanList` class is only called when the `/delete` and `/update`

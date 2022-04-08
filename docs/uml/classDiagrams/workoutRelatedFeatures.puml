@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
+!include ../Style.puml
 hide circle
-
 skinparam classAttributeIconSize 0
 skinparam classFontSize 16
 title Class Diagram of Workout-related Features
@@ -13,38 +13,38 @@ WorkoutCommand --> FileManager
 WorkoutCommand --> UI
 WorkoutCommand -u-> PlanList
 
-class PlanList #LightSkyBlue {
+class PlanList COLOR_LOGIC {
 + deletePlanContainsDeletedWorkout(String deletedWorkoutDetail):void
 + updatePlanContainsUpdatedWorkout(String workoutToCheck, Workout updatedWorkout):void
 }
 
-class FileManager #IndianRed {
+class FileManager COLOR_STORAGE {
 + writeNewWorkoutToFile(Workout newWorkout):void
 + rewriteAllWorkoutsToFile(WorkoutList workoutList):void
 + rewriteAllPlansToFile(PlanList planList):void
 }
 
-class "{abstract}\nCommand" #LightSkyBlue {
+class "{abstract}\nCommand" COLOR_LOGIC {
 }
 
-class WorkoutCommand #LightSkyBlue {
+class WorkoutCommand COLOR_LOGIC {
 + execute():void
 }
 
-class WorkoutList #LightSkyBlue {
+class WorkoutList COLOR_LOGIC {
 + createAndAddWorkout(String userArgument):Workout
 + listAllWorkout():void
 + deleteWorkout(String userArgument):Workout
 + updateWorkout(String userArgument):Workout
 }
 
-class UI #YellowGreen{
+class UI COLOR_UI {
 + printNewWorkoutCreatedMessage(Workout newWorkout):void
 + printDeleteWorkoutMessage(Workout deletedWorkout):void
 + printUpdateWorkoutMessage(Workout updatedWorkout):void
 }
 
-class Parser #Gold {
+class Parser COLOR_PARSER {
 + parseUserInput(String userInput):Command
 + createWorkoutCommand(String userInput):WorkoutCommand
 }
