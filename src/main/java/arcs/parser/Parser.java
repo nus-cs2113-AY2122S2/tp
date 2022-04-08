@@ -115,6 +115,7 @@ public class Parser {
             break;
         case ListStaffCommand.COMMAND_WORD:
             command = new ListStaffCommand();
+            break;
         case AddMealReservationCommand.COMMAND_WORD:
             try {
                 command = MealReservationParser.prepareMealReservationCommand(argumentLine);
