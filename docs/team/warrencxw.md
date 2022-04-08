@@ -31,10 +31,12 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
    * Encapsulates a `Person` object and their overall cost in the session as a debt owed by or owed to an individual.
 
 #### Enhancements to existing features
- * CommandParser interface
+ * [CommandParser interface](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/CommandParser.java)
    * To isolate Parser component related dependencies from Command classes.
- * ParserUtils
- * ParserErrors
+ * [ParserUtils](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserUtils.java)
+ * [ParserErrors](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserErrors.java)
+ * Integration of [`TableFormatter`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TableFormatter.java) class to 
+   [`Session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Session.java) class
 
 #### Testing
  * Added comprehensive JUnit tests for `Parser`, `ParserUtils` and `Session` classes
