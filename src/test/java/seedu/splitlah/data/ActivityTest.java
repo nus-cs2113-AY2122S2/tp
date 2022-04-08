@@ -114,6 +114,16 @@ class ActivityTest {
     }
 
     /**
+     * Checks if the correct array list of persons involved in the activity is returned.
+     */
+    @Test
+    void getInvolvedPersonList_activityOne_correctInvolvedPersonList() {
+        String[] personNames = { "Alice", "Bob","Charlie" };
+        PersonList personList = new PersonList(personNames);
+        assertEquals(personList.getPersonList(), activityOne.getInvolvedPersonList());
+    }
+
+    /**
      * Checks if a negative integer is returned when an Activity object with a smaller activity unique identifier
      * is compared against an Activity object with a larger activity unique identifier.
      */
