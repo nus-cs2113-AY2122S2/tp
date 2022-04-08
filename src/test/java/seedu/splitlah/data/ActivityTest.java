@@ -27,19 +27,21 @@ class ActivityTest {
     private static final String CREATE_TEST_ACTIVITY_INPUT_TWO =
             "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
     private static final String ACTIVITY_ONE_STRING =
-            "Activity Id #1 --\n"
-                    + "Name:  Lunch\n"
-                    + "Id:    1\n"
-                    + "Payer: Alice\n"
-                    + "Cost:  $15.00\n"
-                    + "Involved: \n"
-                    + "-------------------------\n"
-                    + "# | Name    | Cost Owed \n"
-                    + "-------------------------\n"
-                    + "1 | Alice   | 5.00      \n"
-                    + "2 | Bob     | 5.00      \n"
-                    + "3 | Charlie | 5.00      \n"
-                    + "=========================";
+            "Activity Id #1 --\n" +
+                    "Name:                     Lunch\n" +
+                    "Id:                       1\n" +
+                    "Payer:                    Alice\n" +
+                    "GST:                      0.00%\n" +
+                    "Service Charge(SC):       0.00%\n" +
+                    "Cost(GST & SC inclusive): $15.00\n" +
+                    "Involved: \n" +
+                    "-------------------------\n" +
+                    "# | Name    | Cost Owed \n" +
+                    "-------------------------\n" +
+                    "1 | Alice   | 5.00      \n" +
+                    "2 | Bob     | 5.00      \n" +
+                    "3 | Charlie | 5.00      \n" +
+                    "=========================";
 
     /**
      * Creates a session and an activity that are stored and managed by the Manager object.
