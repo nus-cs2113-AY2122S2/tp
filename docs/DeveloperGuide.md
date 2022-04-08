@@ -1679,7 +1679,7 @@ The following sequence diagram illustrates how the `search /all` command works i
 #### About the Location of Directories and Files Created
 Ideally, the `werkItResources` and `werkItLogs` directories should be in the same directory as the `WerkIt.jar` file,
 but the creation of the directories and files depends on where the user starts WerkIt! from. Specifically, it depends
-on the working directory that the user is in when he/she runs WerkIt! In the user guide's 
+on the working directory that the user is in when he/she runs WerkIt!. In the user guide's 
 [quick start guide](UserGuide.md#quick-start-guide) as well as the section regarding 
 [information about the app's local storage](UserGuide.md#werkits-local-storage-information), the user has been told to
 create a new directory to put the WerkIt! JAR file in and to set his/her current working directory before starting the
@@ -2062,12 +2062,14 @@ Testers are welcome conduct more extensive and rigorous testing.
 The following are some test cases for you to try:
 
 ##### Positive Test Cases
+
 | Test Case                                                  | Command                               | Expected result                    |
 |:-----------------------------------------------------------|:--------------------------------------|:-----------------------------------|
 | Valid exercise name and repetition value.                  | `workout /new russian twist /reps 20` | New workout is added successfully. |
 | Valid exercise name and highest possible repetition value. | `workout /new sit up /reps 2147483647` | New workout is added successfully. |
 
 ##### Negative Test Cases
+
 | Test Case                                                                              | Command                                       | Expected result                                                |
 |:---------------------------------------------------------------------------------------|:----------------------------------------------|:---------------------------------------------------------------|
 | Valid exercise name and repetition value that exceeds upper bound for `int` data type. | `workout /new russian twist /reps 2147483648` | Error response (invalid user argument), workout not added.     |
@@ -2080,11 +2082,13 @@ The following are some test cases for you to try:
 The following are some test cases for you to try:
 
 ##### Positive Test Cases
+
 | Test Case                   | Command         | Expected result                                |
 |:----------------------------|:----------------|:-----------------------------------------------|
 | Valid list workout command. | `workout /list` | List down all workouts stored in workout list. |
 
 ##### Negative Test Cases
+
 | Test Case                                     | Command                   | Expected result                                                 |
 |:----------------------------------------------|:--------------------------|:----------------------------------------------------------------|
 | Valid list command with extra arguments.      | `workout /list extraline` | Error response (invalid user argument), workouts not displayed. |
@@ -2100,11 +2104,13 @@ See [this section](#creating-a-new-workout) to view how you can populate your wo
 The following are some test cases for you to try:
 
 ##### Positive Test Cases
+
 | Test Case                  | Command             | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |:---------------------------|:--------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Valid workout to delete    | `workout /delete 1` | The first workout is deleted from the workout list. Details of the deleted workout will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the deleted workout, that plan will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are affected by the deletion of this workout will display their delete messages accordingly. |
 
 ##### Negative Test Cases
+
 | Test Case                                                                                                                                                  | Command             | Expected result                         |
 |:-----------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------|:----------------------------------------|
 | Missing workout index to delete                                                                                                                            | `workout /delete`   | Error response (Insufficient arguments) |
@@ -2129,11 +2135,13 @@ See [this section](#creating-a-new-workout) to view how you can populate your wo
 The following are some test cases for you to try:
 
 ##### Positive Test Cases
+
 | Test Cases         | Command                                | Expected result                                                                                                              |
 |:-------------------|:---------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------|
 | Valid plan created | `plan /new first plan /workouts 1,1,1` | A new plan called "first plan" will be created. This plan contains 3 instances of workout with index 1 in the workout list.  |
 
 ##### Negative Test Cases
+
 | Test Cases                                                                                                                                    | Command                                                             | Expected result                                               |
 |:----------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|:--------------------------------------------------------------|
 | Missing plan name and workouts                                                                                                                | `plan /new`                                                         | Error response (Insufficient arguments)                       |
@@ -2152,12 +2160,14 @@ The following are some test cases for you to try:
 The following are some test cases for you to try:
 
 ##### Positive Test Cases
+
 | Test Cases             | Command      | Expected result                                                                                                                                                                  |
 |:-----------------------|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Valid listing of plans | `plan /list` | a. If plan list is empty, the terminal will display to the user that the plan list is empty. <br/><br/> b. If plan list is not empty, all plan names will be listed to the user. |
 
 
 ##### Negative Test Cases
+
 | Test Cases                                                            | Command        | Expected result                             |
 |:----------------------------------------------------------------------|:---------------|:--------------------------------------------|
 | Additional argument supplied <br/><br/> X could be a word or a number | `plan /list X` | Error response (Additional arguments found) |
@@ -2180,11 +2190,13 @@ The following are some test cases for you to try:
 The following are some test cases for you to try:
 
 ##### Positive Test Cases
+
 | Test Case                      | Command                | Expected result                      |
 |:-------------------------------|:-----------------------|:-------------------------------------|
 | Valid update schedule command. | `schedule /update 1 3` | Plan number 3 is schedule on Monday. |
 
 ##### Negative Test Cases
+
 | Test Case                                     | Command                            | Expected result                                                                         |
 |:----------------------------------------------|:-----------------------------------|:----------------------------------------------------------------------------------------|
 | Update schedule with extra arguments.         | `schedule /update 1 3 extraline`   | Error response (too many arguments entered), plan is not added/updated to the schedule. |
@@ -2201,11 +2213,13 @@ The following are some test cases for you to try:
 The following are some test cases for you to try:
 
 ##### Positive Test Cases
+
 | Test Case                    | Command          | Expected result                                      |
 |:-----------------------------|:-----------------|:-----------------------------------------------------|
 | Valid list schedule command. | `schedule /list` | List down all plans scheduled in the 7-day schedule. |
 
 ##### Negative Test Cases
+
 | Test Case                                     | Command                    | Expected result                                                 |
 |:----------------------------------------------|:---------------------------|:----------------------------------------------------------------|
 | List schedule with extra arguments.           | `schedule /list extraline` | Error response (wrong command entered), schedule not displayed. |
@@ -2217,11 +2231,13 @@ The following are some test cases for you to try:
 The following are some test cases for you to try:
 
 ##### Positive Test Cases
+
 | Test Case                      | Command             | Expected result                                                                   |
 |:-------------------------------|:--------------------|:----------------------------------------------------------------------------------|
 | Valid clear scheduled command. | `schedule /clear 1` | If there is a plan scheduled on Monday, it will be cleared and set to `rest day`. |
 
 ##### Negative Test Cases
+
 | Test Case                                     | Command                       | Expected result                                                                 |
 |:----------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------|
 | Day Number exceed the range of 1 to 7.        | `schedule /clear 9`           | Error response (invalid day number), no plan in the schedule is being cleared.  |
@@ -2234,11 +2250,13 @@ The following are some test cases for you to try:
 The following are some test cases for you to try:
 
 ##### Positive Test Cases
+
 | Test Case                         | Command              | Expected result                             |
 |:----------------------------------|:---------------------|:--------------------------------------------|
 | Valid clear all schedule command. | `schedule /clearall` | All plans added to the schedule is removed. |
 
 ##### Negative Test Cases
+
 | Test Case                                               | Command                        | Expected result                                                                                 |
 |:--------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------|
 | Clear all plans scheduled command with extra arguments. | `schedule /clearall extraline` | Error response (wrong command entered), plans not removed from schedule and schedule not reset. |
