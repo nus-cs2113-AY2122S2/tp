@@ -98,11 +98,19 @@ class ActivityTest {
     }
 
     /**
-     * Checks if the correct gst is returned.
+     * Checks if the correct activity gst is returned.
      */
     @Test
     void getGst_activityOne_correctGst() {
         assertEquals(7, activityOne.getGst());
+    }
+
+    /**
+     * Checks if the correct activity service charge is returned.
+     */
+    @Test
+    void getServiceCharge_activityOne_correctServiceCharge() {
+        assertEquals(10, activityOne.getServiceCharge());
     }
 
     /**
