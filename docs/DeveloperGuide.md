@@ -1039,7 +1039,7 @@ A summary of the general procedure of a new plan being created and stored in Wer
 
 The following sequence diagram illustrates how the `plan /new` command works in greater detail:
 
-<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
  down this section.</span>
 
@@ -1052,21 +1052,21 @@ a `PlanCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
-that the plan action is of type `new`. Subsequently, it will call the
-`PlanList#createAndAddPlan(userArgument)` method to perform the creation of the plan.
+that the plan action is of type `/new`. Subsequently, it will call the
+`PlanList#createAndAddPlan()` method to perform the creation of the plan.
 <br><br>
-The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan(userArgument)`:
+The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan()`:
 <br><br>
 ![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
  `PlanList#createAndAddPlan()` have been omitted.</span>
 
-**(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
+**(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan()`
 method is parsed to obtain the following information required to create the `Plan` object:
 1. Name of the plan.
 2. Workout index numbers in the workout list separated by comma.
-<br><br>
+<br>
 
 Once the information are obtained, the name of the plan to be created will be validated.
 This is to ensure all plan names are valid and unique in the application.
@@ -1075,10 +1075,10 @@ If the plan name is invalid, an `InvalidPlanException` exception will be thrown.
 Subsequently, this `PlanList#createAndAddPlan()` method will find out the number of workouts
 to be added into the new plan. This is done in order to check that the number of workouts to be added into the new plan
 does not exceed 10 workouts, and there should minimally
-be 1 workout in a plan. If the new plan does not meet the minimum and maximum workout number requirement,
+be 1 workout in a plan. If the new plan does not meet the requirements,
 an `InvalidPlanException` will be thrown.
 <br><br>
-**(Steps 2.1 to 2.2)** An `ArrayList` of `Workout` object is created to store the workouts to be added into the new plan.
+**(Steps 2.1 to 2.2)** An ArrayList of `Workout` objects is created to store the workouts to be added into the new plan.
 <br><br>
 **(Steps 2.3 to 2.4)** As the workout indexes in the user argument parameter (e.g. "1, 2, 3") is of type `String`, 
 the loop will split (by comma) and convert each number string into an `Integer`. 
@@ -1086,10 +1086,10 @@ These workout indexes are also checked to ensure that they are within
 the application's workout list range.
 <br><br>
 If the workout indexes are valid, the valid `Workout` object is fetched from the application's workout list based 
-on the workout index and then added into the `ArrayList` that was created in the previous step (Steps 2.1 to 2.2).
-The loop will continue until all workouts to be added in the new plan is added into that `ArrayList`.
+on the workout index and then added into the `ArrayList<Workout>` that was created in the previous step (Steps 2.1 to 2.2).
+The loop will continue until all workouts to be added in the new plan is added into that `ArrayList<Workout>`.
 <br><br>
-**(Steps 2.5 to 2.10)** With the valid plan name and the `ArrayList` containing the workouts to be added into the new plan, 
+**(Steps 2.5 to 2.10)** With the valid plan name and the `ArrayList<Workout>` containing the workouts to be added into the new plan, 
 a new `Plan` object is created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
 check that the new plan to be created does not contain the same workout order as any existing plans. If it does, 
 an `InvalidPlanException` exception will be thrown.
@@ -1098,11 +1098,11 @@ If it is confirmed that the new plan does not contain
 the same workout order as any existing plan, a new `Plan` object is created.
 This new `Plan` object is then added to the application's plan list.
 <br><br>
-**(Step 3)** The `PlanList#createAndAddPlan(userArgument)` method returns the new `Plan` object to `PlanCommand`.
+**(Step 3)** The `PlanList#createAndAddPlan()` method returns the new `Plan` object to `PlanCommand`.
 <br><br>
-**(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage(newPlan)` is called
+**(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage()` is called
 to display the plan that has been created to the user via the terminal. The following is an example
-of a success plan creation message (new plan is called "grow my muscles"):
+of a successful plan creation message (new plan is called "grow my muscles"):
 ```
 ----------------------------------------------------------------------
 Alright, the following plan has been created:
@@ -1111,17 +1111,17 @@ Alright, the following plan has been created:
 
 ----------------------------------------------------------------------
 ```
-**(Steps 6 to 7)** `FileManager#writeNewPlanToFile(newPlan)` is called to write the newly-created `Plan` 
+**(Steps 6 to 7)** `FileManager#writeNewPlanToFile()` is called to write the newly-created `Plan` 
 object's data into `plans.txt`, which is stored on the user's local filesystem.
 <br><br>
 This completes the process of creating and adding a new plan to WerkIt!.
 
 ##### Design Considerations for Creating a New Plan
-###### Validity checks for new plans to be inserted
-The following are the validity checks done before a new plan can be inserted into the application's plan list,
-and the reasons why these checks are done:
+###### Validity Checks for New Plans to Be Inserted
+The following table lists the validity checks done before a new plan can be inserted into the application's plan list,
+as well as the rationale of each check:
 
-|       Type of validity checks       |                                                                                                                                                   Reason for creating the validity checks                                                                                                                                                    |
+|       Type of Validity Checks       |                                                                                                                                                   Reason for Creating the Validity Checks                                                                                                                                                    |
 |:-----------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |          Unique plan name           |                                                                                                       All plan names within the application should be <br/> unique as it makes no sense for users to create plans with the same names.                                                                                                       |
 |     No plans called "rest day"      |                                         "rest day" is used to identify the days in the <br/> schedule that do not have a plan assigned to it. <br/> If a plan called "rest day" is allowed, users might not be able to <br/> differentiate a rest day from days that they actually need to work out.                                         |
@@ -1130,7 +1130,7 @@ and the reasons why these checks are done:
 | Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. <br/> This check is done as it makes no sense to create two plans with different plan names, but same workout orders. |
 
 
-
+<br><br>
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
@@ -1143,7 +1143,7 @@ A summary of the general procedure of listing all plans in the application is as
 
 The following sequence diagram illustrates how the `plan /list` command works in greater detail:
 
-<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
  have been removed from the sequence diagram. </span>
 
 ![List Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/listPlan.png)
@@ -1186,15 +1186,19 @@ This completes the process of displaying all plans in WerkIt!.
 #### List Workouts In A Plan
 A summary of the general procedure of listing all workouts in a plan is as follows:
 1. User enters the command `plan /details <plan index number>`.
-2. A list of workouts that user specified is displayed through the terminal.
+2. A list of workouts that the user has specified is displayed through the terminal.
 
 The following sequence diagram illustrates how the `plan /details` command works:
 
-<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
 have been removed from the sequence diagram.</span>
 
 ![Details Of Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/detailsOfPlan.png)
 <br><br>
+
+<span class="box info">:memo: To improve the diagram's readability, logging-related, input-checking method calls,
+and exception throws in `PlanList#listPlanDetails()` have been omitted.</span>
+
 **(Before Step 1)** The user's input (in this case will be a `plan /details` command) is obtained and parsed to obtain
 a `PlanCommand` object that contains the user's input.
 
@@ -1202,21 +1206,16 @@ a `PlanCommand` object that contains the user's input.
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify that the plan action is of type 
-`details`. Thus, `PlanList#listPlanDetails(userArgument, ui)` will be called to display all the workouts in the plan
+`/details`. Thus, `PlanList#listPlanDetails()` will be called to display all the workouts in the plan
 which user specified.
 
-<span class="box info">:memo: To improve the diagram's readability, logging-related, input-checking method calls,
-and exception throws in `PlanList#listPlanDetails()` have been omitted.</span>
-
 **(Before Step 3)** Methods from the `Integer` class is called to parse the
-argument given to `PlanList#listPlanDetails()` to obtain the plan index number in list.
+argument given to `PlanList#listPlanDetails()` to obtain the plan index number in the plan list.
 
 Next, validity checks of the user input are carried out to ensure that the data entered is valid.
-Plan index number must be a positive integer and smaller than the total number of plan in list 
+Plan index number must be a positive integer and smaller than the total number of plans in the list 
 in order to pass the check. Otherwise, an `InvalidPlanException` will be thrown and
 the entire process is aborted.
-
-Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability.
 
 **(Steps 3 to 4)** With the plan index number, a `Plan` object which user want to view details 
 will be fetched by calling method `PlanList#getPlanFromIndexNum()`.
@@ -1224,8 +1223,8 @@ will be fetched by calling method `PlanList#getPlanFromIndexNum()`.
 **(Steps 5 to 6)** An ArrayList of `Workout` object is created to store the workouts in the `Plan` object we get 
 in the previous step.
 
-**(Step 7 to 9)** The `PlanList#listPlanDetails()` method will then loop through the workout list which we get in the 
-previous step and show the name of the workouts with number of repetitions to the user. 
+**(Steps 7 to 9)** The `PlanList#listPlanDetails()` method will then loop through the workout list which we have obtained
+in the previous step and show the name of the workouts with number of repetitions to the user. 
 The following is an example of what will be displayed to the user when the `plan /details` command is entered:
 
 ```
@@ -1245,14 +1244,14 @@ This completes the process of displaying all workouts in a plan in WerkIt!
 #### Delete Existing Plan
 A summary of the general procedure of listing all workouts in a plan is as follows:
 1. User enters the command `plan /delete <plan index number>`.
-2. The plan with corresponding plan index number (can be determined by entering plan /list) is removed from
+2. The plan with corresponding plan index number (can be determined by entering `plan /list`) is removed from
    the application’s plan list.
 3. The success response is printed to the user through the terminal.
 4. The resource file, `plans.txt`, is rewritten according to the application’s plan list that has been modified.
 
 The following sequence diagram illustrates how the `plan /delete` command works in greater detail:
 
-<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
 have been removed from the sequence diagram. Reference frames will be elaborated further
 down this section.</span>
 
@@ -1265,7 +1264,7 @@ a `PlanCommand` object that contains the user's input.
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `PlanCommand#execute()` method is called,  it will identify that the workout action is
-of type `delete`. `PlanList#deletePlan()` will be called to perform the deletion of plan.
+of type `/delete`. `PlanList#deletePlan()` will be called to perform the deletion of plan.
 
 The following sequence diagram is the detailed procedure for Step 2's `PlanList#deletePlan()`:
 <br><br>
@@ -1282,16 +1281,14 @@ Plan index number must be a positive integer and smaller than the total number o
 in order to pass the check. Otherwise, an `InvalidPlanException` will be thrown and
 the entire process is aborted.
 
-Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability.
 
-
-**(Steps 2.1 to 2.2)** With the plan index number, a `Plan` object which user want to delete
-will be fetched by calling method `PlanList#getPlanFromIndexNum()`.
+**(Steps 2.1 to 2.2)** With the plan index number, the `Plan` object to be deleted is obtained by calling method 
+`Planlist#getPlanFromIndexNum()`.
 <br><br>
 **(Steps 2.3 to 2.8)** The `Plan` object to be deleted is subsequently removed from the ArrayList and HashMap
 which stores the application’s workout list.
 
-This is the end of `PlanLtis#deletePlan()` method.
+This is the end of `PlanList#deletePlan()` method.
 <br><br>
 **(Step 3)** The `PlanList#deletePlan()` method returns the deleted `Plan` object to `PlanCommand`.
 <br><br>
@@ -1314,7 +1311,7 @@ This completes the process of deleting an existing plan in WerkIt!
 ##### Design Considerations for Deleting Existing Workout
 ###### Rewrite All Workout To File
 Currently, when delete plan function is executed, the WerkIt! program will rewrite all plans to the resource file, 
-`plans.txt`. Such implementation may have performance issues as the program needs to rewrite the whole
+`plans.txt`. Such an implementation may have performance issues as the program needs to rewrite the whole
 file with the modified workout list whenever a workout is deleted in the application.
 
 An alternative considered was to find the plan to be deleted in the resource file, and then
@@ -1324,9 +1321,9 @@ way the plan data are formatted and stored in the `plans.txt` file.
 Hence, to simplify the implementation, the team decided to simply
 rewrite all plans to the resource file whenever a plan is deleted.
 
-###### Deleting a plan will cause a cascade delete action
+###### Deleting a Plan Will Cause a Cascading Delete Action
 When an existing workout is deleted from the application, days which is scheduled with that plan 
-should also be cleared. This cascade delete action from `plan -> schedule` must be done so that
+should also be cleared. This cascading delete action from `plan -> schedule` must be done so that
 the data in the `plans.txt`, `schedule.txt` files matches.
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
