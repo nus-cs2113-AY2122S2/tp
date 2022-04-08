@@ -1,1 +1,12 @@
+add ug/ sku/WC1 n/Wooden Chair d/Chair made of oak from Europe size/Medium
+add o/ oid/1 r/Danny Phantom addr/Amity Park
+add g/ sku/WC1 qty/10
+view g/ sku/WC1
+find n/chair
+add og/ oid/1 sku/WC1 q/8
+list g/
+fulfill oid/1
+list o/
+list g/
+fulfill oid/1
 bye

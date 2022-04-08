@@ -55,14 +55,14 @@ public class Order {
                 Orderline orderline = getOrderline(unitGood.getSku());
                 assert orderline != null;
                 orderline.setQuantity(quantity);
-                System.out.printf("%s already exists in order. %d now required to fulfill",
+                System.out.printf("%s already exists in order. %d now required to fulfill\n",
                         orderline.getName(), orderline.getQuantity());
                 return;
             }
             Orderline orderline = new Orderline(unitGood,
                     orderlines.size() + 1, quantity);
             orderlines.add(orderline);
-            System.out.printf("%s is added to order. %d required to fulfill",
+            System.out.printf("%s is added to order. %d required to fulfill\n",
                     orderline.getName(), orderline.getQuantity());
         } catch (NumberFormatException e) {
             System.out.println("Quantity must be positive number");
@@ -91,11 +91,12 @@ public class Order {
         }
     }
 
-    /**
+    /*
      * FOR DEV ONLY.
      *
      * @param orderlineId orderline id
      */
+    /*
     public void removeOrderline(int orderlineId) {
         for (int idx = 0; idx < orderlines.size(); idx++) {
             if (orderlineId == orderlines.get(idx).getId()) {
@@ -104,14 +105,8 @@ public class Order {
             }
         }
     }
+    */
 
-    // public void checkOffOrderline(int orderlineId) {
-    //     Orderline curOrderline = getOrderline(orderlineId);
-    //     if (curOrderline == null) {
-    //         return;
-    //     }
-    //     curOrderline.checkOff();
-    // }
 
     // Function to print grammar for statements to print
     private String checkPlural(int numberOfGoods) {
