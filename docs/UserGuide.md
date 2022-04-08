@@ -17,11 +17,11 @@ and contact management tasks done faster than traditional GUI apps.
   * [Main Menu help](#getting-guidance-on-the-usage-of-the-application-help)
   * [Exiting the app](#exiting-the-application-exit)
 * [Expense Tracker Features](#expense-tracker-features)
-  * [List out expenses](#list-out-all-expenses-list)
   * [Adding an expense](#adding-an-expense-add)
+  * [List out expenses](#list-out-all-expenses-list)
   * [Delete an expense](#delete-an-expense-rm)
   * [Edit an expense](#editing-an-expense-edit)
-  * [Look for an expense](#look-for-an-expense-find)
+  * [Finding an expense](#look-for-an-expense-find)
 * [Study Manager Features](#study-manager-features)
   * [Adding a module](#adding-a-module-add)
   * [List out modules](#listing-modules-list)
@@ -157,24 +157,9 @@ Goodbye! Hope to see you again...
 
 
 ### Expense Tracker Features
-#### List out all expenses: `list`
-Lists out all currently tracked expenses in a list using the keyword `list`. Each entry shows
-its current index in the list, followed by the date, amount, category and any remarks for each expense 
-made.
 
-Format: `list`
-
-**Example of usage:**
-`list`
-
-**Expected outcome:**
-```
-Here are the expenses you have made so far:
- 1. 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
- 2. 2022-03-16 | $4.30 | Food | Chicken rice for lunch
-```
 #### Adding an expense: `add`
-Adds a new expense to the list of expenses. The keyword `add` is used followed by the date, 
+Adds a new expense to the list of expenses. The keyword `add` is used followed by the date,
 amount, category and remarks of a given expense, using the delimiters of `d/` , `a/`,  `c/` and `r/`
 respectively.
 - The DATE field must be in the format of YYYY-MM-DD. All other formats would not be accepted.
@@ -200,6 +185,23 @@ Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
 ```
 Added 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
 ```
+#### List out all expenses: `list`
+Lists out all currently tracked expenses in a list using the keyword `list`. Each entry shows
+its current index in the list, followed by the date, amount, category and any remarks for each expense 
+made.
+
+Format: `list`
+
+**Example of usage:**
+`list`
+
+**Expected outcome:**
+```
+Here are the expenses you have made so far:
+ 1. 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
+ 2. 2022-03-16 | $4.30 | Food | Chicken rice for lunch
+```
+
 #### Delete an expense: `rm`
 Deletes a specific expense record that currently exists in the list using its index. Users may choose
 to `list` out the expenses first before deleting to verify its index. After deleting an expense

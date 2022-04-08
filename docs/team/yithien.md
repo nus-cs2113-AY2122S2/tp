@@ -41,6 +41,8 @@ Given below are my contributions to the project.
     - Developer Guide:
         - Added implementation details and diagrams for Budgeting Reminder Feature
           [#69](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/69)
+        - Added Sequence Diagrams and implementation details of Expense Tracker module
+          [#132](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/132)
 - **Project Management:**
     - Suggested bug fix for issues raised during PE-D as similar bug found in other modules
       [#130](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/130)
@@ -49,5 +51,9 @@ Given below are my contributions to the project.
       [#64](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/64),
       [#76](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/76),
       [#77](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/77),
-      [#78](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/78)
+      [#78](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/78), 
+      [#129](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/129),
+      [#131](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/131),
+      [#137](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/137),
+      [#138](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/138)
 
