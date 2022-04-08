@@ -102,8 +102,8 @@ public class Validator {
         LocalDate birthday = LocalDate.parse(dob);
         Period period = Period.between(birthday, today);
         int calculatedAge = period.getYears();
-        int Age = Integer.parseInt(age);
-        if (!(Age == calculatedAge)) {
+        int parsedAge = Integer.parseInt(age);
+        if (!(parsedAge == calculatedAge)) {
             throw new HalpmiException("Please ensure that the date of birth matches the age provided");
         }
 
