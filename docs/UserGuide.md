@@ -31,10 +31,21 @@ certain tasks, feel free to start another productive session!
 New and inexperienced users who want to use Sherpass, as well as non-users who want to know more about what Sherpass
 can do.
 
+### Using the User Guide
+
+This guide aims to equip readers with the knowledge of the features of our application, such that they are able to use
+it correctly and with ease. Here are some icons which we will use to convey important information.
+
+> **💡 Note**
+>- Additional information that is useful when you are using the application.
+
+> **⚠️Important Notes / Warnings️**
+>- **Essential** information you should take note of to be able to use the application correctly. 
+
+
 ## Table of Content
 - [Quick Start](#quick-start)
 - [Features](#features)
-- [Command Guide](#command-guide)
   - Add tasks: [`add`](#adding-your-tasks-add)
   - Delete tasks: [`delete`](#deleting-your-tasks-delete)
   - Edit tasks: [`edit`](#editing-your-tasks-edit)
@@ -67,22 +78,21 @@ from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Relea
 
 ## Features
 
-## Command Guide
+> ### ⚠️Important notes on command input format
+>- Words in UPPER_CASE are the [parameters](#glossary) to be supplied by the user.
+>- Items in square brackets are optional.
+>- [Extraneous](#glossary) parameters for commands that do not take in parameters (such as show, stop, exit) will be ignored.
 
-### Notes on command input format:
-- Words in UPPER_CASE are the [parameters](#glossary) to be supplied by the user.
-- Items in square brackets are optional
-- [Extraneous](#glossary) parameters for commands that do not take in parameters (such as show, stop, exit) will be ignored
-
-### Notes on task number format:
-- Each task added to your schedule is assigned a task number. You can see what number a task is assigned via
-the [show command](#show-your-tasks-show)
-- The task number will update accordingly as you add/edit/delete a task (with the
-earliest task assigned the first number, second earliest task the second number, and so on)
+>###  ⚠️Important notes on task number format
+>- Each task added to your schedule is assigned a task number. You can see what number a task is assigned via
+>the [show command](#show-your-tasks-show).
+>- The task number will update accordingly as you add/edit/delete a task (with the
+>earliest task assigned the first number, second earliest task the second number, and so on).
 
 ### Adding your tasks: `add` 
-**_Note: When adding tasks, TASK_DESCRIPTION must be the first parameter provided.
-Order of other parameters can be switched._**
+>⚠️Important note: When adding tasks, TASK_DESCRIPTION must be the first parameter provided.
+Order of other parameters can be switched.
+
 #### Adding a single task
 
 Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by DEADLINE]`
@@ -95,7 +105,7 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by D
 |     END_TIME     | Time to stop working on a task  | HH:mm format (e.g 19:00)                          | No       |
 |     DEADLINE     | Due date for the task           | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | Yes      |
 
-Examples: 
+**Examples**
 - `add write final essay /do 25/3/2022 /start 20:00 /end 22:00 /by 27/3/2022`
 - `add revise chapter 3 /do 25/3/2022 /start 20:00 /end 22:00`
 
@@ -116,7 +126,7 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME /repea
 |     END_TIME     | Time to stop working on a task  | HH:mm (e.g 19:00)                            | No       |
 |    FREQUENCY     | How often does the task repeat  | DAILY, WEEKLY, MONTHLY                       | No       |
 
-Examples: 
+**Examples**
 - `add attend cs2113t lecture /do 25/3/2022 /start 16:00 /end 18:00 /repeat WEEKLY`
 - `add browse internship offers /do 27/3/2022 /start 21:00 /end 21:30 /repeat DAILY`
 
@@ -128,7 +138,7 @@ Format: `delete TASK_NUMBER`
 |:-----------:|-----------------------------------------------------|-----------------------|----------|
 | TASK_NUMBER | The index of the task as seen in the `show` command | Any valid task number | No       |
 
-Example:
+**Example**
 - `delete 1`
 
 ### Deleting your recurring tasks
@@ -141,7 +151,7 @@ Format: `delete TASK_NUMBER /repeat`
 |:-----------:|-----------------------------------------------------|-----------------------|----------|
 | TASK_NUMBER | The index of the task as seen in the `show` command | Any valid task number | No       |
 
-Example:
+**Example**
 - `delete 1 /repeat`
 
 
@@ -160,7 +170,7 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end
 |     END_TIME     | Time to start working on a task                     | HH:mm (e.g 19:00)                                 | No if DO_DATE is given |
 |     DEADLINE     | Due date for the task                               | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | Yes                    |
 
-Examples:
+**Examples**
 - `edit 2 write draft essay`
 - `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00`
 
@@ -200,7 +210,7 @@ Format: `mark TASK_NUMBER` or `unmark TASK_NUMBER`
 |:-----------:|---------------------------------------------------|---------------------------------------|----------|
 | TASK_NUMBER | The task number as seen in the `show all` command | Any valid task number in the schedule | No       |
 
-Example:
+**Example**
 
 ![](images/markTasks.png)
 
@@ -277,8 +287,8 @@ Show pending tasks:
 To save the trouble of deleting tasks one by one if you wish to delete all of them,
 Sherpass allows you to do so using `clear`
 
-**_Note: Be sure to use `clear` only when you want to 
-remove all the tasks in your list._**
+> ⚠️ Be sure to use `clear` only when you want to 
+remove all the tasks in your list.
 
 ### Saving your tasks
 
@@ -286,36 +296,25 @@ All changes to your tasks are saved automatically into a JSON file at `[JAR FILE
 
 There is no need to manually save your tasks.
 
-_Note: Advanced users are welcome to manually edit the save file._
+> 💡 **Note:** Advanced users are welcome to manually edit the save file.
 
 ### Enter study session: `study`
 Enter the study session where you can start timers to help finish your tasks.
 
 Format: `study`
 
-Example:
+**Example**
 
 ![image](https://user-images.githubusercontent.com/69501969/160783109-3187d5df-06f1-4fa4-a407-18a87a67c770.png)
 
 ### Starting a timer: `start`
 
-**_Note:_**
-- Once you have entered the study session and have selected a timer,
-a separate pop-up timer window will be shown to you. 
-- It will show you the amount of time left or the elapsed time. Buttons are provided on the window for you
-to pause/resume/stop the timer quickly. 
-- You may also choose to enter the commands via the 
-command line interface instead.
-
 #### Starting a default timer: `start MODE_NUMBER`
 
 Jump right into a study session by starting a study timer from our list of default timers.
 
-**_Note:_**
-
-- Only one timer can be running at any given point of time.
-- Timer keeps track of time remaining and prints time remaining at regular intervals.
-- All our timers can be paused, resumed and stopped while the timer is running.
+- Timer keeps track of time remaining and lets you know when time has run out.
+- Timers can be paused, resumed and stopped while the timer is running.
 
 
 Format: `start MODE_NUMBER`
@@ -330,7 +329,16 @@ Format: `start MODE_NUMBER`
 - `MODE_NUMBER` 2 starts a 1 hour(s) timer
 - `MODE_NUMBER` 3 starts a 1.5 hour(s) timer
 
-Examples:
+> 💡 **Note:**
+>- Only one timer can be running at any given point of time.
+>- Once you have entered the study session and have selected a timer,
+   > a separate pop-up timer window will be shown to you.
+>- It will show you the amount of time left or the elapsed time. Buttons are provided on the window for you
+   >to pause/resume/stop the timer quickly.
+>- You may also choose to enter the commands via the
+   >command line interface instead.
+
+**Examples**
 
 - `start 1`
 
@@ -357,7 +365,7 @@ Format: `start /custom DURATION`
 - Timer `DURATION` is in seconds
 - `/custom` flag is mandatory to start a custom timer
 
-Example:
+**Example**
 
 - `start /custom 60`
 
@@ -376,7 +384,7 @@ you've been studying.
 
 Format: `start stopwatch`
 
-Example:
+**Example**
 
 In the terminal:
 
@@ -392,15 +400,15 @@ your tasks for the day, or mark a task as done.
 
 Format: `pause` or clicking the pause button in the pop-up window.
 
-Example:
+**Example**
 
 In the terminal:
-
-![](images/pauseTimer.png)
 
 ![image](https://user-images.githubusercontent.com/69501969/160329512-3a74d513-d95c-4aa2-9d88-a29ca3f93459.png)
 
 In the pop-up window:
+
+![](images/pauseTimer.png)
 
 Time left in the window will not change until the user enters `resume`
 in the terminal or clicks on the resume button.
@@ -412,7 +420,7 @@ You can resume a paused timer/stopwatch when you're ready to work on your tasks 
 
 Format: `resume` or clicking the resume button in the pop-up window.
 
-Example:
+**Example**
 
 In the terminal:
 
@@ -434,7 +442,7 @@ Format:
 - Clicking the stop button in the pop-up window
 - Closing the pop-up window (Clicking the X button in the top right corner)
 
-Example:
+**Example**
 
 In the terminal:
 
@@ -447,27 +455,29 @@ In the pop-up window:
 The window will disappear immediately after stopping the timer.
 
 ### Show your tasks: `show`
-The show feature is also supported in the study session. 
-Simply follow the format from the [show feature](#show-your-tasks-show)
+The show feature is supported in the study session, in case you need to remind yourselves of the tasks you have to 
+complete. Simply follow the format from the [show feature](#show-your-tasks-show)
 to show your tasks.
 
-**_Note:_**
-- You can only show tasks while the timer is paused or stopped.
+> 💡 **Note:**
+>- You can only show tasks while the timer is paused or stopped.
 
-Example:
+**Example**
 
 ![image](https://user-images.githubusercontent.com/69501969/160788279-c38a7611-e1e9-4aef-87b7-6a06b6d96c9e.png)
 
 ### Mark your tasks as done: `mark`
 
-The mark feature is also supported in the study session. 
+The mark feature also supported in the study session, so that you are able to mark tasks as done after you've completed
+them in the study session.
 Simply follow the format from the [mark feature](#marking-your-tasksmark-task_number--unmark-task_number)
 to mark your task.
 
-**_Note:_**
-- You can only mark tasks while the timer is paused or stopped.
+> 💡 **Note:**
+>- You can only mark tasks while the timer is paused or stopped.
+>- You can also use the unmark feature within the study session if you've marked a task wrongly.
 
-Example:
+**Example**
 
 ![image](https://user-images.githubusercontent.com/69501969/160330280-f0cae4ae-0561-4c09-bc1f-8f89c6136aa6.png)
 
@@ -476,7 +486,9 @@ Leave the study session to go back to the main session.
 
 Format: `leave`
 
-Example:
+> 💡 **Note:** Your timer/stopwatch will be stopped if you leave the study session.
+
+**Example**
 
 ![image](https://user-images.githubusercontent.com/69501969/160330328-f3981868-6bcc-4e29-989c-90356cf15c10.png)
 

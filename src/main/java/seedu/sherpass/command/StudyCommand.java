@@ -38,13 +38,13 @@ public class StudyCommand extends Command {
             ui.showLine();
             userInput = ui.readCommand();
         }
+
     }
 
 
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
-        if (!timerLogic.isTimerPausedOrStopped()) {
-            timerLogic.callStopTimer();
-        }
+        timerLogic.killTimer();
+        timerLogic.resetIsTimerInitialised();
         timerLogic.destroyFrame();
         ui.showLine();
         ui.showToUser(GOODBYE_MESSAGE_STUDY);
