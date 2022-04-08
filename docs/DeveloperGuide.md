@@ -59,6 +59,29 @@ Timetable component consists of `Timer`, `Stopwatch`, `Countdown`, `TimerParser`
 
 ## Design & implementation
 
+### Task Implementation
+Sherpass provides two different ways to add,delete and edit tasks. The /repeat option in commands allows users to add 
+recurring tasks (e.g. Weekly classes or meetings). Without the /repeat option, commands will only affect a single task.
+
+- Both recurring tasks and non-recurring tasks belongs to `Task` class which are stored
+in a `TaskList` object which is created when the program starts.
+- Recurring tasks will share a common identifier so that commands on a recurring task can identify which tasks to 
+operate on.
+
+
+<class diagram of task, tasklist>
+
+#### Editing tasks
+The edit command is handled by the `EditCommand` class, and it allows users to edit either a single or multiple
+occurrences of a task.
+
+If the edit command contains the `/repeat` option, the specified task
+and all its future occurrence will be edited. 
+
+The sequence diagram of `EditCommand#execute()` is shown here:
+<sequence diagram of editcommand#execute()>
+
+
 ### Study Session Implementation
 
 The study session consists of 4 main components:
@@ -260,13 +283,11 @@ constructor of `Storage` if no such file exists, there should not be any issue w
 
 The save file has the following fields:
 - `identifier`: A randomly generated number given to a task. Recurring tasks share the same identifier.
-- `index`: The index of the task in the array list
 - `description`: Description of the task
 - `status`: If the task is completed or not (`'X'` indicates completion, empty string otherwise)
 - `do_date_start`: The start date and time of the task (d/M/yyyy HH:mm format)
 - `do_date_end`: The end date and time of the task (d/M/yyyy HH:mm format)
 - `by_date`: The due date of the task (d/M/yyyy format)
-- `frequency`: How often the task repeats (`DAILY`,`WEEKLY`,`MONTHLY`,`NULL`)
 
 The sequence diagram of `Storage#load()` is shown here:
 ![](images/StorageLoadSD.png)
@@ -275,10 +296,6 @@ In the event where the save file cannot be parsed by `JSONObject` (i.e. the form
 or if there are missing fields in a task, the function `Storage#handleCorruptedSave()`
 will be called. The user will get to choose to create a new save file or exit the program for manual inspection.
 The file error will also be displayed to the user.
-
-The sequence diagram of `Storage#handleCorruptedSave()` is shown here:
-
-![](images/StorageCorruptedSD.png)
 
 #### Design considerations for the format of the save file
 - JSON (current choice)
@@ -314,7 +331,7 @@ to block out pockets of time for studying, so that they can better focus during 
 | v1.0    | user     | be able to pause, stop and resume the study timer | go for a toilet/snack break                |
 | v2.0    | user     | see my timetable of tasks and events              | have a better picture of my schedule       |
 | v2.0    | user     | be able to mark my tasks as done in study session |                                            |
-| v2.0    | user     | add recurring tasks                               | enter my recurring tutorials and lectures  |
+| v2.0    | user     | manage recurring tasks                            | enter my recurring tutorials and lectures  |
 | v2.0    | user     | click a button to interact with the study timer   | interact with the timer more naturally     |
 
 ## Non-Functional Requirements

@@ -8,7 +8,6 @@ class Storage {
     +Storage(filePath:String)
     +writeSaveData(taskList:TaskList):JSONObject
     +load():ArrayList<Task>
-    +handleCorruptedSave(ui:Ui):void
     -wipeSaveData():void
 }
 
@@ -20,10 +19,7 @@ class TaskList {
     +getTasks():ArrayList<Task>
 }
 
-class Ui
-hide Ui members
 
 Storage ..> Parser
 Storage ..> TaskList
-Storage ..> Ui
 @enduml

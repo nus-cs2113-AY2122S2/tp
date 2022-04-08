@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+participant EditCommand as ":EditCommand"
+participant TaskList as ":TaskList"
+participant Storage as ":Storage"
+
+[-> EditCommand ++: execute()
+EditCommand -> EditCommand ++: initialiseDate()
+EditCommand --> EditCommand --
+
+alt isRepeating
+   ref over EditCommand, TaskList : edit repeated task
+else else
+   ref over EditCommand, TaskList : edit single task
+end
+
+EditCommand -> Storage ++: writeSavedData()
+Storage --> EditCommand --
+return
+
+@enduml

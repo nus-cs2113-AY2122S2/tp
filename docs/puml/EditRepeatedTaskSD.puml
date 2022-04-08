@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+participant TaskList as ":TaskList"
+participant affectedTasks as "affectedTasks:ArrayList<Task>"
+participant tempTasks as "tempTasks:ArrayList<Task>"
+participant tasks as "tasks:ArrayList<Task>"
+
+[-> TaskList ++ : editRepeatedTasks()
+TaskList -> TaskList ++ : getAffectedTasks()
+create affectedTasks
+TaskList -> affectedTasks ++:
+affectedTasks --> TaskList --
+TaskList --> TaskList --
+
+create tempTasks
+TaskList -> tempTasks ++: new ArrayList<Task>(tasks)
+tempTasks --> TaskList --
+
+TaskList -> tempTasks ++: removeAll(affectedTasks)
+tempTasks --> TaskList --
+
+ref over TaskList : calculate offsets for new dates
+
+loop foreach task in affectedTasks
+
+end
+@enduml
