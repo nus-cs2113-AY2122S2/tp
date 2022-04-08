@@ -188,19 +188,11 @@ public class ParserTest {
         clearCommand.execute(masterTimetable);
         AddUserCommand addUser = new AddUserCommand("john");
         addUser.execute(masterTimetable);
-        AddLessonCommand addCommand = new AddLessonCommand(
-                "John", "CS2113", "Monday",
-                1200, 1300, "online"
-        );
         assertEquals(ERROR_EXTRA_PARAMETERS, command.execute(masterTimetable));
     }
 
     @Test
     public void prepareAddMeeting_testUpperCaseMode_throwException() {
-        String inputString = "add_meeting t/meeting d/Thursday st/1230 et/1330 m/ONLINE";
-        Parser parser = new Parser(inputString);
-        Command command = parser.parseCommand();
-
         ClearCommand clearCommand = new ClearCommand("all");
         clearCommand.execute(masterTimetable);
         AddUserCommand addUser = new AddUserCommand("john");
@@ -278,7 +270,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddUser_emptyName_throwExceptionn() {
+    public void prepareAddUser_emptyName_throwException() {
         String inputString = "add_user";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -286,7 +278,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddUser_allName_throwExceptionn() {
+    public void prepareAddUser_allName_throwException() {
         String inputString = "add_user all";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -294,7 +286,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareAddUser_nameWithSpecialChar_throwExceptionn() {
+    public void prepareAddUser_nameWithSpecialChar_throwException() {
         String inputString = "add_user john@1";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -302,7 +294,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareEdit_missingRequiredParamsIndex_throwExceptionn() {
+    public void prepareEdit_missingRequiredParamsIndex_throwException() {
         String inputString = "edit n/john t/cs2030";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -310,7 +302,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareEdit_missingRequiredParamsName_throwExceptionn() {
+    public void prepareEdit_missingRequiredParamsName_throwException() {
         String inputString = "edit i/1 t/cs2030";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -318,7 +310,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareEdit_missingOptionalParams_throwExceptionn() {
+    public void prepareEdit_missingOptionalParams_throwException() {
         String inputString = "edit n/john i/1";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
@@ -326,7 +318,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareEdit_invalidIndex_throwExceptionn() {
+    public void prepareEdit_invalidIndex_throwException() {
         String inputString = "edit n/john i/a t/cs2030";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();

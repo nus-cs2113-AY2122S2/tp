@@ -214,6 +214,7 @@ public class Timetable {
         int timeInMinutes = hours * MINS_IN_1_HOUR + minutes;
         return timeInMinutes;
     }
+
     /**
      * This method checks if two timetables are the same.
      *
