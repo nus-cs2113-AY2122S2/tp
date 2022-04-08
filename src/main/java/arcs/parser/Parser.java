@@ -22,6 +22,7 @@ import arcs.commands.ExitCommand;
 import arcs.commands.UndefinedCommand;
 import arcs.commands.staff.AddStaffCommand;
 import arcs.commands.staff.DeleteStaffCommand;
+import arcs.commands.staff.ListStaffCommand;
 
 public class Parser {
 
@@ -92,6 +93,9 @@ public class Parser {
             break;
         case DeleteStaffCommand.COMMAND_WORD:
             command = StaffParser.prepareDeleteStaffCommand(argumentLine);;
+            break;
+        case ListStaffCommand.COMMAND_WORD:
+            command = new ListStaffCommand();;
             break;
         default:
             command = new UndefinedCommand();

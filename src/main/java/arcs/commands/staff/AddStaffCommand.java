@@ -8,7 +8,7 @@ import arcs.data.exception.DuplicateDataException;
 import java.util.ArrayList;
 
 public class AddStaffCommand extends Command  {
-    public static final String COMMAND_WORD = "addstaff";
+    public static final String COMMAND_WORD = "addStaff";
     private Staff toAdd;
     private ArrayList<String> emptyFields = new ArrayList<>();
     private ArrayList<String> invalidFields = new ArrayList<>();
