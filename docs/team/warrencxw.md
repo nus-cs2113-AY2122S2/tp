@@ -74,9 +74,13 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
  * Added description for [`Profile`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#profile-component) component
  * Added section for [`Parser`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#parser-component) component and 
    [`Command`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#command-component) component
+   * Created class diagrams for the components
+   * Added description and general workflow for the components
  * Added section under [`Implementation`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#implementation) for 
    [`Parsing of Commands`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#parsing-of-commands) and 
    [`Settle a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#settle-a-session)
+   * Created sequence diagrams for both sections
+   * Added explanation for the sequence diagrams
 
 ### Miscellaneous Contributions
  * Spearheaded replacement of `XYZCommand#prepare` method with a `XYZCommandParser` class
