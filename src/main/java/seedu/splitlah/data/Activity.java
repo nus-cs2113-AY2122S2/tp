@@ -19,6 +19,8 @@ public class Activity implements Serializable, Comparable<Activity> {
     private double totalCost;
     private Person personPaid;
     private PersonList involvedPersonList;
+    private double gst;
+    private double serviceCharge;
 
     private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final int ZERO_INDEXING_OFFSET = 1;
@@ -41,6 +43,15 @@ public class Activity implements Serializable, Comparable<Activity> {
         this.totalCost = totalCost;
         this.personPaid = personPaid;
         this.involvedPersonList = involvedPersonList;
+        this.gst = 0;
+        this.serviceCharge = 0;
+    }
+
+    public Activity(int activityId, String activityName, double totalCost, Person personPaid,
+                    PersonList involvedPersonList, double gst, double sc) {
+        this(activityId, activityName, totalCost, personPaid, involvedPersonList);
+        this.gst = gst;
+        this.serviceCharge = sc;
     }
 
     /**
@@ -65,27 +76,16 @@ public class Activity implements Serializable, Comparable<Activity> {
         return personPaid;
     }
 
-    /**
-     * Returns an ArrayList object of Person objects representing the persons involved in the activity.
-     *
-     * @return An ArrayList object containing Person objects each representing a person involved in the activity.
-     */
-    public ArrayList<Person> getInvolvedPersonList() {
-        return involvedPersonList.getPersonList();
+    public double getGst() {
+        return gst;
     }
 
-    /**
-     * Returns a String object which summarises the activity, including the activity's unique identifier,
-     * the name of the activity, the total cost spent in the activity
-     * and the name of the person who paid for the activity.
-     *
-     * @return A String object which summarises the activity.
-     */
-    public String getActivitySummaryString() {
-        String costInString = "$" + String.format("%.2f", totalCost);
-        String personName = personPaid.getName();
-        return activityId + SUMMARY_STRING_SEPARATOR + activityName + SUMMARY_STRING_SEPARATOR + costInString
-                + SUMMARY_STRING_SEPARATOR + personName;
+    public double getServiceCharge() {
+        return serviceCharge;
+    }
+
+    public ArrayList<Person> getInvolvedPersonList() {
+        return involvedPersonList.getPersonList();
     }
 
     /**
