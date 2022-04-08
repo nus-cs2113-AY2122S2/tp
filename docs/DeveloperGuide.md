@@ -2013,8 +2013,10 @@ Testers are welcome conduct more extensive and rigorous testing.
 
 ### Test on Workout Features
 #### Creating A New Workout
-(For details on the usage of this command, please refer to the 
-[user guide](UserGuide.md#create-a-workout-workout-new).)
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#create-a-workout-workout-new).)
+
+**Prerequisites: ** Ensure that your list of exercises is populated with at least one exercise for you to test the
+`workout` command on.
 
 The following are some test cases for you to try:
 
@@ -2111,6 +2113,34 @@ Expected: Nothing is listed because no additional arguments should be supplied f
 ---
 
 ### Test on Data Saving 
+
+The following are some test cases for you to try:
+
+<span class="info box">:memo: **Important!** These test cases are done on the following assumptions:
+1. Resource files `workouts.txt`, `plans.txt`, and `schedule.txt` are empty. 
+2. `exercise.txt` is populated with its default exercises.
+
+If you have some data written into these files or modified `exercises.txt`, please do the following
+prior to conducting the test cases mentioned below:
+1. If WerkIt! is running, exit the application.
+2. Backup your existing `werkItResources` directory.
+3. Delete the `werkItResources` directory (not your backup!)
+4. Start WerkIt! to generate a fresh set of `werkItResources` directory and its resource files.
+</span>
+
+<span class="warning box">:warning: Please follow the test cases and its commands in sequence as subsequent test cases 
+rely on former test cases.</span>
+
+| Test Case                                                                  | Command                                                                                                                                | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|:---------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1. Write new data into `workouts.txt`.                                     | (a) `workout /new sit up /reps 10`<br/><br/>(b) `workout /new push up /reps 20`<br/><br/>(c)`workout /new russian twist /reps 30`      | The following three lines are added to `workouts.txt`:<br/><br/>![workouts.txt](images/workoutsTxtNewWorkouts.png)                                                                                                                                                                                                                                                                                                                                                                                             |
+| 2. Update data in `workouts.txt`.                                          | `workout /update 2 40`                                                                                                                 | Workout (push up, 20 reps) is updated to 40 reps. `workouts.txt` should look something like this:<br/><br/>![workouts.txt Update Workout](images/workoutsTxtUpdateWorkout.png)                                                                                                                                                                                                                                                                                                                                 |
+| 3. Write new data into `plans.txt`.                                        | (a) `plan /new plan a  /workouts 1, 2`<br/><br/>(b) `plan /new plan b /workouts 2, 3`<br/><br/>(c) `plan /new plan c /workouts 1, 3`   | The following lines are added to `plans.txt`:<br/><br/>![plans.txt](images/plansTxtNewPlans.png)                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 4. Write new data into `schedule.txt`.                                     | (a) `schedule /update 1 1`<br/><br/>(b) `schedule /update 3 2`<br/><br/>(c) `schedule /update 5 3`<br/><br/>(d) `schedule /update 6 3` | The following lines are added to `schedule.txt`:<br/><br/>![schedule.txt](images/scheduleTxtNewDays.png)                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 5. Delete data from `schedule.txt`.                                        | `schedule /clear 5` | `schedule.txt` will be updated the following:<br/><br/>![schedule.txt day deleted](images/scheduleTxtDeleteDay.png)                                                                                                                                                                                                                                                                                                                                                                                            |
+| 6. Delete data from `plans.txt` and `schedule.txt` is updated accordingly. | `plans /delete 3` | `plans.txt` will be updated to the following:<br/><br/>![plans.txt delete plan](images/plansTxtDeletePlan.png)<br/><br/>`schedule.txt` will also be updated as one of the days has the deleted plan:<br/><br/>![schedule.txt plan delete](images/scheduleTxtPlanDeleteCascade.png)                                                                                                                                                                                                                             |
+| 7. Delete workout from `workouts.txt` and `plans.txt` and `schedule.txt` are updated accordingly. | `workout /delete 1` | `workout.txt` will be updated to the following:<br/><br/>![workout.txt workout delete](images/workoutsTxtDeleteWorkout.png)<br/><br/>`plans.txt` will also be updated as some plans with the deleted workout are affected:<br/><br/>![plans.txt workout delete cascasde](images/plansTxtWorkoutDeleteCascade.png)<br/><br/>Likewise, `schedule.txt` is also updated as a plan assigned to a day has been affected:<br/><br/>![schedule.txt workout delete cascade](images/scheduleTxtWorkoutDeleteCascade.png) |                                    
+
 
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
