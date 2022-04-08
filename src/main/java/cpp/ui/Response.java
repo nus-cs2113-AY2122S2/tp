@@ -47,7 +47,7 @@ public class Response {
         System.out.println(count++ + ". exit");
     }
 
-    public static void invalidHelp(){
+    public static void invalidHelp() {
         System.out.println("Sorry the \"help\" command is only one argument");
     }
 
