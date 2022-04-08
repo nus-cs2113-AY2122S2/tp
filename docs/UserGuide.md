@@ -139,7 +139,7 @@ Example of usage:
 
   <br/>
   
-  ![add-command-screenshot](images/AddPerosn.png) <!-- this is a placeholder -->
+  ![add-command-screenshot](images/AddPerosn.png)
 
 ---
 
@@ -195,7 +195,7 @@ Example of usage:
   
   <br/>
   
-  ![addin-command-screenshot](images/AddIncome.png) <!-- this is a placeholder -->
+  ![addin-command-screenshot](images/AddIncome.png)
 
 ---
 
@@ -224,7 +224,7 @@ Example of usage:
 
   <br/>
   
-  ![deletein-command-screenshot](images/DeleteIncome.png) <!-- this is a placeholder -->
+  ![deletein-command-screenshot](images/DeleteIncome.png)
 
 ---
 
@@ -255,7 +255,7 @@ Example of usage:
 
   <br/>
   
-  ![editin-command-screenshot](images/EditIncome.png) <!-- this is a placeholder -->
+  ![editin-command-screenshot](images/EditIncome.png)
 
 ---
 
@@ -287,7 +287,7 @@ Example of usage:
 
   <br/>
   
-  ![addout-command-screenshot](images/AddExpend.png) <!-- this is a placeholder -->
+  ![addout-command-screenshot](images/AddExpend.png)
 
 ---
 
@@ -316,7 +316,7 @@ Example of usage:
 
   <br/>
   
-  ![deleteout-command-screenshot](images/DeleteExpend.png) <!-- this is a placeholder -->
+  ![deleteout-command-screenshot](images/DeleteExpend.png)
 
 ---
 
@@ -348,7 +348,7 @@ Example of usage:
 
   <br/>
   
-  ![editout-command-screenshot](images/EditExpend.png) <!-- this is a placeholder -->
+  ![editout-command-screenshot](images/EditExpend.png)
 
 ---
 
@@ -358,7 +358,7 @@ Example of usage:
 
 Format: `overview`
 
-![list-command-screenshot](images/Overview.png) <!-- this is a placeholder -->
+![list-command-screenshot](images/Overview.png)
 
 ---
 
@@ -378,7 +378,7 @@ Example of usage:
   
   <br/>
   
-  ![detail_list-command-screenshot](images/List.png) <!-- this is a placeholder -->
+  ![detail_list-command-screenshot](images/List.png)
 
 ---
 
@@ -388,7 +388,7 @@ Example of usage:
 
 Format: `listcat`
 
-![listcat-command-screenshot](images/Listcat.png) <!-- this is a placeholder -->
+![listcat-command-screenshot](images/Listcat.png)
 
 ---
 
@@ -415,7 +415,7 @@ Find records with category:
 
 * _Result_: The result of the search is returned and printed to the screen.
 
-  ![find-command-screenshot](images/FindWithCat.png) <!-- this is a placeholder -->
+  ![find-command-screenshot](images/FindWithCat.png)
 
 Find records without category:
 * Find all the records which descriptions include _candies_.
