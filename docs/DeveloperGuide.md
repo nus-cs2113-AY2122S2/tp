@@ -238,12 +238,14 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 
 ### Family Component
 
-The **Class** of this component is specified in [`Family.java`](
+The `Family` component consists of the following classes: [`Family.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Family.java)
 , [`PersonList.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/PersonList.java)
 and [`Person.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Person.java)
+
+The class diagram below shows the multiplicity and navigability between the 3 classes.
 
 ![FamilyComponent](images/FamilyComponent.png)
 
