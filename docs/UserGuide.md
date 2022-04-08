@@ -139,7 +139,7 @@ Example of usage:
 
   <br/>
   
-  ![add-command-screenshot](images/AddPerosn.png)
+  ![add-command-screenshot](images/AddPerson.png)
 
 ---
 
