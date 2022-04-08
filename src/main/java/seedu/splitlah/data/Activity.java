@@ -35,21 +35,18 @@ public class Activity implements Serializable, Comparable<Activity> {
      * @param personPaid         A Person object representing the person who paid for the activity.
      * @param involvedPersonList An ArrayList object containing Person objects
      *                           each representing a person involved in the activity.
+     * @param gst                A double that represents the GST percentage to be included for the cost of the
+     *                           activity.
+     * @param sc                 A double that represents the service charge to be included for the cost of the
+     *                           activity.
      */
     public Activity(int activityId, String activityName, double totalCost, Person personPaid,
-                    PersonList involvedPersonList) {
+                    PersonList involvedPersonList, double gst, double sc) {
         this.activityId = activityId;
         this.activityName = activityName;
         this.totalCost = totalCost;
         this.personPaid = personPaid;
         this.involvedPersonList = involvedPersonList;
-        this.gst = 0;
-        this.serviceCharge = 0;
-    }
-
-    public Activity(int activityId, String activityName, double totalCost, Person personPaid,
-                    PersonList involvedPersonList, double gst, double sc) {
-        this(activityId, activityName, totalCost, personPaid, involvedPersonList);
         this.gst = gst;
         this.serviceCharge = sc;
     }
