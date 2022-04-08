@@ -12,17 +12,14 @@ import tp.PatientStorage;
 import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
+import tp.person.Nurse;
 
-public class AddPatientDescriptionCommand extends Command {
-    protected static String description;
-    protected static int index;
+public class SearchNurseByNameCommand extends Command {
+    protected String name;
 
-
-    public AddPatientDescriptionCommand(String description, int index) {
-        AddPatientDescriptionCommand.description = description;
-        AddPatientDescriptionCommand.index = index;
+    public SearchNurseByNameCommand(String name) {
+        this.name = name;
     }
-
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
@@ -30,7 +27,10 @@ public class AddPatientDescriptionCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        PatientList.addPatientDescription(description,index);
-        return "Already add description for patient " + index + " \n";
+        Nurse cur = nurseList.searchNurseByName(name);
+        if (cur == null) {
+            return String.format("There is no doctor with ID: " + name + "\n");
+        }
+        return String.format("Here's the doctor found: \n" + cur + "\n");
     }
 }

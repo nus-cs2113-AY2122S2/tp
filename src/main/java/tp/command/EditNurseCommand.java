@@ -13,12 +13,12 @@ import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
 
-public class EditDoctorCommand extends Command {
+public class EditNurseCommand extends Command {
     private int index;
     private String type;
     private String newInformation;
 
-    public EditDoctorCommand(int index, String type, String newInformation) {
+    public EditNurseCommand(int index, String type, String newInformation) {
         this.index = index;
         this.type = type;
         this.newInformation = newInformation;
@@ -30,18 +30,18 @@ public class EditDoctorCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        if (index > doctorList.getSize()) {
-            throw new IHospitalException("The doctor does not exist\n");
+        if (index > nurseList.getSize()) {
+            throw new IHospitalException("The nurse does not exist\n");
         }
 
         if (type.contains("e")) {
-            doctorList.getDoctor(index).editEmail(newInformation);
+            nurseList.getNurse(index).editEmail(newInformation);
             return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
         } else if (type.contains("ph")) {
-            doctorList.getDoctor(index).editPhoneNumber(newInformation);
+            nurseList.getNurse(index).editPhoneNumber(newInformation);
             return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
         } else {
-            doctorList.getDoctor(index).editName(newInformation);
+            nurseList.getNurse(index).editName(newInformation);
             return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
         }
     }

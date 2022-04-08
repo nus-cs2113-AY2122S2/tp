@@ -1,0 +1,5 @@
+1
+1. Appointment:
+* DOCTOR [ DOCTOR [1234] || Name: john || Contact No.: 12341234 || Email: 1234@gmail.com
+* PATIENT [ PATIENT [4321] || Name: Tom || Contact No.: 93333333 || Email: 3233@qq.com || Symptom: symptom || Description: descriptions
+2007-12-03T10:15:30

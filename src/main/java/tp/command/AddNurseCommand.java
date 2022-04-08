@@ -12,27 +12,29 @@ import tp.PatientStorage;
 import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
-import tp.person.Patient;
+import tp.person.Nurse;
 
-public class AddPatientCommand extends Command {
+public class AddNurseCommand extends Command {
     protected String id;
     protected String name;
     protected String phoneNumber;
     protected String email;
-    protected String symptom;
-    protected String description;
+    protected String title;
+    protected String wardNumber;
+    protected boolean isOnDuty;
 
-    public AddPatientCommand() {
+    public AddNurseCommand() {
     }
 
-    public AddPatientCommand(String id, String name, String phoneNumber,
-                             String email, String symptom, String description) {
+    public AddNurseCommand(String id, String name, String phoneNumber, String email, String title,
+                           String wardNumber, boolean isOnDuty) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.symptom = symptom;
-        this.description = description;
+        this.title = title;
+        this.wardNumber = wardNumber;
+        this.isOnDuty = isOnDuty;
     }
 
     @Override
@@ -41,11 +43,11 @@ public class AddPatientCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Patient patient = new Patient(id, name, phoneNumber, email,symptom,description);
-        patientList.addPatient(patient);
-        return String.format(boundary + "Noted. I've added this patient:" + "\n"
-                + patientList.getPatient(patientList.getSize()) + "\n"
-                + "Now you have " + patientList.getSize()
-                + " patients recorded in the system." + System.lineSeparator() + boundary);
+        Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
+        nurseList.addNurse(nurse);
+        return String.format(boundary + "Noted. I've added this nurse:"
+                + "\n" + nurseList.getNurse(nurseList.getSize())
+                + "\n" + "Now you have " + nurseList.getSize()
+                + " nurses recorded in the system." + System.lineSeparator() + boundary);
     }
 }

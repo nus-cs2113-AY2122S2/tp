@@ -52,6 +52,17 @@ Example of usage:
 
 `add appointment /t 2007-12-03T10:15:30 /d 1 /p 1`
 
+
+### Adding a nurse: `add nurse`
+Adds a new nurse to the system.
+
+Format: `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE`
+
+Example of usage:
+
+`add nurse /id 1234 /n john /ph 12341234 /e 1234@gmail.com /t staff nurse`
+
+
 ### Sorting appointment list: 'sort'
 Sorts existing appointments in the system (but does not print out) according to time (most recent to least recent).
 

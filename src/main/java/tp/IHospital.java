@@ -10,6 +10,8 @@ public class IHospital {
     private static DoctorList doctors = new DoctorList();
     private static PatientList patients = new PatientList();
     private static AppointmentList appointments = new AppointmentList();
+    private static NurseList nurses = new NurseList();
+    private static WardList wards = new WardList();
 
     public IHospital() {
     }
@@ -19,17 +21,21 @@ public class IHospital {
         String fullCommand;
         fullCommand = Parser.getCommand();
         DoctorStorage doctorStorage = new DoctorStorage();
-        PatientStorage patientStorage = new PatientStorage();
-        AppointmentStorage appointmentStorage = new AppointmentStorage();
+        NurseStorage nurseStorage = new NurseStorage();
+        WardStorage wardStorage = new WardStorage();
         doctors = doctorStorage.loadDoctorList();
+        nurses = nurseStorage.loadNurseList();
+        wards = wardStorage.loadWardList();
+        PatientStorage patientStorage = new PatientStorage();
         patients = patientStorage.loadPatientList();
+        AppointmentStorage appointmentStorage = new AppointmentStorage();
         appointments = appointmentStorage.loadAppointmentList();
 
         while (!fullCommand.equals("bye")) {
             try {
                 Command c = parser.parse(fullCommand);
-                ui.generateResponse(c.execute(doctors, patients, appointments, ui,
-                        doctorStorage, patientStorage, appointmentStorage));
+                ui.generateResponse(c.execute(doctors, patients, nurses, wards, appointments, ui,
+                        doctorStorage, wardStorage, patientStorage, nurseStorage, appointmentStorage));
                 fullCommand = Parser.getCommand();
             } catch (IHospitalException e) {
                 ui.generateResponse(e.getMessage());
@@ -39,9 +45,10 @@ public class IHospital {
         doctorStorage.saveDoctorList(doctors);
         patientStorage.savePatientList(patients);
         appointmentStorage.saveAppointmentList(appointments);
+        nurseStorage.saveNurseList(nurses);
         Command c = new ExitCommand();
-        c.execute(doctors, patients, appointments, ui,
-                doctorStorage, patientStorage, appointmentStorage);
+        c.execute(doctors, patients, nurses, wards, appointments, ui,
+                doctorStorage, wardStorage, patientStorage, nurseStorage,appointmentStorage);
         ui.sayGoodbye();
     }
 

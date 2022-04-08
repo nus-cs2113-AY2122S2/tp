@@ -1,15 +1,19 @@
 package tp.command;
 
 import tp.AppointmentList;
+import tp.AppointmentStorage;
 import tp.DoctorList;
 import tp.DoctorStorage;
+import tp.IHospitalException;
+import tp.NurseList;
+import tp.NurseStorage;
 import tp.PatientList;
+import tp.PatientStorage;
+import tp.Ui;
+import tp.WardList;
+import tp.WardStorage;
 import tp.person.Doctor;
 import tp.person.Patient;
-import tp.Ui;
-import tp.PatientStorage;
-import tp.AppointmentStorage;
-import tp.IHospitalException;
 
 import java.time.LocalDateTime;
 
@@ -30,19 +34,21 @@ public class AddAppointmentCommand extends Command {
 
 
     @Override
-    public String execute(DoctorList doctorList, PatientList patientList,
-                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                          PatientStorage patientStorage,
+    public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
+                          WardList wardList, AppointmentList appointmentList, Ui ui,
+                          DoctorStorage doctorStorage, WardStorage wardStorage,
+                          PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        if (doctorIndex > doctorList.getSize()) {
+
+        if (doctorIndex <= 0 || doctorIndex > doctorList.getSize()) {
             throw new IHospitalException("The doctor does not exist\n");
         }
-        if (patientIndex > patientList.getSize()) {
+        if (patientIndex <= 0 || patientIndex > patientList.getSize()) {
             throw new IHospitalException("The patient does not exist\n");
         }
 
-        Doctor doctor = (Doctor) doctorList.getDoctor(doctorIndex);
-        Patient patient = (Patient) patientList.getPatient(patientIndex);
+        Doctor doctor = doctorList.getDoctor(doctorIndex);
+        Patient patient = patientList.getPatient(patientIndex);
         appointmentList.addAppointment(doctor, patient, time);
         return String.format(boundary + "Noted. I've added this appointment:\n"
                                      + appointmentList.getAppointment(appointmentList.getSize()) + "\n"

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppointmentTest {
     private final Doctor doctor = new Doctor("1234", "john",
-            "12341234", "3600@gmail.com");
+            "12341234", "3600@gmail.com","Surgery");
     private final Patient patient = new Patient("1234", "sam",
             "12341234", "3600@gmail.com", "symptom", "description");
     String time = "2022-03-19T15:16:00";
