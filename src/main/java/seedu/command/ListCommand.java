@@ -17,12 +17,6 @@ public class ListCommand extends Command {
             + "Parameters: NIL" + System.lineSeparator()
             + "Example: "
             + "list";
-    public static final String COMMAND_DESCRIPTION_WITH_TYPE =
-            ": Prints a list of all equipment in the inventory of the specified type. "
-            + System.lineSeparator()
-            + "Parameters: `TYPE`" + System.lineSeparator()
-            + "Example: "
-            + "list t/`MICROPHONE`";
 
     /**
      * constructor for ListCommand with NO specified type. Initialises successMessage and usageReminder from Command
@@ -33,41 +27,19 @@ public class ListCommand extends Command {
         usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
     }
 
-    /**
-     * constructor for ListCommand with specified type. Initialises successMessage and usageReminder from Command.
-     *
-     * @param commandStrings parsed user input which contains details of equipment to be viewed
-     */
-    public ListCommand(ArrayList<String> commandStrings) {
-        this.commandStrings = commandStrings;
-        successMessage = "TOTAL QUANTITY OF %1$s: %2$d" + System.lineSeparator();
-        usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION_WITH_TYPE;
-    }
 
     /**
-     * List all equipment or list equipment of specified type.
+     * List all equipment.
      *
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute() {
         int listSize;
         ArrayList<Equipment> equipmentArrayList;
-        if (commandStrings == null) {
-            equipmentArrayList = equipmentManager.listEquipment();
-            listSize = equipmentArrayList.size();
-            return new CommandResult(String.format(successMessage, listSize), equipmentArrayList);
-        }
-
-        EquipmentType typeToList;
-        try {
-            typeToList = EquipmentType.valueOf(commandStrings.get(0));
-        } catch (IllegalArgumentException e) {
-            return new CommandResult(INCORRECT_ENUM_TYPE);
-        }
-
-        equipmentArrayList = equipmentManager.listEquipment(typeToList);
+        equipmentArrayList = equipmentManager.listEquipment();
         listSize = equipmentArrayList.size();
-        return new CommandResult(String.format(successMessage, typeToList, listSize), equipmentArrayList);
+
+        return new CommandResult(String.format(successMessage, listSize), equipmentArrayList);
     }
 
     /**
