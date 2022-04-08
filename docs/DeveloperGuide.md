@@ -1973,14 +1973,23 @@ of their schedule. For instance, the user's daily schedule can look like this:
 | Sunday    | rest day       |
 
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 This section includes instructions to test WerkIt! manually.
 <br/>
 <span class = "info box">:memo: These test instructions covers the basic testing of the WerkIt! features. 
-Testers are expected to do more testing.
+Testers are welcome conduct more extensive and rigorous testing.
 </span>
 
-### Launch and shutdown
+### Overview
+- [Launch and Shutdown](#launch-and-shutdown)
+- [Test on Exercise Features](#test-on-exercise-features)
+- [Test on Workout Features](#test-on-workout-features)
+- [Test on Plan Features](#test-on-plan-features)
+- [Test on Schedule Features](#test-on-schedule-features)
+- [Test on Search Features](#test-on-search-features)
+- [Test on Data Saving](#test-on-data-saving)
+
+### Launch and Shutdown
 #### Initial Launch
 1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases/tag/Jar-V2.0) and copy it into an empty folder.
 2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
