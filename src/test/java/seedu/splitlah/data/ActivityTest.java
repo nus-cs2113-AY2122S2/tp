@@ -27,21 +27,21 @@ class ActivityTest {
     private static final String CREATE_TEST_ACTIVITY_INPUT_TWO =
             "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
     private static final String ACTIVITY_ONE_STRING =
-            "Activity Id #1 --\n" +
-                    "Name:                     Lunch\n" +
-                    "Id:                       1\n" +
-                    "Payer:                    Alice\n" +
-                    "GST:                      7.00%\n" +
-                    "Service Charge(SC):       10.00%\n" +
-                    "Cost(GST & SC inclusive): $17.66\n" +
-                    "Involved: \n" +
-                    "-------------------------\n" +
-                    "# | Name    | Cost Owed \n" +
-                    "-------------------------\n" +
-                    "1 | Alice   | 5.89      \n" +
-                    "2 | Bob     | 5.89      \n" +
-                    "3 | Charlie | 5.89      \n" +
-                    "=========================";
+            "Activity Id #1 --\n"
+                    + "Name:                     Lunch\n"
+                    + "Id:                       1\n"
+                    + "Payer:                    Alice\n"
+                    + "GST:                      7.00%\n"
+                    + "Service Charge(SC):       10.00%\n"
+                    + "Cost(GST & SC inclusive): $17.66\n"
+                    + "Involved: \n"
+                    + "-------------------------\n"
+                    + "# | Name    | Cost Owed \n"
+                    + "-------------------------\n"
+                    + "1 | Alice   | 5.89      \n"
+                    + "2 | Bob     | 5.89      \n"
+                    + "3 | Charlie | 5.89      \n"
+                    + "=========================";
 
     /**
      * Creates a session and an activity that are stored and managed by the Manager object.
@@ -85,7 +85,7 @@ class ActivityTest {
      */
     @Test
     void getTotalCost_activityOne_correctActivityTotalCost() {
-        assertTrue(Math.abs(17.65 - activityOne.getTotalCost()) < 0.01 );
+        assertTrue(Math.abs(17.65 - activityOne.getTotalCost()) < 0.01);
     }
 
     /**
