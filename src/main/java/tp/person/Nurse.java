@@ -1,12 +1,15 @@
 package tp.person;
 
-public class Nurse extends Person{
+public class Nurse extends Person {
     protected boolean isOnDuty;
-    protected String title = " ";
+    protected String title;
+    protected String wardNumber;
 
-    public Nurse(String id, String name, String phoneNumber, String email,String title) {
+
+    public Nurse(String id, String name, String phoneNumber, String email, String title, String wardNumber) {
         super(id, name, phoneNumber, email);
-        this.title=title;
+        this.title = title;
+        this.wardNumber = wardNumber;
         isOnDuty = false;
     }
 
@@ -14,8 +17,16 @@ public class Nurse extends Person{
         return title;
     }
 
-    public void setTitle(String title) {
+    public void editTitle(String title) {
         this.title = title;
+    }
+
+    public String getWardNumber() {
+        return wardNumber;
+    }
+
+    public void setWardNumber(String wardNumber) {
+        this.wardNumber = wardNumber;
     }
 
     public void markOnDuty() {
@@ -28,7 +39,7 @@ public class Nurse extends Person{
 
     @Override
     public String toString() {
-        return "* NURSE " + super.toString() + " || Title: " + title;
+        return "* NURSE " + super.toString() + " || TITLE: " + title + " || WardNumber: " + wardNumber;
     }
 
 }

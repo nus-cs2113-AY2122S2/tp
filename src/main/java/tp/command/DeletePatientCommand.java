@@ -1,8 +1,20 @@
 package tp.command;
 
-import tp.*;
+import tp.AppointmentList;
+import tp.AppointmentStorage;
+import tp.DoctorList;
+import tp.DoctorStorage;
+import tp.IHospitalException;
+import tp.NurseList;
+import tp.NurseStorage;
+import tp.PatientList;
+import tp.PatientStorage;
+import tp.Ui;
+import tp.WardList;
+import tp.WardStorage;
 import tp.person.Patient;
 
+//@@author Demonshaha
 public class DeletePatientCommand extends Command {
     private final int index;
 
@@ -12,8 +24,9 @@ public class DeletePatientCommand extends Command {
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
-                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                          PatientStorage patientStorage,NurseStorage nurseStorage,
+                          WardList wardList, AppointmentList appointmentList, Ui ui,
+                          DoctorStorage doctorStorage, WardStorage wardStorage,
+                          PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         if (index <= 0 || index > patientList.getSize()) {
             throw new IHospitalException("The patient does not exist.\n");

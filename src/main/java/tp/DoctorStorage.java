@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+//@@author Demonshaha
 
 public class DoctorStorage {
     private static final String root = System.getProperty("user.dir");
     private static final Path filePath = Paths.get(root, "data", "IHospitalDoctors.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
+    //@@author Demonshaha
     /**
      * The constructor of storage.
      * @throws IHospitalException IHospitalException
@@ -38,6 +40,7 @@ public class DoctorStorage {
      * @param doctors doctor list
      * @throws IHospitalException IHospitalException
      */
+    //@@author Demonshaha
     public void saveDoctorList(DoctorList doctors) throws IHospitalException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
@@ -50,6 +53,7 @@ public class DoctorStorage {
                 fw.write(currDoctor.getName() + "\n");
                 fw.write(currDoctor.getPhoneNumber() + "\n");
                 fw.write(currDoctor.getEmail() + "\n");
+                fw.write(currDoctor.getWardNumber());
             }
             fw.close();
         } catch (IOException e) {
@@ -62,6 +66,7 @@ public class DoctorStorage {
      * @return The doctorList of the IHospitalDoctors.txt
      * @throws IHospitalException IHospitalException
      */
+    //@@author Demonshaha
     public DoctorList loadDoctorList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
@@ -80,7 +85,8 @@ public class DoctorStorage {
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
-                Doctor doctor = new Doctor(id, name, phoneNumber, email);
+                String wardNumber = scanner.nextLine();
+                Doctor doctor = new Doctor(id, name, phoneNumber, email, wardNumber);
                 result.addDoctor(doctor);
             }
             return result;

@@ -1,3 +1,4 @@
+
 package tp;
 
 import tp.person.Nurse;
@@ -10,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+//@@author   Demonshaha
 public class NurseStorage {
     private static final String root = System.getProperty("user.dir");
     private static final Path filePath = Paths.get(root, "data", "IHospitalDoctors.txt");
@@ -18,7 +20,9 @@ public class NurseStorage {
     /**
      * The constructor of storage.
      * @throws IHospitalException IHospitalException
+     *
      */
+    //@@author   Demonshaha
     public NurseStorage() throws IHospitalException {
         try {
             File fileDirectory = new File(dirPath.toString());
@@ -34,22 +38,26 @@ public class NurseStorage {
     }
 
     /**
-     * The function to save Doctor list.
+     * The function to save Nurse list.
      * @param nurses nurse list
      * @throws IHospitalException IHospitalException
      */
+    //@@author  Demonshaha
     public void saveNurseList(NurseList nurses) throws IHospitalException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
             int amount = nurses.getSize();
             fw.write(String.format("%d\n", amount));
             for (int i = 1; i <= amount; i++) {
-                Nurse curNurse = (Nurse) nurses.getNurse(i);
+                Nurse curNurse =  nurses.getNurse(i);
                 fw.write(String.format("%d. Nurse:\n", i));
                 fw.write(curNurse.getId() + "\n");
                 fw.write(curNurse.getName() + "\n");
                 fw.write(curNurse.getPhoneNumber() + "\n");
                 fw.write(curNurse.getEmail() + "\n");
+                //@@ author  DolphXty
+                fw.write(curNurse.getTitle() + "\n");
+                fw.write(curNurse.getWardNumber() + "\n");
             }
             fw.close();
         } catch (IOException e) {
@@ -58,10 +66,11 @@ public class NurseStorage {
     }
 
     /**
-     * A method that will load duke.txt and store the taskList into the current duke's taskList
-     * @return The nurseList of the IHospitalDoctors.txt
+     * The function to load Nurse list.
+     * @return The nurseList of the IHospitalNurses.txt
      * @throws IHospitalException IHospitalException
      */
+    //@@author Demonshaha
     public NurseList loadNurseList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
@@ -80,8 +89,9 @@ public class NurseStorage {
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
-                String title=scanner.nextLine();
-                Nurse nurse = new Nurse(id, name, phoneNumber, email,title);
+                String title = scanner.nextLine();
+                String wardNumber = scanner.nextLine();
+                Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
                 result.addNurse(nurse);
             }
             return result;

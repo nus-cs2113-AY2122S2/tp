@@ -12,10 +12,11 @@ import java.util.Comparator;
 public class AppointmentList {
     public static String boundary = "____________________________________________________________"
                                             + System.lineSeparator();
-    protected ArrayList<Appointment> appointments = new ArrayList<>();
+    protected ArrayList<Appointment> appointments;
     protected int countAppointment;
 
     public AppointmentList() {
+        appointments = new ArrayList<>();
         countAppointment = 0;
     }
 
@@ -63,7 +64,7 @@ public class AppointmentList {
     public AppointmentList getAppointmentListOfDoctorById(String id) {
         AppointmentList res = new AppointmentList();
         for (Appointment appointment : appointments) {
-            if (appointment.doctor.getId().equals(id)) {
+            if (appointment.getDoctor().getId().contains(id)) {
                 res.addAppointment(appointment);
             }
         }

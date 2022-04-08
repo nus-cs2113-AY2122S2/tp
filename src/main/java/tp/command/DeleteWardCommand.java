@@ -1,9 +1,21 @@
 package tp.command;
 
-import tp.*;
+import tp.AppointmentList;
+import tp.AppointmentStorage;
+import tp.DoctorList;
+import tp.DoctorStorage;
+import tp.IHospitalException;
+import tp.NurseList;
+import tp.NurseStorage;
+import tp.PatientList;
+import tp.PatientStorage;
+import tp.Ui;
+import tp.WardList;
+import tp.WardStorage;
+import tp.Ward;
 
 
-public class DeleteWardCommand extends Command{
+public class DeleteWardCommand extends Command {
     private final int index;
 
     public DeleteWardCommand(int index) {
@@ -12,13 +24,14 @@ public class DeleteWardCommand extends Command{
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
-                          AppointmentList appointmentList, WardList wardList, Ui ui, DoctorStorage doctorStorage,
+                          WardList wardList, AppointmentList appointmentList, Ui ui,
+                          DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
-                          AppointmentStorage appointmentStorage, WardStorage wardStorage) throws IHospitalException {
+                          AppointmentStorage appointmentStorage) throws IHospitalException {
         if (index <= 0 || index > wardList.getSize()) {
             throw new IHospitalException("The ward does not exist.\n");
         }
-        ward cur = wardList.deleteward(index);
+        Ward cur = wardList.deleteWard(index);
         return String.format(boundary + "Noted. I've removed this ward:" + cur
                 + "\n" + "Now you have " + wardList.getSize()
                 + " wards in the system." + System.lineSeparator() + boundary);

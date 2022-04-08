@@ -1,8 +1,20 @@
 package tp.command;
 
-import tp.*;
+import tp.AppointmentList;
+import tp.AppointmentStorage;
+import tp.DoctorList;
+import tp.DoctorStorage;
+import tp.IHospitalException;
+import tp.NurseList;
+import tp.NurseStorage;
+import tp.PatientList;
+import tp.PatientStorage;
+import tp.Ui;
+import tp.WardList;
+import tp.WardStorage;
 import tp.person.Doctor;
 
+//@@author Demonshaha
 public class SearchDoctorCommand extends Command {
     protected String id;
 
@@ -12,8 +24,9 @@ public class SearchDoctorCommand extends Command {
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
-                          AppointmentList appointmentList, Ui ui, DoctorStorage doctorStorage,
-                          PatientStorage patientStorage,NurseStorage nurseStorage,
+                          WardList wardList, AppointmentList appointmentList, Ui ui,
+                          DoctorStorage doctorStorage, WardStorage wardStorage,
+                          PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         Doctor curr = doctorList.searchDoctor(id);
         if (curr == null) {
