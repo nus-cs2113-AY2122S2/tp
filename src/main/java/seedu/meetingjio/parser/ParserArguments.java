@@ -82,7 +82,7 @@ public class ParserArguments {
 
         String[] splitString = arguments.split(" ");
         for (String str : splitString) {
-            if (isStringContainsInvalidHeading(str, HEADINGS_ALL)) {
+            if (isStringContainsInvalidHeading(str, HEADINGS_ALL_WITH_INDEX)) {
                 throw new ExtraParametersException();
             }
         }
