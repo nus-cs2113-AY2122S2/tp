@@ -13,10 +13,10 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
    - [print all projects](#print-all-projects-listprojects)
    - [add todo to a project](#add-todo-to-a-project-todo)
    - [mark todo as done](#mark-todo-as-done-mark)
-   - [add a deadline to a project](#add-a-deadline-to-a-project-projdeadline)
+   - [set the deadline to a project](#set-the-deadline-to-a-project-projdeadline)
    - [change the GitHub repo of a project](#change-the-GitHub-repo-of-a-project)
    - [open the GitHub repo of a project](#open-the-GitHub-repo-of-a-project)
-   - [add a deadline to a todo](#add-a-deadline-to-a-todo-tododeadline)
+   - [set the deadline to a todo](#set-the-deadline-to-a-todo-tododeadline)
    - [add language to a project](#add-language-to-a-project-addlanguage)
    - [list languages of a project](#list-languages-of-a-project-listlanguages)
    - [view](#view-details-of-a-project-view)
@@ -117,7 +117,7 @@ Todo has been marked as done successfully:
 [X] buy textbooks
 ```
 ---
-### Add a deadline to a project: `projdeadline`
+### Set the deadline to a project: `projdeadline`
 Adds a deadline date to a project
 
 Format: `projdeadline [project_index] [deadline]`
@@ -160,7 +160,7 @@ opengit project1
 ```
 
 ---
-### Add a deadline to a todo: `tododeadline`
+### Set the deadline to a todo: `tododeadline`
 Adds a deadline date to a todo
 
 Format: `tododeadline [project_index] [todo_index] [deadline]`

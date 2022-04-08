@@ -112,7 +112,7 @@ public class ProjectList {
             Project project = projectList.get(index - 1);
             try {
                 project.setDeadline(deadline);
-                System.out.println("Deadline added to " + project.getTitle() + ": " + deadline);
+                System.out.println("Deadline set for " + project.getTitle() + ": " + deadline);
             } catch (DateTimeParseException e) {
                 System.out.println("Improper format. Please type it in yyyy-mm-dd format.");
             }
@@ -178,7 +178,7 @@ public class ProjectList {
         try {
             targetProject.addTodoDeadline(indexTodo, deadline);
             String todoString = targetProject.getTodos().get(indexTodo - 1).getDescription();
-            System.out.println("Deadline added to " + todoString + ": " + deadline);
+            System.out.println("Deadline set for " + todoString + ": " + deadline);
         } catch (DateTimeParseException e) {
             System.out.println("Improper format. Please type it in yyyy-mm-dd format.");
         }

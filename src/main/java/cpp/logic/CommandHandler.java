@@ -73,7 +73,11 @@ public class CommandHandler {
             executeResult = executeCommand(projectList, new ListLanguageCommandParser().parse(commands));
             break;
         case "help":
-            Response.printHelp();
+            if (commands.length == 1) {
+                Response.printHelp();
+            } else {
+                Response.invalidHelp();
+            }
             break;
         default:
             throw new IllegalCommandException(Constants.UNKNOWN_COMMAND);

@@ -47,6 +47,10 @@ public class Response {
         System.out.println(count++ + ". exit");
     }
 
+    public static void invalidHelp(){
+        System.out.println("Sorry the \"help\" command is only one argument");
+    }
+
 
     public static String addProjectSuccessfully(String name) {
         return ("The project " + name + " has been added successfully.");
