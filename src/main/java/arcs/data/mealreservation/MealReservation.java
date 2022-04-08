@@ -23,18 +23,26 @@ public class MealReservation {
         reservedMenuItems = new ArrayList<>();
     }
 
+    /**
+     * Gets the customer that reserved the meal.
+     * @return Customer
+     */
     public Customer getCustomer() {
         return customer;
     }
 
+    /**
+     * Gets the Route that the meal was reserved for.
+     * @return Route
+     */
     public Route getRoute() {
         return route;
     }
 
-    /*public ArrayList<MenuItem> getReservedMenuItems() {
-        return reservedMenuItems;
-    }*/
-
+    /**
+     * Gets all the reserved menu items as a string.
+     * @return String of Reserved menu items.
+     */
     public String getReservedMenuItemsInfoAsString() {
         StringBuilder builder = new StringBuilder();
         for (MenuItem menuItem: reservedMenuItems) {
@@ -48,13 +56,22 @@ public class MealReservation {
 
     }
 
+    /**
+     * Gets the meal reservation info as a string.
+     * @return string of the meal reservation including flight and passenger details.
+     */
     public String getMealReservationInfo() {
         return "Customer name: " + customer.getName() + System.lineSeparator()
                 + "Flight ID: " + route.getFlightID() + System.lineSeparator()
-                + "In-flight Meal Reserved: " + this.getReservedMenuItemsInfoAsString();
+                + "In-flight Meal Reserved: " + System.lineSeparator()
+                + this.getReservedMenuItemsInfoAsString();
 
     }
 
+    /**
+     * Gets the reserved menu items for storage.
+     * @return String of reserved menu items for storing.
+     */
     public String getReservedMenuItemsToStoreAsString() {
         StringBuilder builder = new StringBuilder();
         for (MenuItem menuItem: reservedMenuItems) {
@@ -68,6 +85,10 @@ public class MealReservation {
         return builder.toString();
     }
 
+    /**
+     * Gets the Meal Reservation info as a string for storage.
+     * @return String of meal reservation info for storage.
+     */
     @Override
     public String toString() {
         assert customer != null : "Customer is null.";

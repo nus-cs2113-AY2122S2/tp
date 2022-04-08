@@ -11,8 +11,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AddMealReservationCommand extends Command {
-    //note command word cap sensitive
+
     public static final String COMMAND_WORD = "reserveMeal";
+
+    /**
+     * Declarations for Messages for the User.
+     */
     private static final String EMPTY_FIELD_MESSAGE = "These necessary fields are not specified:";
     private static final String NO_CUSTOMER_MESSAGE = "This customer has not been registered in the system."
             + System.lineSeparator() + "Please add this customer before booking a flight.";
@@ -34,6 +38,11 @@ public class AddMealReservationCommand extends Command {
         checkEmptyField();
     }
 
+    /**
+     * Executes the command to list of menu items.
+     *
+     * @return CommandResult result of the executed command.
+     */
     @Override
     public CommandResult execute() {
         if (!emptyFields.isEmpty()) {
@@ -62,7 +71,7 @@ public class AddMealReservationCommand extends Command {
             if (menuItem != null) {
                 menuItemsToReserve.add(menuItem);
             } else if (menuItem == null) {
-                System.out.println("There was an invalid Menu Item");
+                System.out.println("There was an invalid Menu Item, only the valid ones were reserved");
             }
         }
         if (menuItemsToReserve.isEmpty()) {
@@ -81,6 +90,9 @@ public class AddMealReservationCommand extends Command {
                 + "Items: " + menuItemsToReserve);
     }
 
+    /**
+     * Stores empty field in an array for empty fields.
+     */
     public void checkEmptyField() {
         if (ic == null || ic.isEmpty()) {
             emptyFields.add("IC");

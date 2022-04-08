@@ -7,6 +7,7 @@ import arcs.data.menuitems.MenuItem;
 import java.util.ArrayList;
 
 public class FindMenuItemNameCommand extends Command {
+
     public static final String COMMAND_WORD = "findMenuItemName";
 
     private String name;
@@ -21,12 +22,21 @@ public class FindMenuItemNameCommand extends Command {
         checkEmptyField();
     }
 
+    /**
+     * Stores empty field in an array.
+     *
+     */
     private void checkEmptyField() {
         if (name == null || name.isEmpty()) {
             emptyFields.add("Menu Item Name");
         }
     }
 
+    /**
+     * Executes the command to find menu item by name.
+     *
+     * @return CommandResult result of the executed command.
+     */
     @Override
     public CommandResult execute() {
         if (!emptyFields.isEmpty()) {

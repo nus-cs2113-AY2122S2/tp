@@ -45,8 +45,10 @@ public class Main {
         new Main().run();
     }
 
+    /**
+     * Initialize ui, logic and storage classes.
+     */
     public Main() {
-        // Initialize ui, logic and storage classes
         mainUi = new MainUi();
         parser = new Parser();
         routeFileManager = new RouteFileManager();
@@ -57,6 +59,9 @@ public class Main {
         loadData();
     }
 
+    /**
+     * Main execution body of code.
+     */
     public void run() {
         Command command;
         mainUi.displayWelcomeMessage();

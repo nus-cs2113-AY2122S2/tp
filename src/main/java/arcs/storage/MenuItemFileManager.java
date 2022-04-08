@@ -10,6 +10,11 @@ import java.util.Scanner;
 
 
 public class MenuItemFileManager {
+
+    private static final int TYPE_INDEX = 0;
+    private static final int NAME_INDEX = 1;
+    private static final int PRICE_INDEX = 2;
+
     private static String DIR_PATH = "data";
     private static final String fileName = "menuItem.txt";
 
@@ -17,6 +22,11 @@ public class MenuItemFileManager {
         DIR_PATH = System.getProperty("user.dir") + File.separator + "data";
     }
 
+    /**
+     * Load the data of Menu Items from text file.
+     * @return ArrayList of Menu Items loaded.
+     * @throws IOException If text file failed to load.
+     */
     public ArrayList<MenuItem> loadData() throws IOException {
         File dir = new File(DIR_PATH);
         if (!dir.exists()) {
@@ -34,6 +44,11 @@ public class MenuItemFileManager {
         return decodeData(records);
     }
 
+    /**
+     * Saves the Menu Items data into a text file.
+     * @param menuItems ArrayList of Menu Items to save.
+     * @throws IOException If file failed to save.
+     */
     public void saveData(ArrayList<MenuItem> menuItems) throws IOException {
         FileWriter fw = new FileWriter(DIR_PATH + File.separator + fileName);
         ArrayList<String> records = encodeData(menuItems);
@@ -44,6 +59,11 @@ public class MenuItemFileManager {
         fw.close();
     }
 
+    /**
+     * Format the raw data into correct format.
+     * @param records Raw input records.
+     * @return ArrayList of Menu Items.
+     */
     private ArrayList<MenuItem> decodeData(ArrayList<String> records) {
         ArrayList<MenuItem> menuItems = new ArrayList<>();
 
@@ -52,12 +72,17 @@ public class MenuItemFileManager {
             if (data.length != 3) {
                 continue;
             }
-            menuItems.add(new MenuItem(data[0], data[1], data[2]));
+            menuItems.add(new MenuItem(data[NAME_INDEX], data[TYPE_INDEX], data[PRICE_INDEX]));
         }
 
         return menuItems;
     }
 
+    /**
+     * Formats the data into the correct format to store in.
+     * @param menuItems ArrayList of Menu Items to store.
+     * @return Formatted ArrayList of Menu Items to store.
+     */
     private ArrayList<String> encodeData(ArrayList<MenuItem> menuItems) {
         ArrayList<String> records = new ArrayList<>();
         for (MenuItem menuItem: menuItems) {
