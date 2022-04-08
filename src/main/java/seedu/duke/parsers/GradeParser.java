@@ -70,6 +70,7 @@ public class GradeParser extends Parser {
         String moduleCode = parsedArguments.get(MODULE_CODE);
         String moduleGrade = parsedArguments.get(MODULE_GRADE).toUpperCase();
         if (!Objects.isNull(moduleCode)) {
+            checksForExcessArg();
             return new GradeCommand(moduleCode, moduleGrade);
         }
         throw new ModHappyException();

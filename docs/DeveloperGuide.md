@@ -325,7 +325,7 @@ Below are instructions to perform manual testing of the application. Please refe
 
 ### Adding a module
 1. Test Case: `add mod CS2113T 4 -d "Software Engineering and OOP"` <br>
-   Expected: A module named CS2113T with 4 mc is added, with a description of "Software Engineering and OOP".
+   Expected: A module named `CS2113T` with `4` mc is added, with a description of `Software Engineering and OOP`.
 2. Test Case: `add mod CS2113T 4` (Continuation from Test Case 1) <br>
    Expected: No new module is added. Error details in the message shows that a module of the same name already exists.
 3. Test Case: `add mod CS2101` <br>
@@ -337,7 +337,7 @@ Below are instructions to perform manual testing of the application. Please refe
 1. Prerequisite: There are existing modules in the application.
 2. Assumption: You have a module `CS2113T` added.
 3. Test Case: `add task "start PE" -m CS2113T` <br>
-   Expected: A task with name `start PE` is added under the module CS2113T.
+   Expected: A task with name `start PE` is added under the module `CS2113T`.
 4. Test Case: `add task Invalid Name` <br>
    Expected: No task is added. Error details in the message shows that the task name is invalid.
 
@@ -348,7 +348,7 @@ Below are instructions to perform manual testing of the application. Please refe
 2. Assumption: You have a module `CS2113T` added, but not `CS2101`.
 3. Note: If you have added tasks to a module, deleting that module will prompt a confirmation to delete. Typing `yes` will delete that module. 
 4. Test Case: `del mod CS2113T` <br>
-   Expected: The module CS2113T is deleted.
+   Expected: The module `CS2113T` is deleted.
 5. Test Case: `del mod CS2101` <br>
    Expected: No module is deleted. Error details in the message shows that there are no such module. 
 
@@ -358,7 +358,7 @@ Below are instructions to perform manual testing of the application. Please refe
 1. Prerequisite: There are existing tasks in the application.
 2. Assumption: You have the module `CS2113T` added with at least one task added. 
 3. Test Case: `del task 1 -m CS2113T` <br>
-   Expected: If there exists a module CS2113T, and it has at least one task, the first task will be deleted.
+   Expected: The first task in `CS2113T` will be deleted.
 4. Test Case: `del task -1` <br>
    Expected: No task is deleted. Error details in the message shows that the task number is invalid.
 
@@ -368,7 +368,7 @@ Below are instructions to perform manual testing of the application. Please refe
 1. Prerequisite: There are existing modules in the application. 
 2. Assumption: You have the module `CS2113T` added.
 3. Test Case: `edit mod CS2113T -d "Changed"` <br>
-   Expected: The description of CS2113T is set to `Changed`.
+   Expected: The description of `CS2113T` is set to `Changed`.
 4. Test Case: `edit mod CS2113T -t "2 hours"` <br>
    Expected: The module remains unchanged. Error details in the message shows that the module description is missing.
 
@@ -405,7 +405,7 @@ Below are instructions to perform manual testing of the application. Please refe
 ### Showing Help
 1. Test Case: `help` <br>
    Expected: A message for format of the `help` command is shown.
-2. Test Case: `help add"` <br>
+2. Test Case: `help add` <br>
    Expected: A message for the format of the `add` command is shown.
 
 <br>
@@ -436,7 +436,7 @@ Below are instructions to perform manual testing of the application. Please refe
 3. Test Case: `tag del 1 IMPT` <br>
    Expected: The tag `IMPT` is removed from the first task in `General Tasks`.
 4. Test Case: `tag del 1 OTHERS` <br>
-   Expected: No tag is deleted. Error details in the message shows that no such tag exists
+   Expected: No tag is deleted. Error details in the message shows that no such tag exists.
 
 <br>
 
@@ -456,7 +456,7 @@ Below are instructions to perform manual testing of the application. Please refe
 3. Test Case: `mark c 1` <br>
    Expected: The first task in `General Tasks` is marked as completed.
 4. Test Case: `mark u 1` <br>
-   Expected: The first task in `General Tasks` is unmarked.
+   Expected: The first task in `General Tasks` is marked as uncompleted.
 5. Test Case: `mark t 1` <br>
    Expected: No tasks is marked/unmarked. Error details in the message shows that `t` is an invalid flag.
 

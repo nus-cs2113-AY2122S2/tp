@@ -2,12 +2,14 @@ package seedu.duke.parsers;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.EditCommand;
-import seedu.duke.exceptions.EmptyParamException;
+import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
-import seedu.duke.exceptions.MissingCompulsoryParameterException;
 import seedu.duke.exceptions.MissingNumberException;
-import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.MissingCompulsoryParameterException;
+import seedu.duke.exceptions.InvalidFlagException;
+import seedu.duke.exceptions.EmptyParamException;
+import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 import java.util.HashMap;
@@ -26,6 +28,7 @@ public class EditTaskParser extends EditParser {
     private static final String TASK_ESTIMATED_WORKING_TIME_STR = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
+    private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
     // Unescaped regex for testing
@@ -55,14 +58,17 @@ public class EditTaskParser extends EditParser {
      *                                                          Any other excess inputs
 
      */
-    private static final String EDIT_FORMAT = "(task\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?"
-            + "(?=\\s+(-n|-d|-t)\\s+\\\"[^\\\"]+\\\")((\\s+-n\\s+\\\"((?<taskName>[^\\\"]+)\\\")?|\\s+-d\\s+\\\""
-            + "((?<taskDescription>[^\\\"]+)\\\")?|(\\s+-t\\s+\\\""
+    private static final String EDIT_FORMAT = "(task\\s+(?<taskNumber>\\d+)(\\s+"
+            + "-m\\s+(?<taskModule>\\w+))?(?=\\s+(-n|-d|-t)\\s+\\\"[^\\\"]+\\\")((\\s+-n\\s+\\\""
+            + "((?<taskName>[^\\\"]+)\\\")?|\\s+-d\\s+\\\"((?<taskDescription>[^\\\"]+)\\\")?|(\\s+-t\\s+\\\""
             + "(?<estimatedWorkingTime>[^\\\"]+)\\\")?)))(?<invalid>.*)";
     private static final String POSITIVE_INT = StringConstants.POSITIVE_INT;
     private static final String QUOTED_UNRESTRICTED_STR = StringConstants.QUOTED_UNRESTRICTED_STR;
     private static final String TASK_PARAMETERS_FLAGS = StringConstants.TASK_PARAMETERS_FLAG;
     private static final String TASK_MODULE_FLAG = StringConstants.TASK_MODULE_FLAG;
+    private static final String ANY_TEXT = StringConstants.ANY_TEXT;
+    private static final String ANY_FLAG = StringConstants.ANY_FLAG;
+    private static final String ANY_FLAG_NO_WHITESPACE = StringConstants.ANY_FLAG_NO_WHITESPACE;
 
     public EditTaskParser() {
         super();
@@ -94,15 +100,55 @@ public class EditTaskParser extends EditParser {
         try {
             taskParameter = userInput.split(TASK_PARAMETERS_FLAGS)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
+            determineErrorInParameter();
             throw new MissingCompulsoryParameterException(TASK_PARAMETER_STR);
         }
         if (!taskParameter.matches(QUOTED_UNRESTRICTED_STR)) {
             throw new InvalidCompulsoryParameterException(TASK_PARAMETER_STR, taskParameter);
         }
+        determineErrorInModuleCode();
+    }
+
+    private void determineErrorInModuleCode() throws EmptyParamException, InvalidCompulsoryParameterException {
         String moduleCode;
         assert (userInput.contains(TASK_MODULE_FLAG));
         moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
+        if (moduleCode.matches(ANY_FLAG_NO_WHITESPACE)) {
+            throw new EmptyParamException(MODULE_CODE_STR);
+        }
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
+    }
+
+    private String getParameterFlag() {
+        String parameterFlag = null;
+        String [] arguments = userInput.split(SPACE);
+        for (String argument : arguments) {
+            if (argument.matches(ANY_FLAG_NO_WHITESPACE)) {
+                parameterFlag = argument;
+            }
+        }
+        assert !Objects.isNull(parameterFlag);
+        return parameterFlag;
+    }
+
+    private void determineErrorInParameter() throws InvalidFlagException {
+        if (userInput.matches(ANY_TEXT + ANY_FLAG + QUOTED_UNRESTRICTED_STR)) {
+            String parameterFlag = getParameterFlag();
+            throw new InvalidFlagException(parameterFlag);
+        }
+    }
+
+    private int parseIndex(String taskNumberString) throws InvalidNumberException {
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskNumberString) - 1;
+            if (taskIndex < MINIMUM_INDEX) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
+        }
+        return taskIndex;
     }
 
     @Override
@@ -115,15 +161,11 @@ public class EditTaskParser extends EditParser {
         String estimatedWorkingTime = parsedArguments.get(TASK_ESTIMATED_WORKING_TIME);
         String taskName = parsedArguments.get(TASK_NAME);
         if (!Objects.isNull(taskNumberString)) {
-            int taskIndex;
-            try {
-                taskIndex = Integer.parseInt(taskNumberString) - 1;
-            } catch (NumberFormatException e) {
-                throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
-            }
+            int taskIndex = parseIndex(taskNumberString);
             checkTaskName(taskName);
             checkTaskDescription(taskDescription);
             checkEstimatedWorkingTime(estimatedWorkingTime);
+            checksForExcessArg();
             return new EditCommand(taskModule, taskIndex, taskDescription, estimatedWorkingTime, taskName);
         }
         throw new ModHappyException();
@@ -152,4 +194,5 @@ public class EditTaskParser extends EditParser {
             }
         }
     }
+
 }

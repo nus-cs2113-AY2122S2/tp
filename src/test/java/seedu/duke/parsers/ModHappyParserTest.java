@@ -178,7 +178,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_addCommand_task_invalidModuleCode() {
         final String testString = "add task \"test\" -m . cs2113t -d \"desc\" -t \"2 hours\"";
-        testParseCommand_expectInvalidExcessArgumentException(testString);
+        testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
     @Test
@@ -189,7 +189,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_invalidTime() {
-        final String testString = "add task \"test\" -m cs2113t -d .\"desc\" -t .\"2 hours\"";
+        final String testString = "add task \"test\" -m cs2113t -d \"desc\" -t .\"2 hours\"";
         testParseCommand_expectInvalidExcessArgumentException(testString);
     }
 
@@ -580,13 +580,13 @@ public class ModHappyParserTest {
     @Test
     public void parse_deleteCommand_invalidFlag() {
         final String testString = "del a 1";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectUnknownCommandException(testString);
     }
 
     @Test
     public void parse_deleteCommand_noFlagProvided() {
         final String testString = "del 1";
-        testParseCommand_expectInvalidCompulsoryParameterException(testString);
+        testParseCommand_expectUnknownCommandException(testString);
     }
 
     @Test
@@ -650,7 +650,7 @@ public class ModHappyParserTest {
     @Test
     public void parse_editCommand_module_wrongFlag() {
         final String testString = "edit mod cs2113t -t \"111\"";
-        testParseCommand_expectMissingCompulsoryParameterException(testString);
+        testParseCommand_expectInvalidFlagException(testString);
     }
 
     /*

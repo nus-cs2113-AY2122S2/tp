@@ -23,7 +23,6 @@ public class AddModuleParser extends AddParser {
     private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
     private static final String MODULE_DESCRIPTION_STR = StringConstants.MODULE_DESCRIPTION_STR;
     private static final String MODULAR_CREDIT = StringConstants.MODULAR_CREDIT;
-    private static final String ERROR_MODULAR_CREDIT_HELP = StringConstants.ERROR_MODULAR_CREDITS_HELP;
     private static final int MAXIMUM_MODULAR_CREDITS = NumberConstants.MAXIMUM_MODULAR_CREDITS;
     private static final int MINIMUM_MODULAR_CREDITS = NumberConstants.MINIMUM_MODULAR_CREDITS;
     private String userInput;
@@ -85,12 +84,33 @@ public class AddModuleParser extends AddParser {
         try {
             modularCredit = userInput.split(SPACE)[SECOND_INDEX];
         } catch (IndexOutOfBoundsException e) {
-            throw new MissingNumberException(MODULAR_CREDIT_STR);
+            throw new MissingNumberException();
         }
         if (!modularCredit.matches(UNRESTRICTED_INT)) {
-            throw new InvalidNumberException(MODULAR_CREDIT_STR, modularCredit, ERROR_MODULAR_CREDIT_HELP);
+            throw new InvalidNumberException(modularCredit);
         }
         throw new InvalidCompulsoryParameterException();
+    }
+
+    private int parseModularCredit(String modularCreditStr) throws InvalidNumberException {
+        int modularCredit;
+        try {
+            modularCredit = Integer.parseInt(modularCreditStr);
+            if (modularCredit > MAXIMUM_MODULAR_CREDITS || modularCredit < MINIMUM_MODULAR_CREDITS) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(modularCreditStr);
+        }
+        return modularCredit;
+    }
+
+    private void checkForEmptyDescription(String moduleDescription) throws EmptyParamException {
+        if (!Objects.isNull(moduleDescription)) {
+            if (moduleDescription.isBlank()) {
+                throw new EmptyParamException(MODULE_DESCRIPTION_STR);
+            }
+        }
     }
 
     @Override
@@ -102,20 +122,9 @@ public class AddModuleParser extends AddParser {
         final String modularCreditStr = parsedArguments.get(MODULAR_CREDIT);
 
         if (!Objects.isNull(moduleCode)) {
-            int modularCredit;
-            try {
-                modularCredit = Integer.parseInt(modularCreditStr);
-                if (modularCredit > MAXIMUM_MODULAR_CREDITS || modularCredit < MINIMUM_MODULAR_CREDITS) {
-                    throw new NumberFormatException();
-                }
-            } catch (NumberFormatException e) {
-                throw new InvalidNumberException(MODULAR_CREDIT_STR, modularCreditStr, ERROR_MODULAR_CREDIT_HELP);
-            }
-            if (!Objects.isNull(moduleDescription)) {
-                if (moduleDescription.isBlank()) {
-                    throw new EmptyParamException(MODULE_DESCRIPTION_STR);
-                }
-            }
+            int modularCredit = parseModularCredit(modularCreditStr);
+            checkForEmptyDescription(moduleDescription);
+            checksForExcessArg();
             return new AddCommand(AddCommand.AddObjectType.MODULE, moduleCode, moduleDescription, modularCredit);
         }
         throw new GeneralParseException();

@@ -10,6 +10,7 @@ import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.MissingNumberException;
 import seedu.duke.exceptions.MissingCompulsoryParameterException;
+import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 
@@ -17,10 +18,11 @@ import seedu.duke.util.StringConstants;
  * This Parser supports the "tag" command.
  */
 public class TagParser extends Parser {
-    public static final String TAG_OPERATION = StringConstants.TAG_OPERATION;
-    public static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
-    public static final String TASK_MODULE = StringConstants.TASK_MODULE;
-    public static final String TAG_NAME = StringConstants.TAG_NAME;
+    private static final String TAG_OPERATION = StringConstants.TAG_OPERATION;
+    private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
+    private static final String TASK_MODULE = StringConstants.TASK_MODULE;
+    private static final String TAG_NAME = StringConstants.TAG_NAME;
+    private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
     // Unescaped Regex for testing:
@@ -104,6 +106,19 @@ public class TagParser extends Parser {
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
 
+    private int parseIndex(String taskNumberString) throws InvalidNumberException {
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskNumberString) - 1;
+            if (taskIndex < MINIMUM_INDEX) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
+        }
+        return taskIndex;
+    }
+
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;
@@ -112,12 +127,8 @@ public class TagParser extends Parser {
         String taskNumberString = parsedArguments.get(TASK_NUMBER);
         String taskModuleString = parsedArguments.get(TASK_MODULE);
         String tagDescription = parsedArguments.get(TAG_NAME);
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(taskNumberString) - 1;
-        } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
-        }
+        int taskIndex = parseIndex(taskNumberString);
+        checksForExcessArg();
         return new TagCommand(tagOperationString, taskIndex, taskModuleString, tagDescription);
     }
 

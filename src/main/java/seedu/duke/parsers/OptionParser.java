@@ -42,6 +42,7 @@ public class OptionParser extends Parser {
         HashMap<String, String> parsedArguments = parseString(userInput);
         String configurationGroupWord = parsedArguments.get(CONFIGURATION_GROUP_WORD);
         String newValue = parsedArguments.get(NEW_VALUE);
+        checksForExcessArg();
         return new OptionCommand(configurationGroupWord, newValue);
     }
 }

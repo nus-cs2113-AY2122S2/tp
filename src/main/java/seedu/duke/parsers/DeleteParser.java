@@ -10,6 +10,8 @@ import seedu.duke.exceptions.MissingNumberException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.MissingCompulsoryParameterException;
+import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -19,6 +21,7 @@ public class DeleteParser extends Parser {
     private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String MODULE_CODE = StringConstants.MODULE_CODE;
+    private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
     // Unescaped regex for testing:
@@ -52,7 +55,7 @@ public class DeleteParser extends Parser {
             determineErrorForModule();
             break;
         default:
-            throw new InvalidCompulsoryParameterException();
+            throw new UnknownCommandException();
         }
     }
 
@@ -80,6 +83,19 @@ public class DeleteParser extends Parser {
         }
     }
 
+    private int parseIndex(String taskNumberString) throws InvalidNumberException {
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskNumberString) - 1;
+            if (taskIndex < MINIMUM_INDEX) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
+        }
+        return taskIndex;
+    }
+
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;
@@ -87,16 +103,12 @@ public class DeleteParser extends Parser {
         String taskNumberString = parsedArguments.get(TASK_NUMBER);
         String taskModuleString = parsedArguments.get(TASK_MODULE);
         String moduleCode = parsedArguments.get(MODULE_CODE);
+        checksForExcessArg();
         if (!Objects.isNull(moduleCode)) {
             return new DeleteCommand(moduleCode);
         }
         if (!Objects.isNull(taskNumberString)) {
-            int taskIndex;
-            try {
-                taskIndex = Integer.parseInt(taskNumberString) - 1;
-            } catch (NumberFormatException e) {
-                throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
-            }
+            int taskIndex = parseIndex(taskNumberString);
             return new DeleteCommand(taskIndex, taskModuleString);
         }
         throw new ModHappyException();

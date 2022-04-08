@@ -4,6 +4,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.EditCommand;
 import seedu.duke.exceptions.MissingCompulsoryParameterException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
+import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
@@ -34,6 +35,8 @@ public class EditModuleParser extends EditParser {
      */
     private static final String EDIT_FORMAT = "(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))"
             + "(\\s+(-d\\s+\\\"(?<moduleDescription>[^\\\"]*)\\\")))(?<invalid>.*)";
+    private static final String ANY_FLAG = StringConstants.ANY_FLAG;
+    private static final String ANY_TEXT = StringConstants.ANY_TEXT;
     private static final String WORD_CHAR_ONLY = StringConstants.WORD_CHAR_ONLY;
     private static final String DESCRIPTION_FLAG = StringConstants.DESCRIPTION_FLAG;
     private static final String QUOTED_UNRESTRICTED_STR = StringConstants.QUOTED_UNRESTRICTED_STR;
@@ -65,12 +68,26 @@ public class EditModuleParser extends EditParser {
         try {
             moduleDescription = userInput.split(DESCRIPTION_FLAG)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
+            determineErrorInDescription();
             throw new MissingCompulsoryParameterException(MODULE_DESCRIPTION_STR);
         }
         if (!moduleDescription.matches(QUOTED_UNRESTRICTED_STR)) {
             throw new InvalidCompulsoryParameterException(MODULE_DESCRIPTION_STR, moduleDescription);
         }
         throw new InvalidCompulsoryParameterException();
+    }
+
+    private void determineErrorInDescription() throws MissingCompulsoryParameterException, InvalidFlagException {
+        String moduleFlag;
+        try {
+            moduleFlag = userInput.split(SPACE)[SECOND_INDEX];
+        } catch (IndexOutOfBoundsException e) {
+            throw new MissingCompulsoryParameterException(MODULE_DESCRIPTION_STR);
+        }
+
+        if (userInput.matches(ANY_TEXT + ANY_FLAG + QUOTED_UNRESTRICTED_STR)) {
+            throw new InvalidFlagException(moduleFlag);
+        }
     }
 
     @Override
@@ -80,6 +97,7 @@ public class EditModuleParser extends EditParser {
         String moduleCode = parsedArguments.get(MODULE_CODE);
         String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
         if (!Objects.isNull(moduleCode)) {
+            checksForExcessArg();
             return new EditCommand(moduleCode, moduleDescription);
         }
 
