@@ -2015,6 +2015,7 @@ Each command entered by the user should respond within two seconds.
 | Saturday       | whole body!                               |
 | Sunday         | rest day                                  |
 
+---
 
 ## Instructions for Manual Testing
 This section includes instructions to test WerkIt! manually.
