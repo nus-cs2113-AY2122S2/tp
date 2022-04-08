@@ -85,7 +85,7 @@ class ActivityTest {
      */
     @Test
     void getTotalCost_activityOne_correctActivityTotalCost() {
-        assertEquals(15, activityOne.getTotalCost());
+        assertTrue(Math.abs(17.65 - activityOne.getTotalCost()) < 0.01 );
     }
 
     /**
