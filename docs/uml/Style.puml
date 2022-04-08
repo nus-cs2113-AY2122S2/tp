@@ -13,3 +13,5 @@ skinparam arrowColor #Black
 skinparam classBorderColor #Black
 
 'Sequence Diagram Settings
+skinparam SequenceLifelineBorderColor #Black
+skinparam participantBorderColor #Black
