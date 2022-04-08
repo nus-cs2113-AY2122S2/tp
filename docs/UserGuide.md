@@ -1,3 +1,7 @@
+---
+title: User Guide
+---
+
 <p align="center"><img alt="logo" src="https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/pngLogo.png"></p>
 
 # SplitLah
