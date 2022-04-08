@@ -474,9 +474,9 @@ the [features](#features) section.
 
 | Index | Name                  |
 |-------|-----------------------|
-| 0     | Others                |
-| 1     | Food and Drinks       |
-| 2     | Home and Utilities    |
-| 3     | Health and Medical    |
-| 4     | Transportation        |
-| 5     | Fun and Entertainment |
+| 1     | Others                |
+| 2     | Food and Drinks       |
+| 3     | Home and Utilities    |
+| 4     | Health and Medical    |
+| 5     | Transportation        |
+| 6     | Fun and Entertainment |
