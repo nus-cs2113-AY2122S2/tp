@@ -234,7 +234,7 @@ The logic component is mainly responsible for executing the command.
 In addition, the respective commands will operate on the appropriate data
 structure objects to create, manipulate and delete data based on the user's requests.
 
-Below is a class diagram of the `Logic` component:
+Below is a class diagram of the `Logic` component:<br/><br/>
 ![LogicUML](uml/classDiagrams/images/logicComponent.png)
 <span class="box info">:memo: This is a high-level overview of the `Logic` component, thus,
 other components have been omitted from the diagram above.</span>
@@ -242,7 +242,7 @@ other components have been omitted from the diagram above.</span>
 The `Logic` component consists of:
 - **`Command` abstract class**. The `ExerciseCommand`, `SearchCommand`, `WorkoutCommand`, `ScheduleCommand`,
 `PlanCommand`, `HelpCommand` and `ExitCommand` extends the `Command` class. These classes
-identify the command action type supplied by the user and also executes the command.
+identify the command action (i.e. create, update, delete and list) supplied by the user and also executes the command.
 The source of these classes can be found [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/tree/master/src/main/java/commands).
 - **`[command name]List` classes**. It includes `ExerciseList`,
 `WorkoutList`,`PlanList` and `DayList`. These classes hold the methods
@@ -259,7 +259,8 @@ How the `Logic` component works:
 3. This subclass-of-`Command` object is executed by the `WerkIt` class, which calls the `execute()` method of that subclass-of-`Command` object.
 4. Depending on the command action (e.g. create/delete/update/list), the `execute()` method will identify and perform the appropriate actions.
 
-<br>
+<br/>
+
 Illustration of the interactions within the `Logic` component can be found
 in the sequence diagram below. The example given is for the creation of new workouts (`workout /new`):
 <br><br>
@@ -271,8 +272,7 @@ is done. To improve readability, some classes and methods have been omitted from
 
 <br>
 Each command type is a feature of the WerkIt! application.
-The next section will explain the design of each
-feature in detail.
+The next section will explain the design of each feature in detail.
 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
@@ -323,23 +323,23 @@ Below is a class diagram of the workout-related features:
 <span class="box info">:memo: To improve readability, some classes and methods have been omitted from the diagram above.
 The diagram shows the main classes and methods the workout-related features uses. </span>
 
-The `Parser` class will call the `Parser#parseUserInput(userInput)` method
+The `Parser` class will call the `Parser#parseUserInput()` method
 to analyse the user's command. If the user's command is of type 
-`workout`, the `Parser#parseUserInput(userInput)` method
+`workout`, the `Parser#parseUserInput()` method
 will parse the `workout` base word and proceed to create a `WorkoutCommand` object via the
-`Parser#createWorkoutCommand(userInput)` method. 
+`Parser#createWorkoutCommand()` method. 
 <br><br>
 Once the `WorkoutCommand` object is created, the `WorkoutCommand#execute()` method
 is called. Depending on the type of command action, this method will
 call the appropriate operations from the `WorkoutList` class. For instance, if the command action
-is `/new`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout(userArgument)`
+is `/new`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout()`
 to create a new workout in the application. 
 To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
 <br><br>
 When all methods except the `listAllWorkout()` method are executed, the
 `FileManager` and `UI` classes will call its appropriate methods depending on the command action.
 From the previous example, the `/new` workout command action will call the 
-`FileManager#writeNewWorkoutToFile(newWorkout)` and also the `UI#printNewCreatedMessage(newWorkout)`
+`FileManager#writeNewWorkoutToFile()` and also the `UI#printNewCreatedMessage()`
 methods after the new workout has been created.
 <br><br>
 Finally, methods in the `PlanList` class is only called when the `/delete` and `/update`
@@ -877,21 +877,21 @@ The following sequence diagram is the detailed procedure for Step 2's `WorkoutLi
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
  `WorkoutList#deleteWorkout()` have been omitted.</span>
 
-**(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
+**(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout()`.
 In this case, the user argument parameter is the workout index number of the workout to be deleted from the workout list as a `String` object.
 <br><br>
-**(Steps 2.3 to 2.4)** With the workout index to delete, the `WorkoutList#deleteWorkout(userArgument)` method will then
-fetch the `Workout` object to be deleted by calling the `WorkoutList#getWorkoutFromIndexNum(indexToDelete)` method.
-However, before that `Workout` object is fetched, the `WorkoutList#deleteWorkout(userArgument)` method
+**(Steps 2.3 to 2.4)** With the workout index to delete, the `WorkoutList#deleteWorkout()` method will then
+fetch the `Workout` object to be deleted by calling the `WorkoutList#getWorkoutFromIndexNum()` method.
+However, before that `Workout` object is fetched, the `WorkoutList#deleteWorkout()` method
 checks that the workout index to delete is within the range of the application's workout list.
 If index to delete is not within the range of the workout list, an `InvalidWorkoutException` exception is thrown.
 <br><br>
 **(Steps 2.5 to 2.8)** The `Workout` object to be deleted is subsequently removed from the ArrayList and HashMap which stores the
 application's workout list.
 <br><br>
-**(Step 3)** The `WorkoutList#deleteWorkout(userArgument)` method returns the deleted `Workout` object to `WorkoutCommand`.
+**(Step 3)** The `WorkoutList#deleteWorkout()` method returns the deleted `Workout` object to `WorkoutCommand`.
 <br><br>
-**(Steps 4 to 5)** Upon returning to the `WorkoutCommand` object, the `UI#printDeleteWorkoutMessage(deletedWorkout)` is called
+**(Steps 4 to 5)** Upon returning to the `WorkoutCommand` object, the `UI#printDeleteWorkoutMessage()` is called
 to display the workout that has been deleted to the user via the terminal. The following is an example 
 of a success deletion message after a valid workout is deleted from the application's workout list:
 ```
@@ -906,11 +906,14 @@ Alright, the following workout has been removed:
 **(Steps 6 to 7)** The `WorkoutCommand#deletePlanContainsDeletedWorkout()` method will
 be called to delete any existing plan(s) that contains that deleted workout.
 <br><br>
-**(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
+**(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile()` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list and the
-`FileManager#rewriteAllPlansToFile(planList)` is also called to rewrite
+`FileManager#rewriteAllPlansToFile()` is also called to rewrite
 the `plans.txt` file according to the newly modified application's plan list.
-<br><br>
+For more information on the file management, 
+refer to this [section](DeveloperGuide.md#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
+
+<br/><br/>
 This completes the process of deleting an existing workout in WerkIt!
 
 ##### Design Considerations for Deleting Existing Workout
@@ -1122,7 +1125,10 @@ Alright, the following plan has been created:
 ```
 **(Steps 6 to 7)** `FileManager#writeNewPlanToFile()` is called to write the newly-created `Plan` 
 object's data into `plans.txt`, which is stored on the user's local filesystem.
-<br><br>
+For more information on the file management,
+refer to this [section](DeveloperGuide.md#writing-a-new-line-of-data-to-the-resource-file).
+
+<br/><br/>
 This completes the process of creating and adding a new plan to WerkIt!.
 
 ##### Design Considerations for Creating a New Plan
@@ -1130,13 +1136,13 @@ This completes the process of creating and adding a new plan to WerkIt!.
 The following table lists the validity checks done before a new plan can be inserted into the application's plan list,
 as well as the rationale of each check:
 
-|       Type of Validity Checks       |                                                                                                                                                   Reason for Creating the Validity Checks                                                                                                                                                    |
-|:-----------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|          Unique plan name           |                                                                                                       All plan names within the application should be <br/> unique as it makes no sense for users to create plans with the same names.                                                                                                       |
-|     No plans called "rest day"      |                                         "rest day" is used to identify the days in the <br/> schedule that do not have a plan assigned to it. <br/> If a plan called "rest day" is allowed, users might not be able to <br/> differentiate a rest day from days that they actually need to work out.                                         |
-|    Character limit for plan name    |                                                                                                           Currently, the maximum character limit set for all plan names is 30 characters. <br/> This is for UI printing purposes.                                                                                                            |
-|     Maximum number of workouts      |                                      Currently, a plan only supports a maximum of 10 workouts as it makes no sense for <br/> a plan to have many different workouts in the real-life context. <br/> In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                      |
-| Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. <br/> This check is done as it makes no sense to create two plans with different plan names, but same workout orders. |
+| Type of Validity Checks             | Reason for Creating the Validity Checks                                                                                                                                                                                                                                                                                                     |
+|:------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Unique plan name                    | All plan names within the application should be unique as it makes no sense for users to create plans with the same names.                                                                                                                                                                                                                  |
+| No plans called "rest day"          | "rest day" is used to identify the days in the schedule that do not have a plan assigned to it. If a plan called "rest day" is allowed, users might not be able to differentiate a rest day from days that they actually need to work out.                                                                                                  |
+| Character limit for plan name       | Currently, the maximum character limit set for all plan names is 30 characters. This is for UI printing purposes.                                                                                                                                                                                                                           |
+| Maximum number of workouts          | Currently, a plan only supports a maximum of 10 workouts as it makes no sense for a plan to have many different workouts in the real-life context. In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                                                                      |
+| Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. This check is done as it makes no sense to create two plans with different plan names, but same workout orders.      |
 
 
 <br><br>

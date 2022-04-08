@@ -7,10 +7,9 @@ autonumber 2.1
 title Sequence Diagram of `PlanList#createAndAddPlan()`
 hide footbox
 
-participant "planList\n:PlanList" AS pl #LightSkyBlue
-participant "workoutList\n:WorkoutList" AS wl #LightSkyBlue
+participant "planList\n:PlanList" AS pl COLOR_LOGIC
 
-activate pl #LightSkyBlue
+activate pl COLOR_LOGIC
 group sd Write new Plan data into file on user's system.
 
 ref over pl
@@ -23,9 +22,9 @@ Obtain number of workouts to be added into the new plan (split string by comma).
 (Method calls not shown)
 end
 
-create "workoutsToAddInAPlanList\n:ArrayList<Workout>" AS wtoadd
-pl -> wtoadd : new
-activate wtoadd
+create "workoutsToAddInAPlanList\n:ArrayList<Workout>" AS wtoadd COLOR_LOGIC
+pl -> wtoadd : new ArrayList<Workout>()
+activate wtoadd COLOR_LOGIC
 return
 
 loop until all workouts to be added in a plan is added
@@ -37,21 +36,23 @@ fetch the corresponding Workout object from the application's workout list.
 end
 
 pl -> wtoadd : add(workoutToAddObject)
-activate wtoadd
+activate wtoadd COLOR_LOGIC
 return
 end
 
-create "newPlan:Plan" AS newPlan
+create "newPlan:Plan" AS newPlan COLOR_LOGIC
 pl -> newPlan : new Plan(userPlanNameInput, workoutsToAddInAPlanList)
-activate newPlan
+activate newPlan COLOR_LOGIC
 return newPlan:Plan
 
-pl -> "plansHashMapList\n:HashMap" : put(newPlanKey, newPlan)
-activate "plansHashMapList\n:HashMap"
+participant "plansHashMapList\n:HashMap" COLOR_LOGIC
+pl -> "plansHashMapList\n:HashMap"   : put(newPlanKey, newPlan)
+activate "plansHashMapList\n:HashMap" COLOR_LOGIC
 return
 
+participant "plansDisplayList\n:ArrayList<String>" COLOR_LOGIC
 pl -> "plansDisplayList\n:ArrayList<String>" : add(newPlanKey)
-activate "plansDisplayList\n:ArrayList<String>"
+activate "plansDisplayList\n:ArrayList<String>" COLOR_LOGIC
 return
 
 end
