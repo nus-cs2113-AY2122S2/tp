@@ -25,9 +25,10 @@ public class Ui {
         System.out.println("Welcome to Doctor Page.");
         System.out.print(doctors);
     }
+
     public void printNursePage(NurseList nurses) {
         System.out.print(boundary);
-        System.out.println("Welcome to Doctor Page.");
+        System.out.println("Welcome to Nurse Page.");
         System.out.print(nurses);
     }
 
@@ -41,7 +42,7 @@ public class Ui {
         String addDoctor = "add doctor /id ID /n NAME /ph PHONE /e EMAIL" + System.lineSeparator();
         String addPatient = "add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS"
                                     + System.lineSeparator();
-        String addNurse="add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE"+System.lineSeparator();
+        String addNurse = "add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE" + System.lineSeparator();
         String addAppointment = "add appointment /t 2022-03-19T15:16:00 /d DOCTOR_NO /p PATIENT_NO"
                                         + System.lineSeparator();
         System.out.println("1. To add something:" + System.lineSeparator()
@@ -51,30 +52,30 @@ public class Ui {
     public void printListHelp() {
         String listDoctor = "list doctor" + System.lineSeparator();
         String listPatient = "list patient" + System.lineSeparator();
-        String listNurse="list nurse"+System.lineSeparator();
+        String listNurse = "list nurse" + System.lineSeparator();
         String sortAppointment = "sort appointment according to appointment time"
-                                         + System.lineSeparator();
+                    + System.lineSeparator();
         String listAppointment = "list appointment" + System.lineSeparator();
         System.out.println("2. To list something:" + System.lineSeparator()
-                                   + listDoctor + listPatient + listNurse+ sortAppointment + listAppointment);
+                                   + listDoctor + listPatient + listNurse + sortAppointment + listAppointment);
     }
 
     public void printDeleteHelp() {
         String deleteDoctor = "delete doctor DOCTOR_NO" + System.lineSeparator();
         String deletePatient = "delete patient PATIENT_NO" + System.lineSeparator();
         String deleteAppointment = "delete appointment APPOINTMENT_NO." + System.lineSeparator();
-        String deleteNurse="delete nurse NURSE_NO."+System.lineSeparator();
+        String deleteNurse = "delete nurse NURSE_NO." + System.lineSeparator();
         System.out.println("3. To delete something:" + System.lineSeparator()
-                                   + deleteDoctor + deletePatient + deleteAppointment+deleteNurse);
+                                   + deleteDoctor + deletePatient + deleteAppointment + deleteNurse);
     }
 
     public void printSearchHelp() {
         String searchDoctor = "search doctor DOCTOR_NO" + System.lineSeparator();
         String searchPatient = "search patient PATIENT_NO" + System.lineSeparator();
         String searchAppointment = "search appointment DATETIME" + System.lineSeparator();
-        String searchNurse="search nurse NURSE_NO"+System.lineSeparator();
+        String searchNurse = "search nurse NURSE_NO" + System.lineSeparator();
         System.out.println("4. To search for something:" + System.lineSeparator()
-                                   + searchDoctor + searchPatient + searchAppointment+searchNurse);
+                                   + searchDoctor + searchPatient + searchAppointment + searchNurse);
     }
 
     public void printSortHelp() {
