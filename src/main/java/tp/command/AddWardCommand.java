@@ -51,11 +51,7 @@ public class AddWardCommand extends Command {
             throw new IHospitalException("The nurse does not exist\n");
         }
 
-        Doctor doctor =  doctorList.getDoctor(doctorIndex);
-        Patient patient = patientList.getPatient(patientIndex);
-        Nurse nurse = nurseList.getNurse(nurseIndex);
-        int wardNum = wardNumber;
-        wardList.addWard(doctor, patient, nurse,wardNum);
+        wardList.addWard(doctorIndex, patientIndex, nurseIndex,wardNumber);
         return String.format(boundary + "Noted. I've added this ward:"
                 + "\n" + wardList.getWard(wardList.getSize())
                 + "\n" + "Now you have " + wardList.getSize()

@@ -51,9 +51,9 @@ public class Ward {
 
     @Override
     public String toString() {
-        return   "Doctor: " + doctor.getName() + " || Nurse: "
-                + "Nurse: " + nurse.getName() + " || Patient: "
-                + patient.getName() + " || Ward number: " + wardNumber;
+        return   "Doctor: " + doctor.getName() + " || Patient: "
+                + patient.getName() + " || Nurse: "
+                + nurse.getName() + " || Ward number: " + wardNumber;
     }
 }
 
