@@ -141,10 +141,12 @@ public class Activity implements Serializable, Comparable<Activity> {
     public String toString() {
         try {
             return "Activity Id #" + activityId + " --\n"
-                    + "Name:  " + activityName + '\n'
-                    + "Id:    " + activityId + '\n'
-                    + "Payer: " + personPaid.getName() + '\n'
-                    + "Cost:  $" + String.format("%.2f", totalCost) + '\n'
+                    + "Name:                     " + activityName + '\n'
+                    + "Id:                       " + activityId + '\n'
+                    + "Payer:                    " + personPaid.getName() + '\n'
+                    + "GST:                      " + String.format("%.2f", gst) + "%\n"
+                    + "Service Charge(SC):       " + String.format("%.2f", serviceCharge) + "%\n"
+                    + "Cost(GST & SC inclusive): $" + String.format("%.2f", totalCost) + '\n'
                     + "Involved: \n"
                     + getInvolvedListString();
         } catch (InvalidDataException e) {
