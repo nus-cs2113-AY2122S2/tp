@@ -16,6 +16,7 @@ public class IHospital {
     public IHospital() {
     }
 
+    //@@author Demonshaha
     public void run() throws IHospitalException {
         ui.sayHello();
         String fullCommand;

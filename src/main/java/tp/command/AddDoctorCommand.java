@@ -25,6 +25,7 @@ public class AddDoctorCommand extends Command {
     public AddDoctorCommand() {
     }
 
+    //@@author Demonshaha
     public AddDoctorCommand(String id, String name, String phoneNumber, String email,
                             String wardNumber, boolean isOnDuty) {
         this.id = id;
@@ -35,6 +36,7 @@ public class AddDoctorCommand extends Command {
         this.isOnDuty = isOnDuty;
     }
 
+    //@@author Demonshaha
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
                           WardList wardList, AppointmentList appointmentList, Ui ui,

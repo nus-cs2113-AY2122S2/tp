@@ -19,6 +19,7 @@ public class PatientStorage {
      * The constructor of storage.
      * @throws IHospitalException IHospitalException
      */
+    //@@author Demonshaha
     public PatientStorage() throws IHospitalException {
         try {
             File fileDirectory = new File(dirPath.toString());
@@ -38,6 +39,7 @@ public class PatientStorage {
      * @param patients doctor list
      * @throws IHospitalException IHospitalException
      */
+    //@@author Demonshaha
     public void savePatientList(PatientList patients) throws IHospitalException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
@@ -64,6 +66,7 @@ public class PatientStorage {
      * @return The taskList of the duke.txt
      * @throws IHospitalException IHospitalException
      */
+    //@@author Demonshaha
     public PatientList loadPatientList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());

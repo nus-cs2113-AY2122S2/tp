@@ -26,13 +26,14 @@ public class AddAppointmentCommand extends Command {
 
     }
 
+    //@@author Demonshaha
     public AddAppointmentCommand(int doctorIndex, int patientIndex, String time) {
         this.doctorIndex = doctorIndex;
         this.patientIndex = patientIndex;
         this.time = LocalDateTime.parse(time);
     }
 
-
+    //@@author Demonshaha
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
                           WardList wardList, AppointmentList appointmentList, Ui ui,
