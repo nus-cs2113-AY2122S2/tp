@@ -49,4 +49,17 @@ public class BorrowRecord {
             return true;
         }
     }
+
+    /**
+     * Returns output string representing a borrow record.
+     *
+     * @return String output containing borrower name and borrow duration.
+     */
+    @Override
+    public String toString() {
+        String output = String.format("Name of Borrower: %s", borrowerName) + System.lineSeparator();
+        output += String.format("Borrow Duration: %s", this.getBorrowDuration());
+        output += System.lineSeparator();
+        return output;
+    }
 }

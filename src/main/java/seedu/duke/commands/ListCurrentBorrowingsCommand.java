@@ -29,8 +29,7 @@ public class ListCurrentBorrowingsCommand extends Command {
                     if (record.getBorrowStatus() == BorrowStatus.PRESENT
                             && record.getBorrowerName().equals(name.get())) {
                         ui.showMessages("Name of Item: " + borrowedItem.getName(),
-                                "Name of Borrower: " + record.getBorrowerName(),
-                                "Borrow Duration: " + record.getBorrowDuration() + "\n");
+                                record.toString());
                     }
                 }
             }
