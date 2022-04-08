@@ -42,6 +42,7 @@ public class CommandParser {
 
     private static final String SPACE = " ";
     private static final String BYE = "bye";
+    private static final String DELETE = "delete ";
     private static final String ADD_ITEM_COMMAND = "add item ";
     private static final String VIEW_ITEM_LIST_COMMAND = "view all items";
     private static final String VIEW_ITEMS_WITH_ZERO_PAX_COMMAND = "view items with zero pax";
@@ -88,6 +89,8 @@ public class CommandParser {
             throw new InvalidCommandException();
         } else if (userInputLowerCase.equals(BYE)) {
             userCommand = new ExitCommand();
+        } else if (userInputLowerCase.startsWith(DELETE)) {
+            userCommand = parseDelete(userInputLowerCase);
         } else if (userInputLowerCase.startsWith(ADD_SATISFACTION_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_SATISFACTION_COMMAND, "").trim();
             userCommand = new AddSatisfactionCommand(userInputLowerCaseWithoutCommand);
@@ -106,9 +109,6 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND, "");
             userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
             userCommand = new ViewItemsWithZeroPaxCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(DELETE_ITEM_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_ITEM_COMMAND, "");
-            userCommand = new DeleteItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith((ADD_HOUSEKEEPER_COMMAND))) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_HOUSEKEEPER_COMMAND, "");
             userCommand = new AddHousekeeperCommand(userInputLowerCaseWithoutCommand);
@@ -155,9 +155,6 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(RESET_AVAILABILITY)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
             userCommand = new ResetAvailabilityCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(DELETE_PROFILE)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_PROFILE, "");
-            userCommand = new DeleteHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(UPDATE_AGE_BY_ONE)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
             userCommand = new AgeIncreaseCommand(userInputLowerCaseWithoutCommand);
@@ -170,6 +167,28 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(VIEW_EVENTS)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_EVENTS, "");
             userCommand = new ViewEventsCommand(userInputLowerCaseWithoutCommand);
+        } else {
+            throw new InvalidCommandException();
+        }
+        return userCommand;
+    }
+
+    /**
+     * Parses the user-provided delete-related command and creates the relevant Command object.
+     * @param userInputLowerCase User input to be parsed and turned into a delete-related Command object.
+     * @return The relevant Command object created based on the user input.
+     * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
+     *      *                            the relevant Command object.
+     */
+    public Command parseDelete(String userInputLowerCase) throws HotelLiteManagerException {
+        Command userCommand = null;
+        String userInputLowerCaseWithoutCommand;
+        if (userInputLowerCase.startsWith(DELETE_ITEM_COMMAND)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_ITEM_COMMAND, "");
+            userCommand = new DeleteItemCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(DELETE_PROFILE)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_PROFILE, "");
+            userCommand = new DeleteHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(DELETE_EVENT)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_EVENT, "");
             userCommand = new DeleteEventCommand(userInputLowerCaseWithoutCommand);
