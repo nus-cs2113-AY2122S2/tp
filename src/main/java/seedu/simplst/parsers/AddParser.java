@@ -26,8 +26,8 @@ public class AddParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType
-            , MissingFlagException, EmptyFieldException {
+    protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType,
+            MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("g")) {
             String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
             HashMap<String, String> regexGoodMatch = new MatchKeywords(userInput, regexGood).getGroupValues();
@@ -39,8 +39,7 @@ public class AddParser extends CommandParser {
             }
         } else if (matches.get("flag").equals("ug")) {
             String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) size/(?<size>.*)";
-                HashMap<String, String> regexUnitGoodMatch = new
-                        MatchKeywords(userInput, regexUnitGood).getGroupValues();
+            HashMap<String, String> regexUnitGoodMatch = new MatchKeywords(userInput, regexUnitGood).getGroupValues();
             try {
                 warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
                         regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));

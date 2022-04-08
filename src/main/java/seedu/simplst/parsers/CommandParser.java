@@ -19,16 +19,17 @@ public abstract class CommandParser {
     }
 
 
-    protected abstract void init_extract_params() throws WrongCommandException, MissingFlagException, EmptyFieldException;
+    protected abstract void init_extract_params() throws WrongCommandException, MissingFlagException,
+            EmptyFieldException;
 
     protected abstract void extract_params() throws
-            WrongCommandException, NullException, InvalidFileException, InvalidObjectType, MissingFlagException
-            , EmptyFieldException;
+            WrongCommandException, NullException, InvalidFileException, InvalidObjectType, MissingFlagException,
+            EmptyFieldException;
     //    protected abstract void validate_params();   // They need implement their own validate commands
 
     public void parse(String userInput) throws
-            WrongCommandException, NullException, InvalidFileException, InvalidObjectType, MissingFlagException
-            , EmptyFieldException {
+            WrongCommandException, NullException, InvalidFileException, InvalidObjectType, MissingFlagException,
+            EmptyFieldException {
         this.userInput = userInput;
         this.init_extract_params();
         try {
