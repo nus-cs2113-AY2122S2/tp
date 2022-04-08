@@ -48,4 +48,40 @@ class CheckCommandTest {
 
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    void execute_invalidEquipmentType_fail() {
+        checkCommand = new CheckCommand(new ArrayList<>(
+                Arrays.asList("t/hello")
+        ));
+
+        CommandResult actualResult = checkCommand.execute();
+        CommandResult expectedResult = new CommandResult(Command.INCORRECT_ENUM_TYPE);
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void execute_invalidCost_fail() {
+        checkCommand = new CheckCommand(new ArrayList<>(
+                Arrays.asList("c/something")
+        ));
+
+        CommandResult actualResult = checkCommand.execute();
+        CommandResult expectedResult = new CommandResult(Command.INCORRECT_COST_FORMAT);
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void execute_invalidDateFormat_fail() {
+        checkCommand = new CheckCommand(new ArrayList<>(
+                Arrays.asList("pd/2022")
+        ));
+
+        CommandResult actualResult = checkCommand.execute();
+        CommandResult expectedResult = new CommandResult(Command.INVALID_DATE_MESSAGE);
+
+        assertEquals(expectedResult, actualResult);
+    }
 }
