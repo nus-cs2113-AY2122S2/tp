@@ -7,7 +7,6 @@ public class Doctor extends tp.person.Person {
         super(id, name, phoneNumber, email);
         isOnDuty = false;
     }
-
     public void markOnDuty() {
         isOnDuty = true;
     }

@@ -17,8 +17,8 @@ public class SearchNurseCommand extends Command{
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         Nurse cur = nurseList.searchNurse(id);
         if (cur == null) {
-            return String.format("There is no doctor with ID: " + id + "\n");
+            return String.format("There is no nurse with ID: " + id + "\n");
         }
-        return String.format("Here's the doctor found: \n" + cur + "\n");
+        return String.format("Here's the nurse found: \n" + cur + "\n");
     }
 }
