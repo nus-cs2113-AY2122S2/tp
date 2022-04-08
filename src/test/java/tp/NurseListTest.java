@@ -63,7 +63,7 @@ class NurseListTest {
                 + "1. * NURSE [1234] || Name: Rose || Contact No.: 12341234 "
                 + "|| Email: 3600@gmail.com || Title: Junior || Ward: 10"
                 + System.lineSeparator()
-                + "2. * DOCTOR [2233] || Name: Mary || Contact No.: 66667777 "
+                + "2. * NURSE [2233] || Name: Mary || Contact No.: 66667777 "
                 + "|| Email: Mary123@gmail.com || Title: Senior || Ward: 22"
                 + System.lineSeparator()
                 + "You have 2 nurses recorded in the system."
