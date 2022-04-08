@@ -88,7 +88,7 @@ public class StorageFile {
                     ParserLocalData.prepareLoadName(name, masterTimetable);
                 } else {
                     if (!isNoTimetableMessage(data)) {
-                        if (checkIndex(data, listNum)) {
+                        if (isIndexInCorrectSequence(data, listNum)) {
                             eventType = ParserLocalData.getEventType(data);
                             checkEventType(eventType);
                             if (eventType.equals("L")) {
@@ -125,7 +125,7 @@ public class StorageFile {
      * @param expectedIndex the expected number
      * @return true if the index is in correct sequence and false otherwise
      */
-    private static boolean checkIndex(String data, int expectedIndex) {
+    private static boolean isIndexInCorrectSequence(String data, int expectedIndex) {
         String index = getFirstChar(data);
         int i = Integer.parseInt(index);
         if (i == expectedIndex) {

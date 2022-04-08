@@ -20,11 +20,11 @@ public class ParserHelperMethods {
     public static void checkTime(int startTime, int endTime) throws InvalidTimeException {
         int startMinutes = startTime % 100;
         int endMinutes = endTime % 100;
-        boolean invalidMinutes = startMinutes >= 60 || endMinutes >= 60;
+        boolean isMinutesInvalid = startMinutes >= 60 || endMinutes >= 60;
         int startHours = startTime / 100;
         int endHours = endTime / 100;
-        boolean invalidHours = startHours >= 24 || endHours >= 24;
-        if (invalidMinutes || invalidHours || startTime >= endTime) {
+        boolean isHoursInvalid = startHours >= 24 || endHours >= 24;
+        if (isMinutesInvalid || isHoursInvalid || startTime >= endTime) {
             throw new InvalidTimeException();
         }
     }
