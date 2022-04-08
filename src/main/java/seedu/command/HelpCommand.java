@@ -24,8 +24,6 @@ public class HelpCommand extends Command {
                 + System.lineSeparator()
                 + System.lineSeparator() + ListCommand.COMMAND_WORD + ListCommand.COMMAND_DESCRIPTION
                 + System.lineSeparator()
-                + System.lineSeparator() + ListCommand.COMMAND_WORD + ListCommand.COMMAND_DESCRIPTION_WITH_TYPE
-                + System.lineSeparator()
                 + System.lineSeparator() + CheckCommand.COMMAND_WORD + CheckCommand.COMMAND_DESCRIPTION
                 + System.lineSeparator()
                 + System.lineSeparator() + SaveCommand.COMMAND_WORD + SaveCommand.COMMAND_DESCRIPTION

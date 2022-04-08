@@ -1,6 +1,7 @@
 package seedu.storage;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.Equipment;
@@ -10,6 +11,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +23,13 @@ public class Storage {
     public static final String SAVE_ERROR_MESSAGE = "An error occurred while saving!";
     public static final String DUPLICATE_SERIAL_NUMBER_ERROR = "Duplicate serial number found!";
     public static final String path = "./equipments.json";
-    private final Gson gson = new Gson();
+    private static final String EMPTY_FILE_ERROR_MESSAGE = "File is empty. Added Equipments will be saved in the file.";
+    private static final String INVALID_DATE_ERROR_MESSAGE = "Invalid date format found in the file. "
+            + "Please check the file and try again. Do not proceed unless you want to rewrite the file.";
+    private final Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+            .create();
 
     /**
      * Loads data from ./equipments.json
@@ -38,6 +47,10 @@ public class Storage {
             System.out.println(FILE_NOT_FOUND_ERROR_MESSAGE);
         } catch (DuplicateSerialNumberException e) {
             System.out.println(DUPLICATE_SERIAL_NUMBER_ERROR);
+        } catch (NullPointerException e) {
+            System.out.println(EMPTY_FILE_ERROR_MESSAGE);
+        } catch (DateTimeException e) {
+            System.out.println(INVALID_DATE_ERROR_MESSAGE);
         }
     }
 
