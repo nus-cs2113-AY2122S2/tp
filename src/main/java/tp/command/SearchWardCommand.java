@@ -14,7 +14,7 @@ import tp.WardList;
 import tp.WardStorage;
 import tp.Ward;
 
-public class SearchWardCommand extends Command{
+public class SearchWardCommand extends Command {
     protected String id;
 
     public SearchWardCommand(String id) {
