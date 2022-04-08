@@ -106,21 +106,25 @@ public class ShowCommand extends Command {
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "jan":
+        case "january":
             ui.showToUser("Here is your schedule for January:");
             Timetable.showScheduleByMonth(JANUARY, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "feb":
+        case "february":
             ui.showToUser("Here is your schedule for February:");
             Timetable.showScheduleByMonth(FEBRUARY, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "mar":
+        case "march":
             ui.showToUser("Here is your schedule for March:");
             Timetable.showScheduleByMonth(MARCH, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "apr":
+        case "april":
             ui.showToUser("Here is your schedule for April:");
             Timetable.showScheduleByMonth(APRIL, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
@@ -131,36 +135,43 @@ public class ShowCommand extends Command {
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "jun":
+        case "june":
             ui.showToUser("Here is your schedule for June:");
             Timetable.showScheduleByMonth(JUNE, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "jul":
+        case "july":
             ui.showToUser("Here is your schedule for July:");
             Timetable.showScheduleByMonth(JULY, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "aug":
+        case "august":
             ui.showToUser("Here is your schedule for August:");
             Timetable.showScheduleByMonth(AUGUST, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "sep":
+        case "september":
             ui.showToUser("Here is your schedule for September:");
             Timetable.showScheduleByMonth(SEPTEMBER, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "oct":
+        case "october":
             ui.showToUser("Here is your schedule for October:");
             Timetable.showScheduleByMonth(OCTOBER, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "nov":
+        case "november":
             ui.showToUser("Here is your schedule for November:");
             Timetable.showScheduleByMonth(NOVEMBER, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "dec":
+        case "december":
             ui.showToUser("Here is your schedule for December:");
             Timetable.showScheduleByMonth(DECEMBER, taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
