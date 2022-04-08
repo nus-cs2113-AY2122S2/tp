@@ -13,6 +13,7 @@ import arcs.storage.MealReservationFileManager;
 import arcs.storage.MenuItemFileManager;
 import arcs.storage.FlightBookingFileManager;
 import arcs.storage.RouteFileManager;
+import arcs.storage.StaffFileManager;
 import arcs.commands.Command;
 import arcs.ui.MainUi;
 
@@ -31,8 +32,10 @@ public class Main {
     private CustomerManager customerManager;
     private CustomerFileManager customerFileManager;
     private StaffManager staffManager;
+    private StaffFileManager staffFileManager;
     private MealReservationManager mealReservationManager;
     private MealReservationFileManager mealReservationFileManager;
+  
     /**
      * Parser object.
      */
@@ -54,6 +57,7 @@ public class Main {
         routeFileManager = new RouteFileManager();
         customerFileManager = new CustomerFileManager();
         flightBookingFileManager = new FlightBookingFileManager();
+        staffFileManager = new StaffFileManager();
         menuItemFileManager = new MenuItemFileManager();
         mealReservationFileManager = new MealReservationFileManager();
         loadData();
@@ -92,14 +96,17 @@ public class Main {
             menuItemManager = new MenuItemManager(menuItemFileManager.loadData());
             customerManager = new CustomerManager(customerFileManager.loadData());
             flightBookingManager = new FlightBookingManager(flightBookingFileManager.loadData());
+            staffManager = new StaffManager(staffFileManager.loadData());
             mealReservationManager = new MealReservationManager(mealReservationFileManager.loadData(),
                     flightBookingManager);
+
 
         } catch (IOException e) {
             mainUi.displayMessages(e.getMessage());
             routeManager = new RouteManager();
             customerManager = new CustomerManager();
             flightBookingManager = new FlightBookingManager();
+            staffManager = new StaffManager();
             menuItemManager = new MenuItemManager();
             mealReservationManager = new MealReservationManager();
         }
@@ -113,6 +120,7 @@ public class Main {
             routeFileManager.saveData(routeManager.getAllRoutes());
             customerFileManager.saveData(customerManager.getAllCustomers());
             flightBookingFileManager.saveData(flightBookingManager.getAllFlightBookings());
+            staffFileManager.saveData(staffManager.getAllStaffs());
             menuItemFileManager.saveData(menuItemManager.getAllMenuItems());
             mealReservationFileManager.saveData(mealReservationManager.getAllMealReservations());
         } catch (IOException e) {
