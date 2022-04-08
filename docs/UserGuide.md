@@ -16,8 +16,6 @@ and maintaining the state of checked-in/checked-out rooms.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
@@ -57,7 +55,6 @@ and maintaining the state of checked-in/checked-out rooms.
    * View All Items Within The Item List With A Pax Of Zero
    * Search For Items Within The Item List
 
-{Give detailed description of each feature}
 
 ## Customer Satisfaction Related Commands
 
