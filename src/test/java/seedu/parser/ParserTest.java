@@ -331,7 +331,16 @@ class ParserTest {
     }
 
     @Test
-    void extractArguments_wrongArgTypesUsed_exceptionThrown() {
+    void extractArguments_wrongArgTypesIgnored_success() throws IncompleteCommandException {
+        ArrayList<String> actualResult = parser.extractArguments("s/`S1404115ASF` rand/`SpeakerC` "
+                + "c/`2510` name/`blahblah` pd/`2022-08-21`");
+        ArrayList<String> expectedResult = new ArrayList<>(Arrays.asList("s/S1404115ASF",
+                "c/2510", "pd/2022-08-21"));
+        assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    void extractArguments_noCorrectArgTypes_exceptionThrown() {
         Throwable exception = assertThrows(IncompleteCommandException.class, () -> parser.extractArguments(
                 "x/`Speaker B` a/`Speaker` b/`1000` d/`Loud Technologies` e/`2022-02-23`"));
         assertEquals(IncompleteCommandException.NO_PARAMETERS_FOUND, exception.getMessage());

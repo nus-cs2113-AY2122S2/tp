@@ -53,7 +53,6 @@ public class Parser {
     public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
             "(" + ARGUMENT_PAIR_REGEX + ")"
                     + "\\s+" // argument space before next delimiter
-                    + "(?=[sntcSNTC]|[pP][fF]|[pP][dD])" // positive lookahead to mandate next delimiter
     );
     /**
      * Extracts last tag for debugging.
