@@ -29,6 +29,7 @@ public class ShowCommand extends Command {
             + "7) `show <month>`, where month can be the full spelling or%n"
             + "                   the abrreviation of the specfic months%n"
             + "                   E.g. `show sep` or `show september`%n"
+            + "    Caution: show <month> will not display previous month task but task that is in the upcoming month%n"
             + "E.g. show 23/5/2022 to show timetable for 23th May 2022.%n%n"
             + ""
             + "To generate a list of all tasks, use%n"
@@ -89,7 +90,7 @@ public class ShowCommand extends Command {
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;
         case "month":
-            ui.showToUser("Here is your schedule for the Month:");
+            ui.showToUser("Here is your schedule for the current Month:");
             Timetable.showMonthlySchedule(taskList, ui);
             ui.showToUser(WAITING_FOR_USER_NEXT_INPUT);
             break;

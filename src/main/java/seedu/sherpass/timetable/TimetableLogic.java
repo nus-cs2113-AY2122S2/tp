@@ -99,14 +99,16 @@ public class TimetableLogic {
 
         int year = LocalDate.now().getYear();
 
-        if (isRequestedMonthAfterCurrentMonth(month, currentMonth)) {
+        if (isRequestedMonthBeforeCurrentMonth(month, currentMonth)) {
+            // For example, requested month is Feb but current month is May. Feb is before May hence return true.
+            // return a date that is in the future and not the past.
             return LocalDate.of(year + 1, month, 1);
         } else {
             return LocalDate.of(year, month, 1);
         }
     }
 
-    private static boolean isRequestedMonthAfterCurrentMonth(Month month, Month currentMonth) {
+    private static boolean isRequestedMonthBeforeCurrentMonth(Month month, Month currentMonth) {
         return month.getValue() - currentMonth.getValue() < 0;
     }
 }
