@@ -53,7 +53,7 @@ Example of usage:
 `add appointment /t 2007-12-03T10:15:30 /d 1 /p 1`
 
 ### Sorting appointment list: 'sort'
-Sorts existing appointments in the system (but does not print out).
+Sorts existing appointments in the system (but does not print out) according to time (most recent to least recent).
 
 Format: `sort appointment`
 

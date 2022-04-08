@@ -78,7 +78,7 @@ public class PatientList {
             toPrint += (i + ". " + getPatient(i) + System.lineSeparator());
         }
         toPrint += ("You have " + countPatient + " patients recorded in the system."
-                            + System.lineSeparator() + boundary + System.lineSeparator());
+                            + System.lineSeparator() + boundary);
         return toPrint;
     }
 }

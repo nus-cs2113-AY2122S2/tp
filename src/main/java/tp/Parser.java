@@ -132,6 +132,8 @@ public class Parser {
             return parseAddAppointment(fullCommand);
         } else if (fullCommand.contains("add patient description")) {
             return parseAddPatientDescription(fullCommand);
+        } else {
+            throw new IHospitalException("Invalid add command.\n");
         }
         return null;
     }
@@ -149,8 +151,9 @@ public class Parser {
             String dummy = fullCommand.trim();
             int index = Integer.parseInt(dummy.substring(dummy.indexOf("appointment") + 12).trim());
             return new DeleteAppointmentCommand(index);
+        } else {
+            throw new IHospitalException("Invalid delete command.\n");
         }
-        return null;
     }
 
     public Command parseSearchCommand(String fullCommand) throws IHospitalException {
@@ -166,8 +169,9 @@ public class Parser {
             String dummy = fullCommand.trim();
             String time = dummy.substring(dummy.indexOf("appointment ") + 12).trim();
             return new SearchAppointmentCommand(time);
+        } else {
+            throw new IHospitalException("Invalid search command.\n");
         }
-        return null;
     }
 
     public Command parseListCommand(String fullCommand) throws IHospitalException {
@@ -177,8 +181,9 @@ public class Parser {
             return new ListAppointmentListCommand();
         } else if (fullCommand.contains("list patient")) {
             return new ListPatientListCommand();
+        } else {
+            throw new IHospitalException("Invalid list command.\n");
         }
-        return null;
     }
 
     public Command parseEditDoctorCommand(String fullCommand) throws IHospitalException {
@@ -262,3 +267,5 @@ public class Parser {
         }
     }
 }
+
+
