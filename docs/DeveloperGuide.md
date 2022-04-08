@@ -1993,17 +1993,17 @@ Each command entered by the user should respond within two seconds.
 * **Workout** - A single 'unit' of exercise with a number of repetitions associated with it.
     * e.g. push up (5 reps), jumping jacks (2 reps), sit-ups (7 reps)
 * **Plan** - A set of workouts
-    * Example:
-
-
-| Plan Name      | Contains                                                                                                               |
-|----------------|------------------------------------------------------------------------------------------------------------------------|
-| grow my biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps)                                                          |
-| whole body!    | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
-
-
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
-of their schedule. For instance, the user's daily schedule can look like this:
+  of their schedule. For instance, the user's daily schedule can look like this:
+
+**Example of Plans**
+
+| Plan Name      | Contains                                                                                   |
+|----------------|--------------------------------------------------------------------------------------------|
+| grow my biceps | bicep curl (3 reps), push up (10 reps), russian twist (2 reps)                             |
+| whole body!    | crunch (10 reps), jumping jack (3 reps), squat (4 reps), pull up (3 reps), burpee (2 reps) |
+
+**Example of A Schedule**
 
 | Day            | Plan Name                                 |
 |----------------|-------------------------------------------|
