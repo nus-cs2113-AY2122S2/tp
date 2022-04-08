@@ -90,7 +90,7 @@ public class NurseStorage {
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
                 String title = scanner.nextLine();
-                String wardNumber = scanner.nextLine();
+                int wardNumber = Integer.parseInt(scanner.nextLine());
                 Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
                 result.addNurse(nurse);
             }

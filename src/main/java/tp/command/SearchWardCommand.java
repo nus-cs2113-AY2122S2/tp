@@ -12,12 +12,12 @@ import tp.PatientStorage;
 import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
-import tp.person.Nurse;
+import tp.Ward;
 
-public class SearchNurseCommand extends Command {
-    protected String id;
+public class SearchWardCommand extends Command {
+    protected int id;
 
-    public SearchNurseCommand(String id) {
+    public SearchWardCommand(int id) {
         this.id = id;
     }
 
@@ -27,10 +27,10 @@ public class SearchNurseCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Nurse cur = nurseList.searchNurse(id);
+        Ward cur = wardList.searchWard(id);
         if (cur == null) {
-            return String.format("There is no nurse with ID: " + id + "\n");
+            return String.format("There is no ward with ID: " + id + "\n");
         }
-        return String.format("Here's the nurse found: \n" + cur + "\n");
+        return String.format("Here's the ward found: \n" + cur + "\n");
     }
 }

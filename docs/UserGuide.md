@@ -62,6 +62,15 @@ Example of usage:
 
 `add nurse /id 1234 /n john /ph 12341234 /e 1234@gmail.com /t staff nurse`
 
+### Adding a ward: `add ward`
+Adds a new ward to the system.
+
+Format: `add ward /d ID /p ID /n ID /id ID`
+
+Example of usage:
+
+`add ward /d 1234 /p 4567 /n 1243 /id 5467`
+
 
 ### Sorting appointment list: 'sort'
 Sorts existing appointments in the system (but does not print out) according to time (most recent to least recent).

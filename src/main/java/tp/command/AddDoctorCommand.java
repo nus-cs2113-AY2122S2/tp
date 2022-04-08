@@ -19,20 +19,22 @@ public class AddDoctorCommand extends Command {
     protected String name;
     protected String phoneNumber;
     protected String email;
-    protected String wardNumber;
+    protected int wardNumber;
+    protected String department;
     protected boolean isOnDuty;
 
     public AddDoctorCommand() {
     }
 
     //@@author Demonshaha
-    public AddDoctorCommand(String id, String name, String phoneNumber, String email,
-                            String wardNumber, boolean isOnDuty) {
+    public AddDoctorCommand(String id, String name, String phoneNumber, String email, String department,
+                            int wardNumber, boolean isOnDuty) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.wardNumber = wardNumber;
+        this.department = department;
         this.isOnDuty = isOnDuty;
     }
 
@@ -43,7 +45,7 @@ public class AddDoctorCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Doctor doctor = new Doctor(id, name, phoneNumber, email,wardNumber);
+        Doctor doctor = new Doctor(id, name, phoneNumber, email, department, wardNumber);
         doctorList.addDoctor(doctor);
         return String.format(boundary + "Noted. I've added this doctor:"
                 + "\n" + doctorList.getDoctor(doctorList.getSize())

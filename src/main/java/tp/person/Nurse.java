@@ -3,10 +3,10 @@ package tp.person;
 public class Nurse extends Person {
     protected boolean isOnDuty;
     protected String title;
-    protected String wardNumber;
+    protected int wardNumber;
 
 
-    public Nurse(String id, String name, String phoneNumber, String email, String title, String wardNumber) {
+    public Nurse(String id, String name, String phoneNumber, String email, String title, int wardNumber) {
         super(id, name, phoneNumber, email);
         this.title = title;
         this.wardNumber = wardNumber;
@@ -17,15 +17,15 @@ public class Nurse extends Person {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void editTitle(String title) {
         this.title = title;
     }
 
-    public String getWardNumber() {
+    public int getWardNumber() {
         return wardNumber;
     }
 
-    public void setWardNumber(String wardNumber) {
+    public void setWardNumber(int wardNumber) {
         this.wardNumber = wardNumber;
     }
 
@@ -39,7 +39,7 @@ public class Nurse extends Person {
 
     @Override
     public String toString() {
-        return "* NURSE " + super.toString() + " || TITLE: " + title + " || WardNumber: " + wardNumber;
+        return "* NURSE " + super.toString() + " || Title: " + title + " || Ward: " + wardNumber;
     }
 
 }

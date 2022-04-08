@@ -20,14 +20,14 @@ public class AddNurseCommand extends Command {
     protected String phoneNumber;
     protected String email;
     protected String title;
-    protected String wardNumber;
+    protected int wardNumber;
     protected boolean isOnDuty;
 
     public AddNurseCommand() {
     }
 
     public AddNurseCommand(String id, String name, String phoneNumber, String email, String title,
-                           String wardNumber, boolean isOnDuty) {
+                           int wardNumber, boolean isOnDuty) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
