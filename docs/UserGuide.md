@@ -17,8 +17,8 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
     * [Removing a Unit Good:](#removing-a-unit-good) `remove ug/`
     * [Listing Unit Goods:](#listing-unit-goods) `list ug/`
   * [Good Commands](#good-commands)
-    * [Adding quantity of a Unit Good:](#adding-quantity-of-a-unit-good) `add g/`
-    * [Removing quantity of a Unit Good:](#removing-quantity-of-a-unit-good) `remove g/`
+    * [Adding quantity of a Good:](#adding-quantity-of-a-unit-good) `add g/`
+    * [Removing quantity of a Good:](#removing-quantity-of-a-unit-good) `remove g/`
     * [Listing available Goods:](#listing-available-goods) `list g/`
     * [Viewing a Good:](#viewing-a-good) `view g/`
     * [Finding a Good:](#finding-a-good) `find`
@@ -28,14 +28,15 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
 ##Explanation of key terms or symbols
 | Terms or Symbols used                              | Further Explanation                                                                                                                          |  
 |----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| Unit Good                                          | A Unit Good contains:  <br/>-unique SKU <br/>-name <br/>-description of unit good <br/>-capacity                                             |
+| Unit Good                                          | A template containing details of a good.<br/>A Unit Good contains: <br/>-unique SKU <br/>-name <br/>-description of unit good <br/>-capacity|
 | SKU                                                | Stands for Stock-Keeping Unit. It is the unique unit number for a specific warehouse item. It can contain characters and numbers (e.g WC01). |
 | Capacity                                           | Defined as Small, Medium and Large.<br/> SMALL: <br/>Medium: <br/>Large:                                                                     |
 | Good                                               | Is a unit good but contains the quantity of the specific Unit Good. A Good contains: <br/>-quantity of the Unit Good                         |
-| Order                                              | To be confirmed                                                                                                                              |             
+| Order                                              | An order is for                                                                                                                                |
+| Orderline                                          | An orderline the specific good required by the order. It is a Good but contains the quantity required to fulfill the good. An orderline contains: <br/>-quantity of Good required to fulfill the order|
 | `Words in MarkUp`                                  | Used to highlight keywords used for commands and commands themself.                                                                          |
 | <img src="img.png" alt="img" style="width:50px;"/> | Used to denote features for warehouse managers.                                                                                              |
-| `*Optional*`                                        | Fields in MarkUp bounded by asteriks (*) are optional to be filled in, but should be replaced with a space ' ' instead.                      |
+| `*Optional*`                                       | Fields in MarkUp bounded by asteriks (*) are optional to be filled in, but should be replaced with a space ' ' instead.                      |
 
 This User Guide is meant for both warehouse workers and managers to learn how to use Simplst and the features to 
 improve efficiency in managing warehouse inventory and orders. 
@@ -119,7 +120,7 @@ Another command?
 ```
 ### ***Good Commands***
 
-### Adding quantity of a Unit Good `add g/`
+### Adding quantity of a Good `add g/`
 Adding the quantity of a Unit Good which is set to default to be 0.
 
 Format: `add g/ sku/[SKU] qty/[QUANTITY]`
