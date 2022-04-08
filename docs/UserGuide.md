@@ -48,6 +48,8 @@ Place it in a folder of your choice, ensure that the folder do not contain any f
 Shows program usage instructions.
 
 Format: `help`
+
+![img_13.png](img_13.png)
 <br>
 <br>
 ### Add a record: `add`
@@ -58,7 +60,8 @@ Adds a product record to the record list.
 Format: `add product i/ITEM_NAME p/PRICE d/DATE t/CATEGORY`
 
 * The `ITEM_NAME`, `PRICE`, and `DATE` can be in a natural language format.
-* The `CATEGORY` should be of fashion, food, accessory, or others.  
+* The `CATEGORY` should be of fashion, food, accessory, or others. 
+* avoid using `|` as your input
 
 Examples of usage: 
 
@@ -71,11 +74,13 @@ Adds a subscription record to the record list.
 
 Format: `add subscription i/ITEM_NAME p/PRICE d/DATE r/RENEWAL`
 
-* The `ITEM_NAME`, `PRICE`, `DATE`, and `RENEWAL` can be in a natural language format.
+* The `ITEM_NAME`, `DATE`, and `RENEWAL` can be in a natural language with string format.
+* the `PRICE` should be strictly written with `$xx.xx` format with each x denoting a number, the maximum price would be limited to $9999999
+  
 
 Examples of usage:
 
-`add subscription i/Netflips p/$10 d/03/02/2022 r/every month`
+`add subscription i/Netflips p/$7.35 d/03/02/2022 r/every month`
 
 ![img_9.png](img_9.png)
 
@@ -91,6 +96,8 @@ Format: `delete INDEX`
 Examples of usage:
 
 `delete 1` - deletes record #1
+
+![img_14.png](img_14.png)
 <br>
 <br>
 ### Show record list: `list`
@@ -148,7 +155,12 @@ Format: `exit`
 **Q**: What is the Spendvelope for?
 
 **A**: The spendvelope is create to help users to take note of their purchase
-<br>
+
+**----------------------------------------------------------------------------**
+
+**Q**: Is it okay for user to manually change the file source?
+
+**A**: The user is not adivsed to change the file by their own as it could tamper with the functionality of Spendvelope
 <br>
 ## Command Summary
 
