@@ -14,7 +14,8 @@ import java.util.Locale;
 public class CheckCommand extends Command {
     private final ArrayList<String> commandStrings;
     public static final String COMMAND_WORD = "check";
-    public static final String COMMAND_DESCRIPTION = ": Check the details of the equipments that matches the specified parameter. "
+    public static final String COMMAND_DESCRIPTION = ": Check the details of the equipments that matches the specified"
+            + " parameter. "
             + System.lineSeparator()
             + "Parameters: parameter/`PARAMETER_VALUE`" + System.lineSeparator()
             + "Example: "

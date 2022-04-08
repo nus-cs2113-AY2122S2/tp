@@ -86,9 +86,7 @@ Here are the equipment matching to 'SpeakerB':
 ### Listing equipment: `list`
 Print a list of all equipment in the inventory. If a parameter is supplied, only the equipment matching to the parameter will be printed.
 
-Format: ``list [t/`TYPE`]``
-
-* `TYPE` can only take on values of `SPEAKER`, `MICROPHONE`, `STAND`, `CABLE`.
+Format: `list`
 
 Example of usage and output:
 
@@ -100,17 +98,6 @@ Output:
 TOTAL QUANTITY OF EQUIPMENT: 2
 1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21
 2. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23
-```
-
-Example of usage and output:
-
-``list t/`MICROPHONE` ``
-
-Output:
-
-```
-TOTAL QUANTITY OF EQUIPMENT: 1
-1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21
 ```
 
 ### Updating an equipment: `update`
@@ -197,10 +184,6 @@ list: Prints a list of all equipment in the inventory.
 Parameters: NIL
 Example: list
 
-list: Prints a list of all equipment in the inventory of the specified type.
-Parameters: `TYPE`
-Example: list t/`MICROPHONE`
-
 check: Check the details of the equipments that matches the specified parameter.
 Parameters: parameter/`PARAMETER_VALUE`
 Example: check n/`MixerC` or check s/`SM57-1` or check t/`MICROPHONE`
@@ -247,7 +230,6 @@ Bye, See you again!
 * Add equipment ``add n/`ITEM_NAME` s/`SERIAL_NUMBER` t/`TYPE` c/`COST` pf/`PURCHASED_FROM` pd/`PURCHASED_DATE` ``
 * Check equipment ``check n/`ITEM_NAME` ``
 * Listing equipment: `list`
-* Listing equipment by type: ``list t/`TYPE` ``
 * Updating an equipment: ``update s/`SERIAL_NUMBER` [n/`ITEM_NAME`] [t/`TYPE`] [c/`COST`] [pf/`PURCHASED_FROM`] [pd/`PURCHASED_DATE`]``
 * Deleting an equipment: ``delete s/`SERIAL_NUMBER` ``
 * Saving application state: `save`
