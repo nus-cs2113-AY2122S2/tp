@@ -31,7 +31,7 @@ public class DeleteNurseCommand extends Command {
             throw new IHospitalException("The nurse does not exist.\n");
         }
         Nurse cur = nurseList.deleteNurse(index);
-        return String.format(boundary + "Noted. I've removed this nurse:" + cur
+        return String.format(boundary + "Noted. I've removed this nurse:\n" + cur
                 + "\n" + "Now you have " + nurseList.getSize()
                 + " nurses in the system." + System.lineSeparator() + boundary);
     }

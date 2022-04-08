@@ -67,11 +67,11 @@ public class Parser {
         String name = dummy.substring(nameIndex + 3, phoneNumberIndex).trim();
         int emailIndex = dummy.indexOf("/e");
         String phoneNumber = dummy.substring(phoneNumberIndex + 4, emailIndex).trim();
-        int wardNumberIndex = dummy.indexOf("/w");
-        String email = dummy.substring(emailIndex + 3, wardNumberIndex).trim();
-        int wardNumber = Integer.parseInt(dummy.substring(wardNumberIndex + 3).trim());
         int departmentIndex = dummy.indexOf("/dep");
+        String email = dummy.substring(emailIndex + 3, departmentIndex).trim();
+        int wardNumberIndex = dummy.indexOf("/w");
         String department = dummy.substring(departmentIndex + 5, wardNumberIndex).trim();
+        int wardNumber = Integer.parseInt(dummy.substring(wardNumberIndex + 3).trim());
         return new AddDoctorCommand(id, name, phoneNumber, email, department, wardNumber, false);
     }
 
@@ -87,10 +87,10 @@ public class Parser {
         String id;
         String dummy = fullCommand.trim();
         if (dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
-                || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
-                || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
+                    || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
+                    || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
             throw new IHospitalException("The format of input is incorrect, "
-                    + "you may type `help` to view the command format.");
+                                                 + "you may type `help` to view the command format.");
         }
 
         int idIndex = dummy.indexOf("/id") + 4;
@@ -113,10 +113,10 @@ public class Parser {
         String id;
         String dummy = fullCommand.trim();
         if (dummy.indexOf("/id") > dummy.indexOf("/n") || dummy.indexOf("/id") > dummy.indexOf("/ph")
-                || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
-                || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
+                    || dummy.indexOf("/id") > dummy.indexOf("/e") || dummy.indexOf("/n") > dummy.indexOf("/ph")
+                    || dummy.indexOf("/n") > dummy.indexOf("/e") || dummy.indexOf("/ph") > dummy.indexOf("/e")) {
             throw new IHospitalException("The format of input is incorrect, "
-                    + "you may type `help` to view the command format.");
+                                                 + "you may type `help` to view the command format.");
         }
         int idIndex = dummy.indexOf("/id") + 4;
         int nameIndex = dummy.indexOf("/n");
@@ -456,5 +456,3 @@ public class Parser {
         }
     }
 }
-
-
