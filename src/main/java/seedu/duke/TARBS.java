@@ -14,11 +14,13 @@ public class TARBS {
         Packages packages = storage.createPackages();
 
         boolean endProgram = false;
+        printDivider();
         System.out.println("Welcome to Travel Agency Booking Reservation System!");
         Scanner sc = new Scanner(System.in);
         while (!endProgram) {
             storage.savePackageToFile(packages);
-            System.out.println();
+            //System.out.println();
+            printDivider();
             System.out.println("Please enter command: ");
             try {
                 Command command = Parser.parse(sc.nextLine());
@@ -31,6 +33,10 @@ public class TARBS {
             }
         }
         storage.savePackageToFile(packages);
+    }
+
+    public static void printDivider() {
+        System.out.println("_______________________________________________________________________");
     }
 
 }
