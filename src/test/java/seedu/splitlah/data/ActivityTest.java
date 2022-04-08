@@ -84,8 +84,25 @@ class ActivityTest {
      * Checks if the correct activity total cost is returned.
      */
     @Test
-    void getActivityName_activityOne_correctActivityTotalCost() {
+    void getTotalCost_activityOne_correctActivityTotalCost() {
         assertEquals(15, activityOne.getTotalCost());
+    }
+
+    /**
+     * Checks if the correct person who paid for the activity is returned.
+     */
+    @Test
+    void getPersonPaid_activityOne_correctPersonPaid() throws InvalidDataException {
+        Person actualPersonPaid = session.getPersonByName("Alice");
+        assertEquals(actualPersonPaid, activityOne.getPersonPaid());
+    }
+
+    /**
+     * Checks if the correct gst is returned.
+     */
+    @Test
+    void getGst_activityOne_correctGst() {
+        assertEquals(7, activityOne.getGst());
     }
 
     /**
