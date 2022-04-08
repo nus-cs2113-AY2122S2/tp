@@ -11,7 +11,7 @@ public class InvalidNumberException extends GeneralParseException {
     }
 
     /**
-     * Thrown when the modular credit is invalid
+     * Thrown when the modular credit is invalid.
      * @param error the invalid modular credit string
      */
     public InvalidNumberException(String error) {

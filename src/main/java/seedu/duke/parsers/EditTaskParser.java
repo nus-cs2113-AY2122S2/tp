@@ -161,10 +161,10 @@ public class EditTaskParser extends EditParser {
         String estimatedWorkingTime = parsedArguments.get(TASK_ESTIMATED_WORKING_TIME);
         String taskName = parsedArguments.get(TASK_NAME);
         if (!Objects.isNull(taskNumberString)) {
-            int taskIndex = parseIndex(taskNumberString);
             checkTaskName(taskName);
             checkTaskDescription(taskDescription);
             checkEstimatedWorkingTime(estimatedWorkingTime);
+            final int taskIndex = parseIndex(taskNumberString);
             checksForExcessArg();
             return new EditCommand(taskModule, taskIndex, taskDescription, estimatedWorkingTime, taskName);
         }

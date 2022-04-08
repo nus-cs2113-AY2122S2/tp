@@ -108,7 +108,8 @@ public class AddTaskParser extends AddParser {
         }
     }
 
-    private void checksForEmptyParams(String taskName, String taskDescription, String estimatedWorkingTime) throws EmptyParamException {
+    private void checksForEmptyParams(String taskName, String taskDescription, String estimatedWorkingTime)
+            throws EmptyParamException {
         if (taskName.isBlank()) {
             throw new EmptyParamException(TASK_STR);
         }
