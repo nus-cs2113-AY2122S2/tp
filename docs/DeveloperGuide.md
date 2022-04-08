@@ -304,6 +304,8 @@ Below is a class diagram of the workout-related features:
 
 ![WorkoutUML](uml/classDiagrams/images/workoutRelatedFeatures.png)
 <br>
+<span class="box info">:memo: To improve readability, some classes and methods have been omitted from the diagram above.
+The diagram shows the main classes and methods the workout-related features uses. </span>
 
 The `Parser` class will call the `Parser#parseUserInput(userInput)` method
 to analyse the user's command. If the user's command is of type 
@@ -417,7 +419,7 @@ an `InvalidScheduleException` will be thrown.
 For `commandAction` such as `/update`, `/clear` and `/clearall`, the method that was called to perform such commands will
 modify the application's schedule list. Hence, appropriate methods in the `FileManager` will be called to manage the data 
 and save them to the local file, `schedule.txt`. For more information on `FileManager` class, you can refer to this 
-[section](#file-management).
+[section](#how-data-is-written-or-updated-to-a-resource-file).
 
 Furthermore, when methods such as `DayList#updateDay()` and `DayList#clearAllSchedule` are being successfully executed, 
 for the former method `UI#printNewScheduleCreatedMessage(Day newDay)` method will be called to display a message 
@@ -820,7 +822,7 @@ a `WorkoutCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `WorkoutCommand#execute()` method is called, it will identify
-that the workout action is of type `delete`. Thus, it will subsequently call the 
+that the workout action is of type `delete`. Subsequently, it will call the 
 `WorkoutList#deleteWorkout()` method to perform the deletion of the workout.
 <br><br>
 The following sequence diagram is the detailed procedure for Step 2's `WorkoutList#deleteWorkout()`:
@@ -857,7 +859,7 @@ Alright, the following workout has been removed:
 ```
 
 **(Steps 6 to 7)** The `WorkoutCommand#deletePlanContainsDeletedWorkout()` method will
-be called to delete any existing plan(s) that contains the workout that has been deleted.
+be called to delete any existing plan(s) that contains that deleted workout.
 <br><br>
 **(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list and the
@@ -1013,7 +1015,7 @@ a `PlanCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
-that the plan action is of type `new`. Thus, it will subsequently call the
+that the plan action is of type `new`. Subsequently, it will call the
 `PlanList#createAndAddPlan(userArgument)` method to perform the creation of the plan.
 <br><br>
 The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan(userArgument)`:
@@ -1026,10 +1028,11 @@ The following sequence diagram is the detailed procedure for Step 2's `PlanList#
 **(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
 method is parsed to obtain the following information required to create the `Plan` object:
 1. Name of the plan.
-2. Workout index numbers in the workout list separated by comma.<br><br>
+2. Workout index numbers in the workout list separated by comma.
+<br><br>
 
 Once the information are obtained, the name of the plan to be created will be validated.
-This is to ensure all plan names are acceptable and unique in the application.
+This is to ensure all plan names are valid and unique in the application.
 If the plan name is invalid, an `InvalidPlanException` exception will be thrown.
 <br><br>
 Subsequently, this `PlanList#createAndAddPlan()` method will find out the number of workouts
@@ -1038,7 +1041,7 @@ does not exceed 10 workouts, and there should minimally
 be 1 workout in a plan. If the new plan does not meet the minimum and maximum workout number requirement,
 an `InvalidPlanException` will be thrown.
 <br><br>
-**(Steps 2.1 to 2.2)** An ArrayList of Workout object is created to store the workouts to be added into the new plan.
+**(Steps 2.1 to 2.2)** An `ArrayList` of `Workout` object is created to store the workouts to be added into the new plan.
 <br><br>
 **(Steps 2.3 to 2.4)** As the workout indexes in the user argument parameter (e.g. "1, 2, 3") is of type `String`, 
 the loop will split (by comma) and convert each number string into an `Integer`. 
@@ -1050,9 +1053,9 @@ on the workout index and then added into the `ArrayList` that was created in the
 The loop will continue until all workouts to be added in the new plan is added into that `ArrayList`.
 <br><br>
 **(Steps 2.5 to 2.10)** With the valid plan name and the `ArrayList` containing the workouts to be added into the new plan, 
-a new `Plan` object can be created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
-check that the new plan to be created does not contain the same workout order as any existing plans. If it does contain
-the same workout order as any existing plan, an `InvalidPlanException` exception will be thrown.
+a new `Plan` object is created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
+check that the new plan to be created does not contain the same workout order as any existing plans. If it does, 
+an `InvalidPlanException` exception will be thrown.
 <br><br>
 If it is confirmed that the new plan does not contain
 the same workout order as any existing plan, a new `Plan` object is created.
@@ -1062,7 +1065,7 @@ This new `Plan` object is then added to the application's plan list.
 <br><br>
 **(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage(newPlan)` is called
 to display the plan that has been created to the user via the terminal. The following is an example
-of a success plan creation message (new plan is called "Grow My Muscles"):
+of a success plan creation message (new plan is called "grow my muscles"):
 ```
 ----------------------------------------------------------------------
 Alright, the following plan has been created:
@@ -1078,16 +1081,16 @@ This completes the process of creating and adding a new plan to WerkIt!.
 
 ##### Design Considerations for Creating a New Plan
 ###### Validity checks for new plans to be inserted
-The following are the validity checks done for new plans to be inserted into the application
+The following are the validity checks done before a new plan can be inserted into the application's plan list,
 and the reasons why these checks are done:
 
-|       Type of validity checks       |                                                                                                                                                         Reason for creating the validity checks                                                                                                                                                         |
-|:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|          Unique plan name           |                                                                                                            All plan names within the application should be <br/> unique as it makes no sense for users to create plans with the same names.                                                                                                             |
-|     No plans called "rest day"      |                                              "rest day" is used to identify the days in the <br/> schedule that do not have a plan assigned to it. <br/> If a plan called "rest day" is allowed, users might not be able to <br/> differentiate a rest day from days that they actually need to work out.                                               |
-|    Character limit for plan name    |                                                                                                                 Currently, the maximum character limit set for all plan names is 30 characters. <br/> This is for UI printing purposes.                                                                                                                 |
-|     Maximum number of workouts      |                                           Currently, a plan only supports a maximum of 10 workouts as it makes no sense for <br/> a plan to have many different workouts in the real-life context. <br/> In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                            |
-| Check plans with same workout order | All plans within the application should have different workout order sequence. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. <br/> This check is done as it makes no sense to create two plans with different plan names, but same workout sequences. |
+|       Type of validity checks       |                                                                                                                                                   Reason for creating the validity checks                                                                                                                                                    |
+|:-----------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|          Unique plan name           |                                                                                                       All plan names within the application should be <br/> unique as it makes no sense for users to create plans with the same names.                                                                                                       |
+|     No plans called "rest day"      |                                         "rest day" is used to identify the days in the <br/> schedule that do not have a plan assigned to it. <br/> If a plan called "rest day" is allowed, users might not be able to <br/> differentiate a rest day from days that they actually need to work out.                                         |
+|    Character limit for plan name    |                                                                                                           Currently, the maximum character limit set for all plan names is 30 characters. <br/> This is for UI printing purposes.                                                                                                            |
+|     Maximum number of workouts      |                                      Currently, a plan only supports a maximum of 10 workouts as it makes no sense for <br/> a plan to have many different workouts in the real-life context. <br/> In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                      |
+| Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. <br/> This check is done as it makes no sense to create two plans with different plan names, but same workout orders. |
 
 
 
@@ -1104,8 +1107,7 @@ A summary of the general procedure of listing all plans in the application is as
 The following sequence diagram illustrates how the `plan /list` command works in greater detail:
 
 <span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
- have been removed from the sequence diagram. Reference frames will be elaborated further
- down this section.</span>
+ have been removed from the sequence diagram. </span>
 
 ![List Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/listPlan.png)
 <br><br>
@@ -1116,7 +1118,7 @@ a `PlanCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Steps 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify
-that the plan action is of type `list`. Thus, it will subsequently call the
+that the plan action is of type `list`. Subsequently, it will call the
 `PlanList#listAllPlan()` method to display all available plan names.
 <br><br>
 **(Step 3)** The `PlanList#listAllPlan()` method will first check if the application's plan list is empty.
@@ -1131,8 +1133,8 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. Test
-2. Grow My Muscles
+1. test
+2. grow my muscles
 ----------------------------------------------------------------------
 ```
 **(Steps 5 to 6)** The `PlanList#listAllPlan()` method returns to the `PlanCommand` object
@@ -1364,7 +1366,8 @@ Monday -- arms
 ----------------------------------------------------------------------
 ```
 (Step 6) Lastly, before the `ScheduleCommand` object is discarded, the `FileManager#rewriteAllDaysScheduleToFile(dayList)`
-is called to rewrite the `schedule.txt` file according to the newly modified application's day list.
+is called to rewrite the `schedule.txt` file according to the newly modified application's day list. For more information
+on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
 
 This completes the process of scheduling a plan for a particular day in WerkIt!
 
@@ -1499,7 +1502,9 @@ Plan had been cleared for Monday.
 ```
 
 (Step 13) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
-in the dayList into `schedule.txt` which is stored on the user's local filesystem.
+in the dayList into `schedule.txt` which is stored on the user's local filesystem. For more information
+on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
+
 
 This completes the process of clearing a plan on a particular day of the schedule on WerkIt!
 
@@ -1550,8 +1555,9 @@ schedule /update <day number [1-7]> <plan number>
 
 (Step 7) Lastly, `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
 in the dayList into `schedule.txt` which is stored on the user's local filesystem. 
-Since all `Day` objects are deleted, the writing of data into `schedule.txt` would be an equivalent of 
-resetting the text file. 
+Since all Day objects are deleted, the writing of data into `schedule.txt` would be an equivalent of 
+resetting the text file. For more information on the file management, 
+refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
 
 This completes the process of clearing of all plans stored in the schedule on WerkIt!
 
@@ -1968,7 +1974,89 @@ of their schedule. For instance, the user's daily schedule can look like this:
 
 
 ## Instructions for manual testing
+This section includes instructions to test WerkIt! manually.
+<br/>
+<span class = "info box">:memo: These test instructions covers the basic testing of the WerkIt! features. 
+Testers are expected to do more testing.
+</span>
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and shutdown
+#### Initial Launch
+1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases/tag/Jar-V2.0) and copy it into an empty folder.
+2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
+`WerkIt.jar` file.
+3. On your terminal, type the command `java -jar WerkIt.jar` to launch WerkIt!.
+4. Upon successful launch, WerkIt! will display a welcome message and also file loading-related messages on the terminal.
+
+#### Shutdown
+1. Enter the `exit` command to exit WerkIt!
+
+### Test on Exercise Features
+#### Listing All Exercises
+
+### Test on Workout Features
+#### Creating A New Workout
+#### Listing All Workouts
+
+#### Deleting An Existing Workout
+1. Prerequisites: Workout list should be populated with
+workout(s) before an existing workout can be deleted. 
+See [this section](#creating-a-new-workout) to view how you can populate your workout list. 
+2. User can enter `workout /list` to see the workout list before the deletion occurs. This is for comparison purposes.
+3. Test case: `workout /delete 1`<br/><br/>
+Expected: The first workout is deleted from the workout list. Details of the deleted workout will be shown 
+to the terminal.<br/><br/>
+Addition: If you have any existing plans containing the deleted workout, that plan
+will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list
+if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are
+affected by the deletion of this workout will display their delete messages accordingly.<br/><br/>
+4. Other incorrect commands to try:<br/>
+   a. `workout /delete` (Missing workout index to delete)<br/>
+   b. `workout /delete 0` (Index 0 is invalid) <br/>
+   c. `workout /delete X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
+
+#### Updating An Existing Workout
+
+### Test on Plan Features
+#### Creating A New Plan 
+1. Prerequisites: The workout list should be populated before a new plan can be created as
+plans contains workout(s). See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+2. Test case: `plan /new first plan /workouts 1,1,1`<br/><br/>
+Expected: A new plan called "first plan" will be created. This plan contains 3 instances of 
+workout with index 1 in the workout list.<br/><br/>
+3. Other incorrect commands to try:<br/>
+   a. `plan /new` (Missing plan name and workouts) <br/>
+   b. `plan /new [plan name]` (Missing workouts)<br/>
+   c. `plan /new /workouts 1,1` (Missing plan name)<br/>
+   d. `plan /new [plan name] /workouts 0,1` (Workout index 0 is invalid) <br/>
+   e. `plan /new rest day /workouts 1,1` (A plan called "rest day" cannot be created) <br/>
+   f. `plan /new [existing plan name] /workouts 1,1` (Plan name must be unique within the application)<br/>
+   g. `plan /new [plan name] /workouts [same order as an existing plan]` (All plans must have a unique workout order)<br/>
+   h. `plan /new [plan name] /workouts X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
+   i. `plan /new [plan name] /workouts [11 ones separated by comma]` (A plan cannot contain more than 10 workouts)
+
+#### Listing All Plans
+1. Test case: `plan /list` <br/><br/>
+Expected: If plan list is empty, the terminal will display to the user that the plan list is empty.
+Else, all plan names will be listed to the user.<br/><br/>
+2. Test case `plan /list ab`<br/><br/>
+Expected: Nothing is listed because no additional arguments should be supplied for this method
+
+#### Listing Workouts In A Plan
+#### Deleting An Existing Plan
+
+### Test on Schedule Features
+#### Updating The Schedule
+#### Viewing The Schedule
+#### Clearing Plan Schedule For A Day
+#### Clearing All Plans In The Schedule
+
+### Test on Search Features
+#### Searching For Exercise
+#### Searching For Workout
+#### Searching For Plan
+#### Searching For All
+
+### Test on Data Saving 
 
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>

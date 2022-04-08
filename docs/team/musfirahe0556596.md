@@ -18,7 +18,7 @@ schedule for them to refer to and follow. More details about the project can be 
 A detailed report of my code contributions to the tP can be found in the [tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=Musfirah&breakdown=true)
 hosted by the module coordinators of CS2113T.
 
-![tP Code Dashboard](../images/ppp/musfirahe0556596/tPCodeDashboard.png)
+![tP Code Dashboard](../images/ppp/musfirahe0556596/tpCodeDashboard.PNG)
 
 A summary of my code contributions are as follows:
 - Implemented the `deleteWorkout()` method for workouts.
@@ -81,6 +81,9 @@ to modify files. Examples of particularly time-consuming test cases are provided
   - Wrote the `Workout-related features` under the Feature Overview of the Design section, including coming up with its diagrams ([link](../DeveloperGuide.md#workout-related-features)).
 - Wrote part of the [glossary](../DeveloperGuide.md#glossary)
 - Wrote the [table of contents](../DeveloperGuide.md#table-of-contents).
+- Wrote parts of the [Instructions for manual testing](../DeveloperGuide.md#instructions-for-manual-testing).
+  - Wrote manual test cases for [deleting a workout](../DeveloperGuide.md#deleting-an-existing-workout),
+  [creating a plan](../DeveloperGuide.md#creating-a-new-plan) and [listing of plans](../DeveloperGuide.md#listing-all-plans).
 
 ### Contributions to Team-Based Tasks
 - Maintained the team's Google Drive folder, which includes the team's project notebook
@@ -100,12 +103,12 @@ As of 06/04/2022, I have reviewed 68 out of 152 pull requests.
 Below is a screenshot of the number of PR reviews I had made, by 
 using the correct Github filters `is:pr reviewed-by:@me`:
 
-![PR Reviews](../images/ppp/musfirahe0556596/PRReviews.png)
+![PR Reviews](../images/ppp/musfirahe0556596/PRReviews.PNG)
 
 In addition, review comments can also be seen at the CS2113T's tp Comment Dashboard [here](https://nus-cs2113-ay2122s2.github.io/dashboards/contents/tp-comments.html):
 Below is a screenshot of the tp Comment Dashboard, as of 06/04/2022:
 
-![tp Comment Dashboard](../images/ppp/musfirahe0556596/tpCommentDashboard.png)
+![tp Comment Dashboard](../images/ppp/musfirahe0556596/tpCommentDashboard.PNG)
 
 
 ### Contributions Beyond the Project Team

@@ -7,22 +7,22 @@ autonumber
 title Sequence Diagram of `workout /delete` Command
 hide footbox
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "deleteCommand\n:WorkoutCommand" AS deleteCommand
-participant "workoutList\n:WorkoutList" AS WorkoutList
-participant "ui:UI" AS UI2
-participant "planList\n:PlanList" AS PlanList
-participant "fileManager\n:FileManager" as FileManager
+participant "werkIt:WerkIt" AS WerkIt #Sandybrown
+participant "deleteCommand\n:WorkoutCommand" AS deleteCommand #LightSkyBlue
+participant "workoutList\n:WorkoutList" AS WorkoutList #LightSkyBlue
+participant "ui:UI" AS UI2 #YellowGreen
+participant "planList\n:PlanList" AS PlanList #LightSkyBlue
+participant "fileManager\n:FileManager" as FileManager #IndianRed
 
-activate WerkIt
+activate WerkIt #Sandybrown
 ref over WerkIt
 Obtain and parse user input.
 end
 
 WerkIt -> deleteCommand : execute()
-activate deleteCommand
+activate deleteCommand #LightSkyBlue
 deleteCommand -> WorkoutList : deleteWorkout(userArguments)
-activate WorkoutList
+activate WorkoutList #LightSkyBlue
 ref over WorkoutList
 Delete workout specified by user.
 end
@@ -30,17 +30,17 @@ deleteCommand <-- WorkoutList : deletedWorkout:Workout
 deactivate WorkoutList
 
 deleteCommand -> UI2 : printDeleteWorkoutMessage(deletedWorkout)
-activate UI2
+activate UI2 #YellowGreen
 deleteCommand <-- UI2
 deactivate UI2
 
 deleteCommand -> PlanList : deletePlanContainsDeletedWorkout(deletedWorkout.toString())
-activate PlanList
+activate PlanList #LightSkyBlue
 deleteCommand <-- PlanList
 deactivate PlanList
 
 deleteCommand -> FileManager : rewriteAllWorkoutsToFile(workoutList)
-activate FileManager
+activate FileManager #IndianRed
 ref over FileManager
 Rewrite modified workoutList
 data into file on user's system
@@ -49,7 +49,7 @@ deleteCommand <-- FileManager
 deactivate FileManager
 
 deleteCommand -> FileManager : rewriteAllPlansToFile(planList)
-activate FileManager
+activate FileManager #IndianRed
 ref over FileManager
 Rewrite modified planList
 data into file on user's system

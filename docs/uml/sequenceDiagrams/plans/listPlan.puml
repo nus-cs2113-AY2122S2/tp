@@ -7,19 +7,19 @@ autonumber
 title Sequence Diagram of `plan /list` Command
 hide footbox
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "newCommand\n:PlanCommand" AS newCommand
-participant "planList\n:PlanList" AS PlanList
+participant "werkIt:WerkIt" AS WerkIt #Sandybrown
+participant "newCommand\n:PlanCommand" AS newCommand #LightSkyBlue
+participant "planList\n:PlanList" AS PlanList #LightSkyBlue
 
-activate WerkIt
+activate WerkIt #Sandybrown
 ref over WerkIt
 Obtain and parse user input.
 end
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand #LightSkyBlue
 newCommand -> PlanList : listAllPlan()
-activate PlanList
+activate PlanList #LightSkyBlue
 opt application plan list is empty
 newCommand <-- PlanList : No plan created yet message
 end
