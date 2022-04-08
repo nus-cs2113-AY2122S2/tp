@@ -99,7 +99,11 @@ public class AppointmentList extends List {
 
     @Override
     public void view() throws HalpmiException {
-        checkDateInDetails();
+        for (Appointment appointment : appointments) {
+            if (!appointment.appointmentDetails.contains(appointment.appointmentDate)) {
+                appointment.updateAppointmentDetails();
+            }
+        }
         CommandLineTable appointmentTable = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
@@ -113,14 +117,6 @@ public class AppointmentList extends List {
                     appointment.getAppointmentDate(), appointment.getAppointmentDetails());
         }
         appointmentTable.print();
-    }
-
-    private void checkDateInDetails() {
-        for (Appointment appointment : appointments) {
-            if (!appointment.appointmentDetails.contains(appointment.appointmentDate)) {
-                appointment.updateAppointmentDetails();
-            }
-        }
     }
 
     @Override
@@ -197,6 +193,14 @@ public class AppointmentList extends List {
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
             UI.printParagraph("Appointment with given date doesn't exist. Please try again!");
+        }
+    }
+
+    public void checkDateInDetails() {
+        for (Appointment appointment : appointments) {
+            if (!appointment.appointmentDetails.contains(appointment.appointmentDate)) {
+                appointment.updateAppointmentDetails();
+            }
         }
     }
 
