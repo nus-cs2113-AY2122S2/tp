@@ -2057,7 +2057,7 @@ Testers are welcome conduct more extensive and rigorous testing.
 #### Creating A New Workout
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#create-a-workout-workout-new).)
 
-**Prerequisites: ** Ensure that your list of exercises is populated with at least one exercise for you to test the
+**Prerequisites:** Ensure that your list of exercises is populated with at least one exercise for you to test the
 `workout` command on.
 
 The following are some test cases for you to try:
@@ -2185,7 +2185,7 @@ The following are some test cases for you to try:
 #### Updating The Schedule
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#update-schedule-schedule-update).)
 
-**Prerequisites: ** Ensure that you have created some plans, at least one, before you to test the
+**Prerequisites:** Ensure that you have created some plans, at least one, before you to test the
 `schedule /update` command.
 
 The following are some test cases for you to try:
