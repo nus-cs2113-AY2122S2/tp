@@ -212,7 +212,7 @@ Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 > :information_source: Notes:
 > * The income indexes that are higher than the deleted one will be **decremented** after
     the deletion is completed.
-    >      * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
+>      * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
 
 Example of usage:
 
@@ -304,7 +304,7 @@ Format: `deleteout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX`
 > :information_source: Notes:
 > * The expenditure indexes that are higher than the deleted one will be **decremented** after
     the deletion is completed.
-    >      * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
+>      * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
 
 Example of usage:
 

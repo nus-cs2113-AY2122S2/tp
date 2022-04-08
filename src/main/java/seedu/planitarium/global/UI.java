@@ -50,4 +50,23 @@ public class UI {
     public static void printHoriLine() {
         System.out.println(HORI_LINE);
     }
+
+    /**
+     * Returns the formatting of a monetary value depending on its polarity.
+     *
+     * @param entry The monetary value
+     * @return The formatting of the value
+     */
+    public static String formatValue(Double entry) {
+        boolean isNegative = false;
+        if (entry < 0) {
+            isNegative = true;
+            entry = (-entry);
+        }
+        String strDouble = String.format("%.2f", entry);
+        if (isNegative) {
+            return ("-$" + strDouble);
+        }
+        return ("$" + strDouble);
+    }
 }
