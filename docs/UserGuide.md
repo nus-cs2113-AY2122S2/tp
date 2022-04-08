@@ -55,14 +55,14 @@ Mod Happy has been tested on and is confirmed to work with the following major o
 | CentOS Linux      | CentOS 7 and above             |
 
 > 📔 <span style="color:#3333ff">**NOTE:**</span>
-> 
+>
 > Although Mod Happy may still work on operating systems not listed in the above table, we cannot guarantee that it will be bug-free or that the performance will be optimal.
 
 <br><br><br>
 
 ## 3. About this user guide
 
-This user guide contains detailed information about the various features and commands available within Mod Happy. For each command, you can find its format, a short description of what it does, as well as some example usage scenarios to help illustrate its effects. 
+This user guide contains detailed information about the various features and commands available within Mod Happy. For each command, you can find its format, a short description of what it does, as well as some example usage scenarios to help illustrate its effects.
 
 The following section details the various terminologies and notation used throughout the guide.
 
@@ -75,15 +75,15 @@ The following section details the various terminologies and notation used throug
 - Parts of the command indicated within square brackets `[]` are optional, and you may choose to omit the enclosed section if you wish. For example, if the command format is `list [TAG_NAME]`, `list` and `list example_tag` are both valid inputs.
 
 > 📔 <span style="color:#3333ff">**NOTE:**</span>
-> 
+>
 > Pay special attention to whether input parameters are surrounded by double quotes in the command format. Missing or unnecessary double quotes will likely result in Mod Happy not understanding your command.
-> 
+>
 > Example 1: `command EXAMPLE` does not require double quotes around `EXAMPLE`. `command hello` is an example of a valid command.
-> 
+>
 > Example 2: `command "EXAMPLE_2"` requires double quotes around `EXAMPLE_2`. `command "hello"` is an example of a valid command.
 
 > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
-> 
+>
 > All parameters, including optional ones, must appear in the same order shown in the command format provided. Mod Happy may fail to interpret your command if you specify these parameters in a different order.
 
 <br>
@@ -106,9 +106,9 @@ Some Mod Happy commands require you to provide a duration. You can specify these
 
 - `DURATION_AMOUNT`: Any positive number less than or equal to one billion (1000000000), including decimals.
 - `DURATION_UNIT`: The time unit that `DURATION_AMOUNT` is specified in. Mod Happy supports the following units:
-  - Hours: `h`, `H`, `hr`, `Hr`, `hrs`, `Hrs`, `hour`, `Hour`, `hours`, `Hours`
-  - Minutes: `m`, `M`, `min`, `Min`, `mins`, `Mins`, `minute`, `Minute`, `minutes`, `Minutes`
-  
+    - Hours: `h`, `H`, `hr`, `Hr`, `hrs`, `Hrs`, `hour`, `Hour`, `hours`, `Hours`
+    - Minutes: `m`, `M`, `min`, `Min`, `mins`, `Mins`, `minute`, `Minute`, `minutes`, `Minutes`
+
 > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
 >
 > You can only choose to specify the duration in hours or minutes — not both. If you need to specify "2 hours and 45 minutes", for example, try `2.75 hours` instead.
@@ -125,7 +125,6 @@ Shows you a generic help message.
 
 ##### Format: `help`
 
-
 ##### Example:
 
 ```
@@ -140,13 +139,13 @@ Compulsory parameters are fully capitalised: e.g. MODULE_CODE.
 Optional parameters are in square brackets: e.g. [-d MODULE_DESCRIPTION]
 ____________________________________________________________
 ```
-  
+
 <br>
 
 #### 4.1.2. Help for specific command word
 
-Shows you the help text for the specified command word. 
- 
+Shows you the help text for the specified command word.
+
 ##### Format: `help [COMMAND_WORD]`
 
 - `COMMAND_WORD`: The command you wish to view the help message for.
@@ -170,11 +169,10 @@ ____________________________________________________________
 Allows you to view and change various user preferences which can affect other aspects of Mod Happy's operation. This command has three different formats, each of which serve a different purpose.
 
 #### 4.2.1. Viewing available configuration options
-  
+
 Lists the names of all available configuration options, as well as what you have them currently set to.
 
 ##### Format: `option`
-
 
 ##### Example:
 
@@ -196,7 +194,7 @@ Shows you a short description of the supplied configuration option as well as it
 ##### Format: `option CONFIG_NAME`
 
 - `CONFIG_NAME`: The name of the configuration option you wish to view the details of.<br><br>
-  
+
 ##### Example:
 
 ```
@@ -219,7 +217,7 @@ Allows you to edit the value of a configuration option of your choice.
 
 - `CONFIG_NAME`: The name of the configuration option you wish to modify.
 - `NEW_VALUE`: The new value of the configuration option. This value must be a value accepted by the target configuration option.
-  
+
 ##### Example:
 
 ```
@@ -229,7 +227,7 @@ ____________________________________________________________
 Preferences updated: SHOW_COMPLETED_TASKS=true
 ____________________________________________________________
 ```
-  
+
 <br>
 
 > 📔 <span style="color:#3333ff">**NOTE:**</span>
@@ -261,7 +259,7 @@ Adds a module to your module list. You must indicate the number of modular credi
 - `MODULE_CODE`: The module code of the module. Must be a single word containing only alphanumeric characters and underscore `_`.
 - `MODULAR_CREDITS`: The number of modular credits the module has. Must be an integer from 0 to 100, inclusive.
 - `MODULE_DESCRIPTION`: A short description of the module. Can contain any characters except double quotes `"`.
-  
+
 ##### Example 1:
 
 ```
@@ -283,17 +281,17 @@ Hey! I have added this module!
 CS2113T (Software Engineering) (4MC, Grade: -)
 ____________________________________________________________
 ```
-  
+
 <br>
 
 > 📔 <span style="color:#3333ff">**NOTE:**</span>
-> 
+>
 > Module codes are case-sensitive. Mod Happy treats `CS2113T` and `cs2113t` as two different modules!
 
 <br>
 
 #### 4.3.2. Add task: `add task`
-  
+
 Adds a task to the list of tasks tracked under the specified module code. If you do not specify any module code, the task is added to your General Tasks list, which is not associated with any module.<br><br>
 
 You may optionally specify a short description for the task, as well as an estimate for the expected time spent working on it.
@@ -304,7 +302,6 @@ You may optionally specify a short description for the task, as well as an estim
 - `MODULE_CODE`: The module code of the module to be associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
 - `TASK_DESCRIPTION`: A short description of the task. Can contain any characters except double quotes `"`.
 - `ESTIMATED_WORKING_TIME`: The expected duration spent working on the task. The duration must be specified in [this format](#33-specifying-durations).
-  
 
 ##### Example 1:
 
@@ -316,7 +313,7 @@ Hey! I have added this task under General tasks!
 ( ) Review PR []
 ____________________________________________________________
 ```
-  
+
 ##### Example 2:
 
 ```
@@ -341,7 +338,6 @@ Deletes the specified module from your module list. You will be prompted for con
 - `MODULE_CODE`: The module code of the module to be deleted. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
 
 ##### Example:
-
 
 ```
 > del mod CS2113T
@@ -369,7 +365,6 @@ Deletes the [specified task](#32-specifying-tasks) from its parent module, or th
 - `TASK_NUMBER`: The number of the task to be deleted. Must be a positive integer.
 - `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
 
-
 ##### Example 1:
 
 ```
@@ -379,7 +374,7 @@ ____________________________________________________________
 ( ) Review PR [] has been deleted.
 ____________________________________________________________
 ```
-  
+
 ##### Example 2:
 
 ```
@@ -396,7 +391,7 @@ ____________________________________________________________
 
 #### 4.5.1. Edit module: `edit mod`
 
-  Edits an attribute of a module you have previously created. Only the module description is editable after creation.
+Edits an attribute of a module you have previously created. Only the module description is editable after creation.
 
 ##### Format: `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"`
 
@@ -462,8 +457,11 @@ The `c` flag indicates that the task will be marked as completed, while the `u` 
 ```
 > mark c 1
 
-  #### Format: `mark (c | u) TASK_NUMBER [-m MODULE_CODE]`
-
+____________________________________________________________
+Nice! I have marked this task as completed!
+(X) Reply to emails []
+____________________________________________________________
+```
 
 ##### Example 2:
 
@@ -475,29 +473,9 @@ Ok! I have marked this task for you as uncompleted!
 ____________________________________________________________
 ```
 
-  ##### Example 1:
-  ```
-  > mark c 1
-  
-  ____________________________________________________________
-  Nice! I have marked this task as completed!
-  (X) Reply to emails []
-  ____________________________________________________________
-  ```
-  
-  ##### Example 2:
-  ```
-  > mark u 1 -m CS2113T
-  ____________________________________________________________
-  Ok! I have marked this task for you as uncompleted!
-  ( ) CS2113T Tutorial 2 []
-  ____________________________________________________________
-  ```
-  
-  <br>
+<br>
 
 ### 4.7. Managing custom tags: `tag`
-
 
 Allows you to add or delete a tag from the [specified task](#32-specifying-tasks).
 
@@ -526,12 +504,12 @@ ____________________________________________________________
 
 ### 4.8. Listing all tasks: `list`
 
-- Shows you your tasks, grouped by module code. General tasks are displayed separately.
+Shows you your tasks, grouped by module code. General tasks are displayed separately.
 
-  If a [tag name](#47-managing-custom-tags-tag) is provided, only tasks with the associated tag will be shown.
+If a [tag name](#47-managing-custom-tags-tag) is provided, only tasks with the associated tag will be shown.
 
 > 📔 <span style="color:#3333ff">**NOTE:**</span>
-> 
+>
 > If the [`SHOW_COMPLETED_TASKS` option](#42-accessing-options-option) is set to `false`, you will only be shown your outstanding tasks. The number of tasks that were hidden will be indicated at the bottom of each group.
 
 ##### Format: `list [TAG_NAME]`
@@ -541,55 +519,56 @@ ____________________________________________________________
 ##### Example 1:
 
 ```
-> lis
+> list
 
-  - `TAG_NAME`: The name of the tag to be filtered for. Must be a single word containing only alphanumeric characters and underscore `_`.
+____________________________________________________________
+Ok! Here are the task(s) in your list:
+CS2113T (Software Engineering & OOP) (4MC, Grade: -)
+    1. ( ) CS2113T Tutorial 2 [project]
 
-  ##### Example 1:
-  ```
-  > list
+CS2101 (4MC, Grade: -)
+    1. ( ) Write user guide peer review []
 
-  ____________________________________________________________
-  Ok! Here are the task(s) in your list:
-  CS2113T (Software Engineering & OOP) (4MC, Grade: -)
-      1. ( ) CS2113T Tutorial 2 [project]
-
+General tasks
+    1. (X) Reply emails []
+____________________________________________________________
+```
 
 ##### Example 2:
 
 ```
 > list project
 
-  ##### Example 2:
-  ```
-  > list project
+____________________________________________________________
+Ok! Here are the task(s) in your list:
+CS2113T (Software Engineering & OOP) (4MC, Grade: -)
+  1. ( ) CS2113T Tutorial 2 [project]
   
-  ____________________________________________________________
-  Ok! Here are the task(s) in your list:
-  CS2113T (Software Engineering & OOP) (4MC, Grade: -)
-    1. ( ) CS2113T Tutorial 2 [project]
-    
-  CS2101 (4MC, Grade: -)
-    (empty)
-    
-  General tasks
-    (empty)
-    
-  ____________________________________________________________
-  ```
+CS2101 (4MC, Grade: -)
+  (empty)
   
-  <br>
+General tasks
+  (empty)
+
+____________________________________________________________
+```
+
+<br>
 
 ### 4.9. Setting a module's grade: `grade`
 
-- Assigns a grade to a module of your choice.
-
+Assigns a grade to a module of your choice.
 
 ##### Format: `grade MODULE_CODE MODULE_GRADE`
 
-  - `MODULE_CODE`: The module code of the module to be assigned the grade. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
-  - `MODULE_GRADE`: The grade to be assigned to the module.
-  
+- `MODULE_CODE`: The module code of the module to be assigned the grade. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
+- `MODULE_GRADE`: The grade to be assigned to the module.
+
+> 📔 <span style="color:#3333ff">**NOTE:**</span>
+>
+> Only the following grades are supported (case-insensitive):
+>
+> A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU
 
 ##### Example:
 
@@ -614,21 +593,14 @@ Computes your GPA based the [inputted grades](#49-setting-a-modules-grade-grade)
 ```
 > gpa
 
-  #### Format: `gpa`
+____________________________________________________________
+Your GPA is 5.00! :)
+____________________________________________________________
+```
 
-  ##### Example:
-  ```
-  > gpa
-  
-  ____________________________________________________________
-  Your GPA is 5.00! :)
-  ____________________________________________________________
-  ```
-  
-  <br>
+<br>
 
 ### 4.11. Resetting the program: `reset`
-
 
 Removes all your tasks and modules.
 
@@ -639,20 +611,14 @@ Removes all your tasks and modules.
 ```
 > reset
 
-
-  ##### Example:
-  ```
-  > reset
-  
-  ____________________________________________________________
-  All modules and tasks have been removed.
-  ____________________________________________________________
-  ```
+____________________________________________________________
+All modules and tasks have been removed.
+____________________________________________________________
+```
 
 <br>
 
 ### 4.12. Saving your data: `save`
-
 
 Saves all your tasks and modules to the data file.
 
@@ -670,24 +636,11 @@ Config options written to file.
 ____________________________________________________________
 ```
 
-  #### Format: `save`
-  
-  ##### Example:
-  ```
-  > save
-  
-  ____________________________________________________________
-  General tasks written to file.
-  Module data written to file.
-  Config options written to file.
-  ____________________________________________________________
-  ```
+> ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
+>
+> Mod Happy does **not** auto-save your changes! Do remember to save your work at regular intervals, or before exiting the program.
 
-  > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
-  >
-  > Mod Happy does **not** auto-save your changes! Do remember to save your work at regular intervals, or before exiting the program.
-  
-  <br><br><br>
+<br><br><br>
 
 ## 5. FAQ
 
