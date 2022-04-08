@@ -55,13 +55,15 @@ public class Parser {
         int nameIndex = dummy.indexOf("/n");
         id = dummy.substring(idIndex, nameIndex).trim();
         int phoneNumberIndex = dummy.indexOf("/ph");
-        String name = dummy.substring(nameIndex + 3, phoneNumberIndex).trim();
+        String name = dummy.substring((nameIndex + 3), phoneNumberIndex).trim();
         int emailIndex = dummy.indexOf("/e");
-        String phoneNumber = dummy.substring(phoneNumberIndex + 4, emailIndex).trim();
+        String phoneNumber = dummy.substring((phoneNumberIndex + 4), emailIndex).trim();
+        int departmentIndex = dummy.indexOf("/d");
+        String email = dummy.substring((emailIndex + 3),departmentIndex);
         int wardNumberIndex = dummy.indexOf("/w");
-        String email = dummy.substring(emailIndex + 3, wardNumberIndex).trim();
-        String wardNumber = dummy.substring(wardNumberIndex + 3).trim();
-        return new AddDoctorCommand(id, name, phoneNumber, email, wardNumber, false);
+        String department = dummy.substring((departmentIndex + 3), wardNumberIndex).trim();
+        String wardNumber = dummy.substring((wardNumberIndex + 3)).trim();
+        return new AddDoctorCommand(id, name, phoneNumber, email, department, wardNumber, false);
     }
 
     //@@author Demonshaha
@@ -114,12 +116,12 @@ public class Parser {
         int phoneNumberIndex = dummy.indexOf("/ph");
         String name = dummy.substring(nameIndex, phoneNumberIndex).trim();
         int emailIndex = dummy.indexOf("/e");
-        String phoneNumber = dummy.substring(phoneNumberIndex + 4, emailIndex).trim();
+        String phoneNumber = dummy.substring((phoneNumberIndex + 4), emailIndex).trim();
         int symptomIndex = dummy.indexOf("/s");
-        String email = dummy.substring(emailIndex + 3,symptomIndex).trim();
+        String email = dummy.substring((emailIndex + 3),symptomIndex).trim();
         int descIndex = dummy.indexOf("/d");
-        String symptom = dummy.substring(symptomIndex + 3,descIndex).trim();
-        String description = dummy.substring(descIndex + 3).trim();
+        String symptom = dummy.substring((symptomIndex + 3),descIndex).trim();
+        String description = dummy.substring((descIndex + 3)).trim();
         return new AddPatientCommand(id, name, phoneNumber, email, symptom, description);
     }
 
@@ -151,7 +153,6 @@ public class Parser {
         int patientIndex = dummy.indexOf("/p");
         doctorIndex += 3;
         String s = dummy.substring(doctorIndex, patientIndex).trim();
-
         doctorIndex = Integer.parseInt(s);
         patientIndex += 3;
         s = dummy.substring(patientIndex).trim();

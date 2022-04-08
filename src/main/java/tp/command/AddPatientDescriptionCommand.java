@@ -31,7 +31,7 @@ public class AddPatientDescriptionCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        PatientList.addPatientDescription(description,index);
+        PatientList.addPatientDescription(description, index);
         return "Already add description for patient " + index + " \n";
     }
 }

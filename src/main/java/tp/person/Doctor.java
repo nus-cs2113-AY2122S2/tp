@@ -4,9 +4,9 @@ public class Doctor extends tp.person.Person {
     protected boolean isOnDuty;
     protected boolean assignedWard;
     protected String department;
-    protected int wardNumber;
+    protected String wardNumber;
 
-    public Doctor(String id, String name, String phoneNumber, String email, String department, int wardNumber) {
+    public Doctor(String id, String name, String phoneNumber, String email, String department, String wardNumber) {
         super(id, name, phoneNumber, email);
         isOnDuty = false;
         assignedWard = true;
@@ -29,7 +29,15 @@ public class Doctor extends tp.person.Person {
         isOnDuty = false;
     }
 
-    public int getWardNumber() {
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getWardNumber() {
         return wardNumber;
     }
 

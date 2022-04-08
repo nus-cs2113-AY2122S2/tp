@@ -42,7 +42,7 @@ public class AddPatientCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Patient patient = new Patient(id, name, phoneNumber, email,symptom,description);
+        Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
         patientList.addPatient(patient);
         return String.format(boundary + "Noted. I've added this patient:" + "\n"
                 + patientList.getPatient(patientList.getSize()) + "\n"

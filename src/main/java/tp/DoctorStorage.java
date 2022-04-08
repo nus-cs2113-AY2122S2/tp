@@ -53,6 +53,7 @@ public class DoctorStorage {
                 fw.write(currDoctor.getName() + "\n");
                 fw.write(currDoctor.getPhoneNumber() + "\n");
                 fw.write(currDoctor.getEmail() + "\n");
+                fw.write(currDoctor.getDepartment() + "\n");
                 fw.write(currDoctor.getWardNumber());
             }
             fw.close();
@@ -85,8 +86,9 @@ public class DoctorStorage {
                 String name = scanner.nextLine();
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
+                String department = scanner.nextLine();
                 String wardNumber = scanner.nextLine();
-                Doctor doctor = new Doctor(id, name, phoneNumber, email, wardNumber);
+                Doctor doctor = new Doctor(id, name, phoneNumber, email, department, wardNumber);
                 result.addDoctor(doctor);
             }
             return result;
