@@ -1,6 +1,10 @@
 package seedu.allonus.modules;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 import seedu.allonus.modules.exceptions.ModuleCategoryException;
 import seedu.allonus.ui.TextUi;
 
@@ -10,7 +14,10 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+//import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests the working of StudyManager class.
@@ -29,6 +36,8 @@ public class StudyManagerTest {
 
     ArrayList<Module> testList = new ArrayList<>();
     StudyManager studyManager;
+
+
 
     /**
      * Creates three new module objects and adds them to the test module list.
@@ -126,31 +135,32 @@ public class StudyManagerTest {
 
     @Test
     public void testEditModule() {
+
+        TextUi ui = new TextUi();
         Module editCheckerModule = new Module("CS2113", "Lecture",
                 "Friday", "4:00pm-6:00pm");
-        TextUi ui = new TextUi();
-        String editCodeInput = "m/GEH1049";
-        String editCategoryInput = "c/tut";
-        String editDayInput = "d/Sunday";
-        String editTimeInput = "t/11:00am-9:00pm";
 
         // Edit module code check
+        String editCodeInput = "m/GEH1049";
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleCode(moduleToEdit, editCodeInput);
         editCheckerModule.setModuleCode("GEH1049");
         assertEquals(editCheckerModule.toString(), moduleToEdit.toString());
 
         // Edit module category check
+        String editCategoryInput = "c/tut";
         studyManager.editModuleCategory(moduleToEdit, editCategoryInput);
         editCheckerModule.setCategory("Tutorial");
         assertEquals(editCheckerModule.toString(), moduleToEdit.toString());
 
         // Edit module day check
+        String editDayInput = "d/Sunday";
         studyManager.editModuleDay(moduleToEdit, editDayInput);
         editCheckerModule.setDay("Sunday");
         assertEquals(editCheckerModule.toString(), moduleToEdit.toString());
 
         // Edit module time check
+        String editTimeInput = "t/11:00am-9:00pm";
         studyManager.editModuleTime(moduleToEdit, editTimeInput);
         editCheckerModule.setTimeSlot("11:00am-9:00pm");
         assertEquals(editCheckerModule.toString(), moduleToEdit.toString());
@@ -158,44 +168,62 @@ public class StudyManagerTest {
 
     @Test
     public void testEditCategoryError() {
+        Module editCheckerModule = new Module("CS2113", "Lecture",
+                "Friday", "4:00pm-6:00pm");
+
         outContent.reset();
         String outputMessage = "Category has to be one of lec, tut, lab or exam\n";
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleCategory(moduleToEdit, "Invalid category");
+        assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
         assertEquals(outputMessage, outContent.toString());
     }
 
     @Test
     public void testEditCodeError() {
+        Module editCheckerModule = new Module("CS2113", "Lecture",
+                "Friday", "4:00pm-6:00pm");
+
         outContent.reset();
         String outputMessage = "Your module code must be an alphanumeric parameter!\n";
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleCode(moduleToEdit, "[]2e4234.`");
+        assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
         assertEquals(outputMessage, outContent.toString());
     }
 
     @Test
     public void testEditDayError() {
+        Module editCheckerModule = new Module("CS2113", "Lecture",
+                "Friday", "4:00pm-6:00pm");
+
         outContent.reset();
+        String module = "[Module] GEH1049 Tutorial: Sunday, 11:00am-9:00pm";
         String outputMessage = "You have entered an invalid day of the week\n"
                 + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY\n";
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleDay(moduleToEdit, "Anyday");
+        assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
         assertEquals(outputMessage, outContent.toString());
 
         outContent.reset();
         outputMessage = "You have entered an invalid date\n"
                 + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY\n";
         studyManager.editModuleDay(moduleToEdit, "1234556");
+        assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
         assertEquals(outputMessage, outContent.toString());
     }
 
     @Test
     public void testEditTimeError() {
+        Module editCheckerModule = new Module("CS2113", "Lecture",
+                "Friday", "4:00pm-6:00pm");
+
         outContent.reset();
         String outputMessage = "Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm\n";
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleTime(moduleToEdit, "2pm-4pm");
+        assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
         assertEquals(outputMessage, outContent.toString());
 
     }
@@ -205,8 +233,7 @@ public class StudyManagerTest {
         outContent.reset();
         ModuleCalendarReader moduleCalendarReader = new ModuleCalendarReader();
         moduleCalendarReader.readIcsFile("nusmods_calendar.ics");
-        String calendarReaderOutput = "\n" +
-                "I have found these modules from your ics file:\n\n"
+        String calendarReaderOutput = "\nI have found these modules from your ics file:\n\n"
                 + "1: [Module] EG2401A Lecture: Wednesday, 6:00 pm-8:00 pm\n"
                 + "2: [Module] EG2401A Tutorial: Friday, 9:00 am-10:00 am\n"
                 + "3: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm\n"
