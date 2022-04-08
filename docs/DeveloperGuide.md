@@ -2016,13 +2016,20 @@ Testers are welcome conduct more extensive and rigorous testing.
 (For details on the usage of this command, please refer to the 
 [user guide](UserGuide.md#create-a-workout-workout-new).)
 
-The following are some suggested test cases for you to try:
+The following are some test cases for you to try:
 
-##### Positive Test Case
+##### Positive Test Cases
 | Test Case                                                  | Command                               | Expected result                    |
 |:-----------------------------------------------------------|:--------------------------------------|:-----------------------------------|
 | Valid exercise name and repetition value.                  | `workout /new russian twist /reps 20` | New workout is added successfully. |
 | Valid exercise name and highest possible repetition value. | `workout /new sit up /reps 2147483647` | New workout is added successfully. |
+
+##### Negative Test Cases
+| Test Case                                                                              | Command                                       | Expected result                                                |
+|:---------------------------------------------------------------------------------------|:----------------------------------------------|:---------------------------------------------------------------|
+| Valid exercise name and repetition value that exceeds upper bound for `int` data type. | `workout /new russian twist /reps 2147483648` | Error response (invalid user argument), workout not added.     |
+| Valid exercise name and repetition value that is 0.                                    | `workout /new push up /reps 0`                | Error response (reps specified is invalid), workout not added. |
+| Exercise name that does not exist in the list of exercises and valid repetition value. | `workout /new somersault /reps 20` | Error response (exercise name does not exist), workout not added. |
 
 #### Listing All Workouts
 
