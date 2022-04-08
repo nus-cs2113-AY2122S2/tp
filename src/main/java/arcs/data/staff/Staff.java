@@ -45,10 +45,10 @@ public class Staff {
         if (newId.length() != 3) {
             return false;
         }
-        if (Character.isDigit(newId.charAt(0)) || Character.isDigit(newId.charAt(8))) {
+        if (Character.isDigit(newId.charAt(0))) {
             return false;
         }
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 3; i++) {
             if (!Character.isDigit(newId.charAt(i))) {
                 return false;
             }
