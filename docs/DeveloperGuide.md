@@ -770,6 +770,6 @@ Given below are instructions to test the app manually.
       Expected: Upon starting up the program again, `Storage` will load valid data until it encounters a
       corrupted entry as seen in the test case. We can check the loaded data by executing the command `list /g 1` 
       and only `Alice` is printed without the corrupted income entry.
-   5. Test case: Edit task type `i` to `e` in save file. The corrupted record should look like this
-      `e Donations 200.0 false 2022-04-08`.
+   5. Test case: Edit task type from income `i` to expenditure `e` in save file. The corrupted record should look like 
+      this `e Donations /d 200.0 /d false /d 2022-04-08`.
       Expected: Similar to the above expected outcome. 
