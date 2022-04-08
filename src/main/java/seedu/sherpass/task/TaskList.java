@@ -3,7 +3,6 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
-import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,8 +18,6 @@ import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_DO_ON_DATE;
 import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_START_DATE_IN_THE_PAST_MESSAGE;
-import static seedu.sherpass.constant.Message.NEWLINE;
-import static seedu.sherpass.constant.Message.TAB_INDENT;
 
 public class TaskList {
     private ArrayList<Task> tasks;
