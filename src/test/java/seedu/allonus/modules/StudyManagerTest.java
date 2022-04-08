@@ -5,19 +5,16 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-import seedu.allonus.modules.exceptions.ModuleCategoryException;
 import seedu.allonus.ui.TextUi;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-//import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests the working of StudyManager class.
@@ -97,7 +94,7 @@ public class StudyManagerTest {
     public void testDeleteModule() {
         studyManager.deleteModule(USER_INPUT_FOR_DELETE);
 
-        // after deletion cs2113 should not be in the list
+        // After deletion cs2113 should not be in the list
         for (Module m: studyManager.getModulesList()) {
             assertNotEquals(m.getModuleCode(), cs2113.getModuleCode());
             assertNotEquals(m.getCategory(), cs2113.getCategory());
