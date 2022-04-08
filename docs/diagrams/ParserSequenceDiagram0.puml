@@ -7,7 +7,6 @@ group **sd**  Parser Component parse and validate
 Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
 Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 
-
 [-> Parser : parseCommandType(userInput:String)
 activate Parser
 Parser -->[ : keywordString:String
@@ -45,6 +44,13 @@ loop LOOP_COLOR for each XYZ term in command
     end opt
     UParser --> Parser : //XYZ//:object
     deactivate UParser
+
+    opt OPT_COLOR XYZ is NAME or DESCRIPTION
+    Parser -> UParser : warnIfNotSpacedForwardSlash(//XYZ//:object)
+    activate UParser
+    UParser --> Parser
+    deactivate UParser
+    end OPT
 
     Parser -->[ : //XYZ//:object
     deactivate Parser

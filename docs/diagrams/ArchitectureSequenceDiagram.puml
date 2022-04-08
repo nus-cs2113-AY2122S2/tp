@@ -6,7 +6,7 @@ Participant Main #grey
 end box
 box COMMAND_COLOR_T2
 Participant ":CommandFactory" as Commands COMMAND_COLOR
-Participant ":AddPersonCommand" as Commands2 COMMAND_COLOR_T1
+Participant ":AddPerson\nCommand" as Commands2 COMMAND_COLOR_T1
 end box
 box LOGIC_COLOR_T3
 Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
@@ -33,7 +33,7 @@ activate Main
 Main -> Commands : getCommand(\n      "add /g 2\n        /n Alice")
 
 activate Commands
-Commands -> Parser : parseCommandType("add /g 2 /n Alice")
+Commands -> Parser : parseCommandType(\n   "add /g 2 /n Alice")
 activate Parser
 Parser --> Commands : "add":String
 deactivate Parser
@@ -105,6 +105,7 @@ activate UI
 UI --> Main
 deactivate UI
 
+note over Parser2 : Note that saveData()\nis not called during the \n`add` command.\nThis is for visual aid.
 Main -> Storage : saveData(:Family)
 activate Storage
 Storage --> Main
