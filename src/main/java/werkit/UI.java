@@ -549,8 +549,8 @@ public class UI {
      */
     public void printPlanAddExample() {
         System.out.println("\t To create a new plan, enter the following command:");
-        printColorText(TextColor.COLOR_YELLOW, "\t plan /new Grow My Muscles /workouts 1, 2");
-        System.out.println("\t A new plan named " + getColorText(TextColor.COLOR_YELLOW, "Grow My Muscles")
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /new grow my muscles /workouts 1, 2");
+        System.out.println("\t A new plan named " + getColorText(TextColor.COLOR_YELLOW, "grow my muscles")
                 + " with workout index " + getColorText(TextColor.COLOR_YELLOW, "1") + " and "
                 + getColorText(TextColor.COLOR_YELLOW, "2\n")
                 + "\t will be created and added to the application's list of plans.");
@@ -564,7 +564,7 @@ public class UI {
                 + getColorText(TextColor.COLOR_YELLOW, "plan /list") + ", contains the\n \t following plans:");
         printColorText(TextColor.COLOR_YELLOW, "\t 1. arms");
         printColorText(TextColor.COLOR_YELLOW, "\t 2. stronger arms");
-        printColorText(TextColor.COLOR_YELLOW, "\t 3. Grow My Muscles");
+        printColorText(TextColor.COLOR_YELLOW, "\t 3. grow my muscles");
     }
 
     /**
