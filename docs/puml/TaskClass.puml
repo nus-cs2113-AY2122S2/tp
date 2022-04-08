@@ -10,12 +10,14 @@ class Task {
     -byDateTime:LocalDateTime
     -doOnStartDateTime:LocalDateTime
     -doOnEndDateTime:LocalDateTime
-    Task(identifier:Integer, description:String, byDateTime:LocalDateTime,
+    +Task(identifier:Integer, description:String, byDateTime:LocalDateTime,
     doOnStartDate:LocalDateTime, doOnEndDateTime:LocalDateTime)
-    editTask():void
+    +editTask(identifier:Integer, description:String, startDateOffset:long, endDateOffset:long, byDateOffset:long):void
 }
 
 class TaskList {
+    -tasks:ArrayList<Task>
+    -identifierList:HashSet<Integer>
     +getTask(index: Integer):Task
     +addTask(newTask: Task)
     +removeTask():void

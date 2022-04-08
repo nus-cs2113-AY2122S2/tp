@@ -69,18 +69,45 @@ in a `TaskList` object which is created when the program starts.
 operate on.
 
 
-<class diagram of task, tasklist>
+![classdiagram](images/TaskClass.png)
 
 #### Editing tasks
-The edit command is handled by the `EditCommand` class, and it allows users to edit either a single or multiple
-occurrences of a task.
+The edit command is handled by the `EditCommand` class, and it allows users to edit a single occurrence of a task or
+multiple occurrences.
 
 If the edit command contains the `/repeat` option, the specified task
 and all its future occurrence will be edited. 
 
-The sequence diagram of `EditCommand#execute()` is shown here:
-<sequence diagram of editcommand#execute()>
+The general procedure for editing a task with the `/repeat` option is as follows:
+1. Get all tasks that have the same identifier and has a later date than the specified task.
+2. Copy the current task list into a temporary list
+3. Remove all affected tasks from the temporary list
+4. Loop through the affected tasks
+   1. Update the task with the new values
+   2. Check for any clashes with the temporary list
+   3. Add the updated task into the temporary list
+5. Use the temporary list as the actual list
 
+The sequence diagram of `EditCommand#execute()` is shown here:
+![executesequencediagram](images/EditCommandSD.png)
+
+The reference frame for `editRepeatedTasks()` is shown here:
+![editrepeatedtasksequencediagram](images/EditRepeatedTaskSD.png)
+
+The sequence diagram for `editSingleTask()` is not shown as it is a similar but simpler case than editing
+repeated tasks.
+
+##### Using offsets to calculate new dates
+
+The reason why the new dates are calculated using an offset instead of giving an absolute date is because
+of the following scenario.
+
+1. Assume the user has a recurring task happening on 3rd,4th and 5th of May.
+2. The user deletes the task happening on 4th May.
+3. The user edits the task happening on 3rd May to be on 6th May.
+
+If dates are not calculated using offsets and are incremented based on how often it recurs, then the
+result of the edit command will be 6th May and 7th May.
 
 ### Study Session Implementation
 

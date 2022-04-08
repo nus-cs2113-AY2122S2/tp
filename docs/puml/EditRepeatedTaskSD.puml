@@ -5,7 +5,9 @@ hide footbox
 participant TaskList as ":TaskList"
 participant affectedTasks as "affectedTasks:ArrayList<Task>"
 participant tempTasks as "tempTasks:ArrayList<Task>"
-participant tasks as "tasks:ArrayList<Task>"
+participant currentTask as "currentTask:Task"
+participant newTask as "updatedTask:Task"
+participant TaskUtil as "<<class>>\nTaskUtil"
 
 [-> TaskList ++ : editRepeatedTasks()
 TaskList -> TaskList ++ : getAffectedTasks()
@@ -21,9 +23,20 @@ tempTasks --> TaskList --
 TaskList -> tempTasks ++: removeAll(affectedTasks)
 tempTasks --> TaskList --
 
-ref over TaskList : calculate offsets for new dates
+ref over TaskList : get difference between new and old dates
 
 loop foreach task in affectedTasks
-
+    TaskList -> currentTask ++ : clone()
+    create newTask
+    currentTask -> newTask ++
+    newTask --> currentTask --
+    currentTask --> TaskList -- : updatedTask
+    TaskList -> newTask ++ : editTask()
+    newTask --> TaskList --
+    TaskList -> TaskUtil ++ : checkDateTimeClash(tempTasks, updatedTask)
+    TaskUtil --> TaskList --
+    TaskList -> tempTasks ++ : add(updatedTask)
+    tempTasks --> TaskList --
 end
+return
 @enduml

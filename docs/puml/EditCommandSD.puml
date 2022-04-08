@@ -11,9 +11,9 @@ EditCommand -> EditCommand ++: initialiseDate()
 EditCommand --> EditCommand --
 
 alt isRepeating
-   ref over EditCommand, TaskList : edit repeated task
+   ref over EditCommand, TaskList : editRepeatedTasks()
 else else
-   ref over EditCommand, TaskList : edit single task
+   ref over EditCommand, TaskList : editSingleTask()
 end
 
 EditCommand -> Storage ++: writeSavedData()
