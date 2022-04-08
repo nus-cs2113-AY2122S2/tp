@@ -59,9 +59,10 @@ public class CheckCommand extends Command {
      * Pair is a class that was implemented to match each attribute to its value.
      * By using pair, we are able to specify the attribute to be checked.
      * @return Pair of value to be checked and its matching attribute.
-     *
      * @throws NumberFormatException if cost is invalid
      * @throws IllegalArgumentException if EquipmentType is invalid
+     * @throws DateTimeParseException if date is not in YYYY-MM-DD format
+     *
      */
     public Pair<String, ?> generateCheckPair() throws AssertionError, NumberFormatException, IllegalArgumentException,
         DateTimeParseException {
