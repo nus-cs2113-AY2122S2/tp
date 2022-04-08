@@ -484,10 +484,5 @@ public class TaskList {
                 .sorted(Comparator.comparing(Task::getDoOnStartDateTime))
                 .collect(Collectors.toList());
     }
-
-    public void printTaskList(ArrayList<Task> taskList, Ui ui) {
-        for (Task task : taskList) {
-            ui.showToUser(task.toString());
-        }
-    }
+    
 }
