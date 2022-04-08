@@ -219,6 +219,8 @@ type of `Command` will be called to create the appropriate `Command` object and 
 
 #### Logic component
 The logic component is mainly responsible for executing the command.
+In addition, the respective commands will operate on the appropriate data
+structure objects to create, manipulate and delete data based on the user's requests.
 Below is a class diagram of the `Logic` component:
 ![LogicUML](uml/classDiagrams/images/logicComponent.png)
 <span class="box info">:memo: This is a high level overview of the `Logic` component, thus,
@@ -2038,24 +2040,34 @@ The following are some test cases for you to try:
 | Valid plan created | `plan /new first plan /workouts 1,1,1` | A new plan called "first plan" will be created. This plan contains 3 instances of workout with index 1 in the workout list.  |
 
 ##### Negative Test Cases
-
-3. Other incorrect commands to try:<br/>
-   a. `plan /new` (Missing plan name and workouts) <br/>
-   b. `plan /new [plan name]` (Missing workouts)<br/>
-   c. `plan /new /workouts 1,1` (Missing plan name)<br/>
-   d. `plan /new [plan name] /workouts 0,1` (Workout index 0 is invalid) <br/>
-   e. `plan /new rest day /workouts 1,1` (A plan called "rest day" cannot be created) <br/>
-   f. `plan /new [existing plan name] /workouts 1,1` (Plan name must be unique within the application)<br/>
-   g. `plan /new [plan name] /workouts [same order as an existing plan]` (All plans must have a unique workout order)<br/>
-   h. `plan /new [plan name] /workouts X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
-   i. `plan /new [plan name] /workouts [11 ones separated by comma]` (A plan cannot contain more than 10 workouts)
+| Test Cases                                                                                                                                    | Command                                                             | Expected result                                               |
+|:----------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|:--------------------------------------------------------------|
+| Missing plan name and workouts                                                                                                                | `plan /new`                                                         | Error response (Insufficient arguments)                       |
+| Missing workouts                                                                                                                              | `plan /new [plan name]`                                             | Error response (Insufficient arguments)                       |
+| Missing plan name                                                                                                                             | `plan /new /workouts 1,1`                                           | Error response (Invalid plan name)                            |
+| Invalid workout index supplied (Index 0)                                                                                                      | `plan /new [plan name] /workouts 0,1`                               | Error response (Invalid workout index)                        |
+| Reserved plan name "rest day" supplied                                                                                                        | `plan /new rest day /workouts 1,1`                                  | Error response (A plan called "rest day" cannot be created)   |
+| Existing plan name supplied                                                                                                                   | `plan /new [existing plan name] /workouts 1,1`                      | Error response (Duplicate plan name within application)       |
+| Plan has same workout order as an existing plan                                                                                               | `plan /new [plan name] /workouts [same order as an existing plan]`  | Error response (Duplicate workout order)                      |
+| Invalid workout arguments <br/><br/> X could be a word, a negative number or an index that exceeds the number of workouts in the workout list | `plan /new [plan name] /workouts X`                                 | Error response (Invalid argument)                             |
+| Number of workouts exceeds the maximum in a plan                                                                                              | `plan /new [plan name] /workouts [11 ones separated by comma]`      | Error response (Exceeds maximum number of workouts in a plan) |                                                                                         
 
 #### Listing All Plans
-1. Test case: `plan /list` <br/><br/>
-Expected: If plan list is empty, the terminal will display to the user that the plan list is empty.
-Else, all plan names will be listed to the user.<br/><br/>
-2. Test case `plan /list ab`<br/><br/>
-Expected: Nothing is listed because no additional arguments should be supplied for this method
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#list-a-plan-plan-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Cases             | Command      | Expected result                                                                                                                                                                  |
+|:-----------------------|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid listing of plans | `plan /list` | a. If plan list is empty, the terminal will display to the user that the plan list is empty. <br/><br/> b. If plan list is not empty, all plan names will be listed to the user. |
+
+
+##### Negative Test Cases
+| Test Cases                                                            | Command        | Expected result                             |
+|:----------------------------------------------------------------------|:---------------|:--------------------------------------------|
+| Additional argument supplied <br/><br/> X could be a word or a number | `plan /list X` | Error response (Additional arguments found) |
+
 
 #### Listing Workouts In A Plan
 #### Deleting An Existing Plan
