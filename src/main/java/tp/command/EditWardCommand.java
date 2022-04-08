@@ -12,13 +12,16 @@ import tp.PatientStorage;
 import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
-import tp.person.Nurse;
 
-public class SearchNurseCommand extends Command {
-    protected String id;
+public class EditWardCommand extends Command {
+    private int index;
+    private String type;
+    private int newInformation;
 
-    public SearchNurseCommand(String id) {
-        this.id = id;
+    public EditWardCommand(int index, String type, int newInformation) {
+        this.index = index;
+        this.type = type;
+        this.newInformation = newInformation;
     }
 
     @Override
@@ -27,10 +30,14 @@ public class SearchNurseCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Nurse cur = nurseList.searchNurse(id);
-        if (cur == null) {
-            return String.format("There is no nurse with ID: " + id + "\n");
+        if (index <= 0 || index > wardList.getSize()) {
+            throw new IHospitalException("The ward does not exist\n");
         }
-        return String.format("Here's the nurse found: \n" + cur + "\n");
+        if (type.contains("id")) {
+            wardList.getWard(index).editNumber(newInformation);
+            return String.format(boundary + "Updated already!\n" + wardList.getWard(index) + "\n" + boundary);
+        } else {
+            return String.format(boundary + "Ward details are already up to date!\n");
+        }
     }
 }

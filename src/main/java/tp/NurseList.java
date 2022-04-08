@@ -74,10 +74,10 @@ public class NurseList {
         return null;
     }
 
-    public NurseList getNurseListOfWardById(String id) throws IHospitalException {
+    public NurseList getNurseListOfWardById(int id) throws IHospitalException {
         NurseList warNur = new NurseList();
         for (Nurse nurse:nurses) {
-            if (nurse.getWardNumber().equals(id)) {
+            if (nurse.getWardNumber() == id) {
                 warNur.addNurse(nurse);
             }
         }

@@ -12,13 +12,14 @@ import tp.PatientStorage;
 import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
-import tp.person.Nurse;
+import tp.Ward;
 
-public class SearchNurseCommand extends Command {
-    protected String id;
 
-    public SearchNurseCommand(String id) {
-        this.id = id;
+public class DeleteWardCommand extends Command {
+    private final int index;
+
+    public DeleteWardCommand(int index) {
+        this.index = index;
     }
 
     @Override
@@ -27,10 +28,12 @@ public class SearchNurseCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        Nurse cur = nurseList.searchNurse(id);
-        if (cur == null) {
-            return String.format("There is no nurse with ID: " + id + "\n");
+        if (index <= 0 || index > wardList.getSize()) {
+            throw new IHospitalException("The ward does not exist.\n");
         }
-        return String.format("Here's the nurse found: \n" + cur + "\n");
+        Ward cur = wardList.deleteWard(index);
+        return String.format(boundary + "Noted. I've removed this ward:" + cur
+                + "\n" + "Now you have " + wardList.getSize()
+                + " wards in the system." + System.lineSeparator() + boundary);
     }
 }
