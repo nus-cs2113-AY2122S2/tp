@@ -913,7 +913,7 @@ the `plans.txt` file according to the newly modified application's plan list.
 For more information on the file management, 
 refer to this [section](DeveloperGuide.md#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
 
-<br/><br/>
+<br/>
 This completes the process of deleting an existing workout in WerkIt!
 
 ##### Design Considerations for Deleting Existing Workout
