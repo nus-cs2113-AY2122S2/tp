@@ -145,14 +145,14 @@ public class Parser {
             docIndexes[i] = Integer.parseInt(strings[i]);
         }
         s = dummy.substring(patientIndex + 3, nurseIndex).trim();
-        strings=s.replaceAll("\\[","").replaceAll("]","").split(",");
+        strings = s.replaceAll("\\[","").replaceAll("]","").split(",");
         int[] patientIndexes = new int[strings.length];
         for (int i = 0; i < strings.length; i++) {
             patientIndexes[i] = Integer.parseInt(strings[i]);
         }
         int wardIndex = dummy.indexOf("/id");
         s = dummy.substring(nurseIndex + 3,wardIndex).trim();
-        strings=s.replaceAll("\\[","").replaceAll("]","").split(",");
+        strings = s.replaceAll("\\[","").replaceAll("]","").split(",");
         int[] nurseIndexes = new int[strings.length];
         for (int i = 0; i < strings.length; i++) {
             nurseIndexes[i] = Integer.parseInt(strings[i]);

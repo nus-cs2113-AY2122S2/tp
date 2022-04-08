@@ -82,45 +82,23 @@ public class WardStorage {
 
             for (int i = 0; i < n; i++) {
                 data = scanner.nextLine();
-//                String did = scanner.nextLine();
-//                String dname = scanner.nextLine();
-//                String dphoneNumber = scanner.nextLine();
-//                String demail = scanner.nextLine();
-//                String department = scanner.nextLine();
-//                int dwardNumber = Integer.parseInt(scanner.nextLine());
-//                String id = scanner.nextLine();
-//                String name = scanner.nextLine();
-//                String phoneNumber = scanner.nextLine();
-//                String email = scanner.nextLine();
-//                String symptom = scanner.nextLine();
-//                String description = scanner.nextLine();
-//                String nid = scanner.nextLine();
-//                String nname = scanner.nextLine();
-//                String nphoneNumber = scanner.nextLine();
-//                String nemail = scanner.nextLine();
-//                String title = scanner.nextLine();
-//                int wardNumber = Integer.parseInt(scanner.nextLine());
-//                Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
-//                Doctor doctor = new Doctor(did, dname, dphoneNumber, demail, department, dwardNumber);
-//                Nurse nurse = new Nurse(nid, nname, nphoneNumber, nemail, title, wardNumber);
-//                wardNumber = Integer.parseInt(scanner.nextLine());
                 String docs = scanner.nextLine();
-                String[] strings = docs.replaceAll("\\[","").
-                        replaceAll("]","").split(",");
+                String[] strings = docs.replaceAll("\\[","")
+                        .replaceAll("]","").split(",");
                 int [] docIndexes = new int[strings.length];
                 for (int j = 0; j < strings.length; j++) {
                     docIndexes[j] = Integer.parseInt(strings[j]);
                 }
                 String pats = scanner.nextLine();
-                strings = pats.replaceAll("\\[","").
-                        replaceAll("]","").split(",");
+                strings = pats.replaceAll("\\[","")
+                        .replaceAll("]","").split(",");
                 int [] patIndexes = new int[strings.length];
                 for (int j = 0; j < strings.length; j++) {
                     patIndexes[j] = Integer.parseInt(strings[j]);
                 }
                 String nurs = scanner.nextLine();
-                strings = nurs.replaceAll("\\[","").
-                        replaceAll("]","").split(",");
+                strings = nurs.replaceAll("\\[","")
+                                .replaceAll("]","").split(",");
                 int [] nurIndexes = new int[strings.length];
                 for (int j = 0; j < strings.length; j++) {
                     nurIndexes[j] = Integer.parseInt(strings[j]);

@@ -51,7 +51,7 @@ public class Ward {
     public String[] getDoctors(int[] doctorIndexes) {
         String[] docNames = new String[10];
         int j = 0;
-        for(int i = 0; i < 20; i++){
+        for (int i = 0; i < 20; i++) {
             for (int doctorIndex : doctorIndexes) {
                 if (i == doctorIndex) {
                     docNames[j] = Objects.requireNonNull(DoctorList.searchDoctor(Integer.toString(i))).getName();
@@ -64,7 +64,7 @@ public class Ward {
     public String[] getPatients(int[] patientIndexes) {
         String[] patientNames = new String[10];
         int j = 0;
-        for(int i = 0; i < 20; i++){
+        for (int i = 0; i < 20; i++) {
             for (int patientIndex : patientIndexes) {
                 if (i == patientIndex) {
                     patientNames[j] = Objects.requireNonNull(PatientList.searchPatient(Integer.toString(i))).getName();
@@ -77,7 +77,7 @@ public class Ward {
     public String[] getNurses(int[] nurseIndexes) {
         String[] nurseNames = new String[10];
         int j = 0;
-        for(int i = 0; i < 20; i++){
+        for (int i = 0; i < 20; i++) {
             for (int nurseIndex : nurseIndexes) {
                 if (i == nurseIndex) {
                     nurseNames[j] = Objects.requireNonNull(NurseList.searchNurse(Integer.toString(i))).getName();

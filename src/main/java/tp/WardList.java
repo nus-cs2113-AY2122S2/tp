@@ -19,9 +19,9 @@ public class WardList {
     /**
      * Adds a ward to ward list.
      *
-     * @param doctor Doctor assigned for this ward.
-     * @param patient Patient coming for this ward.
-     * @param nurse Nurse assigned for this ward.
+     * @param doctorIndexes indexes of Doctors assigned for this ward.
+     * @param patientIndexes indexes of Patients coming for this ward.
+     * @param nurseIndexes indexes of Nurses assigned for this ward.
      */
     public void addWard(int[] doctorIndexes, int[] patientIndexes, int[] nurseIndexes, int number) {
         wards.add(new Ward(doctorIndexes, patientIndexes, nurseIndexes, number));
@@ -54,8 +54,9 @@ public class WardList {
         WardList warDoc = new WardList();
         for (Ward ward : wards) {
             for (int i : ward.getDoctorIndexes()) {
-                if (String.valueOf(i).equals(id))
+                if (String.valueOf(i).equals(id)) {
                     warDoc.addWard(ward);
+                }
             }
         }
         return warDoc;
