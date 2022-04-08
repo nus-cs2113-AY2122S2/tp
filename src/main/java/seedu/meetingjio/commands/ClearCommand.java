@@ -8,6 +8,9 @@ import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
 import java.util.logging.Level;
+
+import static seedu.meetingjio.common.Messages.CLEAR_ALL_CONFIRMATION;
+import static seedu.meetingjio.common.Messages.CLEAR_TIMETABLE_CONFIRMATION;
 import static seedu.meetingjio.parser.Parser.logger;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST_CLEAR;
@@ -107,7 +110,7 @@ public class ClearCommand extends Command {
      * @return user user's string been cleared
      */
     public static String printClearConfirmation(String user) {
-        return user + "'s timetable has been cleared";
+        return user + CLEAR_TIMETABLE_CONFIRMATION;
     }
 
     /**
@@ -115,7 +118,7 @@ public class ClearCommand extends Command {
      *
      */
     public static String printAllClearConfirmation() {
-        return "All records of everyone's timetable has been cleared";
+        return CLEAR_ALL_CONFIRMATION;
     }
 
 }

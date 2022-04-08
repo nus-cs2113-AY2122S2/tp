@@ -68,4 +68,7 @@ public class Messages {
             + MESSAGE_DIVIDER;
 
     public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully";
+    public static final String DELETE_CONFIRMATION = "The following event has been deleted from your timetable:" + "\n";
+    public static final String CLEAR_ALL_CONFIRMATION = "All records of everyone's timetable has been cleared";
+    public static final String CLEAR_TIMETABLE_CONFIRMATION = "'s timetable has been cleared";
 }
