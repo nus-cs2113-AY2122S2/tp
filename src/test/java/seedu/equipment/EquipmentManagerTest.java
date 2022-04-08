@@ -3,6 +3,7 @@ package seedu.equipment;
 import org.junit.jupiter.api.Test;
 import seedu.Pair;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,12 +19,12 @@ public class EquipmentManagerTest {
                 EquipmentType.valueOf("SPEAKER"),
                 1000,
                 "Loud Technologies",
-                "2022-02-23");
+                LocalDate.parse("2022-02-23"));
         ArrayList<Pair<String, ?>> updates = new ArrayList<>();
         updates.add(new Pair<>("itemName", "Speaker A"));
         updates.add(new Pair<>("type", EquipmentType.STAND));
         updates.add(new Pair<>("cost", 2000.0));
-        updates.add(new Pair<>("purchasedDate", "2022-03-17"));
+        updates.add(new Pair<>("purchasedDate", LocalDate.parse("2022-03-17")));
         updates.add(new Pair<>("purchasedFrom", "Louder Technologies"));
         equipmentManager.updateEquipment("S1404115ASF", updates);
         HashMap<String, Equipment> equipments = equipmentManager.getEquipmentList();
@@ -32,7 +33,7 @@ public class EquipmentManagerTest {
                 EquipmentType.valueOf("STAND"),
                 2000,
                 "Louder Technologies",
-                "2022-03-17");
+                LocalDate.parse("2022-03-17"));
         assertEquals(expectedEquipment, equipments.get("S1404115ASF"));
     }
 
@@ -42,7 +43,7 @@ public class EquipmentManagerTest {
         updates.add(new Pair<>("itemName", "Speaker A"));
         updates.add(new Pair<>("type", "STAND"));
         updates.add(new Pair<>("cost", "2000"));
-        updates.add(new Pair<>("purchaseDate", "2022-03-17"));
+        updates.add(new Pair<>("purchaseDate", LocalDate.parse("2022-03-17")));
         updates.add(new Pair<>("purchaseFrom", "Louder Technologies"));
         EquipmentManager equipmentManager = new EquipmentManager();
         assertFalse(equipmentManager.updateEquipment("WRONG SERIAL NUMBER", updates));

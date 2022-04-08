@@ -4,6 +4,7 @@ import seedu.Pair;
 import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -50,36 +51,35 @@ public class CheckCommand extends Command {
      */
     public Pair<String, ?> generateCheckPair() throws AssertionError, NumberFormatException, IllegalArgumentException {
         Pair<String, ?> pair = null;
-
-        for (String s : commandStrings) {
-            int delimiterPos = s.indexOf('/');
-            // the case where delimiterPos = -1 is impossible as
-            // ARGUMENT_FORMAT and ARGUMENT_TRAILING_FORMAT regex requires a '/'
-            assert delimiterPos != -1 : "Each args will need to include minimally a '/' to split arg and value upon";
-            String argType = s.substring(0, delimiterPos);
-            String argValue = s.substring(delimiterPos + 1);
-            switch (argType) {
-            case "n":
-                pair = new Pair<>("itemName", argValue);
-                break;
-            case "pd":
-                pair = new Pair<>("purchasedDate", argValue);
-                break;
-            case "t":
-                pair = new Pair<>("type", EquipmentType.valueOf(argValue.toUpperCase(Locale.ROOT)));
-                break;
-            case "pf":
-                pair = new Pair<>("purchasedFrom", argValue);
-                break;
-            case "c":
-                pair = new Pair<>("cost", Double.valueOf(argValue));
-                break;
-            case "s":
-                pair = new Pair<>("serialNumber", argValue);
-                break;
-            default:
-                System.out.println("`" + argValue + "` not accepted for type " + argType + ": Unrecognised Tag");
-            }
+      
+        String s = commandStrings.get(0);
+        int delimiterPos = s.indexOf('/');
+        // the case where delimiterPos = -1 is impossible as
+        // ARGUMENT_FORMAT and ARGUMENT_TRAILING_FORMAT regex requires a '/'
+        assert delimiterPos != -1 : "Each args will need to include minimally a '/' to split arg and value upon";
+        String argType = s.substring(0, delimiterPos);
+        String argValue = s.substring(delimiterPos + 1);
+        switch (argType) {
+        case "n":
+            pair = new Pair<>("itemName", argValue);
+            break;
+        case "pd":
+            pair = new Pair<>("purchasedDate", LocalDate.parse(argValue));
+            break;
+        case "t":
+            pair = new Pair<>("type", EquipmentType.valueOf(argValue.toUpperCase(Locale.ROOT)));
+            break;
+        case "pf":
+            pair = new Pair<>("purchasedFrom", argValue);
+            break;
+        case "c":
+            pair = new Pair<>("cost", Double.valueOf(argValue));
+            break;
+        case "s":
+            pair = new Pair<>("serialNumber", argValue);
+            break;
+        default:
+            System.out.println("`" + argValue + "` not accepted for type " + argType + ": Unrecognised Tag");
         }
 
         return pair;

@@ -7,6 +7,7 @@ import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.EquipmentManager;
 import seedu.equipment.EquipmentType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -25,7 +26,7 @@ class UpdateCommandTest {
                     EquipmentType.valueOf("SPEAKER"),
                     1000,
                     "Loud Technologies",
-                    "2022-02-23");
+                    LocalDate.parse("2022-02-23"));
         } catch (DuplicateSerialNumberException e) {
             fail();
         }
@@ -58,7 +59,7 @@ class UpdateCommandTest {
         ArrayList<Pair<String, ?>> expectedResult = new ArrayList<>();
         expectedResult.add(new Pair<>("itemName", "Speaker C"));
         expectedResult.add(new Pair<>("cost", 2000.0));
-        expectedResult.add(new Pair<>("purchasedDate", "2022-01-26"));
+        expectedResult.add(new Pair<>("purchasedDate", LocalDate.parse("2022-01-26")));
 
         ArrayList<Pair<String, ?>> actualResult = updateCommand.generateUpdatePairs();
 
