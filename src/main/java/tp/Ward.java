@@ -9,9 +9,7 @@ public class Ward {
     protected Patient patient;
     protected Nurse nurse;
     protected String wardNumber;
-
-
-
+    
     public Ward(Doctor doctor, Patient patient, Nurse nurse, String wardNumber) {
         this.doctor = doctor;
         this.patient = patient;
