@@ -359,4 +359,19 @@ public class Validator {
         }
     }
 
+    public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws HalpmiException {
+        validateNric(dispenseMedicineParameters[0]);
+        if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
+            throw new HalpmiException("Not all medicines in list have both the name of the medicine and the quantity"
+                + "to prescribe!");
+        }
+
+        for (int i = 1; i < dispenseMedicineParameters.length; i += 2) {
+            String medicineName = dispenseMedicineParameters[i];
+            String medicineQuantity = dispenseMedicineParameters[i + 1];
+            validateMedicineName(medicineName);
+            validateQuantity(medicineQuantity);
+        }
+    }
+
 }
