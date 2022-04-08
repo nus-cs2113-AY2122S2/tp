@@ -10,36 +10,37 @@ Participant ":UI" as UI #YellowGreen
 Participant ":Parser" as Parser #Gold
 Participant ":Storage" as Storage #IndianRed
 
-WerkIt -[#Sandybrown]> UI : getUserInput()
+activate WerkIt #Sandybrown
+WerkIt -> UI : getUserInput()
 activate UI #YellowGreen
-UI --[#YellowGreen]> WerkIt : "workout /new sit up /reps 5"
+return "workout /new sit up /reps 5"
 deactivate UI
 
-WerkIt -[#Sandybrown]> Parser : parseUserInput("workout /new sit up /reps 5")
+WerkIt -> Parser : parseUserInput("workout /new sit up /reps 5")
 activate Parser #Gold
 
 create ":Logic" as Logic #LightSkyBlue
-Parser -[#Gold]> Logic : new WorkoutCommand()
+Parser -> Logic : new WorkoutCommand()
 activate Logic #LightSkyBlue
-return #LightSkyBlue :WorkoutCommand
+return :WorkoutCommand
 
-Parser --[#Gold]> WerkIt : :WorkoutCommand
+Parser --> WerkIt : :WorkoutCommand
 deactivate Parser
 
-WerkIt -[#Sandybrown]> Logic : execute()
+WerkIt -> Logic : execute()
 activate Logic #LightSkyBlue
 
-Logic -[#LightSkyBlue]> UI : printNewWorkoutCreatedMessage(newWorkout)
+Logic -> UI : printNewWorkoutCreatedMessage(newWorkout)
 activate UI #YellowGreen
-UI --[#YellowGreen]> Logic
+return
 deactivate UI
 
-Logic -[#LightSkyBlue]> Storage : writeNewWorkoutToFile(newWorkout)
+Logic -> Storage : writeNewWorkoutToFile(newWorkout)
 activate Storage #IndianRed
-Storage --[#IndianRed]> Logic
+return
 deactivate Storage
 
-Logic --[#LightSkyBlue]> WerkIt
+Logic --> WerkIt
 deactivate Logic
 
 @enduml

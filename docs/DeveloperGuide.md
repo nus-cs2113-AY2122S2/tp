@@ -136,6 +136,9 @@ The diagram depicts a scenario where a user attempts to create a workout, `worko
 
 ![Architecture Sequence Diagram](uml/sequenceDiagrams/miscellaneous/images/ArchitectureSequenceDiagram.png)
 
+<span class="box info">:memo: To improve the diagram's readability, 
+some methods or parameters have been omitted.</span>
+
 ### Component Overview
 
 #### Storage Component
