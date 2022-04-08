@@ -545,13 +545,13 @@ object process can be found in
 Next, `WerkIt#startContinuousUserPrompt()` calls on the `execute()` method of the subclass-of-`Command` object to
 perform the user's requested action. If the execution goes smoothly, this completes the user's inputted command.
 This process is repeated until the user enters `exit`, which will terminate the loop, call `UI#printGoodbye()` to
-print a goodbye message to the user, before handing control back to `Main#main` to end the program.
+print a goodbye message to the user, before handing control back to `Main#main()` to end the program.
 
 #### Design Considerations
 * `WerkIt#startContinuousUserPompt()` has a boolean flag `isFirstPrompt`. This flag allows WerkIt to
 print a different prompt each time the application starts up, before defaulting to a different prompt message
 for subsequent prompts.
-   * When the user starts the application, `isFirstPrompt` is set to `true` and thus, the prompt will be
+   * When the user starts the application, `isFirstPrompt` is set to `true` and thus, the prompt will be:
   ```
   ----------------------------------------------------------------------
   Now then, what can I do for you today?
@@ -559,7 +559,7 @@ for subsequent prompts.
   ----------------------------------------------------------------------
   >
   ```
-  * Subsequent prompts in that app's session will be
+  * Subsequent prompts in that app's session will be:
   ```
   ----------------------------------------------------------------------
   What's next?
@@ -618,7 +618,7 @@ since all alternate paths will return an object that is a subclass of the `Comma
 The final step of this section is to invoke the `Command#execute()` method, which will in turn call the
 overridden `execute()` method of the subclass of `Command`.
 - For example, if the user input is `workout /new push up /reps 10`, the created `WorkoutCommand` object is upcasted
-to `Command` when returned to `WerkIt#startContinuousUserInput()`, but when `newCommand.execute()` is called,
+to `Command` when returned to `WerkIt#startContinuousUserInput()`, but when `newCommand#execute()` is called,
 `WorkoutCommand#execute()` is called.
 
 Thereafter, the appropriate procedures are taken to complete the task requested by the user. The various procedures
