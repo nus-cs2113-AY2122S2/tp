@@ -782,8 +782,8 @@ The following sequence diagram illustrates how the `workout /list` command works
 ![ListWorkoutUML](uml/sequenceDiagrams/workouts/images/listWorkout.png)
 <br>
 
-**(Before Step 1)** <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+**(Before Step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
 **(Steps 1)** The command parsed in by the user is `workout /list`, it is a workout command
 and will be executed by calling the `WorkoutCommand#execute()` method.
@@ -1325,8 +1325,8 @@ The following sequence illustrates how the `schedule /update` command works in g
 ![Update Schedule Sequence Diagram](uml/sequenceDiagrams/schedule/images/updateSchedule.png)
 <br><br>
 
-**(Before step 1)** <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+**(Before step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
 **(Step 1)** The program waits for the user's input, which in this case,
 is the schedule `/update <day number> <plan number>` command.
@@ -1417,8 +1417,8 @@ The following sequence illustrates how the `schedule /list` command works in gre
 ![ListSchedule](uml/sequenceDiagrams/schedule/images/listSchedule.png)
 <br><br>
 
-**(Before step 1)** <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+**(Before step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
 **(Step 1 and 2)** The command parsed in by the user is `schedule /list`, it is a schedule command 
 and will be executed by calling the `ScheduleCommand#execute()` method. Since the command action is `list`
@@ -1477,8 +1477,8 @@ The following sequence illustrates how the `schedule /clear` command works in gr
 ![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearSchedule.png) 
 <br><br>
 
-**(Before step 1)** <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+**(Before step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
 **(Step 1)** The program waits for the user's input, which in this case,
 is the `schedule /clear <day number>` command. An example of a valid command would be `schedule \clear 1`. This command entered
@@ -1535,8 +1535,8 @@ The following sequence illustrates how the `schedule /clearall` command works in
 ![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearAllSchedule.png)
 <br><br>
 
-**(Before step 1)** <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+**(Before step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
 **(Step 1)** The program waits for the user's input, which in this case,
 is the `schedule /clearall` command. This command entered by the user is a schedule command, 
