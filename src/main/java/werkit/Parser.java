@@ -10,7 +10,6 @@ import commands.SearchCommand;
 import commands.PlanCommand;
 import commands.ScheduleCommand;
 import data.exercises.ExerciseList;
-import data.plans.Plan;
 import data.plans.PlanList;
 import data.schedule.DayList;
 import data.workouts.WorkoutList;
@@ -20,7 +19,7 @@ import storage.LogHandler;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import static commands.PlanCommand.DETAILS_ACTION_KEYWORD;
+import static commands.PlanCommand.ACTION_KEYWORD_DETAILS;
 import static commands.ScheduleCommand.CLEAR_ACTION_KEYWORD;
 import static commands.ScheduleCommand.CLEAR_ALL_ACTION_KEYWORD;
 import static commands.SearchCommand.SEARCH_PLAN_ACTION_KEYWORD;
@@ -137,7 +136,7 @@ public class Parser {
             return createExerciseCommand(userInput);
         case SearchCommand.BASE_KEYWORD:
             return createSearchCommand(userInput);
-        case PlanCommand.BASE_KEYWORD:
+        case PlanCommand.KEYWORD_BASE:
             return createPlanCommand(userInput);
         case ScheduleCommand.BASE_KEYWORD:
             return createScheduleCommand(userInput);
@@ -386,7 +385,7 @@ public class Parser {
                         InvalidCommandException.INVALID_PLAN_LIST_COMMAND_ERROR_MSG);
             }
             break;
-        case DETAILS_ACTION_KEYWORD:
+        case ACTION_KEYWORD_DETAILS:
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid plan details command action.");
                 throw new InvalidCommandException(className,

@@ -15,12 +15,12 @@ import java.util.logging.Logger;
  * A class that will handle the commands relating to plan.
  */
 public class PlanCommand extends Command {
-    public static final String BASE_KEYWORD = "plan";
-    public static final String CREATE_ACTION_KEYWORD = "/new";
-    public static final String CREATE_ACTION_WORKOUTS_KEYWORD = "/workouts";
-    public static final String LIST_ACTION_KEYWORD = "/list";
-    public static final String DETAILS_ACTION_KEYWORD = "/details";
-    public static final String DELETE_ACTION_KEYWORD = "/delete";
+    public static final String KEYWORD_BASE = "plan";
+    public static final String ACTION_KEYWORD_CREATE = "/new";
+    public static final String ACTION_KEYWORD_CREATE_WORKOUTS = "/workouts";
+    public static final String ACTION_KEYWORD_LIST = "/list";
+    public static final String ACTION_KEYWORD_DETAILS = "/details";
+    public static final String ACTION_KEYWORD_DELETE = "/delete";
 
     private FileManager fileManager;
     private UI ui = new UI();
@@ -98,13 +98,13 @@ public class PlanCommand extends Command {
      */
     public void setUserAction(String userAction) throws InvalidCommandException {
         switch (userAction) {
-        case CREATE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_CREATE:
             //Fallthrough
-        case LIST_ACTION_KEYWORD:
+        case ACTION_KEYWORD_LIST:
             //Fallthrough
-        case DELETE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_DELETE:
             //Fallthrough
-        case DETAILS_ACTION_KEYWORD:
+        case ACTION_KEYWORD_DETAILS:
             this.userAction = userAction;
             break;
         default:
@@ -131,18 +131,18 @@ public class PlanCommand extends Command {
     public void execute() {
         try {
             switch (getUserAction()) {
-            case CREATE_ACTION_KEYWORD:
+            case ACTION_KEYWORD_CREATE:
                 Plan newPlan = getPlanList().createAndAddPlan(getUserArguments());
                 getUI().printNewPlanCreatedMessage(newPlan);
                 getFileManager().writeNewPlanToFile(newPlan);
                 break;
-            case LIST_ACTION_KEYWORD:
+            case ACTION_KEYWORD_LIST:
                 getPlanList().listAllPlan();
                 break;
-            case DETAILS_ACTION_KEYWORD:
+            case ACTION_KEYWORD_DETAILS:
                 getPlanList().listPlanDetails(getUserArguments(), ui);
                 break;
-            case DELETE_ACTION_KEYWORD:
+            case ACTION_KEYWORD_DELETE:
                 Plan deletedPlan = getPlanList().deletePlan(getUserArguments());
                 getUI().printDeletePlanMessage(deletedPlan);
                 getFileManager().rewriteAllPlansToFile(getPlanList());

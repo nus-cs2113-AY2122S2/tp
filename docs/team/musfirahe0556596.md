@@ -95,7 +95,8 @@ assigning them to their respective milestone (if team members forget to do these
 - Helped in release management of WerkIt! (for v1.0 and v2.0)
 - Participated and helped to fix general bugs with the team. 
 An example is the following [PR](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/44), whereby
-codes to handle empty workout descriptor errors are added.
+codes to handle empty workout descriptor errors are added. 
+Additionally, this [PR](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/293), whereby constants are renamed properly to maintain coding quality.
 
 ### Review/Mentoring Contributions
 - Constantly reviewed and gave feedbacks to team members' pull requests.
