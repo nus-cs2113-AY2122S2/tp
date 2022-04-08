@@ -88,8 +88,9 @@ The following Sequence Diagram shows a high-level view on how the components int
 Each of the components are defined and implemented as a class with the same name. The section below provides 
 more in-depth details on how the components interact with one another.
 
-Each component may have several other classes underneath it, belonging to the same logical grouping.
-For example, the `Money` component is defined as an abstract class that is extended by `Income` and `Expenditure`.
+Each component may consist of several classes that are working seamlessly together to achieve their intended abstracted 
+representation. For example, the `Money` component contains an abstract class that is extended by `Income` and 
+`Expenditure` to represent the types of money that can be managed.
 
 ### UI Component
 
