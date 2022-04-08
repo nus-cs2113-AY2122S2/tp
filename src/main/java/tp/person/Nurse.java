@@ -39,7 +39,7 @@ public class Nurse extends Person {
 
     @Override
     public String toString() {
-        return "* NURSE " + super.toString() + " || TITLE: " + title + " || WardNumber: " + wardNumber;
+        return "* NURSE " + super.toString() + " || TITLE: " + title + " || Ward: " + wardNumber;
     }
 
 }
