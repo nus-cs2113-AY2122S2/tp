@@ -239,6 +239,7 @@ public class Parser {
         } else {
             throw new IHospitalException("Invalid delete command.\n");
         }
+        return null;
     }
 
     public Command parseSearchCommand(String fullCommand) throws IHospitalException {
