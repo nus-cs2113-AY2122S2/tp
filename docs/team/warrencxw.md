@@ -47,8 +47,13 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
    * Allow the use of up to two decimal points to support potential changes and variability in charges.
 
 #### Testing
- * Added comprehensive JUnit tests for `Parser`, `ParserUtils` and `Session` classes
- * Added JUnit tests for `SessionSummaryCommandParser` and `HelpCommandParser` classes
+ * Added comprehensive JUnit tests for
+   [`Parser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/ParserTest.java),
+   [`ParserUtils`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/ParserUtilsTest.java) and 
+   [`Session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/data/SessionTest.java) classes
+ * Added JUnit tests for
+   [`SessionSummaryCommandParser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionSummaryCommandParserTest.java) and 
+   [`HelpCommandParser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/HelpCommandParserTest.java) classes
 
 ### Documentation Contributions
 Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=warrencxw&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
