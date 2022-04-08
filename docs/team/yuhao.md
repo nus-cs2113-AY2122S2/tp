@@ -27,7 +27,7 @@ Code contribution can be found [here](https://nus-cs2113-ay2122s2.github.io/tp-d
 
 ### Review/mentoring contributions
 * Pull requests reviewed (only listed those with significant comments/discussion):
-  1.[Reviewed implementation of Equipment related classes](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/29)
+  1. [Reviewed implementation of Equipment related classes](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/29)
   2. [Reviewed implementation of Parser](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/31)
   3. [Reviewed Storage implementation](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/53)
   4. [Reviewed usage of Pair class in EquipmentManager](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/63)
