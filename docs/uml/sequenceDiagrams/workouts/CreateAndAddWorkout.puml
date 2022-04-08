@@ -22,7 +22,7 @@ the exercise name and repetition count.
 end
 
 ref over wl
-Check the validity user input and
+Check the validity of user input and
 throw exceptions if checking fails.
 (Method calls not shown)
 end

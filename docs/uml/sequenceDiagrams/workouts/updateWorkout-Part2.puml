@@ -7,10 +7,10 @@ autonumber 4.1
 title Sequence Diagram of `WorkoutList#updateWorkout()`
 hide footbox
 
-participant "workoutList\n:WorkoutList" AS wl
-participant "updatedWorkout\n:Workout" AS workout
+participant "workoutList\n:WorkoutList" AS wl COLOR_LOGIC
+participant "updatedWorkout\n:Workout" AS workout COLOR_LOGIC
 
-activate wl
+activate wl COLOR_LOGIC
 
 ref over wl
 Parse the user input to obtain the workout
@@ -25,15 +25,15 @@ throw exceptions if checking fails.
 end
 
 wl -> wl : getWorkoutFromIndexNum(indexToUpdate)
-activate wl
+activate wl COLOR_LOGIC
 return updatedWorkout:Workout
 
 wl --> workout : setRepetitions(newRepsValue)
-activate workout
+activate workout COLOR_LOGIC
 return
 
 wl -> wl : updateWorkoutsHashMapList(oldWorkoutKey, updatedWorkout)
-activate wl
+activate wl COLOR_LOGIC
 return
 
 @enduml
