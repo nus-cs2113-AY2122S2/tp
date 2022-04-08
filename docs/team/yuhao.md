@@ -27,11 +27,11 @@ Code contribution can be found [here](https://nus-cs2113-ay2122s2.github.io/tp-d
 
 ### Review/mentoring contributions
 * Pull requests reviewed (only listed those with significant comments/discussion):
- - [Reviewed implementation of Equipment related classes](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/29)
- - [Reviewed implementation of Parser](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/31)
- - [Reviewed Storage implementation](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/53)
- - [Reviewed usage of Pair class in EquipmentManager](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/63)
- - [Reviewed implementation of Date format](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/124)
+  1.[Reviewed implementation of Equipment related classes](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/29)
+  2. [Reviewed implementation of Parser](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/31)
+  3. [Reviewed Storage implementation](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/53)
+  4. [Reviewed usage of Pair class in EquipmentManager](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/63)
+  5. [Reviewed implementation of Date format](https://github.com/AY2122S2-CS2113-F12-2/tp/pull/124)
 
 ### Contributions beyond the project team
 * Filed bug reports for another team [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/issues/101) and [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/issues/109)
