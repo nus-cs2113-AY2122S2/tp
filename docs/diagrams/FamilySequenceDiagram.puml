@@ -1,11 +1,21 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam arrowColor #BLACK
+skinparam noteTextAlignment left
 
-autonumber
+Title: Family component command handling
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+participant ":XYZCommand" as Command COMMAND_COLOR
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
-@enduml
+box
+participant ":Family" as Family MODEL_COLOR
+participant "parents:PersonList" as Parents MODEL_COLOR_T1
+participant "myGen:PersonList" as MyGen MODEL_COLOR_T1
+participant "children:PersonList" as Children MODEL_COLOR_T1
+participant "Alice:Person" as Person MODEL_COLOR_T2
+end box
+
+participant ":System" as System LOGIC_COLOR
+participant ":MoneyList" as Money MONEY_COLOR
+participant ":UI" as UI UI_COLOR
+
