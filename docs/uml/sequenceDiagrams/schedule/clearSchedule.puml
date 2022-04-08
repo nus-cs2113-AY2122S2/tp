@@ -3,52 +3,51 @@
 !include ../../Style.puml
 
 autonumber
+hide footbox
 
 title Sequence Diagram of `schedule /clear` Command
 
-actor   User
-participant "werkIt:WerkIt" AS WerkIt
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:ScheduleCommand" AS newCommand COLOR_LOGIC
+participant "dayList\n:DayList" AS DayList COLOR_LOGIC
+participant "ui:UI" As UI COLOR_UI
 
-participant "newCommand\n:ScheduleCommand" AS newCommand
-participant "dayList\n:DayList" AS DayList
-participant "ui:UI" As UI
-
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 ref over WerkIt
 Obtain and parse user input
 end
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand COLOR_LOGIC
 
 newCommand -> DayList : clearDayPlan(userArgument)
-activate DayList
-create "Integer" AS int
+activate DayList COLOR_LOGIC
+create "Integer" AS int COLOR_LOGIC
 DayList -> int: parseInt(userArgument)
 DayList <-- int : dayNumber: int
 
-create InvalidScheduleException AS ise
+create InvalidScheduleException AS ise COLOR_LOGIC
 opt !isDayValid
 DayList -> ise : throw new InvalidScheduleException
-activate ise
+activate ise COLOR_LOGIC
 return
 deactivate ise
 end
 DayList -> DayList : clearPlan(dayNumber)
-activate DayList
+activate DayList COLOR_LOGIC
 return
 DayList -> DayList : covertDayNumberToDay(dayNumber)
-activate DayList
+activate DayList COLOR_LOGIC
 return dayName:String
 DayList -> UI : printClearedScheduleOnADay(dayName)
 deactivate DayList
-activate UI
-UI--> User: Print successfully remove \nplan from schedule message
+activate UI COLOR_UI
+UI--> WerkIt: Print successfully remove \nplan from schedule message
 deactivate UI
 
-participant "fileManager:FileManager" as FileManager
+participant "fileManager:FileManager" as FileManager COLOR_STORAGE
 newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)
-activate FileManager
+activate FileManager COLOR_STORAGE
 ref over FileManager
 Write the plans scheduled
 for the week into 'schedule.txt'

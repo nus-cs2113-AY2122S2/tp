@@ -132,18 +132,20 @@ The following diagram gives you the general procedure on how to create your work
 * [Search Commands](#search-commands)
 
 <span class="box warning">:warning: **Heads Up!** Due to the design of WerkIt!, commands, `/commandAction`, and
-`<condition>` must be separated by a single whitespace. Excessive whitespaces will not be accepted by the application.
+`<condition>` must be separated by a single whitespace. Excessive whitespaces may not be accepted by the application.
 However, plan names may have more than a single whitespace in between words.<br/><br/>
 **Examples of Incorrect Usage**<br/>
 :x: `workout /new     push up   /reps   1000`<br/>
 :x: `plan    /list`<br/>
-:x: `plan /new Leg Day    /workouts    1, 2, 3`
+:x: `plan   /new leg day    /workouts    1, 2, 3`<br/>
+:x: `schedule    /update    1    1`
 <br/><br/>
 **Examples of Correct Usage**<br/>
 :heavy_check_mark: `workout /new push up /reps 1000`<br/>
 :heavy_check_mark: `plan /list`<br/>
-:heavy_check_mark: `plan /new Leg Day /workouts 1, 2, 3`<br/>
-:heavy_check_mark: `plan /new Leg     Day /workouts 1, 2, 3`
+:heavy_check_mark: `plan /new leg day /workouts 1, 2, 3`<br/>
+:heavy_check_mark: `plan /new leg     day /workouts 1, 2, 3`<br/>
+:heavy_check_mark: `schedule /update 1 1`
 </span>
 
 #### Workout Commands

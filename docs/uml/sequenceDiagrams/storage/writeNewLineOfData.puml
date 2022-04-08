@@ -6,14 +6,14 @@ hide footbox
 
 autonumber
 
-participant "workoutCommand\n:WorkoutCommand" as WorkoutCommand
-participant "fileManager\n:FileManager" as FileManager
+participant "workoutCommand\n:WorkoutCommand" as WorkoutCommand COLOR_LOGIC
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
 
-activate WorkoutCommand
+activate WorkoutCommand COLOR_LOGIC
 WorkoutCommand -> FileManager : writeNewWorkoutToFile(newWorkout)
-activate FileManager
+activate FileManager COLOR_STORAGE
 FileManager -> FileManager : convertWorkoutToFileDataFormat(newWorkout)
-activate FileManager
+activate FileManager COLOR_STORAGE
 return workoutInFileFormat:String
 
 ref over FileManager

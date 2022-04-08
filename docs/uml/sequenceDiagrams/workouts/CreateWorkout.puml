@@ -1,5 +1,4 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 !include ../../Style.puml
 
 autonumber
@@ -7,22 +6,22 @@ autonumber
 title Sequence Diagram of `workout /new` Command
 hide footbox
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "newCommand\n:WorkoutCommand" AS newCommand
-participant "ui:UI" as UI
-participant "workoutList\n:WorkoutList" AS WorkoutList
-participant "fileManager:FileManager" as FileManager
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:WorkoutCommand" AS newCommand COLOR_LOGIC
+participant "ui:UI" as UI COLOR_UI
+participant "workoutList\n:WorkoutList" AS WorkoutList COLOR_LOGIC
+participant "fileManager:FileManager" as FileManager COLOR_STORAGE
 
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 
 ref over WerkIt
 Obtain and parse user input.
 end
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand COLOR_LOGIC
 newCommand -> WorkoutList : createAndAddWorkout(userArguments)
-activate WorkoutList
+activate WorkoutList COLOR_LOGIC
 ref over WorkoutList
 Create new Workout
 and add it to list.
@@ -31,11 +30,11 @@ newCommand <-- WorkoutList : "newWorkout:Workout"
 deactivate WorkoutList
 
 newCommand -> UI : printNewWorkoutCreatedMessage(newWorkout)
-activate UI
+activate UI COLOR_UI
 return
 
 newCommand -> FileManager : writeNewWorkoutToFile(newWorkout)
-activate FileManager
+activate FileManager COLOR_STORAGE
 ref over FileManager
 Write new Workout data
 into file on user's system.

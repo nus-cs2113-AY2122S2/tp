@@ -218,6 +218,9 @@ type of `Command` will be called to create the appropriate `Command` object and 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
 #### Logic component
+The logic component is mainly responsible for executing the command.
+In addition, the respective commands will operate on the appropriate data
+structure objects to create, manipulate and delete data based on the user's requests.
 Below is a class diagram of the `Logic` component:
 ![LogicUML](uml/classDiagrams/images/logicComponent.png)
 <span class="box info">:memo: This is a high level overview of the `Logic` component, thus,
@@ -782,19 +785,28 @@ The following sequence diagram illustrates how the `workout /list` command works
 ![ListWorkoutUML](uml/sequenceDiagrams/workouts/images/listWorkout.png)
 <br>
 
-(Steps 1 to 3) After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput(userInput)` method to parse the user input.
-Upon parsing of the input, a `WorkoutCommand` object is obtained. This `WorkoutCommand` object is upcasted to a `Command` object on return
-to the `WerkIt` object. It will then execute the workout command by calling the `WorkoutCommand#execute()` method.
+**(Before Step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
-(Steps 4) Since the workout command entered is `workout /list` the `WorkoutList#listAllWorkout()` method will be called 
+**(Steps 1)** The command parsed in by the user is `workout /list`, it is a workout command
+and will be executed by calling the `WorkoutCommand#execute()` method.
+
+**(Steps 2)** Since the command action is `list`, 
+the application will execute the `WorkoutList#listAllWorkout()` method
 to process the command and perform the action of listing the workouts. 
 
-(Steps 5 and 6) To get each of the workouts stored in the workoutList, `WorkoutList#getWorkoutFromIndexNum(index)` method 
+**(Step 3)** If the workout list is empty, a message indicating the list is empty will be displayed to the user and the
+process of printing all workouts stored in the list is completed. 
+
+**(Steps 4 and 5)** To get each of the workouts stored in the workoutList, `WorkoutList#getWorkoutFromIndexNum(index)` method 
 is called to obtain each of the `workout` object. Each `workout` object contains the exercise name as well as the 
 number of repetitions of that exercise set by the user. 
 
-(Steps 7 to 9) Upon obtaining the `workout` object, `Workout#toString()` method is called to formulate and print 
+**(Steps 6 to 8)** Upon obtaining the `workout` object, `Workout#toString()` method is called to formulate and print 
 the workouts which is being displayed on the terminal to the user. 
+
+**(Step 9)** Lastly, a final message to indicate that all workouts in the workout list have been printed will be displayed via 
+the terminal.
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
@@ -1316,10 +1328,10 @@ The following sequence illustrates how the `schedule /update` command works in g
 ![Update Schedule Sequence Diagram](uml/sequenceDiagrams/schedule/images/updateSchedule.png)
 <br><br>
 
-(Before step 1) <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+**(Before step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
-(Step 1) The program waits for the user's input, which in this case,
+**(Step 1)** The program waits for the user's input, which in this case,
 is the schedule `/update <day number> <plan number>` command.
 An example of a valid command would be `schedule /update 1 1`.This command entered
 by the user is a schedule command, hence it is being executed by calling the `ScheduleCommand#execute()` method.
@@ -1328,33 +1340,33 @@ Steps 2 and 3 are explained in greater details in the following sequence diagram
 
 ![updateScheduleDetails](uml/sequenceDiagrams/schedule/images/updateScheduleDetails.png)
 
-(Steps 2.1 to 2.2) The `DayList#updateDay(userArgument)` method will be called to update/add a plan for a particular 
+**(Steps 2.1 to 2.2)** The `DayList#updateDay(userArgument)` method will be called to update/add a plan for a particular 
 day in the schedule stated by the user. It will fist call the `String#split(" ")` method 
 to separate out the `userArgument` given by the user. Upon, splitting of the whitespaces in `userArgument`, 
 it will then check if the `userArgument` is valid. If it is invalid, an 
-`ArrayIndexOutOfBoundsException` would be thrown to the user and following the termination of the process (step 2.3).
+`ArrayIndexOutOfBoundsException` would be thrown to the user and following the termination of the process **(step 2.3)**.
 
-(Steps 2.5 to 2.8) After splitting and checking the validity of `userArgument`, variables `userArgument[0]` representing
+**(Steps 2.5 to 2.8)** After splitting and checking the validity of `userArgument`, variables `userArgument[0]` representing
 `dayNumber` and `userArgument[1]` representing `planNumber`, the plan index of the plan stored in the planList are obtained. Both the 
 variables are then converted from data type string to integer. In addition, there is a check executed on both the converted 
 `dayNumber` and `planNumber` to ensure that they are valid. This check is done so by calling the `DayList#isDayValid(DayNumber)` and
 `DayList#isPlanValid(planNumber)` methods respectively.
 
-(Steps 2.9 and 2.11) If the `dayNumber` or `planNumber` is not valid, an `InvalidScheduleException` would be thrown to the user,
+**(Steps 2.9 and 2.11)** If the `dayNumber` or `planNumber` is not valid, an `InvalidScheduleException` would be thrown to the user,
 and the entire process of updating of a plan for a particular day in the schedule is aborted.
 
-(Steps 2.13 and 2.14) `PlanList#getPlanDisplayList()` method is called to find and return the hash value of the `planNumber`, 
+**(Steps 2.13 and 2.14)** `PlanList#getPlanDisplayList()` method is called to find and return the hash value of the `planNumber`, 
 `planToAddKey:String` to be scheduled for a particular day. The `planToAddKey` is used to get the `plan` object in the 
-planList by calling the `PlanList#getPlanFromKey` (steps 2.15 to 2.16).
+planList by calling the `PlanList#getPlanFromKey` **(steps 2.15 to 2.16)**.
 
-(Steps 2.17 to 2.18) Once the `Plan` object is retrieved, if there are no plan being scheduled for the day, 
+**(Steps 2.17 to 2.18)** Once the `Plan` object is retrieved, if there are no plan being scheduled for the day, 
 a new `Day` object is created and stored in the application.
 
-(Steps 2.19 to 2.20) However, if there is an existing plan scheduled for that particular day, the `Day` object that 
+**(Steps 2.19 to 2.20)** However, if there is an existing plan scheduled for that particular day, the `Day` object that 
 has already been created, will then be updated to store the latest plan scheduled for the day. This process is done so by
 calling `Day#setNewPlanForThisDay(newDay, planToAdd)` method.
 
-(Steps 4 and 5) After successfully creating/updating the Day object, the `UI#printNewSchedule(newDay)` method
+**(Steps 4 and 5)** After successfully creating/updating the Day object, the `UI#printNewSchedule(newDay)` method
 will be called to display the day and the corresponding plan scheduled for it via the terminal. The following is an
 example of the message after the user has successfully scheduled a plan for the day (e.g. `schedule /update 1 1`):
 ```
@@ -1365,7 +1377,7 @@ Monday -- arms
 
 ----------------------------------------------------------------------
 ```
-(Step 6) Lastly, before the `ScheduleCommand` object is discarded, the `FileManager#rewriteAllDaysScheduleToFile(dayList)`
+**(Step 6)** Lastly, before the `ScheduleCommand` object is discarded, the `FileManager#rewriteAllDaysScheduleToFile(dayList)`
 is called to rewrite the `schedule.txt` file according to the newly modified application's day list. For more information
 on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
 
@@ -1408,21 +1420,21 @@ The following sequence illustrates how the `schedule /list` command works in gre
 ![ListSchedule](uml/sequenceDiagrams/schedule/images/listSchedule.png)
 <br><br>
 
-(Before step 1) <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+**(Before step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
-(Step 1 and 2) The command parsed in by the user is `schedule /list`, it is a schedule command 
+**(Step 1 and 2)** The command parsed in by the user is `schedule /list`, it is a schedule command 
 and will be executed by calling the `ScheduleCommand#execute()` method. Since the command action is `list`
 the application will execute the `DayList#printSchedule()` method.
 No parameters are needed to be passed in the method as the method loop through the scheduleList, which stores all the plan names
 scheduled for the individual days.
 
-(Steps 3 and 4) To ensure the printing of the schedule is formatted properly with a common standard, when `DayList#printSchedule()`
+**(Steps 3 and 4)** To ensure the printing of the schedule is formatted properly with a common standard, when `DayList#printSchedule()`
 method is called, it will invoke a for loop to pad the plan name with whitespaces for all the plans in the scheduleList 
 by calling the `DayList#padWithSpaces(planForDay)` method. This method will pad both the front and back of the
 plan name with whitespaces. Total characters that the padding and the plan name combined should not exceed 30 characters.
 
-(Step 5) Upon the successful execution of the `DayList#printSchedule()` method, the plan scheduled on each of the day
+**(Step 5)** Upon the successful execution of the `DayList#printSchedule()` method, the plan scheduled on each of the day
 will be display on the console to the user. An expected outcome of the `schedule /list` command would be:
 
 ```
@@ -1468,30 +1480,30 @@ The following sequence illustrates how the `schedule /clear` command works in gr
 ![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearSchedule.png) 
 <br><br>
 
-(Before step 1) <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+**(Before step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
-(Steps 1) The program waits for the user's input, which in this case,
+**(Step 1)** The program waits for the user's input, which in this case,
 is the `schedule /clear <day number>` command. An example of a valid command would be `schedule \clear 1`. This command entered
 by the user is a schedule command, hence it is being executed by calling the `ScheduleCommand#execute()` method.
 
-(Step 2) Since the command entered is `schedule /clear <day number>`, the `DayList#clearDayPlan(userArgument)` method will
-be called. This method will first convert the userArgument to an Integer data type (steps 3 and 4), after which it will call
+**(Step 2)** Since the command entered is `schedule /clear <day number>`, the `DayList#clearDayPlan(userArgument)` method will
+be called. This method will first convert the userArgument to an Integer data type **(steps 3 and 4)**, after which it will call
 the `DayList#isDayValid(dayNumber)` method to check whether the day number entered by the user is valid. 
 If the day number falls within the range of 1 to 7 then it is considered a valid day else 
 an `InvalidScheduleException` would be thrown to the user, and the entire clearing of plan for a 
-particular day in the schedule process is aborted (steps 5 and 6).
+particular day in the schedule process is aborted **(steps 5 and 6)**.
 
-(Steps 7 and 8) If the `dayNumber` is valid, the method `DayList#clearPlan(dayNumber)` will be called to remove the plan 
+**(Steps 7 and 8)** If the `dayNumber` is valid, the method `DayList#clearPlan(dayNumber)` will be called to remove the plan 
 scheduled on that day. The `Day` object that stores the plan details for the specified day in 
 the user command will be deleted.
 
-(Steps 9 and 10) After which, the `DayList#convertDayNumberToDay(dayNumber)` method will be called.
+**(Steps 9 and 10)** After which, the `DayList#convertDayNumberToDay(dayNumber)` method will be called.
 As the method name suggests, this method will convert the day number to its corresponding meaning. 
 For example, day number 1 will be converted to Monday. The purpose of this method is to 
 make the success message to be displayed to the user more user-readable.
 
-(Step 11 and 12) After the plan is successfully cleared for that indicated day, a success message of the process would be
+**(Steps 11 and 12)** After the plan is successfully cleared for that indicated day, a success message of the process would be
 printed to the user through the terminal by calling the `UI#printClearedScheduleOnADay` method. 
 An example of a success message would be
 
@@ -1501,10 +1513,9 @@ Plan had been cleared for Monday.
 ----------------------------------------------------------------------
 ```
 
-(Step 13) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
+**(Step 13)** `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
 in the dayList into `schedule.txt` which is stored on the user's local filesystem. For more information
 on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
-
 
 This completes the process of clearing a plan on a particular day of the schedule on WerkIt!
 
@@ -1527,20 +1538,20 @@ The following sequence illustrates how the `schedule /clearall` command works in
 ![ClearSchedule](uml/sequenceDiagrams/schedule/images/clearAllSchedule.png)
 <br><br>
 
-(Before step 1) <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
-["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+**(Before step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
-(Step 1) The program waits for the user's input, which in this case,
+**(Step 1)** The program waits for the user's input, which in this case,
 is the `schedule /clearall` command. This command entered by the user is a schedule command, 
 hence it is being executed by calling the `ScheduleCommand#execute()` method.
 
-(Step 2) Since the command entered is `schedule /clearall`, the `DayList#clearAllSchedule()` method will
+**(Step 2)** Since the command entered is `schedule /clearall`, the `DayList#clearAllSchedule()` method will
 be called. This method will delete all the `Day` objects stored in the `dayList` using a for loop. 
 
-(Step 3 and 4) `DayList#clearPlan(dayNumber)` will be called 7 times in a for loop to 
+**(Step 3 and 4)** `DayList#clearPlan(dayNumber)` will be called 7 times in a for loop to 
 delete all the `Day` objects stored in the `dayList`.
 
-(Steps 5 and 6) After all the plans are successfully cleared from the schedule, `UI#printClearedScheduleMessage()` method 
+**(Steps 5 and 6)** After all the plans are successfully cleared from the schedule, `UI#printClearedScheduleMessage()` method 
 will be called to print a success message of the process. This message would be printed to the user through the terminal. 
 An example of a success message would be
 
@@ -1553,7 +1564,7 @@ schedule /update <day number [1-7]> <plan number>
 ----------------------------------------------------------------------
 ```
 
-(Step 7) Lastly, `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
+**(Step 7)** Lastly, `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
 in the dayList into `schedule.txt` which is stored on the user's local filesystem. 
 Since all Day objects are deleted, the writing of data into `schedule.txt` would be an equivalent of 
 resetting the text file. For more information on the file management, 
@@ -1688,7 +1699,7 @@ irrelevant to the loading of `workouts.txt` or they do not add significant value
 bar of `WerkIt`, the `Main` object needs to be shown in the sequence diagram. Apologies for the inconvenience caused.</span>
 
 <span class="info box">:memo: The procedures for reading and loading the data for exericse, plan, and schedule data sets are 
-largely similar to the above sequence diagram.</span>
+largely similar to the above sequence diagram. Thus, sequence diagrams for these data sets are not shown.</span>
 
 **(Steps 1 to 3)** When the `WerkIt` object is instantiated, in the constructor, `WerkIt#loadRequiredDirectoryAndFiles()`
 is called. This method is responsible for checking if the necessary resource files and directories are present. In this
@@ -1738,7 +1749,7 @@ command:
 ![Write New Line Of Data](uml/sequenceDiagrams/storage/images/writeNewLineOfData.png)
 
 <span class="info box">:memo: The procedure for writing a new line of data when the user creates a new plan is largely 
-similar to the above sequence diagram.</span>
+similar to the above sequence diagram. Thus, sequence diagrams for these data sets are not shown.</span>
 
 **(Step 1)** After a new workout has been created, the `WorkoutCommand` object calls `FileManager#writeNewWorkoutToFile()`,
 passing the newly created `Workout` object as the argument.
@@ -1941,6 +1952,8 @@ are running this application on a 64-bit operating system and with a minimum of 
 #### Performance Requirements 
 Each command entered by the user should respond within two seconds.
 
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+
 ---
 ## Glossary
 
@@ -1973,14 +1986,23 @@ of their schedule. For instance, the user's daily schedule can look like this:
 | Sunday    | rest day       |
 
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 This section includes instructions to test WerkIt! manually.
 <br/>
 <span class = "info box">:memo: These test instructions covers the basic testing of the WerkIt! features. 
-Testers are expected to do more testing.
+Testers are welcome conduct more extensive and rigorous testing.
 </span>
 
-### Launch and shutdown
+### Overview
+- [Launch and Shutdown](#launch-and-shutdown)
+- [Test on Exercise Features](#test-on-exercise-features)
+- [Test on Workout Features](#test-on-workout-features)
+- [Test on Plan Features](#test-on-plan-features)
+- [Test on Schedule Features](#test-on-schedule-features)
+- [Test on Search Features](#test-on-search-features)
+- [Test on Data Saving](#test-on-data-saving)
+
+### Launch and Shutdown
 #### Initial Launch
 1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases/tag/Jar-V2.0) and copy it into an empty folder.
 2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
@@ -1991,65 +2013,211 @@ Testers are expected to do more testing.
 #### Shutdown
 1. Enter the `exit` command to exit WerkIt!
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+---
+
 ### Test on Exercise Features
 #### Listing All Exercises
 
+---
+
 ### Test on Workout Features
 #### Creating A New Workout
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#create-a-workout-workout-new).)
+
+**Prerequisites: ** Ensure that your list of exercises is populated with at least one exercise for you to test the
+`workout` command on.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                                                  | Command                               | Expected result                    |
+|:-----------------------------------------------------------|:--------------------------------------|:-----------------------------------|
+| Valid exercise name and repetition value.                  | `workout /new russian twist /reps 20` | New workout is added successfully. |
+| Valid exercise name and highest possible repetition value. | `workout /new sit up /reps 2147483647` | New workout is added successfully. |
+
+##### Negative Test Cases
+| Test Case                                                                              | Command                                       | Expected result                                                |
+|:---------------------------------------------------------------------------------------|:----------------------------------------------|:---------------------------------------------------------------|
+| Valid exercise name and repetition value that exceeds upper bound for `int` data type. | `workout /new russian twist /reps 2147483648` | Error response (invalid user argument), workout not added.     |
+| Valid exercise name and repetition value that is 0.                                    | `workout /new push up /reps 0`                | Error response (reps specified is invalid), workout not added. |
+| Exercise name that does not exist in the list of exercises and valid repetition value. | `workout /new somersault /reps 20` | Error response (exercise name does not exist), workout not added. |
+
 #### Listing All Workouts
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#show-all-workouts-workout-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                   | Command         | Expected result                                |
+|:----------------------------|:----------------|:-----------------------------------------------|
+| Valid list workout command. | `workout /list` | List down all workouts stored in workout list. |
+
+##### Negative Test Cases
+| Test Case                                     | Command                   | Expected result                                                 |
+|:----------------------------------------------|:--------------------------|:----------------------------------------------------------------|
+| Valid list command with extra arguments.      | `workout /list extraline` | Error response (invalid user argument), workouts not displayed. |
+| Extra whitespaces between commands arguments. | `workout         /list`   | Error response (invalid user action), schedule not displayed.   |
 
 #### Deleting An Existing Workout
-1. Prerequisites: Workout list should be populated with
-workout(s) before an existing workout can be deleted. 
-See [this section](#creating-a-new-workout) to view how you can populate your workout list. 
-2. User can enter `workout /list` to see the workout list before the deletion occurs. This is for comparison purposes.
-3. Test case: `workout /delete 1`<br/><br/>
-Expected: The first workout is deleted from the workout list. Details of the deleted workout will be shown 
-to the terminal.<br/><br/>
-Addition: If you have any existing plans containing the deleted workout, that plan
-will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list
-if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are
-affected by the deletion of this workout will display their delete messages accordingly.<br/><br/>
-4. Other incorrect commands to try:<br/>
-   a. `workout /delete` (Missing workout index to delete)<br/>
-   b. `workout /delete 0` (Index 0 is invalid) <br/>
-   c. `workout /delete X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-workout-workout-delete).)
+
+**Prerequisites:** Ensure that your workout list is populated with at least one
+workout for you to test the `workout` command on. 
+See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                  | Command             | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|:---------------------------|:--------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid workout to delete    | `workout /delete 1` | The first workout is deleted from the workout list. Details of the deleted workout will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the deleted workout, that plan will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are affected by the deletion of this workout will display their delete messages accordingly. |
+
+##### Negative Test Cases
+| Test Case                                                                                                                                                  | Command             | Expected result                         |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------|:----------------------------------------|
+| Missing workout index to delete                                                                                                                            | `workout /delete`   | Error response (Insufficient arguments) |
+| Invalid argument supplied. <br/><br/>X could be a word, a negative number or an index that does not fall within the range of workouts in the workout list. | `workout /delete X` | Error response (Invalid user argument)  |
+
 
 #### Updating An Existing Workout
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+
+---
+
 ### Test on Plan Features
 #### Creating A New Plan 
-1. Prerequisites: The workout list should be populated before a new plan can be created as
-plans contains workout(s). See [this section](#creating-a-new-workout) to view how you can populate your workout list.
-2. Test case: `plan /new first plan /workouts 1,1,1`<br/><br/>
-Expected: A new plan called "first plan" will be created. This plan contains 3 instances of 
-workout with index 1 in the workout list.<br/><br/>
-3. Other incorrect commands to try:<br/>
-   a. `plan /new` (Missing plan name and workouts) <br/>
-   b. `plan /new [plan name]` (Missing workouts)<br/>
-   c. `plan /new /workouts 1,1` (Missing plan name)<br/>
-   d. `plan /new [plan name] /workouts 0,1` (Workout index 0 is invalid) <br/>
-   e. `plan /new rest day /workouts 1,1` (A plan called "rest day" cannot be created) <br/>
-   f. `plan /new [existing plan name] /workouts 1,1` (Plan name must be unique within the application)<br/>
-   g. `plan /new [plan name] /workouts [same order as an existing plan]` (All plans must have a unique workout order)<br/>
-   h. `plan /new [plan name] /workouts X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
-   i. `plan /new [plan name] /workouts [11 ones separated by comma]` (A plan cannot contain more than 10 workouts)
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#create-a-plan-plan-new).)
+
+**Prerequisites:** Ensure that your workout list is populated with at least one
+workout before a new plan can be created as plans contains workout(s).
+See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Cases         | Command                                | Expected result                                                                                                              |
+|:-------------------|:---------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------|
+| Valid plan created | `plan /new first plan /workouts 1,1,1` | A new plan called "first plan" will be created. This plan contains 3 instances of workout with index 1 in the workout list.  |
+
+##### Negative Test Cases
+| Test Cases                                                                                                                                    | Command                                                             | Expected result                                               |
+|:----------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|:--------------------------------------------------------------|
+| Missing plan name and workouts                                                                                                                | `plan /new`                                                         | Error response (Insufficient arguments)                       |
+| Missing workouts                                                                                                                              | `plan /new [plan name]`                                             | Error response (Insufficient arguments)                       |
+| Missing plan name                                                                                                                             | `plan /new /workouts 1,1`                                           | Error response (Invalid plan name)                            |
+| Invalid workout index supplied (Index 0)                                                                                                      | `plan /new [plan name] /workouts 0,1`                               | Error response (Invalid workout index)                        |
+| Reserved plan name "rest day" supplied                                                                                                        | `plan /new rest day /workouts 1,1`                                  | Error response (A plan called "rest day" cannot be created)   |
+| Existing plan name supplied                                                                                                                   | `plan /new [existing plan name] /workouts 1,1`                      | Error response (Duplicate plan name within application)       |
+| Plan has same workout order as an existing plan                                                                                               | `plan /new [plan name] /workouts [same order as an existing plan]`  | Error response (Duplicate workout order)                      |
+| Invalid workout arguments <br/><br/> X could be a word, a negative number or an index that exceeds the number of workouts in the workout list | `plan /new [plan name] /workouts X`                                 | Error response (Invalid argument)                             |
+| Number of workouts exceeds the maximum in a plan                                                                                              | `plan /new [plan name] /workouts [11 ones separated by comma]`      | Error response (Exceeds maximum number of workouts in a plan) |                                                                                         
 
 #### Listing All Plans
-1. Test case: `plan /list` <br/><br/>
-Expected: If plan list is empty, the terminal will display to the user that the plan list is empty.
-Else, all plan names will be listed to the user.<br/><br/>
-2. Test case `plan /list ab`<br/><br/>
-Expected: Nothing is listed because no additional arguments should be supplied for this method
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#list-a-plan-plan-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Cases             | Command      | Expected result                                                                                                                                                                  |
+|:-----------------------|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid listing of plans | `plan /list` | a. If plan list is empty, the terminal will display to the user that the plan list is empty. <br/><br/> b. If plan list is not empty, all plan names will be listed to the user. |
+
+
+##### Negative Test Cases
+| Test Cases                                                            | Command        | Expected result                             |
+|:----------------------------------------------------------------------|:---------------|:--------------------------------------------|
+| Additional argument supplied <br/><br/> X could be a word or a number | `plan /list X` | Error response (Additional arguments found) |
+
 
 #### Listing Workouts In A Plan
 #### Deleting An Existing Plan
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+---
+
 ### Test on Schedule Features
 #### Updating The Schedule
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#update-schedule-schedule-update).)
+
+**Prerequisites: ** Ensure that you have created some plans, at least one, before you to test the
+`schedule /update` command.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                      | Command                | Expected result                      |
+|:-------------------------------|:-----------------------|:-------------------------------------|
+| Valid update schedule command. | `schedule /update 1 3` | Plan number 3 is schedule on Monday. |
+
+##### Negative Test Cases
+| Test Case                                     | Command                            | Expected result                                                                         |
+|:----------------------------------------------|:-----------------------------------|:----------------------------------------------------------------------------------------|
+| Update schedule with extra arguments.         | `schedule /update 1 3 extraline`   | Error response (too many arguments entered), plan is not added/updated to the schedule. |
+| Update schedule with missing plan number.     | `schedule /update 1`               | Error response (too few arguments entered), plan is not added/updated to the schedule.  |
+| Schedule a plan on an invalid day.            | `schedule /update 8 1`             | Error response (invalid day number), plan is not added/updated to the schedule.         |
+| Schedule an invalid plan.                     | `schedule /update 1 1222`          | Error response (invalid plan number), plan is not added/updated to the schedule.        |
+| Extra whitespaces between commands arguments. | `schedule         /update 1 2`     | Error response (invalid user action), plan is not added/updated to the schedule.        |
+| Extra whitespaces between command parameters. | `schedule /update     1         2` | Error response (invalid user action), plan is not added/updated to the schedule.        |
+
+
 #### Viewing The Schedule
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#view-schedule-schedule-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                    | Command          | Expected result                                      |
+|:-----------------------------|:-----------------|:-----------------------------------------------------|
+| Valid list schedule command. | `schedule /list` | List down all plans scheduled in the 7-day schedule. |
+
+##### Negative Test Cases
+| Test Case                                     | Command                    | Expected result                                                 |
+|:----------------------------------------------|:---------------------------|:----------------------------------------------------------------|
+| List schedule with extra arguments.           | `schedule /list extraline` | Error response (wrong command entered), schedule not displayed. |
+| Extra whitespaces between commands arguments. | `schedule         /list`   | Error response (invalid user action), schedule not displayed.   |
+
 #### Clearing Plan Schedule For A Day
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#clear-schedule-for-a-day-schedule-clear).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                      | Command             | Expected result                                                                   |
+|:-------------------------------|:--------------------|:----------------------------------------------------------------------------------|
+| Valid clear scheduled command. | `schedule /clear 1` | If there is a plan scheduled on Monday, it will be cleared and set to `rest day`. |
+
+##### Negative Test Cases
+| Test Case                                     | Command                       | Expected result                                                                 |
+|:----------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------|
+| Day Number exceed the range of 1 to 7.        | `schedule /clear 9`           | Error response (invalid day number), no plan in the schedule is being cleared.  |
+| Clear scheduled command with extra arguments. | `schedule /clear 1 extraline` | Error response (invalid command), no plan in the schedule is being cleared.     |
+| Extra whitespaces between commands arguments. | `schedule         /clear 1`   | Error response (invalid user action), no plan in the schedule is being cleared. |
+
 #### Clearing All Plans In The Schedule
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#clear-schedule-for-the-week-schedule-clearall).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                         | Command              | Expected result                             |
+|:----------------------------------|:---------------------|:--------------------------------------------|
+| Valid clear all schedule command. | `schedule /clearall` | All plans added to the schedule is removed. |
+
+##### Negative Test Cases
+| Test Case                                               | Command                        | Expected result                                                                                 |
+|:--------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------|
+| Clear all plans scheduled command with extra arguments. | `schedule /clearall extraline` | Error response (wrong command entered), plans not removed from schedule and schedule not reset. |
+| Extra whitespaces between commands arguments.           | `schedule         /clearall`   | Error response (invalid user action), plans not removed from schedule and schedule not reset.   |
+
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+
+---
 
 ### Test on Search Features
 #### Searching For Exercise
@@ -2057,6 +2225,40 @@ Expected: Nothing is listed because no additional arguments should be supplied f
 #### Searching For Plan
 #### Searching For All
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+---
+
 ### Test on Data Saving 
+
+The following are some test cases for you to try:
+
+<span class="info box">:memo: **Important!** These test cases are done on the following assumptions:
+1. Resource files `workouts.txt`, `plans.txt`, and `schedule.txt` are empty. 
+2. `exercise.txt` is populated with its default exercises.
+
+If you have some data written into these files or modified `exercises.txt`, please do the following
+prior to conducting the test cases mentioned below:
+1. If WerkIt! is running, exit the application.
+2. Backup your existing `werkItResources` directory.
+3. Delete the `werkItResources` directory (not your backup!)
+4. Start WerkIt! to generate a fresh set of `werkItResources` directory and its resource files.
+</span>
+
+<span class="warning box">:warning: Please follow the test cases and its commands in sequence as subsequent test cases 
+rely on former test cases.</span>
+
+| Test Case                                                                  | Command                                                                                                                                | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|:---------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1. Write new data into `workouts.txt`.                                     | (a) `workout /new sit up /reps 10`<br/><br/>(b) `workout /new push up /reps 20`<br/><br/>(c)`workout /new russian twist /reps 30`      | The following three lines are added to `workouts.txt`:<br/><br/>![workouts.txt](images/workoutsTxtNewWorkouts.png)                                                                                                                                                                                                                                                                                                                                                                                             |
+| 2. Update data in `workouts.txt`.                                          | `workout /update 2 40`                                                                                                                 | Workout (push up, 20 reps) is updated to 40 reps. `workouts.txt` should look something like this:<br/><br/>![workouts.txt Update Workout](images/workoutsTxtUpdateWorkout.png)                                                                                                                                                                                                                                                                                                                                 |
+| 3. Write new data into `plans.txt`.                                        | (a) `plan /new plan a  /workouts 1, 2`<br/><br/>(b) `plan /new plan b /workouts 2, 3`<br/><br/>(c) `plan /new plan c /workouts 1, 3`   | The following lines are added to `plans.txt`:<br/><br/>![plans.txt](images/plansTxtNewPlans.png)                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 4. Write new data into `schedule.txt`.                                     | (a) `schedule /update 1 1`<br/><br/>(b) `schedule /update 3 2`<br/><br/>(c) `schedule /update 5 3`<br/><br/>(d) `schedule /update 6 3` | The following lines are added to `schedule.txt`:<br/><br/>![schedule.txt](images/scheduleTxtNewDays.png)                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 5. Delete data from `schedule.txt`.                                        | `schedule /clear 5` | `schedule.txt` will be updated the following:<br/><br/>![schedule.txt day deleted](images/scheduleTxtDeleteDay.png)                                                                                                                                                                                                                                                                                                                                                                                            |
+| 6. Delete data from `plans.txt` and `schedule.txt` is updated accordingly. | `plans /delete 3` | `plans.txt` will be updated to the following:<br/><br/>![plans.txt delete plan](images/plansTxtDeletePlan.png)<br/><br/>`schedule.txt` will also be updated as one of the days has the deleted plan:<br/><br/>![schedule.txt plan delete](images/scheduleTxtPlanDeleteCascade.png)                                                                                                                                                                                                                             |
+| 7. Delete workout from `workouts.txt` and `plans.txt` and `schedule.txt` are updated accordingly. | `workout /delete 1` | `workout.txt` will be updated to the following:<br/><br/>![workout.txt workout delete](images/workoutsTxtDeleteWorkout.png)<br/><br/>`plans.txt` will also be updated as some plans with the deleted workout are affected:<br/><br/>![plans.txt workout delete cascasde](images/plansTxtWorkoutDeleteCascade.png)<br/><br/>Likewise, `schedule.txt` is also updated as a plan assigned to a day has been affected:<br/><br/>![schedule.txt workout delete cascade](images/scheduleTxtWorkoutDeleteCascade.png) |                                    
+
+
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
