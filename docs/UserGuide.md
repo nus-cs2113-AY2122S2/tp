@@ -324,7 +324,7 @@ ____________________________________________________________
 
 ____________________________________________________________
 Hey! I have added this task under CS2113T (Software Engineering) (4MC, Grade: -)!
-( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hours) []
+( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hour(s)) []
 ____________________________________________________________
 ```
 
@@ -386,7 +386,7 @@ ____________________________________________________________
 > del task 1 -m CS2113T
 
 ____________________________________________________________
-( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hours) [] has been deleted.
+( ) iP Level-0 (Greet user and exit) (Estimated working time: 1 hour(s)) [] has been deleted.
 ____________________________________________________________
 ```
 
