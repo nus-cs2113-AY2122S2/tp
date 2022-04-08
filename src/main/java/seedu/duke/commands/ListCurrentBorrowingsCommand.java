@@ -27,6 +27,7 @@ public class ListCurrentBorrowingsCommand extends Command {
 
         for (int i = 0; i < itemList.getSize(); i++) {
             Item borrowedItem = itemList.getItem(i);
+            // Return a list of records filtered for name (optional) and status
             List<BorrowRecord> filteredRecords = borrowedItem.filterRecords(name, BorrowStatus.PRESENT);
 
             for (BorrowRecord record : filteredRecords) {
