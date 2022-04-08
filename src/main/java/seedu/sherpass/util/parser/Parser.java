@@ -12,12 +12,11 @@ import seedu.sherpass.command.ShowCommand;
 import seedu.sherpass.command.StudyCommand;
 import seedu.sherpass.command.UnmarkCommand;
 
-import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
 
-import static seedu.sherpass.constant.Index.COMMAND_CONTENT_INDEX;
-import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
+import static seedu.sherpass.constant.Index.INDEX_COMMAND_CONTENT;
+import static seedu.sherpass.constant.Index.INDEX_HELP_OPTIONS;
+import static seedu.sherpass.constant.Index.INDEX_OPTIONS;
 import static seedu.sherpass.constant.Index.SPLIT_TWO_PART_LIMIT;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
@@ -29,7 +28,7 @@ public class Parser {
     private static Command prepareHelp(String userInput) {
         try {
             String[] parsedInput = userInput.split(" ", 2);
-            return new HelpCommand(parsedInput[HELP_OPTIONS_INDEX]);
+            return new HelpCommand(parsedInput[INDEX_HELP_OPTIONS]);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             return new HelpCommand("show help list");
         }
@@ -43,9 +42,9 @@ public class Parser {
      */
     public static Command parseCommand(String userInput, Ui ui) {
         String[] splitInput = userInput.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
-        String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
+        String commandWord = splitInput[INDEX_OPTIONS].toLowerCase().trim();
         String argument = (splitInput.length > 1)
-                ? splitInput[COMMAND_CONTENT_INDEX].trim() : EMPTY_STRING;
+                ? splitInput[INDEX_COMMAND_CONTENT].trim() : EMPTY_STRING;
         switch (commandWord) {
         case MarkCommand.COMMAND_WORD:
             // Fallthrough
