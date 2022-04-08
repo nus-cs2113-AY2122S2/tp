@@ -59,7 +59,8 @@ public class MatchKeywords {
                 throw new MissingFlagException();
             } else {
                 if ((groupName.equals("sku") || groupName.equals("name") || groupName.equals("oid")
-                        || groupName.equals("qty")) && matcher.group(groupName).isBlank()) { //check compulsory fields
+                        || groupName.equals("qty") || groupName.equals("r") || groupName.equals("addr")) &&
+                        matcher.group(groupName).isBlank()) { //check compulsory fields
                     hashMap.clear();
                     throw new EmptyFieldException();
                 }
