@@ -2,10 +2,11 @@
 
 package seedu.meetingjio.commands;
 
-import seedu.meetingjio.exceptions.EmptyMasterTimetableException;
-import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
+
+import seedu.meetingjio.exceptions.EmptyMasterTimetableException;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_LIST;

@@ -13,7 +13,7 @@ import static seedu.meetingjio.parser.Parser.logger;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX;
 
 
 public class DeleteCommand extends Command {
@@ -53,7 +53,7 @@ public class DeleteCommand extends Command {
                 return deleteConfirmation(event);
             }
         } catch (IndexOutOfBoundsException ie) {
-            return ERROR_INDEX_OUT_OF_BOUND;
+            return ERROR_INVALID_INDEX;
         }
     }
 

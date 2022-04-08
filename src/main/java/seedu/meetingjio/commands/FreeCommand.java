@@ -176,17 +176,4 @@ public class FreeCommand extends Command {
         return timeIn24Hour;
     }
 
-    /**
-     * This helper method takes in a time in 24-hour format, and convert it to the number of minutes starting from 0000.
-     *
-     * @param time Time to be converted
-     * @return timeInMinutes The number of minutes converted from time
-     */
-    public static int convertTimeToFreeArrayIndex(int time) {
-        int hours = time / HOUR_PARAMETER_IN_24_HOURS;
-        int minutes = time % HOUR_PARAMETER_IN_24_HOURS;
-        int timeInMinutes = hours * MINS_IN_1_HOUR + minutes;
-        return timeInMinutes;
-    }
-
 }

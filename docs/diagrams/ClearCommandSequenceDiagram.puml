@@ -11,15 +11,22 @@ create ":ClearCommand"
 ":ClearCommand" --> ":Parser" --: clearCommand:ClearCommand
 ":Parser" --> ":Ui" --: clearCommand:ClearCommand
 ":Ui" -> ":ClearCommand" ++: execute(masterTimetable)
-":ClearCommand" -> ":ClearCommand"++: clearAll(masterTimetable)
+":ClearCommand" -> ":ClearCommand": clearAll(masterTimetable)
+loop for each entry in MasterTimetable
 ":ClearCommand" -> ":MasterTimetable" ++: getByIndex(0)
-loop for each entry
 ":MasterTimetable" --> ":ClearCommand" -- : timetable: Timetable
-":ClearCommand" -> ":ClearCommand"++: clearTimetable(timetable)
-":ClearCommand" -> ":MasterTimetable" ++: removeByIndex(0)
-":MasterTimetable" -> ":ClearCommand" --:
+loop for each entry in timetable
+":ClearCommand" -> ":ClearCommand": clearTimetable(timetable)
+":ClearCommand" -> ":MasterTimetable" : removeByIndex(0)
+":MasterTimetable" --> ":ClearCommand" :
+deactivate ":ClearCommand"
+end
 end
 
-":ClearCommand" --> ":Ui" --: printAllClearConfirmation(): String
+":ClearCommand" --> ":Ui" --: 
 ":Ui" --> user
+destroy ":ClearCommand"
+destroy ":Parser"
+destroy ":MasterTimetable"
+destroy ":Ui"
 @enduml

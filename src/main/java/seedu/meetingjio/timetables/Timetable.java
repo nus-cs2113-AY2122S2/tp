@@ -3,10 +3,9 @@ package seedu.meetingjio.timetables;
 import seedu.meetingjio.events.Lesson;
 import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.events.Event;
+
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
-
-import seedu.meetingjio.commands.FreeCommand;
 
 import java.util.ArrayList;
 
@@ -19,6 +18,9 @@ public class Timetable {
 
     public static final int LESSONS_ONLY = 1;
     public static final int MEETINGS_ONLY = 2;
+
+    public static final int HOUR_PARAMETER_IN_24_HOURS = 100;
+    public static final int MINS_IN_1_HOUR = 60;
 
     public Timetable(String name) {
         this.name = name;
@@ -58,10 +60,6 @@ public class Timetable {
         return name;
     }
 
-    public void clear() {
-        list.clear();
-    }
-
     /**
      * Checks through all existing events to the event to be added
      * to ensure that there is no duplicate.
@@ -70,8 +68,7 @@ public class Timetable {
      * @return true if there is identical event, otherwise false
      */
     public boolean isDuplicate(Event newEvent) {
-        for (int i = 0; i < list.size(); i++) {
-            Event event = list.get(i);
+        for (Event event : list) {
             if (event.equals(newEvent)) {
                 return true;
             }
@@ -87,8 +84,7 @@ public class Timetable {
      * @return true if there is overlap, otherwise false
      */
     public boolean isOverlap(Event newEvent) {
-        for (int i = 0; i < list.size(); i++) {
-            Event event = list.get(i);
+        for (Event event : list) {
             if (event.overlaps(newEvent)) {
                 return true;
             }
@@ -188,10 +184,6 @@ public class Timetable {
         return list;
     }
 
-    public void setList(ArrayList<Event> list) {
-        this.list = list;
-    }
-
     /**
      * For each event in the timetable, obtain its corresponding day, start time and end time in the appropriate format.
      * Indicate 1 (BUSY) for every minute that the user is attending an event.
@@ -200,15 +192,27 @@ public class Timetable {
      *                  indicates FREE
      */
     public void populateBusySlots(int[][] busySlots) {
-        for (int i = 0; i < list.size(); i++) {
-            Event event = list.get(i);
+        for (Event event : list) {
             int numericDay = event.getDayInInt();
-            int numericStartTime = FreeCommand.convertTimeToFreeArrayIndex(event.getStartTime());
-            int numericEndTime = FreeCommand.convertTimeToFreeArrayIndex(event.getEndTime());
+            int numericStartTime = convertTimeToFreeArrayIndex(event.getStartTime());
+            int numericEndTime = convertTimeToFreeArrayIndex(event.getEndTime());
             for (int j = numericStartTime; j < numericEndTime; j++) {
                 busySlots[numericDay - 1][j] = BUSY;
             }
         }
+    }
+
+    /**
+     * This helper method takes in a time in 24-hour format, and convert it to the number of minutes starting from 0000.
+     *
+     * @param time Time to be converted
+     * @return timeInMinutes The number of minutes converted from time
+     */
+    private static int convertTimeToFreeArrayIndex(int time) {
+        int hours = time / HOUR_PARAMETER_IN_24_HOURS;
+        int minutes = time % HOUR_PARAMETER_IN_24_HOURS;
+        int timeInMinutes = hours * MINS_IN_1_HOUR + minutes;
+        return timeInMinutes;
     }
 
     @Override

@@ -67,9 +67,6 @@ public abstract class Event {
         if (!day.equals(event.day)) {
             return false;
         }
-        if (!mode.equals(event.mode)) {
-            return false;
-        }
         if (startTime != event.startTime) {
             return false;
         }
@@ -78,7 +75,6 @@ public abstract class Event {
         }
         assert (title.equals(event.title)) : "The titles are different";
         assert (day.equals(event.day)) : "The days are different";
-        assert (mode.equals(event.mode)) : "The modes are different";
         assert (startTime == event.startTime) : "The start times are different";
         assert (endTime == event.endTime) : "The end times are different";
         return true;

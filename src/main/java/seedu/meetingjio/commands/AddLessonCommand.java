@@ -33,10 +33,10 @@ public class AddLessonCommand extends Command {
     }
 
     /**
-     * Execute AddLesson command using the timetable provided.
+     * Add lesson to the user's timetable.
      *
-     * @param masterTimetable MasterTimetable
-     *
+     * @param masterTimetable The collection of everyone's timetable
+     * @return String Add confirmation showing that the lesson is added
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
@@ -58,6 +58,7 @@ public class AddLessonCommand extends Command {
      *
      * @param lesson Lesson that was added
      * @param name User
+     * @return String
      */
     private String addConfirmation(Lesson lesson, String name) {
         return String.format("The following event has been added to %s's timetable:\n%s",

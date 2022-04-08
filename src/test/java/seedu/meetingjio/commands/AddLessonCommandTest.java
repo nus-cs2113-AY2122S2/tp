@@ -1,17 +1,18 @@
 package seedu.meetingjio.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.meetingjio.timetables.MasterTimetable;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 
-class AddCommandTest {
+class AddLessonCommandTest {
     private MasterTimetable masterTimetable;
     private Command addCommand;
     private Command addCommandDifferentEventSameTime;
@@ -61,6 +62,17 @@ class AddCommandTest {
         );
         addUserJohn = new AddUserCommand("John");
         addUserJohnny = new AddUserCommand("Johnny");
+    }
+
+    /**
+     * This test method checks that the program informs user and continues running smoothly when the user attempts to
+     * add a event to a non-existing user.
+     */
+    @Test
+    public void addCommand_nonExistsUser_throwException() {
+        addUserJohnny.execute(masterTimetable);
+        addCommand.execute(masterTimetable);
+        assertEquals(ERROR_INVALID_USER, addCommand.execute(masterTimetable));
     }
 
     /**

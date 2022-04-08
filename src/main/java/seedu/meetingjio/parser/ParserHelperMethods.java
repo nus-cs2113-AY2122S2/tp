@@ -2,6 +2,7 @@
 
 package seedu.meetingjio.parser;
 
+import seedu.meetingjio.exceptions.InvalidNameException;
 import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.InvalidModeException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
@@ -76,4 +77,31 @@ public class ParserHelperMethods {
             throw new InvalidDayException();
         }
     }
+
+    /**
+     * Ensures that 'name' parameter in user's input does not contain special character
+     * and not equal to 'all'.
+     *
+     * @param name String given by user
+     * @throws InvalidNameException If input contains special character or is 'all'
+     */
+    public static void checkName(String name) throws InvalidNameException {
+        if (name.equals("all")) {
+            throw new InvalidNameException();
+        }
+        for (int i = 0; i < name.length(); i++)  {
+            char x = name.charAt(i);
+            if (x >= 'A' && x <= 'Z') {
+                continue;
+            }
+            if (x >= 'a' && x <= 'z') {
+                continue;
+            }
+            if (x >= '0' && x <= '9') {
+                continue;
+            }
+            throw new InvalidNameException();
+        }
+    }
+
 }

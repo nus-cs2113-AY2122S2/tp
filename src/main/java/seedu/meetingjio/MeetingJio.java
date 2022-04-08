@@ -43,7 +43,6 @@ public class MeetingJio {
             Ui.showWelcomeMessage();
         } catch (RuntimeException e) {
             Ui.showInitFailedMessage();
-            /**e.printStackTrace();*/
             System.out.println(e.getMessage());
         }
     }

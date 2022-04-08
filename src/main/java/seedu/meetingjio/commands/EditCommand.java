@@ -3,10 +3,9 @@
 package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Event;
-
+import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
-
 import seedu.meetingjio.parser.ParserHelperMethods;
 
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
@@ -18,7 +17,8 @@ import seedu.meetingjio.exceptions.InvalidTimeException;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_ATTRIBUTE_VALUE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EDIT_MEETING;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,18 +43,23 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Execute EditEvent command using the timetable provided.
+     * Edit lesson based on the user input if the input values are valid.
+     * Otherwise, abort edit.
      *
-     * @param masterTimetable MasterTimetable
-     *
+     * @param masterTimetable The collection of everyone's timetable
+     * @return String Edit confirmation showing that the lesson is edited
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
         try {
             Timetable timetable = masterTimetable.getByName(name);
             Event event = timetable.get(index - 1);
-            Map<String, String> originalValues = getEventInfo(event);
 
+            if (event instanceof Meeting) {
+                return editAbort(ERROR_EDIT_MEETING);
+            }
+
+            Map<String, String> originalValues = getEventInfo(event);
             Boolean isValidInput = editEvent(event, newValues);
             if (!isValidInput) {
                 editEvent(event, originalValues);
@@ -69,7 +74,7 @@ public class EditCommand extends Command {
         } catch (TimetableNotFoundException tnfe) {
             return editAbort(ERROR_INVALID_USER);
         } catch (IndexOutOfBoundsException ioe) {
-            return editAbort(ERROR_INDEX_OUT_OF_BOUND);
+            return editAbort(ERROR_INVALID_INDEX);
         }
     }
 
@@ -109,7 +114,7 @@ public class EditCommand extends Command {
             }
             break;
         default:
-            return;
+            return;    
         }
     }
 
@@ -153,18 +158,18 @@ public class EditCommand extends Command {
     /**
      * Inform user that event has been edited.
      *
-     * @attribute
-     *event Event that was edited
+     * @param event Event that has been edited
+     * @return String confirmation of event being edited
      */
     private String editConfirmation(Event event) {
-        return String.format("The event has been updated to the following:\n%s", event);
+        return String.format("The lesson has been updated to the following:\n%s", event);
     }
 
     /**
      * Inform user that edit is aborted.
      *
-     * @attribute
-     *event Event that user intends to edit
+     * @param error Error messages
+     * @return String confirmation of event not being edited
      */
     private String editAbort(String error) {
         return String.format("%s Edit aborted.", error);

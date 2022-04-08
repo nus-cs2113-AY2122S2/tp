@@ -8,20 +8,27 @@ based on everyone’s availability via a Command Line Interface (CLI). If you ca
 MeetingJio can get your meeting management tasks done faster than manually eyeballing your timetable.
 
 Below are my contributions to the project
-##Features:
-### Delete Feature
-What: Delete specific event of either type meeting or lesson from timetable of a specific user.
-If a meeting is deleted, then that specific event is deleted from all users.
-Otherwise, it will only be deleted for that user. 
-###Clear feature
-What: Allows to clear a user and his timetable or all timetables in a glance.
-This allows a user to be cleared or to to start the program afresh.
-### Add meeting feature 
-What: Allows meeting to be added for to the timetable all users added in
-This allows the team to have a copy and keep track of their timetable.
+##Summary of features contributed:
 
-### J-Unit and Integration testing
-Did testing for all features implemented and ensure program was cohesive.
+### Delete feature
+- Delete specific event of either type meeting or lesson from timetable of a specific user.
+- If a meeting is deleted, then that specific event is deleted from all users.
+Otherwise, it will only be deleted for that user. 
+
+###Clear feature
+
+- Allows to clear a user and his timetable or all timetables in a glance.
+- This allows a user to be cleared or to start the program afresh.
+### Add meeting feature
+- Allows meeting to be added for to the timetable all users added in
+- This allows the team to have a copy and keep track of their timetable.
+
+##Other contributions
+### Parser methods, JUnit and Integration testing
+- Implemented parser for prepareDelete,prepareAddMeeting
+- Added error and exception handling
+- Performed JUnit testing for commands implemented 
+- Did integration testing for all features implemented and ensure program was cohesive.
 
 View my code contributions to the project here: [Reposense report](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=ibrahim%20sharul&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 

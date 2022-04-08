@@ -2,13 +2,10 @@ package seedu.meetingjio.commands;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.meetingjio.exceptions.DuplicateEventException;
-import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.timetables.MasterTimetable;
-import seedu.meetingjio.timetables.Timetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
 
 
@@ -90,8 +87,8 @@ public class DeleteCommandTest {
         deleteCommand.execute(masterTimetable);
         DeleteCommand deleteCommandOutOfRange = new DeleteCommand("john",100);
         deleteCommandOutOfRange.execute(masterTimetable);
-        assertEquals(ERROR_INDEX_OUT_OF_BOUND, deleteCommand.execute(masterTimetable));
-        assertEquals(ERROR_INDEX_OUT_OF_BOUND, deleteCommandOutOfRange.execute(masterTimetable));
+        assertEquals(ERROR_INVALID_INDEX, deleteCommand.execute(masterTimetable));
+        assertEquals(ERROR_INVALID_INDEX, deleteCommandOutOfRange.execute(masterTimetable));
     }
 
     /**
@@ -103,7 +100,7 @@ public class DeleteCommandTest {
         //delete index that is not found in list
         DeleteCommand deleteCommand = new DeleteCommand("john",100);
         deleteCommand.execute(masterTimetable);
-        assertEquals(ERROR_INDEX_OUT_OF_BOUND, deleteCommand.execute(masterTimetable));
+        assertEquals(ERROR_INVALID_INDEX, deleteCommand.execute(masterTimetable));
     }
 
 
