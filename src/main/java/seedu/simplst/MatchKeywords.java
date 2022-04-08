@@ -58,8 +58,8 @@ public class MatchKeywords {
                 hashMap.clear();
                 throw new MissingFlagException();
             } else {
-                if ((groupName.equals("sku") || groupName.equals("name") || groupName.equals("oid") ||
-                        groupName.equals("qty")) && matcher.group(groupName).isBlank()) { //check for compulsory fields
+                if ((groupName.equals("sku") || groupName.equals("name") || groupName.equals("oid")
+                        || groupName.equals("qty")) && matcher.group(groupName).isBlank()) { //check compulsory fields
                     hashMap.clear();
                     throw new EmptyFieldException();
                 }

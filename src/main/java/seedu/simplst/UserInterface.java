@@ -8,7 +8,12 @@ import seedu.simplst.parsers.RemoveParser;
 import seedu.simplst.parsers.TotalParser;
 import seedu.simplst.parsers.ViewParser;
 import seedu.simplst.parsers.FulfillParser;
-import util.exceptions.*;
+import util.exceptions.WrongCommandException;
+import util.exceptions.NullException;
+import util.exceptions.InvalidFileException;
+import util.exceptions.InvalidObjectType;
+import util.exceptions.MissingFlagException;
+import util.exceptions.EmptyFieldException;
 
 import java.util.Scanner;
 

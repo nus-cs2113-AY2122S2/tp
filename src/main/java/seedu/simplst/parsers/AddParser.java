@@ -2,11 +2,18 @@ package seedu.simplst.parsers;
 
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
-import util.exceptions.*;
+import util.exceptions.WrongCommandException;
+import util.exceptions.MissingFlagException;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.InvalidFileException;
+import util.exceptions.InvalidObjectType;
+import util.exceptions.ItemDoesNotExistException;
+import util.exceptions.UnitTestException;
+
 
 import java.util.HashMap;
 
-public class AddParser extends CommandParser{
+public class AddParser extends CommandParser {
     public AddParser(Warehouse warehouse) {
         super(warehouse);
     }
@@ -19,7 +26,8 @@ public class AddParser extends CommandParser{
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType, MissingFlagException, EmptyFieldException {
+    protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType
+            , MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("g")) {
             String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
             HashMap<String, String> regexGoodMatch = new MatchKeywords(userInput, regexGood).getGroupValues();

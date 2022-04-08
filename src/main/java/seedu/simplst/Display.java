@@ -74,11 +74,12 @@ public class Display {
         System.out.println("Please enter the command again.");
     }
 
-    public static void inputAllFlags() {  System.out.println("Missing flag in input. Please key in all the flags " +
-            "required in the command.");}
+    public static void inputAllFlags() {
+        System.out.println("Missing flag in input. Please key in all the flags required in the command.");
+    }
 
-    public static void fillCompulsoryFields() { System.out.println("Non-optional fields are empty. Please fill" +
-            " in all compulsory fields.");
+    public static void fillCompulsoryFields() {
+        System.out.println("Non-optional fields are empty. Please fill in all compulsory fields.");
     }
 
     // Command related
