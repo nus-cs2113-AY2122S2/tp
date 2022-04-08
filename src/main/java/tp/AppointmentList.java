@@ -12,10 +12,11 @@ import java.util.Comparator;
 public class AppointmentList {
     public static String boundary = "____________________________________________________________"
                                             + System.lineSeparator();
-    protected ArrayList<Appointment> appointments = new ArrayList<>();
+    protected ArrayList<Appointment> appointments;
     protected int countAppointment;
 
     public AppointmentList() {
+        appointments = new ArrayList<>();
         countAppointment = 0;
     }
 
@@ -45,6 +46,9 @@ public class AppointmentList {
      * @param index Index of the appointment to be deleted.
      */
     public Appointment deleteAppointment(int index) {
+        if (index <= 0 || index > appointments.size()) {
+            return null;
+        }
         Appointment curr = appointments.get(index - 1);
         appointments.remove(index - 1);
         countAppointment -= 1;
@@ -60,7 +64,7 @@ public class AppointmentList {
     public AppointmentList getAppointmentListOfDoctorById(String id) {
         AppointmentList res = new AppointmentList();
         for (Appointment appointment : appointments) {
-            if (appointment.doctor.getId().equals(id)) {
+            if (appointment.getDoctor().getId().contains(id)) {
                 res.addAppointment(appointment);
             }
         }

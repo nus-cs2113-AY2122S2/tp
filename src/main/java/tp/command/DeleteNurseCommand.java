@@ -12,17 +12,14 @@ import tp.PatientStorage;
 import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
+import tp.person.Nurse;
 
-public class AddPatientDescriptionCommand extends Command {
-    protected static String description;
-    protected static int index;
+public class DeleteNurseCommand extends Command {
+    private final int index;
 
-
-    public AddPatientDescriptionCommand(String description, int index) {
-        AddPatientDescriptionCommand.description = description;
-        AddPatientDescriptionCommand.index = index;
+    public DeleteNurseCommand(int index) {
+        this.index = index;
     }
-
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
@@ -30,7 +27,12 @@ public class AddPatientDescriptionCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        PatientList.addPatientDescription(description,index);
-        return "Already add description for patient " + index + " \n";
+        if (index <= 0 || index > nurseList.getSize()) {
+            throw new IHospitalException("The nurse does not exist.\n");
+        }
+        Nurse cur = nurseList.deleteNurse(index);
+        return String.format(boundary + "Noted. I've removed this nurse:" + cur
+                + "\n" + "Now you have " + nurseList.getSize()
+                + " nurses in the system." + System.lineSeparator() + boundary);
     }
 }
