@@ -71,4 +71,6 @@ public class Messages {
     public static final String DELETE_CONFIRMATION = "The following event has been deleted from your timetable:" + "\n";
     public static final String CLEAR_ALL_CONFIRMATION = "All records of everyone's timetable has been cleared";
     public static final String CLEAR_TIMETABLE_CONFIRMATION = "'s timetable has been cleared";
+    public static final String MEETING_CLEARED_FROM_ALL_CONFIRMATION = "The following meeting event has been deleted"
+            + "from everyone's timetable:\n";
 }

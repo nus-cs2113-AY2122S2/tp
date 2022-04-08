@@ -107,7 +107,7 @@ public class ClearCommand extends Command {
      *
      * @param user The user's timetable that has been cleared.
      *
-     * @return user user's string been cleared
+     * @return user User's string been cleared
      */
     public static String printClearConfirmation(String user) {
         return user + CLEAR_TIMETABLE_CONFIRMATION;
@@ -116,6 +116,7 @@ public class ClearCommand extends Command {
     /**
      * This method informs the user that all the timetables have been cleared.
      *
+     * @return String Clear all confirmation
      */
     public static String printAllClearConfirmation() {
         return CLEAR_ALL_CONFIRMATION;

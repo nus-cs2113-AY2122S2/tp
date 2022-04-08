@@ -205,7 +205,7 @@ public class Parser {
             ParserHelperMethods.checkTime(startTime, endTime);
             ParserHelperMethods.checkMode(mode);
 
-            String title = eventDescription[TITLE_INDEX - 1];
+                String title = eventDescription[TITLE_INDEX - 1];
             return new AddMeetingCommand(title, day, startTime, endTime, mode);
 
         } catch (NullPointerException | MissingParameterException mpe) {

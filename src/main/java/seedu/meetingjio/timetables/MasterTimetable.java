@@ -6,18 +6,17 @@ import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.commands.ListCommand;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.exceptions.DuplicateTimetableException;
-import seedu.meetingjio.parser.Parser;
 
-import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
-
+import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.common.Messages.MEETING_CLEARED_FROM_ALL_CONFIRMATION;
 import static seedu.meetingjio.common.Messages.NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
+import static seedu.meetingjio.parser.Parser.logger;
 
 public class MasterTimetable {
 
@@ -89,7 +88,7 @@ public class MasterTimetable {
      * @param timetable Timetable to be added
      */
     public void addTimetable(Timetable timetable) throws DuplicateTimetableException {
-        if (isDuplicate(timetable)) {
+        if (isDuplicateTimetable(timetable)) {
             throw new DuplicateTimetableException();
         }
         timetables.add(timetable);
@@ -148,9 +147,9 @@ public class MasterTimetable {
      *
      * @return boolean true if there is another event at the same time as the meeting
      */
-    public boolean isMeetingClash(Meeting meeting) {
+    public boolean isMeetingThatClashes(Meeting meeting) {
         for (Timetable timetable : timetables) {
-            if (checkMeetingOverlap(timetable, meeting)) {
+            if (isOverlappingMeeting(timetable, meeting)) {
                 return true;
             }
         }
@@ -165,7 +164,7 @@ public class MasterTimetable {
      *
      * @return boolean True false if there is another event at the same time as the meeting
      */
-    private boolean checkMeetingOverlap(Timetable timetable, Meeting meeting) {
+    private boolean isOverlappingMeeting(Timetable timetable, Meeting meeting) {
         for (Event event : timetable.getList()) {
             if (meeting.overlaps(event)) {
                 return true;
@@ -181,7 +180,7 @@ public class MasterTimetable {
      *
      * @return boolean True false if there meeting already exists
      */
-    public boolean isExistingMeeting(Meeting meeting) {
+    public boolean isPreExistingMeeting(Meeting meeting) {
         for (Timetable timetable : timetables) {
             for (int i = 0; i < timetable.size(); i++) {
                 if (timetable.get(i).equals(meeting)) {
@@ -189,7 +188,6 @@ public class MasterTimetable {
                 }
             }
         }
-
         return false;
     }
 
@@ -210,7 +208,8 @@ public class MasterTimetable {
             } catch (OverlappingEventException oee) {
                 return ERROR_OVERLAPPING_EVENT;
             } catch (Exception e) {
-                return "ERROR DETECTED";
+                logger.log(Level.INFO, "Unhandled Exception : " +  e.getMessage());
+                return ERROR_EXCEPTION_NOT_HANDLED;
             }
         }
         return addMeetingConfirmation(meeting);
@@ -251,8 +250,7 @@ public class MasterTimetable {
      *
      */
     public String deleteMeetingFromAllTimetableConfirmation(Meeting meeting) {
-        return "The following meeting event has been deleted from everyone's timetable:\n"
-                + meeting;
+        return MEETING_CLEARED_FROM_ALL_CONFIRMATION + meeting;
     }
 
     /**
@@ -342,7 +340,7 @@ public class MasterTimetable {
      * @param newTimetable Timetable to be added
      * @return true if there is identical timetable, otherwise false
      */
-    private boolean isDuplicate(Timetable newTimetable) {
+    private boolean isDuplicateTimetable(Timetable newTimetable) {
         for (int i = 0; i < timetables.size(); i++) {
             Timetable timetable = timetables.get(i);
             if (timetable.equals(newTimetable)) {

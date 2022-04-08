@@ -214,7 +214,12 @@ public class Timetable {
         int timeInMinutes = hours * MINS_IN_1_HOUR + minutes;
         return timeInMinutes;
     }
-
+    /**
+     * This method checks if two timetables are the same.
+     *
+     * @param obj Object to compare timetable with
+     * @return boolean True or false if both timetable objects are the same
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Timetable)) {
