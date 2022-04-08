@@ -1,5 +1,4 @@
 # User Guide
-
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -9,7 +8,7 @@
     - [Add subscription record](#adding-subscription-record-add-subscription)
   - [Delete a record](#delete-a-record-delete)
   - [Show record list](#show-record-list-list)
-  - [Search record list using keyword](#search-record-list-using-keyword-find)
+  - [Find records](#find-records-find)
   - [Setting limit](#setting-limit-set)
   - [Showing summary](#showing-summary-summary)
   - [Exit the program](#exit-the-program-exit)
@@ -17,13 +16,13 @@
 - [Command Summary](#command-summary)
 
 ## Introduction
-
 As online shopping becomes more convenient and transactions become easier, people tend to overshoot their budget
 because they are not aware of their accumulated expenditure.
 Spendvelope is designed to regularly remind the buyer of their preset spending limit for each month.
 
 
 ## Quick Start
+
 
 1. Ensure that you are running Java 11.
 2. Download the latest version of `Spendvelope` from [here](https://github.com/AY2122S2-CS2113-F12-1/tp/releases/download/v2.0/Spendvelope.jar).
@@ -59,11 +58,16 @@ Adds a product record to the record list.
 
 Format: `add product i/ITEM_NAME p/PRICE d/DATE t/CATEGORY`
 
-* The `ITEM_NAME`, `PRICE`, and `DATE` can be in a natural language format.
-* The `CATEGORY` should be of fashion, food, accessory, or others. 
+* The `ITEM_NAME` can be in a natural language format. Should not be left empty.
+* The `PRICE` should be a double value, i.e "xx.yy" or "xx" where x and y are digits.
+  * Default `PRICE` value is 0 if no double value is given.
+  * The first double value is taken if multiple double values are given.
+* The `DATE` must be of format "dd/mm/yyyy".
+* The `CATEGORY` should be of fashion, food, accessory, or others.  
 * avoid using `|` as your input
 
-Examples of usage: 
+
+Examples of usage:
 
 `add product i/laptop p/$10 t/others d/04/04/2022`
 
@@ -74,9 +78,14 @@ Adds a subscription record to the record list.
 
 Format: `add subscription i/ITEM_NAME p/PRICE d/DATE r/RENEWAL`
 
-* The `ITEM_NAME`, `DATE`, and `RENEWAL` can be in a natural language with string format.
-* the `PRICE` should be strictly written with `$xx.xx` format with each x denoting a number, the maximum price would be limited to $9999999
-  
+
+* The `ITEM_NAME` can be in a natural language format. Should not be left empty.
+* The `PRICE` can be any double value, i.e "xx.yy" or "xx" where x and y are digits.
+  * Default `PRICE` value is 0 if no double value is given.
+  * The first double value is taken if multiple double values are given.
+* The `DATE` must be of format "dd/mm/yyyy".
+* The `RENEWAL` can be in a natural language format.
+* avoid using `|` as your input
 
 Examples of usage:
 
@@ -108,7 +117,8 @@ Format: `list`
 ![img_10.png](img_10.png)
 <br>
 <br>
-### Search record list using keyword: `Find`
+### Find records: `find`
+
 filter all the records in the RecordManager and display it as a list.
 
 Format: `find KEYWORD`
@@ -117,6 +127,7 @@ Format: `find KEYWORD`
 * The `KEYWORD` is used to filter the name of the records in RecordManager.
 
 Example of usage: `find laptop`
+
 
 ![img_11.png](img_11.png)
 <br>

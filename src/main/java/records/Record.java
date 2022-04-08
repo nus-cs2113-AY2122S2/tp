@@ -44,11 +44,11 @@ public abstract class Record {
      * @return String information of the subscription
      */
     public String toString(){
-        return name + ", price = " + price + ", date = " + date;
+        return name + ", price = " + price + ", date = " + DateTimeHandler.toString(date);
     }
 
     public String saveRecords() {
         int isMarked = 0;
-        return "| " + this.name + " | " + this.price + " | " + this.date;
+        return "| " + this.name + " | " + this.price + " | " + DateTimeHandler.toString(this.date);
     }
 }

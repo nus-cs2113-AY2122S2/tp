@@ -34,4 +34,7 @@ public class ParserConstants {
 
     /** Regex pattern of prices given in user command. */
     public static final String STRING_PATTERN_PRICE = "[^-\\d.]";
+
+    /** Regex pattern of unneeded input in price. */
+    public static final String STRING_PATTERN_UNNEEDED_INPUT_PRICE = "(?<=\\d)[^-\\d.].*";
 }

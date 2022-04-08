@@ -1,6 +1,6 @@
 package commands;
 
-import common.Messages;
+import constants.Messages;
 import records.Record;
 
 import java.util.ArrayList;

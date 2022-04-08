@@ -20,7 +20,7 @@ end
 activate Parser
 opt missing item name, price, or date parameter
     |||
-    ref over Parser: IncorrectCommand    Parser <-- IC2
+    ref over Parser: IncorrectCommand
     Parser --> Parser
     ?<-- Parser
 end

@@ -11,9 +11,6 @@ public class CommandResult {
     /** The list of records that was produced by the command. */
     private final List<Record> relevantRecords;
 
-    /** The change in number that was produced by the command. */
-    private double relevantRecords1;
-
     /**
      * Constructs a <code>CommandResult</code> object.
      *
@@ -40,13 +37,6 @@ public class CommandResult {
      */
     public List<Record> getRelevantRecords() {
         return relevantRecords;
-    }
-
-    /**
-     * Returns the number that was changed by the command, if any.
-     */
-    public double getRelevantRecords1() {
-        return relevantRecords1;
     }
 
     /**

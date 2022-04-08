@@ -10,9 +10,9 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static common.Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX;
-import static common.Messages.MESSAGE_INVALID_NEGATIVE_LIMIT;
+import static constants.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static constants.Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX;
+import static constants.Messages.MESSAGE_INVALID_NEGATIVE_LIMIT;
 
 import static constants.ParserConstants.PARAMETER_DELIMITER_DATE;
 import static constants.ParserConstants.PARAMETER_DELIMITER_ITEM_NAME;
@@ -25,6 +25,7 @@ import static constants.ParserConstants.PARAMETER_PATTERN_PRICE;
 import static constants.ParserConstants.PARAMETER_PATTERN_PRODUCT_TYPE;
 import static constants.ParserConstants.PARAMETER_PATTERN_RENEWAL;
 import static constants.ParserConstants.STRING_PATTERN_PRICE;
+import static constants.ParserConstants.STRING_PATTERN_UNNEEDED_INPUT_PRICE;
 
 /** Parses user input. */
 public class Parser {
@@ -137,6 +138,7 @@ public class Parser {
         // extracts price
         extractedParameters = extractParameter(parameters, PARAMETER_PATTERN_PRICE);
         String priceString = extractedParameters[0];
+        priceString = priceString.replaceAll(STRING_PATTERN_UNNEEDED_INPUT_PRICE,"");
         priceString = priceString.replaceAll(STRING_PATTERN_PRICE, "");
 
         Double price;

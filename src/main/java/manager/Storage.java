@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -75,7 +76,8 @@ public class Storage {
                     date = splitMessage[3];
                 }
 
-                switch (type) {
+                try {
+                    switch (type) {
                     case PRODUCT:
                         String productType = splitMessage[4];
                         if (productType == null || (!productType.equals("fashion") && !productType.equals("food") &&
@@ -90,6 +92,9 @@ public class Storage {
                         break;
                     default:
                         break;
+                    }
+                } catch (DateTimeParseException e) {
+                    continue;
                 }
             }
             s.close();

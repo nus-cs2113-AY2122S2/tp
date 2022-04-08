@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 public class ExpenseManager {
-    private Storage storage;
     /** Constructs a <code>RecordManager</code> with an empty list of records. */
     public ExpenseManager() {
         try {
@@ -13,6 +12,7 @@ public class ExpenseManager {
             e.printStackTrace();
         }
     }
+
     private static BigDecimal totalExpense = BigDecimal.valueOf(0);
     private static BigDecimal fashionExpense = BigDecimal.valueOf(0);
     private static BigDecimal foodExpense = BigDecimal.valueOf(0);
@@ -95,7 +95,7 @@ public class ExpenseManager {
      */
     public void loadTotalExpense() throws IOException {
         try {
-            totalExpense = BigDecimal.valueOf(storage.loadTotalExpenseFile());
+            totalExpense = BigDecimal.valueOf(Storage.loadTotalExpenseFile());
         } catch (IOException e) {
             throw e;
         }
@@ -106,7 +106,7 @@ public class ExpenseManager {
      */
     public void saveTotalExpense() {
         try {
-            storage.saveTotalExpenseFile(totalExpense.doubleValue());
+            Storage.saveTotalExpenseFile(totalExpense.doubleValue());
         } catch (IOException e) {
             System.out.println("Saving failed.");
         }

@@ -10,8 +10,8 @@ import commands.CommandResult;
 
 import records.Record;
 
-import static common.Messages.MESSAGE_GOODBYE;
-import static common.Messages.MESSAGE_WELCOME;
+import static constants.Messages.MESSAGE_GOODBYE;
+import static constants.Messages.MESSAGE_WELCOME;
 
 import static constants.TextUIConstants.COMMENT_LINE_FORMAT_REGEX;
 import static constants.TextUIConstants.DIVIDER;
