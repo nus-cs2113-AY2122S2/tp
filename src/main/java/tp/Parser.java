@@ -32,6 +32,7 @@ public class Parser {
 
     }
 
+    //@@author Demonshaha
     public static String getCommand() {
         String command;
         Scanner in = new Scanner(System.in);
@@ -39,6 +40,7 @@ public class Parser {
         return command;
     }
 
+    //@@author Demonshaha
     public Command parseAddDoctor(String fullCommand) throws IHospitalException {
         String id;
         String dummy = fullCommand.trim();
@@ -62,6 +64,7 @@ public class Parser {
         return new AddDoctorCommand(id, name, phoneNumber, email, wardNumber, false);
     }
 
+    //@@author Demonshaha
     public Command parseGetAppointment(String fullCommand) throws IHospitalException {
         //get appointment /d 123456
         String dummy = fullCommand.trim();
@@ -93,6 +96,7 @@ public class Parser {
         String wardNumber = dummy.substring(wardNumberIndex + 3).trim();
         return new AddNurseCommand(id, name, phoneNumber, email, title, wardNumber, false);
     }
+    //@@author Demonshaha
 
     public Command parseAddPatient(String fullCommand) throws IHospitalException {
         String id;
@@ -136,6 +140,7 @@ public class Parser {
         return new AddWardCommand(doctorIndex, patientIndex, nurseIndex, wardIndex);
     }
 
+    //@@author Demonshaha
     public Command parseAddAppointment(String fullCommand) throws IHospitalException {
         String time;
         String dummy = fullCommand.trim();
@@ -164,6 +169,7 @@ public class Parser {
         return new AddPatientDescriptionCommand(description, patientID);
     }
 
+    //@@author Demonshaha
     public Command parseAddCommand(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("add doctor")) {
             return parseAddDoctor(fullCommand);
@@ -242,6 +248,7 @@ public class Parser {
         return null;
     }
 
+    //@@author Demonshaha
     public Command parseSearchCommand(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("doctor")) {
             String dummy = fullCommand.trim();
@@ -260,6 +267,7 @@ public class Parser {
         }
     }
 
+    //@@author Demonshaha
     public Command parseListCommand(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("list doctor")) {
             return new ListDoctorListCommand();
@@ -272,6 +280,7 @@ public class Parser {
         }
     }
 
+    //@@author Demonshaha
     public Command parseEditDoctorCommand(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
         int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /d") + 8,
@@ -281,7 +290,6 @@ public class Parser {
             return new EditDoctorCommand(index, "ph", newInformation);
         } else if (fullCommand.contains("/e")) {
             String newInformation = dummy.substring(dummy.indexOf("/e") + 3);
-            System.out.println("qwq" + newInformation);
             return new EditDoctorCommand(index, "e", newInformation);
         } else if (fullCommand.contains("/n")) {
             String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
@@ -291,6 +299,7 @@ public class Parser {
         }
     }
 
+    //@@author Demonshaha
     public Command parseEditPatientCommand(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
         int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /p") + 8,
@@ -309,6 +318,7 @@ public class Parser {
         }
     }
 
+    //@@author Demonshaha
     public Command parseEditAppointmentCommand(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
         int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /a") + 8,

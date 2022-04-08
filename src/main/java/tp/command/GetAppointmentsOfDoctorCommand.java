@@ -13,6 +13,7 @@ import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
 
+//@@author Demonshaha
 public class GetAppointmentsOfDoctorCommand extends Command {
     private final String id;
 

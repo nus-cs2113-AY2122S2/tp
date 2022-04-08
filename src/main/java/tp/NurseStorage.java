@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-//@@author   DemonShaha
+//@@author   Demonshaha
 public class NurseStorage {
     private static final String root = System.getProperty("user.dir");
     private static final Path filePath = Paths.get(root, "data", "IHospitalDoctors.txt");
@@ -22,7 +22,7 @@ public class NurseStorage {
      * @throws IHospitalException IHospitalException
      *
      */
-    //@@author   DemonShaha
+    //@@author   Demonshaha
     public NurseStorage() throws IHospitalException {
         try {
             File fileDirectory = new File(dirPath.toString());
@@ -42,7 +42,7 @@ public class NurseStorage {
      * @param nurses nurse list
      * @throws IHospitalException IHospitalException
      */
-    //@@author  DemonShaha
+    //@@author  Demonshaha
     public void saveNurseList(NurseList nurses) throws IHospitalException {
         try {
             FileWriter fw = new FileWriter(filePath.toString());
@@ -70,7 +70,7 @@ public class NurseStorage {
      * @return The nurseList of the IHospitalNurses.txt
      * @throws IHospitalException IHospitalException
      */
-    //@@author DemonShaha
+    //@@author Demonshaha
     public NurseList loadNurseList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
