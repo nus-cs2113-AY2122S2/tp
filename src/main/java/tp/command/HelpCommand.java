@@ -13,7 +13,6 @@ import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
 
-//@@author Demonshaha
 public class HelpCommand extends Command {
     public HelpCommand() {
 
@@ -26,6 +25,6 @@ public class HelpCommand extends Command {
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         ui.printHelpPage();
-        return null;
+        return "_______End_____of_____Help_____Page_____:D__________________\n";
     }
 }

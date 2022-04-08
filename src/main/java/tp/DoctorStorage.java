@@ -87,7 +87,7 @@ public class DoctorStorage {
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
                 String department = scanner.nextLine();
-                String wardNumber = scanner.nextLine();
+                int wardNumber = Integer.parseInt(scanner.nextLine());
                 Doctor doctor = new Doctor(id, name, phoneNumber, email, department, wardNumber);
                 result.addDoctor(doctor);
             }

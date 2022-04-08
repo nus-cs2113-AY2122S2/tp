@@ -8,11 +8,9 @@ public class Ward {
     protected Doctor doctor;
     protected Patient patient;
     protected Nurse nurse;
-    protected String wardNumber;
+    protected int wardNumber;
 
-
-
-    public Ward(Doctor doctor, Patient patient, Nurse nurse, String wardNumber) {
+    public Ward(Doctor doctor, Patient patient, Nurse nurse, int wardNumber) {
         this.doctor = doctor;
         this.patient = patient;
         this.nurse = nurse;
@@ -43,19 +41,19 @@ public class Ward {
         this.nurse = nurse;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return wardNumber;
     }
 
-    public void setNumber(String number) {
+    public void editNumber(int number) {
         this.wardNumber = number;
     }
 
     @Override
     public String toString() {
-        return   "Doctor: " + doctor.getName() + " || Nurse: "
-                + "Nurse: " + nurse.getName() + " || Patient: "
-                + patient.getName() + " || Ward number: " + wardNumber;
+        return   "Doctor: " + doctor.getName() + " || Patient: "
+                + patient.getName() + " || Nurse: "
+                + nurse.getName() + " || Ward number: " + wardNumber;
     }
 }
 

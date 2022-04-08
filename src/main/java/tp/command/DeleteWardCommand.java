@@ -12,13 +12,13 @@ import tp.PatientStorage;
 import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
-import tp.person.Doctor;
+import tp.Ward;
 
-//@@author Demonshaha
-public class DeleteDoctorCommand extends Command {
+
+public class DeleteWardCommand extends Command {
     private final int index;
 
-    public DeleteDoctorCommand(int index) {
+    public DeleteWardCommand(int index) {
         this.index = index;
     }
 
@@ -28,13 +28,12 @@ public class DeleteDoctorCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-
-        if (index <= 0 || index > doctorList.getSize()) {
-            throw new IHospitalException("The doctor does not exist.\n");
+        if (index <= 0 || index > wardList.getSize()) {
+            throw new IHospitalException("The ward does not exist.\n");
         }
-        Doctor curr = doctorList.deleteDoctor(index);
-        return String.format(boundary + "Noted. I've removed this doctor:\n" + curr
-                                     + "\n" + "Now you have " + doctorList.getSize()
-                                     + " doctors in the system." + System.lineSeparator() + boundary);
+        Ward cur = wardList.deleteWard(index);
+        return String.format(boundary + "Noted. I've removed this ward:\n" + cur
+                + "\n" + "Now you have " + wardList.getSize()
+                + " wards in the system." + System.lineSeparator() + boundary);
     }
 }

@@ -38,9 +38,7 @@ public class AddWardCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        if (wardNumber <= 0 || wardNumber > wardList.getSize()) {
-            throw new IHospitalException("The ward does not exist\n");
-        }
+
         if (patientIndex <= 0 || patientIndex > patientList.getSize()) {
             throw new IHospitalException("The patient does not exist\n");
         }
@@ -54,12 +52,12 @@ public class AddWardCommand extends Command {
         Doctor doctor =  doctorList.getDoctor(doctorIndex);
         Patient patient = patientList.getPatient(patientIndex);
         Nurse nurse = nurseList.getNurse(nurseIndex);
-        String wardNum = String.valueOf(wardNumber);
+        int wardNum = wardNumber;
         wardList.addWard(doctor, patient, nurse,wardNum);
         return String.format(boundary + "Noted. I've added this ward:"
-                + "\n" + wardList.getWard(wardList.getSize())
-                + "\n" + "Now you have " + wardList.getSize()
-                + " wards recorded in the system." + System.lineSeparator() + boundary);
+                                     + "\n" + wardList.getWard(wardList.getSize())
+                                     + "\n" + "Now you have " + wardList.getSize()
+                                     + " wards recorded in the system." + System.lineSeparator() + boundary);
     }
 
 }

@@ -19,22 +19,22 @@ public class AddDoctorCommand extends Command {
     protected String name;
     protected String phoneNumber;
     protected String email;
+    protected int wardNumber;
     protected String department;
-    protected String wardNumber;
     protected boolean isOnDuty;
 
     public AddDoctorCommand() {
     }
 
     //@@author Demonshaha
-    public AddDoctorCommand(String id, String name, String phoneNumber, String email,
-                            String department, String wardNumber, boolean isOnDuty) {
+    public AddDoctorCommand(String id, String name, String phoneNumber, String email, String department,
+                            int wardNumber, boolean isOnDuty) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.department = department;
         this.wardNumber = wardNumber;
+        this.department = department;
         this.isOnDuty = isOnDuty;
     }
 

@@ -36,13 +36,16 @@ public class EditNurseCommand extends Command {
 
         if (type.contains("e")) {
             nurseList.getNurse(index).editEmail(newInformation);
-            return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
+            return String.format(boundary + "Updated already!\n" + nurseList.getNurse(index) + "\n" + boundary);
         } else if (type.contains("ph")) {
             nurseList.getNurse(index).editPhoneNumber(newInformation);
-            return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
+            return String.format(boundary + "Updated already!\n" + nurseList.getNurse(index) + "\n" + boundary);
+        } else if (type.contains("t")) {
+            nurseList.getNurse(index).editTitle(newInformation);
+            return String.format(boundary + "Updated already!\n" + nurseList.getNurse(index) + "\n" + boundary);
         } else {
             nurseList.getNurse(index).editName(newInformation);
-            return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
+            return String.format(boundary + "Updated already!\n" + nurseList.getNurse(index) + "\n" + boundary);
         }
     }
 }
