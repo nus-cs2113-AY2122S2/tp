@@ -97,6 +97,7 @@ public class Parser {
         return new AddNurseCommand(id, name, phoneNumber, email, title, wardNumber, false);
     }
     //@@author Demonshaha
+
     public Command parseAddPatient(String fullCommand) throws IHospitalException {
         String id;
         String dummy = fullCommand.trim();
@@ -289,7 +290,6 @@ public class Parser {
             return new EditDoctorCommand(index, "ph", newInformation);
         } else if (fullCommand.contains("/e")) {
             String newInformation = dummy.substring(dummy.indexOf("/e") + 3);
-//            System.out.println("qwq" + newInformation);
             return new EditDoctorCommand(index, "e", newInformation);
         } else if (fullCommand.contains("/n")) {
             String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
