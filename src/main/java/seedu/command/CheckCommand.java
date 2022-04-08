@@ -4,6 +4,7 @@ import seedu.Pair;
 import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -50,7 +51,7 @@ public class CheckCommand extends Command {
      */
     public Pair<String, ?> generateCheckPair() throws AssertionError, NumberFormatException, IllegalArgumentException {
         Pair<String, ?> pair = null;
-
+      
         String s = commandStrings.get(0);
         int delimiterPos = s.indexOf('/');
         // the case where delimiterPos = -1 is impossible as
@@ -63,7 +64,7 @@ public class CheckCommand extends Command {
             pair = new Pair<>("itemName", argValue);
             break;
         case "pd":
-            pair = new Pair<>("purchasedDate", argValue);
+            pair = new Pair<>("purchasedDate", LocalDate.parse(argValue));
             break;
         case "t":
             pair = new Pair<>("type", EquipmentType.valueOf(argValue.toUpperCase(Locale.ROOT)));
