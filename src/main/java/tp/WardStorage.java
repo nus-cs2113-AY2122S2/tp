@@ -89,6 +89,7 @@ public class WardStorage {
                 String dname = scanner.nextLine();
                 String dphoneNumber = scanner.nextLine();
                 String demail = scanner.nextLine();
+                String department = scanner.nextLine();
                 int dwardNumber = Integer.parseInt(scanner.nextLine());
                 String id = scanner.nextLine();
                 String name = scanner.nextLine();
@@ -103,7 +104,7 @@ public class WardStorage {
                 String title = scanner.nextLine();
                 int wardNumber = Integer.parseInt(scanner.nextLine());
                 Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
-                Doctor doctor = new Doctor(did, dname, dphoneNumber, demail, dwardNumber);
+                Doctor doctor = new Doctor(did, dname, dphoneNumber, demail, department, dwardNumber);
                 Nurse nurse = new Nurse(nid, nname, nphoneNumber, nemail, title, wardNumber);
                 wardNumber = Integer.parseInt(scanner.nextLine());
                 result.addWard(doctor, patient, nurse, wardNumber);
