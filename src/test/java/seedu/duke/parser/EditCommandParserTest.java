@@ -66,6 +66,7 @@ public class EditCommandParserTest {
                 CliSyntax.PREFIX_NAME.getPrefix(),  ParserStubs.PAPERCUP_NAME,
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
                 CliSyntax.PREFIX_QUANTITY.getPrefix());
-        assertParseSuccess(parser, testInputNameDescMissingQuantity, ParserStubs.ZEROINDEX_EDITCOMMAND_NAMEDESC_MISSINGQUANTITY);
+        assertParseSuccess(parser, testInputNameDescMissingQuantity,
+                ParserStubs.ZEROINDEX_EDITCOMMAND_NAMEDESC_MISSINGQUANTITY);
     }
 }
