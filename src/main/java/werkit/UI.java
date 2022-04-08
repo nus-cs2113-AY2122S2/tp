@@ -497,7 +497,7 @@ public class UI {
         if (dayName == " ") {
             System.out.println("No plan is being scheduled, hence no plan is cleared.");
         } else {
-            System.out.println("Plan had been cleared for " + dayName + ".");
+            System.out.println("Plan has been cleared for " + dayName + ".");
         }
     }
 
@@ -505,7 +505,7 @@ public class UI {
      * Prints a message when all day schedule had been cleared.
      */
     public void printClearedScheduleMessage() {
-        System.out.println("Schedule had been cleared and reset.");
+        System.out.println("Schedule has been cleared and reset.");
         System.out.println("There is no plan scheduled for any day.");
         System.out.println("To add plan for any day, enter:");
         printColorText(TextColor.COLOR_YELLOW, "schedule /update <day number [1-7]> <plan number>");

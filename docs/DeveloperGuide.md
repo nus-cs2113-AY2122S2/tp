@@ -1301,13 +1301,13 @@ The overview of the design on schedule features can be found [here](#schedule-re
 #### Update Schedule
 A summary of the general procedure of updating a plan for a particular day to the schedule in WerkIt! is as follows:
 1. User enters the command `schedule /update <day number> <plan number>`.
-2. If there are no plan being scheduled for the day, a new Day object is created and stored in the application.
-   If there is an existing plan scheduled for that particular day, the Day object that had already been created,
+2. If there is no plan being scheduled for the day, a new Day object is created and stored in the application.
+   If there is an existing plan scheduled for that particular day, the `Day` object that has already been created
    will then be updated to store the latest plan scheduled for the day.
-3. The success response is printed to the user through the terminal.
-4. The Day object data is written to the resource file `schedule.txt`.
+3. The success response is displayed via the terminal.
+4. The `Day` object data is written to the resource file `schedule.txt`.
 
-The following sequence illustrates how the schedule /update command works in greater detail:
+The following sequence illustrates how the `schedule /update` command works in greater detail:
 
 <span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
@@ -1332,10 +1332,10 @@ Steps 2 and 3 are explained in greater details in the following sequence diagram
 day in the schedule stated by the user. It will fist call the `String#split(" ")` method 
 to separate out the `userArgument` given by the user. Upon, splitting of the whitespaces in `userArgument`, 
 it will then check if the `userArgument` is valid. If it is invalid, an 
-`Exception` would be thrown to the user and following the termination of the process (step 2.3).
+`ArrayIndexOutOfBoundsException` would be thrown to the user and following the termination of the process (step 2.3).
 
 (Steps 2.5 to 2.8) After splitting and checking the validity of `userArgument`, variables `userArgument[0]` representing
-`dayNumber` and `userArgument[1]` representing the plan index of the plan stored in the planList (`planNumber`) are obtained. Both the 
+`dayNumber` and `userArgument[1]` representing `planNumber`, the plan index of the plan stored in the planList are obtained. Both the 
 variables are then converted from data type string to integer. In addition, there is a check executed on both the converted 
 `dayNumber` and `planNumber` to ensure that they are valid. This check is done so by calling the `DayList#isDayValid(DayNumber)` and
 `DayList#isPlanValid(planNumber)` methods respectively.
@@ -1351,12 +1351,12 @@ planList by calling the `PlanList#getPlanFromKey` (steps 2.15 to 2.16).
 a new `Day` object is created and stored in the application.
 
 (Steps 2.19 to 2.20) However, if there is an existing plan scheduled for that particular day, the `Day` object that 
-had already been created, will then be updated to store the latest plan scheduled for the day. This process is done so by
+has already been created, will then be updated to store the latest plan scheduled for the day. This process is done so by
 calling `Day#setNewPlanForThisDay(newDay, planToAdd)` method.
 
-(Steps 4 and 5) After successfully created/updated the Day object, the `UI#printNewSchedule(newDay)` method
+(Steps 4 and 5) After successfully creating/updating the Day object, the `UI#printNewSchedule(newDay)` method
 will be called to display the day and the corresponding plan scheduled for it via the terminal. The following is an
-example of the message after the user had successfully scheduled a plan for the day (e.g. `schedule /update 1 1`):
+example of the message after the user has successfully scheduled a plan for the day (e.g. `schedule /update 1 1`):
 ```
 ----------------------------------------------------------------------
 Alright, the following plan schedule has been created:
@@ -1373,7 +1373,7 @@ This completes the process of scheduling a plan for a particular day in WerkIt!
 
 ##### Design considerations for update schedule
 ###### Day Object
-For the application, schedule is defined to be a 7-days workout plan. The days that do not have any plan scheduled
+For the application, schedule is defined to be a 7-day workout plan. Days that do not have any plan scheduled
 would be considered a rest day for the user. Therefore, when implementing the creation of `Day` object, a total of 7
 `Day` objects at most would be created and be stored in the dayList with size 7.
 
@@ -1393,10 +1393,10 @@ to store the new plan.
 #### View Schedule
 To view the schedule in WerkIt! User can enter the command `schedule /list`.
 
-A schedule in the WerkIt! refers to a 7-days workout plan schedule. 
-For example, a plan named "leg day" which consists of 3 workouts "5 squats, 5 lunges, 5 squats"
+A schedule in the WerkIt! refers to a 7-day workout plan schedule. 
+For example, a plan (plan number 1) named "leg day" which consists of 3 workouts, "5 squats, 5 lunges, 5 squats",
 can be added into the schedule by entering `schedule /update <day number> <plan number>` command. Hence, "leg day" plan
-can be schedule on Monday by the command of `schedule /upate 1 1`. To view the plan in the schedule, user can enter the
+can be schedule on Monday by the command of `schedule /upate 1 1`. To view the plans in the schedule, user can enter the
 command `schedule /list`.
 
 The following sequence illustrates how the `schedule /list` command works in greater detail:
@@ -1411,16 +1411,16 @@ The following sequence illustrates how the `schedule /list` command works in gre
 (Before step 1) <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
-(Step 1 and 2) The command passed in by the user is `schedule /list`, it is a schedule command 
-and will be executed by calling the ScheduleCommand#execute() method. Since the command action is `list`
+(Step 1 and 2) The command parsed in by the user is `schedule /list`, it is a schedule command 
+and will be executed by calling the `ScheduleCommand#execute()` method. Since the command action is `list`
 the application will execute the `DayList#printSchedule()` method.
 No parameters are needed to be passed in the method as the method loop through the scheduleList, which stores all the plan names
 scheduled for the individual days.
 
 (Steps 3 and 4) To ensure the printing of the schedule is formatted properly with a common standard, when `DayList#printSchedule()`
-method is called, it will invoke a for loop to pad the plan name for all the plans in the scheduleList
-with spaces by calling the `DayList#padWithSpaces(planForDay)` method. This method will pad both the front and back of the
-plan name with spaces. Total characters that the padding and the plan name combined should not exceed 30 characters.
+method is called, it will invoke a for loop to pad the plan name with whitespaces for all the plans in the scheduleList 
+by calling the `DayList#padWithSpaces(planForDay)` method. This method will pad both the front and back of the
+plan name with whitespaces. Total characters that the padding and the plan name combined should not exceed 30 characters.
 
 (Step 5) Upon the successful execution of the `DayList#printSchedule()` method, the plan scheduled on each of the day
 will be display on the console to the user. An expected outcome of the `schedule /list` command would be:
@@ -1455,7 +1455,7 @@ A summary of the general procedure of clearing a plan scheduled for a particular
    This `Day` object will then be deleted from the DayList. For example, if `schedule /clear 1` command is entered,
    the index where the `Day` object storing information of the plan scheduled for Monday would be store in index 0,
    (day number -1), of the DayList.
-3. DayList[day number - 1] would become null after the command is successfully being executed.
+3. `DayList[day number - 1]` would become null after the command is successfully being executed.
 4. The success response is printed to the user through the terminal.
 5. The `schedule.txt` will also be rewritten to reflect the changes. 
 
@@ -1476,14 +1476,15 @@ is the `schedule /clear <day number>` command. An example of a valid command wou
 by the user is a schedule command, hence it is being executed by calling the `ScheduleCommand#execute()` method.
 
 (Step 2) Since the command entered is `schedule /clear <day number>`, the `DayList#clearDayPlan(userArgument)` method will
-be called. This method will first convert the userArgument to an Integer data type (steps 3 and 4) and will then call
+be called. This method will first convert the userArgument to an Integer data type (steps 3 and 4), after which it will call
 the `DayList#isDayValid(dayNumber)` method to check whether the day number entered by the user is valid. 
 If the day number falls within the range of 1 to 7 then it is considered a valid day else 
 an `InvalidScheduleException` would be thrown to the user, and the entire clearing of plan for a 
 particular day in the schedule process is aborted (steps 5 and 6).
 
-(Steps 7 and 8) If the `dayNumber` is valid, the method `DayList#clearPlan(dayNumber)` will be called to remove the plan scheduled
-on that day. The `Day` object that stores the plan details for the specified day in the user command will be deleted.
+(Steps 7 and 8) If the `dayNumber` is valid, the method `DayList#clearPlan(dayNumber)` will be called to remove the plan 
+scheduled on that day. The `Day` object that stores the plan details for the specified day in 
+the user command will be deleted.
 
 (Steps 9 and 10) After which, the `DayList#convertDayNumberToDay(dayNumber)` method will be called.
 As the method name suggests, this method will convert the day number to its corresponding meaning. 
@@ -1491,7 +1492,7 @@ For example, day number 1 will be converted to Monday. The purpose of this metho
 make the success message to be displayed to the user more user-readable.
 
 (Step 11 and 12) After the plan is successfully cleared for that indicated day, a success message of the process would be
-printed to the user through the terminal by calling the `UI#printClearedScheduleOnADat` method. 
+printed to the user through the terminal by calling the `UI#printClearedScheduleOnADay` method. 
 An example of a success message would be
 
 ```
@@ -1513,7 +1514,7 @@ This completes the process of clearing a plan on a particular day of the schedul
 #### Clear Schedule For The Week
 A summary of the general procedure of clearing all the plans stored in the schedule in WerkIt! is as follows:
 1. User enters the command `schedule /clearall`.
-2. The application will delete all the plans that had been added to the schedule.
+2. The application will delete all the plans that have been added to the schedule.
 3. The success response is printed to the user through the terminal. 
 4. The `schedule.txt` will also be rewritten to reflect the changes.
 
@@ -1534,12 +1535,12 @@ is the `schedule /clearall` command. This command entered by the user is a sched
 hence it is being executed by calling the `ScheduleCommand#execute()` method.
 
 (Step 2) Since the command entered is `schedule /clearall`, the `DayList#clearAllSchedule()` method will
-be called. This method will delete all the `Day` object stored in the `dayList` using a for loop. 
+be called. This method will delete all the `Day` objects stored in the `dayList` using a for loop. 
 
 (Step 3 and 4) `DayList#clearPlan(dayNumber)` will be called 7 times in a for loop to 
-delete all the `Day` object stored in the `dayList`.
+delete all the `Day` objects stored in the `dayList`.
 
-(Steps 5 and 6) After all the plan is successfully cleared from the schedule, `UI#printClearedScheduleMessage()` method 
+(Steps 5 and 6) After all the plans are successfully cleared from the schedule, `UI#printClearedScheduleMessage()` method 
 will be called to print a success message of the process. This message would be printed to the user through the terminal. 
 An example of a success message would be
 
@@ -1552,12 +1553,11 @@ schedule /update <day number [1-7]> <plan number>
 ----------------------------------------------------------------------
 ```
 
-(Step 7) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
+(Step 7) Lastly, `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
 in the dayList into `schedule.txt` which is stored on the user's local filesystem. 
 Since all Day objects are deleted, the writing of data into `schedule.txt` would be an equivalent of 
 resetting the text file. For more information on the file management, 
 refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
-
 
 This completes the process of clearing of all plans stored in the schedule on WerkIt!
 
@@ -1925,9 +1925,23 @@ where there are many other day-to-day things being kept too.
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
 
 ## Non-Functional Requirements
+#### Data Requirements
+For `workout /new` and `workout /update` commands, the maximum number of repetitions a user can set is `2,147,483,647`. 
+This limit is restricted by `int` data type. The size of `int` is 4 bytes which is 32 bits, therefore, the maximum value 
+for a variable of type `int` will be `2,147,483,647`. If user set the number of repetitions larger than `2,147,483,647`, 
+an `NumberFormatException` will be thrown to indicate that the value entered is not allowed. 
 
-{Give non-functional requirements}
+It is expected that `2,147.483.647` repetitions of any exercise is not achievable by humans hence, 
+using `int` as the data type to hold the value of repetitions is more than sufficient. 
 
+#### Technical/Environment Requirements
+This application is developed using Java JDK 11, hence to run this application, please ensure that you 
+are running this application on a 64-bit operating system and with a minimum of 8 GB of RAM. 
+
+#### Performance Requirements 
+Each command entered by the user should respond within two seconds.
+
+---
 ## Glossary
 
 * **Repetitions** - The process of repeating an exercise. Often abbreviated to 'reps'.
@@ -1941,22 +1955,22 @@ where there are many other day-to-day things being kept too.
 
 | Plan Name      | Contains                                                                                                               |
 |----------------|------------------------------------------------------------------------------------------------------------------------|
-| Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps)                                                          |
-| Whole Body!    | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
+| grow my biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps)                                                          |
+| whole body!    | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
 
 
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
 of their schedule. For instance, the user's daily schedule can look like this:
 
-| Day   | Plan Name      |
-|-------|----------------|
-| Day 1 | Grow my Biceps |
-| Day 2 | Rest Day       |
-| Day 3 | Whole Body!    |
-| Day 4 | Leg Day        |
-| Day 5 | Grow my Biceps |
-| Day 6 | Whole Body!    |
-| Day 7 | Rest Day       |
+| Day       | Plan Name      |
+|-----------|----------------|
+| Monday    | grow my biceps |
+| Tuesday   | rest day       |
+| Wednesday | whole body!    |
+| Thursday  | leg day        |
+| Friday    | grow my biceps |
+| Saturday  | whole body!    |
+| Sunday    | rest day       |
 
 
 ## Instructions for manual testing
