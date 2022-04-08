@@ -109,20 +109,12 @@ public class ExerciseList {
     /**
      * Populates a set of exercises to ExerciseList.
      */
-    public void populateExerciseToList() {
-        this.addExerciseToList("push up");
-        this.addExerciseToList("bicep curl");
-        this.addExerciseToList("pull up");
-        this.addExerciseToList("squat");
-        this.addExerciseToList("lunge");
-        this.addExerciseToList("hip thrust");
-        this.addExerciseToList("sit up");
-        this.addExerciseToList("crunch");
-        this.addExerciseToList("russian twist");
-        this.addExerciseToList("running");
-        this.addExerciseToList("swimming");
-        this.addExerciseToList("jumping jack");
-        this.addExerciseToList("burpee");
+    public void populateExercisesToList() {
+        ArrayList<String> defaultExercises = getDefaultExerciseList();
+
+        for (String defaultExercise : defaultExercises) {
+            addExerciseToList(defaultExercise);
+        }
     }
 
     /**
