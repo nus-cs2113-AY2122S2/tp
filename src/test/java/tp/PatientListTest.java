@@ -59,15 +59,18 @@ class PatientListTest {
     void testToString() {
         PatientList patients = new PatientList();
 
-        String toPrint = "____________________________________________________________\n"
-                                 + "Here are the patients recorded:\n"
+        String toPrint = "____________________________________________________________"
+                                 + System.lineSeparator()
+                                 + "Here are the patients recorded:" + System.lineSeparator()
                                  + "1. * PATIENT [1234] || Name: john || Contact No.: 12341234 "
-                                 + "|| Email: 3600@gmail.com || Symptom: symptom || Description: description\n"
+                                 + "|| Email: 3600@gmail.com || Symptom: symptom || Description: description"
+                                 + System.lineSeparator()
                                  + "2. * PATIENT [0299] || Name: Chris || Contact No.: 55556666 "
                                  + "|| Email: jmchris@gmail.com || Symptom: cough "
-                                 + "|| Description: Allergic to Penicillin\n"
-                                 + "You have 2 patients recorded in the system.\n"
-                                 + "____________________________________________________________\n";
+                                 + "|| Description: Allergic to Penicillin" + System.lineSeparator()
+                                 + "You have 2 patients recorded in the system." + System.lineSeparator()
+                                 + "____________________________________________________________"
+                                 + System.lineSeparator();
         try {
             patients.addPatient(firstPatient);
             patients.addPatient(secondPatient);
