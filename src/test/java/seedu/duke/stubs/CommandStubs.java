@@ -17,6 +17,7 @@ import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
 
 public class CommandStubs {
 
+    // ItemList Stubs for use in SearchCommand
     public static final ItemList SEARCH_LIST = generateItemList(ITEM_PAPER_A4_10, ITEM_PAPER_A5_10, ITEM_MARKER,
             ITEM_WHITEBOARD);
     public static final List<Item> SEARCH_RESULT_PAPER_NAME = generateImmutableResults(
@@ -26,19 +27,31 @@ public class CommandStubs {
     public static final List<Item> SEARCH_RESULT_PAPER_NAME_A4_DESCRIPTION = generateImmutableResults(ITEM_PAPER_A4_10);
     public static final List<Item> SEARCH_RESULT_NONE = generateImmutableResults();
 
+    // ItemList Stubs for use in EditCommand
+    public static final ItemList EDIT_NEGATIVE_QUANTITY_LIST_BEFORE = generateItemListWithRecords(
+            generateItemList(ITEM_PAPER_A4_10));
+    public static final ItemList EDIT_NAME_LIST_BEFORE = generateItemListWithRecords(
+            generateItemList(ITEM_PENCIL));
+    public static final ItemList EDIT_NAME_EXPECTED_LIST_AFTER = generateItemListWithRecords(
+            generateImmutableItemList(ITEM_MARKER));
+    public static final ItemList EDIT_ABSQUANTITY_LIST_BEFORE = generateItemListWithRecords(
+            generateItemList(ITEM_PAPER_A4_10));
+    public static final ItemList EDIT_ABSQUANTITY_EXPECTED_LIST_AFTER = generateItemListWithRecords(
+            generateImmutableItemList(ITEM_PAPER_A4_15));
+    public static final ItemList EDIT_RELQUANTITY_LIST_BEFORE = generateItemListWithRecords(
+            generateItemList(ITEM_PAPER_A4_15));
+    public static final ItemList EDIT_RELQUANTITY_EXPECTED_LIST_AFTER = generateItemListWithRecords(
+            generateImmutableItemList(ITEM_PAPER_A4_10));
+    public static final ItemList EDIT_DESC_LIST_BEFORE = generateItemListWithRecords(
+            generateItemList(ITEM_PAPER_A4_10));
+    public static final ItemList EDIT_DESC_EXPECTED_LIST_AFTER = generateItemListWithRecords(
+            generateImmutableItemList(ITEM_PAPER_A5_10));
+    public static final ItemList EDIT_ALL_LIST_BEFORE = generateItemListWithRecords(
+            generateItemList(ITEM_MARKER));
+    public static final ItemList EDIT_ALL_EXPECTED_LIST_AFTER = generateItemListWithRecords(
+            generateImmutableItemList(ITEM_WHITEBOARD));
 
-    public static final ItemList EDIT_NEGATIVE_QUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
-    public static final ItemList EDIT_NAME_LIST_BEFORE = generateItemList(ITEM_PENCIL);
-    public static final ItemList EDIT_NAME_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_MARKER);
-    public static final ItemList EDIT_ABSQUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
-    public static final ItemList EDIT_ABSQUANTITY_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_PAPER_A4_15);
-    public static final ItemList EDIT_RELQUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_15);
-    public static final ItemList EDIT_RELQUANTITY_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_PAPER_A4_10);
-    public static final ItemList EDIT_DESC_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
-    public static final ItemList EDIT_DESC_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_PAPER_A5_10);
-    public static final ItemList EDIT_ALL_LIST_BEFORE = generateItemList(ITEM_MARKER);
-    public static final ItemList EDIT_ALL_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_WHITEBOARD);
-
+    // ItemList Stubs for use in ListCurrentBorrowingsCommand
     public static final ItemList TEST_ITEM_LIST = generateItemList(ITEM_MARKER, ITEM_PENCIL, ITEM_WHITEBOARD);
     public static final ItemList TEST_ITEM_LIST_WITH_RECORDS = generateItemListWithRecords(TEST_ITEM_LIST);
 
