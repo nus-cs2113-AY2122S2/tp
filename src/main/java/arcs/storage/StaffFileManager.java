@@ -62,7 +62,7 @@ public class StaffFileManager {
     private ArrayList<String> encodeData(ArrayList<Staff> Staffs) {
         ArrayList<String> records = new ArrayList<>();
         for (Staff Staff: Staffs) {
-            records.add(Staff.toString());
+            records.add(Staff.toStringStore());
         }
         return records;
     }

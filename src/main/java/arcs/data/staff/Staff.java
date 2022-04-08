@@ -84,10 +84,17 @@ public class Staff {
         return str;
     }
 
+    public String toStringStore() {
+        String str = id + " / " + password + " / " + name + " / " + job + " / "
+                + phone + " / " + email;
+
+        return str;
+    }
+
     public String getStaffInfo() {
         String info = "ID: " + id + System.lineSeparator()
                 + "Name: " + name + System.lineSeparator()
-                + "job: " + name + System.lineSeparator()
+                + "job: " + job + System.lineSeparator()
                 + "Phone number: " + phone + System.lineSeparator()
                 + "Email address: " + email;
         return info;
