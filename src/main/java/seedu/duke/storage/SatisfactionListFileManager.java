@@ -47,7 +47,7 @@ public class SatisfactionListFileManager extends FileManager {
         return satisfactionList;
     }
 
-    public void writeSatisfactionListToFile(SatisfactionList satisfactionList) throws IOException {
+    public void save(SatisfactionList satisfactionList) throws IOException {
         clearFileContents();
         FileWriter fw = new FileWriter(FILE_PATH, true);
         int lastIndexOfArrayList = satisfactionList.getSize() - 1;
