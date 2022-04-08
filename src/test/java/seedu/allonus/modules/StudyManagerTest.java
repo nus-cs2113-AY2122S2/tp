@@ -225,6 +225,11 @@ public class StudyManagerTest {
 
     }
 
+    /**
+     * Tests the working of 'read ics' feature in StudyManager.
+     * Requires an existing file called nusmods_calendar.ics to be at the top of the directory.
+     * Compares output from reading that file to ensure that the functionality works.
+     */
     @Test
     public void testReadIcs() {
         outContent.reset();
