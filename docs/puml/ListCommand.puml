@@ -2,12 +2,12 @@
 !include Style.puml
 'https://plantuml.com/sequence-diagram
 box ListCommand
-participant ":Parser" as Parser LOGIC_COLOR_T1
-participant "Command:ListCommand" as ListCommand LOGIC_COLOR_T1
+participant ":Parser" as Parser PARSER_COLOUR
+participant "Command:ListCommand" as ListCommand COMMANDS_COLOUR
 end box
-activate ListCommand
+activate ListCommand COMMANDS_COLOUR
 ListCommand -> ListCommand: listToString()
-activate ListCommand
+activate ListCommand COMMANDS_COLOUR
 ListCommand --> ListCommand: listInString:String
 deactivate ListCommand
 

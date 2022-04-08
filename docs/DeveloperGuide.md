@@ -195,9 +195,9 @@ Below is an example showing how the AddCommand behaves at each step.
    `MindMyMoney`.
 2. `AddCommand` instantiates `addInput`, `expenditureList`, `creditCardList`, `incomeList`.
 3. The application invokes `AddCommand.executeCommand()` to execute user instruction.
-4. If user input contains credit card flag, the application executes `AddCommand.addCreditCard()`.
-5. Else if user input contains income flag, the application executes `AddCommand.addIncome()`.
-6. Else the application executes `AddCommand.addExpenditure()`.
+4. If user input contains `/e`, the application executes `AddCommand.addExpenditure()`.
+5. Else user input contains `/cc`, the application executes `AddCommand.addCreditCard()`.
+6. Else if user input contains `/i`, the application executes `AddCommand.addIncome()`.
 7. The application then returns to the Parser component.
 
 <br/>
@@ -216,12 +216,12 @@ to the list.
 
 1. During the execution, `AddCommand.addExpenditure()` will parse through user input to obtain the `PAYMENT_METHOD`, `CATEGORY`,
    `DESCRIPTION`, `AMOUNT` and `TIME` fields.
-2. Once all the fields are obtained, `AddCommand.addExpenditure()` will run tests for its respective fields and capitalise the 
-   `PAYMENT_METHOD`, `CATEGORY` input.
-3. The `AddCommand.addExpenditure()` object instantiates a new `Expenditure` object with the aforementioned 5 fields and adds them
+2. Once all the fields are obtained, `AddCommand.addExpenditure()` will run tests for its respective fields.
+3. The `AddCommand.addExpenditure()` object formats the `CATEGORY` and `AMOUNT` fields, and the `PAYMENT_METHOD` if it is cash.
+4. The `AddCommand.addExpenditure()` object instantiates a new `Expenditure` object with the 5 fields and adds them
    into the `ExpenditureList`.
-4. The `AddCommand.addExpenditure()` object prints a list to show the user what it has saved.
-5. The `AddCommand.addExpenditure()` returns to `AddCommand`.
+5. The `AddCommand.addExpenditure()` object prints a list to show the user what it has saved.
+6. The `AddCommand.addExpenditure()` returns to `AddCommand`.
 
 <br/>
 
@@ -236,11 +236,12 @@ Fig 9 - Add Credit Card Command Sequence Diagram
 The sequence diagram above shows the interactions of different classes when adding a credit card to the list.
 
 1. During the execution, `AddCommand.addCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`,
-   `CASH_BACK`, `CARD_LIMIT` and `CARD_BALANCE` fields.
-2. Once all the fields are obtained, `AddCommand.addCreditCard()` object instantiates a new `CreditCard`
-   object with the aforementioned 5 fields and adds them into the `CreditCardList`.
-3. The `AddCommand.addCreditCard()` object prints a list to show the user what it has saved.
-4. The `AddCommand.addCreditCard()` returns to `AddCommand`.
+   `CASH_BACK` and `CARD_LIMIT` fields.
+2. Once all the fields are obtained, `AddCommand.addExpenditure()` will run tests for its respective fields.
+3. The `AddCommand.addCreditCard()` object instantiates a new `CreditCard`
+   object with the aforementioned 3 fields and adds them into the `CreditCardList`.
+4. The `AddCommand.addCreditCard()` object prints a list to show the user what it has saved.
+5. The `AddCommand.addCreditCard()` returns to `AddCommand`.
 
 <br/>
 
@@ -287,7 +288,7 @@ MindMyMoney allow users to view their current list of added expenditures.
 #### Current Implementation
 The sequence diagram below shows the interactions of different subcomponents of the system when listing.  
 
-![list_command_sequence_diagram](images/List_Command_Sequence_Diagram.png)
+![list_command_sequence_diagram](images/List_Command_Sequence_Diagram.png)  
 Fig 13 - List Command Sequence Diagram
 
 #### ListCommand design considerations
@@ -320,10 +321,10 @@ Manage finances containing multiple payment methods faster than a typical mouse/
 
 ### User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...  | I want to ...             | So that I can ...                                           |
+|---------|-----------|---------------------------|-------------------------------------------------------------|
+| v1.0    | new user  | see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    | user      | find a to-do item by name | locate a to-do without having to go through the entire list |
 
 ### Non Functional Requirements
 
