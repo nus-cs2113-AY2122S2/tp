@@ -11,7 +11,6 @@ public class Ward {
     protected int wardNumber;
 
 
-
     public Ward(Doctor doctor, Patient patient, Nurse nurse, int wardNumber) {
         this.doctor = doctor;
         this.patient = patient;
