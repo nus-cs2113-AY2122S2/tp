@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DoctorListTest {
     private final Doctor firstDoctor = new Doctor("1234", "Rose",
-            "12341234", "3600@gmail.com", "General", 10);
+            "12341234", "3600@gmail.com", 10);
     private final Doctor secondDoctor = new Doctor("2233", "Mary",
-            "66667777", "Mary123@gmail.com", "Oral", 22);
+            "66667777", "Mary123@gmail.com", 22);
     private Ui ui = new Ui();
 
     @Test
