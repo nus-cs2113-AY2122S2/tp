@@ -38,6 +38,8 @@ public class ParserLocalData {
     private static final String EVENT_TYPE_DELIMITER_FRONT = "[";
     private static final String EVENT_TYPE_DELIMITER_BACK = "]";
     private static ParserHelperMethods parserHelperMethods = new ParserHelperMethods();
+    public static final String MEETING_SYMBOL = "M";
+    public static final String LESSON_SYMBOL = "L";
 
     /**
      * Creates a person's timetable.
@@ -127,7 +129,7 @@ public class ParserLocalData {
         } catch (InvalidModeException ime) {
             throw new RuntimeException(ERROR_INVALID_MODE_LOADING);
         } catch (MissingParameterException mpe) {
-            throw new RuntimeException(ERROR_MISSING_PARAMETERS_LOAD_LESSON);
+            throw new RuntimeException(ERROR_MISSING_PARAMETERS_LOAD_MEETING);
         }
     }
 
@@ -157,17 +159,19 @@ public class ParserLocalData {
         String eventType = data.substring(data.indexOf(EVENT_TYPE_DELIMITER_FRONT) + 1,
                 data.indexOf(EVENT_TYPE_DELIMITER_BACK));
         String trimmedEventType = eventType.trim();
-        return trimmedEventType;
+        String uppercaseEventType = trimmedEventType.toUpperCase();
+        return uppercaseEventType;
     }
 
     /**
-     * Checks the validity of the user's given event type in the data file.
+     * Checks the validity of the user's given event type in the data file. M stands for Meeting
+     * and L stands for Lesson.
      *
      * @param event lesson or meeting
      * @throws InvalidEventTypeException if the value for event does not match "M" or "L"
      */
     public static void checkEventType(String event) throws InvalidEventTypeException {
-        if (event.equals("M") || event.equals("L")) {
+        if (event.equals(MEETING_SYMBOL) || event.equals(LESSON_SYMBOL)) {
             return;
         }
         throw new InvalidEventTypeException();
