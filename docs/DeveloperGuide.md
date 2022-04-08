@@ -2135,13 +2135,13 @@ See [this section](#creating-a-new-workout) to view how you can populate your wo
 
 The following are some test cases for you to try:
 
- **Positive Test Cases**<br/><br/>
+**Positive Test Cases**<br/>
 
 | Test Cases         | Command                                | Expected result                                                                                                              |
 |:-------------------|:---------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------|
 | Valid plan created | `plan /new first plan /workouts 1,1,1` | A new plan called "first plan" will be created. This plan contains 3 instances of workout with index 1 in the workout list.  |
 
-**Negative Test Cases**<br/><br/>
+<br/>**Negative Test Cases**<br/>
 
 | Test Cases                                                                                                                                    | Command                                                             | Expected result                                               |
 |:----------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|:--------------------------------------------------------------|
@@ -2160,14 +2160,14 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-**Positive Test Cases**<br/><br/>
+**Positive Test Cases**<br/>
 
 | Test Cases             | Command      | Expected result                                                                                                                                                                  |
 |:-----------------------|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Valid listing of plans | `plan /list` | a. If plan list is empty, the terminal will display to the user that the plan list is empty. <br/><br/> b. If plan list is not empty, all plan names will be listed to the user. |
 
 
-**Negative Test Cases**<br/><br/>
+<br/>**Negative Test Cases**<br/>
 
 | Test Cases                                                            | Command        | Expected result                             |
 |:----------------------------------------------------------------------|:---------------|:--------------------------------------------|
