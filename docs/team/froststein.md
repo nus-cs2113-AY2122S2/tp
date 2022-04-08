@@ -22,8 +22,8 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
   * Allows users to edit previously created sessions.
 * [Session List](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
   * Allows users to view all previously created sessions.
-* Storage
 * [Manager](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Manager.java)
+* [Storage](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/storage/Storage.java)
   * This feature was implemented so that data entered by the user during the lifetime of the application would be stored.
   * This is done by using the `Serializable` class in `java`.
 
