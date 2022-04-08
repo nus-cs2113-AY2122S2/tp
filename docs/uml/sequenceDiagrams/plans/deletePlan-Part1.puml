@@ -8,7 +8,7 @@ title Sequence Diagram of `plan /delete` Command
 hide footbox
 
 participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
-participant "newCommand\n:PlanCommand" AS deleteCommand COLOR_LOGIC
+participant "deleteCommand\n:PlanCommand" AS deleteCommand COLOR_LOGIC
 participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
 participant "ui:UI" AS UI2 COLOR_UI
 participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
