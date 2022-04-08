@@ -877,21 +877,21 @@ The following sequence diagram is the detailed procedure for Step 2's `WorkoutLi
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
  `WorkoutList#deleteWorkout()` have been omitted.</span>
 
-**(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout(userArgument)`.
+**(Steps 2.1 to 2.2)** The `Integer#parseInt()` method is called to parse the user argument parameter given to `WorkoutList#deleteWorkout()`.
 In this case, the user argument parameter is the workout index number of the workout to be deleted from the workout list as a `String` object.
 <br><br>
-**(Steps 2.3 to 2.4)** With the workout index to delete, the `WorkoutList#deleteWorkout(userArgument)` method will then
-fetch the `Workout` object to be deleted by calling the `WorkoutList#getWorkoutFromIndexNum(indexToDelete)` method.
-However, before that `Workout` object is fetched, the `WorkoutList#deleteWorkout(userArgument)` method
+**(Steps 2.3 to 2.4)** With the workout index to delete, the `WorkoutList#deleteWorkout()` method will then
+fetch the `Workout` object to be deleted by calling the `WorkoutList#getWorkoutFromIndexNum()` method.
+However, before that `Workout` object is fetched, the `WorkoutList#deleteWorkout()` method
 checks that the workout index to delete is within the range of the application's workout list.
 If index to delete is not within the range of the workout list, an `InvalidWorkoutException` exception is thrown.
 <br><br>
 **(Steps 2.5 to 2.8)** The `Workout` object to be deleted is subsequently removed from the ArrayList and HashMap which stores the
 application's workout list.
 <br><br>
-**(Step 3)** The `WorkoutList#deleteWorkout(userArgument)` method returns the deleted `Workout` object to `WorkoutCommand`.
+**(Step 3)** The `WorkoutList#deleteWorkout()` method returns the deleted `Workout` object to `WorkoutCommand`.
 <br><br>
-**(Steps 4 to 5)** Upon returning to the `WorkoutCommand` object, the `UI#printDeleteWorkoutMessage(deletedWorkout)` is called
+**(Steps 4 to 5)** Upon returning to the `WorkoutCommand` object, the `UI#printDeleteWorkoutMessage()` is called
 to display the workout that has been deleted to the user via the terminal. The following is an example 
 of a success deletion message after a valid workout is deleted from the application's workout list:
 ```
@@ -906,11 +906,14 @@ Alright, the following workout has been removed:
 **(Steps 6 to 7)** The `WorkoutCommand#deletePlanContainsDeletedWorkout()` method will
 be called to delete any existing plan(s) that contains that deleted workout.
 <br><br>
-**(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
+**(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile()` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list and the
-`FileManager#rewriteAllPlansToFile(planList)` is also called to rewrite
+`FileManager#rewriteAllPlansToFile()` is also called to rewrite
 the `plans.txt` file according to the newly modified application's plan list.
-<br><br>
+For more information on the file management, 
+refer to this [section](DeveloperGuide.md#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
+
+<br/><br/>
 This completes the process of deleting an existing workout in WerkIt!
 
 ##### Design Considerations for Deleting Existing Workout
