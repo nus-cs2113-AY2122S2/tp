@@ -61,13 +61,13 @@ you to:
 
 The following table describes the **formats** used in this User Guide.
 
-| Format              | Description                                                                                                                                              |
-|:--------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/x`                | A forward slash that is appended by a letter denotes a delimiter that should be accompanied by a block term e.g. `/n NAME`.                              |
-| `PARAMETER`         | The parameters in upper casing are placeholders parameters for details to be supplied by you e.g. `add /n Alice` instead of `add /n NAME`.               |
-| `/x PARAMETER`      | The delimiter-parameter pairs not enclosed in any brackets are compulsory inputs to be supplied by you.                                                  |
-| `[/x PARAMETER]`    | The delimiter-parameter pairs enclosed in square brackets are optional inputs that you may choose not to provide.                                        |
-| <code>/p <T&#124;F> | The parameters enclosed in angle brackets indicates that they have fixed values. You may choose any of the values that are separated by a vertical pipe. |
+| <div style="width:120px">Format</div> | Description                                                                                                                                              |
+|:--------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/x`                                  | A forward slash that is appended by a letter denotes a delimiter that should be accompanied by a parameter e.g. `/n NAME`.                               |
+| `PARAMETER`                           | The terms in upper casing are placeholders parameters for details to be supplied by you e.g. `add /n Alice` instead of `add /n NAME`.                    |
+| `/x PARAMETER`                        | The delimiter-parameter pairs not enclosed in any brackets are compulsory inputs to be supplied by you.                                                  |
+| `[/x PARAMETER]`                      | The delimiter-parameter pairs enclosed in square brackets are optional inputs that you may choose not to provide.                                        |
+| <code>/p <T&#124;(any)>               | The parameters enclosed in angle brackets indicates that they have fixed values. You may choose any of the values that are separated by a vertical pipe. |
 
 Some additional points to take note of:
 
@@ -93,17 +93,17 @@ This section describes each command in detail.
 * Sub-points with :information_source: indicates details that you should take note of.
 * Refer to the following table for more details on the parameters that you need to provide.
 
-| Parameter Glossary                | Description                                                                                                                                                                                                                              |
-|:----------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/n NAME`                         | The name of someone you would like to track.                                                                                                                                                                                             |
-| `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> There are currently three group indexes, numbered from 1 to 3.<br/>You can find the group names from the [overview command](#show-financial-summary-overview). |
-| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [listing records command](#show-all-records-by-group-list).                                                                                |
-| `/d DESCRIPTION`                  | The description (or name) of the income and expenditure you wish to track.                                                                                                                                                               |
-| `/c CATEGORY_INDEX`               | An index that refers to a category label such as 'Food and Drinks`.<br/>You can find the category index from the [list categories command](#show-expenditure-categories-listcat).                                                        |
-| `/i INCOME`                       | The monetary value of the income you wish to track.                                                                                                                                                                                      |
-| `/e EXPENDITURE`                  | The monetary value of the expenditure that you have made.                                                                                                                                                                                |
-| `/r (INCOME / EXPENDITURE)_INDEX` | An index that refers to an income or expenditure that you have recorded previously.<br/>You can find this index from the [listing records command](#show-all-records-by-group-list).                                                     |
-| <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent.                                  |
+| Parameter Glossary                | Description                                                                                                                                                                                                                                      |
+|:----------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/n NAME`                         | The name of someone you would like to track.                                                                                                                                                                                                     |
+| `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> There are currently three group indexes, numbered from 1 to 3.<br/>You can find the group names from the [overview command](#show-financial-summary-codeoverviewcode). |
+| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [listing records command](#show-all-records-by-group-codelistcode).                                                                                |
+| `/d DESCRIPTION`                  | The description (or name) of the income and expenditure you wish to track.                                                                                                                                                                       |
+| `/c CATEGORY_INDEX`               | An index that refers to a category label such as "Food and Drinks".<br/>You can find the category index from the [list categories command](#show-expenditure-categories-codelistcatcode).                                                        |
+| `/i INCOME`                       | The monetary value of the income you wish to track.                                                                                                                                                                                              |
+| `/e EXPENDITURE`                  | The monetary value of the expenditure you wish to track.                                                                                                                                                                                         |
+| `/r (INCOME / EXPENDITURE)_INDEX` | An index that refers to an income or expenditure that you have recorded previously.<br/>You can find this index from the [listing records command](#show-all-records-by-group-codelistcode).                                                     |
+| <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent.                                          |
 
 ---
 
@@ -137,9 +137,7 @@ Example of usage:
 
 * _Result_: Entry for Alice is added to Parents' tracking list with a user index (uid) of **1**.
 
-  <br/>
-  
-  ![add-command-screenshot](images/AddPerosn.png) <!-- this is a placeholder -->
+  ![add-command-screenshot](images/AddPerosn.png)
 
 ---
 
@@ -163,9 +161,7 @@ Example of usage:
 
   `delete /g 1 /u 1`
 
-* _Result_: Alice deleted from the Parents' group 
-  
-<br/>
+* _Result_: Alice deleted from the Parents' group
 
 ---
 
@@ -192,10 +188,8 @@ Example of usage:
   `addin /g 1 /u 1 /d Salary /i 2000 /p T`
 
 * _Result_: Entry for Salary is added to Alice's income list with an income index of **1**.
-  
-  <br/>
-  
-  ![addin-command-screenshot](images/AddIncome.png) <!-- this is a placeholder -->
+
+  ![addin-command-screenshot](images/AddIncome.png)
 
 ---
 
@@ -222,9 +216,7 @@ Example of usage:
 
 * _Result_: Income entry for Salary of $2,000 is deleted from Alice's income list.
 
-  <br/>
-  
-  ![deletein-command-screenshot](images/DeleteIncome.png) <!-- this is a placeholder -->
+  ![deletein-command-screenshot](images/DeleteIncome.png)
 
 ---
 
@@ -253,9 +245,7 @@ Example of usage:
 
 * _Result_: Income entry in Alice's income list is edited.
 
-  <br/>
-  
-  ![editin-command-screenshot](images/EditIncome.png) <!-- this is a placeholder -->
+  ![editin-command-screenshot](images/EditIncome.png)
 
 ---
 
@@ -285,9 +275,7 @@ Example of usage:
 
 * _Result_: Entry for candies is added to Alice's expenditure list with an expenditure index of **1**.
 
-  <br/>
-  
-  ![addout-command-screenshot](images/AddExpend.png) <!-- this is a placeholder -->
+  ![addout-command-screenshot](images/AddExpend.png)
 
 ---
 
@@ -314,9 +302,7 @@ Example of usage:
 
 * _Result_: Expenditure entry for candies of $20 is deleted from Alice's expenditure list.
 
-  <br/>
-  
-  ![deleteout-command-screenshot](images/DeleteExpend.png) <!-- this is a placeholder -->
+  ![deleteout-command-screenshot](images/DeleteExpend.png)
 
 ---
 
@@ -346,9 +332,7 @@ Example of usage:
 
 * _Result_: Expenditure entry in Alice's expenditure list is edited.
 
-  <br/>
-  
-  ![editout-command-screenshot](images/EditExpend.png) <!-- this is a placeholder -->
+  ![editout-command-screenshot](images/EditExpend.png)
 
 ---
 
@@ -358,7 +342,7 @@ Example of usage:
 
 Format: `overview`
 
-![list-command-screenshot](images/Overview.png) <!-- this is a placeholder -->
+![list-command-screenshot](images/Overview.png)
 
 ---
 
@@ -375,10 +359,8 @@ Example of usage:
 * List all the members from Parents' group.
 
   `list /g 1`
-  
-  <br/>
-  
-  ![detail_list-command-screenshot](images/List.png) <!-- this is a placeholder -->
+
+  ![detail_list-command-screenshot](images/List.png)
 
 ---
 
@@ -388,7 +370,7 @@ Example of usage:
 
 Format: `listcat`
 
-![listcat-command-screenshot](images/Listcat.png) <!-- this is a placeholder -->
+![listcat-command-screenshot](images/Listcat.png)
 
 ---
 
@@ -415,7 +397,7 @@ Find records with category:
 
 * _Result_: The result of the search is returned and printed to the screen.
 
-  ![find-command-screenshot](images/FindWithCat.png) <!-- this is a placeholder -->
+  ![find-command-screenshot](images/FindWithCat.png)
 
 Find records without category:
 * Find all the records which descriptions include _candies_.
