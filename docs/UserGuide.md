@@ -459,7 +459,7 @@ The `c` flag indicates that the task will be marked as completed, while the `u` 
 
 ____________________________________________________________
 Nice! I have marked this task as completed!
-(X) Reply to emails []
+(X) Reply emails []
 ____________________________________________________________
 ```
 
