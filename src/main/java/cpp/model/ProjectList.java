@@ -94,7 +94,6 @@ public class ProjectList {
             throw new IndexOutOfBoundsException();
         }
         Project targetProject = projectList.get(indexProj - 1);
-
         targetProject.markTodoAsDone(indexTodo);
     }
 
@@ -104,7 +103,7 @@ public class ProjectList {
      * @param index Index of the project.
      * @param deadline Deadline for the project
      */
-    public void addProjectDeadline(int index, String deadline) throws IndexOutOfBoundsException{
+    public void addProjectDeadline(int index, String deadline) throws IndexOutOfBoundsException {
         assert (deadline != null && !deadline.equals("")) : "Cannot add deadline.";
         if (index > projectList.size()) {
             throw new IndexOutOfBoundsException();
