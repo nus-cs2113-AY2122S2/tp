@@ -37,6 +37,11 @@ public class Warehouse {
      */
     public void addUnitGoodToInventory(String sku, String name, String description, String capacity)
             throws UnitTestException {
+        if (unitGoodHashMap.containsKey(sku)) {
+            System.out.println("SKU: " + sku + " already exist in the warehouse");
+            return;
+        }
+
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
         Good newGood = new Good(unitGood, 0);
         unitGoodHashMap.put(sku, unitGood);
