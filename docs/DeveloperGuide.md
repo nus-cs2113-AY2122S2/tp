@@ -741,3 +741,33 @@ Given below are instructions to test the app manually.
       printed out.
    2. Test case: `find /d Test /c 7`
       Expected: No entries are printed. Error details shown in the error message.
+
+### Saving data
+
+1. Dealing with missing data file
+   1. Delete the save file `PlanITarium.txt` before executing `bye`.
+      Expected: The program checks if the file exists before saving, and creates a new one if it does not.
+2. Dealing with missing directory
+   1. Delete the directory `data` before executing `bye`.
+      Expected: The program checks if the directory exists before saving, and creates a new one if it does not.
+
+### Loading data
+
+1. Dealing with missing data file
+   1. Delete the save file `PlanITarium.txt` if it exists and launch the program.
+      Expected: The program will check if the file exists upon start up, and creates one if it does not.
+2. Dealing with missing directory
+   1. Delete the directory `data` if it exists and launch the program.
+      Expected: The program will check if the directory exists upon start up, and creates on if it does not.
+3. Dealing with corrupted data file
+   1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
+      a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
+   2. Execute the command `bye` to save the data to `PlanITarium.txt`.
+   3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
+      added above.
+   4. Test case: Remove delimiters `/d`, `i Donations 200.0 false 2022-04-08`.
+      Expected: Upon starting up the program again, `Storage` will load valid data until it encounters a
+      corrupted entry as seen in the test case. Execute command `list /g 1` and only `Alice` is printed without
+      the corrupted income entry.
+   5. Test case: Edit task type `i` to `e`.
+      Expected: Similar to the above expected outcome. 
