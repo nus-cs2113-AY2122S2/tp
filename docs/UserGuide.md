@@ -165,7 +165,7 @@ respectively.
 - The DATE field must be in the format of YYYY-MM-DD. All other formats would not be accepted.
 - The AMOUNT field must be a valid number (integer/float) and must be non-negative.
 - '/' must not be the last character of a given field, even with trailing spaces.
-- The usage of '/' must be enclosed with white spaces.
+- The usage of '/' as a free text must be enclosed with white spaces.
 - Example: `r/Buffet / Alacarte meal`
 
 Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
@@ -593,7 +593,13 @@ data. However, do not tamper with the load and save files.
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: After you exit the program, your application data will be automatically stored in a text file locally called 
+"allonusData.txt". 
+You can transfer your data to another computer by copying this text file and placing
+it in the same directory as the application in the new computer. 
+When the application runs, it will automatically load the saved data in the text file. 
+Please ensure the version of both applications are the same.
+
 
 ## Command Summary
 
@@ -601,7 +607,8 @@ data. However, do not tamper with the load and save files.
 |-------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Add (Expense)           | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/2022-04-03 a/500 c/Food r/At Supper Stretch`                     |
 | Add (Module)            | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
-| Add (Contact)           | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |                                                                                                             |
+| Add (Contact)           | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |  
+| Edit (Expense)          | `edit INDEX` <br>  `[FIELD] [NEW VALUE]  `<br>E.g. <br>`edit 1` <br> `category Food`                                        |
 | Edit (Module)           | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                      |
 | Edit (Contact)          | `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`                                                                 |
 | Read from .ics (Module) | `read ics`                                                                                                                  |

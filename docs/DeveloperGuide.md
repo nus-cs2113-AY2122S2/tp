@@ -15,6 +15,7 @@
 * [Non-Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
+  * [Study Manager](#study-manager)
 
 
 ## Acknowledgements
@@ -361,7 +362,7 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
    
 
 ### Study Manager
-#### 
+
 1. Deleting a module while all modules are shown.
    1. Prerequisites: List all modules using the `list` command. Ensure there are multiple modules in the list.
    2. Test case: `rm 1`
@@ -370,7 +371,6 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
       1. Expected: No module is deleted from the list. Error details shown in the status message.
    4. Other incorrect delete commands to try: `rm`, `rm 100000` 
       1. Expected: Error message similar to step 3.
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
 2. Adding a module to the list.
    1. Requires module code, category, day and time.
@@ -380,4 +380,35 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
       1. Expected: No module is added to the list. Error details are shown on console.
    4. Other incorrect add commands to try: `add`, `add c/lec t/4pm-6pm`
       1. Or any commands that exclude one of the four requirements to add module.
-      2. Expected: Error messge similar to above.
+      2. Expected: Error message similar to above.
+      
+### Expense Tracker
+1. Adding a new expense record to the list
+   1. Requires date, amount, category and remarks in proper format
+   2. Test case: `add d/2022-03-24 a/9.50 c/Movie r/Jujutsu Kaisen`
+      1. Expected: Expense record is added to the list and details are shown on the console.
+   3. Test case: `add d/Invalid Date Field a/9.50 c/Movie r/Jujutsu Kaisen`
+      1. Expected: Expense record not added due to invalid date format. 
+      Error details are shown on console.
+   4. Test case: `add d/2022-03-24 a/Invalid Amount Field c/Movie r/Jujutsu Kaisen`
+      1. Expected: Expense record not added due to invalid amount format. 
+      Error details are shown on console.
+   5. Test case: `add d/ a/ c/ r/`
+      1. Expected: Expense record not added due to missing values. 
+      Error details are shown on console.
+   6. Test case: `add m/`
+      1. Expected: Expense record not added due to missing fields.
+      Error details are shown on console.
+   7. Test case: `add d/2022-03-24 a/500 c/Car r/Slash /in middle`
+      1. Expected: Expense record not added due to slash in invalid position.
+      Error details are shown on console.
+      
+2. Deleting an expense record after listing
+   1. Prerequisites: List all expense records using the `list` command. Multiple records exist in the list.
+   2. Test case: `rm 1`
+      1. Expected: First expense record is deleted from the list. Details of the deleted record shown in
+      status message.
+   3. Test case: `rm 0`
+      1. Expected: No module is deleted from the list. Error details shown on console.
+   4. Other incorrect delete commands: `rm`
+      1. Expected: Error message similar to step 3.
