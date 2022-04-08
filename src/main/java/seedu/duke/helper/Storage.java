@@ -27,7 +27,7 @@ public class Storage {
     public DoctorList doctors = new DoctorList();
     public PatientList patients = new PatientList();
     public MedicineList medicines = new MedicineList();
-    public AppointmentList appointments = new AppointmentList();
+    public AppointmentList appointments = new AppointmentList(patients, doctors);
 
     public Storage() {
         loadData();

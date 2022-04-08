@@ -4,14 +4,24 @@ import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.CommandLineTable;
+import seedu.duke.helper.IdGenerator;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.finder.AppointmentFinder;
+import seedu.duke.helper.finder.DoctorFinder;
+import seedu.duke.helper.finder.PatientFinder;
 
 import java.util.ArrayList;
 
 public class AppointmentList extends List {
     private ArrayList<Appointment> appointments = new ArrayList<>();
     private ArrayList<Appointment> returnedFinderArray = new ArrayList<>();
+    private PatientList referencePatientList;
+    private DoctorList referenceDoctorList;
+
+    public AppointmentList(PatientList patientList,DoctorList doctorList) {
+        this.referencePatientList = patientList;
+        this.referenceDoctorList = doctorList;
+    }
 
     public Appointment getAppointment(String appointmentId) {
         for (Appointment appointment : appointments) {
@@ -28,15 +38,31 @@ public class AppointmentList extends List {
 
     @Override
     public void add(String[] addAppointmentParameters) throws DuplicateEntryException {
-        final int numberOfAppointmentsBefore = appointments.size();
+        int numberOfAppointmentsBefore = appointments.size();
+
+        String patientNric = addAppointmentParameters[0];
+        PatientFinder patientFinder = new PatientFinder();
+        ArrayList<Patient> foundPatient = patientFinder.findPatientByNric(referencePatientList.getList(), patientNric);
+        String patientName = foundPatient.get(0).getPatientName();
+
+        String doctorNric = addAppointmentParameters[1];
+        DoctorFinder doctorFinder = new DoctorFinder();
+        ArrayList<Doctor> foundDoctor = doctorFinder.findDoctorByNric(referenceDoctorList.getList(), doctorNric);
+        String doctorName = foundDoctor.get(0).getFullName();
+
+        String appointmentDate = addAppointmentParameters[2];
+        String appointmentDetails = addAppointmentParameters[3];
+        String id = IdGenerator.createAppointmentId(patientNric, doctorNric, appointmentDate);
+
         for (Appointment appointment : appointments) {
-            if (appointment.getAppointmentId().equals(addAppointmentParameters[0])) {
-                throw new DuplicateEntryException("Appointment with given appointment ID already exist!");
+            if (appointment.getAppointmentId().equals(id)) {
+                throw new DuplicateEntryException("There is already an appointment between this doctor and patient "
+                        + "on the given date!");
             }
         }
-        Appointment newAppointment = new Appointment(addAppointmentParameters[0], addAppointmentParameters[1],
-                addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4],
-                addAppointmentParameters[5], addAppointmentParameters[6]);
+
+        Appointment newAppointment = new Appointment(id, patientNric, patientName, doctorNric, doctorName,
+                appointmentDate, appointmentDetails);
         appointments.add(newAppointment);
         assert appointments.size() == numberOfAppointmentsBefore + 1;
     }

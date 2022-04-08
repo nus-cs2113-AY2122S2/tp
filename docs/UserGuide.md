@@ -123,7 +123,7 @@ Example: `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12
 
 To add a new medicine into your application you can use the `add medicine` command when prompted by HALPMI for your input.
 To add a medicine there are some parameters that you would have to provide:
-1. Batch ID
+1. Medicine ID
 1. Medicine Name
 2. Dosage
 3. Expiry Date
@@ -140,13 +140,10 @@ Example: `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
 
 To add a new appointment into your application you can use the `add appointment` command when prompted by HALPMI for your input.
 To add an appointment there are some parameters that you would have to provide:
-1. Appointment ID
-2. Patient name
-3. Patient NRIC
-4. Doctor name
-5. Doctor NRIC
-6. Appointment Date
-7. Appointment Details
+1. Patient NRIC
+2. Doctor NRIC
+3. Appointment Date
+4. Appointment Details
 
 You will have to follow the formatting given below when calling the command.
 
@@ -164,17 +161,9 @@ To view the records of all doctors in the application, you can simply call `view
 parameters. You could also give a specific criteria as listed below and the input value if you want to
 search and view by a specific criteria.
 
-Format: `view doctor` or `view doctor /info [criteria], [input value]`
+Format: `view doctor`
 
-Accepted Criteria: `doctor name`,`nric`,`age`,`gender`,`address`,`date of birth`, `specialization`
-
-Example 1: `find doctor /info name, Jimmy` <br>
-Example 2: `find doctor /info nric, S1234567X` <br>
-Example 3: `find doctor /info age, 23` <br>
-Example 4: `find doctor /info gender, M` <br>
-Example 5: `find doctor /info address, 15 King's Avenue` <br>
-Example 6: `find doctor /info dob, 1999-12-31` <br>
-Example 7: `find doctor /info specialization, Dermatology`
+Examples: `view doctor`
 
 #### VIEW PATIENT
 
@@ -182,17 +171,9 @@ To view the records of all patients in the application, you can simply call `vie
 parameters. You could also give a specific criteria as listed below and the input value if you want to
 search and view by a specific criteria.
 
-Format: `view patient` or `view patient /info [criteria], [input value]`
+Format: `view patient`
 
-Accepted Criteria: `patient name`,`nric`,`age`,`gender`,`address`,`date of birth`, `date of admission` 
-
-Example 1: `find patient /info name, Steven Oz` <br>
-Example 2: `find patient /info nric, S1234567X` <br>
-Example 3: `find patient /info age, 54` <br>
-Example 4: `find patient /info gender, M` <br>
-Example 5: `find patient /info address, 15 King's Avenue` <br>
-Example 6: `find patient /info dob, 1999-12-31` <br>
-Example 7: `find patient /info admissiondate, 2022-03-11` <br>
+Example: `view patient`
 
 #### VIEW MEDICINE
 
@@ -200,21 +181,14 @@ To view the records of all medicines in the application, you can simply call `vi
 parameters. You could also give a specific criteria as listed below and the input value if you want to
 search and view by a specific criteria.
 
-Format: `view medicine` or `view medicine /info [criteria], [input value]`
+Format: `view medicine` or `view medicine /info [criteria],[input]`
 
-Accepted Criteria: `medicine name`,`medicine id`,`dosage`,`expiry`,`side effects`,`quantity`
-
-Example 1: `find medicine /info name, Paracetamol` <br>
-Example 2: `find medicine /info id, S125` <br>
-Example 3: `find medicine /info dosage, 500` <br>
-Example 4: `find medicine /info expiry, 2022-06-30` <br>
-Example 5: `find medicine /info sideeffects, Headache` <br>
-Example 6: `find medicine /info quantity, 10`
+Example: `view medicine`
 
 #### VIEW APPOINTMENT
 
 To view the records of all appointments in the application, you can simply call `view appointment` without any
-additional parameters. You could also give a specific criteria as listed below and the input value if you want to
+additional parameters. You could also give a specific criteria as listed below and the input if you want to
 search and view by a specific criteria.
 
 Format: `view appointment` or `view appointment /info [criteria], [input value]`
@@ -265,7 +239,7 @@ This command requires an additional parameter which is the appointment id of the
 
 Format: `delete appointment /info [appointment id]`
 
-Example: `delete medicine /info S234`
+Example: `delete appointment /info S234`
 
 ### Editing: `edit`
 
@@ -530,3 +504,4 @@ TO BE UPDATED
 | `help`               | view the help function for all the commands required                                                                                                                                                                                                        |
 | `bye`                | exit the programme                                                                                                                                                                                                                                          |
 | `to be updated`      | `to be updated`                                                                                                                                                                                                                                             |
+

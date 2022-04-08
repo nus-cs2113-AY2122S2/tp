@@ -26,7 +26,7 @@ public class Validator {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
         Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
         if (!fullNameMatcher.matches()) {
-            throw new HalpmiException("Full name must contain only alphabets and no special characters.");
+            throw new HalpmiException("Full name must contain only alphabets, no special characters or numbers.");
         }
     }
 
@@ -35,7 +35,7 @@ public class Validator {
         try {
             age = Integer.parseInt(ageString);
         } catch (NumberFormatException numberFormatException) {
-            throw new HalpmiException("Please enter a number!");
+            throw new HalpmiException("Age must be a positive number!");
         }
         //age must be within 1 and 120
         if (!(1 <= age && age <= 120)) {
@@ -242,7 +242,7 @@ public class Validator {
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
         if (type.equals("appointment") && newDate.isBefore(today)) {
             throw new HalpmiException("Date must be in YYYY-MM-DD format. "
-                    + "New appointments date must be today and after.");
+                    + "New appointment dates must be today and after.");
         } else if (type.equals("patient") && newDate.isAfter(admissionDateLimit)
                 && newDate.isBefore(today)) {
             throw new HalpmiException("Date must be in YYYY-MM-DD format. "
@@ -260,12 +260,9 @@ public class Validator {
     }
 
     public static void validateAddAppointment(String[] parameters) throws HalpmiException {
+        validateNric(parameters[0]);
         validateNric(parameters[1]);
-        validateFullName(parameters[2]);
-        validateNric(parameters[3]);
-        validateFullName(parameters[4]);
-        validateDate(parameters[5], "appointment");
-        validateAppointmentDetails(parameters[6]);
+        validateDate(parameters[2], "appointment");
     }
 
     public static void validateEditAppointment(String[] parameters) throws HalpmiException {
@@ -346,7 +343,7 @@ public class Validator {
             validateNric(parameters[1]);
             break;
         case "date":
-            validateDate(parameters[1],"find appointment");
+            validateDate(parameters[1], "find appointment");
             break;
         default:
             throw new HalpmiException("Input must be an attribute of Appointment");

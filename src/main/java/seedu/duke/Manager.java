@@ -101,6 +101,12 @@ public class Manager {
             status = command.execute(storage.medicines);
             break;
         case "add appointment":
+            Command checkIfPatientExists = Parser.checkIfPatientExists(parameters);
+            checkIfPatientExists.execute(storage.patients);
+
+            Command checkIfDoctorExists = Parser.checkIfDoctorExists(parameters);
+            checkIfDoctorExists.execute(storage.doctors);
+
             command = Parser.parseAddAppointment(parameters);
             status = command.execute(storage.appointments);
             break;

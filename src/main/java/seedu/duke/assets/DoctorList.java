@@ -3,8 +3,8 @@ package seedu.duke.assets;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
-import seedu.duke.helper.UI;
 import seedu.duke.helper.CommandLineTable;
+import seedu.duke.helper.UI;
 import seedu.duke.helper.finder.DoctorFinder;
 
 import java.util.ArrayList;
@@ -75,8 +75,8 @@ public class DoctorList extends List {
         }
         for (Doctor doctor : doctors) {
             doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
-                  doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
-                  doctor.getSpecialization());
+                    doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
+                    doctor.getSpecialization());
         }
         doctorTable.print();
     }
@@ -132,7 +132,7 @@ public class DoctorList extends List {
     public void findByNric(String[] parameterArray) {
         try {
             this.returnedFinderArray = DoctorFinder.findDoctorByNric(doctors, parameterArray[1]);
-            createArrayOfFoundDoctors();
+            displayFoundDoctorList();
         } catch (NullPointerException e) {
             UI.printParagraph("Doctor with given NRIC doesn't exist. Please try again!");
         }
@@ -141,7 +141,7 @@ public class DoctorList extends List {
     public void findByName(String[] parameterArray) {
         try {
             this.returnedFinderArray = DoctorFinder.findDoctorByName(doctors, parameterArray[1]);
-            createArrayOfFoundDoctors();
+            displayFoundDoctorList();
         } catch (NullPointerException e) {
             UI.printParagraph("Doctor with given name doesn't exist. Please try again!");
         }
@@ -150,7 +150,7 @@ public class DoctorList extends List {
     public void findByAge(String[] parameterArray) {
         try {
             this.returnedFinderArray = DoctorFinder.findDoctorByAge(doctors, Integer.parseInt(parameterArray[1]));
-            createArrayOfFoundDoctors();
+            displayFoundDoctorList();
         } catch (NullPointerException e) {
             UI.printParagraph("Doctor with given age doesn't exist. Please try again!");
         }
@@ -159,7 +159,7 @@ public class DoctorList extends List {
     public void findByGender(String[] parameterArray) {
         try {
             this.returnedFinderArray = DoctorFinder.findDoctorByGender(doctors, parameterArray[1].charAt(0));
-            createArrayOfFoundDoctors();
+            displayFoundDoctorList();
         } catch (NullPointerException e) {
             UI.printParagraph("Doctor with given gender doesn't exist. Please try again!");
         }
@@ -168,7 +168,7 @@ public class DoctorList extends List {
     public void findByAddress(String[] parameterArray) {
         try {
             this.returnedFinderArray = DoctorFinder.findDoctorByAddress(doctors, parameterArray[1]);
-            createArrayOfFoundDoctors();
+            displayFoundDoctorList();
         } catch (NullPointerException e) {
             UI.printParagraph("Doctor with given address doesn't exist. Please try again!");
         }
@@ -177,7 +177,7 @@ public class DoctorList extends List {
     public void findByDob(String[] parameterArray) {
         try {
             this.returnedFinderArray = DoctorFinder.findDoctorByDob(doctors, parameterArray[1]);
-            createArrayOfFoundDoctors();
+            displayFoundDoctorList();
         } catch (NullPointerException e) {
             UI.printParagraph("Doctor doesn't exist please try again!");
         }
@@ -186,13 +186,13 @@ public class DoctorList extends List {
     public void findBySpecialization(String[] parameterArray) {
         try {
             this.returnedFinderArray = DoctorFinder.findDoctorBySpecialization(doctors, parameterArray[1]);
-            createArrayOfFoundDoctors();
+            displayFoundDoctorList();
         } catch (NullPointerException e) {
             UI.printParagraph("Doctor with given specialization doesn't exist. Please try again!");
         }
     }
 
-    private void createArrayOfFoundDoctors() {
+    private void displayFoundDoctorList() {
         if (returnedFinderArray.isEmpty()) {
             UI.printParagraph("Doctor doesn't exist please try again!");
         } else {
@@ -200,8 +200,8 @@ public class DoctorList extends List {
             for (int i = 0; i < returnedFinderArray.size(); i++) {
 
                 findPatientTable.setShowVerticalLines(true);
-                findPatientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                        "Specilization");
+                findPatientTable.setHeaders("Nric", "Full Name", "Age", "Address", "Gender", "Dob",
+                        "Specialization");
                 findPatientTable.addRow(returnedFinderArray.get(i).getNric(),
                         returnedFinderArray.get(i).getFullName(),
                         String.valueOf(returnedFinderArray.get(i).getAge()),
