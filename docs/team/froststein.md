@@ -16,7 +16,7 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 #### New Features
 * [Session Create](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
   * Allows users to create sessions in the application.
-* Session Delete
+* [Session Delete](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
   * Allows users to delete sessions in the application.
 * Session Edit 
   * Allows users to edit previously created sessions.
