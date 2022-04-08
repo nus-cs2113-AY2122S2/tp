@@ -41,6 +41,9 @@ you to:
 * [Frequently Asked Questions](#faq)
 * [Command Summary](#command-summary)
 
+> :information_source: Notes:
+> * This User Guide is only meant to be read at the [github page](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html).
+
 <br/>
 
 ## Quick Start
