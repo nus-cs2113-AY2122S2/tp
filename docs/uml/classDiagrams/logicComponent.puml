@@ -1,0 +1,59 @@
+@startuml
+skinparam groupInheritance 2
+skinparam classFontSize 15
+hide circle
+hide empty methods
+hide empty attribute
+title Class Diagram for Logic Component
+
+rectangle Logic {
+Command <|-- HelpCommand
+Command <|-- ExitCommand
+Command <|-- ExerciseCommand
+Command <|-- WorkoutCommand
+Command <|-- PlanCommand
+Command <|-- ScheduleCommand
+Command <|-- SearchCommand
+ExerciseList <-u- ExerciseCommand
+WorkoutList <-u- WorkoutCommand
+PlanList <-u- WorkoutCommand
+PlanList <-u- PlanCommand
+PlanList <-u- ScheduleCommand
+DayList <-u- ScheduleCommand
+ExerciseList <-u- SearchCommand
+WorkoutList <-u- SearchCommand
+PlanList <-u- SearchCommand
+}
+
+Parser-.>Command:creates >
+WerkIt-r.>Command: execute >
+
+class "{abstract}\nCommand" as Command #LightSkyBlue {
+}
+class Parser #Gold {
+}
+class WerkIt #Sandybrown {
+}
+class HelpCommand #LightSkyBlue {
+}
+class ExitCommand #LightSkyBlue {
+}
+class ExerciseCommand #LightSkyBlue {
+}
+class WorkoutCommand #LightSkyBlue {
+}
+class PlanCommand #LightSkyBlue {
+}
+class ScheduleCommand #LightSkyBlue {
+}
+class SearchCommand #LightSkyBlue {
+}
+class ExerciseList #LightSkyBlue {
+}
+class WorkoutList #LightSkyBlue {
+}
+class PlanList #LightSkyBlue {
+}
+class DayList #LightSkyBlue {
+}
+@enduml

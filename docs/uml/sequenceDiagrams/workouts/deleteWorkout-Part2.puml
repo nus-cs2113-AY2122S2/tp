@@ -7,16 +7,16 @@ autonumber 2.1
 title Sequence Diagram of `WorkoutList#deleteWorkout()`
 hide footbox
 
-participant "workoutList\n:WorkoutList" AS wl
+participant "workoutList\n:WorkoutList" AS wl #LightSkyBlue
 
-activate wl
+activate wl #LightSkyBlue
 wl -> ":Integer" :parseInt(userArgument)
 activate ":Integer"
 return indextoDelete:int
 deactivate ":Integer"
 
 wl -> wl :getWorkoutFromIndexNum(indexToDelete)
-activate wl
+activate wl #LightSkyBlue
 return deletedWorkout:Workout
 
 wl -> "workoutsDisplayList:\nArrayList<String>" :remove(indexToDelete - 1)

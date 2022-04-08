@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+hide footbox
+
+autonumber
+
+Participant ":WerkIt" as WerkIt #Sandybrown
+Participant ":UI" as UI #YellowGreen
+Participant ":Parser" as Parser #Gold
+Participant ":Storage" as Storage #IndianRed
+
+WerkIt -[#Sandybrown]> UI : getUserInput()
+activate UI #YellowGreen
+UI --[#YellowGreen]> WerkIt : "workout /new sit up /reps 5"
+deactivate UI
+
+WerkIt -[#Sandybrown]> Parser : parseUserInput("workout /new sit up /reps 5")
+activate Parser #Gold
+
+create ":Logic" as Logic #LightSkyBlue
+Parser -[#Gold]> Logic : new WorkoutCommand()
+activate Logic #LightSkyBlue
+return #LightSkyBlue :WorkoutCommand
+
+Parser --[#Gold]> WerkIt : :WorkoutCommand
+deactivate Parser
+
+WerkIt -[#Sandybrown]> Logic : execute()
+activate Logic #LightSkyBlue
+
+Logic -[#LightSkyBlue]> UI : printNewWorkoutCreatedMessage(newWorkout)
+activate UI #YellowGreen
+UI --[#YellowGreen]> Logic
+deactivate UI
+
+Logic -[#LightSkyBlue]> Storage : writeNewWorkoutToFile(newWorkout)
+activate Storage #IndianRed
+Storage --[#IndianRed]> Logic
+deactivate Storage
+
+Logic --[#LightSkyBlue]> WerkIt
+deactivate Logic
+
+@enduml

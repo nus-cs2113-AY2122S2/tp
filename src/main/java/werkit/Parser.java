@@ -48,6 +48,7 @@ public class Parser {
     private FileManager fileManager;
     public static final String SPACE_CHARACTER = " ";
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_HELP = 1;
+    public static final int EXPECTED_NUMBER_OF_PARAMETERS_EXIT = 1;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE = 2;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS = 2;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS = 3;
@@ -219,7 +220,12 @@ public class Parser {
         return new WorkoutCommand(userInput, fileManager, workoutList, planList, actionKeyword, arguments);
     }
 
-    public ExitCommand createExitCommand(String userInput) {
+    public ExitCommand createExitCommand(String userInput) throws InvalidCommandException {
+        String className = this.getClass().getSimpleName();
+        if (userInput.trim().split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_EXIT) {
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_EXIT_COMMAND_ERROR_MSG);
+        }
         ExitCommand newCommand = new ExitCommand(userInput);
         return newCommand;
     }

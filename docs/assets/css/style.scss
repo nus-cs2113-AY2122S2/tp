@@ -34,3 +34,16 @@ span.box {
 div.page-break {
   page-break-after: always;
 }
+
+a.button {
+  padding: 5px 10px 5px 10px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: #157977;
+  color: white;
+}
+
+div.button-container {
+  width: 100%;
+  text-align: center;
+}

@@ -1,5 +1,6 @@
-!define LOGIC_COLOR #3333C4
-!define LOGIC_COLOR_T1 #7777DB
-!define LOGIC_COLOR_T2 #5252CE
-!define LOGIC_COLOR_T3 #1616B0
-!define LOGIC_COLOR_T4 #101086
+!define COMMAND_COMP #LightSkyBlue
+!define PARSER_COMP #Gold
+!define UI_COMP #YellowGreen
+!define WERKIT_COMP #SandyBrown
+!define STORAGE_COMP #IndianRed
+!define MAIN_COMP #Cornsilk

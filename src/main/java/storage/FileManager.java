@@ -639,7 +639,7 @@ public class FileManager {
     public void addFileScheduleToList(DayList dayList, String[] scheduleFileDataLine)
             throws ArrayIndexOutOfBoundsException, InvalidScheduleException, InvalidPlanException {
         String dayNumber = scheduleFileDataLine[0];
-        String planName = scheduleFileDataLine[1];
+        String planName = scheduleFileDataLine[1].toLowerCase();
         int planNameIndexNum = getPlanList().getIndexNumFromPlanName(planName);
 
         String userArguments = dayNumber + " " + planNameIndexNum;

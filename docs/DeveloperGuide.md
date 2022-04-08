@@ -1,5 +1,4 @@
 # WerkIt! Developer Guide
-
 ## Table of Contents
 * [About this Guide](#about-this-guide)
 * [Acknowledgements](#acknowledgements)
@@ -100,6 +99,8 @@ output in your terminal:
 
 You are now ready to begin developing!
 
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+
 ## Design 
 ### Architecture Overview
 
@@ -115,17 +116,56 @@ and their interactions.
 - `Storage`: Reads data from, and writes data to the user's local storage.
 - `UI`: The UI of the application that deals with interaction with the user.
 - `Parser`: Parses user input to make sense of the command supplied by the user.
-- `Command`: Holds the different types of commands available in the application.
+- `Logic`: Executes the appropriate command as intended by the user.
 
 #### How the components interact with each other
-[Sequence diagram]
+The *Component Interaction Diagram* shows the inner workings of how each component in WerkIt interacts.
+The diagram depicts a scenario where a user attempts to create a workout, `workout /new sit up /reps 5`.
+
+![Architecture Sequence Diagram](uml/sequenceDiagrams/miscellaneous/images/ArchitectureSequenceDiagram.png)
 
 ### Component Overview
 
 #### Storage component
-[Writeup]
-#### UI component
 
+This component of WerkIt! is mainly responsible for reading and writing application data from and to files
+stored on the user's filesystem. This is to allow the user to retain the data he/she has entered into WerkIt! and be
+able to continue using the data when he/she starts WerkIt! the next time.
+
+The following class diagram shows how the storage component's classes and how it interacts with some other
+components and classes in WerkIt!:
+
+![FileManager Class Diagram](uml/classDiagrams/images/StorageComponent.png)
+
+The storage component consists of two classes: `FileManager` and `LogHandler`.
+
+| Class Name | Description |
+| --- | --- |
+| `FileManager` | - Loads saved data (if any) from the user's local filesystem.<br/>- Writes new/updated data into the user's local filesystem. |
+| `LogHandler` | - Utility class to direct log messages to a file that is stored on the user's local filesystem. |
+
+`WerkIt` is responsible for creating an instance of `FileManager` when the application is started. This same instance
+will be used by commands in the logic component that requires writing data to the user's filesystem when the user (for
+example, when the user creates a new workout). Specifically, classes in the logic component that requires this are 
+`WorkoutCommand`, `PlanCommand`, and `ScheduleCommand`.
+
+`LogHandler` was deliberately grouped in the storage component as this class merely provides functionality to allow
+whichever class in WerkIt! to write the logs to a designated log file.
+
+On the user's local filesystem, the organisation of the application files are as follows:
+```
+werkItResources/        // Primary resource directory for WerkIt!
+    ├── exercises.txt   // Text file containing a list of exercises
+    ├── workouts.txt    // Text file containing a list of user-created workouts
+    ├── plans.txt       // Text file containing a list of user-created plans
+    └── schedule.txt    // Text file containing a 7-day schedule of user-assigned plans for each day
+werkItLogs/
+    └── logs.log        // Log file containing logs created by the application.
+```
+
+<div class="button-container"><a class="button" href="#design">Back to Design</a></div>
+
+#### UI component
 UI component consists of a single [UI class](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/werkit/UI.java)
 which manages interaction (prompting for user input and displaying results
 of commands/methods being called) between the user and the application.
@@ -146,17 +186,83 @@ How the UI class works:
 * Lastly, when the user exits the program, the `printGoodBye()` method will be called to indicate that the 
 user has successfully exited the program. 
 
+<div class="button-container"><a class="button" href="#design">Back to Design</a></div>
+
 #### Parser component
-[Writeup]
-#### Command component
-[Writeup]<br>
-Each command is a feature in the WerkIt! application.
+
+The [Parser class](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/werkit/Parser.java) 
+of WerkIt! is mainly responsible for making sense of the user commands.
+This is to allow WerkIt to breakdown user's command into components of different type, and proceed to create
+appropriate `Command` object to be executed in `WerkIt`.
+
+How does the `Parser` class works:
+<br><br>
+1. After the user has entered a string(userInput) containing command to `WerkIt`, `WerkIt` will call
+`Parser#parseUserInput()` to parse the string.
+2. Upon calling `parseUserInput()`, this method will first check the first non-null component of userInput, and based on
+this component, `parseUserInput()` will call one of `createWorkoutCommand()`, `createExitCommand()`,
+`createHelpCommand()`, `createExerciseCommand()`, `createSearchCommand()`, `createPlanCommand()`,
+`createScheduleCommand()` or throw an `InvalidCommandException`.
+3. If the `InvalidCommandException` is thrown, `parseUserInput()` will be terminated and `WerkIt` will continue on
+`startContinuousUserPrompt()` and to proceed from step 1 again once a new userInput is received.
+4. If one of the `createExitCommand()`, `createHelpCommand()` is called. In the case that the userInput contains any 
+non-spacing characters other than the first non-null component mentioned in step 2, an `InvalidCommandException` will be
+thrown. Otherwise, the constructor of `HelpCommand` or `ExitCommand` will be called to create the `Command` object and 
+return to `WerkIt` for execution.
+5. If one of the `createExerciseCommand()`, `createWorkoutCommand()`, `createPlanCommand()`, `createScheduleCommand()`,
+`createSearchCommand()` is called. The method will check the validity of the remaining components of userInput, 
+if any component of the userInput is invalid, an `InvalidCommandException` will be thrown. 
+Otherwise, the constructor of the appropriate
+type of `Command` will be called to create the appropriate `Command` object and return to `WerkIt` for execution.
+
+<div class="button-container"><a class="button" href="#design">Back to Design</a></div>
+
+#### Logic component
+Below is a class diagram of the `Logic` component:
+![LogicUML](uml/classDiagrams/images/logicComponent.png)
+<span class="box info">:memo: This is a high level overview of the `Logic` component, thus,
+other components have been omitted from the diagram above.</span>
+
+The `Logic` component consists of:
+- `Command` abstract class. The `ExerciseCommand`, `SearchCommand`, `WorkoutCommand`, `ScheduleCommand`,
+`PlanCommand`, `HelpCommand` and `ExitCommand` extends the `Command` class. These classes
+identify the command action type supplied by the user and also executes the command.
+The source of these classes can be found [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/tree/master/src/main/java/commands).
+- The `[command name]List` classes. It includes `ExerciseList`,
+`WorkoutList`,`PlanList` and `DayList`. These classes hold the methods
+to perform the command action desired by the user. Examples of command actions
+are create, delete, update and listing of the objects. The source of these classes
+can be found [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/tree/master/src/main/java/data) 
+(each class is grouped in packages according to their command name).
+
+<br><br>
+How the `Logic` component works:
+<br><br>
+1. The `Parser` class parses the user command and identifies the command type (e.g. plan/schedule/workout/exercise).
+2. Depending on the command type, it creates the appropriate `Command` subclass object.
+3. This subclass-of-`Command` object is executed by the `WerkIt` class, which calls the `execute()` method of that subclass-of-`Command` object.
+4. Depending on the command action (e.g. create/delete/update/list), the `execute()` method will identify and perform the appropriate actions.
+
+<br>
+Illustration of the interactions within the `Logic` component can be found
+in the sequence diagram below. The example given is for the creation of new workouts (`workout /new`):
+<br><br>
+
+![logicComponentUML](uml/sequenceDiagrams/miscellaneous/images/logicComponentSD.png)
+<br><br>
+<span class="box info">:memo: This is a high level overview of how the creation of workouts
+is done. To improve readability, some classes and methods have been omitted from the diagram above.</span>
+
+<br><br>
+Each command types is a feature of the WerkIt! application.
 Thus, the next section will explain the design of each
 features in detail.
 
+<div class="button-container"><a class="button" href="#design">Back to Design</a></div>
+
 ### Feature Overview
 
-The features of WerkIt! are split and grouped into 5 main features:
+The features of WerkIt! are split and grouped into 5 **main** features:
 1. [Exercise-related features](#exercise-related-features)
 2. [Workout-related features](#workout-related-features)
 3. [Plan-related features](#plan-related-features)
@@ -186,6 +292,8 @@ be ignored for now, and the only supported `commandAction` is `/list`. However, 
 are expected to be delivered in future iterations, and we currently have set the framework to implement these features 
 in the future. Thus, we have this standalone section specifically kept for exercise-related features.
 
+<div class="button-container"><a class="button" href="#feature-overview">Back to Feature Overview</a></div>
+
 ---
 
 ### Workout-related features
@@ -196,6 +304,8 @@ Below is a class diagram of the workout-related features:
 
 ![WorkoutUML](uml/classDiagrams/images/workoutRelatedFeatures.png)
 <br>
+<span class="box info">:memo: To improve readability, some classes and methods have been omitted from the diagram above.
+The diagram shows the main classes and methods the workout-related features uses. </span>
 
 The `Parser` class will call the `Parser#parseUserInput(userInput)` method
 to analyse the user's command. If the user's command is of type 
@@ -210,21 +320,53 @@ is `/create`, the `WorkoutCommand#execute()` method will call `WorkoutList#creat
 to create a new workout in the application. 
 To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
 <br><br>
-When all methods except the `listAllWorkout()` method is executed, the appropriate
-`FileManager` and `UI` classes will call the appropriate methods depending on the command action.
-From the previous example, the `/create` workout action will call the 
+When all methods except the `listAllWorkout()` method are executed, the
+`FileManager` and `UI` classes will call its appropriate methods depending on the command action.
+From the previous example, the `/create` workout command action will call the 
 `FileManager#writeNewWorkoutToFile(newWorkout)` and also the `UI#printNewCreatedMessage(newWorkout)`
 methods after the new workout has been created.
 <br><br>
 Finally, methods in the `PlanList` class is only called when the `/delete` and `/update`
-workout actions are executed. These methods are used to modify the application's plans list
+workout command actions are executed. These methods are used to modify the application's plans list
 as the `/delete` and `/update` actions are cascading actions 
 (i.e. deleting a workout will delete plan(s) containing that deleted workout).
+
+<div class="button-container"><a class="button" href="#feature-overview">Back to Feature Overview</a></div>
 
 ---
 
 ### Plan-related features
-_to be updated_
+![PlanUML](uml/classDiagrams/images/PlanRelatedFeatures.png)
+<br>
+
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command,
+the `UI#getUserInput()` method in `UI` class will catch the user input,
+and it will be sent to `Parser` class. Then, the `Parser#parseUserInput(userInput)`
+method will be called to analyse the user's command.
+
+If the user's command is of type `plan`, the `Parser#parseUserInput(userInput)` method
+will parse the `plan` base word and proceed to create a `PlanCommand` object through
+`Parser#createPlanCommand(userInput)` method.
+
+Once the `PlanCommand` object is created, the `PlanCommand#execute()` method
+is called. Depending on the type of command action, this method will
+call the appropriate operations from the `PlanList` class. For instance, if the command action
+is `/create`, `PlanList#createAndAddPlan(userArgument)` will be called to create a new plan.
+To view the details of the `PlanCommand#execute()`,s
+click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/PlanCommand.java).
+
+When `createAndAddPlan()` and  `deletePlan()` method in `PlanList` class are executed, the
+`FileManager` and `UI` classes will call its appropriate methods depending on the command action.
+From the previous example, the `/create` workout command action will call
+the `UI#printNewPlanCreatedMessage()` and also the `FileManager#writeNewPlanToFile()`
+methods after the new plan has been created.
+
+Lastly, `WerkIt#startContinuousUserPrompt()` will check whether the command is of type `delete`.
+If so, `reloadScheduleFile()` method in the `WerkIt` class will be executed to modify the
+application’s day list.
+
+<div class="button-container"><a class="button" href="#feature-overview">Back to Feature Overview</a></div>
 
 ---
 
@@ -244,6 +386,7 @@ If the user's command type is `schedule`, the `Parser#parseUserInput(String user
 base word and proceed to create schedule related command using `Parser#createScheduleCommand(String userInput)` method.
 The following table shows the schedule commands that WerkIt! are able to process by calling the `ScheduleCommand#execute()`
 method.
+<br>
 
 | Command                                                             | `<commandAction>` | Parameters                                                                                                                                           | Method Called                               |
 |---------------------------------------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
@@ -251,6 +394,8 @@ method.
 | [schedule /list](#view-schedule)                                    | list              |                                                                                                                                                      | `DayList#printSchedule() `                  |
 | [schedule /clear `<day number>`](#clear-schedule-for-a-day)         | clear             | `<day number>` Number representing the day.                                                                                                          | `DayList#clearDayPlan(String userArgument)` |
 | [schedule /clearall](#clear-schedule-for-the-week)                  | clearall          |                                                                                                                                                      | `DayList#clearAllSchedule()`                |
+
+
 To view the details of the `ScheduleCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/ScheduleCommand.java).
 
 
@@ -274,13 +419,15 @@ an `InvalidScheduleException` will be thrown.
 For `commandAction` such as `/update`, `/clear` and `/clearall`, the method that was called to perform such commands will
 modify the application's schedule list. Hence, appropriate methods in the `FileManager` will be called to manage the data 
 and save them to the local file, `schedule.txt`. For more information on `FileManager` class, you can refer to this 
-[section](#file-management).
+[section](#how-data-is-written-or-updated-to-a-resource-file).
 
 Furthermore, when methods such as `DayList#updateDay()` and `DayList#clearAllSchedule` are being successfully executed, 
 for the former method `UI#printNewScheduleCreatedMessage(Day newDay)` method will be called to display a message 
 to indicate that the plan had been successfully scheduled on a day and for the latter method, 
 `UI#printClearedScheduleMessage()` method will be called to display a message to indicate that the 
 schedule list has successfully been reset.
+
+<div class="button-container"><a class="button" href="#feature-overview">Back to Feature Overview</a></div>
 
 ---
 
@@ -305,7 +452,10 @@ command using `Parser#createSearchCommand(String userInput)` method. This method
 the constructor. If the `<commandAction>` is null or incorrect, an `InvalidCommandException` will be thrown. If
 the `<keywords>` is not specified, it will be deemed as searching for spacing.
 
+<div class="button-container"><a class="button" href="#feature-overview">Back to Feature Overview</a></div>
+
 ---
+
 ## Implementation
 ### Overview
 * [Getting User Input Continuously](#getting-user-input-continuously)
@@ -322,6 +472,7 @@ the `<keywords>` is not specified, it will be deemed as searching for spacing.
   * [Update Existing Workout](#update-existing-workout)
 * [Plan](#plan)
   * [Create A New Plan](#create-a-new-plan)
+    * [Design Considerations](#design-considerations-for-creating-a-new-plan)
   * [List Plans](#list-plans)
   * [List Workouts In A Plan](#list-workouts-in-a-plan)
   * [Delete Existing Plan](#delete-existing-plan)
@@ -336,6 +487,14 @@ the `<keywords>` is not specified, it will be deemed as searching for spacing.
   * [Search for Workout](#search-for-workout)
   * [Search for Plan](#search-for-plan)
   * [Search for All](#search-for-all)
+* [File Management](#file-management)
+  * [About the Location of Directories and Files Created](#about-the-location-of-directories-and-files-created)
+  * [Storage Format for Each Resource File](#storage-format-for-each-resource-file)
+  * [Loading Resource File Data Into WerkIt!](#loading-resource-file-data-into-werkit)
+  * [Writing a New Line of Data to the Resource File](#writing-a-new-line-of-data-to-the-resource-file)
+  * [Rewriting the Resource Entire File With the Most Recent Set of Data](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data)
+  * [About the `LogHandler` Class](#about-the-loghandler-class)
+  * [Design Considerations](#design-considerations-for-file-management)
 
 ---
 
@@ -379,6 +538,8 @@ for subsequent prompts.
   ----------------------------------------------------------------------
   >
   ```
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
 
@@ -447,6 +608,8 @@ in his/her inputs to avoid any potential instabilities when processing his/her i
 If these characters are inputted by the user, as mentioned in Step 3 above, an `InvalidCommandException` will be thrown 
 and the parsing is aborted.
 
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ---
 
 ### Exercise
@@ -463,6 +626,8 @@ type of action to be executed, in this case, list. It will then list the exercis
 The following sequence diagram illustrates how the `exercise /list` command works in greater detail:
 
 ![List Exercise Sequence Diagram](uml/sequenceDiagrams/exercises/images/viewExercise.png)
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
 
@@ -550,6 +715,8 @@ Alright, the following workout has been created:
 
 This completes the process of adding a new workout to WerkIt!
 
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ##### Design Considerations for Creating a New Workout
 ###### HashMaps - Motivation
 Back in Version 1.0 of WerkIt!, workouts were stored in an ArrayList of `Workout` objects. In that version, plans
@@ -598,6 +765,8 @@ objects. Now, to manipulate the `Workout` object (e.g. `workout /update`),
 Note that the user will not have any direct interactions with the HashMap implementation and it should be transparent
 to him/her.
 
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ---
 
 #### List Workout
@@ -627,6 +796,8 @@ number of repetitions of that exercise set by the user.
 (Steps 7 to 9) Upon obtaining the `workout` object, `Workout#toString()` method is called to formulate and print 
 the workouts which is being displayed on the terminal to the user. 
 
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ---
 
 #### Delete Existing Workout
@@ -651,7 +822,7 @@ a `WorkoutCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `WorkoutCommand#execute()` method is called, it will identify
-that the workout action is of type `delete`. Thus, it will subsequently call the 
+that the workout action is of type `delete`. Subsequently, it will call the 
 `WorkoutList#deleteWorkout()` method to perform the deletion of the workout.
 <br><br>
 The following sequence diagram is the detailed procedure for Step 2's `WorkoutList#deleteWorkout()`:
@@ -688,7 +859,7 @@ Alright, the following workout has been removed:
 ```
 
 **(Steps 6 to 7)** The `WorkoutCommand#deletePlanContainsDeletedWorkout()` method will
-be called to delete any existing plan(s) that contains the workout that has been deleted.
+be called to delete any existing plan(s) that contains that deleted workout.
 <br><br>
 **(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list and the
@@ -709,6 +880,14 @@ way the workout data are formatted and stored in the `workouts.txt` file.
 <br><br>
 Hence, to simplify the implementation, the team decided to simply
 rewrite all workouts to the resource file whenever a workout is deleted.
+
+###### Deleting a workout will cause a cascade delete action
+When an existing workout is deleted from the application, plans that contain that workout
+should also be deleted. In addition, affected plans in the schedule should also be removed. This
+cascade delete action from `workout -> plan -> schedule` must be done so that 
+the data in the `workouts.txt`, `plans.txt` and `schedule.txt` files matches.
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
 
@@ -734,7 +913,7 @@ a `WorkoutCommand` object that contains the user's input.
 <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
-**(Step 1 to 3)** When the `WorkoutCommand#execute()` method is called, 'workout /update' command is identified, and
+**(Step 1 to 3)** When the `WorkoutCommand#execute()` method is called, `workout /update` command is identified, and
 `WorkoutList#getCurrentWorkout()` will be called to get the name of the workout which will be updated later.
 
 Subsequently, `WorkoutList#updateWorkout()` method will be called.
@@ -802,6 +981,14 @@ the `plans.txt` file according to the newly modified plan list.
 <br><br>
 This completes the process of updating an existing workout in WerkIt!
 
+##### Design Considerations for Updating Existing Workout
+###### Update a workout will cause a cascade update action
+When an existing workout is updated, plans that contain that workout
+should also be updated. This cascade update action from `workout -> plan` must be done so that
+the data in the `workouts.txt`, `plans.txt` files matches.
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ---
 
 ### Plan
@@ -828,7 +1015,7 @@ a `PlanCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
-that the plan action is of type `new`. Thus, it will subsequently call the
+that the plan action is of type `new`. Subsequently, it will call the
 `PlanList#createAndAddPlan(userArgument)` method to perform the creation of the plan.
 <br><br>
 The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan(userArgument)`:
@@ -841,10 +1028,11 @@ The following sequence diagram is the detailed procedure for Step 2's `PlanList#
 **(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan(userArgument)`
 method is parsed to obtain the following information required to create the `Plan` object:
 1. Name of the plan.
-2. Workout index numbers in the workout list separated by comma.<br><br>
+2. Workout index numbers in the workout list separated by comma.
+<br><br>
 
 Once the information are obtained, the name of the plan to be created will be validated.
-This is to ensure all plan names are acceptable and unique in the application.
+This is to ensure all plan names are valid and unique in the application.
 If the plan name is invalid, an `InvalidPlanException` exception will be thrown.
 <br><br>
 Subsequently, this `PlanList#createAndAddPlan()` method will find out the number of workouts
@@ -853,7 +1041,7 @@ does not exceed 10 workouts, and there should minimally
 be 1 workout in a plan. If the new plan does not meet the minimum and maximum workout number requirement,
 an `InvalidPlanException` will be thrown.
 <br><br>
-**(Steps 2.1 to 2.2)** An ArrayList of Workout object is created to store the workouts to be added into the new plan.
+**(Steps 2.1 to 2.2)** An `ArrayList` of `Workout` object is created to store the workouts to be added into the new plan.
 <br><br>
 **(Steps 2.3 to 2.4)** As the workout indexes in the user argument parameter (e.g. "1, 2, 3") is of type `String`, 
 the loop will split (by comma) and convert each number string into an `Integer`. 
@@ -865,9 +1053,9 @@ on the workout index and then added into the `ArrayList` that was created in the
 The loop will continue until all workouts to be added in the new plan is added into that `ArrayList`.
 <br><br>
 **(Steps 2.5 to 2.10)** With the valid plan name and the `ArrayList` containing the workouts to be added into the new plan, 
-a new `Plan` object can be created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
-check that the new plan to be created does not contain the same workout order as any existing plans. If it does contain
-the same workout order as any existing plan, an `InvalidPlanException` exception will be thrown.
+a new `Plan` object is created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
+check that the new plan to be created does not contain the same workout order as any existing plans. If it does, 
+an `InvalidPlanException` exception will be thrown.
 <br><br>
 If it is confirmed that the new plan does not contain
 the same workout order as any existing plan, a new `Plan` object is created.
@@ -877,7 +1065,7 @@ This new `Plan` object is then added to the application's plan list.
 <br><br>
 **(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage(newPlan)` is called
 to display the plan that has been created to the user via the terminal. The following is an example
-of a success plan creation message (new plan is called "Grow My Muscles"):
+of a success plan creation message (new plan is called "grow my muscles"):
 ```
 ----------------------------------------------------------------------
 Alright, the following plan has been created:
@@ -891,6 +1079,23 @@ object's data into `plans.txt`, which is stored on the user's local filesystem.
 <br><br>
 This completes the process of creating and adding a new plan to WerkIt!.
 
+##### Design Considerations for Creating a New Plan
+###### Validity checks for new plans to be inserted
+The following are the validity checks done before a new plan can be inserted into the application's plan list,
+and the reasons why these checks are done:
+
+|       Type of validity checks       |                                                                                                                                                   Reason for creating the validity checks                                                                                                                                                    |
+|:-----------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|          Unique plan name           |                                                                                                       All plan names within the application should be <br/> unique as it makes no sense for users to create plans with the same names.                                                                                                       |
+|     No plans called "rest day"      |                                         "rest day" is used to identify the days in the <br/> schedule that do not have a plan assigned to it. <br/> If a plan called "rest day" is allowed, users might not be able to <br/> differentiate a rest day from days that they actually need to work out.                                         |
+|    Character limit for plan name    |                                                                                                           Currently, the maximum character limit set for all plan names is 30 characters. <br/> This is for UI printing purposes.                                                                                                            |
+|     Maximum number of workouts      |                                      Currently, a plan only supports a maximum of 10 workouts as it makes no sense for <br/> a plan to have many different workouts in the real-life context. <br/> In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                      |
+| Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. <br/> This check is done as it makes no sense to create two plans with different plan names, but same workout orders. |
+
+
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ---
 
 #### List Plans
@@ -902,8 +1107,7 @@ A summary of the general procedure of listing all plans in the application is as
 The following sequence diagram illustrates how the `plan /list` command works in greater detail:
 
 <span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
- have been removed from the sequence diagram. Reference frames will be elaborated further
- down this section.</span>
+ have been removed from the sequence diagram. </span>
 
 ![List Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/listPlan.png)
 <br><br>
@@ -914,7 +1118,7 @@ a `PlanCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Steps 1 to 2)** When the `PlanCommand#execute()` method is called, it will identify
-that the plan action is of type `list`. Thus, it will subsequently call the
+that the plan action is of type `list`. Subsequently, it will call the
 `PlanList#listAllPlan()` method to display all available plan names.
 <br><br>
 **(Step 3)** The `PlanList#listAllPlan()` method will first check if the application's plan list is empty.
@@ -929,14 +1133,16 @@ Here are all your plan(s).
 To view each plan in detail, enter
 'plan /details <plan number in list>'.
 
-1. Test
-2. Grow My Muscles
+1. test
+2. grow my muscles
 ----------------------------------------------------------------------
 ```
 **(Steps 5 to 6)** The `PlanList#listAllPlan()` method returns to the `PlanCommand` object
 and the `PlanCommand` object returns to the `WerkIt` object.
 <br><br>
 This completes the process of displaying all plans in WerkIt!.
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
 
@@ -965,7 +1171,7 @@ which user specified.
 <span class="box info">:memo: To improve the diagram's readability, logging-related, input-checking method calls,
 and exception throws in `PlanList#listPlanDetails()` have been omitted.</span>
 
-**(Before Step 3)** Methods from the `String` and `Integer` classes are called to parse the
+**(Before Step 3)** Methods from the `Integer` class is called to parse the
 argument given to `PlanList#listPlanDetails()` to obtain the plan index number in list.
 
 Next, validity checks of the user input are carried out to ensure that the data entered is valid.
@@ -995,10 +1201,98 @@ Here are the 3 workouts in [grow my muscles].
 ```
 This completes the process of displaying all workouts in a plan in WerkIt!
 
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ---
 
 #### Delete Existing Plan
+A summary of the general procedure of listing all workouts in a plan is as follows:
+1. User enters the command `plan /delete <plan index number>`.
+2. The plan with corresponding plan index number (can be determined by entering plan /list) is removed from
+   the application’s plan list.
+3. The success response is printed to the user through the terminal.
+4. The resource file, `plans.txt`, is rewritten according to the application’s plan list that has been modified.
 
+The following sequence diagram illustrates how the `plan /delete` command works in greater detail:
+
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
+have been removed from the sequence diagram. Reference frames will be elaborated further
+down this section.</span>
+
+![Delete Plan Sequence Diagram](uml/sequenceDiagrams/plans/images/deletePlan-Part1.png)
+<br><br>
+**(Before Step 1)** The user's input (in this case will be a `plan /delete` command) is obtained and parsed to obtain
+a `PlanCommand` object that contains the user's input.
+
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+**(Step 1)** When the `PlanCommand#execute()` method is called,  it will identify that the workout action is
+of type `delete`. `PlanList#deletePlan()` will be called to perform the deletion of plan.
+
+The following sequence diagram is the detailed procedure for Step 2's `PlanList#deletePlan()`:
+<br><br>
+![Delete Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/deletePlan-Part2.png)
+
+<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls,
+and exception throws in `planList#deletePlan()` have been omitted.</span>
+
+**(Before Step 2.1)** Method from `Integer` class is called to parse the user argument parameter given to
+`PlanList#deletePlan()` to obtain the plan index number.
+
+Next, validity checks of the user input are carried out to ensure that the data entered is valid.
+Plan index number must be a positive integer and smaller than the total number of plan in list
+in order to pass the check. Otherwise, an `InvalidPlanException` will be thrown and
+the entire process is aborted.
+
+Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability.
+
+
+**(Steps 2.1 to 2.2)** With the plan index number, a `Plan` object which user want to delete
+will be fetched by calling method `PlanList#getPlanFromIndexNum()`.
+<br><br>
+**(Steps 2.3 to 2.8)** The `Plan` object to be deleted is subsequently removed from the ArrayList and HashMap
+which stores the application’s workout list.
+
+This is the end of `PlanLtis#deletePlan()` method.
+<br><br>
+**(Step 3)** The `PlanList#deletePlan()` method returns the deleted `Plan` object to `PlanCommand`.
+<br><br>
+**(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printDeletePlanMessage()` is called
+to display the plan name that has been deleted to the user through the terminal. The following is an example
+of a success deletion message after a valid plan is deleted from the workout list:
+```
+----------------------------------------------------------------------
+Alright, the following plan has been removed:
+
+	grow my muscles
+
+----------------------------------------------------------------------
+```
+**(Steps 6 to 7)** The `FileManager#rewriteAllPlansToFile()` is called to rewrite
+the `plans.txt` file according to the modified plan list.
+<br><br>
+This completes the process of deleting an existing plan in WerkIt!
+
+##### Design Considerations for Deleting Existing Workout
+###### Rewrite All Workout To File
+Currently, when delete plan function is executed, the WerkIt! program will rewrite all plans to the resource file, 
+`plans.txt`. Such implementation may have performance issues as the program needs to rewrite the whole
+file with the modified workout list whenever a workout is deleted in the application.
+
+An alternative considered was to find the plan to be deleted in the resource file, and then
+remove that plan. While this is a more efficient implementation, it is more complex due to the
+way the plan data are formatted and stored in the `plans.txt` file.
+
+Hence, to simplify the implementation, the team decided to simply
+rewrite all plans to the resource file whenever a plan is deleted.
+
+###### Deleting a plan will cause a cascade delete action
+When an existing workout is deleted from the application, days which is scheduled with that plan 
+should also be cleared. This cascade delete action from `plan -> schedule` must be done so that
+the data in the `plans.txt`, `schedule.txt` files matches.
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
 ### Schedule
@@ -1072,7 +1366,8 @@ Monday -- arms
 ----------------------------------------------------------------------
 ```
 (Step 6) Lastly, before the `ScheduleCommand` object is discarded, the `FileManager#rewriteAllDaysScheduleToFile(dayList)`
-is called to rewrite the `schedule.txt` file according to the newly modified application's day list.
+is called to rewrite the `schedule.txt` file according to the newly modified application's day list. For more information
+on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
 
 This completes the process of scheduling a plan for a particular day in WerkIt!
 
@@ -1090,6 +1385,8 @@ If `dayList[0]` contains a `Day` object, it would mean that the user scheduled a
 user were to execute the `schedule /update` command again to update the plan to be scheduled for Monday, the application
 will update the content in the Day object stored in `dayList[0]`. It will not recreate a `Day` object for Monday
 to store the new plan.
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
 
@@ -1148,6 +1445,8 @@ will be display on the console to the user. An expected outcome of the `schedule
 
 By default, if no plan is being scheduled for any of the day, the day is to be considered as a rest day for the user.
 
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ---
 #### Clear Schedule For A Day
 A summary of the general procedure of clearing a plan scheduled for a particular day of the schedule in WerkIt! is as follows:
@@ -1203,9 +1502,13 @@ Plan had been cleared for Monday.
 ```
 
 (Step 13) `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
-in the dayList into `schedule.txt` which is stored on the user's local filesystem.
+in the dayList into `schedule.txt` which is stored on the user's local filesystem. For more information
+on the file management, refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
+
 
 This completes the process of clearing a plan on a particular day of the schedule on WerkIt!
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
 #### Clear Schedule For The Week
@@ -1252,10 +1555,13 @@ schedule /update <day number [1-7]> <plan number>
 
 (Step 7) Lastly, `FileManager#rewriteAllDaysScheduleToFile(dayList)` is called to write all the `Day` objects' data stored 
 in the dayList into `schedule.txt` which is stored on the user's local filesystem. 
-Since all `Day` objects are deleted, the writing of data into `schedule.txt` would be an equivalent of 
-resetting the text file. 
+Since all Day objects are deleted, the writing of data into `schedule.txt` would be an equivalent of 
+resetting the text file. For more information on the file management, 
+refer to this [section](#rewriting-the-resource-entire-file-with-the-most-recent-set-of-data).
 
 This completes the process of clearing of all plans stored in the schedule on WerkIt!
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
 
@@ -1324,36 +1630,273 @@ The following sequence diagram illustrates how the `search /all` command works i
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
 
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
 ---
 
 ### File Management
+#### About the Location of Directories and Files Created
+Ideally, the `werkItResources` and `werkItLogs` directories should be in the same directory as the `WerkIt.jar` file,
+but the creation of the directories and files depends on where the user starts WerkIt! from. Specifically, it depends
+on the working directory that the user is in when he/she runs WerkIt! In the user guide's 
+[quick start guide](UserGuide.md#quick-start-guide) as well as the section regarding 
+[information about the app's local storage](UserGuide.md#werkits-local-storage-information), the user has been told to
+create a new directory to put the WerkIt! JAR file in and to set his/her current working directory before starting the
+application. This is to ensure that the resource directories and files are created in the same location as the WerkIt!
+JAR file to ensure cleanliness on the user's local filesystem.
 
-#### Design Considerations For Inconsistent Data Between Resource Files
+#### Storage Format for Each Resource File
+There are four resource files in total: `exercises.txt`, `workouts.txt`, `plans.txt`, and `schedule.txt`. For all
+four resource files, each line in the file represents one entry of data.
 
+The data format for a line in each file is as follows:
+
+| File            | Data Format      | Example      |
+|-----------------|------------------|--------------|
+| `exercises.txt` | `<exercise name>` | `push up`    |
+| `workouts.txt`  | `<exercise name> | <repetition value>` | `push up | 10` |
+| `plans.txt`     | `<plan name> <workout 1>,<workout 2>,...` | `plan 1 | push up | 10,pull up | 10` |
+| `schedule.txt`  | `<day number of the week> | <plan name>` | `1 | plan 1` |
+
+<span class="info box">:memo: In our application, the week starts on a Monday. Thus, in `schedule.txt`, if the day number
+is `1`, it means that plan is meant for Monday, `2` for Tuesday, and so on...</span>
+
+<span class="info box">To maintain simplicity, WerkIt! only stores words in lower case.</span>
+
+<span class="warning box">In the [user guide](UserGuide.md#werkits-local-storage-information), users have been warned
+not to directly modify the file data in order to avoid application instability and data loss.</span>
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
+#### Loading Resource File Data Into WerkIt!
+When WerkIt! is launched for the first time, WerkIt! will create the required resource directories and files. Alternatively,
+if the user has deleted some resource files for whatever reason (e.g. data reset), WerkIt! will recreate the missing
+files (and directories, if necessary). In either case, the application will not attempt to load the data in any of these
+files since they are just created.
+
+On subsequent launches, if the application discovers the existence of these resource files, it will attempt to load the
+data stored in the files.
+
+The following sequence diagram shows the procedure of how data in `workouts.txt` is read and loaded into WerkIt!:
+
+![Load workouts.txt](uml/sequenceDiagrams/storage/images/loadWorkoutsTxt.png)
+
+<span class="info box">:memo: To simplify the sequence diagram, some method calls have been omitted as they are
+irrelevant to the loading of `workouts.txt` or they do not add significant value to the diagram.</span>
+
+<span class="info box">:memo: Due to the limitations of PlantUML and in order to show the construction activation
+bar of `WerkIt`, the `Main` object needs to be shown in the sequence diagram. Apologies for the inconvenience caused.</span>
+
+<span class="info box">:memo: The procedures for reading and loading the data for exericse, plan, and schedule data sets are 
+largely similar to the above sequence diagram.</span>
+
+**(Steps 1 to 3)** When the `WerkIt` object is instantiated, in the constructor, `WerkIt#loadRequiredDirectoryAndFiles()`
+is called. This method is responsible for checking if the necessary resource files and directories are present. In this
+case, we assume that all resource files are in place and since we are only interested in `workouts.txt`, `WerkIt#loadWorkoutFile()`
+is called (not shown in the sequence diagram to simplify the diagram), which will in turn call `WerkIt#loadWorkoutsFromFile()`.
+
+**(Before Step 4)** With the aid of the `Scanner` class that is built into Java, the first line of `workouts.txt` is
+read into the application and stored as a `String`.  The data is then parsed into a `String` array and sent to
+`FileManager#addFileWorkoutToList()`.
+
+**(Step 4)** In `FileManager#addFileWorkoutToList()`, a `String` is crafted to follow a format that is a truncated
+version of the `workout /new` command that is accepted by `WorkoutList#createAndAddWorkout()`. 
+
+| Original Command                | Truncated `String` |
+|---------------------------------|--------------------|
+| `workout /new push up /reps 10` | `push up /reps 10` |
+
+
+**(Step 5)** The crafted `String` is passed to `WorkoutList#createAndAddWorkout()` to properly add the workout data
+into WerkIt!
+
+Steps 4 to 7 is repeated until all the lines in `workouts.txt` have been read.
+
+**(Step 8)** A boolean value that indicates whether the loading of `workouts.txt` went without any issues. True means
+no issues were encountered and false means otherwise. This boolean will be used to print to the terminal the status
+of the loading of `workouts.txt`.
+
+This will finish the loading of the data in `workouts.txt` into WerkIt!
+
+<span class="info box">In practice, the other resource files (i.e. `exercises.txt`, `plans.txt`, and `schedule.txt`)
+are also processed and loaded in `WerkIt#loadRequiredDirectoryAndFiles()`. Once all the other resource files have been
+loaded, the constructor for `WerkIt` will finish.</span>
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
+#### Writing a New Line of Data to the Resource File
+Writing a new line of data to the respective resource files is done when the user creates a new workout or plan.
+See [this design consideration](#design-considerations-for-how-data-is-written-or-updated-to-a-resource-file)
+for more details.
+
+Currently, a new line of data is written to the respective resource files when creating a [new workout](#create-new-workout)
+or a [new plan](#create-a-new-plan).
+
+The following sequence diagram shows how a new workout is written to `workouts.txt` when the user enters a `workout /new`
+command:
+
+![Write New Line Of Data](uml/sequenceDiagrams/storage/images/writeNewLineOfData.png)
+
+<span class="info box">:memo: The procedure for writing a new line of data when the user creates a new plan is largely 
+similar to the above sequence diagram.</span>
+
+**(Step 1)** After a new workout has been created, the `WorkoutCommand` object calls `FileManager#writeNewWorkoutToFile()`,
+passing the newly created `Workout` object as the argument.
+
+**(Steps 2 and 3)** `FileManager#convertWorkoutToFileDataFormat()` is called, passing the newly created `Workout` object as the
+argument. In this method, the newly created `Workout` object's data is converted into a specified `String` format that will be
+stored in `workouts.txt`. The format of a workout data when stored in the file will look something like this:
+
+```
+<exercise name> | <repetition value>
+```
+
+For example, a workout of 10 reps of push ups will look like this in `workouts.txt`:
+
+```
+push up | 10
+```
+
+**(Step 3 and beyond)** The 'file-formatted' workout data is returned to `FileManager#writeNewWorkoutToFile()` and thereafter
+written to `workouts.txt` with the help of the `FileWriter` class that is built into Java. Each line of `workouts.txt` 
+represents one workout.
+
+This finishes the writing of the new workout to the resource file and control is returned to `WorkoutCommand#execute()`.
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
+#### Rewriting the Resource Entire File With the Most Recent Set of Data
+In contrast to the previous section which covers the scenarios when only the new data is written as a new line to the 
+file, rewriting the respective entire resource file is done with the user updates or deletes a workout, plan, or
+schedule. See [this design consideration](#design-considerations-for-how-data-is-written-or-updated-to-a-resource-file)
+for more details.
+
+The following sequence diagram shows how `workouts.txt` is rewritten when the user updates or deletes a workout:
+
+![Rewrite Resource File](uml/sequenceDiagrams/storage/images/rewriteResourceFile.png)
+
+<span class="info box">The procedures for rewriting the entire file for plan and schedule data sets are largely similar 
+to the above sequence diagram.</span>
+
+**(Step 1)** After an existing workout is updated or deleted, the `WorkoutCommand` object calls
+`FileManager#rewriteAllWorkoutsToFile()`, passing an instance of `WorkoutList` as the argument.
+
+**(Steps 2 and 3)** In `FileManager#rewriteAllWorkoutsToFile()`, `workoutsDisplayList` is obtained from the `WorkoutList`
+instance. `workoutsDisplayList` is an ArrayList of `String` objects where each `String` represents a key that is
+mapped to a `Workout` object stored in a HashMap object in `WorkoutList`. (More information about the HashMap
+implementation for `Workout` objects can be found [here](#hashmaps---motivation)).
+
+The ArrayList of keys is iterated through using an enhanced for loop.
+
+**(Steps 4 and 5)** For each key iterated, the actual `Workout` object mapped to the key is obtained via the
+`WorkoutList#getWorkoutFromKey()` method.
+
+**(Steps 5 and 6)** `FileManager#convertWorkoutToFileDataFormat()` is called, with the `Workout` object obtained in Step
+5 as the parameter. This method will convert the `Workout` object's data into a specified `String` format that will be
+stored in `workouts.txt`. The format of a workout data when stored in the file will look something like this:
+
+```
+<exercise name> | <repetition value>
+```
+
+For example, a workout of 10 reps of push ups will look like this in `workouts.txt`:
+
+```
+push up | 10
+```
+
+Thereafter, the 'file-formatted' workout data is returned to `FileManager#rewriteAllWorkoutsToFile()` and the method
+will write the data into `workouts.txt` with the help of the `FileWriter` class that is built into Java. Each line of
+`workouts.txt` will represent one workout.
+
+Steps 4 to 7 (as well as the reference frame) is repeated until all keys in `workoutsDisplayList` has been iterated
+through.
+
+This finishes the process of rewriting the entire `workouts.txt` and control is returned to `WorkoutCommand#execute()`.
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+
+#### About the `LogHandler` Class
+Logging in WerkIt! is mainly handled by the `Logger` class that is built into Java. The `LogHandler` class is created
+as a custom utility class to help WerkIt!'s various components log to a designated log file in an easier manner.
+Whenever a class wants to log information, besides creating a `Logger` object, the object must be 'linked' to a
+log file handler that has been configured in the `LogHandler` class.
+
+The log file, `logs.log`, is stored in the `werkItLogs` directory, which is in the same directory as the `werkItResources`
+directory. Each log entry has the following format:
+
+```
+<timestamp> <package.ClassName> <methodName>
+<log level>: <log message>
+```
+
+Here's a sample log entry that you may find in `logs.log`:
+```
+Mar 17, 2022 7:24:43 PM data.workouts.WorkoutList createAndAddWorkout
+INFO: New workout created.
+```
+
+#### Design Considerations for File Management
+##### How Data Is Written or Updated to a Resource File
+While writing newly created workout or plan data to its respective resource file is a trivial task, updating or deleting
+existing data is more complex. When we want to update the data in the resource file, we need to find a way to traverse
+through the file and find the exact part of the file where the data that needs to be updated or deleted is at. While it
+is doable and can potentially be more efficient than rewriting the entire file, it is currently too complex and 
+time-consuming for the development team to work on. Thus, we have decided to take the less difficult route of rewriting 
+the entire file with the most recent set of data when an existing data is updated or deleted.
+
+The following table shows whether a certain operation writes a new line of data or rewrites the entire resource file:
+
+**Legend**<br/>
+:large_blue_diamond:: Only write the new line of data to the resource file<br/>
+:large_orange_diamond:: Rewrite the entire resource file with the most recent set of data
+
+| Data Type \ Operation |        Create        |         Update          |         Delete         |
+|:---------------------:|:--------------------:|:-----------------------:|:----------------------:|
+|        Workout        | :large_blue_diamond: | :large_orange_diamond:  | :large_orange_diamond: |
+|         Plans         | :large_blue_diamond: | :large_orange_diamond:  | :large_orange_diamond: |
+|       Schedule        |        _N.A._        | :large_orange_diamond:  | :large_orange_diamond: |
+
+<span class="info box">:memo: The delete operations for schedule commands is the `schedule /clear` and `schedule /clearall`
+commands.</span>
+
+##### Inconsistent Data Between Resource Files
 The first step of loading local files to the app involves the checking of validity of data. That is, before loading plan
 data, `FileManager` will check whether the workouts in the plan exist in the `workouts.txt` file, and before loading
 schedule data, `FileManager` will also check whether the plans in the `schedule.txt` could be found in `plan.txt`. If 
 all the data can be matched, the files will be loaded successfully, otherwise only the unmatched data are classified as 
 "corrupted data" and will be deleted and the deletion will be cascaded. 
 
-Although the users are warned not to edit  the local resource files as this action may corrupt the stored data,
+Although the users are warned not to edit the local resource files as this action may corrupt the stored data,
 resulting in WerkIt unable to load the data properly, there may still be scenarios where the users accidentally edited 
-the files. Thus, other than the warning in our [UserGuide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
+the files. Thus, other than the warning in our [user guide](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html),
 we also implemented error handling methods to handle the situation where users edited the files and caused data 
 corruptions. We could have implemented the handling of "corrupted data" in a more hassle-free way by simply clearing 
 all local data. However, in order to provide the best possible user experience by minimising the amount of data lost in 
 such situations, we decided to implement the validity checking such that only the affected data are removed while 
 keeping all the non-affected data safely.
 
+##### `LogHandler` Managing Its Own Log File Instead of `FileManager` Class
+The development team decided to let the `LogHandler` class manage its own log file instead of the `FileManager` class,
+which is already managing the other resource files and directories. Specifically, managing its own log file also includes
+checking if the log directory exists. This is because logging is done in the `Main` class, and when the application first 
+starts, `WerkIt` has yet to be instantiated, which is responsible for creating the `FileManager` object. Thus, to avoid 
+the risk of further complicating the solution, it was decided to just let `LogHandler`manage its own log file.
+
+<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ## Product Scope
 ### Target User Profile
 
-{Describe the target user profile}
+Generally, our target user profile are people who are interested in exercising and want a simple and quick way to 
+plan their exercise routines. In addition, it would help that they are comfortable with a command-line interface (CLI) 
+and can type fast, since WerkIt! is currently CLI-based.
 
 ### Value Proposition
 
-{Describe the value proposition: what problem does it solve?}
+WerkIt! aims to be the one-stop application for our target users to put their workout routines in a simple and quick manner,
+instead of memorising it in their heads or using a conventional note-taking app to keep track of their workout routines,
+where there are many other day-to-day things being kept too.
 
 ## User Stories
 
@@ -1377,6 +1920,9 @@ keeping all the non-affected data safely.
 | v2.0    | user     | search for workouts that I have created              | find the workouts that I am interested                                 |
 | v2.0    | user     | search for plans that I have created                 | find the plans that I am interested                                    |
 | v2.0    | user     | view the summary of what I can do in the application | know which command to use to perform the actions I want                |
+
+<br/>
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>
 
 ## Non-Functional Requirements
 #### Data Requirements
@@ -1428,5 +1974,89 @@ of their schedule. For instance, the user's daily schedule can look like this:
 
 
 ## Instructions for manual testing
+This section includes instructions to test WerkIt! manually.
+<br/>
+<span class = "info box">:memo: These test instructions covers the basic testing of the WerkIt! features. 
+Testers are expected to do more testing.
+</span>
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and shutdown
+#### Initial Launch
+1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases/tag/Jar-V2.0) and copy it into an empty folder.
+2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
+`WerkIt.jar` file.
+3. On your terminal, type the command `java -jar WerkIt.jar` to launch WerkIt!.
+4. Upon successful launch, WerkIt! will display a welcome message and also file loading-related messages on the terminal.
+
+#### Shutdown
+1. Enter the `exit` command to exit WerkIt!
+
+### Test on Exercise Features
+#### Listing All Exercises
+
+### Test on Workout Features
+#### Creating A New Workout
+#### Listing All Workouts
+
+#### Deleting An Existing Workout
+1. Prerequisites: Workout list should be populated with
+workout(s) before an existing workout can be deleted. 
+See [this section](#creating-a-new-workout) to view how you can populate your workout list. 
+2. User can enter `workout /list` to see the workout list before the deletion occurs. This is for comparison purposes.
+3. Test case: `workout /delete 1`<br/><br/>
+Expected: The first workout is deleted from the workout list. Details of the deleted workout will be shown 
+to the terminal.<br/><br/>
+Addition: If you have any existing plans containing the deleted workout, that plan
+will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list
+if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are
+affected by the deletion of this workout will display their delete messages accordingly.<br/><br/>
+4. Other incorrect commands to try:<br/>
+   a. `workout /delete` (Missing workout index to delete)<br/>
+   b. `workout /delete 0` (Index 0 is invalid) <br/>
+   c. `workout /delete X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
+
+#### Updating An Existing Workout
+
+### Test on Plan Features
+#### Creating A New Plan 
+1. Prerequisites: The workout list should be populated before a new plan can be created as
+plans contains workout(s). See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+2. Test case: `plan /new first plan /workouts 1,1,1`<br/><br/>
+Expected: A new plan called "first plan" will be created. This plan contains 3 instances of 
+workout with index 1 in the workout list.<br/><br/>
+3. Other incorrect commands to try:<br/>
+   a. `plan /new` (Missing plan name and workouts) <br/>
+   b. `plan /new [plan name]` (Missing workouts)<br/>
+   c. `plan /new /workouts 1,1` (Missing plan name)<br/>
+   d. `plan /new [plan name] /workouts 0,1` (Workout index 0 is invalid) <br/>
+   e. `plan /new rest day /workouts 1,1` (A plan called "rest day" cannot be created) <br/>
+   f. `plan /new [existing plan name] /workouts 1,1` (Plan name must be unique within the application)<br/>
+   g. `plan /new [plan name] /workouts [same order as an existing plan]` (All plans must have a unique workout order)<br/>
+   h. `plan /new [plan name] /workouts X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
+   i. `plan /new [plan name] /workouts [11 ones separated by comma]` (A plan cannot contain more than 10 workouts)
+
+#### Listing All Plans
+1. Test case: `plan /list` <br/><br/>
+Expected: If plan list is empty, the terminal will display to the user that the plan list is empty.
+Else, all plan names will be listed to the user.<br/><br/>
+2. Test case `plan /list ab`<br/><br/>
+Expected: Nothing is listed because no additional arguments should be supplied for this method
+
+#### Listing Workouts In A Plan
+#### Deleting An Existing Plan
+
+### Test on Schedule Features
+#### Updating The Schedule
+#### Viewing The Schedule
+#### Clearing Plan Schedule For A Day
+#### Clearing All Plans In The Schedule
+
+### Test on Search Features
+#### Searching For Exercise
+#### Searching For Workout
+#### Searching For Plan
+#### Searching For All
+
+### Test on Data Saving 
+
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>

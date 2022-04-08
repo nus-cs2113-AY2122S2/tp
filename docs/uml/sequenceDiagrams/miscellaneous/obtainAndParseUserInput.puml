@@ -9,7 +9,6 @@ autonumber
 participant "werkIt:WerkIt" AS WerkIt
 participant "ui:UI" AS UI
 participant "parser:Parser" AS Parser
-participant "newCommand\n:Command" AS newCommand
 
 activate WerkIt
 WerkIt -> UI : getUserInput()

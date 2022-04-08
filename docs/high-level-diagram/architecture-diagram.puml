@@ -8,7 +8,7 @@ rectangle "<$documents>\nFiles" as Files #Snow
 title Architecture Diagram for WerkIt!
 rectangle {
 rectangle UI #YellowGreen
-rectangle Command #LightSkyBlue
+rectangle Logic #LightSkyBlue
 rectangle Parser #Gold
 rectangle WerkIt #Sandybrown
 rectangle Main #Cornsilk
@@ -18,8 +18,8 @@ rectangle Storage #IndianRed
 UI<.-up-User
 Main-up->WerkIt
 WerkIt-up->Parser
-Parser-up.>Command
-Command-right->Storage
+Parser-up.>Logic
+Logic-right->Storage
 WerkIt-right->Storage
 WerkIt-left->UI
 Storage-right.>Files

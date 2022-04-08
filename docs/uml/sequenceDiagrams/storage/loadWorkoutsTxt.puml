@@ -1,0 +1,51 @@
+@startuml
+!include ../../Style.puml
+
+title Sequence Diagram for Loading 'workouts.txt'\ninto WerkIt!
+hide footbox
+
+autonumber
+
+participant ":Main" as Main
+participant "werkIt:WerkIt" as WerkIt
+participant "fileManager\n:FileManager" as FileManager
+participant "workoutList\n:WorkoutList" as WorkoutList
+
+activate Main
+create WerkIt
+Main -> WerkIt : new WerkIt()
+activate WerkIt
+WerkIt -> WerkIt : loadRequiredDirectoryAndFiles()
+activate WerkIt
+
+opt workouts.txt already exists prior to app launch
+WerkIt -> FileManager : loadWorkoutsFromFile(WorkoutList)
+activate FileManager
+
+loop until last line of workouts.txt is reached
+ref over FileManager
+Read in one line of workouts.txt
+and parse the line.
+(Method calls not shown)
+end
+
+FileManager -> FileManager : addFileWorkoutToList(WorkoutList, String)
+activate FileManager
+FileManager -> WorkoutList : createAndAddWorkout(String)
+activate WorkoutList
+return
+return
+end
+return hasNoErrorsDuringLoad:boolean
+
+ref over WerkIt
+Print to terminal on file load status.
+(Method calls not shown)
+end
+
+return
+return
+
+end
+
+@enduml

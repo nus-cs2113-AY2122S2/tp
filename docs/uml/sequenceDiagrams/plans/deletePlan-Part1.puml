@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber
+
+title Sequence Diagram of `plan /delete` Command
+hide footbox
+
+participant "werkIt:WerkIt" AS WerkIt
+participant "newCommand\n:PlanCommand" AS deleteCommand
+participant "planList\n:PlanList" AS PlanList
+participant "ui:UI" AS UI2
+participant "fileManager\n:FileManager" as FileManager
+
+activate WerkIt
+ref over WerkIt
+Obtain and parse user input.
+end
+
+WerkIt -> deleteCommand : execute()
+activate deleteCommand
+deleteCommand -> PlanList : deletePlan(userArguments)
+activate PlanList
+ref over PlanList
+Delete plan specified by user.
+end
+deleteCommand <-- PlanList : deletedPlan : Plan
+deactivate PlanList
+
+deleteCommand -> UI2 : printDeletePlanMessage(deletedPlan)
+activate UI2
+deleteCommand <-- UI2
+deactivate UI2
+
+deleteCommand -> FileManager : rewriteAllPlansToFile(planList))
+activate FileManager
+ref over FileManager
+Rewrite modified planList
+data into file on user's system
+end
+deleteCommand <-- FileManager
+deactivate FileManager
+
+WerkIt <-- deleteCommand
+deactivate deleteCommand
+
+destroy deleteCommand
+@enduml

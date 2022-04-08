@@ -8,7 +8,7 @@ title Sequence Diagram of `plan /details` Command
 hide footbox
 
 participant "werkIt:WerkIt" AS WerkIt
-participant "newCommand\n:PlanCommand" AS newCommand
+participant "detailsCommand\n:PlanCommand" AS detailsCommand
 participant "planList\n:PlanList" AS PlanList
 participant "plan\n:Plan" AS Plan
 participant "workout\n:Workout" AS Workout
@@ -18,14 +18,19 @@ ref over WerkIt
 Obtain and parse user input.
 end
 
-WerkIt -> newCommand : execute()
-activate newCommand
-newCommand -> PlanList : listPlanDetails(userArguments, ui)
+WerkIt -> detailsCommand : execute()
+activate detailsCommand
+detailsCommand -> PlanList : listPlanDetails(userArguments, ui)
 activate PlanList
 ref over PlanList
-Check which plan user would
-like to view and whether user
-input is valid.
+Parse the user input to obtain the plan
+index number. (Method calls not shown)
+end
+
+ref over PlanList
+Check the validity of user input and
+throw exceptions if checking fails.
+(Method calls not shown)
 end
 
 PlanList -> PlanList : getPlanFromIndexNum(indexOfPlan)
@@ -45,11 +50,11 @@ return workoutDetails:String
 deactivate Plan
 end
 
-newCommand <-- PlanList
+detailsCommand <-- PlanList
 deactivate PlanList
 
-WerkIt <-- newCommand
-deactivate newCommand
+WerkIt <-- detailsCommand
+deactivate detailsCommand
 
-destroy newCommand
+destroy detailsCommand
 @enduml

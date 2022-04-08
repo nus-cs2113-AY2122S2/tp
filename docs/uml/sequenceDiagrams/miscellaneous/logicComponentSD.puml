@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+hide footbox
+autonumber
+
+title Sequence Diagram of New Workout.
+
+participant ":WerkIt" AS WerkIt #Sandybrown
+participant ":Parser" AS Parser #Gold
+participant ":WorkoutCommand" AS WorkoutCommand #LightSkyBlue
+participant ":WorkoutList" AS WorkoutList #LightSkyBlue
+
+activate WerkIt #Sandybrown
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser #Gold
+WerkIt <-- Parser : :WorkoutCommand
+deactivate Parser
+
+WerkIt -> WorkoutCommand : execute()
+activate WorkoutCommand #LightSkyBlue
+WorkoutCommand -> WorkoutList : createAndAddWorkout(userArguments)
+activate WorkoutList #LightSkyBlue
+WorkoutCommand <-- WorkoutList
+deactivate WorkoutList
+WerkIt <-- WorkoutCommand
+deactivate WorkoutCommand
+
+@enduml
