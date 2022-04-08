@@ -33,12 +33,7 @@ public class ParserArguments {
 
     private static String[] splitAndCheckArguments(String arguments, String[] headings)
             throws MissingParameterException, ExtraParametersException {
-        int numOfParams = checkNumOfParams(arguments);
-        if (numOfParams > headings.length) {
-            throw new ExtraParametersException();
-        } else if (numOfParams < headings.length) {
-            throw new MissingParameterException();
-        }
+        checkNumOfParams(arguments, headings);
         String[] splitArguments = arguments.split("[ /]");
         return splitArgumentsWithHeadings(splitArguments, headings);
     }
@@ -61,7 +56,9 @@ public class ParserArguments {
         return eventDescription;
     }
 
-    protected static Map<String, String> getAttributesMap(String arguments) throws MissingParameterException {
+    protected static Map<String, String> getAttributesMap(String arguments)
+            throws MissingParameterException, ExtraParametersException {
+
         String[] splitArguments = arguments.split("[ /]");
         Map<String, String> attributes = new HashMap<>();
 
@@ -81,6 +78,13 @@ public class ParserArguments {
 
         if (attributes.size() < 3) {
             throw new MissingParameterException();
+        }
+
+        String[] splitString = arguments.split(" ");
+        for (String str : splitString) {
+            if (isStringContainsInvalidHeading(str, HEADINGS_ALL)) {
+                throw new ExtraParametersException();
+            }
         }
         return attributes;
     }
@@ -107,13 +111,66 @@ public class ParserArguments {
         return -1;
     }
 
-    private static int checkNumOfParams(String arguments) {
-        int count = 0;
-        for (int i = 0; i < arguments.length(); i++) {
-            if (arguments.charAt(i) == '/') {
-                count += 1;
+    private static void checkNumOfParams(String arguments, String[] headings)
+        throws MissingParameterException, ExtraParametersException {
+
+        int numOfValidParams = 0;
+        String[] splitArguments = arguments.split(" ");
+        for (String heading : headings) {
+            if (isStringContainsHeading(splitArguments, heading)) {
+                numOfValidParams += 1;
             }
         }
-        return count;
+
+        if (numOfValidParams < headings.length) {
+            throw new MissingParameterException();
+        }
+
+        int slashCount = 0;
+        for (int i = 0; i < arguments.length(); i++) {
+            if (arguments.charAt(i) == '/') {
+                slashCount += 1;
+            }
+        }
+
+        if (slashCount > headings.length) {
+            throw new ExtraParametersException();
+        }
+    }
+
+    private static Boolean isStringContainsHeading(String[] strings, String heading) {
+        String headingWithSlash = heading + "/";
+        for (String str : strings) {
+            if (str.length() < headingWithSlash.length()) {
+                continue;
+            }
+            String strFront = str.substring(0, headingWithSlash.length());
+            if (strFront.equals(headingWithSlash)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static Boolean isStringContainsInvalidHeading(String string, String[] headings) {
+        if (!string.contains("/")) {
+            return false;
+        }
+
+        String[] splitString = string.split("/");
+        if (splitString.length > 2) {
+            return true;
+        }
+
+        for (String heading : headings) {
+            if (splitString[0].length() < heading.length()) {
+                continue;
+            }
+            String strFront = splitString[0].substring(0, heading.length());
+            if (strFront.equals(heading)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

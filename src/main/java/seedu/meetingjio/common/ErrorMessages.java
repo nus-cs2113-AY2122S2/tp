@@ -9,7 +9,7 @@ public class ErrorMessages {
     public static final String ERROR_INIT_FAILED = "Failed to initialise MeetingJio application. Exiting...";
     public static final String ERROR_INVALID_COMMAND = "Hi please input a valid command.";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this.";
-    public static final String ERROR_EXTRA_PARAMETERS = "Hi you may have 1 or more extra/different parameters\n"
+    public static final String ERROR_EXTRA_PARAMETERS = "Hi you may have 1 or more extra parameters\n"
             + "or have '/' character in some of your parameters' value.";
 
     // Add Event Command
