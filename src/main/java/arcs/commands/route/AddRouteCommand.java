@@ -22,6 +22,15 @@ public class AddRouteCommand extends Command {
         this.toAdd = new Route(flightID, date, time, from, to, capacity);
     }
 
+    /**
+     * Checks whether the input fields are null or empty.
+     * @param flightID input flight ID
+     * @param date input flight date
+     * @param time input flight time
+     * @param from input flight source
+     * @param to input flight destination
+     * @param capacity input flight capacity
+     */
     private void checkEmptyField(String flightID, String date, String time,
                                  String from, String to, int capacity) {
         if (flightID == null || flightID.isEmpty()) {

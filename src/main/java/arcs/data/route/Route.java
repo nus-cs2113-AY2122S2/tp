@@ -53,10 +53,20 @@ public class Route {
         this.sold = sold;
     }
 
+    /**
+     * Gets the number of empty seats of this route.
+     *
+     * @return the number of empty seats.
+     */
     public int getEmptySeats() {
         return capacity - sold;
     }
 
+    /**
+     * Increments the number of sold seats by 1.
+     *
+     * @throws ArcsException if the flight has zero or negative empty seats.
+     */
     public void incrementSold() throws ArcsException {
         if (getEmptySeats() <= 0) {
             throw new ArcsException("No empty seats available. Error in incrementing seats.");
@@ -64,6 +74,18 @@ public class Route {
         sold++;
     }
 
+    /**
+     * Decrement the number of sold seats.
+     */
+    public void decrementSold() {
+        sold--;
+        assert sold >= 0 : "Sold is less than 0.";
+    }
+
+    /**
+     * Gets the information of a flight route.
+     * @return a string describing the flight route information.
+     */
     public String getFlightInfo() {
         String flightInfo = "Flight ID: " + flightID + System.lineSeparator()
                 + "Departure Date: " + date + System.lineSeparator()

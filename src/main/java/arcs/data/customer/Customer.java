@@ -29,6 +29,13 @@ public class Customer {
         return email;
     }
 
+    /**
+     * Checks if the input IC is valid.
+     * A valid IC should have 9 characters.
+     * The first and last characters are non-digit and the middle 7 characters are digits.
+     * @param newIc the input IC
+     * @return true if the IC is valid.
+     */
     public static boolean isValidIc(String newIc) {
         if (newIc.length() != 9) {
             return false;
@@ -44,6 +51,12 @@ public class Customer {
         return true;
     }
 
+    /**
+     * Checks if the phone number is valid.
+     * A valid phone number should have 8 digits.
+     * @param num input phone number
+     * @return true if the phone number is valid.
+     */
     public static boolean isValidPhone(String num) {
         if (num.length() != 8) {
             return false;
@@ -56,6 +69,12 @@ public class Customer {
         return true;
     }
 
+    /**
+     * Checks if the email is valid.
+     * A valid email should contain the "@" character.
+     * @param newEmail input email
+     * @return true if the email is valid.
+     */
     public static boolean isValidEmail(String newEmail) {
         if (newEmail.contains("@")) {
             return true;
@@ -72,6 +91,12 @@ public class Customer {
         return str;
     }
 
+    /**
+     * Get information of the customer.
+     * Information including IC number, name, phone number and email.
+     *
+     * @return a string describing the customer information.
+     */
     public String getCustomerInfo() {
         String info = "IC: " + ic + System.lineSeparator()
                 + "Name: " + name + System.lineSeparator()

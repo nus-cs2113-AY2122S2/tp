@@ -2,13 +2,20 @@ package arcs.data.flightbooking;
 
 
 import arcs.data.customer.Customer;
+import arcs.data.mealreservation.MealReservation;
 import arcs.data.route.Route;
+
 
 public class FlightBooking {
     private Customer customer;
     private Route route;
 
     public FlightBooking(Customer customer, Route route) {
+        this.customer = customer;
+        this.route = route;
+    }
+
+    public FlightBooking(Customer customer, Route route, MealReservation mealReservation) {
         this.customer = customer;
         this.route = route;
     }
@@ -21,6 +28,10 @@ public class FlightBooking {
         return route;
     }
 
+    /**
+     * Gets information of a flight.
+     * @return a string containing the description of the flight booking.
+     */
     public String getFlightBookingInfo() {
         String info = "Customer name: " + customer.getName() + System.lineSeparator()
                 + "Customer IC: " + customer.getIc() + System.lineSeparator()

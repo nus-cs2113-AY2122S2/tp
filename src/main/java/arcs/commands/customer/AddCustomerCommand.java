@@ -61,6 +61,13 @@ public class AddCustomerCommand extends Command  {
         }
     }
 
+    /**
+     * Checks if the input fields are valid.
+     *
+     * @param ic input ic number of the customer
+     * @param phone input phone number of the customer
+     * @param email input email number of the customer
+     */
     public void checkInvalidField(String ic, String phone, String email) {
         assert ic != null && phone != null && email != null : "Customer field is null.";
         if (!Customer.isValidIc(ic)) {
