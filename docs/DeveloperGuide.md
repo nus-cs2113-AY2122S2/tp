@@ -355,6 +355,11 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
 
 ## Instructions for manual testing
 
+Given below are instructions to test the app manually:
+
+> :information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are
+> expected to do more *exploratory* testing.
+
 ### Launch and Shutdown 
 1. Initial launch 
    1. Download the jar file and copy into an empty directory.
@@ -412,3 +417,23 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
       1. Expected: No module is deleted from the list. Error details shown on console.
    4. Other incorrect delete commands: `rm`
       1. Expected: Error message similar to step 3.
+      
+3. Editing an existing expense record
+   1. Prerequisites: Expense record exists in the list.
+   2. Test case: `edit 1`
+      1. Expected: Retrieves first expense record and asks user for field to edit.
+   3. Test case: `edit 0`
+      1. Expected: No expense record is retrieved to be edited. Error details shown on console.
+   4. Test case: <br>`edit 1` <br>`INVALIDFIELD randomvalue`
+      1. Expected: Retrieves first expense record, but does not edit any field due to unknown
+      field parameter. Error details shown on console.
+      
+4. Finding a specific expense record
+   1. Prerequisite: Expense record exists in the list and contains the word "test".
+   2. Test case: `find test`
+      1. Expected: Retrieves expense record which contains the word "test"
+   3. Test case: `find notest`
+      1. Expected: No expense record retrieved as keyword is not found in any record.
+   4. Test case: `find`
+      1. Expected: No expense record retrieved as keyword not specified. Error details shown on console.
+   
