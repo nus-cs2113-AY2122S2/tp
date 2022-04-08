@@ -1688,7 +1688,7 @@ irrelevant to the loading of `workouts.txt` or they do not add significant value
 bar of `WerkIt`, the `Main` object needs to be shown in the sequence diagram. Apologies for the inconvenience caused.</span>
 
 <span class="info box">:memo: The procedures for reading and loading the data for exericse, plan, and schedule data sets are 
-largely similar to the above sequence diagram.</span>
+largely similar to the above sequence diagram. Thus, sequence diagrams for these data sets are not shown.</span>
 
 **(Steps 1 to 3)** When the `WerkIt` object is instantiated, in the constructor, `WerkIt#loadRequiredDirectoryAndFiles()`
 is called. This method is responsible for checking if the necessary resource files and directories are present. In this
@@ -1738,7 +1738,7 @@ command:
 ![Write New Line Of Data](uml/sequenceDiagrams/storage/images/writeNewLineOfData.png)
 
 <span class="info box">:memo: The procedure for writing a new line of data when the user creates a new plan is largely 
-similar to the above sequence diagram.</span>
+similar to the above sequence diagram. Thus, sequence diagrams for these data sets are not shown.</span>
 
 **(Step 1)** After a new workout has been created, the `WorkoutCommand` object calls `FileManager#writeNewWorkoutToFile()`,
 passing the newly created `Workout` object as the argument.
