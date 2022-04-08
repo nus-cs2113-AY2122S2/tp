@@ -7,8 +7,8 @@ autonumber
 title Sequence Diagram of `plan /details` Command
 hide footbox
 
-participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
-participant "detailsCommand\n:PlanCommand" AS detailsCommand COLOR_LOGIC
+participant "werkItn\:WerkIt" AS WerkIt COLOR_WERKIT
+participant "detailsCommand\n:PlanCommand" AS planCommand COLOR_LOGIC
 participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
 participant "plan\n:Plan" AS Plan COLOR_LOGIC
 participant "workout\n:Workout" AS Workout COLOR_LOGIC
@@ -18,9 +18,9 @@ ref over WerkIt
 Obtain and parse user input.
 end
 
-WerkIt -> detailsCommand : execute()
-activate detailsCommand COLOR_LOGIC
-detailsCommand -> PlanList : listPlanDetails(userArguments, ui)
+WerkIt -> planCommand : execute()
+activate planCommand COLOR_LOGIC
+planCommand -> PlanList : listPlanDetails(userArguments, ui)
 activate PlanList COLOR_LOGIC
 ref over PlanList
 Parse the user input to obtain the plan
@@ -47,14 +47,15 @@ activate Plan COLOR_LOGIC
 Plan -> Workout : toString()
 activate Workout COLOR_LOGIC
 return workoutDetails:String
+return workoutDetails:String
 deactivate Plan
 end
 
-detailsCommand <-- PlanList
+planCommand <-- PlanList
 deactivate PlanList
 
-WerkIt <-- detailsCommand
-deactivate detailsCommand
+WerkIt <-- planCommand
+deactivate planCommand
 
-destroy detailsCommand
+destroy planCommand
 @enduml
