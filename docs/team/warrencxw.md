@@ -18,9 +18,17 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
    * Provides a full set of methods to parse different arguments of a user input.
    * Performs preliminary validity checking of user input for extraneous arguments and invalid commands.
 * [Session](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Session.java)
+   * Represents a group outing that involves a list of participants and contains one or more activities.
 * [Session Summary](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
+   * Creates a transaction summary that helps users calculate how much each person in a session
+     must pay and to whom they should pay for all debts to be resolved.
+   * Minimises the number of transactions required to be made.
+   * One of the key features of `SplitLah`.
 * [Help command](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/HelpCommand.java)
+   * Provides users a reference of all available commands while they are using `SplitLah`.
 * [PersonCostPair](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/util/PersonCostPair.java)
+   * A utility class that supports `SessionSummaryCommand` in minimising transactions required to be made.
+   * Encapsulates a `Person` object and their overall cost in the session as a debt owed by or owed to an individual.
 
 #### Enhancements to existing features
  * CommandParser interface
