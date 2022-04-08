@@ -185,6 +185,8 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(DELETE_EVENT)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_EVENT, "");
             userCommand = new DeleteEventCommand(userInputLowerCaseWithoutCommand);
+        } else {
+            throw new InvalidCommandException();
         }
         return userCommand;
     }
