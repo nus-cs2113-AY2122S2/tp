@@ -16,22 +16,148 @@ ____________________________________________________________
 Here are all the possible commands:
 1. addproject [Project Name]
 2. deleteproject [Project Name]
-3. changegit [Project Name] [GitHub URL]
+3. changegit [Project Index] [GitHub URL]
 4. opengit [Project Name]
-5. addprojdeadline [Project Name] [Date]
-6. addtododeadline [Project Index] [Todo Index] [Date]
+5. projdeadline [Project Index] [Date]
+6. tododeadline [Project Index] [Todo Index] [Date]
 7. todo [Project Index] [Description]
 8. mark [Project Index] [Todo Index]
 9. listprojects/listproject
-10. addlanguage [project_name] [language]
-11. listlanguages
+10. addlanguage [Project Index] [Language]
+11. listlanguages [Project Name]
 12. view [Project Name]
 13. exit
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-cs2113 added.
+Execution result: Unknown Command.
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+addproject [project_name]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+deleteproject [project_name]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+todo [project_index] [todo_description]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+mark [project_index] [todo_index]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+projdeadline [project_index] [deadline]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+tododeadline [project_index] [todo_index] [deadline]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+You have not added any projects yet!
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+changegit [project_index] [website URL]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+opengit [project_name]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+addlanguage [project_name] [language_name]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Execution result: Invalid command format!
+The correct format should be:
+listlanguages [project_name]
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+proj1 added.
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+proj2 added.
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+proj3 added.
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Here are all current project(s) in your list:
+[1] proj1 (No deadline specified)
+[2] proj2 (No deadline specified)
+[3] proj3 (No deadline specified)
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+proj2 deleted.
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+There is no such project named proj4.
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Here are all current project(s) in your list:
+[1] proj1 (No deadline specified)
+[2] proj3 (No deadline specified)
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Deadline added to proj1: 2022-03-17
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
@@ -41,55 +167,66 @@ ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-Deadline added to cs2113: 2022-03-17
+Todo: task have been added to project proj1
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-Sorry! There was no project with that name.
-____________________________________________________________
-What can I help you with next?
-____________________________________________________________
-Todo:  set up iP repo have been added to project cs2113
-What can I help you with next?
-____________________________________________________________
-Execution result: The entered index is invalid.
-
-What can I help you with next?
-____________________________________________________________
-____________________________________________________________
-Here are all current project(s) in your list:
-[1] cs2113 (2022-03-17)
+Execution result: The index is a negative number!
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-gex1005 added.
+The target index is not found in the list.
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-Here are all current project(s) in your list:
-[1] cs2113 (2022-03-17)
-[2] gex1005 (No deadline specified)
+Todo: another task  have been added to project proj1
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-cs2113 deleted.
+Todo has been marked as done successfully:
+[X] another task : No deadline specified
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
-____________________________________________________________
-Here are all current project(s) in your list:
-[1] gex1005 (No deadline specified)
-____________________________________________________________
-What can I help you with next?
 ____________________________________________________________
 Unsuccessful operation. Please check the target indexes.
+____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
-Execution result: Unknown Command.
+____________________________________________________________
+Deadline added to task: 2022-03-16
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+The Github Repo for proj1 has been changed to: https://github.com/AY2122S2-CS2113-F10-1/tp
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+java language added.
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+python language added.
+____________________________________________________________
+What can I help you with next?
+____________________________________________________________
+____________________________________________________________
+Project Name: proj1
+Deadline: 2022-03-17
+GitHub Repo: https://github.com/AY2122S2-CS2113-F10-1/tp
+	[1]. [ ] task: 2022-03-16
+	[2]. [X] another task : No deadline specified
+Programming languages for proj1:
+	[1]. java
+	[2]. python
+____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________

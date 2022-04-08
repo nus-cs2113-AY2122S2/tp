@@ -1,16 +1,36 @@
 help
-addproject cs2113
-addprojdeadline cs2113 17/03/2022
-addprojdeadline cs2113 2022-03-17
-addprojdeadline cs3245 2022-03-24
-todo 1 set up iP repo
-todo fork iP
-listprojects
-addproject gex1005
-listprojects
-deleteproject cs2113
-listprojects
-mark 1 1
 blah
+addproject
+deleteproject
+todo
+mark
+projdeadline
+tododeadline
+listproject
+view
+changegit
+opengit
+addlanguage
+listlanguages
+addproject proj1
+addproject proj2
+addproject proj3
+listproject
+deleteproject proj2
+deleteproject proj4
+listprojects
+projdeadline 1 2022-03-17
+projdeadline 2 17/03/2022
+todo 1 task
+todo -1 not possible
+todo 3 out of bounds
+todo 1 another task
+mark 1 2
+mark 2 1
+tododeadline 1 1 2022-03-16
+changegit 1 https://github.com/AY2122S2-CS2113-F10-1/tp
+addlanguage 1 java
+addlanguage 1 python
+view proj1
 exit
 
