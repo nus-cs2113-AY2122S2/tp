@@ -1941,6 +1941,8 @@ are running this application on a 64-bit operating system and with a minimum of 
 #### Performance Requirements 
 Each command entered by the user should respond within two seconds.
 
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+
 ---
 ## Glossary
 
@@ -2000,8 +2002,14 @@ Testers are welcome conduct more extensive and rigorous testing.
 #### Shutdown
 1. Enter the `exit` command to exit WerkIt!
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+---
+
 ### Test on Exercise Features
 #### Listing All Exercises
+
+---
 
 ### Test on Workout Features
 #### Creating A New Workout
@@ -2025,6 +2033,11 @@ affected by the deletion of this workout will display their delete messages acco
    c. `workout /delete X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
 
 #### Updating An Existing Workout
+
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+
+---
 
 ### Test on Plan Features
 #### Creating A New Plan 
@@ -2054,11 +2067,20 @@ Expected: Nothing is listed because no additional arguments should be supplied f
 #### Listing Workouts In A Plan
 #### Deleting An Existing Plan
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+---
+
 ### Test on Schedule Features
 #### Updating The Schedule
 #### Viewing The Schedule
 #### Clearing Plan Schedule For A Day
 #### Clearing All Plans In The Schedule
+
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+
+---
 
 ### Test on Search Features
 #### Searching For Exercise
@@ -2066,6 +2088,12 @@ Expected: Nothing is listed because no additional arguments should be supplied f
 #### Searching For Plan
 #### Searching For All
 
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
+
+---
+
 ### Test on Data Saving 
+
+<div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
