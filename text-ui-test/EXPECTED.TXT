@@ -28,8 +28,6 @@ Checking for required directory and files...
 - The schedule file 'schedule.txt' has been
   created in the WerkIt! resource directory.
 
-Loading saved file data...
-- Exercises file	[32mOK![0m
 ----------------------------------------------------------------------
 Now then, what can I do for you today?
 (Need help? Type 'help' for a guide!)

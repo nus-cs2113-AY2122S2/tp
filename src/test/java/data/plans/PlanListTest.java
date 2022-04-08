@@ -13,6 +13,7 @@ import werkit.UI;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -210,6 +211,90 @@ class PlanListTest {
         String invalidArgument = "3a";
         assertThrows(NumberFormatException.class,
             () -> planList.deletePlan(invalidArgument));
+
+    }
+
+    @Test
+    void getIndexNumFromPlanName_planNameExists_expectCorrespondingPlanNumber() throws InvalidPlanException {
+        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+        planList.createAndAddPlan("Plan 2 /workouts 1");
+        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+
+        assertEquals(2, planList.getIndexNumFromPlanName("Plan 2"));
+
+    }
+
+    @Test
+    void getIndexNumFromPlanName_planNameNotFound_expectInvalidPlanException() throws InvalidPlanException {
+        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+        planList.createAndAddPlan("Plan 2 /workouts 1");
+        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+
+        assertThrows(InvalidPlanException.class,
+            () -> planList.getIndexNumFromPlanName("Plan 4"));
+
+    }
+
+    @Test
+    void insertPlanIntoList_validNewPlan_expectNewPlanInList() throws InvalidPlanException,
+            InvalidWorkoutException {
+        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+        planList.createAndAddPlan("Plan 2 /workouts 1");
+        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+
+        assertEquals(3, planList.getPlansDisplayList().size());
+        ArrayList<Workout> listOfWorkouts = new ArrayList<Workout>();
+        listOfWorkouts.add(workoutList.getWorkoutFromIndexNum(1));
+        listOfWorkouts.add(workoutList.getWorkoutFromIndexNum(4));
+        Plan plan = new Plan("Plan 4", listOfWorkouts);
+        planList.insertPlanIntoList("Plan 4", plan);
+        assertEquals(4, planList.getPlansDisplayList().size());
+    }
+
+    @Test
+    void insertPlanIntoList_invalidNewPlan_expectInvalidWorkoutException() throws InvalidPlanException {
+        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+        planList.createAndAddPlan("Plan 2 /workouts 1");
+        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+
+        ArrayList<Workout> listOfWorkouts = new ArrayList<Workout>();
+        Workout workout = new Workout("pull up", 45);
+        listOfWorkouts.add(workout);
+
+        Plan plan = new Plan("Plan 4", listOfWorkouts);
+        assertThrows(InvalidWorkoutException.class,
+            () -> planList.insertPlanIntoList("Plan 4", plan));
+    }
+
+    @Test
+    void deletePlanContainsDeletedWorkout_WorkoutNotInPlan_expectNoChangeWithPlanList() throws
+            InvalidPlanException, InvalidWorkoutException {
+        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+        planList.createAndAddPlan("Plan 2 /workouts 1");
+        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+
+        int workoutNumberToDelete = 4;
+
+        assertEquals(3, planList.getPlansDisplayList().size());
+        Workout deletedWorkout = workoutList.deleteWorkout(Integer.toString(workoutNumberToDelete));
+        planList.deletePlanContainsDeletedWorkout(deletedWorkout.toString());
+        assertEquals(3, planList.getPlansDisplayList().size());
+
+    }
+
+    @Test
+    void deletePlanContainsDeletedWorkout_WorkoutInPlan_expectTwoDeletion() throws
+            InvalidPlanException, InvalidWorkoutException {
+        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+        planList.createAndAddPlan("Plan 2 /workouts 1");
+        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+
+        int workoutNumberToDelete = 3;
+
+        assertEquals(3, planList.getPlansDisplayList().size());
+        Workout deletedWorkout = workoutList.deleteWorkout(Integer.toString(workoutNumberToDelete));
+        planList.deletePlanContainsDeletedWorkout(deletedWorkout.toString());
+        assertEquals(1, planList.getPlansDisplayList().size());
 
     }
 

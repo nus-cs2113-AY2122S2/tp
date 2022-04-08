@@ -497,7 +497,7 @@ public class UI {
         if (dayName == " ") {
             System.out.println("No plan is being scheduled, hence no plan is cleared.");
         } else {
-            System.out.println("Plan had been cleared for " + dayName + ".");
+            System.out.println("Plan has been cleared for " + dayName + ".");
         }
     }
 
@@ -505,7 +505,7 @@ public class UI {
      * Prints a message when all day schedule had been cleared.
      */
     public void printClearedScheduleMessage() {
-        System.out.println("Schedule had been cleared and reset.");
+        System.out.println("Schedule has been cleared and reset.");
         System.out.println("There is no plan scheduled for any day.");
         System.out.println("To add plan for any day, enter:");
         printColorText(TextColor.COLOR_YELLOW, "schedule /update <day number [1-7]> <plan number>");
@@ -549,8 +549,8 @@ public class UI {
      */
     public void printPlanAddExample() {
         System.out.println("\t To create a new plan, enter the following command:");
-        printColorText(TextColor.COLOR_YELLOW, "\t plan /new Grow My Muscles /workouts 1, 2");
-        System.out.println("\t A new plan named " + getColorText(TextColor.COLOR_YELLOW, "Grow My Muscles")
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /new grow my muscles /workouts 1, 2");
+        System.out.println("\t A new plan named " + getColorText(TextColor.COLOR_YELLOW, "grow my muscles")
                 + " with workout index " + getColorText(TextColor.COLOR_YELLOW, "1") + " and "
                 + getColorText(TextColor.COLOR_YELLOW, "2\n")
                 + "\t will be created and added to the application's list of plans.");
@@ -564,7 +564,7 @@ public class UI {
                 + getColorText(TextColor.COLOR_YELLOW, "plan /list") + ", contains the\n \t following plans:");
         printColorText(TextColor.COLOR_YELLOW, "\t 1. arms");
         printColorText(TextColor.COLOR_YELLOW, "\t 2. stronger arms");
-        printColorText(TextColor.COLOR_YELLOW, "\t 3. Grow My Muscles");
+        printColorText(TextColor.COLOR_YELLOW, "\t 3. grow my muscles");
     }
 
     /**

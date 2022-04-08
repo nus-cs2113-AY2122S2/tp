@@ -43,15 +43,14 @@ public class DayList {
      *
      * @param userArgument Day number and plan number to be added into the schedule.
      * @return newDay Day object created with the day number and plan name specified by user.
-     * @throws ArrayIndexOutOfBoundsException If userArgument contains insufficient arguments and parsing fails.
      * @throws InvalidScheduleException If the schedule parameters specified in userArgument is invalid.
      */
-    public Day updateDay(String userArgument) throws ArrayIndexOutOfBoundsException, InvalidScheduleException {
+    public Day updateDay(String userArgument) throws InvalidScheduleException {
         String className = this.getClass().getSimpleName();
         String[] userArgumentArray = userArgument.split(" ", -1);
         if (userArgumentArray.length > 2) {
             logger.log(Level.WARNING, "User entered more parameters than expected.");
-            throw new ArrayIndexOutOfBoundsException();
+            throw new InvalidScheduleException(className, InvalidScheduleException.TOO_MANY_ARGUMENTS);
         }
         int dayNumber = Integer.parseInt(userArgumentArray[0]);
         int planNumber = Integer.parseInt(userArgumentArray[1]);

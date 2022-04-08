@@ -1,6 +1,5 @@
 package data.exercises;
 
-import data.plans.InvalidPlanException;
 import textcolors.TextColor;
 import werkit.UI;
 
@@ -105,6 +104,17 @@ public class ExerciseList {
         defaultExerciseList.add("burpee");
 
         return defaultExerciseList;
+    }
+
+    /**
+     * Populates a set of exercises to ExerciseList.
+     */
+    public void populateExercisesToList() {
+        ArrayList<String> defaultExercises = getDefaultExerciseList();
+
+        for (String defaultExercise : defaultExercises) {
+            addExerciseToList(defaultExercise);
+        }
     }
 
     /**

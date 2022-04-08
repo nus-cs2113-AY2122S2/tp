@@ -132,18 +132,20 @@ The following diagram gives you the general procedure on how to create your work
 * [Search Commands](#search-commands)
 
 <span class="box warning">:warning: **Heads Up!** Due to the design of WerkIt!, commands, `/commandAction`, and
-`<condition>` must be separated by a single whitespace. Excessive whitespaces will not be accepted by the application.
+`<condition>` must be separated by a single whitespace. Excessive whitespaces may not be accepted by the application.
 However, plan names may have more than a single whitespace in between words.<br/><br/>
 **Examples of Incorrect Usage**<br/>
 :x: `workout /new     push up   /reps   1000`<br/>
 :x: `plan    /list`<br/>
-:x: `plan /new Leg Day    /workouts    1, 2, 3`
+:x: `plan   /new leg day    /workouts    1, 2, 3`<br/>
+:x: `schedule    /update    1    1`
 <br/><br/>
 **Examples of Correct Usage**<br/>
 :heavy_check_mark: `workout /new push up /reps 1000`<br/>
 :heavy_check_mark: `plan /list`<br/>
-:heavy_check_mark: `plan /new Leg Day /workouts 1, 2, 3`<br/>
-:heavy_check_mark: `plan /new Leg     Day /workouts 1, 2, 3`
+:heavy_check_mark: `plan /new leg day /workouts 1, 2, 3`<br/>
+:heavy_check_mark: `plan /new leg     day /workouts 1, 2, 3`<br/>
+:heavy_check_mark: `schedule /update 1 1`
 </span>
 
 #### Workout Commands
@@ -492,7 +494,7 @@ Showed all workouts in list
 ```
 To create a new plan, enter the following command:
 ```
-> plan /new Grow My Muscles /workouts 1, 2, 3, 1
+> plan /new grow my muscles /workouts 1, 2, 3, 1
 ```
 **Expected Outcome**
 ```
@@ -504,6 +506,10 @@ Alright, the following plan has been created:
 ----------------------------------------------------------------------
 ```
 A new plan containing the workouts you had specified earlier will be created and added to the application's list of plans.
+
+<span class="box info">:memo: **Note**: If user accidentally add a comma after the last workout number such as 
+`plan /new grow my muscles /workouts 1, 2, 3, 1,`, the program will process it normally. This is by design and 
+not an abnormal behaviour.</span>
 
 ---
 ### List a Plan: `plan /list`
@@ -762,7 +768,7 @@ To clear the plan scheduled on Monday, enter the following command:
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
-Plan had been cleared for Monday.
+Plan has been cleared for Monday.
 ----------------------------------------------------------------------
 ```
 After a plan has been cleared for a particular day, the day will be shown as a rest day.
@@ -817,7 +823,7 @@ To clear all plans scheduled for the week, enter the following command:
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
-Schedule had been cleared and reset.
+Schedule has been cleared and reset.
 There is no plan scheduled for any day.
 To add plan for any day, enter:
 schedule /update <day number [1-7]> <plan number>

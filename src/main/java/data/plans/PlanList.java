@@ -19,8 +19,8 @@ import java.util.logging.Logger;
  * create, list and delete plans.
  */
 public class PlanList {
-    public static final int MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN = 10;
-    public static final String RESERVED_PLAN_NAME = "rest day";
+    public static final int PLAN_MAX_NUMBER_OF_WORKOUTS = 10;
+    public static final String PLAN_NAME_RESERVED = "rest day";
     public static final int PLAN_NAME_CHARACTER_LIMIT = 30;
     private WorkoutList workoutList;
     private HashMap<String, Plan> plansHashMapList = new HashMap<>();
@@ -99,7 +99,7 @@ public class PlanList {
         }
 
         String className = this.getClass().getSimpleName();
-        throw new InvalidPlanException(className, InvalidPlanException.UNKNOWN_PLAN_NAME_ERROR_MSG);
+        throw new InvalidPlanException(className, InvalidPlanException.PLAN_NAME_UNKNOWN);
     }
 
     /**
@@ -118,14 +118,14 @@ public class PlanList {
     public Plan createAndAddPlan(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, InvalidPlanException {
         String userPlanNameInput
-                = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[0].trim().toLowerCase();
-        String userWorkoutIndexNumbersString = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[1].trim();
+                = userArgument.split(PlanCommand.ACTION_KEYWORD_CREATE_WORKOUTS)[0].trim().toLowerCase();
+        String userWorkoutIndexNumbersString = userArgument.split(PlanCommand.ACTION_KEYWORD_CREATE_WORKOUTS)[1].trim();
         String className = this.getClass().getSimpleName();
         checkPlanNameValidity(userPlanNameInput, className);
 
         int numberOfWorkoutsInAPlan = userWorkoutIndexNumbersString.split(",").length;
         checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className);
-        assert (numberOfWorkoutsInAPlan > 0) && (numberOfWorkoutsInAPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN);
+        assert (numberOfWorkoutsInAPlan > 0) && (numberOfWorkoutsInAPlan <= PLAN_MAX_NUMBER_OF_WORKOUTS);
 
         ArrayList<Workout> workoutsToAddInAPlanList = new ArrayList<Workout>();
         for (int i = 0; i < numberOfWorkoutsInAPlan; i += 1) {
@@ -171,8 +171,8 @@ public class PlanList {
         }
 
         if (userPlanNameInput.trim().equals("")) {
-            logger.log(Level.WARNING, "Plan name is just whitespaces.");
-            throw new InvalidPlanException(className, InvalidPlanException.PLAN_NAME_WHITESPACES_ONLY);
+            logger.log(Level.WARNING, "Plan name is just whitespaces, or keyboard shortcuts (e.g. ctrl Z) entered.");
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_NAME_INVALID);
         }
 
         for (int i = 0; i < plansDisplayList.size(); i += 1) {
@@ -180,13 +180,13 @@ public class PlanList {
 
             if (userPlanNameInputLowerCase.equals(getPlanName)) {
                 logger.log(Level.WARNING, "Plan name already exists.");
-                throw new InvalidPlanException(className, InvalidPlanException.DUPLICATE_PLAN_NAME_ERROR_MSG);
+                throw new InvalidPlanException(className, InvalidPlanException.PLAN_DUPLICATE_NAME);
             }
         }
 
-        if (userPlanNameInputLowerCase.trim().equals(RESERVED_PLAN_NAME)) {
+        if (userPlanNameInputLowerCase.trim().equals(PLAN_NAME_RESERVED)) {
             logger.log(Level.WARNING, "Plan name cannot be 'rest day'.");
-            throw new InvalidPlanException(className, InvalidPlanException.RESERVED_PLAN_NAME);
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_NAME_RESERVED);
         }
     }
 
@@ -203,13 +203,13 @@ public class PlanList {
     public void checkMinMaxNumberOfWorkouts(int numberOfWorkouts, String className) throws
             InvalidPlanException {
         boolean isAppropriateNumberOfWorkouts = false;
-        if (numberOfWorkouts > 0 && numberOfWorkouts <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN) {
+        if (numberOfWorkouts > 0 && numberOfWorkouts <= PLAN_MAX_NUMBER_OF_WORKOUTS) {
             isAppropriateNumberOfWorkouts = true;
         }
 
         if (!isAppropriateNumberOfWorkouts) {
             logger.log(Level.WARNING, "Number of workouts to add in a plan is invalid.");
-            throw new InvalidPlanException(className, InvalidPlanException.MIN_MAX_WORKOUTS_IN_A_PLAN);
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_MIN_MAX_WORKOUTS);
         }
     }
 
@@ -232,7 +232,7 @@ public class PlanList {
 
         if (!isWithinWorkoutListRange) {
             logger.log(Level.WARNING, "Workout number to add in the plan is invalid.");
-            throw new InvalidPlanException(className, InvalidPlanException.WORKOUT_NUMBER_OUT_OF_RANGE);
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_WORKOUT_NUMBER_OUT_OF_RANGE);
         }
     }
 
@@ -363,7 +363,7 @@ public class PlanList {
 
         ArrayList<Workout> workoutsInPlanList = planToViewDetails.getWorkoutsInPlanList();
         int numberOfWorkoutsInPlan = workoutsInPlanList.size();
-        assert ((numberOfWorkoutsInPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN) && (numberOfWorkoutsInPlan > 0)) :
+        assert ((numberOfWorkoutsInPlan <= PLAN_MAX_NUMBER_OF_WORKOUTS) && (numberOfWorkoutsInPlan > 0)) :
                 "Total number of workouts is not valid.";
 
         System.out.println("Here are the " + numberOfWorkoutsInPlan + " workouts in ["
@@ -534,6 +534,7 @@ public class PlanList {
             System.out.println((i + 1) + ". " + getPlansDisplayList().get(planIndexWithDeletedWorkout.get(i) - i - 1));
             deletePlan(Integer.toString(planIndexWithDeletedWorkout.get(i) - i));
         }
+        System.out.println();
     }
 
     public void updatePlanContainsUpdatedWorkout(String oldWorkoutToCheck, Workout updatedWorkout) throws
@@ -563,6 +564,7 @@ public class PlanList {
             System.out.println((i + 1) + ". " + getPlansDisplayList().get(planWithUpdatedWorkout.get(i) - 1));
             updatePlanDetails((planWithUpdatedWorkout.get(i)), oldWorkoutToCheck, updatedWorkout);
         }
+        System.out.println();
     }
 
     public void updatePlanDetails(int planIndexToUpdate, String oldWorkoutToCheck, Workout updatedWorkout) throws

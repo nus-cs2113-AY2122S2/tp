@@ -3,66 +3,67 @@
 !include ../../Style.puml
 
 autonumber 2.1
+hide footbox
 
-participant "dayList\n:DayList" AS DayList
-participant ":String" AS string
+participant "dayList\n:DayList" AS DayList COLOR_LOGIC
+participant ":String" AS string COLOR_LOGIC
 
 
-activate DayList
+activate DayList COLOR_LOGIC
 
 group sd Add/update a plan for a Day.
 
 
 DayList -> string : userArgument.split(" ")
-activate string
+activate string COLOR_LOGIC
 return userArgumentArray:String[]
 
 
 opt userArgumentArray. length > 2
-create ":ArrayOutOfBoundException" AS iee
+create ":ArrayOutOfBoundException" AS iee COLOR_LOGIC
 DayList -> iee : throw new ArrayOutOfBoundException
-activate iee
+activate iee COLOR_LOGIC
 return
 deactivate iee
 end
-create "Integer" AS int
+create "Integer" AS int COLOR_LOGIC
 DayList -> int: parseInt(userArgument[0])
 return dayNumber:int
 DayList -> int: parseInt(userArgument[1])
 return planNumber:int
 
 opt !isDayValid
-create ":InvalidScheduleException" AS ise
+create ":InvalidScheduleException" AS ise COLOR_LOGIC
 DayList -> ise : throw new InvalidScheduleException
-activate ise
+activate ise COLOR_LOGIC
 return
 deactivate ise
 end
 
 opt !isPlanValid
 DayList -> ise : throw new InvalidScheduleException
-activate ise
+activate ise COLOR_LOGIC
 return
 deactivate ise
 end
 
-participant "planList\n:PlanList" AS PlanList
+participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
 DayList -> PlanList : getPlanDisplayList().get(planNumber - 1)
-activate PlanList
+activate PlanList COLOR_LOGIC
 return planToAddKey:String
 
 DayList -> PlanList : getPlanFromKey(planToAddKey)
-activate PlanList
+activate PlanList COLOR_LOGIC
 return planToAdd:Plan
 
-create "Day" AS newDay
+create "Day" AS newDay COLOR_LOGIC
 alt scheduleList[dayNumber - 1] == null
 DayList -> newDay : new Day(dayNumber, planToAdd)
-activate newDay
+activate newDay COLOR_LOGIC
 return newDay:Day
 else
 DayList -> newDay :setNewPlanForThisDay(newDay, planToAdd)
-activate newDay
+activate newDay COLOR_LOGIC
 return
 deactivate newDay
 end

@@ -6,21 +6,21 @@ hide footbox
 
 autonumber
 
-participant ":Main" as Main
-participant "werkIt:WerkIt" as WerkIt
-participant "fileManager\n:FileManager" as FileManager
-participant "workoutList\n:WorkoutList" as WorkoutList
+participant ":Main" as Main COLOR_MAIN
+participant "werkIt:WerkIt" as WerkIt COLOR_WERKIT
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
+participant "workoutList\n:WorkoutList" as WorkoutList COLOR_LOGIC
 
-activate Main
+activate Main COLOR_MAIN
 create WerkIt
 Main -> WerkIt : new WerkIt()
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 WerkIt -> WerkIt : loadRequiredDirectoryAndFiles()
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 
 opt workouts.txt already exists prior to app launch
 WerkIt -> FileManager : loadWorkoutsFromFile(WorkoutList)
-activate FileManager
+activate FileManager COLOR_STORAGE
 
 loop until last line of workouts.txt is reached
 ref over FileManager
@@ -30,9 +30,9 @@ and parse the line.
 end
 
 FileManager -> FileManager : addFileWorkoutToList(WorkoutList, String)
-activate FileManager
+activate FileManager COLOR_STORAGE
 FileManager -> WorkoutList : createAndAddWorkout(String)
-activate WorkoutList
+activate WorkoutList COLOR_LOGIC
 return
 return
 end

@@ -2,42 +2,39 @@
 'https://plantuml.com/sequence-diagram
 !include ../../Style.puml
 
-actor   User
+hide footbox
 autonumber
 title Sequence Diagram of `workout /list` Command
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "parser:Parser" AS Parser
-participant "newCommand\n:WorkoutCommand" AS newCommand
-participant "workoutList\n:WorkoutList" AS WorkoutList
-participant "workout\n:Workout" AS Workout
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:WorkoutCommand" AS newCommand COLOR_LOGIC
+participant "workoutList\n:WorkoutList" AS WorkoutList COLOR_LOGIC
+participant "workout\n:Workout" AS Workout COLOR_LOGIC
 
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 ref over WerkIt
-Obtain user input.
+Obtain and parse user input.
 end
-
-WerkIt -> Parser : parseUserInput(userInput)
-activate Parser
-WerkIt <-- Parser : :Command
-deactivate Parser
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand COLOR_LOGIC
 
 newCommand -> WorkoutList : listAllWorkout()
-activate WorkoutList
+activate WorkoutList COLOR_LOGIC
+alt workoutDisplayList.size() <= 0
+WorkoutList --> WerkIt: Display list is \nempty message
+else
 loop index <= workoutDisplayList.size()
 WorkoutList -> WorkoutList:getWorkoutFromIndexNum(index)
-activate WorkoutList
+activate WorkoutList COLOR_LOGIC
 return workoutObject:Workout
 WorkoutList-->Workout: toString()
-activate Workout
+activate Workout COLOR_LOGIC
 return displayString:String
-WorkoutList --> User: Printed Workouts
+WorkoutList --> WerkIt: Print workouts
 end
-
-
+end
+WorkoutList --> WerkIt: Display all \nworkouts \nprinted \nmessage
 
 destroy newCommand
 @enduml

@@ -25,7 +25,10 @@ public class Workout {
     }
 
     public String toString() {
-        String displayString = getExerciseName() + " (" + getRepetitions() + " reps)";
-        return displayString;
+        if (getRepetitions() == 1) {
+            return getExerciseName() + " (" + getRepetitions() + " rep)";
+        } else {
+            return getExerciseName() + " (" + getRepetitions() + " reps)";
+        }
     }
 }
