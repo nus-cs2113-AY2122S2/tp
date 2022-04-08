@@ -63,8 +63,8 @@ public class CheckCommand extends Command {
      * @throws NumberFormatException if cost is invalid
      * @throws IllegalArgumentException if EquipmentType is invalid
      */
-    public Pair<String, ?> generateCheckPair() throws AssertionError, NumberFormatException, IllegalArgumentException
-    , DateTimeParseException {
+    public Pair<String, ?> generateCheckPair() throws AssertionError, NumberFormatException, IllegalArgumentException,
+        DateTimeParseException {
         Pair<String, ?> pair = null;
       
         String s = commandStrings.get(0);
