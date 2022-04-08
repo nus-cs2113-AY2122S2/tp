@@ -2,9 +2,6 @@ package seedu.allonus.modules;
 
 
 import seedu.allonus.AllOnUs;
-import seedu.allonus.contacts.ContactsManager;
-import seedu.allonus.expense.Expense;
-import seedu.allonus.expense.ExpenseTracker;
 import seedu.allonus.mode.Mode;
 import seedu.allonus.modules.exceptions.ModuleCodeException;
 import seedu.allonus.modules.exceptions.ModuleCategoryException;
@@ -301,7 +298,7 @@ public class StudyManager {
         }
     }
 
-    private void editModuleRunner(TextUi ui, int moduleIndex) {
+    protected void editModuleRunner(TextUi ui, int moduleIndex) {
         assert moduleIndex <= modulesList.size();
         assert moduleIndex >= 0;
         Module moduleToEdit = modulesList.get(moduleIndex);
@@ -336,7 +333,7 @@ public class StudyManager {
         printMessage(EDIT_MODULE_CHOOSE_MESSAGE);
     }
 
-    private void editModuleTime(Module moduleToEdit, String editUserInput) {
+    protected void editModuleTime(Module moduleToEdit, String editUserInput) {
         try {
             String moduleTime = editUserInput.replace(MODULE_TIME_DELIMITER, EMPTY_STRING);
             if (moduleTime.equals("")) {
@@ -352,7 +349,7 @@ public class StudyManager {
         }
     }
 
-    private void editModuleDay(Module moduleToEdit, String editUserInput) {
+    protected void editModuleDay(Module moduleToEdit, String editUserInput) {
         try {
             String moduleDay = editUserInput.replace(MODULE_DAY_DELIMITER,EMPTY_STRING);
             if (moduleDay.equals("")) {
@@ -369,7 +366,7 @@ public class StudyManager {
 
     }
 
-    private void editModuleCode(Module moduleToEdit, String editUserInput) {
+    protected void editModuleCode(Module moduleToEdit, String editUserInput) {
         try {
             String moduleCode = editUserInput.replace(MODULE_CODE_DELIMITER, EMPTY_STRING);
             if (moduleCode.equals("")) {
@@ -384,7 +381,7 @@ public class StudyManager {
         }
     }
 
-    private void editModuleCategory(Module moduleToEdit, String editUserInput) {
+    protected void editModuleCategory(Module moduleToEdit, String editUserInput) {
         try {
             String moduleCategory = editUserInput.replace(MODULE_CATEGORY_DELIMITER,EMPTY_STRING);
             if (moduleCategory.equals("")) {
@@ -404,14 +401,16 @@ public class StudyManager {
      * Adds a new module to the module list.
      * Calls addModuleParser to parse the input string.
      * @param userInput String input that contains the add command and module attributes.
+     * @param shouldPrintConsoleMessage Boolean that decides if messages should be printed onto the console.
+     *                                  For testing purpose and internal calls this would be false.
      */
-    public void addModule(String userInput, boolean fromCommandLine) {
+    public void addModule(String userInput, boolean shouldPrintConsoleMessage) {
         Module newModule = moduleParser.addModuleParser(userInput);
         if (newModule == null) {
             return;
         }
         modulesList.add(newModule);
-        if (fromCommandLine) {
+        if (shouldPrintConsoleMessage) {
             printMessage(ADD_MODULE_SUCCESS_MESSAGE);
             printMessage(newModule.toString());
         }
