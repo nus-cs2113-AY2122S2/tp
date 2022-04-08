@@ -20,7 +20,7 @@ public class ScheduleCommand extends Command {
     public static final String KEYWORD_BASE = "schedule";
     public static final String ACTION_KEYWORD_UPDATE = "/update";
     public static final String ACTION_KEYWORD_LIST = "/list";
-    public static final String ACTION_KEYWORD_CLEAR= "/clear";
+    public static final String ACTION_KEYWORD_CLEAR = "/clear";
     public static final String ACTION_KEYWORD_CLEAR_ALL = "/clearall";
 
     private FileManager fileManager;
