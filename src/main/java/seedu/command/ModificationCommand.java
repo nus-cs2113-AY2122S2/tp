@@ -2,6 +2,8 @@ package seedu.command;
 
 import seedu.equipment.EquipmentType;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
@@ -15,10 +17,12 @@ public class ModificationCommand extends Command {
     public static final String INVALID_TYPE_MESSAGE = "Equipment Type needs to be one of:" + System.lineSeparator()
             + EquipmentType.getAllTypes();
     public static final String INVALID_COST_MESSAGE = "Cost needs to be able to be parsed to a double";
+    public static final String INVALID_DATE_MESSAGE = "Date needs to be able to be parsed, make sure you're using "
+            + "YYYY-MM-DD format";
     protected final ArrayList<String> commandStrings;
     protected String serialNumber;
     protected String equipmentName = null;
-    protected String purchasedDate = null;
+    protected LocalDate purchasedDate = null;
     protected EquipmentType equipmentType = null;
     protected String purchasedFrom = null;
     protected Double cost = null;
@@ -39,20 +43,20 @@ public class ModificationCommand extends Command {
         this.equipmentName = equipmentName;
     }
 
-    public void setPurchasedDate(String purchasedDate) {
-        this.purchasedDate = purchasedDate;
+    public void setPurchasedDate(String purchasedDate) throws DateTimeParseException {
+        this.purchasedDate = LocalDate.parse(purchasedDate);
     }
 
-    public void setEquipmentType(EquipmentType equipmentType) {
-        this.equipmentType = equipmentType;
+    public void setEquipmentType(String equipmentType) throws IllegalArgumentException {
+        this.equipmentType = EquipmentType.valueOf(equipmentType.toUpperCase(Locale.ROOT));
     }
 
     public void setPurchasedFrom(String purchasedFrom) {
         this.purchasedFrom = purchasedFrom;
     }
 
-    public void setCost(Double cost) {
-        this.cost = cost;
+    public void setCost(String cost) throws NumberFormatException {
+        this.cost = Double.valueOf(cost);
     }
 
     /**
@@ -65,7 +69,8 @@ public class ModificationCommand extends Command {
      * @throws IllegalArgumentException if EquipmentType is invalid
      *
      */
-    protected void prepareModification() throws AssertionError, NumberFormatException, IllegalArgumentException {
+    protected void prepareModification() throws AssertionError, NumberFormatException, IllegalArgumentException,
+            DateTimeParseException {
         for (String s : commandStrings) {
             int delimiterPos = s.indexOf('/');
             // the case where delimiterPos = -1 is impossible as
@@ -81,13 +86,13 @@ public class ModificationCommand extends Command {
                 setPurchasedDate(argValue);
                 break;
             case "t":
-                setEquipmentType(EquipmentType.valueOf(argValue.toUpperCase(Locale.ROOT)));
+                setEquipmentType(argValue);
                 break;
             case "pf":
                 setPurchasedFrom(argValue);
                 break;
             case "c":
-                setCost(Double.valueOf(argValue));
+                setCost(argValue);
                 break;
             case "s":
                 setSerialNumber(argValue);

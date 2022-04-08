@@ -4,6 +4,7 @@ import seedu.Pair;
 import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -63,7 +64,7 @@ public class CheckCommand extends Command {
                 pair = new Pair<>("itemName", argValue);
                 break;
             case "pd":
-                pair = new Pair<>("purchasedDate", argValue);
+                pair = new Pair<>("purchasedDate", LocalDate.parse(argValue));
                 break;
             case "t":
                 pair = new Pair<>("type", EquipmentType.valueOf(argValue.toUpperCase(Locale.ROOT)));

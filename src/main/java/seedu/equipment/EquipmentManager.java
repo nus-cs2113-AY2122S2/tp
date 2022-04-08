@@ -2,6 +2,7 @@ package seedu.equipment;
 
 import seedu.Pair;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,7 +25,7 @@ public class EquipmentManager {
      * @throws DuplicateSerialNumberException If the serial number exists in equipmentList.
      */
     public void addEquipment(String itemName, String serialNumber, EquipmentType type, double cost,
-                             String purchasedFrom, String purchasedDate) throws DuplicateSerialNumberException {
+                             String purchasedFrom, LocalDate purchasedDate) throws DuplicateSerialNumberException {
         if (!equipmentList.containsKey(serialNumber)) {
             Equipment equipment = new Equipment(itemName, serialNumber, type, cost, purchasedFrom, purchasedDate);
             equipmentList.put(serialNumber, equipment);
@@ -95,7 +96,7 @@ public class EquipmentManager {
             break;
         case "purchasedDate":
             for (Equipment equipment : equipmentList.values()) {
-                if (equipment.getPurchasedDate().contains((String) checkParam.getValue())) {
+                if (equipment.getPurchasedDate().equals(checkParam.getValue())) {
                     listOfEquipments.add(equipment);
                 }
             }
@@ -166,7 +167,7 @@ public class EquipmentManager {
                 updatedEquipment.setCost((Double) updates.getValue());
                 break;
             case "purchasedDate":
-                updatedEquipment.setPurchasedDate((String) updates.getValue());
+                updatedEquipment.setPurchasedDate((LocalDate) updates.getValue());
                 break;
             case "purchasedFrom":
                 updatedEquipment.setPurchasedFrom((String) updates.getValue());

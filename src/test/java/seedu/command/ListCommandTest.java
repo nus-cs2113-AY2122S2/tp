@@ -5,6 +5,7 @@ import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.EquipmentManager;
 import seedu.equipment.EquipmentType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,7 +28,7 @@ class ListCommandTest {
                     EquipmentType.valueOf("SPEAKER"),
                     1000,
                     "Loud Technologies",
-                    "2022-02-23");
+                    LocalDate.parse("2022-02-23"));
         } catch (DuplicateSerialNumberException e) {
             fail();
         }
@@ -51,7 +52,7 @@ class ListCommandTest {
                     EquipmentType.valueOf("SPEAKER"),
                     1000,
                     "Loud Technologies",
-                    "2022-02-23");
+                    LocalDate.parse("2022-02-23"));
         } catch (DuplicateSerialNumberException e) {
             fail();
         }
