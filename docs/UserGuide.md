@@ -17,6 +17,10 @@
       * [Create new flight booking: `book`](#create-new-flight-booking-book)
       * [Remove flight booking: `deleteBooking`](#remove-flight-booking-deletebooking)
       * [View all existing flight booking: `listBooking`](#view-all-existing-flight-booking-listbooking)
+    * [Staff Functionalities](#Staff-Functionalities)
+      * [Add a stuff: `addStaff`](#add-a-stuff-addstaff)
+      * [Delete a staff : `deleteStaff`](#delete-staff--deletestaff)
+      * [List staffs: `listStaffs`](#list-staffs-liststaffs)
     * [Menu Item Functionalities](#Menu-Item-Functionalities)
     * [Meal Reservation Functionalities](#In-Flight-Meal-Reservations)
     * [Exit the system](#Exit-the-System)
@@ -330,24 +334,33 @@ Example of usage: <br>
 * `listMealReservations`
 
 ## Staff Functionalities
-### Add staff object: `addStaff`
+### Add a stuff: `addStaff`
  
-Add a new staff with required staff information
-
+Add a new staff with required staff information:
+* id: 3 character Staff Id, unique for each staff, follow wthe format: [a-zA-Z][0-9][0-9]
+* pw: staff's password, string
+* n: staff name, string
+* j: staff job, string
+* p: staff's phone, 8 characters' string, all digit characters
+* email: staff's email, string, must contain "@"
 Format: `addStaff  id/ID pw/PW n/STAFF_NAME j/STAFF_JOB p/STAFF_PHONE email/STAFF_EMAIL`
 
 Example of usage: <br>
-* `addStaff id/1 pw/123wer n/Mike j/manager p/88888888 e/gmail ` <br>
+* `addStaff id/A12 pw/123wer n/Mike j/manager p/88888888 e/gmail@gamil.com ` <br>
 
 
-### Delete staff object: `deleteStaff`
+### Delete Staff : `deleteStaff`
+Delete a staff with its index in staff lists
 
-Delete a staff with its id and password
-
-Format: `deleteStaff  id/ID pw/PW L`
+Format: `deleteStaff  id/index`
 
 Example of usage: <br>
-* `deleteStaff id/1 pw/123wer ` <br>
+* `deleteStaff id/1` <br>
+
+### List staffs: `listStaffs`
+List all the existing staffs, without showing password
+
+Format: `listStaffs`
 
 
 ## Exit the System
@@ -391,4 +404,7 @@ Example of usage: <br>
 | **Remove Meal Reservation**   | `deleteMealReservation ic/CUSTOMERID fid/FLIGHTID`                                                 | `deleteMealReservation fid/MU8401 ic/W6235354B`                      |
 | **Find Meal Reservation**     | `findMealReservation ic/CUSTOMERID fid/FLIGHTID`                                                   | `findMealReservation fid/MU8401 ic/W6235354B`                        |
 | **List all Meal Reservation** | `listMealReservations`                                                                             | `listMealReservations`                                               |
+| **Add a staff**               | `addStaff  id/ID pw/PW n/STAFF_NAME j/STAFF_JOB p/STAFF_PHONE email/STAFF_EMAIL`                   | `addStaff id/A12 pw/123wer n/Mike j/manager p/88888888 e/gmail@gamil.com`|
+| **Delete a staff**            | `deleteStaff  id/index`                                                                            | `deleteStaff id/1`                                                   |
+| **List staffs**               | `listStaffs`                                                                                       | `listStaffs`                                                         |
 | **Exit the system**           | `bye`                                                                                              | `bye`                                                                |
