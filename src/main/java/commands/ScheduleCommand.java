@@ -17,11 +17,11 @@ import static data.schedule.InvalidScheduleException.INDEX_OUT_OF_BOUND;
 import static data.schedule.InvalidScheduleException.INPUT_NOT_NUMBER_FORMATTABLE;
 
 public class ScheduleCommand extends Command {
-    public static final String BASE_KEYWORD = "schedule";
-    public static final String UPDATE_ACTION_KEYWORD = "/update";
-    public static final String LIST_ACTION_KEYWORD = "/list";
-    public static final String CLEAR_ACTION_KEYWORD = "/clear";
-    public static final String CLEAR_ALL_ACTION_KEYWORD = "/clearall";
+    public static final String KEYWORD_BASE = "schedule";
+    public static final String ACTION_KEYWORD_UPDATE = "/update";
+    public static final String ACTION_KEYWORD_LIST = "/list";
+    public static final String ACTION_KEYWORD_CLEAR= "/clear";
+    public static final String ACTION_KEYWORD_CLEAR_ALL = "/clearall";
 
     private FileManager fileManager;
     private UI ui = new UI();
@@ -108,13 +108,13 @@ public class ScheduleCommand extends Command {
      */
     public void setUserAction(String userAction) throws InvalidCommandException {
         switch (userAction) {
-        case UPDATE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_UPDATE:
             //Fallthrough
-        case LIST_ACTION_KEYWORD:
+        case ACTION_KEYWORD_LIST:
             //Fallthrough
-        case CLEAR_ACTION_KEYWORD:
+        case ACTION_KEYWORD_CLEAR:
             //Fallthrough
-        case CLEAR_ALL_ACTION_KEYWORD:
+        case ACTION_KEYWORD_CLEAR_ALL:
             this.userAction = userAction;
             break;
         default:
@@ -141,20 +141,20 @@ public class ScheduleCommand extends Command {
     public void execute() {
         try {
             switch (getUserAction()) {
-            case UPDATE_ACTION_KEYWORD:
+            case ACTION_KEYWORD_UPDATE:
                 Day newDay = getScheduleList().updateDay(getUserArguments());
                 getUI().printNewScheduleCreatedMessage(newDay);
                 getFileManager().rewriteAllDaysScheduleToFile(getScheduleList());
                 break;
-            case LIST_ACTION_KEYWORD:
+            case ACTION_KEYWORD_LIST:
                 getScheduleList().printSchedule();
                 break;
-            case CLEAR_ACTION_KEYWORD:
+            case ACTION_KEYWORD_CLEAR:
                 String dayName = getScheduleList().clearDayPlan(getUserArguments());
                 getUI().printClearedScheduleOnADay(dayName);
                 getFileManager().rewriteAllDaysScheduleToFile(getScheduleList());
                 break;
-            case CLEAR_ALL_ACTION_KEYWORD:
+            case ACTION_KEYWORD_CLEAR_ALL:
                 getScheduleList().clearAllSchedule();
                 getUI().printClearedScheduleMessage();
                 getFileManager().rewriteAllDaysScheduleToFile(getScheduleList());
