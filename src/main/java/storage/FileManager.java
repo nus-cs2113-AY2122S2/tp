@@ -261,7 +261,7 @@ public class FileManager {
      * Checks if all the required directory and files already exist prior to the current session
      * of the application.
      *
-     * @return Returns true if all the required directory and files already exists. Otherwise,
+     * @return Returns true if all the required directory and files already exist. Otherwise,
      *         returns false.
      */
     public boolean checkIfAllDirectoryAndFilesExists() {
@@ -282,6 +282,21 @@ public class FileManager {
         }
 
         return true;
+    }
+
+    /**
+     * Checks if at least one of the following resource files already exist prior to the current session
+     * of the application: workouts.txt, plans.txt, or schedule.txt
+     *
+     * @return Returns true if at least one of the abovementioned files already exists. Otherwise,
+     *         returns false.
+     */
+    public boolean checkIfAtLeastOneFileExists() {
+        if (isWasWorkoutsFileAlreadyMade() || isWasPlansFileAlreadyMade() || isWasScheduleFileAlreadyMade()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

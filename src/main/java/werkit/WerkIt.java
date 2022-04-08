@@ -132,14 +132,16 @@ public class WerkIt {
     private void loadRequiredDirectoryAndFiles() throws IOException {
         getUI().printCheckingDirectoryAndFilesMessage();
         getFileManager().checkAndCreateDirectoriesAndFiles();
-        getUI().printEmptyLineOrStatus(fileManager.checkIfAllDirectoryAndFilesExists());
+        getUI().printEmptyLineOrStatus(getFileManager().checkIfAllDirectoryAndFilesExists());
 
-        assert (Files.exists(fileManager.getWorkoutFilePath())) : "Workout file does not exist.";
-        assert (Files.exists(fileManager.getExerciseFilePath())) : "Exercise file does not exist.";
-        assert (Files.exists(fileManager.getPlanFilePath())) : "Plan file does not exist.";
-        assert (Files.exists(fileManager.getScheduleFilePath())) : "Schedule file does not exist.";
+        assert (Files.exists(getFileManager().getWorkoutFilePath())) : "Workout file does not exist.";
+        assert (Files.exists(getFileManager().getExerciseFilePath())) : "Exercise file does not exist.";
+        assert (Files.exists(getFileManager().getPlanFilePath())) : "Plan file does not exist.";
+        assert (Files.exists(getFileManager().getScheduleFilePath())) : "Schedule file does not exist.";
 
-        getUI().printLoadingFileDataMessage();
+        if (getFileManager().checkIfAtLeastOneFileExists()) {
+            getUI().printLoadingFileDataMessage();
+        }
         populateExercises();
         if (getFileManager().isWasWorkoutsFileAlreadyMade()) {
             loadWorkoutFile();
@@ -211,7 +213,7 @@ public class WerkIt {
      * Populates a set of exercises to exerciseList.
      */
     public void populateExercises() {
-        getExerciseList().populateExerciseToList();
+        getExerciseList().populateExercisesToList();
     }
 
     /**
