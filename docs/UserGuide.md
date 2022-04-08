@@ -24,20 +24,20 @@ you to:
 * [Quick Start](#quick-start)
 * [Quick Notes](#quick-notes)
 * [Features](#features)
-    * [View all commands: `help`](#viewing-all-commands-help)
-    * [Add a person: `add`](#add-a-person-add)
-    * [Delete a person: `delete`](#delete-a-person-delete)
-    * [Add an income: `addin`](#add-an-income-addin)
-    * [Delete an income: `deletein`](#delete-an-income-deletein)
-    * [Edit an income: `editin`](#edit-an-income-editin)
-    * [Add an expenditure: `addout`](#add-an-expenditure-addout)
-    * [Delete an expenditure: `deleteout`](#delete-an-expenditure-deleteout)
-    * [Edit an expenditure: `editout`](#edit-an-expenditure-editout)
-    * [Show financial summary: `overview`](#show-financial-summary-overview)
-    * [Show all records by group: `list`](#show-all-records-by-group-list)
-    * [Show expenditure categories: `listcat`](#show-expenditure-categories-listcat)
-    * [Searching for details: `find`](#searching-for-details-find)
-    * [Exit the program: `bye`](#exit-bye)
+    * [View all commands: `help`](#viewing-all-commands-codehelpcode)
+    * [Add a person: `add`](#add-a-person-codeaddcode)
+    * [Delete a person: `delete`](#delete-a-person-codedeletecode)
+    * [Add an income: `addin`](#add-an-income-codeaddincode)
+    * [Delete an income: `deletein`](#delete-an-income-codedeleteincode)
+    * [Edit an income: `editin`](#edit-an-income-codeeditincode)
+    * [Add an expenditure: `addout`](#add-an-expenditure-codeaddoutcode)
+    * [Delete an expenditure: `deleteout`](#delete-an-expenditure-codedeleteoutcode)
+    * [Edit an expenditure: `editout`](#edit-an-expenditure-codeeditoutcode)
+    * [Show financial summary: `overview`](#show-financial-summary-codeoverviewcode)
+    * [Show all records by group: `list`](#show-all-records-by-group-codelistcode)
+    * [Show expenditure categories: `listcat`](#show-expenditure-categories-codelistcatcode)
+    * [Searching for details: `find`](#searching-for-details-codefindcode)
+    * [Exit the program: `bye`](#exit-codebyecode)
 * [Frequently Asked Questions](#faq)
 * [Command Summary](#command-summary)
 
@@ -467,7 +467,7 @@ the [features](#features) section.
 | [Searching for details](#searching-for-details-find)                | find /d __ [ /c __ ] <br/>e.g.<br/> `> find salary` <br/> `> find sugar /c 4`                                                                                       |
 | [Exit the program](#exit-bye)                                       | bye                                                                                                                                                                 |
 
-[**Categoty Summary**](#show-expenditure-categories-listcat)
+[**Category Summary**](#show-expenditure-categories-listcat)
 
 | Index | Name                  |
 |-------|-----------------------|
