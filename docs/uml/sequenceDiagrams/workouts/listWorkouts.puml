@@ -21,6 +21,9 @@ activate newCommand COLOR_LOGIC
 
 newCommand -> WorkoutList : listAllWorkout()
 activate WorkoutList COLOR_LOGIC
+alt workoutDisplayList.size() <= 0
+WorkoutList --> WerkIt: Display list is \nempty message
+else
 loop index <= workoutDisplayList.size()
 WorkoutList -> WorkoutList:getWorkoutFromIndexNum(index)
 activate WorkoutList COLOR_LOGIC
@@ -30,7 +33,8 @@ activate Workout COLOR_LOGIC
 return displayString:String
 WorkoutList --> WerkIt: Print workouts
 end
-WorkoutList --> WerkIt: Display all workouts printed message
+end
+WorkoutList --> WerkIt: Display all \nworkouts \nprinted \nmessage
 
 destroy newCommand
 @enduml

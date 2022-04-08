@@ -782,19 +782,27 @@ The following sequence diagram illustrates how the `workout /list` command works
 ![ListWorkoutUML](uml/sequenceDiagrams/workouts/images/listWorkout.png)
 <br>
 
-(Steps 1 to 3) After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput(userInput)` method to parse the user input.
-Upon parsing of the input, a `WorkoutCommand` object is obtained. This `WorkoutCommand` object is upcasted to a `Command` object on return
+**(Before Step 1)** The user's input (in this case will be a `workout /list` command) is obtained and parsed to obtain
+a `WorkoutCommand` object that contains the user's input.
+
+**(Steps 1)** This `WorkoutCommand` object is upcasted to a `Command` object on return
 to the `WerkIt` object. It will then execute the workout command by calling the `WorkoutCommand#execute()` method.
 
-(Steps 4) Since the workout command entered is `workout /list` the `WorkoutList#listAllWorkout()` method will be called 
+**(Steps 2)** Since the workout command entered is `workout /list` the `WorkoutList#listAllWorkout()` method will be called 
 to process the command and perform the action of listing the workouts. 
 
-(Steps 5 and 6) To get each of the workouts stored in the workoutList, `WorkoutList#getWorkoutFromIndexNum(index)` method 
+**(Step 3)** If the workout list is empty, a message indicating the list is empty will be displayed to the user and the
+process of printing all workouts stored in the list is completed. 
+
+**(Steps 4 and 5)** To get each of the workouts stored in the workoutList, `WorkoutList#getWorkoutFromIndexNum(index)` method 
 is called to obtain each of the `workout` object. Each `workout` object contains the exercise name as well as the 
 number of repetitions of that exercise set by the user. 
 
-(Steps 7 to 9) Upon obtaining the `workout` object, `Workout#toString()` method is called to formulate and print 
+**(Steps 6 to 8)** Upon obtaining the `workout` object, `Workout#toString()` method is called to formulate and print 
 the workouts which is being displayed on the terminal to the user. 
+
+**(Step 9)** Lastly, a final message to indicate that all workouts in the workout list have been printed will be displayed via 
+the terminal.
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
