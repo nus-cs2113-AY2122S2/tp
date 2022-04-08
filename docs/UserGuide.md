@@ -126,6 +126,7 @@ Some Mod Happy commands require you to provide a duration. You can specify these
   #### Format: `help`
 
   ##### Example:
+
   ```
   > help
   
@@ -138,6 +139,7 @@ Some Mod Happy commands require you to provide a duration. You can specify these
   Optional parameters are in square brackets: e.g. [-d MODULE_DESCRIPTION]
   ____________________________________________________________
   ```
+  
   <br>
 
 - **Help for specific command word**
@@ -149,6 +151,7 @@ Some Mod Happy commands require you to provide a duration. You can specify these
   - `COMMAND_WORD`: The command you wish to view the help message for.
   
   ##### Example:
+
   ```
   > help add
   
@@ -172,6 +175,7 @@ Allows you to view and change various user preferences which can affect other as
   #### Format: `option`
 
   ##### Example:
+
   ```
   > option
   
@@ -180,6 +184,7 @@ Allows you to view and change various user preferences which can affect other as
   SHOW_COMPLETED_TASKS: false
   ____________________________________________________________
   ```
+  
   <br>
 
 - **Viewing details of a specific configuration option**
@@ -190,7 +195,8 @@ Allows you to view and change various user preferences which can affect other as
 
   - `CONFIG_NAME`: The name of the configuration option you wish to view the details of.<br><br>
   
-  ##### Example: 
+  ##### Example:
+
   ```
   > option SHOW_COMPLETED_TASKS
   
@@ -200,6 +206,7 @@ Allows you to view and change various user preferences which can affect other as
   true: Show completed tasks
   ____________________________________________________________
   ```
+  
   <br>
 
 - **Editing a specific configuration option**
@@ -212,6 +219,7 @@ Allows you to view and change various user preferences which can affect other as
   - `NEW_VALUE`: The new value of the configuration option. This value must be a value accepted by the target configuration option.
   
   ##### Example:
+
   ```
   > option SHOW_COMPLETED_TASKS=true
   
@@ -219,6 +227,7 @@ Allows you to view and change various user preferences which can affect other as
   Preferences updated: SHOW_COMPLETED_TASKS=true
   ____________________________________________________________
   ```
+  
   <br>
 
   > 📔 <span style="color:#3333ff">**NOTE:**</span>
@@ -252,6 +261,7 @@ The following configuration options currently exist:
   - `MODULE_DESCRIPTION`: A short description of the module. Can contain any characters except double quotes `"`.
   
   ##### Example 1:
+
   ```
   > add mod CS2101 4
   
@@ -262,6 +272,7 @@ The following configuration options currently exist:
   ```
 
   ##### Example 2:
+
   ```
   > add mod CS2113T 4 -d "Software Engineering"
   ____________________________________________________________
@@ -269,6 +280,7 @@ The following configuration options currently exist:
   CS2113T (Software Engineering) (4MC, Grade: -)
   ____________________________________________________________
   ```
+  
   <br>
 
   > 📔 <span style="color:#3333ff">**NOTE:**</span>
@@ -291,6 +303,7 @@ The following configuration options currently exist:
   - `ESTIMATED_WORKING_TIME`: The expected duration spent working on the task. The duration must be specified in [this format](#33-specifying-durations).
   
   ##### Example 1:
+
   ```
   > add task "Review PR"
   ____________________________________________________________
@@ -300,6 +313,7 @@ The following configuration options currently exist:
   ```
   
   ##### Example 2:
+
   ```
   > add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour"
   ____________________________________________________________
@@ -321,6 +335,7 @@ The following configuration options currently exist:
   - `MODULE_CODE`: The module code of the module to be deleted. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
 
   ##### Example:
+
   ```
   > del mod CS2113T
 
@@ -335,6 +350,7 @@ The following configuration options currently exist:
   Deletion has been cancelled.
   ____________________________________________________________
   ```
+
   <br>
 
 - **Delete task: `del task`**
@@ -347,6 +363,7 @@ The following configuration options currently exist:
   - `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
 
   ##### Example 1:
+
   ```
   > del task 1
 
@@ -356,6 +373,7 @@ The following configuration options currently exist:
   ```
   
   ##### Example 2:
+
   ```
   > del task 1 -m CS2113T
 
@@ -378,6 +396,7 @@ The following configuration options currently exist:
   - `MODULE_DESCRIPTION`: The new module description for the module. Can contain any characters except double quotes `"`.
 
   ##### Example:
+
   ```
   > edit mod CS2113T -d "Software Engineering & OOP"
 
@@ -400,6 +419,7 @@ The following configuration options currently exist:
   - `ESTIMATED_WORKING_TIME`: The new expected duration. The duration must be specified in [this format](#33-specifying-durations).
 
   ##### Example:
+
   ```
   > edit task 1 -m CS2113T -n "CS2113T Tutorial 2"
 
@@ -429,6 +449,7 @@ The `c` flag indicates that the task will be marked as completed, while the `u` 
 - `MODULE_CODE`: The module code of the module associated with this task. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
 
 ##### Example 1:
+
 ```
 > mark c 1
 
@@ -439,6 +460,7 @@ ____________________________________________________________
 ```
 
 ##### Example 2:
+
 ```
 > mark u 1 -m CS2113T
 ____________________________________________________________
@@ -464,6 +486,7 @@ Allows you to add or delete a tag from the [specified task](#32-specifying-tasks
 > The tag name cannot contain whitespace; it must be a single word.
 
 ##### Example:
+
 ```
 > tag add 1 -m CS2113T project
 
@@ -490,6 +513,7 @@ If a [tag name](#47-managing-custom-tags-tag) is provided, only tasks with the a
 - `TAG_NAME`: The name of the tag to be filtered for. Must be a single word containing only alphanumeric characters and underscore `_`.
 
 ##### Example 1:
+
 ```
 > list
 
@@ -507,6 +531,7 @@ ____________________________________________________________
 ```
 
 ##### Example 2:
+
 ```
 > list project
 
@@ -542,6 +567,7 @@ Assigns a grade to a module of your choice.
 > A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU
   
 ##### Example:
+
 ```
 > grade CS2113T A+
 
@@ -559,6 +585,7 @@ Computes your GPA based the [inputted grades](#49-setting-a-modules-grade-grade)
 #### Format: `gpa`
 
 ##### Example:
+
 ```
 > gpa
 
@@ -576,6 +603,7 @@ Removes all your tasks and modules.
 #### Format: `reset`
 
 ##### Example:
+
 ```
 > reset
 
@@ -593,6 +621,7 @@ Saves all your tasks and modules to the data file.
 #### Format: `save`
 
 ##### Example:
+
 ```
 > save
 
