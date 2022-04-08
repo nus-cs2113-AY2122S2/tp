@@ -3,8 +3,8 @@
 ## Project: PlanITarium
 
 PlanITarium is an application that assists you and your family in managing your finances, optimized for use on the
-Command Line Interface (CLI). You can use it to view your monthly financial status, logical group family members for
-better management and categorise your expenditure. PlanITarium is written in and meant to be run on `Java 11`.
+Command Line Interface (CLI). You can use it to view your monthly financial status, logically group family members for
+better management and categorise your expenditures. PlanITarium is written in and meant to be run on `Java 11`.
 
 ### Summary of Contributions
 
@@ -34,13 +34,13 @@ better management and categorise your expenditure. PlanITarium is written in and
 <p></p>
 
 * **New Feature**: Added category enumeration.
-    * Functionality: The enumeration of expenditure categories that allow users to tag their expenditures by using the
-      number labels assigned to each category.
+    * Functionality: The enumeration of expenditure categories that allow users to tag their expenditures through the
+      usage of number labels that are assigned to each category.
     * Justification: This feature improves the product as it allows advanced users to better manage their expenditure by
       categorizing them. Enumeration is used over the alternatives as the application currently does not allow for
       customized categories.
-    * Highlights: This enhancement affects future commands or features that wish to extend the usage for the
-      categorizing of expenditures.
+    * Highlights: This enhancement affects future commands or features that wish to extend the categorising of
+      expenditures.
 
 <p></p>
 
