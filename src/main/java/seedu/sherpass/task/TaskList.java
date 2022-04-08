@@ -52,24 +52,6 @@ public class TaskList {
     }
 
     /**
-     * Returns the incremented date according to the frequency.
-     *
-     * @param currentDate The current date to be incremented
-     * @param frequency   The frequency of recurrence.
-     * @return The incremented date according to the frequency
-     */
-    private static LocalDateTime incrementDate(LocalDateTime currentDate, Frequency frequency) {
-        if (frequency == Frequency.SINGLE) {
-            return currentDate;
-        } else if (frequency == Frequency.DAILY) {
-            return currentDate.plusDays(1);
-        } else if (frequency == Frequency.WEEKLY) {
-            return currentDate.plusWeeks(1);
-        }
-        return currentDate.plusMonths(1);
-    }
-
-    /**
      * Returns the last recurrence of a recurring task.
      * For tasks recurring daily, the last date is 1 month after the first occurrence.
      * For tasks recurring weekly, the last date is 2 month after the first occurrence.
@@ -88,25 +70,6 @@ public class TaskList {
             return startDate.plusMonths(2);
         }
         return startDate.plusYears(1);
-    }
-
-    /**
-     * Returns the next occurrence of a repeating task.
-     *
-     * @param currentTask The i-th task
-     * @return The i+1 task
-     */
-    private static Task prepareNextTask(Task currentTask, Frequency frequency) {
-        LocalDateTime newStartDate = incrementDate(currentTask.getDoOnStartDateTime(),
-                frequency);
-        LocalDateTime newEndDate = incrementDate(currentTask.getDoOnEndDateTime(),
-                frequency);
-        LocalDateTime byDate = currentTask.getByDateTime();
-        if (byDate != null) {
-            byDate = incrementDate(byDate, frequency);
-        }
-        return new Task(currentTask.getIdentifier(), currentTask.getDescription(), byDate,
-                newStartDate, newEndDate);
     }
 
     private boolean isOnSameDay(LocalDateTime firstDate, LocalDateTime secondDate) {
@@ -210,43 +173,10 @@ public class TaskList {
         do {
             checkDateTimeClash(tasks, newTask, isFromFile);
             taskListToAdd.add(newTask);
-            newTask = prepareNextTask(newTask, frequency);
+            newTask = newTask.prepareNextTask(frequency);
         } while (newTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
         tasks.addAll(taskListToAdd);
         updateIndex();
-    }
-
-    /**
-     * Updates the attribute of a task with the new values.
-     *
-     * @param taskToUpdate    The task to be edited
-     * @param taskDescription The new task description
-     * @param startDateOffset The offset between the new and old start date and time of the task
-     * @param endDateOffset   The offset between the new and old end date and time of the task
-     * @param byDateOffset    The offset between the new and old by date and time of the task
-     */
-    private void updateTask(Task taskToUpdate, String taskDescription,
-                            long startDateOffset,
-                            long endDateOffset,
-                            long byDateOffset) {
-        if (!taskDescription.isBlank()) {
-            taskToUpdate.setTaskDescription(taskDescription);
-        }
-        if (startDateOffset != 0) {
-            taskToUpdate.setDoOnStartDateTime(taskToUpdate
-                    .getDoOnStartDateTime()
-                    .plusSeconds(startDateOffset));
-        }
-        if (endDateOffset != 0) {
-            taskToUpdate.setDoOnEndDateTime(taskToUpdate
-                    .getDoOnEndDateTime()
-                    .plusSeconds(endDateOffset));
-        }
-        if (byDateOffset != 0) {
-            taskToUpdate.setByDateTime(taskToUpdate
-                    .getDoOnStartDateTime()
-                    .plusSeconds(byDateOffset));
-        }
     }
 
     private long calculateOffsetOfDate(LocalDateTime oldDateTime, LocalDateTime newDateTime) {
@@ -279,15 +209,11 @@ public class TaskList {
 
         long startDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnStartDateTime(), doOnStartDateTime);
         long endDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnEndDateTime(), doOnEndDateTime);
+        long byDateOffset = calculateOffsetOfDate(doOnStartDateTime, byDateTime);
 
         Task updatedTask = taskToEdit.clone();
-        updateTask(updatedTask, taskDescription,
-                startDateOffset, endDateOffset, 0);
-        updatedTask.setIdentifier(generateIdentifier());
-
-        if (byDateTime != null) {
-            updatedTask.setByDateTime(byDateTime);
-        }
+        updatedTask.editTask(generateIdentifier(), taskDescription,
+                startDateOffset, endDateOffset, byDateOffset);
 
         checkDateTimeClash(editedList, updatedTask, false);
 
@@ -316,7 +242,7 @@ public class TaskList {
         Task firstTask = getTask(editIndex);
         ArrayList<Task> affectedTasks = getAffectedTasks(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
-        ArrayList<Task> newTasks = new ArrayList<>();
+        ArrayList<Task> editedTasks = new ArrayList<>();
         assert (affectedTasks.size() > 0);
         editedList.removeAll(affectedTasks);
 
@@ -327,17 +253,17 @@ public class TaskList {
         int newIdentifier = generateIdentifier();
         for (Task t : affectedTasks) {
             Task updatedTask = t.clone();
-            updateTask(updatedTask, taskDescription,
+            updatedTask.editTask(newIdentifier, taskDescription,
                     startDateOffset, endDateOffset, byDateOffset);
             updatedTask.setIdentifier(newIdentifier);
             checkDateTimeClash(editedList, updatedTask, false);
-            newTasks.add(updatedTask);
+            editedTasks.add(updatedTask);
             editedList.add(updatedTask);
         }
 
         tasks = editedList;
         updateIndex();
-        return newTasks.get(0);
+        return editedTasks.get(0);
     }
 
     /**

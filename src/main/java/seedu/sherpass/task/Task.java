@@ -1,5 +1,7 @@
 package seedu.sherpass.task;
 
+import seedu.sherpass.enums.Frequency;
+
 import java.time.LocalDateTime;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
@@ -149,22 +151,6 @@ public class Task {
         return result;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.description = taskDescription;
-    }
-
-    public void setByDateTime(LocalDateTime byDateTime) {
-        this.byDateTime = byDateTime;
-    }
-
-    public void setDoOnStartDateTime(LocalDateTime doOnStartDateTime) {
-        this.doOnStartDateTime = doOnStartDateTime;
-    }
-
-    public void setDoOnEndDateTime(LocalDateTime doOnEndDateTime) {
-        this.doOnEndDateTime = doOnEndDateTime;
-    }
-
     public LocalDateTime getDoOnEndDateTime() {
         return doOnEndDateTime;
     }
@@ -175,6 +161,32 @@ public class Task {
 
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
+    }
+
+    /**
+     * Edits the task.
+     *
+     * @param identifier      The new identifier of the task
+     * @param taskDescription The new task description of the task
+     * @param startDateOffset The offset of the new start date
+     * @param endDateOffset   The offset of the new end date
+     * @param byDateOffset    The offset of the new by date
+     */
+    public void editTask(int identifier, String taskDescription,
+            long startDateOffset, long endDateOffset, long byDateOffset) {
+        this.identifier = identifier;
+        if (!taskDescription.isBlank()) {
+            description = taskDescription;
+        }
+        if (startDateOffset != 0) {
+            doOnStartDateTime = doOnStartDateTime.plusSeconds(startDateOffset);
+        }
+        if (endDateOffset != 0) {
+            doOnEndDateTime = doOnEndDateTime.plusSeconds(endDateOffset);
+        }
+        if (byDateOffset != 0) {
+            byDateTime = byDateTime.plusSeconds(byDateOffset);
+        }
     }
 
     @Override
@@ -193,6 +205,44 @@ public class Task {
                 && doOnEndDateTime.equals(t.getDoOnEndDateTime())
                 && identifier == (t.getIdentifier())
                 && byDateTime.equals(t.getByDateTime());
+    }
+
+    /**
+     * Returns a new task with the same identifier and description.
+     * The dates incremented according to the frequency.
+     *
+     * @param frequency The frequency of recurrence
+     * @return The next occurrence of the task
+     */
+    public Task prepareNextTask(Frequency frequency) {
+        LocalDateTime newStartDate = incrementDate(doOnStartDateTime,
+                frequency);
+        LocalDateTime newEndDate = incrementDate(doOnEndDateTime,
+                frequency);
+        LocalDateTime newByDate = byDateTime;
+        if (newByDate != null) {
+            newByDate = incrementDate(newByDate, frequency);
+        }
+        return new Task(identifier, description, newByDate,
+                newStartDate, newEndDate);
+    }
+
+    /**
+     * Returns the incremented date according to the frequency.
+     *
+     * @param currentDate The current date to be incremented
+     * @param frequency   The frequency of recurrence.
+     * @return The incremented date according to the frequency
+     */
+    private LocalDateTime incrementDate(LocalDateTime currentDate, Frequency frequency) {
+        if (frequency == Frequency.SINGLE) {
+            return currentDate;
+        } else if (frequency == Frequency.DAILY) {
+            return currentDate.plusDays(1);
+        } else if (frequency == Frequency.WEEKLY) {
+            return currentDate.plusWeeks(1);
+        }
+        return currentDate.plusMonths(1);
     }
 
     public Task clone() {
