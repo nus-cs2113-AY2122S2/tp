@@ -43,11 +43,19 @@ This section describes how certain features are implemented. Only part of the fe
 
 ### 2. Add Menu Item Command
 2.1 The following sequence diagram shows how the Add Menu Item command works.
-![](Add%20Menu%20Item.png)
+![](diagrams/Add_Menu_Item.png)
 
 ### 3. Check Meal Reservation Command
 3.1 The following sequence diagram shows how the Check Meal Reservation Command works.
-![](Check%20Meal%20Reservation.png)
+![](diagrams/Check_Meal_Reservation.png)
+
+### 4. Add Route Command
+4.1 The following sequence diagram shows how the Add Route Command works.
+![](diagrams/Add_route.jpg)
+
+### 5. List Booking Command
+5.1 The following sequence diagram shows how the List Booking Command works.
+![](diagrams/listBooking.jpg)
 
 ## Product scope
 ### Target user profile
