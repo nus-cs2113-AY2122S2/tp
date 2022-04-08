@@ -60,3 +60,34 @@ deactivate Family
 <- Command
 deactivate Command
 
+-> Command: addin /g 1 /u 1 /i ...
+activate Command
+Command -> Family: addIncome()
+activate Family
+Family -> Parents: addIncome()
+activate Parents
+Parents -> Person: addIncome()
+activate Person
+Person -> Money: addIncome()
+activate Money
+Person <- Money
+deactivate Money
+opt Not Silent
+    Person -> UI: formatValue()
+    activate UI
+    Person <- UI: income:String
+    deactivate UI
+    Person -> System: println()
+    activate System
+    Person <- System
+    deactivate System
+end opt
+Parents <- Person
+deactivate Person
+Family <- Parents
+deactivate Parents
+Command <- Family
+deactivate Family
+<- Command
+deactivate Command
+
