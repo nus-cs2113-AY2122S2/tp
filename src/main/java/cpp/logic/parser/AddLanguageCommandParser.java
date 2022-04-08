@@ -21,16 +21,23 @@ public class AddLanguageCommandParser implements CommandParser<AddLanguageComman
         if (userInput.length < Constants.THREE_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_ADDLANGUAGE_COMMAND_FORMAT);
         }
-        String projectName = userInput[1];
+        int index;
+        try {
+            index = Integer.parseInt(userInput[1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalCommandException(Constants.NON_INTEGER_INDEX);
+        }
         String language = userInput[2];
         for (int i = 3; i < userInput.length; i++) {
             language = language + " " + userInput[i];
         }
 
+        if (index <= 0) {
+            throw new IllegalCommandException(Constants.NEGATIVE_INDEX);
+        }
         if (language.equals("") || language.equals(" ")) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_ADDLANGUAGE_COMMAND_FORMAT);
         }
-
-        return new AddLanguageCommand(projectName, language);
+        return new AddLanguageCommand(index, language);
     }
 }

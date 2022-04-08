@@ -43,7 +43,7 @@ public class Project {
             throw new IndexOutOfBoundsException();
         }
         todos.get(index - 1).markAsDone();
-        System.out.println("Todo has been marked as done successfully: ");
+        System.out.println("Todo has been marked as done successfully:");
         System.out.println(todos.get(index - 1));
     }
 

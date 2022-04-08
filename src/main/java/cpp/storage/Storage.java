@@ -4,9 +4,6 @@ import cpp.exceptions.DataConversionException;
 import cpp.model.ProjectList;
 import cpp.model.project.Project;
 import cpp.model.project.Todo;
-import cpp.ui.Constants;
-import cpp.ui.Response;
-
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,7 +14,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class Storage {
@@ -90,9 +86,9 @@ public class Storage {
             projectList.addProject(title);
 
             readTodo(todos, projectList, indexProject, indexTodo);
-            readProjectDeadline(title, deadline, projectList);
-            projectList.addGithubLink(title, gitHubLink);
-            readLanguages(languages, title, projectList);
+            readProjectDeadline(indexProject, deadline, projectList);
+            projectList.addGithubLink(indexProject, gitHubLink);
+            readLanguages(languages, indexProject, projectList);
 
             indexProject++;
         }
@@ -190,19 +186,19 @@ public class Storage {
         }
     }
 
-    private static void readProjectDeadline(String title, String deadline, ProjectList projectList) {
+    private static void readProjectDeadline(int indexProject, String deadline, ProjectList projectList) {
         //add deadline to project if deadline is specified
         if (!deadline.equalsIgnoreCase("No deadline specified")) {
-            projectList.addProjectDeadline(title, deadline);
+            projectList.addProjectDeadline(indexProject, deadline);
         }
     }
 
-    private static void readLanguages(String languages, String title, ProjectList projectList) {
+    private static void readLanguages(String languages, int index, ProjectList projectList) {
         //add languages to project
-        if (languages != " ") {
+        if (languages.equals(" ")) {
             String[] languageInfo = languages.split(",");
             for (int i = 0; i < languageInfo.length; i++) {
-                projectList.addLanguages(title, languageInfo[i]);
+                projectList.addLanguages(index, languageInfo[i]);
             }
         }
     }

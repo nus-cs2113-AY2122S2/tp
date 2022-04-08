@@ -25,14 +25,14 @@ public class CommandsTest {
     void setUp() {
         defaultProjectList = new ProjectList();
         defaultProjectList.addProject(PROJECT1NAME);
-        defaultProjectList.addTodoToProject("1",TODO1);
-        defaultProjectList.addTodoToProject("1",TODO2);
+        defaultProjectList.addTodoToProject(1, TODO1);
+        defaultProjectList.addTodoToProject(1, TODO2);
     }
 
     @Test
     public void testAddDeadline() throws IllegalCommandException {
-        AddProjectDeadlineCommand addProjectDeadlineCommand = new AddProjectDeadlineCommand(PROJECT1NAME, DEADLINE);
-        String status = addProjectDeadlineCommand.execute(defaultProjectList);
+        ProjectDeadlineCommand projectDeadlineCommand = new ProjectDeadlineCommand(1, DEADLINE);
+        String status = projectDeadlineCommand.execute(defaultProjectList);
         assertEquals(status, "Deadline added to " + PROJECT1NAME + ": " + DEADLINE);
     }
 

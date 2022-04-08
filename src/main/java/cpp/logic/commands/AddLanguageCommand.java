@@ -1,20 +1,25 @@
 package cpp.logic.commands;
 
 import cpp.model.ProjectList;
+import cpp.ui.Constants;
 import cpp.ui.Response;
 
 public class AddLanguageCommand extends Command {
-    private String projectName;
+    private int projectIndex;
     private String language;
 
-    public AddLanguageCommand(String projectName, String language) {
-        this.projectName = projectName;
+    public AddLanguageCommand(int projectIndex, String language) {
+        this.projectIndex = projectIndex;
         this.language = language;
     }
 
     @Override
     public String execute(ProjectList projectList) {
-        projectList.addLanguages(projectName, language);
+        try {
+            projectList.addLanguages(projectIndex, language);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(Constants.INDEX_OUT_OF_RANGE);
+        }
         return Response.addLanguageSuccessfully();
     }
 }

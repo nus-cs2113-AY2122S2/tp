@@ -13,10 +13,10 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
    - [print all projects](#print-all-projects-listprojects)
    - [add todo to a project](#add-todo-to-a-project-todo)
    - [mark todo as done](#mark-todo-as-done-mark)
-   - [add a deadline to a project](#add-a-deadline-to-a-project-addprojdeadline)
+   - [set the deadline to a project](#set-the-deadline-to-a-project-projdeadline)
    - [change the GitHub repo of a project](#change-the-GitHub-repo-of-a-project)
    - [open the GitHub repo of a project](#open-the-GitHub-repo-of-a-project)
-   - [add a deadline to a todo](#add-a-deadline-to-a-todo-addtododeadline)
+   - [set the deadline to a todo](#set-the-deadline-to-a-todo-tododeadline)
    - [add language to a project](#add-language-to-a-project-addlanguage)
    - [list languages of a project](#list-languages-of-a-project-listlanguages)
    - [view](#view-details-of-a-project-view)
@@ -49,10 +49,14 @@ Format: `addproject [project_name]`
 
 
 #### Example of usage
-```addproject project1```
+```
+addproject project1
+```
 
 #### Example of output
-```project1 added.```
+```
+project1 added.
+```
 
 ---
 ### Delete a project: `deleteproject`
@@ -62,10 +66,14 @@ Format: `deleteproject [project_name]`
 *The `project_name` must be a match for a current project already in your list of projects
 
 #### Example of usage
-`deleteproject project1`
+```
+deleteproject project1
+```
 
 #### Example of output
-```project1 deleted.```
+```
+project1 deleted.
+```
 
 ---
 ### Print all projects: `listprojects`
@@ -80,12 +88,17 @@ Format: `listprojects` or `listproject`
 Adds a todo task with description to a project
 
 Format: `todo [project_index] [description]`
-* The `project_Index` must be a positive integer.
+* The `project_index` must be a positive integer.
 
 #### Example of usage
-`todo 1 buy textbooks`
+```
+todo 1 buy textbooks
+```
+
 #### Example of output
-```Todo:  buy textbooks have been added to project pro1```
+```
+Todo:  buy textbooks have been added to project pro1
+```
 
 ---
 ### Mark todo as done: `mark`
@@ -94,25 +107,27 @@ Format: `mark [project_index] [todo_index]`
 * The `project_index` and `todo_index` must be positive integers.
 
 #### Example of usage
-`mark 1 1`
+```
+mark 1 1
+```
 
 #### Example of output
-
 ```
 Todo has been marked as done successfully: 
 [X] buy textbooks
 ```
 ---
-### Add a deadline to a project: `addprojdeadline`
+### Set the deadline to a project: `projdeadline`
 Adds a deadline date to a project
 
-Format: `addprojdeadline [project_name] [deadline]`
+Format: `projdeadline [project_index] [deadline]`
+* The `project_index` must be a positive integer.
 * deadline must be entered in the following format "yyyy-mm-dd"
 * Alternatively, entering a day of the week also works (i.e. Thursday)
 
 #### Example of usage  
 ```
-addprojdeadline project1 2022-04-03
+projdeadline 1 2022-04-03
 ```
 
 #### Example of output  
@@ -123,12 +138,15 @@ Deadline added to project1: 2022-04-03
 ### Change the GitHub repo of a project
 Changes the GitHub repository link for your project
 
-Format: `changegit [project_name] [github_URL]`
+Format: `changegit [project_index] [github_URL]`
+* The `project_index` must be a positive integer.
 * Every project comes with the default github repo "http://github.com"
 * When entering your github_URL, it must begin with either http:// or https://
 
 #### Example of usage
-`changegit project1 http://github.com/project1`
+```
+changegit project1 http://github.com/project1
+```
 
 ---
 ### Open the GitHub repo of a project
@@ -137,21 +155,28 @@ Opens the GitHub repository in your default browser
 Format: `opengit [project_name]`
 
 #### Example of usage
-`opengit project1`
+```
+opengit project1
+```
 
 ---
-### Add a deadline to a todo: `addtododeadline`
+### Set the deadline to a todo: `tododeadline`
 Adds a deadline date to a todo
 
-Format: `addtododeadline [project_index] [todo_index] [deadline]`
+Format: `tododeadline [project_index] [todo_index] [deadline]`
+* The `project_index` and `todo_index` must be positive integers.
 * deadline must be entered in the following format "yyyy-mm-dd"
 * Alternatively, entering a day of the week also works (i.e. Thursday)
 
 #### Example of usage
-`addtododeadline 1 1 2022-05-22`
+```
+tododeadline 1 1 2022-05-22
+```
 
 #### Example of output
-```Deadline added to Complete Diagrams: 2022-05-22```
+```
+Deadline added to Complete Diagrams: 2022-05-22
+```
 
 ---
 ### View details of a project: `view`
@@ -160,10 +185,11 @@ View details of a project: Name, deadline, todos
 Format: `view [project_name]`
 
 #### Example of usage
-`view cs2113`
+```
+view cs2113
+```
 
 #### Example of output
-
 ```
 Project Name: cs2113
 Deadline: 2022-03-17
@@ -173,9 +199,14 @@ Deadline: 2022-03-17
 ---
 ### Add language to a project: `addlanguage`  
 Adds language to a project  
-Format: `addlanguage [project_name] [language]`  
+
+Format: `addlanguage [project_index] [language]`  
+* The `project_index` must be positive integers.
+
 #### Example of usage
-`addlanguage cs2113 java`
+```
+addlanguage 1 java
+```
 
 #### Example of output 
 ```
@@ -186,8 +217,12 @@ java language added.
 ### List languages of a project: `listlanguages`
 Lists languages of a project  
 Format: `listlanguages [project_title]`
+
 #### Example of usage
-`listlanguages cs2113`  
+```
+listlanguages cs2113
+```  
+
 #### Example of output
 ```
 Programming languages for cs2113:
@@ -227,11 +262,11 @@ Please note that the file name should not be changed.
 | view all project(s) | `listproject`, `listprojects`            |
 | add todo            | `todo [project_index] [description]`     |
 | mark todo as done   | `mark [project_index] [todo_index]`      |
-| add project deadline| `addprojdeadline [project_name] [deadline]`
-| change GitHub       | `changegit [project_name] [github_URL]`  |
+| add project deadline| `projdeadline [project_index] [deadline]`|
+| change GitHub       | `changegit [project_index] [github_URL]` |
 | open GitHub         | `opengit [project_name]`                 |
-| add todo deadline   | `addtododeadline [project_index] [todo_index] [deadline]`|
+| add todo deadline   | `tododeadline [project_index] [todo_index] [deadline]`|
 | view a project      | `view [project_name]`                    |
-| addlanguage	      | `addlanguage [project_name] [language]`  |
+| addlanguage	      | `addlanguage [project_index] [language]` |
 | listlanguages	      | `listlanguages`                          |
 | Exit                | `exit`                                   |

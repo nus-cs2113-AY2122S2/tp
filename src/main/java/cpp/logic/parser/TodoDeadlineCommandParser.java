@@ -2,13 +2,13 @@ package cpp.logic.parser;
 
 import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
-import cpp.logic.commands.AddTodoDeadlineCommand;
+import cpp.logic.commands.TodoDeadlineCommand;
 
 /**
  * Parses input arguments and creates a new AddTodoDeadlineCommand object.
  */
 
-public class AddTodoDeadlineCommandParser implements CommandParser<AddTodoDeadlineCommand> {
+public class TodoDeadlineCommandParser implements CommandParser<TodoDeadlineCommand> {
 
     /**
      * Parses the given {@code String[]} of arguments in the context of the AddTodoDeadlineCommand
@@ -17,9 +17,9 @@ public class AddTodoDeadlineCommandParser implements CommandParser<AddTodoDeadli
      */
 
     @Override
-    public AddTodoDeadlineCommand parse(String[] userInput) throws IllegalCommandException {
+    public TodoDeadlineCommand parse(String[] userInput) throws IllegalCommandException {
         if (userInput.length < Constants.FOUR_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_ADDTODODEADLINE_COMMAND_FORMAT);
+            throw new IllegalCommandException(Constants.MESSAGE_INVALID_TODODEADLINE_COMMAND_FORMAT);
         }
         int indexProj;
         int indexTodo;
@@ -32,7 +32,7 @@ public class AddTodoDeadlineCommandParser implements CommandParser<AddTodoDeadli
         if (indexProj <= 0 || indexTodo <= 0) {
             throw new IllegalCommandException(Constants.NEGATIVE_INDEX);
         }
-        return new AddTodoDeadlineCommand(indexProj, indexTodo, userInput[3]);
+        return new TodoDeadlineCommand(indexProj, indexTodo, userInput[3]);
     }
 
 }

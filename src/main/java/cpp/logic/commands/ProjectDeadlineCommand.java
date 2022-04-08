@@ -5,13 +5,13 @@ import cpp.model.project.Project;
 import cpp.ui.Constants;
 import cpp.ui.Response;
 
-public class ChangeGitHubLinkCommand extends Command {
+public class ProjectDeadlineCommand extends Command {
     private final int projectIndex;
-    private final String githubLink;
+    private final String deadline;
 
-    public ChangeGitHubLinkCommand(int projectIndex, String githubLink) {
+    public ProjectDeadlineCommand(int projectIndex, String deadline) {
         this.projectIndex = projectIndex;
-        this.githubLink = githubLink;
+        this.deadline = deadline;
     }
 
     @Override
@@ -19,14 +19,14 @@ public class ChangeGitHubLinkCommand extends Command {
         Project project;
         try {
             project = projectList.getProject(projectIndex - 1);
+            projectList.addProjectDeadline(projectIndex, deadline);
         } catch (IndexOutOfBoundsException e) {
             System.out.println(Constants.INDEX_OUT_OF_RANGE);
             return Response.addProjectDeadlineUnsuccessfully();
         }
-        projectList.addGithubLink(projectIndex, githubLink);
         if (project == null) {
-            return Response.addGithubLinkUnsuccessfully();
+            return Response.addProjectDeadlineUnsuccessfully();
         }
-        return Response.addGithubLinkSuccessfully(project.getTitle(), project.getDeadline());
+        return Response.addProjectDeadlineSuccessfully(project.getTitle(), project.getDeadline());
     }
 }

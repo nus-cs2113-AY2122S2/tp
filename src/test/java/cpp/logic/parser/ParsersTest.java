@@ -25,15 +25,15 @@ public class ParsersTest {
     void setUp() {
         defaultProjectList = new ProjectList();
         defaultProjectList.addProject(PROJECT1NAME);
-        defaultProjectList.addTodoToProject("1",TODO1);
-        defaultProjectList.addTodoToProject("1",TODO2);
+        defaultProjectList.addTodoToProject(1, TODO1);
+        defaultProjectList.addTodoToProject(1, TODO2);
     }
 
     @Test
     public void testAddDeadlineCommandParser() throws IllegalCommandException {
         String[] input = new String[1];
         input[0] = "dummy";
-        AddProjectDeadlineCommandParser addProjectDeadlineCommandParser = new AddProjectDeadlineCommandParser();
+        ProjectDeadlineCommandParser addProjectDeadlineCommandParser = new ProjectDeadlineCommandParser();
         assertThrows(IllegalCommandException.class, () ->
                 addProjectDeadlineCommandParser.parse(input)
         );

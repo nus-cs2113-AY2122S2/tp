@@ -21,7 +21,6 @@ public class AddTodoCommand extends Command {
             System.out.println(Constants.INDEX_OUT_OF_RANGE);
             return Response.addTodoUnsuccessfully(todo);
         }
-
         return Response.addTodoSuccessfully(todo);
     }
 

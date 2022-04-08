@@ -3,13 +3,12 @@ package cpp.logic;
 import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.Command;
-import cpp.logic.commands.ListLanguageCommand;
 import cpp.logic.commands.ListProjectCommand;
 
 import cpp.logic.parser.AddProjectCommandParser;
-import cpp.logic.parser.AddProjectDeadlineCommandParser;
+import cpp.logic.parser.ProjectDeadlineCommandParser;
 import cpp.logic.parser.AddTodoCommandParser;
-import cpp.logic.parser.AddTodoDeadlineCommandParser;
+import cpp.logic.parser.TodoDeadlineCommandParser;
 import cpp.logic.parser.DeleteProjectCommandParser;
 import cpp.logic.parser.MarkCommandParser;
 import cpp.logic.parser.ViewProjectCommandParser;
@@ -52,11 +51,11 @@ public class CommandHandler {
         case "mark":
             executeResult = executeCommand(projectList, new MarkCommandParser().parse(commands));
             break;
-        case "addprojdeadline":
-            executeResult = executeCommand(projectList, new AddProjectDeadlineCommandParser().parse(commands));
+        case "projdeadline":
+            executeResult = executeCommand(projectList, new ProjectDeadlineCommandParser().parse(commands));
             break;
-        case "addtododeadline":
-            executeResult = executeCommand(projectList, new AddTodoDeadlineCommandParser().parse(commands));
+        case "tododeadline":
+            executeResult = executeCommand(projectList, new TodoDeadlineCommandParser().parse(commands));
             break;
         case "changegit":
             executeResult = executeCommand(projectList, new ChangeGitHubLinkCommandParser().parse(commands));
@@ -74,7 +73,11 @@ public class CommandHandler {
             executeResult = executeCommand(projectList, new ListLanguageCommandParser().parse(commands));
             break;
         case "help":
-            Response.printHelp();
+            if (commands.length == 1) {
+                Response.printHelp();
+            } else {
+                Response.invalidHelp();
+            }
             break;
         default:
             throw new IllegalCommandException(Constants.UNKNOWN_COMMAND);
