@@ -17,7 +17,6 @@ import tp.command.EditNurseCommand;
 import tp.command.EditWardCommand;
 import tp.command.EditDoctorCommand;
 import tp.command.EditPatientCommand;
-import tp.command.ExitCommand;
 import tp.command.GetAppointmentsOfDoctorCommand;
 import tp.command.HelpCommand;
 import tp.command.ListAppointmentListCommand;

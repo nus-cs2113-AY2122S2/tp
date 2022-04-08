@@ -1,7 +1,6 @@
 package tp;
 
 import tp.person.Patient;
-import tp.person.Person;
 
 import java.util.ArrayList;
 
@@ -65,7 +64,7 @@ public class PatientList {
         return curr;
     }
 
-    public Patient searchPatient(String id) {
+    public static Patient searchPatient(String id) {
         for (int i = 0; i < patients.size(); i++) {
             if (patients.get(i).getId().trim().equals(id)) {
                 return  patients.get(i);
