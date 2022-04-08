@@ -34,16 +34,23 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new InvMgrException(Messages.INVALID_RELATIVE_WITHOUT_QUANTITY);
         }
 
+        Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
+        optionalName = convertEmptyStringToEmptyOptional(optionalName);
+
         Optional<Integer> optionalIntQuantity = Optional.empty();
         Optional<String> optionalStringQuantity = argMultimap.getValue(PREFIX_QUANTITY);
+        optionalStringQuantity = convertEmptyStringToEmptyOptional(optionalStringQuantity);
         if (optionalStringQuantity.isPresent()) {
             optionalIntQuantity = Optional.of(
                     ParserUtils.parseQuantity(optionalStringQuantity.get()));
         }
 
+        Optional<String> optionalDescription = argMultimap.getValue(PREFIX_DESCRIPTION);
+        optionalDescription = convertEmptyStringToEmptyOptional(optionalDescription);
+
         Optional<Boolean> optionalRelativeAdd = Optional.empty();
         Optional<String> optionalStringRelativeAdd = argMultimap.getValue(PREFIX_RELATIVE);
-        if (optionalStringRelativeAdd.isPresent()) {
+        if (optionalStringRelativeAdd.isPresent() && !optionalStringQuantity.get().equals("")) {
             optionalRelativeAdd = Optional.of(
                     ParserUtils.parseRelative(optionalStringRelativeAdd.get()));
         }
@@ -51,9 +58,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         int index = ParserUtils.parseIndex(argMultimap.getPreamble()) - 1;
 
         return new EditCommand(index,
-                argMultimap.getValue(PREFIX_NAME),
+                optionalName,
                 optionalIntQuantity,
-                argMultimap.getValue(PREFIX_DESCRIPTION),
+                optionalDescription,
                 optionalRelativeAdd);
     }
 
@@ -64,6 +71,16 @@ public class EditCommandParser implements Parser<EditCommand> {
      * For EditCommand, at least one of PREFIX_NAME, PREFIX_QUANTITY, and PREFIX_DESCRIPTION is needed.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).anyMatch(prefix ->
+                argumentMultimap.getValue(prefix).isPresent()
+                && !argumentMultimap.getValue(prefix).get().equals(""));
     }
+
+    private static Optional<String> convertEmptyStringToEmptyOptional(Optional<String> optionalStr) {
+        if (optionalStr.isPresent() && optionalStr.get().equals("")) {
+            return Optional.empty();
+        }
+        return optionalStr;
+    }
+
 }

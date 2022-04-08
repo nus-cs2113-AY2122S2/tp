@@ -39,14 +39,15 @@ public class SearchCommand extends Command {
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        // O(n) search for items matching name and description\
+        // O(n) search for items matching name and description
         for (int i = 0; i < itemList.getSize(); i++) {
             Item searchItem = itemList.getItem(i);
-            if (this.name.isPresent() && !caseInsensitiveContains(searchItem.getName(), this.name.get())) {
+            if (this.name.isPresent()
+                    && !caseInsensitiveContains(searchItem.getName(), this.name.get())) {
                 continue;
             }
-            if (this.description.isPresent() && !caseInsensitiveContains(searchItem.getDescription(),
-                    this.description.get())) {
+            if (this.description.isPresent()
+                    && !caseInsensitiveContains(searchItem.getDescription(), this.description.get())) {
                 continue;
             }
             results.add(searchItem);
@@ -79,10 +80,6 @@ public class SearchCommand extends Command {
     private boolean caseInsensitiveContains(String str1, String str2) {
         String lowerStr1 = str1.toLowerCase();
         String lowerStr2 = str2.toLowerCase();
-        // fail silently
-        if (lowerStr2.equals("")) {
-            return false;
-        }
         return lowerStr1.contains(lowerStr2);
     }
 

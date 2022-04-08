@@ -51,6 +51,8 @@ Search for items based on at least one of the following:
 1. Name
 2. Description
 
+`search` will return nothing if given an argument with no value, e.g. `search d/`
+
 Format: 
 `search [n/NAME] d/DESCRIPTION`
 `search n/NAME [d/DESCRIPTION]`
