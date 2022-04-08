@@ -88,7 +88,7 @@ Throughout the `Parser` implementation, exceptions were used to return `Incorrec
 The update feature is facilitated by `UpdateCommand`. It extends `ModificationCommand` and implements the following operations:
 
 * `UpdateCommand#generateUpdatePairs()` — Generates pairs of attributes and their update values.
-* `VersionedAddressBook#generateUpdateString()` — Generates sString with details of the update executed.
+* `UpdateCommand#generateUpdateString()` — Generates String with details of the update executed.
 
 Given below is an example usage scenario and how the update feature behaves at each step.
 
