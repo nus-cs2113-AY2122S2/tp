@@ -218,6 +218,9 @@ type of `Command` will be called to create the appropriate `Command` object and 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
 #### Logic component
+The logic component is mainly responsible for executing the command.
+In addition, the respective commands will operate on the appropriate data
+structure objects to create, manipulate and delete data based on the user's requests.
 Below is a class diagram of the `Logic` component:
 ![LogicUML](uml/classDiagrams/images/logicComponent.png)
 <span class="box info">:memo: This is a high level overview of the `Logic` component, thus,
@@ -2058,21 +2061,25 @@ The following are some test cases for you to try:
 | Extra whitespaces between commands arguments. | `workout         /list`   | Error response (invalid user action), schedule not displayed.   |
 
 #### Deleting An Existing Workout
-1. Prerequisites: Workout list should be populated with
-workout(s) before an existing workout can be deleted. 
-See [this section](#creating-a-new-workout) to view how you can populate your workout list. 
-2. User can enter `workout /list` to see the workout list before the deletion occurs. This is for comparison purposes.
-3. Test case: `workout /delete 1`<br/><br/>
-Expected: The first workout is deleted from the workout list. Details of the deleted workout will be shown 
-to the terminal.<br/><br/>
-Addition: If you have any existing plans containing the deleted workout, that plan
-will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list
-if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are
-affected by the deletion of this workout will display their delete messages accordingly.<br/><br/>
-4. Other incorrect commands to try:<br/>
-   a. `workout /delete` (Missing workout index to delete)<br/>
-   b. `workout /delete 0` (Index 0 is invalid) <br/>
-   c. `workout /delete X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-workout-workout-delete).)
+
+**Prerequisites:** Ensure that your workout list is populated with at least one
+workout for you to test the `workout` command on. 
+See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                  | Command             | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|:---------------------------|:--------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid workout to delete    | `workout /delete 1` | The first workout is deleted from the workout list. Details of the deleted workout will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the deleted workout, that plan will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are affected by the deletion of this workout will display their delete messages accordingly. |
+
+##### Negative Test Cases
+| Test Case                                                                                                                                                  | Command             | Expected result                         |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------|:----------------------------------------|
+| Missing workout index to delete                                                                                                                            | `workout /delete`   | Error response (Insufficient arguments) |
+| Invalid argument supplied. <br/><br/>X could be a word, a negative number or an index that does not fall within the range of workouts in the workout list. | `workout /delete X` | Error response (Invalid user argument)  |
+
 
 #### Updating An Existing Workout
 
@@ -2083,28 +2090,48 @@ affected by the deletion of this workout will display their delete messages acco
 
 ### Test on Plan Features
 #### Creating A New Plan 
-1. Prerequisites: The workout list should be populated before a new plan can be created as
-plans contains workout(s). See [this section](#creating-a-new-workout) to view how you can populate your workout list.
-2. Test case: `plan /new first plan /workouts 1,1,1`<br/><br/>
-Expected: A new plan called "first plan" will be created. This plan contains 3 instances of 
-workout with index 1 in the workout list.<br/><br/>
-3. Other incorrect commands to try:<br/>
-   a. `plan /new` (Missing plan name and workouts) <br/>
-   b. `plan /new [plan name]` (Missing workouts)<br/>
-   c. `plan /new /workouts 1,1` (Missing plan name)<br/>
-   d. `plan /new [plan name] /workouts 0,1` (Workout index 0 is invalid) <br/>
-   e. `plan /new rest day /workouts 1,1` (A plan called "rest day" cannot be created) <br/>
-   f. `plan /new [existing plan name] /workouts 1,1` (Plan name must be unique within the application)<br/>
-   g. `plan /new [plan name] /workouts [same order as an existing plan]` (All plans must have a unique workout order)<br/>
-   h. `plan /new [plan name] /workouts X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
-   i. `plan /new [plan name] /workouts [11 ones separated by comma]` (A plan cannot contain more than 10 workouts)
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#create-a-plan-plan-new).)
+
+**Prerequisites:** Ensure that your workout list is populated with at least one
+workout before a new plan can be created as plans contains workout(s).
+See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Cases         | Command                                | Expected result                                                                                                              |
+|:-------------------|:---------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------|
+| Valid plan created | `plan /new first plan /workouts 1,1,1` | A new plan called "first plan" will be created. This plan contains 3 instances of workout with index 1 in the workout list.  |
+
+##### Negative Test Cases
+| Test Cases                                                                                                                                    | Command                                                             | Expected result                                               |
+|:----------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------|:--------------------------------------------------------------|
+| Missing plan name and workouts                                                                                                                | `plan /new`                                                         | Error response (Insufficient arguments)                       |
+| Missing workouts                                                                                                                              | `plan /new [plan name]`                                             | Error response (Insufficient arguments)                       |
+| Missing plan name                                                                                                                             | `plan /new /workouts 1,1`                                           | Error response (Invalid plan name)                            |
+| Invalid workout index supplied (Index 0)                                                                                                      | `plan /new [plan name] /workouts 0,1`                               | Error response (Invalid workout index)                        |
+| Reserved plan name "rest day" supplied                                                                                                        | `plan /new rest day /workouts 1,1`                                  | Error response (A plan called "rest day" cannot be created)   |
+| Existing plan name supplied                                                                                                                   | `plan /new [existing plan name] /workouts 1,1`                      | Error response (Duplicate plan name within application)       |
+| Plan has same workout order as an existing plan                                                                                               | `plan /new [plan name] /workouts [same order as an existing plan]`  | Error response (Duplicate workout order)                      |
+| Invalid workout arguments <br/><br/> X could be a word, a negative number or an index that exceeds the number of workouts in the workout list | `plan /new [plan name] /workouts X`                                 | Error response (Invalid argument)                             |
+| Number of workouts exceeds the maximum in a plan                                                                                              | `plan /new [plan name] /workouts [11 ones separated by comma]`      | Error response (Exceeds maximum number of workouts in a plan) |                                                                                         
 
 #### Listing All Plans
-1. Test case: `plan /list` <br/><br/>
-Expected: If plan list is empty, the terminal will display to the user that the plan list is empty.
-Else, all plan names will be listed to the user.<br/><br/>
-2. Test case `plan /list ab`<br/><br/>
-Expected: Nothing is listed because no additional arguments should be supplied for this method
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#list-a-plan-plan-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Cases             | Command      | Expected result                                                                                                                                                                  |
+|:-----------------------|:-------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid listing of plans | `plan /list` | a. If plan list is empty, the terminal will display to the user that the plan list is empty. <br/><br/> b. If plan list is not empty, all plan names will be listed to the user. |
+
+
+##### Negative Test Cases
+| Test Cases                                                            | Command        | Expected result                             |
+|:----------------------------------------------------------------------|:---------------|:--------------------------------------------|
+| Additional argument supplied <br/><br/> X could be a word or a number | `plan /list X` | Error response (Additional arguments found) |
+
 
 #### Listing Workouts In A Plan
 #### Deleting An Existing Plan
