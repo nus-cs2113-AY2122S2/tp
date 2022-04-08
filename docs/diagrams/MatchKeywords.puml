@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+class Regex {
+    -{static}String input
+    - {static}String regex
+    - ArrayList<String> groupNames
+    - HashMap<String, String> groupValues
+    + Regex(input, regex)
+    + getGroupValues() : HashMap<String, String>
+    - findMatch() : HashMap<String, String>
+    - regexMatching(regex, input) : Matcher
+    - findGroup(regex) : ArrayList<String>
+}
+
+@enduml
