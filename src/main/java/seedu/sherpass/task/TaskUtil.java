@@ -74,7 +74,7 @@ public class TaskUtil {
     }
 
     /**
-     * Returns the difference between two dates in seconds
+     * Returns the difference between two dates in seconds.
      *
      * @param oldDateTime The original date
      * @param newDateTime The new date
