@@ -647,9 +647,9 @@ If the user's command type is to list the exercises available, i.e. `exercise /l
 `Parser#parseUserInput(String userInput)` method will parse the 'exercise' base word and proceed to create exercise related
 command using `Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
 exercise action, in this case, `/list` and call the constructor of `ExerciseCommand` class by passing relevant parameters related to the
-ExerciseCommand constructor. If the exercise action is null or incorrect, an InvalidCommandException will be thrown. Once the exercise command is created,
+ExerciseCommand constructor. If the exercise action is null or incorrect, an `InvalidCommandException` will be thrown. Once the exercise command is created,
 this exercise command is executed via the `ExerciseCommand#execute()` method. As it is executed, the method will check the
-type of action to be executed, in this case, list. It will then list the exercises available for selection from the exerciseList using the `ExerciseList#printExerciseList()`.
+type of action to be executed, in this case, `/list`. It will then list the exercises available for selection from the exerciseList using the `ExerciseList#printExerciseList()`.
 
 The following sequence diagram illustrates how the `exercise /list` command works in greater detail:
 
@@ -741,9 +741,10 @@ Alright, the following workout has been created:
 **(Step 6)** `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
 `workouts.txt` which is stored on the user's local filesystem.
 
-This completes the process of adding a new workout to WerkIt!
+<span class="info box">:memo: For more information on how the data is written to `workouts.txt`, please refer to
+['File Management - Writing a New Line of Data to the Resource File'](#writing-a-new-line-of-data-to-the-resource-file).</span>
 
-<div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
+This completes the process of adding a new workout to WerkIt!
 
 ##### Design Considerations for Creating a New Workout
 ###### HashMaps - Motivation
@@ -800,12 +801,13 @@ to him/her.
 #### List Workout
 A summary of the general procedure of listing all the workouts being stored on WerkIt! is as follows:
 1. User enters the command `workout /list`.
-2. The application will then process this command and display all workouts stored in the workoutList at once.
+2. The application will then process this command and display all workouts stored in the `workoutList` object.
 
 The following sequence diagram illustrates how the `workout /list` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial
-> have been removed from the sequence diagram. Reference frames will be elaborated further
-> down this section.
+
+<span class="info box">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
+ have been removed from the sequence diagram. Reference frames will be elaborated further
+ down this section.</span>
 
 ![ListWorkoutUML](uml/sequenceDiagrams/workouts/images/listWorkout.png)
 <br>
@@ -813,22 +815,22 @@ The following sequence diagram illustrates how the `workout /list` command works
 **(Before Step 1)** For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.
 
-**(Steps 1)** The command parsed in by the user is `workout /list`, it is a workout command
-and will be executed by calling the `WorkoutCommand#execute()` method.
+**(Steps 1)** The command entered by the user is a workout command and thus will be executed by calling the 
+`WorkoutCommand#execute()` method.
 
-**(Steps 2)** Since the command action is `list`, 
-the application will execute the `WorkoutList#listAllWorkout()` method
-to process the command and perform the action of listing the workouts. 
+**(Steps 2)** Since the command action is `/list`, 
+the application will execute the `WorkoutList#listAllWorkout()` method to perform the action of listing the workouts. 
 
 **(Step 3)** If the workout list is empty, a message indicating the list is empty will be displayed to the user and the
 process of printing all workouts stored in the list is completed. 
 
-**(Steps 4 and 5)** To get each of the workouts stored in the workoutList, `WorkoutList#getWorkoutFromIndexNum(index)` method 
-is called to obtain each of the `workout` object. Each `workout` object contains the exercise name as well as the 
+**(Steps 4 and 5)** To get each of the workouts stored in the `workoutList` object, `WorkoutList#getWorkoutFromIndexNum(index)` method 
+is called to obtain each of the `Workout` object. Each `Workout` object contains the exercise name as well as the 
 number of repetitions of that exercise set by the user. 
 
-**(Steps 6 to 8)** Upon obtaining the `workout` object, `Workout#toString()` method is called to formulate and print 
-the workouts which is being displayed on the terminal to the user. 
+**(Steps 6 to 8)** Upon obtaining the `Workout` object, `Workout#toString()` method is called to method is called to 
+obtain a `String` representation of the `Workout` object, which will thereafter be printed onto the terminal for the user
+to read.
 
 **(Step 9)** Lastly, a final message to indicate that all workouts in the workout list have been printed will be displayed via 
 the terminal.
@@ -846,7 +848,7 @@ A summary of the general procedure of an existing workout being removed from Wer
 
 The following sequence diagram illustrates how the `workout /delete` command works in greater detail:
 
-<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
  have been removed from the sequence diagram. Reference frames will be elaborated further
  down this section.</span>
 
@@ -859,7 +861,7 @@ a `WorkoutCommand` object that contains the user's input.
  ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When the `WorkoutCommand#execute()` method is called, it will identify
-that the workout action is of type `delete`. Subsequently, it will call the 
+that the workout action is of type `/delete`. Subsequently, it will call the 
 `WorkoutList#deleteWorkout()` method to perform the deletion of the workout.
 <br><br>
 The following sequence diagram is the detailed procedure for Step 2's `WorkoutList#deleteWorkout()`:
@@ -900,15 +902,15 @@ be called to delete any existing plan(s) that contains that deleted workout.
 <br><br>
 **(Steps 8 to 11)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list and the
-the `FileManager#rewriteAllPlansToFile(planList)` is also called to rewrite
+`FileManager#rewriteAllPlansToFile(planList)` is also called to rewrite
 the `plans.txt` file according to the newly modified application's plan list.
 <br><br>
 This completes the process of deleting an existing workout in WerkIt!
 
 ##### Design Considerations for Deleting Existing Workout
 ###### Rewrite All Workout To File
-Currently, the WerkIt! program will rewrite all workout to the resource file, `workouts.txt`, when the delete workout
-function is executed. Such implementation may have performance issues as the program needs to rewrite the whole
+Currently, the WerkIt! program will rewrite all workouts to the resource file, `workouts.txt`, when the delete workout
+function is executed. Such an implementation may have performance issues as the program needs to rewrite the whole
 file with the modified workout list whenever a workout is deleted in the application.
 <br><br>
 An alternative considered was to find the workout to be deleted in the resource file, and then
@@ -918,10 +920,10 @@ way the workout data are formatted and stored in the `workouts.txt` file.
 Hence, to simplify the implementation, the team decided to simply
 rewrite all workouts to the resource file whenever a workout is deleted.
 
-###### Deleting a workout will cause a cascade delete action
+###### Deleting a Workout Will Cause a Cascading Delete Action
 When an existing workout is deleted from the application, plans that contain that workout
 should also be deleted. In addition, affected plans in the schedule should also be removed. This
-cascade delete action from `workout -> plan -> schedule` must be done so that 
+cascading delete action from `workout -> plan -> schedule` must be done so that 
 the data in the `workouts.txt`, `plans.txt` and `schedule.txt` files matches.
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
@@ -930,7 +932,7 @@ the data in the `workouts.txt`, `plans.txt` and `schedule.txt` files matches.
 
 #### Update Existing Workout
 A summary of the general procedure of an existing workout from WerkIt! being updated to new number of repetitions
-is as follows:<br><br>
+is as follows:<br>
 1. User enters the command `workout /update <workout index number> <new number of repetitions>`.
 2. The workout with the corresponding workout index number in the workout list 
 (can be determined by entering `workout /list`) is updated to the number of repetitions that user specified.
@@ -939,7 +941,7 @@ is as follows:<br><br>
 
 The following sequence diagram illustrates how the `workout /update` command works in greater detail:
 
-<span class="box info">:memo: To simplify the sequence diagram, some method invocations that deemed to be trivial 
+<span class="box info">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial 
 have been removed from the sequence diagram. Some reference frames will be elaborated further down this section.</span>
 
 ![Update Workout Sequence Diagram](uml/sequenceDiagrams/workouts/images/updateWorkout-Part1.png)
@@ -973,23 +975,21 @@ Next, validity checks of the user input are carried out to ensure that the data 
 The requirements for a valid input are as follows:
 1. Workout index number must be a positive integer smaller than the total number of workouts in list.
 2. New repetition value must be a non-negative integer greater than 0.
+3. Updated workout's exercise name and repetition number cannot be identical to an existing workout.
 
-If any of the two requirements are not met, an `InvalidWorkoutException` will be thrown and 
+If any of the three requirements are not met, an `InvalidWorkoutException` will be thrown and 
 the entire update process is aborted.
-
-Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability of the
-sequence diagram.
 
 **(Steps 4.1 to 4.2)** With the workout index number to update, the `WorkoutList#updateWorkout()` method 
 will then fetch the `Workout` object to be updated by calling method `WorkoutList#getWorkoutFromIndexNum()`.
 After the `Workout` object is fetched, a check will be conducted to ensure that the 
-(exercise name of the workout, new repetition value)-pair is not exist in the list of workouts maintained 
+(exercise name of the workout, new repetition value)-pair does not exist in the list of workouts maintained 
 in `WorkoutList`. For example, if a workout of 20 reps of push-ups is already stored in the list, a workout of 
 push up with 15 reps cannot be updated to push up with 20 reps.
 
 If this check fails, an `InvalidWorkoutException` exception is thrown.
 <br><br>
-**(Steps 4.3 to 4.6)** The `Workout` object to be updated is modified to new number of reps and `workoutsHashMapLis` 
+**(Steps 4.3 to 4.6)** The `Workout` object to be updated is modified to the new number of reps and `workoutsHashMapList` 
 is subsequently updated.
 
 This is the end of `WorkoutList#updateWorkout()` method.
@@ -1012,17 +1012,17 @@ Alright, the following workout has been updated:
 be called to update any existing plan(s) that contains the workout that has been updated.
 <br><br>
 **(Steps 10 to 13)** The `FileManager#rewriteAllWorkoutsToFile()` is called to rewrite
-the `workouts.txt` file according to the modified workout list and the
+the `workouts.txt` file according to the modified workout list and 
 the `FileManager#rewriteAllPlansToFile()` is also called to rewrite
 the `plans.txt` file according to the newly modified plan list.
 <br><br>
 This completes the process of updating an existing workout in WerkIt!
 
 ##### Design Considerations for Updating Existing Workout
-###### Update a workout will cause a cascade update action
+###### Update a Workout Will Cause a Cascading Update Action
 When an existing workout is updated, plans that contain that workout
-should also be updated. This cascade update action from `workout -> plan` must be done so that
-the data in the `workouts.txt`, `plans.txt` files matches.
+should also be updated. This cascading update action from `workout -> plan` must be done so that
+the data in the `workouts.txt` and `plans.txt` files matches.
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
