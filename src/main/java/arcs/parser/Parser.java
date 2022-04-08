@@ -20,6 +20,8 @@ import arcs.commands.route.ListRouteCommand;
 import arcs.commands.Command;
 import arcs.commands.ExitCommand;
 import arcs.commands.UndefinedCommand;
+import arcs.commands.staff.AddStaffCommand;
+import arcs.commands.staff.DeleteStaffCommand;
 
 public class Parser {
 
@@ -84,6 +86,12 @@ public class Parser {
             break;
         case DeleteBookingCommand.COMMAND_WORD:
             command = FlightBookingParser.prepareDeleteBookingCommand(argumentLine);
+            break;
+        case AddStaffCommand.COMMAND_WORD:
+            command = StaffParser.prepareAddStaffCommand(argumentLine);;
+            break;
+        case DeleteStaffCommand.COMMAND_WORD:
+            command = StaffParser.prepareDeleteStaffCommand(argumentLine);;
             break;
         default:
             command = new UndefinedCommand();
