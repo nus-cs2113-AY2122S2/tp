@@ -22,11 +22,11 @@ Format: `help`
 ### Adding a doctor: `add doctor`
 Adds a new doctor to the system.
 
-Format: `add doctor /id ID /n NAME /ph PHONE /e EMAIL`
+Format: `add doctor /id ID /n NAME /ph PHONE /e EMAIL /dep DEPARTMENT /w WARD_NO`
 
 Example of usage: 
 
-`add doctor /id 1234 /n john /ph 12341234 /e 1234@gmail.com`
+`add doctor /id 222 /n Harry Potter /ph 22223333 /e theChosenOne@gmail.com /dep Defensive /w 2`
 
 
 ### Adding a patient: `add patient`
@@ -36,7 +36,7 @@ Format: `add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTION
 
 Example of usage:
 
-`add patient /id 4321 /n Tom /ph 93333333 /e 3233@qq.com /s symptom /d descriptions`
+`add patient /id 333 /n Draco Malfoy /ph 88888888 /e poorPotter@gmail.com /s cough /d Allergic to Harry Potter`
 
 
 ### Adding an appointment: `add appointment`
@@ -56,11 +56,11 @@ Example of usage:
 ### Adding a nurse: `add nurse`
 Adds a new nurse to the system.
 
-Format: `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE`
+Format: `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE /w WARD_NO`
 
 Example of usage:
 
-`add nurse /id 1234 /n john /ph 12341234 /e 1234@gmail.com /t staff nurse`
+`add nurse /id 001 /n Hermione Granger /ph 11111111 /e ministerForMagic@gmail.com /t Minister /w 2`
 
 ### Adding a ward: `add ward`
 Adds a new ward to the system.
