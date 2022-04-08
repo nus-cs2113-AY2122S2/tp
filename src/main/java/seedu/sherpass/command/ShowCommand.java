@@ -178,7 +178,7 @@ public class ShowCommand extends Command {
             break;
         case "all":
             ui.showToUser("Here are the tasks in your list:");
-            Timetable.showCondensedTimetable(taskList.getTasks(), ui);
+            Timetable.prepareCondensedTimetable(taskList.getTasks(), ui);
             ui.showToUser("You have a total of " + taskList.getSize() + " task(s)!");
             break;
         default:

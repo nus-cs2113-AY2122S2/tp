@@ -57,10 +57,10 @@ public class Timetable {
 
     public static void showPendingTasks(TaskList taskList, Ui ui) {
         tasks = taskList.getPendingTasks();
-        showCondensedTimetable(tasks, ui);
+        prepareCondensedTimetable(tasks, ui);
     }
 
-    public static void showCondensedTimetable(ArrayList<Task> tasks, Ui ui) {
+    public static void prepareCondensedTimetable(ArrayList<Task> tasks, Ui ui) {
         long taskLength = TimetableLogic.prepareTaskContentLength(tasks,
                 TASK_DESCRIPTION_COMPARE_LENGTH, TASK_DESCRIPTION_COMPARE_OFFSET_LENGTH,
                 TASK_DESCRIPTION_FULL_LENGTH, TaskContentType.TASK_DESCRIPTION);
@@ -112,7 +112,7 @@ public class Timetable {
     public static void showScheduleByMonth(Month month, TaskList taskList, Ui ui) {
         LocalDate firstDayOfMonth = TimetableLogic.getFirstDayOfMonth(month);
         ArrayList<Task> monthlySchedule = taskList.getFilteredTasksByMonth(firstDayOfMonth);
-        showCondensedTimetable(monthlySchedule, ui);
+        prepareCondensedTimetable(monthlySchedule, ui);
     }
 
     private static void prepareFullTimetable() {
