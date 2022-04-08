@@ -1,9 +1,11 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 !include ../../Style.puml
 
 title Sequence Diagram of `WorkoutList#createAndAddWorkout()`
 hide footbox
+
+skinparam participantBackgroundColor COLOR_LOGIC
+skinparam sequenceLifelineBackgroundColor COLOR_LOGIC
 
 autonumber 2.1
 
