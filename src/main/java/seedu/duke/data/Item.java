@@ -6,6 +6,7 @@ import seedu.duke.exceptions.InvMgrException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Item {
@@ -61,7 +62,7 @@ public class Item {
     /**
      * Returns True if an Item contains the search term in the item name.
      *
-     * @param searchTerm User input of search term
+     * @param searchTerm User input of search term.
      * @return True if search term found in item name. Returns False, if otherwise.
      */
     public boolean contains(String searchTerm) {
@@ -87,13 +88,17 @@ public class Item {
     }
 
     /**
-     * Returns a list of borrow records filtered by borrow status
+     * Returns a list of borrow records filtered by borrower's name (if present)
+     * and borrow status.
      *
-     * @param status Filter out borrow records with this status
-     * @return List of BorrowRecords
+     * @param name Either an empty Optional instance or
+     *             an Optional instance containing a String name in it.
+     * @param status Filter out borrow records with this BorrowStatus.
+     * @return List of BorrowRecords.
      */
-    public List<BorrowRecord> getRecordsByStatus(BorrowStatus status) {
+    public List<BorrowRecord> filterRecords(Optional<String> name, BorrowStatus status) {
         return borrowRecords.stream()
+                .filter(record -> record.containsBorrowerName(name))
                 .filter(record -> record.isStatus(status))
                 .collect(Collectors.toList());
     }

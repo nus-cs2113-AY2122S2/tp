@@ -5,6 +5,7 @@ import seedu.duke.exceptions.InvMgrException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.duke.stubs.BorrowRecordStubs.PRESENTRECORD_A;
@@ -18,8 +19,10 @@ public class ItemTest {
         List<BorrowRecord> expectedList = new ArrayList<>();
         expectedList.add(PRESENTRECORD_A);
 
+
         ITEM_PENCIL.addBorrowRecord(PRESENTRECORD_A);
-        List<BorrowRecord> outputList = ITEM_PENCIL.getRecordsByStatus(BorrowStatus.PRESENT);
+        Optional<String> name = Optional.empty();
+        List<BorrowRecord> outputList = ITEM_PENCIL.filterRecords(name, BorrowStatus.PRESENT);
 
         assertEquals(expectedList, outputList);
     }
