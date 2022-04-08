@@ -9,6 +9,7 @@
     - [Add subscription record](#adding-subscription-record-add-subscription)
   - [Delete a record](#delete-a-record-delete)
   - [Show record list](#show-record-list-list)
+  - [Search record list using keyword](#search-record-list-using-keyword-find)
   - [Setting limit](#setting-limit-set)
   - [Showing summary](#showing-summary-summary)
   - [Exit the program](#exit-the-program-exit)
@@ -24,11 +25,9 @@ Spendvelope is designed to regularly remind the buyer of their preset spending l
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you are running Java 11.
-2. Download the latest version of `Spendvelope` from [here](https://github.com/AY2122S2-CS2113-F12-1/tp/releases/tag/v1.0).
-Place it in a folder of your choice.
+2. Download the latest version of `Spendvelope` from [here](https://github.com/AY2122S2-CS2113-F12-1/tp/releases/download/v2.0/Spendvelope.jar).
+Place it in a folder of your choice, ensure that the folder do not contain any folder named `data`.
 3. Using Cmd Prompt, navigate to the folder where the `jar` file is stored. Run `Spendvelope` with 
 `java -jar Spendvelope.jar`.
 
@@ -39,20 +38,20 @@ Place it in a folder of your choice.
    2. Add subscription record
 3. Delete a record
 4. Show record history list
-5. Set spending limits and give warnings
-6. View order summary(classified by summary)
-7. Read/Store the data files
-8. Search for expenses by keyword
-9. Closing the program
-
+5. Search for expenses by keyword
+6. Set spending limits and give warnings
+7. View order summary(classified by summary)
+8. Closing the program
+   <br>
+   <br>
 ### Get help message: `help`
 Shows program usage instructions.
 
 Format: `help`
-
+<br>
+<br>
 ### Add a record: `add`
 Adds a record to the RecordManager.
-
 #### Adding product record: `add product`
 Adds a product record to the record list.
 
@@ -63,9 +62,9 @@ Format: `add product i/ITEM_NAME p/PRICE d/DATE t/CATEGORY`
 
 Examples of usage: 
 
-`add product i/handphone cover p/$10 t/accessory d/14022022`
+`add product i/laptop p/$10 t/others d/04/04/2022`
 
-`add product i/burger p/$5.25 t/food d/14/02/2022`
+![img_8.png](img_8.png)
 
 #### Adding subscription record: `add subscription`
 Adds a subscription record to the record list.
@@ -76,10 +75,12 @@ Format: `add subscription i/ITEM_NAME p/PRICE d/DATE r/RENEWAL`
 
 Examples of usage:
 
-`add subscription i/Netflips p/$10 d/14022022 r/14032022`
+`add subscription i/Netflips p/$10 d/03/02/2022 r/every month`
 
-`add subscription i/electricity p/$19.25 d/14/02/2022 r/Tomorrow`
+![img_9.png](img_9.png)
 
+<br>
+<br>
 ### Delete a record: `delete`
 Deletes the record identified by the record number used in the record list.
 
@@ -90,23 +91,29 @@ Format: `delete INDEX`
 Examples of usage:
 
 `delete 1` - deletes record #1
-
+<br>
+<br>
 ### Show record list: `list`
 Displays all records in the RecordManager as a list with their index numbers.
 
 Format: `list`
 
-### Show record list: `Find`
+![img_10.png](img_10.png)
+<br>
+<br>
+### Search record list using keyword: `Find`
 filter all the records in the RecordManager and display it as a list.
 
-Format: `find <KeyWord>`
+Format: `find KEYWORD`
 
-* The `KeyWord` can be any String.
-* The `KeyWord` is used to filter the name of the records in RecordManager.
+* The `KEYWORD` can be any String.
+* The `KEYWORD` is used to filter the name of the records in RecordManager.
 
-Example of usage: `find handphone`
-`
+Example of usage: `find laptop`
 
+![img_11.png](img_11.png)
+<br>
+<br>
 ### Setting limit: `set`
 Set a total spending limit for a month and display the warning
 if the total expenditure exceeds the limit.
@@ -118,6 +125,9 @@ Format: `set LIMIT`
 
 Example of usage: `set 500`
 
+![img_12.png](img_12.png)
+<br>
+<br>
 ### Showing summary: `summary`
 Show the summary table based on the record type.
 
@@ -126,7 +136,8 @@ Example of usage: `summary`
 * In the summary table, records are classified into 5 types:
 fashion, food, accessory, others, and subscription with detailed record information.
 * The summary table also shows expenses on each category and the overall expenses.
-
+  <br>
+  <br>
 ### Exit the program: `exit`
 Closes the program.
 
@@ -134,17 +145,19 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: What is the Spendvelope for?
 
-**A**: {your answer here}
-
+**A**: The spendvelope is create to help users to take note of their purchase
+<br>
+<br>
 ## Command Summary
 
 
-* Add record `add i/ITEM_NAME p/PRICE d/DATE t/CATEGORY (if product) r/RENEWAL (if subscription)`
+* Add product record `add product i/ITEM_NAME p/PRICE d/DATE t/CATEGORY`
+* Add subscription record `add subscription i/ITEM_NAME p/PRICE d/DATE r/RENEWAL`
 * Delete record `delete INDEX`
 * Display record list `list`
-* Find record by keyword `find<keyword>`
+* Find record by keyword `find KEYWORD`
 * Set limit `set LIMIT`
 * Show help message `help`
 * Show summary table based on types `summary`
