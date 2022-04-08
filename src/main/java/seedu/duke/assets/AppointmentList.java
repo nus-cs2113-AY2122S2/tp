@@ -18,7 +18,7 @@ public class AppointmentList extends List {
     private PatientList referencePatientList;
     private DoctorList referenceDoctorList;
 
-    public AppointmentList(PatientList patientList,DoctorList doctorList) {
+    public AppointmentList(PatientList patientList, DoctorList doctorList) {
         this.referencePatientList = patientList;
         this.referenceDoctorList = doctorList;
     }
@@ -31,7 +31,7 @@ public class AppointmentList extends List {
         }
         return null;
     }
-    
+
     public ArrayList<Appointment> getList() {
         return appointments;
     }
@@ -99,6 +99,7 @@ public class AppointmentList extends List {
 
     @Override
     public void view() throws HalpmiException {
+        checkDateInDetails();
         CommandLineTable appointmentTable = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
@@ -108,14 +109,23 @@ public class AppointmentList extends List {
         }
         for (Appointment appointment : appointments) {
             appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
-                        appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
-                        appointment.getAppointmentDate(), appointment.getAppointmentDetails());
+                    appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
+                    appointment.getAppointmentDate(), appointment.getAppointmentDetails());
         }
         appointmentTable.print();
     }
 
+    private void checkDateInDetails() {
+        for (Appointment appointment : appointments) {
+            if (!appointment.appointmentDetails.contains(appointment.appointmentDate)) {
+                appointment.updateAppointmentDetails();
+            }
+        }
+    }
+
     @Override
     public void view(String appointmentId) throws HalpmiException {
+        checkDateInDetails();
         Appointment foundAppointment = getAppointment(appointmentId);
         if (foundAppointment == null) {
             throw new HalpmiException("Appointment doesn't exist please try again!");
@@ -132,6 +142,7 @@ public class AppointmentList extends List {
 
     public void findById(String[] parameters) {
         try {
+            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentById(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -141,6 +152,7 @@ public class AppointmentList extends List {
 
     public void findByPatientName(String[] parameters) {
         try {
+            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByPatientName(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -150,6 +162,7 @@ public class AppointmentList extends List {
 
     public void findByPatientNric(String[] parameters) {
         try {
+            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByPatientNric(appointments, (parameters[1]));
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -159,6 +172,7 @@ public class AppointmentList extends List {
 
     public void findByDoctorName(String[] parameters) {
         try {
+            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByDoctorName(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -168,6 +182,7 @@ public class AppointmentList extends List {
 
     public void findByDoctorNric(String[] parameters) {
         try {
+            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByDoctorNric(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -177,6 +192,7 @@ public class AppointmentList extends List {
 
     public void findByAppointmentDate(String[] parameters) {
         try {
+            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByDate(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {

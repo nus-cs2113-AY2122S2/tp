@@ -287,34 +287,6 @@ public class Validator {
         }
     }
 
-    public static void validateFindPatient(String[] parameters) throws HalpmiException {
-        switch (parameters[0]) {
-        case "nric":
-            validateNric(parameters[1]);
-            break;
-        case "name":
-            validateFullName(parameters[1]);
-            break;
-        case "age":
-            validateAge(parameters[1]);
-            break;
-        case "gender":
-            validateGender(parameters[1]);
-            break;
-        case "address":
-            validateAddress(parameters[1]);
-            break;
-        case "dob":
-            validateDob(parameters[1]);
-            break;
-        case "admissiondate":
-            validateAdmissionDate(parameters[1]);
-            break;
-        default:
-            throw new HalpmiException("Input must be an attribute of Patient");
-        }
-    }
-
     public static void validateFindAppointment(String[] parameters) throws HalpmiException {
         switch (parameters[0]) {
         case "id":
@@ -358,4 +330,33 @@ public class Validator {
             break;
         }
     }
+
+    public static void validateFindPatient(String[] parameters) throws HalpmiException {
+        switch (parameters[0]) {
+        case "nric":
+            validateNric(parameters[1]);
+            break;
+        case "name":
+            validateFullName(parameters[1]);
+            break;
+        case "age":
+            validateAge(parameters[1]);
+            break;
+        case "gender":
+            validateGender(parameters[1]);
+            break;
+        case "address":
+            validateAddress(parameters[1]);
+            break;
+        case "dob":
+            validateDob(parameters[1]);
+            break;
+        case "admissiondate":
+            validateAdmissionDate(parameters[1]);
+            break;
+        default:
+            throw new HalpmiException("Input must be an attribute of Patient");
+        }
+    }
+
 }

@@ -1,5 +1,7 @@
 package seedu.duke.assets;
 
+import java.time.LocalDate;
+
 public class Appointment {
     protected String appointmentId;
     protected String patientNric;
@@ -26,6 +28,21 @@ public class Appointment {
                 + "Doctor: " + doctorName + " (" + doctorNric + ")\n"
                 + "Appointment date: " + appointmentDate + "\n"
                 + "Appointment details: " + appointmentDetails + "\n";
+    }
+
+    public void updateAppointmentDetails() {
+        LocalDate localDateNow = LocalDate.now();
+        LocalDate localAppointmentDate = LocalDate.parse(this.appointmentDate);
+        if (isBeforeOrEqual(localAppointmentDate, localDateNow)) {
+            this.appointmentDetails = this.appointmentDetails + " - appointment finished on " + this.appointmentDate;
+        }
+    }
+
+    private boolean isBeforeOrEqual(LocalDate date, LocalDate compareToDate) {
+        if (date == null || compareToDate == null) {
+            return false;
+        }
+        return !compareToDate.isAfter(date);
     }
 
     public String getAppointmentId() {

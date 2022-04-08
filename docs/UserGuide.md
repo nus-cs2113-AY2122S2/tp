@@ -157,43 +157,29 @@ Allows user to view existing records of doctors, patients and medicine.
 #### VIEW DOCTOR
 
 To view the records of all doctors in the application, you can simply call `view doctor` without any additional
-parameters. You could also give a specific criteria as listed below and the input value if you want to
-search and view by a specific criteria.
+parameters.
 
-Format: `view doctor` or `view doctor /info [criteria],[input]`
+Format: `view doctor`
 
-Accepted Criteria: `nric`,`name`,`age`,`address`,`gender`,`dob`,`specialization`
-
-Examples: `view doctor /info nric,S1234567A`, `view doctor /info name,John Doe`,
-`view doctor /info age,25`, `view doctor /info address,Baker Street`,
-`view doctor /info gender,M`,`view doctor /info dob,1997-03-23`,`view doctor /info specialization, Cardiology`
+Examples: `view doctor`
 
 #### VIEW PATIENT
 
 To view the records of all patients in the application, you can simply call `view patient` without any additional
-parameters. You could also give a specific criteria as listed below and the input value if you want to
-search and view by a specific criteria.
+parameters.
 
-Format: `view patient` or `view patient /info [criteria],[input]`
+Format: `view patient`
 
-Accepted Criteria: `nric`,`name`,`age`,`address`,`gender`,`dob`,`admissiondate`
-
-Example: `view patient /info nric,S7654321A`, `view patient /info name,John Doe`,
-`view patient /info age,25`, `view patient /info address,10 Baker Street`,
-`view patient /info gender,M`,`view patient /info dob,1997-03-23`, `view patient /info admissiondate,2022-01-01`
+Example: `view patient`
 
 #### VIEW MEDICINE
 
 To view the records of all medicines in the application, you can simply call `view medicine` without any additional
-parameters. You could also give a specific criteria as listed below and the input value if you want to
-search and view by a specific criteria.
+parameters.
 
-Format: `view medicine` or `view medicine /info [criteria],[input]`
+Format: `view medicine`
 
-Accepted Criteria: `id`,`name`,`dosage`,`expiry`,`sideeffects`,`quantity`
-
-Example: `view medicine /info id,A123`,`view medicine /info name,Paracetamol`,`view medicine /info dosage,100`,
-`view medicine /info expiry,2023-12-12`,`view medicine /info sideeffects,Drowsiness`,`view medicine /info quantity,10`
+Example: `view medicine`
 
 #### VIEW APPOINTMENT
 
