@@ -1,10 +1,13 @@
 package java.tp;
 
 import org.junit.jupiter.api.Test;
+import tp.DoctorList;
+import tp.IHospitalException;
+import tp.Ui;
 import tp.person.Doctor;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class DoctorListTest {
     private final Doctor firstDoctor = new Doctor("1234", "Rose",
@@ -57,11 +60,11 @@ class DoctorListTest {
         DoctorList doctors = new DoctorList();
 
         String toPrint = "____________________________________________________________\n" +
-                          "Here are the doctors in this hospital:\n" +
-                          "1. * DOCTOR [1234] || Name: Rose || Contact No.: 12341234 || Email: 3600@gmail.com\n" +
-                          "2. * DOCTOR [2233] || Name: Mary || Contact No.: 66667777 || Email: Mary123@gmail.com\n" +
-                          "You have 2 doctors recorded in the system.\n" +
-                          "____________________________________________________________\n";
+                                 "Here are the doctors in this hospital:\n" +
+                                 "1. * DOCTOR [1234] || Name: Rose || Contact No.: 12341234 || Email: 3600@gmail.com\n" +
+                                 "2. * DOCTOR [2233] || Name: Mary || Contact No.: 66667777 || Email: Mary123@gmail.com\n" +
+                                 "You have 2 doctors recorded in the system.\n" +
+                                 "____________________________________________________________\n";
 
         try {
             doctors.addDoctor(firstDoctor);

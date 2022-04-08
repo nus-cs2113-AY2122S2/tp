@@ -1,10 +1,13 @@
 package java.tp;
 
 import org.junit.jupiter.api.Test;
+import tp.IHospitalException;
+import tp.PatientList;
+import tp.Ui;
 import tp.person.Patient;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class PatientListTest {
     private final Patient firstPatient = new Patient("1234", "john",
