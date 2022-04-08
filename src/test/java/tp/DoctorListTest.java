@@ -64,10 +64,10 @@ class DoctorListTest {
                                  + "Here are the doctors in this hospital:"
                                  + System.lineSeparator()
                                  + "1. * DOCTOR [1234] || Name: Rose || Contact No.: 12341234 "
-                                 + "|| Email: 3600@gmail.com || Department: General || Ward: 10"
+                                 + "|| Email: 3600@gmail.com || Ward: 10"
                                  + System.lineSeparator()
                                  + "2. * DOCTOR [2233] || Name: Mary || Contact No.: 66667777 "
-                                 + "|| Email: Mary123@gmail.com || Department: Oral || Ward: 22"
+                                 + "|| Email: Mary123@gmail.com || Ward: 22"
                                  + System.lineSeparator()
                                  + "You have 2 doctors recorded in the system."
                                  + System.lineSeparator()
