@@ -1,9 +1,5 @@
 package tp;
 
-import tp.person.Doctor;
-import tp.person.Nurse;
-import tp.person.Patient;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -108,7 +104,29 @@ public class WardStorage {
 //                Doctor doctor = new Doctor(did, dname, dphoneNumber, demail, department, dwardNumber);
 //                Nurse nurse = new Nurse(nid, nname, nphoneNumber, nemail, title, wardNumber);
 //                wardNumber = Integer.parseInt(scanner.nextLine());
-                result.addWard(doctor, patient, nurse, wardNumber);
+                String docs = scanner.nextLine();
+                String[] strings = docs.replaceAll("\\[","").
+                        replaceAll("]","").split(",");
+                int [] docIndexes = new int[strings.length];
+                for (int j = 0; j < strings.length; j++) {
+                    docIndexes[j] = Integer.parseInt(strings[j]);
+                }
+                String pats = scanner.nextLine();
+                strings = pats.replaceAll("\\[","").
+                        replaceAll("]","").split(",");
+                int [] patIndexes = new int[strings.length];
+                for (int j = 0; j < strings.length; j++) {
+                    patIndexes[j] = Integer.parseInt(strings[j]);
+                }
+                String nurs = scanner.nextLine();
+                strings = nurs.replaceAll("\\[","").
+                        replaceAll("]","").split(",");
+                int [] nurIndexes = new int[strings.length];
+                for (int j = 0; j < strings.length; j++) {
+                    nurIndexes[j] = Integer.parseInt(strings[j]);
+                }
+                int wardNumber = Integer.parseInt(scanner.nextLine());
+                result.addWard(docIndexes, patIndexes, nurIndexes, wardNumber);
             }
             return result;
         } catch (FileNotFoundException e) {

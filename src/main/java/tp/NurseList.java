@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class NurseList {
     public static String boundary = "____________________________________________________________"
             + System.lineSeparator();
-    protected ArrayList<Nurse> nurses = new ArrayList<>();
+    protected static ArrayList<Nurse> nurses = new ArrayList<>();
     protected int size;
 
     public NurseList() {
