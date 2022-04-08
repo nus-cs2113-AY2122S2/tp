@@ -8,10 +8,7 @@ import seedu.simplst.parsers.RemoveParser;
 import seedu.simplst.parsers.TotalParser;
 import seedu.simplst.parsers.ViewParser;
 import seedu.simplst.parsers.FulfillParser;
-import util.exceptions.InvalidFileException;
-import util.exceptions.InvalidObjectType;
-import util.exceptions.NullException;
-import util.exceptions.WrongCommandException;
+import util.exceptions.*;
 
 import java.util.Scanner;
 
@@ -61,7 +58,7 @@ public class UserInterface {
                 String command = userInput.split(" ")[0];
                 switch (command) {
                 case "view":
-                    //using flags here to distinguish between different views????
+                    //using flags here to distinguish between different views
                     viewParser.parse(userInput);
                     break;
                 case "find":
@@ -107,6 +104,10 @@ public class UserInterface {
                 e.printStackTrace();
             } catch (InvalidObjectType e) {
                 Display.tryCommandAgain();
+            } catch (MissingFlagException e) {
+                Display.inputAllFlags();
+            } catch (EmptyFieldException e) {
+                Display.fillCompulsoryFields();
             }
             System.out.println("Another command?");
             userInput = input.nextLine();

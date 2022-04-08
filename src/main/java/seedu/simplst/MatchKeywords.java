@@ -1,5 +1,8 @@
 package seedu.simplst;
 
+import util.exceptions.EmptyFieldException;
+import util.exceptions.MissingFlagException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -24,10 +27,14 @@ public class MatchKeywords {
     private static String regex;
     private HashMap<String, String> groupValues;
 
-    public MatchKeywords(String input, String regex) {
+    public MatchKeywords(String input, String regex) throws MissingFlagException, EmptyFieldException {
         this.input = input;
         this.regex = regex;
         this.groupValues = findMatch();
+    }
+
+    public static String getInput() {
+        return input;
     }
 
     /*
@@ -39,7 +46,7 @@ public class MatchKeywords {
      * Current implementation is just to put no value with
      * corresponding keys
     */
-    private HashMap<String,String> findMatch() {
+    private HashMap<String,String> findMatch() throws MissingFlagException, EmptyFieldException {
         HashMap<String, String> hashMap = new HashMap<>();
         ArrayList<String> groupNames = findGroup(regex);
         Matcher matcher = regexMatching(regex, input);
@@ -47,13 +54,18 @@ public class MatchKeywords {
         // run matcher class to check regex on input string
         boolean hasMatch = matcher.find();
         for (String groupName: groupNames) {
-            if (!hasMatch) {
-                hashMap.put(groupName, "");
+            if (!hasMatch) { //missing certain flags
+                hashMap.clear();
+                throw new MissingFlagException();
             } else {
+                if ((groupName.equals("sku") || groupName.equals("name") || groupName.equals("oid") ||
+                        groupName.equals("qty")) && matcher.group(groupName).isBlank()) { //check for compulsory fields
+                    hashMap.clear();
+                    throw new EmptyFieldException();
+                }
                 hashMap.put(groupName, matcher.group(groupName));
             }
         }
-
         return hashMap;
     }
 

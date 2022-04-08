@@ -1,6 +1,8 @@
 package seedu.simplst;
 
 import org.junit.jupiter.api.Test;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.MissingFlagException;
 
 import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MatchKeywordsTest {
 
     @Test
-    void getGroupValues() {
+    void getGroupValues() throws MissingFlagException, EmptyFieldException {
         String regex = "(?<flag>[og])/ oid/(?<oid>\\d*) gid/(?<gid>\\d*) r/(?<r>.*) a/(?<address>.*)"
                 + " n/(?<name>.*) q/(?<qty>\\d*) d/(?<desc>.*)";
         String test1 = "add o/ oid/12 gid/156 r/receiver a/address n/name q/100 d/description";

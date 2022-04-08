@@ -2,20 +2,16 @@ package seedu.simplst.parsers;
 
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
-import util.exceptions.InvalidFileException;
-import util.exceptions.InvalidObjectType;
-import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.UnitTestException;
-import util.exceptions.WrongCommandException;
+import util.exceptions.*;
 
 import java.util.HashMap;
 
-public class AddParser extends CommandParser {
+public class AddParser extends CommandParser{
     public AddParser(Warehouse warehouse) {
         super(warehouse);
     }
 
-    protected void init_extract_params() {
+    protected void init_extract_params() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[ugbo]{1,2})/";
@@ -23,7 +19,7 @@ public class AddParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType {
+    protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType, MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("g")) {
             String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
             HashMap<String, String> regexGoodMatch = new MatchKeywords(userInput, regexGood).getGroupValues();
@@ -35,8 +31,8 @@ public class AddParser extends CommandParser {
             }
         } else if (matches.get("flag").equals("ug")) {
             String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) size/(?<size>.*)";
-            HashMap<String, String> regexUnitGoodMatch = new
-                    MatchKeywords(userInput, regexUnitGood).getGroupValues();
+                HashMap<String, String> regexUnitGoodMatch = new
+                        MatchKeywords(userInput, regexUnitGood).getGroupValues();
             try {
                 warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
                         regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
