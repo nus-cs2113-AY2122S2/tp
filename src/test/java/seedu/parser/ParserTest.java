@@ -338,13 +338,6 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_listEnumTypeConvertedToUpper_success() {
-        Command testCommand = parser.parseCommand("list spEAker");
-        Command expectedCommand = new ListCommand(new ArrayList<>(Collections.singleton("SPEAKER")));
-        assertEquals(expectedCommand, testCommand);
-    }
-
-    @Test
     void parseCommand_deleteCommand_success() {
         Command testCommand = parser.parseCommand("delete s/`S1234567E`");
         Command expectedCommand = new DeleteCommand(new ArrayList<>(Collections.singleton("s/S1234567E")));

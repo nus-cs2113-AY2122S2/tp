@@ -147,12 +147,7 @@ public class Parser {
                 return new IncorrectCommand(Command.INCORRECT_ENUM_TYPE);
             }
         case ListCommand.COMMAND_WORD:
-            if (arguments == null) {
-                return new ListCommand();
-            } else {
-                args = new ArrayList<>(Collections.singleton(arguments.toUpperCase(Locale.ROOT)));
-                return new ListCommand(args);
-            }
+            return new ListCommand();
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case SaveCommand.COMMAND_WORD:
