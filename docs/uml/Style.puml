@@ -1,3 +1,4 @@
+'Colour Constants
 !define COLOR_LOGIC #LightSkyBlue
 !define COLOR_PARSER #Gold
 !define COLOR_UI #YellowGreen
@@ -5,5 +6,10 @@
 !define COLOR_STORAGE #FF6961
 !define COLOR_MAIN #Cornsilk
 
+'General Settings
 skinparam arrowColor #Black
+
+'Class Diagram Settings
 skinparam classBorderColor #Black
+
+'Sequence Diagram Settings
