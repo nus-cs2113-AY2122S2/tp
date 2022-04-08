@@ -19,3 +19,44 @@ participant ":System" as System LOGIC_COLOR
 participant ":MoneyList" as Money MONEY_COLOR
 participant ":UI" as UI UI_COLOR
 
+-> Command: add /n Alice /g 1
+activate Command
+Command -> Family: addPerson()
+activate Family
+Family -> Family: getList()
+activate Family
+Family <- Family: :PersonList
+deactivate Family
+Family -> Parents: addPerson()
+activate Parents
+create Person
+Parents -> Person: Person()
+activate Person
+create Money
+Person -> Money: MoneyList()
+activate Money
+Person <- Money
+deactivate Money
+Parents <- Person
+deactivate Person
+Family <- Parents
+deactivate Parents
+opt Not Silent
+    Family -> Family: getGenerationName()
+    activate Family
+    Family <- Family: generation: String
+    deactivate Family
+    Family -> Family: printPersonAdded()
+    activate Family
+    Family -> System: println()
+    activate System
+    Family <- System
+    Family <- Family
+    deactivate System
+    deactivate Family
+end opt
+Command <- Family
+deactivate Family
+<- Command
+deactivate Command
+
