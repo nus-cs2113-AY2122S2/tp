@@ -1,6 +1,7 @@
 package seedu.duke.data;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class BorrowRecord {
     private final LocalDate startDate;
@@ -54,6 +55,16 @@ public class BorrowRecord {
     // as the status we are testing for.
     public boolean isStatus(BorrowStatus status) {
         return borrowStatus.equals(status);
+    }
+
+    // Returns true if this borrow record contains search name
+    public boolean containsBorrowerName(Optional<String> searchName) {
+        // If there is no search name entered, all records return true
+        if (searchName.isEmpty()) {
+            return true;
+        }
+
+        return borrowerName.contains(searchName.get());
     }
 
     /**
