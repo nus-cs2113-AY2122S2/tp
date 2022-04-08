@@ -2013,6 +2013,17 @@ Testers are welcome conduct more extensive and rigorous testing.
 
 ### Test on Workout Features
 #### Creating A New Workout
+(For details on the usage of this command, please refer to the 
+[user guide](UserGuide.md#create-a-workout-workout-new).)
+
+The following are some suggested test cases for you to try:
+
+##### Positive Test Case
+| Test Case                                                  | Command                               | Expected result                    |
+|:-----------------------------------------------------------|:--------------------------------------|:-----------------------------------|
+| Valid exercise name and repetition value.                  | `workout /new russian twist /reps 20` | New workout is added successfully. |
+| Valid exercise name and highest possible repetition value. | `workout /new sit up /reps 2147483647` | New workout is added successfully. |
+
 #### Listing All Workouts
 
 #### Deleting An Existing Workout
