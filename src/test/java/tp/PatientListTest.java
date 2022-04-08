@@ -1,4 +1,4 @@
-package java.tp;
+package tp;
 
 import org.junit.jupiter.api.Test;
 import tp.IHospitalException;

@@ -1,4 +1,4 @@
-package java.tp;
+package tp;
 
 import org.junit.jupiter.api.Test;
 import tp.DoctorList;
@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DoctorListTest {
     private final Doctor firstDoctor = new Doctor("1234", "Rose",
-            "12341234", "3600@gmail.com");
+            "12341234", "3600@gmail.com", "General", 10);
     private final Doctor secondDoctor = new Doctor("2233", "Mary",
-            "66667777", "Mary123@gmail.com");
+            "66667777", "Mary123@gmail.com", "Oral", 22);
     private Ui ui = new Ui();
 
     @Test
@@ -61,8 +61,10 @@ class DoctorListTest {
 
         String toPrint = "____________________________________________________________\n" +
                                  "Here are the doctors in this hospital:\n" +
-                                 "1. * DOCTOR [1234] || Name: Rose || Contact No.: 12341234 || Email: 3600@gmail.com\n" +
-                                 "2. * DOCTOR [2233] || Name: Mary || Contact No.: 66667777 || Email: Mary123@gmail.com\n" +
+                                 "1. * DOCTOR [1234] || Name: Rose || Contact No.: 12341234 "
+                                 + "|| Email: 3600@gmail.com || Department: General || Ward: 10\n" +
+                                 "2. * DOCTOR [2233] || Name: Mary || Contact No.: 66667777 "
+                                 + "|| Email: Mary123@gmail.com || Department: Oral || Ward: 22\n" +
                                  "You have 2 doctors recorded in the system.\n" +
                                  "____________________________________________________________\n";
 
