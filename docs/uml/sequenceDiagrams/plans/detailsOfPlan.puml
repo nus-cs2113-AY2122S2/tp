@@ -7,21 +7,21 @@ autonumber
 title Sequence Diagram of `plan /details` Command
 hide footbox
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "detailsCommand\n:PlanCommand" AS detailsCommand
-participant "planList\n:PlanList" AS PlanList
-participant "plan\n:Plan" AS Plan
-participant "workout\n:Workout" AS Workout
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "detailsCommand\n:PlanCommand" AS detailsCommand COLOR_LOGIC
+participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
+participant "plan\n:Plan" AS Plan COLOR_LOGIC
+participant "workout\n:Workout" AS Workout COLOR_LOGIC
 
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 ref over WerkIt
 Obtain and parse user input.
 end
 
 WerkIt -> detailsCommand : execute()
-activate detailsCommand
+activate detailsCommand COLOR_LOGIC
 detailsCommand -> PlanList : listPlanDetails(userArguments, ui)
-activate PlanList
+activate PlanList COLOR_LOGIC
 ref over PlanList
 Parse the user input to obtain the plan
 index number. (Method calls not shown)
@@ -34,18 +34,18 @@ throw exceptions if checking fails.
 end
 
 PlanList -> PlanList : getPlanFromIndexNum(indexOfPlan)
-activate PlanList
+activate PlanList COLOR_LOGIC
 return planToViewDetails : Plan
 
 PlanList -> Plan : getWorkoutsInPlanList()
-activate Plan
+activate Plan COLOR_LOGIC
 return workoutsInPlanList : ArrayList<Workout>
 
 loop index < numberOfWorkoutsInPlan
 PlanList -> Plan : get(index)
-activate Plan
+activate Plan COLOR_LOGIC
 Plan -> Workout : toString()
-activate Workout
+activate Workout COLOR_LOGIC
 return workoutDetails:String
 deactivate Plan
 end

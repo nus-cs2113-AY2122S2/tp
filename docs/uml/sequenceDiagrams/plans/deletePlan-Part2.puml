@@ -4,12 +4,16 @@
 
 autonumber 2.1
 
+skinparam participantBackgroundColor COLOR_LOGIC
+skinparam sequenceLifelineBackgroundColor COLOR_LOGIC
+
 title Sequence Diagram of `PlanList#deletePlan()`
 hide footbox
 
 participant "planList\n:PlanList" AS pl
 participant "plan\n:Plan" AS Plan
 
+activate pl
 ref over pl
 Parse the user input to obtain the plan
 index number. (Method calls not shown)
@@ -30,7 +34,7 @@ activate Plan
 return deletedPlanKey:String
 
 pl -> "planDisplayList:\nArrayList<String>" :remove(indexToDelete - 1)
-activate "planDisplayList:\nArrayList<String>"
+activate "planDisplayList:\nArrayList<String>" COLOR_LOGIC
 return
 
 pl -> "plansHashMapList:\nHashMap" :remove(deletedPlanKey)
