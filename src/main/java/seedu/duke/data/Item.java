@@ -4,7 +4,9 @@ import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Item {
 
@@ -82,6 +84,18 @@ public class Item {
 
         this.borrowRecords.add(newRecord);
         return this;
+    }
+
+    /**
+     * Returns a list of borrow records filtered by borrow status
+     *
+     * @param status Filter out borrow records with this status
+     * @return List of BorrowRecords
+     */
+    public List<BorrowRecord> getRecordsByStatus(BorrowStatus status) {
+        return borrowRecords.stream()
+                .filter(record -> record.isStatus(status))
+                .collect(Collectors.toList());
     }
 
     /**

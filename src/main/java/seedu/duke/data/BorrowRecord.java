@@ -50,6 +50,12 @@ public class BorrowRecord {
         }
     }
 
+    // Returns true if this borrow record status is the same
+    // as the status we are testing for.
+    public boolean isStatus(BorrowStatus status) {
+        return borrowStatus.equals(status);
+    }
+
     /**
      * Returns output string representing a borrow record.
      *
