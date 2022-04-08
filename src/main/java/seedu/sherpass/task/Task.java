@@ -1,7 +1,5 @@
 package seedu.sherpass.task;
 
-import seedu.sherpass.enums.Frequency;
-
 import java.time.LocalDateTime;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
@@ -205,44 +203,6 @@ public class Task {
                 && doOnEndDateTime.equals(t.getDoOnEndDateTime())
                 && identifier == (t.getIdentifier())
                 && byDateTime.equals(t.getByDateTime());
-    }
-
-    /**
-     * Returns a new task with the same identifier and description.
-     * The dates incremented according to the frequency.
-     *
-     * @param frequency The frequency of recurrence
-     * @return The next occurrence of the task
-     */
-    public Task prepareNextTask(Frequency frequency) {
-        LocalDateTime newStartDate = incrementDate(doOnStartDateTime,
-                frequency);
-        LocalDateTime newEndDate = incrementDate(doOnEndDateTime,
-                frequency);
-        LocalDateTime newByDate = byDateTime;
-        if (newByDate != null) {
-            newByDate = incrementDate(newByDate, frequency);
-        }
-        return new Task(identifier, description, newByDate,
-                newStartDate, newEndDate);
-    }
-
-    /**
-     * Returns the incremented date according to the frequency.
-     *
-     * @param currentDate The current date to be incremented
-     * @param frequency   The frequency of recurrence.
-     * @return The incremented date according to the frequency
-     */
-    private LocalDateTime incrementDate(LocalDateTime currentDate, Frequency frequency) {
-        if (frequency == Frequency.SINGLE) {
-            return currentDate;
-        } else if (frequency == Frequency.DAILY) {
-            return currentDate.plusDays(1);
-        } else if (frequency == Frequency.WEEKLY) {
-            return currentDate.plusWeeks(1);
-        }
-        return currentDate.plusMonths(1);
     }
 
     public Task clone() {

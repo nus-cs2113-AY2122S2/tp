@@ -83,7 +83,7 @@ public class EditCommand extends Command {
                 taskToEdit = taskList.editRepeatedTasks(editIndex, taskDescription,
                         doOnStartDateTime, doOnEndDateTime, byDate);
             } else {
-                taskToEdit = taskList.editSingleTaskContent(editIndex, taskDescription,
+                taskToEdit = taskList.editSingleTask(editIndex, taskDescription,
                         doOnStartDateTime, doOnEndDateTime, byDate);
             }
             storage.writeSaveData(taskList);
