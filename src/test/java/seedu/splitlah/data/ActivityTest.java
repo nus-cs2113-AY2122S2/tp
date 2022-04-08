@@ -68,8 +68,16 @@ class ActivityTest {
      * Checks if the correct activity unique identifier is returned.
      */
     @Test
-    void getActivityId_activityOne_activityIdOfOne() throws InvalidDataException {
+    void getActivityId_activityOne_correctActivityId() throws InvalidDataException {
         assertEquals(1, activityOne.getActivityId());
+    }
+
+    /**
+     * Checks if the correct activity name is returned.
+     */
+    @Test
+    void getActivityName_activityOne_correctActivityName() {
+        assertEquals("Lunch", activityOne.getActivityName());
     }
 
     /**
