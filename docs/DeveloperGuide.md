@@ -218,6 +218,7 @@ type of `Command` will be called to create the appropriate `Command` object and 
 <div class="button-container"><a class="button" href="#design">Back to Design</a></div>
 
 #### Logic component
+The logic component is mainly responsible for executing the command.
 Below is a class diagram of the `Logic` component:
 ![LogicUML](uml/classDiagrams/images/logicComponent.png)
 <span class="box info">:memo: This is a high level overview of the `Logic` component, thus,
@@ -1999,31 +2000,45 @@ Testers are expected to do more testing.
 #### Listing All Workouts
 
 #### Deleting An Existing Workout
-1. Prerequisites: Workout list should be populated with
-workout(s) before an existing workout can be deleted. 
-See [this section](#creating-a-new-workout) to view how you can populate your workout list. 
-2. User can enter `workout /list` to see the workout list before the deletion occurs. This is for comparison purposes.
-3. Test case: `workout /delete 1`<br/><br/>
-Expected: The first workout is deleted from the workout list. Details of the deleted workout will be shown 
-to the terminal.<br/><br/>
-Addition: If you have any existing plans containing the deleted workout, that plan
-will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list
-if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are
-affected by the deletion of this workout will display their delete messages accordingly.<br/><br/>
-4. Other incorrect commands to try:<br/>
-   a. `workout /delete` (Missing workout index to delete)<br/>
-   b. `workout /delete 0` (Index 0 is invalid) <br/>
-   c. `workout /delete X` (X could be a word, a negative number or an index that exceeds the number of workouts in the workout list) <br/>
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-workout-workout-delete).)
+
+**Prerequisites:** Ensure that your workout list is populated with at least one
+workout for you to test the `workout` command on. 
+See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Case                  | Command             | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|:---------------------------|:--------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid workout to delete    | `workout /delete 1` | The first workout is deleted from the workout list. Details of the deleted workout will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the deleted workout, that plan will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are affected by the deletion of this workout will display their delete messages accordingly. |
+
+##### Negative Test Cases
+| Test Case                                                                                                                                                  | Command             | Expected result                         |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------|:----------------------------------------|
+| Missing workout index to delete                                                                                                                            | `workout /delete`   | Error response (Insufficient arguments) |
+| Invalid argument supplied. <br/><br/>X could be a word, a negative number or an index that does not fall within the range of workouts in the workout list. | `workout /delete X` | Error response (Invalid user argument)  |
+
 
 #### Updating An Existing Workout
 
 ### Test on Plan Features
 #### Creating A New Plan 
-1. Prerequisites: The workout list should be populated before a new plan can be created as
-plans contains workout(s). See [this section](#creating-a-new-workout) to view how you can populate your workout list.
-2. Test case: `plan /new first plan /workouts 1,1,1`<br/><br/>
-Expected: A new plan called "first plan" will be created. This plan contains 3 instances of 
-workout with index 1 in the workout list.<br/><br/>
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#create-a-plan-plan-new).)
+
+**Prerequisites:** Ensure that your workout list is populated with at least one
+workout before a new plan can be created as plans contains workout(s).
+See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+| Test Cases         | Command                                | Expected result                                                                                                              |
+|:-------------------|:---------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------|
+| Valid plan created | `plan /new first plan /workouts 1,1,1` | A new plan called "first plan" will be created. This plan contains 3 instances of workout with index 1 in the workout list.  |
+
+##### Negative Test Cases
+
 3. Other incorrect commands to try:<br/>
    a. `plan /new` (Missing plan name and workouts) <br/>
    b. `plan /new [plan name]` (Missing workouts)<br/>
