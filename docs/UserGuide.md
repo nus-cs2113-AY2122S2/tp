@@ -51,7 +51,13 @@ Search for items based on at least one of the following:
 1. Name
 2. Description
 
-`search` will return nothing if given an argument with no value, e.g. `search d/`
+Returns a list of items that contains the search terms. (case-insensitive)
+
+Arguments with no corresponding value will be ignored.
+
+e.g. `search d/`, `search n/ d/`, `search n/` are all considered invalid.
+
+e.g. `search n/Orange d/` will only search items with `name:Orange`. It will not search through descriptions.
 
 Format: 
 `search [n/NAME] d/DESCRIPTION`
@@ -60,25 +66,24 @@ Format:
 Examples of usage:
 
 ```
-> search d/Draw
+> search d/ Draw
 Here are the items matching your search terms: 
-1. Markers | 3
-2. Whiteboard | 1
-3. Chalkboard | 1
+1. Chalkboard | 1 | Draw using cha...
+2. Whiteboard | 1 | Draw using mar...
+3. Markers | 1 | To draw
 ```
 
 ```
-> search n/board
+> search d/ Draw
 Here are the items matching your search terms: 
-1. Whiteboard | 1
-2. Chalkboard | 1
-Enter command: 
+1. Chalkboard | 1 | Draw using cha...
+2. Whiteboard | 1 | Draw using mar...
 ```
 
 ```
 > search d/chalk n/board
 Here are the items matching your search terms: 
-1. Chalkboard | 1
+1. Chalkboard | 1 | Draw using cha...
 ```
 
 ### List All Items: `list`
@@ -323,9 +328,18 @@ The arguments:
 3. Description `d/` - changes the description of an item.
 4. Addressing mode `r/ +|-` (used only with quantity argument) - the Item's quantity will be added or subtracted from the specified quantity. Takes only two values.
 
-Format:
+Arguments with no corresponding value will be ignored.
+
+e.g. `edit 1 n/`, `edit n/ q/`, `edit n/ q/ d/`, etc. are all considered invalid.
+
+e.g. `edit 1 n/Orange q/` will only edit the first item to have `name:Orange`. Its quantity is not affected.
+
+**Format:**
+
 `edit INDEX n/NAME [q/QUANTITY [r/ +|-]] [d/DESCRIPTION]`
+
 `edit INDEX [n/NAME] q/QUANTITY [r/ +|-] [d/DESCRIPTION]` 
+
 `edit INDEX [n/NAME] [q/QUANTITY [r/ +|-]] d/DESCRIPTION`
 
 Examples of usage:
@@ -338,21 +352,20 @@ Here are the items in your list:
 
 Enter command: 
 > edit 1 n/Pencils
-Item at index 0 has been modified.
-Before: Markers | 3
-After: Pencils | 3
+Item at index 1 has been modified.
+Before: Markers | 1 | To draw
+After: Pencils | 1 | To draw
 
 Enter command: 
 > edit 1 n/Markers q/5 r/ +
-Item at index 0 has been modified.
-Before: Pencils | 3
-After: Markers | 8
-Enter command: 
+Item at index 1 has been modified.
+Before: Pencils | 1 | To draw
+After: Markers | 6 | To draw
 
-> edit 1 n/Markers q/5 r/- d/To draw on whiteboard
-Item at index 0 has been modified.
-Before: Markers | 8
-After: Markers | 3
+> edit 1 q/5 r/- d/To draw on whiteboard
+Item at index 1 has been modified.
+Before: Markers | 6 | To draw
+After: Markers | 1 | To draw on whi...
 ```
 
 
