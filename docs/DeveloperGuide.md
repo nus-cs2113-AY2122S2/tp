@@ -1125,7 +1125,10 @@ Alright, the following plan has been created:
 ```
 **(Steps 6 to 7)** `FileManager#writeNewPlanToFile()` is called to write the newly-created `Plan` 
 object's data into `plans.txt`, which is stored on the user's local filesystem.
-<br><br>
+For more information on the file management,
+refer to this [section](DeveloperGuide.md#writing-a-new-line-of-data-to-the-resource-file).
+
+<br/><br/>
 This completes the process of creating and adding a new plan to WerkIt!.
 
 ##### Design Considerations for Creating a New Plan
@@ -1133,13 +1136,13 @@ This completes the process of creating and adding a new plan to WerkIt!.
 The following table lists the validity checks done before a new plan can be inserted into the application's plan list,
 as well as the rationale of each check:
 
-|       Type of Validity Checks       |                                                                                                                                                   Reason for Creating the Validity Checks                                                                                                                                                    |
-|:-----------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|          Unique plan name           |                                                                                                       All plan names within the application should be <br/> unique as it makes no sense for users to create plans with the same names.                                                                                                       |
-|     No plans called "rest day"      |                                         "rest day" is used to identify the days in the <br/> schedule that do not have a plan assigned to it. <br/> If a plan called "rest day" is allowed, users might not be able to <br/> differentiate a rest day from days that they actually need to work out.                                         |
-|    Character limit for plan name    |                                                                                                           Currently, the maximum character limit set for all plan names is 30 characters. <br/> This is for UI printing purposes.                                                                                                            |
-|     Maximum number of workouts      |                                      Currently, a plan only supports a maximum of 10 workouts as it makes no sense for <br/> a plan to have many different workouts in the real-life context. <br/> In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                      |
-| Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. <br/> This check is done as it makes no sense to create two plans with different plan names, but same workout orders. |
+| Type of Validity Checks             | Reason for Creating the Validity Checks                                                                                                                                                                                                                                                                                                     |
+|:------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Unique plan name                    | All plan names within the application should be unique as it makes no sense for users to create plans with the same names.                                                                                                                                                                                                                  |
+| No plans called "rest day"          | "rest day" is used to identify the days in the schedule that do not have a plan assigned to it. If a plan called "rest day" is allowed, users might not be able to differentiate a rest day from days that they actually need to work out.                                                                                                  |
+| Character limit for plan name       | Currently, the maximum character limit set for all plan names is 30 characters. This is for UI printing purposes.                                                                                                                                                                                                                           |
+| Maximum number of workouts          | Currently, a plan only supports a maximum of 10 workouts as it makes no sense for a plan to have many different workouts in the real-life context. In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                                                                      |
+| Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. This check is done as it makes no sense to create two plans with different plan names, but same workout orders.      |
 
 
 <br><br>
