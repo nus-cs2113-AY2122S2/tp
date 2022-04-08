@@ -34,7 +34,7 @@ public class EquipmentManagerTest {
                 2000,
                 "Louder Technologies",
                 LocalDate.parse("2022-03-17"));
-        assertEquals(expectedEquipment, equipments.get("S1404115ASF"));
+        assertEquals(expectedEquipment, equipments.get("S1404115ASF".toLowerCase()));
     }
 
     @Test

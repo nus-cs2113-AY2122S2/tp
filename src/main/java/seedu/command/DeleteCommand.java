@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
 
         try {
             serialNumber = prepareDelete();
-            equipmentName = equipmentManager.getEquipmentList().get(serialNumber).getItemName();
+            equipmentName = equipmentManager.getEquipmentList().get(serialNumber.toLowerCase()).getItemName();
         } catch (NullPointerException e) {
             return new CommandResult(INVALID_SERIAL_NUMBER);
         } catch (AssertionError e) {
