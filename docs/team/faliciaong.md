@@ -68,7 +68,6 @@ Given below are my contribution to the projects:
 
 
 * __Contribution to UG__:
-    * Did up a simple logo for the application.
     * Suggested the use of Links/Content Page.
     * Write-up for
         * add housekeeper,
