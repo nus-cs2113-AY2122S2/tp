@@ -28,17 +28,17 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 
 ### Introduction
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user. Spaces are acceptable. <br>
-  e.g. in `check n/ITEM_NAME`, `ITEM_NAME` is a parameter which can be used as `check n/SM-57`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. Spaces are acceptable. However, the parameter must be enclosed in backtick.<br>
+  e.g. in ``check n/`ITEM_NAME` ``, `ITEM_NAME` is a parameter which can be used as ``check n/`SM-57` ``.
 
 * Items in square brackets are optional. <br>
-  e.g. `s/SERIAL_NUMBER [n/ITEM_NAME] [t/TYPE] ...` can be used as `s/SM57-1 n/SM57 t/MICROPHONE...` or as `s/SM57-1 t/MICROPHONE...`.
+  e.g. ``s/`SERIAL_NUMBER` [n/`ITEM_NAME`] [t/`TYPE`] ...`` can be used as ``s/`SM57-1` n/`SM57` t/`MICROPHONE`...`` or as ``s/`SM57-1` t/`MICROPHONE`...``.
 
 * After the command word (e.g. `add`, `update`), parameters can be in any order.<br>
-  e.g. if the command specifies `... s/SERIAL_NUMBER n/ITEM_NAME...`, `n/ITEM_NAME s/SERIAL_NUMBER` is also acceptable.
+  e.g. if the command specifies ``... s/`SERIAL_NUMBER` n/`ITEM_NAME`...``, ``n/`ITEM_NAME` s/`SERIAL_NUMBER` `` is also acceptable.
 
 * Only one attribute/value can be saved per parameter. Where multiple inputs are supplied, the last parameter will be taken instead of the first one. <br>
-  e.g. `... n/ITEM_NAME_1 n/ITEM_NAME_2` will be interpreted as `... n/ITEM_NAME_2`, omitting `n/ITEM_NAME_1` entirely.
+  e.g. ``... n/`ITEM_NAME_1` n/`ITEM_NAME_2` `` will be interpreted as ``... n/`ITEM_NAME_2` ``, omitting ``n/`ITEM_NAME_1` `` entirely.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `bye` and `save`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -57,53 +57,61 @@ Example of usage and output:
 
 ``add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
 
-output: `Equipment successfully added: SpeakerB, serial number S1404115ASF`
+Output:
+
+```
+Equipment successfully added: SpeakerB, serial number S1404115ASF
+```
 
 ### Checking an equipment: `check`
-Check the details of the equipment that has the name specified.
+Check the details of the equipments that matches the specified parameter.
 
-Format: ``check n/`ITEM_NAME` ``
+Format: ``check parameter/`PARAMETER_VALUE` ``
 
-* Only the `ITEM_NAME` can be used to check for a piece of equipment.
+e.g. ``check n/`ITEM_NAME` `` or ``check s/`SERIAL_NUMBER` `` or ``check t/`TYPE` ``
+
+* Only one parameter can be used to check for a piece of equipment.
 
 Example of usage and output:
 
 ``check n/`SpeakerB` ``
 
-output: 
+Output: 
 
-`Here are the equipment matching to 'SpeakerB':`
-
-`1. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23`
+```
+Here are the equipment matching to 'SpeakerB':
+1. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23
+```
 
 ### Listing equipment: `list`
 Print a list of all equipment in the inventory. If a parameter is supplied, only the equipment matching to the parameter will be printed.
 
-Format: `list [PARAMETER_NAME]`
+Format: ``list [t/`TYPE`]``
 
-* `PARAMETER_NAME` can only take on values of `SPEAKER`, `MICROPHONE`, `STAND`, `CABLE`.
+* `TYPE` can only take on values of `SPEAKER`, `MICROPHONE`, `STAND`, `CABLE`.
 
 Example of usage and output:
 
 `list`
 
-output:
+Output:
 
-`TOTAL QUANTITY OF EQUIPMENT: 2`
-
-`1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21`
-
-`2. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23`
+```
+TOTAL QUANTITY OF EQUIPMENT: 2
+1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21
+2. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23
+```
 
 Example of usage and output:
 
-`list microphone`
+``list t/`MICROPHONE` ``
 
-output:
+Output:
 
-`TOTAL QUANTITY OF EQUIPMENT: 1`
-
-`1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21`
+```
+TOTAL QUANTITY OF EQUIPMENT: 1
+1. serialNumber=S89347971ASF,itemName=MicrophoneC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21
+```
 
 ### Updating an equipment: `update`
 
@@ -118,12 +126,14 @@ Example of usage and output:
 
 ``update s/`S14115ASF` c/`1200` pf/`AVLFX` ``
 
-output: 
+Output: 
 
-`Equipment successfully updated for serial number S14115ASF,`<br>
-`Updated details are:`<br>
-`New cost: 1200.0`<br>
-`New purchased from: AVLFX`<br>
+```
+Equipment successfully updated for serial number S14115ASF,
+Updated details are:
+New cost: 1200.0
+New purchased from: AVLFX
+```
 
 ### Deleting an equipment: `delete`
 
@@ -135,9 +145,11 @@ Example of usage and output:
 
 ``delete s/`S14115ASF` ``
 
-output:
+Output:
 
-`Equipment successfully deleted: SpeakerB, serial number S14115ASF`
+```
+Equipment successfully deleted: SpeakerB, serial number S14115ASF
+```
 
 ### Saving application state: `save`
 
@@ -151,7 +163,9 @@ Example of usage and output:
 
 Output:
 
-`Successfully saved.`
+```
+Successfully saved.
+```
 
 ### Getting help: `help`
 
@@ -165,42 +179,44 @@ Example of usage and output:
 
 Output:
 
-`add: Adds a Equipment to the equipmentInventory.`<br>
-``Parameters: n/`ITEM NAME` s/`SERIAL NUMBER` t/`TYPE` c/`COST` pf/`PURCHASED FROM` pd/`PURCHASED DATE` ``<br>
-``Example: add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``<br>
+```
+add: Adds a Equipment to the equipmentInventory.
+Parameters: n/`ITEM NAME` s/`SERIAL NUMBER` t/`TYPE` c/`COST` pf/`PURCHASED FROM` pd/`PURCHASED DATE`
+Example: add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23`
 
-`delete: Deletes the equipment with the specified serial number.`<br>
-``Parameters: s/`SERIAL_NUMBER` ``<br>
-``Example: delete s/`SM57-1` ``<br>
+delete: Deletes the equipment with the specified serial number.
+Parameters: s/`SERIAL_NUMBER`
+Example: delete s/`SM57-1`
 
-`update: Updates the equipment with the specified serial number.`<br>
-`Parameters in [square brackets] are optional.`<br>
-``Parameters: s/`SERIAL NUMBER` [n/`ITEM NAME`] [t/`TYPE`] [c/`COST`] [pf/`PURCHASED FROM`] [pd/`PURCHASED DATE`]``<br>
-``Example: update s/`SM57-1` n/`SpeakerC` c/`2510` pd/`2022-08-21` ``<br>
+update: Updates the equipment with the specified serial number.
+Parameters in [square brackets] are optional.
+Parameters: s/`SERIAL NUMBER` [n/`ITEM NAME`] [t/`TYPE`] [c/`COST`] [pf/`PURCHASED FROM`] [pd/`PURCHASED DATE`]
+Example: update s/`SM57-1` n/`SpeakerC` c/`2510` pd/`2022-08-21`
 
-`list: Prints a list of all equipment in the inventory.`<br>
-`Parameters: NIL`<br>
-`Example: list`<br>
+list: Prints a list of all equipment in the inventory.
+Parameters: NIL
+Example: list
 
-`list: Prints a list of all equipment in the inventory of the specified type.`<br>
-``Parameters: `Type` ``<br>
-`Example: list MICROPHONE`<br>
+list: Prints a list of all equipment in the inventory of the specified type.
+Parameters: `TYPE`
+Example: list t/`MICROPHONE`
 
-`check: Gives details of the equipment with the specified name.`<br>
-``Parameters: n/`ITEM_NAME` ``<br>
-``Example: check n/`MixerC` ``<br>
+check: Check the details of the equipments that matches the specified parameter.
+Parameters: parameter/`PARAMETER_VALUE`
+Example: check n/`MixerC` or check s/`SM57-1` or check t/`MICROPHONE`
 
-`save: Saves current state of application.`<br>
-`Parameters: NIL`<br>
-`Example: save`<br>
+save: Saves current state of application.
+Parameters: NIL
+Example: save
 
-`bye: Exits the application.`<br>
-`Parameters: NIL`<br>
-`Example: bye`<br>
+bye: Exits the application.
+Parameters: NIL
+Example: bye
 
-`help: Shows details of available commands to users.`<br>
-`Parameters: NIL`<br>
-`Example: help`<br>
+help: Shows details of available commands to users.
+Parameters: NIL
+Example: help
+```
 
 ### Exiting the application: `bye`
 
@@ -214,7 +230,9 @@ Example of usage and output:
 
 Output:
 
-`Bye, See you again!`
+```
+Bye, See you again!
+```
 
 ## FAQ
 

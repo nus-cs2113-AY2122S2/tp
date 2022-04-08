@@ -20,9 +20,9 @@ public class ListCommand extends Command {
     public static final String COMMAND_DESCRIPTION_WITH_TYPE =
             ": Prints a list of all equipment in the inventory of the specified type. "
             + System.lineSeparator()
-            + "Parameters: `Type`" + System.lineSeparator()
+            + "Parameters: `TYPE`" + System.lineSeparator()
             + "Example: "
-            + "list MICROPHONE";
+            + "list t/`MICROPHONE`";
 
     /**
      * constructor for ListCommand with NO specified type. Initialises successMessage and usageReminder from Command
