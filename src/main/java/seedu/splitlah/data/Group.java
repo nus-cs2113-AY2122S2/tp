@@ -36,38 +36,18 @@ public class Group implements Serializable {
         this.personList = personList;
     }
 
-    /**
-     * Returns the group's name.
-     *
-     * @return A String object containing the name of the group.
-     */
     public String getGroupName() {
         return groupName;
     }
 
-    /**
-     * Updates the name of this Group object to the specified name.
-     *
-     * @param groupName A String object representing the updated name of the group.
-     */
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
 
-    /**
-     * Returns the group's unique identifier.
-     *
-     * @return An integer representing the group's identifier.
-     */
     public int getGroupId() {
         return groupId;
     }
 
-    /**
-     * Returns an ArrayList object containing Person objects representing the participants in the group.
-     *
-     * @return An ArrayList object containing Person objects in the group.
-     */
     public ArrayList<Person> getPersonList() {
         return personList.getPersonList();
     }
