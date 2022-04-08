@@ -10,10 +10,11 @@ import seedu.duke.helper.finder.AppointmentFinder;
 import seedu.duke.helper.finder.DoctorFinder;
 import seedu.duke.helper.finder.PatientFinder;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AppointmentList extends List {
-    private ArrayList<Appointment> appointments = new ArrayList<>();
+    protected ArrayList<Appointment> appointments = new ArrayList<>();
     private ArrayList<Appointment> returnedFinderArray = new ArrayList<>();
     private PatientList referencePatientList;
     private DoctorList referenceDoctorList;
@@ -202,6 +203,57 @@ public class AppointmentList extends List {
                         returnedFinderArray.get(i).getAppointmentDetails());
             }
             findAppointmentTable.print();
+        }
+    }
+
+    public boolean hasAppointmentToday(String type, String nric) throws NotFoundException, HalpmiException {
+        ArrayList<Appointment> foundAppointments;
+        switch (type) {
+        case "P":
+            foundAppointments = AppointmentFinder.findAppointmentByPatientNric(appointments,nric);
+            for (Appointment a : foundAppointments) {
+                LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
+                if (appointmentDate.equals(LocalDate.now())) {
+                    return true;
+                }
+            }
+            throw new NotFoundException("Patient does not have an appointment today!");
+        case "D":
+            foundAppointments = AppointmentFinder.findAppointmentByDoctorNric(appointments, nric);
+            for (Appointment a : foundAppointments) {
+                LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
+                if (appointmentDate.equals(LocalDate.now())) {
+                    return true;
+                }
+            }
+            throw new NotFoundException("Doctor does not have an appointment today!");
+        default:
+            assert false;
+            throw new HalpmiException("Error with code, approach developer!");
+        }
+    }
+
+    public void dispenseMedicine(String patientNric, String[] medicines) {
+        for (Appointment a : appointments) {
+            LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
+            if (appointmentDate.equals(LocalDate.now()) && a.patientNric.equals(patientNric)) {
+                for (int i = 0; i < medicines.length; i += 2) {
+                    a.addMedicine(medicines[i], medicines[i + 1]);
+                }
+                break;
+            }
+        }
+    }
+
+    public void loadMedicine(String[] parameters) {
+        String appointmentId = parameters[0];
+        for (Appointment a : appointments) {
+            if (a.appointmentId.equals(appointmentId)) {
+                for (int i = 1; i < parameters.length; i += 2) {
+                    a.addMedicine(parameters[i], parameters[i + 1]);
+                }
+                break;
+            }
         }
     }
 }
