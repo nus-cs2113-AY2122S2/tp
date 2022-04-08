@@ -644,7 +644,21 @@ they engage in during the outings.
 | v2.0    | User with a lot of friends | list groups                          | view all groups previously created                                                 |
 
 ## Non-Functional Requirements
-1. The application should be able to work in any operating systems with `Java 11` installed.
+1. The application should be able to work on any operating systems with `Java 11` installed.
+2. The application should be responsive.
+3. The application should be usable by a novice who may not be well versed with a Command Line Interface (CLI).
+4. Ths application should be usable by a novice who has never used an application to split bills.
 
 ## Glossary
-
+| Terms    | Definition                                                                                                                                                                                                                                                                                                  |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Manager  | A Manager manages and stores 3 different objects, namely the `Profile`, `TextUI` and `Storage` objects.                                                                                                                                                                                                     |
+| Profile  | A Profile is responsible for all data management and accesses within the lifetime of the application. It serves as a container and holds a list of all `Session` and `Group` objects and keeps track of the unique identifiers to be issued upon the creation of `Session`, `Activity` and `Group` objects. |
+| TextUi   | A TextUi is an user interface that the user sees on the CLI.                                                                                                                                                                                                                                                |
+| Storage  | A Storage is in charge of saving and reading to and from the save file respectively.                                                                                                                                                                                                                        |
+| Parser   | A Parser is responsible for making sense of the user inputs and processing them as commands for the application to run.                                                                                                                                                                                     |
+| Command  | A Command is an object that performs a task that corresponds to the user input.                                                                                                                                                                                                                             |
+| Session  | A session represents a group outing that involves a list of participants and spans an arbitrary period of time containing one or more activities.                                                                                                                                                           |
+| Activity | An activity represents a single group activity and stores its name, costs and the name of the payer.                                                                                                                                                                                                        |
+| Group    | A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals without having to manually enter their details one by one when creating a session.                                                                                                    |
+| API      | An Application Programming Interface (API) specifies the interface through which other programs can interact with a software component.                                                                                                                                                                     |
