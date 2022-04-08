@@ -1,5 +1,8 @@
 package seedu.duke.storage;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
@@ -9,9 +12,6 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
-
-import java.io.File;
-import java.util.ArrayList;
 
 import static seedu.duke.util.NumberConstants.MAXIMUM_MODULAR_CREDITS;
 import static seedu.duke.util.NumberConstants.MINIMUM_MODULAR_CREDITS;
