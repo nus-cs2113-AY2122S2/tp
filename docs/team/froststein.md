@@ -29,7 +29,8 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
   * This is done by using the `Serializable` class in `java`.
 
 #### Enhancements to existing features:
-* Implemented a wrapper class for storing a list of Person objects.
+* [PersonList](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/PersonList.java)
+  * Implemented a wrapper class for storing a list of Person objects.
 * Added `Junit` Testing for `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand` and `Profile`.
   * Ensure each Junit Test achieved at least 90% coverage.
 
