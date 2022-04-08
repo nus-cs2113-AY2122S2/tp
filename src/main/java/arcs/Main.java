@@ -10,6 +10,7 @@ import arcs.parser.Parser;
 import arcs.storage.CustomerFileManager;
 import arcs.storage.FlightBookingFileManager;
 import arcs.storage.RouteFileManager;
+import arcs.storage.StaffFileManager;
 import arcs.commands.Command;
 import arcs.ui.MainUi;
 
@@ -27,6 +28,7 @@ public class Main {
     private CustomerManager customerManager;
     private CustomerFileManager customerFileManager;
     private StaffManager staffManager;
+    private StaffFileManager staffFileManager;
     /**
      * Parser object.
      */
@@ -46,6 +48,7 @@ public class Main {
         routeFileManager = new RouteFileManager();
         customerFileManager = new CustomerFileManager();
         flightBookingFileManager = new FlightBookingFileManager();
+        staffFileManager = new StaffFileManager();
         loadData();
     }
 
@@ -75,11 +78,13 @@ public class Main {
             menuItemManager = new MenuItemManager();
             customerManager = new CustomerManager(customerFileManager.loadData());
             flightBookingManager = new FlightBookingManager(flightBookingFileManager.loadData());
+            staffManager = new StaffManager(staffFileManager.loadData());
         } catch (IOException e) {
             mainUi.displayMessages(e.getMessage());
             routeManager = new RouteManager();
             customerManager = new CustomerManager();
             flightBookingManager = new FlightBookingManager();
+            staffManager = new StaffManager();
         }
     }
 
@@ -88,6 +93,7 @@ public class Main {
             routeFileManager.saveData(routeManager.getAllRoutes());
             customerFileManager.saveData(customerManager.getAllCustomers());
             flightBookingFileManager.saveData(flightBookingManager.getAllFlightBookings());
+            staffFileManager.saveData(staffManager.getAllStaffs());
         } catch (IOException e) {
             mainUi.displayMessages(e.getMessage());
         }
