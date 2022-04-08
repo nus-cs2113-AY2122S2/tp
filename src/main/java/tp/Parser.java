@@ -69,7 +69,7 @@ public class Parser {
         String phoneNumber = dummy.substring(phoneNumberIndex + 4, emailIndex).trim();
         int wardNumberIndex = dummy.indexOf("/w");
         String email = dummy.substring(emailIndex + 3, wardNumberIndex).trim();
-        String wardNumber = dummy.substring(wardNumberIndex + 3).trim();
+        int wardNumber = Integer.parseInt(dummy.substring(wardNumberIndex + 3).trim());
         return new AddDoctorCommand(id, name, phoneNumber, email, wardNumber, false);
     }
 
@@ -102,7 +102,7 @@ public class Parser {
         String email = dummy.substring(emailIndex + 3,titleIndex).trim();
         int wardNumberIndex = dummy.indexOf("/w");
         String title = dummy.substring(titleIndex + 3, wardNumberIndex).trim();
-        String wardNumber = dummy.substring(wardNumberIndex + 3).trim();
+        int wardNumber = Integer.parseInt(dummy.substring(wardNumberIndex + 3).trim());
         return new AddNurseCommand(id, name, phoneNumber, email, title, wardNumber, false);
     }
     //@@author Demonshaha
@@ -310,7 +310,7 @@ public class Parser {
             return new SearchNurseCommand(index);
         } else if (fullCommand.contains("ward")) {
             String dummy = fullCommand.trim();
-            String index = dummy.substring(dummy.indexOf("ward ") + 5);
+            int index = Integer.parseInt(dummy.substring(dummy.indexOf("ward ") + 5));
             return new SearchWardCommand(index);
         } else {
             throw new IHospitalException("Invalid search command.\n");
@@ -417,7 +417,7 @@ public class Parser {
         int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /w") + 8,
                 dummy.indexOf("edit /w") + 9));
         if (fullCommand.contains("/id")) {
-            String newInformation = dummy.substring(dummy.indexOf("/id") + 4);
+            int newInformation = Integer.parseInt(dummy.substring(dummy.indexOf("/id") + 4));
             return new EditWardCommand(index, "id", newInformation);
         } else {
             throw new IHospitalException("Wrong format detected\n");

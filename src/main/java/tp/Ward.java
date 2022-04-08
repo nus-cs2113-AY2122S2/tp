@@ -8,11 +8,11 @@ public class Ward {
     protected Doctor doctor;
     protected Patient patient;
     protected Nurse nurse;
-    protected String wardNumber;
+    protected int wardNumber;
 
 
 
-    public Ward(Doctor doctor, Patient patient, Nurse nurse, String wardNumber) {
+    public Ward(Doctor doctor, Patient patient, Nurse nurse, int wardNumber) {
         this.doctor = doctor;
         this.patient = patient;
         this.nurse = nurse;
@@ -43,11 +43,11 @@ public class Ward {
         this.nurse = nurse;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return wardNumber;
     }
 
-    public void editNumber(String number) {
+    public void editNumber(int number) {
         this.wardNumber = number;
     }
 

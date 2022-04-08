@@ -27,7 +27,7 @@ public class WardList {
      * @param patient Patient coming for this ward.
      * @param nurse Nurse assigned for this ward.
      */
-    public void addWard(Doctor doctor, Patient patient, Nurse nurse, String number) {
+    public void addWard(Doctor doctor, Patient patient, Nurse nurse, int number) {
         wards.add(new Ward(doctor, patient, nurse, number));
         countWard++;
     }
@@ -65,9 +65,9 @@ public class WardList {
     }
 
 
-    public Ward searchWard(String num) {
+    public Ward searchWard(int num) {
         for (int i = 0; i < wards.size(); i++) {
-            if (wards.get(i).getNumber().equals(num)) {
+            if (wards.get(i).getNumber() == num) {
                 return wards.get(i);
             }
         }

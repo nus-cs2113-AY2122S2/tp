@@ -15,9 +15,9 @@ import tp.WardStorage;
 import tp.Ward;
 
 public class SearchWardCommand extends Command {
-    protected String id;
+    protected int id;
 
-    public SearchWardCommand(String id) {
+    public SearchWardCommand(int id) {
         this.id = id;
     }
 

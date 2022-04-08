@@ -16,9 +16,9 @@ import tp.WardStorage;
 public class EditWardCommand extends Command {
     private int index;
     private String type;
-    private String newInformation;
+    private int newInformation;
 
-    public EditWardCommand(int index, String type, String newInformation) {
+    public EditWardCommand(int index, String type, int newInformation) {
         this.index = index;
         this.type = type;
         this.newInformation = newInformation;
