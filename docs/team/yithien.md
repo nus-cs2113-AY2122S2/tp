@@ -14,10 +14,10 @@ Given below are my contributions to the project.
 
 - **New Feature:** Added the Expense Tracker module for AlloNUS
     - What it does:
-        - allows the user to better track their expenses by adding expense records to a list.
+        - Allows the user to better track their expenses by adding expense records to a list.
           Each record details the Date, Amount, Category and Remarks of the expense, allowing users to look back
           at how much they have spent over time.
-        - allows users to manage said list by giving options to delete, edit and look for records containing
+        - Allows users to manage said list by giving options to delete, edit and look for records containing
           specified keywords.
     - Justification:
         - The features above allows user to keep track of their expenses in a systematic way without the need of
@@ -43,9 +43,13 @@ Given below are my contributions to the project.
           [#69](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/69)
         - Added Sequence Diagrams and implementation details of Expense Tracker module
           [#132](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/132)
+        - Added Instructions for Manual Testing for Expense Manager component
+          [#145](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/145)
+      
 - **Project Management:**
     - Suggested bug fix for issues raised during PE-D as similar bug found in other modules
       [#130](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/130)
+    - Suggested bug fix for delimiter issues post PE-D adjustments
 - **Community:**
     - PRs reviewed: [#56](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/56),
       [#64](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/64),

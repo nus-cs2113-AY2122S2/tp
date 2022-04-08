@@ -273,8 +273,8 @@ public class ExpenseTracker {
                 break;
             case ("done"):
                 if (!fieldToEdit.equals("done")) {
-                TextUi.showToUser(MSG_ONLY_DONE);
-            }
+                    TextUi.showToUser(MSG_ONLY_DONE);
+                }
                 return isEdited;
             default:
                 TextUi.showToUser(MSG_INVALID_EDIT_FIELD);
