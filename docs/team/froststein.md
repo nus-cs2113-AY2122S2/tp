@@ -23,6 +23,7 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 * [Session List](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
   * Allows users to view all previously created sessions.
 * [Manager](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Manager.java)
+  * Contains an instance of `Profile`, `Storage` and `TextUI` to support commands within SplitLah.
 * [Profile](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Profile.java)
   * The `Profile` class serves as a container and holds a list of all `Session` and `Group` objects created by the user.
   * It also keeps track of and issues new _unique identifiers_ for the creation of `Session`, `Activity` and `Group` objects.
