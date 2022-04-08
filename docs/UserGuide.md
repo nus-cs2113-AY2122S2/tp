@@ -1,6 +1,6 @@
 # User Guide
 
-## Introduction
+## Overview
 
 EquipmentManager is a Command Line Interface application to help with keeping track of equipment details (e.g. current user, quantity, cost, warranty duration, purchase date) for an AV club. It provides a clean and fast way to manage the inventory as compared to “traditional” methods such as an Excel spreadsheet.
 
@@ -15,7 +15,7 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 
 ## Features 
 
-- [Introduction](#Introduction)
+- [Introduction](#introduction)
 - [Adding an equipment: `add`](#adding-an-equipment-add)
 - [Checking an equipment: `check`](#checking-an-equipment-check)
 - [Listing equipment: `list`](#listing-equipment-list)
