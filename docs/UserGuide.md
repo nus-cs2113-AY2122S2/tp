@@ -64,7 +64,7 @@ Example of usage:
 
 
 ### Sorting appointment list: 'sort'
-Sorts existing appointments in the system (but does not print out).
+Sorts existing appointments in the system (but does not print out) according to time (most recent to least recent).
 
 Format: `sort appointment`
 

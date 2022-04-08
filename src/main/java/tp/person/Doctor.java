@@ -6,7 +6,7 @@ public class Doctor extends tp.person.Person {
     protected String department;
     protected int wardNumber;
 
-    public Doctor(String id, String name, String phoneNumber, String email,String department, int wardNumber) {
+    public Doctor(String id, String name, String phoneNumber, String email, String department, int wardNumber) {
         super(id, name, phoneNumber, email);
         isOnDuty = false;
         assignedWard = true;

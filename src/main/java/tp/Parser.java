@@ -182,6 +182,8 @@ public class Parser {
             return parseAddPatientDescription(fullCommand);
         } else if (fullCommand.contains("add ward")) {
             return parseAddWard(fullCommand);
+        } else {
+            throw new IHospitalException("Invalid add command.\n");
         }
         return null;
     }
@@ -231,14 +233,11 @@ public class Parser {
                 System.out.println(e);
             }
         } else if (fullCommand.contains("delete appointment")) {
-            try {
-                return parseDeleteAppointment(fullCommand);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+            String dummy = fullCommand.trim();
+            int index = Integer.parseInt(dummy.substring(dummy.indexOf("appointment") + 12).trim());
+            return new DeleteAppointmentCommand(index);
         } else {
-            throw new IHospitalException("Please enter whether you want to delete a doctor, "
-                    + "patient, nurse or appointment");
+            throw new IHospitalException("Invalid delete command.\n");
         }
         return null;
     }
@@ -256,8 +255,9 @@ public class Parser {
             String dummy = fullCommand.trim();
             String time = dummy.substring(dummy.indexOf("appointment ") + 12).trim();
             return new SearchAppointmentCommand(time);
+        } else {
+            throw new IHospitalException("Invalid search command.\n");
         }
-        return null;
     }
 
     public Command parseListCommand(String fullCommand) throws IHospitalException {
@@ -267,8 +267,9 @@ public class Parser {
             return new ListAppointmentListCommand();
         } else if (fullCommand.contains("list patient")) {
             return new ListPatientListCommand();
+        } else {
+            throw new IHospitalException("Invalid list command.\n");
         }
-        return null;
     }
 
     public Command parseEditDoctorCommand(String fullCommand) throws IHospitalException {
@@ -352,3 +353,5 @@ public class Parser {
         }
     }
 }
+
+
