@@ -343,6 +343,7 @@ public class StringConstants {
     /**
      * General strings.
      */
+    public static final String EMPTY_STRING = "";
     public static final String INDENT = "    ";
     public static final String SPACE = " ";
     public static final String LS = System.lineSeparator();

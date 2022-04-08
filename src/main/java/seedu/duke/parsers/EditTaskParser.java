@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 /**
- * This Parser supports the "edit" command.
+ * This Parser supports the "edit task" command.
  */
 public class EditTaskParser extends EditParser {
 
@@ -28,6 +28,7 @@ public class EditTaskParser extends EditParser {
     private static final String TASK_ESTIMATED_WORKING_TIME_STR = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
+    private static final String EMPTY_STRING = StringConstants.EMPTY_STRING;
     private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
@@ -82,11 +83,23 @@ public class EditTaskParser extends EditParser {
     }
 
     /**
-     * Determines the error that the user made in its command.
-     * @throws ModHappyException based on the type of error made.
+     * Determines the error that the user made in the edit task command based of the compulsory parameters.
+     * It will first check if the task number is present and if it is in a positive integer format.
+     * Then it will check if there is a correct task parameter present and if the task parameter has the correct flag,
+     * and it is wrapped in double quotes.
+     * Lastly, if the task number and task parameters have no errors, there should be errors in the module code field.
+     * The module code will be checked if it is empty or if it is invalid.
+     * @throws MissingNumberException if the task number is missing
+     * @throws InvalidNumberException if the task number is not in a positive integer format
+     * @throws MissingCompulsoryParameterException if the task parameter is missing
+     * @throws InvalidCompulsoryParameterException if the task parameter is not wrapped with double quotes
+     * @throws EmptyParamException if the module code inputted is empty
+     * @throws InvalidFlagException if the flag for the task parameter is incorrect
      */
     @Override
-    public void determineError() throws ModHappyException {
+    public void determineError() throws MissingNumberException, InvalidNumberException,
+            MissingCompulsoryParameterException, InvalidCompulsoryParameterException,
+            EmptyParamException, InvalidFlagException {
         String taskNumber;
         String taskParameter;
         try {
@@ -106,31 +119,59 @@ public class EditTaskParser extends EditParser {
         if (!taskParameter.matches(QUOTED_UNRESTRICTED_STR)) {
             throw new InvalidCompulsoryParameterException(TASK_PARAMETER_STR, taskParameter);
         }
+        userInput = userInput.replaceFirst(TASK, EMPTY_STRING);
+        userInput = userInput.replaceFirst(taskNumber, EMPTY_STRING);
+        userInput = userInput.split(TASK_PARAMETERS_FLAGS)[ZEROTH_INDEX];
         determineErrorInModuleCode();
     }
 
+    /**
+     * Determines the error in the module code.
+     * It will check if the module code is empty, otherwise the module code is not made up of only word characters.
+     * @throws EmptyParamException if the module code supplied is empty
+     * @throws InvalidCompulsoryParameterException if module code is not made up of only word characters
+     *                                             or if there is invalid input in where the field should be
+     */
     private void determineErrorInModuleCode() throws EmptyParamException, InvalidCompulsoryParameterException {
         String moduleCode;
-        assert (userInput.contains(TASK_MODULE_FLAG));
-        moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
-        if (moduleCode.matches(ANY_FLAG_NO_WHITESPACE)) {
-            throw new EmptyParamException(MODULE_CODE_STR);
+        try {
+            moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX];
+        } catch (IndexOutOfBoundsException e) {
+            if (userInput.contains(TASK_MODULE_FLAG.trim())) {
+                throw new EmptyParamException(MODULE_CODE_STR);
+            }
+            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, userInput.trim());
         }
+
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
 
+    /**
+     * Gets the incorrect flag.
+     * @return the first incorrect flag, not including the module flag if it is present
+     */
     private String getParameterFlag() {
         String parameterFlag = null;
+        boolean hasModuleFlag = userInput.contains(TASK_MODULE_FLAG);
         String [] arguments = userInput.split(SPACE);
         for (String argument : arguments) {
+            if (hasModuleFlag && argument.equals(TASK_MODULE_FLAG.trim())) {
+                hasModuleFlag = false;
+                continue;
+            }
             if (argument.matches(ANY_FLAG_NO_WHITESPACE)) {
                 parameterFlag = argument;
+                break;
             }
         }
         assert !Objects.isNull(parameterFlag);
         return parameterFlag;
     }
 
+    /**
+     * Determine the error in the prarameter if the parameter is wrapped in double quotes but with the wrong flag.
+     * @throws InvalidFlagException if the incorrect flag is used
+     */
     private void determineErrorInParameter() throws InvalidFlagException {
         if (userInput.matches(ANY_TEXT + ANY_FLAG + QUOTED_UNRESTRICTED_STR)) {
             String parameterFlag = getParameterFlag();
@@ -138,6 +179,13 @@ public class EditTaskParser extends EditParser {
         }
     }
 
+    /**
+     * Parses the task index from a string to an integer form.
+     * It will also check if the index is non-negative, throwing an exception if it is not.
+     * @param taskNumberString the string representation of the task number
+     * @return the zero-based index integer of the task number string
+     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
+     */
     private int parseIndex(String taskNumberString) throws InvalidNumberException {
         int taskIndex;
         try {

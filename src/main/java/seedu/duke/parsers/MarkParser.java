@@ -44,11 +44,17 @@ public class MarkParser extends Parser {
     }
 
     /**
-     * Determines the error that the user made in its command.
-     * @throws ModHappyException based on the type of error made.
+     * Determines the error made by the user in the mark command based on the compulsory parameters.
+     * It will first check if the flag is present and if it is either c or u.
+     * Then it will check if the task number is present and if it is in a positive integer format.
+     * @throws InvalidFlagException if the flag is missing, or not c nor u
+     * @throws MissingNumberException if the task number is missing
+     * @throws InvalidNumberException if the task number is not in a positive integer format
+     * @throws InvalidCompulsoryParameterException if the error is none of the above errors
      */
     @Override
-    public void determineError() throws ModHappyException {
+    public void determineError() throws InvalidFlagException, MissingNumberException,
+            InvalidNumberException, InvalidCompulsoryParameterException {
         String flag;
         String taskNumber;
         try {
@@ -70,6 +76,13 @@ public class MarkParser extends Parser {
         throw new InvalidCompulsoryParameterException();
     }
 
+    /**
+     * Parses the task index from a string to an integer form.
+     * It will also check if the index is non-negative, throwing an exception if it is not.
+     * @param taskNumberString the string representation of the task number
+     * @return the zero-based index integer of the task number string
+     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
+     */
     private int parseIndex(String taskNumberString) throws InvalidNumberException {
         int taskIndex;
         try {

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 /**
- * This Parser supports the "edit" command.
+ * This Parser supports the "edit mod" command.
  */
 public class EditModuleParser extends EditParser {
 
@@ -50,13 +50,19 @@ public class EditModuleParser extends EditParser {
     }
 
     /**
-     * Determines the error that the user made in its command.
-     * @throws ModHappyException based on the error that was made.
+     * Determines the error that the user made in its command based on the compulsory parameters.
+     * It will first check if the module code is present and if the module code is made up of word characters only.
+     * Then it will check if the module description is present and if the flag is correct and the module description is
+     * wrapped with double quotes.
+     * @throws MissingCompulsoryParameterException if either module code is missing or module description is missing
+     * @throws InvalidCompulsoryParameterException if either module code is not made up of all word characters or
+     *                                             if module description is wrapped with double quotes
+     * @throws InvalidFlagException if the flag used for the module description is incorrect
      */
     @Override
-    public void determineError() throws ModHappyException {
+    public void determineError() throws MissingCompulsoryParameterException,
+            InvalidCompulsoryParameterException, InvalidFlagException {
         String moduleCode;
-        String moduleDescription;
         try {
             moduleCode = userInput.split(SPACE)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -65,6 +71,7 @@ public class EditModuleParser extends EditParser {
         if (!moduleCode.matches(WORD_CHAR_ONLY)) {
             throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
+        String moduleDescription;
         try {
             moduleDescription = userInput.split(DESCRIPTION_FLAG)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -77,6 +84,14 @@ public class EditModuleParser extends EditParser {
         throw new InvalidCompulsoryParameterException();
     }
 
+    /**
+     * Determines the error in the module description.
+     * It will first check if there is a description / flag.
+     * Then it will check if the user input has a flag with its parameter wrapped in double quotes.
+     * If there is, it means that the user has inputted the wrong flag.
+     * @throws MissingCompulsoryParameterException if there is no description or flag
+     * @throws InvalidFlagException if the user input the wrong flag
+     */
     private void determineErrorInDescription() throws MissingCompulsoryParameterException, InvalidFlagException {
         String moduleFlag;
         try {

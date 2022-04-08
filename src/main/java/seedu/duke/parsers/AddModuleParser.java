@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 /**
- * This Parser supports the "add" command.
+ * This Parser supports the "add mod" command.
  */
 public class AddModuleParser extends AddParser {
     private static final String MODULE_CODE = StringConstants.MODULE_CODE;
@@ -65,11 +65,17 @@ public class AddModuleParser extends AddParser {
     }
 
     /**
-     * Determines the error that the user made in its command.
-     * @throws ModHappyException based on the type of error made.
+     * Determines the error that the user made in its command based on the compulsory parameters.
+     * It first checks if the user input has a module code, and if the code is made up of only word characters.
+     * Then it checks if the user input has a modular credit, and if the modular credit is an unrestricted integer
+     * @throws MissingCompulsoryParameterException if module code is missing
+     * @throws MissingNumberException if modular credit is missing
+     * @throws InvalidNumberException if the modular credit is not in unrestricted integer format
+     * @throws InvalidCompulsoryParameterException if the module code is not made up of only word characters
      */
     @Override
-    public void determineError() throws ModHappyException {
+    public void determineError() throws MissingCompulsoryParameterException, MissingNumberException,
+            InvalidNumberException, InvalidCompulsoryParameterException {
         String moduleCode;
         String modularCredit;
 
@@ -92,6 +98,13 @@ public class AddModuleParser extends AddParser {
         throw new InvalidCompulsoryParameterException();
     }
 
+    /**
+     * Parses the modular credit from a string to an integer, with checks on its validity.
+     * @param modularCreditStr the string representation of the modular credit
+     * @return the modular credits as an integer
+     * @throws InvalidNumberException if the string cannot be parsed into an integer,
+     *                                or if the credits is not in the range of 0 to 20 inclusive
+     */
     private int parseModularCredit(String modularCreditStr) throws InvalidNumberException {
         int modularCredit;
         try {
@@ -106,10 +119,8 @@ public class AddModuleParser extends AddParser {
     }
 
     private void checkForEmptyDescription(String moduleDescription) throws EmptyParamException {
-        if (!Objects.isNull(moduleDescription)) {
-            if (moduleDescription.isBlank()) {
-                throw new EmptyParamException(MODULE_DESCRIPTION_STR);
-            }
+        if (!Objects.isNull(moduleDescription) && moduleDescription.isBlank()) {
+            throw new EmptyParamException(MODULE_DESCRIPTION_STR);
         }
     }
 
