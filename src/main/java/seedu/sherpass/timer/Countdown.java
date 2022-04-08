@@ -7,13 +7,8 @@ import seedu.sherpass.timetable.Timetable;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-
 import java.time.LocalDate;
-
-import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
-import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
-import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 
 public class Countdown extends Timer  {
 
@@ -35,32 +30,6 @@ public class Countdown extends Timer  {
         this.jlabel = jlabel;
     }
 
-    private String convertTimeToString() {
-        long hour;
-        long minute;
-        long second;
-        if ((timeLeft / ONE_HOUR) > 0) {
-            hour = timeLeft / ONE_HOUR;
-            minute = (long) ((timeLeft * 1.0) / ONE_HOUR) * 60;
-            second = timeLeft - (hour * ONE_HOUR) - (minute * ONE_MINUTE);
-            String zeroStringHour = (hour > 9) ? EMPTY_STRING : "0";
-            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
-            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
-            return zeroStringHour + hour + " hour(s) " + zeroStringMinute + minute
-                    + " minute(s) " + zeroStringSecond + second + " second(s)";
-        } else if ((timeLeft / ONE_MINUTE) > 0) {
-            minute = timeLeft / ONE_MINUTE;
-            second = timeLeft - (minute * ONE_MINUTE);
-            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
-            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
-            return zeroStringMinute + minute + " minute(s) " + zeroStringSecond + second + " second(s)";
-        } else {
-            second = timeLeft;
-            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
-            return zeroStringSecond + second + " second(s)";
-        }
-    }
-
     /**
      * Creates a new thread to run the timer. The timer will continue to run until it has run out of time, or has been
      * stopped by the user.
@@ -72,7 +41,7 @@ public class Countdown extends Timer  {
         jframe.setVisible(true);
         while (hasTimeLeft) {
             assert timeLeft > NO_TIME_LEFT;
-            String timeShownToUser = convertTimeToString();
+            String timeShownToUser = convertTimeToString(timeLeft);
             jlabel.setText("Time left: " + timeShownToUser);
             update();
         }
@@ -102,7 +71,9 @@ public class Countdown extends Timer  {
                 waitForTimerToResume();
             }
         } catch (InterruptedException e) {
-            return;
+            hasTimeLeft = false;
+            forcedStop = true;
+            this.interrupt();
         }
     }
 
@@ -121,6 +92,13 @@ public class Countdown extends Timer  {
         } else {
             ui.showToUser("The timer has already stopped.");
         }
+    }
+
+    public void pauseTimer() {
+        isTimerPaused = true;
+        ui.showToUser("Got it! I've paused the timer.\n"
+                + "You have " + convertTimeToString(timeLeft) + " left.\n"
+                + "Feel free to resume whenever you're ready.");
     }
 
     private void updateHasTimeLeft() {
@@ -142,23 +120,7 @@ public class Countdown extends Timer  {
      * Prints the timer selected by the user.
      */
     protected void printTimerStart() {
-        int hours;
-        int minutes;
-        int seconds;
-        if (timeLeft >= ONE_HOUR) {
-            hours = timeLeft / ONE_HOUR;
-            minutes = (timeLeft - hours * ONE_HOUR) / ONE_MINUTE;
-            seconds = timeLeft - hours * ONE_HOUR - minutes * ONE_MINUTE;
-            ui.showToUser("Timer of " + hours + " hours " + minutes + " minutes "
-                    + seconds + " seconds started.");
-        } else if (timeLeft >= ONE_MINUTE) {
-            minutes = timeLeft / ONE_MINUTE;
-            seconds = timeLeft - (minutes * ONE_MINUTE);
-            ui.showToUser("Timer of " + minutes + " minutes "
-                    + seconds + " seconds started.");
-        } else {
-            ui.showToUser("Timer of " + timeLeft + " seconds started.");
-        }
+        ui.showToUser("Timer of " + convertTimeToString(timeLeft) + " started.");
     }
 
     /**
@@ -175,10 +137,11 @@ public class Countdown extends Timer  {
      * Resumes the timer by calling notify() on the waiting thread.
      */
     public void resumeTimer() {
+        ui.showToUser("Okay! I've resumed the timer.\n"
+                + "You have " + convertTimeToString(timeLeft + 1) + " seconds left.");
         synchronized (this) {
             isTimerPaused = false;
             notify();
         }
-        ui.showToUser("Okay! I've resumed the timer. You have " + timeLeft + " seconds left.");
     }
 }

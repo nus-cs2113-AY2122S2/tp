@@ -1,10 +1,9 @@
 package seedu.sherpass.timer;
 
 import seedu.sherpass.command.Command;
-import seedu.sherpass.command.MarkCommand;
 import seedu.sherpass.exception.InvalidTimeException;
 
-import seedu.sherpass.util.parser.TaskParser;
+import seedu.sherpass.util.parser.Parser;
 import seedu.sherpass.util.parser.TimerParser;
 
 import seedu.sherpass.task.TaskList;
@@ -12,7 +11,6 @@ import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
-import seedu.sherpass.util.parser.TimetableParser;
 import seedu.sherpass.timetable.Timetable;
 
 import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
@@ -32,7 +30,7 @@ import java.time.LocalDate;
 public class TimerLogic implements WindowListener {
 
     private static Ui ui;
-    private static Timer timer;
+    private Timer timer;
     private static TaskList taskList;
     protected static volatile boolean isTimerInitialised = false;
     private final JFrame jframe;
@@ -77,26 +75,24 @@ public class TimerLogic implements WindowListener {
     }
 
     /**
-     * Marks a task as done, as specified in parsedInput.
+     * Checks if the timer is paused or stopped, then executes the mark, unmark or show command.
      *
      * @param storage     Storage.
      * @param parsedInput parsedInput.
      */
-    public void markTask(Storage storage, String parsedInput) {
+    public void markOrShowTask(Storage storage, String parsedInput) {
         if (isTimerPausedOrStopped()) {
-            executeMark(storage, parsedInput);
+            executeCommand(storage, parsedInput);
         } else {
-            ui.showToUser("You can't mark a task as done while timer is running!");
+            ui.showToUser("You can't mark/show tasks while timer is running!");
         }
     }
 
 
-    private void executeMark(Storage storage, String parsedInput) {
-        Command c = TaskParser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, ui);
-        if (c != null) {
-            c.execute(taskList, ui, storage);
-            printAvailableCommands();
-        }
+    private void executeCommand(Storage storage, String parsedInput) {
+        Command c = Parser.parseCommand(parsedInput, ui);
+        c.execute(taskList, ui, storage);
+        printAvailableCommands();
     }
 
     private void printAvailableCommands() {
@@ -106,22 +102,6 @@ public class TimerLogic implements WindowListener {
         } else {
             ui.showToUser("Would you like to resume the timer, mark a task as done, "
                     + "or leave the study session?");
-        }
-    }
-
-    public void showTasks(Storage storage, String[] parsedInput) {
-        if (isTimerPausedOrStopped()) {
-            executeShow(storage, parsedInput);
-        } else {
-            ui.showToUser("You can't show tasks while timer is running!");
-        }
-    }
-
-    private void executeShow(Storage storage, String[] parsedInput) {
-        Command c = TimetableParser.prepareShow(parsedInput);
-        if (c != null) {
-            c.execute(taskList, ui, storage);
-            printAvailableCommands();
         }
     }
 
@@ -192,7 +172,7 @@ public class TimerLogic implements WindowListener {
         ui.showToUser("You don't have a timer running!");
     }
 
-    private static boolean updateIsTimerRunning() {
+    private boolean updateIsTimerRunning() {
         return timer.isTimerRunning();
     }
 
@@ -217,6 +197,14 @@ public class TimerLogic implements WindowListener {
             return;
         }
         timer = new Countdown(taskList, ui, jframe, jlabel);
+    }
+
+    public void killTimer() {
+        if (!isTimerInitialised) {
+            return;
+        } else {
+            timer.interrupt();
+        }
     }
 
     /**
