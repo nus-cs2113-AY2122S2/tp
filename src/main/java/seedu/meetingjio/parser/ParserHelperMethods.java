@@ -20,11 +20,11 @@ public class ParserHelperMethods {
     public static void checkTime(int startTime, int endTime) throws InvalidTimeException {
         int startMinutes = startTime % 100;
         int endMinutes = endTime % 100;
-        boolean invalidMinutes = startMinutes >= 60 || endMinutes >= 60;
+        boolean isMinutesInvalid = startMinutes >= 60 || endMinutes >= 60;
         int startHours = startTime / 100;
         int endHours = endTime / 100;
-        boolean invalidHours = startHours >= 24 || endHours >= 24;
-        if (invalidMinutes || invalidHours || startTime >= endTime) {
+        boolean isHoursInvalid = startHours >= 24 || endHours >= 24;
+        if (isMinutesInvalid || isHoursInvalid || startTime >= endTime) {
             throw new InvalidTimeException();
         }
     }
@@ -36,11 +36,10 @@ public class ParserHelperMethods {
      * @throws MissingValueException If at least one parameter has no value
      */
     public static  void checkNonNullValues(String[] eventDescription) throws MissingValueException {
-        for (int i = 0; i < eventDescription.length; i++) {
-            if (eventDescription[i].length() == 0) {
+        for (String str : eventDescription) {
+            if (str.length() == 0) {
                 throw new MissingValueException();
             }
-            assert (eventDescription[i].length() != 0) : "The parameters have non-null values";
         }
     }
 

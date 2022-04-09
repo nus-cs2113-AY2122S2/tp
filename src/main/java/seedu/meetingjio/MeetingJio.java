@@ -1,5 +1,6 @@
 package seedu.meetingjio;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import seedu.meetingjio.timetables.MasterTimetable;
@@ -22,13 +23,17 @@ public class MeetingJio {
     /** Starts the interaction with the user. */
     public static void main(String[] args) {
         start();
-        String name = in.nextLine().trim();
-        System.out.println(MESSAGE_DIVIDER);
-        System.out.println("Hello! " + name);
-        Ui.showHelpHint();
-        System.out.println(MESSAGE_DIVIDER);
-        String userInput = in.nextLine().trim();
-        Ui.executeCommand(userInput, masterTimetable, in);
+        try {
+            String name = in.nextLine().trim();
+            System.out.println(MESSAGE_DIVIDER);
+            System.out.println("Hello! " + name);
+            Ui.showHelpHint();
+            System.out.println(MESSAGE_DIVIDER);
+            String userInput = in.nextLine().trim();
+            Ui.executeCommand(userInput, masterTimetable, in);
+        } catch (NoSuchElementException nsee) {
+            Ui.executeCommand("exit", masterTimetable, in);
+        }
         exit();
     }
 

@@ -3,7 +3,6 @@ package seedu.meetingjio.timetables;
 import seedu.meetingjio.events.Lesson;
 import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.events.Event;
-import seedu.meetingjio.commands.FreeCommand;
 
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
@@ -19,6 +18,9 @@ public class Timetable {
 
     public static final int LESSONS_ONLY = 1;
     public static final int MEETINGS_ONLY = 2;
+
+    public static final int HOUR_PARAMETER_IN_24_HOURS = 100;
+    public static final int MINS_IN_1_HOUR = 60;
 
     public Timetable(String name) {
         this.name = name;
@@ -192,14 +194,33 @@ public class Timetable {
     public void populateBusySlots(int[][] busySlots) {
         for (Event event : list) {
             int numericDay = event.getDayInInt();
-            int numericStartTime = FreeCommand.convertTimeToFreeArrayIndex(event.getStartTime());
-            int numericEndTime = FreeCommand.convertTimeToFreeArrayIndex(event.getEndTime());
+            int numericStartTime = convertTimeToFreeArrayIndex(event.getStartTime());
+            int numericEndTime = convertTimeToFreeArrayIndex(event.getEndTime());
             for (int j = numericStartTime; j < numericEndTime; j++) {
                 busySlots[numericDay - 1][j] = BUSY;
             }
         }
     }
 
+    /**
+     * This helper method takes in a time in 24-hour format, and convert it to the number of minutes starting from 0000.
+     *
+     * @param time Time to be converted
+     * @return timeInMinutes The number of minutes converted from time
+     */
+    private static int convertTimeToFreeArrayIndex(int time) {
+        int hours = time / HOUR_PARAMETER_IN_24_HOURS;
+        int minutes = time % HOUR_PARAMETER_IN_24_HOURS;
+        int timeInMinutes = hours * MINS_IN_1_HOUR + minutes;
+        return timeInMinutes;
+    }
+
+    /**
+     * This method checks if two timetables are the same.
+     *
+     * @param obj Object to compare timetable with
+     * @return boolean True or false if both timetable objects are the same
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Timetable)) {

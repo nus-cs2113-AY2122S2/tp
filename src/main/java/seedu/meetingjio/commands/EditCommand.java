@@ -45,6 +45,7 @@ public class EditCommand extends Command {
     /**
      * Edit lesson based on the user input if the input values are valid.
      * Otherwise, abort edit.
+     * Note that meetings are non-editable
      *
      * @param masterTimetable The collection of everyone's timetable
      * @return String Edit confirmation showing that the lesson is edited
@@ -61,6 +62,7 @@ public class EditCommand extends Command {
 
             Map<String, String> originalValues = getEventInfo(event);
             Boolean isValidInput = editEvent(event, newValues);
+
             if (!isValidInput) {
                 editEvent(event, originalValues);
                 return editAbort(ERROR_INVALID_ATTRIBUTE_VALUE);

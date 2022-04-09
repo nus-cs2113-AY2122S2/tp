@@ -341,9 +341,40 @@ Exits the application.
 
 **Expected outcome:**
 ```
+Data saved to local successfully
+__________________________________________________________________________________________________________
 See you again!
 ```
 
+### MeetingJio.txt
+
+**Format:**
+```
+Name
+1.[L] TITLE: [Title] DAY: [Day] START: [StartTime] END: [EndTime] MODE: [Mode]
+2.[M] TITLE: [Title] DAY: [Day] START: [StartTime] END: [EndTime] MODE: [Mode]
+Name
+1.[L] TITLE: [Title] DAY: [Day] START: [StartTime] END: [EndTime] MODE: [Mode]
+2.[M] TITLE: [Title] DAY: [Day] START: [StartTime] END: [EndTime] MODE: [Mode]
+3.[L] TITLE: [Title] DAY: [Day] START: [StartTime] END: [EndTime] MODE: [Mode]
+```
+**Example:**
+```
+ibra
+1.[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
+2.[L] TITLE: cs2113		DAY: friday		START: 1230		END: 1330		MODE: online
+3.[L] TITLE: cs2113		DAY: friday		START: 1430		END: 1530		MODE: online
+ym
+1.[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
+2.[L] TITLE: cs2113		DAY: friday		START: 1230		END: 1330		MODE: online
+3.[L] TITLE: cs2113		DAY: friday		START: 1430		END: 1530		MODE: online
+```
+
+**Limitation:**
+- For adding a new meeting, please add it under the first name. For the case above, you only need to add the 
+new meeting for `ibra` and it will populate for `ym` as well. Take note, adding new meeting under names except 
+for the first name will be ignored.
+- Same for editing the detail of an existing meeting, please edit it under the first name. 
 
 ## Current Limitation of app
 - Meeting cannot span across multiple days/past midnight. If that is the case, please create 2 separate meetings.
