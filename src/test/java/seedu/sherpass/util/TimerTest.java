@@ -55,11 +55,9 @@ public class TimerTest {
         TaskList testTaskList = new TaskList(testArrayList);
         Ui ui = new Ui();
         TimerLogic timerLogic = new TimerLogic(testTaskList, ui);
-        String rawInput = "pause";
-        String[] parsedInput = rawInput.trim().split(" ", 2);
-        String expectedOutput = ERROR_INVALID_TIMER_INPUT_MESSAGE + System.lineSeparator();
+        String expectedOutput = "You don't have a timer running!" + System.lineSeparator();
 
-        timerLogic.callStartTimer(parsedInput);
+        timerLogic.callPauseTimer();
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -71,11 +69,9 @@ public class TimerTest {
         TaskList testTaskList = new TaskList(testArrayList);
         Ui ui = new Ui();
         TimerLogic timerLogic = new TimerLogic(testTaskList, ui);
-        String rawInput = "resume";
-        String[] parsedInput = rawInput.trim().split(" ", 2);
-        String expectedOutput = ERROR_INVALID_TIMER_INPUT_MESSAGE + System.lineSeparator();
+        String expectedOutput = "You don't have a timer running!" + System.lineSeparator();
 
-        timerLogic.callStartTimer(parsedInput);
+        timerLogic.callResumeTimer();
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -87,11 +83,9 @@ public class TimerTest {
         TaskList testTaskList = new TaskList(testArrayList);
         Ui ui = new Ui();
         TimerLogic timerLogic = new TimerLogic(testTaskList, ui);
-        String rawInput = "stop";
-        String[] parsedInput = rawInput.trim().split(" ", 2);
-        String expectedOutput = ERROR_INVALID_TIMER_INPUT_MESSAGE + System.lineSeparator();
+        String expectedOutput = "You don't have a timer running!" + System.lineSeparator();
 
-        timerLogic.callStartTimer(parsedInput);
+        timerLogic.callStopTimer();
         assertEquals(expectedOutput, outContent.toString());
     }
 

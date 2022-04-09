@@ -130,7 +130,7 @@ public class TimerLogic implements WindowListener {
 
     public void callPauseTimer() {
         if (!isTimerInitialised) {
-            ui.showToUser("There is no timer running.");
+            ui.showToUser("You don't have a timer running!");
             return;
         }
         if (timer.isTimerPaused()) {
@@ -147,7 +147,7 @@ public class TimerLogic implements WindowListener {
 
     public void callResumeTimer() {
         if (!isTimerInitialised) {
-            ui.showToUser("There is no timer running.");
+            ui.showToUser("You don't have a timer running!");
             return;
         }
         if (timer.isTimerPaused()) {
