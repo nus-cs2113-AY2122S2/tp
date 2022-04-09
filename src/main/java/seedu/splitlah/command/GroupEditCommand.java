@@ -47,7 +47,6 @@ public class GroupEditCommand extends Command {
             }
         }
         if (!(newList.getSize() == oldList.size())) isSame = false;
-
         return isSame;
     }
     
