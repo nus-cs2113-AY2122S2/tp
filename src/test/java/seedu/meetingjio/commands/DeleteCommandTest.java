@@ -104,7 +104,7 @@ public class DeleteCommandTest {
     }
 
 
-    /*
+
     @Test
     public void deleteCommand_deleteMeetingFromEveryone_throwException() {
         //delete meeting which is id 2 from john, should delete from everyone
@@ -118,9 +118,7 @@ public class DeleteCommandTest {
                 "3.[L] TITLE: cs2102\t\tDAY: saturday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
         ListCommand listCommand = new ListCommand("all",0);
         assertEquals(listAllOutput,listCommand.execute(masterTimetable));
-
         DeleteCommand deleteCommand = new DeleteCommand("john",2);
-        deleteCommand.execute(masterTimetable);
         String deleteConfirmation = "The following meeting event has been deleted from everyone's timetable:\n" +
                 "[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online";
         assertEquals(deleteConfirmation, deleteCommand.execute(masterTimetable));
@@ -136,5 +134,5 @@ public class DeleteCommandTest {
         assertEquals(listAllPostDelete, listCommandOutput.execute(masterTimetable));
 
     }
-    */
+
 }
