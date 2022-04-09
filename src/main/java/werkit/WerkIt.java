@@ -209,7 +209,6 @@ public class WerkIt {
         getUI().printGoodbye();
     }
 
-
     /**
      * Populates a set of exercises to exerciseList.
      */
