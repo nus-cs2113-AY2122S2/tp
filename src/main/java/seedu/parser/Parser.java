@@ -4,7 +4,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import seedu.command.AddCommand;
-import seedu.command.ModificationCommand;
 import seedu.command.UpdateCommand;
 import seedu.command.ListCommand;
 import seedu.command.IncorrectCommand;
@@ -106,16 +105,16 @@ public class Parser {
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(AddCommand.COMMAND_WORD + AddCommand.COMMAND_DESCRIPTION);
             } catch (NumberFormatException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_COST_MESSAGE);
+                return new IncorrectCommand(Command.INCORRECT_COST_FORMAT);
             } catch (IllegalArgumentException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_TYPE_MESSAGE);
+                return new IncorrectCommand(Command.INCORRECT_ENUM_TYPE);
             } catch (MissingAttributeException e) {
                 return new IncorrectCommand(e.getMessage()
                         + System.lineSeparator()
                         + AddCommand.COMMAND_WORD
                         + AddCommand.COMMAND_DESCRIPTION);
             } catch (DateTimeParseException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_DATE_MESSAGE);
+                return new IncorrectCommand(Command.INVALID_DATE_MESSAGE);
             }
         case CheckCommand.COMMAND_WORD:
             try {
@@ -123,10 +122,6 @@ public class Parser {
                 return new CheckCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(CheckCommand.COMMAND_WORD + CheckCommand.COMMAND_DESCRIPTION);
-            } catch (NumberFormatException e) {
-                return new IncorrectCommand(Command.INCORRECT_ENUM_TYPE);
-            } catch (IllegalArgumentException e) {
-                return new IncorrectCommand(Command.INCORRECT_COST_FORMAT);
             }
         case DeleteCommand.COMMAND_WORD:
             try {
@@ -142,17 +137,12 @@ public class Parser {
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
             } catch (NumberFormatException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_COST_MESSAGE);
+                return new IncorrectCommand(Command.INCORRECT_COST_FORMAT);
             } catch (IllegalArgumentException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_TYPE_MESSAGE);
+                return new IncorrectCommand(Command.INCORRECT_ENUM_TYPE);
             }
         case ListCommand.COMMAND_WORD:
-            if (arguments == null) {
-                return new ListCommand();
-            } else {
-                args = new ArrayList<>(Collections.singleton(arguments.toUpperCase(Locale.ROOT)));
-                return new ListCommand(args);
-            }
+            return new ListCommand();
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case SaveCommand.COMMAND_WORD:

@@ -53,8 +53,7 @@ class DeleteCommandTest {
 
         CommandResult actualResult = deleteCommand.execute();
         CommandResult expectedResult =
-                new CommandResult("No such serial number, please enter an existing "
-                        + "serial number");
+                new CommandResult(Command.INVALID_SERIAL_NUMBER);
 
         assertEquals(expectedResult, actualResult);
     }
