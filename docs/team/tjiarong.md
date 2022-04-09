@@ -36,9 +36,7 @@ Given below are my contributions to the project.
       Allows for changes to tracked Income items as desired by user, such as its amount or descriptions.
     * Find:
       Allows for user to search through tracked Income items for a specific descriptions or amount.
-
-<p></p>
-
+    
 <div style="page-break-after: always;"></div>
 
 * **Enhancements to Existing Features**:
@@ -51,7 +49,7 @@ Given below are my contributions to the project.
     * Implemented JUnit testing for Income and IncomeList class and make it more defensive:
       [#61](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/61/files),
       [#133](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/133/files)
-    * Implemented additional JUnit testing for Expenditure and ExpenditureList class to cover additional implementations.
+    * Implemented additional JUnit testing for Expenditure and ExpenditureList class to cover additional implementations:
       [#133](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/133/files)
 
 <p></p>
