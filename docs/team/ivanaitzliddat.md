@@ -44,7 +44,10 @@ Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=ivanaitzliddat&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
 
 #### User Guide
-* Added documentation for `ActivityCreateCommand`, `ActivityDeleteCommand`, `GroupViewCommand` and `GroupListCommand`.
+* Added documentation for [Creating an Activity](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create),
+  [Deleting an Activity](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-an-activity-activity-delete),
+  [Viewing a Group](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-group-group-view) and
+  [Listing all Groups](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-groups-group-list).
 * Made the first round of edits to the User Guide to ensure that feedbacks from the PE Dry Run were well acknowledged. [#391](https://github.com/AY2122S2-CS2113T-T10-1/tp/pull/391/files)
 
 #### Developer Guide
