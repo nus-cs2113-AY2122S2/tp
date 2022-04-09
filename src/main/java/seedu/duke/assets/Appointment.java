@@ -1,6 +1,7 @@
 package seedu.duke.assets;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Appointment {
     protected String appointmentId;
@@ -10,6 +11,7 @@ public class Appointment {
     protected String doctorName;
     protected String appointmentDate;
     protected String appointmentDetails;
+    protected ArrayList<String> dispensedMedicines = new ArrayList<>();
 
     public Appointment(String appointmentId, String patientNric, String patientName, String doctorNric,
                        String doctorName, String appointmentDate, String appointmentDetails) {
@@ -20,6 +22,10 @@ public class Appointment {
         this.doctorNric = doctorNric;
         this.appointmentDate = appointmentDate;
         this.appointmentDetails = appointmentDetails;
+    }
+
+    public void addMedicine(String medicineName, String quantity) {
+        dispensedMedicines.add(medicineName + "," + quantity);
     }
 
     @Override
@@ -75,5 +81,17 @@ public class Appointment {
 
     public String saveString() {
         return patientNric + "," + doctorNric + "," + appointmentDate + "," + appointmentDetails;
+    }
+
+    public String saveMedicineString() {
+        String returnString = "";
+        for (int i = 0; i < dispensedMedicines.size(); i++) {
+            if (i != 0) {
+                returnString += "," + dispensedMedicines.get(i);
+            } else {
+                returnString += appointmentId + "," + dispensedMedicines.get(i);
+            }
+        }
+        return returnString;
     }
 }

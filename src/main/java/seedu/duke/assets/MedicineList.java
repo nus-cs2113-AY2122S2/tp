@@ -134,13 +134,26 @@ public class MedicineList extends List {
     public void updateStock() throws HalpmiException {
         for (int i = 0; i < medicines.size(); i++) {
             LocalDate date = LocalDate.parse(medicines.get(i).getExpiry());
+            int quantity = medicines.get(i).getQuantity();
             LocalDate today = LocalDate.now();
-            if (date.isBefore(today)) {
+            if (date.isBefore(today) || quantity == 0) {
                 expiredMedicines.add(medicines.get(i));
                 medicines.remove(i);
             }
         }
         viewExpired();
+    }
+
+    public void updateStockBackend() {
+        for (int i = 0; i < medicines.size(); i++) {
+            LocalDate date = LocalDate.parse(medicines.get(i).getExpiry());
+            int quantity = medicines.get(i).getQuantity();
+            LocalDate today = LocalDate.now();
+            if (date.isBefore(today) || quantity == 0) {
+                expiredMedicines.add(medicines.get(i));
+                medicines.remove(i);
+            }
+        }
     }
 
     public void clearStock() {
@@ -150,6 +163,38 @@ public class MedicineList extends List {
         }
         expiredMedicines.clear();
         UI.printParagraph("Expired medicines in the expired list has been cleared!");
+    }
+
+    public void checkStock(String [] medicines) throws HalpmiException {
+        updateStockBackend();
+        CommandLineTable medicineTable = new CommandLineTable();
+        medicineTable.setShowVerticalLines(true);
+        medicineTable.setHeaders("MedicineName", "Quantity");
+
+        boolean hasShortage = false;
+
+        for (int i = 0; i < medicines.length; i += 2) {
+            String medicineName = medicines[i];
+            int quantity = Integer.parseInt(medicines[i + 1]);
+            for (Medicine a : this.medicines) {
+                if (a.getMedicineName().equals(medicineName)) {
+                    quantity -= a.getQuantity();
+                    if (quantity <= 0) {
+                        break;
+                    }
+                }
+            }
+            if (quantity > 0) {
+                medicineTable.addRow(medicineName,medicines[i + 1]);
+                hasShortage = true;
+            }
+        }
+
+        if (hasShortage) {
+            medicineTable.print();
+            throw new HalpmiException("The medicines mentioned on the table"
+                    + "above do not have enough stock to dispense!");
+        }
     }
 
     public ArrayList<Medicine> getList() {
@@ -232,6 +277,29 @@ public class MedicineList extends List {
         }
     }
 
-}
+    public void dispenseMedicine(String[] medicineArray) {
+        CommandLineTable medicineTable = new CommandLineTable();
+        medicineTable.setShowVerticalLines(true);
+        medicineTable.setHeaders("MedicineId", "MedicineName", "Expiry", "Quantity");
+        medicines.sort(new ExpiryComparator());
+        for (int i = 0; i < medicineArray.length; i += 2) {
+            String medicineName = medicineArray[i];
+            int quantity = Integer.parseInt(medicineArray[i + 1]);
+            for (Medicine a : this.medicines) {
+                if (a.getMedicineName().equals(medicineName)) {
+                    int quantityTaken = (quantity > a.getQuantity()) ? a.getQuantity() : quantity;
+                    quantity = (quantity > quantityTaken) ? quantity - quantityTaken : 0;
+                    a.quantity = (a.getQuantity() > quantityTaken) ? a.getQuantity() - quantityTaken : 0;
 
+                    medicineTable.addRow(a.getMedicineId(), a.getMedicineName(), a.getExpiry(),
+                            String.valueOf(quantityTaken));
+                }
+                if (quantity == 0) {
+                    break;
+                }
+            }
+            medicineTable.print();
+        }
+    }
+}
 
