@@ -15,6 +15,7 @@ Our project, Travel Agency Reservation Booking System (TARBS) was developed to a
     - Implemented handling of invalid save data (if data is tampered with in the saved file)
 
 - Added JUnit tests for `Storage`
+- Fixed bugs for PE dry run
 
 #### Contributions to Developer Guide:
 - Added explanation for `Storage` 

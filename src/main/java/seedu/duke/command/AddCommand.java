@@ -28,8 +28,13 @@ public class AddCommand extends Command {
         if (packages.idExists(newPackage.getID())) {
             System.out.println("Package with this ID already exists! Please try again.");
         } else {
-            packages.addPackage(newPackage);
-            System.out.println("Package successfully added!");
+            if (packages.isContainSamePackage(newPackage)) {
+                System.out.println("Same package is already exists! Please try again.");
+            }
+            else {
+                packages.addPackage(newPackage);
+                System.out.println("Package successfully added!");
+            }
         }
     }
 }
