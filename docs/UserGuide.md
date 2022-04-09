@@ -399,8 +399,8 @@ Edits an existing activity so that you can change the details of an activity.<br
 
 You only have to supply delimiters for the details you wish to edit. However, the `/sid` and `/aid` 
 delimiters are compulsory to identify the activity you wish to edit.
-> Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] [</n [ACTIVITY_NAME]>] [</p [PAYER]>]
-  [</i [NAME1 NAME2...]>] [</cl [COST1 COST2...]>] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+> Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER]
+  /i [NAME1 NAME2...] /cl [COST1 COST2...] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE]}`
 > 
 > Compulsory arguments:
 >* `[SESSION_ID]` refers to the unique identifier of the session.
@@ -417,20 +417,20 @@ delimiters are compulsory to identify the activity you wish to edit.
 >    * The person's name is **case-insensitive**.
 >    * If one is not provided, the original payer is left unchanged.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
->    * Each individual name is **case-insensitive**.
+>* Each individual name is **case-insensitive**.
 >    * If a list is not provided, the original participants are left unchanged.
+>    * You **must** supply a costlist or overall cost if you wish to edit the list of participants.
 >* `[TOTAL_COST]` refers to the overall cost of the activity.
->    * If one is not provided, the original overall cost is left unchanged. If a cost list is provided, that will be used to 
-> edit the activity instead. You cannot supply both a total cost and a cost list.
+>    * If one is not provided, the original overall cost is left unchanged.
+>      You cannot supply both a total cost and a cost list.
 >    * You can use this even if the activity was originally created using a cost list. The new overall cost will be evenly 
 distributed amongst all participants.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
->    * If a list is not provided, the original overall cost list is left unchanged. If an overall cost is provided, that will
->be used to edit the activity instead. You cannot supply both a total cost and a cost list.
+>    * If a list is not provided, the original overall cost list is left unchanged. 
+>      You cannot supply both a total cost and a cost list.
 >    * You can use this even if the activity was originally created using an overall cost. The new cost list will be assigned 
 >to the existing participants in the order displayed when viewing the activity.
->    * You are encouraged to provide a participant list with `/i` together with the cost list to confirm the order in which 
-the costs are distributed.
+>    * You are encouraged to additionally provide a participant list with `/i` to confirm the distribution of costs.
 >* `[GST_PERCENTAGE]` refers to the additional GST that may be charged during your activity.
 >    * If one is not provided, the original GST is left unchanged and will be applied to any changes to the overall cost or
 >cost list.
@@ -443,15 +443,13 @@ the costs are distributed.
 >    * Changing the service charge will automatically recalculate all costs associated with this activity to reflect the new
 >service charge.
 >    * To remove the service charge entirely, you must explicitly specify `/sc 0`.
-
 <br>
 
 > **💡 Notes:**
->* A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
-     it.
->* An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
->* Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
->* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
+>- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before activities in it can be edited.
+>- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
 >* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >   - Example: `Alice Tan` is not allowed.
