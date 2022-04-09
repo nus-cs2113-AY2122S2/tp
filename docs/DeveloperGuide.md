@@ -16,6 +16,7 @@
 * [Glossary](#glossary)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
   * [Study Manager](#study-manager)
+  * [Expense Tracker](#expense-tracker)
 
 
 ## Acknowledgements

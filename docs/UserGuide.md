@@ -21,7 +21,7 @@ and contact management tasks done faster than traditional GUI apps.
   * [List out expenses](#list-out-all-expenses-list)
   * [Delete an expense](#delete-an-expense-rm)
   * [Edit an expense](#editing-an-expense-edit)
-  * [Finding an expense](#look-for-an-expense-find)
+  * [Finding an expense](#finding-an-expense-find)
 * [Study Manager Features](#study-manager-features)
   * [Adding a module](#adding-a-module-add)
   * [List out modules](#listing-modules-list)
@@ -265,7 +265,7 @@ Here is the newly edited expense record:
 2022-03-22 | $20.00 | Movie | This is a remark
 ```
 
-#### Look for an expense: `find`
+#### Finding an expense: `find`
 Looks for a specific expense record by using a user-specified keyword.
 - Only the `<CATEGORY>`, `<DATE>` and `<REMARKS>` fields will be considered when looking for an expense record.
 - The keyword is case-insensitive.
