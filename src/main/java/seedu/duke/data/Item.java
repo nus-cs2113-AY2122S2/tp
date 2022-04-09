@@ -85,18 +85,25 @@ public class Item {
     /**
      * Adds a new borrow record to the item.
      *
-     * @param newRecord A borrow record.
+     * @param newRecord A new borrow record.
      * @return This item that has been added with a new borrow record.
+     * @throws InvMgrException If there is insufficient quantity in inventory to borrow.
      */
     public Item addBorrowRecord(BorrowRecord newRecord) throws InvMgrException {
-        // Iterate through each borrow records.
-        // Throw exception if newRecord conflicts with existing records.
+        // Compute total quantity borrowed in overlapping records.
+        int quantityBorrowed = newRecord.getQuantity();
         for (BorrowRecord record : borrowRecords) {
             if (newRecord.isConflict(record)) {
-                throw new InvMgrException(Messages.INVALID_DATES_CONFLICT);
+                quantityBorrowed += record.getQuantity();
             }
         }
 
+        // Throw exception if there is insufficient quantity in inventory.
+        if (quantityBorrowed > quantity) {
+            throw new InvMgrException(Messages.INVALID_INSUFFICIENT_QUANTITY);
+        }
+
+        // Sufficient quantity in inventory, add borrow record.
         this.borrowRecords.add(newRecord);
         return this;
     }

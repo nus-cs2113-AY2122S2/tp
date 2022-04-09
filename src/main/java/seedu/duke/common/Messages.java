@@ -35,8 +35,8 @@ public class Messages {
     public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost.";
     public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. "
             + "Please ensure that end date >= start date.";
-    public static final String INVALID_DATES_CONFLICT = "Sorry. The item is not available on this date, "
-            + "please try other dates.";
+    public static final String INVALID_INSUFFICIENT_QUANTITY = "Sorry. There is insufficient quantity. "
+            + "Please reduce your quantity borrowed or try another date.";
     public static final String INVALID_BORROW_LOST_ITEM = "Sorry. The item is lost and "
             + "not available for borrowing.";
 }
