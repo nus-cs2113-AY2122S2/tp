@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class StudyManagerTest {
 
     public static final String USER_INPUT_FOR_DELETE = "rm 1";
+    public static final int NUMBER_OF_MODULES_PARSED_FROM_ICS = 16;
     private Module cs2113;
     private Module cs3244;
     private Module ee4204;
@@ -247,7 +248,10 @@ public class StudyManagerTest {
     public void testReadIcs() {
         outContent.reset();
         ModuleCalendarReader moduleCalendarReader = new ModuleCalendarReader();
-        moduleCalendarReader.readIcsFile("nusmods_calendar.ics");
+        ArrayList<Module> icsModuleList = moduleCalendarReader.readIcsFile("nusmods_calendar.ics");
+        studyManager.getModulesList().clear();
+        studyManager.getModulesList().addAll(icsModuleList);
+
         String calendarReaderOutput =  System.lineSeparator() + "I have found these modules from your ics file:"
                 + System.lineSeparator() + System.lineSeparator()
                 + "1: [Module] EG2401A Lecture: Wednesday, 6:00 pm-8:00 pm" + System.lineSeparator()
@@ -270,5 +274,6 @@ public class StudyManagerTest {
                 + "I have added these to your existing schedule!" + System.lineSeparator();
 
         assertEquals(calendarReaderOutput,outContent.toString());
+        assertEquals(NUMBER_OF_MODULES_PARSED_FROM_ICS, studyManager.getModulesList().size());
     }
 }

@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  * Parses the module parameters from this file for each module and creates a module list.
  */
 public class ModuleCalendarReader {
-    static String icsFilePath;
+    protected static String icsFilePath;
 
     //Constant messages and strings
     private static final String LOGGER_IDENTIFIER = "mylogger";
