@@ -46,12 +46,14 @@ it correctly and with ease. Here are some icons which we will use to convey impo
 ## Table of Content
 - [Quick Start](#quick-start)
 - [Features](#features)
-  - Add tasks: [`add`](#adding-your-tasks-add)
-  - Delete tasks: [`delete`](#deleting-your-tasks-delete)
-  - Edit tasks: [`edit`](#editing-your-tasks-edit)
-  - Mark tasks [`mark`](#marking-your-tasksmark-task_number--unmark-task_number)
-  - Show tasks: [`show`](#display-daily-schedule-show-today--show-tomorrow--show-date)
-  - Clear multiple tasks: [`clear`](#clearing-multiple-tasks-clear-all--clear-expired--clear-done)
+- [Command Guide](#command-guide)
+  - Task Management
+    - Add tasks: [`add`](#adding-your-tasks-add)
+    - Delete tasks: [`delete`](#deleting-your-tasks-delete)
+    - Edit tasks: [`edit`](#editing-your-tasks-edit)
+    - Mark tasks [`mark`](#marking-your-tasksmark-task_number--unmark-task_number)
+    - Show tasks: [`show`](#display-daily-schedule-show-today--show-tomorrow--show-date)
+    - Clear all tasks: [`clear`](#clearing-all-tasks-clear)
   - Study session
     - Enter study session: [`study`](#enter-study-session-study)
     - Start timer: [`start`](#starting-a-default-timer-start-mode_number)     
@@ -76,7 +78,7 @@ from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Relea
 4. Open a terminal and navigate to the folder containing the jar file.
 5. Start the application on the terminal using `java -jar Sherpass.jar`
 
-## Features
+## Command Guide
 
 > ### ⚠️Important notes on command input format
 >- Words in UPPER_CASE are the [parameters](#glossary) to be supplied by the user.
@@ -95,40 +97,44 @@ Order of other parameters can be switched.
 
 #### Adding a single task
 
-Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by DEADLINE]`
+Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME]`
 
-|    Parameters    | Description                     | Accepted inputs                                   | Optional |
-|:----------------:|---------------------------------|---------------------------------------------------|----------|
-| TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                          | No       |
-|     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | No       |
-|    START_TIME    | Time to start working on a task | HH:mm format (e.g 18:00), must be before END_TIME | No       |
-|     END_TIME     | Time to stop working on a task  | HH:mm format (e.g 19:00)                          | No       |
-|     DEADLINE     | Due date for the task           | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | Yes      |
+|    Parameters    | Description                     | Accepted inputs                                                                     | Optional                |
+|:----------------:|---------------------------------|-------------------------------------------------------------------------------------|-------------------------|
+| TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                                                            | No                      |
+|     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g `25/3/2022` for 25 March 2022)                                 | No                      |
+|    START_TIME    | Time to start working on a task | HH:mm format (e.g `18:00`)                                                          | No                      |
+|     END_TIME     | Time to stop working on a task  | HH:mm format, must be after START_TIME                                              | No                      |
+|     DUE_DATE     | Due date for the task           | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
+|     DUE_TIME     | Due time for the task           | HH:mm format, must be equal to or after END_TIME if DUE_DATE is the same as DO_DATE | No if DUE_DATE is given |
 
 **Examples**
-- `add write final essay /do 25/3/2022 /start 20:00 /end 22:00 /by 27/3/2022`
-- `add revise chapter 3 /do 25/3/2022 /start 20:00 /end 22:00`
+- `add write final essay /do 25/6/2022 /start 20:00 /end 22:00 /bydate 27/6/2022 /bytime 23:59`
+- `add revise chapter 3 /do 25/6/2022 /start 20:00 /end 22:00`
 
 #### Adding a recurring task
 - All tasks will have the same task description.
-- You can easily add your lecture and tutorial classes into your schedule with this command.
+- You can easily add your lectures or tutorials into your schedule with this command.
 - For a **daily** recurring task, a **month's** worth of task will be added.
 - For a **weekly** recurring task, **2 months'** worth of task will be added.
 - For a **monthly** recurring task, a **year's** worth of task will be added.
 
-Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME /repeat FREQUENCY`
+Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME] /repeat FREQUENCY`
 
-|    Parameters    | Description                     | Accepted inputs                              | Optional |
-|:----------------:|---------------------------------|----------------------------------------------|----------|
-| TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                     | No       |
-|     DO_DATE      | Date to work on the task        | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022) | No       |
-|    START_TIME    | Time to start working on a task | HH:mm (e.g 18:00), must be before END_TIME   | No       |
-|     END_TIME     | Time to stop working on a task  | HH:mm (e.g 19:00)                            | No       |
-|    FREQUENCY     | How often does the task repeat  | DAILY, WEEKLY, MONTHLY                       | No       |
+|    Parameters    | Description                     | Accepted inputs                                                                     | Optional                |
+|:----------------:|---------------------------------|-------------------------------------------------------------------------------------|-------------------------|
+| TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                                                            | No                      |
+|     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g `25/3/2022` for 25 March 2022)                                 | No                      |
+|    START_TIME    | Time to start working on a task | HH:mm format (e.g `18:00`)                                                          | No                      |
+|     END_TIME     | Time to stop working on a task  | HH:mm format, must be after START_TIME                                              | No                      |
+|     DUE_DATE     | Due date for the task           | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
+|     DUE_TIME     | Due time for the task           | HH:mm format, must be equal to or after END_TIME if DUE_DATE is the same as DO_DATE | No if DUE_DATE is given |
+|    FREQUENCY     | How often does the task repeat  | DAILY, WEEKLY, MONTHLY                                                              | No                      |
+
 
 **Examples**
-- `add attend cs2113t lecture /do 25/3/2022 /start 16:00 /end 18:00 /repeat WEEKLY`
-- `add browse internship offers /do 27/3/2022 /start 21:00 /end 21:30 /repeat DAILY`
+- `add cs2113t weekly quiz /do 21/6/2022 /start 16:00 /end 18:00 /bydate 25/6/2022 /bytime 16:00 /repeat WEEKLY`
+- `add browse internship offers /do 27/6/2022 /start 21:00 /end 21:30 /repeat DAILY`
 
 ### Deleting your tasks: `delete`
 
@@ -152,57 +158,71 @@ Format: `delete TASK_NUMBER /repeat`
 | TASK_NUMBER | The index of the task as seen in the `show` command | Any valid task number | No       |
 
 **Example**
-- `delete 1 /repeat`
 
+Before delete command:
+
+![beforedelete](images/beforedelete.png)
+
+After command: `delete 3 /repeat`
+
+![afterdelete](images/afterdelete.png)
 
 ### Editing your tasks: `edit`
 
+>⚠️Important note: When editing tasks, at least one optional [parameter](#glossary) must be provided.
+
+> 💡 **Note:**
+>- When editing a single occurrence of a recurring task, the edited task will detach from the others.
+>- When editing some occurrences of a recurring task, the edited tasks will form a separate recurring task
+
 #### Editing a single task
 
-Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME] [/by DEADLINE]`
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME]`
 
-|    Parameters    | Description                                         | Accepted inputs                                   | Optional               |
-|:----------------:|-----------------------------------------------------|---------------------------------------------------|------------------------|
-|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                             | No                     |
-| TASK_DESCRIPTION | Description for the task                            | Any sentence without the character '/'	           | Yes                    |
-|     DO_DATE      | Date to work on the task                            | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022)      | Yes                    |
-|    START_TIME    | Time to start working on a task                     | HH:mm (e.g 18:00), must be before END_TIME        | No if DO_DATE is given |
-|     END_TIME     | Time to start working on a task                     | HH:mm (e.g 19:00)                                 | No if DO_DATE is given |
-|     DEADLINE     | Due date for the task                               | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | Yes                    |
+|    Parameters    | Description                                         | Accepted inputs                                                                     | Optional                |
+|:----------------:|-----------------------------------------------------|-------------------------------------------------------------------------------------|-------------------------|
+|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                                                               | No                      |
+| TASK_DESCRIPTION | Description for the task                            | Any phrases or sentences                                                            | Yes                     |
+|     DO_DATE      | Date to work on the task                            | d/M/yyyy format (e.g `25/3/2022` for 25 March 2022)                                 | Yes                     |
+|    START_TIME    | Time to start working on a task                     | HH:mm format (e.g `18:00`)                                                          | Yes                     |
+|     END_TIME     | Time to stop working on a task                      | HH:mm format, must be after START_TIME                                              | Yes                     |
+|     DUE_DATE     | Due date for the task                               | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
+|     DUE_TIME     | Due time for the task                               | HH:mm format, must be equal to or after END_TIME if DUE_DATE is the same as DO_DATE | No if DUE_DATE is given |
 
 **Examples**
 - `edit 2 write draft essay`
-- `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00`
+- `edit 3 submit draft essay /start 10:00 /end 13:00`
 
 #### Editing a recurring task
 - The specified task and all its future occurrence will be edited.
 - Occurrences earlier than the specified task will not be affected.
 - To change frequency, delete and add the recurring task with the new frequency using the `delete` and `add` command respectively.
 
-Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME] /repeat`
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME] /repeat`
 
-|    Parameters    | Description                                         | Accepted inputs                                   | Optional               |
-|:----------------:|-----------------------------------------------------|---------------------------------------------------|------------------------|
-|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                             | No                     |
-| TASK_DESCRIPTION | Description for the task                            | Any sentence without the character '/'	           | Yes                    |
-|     DO_DATE      | Date to work on the task                            | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022)      | Yes                    |
-|    START_TIME    | Time to start working on a task                     | HH:mm (e.g 18:00), must be before END_TIME        | No if DO_DATE is given |
-|     END_TIME     | Time to start working on a task                     | HH:mm (e.g 19:00)                                 | No if DO_DATE is given |
-
+|    Parameters    | Description                                         | Accepted inputs                                                                     | Optional                |
+|:----------------:|-----------------------------------------------------|-------------------------------------------------------------------------------------|-------------------------|
+|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                                                               | No                      |
+| TASK_DESCRIPTION | Description for the task                            | Any phrases or sentences                                                            | Yes                     |
+|     DO_DATE      | Date to work on the task                            | d/M/yyyy format(e.g 25/3/2022 for 25 March 2022)                                    | Yes                     |
+|    START_TIME    | Time to start working on a task                     | HH:mm format (e.g 18:00)                                                            | Yes                     |
+|     END_TIME     | Time to stop working on a task                      | HH:mm format, must be after START_TIME                                              | Yes                     |
+|     DUE_DATE     | Due date for the task                               | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
+|     DUE_TIME     | Due time for the task                               | HH:mm format, must be equal to or after END_TIME if DUE_DATE is the same as DO_DATE | No if DUE_DATE is given |
 
 Before edit command:
 
 ![beforeedit](images/beforeedit.png)
 
-After command: `edit 1 /do 25/3/2022 /start 18:00 /end 20:00 /repeat`
+After command: `edit 4 /start 13:00 /end 15:00 /repeat`
 
 ![afteredit](images/afteredit.png)
 
 
 ### Marking your tasks`mark TASK_NUMBER` / `unmark TASK_NUMBER`
 
-Mark the tasks that you've done in the session with `mark`.
-You can also mark a task as undone with `unmark`.
+- Mark the tasks that you've done in the session with `mark`.
+- You can also mark a task as undone with `unmark`.
 
 Format: `mark TASK_NUMBER` or `unmark TASK_NUMBER`
 
@@ -305,6 +325,17 @@ All changes to your tasks are saved automatically into a JSON file at `[JAR FILE
 There is no need to manually save your tasks.
 
 > 💡 **Note:** Advanced users are welcome to manually edit the save file.
+
+The following fields are required to correctly load a task:
+
+|    Fields     | Description                                                 | Accepted inputs                                            |
+|:-------------:|-------------------------------------------------------------|------------------------------------------------------------|
+|  identifier   | Tasks with the same identifier are recurrence of each other | Any number from 1-65535                                    |
+|  description  | Description for the task                                    | Any phrases or sentences                                   |
+| do_date_start | Date and time to start working on the task                  | d/M/yyyy HH:mm (e.g `25/5/2022 16:00` for 25 May 2022 4pm) |
+|  do_date_end  | Date and time to stop working on the task                   | d/M/yyyy HH:mm, must be after DO_DATE_START                |
+|    by_date    | Deadline for the task                                       | d/M/yyyy HH:mm, must be after DO_DATE_END                  |
+|    status     | Status of the task                                          | `X` for completed, `-` for incomplete                      |
 
 ### Enter study session: `study`
 Enter the study session where you can start timers to help finish your tasks.
@@ -505,9 +536,10 @@ Format: `leave`
 **Q**: My save file is corrupted, how do I resolve this?
 
 **A**: Sherpass will print an error message 
-containing details of the corruption (e.g., missing fields, brackets). You can either modify the save file accordingly to
-rectify the problem or allow Sherpass to create a new save file 
-**(Caution: You will lose all previously saved tasks!)**
+containing details of the corruption (e.g., missing fields, brackets). You can either modify the save file manually to
+rectify the problem or allow Sherpass to create a new save file. 
+
+> ⚠️ Caution: You will lose all previously saved tasks if you choose the latter!
 
 **Q**: How do I transfer my data to another computer? 
 
@@ -519,26 +551,26 @@ rectify the problem or allow Sherpass to create a new save file
 * *Extraneous* - Something that is unnecessary or irrelevant.
 ## Command Summary
 
-| Action                        | Format, Examples                                                                                                                                                             |
-|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Generate timetable            | `show today` / `show DATE` / `show week` / `show MONTH`                                                                                                                      |
-| List all tasks                | `show all`                                                                                                                                                                   |
-| List all pending tasks        | `show todo`                                                                                                                                                                  |
-| Clear multiple tasks          | `clear all` / `clear expired` / `clear done`                                                                                                                                  |
-| Add single task               | `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by DEADLINE]`<br/>e.g. `add write final essay /do 25/3/2022 /start 20:00 /end 22:00 /by 27/3/2022`       |
-| Delete task(s)                | `delete TASK_NUMBER`                                                                                                                                                         |
-| Edit single task              | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME] [/by DEADLINE]`<br/>e.g.`edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00` |
-| Add recurring task            | `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY`<br/>e.g. `add attend cs2113t lecture /do 25/3/2022 /start 16:00 /end 18:00 /repeat WEEKLY` |
-| Edit recurring task           | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start TIME /end TIME] /repeat`<br/>e.g.`edit 1 /do 25/3/2022 /start 18:00 /end 20:00 /repeat`                                |
-| Mark a task as done           | `mark TASK_NUMBER`                                                                                                                                                           |
-| Mark a task as undone         | `unmark TASK_NUMBER`                                                                                                                                                         |
-| Enter study session           | `study`                                                                                                                                                                      |
-| Start default timer           | `start MODE_NUMBER`                                                                                                                                                          |
-| Start custom timer            | `start /custom DURATION`                                                                                                                                                     |
-| Start stopwatch               | `start stopwatch`                                                                                                                                                            |
-| Pause timer/stopwatch         | `pause`                                                                                                                                                                      |
-| Resume timer/stopwatch        | `resume`                                                                                                                                                                     |
-| Stop timer/stopwatch          | `stop`                                                                                                                                                                       |
-| Show tasks (in study session) | `show all`                                                                                                                                                                   |
-| Leave study session           | `leave`                                                                                                                                                                      |
-
+| Action                        | Format, Examples                                                                                                                                                                                                                                 |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Generate timetable            | `show today` / `show DATE` / `show week` / `show MONTH`                                                                                                                                                                                          |
+| List all tasks                | `show all`                                                                                                                                                                                                                                       |
+| List all pending tasks        | `show todo`                                                                                                                                                                                                                                      |
+| Clear multiple tasks          | `clear all` / `clear expired` / `clear done`                                                                                                                                                                                                     |
+| Add single task               | `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME]`<br/>e.g. `add revise chapter 3 /do 25/6/2022 /start 20:00 /end 22:00`                                                                     |
+| Edit single task              | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME]`<br/>e.g. `edit 3 submit draft essay /start 10:00 /end 13:00`                                                         |
+| Delete single task            | `delete TASK_NUMBER`                                                                                                                                                                                                                             |
+| Add recurring task            | `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME] /repeat FREQUENCY`<br/>e.g. `add cs2113t weekly quiz /do 21/6/2022 /start 16:00 /end 18:00 /bydate 25/6/2022 /bytime 16:00 /repeat WEEKLY` |
+| Edit recurring task           | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME] /repeat`<br/>e.g.`edit 5 /start 13:00 /end 14:00 /repeat`                                                             |
+| Delete recurring task         | `delete TASK_NUMBER /repeat`                                                                                                                                                                                                                     |
+| Mark a task as done           | `mark TASK_NUMBER`                                                                                                                                                                                                                               |
+| Mark a task as undone         | `unmark TASK_NUMBER`                                                                                                                                                                                                                             |
+| Enter study session           | `study`                                                                                                                                                                                                                                          |
+| Start default timer           | `start MODE_NUMBER`                                                                                                                                                                                                                              |
+| Start custom timer            | `start /custom DURATION`                                                                                                                                                                                                                         |
+| Start stopwatch               | `start stopwatch`                                                                                                                                                                                                                                |
+| Pause timer/stopwatch         | `pause`                                                                                                                                                                                                                                          |
+| Resume timer/stopwatch        | `resume`                                                                                                                                                                                                                                         |
+| Stop timer/stopwatch          | `stop`                                                                                                                                                                                                                                           |
+| Show tasks (in study session) | `show all`                                                                                                                                                                                                                                       |
+| Leave study session           | `leave`                                                                                                                                                                                                                                          |

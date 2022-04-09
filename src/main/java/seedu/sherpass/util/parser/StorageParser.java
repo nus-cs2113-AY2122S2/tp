@@ -2,7 +2,6 @@ package seedu.sherpass.util.parser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 
