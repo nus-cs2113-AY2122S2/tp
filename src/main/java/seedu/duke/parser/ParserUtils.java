@@ -4,6 +4,7 @@ import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class ParserUtils {
@@ -66,8 +67,9 @@ public class ParserUtils {
      * @throws InvMgrException if the given string representation of date does not follow YYYY-MM-DD
      */
     public static LocalDate parseDate(String dateStr) throws InvMgrException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            LocalDate date = LocalDate.parse(dateStr);
+            LocalDate date = LocalDate.parse(dateStr, formatter);
             return date;
         } catch (DateTimeParseException e) {
             throw new InvMgrException(Messages.INVALID_DATE_FORMAT);
