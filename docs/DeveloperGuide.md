@@ -227,7 +227,6 @@ and perform the deletion of that event.
 6. If it is a meeting that the user is trying to delete, the DeleteCommand will find that meeting in 
 everyone's timetable and delete it.
 
-
 Example of usage:
 
 `delete n/John i/1`
@@ -239,6 +238,13 @@ The following sequence diagram shows how the `delete` command works:
 ![DeleteCommandSequenceDiagram](images/DeleteCommandSequenceDiagram.png)
 
 Before the timetable is listed out, it will also be sorted according to day and time for easy reading.
+
+## 3.6 Clear events `clear`
+The `clear` command is a command that the user can clear a certain user's timetable or everyone's timetable.
+
+`clear [user]` clears the timetable for the particular user.
+
+`clear all` clears the timetable for all users.
 
 ## 3.7 Data Saving Feature
 
@@ -281,13 +287,6 @@ If yes, it will call for ParserLocalData.prepareLoadMeeting method to add all th
 
 The following sequence diagram shows how the load operation works:
 ![LoadSequenceDiagram](images/LoadSequenceDiagram.png)
-
-## 3.6 Clear events `clear`
-The `clear` command is a command that the user can clear a certain user's timetable or everyone's timetable.
-
-`clear [user]` clears the timetable for the particular user.
-
-`clear all` clears the timetable for all users.
 
 ## Appendix A: Product scope
 ### Target user profile
