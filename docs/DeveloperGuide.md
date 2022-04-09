@@ -279,7 +279,7 @@ The example given below is for the listing of workouts in WerkIt! (`workout /lis
 
 ![logicComponentUML](uml/sequenceDiagrams/miscellaneous/images/logicComponentSD.png)
 <br><br>
-<span class="box info">:memo: This is a high-level overview of how the creation of workouts
+<span class="box info">:memo: This is a high-level overview of how the listing of workouts
 is done. To improve readability, some classes and methods have been omitted from the diagram above.</span>
 
 <br>
