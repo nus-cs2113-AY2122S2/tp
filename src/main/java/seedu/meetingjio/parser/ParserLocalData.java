@@ -4,23 +4,18 @@ package seedu.meetingjio.parser;
 
 import seedu.meetingjio.commands.AddLessonCommand;
 import seedu.meetingjio.commands.AddMeetingCommand;
-import seedu.meetingjio.timetables.MasterTimetable;
-import seedu.meetingjio.timetables.Timetable;
+import seedu.meetingjio.exceptions.InvalidEventTypeException;
 import seedu.meetingjio.exceptions.DuplicateTimetableException;
+import seedu.meetingjio.exceptions.InvalidNameException;
+import seedu.meetingjio.exceptions.MissingValueException;
+import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.InvalidModeException;
-import seedu.meetingjio.exceptions.InvalidTimeException;
-import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.MissingParameterException;
-import seedu.meetingjio.exceptions.InvalidEventTypeException;
+import seedu.meetingjio.timetables.MasterTimetable;
+import seedu.meetingjio.timetables.Timetable;
 
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_LOAD_LESSON;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_LOAD_LESSON;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME_LOADING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY_LOADING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE_LOADING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_LOAD_MEETING;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_USER_LOAD_NAME;
+import static seedu.meetingjio.common.ErrorMessages.*;
 
 public class ParserLocalData {
 
@@ -50,10 +45,13 @@ public class ParserLocalData {
      */
     public static void prepareLoadName(String name, MasterTimetable masterTimetable) {
         try {
+            parserHelperMethods.checkName(name);
             Timetable timetable = new Timetable(name);
             masterTimetable.addTimetable(timetable);
         } catch (DuplicateTimetableException det) {
-            throw new RuntimeException("[" + name + "]" + ERROR_DUPLICATE_USER_LOAD_NAME);
+            throw new RuntimeException("[" + name + "] " + ERROR_DUPLICATE_USER_LOAD_NAME);
+        } catch (InvalidNameException ine) {
+            throw new RuntimeException("[" + name + "] " + ERROR_INVALID_NAME);
         }
     }
 
