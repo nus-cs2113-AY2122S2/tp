@@ -15,7 +15,15 @@ import seedu.meetingjio.exceptions.MissingParameterException;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
-import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_USER_LOAD_NAME;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_LOAD_LESSON;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_NAME;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_LOAD_LESSON;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME_LOADING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY_LOADING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE_LOADING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_LOAD_MEETING;
+
 
 public class ParserLocalData {
 
