@@ -255,7 +255,7 @@ Format:
 Below is an example of the schedule that is being displayed from the given date
 25/3/2022:
 
-![ShowDateTimetableFormat](images/showDateTimetableFormat.png)
+![ShowDateTimetableFormat](images/showDateTimetableFormat.PNG)
 
 ### Display Weekly Schedule: `show week` / `show next week`
 
