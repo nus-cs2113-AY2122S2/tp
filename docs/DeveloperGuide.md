@@ -1,7 +1,7 @@
 # PlanITarium Developer Guide
 
 This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
-workings of PlanITarium such that engineers can understand the various design and implementations in detail.
+workings of PlanITarium such that developers can understand the various design and implementations in detail.
 
 ---
 
@@ -20,7 +20,6 @@ workings of PlanITarium such that engineers can understand the various design an
   * [Command Execution](#command-execution)
   * [Logical Grouping of Persons Added](#logical-grouping-of-persons-added)
   * [Find Command](#find-feature)
-  * [[Proposed] Listing Categorised Expenditures](#proposed-listing-categorised-expenditures-feature)
   * [Data Archiving](#data-archiving)
 * [Documentation](#documentation)
   * [Logging](#logging)
@@ -65,32 +64,33 @@ is responsible for,
 * Read user's commands from standard input for command execution.
 * At shut down, invokes shutdown sequence and calls Storage to save its current data.
 
-[`UI`](#ui-component) is responsible for the UI of PlanITarium.
+[`UI`](#UI-Component) is responsible for the UI of PlanITarium.
 
-[`Commands`](#commands-component) is responsible for the handling and executing of commands.
+[`Commands`](#Commands-Component) is responsible for the handling and executing of commands.
 
-[`Parser`](#parser-component) is responsible for the parsing and validating user input.
+[`Parser`](#Parser-Component) is responsible for the parsing and validating of user input.
 
-[`Family`](#family-component) is responsible for holding the user data of PlanITarium in memory.
+[`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
 
-[`Money`](#money-component) is responsible for holding the monetary information in memory.
+[`Money`](#Money-Component) is responsible for holding the monetary information in memory.
 
-[`Storage`](#storage-component) is responsible for reading and writing data to the hard disk.
+[`Storage`](#Storage-Component) is responsible for reading and writing data to the hard disk.
 
 **How the components interact with each other**
 
-The following Sequence Diagram, with the specific classes and methods abstracted, shows a high-level view on how the 
-components interact for the scenario where the user types `add /g 2 /n Alice`.
+The following Sequence Diagram shows a high-level view on how the components interact when the user enters the command
+`add /g 2 /n Alice`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 > :information_source: **Note:** The lifeline for `AddPersonCommand` ends at the destroy marker :x:
-> but due to the limiations of PlantUML, the lifeline eraches the end of the diagram.
+> but due to the limitations of PlantUML, the lifeline reaches the end of the diagram.
 
-Each of the main components shown in the diagram above is defined and implemented in a class with the same name as its
-component. The section below provides a more in-depth details on how the components interact with one another.
+Each of the components are defined and implemented as a class with the same name. The section below provides 
+more in-depth details on how the components interact with one another.
 
-Each component may have several other classes underneath it, belonging to the same logical grouping, to reduce coupling.
-For example, the `Money` component is defined as an abstract class that is extended by `Income` and `Expenditure`.
+Each component may consist of several classes that are working seamlessly together to achieve their intended abstracted 
+representation. For example, the `Money` component contains an abstract class that is extended by `Income` and 
+`Expenditure` to represent the types of money that can be managed.
 
 ### UI Component
 
@@ -204,36 +204,14 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 ![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
 
 > :information_source: **Note:** The following are the ranges of index deemed valid:
-<table>
-    <thead>
-        <tr>
-            <th>Index</th>
-            <th>Range</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Group</td>
-            <td>[1, ..., 3]</td>
-        </tr>
-        <tr>
-            <td>User</td>
-            <td>[1, ..., MAX_UID], where MAX_UID is the number of people in the given group</td>
-        </tr>
-        <tr>
-            <td>Category</td>
-            <td>[1, ..., 6]</td>
-        </tr>
-        <tr>
-            <td>Income</td>
-            <td>[1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person</td>
-        </tr>
-        <tr>
-            <td>Expenditure</td>
-            <td>[1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person</td>
-        </tr>
-    </tbody>
-</table>
+
+| Index       | Range                                                                              |
+|-------------|------------------------------------------------------------------------------------|
+| Group       | [1, ..., 3]                                                                        |
+| User        | [1, ..., MAX_UID], where MAX_UID is the number of people in the given group        |
+| Category    | [1, ..., 6]                                                                        |
+| Income      | [1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person |
+| Expenditure | [1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person |
 
 ### Family Component
 
@@ -740,3 +718,35 @@ Given below are instructions to test the app manually.
       printed out.
    2. Test case: `find /d Test /c 7`
       Expected: No entries are printed. Error details shown in the error message.
+
+### Saving data
+
+1. Dealing with missing data file
+   1. Delete the save file `PlanITarium.txt` before executing `bye`.
+      Expected: The program checks if the file exists before saving, and creates a new one if it does not.
+2. Dealing with missing directory
+   1. Delete the directory `data` before executing `bye`.
+      Expected: The program checks if the directory exists before saving, and creates a new one if it does not.
+
+### Loading data
+
+1. Dealing with missing data file
+   1. Delete the save file `PlanITarium.txt` if it exists and launch the program.
+      Expected: The program will check if the file exists upon start up, and creates one if it does not.
+2. Dealing with missing directory
+   1. Delete the directory `data` if it exists and launch the program.
+      Expected: The program will check if the directory exists upon start up, and creates on if it does not.
+3. Dealing with corrupted data file
+   1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
+      a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
+   2. Execute the command `bye` to save the data to `PlanITarium.txt`.
+   3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
+      added above.
+   4. Test case: Remove delimiters `/d` in save file. The corrupted record should look like this 
+      `i Donations 200.0 false 2022-04-08`.
+      Expected: Upon starting up the program again, `Storage` will load valid data until it encounters a
+      corrupted entry as seen in the test case. We can check the loaded data by executing the command `list /g 1` 
+      and only `Alice` is printed without the corrupted income entry.
+   5. Test case: Edit task type from income `i` to expenditure `e` in save file. The corrupted record should look like 
+      this `e Donations /d 200.0 /d false /d 2022-04-08`.
+      Expected: Similar to the above expected outcome. 
