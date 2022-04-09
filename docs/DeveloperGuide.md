@@ -21,6 +21,8 @@ The specific details of exactly how view order command will run will be describe
 ### Unit Good Class
 The Unit good class keep track of the unit goods in the warehouse. A unit good is the template, holding the specific details such as SKU, name, description and [Capacity](#capacity-enumeration)
 #### Description
+![Unit Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UnitGood.puml)
+
 Unit goods will be stored as a HashMap<String, UnitGood> in the warehouse with the key being a unique SKU as a string and the value is the actual Unit Good.
 This means that to update a Unit Good details, there is a need to first remove the Unit Good from the HashMap, then add a new instance of the Unit Good. This is to ensure that existing Unit Goods 
 will not be incorrectly overwritten
@@ -37,6 +39,7 @@ Similar to Unit Goods, the Goods will be stored as a HashMap<String, Good> in th
 
 The Goods class allows for the creation of orderline objects which has the following attributes: id, name, quantity and
 description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
+
 ### Capacity Enumeration
 The Capacity enum is meant as a heuristic to determine the size of a unit good and good.
 #### Description
@@ -53,6 +56,8 @@ A diagram can be seen in the [Architecture Class Diagram](#design)
 ### Orderline Class
 A Orderline class will extend the Goods class. It will contain the extra variable of quantityFulfilled and isCheckedOff.
 #### Description
+![Orderline Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Orderline.puml)
+
 The quantity variable here will be to indicate the quantity required to fulfill the current order.
 The quantity fulfilled variable will be to indicate the quantity currently fulfilled for that order. When the quantity fulfilled equals to the quantity required, the variable isCheckedOff will be true.
 This is to indicate that this orderline is fulfilled in that order, and it does not require any more of the good.
@@ -64,7 +69,8 @@ The diagram below shows the model component of the orderline class.
 
 ### Command Parser
 #### Description
-This is the description for the Command Parser
+This is the description for the Command Parser. This is an abstract class which all other parser classes will implement
+![Command Parser Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/CommandParser.puml)
 
 #### Add Parser
 ##### Description
@@ -82,6 +88,9 @@ This is the description for the Command Parser
 ##### Description
 
 ### User Interface Class
+#### Description
+
+### Display Class
 #### Description
 
 ### Match Keyword Class
