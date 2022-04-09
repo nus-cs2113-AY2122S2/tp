@@ -1617,68 +1617,114 @@ The overview of the design of the search features can be found [here](#search-re
 #### Search For Exercise
 
 A summary of the general procedure of search for exercise in the application is as follows:
-1. User enters the command `search /exercise <keyword>`.
+1. User enters the command `search /exercise <exercise keyword>`.
 2. A list of exercise names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /exercise` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchExercise.png)
 
-(Before Step 1) The user's input (in this case will be a `search /exercise <keyword>` command) is obtained
-and parsed to obtain a SearchCommand object that contains the user's input.
+(Before Step 1) The user's input (in this case will be a `search /exercise <exercise keyword>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
 
 <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
-(Steps 1 to 2) When the SearchCommand#execute() method is called, it will identify that the search action is of type `/exercise`.
-Subsequently, it will call the PlanList#listAllPlan() method to display all available plan names.
+(Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/exercise`.
+Subsequently, it will call the `ExerciseList#getExerciseList()` method to search from all the available exercises.
+
+(Step 4) Based on the exercises from the `exerciseList`, the `searchExercise()` will retrieve all the exercises with name
+containing `<exercise keyword>` and display them in the user's terminal.
+
+(Step 5) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for exercise in WerkIt!.
+
+---
 
 #### Search For Workout
-Format: `search /workout <keywords>`
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/workout` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
-The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching names of workout or 'Sorry, no matching workout found' if the user has entered the command
-correctly.
+A summary of the general procedure of search for workout in the application is as follows:
+1. User enters the command `search /workout <exercise keyword or number of reps>`.
+2. A list of workouts with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /workout` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchWorkout.png)
 
-#### Search For Plan
-Format: `search /plan <keywords>`
+(Before Step 1) The user's input (in this case will be a `search /workout <exercise keyword or number of reps>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/plan` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
-The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching names of plan or 'Sorry, no matching plan found' if the user has entered the command
-correctly.
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/workout`.
+Subsequently, it will call the `WorkoutList#getWorkoutsDisplayList()` method to search from all the existing workouts.
+
+(Step 4) Based on the `workout` objects from the `workoutList`, the `searchWorkout()` will retrieve all the workouts with name
+containing `<exercise keyword>` or repetitions equals to `<number of reps>`, and display them in the user's terminal.
+
+(Step 5) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for workout in WerkIt!.
+
+---
+
+#### Search For Plan
+
+A summary of the general procedure of search for plan in the application is as follows:
+1. User enters the command `search /plan <plan keyword>`.
+2. A list of plan names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /plan` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchPlan.png)
 
-#### Search For All
-Format: `search /all <keywords>`
+(Before Step 1) The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/all` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
-The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching names of exercise, workout and plan or not found messages if the user has entered the command correctly.
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 3) When the SearchCommand#execute() method is called, it will identify that the search action is of type `/plan`.
+Subsequently, it will call the `PlanList#getPlansDisplayList()` method to search from all the existing plans.
+
+(Step 4) Based on the `plan` objects from the `planList`, the `searchPlan()` will retrieve all the plans with name
+containing `<plan keyword>`, and display them in the user's terminal.
+
+(Step 5) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for plan in WerkIt!.
+
+---
+
+#### Search For All
+
+A summary of the general procedure of search for plan in the application is as follows:
+1. User enters the command `search /all <keyword>`.
+2. A list of exercise name, workouts and plan names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /all` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
+
+(Before Step 1) The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
+
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 7) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/all`.
+Subsequently, it will call the `ExerciseList#getExerciseList()`, `WorkoutList#getWorkoutsDisplayList()` and
+`PlanList#getPlansDisplayList()` methods to search from all the existing exercises, workouts and plans.
+
+(Step 8) Based on the exercises, `workout` objects and `plan` objects retrieved, the `searchAll()` will retrieve 
+all the matching results, and display them in the user's terminal.
+
+(Step 9) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for all in WerkIt!.
+
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
