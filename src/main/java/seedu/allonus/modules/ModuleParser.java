@@ -6,6 +6,9 @@ import seedu.allonus.modules.exceptions.ModuleCodeException;
 import seedu.allonus.modules.exceptions.ModuleCategoryException;
 import seedu.allonus.modules.exceptions.InvalidFindInputException;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -37,6 +40,12 @@ public class ModuleParser {
     public static final String WRONG_TIME_FORMAT_MESSAGE = "Accepted module time slot input is"
             + " a valid timeslot of type HH:MMam/pm - HH:MMam/pm";
 
+    private static final String TIME_FORMAT_WITH_AMPM = "h:mma";
+    private static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern(TIME_FORMAT_WITH_AMPM)
+            .toFormatter();
+
+
 
     /**
      * Add module messages.
@@ -55,7 +64,8 @@ public class ModuleParser {
     public static final String FIND_MISSING_QUERY_MESSAGE = "You have not entered a search keyword to find modules!";
     public static final String FIND_SPECIAL_CHARACTERS_MESSAGE = "You have entered a special character."
             + " Please refine your search query!";
-
+    public static final String FIND_COMMON_SEARCH_QUERY_MESSAGE = "You have entered a query common to all modules. "
+            + "Please refine your search query!";
 
     /**
      * Messages for exceptions and errors.
@@ -68,6 +78,11 @@ public class ModuleParser {
 
     public static final String LOGGER_IDENTIFIER = "mylogger";
     public static final String REGEX_ALL_MODULE_PARAMETERS = "[mcdt]/";
+    public static final String INVALID_EQUAL_TIMESLOT_MESSAGE = "You have entered an invalid timeSlot. "
+            + "Start time cannot be equal to end time!";
+    public static final String INVALID_GREATER_START_TIME_MESSAGE = "You have entered an invalid timeslot. "
+            + "Start time cannot be later than end time!";
+
 
     private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
 
@@ -349,9 +364,24 @@ public class ModuleParser {
         String timeSlot = null;
         if (matcher.find()) {
             timeSlot = matcher.group().trim();
+            timeSlot = checkTimeStartEarlier(timeSlot);
             return timeSlot;
         } else {
             throw new ModuleTimeException(WRONG_TIME_FORMAT_MESSAGE);
+        }
+    }
+
+    private String checkTimeStartEarlier(String timeSlot) throws ModuleTimeException {
+        String[] splitTimeArray = timeSlot.split("-", 2);
+        LocalTime startTime = LocalTime.parse(splitTimeArray[0].replaceAll(" ",""), TIME_FORMATTER);
+        LocalTime endTime = LocalTime.parse(splitTimeArray[1].replaceAll(" ",""), TIME_FORMATTER);
+
+        if (endTime.compareTo(startTime) > 0) {
+            return timeSlot;
+        } else if (endTime.compareTo(startTime) == 0) {
+            throw new ModuleTimeException(INVALID_EQUAL_TIMESLOT_MESSAGE);
+        } else {
+            throw new ModuleTimeException(INVALID_GREATER_START_TIME_MESSAGE);
         }
     }
 
@@ -369,7 +399,11 @@ public class ModuleParser {
         } else if (moduleKeyword.equals(":") || moduleKeyword.equals("[") || moduleKeyword.equals("]")
                 || moduleKeyword.equals(",") || moduleKeyword.equals("-")) {
             throw new InvalidFindInputException(FIND_SPECIAL_CHARACTERS_MESSAGE);
+        } else if (moduleKeyword.equals("am") || moduleKeyword.equals("pm")
+                || moduleKeyword.equalsIgnoreCase("module")) {
+            throw new InvalidFindInputException(FIND_COMMON_SEARCH_QUERY_MESSAGE);
+        } else {
+            return moduleKeyword;
         }
-        return moduleKeyword;
     }
 }
