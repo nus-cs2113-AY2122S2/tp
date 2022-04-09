@@ -61,6 +61,10 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 * Added the introduction and a how to use section.
 * Added the application's architecture diagram and component interaction diagram to show how each internal component of the application works together.
 * Explained how the `Storage` Component works in the application [#403](https://github.com/AY2122S2-CS2113T-T10-1/tp/pull/403/files).
+* Added the sequence diagrams and workflow for [`Add a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#add-a-session),
+  [`Remove a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#remove-a-session) and
+  [`Edit a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#edit-a-session) sections of the Developer Guide.
+* Added user stories section.
 
 #### Project Management
 * Setup Organization & Team Repository.
