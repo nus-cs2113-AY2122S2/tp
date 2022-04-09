@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 
 import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
 
-
 /**
  * This class initiates the various classes/components of WerkIt! and contains the logic code for
  * prompting the user for an input continuously until the user enters the exit command.
@@ -193,6 +192,7 @@ public class WerkIt {
                         reloadScheduleFile();
                     }
                 }
+
             } catch (InvalidCommandException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Please try again.");
