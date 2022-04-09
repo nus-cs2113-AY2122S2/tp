@@ -95,63 +95,6 @@ public class Storage {
         }
     }
 
-//    private void loadMedicineData() throws FileNotFoundException {
-//        File data = new File(PATH_MED);
-//        Scanner reader = new Scanner(data);
-//        while (reader.hasNext()) {
-//            String line = reader.nextLine();
-//            String[] parameters = line.split(",");
-//            try {
-//                medicines.add(parameters);
-//            } catch (DuplicateEntryException e) {
-//                continue;
-//            }
-//        }
-//    }
-//
-//    private void loadPatientData() throws FileNotFoundException {
-//        File data = new File(PATH_PAT);
-//        Scanner reader = new Scanner(data);
-//        while (reader.hasNext()) {
-//            String line = reader.nextLine();
-//            String[] parameters = line.split(",");
-//            try {
-//                patients.add(parameters);
-//            } catch (DuplicateEntryException e) {
-//                continue;
-//            }
-//
-//        }
-//    }
-//
-//    private void loadDoctorData() throws FileNotFoundException {
-//        File data = new File(PATH_DOC);
-//        Scanner reader = new Scanner(data);
-//        while (reader.hasNext()) {
-//            String line = reader.nextLine();
-//            String[] parameters = line.split(",");
-//            try {
-//                doctors.add(parameters);
-//            } catch (DuplicateEntryException e) {
-//                continue;
-//            }
-//        }
-//    }
-
-//    private void loadAppointmentData() throws FileNotFoundException {
-//        File data = new File(PATH_APT);
-//        Scanner reader = new Scanner(data);
-//        while (reader.hasNext()) {
-//            String line = reader.nextLine();
-//            String[] parameters = line.split(",");
-//            try {
-//                appointments.add(parameters);
-//            } catch (DuplicateEntryException e) {
-//                continue;
-//            }
-//        }
-//    }
-
     private void loadAppointmentMedData() throws FileNotFoundException {
         File data = new File(PATH_APT_MEDS);
         Scanner reader = new Scanner(data);
