@@ -1,5 +1,7 @@
 package seedu.duke.status;
-
+/*
+ * Holds SUCCESS messages
+ */
 public enum Status {
     ADD_PATIENT_SUCCESS,
     ADD_DOCTOR_SUCCESS,
