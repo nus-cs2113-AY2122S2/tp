@@ -142,7 +142,7 @@ public class Validator {
 
     /* Validate medicine attributes */
     private static boolean validateMedicineName(String medicineName) throws HalpmiException {
-        boolean isValid = medicineName.matches("[a-zA-z]+");
+        boolean isValid = medicineName.matches("[a-zA-z ]+");
         if (!isValid) {
             throw new HalpmiException("Invalid Medicine name");
         }
