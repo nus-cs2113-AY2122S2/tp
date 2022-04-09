@@ -22,11 +22,11 @@ Format: `help`
 ### Adding a doctor: `add doctor`
 Adds a new doctor to the system.
 
-Format: `add doctor /id ID /n NAME /ph PHONE /e EMAIL /dep DEPARTMENT /w WARD_NO`
+Format: `add doctor /id ID /n NAME /ph PHONE /e EMAIL /dep DEPARTMENT`
 
 Example of usage: 
 
-`add doctor /id 222 /n Harry Potter /ph 22223333 /e theChosenOne@gmail.com /dep Defensive /w 2`
+`add doctor /id 222 /n Harry Potter /ph 22223333 /e theChosenOne@gmail.com /dep Defensive`
 
 
 ### Adding a patient: `add patient`
@@ -56,16 +56,19 @@ Example of usage:
 ### Adding a nurse: `add nurse`
 Adds a new nurse to the system.
 
-Format: `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE /w WARD_NO`
+Format: `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE`
 
 Example of usage:
 
-`add nurse /id 001 /n Hermione Granger /ph 11111111 /e ministerForMagic@gmail.com /t Minister /w 2`
+`add nurse /id 001 /n Hermione Granger /ph 11111111 /e ministerForMagic@gmail.com /t Minister`
+
 
 ### Adding a ward: `add ward`
 Adds a new ward to the system.
 
 Format: `add ward /d ID /p ID /n ID /id ID`
+
+* Note that one doctor/nurse can only be assigned to one ward.
 
 Example of usage:
 
@@ -76,6 +79,7 @@ Example of usage:
 Sorts existing appointments in the system (but does not print out) according to time (most recent to least recent).
 
 Format: `sort appointment`
+
 
 ### Viewing doctor/patient/appointment list: `list`
 Lists existing doctors/patients/appointments in the system.
@@ -88,7 +92,12 @@ Example of usage:
 
 `list patient`
 
+`list nurse`
+
+`list ward`
+
 `list appointment`
+
 
 ### Searching a person: `search`
 Searches existing doctors/patients with their numbers in the list.
@@ -101,6 +110,7 @@ Example of usage:
 
 `search patient 3`
 
+
 ### Searching an appointment: `search`
 Searches existing appointments with appointment time.
 
@@ -109,6 +119,7 @@ Format: `search appointment DATETIME`
 Example of usage: 
 
 `search appointment 2007-12-03T10:15:30`
+
 
 ### Editing a person's information
 Editing an existing person's information.
@@ -125,12 +136,14 @@ Example of usage:
 
 `edit /d 1 /e 123489@gmail.com`
 
+
 ### Editing an appointment
 Editing the details of an appointment.
 
 Format: `edit /a APPOINTMENT_INDEX /doctor DOCTOR_INDEX` OR `edit /a APPOINTMENT_INDEX /patient PATIENT_INDEX` OR `edit /a APPOINTMENT_INDEX /time DATETIME`
 
 * Note that you can only edit one information at a time.
+
 
 ### Deleting a person or an appointment: `delete`
 Removes a person or an appointment from the system.
