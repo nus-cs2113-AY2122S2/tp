@@ -373,6 +373,9 @@ Here are the matching modules in your list:
 ---------------------------------------------------
 1: [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
 ---------------------------------------------------
+You have entered a query common to all modules. Please refine your search query!
+---------------------------------------------------
+---------------------------------------------------
 Noted I have removed this module from your schedule:
 [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
 ---------------------------------------------------
@@ -413,6 +416,12 @@ Okay, I have added a new module to the schedule
 [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 ---------------------------------------------------
 ---------------------------------------------------
+You have entered an invalid timeslot. Start time cannot be later than end time!
+---------------------------------------------------
+---------------------------------------------------
+You have entered an invalid timeSlot. Start time cannot be equal to end time!
+---------------------------------------------------
+---------------------------------------------------
 Here is the module that you have chosen to edit:
 [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 Choose the part that you would like to edit:
@@ -441,6 +450,12 @@ Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam
 ---------------------------------------------------
 Here are the changes so far. You can edit more module parameters or you can enter 'done' to stop editing!
 [Module] CS2113 Lecture: Thursday, 03:00pm - 05:00pm
+---------------------------------------------------
+---------------------------------------------------
+You have entered an invalid timeslot. Start time cannot be later than end time!
+---------------------------------------------------
+---------------------------------------------------
+You have entered an invalid timeSlot. Start time cannot be equal to end time!
 ---------------------------------------------------
 ---------------------------------------------------
 Your Module was successfully edited! Here are the changes:

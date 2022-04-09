@@ -95,6 +95,7 @@ done
 find tut
 find cs
 find Cs
+find Module
 rm 1
 find cs
 list
@@ -105,6 +106,8 @@ add m/CS2113 c/lec d/yoyoyo t/2:00pm-4:00pm
 add m/CS2113 c/lec d/12345 t/2:00pm-4:00pm
 add m/CS2113 c/lec d/Thursday t/tangotime
 add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm
+add m/CS2113 c/lec d/Thursday t/9:00pm-4:00pm
+add m/CS2113 c/lec d/Thursday t/9:00pm-9:00pm
 edit 1
 d/yoyoyo
 d/12345
@@ -112,6 +115,8 @@ m/]epf\
 c/Tutorial
 t/2pm-4pm
 t/03:00pm - 05:00pm
+t/9:00pm-4:00pm
+t/9:00pm-9:00pm
 done
 menu
 exit
