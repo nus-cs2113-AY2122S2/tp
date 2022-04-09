@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class DateAdapter extends TypeAdapter<LocalDate> {
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     @Override
     public LocalDate read(JsonReader reader) throws IOException {
         JsonToken token = reader.peek();
