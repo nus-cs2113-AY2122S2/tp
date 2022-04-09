@@ -33,5 +33,5 @@ end
 destroy ":DeleteCommand"
 destroy ":Parser"
 destroy ":Timetable"
-destroy ":Ui"
+
 @enduml
