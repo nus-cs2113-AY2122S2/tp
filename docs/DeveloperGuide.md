@@ -1578,21 +1578,26 @@ This completes the process of clearing of all plans stored in the schedule on We
 
 ### Search
 
-#### Search For Exercise
-Format: `search /exercise <keywords>`
+The overview of the design on search features can be found [here](#search-related-features).
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/exercise` and call the constructor of `SearchCommand` class by passing relevant parameters related to search exercise
-to the constructor. The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching exercises or 'Sorry, no matching exercise found' if the user has entered the command
-correctly.
+#### Search For Exercise
+
+A summary of the general procedure of search for exercise in the application is as follows:
+1. User enters the command `search /exercise <keyword>`.
+2. A list of exercise names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /exercise` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchExercise.png)
+
+(Before Step 1) The user's input (in this case will be a `search /exercise <keyword>` command) is obtained
+and parsed to obtain a SearchCommand object that contains the user's input.
+
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 2) When the SearchCommand#execute() method is called, it will identify that the search action is of type `/exercise`.
+Subsequently, it will call the PlanList#listAllPlan() method to display all available plan names.
 
 #### Search For Workout
 Format: `search /workout <keywords>`
