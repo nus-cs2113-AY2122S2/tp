@@ -19,7 +19,7 @@ Welcome to SplitLah!
 2.  Delete an existing session
         Syntax: session /delete /sid [SESSION_ID]
 3.  Edit an existing session
-        Syntax: session /edit /sid [SESSION_ID] {</n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}
+        Syntax: session /edit /sid [SESSION_ID] {/n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}
 4.  View an existing session's details
         Syntax: session /view /sid [SESSION_ID]
 5.  List all existing sessions
