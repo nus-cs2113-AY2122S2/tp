@@ -324,6 +324,8 @@ The save file has the following fields:
 The sequence diagram of `Storage#load()` is shown here:
 ![](images/StorageLoadSD.png)
 
+> 💡 **Note:** The TaskList is saved to disk at the end to ensure consistency
+
 `Storage#load()` will throw exceptions in the following scenarios
 1. The content of the save file cannot be parsed by `JSONObject` (i.e. the format of the file is incorrect)
 2. There are missing fields for a task

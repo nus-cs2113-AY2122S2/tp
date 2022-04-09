@@ -42,9 +42,8 @@ opt fileContent not empty
         Storage -> List ++: addTask(task)
         List --> Storage --
     end
-
-    Storage -> Storage ++ : writeSavedData(taskList)
-    Storage --> Storage --
 end
+Storage -> Storage ++ : writeSavedData(taskList)
+Storage --> Storage --
 return taskList
 @enduml

@@ -19,7 +19,6 @@ class TaskList {
     +getTasks():ArrayList<Task>
 }
 
-
 Storage ..> StorageParser
 Storage ..> TaskList
 @enduml
