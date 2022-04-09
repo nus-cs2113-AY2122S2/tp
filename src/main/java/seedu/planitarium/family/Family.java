@@ -185,9 +185,9 @@ public class Family {
         Double sum = 0.0;
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
-            Double income = personList.getTotalIncome()
+            Double income = personList.getTotalIncome();
             String incomeString = UI.formatValue(income);
-            Double expenditure = personList.getTotalExpenditure()
+            Double expenditure = personList.getTotalExpenditure();
             String expenditureString = UI.formatValue(expenditure);
             Double remain = personList.getRemain();
             sum += remain;
