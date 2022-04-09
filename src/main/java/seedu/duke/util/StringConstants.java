@@ -231,7 +231,9 @@ public class StringConstants {
             + "0_0:\n%s";
     public static final String MODIFIED_JSON_EXCEPTION = "\nSomething went wrong trying to read the JSON save data.\n"
             + "Has it been manually modified? >:(";
-
+    public static final String ERROR_INVALID_CONFIGURATION = "Invalid config found in loaded config data.\n"
+            + "Aborting load...";
+    public static final String ERROR_INVALID_CONFIG_VALUE = "Config \"%s\" has illegal value \"%s\". Aborting load...";
 
 
     /**

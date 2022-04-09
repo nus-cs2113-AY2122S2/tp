@@ -7,11 +7,15 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+
+import seedu.duke.exceptions.InvalidConfigurationException;
+import seedu.duke.exceptions.InvalidConfigurationValueException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
 import seedu.duke.exceptions.UnknownException;
@@ -25,17 +29,26 @@ public class ConfigurationStorage extends JsonStorage<Configuration> {
     public Configuration loadData(String path) throws ModHappyException {
         Gson gson = new GsonBuilder().create();
         Path file = new File(path).toPath();
+        Configuration configuration;
         try {
             Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
-            return gson.fromJson(reader, (Type) Configuration.class);
+            configuration = gson.fromJson(reader, (Type) Configuration.class);
         } catch (JsonSyntaxException e) {
             throw new ReadException();
-        } catch (JsonParseException e) {
-            throw new ReadException(MODIFIED_JSON_EXCEPTION);
-        } catch (IOException e) {
+        } catch (JsonParseException | IOException e) {
             throw new ReadException(MODIFIED_JSON_EXCEPTION);
         } catch (Exception e) {
             throw new UnknownException(e.toString());
         }
+        HashMap<Configuration.ConfigurationGroup,String> configMap = configuration.configurationGroupHashMap;
+        for (Configuration.ConfigurationGroup key : configMap.keySet()) {
+            if (key == null) {
+                throw new InvalidConfigurationException();
+            }
+            if (!Configuration.LEGAL_VALUES.get(key).contains(configMap.get(key))) {
+                throw new InvalidConfigurationValueException(key, configMap.get(key));
+            }
+        }
+        return configuration;
     }
 }
