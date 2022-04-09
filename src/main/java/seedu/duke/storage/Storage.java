@@ -33,7 +33,7 @@ public class Storage {
 
 
     private final String filePath;
-    private Path dataPath;
+    private static Path dataPath;
 
     public Storage(String filePath) throws InvMgrException {
         this.filePath = filePath;
@@ -66,6 +66,7 @@ public class Storage {
      * @param itemList the ArrayList of items to write to the data file
      * @throws InvMgrException for any IO exceptions while writing
      */
+
     public void save(List<Item> itemList) throws InvMgrException {
         if (itemList == null) {
             throw new NullPointerException();
@@ -73,7 +74,7 @@ public class Storage {
         try {
             Gson gson = new Gson();
             String serializedItems = gson.toJson(itemList);
-            Files.writeString(this.dataPath,
+            Files.writeString(dataPath,
                     serializedItems,
                     StandardCharsets.UTF_8,
                     StandardOpenOption.WRITE,

@@ -11,6 +11,7 @@ import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.ListCurrentBorrowingsCommand;
 import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.LostCommand;
 import seedu.duke.commands.ListOverdueBorrowingsCommand;
 import seedu.duke.commands.ListFutureBorrowingsCommand;
 import seedu.duke.commands.ListAvailableBorrowingsCommand;
@@ -85,6 +86,9 @@ public class InputParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case LostCommand.COMMAND_WORD:
+            return new LostCommandParser().parse(arguments);
 
         default:
             throw new InvMgrException(Messages.INVALID_COMMAND);

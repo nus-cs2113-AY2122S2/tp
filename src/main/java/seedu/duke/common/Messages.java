@@ -22,6 +22,15 @@ public class Messages {
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would be negative! "
             + "Your command has been terminated; no changes were made.";
+    public static final String MISSING_ITEM_NUMBER_MESSAGE = "Sorry, you haven't entered an item number."
+            + " Please enter an item number!\n";
+    public static final String INVALID_ITEM_NUMBER_MESSAGE = "Sorry, You haven't entered a valid item number."
+            + " Please enter a valid item number!\n";
+    public static final String EMPTY_ITEM_LIST_MESSAGE = "Your inventory is currently empty. "
+            + "Please enter add an item first!";
+    public static final String ITEM_NUMBER_OUT_OF_RANGE_MESSAGE = "Sorry, the item number is out of range. "
+            + "Please enter a different item number!";
+    public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost.";
     public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. "
             + "Please ensure that end date >= start date.";
     public static final String INVALID_DATES_CONCLICT = "Sorry. The item is not available on this date, "
