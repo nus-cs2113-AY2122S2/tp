@@ -224,57 +224,76 @@ Further, maintaining a record of the equipment is a time-consuming task given th
 ### Adding equipment
 1. Adding equipment to inventory
    1. Test case: ``add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
+   
       Expected: Equipment successfully added.
    2. Test case: ``add n/`SpeakerB` s/`S1404115ASF` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
+
       Expected: Unable to add equipment with missing attributes.
    3. Test case: ``add n/`SpeakerB` s/`S1404115ASF` t/`something` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
+
       Expected: Unable to add equipment, Equipment Type has to be `MICROPHONE`, `SPEAKER`, `STAND` or `CABLE`.
    4. Test case: ``add n/`SpeakerB` s/`S1404115ASF` t/`something` c/`1000` pf/`Loud_Technologies` pd/`2123928` ``
+
       Expected: Unable to add equipment, date must be in YYYY-MM-DD format.
 2. Adding equipment with duplicate serial number to inventory
    1. Prerequisites: There is already equipment in the inventory, for example the one added above.
    2. Test case: ``add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
+
       Expected: Unable to add equipment with duplicate serial number.
+   
 ### Updating equipment
 1. Updating equipment in inventory
    1. Prerequisite: There is already equipment present in the inventory.
    2. Test case: ``update s/`S1404115ASF` n/`SpeakerC` c/`2510` pd/`2022-08-21` ``
+
       Expected: Equipment details updated with the specified values
    3. Test case: ``update s/`S1404115ASF` c/`2510` rand/`SpeakerC` pd/`2022-08-21` ``
+
       Expected: Update unsuccessful due to unrecognised tag.
 
 ### Checking equipment
 1. Checking for equipment matching to a specified attribute value
    1. Prerequisite: There is already equipment present in the inventory.
    2. Test case: ``check n/`Mic` ``
+
       Expected: List of equipment with name containing `Mic`.
    3. Test case: ``check c/`700` ``
+
       Expected: List of equipment with cost of `700`.
    4. Test case: ``check pf/`Tech` ``
+
       Expected: List of equipment purchased from supplier with name containing `Tech`.
    5. Test case: ``check pd/`2022-01-27` ``
+
       Expected: List of equipment purchased on `2022-01-27`.
    6. Test case: ``check t/`SPEAKER` ``
+
       Expected: List of equipment of type `SPEAKER`.
 2. Checking for equipment, but using wrong input format
    1. Prerequisite: There is already equipment present in the inventory.
    2. Test case: ``check c/`hello` ``
+
       Expected: Error in displaying equipment, specified cost needs to be able to be parsed to double.
    3. Test case: ``check t/`BLA` ``
+
       Expected: Error in displaying equipment, specified type has to be `MICROPHONE`, `SPEAKER`, `STAND` or `CABLE`.
    4. Test case: ``check pd/`2022` ``
+
       Expected: Error in displaying equipment, specified date needs to follow `YYYY-MM-DD` format.
 
 ### Listing equipment
 1. Listing all equipment available in inventory
    1. Test case: `list`
+
       Expected: List of all equipment. 
 
 ### Saving
 1. Manual saving of application state
    1. Test case: `save`
+
       Expected: Successfully saved.
 2. Auto saving of application state
    1. Prerequisite: Application state automatically saved after every 5 commands issued.
    2. Test case: Execution of any 5 commands
+
       Expected: Application auto saved.
