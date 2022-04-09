@@ -66,6 +66,11 @@ public class Parser {
         this.arguments = ParserArguments.getArgumentsFromInput(input);
     }
 
+    /**
+     * Parse the command word and return the respective functions or command objects.
+     *
+     * @return The respective command object
+     */
     public Command parseCommand() {
         switch (command) {
         case AddUserCommand.COMMAND_WORD:
