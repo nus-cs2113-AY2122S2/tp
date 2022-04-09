@@ -132,7 +132,7 @@ Example of usage:
 
 * _Result_: Entry for Alice is added to Parents' tracking list with a user index (uid) of **1**.
 
-  ![add-command-screenshot](images/AddPerosn.png)
+  ![add-command-screenshot](images/AddPerson.png)
 
 ---
 
@@ -434,9 +434,9 @@ the [features](#features) section.
 | [View all commands](#viewing-all-commands-codehelpcode)                     | help                                                                                                                                                                |
 | [Add a person](#add-a-person-codeaddcode)                                   | add /n __ /g __ <br/>e.g.<br/> `> add /n Alice /g 1`                                                                                                                |
 | [Delete a person](#delete-a-person-codedeletecode)                          | delete /g __ /u __ <br/>e.g.<br/> `> delete /g 1 /u 2`                                                                                                              |
-| [Add an income](#add-an-income-codeaddincode)                               | addin /g__ /u __ /i __ /d __ /p __ <br/>e.g.<br/>f`> addin /g 2 /u 3 /i 2000 /d salary /p t`                                                                        |
+| [Add an income](#add-an-income-codeaddincode)                               | addin /g__ /u __ /i __ /d __ /p __ <br/>e.g.<br/> `> addin /g 2 /u 3 /i 2000 /d salary /p t`                                                                        |
 | [Delete an income](#delete-an-income-codedeleteincode)                      | deletein /g __ /u __ /r __ <br/>e.g.<br/> `> deletein /g 2 /u 1 /r 5`                                                                                               |
-| [Edit an income](#edit-an-income-codeeditincode)                            | editin /g __ /u __ /r __ [ /i __ /d __ /p __ ] <br/>e.g.<br/> `> editin /g 3 /u 1 /r 5 /i 10 /d stationary` <br/>f`> editin /g 2 /u 4 /r 1 /d red pack /p f`        |
+| [Edit an income](#edit-an-income-codeeditincode)                            | editin /g __ /u __ /r __ [ /i __ /d __ /p __ ] <br/>e.g.<br/> `> editin /g 3 /u 1 /r 5 /i 10 /d stationary` <br/> `> editin /g 2 /u 4 /r 1 /d red pack /p f`        |
 | [Add an expenditure](#add-an-expenditure-codeaddoutcode)                    | addout /g__ /u __ /e __ /d __ /c __ /p __ <br/>e.g.<br/> `> addout /g 2 /u 3 /e 400 /d books /c 1 /p f`                                                             |
 | [Delete an expenditure](#delete-an-expenditure-codedeleteoutcode)           | deleteout /g __ /u __ /r __ <br/>e.g.<br/> `> deleteout /g 2 /u 1 /r 1`                                                                                             |
 | [Edit an expenditure](#edit-an-expenditure-codeeditoutcode)                 | editout /g __ /u __ /r __ [ /e __ /d __ /c __ /p __ ] <br/>e.g.<br/> `> editout /g 2 /u 1 /r 2 /e 400 /d dinner /c 3` <br/> `> editout /g 1 /u 2 /r 6 /d misc /p t` |
@@ -450,9 +450,9 @@ the [features](#features) section.
 
 | Index | Name                  |
 |-------|-----------------------|
-| 0     | Others                |
-| 1     | Food and Drinks       |
-| 2     | Home and Utilities    |
-| 3     | Health and Medical    |
-| 4     | Transportation        |
-| 5     | Fun and Entertainment |
+| 1     | Others                |
+| 2     | Food and Drinks       |
+| 3     | Home and Utilities    |
+| 4     | Health and Medical    |
+| 5     | Transportation        |
+| 6     | Fun and Entertainment |
