@@ -5,6 +5,7 @@ import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.stream.Stream;
 
 import static seedu.duke.parser.CliSyntax.PREFIX_ITEM_INDEX;
@@ -42,11 +43,39 @@ public class BorrowCommandParser implements Parser<BorrowCommand> {
         LocalDate endDate = ParserUtils.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
         String borrowerName = argMultimap.getValue(PREFIX_BORROWER_NAME).get();
 
+        // Throw exception if startDate > endDate
+        checkDateOrder(startDate, endDate);
+        // Throw exception if borrow duration >= 7 days
+        checkBorrowDuration(startDate, endDate);
+
+        return new BorrowCommand(itemIndex, quantity, startDate, endDate, borrowerName);
+    }
+
+    /**
+     * Throws exception if startDate and endDate are in ascending order.
+     *
+     * @param startDate Start date of borrowing.
+     * @param endDate End date of borrowing.
+     * @throws InvMgrException If startDate > endDate
+     */
+    public void checkDateOrder(LocalDate startDate, LocalDate endDate) throws InvMgrException {
         if (startDate.isAfter(endDate)) {
             throw new InvMgrException(Messages.INVALID_START_END_DATE);
         }
+    }
 
-        return new BorrowCommand(itemIndex, quantity, startDate, endDate, borrowerName);
+    /**
+     * Throws exception if borrow duration > 7 days.
+     *
+     * @param startDate Start date of borrowing.
+     * @param endDate End date of borrowing.
+     * @throws InvMgrException If endDate - startDate > 7 days.
+     */
+    public void checkBorrowDuration(LocalDate startDate, LocalDate endDate) throws InvMgrException {
+        Period period = Period.between(startDate, endDate);
+        if (period.getDays() > 7) {
+            throw new InvMgrException(Messages.INVALID_BORROW_DURATION);
+        }
     }
 
     /**

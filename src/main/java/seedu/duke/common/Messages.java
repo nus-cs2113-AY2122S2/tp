@@ -39,4 +39,5 @@ public class Messages {
             + "Please reduce your quantity borrowed or try another date.";
     public static final String INVALID_BORROW_LOST_ITEM = "Sorry. The item is lost and "
             + "not available for borrowing.";
+    public static final String INVALID_BORROW_DURATION = "Error. You can only borrow for a maximum of 7 days.";
 }

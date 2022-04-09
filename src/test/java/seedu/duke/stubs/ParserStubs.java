@@ -21,8 +21,8 @@ public class ParserStubs {
     public static final String ITEM_INDEX = "1";
     public static final String BORROW_START_DATE_STR = "2022-03-21";
     public static final LocalDate BORROW_START_DATE = LocalDate.parse("2022-03-21");
-    public static final String BORROW_END_DATE_STR = "2022-03-30";
-    public static final LocalDate BORROW_END_DATE = LocalDate.parse("2022-03-30");
+    public static final String BORROW_END_DATE_STR = "2022-03-23";
+    public static final LocalDate BORROW_END_DATE = LocalDate.parse("2022-03-23");
     public static final String BORROWER_NAME = "John";
 
     public static final Item PAPERCUP_ITEM = new Item(ParserStubs.PAPERCUP_NAME,
