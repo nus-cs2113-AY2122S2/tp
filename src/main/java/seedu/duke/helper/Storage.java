@@ -1,8 +1,14 @@
 package seedu.duke.helper;
 
-
-import seedu.duke.assets;
-import seedu.duke.assets.*;
+import seedu.duke.assets.Appointment;
+import seedu.duke.assets.AppointmentList;
+import seedu.duke.assets.Doctor;
+import seedu.duke.assets.DoctorList;
+import seedu.duke.assets.List;
+import seedu.duke.assets.Medicine;
+import seedu.duke.assets.MedicineList;
+import seedu.duke.assets.Patient;
+import seedu.duke.assets.PatientList;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.UserInputErrorException;
 
@@ -64,14 +70,12 @@ public class Storage {
                 }
 
 
-            } catch (UserInputErrorException e) {
-                corruptedLines.add(e + "\nLine: " + line);
-                //UI.printParagraph(line);
+            } catch (UserInputErrorException | DuplicateEntryException e) {
+                if (e instanceof UserInputErrorException) {
+                    corruptedLines.add(e + "\nLine: " + line);
+                }
+                // if duplicate entry just ignore
             }
-            catch (DuplicateEntryException e) {
-                //just ignore any duplicates
-                continue;
-             }
         }
         if (corruptedLines.size() != 0 && !outputFilePathCorrupted.equals("nope")) {
             saveCorruptedData(outputFilePathCorrupted, corruptedLines);
@@ -79,7 +83,7 @@ public class Storage {
                     + "It has been moved to another file named "
                     + outputFilePathCorrupted);
         }
-        }
+    }
 
     private void saveCorruptedData(String filePath, ArrayList<String> stringArray) {
         File file = new File(filePath);
@@ -94,9 +98,9 @@ public class Storage {
         }
         try {
             FileWriter dataWrite = new FileWriter(filePath,true);
-            dataWrite.write("Session: " + LocalDateTime.now().toString() +"\n");
+            dataWrite.write("Session: " + LocalDateTime.now().toString() + "\n");
             for (String s : stringArray) {
-                dataWrite.write(s+ "\n");
+                dataWrite.write(s + "\n");
             }
             dataWrite.write("----------------------------------------------------------\n");
             dataWrite.close();
@@ -105,15 +109,15 @@ public class Storage {
         }
     }
 
-//    private void loadAppointmentMedData() throws FileNotFoundException {
-//        File data = new File(PATH_APT_MEDS);
-//        Scanner reader = new Scanner(data);
-//        while (reader.hasNext()) {
-//            String line = reader.nextLine();
-//            String[] parameters = line.split(",");
-//            appointments.loadMedicine(parameters);
-//        }
-//    }
+    private void loadAppointmentMedData() throws FileNotFoundException {
+        File data = new File(PATH_APT_MEDS);
+        Scanner reader = new Scanner(data);
+        while (reader.hasNext()) {
+            String line = reader.nextLine();
+            String[] parameters = line.split(",");
+            appointments.loadMedicine(parameters);
+        }
+    }
 
 
 
@@ -124,11 +128,11 @@ public class Storage {
             loadGenericData(PATH_MED, medicines);
             loadGenericData(PATH_APT, appointments);
             loadGenericData(PATH_APT_MEDS, appointments);
-//            loadDoctorData();
-//            loadPatientData();
-//            loadMedicineData();
-//            loadAppointmentData();
-//            loadAppointmentMedData();
+            /*loadDoctorData();
+            loadPatientData();
+            loadMedicineData();
+            loadAppointmentData();
+            loadAppointmentMedData();*/
         } catch (FileNotFoundException f) {
             UI.printParagraph("No saved data found!");
         }

@@ -48,19 +48,6 @@ public class Parser {
         }
     }
 
-    private static String[] parameterCheckOpenLength(String parameters) throws UserInputErrorException {
-        try {
-            String[] parametersArray = parameters.split(",");
-
-            for (int i = 0; i < parametersArray.length; i++) {
-                parametersArray[i] = parametersArray[i].trim();
-            }
-            return parametersArray;
-        } catch (Exception e) {
-            throw new UserInputErrorException("There is one or more parameters missing");
-        }
-    }
-
     private static boolean isNull(String string) {
         return string == null;
     }
