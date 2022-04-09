@@ -66,7 +66,11 @@ hide SaveCommand circle
 hide SaveCommand attributes
 hide SaveCommand methods
 
-Main--> Storage
-SaveCommand --> Storage
+ModHappyStorageManager --> Storage
+hide ModHappyStorageManager circle
+hide ModHappyStorageManager attributes
+hide ModHappyStorageManager methods
+Main..> ModHappyStorageManager
+SaveCommand ..> ModHappyStorageManager
 
 @enduml

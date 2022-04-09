@@ -107,11 +107,11 @@ The `Parser` component serves to interpret user input and construct the relevant
 > `NoArgumentParser` is an exception to the above; instead of being associated with a single command type, it is responsible for handling all commands which do not accept any arguments.
 
 The following details how the `Parser` component works at runtime:
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ParserSequenceDiagram.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/ParserSequenceDiagram.puml)
 1. A single `ModHappyParser` instance is initialised by `Main` during at the start of the program.
 2. Each time the user inputs a command, `ModHappyParser`'s `parseCommand()` method with the input as the parameter.
 3. `ModHappyParser` identifies the relevant command-specific parser `XYZParser` and passes on the remaining unparsed arguments to its `parseCommand()` method.
-4. `XYZParser` parses the remaining command arguments and uses them to construct an `XYZCommand` instance, which is subsequently returned to `Main`.
+4. `XYZParser` parses the subsequently command arguments, and may branch the arguments to sub-parsers, and finally construct an `XYZCommand` instance, which is subsequently returned to `Main`.
 
 <br>
 
@@ -263,8 +263,8 @@ Several type-specific classes exist, each overseeing the storage of a different 
 * `ConfigurationStorage` handles the saving and loading of user preferences. This data is stored in the `data/configuration.json` file.
 * `TaskListStorage` handles the saving and loading of the General Tasks list as an `ArrayList<Task>` instance. This data is stored in the `data/tasks.json` file.
 * `ModuleListStorage` handles the saving and loading of all user-created modules as well as the tasks associated with them as an `ArrayList<Module>` instance. This data is stored in the `data/modules.json` file.
-
-Implementation of JsonStorage applies [Gson](https://sites.google.com/site/gson/gson-user-guide), which is a Java library that can be used to convert Java Objects into their JSON representation and back. The Gson object tasks a specific class to wrap  JSON string to an equivalent Java object, which is why the load method for each class should be implemented independently.
+* `ModuleHappyStorageManager` a singleton object keeps a reference of storage and provides other Components easy and encapsulated access to write and load all kinds of data in Mod Happy.
+  Implementation of JsonStorage applies [Gson](https://sites.google.com/site/gson/gson-user-guide), which is a Java library that can be used to convert Java Objects into their JSON representation and back. The Gson object tasks a specific class to wrap  JSON string to an equivalent Java object, which is why the load method for each class should be implemented independently.
 <br><br><br>
 
 ## 7. User Stories
