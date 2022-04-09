@@ -1,8 +1,11 @@
 @startuml
 'https://plantuml.com/class-diagram'
+!include ../Style.puml
+
 hide circle
 
 skinparam classAttributeIconSize 0
+
 title Class Diagram of Plan Component
 
 WerkIt -> Parser
@@ -15,36 +18,36 @@ PlanCommand -d-> FileManager
 PlanCommand -r-> PlanList
 
 
-class WerkIt {
+class WerkIt COLOR_WERKIT {
 + startContinuousUserPrompt()
 }
 
-class PlanList {
+class PlanList COLOR_LOGIC {
 + createAndAddPlan(userArgument:String):Plan
 + listAllPlan():void
 + listPlanDetails(userArgument:String, ui:UI):void
 + deletePlan(userArgument:String):Plan
 }
 
-class FileManager {
+class FileManager COLOR_STORAGE {
 + writeNewPlanToFile(newPlan:Plan):void
 + rewriteAllPlansToFile(planList:PlanList):void
 }
 
-class "{abstract}\nCommand" {
+class "{abstract}\nCommand" COLOR_LOGIC {
 }
 
-class PlanCommand {
+class PlanCommand COLOR_LOGIC {
 + execute():void
 }
 
-class UI {
+class UI COLOR_UI {
 + getUserInput()
 + printNewPlanCreatedMessage(newPlan:Plan):void
 + printDeletePlanMessage(deletedPlan:Plan):void
 }
 
-class Parser {
+class Parser COLOR_PARSER {
 + parseUserInput(userInput:String):Command
 + createPlanCommand(userInput:String):PlanCommand
 }

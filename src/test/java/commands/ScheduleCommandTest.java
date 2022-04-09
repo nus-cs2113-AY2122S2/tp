@@ -3,10 +3,11 @@ package commands;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.plans.InvalidPlanException;
+import data.plans.Plan;
 import data.plans.PlanList;
 import data.schedule.DayList;
-import data.schedule.InvalidScheduleException;
 import data.workouts.InvalidWorkoutException;
+import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import storage.FileManager;
 import storage.LogHandler;
@@ -16,9 +17,7 @@ import werkit.UI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,6 +31,7 @@ class ScheduleCommandTest {
     FileManager fileManager;
     DayList dayList;
 
+    //@@author emilysim00
     @BeforeEach
     void setUp() throws InvalidWorkoutException, InvalidExerciseException, InvalidPlanException {
         LogHandler.startLogHandler();
@@ -47,14 +47,21 @@ class ScheduleCommandTest {
         exerciseList.addExerciseToList("sit up");
         exerciseList.addExerciseToList("pull up");
 
-        workoutList.createAndAddWorkout("push up /reps 10");
-        workoutList.createAndAddWorkout("sit up /reps 15");
-        workoutList.createAndAddWorkout("pull up /reps 20");
+        Workout newWorkout1 = workoutList.createNewWorkout("push up /reps 10");
+        workoutList.addNewWorkoutToLists(newWorkout1);
+        Workout newWorkout2 = workoutList.createNewWorkout("sit up /reps 15");
+        workoutList.addNewWorkoutToLists(newWorkout2);
+        Workout newWorkout3 = workoutList.createNewWorkout("pull up /reps 20");
+        workoutList.addNewWorkoutToLists(newWorkout3);
 
-        planList.createAndAddPlan("more muscles /workouts 1,2,1,2");
-        planList.createAndAddPlan("more arm muscles /workouts 1,3,1,3");
-        planList.createAndAddPlan("only core /workouts 2,2,2,2");
+        Plan newPlan1 = planList.createNewPlan("more muscles /workouts 1,2,1,2");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("more arm muscles /workouts 1,3,1,3");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("only core /workouts 2,2,2,2");
+        planList.addNewPlanToLists(newPlan3);
     }
+    //@@author
 
     @Test
     void setUserAction_createInvalidAction_expectInvalidCommandException() {

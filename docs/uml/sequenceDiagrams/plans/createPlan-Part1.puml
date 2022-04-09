@@ -7,35 +7,39 @@ autonumber
 title Sequence Diagram of `plan /new` Command
 hide footbox
 
-participant "werkIt:WerkIt" AS WerkIt #Sandybrown
-participant "newCommand\n:PlanCommand" AS newCommand #LightSkyBlue
-participant "planList\n:PlanList" AS PlanList #LightSkyBlue
-participant "ui:UI" AS UI2 #YellowGreen
-participant "fileManager:FileManager" as FileManager #IndianRed
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:PlanCommand" AS newCommand COLOR_LOGIC
+participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
+participant "ui:UI" AS UI2 COLOR_UI
+participant "fileManager:FileManager" as FileManager COLOR_STORAGE
 
-activate WerkIt #Sandybrown
+activate WerkIt COLOR_WERKIT
 ref over WerkIt
 Obtain and parse user input.
 end
 
 WerkIt -> newCommand : execute()
-activate newCommand #LightSkyBlue
-newCommand -> PlanList : createAndAddPlan(userArgument)
-activate PlanList #LightSkyBlue
+activate newCommand COLOR_LOGIC
+newCommand -> PlanList : createNewPlan(userArgument)
+activate PlanList COLOR_LOGIC
 ref over PlanList
-Create new Plan
-and add it to list.
+Create a new plan.
 end
 newCommand <-- PlanList : newPlan:Plan
 deactivate PlanList
 
+newCommand -> PlanList : addNewPlanToLists(newPlan)
+activate PlanList COLOR_LOGIC
+newCommand <-- PlanList
+deactivate PlanList
+
 newCommand -> UI2 : printNewPlanCreatedMessage(newPlan)
-activate UI2 #YellowGreen
+activate UI2 COLOR_UI
 newCommand <-- UI2
 deactivate UI2
 
 newCommand -> FileManager : writeNewPlanToFile(newPlan)
-activate FileManager #IndianRed
+activate FileManager COLOR_STORAGE
 ref over FileManager
 Write new Plan data
 into file on user's system.

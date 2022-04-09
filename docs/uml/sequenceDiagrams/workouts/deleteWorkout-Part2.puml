@@ -7,25 +7,28 @@ autonumber 2.1
 title Sequence Diagram of `WorkoutList#deleteWorkout()`
 hide footbox
 
-participant "workoutList\n:WorkoutList" AS wl #LightSkyBlue
+participant "workoutList\n:WorkoutList" AS wl COLOR_LOGIC
+participant ":Integer" COLOR_LOGIC
+participant "workoutsDisplayList:\nArrayList<String>" COLOR_LOGIC
+participant "workoutsHashMapList:\nHashMap" COLOR_LOGIC
 
-activate wl #LightSkyBlue
+activate wl COLOR_LOGIC
 wl -> ":Integer" :parseInt(userArgument)
-activate ":Integer"
+activate ":Integer" COLOR_LOGIC
 return indextoDelete:int
 deactivate ":Integer"
 
 wl -> wl :getWorkoutFromIndexNum(indexToDelete)
-activate wl #LightSkyBlue
+activate wl COLOR_LOGIC
 return deletedWorkout:Workout
 
 wl -> "workoutsDisplayList:\nArrayList<String>" :remove(indexToDelete - 1)
-activate "workoutsDisplayList:\nArrayList<String>"
+activate "workoutsDisplayList:\nArrayList<String>" COLOR_LOGIC
 return
 deactivate "workoutsDisplayList:\nArrayList<String>"
 
 wl -> "workoutsHashMapList:\nHashMap" :remove(deletedWorkout)
-activate "workoutsHashMapList:\nHashMap"
+activate "workoutsHashMapList:\nHashMap" COLOR_LOGIC
 return
 deactivate "workoutsHashMapList:\nHashMap"
 

@@ -20,14 +20,21 @@ end
 
 WerkIt -> newCommand : execute()
 activate newCommand COLOR_LOGIC
-newCommand -> WorkoutList : createAndAddWorkout(userArguments)
+newCommand -> WorkoutList : createNewWorkout(userArgument)
 activate WorkoutList COLOR_LOGIC
 ref over WorkoutList
 Create new Workout
-and add it to list.
 end
 newCommand <-- WorkoutList : "newWorkout:Workout"
 deactivate WorkoutList
+
+newCommand -> WorkoutList : addNewWorkoutToList(newWorkout)
+activate WorkoutList COLOR_LOGIC
+ref over WorkoutList
+Add new Workout to lists
+(Method calls not shown)
+end
+return
 
 newCommand -> UI : printNewWorkoutCreatedMessage(newWorkout)
 activate UI COLOR_UI

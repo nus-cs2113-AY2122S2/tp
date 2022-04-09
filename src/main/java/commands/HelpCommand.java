@@ -2,8 +2,11 @@ package commands;
 
 import werkit.UI;
 
+/**
+ * A class that will handle the commands relating to help.
+ */
 public class HelpCommand extends Command {
-    public static final String BASE_KEYWORD = "help";
+    public static final String KEYWORD_BASE = "help";
 
     private final UI ui = new UI();
 

@@ -1,4 +1,6 @@
 @startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
 skinparam groupInheritance 2
 skinparam classFontSize 15
 hide circle
@@ -26,34 +28,34 @@ PlanList <-u- SearchCommand
 }
 
 Parser-.>Command:creates >
-WerkIt-r.>Command: execute >
+WerkIt-r.>Command: executes >
 
-class "{abstract}\nCommand" as Command #LightSkyBlue {
+class "{abstract}\nCommand" as Command COLOR_LOGIC {
 }
-class Parser #Gold {
+class Parser COLOR_PARSER {
 }
-class WerkIt #Sandybrown {
+class WerkIt COLOR_WERKIT {
 }
-class HelpCommand #LightSkyBlue {
+class HelpCommand COLOR_LOGIC {
 }
-class ExitCommand #LightSkyBlue {
+class ExitCommand COLOR_LOGIC {
 }
-class ExerciseCommand #LightSkyBlue {
+class ExerciseCommand COLOR_LOGIC {
 }
-class WorkoutCommand #LightSkyBlue {
+class WorkoutCommand COLOR_LOGIC {
 }
-class PlanCommand #LightSkyBlue {
+class PlanCommand COLOR_LOGIC {
 }
-class ScheduleCommand #LightSkyBlue {
+class ScheduleCommand COLOR_LOGIC {
 }
-class SearchCommand #LightSkyBlue {
+class SearchCommand COLOR_LOGIC {
 }
-class ExerciseList #LightSkyBlue {
+class ExerciseList COLOR_LOGIC {
 }
-class WorkoutList #LightSkyBlue {
+class WorkoutList COLOR_LOGIC {
 }
-class PlanList #LightSkyBlue {
+class PlanList COLOR_LOGIC {
 }
-class DayList #LightSkyBlue {
+class DayList COLOR_LOGIC {
 }
 @enduml

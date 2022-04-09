@@ -15,15 +15,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * A class that will handle the commands relating to workout.
+ * A class that will handle the commands related to workouts.
  */
 public class WorkoutCommand extends Command {
-    public static final String BASE_KEYWORD = "workout";
-    public static final String CREATE_ACTION_KEYWORD = "/new";
-    public static final String CREATE_ACTION_REPS_KEYWORD = "/reps";
-    public static final String LIST_ACTION_KEYWORD = "/list";
-    public static final String DELETE_ACTION_KEYWORD = "/delete";
-    public static final String UPDATE_ACTION_KEYWORD = "/update";
+    public static final String KEYWORD_BASE = "workout";
+    public static final String ACTION_KEYWORD_CREATE = "/new";
+    public static final String ACTION_KEYWORD_CREATE_REPS = "/reps";
+    public static final String ACTION_KEYWORD_LIST = "/list";
+    public static final String ACTION_KEYWORD_DELETE = "/delete";
+    public static final String ACTION_KEYWORD_UPDATE = "/update";
 
     private FileManager fileManager;
     private UI ui = new UI();
@@ -113,13 +113,13 @@ public class WorkoutCommand extends Command {
      */
     public void setUserAction(String userAction) throws InvalidCommandException {
         switch (userAction) {
-        case CREATE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_CREATE:
             // Fallthrough
-        case LIST_ACTION_KEYWORD:
+        case ACTION_KEYWORD_LIST:
             // Fallthrough
-        case DELETE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_DELETE:
             // Fallthrough
-        case UPDATE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_UPDATE:
             this.userAction = userAction;
             break;
         default:
@@ -146,22 +146,23 @@ public class WorkoutCommand extends Command {
     public void execute() {
         try {
             switch (getUserAction()) {
-            case CREATE_ACTION_KEYWORD:
-                Workout newWorkout = getWorkoutList().createAndAddWorkout(getUserArguments());
+            case ACTION_KEYWORD_CREATE:
+                Workout newWorkout = getWorkoutList().createNewWorkout(getUserArguments());
+                getWorkoutList().addNewWorkoutToLists(newWorkout);
                 getUI().printNewWorkoutCreatedMessage(newWorkout);
                 getFileManager().writeNewWorkoutToFile(newWorkout);
                 break;
-            case LIST_ACTION_KEYWORD:
+            case ACTION_KEYWORD_LIST:
                 getWorkoutList().listAllWorkout();
                 break;
-            case DELETE_ACTION_KEYWORD:
+            case ACTION_KEYWORD_DELETE:
                 Workout deletedWorkout = getWorkoutList().deleteWorkout(getUserArguments());
                 getUI().printDeleteWorkoutMessage(deletedWorkout);
                 getPlanList().deletePlanContainsDeletedWorkout(deletedWorkout.toString());
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 getFileManager().rewriteAllPlansToFile(getPlanList());
                 break;
-            case UPDATE_ACTION_KEYWORD:
+            case ACTION_KEYWORD_UPDATE:
                 String currentWorkout = getWorkoutList().getCurrentWorkout(getUserArguments());
                 Workout updatedWorkout = getWorkoutList().updateWorkout(getUserArguments());
                 getUI().printUpdateWorkoutMessage(currentWorkout, updatedWorkout);

@@ -3,9 +3,12 @@ package commands;
 import data.exercises.ExerciseList;
 import werkit.UI;
 
+/**
+ * A class that will handle the commands relating to exercise.
+ */
 public class ExerciseCommand extends Command {
-    public static final String BASE_KEYWORD = "exercise";
-    public static final String LIST_ACTION_KEYWORD = "/list";
+    public static final String KEYWORD_BASE = "exercise";
+    public static final String ACTION_KEYWORD_LIST = "/list";
 
     private UI ui;
     private ExerciseList exerciseList;
@@ -24,7 +27,7 @@ public class ExerciseCommand extends Command {
 
     public void setUserAction(String userAction) throws InvalidCommandException {
         switch (userAction) {
-        case LIST_ACTION_KEYWORD:
+        case ACTION_KEYWORD_LIST:
             this.userAction = userAction;
             break;
         default:
@@ -42,7 +45,7 @@ public class ExerciseCommand extends Command {
     public void execute() {
         try {
             switch (userAction) {
-            case LIST_ACTION_KEYWORD:
+            case ACTION_KEYWORD_LIST:
                 exerciseList.printExerciseList();
                 break;
             default:

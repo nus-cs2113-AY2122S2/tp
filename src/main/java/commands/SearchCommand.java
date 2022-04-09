@@ -18,11 +18,11 @@ import java.util.logging.Logger;
  * A class that will handle the commands relating to search.
  */
 public class SearchCommand extends Command {
-    public static final String BASE_KEYWORD = "search";
-    public static final String SEARCH_EXERCISE_ACTION_KEYWORD = "/exercise";
-    public static final String SEARCH_WORKOUT_ACTION_KEYWORD = "/workout";
-    public static final String SEARCH_PLAN_ACTION_KEYWORD = "/plan";
-    public static final String SEARCH_ALL_ACTION_KEYWORD = "/all";
+    public static final String KEYWORD_BASE = "search";
+    public static final String ACTION_KEYWORD_EXERCISE = "/exercise";
+    public static final String ACTION_KEYWORD_WORKOUT = "/workout";
+    public static final String ACTION_KEYWORD_PLAN = "/plan";
+    public static final String ACTION_KEYWORD_ALL = "/all";
     public static final String CATEGORY_EXERCISE = "exercise";
     public static final String CATEGORY_WORKOUT = "workout";
     public static final String CATEGORY_PLAN = "plan";
@@ -161,13 +161,13 @@ public class SearchCommand extends Command {
      */
     public void setUserAction(String userAction) throws InvalidCommandException {
         switch (userAction) {
-        case SEARCH_WORKOUT_ACTION_KEYWORD:
+        case ACTION_KEYWORD_WORKOUT:
             //Fallthrough
-        case SEARCH_PLAN_ACTION_KEYWORD:
+        case ACTION_KEYWORD_PLAN:
             //Fallthrough
-        case SEARCH_EXERCISE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_EXERCISE:
             //Fallthrough
-        case SEARCH_ALL_ACTION_KEYWORD:
+        case ACTION_KEYWORD_ALL:
             this.userAction = userAction;
             break;
         default:
@@ -184,25 +184,46 @@ public class SearchCommand extends Command {
      */
     private void printSearchHeading() throws InvalidCommandException {
         switch (userAction) {
-        case SEARCH_EXERCISE_ACTION_KEYWORD:
-            if (isFirstMatch()) {
-                printHeadingMessage(CATEGORY_EXERCISE);
-            }
+        case ACTION_KEYWORD_EXERCISE:
+            printSearchExerciseHeading();
             break;
-        case SEARCH_PLAN_ACTION_KEYWORD:
-            if (isFirstMatch()) {
-                printHeadingMessage(CATEGORY_PLAN);
-            }
+        case ACTION_KEYWORD_PLAN:
+            printSearchPlanHeading();
             break;
-        case SEARCH_WORKOUT_ACTION_KEYWORD:
-            if (isFirstMatch()) {
-                printHeadingMessage(CATEGORY_WORKOUT);
-            }
+        case ACTION_KEYWORD_WORKOUT:
+            printSearchWorkoutHeading();
             break;
         default:
             logger.log(Level.WARNING, "User has entered an invalid search command action.");
             String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
+        }
+    }
+
+    /**
+     * Prints the heading message for search for exercise.
+     */
+    private void printSearchExerciseHeading() {
+        if (isFirstMatch()) {
+            printHeadingMessage(CATEGORY_EXERCISE);
+        }
+    }
+
+    /**
+     * Prints the heading message for search for workout.
+     */
+    private void printSearchWorkoutHeading() {
+        if (isFirstMatch()) {
+            printHeadingMessage(CATEGORY_WORKOUT);
+        }
+    }
+
+    /**
+     * Prints the heading message for search for plan.
+     */
+    private void printSearchPlanHeading() {
+        if (isFirstMatch()) {
+            printHeadingMessage(CATEGORY_PLAN);
         }
     }
 
@@ -213,7 +234,7 @@ public class SearchCommand extends Command {
      */
     private void printHeadingMessage(String category) {
         switch (userAction) {
-        case SEARCH_WORKOUT_ACTION_KEYWORD:
+        case ACTION_KEYWORD_WORKOUT:
             try {
                 Integer.parseInt(userArguments);
                 System.out.println("The " + category + "(s) with "
@@ -293,7 +314,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            ui.printSearchNotFoundMessage(CATEGORY_EXERCISE);
+            ui.printSearchNotFoundMessage(CATEGORY_EXERCISE, getUserArguments());
         }
         clearMatchCount();
     }
@@ -336,7 +357,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            ui.printSearchNotFoundMessage(CATEGORY_PLAN);
+            ui.printSearchNotFoundMessage(CATEGORY_PLAN, getUserArguments());
         }
         clearMatchCount();
     }
@@ -399,7 +420,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            ui.printSearchNotFoundMessage(CATEGORY_WORKOUT);
+            ui.printSearchNotFoundMessage(CATEGORY_WORKOUT, getUserArguments());
         }
         clearMatchCount();
     }
@@ -411,15 +432,15 @@ public class SearchCommand extends Command {
      */
     public void searchAll() throws InvalidCommandException, InvalidPlanException,
             InvalidWorkoutException, InvalidExerciseException {
-        setUserAction(SEARCH_EXERCISE_ACTION_KEYWORD);
+        setUserAction(ACTION_KEYWORD_EXERCISE);
         searchExercise();
         ui.printLine();
-        setUserAction(SEARCH_WORKOUT_ACTION_KEYWORD);
+        setUserAction(ACTION_KEYWORD_WORKOUT);
         searchWorkout();
         ui.printLine();
-        setUserAction(SEARCH_PLAN_ACTION_KEYWORD);
+        setUserAction(ACTION_KEYWORD_PLAN);
         searchPlan();
-        setUserAction(SEARCH_ALL_ACTION_KEYWORD);
+        setUserAction(ACTION_KEYWORD_ALL);
         clearMatchCount();
     }
 
@@ -432,16 +453,16 @@ public class SearchCommand extends Command {
     public void execute() {
         try {
             switch (userAction) {
-            case SEARCH_EXERCISE_ACTION_KEYWORD:
+            case ACTION_KEYWORD_EXERCISE:
                 searchExercise();
                 break;
-            case SEARCH_PLAN_ACTION_KEYWORD:
+            case ACTION_KEYWORD_PLAN:
                 searchPlan();
                 break;
-            case SEARCH_WORKOUT_ACTION_KEYWORD:
+            case ACTION_KEYWORD_WORKOUT:
                 searchWorkout();
                 break;
-            case SEARCH_ALL_ACTION_KEYWORD:
+            case ACTION_KEYWORD_ALL:
                 searchAll();
                 break;
             default:
