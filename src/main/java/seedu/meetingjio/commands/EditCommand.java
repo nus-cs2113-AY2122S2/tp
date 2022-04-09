@@ -80,6 +80,13 @@ public class EditCommand extends Command {
         }
     }
 
+    /**
+     * Edit event based on the values provided.
+     *
+     * @param event Event to be edited
+     * @param eventInfo New attributes' values
+     * @return Boolean True if the edited event is valid
+     */
     private Boolean editEvent(Event event, Map<String, String> eventInfo) {
         try {
             for (Map.Entry<String, String> entry : eventInfo.entrySet()) {
@@ -94,6 +101,14 @@ public class EditCommand extends Command {
         }
     }
 
+    /**
+     * Edit event based on the attribute and values provided.
+     *
+     * @param event Event to be edited
+     * @param attribute Attribute to be edited
+     * @param value New value
+     * @throws InvalidAttributeValueException if the value provided is invalid
+     */
     private void editAttribute(Event event, String attribute, String value) throws InvalidAttributeValueException {
         switch (attribute) {
         case TITLE:

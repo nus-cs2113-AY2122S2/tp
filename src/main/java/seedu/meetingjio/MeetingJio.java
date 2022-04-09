@@ -24,9 +24,6 @@ public class MeetingJio {
     public static void main(String[] args) {
         start();
         try {
-            String name = in.nextLine().trim();
-            System.out.println(MESSAGE_DIVIDER);
-            System.out.println("Hello! " + name);
             Ui.showHelpHint();
             System.out.println(MESSAGE_DIVIDER);
             String userInput = in.nextLine().trim();
