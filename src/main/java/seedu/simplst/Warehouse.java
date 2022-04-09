@@ -150,7 +150,7 @@ public class Warehouse {
             System.out.println(goodList.get(sku));
             System.out.println("Unit size of good: " + unitGoodHashMap.get(sku).getCapacity());
         } else {
-            System.out.println("Could not find unit good with given SKU! Please check input SKU!");
+            System.out.println("Could not find good with given SKU! Please check input SKU!");
         }
     }
 
@@ -159,7 +159,7 @@ public class Warehouse {
             Integer idToBeViewed = Integer.parseInt(orderId);
             for (Order order : orderLists) {
                 if (idToBeViewed.equals(order.getId())) {
-                    System.out.println("Viewing order with sku " + order.getId());
+                    System.out.println("Viewing order with order ID " + order.getId());
                     System.out.println("Receiver: " + order.getReceiver());
                     System.out.println("Shipping address:" + order.getShippingAddress());
                     System.out.println("Items in the order:");
