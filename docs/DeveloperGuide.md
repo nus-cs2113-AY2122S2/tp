@@ -2153,11 +2153,12 @@ The following are some test cases for you to try:
 | Valid workout index number but new repetition value is smaller than 0.                                                                        | `workout /update 1 0`             | Error response (reps specified is invalid), workout is not updated. |
 | Valid workout index number but new repetition value exceeds the upper bound for int data type.                                                | `workout /update 2 2147483648`    | Error response (invalid user argument), workout is not updated.     |
 | Valid workout index but new repetition value is identical with the repetition value of a workout in the workout list with same exercise name. | `workout /update 3 1`             | Error response (identical workout), workout is not updated.         |
-| Invalid workout index number or new repetition value.                                                                                         | `workout /update a 2`             | Error response (invalid user argument), workout is not updated.     |
-| Missing either workout index number or new repetition value.                                                                                  | `workout /update 5`               | Error response (insufficient argument), workout is not updated.     |
-| Missing both workout index number and new repetition value.                                                                                   | `workout /update `                | Error response (invalid command), workout is not updated.           |
+| Workout index number or new repetition value is not an integer.                                                                               | `workout /update a 2`             | Error response (invalid user argument), workout is not updated.     |
+| Missing either workout index number or new repetition value.                                                                                  | `workout /update 4`               | Error response (insufficient argument), workout is not updated.     |
+| Missing both workout index number and new repetition value.                                                                                   | `workout /update `                | Error response (invalid command).                                   |
 | Extra whitespaces between commands arguments.                                                                                                 | `workout         /update 1 2`     | Error response (invalid user action), workout is not updated.       |
 | Extra whitespaces between command parameters.                                                                                                 | `workout /update     1         2` | Error response (invalid user argument), workout is not updated.     |
+| Command with extra arguments.                                                                                                                 | `workout /update 1 8 8`           | Error response (invalid user argument), workout is not updated.     |
 
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
@@ -2214,8 +2215,56 @@ The following are some test cases for you to try:
 
 
 #### Listing Workouts In A Plan
-#### Deleting An Existing Plan
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#list-details-of-a-plan-plan-details).)
 
+**Prerequisites:** Ensure that your plan list has at least one
+plan for you to test the `plan /details` command.
+See [this section](#creating-a-new-plan) to view how you can populate your plan list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case               | Command           | Expected result                                          |
+|:------------------------|:------------------|:---------------------------------------------------------|
+| Valid plan index number | `plan /details 1` | All workouts in plan with index number 1 will be listed. |
+
+##### Negative Test Cases
+
+| Test Case                                                                                      | Command                   | Expected result                                                            |
+|:-----------------------------------------------------------------------------------------------|:--------------------------|:---------------------------------------------------------------------------|
+| Plan index number is smaller than 1 or greater than the total number of plan in the plan list. | `plan /details 0`         | Error response (index out of range), workouts in plan is not displayed.    |
+| Command with extra arguments.                                                                  | `plan /details 1 1`       | Error response (invalid user argument), workouts in plan is not displayed. |
+| Extra whitespaces between commands arguments.                                                  | `plan         /details 1` | Error response (invalid user action), workouts in plan is not displayed.   |
+| Missing plan index number.                                                                     | `plan /details`           | Error response (invalid command).                                          |
+| Plan index number is not an integer.                                                           | `plan /details a`         | Error response (invalid user argument).                                    |
+
+#### Deleting An Existing Plan
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-plan-plan-delete).)
+
+**Prerequisites:** Ensure that your plan list has at least one
+plan for you to test the `plan /delete` command.
+See [this section](#creating-a-new-plan) to view how you can populate your plan list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case               | Command          | Expected result                                          |
+|:------------------------|:-----------------|:---------------------------------------------------------|
+| Valid plan index number | `plan /delete 1` | All workouts in plan with index number 1 will be listed. |
+
+##### Negative Test Cases
+
+| Test Case                                                                                      | Command                  | Expected result                                              |
+|:-----------------------------------------------------------------------------------------------|:-------------------------|:-------------------------------------------------------------|
+| Plan index number is smaller than 1 or greater than the total number of plan in the plan list. | `plan /delete 0`         | Error response (index out of range), plan is not deleted.    |
+| Command with extra arguments.                                                                  | `plan /delete 1 1`       | Error response (invalid user argument), plan is not deleted. |
+| Extra whitespaces between commands arguments.                                                  | `plan         /delete 1` | Error response (invalid user action), plan is not deleted.   |
+| Missing plan index number.                                                                     | `plan /delete`           | Error response (invalid command).                            |
+| Plan index number is not an integer.                                                           | `plan /details a`        | Error response (invalid user argument).                      |
+
+<br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
 ---
