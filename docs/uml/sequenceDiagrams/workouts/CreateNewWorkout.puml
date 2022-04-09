@@ -1,7 +1,7 @@
 @startuml
 !include ../../Style.puml
 
-title Sequence Diagram of `WorkoutList#createAndAddWorkout()`
+title Sequence Diagram of `WorkoutList#createNewWorkout()`
 hide footbox
 
 skinparam participantBackgroundColor COLOR_LOGIC
@@ -31,18 +31,6 @@ create "newWorkout:Workout" AS newWorkout
 wl -> newWorkout : new Workout(userExerciseInput, userRepsInput)
 activate newWorkout
 return newWorkout:Workout
-
-wl -> newWorkout : toString()
-activate newWorkout
-return :String
-
-wl -> "workoutsHashMapList\n:HashMap" : put(newWorkoutKey, newWorkout)
-activate "workoutsHashMapList\n:HashMap"
-return
-
-wl -> "workoutDisplayList\n:ArrayList<String>" : add(newWorkoutKey)
-activate "workoutDisplayList\n:ArrayList<String>"
-return
 
 end
 @enduml

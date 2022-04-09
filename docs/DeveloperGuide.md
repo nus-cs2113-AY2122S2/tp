@@ -692,7 +692,7 @@ a `WorkoutCommand` object that contains the user's input.
 `WorkoutList#createAndAddWorkout()`.
 
 The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createAndAddWorkout()`:
-![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout.png)
+![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateNewWorkout.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and 
 exception throws in `WorkoutList#createAndAddWorkout()` have been omitted.</span> 
