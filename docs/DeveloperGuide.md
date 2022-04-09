@@ -126,6 +126,32 @@ These methods are used during the execution of each of the `Command` class.
 
 The `EquipmentManager` is implemented as the main storage unit of all the equipments during the execution of the program.
 
+### Storage
+
+The `Storage` class is used to store the data of the program. It utilises the Gson library to serialise and deserialise the data.
+There is also a LocalDateAdapter class which is used to convert the LocalDate objects to YYYY-MM-DD format.
+
+#### 1. `saveData` method
+
+The `saveData` method is used to save the Equipments added to the `equipment.json` file.
+The method will automatically create the file if it does not exist.
+While saving the data, the `Equipment` objects in `equipmentList` is converted to a JSON string and saved to the file.
+During the execution of the program, the `equipment.json` file will be updated with the latest data after every 5 commands.
+Alternatively, the user can manually save the data by calling the `save` command.
+
+#### 2. `loadData` method
+
+The `loadData` method is used to load the data from the `equipment.json` file.
+The method is able to handle the cases where:
+
+* The file does not exist.
+* The file is empty.
+* The data in the file is not in the correct format.
+* There are more than one `Equipment` object with the same serial number.
+
+While loading the data, the `equipment.json` file is read and the data is converted from a JSON string to an ArrayList of `Equipment` objects.
+The ArrayList of `Equipment` objects is then added to the `equipmentList` HashMap.
+
 --------------------------------------------------------------------------------------------------------------------
 ## Product scope
 ### Target user profile
