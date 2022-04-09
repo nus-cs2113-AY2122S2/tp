@@ -23,7 +23,8 @@ class WerkIt COLOR_WERKIT {
 }
 
 class PlanList COLOR_LOGIC {
-+ createAndAddPlan(userArgument:String):Plan
++ createNewPlan(userArgument:String):Plan
++ addNewPlanToLists(newPlan:Plan):void
 + listAllPlan():void
 + listPlanDetails(userArgument:String, ui:UI):void
 + deletePlan(userArgument:String):Plan

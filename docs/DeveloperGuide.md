@@ -136,16 +136,16 @@ The *Component Interaction Diagram* shows the inner workings of how each compone
 ![Architecture Sequence Diagram](uml/sequenceDiagrams/miscellaneous/images/ArchitectureSequenceDiagram.png)
 
 <span class="box info">:memo: To improve the diagram's readability, 
-some methods or parameters have been omitted.</span>
+some methods and parameters have been omitted.</span>
 
-1. When `WerkIt` class is initialize, `UI` class is called to ask and get the user input.
+1. When `WerkIt` is initialized, `UI` class is called to ask and get the user input.
 2. The `Parser` class parses the user input and identifies the command type (e.g. plan/schedule/workout/exercise). Based
-   on the command type, the corresponding `Command` object is created.
+   on the command type, the corresponding `Command` object is created, which will then be executed.
 3. When the `Command` object is executed, a sequence of actions will be performed. 
    The actions performed are dependent on the type of action specified by the user.
-4. After the execution process has finished, an appropriate message will be printed to show the user that the command 
+4. After the execution process has finished, an appropriate message may be printed to show the user that the command 
    is executed successfully.
-5. Finally, the change will be written to local file.
+5. Finally, the change may be written to local file.
 
 ### Component Overview
 
@@ -2580,5 +2580,5 @@ rely on former test cases.</span>
 
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
-<br>
+
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
