@@ -27,10 +27,18 @@ Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 
 #### Enhanced Features
 * Separated dependency of parser class from command class by creating Command Parser classes for certain features.
-
+  * These include [ActivityCreateCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/ActivityCreateCommandParser.java),
+    [ActivityDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/ActivityDeleteCommandParser.java) and
+    [GroupViewCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/GroupViewCommandParser.java) classes.
 #### Testing
-* Added JUnit tests for `ActivityCreateCommand` and `ActivityDeleteCommand` classes.
-* Added JUnit tests for `ActivityCreateCommandParser`, `ActivityDeleteCommandParser` and `GroupViewCommandParser` classes.
+* Added JUnit tests for [Activity](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/data/ActivityTest.java),
+  [ActivityCreateCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/ActivityCreateCommandTest.java) and
+  [ActivityDeleteCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/ActivityDeleteCommandTest.java) classes.
+  * Ensure each Junit Test achieved at least 90% coverage.
+* Added JUnit tests for [ActivityCreateCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/ActivityCreateCommandParserTest.java),
+  [ActivityDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/ActivityDeleteCommandParserTest.java) and
+  [GroupViewCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/GroupViewCommandParserTest.java) classes.
+  * Ensure each Junit Test achieved 100% method and line coverage.
 
 ### Documentation Contributions
 Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=ivanaitzliddat&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
