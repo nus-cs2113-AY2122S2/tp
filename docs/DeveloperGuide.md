@@ -693,7 +693,7 @@ a `WorkoutCommand` object that contains the user's input.
 
 The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createNewWorkout()`:
 
-![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateNewWorkout.png)
+![createNewWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateNewWorkout.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and 
 exception throws in `WorkoutList#createNewWorkout()` have been omitted.</span> 
@@ -1795,19 +1795,22 @@ read into the application and stored as a `String`.  The data is then parsed int
 `FileManager#addFileWorkoutToList()`.
 
 **(Step 4)** In `FileManager#addFileWorkoutToList()`, a `String` is crafted to follow a format that is a truncated
-version of the `workout /new` command that is accepted by `WorkoutList#createAndAddWorkout()`. 
+version of the `workout /new` command that is accepted by `WorkoutList#createNewWorkout()`. 
 
 | Original Command                | Truncated `String` |
 |---------------------------------|--------------------|
 | `workout /new push up /reps 10` | `push up /reps 10` |
 
 
-**(Step 5)** The crafted `String` is passed to `WorkoutList#createAndAddWorkout()` to properly add the workout data
-into WerkIt!.
+**(Steps 5 and 6)** The crafted `String` is passed to `WorkoutList#createNewWorkout()` to check the validity of the workout
+data and create the `Workout` object before returning the object to `FileManager#addFileWorkoutToList()`.
 
-Steps 4 to 7 is repeated until all the lines in `workouts.txt` have been read.
+***(Step 7)** The newly created `Workout` object is passed to `WorkoutList#addNewWorkoutToLists()` to add the new
+`Workout` object to the respective data structures maintained in the `WorkoutList` object.
 
-**(Step 8)** A boolean value that indicates whether the loading of `workouts.txt` went without any issues is returned
+Steps 4 to 9 is repeated until all the lines in `workouts.txt` have been read.
+
+**(Step 10)** A boolean value that indicates whether the loading of `workouts.txt` went without any issues is returned
 from `WerkIt#loadWorkoutsFromFile()`. A value of `true` means that no issues were encountered and `false` means otherwise. 
 This boolean will be used to determine the status message of the loading of `workouts.txt`. This status message will then 
 be printed to the terminal.
@@ -1928,7 +1931,7 @@ directory. Each log entry has the following format:
 
 Here's a sample log entry that you may find in `logs.log`:
 ```
-Mar 17, 2022 7:24:43 PM data.workouts.WorkoutList createAndAddWorkout
+Mar 17, 2022 7:24:43 PM data.workouts.WorkoutList createNewWorkout
 INFO: New workout created.
 ```
 
