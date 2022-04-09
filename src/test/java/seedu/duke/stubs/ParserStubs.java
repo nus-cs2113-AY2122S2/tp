@@ -21,8 +21,8 @@ public class ParserStubs {
     public static final String ITEM_INDEX = "1";
     public static final String BORROW_START_DATE_STR = "2022-03-21";
     public static final LocalDate BORROW_START_DATE = LocalDate.parse("2022-03-21");
-    public static final String BORROW_END_DATE_STR = "2022-03-30";
-    public static final LocalDate BORROW_END_DATE = LocalDate.parse("2022-03-30");
+    public static final String BORROW_END_DATE_STR = "2022-03-23";
+    public static final LocalDate BORROW_END_DATE = LocalDate.parse("2022-03-23");
     public static final String BORROWER_NAME = "John";
 
     public static final Item PAPERCUP_ITEM = new Item(ParserStubs.PAPERCUP_NAME,
@@ -47,6 +47,10 @@ public class ParserStubs {
     public static final SearchCommand SEARCHCOMMAND_NAMEANDDESCRIPTION = new SearchCommand(
             Optional.of(PAPERCUP_NAME), Optional.of(PAPERCUP_DESCRIPTION));
     public static final BorrowCommand BORROWCOMMAND_ALL_FIELDS = new BorrowCommand(
-            Integer.parseInt(ITEM_INDEX) - 1, BORROW_START_DATE, BORROW_END_DATE, BORROWER_NAME);
+            Integer.parseInt(ITEM_INDEX) - 1,
+            Integer.parseInt(PAPERCUP_QUANTITY),
+            BORROW_START_DATE,
+            BORROW_END_DATE,
+            BORROWER_NAME);
 }
 
