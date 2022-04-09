@@ -97,15 +97,15 @@ The general procedure for editing a task with the `/repeat` option is as follows
    3. Add the updated task into the temporary list
 5. Use the temporary list as the actual list
 
-The sequence diagram of `EditCommand#execute()` is shown here:
+The sequence diagram of `execute()` in `EditCommand` class is shown here:
 
 ![executesequencediagram](images/EditCommandSD.png)
 
-The reference frame for `editRepeatedTasks()` is shown here:
+The reference frame for `editRepeatedTasks()` in `TaskList` is shown here:
 
 ![editrepeatedtasksequencediagram](images/EditRepeatedTaskSD.png)
 
-The sequence diagram for `editSingleTask()` is omitted as it is similar to how recurring tasks are edited.
+The sequence diagram for `editSingleTask()` in `TaskList` is omitted as it is similar to how recurring tasks are edited.
 
 ##### Using offsets to calculate new dates
 
@@ -307,10 +307,10 @@ the program.
 
 The loading of a save file is done with the function
 
-`Storage#load()` - Loads a saved JSON file and returns an ArrayList of task
+`load()` in `Storage` class - Loads a saved JSON file and returns an ArrayList of task
 
 The path of the JSON file is provided as a parameter in the constructor of `Storage` hence 
-there is no need for any parameters in the `Storage#load()`. Since a save file will be created in the 
+there is no need for any parameters in the `load()` function. Since a save file will be created in the 
 constructor of `Storage` if no such file exists, there should not be any issue with a missing save file.
 
 The save file has the following fields:
@@ -321,12 +321,12 @@ The save file has the following fields:
 - `do_date_end`: The end date and time of the task (d/M/yyyy HH:mm format)
 - `by_date`: The due date of the task (d/M/yyyy HH:mm format) 
 
-The sequence diagram of `Storage#load()` is shown here:
+The sequence diagram of `load()` is shown here:
 ![](images/StorageLoadSD.png)
 
 > 💡 **Note:** The TaskList is saved to disk at the end to ensure consistency
 
-`Storage#load()` will throw exceptions in the following scenarios
+`load()` will throw exceptions in the following scenarios
 1. The content of the save file cannot be parsed by `JSONObject` (i.e. the format of the file is incorrect)
 2. There are missing fields for a task
 3. There are tasks which have clashing date and times
