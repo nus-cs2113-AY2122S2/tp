@@ -689,16 +689,16 @@ a `WorkoutCommand` object that contains the user's input.
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When `WorkoutCommand#execute()` is called, because this is a `workout /new` command, the method will call
-`WorkoutList#createAndAddWorkout()`.
+`WorkoutList#createNewWorkout()`.
 
-The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createAndAddWorkout()`:
+The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createNewWorkout()`:
 ![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateNewWorkout.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and 
-exception throws in `WorkoutList#createAndAddWorkout()` have been omitted.</span> 
+exception throws in `WorkoutList#createNewWorkout()` have been omitted.</span> 
 
 **(Before Step 2.1)** Methods from the `String` and `Integer` classes are called to parse the
-argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the
+argument given to `WorkoutList#createNewWorkout()` to obtain the following information required to create the
 `Workout` object:
 1. Name of the exercise
 2. Number of repetitions associated with the exercise in (1).
@@ -719,20 +719,21 @@ If requirement 1 is not met, an `InvalidExerciseException` will be thrown. If re
 Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability of the 
 sequence diagram.
 
-**(Step 2.1)** If the above checks pass, a new `Workout` object with the user-specified exercise name and
-repetition value is created. 
+**(Steps 2.1 and 2.2)** If the above checks pass, a new `Workout` object with the user-specified exercise name and
+repetition value is created. The new object is then returned to `WorkoutCommand#execute()` 
 
-**(Step 2.3)** Once the `Workout` object is created, a key of the object will be generated (see the 
+**(Steps 4 and 5)** The new `Workout` object passed to `WorkoutList#addNewWorkoutToLists()` to add to two lists maintained
+in the `WorkoutList` object: `workoutsHashMapList` and `workoutsDisplayList`. The following steps are 
+taken:
+1. Key of the `workout` object will be generated (see the 
 [Design Considerations](#design-considerations-for-creating-a-new-workout) section for more details of the `HashMap`
 implementation).
-
-**(Step 2.5)** The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
-
-**(Step 2.7)** The key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
+2. The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
+3. The key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
 `ArrayList<String>` object stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the 
-command `workout /list` is entered by the user. This is the final step of `WorkoutList#createAndAddWorkout()`.
+command `workout /list` is entered by the user. This is the final step of `WorkoutList#createNewWorkout()`.
 
-**(Step 4)** Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
+**(Step 6)** Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
 the user via the terminal. The following is an example of a response after the user entered `workout /new russian twist 
 /reps 50`:
 ```
@@ -744,7 +745,7 @@ Alright, the following workout has been created:
 ----------------------------------------------------------------------
 ```
 
-**(Step 6)** `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
+**(Step 8)** `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
 `workouts.txt` which is stored on the user's local filesystem.
 
 <span class="info box">:memo: For more information on how the data is written to `workouts.txt`, please refer to
