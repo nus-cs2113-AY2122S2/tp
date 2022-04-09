@@ -54,12 +54,12 @@ and contact management tasks done faster than traditional GUI apps.
 #### Navigating from menu to section of interest: `goto`
 Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
 
-Format: `goto m/SECTION`
+Format: `goto SECTION`
 
 **Examples of usage:**
-* `goto m/Expense_Tracker`
-* `goto m/Study_Manager`
-* `goto m/Contacts_Manager`
+* `goto Expense_Tracker`
+* `goto Study_Manager`
+* `goto Contacts_Manager`
 
 **Expected outcome:**
 For expense tracker,

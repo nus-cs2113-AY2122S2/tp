@@ -16,8 +16,8 @@ else Enter expense tracker
     ":AllOnUs" -> "expenseTracker:ExpenseTracker" ++: expenseRunner()
     "expenseTracker:ExpenseTracker" --> ":AllOnUs" --
 else Get help
-    ":AllOnUs" -> "AllOnUs <<class>>"++: displayHelp()
-    "AllOnUs <<class>>" --> ":AllOnUs" --
+    ":AllOnUs" -> ":AllOnUs"++: displayHelp()
+    ":AllOnUs" --> ":AllOnUs" --
 else Unrecognizable or empty command
 
 else exit

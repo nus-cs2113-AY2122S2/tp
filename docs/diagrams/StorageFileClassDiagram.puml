@@ -4,6 +4,7 @@
 skinparam classAttributeIconSize 0
 skinparam guillemet false
 
+hide circle
 class StorageFile
 StorageFile : -fileName
 StorageFile : -dataFileRelativePath
@@ -26,9 +27,7 @@ class ExpenseTracker
 
 class StudyManager
 
-class AllOnUs
 
-AllOnUs --> "1" StorageFile
 StorageFile --> "1" Logger
 StorageFile "1" <--> "1" StudyManager
 StorageFile "1" <--> "1" ContactsManager

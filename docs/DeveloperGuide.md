@@ -84,62 +84,101 @@ This section describes the implementation of core main menu features.
 
 **API:** `AllOnUs.java`
 
-The menu is accessed through a call to static method main() of the AllOnUs class. 
+The menu is accessed through a call to static method `main()` of the AllOnUs class. 
 The Class Diagram below shows the overall structure of the application from the menu's point of view.
-The AllOnUs class and other classes that are coupled to the menu are therefore included.
+The `AllOnUs` class and other classes that are coupled to the menu are therefore included.
 
 ![](images/MenuFeaturesClassDiagram.png)
 
-Note: Exception classes are left out of this diagram that aims to show the core structure of the application. is*Command()
-method here refers to all methods of this form (more on this will be elaborated later in detail). 
+Note: Exception classes are left out of this diagram that aims to show the core structure of the application. `is*Command()`
+and `is*Mode()` methods here refers to all methods of these forms (more on this will be elaborated later in detail). 
 
-As illustrated in the Class Diagram above, the AllOnUs class only associates to one of each of the other classes.
-These classes are, namely, the ContactsManager class which manages the contacts section of the application, 
-the StudyManager class which manages the module and timetable part of the application, the ExpenseTracker class
-which manages the expenses section of the application, the Logger class which helps with logging information about the 
-state of the programme when it is running and the TextUi class which handles user input from command line.
+As illustrated in the Class Diagram above, the `AllOnUs` class only associates to one of each of the other classes.
+These classes are, namely:
+* `ContactsManager` class which manages the contacts section of the application
+* `StudyManager` class which manages the module and timetable part of the application
+* `ExpenseTracker` class which manages the expenses section of the application
+* `StorageFile` class which manages the loading and storing of application related data
+* `Logger` class which helps with logging information about the state of the programme when it is running
+* `TextUi` class which handles user input from command line.
 
-Now we will look at the sequence of operations that take place upon a call to method main() of the AllOnUs class. 
+Now we will look at the sequence of operations that take place upon a call to method `main()` of the `AllOnUs` class. 
 Below is a sequence diagram that shows the core interactions between associated classes and objects in the execution 
 and runtime of the programme.
 
 ![](images/MenuFeaturesSequenceDiagram.png)
 
+![](images/MenuFeaturesModeSeqSubDiagram.png)
+
+As illustrated in the diagram, once `main()` method of AllOnUs is called, a new unnamed `:AllOnUs` object is created 
+for which we execute the non-static method `run()`, which contains a loop for sustained interaction with the user
+(command line). Objects for the `ContactsManager` (`contactsManager`), `StudyManager` (`studyManager`), 
+`ExpenseTracker` (`expenseTracker`), `StorageFile` (`storageFile`) and `TextUi` (`ui`) classes are also created, 
+where `Logger` (`logger`) object is already contained in the relevant field of the `:AllOnUs` object. 
+
+Once the `run()` method is called, the program enters a loop with the following sequence:
+1) `is*Mode()` method is called with parameter `mode` of enumeration `Mode`. If `mode` has value not corresponding to 
+menu mode, step 2 executes. Else, step 3 executes.
+2) either of `expenseRunner()` (belongs to `expenseTracker`), `studyManagerRunner()` (belongs to `studyManager`) or 
+`contactsRunner()` (belongs to `contactsManager`) methods is called depending on `mode` value. 
+3) `getUserInput()` method is called, which belongs to object `ui`, and then checks the returned string for 
+whether it is a command to enter a particular section (essentially step 2), to get help, to exit the application or 
+is an empty or unrecognizable command. 
+
+**Step 1 and 2**:
+
+`mode` can only take 4 possible values which are reflected in the class diagram above in the `Mode` enumeration. 
+* `mode = MENU` signifies that the program is currently in menu mode and should execute normally (i.e. step 3 above).
+* `mode = CONTACTS_MANAGER` signifies that menu interaction with the user should not occur and control should be given 
+to `contactsManager` object (call to runner method of this object).
+* `mode = STUDY_MANAGER` signifies that menu interaction with the user should not occur and control should be given to 
+`studyManager` object.
+* `mode = EXPENSE_TRACKER` signifies that menu interaction with the user should not occur and control should be given 
+to `expenseTracker` object.
+
+`mode` is updated upon every return from a method call to any of the manager/tracker objects. This allows for user to indicate 
+whether they actually want to return to the menu (`mode = MENU`) or want to enter another section of the application
+from the section they entered the command from (any other value of `mode`). The `mode` value is checked by calls to methods of 
+the form `is*Mode()` which are `isContactsManagerMode()`, `isStudyManagerMode()` and `isExpenseTrackerMode()`. 
+
+For example, if user is currently in expense tracker (runner method of `expenseTracker` is executing) and user wants 
+to return to menu, the return value of the runner method will update `mode` to `MENU` for the next iteration in the 
+menu (step 3 executes). If the user, say, wants to jump to the study manager, the return value of the runner method 
+will update `mode` to `STUDY_MANAGER` and control will switch to the study manager (runner method of `studyManager` 
+is called), which is essentially step 2.
+
 ![](images/MenuFeaturesSequenceSubDiagram.png)
 
-As illustrated in the diagram, once main() method of AllOnUs is called, a new unnamed :AllOnUs object is created 
-for which we execute the non-static method run(), which contains a loop for sustained interaction with the user
-(command line). Objects for the ContactsManager (contactsManager), StudyManager (studyManager) and ExpenseTracker (expenseTracker)
-classes are also created, where Logger (logger) and TextUi (ui) objects are already contained in the fields of the 
-:AllOnUs object. 
+**Step 3**:
 
-In the loop, run() method calls the getUserInput() method, which belongs to ui, and then checks the returned string for 
-whether it is a command to enter a particular section, to get help, to exit the application or is an empty or unrecognizable 
-command. 
+Once the user enters a command, `getUserInput()` returns a string `userInput` which becomes a parameter for a function 
+call to static method `is*Command()`, which belongs to the `AllOnUs` class, and the `is*Command()` method is of the 
+form `isStudyManagerCommand()`, `isContactsManagerCommand()` and `isExpenseTrackerCommand()`, `isHelpCommand()`, 
+`isExitCommand()` and `isEmptyCommand()` which are called in a certain sequence. These methods return boolean values 
+which indicate whether `userInput` is a command concerning either of the following actions. 
 
-Command to enter a particular section: 
-The returned string from getUserInput() call becomes a parameter for a function call to static method is*Command(), which
-belongs to the AllOnUs class, and the is*Command() method is of the form isStudyManagerCommand(), isContactsManagerCommand(),
-isExpenseTrackerCommand(), which are called in a certain sequence. For instance, when isStudyManagerCommand() is called with
-the string parameter and the string indeed contains a command to enter the study manager section, then the method returns true,
-else false. If true is returned, we call the studyManagerRunner() method of the studyManager object. The studyManagerRunner() method
-will carry out what it needs to and then eventually return to the run() method of the :AllOnUs object. If false is returned, we proceed 
-to the next check on the string. This is also how the other commands and methods of the same form work. 
+* Command to enter a particular section: 
+  * Either `isContactsManagerCommand()`, `isStudyManagerCommand()` or `isExpenseTrackerCommand()` returns `true` 
+  (called in that order) and execution depending on which method returns `true`, the runner method of the respective 
+  object is called (control switches to one of the managers/tracker).
+  * After the runner method is done executing, the updated `mode` value is returned to the `run()` method of `:AllOnUs object`. 
 
-Command for help section:
-If the isHelpCommand() method returns true on the string representing user input, the displayHelp() static method is called (in AllOnUs class)
-which displays the help section to the user and then returns to the run() method of :AllOnUs object.
+* Command for help section:
+  * If the `isHelpCommand()` method returns `true` on `userInput`, the `displayHelp()` method is called
+  which displays the help section to the user and then returns to the `run()` method.
 
-Empty of unrecognized command:
-When the returned string is empty, we simply continue to the next iteration of the loop. This is essentially similar to a "pass" statement
-as when the user does not input anything, the application silently waits for the user to input something into the command line. 
-When there is an unrecognized command, the application prompts the user through a function call to a static method printInvalidMainMenuCommandMessage()
-(belongs to AllOnUs class and not included in the diagrams above) to enter a known command and suggests referring to the help section.
+* Empty or unrecognized command:
+  * When `userInput` is empty (`isEmptyCommand()` returns `true`), execution continues to the next iteration of the loop. 
+  This is essentially similar to a "pass" statement as when the user does not input anything, the application silently 
+  waits for the user to input something into the command line. 
+  * When there is an unrecognized command (returns `false` on all the methods of type `is*Command()`), the application 
+  prompts the user through a function call to a static method `printInvalidMainMenuCommandMessage()` (belongs to 
+  `AllOnUs` class and not included in the diagrams above) to enter a known command and suggests referring to the help section.
 
-Exit command:
-If the isExitCommand() method returns true on the string representing user input, the loop breaks, and control is returned to the static main()
-method of the AllOnUs class, which then calls the static exit method in the same class to print a termination message, and then finally control
-is returned to the OS. 
+* Exit command:
+  * If the `isExitCommand()` method returns `true` on `userInput`, the loop breaks, and control is returned to the static `main()`
+  method of the `AllOnUs` class, which then calls the static `exit` method in the same class to print a termination message, and then finally control
+  is returned to the OS. 
 
 ### Study Manager component
 API: `StudyManager.java`
@@ -285,16 +324,18 @@ call to update the value of the corresponding field of `contact`.
 Note: Exception classes are left out of this diagram that aims to show the core structure of the load-save functionality.
 Some methods and attributes are not mentioned to keep the diagram simple while keeping the core information visible.
 
-As seen from the class diagram above (which shows the portions relevant to the StorageFile class), 
-the StorageFile class associates to a Logger class, a ContactsManager class, an ExpenseTracker class
-and a StudyManager class. The AllOnUs class (to do with main menu) associates to a StorageFile class and the 
-manager and tracker classes associate to the StorageFile class as well.
+As seen from the class diagram above (which shows the portions relevant to the `StorageFile` class), 
+the `StorageFile` class associates to a `Logger` class, a `ContactsManager` class, an `ExpenseTracker` class
+and a `StudyManager` class. The `AllOnUs` class (to do with main menu) associates to a `StorageFile` class (not shown in class diagram) 
+and the manager and tracker classes associate to the `StorageFile` class as well.
 
-The StorageFile class has private attributes `fileName` and `dataFileRelativePath` which define the name of the file
+The `StorageFile` class has private attributes `fileName` and `dataFileRelativePath` which define the name of the file
 and the relative path of the file to project directory, which are utilized in creating/locating the file by the 
-StorageFile class. More details on this will be discussed soon. All the methods in this class are public and the
-only static method `setFields()` is utilized by class AllOnUs to initialize the StorageFile class with instances of
-the ContactsManager, ExpenseTracker and StudyManager classes used in the application and the file related attributes.
+`StorageFile` class. More details on this will be discussed soon. 
+
+All the methods in this class are public and the
+only static method `setFields()` is utilized by class `AllOnUs` to initialize the `StorageFile` class with instances of
+the `ContactsManager`, `ExpenseTracker` and `StudyManager` classes (used in the application) and the file related attributes.
 
 `get*InFileFormat()`, `load*()` and `create*()` methods represent multiple methods that adhere to the respective forms
 and will be discussed further as needed. 
@@ -308,19 +349,19 @@ We first talk about the save functionality.
 
 Upon any modification to the lists maintained by the manager or tracker objects, a boolean `isModified` is changed to 
 `true` (initially `false` at the start of every iteration of interaction with the user) and this triggers a call to 
-the `saveData()` method of the StorageFile class. If the file for saving does not exist, it is created. While creating 
+the `saveData()` method of the `StorageFile` class. If the file for saving does not exist, it is created. While creating 
 the file, if it is discovered the directory does not exist either, it is created first. These are done through calls to 
 `createFile()` and `createDirectory()`. 
 
 The total number of expense items maintained by the expense tracker is then obtained through a call to `getExpenseCount()`
-which is a method of the ExpenseTracker class. For each of these items, we get a file representation of this expense item
+which is a method of the `ExpenseTracker` class. For each of these items, we get a file representation of this expense item
 through a call to `getExpenseInFileFormat()`, which obtains the specific expense item through a call to `getExpenseList()`
-and this item is converted into file format. The expense item entry is then written to the file in "append" mode and is
+and this item is converted into file format. The expense item entry is then written to the file in `append` mode and is
 now considered "saved". These steps are repeated for module items managed by study manager and contact items managed 
 by contacts manager. 
 
 After all entries have been saved, control returns to where the `saveData()` method was called from so that interaction
-with the user can continue. 
+with the user can resume. 
 
 #### Load
 
@@ -328,24 +369,24 @@ with the user can continue.
 ![](images/StorageFileLoadSeqSubDiagram.png)
 
 This feature is only executed at the start of the application when we need to load the data stored on a file into our
-application. The `loadData()` method of StorageFile class is called by the `run()` method of AllOnUs class before
-entering the user interaction loop of the main menu. There is then a self-invocation of `transferDataFromFileToList()`
-which open the file to be loaded from before reading data from it. In the event the file does not exist, an exception 
-"FileNotFoundException" is raised which is caught by the `loadData()` method and the file creation process described 
+application. The `loadData()` method of `StorageFile` class is called by the `run()` method of AllOnUs class before
+entering the user interaction loop of the main menu. There is then a self-invocation of `transferDataFromFileToList()`,
+which opens the file to be loaded from before reading data from it. In the event the file does not exist, an exception 
+`FileNotFoundException` is raised which is caught by the `loadData()` method and the file creation process described 
 earlier occurs before a call to `transferDataFromFileToList()` again. In the sequence diagram above, this mechanism
 is described using "opt" to simplify the diagram but the outcome is equivalent to what is actually happening. 
 
 Once `transferDataFromFileToList()` is called (assuming the file is created by now, or the process above would repeat),
 each entry in the file is read and using a simple "if-else" clause we can determine whether the entry is an expense,
 a module or a contact (format of saved entry is specific to entry type). If it is an expense, `loadExpense()` is called
-which then calls `loadAdd()` belonging to the ExpenseTracker instance representing the expense tracker of the application.
+which then calls `loadAdd()` belonging to the `ExpenseTracker` instance representing the expense tracker of the application.
 `loadAdd()` then calls the local method used for addition of expense entries into the locally maintained list.
 Here, we can see that the loading mechanism essentially relies on the underlying (already existing) item addition mechanisms
 that the manager and tracker classes possess to load entries correctly.
 Similar operations occur for entries of type module and contact. 
 
 Once all the entries have been loaded and there are no more lines to be read, the loop breaks and control returns to 
-the `run()` method of AllOnUs, so that interactions with the user can begin. 
+the `run()` method of `:AllOnUs`, so that interactions with the user can begin. 
 
 
 ## Glossary

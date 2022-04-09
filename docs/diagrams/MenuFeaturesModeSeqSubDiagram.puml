@@ -1,11 +1,19 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
+skinparam guillemet false
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+mainframe sd Enter appropriate section depending on mode value
+activate ":AllOnUs"
+alt mode is contacts manager mode
+    ":AllOnUs" -> "contactsManager:ContactsManager" ++: contactsRunner()
+    "contactsManager:ContactsManager" --> ":AllOnUs" --
+else mode is study manager mode
+    ":AllOnUs" -> "studyManager:StudyManager" ++: studyManagerRunner()
+    "studyManager:StudyManager" --> ":AllOnUs" --
+else mode is expense tracker mode
+    ":AllOnUs" -> "expenseTracker:ExpenseTracker" ++: expenseRunner()
+    "expenseTracker:ExpenseTracker" --> ":AllOnUs" --
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+end
 @enduml
