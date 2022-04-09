@@ -78,14 +78,7 @@ public class ClearCommand extends Command {
      * @return printAllClearConfirmation() A confirmation string that all records have been cleared
      */
     private String clearAll(MasterTimetable masterTimetable) {
-        int numTimetables = masterTimetable.getSize();
-        Timetable timetable;
-        for (int i = 0; i < numTimetables; i++) {
-            timetable = masterTimetable.getByIndex(0);
-            clearTimetable(timetable);
-            masterTimetable.removeByIndex(0);
-        }
-        masterTimetable.deleteAllMeetings();
+        masterTimetable.clearAll();
         return printAllClearConfirmation();
     }
 
@@ -95,10 +88,7 @@ public class ClearCommand extends Command {
      * @param timetable The timetable containing multiple events
      */
     private void clearTimetable(Timetable timetable) {
-        int numEntries = timetable.size();
-        for (int i = 0; i < numEntries; i++) {
-            timetable.remove(0);
-        }
+        timetable.clearAll();
         assert (timetable.size() == 0) : ERROR_NON_EMPTY_LIST;
     }
 

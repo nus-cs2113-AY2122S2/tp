@@ -77,6 +77,10 @@ public class MasterTimetable {
         return timetables.get(index);
     }
 
+    public void clearAll() {
+        timetables.clear();
+    }
+
     /**
      * Remove timetable at the specified index.
      *
@@ -281,38 +285,6 @@ public class MasterTimetable {
         for (int i = 0; i < meetingList.size(); i++) {
             if (meeting.equals(meetingList.get(i))) {
                 meetingList.remove(i);
-            }
-        }
-    }
-
-    /**
-     * Deletes all meetings that exist.
-     *
-     * @return String Message that all meetings were deleted as new user was added
-     *
-     */
-    public String deleteAllMeetings() {
-        for (Timetable timetable : timetables) {
-            deleteMeetingsFromTimetable(timetable);
-        }
-        for (int i = 0; i < meetingList.size(); i++) {
-            meetingList.remove(0);
-        }
-        assert meetingList.size() == 0 : ERROR_NON_EMPTY_LIST;
-        return NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
-    }
-
-    /**
-     * Deletes all meetings from specified timetable.
-     *
-     * @param timetable Specific timetable to perform delete on
-     *
-     */
-    public void deleteMeetingsFromTimetable(Timetable timetable) {
-        for (int i = 0; i < timetable.size(); i++) {
-            Event event = timetable.get(i);
-            if (event instanceof Meeting) {
-                timetable.remove(i);
             }
         }
     }
