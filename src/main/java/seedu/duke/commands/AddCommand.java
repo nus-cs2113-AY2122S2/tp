@@ -7,6 +7,7 @@ import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
 import seedu.duke.data.TaskList;
+import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
@@ -26,7 +27,13 @@ public class AddCommand extends Command {
     private Module newModule = null;
 
     /**
-     * Constructor for use with commands involving adding tasks.
+     * Constructs a new AddCommand object to add a new task.
+     * @param type Represents the type of object to be added
+     * @param taskName The name of the task to be added
+     * @param taskDescription The description of the task to be added, null if the description is empty
+     * @param estimatedWorkingTime The estimated working time of the task, null if it is empty
+     * @param taskModule The module the task falls under, null if the task falls under General Tasks
+     * @throws ModHappyException If the estimated working time of the task cannot be parsed correctly
      */
     public AddCommand(AddObjectType type, String taskName, String taskDescription, String estimatedWorkingTime,
                       String taskModule) throws ModHappyException {
@@ -37,7 +44,11 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Constructor for use with commands involving adding modules.
+     * Constructs a new AddCommand object to add a new module
+     * @param type Represents the type of object to be added
+     * @param moduleCode The code of the module to be added
+     * @param moduleDescription The description of the module to be added, null if it is empty
+     * @param modularCredit The number of modular credits the module has
      */
     public AddCommand(AddObjectType type, String moduleCode, String moduleDescription, int modularCredit) {
         assert type == AddObjectType.MODULE;
@@ -59,9 +70,13 @@ public class AddCommand extends Command {
 
     /**
      * Adds the specified task or module.
+     * @param moduleList The list of modules
+     * @param configuration The configuration settings of the application
+     * @return A new {@code CommandResult} with the result string
+     * @throws NoSuchModuleException If the module to be added does not exist
      */
     @Override
-    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws NoSuchModuleException {
         String res;
         if (typeToAdd == AddObjectType.TASK) {
             Module targetModule = moduleList.getGeneralTasks();

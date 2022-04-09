@@ -44,7 +44,6 @@ public abstract class Parser {
     protected static final String INVALID_MODULE_GRADE = StringConstants.INVALID_MODULE_GRADE;
     protected static final String INVALID_TAG_COMMAND = StringConstants.INVALID_TAG_COMMAND;
 
-    protected static final String SPACE = StringConstants.SPACE;
     protected static final String WHITESPACES = StringConstants.WHITESPACES;
     protected static final String TASK = StringConstants.TASK_STR;
     protected static final String MODULE = StringConstants.MODULE_STR;
@@ -74,12 +73,14 @@ public abstract class Parser {
     //@@author Ch40gRv1-Mu
     /**
      * Parses the provided user input and returns the relevant Command object.
+     * @throws ModHappyException If there is an error parsing the input
      */
     public abstract Command parseCommand(String userInput) throws ModHappyException;
 
 
     /**
-     * Parses the provided user input and returns the relevant Command object.
+     * Determines the error that occurred in the command.
+     * @throws ModHappyException For the error that occurred in the command
      */
     public abstract void determineError() throws ModHappyException;
 
@@ -107,6 +108,9 @@ public abstract class Parser {
 
     /**
      * Checks for strings that are parsed into groups based on commandFormat, but are essentially invalid.
+     * @throws InvalidFlagException If the flag inputted is invalid
+     * @throws InvalidModuleGradeException If the module grade inputted is invalid
+     * @throws InvalidTagOperationException If the tag operation inputted is invalid
      */
     private void checkForInvalidStrings() throws InvalidFlagException,
             InvalidModuleGradeException, InvalidTagOperationException {

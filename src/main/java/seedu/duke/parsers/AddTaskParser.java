@@ -51,9 +51,7 @@ public class AddTaskParser extends AddParser {
             + "(?<taskModule>\\w*)))?(\\s+-d\\s+\\\"(?<taskDescription>[^\\\"]*)\\\")?(\\s+-t\\s+\\\""
             + "(?<estimatedWorkingTime>[^\\\"]*)\\\")?)(?<invalid>.*)";
     private static final String QUOTED_UNRESTRICTED_STR = StringConstants.QUOTED_UNRESTRICTED_STR;
-    private static final String ANY_FLAG_TRIMMED = StringConstants.ANY_FLAG_TRIMMED;
-    private static final String DASH = StringConstants.DASH;
-    private static final String WORD_CHAR_ONLY = StringConstants.WORD_CHAR_ONLY;
+    private static final String TASK_PARAMETERS_FLAG_NO_NAME = StringConstants.TASK_PARAMETERS_FLAG_NO_NAME;
 
     public AddTaskParser() {
         super();
@@ -71,8 +69,8 @@ public class AddTaskParser extends AddParser {
     /**
      * Throws an exception depending on the error of the task name based on the compulsory parameters.
      * It will check if the user input has the task name and if it is wrapped with double quotes.
-     * @throws MissingCompulsoryParameterException if the task name is missing in the input.
-     * @throws InvalidCompulsoryParameterException if the task name is not wrapped with double quotes
+     * @throws MissingCompulsoryParameterException If the task name is missing in the input.
+     * @throws InvalidCompulsoryParameterException If the task name is not wrapped with double quotes
      */
     @Override
     public void determineError() throws MissingCompulsoryParameterException, InvalidCompulsoryParameterException {
@@ -94,30 +92,35 @@ public class AddTaskParser extends AddParser {
      * Then it checks if the string contains any potential flags.
      * If there are potential flags, the flags are removed, leaving the module code inputted.
      * The inputted module code will then be checked if it is in the correct format of word characters only.
-     * @param moduleFlag the string captured if the user wants to input a module code
-     * @throws EmptyParamException if no module code is inputted
-     * @throws InvalidCompulsoryParameterException if there is a module code,
+     * @param moduleFlag The string captured if the user wants to input a module code
+     * @throws EmptyParamException If no module code is inputted
+     * @throws InvalidCompulsoryParameterException If there is a module code,
      *                                             but it is not made up of only word characters
      */
-    private void checksForErrorInModuleCode(String moduleFlag, String taskModule) throws EmptyParamException,
-            InvalidCompulsoryParameterException {
+    private void checksForErrorInModuleCode(String moduleFlag, String taskModule,
+                                            String invalid, boolean hasTaskParameter)
+            throws EmptyParamException, InvalidCompulsoryParameterException {
         if (!Objects.isNull(moduleFlag)) {
-            if (Objects.isNull(taskModule) || taskModule.isBlank()) {
+            boolean hasEmptyTaskModule = Objects.isNull(taskModule) || taskModule.isBlank();
+            if (!hasEmptyTaskModule) {
+                return;
+            }
+            boolean hasEmptyInvalid = Objects.isNull(invalid) || invalid.isBlank();
+            if (hasEmptyInvalid || hasTaskParameter) {
                 throw new EmptyParamException(MODULE_CODE_STR);
             }
-
-            if (taskModule.contains(SPACE + DASH)) {
-                taskModule = taskModule.split(SPACE + DASH)[ZEROTH_INDEX];
-            }
-            if (taskModule.matches(ANY_FLAG_TRIMMED + QUOTED_UNRESTRICTED_STR)) {
-                throw new EmptyParamException(MODULE_CODE_STR);
-            }
-            if (!taskModule.matches(WORD_CHAR_ONLY)) {
-                throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, taskModule);
-            }
+            String error = invalid.split(TASK_PARAMETERS_FLAG_NO_NAME + QUOTED_UNRESTRICTED_STR)[ZEROTH_INDEX];
+            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, error);
         }
     }
 
+    /**
+     * Checks if the entered parameters are empty.
+     * @param taskName The name of the task to be added
+     * @param taskDescription The description of the task to be added
+     * @param estimatedWorkingTime The estimated working time of the task to be added
+     * @throws EmptyParamException If any of the parameters are empty
+     */
     private void checksForEmptyParams(String taskName, String taskDescription, String estimatedWorkingTime)
             throws EmptyParamException {
         if (taskName.isBlank()) {
@@ -132,6 +135,12 @@ public class AddTaskParser extends AddParser {
     }
 
     //@@author chooyikai
+    /**
+     * Parses the user input and extracts the parameters based on the command format.
+     * @param userInput User input of the task name, task module, task description, estimated working time
+     * @return A new {@code AddCommand} object to add a new task
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;
@@ -141,8 +150,10 @@ public class AddTaskParser extends AddParser {
         final String estimatedWorkingTime = parsedArguments.get(TASK_WORKING_TIME);
         final String taskModule = parsedArguments.get(TASK_MODULE);
         final String moduleFlag = parsedArguments.get(MODULE_FLAG);
+        final String invalid = parsedArguments.get(INVALID);
         if (!Objects.isNull(taskName)) {
-            checksForErrorInModuleCode(moduleFlag, taskModule);
+            boolean hasTaskParameter = !Objects.isNull(taskDescription) || !Objects.isNull(estimatedWorkingTime);
+            checksForErrorInModuleCode(moduleFlag, taskModule, invalid, hasTaskParameter);
             checksForEmptyParams(taskName, taskDescription, estimatedWorkingTime);
             checksForExcessArg();
             return new AddCommand(AddCommand.AddObjectType.TASK, taskName, taskDescription, estimatedWorkingTime,

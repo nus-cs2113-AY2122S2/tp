@@ -46,6 +46,13 @@ public class DeleteCommand extends Command {
         this.taskModule = taskModule;
     }
 
+    /**
+     * Deletes the specified task or module
+     * @param moduleList The list of modules
+     * @param configuration The configuration settings of the application
+     * @return A new {@code CommandResult} with the result string
+     * @throws ModHappyException If the module or task specified does not exist
+     */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         if (taskIndex < 0) { //If invalid task number or no task number was provided
@@ -69,6 +76,7 @@ public class DeleteCommand extends Command {
      * Deletes given module from moduleList.
      *
      * @param moduleList List from which the module is to be deleted from.
+     * @throws NoSuchModuleException If the module does not exist
      */
     public void deleteModule(ModuleList moduleList) throws NoSuchModuleException {
         Module targetModule = moduleList.getModule(moduleCode);
@@ -87,6 +95,7 @@ public class DeleteCommand extends Command {
      * Deletes a task from the given module.
      *
      * @param targetModule The module from which to delete the task
+     * @throws ModHappyException If the task to be deleted does not exist
      */
     public void deleteTaskFromModule(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();

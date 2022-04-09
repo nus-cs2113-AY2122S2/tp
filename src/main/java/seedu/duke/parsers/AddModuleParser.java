@@ -70,17 +70,15 @@ public class AddModuleParser extends AddParser {
      * Determines the error that the user made in its command based on the compulsory parameters.
      * It first checks if the user input has a module code, and if the code is made up of only word characters.
      * Then it checks if the user input has a modular credit, and if the modular credit is an unrestricted integer
-     * @throws MissingCompulsoryParameterException if module code is missing
-     * @throws MissingNumberException if modular credit is missing
-     * @throws InvalidNumberException if the modular credit is not in unrestricted integer format
-     * @throws InvalidCompulsoryParameterException if the module code is not made up of only word characters
+     * @throws MissingCompulsoryParameterException If module code is missing
+     * @throws MissingNumberException If modular credit is missing
+     * @throws InvalidNumberException If the modular credit is not in unrestricted integer format
+     * @throws InvalidCompulsoryParameterException If the module code is not made up of only word characters
      */
     @Override
     public void determineError() throws MissingCompulsoryParameterException, MissingNumberException,
             InvalidNumberException, InvalidCompulsoryParameterException {
         String moduleCode;
-        String modularCredit;
-
         try {
             moduleCode = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -89,6 +87,7 @@ public class AddModuleParser extends AddParser {
         if (!moduleCode.matches(WORD_CHAR_ONLY)) {
             throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
+        String modularCredit;
         try {
             modularCredit = userInput.split(WHITESPACES)[SECOND_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -102,9 +101,9 @@ public class AddModuleParser extends AddParser {
 
     /**
      * Parses the modular credit from a string to an integer, with checks on its validity.
-     * @param modularCreditStr the string representation of the modular credit
-     * @return the modular credits as an integer
-     * @throws InvalidNumberException if the string cannot be parsed into an integer,
+     * @param modularCreditStr The string representation of the modular credit
+     * @return The modular credits as an integer
+     * @throws InvalidNumberException If the string cannot be parsed into an integer,
      *                                or if the credits is not in the range of 0 to 20 inclusive
      */
     private int parseModularCredit(String modularCreditStr) throws InvalidNumberException {
@@ -120,6 +119,11 @@ public class AddModuleParser extends AddParser {
         return modularCredit;
     }
 
+    /**
+     * Checks if the description is empty.
+     * @param moduleDescription The description of the module to be added
+     * @throws EmptyParamException If the module description is empty
+     */
     private void checkForEmptyDescription(String moduleDescription) throws EmptyParamException {
         if (!Objects.isNull(moduleDescription) && moduleDescription.isBlank()) {
             throw new EmptyParamException(MODULE_DESCRIPTION_STR);
@@ -127,6 +131,13 @@ public class AddModuleParser extends AddParser {
     }
 
     //@@author chooyikai
+
+    /**
+     * Parses the user input and extracts the parameters based on the command format.
+     * @param userInput User input of the module code, modular credits and module description
+     * @return A new {@code AddCommand} object to add a new module
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;

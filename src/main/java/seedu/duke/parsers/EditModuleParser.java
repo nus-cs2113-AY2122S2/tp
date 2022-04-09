@@ -55,10 +55,10 @@ public class EditModuleParser extends EditParser {
      * It will first check if the module code is present and if the module code is made up of word characters only.
      * Then it will check if the module description is present and if the flag is correct and the module description is
      * wrapped with double quotes.
-     * @throws MissingCompulsoryParameterException if either module code is missing or module description is missing
-     * @throws InvalidCompulsoryParameterException if either module code is not made up of all word characters or
+     * @throws MissingCompulsoryParameterException If either module code is missing or module description is missing
+     * @throws InvalidCompulsoryParameterException If either module code is not made up of all word characters or
      *                                             if module description is wrapped with double quotes
-     * @throws InvalidFlagException if the flag used for the module description is incorrect
+     * @throws InvalidFlagException If the flag used for the module description is incorrect
      */
     @Override
     public void determineError() throws MissingCompulsoryParameterException,
@@ -68,6 +68,12 @@ public class EditModuleParser extends EditParser {
         throw new InvalidCompulsoryParameterException();
     }
 
+    /**
+     * Checks if the error is in the module code.
+     * It will check if the module code is present and if the module code is made up of word characters only.
+     * @throws MissingCompulsoryParameterException If the module code is missing
+     * @throws InvalidCompulsoryParameterException If the module code is not made up of word characters only
+     */
     private void checkForErrorInModuleCode() throws MissingCompulsoryParameterException,
             InvalidCompulsoryParameterException {
         String moduleCode;
@@ -81,6 +87,14 @@ public class EditModuleParser extends EditParser {
         }
     }
 
+    /**
+     * Checks if the error is in the module description.
+     * It will check if the module description is present and if the flag is correct and the module description is
+     * wrapped with double quotes.
+     * @throws MissingCompulsoryParameterException If the module description is missing
+     * @throws InvalidCompulsoryParameterException If the module description is not wrapped with double quotes
+     * @throws InvalidFlagException If the flag used for the module description is invalid
+     */
     private void checkForErrorInModuleDescription() throws MissingCompulsoryParameterException,
             InvalidCompulsoryParameterException, InvalidFlagException {
         String moduleDescription;
@@ -116,6 +130,12 @@ public class EditModuleParser extends EditParser {
         }
     }
 
+    /**
+     * Parses the user input and extracts the parameters based on the command format.
+     * @param userInput User input of the module code and the module description
+     * @return A new {@code EditCommand} object to edit the module description
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;

@@ -11,16 +11,16 @@ public interface Storage<T> {
 
     /**
      * Writes an object of type T to a json file.
-     * @param path json file path
-     * @throws ModHappyException if an error was encountered during writing
+     * @param path The json file path
+     * @throws ModHappyException If an error was encountered during writing
      */
     void writeData(T object, String path) throws ModHappyException;
 
     /**
      * Load and deserialize a type T object from json file.
-     * @param path json file path
-     * @return the unserialised object of type T
-     * @throws ModHappyException if an error was encountered during reading
+     * @param path The json file path
+     * @return The unserialised object of type T
+     * @throws ModHappyException If an error was encountered during reading
      */
     T loadData(String path) throws ModHappyException;
 

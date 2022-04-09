@@ -14,12 +14,12 @@ import seedu.duke.util.StringConstants;
 //@@author Ch40gRv1-Mu
 public class SaveCommand extends Command {
 
-
     /**
      * Saves the existing list of general tasks and modules.
-     * @param moduleList List to be saved and loaded.
+     * @param moduleList The list of modules
+     * @param configuration The configuration settings of the application
+     * @return A new {@code CommandResult} with the result string
      */
-
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) {
         // Even if there is an error writing to one file, we should still try to write to the others.

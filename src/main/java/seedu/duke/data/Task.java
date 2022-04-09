@@ -24,7 +24,6 @@ public class Task {
     private final ArrayList<String> tags;
 
     public Task(String taskName, String taskDescription, String workingTime) throws ModHappyException {
-
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         if (!Objects.isNull(workingTime)) {
@@ -64,7 +63,11 @@ public class Task {
 
     //@@author Ch40gRv1-Mu
     public void setWorkingTime(String workingTime) throws ModHappyException {
-        this.workingTime = new TaskDuration(workingTime);
+        if (!Objects.isNull(workingTime) && !workingTime.isBlank()) {
+            this.workingTime = new TaskDuration(workingTime);
+        } else {
+            this.workingTime = null;
+        }
     }
 
     public void setTaskName(String taskName) {
@@ -72,9 +75,9 @@ public class Task {
     }
 
     //@@author heekit73098
-    /**.
-     * Check what are the tasks parameters input by user
-     * @return Task parameters status
+    /**
+     * Check what are the tasks parameters input by user.
+     * @return An enumeration of the task parameter status
      */
     public TaskParameters getTaskParameterStatus() {
         boolean hasTaskDescriptionAndWorkingTime = (taskDescription != null && workingTime != null);
@@ -91,14 +94,14 @@ public class Task {
         }
     }
 
-    //@author chooyikai
+    //@@author chooyikai
     public boolean getTaskDone() {
         return isTaskDone;
     }
 
     /**
      * Sets the completion status of the task.
-     * @param status new task completion status
+     * @param status New task completion status
      */
     public void setTaskDone(boolean status) {
         isTaskDone = status;
@@ -106,7 +109,8 @@ public class Task {
 
     //@@author heekit73098
     /**
-     * Returns the task as a formatted string.
+     * Formats the task as a string.
+     * @return The string representation of the task
      */
     @Override
     public String toString() {

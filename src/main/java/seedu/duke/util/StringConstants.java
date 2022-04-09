@@ -237,6 +237,11 @@ public class StringConstants {
     /**
      * For parsers.
      */
+    public static final String TASK_NAME_FLAG = "-n";
+    public static final String TASK_DESCRIPTION_FLAG = "-d";
+    public static final String TASK_ESTIMATED_WORKING_TIME_FLAG = "-t";
+    public static final String TASK_PARAMETER = "taskParameter";
+    public static final String TASK_PARAMETER_FLAG = "taskParameterFlag";
     public static final String TASK_PARAMETER_STR = "task parameter";
     public static final String TASK_NAME = "taskName";
     public static final String TASK_DESCRIPTION = "taskDescription";
@@ -300,13 +305,13 @@ public class StringConstants {
     public static final String UNRESTRICTED_INT = "-?\\d+";
     public static final String POSITIVE_INT = "\\d+";
     public static final String TASK_PARAMETERS_FLAG = "\\s+(-d|-n|-t)\\s+";
+    public static final String TASK_PARAMETERS_FLAG_NO_NAME = "\\s+(-d|-t)\\s+";
     public static final String DESCRIPTION_FLAG = "\\s+-d\\s+";
     public static final String QUOTED_UNRESTRICTED_STR = "\"[^\"]*\"";
     public static final String MODULE_GRADES_MATCH = "(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U)";
     public static final String MARK_COMMAND_FLAGS = "(c|u)";
     public static final String TAG_COMMAND_FLAGS = "(add|del)";
     public static final String TASK_MODULE_FLAG = " -m ";
-    public static final String ANY_FLAG_TRIMMED = "-\\w\\s+";
     public static final String WHITESPACES = "\\s+";
 
     /**
@@ -347,7 +352,6 @@ public class StringConstants {
      */
     public static final String EMPTY_STRING = "";
     public static final String INDENT = "    ";
-    public static final String SPACE = " ";
     public static final String LS = System.lineSeparator();
     public static final String LINE = "____________________________________________________________";
     public static final String COMMAND_PROMPT = "> ";

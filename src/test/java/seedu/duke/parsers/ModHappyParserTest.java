@@ -78,7 +78,7 @@ public class ModHappyParserTest {
         assertThrows(InvalidFlagException.class, () -> parser.parseCommand(testString));
     }
 
-    //@author chooyikai
+    //@@author chooyikai
     @BeforeEach
     public void setUp() {
         parser = new ModHappyParser();

@@ -34,6 +34,7 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
 - Added introduction, page of contents, target user profile, value proposition, purpose of DG, explanation of notation to the Developer Guide [#127](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/127)
 - Fixed formatting inconsistencies in the Developer Guide [#127](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/127)
 - Added user stories, non-functional requirements, glossary and instructions for manual testing to the Developer guide [#127](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/127)
+- Added significant JavaDoc documentation to describe the methods and implementation [#195](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/195)
 
 ### Community
 - Pull Requests Reviewed:

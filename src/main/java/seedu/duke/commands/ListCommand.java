@@ -23,6 +23,9 @@ public class ListCommand extends Command {
     /**
      * Lists all tasks when no argument is provided. Otherwise, list only tasks with matching tag.
      * Depending on config settings, completed tasks may be hidden from the output.
+     * @param moduleList The list of modules
+     * @param configuration The configuration settings of the application
+     * @return A new {@code CommandResult} with the result string
      */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) {
