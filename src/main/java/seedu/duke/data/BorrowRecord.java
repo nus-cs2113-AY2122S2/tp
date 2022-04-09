@@ -4,13 +4,15 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public class BorrowRecord {
+    private final int quantity;
     private final LocalDate startDate;
     private LocalDate endDate;
     private final String borrowerName;
     private final BorrowStatus borrowStatus;
     private boolean isReturned = false;
 
-    public BorrowRecord(LocalDate startDate, LocalDate endDate, String borrowerName) {
+    public BorrowRecord(int quantity, LocalDate startDate, LocalDate endDate, String borrowerName) {
+        this.quantity = quantity;
         this.startDate = startDate;
         this.endDate = endDate;
         this.borrowerName = borrowerName;
@@ -24,6 +26,10 @@ public class BorrowRecord {
         } else {
             this.borrowStatus = BorrowStatus.PRESENT;
         }
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public LocalDate getStartDate() {
@@ -96,9 +102,12 @@ public class BorrowRecord {
      */
     @Override
     public String toString() {
-        String output = String.format("Name of Borrower: %s", borrowerName) + System.lineSeparator();
-        output += String.format("Borrow Duration: %s", this.getBorrowDuration());
-        output += System.lineSeparator();
+        String output = String.format("Name of Borrower: %s", borrowerName)
+                + System.lineSeparator();
+        output += String.format("Borrow Duration: %s", this.getBorrowDuration())
+                + System.lineSeparator();
+        output += String.format("Borrow Quantity: %d", quantity)
+                + System.lineSeparator();
         return output;
     }
 }
