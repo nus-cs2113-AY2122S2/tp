@@ -4,12 +4,26 @@ import seedu.duke.assets.List;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.status.Status;
 
+/*
+ * Class that extends Abstract Command Class.
+ */
 public class DeletePatientCommand extends Command {
 
+    /*
+     * Constructor method that calls constructor of super class
+     * @ param parameterArray an array of Strings - additional parameters given by user
+     */
     public DeletePatientCommand(String[] parameterArray) {
         super(parameterArray);
     }
 
+    /*
+     * Method that takes in a PatientList that needs to be acted on.
+     * Uses parameterArray as inputs to delete an existing Patient in the List.
+     * @ param list a List object - should be an instance of PatientList
+     * @ return Status.DELETE_PATIENT_SUCCESS if changes made to list was successful
+     * @ throws NotFoundException if entry does not exist.
+     */
     public Status execute(List patientList) throws NotFoundException {
         patientList.remove(parameterArray[0]);
         return Status.DELETE_PATIENT_SUCCESS;

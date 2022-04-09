@@ -4,7 +4,15 @@ import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.List;
 import seedu.duke.status.Status;
 
+/*
+ * Class that extends Abstract Command Class.
+ */
 public class FindAppointmentCommand extends Command {
+
+    /*
+     * Constructor method that calls constructor of super class
+     * @ param parameterArray an array of Strings - additional parameters given by user
+     */
     public FindAppointmentCommand(String[] parameterArray) {
         super(parameterArray);
     }
