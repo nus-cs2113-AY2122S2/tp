@@ -23,6 +23,7 @@ import static seedu.meetingjio.parser.Parser.logger;
 public class MasterTimetable {
 
     private final ArrayList<Timetable> timetables;
+    private final ArrayList<Meeting> meetingList;
 
     public static final int NUM_DAYS = 7;
     public static final int NUM_MINS = 1440;
@@ -30,6 +31,7 @@ public class MasterTimetable {
 
     public MasterTimetable() {
         this.timetables = new ArrayList<>();
+        this.meetingList = new ArrayList<>();
     }
 
     /**
@@ -136,7 +138,9 @@ public class MasterTimetable {
         return timetables.size();
     }
 
-
+    public ArrayList<Meeting> getMeetingList() {
+        return meetingList;
+    }
 
     /**
      * Does check if the meeting clashes any other events/lessons with any user across all timetables.
@@ -200,6 +204,7 @@ public class MasterTimetable {
         for (Timetable timetable : timetables) {
             try {
                 timetable.add(meeting);
+                meetingList.add(meeting);
             } catch (DuplicateEventException dee) {
                 return ERROR_DUPLICATE_EVENT;
             } catch (OverlappingEventException oee) {
@@ -234,6 +239,7 @@ public class MasterTimetable {
         for (Timetable timetable : timetables) {
             deleteMeetingFromTimetable(timetable,meeting);
         }
+        deleteMeetingFromMeetingList(meeting);
         return deleteMeetingFromAllTimetableConfirmation(meeting);
     }
 
@@ -264,6 +270,20 @@ public class MasterTimetable {
     }
 
     /**
+     * Deletes meeting from meetingList.
+     *
+     * @param meeting The meeting event that is to be deleted
+     *
+     */
+    public void deleteMeetingFromMeetingList(Meeting meeting) {
+        for (int i = 0; i < meetingList.size(); i++) {
+            if (meeting.equals(meetingList.get(i))) {
+                meetingList.remove(i);
+            }
+        }
+    }
+
+    /**
      * Deletes all meetings that exist.
      *
      * @return String Message that all meetings were deleted as new user was added
@@ -273,6 +293,10 @@ public class MasterTimetable {
         for (Timetable timetable : timetables) {
             deleteMeetingsFromTimetable(timetable);
         }
+        for (int i = 0; i < meetingList.size(); i++) {
+            meetingList.remove(0);
+        }
+        assert meetingList.size() == 0 : ERROR_NON_EMPTY_LIST;
         return NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
     }
 
