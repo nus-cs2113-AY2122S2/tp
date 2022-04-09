@@ -138,7 +138,7 @@ public class WorkoutList {
      * @throws InvalidExerciseException       If the exercise name specified in userArgument is invalid.
      * @throws InvalidWorkoutException        If the details specified in userArgument is invalid.
      */
-    public Workout createAndAddWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
+    public Workout createNewWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, InvalidExerciseException, InvalidWorkoutException {
         String userExerciseInput = userArgument.split(WorkoutCommand.CREATE_ACTION_REPS_KEYWORD)[0].trim();
         String userRepsInputString = userArgument.split(WorkoutCommand.CREATE_ACTION_REPS_KEYWORD)[1].trim();
@@ -180,7 +180,7 @@ public class WorkoutList {
      * @param newWorkout The new Workout object to be added to the two data structures mentioned in the method
      *                   description.
      */
-    public void addNewWorkoutToList(Workout newWorkout) {
+    public void addNewWorkoutToLists(Workout newWorkout) {
         String newWorkoutKey = newWorkout.toString();
         workoutsHashMapList.put(newWorkoutKey, newWorkout);
         workoutsDisplayList.add(newWorkoutKey);

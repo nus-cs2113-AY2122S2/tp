@@ -612,7 +612,8 @@ public class FileManager {
         String workoutReps = workoutFileDataLine[1];
 
         String userArguments = workoutName + " " + WorkoutCommand.CREATE_ACTION_REPS_KEYWORD + " " + workoutReps;
-        workoutList.createAndAddWorkout(userArguments);
+        Workout newWorkout = workoutList.createNewWorkout(userArguments);
+        workoutList.addNewWorkoutToLists(newWorkout);
     }
 
     /**
