@@ -572,10 +572,13 @@ and mouse.
 
 ## Glossary
 
-* *User* - A person that is using or being track by PlanITarium
-* *User Index* - The integer used to identify the user in PlanITarium
-* *Group* - Logically identifies each generation of users
-* *Group Index* - The integer used to identify the group in PlanITarium
+* *User* - A person that is using or being track by PlanITarium.
+* *User Index* - The integer used to identify the user in PlanITarium.
+* *Group* - Logically identifies each generation of users.
+* *Group Index* - The integer used to identify the group in PlanITarium.
+* *Family* - The combined collection of all groups and users in PlaniTarium.
+* *Command* - Sequence of characters input by user to execute functions in PlanITarium.
+* *Delimiter* - Sequence of characters for specifying the boundary between separate areas of text.
 
 ---
 
