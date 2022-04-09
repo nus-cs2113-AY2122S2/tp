@@ -156,7 +156,11 @@ The following sequence diagram shows how the `edit` command works:
 
 Given below is the steps on how the `edit` operation works.
 
->To be added
+1. User inputs edit with appropriate parameters which is passed to the UI.
+2. Ui then provides user input to the Parser class which parses it and retrieves the respective parameters' values.
+3. Ui subsequently executes the command on the MasterTimetable.
+4. The EditCommand will edit the specified event if the values provided in user input are valid.
+5. Eventually a confirmation message will be shown to user upon successful edit.
 
 ## 3.5 Delete events `delete`
 Deletes an event from the user's specified timetable
