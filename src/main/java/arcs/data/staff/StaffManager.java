@@ -35,7 +35,7 @@ public class StaffManager {
         staffs.add(c);
     }
 
-    public ArrayList<Staff> getAllstaffs() {
+    public ArrayList<Staff> getAllStaffs() {
         return staffs;
     }
 

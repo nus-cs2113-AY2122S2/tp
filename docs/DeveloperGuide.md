@@ -6,7 +6,7 @@ This developer guide follows the suggested format given in [AddressBook-Level3 d
 
 ## Design
 ### Architecture
-![Architecture diagram](Architecture_diagram.jpg)
+![Architecture diagram](diagrams/Architecture_diagram.jpg)
 The architecture diagram given above explains the high-level design of the App.
 
 Given below is an overview of the main components and how they interact with each other.
@@ -39,15 +39,23 @@ This section describes how certain features are implemented. Only part of the fe
 
 ### 1. Bye command
 1.1 The following sequence diagram shows how the Bye Command works.
-![](ByeCommand.png)
+![](diagrams/ByeCommand.png)
 
 ### 2. Add Menu Item Command
 2.1 The following sequence diagram shows how the Add Menu Item command works.
-![](Add%20Menu%20Item.png)
+![](diagrams/Add_Menu_Item.png)
 
 ### 3. Check Meal Reservation Command
 3.1 The following sequence diagram shows how the Check Meal Reservation Command works.
-![](Check%20Meal%20Reservation.png)
+![](diagrams/Check_Meal_Reservation.png)
+
+### 4. Add Route Command
+4.1 The following sequence diagram shows how the Add Route Command works.
+![](diagrams/Add_route.jpg)
+
+### 5. List Booking Command
+5.1 The following sequence diagram shows how the List Booking Command works.
+![](diagrams/listBooking.jpg)
 
 ## Product scope
 ### Target user profile
@@ -73,8 +81,15 @@ Therefore, airlines counter staff need a fast an efficient way to manage the man
 |v1.0|Counter Staff|List all in flight menu items|To answer customer queries on the menu items available|
 |v1.0|Counter Staff|Add Flight route|Add new flight route that the airline releases|
 |v1.0|Counter Staff|Remove Flight route|Remove the flight routes the airline will no longer offer|
-|v1.0|Counter Staff|List all flight route|Have an overview of available flight routes|
-|v1.0|Counter Staff|Find flight route|To answer customer's query on whether a flight route exists|
+|v1.0|Counter Staff|List all flight routes|Have an overview of available flight routes|
+|v1.0|Counter Staff|Find flight route|Answer customer's query on whether a flight route to certain destination is available|
+|v2.0|Counter Staff|Add customer|Register this customer's information in system|
+|v2.0|Counter Staff|Delete customer|Remove outdated customer information|
+|v2.0|Counter Staff|Find customer|Find a customer by his/her IC number|
+|v2.0|Counter Staff|List all customers|View all existing customers|
+|v2.0|Counter Staff|Book flight|Book a flight for a customer|
+|v2.0|Counter Staff|Delete flight booking|Cancel flight booking for a customer|
+|v2.0|Counter Staff|List flight bookings|View all existing flight bookings|
 |v2.1|Counter Staff|Add in-flight meal reservation|Reserve in-flight meals for customers|
 |v2.1|Counter Staff|Remove in-flight meal reservation|Remove in-flight meal reservations for customers|
 |v2.1|Counter Staff|Check in-flight meal reservation|Check for a customer's specific meal reservation|
@@ -94,5 +109,5 @@ Therefore, airlines counter staff need a fast an efficient way to manage the man
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+The example inputs in the [User Guide](https://github.com/AY2122s2-CS2113-F12-3/tp/blob/master/docs/UserGuide.md) can be used for manual testing.
 

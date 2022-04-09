@@ -45,10 +45,10 @@ public class Staff {
         if (newId.length() != 3) {
             return false;
         }
-        if (Character.isDigit(newId.charAt(0)) || Character.isDigit(newId.charAt(8))) {
+        if (Character.isDigit(newId.charAt(0))) {
             return false;
         }
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 3; i++) {
             if (!Character.isDigit(newId.charAt(i))) {
                 return false;
             }
@@ -84,10 +84,17 @@ public class Staff {
         return str;
     }
 
+    public String toStringStore() {
+        String str = id + " / " + password + " / " + name + " / " + job + " / "
+                + phone + " / " + email;
+
+        return str;
+    }
+
     public String getStaffInfo() {
         String info = "ID: " + id + System.lineSeparator()
                 + "Name: " + name + System.lineSeparator()
-                + "job: " + name + System.lineSeparator()
+                + "job: " + job + System.lineSeparator()
                 + "Phone number: " + phone + System.lineSeparator()
                 + "Email address: " + email;
         return info;
