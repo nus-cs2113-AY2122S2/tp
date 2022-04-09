@@ -1,0 +1,45 @@
+@startuml
+!include Style.puml
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam ArrowColor black
+skinparam groupInheritance 4
+
+package Parser {
+component Parser as parser PARSER_COLOUR
+
+Package Command {
+component "{abstract}\nCommand" as command COMMANDS_COLOUR
+component "AddCommand" as addCommand COMMANDS_COLOUR
+component "ByeCommand" as byeCommand COMMANDS_COLOUR
+component "DeleteCommand" as deleteCommand COMMANDS_COLOUR
+component "CalculateInputCommand" as calculateInputCommand COMMANDS_COLOUR
+component "HelpCommand" as helpCommand COMMANDS_COLOUR
+component "ListCommand" as listCommand COMMANDS_COLOUR
+component "UpdateCommand" as updateCommand COMMANDS_COLOUR
+}
+
+}
+component MMM MMM_COLOUR
+
+MMM .r.> parser
+
+parser ...> "\n0..1" addCommand: "creates >"
+parser ...> "\n0..1" deleteCommand: "creates >"
+parser ...> "\n0..1" byeCommand: "creates >"
+parser ...> "\n0..1" calculateInputCommand: "creates >"
+parser ...> "\n0..1" helpCommand: "creates >"
+parser ...> "\n0..1" listCommand: "creates >"
+parser ...> "\n0..1" updateCommand: "creates >"
+
+addCommand -down-|> command
+deleteCommand -down-|> command
+byeCommand -down-|> command
+calculateInputCommand -down-|> command
+helpCommand -down-|> command
+listCommand -down-|> command
+updateCommand -down-|> command
+
+
+@enduml

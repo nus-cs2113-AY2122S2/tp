@@ -22,9 +22,10 @@ activate GeneralFunctions HELPER_COLOUR
 GeneralFunctions --> AddCommand: paymentMethod, category, description, amount, time
 deactivate GeneralFunctions
 
-AddCommand -> AddCommand: testExpenditureParameters(paymentMethod, category, description, amount, time)
+
+AddCommand -> AddCommand: testExpenditureParameters(paymentMethod, category, description, amount, time, creditCardList)
 activate AddCommand COMMANDS_COLOUR
-AddCommand -> AddCommandInputTest: testsPaymentMethod(), testExpenditureCategory(), testDescription(), testExpenditureAmount(), time
+AddCommand -> AddCommandInputTest: testsPaymentMethod(), testExpenditureCategory(), testDescription(), testExpenditureAmount(), time,
 activate AddCommandInputTest HELPER_COLOUR
 AddCommandInputTest --> AddCommand
 deactivate AddCommandInputTest

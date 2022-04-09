@@ -19,7 +19,7 @@
       * [Add Credit Card](#add-credit-card-cc)
       * [Add Income](#add-income-i)
       * [Design Considerations](#addCommand-design-considerations)
-    * [CalculateCommand feature](#calculatecommand-feature)
+    * [CalculateInputCommand feature](#calculateinputcommand-feature)
     * [ListCommand feature ](#listcommand-feature)
 * [Appendix Requirements](#appendix-requirements)
   * [Product scope](#product-scope)
@@ -139,11 +139,11 @@ add, delete and update entries in a new `User` during testing without affecting 
 ### Command component 
 The source can be found in [`command`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command)
 
-![command_diagram](images/command_diagram.png)  
+![command_diagram](images/CommandClassDiagram.png)  
 Fig 5 - Command Class Diagram
 
 The Command component consists of Command abstract class, `AddCommand`, `ByeCommand`, `DeleteCommand`, `HelpCommand`
-, `ListCommand`and `UpdateCommand` that extends the `Command` class.
+,`CalculateInputCommand`, `ListCommand`and `UpdateCommand` that extends the `Command` class.
 
 The Command component:
 - Provides all the Command classes which can be instantiated by `Parser.parseCommand()`. The Command objects can then be 
@@ -156,7 +156,7 @@ exceptions if an error is encountered. The error is then handled.
 ### Storage component 
 The source can be found in [`Storage.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Storage.java)
 
-![storage_diagram](images/storage_diagram.png)  
+![storage_diagram](images/StorageClassDiagram.png)  
 Fig 6 - Storage Class Diagram
 
 The Storage component consists of `Storage` class.
@@ -274,12 +274,45 @@ Aspect: How to ask user for the fields of input.
 
 <br/>
 
-### CalculateCommand feature
+### CalculateInputCommand feature
+The source code can be found in [`CalculateInputCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/CalculateInputCommand.java)
+[`Calculations.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/helper/Calculations.java)
 
-To enable users to view their finances in a more meaningfully, MindMyMoney does calculations to present financial data
-that is actionable for the users.
+MindMyMoney allows users to view their finances in a more meaningful manner by displaying the total expenditure and breakdown of expenses in a
+bar chart format.
 
-![calculate_command_sequence_diagram](images/gif_loading.gif)
+The CalculateCommand can take in 3 different `[DATE]` fields:
+- `calculate /epm [DD/MM/YYYY]` allows user to calculate total expenditure of the specific date.
+- `calculate /epm [MM/YYYY]` allows user to calculate total expenditure of the specific month.
+- `calculate /epm [YYYY]` allows user to calculate total expenditure of the specific year.
+
+![calculate_command_sequence_diagram](images/CalculateCommandSequenceDiagram3.png)
+<br/> Fig 11 - Calculate Input Command Sequence Diagram
+
+The sequence diagram above shows the interactions of different classes when calculating the expenditure.
+
+1. After receiving the `CalculateInputCommand` object from `Parser`, `MMM` calls the `CalculateInputCommand.executeCommand()` method.
+2. `GeneralFunctions.parseInput()` method is invoked to obtain the flag and date of the input.
+3. If `/epm` flag is present. It calls `Calculations.calculateExpenditure()` method to obtain the total expenditure of the date specified.
+4. During the execution of `Calculations.calculateExpenditure()`, the `GeneralFunctions.findItemInList()` is invoked to 
+find the items that contain the specified date.
+5. Afterwards, `Calculations.displayCalculationBreakdown()` is invoked to show the breakdown of expenses in a bar chart format.
+6. If `/epm` flag is not present, MindMyMoneyException is thrown.
+
+
+
+#### CalculateCommand Design Considerations
+Aspect: How to allow users to have a better understanding of their own expenses.
+* User is required to input either the date, month or year in order to calculate their expenses.
+  * Pros: User can have a better understanding of their expenditure breakdowns by the specified time they want to look for.
+  * Cons: User is required to fill in a date, and the date must be found in the list of expenditures.
+
+* Use of bar chart to represent breakdown of expenses in the CalculateInputCommand.
+  * Pros: Users can view their overall expenses in a bar chart format, which is easier to view at one glance.
+  * Cons: Some users may not prefer to visualise their data in a bar chart format.
+
+
+
 
 ### ListCommand feature
 The source code can be found in [`ListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/ListCommand.java)  
@@ -288,8 +321,8 @@ MindMyMoney allow users to view their current list of added expenditures.
 #### Current Implementation
 The sequence diagram below shows the interactions of different subcomponents of the system when listing.  
 
-![list_command_sequence_diagram](images/List_Command_Sequence_Diagram.png)  
-Fig 13 - List Command Sequence Diagram
+![list_command_sequence_diagram](images/List_Command_Sequence_Diagram.png)
+<br/> Fig 13 - List Command Sequence Diagram
 
 #### ListCommand design considerations
 Aspect: How to make the `ListCommand` easily tested using JUnit testing.

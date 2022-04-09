@@ -1,12 +1,13 @@
 package seedu.mindmymoney.helper;
 
-import seedu.mindmymoney.MindMyMoney;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
 import seedu.mindmymoney.constants.IncomeCategoryTypes;
-import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static seedu.mindmymoney.constants.Indexes.MAX_CASHBACK_AMOUNT;
 import static seedu.mindmymoney.constants.Indexes.MAX_STUDENT_INCOME;
@@ -14,6 +15,8 @@ import static seedu.mindmymoney.constants.Indexes.MIN_CASHBACK_AMOUNT;
 import static seedu.mindmymoney.constants.Indexes.MIN_EXPENDITURE_AMOUNT;
 import static seedu.mindmymoney.constants.Indexes.MIN_STUDENT_INCOME;
 import static seedu.mindmymoney.constants.PaymentMethod.CASH;
+import static seedu.mindmymoney.helper.TimeFunctions.checkAfterCurrentDate;
+import static seedu.mindmymoney.helper.TimeFunctions.checkValidDate;
 
 /**
  * Input validation for Add Command.
@@ -186,19 +189,6 @@ public class AddCommandInputTests {
     }
 
     /**
-     * Checks if date input format is valid.
-     *
-     * @param input The string of the date input.
-     * @return true if format is valid, false otherwise.
-     */
-    public static boolean isValidInput(String input) {
-        if (input.matches(ValidationRegexTypes.VALIDATION_REGEX_D)) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Checks if user input of credit card name is valid. Currently, we do not accept Credit Card name to be "Cash"
      */
     public static void testCreditCardName(String inputCreditCardName) throws MindMyMoneyException {
@@ -258,5 +248,26 @@ public class AddCommandInputTests {
         assert inputAmountAsDouble > 0 : "Limit amount should have a positive value";
     }
 
+    /**
+     * Tests if the input parameters from the user are valid.
+     *
+     * @param paymentMethod The payment method used, either as cash or the credit card.
+     * @param inputCategory The category as indicated by the user.
+     * @param description The description of the expenditure.
+     * @param amountAsString Price of the expenditure.
+     * @param inputTime Date of when the expenditure was bought.
+     * @throws MindMyMoneyException when the parameters are invalid.
+     */
+    public static void testExpenditureParameters(String paymentMethod, String inputCategory, String description,
+                                                 String amountAsString, String inputTime,
+                                                 CreditCardList creditCardList) throws MindMyMoneyException {
+        testPaymentMethod(paymentMethod, creditCardList);
+        testExpenditureCategory(inputCategory);
+        testDescription(description);
+        testExpenditureAmount(amountAsString, paymentMethod, creditCardList);
+        checkValidDate(inputTime);
+        LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        checkAfterCurrentDate(date);
+    }
 
 }
