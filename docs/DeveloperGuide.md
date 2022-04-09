@@ -38,6 +38,13 @@ Note that certain commands may slightly different implementation compared to the
 
 ![CommandSequenceDiagram](diagrams/CommandSequenceDiagram.png)
 
+Given below is the steps on how the command operations generally works.
+
+1. User inputs is passed to the UI.
+2. Ui then provides user input to the Parser class which parses it and retrieves the command and parameters.
+3. Ui subsequently executes the command on the MasterTimetable.
+4. Eventually a feedback message will be shown to user upon successful or failed execution.
+
 ## 3.1 Add Feature
 The `add` command is a command that allows user to 
 1. add new users to the master timetable.
@@ -63,11 +70,13 @@ This is a condensed diagram. Several terms in the sequence diagram above have be
 The following sequence diagram shows how the `add_user` command works:
 ![AddUserCommandSequenceDiagram](diagrams/AddUserCommandSequenceDiagram.png)
 
+Given below is the steps on how the `add_user` operation works.
+
 1. User inputs add_user with username which is passed to the UI.
 2. Ui then provides user input to the Parser class which parses it and retrieves the name.
 3. Ui subsequently executes the command on the MasterTimetable.
 4. The AddUserCommand will create a new Timetable and add it to the MasterTimetable.
-5. Subsequently a confirmation message will be shown to user upon successful addition.
+5. Eventually a confirmation message will be shown to user upon successful addition.
 
 ### 3.1.2 Add Events Feature
 
@@ -86,7 +95,7 @@ Given below is the steps on how the `add_lesson` operation works.
 2. Ui then provides user input to the Parser class which parses it and retrieves the respective lesson description.
 3. Ui subsequently executes the command on the MasterTimetable.
 4. The AddLessonCommand will create a new Lesson and add it to the specified user's timetable.
-5. Subsequently a confirmation message will be shown to user upon successful addition.
+5. Eventually a confirmation message will be shown to user upon successful addition.
 
 **Add Meeting**
 
@@ -117,14 +126,14 @@ Before the timetable is listed out, it will also be sorted according to day and 
 The following sequence diagram shows how the command `` is executed.
 ![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
 
-###3.2.1 Listing Lessons Feature
+### 3.2.1 Listing Lessons Feature
 Instead of listing all events in the timetable, the user can specify such that only lessons are listed out.
 
 `list_lesson [user]` displays the lessons for the particular user.
 
 `list_lesson all` displays the lessons for all users.
 
-###3.2.2 Listing Meetings Feature
+### 3.2.2 Listing Meetings Feature
 Instead of listing all events in the timetable, the user can specify such that only meetings are listed out.
 
 `list_meeting [user]` displays the meetings for the particular user.
@@ -152,7 +161,11 @@ The following sequence diagram shows how the `edit` command works:
 
 Given below is the steps on how the `edit` operation works.
 
->To be added
+1. User inputs edit with appropriate parameters which is passed to the UI.
+2. Ui then provides user input to the Parser class which parses it and retrieves the respective parameters' values.
+3. Ui subsequently executes the command on the MasterTimetable.
+4. The EditCommand will edit the specified event if the values provided in user input are valid.
+5. Eventually a confirmation message will be shown to user upon successful edit.
 
 ## 3.5 Delete events `delete`
 Deletes an event from the user's specified timetable
@@ -247,15 +260,22 @@ programme can also accommodate to this requirement
 
 ## Appendix B: User Stories
 
-| Version | As a ... | I want to ...                                | So that I can ...                                        |
-|---------|----------|----------------------------------------------|----------------------------------------------------------|
-| v1.0    |new user| see usage instructions                       | refer to them when I forget the command format           |
-| v1.0    |user| add a lesson                                 | view my schedule easily                                  |
-| v1.0    |user| delete a lesson                              | modify my schedule accordingly                           |
-| v1.0    |user| view all the lessons i have in my timetable  | plan my activities accordingly                           |
-| v1.0    |user| add the location paramter to my lesson       | plan my route in advance                                 |
-| v1.0    |user| add a start time and end time to my lessons  | know what time a lesson starts and ends                  |
-| v1.0    |user| clear all the lessons saved in the timetable | reset my timetable without the need to delete one by one |
+| Version | As a ... | I want to ...                                    | So that I can ...                                    |
+|---------|----------|--------------------------------------------------|------------------------------------------------------|
+| v1.0    | new user | see usage instructions                           | refer to them when I forget the command format       |
+| v1.0    | user     | add a lesson                                     | view my schedule easily                              |
+| v1.0    | user     | delete a lesson                                  | modify my schedule accordingly                       |
+| v1.0    | user     | view all the lessons I have in my timetable      | plan my activities accordingly                       |
+| v1.0    | user     | add the location paramter to my lesson           | plan my route in advance                             |
+| v1.0    | user     | add a start time and end time to my lessons      | know what time a lesson starts and ends              |
+| v1.0    | user     | clear all the lessons saved in the timetable     | reset my timetable without the need to delete one by one |
+| v2.0    | user     | add a new user                                   | add my friends' timetables                           |
+| v2.0    | user     | see some common free slots                       | arrange a meeting                                    |
+| v2.0    | user     | add a meeting                                    | block the time slot in everyone's timetables         |
+| v2.0    | user     | view all the events filtered by type             | obtain a quick summary of my week                    |
+| v2.0    | user     | edit a lesson                                    | update the lesson without replace it with a new one  |
+| v2.0    | user     | remove a user                                    | remove the user's timetable and his or her events    |
+| v2.0    | user     | save the modified timetable to the local machine | reuse it next time                                   |
 
 ## Appendix C: Non-Functional Requirements
 1. MeetingJio should work on Windows, macOSX and Linux as long as it has Java 11 or above installed. 
@@ -270,6 +290,8 @@ than using GUI.
 - Ensure Java 11 is installed and configured on your device
 - Open a command prompt or terminal and run the command `java -jar MeetingJio.jar`
 
+
+{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 ### Running Commands
 
 - Input `help` to get an overview of the list of accepted commands
@@ -278,3 +300,4 @@ than using GUI.
 ### Shut Down
 
 - Input `exit` to quit the programme
+
