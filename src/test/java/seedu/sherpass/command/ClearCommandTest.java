@@ -39,10 +39,11 @@ public class ClearCommandTest {
         Storage storage = new Storage("data/test.json");
         storage.wipeSaveData();
         storage.load(taskList);
+        outContent.reset();
 
         String selection1 = "expired";
         String selection2 = "done";
-        String expectedOutput = "Booting up..." + LS + "There are no expired tasks to be removed." + LS
+        String expectedOutput = "There are no expired tasks to be removed." + LS
                 + "There are no completed tasks to be removed." + LS;
         new ClearCommand(selection1).execute(taskList, ui, storage);
         new ClearCommand(selection2).execute(taskList, ui, storage);
@@ -64,10 +65,11 @@ public class ClearCommandTest {
         Storage storage = new Storage("data/test.json");
         storage.wipeSaveData();
         storage.load(taskList);
+        outContent.reset();
 
         String selection1 = "expired";
         String selection2 = "done";
-        String expectedOutput = "Booting up..." + LS + "There are no expired tasks to be removed." + LS
+        String expectedOutput = "There are no expired tasks to be removed." + LS
                 + "There are no completed tasks to be removed." + LS;
         new ClearCommand(selection1).execute(taskList, ui, storage);
         new ClearCommand(selection2).execute(taskList, ui, storage);
@@ -87,9 +89,10 @@ public class ClearCommandTest {
 
         Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
+        outContent.reset();
 
         String selection = "done";
-        String expectedOutput = "Booting up..." + LS + "Done! 1 task(s) have been removed." + LS
+        String expectedOutput = "Done! 1 task(s) have been removed." + LS
                 + "Now you have 0 task(s) in the list." + LS;
         new ClearCommand(selection).execute(taskList, ui, storage);
         assertEquals(expectedOutput, outContent.toString());
@@ -107,9 +110,10 @@ public class ClearCommandTest {
 
         Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
+        outContent.reset();
 
         String selection = "expired";
-        String expectedOutput = "Booting up..." + LS + "Done! 1 task(s) have been removed." + LS
+        String expectedOutput = "Done! 1 task(s) have been removed." + LS
                 + "Now you have 0 task(s) in the list." + LS;
         new ClearCommand(selection).execute(taskList, ui, storage);
         assertEquals(expectedOutput, outContent.toString());
@@ -135,9 +139,10 @@ public class ClearCommandTest {
         Storage storage = new Storage("data/test.json");
         storage.wipeSaveData();
         storage.load(taskList);
+        outContent.reset();
 
         String selection = "all";
-        String expectedOutput = "Booting up..." + LS + CLEAR_ALL_COMMAND_CONFIRMATION_MESSAGE + LS
+        String expectedOutput = CLEAR_ALL_COMMAND_CONFIRMATION_MESSAGE + LS
                 + "____________________________________________________________" + LS
                 + CLEAR_ALL_COMMAND_CONFIRMED_MESSAGE + LS
                 + "____________________________________________________________" + LS
@@ -161,9 +166,10 @@ public class ClearCommandTest {
         Storage storage = new Storage("data/test.json");
         storage.wipeSaveData();
         storage.load(taskList);
+        outContent.reset();
 
         String selection = "all";
-        String expectedOutput = "Booting up..." + LS + CLEAR_ALL_COMMAND_CONFIRMATION_MESSAGE + LS
+        String expectedOutput = CLEAR_ALL_COMMAND_CONFIRMATION_MESSAGE + LS
                 + "____________________________________________________________" + LS
                 + CLEAR_ALL_COMMAND_CANCEL_MESSAGE + LS;
         new ClearCommand(selection).execute(taskList, ui, storage);
@@ -179,9 +185,10 @@ public class ClearCommandTest {
         TaskList taskList = new TaskList(testArrayList);
         Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
+        outContent.reset();
 
         String selection = "foo";
-        String expectedOutput = "Booting up..." + LS + ERROR_PREFIX + ERROR_INVALID_CLEAR_MESSAGE + LS
+        String expectedOutput = ERROR_PREFIX + ERROR_INVALID_CLEAR_MESSAGE + LS
                 + "____________________________________________________________" + LS
                 + ClearCommand.MESSAGE_USAGE + LS;
         new ClearCommand(selection).execute(taskList, ui, storage);
