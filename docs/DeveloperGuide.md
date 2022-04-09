@@ -579,6 +579,7 @@ and mouse.
 * *Family* - The combined collection of all groups and users in PlaniTarium.
 * *Command* - Sequence of characters input by user to execute functions in PlanITarium.
 * *Delimiter* - Sequence of characters for specifying the boundary between separate areas of text.
+* *Mainstream OS* - Windows, Linux
 
 ---
 
