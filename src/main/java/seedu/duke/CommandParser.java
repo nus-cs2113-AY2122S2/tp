@@ -201,7 +201,10 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(CHECK_ROOM_BY_LEVEL)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_ROOM_BY_LEVEL, "");
             userCommand = new CheckRoomByLevelCommand(userInputLowerCaseWithoutCommand);
+        } else {
+            throw new InvalidCommandException();
         }
+
         return userCommand;
     }
 
