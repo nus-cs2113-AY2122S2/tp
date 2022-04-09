@@ -27,8 +27,4 @@ public class ItemTest {
         assertEquals(expectedList, outputList);
     }
 
-    @Test
-    public void clone_successfulDeepCopy() throws InvMgrException {
-
-    }
 }
