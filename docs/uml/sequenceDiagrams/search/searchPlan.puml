@@ -6,32 +6,29 @@ autonumber
 
 title Sequence Diagram of `search /plan` Command
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "ui:UI" AS UI1
-participant "parser:Parser" AS Parser
-participant "newCommand\n:SearchCommand" AS newCommand
-participant "planList\n:PlanList" AS PlanList
+participant "werkIt\n:WerkIt" AS WerkIt #Sandybrown
 
-activate WerkIt
-WerkIt -> UI1 : getUserInput()
-activate UI1
-WerkIt <-- UI1 : userInputTrimmed:String
-deactivate UI1
+ref over WerkIt
+Obtain and parse user input.
+end
 
-WerkIt -> Parser : parseUserInput(userInput)
-activate Parser
-WerkIt <-- Parser : :Command
-deactivate Parser
+
+participant "newCommand\n:SearchCommand" AS newCommand #LightSkyBlue
+participant "planList\n:PlanList" AS PlanList #LightSkyBlue
+
+activate WerkIt #Sandybrown
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand #LightSkyBlue
 newCommand -> PlanList : getPlansDisplayList()
-activate PlanList
+activate PlanList #LightSkyBlue
 
 newCommand <-- PlanList : "planList:ArrayList<String>"
 deactivate PlanList
 
 newCommand -> newCommand : searchPlan()
+
+newCommand --> WerkIt
 
 deactivate newCommand
 
