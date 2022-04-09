@@ -185,24 +185,45 @@ public class SearchCommand extends Command {
     private void printSearchHeading() throws InvalidCommandException {
         switch (userAction) {
         case ACTION_KEYWORD_EXERCISE:
-            if (isFirstMatch()) {
-                printHeadingMessage(CATEGORY_EXERCISE);
-            }
+            printSearchExerciseHeading();
             break;
         case ACTION_KEYWORD_PLAN:
-            if (isFirstMatch()) {
-                printHeadingMessage(CATEGORY_PLAN);
-            }
+            printSearchPlanHeading();
             break;
         case ACTION_KEYWORD_WORKOUT:
-            if (isFirstMatch()) {
-                printHeadingMessage(CATEGORY_WORKOUT);
-            }
+            printSearchWorkoutHeading();
             break;
         default:
             logger.log(Level.WARNING, "User has entered an invalid search command action.");
             String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
+        }
+    }
+
+    /**
+     * Prints the heading message for search for exercise.
+     */
+    private void printSearchExerciseHeading() {
+        if (isFirstMatch()) {
+            printHeadingMessage(CATEGORY_EXERCISE);
+        }
+    }
+
+    /**
+     * Prints the heading message for search for workout.
+     */
+    private void printSearchWorkoutHeading() {
+        if (isFirstMatch()) {
+            printHeadingMessage(CATEGORY_WORKOUT);
+        }
+    }
+
+    /**
+     * Prints the heading message for search for plan.
+     */
+    private void printSearchPlanHeading() {
+        if (isFirstMatch()) {
+            printHeadingMessage(CATEGORY_PLAN);
         }
     }
 
