@@ -355,14 +355,6 @@ class ParserTest {
         assertEquals(IncompleteCommandException.NO_PARAMETERS_FOUND, exception.getMessage());
     }
 
-    @Deprecated
-    @Test
-    void parseCommand_listEnumTypeConvertedToUpper_success() {
-        Command testCommand = parser.parseCommand("list spEAker");
-        Command expectedCommand = new ListCommand(new ArrayList<>(Collections.singleton("SPEAKER")));
-        assertEquals(expectedCommand, testCommand);
-    }
-
     @Test
     void parseCommand_deleteCommand_success() {
         Command testCommand = parser.parseCommand("delete s/`S1234567E`");
