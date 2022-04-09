@@ -75,7 +75,7 @@ public class TagParser extends Parser {
     private void determineErrorInTagOperation() throws InvalidTagOperationException {
         String tagOperation;
         try {
-            tagOperation = userInput.split(SPACE)[ZEROTH_INDEX];
+            tagOperation = userInput.split(WHITESPACES)[ZEROTH_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTagOperationException();
         }
@@ -93,7 +93,7 @@ public class TagParser extends Parser {
     private void determineErrorInTaskNumber() throws MissingNumberException, InvalidNumberException {
         String taskNumber;
         try {
-            taskNumber = userInput.split(SPACE)[FIRST_INDEX];
+            taskNumber = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }
@@ -113,9 +113,9 @@ public class TagParser extends Parser {
         String tagName;
         try {
             if (userInput.contains(TASK_MODULE_FLAG)) {
-                tagName = userInput.split(SPACE)[FOURTH_INDEX];
+                tagName = userInput.split(WHITESPACES)[FOURTH_INDEX];
             } else {
-                tagName = userInput.split(SPACE)[SECOND_INDEX];
+                tagName = userInput.split(WHITESPACES)[SECOND_INDEX];
             }
         } catch (IndexOutOfBoundsException e) {
             throw new MissingCompulsoryParameterException(TAG_NAME_STR);
@@ -132,7 +132,7 @@ public class TagParser extends Parser {
      */
     private void assertErrorInModuleCode() throws InvalidCompulsoryParameterException {
         assert (userInput.contains(TASK_MODULE_FLAG));
-        String moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
+        String moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(WHITESPACES)[ZEROTH_INDEX];
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
 

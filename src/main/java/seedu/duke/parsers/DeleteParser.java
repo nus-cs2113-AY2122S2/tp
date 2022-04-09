@@ -53,7 +53,7 @@ public class DeleteParser extends Parser {
     @Override
     public void determineError() throws MissingNumberException, MissingCompulsoryParameterException,
             InvalidNumberException, InvalidCompulsoryParameterException, UnknownCommandException {
-        String type = userInput.split(SPACE)[ZEROTH_INDEX];
+        String type = userInput.split(WHITESPACES)[ZEROTH_INDEX];
         switch (type) {
         case TASK:
             determineErrorForTask();
@@ -75,7 +75,7 @@ public class DeleteParser extends Parser {
     public void determineErrorForTask() throws MissingNumberException, InvalidNumberException {
         String taskNumber;
         try {
-            taskNumber = userInput.split(SPACE)[FIRST_INDEX];
+            taskNumber = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }
@@ -94,7 +94,7 @@ public class DeleteParser extends Parser {
             InvalidCompulsoryParameterException {
         String moduleCode;
         try {
-            moduleCode = userInput.split(SPACE)[FIRST_INDEX];
+            moduleCode = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingCompulsoryParameterException(MODULE_CODE_STR);
         }

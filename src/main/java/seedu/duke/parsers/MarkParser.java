@@ -56,7 +56,7 @@ public class MarkParser extends Parser {
             InvalidNumberException, InvalidCompulsoryParameterException {
         String flag;
         try {
-            flag = userInput.split(SPACE)[ZEROTH_INDEX];
+            flag = userInput.split(WHITESPACES)[ZEROTH_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidFlagException();
         }
@@ -65,7 +65,7 @@ public class MarkParser extends Parser {
         }
         String taskNumber;
         try {
-            taskNumber = userInput.split(SPACE)[FIRST_INDEX];
+            taskNumber = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }

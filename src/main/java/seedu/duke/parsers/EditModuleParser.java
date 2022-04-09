@@ -1,5 +1,8 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.EditCommand;
 import seedu.duke.exceptions.MissingCompulsoryParameterException;
@@ -8,8 +11,6 @@ import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
-import java.util.HashMap;
-import java.util.Objects;
 
 //@@author heekit73098
 /**
@@ -71,7 +72,7 @@ public class EditModuleParser extends EditParser {
             InvalidCompulsoryParameterException {
         String moduleCode;
         try {
-            moduleCode = userInput.split(SPACE)[FIRST_INDEX];
+            moduleCode = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingCompulsoryParameterException(MODULE_CODE_STR);
         }
@@ -105,7 +106,7 @@ public class EditModuleParser extends EditParser {
     private void determineErrorInDescription() throws MissingCompulsoryParameterException, InvalidFlagException {
         String moduleFlag;
         try {
-            moduleFlag = userInput.split(SPACE)[SECOND_INDEX];
+            moduleFlag = userInput.split(WHITESPACES)[SECOND_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingCompulsoryParameterException(MODULE_DESCRIPTION_STR);
         }

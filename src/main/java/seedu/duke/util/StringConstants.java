@@ -247,6 +247,7 @@ public class StringConstants {
     public static final String TASK_ESTIMATED_WORKING_TIME_STR = "estimated working time";
     public static final String MODULE_CODE = "moduleCode";
     public static final String MODULE_CODE_STR = "module code";
+    public static final String MODULE_FIELD_STR = "module code field";
     public static final String MODULE_DESCRIPTION = "moduleDescription";
     public static final String MODULE_DESCRIPTION_STR = "module description";
     public static final String MODULAR_CREDIT = "modularCredit";
@@ -303,6 +304,7 @@ public class StringConstants {
     public static final String TAG_COMMAND_FLAGS = "(add|del)";
     public static final String TASK_MODULE_FLAG = " -m ";
     public static final String ANY_FLAG_TRIMMED = "-\\w\\s+";
+    public static final String WHITESPACES = "\\s+";
 
     /**
      * For grades.

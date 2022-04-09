@@ -1,5 +1,8 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.EmptyParamException;
@@ -12,8 +15,6 @@ import seedu.duke.exceptions.MissingCompulsoryParameterException;
 import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * This Parser supports the "add mod" command.
@@ -81,7 +82,7 @@ public class AddModuleParser extends AddParser {
         String modularCredit;
 
         try {
-            moduleCode = userInput.split(SPACE)[FIRST_INDEX];
+            moduleCode = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingCompulsoryParameterException(MODULE_CODE_STR);
         }
@@ -89,7 +90,7 @@ public class AddModuleParser extends AddParser {
             throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
         try {
-            modularCredit = userInput.split(SPACE)[SECOND_INDEX];
+            modularCredit = userInput.split(WHITESPACES)[SECOND_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingNumberException();
         }

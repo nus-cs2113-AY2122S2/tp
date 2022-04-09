@@ -45,6 +45,7 @@ public abstract class Parser {
     protected static final String INVALID_TAG_COMMAND = StringConstants.INVALID_TAG_COMMAND;
 
     protected static final String SPACE = StringConstants.SPACE;
+    protected static final String WHITESPACES = StringConstants.WHITESPACES;
     protected static final String TASK = StringConstants.TASK_STR;
     protected static final String MODULE = StringConstants.MODULE_STR;
     protected static final String TASK_NAME_STR = StringConstants.TASK_NAME_STR;

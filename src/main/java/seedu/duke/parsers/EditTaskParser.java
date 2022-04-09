@@ -1,5 +1,8 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.EditCommand;
 import seedu.duke.exceptions.ModHappyException;
@@ -11,8 +14,6 @@ import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.EmptyParamException;
 import seedu.duke.util.StringConstants;
 
-import java.util.HashMap;
-import java.util.Objects;
 
 //@@author heekit73098
 /**
@@ -29,6 +30,7 @@ public class EditTaskParser extends EditParser {
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
     private static final String EMPTY_STRING = StringConstants.EMPTY_STRING;
+    private static final String MODULE_FIELD_STR = StringConstants.MODULE_FIELD_STR;
     private String userInput;
 
     // Unescaped regex for testing
@@ -108,7 +110,7 @@ public class EditTaskParser extends EditParser {
     private String checkErrorInTaskNumber() throws MissingNumberException, InvalidNumberException {
         String taskNumber;
         try {
-            taskNumber = userInput.split(SPACE)[FIRST_INDEX];
+            taskNumber = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }
@@ -139,7 +141,7 @@ public class EditTaskParser extends EditParser {
     private String getParameterFlag() {
         String parameterFlag = null;
         boolean hasModuleFlag = userInput.contains(TASK_MODULE_FLAG);
-        String [] arguments = userInput.split(SPACE);
+        String [] arguments = userInput.split(WHITESPACES);
         for (String argument : arguments) {
             if (hasModuleFlag && argument.equals(TASK_MODULE_FLAG.trim())) {
                 hasModuleFlag = false;
@@ -155,7 +157,7 @@ public class EditTaskParser extends EditParser {
     }
 
     /**
-     * Determine the error in the prarameter if the parameter is wrapped in double quotes but with the wrong flag.
+     * Determine the error in the parameter if the parameter is wrapped in double quotes but with the wrong flag.
      * @throws InvalidFlagException if the incorrect flag is used
      */
     private void determineErrorInParameter() throws InvalidFlagException {
@@ -186,7 +188,11 @@ public class EditTaskParser extends EditParser {
             if (userInput.contains(TASK_MODULE_FLAG.trim())) {
                 throw new EmptyParamException(MODULE_CODE_STR);
             }
-            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, userInput.trim());
+            throw new InvalidCompulsoryParameterException(MODULE_FIELD_STR, userInput.trim());
+        }
+        String inputBeforeModuleCode = userInput.split(TASK_MODULE_FLAG.trim())[ZEROTH_INDEX];
+        if (!inputBeforeModuleCode.isBlank()) {
+            throw new InvalidCompulsoryParameterException(MODULE_FIELD_STR, userInput.trim());
         }
 
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);

@@ -1,5 +1,8 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
@@ -9,8 +12,6 @@ import seedu.duke.exceptions.MissingCompulsoryParameterException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.util.StringConstants;
 
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * This Parser supports the "add task" command.
@@ -53,7 +54,6 @@ public class AddTaskParser extends AddParser {
     private static final String ANY_FLAG_TRIMMED = StringConstants.ANY_FLAG_TRIMMED;
     private static final String DASH = StringConstants.DASH;
     private static final String WORD_CHAR_ONLY = StringConstants.WORD_CHAR_ONLY;
-    private static final String TASK_MODULE_FLAG = StringConstants.TASK_MODULE_FLAG;
 
     public AddTaskParser() {
         super();
@@ -78,7 +78,7 @@ public class AddTaskParser extends AddParser {
     public void determineError() throws MissingCompulsoryParameterException, InvalidCompulsoryParameterException {
         String taskName;
         try {
-            taskName = userInput.split(SPACE)[FIRST_INDEX];
+            taskName = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingCompulsoryParameterException(TASK_NAME_STR);
         }
@@ -99,23 +99,21 @@ public class AddTaskParser extends AddParser {
      * @throws InvalidCompulsoryParameterException if there is a module code,
      *                                             but it is not made up of only word characters
      */
-    private void checksForErrorInModuleCode(String moduleFlag) throws EmptyParamException,
+    private void checksForErrorInModuleCode(String moduleFlag, String taskModule) throws EmptyParamException,
             InvalidCompulsoryParameterException {
         if (!Objects.isNull(moduleFlag)) {
-            String moduleCode;
-            try {
-                moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX];
-            } catch (IndexOutOfBoundsException e) {
+            if (Objects.isNull(taskModule) || taskModule.isBlank()) {
                 throw new EmptyParamException(MODULE_CODE_STR);
             }
-            if (moduleCode.contains(SPACE + DASH)) {
-                moduleCode = moduleCode.split(SPACE + DASH)[ZEROTH_INDEX];
+
+            if (taskModule.contains(SPACE + DASH)) {
+                taskModule = taskModule.split(SPACE + DASH)[ZEROTH_INDEX];
             }
-            if (moduleCode.matches(ANY_FLAG_TRIMMED + QUOTED_UNRESTRICTED_STR)) {
+            if (taskModule.matches(ANY_FLAG_TRIMMED + QUOTED_UNRESTRICTED_STR)) {
                 throw new EmptyParamException(MODULE_CODE_STR);
             }
-            if (!moduleCode.matches(WORD_CHAR_ONLY)) {
-                throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
+            if (!taskModule.matches(WORD_CHAR_ONLY)) {
+                throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, taskModule);
             }
         }
     }
@@ -143,7 +141,7 @@ public class AddTaskParser extends AddParser {
         final String taskModule = parsedArguments.get(TASK_MODULE);
         final String moduleFlag = parsedArguments.get(MODULE_FLAG);
         if (!Objects.isNull(taskName)) {
-            checksForErrorInModuleCode(moduleFlag);
+            checksForErrorInModuleCode(moduleFlag, taskModule);
             checksForEmptyParams(taskName, taskDescription, estimatedWorkingTime);
             checksForExcessArg();
             return new AddCommand(AddCommand.AddObjectType.TASK, taskName, taskDescription, estimatedWorkingTime,
