@@ -57,7 +57,7 @@ public class CommandParser {
     private static final String ADD_AVAILABILITY_COMMAND = "availability ";
     private static final String ADD_SATISFACTION_COMMAND = "add satisfaction ";
     private static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
-    private static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
+    private static final String AVERAGE_SATISFACTION_COMMAND = "view average satisfaction";
     private static final String CHECK_IN = "check in ";
     private static final String CHECK_OUT = "check out ";
     private static final String CHECK_ROOM = "check room ";
