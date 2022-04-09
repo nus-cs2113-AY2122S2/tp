@@ -17,6 +17,7 @@ public class Validator {
             throw new UserInputErrorException("There is one or more parameters missing");
         }
     }
+
     public static void validateNric(String nric) throws UserInputErrorException {
         Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
         Matcher nricMatcher = nricPattern.matcher(nric);
@@ -30,7 +31,8 @@ public class Validator {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
         Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
         if (!fullNameMatcher.matches()) {
-            throw new UserInputErrorException("Full name must contain only alphabets, no special characters or numbers.");
+            throw new UserInputErrorException("Full name must contain only alphabets, "
+                    + "no special characters or numbers.");
         }
     }
 
@@ -390,8 +392,8 @@ public class Validator {
         //minParameterCheck(parameters, 3);
         validateNric(dispenseMedicineParameters[0]);
         if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
-            throw new UserInputErrorException("Not all medicines in list have both the name of the medicine and the quantity"
-                + "to prescribe!");
+            throw new UserInputErrorException("Not all medicines in list have both "
+                    + "the name of the medicine and the quantity to prescribe!");
         }
 
         for (int i = 1; i < dispenseMedicineParameters.length; i += 2) {

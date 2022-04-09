@@ -14,7 +14,8 @@ public class CheckIfAppointmentTodayCommand extends Command {
     }
 
     @Override
-    public Status execute(List appointmentList) throws DuplicateEntryException, NotFoundException, UserInputErrorException {
+    public Status execute(List appointmentList) throws DuplicateEntryException, NotFoundException,
+            UserInputErrorException {
         if (appointmentList instanceof AppointmentList) {
             ((AppointmentList) appointmentList).hasAppointmentToday("P",parameterArray[0]);
         }

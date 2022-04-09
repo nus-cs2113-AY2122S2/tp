@@ -14,7 +14,8 @@ public class UpdateMedicineInventoryCommand extends Command {
     }
 
     @Override
-    public Status execute(List medicineList) throws DuplicateEntryException, NotFoundException, UserInputErrorException {
+    public Status execute(List medicineList) throws DuplicateEntryException, NotFoundException,
+            UserInputErrorException {
         if (medicineList instanceof MedicineList) {
             ((MedicineList) medicineList).updateStock();
             return Status.UPDATE_MEDICINE_INVENTORY_SUCCESS;

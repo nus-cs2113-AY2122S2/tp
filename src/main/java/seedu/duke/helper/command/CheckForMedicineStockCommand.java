@@ -16,7 +16,8 @@ public class CheckForMedicineStockCommand extends Command {
     }
 
     @Override
-    public Status execute(List medicineList) throws DuplicateEntryException, NotFoundException, UserInputErrorException {
+    public Status execute(List medicineList) throws DuplicateEntryException, NotFoundException,
+            UserInputErrorException {
         String[] medicineArray = Arrays.copyOfRange(parameterArray,1,parameterArray.length);
         if (medicineList instanceof MedicineList) {
             ((MedicineList) medicineList).checkStock(medicineArray);

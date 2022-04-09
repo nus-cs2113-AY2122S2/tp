@@ -1,11 +1,10 @@
 package seedu.duke.helper;
 
 
+import seedu.duke.assets;
 import seedu.duke.assets.*;
 import seedu.duke.exception.DuplicateEntryException;
-import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.UserInputErrorException;
-
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,6 +31,7 @@ public class Storage {
     }
 
     ArrayList<String> corruptedLines = new ArrayList<>();
+
     private void loadGenericData(String filePath, List listType) throws FileNotFoundException {
         File data = new File(filePath);
         Scanner reader = new Scanner(data);
@@ -40,11 +40,10 @@ public class Storage {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
             try {
-                if (filePath.equals(PATH_APT_MEDS)){
+                if (filePath.equals(PATH_APT_MEDS)) {
                     outputFilePathCorrupted = "data/appointment_meds_corrupted.txt";
                     appointments.loadMedicine(parameters);
-                }
-                else {
+                } else {
                     if (filePath.equals(PATH_DOC)) {
                         outputFilePathCorrupted = "data/doctor_corrupted.txt";
                         Validator.validateAddDoctor(parameters);
@@ -66,19 +65,23 @@ public class Storage {
 
 
             } catch (UserInputErrorException e) {
-                corruptedLines.add(e.toString() + "\nLine: " + line);
-//                UI.printParagraph(line);
-            } catch (DuplicateEntryException e) {
+                corruptedLines.add(e + "\nLine: " + line);
+                //UI.printParagraph(line);
+            }
+            catch (DuplicateEntryException e) {
+                //just ignore any duplicates
+                continue;
              }
         }
         if (corruptedLines.size() != 0 && !outputFilePathCorrupted.equals("nope")) {
-            saveData(outputFilePathCorrupted, corruptedLines);
-            UI.printParagraph("There are some corrupted lines in your input files. " +
-                    "It has been moved to another file named " +
-                    outputFilePathCorrupted) ;
+            saveCorruptedData(outputFilePathCorrupted, corruptedLines);
+            UI.printParagraph("There are some corrupted lines in your input files. "
+                    + "It has been moved to another file named "
+                    + outputFilePathCorrupted);
         }
         }
-    private void saveData(String filePath, ArrayList<String> stringArray) {
+
+    private void saveCorruptedData(String filePath, ArrayList<String> stringArray) {
         File file = new File(filePath);
         if (!file.exists()) {
             try {
@@ -131,6 +134,7 @@ public class Storage {
         }
 
     }
+
     //todo : clean up save file
     private void saveMedicineData() {
         File medicineFile = new File(PATH_MED);
