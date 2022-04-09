@@ -373,5 +373,5 @@ public class Validator {
             validateQuantity(medicineQuantity);
         }
     }
-    
+
 }
