@@ -22,8 +22,11 @@ public class CommandMessage {
             + "Usage: delete TASK_NUMBER [/repeat]";
     public static final String COMMAND_WORD_EDIT = "edit";
     public static final String MESSAGE_USAGE_EDIT = "Edit: Edit a task in the task list.\n"
-            + "Usage: edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start START_TIME /end END_TIME]"
-            + " [/by DEADLINE]\n\n"
+            + "Usage:\n"
+            + "       edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/end END_TIME]\n"
+            + "       [/bydate DUE DATE /bytime DUE_TIME]\n\n"
+            + "       edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/end END_TIME]\n"
+            + "       [/bydate DUE DATE /bytime DUE_TIME] /repeat\n\n"
             + "DATE & DEADLINE format: d/M/yyyy\n"
             + "START_TIME & END_TIME format: HH:mm";
     public static final String COMMAND_WORD_EXIT = "bye";
@@ -48,7 +51,7 @@ public class CommandMessage {
             + "5) `show <date>`, where date is in the format d/M/YYYY.%n"
             + "6) `show month`%n"
             + "7) `show <month>`, where month can be the full spelling or%n"
-            + "                   the abbreviation of the specific months%n"
+            + "                   the 3-letter abbreviation of the specific months%n"
             + "                   E.g. `show sep` or `show september`%n"
             + "    Caution: show <month> will not display previous month task but task that is in the upcoming month%n"
             + "E.g. show 23/5/2022 to show timetable for 23th May 2022.%n%n"
