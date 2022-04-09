@@ -103,6 +103,9 @@ public class StudyManagerTest {
         }
     }
 
+    /**
+     * Tests output of list feature from StudyManager.
+     */
     @Test
     public void testListModule() {
         outContent.reset();
@@ -114,6 +117,9 @@ public class StudyManagerTest {
         assertEquals(outputList,outContent.toString());
     }
 
+    /**
+     * Tests find feature of StudyManager.
+     */
     @Test
     public void testFindModule() {
         outContent.reset();
@@ -130,6 +136,10 @@ public class StudyManagerTest {
         assertEquals(outputFind,outContent.toString());
     }
 
+    /**
+     * Tests edit feature of StudyManager by calling individual edit parameter functions and ensuring that they are
+     * working as expected.
+     */
     @Test
     public void testEditModule() {
 
