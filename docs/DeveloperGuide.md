@@ -140,11 +140,12 @@ some methods or parameters have been omitted.</span>
 
 1. When `WerkIt` class is initialize, `UI` class is called to ask and get the user input.
 2. The `Parser` class parses the user input and identifies the command type (e.g. plan/schedule/workout/exercise). Based
-   on the command type, corresponding `Command` object is created.
-3. By executed the command, command action will be identified and appropriate actions will be performed.
-4. After the execution process is finished, appropriate message will be printed to show user that the command 
+   on the command type, the corresponding `Command` object is created.
+3. When the `Command` object is executed, a sequence of actions will be performed. 
+   The actions performed are dependent on the type of action specified by the user.
+4. After the execution process has finished, an appropriate message will be printed to show the user that the command 
    is executed successfully.
-5. At last, the change will be written to local file.
+5. Finally, the change will be written to local file.
 
 ### Component Overview
 
