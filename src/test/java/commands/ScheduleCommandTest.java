@@ -3,6 +3,7 @@ package commands;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.plans.InvalidPlanException;
+import data.plans.Plan;
 import data.plans.PlanList;
 import data.schedule.DayList;
 import data.workouts.InvalidWorkoutException;
@@ -30,6 +31,7 @@ class ScheduleCommandTest {
     FileManager fileManager;
     DayList dayList;
 
+    //@@author emilysim00
     @BeforeEach
     void setUp() throws InvalidWorkoutException, InvalidExerciseException, InvalidPlanException {
         LogHandler.startLogHandler();
@@ -52,10 +54,14 @@ class ScheduleCommandTest {
         Workout newWorkout3 = workoutList.createNewWorkout("pull up /reps 20");
         workoutList.addNewWorkoutToLists(newWorkout3);
 
-        planList.createAndAddPlan("more muscles /workouts 1,2,1,2");
-        planList.createAndAddPlan("more arm muscles /workouts 1,3,1,3");
-        planList.createAndAddPlan("only core /workouts 2,2,2,2");
+        Plan newPlan1 = planList.createNewPlan("more muscles /workouts 1,2,1,2");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("more arm muscles /workouts 1,3,1,3");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("only core /workouts 2,2,2,2");
+        planList.addNewPlanToLists(newPlan3);
     }
+    //@@author
 
     @Test
     void setUserAction_createInvalidAction_expectInvalidCommandException() {

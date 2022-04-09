@@ -32,7 +32,8 @@ class WorkoutCommand COLOR_LOGIC {
 }
 
 class WorkoutList COLOR_LOGIC {
-+ createAndAddWorkout(String userArgument):Workout
++ createNewWorkout(String userArgument):Workout
++ addNewWorkoutToLists(Workout newWorkout):void
 + listAllWorkout():void
 + deleteWorkout(String userArgument):Workout
 + updateWorkout(String userArgument):Workout

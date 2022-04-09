@@ -4,7 +4,7 @@
 
 autonumber 2.1
 
-title Sequence Diagram of `PlanList#createAndAddPlan()`
+title Sequence Diagram of `PlanList#createNewPlan()`
 hide footbox
 
 participant "planList\n:PlanList" AS pl COLOR_LOGIC
@@ -44,16 +44,6 @@ create "newPlan:Plan" AS newPlan COLOR_LOGIC
 pl -> newPlan : new Plan(userPlanNameInput, workoutsToAddInAPlanList)
 activate newPlan COLOR_LOGIC
 return newPlan:Plan
-
-participant "plansHashMapList\n:HashMap" COLOR_LOGIC
-pl -> "plansHashMapList\n:HashMap"   : put(newPlanKey, newPlan)
-activate "plansHashMapList\n:HashMap" COLOR_LOGIC
-return
-
-participant "plansDisplayList\n:ArrayList<String>" COLOR_LOGIC
-pl -> "plansDisplayList\n:ArrayList<String>" : add(newPlanKey)
-activate "plansDisplayList\n:ArrayList<String>" COLOR_LOGIC
-return
 
 end
 @enduml

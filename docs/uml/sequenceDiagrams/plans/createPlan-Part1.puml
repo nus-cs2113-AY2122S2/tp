@@ -20,13 +20,17 @@ end
 
 WerkIt -> newCommand : execute()
 activate newCommand COLOR_LOGIC
-newCommand -> PlanList : createAndAddPlan(userArgument)
+newCommand -> PlanList : createNewPlan(userArgument)
 activate PlanList COLOR_LOGIC
 ref over PlanList
-Create new Plan
-and add it to list.
+Create a new plan.
 end
 newCommand <-- PlanList : newPlan:Plan
+deactivate PlanList
+
+newCommand -> PlanList : addNewPlanToLists(newPlan)
+activate PlanList COLOR_LOGIC
+newCommand <-- PlanList
 deactivate PlanList
 
 newCommand -> UI2 : printNewPlanCreatedMessage(newPlan)
