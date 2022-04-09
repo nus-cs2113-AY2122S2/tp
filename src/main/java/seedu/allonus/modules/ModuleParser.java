@@ -280,7 +280,7 @@ public class ModuleParser {
      * @throws ModuleDayException when the user input day is invalid
      */
     public String validateModuleDay(String day) throws ModuleDayException {
-        //accepts either day of the week or, day of the week and a day'
+        //Accepts either day of the week or date
         String regexDay = REGEX_MODULE_DAY;
         String regexDate = REGEX_MODULE_DATE;
 

@@ -11,7 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  */
 public class ModuleTest {
 
-    Module cs2113, cs3244, ee4204;
+    Module cs2113;
+    Module cs3244;
+    Module ee4204;
+
     @BeforeEach
     public void setUp() {
         cs2113 = new Module("CS2113", "Lecture", "Friday", "4:00pm-6:00pm");
