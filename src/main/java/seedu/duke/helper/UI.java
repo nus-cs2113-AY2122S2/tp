@@ -106,10 +106,10 @@ public class UI {
     public static void printAddAppointmentMessage() {
         printNewLineSeparator();
         System.out.println("Feature: ADD APPOINTMENT");
-        System.out.print("Format: add appointment /info [appointment id],[patient nric],");
-        System.out.println("[patient name],[doctor nric],[doctor name],[appointment date],[appointment details]");
-        System.out.print("Example: add appointment /info A123,S1234567A,Don,");
-        System.out.println("S7654321A,John,2022-10-15,Regular knee checkup");
+        System.out.print("Format: add appointment /info [patient nric], [doctor nric], ");
+        System.out.println("[appointment date], [appointment details]");
+        System.out.print("Example: add appointment /info S1234567A, S7654321A, ");
+        System.out.println("2022-10-15, Regular knee checkup");
     }
 
     public static void printViewDoctorMessage() {
@@ -139,7 +139,7 @@ public class UI {
         System.out.println("Format: view appointment or view appointment /info [criteria],[input value]");
         System.out.print("Accepted Criteria: appointment id, patient nric, ");
         System.out.println("patient name, doctor name, doctor nric, date");
-        System.out.println("Example 1: view appointment /info appointment id, A123");
+        System.out.println("Example 1: view appointment /info appointment id, 12356701017647");
         System.out.println("Example 2: view appointment /info patient nric, S1234567A");
         System.out.println("Example 3: view appointment /info doctor name, John");
         System.out.println("Example 4: view appointment /info patient date, 2023-01-01");
@@ -170,7 +170,7 @@ public class UI {
         printNewLineSeparator();
         System.out.println("Feature: DELETE APPOINTMENT");
         System.out.println("Format: delete appointment /info [appointment id]");
-        System.out.println("Example: delete appointment /info S234");
+        System.out.println("Example: delete appointment /info 12356701017647");
     }
 
     public static void printEditDoctorMessage() {
@@ -239,7 +239,7 @@ public class UI {
         printNewLineSeparator();
         System.out.println("Feature: FIND MEDICINE");
         System.out.println("Format: find medicine /info [parameter], [keyword to find]");
-        System.out.println("Example 1: find medicine /info id, S123");
+        System.out.println("Example 1: find medicine /info id, 12356701017647");
         System.out.println("Example 2: find medicine /info name, Paracetamol");
         System.out.println("Example 3: find medicine /info dosage, 500");
         System.out.println("Example 4: find medicine /info expiry, 2023-06-11");
