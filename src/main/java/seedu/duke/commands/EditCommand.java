@@ -12,6 +12,7 @@ import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.NumberConstants;
 
+//@@author heekit73098
 public class EditCommand extends Command {
 
     private static final String EDIT_MODULE_SUCCESS = StringConstants.EDIT_MODULE_SUCCESS;

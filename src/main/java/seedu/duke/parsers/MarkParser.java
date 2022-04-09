@@ -41,6 +41,7 @@ public class MarkParser extends Parser {
         groupNames.add(INVALID);
     }
 
+    //@@author heekit73098
     /**
      * Determines the error made by the user in the mark command based on the compulsory parameters.
      * It will first check if the flag is present and if it is either c or u.

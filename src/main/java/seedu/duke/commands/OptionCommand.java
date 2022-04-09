@@ -16,6 +16,7 @@ public class OptionCommand extends Command {
     private Configuration.ConfigurationGroup configurationGroup = null;
     private String newValue = null;
 
+    //@@author heekit73098
     public OptionCommand(String configurationGroupWord, String newValue) throws ModHappyException {
         if (!Objects.isNull(configurationGroupWord)) {
             try {
