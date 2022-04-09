@@ -75,8 +75,7 @@ class ScheduleCommandTest {
     }
 
     @Test
-    public void scheduleCommand_validScheduleUpdateConstruction() throws IOException,
-            InvalidCommandException {
+    public void scheduleCommand_validScheduleUpdateConstruction() throws IOException, InvalidCommandException {
         String userInput = "schedule /update 1 2";
         String userAction = "/update";
         String userArguments = "1 2";
@@ -94,8 +93,7 @@ class ScheduleCommandTest {
     }
 
     @Test
-    public void scheduleCommand_validScheduleClearConstruction() throws IOException,
-            InvalidCommandException {
+    public void scheduleCommand_validScheduleClearConstruction() throws IOException, InvalidCommandException {
         String userInput = "schedule /clear 1";
         String userAction = "/clear";
         String userArguments = "1";
@@ -113,8 +111,7 @@ class ScheduleCommandTest {
     }
 
     @Test
-    public void scheduleCommand_validScheduleClearAllConstruction() throws IOException,
-            InvalidCommandException {
+    public void scheduleCommand_validScheduleClearAllConstruction() throws IOException, InvalidCommandException {
         String userInput = "schedule /clearall";
         String userAction = "/clearall";
         String userArguments = " ";
