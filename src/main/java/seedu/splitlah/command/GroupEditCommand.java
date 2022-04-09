@@ -3,10 +3,12 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Group;
+import seedu.splitlah.data.Person;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
@@ -15,13 +17,10 @@ import java.util.logging.Level;
  * @author Tianle
  */
 public class GroupEditCommand extends Command {
-
     private static final String COMMAND_SUCCESS = "The group was edited successfully.\n";
-
     private final String groupName;
     private final String[] involvedList;
     private final int groupId;
-
     /**
      * Initializes a GroupEditCommand object.
      *
@@ -37,6 +36,33 @@ public class GroupEditCommand extends Command {
     }
 
     /**
+     * Checks if new person list is exactly the same as old person list.
+     **/
+    public boolean samePersonList(PersonList newList, ArrayList<Person> oldList) {
+        boolean isSame = true;
+        for (Person person : newList.getPersonList()) {
+            if (!oldList.contains(person)) {
+                isSame = false;
+                return isSame;
+            }
+        }
+        if (!(newList.getSize() == oldList.size())) isSame = false;
+
+        return isSame;
+    }
+    
+    public boolean existingGroupWithTheSameName(Manager manager, String newName) {
+        boolean hasDuplicate = true;
+        ArrayList<Group> groupList = manager.getProfile().getGroupList();
+        for (Group group: groupList) {
+            if (newName == group.getGroupName()) {
+                hasDuplicate = true;
+            }
+        }
+        return hasDuplicate;
+    }
+
+    /**
      * Runs the command with the group identifier as provided by the user input.
      *
      * @param manager A Manager object that manages the TextUI, Profile and Storage objects.
@@ -45,6 +71,7 @@ public class GroupEditCommand extends Command {
     public void run(Manager manager) {
         TextUI ui = manager.getUi();
         Group group;
+
         try {
             group = manager.getProfile().getGroup(groupId);
         } catch (InvalidDataException invalidDataException) {
@@ -60,12 +87,30 @@ public class GroupEditCommand extends Command {
                 Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP);
                 return;
             }
-            PersonList newPersonList = new PersonList(involvedList);
-            group.setPersonList(newPersonList);
+
+            ArrayList<Person> oldList = group.getPersonList();
+            PersonList newList = new PersonList(involvedList);
+            if (samePersonList(newList, oldList)) {
+                ui.printlnMessage(Message.ERROR_GROUPEDIT_SAME_PERSON_LIST);
+                return;
+            } else {
+                PersonList newPersonList = new PersonList(involvedList);
+                group.setPersonList(newPersonList);
+            }
         }
+
         if (groupName != null) {
-            group.setGroupName(groupName);
+            if (groupName.equals(group.getGroupName())) {
+                ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW);
+                return;
+            } else if (existingGroupWithTheSameName(manager, groupName)){
+                ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE);
+                return;
+            } else {
+                group.setGroupName(groupName);
+            }
         }
+
         manager.saveProfile();
         ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + group);
     }
