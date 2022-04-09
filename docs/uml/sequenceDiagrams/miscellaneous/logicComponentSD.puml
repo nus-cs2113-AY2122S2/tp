@@ -6,21 +6,21 @@ autonumber
 
 title Sequence Diagram of New Workout.
 
-participant ":WerkIt" AS WerkIt #Sandybrown
-participant ":Parser" AS Parser #Gold
-participant ":WorkoutCommand" AS WorkoutCommand #LightSkyBlue
-participant ":WorkoutList" AS WorkoutList #LightSkyBlue
+participant ":WerkIt" AS WerkIt COLOR_WERKIT
+participant ":Parser" AS Parser COLOR_PARSER
+participant ":WorkoutCommand" AS WorkoutCommand COLOR_LOGIC
+participant ":WorkoutList" AS WorkoutList COLOR_LOGIC
 
-activate WerkIt #Sandybrown
+activate WerkIt COLOR_WERKIT
 WerkIt -> Parser : parseUserInput(userInput)
-activate Parser #Gold
+activate Parser COLOR_PARSER
 WerkIt <-- Parser : :WorkoutCommand
 deactivate Parser
 
 WerkIt -> WorkoutCommand : execute()
-activate WorkoutCommand #LightSkyBlue
+activate WorkoutCommand COLOR_LOGIC
 WorkoutCommand -> WorkoutList : createAndAddWorkout(userArguments)
-activate WorkoutList #LightSkyBlue
+activate WorkoutList COLOR_LOGIC
 WorkoutCommand <-- WorkoutList
 deactivate WorkoutList
 WerkIt <-- WorkoutCommand

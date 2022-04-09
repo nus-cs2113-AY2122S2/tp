@@ -7,21 +7,21 @@ autonumber
 title Sequence Diagram of `plan /delete` Command
 hide footbox
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "newCommand\n:PlanCommand" AS deleteCommand
-participant "planList\n:PlanList" AS PlanList
-participant "ui:UI" AS UI2
-participant "fileManager\n:FileManager" as FileManager
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "deleteCommand\n:PlanCommand" AS deleteCommand COLOR_LOGIC
+participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
+participant "ui:UI" AS UI2 COLOR_UI
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
 
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 ref over WerkIt
 Obtain and parse user input.
 end
 
 WerkIt -> deleteCommand : execute()
-activate deleteCommand
+activate deleteCommand COLOR_LOGIC
 deleteCommand -> PlanList : deletePlan(userArguments)
-activate PlanList
+activate PlanList COLOR_LOGIC
 ref over PlanList
 Delete plan specified by user.
 end
@@ -29,12 +29,12 @@ deleteCommand <-- PlanList : deletedPlan : Plan
 deactivate PlanList
 
 deleteCommand -> UI2 : printDeletePlanMessage(deletedPlan)
-activate UI2
+activate UI2 COLOR_UI
 deleteCommand <-- UI2
 deactivate UI2
 
 deleteCommand -> FileManager : rewriteAllPlansToFile(planList))
-activate FileManager
+activate FileManager COLOR_STORAGE
 ref over FileManager
 Rewrite modified planList
 data into file on user's system

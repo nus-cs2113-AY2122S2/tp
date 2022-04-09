@@ -370,7 +370,8 @@ public class PlanList {
                 + ui.getColorText(TextColor.COLOR_YELLOW, planName) + "].");
 
         for (int i = 0; i < numberOfWorkoutsInPlan; i++) {
-            System.out.println((i + 1) + ". " + workoutsInPlanList.get(i).toString());
+            String workoutDetails = workoutsInPlanList.get(i).toString();
+            System.out.println((i + 1) + ". " + workoutDetails);
         }
         logger.exiting(getClass().getName(), "listPlanDetails");
     }
