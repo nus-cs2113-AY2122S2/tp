@@ -35,18 +35,20 @@ public class ModuleCalendarReader {
     //Constant messages and strings
     private static final String LOGGER_IDENTIFIER = "mylogger";
     private static final String FILE_NOT_FOUND_MESSAGE = "No such file found! Please ensure you have the correct name."
-            + "\nThen place the file in the same directory as AllOnUs.jar.";
+            +  System.lineSeparator() + "Then place the file in the same directory as AllOnUs.jar.";
     private static final String LOGGER_FILE_NOT_FOUND = "No .ics file was found under the given name.";
     private static final String SINGAPORE_TIMEZONE_KEYWORD = "Asia/Singapore";
     private static final String ICS_DATE_FORMAT = "yyyyMMdd'T'HHmmss'Z'";
-    private static final String PARSE_SUCCESS_MESSAGE = "\nI have found these modules from your ics file:\n";
-    private static final String ADDED_TO_SCHEDULE_MESSAGE = "\nI have added these to your existing schedule!";
+    private static final String PARSE_SUCCESS_MESSAGE =  System.lineSeparator()
+            + "I have found these modules from your ics file:" + System.lineSeparator();
+    private static final String ADDED_TO_SCHEDULE_MESSAGE =  System.lineSeparator()
+            + "I have added these to your existing schedule!";
     private static final String ICS_FILE_FORMAT = ".ics";
     private static final String NOT_ICS_ERROR_MESSAGE = "Your filename does not contain .ics.";
     private static final String CHECK_DIRECTORY_ERROR_MESSAGE = "Please ensure you have the correct name and "
             + "the .ics file is in the home directory of the application.";
-    private static final String PARSE_FAILURE_MESSAGE = "Could not be parsed from the given ics file. \n"
-            + "Please ensure that the ics from nusmods.com has not been edited.";
+    private static final String PARSE_FAILURE_MESSAGE = "Could not be parsed from the given ics file. "
+            + System.lineSeparator() + "Please ensure that the ics from nusmods.com has not been edited.";
     private static final String INCORRECT_DAY_ERROR_MESSAGE = "Not a day of the week!";
     private static final String DATE_WAS_NULL_MESSAGE = "DateStart was found to be null";
     private static final String TIME_FORMAT_WITH_AMPM = "h:mm a";
@@ -54,7 +56,7 @@ public class ModuleCalendarReader {
     private static final String ICS_COMPONENT_SUMMARY = "SUMMARY";
     private static final String ICS_COMPONENT_START_DATE = "DTSTART";
     private static final String ICS_COMPONENT_END_DATE = "DTEND";
-    private static final String FILE_NOT_FOUND_ERROR = "File %s was not found\n";
+    private static final String FILE_NOT_FOUND_ERROR = "File %s was not found" + System.lineSeparator();
     private static final String MODULE_CATEGORY_PACKAGED_TYPE = "Packaged";
     private static final String SUNDAY = "Sunday";
     private static final String MONDAY = "Monday";
