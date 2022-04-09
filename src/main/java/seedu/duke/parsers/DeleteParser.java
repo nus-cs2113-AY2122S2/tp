@@ -21,7 +21,6 @@ public class DeleteParser extends Parser {
     private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String MODULE_CODE = StringConstants.MODULE_CODE;
-    private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
     // Unescaped regex for testing:
