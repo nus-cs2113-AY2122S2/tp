@@ -34,6 +34,11 @@ public class Housekeeper {
         return false;
     }
 
+    /**
+     * This method converts the given available day in int to the actual name of the day.
+     *
+     * @return String of days the housekeeper is available to work on.
+     */
     public String getAvailability() {
         if (availability == null) {
             return "N/A";
@@ -51,6 +56,13 @@ public class Housekeeper {
         return availableStr;
     }
 
+    /**
+     * Ensure the availability written into the file is in the correct format such that the next time it loads the
+     * correct format of availability is given.
+     *
+     * @param availability Availability of housekeeper given in integer.
+     * @return Valid format of availability to be written into housekeeper_file.txt.
+     */
     public String getAvailabilityFile(String availability) {
         if (availability == null) {
             return "N/A";
@@ -71,6 +83,12 @@ public class Housekeeper {
         return availabilityForFile;
     }
 
+    /**
+     * Allows updating or adding availability of housekeeper and does not allow duplicated days to be recorded more
+     * than once.
+     *
+     * @param availability Given by the user in integer format.
+     */
     public void setAvailability(String availability) {
         this.availability = availability;
         availableList.clear();
