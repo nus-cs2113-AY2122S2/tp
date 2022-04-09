@@ -55,6 +55,13 @@ public abstract class Event {
         this.mode = mode;
     }
 
+    /**
+     * Checks if the object equals this event.
+     * Two events equals if and only if their title, day, startTime and endTime are equal.
+     *
+     * @param obj Object to be checked
+     * @return True if the object equals this event. False otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Event)) {
