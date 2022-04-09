@@ -2,13 +2,11 @@ package seedu.duke.commands;
 
 import seedu.duke.common.Messages;
 import seedu.duke.data.BorrowRecord;
-import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * Borrow an item from the inventory for a specified duration.
@@ -25,7 +23,6 @@ public class BorrowCommand extends Command {
     private final LocalDate startDate;
     private final LocalDate endDate;
     private final String borrowerName;
-    private final BorrowStatus borrowStatus;
 
     public BorrowCommand(int itemIndex, LocalDate startDate, LocalDate endDate, String borrowerName) {
         // itemIndex is parsed in as zero-based indexing.
@@ -33,16 +30,6 @@ public class BorrowCommand extends Command {
         this.startDate = startDate;
         this.endDate = endDate;
         this.borrowerName = borrowerName;
-
-        // Determine the borrow status compared to today's date
-        LocalDate today = LocalDate.now();
-        if (today.isAfter(this.endDate)) {
-            this.borrowStatus = BorrowStatus.PAST;
-        } else if (today.isBefore(this.startDate)) {
-            this.borrowStatus = BorrowStatus.FUTURE;
-        } else {
-            this.borrowStatus = BorrowStatus.PRESENT;
-        }
     }
 
     @Override
@@ -53,7 +40,7 @@ public class BorrowCommand extends Command {
         }
 
         // Create a new borrow record and add to item
-        BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName, borrowStatus);
+        BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName);
         Item item = itemList.addBorrowRecord(itemIndex, newRecord);
         ui.showMessages("Item has been successfully borrowed!",
                 "Name of Item: " + item.getName(),

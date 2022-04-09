@@ -10,11 +10,20 @@ public class BorrowRecord {
     private final BorrowStatus borrowStatus;
     private boolean isReturned = false;
 
-    public BorrowRecord(LocalDate startDate, LocalDate endDate, String borrowerName, BorrowStatus borrowStatus) {
+    public BorrowRecord(LocalDate startDate, LocalDate endDate, String borrowerName) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.borrowerName = borrowerName;
-        this.borrowStatus = borrowStatus;
+
+        // Determine the borrow status compared to today's date
+        LocalDate today = LocalDate.now();
+        if (today.isAfter(this.endDate)) {
+            this.borrowStatus = BorrowStatus.PAST;
+        } else if (today.isBefore(this.startDate)) {
+            this.borrowStatus = BorrowStatus.FUTURE;
+        } else {
+            this.borrowStatus = BorrowStatus.PRESENT;
+        }
     }
 
     public LocalDate getStartDate() {
