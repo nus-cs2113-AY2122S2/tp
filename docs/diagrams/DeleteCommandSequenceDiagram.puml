@@ -1,37 +1,25 @@
 @startuml
-actor user
+hide footbox
 
-user -> ":Ui" ++ : "delete n/John i/1"
-create ":Parser"
-":Ui" -> ":Parser" ++: new Parser("delete n/John i/1")
-":Parser" --> ":Ui" --: parser:Parser
-":Ui" -> ":Parser" ++: parseCommand("delete n/John i/1")
-create ":DeleteCommand"
-":Parser" -> ":DeleteCommand" ++: new DeleteCommand("John": String,1:int)
-":DeleteCommand" --> ":Parser" --: deleteCommand:DeleteCommand
-":Parser" --> ":Ui" --: deleteCommand:DeleteCommand
 ":Ui" -> ":DeleteCommand" ++: execute(masterTimetable)
-":DeleteCommand" -> ":MasterTimetable" ++: getByName("John")
+":DeleteCommand" -> ":MasterTimetable" ++: getByName(name)
 ":MasterTimetable" --> ":DeleteCommand" -- : timetable: Timetable
 ":DeleteCommand" -> ":Timetable" ++: get(index - 1)
 ":Timetable" --> ":DeleteCommand" -- : event: Event
 alt event is type meeting
 ":DeleteCommand" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
-":MasterTimetable" -> ":MasterTimetable" : deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
-":MasterTimetable" -> ":DeleteCommand" --: deleteMeetingFromAllTimetableConfirmation :String
-":DeleteCommand" --> ":Ui" --: deleteMeetingFromEveryoneTimetable: String
-":Ui" --> "user" : deleteMeetingFromEveryoneTimetable: String
+":MasterTimetable" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
+":MasterTimetable" -> ":DeleteCommand" ++: deleteMeetingFromAllTimetableConfirmation :String
+":DeleteCommand" --> ":Ui" --:
 
 else non-meeting types
-activate ":DeleteCommand"
-":DeleteCommand" -> ":Timetable" : remove(index - 1)
+
+":DeleteCommand" -> ":Timetable" ++ : remove(index - 1)
 ":Timetable" --> ":DeleteCommand" --:
-":DeleteCommand" -> ":DeleteCommand" : deleteConfirmation(event: Event )
-":DeleteCommand" --> ":Ui" --: deleteConfirmation: String
-":Ui" --> "user" --: deleteConfirmation: String
+":DeleteCommand" -> ":DeleteCommand" ++ : deleteConfirmation(event: Event )
+":DeleteCommand" --> ":Ui" --:
+
 end
 destroy ":DeleteCommand"
-destroy ":Parser"
-destroy ":Timetable"
 
 @enduml
