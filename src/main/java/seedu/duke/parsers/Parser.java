@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.commands.Command;
-import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.InvalidModuleGradeException;
 import seedu.duke.exceptions.ExcessArgumentException;
