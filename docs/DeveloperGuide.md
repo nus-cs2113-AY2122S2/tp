@@ -132,12 +132,19 @@ and their interactions.
 
 #### How the components interact with each other
 The *Component Interaction Diagram* shows the inner workings of how each component in WerkIt interacts.
-The diagram depicts a scenario where a user attempts to create a workout, `workout /new sit up /reps 5`.
 
 ![Architecture Sequence Diagram](uml/sequenceDiagrams/miscellaneous/images/ArchitectureSequenceDiagram.png)
 
 <span class="box info">:memo: To improve the diagram's readability, 
 some methods or parameters have been omitted.</span>
+
+1. When `WerkIt` class is initialize, `UI` class is called to ask and get the user input.
+2. The `Parser` class parses the user input and identifies the command type (e.g. plan/schedule/workout/exercise). Based
+   on the command type, corresponding `Command` object is created.
+3. By executed the command, command action will be identified and appropriate actions will be performed.
+4. After the execution process is finished, appropriate message will be printed to show user that the command 
+   is executed successfully.
+5. At last, the change will be written to local file.
 
 ### Component Overview
 
