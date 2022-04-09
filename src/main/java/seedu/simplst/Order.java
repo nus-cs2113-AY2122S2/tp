@@ -195,10 +195,6 @@ public class Order {
         jo.put(OrderKeys.receiver, this.receiver);
         jo.put(OrderKeys.shippingAddress, this.shippingAddress);
         jo.put(OrderKeys.isFulfilled, this.isFulfilled);
-        // jo.put(OrderKeys.totalCost, this.totalCost);
-        // jo.put(OrderKeys.toFulfilBy, this.toFulfilBy);
-        // jo.put(OrderKeys.fulfilledBy, this.fulfilledBy);
-        // jo.put(OrderKeys.comments, this.comments);
         JSONArray jaol = this.serializeOrderlines();
         if (jaol == null) {
             return null;
