@@ -262,7 +262,8 @@ How the `Logic` component works:
 <br/>
 
 Illustration of the interactions within the `Logic` component can be found
-in the sequence diagram below. The example given is for the creation of new workouts (`workout /new`):
+in the sequence diagram below. 
+The example given below is for the listing of workouts in WerkIt! (`workout /list`):
 <br><br>
 
 ![logicComponentUML](uml/sequenceDiagrams/miscellaneous/images/logicComponentSD.png)
@@ -332,8 +333,8 @@ will parse the `workout` base word and proceed to create a `WorkoutCommand` obje
 Once the `WorkoutCommand` object is created, the `WorkoutCommand#execute()` method
 is called. Depending on the type of command action, this method will
 call the appropriate operations from the `WorkoutList` class. For instance, if the command action
-is `/new`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout()`
-to create a new workout in the application. 
+is `/new`, the `WorkoutCommand#execute()` method will call `WorkoutList#createNewWorkout()`
+to create a new workout, followed by `WorkoutList#addNewWorkoutToLists()` to add the new workout to the application. 
 To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
 <br><br>
 When all methods except the `listAllWorkout()` method are executed, the

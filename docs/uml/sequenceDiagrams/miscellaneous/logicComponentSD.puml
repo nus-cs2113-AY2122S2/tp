@@ -4,7 +4,7 @@
 hide footbox
 autonumber
 
-title Sequence Diagram of New Workout.
+title Sequence Diagram of List Workout.
 
 participant ":WerkIt" AS WerkIt COLOR_WERKIT
 participant ":Parser" AS Parser COLOR_PARSER
@@ -19,7 +19,7 @@ deactivate Parser
 
 WerkIt -> WorkoutCommand : execute()
 activate WorkoutCommand COLOR_LOGIC
-WorkoutCommand -> WorkoutList : createAndAddWorkout(userArguments)
+WorkoutCommand -> WorkoutList : listAllWorkout()
 activate WorkoutList COLOR_LOGIC
 WorkoutCommand <-- WorkoutList
 deactivate WorkoutList
