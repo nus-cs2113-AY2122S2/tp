@@ -514,8 +514,9 @@ Format: `leave`
 
 **A**: Sherpass will print an error message 
 containing details of the corruption (e.g., missing fields, brackets). You can either modify the save file accordingly to
-rectify the problem or allow Sherpass to create a new save file 
-**(Caution: You will lose all previously saved tasks!)**
+rectify the problem or allow Sherpass to create a new save file
+
+**(⚠ Caution: You will lose all previously saved tasks!)**
 
 **Q**: How do I transfer my data to another computer? 
 
