@@ -7,25 +7,25 @@ participant ":MasterTimetable" as Master
 participant ":Timetable" as Timetable
 
 create Command
-none -> Command : AddUserCommand(name :String)
+none -> Command : AddUserCommand("john")
 activate Command
 none <-- Command :
 deactivate Command
 
-none -> Command : execute(masterTimetable :MasterTimetable)
+none -> Command : execute(masterTimetable)
 activate Command
 create Timetable
-Command -> Timetable : Timetable(name :String)
+Command -> Timetable : Timetable("john")
 activate Timetable
-Command <-- Timetable
+Command <-- Timetable : timetable :Timetable
 deactivate Timetable
 
-Command ->  Master : addTimetable(timetable :Timetable)
+Command ->  Master : addTimetable(timetable)
 activate Master
 Command <-- Master
 deactivate Master
 
-Command -> Command : addConfirmation(name :String)
+Command -> Command : addConfirmation("john")
 activate Command
 Command --> Command : :String
 deactivate Command

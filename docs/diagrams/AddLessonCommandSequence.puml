@@ -8,27 +8,27 @@ participant ":MasterTimetable" as Master
 participant ":Timetable" as Timetable
 
 create Command
-none -> Command : AddLessonCommand(name, title, day, startTime, endTime, mode)
+none -> Command : AddLessonCommand("john", "cs2113", "monday", 1200, 1400, "online")
 activate Command
 none <-- Command :
 deactivate Command
 
-none -> Command : execute(masterTimetable :MasterTimetable)
+none -> Command : execute(masterTimetable)
 activate Command
 create Lesson
-Command -> Lesson : Lesson(title, day, startTime, endTime, mode)
+Command -> Lesson : Lesson("cs2113", "monday", 1200, 1400, "online")
 activate Lesson
-Command <-- Lesson
+Command <-- Lesson : lesson :Lesson
 deactivate Lesson
 
-Command ->  Master : addLesson(lesson :Lesson, name :String)
+Command ->  Master : addLesson(lesson, "john")
 activate Master
-Master -> Master : getByName(name :String)
+Master -> Master : getByName("john")
 activate Master
 Master --> Master : :Timetable
 deactivate Master
 
-Master -> Timetable : add(lesson :Lesson)
+Master -> Timetable : add(lesson)
 activate Timetable
 Master <-- Timetable
 deactivate Timetable
@@ -36,7 +36,7 @@ deactivate Timetable
 Command <-- Master
 deactivate Master
 
-Command -> Command : addConfirmation(lesson :Lesson, name :String)
+Command -> Command : addConfirmation(lesson, "john")
 activate Command
 Command --> Command : :String
 deactivate Command
