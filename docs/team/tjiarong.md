@@ -68,7 +68,10 @@ Given below are my contributions to the project.
 
 * **Team-based Contribution**:
     * PRs reviewed (with non-trivial comments):
-      * <Placeholder>
+      [#78](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/78),
+      [#163](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/163),
+      [#242](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/242),
+      [#244](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/244),
     * Managed Issues
       * Created and assigned issues related to user stories for `v1.0`
       * Created and assigned issues related to user stories for `v2.0`
