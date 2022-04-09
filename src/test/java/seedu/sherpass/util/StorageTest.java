@@ -30,7 +30,7 @@ class StorageTest {
                     null,
                     LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat),
                     LocalDateTime.parse("12/12/2022 12:10", parseWithTimeFormat));
-            tasks.addTask(newTask, Frequency.SINGLE);
+            tasks.addTask(newTask, Frequency.SINGLE, false);
             storage.writeSaveData(tasks);
         } catch (IOException | TimeClashException | InvalidInputException exception) {
             exception.printStackTrace();

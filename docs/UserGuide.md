@@ -249,6 +249,12 @@ Below is an example of the weekly schedule displayed:
 
 Displays your schedule for the current month or any specific month
 
+***Warning***
+
+Monthly Schedule will only display task that are in the current Month or the upcoming Month.
+
+Please use `show all` method to see task from previous months. 
+
 Format:
 - To see the schedule for the current month: `show month`
 - To see the schedule for any specific month: `show MONTH`, where 
