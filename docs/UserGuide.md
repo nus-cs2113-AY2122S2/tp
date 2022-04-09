@@ -238,7 +238,7 @@ Displays your schedule for the week or the week after.
 
 Format:
 - To see the schedule for the week you are in: `show week`
-- To see the schedule for the week after: "show next week" or `show nextweek`
+- To see the schedule for the week after: `show next week` or `show nextweek`
 
 Below is an example of the weekly schedule displayed:
 
