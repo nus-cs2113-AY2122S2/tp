@@ -134,7 +134,7 @@ The target user is the logistics chief of an event support club. He is responsib
 
 ### Value proposition
 
-Equipment for the club differ in terms of shape and size. Owing to the climate-sensitive and fragile nature of some of these equipment, they are often stored in opaque containers, which may not be easily accessible given space constraints. By keeping records of this information on our application, the logistics chief can easily access and retrieve this information without having to make a physical trip down to the storeroom.
+Equipment for the club differ in terms of shape and size. Owing to the climate-sensitive and fragile nature of some of these equipment, they are often stored in opaque containers, which may not be easily accessible or quickly identifiable given space constraints. By keeping records of this information on our application, the logistics chief can easily access and retrieve this information without having to make a physical trip down to the storeroom.
 
 Further, maintaining a record of the equipment is a time-consuming task given that they often need to be referred to by both the model number and a short alias used by club members. As the post of logistics chief is changed every year when passed down to a new member, this member will need to be acquainted with both the common name and the model number of the relevant equipment. Our application thus provides a convenient way to search by both specifications. 
 
