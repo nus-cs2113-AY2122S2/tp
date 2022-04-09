@@ -64,17 +64,17 @@ is responsible for,
 * Read user's commands from standard input for command execution.
 * At shut down, invokes shutdown sequence and calls Storage to save its current data.
 
-[`UI`](#UI-Component) is responsible for the UI of PlanITarium.
+[`UI`](#ui-component) is responsible for the UI of PlanITarium.
 
-[`Commands`](#Commands-Component) is responsible for the handling and executing of commands.
+[`Commands`](#commands-component) is responsible for the handling and executing of commands.
 
-[`Parser`](#Parser-Component) is responsible for the parsing and validating of user input.
+[`Parser`](#parser-component) is responsible for the parsing and validating of user input.
 
-[`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
+[`Family`](#family-component) is responsible for holding the user data of PlanITarium in memory.
 
-[`Money`](#Money-Component) is responsible for holding the monetary information in memory.
+[`Money`](#money-component) is responsible for holding the monetary information in memory.
 
-[`Storage`](#Storage-Component) is responsible for reading and writing data to the hard disk.
+[`Storage`](#storage-component) is responsible for reading and writing data to the hard disk.
 
 **How the components interact with each other**
 
@@ -569,7 +569,10 @@ and mouse.
 
 ## Glossary
 
-* *glossary item* - Definition
+* *User* - A person that is using or being track by PlanITarium
+* *User Index* - The integer used to identify the user in PlanITarium
+* *Group* - Logically identifies each generation of users
+* *Group Index* - The integer used to identify the group in PlanITarium
 
 ---
 
