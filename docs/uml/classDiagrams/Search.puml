@@ -1,29 +1,29 @@
 @startuml
 'https://plantuml.com/class-diagram
 hide circle
-
+!include ../Style.puml
 skinparam classAttributeIconSize 0
-
+skinparam classFontSize 16
 title Class Diagram of `search` Command
 
 Main -> WerkIt
 WerkIt -> Parser
-WerkIt -> UI
-"{abstract}\nCommand" <|- SearchCommand
-ExerciseList <- SearchCommand
+WerkIt --> UI
+"{abstract}\nCommand" <|-- SearchCommand
+ExerciseList <-left- SearchCommand
 PlanList <- SearchCommand
-WorkoutList <- SearchCommand
+WorkoutList <-u- SearchCommand
 Parser ..> "{abstract}\nCommand"
-
-class WerkIt {
+skinparam classFontSize 16
+class WerkIt #Sandybrown {
 + startContinuousUserPrompt()
 }
 
-class Main {
+class Main COLOR_MAIN {
 
 }
 
-class SearchCommand {
+class SearchCommand #LightSkyBlue {
 + execute()
 + searchWorkout()
 + searchPlan()
@@ -31,24 +31,27 @@ class SearchCommand {
 + searchExercise()
 }
 
-class UI {
+class "{abstract}\nCommand" #LightSkyBlue {
+}
+
+class UI #YellowGreen {
 + getUserInput()
 }
 
-class Parser {
-+ parseUserInput(String userInput)
-+ SearchCommand createSearchCommand(String userInput)
+class Parser #Gold {
++ parseUserInput()
++ SearchCommand createSearchCommand()
 }
 
-class ExerciseList {
+class ExerciseList #LightSkyBlue {
 + exercisesList: ArrayList<String>
 }
 
-class WorkoutList {
+class WorkoutList #LightSkyBlue {
 + workoutsDisplayList: ArrayList<String>
 }
 
-class PlanList {
+class PlanList #LightSkyBlue {
 + plansDisplayList: ArrayList<String>
 }
 

@@ -516,8 +516,9 @@ public class UI {
      *
      * @param category The category that will be searched.
      */
-    public void printSearchNotFoundMessage(String category) {
-        System.out.println("Sorry, no matching " + category + " found.");
+    public void printSearchNotFoundMessage(String category, String keyword) {
+        System.out.println("Sorry, no matching " + category + " found for the keyword"
+                + getColorText(TextColor.COLOR_YELLOW, " [" + keyword + "]") + '.');
     }
 
     /**
