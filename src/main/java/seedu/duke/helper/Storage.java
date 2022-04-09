@@ -2,6 +2,8 @@ package seedu.duke.helper;
 
 
 import seedu.duke.assets.*;
+import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.UserInputErrorException;
 
 
@@ -9,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,21 +35,66 @@ public class Storage {
     private void loadGenericData(String filePath, List listType) throws FileNotFoundException {
         File data = new File(filePath);
         Scanner reader = new Scanner(data);
+        String outputFilePathCorrupted = "nope";
         while (reader.hasNext()) {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
             try {
+                if (filePath.equals(PATH_DOC)) {
+                    outputFilePathCorrupted = "data/doctor_corrupted.txt";
+                    Validator.validateAddDoctor(parameters);
+                }
+                if (filePath.equals(PATH_PAT)) {
+                    outputFilePathCorrupted = "data/patient_corrupted.txt";
+                    Validator.validateAddPatient(parameters);
+                }
+                if (filePath.equals(PATH_MED)) {
+                    outputFilePathCorrupted = "data/medicine_corrupted.txt";
+                    Validator.validateMedicine(parameters);
+                }
+                if (filePath.equals(PATH_APT)) {
+                    outputFilePathCorrupted = "data/appointment_corrupted.txt";
+                    Validator.validateAddAppointment(parameters);
+                }
                 listType.add(parameters);
             } catch (UserInputErrorException e) {
-                if (DuplicateEntryException e) {
-                    continue;
-                }
-                if (UserInputError e)
-                //append line to another file
+                corruptedLines.add(e.toString() + "\nLine: " + line);
+                UI.printParagraph(line);
+            } catch (DuplicateEntryException e) {
                 continue;
+             }
+        }
+        if (corruptedLines.size() != 0 && !outputFilePathCorrupted.equals("nope")) {
+            saveData(outputFilePathCorrupted, corruptedLines);
+            UI.printParagraph("There are some corrupted lines in your input files. " +
+                    "It has been moved to another file named " +
+                    outputFilePathCorrupted) ;
+        }
+        }
+    private void saveData(String filePath, ArrayList<String> stringArray) {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                UI.printParagraph("file has been created");
+            } catch (IOException ioException) {
+                UI.printParagraph("file cannot be created" + filePath);
+                return;
             }
         }
+        try {
+            FileWriter dataWrite = new FileWriter(filePath,true);
+            dataWrite.write("Session: " + LocalDateTime.now().toString() +"\n");
+            for (String s : stringArray) {
+                dataWrite.write(s+ "\n");
+            }
+            dataWrite.write("----------------------------------------------------------\n");
+            dataWrite.close();
+        } catch (IOException e) {
+            UI.printParagraph("Unable to save data...");
+        }
     }
+
 //    private void loadMedicineData() throws FileNotFoundException {
 //        File data = new File(PATH_MED);
 //        Scanner reader = new Scanner(data);

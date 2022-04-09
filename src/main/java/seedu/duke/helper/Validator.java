@@ -12,7 +12,11 @@ import java.util.regex.Pattern;
 public class Validator {
 
     /* Validating person attributes */
-
+    public static void minParameterCheck(String[] parametersArray, int length) throws UserInputErrorException {
+        if (parametersArray.length != length) {
+            throw new UserInputErrorException("There is one or more parameters missing");
+        }
+    }
     public static void validateNric(String nric) throws UserInputErrorException {
         Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
         Matcher nricMatcher = nricPattern.matcher(nric);
@@ -130,11 +134,13 @@ public class Validator {
 
 
     static void validateAddDoctor(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateSpecialization(parameters[6]);
     }
 
     static void validateAddPatient(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateAdmissionDate(parameters[6]);
     }
@@ -199,6 +205,7 @@ public class Validator {
 
     /* Validate medicine */
     public static void validateMedicine(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 6);
         assert parameters.length == 6 : "Validate failed to check parameter length";
         boolean check = true;
         for (int i = 0; i < 5; i++) {
@@ -260,12 +267,14 @@ public class Validator {
     }
 
     public static void validateAddAppointment(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 3);
         validateNric(parameters[0]);
         validateNric(parameters[1]);
         validateDate(parameters[2], "appointment");
     }
 
     public static void validateEditAppointment(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 7);
         validateNric(parameters[1]);
         validateFullName(parameters[2]);
         validateNric(parameters[3]);
@@ -275,6 +284,7 @@ public class Validator {
     }
 
     public static void validateFindDoctor(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 2);
         switch (parameters[0]) {
         case "nric":
             validateNric(parameters[1]);
@@ -303,6 +313,7 @@ public class Validator {
     }
 
     public static void validateFindPatient(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 2);
         switch (parameters[0]) {
         case "nric":
             validateNric(parameters[1]);
@@ -331,6 +342,7 @@ public class Validator {
     }
 
     public static void validateFindAppointment(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 2);
         switch (parameters[0]) {
         case "id":
             break;
@@ -351,7 +363,7 @@ public class Validator {
     }
 
     public static void validateFindMedicine(String[] parameters) throws UserInputErrorException {
-
+        minParameterCheck(parameters, 2);
         boolean check = true;
         switch (parameters[0]) {
 
@@ -375,6 +387,7 @@ public class Validator {
     }
 
     public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws UserInputErrorException {
+        //minParameterCheck(parameters, 3);
         validateNric(dispenseMedicineParameters[0]);
         if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
             throw new UserInputErrorException("Not all medicines in list have both the name of the medicine and the quantity"
