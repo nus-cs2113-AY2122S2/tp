@@ -243,15 +243,22 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 
 ## User Stories
 
-| Version | As a ... | I want to ...                                | So that I can ...                                        |
-|---------|----------|----------------------------------------------|----------------------------------------------------------|
-| v1.0    |new user| see usage instructions                       | refer to them when I forget the command format           |
-| v1.0    |user| add a lesson                                 | view my schedule easily                                  |
-| v1.0    |user| delete a lesson                              | modify my schedule accordingly                           |
-| v1.0    |user| view all the lessons i have in my timetable  | plan my activities accordingly                           |
-| v1.0    |user| add the location paramter to my lesson       | plan my route in advance                                 |
-| v1.0    |user| add a start time and end time to my lessons  | know what time a lesson starts and ends                  |
-| v1.0    |user| clear all the lessons saved in the timetable | reset my timetable without the need to delete one by one |
+| Version | As a ... | I want to ...                                    | So that I can ...                                    |
+|---------|----------|--------------------------------------------------|------------------------------------------------------|
+| v1.0    | new user | see usage instructions                           | refer to them when I forget the command format       |
+| v1.0    | user     | add a lesson                                     | view my schedule easily                              |
+| v1.0    | user     | delete a lesson                                  | modify my schedule accordingly                       |
+| v1.0    | user     | view all the lessons I have in my timetable      | plan my activities accordingly                       |
+| v1.0    | user     | add the location paramter to my lesson           | plan my route in advance                             |
+| v1.0    | user     | add a start time and end time to my lessons      | know what time a lesson starts and ends              |
+| v1.0    | user     | clear all the lessons saved in the timetable     | reset my timetable without the need to delete one by one |
+| v2.0    | user     | add a new user                                   | add my friends' timetables                           |
+| v2.0    | user     | see some common free slots                       | arrange a meeting                                    |
+| v2.0    | user     | add a meeting                                    | block the time slot in everyone's timetables         |
+| v2.0    | user     | view all the events filtered by type             | obtain a quick summary of my week                    |
+| v2.0    | user     | edit a lesson                                    | update the lesson without replace it with a new one  |
+| v2.0    | user     | remove a user                                    | remove the user's timetable and his or her events    |
+| v2.0    | user     | save the modified timetable to the local machine | reuse it next time                                   |
 
 ## Non-Functional Requirements
 
