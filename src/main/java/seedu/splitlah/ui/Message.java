@@ -63,7 +63,7 @@ public abstract class Message {
                     + "        " + ActivityDeleteCommandParser.COMMAND_FORMAT + "\n"
                     + "8.  Edit an existing activity\n"
                     + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_FIRST + "\n"
-                    + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_SECOND + "\n"
+                    + "                " + ActivityEditCommandParser.COMMAND_FORMAT_SECOND + "\n"
                     + "9.  View an existing activity's details\n"
                     + "        " + ActivityViewCommandParser.COMMAND_FORMAT + "\n"
                     + "10. List all existing activities\n"
