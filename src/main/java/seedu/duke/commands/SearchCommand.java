@@ -53,7 +53,7 @@ public class SearchCommand extends Command {
             }
             results.add(searchItem);
 
-            String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i + 1, results.get(i).toDetailedString());
+            String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i + 1, searchItem.toDetailedString());
             ui.showMessages(printMsg);
         }
     }
