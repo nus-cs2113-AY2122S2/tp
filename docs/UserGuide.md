@@ -403,22 +403,22 @@ Another command?
 
 ## Command Summary
 
-| Action                               | Command to be keyed into the terminal                         |
-|--------------------------------------|---------------------------------------------------------------|
-| Add Unit Good                        | `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`|
-| Remove Unit Good                     | `remove ug/ sku/[SKU]`                                        |
-| List Unit Good                       | `list ug/`                                                    |
-| Add Good quantity                    | `add g/ sku/[SKU] qty/[QUANTITY]`                             |
-| Remove Good quantity                 | `remove g/ sku/[SKU] qty/[QUANTITY]`                          |
-| List Goods (with quantity displayed) | `list g/`                                                     |
-| Viewing a Good | `view g/ sku/[SKU]` |
-| Find Good                            | `find n/[NAME]`                                              |
-| Add Order| `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`|
-| Remove Order | `remove o/ oid/[ORDER_ID]` |
-| List Orders | `list o/` |
-| View Order | `view o/ oid/[ORDER_ID]` |
-| Fulfill Order | `fulfill oid/[ORDER_ID]` |
-| Add Orderline | `add og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_NEEDED]` |
-| Remove Orderline Quantity| `remove og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_TO_REMOVE]` |
-| List Orderlines | `list og/ oid/[ORDER_ID]` |
+| Action                               | Command to be keyed into the terminal                             |
+|--------------------------------------|-------------------------------------------------------------------|
+| Add Unit Good                        | `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`    |
+| Remove Unit Good                     | `remove ug/ sku/[SKU]`                                            |
+| List Unit Good                       | `list ug/`                                                        |
+| Add Good quantity                    | `add g/ sku/[SKU] qty/[QUANTITY]`                                 |
+| Remove Good quantity                 | `remove g/ sku/[SKU] qty/[QUANTITY]`                              |
+| List Goods (with quantity displayed) | `list g/`                                                         |
+| Viewing a Good                       | `view g/ sku/[SKU]`                                               |
+| Find Good                            | `find n/[NAME]`                                                   |
+| Add Order                            | `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]` |
+| Remove Order                         | `remove o/ oid/[ORDER_ID]`                                        |
+| List Orders                          | `list o/`                                                         |
+| View Order                           | `view o/ oid/[ORDER_ID]`                                          |
+| Fulfill Order                        | `fulfill oid/[ORDER_ID]`                                          |
+| Add Orderline                        | `add og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_NEEDED]`            |
+| Remove Orderline Quantity            | `remove og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_TO_REMOVE]`      |
+| List Orderlines                      | `list og/ oid/[ORDER_ID]`                                         |
 
