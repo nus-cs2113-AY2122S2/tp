@@ -51,9 +51,9 @@ public class WardStorage {
                 Ward curWard =  wards.getWard(i);
                 fw.write(String.format("%d. Ward:\n", i));
                 //@@ author  DolphXty
-                fw.write(Arrays.toString(curWard.getDoctors(curWard.getDoctorIndexes())) + "\n");
-                fw.write(Arrays.toString(curWard.getPatients(curWard.getPatientIndexes()))  + "\n");
-                fw.write(Arrays.toString(curWard.getNurses(curWard.getNurseIndexes())) + "\n");
+                fw.write(Arrays.toString(curWard.getDoctors()) + "\n");
+                fw.write(Arrays.toString(curWard.getPatients())  + "\n");
+                fw.write(Arrays.toString(curWard.getNurses()) + "\n");
                 fw.write(curWard.getNumber() + "\n");
             }
             fw.close();
