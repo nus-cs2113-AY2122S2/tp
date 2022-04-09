@@ -46,9 +46,12 @@ public class SearchCommandTest {
         exerciseList.addExerciseToList("sit up");
         exerciseList.addExerciseToList("pull up");
 
-        workoutList.createAndAddWorkout("push up /reps 10");
-        workoutList.createAndAddWorkout("sit up /reps 15");
-        workoutList.createAndAddWorkout("pull up /reps 20");
+        var testWorkout1 = workoutList.createNewWorkout("push up /reps 10");
+        var testWorkout2 = workoutList.createNewWorkout("sit up /reps 15");
+        var testWorkout3 = workoutList.createNewWorkout("pull up /reps 20");
+        workoutList.addNewWorkoutToLists(testWorkout1);
+        workoutList.addNewWorkoutToLists(testWorkout2);
+        workoutList.addNewWorkoutToLists(testWorkout3);
 
         planList.createAndAddPlan("more muscles /workouts 1,2,3");
         planList.createAndAddPlan("legs /workouts 2,3");
