@@ -29,10 +29,10 @@ import static seedu.sherpass.constant.CommandParameter.START_TIME_DELIMITER;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputDateOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.timeOnlyFormat;
-import static seedu.sherpass.constant.Index.EDIT_INDEX;
-import static seedu.sherpass.constant.Index.EDIT_TASK_CONTENT;
+import static seedu.sherpass.constant.Index.INDEX_EDIT_TASK_NUMBER;
+import static seedu.sherpass.constant.Index.INDEX_EDIT_TASK_CONTENT;
 import static seedu.sherpass.constant.Index.INDEX_OFFSET;
-import static seedu.sherpass.constant.Index.SPLIT_FIRST_PART_INDEX;
+import static seedu.sherpass.constant.Index.INDEX_SPLIT_FIRST_PART;
 import static seedu.sherpass.constant.Index.SPLIT_TWO_PART_LIMIT;
 import static seedu.sherpass.constant.Index.START_OF_STRING;
 import static seedu.sherpass.constant.Index.WHITESPACE_OFFSET;
@@ -66,7 +66,7 @@ public class TaskParser {
             int indexAfterParameter = argument.indexOf(parameter) + parameter.length() + WHITESPACE_OFFSET;
             String stringAfterParameter = argument.substring(indexAfterParameter);
             String[] splitArguments = stringAfterParameter.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
-            return splitArguments[SPLIT_FIRST_PART_INDEX];
+            return splitArguments[INDEX_SPLIT_FIRST_PART];
         } catch (IndexOutOfBoundsException exception) {
             throw new InvalidInputException(ERROR_NO_VALUE_FOR_PARAMETER_MESSAGE);
         }
@@ -256,10 +256,10 @@ public class TaskParser {
 
     private static EditCommand prepareEditTaskContent(String argument) throws InvalidInputException {
         String[] splitInput = argument.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
-        int editIndex = Integer.parseInt(splitInput[EDIT_INDEX]) - INDEX_OFFSET;
+        int editIndex = Integer.parseInt(splitInput[INDEX_EDIT_TASK_NUMBER]) - INDEX_OFFSET;
         String editTaskContent = EMPTY_STRING;
         if (splitInput.length > 1) {
-            editTaskContent = splitInput[EDIT_TASK_CONTENT];
+            editTaskContent = splitInput[INDEX_EDIT_TASK_CONTENT];
         }
         String taskDescription = parseDescription(editTaskContent);
         String doOnDateString = parseArgument(DO_DATE_DELIMITER, editTaskContent);

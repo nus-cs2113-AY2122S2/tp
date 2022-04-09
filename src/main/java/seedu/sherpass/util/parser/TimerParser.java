@@ -8,15 +8,15 @@ import seedu.sherpass.timer.TimerLogic;
 import java.io.IOException;
 
 import static seedu.sherpass.constant.CommandParameter.TIMER_CUSTOM_DELIMITER;
-import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
-import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
+import static seedu.sherpass.constant.Index.INDEX_CUSTOM_COMMAND;
+import static seedu.sherpass.constant.Index.INDEX_CUSTOM_TIMER;
+import static seedu.sherpass.constant.Index.INDEX_DEFAULT_TIMER;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
-import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
-import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
+import static seedu.sherpass.constant.Index.INDEX_STUDY_COMMAND;
+import static seedu.sherpass.constant.Index.INDEX_TIME_FORMAT;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
 
 public class TimerParser {
@@ -58,18 +58,18 @@ public class TimerParser {
      *                              multiple timer inputs.
      */
     public static int parseTimerInput(String[] parsedInput) throws InvalidTimeException {
-        if (parsedInput[TIMER_FORMAT_INDEX].trim().contains(TIMER_CUSTOM_DELIMITER)) {
-            if (parsedInput[TIMER_FORMAT_INDEX].trim().indexOf(TIMER_CUSTOM_DELIMITER) != CUSTOM_COMMAND_INDEX) {
+        if (parsedInput[INDEX_TIME_FORMAT].trim().contains(TIMER_CUSTOM_DELIMITER)) {
+            if (parsedInput[INDEX_TIME_FORMAT].trim().indexOf(TIMER_CUSTOM_DELIMITER) != INDEX_CUSTOM_COMMAND) {
                 throw new InvalidTimeException();
             }
-            String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split(TIMER_CUSTOM_DELIMITER, 2);
-            int customDuration = Integer.parseInt(customTimerInput[CUSTOM_TIMER_INDEX].trim());
+            String[] customTimerInput = parsedInput[INDEX_TIME_FORMAT].split(TIMER_CUSTOM_DELIMITER, 2);
+            int customDuration = Integer.parseInt(customTimerInput[INDEX_CUSTOM_TIMER].trim());
             if (!isValidDuration(customDuration)) {
                 throw new InvalidTimeException();
             }
             return customDuration;
         }
-        return selectDefaultTimer(parsedInput[DEFAULT_TIMER_INDEX].trim());
+        return selectDefaultTimer(parsedInput[INDEX_DEFAULT_TIMER].trim());
     }
 
     /**
@@ -82,7 +82,7 @@ public class TimerParser {
     public static void parseStudyMode(Ui ui, Storage storage, String rawUserInput,
                                       TimerLogic timerLogic) throws IOException {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
-        switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
+        switch (parsedInput[INDEX_STUDY_COMMAND].trim().toLowerCase()) {
         case "start":
             timerLogic.callStartTimer(parsedInput);
             break;
