@@ -69,6 +69,7 @@ public class Task {
         this.taskName = taskName;
     }
 
+    //@@author heekit73098
     /**.
      * Check what are the tasks parameters input by user
      * @return Task parameters status
@@ -100,6 +101,7 @@ public class Task {
         isTaskDone = status;
     }
 
+    //@@author heekit73098
     /**
      * Returns the task as a formatted string.
      */

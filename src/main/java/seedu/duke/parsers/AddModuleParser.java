@@ -64,6 +64,7 @@ public class AddModuleParser extends AddParser {
         groupNames.add(INVALID);
     }
 
+    //@@author heekit73098
     /**
      * Determines the error that the user made in its command based on the compulsory parameters.
      * It first checks if the user input has a module code, and if the code is made up of only word characters.
