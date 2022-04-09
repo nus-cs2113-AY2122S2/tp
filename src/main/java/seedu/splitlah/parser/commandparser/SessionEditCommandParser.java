@@ -93,6 +93,6 @@ public class SessionEditCommandParser implements CommandParser<SessionEditComman
             throw new InvalidFormatException(invalidCommandMessage);
         }
 
-        return new SessionEditCommand(parsedSessionId,parsedSessionName, parsedNames, parsedSessionDate);
+        return new SessionEditCommand(parsedSessionId, parsedSessionName, parsedNames, parsedSessionDate);
     }
 }
