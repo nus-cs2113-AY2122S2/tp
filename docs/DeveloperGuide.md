@@ -75,8 +75,8 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
     * On creation: Initializes the Profile, TextUI and Storage components.
     * On run: Loads data from `Storage`, receives user input from UI and uses `Parser` to parse user input into application.
 * `Profile`
-    * Handles cached data within run time of application. Manages and stores the list of `session` 
-      that were created by the user before storing it into `Storage`.
+    * Handles cached data within run time of application.
+    * Manages and stores the list of `session` that were created by the user before storing them into `Storage`.
 * `TextUI`
     * Handles UI operations of the application.
 * `Storage`
@@ -97,9 +97,9 @@ The diagram depicts a scenario where a user attempts to create a session.
 ![SplitLah Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SplitLahComponent.drawio.png)
 <br>
 The `SplitLah` component is the application's main class. Its job is to initialize an instance of `Manager` when the
-application starts. After initialization, it proceeds to run a loop which prompts the user for a 
-command. When it receives a command from the user, it invokes the `Parser` and retrieve the command for SplitLah
-to run. Upon using the `Exit` command, SplitLah exits from the command loop and end the application.
+application starts. After initialization, it proceeds to run a loop which prompts the user for an input.
+When it receives an input from the user, it invokes the `Parser` and retrieve a command corresponding to the input for SplitLah
+to run. Upon retrieving and running the `Exit` command, SplitLah exits from the loop and end the application.
 
 
 ### Manager Component
@@ -107,20 +107,20 @@ to run. Upon using the `Exit` command, SplitLah exits from the command loop and 
 <br>
 The `Manager` class is initialized by the `SplitLah` class (the main class) when the application starts.
 It stores the `Profile`, `TextUI` and `Storage` objects. The `Profile` class helps to manage all data accesses 
-throughout the lifetime of the application. While the `Storage` helps to save what the `Profile` class has captured. 
-The `TextUI` class serves as an interface to read user inputs and print application outputs.
+throughout the lifetime of the application while the `Storage` helps to save what the `Profile` class has captured. 
+As for the `TextUI` class, it serves as an interface to read user inputs and to print application outputs.
 
 ### Profile Component
 ![Profile Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/Profile%20Component.drawio.png)
 <br>
 The `Profile` component is responsible for all data management and accesses within the lifetime of `SplitLah`.
 
-The `Profile` component consists of the `Profile`, `Session`, `Activity`, `PersonList`, `Person`, `ActivityCost`
+It consists of the `Profile`, `Session`, `Activity`, `PersonList`, `Person`, `ActivityCost`
 and `Name` classes.
 * The `Profile` class serves as a container and holds a list of all `Session` and `Group` objects created by the user.<br>
   It also keeps track of and issues new _unique identifiers_ for the creation of `Session`, `Activity` and `Group` objects.
 * The `Session` class stores a list of `Activity` objects that are created within a `Session` object as well as a
-  `PersonList` object that represent a collection of all participants in the session.<br>
+  `PersonList` object that represents a collection of all participants in the session.<br>
   It also holds an _optional_ `Group` object (explained in detail in the following point).
   * A `Session` object is identified by a _session unique identifier_.
 * The `Group` class holds a single `PersonList` object and represents a collection of persons.<br>
@@ -160,6 +160,7 @@ When a command updates any attributes of the `Profile` object, the changes will 
 * `GroupCreateCommand`, `GroupDeleteCommand`, `GroupEditCommand`
 
 Once the commands finishes executing, `Manager#saveProfile` is called to update the save file.<br>
+
 For example:
   1. The user enters `session /create /n Class outing /d 31-03-2022 /pl Alice bob`
   2. SplitLah recognizes this as a `SessionCreateCommand` and creates the new session. 
@@ -175,7 +176,7 @@ to write all the data stored in the `Profile` component into the save file witho
 The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class,
 as well as the `CommandParser` class and its subclasses.<br>
 * The `Parser` class provides methods to parse commands from the user and
-  return a `Command` object representing an instruction that the user has for SplitLah.<br>
+  returns a `Command` object representing an instruction that the user has for SplitLah.<br>
 * The `ParserUtils` class provide supporting methods to parse individual arguments from the user input,
   and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.<br>
 * The subclasses of `CommandParser` serve to parse all arguments of a user input to create an object of a corresponding
