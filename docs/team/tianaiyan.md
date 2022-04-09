@@ -26,6 +26,7 @@ Given below are my contributions to the project.
 * Contributes to most of the part for updating the workouts saved in plan when a workout is updated.
 * Implements `deletePlanContainsDeletedWorkout` method in `PlanList` class to fix the bug which 
   deleting a workout but the deleted workout is still in the plan.
+* I also write a function that clear the plan in the schedule when that plan is deleted, but it is not use at last.
 * Contributes to some functions to check validity of inputs.
 * Implements `listPlanDetails()` method and `deletePlan()` method in `PlanList` class.<br>
   `listPlanDetails()` allows users to see the workouts in a plan. <br>
