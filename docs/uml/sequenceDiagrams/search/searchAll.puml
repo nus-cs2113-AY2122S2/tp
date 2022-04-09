@@ -8,23 +8,17 @@ title Sequence Diagram of `search /all` Command
 
 
 participant "werkIt:WerkIt" AS WerkIt  #Sandybrown
-participant "ui:UI" AS UI1 #YellowGreen
-participant "parser:Parser" AS Parser #Gold
+
+ref over WerkIt
+Obtain and parse user input.
+end
+
 participant "newCommand\n:SearchCommand" AS newCommand #LightSkyBlue
 participant "planList\n:PlanList" AS PlanList #LightSkyBlue
 participant "exerciseList\n:ExerciseList" AS ExerciseList #LightSkyBlue
 participant "workoutList\n:WorkoutList" AS WorkoutList #LightSkyBlue
 
 activate WerkIt  #Sandybrown
-WerkIt -> UI1 : getUserInput()
-activate UI1 #YellowGreen
-WerkIt <-- UI1 : userInputTrimmed:String
-deactivate UI1
-
-WerkIt -> Parser : parseUserInput(userInput)
-activate Parser #Gold
-WerkIt <-- Parser : :Command
-deactivate Parser
 
 WerkIt -> newCommand : execute()
 activate newCommand #LightSkyBlue
@@ -49,7 +43,7 @@ deactivate WorkoutList
 newCommand -> newCommand : searchPlan()
 newCommand -> newCommand : searchExercise()
 newCommand -> newCommand : searchWorkout()
-
+newCommand --> WerkIt
 deactivate newCommand
 
 destroy newCommand
