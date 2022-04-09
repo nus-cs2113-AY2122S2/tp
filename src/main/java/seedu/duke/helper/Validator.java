@@ -268,7 +268,7 @@ public class Validator {
     }
 
     public static void validateAddAppointment(String[] parameters) throws UserInputErrorException {
-        minParameterCheck(parameters, 3);
+        minParameterCheck(parameters, 4);
         validateNric(parameters[0]);
         validateNric(parameters[1]);
         validateDate(parameters[2], "appointment");
@@ -387,13 +387,11 @@ public class Validator {
     }
 
     public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws UserInputErrorException {
-        //minParameterCheck(parameters, 3);
         validateNric(dispenseMedicineParameters[0]);
         if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
             throw new UserInputErrorException("Not all medicines in list have both "
                     + "the name of the medicine and the quantity to prescribe!");
         }
-
         for (int i = 1; i < dispenseMedicineParameters.length; i += 2) {
             String medicineName = dispenseMedicineParameters[i];
             String medicineQuantity = dispenseMedicineParameters[i + 1];

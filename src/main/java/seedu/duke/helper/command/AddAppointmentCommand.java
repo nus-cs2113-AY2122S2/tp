@@ -2,6 +2,7 @@ package seedu.duke.helper.command;
 
 import seedu.duke.assets.List;
 import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.status.Status;
 
 /*
@@ -25,7 +26,7 @@ public class AddAppointmentCommand extends Command {
      * @ throws DuplicateEntryException if similar entry already exist.
      */
     @Override
-    public Status execute(List appointmentList) throws DuplicateEntryException {
+    public Status execute(List appointmentList) throws DuplicateEntryException, UserInputErrorException {
         appointmentList.add(parameterArray);
         return Status.ADD_APPOINTMENT_SUCCESS;
     }
