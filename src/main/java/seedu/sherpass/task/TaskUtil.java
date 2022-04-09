@@ -171,7 +171,6 @@ public class TaskUtil {
         if (taskToCheck.getByDateTime() == null) {
             return false;
         }
-        return taskToCheck.getByDateTime().toLocalDate()
-                .isBefore(taskToCheck.getDoOnStartDateTime().toLocalDate());
+        return !taskToCheck.getByDateTime().isAfter(taskToCheck.getDoOnEndDateTime());
     }
 }
