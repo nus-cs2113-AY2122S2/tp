@@ -411,39 +411,25 @@ will not be saved unless the application is exited gracefully. Any other means o
 will not save the data (because they are not taken to be typical exit commands, but rather interrupts).
 
 ## Command Summary
-Main Menu:
-```
-(0) Exit Application
-(1) Enter Dish Menu
-(2) Enter Order Menu
-(3) Enter Staff Menu
-```
-Dish Menu:
-```
-(0) Exit Menu
-(1) List Dish
-(2) Add Dish
-(3) Delete Dish
-(4) Change the price of a dish
-(5) Change the name of a dish
-```
-Order Menu:
-```
-(0) Exit Order Menu
-(1) Create an order
-(2) Delete an order
-(3) Get total price of an order
-(4) Get total price of all orders
-(5) Print receipt
-(6) Display order list
-(7) Display dish menu
-```
-Staff Menu:
-```
-(0) Exit Staff Menu
-(1) Print Staff
-(2) Find Staff
-(3) Add Staff
-(4) Delete Staff
-(5) Edit Staff
-```
+| Action    | Command (with respect to Main Menu)                                                                                                                                                                                                                                                                         |
+|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| List Dish | `1` -> `1` |
+| Add Dish  | `1` -> `2` -> `NAME` -> `PRICE` | 
+| Delete Dish | `1` -> `3` -> `INDEX` |
+| Change Dish Price | `1` -> `4` -> `INDEX` -> `PRICE` |
+| Change Dish Name | `1` -> `5` -> `INDEX` -> `NAME` |
+| Create Order | `2` -> `1` -> `DISH INDEX` |
+| Delete Order | `2` -> `2` -> `INDEX` |
+| Get Order Total Price | `2` -> `3` -> `INDEX` |
+| Get All Order Total Price | `2` -> `4` |
+| Print Receipt | `2` -> `5` -> `INDEX` |
+| Display Order List | `2` -> `6` |
+| Display Dish Menu | `2` -> `7` |
+| Print Staff | `3` -> `1` |
+| Find Staff | `3` -> `2` -> `ID` |
+| Add Staff | `3` -> `3` -> `ID` -> `NAME` -> `POSITION` -> `SALARY` |
+| Delete Staff | `3` -> `4` -> `ID` |
+| Edit Staff ID | `3` -> `5` -> `1` -> `ID` |
+| Edit Staff Name | `3` -> `5` -> `1` -> `NAME` |
+| Edit Staff Position | `3` -> `5` -> `1` -> `POSITION` |
+| Edit Staff Salary | `3` -> `5` -> `1` -> `SALARY` |
