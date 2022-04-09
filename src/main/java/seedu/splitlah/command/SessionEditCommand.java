@@ -26,6 +26,7 @@ public class SessionEditCommand extends Command {
     private final String sessionName;
     private final String[] personNames;
     private final LocalDate sessionDate;
+    private LocalDate oldSessionDate;
 
     /**
      * Initializes a SessionEditCommand object.
@@ -95,7 +96,7 @@ public class SessionEditCommand extends Command {
         if (sessionName != null && !sessionName.equalsIgnoreCase(session.getSessionName())) {
             return true;
         }
-        if (sessionDate != null && !sessionDate.equals(session.getDateCreated())) {
+        if (sessionDate != null && !sessionDate.equals(oldSessionDate)) {
             return true;
         }
         if (personNames != null) {
@@ -125,6 +126,10 @@ public class SessionEditCommand extends Command {
             if (sessionName != null) {
                 newSessionName = getNewSessionName(session.getSessionName(), profile);
             }
+            if (sessionDate != null) {
+                oldSessionDate = session.getDateCreated();
+                session.setDateCreated(sessionDate);
+            }
         } catch (InvalidDataException invalidDataException) {
             ui.printlnMessageWithDivider(invalidDataException.getMessage());
             return;
@@ -137,9 +142,6 @@ public class SessionEditCommand extends Command {
         }
         if (newSessionName != null) {
             session.setSessionName(newSessionName);
-        }
-        if (sessionDate != null) {
-            session.setDateCreated(sessionDate);
         }
         if (isSessionEdited) {
             ui.printlnMessageWithDivider(COMMAND_SUCCESS);
