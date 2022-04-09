@@ -10,12 +10,14 @@ participantBorderColor black
 LifelineBorderColor black
 }
 
+box Components Sequence Diagram
 actor User
 participant ":MMM" as MMM MMM_COLOUR
 participant ":Ui" as Ui UI_COLOUR
 participant ":Parser" as Parser PARSER_COLOUR
 participant ":Commands" as Commands COMMANDS_COLOUR
 participant ":Storage" as Storage STORAGE_COLOUR
+end box
 
 activate MMM MMM_COLOUR
 MMM -> Ui: readInput()
