@@ -14,7 +14,7 @@ import java.util.Scanner;
 //@@author   Demonshaha
 public class NurseStorage {
     private static final String root = System.getProperty("user.dir");
-    private static final Path filePath = Paths.get(root, "data", "IHospitalDoctors.txt");
+    private static final Path filePath = Paths.get(root, "data", "IHospitalNurses.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
     /**
