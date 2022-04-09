@@ -47,18 +47,49 @@ public class ShowCommand extends Command {
             + "To generate a list of pending tasks, use%n"
             + "9) `show todo`.");
 
-    LocalDate dayInput;
-    String selection;
+    private LocalDate dayInput;
+    private String selection;
 
+    /**
+     * The constructor of the ShowCommand object.
+     * It represents the specific type of show command given by the user.
+     *
+     * @param dayInput The show a timetable of the specific date given.
+     * @param selection The specific type of show command given by the user.
+     */
     public ShowCommand(LocalDate dayInput, String selection) {
         this.dayInput = dayInput;
         this.selection = selection;
     }
 
     /**
+     * Compares the 2 ShowCommand object and whether the value contains within are equals.
+     *
+     * @param obj To check if the item is equls to the given ShowCommand object.
+     * @return boolean object.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof ShowCommand)) {
+            return false;
+        }
+        ShowCommand command = (ShowCommand) obj;
+        if (command.dayInput == null && command.selection != null) {
+            return selection.equals(command.selection);
+        } else if (command.dayInput != null && command.selection == null) {
+            return dayInput.isEqual(command.dayInput);
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Executes the show command. Shows the user the schedule
      * for the day that is specified, the list of incomplete
-     * tasks, and the current weekly schedule.
+     * tasks, the weekly schedule and the monthly schedule.
      *
      * @param taskList Task array.
      * @param ui       Ui for printing task content.
