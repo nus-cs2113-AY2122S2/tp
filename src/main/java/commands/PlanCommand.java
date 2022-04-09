@@ -132,7 +132,8 @@ public class PlanCommand extends Command {
         try {
             switch (getUserAction()) {
             case ACTION_KEYWORD_CREATE:
-                Plan newPlan = getPlanList().createAndAddPlan(getUserArguments());
+                Plan newPlan = getPlanList().createNewPlan(getUserArguments());
+                getPlanList().addNewPlanToLists(newPlan);
                 getUI().printNewPlanCreatedMessage(newPlan);
                 getFileManager().writeNewPlanToFile(newPlan);
                 break;
