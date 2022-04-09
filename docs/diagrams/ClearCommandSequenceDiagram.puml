@@ -17,8 +17,8 @@ loop for each entry in MasterTimetable
 ":MasterTimetable" --> ":ClearCommand" -- : timetable: Timetable
 loop for each entry in timetable
 ":ClearCommand" -> ":ClearCommand": clearTimetable(timetable)
-":ClearCommand" -> ":MasterTimetable" : removeByIndex(0)
-":MasterTimetable" --> ":ClearCommand" :
+":ClearCommand" -> ":MasterTimetable" ++ : removeByIndex(0)
+":MasterTimetable" --> ":ClearCommand" --:
 deactivate ":ClearCommand"
 end
 end

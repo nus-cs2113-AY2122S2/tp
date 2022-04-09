@@ -155,8 +155,10 @@ public class Parser {
             int index = Integer.parseInt(indexStr);
 
             return new EditCommand(name, index, newValues);
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException | MissingParameterException mpe) {
+        } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
+        } catch (ArrayIndexOutOfBoundsException | ExtraParametersException epe) {
+            return new CommandResult(ERROR_EXTRA_PARAMETERS);
         } catch (NumberFormatException nfe) {
             return new CommandResult(ERROR_INVALID_INDEX);
         } catch (AssertionError ae) {
@@ -165,9 +167,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Try to parse the delete command to see if index has been done.
-     */
     private Command prepareDelete() {
         try {
             String[] eventDescription = ParserArguments.splitArgumentsNameIndex(arguments);
@@ -207,7 +206,6 @@ public class Parser {
 
             String title = eventDescription[TITLE_INDEX - 1];
             return new AddMeetingCommand(title, day, startTime, endTime, mode);
-
         } catch (NullPointerException | MissingParameterException mpe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_MEETING);
         } catch (ArrayIndexOutOfBoundsException | ExtraParametersException epe) {

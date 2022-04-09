@@ -45,9 +45,9 @@ public class AddMeetingCommand extends Command {
         }
         try {
             Meeting meeting = new Meeting(title, day, startTime, endTime, mode);
-            if (masterTimetable.isExistingMeeting(meeting)) {
+            if (masterTimetable.isPreExistingMeeting(meeting)) {
                 return ERROR_DUPLICATE_MEETING;
-            } else if (masterTimetable.isMeetingClash(meeting)) {
+            } else if (masterTimetable.isMeetingThatClashes(meeting)) {
                 return ERROR_OVERLAPPING_MEETING;
             } else {
                 return masterTimetable.addMeetingToEveryoneTimetable(meeting);
