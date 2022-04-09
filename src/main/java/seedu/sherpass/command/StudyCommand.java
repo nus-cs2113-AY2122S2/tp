@@ -9,23 +9,19 @@ import seedu.sherpass.util.Ui;
 import java.io.IOException;
 
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE_STUDY;
-import static seedu.sherpass.constant.Message.HELP_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_STUDY;
 import static seedu.sherpass.util.parser.TimerParser.parseStudyMode;
 
 public class StudyCommand extends Command {
-    public static final String COMMAND_WORD = "study";
-    public static final String MESSAGE_USAGE = "Study: Enters a study session.\n\n"
-            + "User can access timer features while in a study session.\n\n"
-            + HELP_MESSAGE_STUDY;
 
     /**
-     * Method is called when user chooses to enter Study mode. User is able to start, pause and stop a timer in Study
-     * mode. Only one timer can be running at a time. User can leave Study mode by typing "leave".
+     * Method is called when user chooses to enter Study mode.
+     * User is able to start, pause and stop a timer in Study mode.
+     * Only one timer can be running at a time. User can leave Study mode by typing "leave".
      *
-     * @param ui ui
-     * @param storage storage
-     * @param timerLogic timerLogic
+     * @param ui            Ui for printing task content.
+     * @param storage       Storage for overwriting/appending save data.
+     * @param timerLogic    Logic class to handle timer functions.
      */
     private void enterStudyMode(Ui ui, Storage storage, TimerLogic timerLogic) {
 
@@ -42,9 +38,8 @@ public class StudyCommand extends Command {
             ui.showLine();
             userInput = ui.readCommand();
         }
-
     }
-
+    
     /**
      * Cleans up the study session by destroying any running threads and frames.
      *

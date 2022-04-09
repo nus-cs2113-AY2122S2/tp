@@ -18,12 +18,6 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.TAB_INDENT;
 
 public class EditCommand extends Command {
-    public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_USAGE = "Edit: Edit a task in the task list.\n"
-            + "Usage: edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start START_TIME /end END_TIME]"
-            + " [/by DEADLINE]\n\n"
-            + "DATE & DEADLINE format: d/M/yyyy\n"
-            + "START_TIME & END_TIME format: HH:mm";
 
     private int editIndex;
     private String taskDescription;
@@ -68,6 +62,7 @@ public class EditCommand extends Command {
         doOnEndDateTime = LocalDateTime.of(doOnDate, endTime);
     }
 
+
     /**
      * Executes the editing of a task or multiple tasks.
      *
@@ -83,7 +78,7 @@ public class EditCommand extends Command {
                 taskToEdit = taskList.editRepeatedTasks(editIndex, taskDescription,
                         doOnStartDateTime, doOnEndDateTime, byDate);
             } else {
-                taskToEdit = taskList.editSingleTaskContent(editIndex, taskDescription,
+                taskToEdit = taskList.editSingleTask(editIndex, taskDescription,
                         doOnStartDateTime, doOnEndDateTime, byDate);
             }
             storage.writeSaveData(taskList);

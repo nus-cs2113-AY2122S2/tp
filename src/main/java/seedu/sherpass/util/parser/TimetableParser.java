@@ -9,14 +9,14 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithoutTimeFormat;
-import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
+import static seedu.sherpass.constant.Index.INDEX_SHOW_OPTION;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 
 public class TimetableParser {
 
     public static Command prepareShow(String[] splitInput) {
         try {
-            String selection = splitInput[SHOW_OPTION_INDEX].trim();
+            String selection = splitInput[INDEX_SHOW_OPTION].trim();
             return parseShowCommandOptions(selection.toLowerCase());
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
             System.out.println(ERROR_INVALID_INPUT_MESSAGE);

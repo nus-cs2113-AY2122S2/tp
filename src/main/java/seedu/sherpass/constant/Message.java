@@ -31,7 +31,7 @@ public class Message {
             + "4) Add: add <task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n"
             + "5) Delete: delete <list_index>\n"
             + "6) Find: find <keyword>\n"
-            + "7) Clear: clear\n"
+            + "7) Clear: clear all/expired/done\n"
             + "8) Bye: bye";
     public static final String HELP_MESSAGE_STUDY = "Timer command input quick start guide:\n"
             + "1) Start default timer: start <mode_number>\n"
@@ -52,12 +52,14 @@ public class Message {
 
     public static final String UNMARK_TASK_RESULT_MESSAGE = "Ok, I've marked this task as not done yet:";
     public static final String MARK_TASK_RESULT_MESSAGE = "Nice! I've marked this task as done:";
-    public static final String CLEAR_COMMAND_CONFIRMATION_MESSAGE = "Are you sure you want to delete all tasks?\n"
+    public static final String CLEAR_ALL_COMMAND_CONFIRMATION_MESSAGE = "Are you sure you want to delete all tasks?\n"
             + "You will not be able to recover them after deleting (Y/N): ";
-    public static final String CLEAR_COMMAND_CONFIRMED_MESSAGE = "Understood. Proceeding to delete"
+    public static final String CLEAR_ALL_COMMAND_CONFIRMED_MESSAGE = "Understood. Proceeding to delete"
             + " all tasks in the list..........";
-    public static final String CLEAR_COMMAND_RESULT_MESSAGE = "Done! Now you have 0 task in the list.";
-    public static final String CLEAR_COMMAND_CANCEL_MESSAGE = "Okay, we'll keep it as it is.";
+    public static final String CLEAR_ALL_COMMAND_RESULT_MESSAGE = "Done! Now you have 0 tasks in the list.";
+    public static final String CLEAR_ALL_COMMAND_CANCEL_MESSAGE = "Okay, we'll keep it as it is.";
+    public static final String CLEAR_NO_EXPIRED_TASK_MESSAGE = "There are no expired tasks to be removed.";
+    public static final String CLEAR_NO_COMPLETED_TASK_MESSAGE = "There are no completed tasks to be removed.";
     public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
     public static final String ERROR_NO_VALUE_FOR_PARAMETER_MESSAGE = "Please enter a value for the parameter!";
     public static final String ERROR_EMPTY_EDIT_CONTENT_MESSAGE = "Please enter at least one optional parameter!";
@@ -81,6 +83,7 @@ public class Message {
             + HELP_MESSAGE_STUDY;
     public static final String ERROR_INVALID_DELETE_INDEX_MESSAGE = "It seems that you've given\n"
             + "an invalid index to delete the task.";
+    public static final String ERROR_INVALID_CLEAR_MESSAGE = "Please use appropriate keywords";
     public static final String ERROR_IO_FAILURE_MESSAGE = "Oh no! We've encountered an error \nwhile "
             + "trying to processing the system.\n"
             + "Please reboot and execute the application again.";

@@ -1,5 +1,6 @@
 package seedu.sherpass.timetable;
 
+import seedu.sherpass.enums.TaskContentType;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
@@ -10,22 +11,22 @@ import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
 
-import static java.time.Month.APRIL;
-import static java.time.Month.AUGUST;
-import static java.time.Month.DECEMBER;
-import static java.time.Month.FEBRUARY;
-import static java.time.Month.JANUARY;
-import static java.time.Month.JULY;
-import static java.time.Month.JUNE;
-import static java.time.Month.MARCH;
-import static java.time.Month.MAY;
-import static java.time.Month.NOVEMBER;
-import static java.time.Month.OCTOBER;
-import static java.time.Month.SEPTEMBER;
+
 import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
-import static seedu.sherpass.constant.TimetableConstant.DATE_SPACE_FULL_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.BY_DATE_COMPARE_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.BY_DATE_FULL_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.BY_DATE_OFFSET_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.DAYS_IN_A_WEEK;
+import static seedu.sherpass.constant.TimetableConstant.DO_ON_DATE_COMPARE_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.DO_ON_DATE_FULL_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.DO_ON_DATE_OFFSET_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.TASK_NUMBER_COMPARE_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.TASK_DESCRIPTION_COMPARE_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.TASK_DESCRIPTION_COMPARE_OFFSET_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.TASK_DESCRIPTION_FULL_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.TASK_NUMBER_FULL_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.TASK_NUMBER_OFFSET_LENGTH;
 
 public class Timetable {
     private static LocalDate localDate;
@@ -33,36 +34,15 @@ public class Timetable {
     private static Ui ui;
 
 
-    private static void setTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui userInterface) {
+    private static void setInitialTimetableInputs(LocalDate dateInput,
+                                                  ArrayList<Task> filteredTasks, Ui userInterface) {
         localDate = dateInput;
         tasks = filteredTasks;
         ui = userInterface;
     }
 
     /**
-     * Generate a timetable for today.
-     *
-     * @param taskList Representation of an array of tasks.
-     * @param ui       The user interface which interacts with the user.
-     */
-    public static void showTodaySchedule(TaskList taskList, Ui ui) {
-        LocalDate todayDate = LocalDate.now();
-        showScheduleByDay(todayDate, taskList, ui);
-    }
-
-    /**
-     * Generate a timetable for tomorrow.
-     *
-     * @param taskList Representation of an array of tasks.
-     * @param ui       The user interface which interacts with the user.
-     */
-    public static void showTomorrowSchedule(TaskList taskList, Ui ui) {
-        LocalDate tomorrowDate = LocalDate.now().plusDays(1);
-        showScheduleByDay(tomorrowDate, taskList, ui);
-    }
-
-    /**
-     * Generate a timetable for the day according to the date input.
+     * Generates a timetable for the day according to the date input.
      *
      * @param dateInput The date input.
      * @param taskList  Representation of an array of tasks.
@@ -70,13 +50,49 @@ public class Timetable {
      */
     public static void showScheduleByDay(LocalDate dateInput, TaskList taskList, Ui ui) {
         ArrayList<Task> filteredTasks = taskList.getFilteredTasksByDate(dateInput);
-        setTimetable(dateInput, filteredTasks, ui);
-        printSchedule();
+        setInitialTimetableInputs(dateInput, filteredTasks, ui);
+        prepareFullTimetable();
     }
 
 
-    public static void showScheduleOfTheWeek(TaskList taskList, Ui ui) {
-        LocalDate currentDate = TimetableLogic.resetDateToMonday(LocalDate.now(), ui);
+    public static void showPendingTasks(TaskList taskList, Ui ui) {
+        tasks = taskList.getPendingTasks();
+        prepareCondensedTimetable(tasks, ui);
+    }
+
+    public static void prepareCondensedTimetable(ArrayList<Task> tasks, Ui ui) {
+        long taskLength = TimetableLogic.prepareTaskContentLength(tasks,
+                TASK_DESCRIPTION_COMPARE_LENGTH, TASK_DESCRIPTION_COMPARE_OFFSET_LENGTH,
+                TASK_DESCRIPTION_FULL_LENGTH, TaskContentType.TASK_DESCRIPTION);
+        long byDateLength = TimetableLogic.prepareTaskContentLength(tasks,
+                BY_DATE_COMPARE_LENGTH, BY_DATE_OFFSET_LENGTH,
+                BY_DATE_FULL_LENGTH, TaskContentType.BY_DATE);
+        long doOnDateLength = TimetableLogic.prepareTaskContentLength(tasks,
+                DO_ON_DATE_COMPARE_LENGTH, DO_ON_DATE_OFFSET_LENGTH,
+                DO_ON_DATE_FULL_LENGTH, TaskContentType.DO_ON_DATE);
+        long taskNumberLength = TimetableLogic.prepareTaskContentLength(tasks,
+                TASK_NUMBER_COMPARE_LENGTH, TASK_NUMBER_OFFSET_LENGTH,
+                TASK_NUMBER_FULL_LENGTH, TaskContentType.TASK_NUMBER);
+        long partitionLength = TimetableLogic.calcPartitionLength(taskLength, byDateLength, doOnDateLength,
+                taskNumberLength, false);
+        if (!tasks.isEmpty()) {
+            TimetablePrinting.printCondensedTimetable(tasks, ui, taskLength, byDateLength,
+                    doOnDateLength, taskNumberLength, partitionLength);
+        } else {
+            TimetablePrinting.printEmptyCondensedTimetable(ui);
+        }
+    }
+
+
+    /**
+     * Generates a timetable for the current week.
+     *
+     * @param dateInput The date input.
+     * @param taskList  Representation of an array of tasks.
+     * @param ui        The user interface which interacts with the user.
+     */
+    public static void showScheduleOfTheWeek(LocalDate dateInput, TaskList taskList, Ui ui) {
+        LocalDate currentDate = TimetableLogic.resetDateToMonday(dateInput, ui);
         for (int i = 0; i < DAYS_IN_A_WEEK; i++) {
             showScheduleByDay(currentDate, taskList, ui);
             assert (currentDate != null);
@@ -86,86 +102,35 @@ public class Timetable {
 
 
     /**
-     * Generate a weekly timetable schedule.
+     * Generates a condensed timetable for the month according to the month input.
+     * Applies only to future months, i.e. not for the months which have passed.
      *
-     * @param taskList Representation of an array of tasks.
-     * @param ui       The user interface which interacts with the user.
+     * @param month The month input.
+     * @param taskList  Representation of an array of tasks.
+     * @param ui        The user interface which interacts with the user.
      */
-    public static void showNextWeekSchedule(TaskList taskList, Ui ui) {
-        LocalDate nextMondayDate = LocalDate.now().plusWeeks(1);
-        LocalDate nextDate = TimetableLogic.resetDateToMonday(nextMondayDate, ui);
-        for (int i = 0; i < DAYS_IN_A_WEEK; i++) {
-            showScheduleByDay(nextDate, taskList, ui);
-            assert (nextDate != null);
-            nextDate = nextDate.plusDays(1);
-        }
+    public static void showScheduleByMonth(Month month, TaskList taskList, Ui ui) {
+        LocalDate firstDayOfMonth = TimetableLogic.getFirstDayOfMonth(month);
+        ArrayList<Task> monthlySchedule = taskList.getFilteredTasksByMonth(firstDayOfMonth);
+        prepareCondensedTimetable(monthlySchedule, ui);
     }
 
-    public static void showMonthlySchedule(TaskList taskList, Ui ui) {
-        Month currentMonth = LocalDate.now().getMonth();
-        TimetableLogic.showMonthlySchedule(taskList, ui, currentMonth);
-    }
-
-    public static void showJanuarySchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, JANUARY);
-    }
-
-    public static void showFebruarySchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, FEBRUARY);
-    }
-
-    public static void showMarchSchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, MARCH);
-    }
-
-    public static void showAprilSchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, APRIL);
-    }
-
-    public static void showMaySchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, MAY);
-    }
-
-    public static void showJuneSchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, JUNE);
-    }
-
-    public static void showJulySchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, JULY);
-    }
-
-    public static void showAugustSchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, AUGUST);
-    }
-
-    public static void showSeptemberSchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, SEPTEMBER);
-    }
-
-    public static void showOctoberSchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, OCTOBER);
-    }
-
-    public static void showNovemberSchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, NOVEMBER);
-    }
-
-    public static void showDecemberSchedule(TaskList taskList, Ui ui) {
-        TimetableLogic.showMonthlySchedule(taskList, ui, DECEMBER);
-    }
-
-    private static void printSchedule() {
+    private static void prepareFullTimetable() {
         assert localDate != null;
         String day = localDate.format(dayOnlyFormat);
         String date = localDate.format(outputDateOnlyFormat);
-        long taskLength = TimetableLogic.findTaskLength(tasks);
-        long doOnDateLength = DATE_SPACE_FULL_LENGTH;
-        long partitionLength = TimetableLogic.calcPartitionLength(taskLength, doOnDateLength);
-
+        long taskLength = TimetableLogic.prepareTaskContentLength(tasks,
+                TASK_DESCRIPTION_COMPARE_LENGTH, TASK_DESCRIPTION_COMPARE_OFFSET_LENGTH,
+                TASK_DESCRIPTION_FULL_LENGTH, TaskContentType.TASK_DESCRIPTION);
+        long byDateLength = TimetableLogic.prepareTaskContentLength(tasks,
+                BY_DATE_COMPARE_LENGTH, BY_DATE_OFFSET_LENGTH,
+                BY_DATE_FULL_LENGTH, TaskContentType.BY_DATE);
+        long partitionLength = TimetableLogic.calcPartitionLength(taskLength, byDateLength,
+                0, 0, true);
         if (!tasks.isEmpty()) {
-            TimetablePrinting.printTimetable(day, date, tasks, ui, taskLength, doOnDateLength, partitionLength);
+            TimetablePrinting.printFullTimetable(day, date, tasks, ui, taskLength, byDateLength, partitionLength);
         } else {
-            TimetablePrinting.printEmptyTimetable(ui, day, date, partitionLength);
+            TimetablePrinting.printEmptyFullTimetable(ui, day, date, partitionLength);
         }
     }
 }
