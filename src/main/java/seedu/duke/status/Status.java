@@ -1,4 +1,5 @@
 package seedu.duke.status;
+
 /*
  * Holds SUCCESS messages
  */
