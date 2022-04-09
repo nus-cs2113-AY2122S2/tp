@@ -337,6 +337,7 @@ class ParserTest {
         assertEquals(IncompleteCommandException.NO_PARAMETERS_FOUND, exception.getMessage());
     }
 
+    @Deprecated
     @Test
     void parseCommand_listEnumTypeConvertedToUpper_success() {
         Command testCommand = parser.parseCommand("list spEAker");
