@@ -38,11 +38,16 @@ class PlanListTest {
         exerciseList.addExerciseToList("burpee");
         exerciseList.addExerciseToList("russian twist");
 
-        workoutList.createAndAddWorkout("push up /reps 10");
-        workoutList.createAndAddWorkout("sit up /reps 15");
-        workoutList.createAndAddWorkout("burpee /reps 20");
-        workoutList.createAndAddWorkout("burpee /reps 50");
-        workoutList.createAndAddWorkout("pull up /reps 10");
+        Workout newWorkout1 = workoutList.createNewWorkout("push up /reps 10");
+        workoutList.addNewWorkoutToLists(newWorkout1);
+        Workout newWorkout2 = workoutList.createNewWorkout("sit up /reps 15");
+        workoutList.addNewWorkoutToLists(newWorkout2);
+        Workout newWorkout3 = workoutList.createNewWorkout("burpee /reps 20");
+        workoutList.addNewWorkoutToLists(newWorkout3);
+        Workout newWorkout4 = workoutList.createNewWorkout("burpee /reps 50");
+        workoutList.addNewWorkoutToLists(newWorkout4);
+        Workout newWorkout5 = workoutList.createNewWorkout("pull up /reps 10");
+        workoutList.addNewWorkoutToLists(newWorkout5);
     }
 
     @Test
