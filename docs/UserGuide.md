@@ -260,11 +260,14 @@ Displays your schedule for the current month or any specific month
 > Monthly Schedule will only display task that are in the current Month or the upcoming Month.
 >
 > Please use `show all` method to see task from previous months. 
+> 
+> To show any specific Month, 2 type of input is accepted.
+> - 3-letter abbreviation of the specific month.
+> - The full spelling of the specific month.
 
 Format:
 - To see the schedule for the current month: `show month`
-- To see the schedule for any specific month: `show MONTH`, where 
-  MONTH can be the abbreviation of the specific month. 
+- To see the schedule for any specific month: `show MONTH`,
 
 
   E.g. `show sep` or `show september` is the same command 
