@@ -1,11 +1,7 @@
 package seedu.duke.data;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
 import java.util.Optional;
->>>>>>> de490b3c9b37b5d67193b3f65666f830bd5926d5
 
 public class BorrowRecord implements Cloneable {
     private final LocalDate startDate;

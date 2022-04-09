@@ -22,11 +22,9 @@ public class Messages {
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would be negative! "
             + "Your command has been terminated; no changes were made.";
-<<<<<<< HEAD
     public static final String OVERFLOW_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would overflow! (too large) "
             + "Your command has been terminated; no changes were made.";
-=======
     public static final String MISSING_ITEM_NUMBER_MESSAGE = "Sorry, you haven't entered an item number. "
             + "Please enter an item number!";
     public static final String INVALID_ITEM_NUMBER_MESSAGE = "Sorry, you haven't entered a valid item number. "
@@ -38,7 +36,6 @@ public class Messages {
     public static final String RETURN_ERROR_MESSAGE = "There are no outstanding loans on this item. "
             + "Please select a different item to return!";
     public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost.";
->>>>>>> de490b3c9b37b5d67193b3f65666f830bd5926d5
     public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. "
             + "Please ensure that end date >= start date.";
     public static final String INVALID_DATES_CONFLICT = "Sorry. The item is not available on this date, "
