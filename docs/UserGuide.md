@@ -875,16 +875,26 @@ Expected output:
 | --- | --- |
 | bye | ```bye``` |
 
-| Housekeeper Command | Format, Example |
-| --- | --- |
-| add housekeeper | ```add housekeeper NAME / AGE```<br/>eg. ```add housekeeper susan / 46```|
-| availability | ```availability NAME / DAY(S)```<br/>eg.```availability jane / 1,3,5,7```|
-| view recorded housekeepers | ```view recorded housekeepers```|
-| delete | ```delete housekeeper NAME``` <br/>eg. ```delete housekeeper sally```|
-| get available on | ```get available on DAY ```<br/>eg.```get available on 1``` |
-| is a new week | ```is a new week ```|
-| is a new year | ```is a new year ``` |
-| assign housekeeper | ```assign NAME / ROOM_NUMBER```<br/>eg.```assign susan / 301```|
+
+| Satisfaction Command      | Format, Example                                                                                   |
+|---------------------------|---------------------------------------------------------------------------------------------------|
+| add satisfaction          | ```add satisfaction CUSTOMER_NAME / SATISFACTION_RATING```<br/>eg. ```add satisfaction bob / 5``` |
+| view satisfactions        | ```view satisfactions```                                                                          |
+| view average satisfaction | ```view average satisfaction```                                                                   |
+
+
+| Housekeeper Command | Format, Example                                                                                     |
+| --- |-----------------------------------------------------------------------------------------------------|
+| add housekeeper | ```add housekeeper NAME / AGE```<br/>eg. ```add housekeeper susan / 46```                           |
+| availability | ```availability NAME / DAY(S)```<br/>eg.```availability jane / 1,3,5,7```                           |
+| view recorded housekeepers | ```view recorded housekeepers```                                                                    |
+| delete | ```delete housekeeper NAME``` <br/>eg. ```delete housekeeper sally```                               |
+| get available on | ```get available on DAY ```<br/>eg.```get available on 1```                                         |
+| is a new week | ```is a new week ```                                                                                |
+| is a new year | ```is a new year ```                                                                                |
+| assign housekeeper | ```assign NAME / ROOM_NUMBER```<br/>eg.```assign susan / 301```                                     |
+| add housekeeper performance | ``` add performance HOUSEKEEPER_NAME / PERFORMANCE_RATING``` <br/>eg. ```add performance bob / 5``` |
+| view all housekeeper performances | ``` view performances```                                                                            |
 
 
 | Room Command | Format, Example |
