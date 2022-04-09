@@ -96,10 +96,11 @@ public class TimerParser {
             timerLogic.callStopTimer();
             break;
         case "mark":
-            timerLogic.markTask(storage, rawUserInput);
-            break;
+            //Fallthrough
+        case "unmark":
+            //Fallthrough
         case "show":
-            timerLogic.showTasks(storage, parsedInput);
+            timerLogic.markOrShowTask(storage, rawUserInput);
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);

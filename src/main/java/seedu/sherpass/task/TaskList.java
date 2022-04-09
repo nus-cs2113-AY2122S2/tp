@@ -3,7 +3,6 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
-import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,8 +18,6 @@ import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_DO_ON_DATE;
 import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_START_DATE_IN_THE_PAST_MESSAGE;
-import static seedu.sherpass.constant.Message.NEWLINE;
-import static seedu.sherpass.constant.Message.TAB_INDENT;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -177,12 +174,12 @@ public class TaskList {
      *                            taskToCheck has the same date and clashing of time periods
      *                            with tasks in taskList
      */
-    public void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck)
+    public void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck, boolean isFromFile)
             throws TimeClashException, InvalidInputException {
         if (isStartTimeClashWithEndTime(taskToCheck)) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
-        if (!taskToCheck.isDone() && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
+        if (!isFromFile && !taskToCheck.isDone() && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
             throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
         }
         if (isByDateBeforeDoOnDate(taskToCheck)) {
@@ -202,12 +199,13 @@ public class TaskList {
      *
      * @param newTask The new task to be added to the array.
      */
-    public void addTask(Task newTask, Frequency frequency) throws InvalidInputException, TimeClashException {
+    public void addTask(Task newTask, Frequency frequency, boolean isFromFile) throws InvalidInputException,
+            TimeClashException {
         LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(newTask.getDoOnStartDateTime(),
                 frequency);
         ArrayList<Task> taskListToAdd = new ArrayList<>();
         do {
-            checkDateTimeClash(tasks, newTask);
+            checkDateTimeClash(tasks, newTask, isFromFile);
             taskListToAdd.add(newTask);
             newTask = prepareNextTask(newTask, frequency);
         } while (newTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
@@ -263,10 +261,11 @@ public class TaskList {
      * @param doOnStartDateTime The new start date and time of the task
      * @param doOnEndDateTime   The new end date and time of the task
      * @param byDateTime        The new by date and time of the task
+     * @return The edited task specified by editIndex
      * @throws TimeClashException    if the new do date has is clashing with other tasks
      * @throws InvalidInputException if the dates are invalid e.g. start date after end date
      */
-    public void editSingleTaskContent(int editIndex, String taskDescription,
+    public Task editSingleTaskContent(int editIndex, String taskDescription,
                                       LocalDateTime doOnStartDateTime,
                                       LocalDateTime doOnEndDateTime,
                                       LocalDateTime byDateTime) throws TimeClashException, InvalidInputException {
@@ -278,7 +277,7 @@ public class TaskList {
         long startDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnStartDateTime(), doOnStartDateTime);
         long endDateOffset = calculateOffsetOfDate(taskToEdit.getDoOnEndDateTime(), doOnEndDateTime);
 
-        Task updatedTask = taskToEdit.clone();
+        Task updatedTask = taskToEdit.copy();
         updateTask(updatedTask, taskDescription,
                 startDateOffset, endDateOffset, 0);
         updatedTask.setIdentifier(generateIdentifier());
@@ -287,11 +286,12 @@ public class TaskList {
             updatedTask.setByDateTime(byDateTime);
         }
 
-        checkDateTimeClash(editedList, updatedTask);
+        checkDateTimeClash(editedList, updatedTask, false);
 
         tasks.remove(editIndex);
         tasks.add(updatedTask);
         updateIndex();
+        return updatedTask;
     }
 
     /**
@@ -302,16 +302,19 @@ public class TaskList {
      * @param doOnStartDateTime The new start date and time of the task
      * @param doOnEndDateTime   The new end date and time of the task
      * @param byDateTime        The new by date and time of the task
+     * @return The edited task specified by editIndex
      * @throws TimeClashException    if any one of the occurrence with the new date has a time clash with other tasks
      * @throws InvalidInputException if any of the dates are invalid e.g. start date after end date
      */
-    public void editRepeatedTasks(int editIndex, String taskDescription,
+    public Task editRepeatedTasks(int editIndex, String taskDescription,
                                   LocalDateTime doOnStartDateTime,
                                   LocalDateTime doOnEndDateTime,
                                   LocalDateTime byDateTime) throws TimeClashException, InvalidInputException {
         Task firstTask = getTask(editIndex);
         ArrayList<Task> affectedTasks = getAffectedTasks(editIndex);
         ArrayList<Task> editedList = new ArrayList<>(tasks);
+        ArrayList<Task> newTasks = new ArrayList<>();
+        assert (affectedTasks.size() > 0);
         editedList.removeAll(affectedTasks);
 
         long startDateOffset = calculateOffsetOfDate(firstTask.getDoOnStartDateTime(), doOnStartDateTime);
@@ -320,16 +323,18 @@ public class TaskList {
 
         int newIdentifier = generateIdentifier();
         for (Task t : affectedTasks) {
-            Task updatedTask = t.clone();
+            Task updatedTask = t.copy();
             updateTask(updatedTask, taskDescription,
                     startDateOffset, endDateOffset, byDateOffset);
             updatedTask.setIdentifier(newIdentifier);
-            checkDateTimeClash(editedList, updatedTask);
+            checkDateTimeClash(editedList, updatedTask, false);
+            newTasks.add(updatedTask);
             editedList.add(updatedTask);
         }
 
         tasks = editedList;
         updateIndex();
+        return newTasks.get(0);
     }
 
     /**
@@ -347,20 +352,6 @@ public class TaskList {
             }
         }
         return result;
-    }
-
-    /**
-     * Returns a string listing all tasks in the list.
-     *
-     */
-    public String getAllTasksInString() {
-        StringBuilder result = new StringBuilder();
-        for (Task task : tasks) {
-            result.append("\t");
-            result.append(task);
-            result.append("\n");
-        }
-        return result.toString().stripTrailing();
     }
 
     /**
@@ -457,20 +448,17 @@ public class TaskList {
     }
 
     /**
-     * Returns
-     * Printed tasks applies to non-recurring tasks.
+     * Returns an array of tasks that have not been marked as complete.
      *
      */
-    public String getPendingTasks() {
-        StringBuilder result = new StringBuilder();
+    public ArrayList<Task> getPendingTasks() {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (!task.isDone()) {
-                result.append(TAB_INDENT);
-                result.append(task);
-                result.append(NEWLINE);
+                filteredTasks.add(task);
             }
         }
-        return result.toString().stripTrailing();
+        return filteredTasks;
     }
 
     public int getPendingTasksCount() {
@@ -499,10 +487,5 @@ public class TaskList {
                 .sorted(Comparator.comparing(Task::getDoOnStartDateTime))
                 .collect(Collectors.toList());
     }
-
-    public void printTaskList(ArrayList<Task> taskList, Ui ui) {
-        for (Task task : taskList) {
-            ui.showToUser(task.toString());
-        }
-    }
+    
 }
