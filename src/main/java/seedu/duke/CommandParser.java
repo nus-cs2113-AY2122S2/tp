@@ -127,7 +127,7 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ASSIGN_HOUSEKEEPER, "");
             userCommand = new AssignHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(VIEW_AVAILABLE_HOUSEKEEPER_DAY)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_AVAILABLE_HOUSEKEEPER_DAY, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_AVAILABLE_HOUSEKEEPER_DAY, "");
             userCommand = new GetAvailableHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(RESET_AVAILABILITY)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
@@ -162,7 +162,7 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_ITEM_COMMAND, "");
             userCommand = new DeleteItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(DELETE_PROFILE)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_PROFILE, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(DELETE_PROFILE, "");
             userCommand = new DeleteHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(DELETE_EVENT)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_EVENT, "");
@@ -223,7 +223,7 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_ITEM_COMMAND, "");
             userCommand = new AddItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith((ADD_HOUSEKEEPER_COMMAND))) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_HOUSEKEEPER_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_HOUSEKEEPER_COMMAND, "");
             userCommand = new AddHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(ADD_PERFORMANCE_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_PERFORMANCE_COMMAND, "");

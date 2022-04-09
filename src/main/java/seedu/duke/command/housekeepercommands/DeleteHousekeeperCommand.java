@@ -1,13 +1,14 @@
 package seedu.duke.command.housekeepercommands;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.command.Command;
 import seedu.duke.ListContainer;
+import seedu.duke.exceptions.DuplicateCommandException;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.Ui;
-import seedu.duke.exceptions.UserDoesNotExistException;
 import seedu.duke.exceptions.EmptyNameException;
 import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.AssignmentMap;
@@ -15,11 +16,17 @@ import seedu.duke.storage.HousekeeperFileManager;
 
 public class DeleteHousekeeperCommand extends Command {
     private String name;
+    private static final String DELETE_PROFILE = "delete housekeeper";
     private static Logger logger = Logger.getLogger("housekeeperDeletionLogger");
 
     public DeleteHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         if (commandStringWithoutCommand.isEmpty()) {
             throw new EmptyNameException();
+        }
+        String inputWithNoSpace = commandStringWithoutCommand.trim();
+        if (inputWithNoSpace.contains(DELETE_PROFILE)) {
+            logger.log(Level.WARNING, "Repeated delete housekeeper command given.");
+            throw new DuplicateCommandException();
         }
         name = commandStringWithoutCommand;
     }
@@ -37,7 +44,7 @@ public class DeleteHousekeeperCommand extends Command {
      *
      * @param listContainer List of information.
      * @param ui The instance of the Ui class (used for printing additional messages when a command is executed.
-     * @throws UserDoesNotExistException User given is not in housekeeper list.
+     * @throws HotelLiteManagerException User given is not in housekeeper list.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
