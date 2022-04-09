@@ -8,6 +8,7 @@ title: Developer Guide
 ## Contents
 * [Acknowledgements](#acknowledgements)
 * [Introduction](#introduction)
+    * [How to use this developer guide](#how-to-use-this-developer-guide)
 * [Design](#design)
     * [Architecture](#architecture)
     * [Manager Component](#manager-component)
@@ -17,7 +18,7 @@ title: Developer Guide
     * [Parser Component](#parser-component)
     * [Command Component](#command-component)
 * [Implementation](#implementation)
-  * [Parser implementation](#parsing-of-commands)
+  * [Parser of commands](#parsing-of-commands)
   * [Session Commands](#session-commands)
     * [Add a session](#add-a-session)
     * [Remove a session](#remove-a-session)
@@ -38,8 +39,10 @@ title: Developer Guide
     * [View a group](#view-a-group)
     * [List all groups](#list-groups)
 * [Project Scope](#product-scope)
-* [User Stories](#user-stories)
-* [Non-Functional Requirements](#non-functional-requirements)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+* [User stories](#user-stories)
+* [Non-functional requirements](#non-functional-requirements)
 * [Glossary](#glossary)
 
 ## Acknowledgements
