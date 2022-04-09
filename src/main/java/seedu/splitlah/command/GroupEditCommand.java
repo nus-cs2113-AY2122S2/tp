@@ -21,6 +21,7 @@ public class GroupEditCommand extends Command {
     private final String groupName;
     private final String[] involvedList;
     private final int groupId;
+
     /**
      * Initializes a GroupEditCommand object.
      *
@@ -104,7 +105,7 @@ public class GroupEditCommand extends Command {
             if (groupName.equals(group.getGroupName())) {
                 ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW);
                 return;
-            } else if (existingGroupWithTheSameName(manager, groupName)){
+            } else if (existingGroupWithTheSameName(manager, groupName)) {
                 ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE);
                 return;
             } else {
