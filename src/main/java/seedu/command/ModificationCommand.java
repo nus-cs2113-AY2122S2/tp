@@ -14,11 +14,6 @@ import java.util.Objects;
 public class ModificationCommand extends Command {
     public static final String IMPLEMENTED_BY_CHILD = "Execute method for Modification should be implemented by "
             + "child classes AddCommand and UpdateCommand";
-    public static final String INVALID_TYPE_MESSAGE = "Equipment Type needs to be one of:" + System.lineSeparator()
-            + EquipmentType.getAllTypes();
-    public static final String INVALID_COST_MESSAGE = "Cost needs to be able to be parsed to a double";
-    public static final String INVALID_DATE_MESSAGE = "Date needs to be able to be parsed, make sure you're using "
-            + "YYYY-MM-DD format";
     protected final ArrayList<String> commandStrings;
     protected String serialNumber;
     protected String equipmentName = null;
