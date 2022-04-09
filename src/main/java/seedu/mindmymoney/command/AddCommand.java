@@ -4,7 +4,6 @@ import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
-import seedu.mindmymoney.helper.TimeFunctions;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Income;
@@ -85,7 +84,7 @@ public class AddCommand extends Command {
      * the balance left.
      *
      * @param cardName Name of credit card to be updated.
-     * @param amount amount of new expenditure.
+     * @param amount   amount of new expenditure.
      * @return The credit card balance left.
      * @throws MindMyMoneyException when the card is not found in user's credit card list.
      */
@@ -105,6 +104,21 @@ public class AddCommand extends Command {
      */
     private boolean hasIncomeFlag() {
         return addInput.contains(FLAG_OF_INCOME);
+    }
+
+    /**
+     * Tests if the input parameters of credit card from the user are valid.
+     *
+     * @param cardName  The name of the credit card.
+     * @param cashBack  The amount of cashback the card provides.
+     * @param cardLimit The spending limit of the credit card.
+     * @throws MindMyMoneyException when the parameters are invalid.
+     */
+    public void testCreditCardParameters(String cardName, String cashBack, String cardLimit)
+        throws MindMyMoneyException {
+        testCreditCardName(cardName);
+        testCashbackAmount(cashBack);
+        testCreditCardLimit(cardLimit);
     }
 
     /**
@@ -134,12 +148,12 @@ public class AddCommand extends Command {
         expenditureList.add(new Expenditure(paymentMethod, category, description, amountFloat, time));
 
         System.out.println("Successfully added: \n\n"
-                + "Description: " + description + "\n"
-                + "Amount: $" + String.format("%.2f", amountFloat) + "\n"
-                + "Category: " + category + "\n"
-                + "Payment method: " + paymentMethod + "\n"
-                + "Date: " + time + "\n\n"
-                + "into the account\n");
+            + "Description: " + description + "\n"
+            + "Amount: $" + String.format("%.2f", amountFloat) + "\n"
+            + "Category: " + category + "\n"
+            + "Payment method: " + paymentMethod + "\n"
+            + "Date: " + time + "\n\n"
+            + "into the account\n");
 
         if (!paymentMethod.equals("Cash")) {
             float balanceLeft = updateCreditCardTotalExpenditure(paymentMethod, amountFloat);
@@ -154,26 +168,21 @@ public class AddCommand extends Command {
      * @throws MindMyMoneyException Exception thrown when input is invalid
      */
     public void addCreditCard() throws MindMyMoneyException {
-        //Parse data from input
         final String cardName = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_NAME,
-                FLAG_OF_CASHBACK);
-        testCreditCardName(cardName);
-
+            FLAG_OF_CASHBACK);
         final String cashBack = parseInputWithCommandFlag(addInput, FLAG_OF_CASHBACK,
-                FLAG_OF_CARD_LIMIT);
-        testCashbackAmount(cashBack);
-
+            FLAG_OF_CARD_LIMIT);
         final String cardLimit = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_LIMIT,
-                FLAG_END_VALUE);
-        testCreditCardLimit(cardLimit);
+            FLAG_END_VALUE);
+        testCreditCardParameters(cardName, cashBack, cardLimit);
 
         creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit)));
 
         System.out.println("Successfully added: \n\n"
-                + "Credit card: " + cardName + "\n"
-                + "Cash back: " + cashBack + "%\n"
-                + "Card limit: $" + cardLimit + "\n\n"
-                + "into the account");
+            + "Credit card: " + cardName + "\n"
+            + "Cash back: " + cashBack + "%\n"
+            + "Card limit: $" + cardLimit + "\n\n"
+            + "into the account");
         System.out.print(System.lineSeparator());
     }
 
@@ -196,9 +205,9 @@ public class AddCommand extends Command {
             incomeList.add(new Income(amountAsInt, category));
 
             System.out.print("Successfully added: \n\n"
-                    + "Amount: $" + amountAsInt + "\n"
-                    + "Category: " + category + "\n\n"
-                    + "into the account");
+                + "Amount: $" + amountAsInt + "\n"
+                + "Category: " + category + "\n\n"
+                + "into the account");
             System.out.println(System.lineSeparator());
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Income must be a whole number!");

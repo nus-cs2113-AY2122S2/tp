@@ -2,44 +2,44 @@
 !include Style.puml
 
 box addCreditCard()
-participant ":Parser" as Parser PARSER
-participant "AddCommand:Command" as AddCommand COMMANDS
-participant ":GeneralFunctions" as GeneralFunctions HELPER
-participant ":CreditCard" as CreditCard USERFINANCIAL
-participant ":CreditCardList" as CreditCardList DATA
-end box
+participant ":Parser" as Parser PARSER_COLOUR
+participant "AddCommand:Command" as AddCommand COMMANDS_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
+participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
+participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR
+participant ":CreditCardList" as CreditCardList DATA_COLOUR
 
+end box
+hide footbox
 Parser -> AddCommand: AddCommand.executeCommand()
-activate AddCommand
+activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> AddCommand: addCreditCard()
-activate AddCommand
-
-
+activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> GeneralFunctions: parseInputWithCommandFlag()
-activate GeneralFunctions
-GeneralFunctions --> AddCommand: cardName, cashBack, cardLimit, cardBalance
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> AddCommand: cardName, cashBack, cardLimit
 deactivate GeneralFunctions
 
-'AddCommand -> AddCommandInputTest: test(paymentMethod, category, description, amount)
-'activate AddCommandInputTest
-'AddCommandInputTest --> AddCommand
-'deactivate AddCommandInputTest
+AddCommand -> AddCommand: testCreditCardParameters(cardName, cashBack, cardLimit)
+activate AddCommand COMMANDS_COLOUR
+AddCommand -> AddCommandInputTest: testsCardName(), testCashBack(), testCardLimit()
+activate AddCommandInputTest HELPER_COLOUR
 
-'AddCommand -> GeneralFunctions: capitalise(paymentMethod, category)
-'activate GeneralFunctions
-'GeneralFunctions --> AddCommand: Capitalised paymentMethod and category
-'deactivate GeneralFunctions
+AddCommandInputTest --> AddCommand
+deactivate AddCommandInputTest
+AddCommand --> AddCommand
+deactivate AddCommand COMMANDS_COLOUR
 
 create CreditCard
-AddCommand -> CreditCard: new CreditCard(cardName, cashBack, cardLimit, cardBalance)
-activate CreditCard
+AddCommand -> CreditCard: new CreditCard(cardName, cashBack, cardLimit)
+activate CreditCard USERFINANCIAL_COLOUR
 CreditCard --> AddCommand
 deactivate CreditCard
 
 AddCommand -> CreditCardList: creditCardList.add(new CreditCard)
-activate CreditCardList
+activate CreditCardList DATA_COLOUR
 CreditCardList --> AddCommand
 deactivate CreditCardList
 

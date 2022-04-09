@@ -2,45 +2,60 @@
 !include Style.puml
 
 box addExpenditure()
-participant ":Parser" as Parser LOGIC_COLOR_T1
-participant "Command:AddCommand" as AddCommand LOGIC_COLOR_T1
-participant ":GeneralFunctions" as GeneralFunctions LOGIC_COLOR_T1
-participant ":AddCommandInputTest" as AddCommandInputTest LOGIC_COLOR_T1
-participant ":Expenditure" as Expenditure LOGIC_COLOR_T1
-participant ":expenditureList" as expenditureList LOGIC_COLOR_T1
+participant ":Parser" as Parser PARSER_COLOUR
+participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
+participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
+participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
+participant ":expenditureList" as expenditureList DATA_COLOUR
 end box
+hide footbox
 
 Parser -> AddCommand: AddCommand.executeCommand()
-activate AddCommand
+activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> AddCommand: addExpenditure()
-activate AddCommand
-
-
+activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> GeneralFunctions: parseInputWithCommandFlag()
-activate GeneralFunctions
+activate GeneralFunctions HELPER_COLOUR
 GeneralFunctions --> AddCommand: paymentMethod, category, description, amount, time
 deactivate GeneralFunctions
 
-AddCommand -> AddCommandInputTest: test(paymentMethod, category, description, amount, creditCardList)
-activate AddCommandInputTest
+
+AddCommand -> AddCommand: testExpenditureParameters(paymentMethod, category, description, amount, time, creditCardList)
+activate AddCommand COMMANDS_COLOUR
+AddCommand -> AddCommandInputTest: testsPaymentMethod(), testExpenditureCategory(), testDescription(), testExpenditureAmount(), time,
+activate AddCommandInputTest HELPER_COLOUR
 AddCommandInputTest --> AddCommand
 deactivate AddCommandInputTest
+AddCommand --> AddCommand
+deactivate AddCommand COMMANDS_COLOUR
 
-AddCommand -> GeneralFunctions: capitalise(paymentMethod, category)
-activate GeneralFunctions
-GeneralFunctions --> AddCommand: Capitalised paymentMethod and category
+opt paymentMethod == cash
+AddCommand -> GeneralFunctions: capitalise(paymentMethod)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> AddCommand: Capitalised paymentMethod
+deactivate GeneralFunctions
+end
+AddCommand -> GeneralFunctions: capitalise(category)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> AddCommand: Capitalised category
+deactivate GeneralFunctions
+
+AddCommand -> GeneralFunctions: formatFloat(amount)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> AddCommand: Amount rounded to 2dp
 deactivate GeneralFunctions
 
 create Expenditure
 AddCommand -> Expenditure: new Expenditure(paymentMethod, category, description, amount, time)
-activate Expenditure
+activate Expenditure USERFINANCIAL_COLOUR
 Expenditure --> AddCommand
 deactivate Expenditure
 
 AddCommand -> expenditureList: expenditureList.add(new Expenditure)
-activate expenditureList
+activate expenditureList DATA_COLOUR
 expenditureList --> AddCommand
 deactivate expenditureList
 

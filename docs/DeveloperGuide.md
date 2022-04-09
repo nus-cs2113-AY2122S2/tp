@@ -195,9 +195,9 @@ Below is an example showing how the AddCommand behaves at each step.
    `MindMyMoney`.
 2. `AddCommand` instantiates `addInput`, `expenditureList`, `creditCardList`, `incomeList`.
 3. The application invokes `AddCommand.executeCommand()` to execute user instruction.
-4. If user input contains credit card flag, the application executes `AddCommand.addCreditCard()`.
-5. Else if user input contains income flag, the application executes `AddCommand.addIncome()`.
-6. Else the application executes `AddCommand.addExpenditure()`.
+4. If user input contains `/e`, the application executes `AddCommand.addExpenditure()`.
+5. Else user input contains `/cc`, the application executes `AddCommand.addCreditCard()`.
+6. Else if user input contains `/i`, the application executes `AddCommand.addIncome()`.
 7. The application then returns to the Parser component.
 
 <br/>
@@ -216,12 +216,12 @@ to the list.
 
 1. During the execution, `AddCommand.addExpenditure()` will parse through user input to obtain the `PAYMENT_METHOD`, `CATEGORY`,
    `DESCRIPTION`, `AMOUNT` and `TIME` fields.
-2. Once all the fields are obtained, `AddCommand.addExpenditure()` will run tests for its respective fields and capitalise the 
-   `PAYMENT_METHOD`, `CATEGORY` input.
-3. The `AddCommand.addExpenditure()` object instantiates a new `Expenditure` object with the aforementioned 5 fields and adds them
+2. Once all the fields are obtained, `AddCommand.addExpenditure()` will run tests for its respective fields.
+3. The `AddCommand.addExpenditure()` object formats the `CATEGORY` and `AMOUNT` fields, and the `PAYMENT_METHOD` if it is cash.
+4. The `AddCommand.addExpenditure()` object instantiates a new `Expenditure` object with the 5 fields and adds them
    into the `ExpenditureList`.
-4. The `AddCommand.addExpenditure()` object prints a list to show the user what it has saved.
-5. The `AddCommand.addExpenditure()` returns to `AddCommand`.
+5. The `AddCommand.addExpenditure()` object prints a list to show the user what it has saved.
+6. The `AddCommand.addExpenditure()` returns to `AddCommand`.
 
 <br/>
 
@@ -236,11 +236,12 @@ Fig 9 - Add Credit Card Command Sequence Diagram
 The sequence diagram above shows the interactions of different classes when adding a credit card to the list.
 
 1. During the execution, `AddCommand.addCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`,
-   `CASH_BACK`, `CARD_LIMIT` and `CARD_BALANCE` fields.
-2. Once all the fields are obtained, `AddCommand.addCreditCard()` object instantiates a new `CreditCard`
-   object with the aforementioned 5 fields and adds them into the `CreditCardList`.
-3. The `AddCommand.addCreditCard()` object prints a list to show the user what it has saved.
-4. The `AddCommand.addCreditCard()` returns to `AddCommand`.
+   `CASH_BACK` and `CARD_LIMIT` fields.
+2. Once all the fields are obtained, `AddCommand.addExpenditure()` will run tests for its respective fields.
+3. The `AddCommand.addCreditCard()` object instantiates a new `CreditCard`
+   object with the aforementioned 3 fields and adds them into the `CreditCardList`.
+4. The `AddCommand.addCreditCard()` object prints a list to show the user what it has saved.
+5. The `AddCommand.addCreditCard()` returns to `AddCommand`.
 
 <br/>
 
@@ -353,10 +354,25 @@ Manage finances containing multiple payment methods faster than a typical mouse/
 
 ### User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...                                                           | So that I can ...                                                          |
+|---------|----------|-------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| v1.0    | new user | have a 'help' command that lists the functions of the program           | view implemented features of the program                                   |
+| v1.0    | user     | create an entry for expenditure                                         | -                                                                          |
+| v1.0    | user     | list existing entries                                                   | view my expenses                                                           |
+| v1.0    | user     | update existing entries                                                 | edit details of entries I have previously deleted                          |
+| v1.0    | user     | remove existing entries                                                 | delete wrongly added entries                                               |
+| v1.0    | user     | know if my command entered is invalid                                   | not expect a successful operation with bad inputs                          |
+| v1.0    | user     | exit the application                                                    | -                                                                          |
+| v1.0    | user     | see a welcome page after running the application                        | have a better user experience and know the application loaded successfully |
+| v2.0    | user     | add a date to expenditure                                               | track my expenditure daily, monthly or yearly                              |
+| v2.0    | user     | add my credit cards, with the credit card limits, cashback              | track my expenditure on my credit card                                     |
+| v2.0    | user     | allocate my expenditure into categories                                 | know which main categories I spent the most on                             |
+| v2.0    | user     | see a graph of my expenditures for each category                        | know the breakdown of my expenditures                                      |
+| v2.0    | user     | add my income                                                           | see if I am spending beyond my income                                      |
+| v2.0    | user     | list my income, credit card and expenditure separately                  | better visualise the separate lists instead of seeing all at once          |
+| v2.0    | user     | see the help page for my income, credit card and expenditure separately | refer to the the specific help page that I need                            |
+| v2.1    | user     | save and load my data                                                   | I am able to close and re run the applcation without losing data           |
+
 
 ### Non Functional Requirements
 
@@ -364,7 +380,7 @@ Manage finances containing multiple payment methods faster than a typical mouse/
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-
+  
 ### Glossary
 
 * Mainstream OS: Windows, Linux, Unix, OS-X  
