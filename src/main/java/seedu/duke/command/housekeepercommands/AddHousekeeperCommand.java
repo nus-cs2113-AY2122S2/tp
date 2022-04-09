@@ -51,8 +51,8 @@ public class AddHousekeeperCommand extends Command {
      *
      * @param commandStringWithoutCommand Input given by user.
      * @return housekeeper profile.
-     * @throws InvalidAgeException       Age enter is invalid.
-     * @throws InvalidHousekeeperProfileException Command enter regarding the housekeeper profile is wrong.
+     * @throws HotelLiteManagerException Age enter is invalid and command enter regarding the housekeeper profile
+     *                                   is wrong.
      */
     private Housekeeper extractDetails(String commandStringWithoutCommand) throws HotelLiteManagerException {
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
@@ -92,7 +92,7 @@ public class AddHousekeeperCommand extends Command {
      *
      * @param inputAge Input age given by user.
      * @return Valid age.
-     * @throws InvalidAgeException When age given is not valid.
+     * @throws HotelLiteManagerException When age given is not valid.
      */
     private int extractAge(String inputAge) throws HotelLiteManagerException {
         int ageNumber;
@@ -124,8 +124,7 @@ public class AddHousekeeperCommand extends Command {
      *
      * @param inputName Input name give by user.
      * @return Valid name.
-     * @throws InvalidHousekeeperProfileException When name given is empty.
-     * @throws NameNotStringException    When name has symbols and digits.
+     * @throws HotelLiteManagerException When name given is empty and when name has symbols and digits.
      */
     private String extractName(String inputName) throws HotelLiteManagerException {
         String name;
