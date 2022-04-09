@@ -33,6 +33,13 @@ Note that certain commands may slightly different implementation compared to the
 
 ![CommandSequenceDiagram](diagrams/CommandSequenceDiagram.png)
 
+Given below is the steps on how the command operations generally works.
+
+1. User inputs is passed to the UI.
+2. Ui then provides user input to the Parser class which parses it and retrieves the command and parameters.
+3. Ui subsequently executes the command on the MasterTimetable.
+4. Eventually a feedback message will be shown to user upon successful or failed execution.
+
 ## 3.1 Add Feature
 The `add` command is a command that allows user to 
 1. add new users to the master timetable.
@@ -58,11 +65,13 @@ This is a condensed diagram. Several terms in the sequence diagram above have be
 The following sequence diagram shows how the `add_user` command works:
 ![AddUserCommandSequenceDiagram](diagrams/AddUserCommandSequenceDiagram.png)
 
+Given below is the steps on how the `add_user` operation works.
+
 1. User inputs add_user with username which is passed to the UI.
 2. Ui then provides user input to the Parser class which parses it and retrieves the name.
 3. Ui subsequently executes the command on the MasterTimetable.
 4. The AddUserCommand will create a new Timetable and add it to the MasterTimetable.
-5. Subsequently a confirmation message will be shown to user upon successful addition.
+5. Eventually a confirmation message will be shown to user upon successful addition.
 
 ### 3.1.2 Add Events Feature
 
@@ -81,7 +90,7 @@ Given below is the steps on how the `add_lesson` operation works.
 2. Ui then provides user input to the Parser class which parses it and retrieves the respective lesson description.
 3. Ui subsequently executes the command on the MasterTimetable.
 4. The AddLessonCommand will create a new Lesson and add it to the specified user's timetable.
-5. Subsequently a confirmation message will be shown to user upon successful addition.
+5. Eventually a confirmation message will be shown to user upon successful addition.
 
 **Add Meeting**
 
@@ -112,14 +121,14 @@ Before the timetable is listed out, it will also be sorted according to day and 
 The following sequence diagram shows how the command `` is executed.
 ![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
 
-###3.2.1 Listing Lessons Feature
+### 3.2.1 Listing Lessons Feature
 Instead of listing all events in the timetable, the user can specify such that only lessons are listed out.
 
 `list_lesson [user]` displays the lessons for the particular user.
 
 `list_lesson all` displays the lessons for all users.
 
-###3.2.2 Listing Meetings Feature
+### 3.2.2 Listing Meetings Feature
 Instead of listing all events in the timetable, the user can specify such that only meetings are listed out.
 
 `list_meeting [user]` displays the meetings for the particular user.
@@ -271,9 +280,3 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
-##Clear Command
-The clear command is one of the commands the user can execute to clear the whole list. 
-
-
-Here is the sequence when the command `clear` is executed.
