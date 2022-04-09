@@ -310,17 +310,17 @@ There are 2 ways that you can specify the costs of an activity:
 1. Record the total cost to be split amongst everyone involved.
 2. Record each person's individual cost.
 
-> Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
+> Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2 ...]
 /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 > 
-> Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
+> Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2 ...]
 /cl [COST1 COST2 ...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 >
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_NAME]` refers to the name of the activity.
 >    * The activity name is **case-insensitive**.
->* `[PERSON_PAID]` refers to the person who paid for the activity.
+>* `[PAYER]` refers to the person who paid for the activity.
 >    * The person's name is **case-insensitive**.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
 >    * Each individual name is **case-insensitive**.
@@ -336,9 +336,9 @@ There are 2 ways that you can specify the costs of an activity:
 >* A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
 >  it.
 >* Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
->* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
+>* The names in `[PAYER]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
 >  `[SESSION_ID]`.
->* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>* The names in `[PAYER]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >  * Example: `Alice Tan` is not allowed.
 >* The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
 >  and 2 digits after the decimal point, if any.
@@ -413,7 +413,7 @@ delimiters are compulsory to identify the activity you wish to edit.
 >* `[ACTIVITY_NAME]` refers to the name of the activity.
 >     * The activity name is **case-insensitive**.
 >     * If one is not provided, the original activity name is left unchanged.
->* `[PERSON_PAID]` refers to the person who paid for the activity.
+>* `[PAYER]` refers to the person who paid for the activity.
 >    * The person's name is **case-insensitive**.
 >    * If one is not provided, the original payer is left unchanged.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
@@ -451,9 +451,9 @@ the costs are distributed.
      it.
 >* An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
 >* Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
->* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
+>* The names in `[PAYER]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
->* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>* The names in `[PAYER]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >   - Example: `Alice Tan` is not allowed.
 >* The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
