@@ -138,10 +138,11 @@ class DayListTest {
         String header = String.format("%8s %7s %20s", "Day", "|", "Plan Name");
         String info = "";
         for (int i = 1; i <= 7; i++) {
-            info += String.format("%12s %3s %35s", dayList.covertDayNumberToDay(i), "|", dayList.padWithSpaces("rest day") + "\n");
+            info += String.format("%12s %3s %35s", dayList.covertDayNumberToDay(i), "|",
+                    dayList.padWithSpaces("rest day") + "\n");
         }
 
-        String expectedOutput ="\n                         WORKOUT SCHEDULE\n"
+        String expectedOutput = "\n                         WORKOUT SCHEDULE\n"
                 + "----------------------------------------------------------------------\n"
                 + header + "\n" +  "----------------------------------------------------------------------\n"
                 + info;
