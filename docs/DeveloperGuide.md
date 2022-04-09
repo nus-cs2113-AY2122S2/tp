@@ -222,10 +222,6 @@ https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/pla
 and [`Person.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Person.java)
 
-The Class Diagram below shows the multiplicity and navigability between the 3 classes.
-
-![FamilyComponent](images/FamilyComponent.png)
-
 The `Family` component is implemented in an n-level architecture. It stores the logical grouping of persons added i.e.,
 all `Person` objects must belong to one of the `PersonList`, with all `PersonList` belonging under one `Family`.
 It also depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person` 
@@ -233,7 +229,7 @@ contains an `IncomeList` and `ExpenditureList`.
 
 The Class Diagram below shows the full structure of the `Family` component and the components it interacts with.
 
-![Placeholder]()
+![FamilyComponent](images/FamilyComponent.png)
 
 How the `Family` component is used:
 
@@ -258,7 +254,7 @@ To aid in visualisation,
 
 The following Sequence Diagram shows how the `Family` component handles each call by the `Command` component.  
 
-![Placeholder]()
+![FamilySequenceDiagram](images/FamilySequenceDiagram.png)
 
 ### Money Component
 
