@@ -1,6 +1,7 @@
 package seedu.duke.data;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class BorrowRecord {
     private final LocalDate startDate;
@@ -61,5 +62,34 @@ public class BorrowRecord {
         } else {
             return true;
         }
+    }
+
+    // Returns true if this borrow record status is the same
+    // as the status we are testing for.
+    public boolean isStatus(BorrowStatus status) {
+        return borrowStatus.equals(status);
+    }
+
+    // Returns true if this borrow record contains search name
+    public boolean containsBorrowerName(Optional<String> searchName) {
+        // If there is no search name entered, all records return true
+        if (searchName.isEmpty()) {
+            return true;
+        }
+
+        return borrowerName.contains(searchName.get());
+    }
+
+    /**
+     * Returns output string representing a borrow record.
+     *
+     * @return String output containing borrower name and borrow duration.
+     */
+    @Override
+    public String toString() {
+        String output = String.format("Name of Borrower: %s", borrowerName) + System.lineSeparator();
+        output += String.format("Borrow Duration: %s", this.getBorrowDuration());
+        output += System.lineSeparator();
+        return output;
     }
 }
