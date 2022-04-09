@@ -68,8 +68,9 @@ In the case where a second substring is not required, as in the case of `help` a
 <p align="center"><code>[argumentType/`argumentValue`] [...]</code></p>
 
 Complex commands such as `add` and `update` necessitate multiple arguments.
-To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` is implemented. 
-Without specifically explaining the main regular expression ([details here](https://regex101.com/r/gwjHWD/3)), the approach sought to match `argumentType` and <code>argumentValue</code> pairs with a positive lookahead. 
+To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` is implemented.
+
+The main regular expression ([details here](https://regex101.com/r/dMwMWw/3)) sought to match `argumentType` and <code>argumentValue</code> pairs with a positive lookahead. 
 The final argument pair will then be extracted using a separate regex. 
 Together, this ensured that all argument pairs can be effectively parsed and dispatched to each `Command` class.
 
