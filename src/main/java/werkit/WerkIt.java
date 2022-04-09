@@ -19,7 +19,7 @@ import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
+import static commands.WorkoutCommand.ACTION_KEYWORD_DELETE;
 
 /**
  * This class initiates the various classes/components of WerkIt! and contains the logic code for
@@ -184,11 +184,11 @@ public class WerkIt {
 
                 newCommand.execute();
                 if (newCommand instanceof WorkoutCommand) {
-                    if (newCommand.getUserAction().equals(DELETE_ACTION_KEYWORD)) {
+                    if (newCommand.getUserAction().equals(ACTION_KEYWORD_DELETE)) {
                         reloadScheduleFile();
                     }
                 }   else if (newCommand instanceof PlanCommand) {
-                    if (newCommand.getUserAction().equals(DELETE_ACTION_KEYWORD)) {
+                    if (newCommand.getUserAction().equals(ACTION_KEYWORD_DELETE)) {
                         reloadScheduleFile();
                     }
                 }
