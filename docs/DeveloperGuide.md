@@ -66,7 +66,7 @@ The study session consists of 4 main components:
 - TimerParser class
 - StudyCommand class
 - TimerLogic class
-- Abstract Timer class, Countdown class and Stopwatch class 
+- Abstract [Timer](#glossary) class, [Countdown](#glossary) class and [Stopwatch](#glossary) class 
 
 The `TimerParser` component
 - Parses user inputs in the main session and the study session
@@ -331,7 +331,10 @@ to block out pockets of time for studying, so that they can better focus during 
 
 ## Glossary
 
-- To be updated
+* *Timer* - Refers to something which can keep track of time. (e.g. `Countdown` and `Stopwatch` are timers)
+* *Countdown* - Refers to a countdown timer, where it counts down from a specified time (e.g. 30 seconds) to 0 when the
+countdown timer is started.
+* *Stopwatch* - Refers to a stopwatch timer, where it records time elapsed from the moment the stopwatch is started.
 
 ## Instructions for manual testing
 
