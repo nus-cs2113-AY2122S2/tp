@@ -47,6 +47,7 @@ The commands component consists of a `commands` package. Inside the package are 
 ## 2.4 Parser Component
 
 ![ParserClassDiagram2](images/ParserClassDiagram.png)
+
 The above class diagram illustrates the classes within the `parser` package.
 
 The `parser` package includes:
@@ -57,14 +58,21 @@ The `parser` package includes:
 3. `ParserHelperMethods`
    - Contain helper methods to check if the values of the parameters are valid.
 
-## 2.5 Timetable Component
-- Timetable
-- MasterTimetable
+## 2.5 Timetables Component
 
+![TimetableClassDiagram](images/TimetableClassDiagram.png)
+
+The above class diagram illustrates the classes within the timetables package.
+The `timetables` package includes 
+1. Timetable
+   - To invoke operations involving a specific timetable object.
+2. MasterTimetable
+   - To invoke operations on the master list of all user's timetable.
+   
 ## 2.6 Event Component
 ![EventClassDiagram](images/EventClassDiagram.png)
 
-The above class diagram illustrates the classes within the Event package.
+The above class diagram illustrates the classes within the event package.
 
 The Event package includes:
 1. An abstract `Event` class that other event classes inherit from
