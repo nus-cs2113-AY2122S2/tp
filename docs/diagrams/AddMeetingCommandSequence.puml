@@ -1,12 +1,6 @@
 @startuml
 hide footbox
 
-
-create ":Ui"
-
-create ":AddMeetingCommand"
-":Ui" -> ":AddMeetingCommand" ++: AddMeetingCommand("meeting1","Thursday",1230,1330,"online")
-":AddMeetingCommand" --> ":Ui" -- :
 ":Ui" -> ":AddMeetingCommand" ++: execute(masterTimetable)
 ":AddMeetingCommand" -> ":Meeting" ++ : new()
 ":Meeting" --> ":AddMeetingCommand" --: meeting:Meeting
