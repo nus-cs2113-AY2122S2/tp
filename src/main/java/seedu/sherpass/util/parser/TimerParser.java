@@ -75,9 +75,9 @@ public class TimerParser {
     /**
      * Parses commands for study mode.
      *
-     * @param rawUserInput Raw user input.
-     * @param ui           UI.
-     * @param timerLogic Logic class to handle timer functions
+     * @param rawUserInput  Raw user input.
+     * @param ui            UI.
+     * @param timerLogic    Logic class to handle timer functions.
      */
     public static void parseStudyMode(Ui ui, Storage storage, String rawUserInput,
                                       TimerLogic timerLogic) throws IOException {

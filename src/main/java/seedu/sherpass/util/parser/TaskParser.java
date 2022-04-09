@@ -46,9 +46,13 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_CLEAR_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_NO_VALUE_FOR_PARAMETER_MESSAGE;
 import static seedu.sherpass.constant.Message.WHITESPACE;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_ADD;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_DELETE;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_EDIT;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_MARK;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_UNMARK;
 
 public class TaskParser {
 
@@ -222,11 +226,11 @@ public class TaskParser {
         } catch (IllegalArgumentException exception) {
             ui.showError(ERROR_INVALID_FREQUENCY_MESSAGE);
             ui.showLine();
-            return new HelpCommand(AddCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_ADD);
         } catch (InvalidInputException e) {
             ui.showError(e.getMessage());
             ui.showLine();
-            return new HelpCommand(AddCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_ADD);
         }
     }
 
@@ -241,17 +245,17 @@ public class TaskParser {
     public static Command prepareMarkOrUnmark(String argument, String commandWord, Ui ui) {
         try {
             int markIndex = Integer.parseInt(argument) - 1;
-            if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
+            if (commandWord.equals(COMMAND_WORD_MARK)) {
                 return new MarkCommand(markIndex);
             }
             return new UnmarkCommand(markIndex);
         } catch (NumberFormatException e) {
             ui.showError(ERROR_INVALID_MARKING_INDEX_MESSAGE);
             ui.showLine();
-            if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
-                return new HelpCommand(MarkCommand.COMMAND_WORD);
+            if (commandWord.equals(COMMAND_WORD_MARK)) {
+                return new HelpCommand(COMMAND_WORD_MARK);
             }
-            return new HelpCommand(UnmarkCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_UNMARK);
         }
     }
 
@@ -296,7 +300,7 @@ public class TaskParser {
      */
     public static Command prepareEdit(String argument, Ui ui) {
         if (argument.isBlank()) {
-            return new HelpCommand(EditCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_EDIT);
         }
         try {
             EditCommand newCommand = prepareEditTaskContent(argument);
@@ -308,11 +312,11 @@ public class TaskParser {
         } catch (InvalidInputException e) {
             ui.showError(e.getMessage());
             ui.showLine();
-            return new HelpCommand(EditCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_EDIT);
         } catch (NumberFormatException exception) {
             ui.showError(ERROR_INVALID_INDEX_MESSAGE);
             ui.showLine();
-            return new HelpCommand(EditCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_EDIT);
         }
     }
 
@@ -328,7 +332,7 @@ public class TaskParser {
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             ui.showError(ERROR_INVALID_DELETE_INDEX_MESSAGE);
             ui.showLine();
-            return new HelpCommand(DeleteCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_DELETE);
         }
     }
 }

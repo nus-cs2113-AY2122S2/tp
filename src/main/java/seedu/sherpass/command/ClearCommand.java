@@ -12,14 +12,10 @@ import static seedu.sherpass.constant.Message.CLEAR_ALL_COMMAND_CONFIRMED_MESSAG
 import static seedu.sherpass.constant.Message.CLEAR_ALL_COMMAND_CANCEL_MESSAGE;
 import static seedu.sherpass.constant.Message.CLEAR_ALL_COMMAND_RESULT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_CLEAR_MESSAGE;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_CLEAR;
 
 
 public class ClearCommand extends Command {
-
-    public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_USAGE = "Clear: Deletes multiple tasks in the list quickly.\n"
-            + "Usage: clear CLEAR_SCOPE\n"
-            + "CLEAR_SCOPE: all, expired, or done";
 
     private String selection;
 
@@ -49,7 +45,7 @@ public class ClearCommand extends Command {
         default:
             ui.showError(ERROR_INVALID_CLEAR_MESSAGE);
             ui.showLine();
-            ui.showToUser(ClearCommand.MESSAGE_USAGE);
+            ui.showToUser(MESSAGE_USAGE_CLEAR);
             break;
         }
     }

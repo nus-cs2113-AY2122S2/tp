@@ -21,6 +21,7 @@ import static seedu.sherpass.constant.Message.CLEAR_ALL_COMMAND_CANCEL_MESSAGE;
 import static seedu.sherpass.constant.Message.CLEAR_ALL_COMMAND_RESULT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_CLEAR_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_PREFIX;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_CLEAR;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -183,7 +184,7 @@ public class ClearCommandTest {
         String selection = "foo";
         String expectedOutput = ERROR_PREFIX + ERROR_INVALID_CLEAR_MESSAGE + LS
                 + "____________________________________________________________" + LS
-                + ClearCommand.MESSAGE_USAGE + LS;
+                + MESSAGE_USAGE_CLEAR + LS;
         new ClearCommand(selection).execute(taskList, new Ui(), storage);
         assertEquals(expectedOutput, outContent.toString());
     }

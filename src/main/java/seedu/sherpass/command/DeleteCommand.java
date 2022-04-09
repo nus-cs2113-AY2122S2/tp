@@ -11,12 +11,9 @@ import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_1;
 import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_2;
 
 public class DeleteCommand extends Command {
+
     private int deleteIndex;
     private boolean isRepeat;
-
-    public static final String COMMAND_WORD = "delete";
-    public static final String MESSAGE_USAGE = "Delete: Deletes a task in the task list.\n"
-            + "Usage: delete TASK_NUMBER [/repeat]";
 
     /**
      * Creates constructor for delete command.
