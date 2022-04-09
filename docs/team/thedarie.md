@@ -25,7 +25,7 @@ Summary of code contributions:
     - Implemented the `Frequency` enumeration to identify the interval of which tasks should be repeated.
 - Added JUnit tests for Storage, TaskParser and StorageParser class.
 - Added JavaDoc comments for most methods that I wrote.
-- Refactored code related to Tasks on multiple occasions to achieve better code quality.
+- Refactored code related to `Storage` and `Task` components on multiple occasions to achieve better code quality.
 
 #### Contributions to User Guide:
 - Wrote the quick start section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#editing-your-tasks-edit)
@@ -36,10 +36,11 @@ Summary of code contributions:
 - Wrote the FAQ section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#faq)
 
 #### Contributions to Developer Guide:
-- Gave a high level overview of Storage in the Architecture section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#storage)
-- Explained the storage component in the Design and implementation section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#storage-implementation)
-- Added class diagram to give an overview of the storage component
-- Added sequence diagrams to explain how save files are loaded and how invalid save data is handled
+- Wrote the section on Task Implementation [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#task-implementation)
+- Gave an overview of Storage in the Architecture section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#storage)
+- Explained the storage component in the Design & Implementation section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#storage-implementation)
+- Added class diagram for `Storage` and `Task` to aid explanation.
+- Added sequence diagrams to explain how save files are loaded and how tasks are edited.
 
 #### Contributions to team-based tasks:
 - Set up the initial format for user guide
