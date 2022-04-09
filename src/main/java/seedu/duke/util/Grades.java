@@ -16,6 +16,9 @@ import static seedu.duke.util.StringConstants.NOT_ENTERED_STR;
 import static seedu.duke.util.StringConstants.PLUS;
 import static seedu.duke.util.StringConstants.DASH;
 
+/**
+ * Enumeration for grades and their associated grade points.
+ */
 public enum Grades {
     A_PLUS(GRADE_POINT_A_AND_A_PLUS),
     A(GRADE_POINT_A_AND_A_PLUS),

@@ -3,7 +3,6 @@ package seedu.duke.commands;
 import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
@@ -43,14 +42,8 @@ public class MarkCommand extends Command {
         Module targetModule = moduleList.getGeneralTasks();
         if (!Objects.isNull(taskModuleString)) {
             targetModule = moduleList.getModule(taskModuleString);
-            if (Objects.isNull(targetModule)) {
-                throw new NoSuchModuleException();
-            }
         }
         TaskList taskList = targetModule.getTaskList();
-        if (taskIndex < 0 || taskIndex >= taskList.size()) {
-            throw new NoSuchTaskException();
-        }
         Task target = taskList.getTask(taskIndex);
         target.setTaskDone(status);
         if (status) {

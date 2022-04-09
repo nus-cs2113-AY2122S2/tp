@@ -3,7 +3,6 @@ package seedu.duke.commands;
 import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
@@ -30,15 +29,10 @@ public class AddCommand extends Command {
      */
     public AddCommand(AddObjectType type, String taskName, String taskDescription, String estimatedWorkingTime,
                       String taskModule) throws ModHappyException {
-        try {
-            assert type == AddObjectType.TASK;
-            typeToAdd = type;
-            newTask = new Task(taskName, taskDescription, estimatedWorkingTime);
-            targetModuleName = taskModule;
-        } catch (ModHappyException e) {
-            throw e;
-        }
-
+        assert type == AddObjectType.TASK;
+        typeToAdd = type;
+        newTask = new Task(taskName, taskDescription, estimatedWorkingTime);
+        targetModuleName = taskModule;
     }
 
     /**
@@ -67,14 +61,11 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        String res = "";
+        String res;
         if (typeToAdd == AddObjectType.TASK) {
             Module targetModule = moduleList.getGeneralTasks();
             if (!Objects.isNull(targetModuleName)) {
                 targetModule = moduleList.getModule(targetModuleName);
-            }
-            if (Objects.isNull(targetModule)) {
-                throw new NoSuchModuleException();
             }
             TaskList taskList = targetModule.getTaskList();
             res = String.format(ADD_TASK_MESSAGE, targetModule, taskList.addTask(newTask));

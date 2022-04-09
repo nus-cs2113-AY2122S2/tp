@@ -18,7 +18,7 @@ public class EditCommand extends Command {
     private static final String EDIT_TASK_SUCCESS = StringConstants.EDIT_TASK_SUCCESS;
     private static final String EDIT_TASK_WITH_MODULE_SUCCESS = StringConstants.EDIT_TASK_WITH_MODULE_SUCCESS;
     private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION_STR;
-    private static final String ESTIMATED_WORKING_TIME = StringConstants.ESTIMATED_WORKING_TIME_STR;
+    private static final String ESTIMATED_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
     private static final String TASK_NAME = StringConstants.TASK_NAME_STR;
 
     private String moduleCode;
@@ -46,17 +46,18 @@ public class EditCommand extends Command {
         this.changedParameter = description;
     }
 
-    public EditCommand(String taskModule, int taskIndex, String description, String workingTime, String taskName) {
+    public EditCommand(String taskModule, int taskIndex,
+                       String description, String estimatedWorkingTime, String taskName) {
         this.taskModule = taskModule;
         this.taskIndex = taskIndex;
         if (!Objects.isNull(description)) {
             this.taskParameter = TASK_DESCRIPTION;
             this.changedParameter = description;
-            assert Objects.isNull(workingTime);
+            assert Objects.isNull(estimatedWorkingTime);
             assert Objects.isNull(taskName);
-        } else if (!Objects.isNull(workingTime)) {
+        } else if (!Objects.isNull(estimatedWorkingTime)) {
             this.taskParameter = ESTIMATED_WORKING_TIME;
-            this.changedParameter = workingTime;
+            this.changedParameter = estimatedWorkingTime;
             assert Objects.isNull(taskName);
         } else {
             this.taskParameter = TASK_NAME;
@@ -78,9 +79,6 @@ public class EditCommand extends Command {
             targetModule = moduleList.getGeneralTasks();
         } else {
             targetModule = moduleList.getModule(taskModule);
-            if (Objects.isNull(targetModule)) {
-                throw new NoSuchModuleException();
-            }
         }
         return targetModule;
     }
@@ -103,9 +101,6 @@ public class EditCommand extends Command {
      */
     public void editModuleDescription(ModuleList moduleList) throws NoSuchModuleException {
         Module targetModule = moduleList.getModule(moduleCode);
-        if (Objects.isNull(targetModule)) {
-            throw new NoSuchModuleException();
-        }
         targetModule.setModuleDescription(changedParameter);
         result = String.format(EDIT_MODULE_SUCCESS, targetModule.getModuleCode());
     }
@@ -119,15 +114,14 @@ public class EditCommand extends Command {
         TaskList taskList = targetModule.getTaskList();
         Task targetTask = taskList.getTask(taskIndex);
         String targetTaskName = targetTask.getTaskName();
-        if (taskParameter.equals(TASK_DESCRIPTION)) {
+        switch (taskParameter) {
+        case TASK_DESCRIPTION:
             targetTask.setTaskDescription(changedParameter);
-        } else if (taskParameter.equals(ESTIMATED_WORKING_TIME)) {
-            try {
-                targetTask.setWorkingTime(changedParameter);
-            } catch (ModHappyException e) {
-                throw e;
-            }
-        } else {
+            break;
+        case ESTIMATED_WORKING_TIME:
+            targetTask.setWorkingTime(changedParameter);
+            break;
+        default:
             targetTask.setTaskName(changedParameter);
         }
         if (isGeneralTask) {

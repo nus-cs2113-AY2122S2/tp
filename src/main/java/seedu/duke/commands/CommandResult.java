@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 public class CommandResult {
-    private String resultString;
+    private final String resultString;
 
     public CommandResult(String result) {
         this.resultString = result;

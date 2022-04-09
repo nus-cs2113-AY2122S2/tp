@@ -23,8 +23,10 @@ public class TaskDuration {
     private static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = StringConstants.TO_STRING_FORMAT_WITH_HOUR_ONLY;
     private static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = StringConstants.TO_STRING_FORMAT_WITH_MINUTE_ONLY;
     private static final String DURATION_STRING_FORMAT = StringConstants.DURATION_STRING_FORMAT;
-    private static final String[] HOUR_UNIT_WORD = {"h", "H", "hours", "Hours", "hour", "Hour"};
-    private static final String[] MINUTE_UNIT_WORD = {"m", "M", "min", "Min", "minutes", "Minutes", "minute", "Minute"};
+    private static final String[] HOUR_UNIT_WORD
+            = {"h", "H", "hr", "Hr", "hrs", "Hrs", "hours", "Hours", "hour", "Hour"};
+    private static final String[] MINUTE_UNIT_WORD
+            = {"m", "M", "min", "Min", "mins", "Mins", "minutes", "Minutes", "minute", "Minute"};
 
 
     protected Duration taskDuration;
@@ -68,7 +70,6 @@ public class TaskDuration {
     }
 
 
-    // Intentionally implement the parse method independently here, because later will refactor the command parser.
     private HashMap<String, String> parseDurationString(String durationString) throws ModHappyException {
         Pattern commandPattern = Pattern.compile(DURATION_STRING_FORMAT);
         Matcher matcher = commandPattern.matcher(durationString.trim());
@@ -76,12 +77,8 @@ public class TaskDuration {
         if (!matcher.matches()) {
             throw new WrongDurationFormatException();
         }
-        try {
-            parserDurationString.put(DURATION_UNIT_GROUP_WORD, matcher.group(DURATION_UNIT_GROUP_WORD).trim());
-            parserDurationString.put(DURATION_GROUP_WORD, matcher.group(DURATION_GROUP_WORD).trim());
-        } catch (Exception e) {
-            throw new WrongDurationFormatException();
-        }
+        parserDurationString.put(DURATION_UNIT_GROUP_WORD, matcher.group(DURATION_UNIT_GROUP_WORD).trim());
+        parserDurationString.put(DURATION_GROUP_WORD, matcher.group(DURATION_GROUP_WORD).trim());
         return parserDurationString;
     }
 

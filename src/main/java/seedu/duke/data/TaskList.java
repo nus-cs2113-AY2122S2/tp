@@ -21,13 +21,13 @@ public class TaskList {
     /**
      * Returns the size of the task list.
      */
-    public int size() {
+    public int getSize() {
         return taskList.size();
     }
 
     /**
      * Adds the specified task to the task list, then returns the task for convenience.
-     * @param t the task to be added
+     * @param t The task to be added.
      */
     public Task addTask(Task t) {
         taskList.add(t);
@@ -36,7 +36,7 @@ public class TaskList {
 
     /**
      * Removes the specified task from the task list.
-     * @param index The task number to be removed.
+     * @param index The index of task to be removed.
      */
     public Task removeTask(int index) throws NoSuchTaskException {
         if (index >= taskList.size() || index < 0) {
@@ -47,6 +47,13 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Adds tag to the task list.
+     *
+     * @param tagDescription The description of tag that is inputted by user.
+     * @param index The index of task to be added with tag.
+     * @throws NoSuchTaskException If the user-supplied index is out of bounds.
+     */
     public Task addTag(String tagDescription, int index) throws NoSuchTaskException {
         if (index >= taskList.size() || index < 0) {
             throw new NoSuchTaskException();
@@ -57,6 +64,14 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Removes tag from the task list.
+     *
+     * @param tagDescription The description of tag that is inputted by user.
+     * @param index The index of task to remove the tag.
+     * @throws NoSuchTaskException If the user-supplied index is out of bounds.
+     * @throws NoSuchTagException If the user-supplied tag to be removed does not exist.
+     */
     public Task removeTag(String tagDescription, int index) throws NoSuchTaskException, NoSuchTagException {
         if (index >= taskList.size() || index < 0) {
             throw new NoSuchTaskException();
@@ -69,9 +84,6 @@ public class TaskList {
         return task;
     }
 
-    public ArrayList<Task> getList() {
-        return taskList;
-    }
 
     public void setList(ArrayList<Task> list) {
         taskList = list;
@@ -79,7 +91,7 @@ public class TaskList {
 
     /**
      * Returns the task stored at the given index in the task list.
-     * @param index the index of the task
+     * @param index The index of the task.
      */
     public Task getTask(int index) throws NoSuchTaskException {
         if (index >= taskList.size() || index < 0) {
@@ -94,8 +106,9 @@ public class TaskList {
 
     /**
      * Formats all tasks in the task list as a pretty printed string.
-     * @param indent string representing the indentation level for each task item
-     * @param showCompletedTasks whether completed tasks should be listed
+     *
+     * @param indent String representing the indentation level for each task item.
+     * @param showCompletedTasks Whether completed tasks should be listed.
      */
     public String getAllTasks(String indent, boolean showCompletedTasks) {
         StringBuilder res = new StringBuilder();
@@ -118,20 +131,23 @@ public class TaskList {
 
     /**
      * Formats all tasks in the task list with a matching tag as a pretty printed string.
-     * @param indent string representing the indentation level for each task item
-     * @param tag the tag to be matched
-     * @param showCompletedTasks whether completed tasks should be listed
+     *
+     * @param indent String representing the indentation level for each task item.
+     * @param tag The tag to be matched.
+     * @param showCompletedTasks Whether completed tasks should be listed.
      */
     public String getTasksWithTag(String indent, String tag, boolean showCompletedTasks) {
         StringBuilder res = new StringBuilder();
         int numHiddenTasks = 0;
         for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).getTagList().contains(tag)) {
-                if (showCompletedTasks || !taskList.get(i).getTaskDone()) {
-                    res.append(indent).append(String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i)));
-                } else {
-                    numHiddenTasks++;
-                }
+            if (!taskList.get(i).getTagList().contains(tag)) {
+                // Skip this task as it does not contain the tag we want
+                continue;
+            }
+            if (showCompletedTasks || !taskList.get(i).getTaskDone()) {
+                res.append(indent).append(String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i)));
+            } else {
+                numHiddenTasks++;
             }
 
         }

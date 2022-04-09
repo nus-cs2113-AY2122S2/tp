@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -12,16 +13,17 @@ import java.util.Objects;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import seedu.duke.exceptions.DuplicateModuleException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
 
 import seedu.duke.data.Module;
+import seedu.duke.exceptions.UnknownException;
 
 /**
  * A data access object managing the loading and saving of ModuleList instances.
  */
 public class ModuleListStorage extends ListStorage<Module> {
+
     /**
      * Deserialises the ModuleList stored in the json file.
      * @param path json file path
@@ -41,15 +43,10 @@ public class ModuleListStorage extends ListStorage<Module> {
             } else {
                 arrayList = new ArrayList<>();
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new ReadException();
-        }
-        ArrayList<String> moduleCodes = new ArrayList<>();
-        for (Module m : arrayList) {
-            if (moduleCodes.contains(m.getModuleCode())) {
-                throw new DuplicateModuleException();
-            }
-            moduleCodes.add(m.getModuleCode());
+        } catch (Exception e) {
+            throw new UnknownException(e.toString());
         }
         return arrayList;
     }

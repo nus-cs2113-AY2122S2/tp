@@ -85,8 +85,8 @@ public class ModuleListStorageTest {
                 assertEquals(list.get(i).getModularCredit(), moduleList.get(i).getModularCredit());
                 TaskList taskList1 = list.get(i).getTaskList();
                 TaskList taskList2 = moduleList.get(i).getTaskList();
-                assertEquals(taskList1.size(), taskList2.size());
-                for (int j = 0; j < taskList1.size(); j++) {
+                assertEquals(taskList1.getSize(), taskList2.getSize());
+                for (int j = 0; j < taskList1.getSize(); j++) {
                     assertEquals(taskList1.getTask(j).getTaskName(), taskList2.getTask(j).getTaskName());
                     assertEquals(taskList1.getTask(j).getTaskDescription(), taskList2.getTask(j).getTaskDescription());
                     assertEquals(taskList1.getTask(j).getWorkingTime(),

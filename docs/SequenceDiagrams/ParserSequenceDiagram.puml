@@ -4,7 +4,8 @@
 
 
 
-control Main as X
+
+
 box #beige
 participant ":ModHappyParser" as A
 participant ":XYZParser" as B
@@ -14,7 +15,7 @@ end box
 note right of B: XYZParser refers to a variety \n of command-specific parsers\n(e.g. AddParser for AddCommand)
 
 
-X -> A: parseCommand(userInput)
+[-> A: parseCommand(userInput)
 activate A
 A -> A: parseString(userInput)
 activate A
@@ -42,6 +43,6 @@ return XYZCommand
 return XYZCommand
 [<-- A: XYZCommand
 
-
+hide footbox
 
 @enduml

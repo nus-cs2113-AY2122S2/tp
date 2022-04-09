@@ -16,6 +16,10 @@ public class GpaCommand extends Command {
 
     private String result;
 
+    /**
+     * Calculates GPA based on currently stored module grades.
+     * @param moduleList List from which the grades are retrieved
+     */
     public void calculateGpa(ModuleList moduleList) throws ModHappyException {
         int totalMc = 0;
         double weightedSum = 0.0;

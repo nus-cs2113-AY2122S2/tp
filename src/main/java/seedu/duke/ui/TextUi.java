@@ -24,6 +24,7 @@ public class TextUi {
      * @return user input
      */
     public static String getUserCommand() {
+        out.print(StringConstants.COMMAND_PROMPT);
         return in.nextLine();
     }
 
@@ -45,21 +46,15 @@ public class TextUi {
      * Displays the welcome message.
      */
     public static void showHelloMessage() {
-        showMessage(StringConstants.HELLO_MESSAGE);
+        showMessage(StringConstants.MESSAGE_HELLO);
     }
 
     /**
      * Displays the goodbye message.
      */
     public static void showGoodByeMessage() {
-        showMessage(StringConstants.GOOD_BYE_MESSAGE);
+        showMessage(StringConstants.MESSAGE_GOODBYE);
     }
 
-    /**
-     * Displays the initialisation message.
-     */
-    public static void showInitFailedMessage() {
-        showMessage(StringConstants.INIT_FAILED_MESSAGE);
-    }
 
 }

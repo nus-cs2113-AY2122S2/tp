@@ -14,7 +14,6 @@ package storage {
         --
         + writeData(object: T, path: String): void
         + loadData(path: String): T
-        + createTargetFile(path: String): void
     }
 
     class "ABSTRACT\n JsonStorage" as JsonStorage <T extends Object> {
@@ -66,7 +65,11 @@ hide SaveCommand circle
 hide SaveCommand attributes
 hide SaveCommand methods
 
-Main--> Storage
-SaveCommand --> Storage
+ModHappyStorageManager --> Storage
+hide ModHappyStorageManager circle
+hide ModHappyStorageManager attributes
+hide ModHappyStorageManager methods
+Main..> ModHappyStorageManager
+SaveCommand ..> ModHappyStorageManager
 
 @enduml

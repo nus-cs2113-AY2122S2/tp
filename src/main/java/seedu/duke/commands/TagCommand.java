@@ -3,7 +3,6 @@ package seedu.duke.commands;
 import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
@@ -55,9 +54,6 @@ public class TagCommand extends Command {
             targetModule = moduleList.getGeneralTasks();
         } else {
             targetModule = moduleList.getModule(taskModule);
-            if (Objects.isNull(targetModule)) {
-                throw new NoSuchModuleException();
-            }
         }
         switch (tagOperation) {
         case ADD_TAG:
