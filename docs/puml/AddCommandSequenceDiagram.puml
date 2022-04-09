@@ -2,39 +2,39 @@
 !include Style.puml
 
 box AddCommand
-participant ":Parser" as Parser LOGIC_COLOR_T1
-participant "Command:AddCommand" as AddCommand LOGIC_COLOR_T1
+participant ":Parser" as Parser PARSER_COLOUR
+participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
 end box
 hide footbox
 
 Parser -> AddCommand: AddCommand.executeCommand()
-activate AddCommand
+activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> AddCommand: addInput,expenditureList,creditCardList, incomeList
-activate AddCommand
+activate AddCommand COMMANDS_COLOUR
 AddCommand --> AddCommand:
 deactivate AddCommand
 
 alt hasCreditCardFlag()
 AddCommand -> AddCommand: addCreditCard()
-activate AddCommand
+activate AddCommand COMMANDS_COLOUR
 AddCommand --> AddCommand:
 deactivate AddCommand
 
 
 else hasIncomeFlag()
 AddCommand -> AddCommand: addIncome()
-activate AddCommand
+activate AddCommand COMMANDS_COLOUR
 AddCommand --> AddCommand:
 deactivate AddCommand
 
 else else
 AddCommand -> AddCommand: addExpenditure()
-activate AddCommand
+activate AddCommand COMMANDS_COLOUR
 AddCommand --> AddCommand:
-deactivate AddCommand
+deactivate AddCommand COMMANDS_COLOUR
 AddCommand --> Parser:
-deactivate AddCommand
+deactivate AddCommand COMMANDS_COLOUR
 end
 
 @enduml
