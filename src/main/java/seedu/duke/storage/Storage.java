@@ -16,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +54,7 @@ public class Storage {
             String wholeJsonData = String.join("\n", jsonDataList);
             TypeToken<ArrayList<Item>> dataType = new TypeToken<ArrayList<Item>>(){};
             bufferTaskList = gson.fromJson(wholeJsonData, dataType.getType());
-        } catch (JsonParseException | DateTimeParseException e) {
+        } catch (JsonParseException e) {
             throw new InvMgrException(JSON_PARSING_ERROR,e);
         } catch (IOException e) {
             throw new InvMgrException(READ_FILE_IOERROR,e);
