@@ -1,7 +1,7 @@
 @startuml
 hide footbox
 
-participant "Unspecified" as none
+participant "Ui" as none
 participant ":AddLessonCommand" as Command
 participant ":Lesson" as Lesson
 participant ":MasterTimetable" as Master
