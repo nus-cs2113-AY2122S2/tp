@@ -13,34 +13,44 @@ Given below are my contributions to the project.
 
 <p></p>
 
-* **New Feature**: Added Money class to track each spending details.
+* **New Feature**: Added Money class
+  * Functionality: Allows tracking of items related to money.
 
 <p></p>
 
 * **New Feature**: Added MoneyList class to track a list of spending.
+  * Functionality: Stores money related items in a list to allow for aggregated tracking. 
 
 <p></p>
 
-* **New Feature**: Added Income class as an extension of Money class to track each income details.
+* **New Feature**: Added Income class
+  * Functionality: As an extension of Money class, Income class allows tracking of income item with greater details. 
 
 <p></p>
 
-* **New Feature**: Added IncomeList as an extension of MoneyList class to track a list of incomes.
-
-<p></p>
-
-* **New Feature**: Implemented search function to help user search through existing spending.
-
-<p></p>
-
-* **New Feature**: Implemented edit function for Income and Expenditure to help user search through existing spending.
+* **New Feature**: Added IncomeList 
+  * Functionality: As an extension of MoneyList class, IncomeList class allows for aggregated tracking 
+  of list of incomes with greater details. 
+  * Notable Additional Implementations:
+    * Edit:
+      * Allows for changes to tracked Income items as desired by user, such as its amount or descriptions.
+    * Find:
+      * Allows for user to search through tracked Income items for a specific descriptions or amount.
 
 <p></p>
 
 * **Enhancements to Existing Features**:
-    * Implemented class abstraction for Expenditure and ExpenditureList as well as additional functions.
-    * Implemented JUnit testing for Money, MoneyList, Income and IncomeList class and make it more defensive.
+    * Implemented class abstraction for Expenditure and ExpenditureList as well as additional attributes and functions:
+      * Notable Additional Implementations:
+          * Edit:
+              * Allows for changes to tracked Expenditure items as desired by user, such as its amount or descriptions.
+          * Find:
+              * Allows for user to search through tracked Expenditure items for a specific descriptions or amount.
+    * Implemented JUnit testing for Income and IncomeList class and make it more defensive:
+      * [#61](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/61/files),
+      * [#133](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/133/files),
     * Implemented additional JUnit testing for Expenditure and ExpenditureList class to cover additional implementations.
+      * [#133](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/133/files),
 
 <p></p>
 
@@ -56,6 +66,10 @@ Given below are my contributions to the project.
 
 * **Team-based Contribution**:
     * PRs reviewed (with non-trivial comments):
+      * <Placeholder>
+    * Managed Issues
+      * Created and assigned issues related to user stories for `v1.0`
+      * Created and assigned issues related to user stories for `v2.0`
 
 <p></p>
 
