@@ -86,7 +86,7 @@ public class TaskList {
         return task;
     }
 
-    //@author chooyikai
+    //@@author chooyikai
     public void setList(ArrayList<Task> list) {
         taskList = list;
     }
