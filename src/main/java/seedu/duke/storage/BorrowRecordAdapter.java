@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class BorrowRecordAdapter extends TypeAdapter<LocalDate> {
+public class BorrowRecordAdapter extends TypeAdapter<BorrowRecord> {
 
     private static final String BORROWER_NAME_FIELD = "borrowerName";
     private static final String END_DATE_FIELD = "endDate";
@@ -31,7 +31,6 @@ public class BorrowRecordAdapter extends TypeAdapter<LocalDate> {
             if (token.equals(JsonToken.NAME)) {
                 fieldname = reader.nextName();
             }
-
             if (START_DATE_FIELD.equals(fieldname)) {
                 startDateString = reader.nextString();
             }

@@ -48,7 +48,7 @@ public class Storage {
         ArrayList<Item> bufferTaskList;
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(BorrowRecord.class, new DateAdapter())
+                .registerTypeAdapter(BorrowRecord.class, new BorrowRecordAdapter())
                 .create();
         try {
             List<String> jsonDataList = Files.readAllLines(dataPath);
@@ -78,7 +78,7 @@ public class Storage {
         }
         try {
             Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(BorrowRecord.class, new DateAdapter())
+                    .registerTypeAdapter(BorrowRecord.class, new BorrowRecordAdapter())
                     .create();
 
             String serializedItems = gson.toJson(itemList);
