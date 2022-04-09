@@ -52,7 +52,7 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 
 #### Developer Guide
 * Added the sequence diagrams and workflow for [`Add an activity`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#add-an-activity),
-  [`Remove an activity`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#remove-an-activity)
+  [`Remove an activity`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#remove-an-activity),
   [`View a group`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#view-a-group) and
   [`List all groups`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#list-groups) sections of the Developer Guide.
 * Assisted in ensuring that diagrams were correct and followed the logic of the application.
