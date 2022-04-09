@@ -1,5 +1,8 @@
 package seedu.simplst;
 
+import org.json.simple.JSONObject;
+import seedu.simplst.jsonkeyconstants.OrderlinesKeys;
+
 /*
  * Specific good that is in the Order.
  * This will have its own quantity
@@ -50,5 +53,12 @@ public class Orderline extends Good {
 
     public int getId() {
         return 0;
+    }
+
+    public JSONObject serialize() {
+        JSONObject jo = super.serialize();
+        jo.put(OrderlinesKeys.isCheckedOff, this.isCheckedOff);
+        jo.put(OrderlinesKeys.quantityFulfilled, this.quantityFulfilled);
+        return jo;
     }
 }
