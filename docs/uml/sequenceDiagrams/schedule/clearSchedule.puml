@@ -22,17 +22,17 @@ activate newCommand COLOR_LOGIC
 
 newCommand -> DayList : clearDayPlan(userArgument)
 activate DayList COLOR_LOGIC
-create "Integer" AS int COLOR_LOGIC
-DayList -> int: parseInt(userArgument)
-DayList <-- int : dayNumber: int
 
-create InvalidScheduleException AS ise COLOR_LOGIC
-opt !isDayValid
-DayList -> ise : throw new InvalidScheduleException
-activate ise COLOR_LOGIC
-return
-deactivate ise
+ref over DayList
+Convert userArgument, dayNumber, from
+String to int data type
+(Method calls are not shown)
 end
+
+DayList -> DayList : isDayValid(dayNumber)
+activate DayList COLOR_LOGIC
+return :Boolean
+
 DayList -> DayList : clearPlan(dayNumber)
 activate DayList COLOR_LOGIC
 return
@@ -42,10 +42,10 @@ return dayName:String
 DayList -> UI : printClearedScheduleOnADay(dayName)
 deactivate DayList
 activate UI COLOR_UI
-UI--> WerkIt: Print successfully remove \nplan from schedule message
+UI--> newCommand: Print successfully remove \nplan from schedule message
 deactivate UI
 
-participant "fileManager:FileManager" as FileManager COLOR_STORAGE
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
 newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)
 activate FileManager COLOR_STORAGE
 ref over FileManager
@@ -55,6 +55,6 @@ file on user's system.
 end
 newCommand <-- FileManager
 deactivate FileManager
-
+return
 destroy newCommand
 @enduml

@@ -10,9 +10,9 @@ hide footbox
 
 participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
 participant "newCommand\n:ScheduleCommand" AS newCommand COLOR_LOGIC
-participant "ui:UI" AS UI COLOR_UI
 participant "dayList\n:DayList" AS DayList COLOR_LOGIC
-participant "fileManager:FileManager" as FileManager COLOR_STORAGE
+participant "ui:UI" AS UI COLOR_UI
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
 
 activate WerkIt COLOR_WERKIT
 ref over WerkIt
@@ -32,7 +32,7 @@ deactivate DayList
 
 newCommand -> UI : printNewScheduleCreatedMessage(newDay)
 activate UI COLOR_UI
-WerkIt <-- UI : Plan successfully added/updated message
+newCommand <-- UI : Plan successfully added/updated message
 deactivate UI
 
 newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)

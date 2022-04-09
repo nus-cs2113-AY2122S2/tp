@@ -845,16 +845,14 @@ the application will execute the `WorkoutList#listAllWorkout()` method to perfor
 **(Step 3)** If the workout list is empty, a message indicating the list is empty will be displayed to the user and the
 process of printing all workouts stored in the list is completed. 
 
-**(Steps 4 and 5)** To get each of the workouts stored in the `workoutList` object, `WorkoutList#getWorkoutFromIndexNum(index)` method 
-is called to obtain each of the `Workout` object. Each `Workout` object contains the exercise name as well as the 
+**(Steps 4 and 5)** To get each of the workouts stored in the `workoutList` object, `WorkoutList#getWorkoutFromIndexNum()` 
+method is called to obtain each of the `Workout` object. Each `Workout` object contains the exercise name as well as the 
 number of repetitions of that exercise set by the user. 
 
-**(Steps 6 to 8)** Upon obtaining the `Workout` object, `Workout#toString()` method is called to method is called to 
+**(Steps 6 to 8)** Upon obtaining the `Workout` object, `Workout#toString()` method is called to 
 obtain a `String` representation of the `Workout` object, which will thereafter be printed onto the terminal for the user
-to read.
-
-**(Step 9)** Lastly, a final message to indicate that all workouts in the workout list have been printed will be displayed via 
-the terminal.
+to read. A message to indicate that all workouts in the workout list have been printed will be displayed via 
+the terminal after all `Workout`objects have been printed.
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
@@ -1402,31 +1400,36 @@ Steps 2 and 3 are explained in greater details in the following sequence diagram
 
 ![updateScheduleDetails](uml/sequenceDiagrams/schedule/images/updateScheduleDetails.png)
 
-**(Steps 2.1 to 2.2)** The `DayList#updateDay()` method will be called to update/add a plan for a particular 
+<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls,
+and exception throws in `DayList#updatePlan()` have been omitted.</span>
+
+Firstly, the `DayList#updateDay()` method will be called to update/add a plan for a particular 
 day in the schedule stated by the user. It will first call the `String#split()` method 
 to separate out the `userArgument` given by the user. Upon splitting the whitespaces in `userArgument`, 
 it will check if the `userArgument` is valid. If it is invalid, an 
 `ArrayIndexOutOfBoundsException` would be thrown and the process terminates.
 
-**(Steps 2.5 to 2.8)** After splitting and checking the validity of `userArgument`, variables `userArgument[0]` representing
-`dayNumber` and `userArgument[1]` representing `planNumber`, the plan index of the plan stored in the `planList` are obtained. Both the 
-variables are then converted from data type `String` to `int`. In addition, there is a check executed on both the converted 
-`dayNumber` and `planNumber` to ensure that they are valid. This check is done so by calling the `DayList#isDayValid()` and
-`DayList#isPlanValid()` methods respectively.
+After splitting and checking the validity of `userArgument`, variables `userArgument[0]` representing
+`dayNumber` and `userArgument[1]` representing `planNumber`, the plan index of the plan stored in the `planList` 
+are obtained. Both the variables are then converted from data type `String` to `int`.
 
-**(Steps 2.9 to 2.12)** If the `dayNumber` or `planNumber` is not valid, an `InvalidScheduleException` would be thrown,
+**(Steps 2.1 to 2.4)**  A check executed on both the converted`dayNumber` and `planNumber` to ensure that they are valid. 
+This check is done so by calling the `DayList#isDayValid()` and`DayList#isPlanValid()` methods respectively. 
+If the `dayNumber` or `planNumber` is not valid, an `InvalidScheduleException` would be thrown,
 and the entire process of updating of a plan for a particular day in the schedule is aborted.
 
-**(Steps 2.13 to 2.16)** `PlanList#getPlanDisplayList()` method is called to find and return the HashMap value of the `planNumber`, 
+**(Steps 2.5 to 2.8)** `PlanList#getPlanDisplayList()` method is called to find and return the HashMap value of the `planNumber`, 
 `planToAddKey`, to be scheduled for a particular day. The `planToAddKey` is used to get the `Plan` object in the 
 `planList` by calling the `PlanList#getPlanFromKey()`.
 
-**(Steps 2.17 to 2.18)** Once the `Plan` object is retrieved, if there is no plan scheduled for the day, 
+**(Steps 2.9 to 2.10)** Once the `Plan` object is retrieved, if there is no plan scheduled for the day, 
 a new `Day` object is created and stored in the application.
 
-**(Steps 2.19 to 2.20)** However, if there is an existing plan scheduled for that particular day, the `Day` object that 
+**(Steps 2.11 to 2.12)** However, if there is an existing plan scheduled for that particular day, the `Day` object that 
 has already been created will then be updated to store the latest plan scheduled for the day. This process is done by
 calling `Day#setNewPlanForThisDay()` method.
+
+**(Step 3)** The `Day` object is successfully created.
 
 **(Steps 4 and 5)** After successfully creating/updating the `Day` object, the `UI#printNewSchedule()` method
 will be called to display the day and the corresponding plan scheduled for it via the terminal. The following is an
@@ -1495,7 +1498,10 @@ method is called, it will invoke a `for` loop to pad the plan name with whitespa
 by calling the `DayList#padWithSpaces()` method. This method will pad both the front and back of the
 plan name with whitespaces. The padding and plan name should not exceed 30 characters in total.
 
-**(Step 5)** Upon the successful execution of the `DayList#printSchedule()` method, the 7-day workout plan schedule will
+**(Steps 5 and 6)** To make the schedule more understandable `DayList#convertDayNumberToDay()` method will be called
+to convert the day number to its corresponding day name. For example, day number 1 will be converted to Monday.
+
+**(Step 7)** Upon the successful execution of the `DayList#printSchedule()` method, the 7-day workout plan schedule will
 be displayed on the console to the user. An expected outcome of the `schedule /list` command will be:
 
 ```
@@ -1544,36 +1550,39 @@ The following sequence diagram illustrates how the `schedule /clear` command wor
 <span class="info box">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
+<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls,
+and exception throws in `DayList#clearDayPlan()` have been omitted.</span>
+
 **(Step 1)** The program waits for the user's input, which in this case,
 is the `schedule /clear <day number>` command. An example of a valid command would be `schedule /clear 1`. This command 
 entered by the user is a `schedule` command, hence it is being executed by calling the `ScheduleCommand#execute()` method.
 
-**(Steps 2 to 6)** Since the command entered is `schedule /clear <day number>`, the `DayList#clearDayPlan()` method will
+**(Steps 2 to 4)** Since the command entered is `schedule /clear <day number>`, the `DayList#clearDayPlan()` method will
 be called. This method will first convert the `userArgument` to an `int` data type, after which it will call
 the `DayList#isDayValid()` method to check whether the day number entered by the user is valid. 
 If the day number falls within the range of 1 to 7 then it is considered a valid day, otherwise 
 an `InvalidScheduleException` would be thrown, and the entire process is aborted.
 
-**(Steps 7 and 8)** If the `dayNumber` is valid, the method `DayList#clearPlan()` will be called to remove the plan 
+**(Steps 5 and 6)** If the `dayNumber` is valid, the method `DayList#clearPlan()` will be called to remove the plan 
 scheduled on that day. The `Day` object that stores the plan details for the specified day in 
 the user command will be deleted.
 
-**(Steps 9 and 10)** After which, the `DayList#convertDayNumberToDay()` method will be called.
+**(Steps 7 and 8)** After which, the `DayList#convertDayNumberToDay()` method will be called.
 As the method name suggests, this method will convert the day number to its corresponding day name. 
 For example, day number 1 will be converted to Monday. The purpose of this method is to 
 make the success message to be displayed to the user more readable.
 
-**(Steps 11 and 12)** After the plan is successfully cleared for that indicated day, a success message of the process would be
-printed to the user through the terminal by calling the `UI#printClearedScheduleOnADay()` method. 
+**(Steps 9 and 10)** After the plan is successfully cleared for that indicated day, a success message of the process 
+would be printed to the user through the terminal by calling the `UI#printClearedScheduleOnADay()` method. 
 An example of a success message would be
 
 ```
 ----------------------------------------------------------------------
-Plan had been cleared for Monday.
+Plan has been cleared for Monday.
 ----------------------------------------------------------------------
 ```
 
-**(Step 13)** `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
+**(Step 11)** `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
 in the `dayList` into `schedule.txt` which is stored on the user's local filesystem. For more information
 on the file management, refer to this [section](#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
 
@@ -1601,6 +1610,9 @@ The following sequence diagram illustrates how the `schedule /clearall` command 
 <span class="info box">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
+<span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls,
+and exception throws in `DayList#clearall()` have been omitted.</span>
+
 **(Step 1)** The program waits for the user's input, which in this case,
 is the `schedule /clearall` command. This command entered by the user is a `schedule` command, 
 hence it is being executed by calling the `ScheduleCommand#execute()` method.
@@ -1611,20 +1623,20 @@ be called. This method will delete all the `Day` objects stored in the `dayList`
 **(Steps 3 and 4)** `DayList#clearPlan()` will be called 7 times in a `for` loop to 
 delete all the `Day` objects stored in the `dayList` array.
 
-**(Steps 5 and 6)** After all the plans are successfully cleared from the schedule, `UI#printClearedScheduleMessage()` method 
+**(Steps 6 and 7)** After all the plans are successfully cleared from the schedule, `UI#printClearedScheduleMessage()` method 
 will be called to print a success message of the process. This message would be printed to the user through the terminal. 
 An example of a success message would be:
 
 ```
 ----------------------------------------------------------------------
-Schedule had been cleared and reset.
+Schedule has been cleared and reset.
 There is no plan scheduled for any day.
 To add plan for any day, enter:
 schedule /update <day number [1-7]> <plan number>
 ----------------------------------------------------------------------
 ```
 
-**(Step 7)** Lastly, `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
+**(Step 8)** Lastly, `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
 in the `dayList` into `schedule.txt` which is stored on the user's local filesystem. 
 Since all `Day` objects are deleted, the `schedule.txt` file is essentially cleared. For more information on the file 
 management, refer to this [section](#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
@@ -2367,13 +2379,13 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                      | Command                | Expected result                      |
 |:-------------------------------|:-----------------------|:-------------------------------------|
 | Valid update schedule command. | `schedule /update 1 3` | Plan number 3 is schedule on Monday. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                     | Command                            | Expected result                                                                         |
 |:----------------------------------------------|:-----------------------------------|:----------------------------------------------------------------------------------------|
@@ -2390,13 +2402,13 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                    | Command          | Expected result                                      |
 |:-----------------------------|:-----------------|:-----------------------------------------------------|
 | Valid list schedule command. | `schedule /list` | List down all plans scheduled in the 7-day schedule. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                     | Command                    | Expected result                                                 |
 |:----------------------------------------------|:---------------------------|:----------------------------------------------------------------|
@@ -2408,13 +2420,13 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                      | Command             | Expected result                                                                   |
 |:-------------------------------|:--------------------|:----------------------------------------------------------------------------------|
 | Valid clear scheduled command. | `schedule /clear 1` | If there is a plan scheduled on Monday, it will be cleared and set to `rest day`. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                     | Command                       | Expected result                                                                 |
 |:----------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------|
@@ -2427,13 +2439,13 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                         | Command              | Expected result                             |
 |:----------------------------------|:---------------------|:--------------------------------------------|
 | Valid clear all schedule command. | `schedule /clearall` | All plans added to the schedule is removed. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                               | Command                        | Expected result                                                                                 |
 |:--------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------|
