@@ -9,7 +9,6 @@ import seedu.duke.ListContainer;
 import seedu.duke.exceptions.DuplicateCommandException;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.Ui;
-import seedu.duke.exceptions.UserDoesNotExistException;
 import seedu.duke.exceptions.EmptyNameException;
 import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.AssignmentMap;

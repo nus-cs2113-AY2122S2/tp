@@ -5,7 +5,13 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import seedu.duke.ListContainer;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidAgeException;
+import seedu.duke.exceptions.InvalidHousekeeperProfileException;
+import seedu.duke.exceptions.UnderAgeException;
+import seedu.duke.exceptions.OverAgeException;
+import seedu.duke.exceptions.DuplicateCommandException;
+import seedu.duke.exceptions.NameNotStringException;
 import seedu.duke.Ui;
 import seedu.duke.housekeeperlists.Housekeeper;
 import seedu.duke.housekeeperlists.HousekeeperList;
