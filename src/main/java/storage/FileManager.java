@@ -105,12 +105,12 @@ public class FileManager {
      * are also instantiated.
      */
     public FileManager(PlanList planList) {
-        String workingDirectory = System.getProperty(USER_WORKING_DIRECTORY_PROPERTY);
-        this.directoryPath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME);
-        this.exerciseFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, EXERCISE_FILENAME);
-        this.workoutFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, WORKOUT_FILENAME);
-        this.planFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, PLAN_FILENAME);
-        this.scheduleFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, SCHEDULE_FILENAME);
+        String workingDirectory = System.getProperty(PROPERTY_USER_WORKING_DIRECTORY);
+        this.directoryPath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY);
+        this.exerciseFilePath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY, NAME_EXERCISE_FILE);
+        this.workoutFilePath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY, NAME_WORKOUT_FILE);
+        this.planFilePath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY, NAME_PLAN_FILE);
+        this.scheduleFilePath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY, NAME_SCHEDULE_FILE);
 
         this.planList = planList;
 
