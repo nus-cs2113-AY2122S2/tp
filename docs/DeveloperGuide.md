@@ -54,7 +54,7 @@ This guide's purpose is to explain the internal workings of SplitLah, so that fu
 [Storage Component](#storage-component), [Parser Component](#parser-component) and [Command Component](#command-component)
 * Each component has its own section in this guide explaining them in detail.
 * This [diagram](#interaction-between-components) shows the inner workings of how each component interacts with each other.
-* SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands will not be explained in detail.
+* SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands are not explained in detail.
 * Please refer to the [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
 * Please refer to the [implementation section](#implementation) to find out how each command is designed and implemented in SplitLah.
 * Each command's section in this guide contains an API reference link encased in `code block` that brings you to the main source code responsible for executing the command.
@@ -151,7 +151,7 @@ A save file records user data related to SplitLah even after the application is 
 * If a save file is found, the `Storage` class loads data from it into the `Profile` object managed by the `Manager` object.
 * Else a new save file is created and an empty `Profile` object is created instead.
 
-When a command updates any attributes of the `Profile` object, the changes will be updated the save file. These commands are:
+When a command updates any attributes of the `Profile` object, the changes updated to the save file. These commands are:
 * `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand`
 * `ActivityCreateCommand`, `ActivityDeleteCommand`, `ActivityEditCommand`
 * `GroupCreateCommand`, `GroupDeleteCommand`, `GroupEditCommand`
@@ -483,7 +483,7 @@ The general workflow of the `activity /delete` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityDeleteCommand` object.
 3. `ActivityDeleteCommand#run` method is then invoked to run the `activity /delete` command.
-4. Once the command runs, `ActivityDeleteCommand#run` method will invoke `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
+4. Once the command runs, `ActivityDeleteCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
 5. The `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to delete is stored in.
     - If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
     - Else, the `Session` object that the activity is stored in is returned.
@@ -514,9 +514,9 @@ The general workflow of the `activity /list` command is as follows:
 3. `ActivityListCommand#run` method is then invoked to run the `activity /list` command.
 4. The list of activities are stored in a `Profile` object, hence `Manager#getProfile` is called.
 5. To retrieve the session containing the activity list from the `Profile` object, `Profile#getSession` is executed, returning a session containing all the activities to be listed.
-6. Once the session is retrieved, `ActivityListCommand` class will run `Session#getActivityListSummaryString`.
-   1. If the activity list in the session is empty, the Session class will return a `String` object containing an error message.
-   2. If it's not empty, a `String` object representing a table summarising the list of activities in the session will be returned. 
+6. Once the session is retrieved, `ActivityListCommand` class runs `Session#getActivityListSummaryString`.
+   1. If the activity list in the session is empty, the Session class returns a `String` object containing an error message.
+   2. If it's not empty, a `String` object representing a table summarising the list of activities in the session is returned. 
 7. Finally, the method `printlnMessageWithDivider` is called to print the message returned.
 
 ## Group Commands
@@ -621,7 +621,7 @@ The general workflow of the `group /list` command is as follows:
 * Comfortable using CLI applications.
 
 ### Value proposition
-SplitLah will help the user keep track of expenditures made during each group outing that they go on and help the user 
+SplitLah helps the user keep track of expenditures made during each group outing that they go on and help the user 
 calculate what transactions that they should make in order to ensure that everyone pays equally for the activities that 
 they engage in during the outings.
 
