@@ -1,8 +1,8 @@
 package seedu.duke.assets;
 
 import seedu.duke.exception.DuplicateEntryException;
-import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.exception.NotFoundException;
+import seedu.duke.exception.UserInputErrorException;
 
 public abstract class List {
 

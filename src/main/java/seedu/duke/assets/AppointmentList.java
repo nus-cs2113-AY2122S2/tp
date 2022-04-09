@@ -39,16 +39,21 @@ public class AppointmentList extends List {
 
     @Override
     public void add(String[] addAppointmentParameters) throws DuplicateEntryException {
-        int numberOfAppointmentsBefore = appointments.size();
-
+        final int numberOfAppointmentsBefore = appointments.size();
         String patientNric = addAppointmentParameters[0];
         PatientFinder patientFinder = new PatientFinder();
         ArrayList<Patient> foundPatient = patientFinder.findPatientByNric(referencePatientList.getList(), patientNric);
+        if (foundPatient == null) {
+            throw new DuplicateEntryException("Patient NRIC corrupted");
+        }
         String patientName = foundPatient.get(0).getPatientName();
 
         String doctorNric = addAppointmentParameters[1];
         DoctorFinder doctorFinder = new DoctorFinder();
         ArrayList<Doctor> foundDoctor = doctorFinder.findDoctorByNric(referenceDoctorList.getList(), doctorNric);
+        if (foundDoctor == null) {
+            throw new DuplicateEntryException("Doctor NRIC corrupted");
+        }
         String doctorName = foundDoctor.get(0).getFullName();
 
         String appointmentDate = addAppointmentParameters[2];
@@ -133,7 +138,6 @@ public class AppointmentList extends List {
 
     public void findById(String[] parameters) {
         try {
-            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentById(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -143,7 +147,6 @@ public class AppointmentList extends List {
 
     public void findByPatientName(String[] parameters) {
         try {
-            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByPatientName(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -153,7 +156,6 @@ public class AppointmentList extends List {
 
     public void findByPatientNric(String[] parameters) {
         try {
-            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByPatientNric(appointments, (parameters[1]));
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -163,7 +165,6 @@ public class AppointmentList extends List {
 
     public void findByDoctorName(String[] parameters) {
         try {
-            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByDoctorName(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -173,7 +174,6 @@ public class AppointmentList extends List {
 
     public void findByDoctorNric(String[] parameters) {
         try {
-            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByDoctorNric(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
@@ -183,19 +183,10 @@ public class AppointmentList extends List {
 
     public void findByAppointmentDate(String[] parameters) {
         try {
-            checkDateInDetails();
             this.returnedFinderArray = AppointmentFinder.findAppointmentByDate(appointments, parameters[1]);
             createArrayOfFoundAppointments();
         } catch (NullPointerException e) {
             UI.printParagraph("Appointment with given date doesn't exist. Please try again!");
-        }
-    }
-
-    public void checkDateInDetails() {
-        for (Appointment appointment : appointments) {
-            if (!appointment.appointmentDetails.contains(appointment.appointmentDate)) {
-                appointment.updateAppointmentDetails();
-            }
         }
     }
 

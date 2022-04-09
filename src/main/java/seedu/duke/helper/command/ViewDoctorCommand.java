@@ -17,7 +17,7 @@ public class ViewDoctorCommand extends Command {
         super(parameterArray);
     }
 
-     /*
+    /*
      * Method that takes in a DoctorList that needs to be acted on.
      * parameterArray should be NULL. Prints list of existing Doctors.
      * @ param list a List object - should be an instance of DoctorList
@@ -28,7 +28,7 @@ public class ViewDoctorCommand extends Command {
         if (parameterArray == null) {
             doctorList.view();
         } else {
-            doctorList.view(parameterArray[0]);
+            throw new UserInputErrorException("View Doctor Command only accepts null parameters!");
         }
         return Status.VIEW_SUCCESS;
     }

@@ -17,7 +17,7 @@ public class ViewAppointmentCommand extends Command {
         super(parameterArray);
     }
 
-     /*
+    /*
      * Method that takes in an AppointmentList that needs to be acted on.
      * parameterArray should be NULL. Prints list of existing Appointments.
      * @ param list a List object - should be an instance of AppointmentList

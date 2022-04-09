@@ -68,7 +68,7 @@ public class PatientList extends List {
         CommandLineTable patientTable = new CommandLineTable();
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                "DateAdmission");
+                "DateRegistration");
         patientTable.addRow(patient.getPatientNric(), patient.getPatientName(),
                 String.valueOf(patient.getPatientAge()),
                 patient.getPatientAddress(), String.valueOf(patient.getPatientGender()),
@@ -84,7 +84,7 @@ public class PatientList extends List {
         //st.setRightAlign(true);//if true then cell text is right aligned
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                "DateAdmission");
+                "DateRegistration");
         if (patients.size() == 0) {
             throw new UserInputErrorException("Patient list is empty, please add patient");
         }
@@ -201,7 +201,7 @@ public class PatientList extends List {
             this.returnedFinderArray = PatientFinder.findPatientByDateAdmission(patients, parameters[1]);
             displayFoundPatientList();
         } catch (NullPointerException e) {
-            UI.printParagraph("Patient with given admission date doesn't exist. Please try again!");
+            UI.printParagraph("Patient with given registration date doesn't exist. Please try again!");
         }
     }
 
@@ -214,7 +214,7 @@ public class PatientList extends List {
 
                 findPatientTable.setShowVerticalLines(true);
                 findPatientTable.setHeaders("Nric", "Full Name", "Age", "Address", "Gender", "Dob",
-                        "Admission Date");
+                        "Registration Date");
                 findPatientTable.addRow(returnedFinderArray.get(i).getNric(),
                         returnedFinderArray.get(i).getFullName(),
                         String.valueOf(returnedFinderArray.get(i).getAge()),
