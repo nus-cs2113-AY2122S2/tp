@@ -1,8 +1,6 @@
 # BEGIN EXPENDITURES
- "amount": "3.4"  "description": "Chicken Cice"  "paymentMethod": "Cash"  "time": "01/04/2022"  "category": "Food" 
 # END EXPENDITURES
 # BEGIN CREDIT CARDS
- "totalExpenditure": "0.0"  "monthlyCardLimit": "500.0"  "nameOfCard": "OCBC"  "cashback": "1.5" 
 # END CREDIT CARDS
 # BEGIN INCOME SOURCES
 # END INCOME SOURCES

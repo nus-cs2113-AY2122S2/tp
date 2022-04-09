@@ -257,7 +257,7 @@ public class ListCommand extends Command {
         } else {
             throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
                     + "Use 'list /e' to view your current list of expenditure\n"
-                    + "Use 'list /cc' to view your current list of stored credit cards"
+                    + "Use 'list /cc' to view your current list of stored credit cards\n"
                     + "Use list /i to view your current list of incomes");
         }
     }

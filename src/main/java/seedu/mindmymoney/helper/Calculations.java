@@ -29,7 +29,7 @@ public class Calculations {
     /**
      * Calculates the total expenditure in a given month.
      *
-     * @param input           The month to calculate expenditure for.
+     * @param input The month to calculate expenditure for.
      * @param expenditureList The list containing all expenditures to search for.
      * @throws MindMyMoneyException When findItemsInList throws MindMyMoneyException.
      */
@@ -47,7 +47,7 @@ public class Calculations {
         if (sumOfExpenditure == 0.0) {
             throw new MindMyMoneyException("Date not found in the list! Do check your input");
         }
-        System.out.println("Total expenditure in " + input + " is $" + sumOfExpenditure + ".");
+        System.out.println("Total expenditure in " + input + " is $" + String.format("%.2f", sumOfExpenditure) + ".");
         displayExpenditureBreakdown(foundItems, sumOfExpenditure);
     }
 
@@ -112,7 +112,7 @@ public class Calculations {
         ArrayList<Expenditure> foundCategoryTypeItems = new ArrayList<>();
         foundCategoryTypeItems = findMatchingCategoryInArraylist(categoryType, foundItems, foundCategoryTypeItems);
         float sumOfCategoryType = 0;
-        for (Expenditure item: foundCategoryTypeItems) {
+        for (Expenditure item : foundCategoryTypeItems) {
             sumOfCategoryType += item.getAmount();
         }
         sumOfCategoryType = formatFloat(sumOfCategoryType);

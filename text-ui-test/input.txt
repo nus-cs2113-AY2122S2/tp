@@ -1,0 +1,7 @@
+add /e /pm cash /c Food /d test /a 1234.681 /t
+add /e /pm cash /c Food /d test /a 1234 /t  (space)
+add /e /pm cash /c Food /d test /a 1234 /t oko
+add /e /pm cash /c Food /d test /a 1234 /t 1234
+add /e /pm cash /c Food /d \"); System.out.println("helo"); System.out.println("asd" /a 1234 /t 01/01/1900
+add /e /pm cash /c Food /d 欠扁 /a 1234 /t 01/01/1900
+add fuck this bug /e fuck this bug /pm cash /c Food /d Hello World /a 1234 /t 01/01/1900

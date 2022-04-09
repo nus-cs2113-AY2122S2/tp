@@ -45,7 +45,7 @@ class CalculateInputCommandTest {
         setUp();
         new CalculateInputCommand("/epm 30/03/2022", user).executeCommand();
         tearDown();
-        String expectedOutput = "Total expenditure in 30/03/2022 is $330.0." + System.lineSeparator()
+        String expectedOutput = "Total expenditure in 30/03/2022 is $330.00." + System.lineSeparator()
             + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
             + "-----------------------------------------------" + System.lineSeparator()
             + "FOOD:          $$$$ [6.06%]" + System.lineSeparator()
@@ -78,7 +78,7 @@ class CalculateInputCommandTest {
         setUp();
         new CalculateInputCommand("/epm 03/2022", user).executeCommand();
         tearDown();
-        String expectedOutput = "Total expenditure in 03/2022 is $300.0." + System.lineSeparator()
+        String expectedOutput = "Total expenditure in 03/2022 is $300.00." + System.lineSeparator()
             + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
             + "-----------------------------------------------" + System.lineSeparator()
             + "FOOD:           [0.0%]" + System.lineSeparator()
@@ -110,7 +110,7 @@ class CalculateInputCommandTest {
         setUp();
         new CalculateInputCommand("/epm 2022", user).executeCommand();
         tearDown();
-        String expectedOutput = "Total expenditure in 2022 is $300.0." + System.lineSeparator()
+        String expectedOutput = "Total expenditure in 2022 is $300.00." + System.lineSeparator()
             + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
             + "-----------------------------------------------" + System.lineSeparator()
             + "FOOD:           [0.0%]" + System.lineSeparator()
