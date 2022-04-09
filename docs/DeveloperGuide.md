@@ -40,6 +40,17 @@ and the application.
 
 ### Storage
 
+#### Class diagram:
+
+![](images/StorageClass.png)
+
+> 💡 **Note:** Some methods and attributes of `TaskList` are omitted here for simplicity
+
+The storage component
+- Can save the tasks in a `TaskList` to a file in JSON format
+- Can load a JSON file to restore a previously saved tasks
+- Relies on the `StorageParser` class to understand the content of a JSON file
+
 Storage component consists `Storage` and `StorageParser` classes.
 `Storage` class handles loading, writing and saving
 data to and from a JSON file, such that users' data will be saved automatically.
@@ -59,6 +70,62 @@ Timetable component consists of `Timer`, `Stopwatch`, `Countdown`, `TimerParser`
 
 ## Design & implementation
 
+### Task Implementation
+Sherpass provides two different ways to add,delete and edit tasks. The `/repeat` option in commands allows users to add 
+recurring tasks (e.g. Weekly classes or meetings). Without the `/repeat` option, commands will only affect a single task.
+
+- Both recurring tasks and non-recurring tasks belongs to `Task` class which are stored
+in a `TaskList` object that is created when the program starts.
+- Recurring tasks shares a common identifier so that commands on a recurring task can identify which tasks to 
+operate on.
+
+![classdiagram](images/TaskClass.png)
+
+#### Editing tasks
+The edit command is handled by the `EditCommand` class, and it allows users to edit 1 or more occurrences of a task.
+
+If the edit command contains the `/repeat` option, the specified task
+and all its future occurrence will be edited. 
+
+The general procedure for editing a task with the `/repeat` option is as follows:
+1. Get all tasks that have the same identifier and has a later date than the specified task.
+2. Copy the current task list into a temporary list
+3. Remove all affected tasks from the temporary list
+4. Loop through the affected tasks
+   1. Update the task with the new values
+   2. Check for any clashes with the temporary list
+   3. Add the updated task into the temporary list
+5. Use the temporary list as the actual list
+
+The sequence diagram of `execute()` in `EditCommand` class is shown here:
+
+![executesequencediagram](images/EditCommandSD.png)
+
+The reference frame for `editRepeatedTasks()` in `TaskList` is shown here:
+
+![editrepeatedtasksequencediagram](images/EditRepeatedTaskSD.png)
+
+The sequence diagram for `editSingleTask()` in `TaskList` is omitted as it is similar to how recurring tasks are edited.
+
+##### Using offsets to calculate new dates
+
+The reason why the new dates are calculated using an offset instead of giving a date is because
+of the following scenario.
+
+1. Assume the user has a recurring task on 6th,7th and 8th June
+
+![offset1](images/offset1.png)
+2. The user deletes the task on 7th June
+3. The user edits the task happening on 6th June to be on 10th June.
+
+|        | Not using offset               | Using offset                   |
+|--------|--------------------------------|--------------------------------|
+| Result | ![offset2](images/offset2.png) | ![offset3](images/offset3.png) |
+
+By not using offsets, the gap between task 1 and 2 is lost. Hence, the decision to use offset to preserve such
+details was chosen even though it would make implementation slightly more complicated.
+
+
 ### Study Session Implementation
 
 The study session consists of 4 main components:
@@ -66,7 +133,7 @@ The study session consists of 4 main components:
 - TimerParser class
 - StudyCommand class
 - TimerLogic class
-- Abstract Timer class, Countdown class and Stopwatch class 
+- Abstract [Timer](#glossary) class, [Countdown](#glossary) class and [Stopwatch](#glossary) class 
 
 The `TimerParser` component
 - Parses user inputs in the main session and the study session
@@ -111,20 +178,25 @@ keeps track of time elapsed rather than time remaining.
 Given below is an example usage scenario when the user enters the study session, starts a countdown timer, then stops 
 the timer.
 
-Step 1. The user executes the `study` command and enters the study session through the main `Parser` component, which 
+Step 1. The user inputs the `study` command through `Ui` and enters the study session through the main `Parser` 
+component, which 
 executes the `StudyCommand`. `StudyCommand` then initialises an instance of `TimerLogic`, which handles the execution
-and logic of user commands during the study session, while the `StudyCommand` accepts the user’s input when the 
+and logic of user commands during the study session, and initialises `Ui` accepts the user’s input when the 
 user is in the study session. `TimerParser` parses user inputs (commands) related to `Timer`.
+
+Sequence diagram for `StudyCommand` for receiving input from `Ui`:
+
+![TimerInputSD](https://user-images.githubusercontent.com/69501969/162566570-9b9219dd-858e-409b-b655-0b06d71e5e7d.png)
 
 Sequence diagram for `Timer` when user starts and stops a timer:
 
-![TimerClassSD](https://user-images.githubusercontent.com/69501969/160768104-fa7e06e3-1be8-4387-b75d-ae4e79bca5b7.png)
-
+![TimerClassSD](https://user-images.githubusercontent.com/69501969/162565061-146f1c9d-3e69-4c75-8d49-2eb5e5ccab17.png)
 The diagram above depicts the process when user calls start and stop (in step 2 and 3 below). All the methods
 called by Timer are in parallel with other commands, since `Timer` is in a separate thread. For simplicity’s
-sake, parallel frames for the remainder of methods called by `Timer` are omitted.
+sake, `Countdown-update()` methods are omitted in step 3 to reduce clutter.
 
-Step 2. The user executes `start 1` command to start a 30-minute timer. The input goes through `StudyCommand`, 
+Step 2. The user inputs `start 1` command to start a 30-minute timer. The input is received through `Ui` and passed
+to `StudyCommand`, 
 where the `TimerParser` is called to parse the command. After parsing, `TimerParser` calls the method corresponding to 
 the user’s command (`start`) in `TimerLogic`. `TimerLogic` then handles the logic and initialises an instance of
 `Countdown` (spawn a thread). `Countdown` then automatically updates itself while waiting for the user to issue 
@@ -132,8 +204,8 @@ commands.
 
 Step 3. The user executes the `stop` command to stop the timer. The same process is followed by using `TimerParser` to
 parse the command in the study mode, which calls on the respective `callStopTimer` method in `TimerLogic`. Within the
-`callStopTimer` method is a call to a method in `Countdown` to stop the timer. Control goes back to the user for 
-further commands.
+`callStopTimer` method is a call to a method in `Countdown` to stop the timer. Control goes back to the `StudyCommand`
+to receive further inputs from the user.
 
 #### Design considerations for Timer class
 - Current implementation: Create `Timer` from scratch, using the sleep function of threads to keep 
@@ -238,47 +310,33 @@ the program.
 ### Storage Implementation
 #### Loading saved files
 
-Class diagram of Storage:
-
-![](images/StorageClass.png)
-
-(_Note: some methods and attributes of `TaskList`,`Ui` and `Parser` are omitted here_)
-
-The storage component
-- Can save the content of a `TaskList` to a file in JSON format
-- Can load a JSON file to restore a previously saved `TaskList`
-- Relies on the `Parser` class to understand the content of a JSON file
-- Communicates with the user through the `Ui` class
-
 The loading of a save file is done with the function
 
-`Storage#load()` - Loads a saved JSON file and returns an ArrayList of task
+`load()` in `Storage` class - Loads a saved JSON file and returns an ArrayList of task
 
 The path of the JSON file is provided as a parameter in the constructor of `Storage` hence 
-there is no need for any parameters in the `Storage#load()`. Since a save file will be created in the 
+there is no need for any parameters in the `load()` function. Since a save file will be created in the 
 constructor of `Storage` if no such file exists, there should not be any issue with a missing save file.
 
 The save file has the following fields:
-- `identifier`: A randomly generated number given to a task. Recurring tasks share the same identifier.
-- `index`: The index of the task in the array list
+- `identifier`: A randomly generated number given to a task. A set of recurring tasks share the same identifier.
 - `description`: Description of the task
-- `status`: If the task is completed or not (`'X'` indicates completion, empty string otherwise)
+- `status`: If the task is completed or not (`'X'` indicates completion, `-` otherwise)
 - `do_date_start`: The start date and time of the task (d/M/yyyy HH:mm format)
 - `do_date_end`: The end date and time of the task (d/M/yyyy HH:mm format)
-- `by_date`: The due date of the task (d/M/yyyy format)
-- `frequency`: How often the task repeats (`DAILY`,`WEEKLY`,`MONTHLY`,`NULL`)
+- `by_date`: The due date of the task (d/M/yyyy HH:mm format) 
 
-The sequence diagram of `Storage#load()` is shown here:
+The sequence diagram of `load()` is shown here:
 ![](images/StorageLoadSD.png)
 
-In the event where the save file cannot be parsed by `JSONObject` (i.e. the format of the file is incorrect) 
-or if there are missing fields in a task, the function `Storage#handleCorruptedSave()`
-will be called. The user will get to choose to create a new save file or exit the program for manual inspection.
-The file error will also be displayed to the user.
+> 💡 **Note:** The TaskList is saved to disk at the end to ensure consistency
 
-The sequence diagram of `Storage#handleCorruptedSave()` is shown here:
+`load()` will throw exceptions in the following scenarios
+1. The content of the save file cannot be parsed by `JSONObject` (i.e. the format of the file is incorrect)
+2. There are missing fields for a task
+3. There are tasks which have clashing date and times
 
-![](images/StorageCorruptedSD.png)
+In such scenarios, the user will get to choose to create a new save file or exit the program for manually edit the file.
 
 #### Design considerations for the format of the save file
 - JSON (current choice)
@@ -316,7 +374,7 @@ to block out pockets of time for studying, so that they can better focus during 
 | v1.0    | user     | be able to pause, stop and resume the study timer | go for a toilet/snack break                |
 | v2.0    | user     | see my timetable of tasks and events              | have a better picture of my schedule       |
 | v2.0    | user     | be able to mark my tasks as done in study session |                                            |
-| v2.0    | user     | add recurring tasks                               | enter my recurring tutorials and lectures  |
+| v2.0    | user     | manage recurring tasks                            | enter my recurring tutorials and lectures  |
 | v2.0    | user     | click a button to interact with the study timer   | interact with the timer more naturally     |
 | v2.1    | user     | delete all my expired/completed tasks at once     |                                            | 
 
@@ -327,8 +385,23 @@ to block out pockets of time for studying, so that they can better focus during 
 
 ## Glossary
 
-- To be updated
+* *Timer* - Refers to something which can keep track of time. (e.g. `Countdown` and `Stopwatch` are timers)
+* *Countdown* - Refers to a countdown timer, where it counts down from a specified time (e.g. 30 seconds) to 0 when the
+countdown timer is started.
+* *Stopwatch* - Refers to a stopwatch timer, where it records time elapsed from the moment the stopwatch is started.
 
 ## Instructions for manual testing
 
-- To be updated
+### Task managements
+
+| Test cases                                    | Commands                                                                                                                                                                                    | Expected result                                  |
+|-----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| Adding and editing tasks                      | `add task1 /do 8/8/2023 /start 13:00 /end 14:00`<br/>`add task2 /do 8/8/2023 /start 14:00 /end 15:00`<br/>`edit 1 /start 12:00 /end 13:00`<br/>`show all`                                   | Tasks are successfully added                     |
+| Adding and editing recurring tasks            | `add task1 /do 8/8/2023 /start 13:00 /end 14:00 /repeat weekly`<br/>`show all`<br/>`edit 1 /start 12:00 /bydate 8/8/2024 /bytime 23:59 /repeat`                                             | Tasks are successfully added                     |
+| Adding clashing tasks                         | `add task1 /do 8/8/2023 /start 13:00 /end 14:00`<br/>`add task2 /do 8/8/2023 /start 13:00 /end 15:00`                                                                                       | Error message listing clashing tasks             |
+| Editing recurring tasks                       | `add task1 /do 8/8/2023 /start 13:00 /end 14:00 /repeat weekly`<br/>`show all`<br/>`edit 5 task2 /start 00:00 /end 23:00 /repeat`<br/>`edit 1 task3 /bydate 8/8/2024 /bytime 23:59 /repeat` | Two sets of recurring tasks, `task2` and `task3` |
+| Deleting some occurrences of a recurring task | `add task1 /do 8/8/2023 /start 13:00 /end 14:00 /repeat weekly`<br/>`show all`<br/>`delete 2`<br/>`delete 5`<br/>`show all`                                                                 | The tasks on 15/8/2022 and 12/9/2022 are deleted |
+| Invalid index when deleting                   | `delete foo`                                                                                                                                                                                | Invalid index error message                      |
+
+
+

@@ -1,0 +1,20 @@
+@startuml
+
+ hide footbox
+ participant StudyCommand as ":StudyCommand"
+ participant Ui as "ui:Ui"
+
+ activate StudyCommand
+ StudyCommand -> Ui
+ activate Ui
+
+ Ui -> Ui: readCommand()
+ activate Ui
+ Ui --> Ui
+ deactivate Ui
+
+ Ui -> StudyCommand: userInput
+ deactivate Ui
+ deactivate StudyCommand
+
+ @enduml

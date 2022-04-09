@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+class Task {
+    -identifier:Integer
+    -description:String
+    -isDone:boolean
+    -byDateTime:LocalDateTime
+    -doOnStartDateTime:LocalDateTime
+    -doOnEndDateTime:LocalDateTime
+    +Task(identifier:Integer, description:String, byDateTime:LocalDateTime,
+    doOnStartDate:LocalDateTime, doOnEndDateTime:LocalDateTime)
+    +editTask(identifier:Integer, description:String, startDateOffset:long, endDateOffset:long, byDateOffset:long):void
+}
+
+class TaskList {
+    -tasks:ArrayList<Task>
+    -identifierList:HashSet<Integer>
+    +getTask(index: Integer):Task
+    +addTask(newTask: Task)
+    +removeTask():void
+    +editSingleTaskContent():void
+    +editRepeatedTasks():void
+}
+
+TaskList ..> Task
+@enduml
