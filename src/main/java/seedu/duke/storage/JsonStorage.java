@@ -2,12 +2,14 @@ package seedu.duke.storage;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
 import seedu.duke.exceptions.FileCreateFailException;
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.UnknownException;
 import seedu.duke.exceptions.WriteException;
 
 public abstract class JsonStorage<T extends Object> implements Storage<T> {
@@ -47,8 +49,10 @@ public abstract class JsonStorage<T extends Object> implements Storage<T> {
             targetFile.getParentFile().mkdirs();
             targetFile.createNewFile();
             return;
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new FileCreateFailException();
+        } catch (Exception e) {
+            throw new UnknownException(e.toString());
         }
     }
 

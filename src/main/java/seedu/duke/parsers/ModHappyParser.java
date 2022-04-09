@@ -60,7 +60,6 @@ public class ModHappyParser extends Parser {
         } catch (ModHappyException e) {
             throw new UnknownCommandException(userInput);
         } catch (Exception e) {
-            System.out.println(e);
             throw new UnknownCommandException(userInput);
         }
     }

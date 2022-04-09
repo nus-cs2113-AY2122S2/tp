@@ -70,7 +70,6 @@ public class TaskDuration {
     }
 
 
-    // Intentionally implement the parse method independently here, because later will refactor the command parser.
     private HashMap<String, String> parseDurationString(String durationString) throws ModHappyException {
         Pattern commandPattern = Pattern.compile(DURATION_STRING_FORMAT);
         Matcher matcher = commandPattern.matcher(durationString.trim());
@@ -78,12 +77,8 @@ public class TaskDuration {
         if (!matcher.matches()) {
             throw new WrongDurationFormatException();
         }
-        try {
-            parserDurationString.put(DURATION_UNIT_GROUP_WORD, matcher.group(DURATION_UNIT_GROUP_WORD).trim());
-            parserDurationString.put(DURATION_GROUP_WORD, matcher.group(DURATION_GROUP_WORD).trim());
-        } catch (Exception e) {
-            throw new WrongDurationFormatException();
-        }
+        parserDurationString.put(DURATION_UNIT_GROUP_WORD, matcher.group(DURATION_UNIT_GROUP_WORD).trim());
+        parserDurationString.put(DURATION_GROUP_WORD, matcher.group(DURATION_GROUP_WORD).trim());
         return parserDurationString;
     }
 
