@@ -33,7 +33,4 @@ public class ListCurrentBorrowingsCommandTest {
         ListCurrentBorrowingsCommand c = new ListCurrentBorrowingsCommand(borrowerName);
         c.execute(CommandStubs.TEST_ITEM_LIST_WITH_RECORDS, ui);
     }
-
-
-
 }

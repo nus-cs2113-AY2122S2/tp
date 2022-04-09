@@ -57,8 +57,7 @@ public class BorrowCommand extends Command {
         Item item = itemList.addBorrowRecord(itemIndex, newRecord);
         ui.showMessages("Item has been successfully borrowed!",
                 "Name of Item: " + item.getName(),
-                "Name of Borrower: " + newRecord.getBorrowerName(),
-                "Borrow Duration: " + newRecord.getBorrowDuration());
+                newRecord.toString());
     }
 
     /**

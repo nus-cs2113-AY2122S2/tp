@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class UiStub extends Ui {
 
-    private Set<String> outputMessages;
+    private static Set<String> outputMessages;
 
     public UiStub() {
         super();
@@ -29,4 +29,5 @@ public class UiStub extends Ui {
     public Set<String> getMessages() {
         return this.outputMessages;
     }
+
 }
