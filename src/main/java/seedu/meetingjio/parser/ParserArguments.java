@@ -80,7 +80,7 @@ public class ParserArguments {
     /**
      * Get the attributes and their values from the arguments.
      *
-     * @return Map<String, String> Attributes map
+     * @return Attributes map
      * @throws MissingParameterException if there's missing parameters
      * @throws ExtraParametersException if there's extra parameters     
      */
