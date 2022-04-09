@@ -101,6 +101,12 @@ public class Manager {
             status = command.execute(storage.medicines);
             break;
         case "add appointment":
+            Command checkIfPatientExists = Parser.checkIfPatientExists(parameters);
+            checkIfPatientExists.execute(storage.patients);
+
+            Command checkIfDoctorExists = Parser.checkIfDoctorExists(parameters);
+            checkIfDoctorExists.execute(storage.doctors);
+
             command = Parser.parseAddAppointment(parameters);
             status = command.execute(storage.appointments);
             break;
@@ -130,6 +136,17 @@ public class Manager {
             break;
         case "find medicine":
             command = Parser.parseFindMedicine(parameters);
+            status = command.execute(storage.medicines);
+            break;
+        case "dispense medicine":
+            command = Parser.parseDispenseMedicine(parameters);
+
+            Command helperCommand = Parser.parseCheckForPatientAppointment(parameters);
+            helperCommand.execute(storage.appointments);
+            helperCommand = Parser.parseCheckMedicineStock(parameters);
+            helperCommand.execute(storage.medicines);
+
+            command.execute(storage.appointments);
             status = command.execute(storage.medicines);
             break;
         case "help":

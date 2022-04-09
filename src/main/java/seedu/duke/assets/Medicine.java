@@ -6,10 +6,10 @@ public class Medicine {
     private int dosage; //in milligrams
     private String expiry;
     private String sideEffects;
-    private int quantity;
+    protected int quantity;
 
     public Medicine(String medicineId, String medicineName, int dosage, String expiry,
-                    String sideEffects, int quantity) {
+            String sideEffects, int quantity) {
         this.medicineId = medicineId;
         this.medicineName = medicineName;
         this.dosage = dosage;

@@ -15,6 +15,7 @@
   * [Deleting](#deleting-delete)
   * [Editing](#editing-edit)
   * [Finding](#findingfind)
+  * [Additional Features]()
   * [Saving](#saving)
     * [Saved Data](#saving)
     * [Corrupt Files](#corrupt-files)
@@ -40,7 +41,7 @@ workings behind HALPMI.
 
 ### How to read the Guide?
 The User Guide is structured in a way that it is straight-forward and has a logical flow. Hence it should be easy for any User
-like you to get started with HALPMI immediately. 
+like you to get started with HALPMI immediately.
 
 Before reading, it is noteworthy to understand some formats and keywords used in this Guide for better clarity.
 * Command - Command refers to the text input that you will be providing on the CLI as and when prompted by HALPMI.
@@ -55,7 +56,7 @@ command.
 
 ### Setting Up Java
 
-Firstly you need to have Java 11 or above installed in your computer. If you are not sure on how to check if you have
+Firstly, you need to have Java 11 or above installed in your computer. If you are not sure on how to check if you have
 Java 11 installed on your computer, you can refer to [Check Java](https://www.howtogeek.com/717330/how-to-check-your-java-version-on-windows-10/).
 
 If you do not have Java already installed...
@@ -96,7 +97,7 @@ To add a doctor there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`
+Format: `add doctor /info [nric], [name], [age], [gender], [address], [DOB], [Specialisation]`
 
 Example: `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
@@ -114,7 +115,7 @@ To add a patient there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`
+Format: `add patient /info [nric], [name], [age], [gender], [address], [DOB], [DOA]`
 
 Example: `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
@@ -122,7 +123,7 @@ Example: `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12
 
 To add a new medicine into your application you can use the `add medicine` command when prompted by HALPMI for your input.
 To add a medicine there are some parameters that you would have to provide:
-1. Batch ID
+1. Medicine ID
 1. Medicine Name
 2. Dosage
 3. Expiry Date
@@ -131,28 +132,25 @@ To add a medicine there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`
+Format: `add medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`
 
-Example: `add medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`
+Example: `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
 
 #### ADD APPOINTMENT
 
 To add a new appointment into your application you can use the `add appointment` command when prompted by HALPMI for your input.
 To add an appointment there are some parameters that you would have to provide:
-1. Appointment ID
-2. Patient name
-3. Patient NRIC
-4. Doctor name
-5. Doctor NRIC
-6. Appointment Date
-7. Appointment Details
+1. Patient NRIC
+2. Doctor NRIC
+3. Appointment Date
+4. Appointment Details
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add appointment /info [appointment id],[patient nric],[patient name],[doctor nric],[doctor name],
+Format: `add appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name],
         [appointment date], [appointment details]`
 
-Example: `add appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Regular knee checkup`
+Example: `add appointment /info A123,S1234567A, Don, S7654321A, John, 2022-10-15, Regular knee checkup`
 
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients and medicine.
@@ -160,42 +158,49 @@ Allows user to view existing records of doctors, patients and medicine.
 #### VIEW DOCTOR
 
 To view the records of all doctors in the application, you can simply call `view doctor` without any additional
-parameters. You could also give the NRIC as an additional parameter if you want to view a single doctor only.
+parameters. You could also give a specific criteria as listed below and the input value if you want to
+search and view by a specific criteria.
 
-Format: `view doctor` or `view doctor /info [nric]`
+Format: `view doctor`
 
-Example: `view doctor /info S1234567A`
+Examples: `view doctor`
 
 #### VIEW PATIENT
 
 To view the records of all patients in the application, you can simply call `view patient` without any additional
-parameters. You could also give the NRIC as an additional parameter if you want to view a single patient only.
+parameters. You could also give a specific criteria as listed below and the input value if you want to
+search and view by a specific criteria.
 
-Format: `view patient` or `view patient /info [nric]`
+Format: `view patient`
 
-Example: `view doctor /info S1234567A`
+Example: `view patient`
 
 #### VIEW MEDICINE
 
 To view the records of all medicines in the application, you can simply call `view medicine` without any additional
-parameters. You could also give the Name as an additional parameter if you want to view a single type of Medicine only.
+parameters. You could also give a specific criteria as listed below and the input value if you want to
+search and view by a specific criteria.
 
-Format: `view medicine` or `view medicine /info [name]`
+Format: `view medicine` or `view medicine /info [criteria],[input]`
 
-Example: `view medicine /info Paracetamol`
+Example: `view medicine`
 
 #### VIEW APPOINTMENT
 
 To view the records of all appointments in the application, you can simply call `view appointment` without any
-additional parameters. You could also give a specific criteria as listed below and the input value if you want to
+additional parameters. You could also give a specific criteria as listed below and the input if you want to
 search and view by a specific criteria.
 
-Format: `view appointment` or `view appointment /info [criteria],[input value]`
+Format: `view appointment` or `view appointment /info [criteria], [input value]`
 
-Accepted Criteria: `appointment id`,`patient nric`,`patient name`,`doctor name`,`doctor nric`,`date`
+Accepted Criteria: `appointment id`,`patient nric`,`patient name`,`doctor nric`,`doctor name`,`date`
 
-Examples: `view appointment /info appointment id,A123`, `view appointment /info patient nric,S1234567A`,
-          `view appointment /info doctor name,John`, `view appointment /info date,2023-01-01`
+Example 1: `view appointment /info id,A123` <br>
+Example 2: `view appointment /info patient nric, S1234567A` <br>
+Example 2: `view appointment /info patient name, Don` <br>
+Example 2: `view appointment /info doctor nric, S7654321A` <br>
+Example 3: `view appointment /info doctor name, John` <br>
+Example 4:`view appointment /info date, 2023-01-01`
 
 ### Deleting: `delete`
 Allows user to delete existing records of doctors, patients and medicine.
@@ -234,7 +239,7 @@ This command requires an additional parameter which is the appointment id of the
 
 Format: `delete appointment /info [appointment id]`
 
-Example: `delete medicine /info S234`
+Example: `delete appointment /info S234`
 
 ### Editing: `edit`
 
@@ -252,7 +257,7 @@ To edit a doctor there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`
+Format: `edit doctor /info [nric], [name], [age], [gender], [address], [DOB], [Specialisation]`
 
 Example: `edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
@@ -270,7 +275,7 @@ To edit a patient there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`
+Format: `edit patient /info [nric], [name], [age], [gender], [address], [DOB], [DOA]`
 
 Example: `edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
@@ -287,9 +292,9 @@ To edit a medicine there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`
+Format: `edit medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`
 
-Example: `edit medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`
+Example: `edit medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
 
 #### EDIT APPOINTMENT
 
@@ -305,10 +310,10 @@ To edit an appointment there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `edit appointment /info [appointment id],[patient nric],[patient name],[doctor nric],[doctor name],
+Format: `edit appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name],
 [appointment date], [appointment details]`
 
-Example: `edit appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Regular knee checkup`
+Example: `edit appointment /info A123, S1234567A, Don, S7654321A, John, 2022-10-15, Regular knee checkup`
 
 
 ### Finding: `find`
@@ -327,9 +332,15 @@ To find a doctor you would have to provide one of these parameters:
 6. Date Of Birth (DOB): `dob`
 7. Specialisation: `specialization`
 
-Format:`find doctor /info [parameter], [parameter of doctor]`
+Format: `find doctor /info [parameter], [keyword to find]`
 
-Example: `find doctor /info name, Jimmy`
+Example 1: `find doctor /info name, Jimmy` <br>
+Example 2: `find doctor /info nric, S1234567X` <br>
+Example 3: `find doctor /info age, 23` <br>
+Example 4: `find doctor /info gender, M` <br>
+Example 5: `find doctor /info address, 15 King's Avenue` <br>
+Example 6: `find doctor /info dob, 1999-12-31` <br>
+Example 7: `find doctor /info specialization, Dermatology` 
 
 
 #### FIND PATIENT
@@ -346,9 +357,15 @@ To find a patient you would have to provide one of these parameters using the gi
 6. Date Of Birth (DOB): `dob`
 7. Date Of Admission (DOA): `admissiondate`
 
-Format:`find patient /info [parameter], [parameter of patient]`
+Format: `find patient /info [parameter], [keyword to find]`
 
-Example: `find patient /info nric, S7682373L`
+Example 1: `find patient /info name, Steven Oz` <br>
+Example 2: `find patient /info nric, S1234567X` <br>
+Example 3: `find patient /info age, 54` <br>
+Example 4: `find patient /info gender, M` <br>
+Example 5: `find patient /info address, 15 King's Avenue` <br>
+Example 6: `find patient /info dob, 1999-12-31` <br>
+Example 7: `find patient /info admissiondate, 2022-03-11` <br>
 
 #### FIND MEDICINE
 
@@ -362,9 +379,59 @@ To find a medicine you would have to provide one of these parameters using the g
 4. Side Effects: `sideeffects`
 5. Quantity: `quantity`
 
-Format:`find medicine /info [parameter], [parameter of medicine]`
+Format: `find medicine /info [parameter], [keyword to find]`
 
-Example: `find medicine /info name, Paracetamol`
+Example 1: `find medicine /info name, Paracetamol` <br>
+Example 2: `find medicine /info id, S125` <br>
+Example 3: `find medicine /info dosage, 500` <br>
+Example 4: `find medicine /info expiry, 2022-06-30` <br>
+Example 5: `find medicine /info sideeffects, Headache` <br>
+Example 6: `find medicine /info quantity, 10`
+
+#### FIND APPOINTMENT
+
+To find an existing appointment in the application, you can use the `find appointment` command. This command requires an
+additional parameter which can be any of the parameters of appointment.
+To find an appointment you would have to provide one of these parameters using the given keywords:
+
+1. Appointment Id: `id`
+2. Patient nric: `patient nric`
+3. Patient name: `patient name`
+4. Doctor nric: `doctor nric`
+5. Doctor name: `doctor name`
+6. Appointment Date: `date`
+
+
+Format: `find appointment /info [parameter], [keyword to find]`
+
+Example 1: `find appointment /info id, A123` <br>
+Example 2: `find appointment /info patient nric, S1234567A` <br>
+Example 3: `find appointment /info patient name, Don` <br>
+Example 4: `find appointment /info doctor nric, S7654321A` <br>
+Example 5: `find appointment /info doctor name, John` <br>
+Example 6: `find appointment /info date, 2022-10-15`
+
+
+### Additional Features
+
+#### Retrieving List of Expired Medicine in the inventory
+
+To retrieve list of expired medicine in your inventory, you can simply call the `update medicines` command. This command
+requires no additional parameter. **{DO NOTE THAT THIS LIST WILL BE CLEARED AND THE INFORMATION WITHIN WILL BE DESTROYED
+UPON EXIT OF THE APP}**
+
+Format: `update medicines`
+
+Example: `update medicines`
+
+##### Clearing List of Expired Medicine
+
+If you choose to clear the list of expired medicine manually you can use the `clear old medicines` command. This commmand
+requires no additional parameter.
+
+Format: `clear old medicines`
+
+Example: `clear old medicines`
 
 ### Saving
 
@@ -374,9 +441,9 @@ When you start HalpMi for the first time, the following directory and files woul
 ```
 data/        // Primary resource directory for HalpMi
     ├── doctor.txt   // Text file containing doctor list
-    ├── patient.txt    // Text file containing patient list 
-    ├── medicine.txt       // Text file containing medcine list 
-    └── appointment.txt    // Text file containing appointment list 
+    ├── patient.txt    // Text file containing patient list
+    ├── medicine.txt       // Text file containing medcine list
+    └── appointment.txt    // Text file containing appointment list
 ```
 Do note that the directory (and by extension, the files) will be created in your terminal's
 **current working directory**. Thus, it is highly recommended for you to create a new directory
@@ -413,17 +480,28 @@ TO BE UPDATED
 
 ## Command Summary
 
-| Action             | Format, Examples |
-| ------------------ | ---------------- |
-| `add doctor`       | `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g. `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology` |
-| `add patient`      | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15` |
-| `add medicine`     | `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g. `add medicine /info Paracetamol, 500, 2023-06-11, Slight headache, 10` |
-| `view doctor`      | `view medicine` or `view medicine /info [name]`<br />e.g. `view medicine /info Paracetamol`|
-| `view patient`     | `view patient` or `view patient /info [nric]`<br />e.g. `view doctor /info S1234567A`|
-| `view medicine`    | `view medicine` or `view medicine /info [name]`<br />e.g. `view medicine /info Paracetamol`|
-| `view appointment` | `view appointment` or `view appointment /info [criteria],[input value]`<br />e.g. `view appointment /info patient nric,S1234567A`|
-| `delete doctor`    | `delete doctor /info [nric]`<br />e.g. `delete doctor /info S1234567A` |
-| `delete patient`   | `delete patient /info [nric]`<br />e.g. `delete patient /info S1234567A`|
-| `delete medicine`  | `delete medicine /info [batch id]`<br />e.g. `delete medicine /info S234` |
-| `delete appointment`| `delete appointment /info [appointment id]`<br />e.g. `delete appointment /info A123` |
-| `to be updated`    | `to be updated` |
+| Action               | Format, Examples                                                                                                                                                                                                                                            |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `add doctor`         | `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g. `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                            |
+| `add patient`        | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                                    |
+| `add medicine`       | `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g. `add medicine /info Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                                                        |
+| `add appointment`    | `add appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name], [appointment date], [appointment details]`<br />e.g. `add appointment /info A123, S1234567A, Don, S7654321A, John, 2022-10-15, Regular knee checkup` |
+| `view doctor`        | `view doctor` or `view doctor /info [criteria], [input value]`<br />e.g. `view doctor /info name, Jimmy`                                                                                                                                                    |
+| `view patient`       | `view patient` or `view patient /info [criteria], [input value]`<br />e.g. `view patient /info name, Steven`                                                                                                                                                |
+| `view medicine`      | `view medicine` or `view medicine /info info [criteria], [input value]`<br />e.g. `view medicine /info name, Paracetamol`                                                                                                                                   |
+| `view appointment`   | `view appointment` or `view appointment /info [criteria], [input value]`<br />e.g. `view appointment /info id, A123`                                                                                                                                        |
+| `delete doctor`      | `delete doctor /info [nric]`<br />e.g. `delete doctor /info S1234567A`                                                                                                                                                                                      |
+| `delete patient`     | `delete patient /info [nric]`<br />e.g. `delete patient /info S1234567A`                                                                                                                                                                                    |
+| `delete medicine`    | `delete medicine /info [batch id]`<br />e.g. `delete medicine /info S234`                                                                                                                                                                                   |
+| `delete appointment` | `delete appointment /info [appointment id]`<br />e.g. `delete appointment /info A123`                                                                                                                                                                       |
+| `find doctor`        | `find doctor /info [parameter], [keyword to find]`<br />e.g.`find doctor /info name, Jimmy`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or specialization)                                                               |
+| `find patient`       | `find patient /info [parameter], [keyword to find]`<br />e.g.`find patient /info name, Steven Oz`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or admissiondate)                                                          |
+| `find medicine`      | `find medicine /info [parameter], [keyword to find]`<br />e.g.`find medicine /info name, Paracetamol`<br />e.g.parameter must be one of the six (name, id, dosage, expiry, sideeffects, quantity)                                                           |
+| `find appointment`   | `find appointment /info [parameter], [keyword to find]`<br />e.g.`find appointment /info id, A123` <br />e.g.parameter must be one of the six (appointment id, patient nric, patient name, doctor nric, doctor name, appointment date)                      |
+| `edit doctor`        | `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g.`edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                           |
+| `edit patient`       | `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g.`edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                                   |
+| `edit medicine`      | `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g.`edit medicine /info A123,Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                                       |
+| `help`               | view the help function for all the commands required                                                                                                                                                                                                        |
+| `bye`                | exit the programme                                                                                                                                                                                                                                          |
+| `to be updated`      | `to be updated`                                                                                                                                                                                                                                             |
+

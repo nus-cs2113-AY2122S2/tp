@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Manager {
++ ui: UI = new UI
+- isTerminated: boolean = false
+- storage: Storage = new Storage
++ runLoop() : void
+- executeCommand(commandWord: String, parameters: String) : Status
+}
+
+
+@enduml

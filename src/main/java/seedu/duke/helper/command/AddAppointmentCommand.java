@@ -9,6 +9,7 @@ public class AddAppointmentCommand extends Command {
         super(parameterArray);
     }
 
+    @Override
     public Status execute(List appointmentList) throws DuplicateEntryException {
         appointmentList.add(parameterArray);
         return Status.ADD_APPOINTMENT_SUCCESS;

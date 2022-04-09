@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class PatientList {
+-patients : Arraylist<Patient> = null
+-returnedFinderArray : Arraylist<Patient> = null
++getPatient(String) : Patient
++search()(String) : Patient
++add(String[]) : void
+getPatientInfo(Patient) : String
++getSize() : int
++view() : void
++view(String) : void
++edit(String[]) : void
++remove(String) : void
++getList() : Arraylist<doctor>
++toString() : String
++findByNric(String[]) : void
++findByName(String[]) : void
++findByAge(String[]) : void
++findByGender(String[]) : void
++findByAddress(String[]) : void
++findByDob(String[]) : void
++findByDateAdmission(String[]) : void
++createArrayOfFoundPatients() : void
+}
+
+@enduml

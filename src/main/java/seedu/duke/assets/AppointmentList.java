@@ -4,14 +4,25 @@ import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.CommandLineTable;
+import seedu.duke.helper.IdGenerator;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.finder.AppointmentFinder;
+import seedu.duke.helper.finder.DoctorFinder;
+import seedu.duke.helper.finder.PatientFinder;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AppointmentList extends List {
-    private ArrayList<Appointment> appointments = new ArrayList<>();
+    protected ArrayList<Appointment> appointments = new ArrayList<>();
     private ArrayList<Appointment> returnedFinderArray = new ArrayList<>();
+    private PatientList referencePatientList;
+    private DoctorList referenceDoctorList;
+
+    public AppointmentList(PatientList patientList,DoctorList doctorList) {
+        this.referencePatientList = patientList;
+        this.referenceDoctorList = doctorList;
+    }
 
     public Appointment getAppointment(String appointmentId) {
         for (Appointment appointment : appointments) {
@@ -28,15 +39,31 @@ public class AppointmentList extends List {
 
     @Override
     public void add(String[] addAppointmentParameters) throws DuplicateEntryException {
-        final int numberOfAppointmentsBefore = appointments.size();
+        int numberOfAppointmentsBefore = appointments.size();
+
+        String patientNric = addAppointmentParameters[0];
+        PatientFinder patientFinder = new PatientFinder();
+        ArrayList<Patient> foundPatient = patientFinder.findPatientByNric(referencePatientList.getList(), patientNric);
+        String patientName = foundPatient.get(0).getPatientName();
+
+        String doctorNric = addAppointmentParameters[1];
+        DoctorFinder doctorFinder = new DoctorFinder();
+        ArrayList<Doctor> foundDoctor = doctorFinder.findDoctorByNric(referenceDoctorList.getList(), doctorNric);
+        String doctorName = foundDoctor.get(0).getFullName();
+
+        String appointmentDate = addAppointmentParameters[2];
+        String appointmentDetails = addAppointmentParameters[3];
+        String id = IdGenerator.createAppointmentId(patientNric, doctorNric, appointmentDate);
+
         for (Appointment appointment : appointments) {
-            if (appointment.getAppointmentId().equals(addAppointmentParameters[0])) {
-                throw new DuplicateEntryException("Appointment with given appointment ID already exist!");
+            if (appointment.getAppointmentId().equals(id)) {
+                throw new DuplicateEntryException("There is already an appointment between this doctor and patient "
+                        + "on the given date!");
             }
         }
-        Appointment newAppointment = new Appointment(addAppointmentParameters[0], addAppointmentParameters[1],
-                addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4],
-                addAppointmentParameters[5], addAppointmentParameters[6]);
+
+        Appointment newAppointment = new Appointment(id, patientNric, patientName, doctorNric, doctorName,
+                appointmentDate, appointmentDetails);
         appointments.add(newAppointment);
         assert appointments.size() == numberOfAppointmentsBefore + 1;
     }
@@ -176,6 +203,57 @@ public class AppointmentList extends List {
                         returnedFinderArray.get(i).getAppointmentDetails());
             }
             findAppointmentTable.print();
+        }
+    }
+
+    public boolean hasAppointmentToday(String type, String nric) throws NotFoundException, HalpmiException {
+        ArrayList<Appointment> foundAppointments;
+        switch (type) {
+        case "P":
+            foundAppointments = AppointmentFinder.findAppointmentByPatientNric(appointments,nric);
+            for (Appointment a : foundAppointments) {
+                LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
+                if (appointmentDate.equals(LocalDate.now())) {
+                    return true;
+                }
+            }
+            throw new NotFoundException("Patient does not have an appointment today!");
+        case "D":
+            foundAppointments = AppointmentFinder.findAppointmentByDoctorNric(appointments, nric);
+            for (Appointment a : foundAppointments) {
+                LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
+                if (appointmentDate.equals(LocalDate.now())) {
+                    return true;
+                }
+            }
+            throw new NotFoundException("Doctor does not have an appointment today!");
+        default:
+            assert false;
+            throw new HalpmiException("Error with code, approach developer!");
+        }
+    }
+
+    public void dispenseMedicine(String patientNric, String[] medicines) {
+        for (Appointment a : appointments) {
+            LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
+            if (appointmentDate.equals(LocalDate.now()) && a.patientNric.equals(patientNric)) {
+                for (int i = 0; i < medicines.length; i += 2) {
+                    a.addMedicine(medicines[i], medicines[i + 1]);
+                }
+                break;
+            }
+        }
+    }
+
+    public void loadMedicine(String[] parameters) {
+        String appointmentId = parameters[0];
+        for (Appointment a : appointments) {
+            if (a.appointmentId.equals(appointmentId)) {
+                for (int i = 1; i < parameters.length; i += 2) {
+                    a.addMedicine(parameters[i], parameters[i + 1]);
+                }
+                break;
+            }
         }
     }
 }

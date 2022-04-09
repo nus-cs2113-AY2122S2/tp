@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Validator {
++validateAddAppointment(String[]): void
++validateEditAppointment(String[]): void
++validateFindAppointment(String[]): void
++validateFindDoctor(String[]): void
++validateFindMedicine(String[]): void
++validateFindPatient (String[]): void
++validateMedicine (String[]): void
++validateNric (String): void
++validateAddDoctor (String[]): void
++validateAddPatient(String[]): void
+-validateAddPerson(String[]): void
+-validateAddress (String): void
+-validateAdmissionDate(String): void
+-validateAge (String): void
+-validateAppointmentDetails(String): void
+-validateDate (String): boolean
+-validateDate (String, String): void
+-validateDob (String): void
+-validateDosage(String): boolean
+-validateExpiry(String): boolean
+-validateFullName(String): void
+-validateGender (String): void
+-validateMedicineld (String): void
+-validateMedicineName(String): boolean
+-validateMedicineSideEffects(String): void
+-validateQuantity(String): boolean
+-validateSpecialization(String): void
+}
+@enduml

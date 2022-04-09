@@ -3,8 +3,8 @@ package seedu.duke.assets;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
-import seedu.duke.helper.UI;
 import seedu.duke.helper.CommandLineTable;
+import seedu.duke.helper.UI;
 import seedu.duke.helper.finder.PatientFinder;
 
 import java.util.ArrayList;
@@ -22,9 +22,6 @@ public class PatientList extends List {
             }
         }
         return null;
-    }
-
-    public void find(String[] command) {
     }
 
 
@@ -93,10 +90,10 @@ public class PatientList extends List {
         }
         for (Patient patient : patients) {
             patientTable.addRow(patient.getPatientNric(), patient.getPatientName(),
-                   String.valueOf(patient.getPatientAge()),
-                        patient.getPatientAddress(), String.valueOf(patient.getPatientGender()),
-                        patient.getPatientDob(),
-                        patient.getDateOfAdmission());
+                    String.valueOf(patient.getPatientAge()),
+                    patient.getPatientAddress(), String.valueOf(patient.getPatientGender()),
+                    patient.getPatientDob(),
+                    patient.getDateOfAdmission());
         }
         patientTable.print();
     }
@@ -148,7 +145,7 @@ public class PatientList extends List {
     public void findByNric(String[] parameters) {
         try {
             this.returnedFinderArray = PatientFinder.findPatientByNric(patients, parameters[1]);
-            createArrayOfFoundPatients();
+            displayFoundPatientList();
         } catch (NullPointerException e) {
             UI.printParagraph("Patient with given NRIC doesn't exist. Please try again!");
         }
@@ -157,7 +154,7 @@ public class PatientList extends List {
     public void findByName(String[] parameters) {
         try {
             this.returnedFinderArray = PatientFinder.findPatientByName(patients, parameters[1]);
-            createArrayOfFoundPatients();
+            displayFoundPatientList();
         } catch (NullPointerException e) {
             UI.printParagraph("Patient with given name doesn't exist. Please try again!");
         }
@@ -166,7 +163,7 @@ public class PatientList extends List {
     public void findByAge(String[] parameters) {
         try {
             this.returnedFinderArray = PatientFinder.findPatientByAge(patients, Integer.parseInt(parameters[1]));
-            createArrayOfFoundPatients();
+            displayFoundPatientList();
         } catch (NullPointerException e) {
             UI.printParagraph("Patient with given age doesn't exist. Please try again!");
         }
@@ -175,7 +172,7 @@ public class PatientList extends List {
     public void findByGender(String[] parameters) {
         try {
             this.returnedFinderArray = PatientFinder.findPatientByGender(patients, parameters[1].charAt(0));
-            createArrayOfFoundPatients();
+            displayFoundPatientList();
         } catch (NullPointerException e) {
             UI.printParagraph("Patient with given gender doesn't exist. Please try again!");
         }
@@ -184,7 +181,7 @@ public class PatientList extends List {
     public void findByAddress(String[] parameters) {
         try {
             this.returnedFinderArray = PatientFinder.findPatientByAddress(patients, parameters[1]);
-            createArrayOfFoundPatients();
+            displayFoundPatientList();
         } catch (NullPointerException e) {
             UI.printParagraph("Patient with given address doesn't exist. Please try again!");
         }
@@ -193,7 +190,7 @@ public class PatientList extends List {
     public void findByDob(String[] parameters) {
         try {
             this.returnedFinderArray = PatientFinder.findPatientByDob(patients, parameters[1]);
-            createArrayOfFoundPatients();
+            displayFoundPatientList();
         } catch (NullPointerException e) {
             UI.printParagraph("Patient with given DOB doesn't exist. Please try again!");
         }
@@ -202,13 +199,13 @@ public class PatientList extends List {
     public void findByDateAdmission(String[] parameters) {
         try {
             this.returnedFinderArray = PatientFinder.findPatientByDateAdmission(patients, parameters[1]);
-            createArrayOfFoundPatients();
+            displayFoundPatientList();
         } catch (NullPointerException e) {
             UI.printParagraph("Patient with given admission date doesn't exist. Please try again!");
         }
     }
 
-    private void createArrayOfFoundPatients() {
+    private void displayFoundPatientList() {
         if (returnedFinderArray.isEmpty()) {
             UI.printParagraph("Patient doesn't exist please try again!");
         } else {
@@ -216,8 +213,8 @@ public class PatientList extends List {
             for (int i = 0; i < returnedFinderArray.size(); i++) {
 
                 findPatientTable.setShowVerticalLines(true);
-                findPatientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                        "DateAdmission");
+                findPatientTable.setHeaders("Nric", "Full Name", "Age", "Address", "Gender", "Dob",
+                        "Admission Date");
                 findPatientTable.addRow(returnedFinderArray.get(i).getNric(),
                         returnedFinderArray.get(i).getFullName(),
                         String.valueOf(returnedFinderArray.get(i).getAge()),

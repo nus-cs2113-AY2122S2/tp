@@ -1,0 +1,25 @@
+@startuml
+
+class AppointmentList {
+-appointments : Arraylist<appointment> = null
+-returnedFinderArray : Arraylist<appointment> = null
+-referencePatientList : PatientList = null
+-referenceDoctorList : DoctorList = null
++AppointmentList(PatientList, DoctorList) : void
++getAppointment(String) : Appointment
++getList() : Arraylist<appointment>
++add(String[]) : void
++remove(String) : void
++edit(String[]) : void
++view() : void
++view(String) : void
++findById(String[]) : void
++findByPatientName(String[]) : void
++findByPatientNric(String[]) : void
++findByDoctorName(String[]) : void
++findByDoctorNric(String[]) : void
++findByAppointmentDate(String[]) : void
++createArrayOfFoundAppointments() : void
+}
+
+@enduml

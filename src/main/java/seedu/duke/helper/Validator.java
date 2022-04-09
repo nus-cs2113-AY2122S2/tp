@@ -3,6 +3,7 @@ package seedu.duke.helper;
 import seedu.duke.exception.HalpmiException;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -25,7 +26,7 @@ public class Validator {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
         Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
         if (!fullNameMatcher.matches()) {
-            throw new HalpmiException("Full name must contain only alphabets and no special characters.");
+            throw new HalpmiException("Full name must contain only alphabets, no special characters or numbers.");
         }
     }
 
@@ -34,7 +35,7 @@ public class Validator {
         try {
             age = Integer.parseInt(ageString);
         } catch (NumberFormatException numberFormatException) {
-            throw new HalpmiException("Please enter a number!");
+            throw new HalpmiException("Age must be a positive number!");
         }
         //age must be within 1 and 120
         if (!(1 <= age && age <= 120)) {
@@ -95,6 +96,19 @@ public class Validator {
         }
     }
 
+    private static void validatedobandage(String age, String dob) throws HalpmiException {
+        validateDob(dob);
+        LocalDate today = LocalDate.now();
+        LocalDate birthday = LocalDate.parse(dob);
+        Period period = Period.between(birthday, today);
+        int calculatedAge = period.getYears();
+        int parsedAge = Integer.parseInt(age);
+        if (!(parsedAge == calculatedAge)) {
+            throw new HalpmiException("Please ensure that the date of birth matches the age provided");
+        }
+
+    }
+
     /* Validating person */
     private static void validateAddPerson(String[] parameters) throws HalpmiException {
         validateNric(parameters[0]);
@@ -103,6 +117,7 @@ public class Validator {
         validateGender(parameters[3]);
         validateAddress(parameters[4]);
         validateDob(parameters[5]);
+        validatedobandage(parameters[2], parameters[5]);
     }
 
     private static void validateSpecialization(String specialization) throws HalpmiException {
@@ -227,7 +242,7 @@ public class Validator {
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
         if (type.equals("appointment") && newDate.isBefore(today)) {
             throw new HalpmiException("Date must be in YYYY-MM-DD format. "
-                    + "New appointments date must be today and after.");
+                    + "New appointment dates must be today and after.");
         } else if (type.equals("patient") && newDate.isAfter(admissionDateLimit)
                 && newDate.isBefore(today)) {
             throw new HalpmiException("Date must be in YYYY-MM-DD format. "
@@ -245,12 +260,9 @@ public class Validator {
     }
 
     public static void validateAddAppointment(String[] parameters) throws HalpmiException {
+        validateNric(parameters[0]);
         validateNric(parameters[1]);
-        validateFullName(parameters[2]);
-        validateNric(parameters[3]);
-        validateFullName(parameters[4]);
-        validateDate(parameters[5], "appointment");
-        validateAppointmentDetails(parameters[6]);
+        validateDate(parameters[2], "appointment");
     }
 
     public static void validateEditAppointment(String[] parameters) throws HalpmiException {
@@ -331,7 +343,7 @@ public class Validator {
             validateNric(parameters[1]);
             break;
         case "date":
-            validateDate(parameters[1],"find appointment");
+            validateDate(parameters[1], "find appointment");
             break;
         default:
             throw new HalpmiException("Input must be an attribute of Appointment");
@@ -359,6 +371,21 @@ public class Validator {
         case "side effects":
         default:
             break;
+        }
+    }
+
+    public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws HalpmiException {
+        validateNric(dispenseMedicineParameters[0]);
+        if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
+            throw new HalpmiException("Not all medicines in list have both the name of the medicine and the quantity"
+                + "to prescribe!");
+        }
+
+        for (int i = 1; i < dispenseMedicineParameters.length; i += 2) {
+            String medicineName = dispenseMedicineParameters[i];
+            String medicineQuantity = dispenseMedicineParameters[i + 1];
+            validateMedicineName(medicineName);
+            validateQuantity(medicineQuantity);
         }
     }
 }

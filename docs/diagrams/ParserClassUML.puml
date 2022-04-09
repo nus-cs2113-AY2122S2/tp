@@ -1,9 +1,30 @@
 @startuml
 
-
 class Parser {
--
-+
-
+-isNull (String): boolean
+-minParameterCheck(String, int): String []
++commandParser(String): String[]
++parseAddAppointment(String): Command
++parseAddDoctor(String): Command
++parseAddMedicine (String): Command
++parseAddPatient (String): Command
++parseClearExpiredMedicine(String): Command
++parseDeleteAppointment(String): Command
++parseDeleteDoctor (String): Command
++parseDeleteMedicine (String): Command
++parseDeletePatient(String): Command
++parseEditAppointment(String): Command
++parseEditDoctor (String): Command
++parseEditMedicine (String): Command
++parseEditPatient (String): Command
++parseFindAppointment(String): Command
++parseFindDoctor (String): Command
++parseFindMedicine (String): Command
++parseFindPatient (String): Command
++parseUpdateMedicineStock(String): Command
++parseViewAppointment(String): Command
++parseViewDoctor (String): Command
++parseViewMedicine(String): Command
++parseViewPatient(String): Command
 }
 @enduml
