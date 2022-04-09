@@ -371,6 +371,7 @@ public class ModuleParser {
         }
     }
 
+    // Checks if given start time is earlier than given end time in a String timeSlot
     private String checkTimeStartEarlier(String timeSlot) throws ModuleTimeException {
         String[] splitTimeArray = timeSlot.split("-", 2);
         LocalTime startTime = LocalTime.parse(splitTimeArray[0].replaceAll(" ",""), TIME_FORMATTER);
