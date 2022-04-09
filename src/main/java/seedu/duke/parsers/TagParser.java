@@ -10,7 +10,6 @@ import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.MissingNumberException;
 import seedu.duke.exceptions.MissingCompulsoryParameterException;
-import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 
@@ -22,7 +21,6 @@ public class TagParser extends Parser {
     private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String TAG_NAME = StringConstants.TAG_NAME;
-    private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
     // Unescaped Regex for testing:
@@ -135,26 +133,6 @@ public class TagParser extends Parser {
         assert (userInput.contains(TASK_MODULE_FLAG));
         String moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
-    }
-
-    /**
-     * Parses the task index from a string to an integer form.
-     * It will also check if the index is non-negative, throwing an exception if it is not.
-     * @param taskNumberString the string representation of the task number
-     * @return the zero-based index integer of the task number string
-     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
-     */
-    private int parseIndex(String taskNumberString) throws InvalidNumberException {
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(taskNumberString) - 1;
-            if (taskIndex < MINIMUM_INDEX) {
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
-        }
-        return taskIndex;
     }
 
     @Override

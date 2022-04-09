@@ -60,6 +60,7 @@ public abstract class Parser {
     protected static final int FIRST_INDEX = NumberConstants.FIRST_INDEX;
     protected static final int SECOND_INDEX = NumberConstants.SECOND_INDEX;
     protected static final int FOURTH_INDEX = NumberConstants.FOURTH_INDEX;
+    protected static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
 
 
     protected String commandFormat;
@@ -190,4 +191,23 @@ public abstract class Parser {
         }
     }
 
+    /**
+     * Parses the task index from a string to an integer form.
+     * It will also check if the index is non-negative, throwing an exception if it is not.
+     * @param taskNumberString the string representation of the task number
+     * @return the zero-based index integer of the task number string
+     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
+     */
+    protected int parseIndex(String taskNumberString) throws InvalidNumberException {
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskNumberString) - 1;
+            if (taskIndex < MINIMUM_INDEX) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
+        }
+        return taskIndex;
+    }
 }

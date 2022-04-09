@@ -48,7 +48,6 @@ public class GradeParser extends Parser {
     public void determineError() throws MissingCompulsoryParameterException,
             InvalidCompulsoryParameterException, InvalidModuleGradeException {
         String moduleCode;
-        String moduleGrade;
         try {
             moduleCode = userInput.split(SPACE)[ZEROTH_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -57,6 +56,7 @@ public class GradeParser extends Parser {
         if (!moduleCode.matches(WORD_CHAR_ONLY)) {
             throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
+        String moduleGrade;
         try {
             moduleGrade = userInput.split(SPACE)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
