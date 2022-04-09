@@ -114,9 +114,11 @@ public class SearchCommandTest {
     void execute_validSearchForAll_expectSuccess() throws InvalidCommandException {
         SearchCommand searchAllCommand = parser.createSearchCommand("search /all a");
         String expectedOutput =
-                "Sorry, no matching exercise found.\n"
+                "Sorry, no matching exercise found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [a]") + ".\n"
                         + "----------------------------------------------------------------------\n"
-                        + "Sorry, no matching workout found.\n"
+                        + "Sorry, no matching workout found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [a]") + ".\n"
                         + "----------------------------------------------------------------------\n"
                         + "The plan(s) containing keyword(s)" + ui.getColorText(TextColor.COLOR_YELLOW, " [a] ")
                         + "is(are) listed below together\n"
@@ -173,7 +175,8 @@ public class SearchCommandTest {
     void execute_validSearchForAll3_expectSuccess() throws InvalidCommandException {
         SearchCommand searchAllCommand = parser.createSearchCommand("search /all 10");
         String expectedOutput =
-                "Sorry, no matching exercise found.\n"
+                "Sorry, no matching exercise found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [10]") + ".\n"
                         + "----------------------------------------------------------------------\n"
                         + "The workout(s) with " + ui.getColorText(TextColor.COLOR_YELLOW, "reps = 10")
                         + " is(are) listed below together\n"
@@ -181,7 +184,8 @@ public class SearchCommandTest {
                         + "----------------------------------------------------------------------\n"
                         + ui.getColorText(TextColor.COLOR_YELLOW, "1. push up (10 reps)\n")
                         + "----------------------------------------------------------------------\n"
-                        + "Sorry, no matching plan found.\n";
+                        + "Sorry, no matching plan found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [10]") + '.';
 
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
@@ -198,11 +202,14 @@ public class SearchCommandTest {
     void execute_validSearchForAllNoMatch_expectSuccess() throws InvalidCommandException {
         SearchCommand searchAllCommand = parser.createSearchCommand("search /all asldkaskd");
         String expectedOutput =
-                "Sorry, no matching exercise found.\n"
+                "Sorry, no matching exercise found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [asldkaskd]") + ".\n"
                         + "----------------------------------------------------------------------\n"
-                        + "Sorry, no matching workout found.\n"
+                        + "Sorry, no matching workout found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [asldkaskd]") + ".\n"
                         + "----------------------------------------------------------------------\n"
-                        + "Sorry, no matching plan found.\n";
+                        + "Sorry, no matching plan found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [asldkaskd]") + '.';
 
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();

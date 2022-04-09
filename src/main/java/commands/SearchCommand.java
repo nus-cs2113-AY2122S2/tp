@@ -293,7 +293,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            ui.printSearchNotFoundMessage(CATEGORY_EXERCISE);
+            ui.printSearchNotFoundMessage(CATEGORY_EXERCISE, getUserArguments());
         }
         clearMatchCount();
     }
@@ -336,7 +336,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            ui.printSearchNotFoundMessage(CATEGORY_PLAN);
+            ui.printSearchNotFoundMessage(CATEGORY_PLAN, getUserArguments());
         }
         clearMatchCount();
     }
@@ -399,7 +399,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            ui.printSearchNotFoundMessage(CATEGORY_WORKOUT);
+            ui.printSearchNotFoundMessage(CATEGORY_WORKOUT, userArguments);
         }
         clearMatchCount();
     }
