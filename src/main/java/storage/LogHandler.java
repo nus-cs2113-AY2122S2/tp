@@ -20,7 +20,7 @@ public class LogHandler {
     public static final String LOGS_FILENAME = "logs.log";
 
     private static FileHandler logFileHandler;
-    private static String workingDirectory = System.getProperty(FileManager.USER_WORKING_DIRECTORY_PROPERTY);
+    private static String workingDirectory = System.getProperty(FileManager.PROPERTY_USER_WORKING_DIRECTORY);
     private static Path logFileDirectory = Paths.get(workingDirectory, LOGS_DIRECTORY_NAME);
     private static Path logFilePath = Paths.get(workingDirectory, LOGS_DIRECTORY_NAME, LOGS_FILENAME);
 

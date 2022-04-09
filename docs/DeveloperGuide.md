@@ -689,16 +689,16 @@ a `WorkoutCommand` object that contains the user's input.
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When `WorkoutCommand#execute()` is called, because this is a `workout /new` command, the method will call
-`WorkoutList#createAndAddWorkout()`.
+`WorkoutList#createNewWorkout()`.
 
-The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createAndAddWorkout()`:
-![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout.png)
+The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createNewWorkout()`:
+![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateNewWorkout.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and 
-exception throws in `WorkoutList#createAndAddWorkout()` have been omitted.</span> 
+exception throws in `WorkoutList#createNewWorkout()` have been omitted.</span> 
 
 **(Before Step 2.1)** Methods from the `String` and `Integer` classes are called to parse the
-argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the
+argument given to `WorkoutList#createNewWorkout()` to obtain the following information required to create the
 `Workout` object:
 1. Name of the exercise
 2. Number of repetitions associated with the exercise in (1).
@@ -719,20 +719,21 @@ If requirement 1 is not met, an `InvalidExerciseException` will be thrown. If re
 Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability of the 
 sequence diagram.
 
-**(Step 2.1)** If the above checks pass, a new `Workout` object with the user-specified exercise name and
-repetition value is created. 
+**(Steps 2.1 and 2.2)** If the above checks pass, a new `Workout` object with the user-specified exercise name and
+repetition value is created. The new object is then returned to `WorkoutCommand#execute()` 
 
-**(Step 2.3)** Once the `Workout` object is created, a key of the object will be generated (see the 
+**(Steps 4 and 5)** The new `Workout` object passed to `WorkoutList#addNewWorkoutToLists()` to add to two lists maintained
+in the `WorkoutList` object: `workoutsHashMapList` and `workoutsDisplayList`. The following steps are 
+taken:
+1. Key of the `workout` object will be generated (see the 
 [Design Considerations](#design-considerations-for-creating-a-new-workout) section for more details of the `HashMap`
 implementation).
-
-**(Step 2.5)** The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
-
-**(Step 2.7)** The key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
+2. The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
+3. The key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
 `ArrayList<String>` object stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the 
-command `workout /list` is entered by the user. This is the final step of `WorkoutList#createAndAddWorkout()`.
+command `workout /list` is entered by the user. This is the final step of `WorkoutList#createNewWorkout()`.
 
-**(Step 4)** Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
+**(Step 6)** Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
 the user via the terminal. The following is an example of a response after the user entered `workout /new russian twist 
 /reps 50`:
 ```
@@ -744,7 +745,7 @@ Alright, the following workout has been created:
 ----------------------------------------------------------------------
 ```
 
-**(Step 6)** `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
+**(Step 8)** `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
 `workouts.txt` which is stored on the user's local filesystem.
 
 <span class="info box">:memo: For more information on how the data is written to `workouts.txt`, please refer to
@@ -1615,67 +1616,116 @@ This completes the process of clearing of all plans stored in the schedule on We
 The overview of the design of the search features can be found [here](#search-related-features).
 
 #### Search For Exercise
-Format: `search /exercise <keywords>`
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/exercise` and call the constructor of `SearchCommand` class by passing relevant parameters related to search exercise
-to the constructor. The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching exercises or 'Sorry, no matching exercise found' if the user has entered the command
-correctly.
+A summary of the general procedure of search for exercise in the application is as follows:
+1. User enters the command `search /exercise <exercise keyword>`.
+2. A list of exercise names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /exercise` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchExercise.png)
 
-#### Search For Workout
-Format: `search /workout <keywords>`
+(Before Step 1) The user's input (in this case will be a `search /exercise <exercise keyword>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/workout` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
-The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching names of workout or 'Sorry, no matching workout found' if the user has entered the command
-correctly.
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/exercise`.
+Subsequently, it will call the `ExerciseList#getExerciseList()` method to search from all the available exercises.
+
+(Step 4) Based on the exercises from the `exerciseList`, the `searchExercise()` will retrieve all the exercises with name
+containing `<exercise keyword>` and display them in the user's terminal.
+
+(Step 5) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for exercise in WerkIt!.
+
+---
+
+#### Search For Workout
+
+A summary of the general procedure of search for workout in the application is as follows:
+1. User enters the command `search /workout <exercise keyword or number of reps>`.
+2. A list of workouts with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /workout` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchWorkout.png)
 
-#### Search For Plan
-Format: `search /plan <keywords>`
+(Before Step 1) The user's input (in this case will be a `search /workout <exercise keyword or number of reps>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/plan` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
-The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching names of plan or 'Sorry, no matching plan found' if the user has entered the command
-correctly.
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/workout`.
+Subsequently, it will call the `WorkoutList#getWorkoutsDisplayList()` method to search from all the existing workouts.
+
+(Step 4) Based on the `workout` objects from the `workoutList`, the `searchWorkout()` will retrieve all the workouts with name
+containing `<exercise keyword>` or repetitions equals to `<number of reps>`, and display them in the user's terminal.
+
+(Step 5) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for workout in WerkIt!.
+
+---
+
+#### Search For Plan
+
+A summary of the general procedure of search for plan in the application is as follows:
+1. User enters the command `search /plan <plan keyword>`.
+2. A list of plan names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /plan` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchPlan.png)
 
-#### Search For All
-Format: `search /all <keywords>`
+(Before Step 1) The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/all` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
-The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching names of exercise, workout and plan or not found messages if the user has entered the command correctly.
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 3) When the SearchCommand#execute() method is called, it will identify that the search action is of type `/plan`.
+Subsequently, it will call the `PlanList#getPlansDisplayList()` method to search from all the existing plans.
+
+(Step 4) Based on the `plan` objects from the `planList`, the `searchPlan()` will retrieve all the plans with name
+containing `<plan keyword>`, and display them in the user's terminal.
+
+(Step 5) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for plan in WerkIt!.
+
+---
+
+#### Search For All
+
+A summary of the general procedure of search for plan in the application is as follows:
+1. User enters the command `search /all <keyword>`.
+2. A list of exercise name, workouts and plan names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /all` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
+
+(Before Step 1) The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
+
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 7) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/all`.
+Subsequently, it will call the `ExerciseList#getExerciseList()`, `WorkoutList#getWorkoutsDisplayList()` and
+`PlanList#getPlansDisplayList()` methods to search from all the existing exercises, workouts and plans.
+
+(Step 8) Based on the exercises, `workout` objects and `plan` objects retrieved, the `searchAll()` will retrieve 
+all the matching results, and display them in the user's terminal.
+
+(Step 9) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for all in WerkIt!.
+
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
@@ -2057,6 +2107,23 @@ Testers are welcome conduct more extensive and rigorous testing.
 ### Test on Exercise Features
 #### Listing All Exercises
 
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#show-all-exercises-exercise-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                    | Command          | Expected result                                  |
+|:-----------------------------|:-----------------|:-------------------------------------------------|
+| Valid list exercise command. | `exercise /list` | List down all exercises stored in exercise list. |
+
+##### Negative Test Cases
+
+| Test Case                                    | Command                    | Expected result                                                  |
+|:---------------------------------------------|:---------------------------|:-----------------------------------------------------------------|
+| Valid list command with extra arguments.     | `exercise /list extraline` | Error response (invalid user argument), exercises not displayed. |
+| Extra whitespaces between command arguments. | `exercise         /list`   | Error response (invalid user action), exercise not displayed.    |
+
 ---
 
 ### Test on Workout Features
@@ -2275,10 +2342,92 @@ The following are some test cases for you to try:
 ---
 
 ### Test on Search Features
+
 #### Searching For Exercise
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-exercise-search-exercise).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                                 | Command                             | Expected result                                         |
+|:----------------------------------------------------------------------------------------------------------|:------------------------------------|:--------------------------------------------------------|
+| Valid searching for exercise command.                                                                     | `search /exercise`                  | All exercise names containing whitespace will be shown. |
+| Valid searching for exercise command.                                                                     | `search /exercise a`                | All exercise names containing 'a' will be shown.        |
+
+##### Negative Test Cases
+
+| Test Case                                                             | Command                    | Expected result                                                                                 |
+|:----------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/exercise`. | `search       /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 #### Searching For Workout
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-workout-search-workout).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                                                 | Command                            | Expected result                                                      |
+|:--------------------------------------------------------------------------------------------------------------------------|:-----------------------------------|:---------------------------------------------------------------------|
+| Valid searching for workout command.                                                                                      | `search /workout`                  | All workouts with exercise name containing whitespace will be shown. |
+| Valid searching for workout command.                                                                                      | `search /workout 15`               | All workouts with repetitions equal to 15 will be shown.             |
+| Valid searching for workout command.                                                                                      | `search /workout a`                | All workouts with exercise name containing 'a' will be shown.        |
+
+
+##### Negative Test Cases
+
+| Test Case                                                            | Command                    | Expected result                                                                                 |
+|:---------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/workout`. | `search       /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 #### Searching For Plan
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-plan-search-plan).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                     | Command                         | Expected result                                          |
+|:----------------------------------------------------------------------------------------------|:--------------------------------|:---------------------------------------------------------|
+| Valid searching for plan command.                                                             | `search /plan`                  | All plans with name containing whitespace will be shown. |
+| Valid searching for plan command.                                                             | `search /plan a`                | All plans with name containing 'a' will be shown.        |
+
+
+##### Negative Test Cases
+
+| Test Case                                                         | Command                     | Expected result                                                                                 |
+|:------------------------------------------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/plan`. | `search        /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 #### Searching For All
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-all-search-all).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                | Command                        | Expected result                                                                                                               |
+|:-----------------------------------------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
+| Valid searching for all command.                                                         | `search /all`                  | All exercises, workouts and plans with name containing whitespace will be shown.                                              |
+| Valid searching for all command.                                                         | `search /all a`                | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
+| Valid searching for all command.                                                         | `search /all 15`               | All exercises and plans with name containing '15' will be shown, and all workouts with repetitions equal to 15 will be shown. |
+
+
+##### Negative Test Cases
+
+| Test Case                                                        | Command                | Expected result                                                                                 |
+|:-----------------------------------------------------------------|:-----------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/all`. | `search        /all a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
