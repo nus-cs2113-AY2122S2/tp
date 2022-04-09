@@ -3,6 +3,7 @@ package commands;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.plans.InvalidPlanException;
+import data.plans.Plan;
 import data.plans.PlanList;
 import data.schedule.DayList;
 import data.workouts.InvalidWorkoutException;
@@ -180,7 +181,8 @@ class PlanCommandTest {
 
     @Test
     void execute_validListPlan_expectSuccess() throws InvalidCommandException, InvalidPlanException {
-        planList.createAndAddPlan("Plan A /workouts 1,2");
+        Plan newPlan1 = planList.createNewPlan("Plan A /workouts 1,2");
+        planList.addNewPlanToLists(newPlan1);
         PlanCommand listPlanCommand = parser.createPlanCommand("plan /list");
         String expectedOutput =
                 "Here are all your plan(s).\n"

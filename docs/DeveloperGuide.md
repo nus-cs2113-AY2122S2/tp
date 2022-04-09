@@ -373,11 +373,12 @@ will parse the `plan` base word and proceed to create a `PlanCommand` object thr
 Once the `PlanCommand` object is created, the `PlanCommand#execute()` method
 is called. Depending on the type of command action, this method will
 call the appropriate operations from the `PlanList` class. For instance, if the command action
-is `/new`, `PlanList#createAndAddPlan(userArgument)` will be called to create a new plan.
+is `/new`, `PlanList#createNewPlan(userArgument)` will be called to create a new plan, followed
+by `PlanList#addNewPlanToLists()` to add the newly created plan to the application's plan list.
 To view the details of the `PlanCommand#execute()`,
 click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/PlanCommand.java).
 
-When `createAndAddPlan()` and  `deletePlan()` method in `PlanList` class are executed, the
+When `createNewPlan()` and  `deletePlan()` method in `PlanList` class are executed, the
 `FileManager` and `UI` classes will call its appropriate methods depending on the command action.
 From the previous example, the `/new` workout command action will call
 the `UI#printNewPlanCreatedMessage()` and also the `FileManager#writeNewPlanToFile()`
@@ -1066,16 +1067,16 @@ a `PlanCommand` object that contains the user's input.
 
 **(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
 that the plan action is of type `/new`. Subsequently, it will call the
-`PlanList#createAndAddPlan()` method to perform the creation of the plan.
+`PlanList#createNewPlan()` method to perform the creation of the plan.
 <br><br>
-The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan()`:
+The following sequence diagram is the detailed procedure for Step 2's `PlanList#createNewPlan()`:
 <br><br>
-![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
+![Create New Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
- `PlanList#createAndAddPlan()` have been omitted.</span>
+ `PlanList#createNewPlan()` have been omitted.</span>
 
-**(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan()`
+**(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createNewPlan()`
 method is parsed to obtain the following information required to create the `Plan` object:
 1. Name of the plan.
 2. Workout index numbers in the workout list separated by comma.
@@ -1085,7 +1086,7 @@ Once the information are obtained, the name of the plan to be created will be va
 This is to ensure all plan names are valid and unique in the application.
 If the plan name is invalid, an `InvalidPlanException` exception will be thrown.
 <br><br>
-Subsequently, this `PlanList#createAndAddPlan()` method will find out the number of workouts
+Subsequently, this `PlanList#createNewPlan()` method will find out the number of workouts
 to be added into the new plan. This is done in order to check that the number of workouts to be added into the new plan
 does not exceed 10 workouts, and there should minimally
 be 1 workout in a plan. If the new plan does not meet the requirements,
@@ -1101,19 +1102,29 @@ the application's workout list range.
 If the workout indexes are valid, the valid `Workout` object is fetched from the application's workout list based 
 on the workout index and then added into the `ArrayList<Workout>` that was created in the previous step (Steps 2.1 to 2.2).
 The loop will continue until all workouts to be added in the new plan is added into that `ArrayList<Workout>`.
-<br><br>
-**(Steps 2.5 to 2.10)** With the valid plan name and the `ArrayList<Workout>` containing the workouts to be added into the new plan, 
-a new `Plan` object is created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
+<br/><br/>
+**(Steps 2.5 to 2.6)** With the valid plan name and the `ArrayList<Workout>` containing the workouts to be added into the new plan, 
+a new `Plan` object is created. However, before creating the `Plan` object, the `PlanList#createNewPlan()` method will 
 check that the new plan to be created does not contain the same workout order as any existing plans. If it does, 
 an `InvalidPlanException` exception will be thrown.
-<br><br>
+<br/><br/>
 If it is confirmed that the new plan does not contain
 the same workout order as any existing plan, a new `Plan` object is created.
-This new `Plan` object is then added to the application's plan list.
 <br><br>
-**(Step 3)** The `PlanList#createAndAddPlan()` method returns the new `Plan` object to `PlanCommand`.
-<br><br>
-**(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage()` is called
+**(Step 3)** The `PlanList#createNewPlan()` method returns the newly created `Plan` object to `PlanCommand`.
+<br/><br/>
+**(Steps 4 to 5)** The `PlanCommand` object will then call the `PlanList#addNewPlanToLists()` method to add this new
+`Plan` object to two lists maintained in the `PlanList` object: `plansHashMapList` and `plansDisplayList`.
+The following are the steps taken:<br/>
+
+1. Key of the `Plan` object will be generated. In this case, the key is the unique plan name.
+2. The key-`Plan` pair is stored in `plansHashMapList` which in turn is stored in `PlanList`.
+3. The key of the newly-created `Plan` object is added to the `plansDisplayList`, an `ArrayList<String>` object stored in `PlanList`.
+This ArrayList will be used for displaying the plans when the command `plan /list` is entered by the user.
+
+After the new `Plan` object has been added, this `PlanList#addNewPlanToLists()` method will return to the `PlanCommand` object.
+<br/><br/>
+**(Steps 6 to 7)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage()` is called
 to display the plan that has been created to the user via the terminal. The following is an example
 of a successful plan creation message (new plan is called "grow my muscles"):
 ```
@@ -1124,7 +1135,7 @@ Alright, the following plan has been created:
 
 ----------------------------------------------------------------------
 ```
-**(Steps 6 to 7)** `FileManager#writeNewPlanToFile()` is called to write the newly-created `Plan` 
+**(Steps 8 to 9)** `FileManager#writeNewPlanToFile()` is called to write the newly-created `Plan` 
 object's data into `plans.txt`, which is stored on the user's local filesystem.
 For more information on the file management,
 refer to this [section](DeveloperGuide.md#writing-a-new-line-of-data-to-the-resource-file).

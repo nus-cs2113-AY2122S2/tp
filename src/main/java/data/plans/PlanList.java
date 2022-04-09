@@ -105,7 +105,7 @@ public class PlanList {
     /**
      * Parses the given user argument to identify the details of the new plan to be added.
      * Thereafter, the details will be checked for their validity. If all checks pass, a new
-     * Plan object is instantiated before adding it to the ArrayList of plans.
+     * Plan object is instantiated.
      *
      * @param userArgument The user's details for the new plan, including plan name
      *                     and workout(s) to be added to the plan, via their workout number(s).
@@ -115,7 +115,7 @@ public class PlanList {
      *                               invalid number.
      * @throws InvalidPlanException If the details specified in userArgument is invalid.
      */
-    public Plan createAndAddPlan(String userArgument) throws ArrayIndexOutOfBoundsException,
+    public Plan createNewPlan(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, InvalidPlanException {
         String userPlanNameInput
                 = userArgument.split(PlanCommand.ACTION_KEYWORD_CREATE_WORKOUTS)[0].trim().toLowerCase();
@@ -143,11 +143,20 @@ public class PlanList {
         checkPlanWithSameWorkoutSequence(workoutsToAddInAPlanList, className);
         Plan newPlan = new Plan(userPlanNameInput, workoutsToAddInAPlanList);
         logger.log(Level.INFO, "New plan created.");
+        return newPlan;
+    }
 
+    /**
+     * This method adds a new Plan object to plansHashMapList and plansDisplayList.
+     *
+     * @param newPlan The new plan to be added into the two lists mentioned
+     *                in the method description.
+     */
+    public void addNewPlanToLists(Plan newPlan) {
         String newPlanKey = newPlan.toString();
         plansHashMapList.put(newPlanKey, newPlan);
         plansDisplayList.add(newPlanKey);
-        return newPlan;
+        logger.log(Level.INFO, "New plan added to lists in PlanList.");
     }
 
     /**
