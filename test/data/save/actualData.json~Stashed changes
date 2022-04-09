@@ -1,1 +1,0 @@
-[{"name":"Markers","quantity":3,"description":"Drawing","borrowRecords":[],"isLost":false},{"name":"Whiteboard","quantity":1,"description":"To draw on","borrowRecords":[],"isLost":false},{"name":"HDMI Cable","quantity":2,"description":"For connecting displays","borrowRecords":[{"startDate":"2019-04-01","endDate":"2019-04-02","borrowerName":"Storage Test"}],"isLost":false}]

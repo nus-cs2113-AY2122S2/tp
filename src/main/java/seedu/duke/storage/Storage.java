@@ -54,7 +54,7 @@ public class Storage {
             String wholeJsonData = String.join("\n", jsonDataList);
             TypeToken<ArrayList<Item>> dataType = new TypeToken<ArrayList<Item>>(){};
             bufferTaskList = gson.fromJson(wholeJsonData, dataType.getType());
-        } catch (JsonParseException e) {
+        } catch (JsonParseException | NullPointerException e) {
             throw new InvMgrException(JSON_PARSING_ERROR,e);
         } catch (IOException e) {
             throw new InvMgrException(READ_FILE_IOERROR,e);
