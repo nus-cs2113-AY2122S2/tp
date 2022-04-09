@@ -14,7 +14,6 @@ package storage {
         --
         + writeData(object: T, path: String): void
         + loadData(path: String): T
-        + createTargetFile(path: String): void
     }
 
     class "ABSTRACT\n JsonStorage" as JsonStorage <T extends Object> {
