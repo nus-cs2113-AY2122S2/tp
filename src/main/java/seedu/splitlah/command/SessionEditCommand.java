@@ -125,9 +125,6 @@ public class SessionEditCommand extends Command {
             if (sessionName != null) {
                 newSessionName = getNewSessionName(session.getSessionName(), profile);
             }
-            if (sessionDate != null) {
-                session.setDateCreated(sessionDate);
-            }
         } catch (InvalidDataException invalidDataException) {
             ui.printlnMessageWithDivider(invalidDataException.getMessage());
             return;
@@ -140,6 +137,9 @@ public class SessionEditCommand extends Command {
         }
         if (newSessionName != null) {
             session.setSessionName(newSessionName);
+        }
+        if (sessionDate != null) {
+            session.setDateCreated(sessionDate);
         }
         if (isSessionEdited) {
             ui.printlnMessageWithDivider(COMMAND_SUCCESS);
