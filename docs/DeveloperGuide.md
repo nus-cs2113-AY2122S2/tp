@@ -588,11 +588,14 @@ Given below are instructions to test the app manually.
 
 ### Launch and shutdown
 
-1. Initial launch
-   1. Download the jar file from [here](https://github.com/AY2122S2-CS2113T-T10-2/tp/releases) and copy it into an empty folder.
-   2. Open a terminal in the folder and run `java -jar PlanITarium.jar`. Expected: Shows the welcome message.
-2. Shutdown
-   1. Upon request for input, type `bye` and press [Enter].
+#### Initial launch
+
+1. Download the jar file from [here](https://github.com/AY2122S2-CS2113T-T10-2/tp/releases) and copy it into an empty folder.
+2. Open a terminal in the folder and run `java -jar PlanITarium.jar`. Expected: Shows the welcome message.
+
+#### Shutdown
+
+Upon request for input, type `bye` and press [Enter].
 
 ### Deleting persons
 
