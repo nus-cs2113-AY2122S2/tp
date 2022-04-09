@@ -2,7 +2,7 @@
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
-
+hide circle
 class Task {
     -identifier:Integer
     -description:String
