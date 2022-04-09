@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -286,7 +287,7 @@ public class Validator {
 
     public static void validateFindDoctor(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 2);
-        switch (parameters[0]) {
+        switch (parameters[0].toLowerCase()){
         case "nric":
             validateNric(parameters[1]);
             break;
@@ -315,7 +316,7 @@ public class Validator {
 
     public static void validateFindAppointment(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 2);
-        switch (parameters[0]) {
+        switch (parameters[0].toLowerCase()) {
         case "id":
             break;
         case "patient name":
@@ -337,7 +338,7 @@ public class Validator {
     public static void validateFindMedicine(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 2);
         boolean check = true;
-        switch (parameters[0]) {
+        switch (parameters[0].toLowerCase()) {
 
         case "name":
             check = validateMedicineName(parameters[1]);
@@ -359,7 +360,7 @@ public class Validator {
     }
 
     public static void validateFindPatient(String[] parameters) throws UserInputErrorException {
-        switch (parameters[0]) {
+        switch (parameters[0].toLowerCase()) {
         case "nric":
             validateNric(parameters[1]);
             break;
