@@ -7,10 +7,8 @@ import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import static java.lang.Integer.parseInt;
-import static seedu.duke.parser.CliSyntax.*;
+import static seedu.duke.parser.CliSyntax.PREFIX_ITEM_INDEX;
 
 
 public class ReturnCommand extends Command {

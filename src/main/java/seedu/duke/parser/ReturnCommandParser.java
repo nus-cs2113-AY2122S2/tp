@@ -3,7 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.commands.ReturnCommand;
 import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
-import static seedu.duke.parser.CliSyntax.*;
+import static seedu.duke.parser.CliSyntax.PREFIX_ITEM_INDEX;
 import java.util.stream.Stream;
 
 
