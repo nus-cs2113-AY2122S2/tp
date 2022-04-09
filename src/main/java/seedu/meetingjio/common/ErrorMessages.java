@@ -48,7 +48,7 @@ public class ErrorMessages {
             + "Accepted inputs are: online or physical";
     public static final String ERROR_INVALID_ATTRIBUTE_VALUE = "Invalid attribute value.";
     public static final String ERROR_INVALID_NAME = "Sorry, the user's name cannot be 'all' "
-            + "or contains special characters.";
+            + "or contains numbers or special characters except for dash and apostrophe.";
 
     // List Command
     public static final String ERROR_EMPTY_LIST = "There are no events in your timetable yet!";
