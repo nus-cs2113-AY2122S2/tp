@@ -223,14 +223,14 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
-    public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
+    public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in the wrong format ._.";
     public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with module code \"%s\" found. "
             + "Aborting load...";
     public static final String ERROR_INVALID_MODULE = "Invalid module credits found (%s had %d MCs). Aborting load...";
-    public static final String ERROR_CATCH_UNKNOWN_EXCEPTION = "Oops, I caught an exception "
-            + "that I didn't figured out before 0_0\n%s";
-    public static final String MODIFIED_JSON_EXCEPTION = "\n  Remind: The Json files is likely modified manually"
-            + ", don't do that! lol";
+    public static final String ERROR_CATCH_UNKNOWN_EXCEPTION = "Oops, I caught an exception that I wasn't expecting "
+            + "0_0:\n%s";
+    public static final String MODIFIED_JSON_EXCEPTION = "\nSomething went wrong trying to read the JSON save data.\n"
+            + "Has it been manually modified? >:(";
 
 
 

@@ -6,6 +6,7 @@ import seedu.duke.exceptions.NoSuchTagException;
 import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.util.StringConstants;
 
+//@@author chooyikai
 public class TaskList {
     private static final String LS = StringConstants.LS;
     private static final String ITEMIZE_FORMAT = "%d. %s" + LS;
@@ -85,7 +86,7 @@ public class TaskList {
         return task;
     }
 
-    //@@author
+    //@author chooyikai
     public void setList(ArrayList<Task> list) {
         taskList = list;
     }

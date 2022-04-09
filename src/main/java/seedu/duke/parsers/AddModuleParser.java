@@ -125,6 +125,7 @@ public class AddModuleParser extends AddParser {
         }
     }
 
+    //@@author chooyikai
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;
