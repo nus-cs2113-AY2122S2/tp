@@ -39,7 +39,7 @@ Enhancements implemented:
    - Users are now able to track their sources of income.
    - As a Personal Finance app, it is imperative that income can be tracked, so that users can monitor their income
 inflow and outflow.
-   - Affected existing Add, Delete, Update and List commands as these commands were also used to add `Expenditure` and
+   - Affected existing Add, Delete, Update and List commands as these commands were also used for `Expenditure` and
 `CreditCard`.
 
 
@@ -89,6 +89,13 @@ changes.
 4. Wrote the `Add Income implementation` portion.
    - Added Fig 10 - Add Income Sequence Diagram.
 
+
+5. Wrote the `List Command` portion.
+   - Added Fig 12 - List Command Sequence Diagram.
+   - Added Fig 13 - List Expenditure Sequence Diagram.
+   - Added Fig 14 - List Credit Card Sequence Diagram.
+   - Added Fig 15 - List Income Sequence Diagram.
+
 <br/>
 
 ### Team-Based tasks Contribution
@@ -121,6 +128,8 @@ changes.
 PR reviews (with non-trivial comments):
 [#39](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/39), [#46](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/46), 
 [#72](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/72), [#86](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/86), 
-[#87](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/87), [#143](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/143)
+[#87](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/87), [#143](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/143).
+
+DG review for `Simplst` can be found [here](https://github.com/nus-cs2113-AY2122S2/tp/pull/6/files/4125efa69fbb7ffda1b2ade950ec48b6e80f5baf).
 
 Bugs found during PE-Dry testing for `Spendvelope` can be viewed [here](https://github.com/khseah/ped/issues).
