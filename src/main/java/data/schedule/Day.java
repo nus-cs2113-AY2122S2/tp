@@ -18,14 +18,6 @@ public class Day {
         this.planForThisDay = planForThisDay;
     }
 
-    public void setPlanForThisDay() {
-        this.planForThisDay = planForThisDay;
-    }
-
-    public void setDayNumber() {
-        this.dayNumber = dayNumber;
-    }
-
     public Plan getPlanForThisDay() {
         return planForThisDay;
     }
