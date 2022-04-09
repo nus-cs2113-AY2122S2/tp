@@ -1,9 +1,3 @@
-<div align="center">
-
-![logo](team/Logo/logo.jpg)
-
-</div>
-
 # User Guide
 ## Introduction
 
