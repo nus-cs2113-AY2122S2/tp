@@ -140,6 +140,8 @@ public class Parser {
                 return new IncorrectCommand(Command.INCORRECT_COST_FORMAT);
             } catch (IllegalArgumentException e) {
                 return new IncorrectCommand(Command.INCORRECT_ENUM_TYPE);
+            } catch (DateTimeParseException e) {
+                return new IncorrectCommand(Command.INVALID_DATE_MESSAGE);
             }
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
