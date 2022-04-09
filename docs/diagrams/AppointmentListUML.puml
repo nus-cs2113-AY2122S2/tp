@@ -1,5 +1,6 @@
 @startuml
-
+hide circle
+skinparam classAttributeIconSize 0
 class AppointmentList {
 -appointments : Arraylist<appointment> = null
 -returnedFinderArray : Arraylist<appointment> = null

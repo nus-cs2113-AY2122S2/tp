@@ -229,7 +229,7 @@ Below is an example describing the behaviour of the `find` feature.
 ---------------------------------------------------------------------------------------------------------------
 ## Product scope
 
-###Target user profile:
+### Target user profile:
 
 * administrator in clinic(s)
 * prefer desktop apps over other types
@@ -237,7 +237,7 @@ Below is an example describing the behaviour of the `find` feature.
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-###Value proposition:
+### Value proposition:
 
 Manage core clinic related data faster than using mouse or GUI.
 Ensure each data type conforms to certain standards with in-built validations.
@@ -246,14 +246,14 @@ Ensure each data type conforms to certain standards with in-built validations.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Version | Priority | As a ... | I want to ... | So that I can ... |
-|---------| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-|         | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-|         | `* * *`  | new user                                   | import or export data          | share with others when needed and make backup copies                                                                       |
-|         | `* *`    | user                                       | find appointments based on selected criteria | filter out the appointments that I want to know about                                   |
-|         | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-|         | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-|         | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Version | Priority | As a ...                                   | I want to ...                                | So that I can ...                                                      |
+|---------|----------|--------------------------------------------|----------------------------------------------|------------------------------------------------------------------------|
+|         | `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                 |
+|         | `* * *`  | new user                                   | import or export data                        | share with others when needed and make backup copies                   |
+|         | `* *`    | user                                       | find appointments based on selected criteria | filter out the appointments that I want to know about                  |
+|         | `* * *`  | user                                       | find a person by name                        | locate details of persons without having to go through the entire list |
+|         | `* *`    | user                                       | hide private contact details                 | minimize chance of someone else seeing them by accident                |
+|         | `*`      | user with many persons in the address book | sort persons by name                         | locate a person easily                                                 |
 
 ### Use cases
 

@@ -150,12 +150,11 @@ public class Validator {
 
     /* Validate medicine attributes */
     private static boolean validateMedicineName(String medicineName) throws UserInputErrorException {
-        boolean isValid = medicineName.matches("[a-zA-z]+");
+        boolean isValid = medicineName.matches("[a-zA-z ]+");
         if (!isValid) {
             throw new UserInputErrorException("Invalid Medicine name");
         }
         return true;
-
     }
 
     private static boolean validateDosage(String dosage) throws UserInputErrorException {
@@ -388,12 +387,39 @@ public class Validator {
         }
     }
 
+    public static void validateFindPatient(String[] parameters) throws HalpmiException {
+        switch (parameters[0]) {
+        case "nric":
+            validateNric(parameters[1]);
+            break;
+        case "name":
+            validateFullName(parameters[1]);
+            break;
+        case "age":
+            validateAge(parameters[1]);
+            break;
+        case "gender":
+            validateGender(parameters[1]);
+            break;
+        case "address":
+            validateAddress(parameters[1]);
+            break;
+        case "dob":
+            validateDob(parameters[1]);
+            break;
+        case "admissiondate":
+            validateAdmissionDate(parameters[1]);
+            break;
+        default:
+            throw new HalpmiException("Input must be an attribute of Patient");
+        }
+    }
     public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws UserInputErrorException {
-        //minParameterCheck(parameters, 3);
-        validateNric(dispenseMedicineParameters[0]);
-        if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
-            throw new UserInputErrorException("Not all medicines in list have both "
-                    + "the name of the medicine and the quantity to prescribe!");
+      //minParameterCheck(parameters, 3);
+      validateNric(dispenseMedicineParameters[0]);
+      if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
+          throw new UserInputErrorException("Not all medicines in list have both "
+                  + "the name of the medicine and the quantity to prescribe!");
         }
 
         for (int i = 1; i < dispenseMedicineParameters.length; i += 2) {

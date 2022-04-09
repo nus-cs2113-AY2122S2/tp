@@ -4,11 +4,19 @@ import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.List;
 import seedu.duke.status.Status;
 
+/*
+ * Class that extends Abstract Command Class.
+ */
 public class FindDoctorCommand extends Command {
 
+    /*
+     * Constructor method that calls constructor of super class
+     * @ param parameterArray an array of Strings - additional parameters given by user
+     */
     public FindDoctorCommand(String[] parameterArray) {
         super(parameterArray);
     }
+
 
     public Status execute(List doctorList) {
         if (doctorList instanceof DoctorList) {

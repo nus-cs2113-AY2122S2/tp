@@ -40,7 +40,19 @@ public class Manager {
         }
     }
 
-    private Status executeCommand(String commandWord, String parameters) throws HalpmiException {
+    /*
+     * Method that initialises the relevant Command object and executes the execute method.
+     * Upon execution, returns either a success message or throws exception.
+     * @ param commandWord a String that holds the initial command given by User
+     * @ param parameters a String that holds all the additional parameters given following the Command
+     * @ return Status object - enum that holds various success messages
+     * @ throws HalpmiException when the commandWord or parameters is not following correct formatting
+     * @ throws DuplicateEntryException when duplicate entries are being added through the Command
+     * @ throws NotFoundException when certain data was not found
+     */
+    private Status executeCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
+            DuplicateEntryException {
+
         Command command;
         Status status = null;
         switch (commandWord) {

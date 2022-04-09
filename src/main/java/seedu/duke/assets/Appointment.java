@@ -1,5 +1,6 @@
 package seedu.duke.assets;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Appointment {
@@ -35,6 +36,20 @@ public class Appointment {
                 + "Appointment details: " + appointmentDetails + "\n";
     }
 
+    public void updateAppointmentDetails() {
+        LocalDate localDateNow = LocalDate.now();
+        LocalDate localAppointmentDate = LocalDate.parse(this.appointmentDate);
+        if (isBeforeOrEqual(localDateNow, localAppointmentDate)) {
+            this.appointmentDetails = this.appointmentDetails + " - appointment finished on " + this.appointmentDate;
+        }
+    }
+
+    private boolean isBeforeOrEqual(LocalDate date, LocalDate compareToDate) {
+        if (date == null || compareToDate == null) {
+            return false;
+        }
+        return !compareToDate.isAfter(date);
+    }
 
     public String getAppointmentId() {
         return appointmentId;
@@ -72,7 +87,7 @@ public class Appointment {
         String returnString = "";
         for (int i = 0; i < dispensedMedicines.size(); i++) {
             if (i != 0) {
-                returnString +=  "," + dispensedMedicines.get(i);
+                returnString += "," + dispensedMedicines.get(i);
             } else {
                 returnString += appointmentId + "," + dispensedMedicines.get(i);
             }

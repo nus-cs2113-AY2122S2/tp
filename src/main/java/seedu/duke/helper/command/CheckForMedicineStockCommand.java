@@ -9,12 +9,27 @@ import seedu.duke.status.Status;
 
 import java.util.Arrays;
 
+/*
+ * Class that extends Abstract Command Class.
+ */
 public class CheckForMedicineStockCommand extends Command {
 
+    /*
+     * Constructor method that calls constructor of super class
+     * @ param parameterArray an array of Strings - additional parameters given by user
+     */
     public CheckForMedicineStockCommand(String[] parameterArray) {
         super(parameterArray);
     }
 
+    /*
+     * Method that takes in  MedicineList that needs to be acted on.
+     * Uses parameterArray as inputs to find if required medicines exit in List.
+     * @ param list a List object - should be an instance of MedicineList
+     * @ return Status.MEDICINE_STOCK_FOUND_SUCCESS if changes made to list was successful
+     * @ throws HalpMiException if some medicines cannot be found.
+     * If exception thrown, a table of missing medicines printed.
+     */
     @Override
     public Status execute(List medicineList) throws DuplicateEntryException, NotFoundException,
             UserInputErrorException {
