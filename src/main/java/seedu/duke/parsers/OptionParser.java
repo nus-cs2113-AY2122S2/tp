@@ -5,7 +5,6 @@ import java.util.HashMap;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.OptionCommand;
 import seedu.duke.exceptions.GeneralParseException;
-import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 

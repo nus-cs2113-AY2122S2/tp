@@ -56,11 +56,5 @@ public class TextUi {
         showMessage(StringConstants.MESSAGE_GOODBYE);
     }
 
-    /**
-     * Displays the initialisation message.
-     */
-    public static void showInitFailedMessage() {
-        showMessage(StringConstants.MESSAGE_INIT_FAILED);
-    }
 
 }

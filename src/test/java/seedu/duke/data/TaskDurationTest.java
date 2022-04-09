@@ -205,7 +205,6 @@ public class TaskDurationTest {
 
             taskDuration = new TaskDuration("70.5 m");
             assertEquals("1 hour(s) 11 minute(s)", taskDuration.toString());
-            //System.out.println(taskDuration);
 
         } catch (Exception e) {
             e.printStackTrace();

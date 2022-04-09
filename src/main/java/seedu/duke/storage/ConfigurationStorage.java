@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
+import seedu.duke.exceptions.UnknownException;
 import seedu.duke.util.Configuration;
 
 
@@ -21,10 +23,11 @@ public class ConfigurationStorage extends JsonStorage<Configuration> {
         Path file = new File(path).toPath();
         try {
             Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
-            Configuration configuration = gson.fromJson(reader, (Type) seedu.duke.util.Configuration.class);
-            return configuration;
-        } catch (Exception e) {
+            return gson.fromJson(reader, (Type) Configuration.class);
+        } catch (IOException e) {
             throw new ReadException();
+        } catch (Exception e) {
+            throw new UnknownException(e.toString());
         }
     }
 }

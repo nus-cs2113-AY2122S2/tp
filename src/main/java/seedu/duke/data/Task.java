@@ -20,22 +20,20 @@ public class Task {
     private String taskName;
     private String taskDescription;
     private TaskDuration workingTime;
-    private ArrayList<String> tags;
+    private final ArrayList<String> tags;
 
     public Task(String taskName, String taskDescription, String workingTime) throws ModHappyException {
-        try {
-            this.taskName = taskName;
-            this.taskDescription = taskDescription;
-            if (!Objects.isNull(workingTime)) {
-                this.workingTime = new TaskDuration(workingTime);
-            } else {
-                this.workingTime = null;
-            }
-            isTaskDone = false;
-            tags = new ArrayList<>();
-        } catch (ModHappyException e) {
-            throw e;
+
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        if (!Objects.isNull(workingTime)) {
+            this.workingTime = new TaskDuration(workingTime);
+        } else {
+            this.workingTime = null;
         }
+        isTaskDone = false;
+        tags = new ArrayList<>();
+
     }
 
     public ArrayList<String> getTagList() {
@@ -64,11 +62,7 @@ public class Task {
     }
 
     public void setWorkingTime(String workingTime) throws ModHappyException {
-        try {
-            this.workingTime = new TaskDuration(workingTime);
-        } catch (ModHappyException e) {
-            throw e;
-        }
+        this.workingTime = new TaskDuration(workingTime);
     }
 
     public void setTaskName(String taskName) {

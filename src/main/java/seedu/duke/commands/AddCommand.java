@@ -3,7 +3,6 @@ package seedu.duke.commands;
 import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
@@ -62,7 +61,7 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        String res = "";
+        String res;
         if (typeToAdd == AddObjectType.TASK) {
             Module targetModule = moduleList.getGeneralTasks();
             if (!Objects.isNull(targetModuleName)) {

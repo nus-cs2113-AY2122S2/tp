@@ -6,7 +6,7 @@ import seedu.duke.exceptions.ModHappyException;
  * Storage interfaces of ModHappy.
  * @param <T> any data type
  */
-public interface Storage<T extends Object> {
+public interface Storage<T> {
 
     /**
      * Writes an object of type T to a json file.
@@ -23,10 +23,5 @@ public interface Storage<T extends Object> {
      */
     T loadData(String path) throws ModHappyException;
 
-    /**
-     * Checks the existence of the storage file, and create if not exists.
-     * @param path json file path
-     * @throws ModHappyException if the file could not be created
-     */
-    void createTargetFile(String path) throws ModHappyException;
+
 }

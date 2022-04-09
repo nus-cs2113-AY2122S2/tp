@@ -10,7 +10,6 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.exceptions.UnsupportedResultTypeException;
 import seedu.duke.exceptions.WrongDurationFormatException;
-import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -60,7 +59,6 @@ public class ModHappyParser extends Parser {
         } catch (ModHappyException e) {
             throw new UnknownCommandException(userInput);
         } catch (Exception e) {
-            System.out.println(e);
             throw new UnknownCommandException(userInput);
         }
     }

@@ -19,25 +19,22 @@ import static seedu.duke.util.NumberConstants.MINIMUM_MODULAR_CREDITS;
 public class ModHappyStorageManager {
 
 
-    private static final String taskLoadErrorMessage = StringConstants.TASK_DATA_LOAD_FAILED;
-    private static final String taskLoadSuccessMessage = StringConstants.TASK_DATA_LOAD_SUCCESS;
-    private static final String configurationLoadSuccessMessage = StringConstants.CONFIGURATION_DATA_LOAD_SUCCESS;
-    private static final String configurationLoadErrorMessage = StringConstants.CONFIGURATION_DATA_LOAD_FAILED;
-    private static final String noConfigFileMessage = StringConstants.NO_CONFIG_DATA_FILE;
-
 
     private static Storage modHappyStorage;
 
+    @SuppressWarnings("unchecked")
     public static void saveTaskList(ArrayList<Task> taskArrayList) throws ModHappyException {
         modHappyStorage = new TaskListStorage();
         modHappyStorage.writeData(taskArrayList, StringConstants.TASK_PATH);
     }
 
+    @SuppressWarnings("unchecked")
     public static void saveModuleList(ArrayList<Module> moduleArrayList) throws ModHappyException {
         modHappyStorage = new ModuleListStorage();
         modHappyStorage.writeData(moduleArrayList, StringConstants.MODULE_PATH);
     }
 
+    @SuppressWarnings("unchecked")
     public static void saveConfiguration(Configuration configuration) throws ModHappyException {
         modHappyStorage = new ConfigurationStorage();
         modHappyStorage.writeData(configuration, StringConstants.CONFIGURATION_PATH);
@@ -49,21 +46,22 @@ public class ModHappyStorageManager {
             modHappyStorage = new ConfigurationStorage();
             try {
                 Configuration configuration = (Configuration) modHappyStorage.loadData(configurationPath);
-                TextUi.showUnformattedMessage(configurationLoadSuccessMessage);
+                TextUi.showUnformattedMessage(StringConstants.CONFIGURATION_DATA_LOAD_SUCCESS);
                 return configuration;
             } catch (ModHappyException e) {
                 Configuration configuration = new Configuration();
                 TextUi.showUnformattedMessage(e);
-                TextUi.showUnformattedMessage(configurationLoadErrorMessage);
+                TextUi.showUnformattedMessage(StringConstants.CONFIGURATION_DATA_LOAD_FAILED);
                 return configuration;
             }
         } else {
             Configuration configuration = new Configuration();
-            TextUi.showUnformattedMessage(noConfigFileMessage);
+            TextUi.showUnformattedMessage(StringConstants.NO_CONFIG_DATA_FILE);
             return configuration;
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void loadTaskList(ModuleList moduleList, String taskPath) {
         File taskDataFile = new File(taskPath);
         if (taskDataFile.exists()) {
@@ -78,13 +76,15 @@ public class ModHappyStorageManager {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void loadModuleList(ModuleList moduleList, String modulePath) {
         File moduleDataFile = new File(modulePath);
         if (moduleDataFile.exists()) {
             modHappyStorage = new ModuleListStorage();
             try {
                 ArrayList<String> moduleCodes = new ArrayList<>();
-                ArrayList<Module> arrayListModule = (ArrayList<Module>) modHappyStorage.loadData(modulePath);
+                ArrayList<Module> arrayListModule;
+                arrayListModule = (ArrayList<Module>) modHappyStorage.loadData(modulePath);
                 for (Module m : arrayListModule) {
                     if (moduleCodes.contains(m.getModuleCode())) {
                         throw new DuplicateModuleException(m.getModuleCode());

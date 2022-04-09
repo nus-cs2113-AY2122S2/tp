@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.commands.Command;
-import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.InvalidModuleGradeException;
 import seedu.duke.exceptions.ExcessArgumentException;
@@ -41,9 +40,7 @@ public abstract class Parser {
     protected static final String INVALID_TASK_DES_FLAG = StringConstants.INVALID_TASK_DES_FLAG;
     protected static final String INVALID_MOD_DES_FLAG = StringConstants.INVALID_MOD_DES_FLAG;
     protected static final String INVALID_TIME_FLAG = StringConstants.INVALID_TIME_FLAG;
-    protected static final String INVALID_MARK_FLAG = StringConstants.INVALID_MARK_FLAG;
     protected static final String INVALID_MODULE_GRADE = StringConstants.INVALID_MODULE_GRADE;
-    protected static final String INVALID_NUMBER = StringConstants.INVALID_NUMBER;
     protected static final String INVALID_TAG_COMMAND = StringConstants.INVALID_TAG_COMMAND;
 
     protected static final String SPACE = StringConstants.SPACE;
@@ -51,7 +48,6 @@ public abstract class Parser {
     protected static final String MODULE = StringConstants.MODULE_STR;
     protected static final String TASK_NAME_STR = StringConstants.TASK_NAME_STR;
     protected static final String TASK_NUMBER_STR = StringConstants.TASK_NUMBER_STR;
-    protected static final String MODULAR_CREDIT_STR = StringConstants.MODULAR_CREDIT_STR;
     protected static final String MODULE_CODE_STR = StringConstants.MODULE_CODE_STR;
     protected static final String MODULE_DESCRIPTION_STR = StringConstants.MODULE_DESCRIPTION_STR;
     protected static final String TASK_PARAMETER_STR = StringConstants.TASK_PARAMETER_STR;
