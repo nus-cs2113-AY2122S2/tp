@@ -1,6 +1,5 @@
 package seedu.mindmymoney.helper;
 
-import seedu.mindmymoney.MindMyMoney;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
 import seedu.mindmymoney.constants.IncomeCategoryTypes;
@@ -269,7 +268,8 @@ public class AddCommandInputTests {
      * @throws MindMyMoneyException when the parameters are invalid.
      */
     public static void testExpenditureParameters(String paymentMethod, String inputCategory, String description,
-                                                 String amountAsString, String inputTime, CreditCardList creditCardList) throws MindMyMoneyException {
+                                                 String amountAsString, String inputTime,
+                                                 CreditCardList creditCardList) throws MindMyMoneyException {
         testPaymentMethod(paymentMethod, creditCardList);
         testExpenditureCategory(inputCategory);
         testDescription(description);
