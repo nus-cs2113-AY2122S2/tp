@@ -30,7 +30,7 @@ public class TravelPackage {
     private Reservations reservationList;
 
     public TravelPackage(String name, int id, LocalDate startDate, LocalDate endDate,
-            String hotel, double price, String country, int maxParticipants) {
+                         String hotel, double price, String country, int maxParticipants) {
         this.name = name;
         this.id = id;
         this.startDate = startDate;
