@@ -52,13 +52,13 @@ As such, we referenced AddressBook to segment the program into `Parser`, `Comman
 
 As alluded to prior, one major consideration was to build it in a manner that can parse text input as effectively as possible. In considering text input, we divided the parsing into the following segments:
 
-<p="center"><code>commandWord [argumentType/`argumentValue`] [...]</code></p>
+<p align="center"><code>commandWord [argumentType/`argumentValue`] [...]</code></p>
 
 To dispatch <code>argumentType/\`argumentValue\`</code> strings to the correct `Command` class, the following logic is employed by `Parser#parseCommand`.
 
 **1. Parse the correct Command Word**
 
-<p="center"><code>commandWord</code></p>
+<p align="center"><code>commandWord</code></p>
 
 `Parser#splitCommandTerm` splits the input string upon the first space. 
 The first substring is used to decide which `Command` to dispatch while the second is used for its arguments.
@@ -66,7 +66,7 @@ In the case where a second substring is not required, as in the case of `help` a
 
 **2. Split Arguments**
 
-<p="center"><code>[argumentType/`argumentValue`] [...]</code></p>
+<p align="center"><code>[argumentType/`argumentValue`] [...]</code></p>
 
 Complex commands such as `add` and `update` necessitate multiple arguments.
 To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` is implemented. 
