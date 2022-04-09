@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static seedu.sherpass.constant.Message.EDIT_TASK_RESULT_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_EMPTY_EDIT_CONTENT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.TAB_INDENT;
 
@@ -51,6 +52,14 @@ public class EditCommand extends Command {
         this.byDate = byDate;
     }
 
+    public void checkValidCommand() throws InvalidInputException {
+        boolean isDoDateNull = (doOnDate == null && startTime == null && endTime == null);
+        boolean isByDateNull = (byDate == null);
+        if (isDoDateNull && isByDateNull && taskDescription.isBlank()) {
+            throw new InvalidInputException(ERROR_EMPTY_EDIT_CONTENT_MESSAGE);
+        }
+    }
+
     private void setDoOnDateStartEndTime(Task taskToEdit) {
         doOnDate = (doOnDate == null) ? taskToEdit.getDoOnStartDateTime().toLocalDate() : doOnDate;
         startTime = (startTime == null) ? taskToEdit.getDoOnStartDateTime().toLocalTime() : startTime;
@@ -72,19 +81,19 @@ public class EditCommand extends Command {
             Task taskToEdit = taskList.getTask(editIndex);
             setDoOnDateStartEndTime(taskToEdit);
             if (isRepeating) {
-                taskList.editRepeatedTasks(editIndex, taskDescription,
+                taskToEdit = taskList.editRepeatedTasks(editIndex, taskDescription,
                         doOnStartDateTime, doOnEndDateTime, byDate);
             } else {
-                taskList.editSingleTaskContent(editIndex, taskDescription,
+                taskToEdit = taskList.editSingleTaskContent(editIndex, taskDescription,
                         doOnStartDateTime, doOnEndDateTime, byDate);
             }
             storage.writeSaveData(taskList);
             ui.showToUser(EDIT_TASK_RESULT_MESSAGE);
             ui.showToUser(TAB_INDENT + taskToEdit);
         } catch (TimeClashException | InvalidInputException exception) {
-            ui.showToUser(exception.getMessage());
+            ui.showError(exception.getMessage());
         } catch (IndexOutOfBoundsException exception) {
-            ui.showToUser(ERROR_INVALID_INDEX_MESSAGE);
+            ui.showError(ERROR_INVALID_INDEX_MESSAGE);
         }
     }
 }
