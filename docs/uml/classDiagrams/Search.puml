@@ -19,7 +19,7 @@ class WerkIt #Sandybrown {
 + startContinuousUserPrompt()
 }
 
-class Main {
+class Main COLOR_MAIN {
 
 }
 

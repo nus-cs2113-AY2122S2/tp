@@ -12,7 +12,7 @@ WerkIt -up-> UI
 ExerciseList <-up- ExerciseCommand
 "{abstract}\nCommand" <|- ExerciseCommand
 
-class Main {
+class Main COLOR_MAIN {
 
 }
 Parser ..> "{abstract}\nCommand"
