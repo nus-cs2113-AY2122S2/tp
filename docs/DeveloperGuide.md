@@ -7,7 +7,7 @@
 # 1. Overview
 MeetingJio is a program for **finding potential time slots for team meetings based on everyone’s availability**.
 
-# 2. Design 
+# 2. Design
 
 ## 2.1 Architecture
 
@@ -15,15 +15,50 @@ MeetingJio is a program for **finding potential time slots for team meetings bas
 
 ## 2.2 UI Component
 
-## 2.3 Logic Component
-- Parsers
-- Commands
+## 2.3 Commands Component
+![CommandClassDiagram1](images/CommandClassDiagram1.png)
+![CommandClassDiagram2](images/CommandClassDiagram2.png)
+The above partial class diagrams illustrate the classes inside the commands component
+that correspond to specific functionalities.
 
-## 2.4 Model Component
-- Timetables
-- Events
+The commands component consists of a commands package. Inside the package are the following classes:
+1. An abstract `Command` class which other individual command classes inherit from.
+2. Individual Command classes which corresponding to a specific command based on the user's input.
+- `AddLessonCommand`
+- `AddMeetingCommand`
+- `AddUserCommand`
+- `ClearCommand`
+- `DeleteCommand`
+- `EditCommand`
+- `ExitCommand`
+- `FreeCommand`
+- `HelpCommand`
+- `ListCommand`
+3. Lastly, `CommandResult` class returns corresponding feedbacks to the user.
 
-## 2.5 Storage Component
+##2.4 Parser Component
+## 2.5 Timetable Component
+- Timetable
+- MasterTimetable
+
+## 2.6 Events Component
+- Event
+- Lesson
+- Meeting
+
+## 2.7 Storage Component
+![StorageClassDiagram](images/StorageClassDiagram.png)
+The storage component uses the `StorageFile` and `ParserLocalData` classes.
+- `StorageFile` class consists of the two main functions, `saveData` and `loadData`.
+- `saveData` writes all the elements in the timetable and masterTimetable to the `MeetingJio.txt`. 
+If the file is not found, the file will be created.
+- `loadData` reads all the data stored in the `MeetingJio.txt` and passes them to the corresponding function 
+in the `ParserLocalData` class.
+- `ParserLocalData` parsers all the data and stores them back into the corresponding list. In addition, it contains
+error exception handler to ensure that the data in the `MeetingJio.txt` is correctly formatted.
+
+>The directory and filename of the data file is defined within the `StorageFile` class<br>
+The default value is set to 'MeetingJio.txt'
 
 # 3. Implementation
 This section describes some noteworthy details on how certain features are implemented.
