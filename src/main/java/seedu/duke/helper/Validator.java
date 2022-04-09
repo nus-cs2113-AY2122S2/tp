@@ -153,7 +153,7 @@ public class Validator {
         minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateAdmissionDate(parameters[6]);
-        validateAdmissionDob(parameters[6],  parameters[6]);
+        validateAdmissionDob(parameters[6],  parameters[5]);
     }
 
 
