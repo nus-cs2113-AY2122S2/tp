@@ -45,5 +45,6 @@ public class EditDoctorCommand extends Command {
             doctorList.getDoctor(index).editName(newInformation);
             return String.format(boundary + "Updated already!\n" + doctorList.getDoctor(index) + "\n" + boundary);
         }
+
     }
 }

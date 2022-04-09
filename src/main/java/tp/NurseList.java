@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class NurseList {
     public static String boundary = "____________________________________________________________"
             + System.lineSeparator();
-    protected ArrayList<Nurse> nurses = new ArrayList<>();
+    protected static ArrayList<Nurse> nurses = new ArrayList<>();
     protected int size;
 
     public NurseList() {
@@ -56,7 +56,7 @@ public class NurseList {
      * @param id ID of the nurse to find.
      * @return Nurse with the ID given.
      */
-    public Nurse searchNurse(String id) {
+    public static Nurse searchNurse(String id) {
         for (int i = 0; i < nurses.size(); i++) {
             if (nurses.get(i).getId().trim().equals(id)) {
                 return nurses.get(i);

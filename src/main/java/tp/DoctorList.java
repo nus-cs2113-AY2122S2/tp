@@ -1,20 +1,19 @@
 package tp;
 
 import tp.person.Doctor;
-import tp.person.Person;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 
 public class DoctorList {
     public static String boundary = "____________________________________________________________"
                                             + System.lineSeparator();
-    protected ArrayList<Doctor> doctors = new ArrayList<>();
+    protected static ArrayList<Doctor> doctors = new ArrayList<>();
     protected int size = 0;
 
     public DoctorList() {
         size = 0;
     }
+
 
     public Doctor getDoctor(int index) {
         return doctors.get(index - 1);
@@ -62,7 +61,7 @@ public class DoctorList {
      * @param id ID of the doctor to find.
      * @return Doctor with the ID given.
      */
-    public Doctor searchDoctor(String id) {
+    public static Doctor searchDoctor(String id) {
         for (int i = 0; i < doctors.size(); i++) {
             if (doctors.get(i).getId().trim().equals(id)) {
                 return doctors.get(i);

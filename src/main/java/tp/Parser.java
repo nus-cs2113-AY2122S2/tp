@@ -17,7 +17,6 @@ import tp.command.EditNurseCommand;
 import tp.command.EditWardCommand;
 import tp.command.EditDoctorCommand;
 import tp.command.EditPatientCommand;
-import tp.command.ExitCommand;
 import tp.command.GetAppointmentsOfDoctorCommand;
 import tp.command.HelpCommand;
 import tp.command.ListAppointmentListCommand;
@@ -140,15 +139,27 @@ public class Parser {
         int patientIndex = dummy.indexOf("/p");
         int nurseIndex = dummy.indexOf("/n");
         String s = dummy.substring(doctorIndex + 3, patientIndex).trim();
-        doctorIndex = Integer.parseInt(s);
+        String[] strings = s.replaceAll("\\[","").replaceAll("]","").split(",");
+        int[] docIndexes = new int[strings.length];
+        for (int i = 0; i < strings.length; i++) {
+            docIndexes[i] = Integer.parseInt(strings[i]);
+        }
         s = dummy.substring(patientIndex + 3, nurseIndex).trim();
-        patientIndex = Integer.parseInt(s);
+        strings = s.replaceAll("\\[","").replaceAll("]","").split(",");
+        int[] patientIndexes = new int[strings.length];
+        for (int i = 0; i < strings.length; i++) {
+            patientIndexes[i] = Integer.parseInt(strings[i]);
+        }
         int wardIndex = dummy.indexOf("/id");
         s = dummy.substring(nurseIndex + 3,wardIndex).trim();
-        nurseIndex = Integer.parseInt(s);
+        strings = s.replaceAll("\\[","").replaceAll("]","").split(",");
+        int[] nurseIndexes = new int[strings.length];
+        for (int i = 0; i < strings.length; i++) {
+            nurseIndexes[i] = Integer.parseInt(strings[i]);
+        }
         s = dummy.substring(wardIndex + 3).trim();
         wardIndex = Integer.parseInt(s);
-        return new AddWardCommand(doctorIndex, patientIndex, nurseIndex, wardIndex);
+        return new AddWardCommand(docIndexes, patientIndexes, nurseIndexes, wardIndex);
     }
 
     //@@author Demonshaha

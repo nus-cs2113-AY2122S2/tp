@@ -39,10 +39,10 @@ public class Ui {
     }
 
     public void printAddHelp() {
-        String addDoctor = "add doctor /id ID /n NAME /ph PHONE /e EMAIL" + System.lineSeparator();
+        String addDoctor = "add doctor /id ID /n NAME /ph PHONE /e EMAIL /w WARDNUMBER" + System.lineSeparator();
         String addPatient = "add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS"
                                     + System.lineSeparator();
-        String addNurse = "add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE" + System.lineSeparator();
+        String addNurse = "add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE /w WARDNUMBER" + System.lineSeparator();
         String addAppointment = "add appointment /t 2022-03-19T15:16:00 /d DOCTOR_NO /p PATIENT_NO"
                                         + System.lineSeparator();
         String addWard = "add ward /d DOCTOR_NO /p PATIENT_NO /n NURSE_NO /id WARD_ID"
