@@ -28,6 +28,8 @@
   * [Glossary](#glossary)
 * [Instructions for manual testing](#instructions-for-manual-testing)
 
+<br/>
+
 ## Introduction
 
 **MindMyMoney** (M<sup>3</sup>) is a desktop app for managing users' personal finances, optimized for use via a
@@ -177,10 +179,10 @@ This section describes some noteworthy details on how certain features of MindMy
 ### Add Command
 The source code can be found in [`AddCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/AddCommand.java)
 
-The AddCommand feature allows users to add expenditures, credit cards or their income using a single command. 
+The Add Command feature allows users to add expenditures, credit cards or their income using a single command. 
 This provides speed and ease of use by only requiring a single line of input.
 
-The AddCommand has 3 parts. These parts are differentiated by their flags:
+The Add Command has 3 parts. These parts are differentiated by their flags:
 - Add expenditure `/e`.
 - Add credit card `/cc`.
 - Add income `/i`.
@@ -276,7 +278,7 @@ Aspect: How to ask user for the fields of input.
 
 ### CalculateInputCommand feature
 The source code can be found in [`CalculateInputCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/CalculateInputCommand.java)
-[`Calculations.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/helper/Calculations.java)
+and [`Calculations.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/helper/Calculations.java)
 
 MindMyMoney allows users to view their finances in a more meaningful manner by displaying the total expenditure and breakdown of expenses in a
 bar chart format.
@@ -285,6 +287,8 @@ The CalculateCommand can take in 3 different `[DATE]` fields:
 - `calculate /epm [DD/MM/YYYY]` allows user to calculate total expenditure of the specific date.
 - `calculate /epm [MM/YYYY]` allows user to calculate total expenditure of the specific month.
 - `calculate /epm [YYYY]` allows user to calculate total expenditure of the specific year.
+
+<br/>
 
 ![calculate_command_sequence_diagram](images/CalculateCommandSequenceDiagram3.png)
 <br/> Fig 11 - Calculate Input Command Sequence Diagram
@@ -299,7 +303,7 @@ find the items that contain the specified date.
 5. Afterwards, `Calculations.displayCalculationBreakdown()` is invoked to show the breakdown of expenses in a bar chart format.
 6. If `/epm` flag is not present, MindMyMoneyException is thrown.
 
-
+<br/>
 
 #### CalculateCommand Design Considerations
 Aspect: How to allow users to have a better understanding of their own expenses.
@@ -311,22 +315,84 @@ Aspect: How to allow users to have a better understanding of their own expenses.
   * Pros: Users can view their overall expenses in a bar chart format, which is easier to view at one glance.
   * Cons: Some users may not prefer to visualise their data in a bar chart format.
 
-
-
+<br/>
 
 ### ListCommand feature
 The source code can be found in [`ListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/ListCommand.java)  
 
-MindMyMoney allow users to view their current list of added expenditures. 
-#### Current Implementation
-The sequence diagram below shows the interactions of different subcomponents of the system when listing.  
+The List Command feature allows users to view their current expenditures, credit cards and incomes, using their
+respective flags:
+- List expenditure `/e`.
+- List credit card `/cc`.
+- List income `/i`.
 
-![list_command_sequence_diagram](images/List_Command_Sequence_Diagram.png)
-<br/> Fig 13 - List Command Sequence Diagram
+![list_command_sequence_diagram](images/ListCommandSequenceDiagram.png)
+<br/> Fig 12 - List Command Sequence Diagram
 
-#### ListCommand design considerations
-Aspect: How to make the `ListCommand` easily tested using JUnit testing.
-* Alternative 1 (current choice): Abstract the conversion of `Expenditure` to `String` in a separate` ListCommand.listToString()` method.
+The sequence diagram above shows the interactions when a `ListCommand` is executed.
+1. After receiving the `ListCommand` object from `Parser`, `MMM` calls the `ListCommand.executeCommand()` method.
+2. If the expenses flag `/e` is present, it calls the `printExpenditureList()` method.
+3. Else if the credit card flag `/cc` is present, it calls the `printCreditCardList()` method.
+4. Else if the income flag `/i` is present, it calls the `printIncomeList()` method.
+5. Else, it throws an error, which is then handled by printing an error message to the user.
+
+<br/>
+
+#### List Expenditure `/e`
+Allows the user to view their list of current expenditures. The list is printed through the `ListCommand.printExpenditureList()` 
+method, invoked when using the `/e` flag.
+
+![list_expenditure_sequence_diagram](images/ListExpenditureSequenceDiagram.png)
+<br/> Fig 13 - List Expenditure Sequence Diagram
+
+The sequence diagram above shows the interactions when listing expenditures.
+1. After receiving the `ListCommand` object from `Parser`, `MMM` calls the `ListCommand.executeCommand()` method.
+2. `ListCommand.printExpenditureList()`method is invoked as the `/e` flag is present.
+3. `ListCommand.expenditureListToString()` method is then invoked, which loops through the `expenditureList` and
+concatenates each expenditure entry into a String `listInString`.
+4. The `listInString` is returned which is then printed out.
+5. Control is returned to `MMM`.
+
+<br/>
+
+#### List Credit Card `/cc`
+Allows the user to view their list of current credit cards. The list is printed through the `ListCommand.printCreditCardList()`
+method, invoked when using the `/cc` flag.
+
+![list_credit_card_sequence_diagram](images/ListCreditCardSequenceDiagram.png)
+<br/> Fig 14 - List Credit Card Sequence Diagram
+
+The sequence diagram above shows the interactions when listing credit cards.
+1. After receiving the `ListCommand` object from `Parser`, `MMM` calls the `ListCommand.executeCommand()` method.
+2. `ListCommand.printCreditCardList()`method is invoked as the `/e` flag is present.
+3. `ListCommand.creditCardListToString()` method is then invoked, which loops through the `creditCardList` and
+   concatenates each credit card into a String `listInString`.
+4. The `listInString` is returned which is then printed out.
+5. Control is returned to `MMM`.
+
+<br/>
+
+#### List Income `/i`
+Allows the user to view their list of current incomes. The list is printed through the `ListCommand.printIncomeList()`
+method, invoked when using the `/i` flag.
+
+![list_income_sequence_diagram](images/ListIncomeSequenceDiagram.png)
+<br/> Fig 15 - List Income Sequence Diagram
+
+The sequence diagram above shows the interactions when listing incomes.
+1. After receiving the `ListCommand` object from `Parser`, `MMM` calls the `ListCommand.executeCommand()` method.
+2. `ListCommand.printIncomeList()`method is invoked as the `/i` flag is present.
+3. `ListCommand.incomeListToString()` method is then invoked, which loops through the `incomeList` and
+   concatenates each income entry into a String `listInString`.
+4. The `listInString` is returned which is then printed out.
+5. Control is returned to `MMM`.
+
+<br/>
+
+#### List Command design considerations
+Aspect: To ease testing of `ListCommand` using JUnit.
+* Alternative 1 (current choice): Abstract the conversion of `Expenditure`, `CreditCard` and `Income` to `String` in a 
+separate` ListCommand.listToString()` method.
   * Pros: Easily tested using JUnit testing, by checking the String that the `ListCommand.listToString()` method returns.
   * Cons: Added layer of abstraction that may be deemed redundant.
 
@@ -334,11 +400,10 @@ Aspect: How to make the `ListCommand` easily tested using JUnit testing.
   * Pros: Easily implemented with lesser lines of code as the code is minimalist.
   * Cons: JUnit testing would require I/O redirection prior to checking the output matches expectations.
 
-
+<br/>
 
 ## Appendix Requirements
-  
-  
+
 ### Product scope
 
 **Target user profile**
@@ -351,6 +416,8 @@ Aspect: How to make the `ListCommand` easily tested using JUnit testing.
 
 **Value proposition**
 Manage finances containing multiple payment methods faster than a typical mouse/GUI driven app.
+
+<br/>
 
 ### User Stories
 
