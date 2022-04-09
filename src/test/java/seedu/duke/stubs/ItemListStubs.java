@@ -5,7 +5,6 @@ import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static seedu.duke.stubs.ItemStubs.ITEM_DVI_CABLE;
@@ -38,20 +37,10 @@ public class ItemListStubs {
     public static final ItemList TEST_ITEM_LIST = generateItemList(ITEM_MARKER, ITEM_PENCIL, ITEM_WHITEBOARD);
     public static final ItemList TEST_ITEM_LIST_WITH_RECORDS = generateItemListWithRecords(TEST_ITEM_LIST);
 
-    // ItemList Stubs for use in SearchCommand
-    public static final ItemList SEARCH_LIST = generateImmutableItemList(ITEM_PAPER_A4_10, ITEM_PAPER_A5_10,
-            ITEM_MARKER, ITEM_WHITEBOARD);
-    public static final List<Item> SEARCH_RESULT_PAPER_NAME = generateImmutableResults(
-            ITEM_PAPER_A4_10, ITEM_PAPER_A5_10);
-    public static final List<Item> SEARCH_RESULT_DRAW_DESCRIPTION = generateImmutableResults(
-            ITEM_MARKER, ITEM_WHITEBOARD);
-    public static final List<Item> SEARCH_RESULT_PAPER_NAME_A4_DESCRIPTION = generateImmutableResults(ITEM_PAPER_A4_10);
-    public static final List<Item> SEARCH_RESULT_NONE = generateImmutableResults();
-
     private static ItemList generateItemList(Item... items) {
         ArrayList<Item> list = new ArrayList<>();
         for (Item item: items) {
-            list.add((Item) item.clone());
+            list.add(Item.copyItem(item));
         }
         return new ItemList(list);
     }
@@ -73,7 +62,9 @@ public class ItemListStubs {
 
     private static ItemList generateImmutableItemList(Item... items) {
         ArrayList<Item> list = new ArrayList<>();
-        Collections.addAll(list, items);
+        for (Item item: items) {
+            list.add(Item.copyItem(item));
+        }
         return new ItemList(List.copyOf(list));
     }
 
@@ -84,7 +75,9 @@ public class ItemListStubs {
      */
     private static List<Item> generateImmutableResults(Item... items) {
         ArrayList<Item> list = new ArrayList<>();
-        Collections.addAll(list, items);
+        for (Item item: items) {
+            list.add(Item.copyItem(item));
+        }
         return List.copyOf(list);
     }
 }
