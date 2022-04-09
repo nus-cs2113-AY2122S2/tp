@@ -19,6 +19,9 @@ import static seedu.duke.parser.CliSyntax.PREFIX_BORROWER_NAME;
  */
 public class BorrowCommandParser implements Parser<BorrowCommand> {
 
+    // Define the max no. of days a user can borrow each time
+    private static final int MAX_BORROW_DURATION = 7;
+
     /**
      * Parses the given {@code String} of arguments in the context of the BorrowCommand
      * and returns a BorrowCommand object for execution.
@@ -45,7 +48,7 @@ public class BorrowCommandParser implements Parser<BorrowCommand> {
 
         // Throw exception if startDate > endDate
         checkDateOrder(startDate, endDate);
-        // Throw exception if borrow duration >= 7 days
+        // Throw exception if borrow duration > MAX_BORROW_DURATION
         checkBorrowDuration(startDate, endDate);
 
         return new BorrowCommand(itemIndex, quantity, startDate, endDate, borrowerName);
@@ -65,15 +68,15 @@ public class BorrowCommandParser implements Parser<BorrowCommand> {
     }
 
     /**
-     * Throws exception if borrow duration > 7 days.
+     * Throws exception if borrow duration > MAX_BORROW_DURATION.
      *
      * @param startDate Start date of borrowing.
      * @param endDate End date of borrowing.
-     * @throws InvMgrException If endDate - startDate > 7 days.
+     * @throws InvMgrException If endDate - startDate > MAX_BORROW_DURATION.
      */
     public void checkBorrowDuration(LocalDate startDate, LocalDate endDate) throws InvMgrException {
         Period period = Period.between(startDate, endDate);
-        if (period.getDays() > 7) {
+        if (period.getDays() > MAX_BORROW_DURATION) {
             throw new InvMgrException(Messages.INVALID_BORROW_DURATION);
         }
     }
