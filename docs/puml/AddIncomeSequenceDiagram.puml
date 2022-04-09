@@ -8,14 +8,17 @@ skinparam sequence {
 ArrowColor black
 participantBorderColor black
 LifelineBorderColor black
+boxBorderColor black
 }
 
+box addIncome()
 participant ":MMM" as MMM MMM_COLOUR
-participant "commandType:Command" as C COMMANDS_COLOUR
+participant "commandType:AddCommand" as C COMMANDS_COLOUR
 participant ":GeneralFunctions" as GF HELPER_COLOUR
 participant ":AddCommandInputTests" as IT HELPER_COLOUR
 participant ":Income" as I USERFINANCIAL_COLOUR
 participant ":IncomeList" as IL USERFINANCIAL_COLOUR
+end box
 
 activate MMM MMM_COLOUR
 MMM -> C: executeCommand()
@@ -60,7 +63,5 @@ deactivate
 
 C --> MMM
 deactivate
-
-deactivate MMM
 
 @enduml
