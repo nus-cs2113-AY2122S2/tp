@@ -92,7 +92,7 @@ public class ModuleCalendarReader {
             icsFilePath = directoryPath;
             return parseIcsCalendar();
         } else {
-            System.out.println(FILE_NOT_FOUND_MESSAGE);
+            StudyManager.printMessageWithDivider(FILE_NOT_FOUND_MESSAGE);
             logger.log(Level.WARNING, LOGGER_FILE_NOT_FOUND);
             return null;
         }
@@ -117,7 +117,7 @@ public class ModuleCalendarReader {
             // Initially the data comes in utc timezone, we would later be converting it to sg timezone
             dateFormat.setTimeZone(UTC_TIME_ZONE);
             iterateThroughCalendar();
-            System.out.println(PARSE_SUCCESS_MESSAGE);
+            StudyManager.printMessageWithDivider(PARSE_SUCCESS_MESSAGE);
             listIcsModules();
 
         } catch (ParseException | ParserException e) {
@@ -125,7 +125,7 @@ public class ModuleCalendarReader {
         } catch (FileNotFoundException e) {
             System.out.printf(FILE_NOT_FOUND_ERROR, icsFilePath);
         } catch (IOException e) {
-            System.out.println(PARSE_FAILURE_MESSAGE);
+            StudyManager.printMessageWithDivider(PARSE_FAILURE_MESSAGE);
         }
         return modulesList;
     }
@@ -170,10 +170,10 @@ public class ModuleCalendarReader {
 
     private void handleParseException() {
         if (!icsFilePath.contains(ICS_FILE_FORMAT)) {
-            System.out.println(NOT_ICS_ERROR_MESSAGE);
-            System.out.println(CHECK_DIRECTORY_ERROR_MESSAGE);
+            StudyManager.printMessageWithDivider(NOT_ICS_ERROR_MESSAGE + System.lineSeparator()
+                    + CHECK_DIRECTORY_ERROR_MESSAGE);
         } else {
-            System.out.println(PARSE_FAILURE_MESSAGE);
+            StudyManager.printMessageWithDivider(PARSE_FAILURE_MESSAGE);
         }
     }
 
@@ -182,7 +182,7 @@ public class ModuleCalendarReader {
         for (Module m: modulesList) {
             System.out.println((i++) + ": " + m.toString());
         }
-        System.out.println(ADDED_TO_SCHEDULE_MESSAGE);
+        StudyManager.printMessageWithDivider(ADDED_TO_SCHEDULE_MESSAGE);
     }
 
     private void standardizeModuleCategory() {
@@ -256,7 +256,7 @@ public class ModuleCalendarReader {
                 throw new ModuleDayException(INCORRECT_DAY_ERROR_MESSAGE);
             }
         }  catch (ModuleDayException e) {
-            System.out.println(e.getMessage());
+            StudyManager.printMessageWithDivider(e.getMessage());
         }
         return day;
     }

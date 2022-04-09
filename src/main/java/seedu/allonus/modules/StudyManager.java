@@ -114,6 +114,7 @@ public class StudyManager {
 
     private static StorageFile storageFile = new StorageFile();
     private static boolean isModified = false;
+    private static TextUi textUi = new TextUi();
 
     private static ModuleParser moduleParser = new ModuleParser();
 
@@ -160,7 +161,7 @@ public class StudyManager {
             } else if (AllOnUs.isStudyManagerCommand(userInput)) {
                 printAlreadyInStudyManagerMessage(ui);
             } else {
-                printMessage(UNKNOWN_INPUT_MESSAGE);
+                printMessageWithDivider(UNKNOWN_INPUT_MESSAGE);
             }
             if (isModified) {
                 storageFile.saveData();
@@ -177,26 +178,31 @@ public class StudyManager {
     }
 
     private void openIcsFile(TextUi ui, ModuleCalendarReader icsParser) {
-        printMessage("Please enter the name of your .ics file from nusmods:");
+        printMessageWithDivider("Please enter the name of your .ics file from nusmods:");
         String input = ui.getUserInput();
         ArrayList<Module> icsModulesList = icsParser.readIcsFile(input);
         if (icsModulesList != null) {
             modulesList.addAll(icsModulesList);
             isModified = true;
         }
-        printMessage("Exiting read ics mode");
+        printMessageWithDivider("Exiting read ics mode");
     }
 
     /**
      * Prints a given input string using system output.
      * @param message String that is to be printed on the console.
      */
+    public static void printMessageWithDivider(String message) {
+        textUi.showToUser(message);
+        //System.out.println(message);
+    }
+
     private void printMessage(String message) {
         System.out.println(message);
     }
 
     private void printWelcomeMessage() {
-        printMessage(WELCOME_MESSAGE);
+        printMessageWithDivider(WELCOME_MESSAGE);
     }
 
     /**
@@ -204,10 +210,10 @@ public class StudyManager {
      */
     public void listModules() {
         if (modulesList.size() == 0) {
-            printMessage(EMPTY_MODULE_LIST_MESSAGE);
+            printMessageWithDivider(EMPTY_MODULE_LIST_MESSAGE);
             return;
         }
-        printMessage(LIST_MODULES_MESSAGE);
+        printMessageWithDivider(LIST_MODULES_MESSAGE);
         int i = 1;
         for (Module m: modulesList) {
             printMessage((i++) + ": " + m);
@@ -247,13 +253,13 @@ public class StudyManager {
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOGGER_WRONG_INDEX_DELETE);
             if (modulesList.size() == 0) {
-                printMessage(DELETE_NO_MODULES_ERROR);
+                printMessageWithDivider(DELETE_NO_MODULES_ERROR);
             } else {
                 printListSizeErrorMessage();
             }
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, LOGGER_NO_INDEX_DELETE);
-            printMessage(DELETE_NO_INDEX_ERROR);
+            printMessageWithDivider(DELETE_NO_INDEX_ERROR);
         }
 
     }
@@ -263,14 +269,13 @@ public class StudyManager {
         assert moduleIndex >= 0;
         Module removedModule = modulesList.get(moduleIndex);
         modulesList.remove(moduleIndex);
-        printMessage(DELETE_MODULE_SUCCESS_MESSAGE);
-        printMessage(removedModule.toString());
+        printMessageWithDivider(DELETE_MODULE_SUCCESS_MESSAGE + System.lineSeparator() + removedModule.toString());
         isModified = true;
     }
 
     private void printListSizeErrorMessage() {
         String listSizeError = "Oops there are only " + modulesList.size() + " modules left in your schedule";
-        printMessage(listSizeError);
+        printMessageWithDivider(listSizeError);
     }
 
     /**
@@ -288,13 +293,13 @@ public class StudyManager {
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOGGER_WRONG_EDIT_INDEX);
             if (modulesList.size() == 0) {
-                printMessage(EDIT_NO_MODULES_ERROR);
+                printMessageWithDivider(EDIT_NO_MODULES_ERROR);
             } else {
                 printListSizeErrorMessage();
             }
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, LOGGER_NO_EDIT_INDEX);
-            printMessage(EDIT_NO_INDEX_ERROR);
+            printMessageWithDivider(EDIT_NO_INDEX_ERROR);
         }
     }
 
@@ -316,21 +321,20 @@ public class StudyManager {
             } else if (editUserInput.startsWith(MODULE_TIME_DELIMITER)) {
                 editModuleTime(moduleToEdit, editUserInput);
             } else if (editUserInput.equals(EDIT_MODULE_DONE_COMMAND)) {
-                printMessage(EDIT_MODULE_SUCCESS_MESSAGE);
-                printMessage(moduleToEdit.toString());
+                printMessageWithDivider(EDIT_MODULE_SUCCESS_MESSAGE
+                        + System.lineSeparator() + moduleToEdit.toString());
                 isEditFinished = true;
                 isModified = true;
             } else {
-                printMessage(UNKNOWN_INPUT_MESSAGE);
+                printMessageWithDivider(UNKNOWN_INPUT_MESSAGE);
             }
         }
-        printMessage(EDIT_MODULE_EXIT_MESSAGE);
+        printMessageWithDivider(EDIT_MODULE_EXIT_MESSAGE);
     }
 
     private void printEditWelcomeMessage(Module moduleToEdit) {
-        printMessage(EDIT_MODULE_OPENING_MESSAGE);
-        printMessage(moduleToEdit.toString());
-        printMessage(EDIT_MODULE_CHOOSE_MESSAGE);
+        printMessageWithDivider(EDIT_MODULE_OPENING_MESSAGE + System.lineSeparator()
+                + moduleToEdit.toString() + System.lineSeparator() + EDIT_MODULE_CHOOSE_MESSAGE);
     }
 
     protected void editModuleTime(Module moduleToEdit, String editUserInput) {
@@ -341,11 +345,9 @@ public class StudyManager {
             }
             moduleTime = moduleParser.validateModuleTime(moduleTime);
             moduleToEdit.setTimeSlot(moduleTime);
-            printMessage(EDIT_MODULE_CHANGES_MESSAGE);
-            printMessage(moduleToEdit.toString());
-
+            printMessageWithDivider(EDIT_MODULE_CHANGES_MESSAGE + System.lineSeparator() + moduleToEdit.toString());
         } catch (ModuleTimeException e) {
-            printMessage(e.getMessage());
+            printMessageWithDivider(e.getMessage());
         }
     }
 
@@ -357,11 +359,9 @@ public class StudyManager {
             }
             moduleDay = moduleParser.validateModuleDay(moduleDay);
             moduleToEdit.setDay(moduleDay);
-            printMessage(EDIT_MODULE_CHANGES_MESSAGE);
-            printMessage(moduleToEdit.toString());
-
+            printMessageWithDivider(EDIT_MODULE_CHANGES_MESSAGE + System.lineSeparator() + moduleToEdit.toString());
         } catch (ModuleDayException e) {
-            printMessage(e.getMessage());
+            printMessageWithDivider(e.getMessage());
         }
 
     }
@@ -374,10 +374,9 @@ public class StudyManager {
             }
             moduleCode = moduleParser.validateModuleCode(moduleCode);
             moduleToEdit.setModuleCode(moduleCode);
-            printMessage(EDIT_MODULE_CHANGES_MESSAGE);
-            printMessage(moduleToEdit.toString());
+            printMessageWithDivider(EDIT_MODULE_CHANGES_MESSAGE + System.lineSeparator() + moduleToEdit.toString());
         } catch (ModuleCodeException e) {
-            printMessage(e.getMessage());
+            printMessageWithDivider(e.getMessage());
         }
     }
 
@@ -389,10 +388,9 @@ public class StudyManager {
             }
             moduleCategory = moduleParser.validateModuleCategory(moduleCategory);
             moduleToEdit.setCategory(moduleCategory);
-            printMessage(EDIT_MODULE_CHANGES_MESSAGE);
-            printMessage(moduleToEdit.toString());
+            printMessageWithDivider(EDIT_MODULE_CHANGES_MESSAGE + System.lineSeparator() + moduleToEdit.toString());
         } catch (ModuleCategoryException e) {
-            printMessage(e.getMessage());
+            printMessageWithDivider(e.getMessage());
         }
     }
 
@@ -411,8 +409,7 @@ public class StudyManager {
         }
         modulesList.add(newModule);
         if (shouldPrintConsoleMessage) {
-            printMessage(ADD_MODULE_SUCCESS_MESSAGE);
-            printMessage(newModule.toString());
+            printMessageWithDivider(ADD_MODULE_SUCCESS_MESSAGE + System.lineSeparator() + newModule.toString());
         }
         isModified = true;
     }
@@ -436,13 +433,13 @@ public class StudyManager {
             moduleKeyword = moduleKeyword.toLowerCase();
             ArrayList<Module> matches = getFindMatches(moduleKeyword);
             if (matches.size() == 0) {
-                printMessage(FIND_NO_MATCHES_MESSAGE + " \"" + moduleKeyword + "\"");
+                printMessageWithDivider(FIND_NO_MATCHES_MESSAGE + " \"" + moduleKeyword + "\"");
             } else {
                 listMatches(matches);
             }
         } catch (InvalidFindInputException e) {
             logger.log(Level.WARNING, LOGGER_NO_FIND_QUERY);
-            printMessage(e.getMessage());
+            printMessageWithDivider(e.getMessage());
         }
     }
 
@@ -458,7 +455,7 @@ public class StudyManager {
     }
 
     private void listMatches(ArrayList<Module> matches) {
-        System.out.println(FIND_LIST_MATCHES_MESSAGE);
+        printMessageWithDivider(FIND_LIST_MATCHES_MESSAGE);
         int i = 1;
         for (Module m: matches) {
             System.out.println((i++) + ": " + m);

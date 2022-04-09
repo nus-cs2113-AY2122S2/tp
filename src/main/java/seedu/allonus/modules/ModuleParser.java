@@ -72,7 +72,7 @@ public class ModuleParser {
     private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
 
     private void printMessage(String message) {
-        System.out.println(message);
+        StudyManager.printMessageWithDivider(message);
     }
 
     /**
@@ -96,8 +96,7 @@ public class ModuleParser {
             return new Module(module, category, day, time);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOGGER_WRONG_ADD_FORMAT);
-            printMessage(ADD_WRONG_FORMAT_MESSAGE);
-            printMessage(ADD_SAMPLE_FORMAT_MESSAGE);
+            printMessage(ADD_WRONG_FORMAT_MESSAGE + System.lineSeparator() + ADD_SAMPLE_FORMAT_MESSAGE);
             return null;
         } catch (ModuleDayException e) {
             logger.log(Level.WARNING, LOGGER_MISSING_DAY_IN_ADD);
