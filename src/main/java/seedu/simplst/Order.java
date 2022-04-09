@@ -111,9 +111,9 @@ public class Order {
     // Function to print grammar for statements to print
     private String checkPlural(int numberOfGoods) {
         if (numberOfGoods <= 1) {
-            return "is ";
+            return " is ";
         } else {
-            return "are ";
+            return " are ";
         }
     }
 
@@ -132,7 +132,7 @@ public class Order {
         }
         orderline.setQuantity(orderline.getQuantity() - qty);
         System.out.println(qty + " " + orderline.getName()
-                + checkPlural(orderline.getQuantity()) + " removed.");
+                + checkPlural(qty) + "removed.");
         if (orderline.getQuantity() == 0) {
             orderlines.remove(orderline);
         }
