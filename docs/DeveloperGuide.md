@@ -2104,7 +2104,7 @@ The following are some test cases for you to try:
 | Test Case                                     | Command                   | Expected result                                                 |
 |:----------------------------------------------|:--------------------------|:----------------------------------------------------------------|
 | Valid list command with extra arguments.      | `workout /list extraline` | Error response (invalid user argument), workouts not displayed. |
-| Extra whitespaces between commands arguments. | `workout         /list`   | Error response (invalid user action), schedule not displayed.   |
+| Extra whitespaces between commands arguments. | `workout         /list`   | Error response (invalid user action), workouts not displayed.   |
 
 #### Deleting An Existing Workout
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-workout-workout-delete).)
@@ -2130,9 +2130,37 @@ The following are some test cases for you to try:
 
 
 #### Updating An Existing Workout
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#update-a-workout-workout-update).)
 
+**Prerequisites:** Ensure that your workout list has at least one
+workout for you to test the `workout /update` command.
+See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                           | Command                        | Expected result                                                                                                                                                                                                                                                                    |
+|:--------------------------------------------------------------------|:-------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid workout index number and new number of repetitions.           | `workout /update 1 10`         | The first workout in the workout list is updated to 10 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.         |
+| Valid workout index number and a highest new number of repetitions. | `workout /update 2 2147483647` | The first workout in the workout list is updated to 2147483647 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps. |
+| Valid workout index number and a minimum new number of repetitions. | `workout /update 3 1`          | The first workout in the workout list is updated to 1 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.          |
+
+##### Negative Test Cases
+
+| Test Case                                                                                                                                     | Command                           | Expected result                                                     |
+|:----------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|:--------------------------------------------------------------------|
+| Valid workout index number but new repetition value is smaller than 0.                                                                        | `workout /update 1 0`             | Error response (reps specified is invalid), workout is not updated. |
+| Valid workout index number but new repetition value exceeds the upper bound for int data type.                                                | `workout /update 2 2147483648`    | Error response (invalid user argument), workout is not updated.     |
+| Valid workout index but new repetition value is identical with the repetition value of a workout in the workout list with same exercise name. | `workout /update 3 1`             | Error response (identical workout), workout is not updated.         |
+| Invalid workout index number or new repetition value.                                                                                         | `workout /update a 2`             | Error response (invalid user argument), workout is not updated.     |
+| Missing either workout index number or new repetition value.                                                                                  | `workout /update 5`               | Error response (insufficient argument), workout is not updated.     |
+| Missing both workout index number and new repetition value.                                                                                   | `workout /update `                | Error response (invalid command), workout is not updated.           |
+| Extra whitespaces between commands arguments.                                                                                                 | `workout         /update 1 2`     | Error response (invalid user action), workout is not updated.       |
+| Extra whitespaces between command parameters.                                                                                                 | `workout /update     1         2` | Error response (invalid user argument), workout is not updated.     |
+
+<br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
-
 
 ---
 
