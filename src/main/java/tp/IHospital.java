@@ -13,6 +13,7 @@ public class IHospital {
     private static NurseList nurses = new NurseList();
     private static WardList wards = new WardList();
 
+
     public IHospital() {
     }
 
@@ -47,6 +48,7 @@ public class IHospital {
         patientStorage.savePatientList(patients);
         appointmentStorage.saveAppointmentList(appointments);
         nurseStorage.saveNurseList(nurses);
+        wardStorage.saveWardList(wards);
         Command c = new ExitCommand();
         c.execute(doctors, patients, nurses, wards, appointments, ui,
                 doctorStorage, wardStorage, patientStorage, nurseStorage,appointmentStorage);
