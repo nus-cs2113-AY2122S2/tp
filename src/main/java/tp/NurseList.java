@@ -65,6 +65,7 @@ public class NurseList {
         return null;
     }
 
+    //@@author sethlxk
     public Nurse searchNurseByName(String name) {
         for (int i = 0; i < nurses.size(); i++) {
             if (nurses.get(i).getName().trim().equals(name)) {
@@ -74,6 +75,7 @@ public class NurseList {
         return null;
     }
 
+    //@@author sethlxk
     public NurseList getNurseListOfWardById(int id) throws IHospitalException {
         NurseList warNur = new NurseList();
         for (Nurse nurse:nurses) {
