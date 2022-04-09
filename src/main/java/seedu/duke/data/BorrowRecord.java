@@ -46,7 +46,8 @@ public class BorrowRecord {
 
     public boolean getReturnStatus() {
         return isReturned;
-
+    }
+    
     /**
      * Returns true if otherRecord has overlapping dates with this borrow record.
      *
