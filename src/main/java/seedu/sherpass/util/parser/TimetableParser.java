@@ -14,6 +14,12 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 
 public class TimetableParser {
 
+    /**
+     * Parses the timetable command from the main Parser class.
+     *
+     * @param splitInput The string input given by user in array format.
+     * @return A function call to decode the specific type of Show Command.
+     */
     public static Command prepareShow(String[] splitInput) {
         try {
             String selection = splitInput[SHOW_OPTION_INDEX].trim();
@@ -24,6 +30,13 @@ public class TimetableParser {
         return null;
     }
 
+    /**
+     * Returns the specific type of Show Command Object.
+     *
+     * @param selection The specific type of Show Command given by the user.
+     * @return The specific Show Command Object.
+     * @throws InvalidInputException If the specific type of Show Command given by the user is empty.
+     */
     private static Command parseShowCommandOptions(String selection) throws InvalidInputException {
         if (selection.isBlank()) {
             throw new InvalidInputException();
