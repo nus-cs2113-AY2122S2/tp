@@ -52,13 +52,13 @@ title: Developer Guide
 This guide's purpose is to explain the internal workings of SplitLah, so that future engineers can understand the application's implementation in detail and continue working on the project with ease.
 
 ### How to use this developer guide
-* SplitLah is divided into **six components**: [Manager Component](#manager-component)
+* SplitLah is divided into **six components**: [Manager Component](#manager-component),
 [Profile Component](#profile-component), [TextUI Component](#textui-component),
 [Storage Component](#storage-component), [Parser Component](#parser-component) and [Command Component](#command-component)
 * Each component has its own section in this guide explaining them in detail.
 * This [diagram](#interaction-between-components) shows the inner workings of how each component interacts with each other.
 * SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands will not be explained in detail.
-* Please refer to the [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
+* Please refer to the [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
 * Please refer to the [implementation section](#implementation) to find out how each command is designed and implemented in SplitLah.
 * Each command's section in this guide contains an API reference link encased in `code block` that brings you to the main source code responsible for executing the command.
 
