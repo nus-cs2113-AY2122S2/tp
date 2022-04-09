@@ -1,14 +1,7 @@
 package seedu.duke.helper;
 
 
-import seedu.duke.assets.Appointment;
-import seedu.duke.assets.AppointmentList;
-import seedu.duke.assets.Doctor;
-import seedu.duke.assets.DoctorList;
-import seedu.duke.assets.Medicine;
-import seedu.duke.assets.MedicineList;
-import seedu.duke.assets.Patient;
-import seedu.duke.assets.PatientList;
+import seedu.duke.assets.*;
 import seedu.duke.exception.DuplicateEntryException;
 
 
@@ -16,8 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Storage {
@@ -36,62 +27,75 @@ public class Storage {
         loadData();
     }
 
-    private void loadMedicineData() throws FileNotFoundException {
-        File data = new File(PATH_MED);
+    private void loadGenericData(String filePath, List listType) throws FileNotFoundException {
+        File data = new File(filePath);
         Scanner reader = new Scanner(data);
         while (reader.hasNext()) {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
             try {
-                medicines.add(parameters);
+                listType.add(parameters);
             } catch (DuplicateEntryException e) {
                 continue;
             }
         }
     }
+//    private void loadMedicineData() throws FileNotFoundException {
+//        File data = new File(PATH_MED);
+//        Scanner reader = new Scanner(data);
+//        while (reader.hasNext()) {
+//            String line = reader.nextLine();
+//            String[] parameters = line.split(",");
+//            try {
+//                medicines.add(parameters);
+//            } catch (DuplicateEntryException e) {
+//                continue;
+//            }
+//        }
+//    }
+//
+//    private void loadPatientData() throws FileNotFoundException {
+//        File data = new File(PATH_PAT);
+//        Scanner reader = new Scanner(data);
+//        while (reader.hasNext()) {
+//            String line = reader.nextLine();
+//            String[] parameters = line.split(",");
+//            try {
+//                patients.add(parameters);
+//            } catch (DuplicateEntryException e) {
+//                continue;
+//            }
+//
+//        }
+//    }
+//
+//    private void loadDoctorData() throws FileNotFoundException {
+//        File data = new File(PATH_DOC);
+//        Scanner reader = new Scanner(data);
+//        while (reader.hasNext()) {
+//            String line = reader.nextLine();
+//            String[] parameters = line.split(",");
+//            try {
+//                doctors.add(parameters);
+//            } catch (DuplicateEntryException e) {
+//                continue;
+//            }
+//        }
+//    }
 
-    private void loadPatientData() throws FileNotFoundException {
-        File data = new File(PATH_PAT);
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()) {
-            String line = reader.nextLine();
-            String[] parameters = line.split(",");
-            try {
-                patients.add(parameters);
-            } catch (DuplicateEntryException e) {
-                continue;
-            }
-
-        }
-    }
-
-    private void loadDoctorData() throws FileNotFoundException {
-        File data = new File(PATH_DOC);
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()) {
-            String line = reader.nextLine();
-            String[] parameters = line.split(",");
-            try {
-                doctors.add(parameters);
-            } catch (DuplicateEntryException e) {
-                continue;
-            }
-        }
-    }
-
-    private void loadAppointmentData() throws FileNotFoundException {
-        File data = new File(PATH_APT);
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()) {
-            String line = reader.nextLine();
-            String[] parameters = line.split(",");
-            try {
-                appointments.add(parameters);
-            } catch (DuplicateEntryException e) {
-                continue;
-            }
-        }
-    }
+//    private void loadAppointmentData() throws FileNotFoundException {
+//        File data = new File(PATH_APT);
+//        Scanner reader = new Scanner(data);
+//        while (reader.hasNext()) {
+//            String line = reader.nextLine();
+//            String[] parameters = line.split(",");
+//            try {
+//                appointments.add(parameters);
+//            } catch (DuplicateEntryException e) {
+//                continue;
+//            }
+//        }
+//    }
 
     private void loadAppointmentMedData() throws FileNotFoundException {
         File data = new File(PATH_APT_MEDS);
@@ -107,17 +111,21 @@ public class Storage {
 
     public void loadData() {
         try {
-            loadDoctorData();
-            loadPatientData();
-            loadMedicineData();
-            loadAppointmentData();
+            loadGenericData(PATH_DOC, doctors);
+            loadGenericData(PATH_PAT, patients);
+            loadGenericData(PATH_MED, medicines);
+            loadGenericData(PATH_APT, appointments);
+//            loadDoctorData();
+//            loadPatientData();
+//            loadMedicineData();
+//            loadAppointmentData();
             loadAppointmentMedData();
         } catch (FileNotFoundException f) {
             UI.printParagraph("No saved data found!");
         }
 
     }
-
+    //todo : clean up save file
     private void saveMedicineData() {
         File medicineFile = new File(PATH_MED);
         if (!medicineFile.exists()) {
