@@ -13,6 +13,7 @@ import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
 
+//@@author sethlxk
 public class EditNurseCommand extends Command {
     private int index;
     private String type;

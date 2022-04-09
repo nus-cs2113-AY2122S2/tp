@@ -404,7 +404,7 @@ public class Parser {
         }
     }
 
-    //@@author DolphXty
+    //@@author sethlxk
     public Command parseEditNurseCommand(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
         int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /nu") + 9,
@@ -426,7 +426,7 @@ public class Parser {
         }
     }
 
-    //@@author DolphXty
+    //@@author sethlxk
     public Command parseEditWardCommand(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
         int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /w") + 8,
