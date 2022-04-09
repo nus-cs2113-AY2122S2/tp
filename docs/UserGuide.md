@@ -309,12 +309,14 @@ Show pending tasks:
 ![](images/showPendingTasks.png)
 
 
-### Clearing all tasks: `clear`
-To save the trouble of deleting tasks one by one if you wish to delete all of them,
-Sherpass allows you to do so using `clear`
+### Clearing multiple tasks: `clear all` / `clear expired` / `clear done`
+Deletes a bunch of tasks with different levels of scope, saving the trouble of deleting them one by one.
 
-> ⚠️ Be sure to use `clear` only when you want to 
-remove all the tasks in your list.
+Format:
+- To clear all the tasks in your list: `clear all`
+- To clear all the tasks that have expired `DO_DATE`: `clear expired`
+- To clear all the tasks that have been marked as completed: `clear done`
+
 
 ### Saving your tasks
 
@@ -554,7 +556,7 @@ rectify the problem or allow Sherpass to create a new save file.
 | Generate timetable            | `show today` / `show DATE` / `show week` / `show MONTH`                                                                                                                                                                                          |
 | List all tasks                | `show all`                                                                                                                                                                                                                                       |
 | List all pending tasks        | `show todo`                                                                                                                                                                                                                                      |
-| Clear all tasks               | `clear`                                                                                                                                                                                                                                          |
+| Clear multiple tasks          | `clear all` / `clear expired` / `clear done`                                                                                                                                                                                                     |
 | Add single task               | `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME]`<br/>e.g. `add revise chapter 3 /do 25/6/2022 /start 20:00 /end 22:00`                                                                     |
 | Edit single task              | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME]`<br/>e.g. `edit 3 submit draft essay /start 10:00 /end 13:00`                                                         |
 | Delete single task            | `delete TASK_NUMBER`                                                                                                                                                                                                                             |
@@ -572,4 +574,3 @@ rectify the problem or allow Sherpass to create a new save file.
 | Stop timer/stopwatch          | `stop`                                                                                                                                                                                                                                           |
 | Show tasks (in study session) | `show all`                                                                                                                                                                                                                                       |
 | Leave study session           | `leave`                                                                                                                                                                                                                                          |
-

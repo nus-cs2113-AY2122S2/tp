@@ -143,22 +143,6 @@ public class Task {
         return result;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.description = taskDescription;
-    }
-
-    public void setByDateTime(LocalDateTime byDateTime) {
-        this.byDateTime = byDateTime;
-    }
-
-    public void setDoOnStartDateTime(LocalDateTime doOnStartDateTime) {
-        this.doOnStartDateTime = doOnStartDateTime;
-    }
-
-    public void setDoOnEndDateTime(LocalDateTime doOnEndDateTime) {
-        this.doOnEndDateTime = doOnEndDateTime;
-    }
-
     public LocalDateTime getDoOnEndDateTime() {
         return doOnEndDateTime;
     }
@@ -169,6 +153,32 @@ public class Task {
 
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
+    }
+
+    /**
+     * Edits the task.
+     *
+     * @param identifier      The new identifier of the task
+     * @param taskDescription The new task description of the task
+     * @param startDateOffset The offset of the new start date
+     * @param endDateOffset   The offset of the new end date
+     * @param byDateOffset    The offset of the new by date
+     */
+    public void editTask(int identifier, String taskDescription,
+            long startDateOffset, long endDateOffset, long byDateOffset) {
+        this.identifier = identifier;
+        if (!taskDescription.isBlank()) {
+            description = taskDescription;
+        }
+        if (startDateOffset != 0) {
+            doOnStartDateTime = doOnStartDateTime.plusSeconds(startDateOffset);
+        }
+        if (endDateOffset != 0) {
+            doOnEndDateTime = doOnEndDateTime.plusSeconds(endDateOffset);
+        }
+        if (byDateOffset != 0) {
+            byDateTime = doOnStartDateTime.plusSeconds(byDateOffset);
+        }
     }
 
     @Override
