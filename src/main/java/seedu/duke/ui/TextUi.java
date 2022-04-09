@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 import seedu.duke.util.StringConstants;
 
+//@@author Ch40gRv1-Mu
 public class TextUi {
     protected static final Scanner in = new Scanner(System.in);
     protected static final PrintStream out = System.out;
+
 
     /**
      * Formats the provided message.
@@ -27,6 +29,7 @@ public class TextUi {
         out.print(StringConstants.COMMAND_PROMPT);
         return in.nextLine();
     }
+
 
     /**
      * Displays a message enclosed by horizontal lines.
@@ -48,7 +51,7 @@ public class TextUi {
     public static void showHelloMessage() {
         showMessage(StringConstants.MESSAGE_HELLO);
     }
-
+    
     /**
      * Displays the goodbye message.
      */

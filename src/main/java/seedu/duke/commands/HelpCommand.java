@@ -7,6 +7,7 @@ import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
+//@@author ngys117
 public class HelpCommand extends Command {
     protected static final String EXIT_COMMAND_WORD = StringConstants.EXIT_COMMAND_WORD;
     protected static final String ADD_COMMAND_WORD = StringConstants.ADD_COMMAND_WORD;

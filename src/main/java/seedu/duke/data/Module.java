@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import seedu.duke.util.Grades;
 import seedu.duke.util.StringConstants;
 
+//@@author chooyikai
 public class Module {
     private static final String LS = System.lineSeparator();
     private static final String MODULE_STRING_WITH_DESC = "%s (%s) (%sMC, Grade: %s)";

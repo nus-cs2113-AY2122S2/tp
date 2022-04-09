@@ -6,6 +6,7 @@ import java.util.Objects;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
+//@@author chooyikai
 public class Task {
     public static final String ICON_UNCOMPLETED = StringConstants.ICON_UNCOMPLETED;
     public static final String ICON_COMPLETED = StringConstants.ICON_COMPLETED;
@@ -61,6 +62,7 @@ public class Task {
         taskDescription = description;
     }
 
+    //@@author Ch40gRv1-Mu
     public void setWorkingTime(String workingTime) throws ModHappyException {
         this.workingTime = new TaskDuration(workingTime);
     }
@@ -89,6 +91,7 @@ public class Task {
         }
     }
 
+    //@author chooyikai
     public boolean getTaskDone() {
         return isTaskDone;
     }

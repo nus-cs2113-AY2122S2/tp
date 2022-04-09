@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+//@@author Ch40gRv1-Mu
 public class CommandResult {
     private final String resultString;
 

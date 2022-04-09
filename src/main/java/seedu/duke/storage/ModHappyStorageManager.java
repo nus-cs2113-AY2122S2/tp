@@ -19,27 +19,50 @@ import static seedu.duke.util.NumberConstants.MINIMUM_MODULAR_CREDITS;
 public class ModHappyStorageManager {
 
 
-
     private static Storage modHappyStorage;
 
+    //@@author Ch40gRv1-Mu
+    /**
+     * Saves task list to storage.
+     * @param taskArrayList ArrayList of tasks to be saved.
+     * @throws ModHappyException Failed to write the task to local storage.
+     */
     @SuppressWarnings("unchecked")
     public static void saveTaskList(ArrayList<Task> taskArrayList) throws ModHappyException {
         modHappyStorage = new TaskListStorage();
         modHappyStorage.writeData(taskArrayList, StringConstants.TASK_PATH);
     }
 
+    //@@author Ch40gRv1-Mu
+    /**
+     * Saves module list to storage.
+     * @param moduleArrayList ArrayList of modules to be saved.
+     * @throws ModHappyException Failed to write the modules to local storage.
+     */
     @SuppressWarnings("unchecked")
     public static void saveModuleList(ArrayList<Module> moduleArrayList) throws ModHappyException {
         modHappyStorage = new ModuleListStorage();
         modHappyStorage.writeData(moduleArrayList, StringConstants.MODULE_PATH);
     }
 
+    //@@author Ch40gRv1-Mu
+    /**
+     * Saves Configuration to storage.
+     * @param configuration configuration to be saved.
+     * @throws ModHappyException Failed to write the configuration to local storage.
+     */
     @SuppressWarnings("unchecked")
     public static void saveConfiguration(Configuration configuration) throws ModHappyException {
         modHappyStorage = new ConfigurationStorage();
         modHappyStorage.writeData(configuration, StringConstants.CONFIGURATION_PATH);
     }
 
+    //@@author Ch40gRv1-Mu
+    /**
+     * Loads Configuration from storage.
+     * @param configurationPath The local path that a configuration is saved.
+     * @return Loaded configuration or a default configuration objects
+     */
     public static Configuration loadConfiguration(String configurationPath) {
         File configurationDataFile = new File(configurationPath);
         if (configurationDataFile.exists()) {
@@ -61,6 +84,7 @@ public class ModHappyStorageManager {
         }
     }
 
+    //@@author chooyikai
     @SuppressWarnings("unchecked")
     public static void loadTaskList(ModuleList moduleList, String taskPath) {
         File taskDataFile = new File(taskPath);
@@ -103,6 +127,4 @@ public class ModHappyStorageManager {
             }
         }
     }
-
-
 }

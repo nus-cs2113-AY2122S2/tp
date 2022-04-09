@@ -12,6 +12,7 @@ import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.NumberConstants;
 
+//@@author ngys117
 public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = StringConstants.DELETE_MESSAGE;

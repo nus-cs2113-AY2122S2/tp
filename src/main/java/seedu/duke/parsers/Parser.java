@@ -65,21 +65,25 @@ public abstract class Parser {
     protected HashMap<String, String> parsedCommand;
     protected HashSet<String> groupNames;
 
+    //@@author Ch40gRv1-Mu
     public Parser() {
         groupNames = new HashSet<String>();
         parsedCommand = new HashMap<>();
     }
 
+    //@@author Ch40gRv1-Mu
     /**
      * Parses the provided user input and returns the relevant Command object.
      */
     public abstract Command parseCommand(String userInput) throws ModHappyException;
+
 
     /**
      * Parses the provided user input and returns the relevant Command object.
      */
     public abstract void determineError() throws ModHappyException;
 
+    //@@author Ch40gRv1-Mu
     /**
      * Parses string into groups based on commandFormat.
      * @throws ModHappyException if the provided string does not match the pattern
