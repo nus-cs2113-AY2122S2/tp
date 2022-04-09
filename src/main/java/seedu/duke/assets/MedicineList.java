@@ -298,8 +298,8 @@ public class MedicineList extends List {
                     break;
                 }
             }
-            medicineTable.print();
         }
+        medicineTable.print();
     }
 }
 

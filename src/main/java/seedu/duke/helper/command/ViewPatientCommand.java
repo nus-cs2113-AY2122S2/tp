@@ -28,7 +28,7 @@ public class ViewPatientCommand extends Command {
         if (parameterArray == null) {
             patientList.view();
         } else {
-            patientList.view(parameterArray[0]);
+            throw new UserInputErrorException("View Patient Command only accepts null parameters!");
         }
         return Status.VIEW_SUCCESS;
     }

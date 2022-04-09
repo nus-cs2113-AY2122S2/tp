@@ -71,10 +71,7 @@ public class Storage {
 
 
             } catch (UserInputErrorException | DuplicateEntryException e) {
-                if (e instanceof UserInputErrorException) {
-                    corruptedLines.add(e + "\nLine: " + line);
-                }
-                // if duplicate entry just ignore
+                corruptedLines.add(e + "\nLine: " + line);
             }
         }
         if (corruptedLines.size() != 0 && !outputFilePathCorrupted.equals("nope")) {

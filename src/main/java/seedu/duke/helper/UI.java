@@ -30,7 +30,7 @@ public class UI {
         if (userInputArray.length == 1) {
             return null;
         }
-        return parser.commandParser(userInput)[1].trim();
+        return parser.commandParser(userInput)[1].trim().toUpperCase();
     }
 
     public static void printNewLineSeparator() {

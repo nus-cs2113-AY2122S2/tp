@@ -268,7 +268,7 @@ public class Validator {
     }
 
     public static void validateAddAppointment(String[] parameters) throws UserInputErrorException {
-        minParameterCheck(parameters, 3);
+        minParameterCheck(parameters, 4);
         validateNric(parameters[0]);
         validateNric(parameters[1]);
         validateDate(parameters[2], "appointment");
@@ -310,35 +310,6 @@ public class Validator {
             break;
         default:
             throw new UserInputErrorException("Input must be an attribute of Doctor");
-        }
-    }
-
-    public static void validateFindPatient(String[] parameters) throws UserInputErrorException {
-        minParameterCheck(parameters, 2);
-        switch (parameters[0]) {
-        case "nric":
-            validateNric(parameters[1]);
-            break;
-        case "name":
-            validateFullName(parameters[1]);
-            break;
-        case "age":
-            validateAge(parameters[1]);
-            break;
-        case "gender":
-            validateGender(parameters[1]);
-            break;
-        case "address":
-            validateAddress(parameters[1]);
-            break;
-        case "dob":
-            validateDob(parameters[1]);
-            break;
-        case "admissiondate":
-            validateAdmissionDate(parameters[1]);
-            break;
-        default:
-            throw new UserInputErrorException("Input must be an attribute of Patient");
         }
     }
 
@@ -387,7 +358,7 @@ public class Validator {
         }
     }
 
-    public static void validateFindPatient(String[] parameters) throws HalpmiException {
+    public static void validateFindPatient(String[] parameters) throws UserInputErrorException {
         switch (parameters[0]) {
         case "nric":
             validateNric(parameters[1]);
@@ -411,17 +382,16 @@ public class Validator {
             validateAdmissionDate(parameters[1]);
             break;
         default:
-            throw new HalpmiException("Input must be an attribute of Patient");
+            throw new UserInputErrorException("Input must be an attribute of Patient");
         }
     }
-    public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws UserInputErrorException {
-      //minParameterCheck(parameters, 3);
-      validateNric(dispenseMedicineParameters[0]);
-      if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
-          throw new UserInputErrorException("Not all medicines in list have both "
-                  + "the name of the medicine and the quantity to prescribe!");
-        }
 
+    public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws UserInputErrorException {
+        validateNric(dispenseMedicineParameters[0]);
+        if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
+            throw new UserInputErrorException("Not all medicines in list have both "
+                    + "the name of the medicine and the quantity to prescribe!");
+        }
         for (int i = 1; i < dispenseMedicineParameters.length; i += 2) {
             String medicineName = dispenseMedicineParameters[i];
             String medicineQuantity = dispenseMedicineParameters[i + 1];

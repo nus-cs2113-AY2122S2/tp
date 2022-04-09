@@ -111,6 +111,9 @@ public class Parser {
 
     public static Command parseDeleteMedicine(String parameters) throws UserInputErrorException {
         String[] deleteMedicineParameters = stringSplitter(parameters);
+        if (deleteMedicineParameters.length != 1) {
+            throw new UserInputErrorException("Delete medicine only takes in one parameter");
+        }
         return new DeleteMedicineCommand(deleteMedicineParameters);
     }
 
