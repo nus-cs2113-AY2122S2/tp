@@ -3,6 +3,7 @@ package seedu.duke.helper;
 import seedu.duke.exception.HalpmiException;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -95,6 +96,19 @@ public class Validator {
         }
     }
 
+    private static void validatedobandage(String age, String dob) throws HalpmiException {
+        validateDob(dob);
+        LocalDate today = LocalDate.now();
+        LocalDate birthday = LocalDate.parse(dob);
+        Period period = Period.between(birthday, today);
+        int calculatedAge = period.getYears();
+        int parsedAge = Integer.parseInt(age);
+        if (!(parsedAge == calculatedAge)) {
+            throw new HalpmiException("Please ensure that the date of birth matches the age provided");
+        }
+
+    }
+
     /* Validating person */
     private static void validateAddPerson(String[] parameters) throws HalpmiException {
         validateNric(parameters[0]);
@@ -103,6 +117,7 @@ public class Validator {
         validateGender(parameters[3]);
         validateAddress(parameters[4]);
         validateDob(parameters[5]);
+        validatedobandage(parameters[2], parameters[5]);
     }
 
     private static void validateSpecialization(String specialization) throws HalpmiException {
