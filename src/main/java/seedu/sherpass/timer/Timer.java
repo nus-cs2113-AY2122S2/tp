@@ -24,6 +24,11 @@ public abstract class Timer extends Thread {
         Timer.taskList = taskList;
     }
 
+    /**
+     * Converts the time in seconds to a more readable string form.
+     * @param time time
+     * @return String representing time
+     */
     protected static String convertTimeToString(int time) {
         long hour;
         long minute;
@@ -50,18 +55,33 @@ public abstract class Timer extends Thread {
         }
     }
 
+    /**
+     * update() implements the way the class updates the time variable.
+     */
     protected abstract void update();
 
+    /**
+     * printTimerStart() implements the way the timer prints messages when the timer is started.
+     */
     protected abstract void printTimerStart();
 
+    /**
+     * resumeTimer() implements the way the timer is resumed, along with any messages to be printed.
+     */
     public abstract void resumeTimer();
 
+    /**
+     * stopTimer() implements the way the timer is stopped, along with any messages to be printed.
+     */
     public abstract void stopTimer();
 
     public boolean getIsStopped() {
         return forcedStop;
     }
 
+    /**
+     * pauseTimer() implements the way the timer is paused, along with any messages to be printed.
+     */
     public abstract void pauseTimer();
 
     /**

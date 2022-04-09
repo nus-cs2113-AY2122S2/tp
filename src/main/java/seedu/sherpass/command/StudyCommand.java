@@ -39,7 +39,13 @@ public class StudyCommand extends Command {
             userInput = ui.readCommand();
         }
     }
-
+    
+    /**
+     * Cleans up the study session by destroying any running threads and frames.
+     *
+     * @param ui ui
+     * @param timerLogic timerLogic
+     */
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
         timerLogic.killTimer();
         timerLogic.resetIsTimerInitialised();

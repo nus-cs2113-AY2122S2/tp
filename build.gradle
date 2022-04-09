@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'junit:junit:4.13.1'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
     implementation group: 'org.json', name: 'json', version: '20211205'
@@ -20,12 +21,12 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
-
         showExceptions true
         exceptionFormat "full"
         showCauses true
         showStackTraces true
         showStandardStreams = false
+
     }
 
     //tests below are excluded as an error occurs when they are run together with the other tests
