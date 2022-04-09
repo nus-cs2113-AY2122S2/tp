@@ -1,18 +1,58 @@
 package commands;
 
 import data.exercises.ExerciseList;
+import data.exercises.InvalidExerciseException;
+import data.plans.InvalidPlanException;
+import data.plans.PlanList;
+import data.schedule.DayList;
+import data.workouts.InvalidWorkoutException;
+import data.workouts.WorkoutList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import storage.FileManager;
 import storage.LogHandler;
+import textcolors.TextColor;
+import werkit.Parser;
 import werkit.UI;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SearchCommandTest {
+    ExerciseList exerciseList;
+    WorkoutList workoutList;
+    PlanList planList;
+    UI ui;
+    Parser parser;
+    FileManager fileManager;
+    DayList dayList;
+
     @BeforeEach
-    public void setUp() {
+    void setUp() throws InvalidWorkoutException, InvalidExerciseException, IOException, InvalidPlanException {
         LogHandler.startLogHandler();
+        exerciseList = new ExerciseList();
+        workoutList = new WorkoutList(exerciseList);
+        planList = new PlanList(workoutList);
+        ui = new UI();
+        fileManager = new FileManager(planList);
+        dayList = new DayList(planList);
+        parser = new Parser(ui, exerciseList, workoutList, fileManager, planList, dayList);
+
+        exerciseList.addExerciseToList("push up");
+        exerciseList.addExerciseToList("sit up");
+        exerciseList.addExerciseToList("pull up");
+
+        workoutList.createAndAddWorkout("push up /reps 10");
+        workoutList.createAndAddWorkout("sit up /reps 15");
+        workoutList.createAndAddWorkout("pull up /reps 20");
+
+        planList.createAndAddPlan("more muscles /workouts 1,2,3");
+        planList.createAndAddPlan("legs /workouts 2,3");
+        planList.createAndAddPlan("arms /workouts 3");
     }
 
     @Test
@@ -68,5 +108,172 @@ public class SearchCommandTest {
             () -> new SearchCommand(userInput2, ui, el, userAction2, userArguments2));
         assertThrows(NullPointerException.class,
             () -> new SearchCommand(userInput3, ui, el, userAction3, userArguments3));
+    }
+
+    @Test
+    void execute_validSearchForAll_expectSuccess() throws InvalidCommandException {
+        SearchCommand searchAllCommand = parser.createSearchCommand("search /all a");
+        String expectedOutput =
+                "Sorry, no matching exercise found.\n"
+                        + "----------------------------------------------------------------------\n"
+                        + "Sorry, no matching workout found.\n"
+                        + "----------------------------------------------------------------------\n"
+                        + "The plan(s) containing keyword(s)" + ui.getColorText(TextColor.COLOR_YELLOW, " [a] ")
+                        + "is(are) listed below together\n"
+                        + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "3. arms");
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        searchAllCommand.execute();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "")
+                .replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
+    }
+
+    @Test
+    void execute_validSearchForAll2_expectSuccess() throws InvalidCommandException {
+        SearchCommand searchAllCommand = parser.createSearchCommand("search /all u");
+        String expectedOutput =
+                "The exercise(s) containing keyword(s)" + ui.getColorText(TextColor.COLOR_YELLOW, " [u] ")
+                        + "is(are) listed below together\n" + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "1. push up\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "2. sit up\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "3. pull up\n")
+                        + "----------------------------------------------------------------------\n"
+                        + "The workout(s) containing keyword(s)" + ui.getColorText(TextColor.COLOR_YELLOW, " [u] ")
+                        + "is(are) listed below together\n"
+                        + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "1. push up (10 reps)\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "2. sit up (15 reps)\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "3. pull up (20 reps)\n")
+                        + "----------------------------------------------------------------------\n"
+                        + "The plan(s) containing keyword(s)" + ui.getColorText(TextColor.COLOR_YELLOW, " [u] ")
+                        + "is(are) listed below together\n" + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "1. more muscles\n");
+
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        searchAllCommand.execute();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "")
+                .replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
+    }
+
+    @Test
+    void execute_validSearchForAll3_expectSuccess() throws InvalidCommandException {
+        SearchCommand searchAllCommand = parser.createSearchCommand("search /all 10");
+        String expectedOutput =
+                "Sorry, no matching exercise found.\n"
+                        + "----------------------------------------------------------------------\n"
+                        + "The workout(s) with " + ui.getColorText(TextColor.COLOR_YELLOW, "reps = 10")
+                        + " is(are) listed below together\n"
+                        + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "1. push up (10 reps)\n")
+                        + "----------------------------------------------------------------------\n"
+                        + "Sorry, no matching plan found.\n";
+
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        searchAllCommand.execute();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "")
+                .replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
+    }
+
+    @Test
+    void execute_validSearchForAllNoMatch_expectSuccess() throws InvalidCommandException {
+        SearchCommand searchAllCommand = parser.createSearchCommand("search /all asldkaskd");
+        String expectedOutput =
+                "Sorry, no matching exercise found.\n"
+                        + "----------------------------------------------------------------------\n"
+                        + "Sorry, no matching workout found.\n"
+                        + "----------------------------------------------------------------------\n"
+                        + "Sorry, no matching plan found.\n";
+
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        searchAllCommand.execute();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "")
+                .replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
+    }
+
+    @Test
+    void execute_validSearchForExercise_expectSuccess() throws InvalidCommandException {
+        SearchCommand searchExerciseCommand = parser.createSearchCommand("search /exercise u");
+        String expectedOutput =
+                "The exercise(s) containing keyword(s)" + ui.getColorText(TextColor.COLOR_YELLOW, " [u] ")
+                        + "is(are) listed below together\n" + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "1. push up\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "2. sit up\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "3. pull up\n");
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        searchExerciseCommand.execute();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "")
+                .replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
+    }
+
+    @Test
+    void execute_validSearchForWorkout_expectSuccess() throws InvalidCommandException {
+        SearchCommand searchWorkoutCommand = parser.createSearchCommand("search /workout 15");
+        String expectedOutput =
+                "The workout(s) with " + ui.getColorText(TextColor.COLOR_YELLOW, "reps = 15")
+                        + " is(are) listed below together\n"
+                        + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "2. sit up (15 reps)\n");
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        searchWorkoutCommand.execute();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "")
+                .replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
+    }
+
+    @Test
+    void execute_validSearchForPlan_expectSuccess() throws InvalidCommandException {
+        SearchCommand searchPlanCommand = parser.createSearchCommand("search /plan s");
+        String expectedOutput =
+                "The plan(s) containing keyword(s)" + ui.getColorText(TextColor.COLOR_YELLOW, " [s] ")
+                        + "is(are) listed below together\n" + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "1. more muscles\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "2. legs\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "3. arms\n");
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        searchPlanCommand.execute();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "")
+                .replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
     }
 }
