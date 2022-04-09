@@ -17,7 +17,7 @@ class Main COLOR_MAIN {
 }
 Parser ..> "{abstract}\nCommand"
 class WerkIt #Sandybrown {
-+ startContinuousUserPrompt()
++ startContinuousUserPrompt():void
 }
 
 class "{abstract}\nCommand" #LightSkyBlue {
@@ -26,11 +26,11 @@ class "{abstract}\nCommand" #LightSkyBlue {
 
 
 class ExerciseCommand #LightSkyBlue {
-+ execute()
++ execute():void
 }
 
 class UI #YellowGreen {
-+ getUserInput()
++ getUserInput():void
 }
 
 class Parser #Gold {
@@ -40,7 +40,7 @@ class Parser #Gold {
 
 class ExerciseList #LightSkyBlue {
 + exercisesList: ArrayList<String>
-+ printExerciseList()
++ printExerciseList():void
 }
 
 @enduml

@@ -16,7 +16,7 @@ WorkoutList <-u- SearchCommand
 Parser ..> "{abstract}\nCommand"
 skinparam classFontSize 16
 class WerkIt #Sandybrown {
-+ startContinuousUserPrompt()
++ startContinuousUserPrompt():void
 }
 
 class Main COLOR_MAIN {
@@ -24,18 +24,18 @@ class Main COLOR_MAIN {
 }
 
 class SearchCommand #LightSkyBlue {
-+ execute()
-+ searchWorkout()
-+ searchPlan()
-+ searchWorkout()
-+ searchExercise()
++ execute():void
++ searchWorkout():void
++ searchPlan():void
++ searchWorkout():void
++ searchExercise():void
 }
 
 class "{abstract}\nCommand" #LightSkyBlue {
 }
 
 class UI #YellowGreen {
-+ getUserInput()
++ getUserInput():void
 }
 
 class Parser #Gold {
