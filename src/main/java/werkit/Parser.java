@@ -23,10 +23,6 @@ import static commands.PlanCommand.ACTION_KEYWORD_DETAILS;
 import static commands.ScheduleCommand.ACTION_KEYWORD_UPDATE;
 import static commands.ScheduleCommand.ACTION_KEYWORD_CLEAR_ALL;
 import static commands.ScheduleCommand.ACTION_KEYWORD_CLEAR;
-import static commands.SearchCommand.ACTION_KEYWORD_PLAN;
-import static commands.SearchCommand.ACTION_KEYWORD_EXERCISE;
-import static commands.SearchCommand.ACTION_KEYWORD_WORKOUT;
-import static commands.SearchCommand.ACTION_KEYWORD_ALL;
 import static commands.WorkoutCommand.ACTION_KEYWORD_CREATE;
 import static commands.WorkoutCommand.ACTION_KEYWORD_DELETE;
 
@@ -127,9 +123,9 @@ public class Parser {
         switch (commandKeyword) {
         case WorkoutCommand.KEYWORD_BASE:
             return createWorkoutCommand(userInput);
-        case ExitCommand.BASE_KEYWORD:
+        case ExitCommand.KEYWORD_BASE:
             return createExitCommand(userInput);
-        case HelpCommand.BASE_KEYWORD:
+        case HelpCommand.KEYWORD_BASE:
             return createHelpCommand(userInput);
         case ExerciseCommand.KEYWORD_BASE:
             return createExerciseCommand(userInput);

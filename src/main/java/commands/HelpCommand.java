@@ -3,7 +3,7 @@ package commands;
 import werkit.UI;
 
 public class HelpCommand extends Command {
-    public static final String BASE_KEYWORD = "help";
+    public static final String KEYWORD_BASE = "help";
 
     private final UI ui = new UI();
 
