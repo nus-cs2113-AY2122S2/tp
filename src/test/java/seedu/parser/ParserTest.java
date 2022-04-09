@@ -36,8 +36,26 @@ class ParserTest {
                 "add n/`ITEM_NAME` s/`SERIAL_NUMBER` t/`TYPE` c/`COST` pf/`PURCHASED_FROM` "
                         + "pd/`PURCHASED_DATE`");
         assertEquals(expectedResult, actualResult);
-        assertEquals(expectedResult.get(0), actualResult.get(0));
-        assertEquals(expectedResult.get(1), actualResult.get(1));
+    }
+
+    @Test
+    void splitCommandTerm_listCommandOnly_success() throws IncompleteCommandException {
+        ArrayList<String> expectedResult = new ArrayList<>(
+                Arrays.asList("list", null)
+        );
+        ArrayList<String> actualResult = parser.splitCommandTerm(
+                "list");
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void splitCommandTerm_listCommandExtraWordsRetained_success() throws IncompleteCommandException {
+        ArrayList<String> expectedResult = new ArrayList<>(
+                Arrays.asList("list", "t/`SPEAKER`")
+        );
+        ArrayList<String> actualResult = parser.splitCommandTerm(
+                "list t/`SPEAKER`");
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test

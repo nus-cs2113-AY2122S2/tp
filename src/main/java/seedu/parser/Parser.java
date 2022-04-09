@@ -30,7 +30,7 @@ public class Parser {
      * Format to parse command by breaking it up into two segments: command and arguments: these can then be separately
      * passed into arguments.
      */
-    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\w+)\\s+(?<arguments>.+)");
 
     /**
      * Defines regex used to match argument pairs in the command line.
@@ -168,18 +168,21 @@ public class Parser {
     /**
      * Break down a command into the command term to be parsed and the remainder of the arguments.
      * Assumes command term and remainder arguments are delimited by minimally one space.
-     * If first element is "list", "help", "save" or "bye" remainder arguments can be empty, in which case a null
-     * second object will be passed in.
+     *
+     * <p>If first element is <code>list</code>, <code>help</code>, <code>save</code> or <code>bye</code>,
+     * remainder arguments can be empty, in which case a null second object will be passed in.
+     * If there exists a second element in such a case, it is split as per normal, but it will be ignored in
+     * {@link Parser#parseCommand(String)}.
      *
      * @param userInput String to be split into substrings
-     * @return ArrayList of String, first element being the command term and the second element being arguments
+     * @return ArrayList of 2 String, first element command term and second element arguments
      * @throws IncompleteCommandException if no space is found
      */
     public ArrayList<String> splitCommandTerm(String userInput) throws IncompleteCommandException {
         ArrayList<String> resultArrayList = new ArrayList<>();
         userInput = userInput.trim();
 
-        // Checks for list/help/save command word first
+        // Checks for list/help/save/bye command word first
         switch (userInput.toLowerCase(Locale.ROOT)) {
         case ListCommand.COMMAND_WORD:
             resultArrayList.add(ListCommand.COMMAND_WORD);
