@@ -42,4 +42,5 @@ PRs reviewed (with non-trivial review comments):
 [#91](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/91),
 [#99](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/99),
 [#105](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/105),
-[#111](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/111)
+[#111](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/111),
+[#121](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/121)
