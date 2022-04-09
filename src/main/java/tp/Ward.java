@@ -48,7 +48,7 @@ public class Ward {
         this.wardNumber = number;
     }
 
-    public String[] getDoctors(int[] doctorIndexes) {
+    public String[] getDoctors() {
         String[] docNames = new String[10];
         int j = 0;
         for (int i = 0; i < 20; i++) {
@@ -61,7 +61,7 @@ public class Ward {
         return docNames;
     }
 
-    public String[] getPatients(int[] patientIndexes) {
+    public String[] getPatients() {
         String[] patientNames = new String[10];
         int j = 0;
         for (int i = 0; i < 20; i++) {
@@ -74,7 +74,7 @@ public class Ward {
         return patientNames;
     }
 
-    public String[] getNurses(int[] nurseIndexes) {
+    public String[] getNurses() {
         String[] nurseNames = new String[10];
         int j = 0;
         for (int i = 0; i < 20; i++) {
@@ -90,9 +90,9 @@ public class Ward {
 
     @Override
     public String toString() {
-        return   "Doctor: " + Arrays.toString(getDoctors(doctorIndexes)) + " || Patient: "
-                + Arrays.toString(getPatients(patientIndexes)) + " || Nurse: "
-                + Arrays.toString(getNurses(nurseIndexes)) + " || Ward number: " + wardNumber;
+        return   "Doctor: " + Arrays.toString(getDoctors()) + " || Patient: "
+                + Arrays.toString(getPatients()) + " || Nurse: "
+                + Arrays.toString(getNurses()) + " || Ward number: " + wardNumber;
     }
 }
 
