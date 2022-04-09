@@ -1,7 +1,7 @@
 package seedu.duke.helper.command;
 
 import seedu.duke.assets.List;
-import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.status.Status;
 
 /*
@@ -17,14 +17,14 @@ public class ViewDoctorCommand extends Command {
         super(parameterArray);
     }
 
-    /*
+     /*
      * Method that takes in a DoctorList that needs to be acted on.
      * parameterArray should be NULL. Prints list of existing Doctors.
      * @ param list a List object - should be an instance of DoctorList
      * @ return Status.VIEW_SUCCESS if list was printed.
      * @ throws HalpmiException if issues with parameterArray.
      */
-    public Status execute(List doctorList) throws HalpmiException {
+    public Status execute(List doctorList) throws UserInputErrorException {
         if (parameterArray == null) {
             doctorList.view();
         } else {

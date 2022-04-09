@@ -82,7 +82,7 @@ public class UI {
         System.out.print("Format: add doctor /info [nric],[name],[age],[gender], ");
         System.out.println("[address],[DOB],[Specialisation]");
         System.out.print("Example: add doctor /info S1234567A, John Doe, ");
-        System.out.println("23, M, 10 Baker Street, 1999-12-31, Urinology");
+        System.out.println("22, M, 10 Baker Street, 1999-12-31, Urinology");
     }
 
     public static void printAddPatientMessage() {
@@ -90,7 +90,7 @@ public class UI {
         System.out.println("Feature: ADD PATIENT");
         System.out.print("Format: add patient /info [nric], [name], [age], [gender], ");
         System.out.println("[address], [DOB], [Date of Admission]");
-        System.out.print("Example: add patient /info S1234567A, John Doe, 23, ");
+        System.out.print("Example: add patient /info S1234567A, John Doe, 22, ");
         System.out.println("M, 10 Baker Street, 1999-12-31, 2021-02-15");
     }
 

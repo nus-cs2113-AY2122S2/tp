@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.Parser;
 import seedu.duke.helper.Storage;
@@ -32,7 +33,7 @@ public class Manager {
             try {
                 status = executeCommand(commandWord, parameters);
                 ui.print(status);
-            } catch (HalpmiException | NotFoundException | DuplicateEntryException e) {
+            } catch (HalpmiException e) {
                 UI.printParagraph(e.toString());
             }
             storage.saveData();
@@ -51,6 +52,7 @@ public class Manager {
      */
     private Status executeCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
             DuplicateEntryException {
+
         Command command;
         Status status = null;
         switch (commandWord) {
@@ -168,7 +170,7 @@ public class Manager {
             isTerminated = true;
             break;
         default:
-            throw new HalpmiException("Invalid Command given!");
+            throw new UserInputErrorException("Invalid Command given!");
         }
         return status;
     }

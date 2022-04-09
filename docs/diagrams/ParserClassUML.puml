@@ -1,6 +1,7 @@
 @startuml
 hide circle
 skinparam classAttributeIconSize 0
+
 class Parser {
 -isNull (String): boolean
 -minParameterCheck(String, int): String []

@@ -1,23 +1,23 @@
 package seedu.duke.helper;
 
-
 import seedu.duke.assets.Appointment;
 import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.Doctor;
 import seedu.duke.assets.DoctorList;
+import seedu.duke.assets.List;
 import seedu.duke.assets.Medicine;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
 import seedu.duke.exception.DuplicateEntryException;
-
+import seedu.duke.exception.UserInputErrorException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Storage {
@@ -36,88 +36,94 @@ public class Storage {
         loadData();
     }
 
-    private void loadMedicineData() throws FileNotFoundException {
-        File data = new File(PATH_MED);
+    ArrayList<String> corruptedLines = new ArrayList<>();
+
+    private void loadGenericData(String filePath, List listType) throws FileNotFoundException {
+        File data = new File(filePath);
         Scanner reader = new Scanner(data);
+        String outputFilePathCorrupted = "nope";
         while (reader.hasNext()) {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
             try {
-                medicines.add(parameters);
-            } catch (DuplicateEntryException e) {
-                continue;
+                if (filePath.equals(PATH_APT_MEDS)) {
+                    outputFilePathCorrupted = "data/appointment_meds_corrupted.txt";
+                    appointments.loadMedicine(parameters);
+                } else {
+                    if (filePath.equals(PATH_DOC)) {
+                        outputFilePathCorrupted = "data/doctor_corrupted.txt";
+                        Validator.validateAddDoctor(parameters);
+                    }
+                    if (filePath.equals(PATH_PAT)) {
+                        outputFilePathCorrupted = "data/patient_corrupted.txt";
+                        Validator.validateAddPatient(parameters);
+                    }
+                    if (filePath.equals(PATH_MED)) {
+                        outputFilePathCorrupted = "data/medicine_corrupted.txt";
+                        Validator.validateMedicine(parameters);
+                    }
+                    if (filePath.equals(PATH_APT)) {
+                        outputFilePathCorrupted = "data/appointment_corrupted.txt";
+                        Validator.validateAddAppointment(parameters);
+                    }
+                    listType.add(parameters);
+                }
+
+
+            } catch (UserInputErrorException | DuplicateEntryException e) {
+                if (e instanceof UserInputErrorException) {
+                    corruptedLines.add(e + "\nLine: " + line);
+                }
+                // if duplicate entry just ignore
             }
+        }
+        if (corruptedLines.size() != 0 && !outputFilePathCorrupted.equals("nope")) {
+            saveCorruptedData(outputFilePathCorrupted, corruptedLines);
+            UI.printParagraph("There are some corrupted lines in your input files. "
+                    + "It has been moved to another file named "
+                    + outputFilePathCorrupted);
         }
     }
 
-    private void loadPatientData() throws FileNotFoundException {
-        File data = new File(PATH_PAT);
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()) {
-            String line = reader.nextLine();
-            String[] parameters = line.split(",");
+    private void saveCorruptedData(String filePath, ArrayList<String> stringArray) {
+        File file = new File(filePath);
+        if (!file.exists()) {
             try {
-                patients.add(parameters);
-            } catch (DuplicateEntryException e) {
-                continue;
-            }
-
-        }
-    }
-
-    private void loadDoctorData() throws FileNotFoundException {
-        File data = new File(PATH_DOC);
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()) {
-            String line = reader.nextLine();
-            String[] parameters = line.split(",");
-            try {
-                doctors.add(parameters);
-            } catch (DuplicateEntryException e) {
-                continue;
+                file.createNewFile();
+                UI.printParagraph("file has been created");
+            } catch (IOException ioException) {
+                UI.printParagraph("file cannot be created" + filePath);
+                return;
             }
         }
-    }
-
-    private void loadAppointmentData() throws FileNotFoundException {
-        File data = new File(PATH_APT);
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()) {
-            String line = reader.nextLine();
-            String[] parameters = line.split(",");
-            try {
-                appointments.add(parameters);
-            } catch (DuplicateEntryException e) {
-                continue;
+        try {
+            FileWriter dataWrite = new FileWriter(filePath,true);
+            dataWrite.write("Session: " + LocalDateTime.now().toString() + "\n");
+            for (String s : stringArray) {
+                dataWrite.write(s + "\n");
             }
+            dataWrite.write("----------------------------------------------------------\n");
+            dataWrite.close();
+        } catch (IOException e) {
+            UI.printParagraph("Unable to save data...");
         }
     }
-
-    private void loadAppointmentMedData() throws FileNotFoundException {
-        File data = new File(PATH_APT_MEDS);
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()) {
-            String line = reader.nextLine();
-            String[] parameters = line.split(",");
-            appointments.loadMedicine(parameters);
-        }
-    }
-
 
 
     public void loadData() {
         try {
-            loadDoctorData();
-            loadPatientData();
-            loadMedicineData();
-            loadAppointmentData();
-            loadAppointmentMedData();
+            loadGenericData(PATH_DOC, doctors);
+            loadGenericData(PATH_PAT, patients);
+            loadGenericData(PATH_MED, medicines);
+            loadGenericData(PATH_APT, appointments);
+            loadGenericData(PATH_APT_MEDS, appointments);
         } catch (FileNotFoundException f) {
             UI.printParagraph("No saved data found!");
         }
 
     }
 
+    //todo : clean up save file
     private void saveMedicineData() {
         File medicineFile = new File(PATH_MED);
         if (!medicineFile.exists()) {

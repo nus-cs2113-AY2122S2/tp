@@ -2,10 +2,7 @@ package seedu.duke.helper;
 
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.exception.HalpmiException;
-import seedu.duke.helper.command.AddAppointmentCommand;
-import seedu.duke.helper.command.Command;
-import seedu.duke.helper.command.ViewAppointmentCommand;
+import seedu.duke.exception.UserInputErrorException;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -19,7 +16,7 @@ class ParserTest {
         String[] parameterArray = {"S1234567A","JOHN","23","M","SINGAPORE","1999-01-01","2022-01-01"};
         try {
             assertArrayEquals(parameterArray,Parser.parseAddPatient(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -37,7 +34,7 @@ class ParserTest {
             try {
                 Parser.parseAddPatient(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException e) {
+            } catch (UserInputErrorException e) {
                 assert true;
             }
         }
@@ -49,7 +46,7 @@ class ParserTest {
         String[] parameterArray = {"S1234567A","JOHN","23","M","SINGAPORE","1999-01-01","Paediatrics"};
         try {
             assertArrayEquals(parameterArray,Parser.parseAddDoctor(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -67,7 +64,7 @@ class ParserTest {
             try {
                 Parser.parseAddDoctor(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException e) {
+            } catch (UserInputErrorException e) {
                 assert true;
             }
         }
@@ -79,7 +76,7 @@ class ParserTest {
         String[] parameterArray = { "S123","Paracetamol","500","2025-02-02","Headaches","100"};
         try {
             assertArrayEquals(parameterArray,Parser.parseAddMedicine(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception");
         }
     }
@@ -96,7 +93,7 @@ class ParserTest {
             try {
                 Parser.parseAddMedicine(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException e) {
+            } catch (UserInputErrorException e) {
                 assert true;
             }
         }
@@ -108,7 +105,7 @@ class ParserTest {
         String[] parameterArray = {"S1234567A"};
         try {
             assertArrayEquals(parameterArray,Parser.parseDeletePatient(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -120,7 +117,7 @@ class ParserTest {
             try {
                 Parser.parseDeletePatient(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException h) {
+            } catch (UserInputErrorException h) {
                 assert true;
             }
         }
@@ -132,7 +129,7 @@ class ParserTest {
         String[] parameterArray = {"S1234567A"};
         try {
             assertArrayEquals(parameterArray,Parser.parseDeleteDoctor(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -144,7 +141,7 @@ class ParserTest {
             try {
                 Parser.parseDeleteDoctor(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException h) {
+            } catch (UserInputErrorException h) {
                 assert true;
             }
         }
@@ -156,7 +153,7 @@ class ParserTest {
         String[] parameterArray = {"S123"};
         try {
             assertArrayEquals(parameterArray,Parser.parseDeleteMedicine(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -168,7 +165,7 @@ class ParserTest {
             try {
                 Parser.parseDeleteMedicine(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException h) {
+            } catch (UserInputErrorException h) {
                 assert true;
             }
         }
@@ -180,7 +177,7 @@ class ParserTest {
         String[] parameterArray = {"nric", "S1234567A"};
         try {
             assertArrayEquals(parameterArray,Parser.parseViewDoctor(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -191,7 +188,7 @@ class ParserTest {
         String[] parameterArray = null;
         try {
             assertArrayEquals(parameterArray,Parser.parseViewDoctor(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -204,7 +201,7 @@ class ParserTest {
             try {
                 Parser.parseViewDoctor(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException e) {
+            } catch (UserInputErrorException e) {
                 assert true;
             }
         }
@@ -216,7 +213,7 @@ class ParserTest {
         String[] parameterArray = {"nric", "S1234567A"};
         try {
             assertArrayEquals(parameterArray,Parser.parseViewPatient(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -227,7 +224,7 @@ class ParserTest {
         String[] parameterArray = null;
         try {
             assertArrayEquals(parameterArray,Parser.parseViewPatient(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -240,7 +237,7 @@ class ParserTest {
             try {
                 Parser.parseViewPatient(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException e) {
+            } catch (UserInputErrorException e) {
                 assert true;
             }
         }
@@ -252,7 +249,7 @@ class ParserTest {
         String[] parameterArray = {"id","S1234"};
         try {
             assertArrayEquals(parameterArray,Parser.parseViewMedicine(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -263,7 +260,7 @@ class ParserTest {
         String[] parameterArray = null;
         try {
             assertArrayEquals(parameterArray,Parser.parseViewMedicine(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -276,7 +273,7 @@ class ParserTest {
             try {
                 Parser.parseViewMedicine(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException e) {
+            } catch (UserInputErrorException e) {
                 assert true;
             }
         }
@@ -288,7 +285,7 @@ class ParserTest {
         String[] parameterArray = { "S123","Paracetamol","500","2025-02-02","Headaches","100"};
         try {
             assertArrayEquals(parameterArray,Parser.parseEditMedicine(parameter).parameterArray);
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception");
         }
     }
@@ -305,7 +302,7 @@ class ParserTest {
             try {
                 Parser.parseAddMedicine(s);
                 fail("Should be throwing exception! Failed for: " + s);
-            } catch (HalpmiException e) {
+            } catch (UserInputErrorException e) {
                 assert true;
             }
         }
@@ -316,7 +313,7 @@ class ParserTest {
         try {
             Parser.parseUpdateMedicineStock(null);
             assert true;
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -326,7 +323,7 @@ class ParserTest {
         try {
             Parser.parseUpdateMedicineStock("");
             fail("Should be throwing exception!");
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             assert true;
         }
     }
@@ -336,7 +333,7 @@ class ParserTest {
         try {
             Parser.parseClearExpiredMedicine(null);
             assert true;
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
     }
@@ -346,7 +343,7 @@ class ParserTest {
         try {
             Parser.parseClearExpiredMedicine("");
             fail("Should be throwing exception!");
-        } catch (HalpmiException e) {
+        } catch (UserInputErrorException e) {
             assert true;
         }
     }

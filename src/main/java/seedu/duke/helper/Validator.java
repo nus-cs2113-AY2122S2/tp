@@ -1,6 +1,6 @@
 package seedu.duke.helper;
 
-import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.UserInputErrorException;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -12,78 +12,84 @@ import java.util.regex.Pattern;
 public class Validator {
 
     /* Validating person attributes */
+    public static void minParameterCheck(String[] parametersArray, int length) throws UserInputErrorException {
+        if (parametersArray.length != length) {
+            throw new UserInputErrorException("There is one or more parameters missing");
+        }
+    }
 
-    public static void validateNric(String nric) throws HalpmiException {
+    public static void validateNric(String nric) throws UserInputErrorException {
         Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
         Matcher nricMatcher = nricPattern.matcher(nric);
         if (!nricMatcher.matches()) {
-            throw new HalpmiException("NRIC must start with a capital letter, "
+            throw new UserInputErrorException("NRIC must start with a capital letter, "
                     + "followed by 7 digits and end with a capital letter.");
         }
     }
 
-    private static void validateFullName(String fullName) throws HalpmiException {
+    private static void validateFullName(String fullName) throws UserInputErrorException {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
         Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
         if (!fullNameMatcher.matches()) {
-            throw new HalpmiException("Full name must contain only alphabets, no special characters or numbers.");
+            throw new UserInputErrorException("Full name must contain only alphabets, "
+                    + "no special characters or numbers.");
         }
     }
 
-    private static void validateAge(String ageString) throws HalpmiException {
+    private static void validateAge(String ageString) throws UserInputErrorException {
         int age;
         try {
             age = Integer.parseInt(ageString);
         } catch (NumberFormatException numberFormatException) {
-            throw new HalpmiException("Age must be a positive number!");
+            throw new UserInputErrorException("Age must be a positive number!");
         }
         //age must be within 1 and 120
         if (!(1 <= age && age <= 120)) {
-            throw new HalpmiException("Age must be between 1 and 120 inclusive.");
+            throw new UserInputErrorException("Age must be between 1 and 120 inclusive.");
         }
     }
 
-    private static void validateGender(String gender) throws HalpmiException {
+    private static void validateGender(String gender) throws UserInputErrorException {
         Pattern genderPattern = Pattern.compile("M|F");
         Matcher genderMatcher = genderPattern.matcher(gender);
         if (!genderMatcher.matches()) {
-            throw new HalpmiException("Gender must be a single character: M or F.");
+            throw new UserInputErrorException("Gender must be a single character: M or F.");
         }
     }
 
-    private static void validateAddress(String address) throws HalpmiException {
+    private static void validateAddress(String address) throws UserInputErrorException {
         Pattern addressPattern = Pattern.compile("[\\w\\-\\s'()#]*");
         Matcher addressMatcher = addressPattern.matcher(address);
         if (!addressMatcher.matches()) {
-            throw new HalpmiException("Address must be alphanumeric. "
+            throw new UserInputErrorException("Address must be alphanumeric. "
                     + "Only these specific special characters are allowed: ' ( ) #");
         }
     }
 
-    private static void validateDob(String dobString) throws HalpmiException {
+    private static void validateDob(String dobString) throws UserInputErrorException {
         LocalDate dob;
         try {
             dob = LocalDate.parse(dobString);
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new HalpmiException("Date of birth must be in YYYY-MM-DD format. "
+            throw new UserInputErrorException("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
         }
         LocalDate today = LocalDate.now();
         LocalDate dobLimit = LocalDate.parse("1900-01-01");
         // dob is within the range of 1900 - today
         if (!(dob.isAfter(dobLimit) && dob.isBefore(today))) {
-            throw new HalpmiException("Date of birth must be in YYYY-MM-DD format. "
+            throw new UserInputErrorException("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
         }
     }
 
     // todo : admission date logic (w respect to dob)
-    private static void validateAdmissionDate(String admissionDateString) throws HalpmiException {
+    private static void validateAdmissionDate(String admissionDateString) throws UserInputErrorException {
         LocalDate admissionDate;
         try {
             admissionDate = LocalDate.parse(admissionDateString);
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new HalpmiException("Date of birth must be in YYYY-MM-DD format. "
+            throw new UserInputErrorException("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
         }
         LocalDate today = LocalDate.now();
@@ -91,12 +97,12 @@ public class Validator {
 
         // admission date is after 1980 and before today
         if (!(admissionDate.isAfter(admissionDateLimit) && admissionDate.isBefore(today))) {
-            throw new HalpmiException("Date of birth must be in YYYY-MM-DD format. "
+            throw new UserInputErrorException("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
         }
     }
 
-    private static void validatedobandage(String age, String dob) throws HalpmiException {
+    private static void validatedobandage(String age, String dob) throws UserInputErrorException {
         validateDob(dob);
         LocalDate today = LocalDate.now();
         LocalDate birthday = LocalDate.parse(dob);
@@ -104,13 +110,13 @@ public class Validator {
         int calculatedAge = period.getYears();
         int parsedAge = Integer.parseInt(age);
         if (!(parsedAge == calculatedAge)) {
-            throw new HalpmiException("Please ensure that the date of birth matches the age provided");
+            throw new UserInputErrorException("Please ensure that the date of birth matches the age provided");
         }
 
     }
 
     /* Validating person */
-    private static void validateAddPerson(String[] parameters) throws HalpmiException {
+    private static void validateAddPerson(String[] parameters) throws UserInputErrorException {
         validateNric(parameters[0]);
         validateFullName(parameters[1]);
         validateAge(parameters[2]);
@@ -120,85 +126,87 @@ public class Validator {
         validatedobandage(parameters[2], parameters[5]);
     }
 
-    private static void validateSpecialization(String specialization) throws HalpmiException {
+    private static void validateSpecialization(String specialization) throws UserInputErrorException {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
         Matcher fullNameMatcher = fullNamePattern.matcher(specialization);
         if (!fullNameMatcher.matches()) {
-            throw new HalpmiException("Specialization must contain only alphabets and no special characters.");
+            throw new UserInputErrorException("Specialization must contain only alphabets and no special characters.");
         }
     }
 
 
-    static void validateAddDoctor(String[] parameters) throws HalpmiException {
+    static void validateAddDoctor(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateSpecialization(parameters[6]);
     }
 
-    static void validateAddPatient(String[] parameters) throws HalpmiException {
+    static void validateAddPatient(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateAdmissionDate(parameters[6]);
     }
 
 
     /* Validate medicine attributes */
-    private static boolean validateMedicineName(String medicineName) throws HalpmiException {
+    private static boolean validateMedicineName(String medicineName) throws UserInputErrorException {
         boolean isValid = medicineName.matches("[a-zA-z ]+");
         if (!isValid) {
-            throw new HalpmiException("Invalid Medicine name");
+            throw new UserInputErrorException("Invalid Medicine name");
         }
         return true;
-
     }
 
-    private static boolean validateDosage(String dosage) throws HalpmiException {
+    private static boolean validateDosage(String dosage) throws UserInputErrorException {
         try {
             int dosageInt = Integer.parseInt(dosage);
             return dosageInt > 0;
         } catch (NumberFormatException numberFormatException) {
-            throw new HalpmiException("Invalid Medicine dosage");
+            throw new UserInputErrorException("Invalid Medicine dosage");
         }
     }
 
-    private static boolean validateExpiry(String expiry) throws HalpmiException {
+    private static boolean validateExpiry(String expiry) throws UserInputErrorException {
         try {
             LocalDate expiryDate = LocalDate.parse(expiry);
             LocalDate minimumDate = LocalDate.now();
             if (expiryDate.isBefore(minimumDate)) {
-                throw new HalpmiException("Medicine expiry date is before today");
+                throw new UserInputErrorException("Medicine expiry date is before today");
             }
             return true;
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new HalpmiException("Invalid Medicine Expiry");
+            throw new UserInputErrorException("Invalid Medicine Expiry");
         }
     }
 
-    private static boolean validateQuantity(String quantity) throws HalpmiException {
+    private static boolean validateQuantity(String quantity) throws UserInputErrorException {
         try {
             int quantityInt = Integer.parseInt(quantity);
             return quantityInt > 0;
         } catch (NumberFormatException numberFormatException) {
-            throw new HalpmiException("Invalid Medicine Quantity");
+            throw new UserInputErrorException("Invalid Medicine Quantity");
         }
     }
 
-    private static void validateMedicineId(String medicineId) throws HalpmiException {
+    private static void validateMedicineId(String medicineId) throws UserInputErrorException {
         Pattern fullNamePattern = Pattern.compile("[A-Z][0-9][3}]");
         Matcher fullNameMatcher = fullNamePattern.matcher(medicineId);
         if (!fullNameMatcher.matches()) {
-            throw new HalpmiException("Medicine must contain only alphabets and Numbers.");
+            throw new UserInputErrorException("Medicine must contain only alphabets and Numbers.");
         }
     }
 
-    private static void validateMedicineSideEffects(String sideEffects) throws HalpmiException {
+    private static void validateMedicineSideEffects(String sideEffects) throws UserInputErrorException {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
         Matcher fullNameMatcher = fullNamePattern.matcher(sideEffects);
         if (!fullNameMatcher.matches()) {
-            throw new HalpmiException("Specialization must contain only alphabets and no special characters.");
+            throw new UserInputErrorException("Specialization must contain only alphabets and no special characters.");
         }
     }
 
     /* Validate medicine */
-    public static void validateMedicine(String[] parameters) throws HalpmiException {
+    public static void validateMedicine(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 6);
         assert parameters.length == 6 : "Validate failed to check parameter length";
         boolean check = true;
         for (int i = 0; i < 5; i++) {
@@ -220,52 +228,54 @@ public class Validator {
             }
         }
         if (!check) {
-            throw new HalpmiException("Some Parameters are invalid!");
+            throw new UserInputErrorException("Some Parameters are invalid!");
         }
     }
 
     /* Validate appointment */
-    private static void validateAppointmentDetails(String appointmentDetails) throws HalpmiException {
+    private static void validateAppointmentDetails(String appointmentDetails) throws UserInputErrorException {
         if (appointmentDetails.isBlank() || appointmentDetails.isEmpty()) {
-            throw new HalpmiException("Appointment details cannot be empty. Please indicate some details.");
+            throw new UserInputErrorException("Appointment details cannot be empty. Please indicate some details.");
         }
     }
 
-    private static void validateDate(String inputDate, String type) throws HalpmiException {
+    private static void validateDate(String inputDate, String type) throws UserInputErrorException {
         LocalDate newDate;
         try {
             newDate = LocalDate.parse(inputDate);
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new HalpmiException("Date must be in YYYY-MM-DD format. ");
+            throw new UserInputErrorException("Date must be in YYYY-MM-DD format. ");
         }
         LocalDate today = LocalDate.now();
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
         if (type.equals("appointment") && newDate.isBefore(today)) {
-            throw new HalpmiException("Date must be in YYYY-MM-DD format. "
+            throw new UserInputErrorException("Date must be in YYYY-MM-DD format. "
                     + "New appointment dates must be today and after.");
         } else if (type.equals("patient") && newDate.isAfter(admissionDateLimit)
                 && newDate.isBefore(today)) {
-            throw new HalpmiException("Date must be in YYYY-MM-DD format. "
+            throw new UserInputErrorException("Date must be in YYYY-MM-DD format. "
                     + "Patient admission date must be after 1980-01-01 and today or before.");
         }
     }
 
-    private static boolean validateDate(String expiry) throws HalpmiException {
+    private static boolean validateDate(String expiry) throws UserInputErrorException {
         try {
             LocalDate expiryDate = LocalDate.parse(expiry);
             return true;
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new HalpmiException("Invalid Medicine Expiry");
+            throw new UserInputErrorException("Invalid Medicine Expiry");
         }
     }
 
-    public static void validateAddAppointment(String[] parameters) throws HalpmiException {
+    public static void validateAddAppointment(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 3);
         validateNric(parameters[0]);
         validateNric(parameters[1]);
         validateDate(parameters[2], "appointment");
     }
 
-    public static void validateEditAppointment(String[] parameters) throws HalpmiException {
+    public static void validateEditAppointment(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 7);
         validateNric(parameters[1]);
         validateFullName(parameters[2]);
         validateNric(parameters[3]);
@@ -274,7 +284,8 @@ public class Validator {
         validateAppointmentDetails(parameters[6]);
     }
 
-    public static void validateFindDoctor(String[] parameters) throws HalpmiException {
+    public static void validateFindDoctor(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 2);
         switch (parameters[0]) {
         case "nric":
             validateNric(parameters[1]);
@@ -298,11 +309,41 @@ public class Validator {
             validateSpecialization(parameters[1]);
             break;
         default:
-            throw new HalpmiException("Input must be an attribute of Doctor");
+            throw new UserInputErrorException("Input must be an attribute of Doctor");
         }
     }
 
-    public static void validateFindAppointment(String[] parameters) throws HalpmiException {
+    public static void validateFindPatient(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 2);
+        switch (parameters[0]) {
+        case "nric":
+            validateNric(parameters[1]);
+            break;
+        case "name":
+            validateFullName(parameters[1]);
+            break;
+        case "age":
+            validateAge(parameters[1]);
+            break;
+        case "gender":
+            validateGender(parameters[1]);
+            break;
+        case "address":
+            validateAddress(parameters[1]);
+            break;
+        case "dob":
+            validateDob(parameters[1]);
+            break;
+        case "admissiondate":
+            validateAdmissionDate(parameters[1]);
+            break;
+        default:
+            throw new UserInputErrorException("Input must be an attribute of Patient");
+        }
+    }
+
+    public static void validateFindAppointment(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 2);
         switch (parameters[0]) {
         case "id":
             break;
@@ -318,12 +359,12 @@ public class Validator {
             validateDate(parameters[1], "find appointment");
             break;
         default:
-            throw new HalpmiException("Input must be an attribute of Appointment");
+            throw new UserInputErrorException("Input must be an attribute of Appointment");
         }
     }
 
-    public static void validateFindMedicine(String[] parameters) throws HalpmiException {
-
+    public static void validateFindMedicine(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 2);
         boolean check = true;
         switch (parameters[0]) {
 
@@ -373,12 +414,12 @@ public class Validator {
             throw new HalpmiException("Input must be an attribute of Patient");
         }
     }
-
-    public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws HalpmiException {
-        validateNric(dispenseMedicineParameters[0]);
-        if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
-            throw new HalpmiException("Not all medicines in list have both the name of the medicine and the quantity"
-                    + "to prescribe!");
+    public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws UserInputErrorException {
+      //minParameterCheck(parameters, 3);
+      validateNric(dispenseMedicineParameters[0]);
+      if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
+          throw new UserInputErrorException("Not all medicines in list have both "
+                  + "the name of the medicine and the quantity to prescribe!");
         }
 
         for (int i = 1; i < dispenseMedicineParameters.length; i += 2) {
@@ -388,5 +429,4 @@ public class Validator {
             validateQuantity(medicineQuantity);
         }
     }
-
 }

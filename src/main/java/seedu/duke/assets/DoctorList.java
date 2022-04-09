@@ -1,7 +1,7 @@
 package seedu.duke.assets;
 
 import seedu.duke.exception.DuplicateEntryException;
-import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.UI;
@@ -48,10 +48,10 @@ public class DoctorList extends List {
     }
 
     //view particular doctor
-    public void view(String nric) throws HalpmiException {
+    public void view(String nric) throws UserInputErrorException {
         Doctor doctor = getDoctor(nric);
         if (doctor == null) {
-            throw new HalpmiException("Doctor doesn't exist please try again!");
+            throw new UserInputErrorException("Doctor doesn't exist please try again!");
         }
         CommandLineTable doctorTable = new CommandLineTable();
         doctorTable.setShowVerticalLines(true);
@@ -64,14 +64,14 @@ public class DoctorList extends List {
     }
 
     //view all doctor
-    public void view() throws HalpmiException {
+    public void view() throws UserInputErrorException {
         CommandLineTable doctorTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         doctorTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "Specialization");
         if (doctors.size() == 0) {
-            throw new HalpmiException("Doctor list is empty, please add doctor");
+            throw new UserInputErrorException("Doctor list is empty, please add doctor");
         }
         for (Doctor doctor : doctors) {
             doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
