@@ -105,11 +105,6 @@ public class AppointmentList extends List {
 
     @Override
     public void view() throws UserInputErrorException {
-        for (Appointment appointment : appointments) {
-            if (!appointment.appointmentDetails.contains(appointment.appointmentDate)) {
-                appointment.updateAppointmentDetails();
-            }
-        }
         CommandLineTable appointmentTable = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
