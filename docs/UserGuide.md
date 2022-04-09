@@ -430,7 +430,7 @@ distributed amongst all participants.
 >      You cannot supply both a total cost and a cost list.
 >    * You can use this even if the activity was originally created using an overall cost. The new cost list will be assigned 
 >to the existing participants in the order displayed when viewing the activity.
->    * You are encouraged to additionallly provide a participant list with `/i` to confirm the distribution of costs.
+>    * You are encouraged to additionally provide a participant list with `/i` to confirm the distribution of costs.
 >* `[GST_PERCENTAGE]` refers to the additional GST that may be charged during your activity.
 >    * If one is not provided, the original GST is left unchanged and will be applied to any changes to the overall cost or
 >cost list.
@@ -447,6 +447,7 @@ distributed amongst all participants.
 
 > **💡 Notes:**
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before activities in it can be edited.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
