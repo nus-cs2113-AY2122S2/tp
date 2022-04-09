@@ -53,8 +53,14 @@ and contact management tasks done faster than traditional GUI apps.
 ### Main Menu Features
 #### Navigating from menu to section of interest: `goto`
 Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
+This command can be used from other sections as well to directly go to another section. 
 
 Format: `goto SECTION`
+
+Note: `SECTION` here refers to the names of the sections of the application and there are only 3 valid choices:
+* `Expense_Tracker`
+* `Study_Manager`
+* `Contacts_Manager`
 
 **Examples of usage:**
 * `goto Expense_Tracker`
@@ -64,7 +70,9 @@ Format: `goto SECTION`
 **Expected outcome:**
 For expense tracker,
 ```
+---------------------------------------------------
 Welcome to Expense Tracker
+---------------------------------------------------
 ```
 
 For study manager,
@@ -74,7 +82,9 @@ Welcome to Modules Tracker, where you can track all your classes.
 
 For contacts manager,
 ```
+---------------------------------------------------
 Welcome to Contacts Manager
+---------------------------------------------------
 ```
 
 #### Going back to menu: `menu`
@@ -85,29 +95,34 @@ Format: `menu`
 **Example of usage:**
 user types in the `menu` command from another section which results in:
 ```
+---------------------------------------------------
 Welcome back to the main menu
-Menu:
+---------------------------------------------------
+---------------------------------------------------
+MENU:
+---------------------------------------------------
 ```
 
 #### Getting guidance on the usage of the application: `help`
-Displays user guide for menu.
+Displays guidance for menu features.
 
 Format: `help`
 
 **Example of usage:**
 User enters `help` when in main menu which results in:
 ```
+---------------------------------------------------
 Going from menu to section of interest:
 
 Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
 
-Format: goto m/SECTION
+Format: goto SECTION
 
 Examples:
 
-- goto m/Expense_Tracker
-- goto m/Study_Manager
-- goto m/Contacts_Manager
+- goto Expense_Tracker
+- goto Study_Manager
+- goto Contacts_Manager
 
 
 Going back to menu:
@@ -141,18 +156,23 @@ Format: exit
 Example:
 
 - exit
-Menu:
+---------------------------------------------------
+---------------------------------------------------
+MENU:
+---------------------------------------------------
 ```
 
 #### Exiting the application: `exit`
-Terminates the application.
+Terminates the application. Can only be called from the menu. 
 
 Format: `exit`
 
 **Example of usage:**
 User enters `exit` which results in:
 ```
+---------------------------------------------------
 Goodbye! Hope to see you again...
+---------------------------------------------------
 ```
 
 
@@ -586,6 +606,9 @@ Here are the matching contacts in your list:
 
 Loading and saving is done automatically and the user does not need to worry about manually saving or loading
 data. However, do not tamper with the load and save files. 
+
+Furthermore, exit the application properly using the `exit` command from menu for guaranteed correctness of 
+the program and this load and save feature. 
 
 ## FAQ
 
