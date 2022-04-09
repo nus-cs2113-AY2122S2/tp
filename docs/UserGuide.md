@@ -95,7 +95,7 @@ Order of other parameters can be switched.
 
 #### Adding a single task
 
-Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by DEADLINE]`
+Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DEADLINE /bytime END_TIME]`
 
 |    Parameters    | Description                     | Accepted inputs                                   | Optional |
 |:----------------:|---------------------------------|---------------------------------------------------|----------|
@@ -103,9 +103,12 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by D
 |     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | No       |
 |    START_TIME    | Time to start working on a task | HH:mm format (e.g 18:00), must be before END_TIME | No       |
 |     END_TIME     | Time to stop working on a task  | HH:mm format (e.g 19:00)                          | No       |
-|     DEADLINE     | Due date for the task           | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | Yes      |
+|     DEADLINE     | Due date for the task           | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | Yes      |                  |                                 |                                                   |          |
 
-**Examples**
+> **💡 Note**
+> When using the optional parameter shown in `[]`, both the`DEADLINE` and `END_TIME` to need be used together.
+
+   **Examples**
 - `add write final essay /do 25/3/2022 /start 20:00 /end 22:00 /by 27/3/2022`
 - `add revise chapter 3 /do 25/3/2022 /start 20:00 /end 22:00`
 
@@ -230,7 +233,7 @@ Format:
 Below is an example of the schedule that is being displayed from the given date
 25/3/2022:
 
-![ShowDateTimetableFormat](images/showDateTimetableFormat.PNG)
+![ShowDateTimetableFormat](images/showDateTimetableFormat.png)
 
 ### Display Weekly Schedule: `show week` / `show next week`
 
@@ -249,11 +252,11 @@ Below is an example of the weekly schedule displayed:
 
 Displays your schedule for the current month or any specific month
 
-***Warning***
-
-Monthly Schedule will only display task that are in the current Month or the upcoming Month.
-
-Please use `show all` method to see task from previous months. 
+>**💡 Note**
+>
+> Monthly Schedule will only display task that are in the current Month or the upcoming Month.
+>
+> Please use `show all` method to see task from previous months. 
 
 Format:
 - To see the schedule for the current month: `show month`
@@ -302,7 +305,9 @@ All changes to your tasks are saved automatically into a JSON file at `[JAR FILE
 
 There is no need to manually save your tasks.
 
-> 💡 **Note:** Advanced users are welcome to manually edit the save file.
+> 💡 **Note:** 
+> 
+>Advanced users are welcome to manually edit the save file.
 
 ### Enter study session: `study`
 Enter the study session where you can start timers to help finish your tasks.
