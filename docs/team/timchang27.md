@@ -9,12 +9,13 @@
 
 #### Enhancements Implemented
 - Implementation of `Reservation` Class in and after v1.0 
-
+- Implemented `Hotel` and `Country` Classes for v2.1
 - Implemented `Help` Feature in TARBS
   - `Help` and `HelpCommand` Class  
 
 - Added Improvements in Formatting for Help messages
 - Improved Readability of Interface 
+- Fixed bugs for PE Dry-Run
 
 
 #### Contributions to the UG
