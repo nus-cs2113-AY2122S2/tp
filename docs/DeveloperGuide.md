@@ -104,7 +104,7 @@ called `satisfactionList`, is created.
 ![Step 1 Object Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_Step1ObjectDiagram.png)
 
 
-Step 2. The user types the command `add satisfaction Bob 5`. In the `Duke` class, a `Command` object
+Step 2. The user types the command `add satisfaction bob 5`. In the `Duke` class, a `Command` object
 is created by invoking the `CommandParser` class's constructor on the user input. The details of this
 step are further described below.
 
@@ -112,15 +112,15 @@ step are further described below.
 
 
 Step 3. The `CommandParser` class replaces the `add satisfaction` in the user input with an empty string,
-leaving just `Bob 5`. Then, the `AddSatisfactionCommand` class's constructor is invoked with `Bob 5`.
+leaving just `bob 5`. Then, the `AddSatisfactionCommand` class's constructor is invoked with `bob 5`.
 
 ![Step 1 Object Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_Step3ObjectDiagram.png)
 
-Step 4. The `AddSatisfactionCommand` class's constructor parses `Bob 5`, extracting the customer name `Bob` using the
+Step 4. The `AddSatisfactionCommand` class's constructor parses `bob 5`, extracting the customer name `Bob` using the
 `AddSatisfactionCommand#extractCustomerName(String userInput)` method and extracting the customer satisfaction rating
 `5`using the `AddSatisfactionCommand#extractSatisfactionValue(String userInput)` method. The `AddSatisfactionCommand`
 class constructor then invokes the `Satisfaction` class's constructor to create a new `Satisfaction` object, passing in
-customer name `Bob` and satisfaction rating `5`.
+customer name `bob` and satisfaction rating `5`.
 
 ![Step 1 Object Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_Step4ObjectDiagram.png)
 
@@ -131,13 +131,7 @@ created in the `AddSatisfactionCommand` class is added to `satisfactionList`.
 
 The following sequence diagram shows what would happen if the user typed `add satisfaction bob 5`.
 
-PLEASE NOTE: Due to the limitation of PlantUML, the lengths of the activation bars may not be correct, and
-certain return values from method calls that could not be placed correctly were omitted. For example, the
-instantiation of objects of type `SatisfactionList`, `CommandParser`, `Command`, `AddSatisfactionCommand`,
-and `Satisfaction` should have return value arrows (representing the object that was instantiated) to the
-entity that created those instances, but those are not indicated in the diagram. Furthermore, for neatness, the
-`User` entity should be the left-most entity, but that could not be formatted properly in the diagram.
-
+PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` class.
 ![Sequence Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_SequenceDiagram2.0.png)
 
 ### Add Housekeeper feature
