@@ -10,7 +10,6 @@ import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.MissingNumberException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.GeneralParseException;
-import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -23,7 +22,6 @@ public class MarkParser extends Parser {
     private static final String COMPLETED_FLAG = StringConstants.COMPLETED_FLAG;
     private static final String UNCOMPLETED_FLAG = StringConstants.UNCOMPLETED_FLAG;
     private static final String TASK_NUMBER_STR = StringConstants.TASK_NUMBER_STR;
-    private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
     // Unescaped regex for testing:
@@ -56,7 +54,6 @@ public class MarkParser extends Parser {
     public void determineError() throws InvalidFlagException, MissingNumberException,
             InvalidNumberException, InvalidCompulsoryParameterException {
         String flag;
-        String taskNumber;
         try {
             flag = userInput.split(SPACE)[ZEROTH_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -65,6 +62,7 @@ public class MarkParser extends Parser {
         if (!flag.matches(MARK_COMMAND_FLAGS)) {
             throw new InvalidFlagException(flag);
         }
+        String taskNumber;
         try {
             taskNumber = userInput.split(SPACE)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -74,26 +72,6 @@ public class MarkParser extends Parser {
             throw new InvalidNumberException(TASK_NUMBER_STR, taskNumber);
         }
         throw new InvalidCompulsoryParameterException();
-    }
-
-    /**
-     * Parses the task index from a string to an integer form.
-     * It will also check if the index is non-negative, throwing an exception if it is not.
-     * @param taskNumberString the string representation of the task number
-     * @return the zero-based index integer of the task number string
-     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
-     */
-    private int parseIndex(String taskNumberString) throws InvalidNumberException {
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(taskNumberString) - 1;
-            if (taskIndex < MINIMUM_INDEX) {
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
-        }
-        return taskIndex;
     }
 
     /**

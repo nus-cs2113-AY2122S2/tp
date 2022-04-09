@@ -104,26 +104,6 @@ public class DeleteParser extends Parser {
         }
     }
 
-    /**
-     * Parses the task index from a string to an integer form.
-     * It will also check if the index is non-negative, throwing an exception if it is not.
-     * @param taskNumberString the string representation of the task number
-     * @return the zero-based index integer of the task number string
-     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
-     */
-    private int parseIndex(String taskNumberString) throws InvalidNumberException {
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(taskNumberString) - 1;
-            if (taskIndex < MINIMUM_INDEX) {
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
-        }
-        return taskIndex;
-    }
-
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;

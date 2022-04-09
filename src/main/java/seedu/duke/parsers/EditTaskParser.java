@@ -9,7 +9,6 @@ import seedu.duke.exceptions.MissingNumberException;
 import seedu.duke.exceptions.MissingCompulsoryParameterException;
 import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.EmptyParamException;
-import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 import java.util.HashMap;
@@ -29,7 +28,6 @@ public class EditTaskParser extends EditParser {
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
     private static final String EMPTY_STRING = StringConstants.EMPTY_STRING;
-    private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
     // Unescaped regex for testing
@@ -100,8 +98,14 @@ public class EditTaskParser extends EditParser {
     public void determineError() throws MissingNumberException, InvalidNumberException,
             MissingCompulsoryParameterException, InvalidCompulsoryParameterException,
             EmptyParamException, InvalidFlagException {
+        String taskNumber = checkErrorInTaskNumber();
+        checkErrorInTaskParameter();
+        reduceErrorScope(taskNumber);
+        determineErrorInModuleCode();
+    }
+
+    private String checkErrorInTaskNumber() throws MissingNumberException, InvalidNumberException {
         String taskNumber;
-        String taskParameter;
         try {
             taskNumber = userInput.split(SPACE)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -110,6 +114,12 @@ public class EditTaskParser extends EditParser {
         if (!taskNumber.matches(POSITIVE_INT)) {
             throw new InvalidNumberException(TASK_NUMBER_STR, taskNumber);
         }
+        return taskNumber;
+    }
+
+    private void checkErrorInTaskParameter() throws MissingCompulsoryParameterException,
+            InvalidCompulsoryParameterException, InvalidFlagException {
+        String taskParameter;
         try {
             taskParameter = userInput.split(TASK_PARAMETERS_FLAGS)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
@@ -119,31 +129,6 @@ public class EditTaskParser extends EditParser {
         if (!taskParameter.matches(QUOTED_UNRESTRICTED_STR)) {
             throw new InvalidCompulsoryParameterException(TASK_PARAMETER_STR, taskParameter);
         }
-        userInput = userInput.replaceFirst(TASK, EMPTY_STRING);
-        userInput = userInput.replaceFirst(taskNumber, EMPTY_STRING);
-        userInput = userInput.split(TASK_PARAMETERS_FLAGS)[ZEROTH_INDEX];
-        determineErrorInModuleCode();
-    }
-
-    /**
-     * Determines the error in the module code.
-     * It will check if the module code is empty, otherwise the module code is not made up of only word characters.
-     * @throws EmptyParamException if the module code supplied is empty
-     * @throws InvalidCompulsoryParameterException if module code is not made up of only word characters
-     *                                             or if there is invalid input in where the field should be
-     */
-    private void determineErrorInModuleCode() throws EmptyParamException, InvalidCompulsoryParameterException {
-        String moduleCode;
-        try {
-            moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX];
-        } catch (IndexOutOfBoundsException e) {
-            if (userInput.contains(TASK_MODULE_FLAG.trim())) {
-                throw new EmptyParamException(MODULE_CODE_STR);
-            }
-            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, userInput.trim());
-        }
-
-        throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
 
     /**
@@ -179,24 +164,31 @@ public class EditTaskParser extends EditParser {
         }
     }
 
+    private void reduceErrorScope(String taskNumber) {
+        userInput = userInput.replaceFirst(TASK, EMPTY_STRING);
+        userInput = userInput.replaceFirst(taskNumber, EMPTY_STRING);
+        userInput = userInput.split(TASK_PARAMETERS_FLAGS)[ZEROTH_INDEX];
+    }
+
     /**
-     * Parses the task index from a string to an integer form.
-     * It will also check if the index is non-negative, throwing an exception if it is not.
-     * @param taskNumberString the string representation of the task number
-     * @return the zero-based index integer of the task number string
-     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
+     * Determines the error in the module code.
+     * It will check if the module code is empty, otherwise the module code is not made up of only word characters.
+     * @throws EmptyParamException if the module code supplied is empty
+     * @throws InvalidCompulsoryParameterException if module code is not made up of only word characters
+     *                                             or if there is invalid input in where the field should be
      */
-    private int parseIndex(String taskNumberString) throws InvalidNumberException {
-        int taskIndex;
+    private void determineErrorInModuleCode() throws EmptyParamException, InvalidCompulsoryParameterException {
+        String moduleCode;
         try {
-            taskIndex = Integer.parseInt(taskNumberString) - 1;
-            if (taskIndex < MINIMUM_INDEX) {
-                throw new NumberFormatException();
+            moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX];
+        } catch (IndexOutOfBoundsException e) {
+            if (userInput.contains(TASK_MODULE_FLAG.trim())) {
+                throw new EmptyParamException(MODULE_CODE_STR);
             }
-        } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
+            throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, userInput.trim());
         }
-        return taskIndex;
+
+        throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
 
     @Override
@@ -220,26 +212,20 @@ public class EditTaskParser extends EditParser {
     }
 
     private void checkEstimatedWorkingTime(String estimatedWorkingTime) throws EmptyParamException {
-        if (!Objects.isNull(estimatedWorkingTime)) {
-            if (estimatedWorkingTime.isBlank()) {
-                throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
-            }
+        if (!Objects.isNull(estimatedWorkingTime) && estimatedWorkingTime.isBlank()) {
+            throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
         }
     }
 
     private void checkTaskDescription(String taskDescription) throws EmptyParamException {
-        if (!Objects.isNull(taskDescription)) {
-            if (taskDescription.isBlank()) {
-                throw new EmptyParamException(TASK_DESCRIPTION_STR);
-            }
+        if (!Objects.isNull(taskDescription) && taskDescription.isBlank()) {
+            throw new EmptyParamException(TASK_DESCRIPTION_STR);
         }
     }
 
     private void checkTaskName(String taskName) throws EmptyParamException {
-        if (!Objects.isNull(taskName)) {
-            if (taskName.isBlank()) {
-                throw new EmptyParamException(TASK_NAME_STR);
-            }
+        if (!Objects.isNull(taskName) && taskName.isBlank()) {
+            throw new EmptyParamException(TASK_NAME_STR);
         }
     }
 

@@ -31,7 +31,6 @@ public class EditModuleParser extends EditParser {
      *
      * (?<invalid>.*)                                        -- matches [invalid]
      *                                                          Any other excess inputs
-
      */
     private static final String EDIT_FORMAT = "(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))"
             + "(\\s+(-d\\s+\\\"(?<moduleDescription>[^\\\"]*)\\\")))(?<invalid>.*)";
@@ -62,6 +61,13 @@ public class EditModuleParser extends EditParser {
     @Override
     public void determineError() throws MissingCompulsoryParameterException,
             InvalidCompulsoryParameterException, InvalidFlagException {
+        checkForErrorInModuleCode();
+        checkForErrorInModuleDescription();
+        throw new InvalidCompulsoryParameterException();
+    }
+
+    private void checkForErrorInModuleCode() throws MissingCompulsoryParameterException,
+            InvalidCompulsoryParameterException {
         String moduleCode;
         try {
             moduleCode = userInput.split(SPACE)[FIRST_INDEX];
@@ -71,6 +77,10 @@ public class EditModuleParser extends EditParser {
         if (!moduleCode.matches(WORD_CHAR_ONLY)) {
             throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
+    }
+
+    private void checkForErrorInModuleDescription() throws MissingCompulsoryParameterException,
+            InvalidCompulsoryParameterException, InvalidFlagException {
         String moduleDescription;
         try {
             moduleDescription = userInput.split(DESCRIPTION_FLAG)[FIRST_INDEX];
@@ -81,7 +91,6 @@ public class EditModuleParser extends EditParser {
         if (!moduleDescription.matches(QUOTED_UNRESTRICTED_STR)) {
             throw new InvalidCompulsoryParameterException(MODULE_DESCRIPTION_STR, moduleDescription);
         }
-        throw new InvalidCompulsoryParameterException();
     }
 
     /**
@@ -115,7 +124,6 @@ public class EditModuleParser extends EditParser {
             checksForExcessArg();
             return new EditCommand(moduleCode, moduleDescription);
         }
-
         throw new ModHappyException();
     }
 
