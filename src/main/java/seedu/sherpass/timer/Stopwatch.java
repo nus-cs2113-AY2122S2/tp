@@ -6,6 +6,10 @@ import seedu.sherpass.util.Ui;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import static seedu.sherpass.constant.TimerConstant.FIFTEEN_SECOND_INTERVAL;
+import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
+import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE_INTERVAL;
+
 
 public class Stopwatch extends Timer {
 
@@ -43,6 +47,7 @@ public class Stopwatch extends Timer {
         try {
             Thread.sleep(1000);
             timeElapsed += 1;
+            printTime();
             String timeShownToUser = convertTimeToString(timeElapsed);
             jlabel.setText("Elapsed time: " + timeShownToUser);
             if (isTimerPaused) {
@@ -74,6 +79,17 @@ public class Stopwatch extends Timer {
         ui.showToUser("Got it! I've paused the stopwatch.\n"
                 + convertTimeToString(timeElapsed) + " have elapsed.\n"
                 + "Feel free to resume whenever you're ready.");
+    }
+
+    public void printTime() {
+        if (timeElapsed <= ONE_MINUTE && (timeElapsed % FIFTEEN_SECOND_INTERVAL == 0)) {
+            ui.showToUser(convertTimeToString(timeElapsed) + " have elapsed.");
+            return;
+        }
+        if (timeElapsed % ONE_MINUTE_INTERVAL == 0) {
+            ui.showToUser(convertTimeToString(timeElapsed) + " have elapsed.");
+        }
+
     }
 
     /**

@@ -85,6 +85,11 @@ public abstract class Timer extends Thread {
     public abstract void pauseTimer();
 
     /**
+     * printTime() implements the way the timer prints the time remaining/elapsed.
+     */
+    public abstract void printTime();
+
+    /**
      * Method causes the thread which the timer is running on to wait when it is paused, until the user resumes the
      * timer.
      */
