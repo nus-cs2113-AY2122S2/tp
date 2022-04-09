@@ -23,7 +23,7 @@ activate GeneralFunctions
 GeneralFunctions --> AddCommand: paymentMethod, category, description, amount, time
 deactivate GeneralFunctions
 
-AddCommand -> AddCommandInputTest: test(paymentMethod, category, description, amount)
+AddCommand -> AddCommandInputTest: test(paymentMethod, category, description, amount, creditCardList)
 activate AddCommandInputTest
 AddCommandInputTest --> AddCommand
 deactivate AddCommandInputTest

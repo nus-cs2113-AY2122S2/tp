@@ -258,5 +258,23 @@ public class AddCommandInputTests {
         assert inputAmountAsDouble > 0 : "Limit amount should have a positive value";
     }
 
+    /**
+     * Tests if the input parameters from the user are valid.
+     *
+     * @param paymentMethod The payment method used, either as cash or the credit card.
+     * @param inputCategory The category as indicated by the user.
+     * @param description The description of the expenditure.
+     * @param amountAsString Price of the expenditure.
+     * @param inputTime Date of when the expenditure was bought.
+     * @throws MindMyMoneyException when the parameters are invalid.
+     */
+    public static void testExpenditureParameters(String paymentMethod, String inputCategory, String description,
+                                                 String amountAsString, String inputTime, CreditCardList creditCardList) throws MindMyMoneyException {
+        testPaymentMethod(paymentMethod, creditCardList);
+        testExpenditureCategory(inputCategory);
+        testDescription(description);
+        testExpenditureAmount(amountAsString, paymentMethod, creditCardList);
+        TimeFunctions.checkValidDate(inputTime);
+    }
 
 }

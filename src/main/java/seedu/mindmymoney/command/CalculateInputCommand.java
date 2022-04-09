@@ -8,7 +8,7 @@ import seedu.mindmymoney.userfinancial.User;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENDITURE_PER_MONTH;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
-import static seedu.mindmymoney.helper.Calculations.calculateExpenditurePerMonth;
+import static seedu.mindmymoney.helper.Calculations.calculateExpenditure;
 
 /**
  * Represents the Calculate command.
@@ -45,7 +45,7 @@ public class CalculateInputCommand extends Command {
                     : "First element in parsedCalculateInput is null";
             switch (parsedCalculateInput[INDEX_OF_FIRST_ITEM].toLowerCase()) {
             case FLAG_OF_EXPENDITURE_PER_MONTH:
-                calculateExpenditurePerMonth(parsedCalculateInput[INDEX_OF_SECOND_ITEM], expenditureList);
+                calculateExpenditure(parsedCalculateInput[INDEX_OF_SECOND_ITEM], expenditureList);
                 break;
             default:
                 throw new MindMyMoneyException("Remember to use a proper flag!");

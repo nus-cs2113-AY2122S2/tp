@@ -1,0 +1,45 @@
+@startuml
+!include Style.puml
+
+box CalculateInputCommand
+participant ":MMM" as MMM MMM_COLOUR
+participant "Command:CalculateInputCommand" as CalculateInputCommand COMMANDS_COLOUR
+participant ":Calculations" as Calculations USERFINANCIAL_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions  HELPER_COLOUR
+end box
+hide footbox
+
+MMM -> CalculateInputCommand: CalculateInputCommand.executeCommand()
+activate CalculateInputCommand
+
+CalculateInputCommand -> GeneralFunctions: parseInput()
+activate GeneralFunctions
+GeneralFunctions --> CalculateInputCommand
+deactivate GeneralFunctions
+
+
+alt contain FLAG_OF_EXPENDITURE_PER_MONTH
+CalculateInputCommand -> Calculations: calculateExpenditure()
+activate CalculateInputCommand
+activate Calculations
+Calculations -> GeneralFunctions: findItemInList()
+activate GeneralFunctions
+GeneralFunctions --> Calculations
+deactivate GeneralFunctions
+Calculations -> Calculations: displayCalculationBreakdown()
+activate Calculations
+Calculations --> Calculations
+deactivate Calculations
+Calculations --> CalculateInputCommand
+deactivate Calculations
+CalculateInputCommand --> MMM
+deactivate CalculateInputCommand
+
+
+else
+CalculateInputCommand --> MMM: MindMyMoneyException
+deactivate CalculateInputCommand
+end
+
+
+@enduml

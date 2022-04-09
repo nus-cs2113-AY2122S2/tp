@@ -4,6 +4,7 @@ import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
+import seedu.mindmymoney.helper.TimeFunctions;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.Income;
@@ -12,8 +13,6 @@ import seedu.mindmymoney.userfinancial.User;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static seedu.mindmymoney.command.AddCommand.checkAfterCurrentDate;
-import static seedu.mindmymoney.command.AddCommand.checkValidDate;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
@@ -39,15 +38,13 @@ import static seedu.mindmymoney.data.ExpenditureList.isEqualAmount;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualTime;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeCategory;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureParameters;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
+import static seedu.mindmymoney.helper.TimeFunctions.checkAfterCurrentDate;
 
 /**
  * Represents the Update command.
@@ -115,23 +112,18 @@ public class UpdateCommand extends Command {
 
             String newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
             String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
-            testExpenditureCategory(inputCategory);
-            final String newCategory = capitalise(inputCategory);
+            String newDescription = parseInputWithCommandFlag(updateInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
+            String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
+            String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
 
-            testPaymentMethod(newPaymentMethod, creditCardList);
+            testExpenditureParameters(newPaymentMethod, inputCategory, newDescription, newAmountAsString,
+                    inputTime, creditCardList);
+
+            final String newCategory = capitalise(inputCategory);
+            float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
             if (capitalise(newPaymentMethod).equals("Cash")) {
                 newPaymentMethod = capitalise(newPaymentMethod);
             }
-
-            String newDescription = parseInputWithCommandFlag(updateInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
-            testDescription(newDescription);
-
-            String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-            testExpenditureAmount(newAmountAsString, newPaymentMethod, creditCardList);
-            float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
-
-            String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
-            checkValidDate(inputTime);
             LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             checkAfterCurrentDate(date);
             String newTime = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));

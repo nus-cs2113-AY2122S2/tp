@@ -24,7 +24,7 @@ import static seedu.mindmymoney.helper.TimeFunctions.isValidInput;
  * Container for functions that help do calculations.
  */
 public class Calculations {
-    public static final double INTERVEL_OF_INCREMENT = 5;
+    public static final double INTERVAL_OF_INCREMENT = 5;
 
     /**
      * Calculates the total expenditure in a given month.
@@ -33,7 +33,7 @@ public class Calculations {
      * @param expenditureList The list containing all expenditures to search for.
      * @throws MindMyMoneyException When findItemsInList throws MindMyMoneyException.
      */
-    public static void calculateExpenditurePerMonth(String input, ExpenditureList expenditureList)
+    public static void calculateExpenditure(String input, ExpenditureList expenditureList)
         throws MindMyMoneyException {
         if (!isValidInput(input)) {
             throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
@@ -93,7 +93,7 @@ public class Calculations {
      */
     public static String printBar(float percentage) {
         String output = "";
-        for (float i = 0; i < percentage; i += INTERVEL_OF_INCREMENT) {
+        for (float i = 0; i < percentage; i += INTERVAL_OF_INCREMENT) {
             output += "$$";
         }
         return output;
