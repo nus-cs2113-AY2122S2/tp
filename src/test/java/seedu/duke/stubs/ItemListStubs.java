@@ -8,14 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static seedu.duke.stubs.ItemStubs.ITEM_MARKER;
-import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A4_10;
-import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A4_15;
-import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A5_10;
-import static seedu.duke.stubs.ItemStubs.ITEM_PENCIL;
-import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
+import static seedu.duke.stubs.ItemStubs.*;
 
-public class CommandStubs {
+public class ItemListStubs {
 
     // ItemList Stubs for use in SearchCommand
     public static final ItemList SEARCH_LIST = generateItemList(ITEM_PAPER_A4_10, ITEM_PAPER_A5_10, ITEM_MARKER,

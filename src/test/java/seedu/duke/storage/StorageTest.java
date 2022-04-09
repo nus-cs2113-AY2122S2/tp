@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.Item;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.stubs.ItemStubs;
@@ -54,12 +55,9 @@ public class StorageTest {
     @Test
     void save_validList_validJson() throws InvMgrException {
         ArrayList<Item> itemList = new ArrayList<>();
-        Item item1 = new Item("Markers", 3, "Drawing");
-        Item item2 = new Item("Whiteboard", 1, "To draw on");
-        Item item3 = new Item("HDMI Cable", 2, "For connecting displays");
-        itemList.add(item1);
-        itemList.add(item2);
-        itemList.add(item3);
+        itemList.add(ItemStubs.ITEM_MARKER);
+        itemList.add(ItemStubs.ITEM_WHITEBOARD);
+        itemList.add(ItemStubs.ITEM_HDMI);
 
         Storage testStorage = new Storage("test/data/save/actualData.json");
         testStorage.save(itemList);
@@ -94,6 +92,8 @@ public class StorageTest {
      * @param actualList the list to check against
      */
     private void assertListEquals(ArrayList<Item> expectedList, ArrayList<Item> actualList) {
+        Item wb1 = expectedList.get(2);
+        Item wb2 = actualList.get(2);
         assertEquals(true, actualList.containsAll(expectedList));
     }
 }

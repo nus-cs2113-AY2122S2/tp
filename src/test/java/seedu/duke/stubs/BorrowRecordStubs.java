@@ -75,9 +75,9 @@ public class BorrowRecordStubs {
             PASTRECORD_B_STATUS);
 
     public static final LocalDate FIXED_STARTDATE = LocalDate.parse(
-            "2022-04-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            "2019-04-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final LocalDate FIXED_ENDDATE = LocalDate.parse(
-            "2022-04-02", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            "2019-04-02", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     public static final String FIXED_NAME = "Storage Test";
     public static final BorrowStatus FIXED_PASTRECORD = BorrowStatus.PAST;
     public static final BorrowRecord FIXED_RECORD = new BorrowRecord(FIXED_STARTDATE,

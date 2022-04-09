@@ -2,7 +2,7 @@ package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvMgrException;
-import seedu.duke.stubs.CommandStubs;
+import seedu.duke.stubs.ItemListStubs;
 import seedu.duke.stubs.ItemStubs;
 import seedu.duke.stubs.UiStub;
 
@@ -21,7 +21,7 @@ public class EditCommandTest {
                 Optional.empty(),
                 Optional.of(false));
         assertThrows(InvMgrException.class, () ->
-                testRelQuantityEditCommand.execute(CommandStubs.EDIT_NEGATIVE_QUANTITY_LIST_BEFORE, uiStub));
+                testRelQuantityEditCommand.execute(ItemListStubs.EDIT_NEGATIVE_QUANTITY_LIST_BEFORE, uiStub));
     }
 
     @Test
@@ -33,8 +33,8 @@ public class EditCommandTest {
                 Optional.empty(),
                 Optional.empty(),
                 Optional.empty());
-        testNameEditCommand.execute(CommandStubs.EDIT_NAME_LIST_BEFORE, uiStub);
-        assertEquals(CommandStubs.EDIT_NAME_EXPECTED_LIST_AFTER, CommandStubs.EDIT_NAME_LIST_BEFORE);
+        testNameEditCommand.execute(ItemListStubs.EDIT_NAME_LIST_BEFORE, uiStub);
+        assertEquals(ItemListStubs.EDIT_NAME_EXPECTED_LIST_AFTER, ItemListStubs.EDIT_NAME_LIST_BEFORE);
 
         // Edit Absolute Quantity, 10 -> 15 (of Paper)
         uiStub = new UiStub();
@@ -43,8 +43,8 @@ public class EditCommandTest {
                 Optional.of(ItemStubs.PAPER_QUANTITY_15),
                 Optional.empty(),
                 Optional.empty());
-        testAbsQuantityEditCommand.execute(CommandStubs.EDIT_ABSQUANTITY_LIST_BEFORE, uiStub);
-        assertEquals(CommandStubs.EDIT_ABSQUANTITY_EXPECTED_LIST_AFTER, CommandStubs.EDIT_ABSQUANTITY_LIST_BEFORE);
+        testAbsQuantityEditCommand.execute(ItemListStubs.EDIT_ABSQUANTITY_LIST_BEFORE, uiStub);
+        assertEquals(ItemListStubs.EDIT_ABSQUANTITY_EXPECTED_LIST_AFTER, ItemListStubs.EDIT_ABSQUANTITY_LIST_BEFORE);
 
         // Edit Relative Quantity, 15 -> (15-5=)10 (of Paper)
         uiStub = new UiStub();
@@ -53,8 +53,8 @@ public class EditCommandTest {
                 Optional.of(ItemStubs.PAPER_QUANTITY_15 - ItemStubs.PAPER_QUANTITY_10),
                 Optional.empty(),
                 Optional.of(false));
-        testRelQuantityEditCommand.execute(CommandStubs.EDIT_RELQUANTITY_LIST_BEFORE, uiStub);
-        assertEquals(CommandStubs.EDIT_RELQUANTITY_EXPECTED_LIST_AFTER, CommandStubs.EDIT_RELQUANTITY_LIST_BEFORE);
+        testRelQuantityEditCommand.execute(ItemListStubs.EDIT_RELQUANTITY_LIST_BEFORE, uiStub);
+        assertEquals(ItemListStubs.EDIT_RELQUANTITY_EXPECTED_LIST_AFTER, ItemListStubs.EDIT_RELQUANTITY_LIST_BEFORE);
 
         // Edit Description, "A4 stacks of 30" -> "A5 stacks of 30"
         uiStub = new UiStub();
@@ -63,8 +63,8 @@ public class EditCommandTest {
                 Optional.empty(),
                 Optional.of(ItemStubs.A5_PAPER_DESCRIPTION),
                 Optional.empty());
-        testDescEditCommand.execute(CommandStubs.EDIT_DESC_LIST_BEFORE, uiStub);
-        assertEquals(CommandStubs.EDIT_DESC_EXPECTED_LIST_AFTER, CommandStubs.EDIT_DESC_LIST_BEFORE);
+        testDescEditCommand.execute(ItemListStubs.EDIT_DESC_LIST_BEFORE, uiStub);
+        assertEquals(ItemListStubs.EDIT_DESC_EXPECTED_LIST_AFTER, ItemListStubs.EDIT_DESC_LIST_BEFORE);
 
         // Edit all, "Marker" -> "Whiteboard", 3 -> 1, "Drawing" -> "To draw on"
         uiStub = new UiStub();
@@ -73,7 +73,7 @@ public class EditCommandTest {
                 Optional.of(ItemStubs.WHITEBOARD_QUANTITY),
                 Optional.of(ItemStubs.WHITEBOARD_DESCRIPTION),
                 Optional.empty());
-        testAllEditCommand.execute(CommandStubs.EDIT_ALL_LIST_BEFORE, uiStub);
-        assertEquals(CommandStubs.EDIT_ALL_EXPECTED_LIST_AFTER, CommandStubs.EDIT_ALL_LIST_BEFORE);
+        testAllEditCommand.execute(ItemListStubs.EDIT_ALL_LIST_BEFORE, uiStub);
+        assertEquals(ItemListStubs.EDIT_ALL_EXPECTED_LIST_AFTER, ItemListStubs.EDIT_ALL_LIST_BEFORE);
     }
 }

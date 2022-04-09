@@ -49,4 +49,19 @@ public class BorrowRecord {
             return true;
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other==this) {
+            return true; // short circuit if same object
+        }
+        // instanceof handles nulls
+        if (other instanceof BorrowRecord) {
+            BorrowRecord otherItem = ((BorrowRecord) other);
+            return this.startDate.equals(otherItem.startDate)
+                    && this.endDate.equals(otherItem.endDate)
+                    && this.borrowerName.equals(otherItem.borrowerName);
+        }
+        return false;
+    }
 }
