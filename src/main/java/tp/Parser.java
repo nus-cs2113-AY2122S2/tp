@@ -407,8 +407,8 @@ public class Parser {
     //@@author DolphXty
     public Command parseEditNurseCommand(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
-        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /n") + 8,
-                dummy.indexOf("edit /n") + 9));
+        int index = Integer.parseInt(dummy.substring(dummy.indexOf("edit /nu") + 9,
+                dummy.indexOf("edit /nu") + 10));
         if (fullCommand.contains("/ph")) {
             String newInformation = dummy.substring(dummy.indexOf("/ph") + 4);
             return new EditNurseCommand(index, "ph", newInformation);
@@ -461,7 +461,7 @@ public class Parser {
             return parseEditPatientCommand(fullCommand);
         } else if (fullCommand.contains("edit /a")) {
             return parseEditAppointmentCommand(fullCommand);
-        } else if (fullCommand.contains("edit /n")) {
+        } else if (fullCommand.contains("edit /nu")) {
             return parseEditNurseCommand(fullCommand);
         } else if (fullCommand.contains("edit /w")) {
             return parseEditWardCommand(fullCommand);
