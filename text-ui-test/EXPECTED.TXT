@@ -108,10 +108,12 @@ Participants:
 ============================================================
 > The activity was created successfully.
 Activity Id #1 --
-Name:  Lunch
-Id:    1
-Payer: alice
-Cost:  $20.00
+Name:                     Lunch
+Id:                       1
+Payer:                    alice
+GST:                      0.00%
+Service Charge(SC):       0.00%
+Cost(GST & SC inclusive): $20.00
 Involved: 
 -----------------------
 # | Name  | Cost Owed 
@@ -121,10 +123,12 @@ Involved:
 =======================
 > The activity was created successfully.
 Activity Id #2 --
-Name:  Order In
-Id:    2
-Payer: ivan
-Cost:  $60.00
+Name:                     Order In
+Id:                       2
+Payer:                    ivan
+GST:                      0.00%
+Service Charge(SC):       0.00%
+Cost(GST & SC inclusive): $60.00
 Involved: 
 -------------------------
 # | Name    | Cost Owed 
@@ -135,10 +139,12 @@ Involved:
 =========================
 > The activity was created successfully.
 Activity Id #3 --
-Name:  Online Order
-Id:    3
-Payer: charlie
-Cost:  $50.00
+Name:                     Online Order
+Id:                       3
+Payer:                    charlie
+GST:                      0.00%
+Service Charge(SC):       0.00%
+Cost(GST & SC inclusive): $50.00
 Involved: 
 ----------------------
 # | Name | Cost Owed 
@@ -159,10 +165,12 @@ Transactions to be made:
 ============================================================
 > The activity was created successfully.
 Activity Id #4 --
-Name:  Coffee
-Id:    4
-Payer: mike
-Cost:  $24.00
+Name:                     Coffee
+Id:                       4
+Payer:                    mike
+GST:                      0.00%
+Service Charge(SC):       0.00%
+Cost(GST & SC inclusive): $24.00
 Involved: 
 -------------------------
 # | Name    | Cost Owed 
