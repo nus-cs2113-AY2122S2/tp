@@ -1,0 +1,30 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class Timetable {
+    -name: String
+    +add(event:Event)
+    +remove(index:int)
+    +size():int
+    +get(eventIndex:int):Event
+    +isDuplicate(newEvent:Event):boolean
+    +isOverlap(newEvent:Event):boolean
+    +isValid():boolean
+    -isEarlier(event1:Event,event2:Event)
+    +sort()
+    +listTimetable(constraint:int)
+    +populateBusySlots(busySlots:int[][])
+    -{static}convertTimeToFreeArrayIndex(time:int)
+    +equals(obj:Object):boolean
+}
+
+
+class Event {
+    -author:String
+    +toString():String
+}
+
+"Timetable" -u- "*" "Event" : list
+
+@enduml
