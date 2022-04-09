@@ -109,17 +109,6 @@ public class Storage {
         }
     }
 
-    private void loadAppointmentMedData() throws FileNotFoundException {
-        File data = new File(PATH_APT_MEDS);
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()) {
-            String line = reader.nextLine();
-            String[] parameters = line.split(",");
-            appointments.loadMedicine(parameters);
-        }
-    }
-
-
 
     public void loadData() {
         try {
@@ -128,11 +117,6 @@ public class Storage {
             loadGenericData(PATH_MED, medicines);
             loadGenericData(PATH_APT, appointments);
             loadGenericData(PATH_APT_MEDS, appointments);
-            /*loadDoctorData();
-            loadPatientData();
-            loadMedicineData();
-            loadAppointmentData();
-            loadAppointmentMedData();*/
         } catch (FileNotFoundException f) {
             UI.printParagraph("No saved data found!");
         }
