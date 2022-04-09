@@ -23,7 +23,7 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 5. Save your timetable details to storage and retrieve accordingly
 
 ### Viewing help: `help`
-Shows a list of commands available.
+Shows a list of commands available which are case-sensitive.
 
 **Format**: `help`
 
@@ -61,9 +61,9 @@ Creates a new user and adds his or her timetable to the master timetable.
 
 **Format:** `add_user NAME`
 
-| Parameters  | Description              | Accepted inputs                         |  
-|:-----------:|--------------------------|-----------------------------------------|
-|    NAME     | Name of the user         | Does not contain any special characters |
+| Parameters | Description      | Accepted inputs                                                                                                            |  
+|:----------:|------------------|----------------------------------------------------------------------------------------------------------------------------|
+|    NAME    | Name of the user | English name without any numbers or special characters except `-` and `'`. <br/> Additionally the name cannot be all `all` |
 
 * Duplicate user will not be added.
 

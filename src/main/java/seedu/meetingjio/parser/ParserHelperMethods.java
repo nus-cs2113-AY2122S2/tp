@@ -78,7 +78,7 @@ public class ParserHelperMethods {
     }
 
     /**
-     * Ensures that 'name' parameter in user's input does not contain special character
+     * Ensures that 'name' parameter in user's input contains only valid characters
      * and not equal to 'all'.
      *
      * @param name String given by user
@@ -96,7 +96,7 @@ public class ParserHelperMethods {
             if (x >= 'a' && x <= 'z') {
                 continue;
             }
-            if (x >= '0' && x <= '9') {
+            if ((x == '-') || (x == '\'')) {
                 continue;
             }
             throw new InvalidNameException();
