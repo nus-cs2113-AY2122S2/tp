@@ -58,7 +58,6 @@ public class GroupEditCommand extends Command {
         ArrayList<Group> groupList = manager.getProfile().getGroupList();
         for (Group group: groupList) {
             if (newName.equals(group.getGroupName()) && (group.getGroupId() != groupId)) {
-                System.out.println(groupId);
                 hasDuplicate = true;
             }
         }
