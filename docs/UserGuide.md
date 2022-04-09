@@ -22,12 +22,14 @@ Format: `help`
 ### Adding a doctor: `add doctor`
 Adds a new doctor to the system.
 
-Format: `add doctor /id ID /n NAME /ph PHONE /e EMAIL /dep DEPARTMENT /w WARD_NO`
+Format: `add doctor /id ID /n NAME /ph PHONE /e EMAIL /dep DEPARTMENT`
 
 Example of usage: 
 
-`add doctor /id 222 /n Harry Potter /ph 22223333 /e theChosenOne@gmail.com /dep Defensive /w 2`
+`add doctor /id 222 /n Harry Potter /ph 22223333 /e theChosenOne@gmail.com /dep Defensive`
 
+Expected output:
+![](AddDoctorOutput.png)
 
 ### Adding a patient: `add patient`
 Adds a new patient to the system.
@@ -56,11 +58,12 @@ Example of usage:
 ### Adding a nurse: `add nurse`
 Adds a new nurse to the system.
 
-Format: `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE /w WARD_NO`
+Format: `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE`
 
 Example of usage:
 
-`add nurse /id 001 /n Hermione Granger /ph 11111111 /e ministerForMagic@gmail.com /t Minister /w 2`
+`add nurse /id 001 /n Hermione Granger /ph 11111111 /e ministerForMagic@gmail.com /t Minister`
+
 
 ### Adding a ward: `add ward`
 Adds a new ward to the system. 
@@ -69,6 +72,8 @@ Format: `add ward /d NO /p NO /n NO /id NO`
 
 * The `NO` refers to the indexes of the respective doctors, patients or nurses. 
 * Input can also take in an array of indexes
+
+* Note that one doctor/nurse can only be assigned to one ward.
 
 Example of usage:
 
@@ -82,6 +87,7 @@ Sorts existing appointments in the system (but does not print out) according to 
 
 Format: `sort appointment`
 
+
 ### Viewing doctor/patient/appointment/nurse/ward list: `list`
 Lists existing doctors/patients/appointments/nurses/wards in the system.
 
@@ -93,11 +99,14 @@ Example of usage:
 
 `list patient`
 
-`list appointment`
-
 `list nurse`
 
 `list ward`
+
+`list appointment`
+
+Expected Output:
+![](ListDoctorOutput.png)
 
 ### Searching an entity: `search`
 Searches existing doctors/patients/nurses/wards with their numbers in the list.
@@ -122,6 +131,7 @@ Format: `search appointment DATETIME`
 Example of usage: 
 
 `search appointment 2007-12-03T10:15:30`
+
 
 ### Editing a person's information
 Editing an existing person's information.

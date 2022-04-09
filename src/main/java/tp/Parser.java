@@ -68,10 +68,8 @@ public class Parser {
         String phoneNumber = dummy.substring(phoneNumberIndex + 4, emailIndex).trim();
         int departmentIndex = dummy.indexOf("/dep");
         String email = dummy.substring(emailIndex + 3, departmentIndex).trim();
-        int wardNumberIndex = dummy.indexOf("/w");
-        String department = dummy.substring(departmentIndex + 5, wardNumberIndex).trim();
-        int wardNumber = Integer.parseInt(dummy.substring(wardNumberIndex + 3).trim());
-        return new AddDoctorCommand(id, name, phoneNumber, email, department, wardNumber, false);
+        String department = dummy.substring(departmentIndex + 5).trim();
+        return new AddDoctorCommand(id, name, phoneNumber, email, department, -1, false);
     }
 
     //@@author Demonshaha
@@ -82,6 +80,7 @@ public class Parser {
         return new GetAppointmentsOfDoctorCommand(id);
     }
 
+    //@@author
     public AddNurseCommand parseAddNurse(String fullCommand) throws IHospitalException {
         String id;
         String dummy = fullCommand.trim();
@@ -101,10 +100,8 @@ public class Parser {
         String phoneNumber = dummy.substring(phoneNumberIndex + 4, emailIndex).trim();
         int titleIndex = dummy.indexOf("/t");
         String email = dummy.substring(emailIndex + 3,titleIndex).trim();
-        int wardNumberIndex = dummy.indexOf("/w");
-        String title = dummy.substring(titleIndex + 3, wardNumberIndex).trim();
-        int wardNumber = Integer.parseInt(dummy.substring(wardNumberIndex + 3).trim());
-        return new AddNurseCommand(id, name, phoneNumber, email, title, wardNumber, false);
+        String title = dummy.substring(titleIndex + 3).trim();
+        return new AddNurseCommand(id, name, phoneNumber, email, title, -1, false);
     }
     //@@author Demonshaha
 
@@ -442,6 +439,7 @@ public class Parser {
         }
     }
 
+    //@@author cczhouqi
     public Command parse(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("add")) {
             return parseAddCommand(fullCommand);

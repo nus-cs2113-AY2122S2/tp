@@ -32,6 +32,8 @@ public class DeletePatientCommand extends Command {
             throw new IHospitalException("The patient does not exist.\n");
         }
         Patient curr = patientList.deletePatient(index);
+
+        //@@author cczhouqi
         return String.format(boundary + "Noted. I've removed this patient:\n" + curr
                                      + "\n" + "Now you have " + patientList.getSize()
                                      + " patients in the system." + System.lineSeparator() + boundary);
