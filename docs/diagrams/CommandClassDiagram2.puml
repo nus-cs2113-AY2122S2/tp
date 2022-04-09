@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+Command <|-up- EditCommand
+Command <|-up- ExitCommand
+Command <|-- FreeCommand
+Command <|-- HelpCommand
+Command -right-|> CommandResult : creates
+Command <|-left- ListCommand
+
+class CommandResult {
++ execute(masterTimetable : MasterTimetable) : String
+}
+
+abstract class Command {
++ execute(masterTimetable : MasterTimetable) : String
+}
+
+class EditCommand {
++ {static} {final} COMMAND_WORD: String = "edit"
+- {final} newValues: Map<String, String>
++ execute(masterTimetable : MasterTimetable) : String
+- editEvent(event : Event, eventInfo : Map<String, String>) : Boolean
+- editAttribute (event : Event, attribute : String, value : String)
+- editTimes(event : Event, eventInfo : Map<String, String>)
+- getEventInfo(event : Event) : Map<String, String>
+- editConfirmation(event : Event) : String
+- editAbort(error : String) : String
+}
+
+class ExitCommand {
++ {static} {final} COMMAND_WORD: String = "exit"
++ execute(masterTimetable : MasterTimetable) : String
+}
+
+class FreeCommand {
++ {static} {final} COMMAND_WORD: String = "free"
++ execute(masterTimetable : MasterTimetable) : String
++ listFree(busySlots : int[][], duration : int) : String
+- truncateString(freeSlotsString : String) : String
+- convertFreeArrayIndexToDay(numericDay : int) : String
+- convertFreeArrayIndexToTime(mins : int) : String
+}
+
+class HelpCommand {
++ {static} {final} COMMAND_WORD: String = "help"
++ execute(masterTimetable : MasterTimetable) : String
+}
+
+class ListCommand {
++ {static} {final} ALL_COMMAND_WORD: String = "list"
++ {static} {final} LESSON_COMMAND_WORD: String = "list_lesson"
++ {static} {final} MEETING_COMMAND_WORD: String = "list_meeting"
+- {final} name : String
+- {final} constraint : int
++ execute(masterTimetable : MasterTimetable) : String
++ {static} listAll(masterTimetable : MasterTimetable, constraint : int) : String
++ {static} listUser(user : String, masterTimetable : MasterTimetable, constraint : int) : String
+}
+
+@enduml
