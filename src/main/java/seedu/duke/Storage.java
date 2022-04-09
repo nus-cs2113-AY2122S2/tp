@@ -33,6 +33,11 @@ public class Storage {
     static final int reservationCustomerNumberIndex = 2;
     static final int reservationNumPaxIndex = 3;
 
+    static final int hotelIDIndex = 0;
+    static final int hotelNameIndex = 1;
+    static final int hotelCountryIndex = 2;
+    static final int hotelPriceIndex = 3;
+
     /**
      * String representation of the file path to the save file
      *
