@@ -28,6 +28,11 @@ MeetingJio is a program for **finding potential time slots for team meetings bas
 # 3. Implementation
 This section describes some noteworthy details on how certain features are implemented.
 
+The following sequence diagram shows how the commands generally works.
+Note that certain commands may slightly different implementation compared to the one below.
+
+![CommandSequenceDiagram](diagrams/CommandSequenceDiagram.png)
+
 ## 3.1 Add Feature
 The `add` command is a command that allows user to 
 1. add new users to the master timetable.
@@ -47,26 +52,38 @@ This is a condensed diagram. Several terms in the sequence diagram above have be
 | AddCommand  | `AddUserCommand`  | `AddLessonCommand`   | `AddMeetingCommand`|
 
 
-## 3.1.1 Add User Feature
+### 3.1.1 Add User Feature
 `add_user` adds new user and his or her timetable into the master timetable.
 
 The following sequence diagram shows how the `add_user` command works:
 ![AddUserCommandSequenceDiagram](diagrams/AddUserCommandSequenceDiagram.png)
 
+1. User inputs add_user with username which is passed to the UI.
+2. Ui then provides user input to the Parser class which parses it and retrieves the name.
+3. Ui subsequently executes the command on the MasterTimetable.
+4. The AddUserCommand will create a new Timetable and add it to the MasterTimetable.
+5. Subsequently a confirmation message will be shown to user upon successful addition.
 
-## 3.1.2 Add Events Feature
+### 3.1.2 Add Events Feature
 
 `add_lesson` allows users to create a new lesson and add it to their own timetables.
 
 `add_meeting` allows users to create a new meeting and add it to all the existing timetables.
 
+**Add Lesson**
 
 The following sequence diagram shows how the `add_lesson` operation works in detail.
 ![AddMeetingCommandSequenceDiagram](diagrams/AddLessonCommandSequenceDiagram.png)
 
 Given below is the steps on how the `add_lesson` operation works.
 
->To be added
+1. User inputs add_lesson with appropriate parameters which is passed to the UI.
+2. Ui then provides user input to the Parser class which parses it and retrieves the respective lesson description.
+3. Ui subsequently executes the command on the MasterTimetable.
+4. The AddLessonCommand will create a new Lesson and add it to the specified user's timetable.
+5. Subsequently a confirmation message will be shown to user upon successful addition.
+
+**Add Meeting**
 
 The following sequence diagram shows how the `add_meeting` operation works in detail.
 ![AddMeetingCommandSequence](diagrams/AddMeetingCommandSequence.png)
@@ -75,13 +92,12 @@ The above diagram shows the sequence diagram of an addition of a meeting  which 
 and some of their lessons have been added and the free command is executed to see the free slots.
 
 1. User inputs add_meeting with appropriate parameters which is passed to the UI.
-2. Ui then provides user input to the Parser class which parses it and retrieves the respective meeting comman.
+2. Ui then provides user input to the Parser class which parses it and retrieves the respective meeting command.
 3. Ui subsequently executes the command on the masterTimetable for the whole application.
 4. The AddMeetingCommand will create a new meeting object from Meeting and will add to every user's timetable.
 5. Subsequently a addMeeting confirmation message will be shown to user upon successful addition.
 
->To be added
-> 
+
 ## 3.2 Listing Events Feature
 The `list` command is a command that the user can input in order to list out the events he has in his timetable.
 
@@ -96,14 +112,14 @@ Before the timetable is listed out, it will also be sorted according to day and 
 The following sequence diagram shows how the command `` is executed.
 ![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
 
-##3.2.1 Listing Lessons Feature
+###3.2.1 Listing Lessons Feature
 Instead of listing all events in the timetable, the user can specify such that only lessons are listed out.
 
 `list_lesson [user]` displays the lessons for the particular user.
 
 `list_lesson all` displays the lessons for all users.
 
-##3.2.2 Listing Meetings Feature
+###3.2.2 Listing Meetings Feature
 Instead of listing all events in the timetable, the user can specify such that only meetings are listed out.
 
 `list_meeting [user]` displays the meetings for the particular user.
@@ -122,7 +138,18 @@ Timings that are not marked 'busy' are then identified as free time slots.
 The following sequence diagram shows how the command `free` is executed.
 ![FreeCommandSequenceDiagram](diagrams/FreeCommandSequenceDiagram.png)
 
-## 3.4 Delete events `delete`
+## 3.4 Edit events feature
+
+The `edit` command is a command that allows users to edit a specified event.
+
+The following sequence diagram shows how the `edit` command works:
+![EditCommandSequenceDiagram](diagrams/EditCommandSequenceDiagram.png)
+
+Given below is the steps on how the `edit` operation works.
+
+>To be added
+
+## 3.5 Delete events `delete`
 Deletes an event from the user's specified timetable
 
 **Format:** ` delete n/NAME i/INDEX`
@@ -151,7 +178,7 @@ The following sequence diagram shows how the `delete` command works:
 
 Before the timetable is listed out, it will also be sorted according to day and time for easy reading.
 
-## 3.4 Data Saving Feature
+## 3.7 Data Saving Feature
 
 The save mechanism is facilitated by StorageFile. It creates a text file in the local machine and writes all the elements
 in the MasterTimetable and Timetable to the text file in human-readable format.
@@ -172,7 +199,7 @@ encountered along the way, an error message will be shown.
 The following sequence diagram shows how the save operation works:
 ![SaveSequenceDiagram](diagrams/SaveSequenceDiagram.png)
 
-## 3.5 Loading Data Feature
+## 3.8 Loading Data Feature
 
 The save mechanism is facilitated by StorageFile. It reads the data specified in the local machine and stores all 
 the records back into the MasterTimetable and Timetable list.
@@ -199,17 +226,6 @@ The `clear` command is a command that the user can clear a certain user's timeta
 `clear [user]` clears the timetable for the particular user.
 
 `clear all` clears the timetable for all users.
-
-## 3.7 Edit events feature
-
-The `edit` command is a command that allows users to edit a specified event.
-
-The following sequence diagram shows how the `edit` command works:
-![EditCommandSequenceDiagram](diagrams/EditCommandSequenceDiagram.png)
-
-Given below is the steps on how the `edit` operation works.
-
->To be added
 
 ## Product scope
 ### Target user profile
