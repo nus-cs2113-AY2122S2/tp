@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.duke.ListContainer;
+import seedu.duke.exceptions.DuplicateCommandException;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.Ui;
 import seedu.duke.housekeeperlists.Housekeeper;
@@ -21,11 +22,16 @@ public class GetAvailableHousekeeperCommand extends Command {
     private static Logger logger = Logger.getLogger("housekeeperLogger");
     private static final int MONDAY_INDICATE = 1;
     private static final int SUNDAY_INDICATE = 7;
+    private static final String VIEW_AVAILABLE_HOUSEKEEPER_DAY = "get available on";
 
     public GetAvailableHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         if (commandStringWithoutCommand.isEmpty()) {
             logger.log(Level.WARNING, "Empty Day.");
             throw new EmptyDayException();
+        }
+        if (commandStringWithoutCommand.contains(VIEW_AVAILABLE_HOUSEKEEPER_DAY)) {
+            logger.log(Level.WARNING, "Duplicated command.");
+            throw new DuplicateCommandException();
         }
         searchDay = checkCorrectDayGiven(commandStringWithoutCommand);
         assert (searchDay >= MONDAY_INDICATE & searchDay <= SUNDAY_INDICATE) : "Input day incorrect range.";
@@ -38,7 +44,7 @@ public class GetAvailableHousekeeperCommand extends Command {
      * @return Day within valid range.
      * @throws InvalidDayException if input is not an integer or not between 1 and 7.
      */
-    private int checkCorrectDayGiven(String commandStringWithoutCommand) throws InvalidDayException {
+    private int checkCorrectDayGiven(String commandStringWithoutCommand) throws HotelLiteManagerException {
         int day;
         try {
             String trimmedInput = commandStringWithoutCommand.trim();

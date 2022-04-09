@@ -5,16 +5,10 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import seedu.duke.ListContainer;
-import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.*;
 import seedu.duke.Ui;
 import seedu.duke.housekeeperlists.Housekeeper;
-import seedu.duke.exceptions.InvalidHousekeeperProfileException;
 import seedu.duke.housekeeperlists.HousekeeperList;
-import seedu.duke.exceptions.InvalidUserException;
-import seedu.duke.exceptions.OverAgeException;
-import seedu.duke.exceptions.UnderAgeException;
-import seedu.duke.exceptions.InvalidAgeException;
-import seedu.duke.exceptions.NameNotStringException;
 import seedu.duke.command.Command;
 import seedu.duke.storage.HousekeeperFileManager;
 
@@ -23,6 +17,7 @@ import seedu.duke.storage.HousekeeperFileManager;
  */
 public class AddHousekeeperCommand extends Command {
     private static final int CONTAIN_ONE_SLASH_ONLY = 1;
+    private static final String ADD_HOUSEKEEPER_COMMAND = "add housekeeper";
     private Housekeeper housekeeper;
     private static final String AGE_INDICATE = "/";
     private static final char AGE_INDICATE_CHARACTER = '/';
@@ -42,6 +37,11 @@ public class AddHousekeeperCommand extends Command {
             logger.log(Level.WARNING, "Housekeeper command usage is found to be wrong.");
             throw new InvalidHousekeeperProfileException();
         }
+        String inputWithNoSpace = commandStringWithoutCommand.trim();
+        if (inputWithNoSpace.contains(ADD_HOUSEKEEPER_COMMAND)) {
+            logger.log(Level.WARNING, "Repeated add housekeeper command given.");
+            throw new DuplicateCommandException();
+        }
         Housekeeper housekeeper = extractDetails(commandStringWithoutCommand);
         setHousekeeper(housekeeper);
     }
@@ -54,9 +54,7 @@ public class AddHousekeeperCommand extends Command {
      * @throws InvalidAgeException       Age enter is invalid.
      * @throws InvalidHousekeeperProfileException Command enter regarding the housekeeper profile is wrong.
      */
-    private Housekeeper extractDetails(String commandStringWithoutCommand)
-            throws InvalidAgeException, InvalidHousekeeperProfileException, UnderAgeException, OverAgeException,
-            NameNotStringException {
+    private Housekeeper extractDetails(String commandStringWithoutCommand) throws HotelLiteManagerException {
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
         if (isSymbolIncorrect) {
             logger.log(Level.WARNING, "Housekeeper command usage is found to be wrong.");
@@ -96,7 +94,7 @@ public class AddHousekeeperCommand extends Command {
      * @return Valid age.
      * @throws InvalidAgeException When age given is not valid.
      */
-    private int extractAge(String inputAge) throws InvalidAgeException, UnderAgeException, OverAgeException {
+    private int extractAge(String inputAge) throws HotelLiteManagerException {
         int ageNumber;
         String age;
         try {
@@ -129,7 +127,7 @@ public class AddHousekeeperCommand extends Command {
      * @throws InvalidHousekeeperProfileException When name given is empty.
      * @throws NameNotStringException    When name has symbols and digits.
      */
-    private String extractName(String inputName) throws InvalidHousekeeperProfileException, NameNotStringException {
+    private String extractName(String inputName) throws HotelLiteManagerException {
         String name;
         try {
             name = inputName.trim();
@@ -159,7 +157,7 @@ public class AddHousekeeperCommand extends Command {
      * @param ui The user interface for this execution method.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws InvalidUserException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.addHousekeeperInList(getHousekeeper());
         ui.printHousekeeperNoted(housekeeper);
