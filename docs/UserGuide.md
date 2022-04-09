@@ -162,35 +162,38 @@ Format: `delete TASK_NUMBER /repeat`
 
 #### Editing a single task
 
-Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME] [/by DEADLINE]`
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start START_TIME /end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME]`
 
-|    Parameters    | Description                                         | Accepted inputs                                   | Optional               |
-|:----------------:|-----------------------------------------------------|---------------------------------------------------|------------------------|
-|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                             | No                     |
-| TASK_DESCRIPTION | Description for the task                            | Any sentence without the character '/'	           | Yes                    |
-|     DO_DATE      | Date to work on the task                            | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022)      | Yes                    |
-|    START_TIME    | Time to start working on a task                     | HH:mm (e.g 18:00), must be before END_TIME        | No if DO_DATE is given |
-|     END_TIME     | Time to start working on a task                     | HH:mm (e.g 19:00)                                 | No if DO_DATE is given |
-|     DEADLINE     | Due date for the task                               | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | Yes                    |
+|    Parameters    | Description                                         | Accepted inputs                                 | Optional               |
+|:----------------:|-----------------------------------------------------|-------------------------------------------------|------------------------|
+|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                           | No                     |
+| TASK_DESCRIPTION | Description for the task                            | Any sentence without the character '/'	         | Yes                    |
+|       DATE       | Date to work on the task                            | d/M/yyyy (e.g 25/3/2022 for 25 March 2022)      | Yes                    |
+|    START_TIME    | Time to start working on a task                     | HH:mm (e.g 18:00), must be before END_TIME      | No if DO_DATE is given |
+|     END_TIME     | Time to start working on a task                     | HH:mm (e.g 19:00)                               | No if DO_DATE is given |
+|     DUE_DATE     | Deadline date for the task                          | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | No if editing Deadline |
+|     DUE_TIME     | Deadline time for the task                          | HH:mm (e.g. 20:00)                              | No if editing Deadline |
 
 **Examples**
 - `edit 2 write draft essay`
-- `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00`
+- `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00 /bydate 30/3/2022 /bytime 23:59`
 
 #### Editing a recurring task
 - The specified task and all its future occurrence will be edited.
 - Occurrences earlier than the specified task will not be affected.
 - To change frequency, delete and add the recurring task with the new frequency using the `delete` and `add` command respectively.
 
-Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME] /repeat`
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start START_TIME /end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME] /repeat`
 
-|    Parameters    | Description                                         | Accepted inputs                                   | Optional               |
-|:----------------:|-----------------------------------------------------|---------------------------------------------------|------------------------|
-|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                             | No                     |
-| TASK_DESCRIPTION | Description for the task                            | Any sentence without the character '/'	           | Yes                    |
-|     DO_DATE      | Date to work on the task                            | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022)      | Yes                    |
-|    START_TIME    | Time to start working on a task                     | HH:mm (e.g 18:00), must be before END_TIME        | No if DO_DATE is given |
-|     END_TIME     | Time to start working on a task                     | HH:mm (e.g 19:00)                                 | No if DO_DATE is given |
+|    Parameters    | Description                                         | Accepted inputs                            | Optional               |
+|:----------------:|-----------------------------------------------------|--------------------------------------------|------------------------|
+|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                      | No                     |
+| TASK_DESCRIPTION | Description for the task                            | Any sentence without the character '/'	    | Yes                    |
+|       DATE       | Date to work on the task                            | d/M/yyyy (e.g 25/3/2022 for 25 March 2022) | Yes                    |
+|    START_TIME    | Time to start working on a task                     | HH:mm (e.g 18:00), must be before END_TIME | No if DO_DATE is given |
+|     END_TIME     | Time to start working on a task                     | HH:mm (e.g 19:00)                          | No if DO_DATE is given |
+|      bydate      | Deadline date for the task                          | d/M/yyyy (e.g 30/3/2022 for 30 March 2022) | No if editing Deadline |
+|      bytime      | Deadline time for the task                          | HH:mm (e.g 20:00)                          | No if editing Deadline |
 
 
 Before edit command:
