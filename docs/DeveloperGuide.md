@@ -14,6 +14,13 @@ MeetingJio is a program for **finding potential time slots for team meetings bas
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 ## 2.2 UI Component
+![UiClassDiagram1](images/UiClassDiagram.png)
+
+The Ui class is initialised by MeetingJio, and it handles:
+- Reading user input
+- Printing output
+
+The Parser and Command classes will also be called by Ui class in the process of handling the user's input.
 
 ## 2.3 Commands Component
 
@@ -42,10 +49,16 @@ The commands component consists of a commands package. Inside the package are th
 - Timetable
 - MasterTimetable
 
-## 2.6 Events Component
-- Event
-- Lesson
-- Meeting
+## 2.6 Event Component
+![EventClassDiagram](images/EventClassDiagram.png)
+
+The above class diagram illustrates the classes within the Event package.
+
+The Event package includes:
+1. An abstract `Event` class that other event classes inherit from
+2. Individual Event classes that inherits from the `Event` class 
+   - Lesson
+   - Meeting
 
 ## 2.7 Storage Component
 ![StorageClassDiagram](images/StorageClassDiagram.png)
@@ -67,7 +80,7 @@ This section describes some noteworthy details on how certain features are imple
 The following sequence diagram shows how the commands generally works.
 Note that certain commands may slightly different implementation compared to the one below.
 
-![CommandSequenceDiagram](diagrams/CommandSequenceDiagram.png)
+![CommandSequenceDiagram](images/CommandSequenceDiagram.png)
 
 Given below is the steps on how the command operations generally works.
 
@@ -83,7 +96,7 @@ The `add` command is a command that allows user to
 
 The following sequence diagram shows how the `add` operation generally works.
 
-![AddCommandSequenceDiagram](diagrams/AddCommandSequenceDiagram.png)
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
 
 **_Note:_**
 
@@ -99,7 +112,7 @@ This is a condensed diagram. Several terms in the sequence diagram above have be
 `add_user` adds new user and his or her timetable into the master timetable.
 
 The following sequence diagram shows how the `add_user` command works:
-![AddUserCommandSequenceDiagram](diagrams/AddUserCommandSequenceDiagram.png)
+![AddUserCommandSequenceDiagram](images/AddUserCommandSequenceDiagram.png)
 
 Given below is the steps on how the `add_user` operation works.
 
@@ -118,7 +131,7 @@ Given below is the steps on how the `add_user` operation works.
 **Add Lesson**
 
 The following sequence diagram shows how the `add_lesson` operation works in detail.
-![AddMeetingCommandSequenceDiagram](diagrams/AddLessonCommandSequenceDiagram.png)
+![AddMeetingCommandSequenceDiagram](images/AddLessonCommandSequenceDiagram.png)
 
 Given below is the steps on how the `add_lesson` operation works.
 
@@ -131,7 +144,7 @@ Given below is the steps on how the `add_lesson` operation works.
 **Add Meeting**
 
 The following sequence diagram shows how the `add_meeting` operation works in detail.
-![AddMeetingCommandSequence](diagrams/AddMeetingCommandSequence.png)
+![AddMeetingCommandSequence](images/AddMeetingCommandSequence.png)
 
 The above diagram shows the sequence diagram of an addition of a meeting  which is normally after a few users 
 and some of their lessons have been added and the free command is executed to see the free slots.
@@ -140,36 +153,25 @@ and some of their lessons have been added and the free command is executed to se
 2. Ui then provides user input to the Parser class which parses it and retrieves the respective meeting command.
 3. Ui subsequently executes the command on the masterTimetable for the whole application.
 4. The AddMeetingCommand will create a new meeting object from Meeting and will add to every user's timetable.
-5. Subsequently a addMeeting confirmation message will be shown to user upon successful addition.
+5. Subsequently, a addMeeting confirmation message will be shown to user upon successful addition.
 
 
 ## 3.2 Listing Events Feature
 The `list` command is a command that the user can input in order to list out the events he has in his timetable.
 
-`list [user]` displays the timetable for the particular user.
-
-`list all` displays the timetable for all users.
-
-In essence, the `list all` command repeatedly calls `list [user]` for all users.
-
 Before the timetable is listed out, it will also be sorted according to day and time for easy reading.
 
-The following sequence diagram shows how the command `` is executed.
-![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
+The following sequence diagram shows how the command `list all` is executed.
+![ListCommandSequenceDiagram](images/ListCommandSequenceDiagram.png)
 
-### 3.2.1 Listing Lessons Feature
-Instead of listing all events in the timetable, the user can specify such that only lessons are listed out.
-
-`list_lesson [user]` displays the lessons for the particular user.
-
-`list_lesson all` displays the lessons for all users.
-
-### 3.2.2 Listing Meetings Feature
-Instead of listing all events in the timetable, the user can specify such that only meetings are listed out.
-
-`list_meeting [user]` displays the meetings for the particular user.
-
-`list_meeting all` displays the meetings for all users.
+Given below is the steps of how the `list` command works:
+1. If the given command is `list [user]`, the ListCommand calls the Timetable class to sort the user's timetable and 
+list all events out.
+2. If the given command is `list all`, the ListCommand repeats Step 1 for all users.
+3. If user inputs `list_lesson...` instead of `list...`, the ListCommand checks first if the event listed out in Step 1 
+is a Lesson. If not, it will not be printed out.
+4. If user inputs `list_meeting...` instead of `list...`, the ListCommand checks first if the event listed out in Step 1
+is a Meeting. If not, it will not be printed out.
 
 ## 3.3 Finding Common Free Timeslots Feature
 The `free` command is a command that the user can input in order to find timeslots where all users are free.
@@ -177,18 +179,26 @@ The `free` command is a command that the user can input in order to find timeslo
 For greater customisation, `free [duration]` displays all common timeslots which has a duration longer than or equal to
 what is specified.
 
-The searching algorithm works by marking the busy slots of each timetable first.
-Timings that are not marked 'busy' are then identified as free time slots.
-
 The following sequence diagram shows how the command `free` is executed.
-![FreeCommandSequenceDiagram](diagrams/FreeCommandSequenceDiagram.png)
+![FreeCommandSequenceDiagram](images/FreeCommandSequenceDiagram.png)
+
+Given below is the steps of how the `free` command works:
+1. A 7 x 1440 array is created, with 7 rows for each day of the week, and 1440 columns for each minute from 0000-2359, 
+where each element is initialised to 0 (FREE).
+2. The listBusy() method in MasterTimetable is called. Within this method, each timetable in the MasterTimetable is 
+called to populateBusySlots(). 
+3. The populateBusySlots() method iterates through each event in the timetable, and sets the corresponding minute in the
+array to 1 (BUSY).
+4. After iterating through every timetable in Master Timetable, the Free Command class obtains the updated array, and 
+looks at the number of consecutive 0s to determine if the common free timeslot exceeds the minimum duration required.
+5. The free timeslots will then be printed onto the screen.
 
 ## 3.4 Edit events feature
 
 The `edit` command is a command that allows users to edit a specified event.
 
 The following sequence diagram shows how the `edit` command works:
-![EditCommandSequenceDiagram](diagrams/EditCommandSequenceDiagram.png)
+![EditCommandSequenceDiagram](images/EditCommandSequenceDiagram.png)
 
 Given below is the steps on how the `edit` operation works.
 
@@ -203,6 +213,15 @@ Deletes an event from the user's specified timetable
 
 **Format:** ` delete n/NAME i/INDEX`
 
+Example of usage:
+
+`delete n/John i/1`
+
+If the event is a meeting, it will delete this meeting from all users.
+Else it will delete that specific lesson from the user's timetable.
+
+The following sequence diagram shows how the `delete` command works:
+![DeleteCommandSequenceDiagram](images/DeleteCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of a meeting deletion.
 
@@ -214,17 +233,6 @@ and perform the deletion of that event.
 6. If it is a meeting that the user is trying to delete, the DeleteCommand will find that meeting in 
 everyone's timetable and delete it.
 
-Example of usage:
-
-`delete n/John i/1`
-
-If the event is a meeting, it will delete this meeting from all users.
-Else it will delete that specific lesson from the user's timetable.
-
-The following sequence diagram shows how the `delete` command works:
-![DeleteCommandSequenceDiagram](diagrams/DeleteCommandSequenceDiagram.png)
-
-Before the timetable is listed out, it will also be sorted according to day and time for easy reading.
 
 ## 3.6 Clear events `clear`
 The `clear` command is a command that the user can clear a certain user's timetable or everyone's timetable.
@@ -240,19 +248,16 @@ in the MasterTimetable and Timetable to the text file in human-readable format.
 
 Given below is the steps on how the save operation works.
 
-Step 1: When the user exits the application. The StorageFile.saveData will be initialized.
-
-Step 2: It will check for the existence of the data file. If the file is not found, it will create the file.
+1. When the user exits the application. The StorageFile.saveData will be initialized.
+2. It will check for the existence of the data file. If the file is not found, it will create the file.
 Else do nothing.
-
-Step 3: After creating the file, collateAll method will be called to consolidate all elements in the MasterTimetable and Timetable list,
-and write them into the data file.
-
-Step 4: A message will be shown to the user, informing him that the data has been saved successfully. For any exception
+3. After creating the file, collateAll method will be called to consolidate all elements in the MasterTimetable and Timetable list,
+and write them into the data file. 
+4. A message will be shown to the user, informing him that the data has been saved successfully. For any exception
 encountered along the way, an error message will be shown.
 
 The following sequence diagram shows how the save operation works:
-![SaveSequenceDiagram](diagrams/SaveSequenceDiagram.png)
+![SaveSequenceDiagram](images/SaveSequenceDiagram.png)
 
 ## 3.8 Loading Data Feature
 
@@ -261,19 +266,16 @@ the records back into the MasterTimetable and Timetable list.
 
 Given below is the steps on how the load operation works.
 
-Step 1: When the user starts the application. The StorageFile.LoadData will be initialized.
-
-Step 2: It will check for the existence of the data file. If the file is not found, do nothing.
-Else it will open the file and extract the record line by line.
-
-Step 3: If a record is a lesson type, then it will call ParserLocalData.prepareLoadLesson method.
+1. When the user starts the application. The StorageFile.LoadData will be initialized.
+2. It will check for the existence of the data file. If the file is not found, do nothing.
+Else it will open the file and extract the record line by line. 
+3. If a record is a lesson type, then it will call ParserLocalData.prepareLoadLesson method.
 Else if the record is a meeting type, then it will add the record into the meetingList.
-
-Step 4: If there is no record left, the program will check if the previous record contain a meeting.
+4. If there is no record left, the program will check if the previous record contain a meeting.
 If yes, it will call for ParserLocalData.prepareLoadMeeting method to add all the meetings into the list.
 
 The following sequence diagram shows how the load operation works:
-![LoadSequenceDiagram](diagrams/LoadSequenceDiagram.png)
+![LoadSequenceDiagram](images/LoadSequenceDiagram.png)
 
 ## Appendix A: Product scope
 ### Target user profile
@@ -296,7 +298,7 @@ programme can also accommodate to this requirement
 | v1.0    | user     | add a lesson                                     | view my schedule easily                              |
 | v1.0    | user     | delete a lesson                                  | modify my schedule accordingly                       |
 | v1.0    | user     | view all the lessons I have in my timetable      | plan my activities accordingly                       |
-| v1.0    | user     | add the location paramter to my lesson           | plan my route in advance                             |
+| v1.0    | user     | add the location parameter to my lesson          | plan my route in advance                             |
 | v1.0    | user     | add a start time and end time to my lessons      | know what time a lesson starts and ends              |
 | v1.0    | user     | clear all the lessons saved in the timetable     | reset my timetable without the need to delete one by one |
 | v2.0    | user     | add a new user                                   | add my friends' timetables                           |
