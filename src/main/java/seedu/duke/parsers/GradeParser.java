@@ -37,11 +37,16 @@ public class GradeParser extends Parser {
     }
 
     /**
-     * Determines the error that the user made in its command.
-     * @throws ModHappyException based on the type of error made.
+     * Determines the error that the user made in the grade command based on the compulsory parameters.
+     * It will first check if the module code is present and if it is made up of only word characters.
+     * Then it checks if the module grade entered is one of the grades specified.
+     * @throws MissingCompulsoryParameterException if the module code is missing
+     * @throws InvalidCompulsoryParameterException if the module code is not made up of only word characters
+     * @throws InvalidModuleGradeException if the module grade is not valid or missing
      */
     @Override
-    public void determineError() throws ModHappyException {
+    public void determineError() throws MissingCompulsoryParameterException,
+            InvalidCompulsoryParameterException, InvalidModuleGradeException {
         String moduleCode;
         String moduleGrade;
         try {
@@ -70,6 +75,7 @@ public class GradeParser extends Parser {
         String moduleCode = parsedArguments.get(MODULE_CODE);
         String moduleGrade = parsedArguments.get(MODULE_GRADE).toUpperCase();
         if (!Objects.isNull(moduleCode)) {
+            checksForExcessArg();
             return new GradeCommand(moduleCode, moduleGrade);
         }
         throw new ModHappyException();

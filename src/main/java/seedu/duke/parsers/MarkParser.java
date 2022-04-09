@@ -10,6 +10,7 @@ import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.MissingNumberException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.GeneralParseException;
+import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -22,14 +23,13 @@ public class MarkParser extends Parser {
     private static final String COMPLETED_FLAG = StringConstants.COMPLETED_FLAG;
     private static final String UNCOMPLETED_FLAG = StringConstants.UNCOMPLETED_FLAG;
     private static final String TASK_NUMBER_STR = StringConstants.TASK_NUMBER_STR;
+    private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
     // Unescaped regex for testing:
-    // (?<flag>(c|u)|(?<invalidMarkFlag>.*))\s+(?<taskNumber>\d+|(?<invalidNumber>.*))
-    // (\s+-m\s+(?<taskModule>\w+))?(?<invalid>.*)
-    private static final String MARK_FORMAT = "(?<flag>(c|u)|(?<invalidMarkFlag>.*))\\s+"
-            + "(?<taskNumber>\\d+|(?<invalidNumber>.*))(\\s+-m\\s+"
-            + "(?<taskModule>\\w+))?(?<invalid>.*)";
+    // (?<flag>(c|u))\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?(?<invalid>.*)
+    private static final String MARK_FORMAT = "(?<flag>(c|u))\\s+"
+            + "(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?(?<invalid>.*)";
     private static final String MARK_COMMAND_FLAGS = StringConstants.MARK_COMMAND_FLAGS;
     private static final String POSITIVE_INT = StringConstants.POSITIVE_INT;
 
@@ -41,16 +41,20 @@ public class MarkParser extends Parser {
         groupNames.add(TASK_NUMBER);
         groupNames.add(TASK_MODULE);
         groupNames.add(INVALID);
-        groupNames.add(INVALID_MARK_FLAG);
-        groupNames.add(INVALID_NUMBER);
     }
 
     /**
-     * Determines the error that the user made in its command.
-     * @throws ModHappyException based on the type of error made.
+     * Determines the error made by the user in the mark command based on the compulsory parameters.
+     * It will first check if the flag is present and if it is either c or u.
+     * Then it will check if the task number is present and if it is in a positive integer format.
+     * @throws InvalidFlagException if the flag is missing, or not c nor u
+     * @throws MissingNumberException if the task number is missing
+     * @throws InvalidNumberException if the task number is not in a positive integer format
+     * @throws InvalidCompulsoryParameterException if the error is none of the above errors
      */
     @Override
-    public void determineError() throws ModHappyException {
+    public void determineError() throws InvalidFlagException, MissingNumberException,
+            InvalidNumberException, InvalidCompulsoryParameterException {
         String flag;
         String taskNumber;
         try {
@@ -73,6 +77,26 @@ public class MarkParser extends Parser {
     }
 
     /**
+     * Parses the task index from a string to an integer form.
+     * It will also check if the index is non-negative, throwing an exception if it is not.
+     * @param taskNumberString the string representation of the task number
+     * @return the zero-based index integer of the task number string
+     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
+     */
+    private int parseIndex(String taskNumberString) throws InvalidNumberException {
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskNumberString) - 1;
+            if (taskIndex < MINIMUM_INDEX) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
+        }
+        return taskIndex;
+    }
+
+    /**
      * Parses user's input for "mark" command.
      *
      * @param userInput User input of completed flag or uncompleted flag, task index and task module.
@@ -84,19 +108,15 @@ public class MarkParser extends Parser {
         HashMap<String, String> parsedArguments = parseString(userInput);
         final String commandFlag = parsedArguments.get(FLAG);
         final String taskModule = parsedArguments.get(TASK_MODULE);
-        try {
-            // Account for the zero-indexing
-            final int taskIndex = Integer.parseInt(parsedArguments.get(TASK_NUMBER)) - 1;
-            switch (commandFlag) {
-            case (COMPLETED_FLAG):
-                return new MarkCommand(taskIndex, taskModule, true);
-            case (UNCOMPLETED_FLAG):
-                return new MarkCommand(taskIndex, taskModule, false);
-            default:
-                throw new GeneralParseException();
-            }
-        } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR, parsedArguments.get(TASK_NUMBER));
+        final int taskIndex = parseIndex(parsedArguments.get(TASK_NUMBER));;
+        checksForExcessArg();
+        switch (commandFlag) {
+        case (COMPLETED_FLAG):
+            return new MarkCommand(taskIndex, taskModule, true);
+        case (UNCOMPLETED_FLAG):
+            return new MarkCommand(taskIndex, taskModule, false);
+        default:
+            throw new GeneralParseException();
         }
     }
 }

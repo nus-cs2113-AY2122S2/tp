@@ -39,6 +39,7 @@ public class HelpParser extends Parser {
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);
         String command = parsedArguments.get(COMMAND_AS_HELP_ARGUMENT);
+        checksForExcessArg();
         return new HelpCommand(command);
     }
 }

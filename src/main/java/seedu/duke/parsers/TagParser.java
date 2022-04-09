@@ -10,6 +10,7 @@ import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.MissingNumberException;
 import seedu.duke.exceptions.MissingCompulsoryParameterException;
+import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 
@@ -17,10 +18,11 @@ import seedu.duke.util.StringConstants;
  * This Parser supports the "tag" command.
  */
 public class TagParser extends Parser {
-    public static final String TAG_OPERATION = StringConstants.TAG_OPERATION;
-    public static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
-    public static final String TASK_MODULE = StringConstants.TASK_MODULE;
-    public static final String TAG_NAME = StringConstants.TAG_NAME;
+    private static final String TAG_OPERATION = StringConstants.TAG_OPERATION;
+    private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
+    private static final String TASK_MODULE = StringConstants.TASK_MODULE;
+    private static final String TAG_NAME = StringConstants.TAG_NAME;
+    private static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
     private String userInput;
 
     // Unescaped Regex for testing:
@@ -47,17 +49,30 @@ public class TagParser extends Parser {
     }
 
     /**
-     * Determines the error that the user made in its command.
-     * @throws ModHappyException based on the type of error made.
+     * Determines the error made by the user in the tag command based on its compulsory parameters.
+     * It first checks if the error is in the tag operation, then task number, then tag name.
+     * If there are no errors in the above, it means that there is an error due to the module code.
+     * @throws InvalidTagOperationException if the tag is missing or is not add nor del
+     * @throws MissingNumberException if the task number is missing
+     * @throws InvalidNumberException if the task number is not in a positive integer format
+     * @throws MissingCompulsoryParameterException if the tag name is missing
+     * @throws InvalidCompulsoryParameterException if the tag name is not made up of all word characters or
+     *                                             if the module code is not made up of all word characters
      */
     @Override
-    public void determineError() throws ModHappyException {
+    public void determineError() throws InvalidTagOperationException, MissingNumberException,
+            InvalidNumberException, MissingCompulsoryParameterException, InvalidCompulsoryParameterException {
         determineErrorInTagOperation();
         determineErrorInTaskNumber();
         determineErrorInTagName();
         assertErrorInModuleCode();
     }
 
+    /**
+     * Checks if the error is in the tag operation.
+     * Checks if the tag operation is present and if it is either add or del.
+     * @throws InvalidTagOperationException if the tag operation is missing or if it is neither add nor del
+     */
     private void determineErrorInTagOperation() throws InvalidTagOperationException {
         String tagOperation;
         try {
@@ -70,7 +85,13 @@ public class TagParser extends Parser {
         }
     }
 
-    private void determineErrorInTaskNumber() throws ModHappyException {
+    /**
+     * Checks if the error is in task number.
+     * Checks if the task number is present or if the task number is in a positive integer format.
+     * @throws MissingNumberException if the task number is missing
+     * @throws InvalidNumberException if the task number is not in a positive integer format
+     */
+    private void determineErrorInTaskNumber() throws MissingNumberException, InvalidNumberException {
         String taskNumber;
         try {
             taskNumber = userInput.split(SPACE)[FIRST_INDEX];
@@ -82,7 +103,14 @@ public class TagParser extends Parser {
         }
     }
 
-    private void determineErrorInTagName() throws ModHappyException {
+    /**
+     * Checks if the error is in the tag name.
+     * Check if the tag name is present or if it is made up of only word characters.
+     * @throws MissingCompulsoryParameterException if the tag name is missing
+     * @throws InvalidCompulsoryParameterException if the tag name is not made up of only word characters
+     */
+    private void determineErrorInTagName() throws MissingCompulsoryParameterException,
+            InvalidCompulsoryParameterException {
         String tagName;
         try {
             if (userInput.contains(TASK_MODULE_FLAG)) {
@@ -98,10 +126,35 @@ public class TagParser extends Parser {
         }
     }
 
-    private void assertErrorInModuleCode() throws ModHappyException {
+    /**
+     * Throws exception that the error is in the module code field as the error is not present in the other compulsory
+     * parameters.
+     * @throws InvalidCompulsoryParameterException to show that the error is in the module code
+     */
+    private void assertErrorInModuleCode() throws InvalidCompulsoryParameterException {
         assert (userInput.contains(TASK_MODULE_FLAG));
         String moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
+    }
+
+    /**
+     * Parses the task index from a string to an integer form.
+     * It will also check if the index is non-negative, throwing an exception if it is not.
+     * @param taskNumberString the string representation of the task number
+     * @return the zero-based index integer of the task number string
+     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
+     */
+    private int parseIndex(String taskNumberString) throws InvalidNumberException {
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskNumberString) - 1;
+            if (taskIndex < MINIMUM_INDEX) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
+        }
+        return taskIndex;
     }
 
     @Override
@@ -112,12 +165,8 @@ public class TagParser extends Parser {
         String taskNumberString = parsedArguments.get(TASK_NUMBER);
         String taskModuleString = parsedArguments.get(TASK_MODULE);
         String tagDescription = parsedArguments.get(TAG_NAME);
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(taskNumberString) - 1;
-        } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
-        }
+        int taskIndex = parseIndex(taskNumberString);
+        checksForExcessArg();
         return new TagCommand(tagOperationString, taskIndex, taskModuleString, tagDescription);
     }
 

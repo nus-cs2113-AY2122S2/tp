@@ -105,10 +105,8 @@ public abstract class Parser {
     /**
      * Checks for strings that are parsed into groups based on commandFormat, but are essentially invalid.
      */
-    private void checkForInvalidStrings() throws ExcessArgumentException, InvalidFlagException,
-            InvalidModuleGradeException, InvalidNumberException, InvalidTagOperationException {
-        checksForExcessArg();
-        checksForInvalidMarkFlag();
+    private void checkForInvalidStrings() throws InvalidFlagException,
+            InvalidModuleGradeException, InvalidTagOperationException {
         checksForInvalidModFlag();
         checksForInvalidTaskName();
         checksForInvalidTaskDescriptionFlag();
@@ -182,16 +180,8 @@ public abstract class Parser {
         }
     }
 
-    private void checksForInvalidMarkFlag() throws InvalidFlagException {
-        if (groupNames.contains(INVALID_MARK_FLAG)) {
-            String invalidInput = parsedCommand.get(INVALID_MARK_FLAG);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidFlagException(invalidInput);
-            }
-        }
-    }
 
-    private void checksForExcessArg() throws ExcessArgumentException {
+    protected void checksForExcessArg() throws ExcessArgumentException {
         if (groupNames.contains(INVALID)) {
             String invalidInput = parsedCommand.get(INVALID);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {

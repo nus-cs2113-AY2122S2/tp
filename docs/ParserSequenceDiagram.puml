@@ -42,6 +42,6 @@ return XYZCommand
 return XYZCommand
 [<-- A: XYZCommand
 
-
+hide footbox
 
 @enduml

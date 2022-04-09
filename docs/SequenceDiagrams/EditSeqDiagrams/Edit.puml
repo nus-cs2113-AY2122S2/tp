@@ -3,7 +3,8 @@
 
 skinparam shadowing false
 participant ":ModHappyParser" as ModHappyParser
-participant ":EditParser" as EditParser
+participant "<<class>>\nEditParser" as EditParser
+participant ":EditTaskParser" as EditTaskParser
 participant ":EditCommand" as EditCommand
 participant ":ModuleList" as ModuleList
 participant ":Module" as Module
@@ -17,21 +18,21 @@ end note
 
 [->ModHappyParser:parseCommand(userInput)
 activate ModHappyParser
-create EditParser
-ModHappyParser -> EditParser: EditParser()
-activate EditParser
-return
 
-ModHappyParser -> EditParser: parseCommand(arguments)
+ModHappyParser -> EditParser: getParser()
 activate EditParser
+return new EditTaskParser()
+create EditTaskParser
+ModHappyParser -> EditTaskParser: parseCommand(arguments)
+activate EditTaskParser
 create EditCommand
-EditParser -> EditCommand: EditCommand(taskModule,taskIndex,description,workingTime,taskName)
+EditTaskParser -> EditCommand: EditCommand(arguments)
 activate EditCommand
 return
 return
 return
 
-destroy EditParser
+destroy EditTaskParser
 
 [->EditCommand:execute(moduleList, configuration)
 activate EditCommand
