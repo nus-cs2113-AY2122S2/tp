@@ -1,7 +1,7 @@
 package seedu.duke.assets;
 
 import seedu.duke.exception.DuplicateEntryException;
-import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.UI;
@@ -60,10 +60,10 @@ public class PatientList extends List {
     }
 
     //view particular patient
-    public void view(String nric) throws HalpmiException {
+    public void view(String nric) throws UserInputErrorException {
         Patient patient = getPatient(nric);
         if (patient == null) {
-            throw new HalpmiException("Patient doesn't exist please try again!");
+            throw new UserInputErrorException("Patient doesn't exist please try again!");
         }
         CommandLineTable patientTable = new CommandLineTable();
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
@@ -79,14 +79,14 @@ public class PatientList extends List {
 
 
     //view all patients
-    public void view() throws HalpmiException {
+    public void view() throws UserInputErrorException {
         CommandLineTable patientTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "DateAdmission");
         if (patients.size() == 0) {
-            throw new HalpmiException("Patient list is empty, please add patient");
+            throw new UserInputErrorException("Patient list is empty, please add patient");
         }
         for (Patient patient : patients) {
             patientTable.addRow(patient.getPatientNric(), patient.getPatientName(),

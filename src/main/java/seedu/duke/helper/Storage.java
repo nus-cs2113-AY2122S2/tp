@@ -2,8 +2,7 @@ package seedu.duke.helper;
 
 
 import seedu.duke.assets.*;
-import seedu.duke.exception.DuplicateEntryException;
-import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.UserInputErrorException;
 
 
 import java.io.File;
@@ -38,7 +37,7 @@ public class Storage {
             String[] parameters = line.split(",");
             try {
                 listType.add(parameters);
-            } catch (HalpmiException e) {
+            } catch (UserInputErrorException e) {
                 if (DuplicateEntryException e) {
                     continue;
                 }

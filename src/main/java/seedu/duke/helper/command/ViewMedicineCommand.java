@@ -1,7 +1,7 @@
 package seedu.duke.helper.command;
 
 import seedu.duke.assets.List;
-import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.status.Status;
 
 public class ViewMedicineCommand extends Command {
@@ -10,7 +10,7 @@ public class ViewMedicineCommand extends Command {
         super(parameterArray);
     }
 
-    public Status execute(List medicineList) throws HalpmiException {
+    public Status execute(List medicineList) throws UserInputErrorException {
         if (parameterArray == null) {
             medicineList.view();
         } else {

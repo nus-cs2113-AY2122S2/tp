@@ -1,13 +1,9 @@
 package seedu.duke.exception;
 
-public class DuplicateEntryException extends Exception {
+public class DuplicateEntryException extends HalpmiException {
 
     public DuplicateEntryException(String message) {
         super(message);
     }
 
-    @Override
-    public String toString() {
-        return getMessage();
-    }
 }

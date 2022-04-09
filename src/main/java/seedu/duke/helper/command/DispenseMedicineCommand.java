@@ -4,7 +4,7 @@ import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.List;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.exception.DuplicateEntryException;
-import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.status.Status;
 
@@ -17,7 +17,7 @@ public class DispenseMedicineCommand extends Command {
     }
 
     @Override
-    public Status execute(List list) throws DuplicateEntryException, NotFoundException, HalpmiException {
+    public Status execute(List list) throws DuplicateEntryException, NotFoundException, UserInputErrorException {
         String patientNric = parameterArray[0];
         String[] medicineArray = Arrays.copyOfRange(parameterArray, 1, parameterArray.length);
         if (list instanceof AppointmentList) {

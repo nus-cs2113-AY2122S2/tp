@@ -2,7 +2,7 @@ package seedu.duke.assets;
 
 
 import seedu.duke.exception.DuplicateEntryException;
-import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.CommandLineTable;
@@ -61,10 +61,10 @@ public class MedicineList extends List {
 
 
     //view particular medicine
-    public void view(String medicineId) throws HalpmiException {
+    public void view(String medicineId) throws UserInputErrorException {
         Medicine medicine = getMedicine(medicineId);
         if (medicine == null) {
-            throw new HalpmiException("Medicine doesn't exist please try again!");
+            throw new UserInputErrorException("Medicine doesn't exist please try again!");
         }
         CommandLineTable medicineTable = new CommandLineTable();
         medicineTable.setShowVerticalLines(true);
@@ -75,14 +75,14 @@ public class MedicineList extends List {
         medicineTable.print();
     }
 
-    public void view() throws HalpmiException {
+    public void view() throws UserInputErrorException {
         CommandLineTable medicineTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
 
         if (medicines.size() == 0) {
-            throw new HalpmiException("Medicine list is empty, please add medicine");
+            throw new UserInputErrorException("Medicine list is empty, please add medicine");
         }
         for (Medicine medicine : medicines) {
             medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
@@ -114,13 +114,13 @@ public class MedicineList extends List {
         throw new NotFoundException("There are no medicines with given Batch ID!");
     }
 
-    public void viewExpired() throws HalpmiException {
+    public void viewExpired() throws UserInputErrorException {
         CommandLineTable medicineTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
         if (expiredMedicines.size() == 0) {
-            throw new HalpmiException("There are no expired medicines.");
+            throw new UserInputErrorException("There are no expired medicines.");
         }
         for (Medicine medicine : expiredMedicines) {
             medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
@@ -131,7 +131,7 @@ public class MedicineList extends List {
         medicineTable.print();
     }
 
-    public void updateStock() throws HalpmiException {
+    public void updateStock() throws UserInputErrorException {
         for (int i = 0; i < medicines.size(); i++) {
             LocalDate date = LocalDate.parse(medicines.get(i).getExpiry());
             int quantity = medicines.get(i).getQuantity();
@@ -165,7 +165,7 @@ public class MedicineList extends List {
         UI.printParagraph("Expired medicines in the expired list has been cleared!");
     }
 
-    public void checkStock(String [] medicines) throws HalpmiException {
+    public void checkStock(String [] medicines) throws UserInputErrorException {
         updateStockBackend();
         CommandLineTable medicineTable = new CommandLineTable();
         medicineTable.setShowVerticalLines(true);
@@ -192,7 +192,7 @@ public class MedicineList extends List {
 
         if (hasShortage) {
             medicineTable.print();
-            throw new HalpmiException("The medicines mentioned on the table"
+            throw new UserInputErrorException("The medicines mentioned on the table"
                     + "above do not have enough stock to dispense!");
         }
     }
