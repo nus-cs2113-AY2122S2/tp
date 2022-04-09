@@ -742,10 +742,10 @@ taken:
 1. Key of the `workout` object will be generated (see the 
 [Design Considerations](#design-considerations-for-creating-a-new-workout) section for more details of the `HashMap`
 implementation).
-2. The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
+2. The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList`. 
 3. The key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
 `ArrayList<String>` object stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the 
-command `workout /list` is entered by the user. This is the final step of `WorkoutList#createNewWorkout()`.
+command `workout /list` is entered by the user.
 
 **(Step 6)** Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
 the user via the terminal. The following is an example of a response after the user entered `workout /new russian twist 
@@ -1818,19 +1818,22 @@ read into the application and stored as a `String`.  The data is then parsed int
 `FileManager#addFileWorkoutToList()`.
 
 **(Step 4)** In `FileManager#addFileWorkoutToList()`, a `String` is crafted to follow a format that is a truncated
-version of the `workout /new` command that is accepted by `WorkoutList#createAndAddWorkout()`. 
+version of the `workout /new` command that is accepted by `WorkoutList#createNewWorkout()`. 
 
 | Original Command                | Truncated `String` |
 |---------------------------------|--------------------|
 | `workout /new push up /reps 10` | `push up /reps 10` |
 
 
-**(Step 5)** The crafted `String` is passed to `WorkoutList#createAndAddWorkout()` to properly add the workout data
-into WerkIt!.
+**(Steps 5 and 6)** The crafted `String` is passed to `WorkoutList#createNewWorkout()` to check the validity of the workout
+data and create the `Workout` object before returning the object to `FileManager#addFileWorkoutToList()`.
 
-Steps 4 to 7 is repeated until all the lines in `workouts.txt` have been read.
+***(Step 7)** The newly created `Workout` object is passed to `WorkoutList#addNewWorkoutToLists()` to add the new
+`Workout` object to the respective data structures maintained in the `WorkoutList` object.
 
-**(Step 8)** A boolean value that indicates whether the loading of `workouts.txt` went without any issues is returned
+Steps 4 to 9 is repeated until all the lines in `workouts.txt` have been read.
+
+**(Step 10)** A boolean value that indicates whether the loading of `workouts.txt` went without any issues is returned
 from `WerkIt#loadWorkoutsFromFile()`. A value of `true` means that no issues were encountered and `false` means otherwise. 
 This boolean will be used to determine the status message of the loading of `workouts.txt`. This status message will then 
 be printed to the terminal.
@@ -1951,7 +1954,7 @@ directory. Each log entry has the following format:
 
 Here's a sample log entry that you may find in `logs.log`:
 ```
-Mar 17, 2022 7:24:43 PM data.workouts.WorkoutList createAndAddWorkout
+Mar 17, 2022 7:24:43 PM data.workouts.WorkoutList createNewWorkout
 INFO: New workout created.
 ```
 

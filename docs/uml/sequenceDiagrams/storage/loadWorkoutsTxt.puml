@@ -31,7 +31,10 @@ end
 
 FileManager -> FileManager : addFileWorkoutToList(WorkoutList, String)
 activate FileManager COLOR_STORAGE
-FileManager -> WorkoutList : createAndAddWorkout(String)
+FileManager -> WorkoutList : createNewWorkout(String)
+activate WorkoutList COLOR_LOGIC
+return newWorkout:Workout
+FileManager -> WorkoutList : addNewWorkoutToLists(newWorkout)
 activate WorkoutList COLOR_LOGIC
 return
 return
