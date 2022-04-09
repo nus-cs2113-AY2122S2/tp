@@ -47,6 +47,10 @@ public class ParserStubs {
     public static final SearchCommand SEARCHCOMMAND_NAMEANDDESCRIPTION = new SearchCommand(
             Optional.of(PAPERCUP_NAME), Optional.of(PAPERCUP_DESCRIPTION));
     public static final BorrowCommand BORROWCOMMAND_ALL_FIELDS = new BorrowCommand(
-            Integer.parseInt(ITEM_INDEX) - 1, BORROW_START_DATE, BORROW_END_DATE, BORROWER_NAME);
+            Integer.parseInt(ITEM_INDEX) - 1,
+            Integer.parseInt(PAPERCUP_QUANTITY),
+            BORROW_START_DATE,
+            BORROW_END_DATE,
+            BORROWER_NAME);
 }
 

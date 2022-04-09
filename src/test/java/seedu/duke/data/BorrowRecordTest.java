@@ -3,6 +3,7 @@ package seedu.duke.data;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.duke.stubs.BorrowRecordStubs.BORROW_QUANTITY;
 import static seedu.duke.stubs.BorrowRecordStubs.FUTURERECORD_A;
 import static seedu.duke.stubs.BorrowRecordStubs.PRESENTRECORD_A;
 import static seedu.duke.stubs.BorrowRecordStubs.PASTRECORD_A;
@@ -32,8 +33,9 @@ public class BorrowRecordTest {
         String expectedOutput = String.format("Name of Borrower: %s",
                 PRESENTRECORD_A_NAME) + System.lineSeparator();
         expectedOutput += String.format("Borrow Duration: %s to %s",
-                PRESENTRECORD_A_STARTDATE, PRESENTRECORD_A_ENDDATE);
-        expectedOutput += System.lineSeparator();
+                PRESENTRECORD_A_STARTDATE, PRESENTRECORD_A_ENDDATE) + System.lineSeparator();
+        expectedOutput += String.format("Borrow Quantity: %d",
+                BORROW_QUANTITY) + System.lineSeparator();
 
         assertEquals(expectedOutput, PRESENTRECORD_A.toString());
     }
