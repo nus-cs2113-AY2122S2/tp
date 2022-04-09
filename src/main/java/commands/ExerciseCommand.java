@@ -3,6 +3,9 @@ package commands;
 import data.exercises.ExerciseList;
 import werkit.UI;
 
+/**
+ * A class that will handle the commands relating to exercise.
+ */
 public class ExerciseCommand extends Command {
     public static final String KEYWORD_BASE = "exercise";
     public static final String ACTION_KEYWORD_LIST = "/list";
