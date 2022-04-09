@@ -68,12 +68,16 @@ Creates a new user and adds his or her timetable to the master timetable.
 * Duplicate user will not be added.
 
 Example of usage:
+```
+add_user john
+add_user peter
+```
 
-`add_user john`
 
 Expected outcome:
 ```
 john's timetable is created and added to the master timetable
+peter's timetable is created and added to the master timetable
 ```
 
 
@@ -97,12 +101,18 @@ Adds a new lesson to the user's timetable.
 
 **Example of usage:**
 
-`add_lesson n/john t/cs2113 d/friday st/1230 et/1330 m/online`
+```
+add_lesson n/john t/cs2113 d/friday st/1230 et/1330 m/online
+add_lesson n/peter t/CS2113 d/Monday st/1200 et/1300 m/online
+```
 
 **Expected outcome:**
 ```
 The following event has been added to john's timetable:
 [L] TITLE: cs2113		DAY: friday		START: 1230		END: 1330		MODE: online
+
+The following event has been added to peter's timetable:
+[L] TITLE: cs2113		DAY: monday		START: 1200		END: 1300		MODE: online
 ```
 
 
@@ -113,7 +123,7 @@ Adds a new meeting that will be synced with everyone
 
 |  Parameters   | Description               | Accepted inputs                  |  
 |:-------------:|---------------------------|----------------------------------|
-|   `TITLE`     | Title of the meeting      | Do not contain `/` character     | 
+|    `TITLE`    | Title of the meeting      | Do not contain `/` character     | 
 | `DAY_OF_WEEK` | Day of week               | Ranges from `monday` to `sunday` | 
 | `START_TIME`  | Start time of the meeting | 24-hour format                   | 
 |  `END_TIME`   | End time of the meeting   | 24-hour format                   | 
