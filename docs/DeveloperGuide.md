@@ -692,6 +692,7 @@ a `WorkoutCommand` object that contains the user's input.
 `WorkoutList#createNewWorkout()`.
 
 The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createNewWorkout()`:
+
 ![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateNewWorkout.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and 
@@ -728,10 +729,10 @@ taken:
 1. Key of the `workout` object will be generated (see the 
 [Design Considerations](#design-considerations-for-creating-a-new-workout) section for more details of the `HashMap`
 implementation).
-2. The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
+2. The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList`. 
 3. The key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
 `ArrayList<String>` object stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the 
-command `workout /list` is entered by the user. This is the final step of `WorkoutList#createNewWorkout()`.
+command `workout /list` is entered by the user.
 
 **(Step 6)** Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
 the user via the terminal. The following is an example of a response after the user entered `workout /new russian twist 
