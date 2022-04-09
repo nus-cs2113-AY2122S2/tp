@@ -247,7 +247,7 @@ public class Parser {
         String actionKeyword = userInput.split(" ", 3)[1];
         String arguments = null;
         switch (actionKeyword) {
-        case LIST_ACTION_KEYWORD:
+        case ExerciseCommand.ACTION_KEYWORD_LIST:
             if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid list exercise command action.");
                 throw new InvalidCommandException(className,
@@ -293,7 +293,7 @@ public class Parser {
         String arguments = null;
         String className = this.getClass().getSimpleName();
         switch (actionKeyword) {
-        case ACTION_KEYWORD_EXERCISE:
+        case SearchCommand.ACTION_KEYWORD_EXERCISE:
             if (userInput.split(" ", 3).length == EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE) {
                 arguments = SPACE_CHARACTER;
                 return new SearchCommand(userInput, ui, exerciseList, actionKeyword, arguments);
@@ -305,7 +305,7 @@ public class Parser {
             }
             arguments = userInput.split(" ", 3)[2];
             return new SearchCommand(userInput, ui, exerciseList, actionKeyword, arguments);
-        case ACTION_KEYWORD_PLAN:
+        case SearchCommand.ACTION_KEYWORD_PLAN:
             if (userInput.split(" ", 3).length == EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE) {
                 arguments = SPACE_CHARACTER;
                 return new SearchCommand(userInput, ui, planList, actionKeyword, arguments);
@@ -317,7 +317,7 @@ public class Parser {
             }
             arguments = userInput.split(" ", 3)[2];
             return new SearchCommand(userInput, ui, planList, actionKeyword, arguments);
-        case ACTION_KEYWORD_WORKOUT:
+        case SearchCommand.ACTION_KEYWORD_WORKOUT:
             if (userInput.split(" ", 3).length == EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE) {
                 arguments = SPACE_CHARACTER;
                 return new SearchCommand(userInput, ui, workoutList, actionKeyword, arguments);
@@ -329,7 +329,7 @@ public class Parser {
             }
             arguments = userInput.split(" ", 3)[2];
             return new SearchCommand(userInput, ui, workoutList, actionKeyword, arguments);
-        case ACTION_KEYWORD_ALL:
+        case SearchCommand.ACTION_KEYWORD_ALL:
             if (userInput.split(" ", 3).length == EXPECTED_NUMBER_OF_PARAMETERS_SEARCH_SPACE) {
                 arguments = SPACE_CHARACTER;
                 return new SearchCommand(userInput, ui, exerciseList, workoutList, planList, actionKeyword, arguments);
