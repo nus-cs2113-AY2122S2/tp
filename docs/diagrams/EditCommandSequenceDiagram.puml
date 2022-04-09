@@ -7,7 +7,7 @@ participant ":MasterTimetable" as Master
 participant ":Timetable" as Timetable
 
 create Command
-none -> Command : EditCommand(name, index, newValues)
+none -> Command : EditCommand("john", 1, {"d": "friday"})
 activate Command
 none <-- Command :
 deactivate Command
@@ -15,18 +15,18 @@ deactivate Command
 none -> Command : execute(masterTimetable)
 activate Command
 
-Command ->  Master : getByName(name)
+Command ->  Master : getByName("john")
 activate Master
 Command <-- Master : timetable :Timetable
 deactivate Master
 
-Command -> Timetable : get(index - 1)
+Command -> Timetable : get(0)
 activate Timetable
 Command <-- Timetable : event :Event
 deactivate Timetable
 
 opt event is type meeting
-Command -> Command : editEvent(event, newValues)
+Command -> Command : editEvent(event, {"d": "friday"})
 activate Command
 Command --> Command : isValidInput :Boolean
 deactivate Command

@@ -4,12 +4,12 @@ hide footbox
 actor user
 participant ":Ui" as Ui
 participant ":Parser" as Parser
-participant ":XXCommand" as Command
+participant ":XYZCommand" as Command
 
 activate Ui
-user -> Ui : "xx..."
+user -> Ui : "xyz..."
 create Parser
-Ui -> Parser : Parser("xx...")
+Ui -> Parser : Parser("xyz...")
 activate Parser
 Ui <-- Parser : parser :Parser
 deactivate Parser
@@ -17,7 +17,7 @@ deactivate Parser
 Ui --> Parser : parseCommand()
 activate Parser
 
-Parser -> Parser : prepareXX()
+Parser -> Parser : prepareXYZ()
 activate Parser
 
 create Command
