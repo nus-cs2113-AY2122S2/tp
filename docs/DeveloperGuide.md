@@ -52,6 +52,23 @@ Once the doctor is removed from the doctor list, the system informs the user tha
 
 ![](DeleteDoctor.png)
 
+### Add Appointment
+Step 1: User types "add appointment" to add an appointment to IHospital. 
+IHospital will call on the Parser to parse the command. The parser will call on the AddAppointmentCommand
+
+Step 2: AddAppointmentCommand calls on the Appointment List to add an appointment to the list of appointments.
+The appointment list will create a new appointment object and add it to the list
+
+![](AddAppointment.png)
+
+### List Nurse
+Step 1: User types "list nurse" to view the list of nurses in IHospital.
+IHospital will call on the Parser to parse through the command. The Parser will invoke ListNurseListCommand.
+
+Step 2: ListNurseListCommand will call on the toString function in nurseList to print out the array of nurses
+
+![](ListNurse.png)
+
 ## Product scope
 Use in all hospitals in Singapore
 ### Target user profile
