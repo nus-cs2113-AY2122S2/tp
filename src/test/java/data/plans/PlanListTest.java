@@ -38,11 +38,16 @@ class PlanListTest {
         exerciseList.addExerciseToList("burpee");
         exerciseList.addExerciseToList("russian twist");
 
-        workoutList.createAndAddWorkout("push up /reps 10");
-        workoutList.createAndAddWorkout("sit up /reps 15");
-        workoutList.createAndAddWorkout("burpee /reps 20");
-        workoutList.createAndAddWorkout("burpee /reps 50");
-        workoutList.createAndAddWorkout("pull up /reps 10");
+        Workout newWorkout1 = workoutList.createNewWorkout("push up /reps 10");
+        workoutList.addNewWorkoutToLists(newWorkout1);
+        Workout newWorkout2 = workoutList.createNewWorkout("sit up /reps 15");
+        workoutList.addNewWorkoutToLists(newWorkout2);
+        Workout newWorkout3 = workoutList.createNewWorkout("burpee /reps 20");
+        workoutList.addNewWorkoutToLists(newWorkout3);
+        Workout newWorkout4 = workoutList.createNewWorkout("burpee /reps 50");
+        workoutList.addNewWorkoutToLists(newWorkout4);
+        Workout newWorkout5 = workoutList.createNewWorkout("pull up /reps 10");
+        workoutList.addNewWorkoutToLists(newWorkout5);
     }
 
     @Test
@@ -64,9 +69,12 @@ class PlanListTest {
 
     @Test
     void listAllPlan_expectThreePrints() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1");
-        planList.createAndAddPlan("Plan 3 /workouts 1,5,4,3");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1,5,4,3");
+        planList.addNewPlanToLists(newPlan3);
         String expectedOutput =
                 "Here are all your plan(s).\n"
                         + "To view each plan in detail, enter\n'plan /details <plan number in list>'.\n"
@@ -84,11 +92,15 @@ class PlanListTest {
     }
 
     @Test
-    void createAndAddPlan_validPlansAdded_expectValidPlans() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,5,4,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
-        planList.createAndAddPlan("Plan 3 /workouts 1, 3, 4");
-        planList.createAndAddPlan("Plan 4 /workouts 1,1, 5,2");
+    void createNewPlan_validPlansAdded_expectValidPlans() throws InvalidPlanException {
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,5,4,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1, 3, 4");
+        planList.addNewPlanToLists(newPlan3);
+        Plan newPlan4 = planList.createNewPlan("Plan 4 /workouts 1,1, 5,2");
+        planList.addNewPlanToLists(newPlan4);
 
         for (int i = 0; i < planList.getPlansDisplayList().size(); i += 1) {
             assertEquals("plan " + (i + 1), planList.getPlansDisplayList().get(i).toString());
@@ -96,46 +108,50 @@ class PlanListTest {
     }
 
     @Test
-    void createAndAddPlan_invalidPlanName_expectInvalidPlanException() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+    void createNewPlan_invalidPlanName_expectInvalidPlanException() throws InvalidPlanException {
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
         assertThrows(InvalidPlanException.class,
-            () -> planList.createAndAddPlan("Plan 1 /workouts 2,2,2"));
+            () -> planList.createNewPlan("Plan 1 /workouts 2,2,2"));
         assertThrows(InvalidPlanException.class,
-            () -> planList.createAndAddPlan("rest day /workouts 3,2,3"));
+            () -> planList.createNewPlan("rest day /workouts 3,2,3"));
         assertThrows(InvalidPlanException.class,
-            () -> planList.createAndAddPlan("REST DAY       /workouts 3,2,3,1"));
+            () -> planList.createNewPlan("REST DAY       /workouts 3,2,3,1"));
         assertThrows(InvalidPlanException.class,
-            () -> planList.createAndAddPlan("        /workouts 3,2,3,1,1"));
+            () -> planList.createNewPlan("        /workouts 3,2,3,1,1"));
         assertThrows(InvalidPlanException.class,
-            () -> planList.createAndAddPlan("Exceed the 30 characters limit yes /workouts 1,2,1"));
+            () -> planList.createNewPlan("Exceed the 30 characters limit yes /workouts 1,2,1"));
     }
 
     @Test
-    void createAndAddPlan_minMaxWorkoutsToAdd_expectException() {
+    void createNewPlan_minMaxWorkoutsToAdd_expectException() {
         assertThrows(InvalidPlanException.class,
-            () -> planList.createAndAddPlan("Exceed 10 Plan /workouts 1,1,1,1,1,2,2,2,2,2,3"));
+            () -> planList.createNewPlan("Exceed 10 Plan /workouts 1,1,1,1,1,2,2,2,2,2,3"));
         assertThrows(ArrayIndexOutOfBoundsException.class,
-            () -> planList.createAndAddPlan("Min 1 Plan /workouts"));
+            () -> planList.createNewPlan("Min 1 Plan /workouts"));
     }
 
     @Test
-    void createAndAddPlan_workoutIndexOutOfRange_expectInvalidPlanException() {
+    void createNewPlan_workoutIndexOutOfRange_expectInvalidPlanException() {
         assertThrows(InvalidPlanException.class,
-            () -> planList.createAndAddPlan("Plan 1 /workouts 1,2,3,9"));
+            () -> planList.createNewPlan("Plan 1 /workouts 1,2,3,9"));
         assertThrows(InvalidPlanException.class,
-            () -> planList.createAndAddPlan("Plan 2 /workouts 9"));
+            () -> planList.createNewPlan("Plan 2 /workouts 9"));
     }
 
     @Test
-    void createAndAddPlan_workoutWithSameSequence_expectInvalidPlanException() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+    void createNewPlan_workoutWithSameSequence_expectInvalidPlanException() throws InvalidPlanException {
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
         assertThrows(InvalidPlanException.class,
-            () -> planList.createAndAddPlan("Duplicate Sequence /workouts 1,2,3"));
+            () -> planList.createNewPlan("Duplicate Sequence /workouts 1,2,3"));
     }
 
+    //@@author TianaiYan
     @Test
     void listPlanDetails_validPlanNumber_expectThreeWorkouts() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
         String expectedOutput =
                 "Here are the 3 workouts in [" + ui.getColorText(TextColor.COLOR_YELLOW, "plan 1")
                         + "].\n"
@@ -155,9 +171,12 @@ class PlanListTest {
 
     @Test
     void listPlanDetails_planNumberOutOfRange_expectInvalidPlanException() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,5,4,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
-        planList.createAndAddPlan("Plan 3 /workouts 1, 3, 4");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,5,4,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1, 3, 4");
+        planList.addNewPlanToLists(newPlan3);
 
         String planNumber = "5";
         assertThrows(InvalidPlanException.class,
@@ -167,9 +186,12 @@ class PlanListTest {
 
     @Test
     void listPlanDetails_inputArgumentIsNotANumber_expectNumberFormatException() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,5,4,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
-        planList.createAndAddPlan("Plan 3 /workouts 1, 3, 4");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,5,4,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1, 3, 4");
+        planList.addNewPlanToLists(newPlan3);
 
         String invalidArgument = "3a";
         assertThrows(NumberFormatException.class,
@@ -179,9 +201,12 @@ class PlanListTest {
 
     @Test
     void deletePlan_validIndexToDelete_expectDeletePlanMessage() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,5,4,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
-        planList.createAndAddPlan("Plan 3 /workouts 1, 3, 4");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,5,4,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1, 3, 4");
+        planList.addNewPlanToLists(newPlan3);
 
         int planNumberToDelete = 2;
 
@@ -192,9 +217,12 @@ class PlanListTest {
 
     @Test
     void deletePlan_indexOutOfRange_expectInvalidPlanException() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,5,4,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
-        planList.createAndAddPlan("Plan 3 /workouts 1, 3, 4");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,5,4,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1, 3, 4");
+        planList.addNewPlanToLists(newPlan3);
 
         String planNumberToDelete = "5";
         assertThrows(InvalidPlanException.class,
@@ -204,9 +232,12 @@ class PlanListTest {
 
     @Test
     void deleteWorkout_inputArgumentIsNotANumber_expectNumberFormatException() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,5,4,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
-        planList.createAndAddPlan("Plan 3 /workouts 1, 3, 4");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,5,4,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1, 3, 4");
+        planList.addNewPlanToLists(newPlan3);
 
         String invalidArgument = "3a";
         assertThrows(NumberFormatException.class,
@@ -216,9 +247,12 @@ class PlanListTest {
 
     @Test
     void getIndexNumFromPlanName_planNameExists_expectCorrespondingPlanNumber() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1");
-        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1,5, 3");
+        planList.addNewPlanToLists(newPlan3);
 
         assertEquals(2, planList.getIndexNumFromPlanName("Plan 2"));
 
@@ -226,9 +260,12 @@ class PlanListTest {
 
     @Test
     void getIndexNumFromPlanName_planNameNotFound_expectInvalidPlanException() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1");
-        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1,5, 3");
+        planList.addNewPlanToLists(newPlan3);
 
         assertThrows(InvalidPlanException.class,
             () -> planList.getIndexNumFromPlanName("Plan 4"));
@@ -238,9 +275,12 @@ class PlanListTest {
     @Test
     void insertPlanIntoList_validNewPlan_expectNewPlanInList() throws InvalidPlanException,
             InvalidWorkoutException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1");
-        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1,5, 3");
+        planList.addNewPlanToLists(newPlan3);
 
         assertEquals(3, planList.getPlansDisplayList().size());
         ArrayList<Workout> listOfWorkouts = new ArrayList<Workout>();
@@ -253,9 +293,12 @@ class PlanListTest {
 
     @Test
     void insertPlanIntoList_invalidNewPlan_expectInvalidWorkoutException() throws InvalidPlanException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1");
-        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1,5, 3");
+        planList.addNewPlanToLists(newPlan3);
 
         ArrayList<Workout> listOfWorkouts = new ArrayList<Workout>();
         Workout workout = new Workout("pull up", 45);
@@ -269,9 +312,12 @@ class PlanListTest {
     @Test
     void deletePlanContainsDeletedWorkout_WorkoutNotInPlan_expectNoChangeWithPlanList() throws
             InvalidPlanException, InvalidWorkoutException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1");
-        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1,5, 3");
+        planList.addNewPlanToLists(newPlan3);
 
         int workoutNumberToDelete = 4;
 
@@ -285,9 +331,12 @@ class PlanListTest {
     @Test
     void deletePlanContainsDeletedWorkout_WorkoutInPlan_expectTwoDeletion() throws
             InvalidPlanException, InvalidWorkoutException {
-        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
-        planList.createAndAddPlan("Plan 2 /workouts 1");
-        planList.createAndAddPlan("Plan 3 /workouts 1,5, 3");
+        Plan newPlan1 = planList.createNewPlan("Plan 1 /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("Plan 2 /workouts 1");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("Plan 3 /workouts 1,5, 3");
+        planList.addNewPlanToLists(newPlan3);
 
         int workoutNumberToDelete = 3;
 
@@ -297,5 +346,5 @@ class PlanListTest {
         assertEquals(1, planList.getPlansDisplayList().size());
 
     }
-
+    //@@author
 }

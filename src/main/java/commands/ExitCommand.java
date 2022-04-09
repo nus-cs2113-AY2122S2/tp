@@ -5,7 +5,7 @@ package commands;
  * as the exiting of the program is done by the WerkIt class.
  */
 public class ExitCommand extends Command {
-    public static final String BASE_KEYWORD = "exit";
+    public static final String KEYWORD_BASE = "exit";
 
     public ExitCommand(String userInput) {
         super(userInput);

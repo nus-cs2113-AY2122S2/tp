@@ -36,12 +36,12 @@ public class FileManager {
     public static final String[] ILLEGAL_CHARACTERS = {"|"};
 
     // Directory and filenames for data storage
-    public static final String USER_WORKING_DIRECTORY_PROPERTY = "user.dir";
-    public static final String DATA_DIRECTORY_NAME = "werkItResources";
-    public static final String EXERCISE_FILENAME = "exercises.txt";
-    public static final String WORKOUT_FILENAME = "workouts.txt";
-    public static final String PLAN_FILENAME = "plans.txt";
-    public static final String SCHEDULE_FILENAME = "schedule.txt";
+    public static final String PROPERTY_USER_WORKING_DIRECTORY = "user.dir";
+    public static final String NAME_DATA_DIRECTORY = "werkItResources";
+    public static final String NAME_EXERCISE_FILE = "exercises.txt";
+    public static final String NAME_WORKOUT_FILE = "workouts.txt";
+    public static final String NAME_PLAN_FILE = "plans.txt";
+    public static final String NAME_SCHEDULE_FILE = "schedule.txt";
 
     // Delimiters for processing file data
     private static final String FILE_DATA_DELIMITER_REGEX = "\\|";
@@ -105,12 +105,12 @@ public class FileManager {
      * are also instantiated.
      */
     public FileManager(PlanList planList) {
-        String workingDirectory = System.getProperty(USER_WORKING_DIRECTORY_PROPERTY);
-        this.directoryPath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME);
-        this.exerciseFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, EXERCISE_FILENAME);
-        this.workoutFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, WORKOUT_FILENAME);
-        this.planFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, PLAN_FILENAME);
-        this.scheduleFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, SCHEDULE_FILENAME);
+        String workingDirectory = System.getProperty(PROPERTY_USER_WORKING_DIRECTORY);
+        this.directoryPath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY);
+        this.exerciseFilePath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY, NAME_EXERCISE_FILE);
+        this.workoutFilePath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY, NAME_WORKOUT_FILE);
+        this.planFilePath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY, NAME_PLAN_FILE);
+        this.scheduleFilePath = Paths.get(workingDirectory, NAME_DATA_DIRECTORY, NAME_SCHEDULE_FILE);
 
         this.planList = planList;
 
@@ -345,7 +345,7 @@ public class FileManager {
         assert (Files.exists(getDirectoryPath())) : "Directory does not exist, but it should.";
         assert (Files.exists(getExerciseFilePath())) : "Exercise file does not exist, but it should.";
         assert (Files.exists(getWorkoutFilePath())) : "Workout file does not exist, but it should.";
-        // TODO: assert for plans (Haofeng?)
+        assert (Files.exists(getPlanFilePath())) : "Plan file does not exist, but it should.";
         assert (Files.exists(getScheduleFilePath())) : "Schedule file does not exist, but it should.";
     }
 
@@ -611,8 +611,9 @@ public class FileManager {
         String workoutName = workoutFileDataLine[0].toLowerCase();
         String workoutReps = workoutFileDataLine[1];
 
-        String userArguments = workoutName + " " + WorkoutCommand.CREATE_ACTION_REPS_KEYWORD + " " + workoutReps;
-        workoutList.createAndAddWorkout(userArguments);
+        String userArguments = workoutName + " " + WorkoutCommand.ACTION_KEYWORD_CREATE_REPS + " " + workoutReps;
+        Workout newWorkout = workoutList.createNewWorkout(userArguments);
+        workoutList.addNewWorkoutToLists(newWorkout);
     }
 
     /**

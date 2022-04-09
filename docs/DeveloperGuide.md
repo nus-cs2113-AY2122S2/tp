@@ -132,9 +132,20 @@ and their interactions.
 
 #### How the components interact with each other
 The *Component Interaction Diagram* shows the inner workings of how each component in WerkIt interacts.
-The diagram depicts a scenario where a user attempts to create a workout, `workout /new sit up /reps 5`.
 
 ![Architecture Sequence Diagram](uml/sequenceDiagrams/miscellaneous/images/ArchitectureSequenceDiagram.png)
+
+<span class="box info">:memo: To improve the diagram's readability, 
+some methods or parameters have been omitted.</span>
+
+1. When `WerkIt` class is initialize, `UI` class is called to ask and get the user input.
+2. The `Parser` class parses the user input and identifies the command type (e.g. plan/schedule/workout/exercise). Based
+   on the command type, the corresponding `Command` object is created.
+3. When the `Command` object is executed, a sequence of actions will be performed. 
+   The actions performed are dependent on the type of action specified by the user.
+4. After the execution process has finished, an appropriate message will be printed to show the user that the command 
+   is executed successfully.
+5. Finally, the change will be written to local file.
 
 ### Component Overview
 
@@ -262,12 +273,13 @@ How the `Logic` component works:
 <br/>
 
 Illustration of the interactions within the `Logic` component can be found
-in the sequence diagram below. The example given is for the creation of new workouts (`workout /new`):
+in the sequence diagram below. 
+The example given below is for the listing of workouts in WerkIt! (`workout /list`):
 <br><br>
 
 ![logicComponentUML](uml/sequenceDiagrams/miscellaneous/images/logicComponentSD.png)
 <br><br>
-<span class="box info">:memo: This is a high-level overview of how the creation of workouts
+<span class="box info">:memo: This is a high-level overview of how the listing of workouts
 is done. To improve readability, some classes and methods have been omitted from the diagram above.</span>
 
 <br>
@@ -332,8 +344,8 @@ will parse the `workout` base word and proceed to create a `WorkoutCommand` obje
 Once the `WorkoutCommand` object is created, the `WorkoutCommand#execute()` method
 is called. Depending on the type of command action, this method will
 call the appropriate operations from the `WorkoutList` class. For instance, if the command action
-is `/new`, the `WorkoutCommand#execute()` method will call `WorkoutList#createAndAddWorkout()`
-to create a new workout in the application. 
+is `/new`, the `WorkoutCommand#execute()` method will call `WorkoutList#createNewWorkout()`
+to create a new workout, followed by `WorkoutList#addNewWorkoutToLists()` to add the new workout to the application. 
 To view the details of the `WorkoutCommand#execute()`, click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/WorkoutCommand.java). 
 <br><br>
 When all methods except the `listAllWorkout()` method are executed, the
@@ -373,11 +385,12 @@ will parse the `plan` base word and proceed to create a `PlanCommand` object thr
 Once the `PlanCommand` object is created, the `PlanCommand#execute()` method
 is called. Depending on the type of command action, this method will
 call the appropriate operations from the `PlanList` class. For instance, if the command action
-is `/new`, `PlanList#createAndAddPlan(userArgument)` will be called to create a new plan.
+is `/new`, `PlanList#createNewPlan(userArgument)` will be called to create a new plan, followed
+by `PlanList#addNewPlanToLists()` to add the newly created plan to the application's plan list.
 To view the details of the `PlanCommand#execute()`,
 click [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/blob/master/src/main/java/commands/PlanCommand.java).
 
-When `createAndAddPlan()` and  `deletePlan()` method in `PlanList` class are executed, the
+When `createNewPlan()` and  `deletePlan()` method in `PlanList` class are executed, the
 `FileManager` and `UI` classes will call its appropriate methods depending on the command action.
 From the previous example, the `/new` workout command action will call
 the `UI#printNewPlanCreatedMessage()` and also the `FileManager#writeNewPlanToFile()`
@@ -689,17 +702,17 @@ a `WorkoutCommand` object that contains the user's input.
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** When `WorkoutCommand#execute()` is called, because this is a `workout /new` command, the method will call
-`WorkoutList#createAndAddWorkout()`.
+`WorkoutList#createNewWorkout()`.
 
-The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createAndAddWorkout()`:
+The following sequence diagram is the detailed procedures for Step 2's `WorkoutList#createNewWorkout()`:
 
-![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateAndAddWorkout.png)
+![createNewWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/workouts/images/CreateNewWorkout.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and 
-exception throws in `WorkoutList#createAndAddWorkout()` have been omitted.</span> 
+exception throws in `WorkoutList#createNewWorkout()` have been omitted.</span> 
 
 **(Before Step 2.1)** Methods from the `String` and `Integer` classes are called to parse the
-argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the
+argument given to `WorkoutList#createNewWorkout()` to obtain the following information required to create the
 `Workout` object:
 1. Name of the exercise
 2. Number of repetitions associated with the exercise in (1).
@@ -720,20 +733,21 @@ If requirement 1 is not met, an `InvalidExerciseException` will be thrown. If re
 Note that the above methods and exception throws are not shown in the sequence diagram to improve the readability of the 
 sequence diagram.
 
-**(Step 2.1)** If the above checks pass, a new `Workout` object with the user-specified exercise name and
-repetition value is created. 
+**(Steps 2.1 and 2.2)** If the above checks pass, a new `Workout` object with the user-specified exercise name and
+repetition value is created. The new object is then returned to `WorkoutCommand#execute()` 
 
-**(Step 2.3)** Once the `Workout` object is created, a key of the object will be generated (see the 
+**(Steps 4 and 5)** The new `Workout` object passed to `WorkoutList#addNewWorkoutToLists()` to add to two lists maintained
+in the `WorkoutList` object: `workoutsHashMapList` and `workoutsDisplayList`. The following steps are 
+taken:
+1. Key of the `workout` object will be generated (see the 
 [Design Considerations](#design-considerations-for-creating-a-new-workout) section for more details of the `HashMap`
 implementation).
-
-**(Step 2.5)** The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
-
-**(Step 2.7)** The key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
+2. The key-`Workout` pair is stored in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
+3. The key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
 `ArrayList<String>` object stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the 
-command `workout /list` is entered by the user. This is the final step of `WorkoutList#createAndAddWorkout()`.
+command `workout /list` is entered by the user. This is the final step of `WorkoutList#createNewWorkout()`.
 
-**(Step 4)** Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
+**(Step 6)** Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
 the user via the terminal. The following is an example of a response after the user entered `workout /new russian twist 
 /reps 50`:
 ```
@@ -745,7 +759,7 @@ Alright, the following workout has been created:
 ----------------------------------------------------------------------
 ```
 
-**(Step 6)** `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
+**(Step 8)** `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
 `workouts.txt` which is stored on the user's local filesystem.
 
 <span class="info box">:memo: For more information on how the data is written to `workouts.txt`, please refer to
@@ -1066,16 +1080,16 @@ a `PlanCommand` object that contains the user's input.
 
 **(Step 1)** When the `PlanCommand#execute()` method is called, it will identify
 that the plan action is of type `/new`. Subsequently, it will call the
-`PlanList#createAndAddPlan()` method to perform the creation of the plan.
+`PlanList#createNewPlan()` method to perform the creation of the plan.
 <br><br>
-The following sequence diagram is the detailed procedure for Step 2's `PlanList#createAndAddPlan()`:
+The following sequence diagram is the detailed procedure for Step 2's `PlanList#createNewPlan()`:
 <br><br>
-![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
+![Create New Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/createPlan-Part2.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls, and exception throws in
- `PlanList#createAndAddPlan()` have been omitted.</span>
+ `PlanList#createNewPlan()` have been omitted.</span>
 
-**(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createAndAddPlan()`
+**(Before Steps 2.1 to 2.2)** The user argument parameter of the `PlanList#createNewPlan()`
 method is parsed to obtain the following information required to create the `Plan` object:
 1. Name of the plan.
 2. Workout index numbers in the workout list separated by comma.
@@ -1085,7 +1099,7 @@ Once the information are obtained, the name of the plan to be created will be va
 This is to ensure all plan names are valid and unique in the application.
 If the plan name is invalid, an `InvalidPlanException` exception will be thrown.
 <br><br>
-Subsequently, this `PlanList#createAndAddPlan()` method will find out the number of workouts
+Subsequently, this `PlanList#createNewPlan()` method will find out the number of workouts
 to be added into the new plan. This is done in order to check that the number of workouts to be added into the new plan
 does not exceed 10 workouts, and there should minimally
 be 1 workout in a plan. If the new plan does not meet the requirements,
@@ -1101,19 +1115,29 @@ the application's workout list range.
 If the workout indexes are valid, the valid `Workout` object is fetched from the application's workout list based 
 on the workout index and then added into the `ArrayList<Workout>` that was created in the previous step (Steps 2.1 to 2.2).
 The loop will continue until all workouts to be added in the new plan is added into that `ArrayList<Workout>`.
-<br><br>
-**(Steps 2.5 to 2.10)** With the valid plan name and the `ArrayList<Workout>` containing the workouts to be added into the new plan, 
-a new `Plan` object is created. However, before creating the `Plan` object, the `PlanList#createAndAddPlan()` method will 
+<br/><br/>
+**(Steps 2.5 to 2.6)** With the valid plan name and the `ArrayList<Workout>` containing the workouts to be added into the new plan, 
+a new `Plan` object is created. However, before creating the `Plan` object, the `PlanList#createNewPlan()` method will 
 check that the new plan to be created does not contain the same workout order as any existing plans. If it does, 
 an `InvalidPlanException` exception will be thrown.
-<br><br>
+<br/><br/>
 If it is confirmed that the new plan does not contain
 the same workout order as any existing plan, a new `Plan` object is created.
-This new `Plan` object is then added to the application's plan list.
 <br><br>
-**(Step 3)** The `PlanList#createAndAddPlan()` method returns the new `Plan` object to `PlanCommand`.
-<br><br>
-**(Steps 4 to 5)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage()` is called
+**(Step 3)** The `PlanList#createNewPlan()` method returns the newly created `Plan` object to `PlanCommand`.
+<br/><br/>
+**(Steps 4 to 5)** The `PlanCommand` object will then call the `PlanList#addNewPlanToLists()` method to add this new
+`Plan` object to two lists maintained in the `PlanList` object: `plansHashMapList` and `plansDisplayList`.
+The following are the steps taken:<br/>
+
+1. Key of the `Plan` object will be generated. In this case, the key is the unique plan name.
+2. The key-`Plan` pair is stored in `plansHashMapList` which in turn is stored in `PlanList`.
+3. The key of the newly-created `Plan` object is added to the `plansDisplayList`, an `ArrayList<String>` object stored in `PlanList`.
+This ArrayList will be used for displaying the plans when the command `plan /list` is entered by the user.
+
+After the new `Plan` object has been added, this `PlanList#addNewPlanToLists()` method will return to the `PlanCommand` object.
+<br/><br/>
+**(Steps 6 to 7)** Upon returning to the `PlanCommand` object, the `UI#printNewPlanCreatedMessage()` is called
 to display the plan that has been created to the user via the terminal. The following is an example
 of a successful plan creation message (new plan is called "grow my muscles"):
 ```
@@ -1124,7 +1148,7 @@ Alright, the following plan has been created:
 
 ----------------------------------------------------------------------
 ```
-**(Steps 6 to 7)** `FileManager#writeNewPlanToFile()` is called to write the newly-created `Plan` 
+**(Steps 8 to 9)** `FileManager#writeNewPlanToFile()` is called to write the newly-created `Plan` 
 object's data into `plans.txt`, which is stored on the user's local filesystem.
 For more information on the file management,
 refer to this [section](DeveloperGuide.md#writing-a-new-line-of-data-to-the-resource-file).
@@ -1616,67 +1640,116 @@ This completes the process of clearing of all plans stored in the schedule on We
 The overview of the design of the search features can be found [here](#search-related-features).
 
 #### Search For Exercise
-Format: `search /exercise <keywords>`
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/exercise` and call the constructor of `SearchCommand` class by passing relevant parameters related to search exercise
-to the constructor. The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching exercises or 'Sorry, no matching exercise found' if the user has entered the command
-correctly.
+A summary of the general procedure of search for exercise in the application is as follows:
+1. User enters the command `search /exercise <exercise keyword>`.
+2. A list of exercise names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /exercise` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchExercise.png)
 
-#### Search For Workout
-Format: `search /workout <keywords>`
+(Before Step 1) The user's input (in this case will be a `search /exercise <exercise keyword>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/workout` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
-The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching names of workout or 'Sorry, no matching workout found' if the user has entered the command
-correctly.
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/exercise`.
+Subsequently, it will call the `ExerciseList#getExerciseList()` method to search from all the available exercises.
+
+(Step 4) Based on the exercises from the `exerciseList`, the `searchExercise()` will retrieve all the exercises with name
+containing `<exercise keyword>` and display them in the user's terminal.
+
+(Step 5) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for exercise in WerkIt!.
+
+---
+
+#### Search For Workout
+
+A summary of the general procedure of search for workout in the application is as follows:
+1. User enters the command `search /workout <exercise keyword or number of reps>`.
+2. A list of workouts with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /workout` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchWorkout.png)
 
-#### Search For Plan
-Format: `search /plan <keywords>`
+(Before Step 1) The user's input (in this case will be a `search /workout <exercise keyword or number of reps>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/plan` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
-The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching names of plan or 'Sorry, no matching plan found' if the user has entered the command
-correctly.
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/workout`.
+Subsequently, it will call the `WorkoutList#getWorkoutsDisplayList()` method to search from all the existing workouts.
+
+(Step 4) Based on the `workout` objects from the `workoutList`, the `searchWorkout()` will retrieve all the workouts with name
+containing `<exercise keyword>` or repetitions equals to `<number of reps>`, and display them in the user's terminal.
+
+(Step 5) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for workout in WerkIt!.
+
+---
+
+#### Search For Plan
+
+A summary of the general procedure of search for plan in the application is as follows:
+1. User enters the command `search /plan <plan keyword>`.
+2. A list of plan names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /plan` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchPlan.png)
 
-#### Search For All
-Format: `search /all <keywords>`
+(Before Step 1) The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
 
-The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
-`/all` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
-The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
-method to `Parser#parseUserInput(String userInput)` method, and finally returned by
-`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
-be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
-will either be a list of matching names of exercise, workout and plan or not found messages if the user has entered the command correctly.
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 3) When the SearchCommand#execute() method is called, it will identify that the search action is of type `/plan`.
+Subsequently, it will call the `PlanList#getPlansDisplayList()` method to search from all the existing plans.
+
+(Step 4) Based on the `plan` objects from the `planList`, the `searchPlan()` will retrieve all the plans with name
+containing `<plan keyword>`, and display them in the user's terminal.
+
+(Step 5) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for plan in WerkIt!.
+
+---
+
+#### Search For All
+
+A summary of the general procedure of search for plan in the application is as follows:
+1. User enters the command `search /all <keyword>`.
+2. A list of exercise name, workouts and plan names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /all` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
+
+(Before Step 1) The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
+and parsed to obtain a `SearchCommand` object that contains the user's input.
+
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
+(Steps 1 to 7) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/all`.
+Subsequently, it will call the `ExerciseList#getExerciseList()`, `WorkoutList#getWorkoutsDisplayList()` and
+`PlanList#getPlansDisplayList()` methods to search from all the existing exercises, workouts and plans.
+
+(Step 8) Based on the exercises, `workout` objects and `plan` objects retrieved, the `searchAll()` will retrieve 
+all the matching results, and display them in the user's terminal.
+
+(Step 9) The `SearchCommand` object returns to the WerkIt object.
+
+This completes the process of search for all in WerkIt!.
+
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
@@ -2058,6 +2131,23 @@ Testers are welcome conduct more extensive and rigorous testing.
 ### Test on Exercise Features
 #### Listing All Exercises
 
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#show-all-exercises-exercise-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                    | Command          | Expected result                                  |
+|:-----------------------------|:-----------------|:-------------------------------------------------|
+| Valid list exercise command. | `exercise /list` | List down all exercises stored in exercise list. |
+
+##### Negative Test Cases
+
+| Test Case                                    | Command                    | Expected result                                                  |
+|:---------------------------------------------|:---------------------------|:-----------------------------------------------------------------|
+| Valid list command with extra arguments.     | `exercise /list extraline` | Error response (invalid user argument), exercises not displayed. |
+| Extra whitespaces between command arguments. | `exercise         /list`   | Error response (invalid user action), exercise not displayed.    |
+
 ---
 
 ### Test on Workout Features
@@ -2100,7 +2190,7 @@ The following are some test cases for you to try:
 | Test Case                                     | Command                   | Expected result                                                 |
 |:----------------------------------------------|:--------------------------|:----------------------------------------------------------------|
 | Valid list command with extra arguments.      | `workout /list extraline` | Error response (invalid user argument), workouts not displayed. |
-| Extra whitespaces between commands arguments. | `workout         /list`   | Error response (invalid user action), schedule not displayed.   |
+| Extra whitespaces between commands arguments. | `workout         /list`   | Error response (invalid user action), workouts not displayed.   |
 
 #### Deleting An Existing Workout
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-workout-workout-delete).)
@@ -2126,9 +2216,38 @@ The following are some test cases for you to try:
 
 
 #### Updating An Existing Workout
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#update-a-workout-workout-update).)
 
+**Prerequisites:** Ensure that your workout list has at least one
+workout for you to test the `workout /update` command.
+See [this section](#creating-a-new-workout) to view how you can populate your workout list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                           | Command                        | Expected result                                                                                                                                                                                                                                                                    |
+|:--------------------------------------------------------------------|:-------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid workout index number and new number of repetitions.           | `workout /update 1 10`         | The first workout in the workout list is updated to 10 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.         |
+| Valid workout index number and a highest new number of repetitions. | `workout /update 2 2147483647` | The first workout in the workout list is updated to 2147483647 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps. |
+| Valid workout index number and a minimum new number of repetitions. | `workout /update 3 1`          | The first workout in the workout list is updated to 1 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.          |
+
+##### Negative Test Cases
+
+| Test Case                                                                                                                                     | Command                           | Expected result                                                     |
+|:----------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|:--------------------------------------------------------------------|
+| Valid workout index number but new repetition value is smaller than 0.                                                                        | `workout /update 1 0`             | Error response (reps specified is invalid), workout is not updated. |
+| Valid workout index number but new repetition value exceeds the upper bound for int data type.                                                | `workout /update 2 2147483648`    | Error response (invalid user argument), workout is not updated.     |
+| Valid workout index but new repetition value is identical with the repetition value of a workout in the workout list with same exercise name. | `workout /update 3 1`             | Error response (identical workout), workout is not updated.         |
+| Workout index number or new repetition value is not an integer.                                                                               | `workout /update a 2`             | Error response (invalid user argument), workout is not updated.     |
+| Missing either workout index number or new repetition value.                                                                                  | `workout /update 4`               | Error response (insufficient argument), workout is not updated.     |
+| Missing both workout index number and new repetition value.                                                                                   | `workout /update `                | Error response (invalid command).                                   |
+| Extra whitespaces between commands arguments.                                                                                                 | `workout         /update 1 2`     | Error response (invalid user action), workout is not updated.       |
+| Extra whitespaces between command parameters.                                                                                                 | `workout /update     1         2` | Error response (invalid user argument), workout is not updated.     |
+| Command with extra arguments.                                                                                                                 | `workout /update 1 8 8`           | Error response (invalid user argument), workout is not updated.     |
+
+<br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
-
 
 ---
 
@@ -2182,8 +2301,56 @@ The following are some test cases for you to try:
 
 
 #### Listing Workouts In A Plan
-#### Deleting An Existing Plan
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#list-details-of-a-plan-plan-details).)
 
+**Prerequisites:** Ensure that your plan list has at least one
+plan for you to test the `plan /details` command.
+See [this section](#creating-a-new-plan) to view how you can populate your plan list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case               | Command           | Expected result                                        |
+|:------------------------|:------------------|:-------------------------------------------------------|
+| Valid plan index number | `plan /details 1` | All workouts in plan with index number 1 is displayed. |
+
+##### Negative Test Cases
+
+| Test Case                                                                                      | Command                   | Expected result                                                            |
+|:-----------------------------------------------------------------------------------------------|:--------------------------|:---------------------------------------------------------------------------|
+| Plan index number is smaller than 1 or greater than the total number of plan in the plan list. | `plan /details 0`         | Error response (index out of range), workouts in plan is not displayed.    |
+| Command with extra arguments.                                                                  | `plan /details 1 1`       | Error response (invalid user argument), workouts in plan is not displayed. |
+| Extra whitespaces between commands arguments.                                                  | `plan         /details 1` | Error response (invalid user action), workouts in plan is not displayed.   |
+| Missing plan index number.                                                                     | `plan /details`           | Error response (invalid command).                                          |
+| Plan index number is not an integer.                                                           | `plan /details a`         | Error response (invalid user argument).                                    |
+
+#### Deleting An Existing Plan
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-plan-plan-delete).)
+
+**Prerequisites:** Ensure that your plan list has at least one
+plan for you to test the `plan /delete` command.
+See [this section](#creating-a-new-plan) to view how you can populate your plan list.
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case               | Command          | Expected result                      |
+|:------------------------|:-----------------|:-------------------------------------|
+| Valid plan index number | `plan /delete 1` | Plan with index number 1 is deleted. |
+
+##### Negative Test Cases
+
+| Test Case                                                                                      | Command                  | Expected result                                              |
+|:-----------------------------------------------------------------------------------------------|:-------------------------|:-------------------------------------------------------------|
+| Plan index number is smaller than 1 or greater than the total number of plan in the plan list. | `plan /delete 0`         | Error response (index out of range), plan is not deleted.    |
+| Command with extra arguments.                                                                  | `plan /delete 1 1`       | Error response (invalid user argument), plan is not deleted. |
+| Extra whitespaces between commands arguments.                                                  | `plan         /delete 1` | Error response (invalid user action), plan is not deleted.   |
+| Missing plan index number.                                                                     | `plan /delete`           | Error response (invalid command).                            |
+| Plan index number is not an integer.                                                           | `plan /delete a`         | Error response (invalid user argument).                      |
+
+<br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
 ---
@@ -2276,10 +2443,92 @@ The following are some test cases for you to try:
 ---
 
 ### Test on Search Features
+
 #### Searching For Exercise
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-exercise-search-exercise).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                                 | Command                             | Expected result                                         |
+|:----------------------------------------------------------------------------------------------------------|:------------------------------------|:--------------------------------------------------------|
+| Valid searching for exercise command.                                                                     | `search /exercise`                  | All exercise names containing whitespace will be shown. |
+| Valid searching for exercise command.                                                                     | `search /exercise a`                | All exercise names containing 'a' will be shown.        |
+
+##### Negative Test Cases
+
+| Test Case                                                             | Command                    | Expected result                                                                                 |
+|:----------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/exercise`. | `search       /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 #### Searching For Workout
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-workout-search-workout).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                                                 | Command                            | Expected result                                                      |
+|:--------------------------------------------------------------------------------------------------------------------------|:-----------------------------------|:---------------------------------------------------------------------|
+| Valid searching for workout command.                                                                                      | `search /workout`                  | All workouts with exercise name containing whitespace will be shown. |
+| Valid searching for workout command.                                                                                      | `search /workout 15`               | All workouts with repetitions equal to 15 will be shown.             |
+| Valid searching for workout command.                                                                                      | `search /workout a`                | All workouts with exercise name containing 'a' will be shown.        |
+
+
+##### Negative Test Cases
+
+| Test Case                                                            | Command                    | Expected result                                                                                 |
+|:---------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/workout`. | `search       /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 #### Searching For Plan
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-plan-search-plan).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                     | Command                         | Expected result                                          |
+|:----------------------------------------------------------------------------------------------|:--------------------------------|:---------------------------------------------------------|
+| Valid searching for plan command.                                                             | `search /plan`                  | All plans with name containing whitespace will be shown. |
+| Valid searching for plan command.                                                             | `search /plan a`                | All plans with name containing 'a' will be shown.        |
+
+
+##### Negative Test Cases
+
+| Test Case                                                         | Command                     | Expected result                                                                                 |
+|:------------------------------------------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/plan`. | `search        /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 #### Searching For All
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-all-search-all).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                | Command                        | Expected result                                                                                                               |
+|:-----------------------------------------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
+| Valid searching for all command.                                                         | `search /all`                  | All exercises, workouts and plans with name containing whitespace will be shown.                                              |
+| Valid searching for all command.                                                         | `search /all a`                | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
+| Valid searching for all command.                                                         | `search /all 15`               | All exercises and plans with name containing '15' will be shown, and all workouts with repetitions equal to 15 will be shown. |
+
+
+##### Negative Test Cases
+
+| Test Case                                                        | Command                | Expected result                                                                                 |
+|:-----------------------------------------------------------------|:-----------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/all`. | `search        /all a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
@@ -2314,7 +2563,7 @@ rely on former test cases.</span>
 | 6. Delete data from `plans.txt` and `schedule.txt` is updated accordingly. | `plans /delete 3` | `plans.txt` will be updated to the following:<br/><br/>![plans.txt delete plan](images/plansTxtDeletePlan.png)<br/><br/>`schedule.txt` will also be updated as one of the days has the deleted plan:<br/><br/>![schedule.txt plan delete](images/scheduleTxtPlanDeleteCascade.png)                                                                                                                                                                                                                             |
 | 7. Delete workout from `workouts.txt` and `plans.txt` and `schedule.txt` are updated accordingly. | `workout /delete 1` | `workout.txt` will be updated to the following:<br/><br/>![workout.txt workout delete](images/workoutsTxtDeleteWorkout.png)<br/><br/>`plans.txt` will also be updated as some plans with the deleted workout are affected:<br/><br/>![plans.txt workout delete cascasde](images/plansTxtWorkoutDeleteCascade.png)<br/><br/>Likewise, `schedule.txt` is also updated as a plan assigned to a day has been affected:<br/><br/>![schedule.txt workout delete cascade](images/scheduleTxtWorkoutDeleteCascade.png) |                                    
 
-
+<br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
-
+<br>
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>

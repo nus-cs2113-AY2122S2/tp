@@ -3,9 +3,11 @@ package commands;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.plans.InvalidPlanException;
+import data.plans.Plan;
 import data.plans.PlanList;
 import data.schedule.DayList;
 import data.workouts.InvalidWorkoutException;
+import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,9 +53,12 @@ class PlanCommandTest {
         exerciseList.addExerciseToList("sit up");
         exerciseList.addExerciseToList("pull up");
 
-        workoutList.createAndAddWorkout("push up /reps 10");
-        workoutList.createAndAddWorkout("sit up /reps 15");
-        workoutList.createAndAddWorkout("pull up /reps 20");
+        Workout newWorkout1 = workoutList.createNewWorkout("push up /reps 10");
+        workoutList.addNewWorkoutToLists(newWorkout1);
+        Workout newWorkout2 = workoutList.createNewWorkout("sit up /reps 15");
+        workoutList.addNewWorkoutToLists(newWorkout2);
+        Workout newWorkout3 = workoutList.createNewWorkout("pull up /reps 20");
+        workoutList.addNewWorkoutToLists(newWorkout3);
     }
 
     @Test
@@ -176,7 +181,8 @@ class PlanCommandTest {
 
     @Test
     void execute_validListPlan_expectSuccess() throws InvalidCommandException, InvalidPlanException {
-        planList.createAndAddPlan("Plan A /workouts 1,2");
+        Plan newPlan1 = planList.createNewPlan("Plan A /workouts 1,2");
+        planList.addNewPlanToLists(newPlan1);
         PlanCommand listPlanCommand = parser.createPlanCommand("plan /list");
         String expectedOutput =
                 "Here are all your plan(s).\n"

@@ -5,6 +5,7 @@ import data.exercises.InvalidExerciseException;
 import data.plans.PlanList;
 import data.schedule.DayList;
 import data.workouts.InvalidWorkoutException;
+import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -236,7 +237,8 @@ public class WorkoutCommandTest {
                 String workoutFileDataLine = workoutFileReader.nextLine();
                 String getExerciseNameLine = workoutFileDataLine.split("\\|")[0].trim();
                 String getRepsLine = workoutFileDataLine.split("\\|")[1].trim();
-                wl.createAndAddWorkout(getExerciseNameLine + " /reps " + getRepsLine);
+                Workout newWorkout = wl.createNewWorkout(getExerciseNameLine + " /reps " + getRepsLine);
+                wl.addNewWorkoutToLists(newWorkout);
                 if (workoutFileDataLine.contains(createTestWorkout)) {
                     createTestWorkout = "squat | " + rand.nextInt(upperbound);
                 }
