@@ -302,34 +302,6 @@ public class Validator {
         }
     }
 
-    public static void validateFindPatient(String[] parameters) throws HalpmiException {
-        switch (parameters[0]) {
-        case "nric":
-            validateNric(parameters[1]);
-            break;
-        case "name":
-            validateFullName(parameters[1]);
-            break;
-        case "age":
-            validateAge(parameters[1]);
-            break;
-        case "gender":
-            validateGender(parameters[1]);
-            break;
-        case "address":
-            validateAddress(parameters[1]);
-            break;
-        case "dob":
-            validateDob(parameters[1]);
-            break;
-        case "admissiondate":
-            validateAdmissionDate(parameters[1]);
-            break;
-        default:
-            throw new HalpmiException("Input must be an attribute of Patient");
-        }
-    }
-
     public static void validateFindAppointment(String[] parameters) throws HalpmiException {
         switch (parameters[0]) {
         case "id":
@@ -374,11 +346,39 @@ public class Validator {
         }
     }
 
+    public static void validateFindPatient(String[] parameters) throws HalpmiException {
+        switch (parameters[0]) {
+        case "nric":
+            validateNric(parameters[1]);
+            break;
+        case "name":
+            validateFullName(parameters[1]);
+            break;
+        case "age":
+            validateAge(parameters[1]);
+            break;
+        case "gender":
+            validateGender(parameters[1]);
+            break;
+        case "address":
+            validateAddress(parameters[1]);
+            break;
+        case "dob":
+            validateDob(parameters[1]);
+            break;
+        case "admissiondate":
+            validateAdmissionDate(parameters[1]);
+            break;
+        default:
+            throw new HalpmiException("Input must be an attribute of Patient");
+        }
+    }
+
     public static void validateDispenseMedicine(String[] dispenseMedicineParameters) throws HalpmiException {
         validateNric(dispenseMedicineParameters[0]);
         if (dispenseMedicineParameters.length < 3 || dispenseMedicineParameters.length % 2 != 1) {
             throw new HalpmiException("Not all medicines in list have both the name of the medicine and the quantity"
-                + "to prescribe!");
+                    + "to prescribe!");
         }
 
         for (int i = 1; i < dispenseMedicineParameters.length; i += 2) {
@@ -388,4 +388,5 @@ public class Validator {
             validateQuantity(medicineQuantity);
         }
     }
+
 }

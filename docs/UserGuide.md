@@ -99,7 +99,7 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `add doctor /info [nric], [name], [age], [gender], [address], [DOB], [Specialisation]`
 
-Example: `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
+Example: `add doctor /info S7654321A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
 #### ADD PATIENT
 
@@ -157,8 +157,7 @@ Allows user to view existing records of doctors, patients and medicine.
 #### VIEW DOCTOR
 
 To view the records of all doctors in the application, you can simply call `view doctor` without any additional
-parameters. You could also give a specific criteria as listed below and the input value if you want to
-search and view by a specific criteria.
+parameters.
 
 Format: `view doctor`
 
@@ -167,8 +166,7 @@ Examples: `view doctor`
 #### VIEW PATIENT
 
 To view the records of all patients in the application, you can simply call `view patient` without any additional
-parameters. You could also give a specific criteria as listed below and the input value if you want to
-search and view by a specific criteria.
+parameters.
 
 Format: `view patient`
 
@@ -177,10 +175,9 @@ Example: `view patient`
 #### VIEW MEDICINE
 
 To view the records of all medicines in the application, you can simply call `view medicine` without any additional
-parameters. You could also give a specific criteria as listed below and the input value if you want to
-search and view by a specific criteria.
+parameters.
 
-Format: `view medicine` or `view medicine /info [criteria],[input]`
+Format: `view medicine`
 
 Example: `view medicine`
 
@@ -339,7 +336,7 @@ Example 3: `find doctor /info age, 23` <br>
 Example 4: `find doctor /info gender, M` <br>
 Example 5: `find doctor /info address, 15 King's Avenue` <br>
 Example 6: `find doctor /info dob, 1999-12-31` <br>
-Example 7: `find doctor /info specialization, Dermatology` 
+Example 7: `find doctor /info specialization, Dermatology`
 
 
 #### FIND PATIENT
