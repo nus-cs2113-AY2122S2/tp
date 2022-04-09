@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+-> CommandParser: (check level 2)
+activate CommandParser
+CommandParser -> CheckRoomByLevelCommand: new CheckRoomByLevelCommand(2)
+activate CheckRoomByLevelCommand
+CheckRoomByLevelCommand --> CommandParser
+CommandParser -> CheckRoomByLevelCommand: execute
+CheckRoomByLevelCommand -> ListContainer: getRoomList
+activate ListContainer
+ListContainer --> CheckRoomByLevelCommand: roomList
+CheckRoomByLevelCommand -> ListContainer: getAssignmentMap
+ListContainer --> CheckRoomByLevelCommand: roomList
+CheckRoomByLevelCommand -> Ui: printTableHeader()
+activate Ui
+loop all room in roomList
+    CheckRoomByLevelCommand -> Room: getLevel
+    activate Room
+    Room --> CheckRoomByLevelCommand
+    opt room level is (2)
+    CheckRoomByLevelCommand -> AssignmentMap: getHouseKeeperNameByRoom(roomId)
+    activate AssignmentMap
+    AssignmentMap --> CheckRoomByLevelCommand: name
+    end
+end
+@enduml
