@@ -2354,8 +2354,6 @@ The following are some test cases for you to try:
 |:----------------------------------------------------------------------------------------------------------|:------------------------------------|:--------------------------------------------------------|
 | Valid searching for exercise command.                                                                     | `search /exercise`                  | All exercise names containing whitespace will be shown. |
 | Valid searching for exercise command.                                                                     | `search /exercise a`                | All exercise names containing 'a' will be shown.        |
-| Valid searching for exercise command with extra whitespaces between `/exercise` and `<exercise keyword>`. | `search /exercise                a` | All exercise names containing 'a' will be shown.        |
-| Valid searching for exercise command with extra whitespaces after `<exercise keyword>`.                   | `search /exercise a           `     | All exercise names containing 'a' will be shown.        |
 
 ##### Negative Test Cases
 
@@ -2377,8 +2375,6 @@ The following are some test cases for you to try:
 | Valid searching for workout command.                                                                                      | `search /workout`                  | All workouts with exercise name containing whitespace will be shown. |
 | Valid searching for workout command.                                                                                      | `search /workout 15`               | All workouts with repetitions equal to 15 will be shown.             |
 | Valid searching for workout command.                                                                                      | `search /workout a`                | All workouts with exercise name containing 'a' will be shown.        |
-| Valid searching for workout command with extra whitespaces between `/workout` and `<exercise keyword or number of reps>`. | `search /workout                a` | All workouts with exercise name containing 'a' will be shown.        |
-| Valid searching for workout command with extra whitespaces after `<exercise keyword or number of reps>`.                  | `search /workout a           `     | All workouts with exercise name containing 'a' will be shown.        |
 
 
 ##### Negative Test Cases
@@ -2400,8 +2396,6 @@ The following are some test cases for you to try:
 |:----------------------------------------------------------------------------------------------|:--------------------------------|:---------------------------------------------------------|
 | Valid searching for plan command.                                                             | `search /plan`                  | All plans with name containing whitespace will be shown. |
 | Valid searching for plan command.                                                             | `search /plan a`                | All plans with name containing 'a' will be shown.        |
-| Valid searching for plan command with extra whitespaces between `/plan` and `<plan keyword>`. | `search /plan                a` | All plans with name containing 'a' will be shown.        |
-| Valid searching for plan command with extra whitespaces after `<plan keyword>`.               | `search /plan a           `     | All plans with name containing 'a' will be shown.        |
 
 
 ##### Negative Test Cases
@@ -2424,8 +2418,6 @@ The following are some test cases for you to try:
 | Valid searching for all command.                                                         | `search /all`                  | All exercises, workouts and plans with name containing whitespace will be shown.                                              |
 | Valid searching for all command.                                                         | `search /all a`                | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
 | Valid searching for all command.                                                         | `search /all 15`               | All exercises and plans with name containing '15' will be shown, and all workouts with repetitions equal to 15 will be shown. |
-| Valid searching for all command with extra whitespaces between `/all` and `<keyword>`.   | `search /all                a` | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
-| Valid searching for all command with extra whitespaces after `<keyword>`.                | `search /all a           `     | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
 
 
 ##### Negative Test Cases
