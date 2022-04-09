@@ -1,7 +1,6 @@
 package tp;
 
 import org.junit.jupiter.api.Test;
-import tp.Appointment;
 import tp.person.Doctor;
 import tp.person.Patient;
 

@@ -1,9 +1,6 @@
 package tp;
 
 import org.junit.jupiter.api.Test;
-import tp.DoctorList;
-import tp.IHospitalException;
-import tp.Ui;
 import tp.person.Doctor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
