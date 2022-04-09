@@ -80,7 +80,7 @@ public class Item {
         // Throw exception if newRecord conflicts with existing records.
         for (BorrowRecord record : borrowRecords) {
             if (newRecord.isConflict(record)) {
-                throw new InvMgrException(Messages.INVALID_DATES_CONCLICT);
+                throw new InvMgrException(Messages.INVALID_DATES_CONFLICT);
             }
         }
 
