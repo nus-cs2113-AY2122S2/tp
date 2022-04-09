@@ -508,6 +508,9 @@ PlanITarium is tested mainly in 2 ways:
 JUnit testing can be performed by running the tests in the [`test`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/test/java/seedu/planitarium) folder.
 
+> :information_source: **Note:** The JUnit tests have been configured and tested on IntelliJ IDEA.
+> Additional configurations or changes may be needed depending on the tester's setup.
+
 #### IO redirection testing
 
 IO redirection testing can be performed via the following steps:
