@@ -26,7 +26,7 @@ public class RemoveParser extends CommandParser {
                     MatchKeywords(userInput, regexOrder).getGroupValues();
             warehouse.removeOrder(regexOrderMatch.get("oid"));
         } else if (matches.get("flag").equals("og")) {
-            String regexOrderline = "oid/(?<oid>)\\d sku/(?<sku>.*) q/(?<qty>\\d*)";
+            String regexOrderline = "oid/(?<oid>\\d*) sku/(?<sku>.*) q/(?<qty>\\d*)";
             HashMap<String, String> regexOrderlineMatch = new
                     MatchKeywords(userInput, regexOrderline).getGroupValues();
             warehouse.removeOrderline(regexOrderlineMatch.get("oid"),
