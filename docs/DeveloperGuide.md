@@ -99,15 +99,22 @@ repeated tasks.
 
 ##### Using offsets to calculate new dates
 
-The reason why the new dates are calculated using an offset instead of giving an absolute date is because
+The reason why the new dates are calculated using an offset instead of giving a date is because
 of the following scenario.
 
-1. Assume the user has a recurring task happening on 3rd,4th and 5th of May.
-2. The user deletes the task happening on 4th May.
-3. The user edits the task happening on 3rd May to be on 6th May.
+1. Assume the user has a recurring task on 6th,7th and 8th June
 
-If dates are not calculated using offsets and are incremented based on how often it recurs, then the
-result of the edit command will be 6th May and 7th May.
+![offset1](images/offset1.png)
+2. The user deletes the task on 7th June
+3. The user edits the task happening on 6th June to be on 10th June.
+
+|        | Using offset                   | Not using offset               |
+|--------|--------------------------------|--------------------------------|
+| Result | ![offset3](images/offset3.png) | ![offset2](images/offset2.png) |
+
+By not using offsets, the gap between task 1 and 2 is lost. Hence, the decision to use offset to preserve such
+details was chosen even though it would make implementation slightly more complicated.
+
 
 ### Study Session Implementation
 
