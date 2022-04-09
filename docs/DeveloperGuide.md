@@ -249,7 +249,7 @@ wrapping and indentation of lines printed.
 To aid in visualisation, 
 
 * Methods on `IncomeList` and `ExpenditureList` will be simplified to call to `MoneyList`. See 
-[Money Component](#Money-component) for more information.
+[Money Component](#money-component) for more information.
 * The following situation will be simulated:
   1. User adds a Person, *Alice* to `parents`
   2. User adds an income to *Alice*
