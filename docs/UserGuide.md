@@ -89,8 +89,8 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/byda
 |    Parameters    | Description                     | Accepted inputs                                                                     | Optional                |
 |:----------------:|---------------------------------|-------------------------------------------------------------------------------------|-------------------------|
 | TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                                                            | No                      |
-|     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022)                                   | No                      |
-|    START_TIME    | Time to start working on a task | HH:mm format (e.g 18:00)                                                            | No                      |
+|     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g `25/3/2022` for 25 March 2022)                                 | No                      |
+|    START_TIME    | Time to start working on a task | HH:mm format (e.g `18:00`)                                                          | No                      |
 |     END_TIME     | Time to stop working on a task  | HH:mm format, must be after START_TIME                                              | No                      |
 |     DUE_DATE     | Due date for the task           | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
 |     DUE_TIME     | Due time for the task           | HH:mm format, must be equal to or after END_TIME if DUE_DATE is the same as DO_DATE | No if DUE_DATE is given |
@@ -111,8 +111,8 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/byda
 |    Parameters    | Description                     | Accepted inputs                                                                     | Optional                |
 |:----------------:|---------------------------------|-------------------------------------------------------------------------------------|-------------------------|
 | TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                                                            | No                      |
-|     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022)                                   | No                      |
-|    START_TIME    | Time to start working on a task | HH:mm format (e.g 18:00)                                                            | No                      |
+|     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g `25/3/2022` for 25 March 2022)                                 | No                      |
+|    START_TIME    | Time to start working on a task | HH:mm format (e.g `18:00`)                                                          | No                      |
 |     END_TIME     | Time to stop working on a task  | HH:mm format, must be after START_TIME                                              | No                      |
 |     DUE_DATE     | Due date for the task           | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
 |     DUE_TIME     | Due time for the task           | HH:mm format, must be equal to or after END_TIME if DUE_DATE is the same as DO_DATE | No if DUE_DATE is given |
@@ -147,7 +147,7 @@ Before delete command:
 
 ![beforedelete](images/beforedelete.png)
 
-After command: `delete 5 /repeat`
+After command: `delete 3 /repeat`
 
 ![afterdelete](images/afterdelete.png)
 
@@ -159,15 +159,15 @@ After command: `delete 5 /repeat`
 
 Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME]`
 
-|    Parameters    | Description                                         | Accepted inputs                                                                                 | Optional                |
-|:----------------:|-----------------------------------------------------|-------------------------------------------------------------------------------------------------|-------------------------|
-|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                                                                           | No                      |
-| TASK_DESCRIPTION | Description for the task                            | Any phrases or sentences                                                                        | Yes                     |
-|     DO_DATE      | Date to work on the task                            | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022)                                               | Yes                     |
-|    START_TIME    | Time to start working on a task                     | HH:mm format (e.g 18:00)                                                                        | Yes                     |
-|     END_TIME     | Time to stop working on a task                      | HH:mm format, must be after START_TIME                                                          | Yes                     |
-|     DUE_DATE     | Due date for the task                               | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022), must be equal to or after DUE_DATE           | Yes                     |
-|     DUE_TIME     | Due time for the task                               | HH:mm format (e.g 19:00), must be equal to or after END_TIME if DUE_DATE is the same as DO_DATE | No if DUE_DATE is given |
+|    Parameters    | Description                                         | Accepted inputs                                                                     | Optional                |
+|:----------------:|-----------------------------------------------------|-------------------------------------------------------------------------------------|-------------------------|
+|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                                                               | No                      |
+| TASK_DESCRIPTION | Description for the task                            | Any phrases or sentences                                                            | Yes                     |
+|     DO_DATE      | Date to work on the task                            | d/M/yyyy format (e.g `25/3/2022` for 25 March 2022)                                 | Yes                     |
+|    START_TIME    | Time to start working on a task                     | HH:mm format (e.g `18:00`)                                                          | Yes                     |
+|     END_TIME     | Time to stop working on a task                      | HH:mm format, must be after START_TIME                                              | Yes                     |
+|     DUE_DATE     | Due date for the task                               | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
+|     DUE_TIME     | Due time for the task                               | HH:mm format, must be equal to or after END_TIME if DUE_DATE is the same as DO_DATE | No if DUE_DATE is given |
 
 Examples:
 - `edit 2 write draft essay`
@@ -194,7 +194,7 @@ Before edit command:
 
 ![beforeedit](images/beforeedit.png)
 
-After command: `edit 5 /start 13:00 /end 14:00 /repeat`
+After command: `edit 4 /start 13:00 /end 15:00 /repeat`
 
 ![afteredit](images/afteredit.png)
 
@@ -304,10 +304,10 @@ The following fields are required to correctly load a task:
 |:-------------:|-------------------------------------------------------------|------------------------------------------------------------|
 |  identifier   | Tasks with the same identifier are recurrence of each other | Any number from 1-65535                                    |
 |  description  | Description for the task                                    | Any phrases or sentences                                   |
-| do_date_start | Date and time to start working on the task                  | d/M/yyyy HH:mm (e.g "25/5/2022 16:00" for 25 May 2022 4pm) |
+| do_date_start | Date and time to start working on the task                  | d/M/yyyy HH:mm (e.g `25/5/2022 16:00` for 25 May 2022 4pm) |
 |  do_date_end  | Date and time to stop working on the task                   | d/M/yyyy HH:mm, must be after DO_DATE_START                |
 |    by_date    | Deadline for the task                                       | d/M/yyyy HH:mm, must be after DO_DATE_END                  |
-|    status     | Status of the task                                          | 'X' for completed, ' ' for incomplete                      |
+|    status     | Status of the task                                          | `X` for completed, `-` for incomplete                      |
 
 ### Enter study session: `study`
 Enter the study session where you can start timers to help finish your tasks.
