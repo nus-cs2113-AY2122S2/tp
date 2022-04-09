@@ -33,31 +33,33 @@ Given below are my contributions to the project.
   of list of incomes with greater details. 
   * Notable Additional Implementations:
     * Edit:
-      * Allows for changes to tracked Income items as desired by user, such as its amount or descriptions.
+      Allows for changes to tracked Income items as desired by user, such as its amount or descriptions.
     * Find:
-      * Allows for user to search through tracked Income items for a specific descriptions or amount.
+      Allows for user to search through tracked Income items for a specific descriptions or amount.
 
 <p></p>
+
+<div style="page-break-after: always;"></div>
 
 * **Enhancements to Existing Features**:
     * Implemented class abstraction for Expenditure and ExpenditureList as well as additional attributes and functions:
       * Notable Additional Implementations:
           * Edit:
-              * Allows for changes to tracked Expenditure items as desired by user, such as its amount or descriptions.
+            Allows for changes to tracked Expenditure items as desired by user, such as its amount or descriptions.
           * Find:
-              * Allows for user to search through tracked Expenditure items for a specific descriptions or amount.
+            Allows for user to search through tracked Expenditure items for a specific descriptions or amount.
     * Implemented JUnit testing for Income and IncomeList class and make it more defensive:
-      * [#61](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/61/files),
-      * [#133](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/133/files),
+      [#61](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/61/files),
+      [#133](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/133/files)
     * Implemented additional JUnit testing for Expenditure and ExpenditureList class to cover additional implementations.
-      * [#133](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/133/files),
+      [#133](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/133/files)
 
 <p></p>
 
 * **Documentation**:
     * User Guide (UG):
         * Added documentation for the features `editin` and `find`: 
-          * [#169](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/169/files)
+          [#169](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/169/files)
     * Developer Guide (DG):
         * Added sections on `Money` design.
         * Added UML diagrams for `Money` component and `Find` implementation.
