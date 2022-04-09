@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.simplst;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,12 +19,12 @@ import java.util.regex.Pattern;
  * This will give a HashMap of <k,v> as <id,id_value>
  * Refer to UserInterface.run() -> case "add" for another example
  */
-public class Regex {
+public class MatchKeywords {
     private static String input;
     private static String regex;
     private HashMap<String, String> groupValues;
 
-    public Regex(String input, String regex) {
+    public MatchKeywords(String input, String regex) {
         this.input = input;
         this.regex = regex;
         this.groupValues = findMatch();

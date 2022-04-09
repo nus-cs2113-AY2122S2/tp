@@ -37,8 +37,8 @@ The above diagram shows the inner workings of how the Regex Class will work. Her
 #### Example of Usage
 ```
 String regex = "id/(?<id>\\d*) n/(?<name>.*) q/(?<qty>\\d*) d/(?<desc>\\.*)";
-Regex regexMatch = new Regex(userInput, regex);
-HashMap<String, String> matches = regexMatch.getGroupValues();
+Regex matchKeywordsMatch = new Regex(userInput, regex);
+HashMap<String, String> matches = matchKeywordsMatch.getGroupValues();
 String id = matches.get("id");
 String name = matches.get("name");
 String quantity = matches.get("qty");

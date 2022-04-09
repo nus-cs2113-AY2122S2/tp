@@ -1,61 +1,34 @@
 Hello from
 Simplst
 What would you like to do?
-New login. Please type the total number of goods your warehouse can hold
-Order 1 is added
+Unit Good of SKU: WC1 added to warehouse
 Another command?
-100 chairs are  added
+Order 1 added to the warehouse
 Another command?
-list command was used wrongly. Type help to see examples
-* Add order `add o/ id/ID r/RECEIVER a/SHIPPING_ADDRESS`
-* Add orderline `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
-* Remove order: `remove o/ i/ID`
-* Remove orderline: `remove g/ i/ID q/QUANTITY`
-* List all orders: `list o/`
-* List all goods: `list g/`
-* View order: `view o/ id/ORDER_ID`
-* View orderline: `view g/ id/GOOD_ID`
-* Total quantity of goods: `total`
+10 Good of SKU: WC1 added to warehouse
 Another command?
-Viewing order with id 1
-Receiver: Peter Pan
-Shipping address:NUS
-Items in the order:
-	1. 100 - chairs (this is a chair)
+WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 10]
+Unit size of good: MEDIUM
 Another command?
-Viewing item with id 100
-Item name: chairs
-Item description: this is a chair
-Item quantity: 100
+WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 10]
+Unit size of good: MEDIUM
+Another command?
+Wooden Chair is added to order. 8 required to fulfill
+8 of WC1 is added to order number 1
+Another command?
+List of available goods with its quantity:
+WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 10]
+Another command?
+Orderline fulfilled
+2 Wooden Chair left in the warehouse
+Order 1 completed
 Another command?
 List of orders:
-	1. 1 - Peter Pan (NUS)
+	1: 1 - Danny Phantom (Amity Park) : completed
 Another command?
-List of goods:
-id | name
-	1. 100 - chairs (this is a chair)
+List of available goods with its quantity:
+WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 2]
 Another command?
-14 chairs have been removed.
-Another command?
-Viewing order with id 1
-Receiver: Peter Pan
-Shipping address:NUS
-Items in the order:
-	1. 100 - chairs (this is a chair)
-Another command?
-Viewing item with id 100
-Item name: chairs
-Item description: this is a chair
-Item quantity: 86
-Another command?
-There are 86 goods in total.
-Another command?
-Order 1 has been removed.
-Another command?
-There are currently no orders.
-Another command?
-There are no inventory in the warehouse.
-Another command?
-There are 0 goods in total.
+Order 1 already completed
 Another command?
 Bye

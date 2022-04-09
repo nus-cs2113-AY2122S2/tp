@@ -1,6 +1,13 @@
-package seedu.duke;
+package seedu.simplst;
 
-import seedu.duke.CommandParsers.*;
+import seedu.simplst.parsers.AddParser;
+import seedu.simplst.parsers.FindParser;
+import seedu.simplst.parsers.HelpParser;
+import seedu.simplst.parsers.ListParser;
+import seedu.simplst.parsers.RemoveParser;
+import seedu.simplst.parsers.TotalParser;
+import seedu.simplst.parsers.ViewParser;
+import seedu.simplst.parsers.FulfillParser;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
 import util.exceptions.NullException;
@@ -11,12 +18,14 @@ import java.util.Scanner;
 public class UserInterface {
     private Warehouse warehouse;
 
-    private ListParser  listParser;
+    private ListParser listParser;
     private ViewParser viewParser;
     private AddParser addParser;
     private RemoveParser removeParser;
     private TotalParser totalParser;
     private FindParser findParser;
+    private HelpParser helpParser;
+    private FulfillParser fulfillParser;
 
 
     public UserInterface(Warehouse warehouse) {
@@ -27,6 +36,8 @@ public class UserInterface {
         this.addParser = new AddParser(warehouse);
         this.removeParser = new RemoveParser(warehouse);
         this.totalParser = new TotalParser(warehouse);
+        this.helpParser = new HelpParser(warehouse);
+        this.fulfillParser = new FulfillParser(warehouse);
     }
 
     public void run() {
@@ -68,8 +79,11 @@ public class UserInterface {
                 case "total":
                     totalParser.parse(userInput);
                     break;
+                case "fulfill":
+                    fulfillParser.parse(userInput);
+                    break;
                 case "help":
-                    Display.help();
+                    helpParser.parse(userInput);
                     break;
                 case "storage-capacity":
                     warehouse.getPercentOccupied();
@@ -83,17 +97,15 @@ public class UserInterface {
                     String wrongCommand = wrongCommandException.getCommand();
                     System.out.printf("%s command was used wrongly. Type help to see examples\n",
                             wrongCommand);
-                    Display.help();
                 } else {
                     System.out.println("No such command. Type help to see examples");
-                    Display.help();
                 }
             } catch (NullException nullException) {
                 //catch null exception here
                 Display.tryCommandAgain();
             } catch (InvalidFileException e) {
                 e.printStackTrace();
-            } catch (InvalidObjectType e){
+            } catch (InvalidObjectType e) {
                 Display.tryCommandAgain();
             }
             System.out.println("Another command?");

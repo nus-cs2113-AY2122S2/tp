@@ -1,4 +1,4 @@
-package seedu.duke.JsonKeyConstants;
+package seedu.simplst.jsonkeyconstants;
 
 public class OrderlinesKeys {
     public static String orderlineId = "OLID";
