@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
-import seedu.duke.stubs.ItemListStubs;
 import seedu.duke.stubs.ItemStubs;
 import seedu.duke.stubs.UiStub;
 
@@ -14,7 +13,14 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.duke.stubs.ItemStubs.*;
+import static seedu.duke.stubs.ItemStubs.ITEM_DVI_CABLE;
+import static seedu.duke.stubs.ItemStubs.ITEM_HDMI_CABLE;
+import static seedu.duke.stubs.ItemStubs.ITEM_MARKER;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A4_10;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A4_15;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A5_10;
+import static seedu.duke.stubs.ItemStubs.ITEM_PENCIL;
+import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
 
 public class EditCommandTest {
     private static ItemList EDIT_NEGATIVE_QUANTITY_LIST_BEFORE;

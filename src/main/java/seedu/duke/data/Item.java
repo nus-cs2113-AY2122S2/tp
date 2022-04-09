@@ -177,7 +177,7 @@ public class Item {
             for (int i = 0; i < borrowRecords.size(); i++) {
                 copiedItem.addBorrowRecord(borrowRecords.get(i));
             }
-        } catch (InvMgrException e){
+        } catch (InvMgrException e) {
             // suppress error, return null
             return null;
         }

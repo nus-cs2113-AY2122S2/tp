@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.duke.stubs.ItemStubs.*;
+import static seedu.duke.stubs.ItemStubs.ITEM_MARKER;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A4_10;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A5_10;
+import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
 
 import seedu.duke.stubs.ItemStubs;
 import seedu.duke.stubs.UiStub;
