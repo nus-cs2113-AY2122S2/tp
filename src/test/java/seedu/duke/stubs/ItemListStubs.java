@@ -5,6 +5,7 @@ import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,28 +24,19 @@ public class ItemListStubs {
     public static final List<Item> SEARCH_RESULT_NONE = generateImmutableResults();
 
     // ItemList Stubs for use in EditCommand
-    public static final ItemList EDIT_NEGATIVE_QUANTITY_LIST_BEFORE = generateItemListWithRecords(
-            generateItemList(ITEM_PAPER_A4_10));
-    public static final ItemList EDIT_NAME_LIST_BEFORE = generateItemListWithRecords(
-            generateItemList(ITEM_PENCIL));
-    public static final ItemList EDIT_NAME_EXPECTED_LIST_AFTER = generateItemListWithRecords(
-            generateImmutableItemList(ITEM_MARKER));
-    public static final ItemList EDIT_ABSQUANTITY_LIST_BEFORE = generateItemListWithRecords(
-            generateItemList(ITEM_PAPER_A4_10));
-    public static final ItemList EDIT_ABSQUANTITY_EXPECTED_LIST_AFTER = generateItemListWithRecords(
-            generateImmutableItemList(ITEM_PAPER_A4_15));
-    public static final ItemList EDIT_RELQUANTITY_LIST_BEFORE = generateItemListWithRecords(
-            generateItemList(ITEM_PAPER_A4_15));
-    public static final ItemList EDIT_RELQUANTITY_EXPECTED_LIST_AFTER = generateItemListWithRecords(
-            generateImmutableItemList(ITEM_PAPER_A4_10));
-    public static final ItemList EDIT_DESC_LIST_BEFORE = generateItemListWithRecords(
-            generateItemList(ITEM_PAPER_A4_10));
-    public static final ItemList EDIT_DESC_EXPECTED_LIST_AFTER = generateItemListWithRecords(
-            generateImmutableItemList(ITEM_PAPER_A5_10));
-    public static final ItemList EDIT_ALL_LIST_BEFORE = generateItemListWithRecords(
-            generateItemList(ITEM_MARKER));
-    public static final ItemList EDIT_ALL_EXPECTED_LIST_AFTER = generateItemListWithRecords(
-            generateImmutableItemList(ITEM_WHITEBOARD));
+    public static final ItemList EDIT_NEGATIVE_QUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
+    public static final ItemList EDIT_NAME_LIST_BEFORE = generateItemList(ITEM_PENCIL);
+    public static final ItemList EDIT_NAME_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_MARKER);
+    public static final ItemList EDIT_ABSQUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
+    public static final ItemList EDIT_ABSQUANTITY_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_PAPER_A4_15);
+    public static final ItemList EDIT_RELQUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_15);
+    public static final ItemList EDIT_RELQUANTITY_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_PAPER_A4_10);
+    public static final ItemList EDIT_DESC_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
+    public static final ItemList EDIT_DESC_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_PAPER_A5_10);
+    public static final ItemList EDIT_ALL_LIST_BEFORE = generateItemList(ITEM_MARKER);
+    public static final ItemList EDIT_ALL_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_WHITEBOARD);
+    public static final ItemList EDIT_NAME_LIST_WITH_BORROWRECORDS_BEFORE = generateItemList(ITEM_DVI_CABLE);
+    public static final ItemList EDIT_NAME_LIST_WITH_BORROWRECORDS_AFTER = generateImmutableItemList(ITEM_HDMI_CABLE);
 
     // ItemList Stubs for use in ListCurrentBorrowingsCommand
     public static final ItemList TEST_ITEM_LIST = generateItemList(ITEM_MARKER, ITEM_PENCIL, ITEM_WHITEBOARD);
@@ -52,7 +44,9 @@ public class ItemListStubs {
 
     private static ItemList generateItemList(Item... items) {
         ArrayList<Item> list = new ArrayList<>();
-        Collections.addAll(list, items);
+        for (Item item: items) {
+            list.add((Item) item.clone());
+        }
         return new ItemList(list);
     }
 
@@ -64,6 +58,7 @@ public class ItemListStubs {
             itemList.addBorrowRecord(1, BorrowRecordStubs.PASTRECORD_B);
             itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_A);
             itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_B);
+            return itemList;
         } catch (InvMgrException e) {
             System.out.println(e);
         }

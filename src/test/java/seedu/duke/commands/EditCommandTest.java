@@ -75,5 +75,19 @@ public class EditCommandTest {
                 Optional.empty());
         testAllEditCommand.execute(ItemListStubs.EDIT_ALL_LIST_BEFORE, uiStub);
         assertEquals(ItemListStubs.EDIT_ALL_EXPECTED_LIST_AFTER, ItemListStubs.EDIT_ALL_LIST_BEFORE);
+
+
+        // Edit name, "DVI" -> "HDMI" while maintaining BorrowRecords
+        uiStub = new UiStub();
+        EditCommand testNameWithBorrowRecordsEditCommand = new EditCommand(0,
+                Optional.of(ItemStubs.HDMI_CABLE_NAME),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty());
+        testNameWithBorrowRecordsEditCommand.execute(ItemListStubs.EDIT_NAME_LIST_WITH_BORROWRECORDS_BEFORE, uiStub);
+        assertEquals(ItemListStubs.EDIT_NAME_LIST_WITH_BORROWRECORDS_AFTER,
+                ItemListStubs.EDIT_NAME_LIST_WITH_BORROWRECORDS_BEFORE);
+
+
     }
 }

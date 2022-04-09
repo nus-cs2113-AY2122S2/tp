@@ -1,8 +1,9 @@
 package seedu.duke.data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class BorrowRecord {
+public class BorrowRecord implements Cloneable {
     private final LocalDate startDate;
     private final LocalDate endDate;
     private final String borrowerName;
@@ -52,7 +53,7 @@ public class BorrowRecord {
 
     @Override
     public boolean equals(Object other) {
-        if (other==this) {
+        if (other == this) {
             return true; // short circuit if same object
         }
         // instanceof handles nulls
@@ -63,5 +64,15 @@ public class BorrowRecord {
                     && this.borrowerName.equals(otherItem.borrowerName);
         }
         return false;
+    }
+
+    public Object clone() {
+        BorrowRecord cloneObj;
+        try {
+            cloneObj = (BorrowRecord)super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+        return cloneObj;
     }
 }

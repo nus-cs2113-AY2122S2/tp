@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.Item;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.stubs.ItemStubs;
@@ -38,7 +37,7 @@ public class StorageTest {
         ArrayList<Item> expectedItemList = new ArrayList<>();
         expectedItemList.add(ItemStubs.ITEM_MARKER);
         expectedItemList.add(ItemStubs.ITEM_WHITEBOARD);
-        expectedItemList.add(ItemStubs.ITEM_HDMI);
+        expectedItemList.add(ItemStubs.ITEM_HDMI_CABLE);
 
         Storage testStorage = new Storage("test/data/load/validInputData.json");
         ArrayList<Item> testItemList = testStorage.load();
@@ -57,7 +56,7 @@ public class StorageTest {
         ArrayList<Item> itemList = new ArrayList<>();
         itemList.add(ItemStubs.ITEM_MARKER);
         itemList.add(ItemStubs.ITEM_WHITEBOARD);
-        itemList.add(ItemStubs.ITEM_HDMI);
+        itemList.add(ItemStubs.ITEM_HDMI_CABLE);
 
         Storage testStorage = new Storage("test/data/save/actualData.json");
         testStorage.save(itemList);
@@ -92,8 +91,6 @@ public class StorageTest {
      * @param actualList the list to check against
      */
     private void assertListEquals(ArrayList<Item> expectedList, ArrayList<Item> actualList) {
-        Item wb1 = expectedList.get(2);
-        Item wb2 = actualList.get(2);
         assertEquals(true, actualList.containsAll(expectedList));
     }
 }

@@ -113,16 +113,16 @@ public class Item implements Cloneable {
 
     @Override
     public boolean equals(Object other) {
-        if (other==this) {
+        if (other == this) {
             return true; // short circuit if same object
         }
         // instanceof handles nulls
         if (other instanceof Item) {
             Item otherItem = ((Item) other);
             return this.name.equals(otherItem.name)
-            && this.description.equals(otherItem.description)
-            && this.quantity == (otherItem.quantity)
-            && this.borrowRecords.containsAll(otherItem.borrowRecords);
+                    && this.description.equals(otherItem.description)
+                    && this.quantity == (otherItem.quantity)
+                    && this.borrowRecords.containsAll(otherItem.borrowRecords);
         }
         return false;
     }
@@ -134,7 +134,11 @@ public class Item implements Cloneable {
         } catch (CloneNotSupportedException e) {
             return null;
         }
-        cloneObj.borrowRecords = new ArrayList<>(this.borrowRecords);
+        cloneObj.borrowRecords = new ArrayList<>();
+        for (int i = 0; i < this.borrowRecords.size(); i++) {
+            BorrowRecord cloneRecord = this.borrowRecords.get(i);
+            cloneObj.borrowRecords.add((BorrowRecord) cloneRecord.clone());
+        }
         return cloneObj;
     }
 }
