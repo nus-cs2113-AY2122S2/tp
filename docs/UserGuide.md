@@ -272,7 +272,11 @@ Below is an example of the weekly schedule displayed:
 
 ### Display Monthly Schedule: `show month` / `show MONTH`
 
-Displays your schedule for the current month or any specific month
+- Displays your schedule for the current month or any specific month
+
+- To make your life easier when typing the to show any specific month command, 
+  
+  3-letter abrivation of any specific month is accepted.
 
 >**💡 Note**
 >
