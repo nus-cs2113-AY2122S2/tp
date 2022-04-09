@@ -227,8 +227,11 @@ public class StringConstants {
     public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with module code \"%s\" found. "
             + "Aborting load...";
     public static final String ERROR_INVALID_MODULE = "Invalid module credits found (%s had %d MCs). Aborting load...";
-    public static final String ERROR_CATCH_UNKNOWN_EXCEPTION = "Oops, I caught an exception"
+    public static final String ERROR_CATCH_UNKNOWN_EXCEPTION = "Oops, I caught an exception "
             + "that I didn't figured out before 0_0\n%s";
+    public static final String MODIFIED_JSON_EXCEPTION = "\n  Remind: The Json files is likely modified manually"
+            + ", don't do that! lol";
+
 
 
     /**
