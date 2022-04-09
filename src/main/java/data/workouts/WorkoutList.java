@@ -127,7 +127,7 @@ public class WorkoutList {
     /**
      * Parses the given user argument to identify the details of the new workout to be added.
      * Thereafter, the details will be checked for their validity. If all checks pass, a new
-     * Workout object is instantiated before adding it to the ArrayList of workouts.
+     * Workout object is instantiated.
      *
      * @param userArgument The user's details for the new workout, including exercise name
      *                     and number of repetitions.
@@ -171,13 +171,22 @@ public class WorkoutList {
         Workout newWorkout = new Workout(userExerciseInput, userRepsInput);
         logger.log(Level.INFO, "New workout created.");
 
-        String newWorkoutKey = newWorkout.toString();
-        workoutsHashMapList.put(newWorkoutKey, newWorkout);
-
-        workoutsDisplayList.add(newWorkoutKey);
-
         return newWorkout;
     }
+
+    /**
+     * Adds a newly created workout object to workoutsDisplayList and workoutsHashMapList.
+     *
+     * @param newWorkout The new Workout object to be added to the two data structures mentioned in the method
+     *                   description.
+     */
+    public void addNewWorkoutToList(Workout newWorkout) {
+        String newWorkoutKey = newWorkout.toString();
+        workoutsHashMapList.put(newWorkoutKey, newWorkout);
+        workoutsDisplayList.add(newWorkoutKey);
+        logger.log(Level.INFO, "New workout added to lists in WorkoutList.");
+    }
+
 
     /**
      * Checks if the number of repetitions specified is a value that is at least 1.
