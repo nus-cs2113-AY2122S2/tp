@@ -14,7 +14,6 @@ import static seedu.sherpass.constant.Message.CLEAR_ALL_COMMAND_RESULT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_CLEAR_MESSAGE;
 
 
-
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
@@ -38,7 +37,7 @@ public class ClearCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        switch(selection) {
+        switch (selection) {
         case "all":
             clearAll(taskList, ui, storage);
             break;
