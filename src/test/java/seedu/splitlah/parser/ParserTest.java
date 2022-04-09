@@ -4,8 +4,14 @@ import org.junit.jupiter.api.Test;
 import seedu.splitlah.command.ActivityCreateCommand;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityEditCommand;
+import seedu.splitlah.command.ActivityListCommand;
+import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.Command;
+import seedu.splitlah.command.GroupCreateCommand;
+import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupEditCommand;
+import seedu.splitlah.command.GroupListCommand;
+import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.command.HelpCommand;
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.SessionCreateCommand;
@@ -26,7 +32,6 @@ class ParserTest {
      */
     @Test
     void getCommand_validInput_validCommand() {
-        // TODO: update with all Command subclasses after their CommandParser is complete
         String activityCreateCommandInput = "activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10";
         Command command = Parser.getCommand(activityCreateCommandInput);
         assertEquals(ActivityCreateCommand.class, command.getClass());
@@ -40,19 +45,33 @@ class ParserTest {
         command = Parser.getCommand(activityEditCommandInput);
         assertEquals(ActivityEditCommand.class, command.getClass());
 
-        // TODO: Add missing: ActivityList, ActivityView, GroupCreate, GroupDelete
+        String activityListCommandInput = "activity /list /sid 1";
+        command = Parser.getCommand(activityListCommandInput);
+        assertEquals(ActivityListCommand.class, command.getClass());
+
+        String activityViewCommandInput = "activity /view /sid 1 /aid 1";
+        command = Parser.getCommand(activityViewCommandInput);
+        assertEquals(ActivityViewCommand.class, command.getClass());
+
+        String groupCreateCommandInput = "group /create /n SplitLah /pl Roy Ivan Warren Saurav Tianle";
+        command = Parser.getCommand(groupCreateCommandInput);
+        assertEquals(GroupCreateCommand.class, command.getClass());
+
+        String groupDeleteCommandInput = "group /delete /gid 1";
+        command = Parser.getCommand(groupDeleteCommandInput);
+        assertEquals(GroupDeleteCommand.class, command.getClass());
         
         String groupEditCommandInput = "group /edit /gid 1 /n Class gathering";
         command = Parser.getCommand(groupEditCommandInput);
         assertEquals(GroupEditCommand.class, command.getClass());
 
         String groupListCommandInput = "group /list";
-        command = Parser.getCommand(groupEditCommandInput);
-        assertEquals(GroupEditCommand.class, command.getClass());
+        command = Parser.getCommand(groupListCommandInput);
+        assertEquals(GroupListCommand.class, command.getClass());
 
         String groupViewCommandInput = "group /view /gid 1";
-        command = Parser.getCommand(groupEditCommandInput);
-        assertEquals(GroupEditCommand.class, command.getClass());
+        command = Parser.getCommand(groupViewCommandInput);
+        assertEquals(GroupViewCommand.class, command.getClass());
 
         String sessionCreateCommandInput = "session /create /n Class Gathering /d 16-04-2022 /gid 1 /pl Alice";
         command = Parser.getCommand(sessionCreateCommandInput);

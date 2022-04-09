@@ -1,3 +1,7 @@
+---
+title: User Guide
+---
+
 <p align="center"><img alt="logo" src="https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/pngLogo.png"></p>
 
 # SplitLah
@@ -446,21 +450,21 @@ distributed amongst all participants.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
->- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >   - Example: `Alice Tan` is not allowed.
->- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
+>* The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
->- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that can only range from 0 to 100,
+>* The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that can only range from 0 to 100,
    with a maximum of 3 digits before and 2 after the decimal point, if any.
->- All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
+>* All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 >
 > **⚠️Warnings:**
->- This action is irreversible. The activity is edited immediately after entering this command.
+>* This action is irreversible. The activity is edited immediately after entering this command.
 
 <br>
 
 **Example**
-- An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1 in 
+* An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1 in 
   a session with a `SESSION_ID` of 1. It is named *Lunch* with Alice and Bob.<br>
   Edits the activity's name, payer, overall cost, GST percentage and service charge. List of participants remains
   unchanged.<br><br>
