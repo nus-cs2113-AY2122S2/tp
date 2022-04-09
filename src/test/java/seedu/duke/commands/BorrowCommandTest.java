@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BorrowCommandTest {
     @Test
-    public void execute_borrowCommand() {
+    public void execute_borrowCommand() throws InvMgrException {
         Ui ui = new Ui();
         ArrayList<Item> itemArrayList = new ArrayList<>();
         ItemList itemList = new ItemList(itemArrayList);

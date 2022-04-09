@@ -8,6 +8,9 @@ import seedu.duke.ui.Ui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Lists down Items that are available throughout a time period.
+ */
 public class ListAvailableBorrowingsCommand extends Command {
     public static final String COMMAND_WORD = "listab";
     public static final String COMMAND_NAME = "List available items";
@@ -16,15 +19,27 @@ public class ListAvailableBorrowingsCommand extends Command {
     public static final String COMMAND_FORMAT = COMMAND_WORD + "[start date] [end date]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE
             + ":\n" + "[Command Format] " + COMMAND_FORMAT + "\n";
-
+    public static final String AVAILABLE_RESULT = "Here are the items available for borrowing:";
+    public static final String NO_AVAILABLE_RESULT = 
+            "Sorry. There are no items available for borrowings.";
     private final LocalDate startDate;
     private final LocalDate endDate;
 
+    /**
+     * Constructor for ListAvailableBorrowingsCommand.
+     * @param startDate the start date of interest
+     * @param endDate the end date of interest
+     */
     public ListAvailableBorrowingsCommand(LocalDate startDate, LocalDate endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
+    /**
+     * Check if an item is available throughout the time period between startDate and endDate.
+     * @param item Item being checked
+     * @return Boolean value whether the Item is available
+     */
     private boolean isAvailable(Item item) {
         ArrayList<BorrowRecord> borrowRecord = item.getBorrowRecords();
         for (BorrowRecord record : borrowRecord) {
@@ -37,6 +52,14 @@ public class ListAvailableBorrowingsCommand extends Command {
         return true;
     }
 
+    /**
+     * Compares startDate and endDate of a BorrowRecord to startDate and endDate of interest.
+     * @param startDate start date of interest
+     * @param endDate end date of interest
+     * @param recordStartDate start date of a specific record
+     * @param recordEndDate end date of a specific record
+     * @return Boolean value whether there are overlaps in dates
+     */
     private boolean hasClash(LocalDate startDate, LocalDate endDate, 
             LocalDate recordStartDate, LocalDate recordEndDate) {
         if (recordEndDate.compareTo(startDate) < 0) {
@@ -50,10 +73,15 @@ public class ListAvailableBorrowingsCommand extends Command {
         }
     }
 
+    /**
+     * Prints out a list of available items for borrowing throughout the time period.
+     * @param itemList ItemList of all Item
+     * @param ui User Interface
+     */
     @Override
     public void execute(ItemList itemList, Ui ui) {
         boolean hasItem = false;
-        ui.showMessages("Here are the items available for borrowing:");
+        ui.showMessages(AVAILABLE_RESULT);
         for (int i = 0; i < itemList.getSize(); i++) {
             Item item = itemList.getItem(i);
             if (isAvailable(item)) {
@@ -62,7 +90,7 @@ public class ListAvailableBorrowingsCommand extends Command {
             }
         }
         if (!hasItem) {
-            ui.showMessages("Sorry. There are no items available for borrowings.");
+            ui.showMessages(NO_AVAILABLE_RESULT);
         }
     }
 }

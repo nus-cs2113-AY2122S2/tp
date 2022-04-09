@@ -20,7 +20,7 @@ public class ListCurrentBorrowingsCommand extends Command {
 
     public void execute(ItemList itemList, Ui ui) {
         if (name.isPresent()) {
-            ui.showMessages("Here is a list of future borrowings for " + name.get() + ": ");
+            ui.showMessages("Here is a list of current borrowings for " + name.get() + ": ");
             for (int i = 0; i < itemList.getSize(); i++) {
                 Item borrowedItem = itemList.getItem(i);
                 ArrayList<BorrowRecord> borrowRecords = borrowedItem.getBorrowRecords();
