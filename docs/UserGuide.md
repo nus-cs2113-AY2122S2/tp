@@ -4,8 +4,10 @@
 
 WerkIt! is an application for managing workout routines,
 optimized for use via a Command Line Interface (CLI). 
-This application is targeted to you if you wish to
-have an application to keep track of your workouts, plans and workout routines for a week.
+This application is targeted to those who may have
+trouble managing their workout routines. With this application,
+it helps to keep track of your workouts, plans and workout routines
+for a week in a simple and concise manner.
 
 You will be able to create, view, update and delete the workouts and plans you have created and store them in the application.
 You will also be able to schedule your workout plans for a week (7 days). 
