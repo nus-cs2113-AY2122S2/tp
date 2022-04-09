@@ -27,9 +27,6 @@ public class Ui {
     public static void showWelcomeMessage() {
         System.out.println(LOGO);
         System.out.println(MESSAGE_WELCOME);
-        System.out.println(MESSAGE_DIVIDER);
-        System.out.println(MESSAGE_QUESTION_NAME);
-        System.out.println(MESSAGE_DIVIDER);
     }
 
     public static void showInitFailedMessage() {
