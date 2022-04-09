@@ -560,13 +560,13 @@ IO redirection testing can be performed via the following steps:
 
 ## Non-Functional Requirements
 
-1. Should work on any _mainstream_ operating systems that has **Java 11** or above.
-2. Should be able to hold up to 1000 combined entries without a noticeable degrade in performance for typical 
+1. Should work on any _mainstream_ operating systems that have **Java 11** or above.
+2. Should be able to hold up to 1000 combined entries without a noticeable degradation in performance for typical 
 usage.
 3. A user with above average typing speed for regular English text, that are neither programming code nor system
 administrator commands, should be able to accomplish most of the tasks faster using commands than using the keyboard
 and mouse.
-4. Users should be able to load and use the saved application data on _any_ operating systems that fulfils point 1.
+4. Users should be able to load and use the saved application data on _any_ operating systems that fulfil point 1.
 
 ---
 
@@ -622,7 +622,7 @@ than the number of members in group x)
 ### Adding incomes
 
 #### Adding a non-recurring income
-1. Prerequisite: The person in which the income will be added to exists, then use the `list` command on the group 
+1. Prerequisite: The person in which the income will be added to exist, then use the `list` command on the group 
    which the person resides in to get his user index.
 2. Test case: `addin /g 1 /u 1 /d Donations /i 6000 /p f`
    Expected: A non-recurring income entry worth $6000 from Donations is added to the first person of `Parents`.
@@ -637,7 +637,7 @@ than the number of members in group x)
 ### Adding expenditures
 
 #### Adding a non-recurring expenditure
-1. Prerequisite: The person in which the expenditure will be added to exists, then use the `list` command on the group
+1. Prerequisite: The person in which the expenditure will be added to exist, then use the `list` command on the group
    which the person resides in to get his user index.
 2. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 2 /p f`
    Expected: A non-recurring expenditure entry worth $50 for Food, in the category *Food and Drinks*, is added to
