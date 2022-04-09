@@ -16,16 +16,37 @@ import seedu.meetingjio.exceptions.ExtraParametersException;
 
 public class ParserArguments {
 
+    /**
+     * Split the arguments with HEADINGS_ALL.
+     *
+     * @return String[] Arguments array
+     * @throws MissingParameterException if there's missing parameters
+     * @throws ExtraParametersException if there's extra parameters     
+     */
     protected static String[] splitArgumentsAll(String arguments)
             throws MissingParameterException, ExtraParametersException {
         return splitAndCheckArguments(arguments, HEADINGS_ALL);
     }
 
+    /**
+     * Split the arguments with HEADINGS_NAME_INDEX.
+     *
+     * @return String[] Arguments array
+     * @throws MissingParameterException if there's missing parameters
+     * @throws ExtraParametersException if there's extra parameters    
+     */
     protected static String[] splitArgumentsNameIndex(String arguments)
             throws MissingParameterException, ExtraParametersException {
         return splitAndCheckArguments(arguments, HEADINGS_NAME_INDEX);
     }
 
+    /**
+     * Split the arguments with HEADINGS_WITHOUT_NAME.
+     *
+     * @return String[] Arguments array
+     * @throws MissingParameterException if there's missing parameters
+     * @throws ExtraParametersException if there's extra parameters    
+     */
     protected static String[] splitArgumentsWithoutName(String arguments)
             throws MissingParameterException, ExtraParametersException {
         return splitAndCheckArguments(arguments, HEADINGS_WITHOUT_NAME);
@@ -56,6 +77,13 @@ public class ParserArguments {
         return eventDescription;
     }
 
+    /**
+     * Get the attributes and their values from the arguments.
+     *
+     * @return Attributes map
+     * @throws MissingParameterException if there's missing parameters
+     * @throws ExtraParametersException if there's extra parameters     
+     */
     protected static Map<String, String> getAttributesMap(String arguments)
             throws MissingParameterException, ExtraParametersException {
 
@@ -89,6 +117,11 @@ public class ParserArguments {
         return attributes;
     }
 
+    /**
+     * Get arguments from user input.
+     *
+     * @return String Arguments
+     */
     protected static String getArgumentsFromInput(String input) {
         String str = "";
         int spaceIndex = input.trim().indexOf(" ");
@@ -98,6 +131,11 @@ public class ParserArguments {
         return str.trim().toLowerCase();
     }
 
+    /**
+     * Get command from user input.
+     *
+     * @return String Command
+     */
     protected static String getCommandFromInput(String input) {
         return input.split(" ")[0].trim().toLowerCase();
     }
