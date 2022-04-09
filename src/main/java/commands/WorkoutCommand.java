@@ -147,7 +147,8 @@ public class WorkoutCommand extends Command {
         try {
             switch (getUserAction()) {
             case CREATE_ACTION_KEYWORD:
-                Workout newWorkout = getWorkoutList().createAndAddWorkout(getUserArguments());
+                Workout newWorkout = getWorkoutList().createNewWorkout(getUserArguments());
+                getWorkoutList().addNewWorkoutToLists(newWorkout);
                 getUI().printNewWorkoutCreatedMessage(newWorkout);
                 getFileManager().writeNewWorkoutToFile(newWorkout);
                 break;
