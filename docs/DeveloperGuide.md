@@ -111,7 +111,7 @@ The following details how the `Parser` component works at runtime:
 1. A single `ModHappyParser` instance is initialised by `Main` during at the start of the program.
 2. Each time the user inputs a command, `ModHappyParser`'s `parseCommand()` method with the input as the parameter.
 3. `ModHappyParser` identifies the relevant command-specific parser `XYZParser` and passes on the remaining unparsed arguments to its `parseCommand()` method.
-4. `XYZParser` parses the subsequently command arguments, and may branch the arguments to sub-parsers, and finally construct an `XYZCommand` instance, which is subsequently returned to `Main`.
+4. `XYZParser` parses the command arguments subsequently, and finally construct an `XYZCommand` instance, which is subsequently returned to `Main`.
 
 <br>
 
