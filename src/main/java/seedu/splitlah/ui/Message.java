@@ -448,15 +448,14 @@ public abstract class Message {
     // Group Edit Command
     public static final String ASSERT_GROUPEDIT_GROUP_ID_INVALID =
             "Group ID is less than or equals to zero.";
-    public static final String ERROR_GROUPEDIT_NEWLIST_NOT_CONTAIN_ALL_NAMES_FROM_OLDLIST =
-            "The new person list does not include all the names from the old person list"
+    public static final String ERROR_GROUPEDIT_SAME_PERSON_LIST =
+            "The new person list is the same as old list"
                   + " ,please rectify and try again.";
-    public static final String ERROR_GROUPEDIT_NO_NEW_NAMES =
-            "The new person list does not have any new names"
-                  + " ,please rectify and try again.";
+    public static final String ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE =
+             "There is existing group with the group name"
+                  + ", please rectify and try again.";
     public static final String ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW =
-            "The group name is the same as the old one, please rectify and try again.";
-
+             "The group name is the same as the old one, please rectify and try again.";
 
     // Group Edit Command Parser
     public static final String ERROR_GROUPEDIT_NO_EDIT_DELIMITERS_FOUND =
