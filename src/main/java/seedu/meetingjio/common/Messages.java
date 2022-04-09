@@ -73,6 +73,6 @@ public class Messages {
     public static final String CLEAR_TIMETABLE_CONFIRMATION = "'s timetable has been cleared";
     public static final String MEETING_CLEARED_FROM_ALL_CONFIRMATION = "The following meeting event has been deleted"
             + " from everyone's timetable:\n";
-    public static final String MEETING_ADDED_TO_ALL_CONFIRMATION ="The following meeting has been added "
+    public static final String MEETING_ADDED_TO_ALL_CONFIRMATION = "The following meeting has been added "
             + "to everyone's timetable: \n";
 }
