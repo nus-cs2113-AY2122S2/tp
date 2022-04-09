@@ -6,7 +6,12 @@ autonumber
 
 title Sequence Diagram of `search /exercise` Command
 
-participant "werkIt\n:WerkIt" AS WerkIt   #Sandybrown
+participant "werkIt\n:WerkIt" AS WerkIt #Sandybrown
+
+ref over WerkIt
+Obtain and parse user input.
+end
+
 
 participant "newCommand\n:SearchCommand" AS newCommand  #LightSkyBlue
 participant "exerciseList\n:ExerciseList" AS ExerciseList   #LightSkyBlue
