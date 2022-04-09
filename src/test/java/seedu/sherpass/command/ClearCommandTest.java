@@ -35,7 +35,6 @@ public class ClearCommandTest {
         System.setOut(new PrintStream(outContent));
         ArrayList<Task> testArrayList = new ArrayList<>();
         TaskList taskList = new TaskList(testArrayList);
-        Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
         storage.wipeSaveData();
         storage.load(taskList);
@@ -45,8 +44,8 @@ public class ClearCommandTest {
         String selection2 = "done";
         String expectedOutput = "There are no expired tasks to be removed." + LS
                 + "There are no completed tasks to be removed." + LS;
-        new ClearCommand(selection1).execute(taskList, ui, storage);
-        new ClearCommand(selection2).execute(taskList, ui, storage);
+        new ClearCommand(selection1).execute(taskList, new Ui(), storage);
+        new ClearCommand(selection2).execute(taskList, new Ui(), storage);
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -57,11 +56,10 @@ public class ClearCommandTest {
         System.setOut(new PrintStream(outContent));
 
         ArrayList<Task> testArrayList = new ArrayList<>();
-        TaskList taskList = new TaskList(testArrayList);
         testArrayList.add(new Task(1,"watch cs2113t videos", null,
                 LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(1).plusMinutes(1)));
+        TaskList taskList = new TaskList(testArrayList);
 
-        Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
         storage.wipeSaveData();
         storage.load(taskList);
@@ -71,8 +69,8 @@ public class ClearCommandTest {
         String selection2 = "done";
         String expectedOutput = "There are no expired tasks to be removed." + LS
                 + "There are no completed tasks to be removed." + LS;
-        new ClearCommand(selection1).execute(taskList, ui, storage);
-        new ClearCommand(selection2).execute(taskList, ui, storage);
+        new ClearCommand(selection1).execute(taskList, new Ui(), storage);
+        new ClearCommand(selection2).execute(taskList, new Ui(), storage);
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -82,19 +80,18 @@ public class ClearCommandTest {
         System.setOut(new PrintStream(outContent));
 
         ArrayList<Task> testArrayList = new ArrayList<>();
-        TaskList taskList = new TaskList(testArrayList);
         testArrayList.add(new Task(1,"watch cs2113t videos", null,
                 LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(1).plusMinutes(1)));
         testArrayList.get(0).markAsDone();
+        TaskList taskList = new TaskList(testArrayList);
 
-        Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
         outContent.reset();
 
         String selection = "done";
         String expectedOutput = "Done! 1 task(s) have been removed." + LS
                 + "Now you have 0 task(s) in the list." + LS;
-        new ClearCommand(selection).execute(taskList, ui, storage);
+        new ClearCommand(selection).execute(taskList, new Ui(), storage);
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -108,14 +105,13 @@ public class ClearCommandTest {
         testArrayList.add(new Task(1,"watch cs2113t videos", null,
                 LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1)));
 
-        Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
         outContent.reset();
 
         String selection = "expired";
         String expectedOutput = "Done! 1 task(s) have been removed." + LS
                 + "Now you have 0 task(s) in the list." + LS;
-        new ClearCommand(selection).execute(taskList, ui, storage);
+        new ClearCommand(selection).execute(taskList, new Ui(), storage);
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -135,7 +131,6 @@ public class ClearCommandTest {
                 LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(3).plusMinutes(1)));
         TaskList taskList = new TaskList(testArrayList);
 
-        Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
         storage.wipeSaveData();
         storage.load(taskList);
@@ -147,7 +142,7 @@ public class ClearCommandTest {
                 + CLEAR_ALL_COMMAND_CONFIRMED_MESSAGE + LS
                 + "____________________________________________________________" + LS
                 + CLEAR_ALL_COMMAND_RESULT_MESSAGE + LS;
-        new ClearCommand(selection).execute(taskList, ui, storage);
+        new ClearCommand(selection).execute(taskList, new Ui(), storage);
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -162,7 +157,6 @@ public class ClearCommandTest {
         ArrayList<Task> testArrayList = new ArrayList<>();
         TaskList taskList = new TaskList(testArrayList);
 
-        Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
         storage.wipeSaveData();
         storage.load(taskList);
@@ -172,7 +166,7 @@ public class ClearCommandTest {
         String expectedOutput = CLEAR_ALL_COMMAND_CONFIRMATION_MESSAGE + LS
                 + "____________________________________________________________" + LS
                 + CLEAR_ALL_COMMAND_CANCEL_MESSAGE + LS;
-        new ClearCommand(selection).execute(taskList, ui, storage);
+        new ClearCommand(selection).execute(taskList, new Ui(), storage);
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -183,7 +177,6 @@ public class ClearCommandTest {
 
         ArrayList<Task> testArrayList = new ArrayList<>();
         TaskList taskList = new TaskList(testArrayList);
-        Ui ui = new Ui();
         Storage storage = new Storage("data/test.json");
         outContent.reset();
 
@@ -191,7 +184,7 @@ public class ClearCommandTest {
         String expectedOutput = ERROR_PREFIX + ERROR_INVALID_CLEAR_MESSAGE + LS
                 + "____________________________________________________________" + LS
                 + ClearCommand.MESSAGE_USAGE + LS;
-        new ClearCommand(selection).execute(taskList, ui, storage);
+        new ClearCommand(selection).execute(taskList, new Ui(), storage);
         assertEquals(expectedOutput, outContent.toString());
     }
 }
