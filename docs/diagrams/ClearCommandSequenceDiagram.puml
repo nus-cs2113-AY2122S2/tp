@@ -1,32 +1,13 @@
 @startuml
-actor user
+hide footbox
 
-user -> ":Ui" ++ : "clear all"
-create ":Parser"
-":Ui" -> ":Parser" ++: new Parser("clear all")
-":Parser" --> ":Ui" --: parser:Parser
-":Ui" -> ":Parser" ++: parseCommand("clear all")
-create ":ClearCommand"
-":Parser" -> ":ClearCommand" ++: new ClearCommand()
-":ClearCommand" --> ":Parser" --: clearCommand:ClearCommand
-":Parser" --> ":Ui" --: clearCommand:ClearCommand
+
 ":Ui" -> ":ClearCommand" ++: execute(masterTimetable)
-":ClearCommand" -> ":ClearCommand": clearAll(masterTimetable)
-loop for each entry in MasterTimetable
-":ClearCommand" -> ":MasterTimetable" ++: getByIndex(0)
-":MasterTimetable" --> ":ClearCommand" -- : timetable: Timetable
-loop for each entry in timetable
-":ClearCommand" -> ":ClearCommand": clearTimetable(timetable)
-":ClearCommand" -> ":MasterTimetable" ++ : removeByIndex(0)
+":ClearCommand" -> ":ClearCommand" ++: clearAll(masterTimetable)
+":ClearCommand" -> ":MasterTimetable" ++: clearAll(masterTimetable)
+":MasterTimetable" -> ":MasterTimetable" : clear()
 ":MasterTimetable" --> ":ClearCommand" --:
-deactivate ":ClearCommand"
-end
-end
-
 ":ClearCommand" --> ":Ui" --: 
-":Ui" --> user
 destroy ":ClearCommand"
-destroy ":Parser"
-destroy ":MasterTimetable"
-destroy ":Ui"
+
 @enduml
