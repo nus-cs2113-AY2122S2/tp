@@ -1,6 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
-
+hide circle
+skinparam classAttributeIconSize 0
 class Manager {
 + ui: UI = new UI
 - isTerminated: boolean = false

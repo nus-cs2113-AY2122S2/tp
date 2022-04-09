@@ -8,7 +8,7 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 **Code contributed:** [RepoSense link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=tanweili&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 <br>
-**Enhancement implemented:**
+**Enhancements implemented:**
 <br>
 **UG contributions:**
 <br>

@@ -229,7 +229,7 @@ Below is an example describing the behaviour of the `find` feature.
 ---------------------------------------------------------------------------------------------------------------
 ## Product scope
 
-###Target user profile:
+### Target user profile:
 
 * administrator in clinic(s)
 * prefer desktop apps over other types
@@ -237,7 +237,7 @@ Below is an example describing the behaviour of the `find` feature.
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-###Value proposition:
+### Value proposition:
 
 Manage core clinic related data faster than using mouse or GUI.
 Ensure each data type conforms to certain standards with in-built validations.
