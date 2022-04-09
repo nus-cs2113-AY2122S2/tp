@@ -4,7 +4,10 @@ import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Item implements Cloneable {
 
@@ -16,12 +19,18 @@ public class Item implements Cloneable {
     private int quantity;
     private String description;
     private ArrayList<BorrowRecord> borrowRecords;
+    private boolean isLost = false;
+
 
     public Item(String name, int quantity, String description) {
         this.name = name;
         this.quantity = quantity;
         this.description = description;
         this.borrowRecords = new ArrayList<>();
+    }
+
+    public boolean getLost() {
+        return isLost;
     }
 
     public String getDescription() {
@@ -45,6 +54,14 @@ public class Item implements Cloneable {
         this.name = name;
     }
 
+    public void setLost(boolean isLost) {
+        this.isLost = isLost;
+    }
+
+    public void markItemAsLost() {
+        this.setLost(true);
+    }
+
     public void setQuantity(int quantity) {
         if (quantity <= 0) {
             throw new IllegalArgumentException(NON_ZERO_QUANTITY);
@@ -58,17 +75,13 @@ public class Item implements Cloneable {
     }
 
     /**
-     * Returns a boolean indicating if an Item contains the search term in the item name.
+     * Returns True if an Item contains the search term in the item name.
      *
-     * @param searchTerm User input of search term
+     * @param searchTerm User input of search term.
      * @return True if search term found in item name. Returns False, if otherwise.
      */
     public boolean contains(String searchTerm) {
-        if (name == searchTerm) {
-            return true;
-        } else {
-            return false;
-        }
+        return name.equals(searchTerm);
     }
 
     /**
@@ -81,12 +94,28 @@ public class Item implements Cloneable {
         // Throw exception if newRecord conflicts with existing records.
         for (BorrowRecord record : borrowRecords) {
             if (newRecord.isConflict(record)) {
-                throw new InvMgrException(Messages.INVALID_DATES_CONCLICT);
+                throw new InvMgrException(Messages.INVALID_DATES_CONFLICT);
             }
         }
 
         this.borrowRecords.add(newRecord);
         return this;
+    }
+
+    /**
+     * Returns a list of borrow records filtered by borrower's name (if present)
+     * and borrow status.
+     *
+     * @param name Either an empty Optional instance or
+     *             an Optional instance containing a String name in it.
+     * @param status Filter out borrow records with this BorrowStatus.
+     * @return List of BorrowRecords.
+     */
+    public List<BorrowRecord> filterRecords(Optional<String> name, BorrowStatus status) {
+        return borrowRecords.stream()
+                .filter(record -> record.containsBorrowerName(name))
+                .filter(record -> record.isStatus(status))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -98,7 +127,6 @@ public class Item implements Cloneable {
         return String.format("%s | %d | %s", name, quantity, description);
     }
 
-    // String representation of an item when printed on Ui
     @Override
     public String toString() {
         return String.format("%s | %d", this.name, this.quantity);
@@ -110,6 +138,18 @@ public class Item implements Cloneable {
         }
         return String.format("%s | %d | %s", this.name, this.quantity, this.description);
     }
+    /**
+     *     // String representation of an item when printed on Ui.
+     *     @Override
+     *     public String toString() {
+     *         String string1 = (name + " | " + quantity);
+     *         if (isLost) {
+     *             string1 = string1 + " |[LOST]";
+     *         }
+     *         return string1;
+     *     }
+     * */
+
 
     @Override
     public boolean equals(Object other) {
