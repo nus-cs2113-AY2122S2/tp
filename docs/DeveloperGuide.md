@@ -1,4 +1,4 @@
-# Developer Guide
+AddS# Developer Guide
 
 ## Design & implementation
 
@@ -129,7 +129,7 @@ created in the `AddSatisfactionCommand` class is added to `satisfactionList`.
 
 ![Step 1 Object Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_Step5ObjectDiagram.png)
 
-The following sequence diagram shows what would happen if the user typed `add satisfaction Bob 5`.
+The following sequence diagram shows what would happen if the user typed `add satisfaction bob 5`.
 
 PLEASE NOTE: Due to the limitation of PlantUML, the lengths of the activation bars may not be correct, and
 certain return values from method calls that could not be placed correctly were omitted. For example, the
@@ -138,7 +138,7 @@ and `Satisfaction` should have return value arrows (representing the object that
 entity that created those instances, but those are not indicated in the diagram. Furthermore, for neatness, the
 `User` entity should be the left-most entity, but that could not be formatted properly in the diagram.
 
-![Sequence Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_SequenceDiagram.png)
+![Sequence Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_SequenceDiagram2.0.png)
 
 ### Add Housekeeper feature
 
