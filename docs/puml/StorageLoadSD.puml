@@ -3,18 +3,14 @@
 
 hide footbox
 participant Storage as "storage:Storage"
-participant List as "taskList:ArrayList<task>"
 participant File as "<<class>>\nFile"
 participant JSONObject as ":JSONObject"
 participant JSONArray as "taskArray:JSONArray"
 participant Parser as "<<class>>\nParser"
 participant Task as "newTask:Task"
+participant List as "taskList:TaskList"
 
-[-> Storage ++: load()
-
-create List
-Storage -> List ++:
-List --> Storage --
+[-> Storage ++: load(taskList: TaskList)
 
 Storage -> File as "<<class>>\nFile" ++: readAllLines(saveFilePath)
 
@@ -43,9 +39,12 @@ opt fileContent not empty
 
         Parser --> Storage --: task
 
-        Storage -> List ++: add(task)
+        Storage -> List ++: addTask(task)
         List --> Storage --
     end
+
+    Storage -> Storage ++ : writeSavedData(taskList)
+    Storage --> Storage --
 end
 return taskList
 @enduml

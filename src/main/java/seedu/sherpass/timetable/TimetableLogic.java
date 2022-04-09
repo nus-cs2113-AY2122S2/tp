@@ -1,7 +1,7 @@
 package seedu.sherpass.timetable;
 
+import seedu.sherpass.enums.TaskContentType;
 import seedu.sherpass.task.Task;
-import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
@@ -13,40 +13,67 @@ import java.util.logging.Level;
 import static seedu.sherpass.Main.LOGGER;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
-import static seedu.sherpass.constant.TimetableConstant.PARTITION_PIPE_LINE_LENGTH;
-import static seedu.sherpass.constant.TimetableConstant.PARTITION_SPACE_OFFSET_LENGTH;
-import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_COMPARE_LENGTH;
-import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_COMPARE_OFFSET_LENGTH;
-import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_FULL_LENGTH;
-import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.PARTITION_PIPE_LINE_LENGTH_ONE;
+import static seedu.sherpass.constant.TimetableConstant.PARTITION_SPACE_OFFSET_LENGTH_ONE;
+import static seedu.sherpass.constant.TimetableConstant.PARTITION_SPACE_OFFSET_LENGTH_TWO;
+import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET_LENGTH_ONE;
+import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET_LENGTH_TWO;
 
 public class TimetableLogic {
-    protected static int findTaskDescriptionLength(ArrayList<Task> filteredTasks) {
-        int max = 0;
+    protected static long findTaskContentLength(ArrayList<Task> filteredTasks, TaskContentType type) {
+        long max = 0;
+        long contentLength;
         for (Task task : filteredTasks) {
-            int taskLength = task.getDescription().length();
-            if (taskLength > max) {
-                max = taskLength;
+            switch (type) {
+            case TASK_DESCRIPTION:
+                contentLength = task.getDescription().length();
+                break;
+            case TASK_NUMBER:
+                contentLength = String.valueOf(task.getIndex()).length();
+                break;
+            case BY_DATE:
+                contentLength = task.getByDateString().length();
+                break;
+            default:
+                contentLength = task.getDoOnDateString().length();
+            }
+            if (contentLength > max) {
+                max = contentLength;
             }
         }
         return max;
     }
 
-    protected static int findTaskLength(ArrayList<Task> filteredTasks) {
-        int descriptionLength = findTaskDescriptionLength(filteredTasks);
-        if (descriptionLength > TASK_SPACE_COMPARE_LENGTH) {
-            return descriptionLength + TASK_SPACE_COMPARE_OFFSET_LENGTH;
+    protected static long prepareTaskContentLength(ArrayList<Task> filteredTasks,
+                                                   long taskContentCompareLength,
+                                                   long taskOffsetLength,
+                                                   long taskFullLength, TaskContentType type) {
+        long descriptionLength = findTaskContentLength(filteredTasks, type);
+        if (descriptionLength > taskContentCompareLength) {
+            return descriptionLength + taskOffsetLength;
         }
-        return TASK_SPACE_FULL_LENGTH;
+        return taskFullLength;
+    }
+
+    protected static long calcOffset(boolean condition) {
+        if (condition) {
+            return WHITE_SPACE_FRONT_OFFSET_LENGTH_ONE;
+        }
+        return WHITE_SPACE_FRONT_OFFSET_LENGTH_TWO;
     }
 
     protected static long calculateColBackWhiteSpace(long maxDescriptionLength,
-                                                   String description) {
-        return maxDescriptionLength - (description.length() + WHITE_SPACE_FRONT_OFFSET_LENGTH);
+                                                   String description, long offset) {
+        return maxDescriptionLength - (description.length() + offset);
     }
 
-    protected static long calcPartitionLength(long taskLength, long dateLength) {
-        return PARTITION_SPACE_OFFSET_LENGTH + taskLength + dateLength + PARTITION_PIPE_LINE_LENGTH;
+    protected static long calcPartitionLength(long taskLength, long byDateLength,
+                                              long doOnDateLength, long taskNumberLength,
+                                              boolean isFullTimetable) {
+        if (isFullTimetable) {
+            return PARTITION_SPACE_OFFSET_LENGTH_ONE + taskLength + byDateLength + PARTITION_PIPE_LINE_LENGTH_ONE;
+        }
+        return PARTITION_SPACE_OFFSET_LENGTH_TWO + taskLength + byDateLength + doOnDateLength + taskNumberLength;
     }
 
     /**
@@ -83,30 +110,24 @@ public class TimetableLogic {
         }
     }
 
-    protected static void showMonthlySchedule(TaskList taskList, Ui ui, Month month) {
-        LocalDate firstDayOfMonth = TimetableLogic.getFirstDayOfMonth(month);
-        ArrayList<Task> monthlySchedule = taskList.getFilteredTasksByMonth(firstDayOfMonth);
 
-        if (monthlySchedule.isEmpty()) {
-            ui.showToUser(String.format("Your schedule is empty for %s", month));
-        } else {
-            taskList.printTaskList(monthlySchedule, ui);
-        }
-    }
 
     protected static LocalDate getFirstDayOfMonth(Month month) {
         Month currentMonth = LocalDate.now().getMonth();
 
         int year = LocalDate.now().getYear();
 
-        if (isRequestedMonthAfterCurrentMonth(month, currentMonth)) {
+        if (isRequestedMonthBeforeCurrentMonth(month, currentMonth)) {
+            // For example, requested month is Feb but current month is May. Feb is before May hence return true.
+            // return a date that is in the future and not the past.
             return LocalDate.of(year + 1, month, 1);
         } else {
             return LocalDate.of(year, month, 1);
         }
     }
 
-    private static boolean isRequestedMonthAfterCurrentMonth(Month month, Month currentMonth) {
+    private static boolean isRequestedMonthBeforeCurrentMonth(Month month, Month currentMonth) {
         return month.getValue() - currentMonth.getValue() < 0;
     }
+
 }

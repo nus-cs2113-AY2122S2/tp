@@ -1,7 +1,6 @@
 package seedu.sherpass.util;
 
 import org.junit.jupiter.api.Test;
-import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.timetable.Timetable;
@@ -63,19 +62,19 @@ public class TimetableTest {
                 LocalDateTime.parse(LocalDate.now().format(outputDateOnlyFormat) + " 09:00", inputWithTimeFormat),
                 LocalDateTime.parse(LocalDate.now().format(outputDateOnlyFormat) + " 11:00", inputWithTimeFormat));
 
-        String expectedOutput = "------------------------------------------------"
-                + "---------------------------------------" + System.lineSeparator()
-                + "|  Day       |  Time         |  Mark Status |  Task Description    |  To complete by  |"
+        String expectedOutput = "---------------------------------------------"
+                + "------------------------------------------------" + System.lineSeparator()
+                + "|  Day       |  Time         |  Mark Status |  Task Description    |  To complete by        |"
                 + System.lineSeparator()
                 + "|  " + LocalDate.now().format(dayOnlyFormat)
-                + "       | " + testTask.getTimePeriod() + " |              |  1. submit DG        "
-                + "|  Tue, 29/03/2022 |"
+                + "       | " + testTask.getDoOnDateTimePeriod() + " |              |  1. submit DG        "
+                + "|  Tue, 29/03/2022 00:00 |"
                 + System.lineSeparator()
                 + "| " + LocalDate.now().format(outputDateOnlyFormat)
-                + " |               |              |                      |                  |"
+                + " |               |              |                      |                        |"
                 + System.lineSeparator()
-                + "------------------------------------------------------"
-                + "---------------------------------"
+                + "---------------------------------------------------"
+                + "------------------------------------------"
                 + System.lineSeparator();
 
         dummyList.add(testTask);
@@ -108,7 +107,7 @@ public class TimetableTest {
                     .append("---------------------------------------------------------------------------------------")
                     .append(System.lineSeparator());
         }
-        Timetable.showScheduleOfTheWeek(taskList, ui);
+        Timetable.showScheduleOfTheWeek(LocalDate.now(), taskList, ui);
         assertEquals(sb.toString(), outContent.toString());
     }
 
@@ -137,24 +136,24 @@ public class TimetableTest {
                 + "|  Day       |  Time         |  Mark Status |  Task Description              "
                 + "            |  To complete by  |" + System.lineSeparator()
                 + "|  " + currentDay
-                + "       | " + dummyList.get(0).getTimePeriod() + " |              |"
+                + "       | " + dummyList.get(0).getDoOnDateTimePeriod() + " |              |"
                 + "  1. A significantly long task description  |"
                 + "                  |" + System.lineSeparator()
                 + "| " + currentDate
-                + " | " + dummyList.get(1).getTimePeriod()
+                + " | " + dummyList.get(1).getDoOnDateTimePeriod()
                 + " |              |  2. A somewhat long description            |"
                 + "                  |" + System.lineSeparator()
-                + "|            | " + dummyList.get(2).getTimePeriod() + " |              |  3. break time!"
+                + "|            | " + dummyList.get(2).getDoOnDateTimePeriod() + " |              |  3. break time!"
                 + "                            |"
                 + "                  |" + System.lineSeparator()
-                + "|            | " + dummyList.get(3).getTimePeriod() + " |              | "
+                + "|            | " + dummyList.get(3).getDoOnDateTimePeriod() + " |              | "
                 + " 4. One more task to add                   |"
                 + "                  |" + System.lineSeparator()
                 + "---------------------------------------"
                 + "----------------------------------------------------------------------"
                 + System.lineSeparator();
         Ui ui = new Ui();
-        Timetable.showTodaySchedule(new TaskList(dummyList), ui);
+        Timetable.showScheduleByDay(LocalDate.now(), new TaskList(dummyList), ui);
 
         assertEquals(expectedOutput, outContent.toString());
     }

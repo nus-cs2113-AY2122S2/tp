@@ -11,7 +11,7 @@ class Storage {
     -wipeSaveData():void
 }
 
-class Parser {
+class StorageParser {
     +parseSaveData(taskData:JSONObject):Task
 }
 
@@ -20,6 +20,6 @@ class TaskList {
 }
 
 
-Storage ..> Parser
+Storage ..> StorageParser
 Storage ..> TaskList
 @enduml
