@@ -207,8 +207,8 @@ public class Parser {
     }
 
     /**
-     * Prepare argument for CheckCommand by matching the preceding "n/" prefix, setting it to lowercase and verifying
-     * that there are no additional tags.
+     * Prepare argument for CheckCommand by matching the preceding "n/" prefix, setting the prefix to lowercase,
+     * remove backticks and verifying that there are no additional tags.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is item name)
@@ -224,8 +224,8 @@ public class Parser {
     }
 
     /**
-     * Prepare argument for DeleteCommand by matching the preceding "s/" prefix, setting it to lowercase and verifying
-     * that there are no additional tags.
+     * Prepare argument for DeleteCommand by matching the preceding "s/" prefix, setting the prefix to lowercase,
+     * remove backticks and verifying that there are no additional tags.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is serial number)
@@ -241,7 +241,8 @@ public class Parser {
     }
 
     /**
-     * Splits main arguments into split tags with each substring.
+     * Splits main arguments into split tags with each substring by setting the prefix to lowercase
+     * and removing backticks.
      *
      * @param args String to be split into substrings
      * @return ArrayList of two elements
