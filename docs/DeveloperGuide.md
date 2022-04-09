@@ -29,7 +29,7 @@ The Parser and Command classes will also be called by Ui class in the process of
 The above partial class diagrams illustrate the classes inside the commands component
 that correspond to specific functionalities.
 
-The commands component consists of a commands package. Inside the package are the following classes:
+The commands component consists of a `commands` package. Inside the package are the following classes:
 1. An abstract `Command` class which other individual command classes inherit from.
 2. Individual Command classes which corresponding to a specific command based on the user's input.
 - `AddLessonCommand`
@@ -44,7 +44,19 @@ The commands component consists of a commands package. Inside the package are th
 - `ListCommand`
 3. Lastly, `CommandResult` class returns corresponding feedbacks to the user.
 
-##2.4 Parser Component
+## 2.4 Parser Component
+
+![ParserClassDiagram2](images/ParserClassDiagram.png)
+The above class diagram illustrates the classes within the `parser` package.
+
+The `parser` package includes:
+1. `Parser` 
+   - To parse the user input and call the respective functions or command objects based on the command word.
+2. `ParserArguments`
+   - To parse and split the arguments into array of parameters' values.
+3. `ParserHelperMethods`
+   - Contain helper methods to check if the values of the parameters are valid.
+
 ## 2.5 Timetable Component
 - Timetable
 - MasterTimetable
