@@ -47,7 +47,7 @@ public class EditCommand extends Command {
     }
 
     public EditCommand(String taskModule, int taskIndex,
-                        String description, String estimatedWorkingTime, String taskName) {
+                       String description, String estimatedWorkingTime, String taskName) {
         this.taskModule = taskModule;
         this.taskIndex = taskIndex;
         if (!Objects.isNull(description)) {
@@ -119,11 +119,7 @@ public class EditCommand extends Command {
             targetTask.setTaskDescription(changedParameter);
             break;
         case ESTIMATED_WORKING_TIME:
-            try {
-                targetTask.setWorkingTime(changedParameter);
-            } catch (ModHappyException e) {
-                throw e;
-            }
+            targetTask.setWorkingTime(changedParameter);
             break;
         default:
             targetTask.setTaskName(changedParameter);

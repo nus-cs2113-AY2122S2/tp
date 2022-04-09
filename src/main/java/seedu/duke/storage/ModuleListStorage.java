@@ -18,13 +18,11 @@ import seedu.duke.exceptions.ReadException;
 
 import seedu.duke.data.Module;
 import seedu.duke.exceptions.UnknownException;
-import seedu.duke.util.NumberConstants;
 
 /**
  * A data access object managing the loading and saving of ModuleList instances.
  */
 public class ModuleListStorage extends ListStorage<Module> {
-    private static final int MAXIMUM_MODULAR_CREDITS = NumberConstants.MAXIMUM_MODULAR_CREDITS;
 
     /**
      * Deserialises the ModuleList stored in the json file.

@@ -108,7 +108,7 @@ public class MarkParser extends Parser {
         HashMap<String, String> parsedArguments = parseString(userInput);
         final String commandFlag = parsedArguments.get(FLAG);
         final String taskModule = parsedArguments.get(TASK_MODULE);
-        final int taskIndex = parseIndex(parsedArguments.get(TASK_NUMBER));;
+        final int taskIndex = parseIndex(parsedArguments.get(TASK_NUMBER));
         checksForExcessArg();
         switch (commandFlag) {
         case (COMPLETED_FLAG):

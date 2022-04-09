@@ -84,9 +84,6 @@ public class TaskList {
         return task;
     }
 
-    public ArrayList<Task> getList() {
-        return taskList;
-    }
 
     public void setList(ArrayList<Task> list) {
         taskList = list;

@@ -7,7 +7,6 @@ import seedu.duke.commands.ExitCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.parsers.ModHappyParser;
 import seedu.duke.storage.ModHappyStorageManager;
-import seedu.duke.storage.Storage;
 import seedu.duke.data.ModuleList;
 import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
@@ -15,15 +14,11 @@ import seedu.duke.util.StringConstants;
 
 
 public class Main {
-    private final String modulePath = StringConstants.MODULE_PATH;
-    private final String taskPath = StringConstants.TASK_PATH;
-    private final String configurationPath = StringConstants.CONFIGURATION_PATH;
 
 
     private ModHappyParser modHappyParser;
     private ModuleList moduleList;
     private Configuration configuration;
-    private Storage modHappyStorage;
 
     /**
      * Main entry-point for the application.
@@ -58,8 +53,11 @@ public class Main {
      * If a data file is not found or contains invalid data, the file will be treated as blank instead.
      */
     private void loadDataFromFile() {
+        String taskPath = StringConstants.TASK_PATH;
         ModHappyStorageManager.loadTaskList(moduleList, taskPath);
+        String modulePath = StringConstants.MODULE_PATH;
         ModHappyStorageManager.loadModuleList(moduleList, modulePath);
+        String configurationPath = StringConstants.CONFIGURATION_PATH;
         configuration = ModHappyStorageManager.loadConfiguration(configurationPath);
     }
 

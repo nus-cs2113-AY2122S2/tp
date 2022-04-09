@@ -23,8 +23,7 @@ public class ConfigurationStorage extends JsonStorage<Configuration> {
         Path file = new File(path).toPath();
         try {
             Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
-            Configuration configuration = gson.fromJson(reader, (Type) seedu.duke.util.Configuration.class);
-            return configuration;
+            return gson.fromJson(reader, (Type) Configuration.class);
         } catch (IOException e) {
             throw new ReadException();
         } catch (Exception e) {

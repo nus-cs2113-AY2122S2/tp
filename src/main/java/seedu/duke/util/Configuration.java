@@ -78,11 +78,11 @@ public class Configuration {
      */
     public String getValueExplain(ConfigurationGroup configureGroup) {
         HashSet<String> valueOfConfigureGroup = EXPLAIN_LEGAL_VALUES.get(configureGroup);
-        String listResult = "";
+        StringBuilder listResult = new StringBuilder();
         for (String explain : valueOfConfigureGroup) {
-            listResult += INDENT + explain + LS;
+            listResult.append(INDENT).append(explain).append(LS);
         }
-        return listResult;
+        return listResult.toString();
     }
 
     /**
@@ -90,11 +90,12 @@ public class Configuration {
      * @return Report of current configuration setting.
      */
     public String getConfigurationsReport() {
-        String listResult = "";
+        StringBuilder listResult = new StringBuilder();
         for (ConfigurationGroup group : ConfigurationGroup.values()) {
-            listResult += INDENT + String.format(DESCRIPTION_FORMAT, group, configurationGroupHashMap.get(group)) + LS;
+            listResult.append(INDENT).append(String.format(DESCRIPTION_FORMAT,
+                     group, configurationGroupHashMap.get(group))).append(LS);
         }
-        return listResult;
+        return listResult.toString();
     }
 
     /**
@@ -110,10 +111,10 @@ public class Configuration {
      * Returns a list of all config settings and their descriptions.
      */
     public static String getAllConfigurationExplanations() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (String s : EXPLAIN_CONFIGURE_GROUP) {
-            result += s + LS;
+            result.append(s).append(LS);
         }
-        return result;
+        return result.toString();
     }
 }

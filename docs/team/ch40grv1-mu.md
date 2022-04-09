@@ -41,13 +41,13 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
         - Added section explaining the format and usage of estimated time. [#118](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/118)
         - Added explanation of the overview of the app and created the relevant class diagrams within that section. [#99](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/99),  [#109](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/109)
         - Added explanations of the parsers and created the relevant class diagrams within that section.  [#109](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/109), [#118](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/118)
-        - Added explanations of the component and implementation of storage, and created the relevant class diagrams within that section. [#99](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/99), [#109](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/109)
+        - Added explanations of the component and implementation of storage, and created the relevant class diagrams within that section. [#109](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/109), [#99](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/99)
 
 - **Team tasks:**
     - Performed code cleanup and fixed bugs.
     - Confirmed meeting time and created Zoom for each meeting.
     - Checked the releases `v1.0` and `v2.0` on multiple systems(macOS, Kali Linux, Ubuntu, CentOS) for each release.
-    - Keep tracking potential bugs and created multiple bug issues after discussing with teammates. [#135](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/135), [#170](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/170), [#134](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/134), [#172](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/172) , [#136](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/136) , [#119](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/119), [#71](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/71)
+    - Keep tracking potential bugs and created multiple bug issues after discussing with teammates. [#170](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/170), [#135](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/135), [#134](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/134), [#172](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/172) , [#136](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/136) , [#119](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/119), [#71](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/71)
 
 
 - **Community:**

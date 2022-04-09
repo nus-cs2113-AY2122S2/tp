@@ -81,7 +81,6 @@ public class StringConstants {
     public static final String LIST_MESSAGE = "Ok! Here are the task(s) in your list:\n%s";
     public static final String EMPTY_LIST = "(empty)";
     public static final String HIDDEN_TASKS_COUNT = "--- %d completed task(s) hidden ---";
-    public static final String LIST_ARGUMENT = "listArgument";
 
     /**
      * For MarkCommand.
@@ -252,7 +251,6 @@ public class StringConstants {
     public static final String MODULE_DESCRIPTION = "moduleDescription";
     public static final String MODULE_DESCRIPTION_STR = "module description";
     public static final String MODULAR_CREDIT = "modularCredit";
-    public static final String MODULAR_CREDIT_STR = "modular credits";
     public static final String MODULE_GRADE = "moduleGrade";
     public static final String MODULE_STR = "mod";
     public static final String FLAG = "flag";
@@ -271,9 +269,7 @@ public class StringConstants {
     public static final String INVALID_TASK_DES_FLAG = "invalidTaskDesFlag";
     public static final String INVALID_MOD_DES_FLAG = "invalidModDesFlag";
     public static final String INVALID_TIME_FLAG = "invalidTimeFlag";
-    public static final String INVALID_MARK_FLAG = "invalidMarkFlag";
     public static final String INVALID_MODULE_GRADE = "invalidModuleGrade";
-    public static final String INVALID_NUMBER = "invalidNumber";
     public static final String INVALID_TAG_COMMAND = "invalidTagCommand";
     public static final String COMMAND_WORD = "commandWord";
     public static final String EXIT_COMMAND_WORD = "exit";
