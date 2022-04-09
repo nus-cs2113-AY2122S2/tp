@@ -186,8 +186,12 @@ loop For all Personlists in Family
     activate Family
     Family <- Family: generation:String
     deactivate Family
-    Family -> Family: printFormattedString()
+    Family -> Family: printFormattedOverview()
     activate Family
+    Family -> System: println()
+    activate System
+    Family <- System
+    deactivate System
     Family <- Family
     deactivate Family
 end loop
