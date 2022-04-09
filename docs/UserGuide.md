@@ -1,24 +1,25 @@
+---
+title: User Guide
+---
+
 <p align="center"><img alt="logo" src="https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/pngLogo.png"></p>
 
 # SplitLah
-SplitLah is a desktop app with a Command Line Interface (CLI) for **splitting bills** amongst you and your friends after a group outing,
-where each group outing can consist of several activities with **different people paying the bill** for each activity.
-SplitLah does the work of **calculating how much each participant owes** and whom they must pay at the end of the activity.
-You will no longer have to waste time doing these calculations by hand, leaving you with more time to spend with your
-friends.
+SplitLah is a desktop application with a Command Line Interface (CLI) for **splitting bills** amongst you and your friends after a group outing.
+Each group outing can consist of several activities with **different people paying the bill** for each activity.
+SplitLah does the work of **calculating how much each participant owes** and who they must pay at the end of the outing.
+
 
 SplitLah also **consolidates all debts intelligently** so that they can be paid off with the fewest number of transactions 
-possible, helping you to **reduce time spent on making pointless transactions**. 
-You can **look up past activities** anytime you want. SplitLah remembers your information by saving your outings and
-activities.
-If you can type fast, SplitLah can manage your outings faster than apps using a Graphical User Interface (GUI).
+possible, helping you **reduce time spent on making unnecessary transactions**. 
+SplitLah remembers your information by saving your outings and activities so that you can **look up past activities** anytime you want.
+If you can type fast, SplitLah can manage your outings faster than applications using a Graphical User Interface (GUI).
 
 ### Who SplitLah is for:
-- People who go on group outings often and love to split bills.
-- People who dislike manually calculating how much people owe across several activities.
+- People who go on group outings often and need to split bills.
 - People who go on group outings where different people pay for different activities, making bill-splitting harder.
+- People who dislike manually calculating how much everyone owes across several activities.
 - People who want to manage outings with multiple social circles in one application.
-- People who can type fast.
 
 <hr>
 
@@ -70,11 +71,11 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 
 ## Quick Notes
 - Allowed characters for values:
-  - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
-    - Names of participants can only contain: `A-Z`, `a-z`
+  - Names of `Sessions`,`Activities` and `Groups` can have all printable [ASCII](https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html) characters.
+  - Names of participants can only contain: `A-Z`, `a-z`
   - Decimals (up to 2 decimal places): `3.5`, `3.95`
+  - Unique identifiers must be positive integers: `1`, `3`
   - Dates (DD-MM-YYYY or today): `02-04-2022`, `today`
-  - Whitespace: `Birthday party`
 - A forward slash `/` indicates a delimiter and is used to separate commands into parts.
   Each command's documentation specifies the required delimiters and their purpose.
   - Example: `/n`, `/sid`
@@ -102,28 +103,28 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
 3. Copy the file to the folder you wish to use as a home folder for SplitLah.
-4. Start SplitLah by executing `java -jar SplitLah.jar` in the terminal.
+4. Start SplitLah by executing `java -jar splitlah.jar` in the terminal.
 5. Type in a command and press Enter to execute it.
-6. Refer to Features for a more in-depth explanation of all commands available.
+6. Refer to [Features](#features) for a more in-depth explanation of all commands available.
 
 ## How SplitLah works
-- An activity represents a single group activity, paid for by one person. It stores a list of its participants,
-the payer and how much each participant owes.
-  - Example: `Lunch at a restaurant`
-  - Consisting of the following participants:
-    - `Alice`, `Bob`, `Charlie`
-  - Paid for by:
-    - `Alice`
-- A session represents a period of time and stores one or more activities, as well as a list of participants. Each
-activity could have a different payer.
-  - Example: `Bob's birthday`
-  - Consisting of the following participants:
-    - `Alice`, `Bob`, `Charlie`
-  - Consisting of the following activities:
-    - `Breakfast at McDonald's`, `Lunch at a restaurant`, `Movie at a theatre`
-    - Each paid for by a different person.
-- At the end of a session, SplitLah calculates how much each person owes and who they need to pay. This information is
-displayed in an easy-to-read summary.
+* An activity represents a single group activity, paid for by one person. It stores a list of its participants,
+  the payer and how much each participant owes.
+  * Example: `Lunch at a restaurant`
+  * Consisting of the following participants:
+    * `Alice`, `Bob`, `Charlie`
+  * Paid for by:
+    * `Alice`
+* A session represents a period of time and stores one or more activities, as well as a list of participants. Each
+  activity could have a different payer.
+  * Example: `Bob's birthday`
+  * Consisting of the following participants:
+    * `Alice`, `Bob`, `Charlie`
+  * Consisting of the following activities:
+    * `Breakfast at McDonald's`, `Lunch at a restaurant`, `Movie at a theatre`
+    * Each paid for by a different person.
+* At the end of a session, SplitLah calculates how much each person owes and who they need to pay. This information is
+  displayed in an easy-to-read summary.
 
 <hr>
 
@@ -136,42 +137,42 @@ displayed in an easy-to-read summary.
 <br>
 
 ### Creating a session: `session /create`
-Creates a session so that you can manage your group outings using SplitLah. <br>
+Creates a session so that you can manage your group outings. <br>
 
 > Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] {/pl [NAME1 NAME2 ...] /gid [GROUD_ID]}`
 >* `[SESSION_NAME]` refers to the name of the session.
 >  * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
->  * The format of the date must be in `DD-MM-YYYY`.
+>  * The format of the date must be in `DD-MM-YYYY` or `today`.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
 >  * Each individual name is **case-insensitive**.
->* `[GROUP_ID]` refers to the unique identifier of the group.
+>* `[GROUP_ID]` refers to the unique identifier of a group.
 >  * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
  
 <br>
 
 >  **💡 Notes:**
->- The `[SESSION_NAME]` should be unique across all active sessions.
->- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
->- The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
->  - Example: `Alice Tan` is not allowed.
+>* The `[SESSION_NAME]` should be unique across all existing sessions.
+>* Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
+>* The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>  * Example: `Alice Tan` is not allowed.
 > 
 > **⚠️Warnings:**
->- If you include a name of an individual in `[NAME1 NAME2 ...]` who already exists in the group specified by
+>* If you include a name of an individual in `[NAME1 NAME2 ...]` who already exists in the group specified by
    `[GROUP_ID]`, only one instance of this individual is stored in the session.
->- Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
-   includes Alice, only two names, Alice and Bob, would be saved.
+>  * Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
+     includes Alice, only two names, Alice and Bob, would be saved.
 
 <br>
 
 **Example 1** 
-- Adds a new session named _Class Outing_ involving Alice and Bob on 15-03-2022.<br><br>
+* Adds a new session named _Class Outing_ involving Alice and Bob on 15-03-2022.<br><br>
   `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br><br>
   ![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
 
 **Example 2** 
-- A [group has been created](#creating-a-group-group-create) with group named *Friends* with Charlie and Mike. <br>
-  Adds a new session named _Class Gathering_ consisting of a group named *Friends* and Alice, on 16-04-2022.<br><br>
+* A [group has been created](#creating-a-group-group-create) with group named *Uni Friends* with Sally, Emily, David, Uriel, Natalie, Daniel, Nathan, Ethan and Sam. <br>
+  Adds a new session named _Class Gathering_ consisting of a group named *Uni Friends* and Alice, on 16-04-2022.<br><br>
   `session /create /n Class Gathering /d 16-04-2022 /gid 1 /pl Alice` <br><br>
   ![Session create command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[2].png)
   <br>
@@ -187,15 +188,15 @@ Deletes an existing session so that you can remove sessions that you no longer n
 <br>
 
 > **💡 Note:**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
+>* A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 > 
 > **⚠️Warning:**
-> - This action is irreversible. The session is deleted immediately after entering this command.
+>* This action is irreversible. The session is deleted immediately after entering this command.
 
 <br>
 
 **Example** 
-- Removes an existing session with a unique identifier of 1.<br><br>
+* Removes an existing session with a unique identifier of 1.<br><br>
   `session /delete /sid 1` <br><br>
   ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
   <br>
@@ -210,55 +211,56 @@ Edits an existing session so that you can change the details of a session.<br>
 >* `[SESSION_NAME]` refers to the name of the session.
 >  * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
->  * The format of the date must be in `DD-MM-YYYY`.
+>  * The format of the date must be in `DD-MM-YYYY` or `today`.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
 >  * Each individual name is **case-insensitive**.
 
 <br>
 
 > **💡 Notes:**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be edited.
->- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
->- The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
->  - Example: `Alice Tan` is not allowed.
->- There are 3 editable fields: _session name_, _session date_ and the _list of participants_ in the session.
->  - At least 1 field has to be edited for the command to run.
->  - More than 1 field can be edited in a single run of the command.
->- When editing the _list of participants_, existing participants, including those part of the group declared when
+>* A session with a unique identifier of `[SESSION_ID]` has to exist before it can be edited.
+> The `[SESSION_NAME]` should be unique across all existing sessions.
+>* Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
+>* The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>  * Example: `Alice Tan` is not allowed.
+>* There are 3 editable fields: _session name_, _session date_ and the _list of participants_ in the session.
+>  * At least 1 field has to be edited for the command to run.
+>  * More than 1 field can be edited in a single run of the command.
+>* When editing the _list of participants_, existing participants, including those part of the group declared when
 >  creating the session, must be included.
->  - Activities may have been created using participants in the list, hence the _list of participants_ can only expand
+>  * Activities may have been created using participants in the list, hence the _list of participants_ can only expand
 >    and not shrink. This is to prevent introducing any inconsistencies to activities in the session.
->  - Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
+>  * Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
 >    and you wish to edit it to include Charlie, a valid edit command would be: <br>
 >    `session /edit /sid 1 /pl Alice Bob Charlie`.
->  - Example 2: If the session with session unique identifier of 1 has been created with
->    Alice and a group consisting of Bob and Charlie, and you wish to edit it to include Mallory,
+>  * Example 2: If the session with session unique identifier of 1 has been created with
+>    Alice and a group consisting of Bob and Charlie, and you wish to edit it to include Mike,
 >    a valid edit command would be: <br>
->    `session /edit /sid 1 /pl Alice Bob Charlie Mallory`.
+>    `session /edit /sid 1 /pl Alice Bob Charlie Mike`.
 > 
 > **⚠️Warning:**
-> - This action is irreversible. The session is edited immediately after entering this command.
+>* This action is irreversible. The session is edited immediately after entering this command.
 
 <br>
 
 Examples of usage:
-- A [session has been created](#creating-a-session-session-create) with a unique identifier of 1,
+* A [session has been created](#creating-a-session-session-create) with a unique identifier of 1,
   named _Class Outing_ with Alice and Bob involved on 15-03-2022.
 
 **Example 1** 
-- Edits the name of the session to _Class gathering_ and date to 16-03-2022. <br><br>
+* Edits the name of the session to _Class gathering_ and the date to 16-03-2022. <br><br>
   `session /edit /sid 1 /n Class gathering /d 16-03-2022` <br><br>
   ![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
 
 **Example 2** 
-- Edits the session to include Charlie. <br><br>
+* Edits the session to include Charlie. <br><br>
   `session /edit /sid 1 /pl Alice Bob Charlie` <br><br>
   ![Session Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[2].png)
   <br>
   <br>
 
 ### Viewing a session : `session /view`
-Displays details about a session so that you can review the session.<br>
+Displays the details of a session so that you can review it.<br>
 
 >Format: `session /view /sid [SESSION_ID]`
 ><br>
@@ -268,7 +270,7 @@ Displays details about a session so that you can review the session.<br>
 <br>
 
 > **💡 Note:**
->- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be viewed.
+>* The session with a unique identifier of `[SESSION_ID]` has to exist before the session can be viewed.
 
 <br>
 
@@ -288,7 +290,7 @@ However, deleted sessions are not listed.
 <br>
 
 **Example**
-- Lists all existing sessions <br><br>
+* Lists all existing sessions <br><br>
   `session /list`<br><br>
   ![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
   <br>
@@ -302,11 +304,11 @@ However, deleted sessions are not listed.
 <br>
 
 ### Creating an activity: `activity /create`
-Creates an activity so that you can record the relevant details, and then assigns it to a session. <br>
+Creates an activity with the details that you specify and then assigns it to a session. <br>
 
-There are 2 ways that you can create an activity:
-1. Record the total cost to be split amongst everyone involved
-2. Record each person's individual cost
+There are 2 ways that you can specify the costs of an activity:
+1. Record the total cost to be split amongst everyone involved.
+2. Record each person's individual cost.
 
 > Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
@@ -325,39 +327,39 @@ There are 2 ways that you can create an activity:
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 >    * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
->* `[GST_PERCENTAGE]` refers to the additional percentage gst that may be charged during your activity.
+>* `[GST_PERCENTAGE]` refers to the additional percentage GST that may be charged during your activity.
 >* `[SERVICE_CHARGE]` refers to the additional percentage service charge that may be charged during your activity.
 
 <br>
 
 > **💡 Notes:**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
+>* A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
 >  it.
->- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
->- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
+>* Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
+>* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
 >  `[SESSION_ID]`.
->- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
->  - Example: `Alice Tan` is not allowed.
->- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
+>* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>  * Example: `Alice Tan` is not allowed.
+>* The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
 >  and 2 digits after the decimal point, if any.
->- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that range from 0 to 100,
+>* The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that range from 0 to 100,
 >  with a maximum of 3 digits before and 2 after the decimal point, if any.
->- If the payer is also involved in the activity, the payer's name has to be included in the list of participants
->  - Example: Alice paid for a movie which she watched with Bob in a session with a session unique identifier of 1,
+>* If the payer is also involved in the activity, the payer's name has to be included in the list of participants
+>   * Example: Alice paid for a movie which she watched with Bob in a session with a session unique identifier of 1,
 >    costing a total of $20. The correct command format is: <br>
 >    `activity /create /sid 1 /n movie /p Alice /i Alice Bob /co 20`
->- All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
+>* All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 
 <br>
 
 **Example 1**
-- Adds a new activity to a session with a session unique identifier of 2 named _Class Lunch_. Alice paid a total of $10
-  for both Bob and herself which is split equally between them later on.<br><br>
+* Adds a new activity to a session with a session unique identifier of 2 named _Class Lunch_. Alice paid a total of $10
+  for both Bob and herself which is split equally amongst them.<br><br>
   `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br><br>
   ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 
 **Example 2**
-- Adds a new activity to a session with a session unique identifier of 2 named _Class Lunch_. Alice paid for both
+* Adds a new activity to a session with a session unique identifier of 2 named _Class Lunch_. Alice paid for both
   Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.<br><br>
   `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br><br>
   ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
@@ -445,28 +447,27 @@ the costs are distributed.
 <br>
 
 > **💡 Notes:**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
+>* A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
      it.
->- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
->- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
->- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
+>* An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
+>* Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
+>* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
->- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >   - Example: `Alice Tan` is not allowed.
->- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
+>* The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
->- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that can only range from 0 to 100,
+>* The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that can only range from 0 to 100,
    with a maximum of 3 digits before and 2 after the decimal point, if any.
->- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
->  in the calculations.
+>* All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 >
 > **⚠️Warnings:**
->- This action is irreversible. The activity is edited immediately after entering this command.
+>* This action is irreversible. The activity is edited immediately after entering this command.
 
 <br>
 
 **Example**
-- An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1 in 
+* An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1 in 
   a session with a `SESSION_ID` of 1. It is named *Lunch* with Alice and Bob.<br>
   Edits the activity's name, payer, overall cost, GST percentage and service charge. List of participants remains
   unchanged.<br><br>
@@ -476,7 +477,7 @@ the costs are distributed.
   <br>
 
 ### Viewing an activity: `activity /view`
-Displays details about an activity so that you can review the activity's details.<br>
+Displays the details about an activity so that you can review it.<br>
 
 > Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >
@@ -488,7 +489,9 @@ Displays details about an activity so that you can review the activity's details
 <br>
 
 > **💡 Note:**
->- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be viewed.
+>- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be viewed.
+>- All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 
 <br>
 
@@ -530,7 +533,7 @@ However, deleted activities are not listed.
 
 ### Settling all transactions for a session: `session /summary`
 
-Displays a transaction summary for a session and helps you calculate how much each person in the session
+Displays a transaction summary for a session. The transaction summary helps you calculate how much each person in the session
 must pay and to whom they should pay for all debts to be resolved.<br>
 
 > Format: `session /summary /sid [SESSION_ID]`
@@ -540,14 +543,13 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <br>
 
 > **💡 Notes:**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
->- Given that the values can only be displayed up to 2 decimal places, rounding errors may seem to have occurred
->  in the calculations.
->- SplitLah will aim to simplify transactions to minimise the number of transactions you have to make.
->  - Example: In the same session, _Alice_ paid for _Bob_'s lunch which costs $10 and _Bob_ paid for _Charlie_'s
+>* A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
+>* All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
+>* SplitLah simplifies transactions to minimise the number of transactions you have to make.
+>  * Example: In the same session, _Alice_ paid for _Bob_'s lunch which costs $10 and _Bob_ paid for _Charlie_'s
 >    movie ticket which costs $10. 
->  - Instead of having _Bob_ pay _Alice_ $10 and having _Charlie_ pay _Bob_ $10, SplitLah simplifies this
->    and has _Charlie_ pay $10 directly to _Alice_, settling all debts in a single transaction.
+>  * Instead of having _Bob_ pay _Alice_ $10 and _Charlie_ pay _Bob_ $10, SplitLah simplifies this
+>    so _Charlie_ just has to pay $10 directly to _Alice_, settling all debts in a single transaction.
 
 <br>
 
@@ -564,14 +566,14 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <hr>
 
 ## _Group Management_
-> A group represents one or more individuals. The only purpose of a group is to quickly identify a group of individuals
+> A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals
 > without having to manually enter their details one by one when creating a session.
 
 <br>
 
 ### Creating a group: `group /create`
-Creates a new group so that you do not have to enter the particulars for the same individuals whenever creating a
-new session that is participated by the same group of individuals.
+Creates a new group consisting of a group of individuals. You can use this group whenever creating a new session that
+involves the same group of individuals. This saves you time when entering the list of participants for a session.
 
 > Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 >
@@ -583,14 +585,16 @@ new session that is participated by the same group of individuals.
 <br>
 
 > **💡 Notes:**
->- The `[GROUP_NAME]` should be unique across all groups.
->- Each name in `[NAME1 NAME2 ...]` for the group should be unique.
+>* The `[GROUP_NAME]` should be unique across all existing groups.
+>* Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
+>* The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+   >  * Example: `Alice Tan` is not allowed.
 
 <br>
 
 **Example**:
-- Adds a new group named _Uni Friends_, consisting of Charlie and Mike.<br><br>
-  `group /create /n Uni Friends /pl Charlie Mike` <br><br>
+- Adds a new group named _Uni Friends_, consisting of Sally, Emily, David, Uriel, Natalie, Daniel, Nathan, Ethan and Sam.<br><br>
+  `group /create /n Uni Friends /pl Sally Emily David Uriel Natalie Daniel Nathan Ethan Sam` <br><br>
   ![Group create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupCreateCommand.png)
   <br>
   <br>
@@ -623,7 +627,7 @@ Deletes an existing group so that you can remove groups that you no longer need.
 ### Editing a group: `group /edit`
 Edits an existing group so that you can change the details of a group.<br>
 
->Format: `group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]`
+>Format: `group /edit /gid [GROUP_ID] {/n [GROUP_NAME] /pl [NAME1 NAME2...]}`
 >* `[GROUP_ID]` refers to the unique identifier of the group.
 >  * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
 >* `[GROUP_NAME]` refers to the name of the group.
@@ -634,13 +638,14 @@ Edits an existing group so that you can change the details of a group.<br>
 
 > **💡 Notes:**
 >- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
+>- The `[GROUP_NAME]` should be unique across all existing groups.
 >- Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
 >- There are 2 editable fields: _group name_ and the _list of individuals_ in the group.
 >  - At least 1 field has to be edited for the command to run.
 >  - More than 1 field can be edited in a single run of the command.
 >- Editing groups **does not** affect sessions.
 >  - If a session has been created with the group that you are editing,
->    editing the group does not edit the _list of participants_ in the session.
+>    editing the group **does not modify** the _list of participants_ in the session.
 >
 > **⚠️Warning:**
 > - This action is irreversible. The group is edited immediately after entering this command.
@@ -663,7 +668,7 @@ Examples of usage:
   <br>
 
 ### Viewing a group: `group /view`
-Displays details about a group so that you can review the group's details.<br>
+Displays the details about a group so that you can review it.<br>
 
 >Format: `group /view /gid [GROUP_ID]`
 >
@@ -727,7 +732,7 @@ Quits the application.<br>
 **Q**: Is data saved to the disk upon exit?
 
 **A**: SplitLah 2.0 creates a save file in a folder named `data` that is created in the same directory as
-`SplitLah.jar`. All changes are saved to the save file upon exit.
+`splitlah.jar`. Changes are saved whenever a `create`, `delete` or `edit` command is run.
 
 **Q**: How do session, activity and group unique identifiers work?
 
@@ -736,9 +741,8 @@ has been allocated, it will not be changed nor reused.
 
 **Q**: Is there any way I can mark a transaction that is shown using the `session /summary` command as paid?
 
-**A**: As of now, this functionality is not supported by our SplitLah. All functionality that SplitLah currently
-supports are documented in this user guide.
-You can find a summary of all available commands can be found in the [Command Summary](#command-summary) below.
+**A**: As of now, this functionality is not supported by SplitLah. All functionalities that SplitLah supports are documented in this user guide.
+You can find a summary of all available commands in the [Command Summary](#command-summary) below.
 Stay tuned to future updates from us!
 
 <br>
@@ -764,7 +768,7 @@ Stay tuned to future updates from us!
 | Show session summary                    | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                                                 |
 | Create a new group                      | Format: `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 …]`<br><br>Example: `group /create /n SplitLah /pl Roy Ivan Warren Saurav Tianle`                                                                                              |
 | Delete an existing group                | Format: `group /delete /gid [GROUP_ID]`<br><br>Example: `group /delete /gid 1`                                                                                                                                                         |
-| Edit an existing group                  | Format: `group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]`<br><br>Example: `group /edit /gid 1 /n Class gathering`                                                                                             |
+| Edit an existing group                  | Format: `group /edit /gid [GROUP_ID] {/n [GROUP_NAME] /pl [NAME1 NAME2...]}`<br><br>Example: `group /edit /gid 1 /n Class gathering`                                                                                                   |
 | View an existing group                  | Format: `group /view /gid [GROUP_ID]`<br><br>Example: `group /view /gid 1`                                                                                                                                                             |
 | List all groups                         | Format: `group /list`                                                                                                                                                                                                                  |
 | List all available commands             | Format: `help`                                                                                                                                                                                                                         |

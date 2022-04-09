@@ -1,3 +1,7 @@
+---
+title: Developer Guide
+---
+
 <p align="center"><img alt="logo" src="https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/pngLogo.png"></p>
 
 # Developer Guide
@@ -50,7 +54,7 @@ This guide's purpose is to explain the internal workings of SplitLah, so that fu
 [Storage Component](#storage-component), [Parser Component](#parser-component) and [Command Component](#command-component)
 * Each component has its own section in this guide explaining them in detail.
 * This [diagram](#interaction-between-components) shows the inner workings of how each component interacts with each other.
-* SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands will not be explained in detail.
+* SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands are not explained in detail.
 * Please refer to the [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
 * Please refer to the [implementation section](#implementation) to find out how each command is designed and implemented in SplitLah.
 * Each command's section in this guide contains an API reference link encased in `code block` that brings you to the main source code responsible for executing the command.
@@ -90,9 +94,9 @@ The diagram depicts a scenario where a user attempts to create a session.
 ![SplitLah Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SplitLahComponent.drawio.png)
 <br>
 The `SplitLah` component is the application's main class. Its job is to initialize an instance of `Manager` when the
-application starts. After initialization, it would then proceed to run a loop which would prompt the user for a 
-command. When it receives a command from the user, it would invoke the `parser` and retrieve the command for SplitLah
-to run. Upon using the `Exit` command, SplitLah would then exit from the command loop and end the application.
+application starts. After initialization, it proceeds to run a loop which prompts the user for a 
+command. When it receives a command from the user, it invokes the `Parser` and retrieve the command for SplitLah
+to run. Upon using the `Exit` command, SplitLah exits from the command loop and end the application.
 
 
 ### Manager Component
@@ -147,7 +151,7 @@ A save file records user data related to SplitLah even after the application is 
 * If a save file is found, the `Storage` class loads data from it into the `Profile` object managed by the `Manager` object.
 * Else a new save file is created and an empty `Profile` object is created instead.
 
-When a command updates any attributes of the `Profile` object, the changes will be updated the save file. These commands are:
+When a command updates any attributes of the `Profile` object, the changes are updated to the save file. These commands are:
 * `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand`
 * `ActivityCreateCommand`, `ActivityDeleteCommand`, `ActivityEditCommand`
 * `GroupCreateCommand`, `GroupDeleteCommand`, `GroupEditCommand`
@@ -167,12 +171,11 @@ to write all the data stored in the `Profile` component into the save file witho
 <br>
 The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class,
 as well as the `CommandParser` class and its subclasses.<br>
-* The `Parser` class provides utility methods to parse commands and arguments from the user and
+* The `Parser` class provides methods to parse commands from the user and
   return a `Command` object representing an instruction that the user has for SplitLah.<br>
-  `Parser` class is the only class in the `Parser` component that other external classes actively interact with.<br>
-* The `ParserUtils` class provide supporting methods for `Parser` class to properly run,
+* The `ParserUtils` class provide supporting methods to parse individual arguments from the user input,
   and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.<br>
-* The subclasses of `CommandParser` then serve to parse all arguments of a user input to create an object of a specific
+* The subclasses of `CommandParser` serve to parse all arguments of a user input to create an object of a corresponding
   subclass of the `Command` class.
 
 The general workflow of the `Parser` component is as follows:
@@ -181,9 +184,9 @@ The general workflow of the `Parser` component is as follows:
 2. `Parser` class instantiates a new `XYZCommandParser` object corresponding to the user input 
    and passes the user input to it.
    (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
-3. The `XYZCommandParser` object then uses parse methods from `Parser` class to extract all the
+3. The `XYZCommandParser` object then uses parse methods from `ParserUtils` class to extract all the
    arguments from the user input.
-   * Each of these parse methods in `Parser` class then calls utility methods from `ParserUtils` class 
+   * Each of these parse methods in `ParserUtils` class then calls other utility methods within the class 
      to return a parsed value.
 4. All relevant arguments that are parsed are then used to create a new `XYZCommand `object to be
    returned to the `Parser` class.
@@ -231,46 +234,36 @@ the Command component when any user input is provided to SplitLah.
 <br>
 1. When `SplitLah` reads a user input, `SplitLah` calls the `Parser#getCommand` method and passes the
    user input as the argument.
-2. Given the user input, `Parser` class first decomposes the user input into two separate components, the _command type_
+2. `Parser` class decomposes the user input into two separate components, the _command type_
    and the _remaining arguments_.
-   This is done using the two methods `Parser#getCommandType` and `Parser#getRemainingArguments` respectively.<br>
-   Where the input is `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`, the _command type_ is parsed as
-   `session /create` and the _remaining arguments_ is parsed as `/n Class Outing /d 15-03-2022 /pl Alice Bob`.
-   1. If the _command type_ is of invalid syntax, the method `Parser#getCommandType` returns null.
-      When null is returned, `Parser` class creates and returns an `InvalidCommand` object to `SplitLah`.
-   2. Next, to check whether the _command type_ and _remaining arguments_ are valid, `Parser` class calls the method
+   With the two methods `Parser#getCommandType` and `Parser#getRemainingArguments`,
+   `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` is parsed separately as
+   `session /create` and `/n Class Outing /d 15-03-2022 /pl Alice Bob`.
+   1. If the _command type_ is invalid, the method `Parser#getCommandType` returns null to `Parser` class.
+      An `InvalidCommand` object is then created and returned to `SplitLah`.
+   2. `Parser` class then validates the _command type_ and the _remaining arguments_ with
       `Parser#checkIfCommandIsValid`. If either the _command type_ or the _remaining arguments_ are invalid, an error
       message is returned by the method, which is then used to return an `InvalidCommand` object to `SplitLah`.
-3. Depending on the _command type_, `Parser` class instantiates an appropriate `XYZCommandParser` object. For example,
+3. `Parser` class creates the `XYZCommandParser` object for a `XYZCommand`. For example,
    for a _command type_ of `"session /create"`, a `SessionCreateCommandParser` object is instantiated.
    If `Parser` class does not recognise the _command type_, an `InvalidCommand` object is created and returned immediately.
-4. With the corresponding `XYZCommandParser` object instantiated, `Parser` class calls the `getCommand` method
-   of `XYZCommandParser`. This process is explained in further detail in the sequence diagrams below.
 
    ![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
 
-   ![Reference Frame ParseABC Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefParseABC.drawio.png)
-
-   ![Reference Frame InvalidCommand Instantiation Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefInvalidCommand.drawio.png)
-
-5. After `XYZCommandParser#getCommand` is called, `XYZCommandParser` prepares to create a `XYZCommand` object. 
-   To begin with, it parses all the _remaining arguments_ using `ParseABC` methods from the `Parser` class.
-   (`ParseABC` is a placeholder for specific methods in `Parser` class, 
-   e.g. `Parser#parseName` and `Parser#parseSessionId`)
-   * For example, `SessionCreateCommandParser` has to call `parsePersonList`, `parseGroupId`, `parseName` and
-     `parseLocalDate` from `Parser` class in order to get the details to create a `Session` object.
+4. `Parser` class calls the `getCommand` method of `XYZCommandParser`.
+5. `XYZCommandParser` parses all _remaining arguments_ using `parseABC` methods from the `ParserUtils` class.
+   (`parseABC` is a placeholder for specific methods in `ParserUtils` class, 
+   e.g. `ParserUtils#parseName` and `ParserUtils#parseSessionId`)
+   * For example, `SessionCreateCommandParser` has to call the `parsePersonList`, `parseGroupId`, `parseName` and
+     `parseLocalDate` methods from `ParserUtils` class.
    * If an exception is encountered, `XYZCommandParser` handles the exception accordingly, and if necessary,
      throws an exception back to `Parser` class, resulting in an `InvalidCommand` object being created and returned.
-6. In detail, when `Parser#parseABC` is called, `Parser` class calls the method `getArgumentFromDelimiter` from
-   `ParserUtils` class, which returns the respective object being parsed.
-   * For example, when `SessionCreateCommandParser` calls `Parser#parsePersonList`,
-     `ParserUtils#getArgumentFromDelimiter` is called. After returning a `String` object containing the arguments to
-     `Parser` class, `Parser` class returns a `String[]` object to `SessionCreateCommandParser` after processing the
-     arguments.
-   * Any exception encountered by `ParserUtils` class is propagated back to `XYZCommandParser` to be handled.
-7. After all necessary information is parsed, `XYZCommandParser` instantiates a new `XYZCommand` object and passes
-   all parsed information to it through the constructor.
-8. The newly instantiated `XYZCommand` object is then returned from `XYZCommandParser` to `Parser` class,
+6. `ParseUtils#parseABC` then calls `ParserUtils#getArgumentFromDelimiter` to extract the relevant argument from
+   the _remaining arguments_ and returns a corresponding parsed object.
+   * For example, `ParserUtils#parseName` returns a `String` object representing a name.
+7. After all necessary information is parsed, `XYZCommandParser` instantiates a new `XYZCommand` object with
+   all the parsed information.
+8. The `XYZCommand` object is then returned from `XYZCommandParser` to `Parser` class,
    and finally back to `SplitLah` to be run.
 
 ## Session Commands
@@ -343,14 +336,19 @@ The general workflow of the `session /edit` command is as follows:
    * Else the `Session` object with the specified session unique identifier is returned.
 6. The detail of how a session is updated in the reference diagram below.<br>
    ![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
-7. `SessionEditCommand#run` will check if there is an update for a new list of persons, new session or new session date.
-   * If there is an update on the list of persons. It would first check if the newly provided list of persons contains duplicated names.
-     * If duplicated names are detected, an error message would be printed and control is returned to `SplitLah`.
-     * Else, it would call `PersonList#isSuperSet` to check if the newly supplied list of persons contain all existing persons in the session.
-     * If `PersonList#isSuperSet` returns `false`, an error message would be printed and control is returned to `SplitLah`.
-     * Else, if it returns `true` it would then call `Session#addPerson` to add in the new list of persons.
-   * If there is an update on the session name, `Session#setSessionName` is called to set the new session name.
+7. `SessionEditCommand#run` checks if there is an update for a new list of persons, new session or new session date.
+   * If there is an update on the list of persons, `SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored. 
+     * The method checks if the newly provided list of persons contains duplicated names.
+       * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+       * Else, it calls `PersonList#isSuperSet` to check if the newly supplied list of persons contains all existing persons in the session.
+       * If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+       * Else, a new list of persons ready to be stored in the session is returned.
+   * If there is an update on the session name, `SessionEditCommand#getNewSessionName` is called to return the new session name.
+     * The method checks if the provided session name already exists in the list of sessions.
+       * If the provided session name exists within the list of sessions, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+       * Else, the provided session name is returned to be used as the updated name for the session
    * If there is an update on the session date, `Session#setDateCreated` is called to set the new session date.
+   * After which, the necessary setter methods are called to update the session name and list of persons for the session that is being edited.
 8. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
 9. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
 
@@ -485,7 +483,7 @@ The general workflow of the `activity /delete` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityDeleteCommand` object.
 3. `ActivityDeleteCommand#run` method is then invoked to run the `activity /delete` command.
-4. Once the command runs, `ActivityDeleteCommand#run` method will invoke `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
+4. Once the command runs, `ActivityDeleteCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
 5. The `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to delete is stored in.
     - If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
     - Else, the `Session` object that the activity is stored in is returned.
@@ -559,15 +557,21 @@ The general workflow of the `activity /list` command is as follows:
 3. `ActivityListCommand#run` method is then invoked to run the `activity /list` command.
 4. The list of activities are stored in a `Profile` object, hence `Manager#getProfile` is called.
 5. To retrieve the session containing the activity list from the `Profile` object, `Profile#getSession` is executed, returning a session containing all the activities to be listed.
-6. Once the session is retrieved, `ActivityListCommand` class will run `Session#getActivityListSummaryString`.
-   1. If the activity list in the session is empty, the Session class will return a `String` object containing an error message.
-   2. If it's not empty, a `String` object representing a table summarising the list of activities in the session will be returned. 
+6. Once the session is retrieved, `ActivityListCommand` class runs `Session#getActivityListSummaryString`.
+   1. If the activity list in the session is empty, the Session class returns a `String` object containing an error message.
+   2. If it's not empty, a `String` object representing a table summarising the list of activities in the session is returned. 
 7. Finally, the method `printlnMessageWithDivider` is called to print the message returned.
 
 ## Group Commands
 
 ### Add a group
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
+
+The sequence diagram for `GroupCreateCommand` is omitted as it bears many similarities with [`SessionCreateCommand`](#add-a-session).<br>
+The interactions of GroupCreateCommand with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
+* `GroupCreateCommand` parses only the **name** and **list of persons**. It then creates a new `Group` object and adds it to the list of groups managed by the `Profile` class.
+
+Please refer to the [sequence diagram](#add-a-session) of `SessionCreateCommand` for reference.
 
 The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `group /create` command.
@@ -660,7 +664,7 @@ The general workflow of the `group /list` command is as follows:
 * Comfortable using CLI applications.
 
 ### Value proposition
-SplitLah will help the user keep track of expenditures made during each group outing that they go on and help the user 
+SplitLah helps the user keep track of expenditures made during each group outing that they go on and help the user 
 calculate what transactions that they should make in order to ensure that everyone pays equally for the activities that 
 they engage in during the outings.
 
@@ -687,7 +691,21 @@ they engage in during the outings.
 | v2.0    | User with a lot of friends | list groups                          | view all groups previously created                                                 |
 
 ## Non-Functional Requirements
-1. The application should be able to work in any operating systems with `Java 11` installed.
+1. The application should be able to work on any operating systems with `Java 11` installed.
+2. The application should be responsive.
+3. The application should be usable by a novice who may not be well versed with a Command Line Interface (CLI).
+4. Ths application should be usable by a novice who has never used an application to split bills.
 
 ## Glossary
-
+| Terms    | Definition                                                                                                                                                                                                                                                                                                  |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Manager  | A Manager manages and stores 3 different objects, namely the `Profile`, `TextUI` and `Storage` objects.                                                                                                                                                                                                     |
+| Profile  | A Profile is responsible for all data management and accesses within the lifetime of the application. It serves as a container and holds a list of all `Session` and `Group` objects and keeps track of the unique identifiers to be issued upon the creation of `Session`, `Activity` and `Group` objects. |
+| TextUi   | A TextUi is an user interface that the user sees on the CLI.                                                                                                                                                                                                                                                |
+| Storage  | A Storage is in charge of saving and reading to and from the save file respectively.                                                                                                                                                                                                                        |
+| Parser   | A Parser is responsible for making sense of the user inputs and processing them as commands for the application to run.                                                                                                                                                                                     |
+| Command  | A Command is an object that performs a task that corresponds to the user input.                                                                                                                                                                                                                             |
+| Session  | A session represents a group outing that involves a list of participants and spans an arbitrary period of time containing one or more activities.                                                                                                                                                           |
+| Activity | An activity represents a single group activity and stores its name, costs and the name of the payer.                                                                                                                                                                                                        |
+| Group    | A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals without having to manually enter their details one by one when creating a session.                                                                                                    |
+| API      | An Application Programming Interface (API) specifies the interface through which other programs can interact with a software component.                                                                                                                                                                     |

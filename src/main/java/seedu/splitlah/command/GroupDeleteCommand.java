@@ -2,7 +2,6 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
@@ -15,15 +14,7 @@ import java.util.logging.Level;
  */
 public class GroupDeleteCommand extends Command {
 
-    public static final String COMMAND_TEXT = "group /delete";
-
-    public static final String COMMAND_FORMAT = "Syntax: group /delete /gid [GROUP_ID]";
-
     private static final String COMMAND_SUCCESS = "The group was deleted successfully.";
-
-    public static final String[] COMMAND_DELIMITERS = {
-        ParserUtils.GROUP_ID_DELIMITER,
-    };
 
     private int groupId;
 

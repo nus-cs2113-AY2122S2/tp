@@ -19,6 +19,8 @@ public class Activity implements Serializable, Comparable<Activity> {
     private double totalCost;
     private Person personPaid;
     private PersonList involvedPersonList;
+    private double gst;
+    private double serviceCharge;
 
     private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final int ZERO_INDEXING_OFFSET = 1;
@@ -33,14 +35,20 @@ public class Activity implements Serializable, Comparable<Activity> {
      * @param personPaid         A Person object representing the person who paid for the activity.
      * @param involvedPersonList An ArrayList object containing Person objects
      *                           each representing a person involved in the activity.
+     * @param gst                A double that represents the GST percentage to be included for the cost of the
+     *                           activity.
+     * @param sc                 A double that represents the service charge to be included for the cost of the
+     *                           activity.
      */
     public Activity(int activityId, String activityName, double totalCost, Person personPaid,
-                    PersonList involvedPersonList) {
+                    PersonList involvedPersonList, double gst, double sc) {
         this.activityId = activityId;
         this.activityName = activityName;
         this.totalCost = totalCost;
         this.personPaid = personPaid;
         this.involvedPersonList = involvedPersonList;
+        this.gst = gst;
+        this.serviceCharge = sc;
     }
 
     /**
@@ -53,54 +61,28 @@ public class Activity implements Serializable, Comparable<Activity> {
         return activityId;
     }
 
-    /**
-     * Returns a String object representing the activity's name.
-     *
-     * @return A String object containing the name of the activity.
-     */
     public String getActivityName() {
         return activityName;
     }
 
-    /**
-     * Returns a double representing the activity's total cost.
-     *
-     * @return A double representing the total cost spent in the activity.
-     */
     public double getTotalCost() {
         return totalCost;
     }
 
-    /**
-     * Returns a Person object representing the activity's payer.
-     *
-     * @return A Person object representing the person who paid for the activity.
-     */
     public Person getPersonPaid() {
         return personPaid;
     }
 
-    /**
-     * Returns an ArrayList object of Person objects representing the persons involved in the activity.
-     *
-     * @return An ArrayList object containing Person objects each representing a person involved in the activity.
-     */
-    public ArrayList<Person> getInvolvedPersonList() {
-        return involvedPersonList.getPersonList();
+    public double getGst() {
+        return gst;
     }
 
-    /**
-     * Returns a String object which summarises the activity, including the activity's unique identifier,
-     * the name of the activity, the total cost spent in the activity
-     * and the name of the person who paid for the activity.
-     *
-     * @return A String object which summarises the activity.
-     */
-    public String getActivitySummaryString() {
-        String costInString = "$" + String.format("%.2f", totalCost);
-        String personName = personPaid.getName();
-        return activityId + SUMMARY_STRING_SEPARATOR + activityName + SUMMARY_STRING_SEPARATOR + costInString
-                + SUMMARY_STRING_SEPARATOR + personName;
+    public double getServiceCharge() {
+        return serviceCharge;
+    }
+
+    public ArrayList<Person> getInvolvedPersonList() {
+        return involvedPersonList.getPersonList();
     }
 
     /**
@@ -156,10 +138,12 @@ public class Activity implements Serializable, Comparable<Activity> {
     public String toString() {
         try {
             return "Activity Id #" + activityId + " --\n"
-                    + "Name:  " + activityName + '\n'
-                    + "Id:    " + activityId + '\n'
-                    + "Payer: " + personPaid.getName() + '\n'
-                    + "Cost:  $" + String.format("%.2f", totalCost) + '\n'
+                    + "Name:                     " + activityName + '\n'
+                    + "Id:                       " + activityId + '\n'
+                    + "Payer:                    " + personPaid.getName() + '\n'
+                    + "GST:                      " + String.format("%.2f", gst) + "%\n"
+                    + "Service Charge(SC):       " + String.format("%.2f", serviceCharge) + "%\n"
+                    + "Cost(GST & SC inclusive): $" + String.format("%.2f", totalCost) + '\n'
                     + "Involved: \n"
                     + getInvolvedListString();
         } catch (InvalidDataException e) {
