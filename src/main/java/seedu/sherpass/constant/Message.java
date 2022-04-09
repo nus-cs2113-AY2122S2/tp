@@ -61,6 +61,8 @@ public class Message {
     public static final String CLEAR_NO_EXPIRED_TASK_MESSAGE = "There are no expired tasks to be removed.";
     public static final String CLEAR_NO_COMPLETED_TASK_MESSAGE = "There are no completed tasks to be removed.";
     public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
+    public static final String ERROR_NO_VALUE_FOR_PARAMETER_MESSAGE = "Please enter a value for the parameter!";
+    public static final String ERROR_EMPTY_EDIT_CONTENT_MESSAGE = "Please enter at least one optional parameter!";
     public static final String ERROR_START_DATE_IN_THE_PAST_MESSAGE = "Do date cannot be in the past!";
     public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after/equals to end time!";
     public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank and must be before "

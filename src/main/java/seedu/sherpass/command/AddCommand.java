@@ -68,7 +68,7 @@ public class AddCommand extends Command {
         int identifier = taskList.generateIdentifier();
         newTask = new Task(identifier, taskDescription, byDate, doOnStartDateTime, doOnEndDateTime);
         try {
-            taskList.addTask(newTask, frequency);
+            taskList.addTask(newTask, frequency, false);
             storage.writeSaveData(taskList);
             ui.showToUser(ADD_TASK_RESULT_MESSAGE);
             ui.showToUser(TAB_INDENT + newTask);

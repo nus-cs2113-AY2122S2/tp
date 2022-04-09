@@ -84,7 +84,7 @@ The `TimerLogic` component
 
 The `Timer` component
 
-![image](https://user-images.githubusercontent.com/69501969/160758578-39b9b3f3-d1ca-429d-8319-9f28e9c199c3.png)
+![TimerClassDiagram](https://user-images.githubusercontent.com/69501969/162180366-87a7ba16-fd03-45e3-9d45-682382412ea5.png)
 
 - Consists of abstract `Timer` class, `Countdown` class and `Stopwatch` class as depicted in the class diagram above
 - `Timer` inherits from Java's `Thread` class
@@ -290,7 +290,9 @@ The sequence diagram of `Storage#handleCorruptedSave()` is shown here:
 - Text file with custom format
   - Pros: Might use less space (negligible)
   - Cons: Unintuitive for users to modify
+
 ## Product scope
+
 ### Target user profile
 
 Students from CEG and SOC
