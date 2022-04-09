@@ -19,13 +19,11 @@
 Our project could not have been possible without the prior work of the following:
 
 - [SE-EDU project team](https://se-education.org/docs/team.html) for their work on [AddressBook Level 3](https://github.com/se-edu/addressbook-level3), for which we referenced ideas as well as code snippets.
-- Google's [GSON Java library](https://github.com/google/gson) for which we used to load and save our data files.
-- Members of the [AY2122S2-CS2113-F10-2 team](https://github.com/nus-cs2113-AY2122S2) for pointing out the possibility of and requesting permission to make use of the above GSON library.  
+- Google's [Gson Java library](https://github.com/google/gson) for which we used to load and save our data files.
+- Members of the [AY2122S2-CS2113-F10-2 team](https://github.com/nus-cs2113-AY2122S2) for pointing out the possibility of and requesting permission to make use of the above Gson library.  
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Design and Implementation**
-
-This section describes some noteworthy details on how certain features are designed and implemented.
 
 ### Architecture
 
@@ -52,11 +50,12 @@ As such, we referenced AddressBook to segment the program into `Parser`, `Comman
 
 As alluded to prior, one major consideration was to build it in a manner that can parse text input as effectively as possible. In considering text input, we divided the parsing into the following segments:
 
+<!--suppress HtmlDeprecatedAttribute -->
 <p align="center"><code>commandWord [argumentType/`argumentValue`] [...]</code></p>
 
 To dispatch <code>argumentType/\`argumentValue\`</code> strings to the correct `Command` class, the following logic is employed by `Parser#parseCommand`.
 
-**1. Parse the correct Command Word**
+#### 1. Parse the command word
 
 <p align="center"><code>commandWord</code></p>
 
@@ -64,13 +63,13 @@ To dispatch <code>argumentType/\`argumentValue\`</code> strings to the correct `
 The first substring is used to decide which `Command` to dispatch while the second is used for its arguments.
 In the case where a second substring is not required, as in the case of `help` and `list`, a null String is used and the following step is skipped entirely.
 
-**2. Split Arguments**
+####2. Split arguments
 
 <p align="center"><code>[argumentType/`argumentValue`] [...]</code></p>
 
 Complex commands such as `add` and `update` necessitate multiple arguments.
 To implement this while ensuring that multi-word strings are acceptable input, `extractArguments` is implemented. 
-Without specifically explaining the main regular expression ([details here](https://regex101.com/r/gwjHWD/3)), the approach sought to match `argumentType` and <code>\`argumentValue\`</code> pairs with a positive lookahead. 
+Without specifically explaining the main regular expression ([details here](https://regex101.com/r/gwjHWD/3)), the approach sought to match `argumentType` and <code>argumentValue</code> pairs with a positive lookahead. 
 The final argument pair will then be extracted using a separate regex. 
 Together, this ensured that all argument pairs can be effectively parsed and dispatched to each `Command` class.
 
@@ -86,8 +85,6 @@ Throughout the `Parser` implementation, exceptions were caught to return `Incorr
 
 ### Command classes
 
-#### Current Design and Implementation
-
 `Command` classes are largely similar to each other. Taking in input Strings from `Parser`, they invoke methods from `EquipmentManager` to perform the necessary actions. Where applicable, the `Command` classes also convert values to the necessary data types (Double, EquipmentType and LocalDate) prior to passing these values in.
 
 The most complex command, `UpdateCommand` will be explained here as the method calls are similar to the remaining commands. The update feature is facilitated by `UpdateCommand`. It extends `ModificationCommand` and implements the following operations:
@@ -97,25 +94,31 @@ The most complex command, `UpdateCommand` will be explained here as the method c
 
 Given below is an example usage scenario and how the update feature behaves at each step.
 
-Step 1. The user adds an equipment to the system with the help of the `add` command. The added equipment has the following attributes shown below.
+#### Step 1 
+The user adds an equipment to the system with the help of the `add` command. The added equipment has the following attributes shown below.
 
 ![equipment0](images/equipment0.png)
 
 ![sequenceDiagram1](images/sequenceDiagram1.png)
 
-Step 2. The user executes `update s/S1404115ASF n/SpeakerC c/2000 pd/2022-01-29` to update equipment with serial number S1404115ASF. `Parser#parseCommand` is called from `Duke` to parse the user's input.
+#### Step 2
+The user executes `update s/S1404115ASF n/SpeakerC c/2000 pd/2022-01-29` to update equipment with serial number S1404115ASF. `Parser#parseCommand` is called from `Duke` to parse the user's input.
 
-Step 3. The parser recognises that an `UpdateCommand` is required, and the UpdateCommand is prepared to return to `Duke`. In the constructor of `UpdateCommand`, `prepareModification` is called to set the values of the attributes to be updated. The other attributes are set to null by default.
+#### Step 3
+The parser recognises that an `UpdateCommand` is required, and the UpdateCommand is prepared to return to `Duke`. In the constructor of `UpdateCommand`, `UpdateCommand#prepareModification` is called to set the values of the attributes to be updated. The other attributes are set to null by default.
 
 ![sequenceDiagramExecute](images/sequenceDiagramExecute.png)
 
-Step 4. `UpdateCommand#execute` is run to process the update. If the serialNumber attribute is null, a `CommandResult` with a `MISSING_SERIAL_NUMBER` output string will be returned. Otherwise, `EquipmentManager#updateEquipment` is called.
+#### Step 4
+`UpdateCommand#execute` is run to process the update. If the serialNumber attribute is null, a `CommandResult` with a `MISSING_SERIAL_NUMBER` output string will be returned. Otherwise, `EquipmentManager#updateEquipment` is called.
 
-Step 5. If the update was successful, a `CommandResult` with success message will be returned, else a `CommandResult` with `UPDATE_FAILURE_MESSAGE` will be returned. Upon successful update, the object should be updated with the new attributes as shown in the diagram below.
+#### Step 5
+If the update was successful, a `CommandResult` with success message will be returned, else a `CommandResult` with `UPDATE_FAILURE_MESSAGE` will be returned. Upon successful update, the object should be updated with the new attributes as shown in the diagram below.
 
 ![equipment1](images/equipment1.png)
 
-Step 6. It is not shown in the sequence diagram but ultimately when the CommandResult is returned to `Duke`, the output of the `CommandResult` gets printed out and displayed to the user.
+#### Step 6
+It is not shown in the sequence diagram but ultimately when the CommandResult is returned to `Duke`, the output of the `CommandResult` gets printed out and displayed to the user.
 
 ### EquipmentManager
 
@@ -129,7 +132,7 @@ These methods are used during the execution of each of the `Command` class.
 * `updateEquipment` — Updates the specified `Equipment` with the corresponding updates given in the ArrayList of pairs.
 * `deleteEquipment` — Deletes the specified `Equipment`.
 
-The `EquipmentManager` is implemented as the main storage unit of all the equipments during the execution of the program.
+The `EquipmentManager` is implemented as the main storage unit of all `Equipment` during the execution of the program.
 
 ### Storage
 
