@@ -39,11 +39,11 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
   * Improves the readability when printing list of sessions.
 
 #### Testing
-* Added `Junit` test for 
+* Added command `Junit` test for 
   [SessionCreateCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionCreateCommandTest.java), 
-[SessionDeleteCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionDeleteCommandTest.java), 
-[SessionEditCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionEditCommandTest.java) and 
-[Profile](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/data/ProfileTest.java) classes.
+[SessionDeleteCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionDeleteCommandTest.java) and 
+[SessionEditCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionEditCommandTest.java).
+  * Ensure each Junit Test achieved 100% coverage.
 * Added command parser `Junit` test for
   [SessionCreateCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionCreateCommandParserTest.java),
   [SessionDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionDeleteCommandParserTest.java) and
