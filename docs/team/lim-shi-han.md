@@ -37,3 +37,7 @@ Welcome to my PPP:)
     - https://github.com/AY2122S2-CS2113-T11-4/tp/pull/54
     - https://github.com/AY2122S2-CS2113-T11-4/tp/pull/23
     - https://github.com/AY2122S2-CS2113-T11-4/tp/pull/61
+#### Contributions beyond the team project
+  - Provided and above average number of reviews for other team and individual projects, with links to examples provided below:
+    - https://github.com/nus-cs2113-AY2122S2/ip/pull/18
+    - https://github.com/Lim-Shi-Han/ped/issues
