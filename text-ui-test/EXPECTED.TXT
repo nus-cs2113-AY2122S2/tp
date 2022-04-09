@@ -66,14 +66,14 @@ ____________________________________________________________
 ____________________________________________________________
 Execution result: Invalid command format!
 The correct format should be:
-projdeadline [project_index] [deadline]
+projdeadline [project_index] [deadline (yyyy-mm-dd)]
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
 Execution result: Invalid command format!
 The correct format should be:
-tododeadline [project_index] [todo_index] [deadline]
+tododeadline [project_index] [todo_index] [deadline (yyyy-mm-dd)]
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
@@ -172,12 +172,12 @@ ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-Execution result: The index is a negative number!
+Execution result: Unsuccessful. The index is a negative number!
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-The target index is not found in the list.
+Execution result:Unsuccessful.The target index is not found in the list.
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________

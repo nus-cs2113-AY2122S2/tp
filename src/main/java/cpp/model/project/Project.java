@@ -1,5 +1,7 @@
 package cpp.model.project;
 
+import cpp.ui.Constants;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -174,8 +176,15 @@ public class Project {
      */
     public void printLanguages() {
         System.out.print("Programming languages for " + getTitle() + ":\n");
+        if (getLanguages().size() == 0) {
+            System.out.println(Constants.NO_LANGUAGES_ADDED);
+        }
         int count = 1;
         for (String language: getLanguages()) {
+            if (language.trim().equals("")) {
+                System.out.println(Constants.NO_LANGUAGES_ADDED);
+                continue;
+            }
             System.out.print("\t" + "[" + count + "]. " + language + "\n");
             count++;
         }
@@ -183,6 +192,10 @@ public class Project {
 
     public void addLanguage(String language) {
         assert (languages != null) : "Cannot add languages to this project.";
+        if (language.trim().equals("")) {
+            System.out.println(Constants.EMPTY_LANGUAGES);
+            return;
+        }
         languages.add(language);
     }
 }

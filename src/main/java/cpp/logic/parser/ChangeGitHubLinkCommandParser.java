@@ -23,7 +23,7 @@ public class ChangeGitHubLinkCommandParser implements CommandParser<ChangeGitHub
         try {
             index = Integer.parseInt(userInput[1]);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandException(Constants.NON_INTEGER_INDEX);
+            throw new IllegalCommandException(Constants.INDEX_PARSING_ERROR);
         }
         if (index <= 0) {
             throw new IllegalCommandException(Constants.NEGATIVE_INDEX);

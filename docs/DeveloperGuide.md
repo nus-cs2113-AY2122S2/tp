@@ -23,6 +23,17 @@
 - [Glossary](#glossary)
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Instructions for manual testing](#instructions-for-manual-testing)
+  -[Launch and shutdown](#launch-and-shutdown)
+  -[Adding a project](#adding-a-project)
+  -[Deleting a project](#deleting-a-project)
+  -[Adding todos](#adding-todos)
+  -[Setting project deadline](#setting-project-deadline)
+  -[Changing the GitHub repo](#changing-the-github-repo)
+  -[Opening the GitHub repo](#opening-the-github-repo)
+  -[Setting todo's deadline](#setting-todos-deadline)
+  -[Viewing details of a project](#viewing-details-of-a-project)
+  -[Adding languages to a project](#adding-languages-to-a-project)
+  -[Listing languages of a project](#listing-languages-of-a-project)
 
 
 ## Acknowledgements
@@ -307,5 +318,137 @@ the program also allows for faster searching and editing than a GUI design once 
 * *Todo* - Within each project is a list of (optional to add) todo's. These represent tasks to be done on the project
 
 ## Instructions for manual testing
+Given below are instructions to test the app manually.  
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+* Test Launch and shutdown
+
+
+### Launch and shutdown  
+1. Initial launch  
+   1.1. Download the jar file and copy into an empty folder.  
+   1.2. Open up the terminal, type `java -jar [path of the jar file]`.  
+2. Shutdown  
+   2.1. Enter command `exit` to exit the app.  
+--- 
+### Adding a project
+
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`addproject`|when the command is invalid|Execution result: Invalid command format! <br>The correct format should be: <br> addproject [project_name]|
+|`addproject newproject`|when the project name consists of one word|newproject added.|
+|`addproject project cs2113 tp`|when the project name consists of more than one words|project cs2113 tp added.|
+
+### Deleting a project
+* Prerequisites: List all projects using command `listprojects`.  
+
+| Command |Test case| Expected Output |    
+|-----------|----------|----------|
+|`deleteproject`|when the command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>deleteproject [project_name]|
+|`deleteproject non-exist-projects`|when the target project does not exist|There is no such project named non-exist-projects.|
+|`deleteproject newproject`|successful operation|newproject deleted.|  
+
+### Print all projects  
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`listprojects`| when there are projects in the project list)| * The output will list all projects.|
+|`listprojects` |when there is no project in the project list)| You have not added any projects yet!|  
+
+
+### Adding todos
+* Prerequisites: List all projects using command `listprojects`.  
+
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`todo`|when the command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>todo [project_index] [todo_description]|
+|`todo 1 buy textbooks`|when command is valid|Todo: buy textbooks  have been added to project newproject|
+|`todo -1 buy textbooks`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`todo buy textbooks`|when project index is not entered|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
+|`todo 1000000000000000000000 buy textbooks`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
+|`todo 1`|when todo description is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>todo [project_index] [todo_description]|
+
+### Marking todo as done
+* Prerequisites: view projects using command `view`.  
+
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+| `mark 1 1`| when command is valid|Todo has been marked as done successfully:<br>[X] buy textbooks : No deadline specified|
+|`mark 1`|when todo index is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>mark [project_index] [todo_index]|
+|`mark -1 1`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`mark 1000000000000000000000 1`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
+|`mark 1 -1`|when todo index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`mark 1 4`|when target todo index is out of range|Unsuccessful operation. Please check the target indexes.|
+|`mark 4 1`|when target project index is out of range|Unsuccessful operation. Please check the target indexes.|
+
+### Setting project deadline
+* Prerequisites: List all projects using command `listprojects`.  
+
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`projdeadline`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>projdeadline [project_index] [deadline (yyyy-mm-dd)]|
+|`projdeadline 1`|when deadline is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>projdeadline [project_index] [deadline (yyyy-mm-dd)]|
+|`projdeadline 1 2022`|when the date format is not correct|Improper format. Please type it in yyyy-mm-dd format.|
+|`projdeadline 1 2022-04-01`|when command is valid|Deadline set for newproject: 2022-04-01|
+|`projdeadline -1 2022-04-01`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`projdeadline 1000000000000000000000 2022-04-01`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
+
+
+### Changing the GitHub repo
+* Prerequisites: List all projects using command `listprojects`.  
+
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`changegit`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>changegit [project_index] [website URL]|
+|`changegit 1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when the command is valid|The Github Repo for newproject has been changed to: https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html|
+|`changegit 1`|when the url is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>changegit [project_index] [website URL]|
+|`changegit 1 url`|when the url is in invalid format|Please make sure your link begins with the following: http:// or https://|
+|`changegit -1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!
+|`changegit 1000000000000000000000  https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
+
+### Opening the GitHub repo  
+
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`opengit`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>opengit [project_name]|
+|`opengit proj`|when target project does not exist|Sorry! There was no project with that name.|
+|`opengit non-exist-projects`|when command is valid|* The repo will be opened.|  
+
+### Setting todo's deadline
+* Prerequisites: view projects using command `view`.  
+
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`tododeadline`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>tododeadline [project_index] [todo_index] [deadline (yyyy-mm-dd)]|
+|`tododeadline 1 1 2022-05-22`|when command is valid|Deadline set for buy textbooks : 2022-05-22|
+|`tododeadline 1 1`|when deadline is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>tododeadline [project_index] [todo_index] [deadline (yyyy-mm-dd)]|
+|`tododeadline 1 1 2002`|when the date format is not correct|Improper format. Please type it in yyyy-mm-dd format.|
+|`tododeadline -1 1 2022-05-22`|when the target index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`tododeadline 1000000000000000000000 1 2022-05-22`|when target index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number. |
+
+### Viewing details of a project
+
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`view`|when command is invalid|Execution result: Invalid command format!|
+|`view newproject`|when command is valid|* List all information of the project 'newproject'|
+|`view proj`|when the target project does not exist|Sorry! There was no project with that name.|
+
+### Adding languages to a project
+
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`addlanguage`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be: <br>addlanguage [project_name] [language_name]|
+|`addlanguage 1`|when the language is not entered|Execution result: Invalid command format!<br>The correct format should be: <br>addlanguage [project_name] [language_name]|
+|`addlanguage java`|when the index is not entered|Execution result: Invalid command format!<br>The correct format should be: <br>addlanguage [project_name] [language_name]|
+|`addlanguage 1 java`|when command is valid|java language added.|
+|`addlanguage -1 java`|when the target project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`addlanguage 1000000000000000000000 java`|when target index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
+
+### Listing languages of a project
+| Command |Test case| Expected Output |  
+|-----------|----------|----------|
+|`listlanguages`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>listlanguages [project_name]|
+|`listlanguages newproject`|when command is valid|*List all programming languages.|
+|`listlanguages proj`|when the target project does not exist|Sorry! There was no project with that name.|  
+
+
+

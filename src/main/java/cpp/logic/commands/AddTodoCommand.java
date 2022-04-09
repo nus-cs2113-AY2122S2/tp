@@ -18,7 +18,7 @@ public class AddTodoCommand extends Command {
         try {
             projectList.addTodoToProject(projectIndex, todo);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(Constants.INDEX_OUT_OF_RANGE);
+            System.out.println("Execution result:" + Constants.INDEX_OUT_OF_RANGE);
             return Response.addTodoUnsuccessfully(todo);
         }
         return Response.addTodoSuccessfully(todo);
