@@ -44,18 +44,23 @@ As such, we referenced AddressBook to segment the program into `Parser`, `Comman
 
 ### Parser
 
-`Parser` is the first filter for text inputs read to the user. 
+`Parser` is the first filter for text inputs read to the user. It serves to:
+1. Split text input from the user into strings of argument pairs.
+2. Check and modify upper/lower case for argument tags.
+3. Remove backticks, beginning and trailing whitespace.
+4. Create the correct instance of `Command` based on the argument tag.
+
 As alluded to prior, one major consideration was to build it in a manner that can parse text input as effectively as possible. In considering text input, we divided the parsing into the following segments:
 
 <p align="center"><code>commandWord [argumentType/`argumentValue`] [...]</code></p>
 
-To dispatch <code>argumentType/\`argumentValue\`</code> strings to the correct `Command` class, the following logic is employed throughout `Parser` by `parseCommand`.
+To dispatch <code>argumentType/\`argumentValue\`</code> strings to the correct `Command` class, the following logic is employed by `Parser#parseCommand`.
 
 **1. Parse the correct Command Word**
 
 <p align="center"><code>commandWord</code></p>
 
-`splitCommandTerm` splits the input string upon the first space. 
+`Parser#splitCommandTerm` splits the input string upon the first space. 
 The first substring is used to decide which `Command` to dispatch while the second is used for its arguments.
 In the case where a second substring is not required, as in the case of `help` and `list`, a null String is used and the following step is skipped entirely.
 
@@ -77,15 +82,15 @@ For added safeguards in equipment deletion, the delete command implements a more
 </p>
 </details>
 
-Throughout the `Parser` implementation, exceptions were used to return `IncorrectCommand` classes that can be used to pass error messages to the user. These will be discussed in the following segments.
+Throughout the `Parser` implementation, exceptions were caught to return `IncorrectCommand` classes that can be used to pass error messages to the user. These will be discussed in the following segments.
 
 ### Command classes
 
 #### Current Design and Implementation
 
-`Command` classes are largely similar to each other. The most complex command, `UpdateCommand` will be explained here.
+`Command` classes are largely similar to each other. Taking in input Strings from `Parser`, they invoke methods from `EquipmentManager` to perform the necessary actions. Where applicable, the `Command` classes also convert values to the necessary data types (Double, EquipmentType and LocalDate) prior to passing these values in.
 
-The update feature is facilitated by `UpdateCommand`. It extends `ModificationCommand` and implements the following operations:
+The most complex command, `UpdateCommand` will be explained here as the method calls are similar to the remaining commands. The update feature is facilitated by `UpdateCommand`. It extends `ModificationCommand` and implements the following operations:
 
 * `UpdateCommand#generateUpdatePairs()` — Generates pairs of attributes and their update values.
 * `UpdateCommand#generateUpdateString()` — Generates String with details of the update executed.
