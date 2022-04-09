@@ -1,13 +1,13 @@
 @startuml
-'https://plantuml.com/class-diagram
-
+hide circle
+skinparam classAttributeIconSize 0
 class PatientList {
 -patients : Arraylist<Patient> = null
 -returnedFinderArray : Arraylist<Patient> = null
 +getPatient(String) : Patient
 +search()(String) : Patient
 +add(String[]) : void
-getPatientInfo(Patient) : String
++getPatientInfo(Patient) : String
 +getSize() : int
 +view() : void
 +view(String) : void

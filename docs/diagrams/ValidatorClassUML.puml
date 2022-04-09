@@ -1,6 +1,6 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
+hide circle
+skinparam classAttributeIconSize 0
 class Validator {
 +validateAddAppointment(String[]): void
 +validateEditAppointment(String[]): void
