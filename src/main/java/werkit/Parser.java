@@ -186,13 +186,13 @@ public class Parser {
             arguments = getArgsForCreateAction(userInput);
             break;
         case DELETE_ACTION_KEYWORD:
-            arguments = getArgsForDeleteAction(userInput);
+            arguments = getArgsForWorkoutDeleteAction(userInput);
             break;
         case UPDATE_ACTION_KEYWORD:
-            arguments = getArgsForUpdateAction(userInput);
+            arguments = getArgsForWorkoutUpdateAction(userInput);
             break;
         case LIST_ACTION_KEYWORD:
-            checkListActionArgs(userInput);
+            checkWorkoutListActionArgs(userInput);
             break;
         default:
             logger.log(Level.WARNING, "User has entered an invalid workout command action.");
@@ -202,7 +202,13 @@ public class Parser {
         return new WorkoutCommand(userInput, fileManager, workoutList, planList, actionKeyword, arguments);
     }
 
-    public void checkListActionArgs(String userInput) throws InvalidCommandException {
+    /**
+     * Checks if the workout /list command given by the user does not have extra arguments.
+     *
+     * @param userInput The workout /list command given by the user.
+     * @throws InvalidCommandException If the user input contains more arguments than expected.
+     */
+    public void checkWorkoutListActionArgs(String userInput) throws InvalidCommandException {
         String className = this.getClass().getSimpleName();
         if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
             logger.log(Level.WARNING, "User has entered an invalid list workout command action.");
@@ -211,7 +217,14 @@ public class Parser {
         }
     }
 
-    public String getArgsForUpdateAction(String userInput) throws InvalidCommandException {
+    /**
+     * Returns the workout /update arguments given by the user if the input has the right number of arguments.
+     *
+     * @param userInput The workout /update command given by the user.
+     * @return A String representation of the arguments given by the user.
+     * @throws InvalidCommandException If the user input contains an incorrect number of arguments.
+     */
+    public String getArgsForWorkoutUpdateAction(String userInput) throws InvalidCommandException {
         String className = this.getClass().getSimpleName();
         if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
             logger.log(Level.WARNING, "User has entered an invalid update workout command action.");
@@ -222,7 +235,14 @@ public class Parser {
         return arguments;
     }
 
-    public String getArgsForDeleteAction(String userInput) throws InvalidCommandException {
+    /**
+     * Returns the workout /delete arguments given by the user if the input has the right number of arguments.
+     *
+     * @param userInput The workout /delete command given by the user.
+     * @return A String representation of the arguments given by the user.
+     * @throws InvalidCommandException If the user input contains an incorrect number of arguments.
+     */
+    public String getArgsForWorkoutDeleteAction(String userInput) throws InvalidCommandException {
         String className = this.getClass().getSimpleName();
         if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
             logger.log(Level.WARNING, "User has entered an invalid delete workout command action.");
@@ -233,6 +253,13 @@ public class Parser {
         return arguments;
     }
 
+    /**
+     * Returns the workout /new arguments given by the user if the input has the right number of arguments.
+     *
+     * @param userInput The workout /new command given by the user.
+     * @return A String representation of the arguments given by the user.
+     * @throws InvalidCommandException If the user input contains an incorrect number of arguments.
+     */
     public String getArgsForCreateAction(String userInput) throws InvalidCommandException {
         String className = this.getClass().getSimpleName();
         if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
