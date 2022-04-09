@@ -1,9 +1,14 @@
-package seedu.meetingjio.commands;
+package seedu.meetingjio.parser;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import seedu.meetingjio.commands.AddLessonCommand;
+import seedu.meetingjio.commands.AddMeetingCommand;
+import seedu.meetingjio.commands.AddUserCommand;
+import seedu.meetingjio.commands.ClearCommand;
+import seedu.meetingjio.commands.Command;
 import seedu.meetingjio.parser.Parser;
 import seedu.meetingjio.timetables.MasterTimetable;
 
@@ -205,7 +210,7 @@ public class ParserTest {
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand("meeting", "thursday",
                 1230, 1330, "online"
         );
-        String expectedOutput = "The following meeting has been added to everyone's timetable:\n"
+        String expectedOutput = "The following meeting has been added to everyone's timetable: \n"
                 + "[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online";
         assertEquals(expectedOutput, addMeetingCommand.execute(masterTimetable));
     }
