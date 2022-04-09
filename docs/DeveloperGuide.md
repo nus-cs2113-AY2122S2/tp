@@ -15,13 +15,18 @@ MeetingJio is a program for **finding potential time slots for team meetings bas
 
 ## 2.2 UI Component
 
-## 2.3 Logic Component
-- Parsers
+## 2.3 Commands Component
 - Commands
 
-## 2.4 Model Component
-- Timetables
-- Events
+##2.4 Parser Component
+## 2.5 Timetable Component
+- Timetable
+- MasterTimetable
+
+## 2.6 Events Component
+- Event
+- Lesson
+- Meeting
 
 ## 2.5 Storage Component
 
