@@ -88,7 +88,7 @@ public class DoctorList extends List {
                     (parameterArray[4].charAt(0)), parameterArray[5], parameterArray[6]);
             return;
         }
-        throw new NotFoundException("There are no patients with given NRIC!");
+        throw new NotFoundException("There are no doctors with given NRIC!");
     }
 
 
