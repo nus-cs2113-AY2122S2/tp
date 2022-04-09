@@ -178,12 +178,12 @@ Further, maintaining a record of the equipment is a time-consuming task given th
 
 | Version | As a ...                              | I want to ...                                                  | So that I can ...                                                    |
 |---------|---------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------|
-| v_.0    | new user                              | see usage instructions                                         | refer to them when I forget how to use the application               |
-| v_.0    | new user                              | list all equipment                                             | see all current equipment in the application                         |
-| v_.0    | conscientious logs chief              | add equipment                                                  | newly purchased equipment can be kept up to date                     |
-| v_.0    | meticulous logs chief                 | update equipment                                               | correct any errors in previously recorded equipment                  |
-| v_.0    | conscientious logs chief              | delete equipment                                               | remove decommissioned equipment from the application                 |
-| v_.0    | forgetful logs chief                  | search for equipment                                           | be able to find equipment by its attributes                          |
+| v1.0    | new user                              | list all equipment                                             | see all current equipment in the application                         |
+| v1.0    | conscientious logs chief              | add equipment                                                  | newly purchased equipment can be kept up to date                     |
+| v2.0    | new user                              | see usage instructions                                         | refer to them when I forget how to use the application               |
+| v2.0    | meticulous logs chief                 | update equipment                                               | correct any errors in previously recorded equipment                  |
+| v2.0    | conscientious logs chief              | delete equipment                                               | remove decommissioned equipment from the application                 |
+| v2.1    | forgetful logs chief                  | search for equipment                                           | be able to find equipment by its attributes                          |
 | v3.0    | forward-planning logs chief           | filter equipment purchased before a certain date               | conduct more regular inspections on them                             |
 | v3.0    | busy logs chief                       | mark equipment to be faulty/working                            | filter and send the faulty ones for repair                           |
 | v3.0    | logs chief supporting multiple events | ensure that equipment can be earmarked for an associated event | my equipment will not be double-booked and have scheduling conflicts |
