@@ -24,8 +24,10 @@ UI -down-> Warehouse
 "Command Parser" -> "Match Keywords"
 "Command Parser" -> Warehouse
 Warehouse "0..*"-> "Unit Good"
-Warehouse "0..*"-left-> Good
-Warehouse "0..*"-down-> Order
+Warehouse "0..*"--> Good
+Good -|> "Unit Good"
+Warehouse "0..*"--> Order
 Order "1..*"-> Orderline
+Orderline -|> Good
 
 @enduml

@@ -32,6 +32,11 @@ The class diagram will be shown below.
 A Goods class will extend the unit good class. It will contain the extra variable of quantity which is meant to show the current quantity the warehouse contains.
 #### Description
 Similar to Unit Goods, the Goods will be stored as a HashMap<String, Good> in the warehouse with the key being the SKU as a string and the value is the actual Good.
+
+![Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Good.puml)
+
+The Goods class allows for the creation of orderline objects which has the following attributes: id, name, quantity and
+description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
 ### Capacity Enumeration
 The Capacity enum is meant as a heuristic to determine the size of a unit good and good.
 #### Description
@@ -56,10 +61,6 @@ The diagram below shows the model component of the orderline class.
 ### Warehouse Class
 #### Description
 
-![Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Good.puml)
-
-The Goods class allows for the creation of orderline objects which has the following attributes: id, name, quantity and 
-description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
 
 ### Command Parser
 #### Description
