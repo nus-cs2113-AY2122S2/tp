@@ -6,33 +6,24 @@ autonumber
 
 title Sequence Diagram of `search /exercise` Command
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "ui:UI" AS UI1
-participant "parser:Parser" AS Parser
-participant "newCommand\n:SearchCommand" AS newCommand
-participant "exerciseList\n:ExerciseList" AS ExerciseList
+participant "werkIt\n:WerkIt" AS WerkIt   #Sandybrown
 
-activate WerkIt
-WerkIt -> UI1 : getUserInput()
-activate UI1
-WerkIt <-- UI1 : userInputTrimmed:String
-deactivate UI1
+participant "newCommand\n:SearchCommand" AS newCommand  #LightSkyBlue
+participant "exerciseList\n:ExerciseList" AS ExerciseList   #LightSkyBlue
 
-WerkIt -> Parser : parseUserInput(userInput)
-activate Parser
-WerkIt <-- Parser : :Command
-deactivate Parser
+activate WerkIt #Sandybrown
+
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand #LightSkyBlue
 newCommand -> ExerciseList : getExerciseList()
-activate ExerciseList
+activate ExerciseList   #LightSkyBlue
 
 newCommand <-- ExerciseList : "exerciseList:ArrayList<String>"
 deactivate ExerciseList
 
 newCommand -> newCommand : searchExercise()
-
+newCommand --> WerkIt
 deactivate newCommand
 
 destroy newCommand

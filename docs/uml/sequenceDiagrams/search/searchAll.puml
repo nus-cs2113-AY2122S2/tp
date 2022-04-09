@@ -7,7 +7,7 @@ hide footbox
 title Sequence Diagram of `search /all` Command
 
 
-participant "werkIt:WerkIt" AS WerkIt  #Sandybrown
+participant "werkIt\n:WerkIt" AS WerkIt  #Sandybrown
 
 ref over WerkIt
 Obtain and parse user input.
