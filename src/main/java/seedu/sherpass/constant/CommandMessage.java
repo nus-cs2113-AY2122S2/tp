@@ -6,10 +6,13 @@ public class CommandMessage {
     public static final String COMMAND_WORD_ADD = "add";
     public static final String MESSAGE_USAGE_ADD = "Add: Adds a task into the task list.\n"
             + "Usage: add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY\n"
-            + "       add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/by DEADLINE]\n\n"
+            + "       add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate DEADLINE "
+            + "/bytime END_TIME]\n\n"
             + "DATE & DEADLINE format: d/M/yyyy\n"
             + "START_TIME & END_TIME format: HH:mm\n"
-            + "FREQUENCY: daily, weekly, or monthly";
+            + "FREQUENCY: daily, weekly, or monthly\n\n"
+            + "Warning:\n"
+            + "If using the optional deadline parameter, both the bydate and the bytime needs to be used together";
     public static final String COMMAND_WORD_CLEAR = "clear";
     public static final String MESSAGE_USAGE_CLEAR = "Clear: Deletes multiple tasks in the list quickly.\n"
             + "Usage: clear CLEAR_SCOPE\n"
