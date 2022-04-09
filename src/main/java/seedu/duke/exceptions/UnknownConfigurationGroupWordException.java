@@ -2,7 +2,7 @@ package seedu.duke.exceptions;
 
 import seedu.duke.util.StringConstants;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 public class UnknownConfigurationGroupWordException extends ModHappyException {
 
     private static final String ERROR_MESSAGE = StringConstants.ERROR_UNKNOWN_CONFIGURATION_GROUP;

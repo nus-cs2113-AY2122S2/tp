@@ -9,7 +9,7 @@ public class TextUi {
     protected static final Scanner in = new Scanner(System.in);
     protected static final PrintStream out = System.out;
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
     /**
      * Formats the provided message.
      *
@@ -19,7 +19,7 @@ public class TextUi {
         return String.format("%s%s\n%s\n%s", StringConstants.LS, StringConstants.LINE, message, StringConstants.LINE);
     }
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
     /**
      * Receives command from user.
      *
@@ -30,7 +30,7 @@ public class TextUi {
         return in.nextLine();
     }
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
     /**
      * Displays a message enclosed by horizontal lines.
      */
@@ -45,7 +45,7 @@ public class TextUi {
         out.println(message.toString());
     }
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
     /**
      * Displays the welcome message.
      */
@@ -53,7 +53,7 @@ public class TextUi {
         showMessage(StringConstants.MESSAGE_HELLO);
     }
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
     /**
      * Displays the goodbye message.
      */

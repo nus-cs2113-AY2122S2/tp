@@ -13,7 +13,7 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.UnknownException;
 import seedu.duke.exceptions.WriteException;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 public abstract class JsonStorage<T> implements Storage<T> {
     /**
      * Writes a ArrayList with elements of type ModHappyT to a json file.

@@ -4,7 +4,7 @@ import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 public class ExitCommand extends Command {
 
     public static boolean isExit = false;

@@ -19,7 +19,7 @@ import seedu.duke.util.Configuration;
 
 import static seedu.duke.util.StringConstants.MODIFIED_JSON_EXCEPTION;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 public class ConfigurationStorage extends JsonStorage<Configuration> {
     @Override
     public Configuration loadData(String path) throws ModHappyException {

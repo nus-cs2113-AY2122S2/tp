@@ -22,7 +22,7 @@ public class ModHappyStorageManager {
 
     private static Storage modHappyStorage;
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
 
     /**
      * Saves task list to storage.
@@ -35,7 +35,7 @@ public class ModHappyStorageManager {
         modHappyStorage.writeData(taskArrayList, StringConstants.TASK_PATH);
     }
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
 
     /**
      * Saves module list to storage.
@@ -48,7 +48,7 @@ public class ModHappyStorageManager {
         modHappyStorage.writeData(moduleArrayList, StringConstants.MODULE_PATH);
     }
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
 
     /**
      * Saves Configuration to storage.
@@ -61,7 +61,7 @@ public class ModHappyStorageManager {
         modHappyStorage.writeData(configuration, StringConstants.CONFIGURATION_PATH);
     }
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
 
     /**
      * Loads Configuration from storage.

@@ -14,7 +14,7 @@ import seedu.duke.data.Task;
 import seedu.duke.data.TaskList;
 import seedu.duke.util.StringConstants;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 public class ModuleListStorageTest {
     private final String path = StringConstants.MODULE_TEST_PATH;
     private ModuleListStorage moduleListStorage;

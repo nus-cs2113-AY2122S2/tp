@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.commands.Command;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 public class ParserTest extends Parser {
     public ParserTest() {
         // This can be replaced to any regex you want to test

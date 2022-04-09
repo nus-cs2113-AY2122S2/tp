@@ -2,7 +2,7 @@ package seedu.duke.storage;
 
 import seedu.duke.exceptions.ModHappyException;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 /**
  * Storage interfaces of ModHappy.
  * @param <T> any data type

@@ -38,7 +38,7 @@ public class OptionCommand extends Command {
         }
     }
 
-    //@@author  Ch40gRv1-Mu
+    //@@author Ch40gRv1-Mu
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) {
         // enter "option" to check the list of configuration setting

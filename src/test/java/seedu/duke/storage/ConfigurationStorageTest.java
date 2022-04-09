@@ -11,7 +11,7 @@ import static seedu.duke.util.Configuration.ConfigurationGroup.SHOW_COMPLETED_TA
 
 
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 public class ConfigurationStorageTest {
 
     private ConfigurationStorage configurationStorage;

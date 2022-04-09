@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 public class Configuration {
 
     private static final String INDENT = StringConstants.INDENT;

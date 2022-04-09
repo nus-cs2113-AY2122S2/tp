@@ -1,6 +1,6 @@
 package seedu.duke.exceptions;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 /**
  * Base class for all program-specific exceptions.
  */

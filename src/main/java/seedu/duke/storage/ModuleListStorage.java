@@ -23,7 +23,7 @@ import seedu.duke.exceptions.UnknownException;
 
 import static seedu.duke.util.StringConstants.MODIFIED_JSON_EXCEPTION;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 /**
  * A data access object managing the loading and saving of ModuleList instances.
  *

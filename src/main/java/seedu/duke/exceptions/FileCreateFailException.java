@@ -2,7 +2,7 @@ package seedu.duke.exceptions;
 
 import seedu.duke.util.StringConstants;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 /**
  * Exception to be thrown when the storage file does not exist and cannot be created.
  */

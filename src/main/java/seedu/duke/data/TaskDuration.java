@@ -11,7 +11,7 @@ import seedu.duke.exceptions.WrongDurationFormatException;
 import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
-//@@author  Ch40gRv1-Mu
+//@@author Ch40gRv1-Mu
 public class TaskDuration {
 
     private static final long MINUTE_PER_HOUR = NumberConstants.MINUTE_PER_HOUR;
