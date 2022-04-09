@@ -335,16 +335,16 @@ public class UI {
 
         String messageToPrint;
         switch (filename) {
-        case FileManager.EXERCISE_FILENAME:
+        case FileManager.NAME_EXERCISE_FILE:
             messageToPrint = EXERCISES_FILE_LOADED_MSG;
             break;
-        case FileManager.WORKOUT_FILENAME:
+        case FileManager.NAME_WORKOUT_FILE:
             messageToPrint = WORKOUTS_FILE_LOADED_MSG;
             break;
-        case FileManager.PLAN_FILENAME:
+        case FileManager.NAME_PLAN_FILE:
             messageToPrint = PLANS_FILE_LOADED_MSG;
             break;
-        case FileManager.SCHEDULE_FILENAME:
+        case FileManager.NAME_SCHEDULE_FILE:
             messageToPrint = SCHEDULE_FILE_LOADED_MSG;
             break;
         default:
