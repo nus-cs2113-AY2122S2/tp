@@ -1,9 +1,9 @@
 @startuml
 actor user
 
-user -> ":Ui" ++ : "free ..."
+user -> ":Ui" ++ : "free"
 create ":Parser"
-":Ui" -> ":Parser" ++: new Parser("free ...")
+":Ui" -> ":Parser" ++: new Parser("free")
 ":Parser" --> ":Ui" --: parser:Parser
 ":Ui" -> ":Parser" ++: parseCommand()
 create ":FreeCommand"

@@ -2,7 +2,7 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This guide was done referencing https://se-education.org/addressbook-level3/DeveloperGuide.html.
 
 # 1. Overview
 MeetingJio is a program for **finding potential time slots for team meetings based on everyone’s availability**.
@@ -15,13 +15,18 @@ MeetingJio is a program for **finding potential time slots for team meetings bas
 
 ## 2.2 UI Component
 
-## 2.3 Logic Component
-- Parsers
+## 2.3 Commands Component
 - Commands
 
-## 2.4 Model Component
-- Timetables
-- Events
+##2.4 Parser Component
+## 2.5 Timetable Component
+- Timetable
+- MasterTimetable
+
+## 2.6 Events Component
+- Event
+- Lesson
+- Meeting
 
 ## 2.5 Storage Component
 
@@ -240,7 +245,7 @@ The `clear` command is a command that the user can clear a certain user's timeta
 
 `clear all` clears the timetable for all users.
 
-## Product scope
+## Appendix A: Product scope
 ### Target user profile
 
 NUS Students who wish to meet as a group (be it for project meetings or to eat together)
@@ -249,12 +254,11 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 
 1. Allow a group of students to quickly identify a common time slot such that all of them are free to meet up
 
-2. If no common time slot, allow students to see who is free at certain time slots
+2. If the group of students has a certain constraint regarding the minimum number of hours they want to meet for, the
+programme can also accommodate to this requirement
 
-3. The longest time slot with the most number of available students should be suggested first, followed by either shorter time slots or time slots where lesser students are able to make it
 
-
-## User Stories
+## Appendix B: User Stories
 
 | Version | As a ... | I want to ...                                    | So that I can ...                                    |
 |---------|----------|--------------------------------------------------|------------------------------------------------------|
@@ -273,14 +277,27 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 | v2.0    | user     | remove a user                                    | remove the user's timetable and his or her events    |
 | v2.0    | user     | save the modified timetable to the local machine | reuse it next time                                   |
 
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
+1. MeetingJio should work on Windows, macOSX and Linux as long as it has Java 11 or above installed. 
+2. As long as the user can type commands in the CLI quickly and properly, tasks are likely to be accomplished faster 
+than using GUI.
 
-{Give non-functional requirements}
+## Appendix D: Instructions for manual testing
 
-## Glossary
+### Start up 
 
-* *glossary item* - Definition
+- Download the latest [MeetingJio.jar](https://github.com/AY2122S2-CS2113-T11-3/tp/releases/tag/v2.1)
+- Ensure Java 11 is installed and configured on your device
+- Open a command prompt or terminal and run the command `java -jar MeetingJio.jar`
 
-## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Running Commands
+
+- Input `help` to get an overview of the list of accepted commands
+- You can also refer to our User Guide to understand how to use each command
+
+### Shut Down
+
+- Input `exit` to quit the programme
+
