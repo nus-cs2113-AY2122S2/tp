@@ -19,16 +19,6 @@ import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
 
 public class ItemListStubs {
 
-    // ItemList Stubs for use in SearchCommand
-    public static final ItemList SEARCH_LIST = generateItemList(ITEM_PAPER_A4_10, ITEM_PAPER_A5_10, ITEM_MARKER,
-            ITEM_WHITEBOARD);
-    public static final List<Item> SEARCH_RESULT_PAPER_NAME = generateImmutableResults(
-            ITEM_PAPER_A4_10, ITEM_PAPER_A5_10);
-    public static final List<Item> SEARCH_RESULT_DRAW_DESCRIPTION = generateImmutableResults(
-            ITEM_MARKER, ITEM_WHITEBOARD);
-    public static final List<Item> SEARCH_RESULT_PAPER_NAME_A4_DESCRIPTION = generateImmutableResults(ITEM_PAPER_A4_10);
-    public static final List<Item> SEARCH_RESULT_NONE = generateImmutableResults();
-
     // ItemList Stubs for use in EditCommand
     public static final ItemList EDIT_NEGATIVE_QUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
     public static final ItemList EDIT_NAME_LIST_BEFORE = generateItemList(ITEM_PENCIL);
@@ -47,6 +37,16 @@ public class ItemListStubs {
     // ItemList Stubs for use in ListCurrentBorrowingsCommand
     public static final ItemList TEST_ITEM_LIST = generateItemList(ITEM_MARKER, ITEM_PENCIL, ITEM_WHITEBOARD);
     public static final ItemList TEST_ITEM_LIST_WITH_RECORDS = generateItemListWithRecords(TEST_ITEM_LIST);
+
+    // ItemList Stubs for use in SearchCommand
+    public static final ItemList SEARCH_LIST = generateImmutableItemList(ITEM_PAPER_A4_10, ITEM_PAPER_A5_10,
+            ITEM_MARKER, ITEM_WHITEBOARD);
+    public static final List<Item> SEARCH_RESULT_PAPER_NAME = generateImmutableResults(
+            ITEM_PAPER_A4_10, ITEM_PAPER_A5_10);
+    public static final List<Item> SEARCH_RESULT_DRAW_DESCRIPTION = generateImmutableResults(
+            ITEM_MARKER, ITEM_WHITEBOARD);
+    public static final List<Item> SEARCH_RESULT_PAPER_NAME_A4_DESCRIPTION = generateImmutableResults(ITEM_PAPER_A4_10);
+    public static final List<Item> SEARCH_RESULT_NONE = generateImmutableResults();
 
     private static ItemList generateItemList(Item... items) {
         ArrayList<Item> list = new ArrayList<>();

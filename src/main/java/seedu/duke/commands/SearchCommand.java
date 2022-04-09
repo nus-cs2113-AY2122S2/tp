@@ -34,7 +34,7 @@ public class SearchCommand extends Command {
         if (!name.isPresent() && !description.isPresent()) {
             throw new NullPointerException();
         }
-        results = new ArrayList<>();
+        this.results = new ArrayList<>();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class SearchCommand extends Command {
                     && !caseInsensitiveContains(searchItem.getDescription(), this.description.get())) {
                 continue;
             }
-            results.add(searchItem);
+            this.results.add(searchItem);
 
             String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i + 1, searchItem.toDetailedString());
             ui.showMessages(printMsg);

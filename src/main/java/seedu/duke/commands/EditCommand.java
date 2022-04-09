@@ -44,7 +44,7 @@ public class EditCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new InvMgrException(Messages.INVALID_INDEX);
         }
-        Item placeholderItem = (Item) targetedItem.clone();
+        Item placeholderItem = Item.copyItem(targetedItem);
 
         if (this.name.isPresent()) {
             placeholderItem.setName(this.name.get());

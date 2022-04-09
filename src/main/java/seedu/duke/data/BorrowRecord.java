@@ -3,7 +3,7 @@ package seedu.duke.data;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class BorrowRecord implements Cloneable {
+public class BorrowRecord {
     private final int quantity;
     private final LocalDate startDate;
     private LocalDate endDate;
@@ -126,13 +126,14 @@ public class BorrowRecord implements Cloneable {
         return false;
     }
 
-    public Object clone() {
-        BorrowRecord cloneObj;
-        try {
-            cloneObj = (BorrowRecord) super.clone();
-        } catch (CloneNotSupportedException e) {
-            return null;
-        }
-        return cloneObj;
+    public static BorrowRecord copyBorrowRecord(BorrowRecord borrowRecord) {
+        int quantity = borrowRecord.getQuantity();
+        LocalDate startDate = borrowRecord.getStartDate();
+        LocalDate endDate = borrowRecord.getEndDate();
+        String borrowerName = borrowRecord.getBorrowerName();
+        boolean isReturned = borrowRecord.getReturnStatus();
+        BorrowRecord copiedRecord = new BorrowRecord(quantity, startDate, endDate, borrowerName);
+        copiedRecord.setReturnStatus(isReturned);
+        return copiedRecord;
     }
 }

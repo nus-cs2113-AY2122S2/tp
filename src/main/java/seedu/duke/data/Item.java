@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class Item implements Cloneable {
+public class Item {
 
     private static final String NON_ZERO_QUANTITY = "quantity must be non-zero positive integer!";
     private static final String NOT_NULL_NAME = "name must not be null!";
@@ -20,7 +20,6 @@ public class Item implements Cloneable {
     private String description;
     private ArrayList<BorrowRecord> borrowRecords;
     private boolean isLost = false;
-
 
     public Item(String name, int quantity, String description) {
         this.name = name;
@@ -137,7 +136,11 @@ public class Item implements Cloneable {
 
     @Override
     public String toString() {
-        return String.format("%s | %d", this.name, this.quantity);
+        String output = String.format("%s | %d", this.name, this.quantity);
+        if (isLost) {
+            output = output + " |[LOST]";
+        }
+        return output;
     }
 
     public String toDetailedString() {
@@ -146,18 +149,6 @@ public class Item implements Cloneable {
         }
         return String.format("%s | %d | %s", this.name, this.quantity, this.description);
     }
-    /**
-     *     // String representation of an item when printed on Ui.
-     *     @Override
-     *     public String toString() {
-     *         String string1 = (name + " | " + quantity);
-     *         if (isLost) {
-     *             string1 = string1 + " |[LOST]";
-     *         }
-     *         return string1;
-     *     }
-     * */
-
 
     @Override
     public boolean equals(Object other) {
@@ -175,18 +166,22 @@ public class Item implements Cloneable {
         return false;
     }
 
-    public Object clone() {
-        Item cloneObj;
+    public static Item copyItem(Item item) {
+        String name = item.getName();
+        int quantity = item.getQuantity();
+        String description = item.getDescription();
+        ArrayList<BorrowRecord> borrowRecords = item.getBorrowRecords();
+        boolean isLost = item.getLost();
+        Item copiedItem = new Item(name, quantity, description);
         try {
-            cloneObj = (Item)super.clone();
-        } catch (CloneNotSupportedException e) {
+            for (int i = 0; i < borrowRecords.size(); i++) {
+                copiedItem.addBorrowRecord(borrowRecords.get(i));
+            }
+        } catch (InvMgrException e){
+            // suppress error, return null
             return null;
         }
-        cloneObj.borrowRecords = new ArrayList<>();
-        for (int i = 0; i < this.borrowRecords.size(); i++) {
-            BorrowRecord cloneRecord = this.borrowRecords.get(i);
-            cloneObj.borrowRecords.add((BorrowRecord) cloneRecord.clone());
-        }
-        return cloneObj;
+        copiedItem.setLost(isLost);
+        return copiedItem;
     }
 }
