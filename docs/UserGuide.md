@@ -23,14 +23,10 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs, especial
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
-## Features 
-
-{Give detailed description of each feature}
+## Features
 
 ### Add an Item: `add`
 Add items with the following arguments:
@@ -95,24 +91,22 @@ HDMI Cable | 2
 ### Borrow an Item: `borrow`
 Borrow the item that you want for the duration between the start date and end date.
 
-Format: `borrow i/ITEM_INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`
+Format: `borrow i/ITEM_INDEX q/QUANTITY s/START_DATE e/END_DATE p/BORROWER_NAME`
 * `ITEM_INDEX` should be within one of the index for ItemList.
+* `QUANTITY` should be >= 0. Error will be raised if there are insufficient quantity in inventory to borrow.
 * The `START_DATE` and `END_DATE` must be in YYYY-MM-DD format.
 * `END_DATE` must be either the same as `START_DATE` or a later date.
-* Borrower will start borrowing the item at `START_DATE` 00:01 HRS.
-* Borrower will return the item at `END_DATE` 2359 HRS.
-* The next borrower can only borrow after `END_DATE` + 1 day or `START_DATE` - 1 day.
-* A borrower will not be able to borrow if his/her borrow timeframe overlaps
-  with a borrow record in the system.
+* Borrower will borrow at `START_DATE` 00:01 HRS and return at `END_DATE` 2359 HRS.
 * The `BORROWER_NAME` cannot contain punctuations.
 
 Examples of usage:
 ```
-> borrow i/1 s/2021-03-21 e/2021-03-25 p/John Smith
+> borrow i/1 q/5 s/2022-03-21 e/2022-03-25 p/John Smith
 You have successfully borrowed the following item:
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
 Borrow Duration: 2021-03-21 to 2021-03-23
+Borrow Quantity: 5
 ```
 
 ```
@@ -139,19 +133,17 @@ Examples of usage:
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Quantity: 5
 
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
 Borrow Duration: 2021-03-21 to 2021-03-23
+Borrow Quantity: 1
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
-```
-If there are no items have been borrowed from the inventory, the `listcb` command will return:
-```
-> listcb
-There are no items in the inventory being borrowed.
+Borrow Quantity: 1
 ```
 
 ```
@@ -164,6 +156,14 @@ Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-04-24 to 2021-04-30
 ```
+
+If there are no items have been borrowed from the inventory, the `listcb` command will return:
+```
+> listcb
+There are no items in the inventory being borrowed.
+```
+
+
 If the person does not exist in the borrowings, the `listcb p/BORROWER_NAME` will return:
 ```
 > listcb p/David
@@ -185,14 +185,17 @@ Examples of usage (Assuming today's date is **2021-03-18**):
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-21
+Borrow Quantity: 5
 
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
 Borrow Duration: 2021-03-21 to 2021-03-23
+Borrow Quantity: 1
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Quantity: 1
 ```
 If there are no future borrowings, the `listfb` command will return:
 ```
@@ -205,10 +208,12 @@ There are no future borrowings.
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Quantity: 5
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Quantity: 1
 ```
 If the person does not exist in the borrowings, the `listfb p/BORROWER_NAME` will return:
 ```
@@ -231,14 +236,17 @@ Examples of usage (Assuming today's date is **2021-03-31**):
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Quantity: 5
 
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
 Borrow Duration: 2021-03-21 to 2021-03-23
+Borrow Quantity: 1
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Quantity: 1
 ```
 If there are no overdue borrowings, the `listob` command will return:
 ```
@@ -251,10 +259,12 @@ There are no overdue borrowings.
 Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Quantity: 5
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Quantity: 1
 ```
 If the person does not exist in the borrowings, the `listob p/BORROWER_NAME` will return:
 ```
@@ -282,9 +292,6 @@ If there are no items available for borrowings, the `listab` command will return
 Here are the items available for borrowing:
 Sorry. There are no items available for borrowings.
 ```
-
-
-
 
 ### Get Description of Item: `desc`
 Retrieve the details of a particular item of your interest from the current inventory by entering the index (1-based indexing).
