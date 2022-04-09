@@ -4,9 +4,10 @@ import java.time.LocalDate;
 
 public class BorrowRecord {
     private final LocalDate startDate;
-    private final LocalDate endDate;
+    private LocalDate endDate;
     private final String borrowerName;
     private final BorrowStatus borrowStatus;
+    private boolean isReturned = false;
 
     public BorrowRecord(LocalDate startDate, LocalDate endDate, String borrowerName, BorrowStatus borrowStatus) {
         this.startDate = startDate;
@@ -35,6 +36,18 @@ public class BorrowRecord {
         return borrowStatus;
     }
 
+    public void setReturnStatus(boolean isReturned) {
+        this.isReturned = isReturned;
+    }
+
+    public void setEndDate() {
+        this.endDate = LocalDate.now();
+    }
+
+    public boolean getReturnStatus() {
+        return isReturned;
+    }
+    
     /**
      * Returns true if otherRecord has overlapping dates with this borrow record.
      *
