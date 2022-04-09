@@ -55,7 +55,7 @@ public class ExerciseCommandTest {
                         + ui.getColorText(TextColor.COLOR_YELLOW, "1. push up\n")
                         + ui.getColorText(TextColor.COLOR_YELLOW, "2. sit up\n")
                         + ui.getColorText(TextColor.COLOR_YELLOW, "3. pull up\n")
-                        +"----------------------------------------------------------------------\n"
+                        + "----------------------------------------------------------------------\n"
                         + "End of exercise list.";
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
