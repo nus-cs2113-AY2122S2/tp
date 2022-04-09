@@ -5,38 +5,38 @@ hide footbox
 
 autonumber
 
-Participant ":WerkIt" as WerkIt #Sandybrown
-Participant ":UI" as UI #YellowGreen
-Participant ":Parser" as Parser #Gold
-Participant ":Storage" as Storage #IndianRed
+Participant ":WerkIt" as WerkIt COLOR_WERKIT
+Participant ":UI" as UI COLOR_UI
+Participant ":Parser" as Parser COLOR_PARSER
+Participant ":Storage" as Storage COLOR_STORAGE
 
-activate WerkIt #Sandybrown
-WerkIt -> UI : getUserInput()
-activate UI #YellowGreen
-return "workout /new sit up /reps 5"
+activate WerkIt COLOR_WERKIT
+WerkIt -> UI : Ask and get user input
+activate UI COLOR_UI
+return User input in String
 deactivate UI
 
-WerkIt -> Parser : parseUserInput("workout /new sit up /reps 5")
-activate Parser #Gold
+WerkIt -> Parser : Parse user input
+activate Parser COLOR_PARSER
 
 create ":Logic" as Logic #LightSkyBlue
-Parser -> Logic : new WorkoutCommand()
+Parser -> Logic : Create Command object
 activate Logic #LightSkyBlue
-return :WorkoutCommand
+return Command object
 
-Parser --> WerkIt : :WorkoutCommand
+Parser --> WerkIt : Command object
 deactivate Parser
 
-WerkIt -> Logic : execute()
+WerkIt -> Logic : Execute command
 activate Logic #LightSkyBlue
 
-Logic -> UI : printNewWorkoutCreatedMessage(newWorkout)
-activate UI #YellowGreen
+Logic -> UI : Print command completed message
+activate UI COLOR_UI
 return
 deactivate UI
 
-Logic -> Storage : writeNewWorkoutToFile(newWorkout)
-activate Storage #IndianRed
+Logic -> Storage : Write to local file
+activate Storage COLOR_STORAGE
 return
 deactivate Storage
 
