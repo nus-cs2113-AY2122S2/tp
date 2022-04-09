@@ -44,7 +44,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Constructs a new AddCommand object to add a new module
+     * Constructs a new AddCommand object to add a new module.
      * @param type Represents the type of object to be added
      * @param moduleCode The code of the module to be added
      * @param moduleDescription The description of the module to be added, null if it is empty

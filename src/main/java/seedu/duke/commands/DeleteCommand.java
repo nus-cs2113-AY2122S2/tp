@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes the specified task or module
+     * Deletes the specified task or module.
      * @param moduleList The list of modules
      * @param configuration The configuration settings of the application
      * @return A new {@code CommandResult} with the result string

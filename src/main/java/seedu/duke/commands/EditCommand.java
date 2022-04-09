@@ -2,7 +2,10 @@ package seedu.duke.commands;
 
 import java.util.Objects;
 
-import seedu.duke.data.*;
+import seedu.duke.data.TaskParameters;
+import seedu.duke.data.ModuleList;
+import seedu.duke.data.Task;
+import seedu.duke.data.TaskList;
 import seedu.duke.data.Module;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
