@@ -34,8 +34,8 @@ class UI #YellowGreen {
 }
 
 class Parser #Gold {
-+ parseUserInput(String userInput)
-+ ExerciseCommand createExerciseCommand(String userInput)
++ parseUserInput()
++ ExerciseCommand createExerciseCommand()
 }
 
 class ExerciseList #LightSkyBlue {
