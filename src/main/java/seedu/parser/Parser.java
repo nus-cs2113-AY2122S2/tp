@@ -4,7 +4,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import seedu.command.AddCommand;
-import seedu.command.ModificationCommand;
 import seedu.command.UpdateCommand;
 import seedu.command.ListCommand;
 import seedu.command.IncorrectCommand;
@@ -30,8 +29,7 @@ public class Parser {
      * Format to parse command by breaking it up into two segments: command and arguments: these can then be separately
      * passed into arguments.
      */
-    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\w+)\\s+(?<arguments>.+)");
-
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
     /**
      * Defines regex used to match argument pairs in the command line.
      *
@@ -51,9 +49,7 @@ public class Parser {
      * <a href="https://regex101.com/r/dMwMWw/1"> Regex101</a> for demo.
      */
     public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
-            "(" + ARGUMENT_PAIR_REGEX + ")"
-                    + "\\s+" // argument space before next delimiter
-                    + "(?=[sntcSNTC]|[pP][fF]|[pP][dD])" // positive lookahead to mandate next delimiter
+            "(" + ARGUMENT_PAIR_REGEX + ")" + "\\s+" // argument space before next delimiter
     );
     /**
      * Extracts last tag for debugging.
@@ -62,10 +58,8 @@ public class Parser {
      */
     public static final Pattern MODIFICATION_ARGUMENT_TRAILING_FORMAT = Pattern.compile(
             "(?<![\\w`])" // require a previous pattern
-                    + ARGUMENT_PAIR_REGEX
-                    + "$" // require end of string
+                    + ARGUMENT_PAIR_REGEX + "$" // require end of string
     );
-
     public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("^(?<itemName>" + ARGUMENT_PAIR_REGEX + ")$");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("^(?<serialNumber>" + "[Ss]"
             + "\\/" // argument delimiter
@@ -73,13 +67,13 @@ public class Parser {
             + "[\\w\\s\\-\\.]+" // actual argument value
             + "`+" //  backticks to enclose string
             + ")$");
-    public static final String INCORRECT_COMMAND_FORMAT = "Command word not recognised. " + System.lineSeparator()
+    public static final String UNRECOGNISED_COMMAND_MESSAGE = "Command word not recognised. " + System.lineSeparator()
             + "Please use one of the following: "
             + AddCommand.COMMAND_WORD + ", " + UpdateCommand.COMMAND_WORD + ", " + ListCommand.COMMAND_WORD + ", "
             + CheckCommand.COMMAND_WORD + ", " + DeleteCommand.COMMAND_WORD + ", " + HelpCommand.COMMAND_WORD + ", "
             + SaveCommand.COMMAND_WORD + ", " + ByeCommand.COMMAND_WORD + ".";
-    public static final String MISSING_COMMAND_WORD_DELIMITER = INCORRECT_COMMAND_FORMAT + System.lineSeparator()
-            + "If including additional arguments, please separate them with a space.";
+    public static final String MISSING_COMMAND_WORD_DELIMITER_MESSAGE = UNRECOGNISED_COMMAND_MESSAGE
+            + System.lineSeparator() + "If including additional arguments, please separate them with a space.";
 
     /**
      * Interpret the command requested by the user and returns a corresponding Command object.
@@ -93,7 +87,7 @@ public class Parser {
         try {
             commandAndArgument = splitCommandTerm(userInput);
         } catch (IncompleteCommandException e) {
-            return new IncorrectCommand(MISSING_COMMAND_WORD_DELIMITER);
+            return new IncorrectCommand(MISSING_COMMAND_WORD_DELIMITER_MESSAGE);
         }
 
         // only arguments is trimmed because commandWord is split on the first space
@@ -111,16 +105,16 @@ public class Parser {
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(AddCommand.COMMAND_WORD + AddCommand.COMMAND_DESCRIPTION);
             } catch (NumberFormatException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_COST_MESSAGE);
+                return new IncorrectCommand(Command.INCORRECT_COST_FORMAT);
             } catch (IllegalArgumentException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_TYPE_MESSAGE);
+                return new IncorrectCommand(Command.INCORRECT_ENUM_TYPE);
             } catch (MissingAttributeException e) {
                 return new IncorrectCommand(e.getMessage()
                         + System.lineSeparator()
                         + AddCommand.COMMAND_WORD
                         + AddCommand.COMMAND_DESCRIPTION);
             } catch (DateTimeParseException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_DATE_MESSAGE);
+                return new IncorrectCommand(Command.INVALID_DATE_MESSAGE);
             }
         case CheckCommand.COMMAND_WORD:
             try {
@@ -128,10 +122,6 @@ public class Parser {
                 return new CheckCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(CheckCommand.COMMAND_WORD + CheckCommand.COMMAND_DESCRIPTION);
-            } catch (NumberFormatException e) {
-                return new IncorrectCommand(Command.INCORRECT_ENUM_TYPE);
-            } catch (IllegalArgumentException e) {
-                return new IncorrectCommand(Command.INCORRECT_COST_FORMAT);
             }
         case DeleteCommand.COMMAND_WORD:
             try {
@@ -147,9 +137,9 @@ public class Parser {
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
             } catch (NumberFormatException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_COST_MESSAGE);
+                return new IncorrectCommand(Command.INCORRECT_COST_FORMAT);
             } catch (IllegalArgumentException e) {
-                return new IncorrectCommand(ModificationCommand.INVALID_TYPE_MESSAGE);
+                return new IncorrectCommand(Command.INCORRECT_ENUM_TYPE);
             }
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -160,7 +150,7 @@ public class Parser {
         case ByeCommand.COMMAND_WORD:
             return new ByeCommand();
         default:
-            return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
+            return new IncorrectCommand(UNRECOGNISED_COMMAND_MESSAGE);
         }
 
     }
@@ -287,63 +277,5 @@ public class Parser {
         String newString = argument.substring(0, slashIndex).toLowerCase(Locale.ROOT) + argument.substring(slashIndex);
         return newString.replace("`", "");
     }
-
-    @Deprecated
-    public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
-            "n\\/(?<itemName>.+)" + "\\s+"
-                    + "s\\/(?<serialNumber>.+)" + "\\s+"
-                    + "t\\/(?<equipmentType>.+)" + "\\s+"
-                    + "c\\/(?<cost>.+)" + "\\s+"
-                    + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
-                    + "pd\\/(?<purchasedDate>.+)"
-    );
-
-    /**
-     * Prepare arguments for AddCommand by splitting up the arguments into different parts.
-     *
-     * <p>Index:
-     *
-     * <p>0. <code> equipmentName </code>: String of equipment name
-     *
-     * <p>1. <code> serialNumber </code>: String of unique serial number
-     *
-     * <p>2. <code> type </code>: String representation of enumerated class
-     *
-     * <p>3. <code> cost </code>: String representation of double value, "$" optional but "," delimiter forbidden
-     *
-     * <p>4. <code> purchasedFrom </code>: String of vendor name, suggest adhering to one consistent naming scheme
-     *
-     * <p>5. <code> purchasedDate </code>: String representation for now, possibility for future support
-     *
-     * @param args String to be split into substrings
-     * @return ArrayList of arguments
-     * @throws IncompleteCommandException if no match found
-     * @deprecated Use extractArguments as it is more robust in conjunction with subclasses of ModificationCommand
-     */
-    @Deprecated
-    protected ArrayList<String> prepareAdd(String args) throws IncompleteCommandException {
-        final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
-        // validate arg string format
-        int matchCount = matcher.groupCount();
-        if (!matcher.matches()) {
-            throw new IncompleteCommandException("Add command values are incomplete or missing!");
-        }
-        ArrayList<String> results = new ArrayList<>();
-        for (int i = 1; i <= matchCount; i++) {
-            String result = matcher.group(i);
-            if (hasSlashDelimiter(result)) {
-                throw new IncompleteCommandException("Use of '/' for purposes other than delimiter is forbidden!");
-            }
-            results.add(result);
-        }
-        return results;
-    }
-
-    @Deprecated
-    private static boolean hasSlashDelimiter(String argument) {
-        return argument.contains("/");
-    }
-
-
 
 }
