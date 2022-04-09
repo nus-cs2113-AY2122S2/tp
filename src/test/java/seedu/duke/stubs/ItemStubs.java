@@ -48,6 +48,7 @@ public class ItemStubs {
     public static final Item ITEM_DVI_CABLE = attachRecord(
             generateItem(DVI_CABLE_NAME, DVI_CABLE_QUANTITY, DVI_CABLE_DESCRIPTION),
             BorrowRecordStubs.FIXED_RECORD);
+
     /**
      * Generate an {@code Item}.
      * @param name name of Item

@@ -5,11 +5,17 @@ import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static seedu.duke.stubs.ItemStubs.*;
+import static seedu.duke.stubs.ItemStubs.ITEM_DVI_CABLE;
+import static seedu.duke.stubs.ItemStubs.ITEM_HDMI_CABLE;
+import static seedu.duke.stubs.ItemStubs.ITEM_MARKER;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A4_10;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A4_15;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A5_10;
+import static seedu.duke.stubs.ItemStubs.ITEM_PENCIL;
+import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
 
 public class ItemListStubs {
 
