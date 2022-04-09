@@ -15,12 +15,13 @@ public class Item implements Cloneable {
     private String name;
     private int quantity;
     private String description;
-    public ArrayList<BorrowRecord> borrowRecords = new ArrayList<BorrowRecord>();
+    private ArrayList<BorrowRecord> borrowRecords;
 
     public Item(String name, int quantity, String description) {
         this.name = name;
         this.quantity = quantity;
         this.description = description;
+        this.borrowRecords = new ArrayList<>();
     }
 
     public String getDescription() {
@@ -112,11 +113,18 @@ public class Item implements Cloneable {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Item // instanceof handles nulls
-                && this.name.equals(((Item) other).name)
-                && this.description.equals(((Item) other).description)
-                && (this.quantity == ((Item) other).quantity));
+        if (other==this) {
+            return true; // short circuit if same object
+        }
+        // instanceof handles nulls
+        if (other instanceof Item) {
+            Item otherItem = ((Item) other);
+            return this.name.equals(otherItem.name)
+            && this.description.equals(otherItem.description)
+            && this.quantity == (otherItem.quantity)
+            && this.borrowRecords.containsAll(otherItem.borrowRecords);
+        }
+        return false;
     }
 
     public Object clone() {

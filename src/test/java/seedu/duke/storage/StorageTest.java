@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 import seedu.duke.data.Item;
 import seedu.duke.exceptions.InvMgrException;
+import seedu.duke.stubs.ItemStubs;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,12 +35,9 @@ public class StorageTest {
     @Test
     void load_validJsonFile_validList() throws InvMgrException {
         ArrayList<Item> expectedItemList = new ArrayList<>();
-        Item item1 = new Item("Markers", 3, "Drawing");
-        Item item2 = new Item("Whiteboard", 1, "To draw on");
-        Item item3 = new Item("HDMI Cable", 2, "For connecting displays");
-        expectedItemList.add(item1);
-        expectedItemList.add(item2);
-        expectedItemList.add(item3);
+        expectedItemList.add(ItemStubs.ITEM_MARKER);
+        expectedItemList.add(ItemStubs.ITEM_WHITEBOARD);
+        expectedItemList.add(ItemStubs.ITEM_HDMI);
 
         Storage testStorage = new Storage("test/data/load/validInputData.json");
         ArrayList<Item> testItemList = testStorage.load();

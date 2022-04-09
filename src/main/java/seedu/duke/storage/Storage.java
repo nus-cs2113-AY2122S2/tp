@@ -3,6 +3,7 @@ package seedu.duke.storage;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.Item;
 
 import com.google.gson.Gson;
@@ -47,7 +48,7 @@ public class Storage {
         ArrayList<Item> bufferTaskList;
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new DateAdapter())
+                .registerTypeAdapter(BorrowRecord.class, new DateAdapter())
                 .create();
         try {
             List<String> jsonDataList = Files.readAllLines(dataPath);
@@ -77,7 +78,7 @@ public class Storage {
         }
         try {
             Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(LocalDate.class, new DateAdapter())
+                    .registerTypeAdapter(BorrowRecord.class, new DateAdapter())
                     .create();
 
             String serializedItems = gson.toJson(itemList);
