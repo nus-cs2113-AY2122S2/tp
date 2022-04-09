@@ -16,7 +16,6 @@ public class StringConstants {
      */
     public static final String MESSAGE_HELLO = "Hello, welcome to Mod Happy!";
     public static final String MESSAGE_GOODBYE = "See you later!";
-    public static final String MESSAGE_INIT_FAILED = "Failed to start Mod Happy...";
 
     /**
      * For loading of data.
