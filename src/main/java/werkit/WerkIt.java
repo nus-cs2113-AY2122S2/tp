@@ -167,46 +167,75 @@ public class WerkIt {
      * @throws IOException If the application is unable to process the user input.
      */
     public void startContinuousUserPrompt() throws IOException {
-        boolean userWantsToExit = false;
         boolean isFirstPrompt = true;
 
+        Command newCommand;
         do {
-            try {
-                getUI().printUserInputPrompt(isFirstPrompt);
-                isFirstPrompt = false;
-                String userInput = getUI().getUserInput();
-                Command newCommand = getParser().parseUserInput(userInput);
+            getUI().printUserInputPrompt(isFirstPrompt);
+            isFirstPrompt = false;
+            String userInput = getUI().getUserInput();
+            newCommand = parseUserInput(userInput);
 
-                if (newCommand instanceof ExitCommand) {
-                    userWantsToExit = true;
-                    continue;
-                }
-
-                newCommand.execute();
-                if (newCommand instanceof WorkoutCommand) {
-                    if (newCommand.getUserAction().equals(ACTION_KEYWORD_DELETE)) {
-                        reloadScheduleFile();
-                    }
-                }   else if (newCommand instanceof PlanCommand) {
-                    if (newCommand.getUserAction().equals(ACTION_KEYWORD_DELETE)) {
-                        reloadScheduleFile();
-                    }
-                }
-
-            } catch (InvalidCommandException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Please try again.");
-                logger.log(Level.WARNING, "User has entered an invalid command.");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Uh oh, the command entered is invalid.");
-                System.out.println("Please try again.");
-                logger.log(Level.WARNING, "User has entered an array index out of bound invalid command.");
+            if (newCommand == null) {
+                continue;
             }
-        } while (!userWantsToExit);
+
+            assert (newCommand != null);
+
+            newCommand.execute();
+            conductPostExecuteChecks(newCommand);
+        } while (!(newCommand instanceof ExitCommand));
 
         // User is exiting the program
-        assert (userWantsToExit);
         getUI().printGoodbye();
+    }
+
+    /**
+     * Conducts certain procedures after a Command#execute() has been called. Currently, the only procedure
+     * carried out post-execution is to reload schedule.txt if the command ran is a 'workout /delete' or
+     * 'plan /delete' command.
+     *
+     * @param newCommand A Command object that represents the user input.
+     * @throws IOException If the reloading of schedule.txt is unsuccessful.
+     */
+    public void conductPostExecuteChecks(Command newCommand) throws IOException {
+        boolean isWorkoutOrPlanCommand = (newCommand instanceof WorkoutCommand) || (newCommand instanceof PlanCommand);
+
+        if (!isWorkoutOrPlanCommand) {
+            return;
+        }
+
+        boolean isDeleteAction = newCommand.getUserAction().equals(ACTION_KEYWORD_DELETE);
+
+        if (isDeleteAction) {
+            reloadScheduleFile();
+        }
+    }
+
+    /**
+     * Acts as an intermediary method to call Parser#parseUserInput(). This method was created to flatten
+     * the arrowhead code that existed in startContinuousUserPrompt().
+     *
+     * @param userInput The input given by the user.
+     * @return A command object that represents the user input. However, null is returned if the parsing
+     *         is unsuccessful.
+     */
+    public Command parseUserInput(String userInput) {
+        Command newCommand = null;
+
+        try {
+            newCommand = getParser().parseUserInput(userInput);
+        } catch (InvalidCommandException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Please try again.");
+            logger.log(Level.WARNING, "User has entered an invalid command.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Uh oh, the command entered is invalid.");
+            System.out.println("Please try again.");
+            logger.log(Level.WARNING, "User has entered an array index out of bound invalid command.");
+        }
+
+        return newCommand;
     }
 
     /**
