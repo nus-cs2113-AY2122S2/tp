@@ -28,6 +28,8 @@ Example of usage:
 
 `add doctor /id 222 /n Harry Potter /ph 22223333 /e theChosenOne@gmail.com /dep Defensive`
 
+Expected output:
+![](AddDoctorOutput.png)
 
 ### Adding a patient: `add patient`
 Adds a new patient to the system.
