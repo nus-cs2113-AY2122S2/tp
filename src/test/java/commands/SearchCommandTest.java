@@ -3,6 +3,7 @@ package commands;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.plans.InvalidPlanException;
+import data.plans.Plan;
 import data.plans.PlanList;
 import data.schedule.DayList;
 import data.workouts.InvalidWorkoutException;
@@ -31,6 +32,7 @@ public class SearchCommandTest {
     FileManager fileManager;
     DayList dayList;
 
+    //@@author a1021492980
     @BeforeEach
     void setUp() throws InvalidWorkoutException, InvalidExerciseException, IOException, InvalidPlanException {
         LogHandler.startLogHandler();
@@ -53,10 +55,14 @@ public class SearchCommandTest {
         workoutList.addNewWorkoutToLists(testWorkout2);
         workoutList.addNewWorkoutToLists(testWorkout3);
 
-        planList.createAndAddPlan("more muscles /workouts 1,2,3");
-        planList.createAndAddPlan("legs /workouts 2,3");
-        planList.createAndAddPlan("arms /workouts 3");
+        Plan newPlan1 = planList.createNewPlan("more muscles /workouts 1,2,3");
+        planList.addNewPlanToLists(newPlan1);
+        Plan newPlan2 = planList.createNewPlan("legs /workouts 2,3");
+        planList.addNewPlanToLists(newPlan2);
+        Plan newPlan3 = planList.createNewPlan("arms /workouts 3");
+        planList.addNewPlanToLists(newPlan3);
     }
+    //@@author
 
     @Test
     public void searchCommand_normalSearchExerciseConstruction_constructSuccess() throws
