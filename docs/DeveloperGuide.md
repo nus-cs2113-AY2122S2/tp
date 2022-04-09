@@ -2225,9 +2225,9 @@ The following are some test cases for you to try:
 
 ##### Positive Test Cases
 
-| Test Case               | Command           | Expected result                                          |
-|:------------------------|:------------------|:---------------------------------------------------------|
-| Valid plan index number | `plan /details 1` | All workouts in plan with index number 1 will be listed. |
+| Test Case               | Command           | Expected result                                        |
+|:------------------------|:------------------|:-------------------------------------------------------|
+| Valid plan index number | `plan /details 1` | All workouts in plan with index number 1 is displayed. |
 
 ##### Negative Test Cases
 
@@ -2250,9 +2250,9 @@ The following are some test cases for you to try:
 
 ##### Positive Test Cases
 
-| Test Case               | Command          | Expected result                                          |
-|:------------------------|:-----------------|:---------------------------------------------------------|
-| Valid plan index number | `plan /delete 1` | All workouts in plan with index number 1 will be listed. |
+| Test Case               | Command          | Expected result                      |
+|:------------------------|:-----------------|:-------------------------------------|
+| Valid plan index number | `plan /delete 1` | Plan with index number 1 is deleted. |
 
 ##### Negative Test Cases
 
@@ -2262,7 +2262,7 @@ The following are some test cases for you to try:
 | Command with extra arguments.                                                                  | `plan /delete 1 1`       | Error response (invalid user argument), plan is not deleted. |
 | Extra whitespaces between commands arguments.                                                  | `plan         /delete 1` | Error response (invalid user action), plan is not deleted.   |
 | Missing plan index number.                                                                     | `plan /delete`           | Error response (invalid command).                            |
-| Plan index number is not an integer.                                                           | `plan /details a`        | Error response (invalid user argument).                      |
+| Plan index number is not an integer.                                                           | `plan /delete a`         | Error response (invalid user argument).                      |
 
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
@@ -2395,7 +2395,7 @@ rely on former test cases.</span>
 | 6. Delete data from `plans.txt` and `schedule.txt` is updated accordingly. | `plans /delete 3` | `plans.txt` will be updated to the following:<br/><br/>![plans.txt delete plan](images/plansTxtDeletePlan.png)<br/><br/>`schedule.txt` will also be updated as one of the days has the deleted plan:<br/><br/>![schedule.txt plan delete](images/scheduleTxtPlanDeleteCascade.png)                                                                                                                                                                                                                             |
 | 7. Delete workout from `workouts.txt` and `plans.txt` and `schedule.txt` are updated accordingly. | `workout /delete 1` | `workout.txt` will be updated to the following:<br/><br/>![workout.txt workout delete](images/workoutsTxtDeleteWorkout.png)<br/><br/>`plans.txt` will also be updated as some plans with the deleted workout are affected:<br/><br/>![plans.txt workout delete cascasde](images/plansTxtWorkoutDeleteCascade.png)<br/><br/>Likewise, `schedule.txt` is also updated as a plan assigned to a day has been affected:<br/><br/>![schedule.txt workout delete cascade](images/scheduleTxtWorkoutDeleteCascade.png) |                                    
 
-
+<br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
-
+<br>
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
