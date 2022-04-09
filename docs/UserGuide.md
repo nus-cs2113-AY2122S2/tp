@@ -107,15 +107,15 @@ The price of dish:
 #### Notice
 `Name` of the dish cannot be empty, and `price` of the dish cannot be negative (`price` being 0 means this dish is free to serve).
 
-### Order Management
+## Order Management
 
-## Introduction
+### Introduction
 `Order Management` feature is consist of several sub-features:
 > `Create an order`, `Delete an order`, `Get total price of an order`, `Get total price of all orders in the list`, `Print receipt`.
 
-## Usage
+### Usage
 When using `Order Management`, the program pops up a select panel to ask for action:
-```aidl
+```
 (0) Exit Order Menu
 (1) Create an order
 (2) Delete an order
@@ -138,14 +138,14 @@ When using `Create an order`, the user creates a new order and adds dishes to it
 
 > Example: Add some dishes to: 2 Chicken Rice ($3.5 * 2), 1 Mala hotpot Set A($10)
 
-```aidl
+```
 Creating a new order...
 Enter dishes you want to add to the order (enter negative number to exit): 
 ```
 
 > Enter the index of the dish one by one. Enter a negative number to quit.
 
-```aidl
+```
 Enter choice: 1
 Creating a new order...
 Enter dishes you want to add to the order (enter negative number to exit): 0
@@ -160,7 +160,7 @@ You have 3 dish(es), some more:
 ```
 ### Notice
 If the user input is invalid, the program issues an error.
-```aidl
+```
 Creating a new order...
 Please enter a valid dish index and try again.
 ```
@@ -172,7 +172,7 @@ Order index starts from 1.
 
 > Example: Delete order with index 1.
 
-```aidl
+```
 Enter choice: 2
 Deleting an order...
 Enter the order you want to delete: 1
@@ -180,7 +180,7 @@ Deleted successfully!
 ```
 ### Notice
 If the user input is invalid, the program issues an error.
-```aidl
+```
 Deleting an order...
 Please enter a valid order index.
 ```
@@ -193,7 +193,7 @@ When using `Get total price of an order`, the user searches an order by index an
 
 > Example: Get total price of an order with index 1.
 
-```aidl
+```
 Enter choice: 3
 Getting total price of an order...
 Enter the order you want to get price: 1
@@ -201,7 +201,7 @@ Total value of this order: 13.500000.
 ```
 ### Notice
 If the user input is invalid, the program issues an error.
-```aidl
+```
 Getting total price of an order...
 Please enter a valid order index.
 ```
@@ -211,7 +211,7 @@ When using `Get total price of all orders`, the user gets the sum of prices of a
 
 > Enter `4` in `Order Menu` 
 
-```aidl
+```
 Enter choice: 4
 Getting total price of all orders in the list...
 Total value of all orders: 13.500000. 
@@ -225,7 +225,7 @@ order. Order index starts from 1.
 
 > Example: Print receipt of an order with index 1.
 
-```aidl
+```
 Enter choice: 5
 Printing receipt...
 Enter the order you want to display: 1
@@ -236,7 +236,7 @@ Total Price: 13.5
 ```
 ### Notice
 If the user input is invalid, the program issues an error.
-```aidl
+```
 Printing receipt...
 Invalid order index.
 ```
@@ -246,7 +246,7 @@ When using `Display order list`, the user checks the order list.
 
 > Enter `6` in `Order Menu` 
 
-```aidl
+```
 Enter choice: 6
 Printing all orders...
 Order 1:
@@ -411,7 +411,39 @@ will not be saved unless the application is exited gracefully. Any other means o
 will not save the data (because they are not taken to be typical exit commands, but rather interrupts).
 
 ## Command Summary
-
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+Main Menu:
+```
+(0) Exit Application
+(1) Enter Dish Menu
+(2) Enter Order Menu
+(3) Enter Staff Menu
+```
+Dish Menu:
+```
+(0) Exit Menu
+(1) List Dish
+(2) Add Dish
+(3) Delete Dish
+(4) Change the price of a dish
+(5) Change the name of a dish
+```
+Order Menu:
+```
+(0) Exit Order Menu
+(1) Create an order
+(2) Delete an order
+(3) Get total price of an order
+(4) Get total price of all orders
+(5) Print receipt
+(6) Display order list
+(7) Display dish menu
+```
+Staff Menu:
+```
+(0) Exit Staff Menu
+(1) Print Staff
+(2) Find Staff
+(3) Add Staff
+(4) Delete Staff
+(5) Edit Staff
+```
