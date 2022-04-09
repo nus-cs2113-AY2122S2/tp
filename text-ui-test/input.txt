@@ -1,6 +1,6 @@
 help
 session /create /n Class outing /d 12-03-2022 /pl alice bob
-session /create /n Class hangout /d today /pl ivan mike charlie
+session /create /n Class hangout /d 09-04-2022 /pl ivan mike charlie
 session /view /sid 1
 group /create /n Friends /pl Alice bob charlie
 group /create /n Army Friends /pl James Joey Brandon
