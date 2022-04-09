@@ -318,6 +318,7 @@ to block out pockets of time for studying, so that they can better focus during 
 | v2.0    | user     | be able to mark my tasks as done in study session |                                            |
 | v2.0    | user     | add recurring tasks                               | enter my recurring tutorials and lectures  |
 | v2.0    | user     | click a button to interact with the study timer   | interact with the timer more naturally     |
+| v2.1    | user     | delete all my expired/completed tasks at once     |                                            | 
 
 ## Non-Functional Requirements
 

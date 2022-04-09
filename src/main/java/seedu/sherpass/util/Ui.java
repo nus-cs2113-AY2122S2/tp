@@ -10,6 +10,8 @@ import static seedu.sherpass.constant.Message.ERROR_PREFIX;
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_ONE;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
+import static seedu.sherpass.constant.Message.CLEAR_NO_EXPIRED_TASK_MESSAGE;
+import static seedu.sherpass.constant.Message.CLEAR_NO_COMPLETED_TASK_MESSAGE;
 
 public class Ui {
     private static final Scanner in = new Scanner(System.in);
@@ -139,6 +141,20 @@ public class Ui {
             }
             showToUser("Please confirm your choice with either Y (Yes) or N (No).");
             showLine();
+        }
+    }
+
+    public void showClearRemoveTask(int oldTaskListSize, int newTaskListSize) {
+        showToUser("Done! " + (oldTaskListSize - newTaskListSize) + " task(s) have been removed.",
+                "Now you have " + newTaskListSize + " task(s) in the list.");
+    }
+
+    public void showClearFailToRemoveTask(String selection) {
+        if (selection.equals("expired")) {
+            showToUser(CLEAR_NO_EXPIRED_TASK_MESSAGE);
+        }
+        if (selection.equals("done")) {
+            showToUser(CLEAR_NO_COMPLETED_TASK_MESSAGE);
         }
     }
 }

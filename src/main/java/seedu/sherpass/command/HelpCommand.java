@@ -7,11 +7,30 @@ import seedu.sherpass.task.TaskList;
 
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_QUICK_START_COMMAND;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_ADD;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_CLEAR;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_DELETE;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_EDIT;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_EXIT;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_HELP_VARIANT;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_SHOW;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_MARK;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_UNMARK;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_STUDY;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_ADD;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_CLEAR;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_DELETE;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_MARK;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_UNMARK;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_EDIT;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_SHOW;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_STUDY;
+import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_EXIT;
+
 
 public class HelpCommand extends Command {
+
     private String helpInput;
-    public static final String COMMAND_WORD = "help";
-    public static final String COMMAND_WORD_VARIANT = "quick start";
 
     /**
      * Creates a constructor for the HelpCommand. Accepts the help input.
@@ -26,10 +45,10 @@ public class HelpCommand extends Command {
 
     private void showHelpList(Ui ui) {
         System.out.println("Here is a list of commands available:");
-        String[] helpCommands = {MarkCommand.COMMAND_WORD, UnmarkCommand.COMMAND_WORD,
-            AddCommand.COMMAND_WORD, ShowCommand.COMMAND_WORD,
-            EditCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD,
-            StudyCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD, };
+        String[] helpCommands = {COMMAND_WORD_MARK, COMMAND_WORD_UNMARK,
+            COMMAND_WORD_ADD, COMMAND_WORD_SHOW,
+            COMMAND_WORD_EDIT, COMMAND_WORD_DELETE, COMMAND_WORD_CLEAR,
+            COMMAND_WORD_STUDY, COMMAND_WORD_EXIT, };
         for (String helpCommand : helpCommands) {
             ui.showLine();
             showSpecificHelpCommand(ui, helpCommand);
@@ -42,34 +61,34 @@ public class HelpCommand extends Command {
 
     private void showSpecificHelpCommand(Ui ui, String helpCommand) {
         switch (helpCommand) {
-        case MarkCommand.COMMAND_WORD:
-            ui.showToUser(MarkCommand.MESSAGE_USAGE);
+        case COMMAND_WORD_MARK:
+            ui.showToUser(MESSAGE_USAGE_MARK);
             break;
-        case UnmarkCommand.COMMAND_WORD:
-            ui.showToUser(UnmarkCommand.MESSAGE_USAGE);
+        case COMMAND_WORD_UNMARK:
+            ui.showToUser(MESSAGE_USAGE_UNMARK);
             break;
-        case AddCommand.COMMAND_WORD:
-            ui.showToUser(AddCommand.MESSAGE_USAGE);
+        case COMMAND_WORD_ADD:
+            ui.showToUser(MESSAGE_USAGE_ADD);
             break;
-        case DeleteCommand.COMMAND_WORD:
-            ui.showToUser(DeleteCommand.MESSAGE_USAGE);
+        case COMMAND_WORD_DELETE:
+            ui.showToUser(MESSAGE_USAGE_DELETE);
             break;
-        case ClearCommand.COMMAND_WORD:
-            ui.showToUser(ClearCommand.MESSAGE_USAGE);
+        case COMMAND_WORD_CLEAR:
+            ui.showToUser(MESSAGE_USAGE_CLEAR);
             break;
-        case ShowCommand.COMMAND_WORD:
-            ui.showToUser(ShowCommand.MESSAGE_USAGE);
+        case COMMAND_WORD_SHOW:
+            ui.showToUser(MESSAGE_USAGE_SHOW);
             break;
-        case StudyCommand.COMMAND_WORD:
-            ui.showToUser(StudyCommand.MESSAGE_USAGE);
+        case COMMAND_WORD_STUDY:
+            ui.showToUser(MESSAGE_USAGE_STUDY);
             break;
-        case ExitCommand.COMMAND_WORD:
-            ui.showToUser(ExitCommand.MESSAGE_USAGE);
+        case COMMAND_WORD_EXIT:
+            ui.showToUser(MESSAGE_USAGE_EXIT);
             break;
-        case EditCommand.COMMAND_WORD:
-            ui.showToUser(EditCommand.MESSAGE_USAGE);
+        case COMMAND_WORD_EDIT:
+            ui.showToUser(MESSAGE_USAGE_EDIT);
             break;
-        case COMMAND_WORD_VARIANT:
+        case COMMAND_WORD_HELP_VARIANT:
             ui.showToUser(HELP_MESSAGE_QUICK_START_COMMAND + HELP_MESSAGE_SPECIFIC_COMMAND);
             break;
         default:
