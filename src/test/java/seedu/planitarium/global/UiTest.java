@@ -11,7 +11,7 @@ public class UiTest {
     private static final Double THREE_DP_AMOUNT = 123.456;
     private static final String FORMATTED_VALID = "$1000.00";
     private static final String FORMATTED_NEGATIVE = "-$1000.00";
-    private static final String FORMATTED_TWO_DP = "-$123.46";
+    private static final String FORMATTED_TWO_DP = "$123.46";
 
     @Test
     public void formatValue_negativeValue_minusInFrontOfDollar() {
