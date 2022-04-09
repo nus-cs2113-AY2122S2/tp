@@ -101,13 +101,15 @@ public class Validator {
                     + "It cannot be before 1900-01-01 or be today and after.");
         }
     }
+
     private static void validateAdmissionDob(String admissionDateString, String dob) throws UserInputErrorException {
         LocalDate admissionDate = LocalDate.parse(admissionDateString);
         LocalDate dateOfBirth = LocalDate.parse(dob);
-        if (!(admissionDate.isAfter(dateOfBirth))){
+        if (!(admissionDate.isAfter(dateOfBirth))) {
             throw new UserInputErrorException("Registration date must be after date of birth!");
         }
     }
+
     private static void validateDobAge(String age, String dob) throws UserInputErrorException {
         validateDob(dob);
         LocalDate today = LocalDate.now();
@@ -150,8 +152,8 @@ public class Validator {
     static void validateAddPatient(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
-        validateAdmissionDob(parameters[5],  parameters[6]);
         validateAdmissionDate(parameters[6]);
+        validateAdmissionDob(parameters[6],  parameters[6]);
     }
 
 
@@ -293,7 +295,7 @@ public class Validator {
 
     public static void validateFindDoctor(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 2);
-        switch (parameters[0].toLowerCase()){
+        switch (parameters[0].toLowerCase()) {
         case "nric":
             validateNric(parameters[1]);
             break;
