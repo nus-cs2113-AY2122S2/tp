@@ -392,7 +392,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-t-m /m -m -d -t", t.getTaskDescription());
-            assertEquals("1 hours 15 minutes", t.getWorkingTime());
+            assertEquals("1 hour(s) 15 minute(s)", t.getWorkingTime());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
