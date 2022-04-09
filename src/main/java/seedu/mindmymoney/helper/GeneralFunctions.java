@@ -112,7 +112,7 @@ public class GeneralFunctions {
                     + "Look out for our future updates");
             }
             if (foundItems.size() == 0) {
-                throw new MindMyMoneyException("The task \"" + searchTerm + "\" was not found in the list, sorry!");
+                throw new MindMyMoneyException("The item \"" + searchTerm + "\" was not found in the list, sorry!");
             } else {
                 return foundItems;
             }

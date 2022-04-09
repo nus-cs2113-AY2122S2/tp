@@ -47,7 +47,7 @@ public class Calculations {
         if (sumOfExpenditure == 0.0) {
             throw new MindMyMoneyException("Date not found in the list! Do check your input");
         }
-        System.out.println("Total expenditure in " + input + " is $" + sumOfExpenditure + ".");
+        System.out.println("Total expenditure in " + input + " is $" + String.format("%.2f", sumOfExpenditure )+ ".");
         displayExpenditureBreakdown(foundItems, sumOfExpenditure);
     }
 

@@ -116,7 +116,7 @@ public class DeleteCommand extends Command {
 
             System.out.println("I have removed "
                     + expenditure.getDescription()
-                    + " of $" + expenditure.getAmount()
+                    + " of $" + String.format("%.2f",expenditure.getAmount())
                     + " from the account" + System.lineSeparator());
             expenditureList.delete(positionToDelete);
             assert positionToDelete >= 0 : "Index should always be >= 0";
