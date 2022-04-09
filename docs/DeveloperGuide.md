@@ -151,7 +151,7 @@ A save file records user data related to SplitLah even after the application is 
 * If a save file is found, the `Storage` class loads data from it into the `Profile` object managed by the `Manager` object.
 * Else a new save file is created and an empty `Profile` object is created instead.
 
-When a command updates any attributes of the `Profile` object, the changes updated to the save file. These commands are:
+When a command updates any attributes of the `Profile` object, the changes are updated to the save file. These commands are:
 * `SessionCreateCommand`, `SessionDeleteCommand`, `SessionEditCommand`
 * `ActivityCreateCommand`, `ActivityDeleteCommand`, `ActivityEditCommand`
 * `GroupCreateCommand`, `GroupDeleteCommand`, `GroupEditCommand`
