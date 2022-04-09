@@ -105,6 +105,9 @@ Example of usage:
 
 `list appointment`
 
+Expected Output:
+![](ListDoctorOutput.png)
+
 ### Searching an entity: `search`
 Searches existing doctors/patients/nurses/wards with their numbers in the list.
 
