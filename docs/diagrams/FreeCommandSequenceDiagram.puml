@@ -1,15 +1,6 @@
 @startuml
-actor user
+hide footbox
 
-user -> ":Ui" ++ : "free"
-create ":Parser"
-":Ui" -> ":Parser" ++: new Parser("free")
-":Parser" --> ":Ui" --: parser:Parser
-":Ui" -> ":Parser" ++: parseCommand()
-create ":FreeCommand"
-":Parser" -> ":FreeCommand" ++: new FreeCommand()
-":FreeCommand" --> ":Parser" --: freeCommand:FreeCommand
-":Parser" --> ":Ui" --: freeCommand:FreeCommand
 ":Ui" -> ":FreeCommand" ++: execute(masterTimetable)
 ":FreeCommand" -> ":MasterTimetable" ++: listBusy()
 loop for each timetable
@@ -20,5 +11,6 @@ end
 ":FreeCommand" -> ":FreeCommand"++: listFree(busySlots)
 ":FreeCommand" --> ":FreeCommand"--: freeTimeSlots
 ":FreeCommand" --> ":Ui" --: freeTimeSlots
-":Ui" --> user
+destroy ":FreeCommand"
+
 @enduml
