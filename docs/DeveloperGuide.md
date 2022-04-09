@@ -286,7 +286,7 @@ The CalculateCommand can take in 3 different `[DATE]` fields:
 - `calculate /epm [MM/YYYY]` allows user to calculate total expenditure of the specific month.
 - `calculate /epm [YYYY]` allows user to calculate total expenditure of the specific year.
 
-![calculate_command_sequence_diagram](images/CalculateCommandSequenceDiagram2.png)
+![calculate_command_sequence_diagram](images/CalculateCommandSequenceDiagram3.png)
 <br/> Fig 11 - Calculate Input Command Sequence Diagram
 
 The sequence diagram above shows the interactions of different classes when calculating the expenditure.

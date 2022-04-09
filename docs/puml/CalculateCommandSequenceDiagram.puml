@@ -10,35 +10,35 @@ end box
 hide footbox
 
 MMM -> CalculateInputCommand: CalculateInputCommand.executeCommand()
-activate CalculateInputCommand
+activate CalculateInputCommand COMMANDS_COLOUR
 
 CalculateInputCommand -> GeneralFunctions: parseInput()
-activate GeneralFunctions
+activate GeneralFunctions HELPER_COLOUR
 GeneralFunctions --> CalculateInputCommand
-deactivate GeneralFunctions
+deactivate GeneralFunctions HELPER_COLOUR
 
 
 alt contain FLAG_OF_EXPENDITURE_PER_MONTH
 CalculateInputCommand -> Calculations: calculateExpenditure()
-activate CalculateInputCommand
-activate Calculations
+activate CalculateInputCommand COMMANDS_COLOUR
+activate Calculations USERFINANCIAL_COLOUR
 Calculations -> GeneralFunctions: findItemInList()
-activate GeneralFunctions
+activate GeneralFunctions HELPER_COLOUR
 GeneralFunctions --> Calculations
-deactivate GeneralFunctions
+deactivate GeneralFunctions HELPER_COLOUR
 Calculations -> Calculations: displayCalculationBreakdown()
-activate Calculations
+activate Calculations USERFINANCIAL_COLOUR
 Calculations --> Calculations
-deactivate Calculations
+deactivate Calculations HELPER_COLOUR
 Calculations --> CalculateInputCommand
-deactivate Calculations
+deactivate Calculations HELPER_COLOUR
 CalculateInputCommand --> MMM
-deactivate CalculateInputCommand
+deactivate CalculateInputCommand COMMANDS_COLOUR
 
 
 else
 CalculateInputCommand --> MMM: MindMyMoneyException
-deactivate CalculateInputCommand
+deactivate CalculateInputCommand COMMANDS_COLOUR
 end
 
 

@@ -18,7 +18,7 @@ import static seedu.mindmymoney.constants.ExpenditureFields.TIME;
 import static seedu.mindmymoney.helper.GeneralFunctions.findItemsInList;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
 import static seedu.mindmymoney.helper.GeneralFunctions.findMatchingCategoryInArraylist;
-import static seedu.mindmymoney.helper.TimeFunctions.isValidInput;
+import static seedu.mindmymoney.helper.TimeFunctions.isValidInputCalculateCommand;
 
 /**
  * Container for functions that help do calculations.
@@ -35,7 +35,7 @@ public class Calculations {
      */
     public static void calculateExpenditure(String input, ExpenditureList expenditureList)
         throws MindMyMoneyException {
-        if (!isValidInput(input)) {
+        if (!isValidInputCalculateCommand(input)) {
             throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
         }
         ArrayList<Expenditure> foundItems = findItemsInList(input, TIME.toString(), expenditureList);

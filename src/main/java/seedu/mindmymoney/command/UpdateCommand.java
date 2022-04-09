@@ -124,17 +124,14 @@ public class UpdateCommand extends Command {
             if (capitalise(newPaymentMethod).equals("Cash")) {
                 newPaymentMethod = capitalise(newPaymentMethod);
             }
-            LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            checkAfterCurrentDate(date);
-            String newTime = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             if (isSimilarExpenditure(indexToUpdate, newPaymentMethod, newCategory, newDescription, newAmountAsFloat,
-                    newTime)) {
+                    inputTime)) {
                 throw new MindMyMoneyException("Expense fields to be updated is similar to the expense in the list.\n"
                         + "Please make sure the field descriptions you want to change are different.");
             }
             // Create new expenditure object to substitute in
             Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,
-                    newAmountAsFloat, newTime);
+                    newAmountAsFloat, inputTime);
             expenditureList.set(indexToUpdate, newExpenditure);
             System.out.println("Successfully set expenditure " + indexAsString + " to:\n"
                     + "$" + newExpenditure.getAmount() + " was spent on " + newExpenditure.getDescription()

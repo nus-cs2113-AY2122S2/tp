@@ -132,7 +132,6 @@ public class AddCommand extends Command {
         String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
         String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
-
         testExpenditureParameters(paymentMethod, inputCategory, description, amountAsString, inputTime, creditCardList);
 
         if (capitalise(paymentMethod).equals("Cash")) {
@@ -141,18 +140,14 @@ public class AddCommand extends Command {
         String category = capitalise(inputCategory);
         float amountAsFloat = Float.parseFloat(amountAsString);
         float amountFloat = formatFloat(amountAsFloat);
-        LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        checkAfterCurrentDate(date);
-        String time = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
-        expenditureList.add(new Expenditure(paymentMethod, category, description, amountFloat, time));
+        expenditureList.add(new Expenditure(paymentMethod, category, description, amountFloat, inputTime));
 
         System.out.println("Successfully added: \n\n"
             + "Description: " + description + "\n"
             + "Amount: $" + String.format("%.2f", amountFloat) + "\n"
             + "Category: " + category + "\n"
             + "Payment method: " + paymentMethod + "\n"
-            + "Date: " + time + "\n\n"
+            + "Date: " + inputTime + "\n\n"
             + "into the account\n");
 
         if (!paymentMethod.equals("Cash")) {
