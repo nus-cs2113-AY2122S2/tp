@@ -40,28 +40,35 @@ public class Storage {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
             try {
-                if (filePath.equals(PATH_DOC)) {
-                    outputFilePathCorrupted = "data/doctor_corrupted.txt";
-                    Validator.validateAddDoctor(parameters);
+                if (filePath.equals(PATH_APT_MEDS)){
+                    outputFilePathCorrupted = "data/appointment_meds_corrupted.txt";
+                    appointments.loadMedicine(parameters);
                 }
-                if (filePath.equals(PATH_PAT)) {
-                    outputFilePathCorrupted = "data/patient_corrupted.txt";
-                    Validator.validateAddPatient(parameters);
+                else {
+                    if (filePath.equals(PATH_DOC)) {
+                        outputFilePathCorrupted = "data/doctor_corrupted.txt";
+                        Validator.validateAddDoctor(parameters);
+                    }
+                    if (filePath.equals(PATH_PAT)) {
+                        outputFilePathCorrupted = "data/patient_corrupted.txt";
+                        Validator.validateAddPatient(parameters);
+                    }
+                    if (filePath.equals(PATH_MED)) {
+                        outputFilePathCorrupted = "data/medicine_corrupted.txt";
+                        Validator.validateMedicine(parameters);
+                    }
+                    if (filePath.equals(PATH_APT)) {
+                        outputFilePathCorrupted = "data/appointment_corrupted.txt";
+                        Validator.validateAddAppointment(parameters);
+                    }
+                    listType.add(parameters);
                 }
-                if (filePath.equals(PATH_MED)) {
-                    outputFilePathCorrupted = "data/medicine_corrupted.txt";
-                    Validator.validateMedicine(parameters);
-                }
-                if (filePath.equals(PATH_APT)) {
-                    outputFilePathCorrupted = "data/appointment_corrupted.txt";
-                    Validator.validateAddAppointment(parameters);
-                }
-                listType.add(parameters);
+
+
             } catch (UserInputErrorException e) {
                 corruptedLines.add(e.toString() + "\nLine: " + line);
-                UI.printParagraph(line);
+//                UI.printParagraph(line);
             } catch (DuplicateEntryException e) {
-                continue;
              }
         }
         if (corruptedLines.size() != 0 && !outputFilePathCorrupted.equals("nope")) {
@@ -95,15 +102,15 @@ public class Storage {
         }
     }
 
-    private void loadAppointmentMedData() throws FileNotFoundException {
-        File data = new File(PATH_APT_MEDS);
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()) {
-            String line = reader.nextLine();
-            String[] parameters = line.split(",");
-            appointments.loadMedicine(parameters);
-        }
-    }
+//    private void loadAppointmentMedData() throws FileNotFoundException {
+//        File data = new File(PATH_APT_MEDS);
+//        Scanner reader = new Scanner(data);
+//        while (reader.hasNext()) {
+//            String line = reader.nextLine();
+//            String[] parameters = line.split(",");
+//            appointments.loadMedicine(parameters);
+//        }
+//    }
 
 
 
@@ -113,11 +120,12 @@ public class Storage {
             loadGenericData(PATH_PAT, patients);
             loadGenericData(PATH_MED, medicines);
             loadGenericData(PATH_APT, appointments);
+            loadGenericData(PATH_APT_MEDS, appointments);
 //            loadDoctorData();
 //            loadPatientData();
 //            loadMedicineData();
 //            loadAppointmentData();
-            loadAppointmentMedData();
+//            loadAppointmentMedData();
         } catch (FileNotFoundException f) {
             UI.printParagraph("No saved data found!");
         }

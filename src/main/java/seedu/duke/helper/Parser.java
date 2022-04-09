@@ -155,18 +155,18 @@ public class Parser {
     }
 
     public static Command parseDispenseMedicine(String parameters) throws UserInputErrorException {
-        String[] dispenseMedicineParameters = parameterCheckOpenLength(parameters);
+        String[] dispenseMedicineParameters = stringSplitter(parameters);
         Validator.validateDispenseMedicine(dispenseMedicineParameters);
         return new DispenseMedicineCommand(dispenseMedicineParameters);
     }
 
     public static Command parseCheckMedicineStock(String parameters) throws UserInputErrorException {
-        String[] retrieveMedicineParameters = parameterCheckOpenLength(parameters);
+        String[] retrieveMedicineParameters = stringSplitter(parameters);
         return new CheckForMedicineStockCommand(retrieveMedicineParameters);
     }
 
     public static Command parseCheckForPatientAppointment(String parameters) throws UserInputErrorException {
-        String[] checkForPatientAppointmentParameters = parameterCheckOpenLength(parameters);
+        String[] checkForPatientAppointmentParameters = stringSplitter(parameters);
         return new CheckIfAppointmentTodayCommand(checkForPatientAppointmentParameters);
     }
 
