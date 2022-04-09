@@ -4,6 +4,8 @@ import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.List;
 import seedu.duke.status.Status;
 
+import java.util.Locale;
+
 /*
  * Class that extends Abstract Command Class.
  */
@@ -19,7 +21,7 @@ public class FindAppointmentCommand extends Command {
 
     public Status execute(List appointmentList) {
         if (appointmentList instanceof AppointmentList) {
-            switch (parameterArray[0]) {
+            switch (parameterArray[0].toLowerCase()) {
             case "id":
                 ((AppointmentList) appointmentList).findById(parameterArray);
                 break;

@@ -19,7 +19,7 @@ public class FindMedicineCommand extends Command {
 
     public Status execute(List medicineList) {
         if (medicineList instanceof MedicineList) {
-            switch (parameterArray[0]) {
+            switch (parameterArray[0].toLowerCase()) {
             case "id":
                 ((MedicineList) medicineList).findById(parameterArray);
                 break;
