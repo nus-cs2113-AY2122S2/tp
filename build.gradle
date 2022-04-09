@@ -21,18 +21,14 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
-        systemProperty 'java.awt.headless', 'true'
-        systemProperty 'testfx.robot', 'glass'
-        systemProperty 'testfx.headless', 'true'
-        systemProperty 'prism.order', 'sw'
-        systemProperty 'prism.text', 't2k'
-        systemProperty 'testfx.setup.timeout', '2500'
         showExceptions true
         exceptionFormat "full"
         showCauses true
         showStackTraces true
         showStandardStreams = false
     }
+
+    jvmArgs "-Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw -Dprism.text=t2k -Dtestfx.setup.timeout=2500"
 
     //tests below are excluded as an error occurs when they are run together with the other tests
     filter {
