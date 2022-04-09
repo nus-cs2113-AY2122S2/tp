@@ -330,7 +330,7 @@ clear [NAME]
 
 |  Parameters   | Description              | Accepted inputs                  |  
 |:-------------:|--------------------------|----------------------------------|
-|     `NAME`    | Name of the user         | Existing user                    | 
+|    `NAME`     | Name of the user         | Existing user                    | 
 
 **Example of usage:**
 
@@ -358,7 +358,7 @@ All records of everyone's timetable has been cleared
 
 
 ### Exiting the application: `exit`
-Exits the application and saves pre-existing timetable of users into the text file `MeetingJio.txt`.
+Exits the application and saves the current timetable of users into the text file `MeetingJio.txt`.
 
 **Format:** `exit`
 
@@ -400,11 +400,11 @@ ym
 ```
 
 **Limitation:**
-- When adding a new meeting, please add it under the first user added. 
-- For the case above, you only need to add the 
-new meeting for `ibra` and it will populate for `ym` as well. Take note, adding new meeting under names except 
-for the first name will be ignored.
-- This applies for editing the details of an existing meeting, please edit it under the first name. 
+- When adding a new meeting, please add it under the **first user added**. 
+- For the case above, you only need to add the new meeting for `ibra` and it will populate for `ym` as well.
+- **Take note**, adding new meeting under names except 
+for the first name **will be ignored**.
+- This applies for editing the details of an existing meeting, please edit it under the **first user added**. 
 
 ## Current Limitation of app
 - Meeting cannot span across multiple days or go past midnight. If that is the case, please create 2 separate meetings.
