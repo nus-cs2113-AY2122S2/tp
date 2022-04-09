@@ -99,7 +99,7 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`
 
-Example: `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
+Example: `add doctor /info S7654321A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
 #### ADD PATIENT
 

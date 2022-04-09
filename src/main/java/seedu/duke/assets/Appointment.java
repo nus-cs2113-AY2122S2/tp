@@ -39,7 +39,7 @@ public class Appointment {
     public void updateAppointmentDetails() {
         LocalDate localDateNow = LocalDate.now();
         LocalDate localAppointmentDate = LocalDate.parse(this.appointmentDate);
-        if (isBeforeOrEqual(localAppointmentDate, localDateNow)) {
+        if (isBeforeOrEqual(localDateNow, localAppointmentDate)) {
             this.appointmentDetails = this.appointmentDetails + " - appointment finished on " + this.appointmentDate;
         }
     }
