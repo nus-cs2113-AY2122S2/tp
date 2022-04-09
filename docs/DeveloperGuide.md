@@ -139,14 +139,16 @@ Both methods `getOrderPrice(int)` and `getAllOrderValue()` call `getTotalPrice()
 
 ### Staff Management
 
-I/O for staff is being handled by `StaffController`.
+I/O for staff is being handled by `StaffController`, and handles the following method:
+
+- `editStaff()` -- change attribute of a staff using staff id, with the aid of setter methods in `Staff`.
+
 The management of staff is handled by `StaffManager`, which implements following methods:
 
 - `printStaff()` -- print all staffs.
 - `addStaff(int staffId, String staffName, String position, double salary)` -- add a new staff with the arguments as its attributes.
 - `findByStaffId(int staffId, boolean printMsg)` -- find a staff using staff id, and print message if boolean variable printMsg is true.
 - `deleteByStaffId(int staffId)` -- delete a staff using staff id.
-- `getNumOfStaffs(` -- change the name of a dish using its menu index.
 
 `StaffManager` manages `ArrayList<Staff>` and the above functions help to update the collection of `Staff`.
 The sequence diagrams for each feature of staff handling is attached below.
