@@ -84,8 +84,8 @@ public class DoctorList extends List {
     public void edit(String[] parameterArray) throws NotFoundException {
         if (search(parameterArray[0]) != null) {
             Doctor doctor = search(parameterArray[0]);
-            doctor.edit(parameterArray[1], Integer.parseInt(parameterArray[2]), parameterArray[3],
-                    (parameterArray[4].charAt(0)), parameterArray[5], parameterArray[6]);
+            doctor.edit(parameterArray[1], Integer.parseInt(parameterArray[2]), parameterArray[3].charAt(0),
+                    (parameterArray[4]), parameterArray[5], parameterArray[6]);
             return;
         }
         throw new NotFoundException("There are no doctors with given NRIC!");
