@@ -19,7 +19,6 @@ import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
 
 /**
  * This class initiates the various classes/components of WerkIt! and contains the logic code for
@@ -183,16 +182,7 @@ public class WerkIt {
                 }
 
                 newCommand.execute();
-                if (newCommand instanceof WorkoutCommand) {
-                    if (newCommand.getUserAction().equals(DELETE_ACTION_KEYWORD)) {
-                        reloadScheduleFile();
-                    }
-                }   else if (newCommand instanceof PlanCommand) {
-                    if (newCommand.getUserAction().equals(DELETE_ACTION_KEYWORD)) {
-                        reloadScheduleFile();
-                    }
-                }
-
+                checkForCascade(newCommand);
             } catch (InvalidCommandException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Please try again.");
@@ -207,6 +197,23 @@ public class WerkIt {
         // User is exiting the program
         assert (userWantsToExit);
         getUI().printGoodbye();
+    }
+
+    /**
+     * Checks if the command is a delete command, cascade the changes to affected data if it is.
+     * @param command   the command to be checked.
+     * @throws IOException  if local files cannot be accessed.
+     */
+    public void checkForCascade(Command command) throws IOException {
+        if (command instanceof WorkoutCommand) {
+            if (command.getUserAction().equals(WorkoutCommand.ACTION_KEYWORD_DELETE)) {
+                reloadScheduleFile();
+            }
+        }   else if (command instanceof PlanCommand) {
+            if (command.getUserAction().equals(PlanCommand.ACTION_KEYWORD_LIST)) {
+                reloadScheduleFile();
+            }
+        }
     }
 
     /**

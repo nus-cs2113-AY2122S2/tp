@@ -24,13 +24,9 @@ import static commands.ScheduleCommand.ACTION_KEYWORD_LIST;
 import static commands.ScheduleCommand.ACTION_KEYWORD_UPDATE;
 import static commands.ScheduleCommand.ACTION_KEYWORD_CLEAR_ALL;
 import static commands.ScheduleCommand.ACTION_KEYWORD_CLEAR;
-import static commands.SearchCommand.ACTION_KEYWORD_PLAN;
-import static commands.SearchCommand.ACTION_KEYWORD_EXERCISE;
-import static commands.SearchCommand.ACTION_KEYWORD_WORKOUT;
-import static commands.SearchCommand.ACTION_KEYWORD_ALL;
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
-import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
+import static commands.WorkoutCommand.ACTION_KEYWORD_DELETE;
 import static commands.WorkoutCommand.UPDATE_ACTION_KEYWORD;
 
 
@@ -190,7 +186,7 @@ public class Parser {
             }
             arguments = userInput.split(" ", 3)[2];
             break;
-        case DELETE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_DELETE:
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid delete workout command action.");
                 throw new InvalidCommandException(className,
@@ -372,7 +368,7 @@ public class Parser {
             }
             arguments = userInput.split(" ", 3)[2];
             break;
-        case DELETE_ACTION_KEYWORD:
+        case ACTION_KEYWORD_DELETE:
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid delete plan command action.");
                 throw new InvalidCommandException(className,
