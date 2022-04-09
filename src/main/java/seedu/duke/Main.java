@@ -50,7 +50,7 @@ public class Main {
         TextUi.showHelloMessage();
     }
 
-    // This would be more like yikai's contribution, because I just did a refactoring - Changrui
+    //@@author chooyikai
     /**
      * Initialises the program data by attempting to read from the data files, if possible.
      * If a data file is not found or contains invalid data, the file will be treated as blank instead.

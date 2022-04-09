@@ -16,14 +16,12 @@ import seedu.duke.util.StringConstants;
 import static seedu.duke.util.NumberConstants.MAXIMUM_MODULAR_CREDITS;
 import static seedu.duke.util.NumberConstants.MINIMUM_MODULAR_CREDITS;
 
-// I would put the contribution of this class as equally shared between yikai and me -Changrui
 public class ModHappyStorageManager {
 
 
     private static Storage modHappyStorage;
 
     //@@author Ch40gRv1-Mu
-
     /**
      * Saves task list to storage.
      * @param taskArrayList ArrayList of tasks to be saved.
@@ -36,7 +34,6 @@ public class ModHappyStorageManager {
     }
 
     //@@author Ch40gRv1-Mu
-
     /**
      * Saves module list to storage.
      * @param moduleArrayList ArrayList of modules to be saved.
@@ -49,7 +46,6 @@ public class ModHappyStorageManager {
     }
 
     //@@author Ch40gRv1-Mu
-
     /**
      * Saves Configuration to storage.
      * @param configuration configuration to be saved.
@@ -62,7 +58,6 @@ public class ModHappyStorageManager {
     }
 
     //@@author Ch40gRv1-Mu
-
     /**
      * Loads Configuration from storage.
      * @param configurationPath The local path that a configuration is saved.
@@ -89,7 +84,7 @@ public class ModHappyStorageManager {
         }
     }
 
-    // This should be Yikai's contribution
+    //@@author chooyikai
     @SuppressWarnings("unchecked")
     public static void loadTaskList(ModuleList moduleList, String taskPath) {
         File taskDataFile = new File(taskPath);
@@ -105,7 +100,6 @@ public class ModHappyStorageManager {
         }
     }
 
-    // This should be Yikai's contribution
     @SuppressWarnings("unchecked")
     public static void loadModuleList(ModuleList moduleList, String modulePath) {
         File moduleDataFile = new File(modulePath);
@@ -133,6 +127,4 @@ public class ModHappyStorageManager {
             }
         }
     }
-
-
 }

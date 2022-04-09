@@ -4,6 +4,7 @@ import seedu.duke.exceptions.NoSuchModuleException;
 
 import java.util.ArrayList;
 
+//@@author chooyikai
 public class ModuleList {
     private ArrayList<Module> list;
     private final Module generalTasks;
