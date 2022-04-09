@@ -266,7 +266,7 @@ than using GUI.
 
 ### Start up 
 
-- Download the latest MeetingJio.jar 
+- Download the latest [MeetingJio.jar](https://github.com/AY2122S2-CS2113-T11-3/tp/releases/tag/v2.1)
 - Ensure Java 11 is installed and configured on your device
 - Open a command prompt or terminal and run the command `java -jar MeetingJio.jar`
 
