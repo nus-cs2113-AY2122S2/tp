@@ -38,6 +38,12 @@ public class Ui {
         System.out.print(patients);
     }
 
+    public void printWardPage(WardList wards) {
+        System.out.print(boundary);
+        System.out.println("Welcome to Ward Page.");
+        System.out.print(wards);
+    }
+
     public void printAddHelp() {
         String addDoctor = "add doctor /id ID /n NAME /ph PHONE /e EMAIL /w WARDNUMBER" + System.lineSeparator();
         String addPatient = "add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS"
@@ -45,7 +51,7 @@ public class Ui {
         String addNurse = "add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE /w WARDNUMBER" + System.lineSeparator();
         String addAppointment = "add appointment /t 2022-03-19T15:16:00 /d DOCTOR_NO /p PATIENT_NO"
                                         + System.lineSeparator();
-        String addWard = "add ward /d DOCTOR_NO /p PATIENT_NO /n NURSE_NO /id WARD_ID"
+        String addWard = "add ward /d DOCTOR_NOs /p PATIENT_NOs /n NURSE_NOs /id WARD_ID"
                                  + System.lineSeparator();
         System.out.println("1. To add something:" + System.lineSeparator()
                                    + addDoctor + addPatient + addNurse + addWard + addAppointment);

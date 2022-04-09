@@ -51,9 +51,9 @@ public class WardStorage {
                 Ward curWard =  wards.getWard(i);
                 fw.write(String.format("%d. Ward:\n", i));
                 //@@ author  DolphXty
-                fw.write(Arrays.toString(curWard.getDoctors(curWard.getDoctorIndexes())) + "\n");
-                fw.write(Arrays.toString(curWard.getPatients(curWard.getPatientIndexes()))  + "\n");
-                fw.write(Arrays.toString(curWard.getNurses(curWard.getNurseIndexes())) + "\n");
+                fw.write(Arrays.toString(curWard.getDoctors()) + "\n");
+                fw.write(Arrays.toString(curWard.getPatients())  + "\n");
+                fw.write(Arrays.toString(curWard.getNurses()) + "\n");
                 fw.write(curWard.getNumber() + "\n");
             }
             fw.close();
@@ -67,7 +67,7 @@ public class WardStorage {
      * @return The wardList of the IHospitalWard.txt
      * @throws IHospitalException IHospitalException
      */
-    //@@author Demonshaha
+    //@@author DolphXty
     public WardList loadWardList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
