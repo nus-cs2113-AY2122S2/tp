@@ -109,5 +109,5 @@ Therefore, airlines counter staff need a fast an efficient way to manage the man
 
 ## Instructions for manual testing
 
-The example inputs in the user guide can be used for manual testing.
+The example inputs in the [User Guide](https://github.com/AY2122s2-CS2113-F12-3/tp/blob/master/docs/UserGuide.md) can be used for manual testing.
 
