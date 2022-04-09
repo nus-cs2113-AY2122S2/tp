@@ -48,7 +48,6 @@ public class ModuleListStorage extends ListStorage<Module> {
             } else {
                 arrayList = new ArrayList<>();
             }
-
         } catch (JsonParseException e) {
             throw new ReadException(MODIFIED_JSON_EXCEPTION);
         } catch (IOException e) {

@@ -36,9 +36,10 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
     - Added accepted inputs for each parameter in each command format. ([#116](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/116))
     - Generally rewrote command explanations to sound less clinical and more friendly.
   - Developer guide:
-    - Added explanation of the Data component and created the relevant class diagrams within that section. (, [#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111))
+    - Added explanation of the Data component and created the relevant class diagrams within that section. ([#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111))
     - Edited explanations of the Parser and Command components. ([#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111))
     - Edited class diagram for the Storage component to correctly represent binding relationships. ([#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111), [#116](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/116))
+    - Added some elaboration for the Storage implementation. ([#194](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/194))
 
 
 - **Team tasks:**
