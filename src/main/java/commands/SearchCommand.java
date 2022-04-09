@@ -399,7 +399,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            ui.printSearchNotFoundMessage(CATEGORY_WORKOUT, userArguments);
+            ui.printSearchNotFoundMessage(CATEGORY_WORKOUT, getUserArguments());
         }
         clearMatchCount();
     }
