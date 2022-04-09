@@ -36,12 +36,12 @@ public class FileManager {
     public static final String[] ILLEGAL_CHARACTERS = {"|"};
 
     // Directory and filenames for data storage
-    public static final String USER_WORKING_DIRECTORY_PROPERTY = "user.dir";
-    public static final String DATA_DIRECTORY_NAME = "werkItResources";
-    public static final String EXERCISE_FILENAME = "exercises.txt";
-    public static final String WORKOUT_FILENAME = "workouts.txt";
-    public static final String PLAN_FILENAME = "plans.txt";
-    public static final String SCHEDULE_FILENAME = "schedule.txt";
+    public static final String PROPERTY_USER_WORKING_DIRECTORY = "user.dir";
+    public static final String NAME_DATA_DIRECTORY = "werkItResources";
+    public static final String NAME_EXERCISE_FILE = "exercises.txt";
+    public static final String NAME_WORKOUT_FILE = "workouts.txt";
+    public static final String NAME_PLAN_FILE = "plans.txt";
+    public static final String NAME_SCHEDULE_FILE = "schedule.txt";
 
     // Delimiters for processing file data
     private static final String FILE_DATA_DELIMITER_REGEX = "\\|";
