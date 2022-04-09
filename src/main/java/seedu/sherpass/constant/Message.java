@@ -55,8 +55,8 @@ public class Message {
     public static final String CLEAR_COMMAND_CONFIRMATION_MESSAGE = "Are you sure you want to delete all tasks?\n"
             + "You will not be able to recover them after deleting (Y/N): ";
     public static final String CLEAR_COMMAND_CONFIRMED_MESSAGE = "Understood. Proceeding to delete"
-            + " all tasks in the list..........";
-    public static final String CLEAR_COMMAND_RESULT_MESSAGE = "Done! Now you have 0 task in the list.";
+            + " all tasks in the list.......";
+    public static final String CLEAR_COMMAND_RESULT_MESSAGE = "Done! Now you have 0 tasks in the list.";
     public static final String CLEAR_COMMAND_CANCEL_MESSAGE = "Okay, we'll keep it as it is.";
     public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
     public static final String ERROR_NO_VALUE_FOR_PARAMETER_MESSAGE = "Please enter a value for the parameter!";

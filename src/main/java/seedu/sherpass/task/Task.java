@@ -2,10 +2,10 @@ package seedu.sherpass.task;
 
 import java.time.LocalDateTime;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.outputWithoutTimeFormat;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
+import static seedu.sherpass.constant.Message.WHITESPACE;
 
 public class Task {
     protected String description;
@@ -18,8 +18,8 @@ public class Task {
     protected int index;
 
     /**
-     * Creates a constructor for the parent class of tasks, 'Task'.
-     * Accepts only task description
+     * Creates an object for the class 'Task'.
+     * Accepts only task description.
      *
      * @param identifier  Identity number of a repeated task.
      * @param description Description of task.
@@ -49,7 +49,7 @@ public class Task {
      *
      * @return Returns a range of time when the task occurs.
      */
-    public String getTimePeriod() {
+    public String getDoOnDateTimePeriod() {
         return doOnStartDateTime.toLocalTime().toString()
                 + " - " + doOnEndDateTime.toLocalTime().toString();
     }
@@ -102,22 +102,18 @@ public class Task {
      */
     public String getByDateString() {
         if (byDateTime != null) {
-            return byDateTime.format(outputWithoutTimeFormat);
+            return byDateTime.format(outputWithTimeFormat);
         }
         return EMPTY_STRING;
     }
 
     /**
-     * Returns the do on date in String format.
+     * Returns a string version of the do on date (includes the time period of when the task occurs).
      *
-     * @return Returns if doOnDate contains a parsed date. Otherwise, returns a blank string (no whitespace).
+     * @return do on date in string format.
      */
-    public String getDoOnDateString(boolean isDateOnly) {
-        if (doOnStartDateTime != null) {
-            return (isDateOnly) ? doOnStartDateTime.format(outputDateOnlyFormat)
-                    : doOnStartDateTime.format(outputWithTimeFormat);
-        }
-        return EMPTY_STRING;
+    public String getDoOnDateString() {
+        return doOnStartDateTime.format(outputWithoutTimeFormat) + WHITESPACE + getDoOnDateTimePeriod();
     }
 
     /**
@@ -131,8 +127,7 @@ public class Task {
     public String toString() {
         String result = index + ". [" + this.getStatusIcon() + "] " + this.getDescription();
         if (this.doOnStartDateTime != null) {
-            result += " (to do on: " + getDoOnDateString(false) + " - "
-                    + doOnEndDateTime.toLocalTime().toString() + ")";
+            result += " (to do on: " + getDoOnDateString() + ")";
         }
         if (this.byDateTime != null) {
             result += " (by: " + getByDateString() + ")";
@@ -141,8 +136,7 @@ public class Task {
     }
 
     public String printTask() {
-        String result = this.getDescription() + " (to do on: " + getDoOnDateString(false) + " - "
-                + doOnEndDateTime.toLocalTime().toString() + ")";
+        String result = this.getDescription() + " (to do on: " + getDoOnDateString() + ")";
         if (this.byDateTime != null) {
             result += " (by: " + getByDateString() + ")";
         }
@@ -205,7 +199,7 @@ public class Task {
                 && byDateTime.equals(t.getByDateTime());
     }
 
-    public Task clone() {
+    public Task copy() {
         return new Task(this.identifier, this.description, this.byDateTime,
                 this.doOnStartDateTime, this.doOnEndDateTime);
     }

@@ -3,6 +3,7 @@ package seedu.sherpass.util;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.timetable.Timetable;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import static seedu.sherpass.constant.Message.ERROR_PREFIX;
@@ -92,7 +93,7 @@ public class Ui {
         String welcomeMessage = PARTITION_LINE + LS + WELCOME_MESSAGE_ONE
                 + LOGO + LS + PARTITION_LINE + LS + WELCOME_MESSAGE_TWO;
         showToUser(welcomeMessage);
-        Timetable.showTodaySchedule(taskList, ui);
+        Timetable.showScheduleByDay(LocalDate.now(), taskList, ui);
         showReminderMessage(taskList, ui);
         showLine();
     }

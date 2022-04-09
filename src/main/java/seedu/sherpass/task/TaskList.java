@@ -3,7 +3,6 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
-import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +15,10 @@ import java.util.stream.Collectors;
 
 import static seedu.sherpass.constant.Message.NEWLINE;
 import static seedu.sherpass.constant.Message.TAB_INDENT;
+import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_DO_ON_DATE;
+import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_START_DATE_IN_THE_PAST_MESSAGE;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -91,7 +94,7 @@ public class TaskList {
         long endDateOffset = TaskUtil.calculateOffsetOfDate(taskToEdit.getDoOnEndDateTime(), doOnEndDateTime);
         long byDateOffset = TaskUtil.calculateOffsetOfDate(doOnStartDateTime, byDateTime);
 
-        Task updatedTask = taskToEdit.clone();
+        Task updatedTask = taskToEdit.copy();
         updatedTask.editTask(generateIdentifier(), taskDescription,
                 startDateOffset, endDateOffset, byDateOffset);
 
@@ -132,7 +135,7 @@ public class TaskList {
 
         int newIdentifier = generateIdentifier();
         for (Task t : affectedTasks) {
-            Task updatedTask = t.clone();
+            Task updatedTask = t.copy();
             updatedTask.editTask(newIdentifier, taskDescription,
                     startDateOffset, endDateOffset, byDateOffset);
             updatedTask.setIdentifier(newIdentifier);
@@ -161,19 +164,6 @@ public class TaskList {
             }
         }
         return result;
-    }
-
-    /**
-     * Returns a string listing all tasks in the list.
-     */
-    public String getAllTasksInString() {
-        StringBuilder result = new StringBuilder();
-        for (Task task : tasks) {
-            result.append("\t");
-            result.append(task);
-            result.append("\n");
-        }
-        return result.toString().stripTrailing();
     }
 
     /**
@@ -270,19 +260,17 @@ public class TaskList {
     }
 
     /**
-     * Returns
-     * Printed tasks applies to non-recurring tasks.
+     * Returns an array of tasks that have not been marked as complete.
+     *
      */
-    public String getPendingTasks() {
-        StringBuilder result = new StringBuilder();
+    public ArrayList<Task> getPendingTasks() {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (!task.isDone()) {
-                result.append(TAB_INDENT);
-                result.append(task);
-                result.append(NEWLINE);
+                filteredTasks.add(task);
             }
         }
-        return result.toString().stripTrailing();
+        return filteredTasks;
     }
 
     public int getPendingTasksCount() {
@@ -311,10 +299,5 @@ public class TaskList {
                 .sorted(Comparator.comparing(Task::getDoOnStartDateTime))
                 .collect(Collectors.toList());
     }
-
-    public void printTaskList(ArrayList<Task> taskList, Ui ui) {
-        for (Task task : taskList) {
-            ui.showToUser(task.toString());
-        }
-    }
+    
 }

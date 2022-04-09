@@ -25,6 +25,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.time.LocalDate;
 
 public class TimerLogic implements WindowListener {
 
@@ -163,7 +164,7 @@ public class TimerLogic implements WindowListener {
         if (isTimerInitialised) {
             timer.stopTimer();
             isTimerInitialised = updateIsTimerRunning();
-            Timetable.showTodaySchedule(taskList, ui);
+            Timetable.showScheduleByDay(LocalDate.now(), taskList, ui);
             ui.showToUser("Would you like to start another timer, mark a task as done, "
                     + "or leave the study session?");
             return;
@@ -232,7 +233,7 @@ public class TimerLogic implements WindowListener {
 
 
     /**
-     * Call method when window is opened.
+     * Calls method when window is opened.
      *
      * @param e Event signifying the change in status of the window.
      */
@@ -242,7 +243,7 @@ public class TimerLogic implements WindowListener {
     }
 
     /**
-     * Call method as window is closing.
+     * Calls method as window is closing.
      *
      * @param e Event signifying the change in status of the window.
      */
@@ -253,7 +254,7 @@ public class TimerLogic implements WindowListener {
     }
 
     /**
-     * Call method when window is closed.
+     * Calls method when window is closed.
      *
      * @param e Event signifying the change in status of the window.
      */
@@ -263,7 +264,7 @@ public class TimerLogic implements WindowListener {
 
 
     /**
-     * Call method when window is minimised.
+     * Calls method when window is minimised.
      *
      * @param e Event signifying the change in status of the window.
      */
@@ -273,7 +274,7 @@ public class TimerLogic implements WindowListener {
     }
 
     /**
-     * Call method when window is set from minimised to normal size.
+     * Calls method when window is set from minimised to normal size.
      *
      * @param e Event signifying the change in status of the window.
      */
@@ -283,7 +284,7 @@ public class TimerLogic implements WindowListener {
     }
 
     /**
-     * Call method when window is set to be the active (current viewing) window.
+     * Calls method when window is set to be the active (current viewing) window.
      *
      * @param e Event signifying the change in status of the window.
      */
@@ -294,7 +295,7 @@ public class TimerLogic implements WindowListener {
 
 
     /**
-     * Call method when window is not set to be the active (current viewing) window.
+     * Calls method when window is not set to be the active (current viewing) window.
      *
      * @param e Event signifying the change in status of the window.
      */
