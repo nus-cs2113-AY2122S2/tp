@@ -31,7 +31,6 @@ public class Parser {
      * passed into arguments.
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
-
     /**
      * Defines regex used to match argument pairs in the command line.
      *
@@ -51,8 +50,7 @@ public class Parser {
      * <a href="https://regex101.com/r/dMwMWw/1"> Regex101</a> for demo.
      */
     public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
-            "(" + ARGUMENT_PAIR_REGEX + ")"
-                    + "\\s+" // argument space before next delimiter
+            "(" + ARGUMENT_PAIR_REGEX + ")" + "\\s+" // argument space before next delimiter
     );
     /**
      * Extracts last tag for debugging.
@@ -61,10 +59,8 @@ public class Parser {
      */
     public static final Pattern MODIFICATION_ARGUMENT_TRAILING_FORMAT = Pattern.compile(
             "(?<![\\w`])" // require a previous pattern
-                    + ARGUMENT_PAIR_REGEX
-                    + "$" // require end of string
+                    + ARGUMENT_PAIR_REGEX + "$" // require end of string
     );
-
     public static final Pattern CHECK_COMMAND_FORMAT = Pattern.compile("^(?<itemName>" + ARGUMENT_PAIR_REGEX + ")$");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("^(?<serialNumber>" + "[Ss]"
             + "\\/" // argument delimiter
@@ -72,13 +68,13 @@ public class Parser {
             + "[\\w\\s\\-\\.]+" // actual argument value
             + "`+" //  backticks to enclose string
             + ")$");
-    public static final String INCORRECT_COMMAND_FORMAT = "Command word not recognised. " + System.lineSeparator()
+    public static final String UNRECOGNISED_COMMAND_MESSAGE = "Command word not recognised. " + System.lineSeparator()
             + "Please use one of the following: "
             + AddCommand.COMMAND_WORD + ", " + UpdateCommand.COMMAND_WORD + ", " + ListCommand.COMMAND_WORD + ", "
             + CheckCommand.COMMAND_WORD + ", " + DeleteCommand.COMMAND_WORD + ", " + HelpCommand.COMMAND_WORD + ", "
             + SaveCommand.COMMAND_WORD + ", " + ByeCommand.COMMAND_WORD + ".";
-    public static final String MISSING_COMMAND_WORD_DELIMITER = INCORRECT_COMMAND_FORMAT + System.lineSeparator()
-            + "If including additional arguments, please separate them with a space.";
+    public static final String MISSING_COMMAND_WORD_DELIMITER_MESSAGE = UNRECOGNISED_COMMAND_MESSAGE
+            + System.lineSeparator() + "If including additional arguments, please separate them with a space.";
 
     /**
      * Interpret the command requested by the user and returns a corresponding Command object.
@@ -92,7 +88,7 @@ public class Parser {
         try {
             commandAndArgument = splitCommandTerm(userInput);
         } catch (IncompleteCommandException e) {
-            return new IncorrectCommand(MISSING_COMMAND_WORD_DELIMITER);
+            return new IncorrectCommand(MISSING_COMMAND_WORD_DELIMITER_MESSAGE);
         }
 
         // only arguments is trimmed because commandWord is split on the first space
@@ -164,7 +160,7 @@ public class Parser {
         case ByeCommand.COMMAND_WORD:
             return new ByeCommand();
         default:
-            return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
+            return new IncorrectCommand(UNRECOGNISED_COMMAND_MESSAGE);
         }
 
     }
