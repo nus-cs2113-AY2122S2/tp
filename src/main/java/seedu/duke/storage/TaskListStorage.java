@@ -51,7 +51,7 @@ public class TaskListStorage extends ListStorage<Task> {
 
         } catch (JsonSyntaxException e) {
             throw new ReadException(MODIFIED_JSON_EXCEPTION);
-        } catch(JsonParseException e) {
+        } catch (JsonParseException e) {
             throw new ReadException(MODIFIED_JSON_EXCEPTION);
         } catch (IOException e) {
             throw new ReadException();

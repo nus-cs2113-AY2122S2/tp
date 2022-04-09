@@ -30,7 +30,7 @@ public class ConfigurationStorage extends JsonStorage<Configuration> {
             return gson.fromJson(reader, (Type) Configuration.class);
         } catch (JsonSyntaxException e) {
             throw new ReadException();
-        } catch(JsonParseException e) {
+        } catch (JsonParseException e) {
             throw new ReadException(MODIFIED_JSON_EXCEPTION);
         } catch (IOException e) {
             throw new ReadException(MODIFIED_JSON_EXCEPTION);

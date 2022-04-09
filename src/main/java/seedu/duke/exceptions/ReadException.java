@@ -3,6 +3,7 @@ package seedu.duke.exceptions;
 import seedu.duke.util.StringConstants;
 
 // This leaves to Yikai as I remember we refactored the exception of storage before?
+
 /**
  * Exception to be thrown when an error was encountered during reading of storage file.
  */
@@ -14,6 +15,6 @@ public class ReadException extends ModHappyException {
     }
 
     public ReadException(String additionalMessage) {
-        super(ERROR_MESSAGE+additionalMessage);
+        super(ERROR_MESSAGE + additionalMessage);
     }
 }
