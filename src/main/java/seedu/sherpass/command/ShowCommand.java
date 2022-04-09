@@ -24,28 +24,6 @@ import static seedu.sherpass.constant.Message.WAITING_FOR_USER_NEXT_INPUT;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 
 public class ShowCommand extends Command {
-    public static final String COMMAND_WORD = "show";
-
-    public static final String MESSAGE_USAGE = String.format("Show: shows the array of tasks in a list format%n"
-            + "or in a timetable format.%n%n"
-            + ""
-            + "To generate the timetable or a list of monthly schedule, use %n"
-            + "1) `show today`%n"
-            + "2) `show tomorrow`, where `tomorrow can be shorten to `tmr`%n"
-            + "3) `show week`%n"
-            + "4) `show next week`, where `next week` can be shorten to `nextweek`%n"
-            + "5) `show <date>`, where date is in the format d/M/YYYY.%n"
-            + "6) `show month`%n"
-            + "7) `show <month>`, where month can be the full spelling or%n"
-            + "                   the abbreviation of the specific months%n"
-            + "                   E.g. `show sep` or `show september`%n"
-            + "    Caution: show <month> will not display previous month task but task that is in the upcoming month%n"
-            + "E.g. show 23/5/2022 to show timetable for 23th May 2022.%n%n"
-            + ""
-            + "To generate a list of all tasks, use%n"
-            + "8) `show all`.%n"
-            + "To generate a list of pending tasks, use%n"
-            + "9) `show todo`.");
 
     private LocalDate dayInput;
     private String selection;

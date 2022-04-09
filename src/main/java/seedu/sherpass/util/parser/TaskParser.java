@@ -1,7 +1,7 @@
 package seedu.sherpass.util.parser;
 
-import seedu.sherpass.command.AddCommand;
 import seedu.sherpass.command.Command;
+import seedu.sherpass.command.AddCommand;
 import seedu.sherpass.command.DeleteCommand;
 import seedu.sherpass.command.EditCommand;
 import seedu.sherpass.command.HelpCommand;
@@ -29,10 +29,10 @@ import static seedu.sherpass.constant.CommandParameter.START_TIME_DELIMITER;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputDateOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.timeOnlyFormat;
-import static seedu.sherpass.constant.Index.EDIT_INDEX;
-import static seedu.sherpass.constant.Index.EDIT_TASK_CONTENT;
+import static seedu.sherpass.constant.Index.INDEX_EDIT_TASK_NUMBER;
+import static seedu.sherpass.constant.Index.INDEX_EDIT_TASK_CONTENT;
 import static seedu.sherpass.constant.Index.INDEX_OFFSET;
-import static seedu.sherpass.constant.Index.SPLIT_FIRST_PART_INDEX;
+import static seedu.sherpass.constant.Index.INDEX_SPLIT_FIRST_PART;
 import static seedu.sherpass.constant.Index.SPLIT_TWO_PART_LIMIT;
 import static seedu.sherpass.constant.Index.START_OF_STRING;
 import static seedu.sherpass.constant.Index.WHITESPACE_OFFSET;
@@ -48,6 +48,11 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_NO_VALUE_FOR_PARAMETER_MESSAGE;
 import static seedu.sherpass.constant.Message.WHITESPACE;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_ADD;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_DELETE;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_EDIT;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_MARK;
+import static seedu.sherpass.constant.CommandMessage.COMMAND_WORD_UNMARK;
 
 public class TaskParser {
 
@@ -66,7 +71,7 @@ public class TaskParser {
             int indexAfterParameter = argument.indexOf(parameter) + parameter.length() + WHITESPACE_OFFSET;
             String stringAfterParameter = argument.substring(indexAfterParameter);
             String[] splitArguments = stringAfterParameter.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
-            return splitArguments[SPLIT_FIRST_PART_INDEX];
+            return splitArguments[INDEX_SPLIT_FIRST_PART];
         } catch (IndexOutOfBoundsException exception) {
             throw new InvalidInputException(ERROR_NO_VALUE_FOR_PARAMETER_MESSAGE);
         }
@@ -221,11 +226,11 @@ public class TaskParser {
         } catch (IllegalArgumentException exception) {
             ui.showError(ERROR_INVALID_FREQUENCY_MESSAGE);
             ui.showLine();
-            return new HelpCommand(AddCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_ADD);
         } catch (InvalidInputException e) {
             ui.showError(e.getMessage());
             ui.showLine();
-            return new HelpCommand(AddCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_ADD);
         }
     }
 
@@ -240,26 +245,26 @@ public class TaskParser {
     public static Command prepareMarkOrUnmark(String argument, String commandWord, Ui ui) {
         try {
             int markIndex = Integer.parseInt(argument) - 1;
-            if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
+            if (commandWord.equals(COMMAND_WORD_MARK)) {
                 return new MarkCommand(markIndex);
             }
             return new UnmarkCommand(markIndex);
         } catch (NumberFormatException e) {
             ui.showError(ERROR_INVALID_MARKING_INDEX_MESSAGE);
             ui.showLine();
-            if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
-                return new HelpCommand(MarkCommand.COMMAND_WORD);
+            if (commandWord.equals(COMMAND_WORD_MARK)) {
+                return new HelpCommand(COMMAND_WORD_MARK);
             }
-            return new HelpCommand(UnmarkCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_UNMARK);
         }
     }
 
     private static EditCommand prepareEditTaskContent(String argument) throws InvalidInputException {
         String[] splitInput = argument.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
-        int editIndex = Integer.parseInt(splitInput[EDIT_INDEX]) - INDEX_OFFSET;
+        int editIndex = Integer.parseInt(splitInput[INDEX_EDIT_TASK_NUMBER]) - INDEX_OFFSET;
         String editTaskContent = EMPTY_STRING;
         if (splitInput.length > 1) {
-            editTaskContent = splitInput[EDIT_TASK_CONTENT];
+            editTaskContent = splitInput[INDEX_EDIT_TASK_CONTENT];
         }
         String taskDescription = parseDescription(editTaskContent);
         String doOnDateString = parseArgument(DO_DATE_DELIMITER, editTaskContent);
@@ -295,7 +300,7 @@ public class TaskParser {
      */
     public static Command prepareEdit(String argument, Ui ui) {
         if (argument.isBlank()) {
-            return new HelpCommand(EditCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_EDIT);
         }
         try {
             EditCommand newCommand = prepareEditTaskContent(argument);
@@ -307,11 +312,11 @@ public class TaskParser {
         } catch (InvalidInputException e) {
             ui.showError(e.getMessage());
             ui.showLine();
-            return new HelpCommand(EditCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_EDIT);
         } catch (NumberFormatException exception) {
             ui.showError(ERROR_INVALID_INDEX_MESSAGE);
             ui.showLine();
-            return new HelpCommand(EditCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_EDIT);
         }
     }
 
@@ -327,7 +332,7 @@ public class TaskParser {
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             ui.showError(ERROR_INVALID_DELETE_INDEX_MESSAGE);
             ui.showLine();
-            return new HelpCommand(DeleteCommand.COMMAND_WORD);
+            return new HelpCommand(COMMAND_WORD_DELETE);
         }
     }
 }

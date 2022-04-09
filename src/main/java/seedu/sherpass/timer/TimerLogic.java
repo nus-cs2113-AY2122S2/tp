@@ -13,7 +13,7 @@ import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.timetable.Timetable;
 
-import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
+import static seedu.sherpass.constant.Index.INDEX_STUDY_PARAMETER;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 
@@ -181,7 +181,7 @@ public class TimerLogic implements WindowListener {
     }
 
     private String selectStudyTimer(String[] parsedInput) {
-        if (parsedInput[STUDY_PARAMETER_INDEX].trim().equals("stopwatch")) {
+        if (parsedInput[INDEX_STUDY_PARAMETER].trim().equals("stopwatch")) {
             return "stopwatch";
         }
         return "countdown";

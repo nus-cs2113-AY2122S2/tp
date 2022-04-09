@@ -16,16 +16,6 @@ import static seedu.sherpass.constant.Message.TASK_COUNT_MESSAGE_2;
 import static seedu.sherpass.constant.Message.TAB_INDENT;
 
 public class AddCommand extends Command {
-    public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_USAGE = "Add: Adds a task into the task list.\n"
-            + "Usage: add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY\n"
-            + "       add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate DEADLINE "
-            + "/bytime END_TIME]\n\n"
-            + "DATE & DEADLINE format: d/M/yyyy\n"
-            + "START_TIME & END_TIME format: HH:mm\n"
-            + "FREQUENCY: daily, weekly, or monthly\n\n"
-            + "Warning:\n"
-            + "If using the optional deadline parameter, both the bydate and the bytime needs to be used together";
 
     private String taskDescription;
     private LocalDateTime doOnStartDateTime;
