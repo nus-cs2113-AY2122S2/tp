@@ -108,27 +108,27 @@ public class DeleteCommandTest {
     @Test
     public void deleteCommand_deleteMeetingFromEveryone_throwException() {
         //delete meeting which is id 2 from john, should delete from everyone
-        String listAllOutput = "john\n" +
-                "1.[L] TITLE: cs2113\t\tDAY: monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
-                "2.[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online\n" +
-                "3.[L] TITLE: cs2113\t\tDAY: friday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n" +
-                "peter\n" +
-                "1.[L] TITLE: cs2102\t\tDAY: wednesday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
-                "2.[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online\n" +
-                "3.[L] TITLE: cs2102\t\tDAY: saturday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
+        String listAllOutput = "john\n"
+                + "1.[L] TITLE: cs2113\t\tDAY: monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n"
+                + "2.[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online\n"
+                + "3.[L] TITLE: cs2113\t\tDAY: friday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n"
+                + "peter\n"
+                + "1.[L] TITLE: cs2102\t\tDAY: wednesday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n"
+                + "2.[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online\n"
+                + "3.[L] TITLE: cs2102\t\tDAY: saturday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
         ListCommand listCommand = new ListCommand("all",0);
         assertEquals(listAllOutput,listCommand.execute(masterTimetable));
         DeleteCommand deleteCommand = new DeleteCommand("john",2);
-        String deleteConfirmation = "The following meeting event has been deleted from everyone's timetable:\n" +
-                "[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online";
+        String deleteConfirmation = "The following meeting event has been deleted from everyone's timetable:\n"
+                + "[M] TITLE: meeting\t\tDAY: thursday\t\tSTART: 1230\t\tEND: 1330\t\tMODE: online";
         assertEquals(deleteConfirmation, deleteCommand.execute(masterTimetable));
 
-        String listAllPostDelete = "john\n" +
-                "1.[L] TITLE: cs2113\t\tDAY: monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
-                "2.[L] TITLE: cs2113\t\tDAY: friday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n" +
-                "peter\n" +
-                "1.[L] TITLE: cs2102\t\tDAY: wednesday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
-                "2.[L] TITLE: cs2102\t\tDAY: saturday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
+        String listAllPostDelete = "john\n"
+                + "1.[L] TITLE: cs2113\t\tDAY: monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n"
+                + "2.[L] TITLE: cs2113\t\tDAY: friday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n"
+                + "peter\n"
+                + "1.[L] TITLE: cs2102\t\tDAY: wednesday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n"
+                + "2.[L] TITLE: cs2102\t\tDAY: saturday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
 
         ListCommand listCommandOutput = new ListCommand("all",0);
         assertEquals(listAllPostDelete, listCommandOutput.execute(masterTimetable));
