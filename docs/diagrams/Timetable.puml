@@ -19,12 +19,33 @@ class Timetable {
     +equals(obj:Object):boolean
 }
 
+class MasterTimetable {
+    +removeByName(name:String)
+    +getByName (name:String)
+    +getByIndex(index:int)
+    +removeByIndex(index:int)
+    +addTimetable(timetable:Timetable)
+    +addLesson(lesson:Lesson,name:String)
+    +collateAll(masterTimetable:MasterTimetable,constraint:int):String
+    +getSize():int
+    +isMeetingThatClashes(meeting:Meeting):boolean
+    -isOverlappingMeeting(timetable:Timetable,meeting:Meeting):boolean
+    -isPreExistingMeeting(meeting:Meeting):boolean
+    +addMeetingToEveryoneTimetable(meeting:Meeting):String
+    -addMeetingConfirmation(meeting:Meeting):String
+    -deleteMeetingFromEveryoneTimetable(meeting:Meeting):String
+    -deleteMeetingFromAllTimetableConfirmation(meeting:Meeting):String
+    +deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
+    +deleteAllMeetings():String
+    +deleteMeetingsFromTimetable(timetable:Timetable)
+    +listBusy():int[][]
+    -isDuplicateTimetable(timetable:Timetable:boolean
+}
 
 class Event {
-    -author:String
-    +toString():String
+
 }
 
 "Timetable" -u- "*" "Event" : list
-
+"MasterTimetable" -u- "*" "Timetable" : timetables
 @enduml

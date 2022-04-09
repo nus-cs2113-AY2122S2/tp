@@ -17,8 +17,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
-import static seedu.meetingjio.common.Messages.MEETING_CLEARED_FROM_ALL_CONFIRMATION;
-import static seedu.meetingjio.common.Messages.NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
+import static seedu.meetingjio.common.Messages.*;
 import static seedu.meetingjio.parser.Parser.logger;
 
 public class MasterTimetable {
@@ -221,8 +220,7 @@ public class MasterTimetable {
      * @return String confirmation of meeting added to everyone's timetable
      */
     private String addMeetingConfirmation(Meeting meeting) {
-        return String.format("The following meeting has been added to everyone's timetable:\n%s",
-                meeting);
+        return MEETING_ADDED_TO_ALL_CONFIRMATION + meeting;
     }
 
     /**
@@ -246,7 +244,7 @@ public class MasterTimetable {
      *
      *
      */
-    public String deleteMeetingFromAllTimetableConfirmation(Meeting meeting) {
+    private String deleteMeetingFromAllTimetableConfirmation(Meeting meeting) {
         return MEETING_CLEARED_FROM_ALL_CONFIRMATION + meeting;
     }
 
