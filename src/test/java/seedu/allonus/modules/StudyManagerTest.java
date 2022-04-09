@@ -35,7 +35,13 @@ public class StudyManagerTest {
     ArrayList<Module> testList = new ArrayList<>();
     StudyManager studyManager;
 
+    private static final String DIVIDER = "---------------------------------------------------"
+            + System.lineSeparator();
 
+    private String initializeWithDivider(String message) {
+        message = DIVIDER + message + DIVIDER;
+        return message;
+    }
 
     /**
      * Creates three new module objects and adds them to the test module list.
@@ -111,7 +117,7 @@ public class StudyManagerTest {
     public void testListModule() {
         outContent.reset();
         studyManager.listModules();
-        String outputList = "Here are the modules in your schedule:" + System.lineSeparator()
+        String outputList = DIVIDER + "Here are the modules in your schedule:" + System.lineSeparator() + DIVIDER
                 + "1: [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm" + System.lineSeparator()
                 + "2: [Module] CS3244 Tutorial: Monday, 2:00pm-3:00pm" + System.lineSeparator()
                 + "3: [Module] EE4204 Exam: Monday, 10:00am-12:00pm" + System.lineSeparator();
@@ -125,13 +131,15 @@ public class StudyManagerTest {
     public void testFindModule() {
         outContent.reset();
         studyManager.findModule("find CS3244");
-        String outputFind = "Here are the matching modules in your list:" + System.lineSeparator()
+        String outputFind = DIVIDER + "Here are the matching modules in your list:" + System.lineSeparator()
+                + DIVIDER
                 + "1: [Module] CS3244 Tutorial: Monday, 2:00pm-3:00pm" + System.lineSeparator();
         assertEquals(outputFind,outContent.toString());
 
         outContent.reset();
         studyManager.findModule("find cs");
-        outputFind = "Here are the matching modules in your list:" + System.lineSeparator()
+        outputFind = DIVIDER + "Here are the matching modules in your list:" + System.lineSeparator()
+                + DIVIDER
                 + "1: [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm" + System.lineSeparator()
                 + "2: [Module] CS3244 Tutorial: Monday, 2:00pm-3:00pm" + System.lineSeparator();
         assertEquals(outputFind,outContent.toString());
@@ -176,11 +184,11 @@ public class StudyManagerTest {
 
     @Test
     public void testEditCategoryError() {
-        Module editCheckerModule = new Module("CS2113", "Lecture",
-                "Friday", "4:00pm-6:00pm");
-
         outContent.reset();
         String outputMessage = "Category has to be one of lec, tut, lab or exam" + System.lineSeparator();
+        outputMessage = initializeWithDivider(outputMessage);
+        Module editCheckerModule = new Module("CS2113", "Lecture",
+                "Friday", "4:00pm-6:00pm");
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleCategory(moduleToEdit, "Invalid category");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
@@ -189,11 +197,11 @@ public class StudyManagerTest {
 
     @Test
     public void testEditCodeError() {
-        Module editCheckerModule = new Module("CS2113", "Lecture",
-                "Friday", "4:00pm-6:00pm");
-
         outContent.reset();
         String outputMessage = "Your module code must be an alphanumeric parameter!" + System.lineSeparator();
+        outputMessage = initializeWithDivider(outputMessage);
+        Module editCheckerModule = new Module("CS2113", "Lecture",
+                "Friday", "4:00pm-6:00pm");
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleCode(moduleToEdit, "[]2e4234.`");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
@@ -207,18 +215,24 @@ public class StudyManagerTest {
 
         outContent.reset();
         String module = "[Module] GEH1049 Tutorial: Sunday, 11:00am-9:00pm";
-        String outputMessage = "You have entered an invalid day of the week" + System.lineSeparator()
+        String outputMessage = DIVIDER
+                + "You have entered an invalid day of the week" + System.lineSeparator()
+                + DIVIDER + DIVIDER
                 + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY"
-                + System.lineSeparator();
+                + System.lineSeparator()
+                + DIVIDER;
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleDay(moduleToEdit, "Anyday");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
         assertEquals(outputMessage, outContent.toString());
 
         outContent.reset();
-        outputMessage = "You have entered an invalid date" + System.lineSeparator()
+        outputMessage = DIVIDER
+                + "You have entered an invalid date" + System.lineSeparator()
+                + DIVIDER + DIVIDER
                 + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY"
-                + System.lineSeparator();
+                + System.lineSeparator()
+                + DIVIDER;
         studyManager.editModuleDay(moduleToEdit, "1234556");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
         assertEquals(outputMessage, outContent.toString());
@@ -226,12 +240,12 @@ public class StudyManagerTest {
 
     @Test
     public void testEditTimeError() {
-        Module editCheckerModule = new Module("CS2113", "Lecture",
-                "Friday", "4:00pm-6:00pm");
-
         outContent.reset();
         String outputMessage = "Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm"
                 + System.lineSeparator();
+        outputMessage = initializeWithDivider(outputMessage);
+        Module editCheckerModule = new Module("CS2113", "Lecture",
+                "Friday", "4:00pm-6:00pm");
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleTime(moduleToEdit, "2pm-4pm");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
@@ -252,8 +266,10 @@ public class StudyManagerTest {
         studyManager.getModulesList().clear();
         studyManager.getModulesList().addAll(icsModuleList);
 
-        String calendarReaderOutput =  System.lineSeparator() + "I have found these modules from your ics file:"
+        String calendarReaderOutput =  DIVIDER
+                + System.lineSeparator() + "I have found these modules from your ics file:"
                 + System.lineSeparator() + System.lineSeparator()
+                + DIVIDER
                 + "1: [Module] EG2401A Lecture: Wednesday, 6:00 pm-8:00 pm" + System.lineSeparator()
                 + "2: [Module] EG2401A Tutorial: Friday, 9:00 am-10:00 am" + System.lineSeparator()
                 + "3: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm" + System.lineSeparator()
@@ -270,8 +286,9 @@ public class StudyManagerTest {
                 + "14: [Module] EE4204 Lecture: Monday, 10:00 am-12:00 pm" + System.lineSeparator()
                 + "15: [Module] EE4204 Tutorial: Wednesday, 1:00 pm-2:00 pm" + System.lineSeparator()
                 + "16: [Module] EE4204 Exam: 29-04-2022, 9:00 am-11:00 am"
-                + System.lineSeparator() + System.lineSeparator()
-                + "I have added these to your existing schedule!" + System.lineSeparator();
+                + System.lineSeparator() + DIVIDER + System.lineSeparator()
+                + "I have added these to your existing schedule!" + System.lineSeparator()
+                + DIVIDER;
 
         assertEquals(calendarReaderOutput,outContent.toString());
         assertEquals(NUMBER_OF_MODULES_PARSED_FROM_ICS, studyManager.getModulesList().size());

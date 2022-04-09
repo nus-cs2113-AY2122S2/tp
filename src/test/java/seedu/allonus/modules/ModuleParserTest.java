@@ -25,6 +25,9 @@ public class ModuleParserTest {
     StudyManager studyManager;
     ModuleParser moduleParser;
 
+    private static final String DIVIDER = "---------------------------------------------------"
+            + System.lineSeparator();
+
     private Module cs2113;
 
     private static final String validUserInput = "add m/CS2113 c/lec d/Friday t/4:00pm-6:00pm";
@@ -57,43 +60,50 @@ public class ModuleParserTest {
 
         outContent.reset();
         String invalidUserInput1 = "add";
-        outputAdd = "Please ensure that your input follows the form:" + System.lineSeparator()
-                + "add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm" + System.lineSeparator();
+        outputAdd = DIVIDER
+                + "Please ensure that your input follows the form:" + System.lineSeparator()
+                + "add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm" + System.lineSeparator()
+                + DIVIDER;
         moduleParser.addModuleParser(invalidUserInput1);
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
         String invalidUserInput2 = "add m/-=- c/lec d/Friday t/4:00pm-6:00pm";
-        outputAdd = "Your module code must be an alphanumeric parameter!" + System.lineSeparator();
+        outputAdd = DIVIDER
+                + "Your module code must be an alphanumeric parameter!" + System.lineSeparator()
+                + DIVIDER;
         moduleParser.addModuleParser(invalidUserInput2);
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
         String invalidUserInput3 = "add m/CS2113 c/packaged d/Friday t/4:00pm-6:00pm";
-        outputAdd = "Category has to be one of lec, tut, lab or exam" + System.lineSeparator();
+        outputAdd = DIVIDER + "Category has to be one of lec, tut, lab or exam" + System.lineSeparator() + DIVIDER;
         moduleParser.addModuleParser(invalidUserInput3);
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
         String invalidUserInput4 = "add m/CS2113 c/lec d/dday t/4:00pm-6:00pm";
-        outputAdd = "You have entered an invalid day of the week" + System.lineSeparator()
+        outputAdd = DIVIDER
+                + "You have entered an invalid day of the week" + System.lineSeparator()
+                + DIVIDER + DIVIDER
                 + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY"
-                + System.lineSeparator();
+                + System.lineSeparator() + DIVIDER;
         moduleParser.addModuleParser(invalidUserInput4);
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
         String invalidUserInput5 = "add m/CS2113 c/lec d/12122022 t/4:00pm-6:00pm";
-        outputAdd = "You have entered an invalid date" + System.lineSeparator()
+        outputAdd = DIVIDER + "You have entered an invalid date" + System.lineSeparator()
+                + DIVIDER + DIVIDER
                 + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY"
-                + System.lineSeparator();
+                + System.lineSeparator() + DIVIDER;
         moduleParser.addModuleParser(invalidUserInput5);
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
         String invalidUserInput6 = "add m/CS2113 c/lec d/Thursday t/4pm-6pm";
-        outputAdd = "Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm"
-                + System.lineSeparator();
+        outputAdd = DIVIDER + "Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm"
+                + System.lineSeparator() + DIVIDER;
         moduleParser.addModuleParser(invalidUserInput6);
         assertEquals(outputAdd,outContent.toString());
 

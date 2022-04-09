@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 public class ModuleCalendarReaderTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
+    private static final String DIVIDER = "---------------------------------------------------"
+            + System.lineSeparator();
 
     ModuleCalendarReader moduleCalendarReader;
 
@@ -44,8 +46,10 @@ public class ModuleCalendarReaderTest {
 
         outContent.reset();
         moduleCalendarReader.readIcsFile("wrong_filename.ics");
-        String readIcsOutput = "No such file found! Please ensure you have the correct name." + System.lineSeparator()
-                + "Then place the file in the same directory as AllOnUs.jar." + System.lineSeparator();
+        String readIcsOutput = DIVIDER
+                + "No such file found! Please ensure you have the correct name." + System.lineSeparator()
+                + "Then place the file in the same directory as AllOnUs.jar." + System.lineSeparator()
+                + DIVIDER;
         assertEquals(readIcsOutput, outContent.toString());
     }
 

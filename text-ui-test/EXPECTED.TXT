@@ -291,74 +291,164 @@ Welcome back to the main menu
 ---------------------------------------------------
 MENU:
 ---------------------------------------------------
+---------------------------------------------------
 Welcome to Modules Tracker, where you can track all your classes.
+---------------------------------------------------
+---------------------------------------------------
 There are no modules in your list yet!
+---------------------------------------------------
+---------------------------------------------------
 Okay, I have added a new module to the schedule
 [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+---------------------------------------------------
+---------------------------------------------------
 Please enter the category of your module
+---------------------------------------------------
+---------------------------------------------------
 Please enter the code for your module
+---------------------------------------------------
+---------------------------------------------------
 Please enter the day of your module
+---------------------------------------------------
+---------------------------------------------------
 Please enter the time of your module's class
+---------------------------------------------------
+---------------------------------------------------
 Please ensure that your input follows the form:
 add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm
+---------------------------------------------------
+---------------------------------------------------
 Okay, I have added a new module to the schedule
 [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
+---------------------------------------------------
+---------------------------------------------------
 Here are the modules in your schedule:
+---------------------------------------------------
 1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 2: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
+---------------------------------------------------
 Here are the matching modules in your list:
+---------------------------------------------------
 1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 2: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
+---------------------------------------------------
 Here is the module that you have chosen to edit:
 [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 Choose the part that you would like to edit:
+---------------------------------------------------
+---------------------------------------------------
 Here are the changes so far. You can edit more module parameters or you can enter 'done' to stop editing!
 [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+---------------------------------------------------
+---------------------------------------------------
 Please enter the category of your module
+---------------------------------------------------
+---------------------------------------------------
 Please enter the code for your module
+---------------------------------------------------
+---------------------------------------------------
 Please enter the day of your module
+---------------------------------------------------
+---------------------------------------------------
 Please enter the time of your module's class
+---------------------------------------------------
+---------------------------------------------------
 Your Module was successfully edited! Here are the changes:
 [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+---------------------------------------------------
+---------------------------------------------------
 Exiting the edit mode
+---------------------------------------------------
+---------------------------------------------------
 Here are the matching modules in your list:
+---------------------------------------------------
 1: [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
 2: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
+---------------------------------------------------
 Here are the matching modules in your list:
+---------------------------------------------------
 1: [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+---------------------------------------------------
 Here are the matching modules in your list:
+---------------------------------------------------
 1: [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+---------------------------------------------------
 Noted I have removed this module from your schedule:
 [Module] CS2113 Tutorial: Thursday, 2:00pm-4:00pm
+---------------------------------------------------
+---------------------------------------------------
 There are no modules that match "cs"
+---------------------------------------------------
+---------------------------------------------------
 Here are the modules in your schedule:
+---------------------------------------------------
 1: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
+---------------------------------------------------
 Noted I have removed this module from your schedule:
 [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm
+---------------------------------------------------
+---------------------------------------------------
 There are no modules in your list yet!
+---------------------------------------------------
+---------------------------------------------------
 Your module code must be an alphanumeric parameter!
+---------------------------------------------------
+---------------------------------------------------
 You have entered an invalid day of the week
+---------------------------------------------------
+---------------------------------------------------
 Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY
+---------------------------------------------------
+---------------------------------------------------
 You have entered an invalid date
+---------------------------------------------------
+---------------------------------------------------
 Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY
+---------------------------------------------------
+---------------------------------------------------
 Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm
+---------------------------------------------------
+---------------------------------------------------
 Okay, I have added a new module to the schedule
 [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+---------------------------------------------------
+---------------------------------------------------
 Here is the module that you have chosen to edit:
 [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
 Choose the part that you would like to edit:
+---------------------------------------------------
+---------------------------------------------------
 You have entered an invalid day of the week
+---------------------------------------------------
+---------------------------------------------------
 Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY
+---------------------------------------------------
+---------------------------------------------------
 You have entered an invalid date
+---------------------------------------------------
+---------------------------------------------------
 Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY
+---------------------------------------------------
+---------------------------------------------------
 Your module code must be an alphanumeric parameter!
+---------------------------------------------------
+---------------------------------------------------
 Category has to be one of lec, tut, lab or exam
+---------------------------------------------------
+---------------------------------------------------
 Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm
+---------------------------------------------------
+---------------------------------------------------
 Here are the changes so far. You can edit more module parameters or you can enter 'done' to stop editing!
 [Module] CS2113 Lecture: Thursday, 03:00pm - 05:00pm
+---------------------------------------------------
+---------------------------------------------------
 Your Module was successfully edited! Here are the changes:
 [Module] CS2113 Lecture: Thursday, 03:00pm - 05:00pm
+---------------------------------------------------
+---------------------------------------------------
 Exiting the edit mode
+---------------------------------------------------
 ---------------------------------------------------
 Welcome back to the main menu
 ---------------------------------------------------
