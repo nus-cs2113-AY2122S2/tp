@@ -147,10 +147,9 @@ To add an appointment there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name],
-        [appointment date], [appointment details]`
+Format: `add appointment /info [patient nric], [doctor nric], [appointment date], [appointment details]`
 
-Example: `add appointment /info A123,S1234567A, Don, S7654321A, John, 2022-10-15, Regular knee checkup`
+Example: `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup`
 
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients and medicine.
