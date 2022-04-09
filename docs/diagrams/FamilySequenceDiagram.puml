@@ -10,8 +10,7 @@ participant ":XYZCommand" as Command COMMAND_COLOR
 box
 participant ":Family" as Family MODEL_COLOR
 participant "parents:PersonList" as Parents MODEL_COLOR_T1
-participant "myGen:PersonList" as MyGen MODEL_COLOR_T1
-participant "children:PersonList" as Children MODEL_COLOR_T1
+participant ":PersonList" as PersonList MODEL_COLOR_T1
 participant "Alice:Person" as Person MODEL_COLOR_T2
 end box
 
@@ -141,6 +140,65 @@ loop for every Person
 end loop
 Family <- Parents
 deactivate Parents
+Command <- Family
+deactivate Family
+<- Command
+deactivate Command
+
+-> Command: overview
+activate Command
+Command -> Family: overview()
+activate Family
+Family -> System: println()
+activate System
+Family <- System
+deactivate System
+loop For all Personlists in Family
+    Family -> Family: getList()
+    activate Family
+    Family <- Family: personList:PersonList
+    deactivate Family
+    Family -> PersonList: getTotalIncome()
+    activate PersonList
+    Family <- PersonList: income:Double
+    deactivate PersonList
+    Family -> UI: formatValue()
+    activate UI
+    Family <- UI: incomeString:String
+    deactivate UI
+    Family -> PersonList: getTotalExpenditure()
+    activate PersonList
+    Family <- PersonList: expenditure:Double
+    deactivate PersonList
+    Family -> UI: formatValue()
+    activate UI
+    Family <- UI: expenditureString:String
+    deactivate UI
+    Family -> PersonList: getRemain()
+    activate PersonList
+    Family <- PersonList: remain:Double
+    deactivate PersonList
+    Family -> UI: formatValue()
+    activate UI
+    Family <- UI: disposable:String
+    deactivate UI
+    Family -> Family: getGenerationName()
+    activate Family
+    Family <- Family: generation:String
+    deactivate Family
+    Family -> Family: printFormattedString()
+    activate Family
+    Family <- Family
+    deactivate Family
+end loop
+Family -> UI: formatValue()
+activate UI
+Family <- UI: familyDisposable:String
+deactivate UI
+Family -> System: println()
+activate System
+Family <- System
+deactivate System
 Command <- Family
 deactivate Family
 <- Command
