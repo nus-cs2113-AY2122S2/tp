@@ -34,6 +34,7 @@ public class TaskList {
         return t;
     }
 
+    //@@author ngys117
     /**
      * Removes the specified task from the task list.
      * @param index The index of task to be removed.
@@ -84,7 +85,7 @@ public class TaskList {
         return task;
     }
 
-
+    //@@author
     public void setList(ArrayList<Task> list) {
         taskList = list;
     }

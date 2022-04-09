@@ -34,6 +34,7 @@ public class HelpParser extends Parser {
         throw new GeneralParseException();
     }
 
+    //@@author ngys117
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);

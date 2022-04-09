@@ -136,6 +136,7 @@ public class TagParser extends Parser {
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
 
+    //@@author ngys117
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;
