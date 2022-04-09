@@ -50,7 +50,7 @@ public class ShowCommand extends Command {
             return;
         }
 
-        switch (selection) {
+        switch (selection.toLowerCase()) {
         case "todo":
             ui.showToUser("Here are your pending tasks:");
             Timetable.showPendingTasks(taskList, ui);
