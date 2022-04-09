@@ -19,7 +19,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
-import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
+import static seedu.sherpass.constant.Index.INDEX_DIRECTORY;
 import static seedu.sherpass.constant.Index.INDENT_FACTOR;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
@@ -37,7 +37,7 @@ public class Storage {
         saveFilePath = filePath;
         System.out.println("Booting up...");
         String[] directoryName = filePath.split("/");
-        File saveDirectory = new File(directoryName[DIRECTORY_INDEX]);
+        File saveDirectory = new File(directoryName[INDEX_DIRECTORY]);
         if (saveDirectory.mkdir()) {
             System.out.println("Creating save directory...");
         }
