@@ -262,7 +262,39 @@ The following Sequence Diagram shows how the `Family` component handles each cal
 
 ### Money Component
 
-<!-- {For Jiarong} -->
+The `Money` component consists of the following classes:
+[`Money.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/Money.java),
+[`MoneyList.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/MoneyList.java),
+[`Income.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/Income.java),
+[`IncomeList.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/IncomeList.java),
+[`Expenditure.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/Expenditure.java)
+and [`ExpenditureList.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/ExpenditureList.java)
+
+<!-- { ![MoneyClassDiagram](images/MoneyClassDiagram.png) } -->
+
+The `Money` components consists of two abstract classes, `Money` and `MoneyList`, of which contains the basic attributes
+and functions required to track monetary items. Each `Person`'s Income and Expenditure are then tracked by the 
+respective subclasses (`Income` and `IncomeList` for tracking incomes, `Expenditure` and `ExpenditureList` for tracking 
+expenditures) which contains additional functions.
+
+How the `Money` component is used:
+1. Upon input from the user, the input is passed through the `Command` component and a corresponding method is 
+called from the `Family` class.
+2. If the command specified involves operation on a `Person`'s IncomeList or ExpenditureList, the corresponding 
+function will be called from either the `IncomeList` or `ExpenditureList` class with the required values parsed 
+out using the `Parser` component.
+
+To aid in visualisation, the editing of an existing income will be simulated.
+
+The following Sequence Diagram shows how the `Money` component handles the call by the `Person` component.
+
+<!-- { [MoneyAddInSequenceDiagram](images/MoneySequenceDiagram0.png) } -->
 
 ### Storage Component
 
