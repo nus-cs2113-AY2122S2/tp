@@ -18,3 +18,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 META-INF/MANIFEST.MF
 src/main/java/META-INF/MANIFEST.MF
 /equipments.json
+docs/diagrams/EquipmentManager.vpp.bak_001d
+docs/diagrams/EquipmentManager.vpp.bak_002d
+docs/diagrams/EquipmentManager.vpp.bak_003d

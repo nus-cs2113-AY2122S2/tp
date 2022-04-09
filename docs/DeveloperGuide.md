@@ -4,7 +4,7 @@
 - [Design and Implementation](#design-and-implementation)
   - [Architecture](#architecture)
   - [Parser](#parser)
-  - [Update feature](#update-feature)
+  - [Command classes](#command-classes)
   - [EquipmentManager](#equipmentmanager)
 - [Product scope](#product-scope)
   - [Target user profile](#target-user-profile)
@@ -96,19 +96,19 @@ Step 1. The user adds an equipment to the system with the help of the `add` comm
 
 ![equipment0](images/equipment0.png)
 
+![sequenceDiagram1](images/sequenceDiagram1.png)
+
 Step 2. The user executes `update s/S1404115ASF n/SpeakerC c/2000 pd/2022-01-29` to update equipment with serial number S1404115ASF. `Parser#parseCommand` is called from `Duke` to parse the user's input.
 
 Step 3. The parser recognises that an `UpdateCommand` is required, and the UpdateCommand is prepared to return to `Duke`. In the constructor of `UpdateCommand`, `prepareModification` is called to set the values of the attributes to be updated. The other attributes are set to null by default.
+
+![sequenceDiagramExecute](images/sequenceDiagramExecute.png)
 
 Step 4. `UpdateCommand#execute` is run to process the update. If the serialNumber attribute is null, a `CommandResult` with a `MISSING_SERIAL_NUMBER` output string will be returned. Otherwise, `EquipmentManager#updateEquipment` is called.
 
 Step 5. If the update was successful, a `CommandResult` with success message will be returned, else a `CommandResult` with `UPDATE_FAILURE_MESSAGE` will be returned. Upon successful update, the object should be updated with the new attributes as shown in the diagram below.
 
 ![equipment1](images/equipment1.png)
-
-The *Sequence Diagram* below shows how the objects/classes interact with each other in the case of an update command being issued by the user.
-
-![sequenceDiagram](images/sequenceDiagram.png)
 
 Step 6. It is not shown in the sequence diagram but ultimately when the CommandResult is returned to `Duke`, the output of the `CommandResult` gets printed out and displayed to the user.
 
@@ -180,9 +180,84 @@ Further, maintaining a record of the equipment is a time-consuming task given th
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
-* *glossary item* - Definition
+* *Equipment* - Each entity that is being stored/manipulated in the application
+* *Inventory* - Refers to the whole of the Equipment stored in the application
+* *Command* - Keywords that users use to tell the application to perform certain actions
+* *CommandResult* - Results that are produced from the execution of Commands.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and exit
+1. Initial launch
+   1. Ensure that you have Java 11 or above installed.
+   2. Download the latest version of `EquipmentManager` jar file from [here](https://github.com/AY2122S2-CS2113-F12-2/tp/releases) and copy into an empty folder.
+   3. Launch command line and change into the directory jar file is saved.
+   4. Run java -jar tp.jar.<br>
+   Expected: application starts with greeting message.
+2. Exit application
+   1. Enter `bye` into command line.<br>
+      Expected: application exits.
+
+### Help
+1. Help
+   1. Test case: `help`<br>
+      Expected: List of commands usage examples is shown.
+
+### Adding equipment
+1. Adding equipment to inventory
+   1. Test case: ``add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
+      Expected: Equipment successfully added.
+   2. Test case: ``add n/`SpeakerB` s/`S1404115ASF` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
+      Expected: Unable to add equipment with missing attributes.
+   3. Test case: ``add n/`SpeakerB` s/`S1404115ASF` t/`something` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
+      Expected: Unable to add equipment, Equipment Type has to be `MICROPHONE`, `SPEAKER`, `STAND` or `CABLE`.
+   4. Test case: ``add n/`SpeakerB` s/`S1404115ASF` t/`something` c/`1000` pf/`Loud_Technologies` pd/`2123928` ``
+      Expected: Unable to add equipment, date must be in YYYY-MM-DD format.
+2. Adding equipment with duplicate serial number to inventory
+   1. Prerequisites: There is already equipment in the inventory, for example the one added above.
+   2. Test case: ``add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`1000` pf/`Loud_Technologies` pd/`2022-02-23` ``
+      Expected: Unable to add equipment with duplicate serial number.
+### Updating equipment
+1. Updating equipment in inventory
+   1. Prerequisite: There is already equipment present in the inventory.
+   2. Test case: ``update s/`S1404115ASF` n/`SpeakerC` c/`2510` pd/`2022-08-21` ``
+      Expected: Equipment details updated with the specified values
+   3. Test case: ``update s/`S1404115ASF` c/`2510` rand/`SpeakerC` pd/`2022-08-21` ``
+      Expected: Update unsuccessful due to unrecognised tag.
+
+### Checking equipment
+1. Checking for equipment matching to a specified attribute value
+   1. Prerequisite: There is already equipment present in the inventory.
+   2. Test case: ``check n/`Mic` ``
+      Expected: List of equipment with name containing `Mic`.
+   3. Test case: ``check c/`700` ``
+      Expected: List of equipment with cost of `700`.
+   4. Test case: ``check pf/`Tech` ``
+      Expected: List of equipment purchased from supplier with name containing `Tech`.
+   5. Test case: ``check pd/`2022-01-27` ``
+      Expected: List of equipment purchased on `2022-01-27`.
+   6. Test case: ``check t/`SPEAKER` ``
+      Expected: List of equipment of type `SPEAKER`.
+2. Checking for equipment, but using wrong input format
+   1. Prerequisite: There is already equipment present in the inventory.
+   2. Test case: ``check c/`hello` ``
+      Expected: Error in displaying equipment, specified cost needs to be able to be parsed to double.
+   3. Test case: ``check t/`BLA` ``
+      Expected: Error in displaying equipment, specified type has to be `MICROPHONE`, `SPEAKER`, `STAND` or `CABLE`.
+   4. Test case: ``check pd/`2022` ``
+      Expected: Error in displaying equipment, specified date needs to follow `YYYY-MM-DD` format.
+
+### Listing equipment
+1. Listing all equipment available in inventory
+   1. Test case: `list`
+      Expected: List of all equipment. 
+
+### Saving
+1. Manual saving of application state
+   1. Test case: `save`
+      Expected: Successfully saved.
+2. Auto saving of application state
+   1. Prerequisite: Application state automatically saved after every 5 commands issued.
+   2. Test case: Execution of any 5 commands
+      Expected: Application auto saved.
