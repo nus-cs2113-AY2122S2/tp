@@ -5,39 +5,39 @@
 autonumber
 
 title Sequence Diagram of `schedule /clearall` Command
+hide footbox
 
-actor   User
-participant "werkIt:WerkIt" AS WerkIt
-participant "ui:UI" AS UI
-participant "newCommand\n:ScheduleCommand" AS newCommand
-participant "dayList\n:DayList" AS DayList
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "ui:UI" AS UI COLOR_UI
+participant "newCommand\n:ScheduleCommand" AS newCommand COLOR_LOGIC
+participant "dayList\n:DayList" AS DayList COLOR_LOGIC
 
 
-activate WerkIt
+activate WerkIt COLOR_WERKIT
 ref over WerkIt
 Obtain and parse user input
 end
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand COLOR_LOGIC
 
 newCommand -> DayList : clearAllSchedule()
-activate DayList
+activate DayList COLOR_LOGIC
 loop 7 times
 DayList -> DayList : clearPlan(dayNumber)
-activate DayList
+activate DayList COLOR_LOGIC
 return
 end
 deactivate DayList
 
 newCommand -> UI : printClearedScheduleMessage()
-activate UI
-UI --> User: Display a message to \nindicate the process is completed
+activate UI COLOR_UI
+UI --> WerkIt: Display a message to \nindicate the process is completed
 deactivate UI
 
-participant "fileManager:FileManager" as FileManager
+participant "fileManager:FileManager" as FileManager COLOR_STORAGE
 newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)
-activate FileManager
+activate FileManager COLOR_STORAGE
 ref over FileManager
 Write the plans scheduled
 for the week into 'schedule.txt'

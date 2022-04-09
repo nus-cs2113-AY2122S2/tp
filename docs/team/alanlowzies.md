@@ -82,6 +82,9 @@ prerequisites to download and the steps to get it running on the user's computer
 - Wrote the 'Design - Storage Component' section ([link to part](../DeveloperGuide.md#storage-component)).
 - Wrote the instructions on 
 [how to set up the development environment](../DeveloperGuide.md#setting-up-your-development-environment).
+- Wrote the following ['Instructions for Manual Testing'](../DeveloperGuide.md#instructions-for-manual-testing):
+  - [Creating workouts](../DeveloperGuide.md#creating-a-new-workout)
+  - [Data saving](../DeveloperGuide.md#test-on-data-saving)
 - Wrote the [target user profile](../DeveloperGuide.md#target-user-profile) of WerkIt!
 - Wrote the [value proposition](../DeveloperGuide.md#value-proposition) of WerkIt!
 - Wrote part of the [glossary](../DeveloperGuide.md#glossary)
