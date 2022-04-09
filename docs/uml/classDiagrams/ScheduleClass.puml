@@ -1,5 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram'
+
+!include ../Style.puml
+
 hide circle
 
 skinparam classAttributeIconSize 0
@@ -14,33 +17,33 @@ ScheduleCommand -d-> FileManager
 ScheduleCommand -r-> DayList
 UI <. FileManager
 
-class WerkIt {
+class WerkIt COLOR_WERKIT {
 + startContinuousUserPrompt()
 }
 
-class DayList {
+class DayList COLOR_LOGIC {
 + updateDay(String userArgument):Day
 + printSchedule()
 + clearDayPlan(String userArgument)
 + clearAllSchedule()
 }
 
-class FileManager {
+class FileManager COLOR_STORAGE {
 + addFileScheduleToList(DayList dayList, String[] scheduleFileDataLine):void
 + rewriteAllDaysScheduleToFile(DayList dayList):void
 + convertDayScheduleToFileDataFormat(Day day):String
 }
 
-class "{abstract}\nCommand" {
+class "{abstract}\nCommand" COLOR_LOGIC {
 }
 
-class ScheduleCommand {
+class ScheduleCommand COLOR_LOGIC {
 + execute():void
 }
 
 
 
-class UI {
+class UI COLOR_UI {
 + getUserInput()
 + printScheduleFileNotFoundMessage():void
 + printScheduleFileCreatedMessage():void
@@ -48,7 +51,7 @@ class UI {
 + printClearedScheduleMessage():void
 }
 
-class Parser {
+class Parser COLOR_PARSER {
 + parseUserInput(String userInput):Command
 + createScheduleCommand(String userInput):ScheduleCommand
 }

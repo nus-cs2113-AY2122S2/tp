@@ -23,13 +23,18 @@ activate newCommand COLOR_LOGIC
 newCommand -> DayList : printSchedule()
 activate DayList COLOR_LOGIC
 loop 7 times
-
 DayList -> DayList : padWithSpaces(planForDay)
 activate DayList COLOR_LOGIC
-return planForDayWithPadding:string
-
+return planForDayWithPadding:String
 end
-WerkIt <-- DayList : Display plans scheduled for the week
-return
+
+loop 7 times
+DayList -> DayList : ConvertDayNumberToDay(dayNumber)
+activate DayList COLOR_LOGIC
+return info:String
+end
+
+newCommand <-- DayList : Display plans scheduled for the week
+newCommand --> WerkIt
 destroy newCommand
 @enduml
