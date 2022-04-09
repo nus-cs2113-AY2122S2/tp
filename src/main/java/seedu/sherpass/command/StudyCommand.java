@@ -22,6 +22,10 @@ public class StudyCommand extends Command {
     /**
      * Method is called when user chooses to enter Study mode. User is able to start, pause and stop a timer in Study
      * mode. Only one timer can be running at a time. User can leave Study mode by typing "leave".
+     *
+     * @param ui ui
+     * @param storage storage
+     * @param timerLogic timerLogic
      */
     private void enterStudyMode(Ui ui, Storage storage, TimerLogic timerLogic) {
 
@@ -41,7 +45,12 @@ public class StudyCommand extends Command {
 
     }
 
-
+    /**
+     * Cleans up the study session by destroying any running threads and frames.
+     *
+     * @param ui ui
+     * @param timerLogic timerLogic
+     */
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
         timerLogic.killTimer();
         timerLogic.resetIsTimerInitialised();
