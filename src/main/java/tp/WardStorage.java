@@ -67,7 +67,7 @@ public class WardStorage {
      * @return The wardList of the IHospitalWard.txt
      * @throws IHospitalException IHospitalException
      */
-    //@@author Demonshaha
+    //@@author DolphXty
     public WardList loadWardList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());

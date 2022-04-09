@@ -53,10 +53,10 @@ public class WardList {
     public String[]  getDoctorListOfWardById(int num) {
         String[] str = new String[10];
         for (Ward ward : wards) {
-                if (ward.getNumber() == num) {
-                    str = ward.getDoctors();
-                    }
+            if (ward.getNumber() == num) {
+                str = ward.getDoctors();
                 }
+            }
         return str;
     }
 
