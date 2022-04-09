@@ -49,22 +49,33 @@ public class Task {
         return taskDescription;
     }
 
-    public String getWorkingTime() {
+    public String getWorkingTimeString() {
         if (Objects.isNull(workingTime)) {
             return null;
         } else {
             return workingTime.toString();
         }
+    }
 
+    public TaskDuration getWorkingTime() {
+        return workingTime;
     }
 
     public void setTaskDescription(String description) {
-        taskDescription = description;
+        if (description.isBlank()) {
+            taskDescription = null;
+        } else {
+            taskDescription = description;
+        }
     }
 
     //@@author Ch40gRv1-Mu
     public void setWorkingTime(String workingTime) throws ModHappyException {
-        this.workingTime = new TaskDuration(workingTime);
+        if (Objects.isNull(workingTime)) {
+            this.workingTime = null;
+        } else {
+            this.workingTime = new TaskDuration(workingTime);
+        }
     }
 
     public void setTaskName(String taskName) {

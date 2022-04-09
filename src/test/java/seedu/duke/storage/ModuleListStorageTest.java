@@ -89,8 +89,8 @@ public class ModuleListStorageTest {
                 for (int j = 0; j < taskList1.getSize(); j++) {
                     assertEquals(taskList1.getTask(j).getTaskName(), taskList2.getTask(j).getTaskName());
                     assertEquals(taskList1.getTask(j).getTaskDescription(), taskList2.getTask(j).getTaskDescription());
-                    assertEquals(taskList1.getTask(j).getWorkingTime(),
-                            taskList2.getTask(j).getWorkingTime());
+                    assertEquals(taskList1.getTask(j).getWorkingTimeString(),
+                            taskList2.getTask(j).getWorkingTimeString());
                 }
             }
         } catch (Exception e) {

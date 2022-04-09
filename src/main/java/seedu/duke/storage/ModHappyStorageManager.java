@@ -2,13 +2,14 @@ package seedu.duke.storage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
-import seedu.duke.exceptions.DuplicateModuleException;
-import seedu.duke.exceptions.InvalidModuleException;
-import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.data.TaskList;
+import seedu.duke.exceptions.*;
 import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
@@ -69,6 +70,15 @@ public class ModHappyStorageManager {
             modHappyStorage = new ConfigurationStorage();
             try {
                 Configuration configuration = (Configuration) modHappyStorage.loadData(configurationPath);
+                HashMap<Configuration.ConfigurationGroup,String> configMap = configuration.configurationGroupHashMap;
+                for (Configuration.ConfigurationGroup key : configMap.keySet()) {
+                    if (key == null) {
+                        throw new InvalidConfigurationException();
+                    }
+                    if (!Configuration.LEGAL_VALUES.get(key).contains(configMap.get(key))) {
+                        throw new InvalidConfigurationValueException(key, configMap.get(key));
+                    }
+                }
                 TextUi.showUnformattedMessage(StringConstants.CONFIGURATION_DATA_LOAD_SUCCESS);
                 return configuration;
             } catch (ModHappyException e) {
@@ -85,13 +95,27 @@ public class ModHappyStorageManager {
     }
 
     //@@author chooyikai
+    public static void checkTaskList(ArrayList<Task> list) throws ModHappyException {
+        for (Task t : list) {
+            if (Objects.isNull(t.getTaskName())) {
+                throw new InvalidTaskException();
+            }
+            if (Objects.isNull(t.getWorkingTime()) || t.getWorkingTime().getTaskDuration().isNegative()
+                    || t.getWorkingTime().getTaskDuration().isZero()) {
+                t.setWorkingTime(null);
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public static void loadTaskList(ModuleList moduleList, String taskPath) {
         File taskDataFile = new File(taskPath);
         if (taskDataFile.exists()) {
             modHappyStorage = new TaskListStorage();
             try {
-                moduleList.initialiseGeneralTasksFromTaskList((ArrayList<Task>) modHappyStorage.loadData(taskPath));
+                ArrayList<Task> list = (ArrayList<Task>) modHappyStorage.loadData(taskPath);
+                checkTaskList(list);
+                moduleList.initialiseGeneralTasksFromTaskList(list);
                 TextUi.showUnformattedMessage(StringConstants.TASK_DATA_LOAD_SUCCESS);
             } catch (ModHappyException e) {
                 TextUi.showUnformattedMessage(e);
@@ -110,13 +134,17 @@ public class ModHappyStorageManager {
                 ArrayList<Module> arrayListModule;
                 arrayListModule = (ArrayList<Module>) modHappyStorage.loadData(modulePath);
                 for (Module m : arrayListModule) {
+                    if (Objects.isNull(m.getModuleCode())) {
+                        throw new InvalidModuleException();
+                    }
                     if (moduleCodes.contains(m.getModuleCode())) {
                         throw new DuplicateModuleException(m.getModuleCode());
                     }
                     if (m.getModularCredit() > MAXIMUM_MODULAR_CREDITS
                             || m.getModularCredit() < MINIMUM_MODULAR_CREDITS) {
-                        throw new InvalidModuleException(m.getModuleCode(), m.getModularCredit());
+                        throw new InvalidModuleCreditsException(m.getModuleCode(), m.getModularCredit());
                     }
+                    checkTaskList(m.getTaskList().getTaskList());
                     moduleCodes.add(m.getModuleCode());
                 }
                 moduleList.setModuleList(arrayListModule);
