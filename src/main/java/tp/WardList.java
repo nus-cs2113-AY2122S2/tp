@@ -55,8 +55,8 @@ public class WardList {
         for (Ward ward : wards) {
             if (ward.getNumber() == num) {
                 str = ward.getDoctors();
-                }
             }
+        }
         return str;
     }
 
