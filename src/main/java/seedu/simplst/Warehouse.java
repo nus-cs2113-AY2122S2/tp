@@ -39,6 +39,11 @@ public class Warehouse {
             throws UnitTestException {
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
         Good newGood = new Good(unitGood, 0);
+        if (unitGoodHashMap.containsKey(sku)) {
+            System.out.println("Item with SKU: " + sku + "already exists in the warehouse. " +
+                    "Please check the SKU again.");
+            return;
+        }
         unitGoodHashMap.put(sku, unitGood);
         goodList.put(sku, newGood);
         System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
@@ -75,6 +80,7 @@ public class Warehouse {
             throw new WrongCommandException("add", true);
         }
     }
+
 
     // Meant for batch adding goods, could be used with UI if i create a param map.
     public void addGoodToInventory(int id, Object goodObject) {
