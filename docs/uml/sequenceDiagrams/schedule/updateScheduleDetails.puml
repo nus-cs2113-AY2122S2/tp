@@ -14,38 +14,29 @@ activate DayList COLOR_LOGIC
 group sd Add/update a plan for a Day.
 
 
-DayList -> string : userArgument.split(" ")
-activate string COLOR_LOGIC
-return userArgumentArray:String[]
-
-
-opt userArgumentArray. length > 2
-create ":ArrayOutOfBoundException" AS iee COLOR_LOGIC
-DayList -> iee : throw new ArrayOutOfBoundException
-activate iee COLOR_LOGIC
-return
-deactivate iee
-end
-create "Integer" AS int COLOR_LOGIC
-DayList -> int: parseInt(userArgument[0])
-return dayNumber:int
-DayList -> int: parseInt(userArgument[1])
-return planNumber:int
-
-opt !isDayValid
-create ":InvalidScheduleException" AS ise COLOR_LOGIC
-DayList -> ise : throw new InvalidScheduleException
-activate ise COLOR_LOGIC
-return
-deactivate ise
+ref over DayList
+Obtain dayNumber and planNumber (split userInput by spacing).
+(Method calls are not shown)
 end
 
-opt !isPlanValid
-DayList -> ise : throw new InvalidScheduleException
-activate ise COLOR_LOGIC
-return
-deactivate ise
+ref over DayList
+Determine if only dayNumber and planNumber
+is obtained from userInput
 end
+
+ref over DayList
+Convert dayNumber and planNumber from
+data type String to int
+(Method calls are not shown)
+end
+
+DayList -> DayList:isDayValid(dayNumber)
+activate DayList COLOR_LOGIC
+return :Boolean
+
+DayList -> DayList:isPlanValid(planNumber)
+activate DayList COLOR_LOGIC
+return :Boolean
 
 participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
 DayList -> PlanList : getPlanDisplayList().get(planNumber - 1)
