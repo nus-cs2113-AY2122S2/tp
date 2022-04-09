@@ -61,6 +61,7 @@ public class Task {
         taskDescription = description;
     }
 
+    //@@author  Ch40gRv1-Mu
     public void setWorkingTime(String workingTime) throws ModHappyException {
         this.workingTime = new TaskDuration(workingTime);
     }

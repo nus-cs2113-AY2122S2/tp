@@ -2,6 +2,7 @@ package seedu.duke.exceptions;
 
 import seedu.duke.util.StringConstants;
 
+//@@author  Ch40gRv1-Mu
 /**
  * Exception to be thrown when command word entered by the user is not recognised.
  */

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import seedu.duke.exceptions.ModHappyException;
 
+//@@author  Ch40gRv1-Mu
+
 /**
  * A data access object that can manage the storage of ArrayList instances.
  * @param <ModHappyT> ModHappy class

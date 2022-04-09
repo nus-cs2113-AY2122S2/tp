@@ -4,6 +4,7 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 
+//@@author  Ch40gRv1-Mu
 /**
  * Parent class of all commands in Mod Happy.
  */

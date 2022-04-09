@@ -28,6 +28,7 @@ public class Main {
         new Main().run();
     }
 
+    //@@author  Ch40gRv1-Mu
     /**
      * Runs the program until termination.
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
@@ -38,6 +39,7 @@ public class Main {
         exit();
     }
 
+    //@@author  Ch40gRv1-Mu
     /**
      * Sets up the required objects.
      */
@@ -48,6 +50,7 @@ public class Main {
         TextUi.showHelloMessage();
     }
 
+    // This would be more like yikai's contribution, because I just did a refactoring - Changrui
     /**
      * Initialises the program data by attempting to read from the data files, if possible.
      * If a data file is not found or contains invalid data, the file will be treated as blank instead.
@@ -61,6 +64,7 @@ public class Main {
         configuration = ModHappyStorageManager.loadConfiguration(configurationPath);
     }
 
+    //@@author  Ch40gRv1-Mu
     /**
      * Reads the user command and executes it, until the user calls the exit command.
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
@@ -80,6 +84,7 @@ public class Main {
         } while (command == null || !ExitCommand.isExit);
     }
 
+    //@@author  Ch40gRv1-Mu
     /**
      * Prints the goodbye message and exits.
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>

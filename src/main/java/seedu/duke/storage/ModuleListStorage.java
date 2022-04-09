@@ -9,9 +9,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
@@ -19,6 +20,9 @@ import seedu.duke.exceptions.ReadException;
 import seedu.duke.data.Module;
 import seedu.duke.exceptions.UnknownException;
 
+import static seedu.duke.util.StringConstants.MODIFIED_JSON_EXCEPTION;
+
+//@@author  Ch40gRv1-Mu
 /**
  * A data access object managing the loading and saving of ModuleList instances.
  */
@@ -43,6 +47,11 @@ public class ModuleListStorage extends ListStorage<Module> {
             } else {
                 arrayList = new ArrayList<>();
             }
+
+        } catch (JsonSyntaxException e) {
+            throw new ReadException(MODIFIED_JSON_EXCEPTION);
+        } catch(JsonParseException e) {
+            throw new ReadException(MODIFIED_JSON_EXCEPTION);
         } catch (IOException e) {
             throw new ReadException();
         } catch (Exception e) {

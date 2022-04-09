@@ -6,6 +6,7 @@ import seedu.duke.exceptions.ModHappyException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//@@author  Ch40gRv1-Mu
 public class TaskDurationTest {
     TaskDuration taskDuration;
 
