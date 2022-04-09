@@ -28,6 +28,7 @@ public class ResetAvailabilityCommand extends Command {
      * @param listContainer List of information.
      * @param ui            The instance of the Ui class (used for printing additional messages when a command is
      *                      executed.
+     * @throws IOException  If unable to write to file
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws IOException {
