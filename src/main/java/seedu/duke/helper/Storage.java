@@ -3,12 +3,14 @@ package seedu.duke.helper;
 
 import seedu.duke.assets.*;
 import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.exception.HalpmiException;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -27,6 +29,7 @@ public class Storage {
         loadData();
     }
 
+    ArrayList<String> corruptedLines = new ArrayList<>();
     private void loadGenericData(String filePath, List listType) throws FileNotFoundException {
         File data = new File(filePath);
         Scanner reader = new Scanner(data);
@@ -35,7 +38,12 @@ public class Storage {
             String[] parameters = line.split(",");
             try {
                 listType.add(parameters);
-            } catch (DuplicateEntryException e) {
+            } catch (HalpmiException e) {
+                if (DuplicateEntryException e) {
+                    continue;
+                }
+                if (UserInputError e)
+                //append line to another file
                 continue;
             }
         }
