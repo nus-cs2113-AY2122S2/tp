@@ -1,4 +1,4 @@
-AddS# Developer Guide
+# Developer Guide
 
 ## Design & implementation
 
@@ -8,13 +8,28 @@ AddS# Developer Guide
 
 The objective of the `AddHousekeeperCommand` is to take in user input and spilt it into two parts which is the name and age of a Housekeeper. These details make up parts of the Housekeeper profile. With the name and age derived, this information will be added into a new Housekeeper object, which will be recorded into the list of housekeeper. The class diagram below depicts how the `AddHousekeeperCommand` interacts with other classes.
 
-![class](team/falicia_addHousekeeperCommand/classAddHousekeeper.jpg)
+PLEASE NOTE: This class diagram omits the details of some classes involved, like the `Duke`, `CommandParser` and `Command` class.
+![class](team/falicia_addHousekeeperCommand/classAddHousekeeperv2.jpg)
 
 Below is an example showing the usage of `AddHousekeeperCommand`.
-1. Command given from the user: `add housekeeper susan / 33`. This command meant to add a new housekeeper called susan who is 33 years old.
-2. The parse method from `CommandParser` will run parse to create `AddHousekeeperCommand` and would be return to Duke.
-3. The execute method in `AddHousekeeperCommand` will be performed. It first checks with the housekeeperList if the name of the housekeeper to be added has been recorded into the list. If it has not been recorded, housekeeperList would then add this new user into the records. Ui will be called to print a confirmation to show that the housekeeper has been entered into the list.
-5. If housekeeper exist, the housekeeper profile would not be added into the list.
+Step 1: Command given from the user: `add housekeeper susan / 33`. This command meant to add a new housekeeper called susan who is 33 years old.
+
+Step 2: The parse method from `CommandParser` will run parse to create `AddHousekeeperCommand` and would be return to Duke.
+
+Step 3: The execute method in `AddHousekeeperCommand` will be performed. It would get the `housekeeperList` from `ListContainer`.
+
+Step 4: The `addHousekeeperInList` method from `HousekeeperList` would be called to check if the housekeeper has been recorded.
+name of the housekeeper to be added has been recorded into the list. 
+
+Step 5: `addHousekeeperInList` will verify if housekeeper name is in the list by calling `hasNameAdded` and stores the 
+result in boolean.
+If it has not been recorded, housekeeperList would then add this new user into the records by calling `addHousekeeper`
+method. 
+
+Step 6: `printHousekeeperNoted` will be called to print a confirmation to show that the housekeeper 
+has been entered into the list.
+
+Step 7. Housekeeper file storing all profile will be updated by calling method `save` from `HousekeeperFileManager`
 
 ### Add Item Command
 The objective of the AddItemCommand is to allow the user to add a new item to the list of items found within the inventory. It takes in the user input and spilt it up into two parts which are the name of the item to be added and its pax. These two information would then be used to create an Item Object and the Item Object would be saved into a list of items.
@@ -136,13 +151,19 @@ PLEASE NOTE: This sequence diagram omits the details of some behavior and classe
 
 ### Add Housekeeper feature
 
+PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` class.
+
 
 The add housekeeper mechanism is facilitated by `AddHousekeeperCommand`. It extends command. Additionally, 
 it implements the following operations:
-* `AddHousekeeperCommand#extractDetails()`— Stores the name and age of the new Housekeeper
 * `AddHousekeeperCommand#extractName()`— Derive the name of the Housekeeper
 * `AddHousekeeperCommand#extractAge()`— Derive the age of Housekeeper and cast it into an integer
 * `AddHousekeeperCommand#execute()` — Executes the addition of new housekeeper into list
+* `HousekeeperList#addHousekeeperInList()` — Facilitates the adding of new housekeeper into the list
+* `HousekeeperList#hasNameAdded()` — Checks if name of housekeeper has been recorded
+* `HousekeeperList#addHousekeeper()` — Method to add housekeeper into the list
+* `Ui#printHousekeeperNoted()`  — Prints a message to show user that housekeeper has been added into the list
+* `HousekeeperFileManager#save()` — Updates the new housekeeper added into housekeeper file
 
 Given below is an example usage scenario of how AddHousekeeperCommand behaves at each step.
 
@@ -151,16 +172,27 @@ Step 1: User launches the application for the first time. The list of housekeepe
 Step 2: User give an add housekeeper command `add housekeeper susan / 33`. The input will be split by the delimiter
 `/` to derive `susan` and `33`. The `CommandParser` runs parse which will return a new `AddHousekeeperCommand`.
 
-Step 3: `AddHousekeeperCommand#extractDetails()` will call `AddHousekeeperCommand#extractName()` 
-and `AddHousekeeperCommand#extractAge()` to derive `susan` and `33`.
+Step 3: `AddHousekeeperCommand#extractName()`and `AddHousekeeperCommand#extractAge()` will derive `susan` and `33`.
 
 Step 4: The `AddHousekeeperCommand` will now contain `susan` and `33`.
 
-Step 5: The execute method will derive the housekeeper name, `susan` which would call `HousekeeperList#hasNameAdded()` 
-to verify if name has been recorded. If name is not in records, `HousekeeperList#addHousekeeper()` would be called to 
+Step 5: The execute method will derive the housekeeper name, `susan` which would first get the list of housekeeper
+from `ListContainer`. It will then call the `HousekeeperList#addHousekeeperInList()`.
+
+Step 6: `HousekeeperList#hasNameAdded()` will be called to check if housekeeper name has already been recorded in list.
+
+If housekeeper name has been recorded, `InavlidUserException()` will be thrown. 
+
+If housekeeper name has not been recorded `HousekeeperList#addHousekeeper()` would be called to
 add the housekeeper, `susan` and `33` into the housekeeperList.
 
-![Sequence](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandv2.jpg)
+Step 7: It will then call `Ui#printHousekeeperNoted()` to notify user that housekeeper has been added into the list.
+
+Step 8: Since a housekeeper has been added, `HousekeeperFileManager#save()` will be called to save the contents of the
+`housekeeperlist` into housekeeper file.
+
+
+![Sequence](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandv3.jpg)
 
 ### Delete Housekeeper feature 
 The add housekeeper mechanism is facilitated by `DeleteHousekeeperCommand`. It extends command. Additionally, it 
