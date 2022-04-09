@@ -32,6 +32,7 @@ public class Messages {
             + "Please enter a different item number!";
     public static final String RETURN_ERROR_MESSAGE = "There are no outstanding loans on this item. "
             + "Please select a different item to return!";
+    public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost.";
     public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. "
             + "Please ensure that end date >= start date.";
     public static final String INVALID_DATES_CONFLICT = "Sorry. The item is not available on this date, "
