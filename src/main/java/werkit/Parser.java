@@ -23,7 +23,6 @@ import static commands.PlanCommand.ACTION_KEYWORD_DETAILS;
 import static commands.ScheduleCommand.ACTION_KEYWORD_UPDATE;
 import static commands.ScheduleCommand.ACTION_KEYWORD_CLEAR_ALL;
 import static commands.ScheduleCommand.ACTION_KEYWORD_CLEAR;
-
 import static commands.WorkoutCommand.ACTION_KEYWORD_CREATE;
 import static commands.WorkoutCommand.ACTION_KEYWORD_DELETE;
 
@@ -125,9 +124,9 @@ public class Parser {
         switch (commandKeyword) {
         case WorkoutCommand.KEYWORD_BASE:
             return createWorkoutCommand(userInput);
-        case ExitCommand.BASE_KEYWORD:
+        case ExitCommand.KEYWORD_BASE:
             return createExitCommand(userInput);
-        case HelpCommand.BASE_KEYWORD:
+        case HelpCommand.KEYWORD_BASE:
             return createHelpCommand(userInput);
         case ExerciseCommand.KEYWORD_BASE:
             return createExerciseCommand(userInput);
@@ -178,35 +177,16 @@ public class Parser {
         String className = this.getClass().getSimpleName();
         switch (actionKeyword) {
         case WorkoutCommand.ACTION_KEYWORD_CREATE:
-            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
-                logger.log(Level.WARNING, "User has entered an invalid create workout command action.");
-                throw new InvalidCommandException(className,
-                        InvalidCommandException.INVALID_NEW_WORKOUT_COMMAND_ERROR_MSG);
-            }
-            arguments = userInput.split(" ", 3)[2];
+            arguments = getArgsForCreateAction(userInput);
             break;
         case WorkoutCommand.ACTION_KEYWORD_DELETE:
-            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
-                logger.log(Level.WARNING, "User has entered an invalid delete workout command action.");
-                throw new InvalidCommandException(className,
-                        InvalidCommandException.INVALID_DELETE_WORKOUT_COMMAND_ERROR_MSG);
-            }
-            arguments = userInput.split(" ", 3)[2];
+            arguments = getArgsForWorkoutDeleteAction(userInput);
             break;
         case WorkoutCommand.ACTION_KEYWORD_UPDATE:
-            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
-                logger.log(Level.WARNING, "User has entered an invalid update workout command action.");
-                throw new InvalidCommandException(className,
-                        InvalidCommandException.INVALID_UPDATE_WORKOUT_COMMAND_ERROR_MSG);
-            }
-            arguments = userInput.split(" ", 3)[2];
+            arguments = getArgsForWorkoutUpdateAction(userInput);
             break;
         case WorkoutCommand.ACTION_KEYWORD_LIST:
-            if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
-                logger.log(Level.WARNING, "User has entered an invalid list workout command action.");
-                throw new InvalidCommandException(className,
-                        InvalidCommandException.INVALID_WORKOUT_LIST_COMMAND_ERROR_MSG);
-            }
+            checkWorkoutListActionArgs(userInput);
             break;
         default:
             logger.log(Level.WARNING, "User has entered an invalid workout command action.");
@@ -214,6 +194,75 @@ public class Parser {
                     InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
         return new WorkoutCommand(userInput, fileManager, workoutList, planList, actionKeyword, arguments);
+    }
+
+    /**
+     * Checks if the workout /list command given by the user does not have extra arguments.
+     *
+     * @param userInput The workout /list command given by the user.
+     * @throws InvalidCommandException If the user input contains more arguments than expected.
+     */
+    public void checkWorkoutListActionArgs(String userInput) throws InvalidCommandException {
+        String className = this.getClass().getSimpleName();
+        if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
+            logger.log(Level.WARNING, "User has entered an invalid list workout command action.");
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_WORKOUT_LIST_COMMAND_ERROR_MSG);
+        }
+    }
+
+    /**
+     * Returns the workout /update arguments given by the user if the input has the right number of arguments.
+     *
+     * @param userInput The workout /update command given by the user.
+     * @return A String representation of the arguments given by the user.
+     * @throws InvalidCommandException If the user input contains an incorrect number of arguments.
+     */
+    public String getArgsForWorkoutUpdateAction(String userInput) throws InvalidCommandException {
+        String className = this.getClass().getSimpleName();
+        if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+            logger.log(Level.WARNING, "User has entered an invalid update workout command action.");
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_UPDATE_WORKOUT_COMMAND_ERROR_MSG);
+        }
+        String arguments = userInput.split(" ", 3)[2];
+        return arguments;
+    }
+
+    /**
+     * Returns the workout /delete arguments given by the user if the input has the right number of arguments.
+     *
+     * @param userInput The workout /delete command given by the user.
+     * @return A String representation of the arguments given by the user.
+     * @throws InvalidCommandException If the user input contains an incorrect number of arguments.
+     */
+    public String getArgsForWorkoutDeleteAction(String userInput) throws InvalidCommandException {
+        String className = this.getClass().getSimpleName();
+        if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+            logger.log(Level.WARNING, "User has entered an invalid delete workout command action.");
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_DELETE_WORKOUT_COMMAND_ERROR_MSG);
+        }
+        String arguments = userInput.split(" ", 3)[2];
+        return arguments;
+    }
+
+    /**
+     * Returns the workout /new arguments given by the user if the input has the right number of arguments.
+     *
+     * @param userInput The workout /new command given by the user.
+     * @return A String representation of the arguments given by the user.
+     * @throws InvalidCommandException If the user input contains an incorrect number of arguments.
+     */
+    public String getArgsForCreateAction(String userInput) throws InvalidCommandException {
+        String className = this.getClass().getSimpleName();
+        if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+            logger.log(Level.WARNING, "User has entered an invalid create workout command action.");
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_NEW_WORKOUT_COMMAND_ERROR_MSG);
+        }
+        String arguments = userInput.split(" ", 3)[2];
+        return arguments;
     }
 
     public ExitCommand createExitCommand(String userInput) throws InvalidCommandException {
