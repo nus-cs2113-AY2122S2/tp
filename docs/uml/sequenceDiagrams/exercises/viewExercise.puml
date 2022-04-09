@@ -7,31 +7,32 @@ autonumber
 title Sequence Diagram of `exercise /list` Command
 
 
-participant "werkIt:WerkIt" AS WerkIt
-participant "ui:UI" AS UI1
-participant "parser:Parser" AS Parser
-participant "newCommand\n:ExerciseCommand" AS newCommand
-participant "exerciseList\n:ExerciseList" AS ExerciseList
+participant "werkIt\n:WerkIt" AS WerkIt #Sandybrown
 
-activate WerkIt
-WerkIt -> UI1 : getUserInput()
-activate UI1
 
-WerkIt <-- UI1 : userInputTrimmed:String
-deactivate UI1
+participant "newCommand\n:ExerciseCommand" AS newCommand #LightSkyBlue
+participant "exerciseList\n:ExerciseList" AS ExerciseList #LightSkyBlue
 
-WerkIt -> Parser : parseUserInput(userInput)
-activate Parser
-WerkIt <-- Parser : :Command
-deactivate Parser
+activate WerkIt #Sandybrown
+
+
+
+ref over WerkIt
+Obtain and parse user input.
+end
+
 
 WerkIt -> newCommand : execute()
-activate newCommand
+activate newCommand #LightSkyBlue
 newCommand -> ExerciseList : printExerciseList()
-activate ExerciseList
+activate ExerciseList #LightSkyBlue
 
-
+loop all exercises in plan list
+newCommand <-- ExerciseList : Show name of exercises
+end
+newCommand <-- ExerciseList
 deactivate ExerciseList
+WerkIt <-- newCommand
 
 
 deactivate newCommand
