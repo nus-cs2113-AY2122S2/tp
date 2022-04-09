@@ -232,7 +232,7 @@ The `clear` command is a command that the user can clear a certain user's timeta
 
 `clear all` clears the timetable for all users.
 
-## Product scope
+## Appendix A: Product scope
 ### Target user profile
 
 NUS Students who wish to meet as a group (be it for project meetings or to eat together)
@@ -241,12 +241,11 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 
 1. Allow a group of students to quickly identify a common time slot such that all of them are free to meet up
 
-2. If no common time slot, allow students to see who is free at certain time slots
+2. If the group of students has a certain constraint regarding the minimum number of hours they want to meet for, the
+programme can also accommodate to this requirement
 
-3. The longest time slot with the most number of available students should be suggested first, followed by either shorter time slots or time slots where lesser students are able to make it
 
-
-## User Stories
+## Appendix B: User Stories
 
 | Version | As a ... | I want to ...                                | So that I can ...                                        |
 |---------|----------|----------------------------------------------|----------------------------------------------------------|
@@ -258,20 +257,24 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 | v1.0    |user| add a start time and end time to my lessons  | know what time a lesson starts and ends                  |
 | v1.0    |user| clear all the lessons saved in the timetable | reset my timetable without the need to delete one by one |
 
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
+1. MeetingJio should work on Windows, macOSX and Linux as long as it has Java 11 or above installed. 
+2. As long as the user can type commands in the CLI quickly and properly, tasks are likely to be accomplished faster 
+than using GUI.
 
-{Give non-functional requirements}
+## Appendix D: Instructions for manual testing
 
-## Glossary
+### Start up 
 
-* *glossary item* - Definition
+- Download the latest [MeetingJio.jar](https://github.com/AY2122S2-CS2113-T11-3/tp/releases/tag/v2.1)
+- Ensure Java 11 is installed and configured on your device
+- Open a command prompt or terminal and run the command `java -jar MeetingJio.jar`
 
-## Instructions for manual testing
+### Running Commands
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+- Input `help` to get an overview of the list of accepted commands
+- You can also refer to our User Guide to understand how to use each command
 
-##Clear Command
-The clear command is one of the commands the user can execute to clear the whole list. 
+### Shut Down
 
-
-Here is the sequence when the command `clear` is executed.
+- Input `exit` to quit the programme
