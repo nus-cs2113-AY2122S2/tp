@@ -195,9 +195,12 @@ public class Storage {
 
     private static void readLanguages(String languages, int index, ProjectList projectList) {
         //add languages to project
-        if (languages.equals(" ")) {
+        if (!languages.trim().equals("")) {
             String[] languageInfo = languages.split(",");
             for (int i = 0; i < languageInfo.length; i++) {
+                if (languageInfo[i].trim().equals("")) {        //the language is empty
+                    continue;
+                }
                 projectList.addLanguages(index, languageInfo[i]);
             }
         }

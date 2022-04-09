@@ -25,7 +25,7 @@ public class AddLanguageCommandParser implements CommandParser<AddLanguageComman
         try {
             index = Integer.parseInt(userInput[1]);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandException(Constants.NON_INTEGER_INDEX);
+            throw new IllegalCommandException(Constants.INDEX_PARSING_ERROR);
         }
         String language = userInput[2];
         for (int i = 3; i < userInput.length; i++) {

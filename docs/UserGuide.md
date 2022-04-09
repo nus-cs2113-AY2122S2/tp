@@ -145,7 +145,7 @@ Format: `changegit [project_index] [github_URL]`
 
 #### Example of usage
 ```
-changegit project1 http://github.com/project1
+changegit 1 http://github.com/project1
 ```
 
 ---

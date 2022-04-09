@@ -28,7 +28,7 @@ public class MarkCommandParser implements CommandParser<MarkCommand> {
             indexProj = Integer.parseInt(userInput[1]);
             indexTodo = Integer.parseInt(userInput[2]);
         } catch (NumberFormatException e) {
-            throw new IllegalCommandException(Constants.NON_INTEGER_INDEX);
+            throw new IllegalCommandException(Constants.INDEX_PARSING_ERROR);
         }
         if (indexProj <= 0 || indexTodo <= 0) {
             throw new IllegalCommandException(Constants.NEGATIVE_INDEX);
