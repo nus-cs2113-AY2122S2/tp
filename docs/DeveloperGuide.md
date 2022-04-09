@@ -64,7 +64,21 @@ This is to indicate that this orderline is fulfilled in that order, and it does 
 
 The diagram below shows the model component of the orderline class.
 ### Warehouse Class
+The warehouse class is created to simulate an entire warehouse
 #### Description
+![Warehouse Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/Warehouse.puml)
+
+Most of the methods in the Warehouse Class will require users to know the SKU of the Good that they want to interact with.
+
+The warehouse class will contain:
+- List of orders
+  - An arraylist is chosen to store the orders.
+  - This is so as to store the ordering of orders being added.
+- HashMap of unitgoods
+  - A hashmap is chosen for UnitGoods with the <key, value> pair as <SKU, UnitGood>.
+  - This is to allow for quick access to the details of the unit good through knowing the SKU
+- LinkedHashMap of goods
+  - A linked hashmap is chosen for goods to ensure that we are able to maintain the ordering of goods added while having the simplicity of accessing the necessary goods through their SKU
 
 
 ### Command Parser
