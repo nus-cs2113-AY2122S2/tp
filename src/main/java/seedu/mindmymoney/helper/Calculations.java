@@ -47,14 +47,14 @@ public class Calculations {
         if (sumOfExpenditure == 0.0) {
             throw new MindMyMoneyException("Date not found in the list! Do check your input");
         }
-        System.out.println("Total expenditure in " + input + " is $" + String.format("%.2f", sumOfExpenditure )+ ".");
+        System.out.println("Total expenditure in " + input + " is $" + String.format("%.2f", sumOfExpenditure) + ".");
         displayExpenditureBreakdown(foundItems, sumOfExpenditure);
     }
 
     /**
      * Displays the expenditure breakdown for the given month.
      *
-     * @param foundItems The list containing all the expenses in the month.
+     * @param foundItems       The list containing all the expenses in the month.
      * @param sumOfExpenditure Total sum of expenses in the month.
      */
     public static void displayExpenditureBreakdown(ArrayList<Expenditure> foundItems, float sumOfExpenditure) {
@@ -102,8 +102,8 @@ public class Calculations {
     /**
      * Calculates the percentage of expenses for a particular category type.
      *
-     * @param categoryType Category type to calculate for.
-     * @param foundItems The list containing all the expenses in the month.
+     * @param categoryType     Category type to calculate for.
+     * @param foundItems       The list containing all the expenses in the month.
      * @param sumOfExpenditure Total sum of expenses in the month.
      * @return Percentage of expenses for that particular category type.
      */
@@ -112,7 +112,7 @@ public class Calculations {
         ArrayList<Expenditure> foundCategoryTypeItems = new ArrayList<>();
         foundCategoryTypeItems = findMatchingCategoryInArraylist(categoryType, foundItems, foundCategoryTypeItems);
         float sumOfCategoryType = 0;
-        for (Expenditure item: foundCategoryTypeItems) {
+        for (Expenditure item : foundCategoryTypeItems) {
             sumOfCategoryType += item.getAmount();
         }
         sumOfCategoryType = formatFloat(sumOfCategoryType);
