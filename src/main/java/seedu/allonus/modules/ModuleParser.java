@@ -9,6 +9,7 @@ import seedu.allonus.modules.exceptions.InvalidFindInputException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -373,16 +374,20 @@ public class ModuleParser {
 
     // Checks if given start time is earlier than given end time in a String timeSlot
     private String checkTimeStartEarlier(String timeSlot) throws ModuleTimeException {
-        String[] splitTimeArray = timeSlot.split("-", 2);
-        LocalTime startTime = LocalTime.parse(splitTimeArray[0].replaceAll(" ",""), TIME_FORMATTER);
-        LocalTime endTime = LocalTime.parse(splitTimeArray[1].replaceAll(" ",""), TIME_FORMATTER);
+        try {
+            String[] splitTimeArray = timeSlot.split("-", 2);
+            LocalTime startTime = LocalTime.parse(splitTimeArray[0].replaceAll(" ", ""), TIME_FORMATTER);
+            LocalTime endTime = LocalTime.parse(splitTimeArray[1].replaceAll(" ", ""), TIME_FORMATTER);
 
-        if (endTime.compareTo(startTime) > 0) {
-            return timeSlot;
-        } else if (endTime.compareTo(startTime) == 0) {
-            throw new ModuleTimeException(INVALID_EQUAL_TIMESLOT_MESSAGE);
-        } else {
-            throw new ModuleTimeException(INVALID_GREATER_START_TIME_MESSAGE);
+            if (endTime.compareTo(startTime) > 0) {
+                return timeSlot;
+            } else if (endTime.compareTo(startTime) == 0) {
+                throw new ModuleTimeException(INVALID_EQUAL_TIMESLOT_MESSAGE);
+            } else {
+                throw new ModuleTimeException(INVALID_GREATER_START_TIME_MESSAGE);
+            }
+        } catch (DateTimeParseException e) {
+            throw new ModuleTimeException("Parse error for time");
         }
     }
 
