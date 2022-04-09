@@ -44,6 +44,7 @@ public class CommandParser {
     private static final String BYE = "bye";
     private static final String DELETE = "delete ";
     private static final String ADD = "add ";
+    private static final String CHECK = "check ";
     private static final String ADD_ITEM_COMMAND = "add item ";
     private static final String VIEW_ITEM_LIST_COMMAND = "view all items";
     private static final String VIEW_ITEMS_WITH_ZERO_PAX_COMMAND = "view items with zero pax";
@@ -94,6 +95,8 @@ public class CommandParser {
             userCommand = parseAdd(userInputLowerCase);
         } else if (userInputLowerCase.startsWith(DELETE)) {
             userCommand = parseDelete(userInputLowerCase);
+        } else if (userInputLowerCase.startsWith(CHECK)) {
+            userCommand = parseCheck(userInputLowerCase);
         } else if (userInputLowerCase.trim().equals(VIEW_SATISFACTIONS_COMMAND)) {
             userCommand = new ViewSatisfactionsCommand();
         } else if (userInputLowerCase.equals(AVERAGE_SATISFACTION_COMMAND)) {
@@ -108,23 +111,6 @@ public class CommandParser {
             userCommand = new ViewItemsWithZeroPaxCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.trim().equals(VIEW_PERFORMANCES_COMMAND)) {
             userCommand = new ViewHousekeeperPerformancesCommand();
-        } else if (userInputLowerCase.startsWith(CHECK_IN)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_IN, "");
-            userCommand = new CheckInCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(CHECK_OUT)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_OUT, "");
-            userCommand = new CheckOutCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(CHECK_BY_CATEGORY)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_BY_CATEGORY, "");
-            userCommand = new CheckRoomByCatCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(CHECK_ROOM)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_ROOM, "");
-            userCommand = new CheckRoomCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.trim().equals(CHECK_ALL_ROOM)) {
-            userCommand = new CheckAllRoomCommand();
-        } else if (userInputLowerCase.startsWith(CHECK_ROOM_BY_LEVEL)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_ROOM_BY_LEVEL, "");
-            userCommand = new CheckRoomByLevelCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(UPDATE_ITEM_PAX_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(UPDATE_ITEM_PAX_COMMAND, "");
             userCommand = new UpdateItemPaxCommand(userInputLowerCaseWithoutCommand);
@@ -183,6 +169,38 @@ public class CommandParser {
             userCommand = new DeleteEventCommand(userInputLowerCaseWithoutCommand);
         } else {
             throw new InvalidCommandException();
+        }
+        return userCommand;
+    }
+
+    /**
+     * Parses the user-provided check-related command and creates the relevant Command object.
+     *
+     * @param userInputLowerCase User input to be parsed and turned into a check-related Command object.
+     * @return The relevant Command object created based on the user input.
+     * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
+     *                                   the relevant Command object.
+     */
+    private Command parseCheck(String userInputLowerCase) throws HotelLiteManagerException {
+        Command userCommand = null;
+        String userInputLowerCaseWithoutCommand;
+        if (userInputLowerCase.startsWith(CHECK_IN)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_IN, "");
+            userCommand = new CheckInCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(CHECK_OUT)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_OUT, "");
+            userCommand = new CheckOutCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(CHECK_BY_CATEGORY)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_BY_CATEGORY, "");
+            userCommand = new CheckRoomByCatCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(CHECK_ROOM)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_ROOM, "");
+            userCommand = new CheckRoomCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.trim().equals(CHECK_ALL_ROOM)) {
+            userCommand = new CheckAllRoomCommand();
+        } else if (userInputLowerCase.startsWith(CHECK_ROOM_BY_LEVEL)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_ROOM_BY_LEVEL, "");
+            userCommand = new CheckRoomByLevelCommand(userInputLowerCaseWithoutCommand);
         }
         return userCommand;
     }
