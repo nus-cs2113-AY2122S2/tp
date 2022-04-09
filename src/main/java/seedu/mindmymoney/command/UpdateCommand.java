@@ -4,14 +4,10 @@ import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
-import seedu.mindmymoney.helper.TimeFunctions;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.Income;
 import seedu.mindmymoney.userfinancial.User;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
@@ -44,7 +40,6 @@ import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureParam
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
-import static seedu.mindmymoney.helper.TimeFunctions.checkAfterCurrentDate;
 
 /**
  * Represents the Update command.

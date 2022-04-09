@@ -10,7 +10,6 @@ import seedu.mindmymoney.data.IncomeList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.User;
-import seedu.mindmymoney.helper.GeneralFunctions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

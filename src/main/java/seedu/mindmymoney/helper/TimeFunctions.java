@@ -1,7 +1,6 @@
 package seedu.mindmymoney.helper;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.ValidationRegexTypes;
 
 import java.time.LocalDate;
 

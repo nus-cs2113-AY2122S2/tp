@@ -30,10 +30,6 @@ import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
-import static seedu.mindmymoney.helper.TimeFunctions.checkAfterCurrentDate;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the Add command.

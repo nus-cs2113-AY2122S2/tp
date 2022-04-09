@@ -4,10 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.data.CreditCardList;
-import seedu.mindmymoney.data.ExpenditureList;
-import seedu.mindmymoney.data.IncomeList;
-import seedu.mindmymoney.userfinancial.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
