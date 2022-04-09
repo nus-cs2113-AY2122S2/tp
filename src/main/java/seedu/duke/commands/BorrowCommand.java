@@ -52,8 +52,8 @@ public class BorrowCommand extends Command {
      * or contains the same attributes as another BorrowRecord object.
      *
      * @param o The other BorrowRecord object to compare to.
-     * @return True if this BorrowRecord and another BorrowRecord are the
-     * same object or contains the same attributes
+     * @return True if this BorrowRecord and another BorrowRecord
+     *     are the same object or contains the same attributes.
      */
     @Override
     public boolean equals(Object o) {
