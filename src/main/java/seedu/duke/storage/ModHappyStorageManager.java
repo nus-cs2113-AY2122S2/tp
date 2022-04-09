@@ -8,10 +8,16 @@ import java.util.Objects;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
-import seedu.duke.data.TaskList;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.DuplicateModuleException;
+import seedu.duke.exceptions.InvalidConfigurationException;
+import seedu.duke.exceptions.InvalidConfigurationValueException;
+import seedu.duke.exceptions.InvalidModuleCreditsException;
+import seedu.duke.exceptions.InvalidModuleException;
+import seedu.duke.exceptions.InvalidTaskException;
+import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
+import seedu.duke.util.Grades;
 import seedu.duke.util.StringConstants;
 
 import static seedu.duke.util.NumberConstants.MAXIMUM_MODULAR_CREDITS;
@@ -136,6 +142,9 @@ public class ModHappyStorageManager {
                 for (Module m : arrayListModule) {
                     if (Objects.isNull(m.getModuleCode())) {
                         throw new InvalidModuleException();
+                    }
+                    if (Objects.isNull(m.getModuleGrade())) {
+                        m.setModuleGrade(Grades.NOT_ENTERED.toString());
                     }
                     if (moduleCodes.contains(m.getModuleCode())) {
                         throw new DuplicateModuleException(m.getModuleCode());
