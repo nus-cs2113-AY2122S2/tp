@@ -171,7 +171,7 @@ The target user is the logistics chief of an event support club. He is responsib
 
 Equipment for the club differ in terms of shape and size. Owing to the climate-sensitive and fragile nature of some of these equipment, they are often stored in opaque containers, which may not be easily accessible or quickly identifiable given space constraints. By keeping records of this information on our application, the logistics chief can easily access and retrieve this information without having to make a physical trip down to the storeroom.
 
-Further, maintaining a record of the equipment is a time-consuming task given that they often need to be referred to by both the model number and a short alias used by club members. As the post of logistics chief is changed every year when passed down to a new member, this member will need to be acquainted with both the common name and the model number of the relevant equipment. Our application thus provides a convenient way to search by both specifications. 
+Further, maintaining a record of the equipment is a time-consuming task given that they often need to be referred to by both the serial number and a common name (short alias) used by club members. As the post of logistics chief is changed every year when passed down to a new member, this member will need to be acquainted with both the common name and the serial number of the relevant equipment. Our application thus provides a convenient way to search by both specifications. In fact, additional information such as the vendor, purchased date, equipment type, and the cost of the equipment is also stored and searchable.
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Stories
@@ -182,6 +182,7 @@ Further, maintaining a record of the equipment is a time-consuming task given th
 | v1.0    | conscientious logs chief              | add equipment                                                  | newly purchased equipment can be kept up to date                     |
 | v2.0    | new user                              | see usage instructions                                         | refer to them when I forget how to use the application               |
 | v2.0    | meticulous logs chief                 | update equipment                                               | correct any errors in previously recorded equipment                  |
+| v2.0    | conscientious logs chief              | save the state of the equipment list                           | come back to a saved version of my work later on                     |
 | v2.0    | conscientious logs chief              | delete equipment                                               | remove decommissioned equipment from the application                 |
 | v2.1    | forgetful logs chief                  | search for equipment                                           | be able to find equipment by its attributes                          |
 | v3.0    | forward-planning logs chief           | filter equipment purchased before a certain date               | conduct more regular inspections on them                             |
@@ -193,7 +194,9 @@ Further, maintaining a record of the equipment is a time-consuming task given th
 --------------------------------------------------------------------------------------------------------------------
 ## NonFunctional Requirements
 
-{Give non-functional requirements}
+1. Spaces should be permitted as a delimiter for equipment attributes of type String, e.g. equipment name, vendor name.
+2. Equipment name need not be unique as there may be multiple equipment with the same name.
+3. Serial number should be unique and case-insensitive.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
