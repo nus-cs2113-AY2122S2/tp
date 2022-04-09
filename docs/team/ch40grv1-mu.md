@@ -36,7 +36,6 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
         - Added supported system explaining the operating systems that the app are well tested on. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added expected output to all sample input and keep the output of the user guide updated when the app is updated. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added sample input in the command summary. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
-
       
     - Developer guide:
         - Added section explaining the format and usage of estimated time. [#118](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/118)
@@ -52,5 +51,5 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
 
 
 - **Community:**
-    - PRs reviewed (most with significant comments): [#73](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/73), [#75](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/75), [#80](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/80), [#86](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/86), [#87](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/87), [#88](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/88), [#89](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/89), [#90](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/90), [#94](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/94), [#105](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/105), [#106](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/106), [#108](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/108), [#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111), [#171](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/171)
+    - PRs reviewed (most with significant comments): [#176](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/176) , [#73](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/73), [#75](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/75), [#80](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/80), [#86](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/86), [#87](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/87), [#88](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/88), [#89](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/89), [#90](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/90), [#94](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/94), [#105](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/105), [#106](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/106), [#108](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/108), [#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111), [#171](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/171)
 
