@@ -29,7 +29,7 @@ public class Calculations {
     /**
      * Calculates the total expenditure in a given month.
      *
-     * @param input           The month to calculate expenditure for.
+     * @param input The month to calculate expenditure for.
      * @param expenditureList The list containing all expenditures to search for.
      * @throws MindMyMoneyException When findItemsInList throws MindMyMoneyException.
      */
@@ -54,7 +54,7 @@ public class Calculations {
     /**
      * Displays the expenditure breakdown for the given month.
      *
-     * @param foundItems       The list containing all the expenses in the month.
+     * @param foundItems The list containing all the expenses in the month.
      * @param sumOfExpenditure Total sum of expenses in the month.
      */
     public static void displayExpenditureBreakdown(ArrayList<Expenditure> foundItems, float sumOfExpenditure) {
@@ -102,8 +102,8 @@ public class Calculations {
     /**
      * Calculates the percentage of expenses for a particular category type.
      *
-     * @param categoryType     Category type to calculate for.
-     * @param foundItems       The list containing all the expenses in the month.
+     * @param categoryType Category type to calculate for.
+     * @param foundItems The list containing all the expenses in the month.
      * @param sumOfExpenditure Total sum of expenses in the month.
      * @return Percentage of expenses for that particular category type.
      */
