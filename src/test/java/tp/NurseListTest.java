@@ -40,7 +40,7 @@ class NurseListTest {
     }
 
     @Test
-    void searchDoctor() {
+    void searchNurse() {
         NurseList nurses = new NurseList();
 
         try {

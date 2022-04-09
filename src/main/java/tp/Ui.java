@@ -86,6 +86,17 @@ public class Ui {
                                    + searchWard + searchAppointment);
     }
 
+    public void printEditHelp() {
+        String editDoctor = "edit /d DOCTOR_NO /field INFO" + System.lineSeparator();
+        String editPatient = "edit /p PATIENT_NO /field INFO" + System.lineSeparator();
+        String editAppointment = "edit /a APPOINTMENT_NO /field INFO" + System.lineSeparator();
+        String editNurse = "edit /nu NURSE_NO /field INFO" + System.lineSeparator();
+        String editWard = "edit /w WARD_NO /field INFO" + System.lineSeparator();
+        System.out.println("5. To edit something:" + System.lineSeparator()
+                + editDoctor + editPatient + editNurse
+                + editWard + editAppointment);
+    }
+
     public void printSortHelp() {
         String sortAppointment = "sort appointment" + System.lineSeparator();
         System.out.println("5. To sort something:" + System.lineSeparator() + sortAppointment);
@@ -107,6 +118,7 @@ public class Ui {
         printSearchHelp();
         printSortHelp();
         printGetHelp();
+        printEditHelp();
 
         System.out.println("Hope they are helpful to you~");
         System.out.print(boundary);
