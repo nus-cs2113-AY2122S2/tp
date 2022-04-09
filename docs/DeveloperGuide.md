@@ -2106,6 +2106,23 @@ Testers are welcome conduct more extensive and rigorous testing.
 ### Test on Exercise Features
 #### Listing All Exercises
 
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#show-all-exercises-exercise-list).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                    | Command          | Expected result                                  |
+|:-----------------------------|:-----------------|:-------------------------------------------------|
+| Valid list exercise command. | `exercise /list` | List down all exercises stored in exercise list. |
+
+##### Negative Test Cases
+
+| Test Case                                    | Command                    | Expected result                                                  |
+|:---------------------------------------------|:---------------------------|:-----------------------------------------------------------------|
+| Valid list command with extra arguments.     | `exercise /list extraline` | Error response (invalid user argument), exercises not displayed. |
+| Extra whitespaces between command arguments. | `exercise         /list`   | Error response (invalid user action), exercise not displayed.    |
+
 ---
 
 ### Test on Workout Features
@@ -2324,10 +2341,100 @@ The following are some test cases for you to try:
 ---
 
 ### Test on Search Features
+
 #### Searching For Exercise
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-exercise-search-exercise).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                                 | Command                             | Expected result                                         |
+|:----------------------------------------------------------------------------------------------------------|:------------------------------------|:--------------------------------------------------------|
+| Valid searching for exercise command.                                                                     | `search /exercise`                  | All exercise names containing whitespace will be shown. |
+| Valid searching for exercise command.                                                                     | `search /exercise a`                | All exercise names containing 'a' will be shown.        |
+| Valid searching for exercise command with extra whitespaces between `/exercise` and `<exercise keyword>`. | `search /exercise                a` | All exercise names containing 'a' will be shown.        |
+| Valid searching for exercise command with extra whitespaces after `<exercise keyword>`.                   | `search /exercise a           `     | All exercise names containing 'a' will be shown.        |
+
+##### Negative Test Cases
+
+| Test Case                                                             | Command                    | Expected result                                                                                 |
+|:----------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/exercise`. | `search       /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 #### Searching For Workout
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-workout-search-workout).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                                                 | Command                            | Expected result                                                      |
+|:--------------------------------------------------------------------------------------------------------------------------|:-----------------------------------|:---------------------------------------------------------------------|
+| Valid searching for workout command.                                                                                      | `search /workout`                  | All workouts with exercise name containing whitespace will be shown. |
+| Valid searching for workout command.                                                                                      | `search /workout 15`               | All workouts with repetitions equal to 15 will be shown.             |
+| Valid searching for workout command.                                                                                      | `search /workout a`                | All workouts with exercise name containing 'a' will be shown.        |
+| Valid searching for workout command with extra whitespaces between `/workout` and `<exercise keyword or number of reps>`. | `search /workout                a` | All workouts with exercise name containing 'a' will be shown.        |
+| Valid searching for workout command with extra whitespaces after `<exercise keyword or number of reps>`.                  | `search /workout a           `     | All workouts with exercise name containing 'a' will be shown.        |
+
+
+##### Negative Test Cases
+
+| Test Case                                                            | Command                    | Expected result                                                                                 |
+|:---------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/workout`. | `search       /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 #### Searching For Plan
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-plan-search-plan).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                     | Command                         | Expected result                                          |
+|:----------------------------------------------------------------------------------------------|:--------------------------------|:---------------------------------------------------------|
+| Valid searching for plan command.                                                             | `search /plan`                  | All plans with name containing whitespace will be shown. |
+| Valid searching for plan command.                                                             | `search /plan a`                | All plans with name containing 'a' will be shown.        |
+| Valid searching for plan command with extra whitespaces between `/plan` and `<plan keyword>`. | `search /plan                a` | All plans with name containing 'a' will be shown.        |
+| Valid searching for plan command with extra whitespaces after `<plan keyword>`.               | `search /plan a           `     | All plans with name containing 'a' will be shown.        |
+
+
+##### Negative Test Cases
+
+| Test Case                                                         | Command                     | Expected result                                                                                 |
+|:------------------------------------------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/plan`. | `search        /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 #### Searching For All
+
+(For details on the usage of this command, please refer to the [user guide](UserGuide.md#search-for-all-search-all).)
+
+The following are some test cases for you to try:
+
+##### Positive Test Cases
+
+| Test Case                                                                                | Command                        | Expected result                                                                                                               |
+|:-----------------------------------------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
+| Valid searching for all command.                                                         | `search /all`                  | All exercises, workouts and plans with name containing whitespace will be shown.                                              |
+| Valid searching for all command.                                                         | `search /all a`                | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
+| Valid searching for all command.                                                         | `search /all 15`               | All exercises and plans with name containing '15' will be shown, and all workouts with repetitions equal to 15 will be shown. |
+| Valid searching for all command with extra whitespaces between `/all` and `<keyword>`.   | `search /all                a` | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
+| Valid searching for all command with extra whitespaces after `<keyword>`.                | `search /all a           `     | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
+
+
+##### Negative Test Cases
+
+| Test Case                                                        | Command                | Expected result                                                                                 |
+|:-----------------------------------------------------------------|:-----------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/all`. | `search        /all a` | Error response (invalid user action), no result is retrieved.                                   |
+
+
 
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
