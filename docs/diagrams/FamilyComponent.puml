@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
 
-Package "Person" <<Rectangle>> {
+Package "Family" <<Rectangle>> {
     class Family MODEL_COLOR
     class PersonList MODEL_COLOR_T3
     class Person  MODEL_COLOR_T2
