@@ -37,4 +37,6 @@ public class Messages {
             + "Please ensure that end date >= start date.";
     public static final String INVALID_DATES_CONFLICT = "Sorry. The item is not available on this date, "
             + "please try other dates.";
+    public static final String INVALID_BORROW_LOST_ITEM = "Sorry. The item is lost and "
+            + "not available for borrowing.";
 }
