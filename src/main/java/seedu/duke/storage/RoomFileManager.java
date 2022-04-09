@@ -84,7 +84,6 @@ public class RoomFileManager extends FileManager {
         File file = getFile(FILE_PATH);
         FileWriter fileWriter = new FileWriter(FILE_PATH);
         for (Room room : roomArrayList) {
-            //String housekeeperName = assignmentMap.getHouseKeeperNameByRoom(room);
             fileWriter.write(room.toFileString() + System.lineSeparator());
         }
         fileWriter.close();

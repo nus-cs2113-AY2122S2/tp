@@ -46,7 +46,7 @@ public class CheckInCommand extends Command {
                 }
                 room.checkIn();
                 ui.printTableHeader();
-                System.out.println(room.toString()
+                System.out.println(room
                         + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
                 );
                 roomList.save();
