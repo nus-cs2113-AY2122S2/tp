@@ -45,21 +45,19 @@ public class WardList {
     }
 
     /**
-     * Get the list of ward of a given doctor.
+     * Get the list of doctor of a given ward.
      *
-     * @param id ID of the doctor.
-     * @return Ward list of the given doctor.
+     * @param num Num of the ward.
+     * @return Doctor list of the given ward.
      */
-    public WardList getWardListOfDoctorById(String id) {
-        WardList warDoc = new WardList();
+    public String[]  getDoctorListOfWardById(int num) {
+        String[] str = new String[10];
         for (Ward ward : wards) {
-            for (int i : ward.getDoctorIndexes()) {
-                if (String.valueOf(i).equals(id)) {
-                    warDoc.addWard(ward);
-                }
+            if (ward.getNumber() == num) {
+                str = ward.getDoctors();
             }
         }
-        return warDoc;
+        return str;
     }
 
 

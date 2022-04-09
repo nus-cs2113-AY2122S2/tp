@@ -37,6 +37,19 @@ public class AddWardCommand extends Command {
             throw new IHospitalException("The ward does not exist\n");
         }
 
+        for (int docs : docIndexes) {
+            if (doctorList.getDoctor(docs).getWardNumber() == -1) {
+                throw new IHospitalException("The doctor" + docs + "already assigned to a ward\n");
+            }
+        }
+
+        for (int docs : nurseIndexes) {
+            if (nurseList.getNurse(docs).getWardNumber() == -1) {
+                throw new IHospitalException("The nurse" + docs + "already assigned to a ward\n");
+            }
+        }
+
+
         wardList.addWard(docIndexes, patientIndexes, nurseIndexes,wardNumber);
         return String.format(boundary + "Noted. I've added this ward:"
                                      + "\n" + wardList.getWard(wardList.getSize())
