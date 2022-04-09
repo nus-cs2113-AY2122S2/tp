@@ -28,10 +28,6 @@ public class DayList {
         return scheduleList;
     }
 
-    public String[] getSchedulePrintList() {
-        return schedulePrintList;
-    }
-
     public Day[] getDayList() {
         return this.dayList;
     }
