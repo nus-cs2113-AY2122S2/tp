@@ -396,12 +396,12 @@ The sequence diagram above shows the interactions when listing incomes.
 #### List Command design considerations
 Aspect: To ease testing of `ListCommand` using JUnit.
 * Alternative 1 (current choice): Abstract the conversion of `Expenditure`, `CreditCard` and `Income` to `String` in a 
-separate` ListCommand.listToString()` method.
-  * Pros: Easily tested using JUnit testing, by checking the String that the `ListCommand.listToString()` method returns.
+separate `ListCommand.listToString()` method.
+  * Pros: Easily tested using JUnit by checking the String that the `ListCommand.listToString()` method returns.
   * Cons: Added layer of abstraction that may be deemed redundant.
 
-* Alternative 2: Print directly in the `ListCommand.executeCommand()` method .
-  * Pros: Easily implemented with lesser lines of code as the code is minimalist.
+* Alternative 2: Print directly in the `ListCommand.executeCommand()` method.
+  * Pros: Easily implemented with lesser lines of code.
   * Cons: JUnit testing would require I/O redirection prior to checking the output matches expectations.
 
 <br/>
