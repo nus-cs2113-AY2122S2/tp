@@ -1,7 +1,6 @@
 package seedu.sherpass.task;
 
 import org.junit.jupiter.api.Test;
-import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.TimeClashException;
 
@@ -25,7 +24,7 @@ public class TaskListTest {
                 LocalDateTime.parse("31/3/2023 10:00", inputWithTimeFormat),
                 LocalDateTime.parse("31/3/2023 13:00", inputWithTimeFormat));
         assertThrows(TimeClashException.class,
-            () -> TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false));
+            () -> TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false, false));
     }
 
     @Test
@@ -39,7 +38,7 @@ public class TaskListTest {
                 LocalDateTime.parse("31/3/2023 11:00", inputWithTimeFormat),
                 LocalDateTime.parse("31/3/2023 12:00", inputWithTimeFormat));
         assertThrows(TimeClashException.class,
-            () -> TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false));
+            () -> TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false, false));
     }
 
     @Test
@@ -53,7 +52,7 @@ public class TaskListTest {
                 LocalDateTime.parse("31/3/2023 10:30", inputWithTimeFormat),
                 LocalDateTime.parse("31/3/2023 11:00", inputWithTimeFormat));
         assertThrows(TimeClashException.class,
-            () -> TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false));
+            () -> TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false, false));
     }
 
     @Test
@@ -67,7 +66,7 @@ public class TaskListTest {
                 LocalDateTime.parse("31/3/2023 09:00", inputWithTimeFormat),
                 LocalDateTime.parse("31/3/2023 13:00", inputWithTimeFormat));
         assertThrows(TimeClashException.class,
-            () -> TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false));
+            () -> TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false, false));
     }
 
     @Test
@@ -80,8 +79,18 @@ public class TaskListTest {
         Task testTaskTwo = new Task(2, "break time!", null,
                 LocalDateTime.parse("31/3/2023 12:00", inputWithTimeFormat),
                 LocalDateTime.parse("31/3/2023 13:00", inputWithTimeFormat));
-        TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false);
+        TaskUtil.checkDateTimeClash(dummyList, testTaskTwo, false, false);
         assertTrue(true);
     }
 
+    @Test
+    void checkDateTimeClash_byDateBeforeDoOnDate_TimeClashExceptionThrown() {
+        Task testTask = new Task(1, "blah",
+                LocalDateTime.parse("15/2/2022 15:00", inputWithTimeFormat),
+                LocalDateTime.parse("31/3/2022 10:00", inputWithTimeFormat),
+                LocalDateTime.parse("31/3/2022 12:00", inputWithTimeFormat));
+        ArrayList<Task> dummyList = new ArrayList<>();
+        assertThrows(InvalidInputException.class,
+            () -> TaskUtil.checkDateTimeClash(dummyList, testTask, false, false));
+    }
 }
