@@ -17,11 +17,11 @@ and contact management tasks done faster than traditional GUI apps.
   * [Main Menu help](#getting-guidance-on-the-usage-of-the-application-help)
   * [Exiting the app](#exiting-the-application-exit)
 * [Expense Tracker Features](#expense-tracker-features)
-  * [List out expenses](#list-out-all-expenses-list)
   * [Adding an expense](#adding-an-expense-add)
+  * [List out expenses](#list-out-all-expenses-list)
   * [Delete an expense](#delete-an-expense-rm)
   * [Edit an expense](#editing-an-expense-edit)
-  * [Look for an expense](#look-for-an-expense-find)
+  * [Finding an expense](#finding-an-expense-find)
 * [Study Manager Features](#study-manager-features)
   * [Adding a module](#adding-a-module-add)
   * [List out modules](#listing-modules-list)
@@ -157,31 +157,16 @@ Goodbye! Hope to see you again...
 
 
 ### Expense Tracker Features
-#### List out all expenses: `list`
-Lists out all currently tracked expenses in a list using the keyword `list`. Each entry shows
-its current index in the list, followed by the date, amount, category and any remarks for each expense 
-made.
 
-Format: `list`
-
-**Example of usage:**
-`list`
-
-**Expected outcome:**
-```
-Here are the expenses you have made so far:
- 1. 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
- 2. 2022-03-16 | $4.30 | Food | Chicken rice for lunch
-```
 #### Adding an expense: `add`
-Adds a new expense to the list of expenses. The keyword `add` is used followed by the date, 
+Adds a new expense to the list of expenses. The keyword `add` is used followed by the date,
 amount, category and remarks of a given expense, using the delimiters of `d/` , `a/`,  `c/` and `r/`
 respectively.
 - The DATE field must be in the format of YYYY-MM-DD. All other formats would not be accepted.
 - The AMOUNT field must be a valid number (integer/float) and must be non-negative.
 - '/' must not be the last character of a given field, even with trailing spaces.
-- The usage of '/' must be enclosed with white spaces.
-- Example: `r/Buffet / Alacarte meal`
+- The usage of '/' as a free text must be enclosed with white spaces, even as the first character.
+  - Example: `r/Buffet / Alacarte meal`
 
 Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
 
@@ -198,8 +183,30 @@ Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
 
 **Expected Outcome:**
 ```
+---------------------------------------------------
 Added 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
+---------------------------------------------------
 ```
+#### List out all expenses: `list`
+Lists out all currently tracked expenses in a list using the keyword `list`. Each entry shows
+its current index in the list, followed by the date, amount, category and the remarks for each expense 
+made.
+
+Format: `list`
+
+**Example of usage:**
+`list`
+
+**Expected outcome:**
+```
+---------------------------------------------------
+Here are the expenses you have made so far:
+ 1. 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
+ 2. 2022-03-16 | $4.30 | Food | Chicken rice for lunch
+ 
+ ---------------------------------------------------
+```
+
 #### Delete an expense: `rm`
 Deletes a specific expense record that currently exists in the list using its index. Users may choose
 to `list` out the expenses first before deleting to verify its index. After deleting an expense
@@ -217,18 +224,23 @@ Format:
 
 `list`
 ```
+---------------------------------------------------
 Here are the expenses you have made so far:
  1. 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
  2. 2022-03-14 | $4.30 | Food | Chicken rice for lunch
+ 
+ ---------------------------------------------------
 ```
 `rm 2`
 
 **Expected outcome:**
 ```
+---------------------------------------------------
 Deleted entry: 2022-03-14 | $4.30 | Food | Chicken rice for lunch
+---------------------------------------------------
 ```
 #### Editing an expense: `edit`
-Edits an existing expense in the list of expenses. Users may choose to `list` out the expenses first 
+Edits an existing expense record in the list of expenses. Users may choose to `list` out the expenses first 
 before editing to verify its index. After the record is extracted, users need to choose
 which field to edit in that record. After editing an expense
 record, the newly edited record will be shown to the user.
@@ -252,18 +264,28 @@ Format:
 
 **Expected Outcome:**
 ```
+---------------------------------------------------
 Here is the expense record you have chosen to edit:
 2022-03-22 | $18.00 | Category | This is a remark
+---------------------------------------------------
+---------------------------------------------------
 Which field would you like to edit? Enter [field] [newValue] or enter 'DONE' when you have finished editing:
+---------------------------------------------------
 < category Movie
+---------------------------------------------------
 New category value set!
+---------------------------------------------------
 < done
+---------------------------------------------------
 Editing complete!
+---------------------------------------------------
+---------------------------------------------------
 Here is the newly edited expense record:
 2022-03-22 | $20.00 | Movie | This is a remark
+---------------------------------------------------
 ```
 
-#### Look for an expense: `find`
+#### Finding an expense: `find`
 Looks for a specific expense record by using a user-specified keyword.
 - Only the `<CATEGORY>`, `<DATE>` and `<REMARKS>` fields will be considered when looking for an expense record.
 - The keyword is case-insensitive.
@@ -282,8 +304,10 @@ Format:
 
 **Expected outcome:**
 ```
+---------------------------------------------------
 Here are the matching expense records:
 2022-03-22 | $9.50 | Movie | Fast and Furious
+---------------------------------------------------
 ```
 
 ### Study Manager Features
@@ -591,7 +615,13 @@ data. However, do not tamper with the load and save files.
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: After you exit the program, your application data will be automatically stored in a text file locally called 
+"allonusData.txt". 
+You can transfer your data to another computer by copying this text file and placing
+it in the same directory as the application in the new computer. 
+When the application runs, it will automatically load the saved data in the text file. 
+Please ensure the version of both applications are the same.
+
 
 ## Command Summary
 
@@ -599,7 +629,8 @@ data. However, do not tamper with the load and save files.
 |-------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Add (Expense)           | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/2022-04-03 a/500 c/Food r/At Supper Stretch`                     |
 | Add (Module)            | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
-| Add (Contact)           | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |                                                                                                             |
+| Add (Contact)           | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |  
+| Edit (Expense)          | `edit INDEX` <br>  `[FIELD] [NEW VALUE]  `<br>E.g. <br>`edit 1` <br> `category Food`                                        |
 | Edit (Module)           | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                      |
 | Edit (Contact)          | `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`                                                                 |
 | Read from .ics (Module) | `read ics`                                                                                                                  |

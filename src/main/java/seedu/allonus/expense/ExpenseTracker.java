@@ -1,7 +1,6 @@
 package seedu.allonus.expense;
 
 
-
 import seedu.allonus.AllOnUs;
 import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
 import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
@@ -13,6 +12,7 @@ import seedu.allonus.mode.Mode;
 import seedu.allonus.storage.StorageFile;
 
 import seedu.allonus.ui.TextUi;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -49,7 +49,7 @@ public class ExpenseTracker {
     public static final int SPLIT_INTO_HALF = 2;
     public static final int EXPENSE_INDEX = 1;
     public static final String LOG_MISSING_PARAMETERS = "User possibly entered missing parameters";
-    public static final String MSG_EMPTY_FIELDS = "Some fields are empty! Try again!";
+    public static final String MSG_MISSING_FIELDS = "Some fields are missing!";
     public static final String LOG_INDEX_OUT_OF_BOUNDS = "User entered an index out of bounds";
     public static final String MSG_ITEM_NOT_FOUND = "Selected item does not exist in the list";
     public static final String LOG_EMPTY_INDEX = "User entered empty index";
@@ -103,6 +103,7 @@ public class ExpenseTracker {
     public static final String LOG_EMPTY_FIELD = "User input is missing a field";
     public static final String LOG_EXTRA_FIELDS = "User enter multiple copies of the same delimiter";
     public static final String LOG_INVALID_SLASH = "User entered slash in incorrect format";
+    public static final String MSG_ONLY_DONE = "Type only 'done' to exit editing!";
 
 
     private static void expenseWelcome() {
@@ -183,8 +184,8 @@ public class ExpenseTracker {
     /**
      * Adds a record into the list of expenses.
      *
-     * @param list list of expenses itself
-     * @param expense    the expense object itself to be added
+     * @param list    list of expenses itself
+     * @param expense the expense object itself to be added
      */
     private static void addExpense(ArrayList<Expense> list, Expense expense, boolean fromCommandLine) {
         if (fromCommandLine) {
@@ -271,6 +272,9 @@ public class ExpenseTracker {
                 isEdited = editRemarksField(toBeEdited, isEdited, newValue);
                 break;
             case ("done"):
+                if (!fieldToEdit.equals("done")) {
+                    TextUi.showToUser(MSG_ONLY_DONE);
+                }
                 return isEdited;
             default:
                 TextUi.showToUser(MSG_INVALID_EDIT_FIELD);
@@ -282,9 +286,10 @@ public class ExpenseTracker {
 
     /**
      * Modifies the Edit field of a specific expense record.
+     *
      * @param toBeEdited the expense record to be edited
-     * @param isEdited boolean variable to check if new value is the same as original value
-     * @param newValue the content to replace original value in expense record
+     * @param isEdited   boolean variable to check if new value is the same as original value
+     * @param newValue   the content to replace original value in expense record
      * @return True if record has been edited, false otherwise
      */
     private static boolean editRemarksField(Expense toBeEdited, boolean isEdited, String newValue) {
@@ -299,7 +304,7 @@ public class ExpenseTracker {
         } else {
             toBeEdited.setRemark(newValue);
             isEdited = true;
-            
+
             TextUi.showToUser(NEW_REMARKS_VALUE_SET);
         }
         return isEdited;
@@ -307,9 +312,10 @@ public class ExpenseTracker {
 
     /**
      * Modifies the Category field of a specific expense record.
+     *
      * @param toBeEdited the expense record to be edited
-     * @param isEdited boolean variable to check if new value is the same as original value
-     * @param newValue the content to replace original value in expense record
+     * @param isEdited   boolean variable to check if new value is the same as original value
+     * @param newValue   the content to replace original value in expense record
      * @return True if record has been edited, false otherwise
      */
     private static boolean editCategoryField(Expense toBeEdited, boolean isEdited, String newValue) {
@@ -331,9 +337,10 @@ public class ExpenseTracker {
 
     /**
      * Modifies the Amount field of a specific expense record.
+     *
      * @param toBeEdited the expense record to be edited
-     * @param isEdited boolean variable to check if new value is the same as original value
-     * @param newValue the content to replace original value in expense record
+     * @param isEdited   boolean variable to check if new value is the same as original value
+     * @param newValue   the content to replace original value in expense record
      * @return True if record has been edited, false otherwise
      */
     private static boolean editAmountField(Expense toBeEdited, boolean isEdited, String newValue) {
@@ -358,9 +365,10 @@ public class ExpenseTracker {
 
     /**
      * Modifies the Date field of a specific expense record.
+     *
      * @param toBeEdited the expense record to be edited
-     * @param isEdited boolean variable to check if new value is the same as original value
-     * @param newValue the content to replace original value in expense record
+     * @param isEdited   boolean variable to check if new value is the same as original value
+     * @param newValue   the content to replace original value in expense record
      * @return True if record has been edited, false otherwise
      */
     private static boolean editDateField(Expense toBeEdited, boolean isEdited, String newValue) {
@@ -419,15 +427,18 @@ public class ExpenseTracker {
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_EMPTY_INDEX);
             TextUi.showToUser(MSG_EMPTY_INDEX);
+            return;
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
             TextUi.showToUser(MSG_INVALID_INDEX_TYPE);
+            return;
         }
         try {
             deleteExpense(expenseList, index);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
             TextUi.showToUser(MSG_ITEM_NOT_FOUND);
+            return;
         }
     }
 
@@ -446,7 +457,7 @@ public class ExpenseTracker {
             addExpense(expenseList, expense, fromCommandLine);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_MISSING_PARAMETERS);
-            TextUi.showToUser(MSG_EMPTY_FIELDS);
+            TextUi.showToUser(MSG_MISSING_FIELDS);
         } catch (DateTimeParseException e) {
             logger.log(Level.WARNING, LOG_INCORRECT_DATE_FIELD);
             TextUi.showToUser(MSG_INCORRECT_DATE_FORMAT);
@@ -511,13 +522,21 @@ public class ExpenseTracker {
         } else {
             try {
                 index = parseEditExpense(rawInput);
-                editExpense(expenseList, index, ui);
             } catch (IndexOutOfBoundsException e) {
                 logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
                 TextUi.showToUser(MSG_EMPTY_INDEX);
+                return;
             } catch (NumberFormatException e) {
                 logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
                 TextUi.showToUser(MSG_INVALID_INDEX_TYPE);
+                return;
+            }
+            try {
+                editExpense(expenseList, index, ui);
+            } catch (IndexOutOfBoundsException e) {
+                logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
+                TextUi.showToUser(MSG_ITEM_NOT_FOUND);
+                return;
             }
         }
     }
@@ -532,8 +551,9 @@ public class ExpenseTracker {
     /**
      * Returns mode of study or contacts manager if the command pertaining to these managers
      * is contained in <code>userInput</code> else returns an unchanged <code>mode</code> value.
-     * @param ui instance of TextUi used for displaying messages to user.
-     * @param mode contains the current value of mode.
+     *
+     * @param ui        instance of TextUi used for displaying messages to user.
+     * @param mode      contains the current value of mode.
      * @param userInput String containing input from user.
      * @return new value of mode.
      */
@@ -570,12 +590,18 @@ public class ExpenseTracker {
         }
 
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
-        String firstWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX];
+        String[] userParameters = rawInput.split(" ", SPLIT_INTO_HALF);
+        String firstWord = userParameters[KEYWORD_INDEX];
         String keyWord = firstWord.trim().toLowerCase();
         while (!(keyWord.equals(MENU_STRING))) {
             isModified = false;
             switch (keyWord) {
             case KEYWORD_LIST:
+                if (!rawInput.equals(KEYWORD_LIST)) {
+                    logger.log(Level.WARNING, LOG_INVALID_COMMANDS);
+                    TextUi.showToUser(MSG_INVALID_COMMANDS);
+                    break;
+                }
                 listExpenses();
                 break;
             case KEYWORD_REMOVE:

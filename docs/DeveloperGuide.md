@@ -15,6 +15,9 @@
 * [Non-Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
+  * [Study Manager](#study-manager)
+  * [Expense Tracker](#expense-tracker)
+
 
 
 ## Acknowledgements
@@ -25,7 +28,6 @@ In this project, we have referenced the following list of materials:
 * [NUSMods](https://nusmods.com/)
 * [Our individual projects](AboutUs.md)
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Product scope
 ### Target user profile
@@ -188,12 +190,12 @@ in user commands and interacts with the `ExpenseParser` class depending on what 
 `ExpenseTracker` class continues validating the inputs of the user before executing the user's commands.
 
 How the Expense Tracker component is used:
-1. From the Main Menu, if the user decides to run `goto m/Expense_Tracker`, the `ExpenseTracker` class takes over.
+1. From the Main Menu, if the user decides to run `goto Expense_Tracker`, the `ExpenseTracker` class takes over.
 2. The `expenseRunner()` method begins by taking in user inputs depending on the user's requirements. Some examples
 of valid commands include add, delete, list, edit and find.
 3. Depending on the user's input, the `ExpenseParser` class calls 
 `parseXYZExpense` where `XYZ` is a placeholder for the specific command name (eg. `parseDeleteExpense`).
-4. If the parsing is valid (i.e. user followed the structure of the command properly), the appropriate field values
+4. If the parsing is valid (i.e. user followed the format of the command properly), the appropriate field values
 are returned to the `ExpenseTracker` class.
 5. The `ExpenseTracker` class takes these fields and validates them depending on the type of command entered by the user
 in Step 2. (eg. if an `add` command is issued, the `ExpenseTracker` class checks if the Date is formatted properly)
@@ -350,9 +352,23 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
 
 ## Glossary
 
-* *glossary item* - Definition
+| Terms     | Definition                                                                                                                                                            |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Main Menu | The Main Menu the user interfaces with to access the 3 components: `ContactsManager`, `ExpenseTracker` and `StudyManager`                                             |
+| Contacts  | The Contacts component which manages a list of contacts added by the user. It facilitates the adding, deleting, editing and finding of contacts as well.              |
+| Expense   | The Expense component which manages a list of expense records added by the user. It facilitates the adding, deleting, editing and finding of expense records as well. |
+| Modules   | The Modules component which manages a list of expense records added by the user. It facilitates the adding, deleting, editing and finding of classes as well.         |
+| Storage   | The Storage class responsible for the saving to and loading from the save file respectively.                                                                          |
+| TextUi    | The TextUi class deals with all things related to printing and reading of lines for the user to interface with.                                                       |
+| Parser    | Each component has their own respective parser, which makes sense of the user's input before executing them.                                                          |
+
 
 ## Instructions for manual testing
+
+Given below are instructions to test the app manually:
+
+> :information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are
+> expected to do more *exploratory* testing.
 
 ### Launch and Shutdown 
 1. Initial launch 
@@ -361,7 +377,7 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
    
 
 ### Study Manager
-#### 
+
 1. Deleting a module while all modules are shown.
    1. Prerequisites: List all modules using the `list` command. Ensure there are multiple modules in the list.
    2. Test case: `rm 1`
@@ -370,7 +386,6 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
       1. Expected: No module is deleted from the list. Error details shown in the status message.
    4. Other incorrect delete commands to try: `rm`, `rm 100000` 
       1. Expected: Error message similar to step 3.
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
 2. Adding a module to the list.
    1. Requires module code, category, day and time.
@@ -380,4 +395,55 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
       1. Expected: No module is added to the list. Error details are shown on console.
    4. Other incorrect add commands to try: `add`, `add c/lec t/4pm-6pm`
       1. Or any commands that exclude one of the four requirements to add module.
-      2. Expected: Error messge similar to above.
+      2. Expected: Error message similar to above.
+      
+### Expense Tracker
+1. Adding a new expense record to the list
+   1. Requires date, amount, category and remarks in proper format
+   2. Test case: `add d/2022-03-24 a/9.50 c/Movie r/Jujutsu Kaisen`
+      1. Expected: Expense record is added to the list and details are shown on the console.
+   3. Test case: `add d/Invalid Date Field a/9.50 c/Movie r/Jujutsu Kaisen`
+      1. Expected: Expense record not added due to invalid date format. 
+      Error details are shown on console.
+   4. Test case: `add d/2022-03-24 a/Invalid Amount Field c/Movie r/Jujutsu Kaisen`
+      1. Expected: Expense record not added due to invalid amount format. 
+      Error details are shown on console.
+   5. Test case: `add d/ a/ c/ r/`
+      1. Expected: Expense record not added due to missing values. 
+      Error details are shown on console.
+   6. Test case: `add m/`
+      1. Expected: Expense record not added due to missing fields.
+      Error details are shown on console.
+   7. Test case: `add d/2022-03-24 a/500 c/Car r/Slash /in middle`
+      1. Expected: Expense record not added due to slash in invalid position.
+      Error details are shown on console.
+      
+2. Deleting an expense record after listing
+   1. Prerequisites: List all expense records using the `list` command. Multiple records exist in the list.
+   2. Test case: `rm 1`
+      1. Expected: First expense record is deleted from the list. Details of the deleted record shown in
+      status message.
+   3. Test case: `rm 0`
+      1. Expected: No module is deleted from the list. Error details shown on console.
+   4. Other incorrect delete commands: `rm`
+      1. Expected: Error message similar to step 3.
+      
+3. Editing an existing expense record
+   1. Prerequisites: Expense record exists in the list.
+   2. Test case: `edit 1`
+      1. Expected: Retrieves first expense record and asks user for field to edit.
+   3. Test case: `edit 0`
+      1. Expected: No expense record is retrieved to be edited. Error details shown on console.
+   4. Test case: <br>`edit 1` <br>`INVALIDFIELD randomvalue`
+      1. Expected: Retrieves first expense record, but does not edit any field due to unknown
+      field parameter. Error details shown on console.
+      
+4. Finding a specific expense record
+   1. Prerequisite: Expense record exists in the list and contains the word "test".
+   2. Test case: `find test`
+      1. Expected: Retrieves expense record which contains the word "test"
+   3. Test case: `find notest`
+      1. Expected: No expense record retrieved as keyword is not found in any record.
+   4. Test case: `find`
+      1. Expected: No expense record retrieved as keyword not specified. Error details shown on console.
+   
