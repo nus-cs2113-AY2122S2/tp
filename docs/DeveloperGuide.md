@@ -226,6 +226,7 @@ Below is a simplified sequence diagram showing the key class interactions specif
 `view appointment` command appropriately. 
 
 ![ViewAppointmentImplementationUML](diagrams/ViewAppointmentImplementationUML.png)
+<br>
 The user first types in the command for view appointment correctly. Then, Manager will call UI methods to
 parse and identify the command string and parameters string before parsing within Parser. If parameters are absent,
 then a ViewAppointmentCommand is returned. Else, a FindAppointmentCommand with the parameters is returned. The Command
