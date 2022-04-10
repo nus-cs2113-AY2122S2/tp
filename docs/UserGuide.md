@@ -26,7 +26,7 @@ Spendvelope is designed to regularly remind the buyer of their preset spending l
 
 1. Ensure that you are running Java 11.
 2. Download the latest version of `Spendvelope` from [here](https://github.com/AY2122S2-CS2113-F12-1/tp/releases/download/v2.0/Spendvelope.jar).
-Place it in a folder of your choice, ensure that the folder do not contain any folder named `data`.
+Place it in an empty folder.
 3. Using Cmd Prompt, navigate to the folder where the `jar` file is stored. Run `Spendvelope` with 
 `java -jar Spendvelope.jar`.
 
@@ -94,7 +94,7 @@ Examples of usage:
 ![img_9.png](img_9.png)
 
 <br>
-<br>
+
 ### Delete a record: `delete`
 Deletes the record identified by the record number used in the record list.
 
@@ -171,7 +171,7 @@ Format: `exit`
 
 **Q**: Is it okay for user to manually change the file source?
 
-**A**: The user is not adivsed to change the file by their own as it could tamper with the functionality of Spendvelope
+**A**: The user shouldn't change the data file on their own as it could tamper with the functionality of Spendvelope
 <br>
 ## Command Summary
 
