@@ -32,6 +32,9 @@ public class ListAvailableBorrowingsParser implements Parser<ListAvailableBorrow
         LocalDate startDate = ParserUtils.parseDate(argMultimap.getValue(PREFIX_START_DATE).get());
         LocalDate endDate = ParserUtils.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
 
+        if (startDate.isAfter(endDate)) {
+            throw new InvMgrException("Input start date has to be before end date");
+        }
         return new ListAvailableBorrowingsCommand(startDate, endDate);
     }
     
