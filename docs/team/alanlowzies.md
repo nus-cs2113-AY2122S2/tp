@@ -59,8 +59,7 @@ should take note of to avoid issues in the application.</span>
 the users.</span>
 - (Developer and User Guides) Inserted 'buttons' throughout the guides to allow users to click and navigate back to the
   guides' tables of contents for easier navigation. 
-  <br/><br/>**Demo:**<br/>
-  ![Back to Top Button Demo](../images/ppp/alanlowzies/BackToToCDemo.gif)
+    - Click [here](../images/ppp/alanlowzies/BackToToCDemo.gif) for a GIF demonstration of the enhancement.
 
 ### Contributions to the User Guide (UG)
 - Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
