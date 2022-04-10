@@ -46,7 +46,7 @@ public class Parser {
                     + "`+"; //  backticks to enclose string
     /**
      * Extracts first n-1 tags for debugging and assumes that the last tag contains the whole string, refer to:
-     * <a href="https://regex101.com/r/dMwMWw/1"> Regex101</a> for demo.
+     * <a href="https://regex101.com/r/dMwMWw/3> Regex101</a> for demo.
      */
     public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
             "(" + ARGUMENT_PAIR_REGEX + ")" + "\\s+" // argument space before next delimiter
@@ -215,8 +215,8 @@ public class Parser {
     }
 
     /**
-     * Prepare argument for CheckCommand by matching the preceding "n/" prefix, setting it to lowercase and verifying
-     * that there are no additional tags.
+     * Prepare argument for CheckCommand by matching the preceding "n/" prefix, setting the prefix to lowercase,
+     * remove backticks and verifying that there are no additional tags.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is item name)
@@ -232,8 +232,8 @@ public class Parser {
     }
 
     /**
-     * Prepare argument for DeleteCommand by matching the preceding "s/" prefix, setting it to lowercase and verifying
-     * that there are no additional tags.
+     * Prepare argument for DeleteCommand by matching the preceding "s/" prefix, setting the prefix to lowercase,
+     * remove backticks and verifying that there are no additional tags.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is serial number)
@@ -249,7 +249,8 @@ public class Parser {
     }
 
     /**
-     * Splits main arguments into split tags with each substring.
+     * Splits main arguments into split tags with each substring by setting the prefix to lowercase
+     * and removing backticks.
      *
      * @param args String to be split into substrings
      * @return ArrayList of two elements
