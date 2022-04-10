@@ -765,13 +765,15 @@ Test Scenario 1: No sessions are currently stored in the application. <br>
 3. Test Command: `session /create /n SessionTest3 /pl Alice Alice /d today` <br>
    Expected: An error message should be printed, indicating that there are duplicates in the list of persons provided.
 
-Test Scenario 2: There is a session named SessionTest1 currently stored in the application. <br>
+Test Scenario 2: Only a single session with a session unique identifier of `1`, named SessionTest1, exists in the application after creating
+it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. <br>
 1. Test Command: `session /create /n SessionTest3 /pl Alice Bob /d today` <br>
    Expected: A success message should be printed, indicating the details of the session as provided in the command.
 2. Test Command: `session /create /n SessionTest1 /pl Alice Bob /d 10-04-2022` <br>
    Expected: An error message should be printed, indicating that a session with the same name already exists within the application.
 
-Test Scenario 3: There is a group with unique identifier of 1 named GroupTest1 with Alice, Bob and Charlie stored in the application. There are no other groups stored apart from GroupTest1.<br>
+Test Scenario 3: Only a single session with a session unique identifier of `1`, named GroupTest1 with Alice, Bob and Charlie exists in the application after creating
+it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. <br>
 1. Test Command: `session /create /n SessionTest4 /gid 1 /d today`<br>
    Expected: A success message should be printed, indicating the details of the session as provided in the command. 
              The list of persons for the session would include the persons found in the group.
@@ -786,7 +788,8 @@ Test Scenario 3: There is a group with unique identifier of 1 named GroupTest1 w
 > For details on the usage of `session /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-session-session-delete).
 <hr>
 
-Test Scenario 1: There is a session with unique identifier of 1 stored in the application. <br>
+Test Scenario 1: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. <br>
 1. Test Command: `session /delete /sid 1`<br>
    Expected: A success message should be printed, indicating that the session has been deleted.
 2. Test Command: `session /delete /sid 2`<br>
@@ -798,7 +801,8 @@ Test Scenario 1: There is a session with unique identifier of 1 stored in the ap
 > For details on the usage of `session /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-session-session-edit).
 <hr>
 
-Test Scenario 1: A session has been created with a unique identifier of 1, named SessionTest1 with Alice and Bob involved on 10-04-2022.
+Test Scenario 1: Only a single session with a session unique identifier of `1`, named SessionTest1 with Alice and Bob involved on 10-04-2022, exists in the application after creating
+it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. <br>
 1. Test Command: `session /edit /sid 1 /n SessionTest1`<br>
    Expected: A message should be printed, indicating that no edits were made.
 2. Test Command: `session /edit /sid 1 /n SessionTest10`<br>
@@ -883,23 +887,23 @@ Test Scenario 2: At least 1 session exists in the application.
 **Test Cases:**
 
 Test Scenario 1: The cost is split evenly amongst those who participated in the activity. <br>
-* Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /co 20` <br>
+* Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /co 20` <br>
   Expected: A success message should be printed, along with the details of the activity as provided in the command. Each person's cost owed is $10.
 
 Test Scenario 2: Each person who participated in the activity incurred different costs. <br>
-* Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /cl 5 10` <br>
+* Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /cl 5 10` <br>
   Expected: A success message should be printed, along with the details of the activity as provided in the command. PersonOne's cost owed is $5 while PersonTwo's cost owed is $10.
 
 Test Scenario 3: There was GST and Service Charge involved for an activity. <br>
-1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /co 20 /gst 7 /sc 10` <br>
+1. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /co 20 /gst 7 /sc 10` <br>
    Expected: A success message should be printed, along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
-2. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /cl 5 10 /gst 7 /sc 10` <br>
+2. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /cl 5 10 /gst 7 /sc 10` <br>
    Expected: A success message should be printed, along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
 
 Test Scenario 4: The person who paid or the persons involved in the activity were not part of the session
-1. Test Command: `activity /create /sid 1 /n Test1 /p PersonThree /i PersonOne PersonTwo /co 20 /gst 7 /sc 10` <br>
+1. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Mallory /i Alice Bob /co 20 /gst 7 /sc 10` <br>
    Expected: An error message should be printed, indicating that a person specified was not found in the particular session.
-2. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonThree /cl 5 10 /gst 7 /sc 10` <br>
+2. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Bob Mallory /cl 5 10 /gst 7 /sc 10` <br>
    Expected: An error message should be printed, indicating that a person specified was not found in the particular session.
 
 <hr>
