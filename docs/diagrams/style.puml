@@ -48,6 +48,8 @@
 !define OPT_COLOR #OldLace
 !define OPT_COLOR_T1 #EAE6FD
 
+!define SYSTEM_COLOR #45CEB7
+
 skinparam BackgroundColor #FFFFFFF
 
 skinparam Shadowing false
