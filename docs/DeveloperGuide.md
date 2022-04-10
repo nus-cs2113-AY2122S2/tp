@@ -724,13 +724,29 @@ This section includes instructions to test SplitLah manually.
 > These instructions only provide a starting point for testers to work on; testers are free to do more _exploratory_ testing.
 
 ### Overview
-* Launch and Shutdown
-* Session Testing
-* Activity Testing
-* Group Testing
-* Storage Testing
+* [Launch and Shutdown](#launch-and-shutdown)
+* [Session Testing](#session-testing)
+* [Activity Testing](#activity-testing)
+* [Group Testing](#group-testing)
+* [Storage Testing](#storage-testing)
 
 ### Launch and Shutdown
+<hr>
+
+#### Initial Launch
+1. Ensure that Java 11 or above is installed.
+2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
+3. Copy the file to the folder you wish to use as a home folder for SplitLah.
+4. Open a terminal and set the working directory to the home folder.
+5. Start SplitLah by executing `java -jar splitlah.jar` in the terminal.
+6. When SplitLah has successfully launched a welcome message should appear.
+   For the first launch, SplitLah should mention that no save files were found and loaded.
+
+#### Shutting Down
+1. When SplitLah is awaiting user input, enter `exit` to terminate the application.
+2. A farewell message should be printed as the SplitLah terminates.
+
+<hr>
 
 ### Session Testing
 <hr>
@@ -797,14 +813,64 @@ Test Scenario 1: A session has been created with a unique identifier of 1, named
 
 #### Settling a Session
 > For details on the usage of `session /summary` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#settling-all-transactions-for-a-session-session-summary).
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application. 
+* Test Command: `session /summary /sid 1` <br>
+   Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+1. Test Command: `session /summary`<br>
+   Expected: An error message should be printed, indicating that the `/sid` delimiter is missing from the input.
+2. Test Command: `session /summary /sid`<br>
+   Expected: An error message should be printed, indicating that an argument following the `/sid` delimiter is missing from the input.
+3. Test Command: `session /summary /sid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+4. Test Command: `session /summary /sid 2`<br>
+   Expected: An error message should be printed, indicating that a session with the specified session unique identifier was not found.
+5. Test Command: `session /summary /sid 1`<br>
+   Expected: A summary indicating the transactions that have to be made to settle all debts of the session with a 
+   session unique identifier of `1` should be printed.
 <hr>
 
 #### Viewing a Session
 > For details on the usage of `session /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-session--session-view)
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `session /view /sid 1` <br>
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+1. Test Command: `session /view`<br>
+   Expected: An error message should be printed, indicating that the `/sid` delimiter is missing from the input.
+2. Test Command: `session /view /sid`<br>
+   Expected: An error message should be printed, indicating that an argument following the `/sid` delimiter is missing from the input.
+3. Test Command: `session /view /sid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+4. Test Command: `session /view /sid 2`<br>
+   Expected: An error message should be printed, indicating that a session with the specified session unique identifier was not found.
+5. Test Command: `session /view /sid 1`<br>
+   Expected: The full details of the session with a session unique identifier of `1` should be printed.
 <hr>
 
 #### Listing all Sessions
 > For details on the usage of `session /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-sessions-session-list)
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `session /list` <br>
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: At least 1 session exists in the application.
+* Test Command: `session /list`<br>
+  Expected: A table summarising the details of all existing sessions should be printed.
+
 <hr>
 
 ### Activity Testing
