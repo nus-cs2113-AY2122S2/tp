@@ -110,4 +110,30 @@ public class BorrowRecord {
                 + System.lineSeparator();
         return output;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true; // short circuit if same object
+        }
+        // instanceof handles nulls
+        if (other instanceof BorrowRecord) {
+            BorrowRecord otherItem = ((BorrowRecord) other);
+            return this.startDate.equals(otherItem.startDate)
+                    && this.endDate.equals(otherItem.endDate)
+                    && this.borrowerName.equals(otherItem.borrowerName);
+        }
+        return false;
+    }
+
+    public static BorrowRecord copyBorrowRecord(BorrowRecord borrowRecord) {
+        int quantity = borrowRecord.getQuantity();
+        LocalDate startDate = borrowRecord.getStartDate();
+        LocalDate endDate = borrowRecord.getEndDate();
+        String borrowerName = borrowRecord.getBorrowerName();
+        boolean isReturned = borrowRecord.getReturnStatus();
+        BorrowRecord copiedRecord = new BorrowRecord(quantity, startDate, endDate, borrowerName);
+        copiedRecord.setReturnStatus(isReturned);
+        return copiedRecord;
+    }
 }

@@ -16,7 +16,9 @@ public class ParserStubs {
     public static final String PAPERCUP_NAME = "Paper Cup";
     public static final String PAPERCUP_QUANTITY = "25";
     public static final String PAPERCUP_SETQUANTITY = "23";
+    public static final int PAPERCUP_SETQUANTITY_INT = 23;
     public static final String PAPERCUP_SETRELATIVEQUANTITY = "2";
+    public static final int PAPERCUP_SETRELATIVEQUANTITY_INT = 2;
     public static final String PAPERCUP_DESCRIPTION = "25ml cups";
     public static final String ITEM_INDEX = "1";
     public static final String BORROW_START_DATE_STR = "2022-03-21";
@@ -32,14 +34,19 @@ public class ParserStubs {
     public static final DescCommand ZEROINDEX_DESCCOMMAND = new DescCommand(0);
     public static final EditCommand ZEROINDEX_EDITCOMMAND_QUANTITYONLY = new EditCommand(0,
             Optional.empty(),
-            Optional.of(23),
+            Optional.of(PAPERCUP_SETQUANTITY_INT),
             Optional.empty(),
             Optional.empty());
     public static final EditCommand ZEROINDEX_EDITCOMMAND_NEGATIVERELATIVEQUANTITY = new EditCommand(0,
             Optional.empty(),
-            Optional.of(2),
+            Optional.of(PAPERCUP_SETRELATIVEQUANTITY_INT),
             Optional.empty(),
             Optional.of(false));
+    public static final EditCommand ZEROINDEX_EDITCOMMAND_NAMEDESC_MISSINGQUANTITY = new EditCommand(0,
+            Optional.of(PAPERCUP_NAME),
+            Optional.empty(),
+            Optional.of(PAPERCUP_DESCRIPTION),
+            Optional.empty());
     public static final SearchCommand SEARCHCOMMAND_NAMEONLY = new SearchCommand(
             Optional.of(PAPERCUP_NAME), Optional.empty());
     public static final SearchCommand SEARCHCOMMAND_DESCRIPTIONONLY = new SearchCommand(

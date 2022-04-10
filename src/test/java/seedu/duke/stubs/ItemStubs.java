@@ -1,9 +1,12 @@
 package seedu.duke.stubs;
 
+import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.Item;
+import seedu.duke.exceptions.InvMgrException;
 
 public class ItemStubs {
 
+    // Items without any borrow records
     public static final String PENCIL_NAME = "Pencil";
     public static final int PENCIL_QUANTITY = 3;
     public static final String PENCIL_DESCRIPTION = "Drawing";
@@ -24,17 +27,27 @@ public class ItemStubs {
     public static final Item ITEM_PAPER_A4_15 = generateItem(PAPER_NAME, PAPER_QUANTITY_15, A4_PAPER_DESCRIPTION);
     public static final Item ITEM_PAPER_A5_15 = generateItem(PAPER_NAME, PAPER_QUANTITY_15, A5_PAPER_DESCRIPTION);
 
-
-    public static final String HDMI_CABLE_NAME = "HDMI Cable";
-    public static final int HDMI_CABLE_QUANTITY = 2;
-    public static final String HDMI_CABLE_DESCRIPTION = "For connecting displays";
-    public static final Item ITEM_HDMI = generateItem(HDMI_CABLE_NAME, HDMI_CABLE_QUANTITY, HDMI_CABLE_DESCRIPTION);
-
     public static final String WHITEBOARD_NAME = "Whiteboard";
     public static final int WHITEBOARD_QUANTITY = 1;
     public static final String WHITEBOARD_DESCRIPTION = "To draw on";
     public static final Item ITEM_WHITEBOARD = generateItem(WHITEBOARD_NAME, WHITEBOARD_QUANTITY,
             WHITEBOARD_DESCRIPTION);
+
+    // Items with past records
+    public static final String HDMI_CABLE_NAME = "HDMI Cable";
+    public static final int HDMI_CABLE_QUANTITY = 2;
+    public static final String HDMI_CABLE_DESCRIPTION = "For connecting displays";
+    public static final Item ITEM_HDMI_CABLE = attachRecord(
+            generateItem(HDMI_CABLE_NAME, HDMI_CABLE_QUANTITY, HDMI_CABLE_DESCRIPTION),
+            BorrowRecordStubs.FIXED_RECORD);
+
+    // Items with past records
+    public static final String DVI_CABLE_NAME = "DVI Cable";
+    public static final int DVI_CABLE_QUANTITY = 2;
+    public static final String DVI_CABLE_DESCRIPTION = "For connecting displays";
+    public static final Item ITEM_DVI_CABLE = attachRecord(
+            generateItem(DVI_CABLE_NAME, DVI_CABLE_QUANTITY, DVI_CABLE_DESCRIPTION),
+            BorrowRecordStubs.FIXED_RECORD);
 
     /**
      * Generate an {@code Item}.
@@ -45,5 +58,15 @@ public class ItemStubs {
      */
     private static Item generateItem(String name, int quantity, String description) {
         return new Item(name, quantity, description);
+    }
+
+    private static Item attachRecord(Item item, BorrowRecord record) {
+        try {
+            item.addBorrowRecord(record);
+            return item;
+        } catch (InvMgrException e) {
+            // fail silently
+            return null;
+        }
     }
 }

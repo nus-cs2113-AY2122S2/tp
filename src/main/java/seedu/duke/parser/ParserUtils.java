@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class ParserUtils {
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -67,9 +69,8 @@ public class ParserUtils {
      * @throws InvMgrException if the given string representation of date does not follow YYYY-MM-DD
      */
     public static LocalDate parseDate(String dateStr) throws InvMgrException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            LocalDate date = LocalDate.parse(dateStr, formatter);
+            LocalDate date = LocalDate.parse(dateStr, DATE_FORMAT);
             return date;
         } catch (DateTimeParseException e) {
             throw new InvMgrException(Messages.INVALID_DATE_FORMAT);

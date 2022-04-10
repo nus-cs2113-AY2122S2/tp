@@ -22,6 +22,9 @@ public class Messages {
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would be negative! "
             + "Your command has been terminated; no changes were made.";
+    public static final String OVERFLOW_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
+            + "would overflow! (too large) "
+            + "Your command has been terminated; no changes were made.";
     public static final String MISSING_ITEM_NUMBER_MESSAGE = "Sorry, you haven't entered an item number. "
             + "Please enter an item number!";
     public static final String INVALID_ITEM_NUMBER_MESSAGE = "Sorry, you haven't entered a valid item number. "

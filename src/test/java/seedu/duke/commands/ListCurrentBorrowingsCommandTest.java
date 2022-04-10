@@ -2,10 +2,9 @@ package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.stubs.BorrowRecordStubs;
-import seedu.duke.stubs.CommandStubs;
+import seedu.duke.stubs.ItemListStubs;
 import seedu.duke.ui.Ui;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 public class ListCurrentBorrowingsCommandTest {
@@ -19,7 +18,7 @@ public class ListCurrentBorrowingsCommandTest {
         Ui ui = new Ui();
         Optional<String> borrowerName = Optional.ofNullable(null);
         ListCurrentBorrowingsCommand c = new ListCurrentBorrowingsCommand(borrowerName);
-        c.execute(CommandStubs.TEST_ITEM_LIST_WITH_RECORDS, ui);
+        c.execute(ItemListStubs.TEST_ITEM_LIST_WITH_RECORDS, ui);
     }
 
     /**
@@ -31,6 +30,6 @@ public class ListCurrentBorrowingsCommandTest {
         Ui ui = new Ui();
         Optional<String> borrowerName = Optional.ofNullable(BorrowRecordStubs.PRESENTRECORD_A_NAME);
         ListCurrentBorrowingsCommand c = new ListCurrentBorrowingsCommand(borrowerName);
-        c.execute(CommandStubs.TEST_ITEM_LIST_WITH_RECORDS, ui);
+        c.execute(ItemListStubs.TEST_ITEM_LIST_WITH_RECORDS, ui);
     }
 }

@@ -2,8 +2,10 @@ package seedu.duke.stubs;
 
 import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.BorrowStatus;
+import seedu.duke.parser.ParserUtils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class BorrowRecordStubs {
 
@@ -67,5 +69,15 @@ public class BorrowRecordStubs {
             PASTRECORD_B_STARTDATE,
             PASTRECORD_B_ENDDATE,
             PASTRECORD_B_NAME);
+
+    public static final LocalDate FIXED_STARTDATE = LocalDate.parse(
+            "2019-04-01", ParserUtils.DATE_FORMAT);
+    public static final LocalDate FIXED_ENDDATE = LocalDate.parse(
+            "2019-04-02", ParserUtils.DATE_FORMAT);
+    public static final String FIXED_NAME = "Storage Test";
+    public static final BorrowRecord FIXED_RECORD = new BorrowRecord(1,
+            FIXED_STARTDATE,
+            FIXED_ENDDATE,
+            FIXED_NAME);
 
 }
