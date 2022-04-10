@@ -42,7 +42,7 @@ public class Response {
         System.out.println(count++ + ". mark [Project Index] [Todo Index]");
         System.out.println(count++ + ". listprojects/listproject");
         System.out.println(count++ + ". addlanguage [Project Index] [Language]");
-        System.out.println(count++ + ". listlanguages [Project Name]");
+        System.out.println(count++ + ". listlanguages [Project Index]");
         System.out.println(count++ + ". view [Project Index]");
         System.out.println(count++ + ". exit");
     }

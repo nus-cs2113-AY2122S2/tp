@@ -279,6 +279,6 @@ Please note that the file name should not be changed.
 | add todo deadline   | `tododeadline [project_index] [todo_index] [deadline]` |
 | view a project      | `view [project_index]`                                 |
 | addlanguage	      | `addlanguage [project_index] [language]`               |
-| listlanguages	      | `listlanguages`                                        |
+| listlanguages	      | `listlanguages [project_index]`                        |
 | help                | `help`                                                 |
 | Exit                | `exit`                                                 |
