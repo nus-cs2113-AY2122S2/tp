@@ -275,7 +275,7 @@ public class AddCommandInputTests {
      *
      * @param amountAsInt Integer amount of the income.
      * @param inputCategory Source of income.
-     * @throws MindMyMoneyException
+     * @throws MindMyMoneyException when the parameters are invalid.
      */
     public static void testIncomeParameters(int amountAsInt, String inputCategory) throws MindMyMoneyException {
         testIncomeAmount(amountAsInt);
