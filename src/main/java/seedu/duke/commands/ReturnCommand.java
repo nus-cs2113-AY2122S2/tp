@@ -73,8 +73,8 @@ public class ReturnCommand extends Command {
         ArrayList<BorrowRecord> itemBorrowRecords = returnedItem.getBorrowRecords();
         for (BorrowRecord record : itemBorrowRecords) {
             boolean isOverdue = (record.getBorrowStatus() == BorrowStatus.PAST) && (record.getReturnStatus() == false);
-            boolean isOutstanding = (record.getBorrowStatus() == BorrowStatus.PRESENT) &&
-                    (record.getReturnStatus() == false);
+            boolean isOutstanding = (record.getBorrowStatus() == BorrowStatus.PRESENT)
+                    && (record.getReturnStatus() == false);
             if (isOutstanding || isOverdue) {
                 record.setReturnStatus(true);
                 record.setEndDate();
