@@ -11,10 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeleteRecordTest {
-    Family family;
-    DeleteRecordCommand deleteIn;
-    DeleteRecordCommand deleteOut;
-
     protected static final String INVALID_UID_MSG =
             "Unknown error is detected from 'Empty string after `/u`', please check again.";
     protected static final String INVALID_GROUPINX_ERROR_MSG =
@@ -22,7 +18,12 @@ public class DeleteRecordTest {
     protected static final String INVALID_RECINX_MSG1 =
             "Unknown error is detected from 'Invalid income index `3`', please check again.";
     protected static final String INVALID_RECINX_MSG2 =
-            "Unknown error is detected from 'Invalid income index `0`', please check again.";
+            "Unknown error is detected from 'Invalid expenditure index `0`', please check again.";
+
+    Family family;
+    DeleteRecordCommand deleteIn;
+    DeleteRecordCommand deleteOut;
+
     private void initialize() throws PlanITariumException {
         family = new Family();
         AddPersonCommand add = new AddPersonCommand(CommandsForTesting.ADDPERSON, family);

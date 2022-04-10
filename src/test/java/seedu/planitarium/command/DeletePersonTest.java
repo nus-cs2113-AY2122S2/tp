@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeletePersonTest {
     protected static final String INVALID_UID_MSG =
-            "Unknown error is detected from 'Invalid category index `2`', please check again.";
+            "Unknown error is detected from 'Invalid user index `2`', please check again.";
     protected static final String EMPTY_GROUPINX_ERROR_MSG =
             "Unknown error is detected from 'Empty string after `/g`', please check again.";
 

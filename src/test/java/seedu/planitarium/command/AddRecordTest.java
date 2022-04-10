@@ -10,8 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddRecordTest {
+    protected static final String INVALID_DES_MSG =
+            "Unknown error is detected from 'Empty string after `/d`', please check again.";
     protected static final String INVALID_UID_MSG =
-            "Unknown error is detected from 'Invalid category index `-1`', please check again.";
+            "Unknown error is detected from 'Invalid user index `-1`', please check again.";
     protected static final String INVALID_IMONEY_MSG =
             "Unknown error is detected from 'Empty string after `/i`', please check again.";
     protected static final String INVALID_IMONEY_MSG2 =
@@ -78,23 +80,35 @@ public class AddRecordTest {
     }
 
     @Test
-    void addExpend_invalidCat_fail() {
+    void addPerson_invalidGroupInx_fail() {
         try {
-            initialize();
-            addRec = new AddRecordCommand(CommandsForTesting.ADDEXPEND3, family);
+            addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME5, family);
         } catch (PlanITariumException e) {
-            assertEquals(e.toString(), INVALID_CAT_MSG);
+            assertEquals(e.toString(), INVALID_GROUPINX_ERROR_MSG);
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    void addPerson_invalidGroupInx_fail() {
+    void find_invalidDes_fail() {
         try {
-            addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME5, family);
+            initialize();
+            addIn = new AddRecordCommand(CommandsForTesting.ADDINCOME6, family);
         } catch (PlanITariumException e) {
-            assertEquals(e.toString(), INVALID_GROUPINX_ERROR_MSG);
+            assertEquals(e.toString(), INVALID_DES_MSG);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void find_invalidCatInx_fail() {
+        try {
+            initialize();
+            addOut = new AddRecordCommand(CommandsForTesting.ADDEXPEND3, family);
+        } catch (PlanITariumException e) {
+            assertEquals(e.toString(), INVALID_CAT_MSG);
         } catch (Exception e) {
             fail();
         }
