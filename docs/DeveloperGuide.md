@@ -855,6 +855,14 @@ Test Scenario 2: There is a group named GroupTest1 currently stored in the appli
 > For details on the usage of `group /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-group-group-delete).
 <hr>
 
+Test Scenario 1: There is a group with unique identifier of 1 stored in the application. <br>
+1. Test Command: `group /delete /gid 1`<br>
+   Expected: A success message should be printed, indicating the group has been deleted.
+2. Test Command: `group /delete /gid 2`<br>
+   Expected: An error message should be printed, indicating the specified group unique identifier cannot be found.
+3. Test Command; `group /delete /gid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
+
 #### Editing a Group
 > For details on the usage of `group /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-group-group-edit).
 <hr>
