@@ -14,11 +14,12 @@ Given below are my contributions to the project.
 
 - **New Feature:** Added the Expense Tracker module for AlloNUS
     - What it does:
-        - Allows the user to better track their expenses by adding expense records to a list.
-          Each record details the Date, Amount, Category and Remarks of the expense, allowing users to look back
-          at how much they have spent over time.
-        - Allows users to manage said list by giving options to delete, edit and look for records containing
-          specified keywords.
+      - `add`, `rm`, `list`,`edit`, and `find`
+          - Allows the user to better track their expenses by adding expense records to a list.
+            Each record details the Date, Amount, Category and Remarks of the expense, allowing users to look back
+            at how much they have spent over time.
+          - Allows users to manage said list by giving options to delete, edit and look for records containing
+            specified keywords.
     - Justification:
         - The features above allows user to keep track of their expenses in a systematic way without the need of
           remembering it manually.
@@ -61,4 +62,4 @@ Given below are my contributions to the project.
       [#137](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/137),
       [#138](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/138), 
       [#150](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/150)
-
+ 
