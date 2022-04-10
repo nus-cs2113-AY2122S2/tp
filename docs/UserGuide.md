@@ -81,8 +81,19 @@ Prints all projects in the list with their names and project deadlines
 
 Format: `listprojects` or `listproject`
 
-* The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.  
+* The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.
+* Note that these two commands will lead to the **same** output. The reason why we set 2 command for one function is that we consider some users might forget to print s when they use this command.
 
+#### Example of usage
+```
+listprojects
+```
+
+#### Example of output
+```
+Here are all current project(s) in your list:
+[1] cs2113 (17/03/2022)
+```
 ---
 ### Add todo to a project: `todo`
 Adds a todo task with description to a project
