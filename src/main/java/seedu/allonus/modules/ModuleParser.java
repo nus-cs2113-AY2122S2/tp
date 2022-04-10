@@ -117,23 +117,23 @@ public class ModuleParser {
 
             return new Module(module, category, day, time);
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, LOGGER_WRONG_ADD_FORMAT);
+            logger.log(Level.INFO, LOGGER_WRONG_ADD_FORMAT);
             printMessage(ADD_WRONG_FORMAT_MESSAGE + System.lineSeparator() + ADD_SAMPLE_FORMAT_MESSAGE);
             return null;
         } catch (ModuleDayException e) {
-            logger.log(Level.WARNING, LOGGER_MISSING_DAY_IN_ADD);
+            logger.log(Level.INFO, LOGGER_MISSING_DAY_IN_ADD);
             printMessage(e.getMessage());
             return null;
         } catch (ModuleCategoryException e) {
             printMessage(e.getMessage());
-            logger.log(Level.WARNING, LOGGER_MISSING_CAT_IN_ADD);
+            logger.log(Level.INFO, LOGGER_MISSING_CAT_IN_ADD);
             return null;
         } catch (ModuleTimeException e) {
-            logger.log(Level.WARNING, LOGGER_MISSING_TIME_IN_ADD);
+            logger.log(Level.INFO, LOGGER_MISSING_TIME_IN_ADD);
             printMessage(e.getMessage());
             return null;
         } catch (ModuleCodeException e) {
-            logger.log(Level.WARNING, LOGGER_MISSING_CODE_IN_ADD);
+            logger.log(Level.INFO, LOGGER_MISSING_CODE_IN_ADD);
             printMessage(e.getMessage());
             return null;
         }

@@ -251,14 +251,14 @@ public class StudyManager {
                 performDelete(moduleIndex);
             }
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, LOGGER_WRONG_INDEX_DELETE);
+            logger.log(Level.INFO, LOGGER_WRONG_INDEX_DELETE);
             if (modulesList.size() == 0) {
                 printMessageWithDivider(DELETE_NO_MODULES_ERROR);
             } else {
                 printListSizeErrorMessage();
             }
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, LOGGER_NO_INDEX_DELETE);
+            logger.log(Level.INFO, LOGGER_NO_INDEX_DELETE);
             printMessageWithDivider(DELETE_NO_INDEX_ERROR);
         }
 
@@ -291,14 +291,14 @@ public class StudyManager {
                 editModuleRunner(ui, moduleIndex);
             }
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, LOGGER_WRONG_EDIT_INDEX);
+            logger.log(Level.INFO, LOGGER_WRONG_EDIT_INDEX);
             if (modulesList.size() == 0) {
                 printMessageWithDivider(EDIT_NO_MODULES_ERROR);
             } else {
                 printListSizeErrorMessage();
             }
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, LOGGER_NO_EDIT_INDEX);
+            logger.log(Level.INFO, LOGGER_NO_EDIT_INDEX);
             printMessageWithDivider(EDIT_NO_INDEX_ERROR);
         }
     }
@@ -438,7 +438,7 @@ public class StudyManager {
                 listMatches(matches);
             }
         } catch (InvalidFindInputException e) {
-            logger.log(Level.WARNING, LOGGER_NO_FIND_QUERY);
+            logger.log(Level.INFO, LOGGER_NO_FIND_QUERY);
             printMessageWithDivider(e.getMessage());
         }
     }
