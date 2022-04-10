@@ -52,14 +52,10 @@ public class CheckRoomByLevelCommand extends Command {
         if (!isValidLevel) {
             throw new InvalidLevelException();
         }
-        printRoom(level, roomList, assignmentMap);
-    }
-
-    private void printRoom(int level, RoomList roomList, AssignmentMap assignmentMap) {
-        System.out.println(TABLE_HEADER);
+        ui.printTableHeader();
         for (Room room : roomList.getRoomList()) {
             if (room.getLevel() == level) {
-                System.out.println(room.toString()
+                System.out.println(room
                         + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
                 );
             }
