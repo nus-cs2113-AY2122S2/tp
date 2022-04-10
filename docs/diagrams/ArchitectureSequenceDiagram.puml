@@ -27,6 +27,12 @@ note over Parser : Parser component is\nan abstraction for the\n**Parser** and *
 [-> Main : "add /g 2\n /n Alice"
 
 activate Main
+
+Main -> UI : printHoriLine()
+activate UI
+UI --> Main
+deactivate UI
+
 Main -> Commands : getCommand(\n      "add /g 2\n        /n Alice")
 
 activate Commands
@@ -44,11 +50,6 @@ deactivate Commands2
 
 Commands --> Main : :AddPerson\n      Command
 deactivate Commands
-
-Main -> UI : printHoriLine()
-activate UI
-UI --> Main
-deactivate UI
 
 Main -> Commands2 : execute()
 activate Commands2
