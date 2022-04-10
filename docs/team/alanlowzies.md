@@ -14,57 +14,54 @@ A detailed report of my code contributions to the tP can be found in the [tP Cod
 hosted by the module coordinators of CS2113T.
 
 A summary of my code contributions are as follows:
-- Wrote most of the `FileManager` API, which allows WerkIt! to read and write application data
-into text files stored on the user's local filesystem 
-([Developer Guide](../DeveloperGuide.md#file-management)). 
-- Implemented the functionality for users to create a new workout 
-([User Guide](../UserGuide.md#create-a-workout-workout-new) | [Developer Guide](../DeveloperGuide.md#create-new-workout)).
-- Wrote most of the `UI` API, which contains UI-related elements, including WerkIt!'s banner logo and response messages.
-- Wrote most of the `WerkIt` API, which contains the code to start up WerkIt!, load its components, load saved file data
-  (if any), and finally receive and process user inputs until the user exits the program.
-- Wrote parts the `Parser` API, which parses user inputs into the appropriate `Command` class types as well
-  as check for invalid characters in the user inputs ([Developer Guide](../DeveloperGuide.md#parsing-user-input-and-getting-the-right-command)).
-- Implemented the HashMap data structure in the `WorkoutList` API to allow `PlanList` to reference
-  workouts created by the user ([Developer Guide](../DeveloperGuide.md#design-considerations-for-creating-a-new-workout)).
-- Wrote the `LogHandler` API, which allows the various components in WerkIt! to log into a file
-  stored in the user's local filesystem ([Developer Guide](../DeveloperGuide.md#about-the-loghandler-class)).
-- Wrote the `Command` abstract class, which is a template class that sets out the main structure of all types
-  of commands in WerkIt! (e.g. `WorkoutCommand`, `ExerciseCommand`, etc.)
-- Wrote most of the `WorkoutCommand` API, which contains a workout-related command that the user has requested
+1. Wrote most of the `FileManager` API, which allows WerkIt! to read and write application data
+   into text files stored on the user's local filesystem. 
+2. Implemented the functionality for users to create a new workout.
+3. Wrote most of the `UI` API, which contains UI-related elements, including WerkIt!'s banner logo and response messages.
+4. Wrote most of the `WerkIt` API, which contains the code to start up WerkIt!, load saved file data
+   (if any), and receive and process user inputs.
+5. Wrote parts the `Parser` API to parse user inputs into the appropriate `Command` class types and check for invalid 
+   characters in the user inputs.
+6. Implemented the HashMap data structure in the `WorkoutList` API to allow `PlanList` to reference
+   workouts created by the user.
+7. Wrote the `LogHandler` API, which allows the various components in WerkIt! to log into a file
+  stored in the user's local filesystem.
+8. Wrote the `Command` abstract class, which is a template class that sets out the main structure of all types
+  of commands in WerkIt! (e.g. `WorkoutCommand`, `ExerciseCommand`, etc.).
+9. Wrote most of the `WorkoutCommand` API, which contains a workout-related command that the user has requested
   WerkIt! to carry out.
-- Wrote some of the exception APIs for WerkIt!, including `InvalidWorkoutException`, `InvalidExerciseException`, and
+10. Wrote some exception APIs for WerkIt!, including `InvalidWorkoutException`, `InvalidExerciseException`, and
   `UnknownFileException`.
-- Contributed to the `ExerciseList` API, which is mainly done by my team member Haofeng, by adding
+11. Contributed to the `ExerciseList` API, which is mainly done by my team member Haofeng, by adding
   additional functionality to the API such as populating the `exercise.txt` file with default exercises. The exercises
   were thought of by Haofeng :)
-- Wrote JUnit test cases for WerkIt! APIs including (but not limited to) `WorkoutCommand`, `FileManager`, `Parser`, etc.
-- Wrote JavaDocs for the classes and methods that I have created.
-- Created skeleton codes and packages for the project.
+12. Wrote JUnit test cases for WerkIt! APIs including (but not limited to) `WorkoutCommand`, `FileManager`, `Parser`, etc.
+13. Wrote JavaDocs for the classes and methods that I have created.
 
 
 ### Enhancements Implemented
-- (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.
-  This was done as the original MD quote blocks were hard to spot and thus readers may miss such messages. Hence, the
+1. (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.
+  The original MD quote blocks were hard to spot and thus readers may miss such messages. Hence, the
   custom boxes were created to make them more conspicuous.
-  - An example of the custom CSS boxes can be found in the ['Notations Used In This Guide'](../UserGuide.md#notations-used-in-this-guide)
+    - An example of the custom CSS boxes can be found in the ['Notations Used In This Guide'](../UserGuide.md#notations-used-in-this-guide)
   section of the user guide.
-- (Developer and User Guides) Inserted 'buttons' throughout the guides to allow users to click and navigate back to the
+2. (Developer and User Guides) Inserted 'buttons' throughout the guides to allow users to click and navigate back to the
   guides' tables of contents for easier navigation in our documentations. 
-  - I tried to utilise JavaScript for a floating back-to-top button, but due to the time constraints and the need to
+    - I tried to utilise JavaScript for a floating back-to-top button, but due to the time constraints and the need to
     fully understand the structure of the webpage theme that we're using on GitHub Pages, I decided to
     use simple HTML hyperlink buttons with some CSS styling instead.
-  - Click [here](../images/ppp/alanlowzies/BackToToCDemo.gif) for a GIF demonstration of the enhancement.
+    - Click [here](../images/ppp/alanlowzies/BackToToCDemo.gif) for a GIF demonstration of the enhancement.
 
 ### Contributions to the User Guide (UG)
-- Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
-- Wrote the informational section on [WerkIt!'s local storage structure](../UserGuide.md#werkits-local-storage-information).
-- Wrote the [Quick Start Guide](../UserGuide.md#quick-start-guide) section, which guides the user on the necessary
+1. Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
+2. Wrote the informational section on [WerkIt!'s local storage structure](../UserGuide.md#werkits-local-storage-information).
+3. Wrote the [Quick Start Guide](../UserGuide.md#quick-start-guide) section, which guides the user on the necessary
 prerequisites to download and the steps to get it running on the user's computer.
-  - Includes a list of recommended OSes, their versions, and the terminals to use for each OS.
-- Wrote the [frequently asked questions](../UserGuide.md#frequently-asked-questions-faq) section.
+   - Includes a list of recommended OSes, their versions, and the terminals to use for each OS.
+4. Wrote the [frequently asked questions](../UserGuide.md#frequently-asked-questions-faq) section.
 
 ### Contributions to the Developer Guide (DG)
-- Wrote the following contributions to the ['Implementation'](../DeveloperGuide.md#implementation) section:
+1. Wrote the following contributions to the ['Implementation'](../DeveloperGuide.md#implementation) section:
     - How WerkIt! repeatedly waits and receives user inputs ([link to part](../DeveloperGuide.md#getting-user-input-continuously)).
     - How WerkIt! parses user inputs and determines the appropriate procedures to take 
       ([link to part](../DeveloperGuide.md#parsing-user-input-and-getting-the-right-command)).
@@ -72,19 +69,20 @@ prerequisites to download and the steps to get it running on the user's computer
       ([link to part](../DeveloperGuide.md#create-new-workout)).
       - Includes sequence diagrams to visualise the process.
     - Most of the section on [File Management](../DeveloperGuide.md#file-management).
-- Wrote the 'Design - Storage Component' section ([link to part](../DeveloperGuide.md#storage-component)).
-- Wrote the instructions on 
+2. Wrote the 'Design - Storage Component' section ([link to part](../DeveloperGuide.md#storage-component)).
+3. Wrote the instructions on 
 [how to set up the development environment](../DeveloperGuide.md#setting-up-your-development-environment).
-- Wrote the following ['Instructions for Manual Testing'](../DeveloperGuide.md#instructions-for-manual-testing):
-  - [Creating workouts](../DeveloperGuide.md#creating-a-new-workout)
-  - [Data saving](../DeveloperGuide.md#test-on-data-saving)
-- Wrote the [target user profile](../DeveloperGuide.md#target-user-profile) of WerkIt!
-- Wrote the [value proposition](../DeveloperGuide.md#value-proposition) of WerkIt!
-- Wrote part of the [glossary](../DeveloperGuide.md#glossary)
-- Wrote the [table of contents](../DeveloperGuide.md#table-of-contents).
+4. Wrote the following ['Instructions for Manual Testing'](../DeveloperGuide.md#instructions-for-manual-testing):
+   - [Creating workouts](../DeveloperGuide.md#creating-a-new-workout)
+   - [Data saving](../DeveloperGuide.md#test-on-data-saving)
+5. Wrote the [target user profile](../DeveloperGuide.md#target-user-profile), 
+   [value proposition](../DeveloperGuide.md#value-proposition), and parts of the 
+   [glossary](../DeveloperGuide.md#glossary) of WerkIt!.
+6. Wrote the [table of contents](../DeveloperGuide.md#table-of-contents).
 
 ### Contributions to Team-Based Tasks
 - Set up the team's organisation and repository on GitHub
+- Created skeleton codes and packages for the project.
 - Set up and maintained the team's Google Drive folder, which includes the team's project notebook
 and other documents for the co-requsuite module CS2101 Effective Communication for Computing Professionals.
 - Helped to maintain the team's GitHub repository issue tracker.
@@ -122,5 +120,3 @@ Overall, this module has given me a greater appreciation for the 'art' of softwa
 about the large tech companies out there having to manage and maintain much more complex software and systems among 
 large groups of people who are from technical (e.g. software developers) and non-technical (e.g. marketing managers) 
 backgrounds.
-
-<div class="button-container"><a class="button" href="#overview">Back to Top</a></div>
