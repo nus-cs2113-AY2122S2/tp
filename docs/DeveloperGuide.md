@@ -853,6 +853,21 @@ Test Scenario 3: The session or activity that was indicated does not exist. <br>
 
 #### Viewing a Group
 > For details on the usage of `group /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-group-group-view).
+
+**Test Cases:**
+
+Test Scenario 1: There is a group that can be viewed. <br>
+1. Test Command: `group /view /gid 1` <br>
+   Expected: A message is printed displaying the full details of the group.
+
+Test Scenario 2: There are currently groups stored. <br>
+1. Test Command: `group /view /gid 1` <br>
+   Expected: An error message is printed indicating that there are currently no groups stored.
+
+Test Scenario 3: The group specified does not exist. <br>
+1. Test Command: `group /view /gid 2` <br>
+   Expected: An error message is printed indicating that the group specified was not found.
+
 <hr>
 
 #### Listing all Groups
