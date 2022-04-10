@@ -9,3 +9,4 @@
 | ![](https://via.placeholder.com/100.png?text=Photo) |  Braden   | [Github](https://github.com/BradenTeo) | [Portfolio](https://github.com/AY2122S2-CS2113T-T09-1/tp/blob/master/docs/team/BradenTeo.md) |
 | ![](https://via.placeholder.com/100.png?text=Photo) |  Jun Lim  |   [Github](https://github.com/jltha)   |   [Portfolio](https://github.com/AY2122S2-CS2113T-T09-1/tp/blob/master/docs/team/jltha.md)   |
 
+
