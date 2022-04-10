@@ -1,21 +1,66 @@
 package seedu.duke;
 
+import seedu.command.Command;
+import seedu.command.CommandResult;
+import seedu.equipment.DuplicateSerialNumberException;
+import seedu.equipment.EquipmentManager;
+import seedu.parser.Parser;
+import seedu.ui.TextUi;
+import seedu.storage.Storage;
+
 import java.util.Scanner;
 
 public class Duke {
+    private TextUi ui;
+    private static EquipmentManager equipmentInventory = new EquipmentManager();
+    private static Storage storage = new Storage();
+    private static int commandCount = 0;
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+        Duke duke = new Duke();
 
+        duke.start();
+        storage.loadData(equipmentInventory);
+        duke.runCommandLoop();
+        storage.saveData(equipmentInventory);
+    }
+
+    /**
+     * Initialises the required objects and loads up the data from storage and show welcome message to user.
+     */
+    private void start() {
+        ui = new TextUi();
+        ui.showWelcomeMessage();
+    }
+
+    private void runCommandLoop() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        Parser parser = new Parser();
+        String userCommand;
+        Command command;
+        CommandResult result;
+        do {
+            userCommand = in.nextLine();
+            command = parser.parseCommand(userCommand);
+            result = executeCommand(command);
+            ui.showResultToUser(result);
+            commandCount++;
+            if (commandCount % 5 == 0) {
+                storage.saveData(equipmentInventory);
+                System.out.print(System.lineSeparator());
+                System.out.println("Auto-saved");
+            }
+        } while (!userCommand.equals("bye"));
+    }
+
+    private CommandResult executeCommand(Command command) {
+        command.setEquipmentManager(equipmentInventory);
+        command.setStorage(storage);
+        CommandResult result = command.execute();
+
+        return result;
     }
 }
