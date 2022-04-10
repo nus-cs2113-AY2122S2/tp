@@ -105,7 +105,7 @@ public class Activity implements Serializable, Comparable<Activity> {
             Person person = involvedPersonList.getPerson(i - ZERO_INDEXING_OFFSET);
             String personName = person.getName();
             Double cost = person.getActivityCostOwed(activityId);
-            String costOwed = String.format("%.2f", cost);
+            String costOwed = "$" + String.format("%.2f", cost);
             summaryTable.addRow(index, personName, costOwed);
         }
         return summaryTable.toString();

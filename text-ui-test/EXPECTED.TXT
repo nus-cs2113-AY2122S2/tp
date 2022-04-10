@@ -118,8 +118,8 @@ Involved:
 -----------------------
 # | Name  | Cost Owed 
 -----------------------
-1 | alice | 10.00     
-2 | bob   | 10.00     
+1 | alice | $10.00    
+2 | bob   | $10.00    
 =======================
 > The activity was created successfully.
 Activity Id #2 --
@@ -133,9 +133,9 @@ Involved:
 -------------------------
 # | Name    | Cost Owed 
 -------------------------
-1 | ivan    | 10.00     
-2 | mike    | 20.00     
-3 | charlie | 30.00     
+1 | ivan    | $10.00    
+2 | mike    | $20.00    
+3 | charlie | $30.00    
 =========================
 > The activity was created successfully.
 Activity Id #3 --
@@ -149,7 +149,7 @@ Involved:
 ----------------------
 # | Name | Cost Owed 
 ----------------------
-1 | ivan | 50.00     
+1 | ivan | $50.00    
 ======================
 > Summary (Session Id #1) --
 Name: Class outing
@@ -175,9 +175,9 @@ Involved:
 -------------------------
 # | Name    | Cost Owed 
 -------------------------
-1 | charlie | 9.00      
-2 | ivan    | 8.00      
-3 | mike    | 7.00      
+1 | charlie | $9.00     
+2 | ivan    | $8.00     
+3 | mike    | $7.00     
 =========================
 > ------------------------------------
 # | Activities   | Cost   | Payer   

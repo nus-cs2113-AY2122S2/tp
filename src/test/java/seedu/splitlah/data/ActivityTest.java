@@ -38,9 +38,9 @@ class ActivityTest {
                     + "-------------------------\n"
                     + "# | Name    | Cost Owed \n"
                     + "-------------------------\n"
-                    + "1 | Alice   | 5.89      \n"
-                    + "2 | Bob     | 5.89      \n"
-                    + "3 | Charlie | 5.89      \n"
+                    + "1 | Alice   | $5.89     \n"
+                    + "2 | Bob     | $5.89     \n"
+                    + "3 | Charlie | $5.89     \n"
                     + "=========================";
 
     /**
@@ -68,7 +68,7 @@ class ActivityTest {
      * Checks if the correct activity unique identifier is returned.
      */
     @Test
-    void getActivityId_activityOne_correctActivityId() throws InvalidDataException {
+    void getActivityId_activityOne_correctActivityId() {
         assertEquals(1, activityOne.getActivityId());
     }
 
