@@ -161,9 +161,7 @@ public class ListCommand extends Command {
             throw new MindMyMoneyException(
                     "Your expenditure list is currently empty! Please add some expenditures to your list first");
         } else {
-//            System.out.print(PrintStrings.LINE);
             System.out.print(expenditureListToString());
-//            System.out.println(PrintStrings.LINE);
         }
     }
 
