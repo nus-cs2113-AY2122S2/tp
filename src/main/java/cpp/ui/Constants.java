@@ -8,6 +8,8 @@ import java.util.Set;
  * Stores Magic Constants.
  */
 public class Constants {
+    public static final String FILEPATH = "./src/data/projectList.txt";
+    public static final String DIRECTORYPATH = "./src/data";
     public static final String SEPARATOR = "____________________________________________________________";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n";
     public static final String NO_COMMAND_ENTERED = "No command is entered.";
@@ -20,6 +22,7 @@ public class Constants {
     public static final String EMPTY_LANGUAGES = "Unsuccessful. The language name cannot be empty.\n";
     public static final String UNKNOWN_COMMAND = "Unknown Command.";
     public static final String INVALID_INDEX = "The entered index is invalid.\n";
+    public static final String MESSAGE_NO_DEADLINE = "No deadline specified";
     public static final String MESSAGE_INVALID_TODO_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
             + "todo [project_index] [todo_description]";

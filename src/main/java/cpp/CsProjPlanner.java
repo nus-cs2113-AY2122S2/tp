@@ -29,7 +29,7 @@ public class CsProjPlanner {
         String input;
         Scanner in = new Scanner(System.in);
 
-        Response.displayWelcome(); //display welcome message
+        Response.displayWelcome();
 
         input = in.nextLine();
 
@@ -49,6 +49,7 @@ public class CsProjPlanner {
             Response.displayNext();
             input = in.nextLine(); //fetch next input from the user
         }
+
         //automatically save data here
         Storage.save(projectList);
         Response.displayExit();
