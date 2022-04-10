@@ -13,15 +13,15 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
 * [Quick start](#quick-start)
 * [Features](#features)
   * [Unit Good Commands](#unit-good-commands)
-    * [Adding a Unit Good:](#adding-a-unit-good-add-ug)
-    * [Removing a Unit Good:](#removing-a-unit-good-remove-ug)
-    * [Listing Unit Goods:](#listing-unit-goods-list-ug)
+    * [Adding a Unit Good](#adding-a-unit-good-add-ug)
+    * [Removing a Unit Good](#removing-a-unit-good-remove-ug)
+    * [Listing Unit Goods](#listing-unit-goods-list-ug)
   * [Good Commands](#good-commands)
-    * [Adding quantity of a Good:](#adding-quantity-of-a-good-add-g)
-    * [Removing quantity of a Good:](#removing-quantity-of-a-good-remove-g)
-    * [Listing available Goods:](#listing-available-goods-list-g)
-    * [Viewing a Good:](#viewing-a-good-view-g)
-    * [Finding a Good:](#finding-a-good-find) 
+    * [Adding quantity of a Good](#adding-quantity-of-a-good-add-g)
+    * [Removing quantity of a Good](#removing-quantity-of-a-good-remove-g)
+    * [Listing available Goods](#listing-available-goods-list-g)
+    * [Viewing a Good](#viewing-a-good-view-g)
+    * [Finding a Good](#finding-a-good-find) 
   * [Order Commands](#order-commands)
     * [Adding an Order](#adding-an-order-add-o)
     * [Removing an Order](#removing-an-order-remove-o)
@@ -94,7 +94,7 @@ Note:
 * If the size input is not either [SMALL / MEDIUM / LARGE], the capacity would be set to the default MEDIUM
 
 Example of adding a unit good:<br/>
-Adding a Unit Good of SKU being WC1, with name Wooden Chair, description as Chair made of oak from Europe, and a size of Medium.<br/>
+Adding a Unit Good with SKU being WC1, with name Wooden Chair, description as Chair made of oak from Europe, and a size of Medium<br/>
 
 `add ug/ sku/WC1 n/Wooden Chair d/Chair made of oak from Europe size/Medium`
 
@@ -116,17 +116,18 @@ Note:
 anymore
 
 Example of removing a unit good:<br/>
-Removing a Unit Good of sku WC1.<br/>
+Removing a Unit Good of SKU WC1<br/>
 
 `remove ug/ sku/WC1`
 
 Expected Output
 ```
+Unit Good with SKU: WC1 has been removed from warehouse
 Another command?
 ```
 
 ### Listing Unit Goods `list ug/`
-Listing all Unit Goods present in the warehouse.
+Listing all Unit Goods already added to the warehouse.
 
 Format: `list ug/`
 
@@ -136,32 +137,33 @@ Example of listing Unit Goods:<br/>
 Expected Output
 ```
 List of unit goods (in no order):
-WC1 - Wooden Chair (chair made of oak from europe)
-WC2 - Wooden Table (Table made of oak from Italy)
+	WC1 - Wooden Chair (chair made of oak from europe)
+	WC2 - Wooden Table (Table made of oak from Italy)
 Another command?
 ```
 ### ***Good Commands***
 A Good is the actual good that is currently in the warehouse inventory. It will also have the same information as the Unit Good previously added into Simplst with the same SKU.
-In addition to the details in the Unit Good. A Good will also contain:
-- quantity
+In addition to the details in the Unit Good, a Good will also contain:
+- Quantity of good available in the warehouse
 
 ### Adding quantity of a Good `add g/`
-Adding the quantity of a Unit Good which is set to default to be 0.
+Adding a quantity of a Unit Good to be available at the warehouse.
 
 Format: `add g/ sku/[SKU] qty/[QUANTITY]`
 
 Example of adding quantity to a specific Unit Good:<br/>
-Adding 30 Wooden Chairs. <br/>
+Adding 30 of a good with its SKU being WC1<br/>
 
 `add g/ sku/WC1 qty/30`
 
 Expected Output
 ```
+30 of Good with SKU: WC1 added to warehouse
 Another command?
 ```
 
 ### Removing quantity of a Good `remove g/`
-Removing the quantity of a Unit Good from its previous value.
+Removing a quantity of a Unit Good available at the warehouse.
 
 Format: `remove g/ sku/[SKU] qty/[QUANTITY]`
 
@@ -169,12 +171,13 @@ Note:
 * Used when certain units of the good has been shipped out and thus quantity has to be decreased.
 
 Example of removing quantity of a specific Unit Good:<br/>
-Removing 10 Wooden Chairs. <br/>
+Removing 10 of a good with its SKU being WC1<br/>
 
 `remove g/ sku/WC1 qty/10`
 
 Expected Output
 ```
+10 of Good with SKU: WC1 has been removed from warehouse
 Another command?
 ```
 
@@ -192,17 +195,19 @@ Note:
 
 Expected Output
 ```
-WC1 - Wooden Chairs (chair made of oak from Europe) [Qty: 30]
+List of available goods with its quantity:
+	WC1 - Wooden Chairs (chair made of oak from Europe) [Qty: 30]
 Another command?
 ```
 
 ### Viewing a good `view g/`
-View a good in the warehouse using its SKU. This will show the details of the specified good.
+View a good in the warehouse using its SKU. This will show more details of the specified good.
 
 Format: `view g/ sku/[SKU]`
 
 Example of finding a Good:<br/>
-Viewing details of the Wooden Chair with sku: WC1
+Viewing details of the Wooden Chair with SKU: WC1
+
 `view g/ sku/WC1`
 
 Expected Output
@@ -212,9 +217,10 @@ Unit size of good: MEDIUM
 Another command?
 ```
 
-If there are no good in the warehouse with such a name, Simplst will inform you accordingly.
-Example of trying to find spoon in the warehouse.
-`find n/spoon`
+If there are no Unit Good in the warehouse with such SKU, Simplst will inform you accordingly.
+Example of trying to view an SKU not in the warehouse.
+
+`view g/ sku/fakeSKU`
 
 Expected Output
 ```
@@ -223,23 +229,27 @@ Another command?
 ```
 
 ### Finding a Good `find`
-Finding a Good in the warehouse through the name of the Unit Good. After finding a good, it will show the details of the good found.
+Finding Goods in the warehouse through the name of the Unit Good. After finding the goods, it will show the details of all the goods found.
 
 Format: `find n/[NAME]`
 
 Example of finding a Good:<br/>
-Finding if Wooden Chair exists in the warehouse.
-`find n/Chair`
+Finding if any Unit Good with "Wooden" in its name exists in the warehouse.
+
+`find n/Wooden`
 
 Expected Output
 ```
 WC1 - Wooden Chair (chair made of oak from Europe) [Qty: 30]
 Unit size of good: MEDIUM
+WC2 - Wooden Table (Table made of oak from Italy) [Qty: 0]
+Unit size of good: LARGE
 Another command?
 ```
 
-If there are no good in the warehouse with such a name, Simplst will inform you accordingly.
+If there are no Unit Goods in the warehouse with its name containing any part of the input, Simplst will inform you accordingly.
 Example of trying to find spoon in the warehouse.
+
 `find n/spoon`
 
 Expected Output
@@ -261,7 +271,8 @@ Adding a new order to be tracked in the warehouse.
 
 Format: `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`
 
-Notes: * Order ID (oid) must be an unique positive number
+Notes: 
+* Order ID (oid) must be an unique non-negative number (i.e 0, 1, 2... etc)
 
 Example of adding an order for Danny Phantom who lives at Amity Park:<br/>
 
@@ -269,7 +280,7 @@ Example of adding an order for Danny Phantom who lives at Amity Park:<br/>
 
 Expected Output
 ```
-Order 1 has been added to the warehouse
+Order 1 added to the warehouse
 Another command?
 ```
 
@@ -284,7 +295,7 @@ Example of removing order 1:<br/>
 
 Expected Output
 ```
-Order 1 has been removed.
+Order 1 has been removed
 Another command?
 ```
 
@@ -304,7 +315,7 @@ Example of listing all Orders (This will continue the above example [here](#addi
 Expected Output
 ```
 List of orders:
-	1: 1 - Danny Phantom (Amity Park) : completed
+	1 - Danny Phantom (Amity Park) : completed
 Another command?
 ```
 
@@ -370,7 +381,7 @@ Another command?
 
 If the order in the warehouse with the specified order ID are already fulfilled, Simplst will inform you accordingly.
 Example of trying to fulfill order ID 1 which is already fulfilled.
-`view o/ oid/1`
+`fulfill oid/1`
 
 Expected Output
 ```
@@ -382,12 +393,12 @@ Another command?
 An orderline is the goods required by the order. It is the same as a Good with the same SKU, and contains the quantity required to fulfill the good.
 
 In addition to the details in a Good. An orderline will also contain:
-- quantity of Good required to fulfill the order                                                        |
+- Quantity of Good required to fulfill the order
 
 ### Adding an Orderline `add og/`
-This will add an orderline to a specified order.
+This will add an orderline to a specific order.
 
-Format: `add og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_NEEDED_FOR_ORDER]`
+Format: `add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED_FOR_ORDER]`
 
 Example of adding an orderline to order ID 1 for 10 Wooden Chairs:<br/>
 
@@ -401,9 +412,9 @@ Another command?
 ```
 
 ### Removing a quantity of an Orderline `remove og/`
-Removing the quantity required in an orderline.
+Removing the quantity required in an orderline from a specific order.
 
-Format: `remove og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_TO_REMOVE]`
+Format: `remove og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_TO_REMOVE]`
 
 Example of removing 1 Wooden Chair orderline from order ID 1:<br/>
 
@@ -416,7 +427,7 @@ Another command?
 ```
 
 ### Listing Orderlines in an Order `list og/`
-Listing the orderlines in a specified order.
+Listing the orderlines from a specific order.
 
 Format: `list og/ oid/[ORDER_ID]`
 
