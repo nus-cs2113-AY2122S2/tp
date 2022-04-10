@@ -34,7 +34,6 @@ public class ItemList {
      * the user wants to add, the item would not be added into the item list.
      *
      * @param item The item that the user wants to add into the item list.
-     * @return true if there is no items within the item list which has the same name as that passed into the function
      */
     public void addItemToList(Item item) {
         listOfItems.add(item);

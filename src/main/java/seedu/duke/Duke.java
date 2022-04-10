@@ -16,13 +16,13 @@ public class Duke {
      */
 
     private void writeListsToFile(Command command, ListContainer listContainer) throws IOException {
-        if (command instanceof AddItemCommand ) {
+        if (command instanceof AddItemCommand) {
             AddItemCommand addItemCommand = (AddItemCommand) command;
             addItemCommand.writeItemListToFile(listContainer);
-        } else if (command instanceof UpdateItemPaxCommand ) {
+        } else if (command instanceof UpdateItemPaxCommand) {
             UpdateItemPaxCommand updateItemPaxCommand = (UpdateItemPaxCommand) command;
             updateItemPaxCommand.writeItemListToFile(listContainer);
-        } else if (command instanceof UpdateItemNameCommand ) {
+        } else if (command instanceof UpdateItemNameCommand) {
             UpdateItemNameCommand updateItemNameCommand = (UpdateItemNameCommand) command;
             updateItemNameCommand.writeItemListToFile(listContainer);
         } else if (command instanceof DeleteItemCommand) {
@@ -52,11 +52,11 @@ public class Duke {
                 userInput = ui.readUserInput();
                 command = commandParser.parse(userInput);
                 command.execute(listContainer, ui);
-                writeListsToFile(command,listContainer);
+                writeListsToFile(command, listContainer);
                 shouldExitProgram = command.isExit();
             } catch (HotelLiteManagerException e) {
                 ui.printErrorMessage(e);
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
