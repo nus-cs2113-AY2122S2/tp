@@ -14,9 +14,6 @@ package data {
         + addModule(m: Module): Module
         + removeModule(moduleCode: String): Module
         + getModule(moduleCode: String): Module
-        + getGeneralTasks(): Module
-        + initialiseGeneralTasksFromTaskList(list: ArrayList<Task>): void
-        + isModuleExists(moduleCode: String): boolean
     }
 
     class Module {
@@ -26,9 +23,6 @@ package data {
         - modularCredit: int
         --
         + addTask(task: Task): void
-        + printModuleTaskList(): String
-        + printModuleTaskListWithTag(): String
-        + toString(): String
     }
 
     class TaskList {
@@ -37,9 +31,6 @@ package data {
         + removeTask(index: int): Task
         + addTag(tagDescription: String, index: int): Task
         + deleteTag(tagDescription: String, index: int): Task
-        + getAllTasks(indent: String): String
-        + getTasksWithTag(indent: String, tag: String): String
-        + size(): int
     }
 
     class Task {
@@ -63,7 +54,7 @@ package data {
 
 note top of data
 Note:
-Some getters/setters have been
+Some methods have been
 omitted from this class diagram.
 end note
 

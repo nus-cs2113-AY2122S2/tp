@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -15,6 +16,7 @@ import com.google.gson.GsonBuilder;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
 import seedu.duke.data.Task;
+import seedu.duke.exceptions.UnknownException;
 
 /**
  * A data access object managing the loading and saving of TaskList instances.
@@ -42,8 +44,10 @@ public class TaskListStorage extends ListStorage<Task> {
             }
             return arrayList;
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new ReadException();
+        } catch (Exception e) {
+            throw new UnknownException(e.toString());
         }
     }
 

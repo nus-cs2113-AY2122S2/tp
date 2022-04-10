@@ -43,6 +43,6 @@ public class NumberConstants {
     public static final int ZEROTH_INDEX = 0;
     public static final int FIRST_INDEX = 1;
     public static final int SECOND_INDEX = 2;
-    public static final int THIRD_INDEX = 3;
     public static final int FOURTH_INDEX = 4;
+    public static final int MINIMUM_INDEX = 0;
 }

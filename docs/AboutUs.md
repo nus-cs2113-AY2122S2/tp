@@ -7,4 +7,3 @@
 | ![](https://via.placeholder.com/100.png?text=Photo) | Ng Yong Sheng |   [Github](https://github.com/ngys117)    |  [Portfolio](team/ngys117.md)  |
 | ![](https://via.placeholder.com/100.png?text=Photo) |  Choo Yi Kai  |  [Github](https://github.com/chooyikai/)  | [Portfolio](team/chooyikai.md) |
 | ![](https://via.placeholder.com/100.png?text=Photo) | Bang Hee Kit  | [Github](https://github.com/heekit73098/) |  [Portfolio](team/heekit73098.md)  |
-

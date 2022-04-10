@@ -10,6 +10,8 @@ import seedu.duke.exceptions.MissingNumberException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.MissingCompulsoryParameterException;
+import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -38,11 +40,19 @@ public class DeleteParser extends Parser {
     }
 
     /**
-     * Determines the error that the user made in its command based on the command type.
-     * @throws ModHappyException based on the command type.
+     * Determines the error that the user made in its command based on the compulsory parameters.
+     * It will first determine the object type the command is trying to delete,
+     * and then check for errors within each specific command.
+     * @throws MissingNumberException if the task number is missing for a del task command
+     * @throws MissingCompulsoryParameterException if the module code is missing for a del mod command
+     * @throws InvalidNumberException if the task number is not in a positive integer format for a del task command
+     * @throws InvalidCompulsoryParameterException if the module code is not made up of all word characters
+     *                                             for a del mod command
+     * @throws UnknownCommandException if the object type specified is not mod or task
      */
     @Override
-    public void determineError() throws ModHappyException {
+    public void determineError() throws MissingNumberException, MissingCompulsoryParameterException,
+            InvalidNumberException, InvalidCompulsoryParameterException, UnknownCommandException {
         String type = userInput.split(SPACE)[ZEROTH_INDEX];
         switch (type) {
         case TASK:
@@ -52,11 +62,17 @@ public class DeleteParser extends Parser {
             determineErrorForModule();
             break;
         default:
-            throw new InvalidCompulsoryParameterException();
+            throw new UnknownCommandException();
         }
     }
 
-    public void determineErrorForTask() throws ModHappyException {
+    /**
+     * Determines the error of the del tag command based on the compulsory parameters.
+     * It will check if the task number is present and if it is in a positive integer format.
+     * @throws MissingNumberException if the task number is missing
+     * @throws InvalidNumberException if the task number is not in a positive integer format
+     */
+    public void determineErrorForTask() throws MissingNumberException, InvalidNumberException {
         String taskNumber;
         try {
             taskNumber = userInput.split(SPACE)[FIRST_INDEX];
@@ -68,7 +84,14 @@ public class DeleteParser extends Parser {
         }
     }
 
-    public void determineErrorForModule() throws ModHappyException {
+    /**
+     * Determines the error for a del mod command, based on its compulsory parameters.
+     * It will check if the module code is present and if it is made up only of word characters.
+     * @throws MissingCompulsoryParameterException if the module code is missing
+     * @throws InvalidCompulsoryParameterException if the module code is not made up of word characters only
+     */
+    public void determineErrorForModule() throws MissingCompulsoryParameterException,
+            InvalidCompulsoryParameterException {
         String moduleCode;
         try {
             moduleCode = userInput.split(SPACE)[FIRST_INDEX];
@@ -87,16 +110,12 @@ public class DeleteParser extends Parser {
         String taskNumberString = parsedArguments.get(TASK_NUMBER);
         String taskModuleString = parsedArguments.get(TASK_MODULE);
         String moduleCode = parsedArguments.get(MODULE_CODE);
+        checksForExcessArg();
         if (!Objects.isNull(moduleCode)) {
             return new DeleteCommand(moduleCode);
         }
         if (!Objects.isNull(taskNumberString)) {
-            int taskIndex;
-            try {
-                taskIndex = Integer.parseInt(taskNumberString) - 1;
-            } catch (NumberFormatException e) {
-                throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
-            }
+            int taskIndex = parseIndex(taskNumberString);
             return new DeleteCommand(taskIndex, taskModuleString);
         }
         throw new ModHappyException();

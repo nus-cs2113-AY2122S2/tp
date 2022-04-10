@@ -14,7 +14,6 @@ import static seedu.duke.util.Configuration.ConfigurationGroup.SHOW_COMPLETED_TA
 
 public class ConfigurationStorageTest {
 
-    private final String path = StringConstants.CONFIGURATION_TEST_PATH;
     private ConfigurationStorage configurationStorage;
     private Configuration configuration;
 
@@ -29,6 +28,7 @@ public class ConfigurationStorageTest {
         try {
             assertEquals("false", configuration.getConfigurationValue(SHOW_COMPLETED_TASKS));
             configuration.configurationGroupHashMap.put(SHOW_COMPLETED_TASKS, "true");
+            String path = StringConstants.CONFIGURATION_TEST_PATH;
             configurationStorage.writeData(configuration, path);
             Configuration loadedConfiguration = configurationStorage.loadData(path);
             assertEquals(configuration.getConfigurationsReport(), loadedConfiguration.getConfigurationsReport());

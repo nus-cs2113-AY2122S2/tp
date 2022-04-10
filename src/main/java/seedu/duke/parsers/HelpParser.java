@@ -5,7 +5,6 @@ import java.util.HashMap;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.exceptions.GeneralParseException;
-import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
@@ -39,6 +38,7 @@ public class HelpParser extends Parser {
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);
         String command = parsedArguments.get(COMMAND_AS_HELP_ARGUMENT);
+        checksForExcessArg();
         return new HelpCommand(command);
     }
 }

@@ -37,7 +37,7 @@ public class OptionCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) {
         // enter "option" to check the list of configuration setting
         if (Objects.isNull(configurationGroup)) {
             return new CommandResult(OPTION_CHECK_CONFIGURATIONS + StringConstants.LS

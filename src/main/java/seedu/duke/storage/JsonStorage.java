@@ -2,15 +2,17 @@ package seedu.duke.storage;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
 import seedu.duke.exceptions.FileCreateFailException;
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.UnknownException;
 import seedu.duke.exceptions.WriteException;
 
-public abstract class JsonStorage<T extends Object> implements Storage<T> {
+public abstract class JsonStorage<T> implements Storage<T> {
     /**
      * Writes a ArrayList with elements of type ModHappyT to a json file.
      * @param path json file path
@@ -37,18 +39,19 @@ public abstract class JsonStorage<T extends Object> implements Storage<T> {
      * @param path json file path
      * @throws ModHappyException if the file could not be created
      */
-    @Override
     public void createTargetFile(String path) throws ModHappyException {
         File targetFile = new File(path);
         if (targetFile.exists()) {
             return;
         }
         try {
+            // the result is ignored intentionally
             targetFile.getParentFile().mkdirs();
             targetFile.createNewFile();
-            return;
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new FileCreateFailException();
+        } catch (Exception e) {
+            throw new UnknownException(e.toString());
         }
     }
 

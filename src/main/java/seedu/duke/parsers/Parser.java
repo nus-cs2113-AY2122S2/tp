@@ -7,15 +7,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.duke.commands.Command;
-import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.InvalidFlagException;
 import seedu.duke.exceptions.InvalidModuleGradeException;
-import seedu.duke.exceptions.ExcessArgumentException;
 import seedu.duke.exceptions.InvalidTagOperationException;
-
-import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.ExcessArgumentException;
+import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.NumberConstants;
+
 
 /**
  * Represents a Parser that parse a {@code Command}.
@@ -41,9 +41,7 @@ public abstract class Parser {
     protected static final String INVALID_TASK_DES_FLAG = StringConstants.INVALID_TASK_DES_FLAG;
     protected static final String INVALID_MOD_DES_FLAG = StringConstants.INVALID_MOD_DES_FLAG;
     protected static final String INVALID_TIME_FLAG = StringConstants.INVALID_TIME_FLAG;
-    protected static final String INVALID_MARK_FLAG = StringConstants.INVALID_MARK_FLAG;
     protected static final String INVALID_MODULE_GRADE = StringConstants.INVALID_MODULE_GRADE;
-    protected static final String INVALID_NUMBER = StringConstants.INVALID_NUMBER;
     protected static final String INVALID_TAG_COMMAND = StringConstants.INVALID_TAG_COMMAND;
 
     protected static final String SPACE = StringConstants.SPACE;
@@ -51,7 +49,6 @@ public abstract class Parser {
     protected static final String MODULE = StringConstants.MODULE_STR;
     protected static final String TASK_NAME_STR = StringConstants.TASK_NAME_STR;
     protected static final String TASK_NUMBER_STR = StringConstants.TASK_NUMBER_STR;
-    protected static final String MODULAR_CREDIT_STR = StringConstants.MODULAR_CREDIT_STR;
     protected static final String MODULE_CODE_STR = StringConstants.MODULE_CODE_STR;
     protected static final String MODULE_DESCRIPTION_STR = StringConstants.MODULE_DESCRIPTION_STR;
     protected static final String TASK_PARAMETER_STR = StringConstants.TASK_PARAMETER_STR;
@@ -60,6 +57,7 @@ public abstract class Parser {
     protected static final int FIRST_INDEX = NumberConstants.FIRST_INDEX;
     protected static final int SECOND_INDEX = NumberConstants.SECOND_INDEX;
     protected static final int FOURTH_INDEX = NumberConstants.FOURTH_INDEX;
+    protected static final int MINIMUM_INDEX = NumberConstants.MINIMUM_INDEX;
 
 
     protected String commandFormat;
@@ -105,10 +103,8 @@ public abstract class Parser {
     /**
      * Checks for strings that are parsed into groups based on commandFormat, but are essentially invalid.
      */
-    private void checkForInvalidStrings() throws ExcessArgumentException, InvalidFlagException,
-            InvalidModuleGradeException, InvalidNumberException, InvalidTagOperationException {
-        checksForExcessArg();
-        checksForInvalidMarkFlag();
+    private void checkForInvalidStrings() throws InvalidFlagException,
+            InvalidModuleGradeException, InvalidTagOperationException {
         checksForInvalidModFlag();
         checksForInvalidTaskName();
         checksForInvalidTaskDescriptionFlag();
@@ -182,16 +178,8 @@ public abstract class Parser {
         }
     }
 
-    private void checksForInvalidMarkFlag() throws InvalidFlagException {
-        if (groupNames.contains(INVALID_MARK_FLAG)) {
-            String invalidInput = parsedCommand.get(INVALID_MARK_FLAG);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidFlagException(invalidInput);
-            }
-        }
-    }
 
-    private void checksForExcessArg() throws ExcessArgumentException {
+    protected void checksForExcessArg() throws ExcessArgumentException {
         if (groupNames.contains(INVALID)) {
             String invalidInput = parsedCommand.get(INVALID);
             if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
@@ -200,4 +188,23 @@ public abstract class Parser {
         }
     }
 
+    /**
+     * Parses the task index from a string to an integer form.
+     * It will also check if the index is non-negative, throwing an exception if it is not.
+     * @param taskNumberString the string representation of the task number
+     * @return the zero-based index integer of the task number string
+     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
+     */
+    protected int parseIndex(String taskNumberString) throws InvalidNumberException {
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskNumberString) - 1;
+            if (taskIndex < MINIMUM_INDEX) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
+        }
+        return taskIndex;
+    }
 }

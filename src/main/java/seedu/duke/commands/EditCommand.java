@@ -46,8 +46,10 @@ public class EditCommand extends Command {
         this.changedParameter = description;
     }
 
+
     public EditCommand(String taskModule, int taskIndex, String description,
                        String taskEstimatedWorkingTime, String taskName) {
+
         this.taskModule = taskModule;
         this.taskIndex = taskIndex;
         if (!Objects.isNull(description)) {
@@ -114,15 +116,14 @@ public class EditCommand extends Command {
         TaskList taskList = targetModule.getTaskList();
         Task targetTask = taskList.getTask(taskIndex);
         String targetTaskName = targetTask.getTaskName();
-        if (taskParameter.equals(TASK_DESCRIPTION)) {
+        switch (taskParameter) {
+        case TASK_DESCRIPTION:
             targetTask.setTaskDescription(changedParameter);
-        } else if (taskParameter.equals(TASK_ESTIMATED_WORKING_TIME)) {
-            try {
-                targetTask.setWorkingTime(changedParameter);
-            } catch (ModHappyException e) {
-                throw e;
-            }
-        } else {
+            break;
+        case TASK_ESTIMATED_WORKING_TIME:
+            targetTask.setWorkingTime(changedParameter);
+            break;
+        default:
             targetTask.setTaskName(changedParameter);
         }
         if (isGeneralTask) {

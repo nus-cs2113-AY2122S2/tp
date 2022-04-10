@@ -16,7 +16,6 @@ public class StringConstants {
      */
     public static final String MESSAGE_HELLO = "Hello, welcome to Mod Happy!";
     public static final String MESSAGE_GOODBYE = "See you later!";
-    public static final String MESSAGE_INIT_FAILED = "Failed to start Mod Happy...";
 
     /**
      * For loading of data.
@@ -81,7 +80,6 @@ public class StringConstants {
     public static final String LIST_MESSAGE = "Ok! Here are the task(s) in your list:\n%s";
     public static final String EMPTY_LIST = "(empty)";
     public static final String HIDDEN_TASKS_COUNT = "--- %d completed task(s) hidden ---";
-    public static final String LIST_ARGUMENT = "listArgument";
 
     /**
      * For MarkCommand.
@@ -208,8 +206,12 @@ public class StringConstants {
             + "\nPlease try again. Accepted module grades are: A+, A, A-, B+, B, B-, C+, C, D+, D, F, CS, CU, S, U.";
     public static final String ERROR_INVALID_NUMBER = "\nInvalid number format for %s '%s'."
             + "\nPlease try again using a positive integer.";
+    public static final String ERROR_INVALID_MODULAR_CREDIT = "\nInvalid number format for modular credits '%s'."
+            + "\n(Accepted range: 0 to 20)";
     public static final String ERROR_MISSING_NUMBER = "\nMissing %s."
             + "\nPlease try again using a positive integer.";
+    public static final String ERROR_MISSING_MODULAR_CREDIT = "\nMissing modular credits."
+            + "\nPlease try again using a integer from 0 to 20.";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, the value \"%s\" is not supported for "
             + "configuration \"%s\".";
@@ -221,11 +223,12 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "\nSorry, you have 0 MCs counted towards your GPA ._."
             + "\nPlease add some modules or grades!";
-    public static final String ERROR_MODULAR_CREDITS_HELP = " (Accepted range: 0 to 20)";
     public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
     public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with module code \"%s\" found. "
             + "Aborting load...";
     public static final String ERROR_INVALID_MODULE = "Invalid module credits found (%s had %d MCs). Aborting load...";
+    public static final String ERROR_CATCH_UNKNOWN_EXCEPTION = "Oops, I caught an exception"
+            + "that I didn't figured out before 0_0\n%s";
 
 
     /**
@@ -247,10 +250,10 @@ public class StringConstants {
     public static final String MODULE_DESCRIPTION = "moduleDescription";
     public static final String MODULE_DESCRIPTION_STR = "module description";
     public static final String MODULAR_CREDIT = "modularCredit";
-    public static final String MODULAR_CREDIT_STR = "modular credits";
     public static final String MODULE_GRADE = "moduleGrade";
     public static final String MODULE_STR = "mod";
     public static final String FLAG = "flag";
+    public static final String MODULE_FLAG = "moduleFlag";
     public static final String CONFIGURATION_GROUP_WORD = "configurationGroupWord";
     public static final String NEW_VALUE = "newValue";
     public static final String COMPLETED_FLAG = "c";
@@ -259,16 +262,13 @@ public class StringConstants {
     public static final String TAG_NAME = "tagName";
     public static final String TAG_NAME_STR = "tag name";
     public static final String TAG_OPERATION = "tagOperation";
-    public static final String TAG_OPERATION_STR = "tag operation";
     public static final String INVALID = "invalid";
     public static final String INVALID_MOD_FLAG = "invalidModFlag";
     public static final String INVALID_TASK_NAME_FLAG = "invalidTaskNameFlag";
     public static final String INVALID_TASK_DES_FLAG = "invalidTaskDesFlag";
     public static final String INVALID_MOD_DES_FLAG = "invalidModDesFlag";
     public static final String INVALID_TIME_FLAG = "invalidTimeFlag";
-    public static final String INVALID_MARK_FLAG = "invalidMarkFlag";
     public static final String INVALID_MODULE_GRADE = "invalidModuleGrade";
-    public static final String INVALID_NUMBER = "invalidNumber";
     public static final String INVALID_TAG_COMMAND = "invalidTagCommand";
     public static final String COMMAND_WORD = "commandWord";
     public static final String EXIT_COMMAND_WORD = "exit";
@@ -289,16 +289,20 @@ public class StringConstants {
     /**
      * For regex constants.
      */
+    public static final String ANY_TEXT = ".*";
+    public static final String ANY_FLAG = "\\s+-\\w\\s+";
+    public static final String ANY_FLAG_NO_WHITESPACE = "-\\w";
     public static final String WORD_CHAR_ONLY = "\\w+";
     public static final String UNRESTRICTED_INT = "-?\\d+";
     public static final String POSITIVE_INT = "\\d+";
     public static final String TASK_PARAMETERS_FLAG = "\\s+(-d|-n|-t)\\s+";
     public static final String DESCRIPTION_FLAG = "\\s+-d\\s+";
-    public static final String QUOTED_UNRESTRICTED_STR = "\"[^\"]+\"";
+    public static final String QUOTED_UNRESTRICTED_STR = "\"[^\"]*\"";
     public static final String MODULE_GRADES_MATCH = "(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U)";
     public static final String MARK_COMMAND_FLAGS = "(c|u)";
     public static final String TAG_COMMAND_FLAGS = "(add|del)";
     public static final String TASK_MODULE_FLAG = " -m ";
+    public static final String ANY_FLAG_TRIMMED = "-\\w\\s+";
 
     /**
      * For grades.
@@ -327,15 +331,16 @@ public class StringConstants {
      */
     public static final String DURATION_GROUP_WORD = "duration";
     public static final String DURATION_UNIT_GROUP_WORD = "durationUnit";
-    public static final String TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE = "%d hours %d minutes";
-    public static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = "%d hours";
-    public static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = "%d minutes";
+    public static final String TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE = "%d hour(s) %d minute(s)";
+    public static final String TO_STRING_FORMAT_WITH_HOUR_ONLY = "%d hour(s)";
+    public static final String TO_STRING_FORMAT_WITH_MINUTE_ONLY = "%d minute(s)";
     public static final String DURATION_STRING_FORMAT = "(?<duration>[1-9]\\d*\\.?\\d*|0\\.\\d*[1-9])"
             + "\\s*(?<durationUnit>.*)";
 
     /**
      * General strings.
      */
+    public static final String EMPTY_STRING = "";
     public static final String INDENT = "    ";
     public static final String SPACE = " ";
     public static final String LS = System.lineSeparator();

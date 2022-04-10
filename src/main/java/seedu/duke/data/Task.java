@@ -20,24 +20,20 @@ public class Task {
     private String taskName;
     private String taskDescription;
     private TaskDuration workingTime;
-    private TaskParameters taskParameters;
-    private ArrayList<String> tags;
+    private final ArrayList<String> tags;
 
     public Task(String taskName, String taskDescription, String workingTime) throws ModHappyException {
-        try {
-            this.taskName = taskName;
-            this.taskDescription = taskDescription;
-            if (!Objects.isNull(workingTime)) {
-                this.workingTime = new TaskDuration(workingTime);
-            } else {
-                this.workingTime = null;
-            }
-            isTaskDone = false;
-            taskParameters = getTaskParameterStatus();
-            tags = new ArrayList<>();
-        } catch (ModHappyException e) {
-            throw e;
+
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        if (!Objects.isNull(workingTime)) {
+            this.workingTime = new TaskDuration(workingTime);
+        } else {
+            this.workingTime = null;
         }
+        isTaskDone = false;
+        tags = new ArrayList<>();
+
     }
 
     public ArrayList<String> getTagList() {
@@ -63,15 +59,10 @@ public class Task {
 
     public void setTaskDescription(String description) {
         taskDescription = description;
-        taskParameters = getTaskParameterStatus();
     }
 
     public void setWorkingTime(String workingTime) throws ModHappyException {
-        try {
-            this.workingTime = new TaskDuration(workingTime);
-        } catch (ModHappyException e) {
-            throw e;
-        }
+        this.workingTime = new TaskDuration(workingTime);
     }
 
     public void setTaskName(String taskName) {
@@ -115,6 +106,7 @@ public class Task {
     @Override
     public String toString() {
         String taskStatusString = isTaskDone ? ICON_COMPLETED : ICON_UNCOMPLETED;
+        TaskParameters taskParameters = getTaskParameterStatus();
         switch (taskParameters) {
         case DESCRIPTION_AND_WORKING_TIME:
             return String.format(TASK_STRING_WITH_DESC_WITH_TIME, taskStatusString, taskName,
