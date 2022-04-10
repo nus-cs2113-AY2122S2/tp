@@ -16,6 +16,15 @@ public class Duke {
      */
 
     private void writeListsToFile(Command command, ListContainer listContainer) throws IOException {
+        if (command instanceof AddItemCommand || command instanceof UpdateItemPaxCommand || command instanceof
+                UpdateItemNameCommand || command instanceof UpdateItemNameCommand || command instanceof
+                DeleteItemCommand) {
+            writeItemListsToFile(command, listContainer);
+        }
+    }
+
+
+    private void writeItemListsToFile(Command command, ListContainer listContainer) throws IOException {
         if (command instanceof AddItemCommand) {
             AddItemCommand addItemCommand = (AddItemCommand) command;
             addItemCommand.writeItemListToFile(listContainer);
