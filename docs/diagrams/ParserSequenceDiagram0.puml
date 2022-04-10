@@ -4,8 +4,8 @@ skinparam arrowColor #BLACK
 skinparam noteTextAlignment left
 
 group **sd**  Parser Component parse and validate
-Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
-Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
+Participant "<<class>>\nParser" as Parser LOGIC_COLOR
+Participant "<<class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 
 [-> Parser : parseCommandType(userInput:String)
 activate Parser
@@ -28,7 +28,8 @@ loop LOOP_COLOR for each XYZ term in command
     opt OPT_COLOR found no DELIMITER_XYZ
         UParser --> Parser : :MissingDelimiterException
         Parser -->[ : :MissingDelimiterException
-    else found too many DELIMITER_XYZ
+    end opt
+    opt OPT_COLOR found too many DELIMITER_XYZ
         UParser --> Parser : :DuplicateDelimiterException
         Parser -->[ : :DuplicateDelimiterException
     end opt

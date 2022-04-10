@@ -8,8 +8,7 @@ Package "Parser" as P {
     Class Exceptions LOGIC_COLOR_T2
 }
 
-package Commands as "**Commands**\n**Component**" {
-'Class HiddenModel as " " #TRANSPARENT
+package Commands as "**Commands**\n**Component**" COMMAND_COLOR_T2 {
 }
 
 
