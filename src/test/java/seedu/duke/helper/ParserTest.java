@@ -20,7 +20,7 @@ class ParserTest {
             fail("Should not be throwing exception!");
         }
     }
-
+     /*
     @Test
     void parseAddPatientInvalidParamTest() {
         String[] parameters = {"S1234567,JOHN,23,M,SINGAPORE,1999-01-01,2022-01-01",
@@ -39,6 +39,7 @@ class ParserTest {
             }
         }
     }
+    */
 
     @Test
     void parseAddDoctorTest() {
@@ -51,6 +52,7 @@ class ParserTest {
         }
     }
 
+    /*
     @Test
     void parseAddDoctorInvalidParamTest() {
         String[] parameters = {"S1234567,JOHN,23,M,SINGAPORE,1999-01-01,Paediatrics",
@@ -69,6 +71,7 @@ class ParserTest {
             }
         }
     }
+    */
 
     @Test
     void parseAddMedicineTest() {
@@ -81,6 +84,7 @@ class ParserTest {
         }
     }
 
+    /*
     @Test
     void parseAddMedicineInvalidParamTest() {
         String[] parameters = {"S123,Paracetamol1,500,2025-02-02,Headaches,100",
@@ -98,6 +102,7 @@ class ParserTest {
             }
         }
     }
+    */
 
     @Test
     void parseDeletePatientTest() {
@@ -290,6 +295,7 @@ class ParserTest {
         }
     }
 
+    /*
     @Test
     void parseEditMedicineInvalidParamTest() {
         String[] parameters = {"S123,Paracetamol1,500,2025-02-02,Headaches,100",
@@ -307,6 +313,7 @@ class ParserTest {
             }
         }
     }
+    */
 
     @Test
     void parseUpdateMedicineStockTest() {
