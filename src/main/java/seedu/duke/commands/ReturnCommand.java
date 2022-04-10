@@ -91,4 +91,16 @@ public class ReturnCommand extends Command {
             ui.showMessages(Messages.RETURN_ERROR_MESSAGE);
         }
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        ReturnCommand that = (ReturnCommand) object;
+        return itemIndex == that.itemIndex;
+    }
 }
