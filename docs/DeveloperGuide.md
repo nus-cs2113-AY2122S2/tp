@@ -56,13 +56,13 @@ Given below is a quick overview of main components and how they interact with ea
 
 `Commons` represents a collection of classes used by multiple other components. 
 
-The rest of the App consists of four other components.
+The rest of the App consists of five other components.
 
- 1. `UI`: The UI of the App. 
- 2. `Parser`: Creates the appropriate `Command` object.
- 3. `Command`: Executes user instructions.
- 4. `ItemList`: Holds the data of the application (`Item`) in memory. 
- 5. `Storage`: Reads data from, and writes data to, the storage medium.
+1. `UI`: The UI of the App. 
+2. `Data`: Holds the data of the application (`Item`) in memory.
+3. `Parser`: Creates the appropriate `Command` object.
+4. `Command`: Executes user instructions.
+5. `Storage`: Reads data from, and writes data to, the storage medium.
  
 #### Application Startup
 
@@ -73,8 +73,8 @@ The above diagram shows a sequence diagram of the program when it first starts u
 On startup, `InvMgr` does a setup by creating the required `Ui`, `Storage`, and `ItemList` objects.
 
 1. The `Ui` object is initialised.
-2. `load()` from `Storage` is called. This returns an `ArrayList<Item>` containing the appliaction data.
-3. The `ArrayList<Item>` from before is used to create the `ItemList` object. `ItemList` is a wrapper around a `List<Item>`.
+2. `load()` from `Storage` is called. This returns an `ArrayList<Item>` containing the application data.
+3. The `ArrayList<Item>` from before is used to create the `ItemList` object. `ItemList` is a wrapper around a `List<Item>`, and acts as the `Data` component of the application.
 
 #### Application runtime and exit
 
@@ -90,6 +90,12 @@ The above diagram shows a sequence diagram of the program when it is running.
 4. `InvMgr` calls upon the `execute()` method of the returned `Command` object .
 5. The loop stops when the user types `exit`.
 
+### Commons Component
+
+![stuff](todo)
+
+The above diagram todo...
+
 ### UI Component
 
 ![UiClassDiagram](img/UiClassDiagram.png)
@@ -101,7 +107,13 @@ The `UI` component
 - Reads in user inputs
 - Depends on the `Messages` and `InvMgrException` classes in the `Common` component. It displays messages stored in the `Messages` class and displays an error message whenever `InvMgrException` is invoked.
 
-### Parser Component
+### Data Component
+
+![stuff](todo)
+
+The above diagram todo...
+
+### Parser Components
 
 ![ParserClassDiagram](img/ParserClassDiagram.png)
 
@@ -126,22 +138,16 @@ The above diagram shows the class diagram for the `Command` component.
 The above diagram shows the class diagram for the `Storage` component.
 
 1. `Storage` has `save()` and `load()` methods. These are called by `InvMgr` when needed.
-2. `save(itemList)` writes the contents of an `itemList` to a file.
-3. `load(itemList)` loads a JSON file into an `itemList`.
-4. Gson is used to serialise and deserialise the `itemList` of type `ArrayList<Item>`.
+2. `Storage` uses the 3rd party library GSON through the `Gson` object to convert the `Data` component into JSON and vice-versa.
+3. `save(itemList)` which writes the contents of the `List` within the Data Component to the file at `dataPath`.
+4. `load(itemList)` loads a JSON file into the `Data` component.
 
 ## Implementation
-
-### Description Command
-![DescCommandSequenceDiagram](img/DescCommandSequenceDiagram.png)
-The following diagram shows the sequence diagram for retrieving the description of an item.
-
-For a user who is unaware of what an item is about, he/she can enter the command eg. `desc 2` command to extract the description for the second item in the inventory list. This command is interpreted by the `Parser` and a `DescCommand` is returned to `InvMgr`. `InvMgr` calls the execute command of `DescCommand` which retrieves the item's information from the `ItemList` and then outputs them into the `Ui` for the user to see.
 
 ### Add Command
 ![AddCommandSequenceDiagram](img/AddCommandSequenceDiagram.png)
 
-The following diagram shows the sequence diagram of the addition of an item.
+The above diagram shows the sequence diagram of the addition of an item.
 
 The user starts by typing an add command. The example used in the diagram above is the addition of an item with the name `Paper Cup`, quantity of `25` and description of `100ml paper cups`. The full command is `add n/Paper Cup q/25 d/100ml paper cups`.
 
@@ -152,10 +158,19 @@ The user starts by typing an add command. The example used in the diagram above 
 5. The `run()` method calls on the `execute()` function in the `AddCommand` which will add the generated item to the `ItemList` using its `addItem()` method.
 6. `AddCommand` will converse with `Ui` to show a message that the item has been added. In this case, the item to add will be printed as the name of the item, followed by " has been added!".
 
+### Description Command
+
+![DescCommandSequenceDiagram](img/DescCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram for retrieving the description of an item.
+
+For a user who is unaware of what an item is about, he/she can enter the command eg. `desc 2` command to extract the description for the second item in the inventory list. This command is interpreted by the `Parser` and a `DescCommand` is returned to `InvMgr`. `InvMgr` calls the execute command of `DescCommand` which retrieves the item's information from the `ItemList` and then outputs them into the `Ui` for the user to see.
+
+
 ### Delete Command
 ![DeleteCommandSequenceDiagram](img/DeleteCommandSequenceDiagram.png)
 
-The following diagram shows the sequence diagram of the addition of an item.
+The above diagram shows the sequence diagram of the addition of an item.
 
 The user starts by typing an add command. The example used in the diagram above is the addition of an item with the index `1`, based on the list when the user types the `list` command.
 
@@ -166,9 +181,10 @@ The user starts by typing an add command. The example used in the diagram above 
 5. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
 
 ### List Command
+
 ![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
 
-The following diagram shows the sequence diagram of the listing of items in `itemList`.
+The above diagram shows the sequence diagram of the listing of items in `itemList`.
 
 The user starts by typing a list command.
 
@@ -176,6 +192,18 @@ The user starts by typing a list command.
 2. `InvMgr` calls `execute(itemList, ui)` method in `ListCommand` object.
 3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line
    and numbers them.
+
+### Edit Command
+
+![tbd](todo)
+
+The above diagram todo
+
+### Search Command
+
+![tbd](todo)
+
+The above diagram todo
 
 ### Storage
 
@@ -213,6 +241,12 @@ The following diagram shows the sequence diagram illustrating how the data file 
 2. `storage` initialises `Gson()` as `gson`, a library used to serialize and deserialize JSON objects into their relevant Java objects.
 3. `storage` calls the `toJson(itemList)` method of `gson`. This returns a `String` named `serializedItems` which contains the JSON String representing `itemList`.
 4. `storage` then writes `serializedItems` to the file at `dataFile`.
+
+#### Extra diagrams regarding file read/write
+
+![todo](todo)
+
+The above diagram todo
 
 ## Product scope
 ### Target user profile
