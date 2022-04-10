@@ -217,6 +217,19 @@ Output:
 Bye, See you again!
 ```
 
+## Planned Features (Coming Soon!)
+
+In v3.0, we will add support to:
+1. Filter equipment by range for:
+   * Date
+   * Cost
+2. Introduce additional fields to
+   * Mark equipment as faulty/working
+   * Add comment for equipment
+3. Implement a booking system 
+   * Purpose: equipment can be earmarked for an associated event to avoid scheduling conflicts from double-booking
+
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
