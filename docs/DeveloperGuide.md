@@ -190,12 +190,12 @@ in user commands and interacts with the `ExpenseParser` class depending on what 
 `ExpenseTracker` class continues validating the inputs of the user before executing the user's commands.
 
 How the Expense Tracker component is used:
-1. From the Main Menu, if the user decides to run `goto m/Expense_Tracker`, the `ExpenseTracker` class takes over.
+1. From the Main Menu, if the user decides to run `goto Expense_Tracker`, the `ExpenseTracker` class takes over.
 2. The `expenseRunner()` method begins by taking in user inputs depending on the user's requirements. Some examples
 of valid commands include add, delete, list, edit and find.
 3. Depending on the user's input, the `ExpenseParser` class calls 
 `parseXYZExpense` where `XYZ` is a placeholder for the specific command name (eg. `parseDeleteExpense`).
-4. If the parsing is valid (i.e. user followed the structure of the command properly), the appropriate field values
+4. If the parsing is valid (i.e. user followed the format of the command properly), the appropriate field values
 are returned to the `ExpenseTracker` class.
 5. The `ExpenseTracker` class takes these fields and validates them depending on the type of command entered by the user
 in Step 2. (eg. if an `add` command is issued, the `ExpenseTracker` class checks if the Date is formatted properly)

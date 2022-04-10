@@ -166,7 +166,7 @@ respectively.
 - The AMOUNT field must be a valid number (integer/float) and must be non-negative.
 - '/' must not be the last character of a given field, even with trailing spaces.
 - The usage of '/' as a free text must be enclosed with white spaces, even as the first character.
-- Example: `r/Buffet / Alacarte meal`
+  - Example: `r/Buffet / Alacarte meal`
 
 Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
 
@@ -187,7 +187,7 @@ Added 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
 ```
 #### List out all expenses: `list`
 Lists out all currently tracked expenses in a list using the keyword `list`. Each entry shows
-its current index in the list, followed by the date, amount, category and any remarks for each expense 
+its current index in the list, followed by the date, amount, category and the remarks for each expense 
 made.
 
 Format: `list`
@@ -230,7 +230,7 @@ Here are the expenses you have made so far:
 Deleted entry: 2022-03-14 | $4.30 | Food | Chicken rice for lunch
 ```
 #### Editing an expense: `edit`
-Edits an existing expense in the list of expenses. Users may choose to `list` out the expenses first 
+Edits an existing expense record in the list of expenses. Users may choose to `list` out the expenses first 
 before editing to verify its index. After the record is extracted, users need to choose
 which field to edit in that record. After editing an expense
 record, the newly edited record will be shown to the user.
