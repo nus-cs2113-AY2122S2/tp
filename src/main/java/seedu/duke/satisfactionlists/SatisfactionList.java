@@ -97,4 +97,11 @@ public class SatisfactionList {
         double satisfactionAverage = (double) satisfactionSum / (double) getSize();
         return satisfactionAverage;
     }
+
+    /**
+     * Clears the list of satisfactions.
+     */
+    public void clearSatisfactionList() {
+        satisfactionList.clear();
+    }
 }

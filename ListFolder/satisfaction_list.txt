@@ -1,7 +1,5 @@
+george|2
 bob|3
-joe|4
-john|5
-susan|3
-alina|3
-thiti|2
-ryan|4
+ted|3
+ned|5
+chad|4
