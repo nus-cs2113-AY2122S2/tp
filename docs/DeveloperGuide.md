@@ -860,7 +860,7 @@ Test Scenario 1: There is a group that can be viewed. <br>
 1. Test Command: `group /view /gid 1` <br>
    Expected: A message is printed displaying the full details of the group.
 
-Test Scenario 2: There are currently groups stored. <br>
+Test Scenario 2: There are currently no groups stored. <br>
 1. Test Command: `group /view /gid 1` <br>
    Expected: An error message is printed indicating that there are currently no groups stored.
 
@@ -872,6 +872,17 @@ Test Scenario 3: The group specified does not exist. <br>
 
 #### Listing all Groups
 > For details on the usage of `group /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-groups-group-list).
+
+**Test Cases:**
+
+Test Scenario 1: There are groups stored. <br>
+1. Test Command: `group /list` <br>
+   Expected: A message is printed displaying the list of all the groups.
+
+Test Scenario 2: There are currently no groups stored. <br>
+1. Test Command: `group /list` <br>
+   Expected: An error message is printed indicating that there are currently no groups stored.
+
 <hr>
 
 ### Storage Testing
