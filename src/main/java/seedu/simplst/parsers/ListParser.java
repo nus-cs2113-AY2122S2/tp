@@ -11,7 +11,7 @@ public class ListParser extends CommandParser {
         super(warehouse);
     }
 
-    protected void init_extract_params() {
+    protected void initExtractParams() {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[uog]{1,2})/";
@@ -19,7 +19,7 @@ public class ListParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException {
+    protected void extractParams() throws WrongCommandException {
         if (matches.get("flag").equals("o")) {
             // list orders with flag "o/"
             this.warehouse.listOrders();

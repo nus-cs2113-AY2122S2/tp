@@ -17,18 +17,18 @@ public abstract class CommandParser {
         this.warehouse = warehouse;
     }
 
-    protected abstract void init_extract_params();
+    protected abstract void initExtractParams();
 
-    protected abstract void extract_params() throws
+    protected abstract void extractParams() throws
             WrongCommandException, NullException, InvalidFileException, InvalidObjectType;
     //    protected abstract void validate_params();   // They need implement their own validate commands
 
     public void parse(String userInput) throws
             WrongCommandException, NullException, InvalidFileException, InvalidObjectType {
         this.userInput = userInput;
-        this.init_extract_params();
+        this.initExtractParams();
         try {
-            this.extract_params();
+            this.extractParams();
         } catch (InvalidObjectType e1) {
             return;
         }

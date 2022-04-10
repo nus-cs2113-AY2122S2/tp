@@ -15,7 +15,8 @@ public class AddParser extends CommandParser {
         super(warehouse);
     }
 
-    protected void init_extract_params() {
+
+    protected void initExtractParams() {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[ugbo]{1,2})/";
@@ -23,7 +24,7 @@ public class AddParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType {
+    public void extractParams() throws WrongCommandException, InvalidFileException, InvalidObjectType {
         if (matches.get("flag").equals("g")) {
             String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
             HashMap<String, String> regexGoodMatch = new MatchKeywords(userInput, regexGood).getGroupValues();

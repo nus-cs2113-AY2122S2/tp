@@ -11,7 +11,7 @@ public class FindParser extends CommandParser {
     }
 
     @Override
-    protected void init_extract_params() {
+    protected void initExtractParams() {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "n/(?<name>.*)";
@@ -20,7 +20,7 @@ public class FindParser extends CommandParser {
     }
 
     @Override
-    protected void extract_params() throws WrongCommandException {
+    protected void extractParams() throws WrongCommandException {
         if (matches.get("name").equals("")) {
             throw new WrongCommandException("find", true);
         }

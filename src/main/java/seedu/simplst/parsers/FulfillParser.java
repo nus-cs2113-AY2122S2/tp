@@ -9,7 +9,7 @@ public class FulfillParser extends CommandParser {
         super(warehouse);
     }
 
-    protected void init_extract_params() {
+    protected void initExtractParams() {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "oid/(?<oid>\\d*)";
@@ -17,7 +17,7 @@ public class FulfillParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException {
+    protected void extractParams() throws WrongCommandException {
         warehouse.fulfillOrder(matches.get("oid"));
     }
 }

@@ -10,7 +10,7 @@ public class TotalParser extends CommandParser {
         super(warehouse);
     }
 
-    protected void init_extract_params() {
+    protected void initExtractParams() {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[og])/ id/(?<id>\\d*)";
@@ -18,7 +18,7 @@ public class TotalParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException, NullException {
+    protected void extractParams() throws WrongCommandException, NullException {
         if (matches.get("flag").equals("o")) {
             // get total orders with flag "o/"
             int totalOrders = warehouse.totalNumberOfOrder();

@@ -11,7 +11,7 @@ public class RemoveParser extends CommandParser {
         super(warehouse);
     }
 
-    protected void init_extract_params() {
+    protected void initExtractParams() {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[uog]{1,2})/";
@@ -19,7 +19,7 @@ public class RemoveParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException {
+    protected void extractParams() throws WrongCommandException {
         if (matches.get("flag").equals("o")) {
             String regexOrder = "oid/(?<oid>)\\d";
             HashMap<String, String> regexOrderMatch = new

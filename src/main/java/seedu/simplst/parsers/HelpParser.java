@@ -11,7 +11,7 @@ public class HelpParser extends CommandParser {
     }
 
     @Override
-    protected void init_extract_params() {
+    protected void initExtractParams() {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[uog]{1,2})";
@@ -20,7 +20,7 @@ public class HelpParser extends CommandParser {
     }
 
     @Override
-    protected void extract_params() {
+    protected void extractParams() {
         String flag = matches.get("flag");
         switch (flag) {
         case "ug":
