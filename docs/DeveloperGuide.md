@@ -810,6 +810,17 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 
 #### Listing all Sessions
 > For details on the usage of `session /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-sessions-session-list)
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `session /list` <br>
+  Expected: An error message is printed indicating that no session are stored in SplitLah.
+
+Test Scenario 2: At least 1 session exists in the application.
+* Test Command: `session /list`<br>
+  Expected: A table summarising the details of all existing sessions is printed.
+
 <hr>
 
 ### Activity Testing
