@@ -84,49 +84,6 @@ public abstract class Parser {
      */
     public abstract void determineError() throws ModHappyException;
 
-    //@@author Ch40gRv1-Mu
-    /**
-     * Parses string into groups based on commandFormat.
-     * @throws ModHappyException if the provided string does not match the pattern
-     */
-    public HashMap<String, String> parseString(String userInput) throws ModHappyException {
-        final Pattern commandPattern = Pattern.compile(commandFormat);
-        final Matcher matcher = commandPattern.matcher(userInput.trim());
-        if (!matcher.matches()) {
-            determineError();
-        }
-        for (Object groupName : groupNames) {
-            try {
-                parsedCommand.put(groupName.toString(), matcher.group(groupName.toString()).trim());
-            } catch (Exception e) {
-                parsedCommand.put(groupName.toString(), null);
-            }
-        }
-        checkForInvalidStrings();
-        return parsedCommand;
-    }
-
-    //@@author Yzkkk
-    /**
-     * Parses the task index from a string to an integer form.
-     * It will also check if the index is non-negative, throwing an exception if it is not.
-     * @param taskNumberString the string representation of the task number
-     * @return the zero-based index integer of the task number string
-     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
-     */
-    protected int parseIndex(String taskNumberString) throws InvalidNumberException {
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(taskNumberString) - 1;
-            if (taskIndex < MINIMUM_INDEX) {
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException e) {
-            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
-        }
-        return taskIndex;
-    }
-
     //@@author Yzkkk
     /**
      * Checks for strings that are parsed into groups based on commandFormat, but are essentially invalid.
@@ -223,5 +180,48 @@ public abstract class Parser {
                 throw new ExcessArgumentException(invalidInput);
             }
         }
+    }
+
+    //@@author Ch40gRv1-Mu
+    /**
+     * Parses string into groups based on commandFormat.
+     * @throws ModHappyException if the provided string does not match the pattern
+     */
+    public HashMap<String, String> parseString(String userInput) throws ModHappyException {
+        final Pattern commandPattern = Pattern.compile(commandFormat);
+        final Matcher matcher = commandPattern.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            determineError();
+        }
+        for (Object groupName : groupNames) {
+            try {
+                parsedCommand.put(groupName.toString(), matcher.group(groupName.toString()).trim());
+            } catch (Exception e) {
+                parsedCommand.put(groupName.toString(), null);
+            }
+        }
+        checkForInvalidStrings();
+        return parsedCommand;
+    }
+    
+    //@@author Yzkkk
+    /**
+     * Parses the task index from a string to an integer form.
+     * It will also check if the index is non-negative, throwing an exception if it is not.
+     * @param taskNumberString the string representation of the task number
+     * @return the zero-based index integer of the task number string
+     * @throws InvalidNumberException if the task index is less than 0 or if the string cannot be parsed into an integer
+     */
+    protected int parseIndex(String taskNumberString) throws InvalidNumberException {
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(taskNumberString) - 1;
+            if (taskIndex < MINIMUM_INDEX) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
+        }
+        return taskIndex;
     }
 }
