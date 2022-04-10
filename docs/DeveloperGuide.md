@@ -18,6 +18,13 @@
     * [Help Parser](#help-parser)
   * [User Interface Class](#user-interface-class)
   * [Match Keyword Class](#match-keyword-class)
+* [Product Scope](#product-scope)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
+  * [User Stories](#user-stories)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ## Design
 ![Architecture Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/ArchitectureDiagram.puml)
@@ -114,6 +121,8 @@ The warehouse class will contain:
 - LinkedHashMap of goods
   - A linked hashmap is chosen for goods to ensure that we are able to maintain the ordering of goods added while having the simplicity of accessing the necessary goods through their SKU
 
+For more information of the methods regarding the Warehouse Class, check the [UserGuide](/UserGuide.md) to see what features are available to each of the above Classes.
+
 ### Command Parser
 #### Description
 This is the description for the Command Parser. This is an abstract class which all other parser classes will implement
@@ -172,9 +181,8 @@ String quantity = matches.get("qty");
 String description = matches.get("desc");
 ```
 
-### View Good Method
+### View Good
 #### Description
-View Good belongs as part of the Commands Class. It is used when a user would like to know more information about an inventory item has an item id linked to it in the warehouse.
 
 #### Operation
 
@@ -271,6 +279,9 @@ Target user profile: Warehouse Workers
 * is reasonably comfortable using CLI apps
 
 Target user profile: Warehouse Managers
+* has a need to update warehouse and workers on new orders
+* can type fast
+* is reasonably comfortable using CLI apps
 
 
 
@@ -280,14 +291,19 @@ A cheap, user-friendly Warehouse Management System with intuitive commands to im
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|Warehouse Worker|Get the total number of goods in the warehouse|its less tiring to have to count the total number of goods in the warehouse|
-|v1.0|Warehouse Worker|View the description of goods easily|it would be easier for stocktaking|
-|v1.0|Warehouse Worker|Add inventory items to the items list|so that I can keep track of goods entering the warehouse|
-|v1.0|Warehouse Worker|Remove inventory items from the items list|so that I can track whenever a orderline is not in the warehouse|
-|v1.0|Warehouse Worker|Get a list of all the inventory currently in the warehouse|so that I can see all the items we have in the warehouse|
-<!-- |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list| -->
+| Version | As a ...          | I want to ...                                           | So that I can ...                                                                         |
+|---------|-------------------|---------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| v1.0    | Warehouse Worker  | Get the total number of goods in the warehouse          | its less tiring to have to count the total number of goods in the warehouse               |
+| v1.0    | Warehouse Worker  | View the description of goods easily                    | it would be easier for stocktaking                                                        |
+| v1.0    | Warehouse Worker  | Add Goods to the items list                             | so that I can keep track of goods entering the warehouse                                  |
+| v1.0    | Warehouse Worker  | Remove Goods from the items list                        | so that I can track whenever a Good is not in the warehouse                               |
+| v1.0    | Warehouse Worker  | Get a list of all the Goods currently in the warehouse  | so that I can see all the items we have in the warehouse                                  |
+| v2.0    | Warehouse Worker  | Find a certain Good currently in the warehouse by name  | so that I can easily find a certain Good we have in the warehouse                         |
+| v2.0    | Warehouse Worker  | Get a list of all the orders currently in the warehouse | so that I can see all the orders we have in the warehouse                                 |
+| v2.0    | Warehouse Worker  | Get a list of all the orderlines in an order            | so that I can see goods required to fulfill the order                                     |
+| v2.0    | Warehouse Manager | Add an order to the warehouse                           | so that I can inform warehouse workers on what orders the warehouse requires to fulfill   |
+| v2.0    | Warehouse Worker  | Fulfill a completed Order                               | so that I know which order does not require more goods and is completed to be shipped out |
+| v2.0    | Warehouse Worker  | View a specific order                                   | so that I can see all the details regarding a certain order in mind                       |
 
 ## Non-Functional Requirements
 
@@ -295,8 +311,11 @@ A cheap, user-friendly Warehouse Management System with intuitive commands to im
 
 ## Glossary
 
-* *glossary item* - Definition
+* *SKU* - Stock-Keeping Unit. It is the unique unit number for a specific warehouse item. It can contain characters and numbers (e.g WC01).
+* *[Unit Good](#unit-good-class)* - Template for creating a Good. Holds details of a certain Good.
+* *[Good](#good-class)* - Good to be stored in the warehouse
+* *[Order](#order-class)* - Information about what goods are delivered to who and where
+* *[Orderline](#orderline-class)* - The goods that needs to be delivered in that order
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
