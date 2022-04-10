@@ -84,4 +84,11 @@ public class Good extends UnitGood {
         return jo;
     }
 
+    public static Good restoreGood(JSONObject jo){
+        UnitGood ug = UnitGood.restoreUnitGood(jo);
+        String qty = (String)jo.get(GoodKeys.quantity);
+        Good cur = new Good(ug, Integer.parseInt(qty));
+        return cur;
+    }
+
 }

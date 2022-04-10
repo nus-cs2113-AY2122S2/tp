@@ -1,6 +1,7 @@
 package seedu.simplst;
 
 import org.json.simple.JSONObject;
+import seedu.simplst.jsonkeyconstants.OrderKeys;
 import seedu.simplst.jsonkeyconstants.OrderlinesKeys;
 
 /*
@@ -61,4 +62,5 @@ public class Orderline extends Good {
         jo.put(OrderlinesKeys.quantityFulfilled, this.quantityFulfilled);
         return jo;
     }
+
 }

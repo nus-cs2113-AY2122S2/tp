@@ -2,7 +2,9 @@ package seedu.simplst;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import seedu.simplst.jsonkeyconstants.GoodKeys;
 import seedu.simplst.jsonkeyconstants.OrderKeys;
+import seedu.simplst.jsonkeyconstants.UnitGoodKeys;
 import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.LargeQuantityException;
 import util.exceptions.WrongCommandException;
@@ -185,7 +187,9 @@ public class Order {
 
     private JSONArray serializeOrderlines() {
         JSONArray ja = new JSONArray();
-
+        for(Orderline ol: orderlines){
+            ja.add(ol.serialize());
+        }
         return ja;
     }
 
@@ -202,5 +206,35 @@ public class Order {
         jo.put(OrderKeys.orderlines, this.orderlines);
         return jo;
     }
+
+
+
+    public static Order restoreOrder(JSONObject jo){
+        Integer orderId = Integer.parseInt((String)jo.get(OrderKeys.orderId));
+        String receiver = (String)jo.get(OrderKeys.receiver);
+        String shippingAddress = (String)jo.get(OrderKeys.shippingAddress);
+        Order cur = new Order(
+                orderId,
+                receiver,
+                shippingAddress
+        );
+        cur.setFulfilled(Boolean.parseBoolean((String) jo.get(OrderKeys.isFulfilled)));
+        JSONArray orderLinesJson = (JSONArray) jo.get(OrderKeys.orderlines);
+        orderLinesJson.forEach((item)->{
+            JSONObject jol = (JSONObject) item;
+            UnitGood ug = UnitGood.restoreUnitGood(jol);
+            String qty = (String)jol.get(GoodKeys.quantity);
+            try {
+                cur.addOrderline(ug,qty);
+            } catch (WrongCommandException e) {
+                e.printStackTrace();
+            }
+        });
+
+
+
+        return cur;
+    }
+
 
 }

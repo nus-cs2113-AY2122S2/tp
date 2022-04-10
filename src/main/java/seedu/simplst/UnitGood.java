@@ -76,8 +76,22 @@ public class UnitGood {
         jo.put(UnitGoodKeys.name, this.name);
         jo.put(UnitGoodKeys.SKU, this.sku);
         jo.put(UnitGoodKeys.description, this.description);
-        jo.put(UnitGoodKeys.unitPrice, this.capacity);
+        jo.put(UnitGoodKeys.capacity, this.capacity);
         return jo;
+    }
+
+    public static UnitGood restoreUnitGood(JSONObject jo){
+        String sku = (String)jo.get(UnitGoodKeys.SKU);
+        String name = (String)jo.get(UnitGoodKeys.name);
+        String description = (String)jo.get(UnitGoodKeys.description);
+        String capacity = (String)jo.get(UnitGoodKeys.capacity);
+        UnitGood ug = new UnitGood(
+                sku,
+                name,
+                description,
+                capacity
+        );
+        return ug;
     }
 
 }

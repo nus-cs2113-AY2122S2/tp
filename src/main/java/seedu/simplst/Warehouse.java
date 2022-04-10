@@ -3,6 +3,8 @@ package seedu.simplst;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.json.simple.parser.ParseException;
+import seedu.simplst.jsonkeyconstants.OrderKeys;
 import seedu.simplst.jsonkeyconstants.WarehouseKeys;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
@@ -460,44 +462,6 @@ public class Warehouse {
 
     }
 
-    // Related to saving state outside program
-    public Boolean saveWarehouseState() {
-        String fp = LocalStorage.WAREHOUSE_PATH;
-        // Create JSON Obj
-        JSONObject state = this.serialize();
-        // Save to file
-        LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
-        Display.warehouseStateSaved(fp);
-        return true;
-    }
-
-    private JSONArray serializeOrders() {
-        JSONArray ja = new JSONArray();
-        for (Order o : orderLists) {
-            try {
-                JSONObject jo = o.serialize();
-                ja.add(jo);
-            } catch (Exception e) {
-                Display.serializeException("Warehouse Orderlist");
-            }
-        }
-        return ja;
-    }
-
-    private JSONObject serialize() {
-        JSONObject warehouse = new JSONObject();
-
-        warehouse.put(WarehouseKeys.capacityOccupied, getCapacityOccupied());
-        warehouse.put(WarehouseKeys.inventoryTypeCount, uniqueInventories());
-        warehouse.put(WarehouseKeys.totalCapacity, this.totalCapacity);
-        JSONArray sol = this.serializeOrders();
-        if (sol == null) {
-            return null;
-        }
-        warehouse.put(WarehouseKeys.orderLists, sol);
-
-        return warehouse;
-    }
 
     public void batchSetOrders(String filePath) throws WrongCommandException, InvalidFileException, InvalidObjectType {
         String saveStr = LocalStorage.readSaveFile(filePath);
@@ -591,6 +555,10 @@ public class Warehouse {
         }
     }
 
+    private void addOrder(Order order){
+        orderLists.add(order);
+    }
+
     public Warehouse(Integer capacity) {
         this.totalCapacity = capacity;
     }
@@ -624,7 +592,7 @@ public class Warehouse {
         return total.get();
     }
 
-    public boolean setCapacity(String input) {
+    public boolean setTotalCapacity(String input) {
         try {
             int capacity = Integer.parseInt(input);//Integer.parseInt(input);
             assert capacity > 0;
@@ -642,6 +610,133 @@ public class Warehouse {
             System.out.println("Please set the Warehouse capacity again.");
         }
         return false;
+    }
+
+
+    // Related to saving state outside program
+    public Boolean saveWarehouseState() {
+        String fp = LocalStorage.WAREHOUSE_PATH;
+        // Create JSON Obj
+        JSONObject state = this.serialize();
+        // Save to file
+        LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
+        Display.warehouseStateSaved(fp);
+        return true;
+    }
+
+    private JSONArray serializeOrders() {
+        JSONArray ja = new JSONArray();
+        for (Order o : orderLists) {
+            try {
+                JSONObject jo = o.serialize();
+                ja.add(jo);
+            } catch (Exception e) {
+                Display.serializeException("Warehouse Orderlist");
+            }
+        }
+        return ja;
+    }
+
+
+
+    private Boolean restoreOrders(JSONArray ja){
+        ja.forEach(item->{
+           JSONObject jo = (JSONObject) item;
+           this.addOrder(Order.restoreOrder(jo));
+        });
+        return true;
+    }
+
+    private JSONArray serializeGoods() {
+        JSONArray ja = new JSONArray();
+        goodList.forEach((sku, good) -> {
+            try {
+                JSONObject jo = good.serialize();
+                ja.add(jo);
+            } catch (Exception e) {
+                Display.serializeException("Warehouse Goodlist");
+            }
+        });
+        return ja;
+    }
+
+    private Boolean restoreGoods(JSONObject jo){
+        jo.forEach((sku, jg)->{
+            goodList.put((String)sku,Good.restoreGood(jo));
+        });
+        return true;
+    }
+
+    private JSONObject serializeUnitGoods() {
+        JSONObject jo = new JSONObject();
+        unitGoodHashMap.forEach((sku, ug)->{
+            jo.put(sku, ug.serialize());
+        });
+        return jo;
+    }
+
+    private JSONObject serialize() {
+        JSONObject warehouse = new JSONObject();
+        warehouse.put(WarehouseKeys.totalCapacity, this.totalCapacity);
+        JSONArray sol = this.serializeOrders();
+        if (sol == null) {
+            return null;
+        }
+        warehouse.put(WarehouseKeys.orderLists, sol);
+
+        JSONArray sgl = this.serializeGoods();
+        if(sgl == null){
+            return null;
+        }
+        warehouse.put(WarehouseKeys.goodList, sgl);
+
+        JSONObject ugm = this.serializeUnitGoods();
+        if(ugm == null){
+            return null;
+        }
+        warehouse.put(WarehouseKeys.unitGoodHashMap, ugm);
+
+        return warehouse;
+    }
+
+
+    public Boolean restoreWarehouseState(){
+        // READ JSON FILE
+        String fp = LocalStorage.WAREHOUSE_PATH;
+        String saveStr = LocalStorage.readSaveFile(fp);
+        if (saveStr == null){return false;}
+        // PARSE
+        try{
+            JSONObject jWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
+            boolean status = false;
+            //Float totalCapacity = Float.parseFloat();
+            status = this.setTotalCapacity((String)jWarehouse.get(WarehouseKeys.totalCapacity));
+            if (!status){
+                return false;
+            }
+            JSONArray sol = (JSONArray) jWarehouse.get(WarehouseKeys.orderLists);
+            status = this.restoreOrders(sol);
+            if (!status){
+                return false;
+            }
+
+            JSONObject sgl = (JSONObject) jWarehouse.get(WarehouseKeys.goodList);
+            status = this.restoreGoods(sgl);
+            if (!status){
+                return false;
+            }
+
+        } catch (ParseException e) {
+            Display.jsonParseException(fp);
+            return false;
+        } catch (NumberFormatException e){
+            Display.numberFormatException();
+            Display.jsonParseException(fp);
+            return false;
+        }
+
+
+        return true;
     }
 
 }

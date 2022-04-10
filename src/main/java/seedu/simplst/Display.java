@@ -143,6 +143,17 @@ public class Display {
     public static void tryCommandAgain() {
         System.out.println("Please enter the command again.");
     }
+    public static void jsonParseException(String fp){
+        System.out.println("File: " + fp + " is not a valid json file.");
+    }
 
+
+    public static void numberFormatException(){
+        System.out.println("Number formatting invalid");
+    }
+
+    public static void numberFormatException(String val, String type){
+        System.out.println(val + " can't be intrepreted as type " + type);
+    }
 
 }
