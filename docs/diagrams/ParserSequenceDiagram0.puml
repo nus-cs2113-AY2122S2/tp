@@ -54,6 +54,8 @@ loop LOOP_COLOR for each XYZ term in command
     end OPT
 
     Parser -->[ : //XYZ//:object
+
+    note right : object is either of type String or Boolean
     deactivate Parser
 
     ' needs Validation
@@ -79,7 +81,7 @@ loop LOOP_COLOR for each XYZ term in command
             UParser --> Parser
             deactivate UParser
 
-            Parser -->[ : //XYZ//:double
+            Parser -->[ : //XYZ//:Double
 
         ' notMoney
         else //XYZ// is not Money
@@ -108,7 +110,7 @@ loop LOOP_COLOR for each XYZ term in command
             UParser --> Parser
             deactivate UParser
 
-            Parser -->[ : //XYZ//:int
+            Parser -->[ : //XYZ//:Integer
             deactivate Parser
         end opt
     end opt
