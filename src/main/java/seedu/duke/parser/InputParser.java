@@ -15,6 +15,8 @@ import seedu.duke.commands.LostCommand;
 import seedu.duke.commands.ListOverdueBorrowingsCommand;
 import seedu.duke.commands.ListFutureBorrowingsCommand;
 import seedu.duke.commands.ListAvailableBorrowingsCommand;
+import seedu.duke.commands.CancelFutureBorrowingsCommand;
+
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
 
@@ -75,6 +77,9 @@ public class InputParser {
 
         case ListFutureBorrowingsCommand.COMMAND_WORD:
             return new ListFutureBorrowingsParser().parse(arguments);
+
+        case CancelFutureBorrowingsCommand.COMMAND_WORD:
+            return new CancelFutureBorrowingsParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
