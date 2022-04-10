@@ -114,6 +114,7 @@ and other documents for the co-requsuite module CS2101 Effective Communication f
   - [(#3) Editing a task to add a duration does not show the new duration](https://github.com/alanlowzies/ped/issues/3)
   - [(#5) Discrepancy in maximum allowable time for time values mentioned in UG](https://github.com/alanlowzies/ped/issues/4)
   - [(#5) Editing a module to an empty description is not accepted](https://github.com/alanlowzies/ped/issues/5)
+
 ---
 
 ## Reflections on the Team Project (tP)
