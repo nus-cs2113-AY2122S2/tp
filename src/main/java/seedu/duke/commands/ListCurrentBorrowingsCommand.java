@@ -29,12 +29,12 @@ public class ListCurrentBorrowingsCommand extends Command {
         List<Item> items = itemList.getItemArrayList();
         List<String> currentRecords =
                 items.stream()
-                        // for every item, get the list of borrowrecords in the form of strings
-                        .map(item -> item.filterRecords(name, BorrowStatus.PRESENT))
-                        // combine all the arraylists into 1 single stream of borrowrecords (regardless of item)
-                        .flatMap(Collection::stream)
-                        // convert this stream into a list (that is currentRecords)
-                        .collect(Collectors.toList());
+                     // for every item, get the list of borrowrecords in the form of strings
+                     .map(item -> item.filterRecords(name, BorrowStatus.PRESENT))
+                     // combine all the arraylists into 1 single stream of borrowrecords (regardless of item)
+                     .flatMap(Collection::stream)
+                     // convert this stream into a list (that is currentRecords)
+                     .collect(Collectors.toList());
 
         if (currentRecords.size() == 0) {
             if (name.isPresent()) {
