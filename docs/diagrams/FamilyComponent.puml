@@ -3,7 +3,7 @@
 
 Package "Family" <<Rectangle>> {
     class Family MODEL_COLOR
-    class PersonList MODEL_COLOR_T1
+    class PersonList MODEL_COLOR_T3
     class Person  MODEL_COLOR_T2
 }
 
