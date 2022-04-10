@@ -218,29 +218,12 @@ public class Validator {
         minParameterCheck(parameters, 6);
         assert parameters.length == 6 : "Validate failed to check parameter length";
         boolean check = true;
-        for (int i = 0; i < 5; i++) {
-            switch (i) {
-            case 1:
-                check = validateMedicineName(parameters[i]);
-                break;
-            case 2:
-                check = check && validateDosage(parameters[i]);
-                break;
-            case 3:
-                check = check && validateExpiry(parameters[i]);
-                break;
-            case 5:
-                check = check && validateQuantity(parameters[i]);
-                break;
-            default:
-                break;
-            }
-        }
-        if (!check) {
-            throw new UserInputErrorException("Some Parameters are invalid!");
-        }
-    }
+        validateMedicineName(parameters[1);
+        validateDosage(parameters[2]);
+        validateExpiry(parameters[3]);
+        validateQuantity(parameters[5]);
 
+    }
     /* Validate appointment */
     private static void validateAppointmentDetails(String appointmentDetails) throws UserInputErrorException {
         if (appointmentDetails.isBlank() || appointmentDetails.isEmpty()) {
