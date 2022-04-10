@@ -2160,7 +2160,7 @@ Each command entered by the user should respond within two seconds.
 This section includes instructions to test WerkIt! manually.
 <br/>
 <span class = "info box">:memo: These test instructions covers the basic testing of the WerkIt! features. 
-Testers are welcome conduct more extensive and rigorous testing.
+Testers are welcome to conduct more extensive and rigorous testing.
 </span>
 
 ### Overview
@@ -2174,14 +2174,14 @@ Testers are welcome conduct more extensive and rigorous testing.
 
 ### Launch and Shutdown
 #### Initial Launch
-1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases/tag/Jar-V2.0) and copy it into an empty folder.
+1. Download the JAR file of WerkIt! [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases) and copy it into an empty folder.
 2. Open up your terminal (Windows Terminal for Microsoft users) and navigate to the directory containing the 
 `WerkIt.jar` file.
 3. On your terminal, type the command `java -jar WerkIt.jar` to launch WerkIt!.
 4. Upon successful launch, WerkIt! will display a welcome message and also file loading-related messages on the terminal.
 
 #### Shutdown
-1. Enter the `exit` command to exit WerkIt!
+1. Enter the `exit` command to exit WerkIt!.
 
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 

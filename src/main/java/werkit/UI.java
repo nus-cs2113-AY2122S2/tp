@@ -8,6 +8,7 @@ import storage.LogHandler;
 import storage.UnknownFileException;
 import textcolors.TextColor;
 
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Scanner;
@@ -159,9 +160,19 @@ public class UI {
      * @return userInputTrimmed user input with no spaces at the back of the input.
      */
     protected String getUserInput() {
-        String userInput = inputReader.nextLine();
-        String userInputTrimmed = userInput.trim();
-        printLine();
+        String userInputTrimmed = "";
+
+        try {
+            String userInput = inputReader.nextLine();
+            userInputTrimmed = userInput.trim();
+            printLine();
+        } catch (NoSuchElementException e) {
+            System.out.println();
+            printLine();
+            System.out.println("System signal detected. Exiting program.");
+            userInputTrimmed = "exit";
+            return userInputTrimmed;
+        }
 
         return userInputTrimmed;
     }
