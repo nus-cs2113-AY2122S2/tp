@@ -12,20 +12,27 @@ A detailed report of my code contributions to the tP can be found in the
 [tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=emilysim00&breakdown=true)
 hosted by the module coordinators of CS2113T.
 
-![tP Code Dashboard](../images/ppp/emilysim00/tPCodeDashboard.png)
-
 #### Summary of my feature's code contributions 
 * Implemented various WerkIt's features. A summary of these features implemented by me is stated below. 
-
-| New Feature                                 | What it does                                                   | Justification                                                                                                                                                                                                                                                        |
-|---------------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| View all workouts                           | Allows user to view all the workouts created by him/her.       | This feature allows the user to view all workouts stored in the workout list. They can then create a plan with these workouts.                                                                                                                                       |
-| Add/Update a plan for a day in the schedule | Allows user to schedule a workout plan on a particular day.    | Users should be able to schedule any plans they created for a day in the 7-day workout plan schedule. <br><br> Highlights: Users are able to quickly type out the command by indicating the day in the week with integers instead of typing out the name of the day. |
-| View schedule                               | Allows user to view all the plans scheduled for the week.      | This feature allows the user to have an overview of all the plans that have been scheduled. This would allow them to determine if they would want to make modification to the schedule.                                                                              |
-| Remove plan scheduled on a particular day   | Allows users to remove the plan scheduled on a particular day. | This feature allows the user to change the plan scheduled on a particular day easily. <br><br> Highlights: Users are able to quickly type out the command by indicating the day in the week with integers instead of typing out the name of the day.                 |
-| Reset the 7-days workout plan schedule      | Allows user to reset his/her workout plan schedule.            | This feature allows the user to remove all plans scheduled at once, so they can plan their schedule from the start.                                                                                                                                                  |
-
-
+  * **New Feature:** View all workouts <br/>
+    * **What it does:** Allows user to view all the workouts created by him/her. <br/>
+    * **Justification:** This feature allows the user to view all workouts stored in the workout list.
+    They can then create a plan with these workouts.
+  * **New Feature:** Add/Update a plan for a day in the schedule <br/>
+    * **What it does:** Allows user to schedule a workout plan on a particular day. <br/>
+    * **Justification:** Users should be able to schedule any plans they created for a day in the 7-day workout plan schedule. <br/>
+    * **Highlights:** Users are able to quickly type out the command by indicating the day in the week with integers instead of typing out the name of the day.
+  * **New Feature:** View schedule <br/>
+    * **What it does:** Allows user to view all the plans scheduled for the week. <br/>
+    * **Justification:** This feature allows the user to have an overview of all the plans that have been scheduled.
+    This would allow them to determine if they would want to make modification to the schedule.
+  * **New Feature:** Remove plan scheduled on a particular day <br/>
+    * **What it does:** Allows users to remove the plan scheduled on a particular day. <br/>
+    * **Justification:** This feature allows the user to change the plan scheduled on a particular day easily.<br/>
+    * **Highlights:** Users are able to quickly type out the command by indicating the day in the week with integers instead of typing out the name of the day.
+  * **New Feature:** Reset the 7-days workout plan schedule <br/>
+    * **What it does:** Allows user to reset his/her workout plan schedule. <br/>
+    * **Justification:** This feature allows the user to remove all plans scheduled at once, so they can plan their schedule from the start. 
 * Wrote the majority of the codes in `Day.java`, `ScheduleCommand.java` and `InvalidScheduleException.java`.
 * Contributed to some codes in exception-related files such as `InvalidCommandException`. 
 * Contributed to some parts of the `UI` such as the `printNewScheduleCreatedMessage(Day newDay)` and 
@@ -40,19 +47,15 @@ parts of the method to ensure the code works based on assumptions, such as testi
 the methods to capture and keep track of the events that has occurred. 
 
 #### Summary of my Test Code contributions
-Wrote JUnit test cases for WerkIt!.
-* Parts of WorkoutListTest.java
-* ScheduleCommandTest.java
-* DayListTest.java
+* Wrote JUnit test cases for parts of WorkoutListTest.java
+* Wrote JUnit test cases for ScheduleCommandTest.java
+* Wrote JUnit test cases for DayListTest.java
 
 ### Contributions to the User Guide (UG)
 * Wrote the [Introduction and Terminology](../UserGuide.md) section in the User Guide.
 * Wrote guide on [listing all workouts](../UserGuide.md#show-all-workouts-workout-list)
-* Wrote guide on all the Schedule features of WerkIt:
-  * [Adding/Updating a plan to a particular day](../UserGuide.md#update-schedule-schedule-update)
-  * [Viewing the 7-days workout plan schedule](../UserGuide.md#view-schedule-schedule-list)
-  * [Removing of a plan scheduled on a particular day](../UserGuide.md#clear-schedule-for-a-day-schedule-clear)
-  * [Resetting the workout plan schedule](../UserGuide.md#clear-schedule-for-the-week-schedule-clearall)
+* Wrote guide on all the [Schedule features](../UserGuide.md#schedule-features) of WerkIt, including `schedule /update`, 
+  `schedule /list`, `schedule /clear` and `schedule /clearall`
 * Wrote the informational sector of WerkIt's features
   * [Overview of the all WerkIt's features](../UserGuide.md#features)
   * [Explanation on how the different features link with one another](../UserGuide.md#features)
@@ -61,19 +64,14 @@ Wrote JUnit test cases for WerkIt!.
 
 ### Contributions to the Developer Guide (DG)
 * Creating the [Architecture Diagram](../DeveloperGuide.md#architecture-diagram) under the Design Section.
-* Wrote the design section on [UI component](../DeveloperGuide.md#ui-component).
+* Wrote the design section on [UI component](../DeveloperGuide.md#ui-component) and added the class diagram of it.
 * Wrote the design section on [Schedule related features](../DeveloperGuide.md#schedule-related-features).
-* Wrote the following contributions to the [Implementation](../DeveloperGuide.md#implementation) section:
+* Wrote the following contributions to the [Implementation](../DeveloperGuide.md#implementation) section (including sequence diagram):
   * [Schedule Features](../DeveloperGuide.md#schedule)
     * [How a plan is being updated/added into the schedule](../DeveloperGuide.md#update-schedule)
-      * Includes sequence diagrams to visualise the process.
-      * Includes the design consideration for this feature. 
     * [How to view the schedule](../DeveloperGuide.md#view-schedule)
-      * Includes sequence diagrams to visualise the process.
     * [How to remove a scheduled workout plan](../DeveloperGuide.md#clear-schedule-for-a-day)
-      * Includes sequence diagrams to visualise the process.
     * [How to reset the workout plan schedule](../DeveloperGuide.md#clear-schedule-for-the-week)
-      * Includes sequence diagrams to visualise the process.
 * Wrote part of [user stories](../DeveloperGuide.md#user-stories).
 * Wrote part of [manual testing instructions](../DeveloperGuide.md#test-on-schedule-features).
 * Wrote the [non-functional requirements](../DeveloperGuide.md#non-functional-requirements) section.
@@ -99,7 +97,6 @@ as part of the Practical Exam Dry-Run (PED).
   they are being assigned to a hotel room. The program get terminated
   straight without proper exception handling. 
   Click [here](https://github.com/emilysim00/ped/issues/8) to view the issues in GitHub.
-
   * Another high severity bug reported is on the file management of one of its feature. To find out more details on this 
   bug, click [here](https://github.com/emilysim00/ped/issues/10).
   
