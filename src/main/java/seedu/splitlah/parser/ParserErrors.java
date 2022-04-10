@@ -9,7 +9,6 @@ import seedu.splitlah.ui.Message;
  */
 public class ParserErrors {
 
-    // ERROR REPORTING FUNCTIONS
     /**
      * Returns an error message for a specified delimiter that is missing.
      * 

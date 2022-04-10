@@ -77,7 +77,7 @@ public class ParserUtils {
         assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
         assert delimiter != null : Message.ASSERT_PARSER_DELIMITER_NULL;
         
-        int delimiterIndex = commandArgs.indexOf(delimiter);
+        int delimiterIndex = commandArgs.toLowerCase().indexOf(delimiter);
         if (delimiterIndex == INVALID_INDEX_INDICATOR) {
             throw new InvalidFormatException(ParserErrors.getMissingDelimiterErrorMessage(delimiter));
         }
@@ -324,7 +324,7 @@ public class ParserUtils {
     private static boolean isValidDelimiter(String token) {
         assert token != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
         
-        switch (token) {
+        switch (token.toLowerCase()) {
         case NAME_DELIMITER:
             // Fallthrough
         case PERSON_LIST_DELIMITER:
@@ -431,7 +431,7 @@ public class ParserUtils {
         assert remainingArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
         
         String[] delimiterList;
-        switch (commandType) {
+        switch (commandType.toLowerCase()) {
         case ActivityCreateCommandParser.COMMAND_TEXT:
             delimiterList = ActivityCreateCommandParser.COMMAND_DELIMITERS;
             break;
@@ -480,7 +480,7 @@ public class ParserUtils {
 
         String[] argumentTokens = remainingArgs.split(REGEX_WHITESPACES_DELIMITER);
         for (String token : argumentTokens) {
-            if (token.contains(DELIMITER_INDICATOR) && !hasStringInStringArray(token, delimiterList)) {
+            if (token.contains(DELIMITER_INDICATOR) && !hasStringInStringArray(token.toLowerCase(), delimiterList)) {
                 return true;
             }
         }

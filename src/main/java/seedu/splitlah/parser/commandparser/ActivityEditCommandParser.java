@@ -19,7 +19,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
 
     public static final String COMMAND_FORMAT_FIRST =
             "activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] "
-                    + "/co <TOTAL_COST> /gst [GST_PERCENT] /sc [SERVICE_CHARGE]}";
+                    + "/co [TOTAL_COST] /gst [GST_PERCENT] /sc [SERVICE_CHARGE]}";
 
     public static final String COMMAND_FORMAT_SECOND =
             "activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] "

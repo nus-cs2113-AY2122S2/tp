@@ -7,6 +7,7 @@ import seedu.splitlah.command.ActivityEditCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.Command;
+import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupEditCommand;
@@ -100,6 +101,10 @@ class ParserTest {
         String helpCommandInput = "help";
         command = Parser.getCommand(helpCommandInput);
         assertEquals(HelpCommand.class, command.getClass());
+        
+        String exitCommandInput = "exit";
+        command = Parser.getCommand(exitCommandInput);
+        assertEquals(ExitCommand.class, command.getClass());
     }
     
     /**
