@@ -7,13 +7,14 @@ public class UnitGoodTest {
 
     @Test
     public void convertCapacity_integerInput_CapacityMedium() { //to test if integer inputs are set to MEDIUM by default
-           String capacity = "1";
-           UnitGood testUnitGood = new UnitGood("WC1", "Wooden chair", "From Germany", capacity);
-           assertEquals(Capacity.MEDIUM, testUnitGood.getCapacity());
+       String capacity = "1";
+       UnitGood testUnitGood = new UnitGood("WC1", "Wooden chair", "From Germany", capacity);
+       assertEquals(Capacity.MEDIUM, testUnitGood.getCapacity());
     }
 
+    //to test if integer inputs are set to MEDIUM by default
     @Test
-    public void convertCapacity_alphaNumericInput_CapacityDefault() { //to test if integer inputs are set to MEDIUM by default
+    public void convertCapacity_alphaNumericInput_CapacityDefault() {
         String capacity = ">/?l";
         UnitGood testUnitGood = new UnitGood("WC1", "Wooden chair", "From Germany", capacity);
         assertEquals(Capacity.MEDIUM, testUnitGood.getCapacity());
