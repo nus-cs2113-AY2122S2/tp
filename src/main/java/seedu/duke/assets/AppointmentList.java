@@ -18,6 +18,7 @@ public class AppointmentList extends List {
     private ArrayList<Appointment> returnedFinderArray = new ArrayList<>();
     private PatientList referencePatientList;
     private DoctorList referenceDoctorList;
+    private final String title = "Table of appointments";
 
     public AppointmentList(PatientList patientList, DoctorList doctorList) {
         this.referencePatientList = patientList;
@@ -105,7 +106,7 @@ public class AppointmentList extends List {
 
     @Override
     public void view() throws UserInputErrorException {
-        CommandLineTable appointmentTable = new CommandLineTable();
+        CommandLineTable appointmentTable = new CommandLineTable(title);
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
@@ -126,7 +127,7 @@ public class AppointmentList extends List {
         if (foundAppointment == null) {
             throw new UserInputErrorException("Appointment doesn't exist please try again!");
         }
-        CommandLineTable appointmentTable = new CommandLineTable();
+        CommandLineTable appointmentTable = new CommandLineTable(title);
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
@@ -194,7 +195,7 @@ public class AppointmentList extends List {
         if (returnedFinderArray.isEmpty()) {
             UI.printParagraph("Appointment doesn't exist please try again!");
         } else {
-            CommandLineTable findAppointmentTable = new CommandLineTable();
+            CommandLineTable findAppointmentTable = new CommandLineTable(title);
             findAppointmentTable.setShowVerticalLines(true);
             findAppointmentTable.setHeaders("Appointment Id", "Patient Nric", "Patient Name", "Doctor Nric",
                     "Doctor Name", "Appointment Date", "Appointment Details");

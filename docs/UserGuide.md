@@ -81,7 +81,7 @@ at which Halpmi.jar is located.
 ## Features
 
 ### Adding: `add`
-Adds a new entry into the app. This entry can be either a doctor, patient or medicine.
+Adds a new entry into the app. This entry can be either a doctor, patient, medicine or appointment.
 
 #### ADD DOCTOR
 
@@ -152,7 +152,7 @@ Format: `add appointment /info [patient nric], [doctor nric], [appointment date]
 Example: `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup`
 
 ### Viewing: `view`
-Allows user to view existing records of doctors, patients and medicine.
+Allows user to view existing records of doctors, patients, medicine or appointment.
 
 #### VIEW DOCTOR
 
@@ -199,7 +199,8 @@ Example 5: `view appointment /info doctor name, John` <br>
 Example 6: `view appointment /info date, 2022-10-15`
 
 ### Deleting: `delete`
-Allows user to delete existing records of doctors, patients and medicine.
+Allows user to delete existing records of doctors, patients, medicine or appointment. Do note that all delete commands
+are irreversible.
 
 #### DELETE DOCTOR
 
@@ -238,7 +239,8 @@ Format: `delete appointment /info [appointment id]`
 Example: `delete appointment /info 12356710156543`
 
 ### Editing: `edit`
-
+Allows user to edit existing records of doctors, patients, medicine or appointment. Do note that successful edit
+commands will overwrite the previous data recorded.
 #### EDIT DOCTOR
 
 To edit an existing doctor in your application you can use the `edit doctor` command when prompted by HALPMI for your input.
