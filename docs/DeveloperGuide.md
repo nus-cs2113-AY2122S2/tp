@@ -195,9 +195,24 @@ The user starts by typing a list command.
 
 ### Edit Command
 
-![tbd](todo)
+![EditCommand1SequenceDiagram](EditCommand1SequenceDiagram.png)
+![EditCommand2SequenceDiagram](EditCommand2SequenceDiagram.png)
+![EditCommand3SequenceDiagram](EditCommand3SequenceDiagram.png)
 
-The above diagram todo
+The above diagrams show the sequence diagram when editing an item.
+
+The user starts by typing an `edit` command.
+
+1. `InvMgr` calls `parse(command)`. `command` is the user input, i.e. `edit 1 n/Marker q/5 d/To draw on whiteboard r/+`.
+2. `InvMgr` creates the appropriate `Command` object based on the user input. The arguments are also parsed and the needed values are stored within `EditCommand`.
+3. `InvMgr` calls `execute(itemList, ui)` of the `EditCommand` object.
+4. Within the `execute()` method of `EditCommand`, `EditCommand` will try to extract the `Item` at the specified index of `ItemList` (`1` in this case).
+5. Next, `EditCommand` duplicates the `Item`. It will be named as placeholderItem.
+6. `placeholderItem` will have its attributes set accordingly based on the presence of various arguments.
+   1. Since `name` is present (`n/Marker`), `EditCommand` will change the name of `placeholderItem` to `Marker`.
+   2. Since `quantity` is present (`q/5`), `EditCommand` will change the quantity of `placeholderItem`. An intermediary calculation is needed due to the presence of the relative modifier `r/+`. Ultimately, the quantity of `placeholderItem` will be increased by 5. 
+   3. Since `description` is present (`q/To draw on whiteboard`), `EditCommand` will change the description of `placeholderItem` to `To draw on whiteboard`.
+7. The `Item` at index 1 of `ItemList` will be replaced by the `placeholderItem`.
 
 ### Search Command
 

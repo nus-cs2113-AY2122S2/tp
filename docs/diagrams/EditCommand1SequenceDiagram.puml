@@ -1,0 +1,29 @@
+@startuml
+
+skinparam sequenceStereotypeFontColor red
+hide footbox
+
+Participant ":InvMgr" as InvMgr
+Participant "InputParser" as InputParser <<class>>
+Participant "inputCommand:EditCommand" as EditCommand
+
+activate InvMgr
+    InvMgr -> InputParser: parse("edit 1 n/Marker \nq/5 d/To draw on whiteboard r/+")
+    activate InputParser
+        create EditCommand
+        InputParser -> EditCommand:
+        activate EditCommand
+        return
+    return inputCommand: Command
+
+    InvMgr -> EditCommand: execute(itemList:ItemList, ui:Ui)
+    activate EditCommand
+    return
+
+    InvMgr -> Storage: writeData(ArrayList)
+    activate Storage
+    return
+
+deactivate InvMgr
+
+@enduml

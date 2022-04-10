@@ -9,21 +9,9 @@ Participant ":EditCommand" as EditCommand
 Participant "itemList:ItemList" as ItemList
 Participant "ui:Ui" as Ui
 Participant "placeholderItem" as placeholderItem
-Participant "Item" as ItemClass <<class>>
 
--> EditCommand: execute(itemList:ItemList, ui:Ui)
+
 activate EditCommand
-    EditCommand -> ItemList: getItem(index:int)
-    activate ItemList
-    return targetItem:Item
-
-    EditCommand -> ItemClass: copyItem(targetItem)
-    activate ItemClass
-        create placeholderItem
-        ItemClass -> placeholderItem: duplicates targetItem
-        activate placeholderItem
-        return
-    return placeholderItem: Item
 
     opt name is present
         EditCommand -> placeholderItem: setName(name: String)
@@ -54,6 +42,7 @@ activate EditCommand
     return
 
     destroy placeholderItem
-return
+<- EditCommand
+destroy EditCommand
 
 @enduml
