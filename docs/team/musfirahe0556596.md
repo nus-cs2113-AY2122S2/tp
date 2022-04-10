@@ -61,7 +61,7 @@ A summary of my code contributions are as follows:
 - Wrote the guide on [deleting an existing workout](../UserGuide.md#delete-a-workout-workout-delete).
 - Wrote the guide on [creating a new plan](../UserGuide.md#create-a-plan-plan-new).
 - Wrote the guide on [listing of plans](../UserGuide.md#list-a-plan-plan-list).
-- Modified some parts of the [Quick Start Guide](../UserGuide.md#quick-start-guide) section.
+- Wrote some parts of the [Quick Start Guide](../UserGuide.md#quick-start-guide) section.
 - Wrote parts of the table of contents.
 - Wrote parts of the [Command Summary](../UserGuide.md#command-summary).
 - Contributed to a part of the [FAQ](../UserGuide.md#1-my-terminal-in-windows-is-displaying-weird-symbols-when-i-run-the-application),
