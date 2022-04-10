@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam classAttributeIconSize 0
+hide empty member
+
+class UnitGood {
+-sku : String
+-name : String
+-description : String
+-capacity : Capacity
++convertCapacity(String capacity) : Capacity
++getCapacity() : Capacity
++getSku() : String
++getDescription() : String
++getName() : String
++toString() : String
+}
+
+Enum Capacity <<enumeration>>{
+SMALL
+MEDIUM
+LARGE
+}
+
+UnitGood -down->"capacity" Capacity
+
+@enduml

@@ -30,6 +30,33 @@ public class Display {
     //        }
     //    }
 
+    public static void hello() {
+        String logo = "Simplst";
+        System.out.println("Hello from\n" + logo);
+        System.out.println("What would you like to do?");
+    }
+
+    public static void bye() {
+        System.out.println("Bye");
+    }
+
+    public static void stateRestored() {
+        System.out.println("State restored!");
+    }
+
+    public static void stateSaved() {
+        System.out.println("State saved!");
+    }
+
+    public static void stateNotSaved() {
+        System.out.println("State not saved!");
+    }
+
+    public static void newLogin() {
+//         System.out.println("New login. Please type the total number of goods"
+//                 + " your warehouse can hold");
+        System.out.println("New login.");
+    }
 
     // successful output
     public static void inventoryGoodQtyRemoved(Float qty, String goodName) {
@@ -38,6 +65,10 @@ public class Display {
 
     public static void orderlineCheckedOff(String unitGoodName, String orderId) {
         System.out.println(unitGoodName + "of order " + orderId + " has been removed.");
+    }
+
+    public static void unitGoodAdded(String sku) {
+        System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
     }
 
 
@@ -50,6 +81,12 @@ public class Display {
     }
 
     // error outputs
+
+    public static void skuAlreadyExists(String sku) {
+        System.out.println("Item with SKU: " + sku + "already exists in the warehouse. "
+                + "Please check the SKU again.");
+    }
+
     public static void nonExistentGood() {
         System.out.println("The goods you are trying to remove are not on the current list. "
                 + "Please try another id or add the goods first.");
@@ -70,6 +107,17 @@ public class Display {
         System.out.println("The following " + obj + " has trouble serializing."); // perhaps reattempt reserializing?
     }
 
+    public static void tryCommandAgain() {
+        System.out.println("Please enter the command again.");
+    }
+
+    public static void inputAllFlags() {
+        System.out.println("Missing flag in input. Please key in all the flags required in the command.");
+    }
+
+    public static void fillCompulsoryFields() {
+        System.out.println("Non-optional fields are empty. Please fill in all compulsory fields.");
+    }
 
     // Command related
 
@@ -123,12 +171,12 @@ public class Display {
         System.out.println("\tExample: remove og/ oid/1 sku/WC1 q/1\n");
         System.out.println("Listing all orders");
         System.out.println("\tFormat: list o/\n");
-        System.out.println("Listing orderlines in a specific order");
+        System.out.println("Listing orderlines in an order");
         System.out.println("\tFormat: list og/ oid/[ORDER_ID]\n");
         System.out.println("\tExample: list og/ oid/1\n");
         System.out.println("View Command");
         System.out.println("\tFormat: view o/ oid/[ORDER_ID]");
-        System.out.println("\tExample: view ug/ oid/1\n");
+        System.out.println("\tExample: view o/ oid/1\n");
         System.out.println("Fulfill Command");
         System.out.println("\tFormat: fulfill oid/[ORDER_ID]");
         System.out.println("\tExample: fulfill oid/1\n");
@@ -140,9 +188,16 @@ public class Display {
         helpOrder();
     }
 
-    public static void tryCommandAgain() {
-        System.out.println("Please enter the command again.");
+    public static void jsonParseException(String fp) {
+        System.out.println("File: " + fp + " is not a valid json file.");
     }
 
+    public static void numberFormatException() {
+        System.out.println("Number formatting invalid");
+    }
+
+    public static void numberFormatException(String val, String type) {
+        System.out.println(val + " can't be intrepreted as type " + type);
+    }
 
 }

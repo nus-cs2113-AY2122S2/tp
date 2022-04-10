@@ -16,6 +16,7 @@ public class UnitGoodTest {
     public void convertCapacity_otherSymbols_capacityDefault() {
         String capacity = "./>5";
         UnitGood testUnitGood = new UnitGood("WC1", "Wooden Chair", "German Oak", capacity);
+
         assertEquals(Capacity.MEDIUM, testUnitGood.getCapacity());
     }
 

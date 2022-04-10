@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+Class UserInterface {
+    -warehouse : Warehouse
+    -listParser : ListParser
+    -viewParser : ViewParser
+    -addParser : AddParser
+    -removeParser : RemoveParser
+    -totalParser : TotalParser
+    -findParser : FindParser
+    -helpParser : HelpParser
+    -fulfillParser : FulfillParser
+    +run() : void
+}
+@enduml

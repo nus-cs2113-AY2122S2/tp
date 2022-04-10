@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide empty member
+
+class Orderline {
+- quantityFulfilled : int
+- isCheckedOff : boolean
++checkOff() : void
++getQuantityFulfilled() : int
++setQuantityFulfilled() : void
++getCheckedOff() : boolean
++toString() : String
+-isDone() : String
+}
+
+Orderline -up-|> Good
+
+@enduml
