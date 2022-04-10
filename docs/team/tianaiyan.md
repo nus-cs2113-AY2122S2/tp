@@ -1,4 +1,4 @@
-# Tianai - Project Portfolio Page
+# Project Portfolio Page of Yan Tianai (TianaiYan)
 
 ## Overview
 This page showcases my contributions to the development of WerkIt!, a team project (tP) in the CS2113T
