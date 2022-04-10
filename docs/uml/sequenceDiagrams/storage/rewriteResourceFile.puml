@@ -1,0 +1,37 @@
+@startuml
+!include ../../Style.puml
+
+title Sequence Diagram of Rewriting workouts.txt
+hide footbox
+
+autonumber
+
+participant "workoutCommand\n:WorkoutCommand" as WorkoutCommand COLOR_LOGIC
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
+participant "workoutList\n:WorkoutList" as WorkoutList COLOR_LOGIC
+
+activate WorkoutCommand COLOR_LOGIC
+WorkoutCommand -> FileManager : rewriteAllWorkoutsToFile(WorkoutList)
+activate FileManager COLOR_STORAGE
+FileManager ->WorkoutList : getWorkoutsDisplayList()
+activate WorkoutList COLOR_LOGIC
+return workoutsDisplayList:ArrayList<String>
+
+loop until workoutsDisplayList is\nfully iterated through
+FileManager -> WorkoutList : getWorkoutFromKey(workoutKey)
+activate WorkoutList COLOR_LOGIC
+return workoutObject:Workout
+FileManager -> FileManager : convertWorkoutToFileDataFormat(workoutObject)
+activate FileManager COLOR_STORAGE
+return workoutInFileFormat:String
+
+ref over FileManager
+Write workoutInFileFormat
+into workouts.txt
+(Method calls not shown)
+end
+
+end
+return
+
+@enduml

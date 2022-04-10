@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+hide footbox
+autonumber
+
+title Sequence Diagram of `search /workout` Command
+
+participant "werkIt\n:WerkIt" AS WerkIt #Sandybrown
+participant "newCommand\n:SearchCommand" AS newCommand #LightSkyBlue
+participant "workoutList\n:WorkoutList" AS WorkoutList #LightSkyBlue
+
+ref over WerkIt
+Obtain and parse user input.
+end
+
+
+activate WerkIt #Sandybrown
+
+WerkIt -> newCommand : execute()
+activate newCommand #LightSkyBlue
+newCommand -> WorkoutList : getWorkoutsDisplayList()
+activate WorkoutList #LightSkyBlue
+
+newCommand <-- WorkoutList : "workoutList:ArrayList<String>"
+deactivate WorkoutList
+
+newCommand -> newCommand : searchWorkout()
+activate newCommand #LightSkyBlue
+return A list of workouts to search is displayed
+newCommand --> WerkIt
+
+deactivate newCommand
+
+destroy newCommand
+@enduml

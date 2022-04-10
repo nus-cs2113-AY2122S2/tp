@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+hide footbox
+autonumber
+title Sequence Diagram of `workout /list` Command
+
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:WorkoutCommand" AS newCommand COLOR_LOGIC
+participant "workoutList\n:WorkoutList" AS WorkoutList COLOR_LOGIC
+participant "workout\n:Workout" AS Workout COLOR_LOGIC
+
+activate WerkIt COLOR_WERKIT
+ref over WerkIt
+Obtain and parse user input.
+end
+
+WerkIt -> newCommand : execute()
+activate newCommand COLOR_LOGIC
+
+newCommand -> WorkoutList : listAllWorkout()
+activate WorkoutList COLOR_LOGIC
+alt workoutDisplayList.size() <= 0
+WorkoutList --> newCommand: Display list is \nempty message
+else
+loop index <= workoutDisplayList.size()
+WorkoutList -> WorkoutList:getWorkoutFromIndexNum(index)
+activate WorkoutList COLOR_LOGIC
+return workoutObject:Workout
+WorkoutList->Workout: toString()
+activate Workout COLOR_LOGIC
+return displayString:String
+WorkoutList --> newCommand: Print workouts
+end
+end
+
+newCommand --> WerkIt
+destroy newCommand
+@enduml

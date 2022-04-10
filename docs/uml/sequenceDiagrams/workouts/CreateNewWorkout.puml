@@ -1,0 +1,36 @@
+@startuml
+!include ../../Style.puml
+
+title Sequence Diagram of `WorkoutList#createNewWorkout()`
+hide footbox
+
+skinparam participantBackgroundColor COLOR_LOGIC
+skinparam sequenceLifelineBackgroundColor COLOR_LOGIC
+
+autonumber 2.1
+
+participant "workoutList\n:WorkoutList" AS wl
+
+activate wl
+
+group sd Create new Workout and add it to list.
+
+ref over wl
+Parse the user input to obtain
+the exercise name and repetition count.
+(Method calls not shown)
+end
+
+ref over wl
+Check the validity of user input and
+throw exceptions if checking fails.
+(Method calls not shown)
+end
+
+create "newWorkout:Workout" AS newWorkout
+wl -> newWorkout : new Workout(userExerciseInput, userRepsInput)
+activate newWorkout
+return newWorkout:Workout
+
+end
+@enduml

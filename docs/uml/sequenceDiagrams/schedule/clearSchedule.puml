@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber
+hide footbox
+
+title Sequence Diagram of `schedule /clear` Command
+
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:ScheduleCommand" AS newCommand COLOR_LOGIC
+participant "dayList\n:DayList" AS DayList COLOR_LOGIC
+participant "ui:UI" As UI COLOR_UI
+
+activate WerkIt COLOR_WERKIT
+ref over WerkIt
+Obtain and parse user input
+end
+
+WerkIt -> newCommand : execute()
+activate newCommand COLOR_LOGIC
+
+newCommand -> DayList : clearDayPlan(userArgument)
+activate DayList COLOR_LOGIC
+
+ref over DayList
+Convert userArgument, dayNumber, from
+String to int data type
+(Method calls are not shown)
+end
+
+DayList -> DayList : isDayValid(dayNumber)
+activate DayList COLOR_LOGIC
+return :Boolean
+
+DayList -> DayList : clearPlan(dayNumber)
+activate DayList COLOR_LOGIC
+return
+DayList -> DayList : covertDayNumberToDay(dayNumber)
+activate DayList COLOR_LOGIC
+return dayName:String
+return
+deactivate DayList
+newCommand -> UI : printClearedScheduleOnADay(dayName)
+activate UI COLOR_UI
+UI--> newCommand: Print successfully remove \nplan from schedule message
+deactivate UI
+
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
+newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)
+activate FileManager COLOR_STORAGE
+ref over FileManager
+Write the plans scheduled
+for the week into 'schedule.txt'
+file on user's system.
+end
+newCommand <-- FileManager
+deactivate FileManager
+newCommand --> WerkIt
+destroy newCommand
+@enduml

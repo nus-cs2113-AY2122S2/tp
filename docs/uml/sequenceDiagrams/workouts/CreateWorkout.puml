@@ -1,0 +1,56 @@
+@startuml
+!include ../../Style.puml
+
+autonumber
+
+title Sequence Diagram of `workout /new` Command
+hide footbox
+
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:WorkoutCommand" AS newCommand COLOR_LOGIC
+participant "ui:UI" as UI COLOR_UI
+participant "workoutList\n:WorkoutList" AS WorkoutList COLOR_LOGIC
+participant "fileManager:FileManager" as FileManager COLOR_STORAGE
+
+activate WerkIt COLOR_WERKIT
+
+ref over WerkIt
+Obtain and parse user input.
+end
+
+WerkIt -> newCommand : execute()
+activate newCommand COLOR_LOGIC
+newCommand -> WorkoutList : createNewWorkout(userArgument)
+activate WorkoutList COLOR_LOGIC
+ref over WorkoutList
+Create new Workout
+end
+newCommand <-- WorkoutList : "newWorkout:Workout"
+deactivate WorkoutList
+
+newCommand -> WorkoutList : addNewWorkoutToList(newWorkout)
+activate WorkoutList COLOR_LOGIC
+ref over WorkoutList
+Add new Workout to lists
+(Method calls not shown)
+end
+return
+
+newCommand -> UI : printNewWorkoutCreatedMessage(newWorkout)
+activate UI COLOR_UI
+return
+
+newCommand -> FileManager : writeNewWorkoutToFile(newWorkout)
+activate FileManager COLOR_STORAGE
+ref over FileManager
+Write new Workout data
+into file on user's system.
+end
+newCommand <-- FileManager
+deactivate FileManager
+
+WerkIt <-- newCommand
+deactivate newCommand
+
+destroy newCommand
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/class-diagram'
+
+!include ../Style.puml
+
+hide circle
+
+skinparam classAttributeIconSize 0
+title Class Diagram of Schedule Component
+
+WerkIt -> Parser
+WerkIt -> UI
+Parser .r.> "{abstract}\nCommand"
+"{abstract}\nCommand" <|-- ScheduleCommand
+ScheduleCommand --> UI
+ScheduleCommand -d-> FileManager
+ScheduleCommand -r-> DayList
+UI <. FileManager
+
+class WerkIt COLOR_WERKIT {
++ startContinuousUserPrompt()
+}
+
+class DayList COLOR_LOGIC {
++ updateDay(userArgument:String):Day
++ printSchedule()
++ clearDayPlan(userArgument:String)
++ clearAllSchedule()
++ clearPlan(dayNumber:int)
+}
+
+class FileManager COLOR_STORAGE {
++ addFileScheduleToList(dayList:DayList, scheduleFileDataLine:String[]):void
++ rewriteAllDaysScheduleToFile(dayList:DayList):void
++ convertDayScheduleToFileDataFormat(day:Day):String
+}
+
+class "{abstract}\nCommand" COLOR_LOGIC {
+}
+
+class ScheduleCommand COLOR_LOGIC {
++ execute():void
+}
+
+
+
+class UI COLOR_UI {
++ getUserInput()
++ printScheduleFileNotFoundMessage():void
++ printScheduleFileCreatedMessage():void
++ printNewScheduleCreatedMessage(newDay:Day):void
++ printClearedScheduleMessage():void
+}
+
+class Parser COLOR_PARSER {
++ parseUserInput(userInput:String):Command
++ createScheduleCommand(userInput:String):ScheduleCommand
+}
+
+
+@enduml

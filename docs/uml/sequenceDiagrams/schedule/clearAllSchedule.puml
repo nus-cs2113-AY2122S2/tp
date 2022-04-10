@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber
+
+title Sequence Diagram of `schedule /clearall` Command
+hide footbox
+
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:ScheduleCommand" AS newCommand COLOR_LOGIC
+participant "dayList\n:DayList" AS DayList COLOR_LOGIC
+participant "ui:UI" AS UI COLOR_UI
+
+
+activate WerkIt COLOR_WERKIT
+ref over WerkIt
+Obtain and parse user input
+end
+
+WerkIt -> newCommand : execute()
+activate newCommand COLOR_LOGIC
+
+newCommand -> DayList : clearAllSchedule()
+activate DayList COLOR_LOGIC
+loop 7 times
+DayList -> DayList : clearPlan(dayNumber)
+activate DayList COLOR_LOGIC
+return
+end
+return
+deactivate DayList
+
+newCommand -> UI : printClearedScheduleMessage()
+activate UI COLOR_UI
+UI --> newCommand: Display a message to \nindicate the process is completed
+deactivate UI
+
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
+newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)
+activate FileManager COLOR_STORAGE
+ref over FileManager
+Write the plans scheduled
+for the week into 'schedule.txt'
+file on user's system.
+end
+newCommand <-- FileManager
+deactivate FileManager
+
+newCommand --> WerkIt
+destroy newCommand
+@enduml

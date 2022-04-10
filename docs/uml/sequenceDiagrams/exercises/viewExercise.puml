@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+hide footbox
+autonumber
+
+title Sequence Diagram of `exercise /list` Command
+
+
+participant "werkIt\n:WerkIt" AS WerkIt #Sandybrown
+
+
+participant "newCommand\n:ExerciseCommand" AS newCommand #LightSkyBlue
+participant "exerciseList\n:ExerciseList" AS ExerciseList #LightSkyBlue
+
+activate WerkIt #Sandybrown
+
+
+
+ref over WerkIt
+Obtain and parse user input.
+end
+
+
+WerkIt -> newCommand : execute()
+activate newCommand #LightSkyBlue
+newCommand -> ExerciseList : printExerciseList()
+activate ExerciseList #LightSkyBlue
+
+loop all exercises in plan list
+newCommand <-- ExerciseList : Show name of exercises
+end
+newCommand <-- ExerciseList
+deactivate ExerciseList
+WerkIt <-- newCommand
+
+
+deactivate newCommand
+
+destroy newCommand
+@enduml

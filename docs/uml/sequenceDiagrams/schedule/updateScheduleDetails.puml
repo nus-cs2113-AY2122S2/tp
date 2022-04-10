@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber 2.1
+hide footbox
+
+participant "dayList\n:DayList" AS DayList COLOR_LOGIC
+
+
+activate DayList COLOR_LOGIC
+
+group sd Add/update a plan for a Day.
+
+
+ref over DayList
+Obtain dayNumber and planNumber (split userInput by spacing).
+(Method calls are not shown)
+end
+
+ref over DayList
+Determine if only dayNumber and planNumber
+is obtained from userInput
+end
+
+ref over DayList
+Convert dayNumber and planNumber from
+data type String to int
+(Method calls are not shown)
+end
+
+DayList -> DayList:isDayValid(dayNumber)
+activate DayList COLOR_LOGIC
+return :Boolean
+
+DayList -> DayList:isPlanValid(planNumber)
+activate DayList COLOR_LOGIC
+return :Boolean
+
+participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
+DayList -> PlanList : getPlanDisplayList().get(planNumber - 1)
+activate PlanList COLOR_LOGIC
+return planToAddKey:String
+
+DayList -> PlanList : getPlanFromKey(planToAddKey)
+activate PlanList COLOR_LOGIC
+return planToAdd:Plan
+
+create "Day" AS newDay COLOR_LOGIC
+alt scheduleList[dayNumber - 1] == null
+DayList -> newDay : new Day(dayNumber, planToAdd)
+activate newDay COLOR_LOGIC
+return newDay:Day
+else
+DayList -> newDay :setNewPlanForThisDay(newDay, planToAdd)
+activate newDay COLOR_LOGIC
+return
+deactivate newDay
+end
+end
+
+
+@enduml

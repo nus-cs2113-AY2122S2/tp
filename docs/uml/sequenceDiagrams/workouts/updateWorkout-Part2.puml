@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber 4.1
+
+title Sequence Diagram of `WorkoutList#updateWorkout()`
+hide footbox
+
+participant "workoutList\n:WorkoutList" AS wl COLOR_LOGIC
+participant "updatedWorkout\n:Workout" AS workout COLOR_LOGIC
+
+activate wl COLOR_LOGIC
+
+ref over wl
+Parse the user input to obtain the workout
+index number and new repetition count.
+(Method calls not shown)
+end
+
+ref over wl
+Check the validity of user input and
+throw exceptions if checking fails.
+(Method calls not shown)
+end
+
+wl -> wl : getWorkoutFromIndexNum(indexToUpdate)
+activate wl COLOR_LOGIC
+return updatedWorkout:Workout
+
+wl --> workout : setRepetitions(newRepsValue)
+activate workout COLOR_LOGIC
+return
+
+wl -> wl : updateWorkoutsHashMapList(oldWorkoutKey, updatedWorkout)
+activate wl COLOR_LOGIC
+return
+
+@enduml

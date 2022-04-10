@@ -1,0 +1,5 @@
+theme: jekyll-theme-cayman
+markdown: kramdown
+plugins:
+  - jemoji
+  - jekyll-redirect-from

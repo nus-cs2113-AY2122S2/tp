@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+skinparam groupInheritance 2
+skinparam classFontSize 15
+hide circle
+hide empty methods
+hide empty attribute
+title Class Diagram for Logic Component
+
+rectangle Logic {
+Command <|-- HelpCommand
+Command <|-- ExitCommand
+Command <|-- ExerciseCommand
+Command <|-- WorkoutCommand
+Command <|-- PlanCommand
+Command <|-- ScheduleCommand
+Command <|-- SearchCommand
+ExerciseList <-u- ExerciseCommand
+WorkoutList <-u- WorkoutCommand
+PlanList <-u- WorkoutCommand
+PlanList <-u- PlanCommand
+PlanList <-u- ScheduleCommand
+DayList <-u- ScheduleCommand
+ExerciseList <-u- SearchCommand
+WorkoutList <-u- SearchCommand
+PlanList <-u- SearchCommand
+}
+
+Parser-.>Command:creates >
+WerkIt-r.>Command: executes >
+
+class "{abstract}\nCommand" as Command COLOR_LOGIC {
+}
+class Parser COLOR_PARSER {
+}
+class WerkIt COLOR_WERKIT {
+}
+class HelpCommand COLOR_LOGIC {
+}
+class ExitCommand COLOR_LOGIC {
+}
+class ExerciseCommand COLOR_LOGIC {
+}
+class WorkoutCommand COLOR_LOGIC {
+}
+class PlanCommand COLOR_LOGIC {
+}
+class ScheduleCommand COLOR_LOGIC {
+}
+class SearchCommand COLOR_LOGIC {
+}
+class ExerciseList COLOR_LOGIC {
+}
+class WorkoutList COLOR_LOGIC {
+}
+class PlanList COLOR_LOGIC {
+}
+class DayList COLOR_LOGIC {
+}
+@enduml

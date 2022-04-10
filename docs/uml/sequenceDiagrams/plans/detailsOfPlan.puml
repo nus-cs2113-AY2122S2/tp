@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber
+
+title Sequence Diagram of `plan /details` Command
+hide footbox
+
+participant "werkItn\:WerkIt" AS WerkIt COLOR_WERKIT
+participant "detailsCommand\n:PlanCommand" AS planCommand COLOR_LOGIC
+participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
+participant "plan\n:Plan" AS Plan COLOR_LOGIC
+participant "workout\n:Workout" AS Workout COLOR_LOGIC
+
+activate WerkIt COLOR_WERKIT
+ref over WerkIt
+Obtain and parse user input.
+end
+
+WerkIt -> planCommand : execute()
+activate planCommand COLOR_LOGIC
+planCommand -> PlanList : listPlanDetails(userArguments, ui)
+activate PlanList COLOR_LOGIC
+ref over PlanList
+Parse the user input to obtain the plan
+index number. (Method calls not shown)
+end
+
+ref over PlanList
+Check the validity of user input and
+throw exceptions if checking fails.
+(Method calls not shown)
+end
+
+PlanList -> PlanList : getPlanFromIndexNum(indexOfPlan)
+activate PlanList COLOR_LOGIC
+return planToViewDetails : Plan
+
+PlanList -> Plan : getWorkoutsInPlanList()
+activate Plan COLOR_LOGIC
+return workoutsInPlanList : ArrayList<Workout>
+
+loop index < numberOfWorkoutsInPlan
+PlanList -> Plan : get(index)
+activate Plan COLOR_LOGIC
+Plan -> Workout : toString()
+activate Workout COLOR_LOGIC
+return workoutDetails:String
+return workoutDetails:String
+deactivate Plan
+end
+
+planCommand <-- PlanList
+deactivate PlanList
+
+WerkIt <-- planCommand
+deactivate planCommand
+
+destroy planCommand
+@enduml

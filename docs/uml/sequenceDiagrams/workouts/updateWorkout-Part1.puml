@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber
+
+title Sequence Diagram of `workout /update` Command
+hide footbox
+
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "updateCommand\n:WorkoutCommand" AS updateCommand COLOR_LOGIC
+participant "workoutList\n:WorkoutList" AS WorkoutList COLOR_LOGIC
+participant "ui:UI" AS UI2 COLOR_UI
+participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
+
+activate WerkIt COLOR_WERKIT
+ref over WerkIt
+Obtain and parse user input.
+end
+
+WerkIt -> updateCommand : execute()
+activate updateCommand COLOR_LOGIC
+updateCommand -> WorkoutList : getCurrentWorkout(userArguments)
+activate WorkoutList COLOR_LOGIC
+ref over WorkoutList
+Find workout which will be updated.
+end
+updateCommand <-- WorkoutList : currentWorkout:String
+deactivate WorkoutList
+
+updateCommand -> WorkoutList : updateWorkout(userArguments)
+activate WorkoutList COLOR_LOGIC
+ref over WorkoutList
+Update workout with new number
+of repetitions specified by user.
+end
+updateCommand <-- WorkoutList : updatedWorkout:Workout
+deactivate WorkoutList
+
+updateCommand -> UI2 : printUpdateWorkoutMessage(updatedWorkout)
+activate UI2 COLOR_UI
+updateCommand <-- UI2
+deactivate UI2
+
+updateCommand -> PlanList : updatePlanContainsUpdatedWorkout(currentWorkout, updatedWorkout)
+activate PlanList COLOR_LOGIC
+ref over PlanList
+Find whether the updated workout
+is in any plan. If such plan exist,
+update the planList.
+end
+updateCommand <-- PlanList
+deactivate PlanList
+
+updateCommand -> FileManager : rewriteAllWorkoutsToFile(workoutList)
+activate FileManager COLOR_STORAGE
+ref over FileManager
+Rewrite modified workoutList
+data into file on user's system
+end
+updateCommand <-- FileManager
+deactivate FileManager
+
+updateCommand -> FileManager : rewriteAllPlansToFile(planList)
+activate FileManager COLOR_STORAGE
+ref over FileManager
+Rewrite modified planList
+data into file on user's system
+end
+updateCommand <-- FileManager
+deactivate FileManager
+
+WerkIt <-- updateCommand
+deactivate updateCommand
+
+destroy updateCommand
+@enduml

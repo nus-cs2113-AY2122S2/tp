@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+hide footbox
+
+autonumber
+
+Participant ":WerkIt" as WerkIt COLOR_WERKIT
+Participant ":UI" as UI COLOR_UI
+Participant ":Parser" as Parser COLOR_PARSER
+Participant ":Storage" as Storage COLOR_STORAGE
+
+activate WerkIt COLOR_WERKIT
+WerkIt -> UI : Ask and get user input
+activate UI COLOR_UI
+return User input in String
+deactivate UI
+
+WerkIt -> Parser : Parse user input
+activate Parser COLOR_PARSER
+
+create ":Logic" as Logic #LightSkyBlue
+Parser -> Logic : Create Command object
+activate Logic #LightSkyBlue
+return Command object
+
+Parser --> WerkIt : Command object
+deactivate Parser
+
+WerkIt -> Logic : Execute command
+activate Logic #LightSkyBlue
+
+Logic -> UI : Print command completed message
+activate UI COLOR_UI
+return
+deactivate UI
+
+Logic -> Storage : Write to local file
+activate Storage COLOR_STORAGE
+return
+deactivate Storage
+
+Logic --> WerkIt
+deactivate Logic
+
+@enduml

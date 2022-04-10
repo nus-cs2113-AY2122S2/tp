@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include ../Style.puml
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam classFontSize 16
+title Class Diagram of `exercise` Command
+Main -> WerkIt
+WerkIt -> Parser
+WerkIt -up-> UI
+ExerciseList <-up- ExerciseCommand
+"{abstract}\nCommand" <|- ExerciseCommand
+
+class Main COLOR_MAIN {
+
+}
+Parser ..> "{abstract}\nCommand"
+class WerkIt #Sandybrown {
++ startContinuousUserPrompt():void
+}
+
+class "{abstract}\nCommand" #LightSkyBlue {
+}
+
+
+
+class ExerciseCommand #LightSkyBlue {
++ execute():void
+}
+
+class UI #YellowGreen {
++ getUserInput():void
+}
+
+class Parser #Gold {
++ parseUserInput(userInput:String):Command
++ createExerciseCommand(userInput:String):ExerciseCommand
+}
+
+class ExerciseList #LightSkyBlue {
++ exercisesList: ArrayList<String>
++ printExerciseList():void
+}
+
+@enduml

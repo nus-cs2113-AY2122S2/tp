@@ -1,0 +1,29 @@
+@startuml
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include ../uml/Style.puml
+
+rectangle "<$user>\nUser" as User #Pink
+rectangle "<$documents>\nFiles" as Files #Snow
+
+title Architecture Diagram for WerkIt!
+rectangle {
+    rectangle UI COLOR_UI
+    rectangle Logic COLOR_LOGIC
+    rectangle Parser COLOR_PARSER
+    rectangle WerkIt COLOR_WERKIT
+    rectangle Main COLOR_MAIN
+    rectangle Storage COLOR_STORAGE
+}
+
+UI<.-up-User
+Main-up->WerkIt
+WerkIt-up->Parser
+Parser-up.>Logic
+Logic-right->Storage
+WerkIt-right->Storage
+WerkIt-left->UI
+Storage-right.>Files
+Files-left.>Storage
+
+@enduml

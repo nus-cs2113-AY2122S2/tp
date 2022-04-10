@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber 2.1
+
+title Sequence Diagram of `PlanList#createNewPlan()`
+hide footbox
+
+participant "planList\n:PlanList" AS pl COLOR_LOGIC
+
+activate pl COLOR_LOGIC
+group sd Write new Plan data into file on user's system.
+
+ref over pl
+Parse the user input to obtain the plan name and the workout index numbers separated by comma.
+(Method calls not shown)
+end
+
+ref over pl
+Obtain number of workouts to be added into the new plan (split string by comma).
+(Method calls not shown)
+end
+
+create "workoutsToAddInAPlanList\n:ArrayList<Workout>" AS wtoadd COLOR_LOGIC
+pl -> wtoadd : new ArrayList<Workout>()
+activate wtoadd COLOR_LOGIC
+return
+
+loop until all workouts to be added in a plan is added
+
+ref over pl
+Get each individual workout index from user input and
+fetch the corresponding Workout object from the application's workout list.
+(Method calls not shown)
+end
+
+pl -> wtoadd : add(workoutToAddObject)
+activate wtoadd COLOR_LOGIC
+return
+end
+
+create "newPlan:Plan" AS newPlan COLOR_LOGIC
+pl -> newPlan : new Plan(userPlanNameInput, workoutsToAddInAPlanList)
+activate newPlan COLOR_LOGIC
+return newPlan:Plan
+
+end
+@enduml

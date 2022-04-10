@@ -1,0 +1,27 @@
+@startuml
+!include ../../Style.puml
+
+title Sequence Diagram of Writing a New Workout to workouts.txt
+hide footbox
+
+autonumber
+
+participant "workoutCommand\n:WorkoutCommand" as WorkoutCommand COLOR_LOGIC
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
+
+activate WorkoutCommand COLOR_LOGIC
+WorkoutCommand -> FileManager : writeNewWorkoutToFile(newWorkout)
+activate FileManager COLOR_STORAGE
+FileManager -> FileManager : convertWorkoutToFileDataFormat(newWorkout)
+activate FileManager COLOR_STORAGE
+return workoutInFileFormat:String
+
+ref over FileManager
+Write workoutInFileFormat
+into workouts.txt
+(Method calls not shown)
+end
+
+return
+
+@enduml

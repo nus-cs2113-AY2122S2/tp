@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber
+
+title Sequence Diagram of `schedule /update` Command
+
+hide footbox
+
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:ScheduleCommand" AS newCommand COLOR_LOGIC
+participant "dayList\n:DayList" AS DayList COLOR_LOGIC
+participant "ui:UI" AS UI COLOR_UI
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
+
+activate WerkIt COLOR_WERKIT
+ref over WerkIt
+Obtain and parse user input
+end
+
+WerkIt -> newCommand : execute()
+activate newCommand COLOR_LOGIC
+newCommand -> DayList : updateDay(userArgument)
+activate DayList COLOR_LOGIC
+ref over DayList
+Add/update a
+plan for a Day.
+end
+newCommand <-- DayList : newDay:Day
+deactivate DayList
+
+newCommand -> UI : printNewScheduleCreatedMessage(newDay)
+activate UI COLOR_UI
+newCommand <-- UI : Plan successfully added/updated message
+deactivate UI
+
+newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)
+activate FileManager COLOR_STORAGE
+ref over FileManager
+Write the plans scheduled
+for the week into 'schedule.txt'
+file on user's system.
+end
+newCommand <-- FileManager
+deactivate FileManager
+
+WerkIt <-- newCommand
+deactivate newCommand
+
+destroy newCommand
+@enduml

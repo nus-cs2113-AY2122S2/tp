@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber
+
+title Sequence Diagram of `workout /delete` Command
+hide footbox
+
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "deleteCommand\n:WorkoutCommand" AS deleteCommand COLOR_LOGIC
+participant "workoutList\n:WorkoutList" AS WorkoutList COLOR_LOGIC
+participant "ui:UI" AS UI2 COLOR_UI
+participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
+participant "fileManager\n:FileManager" as FileManager COLOR_STORAGE
+
+activate WerkIt COLOR_WERKIT
+ref over WerkIt
+Obtain and parse user input.
+end
+
+WerkIt -> deleteCommand : execute()
+activate deleteCommand COLOR_LOGIC
+deleteCommand -> WorkoutList : deleteWorkout(userArguments)
+activate WorkoutList COLOR_LOGIC
+ref over WorkoutList
+Delete workout specified by user.
+end
+deleteCommand <-- WorkoutList : deletedWorkout:Workout
+deactivate WorkoutList
+
+deleteCommand -> UI2 : printDeleteWorkoutMessage(deletedWorkout)
+activate UI2 COLOR_UI
+deleteCommand <-- UI2
+deactivate UI2
+
+deleteCommand -> PlanList : deletePlanContainsDeletedWorkout(deletedWorkout.toString())
+activate PlanList COLOR_LOGIC
+deleteCommand <-- PlanList
+deactivate PlanList
+
+deleteCommand -> FileManager : rewriteAllWorkoutsToFile(workoutList)
+activate FileManager COLOR_STORAGE
+ref over FileManager
+Rewrite modified workoutList
+data into file on user's system
+end
+deleteCommand <-- FileManager
+deactivate FileManager
+
+deleteCommand -> FileManager : rewriteAllPlansToFile(planList)
+activate FileManager COLOR_STORAGE
+ref over FileManager
+Rewrite modified planList
+data into file on user's system
+end
+deleteCommand <-- FileManager
+deactivate FileManager
+
+WerkIt <-- deleteCommand
+deactivate deleteCommand
+
+destroy deleteCommand
+@enduml

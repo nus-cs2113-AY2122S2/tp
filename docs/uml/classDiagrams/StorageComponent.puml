@@ -1,0 +1,67 @@
+@startuml
+!include ../style.puml
+
+skinparam classAttributeIconSize 0
+skinparam classFontsize 14
+skinparam classAttributeFontSize 13
+skinparam arrowThickness 2
+skinparam noteFontSize 13
+
+hide circle
+
+class UI COLOR_UI {
+    + printDirectoryNotFoundMessage() : void
+    + printDirectoryCreatedMessage() : void
+    + printExerciseFileNotFoundMessage() : void
+    + printExerciseFileCreatedMessage() : void
+}
+
+class WerkIt COLOR_WERKIT
+
+package "Logic Component" <<rectangle>> {
+    class WorkoutCommand COLOR_LOGIC
+    class PlanCommand COLOR_LOGIC
+    class ScheduleCommand COLOR_LOGIC
+}
+package "Storage Component" <<rectangle>> {
+    class FileManager COLOR_STORAGE {
+        - directoryPath: Path
+        - exerciseFilePath: Path
+
+        + createDataDirectory() : void
+        + createExerciseFile() : void
+        + loadExercisesFromFile(ExerciseList) : void
+        + addFileWorkoutToList(WorkoutList, String[]) : void
+        + writeNewWorkoutToFile(Workout) : void
+        + rewriteAllWorkoutsToFile(WorkoutList) : void
+        + convertWorkoutToFileDataFormat(String) : String
+    }
+
+    class LogHandler COLOR_STORAGE {
+        - {static} logFileDirectory: Path
+        - {static} logFilePath: Path
+
+        + {static} startLogHandler() : void
+        + {static} linkToFileLogger(Logger) : void
+        + {static} checkAndCreateLogsDirectory(): void
+    }
+}
+
+
+
+'Associations
+LogHandler ..> FileManager
+FileManager ..> LogHandler
+
+FileManager --> UI
+UI ..> FileManager
+
+WerkIt -r-> "1" FileManager
+
+WorkoutCommand --> FileManager
+PlanCommand --> FileManager
+ScheduleCommand --> FileManager
+
+note right of FileManager #LightSalmon : Not all fields and methods are listed as\nmany are similar methods called to\noperate on the other applicaiton files.
+
+@enduml

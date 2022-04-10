@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+hide footbox
+autonumber
+
+title Sequence Diagram of `schedule /list` Command
+
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:ScheduleCommand" AS newCommand COLOR_LOGIC
+participant "dayList\n:DayList" AS DayList COLOR_LOGIC
+
+
+activate WerkIt COLOR_WERKIT
+ref over WerkIt
+Obtain and parse user input
+end
+
+WerkIt -> newCommand : execute()
+activate newCommand COLOR_LOGIC
+
+newCommand -> DayList : printSchedule()
+activate DayList COLOR_LOGIC
+loop 7 times
+DayList -> DayList : padWithSpaces(planForDay)
+activate DayList COLOR_LOGIC
+return planForDayWithPadding:String
+end
+
+loop 7 times
+DayList -> DayList : ConvertDayNumberToDay(dayNumber)
+activate DayList COLOR_LOGIC
+return info:String
+end
+
+newCommand <-- DayList : Display plans scheduled for the week
+newCommand --> WerkIt
+destroy newCommand
+@enduml

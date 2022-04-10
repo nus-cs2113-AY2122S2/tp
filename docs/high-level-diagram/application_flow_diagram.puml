@@ -1,0 +1,28 @@
+@startuml
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+rectangle "<$user>\nUser" as User #khaki
+
+
+title Application Flow
+rectangle {
+rectangle "Create a new workout" as workout #lightgreen
+rectangle "Create a new plan" as plan #lightblue
+rectangle "Add to schedule" as schedule #orange
+
+}
+rectangle "User has to first create a workout before \nhe/she can create a plan" as note1 #Salmon
+rectangle "User has to first create a plan before \nhe/she can schedule a plan into the schedule" as note2 #Salmon
+
+
+User-right->workout
+workout-down.note1
+workout-right->plan
+plan-down.note2
+plan-right->schedule
+
+
+
+
+@enduml

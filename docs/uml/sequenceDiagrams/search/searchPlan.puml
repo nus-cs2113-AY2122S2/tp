@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+hide footbox
+autonumber
+
+title Sequence Diagram of `search /plan` Command
+
+participant "werkIt\n:WerkIt" AS WerkIt #Sandybrown
+
+ref over WerkIt
+Obtain and parse user input.
+end
+
+
+participant "newCommand\n:SearchCommand" AS newCommand #LightSkyBlue
+participant "planList\n:PlanList" AS PlanList #LightSkyBlue
+
+activate WerkIt #Sandybrown
+
+WerkIt -> newCommand : execute()
+activate newCommand #LightSkyBlue
+newCommand -> PlanList : getPlansDisplayList()
+activate PlanList #LightSkyBlue
+
+newCommand <-- PlanList : "planList:ArrayList<String>"
+deactivate PlanList
+
+newCommand -> newCommand : searchPlan()
+activate newCommand #LightSkyBlue
+return A list of plans to search is displayed
+newCommand --> WerkIt
+
+deactivate newCommand
+
+destroy newCommand
+@enduml

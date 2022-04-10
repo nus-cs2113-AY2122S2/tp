@@ -1,0 +1,49 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+h5, h6 {
+  font-size: 1.1rem;
+}
+
+.box {
+  margin: 20px 10px 20px 10px;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+span.box {
+  display: block;
+}
+
+.warning {
+  background-color: #FAC898;
+  color: black;
+}
+
+.info {
+  background-color: #A7C7E7;
+  color: black;
+}
+
+.info a {
+  color:  #900C3F ;
+}
+
+div.page-break {
+  page-break-after: always;
+}
+
+a.button {
+  padding: 5px 10px 5px 10px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: #157977;
+  color: white;
+}
+
+div.button-container {
+  width: 100%;
+  text-align: center;
+}

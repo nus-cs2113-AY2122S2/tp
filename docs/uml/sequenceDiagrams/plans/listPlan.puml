@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../../Style.puml
+
+autonumber
+
+title Sequence Diagram of `plan /list` Command
+hide footbox
+
+participant "werkIt:WerkIt" AS WerkIt COLOR_WERKIT
+participant "newCommand\n:PlanCommand" AS newCommand COLOR_LOGIC
+participant "planList\n:PlanList" AS PlanList COLOR_LOGIC
+
+activate WerkIt COLOR_WERKIT
+ref over WerkIt
+Obtain and parse user input.
+end
+
+WerkIt -> newCommand : execute()
+activate newCommand COLOR_LOGIC
+newCommand -> PlanList : listAllPlan()
+activate PlanList COLOR_LOGIC
+opt application plan list is empty
+newCommand <-- PlanList : No plan created yet message
+end
+loop all plans in plan list
+newCommand <-- PlanList : Show name of plans
+end
+newCommand <-- PlanList
+deactivate PlanList
+
+WerkIt <-- newCommand
+deactivate newCommand
+
+destroy newCommand
+@enduml
