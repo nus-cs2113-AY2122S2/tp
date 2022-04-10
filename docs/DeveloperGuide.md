@@ -760,7 +760,7 @@ Test Scenario 3: There is a group with unique identifier of 1 named GroupTest1 w
              The list of persons for the session would include the persons found in the group.
 2. Test Command: `session /create /n SessionTest5 /gid 1 /pl David /d today`<br>
    Expected: A success message should be printed, indicating the details of the session as provided in the command.
-   The list of persons for the session would include the persons found in the group and also David.
+   The list of persons for the session includes Alice, Bob, Charlie and also David.
 3. Test Command: `session /create /n SessionTest6 /gid 2 /d today`<br>
    Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
 <hr>
