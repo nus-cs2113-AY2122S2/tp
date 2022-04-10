@@ -1155,8 +1155,8 @@ Format: `help`
 	 2. sit up (10 reps)
 	 3. pull up (10 reps)
 	 To create a new plan, enter the following command:
-	 plan /new Grow My Muscles /workouts 1, 2
-	 A new plan named Grow My Muscles with workout index 1 and 2
+	 plan /new grow my muscles /workouts 1, 2
+	 A new plan named grow my muscles with workout index 1 and 2
 	 will be created and added to the application's list of plans.
 ----------------------------------------------------------------------
 	 To delete a plan, please enter: 
