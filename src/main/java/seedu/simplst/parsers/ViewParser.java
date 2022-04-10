@@ -2,6 +2,8 @@ package seedu.simplst.parsers;
 
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.MissingFlagException;
 import util.exceptions.WrongCommandException;
 
 import java.util.HashMap;
@@ -11,7 +13,7 @@ public class ViewParser extends CommandParser {
         super(warehouse);
     }
 
-    protected void init_extract_params() {
+    protected void init_extract_params() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[uog]{1,2})/";
@@ -19,7 +21,7 @@ public class ViewParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException {
+    protected void extract_params() throws WrongCommandException, MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("o")) {
             // view order with flag "o/"
             String regexOrder = "oid/(?<oid>\\d*)";

@@ -122,10 +122,28 @@ The warehouse class will contain:
   - A linked hashmap is chosen for goods to ensure that we are able to maintain the ordering of goods added while having the simplicity of accessing the necessary goods through their SKU
 
 For more information of the methods regarding the Warehouse Class, check the [UserGuide](/UserGuide.md) to see what features are available to each of the above Classes.
+### Display Class
+Display class is used to store and display different messages to user.
+#### Description
+![Display Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Display.puml)
+
+By calling different methods of Display class, Simplst can print out different messages for user
+
+### UserInterface Class
+UserInterface class is used to take user input and pass it to the corresponding command parser.
+
+#### Description
+![UserInterface Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UserInterface.puml)
+
+After receiving user input, the first part of the command will be used to determine what is the command type of the input. 
+Then, it will pass the command to one of the command parsers. 
+After executing the commannd, user will be asked to input another command until the program is terminated.
+If the user input `bye`, no other command will be taken and the program will be terminated.  
 
 ### Command Parser
 #### Description
 This is the description for the Command Parser. This is an abstract class which all other parser classes will implement
+
 ![Command Parser Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/CommandParser.puml)
 
 #### Add Parser
