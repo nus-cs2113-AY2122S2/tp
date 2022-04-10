@@ -20,7 +20,6 @@ participant ":Income" as I USERFINANCIAL_COLOUR
 participant ":IncomeList" as IL USERFINANCIAL_COLOUR
 end box
 
-activate MMM MMM_COLOUR
 MMM -> C: executeCommand()
 
 activate C COMMANDS_COLOUR

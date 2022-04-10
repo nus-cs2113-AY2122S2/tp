@@ -2,7 +2,7 @@
 !include Style.puml
 
 box addCreditCard()
-participant ":Parser" as Parser PARSER_COLOUR
+participant ":MMM" as MMM MMM_COLOUR
 participant "AddCommand:Command" as AddCommand COMMANDS_COLOUR
 participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
 participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
@@ -11,7 +11,7 @@ participant ":CreditCardList" as CreditCardList DATA_COLOUR
 
 end box
 hide footbox
-Parser -> AddCommand: executeCommand()
+MMM -> AddCommand: executeCommand()
 activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> AddCommand: addCreditCard()
@@ -62,6 +62,6 @@ end note
 
 AddCommand --> AddCommand:
 deactivate AddCommand
-AddCommand --> Parser:
+AddCommand --> MMM:
 deactivate AddCommand
 @enduml
