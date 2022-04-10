@@ -34,6 +34,9 @@ public class DishManager extends Manager {
         return singleton;
     }
 
+    /**
+     * This is for testing.
+     */
     public static void resetInstance() {
         singleton = null;
     }
