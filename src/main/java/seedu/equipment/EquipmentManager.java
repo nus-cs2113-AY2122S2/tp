@@ -114,22 +114,6 @@ public class EquipmentManager {
         return new ArrayList<>(equipmentList.values());
     }
 
-    /**
-     * Creates an ArrayList of all Equipment with the specified EquipmentType.
-     *
-     * @param type Type of equipment in EquipmentType enum.
-     * @return An ArrayList of Equipment Objects with the specified type in equipmentList.
-     */
-    public ArrayList<Equipment> listEquipment(EquipmentType type) {
-        ArrayList<Equipment> listOfEquipments = new ArrayList<>();
-        for (Equipment equipment : equipmentList.values()) {
-            if (equipment.getType().equals(type)) {
-                listOfEquipments.add(equipment);
-            }
-        }
-        return listOfEquipments;
-    }
-
     public HashMap<String, Equipment> getEquipmentList() {
         return equipmentList;
     }
