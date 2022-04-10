@@ -130,7 +130,8 @@ norm when working in the industry. Thus, learning how to convert technical topic
 understood by non-technical professionals is also an important skill to have.
 
 Overall, this module has given me a greater appreciation for the 'art' of software engineering, especially when thinking
-about the large tech companies out there having to manage and maintain much more complex software and systems among a 
-large group of people, both technical (software developers) and non-technical (marketing managers).
+about the large tech companies out there having to manage and maintain much more complex software and systems among 
+large groups of people who are from technical (e.g. software developers) and non-technical (e.g. marketing managers) 
+backgrounds.
 
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
