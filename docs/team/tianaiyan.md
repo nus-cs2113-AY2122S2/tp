@@ -15,7 +15,7 @@ schedule for them to refer to and follow. More details about the project can be 
 ### Summary of Contributions
 ### Code Contributed
 A detailed report of my code contributions to the tP can be found in the 
-[tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=TianaiYan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
+[tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=TianaiYan&breakdown=true)
 hosted by the module coordinators of CS2113T.
 
 * Implemented `updateWorkout()` method in `WorkoutList` class, which allow users to modify the
