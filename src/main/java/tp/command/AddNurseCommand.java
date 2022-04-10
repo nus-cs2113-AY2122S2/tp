@@ -14,6 +14,7 @@ import tp.WardList;
 import tp.WardStorage;
 import tp.person.Nurse;
 
+//@@author DolphXty
 public class AddNurseCommand extends Command {
     protected String id;
     protected String name;

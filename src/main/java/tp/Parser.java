@@ -129,7 +129,7 @@ public class Parser {
         return new AddPatientCommand(id, name, phoneNumber, email, symptom, description);
     }
 
-    //@@ author DolphXty
+    //@@author DolphXty
     public Command parseAddWard(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
         int doctorIndex = dummy.indexOf("/d");
@@ -177,7 +177,7 @@ public class Parser {
         return new AddAppointmentCommand(doctorIndex, patientIndex, time);
     }
 
-    //@@ author DolphXty
+    //@@author DolphXty
     public Command parseAddPatientDescription(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
         int patientIndex = dummy.indexOf("/p");
@@ -255,6 +255,7 @@ public class Parser {
         }
     }
 
+    //@@author DolphXty
     public Command parseDeleteWard(String fullCommand) throws IHospitalException {
         String[] dummy = fullCommand.split(" ");
         if (dummy.length <= 2) {
