@@ -28,7 +28,7 @@ deactivate PlanList
 
 newCommand -> newCommand : searchPlan()
 activate newCommand #LightSkyBlue
-
+return A list of plans to search is displayed
 newCommand --> WerkIt
 
 deactivate newCommand

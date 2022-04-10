@@ -29,6 +29,7 @@ deactivate ExerciseList
 
 newCommand -> newCommand : searchExercise()
 activate newCommand #LightSkyBlue
+return A list of exercises to search is displayed
 newCommand --> WerkIt
 deactivate newCommand
 
