@@ -41,6 +41,24 @@ class ParserTest {
     private static final String CORRECT_SEARCH_NURSE_TWO = "search nurse 1 ";
     private static final String CORRECT_SEARCH_WARD_ONE = "search ward 1";
     private static final String CORRECT_SEARCH_WARD_TWO = "search ward 1 ";
+    private static final String CORRECT_EDIT_DOCTOR_ONE = "edit /d 1 /ph 12341234";
+    private static final String CORRECT_EDIT_DOCTOR_TWO = "edit /d 1 /e 12341234@gmail.com";
+    private static final String CORRECT_EDIT_PATIENT_ONE = "edit /p 1 /n Mike";
+    private static final String CORRECT_EDIT_PATIENT_TWO = "edit /p 1 /e 12341234@gmail.com";
+    private static final String CORRECT_EDIT_NURSE_ONE = "edit /nu 1 /t Senior";
+    private static final String CORRECT_EDIT_NURSE_TWO = "edit /nu 1 /t Senior  ";
+    private static final String CORRECT_EDIT_WARD_ONE = "edit /w 1 /id 2";
+    private static final String CORRECT_EDIT_WARD_TWO = "edit /w 1 /id 2 ";
+    private static final String CORRECT_DELETE_DOCTOR_ONE = "delete doctor 1";
+    private static final String CORRECT_DELETE_DOCTOR_TWO = "delete doctor 1 ";
+    private static final String CORRECT_DELETE_PATIENT_ONE = "delete patient 1";
+    private static final String CORRECT_DELETE_PATIENT_TWO = "delete patient 1 ";
+    private static final String CORRECT_DELETE_APPOINTMENT_ONE = "delete appointment 1";
+    private static final String CORRECT_DELETE_APPOINTMENT_TWO = "delete appointment 1 ";
+    private static final String CORRECT_DELETE_NURSE_ONE = "delete nurse 1";
+    private static final String CORRECT_DELETE_NURSE_TWO = "delete nurse 1 ";
+    private static final String CORRECT_DELETE_WARD_ONE = "delete ward 1";
+    private static final String CORRECT_DELETE_WARD_TWO = "delete ward 1 ";
 
     @Test
     void parse_addPatientCommand_correctCommandCreated() throws IHospitalException {
@@ -126,7 +144,31 @@ class ParserTest {
         parseAndAssertCommandType(CORRECT_SEARCH_WARD_TWO, SearchWardCommand.class);
     }
 
+    @Test
+    void parse_edit_correctCommandCreated() throws IHospitalException {
+        parseAndAssertCommandType(CORRECT_EDIT_DOCTOR_ONE, EditDoctorCommand.class);
+        parseAndAssertCommandType(CORRECT_EDIT_DOCTOR_TWO, EditDoctorCommand.class);
+        parseAndAssertCommandType(CORRECT_EDIT_PATIENT_ONE, EditPatientCommand.class);
+        parseAndAssertCommandType(CORRECT_EDIT_PATIENT_TWO, EditPatientCommand.class);
+        parseAndAssertCommandType(CORRECT_EDIT_NURSE_ONE, EditNurseCommand.class);
+        parseAndAssertCommandType(CORRECT_EDIT_NURSE_TWO, EditNurseCommand.class);
+        parseAndAssertCommandType(CORRECT_EDIT_WARD_ONE, EditWardCommand.class);
+        parseAndAssertCommandType(CORRECT_EDIT_WARD_TWO, EditWardCommand.class);
+    }
 
+    @Test
+    void parse_delete_correctCommandCreated() throws IHospitalException {
+        parseAndAssertCommandType(CORRECT_DELETE_DOCTOR_ONE, DeleteDoctorCommand.class);
+        parseAndAssertCommandType(CORRECT_DELETE_DOCTOR_TWO, DeleteDoctorCommand.class);
+        parseAndAssertCommandType(CORRECT_DELETE_PATIENT_ONE, DeletePatientCommand.class);
+        parseAndAssertCommandType(CORRECT_DELETE_PATIENT_TWO, DeletePatientCommand.class);
+        parseAndAssertCommandType(CORRECT_DELETE_NURSE_ONE, DeleteNurseCommand.class);
+        parseAndAssertCommandType(CORRECT_DELETE_NURSE_TWO, DeleteNurseCommand.class);
+        parseAndAssertCommandType(CORRECT_DELETE_WARD_ONE, DeleteWardCommand.class);
+        parseAndAssertCommandType(CORRECT_DELETE_WARD_TWO, DeleteWardCommand.class);
+        parseAndAssertCommandType(CORRECT_DELETE_APPOINTMENT_ONE, DeleteAppointmentCommand.class);
+        parseAndAssertCommandType(CORRECT_DELETE_APPOINTMENT_TWO, DeleteAppointmentCommand.class);
+    }
 
     private <T extends Command> void parseAndAssertCommandType(String input, Class<T> expectedCommandClass)
     throws IHospitalException {
