@@ -26,6 +26,7 @@ newCommand <-- WorkoutList : "workoutList:ArrayList<String>"
 deactivate WorkoutList
 
 newCommand -> newCommand : searchWorkout()
+activate newCommand #LightSkyBlue
 
 newCommand --> WerkIt
 

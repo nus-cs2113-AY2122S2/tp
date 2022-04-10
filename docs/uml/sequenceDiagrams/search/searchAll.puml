@@ -40,7 +40,10 @@ activate WorkoutList #LightSkyBlue
 newCommand <-- WorkoutList : "workoutList:ArrayList<String>"
 deactivate WorkoutList
 
+
 newCommand -> newCommand : searchAll()
+
+activate newCommand #LightSkyBlue
 
 newCommand --> WerkIt
 deactivate newCommand
