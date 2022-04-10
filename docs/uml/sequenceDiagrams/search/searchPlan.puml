@@ -27,6 +27,7 @@ newCommand <-- PlanList : "planList:ArrayList<String>"
 deactivate PlanList
 
 newCommand -> newCommand : searchPlan()
+activate newCommand #LightSkyBlue
 
 newCommand --> WerkIt
 
