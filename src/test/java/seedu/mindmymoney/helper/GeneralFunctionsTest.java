@@ -48,8 +48,10 @@ class GeneralFunctionsTest {
         String inputStringTwo = "/e /pm cash /c Food /d Shoes /a 30 /t 30/04/2021";
         new AddCommand(inputStringTwo, user).executeCommand();
         String listInString = new ListCommand("/e", user).expenditureListToString();
-        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using dbs [30/03/2022]\n"
-            + "2. $30.00 was spent on Shoes(Food) using Cash [30/04/2021]\n", listInString);
+        assertEquals("-----------------------------------------------" + System.lineSeparator()
+                + "1. $300.00 was spent on Nike Shoes(Personal) using dbs [30/03/2022]\n"
+                + "2. $30.00 was spent on Shoes(Food) using Cash [30/04/2021]\n"
+                + "-----------------------------------------------" + System.lineSeparator(), listInString);
 
         // Tests if findItemInList searches for the right payment method
         ArrayList<Expenditure> result = GeneralFunctions.findItemsInList("Cash",
@@ -94,8 +96,10 @@ class GeneralFunctionsTest {
         String inputStringTwo = "/e /pm cash /c Food /d Shoes /a 30 /t 30/04/2021";
         new AddCommand(inputStringTwo, user).executeCommand();
         String listInString = new ListCommand("/e", user).expenditureListToString();
-        assertEquals("1. $300.00 was spent on Nike Shoes(Personal) using dbs [30/03/2022]\n"
-            + "2. $30.00 was spent on Shoes(Food) using Cash [30/04/2021]\n", listInString);
+        assertEquals("-----------------------------------------------" + System.lineSeparator()
+                + "1. $300.00 was spent on Nike Shoes(Personal) using dbs [30/03/2022]\n"
+                + "2. $30.00 was spent on Shoes(Food) using Cash [30/04/2021]\n"
+                + "-----------------------------------------------" + System.lineSeparator(), listInString);
 
         assertThrows(MindMyMoneyException.class,
             () -> GeneralFunctions.findItemsInList("abc",
