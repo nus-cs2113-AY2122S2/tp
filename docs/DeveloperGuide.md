@@ -71,8 +71,8 @@ Timetable component consists of `Timer`, `Stopwatch`, `Countdown`, `TimerParser`
 ## Design & implementation
 
 ### Task Implementation
-Sherpass provides two different ways to add,delete and edit tasks. The `/repeat` option in commands allows users to add 
-recurring tasks (e.g. Weekly classes or meetings). Without the `/repeat` option, commands will only affect a single task.
+Sherpass provides two different ways to add, edit and delete tasks. The `/repeat` option in commands allows users to add 
+recurring tasks (e.g. weekly classes or meetings). Without the `/repeat` option, commands will only affect a single task.
 
 - Both recurring tasks and non-recurring tasks belongs to `Task` class which are stored
 in a `TaskList` object that is created when the program starts.
@@ -85,7 +85,7 @@ operate on.
 The edit command is handled by the `EditCommand` class, and it allows users to edit 1 or more occurrences of a task.
 
 If the edit command contains the `/repeat` option, the specified task
-and all its future occurrence will be edited. 
+and all its future occurrences will be edited. 
 
 The general procedure for editing a task with the `/repeat` option is as follows:
 1. Get all tasks that have the same identifier and has a later date than the specified task.
@@ -97,7 +97,11 @@ The general procedure for editing a task with the `/repeat` option is as follows
    3. Add the updated task into the temporary list
 5. Use the temporary list as the actual list
 
-The sequence diagram of `execute()` in `EditCommand` class is shown here:
+The sequence diagram for `EditCommand` for receiving input from the user is shown here:
+![editparseuserinputdiagram](images/EditParseUserInputSD.png)
+
+The `Main` class then calls the `execute` method of the `EditCommand` class.<br/>
+The sequence diagram of `execute()` in the `EditCommand` class is shown here:
 
 ![executesequencediagram](images/EditCommandSD.png)
 
@@ -112,17 +116,18 @@ The sequence diagram for `editSingleTask()` in `TaskList` is omitted as it is si
 The reason why the new dates are calculated using an offset instead of giving a date is because
 of the following scenario.
 
-1. Assume the user has a recurring task on 6th,7th and 8th June
+1. Assume the user has a recurring task on 6th, 7th and 8th June
 
 ![offset1](images/offset1.png)
 2. The user deletes the task on 7th June
 3. The user edits the task happening on 6th June to be on 10th June.
 
-|        | Not using offset               | Using offset                   |
-|--------|--------------------------------|--------------------------------|
-| Result | ![offset2](images/offset2.png) | ![offset3](images/offset3.png) |
+|                  | Result                         |
+|------------------|--------------------------------|
+| Not using offset | ![offset2](images/offset2.png) |
+| Using offset     | ![offset3](images/offset3.png) |
 
-By not using offsets, the gap between task 1 and 2 is lost. Hence, the decision to use offset to preserve such
+By not using offsets, the 2-day gap between task 1 and 2 is lost. Hence, the decision to use offset to preserve such
 details was chosen even though it would make implementation slightly more complicated.
 
 
