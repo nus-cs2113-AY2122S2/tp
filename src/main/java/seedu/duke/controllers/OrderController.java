@@ -61,6 +61,9 @@ public class OrderController extends Controller {
         return false;
     }
 
+    /**
+     * Prints all orders in the records.
+     */
     private void displayOrders() {
         if (orderManager.getOrderCount() > 0) {
             System.out.println("Printing all orders...");
@@ -72,6 +75,11 @@ public class OrderController extends Controller {
         }
     }
 
+    /**
+     * Add new order.
+     *
+     * @throws OperationTerminationException When user inputs terminator.
+     */
     private void addNewOrder() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is creating an order");
         System.out.println("Creating a new order...");
@@ -91,6 +99,11 @@ public class OrderController extends Controller {
 
     }
 
+    /**
+     * Delete order by ID.
+     *
+     * @throws OperationTerminationException When user inputs terminator.
+     */
     private void deleteOrder() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is deleting an order");
         System.out.println("Deleting an order...");
@@ -107,6 +120,11 @@ public class OrderController extends Controller {
         }
     }
 
+    /**
+     * Display order price by ID.
+     *
+     * @throws OperationTerminationException When user inputs terminator.
+     */
     private void displayPrice() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is displaying the price of an order");
         System.out.println("Getting total price of an order...");
@@ -118,6 +136,9 @@ public class OrderController extends Controller {
         }
     }
 
+    /**
+     * Display total order price.
+     */
     private void displayAllPrice() {
         MainLogger.logInfo(this, "User is displaying the total price of all orders");
         System.out.println("Getting total price of all orders in the list...");
@@ -128,6 +149,11 @@ public class OrderController extends Controller {
         }
     }
 
+    /**
+     * Print receipt by ID.
+     *
+     * @throws OperationTerminationException When user inputs terminator.
+     */
     private void printOrder() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is printing receipt");
         System.out.println("Printing receipt...");
