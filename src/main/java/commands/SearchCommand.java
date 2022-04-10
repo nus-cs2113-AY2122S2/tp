@@ -302,6 +302,7 @@ public class SearchCommand extends Command {
      * "Sorry, no matching exercise found." if no matching exercise could be found.
      *
      * @throws InvalidCommandException If the action specified by the user is invalid.
+     * @throws InvalidExerciseException If the exercise specified by the user is invalid.
      */
     public void searchExercise() throws InvalidCommandException, InvalidExerciseException {
         ArrayList<String> exerciseListToSearch = exerciseList.getExerciseList();
@@ -343,6 +344,7 @@ public class SearchCommand extends Command {
      * "Sorry, no matching plan found." if no matching plan could be found.
      *
      * @throws InvalidCommandException If the action specified by the user is invalid.
+     * @throws InvalidPlanException If the plan specified by the user is invalid.
      */
     public void searchPlan() throws InvalidCommandException, InvalidPlanException {
         var planListToSearch = planList.getPlansDisplayList();
@@ -391,6 +393,7 @@ public class SearchCommand extends Command {
      * "Sorry, no matching workout found." if no matching workout could be found.
      *
      * @throws InvalidCommandException If the action specified by the user is invalid.
+     * @throws InvalidWorkoutException If the workout specified by the user is invalid.
      */
     public void searchWorkout() throws InvalidCommandException, InvalidWorkoutException {
         var workoutListToSearch = workoutList.getWorkoutsDisplayList();
@@ -429,6 +432,9 @@ public class SearchCommand extends Command {
      * Prints the relevant exercises, workouts and plans that match the userArguments.
      *
      * @throws InvalidCommandException  If the action specified by the user is invalid.
+     * @throws InvalidPlanException  If the plan specified by the user is invalid.
+     * @throws InvalidWorkoutException  If the workout specified by the user is invalid.
+     * @throws InvalidExerciseException  If the exercise specified by the user is invalid.
      */
     public void searchAll() throws InvalidCommandException, InvalidPlanException,
             InvalidWorkoutException, InvalidExerciseException {
