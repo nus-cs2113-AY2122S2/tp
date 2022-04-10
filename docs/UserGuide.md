@@ -45,7 +45,6 @@ it correctly and with ease. Here are some icons which we will use to convey impo
 
 ## Table of Content
 - [Quick Start](#quick-start)
-- [Features](#features)
 - [Command Guide](#command-guide)
   - Task Management
     - Add tasks: [`add`](#adding-your-tasks-add)
@@ -115,6 +114,9 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 
 **Examples**
 - `add write final essay /do 25/6/2022 /start 20:00 /end 22:00 /bydate 27/6/2022 /bytime 23:59`
+
+
+
 - `add revise chapter 3 /do 25/6/2022 /start 20:00 /end 22:00`
 
 #### Adding a recurring task
@@ -139,6 +141,8 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 
 **Examples**
 - `add cs2113t weekly quiz /do 21/6/2022 /start 16:00 /end 18:00 /bydate 25/6/2022 /bytime 16:00 /repeat WEEKLY`
+
+
 - `add browse internship offers /do 27/6/2022 /start 21:00 /end 21:30 /repeat DAILY`
 
 ### Deleting your tasks: `delete`
@@ -197,6 +201,8 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 
 **Examples**
 - `edit 2 write draft essay`
+
+
 - `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00 /bydate 30/3/2022 /bytime 23:59`
 
 #### Editing a recurring task
@@ -262,20 +268,14 @@ Format:
 - `show tomorrow`/ `show tmr`
 - `show DATE`
 
-|     Parameters      | Description                                         | Accepted inputs                      | Optional                |
-|:-------------------:|-----------------------------------------------------|--------------------------------------|-------------------------|
-|        today        | Shows the schedule for the week you are in          |                                      |                         |
-| next week/ nextweek | Shows the schedule for the week after               |                                      |                         |
+|  Parameters   | Description                                  | Accepted inputs | Optional                                      |
+|:-------------:|----------------------------------------------|-----------------|-----------------------------------------------|
+|     today     | Shows the full timetable for the current day | N.A.            | No if you are intending to use this parameter |
+| tomorrow/tmr  | Shows the full timetable for the next day    | N.A.            | No if you are intending to use this parameter |
+|     DATE      | Shows the full timetable for a specific day  | d/M/yyyy format | No if you are intending to use this parameter |
 
-Format:
-- To see the schedule for the day: `show today`
-- To see the schedule for tomorrow: `show tomorrow` or `show tmr`
-- To see the schedule for a specific day: `show DATE`, where the date is in the format `d/M/YYYY`.
-  
-   E.g. `show 25/3/2022` shows the schedule for 25th March 2022
 
-Below is an example of the schedule that is being displayed from the given date
-25/3/2022:
+**Example**
 
 ![ShowDateTimetableFormat](images/showDateTimetableFormat.PNG)
 
@@ -285,16 +285,18 @@ If you are wondering what is your schedule for the current week or the next week
 for Sherpass has the ability to display your schedule for the current week or the week after.
 
 
-Command for `show next week` can be shortened to `show nextweek`.
+Format:
+- `show week`
+- `show next week`/ `show next week`
 
 
-|     Parameters      | Description                                         | Accepted inputs | Optional |
-|:-------------------:|-----------------------------------------------------|-----------------|----------|
-|        week         | Shows the schedule for the week you are in          | N.A.            | No       |
-| next week/ nextweek | Shows the schedule for the week after               | N.A.            | No       |
+|     Parameters      | Description                                         | Accepted inputs                                                  | Optional                                      |
+|:-------------------:|-----------------------------------------------------|------------------------------------------------------------------|-----------------------------------------------|
+|        week         | Shows the schedule for the week you are in          | N.A.                                                             | No if you are intending to use this parameter |
+| next week/ nextweek | Shows the schedule for the week after               | Command for `show next week` can be shortened to `show nextweek` | No if you are intending to use this parameter |
 
 
-Below is an example of the weekly schedule displayed:
+**Example**
 
 ![weeklyTimetablePart1](images/weeklyTimetablePart1.PNG)
 ![weeklyTimetablePart2](images/weeklyTimetablePart2.PNG)
@@ -305,30 +307,26 @@ If showing of your daily schedule or weekly schedule is not enough, Sherpass als
 monthly schedule.
 
 
->**💡 Note**
+>**⚠️Important Note:**
 >
 > Monthly Schedule will only display task that are in the current Month or the upcoming Month.
 >
 > Please use `show all` method to see task from previous months. 
 > 
-> To show any specific Month, only two types of input are accepted:
-> - 3-letter abbreviation of the specific month.
+> To show any specific Month, **_only two_** types of input are accepted:
+> - Three-letter abbreviation of the specific month.
 > - The full spelling of the specific month.
 
 Format:
-- To see the schedule for the current month: `show month`
-- To see the schedule for any specific month: `show MONTH`,
+- `show month`
+- `show MONTH`,
 
-|     Parameters      | Description                                         | Accepted inputs | Optional |
-|:-------------------:|-----------------------------------------------------|-----------------|----------|
-|        week         | Shows the schedule for the week you are in          | N.A.            | No       |
-| next week/ nextweek | Shows the schedule for the week after               | N.A.            | No       |
+| Parameters | Description                                 | Accepted inputs                                                                                                | Optional                                      |
+|:----------:|---------------------------------------------|----------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
+|   month    | Shows the schedule for the month you are in | N.A.                                                                                                           | No if you are intending to use this parameter |
+|   MONTH    | Shows the schedule for the specific month   | Three-letter abbreviations/Full spelling of the month, e.g. `show sep` or `show september` is the same command | No if you are intending to use this parameter |
 
-  E.g. `show sep` or `show september` is the same command 
-
-  E.g. `show september` to display the schedule for **September**
-
-Below is an example of the monthly schedule displayed:
+**Example**
 
 ![monthlySchedule](images/monthlySchedule.PNG)
 
@@ -338,14 +336,14 @@ Other than getting a timetable, Sherpass also allows you
 to view all the tasks that have been added/edited/deleted.
 
 Format:
-- To view all the tasks that exist in your list: `show all`
-- To view all the tasks that are yet to be completed: `show todo` 
+- `show all`
+- `show todo` 
 
 
-|     Parameters      | Description                                         | Accepted inputs | Optional |
-|:-------------------:|-----------------------------------------------------|-----------------|----------|
-|        week         | Shows the schedule for the week you are in          | N.A.            | No       |
-| next week/ nextweek | Shows the schedule for the week after               | N.A.            | No       |
+| Parameters | Description                                                   | Accepted inputs | Optional                                      |
+|:----------:|---------------------------------------------------------------|-----------------|-----------------------------------------------|
+|    all     | Shows a condensed timetable containing all the existing tasks | N.A.            | No if you are intending to use this parameter |
+|    todo    | Shows a condensed timetable containing all pending tasks      | N.A.            | No if you are intending to use this parameter |
 
 Below are some sample outputs using `show all` and `show todo` respectively
 
@@ -604,6 +602,7 @@ In the case for Sherpass, a parameter would be a valid input that accompanies a 
 For example, in the [`show`](#show-your-tasks-show) command,
 one of the options provided is `show all`. The `all` keyword would thus be the parameter.
 * *Extraneous* - Something that is unnecessary or irrelevant.
+
 ## Command Summary
 
 | Action                                | Format, Examples                                                                                                                                                                                                                                 |
