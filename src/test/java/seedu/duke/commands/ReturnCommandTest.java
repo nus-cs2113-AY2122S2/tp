@@ -24,7 +24,7 @@ public class ReturnCommandTest {
         itemList.addItem(item1);
         LocalDate startDate1 = LocalDate.parse("2022-03-21");
         LocalDate endDate1 = LocalDate.parse("2022-04-02");
-        BorrowRecord borrowRecord1 = new BorrowRecord(startDate1, endDate1, "John Doe", BorrowStatus.PAST);
+        BorrowRecord borrowRecord1 = new BorrowRecord(3, startDate1, endDate1, "John Doe");
         borrowRecord1.setReturnStatus(true);
         item1.addBorrowRecord(borrowRecord1);
 
@@ -32,7 +32,7 @@ public class ReturnCommandTest {
         itemList.addItem(item2);
         LocalDate startDate2 = LocalDate.parse("2022-03-21");
         LocalDate endDate2 = LocalDate.parse("2022-04-02");
-        BorrowRecord borrowRecord2 = new BorrowRecord(startDate2, endDate2, "John Doe", BorrowStatus.PAST);
+        BorrowRecord borrowRecord2 = new BorrowRecord(1, startDate2, endDate2, "John Doe");
         item2.addBorrowRecord(borrowRecord2);
     }
 
@@ -84,7 +84,7 @@ public class ReturnCommandTest {
         itemList.addItem(item2);
         LocalDate startDate2 = LocalDate.now().plusDays(-1);
         LocalDate endDate2 = LocalDate.now().plusDays(2);
-        BorrowRecord borrowRecord2 = new BorrowRecord(startDate2, endDate2, "John Doe", BorrowStatus.PRESENT);
+        BorrowRecord borrowRecord2 = new BorrowRecord(1, startDate2, endDate2, "John Doe");
         item2.addBorrowRecord(borrowRecord2);
         ReturnCommand c = new ReturnCommand(1);
         c.execute(itemList, ui);
