@@ -40,6 +40,7 @@ you to:
     * [Exit the program: `bye`](#exit-codebyecode)
 * [Frequently Asked Questions](#faq)
 * [Command Summary](#command-summary)
+* [Category Summary](#category-summary)
 
 > :information_source: Notes:
 > * This User Guide is only meant to be read at the [github page](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html).
@@ -447,7 +448,7 @@ the [features](#features) section.
 | [Searching for details](#searching-for-details-find)                | find /d __ [ /c __ ] <br/>e.g.<br/> `> find salary` <br/> `> find sugar /c 4`                                                                                       |
 | [Exit the program](#exit-bye)                                       | bye                                                                                                                                                                 |
 
-[**Category Summary**](#show-expenditure-categories-codelistcatcode)
+## Category Summary
 
 | Index | Name                  |
 |-------|-----------------------|
