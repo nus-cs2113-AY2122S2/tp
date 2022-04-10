@@ -28,6 +28,7 @@ public class TravelPackage {
     private final int maxParticipants;
     private int numParticipants;
     private Reservations reservationList;
+    private Hotels hotelsList;
 
     public TravelPackage(String name, int id, LocalDate startDate, LocalDate endDate,
                          String hotel, double price, String country, int maxParticipants) {
@@ -41,6 +42,7 @@ public class TravelPackage {
         this.maxParticipants = maxParticipants;
         this.numParticipants = 0;
         this.reservationList = new Reservations();
+        this.hotelsList = new Hotels();
     }
 
     public TravelPackage(String name, int id, LocalDate startDate, LocalDate endDate,
@@ -55,6 +57,7 @@ public class TravelPackage {
         this.maxParticipants = maxParticipants;
         this.numParticipants = numParticipants;
         this.reservationList = new Reservations();
+        this.hotelsList = new Hotels();
     }
 
     public boolean isFull() {
@@ -101,6 +104,10 @@ public class TravelPackage {
         return this.reservationList;
     }
 
+    public Hotels getHotelsList() {
+        return this.hotelsList;
+    }
+
     public void addParticipants(int addParticipants) {
         this.numParticipants = this.numParticipants + addParticipants;
     }
@@ -111,6 +118,10 @@ public class TravelPackage {
 
     public void setReservationList(Reservations r) {
         this.reservationList = r;
+    }
+
+    public void setHotelsList(Hotels h) {
+        this.hotelsList = h;
     }
 
     public String toString() {
