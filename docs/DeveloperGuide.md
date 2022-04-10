@@ -192,8 +192,8 @@ required.
 
 How the `Parser` component is used:
 
-1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command to
-   be executed.
+1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command 
+   to be executed.
 2. This will result in the keyword of the command to be returned as a string.
 3. When necessary, the `parseXYZ()` methods will be called upon to parse more terms for the `Commands`
    component to obtain the details required for the command execution (e.g. `parseGroupIndex("add /n Alice /g 2")`
@@ -206,7 +206,7 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 
 ![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
 
-> :information_source: **Note:** The following are the ranges of index deemed valid:
+> :information_source: **Note:** The following are the range of indexes deemed valid:
 
 | Index       | Range                                                                               |
 |-------------|-------------------------------------------------------------------------------------|

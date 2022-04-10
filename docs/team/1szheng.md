@@ -107,32 +107,10 @@ better management, and categorise your expenditures. PlanITarium is written in, 
       [#124](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/124),
       [#237](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/237)
 
-<br/>
-
 ## Reproduced [User Guide](../UserGuide.md) Contribution
 
-### Quick Notes
-
-The following table describes the **formats** used in this User Guide.
-
-| <div style="width:120px">Format</div> | Description                                                                                                                                              |
-|:--------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/x`                                  | A forward slash that is appended by a letter denotes a delimiter that should be accompanied by a parameter e.g. `/n NAME`.                               |
-| `PARAMETER`                           | The terms in upper casing are placeholders parameters for details to be supplied by you e.g. `add /n Alice` instead of `add /n NAME`.                    |
-| `/x PARAMETER`                        | The delimiter-parameter pairs not enclosed in any brackets are compulsory inputs to be supplied by you.                                                  |
-| `[/x PARAMETER]`                      | The delimiter-parameter pairs enclosed in square brackets are optional inputs that you may choose not to provide.                                        |
-| <code>/p <T&#124;(any)>               | The parameters enclosed in angle brackets indicates that they have fixed values. You may choose any of the values that are separated by a vertical pipe. |
-
-Some additional points to take note of:
-
-* You may provide the delimiter-parameter pairs in any preferred order.
-    * Example: `add /n Alice /g 2`, `add /g 2 /n Alice`
-* If you wish to use a forward slash `/` in any parameters, enclose them in whitespaces or use <code>&#92;</code>
-  instead.
-    * Example: `Bought on / off switch` or `Bought on\off switch` as a description
-* You need not include any currency symbols, and monetary values are in at most 2 decimal places.
-* You may provide duplicate entries such as when you have two family members with the same name. PlanITarium will track
-  each of them as separate entries via indexing.
+This section contains the reproduction of some of my contributions to the Developer Guide. The hyperlinks have been
+reproduced for aesthetic purposes only and may not be operable.
 
 ### Features
 
@@ -160,7 +138,7 @@ This section describes each command in detail.
 
 ---
 
-#### Add an income: `addin`
+### Add an income: `addin`
 
 > Adds an entry to your list of tracked incomes.
 
@@ -188,7 +166,7 @@ Example of usage:
 
 ---
 
-#### Delete an income: `deletein`
+### Delete an income: `deletein`
 
 > Deletes an entry from your list of tracked incomes.
 
@@ -216,3 +194,100 @@ Example of usage:
 
 ## Reproduced [Developer Guide](../DeveloperGuide.md) Contribution
 
+This section contains the reproduction of some of my contributions to the Developer Guide. The hyperlinks have been
+reproduced for aesthetic purposes only and may not be operable.
+
+### Architecture
+
+The ***Architecture Diagram*** given below shows the high-level design of PlanITarium.
+
+![ArchitectureDiagram](../images/ArchitectureDiagram.png)
+
+> :information_source: **Note:** The that `.puml` files used to create diagrams in this document
+> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#acknowledgements)
+> to learn how to create and edit these diagrams when necessary.
+
+**Overview of components in the Architecture**
+
+[`Main`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/PlanITarium.java)
+is responsible for,
+
+* At launch, initialize the components in an appropriate manner and calls Storage to read data if any.
+* Read user's commands from standard input for command execution.
+* At shut down, invokes shutdown sequence and calls Storage to save its current data.
+
+[`UI`](#ui-component) is responsible for the UI of PlanITarium.
+
+[`Commands`](#commands-component) is responsible for the handling and executing of commands.
+
+[`Parser`](#parser-component) is responsible for the parsing and validating of user input.
+
+[`Family`](#family-component) is responsible for holding the user data of PlanITarium in memory.
+
+[`Money`](#money-component) is responsible for holding the monetary information in memory.
+
+[`Storage`](#storage-component) is responsible for reading and writing data to the hard disk.
+
+**How the components interact with each other**
+
+The following Sequence Diagram shows a high-level view on how the components interact when the user enters the command
+`add /g 2 /n Alice`.
+
+![ArchitectureSequenceDiagram](../images/ArchitectureSequenceDiagram.png)
+> :information_source: **Note:** The lifeline for `AddPersonCommand` ends at the destroy marker :x:
+> but due to the limitations of PlantUML, the lifeline reaches the end of the diagram.
+
+Each of the components are defined and implemented as a class with the same name. The section below provides more
+in-depth details on how the components interact with one another.
+
+Each component may consist of several classes that are working seamlessly together to achieve their intended abstracted
+representation. For example, the `Money` component contains an abstract class that is extended by `Income` and
+`Expenditure` to represent the types of money that can be managed.
+
+### Parser Component
+
+**Class:** [`Parser.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
+
+The Class Diagram below shows the full structure of the `Parser` component and the components it interacts with.
+
+![ParserClassDiagram](../images/ParserClassDiagram.png)
+
+The `Parser` component consists of the
+[`Parser`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
+class,
+[`ParserUtility`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/ParserUtility.java)
+class and several `Exception` classes.
+
+The `Parser` class provides the `parseXYZ()` and `getValidXYZ()` methods where `XYZ` is a placeholder for the type of
+term (e.g. `parseCommandType()` and `getValidUserIndex`). The methods prepended by **parse** assists in parsing the user
+input into its respective terms and the method prepended by **getValid** assists in validating the parsed terms and
+returning an appropriately typed object to the `Commands` component. The `Parser` class interacts with the
+`ParserUtility` class which provides supporting methods for parsing and validating. Both classes throws exceptions as
+required.
+
+How the `Parser` component is used:
+
+1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command
+   to be executed.
+2. This will result in the keyword of the command to be returned as a string.
+3. When necessary, the `parseXYZ()` methods will be called upon to parse more terms for the `Commands`
+   component to obtain the details required for the command execution (e.g. `parseGroupIndex("add /n Alice /g 2")`
+   to get group 2). The `ParserUtility` assists the parsing during this process by providing utility methods.
+4. The `getValidXYZ()` methods will also be called upon thereafter to check and return valid typecasted objects to be
+   used for the command execution (e.g. `getValidGroupIndex(indexString)` to check that the index provided corresponds
+   to an existing group). The `ParserUtility` is also called here to assist with the validation process.
+
+The following Sequence Diagram shows how the classes of the `Parser` component interacts for each user command.
+
+![ParserOverviewSequenceDiagram](../images/ParserSequenceDiagram0.png)
+
+> :information_source: **Note:** The following are the range of indexes deemed valid:
+
+| Index       | Range                                                                               |
+|-------------|-------------------------------------------------------------------------------------|
+| Group       | [1, ..., 3]                                                                         |
+| User        | [1, ..., MAX_UID], where MAX_UID is the number of people in the given group         |
+| Category    | [1, ..., 6]                                                                         |
+| Income      | [1, ..., MAX_IID], where MAX_IID is the number of income entries for a given person |
+| Expenditure | [1, ..., MAX_EID], where MAX_EID is the number of income entries for a given person |
