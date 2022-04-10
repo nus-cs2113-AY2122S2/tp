@@ -127,7 +127,7 @@ Display class is used to store and display different messages to user.
 #### Description
 ![Display Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Display.puml)
 
-By calling different methods of Display class, Simplst can print out different messages for user
+By calling different methods of Display class, Simplst can print out different messages for users.
 
 ### UserInterface Class
 UserInterface class is used to take user input and pass it to the corresponding command parser.
@@ -135,10 +135,13 @@ UserInterface class is used to take user input and pass it to the corresponding 
 #### Description
 ![UserInterface Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UserInterface.puml)
 
-After receiving user input, the first part of the command will be used to determine what is the command type of the input. 
-Then, it will pass the command to one of the command parsers. 
-After executing the commannd, user will be asked to input another command until the program is terminated.
-If the user input `bye`, no other command will be taken and the program will be terminated.  
+The main method in UserInterface is the run() method. This would choose what which Parser to send the user's input to based on the 1st word of the user's input.
+Below are the steps taken:
+
+1. After receiving user input, the first part of the command will be used to determine what is the command type of the input. 
+2. It will pass the command to the corresponding command parser. 
+3. After executing the commannd, user will be asked to input another command until the program is terminated.
+4. This will continue until the user inputs `bye`, no other command will be taken and the program will be terminated.
 
 ### Command Parser
 #### Description
