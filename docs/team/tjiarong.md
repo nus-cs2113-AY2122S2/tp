@@ -58,13 +58,12 @@ Given below are my contributions to the project.
     * User Guide (UG):
         * Added documentation for the features `editin` and `find`: 
           [#169](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/169/files)
-    * Developer Guide (DG):
+    * Developer Guide (DG) [#255](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/255/files):
         * Added sections on `Money` design.
         * Added UML diagrams for `Money` component and `Find` implementation.
         * Added manual testing instructions for adding persons.
         * Added terms for the Glossary section.
-        * [#255](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/255/files)
-
+        
 <p></p>
 
 * **Team-based Contribution**:
