@@ -13,22 +13,22 @@ Given below is an overview of the main components and how they interact with eac
 
 ### Data component
 The data component consists of customers, flight bookings, menu items, routes data as well as exceptions and validity checkers.<br>
-The actual data objects are encapsulated in the respective data managers. For example, the list of Customer objects are maintained in the CustomerManager object.<br>
+The actual data objects are encapsulated in the respective data managers. For example, the list of `Customer` objects are maintained in an object of `CustomerManager` class.<br>
 In this way, data are encapsulated and decoupled from higher layers.
 Manipulation of data can only be performed through data managers to ensure data integrity.
 
 ### Command component
-Command class is an abstract class, which is then extended as specific commands such as BookCommand and AddRouteCommand.<br>
+`Command` class is an abstract class, which is then extended as specific commands such as `BookCommand` and `AddRouteCommand`.<br>
 Each command interacts with data managers to create, retrieve, delete or modify data.<br>
 This design makes use of polymorphism, such that duplication is avoided and the functionalities can be easily expanded.
 
 ### Parser component
 Parser component consists of a general parser and dedicated parsers for customers data and flight bookings respectively. <br>
-The parser object takes in user input string, extracts desired information and returns a command object.<br>
-The parser class decouples the command class from parsing input. Thus, each class has only one dedicated responsibility.
+The `Parser` object takes in user input string, extracts desired information and returns a `Command` object.<br>
+The `Parser` class decouples the command class from parsing input. Thus, each class has only one dedicated responsibility.
 
 ### Storage component
-Each data class has a file manager to handle data storage, such as CustomerFileManager for customer data and RouteFileManager for route data.<br>
+Each data class has a file manager to handle data storage, such as `CustomerFileManager` for customer data and `RouteFileManager` for route data.<br>
 The file manager is responsible for decoding, encoding, saving and loading data from text file.
 
 ### Common component
@@ -56,6 +56,11 @@ This section describes how certain features are implemented. Only part of the fe
 ### 5. List Booking Command
 5.1 The following sequence diagram shows how the List Booking Command works.
 ![](diagrams/listBooking.jpg)
+
+### 6. Add Customer Command
+6.1 The following class diagram shows the implementation of the Add Customer Command. <br>
+(Only part of the classes, attributes and operations related to the Add Customer Command are shown here.)
+![](diagrams/AddCustomer_Class_Diagram.jpg)
 
 ## Product scope
 ### Target user profile
