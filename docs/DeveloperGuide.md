@@ -271,8 +271,6 @@ It also interacts with the classes to obtain the necessary inputs or facilitate 
 - Ui
 - Main
 
-Below is a summary of the relationships between the mentioned classes
-
 #### Parser Class
 
 The **Parser** is a class which parses the inputs which the user enters. 
