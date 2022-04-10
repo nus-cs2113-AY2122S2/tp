@@ -781,6 +781,18 @@ Test Scenario 1: There is a sessions with unique identifier of 1 stored in the a
 > For details on the usage of `session /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-session-session-edit).
 <hr>
 
+Test Scenario 1: A session has been created with a unique identifier of 1, named SessionTest1 with Alice and Bob involved on 10-04-2022.
+1. Test Command: `session /edit /sid 1 /n SessionTest1`<br>
+   Expected: A message should be printed, indicating no edits were made.
+2. Test Command: `session /edit /sid 1 /n SessionTest10`<br>
+   Expected: A success message should be printed, indicating the session was edited.
+3. Test Command: `session /edit /sid /pl Alice Bob Charlie`<br>
+   Expected: A success message should be printed, indicating the session was edited.
+4. Test Command: `session /edit /sid 1 /pl Alice`<br>
+   Expected: An error message should be printed, indicating that there are missing persons from the original list of persons of the session.
+5. Test Command: `session /edit /sid 1`<br>
+   Expected: An error message should be printed, indicating no delimiters were found.
+
 #### Settling a Session
 > For details on the usage of `session /summary` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#settling-all-transactions-for-a-session-session-summary).
 <hr>
