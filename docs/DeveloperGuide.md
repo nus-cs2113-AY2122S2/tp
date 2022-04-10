@@ -43,7 +43,10 @@ title: Developer Guide
 * [Glossary](#glossary)
 
 ## Acknowledgements
-* Address Book (Level-3) - Provide samples of User Guide(UG) and Developer Guide(DG)
+We would like to acknowledge [Address Book (Level-3)](https://github.com/se-edu/addressbook-level3) for providing much
+insight as to how we could improve SplitLah and develop SplitLah while abiding by Object-Oriented Programming principles.
+We also referenced their [User Guide(UG)](https://se-education.org/addressbook-level3/UserGuide.html)
+and [Developer Guide(DG)](https://se-education.org/addressbook-level3/DeveloperGuide.html) to structure SplitLah's documentation.
 
 ## Introduction
 This guide's purpose is to explain the internal workings of SplitLah, so that future engineers can understand the application's implementation in detail and continue working on the project with ease.
