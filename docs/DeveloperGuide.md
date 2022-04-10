@@ -572,14 +572,13 @@ when the user invokes the `group /delete` command.
 
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
+The sequence diagram for `GroupViewCommand` is omitted as it bears many similarities with [`SessionViewCommand`](#view-a-session).<br>
+The interactions of GroupViewCommand with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
+* `GroupViewCommand` parses the **group unique identifier** instead of the **session unique identifier**.
+It then displays the details of the `Group` object from the list of groups managed by the `Profile` class corresponding to the **group unique identifier**.
 
-The sequence diagram below models the interactions between various entities in SplitLah
-when the user invokes the `group /view` command.
-<br>
-<br>
-![View Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupViewCommand.drawio.png)
-<br>
-<br>
+Please refer to the [sequence diagram](#view-a-session) of `SessionViewCommand` for reference.
+
 The general workflow of the `group /view` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupViewCommand` object.
