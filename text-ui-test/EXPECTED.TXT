@@ -5,7 +5,7 @@ Unit Good with SKU: WC1 added to warehouse
 Another command?
 Order 1 added to the warehouse
 Another command?
-10 Good with SKU: WC1 added to warehouse
+10 of Good with SKU: WC1 added to warehouse
 Another command?
 WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 10]
 Unit size of good: MEDIUM
