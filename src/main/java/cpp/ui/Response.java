@@ -43,7 +43,7 @@ public class Response {
         System.out.println(count++ + ". listprojects/listproject");
         System.out.println(count++ + ". addlanguage [Project Index] [Language]");
         System.out.println(count++ + ". listlanguages [Project Name]");
-        System.out.println(count++ + ". view [Project Name]");
+        System.out.println(count++ + ". view [Project Index]");
         System.out.println(count++ + ". exit");
     }
 
@@ -97,6 +97,10 @@ public class Response {
 
     public static String viewCommandExecuted() {
         return ("View command has been executed successfully.");
+    }
+
+    public static String viewCommandUnsuccessfully() {
+        return "Viewing command unsuccessful";
     }
 
     public static String projectDeadlineSuccessfully(String projectTitle, String deadline) {

@@ -35,9 +35,4 @@ public class OpenGitCommandParser implements CommandParser<OpenGitCommand> {
         }
         return new OpenGitCommand(index);
     }
-
-    private String getProjectTitle(String[] userInput) {
-        String[] splitedName = Arrays.copyOfRange(userInput, 1, userInput.length);
-        return String.join(" ", splitedName);
-    }
 }

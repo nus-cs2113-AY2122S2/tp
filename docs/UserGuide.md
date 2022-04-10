@@ -163,11 +163,11 @@ changegit 1 http://github.com/project1
 ### Open the GitHub repo of a project
 Opens the GitHub repository in your default browser
 
-Format: `opengit [project_name]`
+Format: `opengit [project_index]`
 
 #### Example of usage
 ```
-opengit project1
+opengit 1
 ```
 
 ---
@@ -266,19 +266,19 @@ Please note that the file name should not be changed.
 
 ## Command Summary
 
-| Action              | Format                                   |
-|---------------------|------------------------------------------|
-| add project         | `addproject [project_name]`              |
-| delete project      | `deleteproject [project_name]`           |
-| view all project(s) | `listproject`, `listprojects`            |
-| add todo            | `todo [project_index] [description]`     |
-| mark todo as done   | `mark [project_index] [todo_index]`      |
-| add project deadline| `projdeadline [project_index] [deadline]`|
-| change GitHub       | `changegit [project_index] [github_URL]` |
-| open GitHub         | `opengit [project_name]`                 |
-| add todo deadline   | `tododeadline [project_index] [todo_index] [deadline]`|
-| view a project      | `view [project_name]`                    |
-| addlanguage	      | `addlanguage [project_index] [language]` |
-| listlanguages	      | `listlanguages`                          |
-| help                | `help`                                   |
-| Exit                | `exit`                                   |
+| Action              | Format                                                 |
+|---------------------|--------------------------------------------------------|
+| add project         | `addproject [project_name]`                            |
+| delete project      | `deleteproject [project_name]`                         |
+| view all project(s) | `listproject`, `listprojects`                          |
+| add todo            | `todo [project_index] [description]`                   |
+| mark todo as done   | `mark [project_index] [todo_index]`                    |
+| add project deadline| `projdeadline [project_index] [deadline]`              |
+| change GitHub       | `changegit [project_index] [github_URL]`               |
+| open GitHub         | `opengit [project_index]`                              |
+| add todo deadline   | `tododeadline [project_index] [todo_index] [deadline]` |
+| view a project      | `view [project_index]`                                 |
+| addlanguage	      | `addlanguage [project_index] [language]`               |
+| listlanguages	      | `listlanguages`                                        |
+| help                | `help`                                                 |
+| Exit                | `exit`                                                 |
