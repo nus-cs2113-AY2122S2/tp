@@ -809,7 +809,7 @@ Test Scenario 4: The person who paid or the persons involved in the activity wer
 **Test Cases:**
 
 Test Scenario 1: No activities are currently stored in a particular session in the application. <br>
-1. Test Command: `activity /delete /sid 2 /aid 1` <br>
+1. Test Command: `activity /delete /sid 1 /aid 1` <br>
    Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
 
 Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
@@ -881,13 +881,13 @@ a single group with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.
 
 **Test Cases:**
 
-Test Scenario 1: There are groups stored. <br>
-1. Test Command: `group /list` <br>
-   Expected: A message should be printed displaying the list of all the groups.
+Test Scenario 1: No groups are currently stored in the application.
+* Test Command: `group /list` <br>
+  Expected: An error message should be printed, indicating that no groups are stored in SplitLah.
 
-Test Scenario 2: There are currently no groups stored. <br>
-1. Test Command: `group /list` <br>
-   Expected: An error message should be printed indicating that there are currently no groups stored.
+Test Scenario 2: At least 1 group exists in the application.
+* Test Command: `group /list`<br>
+  Expected: A table summarising the details of all existing groups should be printed.
 
 <hr>
 
