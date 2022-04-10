@@ -18,8 +18,7 @@ workings of PlanITarium such that developers can understand the various design a
   * [Storage Component](#storage-component)
 * [Implementation](#implementation)
   * [Command Execution](#command-execution)
-  * [Logical Grouping of Persons Added](#logical-grouping-of-persons-added)
-  * [Find Command](#find-feature)
+  * [Edit Feature](#edit-feature)
   * [Data Archiving](#data-archiving)
 * [Documentation](#documentation)
   * [Logging](#logging)
@@ -380,7 +379,7 @@ The rest of the commands follow the similar flow as `AddPersonCommand`.
 
 ---
 
-### Edit feature
+### Edit Feature
 
 #### Implementation
 
