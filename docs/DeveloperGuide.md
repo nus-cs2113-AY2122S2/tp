@@ -231,6 +231,8 @@ The Class Diagram below shows the full structure of the `Family` component and t
 
 ![FamilyComponent](images/FamilyComponent.png)
 
+The three generational `PersonList` under `Family` are `parents`, `myGen` and `children`.
+
 How the `Family` component is used:
 
 1. Upon input from the user, the user is passed through the `Command` component and a corresponding method is called from 
