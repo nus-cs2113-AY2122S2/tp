@@ -121,7 +121,20 @@ Deleting a project will follow nearly the exact same structure; the only differe
 
 #### Delete a Project
 ![image info](./UmlDiagrams/deleteProjectNew.png)
-*The steps are omitted here as they are the exact same as adding a project, only with the differing class names previously mentioned.
+
+**Step1.** After recieving the necessary method call, the `CommandHandler` class will self-call executeCommand with both the list of projects as well as a constructor call to DeleteProjectCommandParser (and a call to the parse method of DeleteProjectCommandParser) as its parameters
+
+**Step2.** The DeleteProjectCommandParser object instance is created
+
+**Step3.** The parse method of DeleteProjectCommandParser is called with `commands` (the user input) as its parameter.
+
+**Step4.** DeleteProjectCommandParser will self call its `getProjectTitle` method. This will split the user's input and return the correct name for the project
+
+**Step5.** After returning this projectTitle to itself, `DeleteProjectCommandParser` will call the constructor for a new `DeleteProjectCommand` object
+
+**Step6.** This `DeleteProjectCommand` object will use the newly gathered project name to call the `deleteProjct` command of the `ProjectList` class.
+
+**Step7.** The status of this command completing is returned to `CommandHandler`, and the output is sent to the user.
 
 #### Print Project List
 ![image info](./UmlDiagrams/printProject.png)
@@ -210,6 +223,40 @@ Given below is an example usage scenario and how View Project behaves at each st
 **Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
 
 
+#### Change the GitHub Link of a Project
+![image info](./UmlDiagrams/ChangeGit.jpg)
+
+**Step 1.** When `CommandHandler` receives a user input starting with string “changegit”, it will create a `ChangeGitHubLinkCommandParser` object and call its `parse()` function to parse the user input
+
+**Step 2.** The project index given by the user is parsed during this process. The `ChangeGitHubCommandParser` will then create a new `ChangeGitHubLinkCommand` object
+
+**Step 3.** This new `ChangeGitHubLinkCommand` is returned back to the `executeCommand` method, which will make a call to the `execute` method of the corresponding command object
+
+**Step 4.** The `getProject` method of `projectList` is called to return the project in question
+
+**Step 5.** The `changeGit` method of `projectList` is called, opening the GitHub URL in the user's primary browser
+
+**Step 6.** The status of this command is returned to the Command Handler. Unsuccessful status will be returned if the user makes an input mistake, or if an assertion error occurs.
+
+**Step 7.** Output is sent to the user.
+
+
+#### Open the GitHub Link of a Project
+![image info](./UmlDiagrams/ChangeGit.jpg)
+
+**Step 1.** When `CommandHandler` receives a user input starting with string “opengit”, it will create a `OpenGitCommandParser` object and call its `parse()` function to parse the user input
+
+**Step 2.** The project index given by the user is parsed during this process. The `OpenGitCommandParser` will then create a new `OpenGitCommand` object
+
+**Step 3.** This new `OpenGitCommand` is returned back to the `executeCommand` method, which will make a call to the `execute` method of the corresponding command object
+
+**Step 4.** The `getProject` method of `projectList` is called to return the project in question
+
+**Step 5.** The `openGit` method of `projectList` is called, opening the GitHub URL in the user's primary browser
+
+**Step 6.** The status of this command is returned to the Command Handler. Unsuccessful status will be returned if the user makes an input mistake, or if an assertion error occurs.
+
+**Step 7.** Output is sent to the user.
 
 ### Proposed Features
 
@@ -230,6 +277,8 @@ The Tasks Due Soon feature makes use of `ProjectList` and `CommandHandler` class
 **Step 5.** `printDueSoon()` then calls `printTodos()` in `ProjectList` and passes in `tasksDue`.
 
 **Step 6.** `printTodos()` iterates through all `Todo`s in `tasksDue` and prints each of them using `Todo`’s `toString()` method.
+
+
 
 
 
