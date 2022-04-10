@@ -1765,10 +1765,10 @@ and parsed to obtain a `SearchCommand` object that contains the user's input.
 Subsequently, it will call the `PlanList#getPlansDisplayList()` method to fetch the `planList` that is used to
 search through the available plans.
 
-**(Step 4)** Based on the `plan` objects from the `planList`, the `searchPlan()` will retrieve all the plans with name
+**(Steps 4 to 5)** Based on the `plan` objects from the `planList`, the `searchPlan()` will retrieve all the plans with name
 containing `<plan keyword>`, and display them in the user's terminal.
 
-**(Step 5)** The `SearchCommand` object returns to the `WerkIt` object.
+**(Step 6)** The `SearchCommand` object returns to the `WerkIt` object.
 
 This completes the process of searching for plan in WerkIt!.
 
