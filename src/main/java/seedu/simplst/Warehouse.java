@@ -4,14 +4,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
-import seedu.simplst.jsonkeyconstants.OrderKeys;
 import seedu.simplst.jsonkeyconstants.WarehouseKeys;
-import util.exceptions.InvalidFileException;
-import util.exceptions.InvalidObjectType;
-import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.LargeQuantityException;
-import util.exceptions.UnitTestException;
-import util.exceptions.WrongCommandException;
+import util.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -671,8 +665,8 @@ public class Warehouse {
 
     private Boolean restoreGoods(JSONObject jo) {
         jo.forEach((sku, jg) -> {
-//            System.out.println("sku: " + sku);
-            goodList.put((String) sku, Good.restoreGood((JSONObject) jg));
+            // System.out.println("sku: " + sku);
+            // goodList.put((String) sku, Good.restoreGood((JSONObject) jg));
         });
         return true;
     }
@@ -719,22 +713,22 @@ public class Warehouse {
         }
         // PARSE
         try {
-            JSONObject jWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
+            JSONObject jsonWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
             System.out.println("Parse success");
             boolean status = false;
             //addUnitGoodToInventory
             //Float totalCapacity = Float.parseFloat();
-            status = this.setTotalCapacity(jWarehouse.get(WarehouseKeys.totalCapacity).toString());
+            status = this.setTotalCapacity(jsonWarehouse.get(WarehouseKeys.totalCapacity).toString());
             if (!status) {
                 return false;
             }
-            JSONArray sol = (JSONArray) jWarehouse.get(WarehouseKeys.orderLists);
+            JSONArray sol = (JSONArray) jsonWarehouse.get(WarehouseKeys.orderLists);
             status = this.restoreOrders(sol);
             if (!status) {
                 return false;
             }
 
-            JSONObject sgl = (JSONObject) jWarehouse.get(WarehouseKeys.goodList);
+            JSONObject sgl = (JSONObject) jsonWarehouse.get(WarehouseKeys.goodList);
             status = this.restoreGoods(sgl);
             if (!status) {
                 return false;
@@ -749,10 +743,8 @@ public class Warehouse {
             return false;
         }
 
-
         return true;
     }
-
 }
 
 

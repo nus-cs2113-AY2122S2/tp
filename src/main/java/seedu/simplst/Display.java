@@ -53,8 +53,8 @@ public class Display {
     }
 
     public static void newLogin() {
-//         System.out.println("New login. Please type the total number of goods"
-//                 + " your warehouse can hold");
+        // System.out.println("New login. Please type the total number of goods"
+        //         + " your warehouse can hold");
         System.out.println("New login.");
     }
 
