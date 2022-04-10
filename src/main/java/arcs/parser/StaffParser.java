@@ -39,7 +39,7 @@ public class StaffParser {
      * @param argumentLine the user input string
      * @param startIdx the index where the required attribute should be in the input string
      * @param fieldA other attribute from input string
-     * @param offset characters of identifider (eg. id/ : 3, j/ :2 )             
+     * @param offset characters of identifider (eg. id/ : 3, j/ :2 )
      * @return an AddStaffCommand
      */
     private static String parseField(String argumentLine, int startIdx,
