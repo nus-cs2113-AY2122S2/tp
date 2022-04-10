@@ -42,7 +42,7 @@ public class GradeCommand extends Command {
      */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration)
-            throws NoSuchModuleException , InvalidGradeRemovalException{
+            throws NoSuchModuleException, InvalidGradeRemovalException {
         Module targetModule = moduleList.getModule(moduleCode);
         addGradeToModule(targetModule);
         return new CommandResult(result);
