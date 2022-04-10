@@ -40,13 +40,12 @@ A summary of my code contributions are as follows:
 
 
 ### Enhancements Implemented
-1. (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.
-  The original MD quote blocks were hard to spot and thus readers may miss such messages. Hence, the
-  custom boxes were created to make them more conspicuous.
+1. (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes
+    as the original MD quote blocks were hard to spot and thus readers may miss such messages.
     - An example of the custom CSS boxes can be found in the ['Notations Used In This Guide'](../UserGuide.md#notations-used-in-this-guide)
   section of the user guide.
-2. (Developer and User Guides) Inserted 'buttons' throughout the guides to allow users to click and navigate back to the
-  guides' tables of contents for easier navigation in our documentations. 
+2. (Developer and User Guides) Inserted 'buttons' throughout the documentations to allow users to easily click and navigate back 
+   to the guides' tables of contents. 
     - I tried to utilise JavaScript for a floating back-to-top button, but due to the time constraints and the need to
     fully understand the structure of the webpage theme that we're using on GitHub Pages, I decided to
     use simple HTML hyperlink buttons with some CSS styling instead.
@@ -61,24 +60,23 @@ prerequisites to download and the steps to get it running on the user's computer
 4. Wrote the [frequently asked questions](../UserGuide.md#frequently-asked-questions-faq) section.
 
 ### Contributions to the Developer Guide (DG)
-1. Wrote the following contributions to the ['Implementation'](../DeveloperGuide.md#implementation) section:
+1. Wrote and designed diagrams for the following sections of the ['Implementation'](../DeveloperGuide.md#implementation) 
+   section:
     - How WerkIt! repeatedly waits and receives user inputs ([link to part](../DeveloperGuide.md#getting-user-input-continuously)).
     - How WerkIt! parses user inputs and determines the appropriate procedures to take 
       ([link to part](../DeveloperGuide.md#parsing-user-input-and-getting-the-right-command)).
     - How WerkIt! processes and creates a new workout when requested by the user
       ([link to part](../DeveloperGuide.md#create-new-workout)).
-      - Includes sequence diagrams to visualise the process.
     - Most of the section on [File Management](../DeveloperGuide.md#file-management).
-2. Wrote the 'Design - Storage Component' section ([link to part](../DeveloperGuide.md#storage-component)).
-3. Wrote the instructions on 
+3. Wrote the 'Design - Storage Component' section ([link to part](../DeveloperGuide.md#storage-component)).
+4. Wrote the instructions on 
 [how to set up the development environment](../DeveloperGuide.md#setting-up-your-development-environment).
-4. Wrote the following ['Instructions for Manual Testing'](../DeveloperGuide.md#instructions-for-manual-testing):
-   - [Creating workouts](../DeveloperGuide.md#creating-a-new-workout)
-   - [Data saving](../DeveloperGuide.md#test-on-data-saving)
-5. Wrote the [target user profile](../DeveloperGuide.md#target-user-profile), 
+5. Wrote the instructions for manual testing of [creating workouts](../DeveloperGuide.md#creating-a-new-workout) and 
+   [data saving](../DeveloperGuide.md#test-on-data-saving).
+6. Wrote the [target user profile](../DeveloperGuide.md#target-user-profile), 
    [value proposition](../DeveloperGuide.md#value-proposition), and parts of the 
    [glossary](../DeveloperGuide.md#glossary) of WerkIt!.
-6. Wrote the [table of contents](../DeveloperGuide.md#table-of-contents).
+7. Wrote the [table of contents](../DeveloperGuide.md#table-of-contents).
 
 ### Contributions to Team-Based Tasks
 - Set up the team's organisation and repository on GitHub
