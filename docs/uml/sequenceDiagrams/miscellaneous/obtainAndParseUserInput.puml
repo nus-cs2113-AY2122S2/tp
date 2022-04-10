@@ -15,6 +15,8 @@ WerkIt -> UI : getUserInput()
 activate UI COLOR_UI
 return userInputTrimmed:String
 
+WerkIt -> WerkIt : parseUserInput(userInputTrimmed)
+activate WerkIt COLOR_WERKIT
 WerkIt -> Parser : parseUserInput(userInputTrimmed)
 activate Parser COLOR_PARSER
 ref over Parser
@@ -51,6 +53,7 @@ else Command starts with 'schedule'
     return :ScheduleCommand
 end
 
+return newCommand:Command
 return newCommand:Command
 
 @enduml
