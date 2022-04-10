@@ -380,70 +380,57 @@ The rest of the commands follow the similar flow as `AddPersonCommand`.
 
 ---
 
-### Find feature
+### Edit feature
 
 #### Implementation
-editin /u 1 /g 1 /r 1 /d Bills
-The proposed find feature is facilitated by `Categories`, `Money(temp)`, `MoneyList(temp)`
-and `Family`. The `Categories` is an enumeration of keys that is used as the expenditure categories. The `Money(temp)`
-will have an additional integer attribute that acts as an index to a category. Additionally, the following operations
-are implemented:
+
+The proposed find feature is facilitated by `Categories`, `Money`, `MoneyList`, `Income`, `IncomeList`, `Expenditure`
+and `ExpenditureList`. The `Categories` is an enumeration of keys that is used as the expenditure categories. 
+`Expenditure` will have an additional integer attribute that acts as an index to a category. 
+Additionally, the following operations are implemented:
 
 * `Categories#getLabelForIndex(index)` -- Returns the name of the category with this index.
-* `Money(temp)#getCategory()` -- Returns the category index for this money object.
-* `Money(temp)#getDescription()` -- Returns the description for this money object.
-* `MoneyList(temp)#searchExpense(description, index)` -- Returns a list of expenditures having category index matching
-  the index argument and description matching the expenditure's description.
-* `MoneyList(temp)#searchIncome(description)` -- Returns a list of income having description matching the income's
-  description.
-* `Family#listExpenseSearch(description, index)` -- Lists all expenses matching the criteria.
-* `Family#listIncomeSearch(description)` -- Lists all income with matching description.
+* `Money#getAmount()` -- Returns the amount for this money object.
+* `Money#getDescription()` -- Returns the description for this money object.
+* `Money#isPermanent()` -- Returns the recurring status for this money object.
+* `Expenditure#getCategory()` -- Returns the category index for this expenditure object.
+* `ExpenditureList#editExpenditure(index, description, amount, category, isPermanent)` - Edits an expenditure in
+the list of expenditures given some parameters
+* `ExpenditureList#editExpDesc(index, description)` -- Edits expenditure object's description;
+* `ExpenditureList#editExpAmount(index, amount)` -- Edits expenditure object's amount;
+* `ExpenditureList#editExpCat(index, category)` -- Edits expenditure object's category;
+* `ExpenditureList#editExpPerm(index, isPermanent)` -- Edits expenditure object's recurring status;
+* `IncomeList#editIncome(index, description, amount, isPermanent)` - Edits an income in
+    the list of incomes given some parameters
+* `IncomeList#editIncDesc(index, description)` -- Edits income object's description;
+* `IncomeList#editIncAmount(index, amount)` -- Edits income object's amount;
+* `IncomeList#editIncPerm(index, isPermanent)` -- Edits income object's recurring status;
 
-Below is an example usage scenario and how the expenses of a category will be printed.
+Below is an example usage scenario of how an income can be edited.
 
 Step 1. Given that the application already has existing data and there is one person being tracked, Alice, who belongs
 to the current generation. In this case `Family` would be initialised with one generation being tracked - myGen.
 
-![FindIncomeExpenditure1](images/FindIncomeExpenditure1.png)
+![EditIncome1](images/EditIncomeDiagram1.png)
 
-Step 2. The user executes `find /d Bills /c 1` command to search for income and expenditures with descriptions
-containing "Bills". The `find` command will be parsed and calls
-`Family#listExpenseSearch("Bills", 1)` and `Family#listSearch("Bills")` which would instantiate 2 temporary array list
-for storing the results of the upcoming search.
+Step 2. The user executes `editin /u 1 /g 2 /r 1 /d Bills` command to search for income and expenditures with 
+descriptions containing "Bills". The `edit` command will be parsed and calls `IncomeList#editIncome(1, "Bills", null, 
+null)` which then calls `editIncDesc(1, "Bills)`, `editIncAmount(1, null)` and `editIncPerm(1, null)`.
 
-![FindIncomeExpenditure2](images/FindIncomeExpenditure2.png)
+Step 3. For each edit income method called, the target income object is first retrieved, followed by its
+respective attributes. The retrieved attributes values are then compared to the input value. If the input value is not
+null and it differs from the object's current description, the object's attributes are updated. If changes were made, 
+a boolean value of True is returned from the function. Else, False is returned.
 
-Step 3. After the temporary array list for expenditure has been created, the existing generation will be iterated
-for `Person` objects. The `expenditureList` for a person would be retrieved during that person's iteration
-and `MoneyList(temp)#searchExpense("Bills", 1)` will be called as `expenditureList` extends `MoneyList(temp)`. This
-method then iterates through the list and calls
-`Money(temp)#getCategory()` and `Money(temp)#getDescription()` on each expenditure, collecting and returning the
-expenditure if its category matches the given index and description matches the given description. The returned
-expenditures are then appended to the temporary array list.
+Step 4. At the end of all edit attributes function call, a check to the boolean variables returned are check.
+If any of the variable returns true, a message is printed to the user that changes were made as well as the object's
+updated value. Else, the user is notified that no changes were made.
 
-![FindIncomeExpenditure3](images/FindIncomeExpenditure3.png)
+![EditIncome2](images/EditIncomeDiagram2.png)
 
-Step 4. After the temporary array list for income has been created, the existing generation will be iterated
-for `Person` objects. The `incomeList` for a person would be retrieved during that person's iteration
-and `MoneyList(temp)#searchIncome("Bills")` will be called as `incomeList` extends `MoneyList(temp)`. This method then
-iterates through the list and calls
-`Money(temp)#getDescription()` on each income, collecting and returning the income if its description matches the given
-description. The returned incomes are then appended to the temporary array list.
-
-![FindIncomeExpenditure4](images/FindIncomeExpenditure4.png)
-
-Step 5. The iteration, collecting and appending to the temporary array list in step 3 and 4 is repeated until every
-person has been iterated. Finally, `Categories#getLabelForIndex(1)` is called so that an appropriate message can be displayed to
-the user, stating the name of the category, following by a series of print to display the expenditures in this category.
-
-> :information_source: **Note:** If the `index` provided does not map to any existing categories,
-> then it can be observed that there will never be any results returned. The `find` command will
-> check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
-> fails, an error message will be displayed to the user instead of continuing with the execution.
-
-The following sequence diagram shows how the `find` operation works after the `FindCommand` has been created
-by [`CommandFactory`](#PlaceholderToCommandFactory):
-![FindIncomeExpenditureSequence](images/FindIncomeExpenditureSequence.png)
+The following sequence diagram shows how the `editin` operation works after the `EditCommand` has been parsed 
+and called by `PersonList`:
+![EditIncomeSequence](images/EditIncomeSequence.png)
 
 #### Design considerations:
 

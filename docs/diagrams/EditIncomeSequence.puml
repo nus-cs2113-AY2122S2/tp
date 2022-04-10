@@ -15,24 +15,24 @@ Ilist -> Ilist: isDescEdited(1, "Bills")
 activate Ilist
 Ilist -> Alist: get(0)
 activate Alist
-Alist -> Ilist : Item: Income
+Alist --> Ilist : Item: Income
 deactivate Alist
 Ilist -> Inc: getDescription()
 activate Inc
-Inc -> Ilist: Description:String
+Inc --> Ilist: Description:String
 deactivate Inc
 
 alt OPT_COLOR description != null && !Description.equals("Bills")
     Ilist -> Inc: setDescription("Bills")
     activate Inc
-    Inc -> Ilist: True
+    Inc --> Ilist: True
     deactivate Inc
 else else
-    Inc -> Ilist: False
+    Inc --> Ilist: False
     deactivate Inc
 end alt
 
-Ilist -> Ilist: True:Boolean
+Ilist --> Ilist: True:Boolean
 deactivate Ilist
 deactivate Alist
 
@@ -40,24 +40,24 @@ Ilist -> Ilist: isPermEdited(1, null)
 activate Ilist
 Ilist -> Alist: get(0)
 activate Alist
-Alist -> Ilist : Item: Income
+Alist --> Ilist : Item: Income
 deactivate Alist
 Ilist -> Inc: isPermanent()
 activate Inc
-Inc -> Ilist: isPermanent:Boolean
+Inc --> Ilist: isPermanent:Boolean
 deactivate Inc
 
 alt OPT_COLOR isPermanent != null && !isPermanent.equals(null)
     Ilist -> Inc: setPermanent(null)
     activate Inc
-    Inc -> Ilist: True
+    Inc --> Ilist: True
     deactivate Inc
 else else
-    Inc -> Ilist: False
+    Inc --> Ilist: False
     deactivate Inc
 end alt
 
-Ilist -> Ilist: False:Boolean
+Ilist --> Ilist: False:Boolean
 deactivate Ilist
 deactivate Alist
 
@@ -65,24 +65,24 @@ Ilist -> Ilist: isAmountEdited(1, null)
 activate Ilist
 Ilist -> Alist: get(0)
 activate Alist
-Alist -> Ilist : Item: Income
+Alist --> Ilist : Item: Income
 deactivate Alist
 Ilist -> Inc: getAmount()
 activate Inc
-Inc -> Ilist: Amount:Double
+Inc --> Ilist: Amount:Double
 deactivate Inc
 
 alt OPT_COLOR Amount != null && !Amount.equals(null)
     Ilist -> Inc: setAmount(null)
     activate Inc
-    Inc -> Ilist: True
+    Inc --> Ilist: True
     deactivate Inc
 else else
-    Inc -> Ilist: False
+    Inc --> Ilist: False
     deactivate Inc
 end alt
 
-Ilist -> Ilist: False:Boolean
+Ilist --> Ilist: False:Boolean
 deactivate Ilist
 deactivate Alist
 
@@ -91,20 +91,20 @@ activate Ilist
 alt OPT_COLOR isDescEdited || isAmountEdited || isPermEdited
     Ilist -> System:println("Your Income have been edited")
     activate System
-    Ilist <- System
+    Ilist <-- System
     deactivate System
     Ilist -> Alist: incomeArrayList.get(0)
     activate Alist
-    Alist -> Ilist : Item: Income
+    Alist --> Ilist : Item: Income
     deactivate Alist
     Ilist -> System:println(Item)
     activate System
-    Ilist <- System
+    Ilist <-- System
     deactivate System
 else else
     Ilist -> System:println("No changes have been made")
     activate System
-    Ilist <- System
+    Ilist <-- System
     deactivate System
 end alt
 
