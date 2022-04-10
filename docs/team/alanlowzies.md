@@ -8,7 +8,7 @@ offered by the School of Computing, National University of Singapore.
 ### About the Project
 WerkIt! is a command line interface (CLI) application written in Java that allows users to create a weekly workout 
 schedule for them to refer to and follow. More details about the project can be found in the following locations:
-* [GitHub Repository](../../)
+* [GitHub Repository](https://github.com/AY2122S2-CS2113T-T09-2/tp)
 * [WerkIt! User Guide](../UserGuide.md)
 * [WerkIt! Developer Guide](../DeveloperGuide.md)
 
