@@ -307,13 +307,13 @@ After data is loaded from the data file, some verification checks are performed 
 | v2.0    | user     | create tags for tasks                         | I can categorise them more easily (e.g. tutorial, project, assignment, etc) |
 | v2.0    | user     | mark tasks as important                       | I can know what tasks to prioritise                                         |
 | v2.0    | user     | list tasks by tag                             | I can filter tasks I’m looking for                                          |
-| v2.0    | user     | input my grades                               | I can estimate my final grade                                               |
-
+| v2.0    | user     | input my grades                               | I can estimate my final GPA                                                 |
+| v2.0    | user     | estimate my GPA                               | I can gauge my performance                                                  |
 <br><br><br>
 
 ## 8. Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 installed.
+1. Should work on any mainstream OS as long as it has _Java 11_ installed.
 2. Should be able to hold up to 1000 tasks and modules combined without a noticeable sluggishness in performance for typical usage.
 3. Should be able to save up to 1000 tasks and modules without taking up noticeable disk space.
 <br><br><br>
@@ -407,6 +407,8 @@ Below are instructions to perform manual testing of the application. Please refe
    Expected: The grade of `CS2113T` has been set to `A+`.
 4. Test Case: `grade CS2113T E` <br>
    Expected: No grade is set. Error details in the message shows that `E` is an invalid module grade.
+5. Test Case: `grade CS2113T -` <br>
+   Expected: The grade of `CS2113T` has been removed.
 
 <br>
 
@@ -466,7 +468,7 @@ Below are instructions to perform manual testing of the application. Please refe
 
 <br>
 
-### Marking and unmarking a task as completed
+### Marking a task as completed or uncompleted
 1. Prerequisite: There are existing tasks in the application.
 2. Assumption: There are at least one task in `General Tasks`.
 3. Test Case: `mark c 1` <br>
