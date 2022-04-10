@@ -40,7 +40,8 @@ public class Country {
             if (aHotel.getHotelID() == newHotel.getHotelID() &&
                     aHotel.getHotelName().equals(newHotel.getHotelName()) &&
                     aHotel.getCountry().equals((newHotel.getCountry())) &&
-                    aHotel.getPrice() == newHotel.getPrice()
+                    aHotel.getPrice() == newHotel.getPrice() &&
+                    aHotel.getPackageID() == newHotel.getPackageID()
                 ) {
                 return true;
             }
