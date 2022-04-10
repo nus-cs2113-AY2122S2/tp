@@ -9,8 +9,7 @@ Participant ":CommandFactory" as Commands COMMAND_COLOR
 Participant ":AddPerson\nCommand" as Commands2 COMMAND_COLOR_T1
 end box
 box LOGIC_COLOR_T3
-Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
-Participant "<<Class>>\nParserUtility" as Parser2 LOGIC_COLOR_T1
+Participant ":Parser\nComponent" as Parser LOGIC_COLOR
 end box
 box #PINK
 Participant ":Family" as Family MODEL_COLOR
@@ -18,14 +17,12 @@ Participant ":PersonList" as Family2 MODEL_COLOR_T3
 Participant ":Person" as Family3 MODEL_COLOR_T2
 end box
 box MONEY_COLOR_T3
-Participant ":IncomeList" as Money MONEY_COLOR
-Participant ":ExpenditureList" as Money2 MONEY_COLOR
+Participant ":MoneyList" as Money MONEY_COLOR
 box UI_COLOR_T3
 Participant ":UI" as UI UI_COLOR
 end box
-box STORAGE_COLOR_T1
-Participant ":Storage" as Storage STORAGE_COLOR
-end box
+
+note over Parser : Parser component is\nan abstraction for the\n**Parser** and **ParserUtility**\nclasses
 
 [-> Main : "add /g 2\n /n Alice"
 
@@ -56,8 +53,9 @@ deactivate UI
 Main -> Commands2 : execute()
 activate Commands2
 
-ref over Commands2, Parser, Parser2
-Parser Component parse and validate
+ref over Commands2, Parser
+Parser Component
+parse and validate
 end ref
 
 Commands2 -> Family : addPerson(2:int, "Alice":String)
@@ -82,14 +80,10 @@ activate Money
 Money --> Family3
 deactivate Money
 
-create Money2
-Family3 -> Money2
-activate Money2
-Money2 --> Family3
-deactivate Money2
-
 Family3 --> Family2
 deactivate Family3
+
+note over Money : MoneyList is an abstraction for the\n**IncomeList** and **ExpenditureList**\nclasses
 
 Family2 --> Family
 deactivate Family2
@@ -104,12 +98,6 @@ Main -> UI : printHoriLine()
 activate UI
 UI --> Main
 deactivate UI
-
-note over Parser2 : Note that saveData()\nis not called during the \n`add` command.\nThis is for visual aid.
-Main -> Storage : saveData(:Family)
-activate Storage
-Storage --> Main
-deactivate Storage
 
 Main -->[
 

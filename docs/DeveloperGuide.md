@@ -78,7 +78,8 @@ is responsible for,
 **How the components interact with each other**
 
 The following Sequence Diagram shows a high-level view on how the components interact when the user enters the command
-`add /g 2 /n Alice`.
+`add /g 2 /n Alice`. The interactions with storage is not displayed in this section, but is detailed in the 
+[Data Archiving](#data-archiving) section. 
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 > :information_source: **Note:** The lifeline for `AddPersonCommand` ends at the destroy marker :x:
