@@ -1,6 +1,5 @@
 package commands;
 
-import data.plans.Plan;
 import data.plans.PlanList;
 import data.schedule.Day;
 import data.schedule.DayList;
@@ -14,7 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static data.schedule.InvalidScheduleException.INDEX_OUT_OF_BOUND;
-import static data.schedule.InvalidScheduleException.INPUT_NOT_NUMBER_FORMATTABLE;
+import static data.schedule.InvalidScheduleException.INVALID_INPUT;
+
 
 public class ScheduleCommand extends Command {
     public static final String KEYWORD_BASE = "schedule";
@@ -170,8 +170,8 @@ public class ScheduleCommand extends Command {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(INDEX_OUT_OF_BOUND);
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, "A non-formattable number was received!");
-            System.out.println(INPUT_NOT_NUMBER_FORMATTABLE);
+            logger.log(Level.WARNING, "User argument supplied is invalid");
+            System.out.println(INVALID_INPUT);
         } catch (InvalidScheduleException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
