@@ -161,6 +161,16 @@ The method is able to handle the cases where:
 While loading the data, the `equipment.json` file is read and the data is converted from a JSON string to an ArrayList of `Equipment` objects.
 The ArrayList of `Equipment` objects is then added to the `equipmentList` HashMap.
 
+The `Storage` class is used in the `Duke` class. 
+It is used to save and load the data of the program.
+Below are the procedures of the `Storage` class usage during program execution.
+
+1. `Duke` is initialised.
+2. `Storage` is initialised.
+3. `Storage#loadData` is called to load the data from the `equipment.json` file.
+4. After every 5 commands, `Storage#saveData` is called to save the data to the `equipment.json` file.
+5. Lastly, before the program terminates, `Storage#saveData` is called to save the data to the `equipment.json` file.
+
 --------------------------------------------------------------------------------------------------------------------
 ## Product scope
 ### Target user profile
