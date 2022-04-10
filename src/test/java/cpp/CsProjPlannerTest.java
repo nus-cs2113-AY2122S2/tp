@@ -72,26 +72,26 @@ class CsProjPlannerTest {
     void testWelcomeAndExit() {
         provideInput(EXIT_COMMAND);
         CsProjPlanner.main(new String[0]);
-        assertEquals(WELCOME_MESSAGE + EXIT_MESSAGE, outputStream.toString());
+        assertEquals((WELCOME_MESSAGE + EXIT_MESSAGE).trim(), outputStream.toString().trim());
     }
 
     @Test
     void testInvalidCommand() {
         provideInput("blah\n" + EXIT_COMMAND);
         CsProjPlanner.main(new String[0]);
-        assertEquals(WELCOME_MESSAGE + UNKNOWN_COMMAND + EXIT_MESSAGE, outputStream.toString());
+        assertEquals((WELCOME_MESSAGE + UNKNOWN_COMMAND + EXIT_MESSAGE).trim(), outputStream.toString().trim());
     }
 
     @Test
     void testHelp() {
         provideInput(HELP_COMMAND + "\n" + EXIT_COMMAND);
         CsProjPlanner.main(new String[0]);
-        assertEquals(WELCOME_MESSAGE + HELP_MESSAGE + EXIT_MESSAGE, outputStream.toString());
+        assertEquals((WELCOME_MESSAGE + HELP_MESSAGE + EXIT_MESSAGE).trim(), outputStream.toString().trim());
     }
 
     @Test
     void testDebug() {
         System.out.println("Testing");
-        assertEquals("Testing\n", outputStream.toString());
+        assertEquals("Testing", outputStream.toString().trim());
     }
 }
