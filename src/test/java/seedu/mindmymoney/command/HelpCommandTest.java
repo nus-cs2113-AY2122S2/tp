@@ -30,7 +30,7 @@ public class HelpCommandTest {
     void helpCommand_fromUser_expectExpenditureHelpPage() throws MindMyMoneyException {
         String helpPage = "---------------------------------------Expenditure Help Page------------------------"
             + "---------------\n"
-            + "1. Listing all Expenditures: list /e [DATE]\n"
+            + "1. Listing all Expenditures: list /e {DATE}\n"
             + "2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] "
             + "/d [DESCRIPTION] /a [AMOUNT] /t [DATE]\n"
             + "3. Calculating the total expenditure in a month: calculate /epm [DATE]\n"
@@ -121,7 +121,7 @@ public class HelpCommandTest {
     void helpCommand_fromUser_expectAllHelpPages() throws MindMyMoneyException {
         String helpPage = "---------------------------------------Expenditure Help Page------------------------"
             + "---------------\n"
-            + "1. Listing all Expenditures: list /e [DATE]\n"
+            + "1. Listing all Expenditures: list /e {DATE}\n"
             + "2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] "
             + "/a [AMOUNT] /t [DATE]\n"
             + "3. Calculating the total expenditure in a month: calculate /epm [DATE]\n"

@@ -98,10 +98,12 @@ What can I do for you?
 
 The following are features of the `MindMyMoney` application. Please ensure that the format of commands given is
 accurate.  
-Words in `[SQUARE_BRACKETS]` are the parameters. Words starting with a `/` are flags
+Words in `[SQUARE_BRACKETS]` are compulsory parameters. Words in `{CURLY_BRACKETS}` are optional parameters. <br/>
+Words starting with a `/` are flags.
 
 > **💡 Note:**
->- All parameters are compulsory unless stated in the notes.
+>- Parameters and flags are space-separated. For example: `list/e` is not a valid command while `list /e` is valid.
+>- All parameters are compulsory unless it is optional.
 
 > **⚠️Warning⚠️**
 >- All parameters are compulsory! Input the parameters in the order shown, or the application will not be able to read your
@@ -117,11 +119,12 @@ Prints a list of currently available expenditure-related commands.
 #### Format: `help /e`
 
 #### Expected Outcome:
+For example: `help /e` <br/>
 Show help page for expenditure related commands.
 ````
 > help /e
 ---------------------------------------Expenditure Help Page---------------------------------------
-1. Listing all Expenditures: list /e [DATE]
+1. Listing all Expenditures: list /e {DATE}
 2. Adding an Expenditure entry: add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]
 3. Calculating the total expenditure in a month: calculate /epm [DATE]
 4. Updating an Expenditure: update /e [NEW_INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]
@@ -151,10 +154,9 @@ Adds an expenditure to your program. Only **one** expenditure can only be added 
     * Format of the date is `dd/mm/yyyy`.
     * For example: `12 March 2022` will be entered as `12/03/2022`.
 
-For example: `add /e /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022`  
-Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash on 12 March 2022 to your expenditure list. <br>
 
 #### Expected Outcome:
+For example: `add /e /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022` <br/>
 Add a $4.50 expenditure of food item 'Porridge' that was paid in cash on 12 March 2022 to your expenditure list.
 ````
 > add /e /pm cash /c Food /d Porridge /a 4.50 /t 12/03/2022
@@ -187,13 +189,14 @@ into the account
 
 Prints your current list of expenditures.
 
-#### Format: `list /e [DATE]`
+#### Format: `list /e {DATE}`
 
-* `[DATE]` refers to the date of the expenditures you would like to view.
-    * Enter the `[DATE]` in `dd/mm/yyyy`, `mm/yyyy` or `yyyy` format.
+* `{DATE}` refers to the date of the expenditures you would like to view.
+    * Enter the `{DATE}` in `dd/mm/yyyy`, `mm/yyyy` or `yyyy` format.
 
 #### Expected Outcome:
-- List all your expenditures stored.
+For example: `list /e` <br/>
+List all your expenditures stored.
 ```
 > list /e
 -----------------------------------------------
@@ -203,7 +206,8 @@ Prints your current list of expenditures.
 4. $4.50 was spent on Porridge(Food) using Cash [12/03/2022]
 -----------------------------------------------
 ```
-- List all your expenditures in March 2022.
+For example: `list /e 03/22` <br/>
+List all your expenditures in March 2022.
 ```
 > list /e 03/2022
 -----------------------------------------------
@@ -212,7 +216,8 @@ Prints your current list of expenditures.
 3. $4.50 was spent on Porridge(Food) using Cash [12/03/2022]
 -----------------------------------------------
 ```
-- List all your expenditures in 30 March 2022.
+For example: `list /e 30/03/2022` <br/>
+List all your expenditures in 30 March 2022.
 ```
 > list /e 30/03/2022
 -----------------------------------------------
@@ -223,11 +228,11 @@ Prints your current list of expenditures.
 
 
 > **💡 Note:**
->- `[DATE]` is **optional**. `list /e` will give all expenditures stored in the list.
+>- `list /e` will give all expenditures stored in the list.
 
 > **⚠️Warning⚠️**
->- `[DATE]`: Any input not in the format of `dd/mm/yyyy`, `mm/yyyy` or `yyyy` will be rejected.
->- `[DATE]`: There must be an expenditure with the same input date.
+>- `{DATE}`: Any input not in the format of `dd/mm/yyyy`, `mm/yyyy` or `yyyy` will be rejected.
+>- `{DATE}`: There must be an expenditure with the same input date.
 
 <br/>
 
@@ -253,11 +258,9 @@ Use the `list /e` command to view the indices of your expenditures.
     * Format of the date is `dd/mm/yyyy`.
     * For example: `12 March 2022` will be entered as `12/03/2022`.
 
-For example: `update /e 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022`.  
-Updates the first expenditure in your list to a $5.0 expenditure on food item 'chicken rice' that was paid in cash on 12
-March 2022.
 
 #### Expected Outcome:
+For example: `update /e 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022`.  <br/>
 Update the first expenditure in your list to a $5.0 expenditure on food item 'chicken rice' that was paid in cash on 12
 March 2022.
 ````
@@ -288,10 +291,8 @@ Use the `list /e` command to view the current indices of your expenditures.
 
 * `[INDEX]` refers to the index of expenditure in list in which you want to delete.
 
-For example: `delete /e 1`  
-Deletes the first expenditure on your list.
-
 #### Expected Outcome:
+For example: `delete /e 1` <br/>
 Delete the first expenditure on your list.
 ````
 > list /e
@@ -323,10 +324,9 @@ Shows the percentage spent on each category of expenditure, displayed in a horiz
 
 * `[DATE]` can be of the format `dd/mm/yyyy`, `mm/yyyy` or `yyyy`, depending on the duration you are interested in.
 
-For example: `calculate /epm 03/2022`  
-Shows you your total expenditure and its relevant categories on March 2022.
 
 ##### Expected Outcome:
+For example: `calculate /epm 03/2022`  <br/>
 Show your total expenditure in March 2022 and breakdown of expenses.
 ````
 > calculate /epm 03/2022
@@ -360,6 +360,7 @@ Prints a list of commands for storing credit cards as a payment method.
 #### Format: `help /cc`
 
 #### Expected Outcome:
+For example: `help /cc` <br/>
 Show the help page for credit card related commands.
 ````
 > help /cc
@@ -387,11 +388,9 @@ Adds a credit card to your program. Only **one** credit card can only be added p
     * For example: a credit card with `2% cashback` can be represented as `/cb 2`.
 * `[CARD_LIMIT]` refers to the maximum monthly expenditure on this credit card.
     * Enter the monthly maximum amount that can be spent on the credit card in dollars.
-
-For example:`add /cc /n dbs /cb 2 /cl 1000`  
-Adds a credit card of the name 'DBS' with a cashback of 2% and a monthly spending limit of $1000.
-
+    
 #### Expected Outcome:
+For example:`add /cc /n dbs /cb 2 /cl 1000`  <br/>
 Add your credit card of the name 'DBS' with a cashback of 2% and a monthly spending limit of $1000.
 ````
 > add /cc /n dbs /cb 2 /cl 1000
@@ -421,6 +420,7 @@ Prints your current list of credit cards that you have added so far.
 #### Format: `list /cc`
 
 #### Expected Outcome:
+For example: `list /cc` <br/>
 List all your credit cards stored.
 ````
 > list /cc
@@ -448,12 +448,9 @@ Use the `list /cc` command to view the current indices of your credit cards.
     * For example: a credit card with `2% cashback` can be represented as `/cb 2`.
 * `[NEW_CARD_LIMIT]` refers to the updated maximum monthly expenditure on this credit card.
     * Enter the monthly maximum amount that can be spent on the credit card in dollars.
-
-For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500`  
-Updates the first credit card on your list to have a name of 'OCBC' with a cashback of 1.5% and a monthly spending limit of
-$500.
-
+    
 #### Expected Outcome:
+For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500`  <br/>
 Update the first credit card on your list to have a name of 'OCBC' with a cashback of 1.5% and a monthly spending limit of
 $500.
 ````
@@ -491,11 +488,9 @@ Use the `list /cc` command to view the current indices of your credit cards.
 
 * `[INDEX]` refers to the index of credit card in your credit card list in which you want to delete.
     * Enter `2` if you want to delete the second credit card in your credit card list.
-
-For example: `delete /cc 1`<br/>
-Deletes the first credit card on your credit card list.
-
+    
 #### Expected Outcome
+For example: `delete /cc 1`<br/>
 Delete the first credit card on your credit card list.
 ````
 > list /cc
@@ -525,6 +520,7 @@ Prints a list of commands relating to income.
 #### Format: `help /i`
 
 #### Expected Outcome:
+For example: `help /i`<br/>
 Show the help page for income related commands.
 ````
 > help /i
@@ -548,11 +544,9 @@ Adds an income into the income list.
 * `[CATEGORY]` refers to the supported categories of income.
     * Enter `Salary`, `Allowance`, `Investment` or `Others`.
     * Categories are case-insensitive.
-
-For example: `add /i /a 3000 /c salary`  
-Adds an income of $3000 categorised as your Salary.
-
+    
 #### Expected Outcome:
+For example: `add /i /a 3000 /c salary`  <br/>
 Add an income of $3000 categorised as your Salary.
 ````
 > add /i /a 3000 /c salary
@@ -580,6 +574,7 @@ Prints your current list of income entries that you have added so far.
 #### Format: `list /i`
 
 #### Expected Outcome:
+For example: `list /i` <br/>  
 List all your income entries stored.
 ````
 > list /i
@@ -603,11 +598,9 @@ Use the `list /i` command to view the current indices of your income entries.
 * `[NEW_AMOUNT]` refers to the updated monthly sum received, as a whole number.
 * `[NEW_CATEGORY]` refers to the supported categories of income.
     * Enter `Salary`, `Allowance`, `Investment` or `Others`.
-
-For example: `update /i 1 /a 4000 /c salary`  
-Updates the first income entry on your income list to $4000 categorised as your salary.
-
+    
 #### Expected Outcome:
+For example: `update /i 1 /a 4000 /c salary`  <br/>
 Update the first income entry on your income list to $4000 categorised as your salary.
 ````
 > update /i 1 /a 4000 /c salary
@@ -636,10 +629,8 @@ Use the `list /i` command to view the current indices of your income entries.
 * `[INDEX]` refers to the index of income in your income list you want to delete.
     * Enter `3` if you want to delete the third income in your income list.
 
-For example: `delete /i 1`  
-Deletes the first income entry on your income list.
-
 #### Expected Outcome:
+For example: `delete /i 1`  <br/>
 Delete the first income entry on your income list.
 ````
 > delete /i 1
@@ -659,6 +650,7 @@ Shuts down the MindMyMoney application.
 ### Format: `bye`
 
 ### Expected Outcome:
+For example: `bye`  
 Exit your program.
 ````
 > bye
@@ -701,7 +693,7 @@ copy the `list.txt` file found in the current directory into a new folder where 
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Help      | `help /e` <br/> Prints a list of commands for storing expenditures.                                                                                                                                                                                                                                                                                        |
 | Add       | `add /e /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`<br/>For example: `add /e /pm cash /c Food /d Porridge /a 4.5 /t 10/03/2022` <br/> Adds a $4.50 expenditure of food item 'Porridge' that was paid in cash on 10 March 2022 to your expenditure list.                                                                     |
-| List      | `list /e [DATE]` <br/> For example: `list /e 03/03/2022` <br/> Displays your current list of expenditures on 3 March 2022.                                                                                                                                                                                                                                 |
+| List      | `list /e {DATE}` <br/> For example: `list /e 03/03/2022` <br/> Displays your current list of expenditures on 3 March 2022.                                                                                                                                                                                                                                 |
 | Calculate | `calculate /epm [DATE]` <br/> For example: `calculate /epm 03/2022` <br/> Calculates the total expenditures in March 2022 and prints the percentage of expenditures grouped by categories.                                                                                                                                                                 |
 | Delete    | `delete /e [INDEX]`<br/>For example: `delete 1` <br/> Deletes the first expenditure from your expenditure list.                                                                                                                                                                                                                                            | 
 | Update    | `update /e [INDEX] /pm [NEW_PAYMENT_METHOD] /c [NEW_CATEGORY] /d [NEW_DESCRIPTION] /a [NEW_AMOUNT] /t [NEW_DATE]`<br/>For example: `update /e 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022` <br/> Updates the first expenditure in your expenditure list to a $5.0 expenditure of food item 'chicken rice' that was paid in cash on 12 March 2022 |
