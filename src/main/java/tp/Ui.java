@@ -24,6 +24,7 @@ public class Ui {
             throws IHospitalException {
         System.out.print(boundary);
         System.out.println("Welcome to Doctor Page.");
+        System.out.println("Here are the doctors and their appointments:");
         for (int i = 1; i <= doctors.getSize(); i++) {
             System.out.println(doctors.getDoctor(i));
             System.out.println(appointments.getAppointmentListOfDoctorById(doctors.getDoctor(i).getId()));
@@ -36,10 +37,15 @@ public class Ui {
         System.out.print(nurses);
     }
 
-    public void printPatientPage(PatientList patients) {
+    public void printPatientPage(PatientList patients, AppointmentList appointments)
+            throws IHospitalException {
         System.out.print(boundary);
         System.out.println("Welcome to Patient Page.");
-        System.out.print(patients);
+        System.out.println("Here are the patients and their appointments:");
+        for (int i = 1; i <= patients.getSize(); i++) {
+            System.out.println(patients.getPatient(i));
+            System.out.println(appointments.getAppointmentListOfPatientById(patients.getPatient(i).getId()));
+        }
     }
 
     public void printWardPage(WardList wards) {
@@ -103,8 +109,8 @@ public class Ui {
         String editNurse = "edit /nu NURSE_NO /field INFO" + System.lineSeparator();
         String editWard = "edit /w WARD_NO /field INFO" + System.lineSeparator();
         System.out.println("5. To edit something:" + System.lineSeparator()
-                + editDoctor + editPatient + editNurse
-                + editWard + editAppointment);
+                                   + editDoctor + editPatient + editNurse
+                                   + editWard + editAppointment);
     }
 
     public void printSortHelp() {

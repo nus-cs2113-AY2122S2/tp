@@ -86,6 +86,16 @@ public class AppointmentList {
         return res;
     }
 
+    public AppointmentList getAppointmentListOfPatientById(String id) throws IHospitalException {
+        AppointmentList patientBookings = new AppointmentList();
+        for (Appointment appointment : appointments) {
+            if (appointment.getPatient().getId().contains(id)) {
+                patientBookings.addAppointment(appointment);
+            }
+        }
+        return patientBookings;
+    }
+
     public Appointment searchAppointmentByTime(String time) {
         for (Appointment appointment : appointments) {
             if (appointment.getTime().equals(LocalDateTime.parse(time))) {

@@ -13,7 +13,7 @@ import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
 
-public class ViewDoctorPageCommand extends Command {
+public class ViewPatientPageCommand extends Command {
 
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,
@@ -21,7 +21,7 @@ public class ViewDoctorPageCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        ui.printDoctorPage(doctorList, appointmentList);
-        return "_____End_____of_____Doctor_____Page_____:D__________________\n" + boundary;
+        ui.printPatientPage(patientList, appointmentList);
+        return "_____End_____of_____Patient____Page_____:D__________________\n" + boundary;
     }
 }
