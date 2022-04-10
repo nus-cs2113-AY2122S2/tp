@@ -38,22 +38,16 @@ public class AddParser extends CommandParser {
             }
         } else if (matches.get("flag").equals("ug")) {
             String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) size/(?<size>.*)";
-<<<<<<< HEAD
             HashMap<String, String> regexUnitGoodMatch = new MatchKeywords(userInput, regexUnitGood).getGroupValues();
-            try {
-                warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
+            warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
                         regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
-            } catch (UnitTestException e) {
-                System.out.println("Capacity Added is not either Small, Medium, Large. "
-                        + "Default set to Medium");
-            }
-=======
-            HashMap<String, String> regexUnitGoodMatch = new
+
+            regexUnitGoodMatch = new
                     MatchKeywords(userInput, regexUnitGood).getGroupValues();
 
             warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
                     regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
->>>>>>> ee295f950b70b3622b13d514b93d6b34aeeee7e9
+
         } else if (matches.get("flag").equals("o")) {
             // adding the base details for order
             String regexOrder = "oid/(?<oid>\\d*) r/(?<recv>.*) addr/(?<addr>.*)";
