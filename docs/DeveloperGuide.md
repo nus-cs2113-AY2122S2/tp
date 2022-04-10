@@ -195,6 +195,8 @@ The user starts by typing a list command.
 
 ### Edit Command
 
+**Normal function**
+
 ![EditCommand1SequenceDiagram](EditCommand1SequenceDiagram.png)
 ![EditCommand2SequenceDiagram](EditCommand2SequenceDiagram.png)
 ![EditCommand3SequenceDiagram](EditCommand3SequenceDiagram.png)
@@ -213,12 +215,41 @@ The user starts by typing an `edit` command.
    2. Since `quantity` is present (`q/5`), `EditCommand` will change the quantity of `placeholderItem`. An intermediary calculation is needed due to the presence of the relative modifier `r/+`. Ultimately, the quantity of `placeholderItem` will be increased by 5. 
    3. Since `description` is present (`q/To draw on whiteboard`), `EditCommand` will change the description of `placeholderItem` to `To draw on whiteboard`.
 7. The `Item` at index 1 of `ItemList` will be replaced by the `placeholderItem`.
+8. `EditCommand` will print out the changes in `Item`.
+
+**Error handling**
+
+Exceptions are thrown for the following:
+
+1. When the user enters a command without any name, description or quantity (missing all of `n/ q/ d/`). This is done in `EditCommandParser`.
+2. When the user sets the relative flag (`r/`) without any associated quantity. This is done in `EditCommandParser`.
+3. When the user enters an index for an item that is not in the list (e.g. `100000` when item 100000 does not exist). This is done in `EditCommand`.
 
 ### Search Command
 
-![tbd](todo)
+**Normal function**
 
-The above diagram todo
+![SearchCommand1SequenceDiagram](SearchCommand1SequenceDiagram.png)
+![SearchCommand2SequenceDiagram](SearchCommand2SequenceDiagram.png)
+
+The above diagrams show the sequence diagram when searching for items.
+
+The user starts by typing a `search` command.
+
+1. `InvMgr` calls `parse(command)`. `command` is the user input, i.e. `search n/Marker d/draw`.
+2. `InvMgr` creates the appropriate `Command` object based on the user input. The arguments are also parsed and the needed values are stored within `SearchCommand`.
+3. `InvMgr` calls `execute(itemList, ui)` of the `SearchCommand` object.
+4. For each `Item` in `ItemList`, `SearchCommand` will try to:
+   1. Match, if given, the `name` to search in the name of `Item`.
+   2. Match, if given, the `description` to search in the name of `Item`.
+   3. If the `Item` matches the given arguments, the `Item` is prepared for printing through `String.format`, not shown for brevity.
+   4. The `Item` is then printed.
+
+**Error handling**
+
+Exceptions are thrown for the following:
+
+1. When the user enters a command without any name or description (missing all of `n/ d/`). This is done in `SearchCommandParser`.
 
 ### Storage
 
