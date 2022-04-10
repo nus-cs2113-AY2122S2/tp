@@ -8,8 +8,7 @@ public class InvalidScheduleException extends Exception {
     public static final String INVALID_PLAN = "Uh oh, the plan number entered is invalid.\n"
             + "Please specify a valid plan number.";
     public static final String INVALID_DAY = "Uh oh, the day number entered is invalid.\n";
-    public static final String INPUT_NOT_NUMBER_FORMATTABLE = "Uh oh, a number was expected in your input, "
-            + "but a non-formattable number was received.\n"
+    public static final String INVALID_INPUT = "Uh oh, user argument supplied is invalid.\n"
             + "Please try again. Alternatively, type 'help' if you need\n"
             + "more information on the commands.";
     public static final String INDEX_OUT_OF_BOUND = "Uh oh, it seems like too few arguments were entered.\n"
