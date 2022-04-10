@@ -2591,5 +2591,5 @@ rely on former test cases.</span>
 
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
-<br/><br/>
+<br/>
 <div class="button-container"><a class="button" href="#">Back to Top</a></div>
