@@ -557,16 +557,18 @@ IO redirection testing can be performed via the following steps:
 
 ## Non-Functional Requirements
 
-1. The product should be targeting users who can type fast and prefer typing to other means of input.
-2. The product should be for a single user i.e. (not a multi-user product).
-3. The data should be stored locally and should be in a human editable text file.
-4. The data should not be stored with a database management system.
-5. The product should work on the Windows, Linux and OS-X platforms.
-6. The product should work on a computer that has version 11 of Java installed.
-7. The product should work without requiring an installer.
-8. The product should not depend on a remote server.
-9. The product must be packaged into a single JAR file.
-10. Size of product should be less than 100MB, size of documents should be less than 15MB per file.
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be 
+able to accomplish most of the tasks faster using commands than using the mouse.
+2. The product be able to hold up to 100 entries without a noticeable sluggishness in performance for typical usage.
+3. The product should be for a single user i.e. (not a multi-user product).
+4. The data should be stored locally and should be in a human editable text file.
+5. The data should not be stored with a database management system.
+6. The product should work on the Windows, Linux and OS-X platforms.
+7. The product should work on a computer that has version 11 of Java installed.
+8. The product should work without requiring an installer.
+9. The product should not depend on a remote server.
+10. The product must be packaged into a single JAR file.
+11. Size of product should be less than 100MB, size of documents should be less than 15MB per file.
 
 ---
 
