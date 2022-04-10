@@ -19,7 +19,7 @@ public class FindPatientCommand extends Command {
 
     public Status execute(List patientList) {
         if (patientList instanceof PatientList) {
-            switch (parameterArray[0]) {
+            switch (parameterArray[0].toLowerCase()) {
             case "nric":
                 ((PatientList) patientList).findByNric(parameterArray);
                 break;
