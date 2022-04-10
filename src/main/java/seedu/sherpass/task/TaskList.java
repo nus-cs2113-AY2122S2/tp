@@ -13,13 +13,6 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static seedu.sherpass.constant.Message.NEWLINE;
-import static seedu.sherpass.constant.Message.TAB_INDENT;
-import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_DO_ON_DATE;
-import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_START_DATE_IN_THE_PAST_MESSAGE;
-
 public class TaskList {
     private ArrayList<Task> tasks;
     private final HashSet<Integer> identifierList;
