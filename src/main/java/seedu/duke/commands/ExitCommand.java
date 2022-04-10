@@ -10,9 +10,6 @@ public class ExitCommand extends Command {
     public static boolean isExit = false;
 
     /**
-     *
-     */
-    /**
      * Prepares the program for termination.
      * @param moduleList The list of modules
      * @param configuration The configuration settings of the application
