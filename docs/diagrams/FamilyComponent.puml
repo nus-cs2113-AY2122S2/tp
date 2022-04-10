@@ -7,8 +7,26 @@ Package "Family" <<Rectangle>> {
     class Person  MODEL_COLOR_T2
 }
 
+class Command COMMAND_COLOR
+class UI UI_COLOR
+class Storage STORAGE_COLOR
+class IncomeList MONEY_COLOR
+class ExpenditureList MONEY_COLOR
+
+Command -down[#grey].> Family
+
+Storage "1" -down[#grey]-> "1" Family
+
 Family "1" -down[#grey]-> "3" PersonList
 
+Family -right[#grey].> UI
+
 PersonList "1" -down[#grey]-> "*" Person
+
+Person "1" -down[#grey]-> "1" IncomeList
+
+Person -right[#grey].> UI
+
+Person "1" -down[#grey]-> "1" ExpenditureList
 
 @enduml

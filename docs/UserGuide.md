@@ -157,6 +157,7 @@ Example of usage:
 
 * _Result_: Alice deleted from the Parents' group
 
+  ![delete-command-screenshot](images/DeletePerson.png)
 ---
 
 ### Add an income: `addin`
@@ -177,11 +178,11 @@ Format: `addin /g GROUP_INDEX /u USER_INDEX /d DESCRIPTION /i INCOME /p <T/(any)
 
 Example of usage:
 
-* Add a monthly-recurrent Salary of $2,000, to Bob's income.
+* Add a monthly-recurrent Salary of $2,000, to Alice's income.
 
   `addin /g 1 /u 1 /d Salary /i 2000 /p T`
 
-* _Result_: Entry for Salary is added to Bob's income list with an income index of **1**.
+* _Result_: Entry for Salary is added to Alice's income list with an income index of **1**.
 
   ![addin-command-screenshot](images/AddIncome.png)
 
@@ -429,24 +430,24 @@ computer.
 To keep things simple, we will omit the parameter description for you. To view each command in detail, refer to
 the [features](#features) section.
 
-| Command                                                                     | Format                                                                                                                                                              |
-|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [View all commands](#viewing-all-commands-codehelpcode)                     | help                                                                                                                                                                |
-| [Add a person](#add-a-person-codeaddcode)                                   | add /n __ /g __ <br/>e.g.<br/> `> add /n Alice /g 1`                                                                                                                |
-| [Delete a person](#delete-a-person-codedeletecode)                          | delete /g __ /u __ <br/>e.g.<br/> `> delete /g 1 /u 2`                                                                                                              |
-| [Add an income](#add-an-income-codeaddincode)                               | addin /g__ /u __ /i __ /d __ /p __ <br/>e.g.<br/> `> addin /g 2 /u 3 /i 2000 /d salary /p t`                                                                        |
-| [Delete an income](#delete-an-income-codedeleteincode)                      | deletein /g __ /u __ /r __ <br/>e.g.<br/> `> deletein /g 2 /u 1 /r 5`                                                                                               |
-| [Edit an income](#edit-an-income-codeeditincode)                            | editin /g __ /u __ /r __ [ /i __ /d __ /p __ ] <br/>e.g.<br/> `> editin /g 3 /u 1 /r 5 /i 10 /d stationary` <br/> `> editin /g 2 /u 4 /r 1 /d red pack /p f`        |
-| [Add an expenditure](#add-an-expenditure-codeaddoutcode)                    | addout /g__ /u __ /e __ /d __ /c __ /p __ <br/>e.g.<br/> `> addout /g 2 /u 3 /e 400 /d books /c 1 /p f`                                                             |
-| [Delete an expenditure](#delete-an-expenditure-codedeleteoutcode)           | deleteout /g __ /u __ /r __ <br/>e.g.<br/> `> deleteout /g 2 /u 1 /r 1`                                                                                             |
-| [Edit an expenditure](#edit-an-expenditure-codeeditoutcode)                 | editout /g __ /u __ /r __ [ /e __ /d __ /c __ /p __ ] <br/>e.g.<br/> `> editout /g 2 /u 1 /r 2 /e 400 /d dinner /c 3` <br/> `> editout /g 1 /u 2 /r 6 /d misc /p t` |
-| [Show financial summary](#show-financial-summary-codeoverviewcode)          | overview                                                                                                                                                            |
-| [Show all records by group](#show-all-records-by-group-codelistcode)        | list /g __ <br/>e.g.<br/> `> list /g 1`                                                                                                                             | 
-| [Show expenditure categories](#show-expenditure-categories-codelistcatcode) | listcat                                                                                                                                                             |
-| [Searching for details](#searching-for-details-codefindcode)                | find /d __ [ /c __ ] <br/>e.g.<br/> `> find salary` <br/> `> find sugar /c 4`                                                                                       |
-| [Exit the program](#exit-codebyecode)                                       | bye                                                                                                                                                                 |
+| Command                                                             | Format                                                                                                                                                              |
+|---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [View all commands](#viewing-all-commands-help)                     | help                                                                                                                                                                |
+| [Add a person](#add-a-person-add)                                   | add /n __ /g __ <br/>e.g.<br/> `> add /n Alice /g 1`                                                                                                                |
+| [Delete a person](#delete-a-person-delete)                          | delete /g __ /u __ <br/>e.g.<br/> `> delete /g 1 /u 2`                                                                                                              |
+| [Add an income](#add-an-income-addin)                               | addin /g__ /u __ /i __ /d __ /p __ <br/>e.g.<br/>f`> addin /g 2 /u 3 /i 2000 /d salary /p t`                                                                        |
+| [Delete an income](#delete-an-income-deletein)                      | deletein /g __ /u __ /r __ <br/>e.g.<br/> `> deletein /g 2 /u 1 /r 5`                                                                                               |
+| [Edit an income](#edit-an-income-editin)                            | editin /g __ /u __ /r __ [ /i __ /d __ /p __ ] <br/>e.g.<br/> `> editin /g 3 /u 1 /r 5 /i 10 /d stationary` <br/> `> editin /g 2 /u 4 /r 1 /d red pack /p f`        |
+| [Add an expenditure](#add-an-expenditure-addout)                    | addout /g__ /u __ /e __ /d __ /c __ /p __ <br/>e.g.<br/> `> addout /g 2 /u 3 /e 400 /d books /c 1 /p f`                                                             |
+| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /g __ /u __ /r __ <br/>e.g.<br/> `> deleteout /g 2 /u 1 /r 1`                                                                                             |
+| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /g __ /u __ /r __ [ /e __ /d __ /c __ /p __ ] <br/>e.g.<br/> `> editout /g 2 /u 1 /r 2 /e 400 /d dinner /c 3` <br/> `> editout /g 1 /u 2 /r 6 /d misc /p t` |
+| [Show financial summary](#show-financial-summary-overview)          | overview                                                                                                                                                            |
+| [Show all records by group](#show-all-records-by-group-list)        | list /g __ <br/>e.g.<br/> `> list /g 1`                                                                                                                             | 
+| [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                                                                                                                                             |
+| [Searching for details](#searching-for-details-find)                | find /d __ [ /c __ ] <br/>e.g.<br/> `> find salary` <br/> `> find sugar /c 4`                                                                                       |
+| [Exit the program](#exit-bye)                                       | bye                                                                                                                                                                 |
 
-[**Category Summary**](#show-expenditure-categories-codelistcatcode)
+[**Categoty Summary**](#show-expenditure-categories-listcat)
 
 | Index | Name                  |
 |-------|-----------------------|
