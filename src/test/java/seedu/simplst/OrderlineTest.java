@@ -1,18 +1,31 @@
 package seedu.simplst;
 
-import org.junit.Test;
-import util.exceptions.WrongCommandException;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OrderlineTest {
 
-    public void setUpOrderline() throws WrongCommandException {
-        Order testOrder = new Order(101, "John Doe", "123 Maple Street Anytown");
-        UnitGood testUnitGood = new UnitGood("WC1", "Wooden Chair", "German Oak", "Small");
-        String quantity = "50";
-        testOrder.addOrderline(testUnitGood, quantity);
+    @Test
+    public void fulfilOrder_allQuantityFulfilled_isDone() {
+        Order testOrder = new Order(1, "John Doe", "123 Maple ave");
+        UnitGood testUnitGood = new UnitGood("WC1", "Wooden Chairs", "German Oak", "small");
+        Good testGood = new Good(testUnitGood, 50);
+        Orderline testOrderline = new Orderline(testGood, 1, 20);
+
+        testOrderline.setQuantityFulfilled(20);
+        assertEquals(20, testOrderline.getQuantityFulfilled());
+        assertEquals(true, testOrderline.getCheckedOff());
     }
 
+    @Test
+    public void fulfilOrder_someQuantityFulfilled_isNotDone() {
+        Order testOrder = new Order(2, "John Day", "321 Maple ave");
+        UnitGood testUnitGood = new UnitGood("WC2", "Wooden Table", "German Oak", "small");
+        Good testGood = new Good(testUnitGood, 50);
+        Orderline testOrderline = new Orderline(testGood, 2, 20);
+
+        testOrderline.setQuantityFulfilled(10);
+        assertEquals(false, testOrderline.getCheckedOff());
+    }
 
 }
