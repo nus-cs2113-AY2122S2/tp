@@ -1,0 +1,125 @@
+@startuml
+!include Style.puml
+
+box updateExpenditure()
+participant ":MMM" as MMM MMM_COLOUR
+participant "Command:UpdateCommand" as updateCommand COMMANDS_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
+participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
+participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
+participant ":ExpenditureList" as ExpenditureList DATA_COLOUR
+
+end box
+hide footbox
+
+MMM -> updateCommand: executeCommand()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> updateCommand: updateExpenditure()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> GeneralFunctions: parseInputWithCommandFlag()
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+
+updateCommand -> AddCommandInputTest: testUpdateExpenditureParameters()
+activate AddCommandInputTest HELPER_COLOUR
+
+AddCommandInputTest -> AddCommandInputTest: testsPaymentMethod()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: testExpenditureCategory()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: testDescription()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: checkValidDate()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: checkAfterCurrentDate()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+alt isSamePaymentMethod() && NEW_PAYMENT_METHOD != cash
+
+AddCommandInputTest -> AddCommandInputTest: testSameCreditCardExpenditure()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+else else
+
+AddCommandInputTest -> AddCommandInputTest: testExpenditureAmount()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+end
+
+AddCommandInputTest --> updateCommand
+deactivate AddCommandInputTest
+updateCommand --> updateCommand
+deactivate updateCommand COMMANDS_COLOUR
+
+opt NEW_PAYMENT_METHOD == cash
+updateCommand -> GeneralFunctions: capitalise(paymentMethod)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+end
+
+updateCommand -> GeneralFunctions: capitalise(category)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+updateCommand -> GeneralFunctions: formatFloat(amount)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+opt isSimilarExpenditure()
+updateCommand --> MMM
+note right
+An exception is thrown, warning user
+that the new Expenditure is similar to
+old Expenditure
+end note
+end
+
+updateCommand -> updateCommand: updatePaymentMethod()
+activate updateCommand COMMANDS_COLOUR
+updateCommand --> updateCommand
+deactivate updateCommand
+
+create Expenditure
+updateCommand -> Expenditure: Expenditure()
+activate Expenditure USERFINANCIAL_COLOUR
+Expenditure --> updateCommand
+deactivate Expenditure
+
+updateCommand -> ExpenditureList: set()
+activate ExpenditureList DATA_COLOUR
+ExpenditureList --> updateCommand
+deactivate ExpenditureList
+
+note left
+Details of newly updated
+expenditure is printed out
+end note
+
+updateCommand --> MMM
+deactivate updateCommand
+@enduml

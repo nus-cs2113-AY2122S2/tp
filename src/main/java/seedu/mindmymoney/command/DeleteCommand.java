@@ -76,14 +76,12 @@ public class DeleteCommand extends Command {
      *
      * @param cardName Name of credit card to be updated.
      * @param amount amount of new expenditure.
-     * @throws MindMyMoneyException when the card is not found in user's credit card list.
      */
-    private void updateCreditCardTotalExpenditure(String cardName, float amount) throws MindMyMoneyException {
+    private void updateCreditCardTotalExpenditure(String cardName, float amount) {
         CreditCard creditCard = creditCardList.get(cardName);
-        if (creditCard == null) {
-            throw new MindMyMoneyException("Invalid Card Name!");
+        if (creditCard != null) {
+            creditCard.deductExpenditure(amount);
         }
-        creditCard.deductExpenditure(amount);
     }
 
     /**
