@@ -57,7 +57,7 @@ public class AddParser extends CommandParser {
                     regexOrderMatch.get("recv"), regexOrderMatch.get("addr"));
         } else if (matches.get("flag").equals("og")) {
             // adding a good for that order
-            String regexOrderline = "oid/(?<oid>\\d*) sku/(?<sku>.*) q/(?<qty>\\d*)";
+            String regexOrderline = "oid/(?<oid>\\d*) sku/(?<sku>.*) qty/(?<qty>\\d*)";
             HashMap<String, String> regexOrderlineMatch = new MatchKeywords(
                     userInput, regexOrderline).getGroupValues();
             warehouse.addOrderline(regexOrderlineMatch.get("oid"),
