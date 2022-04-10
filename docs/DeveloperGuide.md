@@ -741,16 +741,28 @@ This section includes instructions to test SplitLah manually.
 **Test Cases:**
 
 Test Scenario 1: No sessions are currently stored in the application. <br>
-1. Test Command: `session /create /n Test1 /pl Person1 Person2 /d 10-04-2022` <br>
-   Expected: A success message is printed along with the details of the session as provided in the command.
-2. Test Command: `session /create /n Test2 /pl Person1 Person2 /d today`<br>
-   Expected: A success message is printed along with the details of the session as provided in the command.
+1. Test Command: `session /create /n SessionTest1 /pl Alice Bob /d 10-04-2022` <br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command.
+2. Test Command: `session /create /n SessionTest2 /pl Alice Bob /d today`<br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command.
+3. Test Command: `session /create /n SessionTest3 /pl Alice Alice /d today` <br>
+   Expected: An error message should be printed, indicating there are duplicates in the list of persons provided.
 
-Test Scenario 2: There is a session named Test1 currently stored in the application. <br>
-1. Test Command: `session /create /n Test1 /pl Person1 Person2 /d 10-04-2022` <br>
-   Expected: An error message is printed indicating a session with the same name exists within the application.
+Test Scenario 2: There is a session named SessionTest1 currently stored in the application. <br>
+1. Test Command: `session /create /n SessionTest3 /pl Alice Bob /d today` <br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command.
+2. Test Command: `session /create /n SessionTest1 /pl Alice Bob /d 10-04-2022` <br>
+   Expected: An error message should be printed, indicating a session with the same name already exists within the application.
 
-
+Test Scenario 3: There is a group with unique identifier of 1 named GroupTest1 with Alice, Bob and Charlie stored in the application. There are no other groups stored apart from GroupTest1.<br>
+1. Test Command: `session /create /n SessionTest4 /gid 1 /d today`<br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command. 
+             The list of persons for the session would include the persons found in the group.
+2. Test Command: `session /create /n SessionTest5 /gid 1 /pl David /d today`<br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command.
+   The list of persons for the session would include the persons found in the group and also David.
+3. Test Command: `session /create /n SessionTest6 /gid 2 /d today`<br>
+   Expected: An error message should be printed, indicating the specified group unique identifier cannot be found.
 <hr>
 
 #### Deleting a Session
