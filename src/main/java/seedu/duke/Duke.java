@@ -26,8 +26,8 @@ public class Duke {
                 instanceof DeleteItemCommand) {
             writeItemListsToFile(command, listContainer);
         } else if (command instanceof AddAvailabilityCommand || command instanceof AddHousekeeperCommand || command
-                instanceof AgeIncreaseCommand || command instanceof ResetAvailabilityCommand || command instanceof
-                DeleteHousekeeperCommand) {
+                instanceof AgeIncreaseCommand || command instanceof ResetAvailabilityCommand || command
+                instanceof DeleteHousekeeperCommand) {
             writeHousekeeperListsToFile(command, listContainer);
         }
     }
