@@ -13,7 +13,7 @@ participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR
 end box
 hide footbox
 
-MMM -> AddCommand: AddCommand.executeCommand()
+MMM -> AddCommand: executeCommand()
 activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> AddCommand: addExpenditure()
@@ -81,12 +81,12 @@ GeneralFunctions --> AddCommand
 deactivate GeneralFunctions
 
 create Expenditure
-AddCommand -> Expenditure: new Expenditure()
+AddCommand -> Expenditure: Expenditure()
 activate Expenditure USERFINANCIAL_COLOUR
 Expenditure --> AddCommand
 deactivate Expenditure
 
-AddCommand -> ExpenditureList: expenditureList.add()
+AddCommand -> ExpenditureList: add()
 activate ExpenditureList DATA_COLOUR
 ExpenditureList --> AddCommand
 deactivate ExpenditureList
@@ -98,14 +98,14 @@ end note
 
 opt PAYMENT_METHOD != cash
 
-AddCommand -> AddCommand: AddCommand.updateCreditCardTotalExpenditure()
+AddCommand -> AddCommand: updateCreditCardTotalExpenditure()
 activate AddCommand COMMANDS_COLOUR
-AddCommand -> CreditCardList: creditCardList.get()
+AddCommand -> CreditCardList: get()
 activate CreditCardList DATA_COLOUR
 CreditCardList --> AddCommand
 deactivate CreditCardList
 
-AddCommand -> CreditCard: creditCard.addExpenditure(amount)
+AddCommand -> CreditCard: addExpenditure(amount)
 activate CreditCard USERFINANCIAL_COLOUR
 CreditCard --> AddCommand
 deactivate CreditCard

@@ -9,7 +9,7 @@ participant ":GeneralFunctions" as GeneralFunctions  HELPER_COLOUR
 end box
 hide footbox
 
-MMM -> CalculateInputCommand: CalculateInputCommand.executeCommand()
+MMM -> CalculateInputCommand: executeCommand()
 activate CalculateInputCommand COMMANDS_COLOUR
 
 CalculateInputCommand -> GeneralFunctions: parseInput()

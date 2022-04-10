@@ -11,7 +11,7 @@ participant ":CreditCardList" as CreditCardList DATA_COLOUR
 
 end box
 hide footbox
-Parser -> AddCommand: AddCommand.executeCommand()
+Parser -> AddCommand: executeCommand()
 activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> AddCommand: addCreditCard()

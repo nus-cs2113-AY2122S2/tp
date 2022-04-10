@@ -7,7 +7,7 @@ participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
 end box
 hide footbox
 
-Parser -> AddCommand: AddCommand.executeCommand()
+Parser -> AddCommand: executeCommand()
 activate AddCommand COMMANDS_COLOUR
 
 alt hasCreditCardFlag()
