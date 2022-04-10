@@ -41,8 +41,7 @@ public class AddWardCommand extends Command {
         for (int docs : docIndexes) {
             if (doctorList.getDoctor(docs).getWardNumber() != -1) {
                 throw new IHospitalException("The doctor" + docs + "already assigned to a ward\n");
-            }
-            else {
+            } else {
                 doctorList.getDoctor(docs).setWardNumber(wardNumber);
             }
         }
@@ -50,8 +49,7 @@ public class AddWardCommand extends Command {
         for (int nurs : nurseIndexes) {
             if (nurseList.getNurse(nurs).getWardNumber() != -1) {
                 throw new IHospitalException("The nurse" + nurs + "already assigned to a ward\n");
-            }
-            else {
+            } else {
                 nurseList.getNurse(nurs).setWardNumber(wardNumber);
             }
         }
