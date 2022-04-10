@@ -173,6 +173,8 @@ the `XYZCommand` to obtain the desired results.
 **Class:** [`Parser.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
 
+The Class Diagram below shows the full structure of the `Parser` component and the components it interacts with.
+
 ![ParserClassDiagram](images/ParserClassDiagram.png)
 
 The `Parser` component consists of the 
