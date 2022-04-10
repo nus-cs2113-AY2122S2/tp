@@ -353,7 +353,7 @@ To find a patient you would have to provide one of these parameters using the gi
 4. Gender: `gender`
 5. Address: `address`
 6. Date Of Birth (DOB): `dob`
-7. Date Of Admission (DOA): `admissiondate`
+7. Registration Date: `registrationdate`
 
 Format: `find patient /info [parameter], [keyword to find]`
 
@@ -363,7 +363,7 @@ Example 3: `find patient /info age, 22` <br>
 Example 4: `find patient /info gender, M` <br>
 Example 5: `find patient /info address, 10 BAKER STREET` <br>
 Example 6: `find patient /info dob, 1999-12-31` <br>
-Example 7: `find patient /info admissiondate, 2021-02-15` <br>
+Example 7: `find patient /info registrationdate, 2021-02-15` <br>
 
 #### FIND MEDICINE
 
@@ -509,7 +509,7 @@ TO BE UPDATED
 | `delete medicine`     | `delete medicine /info [batch id]`<br />e.g. `delete medicine /info S234`                                                                                                                                                                        |
 | `delete appointment`  | `delete appointment /info [appointment id]`<br />e.g. `delete appointment /info 12356701017647`                                                                                                                                                  |
 | `find doctor`         | `find doctor /info [parameter], [keyword to find]`<br />e.g.`find doctor /info name, Jimmy`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or specialization)                                                    |
-| `find patient`        | `find patient /info [parameter], [keyword to find]`<br />e.g.`find patient /info name, Steven Oz`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or admissiondate)                                               |
+| `find patient`        | `find patient /info [parameter], [keyword to find]`<br />e.g.`find patient /info name, Steven Oz`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or registrationdate)                                               |
 | `find medicine`       | `find medicine /info [parameter], [keyword to find]`<br />e.g.`find medicine /info name, Paracetamol`<br />e.g.parameter must be one of the six (name, id, dosage, expiry, sideeffects, quantity)                                                |
 | `find appointment`    | `find appointment /info [parameter], [keyword to find]`<br />e.g.`find appointment /info id, 12356701017647` <br />e.g.parameter must be one of the six (appointment id, patient nric, patient name, doctor nric, doctor name, appointment date) |
 | `edit doctor`         | `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g.`edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                |
