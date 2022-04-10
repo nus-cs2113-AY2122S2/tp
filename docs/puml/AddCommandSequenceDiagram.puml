@@ -13,14 +13,16 @@ activate AddCommand COMMANDS_COLOUR
 alt hasCreditCardFlag()
 AddCommand -> AddCommand: addCreditCard()
 activate AddCommand COMMANDS_COLOUR
-AddCommand --> AddCommand:
+AddCommand --> AddCommand
+AddCommand --> MMM
 deactivate AddCommand
 
 
 else hasIncomeFlag()
 AddCommand -> AddCommand: addIncome()
 activate AddCommand COMMANDS_COLOUR
-AddCommand --> AddCommand:
+AddCommand --> AddCommand
+AddCommand --> MMM
 deactivate AddCommand
 
 else hasExpenditureFlag()
@@ -28,10 +30,10 @@ AddCommand -> AddCommand: addExpenditure()
 activate AddCommand COMMANDS_COLOUR
 AddCommand --> AddCommand:
 deactivate AddCommand COMMANDS_COLOUR
-AddCommand --> MMM:
+AddCommand --> MMM
 
 else else
-AddCommand --> MMM:
+AddCommand --> MMM
 deactivate AddCommand COMMANDS_COLOUR
 note right
 An exception containing warning messages is thrown
