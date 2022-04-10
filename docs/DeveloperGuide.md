@@ -77,6 +77,8 @@
 |reserve|reserve {package_id},{contact_name},{contact_number},{number_pax} <br/> e.g reserve 3,John,91234567,3|
 |remove|remove {package_id},{contact_number} <br/> e.g remove 1,8888888 <br/> remove an existing reservation|
 |reservations|reservations {package_number} <br/> eg. reservations 2 <br/> print all reservations for a given travelPackageID|
+|addHotel|addHotel {hotel_id},{hotel_name},{country},{price},{package_id} <br/> eg. addHotel 1,Hotel99,Singapore,100,1 <br/> Add a Hotel to the Itinerary|
+|hotels|hotels {package_number} <br/> eg. hotels 1 <br/> View all hotels offering this package|
 
 ### Test Case 1
 
