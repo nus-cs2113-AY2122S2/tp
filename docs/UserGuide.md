@@ -184,19 +184,11 @@ Example: `view medicine`
 #### VIEW APPOINTMENT
 
 To view the records of all appointments in the application, you can simply call `view appointment` without any
-additional parameters. You could also give a specific criteria as listed below and the input if you want to
-search and view by a specific criteria.
+additional parameters.
 
-Format: `view appointment` or `view appointment /info [criteria], [input value]`
+Format: `view appointment`
 
-Accepted Criteria: `appointment id`,`patient nric`,`patient name`,`doctor nric`,`doctor name`,`date`
-
-Example 1: `view appointment /info id, 12356710156543` <br>
-Example 2: `view appointment /info patient nric, S1234567A` <br>
-Example 3: `view appointment /info patient name, Doe` <br>
-Example 4: `view appointment /info doctor nric, S7654321A` <br>
-Example 5: `view appointment /info doctor name, John` <br>
-Example 6: `view appointment /info date, 2022-10-15`
+Example: `view appointment`
 
 ### Deleting: `delete`
 Allows user to delete existing records of doctors, patients, medicine or appointment. Do note that all delete commands
@@ -500,10 +492,10 @@ TO BE UPDATED
 | `add patient`         | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                         |
 | `add medicine`        | `add medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`<br />e.g. `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                       |
 | `add appointment`     | `add appointment /info [patient nric], [doctor nric], [appointment date], [appointment details]`<br />e.g. `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup`                                                        |
-| `view doctor`         | `view doctor` or `view doctor /info [criteria], [input value]`<br />e.g. `view doctor /info name, Jimmy`                                                                                                                                         |
-| `view patient`        | `view patient` or `view patient /info [criteria], [input value]`<br />e.g. `view patient /info name, Steven`                                                                                                                                     |
-| `view medicine`       | `view medicine` or `view medicine /info info [criteria], [input value]`<br />e.g. `view medicine /info name, Paracetamol`                                                                                                                        |
-| `view appointment`    | `view appointment` or `view appointment /info [criteria], [input value]`<br />e.g. `view appointment /info id, 12356701017647`                                                                                                                   |
+| `view doctor`         | `view doctor` or `view doctor /info [parameter], [keyword to find]`<br />e.g. `view doctor /info name, Jimmy`                                                                                                                                         |
+| `view patient`        | `view patient` or `view patient /info [parameter], [keyword to find]`<br />e.g. `view patient /info name, Steven`                                                                                                                                     |
+| `view medicine`       | `view medicine` or `view medicine /info info [parameter], [keyword to find]`<br />e.g. `view medicine /info name, Paracetamol`                                                                                                                        |
+| `view appointment`    | `view appointment` or `view appointment /info [parameter], [keyword to find]`<br />e.g. `view appointment /info id, 12356701017647`                                                                                                                   |
 | `delete doctor`       | `delete doctor /info [nric]`<br />e.g. `delete doctor /info S1234567A`                                                                                                                                                                           |
 | `delete patient`      | `delete patient /info [nric]`<br />e.g. `delete patient /info S1234567A`                                                                                                                                                                         |
 | `delete medicine`     | `delete medicine /info [batch id]`<br />e.g. `delete medicine /info S234`                                                                                                                                                                        |
