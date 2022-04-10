@@ -1412,7 +1412,7 @@ The following sequence diagram illustrates how the `schedule /update` command wo
 ![Update Schedule Sequence Diagram](uml/sequenceDiagrams/schedule/images/updateSchedule.png)
 <br><br>
 
-<span class="info box>:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+<span class="info box">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** The program waits for the user's input, which in this case,
@@ -1591,12 +1591,12 @@ an `InvalidScheduleException` would be thrown, and the entire process is aborted
 scheduled on that day. The `Day` object that stores the plan details for the specified day in 
 the user command will be deleted.
 
-**(Steps 7 and 8)** After which, the `DayList#convertDayNumberToDay()` method will be called.
+**(Steps 7 to 9)** After which, the `DayList#convertDayNumberToDay()` method will be called.
 As the method name suggests, this method will convert the day number to its corresponding day name. 
 For example, day number 1 will be converted to Monday. The purpose of this method is to 
 make the success message to be displayed to the user more readable.
 
-**(Steps 9 and 10)** After the plan is successfully cleared for that indicated day, a success message of the process 
+**(Steps 10 and 11)** After the plan is successfully cleared for that indicated day, a success message of the process 
 would be printed to the user through the terminal by calling the `UI#printClearedScheduleOnADay()` method. 
 An example of a success message would be
 
@@ -1606,7 +1606,7 @@ Plan has been cleared for Monday.
 ----------------------------------------------------------------------
 ```
 
-**(Step 11)** `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
+**(Step 12)** `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
 in the `dayList` into `schedule.txt` which is stored on the user's local filesystem. For more information
 on the file management, refer to this [section](#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
 
@@ -2249,7 +2249,7 @@ The following are some test cases for you to try:
 | Test Case                                     | Command                   | Expected result                                                 |
 |:----------------------------------------------|:--------------------------|:----------------------------------------------------------------|
 | Valid list command with extra arguments.      | `workout /list extraline` | Error response (invalid user argument), workouts not displayed. |
-| Extra whitespaces between commands arguments. | `workout         /list`   | Error response (invalid user action), workouts not displayed.   |
+| Extra whitespaces between commands arguments. | :x: `workout      /list`  | Error response (invalid user action), workouts not displayed.   |
 
 #### Deleting An Existing Workout
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-workout-workout-delete).)
@@ -2419,27 +2419,27 @@ The following are some test cases for you to try:
 #### Updating The Schedule
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#update-schedule-schedule-update).)
 
-**Prerequisites:** Ensure that you have created some plans, at least one, before you to test the
+**Prerequisites:** Ensure that you have created some plans, at least one, before you test the
 `schedule /update` command.
 
 The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case                      | Command                | Expected result                      |
-|:-------------------------------|:-----------------------|:-------------------------------------|
-| Valid update schedule command. | `schedule /update 1 3` | Plan number 3 is schedule on Monday. |
+| Test Case                      | Command                | Expected result                        |
+|:-------------------------------|:-----------------------|:---------------------------------------|
+| Valid update schedule command. | `schedule /update 1 3` | Plan number 3 is scheduled for Monday. |
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                     | Command                            | Expected result                                                                         |
-|:----------------------------------------------|:-----------------------------------|:----------------------------------------------------------------------------------------|
-| Update schedule with extra arguments.         | `schedule /update 1 3 extraline`   | Error response (too many arguments entered), plan is not added/updated to the schedule. |
-| Update schedule with missing plan number.     | `schedule /update 1`               | Error response (too few arguments entered), plan is not added/updated to the schedule.  |
-| Schedule a plan on an invalid day.            | `schedule /update 8 1`             | Error response (invalid day number), plan is not added/updated to the schedule.         |
-| Schedule an invalid plan.                     | `schedule /update 1 1222`          | Error response (invalid plan number), plan is not added/updated to the schedule.        |
-| Extra whitespaces between commands arguments. | `schedule         /update 1 2`     | Error response (invalid user action), plan is not added/updated to the schedule.        |
-| Extra whitespaces between command parameters. | `schedule /update     1         2` | Error response (invalid user action), plan is not added/updated to the schedule.        |
+| Test Case                                     | Command                          | Expected result                                                                         |
+|:----------------------------------------------|:---------------------------------|:----------------------------------------------------------------------------------------|
+| Update schedule with extra arguments.         | `schedule /update 1 3 extraline` | Error response (too many arguments entered), plan is not added/updated to the schedule. |
+| Update schedule with missing plan number.     | `schedule /update 1`             | Error response (too few arguments entered), plan is not added/updated to the schedule.  |
+| Schedule a plan on an invalid day.            | `schedule /update 8 1`           | Error response (invalid day number), plan is not added/updated to the schedule.         |
+| Schedule an invalid plan.                     | `schedule /update 2147483646`    | Error response (invalid plan number), plan is not added/updated to the schedule.        |
+| Extra whitespaces between commands arguments. | :x: `schedule     /update 1 2`   | Error response (invalid user action), plan is not added/updated to the schedule.        |
+| Extra whitespaces between command parameters. | :x: `schedule /update   1   2`   | Error response (invalid user action), plan is not added/updated to the schedule.        |
 
 
 #### Viewing The Schedule
@@ -2458,7 +2458,7 @@ The following are some test cases for you to try:
 | Test Case                                     | Command                    | Expected result                                                 |
 |:----------------------------------------------|:---------------------------|:----------------------------------------------------------------|
 | List schedule with extra arguments.           | `schedule /list extraline` | Error response (wrong command entered), schedule not displayed. |
-| Extra whitespaces between commands arguments. | `schedule         /list`   | Error response (invalid user action), schedule not displayed.   |
+| Extra whitespaces between commands arguments. | :x: `schedule     /list`   | Error response (invalid user action), schedule not displayed.   |
 
 #### Clearing Plan Schedule For A Day
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#clear-schedule-for-a-day-schedule-clear).)
@@ -2467,17 +2467,17 @@ The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case                      | Command             | Expected result                                                                   |
-|:-------------------------------|:--------------------|:----------------------------------------------------------------------------------|
-| Valid clear scheduled command. | `schedule /clear 1` | If there is a plan scheduled on Monday, it will be cleared and set to `rest day`. |
+| Test Case                      | Command             | Expected result                                                                    |
+|:-------------------------------|:--------------------|:-----------------------------------------------------------------------------------|
+| Valid clear scheduled command. | `schedule /clear 1` | If there is a plan scheduled for Monday, it will be cleared and set to `rest day`. |
 
 <br/>**Negative Test Cases**<br/>
 
 | Test Case                                     | Command                       | Expected result                                                                 |
 |:----------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------|
 | Day Number exceed the range of 1 to 7.        | `schedule /clear 9`           | Error response (invalid day number), no plan in the schedule is being cleared.  |
-| Clear scheduled command with extra arguments. | `schedule /clear 1 extraline` | Error response (invalid command), no plan in the schedule is being cleared.     |
-| Extra whitespaces between commands arguments. | `schedule         /clear 1`   | Error response (invalid user action), no plan in the schedule is being cleared. |
+| Command with extra arguments.                 | `schedule /clear 1 extraline` | Error response (invalid command), no plan in the schedule is being cleared.     |
+| Extra whitespaces between commands arguments. | :x: `schedule     /clear 1`   | Error response (invalid user action), no plan in the schedule is being cleared. |
 
 #### Clearing All Plans In The Schedule
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#clear-schedule-for-the-week-schedule-clearall).)
@@ -2486,16 +2486,16 @@ The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case                         | Command              | Expected result                             |
-|:----------------------------------|:---------------------|:--------------------------------------------|
-| Valid clear all schedule command. | `schedule /clearall` | All plans added to the schedule is removed. |
+| Test Case                         | Command              | Expected result                              |
+|:----------------------------------|:---------------------|:---------------------------------------------|
+| Valid clear all schedule command. | `schedule /clearall` | All plans added to the schedule are removed. |
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                               | Command                        | Expected result                                                                                 |
-|:--------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------|
-| Clear all plans scheduled command with extra arguments. | `schedule /clearall extraline` | Error response (wrong command entered), plans not removed from schedule and schedule not reset. |
-| Extra whitespaces between commands arguments.           | `schedule         /clearall`   | Error response (invalid user action), plans not removed from schedule and schedule not reset.   |
+| Test Case                                     | Command                        | Expected result                                                                                 |
+|:----------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------|
+| Command with extra arguments.                 | `schedule /clearall extraline` | Error response (wrong command entered), plans not removed from schedule and schedule not reset. |
+| Extra whitespaces between commands arguments. | :x: `schedule     /clearall`   | Error response (invalid user action), plans not removed from schedule and schedule not reset.   |
 
 <br/>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
@@ -2575,11 +2575,11 @@ The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case                                                                                | Command                        | Expected result                                                                                                               |
-|:-----------------------------------------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
-| Valid searching for all command.                                                         | `search /all`                  | All exercises, workouts and plans with name containing whitespace will be shown.                                              |
-| Valid searching for all command.                                                         | `search /all a`                | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
-| Valid searching for all command.                                                         | `search /all 15`               | All exercises and plans with name containing '15' will be shown, and all workouts with repetitions equal to 15 will be shown. |
+| Test Case                                                          | Command                        | Expected result                                                                                                               |
+|:-------------------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
+| Valid searching for all command.                                   | `search /all`                  | All exercises, workouts and plans with name containing whitespace will be shown.                                              |
+| Valid searching for all command.                                   | `search /all a`                | All exercises, workouts and plans with name containing 'a' will be shown.                                                     |
+| Valid searching for all command.                                   | `search /all 15`               | All exercises and plans with name containing '15' will be shown, and all workouts with repetitions equal to 15 will be shown. |
 
 
 <br/>**Negative Test Cases**<br/>
@@ -2612,6 +2612,7 @@ prior to conducting the test cases mentioned below:<br/><br/>
 <span class="warning box">:warning: Please follow the test cases and its commands in sequence as subsequent test cases 
 rely on former test cases.</span>
 
+
 | Test Case                                                                                      | Command                                                                                                                                | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 |:-----------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1. Write new data into `workouts.txt`.                                                         | (a) `workout /new sit up /reps 10`<br/><br/>(b) `workout /new push up /reps 20`<br/><br/>(c)`workout /new russian twist /reps 30`      | The following three lines are added to `workouts.txt`:<br/><br/>![workouts.txt](images/workoutsTxtNewWorkouts.png)                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -2621,6 +2622,7 @@ rely on former test cases.</span>
 | 5. Delete data from `schedule.txt`.                                                            | `schedule /clear 5` | `schedule.txt` will be updated the following:<br/><br/>![schedule.txt day deleted](images/scheduleTxtDeleteDay.png)                                                                                                                                                                                                                                                                                                                                                                                            |
 | 6. Delete data from `plans.txt` and `schedule.txt` is updated accordingly.                     | `plans /delete 3` | `plans.txt` will be updated to the following:<br/><br/>![plans.txt delete plan](images/plansTxtDeletePlan.png)<br/><br/>`schedule.txt` will also be updated as one of the days has the deleted plan:<br/><br/>![schedule.txt plan delete](images/scheduleTxtPlanDeleteCascade.png)                                                                                                                                                                                                                             |
 | 7. Delete workout from `workouts.txt`. `plans.txt` and `schedule.txt` are updated accordingly. | `workout /delete 1` | `workout.txt` will be updated to the following:<br/><br/>![workout.txt workout delete](images/workoutsTxtDeleteWorkout.png)<br/><br/>`plans.txt` will also be updated as some plans with the deleted workout are affected:<br/><br/>![plans.txt workout delete cascasde](images/plansTxtWorkoutDeleteCascade.png)<br/><br/>Likewise, `schedule.txt` is also updated as a plan assigned to a day has been affected:<br/><br/>![schedule.txt workout delete cascade](images/scheduleTxtWorkoutDeleteCascade.png) |                                    
+
 
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
