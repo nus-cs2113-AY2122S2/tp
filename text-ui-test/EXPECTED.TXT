@@ -6,8 +6,6 @@ Todo has been marked as done successfully:
 [X] another task : No deadline specified
 Todo: task have been added to project proj1
 Todo: another task  have been added to project proj1
-Todo: task have been added to project proj1
-Todo: another task  have been added to project proj1
 Deadline set for proj1: 2022-03-17
 The Github Repo for proj1 has been changed to: https://github.com/AY2122S2-CS2113-F10-1/tp
 java language added.
