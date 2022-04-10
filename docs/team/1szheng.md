@@ -233,14 +233,15 @@ is responsible for,
 **How the components interact with each other**
 
 The following Sequence Diagram shows a high-level view on how the components interact when the user enters the command
-`add /g 2 /n Alice`.
+`add /g 2 /n Alice`. The interactions with storage is not showcased in this section, but is detailed in the
+[Data Archiving](#data-archiving) section.
 
 ![ArchitectureSequenceDiagram](../images/ArchitectureSequenceDiagram.png)
 > :information_source: **Note:** The lifeline for `AddPersonCommand` ends at the destroy marker :x:
 > but due to the limitations of PlantUML, the lifeline reaches the end of the diagram.
 
-Each of the components are defined and implemented as a class with the same name. The section below provides more
-in-depth details on how the components interact with one another.
+Each of the components are defined and implemented as a class with the same name. The section below provides
+more in-depth details on how the components interact with one another.
 
 Each component may consist of several classes that are working seamlessly together to achieve their intended abstracted
 representation. For example, the `Money` component contains an abstract class that is extended by `Income` and
