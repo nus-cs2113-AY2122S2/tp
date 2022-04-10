@@ -81,7 +81,7 @@ public class ContactParser {
     }
 
     private static void isValidFieldString(String fieldString) throws InvalidContactField {
-        if (fieldString.split(CONTACTS_DELIMITERS).length != LENGTH_FIELD_AFTER_SPLIT) {
+        if (fieldString.split(CONTACTS_DELIMITERS).length < LENGTH_FIELD_AFTER_SPLIT) {
             String loggerMessage = String.format(CONTACTS_PARSER_INVALID_FIELD_LOG_MESSAGE, fieldString);
             logger.log(Level.FINE, loggerMessage);
             throw new InvalidContactField(CONTACTS_PARSER_INVALID_FIELD_MESSAGE);
@@ -99,7 +99,7 @@ public class ContactParser {
         for (String fieldString : fieldStrings) {
             char fieldType = fieldString.charAt(0);
             isValidFieldString(fieldString);
-            String fieldContent = fieldString.split(CONTACTS_DELIMITERS)[1];
+            String fieldContent = fieldString.split(CONTACTS_DELIMITERS, 2)[1];
 
             switch (fieldType) {
             case NAME_DELIMITER:

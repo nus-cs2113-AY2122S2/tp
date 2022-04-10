@@ -35,3 +35,4 @@ Added these features to the application:
 * PRs reviewed (non-trivial): [#56](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/56), [#64](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/64), [#65](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/65), [#78](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/78)
 * Reported useful bugs and suggestions for another team's software as part of practical exam dry run.'
 
+[Back to main menu](https://ay2122s2-cs2113-f10-4.github.io/tp/)
