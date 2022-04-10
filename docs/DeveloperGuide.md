@@ -680,6 +680,9 @@ down this section.</span>
 
 ![List Exercise Sequence Diagram](uml/sequenceDiagrams/exercises/images/viewExercise.png)
 
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
+
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
