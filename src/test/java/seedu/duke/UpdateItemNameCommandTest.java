@@ -10,6 +10,7 @@ import seedu.duke.exceptions.DuplicateItemNameException;
 import seedu.duke.exceptions.InvalidItemNameException;
 import seedu.duke.exceptions.ItemNotFoundException;
 import seedu.duke.exceptions.ItemNameAlreadyInListException;
+import seedu.duke.exceptions.DuplicateCommandException;
 
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
@@ -90,5 +91,12 @@ public class UpdateItemNameCommandTest {
         assertThrows(ItemNameAlreadyInListException.class, () -> itemNameCommand.execute(listContainer, ui));
     }
 
+    @Test
+    public void execute_UpdateItemNameCommandWithinItemNameOrPax_exceptionThrown() {
+        assertThrows(DuplicateCommandException.class, () -> new UpdateItemNameCommand("update item name / "
+                + "Premium Toilet Roll"));
+        assertThrows(DuplicateCommandException.class, () -> new UpdateItemNameCommand("Toilet Roll / update "
+                + "item name"));
+    }
 
 }
