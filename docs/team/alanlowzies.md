@@ -24,7 +24,7 @@ hosted by the module coordinators of CS2113T.
 A summary of my code contributions are as follows:
 - Wrote most of the `FileManager` API, which allows WerkIt! to read and write application data
 into text files stored on the user's local filesystem 
-([[WIP] Developer Guide]()). 
+([Developer Guide](../DeveloperGuide.md#file-management)). 
 - Implemented the functionality for users to create a new workout 
 ([User Guide](../UserGuide.md#create-a-workout-workout-new) | [Developer Guide](../DeveloperGuide.md#create-new-workout)).
 - Wrote most of the `UI` API, which contains UI-related elements, including WerkIt!'s banner logo and response messages.
@@ -35,7 +35,7 @@ into text files stored on the user's local filesystem
 - Implemented the HashMap data structure in the `WorkoutList` API to allow `PlanList` to reference
   workouts created by the user ([Developer Guide](../DeveloperGuide.md#design-considerations-for-creating-a-new-workout)).
 - Wrote the `LogHandler` API, which allows the various components in WerkIt! to log into a file
-  stored in the user's local filesystem ([[WIP] Developer Guide]()).
+  stored in the user's local filesystem ([Developer Guide](../DeveloperGuide.md#about-the-loghandler-class)).
 - Wrote the `Command` abstract class, which is a template class that sets out the main structure of all types
   of commands in WerkIt! (e.g. `WorkoutCommand`, `ExerciseCommand`, etc.)
 - Wrote most of the `WorkoutCommand` API, which contains a workout-related command that the user has requested
