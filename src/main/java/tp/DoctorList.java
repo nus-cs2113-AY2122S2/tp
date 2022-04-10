@@ -14,7 +14,6 @@ public class DoctorList {
         size = 0;
     }
 
-
     public Doctor getDoctor(int index) {
         return doctors.get(index - 1);
     }
@@ -27,9 +26,10 @@ public class DoctorList {
      */
     public void addDoctor(Doctor doctor) throws IHospitalException {
         boolean isDuplicate = false;
-        for (int i = 0; i < doctors.size(); i++) {
-            if (doctors.get(i).getId().trim().equals(doctor.getId())) {
+        for (Doctor value : doctors) {
+            if (value.getId().trim().equals(doctor.getId())) {
                 isDuplicate = true;
+                break;
             }
         }
 

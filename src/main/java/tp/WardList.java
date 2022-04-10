@@ -30,6 +30,7 @@ public class WardList {
 
     public void addWard(Ward ward) {
         wards.add(ward);
+        countWard++;
     }
 
     /**

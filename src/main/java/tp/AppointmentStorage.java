@@ -79,8 +79,8 @@ public class AppointmentStorage {
                 String name = dummy.substring(dummy.indexOf("Name:") + 6, dummy.indexOf(" || Contact"));
                 String phoneNumber = dummy.substring(dummy.indexOf("No.:") + 5, dummy.indexOf(" || Email:"));
                 String email = dummy.substring(dummy.indexOf("Email:") + 7, dummy.indexOf(" || Department:"));
-                String department = dummy.substring(dummy.indexOf("Department:") + 12, dummy.indexOf(" || WardNumber"));
-                int wardNumber = Integer.parseInt(dummy.substring(dummy.indexOf("WardNumber:")));
+                String department = dummy.substring(dummy.indexOf("Department:") + 12, dummy.indexOf(" || Ward"));
+                int wardNumber = Integer.parseInt(dummy.substring(dummy.indexOf("Ward:") + 6).trim());
                 doctor = new Doctor(id, name, phoneNumber, email, department, wardNumber);
                 dummy = scanner.nextLine();
                 id = dummy.substring(1, dummy.indexOf("]"));

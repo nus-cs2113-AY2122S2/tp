@@ -38,8 +38,8 @@ public class DeleteAppointmentCommand extends Command {
         Appointment curr = appointmentList.deleteAppointment(index);
 
         //@@author cczhouqi
-        return String.format(boundary + "Noted. I've removed this appointment:\n" + curr
-                                     + "\n" + "Now you have " + (appointmentList.getSize())
-                                     + " appointments recorded in the system." + System.lineSeparator() + boundary);
+        return (boundary + "Noted. I've removed this appointment:\n" + curr
+                        + "\n" + "Now you have " + (appointmentList.getSize())
+                        + " appointments recorded in the system." + System.lineSeparator() + boundary);
     }
 }
