@@ -133,6 +133,8 @@ into their respective lists. The Storage class has 5 save methods that save the 
 in the CSV format. The Directory of these text files is found in the DIR String variable, the PATH for each of the 4 text files
 can be found in the PATH_MED, PATH_PAT, PATH_DOC, PATH_APP, PATH_APT_MEDS String variables respectively.
 
+#### Corrupted files
+A preliminary check for corrupted files will be done when HalpMi starts. The validator function will be invoked to ensure the the input lines are correct. Else, the corrupted files will be moved into another separate text file named `[datatype]_corrupted.txt`.
 ### Asset classes
 
 #### `Appointment`
