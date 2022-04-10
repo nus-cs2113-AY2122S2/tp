@@ -21,14 +21,16 @@ complete the activities with the use of the study session.
     - Note: The code written in this pull request was improved upon heavily by another teammate as we decided to add more functionality to the `add` and `edit` commands
   - Updated the `clear` command to let users delete expired and completed tasks in one go (pull request [#152](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/152))
   - Added extensive JUnit tests for the `clear` command (pull request [#152](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/152))
-  - Maintained code quality for classes in `command` package (pull request [#152](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/152))
+  - Maintained code quality for classes in `command` package (pull request [#152](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/152), [#159](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/159))
 
 
 - **Documentation**
     - User Guide:
-      - Updated documentation for features `clear`.
+      - Updated documentation for `clear` feature. (pull request [#152](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/152))
+      - Added documentation for features `help` and `bye` (pull request [#159](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/159)).
     - Developer Guide:
-      - Updated documentation details of the `clear` feature.
+      - Updated documentation details of the `clear` feature. (pull request [#152](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/152))
+      - Added UML sequence diagram for parsing user input (pull request [#159](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/159))
 
 
 - **Review/mentoring contributions**
