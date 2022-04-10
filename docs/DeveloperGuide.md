@@ -312,13 +312,13 @@ After data is loaded from the data file, some verification checks are performed 
 | v2.0    | user     | create tags for tasks                         | I can categorise them more easily (e.g. tutorial, project, assignment, etc) |
 | v2.0    | user     | mark tasks as important                       | I can know what tasks to prioritise                                         |
 | v2.0    | user     | list tasks by tag                             | I can filter tasks I’m looking for                                          |
-| v2.0    | user     | input my grades                               | I can estimate my final grade                                               |
-
+| v2.0    | user     | input my grades                               | I can estimate my final GPA                                                 |
+| v2.0    | user     | estimate my GPA                               | I can gauge my performance                                                  |
 <br><br><br>
 
 ## 8. Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 installed.
+1. Should work on any mainstream OS as long as it has _Java 11_ installed.
 2. Should be able to hold up to 1000 tasks and modules combined without a noticeable sluggishness in performance for typical usage.
 3. Should be able to save up to 1000 tasks and modules without taking up noticeable disk space.
 
@@ -421,6 +421,7 @@ Below are instructions to perform manual testing of the application. Please refe
 <br>
 
 ### Setting grade for a module
+<<<<<<< HEAD
 * Prerequisite: There are existing modules in the application.
 * Assumption: You have a module `CS2113T`.
 
@@ -429,6 +430,16 @@ Below are instructions to perform manual testing of the application. Please refe
   Expected: The grade of `CS2113T` has been set to `A+`.
 * Test Case: `grade CS2113T E` <br>
   Expected: No grade is set. Error details in the message shows that `E` is an invalid module grade.
+=======
+1. Prerequisite: There are existing modules in the application.
+2. Assumption: You have a module `CS2113T`.
+3. Test Case: `grade CS2113T A+` <br>
+   Expected: The grade of `CS2113T` has been set to `A+`.
+4. Test Case: `grade CS2113T E` <br>
+   Expected: No grade is set. Error details in the message shows that `E` is an invalid module grade.
+5. Test Case: `grade CS2113T -` <br>
+   Expected: The grade of `CS2113T` has been removed.
+>>>>>>> master
 
 <br>
 
@@ -495,7 +506,7 @@ Below are instructions to perform manual testing of the application. Please refe
 
 <br>
 
-### Marking and unmarking a task as completed
+### Marking a task as completed or uncompleted
 * Prerequisite: There are existing tasks in the application.
 * Assumption: There are at least one task in `General Tasks`.
 
@@ -505,7 +516,7 @@ Below are instructions to perform manual testing of the application. Please refe
 * Test Case: `mark u 1` <br>
   Expected: The first task in `General Tasks` is marked as uncompleted.
 * Test Case: `mark t 1` <br>
-  Expected: No tasks is marked/unmarked. Error details in the message shows that `t` is an invalid flag.
+  Expected: No tasks are marked/unmarked. Error details in the message shows that `t` is an invalid flag.
 
 <br>
 

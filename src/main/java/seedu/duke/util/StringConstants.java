@@ -233,11 +233,12 @@ public class StringConstants {
             + "0_0:\n%s";
     public static final String MODIFIED_JSON_EXCEPTION = "\nSomething went wrong trying to read the JSON save data.\n"
             + "Has it been manually modified? >:(";
-    public static final String ERROR_INVALID_CONFIGURATION = "Invalid config found in loaded config data. "
-            + "Aborting load...";
-    public static final String ERROR_INVALID_CONFIG_VALUE = "Config \"%s\" has illegal value \"%s\". Aborting load...";
+    public static final String ERROR_INVALID_CONFIGURATION = "Invalid configuration found in loaded configuration data."
+            + " Aborting load...";
+    public static final String ERROR_INVALID_CONFIG_VALUE = "Configuration \"%s\" has illegal value \"%s\"."
+            + " Aborting load...";
     public static final String ERROR_INVALID_TASK_DATA = "Invalid task data found in loaded data. Aborting load...";
-    public static final String ERROR_GRADE_REMOVAL = "Your grade has not been entered yet for this module...";
+    public static final String ERROR_GRADE_REMOVAL_FAILED = "Your grade has not been entered yet for this module...";
 
     /**
      * For parsers.
