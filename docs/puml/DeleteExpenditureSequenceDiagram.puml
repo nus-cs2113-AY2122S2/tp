@@ -1,0 +1,68 @@
+@startuml
+!include Style.puml
+
+hide footbox
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box deleteExpenditure()
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:DeleteCommand" as C COMMANDS_COLOUR
+participant ":ExpenditureList" as ExpenditureList DATA_COLOUR
+participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
+participant ":CreditCardList" as CreditCardList DATA_COLOUR
+participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR
+end box
+
+activate MMM MMM_COLOUR
+MMM -> C: executeCommand()
+activate C COMMANDS_COLOUR
+
+C -> C: deleteExpenditure()
+activate C COMMANDS_COLOUR
+
+C -> ExpenditureList: get()
+activate ExpenditureList DATA_COLOUR
+ExpenditureList --> C
+deactivate ExpenditureList
+
+C -> Expenditure: getPaymentMethod()
+activate Expenditure USERFINANCIAL_COLOUR
+Expenditure --> C
+deactivate Expenditure
+
+opt PAYMENT_METHOD != cash
+C -> C: updateCreditCardTotalExpenditure()
+activate C COMMANDS_COLOUR
+
+C -> CreditCardList: get()
+activate CreditCardList DATA_COLOUR
+CreditCardList --> C
+deactivate CreditCardList
+
+C -> CreditCard: deductExpenditure()
+activate CreditCard USERFINANCIAL_COLOUR
+CreditCard --> C
+deactivate CreditCard
+
+C --> C
+note left
+Details of deleted
+expenditure is printed out
+end note
+deactivate C
+end
+
+C --> C
+deactivate C
+
+C --> MMM
+deactivate C
+
+@enduml
