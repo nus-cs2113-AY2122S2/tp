@@ -76,15 +76,15 @@ list
 menu
 goto Study_Manager
 list
-add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm
-add m/EE4204 d/Wednesday t/1:00pm-2:00pm
-add c/tut d/Wednesday t/1:00pm-2:00pm
-add m/EE4204 c/tut t/1:00pm-2:00pm
+add m/CS2113 c/lec d/Thursday t/2:00 pm-4:00 pm
+add m/EE4204 d/Wednesday t/1:00 pm-2:00 pm
+add c/tut d/Wednesday t/1:00 pm-2:00 pm
+add m/EE4204 c/tut t/1:00 pm-2:00 pm
 add m/EE4204 c/tut d/Wednesday
 add
-add m/EE4204 c/tut d/Wednesday t/1:00pm-2:00pm
+add m/EE4204 c/tut d/Wednesday t/1:00 pm-2:00 pm
 list
-find 2:00pm
+find 2:00 pm
 edit 1
 c/tut
 c/
@@ -95,23 +95,28 @@ done
 find tut
 find cs
 find Cs
+find Module
 rm 1
 find cs
 list
 rm 1
 list
-add m/---+= c/lec d/Thursday t/2:00pm-4:00pm
-add m/CS2113 c/lec d/yoyoyo t/2:00pm-4:00pm
-add m/CS2113 c/lec d/12345 t/2:00pm-4:00pm
+add m/---+= c/lec d/Thursday t/2:00 pm-4:00 pm
+add m/CS2113 c/lec d/yoyoyo t/2:00 pm-4:00 pm
+add m/CS2113 c/lec d/12345 t/2:00 pm-4:00 pm
 add m/CS2113 c/lec d/Thursday t/tangotime
-add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm
+add m/CS2113 c/lec d/Thursday t/2:00 pm-4:00 pm
+add m/CS2113 c/lec d/Thursday t/9:00 pm-4:00 pm
+add m/CS2113 c/lec d/Thursday t/9:00 pm-9:00 pm
 edit 1
 d/yoyoyo
 d/12345
 m/]epf\
 c/Tutorial
-t/2pm-4pm
-t/03:00pm - 05:00pm
+t/2 pm-4 pm
+t/03:00 pm - 05:00 pm
+t/9:00 pm - 4:00 pm
+t/9:00 pm - 9:00 pm
 done
 menu
 exit

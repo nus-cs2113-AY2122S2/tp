@@ -6,38 +6,29 @@ import seedu.allonus.modules.exceptions.ModuleCodeException;
 import seedu.allonus.modules.exceptions.ModuleCategoryException;
 import seedu.allonus.modules.exceptions.InvalidFindInputException;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 /**
  * Represents the class that will parse and validate user inputs for module parameters.
  */
 public class ModuleParser {
     /**
-     * ModuleParser messages, commands and constants.
+     * ModuleParser messages and constants.
      */
-
-    private static final String FIND_COMMAND = "find";
-    private static final String MODULE_TIME_DELIMITER = "t/";
-    private static final String MODULE_DAY_DELIMITER = "d/";
-    private static final String MODULE_CODE_DELIMITER = "m/";
-    private static final String MODULE_CATEGORY_DELIMITER = "c/";
-    private static final String MODULE_CATEGORY_LEC = "Lecture";
-    private static final String MODULE_CATEGORY_TUT = "Tutorial";
-    private static final String MODULE_CATEGORY_EXAM = "Exam";
-    private static final String MODULE_CATEGORY_LAB = "Laboratory";
-    private static final String CATEGORY_LECTURE_SHORTHAND = "lec";
-    private static final String CATEGORY_TUTORIAL_SHORTHAND = "tut";
-    private static final String CATEGORY_EXAM_SHORTHAND = "exam";
-    private static final String CATEGORY_LAB_SHORTHAND = "lab";
     public static final String STRING_SPACE_CHARACTER = " ";
     public static final String EMPTY_STRING = "";
     public static final String REGEX_MODULE_CODE = "^[a-zA-Z0-9]+$";
-    public static final String REGEX_MODULE_DAY = "([sS]unday|[mM]onday|[tT]uesday|[wW]ednesday|[tT]hursday"
+    public static final String REGEX_MODULE_DAY = "^([sS]unday|[mM]onday|[tT]uesday|[wW]ednesday|[tT]hursday"
             + "|[fF]riday|[sS]aturday)";
-    public static final String REGEX_MODULE_TIME = "(0?[1-9]|1[0-2]):([0-5]?\\d)\\s*([pa]m)\\s*"
+    public static final String REGEX_MODULE_TIME = "^(0?[1-9]|1[0-2]):([0-5]?\\d)\\s*([pa]m)\\s*"
             + "-\\s*(0?[1-9]|1[0-2]):([0-5]?\\d)\\s*([pa]m)";
     public static final String REGEX_MODULE_DATE = "^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$";
     public static final String WRONG_DAY_FORMAT_MESSAGE = "Accepted module day inputs are either a day of "
@@ -48,14 +39,22 @@ public class ModuleParser {
     public static final String INVALID_DATE_MESSAGE = "You have entered an invalid date";
     public static final String INVALID_WEEKDAY_MESSAGE = "You have entered an invalid day of the week";
     public static final String WRONG_TIME_FORMAT_MESSAGE = "Accepted module time slot input is"
-            + " a valid timeslot of type HH:MMam/pm - HH:MMam/pm";
+            + " a valid timeslot of type HH:MM am/pm - HH:MM am/pm";
+
+    private static final String TIME_FORMAT_WITH_AMPM = "h:mm a";
+    private static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .parseLenient()
+            .appendPattern(TIME_FORMAT_WITH_AMPM)
+            .toFormatter();
+
 
 
     /**
      * Add module messages.
      */
     private static final String ADD_WRONG_FORMAT_MESSAGE = "Please ensure that your input follows the form:";
-    private static final String ADD_SAMPLE_FORMAT_MESSAGE = "add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm";
+    private static final String ADD_SAMPLE_FORMAT_MESSAGE = "add m/CS2113 c/lec d/Thursday t/2:00 pm-4:00 pm";
     private static final String LOGGER_WRONG_ADD_FORMAT = "Wrong format for add module";
     private static final String LOGGER_MISSING_DAY_IN_ADD = "Day was not specified for add module";
     private static final String LOGGER_MISSING_CAT_IN_ADD = "Category was not specified for add module";
@@ -65,10 +64,14 @@ public class ModuleParser {
     /**
      * Find modules messages.
      */
+    public static final String INVALID_FIND_KEYWORD_AM = "am";
+    public static final String INVALID_FIND_KEYWORD_PM = "pm";
+    public static final String INVALID_FIND_KEYWORD_MODULE = "module";
     public static final String FIND_MISSING_QUERY_MESSAGE = "You have not entered a search keyword to find modules!";
     public static final String FIND_SPECIAL_CHARACTERS_MESSAGE = "You have entered a special character."
             + " Please refine your search query!";
-
+    public static final String FIND_COMMON_SEARCH_QUERY_MESSAGE = "You have entered a query common to all modules. "
+            + "Please refine your search query!";
 
     /**
      * Messages for exceptions and errors.
@@ -80,11 +83,18 @@ public class ModuleParser {
     private static final String WRONG_CATEGORY_FORMAT_MESSAGE = "Category has to be one of lec, tut, lab or exam";
 
     public static final String LOGGER_IDENTIFIER = "mylogger";
+    public static final String REGEX_ALL_MODULE_PARAMETERS = "[mcdt]/";
+    public static final String INVALID_EQUAL_TIMESLOT_MESSAGE = "You have entered an invalid timeSlot. "
+            + "Start time cannot be equal to end time!";
+    public static final String INVALID_GREATER_START_TIME_MESSAGE = "You have entered an invalid timeslot. "
+            + "Start time cannot be later than end time!";
+
+
 
     private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
 
     private void printMessage(String message) {
-        System.out.println(message);
+        StudyManager.printMessageWithDivider(message);
     }
 
     /**
@@ -108,8 +118,7 @@ public class ModuleParser {
             return new Module(module, category, day, time);
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOGGER_WRONG_ADD_FORMAT);
-            printMessage(ADD_WRONG_FORMAT_MESSAGE);
-            printMessage(ADD_SAMPLE_FORMAT_MESSAGE);
+            printMessage(ADD_WRONG_FORMAT_MESSAGE + System.lineSeparator() + ADD_SAMPLE_FORMAT_MESSAGE);
             return null;
         } catch (ModuleDayException e) {
             logger.log(Level.WARNING, LOGGER_MISSING_DAY_IN_ADD);
@@ -131,7 +140,7 @@ public class ModuleParser {
     }
 
     private String[] getSplitParameters(String userInput) {
-        String regex = "[mcdt]/" + ".*?(?=(" + "[mcdt]/" + "|$))";
+        String regex = REGEX_ALL_MODULE_PARAMETERS + ".*?(?=(" + REGEX_ALL_MODULE_PARAMETERS + "|$))";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userInput);
 
@@ -176,7 +185,7 @@ public class ModuleParser {
         String module;
         try {
             if (parameters[0].substring(2).equals(EMPTY_STRING)
-                    || !parameters[0].substring(0, 2).equals(MODULE_CODE_DELIMITER)) {
+                    || !parameters[0].substring(0, 2).equals(StudyManager.MODULE_CODE_DELIMITER)) {
                 throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
             } else {
                 module = parameters[0].substring(2);
@@ -218,13 +227,15 @@ public class ModuleParser {
         String category;
         try {
             if (parameters[1].substring(2).equals(EMPTY_STRING)
-                    || !parameters[1].substring(0, 2).equals(MODULE_CATEGORY_DELIMITER)) {
+                    || !parameters[1].substring(0, 2).equals(StudyManager.MODULE_CATEGORY_DELIMITER)) {
                 throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
             } else {
                 category = parameters[1].substring(2);
                 category = validateModuleCategory(category);
-                assert category.equals(MODULE_CATEGORY_LEC) || category.equals(MODULE_CATEGORY_TUT)
-                        || category.equals(MODULE_CATEGORY_EXAM) || category.equals(MODULE_CATEGORY_LAB);
+                assert category.equals(StudyManager.MODULE_CATEGORY_LEC)
+                        || category.equals(StudyManager.MODULE_CATEGORY_TUT)
+                        || category.equals(StudyManager.MODULE_CATEGORY_EXAM)
+                        || category.equals(StudyManager.MODULE_CATEGORY_LAB);
             }
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
@@ -240,17 +251,17 @@ public class ModuleParser {
      */
     public String validateModuleCategory(String category) throws ModuleCategoryException {
         switch (category) {
-        case CATEGORY_LECTURE_SHORTHAND:
-            category = MODULE_CATEGORY_LEC;
+        case StudyManager.CATEGORY_LECTURE_SHORTHAND:
+            category = StudyManager.MODULE_CATEGORY_LEC;
             break;
-        case CATEGORY_TUTORIAL_SHORTHAND:
-            category = MODULE_CATEGORY_TUT;
+        case StudyManager.CATEGORY_TUTORIAL_SHORTHAND:
+            category = StudyManager.MODULE_CATEGORY_TUT;
             break;
-        case CATEGORY_EXAM_SHORTHAND:
-            category = MODULE_CATEGORY_EXAM;
+        case StudyManager.CATEGORY_EXAM_SHORTHAND:
+            category = StudyManager.MODULE_CATEGORY_EXAM;
             break;
-        case CATEGORY_LAB_SHORTHAND:
-            category = MODULE_CATEGORY_LAB;
+        case StudyManager.CATEGORY_LAB_SHORTHAND:
+            category = StudyManager.MODULE_CATEGORY_LAB;
             break;
         default:
             throw new ModuleCategoryException(WRONG_CATEGORY_FORMAT_MESSAGE);
@@ -269,7 +280,7 @@ public class ModuleParser {
         String day;
         try {
             if (parameters[2].substring(2).equals(EMPTY_STRING)
-                    || !parameters[2].substring(0, 2).equals(MODULE_DAY_DELIMITER)) {
+                    || !parameters[2].substring(0, 2).equals(StudyManager.MODULE_DAY_DELIMITER)) {
                 throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
             } else {
                 day = parameters[2].substring(2);
@@ -290,7 +301,7 @@ public class ModuleParser {
      * @throws ModuleDayException when the user input day is invalid
      */
     public String validateModuleDay(String day) throws ModuleDayException {
-        //accepts either day of the week or, day of the week and a day'
+        //Accepts either day of the week or date
         String regexDay = REGEX_MODULE_DAY;
         String regexDate = REGEX_MODULE_DATE;
 
@@ -335,7 +346,7 @@ public class ModuleParser {
         String time;
         try {
             if (parameters[3].substring(2).equals(EMPTY_STRING)
-                    || !parameters[3].substring(0, 2).equals(MODULE_TIME_DELIMITER)) {
+                    || !parameters[3].substring(0, 2).equals(StudyManager.MODULE_TIME_DELIMITER)) {
                 throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
             } else {
                 time = parameters[3].substring(2);
@@ -360,8 +371,34 @@ public class ModuleParser {
         String timeSlot = null;
         if (matcher.find()) {
             timeSlot = matcher.group().trim();
+            timeSlot = checkTimeStartEarlier(timeSlot);
             return timeSlot;
         } else {
+            throw new ModuleTimeException(WRONG_TIME_FORMAT_MESSAGE);
+        }
+    }
+
+    // Checks if given start time is earlier than given end time in a String timeSlot
+    private String checkTimeStartEarlier(String timeSlot) throws ModuleTimeException {
+        try {
+            timeSlot = timeSlot.replace(" - ","-");
+            // Convert to uppercase so that it is recognized by parser from LocalDateTime which expects AM/PM
+            timeSlot = timeSlot.toUpperCase();
+            String[] splitTimeArray = timeSlot.split("-", 2);
+            splitTimeArray[0] = splitTimeArray[0].trim();
+            splitTimeArray[1] = splitTimeArray[1].trim();
+
+            LocalTime startTime = LocalTime.parse(splitTimeArray[0], TIME_FORMATTER);
+            LocalTime endTime = LocalTime.parse(splitTimeArray[1], TIME_FORMATTER);
+
+            if (endTime.compareTo(startTime) > 0) {
+                return timeSlot.toLowerCase();
+            } else if (endTime.compareTo(startTime) == 0) {
+                throw new ModuleTimeException(INVALID_EQUAL_TIMESLOT_MESSAGE);
+            } else {
+                throw new ModuleTimeException(INVALID_GREATER_START_TIME_MESSAGE);
+            }
+        } catch (DateTimeParseException e) {
             throw new ModuleTimeException(WRONG_TIME_FORMAT_MESSAGE);
         }
     }
@@ -373,14 +410,18 @@ public class ModuleParser {
      * @throws InvalidFindInputException for empty spaces and special characters in find query.
      */
     public String validateFindQuery(String userInput) throws InvalidFindInputException {
-        String moduleKeyword = userInput.replace(FIND_COMMAND + STRING_SPACE_CHARACTER, EMPTY_STRING);
+        String moduleKeyword = userInput.replace(StudyManager.FIND_COMMAND + STRING_SPACE_CHARACTER, EMPTY_STRING);
         if (moduleKeyword.equals(STRING_SPACE_CHARACTER) || moduleKeyword.equals(EMPTY_STRING)
                 || !userInput.contains(" ")) {
             throw new InvalidFindInputException(FIND_MISSING_QUERY_MESSAGE);
         } else if (moduleKeyword.equals(":") || moduleKeyword.equals("[") || moduleKeyword.equals("]")
                 || moduleKeyword.equals(",") || moduleKeyword.equals("-")) {
             throw new InvalidFindInputException(FIND_SPECIAL_CHARACTERS_MESSAGE);
+        } else if (moduleKeyword.equals(INVALID_FIND_KEYWORD_AM) || moduleKeyword.equals(INVALID_FIND_KEYWORD_PM)
+                || moduleKeyword.equalsIgnoreCase(INVALID_FIND_KEYWORD_MODULE)) {
+            throw new InvalidFindInputException(FIND_COMMON_SEARCH_QUERY_MESSAGE);
+        } else {
+            return moduleKeyword;
         }
-        return moduleKeyword;
     }
 }

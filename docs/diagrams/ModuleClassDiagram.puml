@@ -17,6 +17,10 @@ package modules {
         class ModuleDayException
         class ModuleTImeException
     }
+
+    Class ModuleParser {
+
+    }
 Class StudyManager {
     -modulesList: Arraylist<String>
 }
@@ -24,12 +28,9 @@ Class ModuleCalendarReader
 
 }
 StudyManager --> ModuleCalendarReader : uses
-StudyManager -->InvalidFindInputException
-StudyManager -->ModuleCategoryException
-StudyManager -->ModuleCodeException
-StudyManager -->ModuleDayException
-StudyManager --> ModuleTImeException
+StudyManager --> ModuleParser : uses
+ModuleParser -->  Module : creates
+StudyManager --> Module
 ModuleCalendarReader --> Module
-
-StudyManager *--> "*" Module : creates
+ModuleParser --> exceptions : throws
  @enduml
