@@ -2,8 +2,9 @@
 
 ## Project: PlanITarium
 
-PlanITarium is a CLI application that tracks the income and expenditure for you and your family. It gives the
-overview of your family's disposable income. It is written in Java.
+PlanITarium is an application that assists you and your family in managing your finances, optimized for use on the
+Command Line Interface (CLI). You can use it to view your monthly financial status, logically group family members for
+better management, and categorise your expenditures. PlanITarium is written in, and meant to be run on `Java 11`.
 
 ### Summary of Contributions
 
@@ -36,7 +37,7 @@ overview of your family's disposable income. It is written in Java.
 * **Enhancements to Existing Features**:
     * Implemented JUnit testing for parts of Expenditure and ExpenditureList. [#83](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/83/files)
     * Made Expenditure and ExpenditureList more defensive. [#81](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/81/files)
-    * Implemented JUnit testing for Storage and make it more defensive. [#168](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/168/files)
+    * Implemented JUnit testing for Storage and made it more defensive. [#168](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/168/files)
     * Made Storage more defensive. [#165](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/165/files)
 
 <p></p>
@@ -44,7 +45,7 @@ overview of your family's disposable income. It is written in Java.
 * **Documentation**:
     * User Guide (UG):
         * Assisted in documentation for features `addout`, `deleteout` and `editout`. [#142](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/142/files)
-        * Provide fixes to mark-down. [#245](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/245/files)
+        * Provide fixes to markdown. [#245](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/245/files)
     * Developer Guide (DG):
         * Added sections on `Storage` design and implementation. [#112](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/112)
         * Added UML diagrams for `Storage` component and `Storage` implementation. ([#112](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/112/files),

@@ -17,48 +17,52 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ExpenditureListTest {
 
-    private static int INVALID_INDEX = -1;
-    private static int VALID_INDEX = 1;
-    private static final PrintStream ORIGINAL_OUT = System.out;
-    private static final String INDENTATION = "   ";
-    private static final String EXPECTED_LABELS = "Food: $20.00 - Recurring: false - "
-            + "Category: Food and Drinks" + System.lineSeparator();
-    private static final String EXPECTED_LABEL_NUMBERED = INDENTATION + "1. Food: $20.00 - Recurring: false "
-            + "- Category: Food and Drinks" + System.lineSeparator();
+    private static final int INVALID_INDEX = -1;
+    private static final int VALID_INDEX = 1;
     private static final int NUM_OF_EXP = 2;
+    private static final int VALID_CAT = 2;
+    private static final double VALID_AMOUNT = 30.00;
+    private static final double VALID_AMOUNT_2 = 5.00;
+    private static final double EXPECTED_AMOUNT = 35.00;
+    private static final String VALID_DESC = "clothes";
+    private static final String VALID_DESC_2 = "Transport";
+    private static final String VALID_DESC_3 = "utility";
+    private static final String INDENTATION = "   ";
+    private static final String EXPECTED_LABELS = VALID_DESC + ": $30.00 - Recurring: false - "
+            + "Category: Food and Drinks" + System.lineSeparator();
+    private static final String EXPECTED_LABEL_NUMBERED = INDENTATION + "1. " + VALID_DESC
+            + ": $30.00 - Recurring: false - Category: Food and Drinks" + System.lineSeparator();
+    private static final PrintStream ORIGINAL_OUT = System.out;
+
 
     private ExpenditureList personOne;
 
     @BeforeEach
     public void setUp() {
         personOne = new ExpenditureList();
-        personOne.addExpenditure("Food", 20.0, 2, false);
-        personOne.addExpenditure("Transport", 5.0, 2, false);
+        personOne.addExpenditure(VALID_DESC, VALID_AMOUNT, VALID_CAT, false);
+        personOne.addExpenditure(VALID_DESC_2, VALID_AMOUNT_2, VALID_CAT, false);
     }
 
     @Test
     public void addExpenditure_newExpenditure_existsInExpenditure() {
         ExpenditureList personTwo = new ExpenditureList();
-        personTwo.addExpenditure("clothes", 30.0, 2, false);
-        String description = "clothes";
-        double amount = 30;
-        assertEquals(description, personTwo.getDescription(VALID_INDEX));
-        assertEquals(amount, personTwo.getExpenditureValue(VALID_INDEX));
+        personTwo.addExpenditure(VALID_DESC, VALID_AMOUNT, VALID_CAT, false);
+        assertEquals(VALID_DESC, personTwo.getDescription(VALID_INDEX));
+        assertEquals(VALID_AMOUNT, personTwo.getExpenditureValue(VALID_INDEX));
 
     }
 
     @Test
     public void getDescription_validIndex_expectSameDescription() {
-        String inputString = "Food";
         String getDescriptionString = personOne.getDescription(VALID_INDEX);
-        assertEquals(inputString, getDescriptionString);
+        assertEquals(VALID_DESC, getDescriptionString);
     }
 
     @Test
     public void getExpenditureValue_validIndex_expectSameDescription() {
-        double inputAmount = 20;
         double getAmount = personOne.getExpenditureValue(VALID_INDEX);
-        assertEquals(inputAmount, getAmount);
+        assertEquals(VALID_AMOUNT, getAmount);
     }
 
     @Test
@@ -110,7 +114,7 @@ class ExpenditureListTest {
     public void addExpenditure_nullDescription_expectAssertionError() {
         ExpenditureList testList = new ExpenditureList();
         try {
-            testList.addExpenditure(null, 24.0, 2, false);
+            testList.addExpenditure(null, VALID_AMOUNT, VALID_CAT, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -121,28 +125,28 @@ class ExpenditureListTest {
 
     @Test
     public void editExpenditure_validParam_Success() {
-        personOne.editExpenditure(1, "Dabao", 1000.0, 2, true);
-        assertEquals(personOne.getDescription(1), "Dabao");
-        assertEquals(personOne.getExpenditureValue(1), 1000.0);
-        assertEquals(personOne.getCategory(2), Category.getLabelForIndex(2));
-        assertTrue(personOne.isPermanent(1));
+        personOne.editExpenditure(VALID_INDEX, VALID_DESC_2, VALID_AMOUNT_2, VALID_CAT, true);
+        assertEquals(personOne.getDescription(VALID_INDEX), VALID_DESC_2);
+        assertEquals(personOne.getExpenditureValue(VALID_INDEX), VALID_AMOUNT_2);
+        assertEquals(personOne.getCategory(VALID_INDEX), Category.getLabelForIndex(VALID_CAT));
+        assertTrue(personOne.isPermanent(VALID_INDEX));
     }
 
     @Test
     public void findExpenditure_validParam_Success() {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
-        personOne.find("Food", 2);
+        personOne.find(VALID_DESC, VALID_CAT);
         assertEquals(EXPECTED_LABELS, newOut.toString());
         System.setOut(ORIGINAL_OUT);
     }
 
     @Test
-    public void findExpenditure_allCat_Success() {
+    public void findExpenditure_NonExistentString_Succcess() {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
-        personOne.find("Food", 2);
-        assertEquals(EXPECTED_LABELS, newOut.toString());
+        personOne.find(VALID_DESC_3, VALID_CAT);
+        assertEquals("", newOut.toString());
         System.setOut(ORIGINAL_OUT);
     }
 
@@ -157,7 +161,7 @@ class ExpenditureListTest {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
         ExpenditureList personTwo = new ExpenditureList();
-        personTwo.addExpenditure("Food", 20.0, 2, false);
+        personTwo.addExpenditure(VALID_DESC, VALID_AMOUNT, VALID_CAT, false);
         personTwo.printExpenditureList();
         assertEquals(EXPECTED_LABEL_NUMBERED, newOut.toString());
         System.setOut(ORIGINAL_OUT);
@@ -166,7 +170,6 @@ class ExpenditureListTest {
     @Test
     public void getTotalExp_success() {
         double totalExp = personOne.getTotalExpenditure();
-        double expectedExp = 25.0;
-        assertEquals(expectedExp, totalExp);
+        assertEquals(EXPECTED_AMOUNT, totalExp);
     }
 }

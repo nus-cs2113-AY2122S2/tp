@@ -9,7 +9,7 @@ Package " "<<Rectangle>>{
     Class Commands COMMAND_COLOR
     Class Storage STORAGE_COLOR
     Class Family MODEL_COLOR
-    Class MoneyList MONEY_COLOR
+    Class Money MONEY_COLOR
     Class Main #grey
     Class Parser LOGIC_COLOR
 }
@@ -17,20 +17,20 @@ Package " "<<Rectangle>>{
 Class "<$user>\nUser" as User MODEL_COLOR_T2
 Class "<$documents>\nSaved Data" as File STORAGE_COLOR_T3
 
-Main -right[#grey]->UI
+Main -left[#grey]->UI
 Main -down[#grey]->Family
-Main -right[#grey]->Commands
-Main -down[#grey]->Storage
+Main -left[#grey]->Commands
+Main -right[#grey]->Storage
 
-Commands -up[COMMAND_COLOR]->UI
+Commands -up[COMMAND_COLOR].>UI
 Commands -left[COMMAND_COLOR]->Family
-Commands -down[COMMAND_COLOR].>Storage
+
 Commands -down[COMMAND_COLOR].>Parser
 
-Family -down[MODEL_COLOR]->MoneyList
+Family -down[MODEL_COLOR]->Money
 
-Storage -left[STORAGE_COLOR]>Family
-Storage .down[STORAGE_COLOR].>File
+Storage -left[STORAGE_COLOR]->Family
+Storage -right[STORAGE_COLOR]->File
 
 User ..> Main
 @enduml

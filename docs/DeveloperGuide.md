@@ -18,8 +18,7 @@ workings of PlanITarium such that developers can understand the various design a
   * [Storage Component](#storage-component)
 * [Implementation](#implementation)
   * [Command Execution](#command-execution)
-  * [Logical Grouping of Persons Added](#logical-grouping-of-persons-added)
-  * [Find Command](#find-feature)
+  * [Edit Feature](#edit-feature)
   * [Data Archiving](#data-archiving)
 * [Documentation](#documentation)
   * [Logging](#logging)
@@ -52,7 +51,7 @@ The ***Architecture Diagram*** given below shows the high-level design of PlanIT
 ![ArchitectureDiagram](images/ArchitectureDiagram.png)
 
 > :information_source: **Note:** The that `.puml` files used to create diagrams in this document
-> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#Acknowledgements)
+> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#acknowledgements)
 > to learn how to create and edit these diagrams when necessary.
 
 **Overview of components in the Architecture**
@@ -64,22 +63,23 @@ is responsible for,
 * Read user's commands from standard input for command execution.
 * At shut down, invokes shutdown sequence and calls Storage to save its current data.
 
-[`UI`](#UI-Component) is responsible for the UI of PlanITarium.
+[`UI`](#ui-component) is responsible for the UI of PlanITarium.
 
-[`Commands`](#Commands-Component) is responsible for the handling and executing of commands.
+[`Commands`](#commands-component) is responsible for the handling and executing of commands.
 
-[`Parser`](#Parser-Component) is responsible for the parsing and validating of user input.
+[`Parser`](#parser-component) is responsible for the parsing and validating of user input.
 
-[`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
+[`Family`](#family-component) is responsible for holding the user data of PlanITarium in memory.
 
-[`Money`](#Money-Component) is responsible for holding the monetary information in memory.
+[`Money`](#money-component) is responsible for holding the monetary information in memory.
 
-[`Storage`](#Storage-Component) is responsible for reading and writing data to the hard disk.
+[`Storage`](#storage-component) is responsible for reading and writing data to the hard disk.
 
 **How the components interact with each other**
 
 The following Sequence Diagram shows a high-level view on how the components interact when the user enters the command
-`add /g 2 /n Alice`.
+`add /g 2 /n Alice`. The interactions with storage is not showcased in this section, but is detailed in the 
+[Data Archiving](#data-archiving) section. 
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 > :information_source: **Note:** The lifeline for `AddPersonCommand` ends at the destroy marker :x:
@@ -174,6 +174,8 @@ the `XYZCommand` to obtain the desired results.
 **Class:** [`Parser.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
 
+The Class Diagram below shows the full structure of the `Parser` component and the components it interacts with.
+
 ![ParserClassDiagram](images/ParserClassDiagram.png)
 
 The `Parser` component consists of the 
@@ -191,8 +193,8 @@ required.
 
 How the `Parser` component is used:
 
-1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command to
-   be executed.
+1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command 
+   to be executed.
 2. This will result in the keyword of the command to be returned as a string.
 3. When necessary, the `parseXYZ()` methods will be called upon to parse more terms for the `Commands`
    component to obtain the details required for the command execution (e.g. `parseGroupIndex("add /n Alice /g 2")`
@@ -205,7 +207,7 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 
 ![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
 
-> :information_source: **Note:** The following are the ranges of index deemed valid:
+> :information_source: **Note:** The following are the range of indexes deemed valid:
 
 | Index       | Range                                                                               |
 |-------------|-------------------------------------------------------------------------------------|
@@ -248,8 +250,7 @@ wrapping and indentation of lines printed.
 
 To aid in visualisation, 
 
-* Methods on `IncomeList` and `ExpenditureList` will be simplified to call to `MoneyList`. See 
-[Money Component](#Money-component) for more information.
+* Methods on `IncomeList` and `ExpenditureList` will be simplified to call to `MoneyList`.
 * The following situation will be simulated:
   1. User adds a Person, *Alice* to `parents`
   2. User adds an income to *Alice*
@@ -262,7 +263,36 @@ The following Sequence Diagram shows how the `Family` component handles each cal
 
 ### Money Component
 
-<!-- {For Jiarong} -->
+The `Money` component consists of the following classes:
+[`Money.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/Money.java),
+[`MoneyList.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/MoneyList.java),
+[`Income.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/Income.java),
+[`IncomeList.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/IncomeList.java),
+[`Expenditure.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/Expenditure.java)
+and [`ExpenditureList.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/ExpenditureList.java)
+
+![MoneyClassDiagram](images/MoneyClassDiagram.png)
+
+The `Money` components consists of two abstract classes, `Money` and `MoneyList`, of which contains the basic attributes
+and functions required to track monetary items. Each `Person`'s Income and Expenditure are then tracked by the
+respective subclasses (`Income` and `IncomeList` for tracking incomes, `Expenditure` and `ExpenditureList` for tracking
+expenditures) which contains additional functions.
+
+How the `Money` component is used:
+1. Upon input from the user, the input is passed through the `Command` component and a corresponding method is
+   called from the `Family` class.
+2. If the command specified involves operation on a `Person`'s IncomeList or ExpenditureList, the corresponding
+   function will be called from either the `IncomeList` or `ExpenditureList` class with the required values parsed
+   out using the `Parser` component.
+
+To aid in visualisation, the editing of an existing income will be simulated with details shown in the implementation
+section.
 
 ### Storage Component
 
@@ -351,70 +381,57 @@ The rest of the commands follow the similar flow as `AddPersonCommand`.
 
 ---
 
-### Find feature
+### Edit Feature
 
 #### Implementation
 
-The proposed find feature is facilitated by `Categories`, `Money(temp)`, `MoneyList(temp)`
-and `Family`. The `Categories` is an enumeration of keys that is used as the expenditure categories. The `Money(temp)`
-will have an additional integer attribute that acts as an index to a category. Additionally, the following operations
-are implemented:
+The proposed find feature is facilitated by `Categories`, `Money`, `MoneyList`, `Income`, `IncomeList`, `Expenditure`
+and `ExpenditureList`. The `Categories` is an enumeration of keys that is used as the expenditure categories.
+`Expenditure` will have an additional integer attribute that acts as an index to a category.
+Additionally, the following operations are implemented:
 
 * `Categories#getLabelForIndex(index)` -- Returns the name of the category with this index.
-* `Money(temp)#getCategory()` -- Returns the category index for this money object.
-* `Money(temp)#getDescription()` -- Returns the description for this money object.
-* `MoneyList(temp)#searchExpense(description, index)` -- Returns a list of expenditures having category index matching
-  the index argument and description matching the expenditure's description.
-* `MoneyList(temp)#searchIncome(description)` -- Returns a list of income having description matching the income's
-  description.
-* `Family#listExpenseSearch(description, index)` -- Lists all expenses matching the criteria.
-* `Family#listIncomeSearch(description)` -- Lists all income with matching description.
+* `Money#getAmount()` -- Returns the amount for this money object.
+* `Money#getDescription()` -- Returns the description for this money object.
+* `Money#isPermanent()` -- Returns the recurring status for this money object.
+* `Expenditure#getCategory()` -- Returns the category index for this expenditure object.
+* `ExpenditureList#editExpenditure(index, description, amount, category, isPermanent)` - Edits an expenditure in
+  the list of expenditures given some parameters
+* `ExpenditureList#editExpDesc(index, description)` -- Edits expenditure object's description;
+* `ExpenditureList#editExpAmount(index, amount)` -- Edits expenditure object's amount;
+* `ExpenditureList#editExpCat(index, category)` -- Edits expenditure object's category;
+* `ExpenditureList#editExpPerm(index, isPermanent)` -- Edits expenditure object's recurring status;
+* `IncomeList#editIncome(index, description, amount, isPermanent)` - Edits an income in
+  the list of incomes given some parameters
+* `IncomeList#editIncDesc(index, description)` -- Edits income object's description;
+* `IncomeList#editIncAmount(index, amount)` -- Edits income object's amount;
+* `IncomeList#editIncPerm(index, isPermanent)` -- Edits income object's recurring status;
 
-Below is an example usage scenario and how the expenses of a category will be printed.
+Below is an example usage scenario of how an income can be edited.
 
 Step 1. Given that the application already has existing data and there is one person being tracked, Alice, who belongs
 to the current generation. In this case `Family` would be initialised with one generation being tracked - myGen.
 
-![FindIncomeExpenditure1](images/FindIncomeExpenditure1.png)
+![EditIncome1](images/EditIncomeDiagram1.png)
 
-Step 2. The user executes `find /d Bills /c 1` command to search for income and expenditures with descriptions
-containing "Bills". The `find` command will be parsed and calls
-`Family#listExpenseSearch("Bills", 1)` and `Family#listSearch("Bills")` which would instantiate 2 temporary array list
-for storing the results of the upcoming search.
+Step 2. The user executes `editin /u 1 /g 2 /r 1 /d Bills` command to search for income and expenditures with
+descriptions containing "Bills". The `edit` command will be parsed and calls `IncomeList#editIncome(1, "Bills", null,
+null)` which then calls `editIncDesc(1, "Bills)`, `editIncAmount(1, null)` and `editIncPerm(1, null)`.
 
-![FindIncomeExpenditure2](images/FindIncomeExpenditure2.png)
+Step 3. For each edit income method called, the target income object is first retrieved, followed by its
+respective attributes. The retrieved attributes values are then compared to the input value. If the input value is not
+null and it differs from the object's current description, the object's attributes are updated. If changes were made,
+a boolean value of True is returned from the function. Else, False is returned.
 
-Step 3. After the temporary array list for expenditure has been created, the existing generation will be iterated
-for `Person` objects. The `expenditureList` for a person would be retrieved during that person's iteration
-and `MoneyList(temp)#searchExpense("Bills", 1)` will be called as `expenditureList` extends `MoneyList(temp)`. This
-method then iterates through the list and calls
-`Money(temp)#getCategory()` and `Money(temp)#getDescription()` on each expenditure, collecting and returning the
-expenditure if its category matches the given index and description matches the given description. The returned
-expenditures are then appended to the temporary array list.
+Step 4. At the end of all edit attributes function call, a check to the boolean variables returned are check.
+If any of the variable returns true, a message is printed to the user that changes were made as well as the object's
+updated value. Else, the user is notified that no changes were made.
 
-![FindIncomeExpenditure3](images/FindIncomeExpenditure3.png)
+![EditIncome2](images/EditIncomeDiagram2.png)
 
-Step 4. After the temporary array list for income has been created, the existing generation will be iterated
-for `Person` objects. The `incomeList` for a person would be retrieved during that person's iteration
-and `MoneyList(temp)#searchIncome("Bills")` will be called as `incomeList` extends `MoneyList(temp)`. This method then
-iterates through the list and calls
-`Money(temp)#getDescription()` on each income, collecting and returning the income if its description matches the given
-description. The returned incomes are then appended to the temporary array list.
-
-![FindIncomeExpenditure4](images/FindIncomeExpenditure4.png)
-
-Step 5. The iteration, collecting and appending to the temporary array list in step 3 and 4 is repeated until every
-person has been iterated. Finally, `Categories#getLabelForIndex(1)` is called so that an appropriate message can be displayed to
-the user, stating the name of the category, following by a series of print to display the expenditures in this category.
-
-> :information_source: **Note:** If the `index` provided does not map to any existing categories,
-> then it can be observed that there will never be any results returned. The `find` command will
-> check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
-> fails, an error message will be displayed to the user instead of continuing with the execution.
-
-The following sequence diagram shows how the `find` operation works after the `FindCommand` has been created
-by [`CommandFactory`](#PlaceholderToCommandFactory):
-![FindIncomeExpenditureSequence](images/FindIncomeExpenditureSequence.png)
+The following sequence diagram shows how the `editin` operation works after the `EditCommand` has been parsed
+and called by `PersonList`:
+![EditIncomeSequence](images/EditIncomeSequence.png)
 
 #### Design considerations:
 
@@ -563,7 +580,7 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 3. The product should be for a single user i.e. (not a multi-user product).
 4. The data should be stored locally and should be in a human editable text file.
 5. The data should not be stored with a database management system.
-6. The product should work on the Windows, Linux and OS-X platforms.
+6. The product should work on mainstream OS platforms.
 7. The product should work on a computer that has version 11 of Java installed.
 8. The product should work without requiring an installer.
 9. The product should not depend on a remote server.
@@ -574,7 +591,16 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
 
-* *glossary item* - Definition
+* *User* - A person that is using or being tracked by PlanITarium.
+* *User Index* - The integer used to identify the user in PlanITarium.
+* *Group* - Logically identifies each generation of users.
+* *Group Index* - The integer used to identify the group in PlanITarium.
+* *Family* - The combined collection of all groups and users in PlaniTarium.
+* *Command* - Sequence of characters input by user to execute functions in PlanITarium.
+* *Delimiter* - Sequence of characters for specifying the boundary between separate areas of text.
+* *Mainstream OS* - Windows, Linux, OS-X.
+* *UML* - Unified Modeling Language that provides a standard way to visualize the design of a system.
+* *PlantUML* - The tool used to create the UML diagrams seen in this guide.
 
 ---
 
@@ -582,126 +608,136 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 
 Given below are instructions to test the app manually.
 
-> :information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are 
+> :information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are
 > expected to do more *exploratory* testing.
 
-### Launch and shutdown
+### Initial launch
 
-1. Initial launch
-   1. Download the jar file from [here](https://github.com/AY2122S2-CS2113T-T10-2/tp/releases) and copy it into an empty folder.
-   2. Open a terminal in the folder and run `java -jar PlanITarium.jar`. Expected: Shows the welcome message.
-2. Shutdown
-   1. Upon request for input, type `bye` and press [Enter].
+1. Download the jar file from [here](https://github.com/AY2122S2-CS2113T-T10-2/tp/releases) and copy it into an empty folder.
+2. Open a terminal in the folder and run `java -jar PlanITarium.jar`. Expected: Shows the welcome message.
+
+### Shutdown
+
+Upon request for input, type `bye` and press [Enter].
+
+### Adding persons
+
+1. Use the `overview` command to view the groups available.
+2. Test case: `add /g 1 /n Alice`  
+   Expected: Alice is added to the `Parents` group. Upon `list /g 1`, Alice can be seen under `Parents`.
+3. Test case: `add /g 0 /n Bob`  
+   Expected: Bob is not added. Error details shown in the error message.
 
 ### Deleting persons
 
-1. Deleting a person 
-   1. Use the `list` command on the group which a person should be deleted from.
-   2. Prerequisite: At least 1 person in the group.
-   3. Test case: `delete /g 1 /u 1`
-      Expected: First person is deleted from the `Parents` group. Upon `list /g 1`, other persons have their index decremented.
-   4. Test case: `delete /g 0 /u 1`
-      Expected: No person is deleted. Error details shown in the error message.
-   5. Other incorrect delete commands to try: `delete`, `delete /g 1`, `delete /g 1 /u 0`, `delete /g x /u y` (where y is larger
-   than the number of members in group x)
-      Expected: Similar to previous.
+1. Use the `list` command on the group which a person should be deleted from.
+2. Prerequisite: At least 1 person in the group.
+3. Test case: `delete /g 1 /u 1`  
+   Expected: First person is deleted from the `Parents` group. Upon `list /g 1`, other persons have their index decremented.
+4. Test case: `delete /g 0 /u 1`  
+   Expected: No person is deleted. Error details shown in the error message.
+5. Other incorrect delete commands to try: `delete`, `delete /g 1`, `delete /g 1 /u 0`, `delete /g x /u y` (where y is larger
+   than the number of members in group x)  
+   Expected: Similar to previous.
 
 ### Adding incomes
 
-1. Adding a non-recurring income
-   1. Prerequisite: The person in which the income will be added to exists, then use the `list` command on the group 
-      which the person resides in to get his user index.
-   2. Test case: `addin /g 1 /u 1 /d Donations /i 6000 /p f`
-      Expected: A non-recurring income entry worth $6000 from Donations is added to the first person of `Parents`.
-   3. Test case: `addin /g 1 /u 1 /d Donations /i 6000.123 /p f`
-      Expected: No income is added. Error details shown in the error message.
-   4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`
-      Expected: Similar to previous.
-2. Adding a recurring income
-   1. Prerequisite: Similar to previous.
-   2. Testing similar to previous, but with `/p t` instead.
+#### Adding a non-recurring income
+1. Prerequisite: The person in which the income will be added to exist, then use the `list` command on the group
+   which the person resides in to get his user index.
+2. Test case: `addin /g 1 /u 1 /d Donations /i 6000 /p f`  
+   Expected: A non-recurring income entry worth $6000 from Donations is added to the first person of `Parents`.
+3. Test case: `addin /g 1 /u 1 /d Donations /i 6000.123 /p f`  
+   Expected: No income is added. Error details shown in the error message.
+4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`  
+   Expected: Similar to previous.
+#### Adding a recurring income
+1. Prerequisite: Similar to previous.
+2. Testing similar to previous, but with `/p t` instead.
 
 ### Adding expenditures
 
-1. Adding a non-recurring expenditure
-   1. Prerequisite: The person in which the expenditure will be added to exists, then use the `list` command on the group
-      which the person resides in to get his user index.
-   2. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 2 /p f`
-      Expected: A non-recurring expenditure entry worth $50 for Food, in the category *Food and Drinks*, is added to
-      the first person of `Parents`.
-   3. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 7 /p f`
-      Expected: No expenditure is added. Error details shown in the error message.
-   4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`
-      Expected: Similar to previous.
-2. Adding a recurring expenditure
-   1. Prerequisite: Similar to previous.
-   2. Testing similar to previous, but with `/p t` instead.
+#### Adding a non-recurring expenditure
+1. Prerequisite: The person in which the expenditure will be added to exist, then use the `list` command on the group
+   which the person resides in to get his user index.
+2. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 2 /p f`  
+   Expected: A non-recurring expenditure entry worth $50 for Food, in the category *Food and Drinks*, is added to
+   the first person of `Parents`.
+3. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 7 /p f`  
+   Expected: No expenditure is added. Error details shown in the error message.
+4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`  
+   Expected: Similar to previous.
+#### Adding a recurring expenditure
+1. Prerequisite: Similar to previous.
+2. Testing similar to previous, but with `/p t` instead.
 
 ### Deleting incomes and expenditures
 
-1. Deleting an income
-   1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the 
-      person resides in to get his user index as well as the income index of interest.
-   2. Test case: `deletein /g 1 /u 1 /r 1`
-      Expected: First income entry of the first person in `Parents` group is deleted. Upon `list /g 1`, other income entries
-      under the first person is decremented.
-   3. Test case: `deletein /g 1 /u 1 /r 0`
-      Expected: No income is deleted. Error details shown in the error message.
-   4. Other incorrect deletein commands to try: `deletein`, `deletein /u 1 /r 1`, `deletein /g 1 /u 1 /r first`
-      Expected: Similar to previous.
-2. Deleting an expenditure
-   1. Prerequisite: Similar to previous, but existing expenditure instead of income.
-   2. Testing similar to previous, but with `deleteout` instead.
+#### Deleting an income
+1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the
+   person resides in to get his user index as well as the income index of interest.
+2. Test case: `deletein /g 1 /u 1 /r 1`  
+   Expected: First income entry of the first person in `Parents` group is deleted. Upon `list /g 1`, other income entries
+   under the first person is decremented.
+3. Test case: `deletein /g 1 /u 1 /r 0`  
+   Expected: No income is deleted. Error details shown in the error message.
+4. Other incorrect deletein commands to try: `deletein`, `deletein /u 1 /r 1`, `deletein /g 1 /u 1 /r first`  
+   Expected: Similar to previous.
+#### Deleting an expenditure
+1. Prerequisite: Similar to previous, but existing expenditure instead of income.
+2. Testing similar to previous, but with `deleteout` instead.
 
 ### Editing incomes and expenditures
 
-1. Editing an income
-   1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the
-      person resides in to get his user index as well as the income index of interest.
-   2. Test case: `editin /g 1 /u 1 /r 1 /i 50`
-      Expected: In-place editing of the first income record of the first person in `Parents`. Upon `list /g 1`, first 
-      income under the first person will be edited to have an income value of $50.00.
-   3. Test case: `editin /g 1 /u 1 /r 1 /i 100 /d Stocks /p t`
-      Expected: Similar in-place editing of the income value, description, and recurrence.
-   4. Test case: `editin`
-      Expected: No income is edited. Error details shown in the error message.
-   5. Other incorrect editin commands to try: `editin /g 1 /u 1 /r 1`, `editin /g 1 /u 1 /r 1 /i notDouble`
-      Expected: Similar to previous.
-2. Editing an expenditure
-   1. Prerequisite: Similar to previous, but existing expenditure instead of income.
-   2. Testing similar to previous, but with `editin` instead and additional delimiter of `/c` can be added for category.
+#### Editing an income
+1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the
+   person resides in to get his user index as well as the income index of interest.
+2. Test case: `editin /g 1 /u 1 /r 1 /i 50`  
+   Expected: In-place editing of the first income record of the first person in `Parents`. Upon `list /g 1`, first
+   income under the first person will be edited to have an income value of $50.00.
+3. Test case: `editin /g 1 /u 1 /r 1 /i 100 /d Stocks /p t`  
+   Expected: Similar in-place editing of the income value, description, and recurrence.
+4. Test case: `editin`  
+   Expected: No income is edited. Error details shown in the error message.
+5. Other incorrect editin commands to try: `editin /g 1 /u 1 /r 1`, `editin /g 1 /u 1 /r 1 /i notDouble`  
+   Expected: Similar to previous.
+#### Editing an expenditure
+1. Prerequisite: Similar to previous, but existing expenditure instead of income.
+2. Testing similar to previous, but with `editin` instead and additional delimiter of `/c` can be added for category.
 
 ### Finding entries
 
-1. Finding incomes and general expenditures
-   1. Test case: `find /d Test`
-      Expected: All incomes and expenditures whose description contains `Test` will be printed out.
-2. Finding expenditures in a category
-   1. Test case: `find /d Test /c 1`
-      Expected: All incomes, and expenditures in the category of `Others`, whose description contains `Test` will be 
-      printed out.
-   2. Test case: `find /d Test /c 7`
-      Expected: No entries are printed. Error details shown in the error message.
+#### Finding incomes and general expenditures
+Test case: `find /d Test`  
+Expected: All incomes and expenditures whose description contains `Test` will be printed out.
+#### Finding expenditures in a category
+1. Test case: `find /d Test /c 1`  
+   Expected: All incomes, and expenditures in the category of `Others`, whose description contains `Test` will be
+   printed out.
+2. Test case: `find /d Test /c 7`  
+   Expected: No entries are printed. Error details shown in the error message.
 
 ### Loading data
 
-1. Dealing with missing data file
-   1. Test case: Delete the save file `PlanITarium.txt` if it exists and launch the program.
-      Expected: The program will check if the file exists upon start up, and creates one if it does not.
-2. Dealing with missing directory
-   1. Test case: Delete the directory `data` if it exists and launch the program.
-      Expected: The program will check if the directory exists upon start up, and creates one if it does not.
-3. Dealing with corrupted data file
-   1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
-      a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
-   2. Execute the command `bye` to save the data to `PlanITarium.txt`.
-   3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
-      added above.
-   4. Test case: Remove delimiters `/d` in save file. The corrupted record should look like this 
-      `i Donations 200.0 false 2022-04-08`.
-      Expected: Upon starting up the program again, `Storage` will load valid data until it encounters a
-      corrupted entry as seen in the test case. We can check the loaded data by executing the command `list /g 1` 
-      and only `Alice` is printed without the corrupted income entry.
-   5. Test case: Edit task type from income `i` to expenditure `e` in save file. The corrupted record should look like 
-      this `e Donations /d 200.0 /d false /d 2022-04-08`.
-      Expected: Similar to the above expected outcome. 
+#### Dealing with missing data file
+Test case: Delete the save file `PlanITarium.txt` if it exists and launch the program.  
+Expected: The program will check if the file exists upon start up, and creates one if it does not.
+
+#### Dealing with missing directory
+Test case: Delete the directory `data` if it exists and launch the program.  
+Expected: The program will check if the directory exists upon start up, and creates one if it does not.
+
+#### Dealing with corrupted data file
+1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
+   a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
+2. Execute the command `bye` to save the data to `PlanITarium.txt`.
+3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
+   added above.
+4. Test case: Remove delimiters `/d` in save file. The corrupted record should look like this
+   `i Donations 200.0 false 2022-04-08`.  
+   Expected: Upon starting up the program again, `Storage` will load valid data until it encounters a
+   corrupted entry as seen in the test case. We can check the loaded data by executing the command `list /g 1`
+   and only `Alice` is printed without the corrupted income entry.
+5. Test case: Edit task type from income `i` to expenditure `e` in save file. The corrupted record should look like
+   this `e Donations /d 200.0 /d false /d 2022-04-08`.  
+   Expected: Similar to previous.
