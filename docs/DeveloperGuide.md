@@ -867,6 +867,18 @@ Test Scenario 1: There is a group with unique identifier of 1 stored in the appl
 > For details on the usage of `group /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-group-group-edit).
 <hr>
 
+Test Scenario 1: A group has been created with a unique identifier of 1, named GroupTest1 with Alice, Bob and Charlie.
+1. Test Command: `group /edit /gid 1 /n GroupTest1`<br>
+   Expected: A message should be printed, indicating no edits were made.
+2. Test Command: `group /edit /gid 1 /n GroupTest10`<br>
+   Expected: A success message should be printed, indicating the group was edited.
+3. Test Command: `group /edit /gid /pl Alice Bob Charlie`<br>
+   Expected: A success message should be printed, indicating the group was edited.
+4. Test Command: `group /edit /gid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
+5. Test Command: `group /edit /gid 1`<br>
+   Expected: An error message should be printed, indicating no delimiters were found.
+
 #### Viewing a Group
 > For details on the usage of `group /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-group-group-view).
 <hr>
