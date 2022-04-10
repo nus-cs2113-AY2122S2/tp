@@ -59,7 +59,10 @@ should take note of to avoid issues in the application.</span>
 the users.</span>
 - (Developer and User Guides) Inserted 'buttons' throughout the guides to allow users to click and navigate back to the
   guides' tables of contents for easier navigation. 
-    - Click [here](../images/ppp/alanlowzies/BackToToCDemo.gif) for a GIF demonstration of the enhancement.
+  - I tried to utilise JavaScript for a floating back-to-top button, but due to the time constraints and the need to
+    fully understand the structure of the webpage theme that we're using on GitHub Pages, I decided to
+    use simple hyperlink buttons instead.
+  - Click [here](../images/ppp/alanlowzies/BackToToCDemo.gif) for a GIF demonstration of the enhancement.
 
 ### Contributions to the User Guide (UG)
 - Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
