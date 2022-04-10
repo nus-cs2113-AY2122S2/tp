@@ -54,14 +54,16 @@ Given below are my contributions to the project.
 <div style="page-break-after: always;"></div>
 
 * **Project management**:
-    * Managed releases `v2.1` on GitHub.
+    * Managed releases `v2.1` on GitHub and made final JAR file for submission.
     * Forked initial repository
     * Set up and wrap up `v1.0`, `v2.0`, `v2.1`
     * Assigned tasks on issues
+    * Managed issues and milestones.
+    * Helped compile user guide and developer guide for submission.
     
 
 * **Documentation**:
-    * User Guide:
+    * User Guide: (Pull request: [\#105](https://github.com/AY2122s2-CS2113-F12-3/tp/pull/105), [\#107](https://github.com/AY2122s2-CS2113-F12-3/tp/pull/107))
         * Added documentation for the features:
           * `listMealReservations`
           * `deleteMealReservation`
@@ -73,7 +75,7 @@ Given below are my contributions to the project.
           * `findMenuItemName`
           * `findMenuItemType`
           * `bye`
-    * Developer Guide:
+    * Developer Guide: (Pull request: [\#20](https://github.com/AY2122s2-CS2113-F12-3/tp/pull/20), [\#109](https://github.com/AY2122s2-CS2113-F12-3/tp/pull/109), [\#111](https://github.com/AY2122s2-CS2113-F12-3/tp/pull/111))
         * Added implementation details for the features:
           * `findMealReservation`
           * `addMenuItem`
@@ -86,3 +88,6 @@ Given below are my contributions to the project.
           * All menu item functionalities
           * All meal reservation functionalities
 
+* **Review/mentoring contributions**:
+    * Reported bugs and suggestions for other teams in the class. (Examples: [1](https://github.com/suenalaba/ped/issues/6), [2](https://github.com/suenalaba/ped/issues/1), [3](https://github.com/suenalaba/ped/issues/8))
+    * Assisted in solving team-based issues raised by tutor. (Example: [1](https://github.com/AY2122s2-CS2113-F12-3/tp/issues/95), [2](https://github.com/AY2122s2-CS2113-F12-3/tp/issues/76)) 
