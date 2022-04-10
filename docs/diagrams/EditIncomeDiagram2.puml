@@ -11,7 +11,9 @@ title Initial State
 package " " {
     class Fam as "__family:Family__"
     class MyGen as "__myGen:PersonList__"
-    class Alice as "__Alice:Person__"
+    class Alice as "__:Person__" {
+        name = "Alice"
+    }
     class List as "__expenditureList:ExpenditureList__"
     class List2 as "__incomeList:IncomeList__"
     class Exp0 as "__expenditure0:Expenditure__" #LIGHTGREEN {

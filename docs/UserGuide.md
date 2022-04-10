@@ -178,11 +178,11 @@ Format: `addin /g GROUP_INDEX /u USER_INDEX /d DESCRIPTION /i INCOME /p <T/(any)
 
 Example of usage:
 
-* Add a monthly-recurrent Salary of $2,000, to Alice's income.
+* Add a monthly-recurrent Salary of $2,000, to Bob's income.
 
   `addin /g 1 /u 1 /d Salary /i 2000 /p T`
 
-* _Result_: Entry for Salary is added to Alice's income list with an income index of **1**.
+* _Result_: Entry for Salary is added to Bob's income list with an income index of **1**.
 
   ![addin-command-screenshot](images/AddIncome.png)
 
@@ -447,7 +447,7 @@ the [features](#features) section.
 | [Searching for details](#searching-for-details-find)                | find /d __ [ /c __ ] <br/>e.g.<br/> `> find salary` <br/> `> find sugar /c 4`                                                                                       |
 | [Exit the program](#exit-bye)                                       | bye                                                                                                                                                                 |
 
-[**Categoty Summary**](#show-expenditure-categories-listcat)
+[**Category Summary**](#show-expenditure-categories-codelistcatcode)
 
 | Index | Name                  |
 |-------|-----------------------|
