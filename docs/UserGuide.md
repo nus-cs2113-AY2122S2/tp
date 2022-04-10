@@ -74,7 +74,7 @@ If you can type fast, SplitLah can manage your outings faster than applications 
   - Names of `Sessions`,`Activities` and `Groups` can have all printable [ASCII](https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html) characters.
   - Names of participants can only contain: `A-Z`, `a-z`
   - Decimals (up to 2 decimal places): `3.5`, `3.95`
-  - Unique identifiers must be positive integers: `1`, `3`
+  - Unique identifiers must be positive integers less than or equal to `2147483647`: `1`, `3`
   - Dates (DD-MM-YYYY or today): `02-04-2022`, `today`
 - A forward slash `/` indicates a delimiter and is used to separate commands into parts.
   Each command's documentation specifies the required delimiters and their purpose.
