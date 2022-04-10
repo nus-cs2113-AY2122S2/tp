@@ -92,7 +92,7 @@ class CommandHandlerTest {
     }
 
     @Test
-    public void testInvalidCommand(){
+    public void testInvalidCommand() {
         assertThrows(IllegalCommandException.class, () ->
                 defaultCommandHandler.handleUserInput(defaultProjectList,"zzzzz")
         );

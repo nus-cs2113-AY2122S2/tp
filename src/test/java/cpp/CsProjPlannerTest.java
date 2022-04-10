@@ -6,7 +6,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.io.PrintStream;
 
 class CsProjPlannerTest {
     private final InputStream standardIn = System.in;
@@ -14,11 +18,11 @@ class CsProjPlannerTest {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private ByteArrayInputStream testIn;
 
-    private final String FILEPATH = "./src/data/projectList.txt";
-    private final String SEPARATOR = "____________________________________________________________\n";
-    private final String HELP_COMMAND = "help";
-    private final String EXIT_COMMAND = "exit";
-    private final String WELCOME_MESSAGE = "\n   ___________ ____               _    ____  __\n"
+    private static final String FILEPATH = "./src/data/projectList.txt";
+    private static final String SEPARATOR = "____________________________________________________________\n";
+    private static final String HELP_COMMAND = "help";
+    private static final String EXIT_COMMAND = "exit";
+    private static final String WELCOME_MESSAGE = "\n   ___________ ____               _    ____  __\n"
             + "  / ____/ ___// __ \\_________    (_)  / __ \\/ /___ _____  ____  ___  _____\n"
             + " / /    \\__ \\/ /_/ / ___/ __ \\  / /  / /_/ / / __ `/ __ \\/ __ \\/ _ \\/ ___/\n"
             + "/ /___ ___/ / ____/ /  / /_/ / / /  / ____/ / /_/ / / / / / / /  __/ /\n"
