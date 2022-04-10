@@ -26,9 +26,9 @@ public class ModuleParser {
     public static final String STRING_SPACE_CHARACTER = " ";
     public static final String EMPTY_STRING = "";
     public static final String REGEX_MODULE_CODE = "^[a-zA-Z0-9]+$";
-    public static final String REGEX_MODULE_DAY = "([sS]unday|[mM]onday|[tT]uesday|[wW]ednesday|[tT]hursday"
+    public static final String REGEX_MODULE_DAY = "^([sS]unday|[mM]onday|[tT]uesday|[wW]ednesday|[tT]hursday"
             + "|[fF]riday|[sS]aturday)";
-    public static final String REGEX_MODULE_TIME = "(0?[1-9]|1[0-2]):([0-5]?\\d)\\s*([pa]m)\\s*"
+    public static final String REGEX_MODULE_TIME = "^(0?[1-9]|1[0-2]):([0-5]?\\d)\\s*([pa]m)\\s*"
             + "-\\s*(0?[1-9]|1[0-2]):([0-5]?\\d)\\s*([pa]m)";
     public static final String REGEX_MODULE_DATE = "^(3[01]|[12][0-9]|0[1-9])-(1[0-2]|0[1-9])-[0-9]{4}$";
     public static final String WRONG_DAY_FORMAT_MESSAGE = "Accepted module day inputs are either a day of "
