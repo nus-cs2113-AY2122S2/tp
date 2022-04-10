@@ -159,13 +159,24 @@ public class AddHousekeeperCommand extends Command {
     /**
      * Method to add new housekeeper profile into list and rejects any profile that has already been recorded.
      *
+     * @param listContainer Containing the list of information
      * @param ui The user interface for this execution method.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.addHousekeeperInList(getHousekeeper());
         ui.printHousekeeperNoted(housekeeper);
+    }
+
+    /**
+     * This method updates the new profile into the file.
+     *
+     * @param listContainer Containing the list of information.
+     * @throws IOException Write to file failed.
+     */
+    public void writeHousekeeperNameToFile(ListContainer listContainer) throws IOException {
+        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
         housekeeperFileManager.save(housekeeperList);
     }
