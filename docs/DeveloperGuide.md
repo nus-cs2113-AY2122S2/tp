@@ -319,3 +319,24 @@ A cheap, user-friendly Warehouse Management System with intuitive commands to im
 
 ## Instructions for manual testing
 
+Following commands from the [User Guide](/UserGuide.md) can give a rough overview of how Simplst will handle the commands.
+Here is a quick guide on example commands to try.
+
+| Action                               | Command to be keyed into the terminal                        |
+|--------------------------------------|--------------------------------------------------------------|
+| Add Unit Good                        | `add ug/ sku/SKU01 n/Metal Chair d/Made of steel size/small` |
+| Remove Unit Good                     | `remove ug/ sku/SKU01`                                       |
+| List Unit Good                       | `list ug/`                                                   |
+| Add Good quantity                    | `add g/ sku/SKU01 qty/30`                                    |
+| Remove Good quantity                 | `remove g/ sku/SKU01 qty/10`                                 |
+| List Goods (with quantity displayed) | `list g/`                                                    |
+| Viewing a Good                       | `view g/ sku/SKU01`                                          |
+| Find Good                            | `find n/chair`                                               |
+| Add Order                            | `add o/ oid/1 r/Mirana addr/Radiant Fountain`                |
+| Remove Order                         | `remove o/ oid/1`                                            |
+| List Orders                          | `list o/`                                                    |
+| View Order                           | `view o/ oid/1`                                              |
+| Fulfill Order                        | `fulfill oid/1`                                              |
+| Add Orderline                        | `add og/ oid/1 sku/SKU01 q/10`                               | 
+| Remove Orderline Quantity            | `remove og/ oid/1 sku/SKU01 q/5`                             |
+| List Orderlines                      | `list og/ oid/1`                                             |
