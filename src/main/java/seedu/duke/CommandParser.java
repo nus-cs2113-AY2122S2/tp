@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.customercommands.AddSatisfactionCommand;
-import seedu.duke.command.customercommands.AverageSatisfactionCommand;
+import seedu.duke.command.customercommands.ViewAverageSatisfactionCommand;
 import seedu.duke.command.customercommands.ViewSatisfactionsCommand;
 import seedu.duke.command.eventcommands.AddEventCommand;
 import seedu.duke.command.eventcommands.DeleteEventCommand;
@@ -95,7 +95,7 @@ public class CommandParser {
         } else if (userInputLowerCase.trim().equals(VIEW_SATISFACTIONS_COMMAND)) {
             userCommand = new ViewSatisfactionsCommand();
         } else if (userInputLowerCase.equals(AVERAGE_SATISFACTION_COMMAND)) {
-            userCommand = new AverageSatisfactionCommand();
+            userCommand = new ViewAverageSatisfactionCommand();
         } else if (userInputLowerCase.startsWith(VIEW_ITEM_LIST_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_ITEM_LIST_COMMAND, "");
             userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();

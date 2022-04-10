@@ -44,9 +44,14 @@ class DukeTest {
         assertThrows(InvalidCommandException.class, () -> new CommandParser().parse("Add Item "));
     }
 
-
     @Test
     public void commandParser_addCommandInvalidView_exceptionThrown() {
         assertThrows(InvalidCommandException.class, () -> new CommandParser().parse("ViewRecorded Housekeeper"));
+    }
+
+    @Test
+    public void commandParser_addCommandInvalidViewAverageSatisfaction_exceptionThrown() {
+        assertThrows(InvalidCommandException.class, () -> new CommandParser().parse("View "
+                + "average satisfaction blah"));
     }
 }
