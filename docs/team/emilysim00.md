@@ -25,6 +25,7 @@ hosted by the module coordinators of CS2113T.
 | Remove plan scheduled on a particular day   | Allows users to remove the plan scheduled on a particular day. | This feature allows the user to change the plan scheduled on a particular day easily. <br><br> Highlights: Users are able to quickly type out the command by indicating the day in the week with integers instead of typing out the name of the day.                 |
 | Reset the 7-days workout plan schedule      | Allows user to reset his/her workout plan schedule.            | This feature allows the user to remove all plans scheduled at once, so they can plan their schedule from the start.                                                                                                                                                  |
 
+
 * Wrote the majority of the codes in `Day.java`, `ScheduleCommand.java` and `InvalidScheduleException.java`.
 * Contributed to some codes in exception-related files such as `InvalidCommandException`. 
 * Contributed to some parts of the `UI` such as the `printNewScheduleCreatedMessage(Day newDay)` and 
@@ -76,6 +77,7 @@ Wrote JUnit test cases for WerkIt!.
 * Wrote part of [user stories](../DeveloperGuide.md#user-stories).
 * Wrote part of [manual testing instructions](../DeveloperGuide.md#test-on-schedule-features).
 * Wrote the [non-functional requirements](../DeveloperGuide.md#non-functional-requirements) section.
+
 
 ### Review/Mentoring Contributions
 Reviewed teammates' pull requests, including (but not limited to):

@@ -99,7 +99,7 @@ output in your terminal:
 
 You are now ready to begin developing!
 
-<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+<div class="button-container"><a class="button" href="#werkit-developer-guide">Back to Top</a></div>
 
 ## Design 
 
@@ -547,9 +547,13 @@ of Java's built-in `Scanner` class.
 
 Once the user has entered an input, `UI#getUserInput()` trims any preceding and trailing whitespaces before returning 
 the user's input as a `String` object to `WerkIt#startContinuousUserPrompt()`. Then, 
-`WerkIt#startContinuousUserPrompt()` calls `Parser#parseUserInput()` to parse the user's input and create an 
+`WerkIt#startContinuousUserPrompt()` calls `WerkIt#parseUserInput()`, an intermediary method to call
+`Parser#parseUserInput()`, which will parse the user's input and create an 
 object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
-this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()`.
+this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()` via `WerkIt#parseUserInput()`.
+
+<span class="box info">:memo: The intermediary `WerkIt#parseUserInput()` method is created to reduce the arrowhead code 
+that was grossly present in `WerkIt#startContinuousUserPrompt()`.</span>
 
 <span class="box info">:memo: A detailed implementation of the parsing and creation of subclass-of-`Command` 
 object process can be found in 
@@ -598,12 +602,18 @@ and will be processed, before returning the user input as a `String` to the call
 `WerkIt#startContinuousUserPrompt()`).
 
 **(Step 3)** In `WerkIt#startContinuousUserPrompt()`, the method will pass the obtained user string as a parameter into
-`Parser#parseUserInput()`. The latter method will first check if the user input contains any characters
-or symbols that are deemed as illegal (see [Illegal Characters and Phrases](#illegal-characters-and-phrases) for details).
+`WerkIt#parseUserInput()`, an intermediary method that will pass the parameter to `Parser#parseUserInput()` which does
+the actual parsing of the user input.
+
+<span class="box info">:memo: The intermediary `WerkIt#parseUserInput()` is created to reduce the arrowhead code that
+was grossly present in `WerkIt#startContinuousUserPrompt()`.</span>
+
+**(Step 4)** In `Parser#parseUserInput()`, it will first check if the user input contains any characters
+or symbols that are deemed as illegal (see ['Illegal Characters and Phrases'](#illegal-characters-and-phrases) for details).
 If at least one illegal character or phrase is found, an `InvalidCommandException` will be thrown and the parsing is
 aborted.
 
-**(Steps 4 to 17)** If no illegal characters and phrases are found, `Parser#parseUserInput()` will examine the first
+**(Steps 5 to 18)** If no illegal characters and phrases are found, `Parser#parseUserInput()` will examine the first
 word in the user input. This first word should represent the command type that the user wish to execute (i.e. `exercise`,
 `workout`, `plan`, `schedule`, `search`, `help`, or `exit`). Depending on the first word of the user input, different
 methods will be invoked to create the appropriate object of the subclass of the `Command` abstract superclass (see the 
@@ -622,7 +632,8 @@ of `Command` is carried out:
 3. A new object of the subclass of `Command` is created and if the object is successfully constructed with no errors,
 it is returned to `Parser#parseUserInput()`.
 
-**(Step 18)** The object created is then returned to `WerkIt#startContinuousUserInput()`.
+**(Steps 19 and 20)** The object created is then returned to `WerkIt#parseUserInput()`, which will return to
+`WerkIt#startContinuousUserInput()`.
 
 <span class="box info">:memo: (About the sequence diagram) Strictly speaking, the object is returned right after whichever 
 'create command' method is invoked. However, to improve the readability of the diagram, only one return line is shown,
@@ -2086,7 +2097,7 @@ where there are many other day-to-day things being kept too.
 | v2.0    | user     | view the summary of what I can do in the application | know which command to use to perform the actions I want                |
 
 <br/>
-<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+<div class="button-container"><a class="button" href="#werkit-developer-guide">Back to Top</a></div>
 
 ## Non-Functional Requirements
 #### Data Requirements
@@ -2105,7 +2116,7 @@ are running it on a 64-bit operating system and with a minimum of 8 GB of RAM.
 #### Performance Requirements 
 Each command entered by the user should respond within two seconds.
 
-<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+<div class="button-container"><a class="button" href="#werkit-developer-guide">Back to Top</a></div>
 
 ---
 ## Glossary
@@ -2480,8 +2491,8 @@ The following are some test cases for you to try:
 | Clear all plans scheduled command with extra arguments. | `schedule /clearall extraline` | Error response (wrong command entered), plans not removed from schedule and schedule not reset. |
 | Extra whitespaces between commands arguments.           | `schedule         /clearall`   | Error response (invalid user action), plans not removed from schedule and schedule not reset.   |
 
+<br/>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
-
 
 ---
 
@@ -2572,7 +2583,7 @@ The following are some test cases for you to try:
 | Extra whitespaces between command arguments `search` and `/all`. | `search        /all a` | Error response (invalid user action), no result is retrieved.                                   |
 
 
-
+<br/>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 
 ---
@@ -2581,16 +2592,15 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-<span class="info box">:memo: **Important!** These test cases are done on the following assumptions:
-1. Resource files `workouts.txt`, `plans.txt`, and `schedule.txt` are empty. 
-2. `exercise.txt` is populated with its default exercises.
-
+<span class="info box">:memo: **Important!** These test cases are done on the following assumptions:<br/><br/>
+**(a)** Resource files `workouts.txt`, `plans.txt`, and `schedule.txt` are empty.<br/>
+**(b)** `exercise.txt` is populated with its default exercises.<br/><br/>
 If you have some data written into these files or modified `exercises.txt`, please do the following
-prior to conducting the test cases mentioned below:
-1. If WerkIt! is running, exit the application.
-2. Backup your existing `werkItResources` directory.
-3. Delete the `werkItResources` directory (not your backup!)
-4. Start WerkIt! to generate a fresh set of `werkItResources` directory and its resource files.
+prior to conducting the test cases mentioned below:<br/><br/>
+**(1)** If WerkIt! is running, exit the application.<br/>
+**(2)** Backup your existing `werkItResources` directory.<br/>
+**(3)** Delete the `werkItResources` directory (not your backup!)<br/>
+**(4)** Start WerkIt! to generate a fresh set of `werkItResources` directory and its resource files.
 </span>
 
 <span class="warning box">:warning: Please follow the test cases and its commands in sequence as subsequent test cases 
@@ -2608,5 +2618,5 @@ rely on former test cases.</span>
 
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
-
-<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+<br/>
+<div class="button-container"><a class="button" href="#werkit-developer-guide">Back to Top</a></div>
