@@ -42,14 +42,14 @@ class ListCommandTest {
         String secondInputString = "/e /pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(secondInputString, user).executeCommand();
         listInString = new ListCommand("/e", user).expenditureListToString();
-        assertEquals( "-----------------------------------------------" + System.lineSeparator()
+        assertEquals("-----------------------------------------------" + System.lineSeparator()
                 + "1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
                 + "2. $69.00 was spent on Cream Pie(Food) using Cash [30/03/2022]\n"
                 + "-----------------------------------------------" + System.lineSeparator(), listInString);
 
         String listInString2 = new ListCommand("/e ", user).expenditureListToString();
         assertEquals("-----------------------------------------------" + System.lineSeparator()
-                +"1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
+                + "1. $300.00 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
                 + "2. $69.00 was spent on Cream Pie(Food) using Cash [30/03/2022]\n"
                 + "-----------------------------------------------" + System.lineSeparator(), listInString2);
     }
