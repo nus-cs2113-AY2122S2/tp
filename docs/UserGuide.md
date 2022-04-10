@@ -298,18 +298,18 @@ Format: `add m/<MODULE_CODE> c/<CATEGORY> d/<DAY> t/<TIME>`
 | ```<MODULE_CODE> ``` | Code for the module                  | Accepted inputs are alphanumeric parameters |
 | ```<CATEGORY> ```    | Category of the module| Accepts shorthand notations `lec`,`tut`,`lab` and `exam` |
 | ```<DAY> ```         | Class day of the week for the module<br><br>OR<br><br>Date of a one-off event like exam or a non recurring class| Accepted inputs are valid days of the week <br> E.g. `thursday` or `Thursday`<br><br>OR<br><br>Alternatively a valid date of type DD-MM-YYYY can be specified<br>E.g. `12-12-2022`   |
-| ```<TIME> ```        | Class timeslot for the module |  Accepted inputs are timeslots with a start and end time of the form `HH:MMam/pm - HH:MMam/pm`  <br>E.g. `2:00pm - 4:00pm` |
+| ```<TIME> ```        | Class timeslot for the module |  Accepted inputs are timeslots with a start and end time of the form `HH:MM am/pm - HH:MM am/pm`  <br>E.g. `2:00 pm - 4:00 pm` |
 
 Example of usage:
 
-    add m/CS2113 c/lec d/Friday t/4:00pm-6:00pm
-    add m/CG2271 c/tut d/Thursday t/3:00pm-4:00pm
-    add m/CS2113 c/exam d/10-04-2021 t/10:00am-12:00pm
+    add m/CS2113 c/lec d/Friday t/4:00 pm-6:00 pm
+    add m/CG2271 c/tut d/Thursday t/3:00 pm-4:00 pm
+    add m/CS2113 c/exam d/10-04-2021 t/10:00 am-12:00 pm
 
 Expected outcome:
 
     Okay, I have added a new module to the schedule
-    [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm
+    [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
 
 A new module has been added to the schedule with the specified module code, category, day and time.
 
@@ -325,8 +325,8 @@ Example of usage:
 Expected outcome:
 
     Here are the modules in your schedule:
-    1: [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm
-    2: [Module] CS3244 Tutorial: Monday, 1:00pm-2:00pm
+    1: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
+    2: [Module] CS3244 Tutorial: Monday, 1:00 pm-2:00 pm
 
 #### Deleting a module: `rm`
 Deletes the specified module from the schedule.
@@ -345,7 +345,7 @@ Example of usage:
 Expected outcome:
 
     Noted I have removed this module from your schedule:
-    [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm
+    [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
 
 #### Editing a module: `edit`
 Edits an existing module in the schedule. The user can specify a module parameter to edit individually. 
@@ -363,13 +363,13 @@ Format: `edit <index>`
 
 `done`
 
-| Parameter      | Description                       |
-|----------------|-----------------------------------|
-| ```<index> ``` | Index of the module to be edited |
-| ```<MODULE_CODE> ``` | New code for the module                  |
-| ```<CATEGORY> ```    | New category of the module               |
-| ```<DAY> ```         | New class day of the week for the module |
-| ```<TIME> ```        | New class timing for the module          |
+| Parameter      | Description                       |  Constraints |
+|----------------|-----------------------------------|--------------------------------------|
+| ```<index> ``` | Index of the module to be edited | Accepts valid index number from list of modules |
+| ```<MODULE_CODE> ``` | New code for the module                  | Accepted inputs are alphanumeric parameters |
+| ```<CATEGORY> ```    | New category of the module               | Accepts shorthand notations `lec`,`tut`,`lab` and `exam` |
+| ```<DAY> ```         | New class day of the week for the module | Accepted inputs are valid days of the week <br> E.g. `thursday` or `Thursday`<br><br>OR<br><br>Alternatively a valid date of type DD-MM-YYYY can be specified<br>E.g. `12-12-2022`   |
+| ```<TIME> ```        | New class timing for the module          | Accepted inputs are timeslots with a start and end time of the form `HH:MM am/pm - HH:MM am/pm`  <br>E.g. `2:00 pm - 4:00 pm` |
 
 Example of usage:
 
@@ -381,14 +381,14 @@ Expected outcome:
 
     edit 1
     Here is the module that you have chosen to edit:
-    [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm
+    [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
     Choose the part that you would like to edit:
     m/CS3244
     Here are the changes so far. You can edit more module parameters or you can enter 'done' to stop editing!
-    [Module] CS3244 Lecture: Friday, 4:00pm-6:00pm
+    [Module] CS3244 Lecture: Friday, 4:00 pm-6:00 pm
     done
     Your Module was successfully edited! Here are the changes:
-    [Module] CS3244 Lecture: Friday, 4:00pm-6:00pm
+    [Module] CS3244 Lecture: Friday, 4:00 pm-6:00 pm
     Exiting the edit mode
 
 The existing module has been edited to change the module code from CS2113 to CS3244.
@@ -397,33 +397,33 @@ The existing module has been edited to change the module code from CS2113 to CS3
 
 Format: find `<query>`
 
-| Parameter      | Description                       |
-|----------------|-----------------------------------|
-| ```<query> ``` | Search query to find module |
+| Parameter      | Description                       | Constraints |
+|----------------|-----------------------------------| -----------------------------------|
+| ```<query> ``` | Search query to find module | Has to be a valid find query that is not common to all modules. Examples of invalid queries include `am`, `pm`, `module` |
 
 Example of usage:
 
     find CS
     find Wednesday
-    find 2pm
+    find 2:00 pm
 
 
 Expected outcome:
 
     list
     Here are the modules in your schedule:
-    1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
-    2: [Module] EE4204 Lecture: Wednesday, 2:00pm-4:00pm
+    1: [Module] CS2113 Lecture: Thursday, 2:00 pm-4:00 pm
+    2: [Module] EE4204 Lecture: Wednesday, 2:00 pm-4:00 pm
     find CS
     Here are the matching modules in your list:
-    1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
+    1: [Module] CS2113 Lecture: Thursday, 2:00 pm-4:00 pm
     find Wednesday
     Here are the matching modules in your list:
-    1: [Module] EE4204 Lecture: Wednesday, 2:00pm-4:00pm
-    find 2pm
+    1: [Module] EE4204 Lecture: Wednesday, 2:00 pm-4:00 pm
+    find 2:00 pm
     Here are the matching modules in your list:
-    1: [Module] CS2113 Lecture: Thursday, 2:00pm-4:00pm
-    2: [Module] EE4204 Lecture: Wednesday, 2:00pm-4:00pm
+    1: [Module] CS2113 Lecture: Thursday, 2:00 pm-4:00 pm
+    2: [Module] EE4204 Lecture: Wednesday, 2:00 pm-4:00 pm
 
 #### Reading from .ics file: `read ics`
 Creates a list of your modules by reading from .ics calendar file that can be downloaded from nusmods.com.
@@ -433,6 +433,9 @@ This is an efficient alternative to add modules function where you can only add 
 Prerequisites:
 1. Download the .ics file of your academic schedule from nusmods.com.
 2. Place the unedited .ics file in the same folder as your AllOnUs.jar file.
+3. Do not tamper with the .ics file.
+   - If .ics file was tampered with, delete it and repeat steps 1 and 2 before trying this feature.
+   
 
 Format: `read ics`
 
@@ -600,7 +603,7 @@ data. However, do not tamper with the load and save files.
 | Add (Expense)           | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/2022-04-03 a/500 c/Food r/At Supper Stretch`                     |
 | Add (Module)            | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
 | Add (Contact)           | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |                                                                                                             |
-| Edit (Module)           | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                      |
+| Edit (Module)           | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113` <br> `done`                                                                    |
 | Edit (Contact)          | `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`                                                                 |
 | Read from .ics (Module) | `read ics`                                                                                                                  |
 | Find                    | `find KEYWORD`                                                                                                              |
