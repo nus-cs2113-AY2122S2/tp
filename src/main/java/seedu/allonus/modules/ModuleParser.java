@@ -43,6 +43,8 @@ public class ModuleParser {
 
     private static final String TIME_FORMAT_WITH_AMPM = "h:mm a";
     private static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .parseLenient()
             .appendPattern(TIME_FORMAT_WITH_AMPM)
             .toFormatter();
 
@@ -376,6 +378,8 @@ public class ModuleParser {
     private String checkTimeStartEarlier(String timeSlot) throws ModuleTimeException {
         try {
             timeSlot = timeSlot.replace(" - ","-");
+            // Convert to uppercase so that it is recognized by parser from LocalDateTime which expects AM/PM
+            timeSlot = timeSlot.toUpperCase();
             String[] splitTimeArray = timeSlot.split("-", 2);
             splitTimeArray[0] = splitTimeArray[0].trim();
             splitTimeArray[1] = splitTimeArray[1].trim();
@@ -384,7 +388,7 @@ public class ModuleParser {
             LocalTime endTime = LocalTime.parse(splitTimeArray[1], TIME_FORMATTER);
 
             if (endTime.compareTo(startTime) > 0) {
-                return timeSlot;
+                return timeSlot.toLowerCase();
             } else if (endTime.compareTo(startTime) == 0) {
                 throw new ModuleTimeException(INVALID_EQUAL_TIMESLOT_MESSAGE);
             } else {
