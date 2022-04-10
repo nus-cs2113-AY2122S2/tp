@@ -22,15 +22,27 @@ activate GeneralFunctions HELPER_COLOUR
 GeneralFunctions --> AddCommand
 deactivate GeneralFunctions
 
-AddCommand -> AddCommand: testCreditCardParameters()
-activate AddCommand COMMANDS_COLOUR
-AddCommand -> AddCommandInputTest: testsCardName(), testCashBack(), testCardLimit()
+AddCommand -> AddCommandInputTest: testCreditCardParameters()
+
 activate AddCommandInputTest HELPER_COLOUR
+
+AddCommandInputTest -> AddCommandInputTest: testsCardName()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: testCashBack()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: testCardLimit()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
 
 AddCommandInputTest --> AddCommand
 deactivate AddCommandInputTest
-AddCommand --> AddCommand
-deactivate AddCommand COMMANDS_COLOUR
 
 create CreditCard
 AddCommand -> CreditCard: CreditCard()
