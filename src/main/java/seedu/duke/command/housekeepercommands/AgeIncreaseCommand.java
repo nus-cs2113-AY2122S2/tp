@@ -38,6 +38,16 @@ public class AgeIncreaseCommand extends Command {
         ui.printMessage("**Over age limit housekeeper will be removed from list**");
         ui.printOverAgeList(overAgeHousekeeperList);
         housekeeperList.deleteOverAgeHousekeeper();
+    }
+
+    /**
+     * This method updates all the age of housekeeper in records by one.
+     *
+     * @param listContainer The list of information.
+     * @throws IOException Write to file fail.
+     */
+    public void writeAgeIncreaseToFile(ListContainer listContainer) throws IOException {
+        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
         housekeeperFileManager.save(housekeeperList);
     }

@@ -271,7 +271,7 @@ Step 6: It will then proceed to print noted message to inform user that the dele
 
 Step 7: Changes in the list will be updated to file by calling `HousekeeperFileManager#save()` method.
 
-![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperv2.jpg)
+![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperv3.jpg)
 
 
 ### Add Item Command

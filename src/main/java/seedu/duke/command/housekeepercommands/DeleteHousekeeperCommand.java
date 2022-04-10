@@ -57,6 +57,17 @@ public class DeleteHousekeeperCommand extends Command {
         ui.printMessage("Deleted " + name + " from the list of profile");
         ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
         ui.printBottomLine();
+    }
+
+    /**
+     * After deletion of housekeeper, the housekeeper file has to be updated. This method will update
+     * by removing the housekeeper from the records.
+     *
+     * @param listContainer List of information.
+     * @throws IOException Write to file has failed.
+     */
+    public void writeHousekeeperToFile(ListContainer listContainer) throws IOException {
+        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
         housekeeperFileManager.save(housekeeperList);
     }
