@@ -17,8 +17,7 @@ public class AddCommand extends Command {
         TASK, MODULE
     }
 
-    private static final String ADD_TASK_MESSAGE = StringConstants.ADD_TASK_MESSAGE_TOP + LS + "%s" + LS
-            + LS;
+    private static final String ADD_TASK_MESSAGE = StringConstants.ADD_TASK_MESSAGE_TOP + LS + "%s" + LS + LS;
     private static final String ADD_MODULE_MESSAGE = StringConstants.ADD_MODULE_MESSAGE_TOP + LS + "%s";
 
     private final AddObjectType typeToAdd;

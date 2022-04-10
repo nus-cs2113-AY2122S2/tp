@@ -20,7 +20,7 @@ public class EditCommand extends Command {
     private static final String EDIT_TASK_SUCCESS = StringConstants.EDIT_TASK_SUCCESS;
     private static final String EDIT_TASK_WITH_MODULE_SUCCESS = StringConstants.EDIT_TASK_WITH_MODULE_SUCCESS;
     private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION_STR;
-    private static final String ESTIMATED_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
+    private static final String TASK_ESTIMATED_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
     private static final String TASK_NAME = StringConstants.TASK_NAME_STR;
 
     private String moduleCode;
@@ -69,7 +69,7 @@ public class EditCommand extends Command {
             this.taskParameter = TASK_DESCRIPTION;
             break;
         case WORKING_TIME_ONLY:
-            this.taskParameter = ESTIMATED_WORKING_TIME;
+            this.taskParameter = TASK_ESTIMATED_WORKING_TIME;
             break;
         default:
             this.taskParameter = TASK_NAME;
@@ -96,7 +96,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        if (taskIndex < 0) {
+        if (!Objects.isNull(moduleCode)) {
             editModuleDescription(moduleList);
         } else {
             Module targetModule = getTargetModule(moduleList);
@@ -118,7 +118,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Changes task parameter (either task description or estimated working time) of the target task.
+     * Changes task parameter (either task name, description or estimated working time) of the target task.
      *
      * @param targetModule The module (or General Tasks) the target task belongs to.
      * @throws ModHappyException If the task to be edited does not exist, or if the working time entered cannot be
@@ -132,7 +132,7 @@ public class EditCommand extends Command {
         case TASK_DESCRIPTION:
             targetTask.setTaskDescription(changedParameter);
             break;
-        case ESTIMATED_WORKING_TIME:
+        case TASK_ESTIMATED_WORKING_TIME:
             targetTask.setWorkingTime(changedParameter);
             break;
         default:

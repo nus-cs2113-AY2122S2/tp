@@ -99,6 +99,19 @@ public class AddModuleParser extends AddParser {
         throw new InvalidCompulsoryParameterException();
     }
 
+    //@@author Yzkkk
+    /**
+     * Checks if the description is empty.
+     * @param moduleDescription The description of the module to be added
+     * @throws EmptyParamException If the module description is empty
+     */
+    private void checkForEmptyDescription(String moduleDescription) throws EmptyParamException {
+        if (!Objects.isNull(moduleDescription) && moduleDescription.isBlank()) {
+            throw new EmptyParamException(MODULE_DESCRIPTION_STR);
+        }
+    }
+
+    //@@author Yzkkk
     /**
      * Parses the modular credit from a string to an integer, with checks on its validity.
      * @param modularCreditStr The string representation of the modular credit
@@ -117,17 +130,6 @@ public class AddModuleParser extends AddParser {
             throw new InvalidNumberException(modularCreditStr);
         }
         return modularCredit;
-    }
-
-    /**
-     * Checks if the description is empty.
-     * @param moduleDescription The description of the module to be added
-     * @throws EmptyParamException If the module description is empty
-     */
-    private void checkForEmptyDescription(String moduleDescription) throws EmptyParamException {
-        if (!Objects.isNull(moduleDescription) && moduleDescription.isBlank()) {
-            throw new EmptyParamException(MODULE_DESCRIPTION_STR);
-        }
     }
 
     //@@author chooyikai

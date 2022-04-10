@@ -45,7 +45,7 @@ public class TaskList {
      * @throws NoSuchTaskException If the task does not exist
      */
     public Task removeTask(int index) throws NoSuchTaskException {
-        if (index >= taskList.size() || index < 0) {
+        if (index >= taskList.size()) {
             throw new NoSuchTaskException();
         }
         Task task = getTask(index);
@@ -62,7 +62,7 @@ public class TaskList {
      * @throws NoSuchTaskException If the user-supplied index is out of bounds
      */
     public Task addTag(String tagDescription, int index) throws NoSuchTaskException {
-        if (index >= taskList.size() || index < 0) {
+        if (index >= taskList.size()) {
             throw new NoSuchTaskException();
         }
         Task task = getTask(index);
@@ -80,7 +80,7 @@ public class TaskList {
      * @throws NoSuchTagException If the user-supplied tag to be removed does not exist
      */
     public Task removeTag(String tagDescription, int index) throws NoSuchTaskException, NoSuchTagException {
-        if (index >= taskList.size() || index < 0) {
+        if (index >= taskList.size()) {
             throw new NoSuchTaskException();
         }
         Task task = getTask(index);
