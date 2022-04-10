@@ -2468,11 +2468,11 @@ The following are some test cases for you to try:
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                     | Command                       | Expected result                                                                 |
-|:----------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------|
-| Day Number exceed the range of 1 to 7.        | `schedule /clear 9`           | Error response (invalid day number), no plan in the schedule is being cleared.  |
-| Command with extra arguments.                 | `schedule /clear 1 extraline` | Error response (invalid command), no plan in the schedule is being cleared.     |
-| Extra whitespaces between commands arguments. | :x: `schedule     /clear 1`   | Error response (invalid user action), no plan in the schedule is being cleared. |
+| Test Case                                      | Command                       | Expected result                                                                 |
+|:-----------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------|
+| Day Number exceed the range of 1 to 7.         | `schedule /clear 9`           | Error response (invalid day number), no plan in the schedule is being cleared.  |
+| Command with extra arguments.                  | `schedule /clear 1 extraline` | Error response (invalid command), no plan in the schedule is being cleared.     |
+| Extra whitespaces between commands arguments.  | :x: `schedule     /clear 1`   | Error response (invalid user action), no plan in the schedule is being cleared. |
 
 #### Clearing All Plans In The Schedule
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#clear-schedule-for-the-week-schedule-clearall).)
