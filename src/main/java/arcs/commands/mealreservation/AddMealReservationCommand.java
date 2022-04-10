@@ -70,7 +70,7 @@ public class AddMealReservationCommand extends Command {
             MenuItem menuItem = menuItemManager.getMenuItemByNameAndType(menuItemType,mealsReserved.get(menuItemType));
             if (menuItem != null) {
                 menuItemsToReserve.add(menuItem);
-            } else if (menuItem == null) {
+            } else {
                 System.out.println("There was an invalid Menu Item, only the valid ones were reserved");
             }
         }
@@ -79,9 +79,7 @@ public class AddMealReservationCommand extends Command {
         }
         try {
             mealReservationManager.reserveMeal(customer, route, menuItemsToReserve);
-        } catch (ArcsException e) {
-            return new CommandResult(e.getMessage());
-        } catch (NullPointerException e) {
+        } catch (ArcsException | NullPointerException e) {
             return new CommandResult(e.getMessage());
         }
         return new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()

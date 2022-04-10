@@ -119,8 +119,7 @@ public class AddMenuItemCommand extends Command {
             return new CommandResult(DUPLICATE_ITEM_MESSAGE);
         }
         menuItemManager.addMenuItem(toAdd);
-        CommandResult result = new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
+        return new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
                 + toAdd.getMenuItemInfo());
-        return result;
     }
 }
