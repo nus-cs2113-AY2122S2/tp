@@ -23,10 +23,10 @@ public class ChangeGitHubLinkCommand extends Command {
             System.out.println(Constants.INDEX_OUT_OF_RANGE);
             return Response.deadlineUnsuccessfully();
         }
-        projectList.addGithubLink(projectIndex, githubLink);
         if (project == null) {
             return Response.addGithubLinkUnsuccessfully();
         }
+        projectList.addGithubLink(projectIndex, githubLink);
         return Response.addGithubLinkSuccessfully(project.getTitle(), project.getGitHubLink());
     }
 }
