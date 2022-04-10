@@ -43,7 +43,7 @@ public class AddAvailabilityTest {
     }
 
     @Test
-    public void UserDoesNotExist_exceptionThrown() throws HotelLiteManagerException, IOException {
+    public void userDoesNotExist_exceptionThrown() throws HotelLiteManagerException, IOException {
         AddAvailabilityCommand addAvailabilityCommand =
                 new AddAvailabilityCommand("han / 1,2");
         assertThrows(UserDoesNotExistException.class, () -> addAvailabilityCommand.execute(listContainer, ui));
