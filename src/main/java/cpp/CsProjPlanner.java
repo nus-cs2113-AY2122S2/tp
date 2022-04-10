@@ -54,6 +54,5 @@ public class CsProjPlanner {
         Storage.save(projectList);
         Response.displayExit();
         logger.log(Level.INFO, "Exiting the system...");
-
     }
 }

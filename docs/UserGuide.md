@@ -280,4 +280,5 @@ Please note that the file name should not be changed.
 | view a project      | `view [project_name]`                    |
 | addlanguage	      | `addlanguage [project_index] [language]` |
 | listlanguages	      | `listlanguages`                          |
+| help                | `help`                                   |
 | Exit                | `exit`                                   |

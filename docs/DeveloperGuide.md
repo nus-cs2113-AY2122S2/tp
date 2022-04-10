@@ -9,8 +9,8 @@
   - [Print Project List](#print-project-list)
   - [Todo feature](#todo-feature)
   - [View a Project](#view-a-project)
-  - [Add a Deadline to a Project](#add-a-deadline-to-a-project)
-  - [Add a Deadline to a Todo](#add-a-deadline-to-a-todo)
+  - [Set the Deadline to a Project](#set-the-deadline-to-a-project)
+  - [Set the Deadline to a Todo](#set-the-deadline-to-a-todo)
 - [Proposed Features](#proposed-features)
   - [Tasks Due Soon Feature](#tasks-due-soon-feature)
 - [Previous project structure](#previous-project-structure)
@@ -23,17 +23,17 @@
 - [Glossary](#glossary)
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Instructions for manual testing](#instructions-for-manual-testing)
-  -[Launch and shutdown](#launch-and-shutdown)
-  -[Adding a project](#adding-a-project)
-  -[Deleting a project](#deleting-a-project)
-  -[Adding todos](#adding-todos)
-  -[Setting project deadline](#setting-project-deadline)
-  -[Changing the GitHub repo](#changing-the-github-repo)
-  -[Opening the GitHub repo](#opening-the-github-repo)
-  -[Setting todo's deadline](#setting-todos-deadline)
-  -[Viewing details of a project](#viewing-details-of-a-project)
-  -[Adding languages to a project](#adding-languages-to-a-project)
-  -[Listing languages of a project](#listing-languages-of-a-project)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Adding a project](#adding-a-project)
+  - [Deleting a project](#deleting-a-project)
+  - [Adding todos](#adding-todos)
+  - [Setting project deadline](#setting-project-deadline)
+  - [Changing the GitHub repo](#changing-the-github-repo)
+  - [Opening the GitHub repo](#opening-the-github-repo)
+  - [Setting todo's deadline](#setting-todos-deadline)
+  - [Viewing details of a project](#viewing-details-of-a-project)
+  - [Adding languages to a project](#adding-languages-to-a-project)
+  - [Listing languages of a project](#listing-languages-of-a-project)
 
 
 ## Acknowledgements
@@ -167,8 +167,8 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 
 
-#### Add a Deadline to a Project
-![image info](./UmlDiagrams/AddProjectDeadline.jpg)
+#### Set the Deadline to a Project
+![image info](./UmlDiagrams/ProjectDeadline.jpg)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “addprojdeadline”, it will create an `AddProjectDeadlineCommandParser` object and call its `parse()` function to parse the user input
 
@@ -178,20 +178,18 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 **Step 4.** `executeCommand()` will call `execute()` method of `AddProjectDeadlineCommand`.
 
-**Step 5.** If the number of arguments is valid, call the projectList’s `addProjectDeadline()` method, with the arguments of title and deadline.
+**Step 5.** If the number of arguments is valid, call the projectList’s `addProjectDeadline()` method, with the arguments of index and deadline.
 
-**Step 6.** We call the `findProjectIndex()` method to find the given project that matches the title provided. If the value indicates that the project does not exist, return immediately and indicate no deadline was added.
+**Step 6.** If the index of the project was found, call that specific Project’s `setDeadline()` method and update the deadline.
 
-**Step 7.** If the index of the project was found, call that specific Project’s `setDeadline()` method and update the deadline.
+**Step 7.** The string deadline is used to build the class object `Deadline`
 
-**Step 8.** The string deadline is used to build the class object `Deadline`
-
-**Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
+**Step 8.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
 
 
 
-#### Add a Deadline to a Todo
-![image info](./UmlDiagrams/AddTodoDeadline.jpg)
+#### Set the Deadline to a Todo
+![image info](./UmlDiagrams/TodoDeadline.jpg)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “addtododeadline”, it will create an `AddTodoDeadlineCommandParser` object and call its `parse()` function to parse the user input
 

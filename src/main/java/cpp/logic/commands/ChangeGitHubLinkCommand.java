@@ -21,12 +21,12 @@ public class ChangeGitHubLinkCommand extends Command {
             project = projectList.getProject(projectIndex - 1);
         } catch (IndexOutOfBoundsException e) {
             System.out.println(Constants.INDEX_OUT_OF_RANGE);
-            return Response.addProjectDeadlineUnsuccessfully();
+            return Response.deadlineUnsuccessfully();
         }
         projectList.addGithubLink(projectIndex, githubLink);
         if (project == null) {
             return Response.addGithubLinkUnsuccessfully();
         }
-        return Response.addGithubLinkSuccessfully(project.getTitle(), project.getDeadline());
+        return Response.addGithubLinkSuccessfully(project.getTitle(), project.getGitHubLink());
     }
 }
