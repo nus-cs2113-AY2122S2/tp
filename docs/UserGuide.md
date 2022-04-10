@@ -408,11 +408,11 @@ Example 5: `find appointment /info doctor name, John` <br>
 Example 6: `find appointment /info date, 2022-10-15`
 
 
-### Additional Features
+### Features involving Medicine Inventory
 
-#### Retrieving List of Expired Medicine in the inventory
+#### Retrieving List of Expired/Run Out Medicine in the inventory
 
-To retrieve list of expired medicine in your inventory, you can simply call the `update medicines` command. This command
+To retrieve list of expired medicine or depleted medicine in your inventory, you can simply call the `update medicines` command. This command
 requires no additional parameter. **{DO NOTE THAT THIS LIST WILL BE CLEARED AND THE INFORMATION WITHIN WILL BE DESTROYED
 UPON EXIT OF THE APP}**
 
@@ -420,7 +420,7 @@ Format: `update medicines`
 
 Example: `update medicines`
 
-##### Clearing List of Expired Medicine
+#### Clearing List of Expired Medicine
 
 If you choose to clear the list of expired medicine manually you can use the `clear old medicines` command. This commmand
 requires no additional parameter.
@@ -428,6 +428,22 @@ requires no additional parameter.
 Format: `clear old medicines`
 
 Example: `clear old medicines`
+
+#### Dispensing Medicine to Patients who have appointments on that day
+
+You can use this feature to generate the Batch IDs of the medicines that are required to be dispensed to the patient on
+his appointment day. If certain medicines you wish to dispense are not in stock, HalpMi will show you a list of medicine
+you are missing in the inventory. If all the required medicines are present in the inventory, HalpMi will show the list
+of Medicines you have to dispense along with the Batch ID so that you can clear batches with earlier expiry dates first.
+
+You can use this feature using the `dispense medicine` command. This command takes in the NRIC of an existing patient
+followed by a list of medicine you would like to dispense.
+
+Format: `dispense medicine /info [NRIC],[Medicine Name],[Quantity]`
+
+Example: `dispense medicine /info S1234567A,Paracetamol,10,Aspirin,20`
+
+You need to give at list 1 medicine to dispense.
 
 ### Saving
 
@@ -476,27 +492,30 @@ TO BE UPDATED
 
 ## Command Summary
 
-| Action               | Format, Examples                                                                                                                                                                                                                                            |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `add doctor`         | `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g. `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                            |
-| `add patient`        | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                                    |
-| `add medicine`       | `add medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`<br />e.g. `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                                                        |
-| `add appointment`    | `add appointment /info [patient nric], [doctor nric], [appointment date], [appointment details]`<br />e.g. `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup` |
-| `view doctor`        | `view doctor` or `view doctor /info [criteria], [input value]`<br />e.g. `view doctor /info name, Jimmy`                                                                                                                                                    |
-| `view patient`       | `view patient` or `view patient /info [criteria], [input value]`<br />e.g. `view patient /info name, Steven`                                                                                                                                                |
-| `view medicine`      | `view medicine` or `view medicine /info info [criteria], [input value]`<br />e.g. `view medicine /info name, Paracetamol`                                                                                                                                   |
-| `view appointment`   | `view appointment` or `view appointment /info [criteria], [input value]`<br />e.g. `view appointment /info id, 12356701017647`                                                                                                                                        |
-| `delete doctor`      | `delete doctor /info [nric]`<br />e.g. `delete doctor /info S1234567A`                                                                                                                                                                                      |
-| `delete patient`     | `delete patient /info [nric]`<br />e.g. `delete patient /info S1234567A`                                                                                                                                                                                    |
-| `delete medicine`    | `delete medicine /info [batch id]`<br />e.g. `delete medicine /info S234`                                                                                                                                                                                   |
-| `delete appointment` | `delete appointment /info [appointment id]`<br />e.g. `delete appointment /info 12356701017647`                                                                                                                                                                       |
-| `find doctor`        | `find doctor /info [parameter], [keyword to find]`<br />e.g.`find doctor /info name, Jimmy`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or specialization)                                                               |
-| `find patient`       | `find patient /info [parameter], [keyword to find]`<br />e.g.`find patient /info name, Steven Oz`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or admissiondate)                                                          |
-| `find medicine`      | `find medicine /info [parameter], [keyword to find]`<br />e.g.`find medicine /info name, Paracetamol`<br />e.g.parameter must be one of the six (name, id, dosage, expiry, sideeffects, quantity)                                                           |
-| `find appointment`   | `find appointment /info [parameter], [keyword to find]`<br />e.g.`find appointment /info id, 12356701017647` <br />e.g.parameter must be one of the six (appointment id, patient nric, patient name, doctor nric, doctor name, appointment date)                      |
-| `edit doctor`        | `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g.`edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                           |
-| `edit patient`       | `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g.`edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                                   |
-| `edit medicine`      | `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g.`edit medicine /info A123,Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                                       |
-| `help`               | view the help function for all the commands required                                                                                                                                                                                                        |
-| `bye`                | exit the programme                                                                                                                                                                                                                                          |
+| Action                | Format, Examples                                                                                                                                                                                                                                 |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `add doctor`          | `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g. `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                 |
+| `add patient`         | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                         |
+| `add medicine`        | `add medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`<br />e.g. `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                       |
+| `add appointment`     | `add appointment /info [patient nric], [doctor nric], [appointment date], [appointment details]`<br />e.g. `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup`                                                        |
+| `view doctor`         | `view doctor` or `view doctor /info [criteria], [input value]`<br />e.g. `view doctor /info name, Jimmy`                                                                                                                                         |
+| `view patient`        | `view patient` or `view patient /info [criteria], [input value]`<br />e.g. `view patient /info name, Steven`                                                                                                                                     |
+| `view medicine`       | `view medicine` or `view medicine /info info [criteria], [input value]`<br />e.g. `view medicine /info name, Paracetamol`                                                                                                                        |
+| `view appointment`    | `view appointment` or `view appointment /info [criteria], [input value]`<br />e.g. `view appointment /info id, 12356701017647`                                                                                                                   |
+| `delete doctor`       | `delete doctor /info [nric]`<br />e.g. `delete doctor /info S1234567A`                                                                                                                                                                           |
+| `delete patient`      | `delete patient /info [nric]`<br />e.g. `delete patient /info S1234567A`                                                                                                                                                                         |
+| `delete medicine`     | `delete medicine /info [batch id]`<br />e.g. `delete medicine /info S234`                                                                                                                                                                        |
+| `delete appointment`  | `delete appointment /info [appointment id]`<br />e.g. `delete appointment /info 12356701017647`                                                                                                                                                  |
+| `find doctor`         | `find doctor /info [parameter], [keyword to find]`<br />e.g.`find doctor /info name, Jimmy`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or specialization)                                                    |
+| `find patient`        | `find patient /info [parameter], [keyword to find]`<br />e.g.`find patient /info name, Steven Oz`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or admissiondate)                                               |
+| `find medicine`       | `find medicine /info [parameter], [keyword to find]`<br />e.g.`find medicine /info name, Paracetamol`<br />e.g.parameter must be one of the six (name, id, dosage, expiry, sideeffects, quantity)                                                |
+| `find appointment`    | `find appointment /info [parameter], [keyword to find]`<br />e.g.`find appointment /info id, 12356701017647` <br />e.g.parameter must be one of the six (appointment id, patient nric, patient name, doctor nric, doctor name, appointment date) |
+| `edit doctor`         | `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g.`edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                |
+| `edit patient`        | `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g.`edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                        |
+| `edit medicine`       | `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g.`edit medicine /info A123,Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                            |
+| `update medicines`    | `update medicines` <br />e.g `update medicines`                                                                                                                                                                                                  |
+| `clear old medicines` | `clear old medicines` <br />e.g `clear old medicines`                                                                                                                                                                                            |
+| `dispense medicine`   | `dispense medicine /info [NRIC],[Medicine Name],[Quantity]`<br/>e.g `dispense medicine /info S1234567A,Paracetamol,10,Aspirin,20`                                                                                                                |
+| `help`                | view the help function for all the commands required                                                                                                                                                                                             |
+| `bye`                 | exit the programme                                                                                                                                                                                                                               |
 

@@ -77,7 +77,6 @@ public class MedicineList extends List {
 
     public void view() throws UserInputErrorException {
         CommandLineTable medicineTable = new CommandLineTable();
-        //st.setRightAlign(true);//if true then cell text is right aligned
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
 
@@ -116,7 +115,6 @@ public class MedicineList extends List {
 
     public void viewExpired() throws UserInputErrorException {
         CommandLineTable medicineTable = new CommandLineTable();
-        //st.setRightAlign(true);//if true then cell text is right aligned
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
         if (expiredMedicines.size() == 0) {

@@ -127,11 +127,11 @@ calls the validator class to validate the parameters, and then returns a command
 ![StorageClassUML](diagrams/StorageClassUML.png)
 
 The Storage class holds 4 different Lists found in the Assets collection as seen in the Class Diagram shown above. Any edits made
-to these Lists must be made by accessing them from the Storage object. The Storage class also has 4 load functions for each type of Asset,
+to these Lists must be made by accessing them from the Storage object. The Storage class also has a genericLoadFunction for all types of Asset,
 namely Patient, Doctor, Medicine and Appointment. These methods read in the respective text files to load existing information
-into their respective lists. The Storage class has 4 save methods that save the information found in the 4 Lists into text files
+into their respective lists. The Storage class has 5 save methods that save the information found in the 4 Lists into text files
 in the CSV format. The Directory of these text files is found in the DIR String variable, the PATH for each of the 4 text files
-can be found in the PATH_MED, PATH_PAT, PATH_DOC, PATH_APP String variables respectively.
+can be found in the PATH_MED, PATH_PAT, PATH_DOC, PATH_APP, PATH_APT_MEDS String variables respectively.
 
 ### Asset classes
 
@@ -231,6 +231,23 @@ parse and identify the command string and parameters string before parsing withi
 then a ViewAppointmentCommand is returned. Else, a FindAppointmentCommand with the parameters is returned. The Command
 is executed which displays the appointments to the User. The command allows calls to get a Status variable to be
 returned to the Manager.
+
+
+### Dispense Medicine to Patient
+
+This feature allows the user to generate the Batch IDs of the medicine that he/she wishes to dispense to a patient
+on his day of appointment. The logic behind this feature is that, in a clinic there will be many batches of
+the same medication, each batch differing by the expiry date and the quantity left. This feature allows the user to
+simply give the list of Medicine Names and the Quantity of each medicine required. HalpMi will figure out the best way
+to dispense each type of medicine such that medicine that expire earlier are dispensed first before dispensing later ones.
+HalpMi also generates the list of Medicine that is not available in the inventory if the medicines listed by the user
+does not have the necessary quantity. Below is a sequence diagram showcasing how this functionality is achieved.
+
+This would be the basic flow of application logic when the user gives an input
+`dispense medicine /info S1234567A,Paracetamol,10`. Given that both the Patient has an appointment today and the medicine
+requested is in stock.
+
+![DispenseMed](diagrams/DispenseMed.png)
 
 ---------------------------------------------------------------------------------------------------------------
 ## Product scope

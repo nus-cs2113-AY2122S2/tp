@@ -40,17 +40,8 @@ public class Manager {
         }
     }
 
-    /*
-     * Method that initialises the relevant Command object and executes the execute method.
-     * Upon execution, returns either a success message or throws exception.
-     * @ param commandWord a String that holds the initial command given by User
-     * @ param parameters a String that holds all the additional parameters given following the Command
-     * @ return Status object - enum that holds various success messages
-     * @ throws HalpmiException when the commandWord or parameters is not following correct formatting
-     * @ throws DuplicateEntryException when duplicate entries are being added through the Command
-     * @ throws NotFoundException when certain data was not found
-     */
-    private Status executeCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
+
+    private Status executeAddCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
             DuplicateEntryException {
 
         Command command;
@@ -60,56 +51,12 @@ public class Manager {
             command = Parser.parseAddPatient(parameters);
             status = command.execute(storage.patients);
             break;
-        case "delete patient":
-            command = Parser.parseDeletePatient(parameters);
-            status = command.execute(storage.patients);
-            break;
-        case "view patient":
-            command = Parser.parseViewPatient(parameters);
-            status = command.execute(storage.patients);
-            break;
-        case "edit patient":
-            command = Parser.parseEditPatient(parameters);
-            status = command.execute(storage.patients);
-            break;
         case "add doctor":
             command = Parser.parseAddDoctor(parameters);
             status = command.execute(storage.doctors);
             break;
-        case "delete doctor":
-            command = Parser.parseDeleteDoctor(parameters);
-            status = command.execute(storage.doctors);
-            break;
-        case "view doctor":
-            command = Parser.parseViewDoctor(parameters);
-            status = command.execute(storage.doctors);
-            break;
-        case "edit doctor":
-            command = Parser.parseEditDoctor(parameters);
-            status = command.execute(storage.doctors);
-            break;
         case "add medicine":
             command = Parser.parseAddMedicine(parameters);
-            status = command.execute(storage.medicines);
-            break;
-        case "delete medicine":
-            command = Parser.parseDeleteMedicine(parameters);
-            status = command.execute(storage.medicines);
-            break;
-        case "view medicine":
-            command = Parser.parseViewMedicine(parameters);
-            status = command.execute(storage.medicines);
-            break;
-        case "edit medicine":
-            command = Parser.parseEditMedicine(parameters);
-            status = command.execute(storage.medicines);
-            break;
-        case "update medicines":
-            command = Parser.parseUpdateMedicineStock(parameters);
-            status = command.execute(storage.medicines);
-            break;
-        case "clear old medicines":
-            command = Parser.parseClearExpiredMedicine(parameters);
             status = command.execute(storage.medicines);
             break;
         case "add appointment":
@@ -122,22 +69,103 @@ public class Manager {
             command = Parser.parseAddAppointment(parameters);
             status = command.execute(storage.appointments);
             break;
-        case "view appointment":
-            command = Parser.parseViewAppointment(parameters);
-            status = command.execute(storage.appointments);
+        default:
+            throw new UserInputErrorException("Invalid Command given!");
+        }
+
+        return status;
+    }
+
+    private Status executeDeleteCommand(String commandWord, String parameters) throws HalpmiException,
+            NotFoundException, DuplicateEntryException {
+
+        Command command;
+        Status status = null;
+        switch (commandWord) {
+        case "delete patient":
+            command = Parser.parseDeletePatient(parameters);
+            status = command.execute(storage.patients);
             break;
-        case "find appointment":
-            command = Parser.parseFindAppointment(parameters);
-            status = command.execute(storage.appointments);
+        case "delete doctor":
+            command = Parser.parseDeleteDoctor(parameters);
+            status = command.execute(storage.doctors);
+            break;
+        case "delete medicine":
+            command = Parser.parseDeleteMedicine(parameters);
+            status = command.execute(storage.medicines);
             break;
         case "delete appointment":
             command = Parser.parseDeleteAppointment(parameters);
             status = command.execute(storage.appointments);
             break;
+        default:
+            throw new UserInputErrorException("Invalid Command given!");
+        }
+        return status;
+    }
+
+    private Status executeViewCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
+            DuplicateEntryException {
+
+        Command command;
+        Status status = null;
+        switch (commandWord) {
+        case "view patient":
+            command = Parser.parseViewPatient(parameters);
+            status = command.execute(storage.patients);
+            break;
+        case "view doctor":
+            command = Parser.parseViewDoctor(parameters);
+            status = command.execute(storage.doctors);
+            break;
+        case "view medicine":
+            command = Parser.parseViewMedicine(parameters);
+            status = command.execute(storage.medicines);
+            break;
+        case "view appointment":
+            command = Parser.parseViewAppointment(parameters);
+            status = command.execute(storage.appointments);
+            break;
+        default:
+            throw new UserInputErrorException("Invalid Command given!");
+        }
+        return status;
+    }
+
+    private Status executeEditCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
+            DuplicateEntryException {
+
+        Command command;
+        Status status = null;
+        switch (commandWord) {
+        case "edit patient":
+            command = Parser.parseEditPatient(parameters);
+            status = command.execute(storage.patients);
+            break;
+        case "edit doctor":
+            command = Parser.parseEditDoctor(parameters);
+            status = command.execute(storage.doctors);
+            break;
+        case "edit medicine":
+            command = Parser.parseEditMedicine(parameters);
+            status = command.execute(storage.medicines);
+            break;
         case "edit appointment":
             command = Parser.parseEditAppointment(parameters);
             status = command.execute(storage.appointments);
             break;
+        default:
+            throw new UserInputErrorException("Invalid Command given!");
+        }
+        return status;
+    }
+
+    private Status executeFindCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
+            DuplicateEntryException {
+
+        Command command;
+        Status status = null;
+        switch (commandWord) {
         case "find doctor":
             command = Parser.parseFindDoctor(parameters);
             status = command.execute(storage.doctors);
@@ -148,6 +176,30 @@ public class Manager {
             break;
         case "find medicine":
             command = Parser.parseFindMedicine(parameters);
+            status = command.execute(storage.medicines);
+            break;
+        case "find appointment":
+            command = Parser.parseFindAppointment(parameters);
+            status = command.execute(storage.appointments);
+            break;
+        default:
+            throw new UserInputErrorException("Invalid Command given!");
+        }
+        return status;
+    }
+
+    private Status executeOtherCommands(String commandWord, String parameters) throws HalpmiException,
+            NotFoundException, DuplicateEntryException {
+
+        Command command;
+        Status status = null;
+        switch (commandWord) {
+        case "update medicines":
+            command = Parser.parseUpdateMedicineStock(parameters);
+            status = command.execute(storage.medicines);
+            break;
+        case "clear old medicines":
+            command = Parser.parseClearExpiredMedicine(parameters);
             status = command.execute(storage.medicines);
             break;
         case "dispense medicine":
@@ -161,6 +213,42 @@ public class Manager {
             command.execute(storage.appointments);
             status = command.execute(storage.medicines);
             break;
+        default:
+            throw new UserInputErrorException("Invalid Command given!");
+        }
+        return status;
+    }
+
+    /*
+     * Method that initialises the relevant Command object and executes the execute method.
+     * Upon execution, returns either a success message or throws exception.
+     * @ param commandWord a String that holds the initial command given by User
+     * @ param parameters a String that holds all the additional parameters given following the Command
+     * @ return Status object - enum that holds various success messages
+     * @ throws HalpmiException when the commandWord or parameters is not following correct formatting
+     * @ throws DuplicateEntryException when duplicate entries are being added through the Command
+     * @ throws NotFoundException when certain data was not found
+     */
+    private Status executeCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
+            DuplicateEntryException {
+        String firstCommand = commandWord.split(" ")[0].trim();
+        Status status = null;
+        switch (firstCommand) {
+        case "add":
+            status = executeAddCommand(commandWord,parameters);
+            break;
+        case "delete":
+            status = executeDeleteCommand(commandWord,parameters);
+            break;
+        case "view":
+            status = executeViewCommand(commandWord,parameters);
+            break;
+        case "edit":
+            status = executeEditCommand(commandWord,parameters);
+            break;
+        case "find":
+            status = executeFindCommand(commandWord,parameters);
+            break;
         case "help":
             status = Status.PRINT_HELP;
             break;
@@ -170,7 +258,7 @@ public class Manager {
             isTerminated = true;
             break;
         default:
-            throw new UserInputErrorException("Invalid Command given!");
+            status = executeOtherCommands(commandWord,parameters);
         }
         return status;
     }

@@ -4,5 +4,7 @@ HALPMI
 -------------------------
 HalpMi: Welcome! This is the Hospital Management System.
         Please type in your input
+
 You: HalpMi: Invalid Command given!
+
 You: Terminated
