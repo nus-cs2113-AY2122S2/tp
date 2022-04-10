@@ -1384,7 +1384,7 @@ Hence, to simplify the implementation, the team decided to simply
 rewrite all plans to the resource file whenever a plan is deleted.
 
 ###### Deleting a Plan Will Cause a Cascading Delete Action
-When an existing workout is deleted from the application, days which is scheduled with that plan 
+When an existing plan is deleted from the application, days which is scheduled with that plan 
 should also be cleared. This cascading delete action from `plan -> schedule` must be done so that
 the data in the `plans.txt`, `schedule.txt` files matches.
 
@@ -1689,20 +1689,20 @@ down this section.</span>
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchExercise.png)
 
-(Before Step 1) The user's input (in this case will be a `search /exercise <exercise keyword>` command) is obtained
+**(Before Step 1)** The user's input (in this case will be a `search /exercise <exercise keyword>` command) is obtained
 and parsed to obtain a `SearchCommand` object that contains the user's input.
 
 <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
-(Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/exercise`.
+**(Steps 1 to 3)** When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/exercise`.
 Subsequently, it will call the `ExerciseList#getExerciseList()` method to fetch the `exerciseList` that is used to 
 search through the available exercises.
 
-(Step 4) Based on the exercises from the `exerciseList`, the `searchExercise()` will retrieve all the exercises with name
+**(Step 4)** Based on the exercises from the `exerciseList`, the `searchExercise()` will retrieve all the exercises with name
 containing `<exercise keyword>` and display them in the user's terminal.
 
-(Step 5) The `SearchCommand` object returns to the `WerkIt` object.
+**(Step 5)** The `SearchCommand` object returns to the `WerkIt` object.
 
 This completes the process of searching for exercise in WerkIt!.
 
@@ -1720,22 +1720,22 @@ The following sequence diagram illustrates how the `search /workout` command wor
 have been removed from the sequence diagram. Reference frames will be elaborated further
 down this section.</span>
 
-![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchWorkout.png)
+![Search Workout Sequence Diagram](uml/sequenceDiagrams/search/images/searchWorkout.png)
 
-(Before Step 1) The user's input (in this case will be a `search /workout <exercise keyword or number of reps>` command) is obtained
+**(Before Step 1)** The user's input (in this case will be a `search /workout <exercise keyword or number of reps>` command) is obtained
 and parsed to obtain a `SearchCommand` object that contains the user's input.
 
 <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
-(Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/workout`.
+**(Steps 1 to 3)** When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/workout`.
 Subsequently, it will call the `WorkoutList#getWorkoutsDisplayList()` method to fetch the `workoutList` that is used to
 search through the available workouts.
 
-(Step 4) Based on the `workout` objects from the `workoutList`, the `searchWorkout()` will retrieve all the workouts with name
+**(Step 4)** Based on the `workout` objects from the `workoutList`, the `searchWorkout()` will retrieve all the workouts with name
 containing `<exercise keyword>` or repetitions equals to `<number of reps>`, and display them in the user's terminal.
 
-(Step 5) The `SearchCommand` object returns to the `WerkIt` object.
+**(Step 5)** The `SearchCommand` object returns to the `WerkIt` object.
 
 This completes the process of searching for workout in WerkIt!.
 
@@ -1753,22 +1753,22 @@ The following sequence diagram illustrates how the `search /plan` command works 
 have been removed from the sequence diagram. Reference frames will be elaborated further
 down this section.</span>
 
-![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchPlan.png)
+![Search Plan Sequence Diagram](uml/sequenceDiagrams/search/images/searchPlan.png)
 
-(Before Step 1) The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
+**(Before Step 1)** The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
 and parsed to obtain a `SearchCommand` object that contains the user's input.
 
 <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
-(Steps 1 to 3) When the SearchCommand#execute() method is called, it will identify that the search action is of type `/plan`.
+**(Steps 1 to 3)** When the SearchCommand#execute() method is called, it will identify that the search action is of type `/plan`.
 Subsequently, it will call the `PlanList#getPlansDisplayList()` method to fetch the `planList` that is used to
 search through the available plans.
 
-(Step 4) Based on the `plan` objects from the `planList`, the `searchPlan()` will retrieve all the plans with name
+**(Step 4)** Based on the `plan` objects from the `planList`, the `searchPlan()` will retrieve all the plans with name
 containing `<plan keyword>`, and display them in the user's terminal.
 
-(Step 5) The `SearchCommand` object returns to the `WerkIt` object.
+**(Step 5)** The `SearchCommand` object returns to the `WerkIt` object.
 
 This completes the process of searching for plan in WerkIt!.
 
@@ -1786,23 +1786,23 @@ The following sequence diagram illustrates how the `search /all` command works i
 have been removed from the sequence diagram. Reference frames will be elaborated further
 down this section.</span>
 
-![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
+![Search All Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
 
-(Before Step 1) The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
+**(Before Step 1)** The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
 and parsed to obtain a `SearchCommand` object that contains the user's input.
 
 <span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
-(Steps 1 to 7) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/all`.
+**(Steps 1 to 7)** When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/all`.
 Subsequently, it will call the `ExerciseList#getExerciseList()`, `WorkoutList#getWorkoutsDisplayList()` and
 `PlanList#getPlansDisplayList()` methods to fetch the `exerciseList`, `workoutList` and `planList` that are used to
 search through the available exercises, workouts and plans.
 
-(Step 8) Based on the exercises, `workout` objects and `plan` objects retrieved, the `searchAll()` will retrieve 
+**(Step 8)** Based on the exercises, `workout` objects and `plan` objects retrieved, the `searchAll()` will retrieve 
 all the matching results, and display them in the user's terminal.
 
-(Step 9) The `SearchCommand` object returns to the `WerkIt` object.
+**(Step 9)** The `SearchCommand` object returns to the `WerkIt` object.
 
 This completes the process of searching for everything in WerkIt!.
 
@@ -2196,9 +2196,9 @@ The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case                    | Command          | Expected result                                  |
-|:-----------------------------|:-----------------|:-------------------------------------------------|
-| Valid list exercise command. | `exercise /list` | List down all exercises stored in exercise list. |
+| Test Case                    | Command                 | Expected result                                  |
+|:-----------------------------|:------------------------|:-------------------------------------------------|
+| Valid list exercise command. | `exercise        /list` | List down all exercises stored in exercise list. |
 
 <br/>**Negative Test Cases**<br/>
 
@@ -2285,25 +2285,26 @@ The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case                                                           | Command                        | Expected result                                                                                                                                                                                                                                                                    |
-|:--------------------------------------------------------------------|:-------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Valid workout index number and new number of repetitions.           | `workout /update 1 10`         | The first workout in the workout list is updated to 10 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.         |
-| Valid workout index number and a highest new number of repetitions. | `workout /update 2 2147483647` | The first workout in the workout list is updated to 2147483647 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps. |
-| Valid workout index number and a minimum new number of repetitions. | `workout /update 3 1`          | The first workout in the workout list is updated to 1 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.          |
+| Test Case                                                           | Command                        | Expected result                                                                                                                                                                                                                                                                        |
+|:--------------------------------------------------------------------|:-------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid workout index number and new number of repetitions.           | `workout /update 1 10`         | The first workout in the workout list is updated to 10 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.             |
+| Valid workout index number and a highest new number of repetitions. | `workout /update 2 2147483647` | The second workout in the workout list is updated to 2,147,483,647 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps. |
+| Valid workout index number and a minimum new number of repetitions. | `workout /update 3 1`          | The third workout in the workout list is updated to 1 rep. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.               |
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                                                                                                                     | Command                                   | Expected result                                                     |
-|:----------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------|:--------------------------------------------------------------------|
-| Valid workout index number but new repetition value is smaller than 0.                                                                        | `workout /update 1 0`                     | Error response (reps specified is invalid), workout is not updated. |
-| Valid workout index number but new repetition value exceeds the upper bound for int data type.                                                | `workout /update 2 2147483648`            | Error response (invalid user argument), workout is not updated.     |
-| Valid workout index but new repetition value is identical with the repetition value of a workout in the workout list with same exercise name. | `workout /update 3 1`                     | Error response (identical workout), workout is not updated.         |
-| Workout index number or new repetition value is not an integer.                                                                               | `workout /update a 2`                     | Error response (invalid user argument), workout is not updated.     |
-| Missing either workout index number or new repetition value.                                                                                  | `workout /update 4`                       | Error response (insufficient argument), workout is not updated.     |
-| Missing both workout index number and new repetition value.                                                                                   | `workout /update `                        | Error response (invalid command).                                   |
-| Extra whitespaces between commands arguments.                                                                                                 | <pre>`workout         /update 1 2`</pre>  | Error response (invalid user action), workout is not updated.       |
-| Extra whitespaces between command parameters.                                                                                                 | <pre>`workout /update     1      2`</pre> | Error response (invalid user argument), workout is not updated.     |
-| Command with extra arguments.                                                                                                                 | `workout /update 1 8 8`                   | Error response (invalid user argument), workout is not updated.     |
+| Test Case                                                                                                                                     | Command                        | Expected result                                                     |
+|:----------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------|:--------------------------------------------------------------------|
+| Valid workout index number but new repetition value is smaller than 0.                                                                        | `workout /update 1 0`          | Error response (reps specified is invalid), workout is not updated. |
+| Valid workout index number but new repetition value exceeds the upper bound for int data type.                                                | `workout /update 2 2147483648` | Error response (invalid user argument), workout is not updated.     |
+| Valid workout index but new repetition value is identical with the repetition value of a workout in the workout list with same exercise name. | `workout /update 3 1`          | Error response (identical workout), workout is not updated.         |
+| Workout index number or new repetition value is not an integer.                                                                               | `workout /update a 2`          | Error response (invalid user argument), workout is not updated.     |
+| Missing either workout index number or new repetition value.                                                                                  | `workout /update 4`            | Error response (insufficient argument), workout is not updated.     |
+| Missing both workout index number and new repetition value.                                                                                   | `workout /update `             | Error response (invalid command).                                   |
+| Workout index number is smaller than 1 or greater than the total number of workouts in the workouts list.                                     | `workout /update 0 10`         | Error response (index out of range).                                |
+| Extra whitespaces between commands arguments.                                                                                                 | `workout       /update 1 2`    | Error response (invalid user action), workout is not updated.       |
+| Extra whitespaces between command parameters.                                                                                                 | `workout /update     1      2` | Error response (invalid user argument), workout is not updated.     |
+| Command with extra arguments.                                                                                                                 | `workout /update 1 8 8`        | Error response (invalid user argument), workout is not updated.     |
 
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
@@ -2370,19 +2371,19 @@ The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case               | Command           | Expected result                                        |
-|:------------------------|:------------------|:-------------------------------------------------------|
-| Valid plan index number | `plan /details 1` | All workouts in plan with index number 1 is displayed. |
+| Test Case               | Command           | Expected result                                         |
+|:------------------------|:------------------|:--------------------------------------------------------|
+| Valid plan index number | `plan /details 1` | All workouts in plan with index number 1 are displayed. |
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                                                                      | Command                              | Expected result                                                            |
-|:-----------------------------------------------------------------------------------------------|:-------------------------------------|:---------------------------------------------------------------------------|
-| Plan index number is smaller than 1 or greater than the total number of plan in the plan list. | `plan /details 0`                    | Error response (index out of range), workouts in plan is not displayed.    |
-| Command with extra arguments.                                                                  | `plan /details 1 1`                  | Error response (invalid user argument), workouts in plan is not displayed. |
-| Extra whitespaces between commands arguments.                                                  | <pre>`plan         /details 1`</pre> | Error response (invalid user action), workouts in plan is not displayed.   |
-| Missing plan index number.                                                                     | `plan /details`                      | Error response (invalid command).                                          |
-| Plan index number is not an integer.                                                           | `plan /details a`                    | Error response (invalid user argument).                                    |
+| Test Case                                                                                       | Command                 | Expected result                                                             |
+|:------------------------------------------------------------------------------------------------|:------------------------|:----------------------------------------------------------------------------|
+| Plan index number is smaller than 1 or greater than the total number of plans in the plan list. | `plan /details 0`       | Error response (index out of range), workouts in plan are not displayed.    |
+| Command with extra arguments.                                                                   | `plan /details 1 1`     | Error response (invalid user argument), workouts in plan are not displayed. |
+| Extra whitespaces between commands arguments.                                                   | `plan       /details 1` | Error response (invalid user action), workouts in plan are not displayed.   |
+| Missing plan index number.                                                                      | `plan /details`         | Error response (invalid command).                                           |
+| Plan index number is not an integer.                                                            | `plan /details a`       | Error response (invalid user argument).                                     |
 
 #### Deleting An Existing Plan
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-plan-plan-delete).)
@@ -2401,13 +2402,13 @@ The following are some test cases for you to try:
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                                                                      | Command                             | Expected result                                              |
-|:-----------------------------------------------------------------------------------------------|:------------------------------------|:-------------------------------------------------------------|
-| Plan index number is smaller than 1 or greater than the total number of plan in the plan list. | `plan /delete 0`                    | Error response (index out of range), plan is not deleted.    |
-| Command with extra arguments.                                                                  | `plan /delete 1 1`                  | Error response (invalid user argument), plan is not deleted. |
-| Extra whitespaces between commands arguments.                                                  | <pre>`plan         /delete 1`</pre> | Error response (invalid user action), plan is not deleted.   |
-| Missing plan index number.                                                                     | `plan /delete`                      | Error response (invalid command).                            |
-| Plan index number is not an integer.                                                           | `plan /delete a`                    | Error response (invalid user argument).                      |
+| Test Case                                                                                       | Command                | Expected result                                              |
+|:------------------------------------------------------------------------------------------------|:-----------------------|:-------------------------------------------------------------|
+| Plan index number is smaller than 1 or greater than the total number of plans in the plan list. | `plan /delete 0`       | Error response (index out of range), plan is not deleted.    |
+| Command with extra arguments.                                                                   | `plan /delete 1 1`     | Error response (invalid user argument), plan is not deleted. |
+| Extra whitespaces between commands arguments.                                                   | `plan       /delete 1` | Error response (invalid user action), plan is not deleted.   |
+| Missing plan index number.                                                                      | `plan /delete`         | Error response (invalid command).                            |
+| Plan index number is not an integer.                                                            | `plan /delete a`       | Error response (invalid user argument).                      |
 
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
@@ -2518,9 +2519,9 @@ The following are some test cases for you to try:
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                                             | Command                    | Expected result                                                                                 |
-|:----------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
-| Extra whitespaces between command arguments `search` and `/exercise`. | `search       /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+| Test Case                                                             | Command                      | Expected result                                                                                 |
+|:----------------------------------------------------------------------|:-----------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/exercise`. | `search         /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
 
 
 #### Searching For Workout
@@ -2540,9 +2541,9 @@ The following are some test cases for you to try:
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                                            | Command                    | Expected result                                                                                 |
-|:---------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
-| Extra whitespaces between command arguments `search` and `/workout`. | `search       /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+| Test Case                                                            | Command                      | Expected result                                                                                 |
+|:---------------------------------------------------------------------|:-----------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/workout`. | `search         /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
 
 
 #### Searching For Plan
@@ -2561,9 +2562,9 @@ The following are some test cases for you to try:
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                                         | Command                     | Expected result                                                                                 |
-|:------------------------------------------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------|
-| Extra whitespaces between command arguments `search` and `/plan`. | `search        /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
+| Test Case                                                         | Command                           | Expected result                                                                                 |
+|:------------------------------------------------------------------|:----------------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/plan`. | `search              /exercise a` | Error response (invalid user action), no result is retrieved.                                   |
 
 
 #### Searching For All
@@ -2583,9 +2584,9 @@ The following are some test cases for you to try:
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                                        | Command                | Expected result                                                                                 |
-|:-----------------------------------------------------------------|:-----------------------|:------------------------------------------------------------------------------------------------|
-| Extra whitespaces between command arguments `search` and `/all`. | `search        /all a` | Error response (invalid user action), no result is retrieved.                                   |
+| Test Case                                                        | Command                 | Expected result                                                                                 |
+|:-----------------------------------------------------------------|:------------------------|:------------------------------------------------------------------------------------------------|
+| Extra whitespaces between command arguments `search` and `/all`. | `search         /all a` | Error response (invalid user action), no result is retrieved.                                   |
 
 
 <br/>
@@ -2611,15 +2612,15 @@ prior to conducting the test cases mentioned below:<br/><br/>
 <span class="warning box">:warning: Please follow the test cases and its commands in sequence as subsequent test cases 
 rely on former test cases.</span>
 
-| Test Case                                                                  | Command                                                                                                                                | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|:---------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1. Write new data into `workouts.txt`.                                     | (a) `workout /new sit up /reps 10`<br/><br/>(b) `workout /new push up /reps 20`<br/><br/>(c)`workout /new russian twist /reps 30`      | The following three lines are added to `workouts.txt`:<br/><br/>![workouts.txt](images/workoutsTxtNewWorkouts.png)                                                                                                                                                                                                                                                                                                                                                                                             |
-| 2. Update data in `workouts.txt`.                                          | `workout /update 2 40`                                                                                                                 | Workout (push up, 20 reps) is updated to 40 reps. `workouts.txt` should look something like this:<br/><br/>![workouts.txt Update Workout](images/workoutsTxtUpdateWorkout.png)                                                                                                                                                                                                                                                                                                                                 |
-| 3. Write new data into `plans.txt`.                                        | (a) `plan /new plan a  /workouts 1, 2`<br/><br/>(b) `plan /new plan b /workouts 2, 3`<br/><br/>(c) `plan /new plan c /workouts 1, 3`   | The following lines are added to `plans.txt`:<br/><br/>![plans.txt](images/plansTxtNewPlans.png)                                                                                                                                                                                                                                                                                                                                                                                                               |
-| 4. Write new data into `schedule.txt`.                                     | (a) `schedule /update 1 1`<br/><br/>(b) `schedule /update 3 2`<br/><br/>(c) `schedule /update 5 3`<br/><br/>(d) `schedule /update 6 3` | The following lines are added to `schedule.txt`:<br/><br/>![schedule.txt](images/scheduleTxtNewDays.png)                                                                                                                                                                                                                                                                                                                                                                                                       |
-| 5. Delete data from `schedule.txt`.                                        | `schedule /clear 5` | `schedule.txt` will be updated the following:<br/><br/>![schedule.txt day deleted](images/scheduleTxtDeleteDay.png)                                                                                                                                                                                                                                                                                                                                                                                            |
-| 6. Delete data from `plans.txt` and `schedule.txt` is updated accordingly. | `plans /delete 3` | `plans.txt` will be updated to the following:<br/><br/>![plans.txt delete plan](images/plansTxtDeletePlan.png)<br/><br/>`schedule.txt` will also be updated as one of the days has the deleted plan:<br/><br/>![schedule.txt plan delete](images/scheduleTxtPlanDeleteCascade.png)                                                                                                                                                                                                                             |
-| 7. Delete workout from `workouts.txt` and `plans.txt` and `schedule.txt` are updated accordingly. | `workout /delete 1` | `workout.txt` will be updated to the following:<br/><br/>![workout.txt workout delete](images/workoutsTxtDeleteWorkout.png)<br/><br/>`plans.txt` will also be updated as some plans with the deleted workout are affected:<br/><br/>![plans.txt workout delete cascasde](images/plansTxtWorkoutDeleteCascade.png)<br/><br/>Likewise, `schedule.txt` is also updated as a plan assigned to a day has been affected:<br/><br/>![schedule.txt workout delete cascade](images/scheduleTxtWorkoutDeleteCascade.png) |                                    
+| Test Case                                                                                      | Command                                                                                                                                | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|:-----------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1. Write new data into `workouts.txt`.                                                         | (a) `workout /new sit up /reps 10`<br/><br/>(b) `workout /new push up /reps 20`<br/><br/>(c)`workout /new russian twist /reps 30`      | The following three lines are added to `workouts.txt`:<br/><br/>![workouts.txt](images/workoutsTxtNewWorkouts.png)                                                                                                                                                                                                                                                                                                                                                                                             |
+| 2. Update data in `workouts.txt`.                                                              | `workout /update 2 40`                                                                                                                 | Workout (push up, 20 reps) is updated to 40 reps. `workouts.txt` should look something like this:<br/><br/>![workouts.txt Update Workout](images/workoutsTxtUpdateWorkout.png)                                                                                                                                                                                                                                                                                                                                 |
+| 3. Write new data into `plans.txt`.                                                            | (a) `plan /new plan a  /workouts 1, 2`<br/><br/>(b) `plan /new plan b /workouts 2, 3`<br/><br/>(c) `plan /new plan c /workouts 1, 3`   | The following lines are added to `plans.txt`:<br/><br/>![plans.txt](images/plansTxtNewPlans.png)                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 4. Write new data into `schedule.txt`.                                                         | (a) `schedule /update 1 1`<br/><br/>(b) `schedule /update 3 2`<br/><br/>(c) `schedule /update 5 3`<br/><br/>(d) `schedule /update 6 3` | The following lines are added to `schedule.txt`:<br/><br/>![schedule.txt](images/scheduleTxtNewDays.png)                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 5. Delete data from `schedule.txt`.                                                            | `schedule /clear 5` | `schedule.txt` will be updated the following:<br/><br/>![schedule.txt day deleted](images/scheduleTxtDeleteDay.png)                                                                                                                                                                                                                                                                                                                                                                                            |
+| 6. Delete data from `plans.txt` and `schedule.txt` is updated accordingly.                     | `plans /delete 3` | `plans.txt` will be updated to the following:<br/><br/>![plans.txt delete plan](images/plansTxtDeletePlan.png)<br/><br/>`schedule.txt` will also be updated as one of the days has the deleted plan:<br/><br/>![schedule.txt plan delete](images/scheduleTxtPlanDeleteCascade.png)                                                                                                                                                                                                                             |
+| 7. Delete workout from `workouts.txt`. `plans.txt` and `schedule.txt` are updated accordingly. | `workout /delete 1` | `workout.txt` will be updated to the following:<br/><br/>![workout.txt workout delete](images/workoutsTxtDeleteWorkout.png)<br/><br/>`plans.txt` will also be updated as some plans with the deleted workout are affected:<br/><br/>![plans.txt workout delete cascasde](images/plansTxtWorkoutDeleteCascade.png)<br/><br/>Likewise, `schedule.txt` is also updated as a plan assigned to a day has been affected:<br/><br/>![schedule.txt workout delete cascade](images/scheduleTxtWorkoutDeleteCascade.png) |                                    
 
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
