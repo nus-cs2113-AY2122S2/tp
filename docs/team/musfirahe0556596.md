@@ -39,8 +39,7 @@ A summary of my code contributions are as follows:
 - Wrote parts of the `Parser` API, mainly the `createPlanCommand()` method and parts
   of the `createWorkoutCommand()` method.
 - Wrote JUnit test cases for WerkIt! APIs such as the
-  `PlanListTest`, `PlanCommandTest`, `ParserTest`, `WorkoutCommandTest` and `WorkoutListTest`.
-  This is done to improve the code coverage of the team. Additionally, writing JUnit
+  `PlanListTest`, `PlanCommandTest`, `ParserTest`, `WorkoutCommandTest` and `WorkoutListTest`. Writing JUnit
   test cases for some test cases were difficult as it may require the application
   to modify files. Examples of particularly time-consuming test cases are provided below:
   - Under `PlanCommandTest.java`: Writing test case to ensure plan is created successfully.
@@ -93,7 +92,7 @@ to address a [PE-D] bug [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/issu
 - Helped to maintain the team's GitHub repository issue tracker by creating issues and also linking
   them to the PRs that addresses the issue.
 - Helped to maintain PRs by assigning them to the members who did the PR and also
-  assigning them to their respective milestone (if team members forgot to do these).
+  assigning them to their respective milestone.
 - Helped in release management of WerkIt! (for v1.0 and v2.0)
 - Participated and helped to fix general bugs with the team (this includes but not limited to):
   - Added codes to handle empty workout descriptor errors in this [PR](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/44).
@@ -112,16 +111,10 @@ to address a [PE-D] bug [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/issu
 ![PR Reviews](../images/ppp/musfirahe0556596/PRReviews.PNG)
 
 In addition, review comments done by me can also be seen at the CS2113T's tp Comment Dashboard [here](https://nus-cs2113-ay2122s2.github.io/dashboards/contents/tp-comments.html).
-Below is a screenshot of the tp Comment Dashboard, as of 10/04/2022:
-
-![tp Comment Dashboard](../images/ppp/musfirahe0556596/tpCommentDashboard.PNG)
-
 
 ### Contributions Beyond the Project Team
-- Provided feedback and filed potential bug reports to another team's project (CS2113T-T10-1 SplitLah) as part
-  of the Practical Exam Dry-Run (PED). In addition, provided detailed explanation of the bug found instead of just
-  providing merely a screenshot of it with no explanations. Below
-  are the potential bugs found:
+- Provided feedback and filed potential bug reports to another team's project (CS2113T-T10-1 SplitLah) as part 
+  of the Practical Exam Dry-Run (PED). Below are the potential bugs found:
   - [Bug report 1: Session name not unique across all active session after editing](https://github.com/Musfirahe0556596/ped/issues/1)
   - [Bug report 2: Cost did not divide equally when entering a specific value](https://github.com/Musfirahe0556596/ped/issues/2)
   - [Bug report 3: Activity name not unique across all activities in a session](https://github.com/Musfirahe0556596/ped/issues/3)
@@ -129,12 +122,3 @@ Below is a screenshot of the tp Comment Dashboard, as of 10/04/2022:
   - [Bug report 5: Unable to edit a session if a group of friends is added at first](https://github.com/Musfirahe0556596/ped/issues/5)
 
 ---
-
-## Reflections on the Team Project (tP)
-All in all, I had a great time working with my CS2113T project team
-as all of us contributed their parts properly and worked very well together. The (almost everyday) Zoom meetings
-proved to be useful as all of us worked together to edit our documents, find bugs and
-address any potential concerns that team members may face. As all of us communicated
-our thoughts and gave opinions whenever in doubt, our team is able to compromise whenever
-there arises conflicts (our conflict is more to what is to be included in code/documents, not responsibility issues).
-Many thanks to the team, which consists of Alan, Emily, HaoFeng and Tianai. It was nice to be part of WerkIt! and being able to learn from one another.
