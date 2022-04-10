@@ -46,9 +46,8 @@ into text files stored on the user's local filesystem
 - (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.
   This was done as the original MD quote blocks were hard to spot and thus readers may miss such messages. Hence, the
   custom boxes were created to make them more conspicuous.
-  <br/><br/>**Sample:**<br/>
-<span class="box info">:memo: This is an example of an information box. Contains information that may be useful for
-the users.</span>
+  - An example of the custom CSS boxes can be found in the ['Notations Used In This Guide'](../UserGuide.md#notations-used-in-this-guide)
+  section of the user guide.
 - (Developer and User Guides) Inserted 'buttons' throughout the guides to allow users to click and navigate back to the
   guides' tables of contents for easier navigation in our documentations. 
   - I tried to utilise JavaScript for a floating back-to-top button, but due to the time constraints and the need to
