@@ -428,7 +428,7 @@ Format: `study`
 
 **Example**
 
-![image](https://user-images.githubusercontent.com/69501969/160783109-3187d5df-06f1-4fa4-a407-18a87a67c770.png)
+![](images/studyWelcome.png)
 
 ### Starting a timer: `start`
 
@@ -467,7 +467,7 @@ Format: `start MODE_NUMBER`
 
 In the terminal:
 
-![](images/terminalStart1.png)
+![](images/startDefaultOneTerminal.png)
 
 In the pop-up window:
 
@@ -511,7 +511,7 @@ Format: `start stopwatch`
 
 In the terminal:
 
-![image](https://user-images.githubusercontent.com/69501969/160330116-886c03a2-b3c8-4e9c-a879-8fba990c2668.png)
+![](images/stopwatchTerminal.png)
 
 In the pop-up window:
 
@@ -527,7 +527,7 @@ Format: `pause` or clicking the pause button in the pop-up window.
 
 In the terminal:
 
-![image](https://user-images.githubusercontent.com/69501969/160329512-3a74d513-d95c-4aa2-9d88-a29ca3f93459.png)
+![](images/pauseTimerTerminal.png)
 
 In the pop-up window:
 
@@ -547,7 +547,7 @@ Format: `resume` or clicking the resume button in the pop-up window.
 
 In the terminal:
 
-![image](https://user-images.githubusercontent.com/69501969/160329950-48c20933-84aa-46ef-9f7d-e58154c3270a.png)
+![](images/resumeTimerTerminal.png)
 
 In the pop-up window:
 
@@ -569,7 +569,7 @@ Format:
 
 In the terminal:
 
-![image](https://user-images.githubusercontent.com/69501969/160329869-2696b661-585b-4fae-9ebd-149b79316dd2.png)
+![](images/stopTimerTerminal.png)
 
 In the pop-up window:
 
@@ -587,7 +587,7 @@ to show your tasks.
 
 **Example**
 
-![image](https://user-images.githubusercontent.com/69501969/160788279-c38a7611-e1e9-4aef-87b7-6a06b6d96c9e.png)
+![](images/studyShowToday.png)
 
 ### Mark your tasks as done: `mark`
 
@@ -602,7 +602,7 @@ to mark your task.
 
 **Example**
 
-![image](https://user-images.githubusercontent.com/69501969/160330280-f0cae4ae-0561-4c09-bc1f-8f89c6136aa6.png)
+![](images/studyMark.png)
 
 ### Leave the study session: `leave`
 Leave the study session to go back to the main session.
@@ -613,7 +613,7 @@ Format: `leave`
 
 **Example**
 
-![image](https://user-images.githubusercontent.com/69501969/160330328-f3981868-6bcc-4e29-989c-90356cf15c10.png)
+![](images/studyLeave.png)
 
 ## FAQ
 
