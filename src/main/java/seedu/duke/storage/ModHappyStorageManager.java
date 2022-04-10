@@ -72,35 +72,37 @@ public class ModHappyStorageManager {
      */
     public static Configuration loadConfiguration(String configurationPath) {
         File configurationDataFile = new File(configurationPath);
-        if (configurationDataFile.exists()) {
+        if (!configurationDataFile.exists()) {
             modHappyStorage = new ConfigurationStorage();
             try {
                 Configuration configuration = (Configuration) modHappyStorage.loadData(configurationPath);
-                HashMap<Configuration.ConfigurationGroup,String> configMap = configuration.configurationGroupHashMap;
-                for (Configuration.ConfigurationGroup key : configMap.keySet()) {
-                    if (key == null) {
-                        throw new InvalidConfigurationException();
-                    }
-                    if (!Configuration.LEGAL_VALUES.get(key).contains(configMap.get(key))) {
-                        throw new InvalidConfigurationValueException(key, configMap.get(key));
-                    }
-                }
+                checkConfiguration(configuration);
                 TextUi.showUnformattedMessage(StringConstants.CONFIGURATION_DATA_LOAD_SUCCESS);
                 return configuration;
             } catch (ModHappyException e) {
-                Configuration configuration = new Configuration();
                 TextUi.showUnformattedMessage(e);
                 TextUi.showUnformattedMessage(StringConstants.CONFIGURATION_DATA_LOAD_FAILED);
-                return configuration;
+                return new Configuration();
             }
         } else {
-            Configuration configuration = new Configuration();
             TextUi.showUnformattedMessage(StringConstants.NO_CONFIG_DATA_FILE);
-            return configuration;
+            return new Configuration();
         }
     }
 
     //@@author chooyikai
+    public static void checkConfiguration(Configuration configuration) throws ModHappyException {
+        HashMap<Configuration.ConfigurationGroup,String> configMap = configuration.configurationGroupHashMap;
+        for (Configuration.ConfigurationGroup key : configMap.keySet()) {
+            if (key == null) {
+                throw new InvalidConfigurationException();
+            }
+            if (!Configuration.LEGAL_VALUES.get(key).contains(configMap.get(key))) {
+                throw new InvalidConfigurationValueException(key, configMap.get(key));
+            }
+        }
+    }
+
     public static void checkTaskList(ArrayList<Task> list) throws ModHappyException {
         for (Task t : list) {
             if (Objects.isNull(t.getTaskName())) {
@@ -113,55 +115,60 @@ public class ModHappyStorageManager {
         }
     }
 
+    public static void checkModuleList(ArrayList<Module> list) throws ModHappyException {
+        ArrayList<String> moduleCodes = new ArrayList<>();
+        for (Module m : list) {
+            if (Objects.isNull(m.getModuleCode())) {
+                throw new InvalidModuleException();
+            }
+            if (Objects.isNull(m.getModuleGrade())) {
+                m.setModuleGrade(Grades.NOT_ENTERED.toString());
+            }
+            if (moduleCodes.contains(m.getModuleCode())) {
+                throw new DuplicateModuleException(m.getModuleCode());
+            }
+            if (m.getModularCredit() > MAXIMUM_MODULAR_CREDITS
+                    || m.getModularCredit() < MINIMUM_MODULAR_CREDITS) {
+                throw new InvalidModuleCreditsException(m.getModuleCode(), m.getModularCredit());
+            }
+            checkTaskList(m.getTaskList().getTaskList());
+            moduleCodes.add(m.getModuleCode());
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public static void loadTaskList(ModuleList moduleList, String taskPath) {
         File taskDataFile = new File(taskPath);
-        if (taskDataFile.exists()) {
-            modHappyStorage = new TaskListStorage();
-            try {
-                ArrayList<Task> list = (ArrayList<Task>) modHappyStorage.loadData(taskPath);
-                checkTaskList(list);
-                moduleList.initialiseGeneralTasksFromTaskList(list);
-                TextUi.showUnformattedMessage(StringConstants.TASK_DATA_LOAD_SUCCESS);
-            } catch (ModHappyException e) {
-                TextUi.showUnformattedMessage(e);
-                TextUi.showUnformattedMessage(StringConstants.TASK_DATA_LOAD_FAILED);
-            }
+        if (!taskDataFile.exists()) {
+            return;
+        }
+        modHappyStorage = new TaskListStorage();
+        try {
+            ArrayList<Task> list = (ArrayList<Task>) modHappyStorage.loadData(taskPath);
+            checkTaskList(list);
+            moduleList.initialiseGeneralTasksFromTaskList(list);
+            TextUi.showUnformattedMessage(StringConstants.TASK_DATA_LOAD_SUCCESS);
+        } catch (ModHappyException e) {
+            TextUi.showUnformattedMessage(e);
+            TextUi.showUnformattedMessage(StringConstants.TASK_DATA_LOAD_FAILED);
         }
     }
 
     @SuppressWarnings("unchecked")
     public static void loadModuleList(ModuleList moduleList, String modulePath) {
         File moduleDataFile = new File(modulePath);
-        if (moduleDataFile.exists()) {
-            modHappyStorage = new ModuleListStorage();
-            try {
-                ArrayList<String> moduleCodes = new ArrayList<>();
-                ArrayList<Module> arrayListModule;
-                arrayListModule = (ArrayList<Module>) modHappyStorage.loadData(modulePath);
-                for (Module m : arrayListModule) {
-                    if (Objects.isNull(m.getModuleCode())) {
-                        throw new InvalidModuleException();
-                    }
-                    if (Objects.isNull(m.getModuleGrade())) {
-                        m.setModuleGrade(Grades.NOT_ENTERED.toString());
-                    }
-                    if (moduleCodes.contains(m.getModuleCode())) {
-                        throw new DuplicateModuleException(m.getModuleCode());
-                    }
-                    if (m.getModularCredit() > MAXIMUM_MODULAR_CREDITS
-                            || m.getModularCredit() < MINIMUM_MODULAR_CREDITS) {
-                        throw new InvalidModuleCreditsException(m.getModuleCode(), m.getModularCredit());
-                    }
-                    checkTaskList(m.getTaskList().getTaskList());
-                    moduleCodes.add(m.getModuleCode());
-                }
-                moduleList.setModuleList(arrayListModule);
-                TextUi.showUnformattedMessage(StringConstants.MODULE_DATA_LOAD_SUCCESS);
-            } catch (ModHappyException e) {
-                TextUi.showUnformattedMessage(e);
-                TextUi.showUnformattedMessage(StringConstants.MODULE_DATA_LOAD_FAILED);
-            }
+        if (!moduleDataFile.exists()) {
+            return;
+        }
+        modHappyStorage = new ModuleListStorage();
+        try {
+            ArrayList<Module> arrayListModule = (ArrayList<Module>) modHappyStorage.loadData(modulePath);
+            checkModuleList(arrayListModule);
+            moduleList.setModuleList(arrayListModule);
+            TextUi.showUnformattedMessage(StringConstants.MODULE_DATA_LOAD_SUCCESS);
+        } catch (ModHappyException e) {
+            TextUi.showUnformattedMessage(e);
+            TextUi.showUnformattedMessage(StringConstants.MODULE_DATA_LOAD_FAILED);
         }
     }
 }
