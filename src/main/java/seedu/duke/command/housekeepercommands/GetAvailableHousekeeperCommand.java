@@ -64,10 +64,6 @@ public class GetAvailableHousekeeperCommand extends Command {
         return searchDay;
     }
 
-    public void setSearchDay(int searchDay) {
-        this.searchDay = searchDay;
-    }
-
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();

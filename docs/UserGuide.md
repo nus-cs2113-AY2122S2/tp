@@ -14,11 +14,11 @@ and maintaining the state of checked-in/checked-out rooms.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Features
-1. [Customer Satisfaction Related Commands](#Customer-Satisfaction-Related-Commands)
+1. [Customer Satisfaction Related Commands](#customer-satisfaction-related-commands)
     * Add Customer Satisfaction 
     * View All Customer Satisfactions
     * Calculate Average Satisfaction
-2. [Housekeeper Related Commands](#Housekeeper-Related-Commands)
+2. [Housekeeper Related Commands](#housekeeper-related-commands)
    * Add Housekeeper Profile
    * Add/Update Availability of Housekeeper
    * View Recorded Housekeeper List
@@ -29,18 +29,18 @@ and maintaining the state of checked-in/checked-out rooms.
    * Adding Housekeeper Performance Rating
    * View All Housekeeper Performances
    * Assign a housekeeper to a room
-3. [Event Related Commands](#Event-Related-Commands)
+3. [Event Related Commands](#event-related-commands)
    * Add an event
    * Delete an event
    * View previously added events
-4. [Room Related Commands](#Room-Related-Commands)
+4. [Room Related Commands](#room-related-commands)
    * Check in a room
    * Check out a room
    * Check room information
    * Check all room information
    * Check room information by level
    * Check room information by category
-5. [Item Related Commands](#Item-Related-Commands)
+5. [Item Related Commands](#item-related-commands)
    * Add A New Item To The Item List
    * Update The Pax Of An Item In The Item List
    * Update The Name Of An Item In The Item List
@@ -875,16 +875,26 @@ Expected output:
 | --- | --- |
 | bye | ```bye``` |
 
-| Housekeeper Command | Format, Example |
-| --- | --- |
-| add housekeeper | ```add housekeeper NAME / AGE```<br/>eg. ```add housekeeper susan / 46```|
-| availability | ```availability NAME / DAY(S)```<br/>eg.```availability jane / 1,3,5,7```|
-| view recorded housekeepers | ```view recorded housekeepers```|
-| delete | ```delete housekeeper NAME``` <br/>eg. ```delete housekeeper sally```|
-| get available on | ```get available on DAY ```<br/>eg.```get available on 1``` |
-| is a new week | ```is a new week ```|
-| is a new year | ```is a new year ``` |
-| assign housekeeper | ```assign NAME / ROOM_NUMBER```<br/>eg.```assign susan / 301```|
+
+| Satisfaction Command      | Format, Example                                                                                   |
+|---------------------------|---------------------------------------------------------------------------------------------------|
+| add satisfaction          | ```add satisfaction CUSTOMER_NAME / SATISFACTION_RATING```<br/>eg. ```add satisfaction bob / 5``` |
+| view satisfactions        | ```view satisfactions```                                                                          |
+| view average satisfaction | ```view average satisfaction```                                                                   |
+
+
+| Housekeeper Command | Format, Example                                                                                     |
+| --- |-----------------------------------------------------------------------------------------------------|
+| add housekeeper | ```add housekeeper NAME / AGE```<br/>eg. ```add housekeeper susan / 46```                           |
+| availability | ```availability NAME / DAY(S)```<br/>eg.```availability jane / 1,3,5,7```                           |
+| view recorded housekeepers | ```view recorded housekeepers```                                                                    |
+| delete | ```delete housekeeper NAME``` <br/>eg. ```delete housekeeper sally```                               |
+| get available on | ```get available on DAY ```<br/>eg.```get available on 1```                                         |
+| is a new week | ```is a new week ```                                                                                |
+| is a new year | ```is a new year ```                                                                                |
+| assign housekeeper | ```assign NAME / ROOM_NUMBER```<br/>eg.```assign susan / 301```                                     |
+| add housekeeper performance | ``` add performance HOUSEKEEPER_NAME / PERFORMANCE_RATING``` <br/>eg. ```add performance bob / 5``` |
+| view all housekeeper performances | ``` view performances```                                                                            |
 
 
 | Room Command | Format, Example |

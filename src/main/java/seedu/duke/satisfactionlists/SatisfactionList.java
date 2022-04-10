@@ -3,6 +3,8 @@ package seedu.duke.satisfactionlists;
 
 import java.util.ArrayList;
 
+
+
 /**
  * Represents a data structure containing multiple Satisfaction objects.
  * Uses an ArrayList to store the Satisfaction objects.
@@ -94,5 +96,12 @@ public class SatisfactionList {
         }
         double satisfactionAverage = (double) satisfactionSum / (double) getSize();
         return satisfactionAverage;
+    }
+
+    /**
+     * Clears the list of satisfactions.
+     */
+    public void clearSatisfactionList() {
+        satisfactionList.clear();
     }
 }

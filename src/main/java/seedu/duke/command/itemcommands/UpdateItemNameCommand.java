@@ -4,13 +4,14 @@ import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidUpdateItemNameCommandException;
 import seedu.duke.exceptions.ItemNameAlreadyInListException;
+import seedu.duke.exceptions.DuplicateItemNameException;
+import seedu.duke.exceptions.DuplicateCommandException;
 
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
 import seedu.duke.storage.ItemListFileManager;
-import seedu.duke.exceptions.DuplicateItemNameException;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -26,6 +27,7 @@ public class UpdateItemNameCommand extends Command {
     private static final String DELIMITER = "/";
     private Item item;
     private static final int NUMBER_OF_PARTS_IN_COMMAND = 2;
+    private static final String UPDATE_ITEM_NAME_COMMAND = "update item name";
     private static Logger itemLogger = Logger.getLogger("itemLogger");
 
     /**
@@ -48,6 +50,12 @@ public class UpdateItemNameCommand extends Command {
                     + "Name Command. Exception thrown");
             throw new InvalidUpdateItemNameCommandException();
         }
+
+        if (userInput.contains(UPDATE_ITEM_NAME_COMMAND)) {
+            itemLogger.log(Level.WARNING, "Repeated update item name command given.");
+            throw new DuplicateCommandException();
+        }
+
         StringTokenizer tokens = new StringTokenizer(userInput, DELIMITER);
         if (tokens.countTokens() != NUMBER_OF_PARTS_IN_COMMAND) {
             itemLogger.log(Level.WARNING, "Invalid formatting for the Update Item Name Command detected."
@@ -56,7 +64,7 @@ public class UpdateItemNameCommand extends Command {
         }
         String oldItemName = extractCurrentItemName(tokens);
         String newItemName = extractNewItemName(tokens);
-        Item item = new Item(oldItemName,newItemName);
+        Item item = new Item(oldItemName, newItemName);
         setItem(item);
     }
 
@@ -119,7 +127,7 @@ public class UpdateItemNameCommand extends Command {
      * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
         String oldItemName = item.getName();
@@ -135,6 +143,10 @@ public class UpdateItemNameCommand extends Command {
         oldItemName = oldItemName.toUpperCase();
         newItemName = newItemName.toUpperCase();
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
+    }
+
+    public void writeItemListToFile(ListContainer listContainer) throws IOException {
+        ItemList listOfItems = listContainer.getItemList();
         ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemListFileManager.writeItemListToFile(listOfItems);
     }

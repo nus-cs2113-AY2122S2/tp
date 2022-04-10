@@ -14,7 +14,7 @@ import seedu.duke.exceptions.HotelLiteManagerException;
  * objects.
  */
 
-public class AverageSatisfactionCommand extends Command {
+public class ViewAverageSatisfactionCommand extends Command {
 
     /**
      * Override of execute command in Command class.

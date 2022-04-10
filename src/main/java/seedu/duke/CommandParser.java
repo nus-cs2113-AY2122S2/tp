@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.customercommands.AddSatisfactionCommand;
-import seedu.duke.command.customercommands.AverageSatisfactionCommand;
+import seedu.duke.command.customercommands.ViewAverageSatisfactionCommand;
 import seedu.duke.command.customercommands.ViewSatisfactionsCommand;
 import seedu.duke.command.eventcommands.AddEventCommand;
 import seedu.duke.command.eventcommands.DeleteEventCommand;
@@ -58,7 +58,7 @@ public class CommandParser {
     private static final String ADD_AVAILABILITY_COMMAND = "availability ";
     private static final String ADD_SATISFACTION_COMMAND = "add satisfaction ";
     private static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
-    private static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
+    private static final String AVERAGE_SATISFACTION_COMMAND = "view average satisfaction";
     private static final String CHECK_IN = "check in ";
     private static final String CHECK_OUT = "check out ";
     private static final String CHECK_ROOM = "check room ";
@@ -89,8 +89,6 @@ public class CommandParser {
         String userInputLowerCaseWithoutCommand;
         if (userInputLowerCase.startsWith(SPACE)) {
             throw new InvalidCommandException();
-        } else if (userInputLowerCase.equals(BYE)) {
-            userCommand = new ExitCommand();
         } else if (userInputLowerCase.startsWith(ADD)) {
             userCommand = parseAdd(userInputLowerCase);
         } else if (userInputLowerCase.startsWith(DELETE)) {
@@ -100,13 +98,14 @@ public class CommandParser {
         } else if (userInputLowerCase.trim().equals(VIEW_SATISFACTIONS_COMMAND)) {
             userCommand = new ViewSatisfactionsCommand();
         } else if (userInputLowerCase.equals(AVERAGE_SATISFACTION_COMMAND)) {
-            userCommand = new AverageSatisfactionCommand();
+            userCommand = new ViewAverageSatisfactionCommand();
         } else if (userInputLowerCase.startsWith(VIEW_ITEM_LIST_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_ITEM_LIST_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_ITEM_LIST_COMMAND, "");
             userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
             userCommand = new ViewItemListCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND,
+                    "");
             userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
             userCommand = new ViewItemsWithZeroPaxCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.trim().equals(VIEW_PERFORMANCES_COMMAND)) {
@@ -123,26 +122,11 @@ public class CommandParser {
         } else if (userInputLowerCase.contains((VIEW_HOUSEKEEPER_COMMAND))) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
             userCommand = new ViewHousekeeperListCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(ASSIGN_HOUSEKEEPER)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ASSIGN_HOUSEKEEPER, "");
-            userCommand = new AssignHousekeeperCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(VIEW_AVAILABLE_HOUSEKEEPER_DAY)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_AVAILABLE_HOUSEKEEPER_DAY, "");
-            userCommand = new GetAvailableHousekeeperCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(RESET_AVAILABILITY)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
-            userCommand = new ResetAvailabilityCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(UPDATE_AGE_BY_ONE)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
-            userCommand = new AgeIncreaseCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(SEARCH_ITEM_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(SEARCH_ITEM_COMMAND, "");
-            userCommand = new SearchItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(VIEW_EVENTS)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_EVENTS, "");
             userCommand = new ViewEventsCommand(userInputLowerCaseWithoutCommand);
         } else {
-            throw new InvalidCommandException();
+            userCommand = parseMiscellaneous(userInputLowerCase);
         }
         return userCommand;
     }
@@ -159,7 +143,7 @@ public class CommandParser {
         Command userCommand = null;
         String userInputLowerCaseWithoutCommand;
         if (userInputLowerCase.startsWith(DELETE_ITEM_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_ITEM_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(DELETE_ITEM_COMMAND, "");
             userCommand = new DeleteItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(DELETE_PROFILE)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(DELETE_PROFILE, "");
@@ -204,7 +188,6 @@ public class CommandParser {
         } else {
             throw new InvalidCommandException();
         }
-
         return userCommand;
     }
 
@@ -220,10 +203,11 @@ public class CommandParser {
         Command userCommand = null;
         String userInputLowerCaseWithoutCommand;
         if (userInputLowerCase.startsWith(ADD_SATISFACTION_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_SATISFACTION_COMMAND, "").trim();
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_SATISFACTION_COMMAND, "")
+                    .trim();
             userCommand = new AddSatisfactionCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(ADD_ITEM_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_ITEM_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_ITEM_COMMAND, "");
             userCommand = new AddItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith((ADD_HOUSEKEEPER_COMMAND))) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_HOUSEKEEPER_COMMAND, "");
@@ -240,6 +224,50 @@ public class CommandParser {
         return userCommand;
     }
 
+    /**
+     * Parses the user-provided commands that are neither an add, delete, view nor room-related commands. It then
+     * creates the relevant Command object.
+     *
+     * @param userInputLowerCase User input to be parsed and turned into the relevant Command object.
+     * @return The relevant Command object created based on the user input.
+     * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
+     *                                   the relevant Command object or if the command is invalid.
+     */
+    public Command parseMiscellaneous(String userInputLowerCase) throws HotelLiteManagerException {
+        Command userCommand = null;
+        String userInputLowerCaseWithoutCommand;
+        if (userInputLowerCase.equals(BYE)) {
+            userCommand = new ExitCommand();
+        } else if (userInputLowerCase.startsWith(ADD_AVAILABILITY_COMMAND)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_AVAILABILITY_COMMAND, "");
+            userCommand = new AddAvailabilityCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(VIEW_AVAILABLE_HOUSEKEEPER_DAY)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_AVAILABLE_HOUSEKEEPER_DAY,
+                    "");
+            userCommand = new GetAvailableHousekeeperCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(RESET_AVAILABILITY)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
+            userCommand = new ResetAvailabilityCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(UPDATE_AGE_BY_ONE)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
+            userCommand = new AgeIncreaseCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(ASSIGN_HOUSEKEEPER)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ASSIGN_HOUSEKEEPER, "");
+            userCommand = new AssignHousekeeperCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(SEARCH_ITEM_COMMAND)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(SEARCH_ITEM_COMMAND, "");
+            userCommand = new SearchItemCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(UPDATE_ITEM_PAX_COMMAND)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(UPDATE_ITEM_PAX_COMMAND, "");
+            userCommand = new UpdateItemPaxCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(UPDATE_ITEM_NAME_COMMAND)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(UPDATE_ITEM_NAME_COMMAND, "");
+            userCommand = new UpdateItemNameCommand(userInputLowerCaseWithoutCommand);
+        } else {
+            throw new InvalidCommandException();
+        }
+        return userCommand;
+    }
 
 }
 

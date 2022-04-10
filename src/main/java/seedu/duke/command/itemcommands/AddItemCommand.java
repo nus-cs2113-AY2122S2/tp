@@ -7,6 +7,8 @@ import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.exceptions.InvalidItemPaxException;
 import seedu.duke.exceptions.ItemAlreadyInListException;
+import seedu.duke.exceptions.DuplicateCommandException;
+
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
 import seedu.duke.Ui;
@@ -25,6 +27,7 @@ import java.util.logging.Level;
 public class AddItemCommand extends Command {
     private static final String DELIMITER = "/";
     private static final int NUMBER_OF_PARTS_IN_COMMAND = 2;
+    private static final String ADD_ITEM_COMMAND = "add item";
     private Item item;
     private static Logger itemLogger = Logger.getLogger("itemLogger");
 
@@ -47,6 +50,12 @@ public class AddItemCommand extends Command {
             itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
             throw new EmptyItemPaxException();
         }
+
+        if (userInput.contains(ADD_ITEM_COMMAND)) {
+            itemLogger.log(Level.WARNING, "Repeated add item command given.");
+            throw new DuplicateCommandException();
+        }
+
         StringTokenizer tokens = new StringTokenizer(userInput, DELIMITER);
         if (tokens.countTokens() != NUMBER_OF_PARTS_IN_COMMAND) {
             itemLogger.log(Level.WARNING, "Invalid formatting for AddItemCommand detected. Exception thrown.");
@@ -117,7 +126,7 @@ public class AddItemCommand extends Command {
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
      */
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
         String nameOfItemToAdd = item.getName();
@@ -129,6 +138,10 @@ public class AddItemCommand extends Command {
 
         listOfItems.addItemToList(item);
         ui.printAddItemAcknowledgementMessage(listOfItems);
+    }
+
+    public void writeItemListToFile(ListContainer listContainer) throws IOException {
+        ItemList listOfItems = listContainer.getItemList();
         ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemListFileManager.writeItemListToFile(listOfItems);
     }

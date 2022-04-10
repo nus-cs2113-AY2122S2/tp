@@ -16,7 +16,7 @@ import seedu.duke.storage.HousekeeperFileManager;
 
 public class DeleteHousekeeperCommand extends Command {
     private String name;
-    private static final String DELETE_PROFILE = "delete housekeeper";
+    private static final String DELETE_PROFILE_COMMAND = "delete housekeeper";
     private static Logger logger = Logger.getLogger("housekeeperDeletionLogger");
 
     public DeleteHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
@@ -24,7 +24,7 @@ public class DeleteHousekeeperCommand extends Command {
             throw new EmptyNameException();
         }
         String inputWithNoSpace = commandStringWithoutCommand.trim();
-        if (inputWithNoSpace.contains(DELETE_PROFILE)) {
+        if (inputWithNoSpace.contains(DELETE_PROFILE_COMMAND)) {
             logger.log(Level.WARNING, "Repeated delete housekeeper command given.");
             throw new DuplicateCommandException();
         }

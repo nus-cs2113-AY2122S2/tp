@@ -1,33 +1,7 @@
 James Gosling
-Add Item Toilet Roll / 15
-Add Item  / 20
-Add Item Toilet Roll /
-Add Item Toilet Roll / -1
-Add Item Toilet Roll / 0
-Add Item Fork / 15
-Add Item Spoon /2
 View All Items
-Update Item Pax Toilet Roll / 5
-Update Item Pax Toilet Roll / -1
-Update Item Pax Toilet Roll /
-Update Item Pax / 5
-Update Item Pax
-Update Item Pax Swimming Pool /5
-Update Item Pax Spoon / 0
 Availability @
 Availability lucy M
-Delete Item Toilet Roll
-Delete Item Table
-Delete Item
-Update Item Name Swimming Pool /
-Update Item Name / Premium Swimming Pool
-Update Item Name Spoon / Premium Spoon
-Search Item
-Search Item o
 View Items With Zero Pax
 View Items With Zero
-Add Item Premium Spoon / 500
-Add Item Table / 2000
-Update Item Pax Table / 100000000
-Add Item Swiss Watch / 100000000
 bye
