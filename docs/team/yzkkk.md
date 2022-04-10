@@ -20,10 +20,13 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
   - Added significant number of Junit test cases in `ModHappyParserTest`.
   [#82](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/82),
   [#114](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/114)
-  - Expanded exceptions, fixed bugs and added more descriptive error messages.
+  - Expanded exceptions and added more descriptive error messages.
+  [#123](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/123)
+  - Handled bug fixes pertaining to the parsers.
   [#123](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/123)
   - Added javadoc for the commands, parsers and exceptions.
-  [#123](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/123)
+  [#123](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/123),
+  [#198](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/198)
 
 ### Documentation
 - **User Guide**
@@ -35,9 +38,10 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
   [#112](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/112)
   
 ### Team Tasks
-  - Fixed formatting inconsistencies in the User guide.
+  - Fixed formatting inconsistencies in the code and User guide.
   [#179](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/179),
-  [#183](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/183)
+  [#183](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/183),
+  [#198](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/198)
 
 ### Community
 - Pull Requests Reviewed:
