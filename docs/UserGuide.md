@@ -76,6 +76,8 @@ If you are not ready to handle the intricacies of the Command Prompt, you can us
 to launch HALPMI as well. However do note that you will have to change the PATH name included on the bat file to the PATH name
 at which Halpmi.jar is located.
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.14.49 AM.png)
+
 -----------------------------------------------
 
 ## Features
@@ -101,6 +103,8 @@ Format: `add doctor /info [nric], [name], [age], [gender], [address], [DOB], [Sp
 
 Example: `add doctor /info S7654321A, John Doe, 22, M, 10 Baker Street, 1999-12-31, Urinology`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.15.38 AM.png)
+
 #### ADD PATIENT
 
 To add a new patient into your application you can use the `add patient` command when prompted by HALPMI for your input.
@@ -119,6 +123,8 @@ Format: `add patient /info [nric], [name], [age], [gender], [address], [DOB], [D
 
 Example: `add patient /info S1234567A, John Doe, 22, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_hs7ymv/Screenshot 2022-04-11 at 4.16.18 AM.png)
+
 #### ADD MEDICINE
 
 To add a new medicine into your application you can use the `add medicine` command when prompted by HALPMI for your input.
@@ -136,6 +142,8 @@ Format: `add medicine /info [batch id], [name], [dosage], [expiry date], [side e
 
 Example: `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_FaOeNF/Screenshot 2022-04-11 at 4.17.09 AM.png)
+
 #### ADD APPOINTMENT
 
 To add a new appointment into your application you can use the `add appointment` command when prompted by HALPMI for your input.
@@ -151,6 +159,8 @@ Format: `add appointment /info [patient nric], [doctor nric], [appointment date]
 
 Example: `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_iZfaSb/Screenshot 2022-04-11 at 4.17.38 AM.png)
+
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients and medicine.
 
@@ -163,6 +173,8 @@ Format: `view doctor`
 
 Examples: `view doctor`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_2erWOk/Screenshot 2022-04-11 at 4.18.30 AM.png)
+
 #### VIEW PATIENT
 
 To view the records of all patients in the application, you can simply call `view patient` without any additional
@@ -172,6 +184,8 @@ Format: `view patient`
 
 Example: `view patient`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_VHDNrB/Screenshot 2022-04-11 at 4.19.04 AM.png)
+
 #### VIEW MEDICINE
 
 To view the records of all medicines in the application, you can simply call `view medicine` without any additional
@@ -180,6 +194,8 @@ parameters.
 Format: `view medicine`
 
 Example: `view medicine`
+
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_nSOnp6/Screenshot 2022-04-11 at 4.20.06 AM.png)
 
 #### VIEW APPOINTMENT
 
@@ -198,6 +214,10 @@ Example 4: `view appointment /info doctor nric, S7654321A` <br>
 Example 5: `view appointment /info doctor name, John` <br>
 Example 6: `view appointment /info date, 2022-10-15`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.20.39 AM.png)
+
+
+
 ### Deleting: `delete`
 Allows user to delete existing records of doctors, patients and medicine.
 
@@ -209,6 +229,8 @@ additional parameter which is the NRIC of the doctor.
 Format: `delete doctor /info [nric]`
 
 Example: `delete doctor /info S7654321A`
+
+
 
 #### DELETE PATIENT
 
