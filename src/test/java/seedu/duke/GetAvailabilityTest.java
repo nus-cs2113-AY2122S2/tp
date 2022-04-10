@@ -23,6 +23,7 @@ public class GetAvailabilityTest {
     private Ui ui = new Ui();
     private static final int INDEX_OF_MAN_AVAILABLE_ON_TWO = 1;
     private static final int INDEX_OF_SALLY_AVAILABLE_ON_TWO = 0;
+    private static final int DAY_TWO_AVAILABILITY = 2;
 
     @BeforeEach
     public void pretestingSetUp() throws HotelLiteManagerException, IOException {
@@ -42,11 +43,9 @@ public class GetAvailabilityTest {
 
     @Test
     public void commandParser_getAvailability_success() throws HotelLiteManagerException {
-        GetAvailableHousekeeperCommand getAvailableHousekeeperCommand =
-                new GetAvailableHousekeeperCommand("2");
-        getAvailableHousekeeperCommand.execute(listContainer, ui);
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
-        ArrayList<Housekeeper> listOfHousekeeperAvailable = housekeeperList.getAvailableHousekeeperByDay(2);
+        ArrayList<Housekeeper> listOfHousekeeperAvailable =
+                housekeeperList.getAvailableHousekeeperByDay(DAY_TWO_AVAILABILITY);
         assertEquals("Man", listOfHousekeeperAvailable.get(INDEX_OF_MAN_AVAILABLE_ON_TWO).getName());
         assertEquals("Sally", listOfHousekeeperAvailable.get(INDEX_OF_SALLY_AVAILABLE_ON_TWO).getName());
     }

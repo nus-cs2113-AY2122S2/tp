@@ -28,13 +28,23 @@ public class ResetAvailabilityCommand extends Command {
      * @param listContainer List of information.
      * @param ui            The instance of the Ui class (used for printing additional messages when a command is
      *                      executed.
-     * @throws IOException  If unable to write to file
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.resetAvailability();
         ui.printHousekeeperListReset(housekeeperList);
+    }
+
+    /**
+     * After all housekeeper's availability has been reset, this method will update the file and resets
+     * every housekeeper availability.
+     *
+     * @param listContainer List of information.
+     * @throws IOException Failed to write to file.
+     */
+    public void writeHousekeeperToFile(ListContainer listContainer) throws IOException {
+        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
         housekeeperFileManager.save(housekeeperList);
     }
