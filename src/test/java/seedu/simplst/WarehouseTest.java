@@ -81,7 +81,7 @@ class WarehouseTest {
         //test 1 - success
         try {
             warehouse.addOrder("01", "Joe Mama", "here");
-            assertEquals(1, warehouse.totalNumberOfOrder());
+            assertEquals(2, warehouse.totalNumberOfOrder());
         } catch (WrongCommandException e1) {
             fail();
         }
@@ -125,7 +125,7 @@ class WarehouseTest {
         //test 6 - fail, order id is repeated
         try {
             warehouse.addOrder("02", "John Cena", "here");
-            assertEquals(1, warehouse.totalNumberOfOrder());
+            assertEquals(2, warehouse.totalNumberOfOrder());
         } catch (WrongCommandException e) {
             fail();
         }
@@ -375,12 +375,37 @@ class WarehouseTest {
             fail();
         }
 
-        //test 2 - fail, SKU does not exist
+        //test 2 - fail, order id is not a number
         try {
-            warehouse.removeOrderline("2", "SKU03", "5");
+            warehouse.removeOrderline("two", "SKU01", "5");
+            fail();
         } catch (WrongCommandException e) {
+            assertTrue(e.isCommand());
+            assertEquals("remove", e.getCommand());
+        }
+
+        //test 3 - fail, quantity is not a number
+        try {
+            warehouse.removeOrderline("2", "SKU01", "five");
+            fail();
+        } catch (WrongCommandException e) {
+            assertTrue(e.isCommand());
+            assertEquals("remove", e.getCommand());
+        }
+    }
+
+
+    @Test
+    void getCapacityOccupiedTest() {
+        warehouse.addUnitGoodToInventory("SKU01", "banana", "BANANAS", "small");
+        try {
+            warehouse.addQuantityOfGoodToInventory("SKU01", "100");
+        } catch (WrongCommandException e1) {
+            fail();
+        } catch (ItemDoesNotExistException e2) {
             fail();
         }
+        assertEquals(100, warehouse.getCapacityOccupied());
     }
 }
 
