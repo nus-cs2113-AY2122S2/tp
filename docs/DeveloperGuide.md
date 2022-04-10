@@ -1,13 +1,9 @@
 # Travel Agency Reservation Booking System (TARBS)
 # Developer Guide
 
-## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 ### Basic Class Diagram 
 ![image](https://user-images.githubusercontent.com/53790951/160271319-4a351f51-afd7-4e04-9451-f04143146551.png)
 
@@ -73,6 +69,7 @@
 
 | Command | Format Examples |
 | ------- | --------------- |
+|help|help <br/> (prints details of all commands)|
 |packages|packages <br/> (prints details of all packages)|
 |info|info {num} (num < number of available packages) <br/> e.g. info 2 |
 |add|add {package_name},{ID},{startDate},{endDate},{hotel},{price},{country},{vacancies} <br/>  e.g. add Skiing Trip,1,23/2/2022,24/2/2022,hotelName,90.99,Singapore,20 <br/> adds a TravelPackage|
