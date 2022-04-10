@@ -1,8 +1,4 @@
 # BEGIN EXPENDITURES
- "amount": "5.0"  "description": "chicken rice"  "paymentMethod": "Cash"  "time": "12/03/2022"  "category": "Food" 
- "amount": "20.0"  "description": "Grab"  "paymentMethod": "Cash"  "time": "30/03/2022"  "category": "Transport" 
- "amount": "3.21"  "description": "Bubble Tea"  "paymentMethod": "Cash"  "time": "30/01/1999"  "category": "Food" 
- "amount": "4.5"  "description": "Porridge"  "paymentMethod": "Cash"  "time": "12/03/2022"  "category": "Food" 
 # END EXPENDITURES
 # BEGIN CREDIT CARDS
 # END CREDIT CARDS

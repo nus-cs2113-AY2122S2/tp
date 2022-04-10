@@ -451,11 +451,16 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        new AddCommand("/cc /n DBS /cb 1.5 /cl 500", user).executeCommand();
+
         String inputString = "/cc /n cash /cb 1.5 /cl 500";
         assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString, user).executeCommand());
 
-        String inputString2 = "/cc /n CASH /cb 1.5 /cl 500";
-        assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString2, user).executeCommand());
+        String secondInputString = "/cc /n CASH /cb 1.5 /cl 500";
+        assertThrows(MindMyMoneyException.class, () -> new AddCommand(secondInputString, user).executeCommand());
+
+        String thirdInputString = "/cc /n dbs /cb 1.5 /cl 500";
+        assertThrows(MindMyMoneyException.class, () -> new AddCommand(thirdInputString, user).executeCommand());
     }
 
     /**
@@ -470,8 +475,8 @@ class AddCommandTest {
         String inputString = "/cc /n cash /cb 101 /cl 500";
         assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString, user).executeCommand());
 
-        String inputString2 = "/cc /n cash /cb -1 /cl 500";
-        assertThrows(MindMyMoneyException.class, () -> new AddCommand(inputString2, user).executeCommand());
+        String secondInputString = "/cc /n cash /cb -1 /cl 500";
+        assertThrows(MindMyMoneyException.class, () -> new AddCommand(secondInputString, user).executeCommand());
     }
 
     /**
