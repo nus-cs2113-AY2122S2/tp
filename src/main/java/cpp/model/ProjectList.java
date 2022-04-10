@@ -128,7 +128,7 @@ public class ProjectList {
      * @param githubLink New GitHub repo link for the project
      */
     public void addGithubLink(int index, String githubLink) {
-        assert (githubLink != null && githubLink.equals("")) : "Cannot add deadline.";
+        assert (githubLink != null && !githubLink.equals("")) : "Cannot add a Github link.";
         if (index != Constants.PROJECT_NOT_FOUND) {
             Project project = projectList.get(index - 1);
             try {
