@@ -51,7 +51,6 @@ public class InvMgr {
                 ui.showError(e);
             }
         }
-        assert false : "Execution should never reach this point!";
     }
 
     /**
