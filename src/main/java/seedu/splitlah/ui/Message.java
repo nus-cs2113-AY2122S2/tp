@@ -449,13 +449,13 @@ public abstract class Message {
     public static final String ASSERT_GROUPEDIT_GROUP_ID_INVALID =
             "Group ID is less than or equals to zero.";
     public static final String ERROR_GROUPEDIT_SAME_PERSON_LIST =
-            "The new person list is the same as old list"
-                  + " ,please rectify and try again.";
+            "The new person list is the same as old list, please rectify and try again.";
     public static final String ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE =
-             "There is existing group with the group name"
-                  + ", please rectify and try again.";
+             "There is existing group with the group name, please rectify and try again.";
     public static final String ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW =
              "The group name is the same as the old one, please rectify and try again.";
+    public static final String ERROR_GROUPEDIT_NO_CHANGE =
+             "No changes made, please rectify and try again.";
 
     // Group Edit Command Parser
     public static final String ERROR_GROUPEDIT_NO_EDIT_DELIMITERS_FOUND =

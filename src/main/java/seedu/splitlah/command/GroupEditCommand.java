@@ -17,7 +17,7 @@ import java.util.logging.Level;
  * @author Tianle
  */
 public class GroupEditCommand extends Command {
-    private static final String COMMAND_SUCCESS = "The group was edited successfully.\n";
+    private static final String COMMAND_SUCCESS = "The group was edited successfully.";
     private final String groupName;
     private final String[] involvedList;
     private final int groupId;
@@ -55,6 +55,9 @@ public class GroupEditCommand extends Command {
     public void run(Manager manager) {
         TextUI ui = manager.getUi();
         Group group;
+        boolean editedGroupName = false;
+        boolean editedPersonList = false;
+
 
         try {
             group = manager.getProfile().getGroup(groupId);
@@ -76,24 +79,37 @@ public class GroupEditCommand extends Command {
             PersonList newList = new PersonList(involvedList);
             if (newList.isSamePersonList(oldList)) {
                 ui.printlnMessage(Message.ERROR_GROUPEDIT_SAME_PERSON_LIST);
-                return;
             } else {
-                PersonList newPersonList = new PersonList(involvedList);
-                group.setPersonList(newPersonList);
+                editedPersonList = true;
             }
         }
 
         if (groupName != null) {
             if (groupName.equals(group.getGroupName())) {
                 ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW);
-                return;
             } else if (existingGroupWithTheSameName(manager.getProfile().getGroupList(), groupName, groupId)) {
                 ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE);
-                return;
             } else {
-                group.setGroupName(groupName);
+                editedGroupName = true;
             }
         }
+
+        if (editedGroupName) {
+            group.setGroupName(groupName);
+        }
+        if (editedPersonList) {
+            PersonList newPersonList = new PersonList(involvedList);
+            group.setPersonList(newPersonList);
+        }
+
+        boolean isGroupEdited = (editedGroupName || editedPersonList);
+        if (isGroupEdited) {
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS);
+        } else {
+            ui.printlnMessage(Message.ERROR_GROUPEDIT_NO_CHANGE);
+            return;
+        }
+
         manager.saveProfile();
         ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + group);
     }
