@@ -263,7 +263,7 @@ public class Parser {
      * @return A valid integer user index.
      * @throws InvalidIndexException if amount is not a valid integer or out of bounds.
      */
-    public static int getValidUserIndex(String userIndex, int numberOfMembers) throws InvalidIndexException {
+    public static Integer getValidUserIndex(String userIndex, int numberOfMembers) throws InvalidIndexException {
         assert (userIndex != null) : ASSERT_USER_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(userIndex);
@@ -285,7 +285,7 @@ public class Parser {
      * @return A valid expenditure index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static int getValidExpenditureIndex(String expenditureIndex, int numberOfExpenditures)
+    public static Integer getValidExpenditureIndex(String expenditureIndex, int numberOfExpenditures)
             throws InvalidIndexException {
         assert (expenditureIndex != null) : ASSERT_EXPENDITURE_INDEX_NOT_NULL;
         try {
@@ -308,7 +308,7 @@ public class Parser {
      * @return A valid income index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static int getValidIncomeIndex(String incomeIndex, int numberOfIncomes) throws InvalidIndexException {
+    public static Integer getValidIncomeIndex(String incomeIndex, int numberOfIncomes) throws InvalidIndexException {
         assert (incomeIndex != null) : ASSERT_INCOME_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(incomeIndex);
@@ -332,7 +332,7 @@ public class Parser {
     public static Integer getValidCategoryIndex(String categoryIndex) throws InvalidIndexException {
         assert (categoryIndex != null) : ASSERT_CATEGORY_NOT_NULL;
         try {
-            Integer checkIndex = Integer.parseInt(categoryIndex);
+            int checkIndex = Integer.parseInt(categoryIndex);
             ParserUtility.checkTooHighIndex(checkIndex, Category.getNumberOfCategories());
             ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_CATEGORY_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
@@ -350,7 +350,7 @@ public class Parser {
      * @return A valid group index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static int getValidGroupIndex(String groupIndex) throws InvalidIndexException {
+    public static Integer getValidGroupIndex(String groupIndex) throws InvalidIndexException {
         assert (groupIndex != null) : ASSERT_GROUP_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(groupIndex);
