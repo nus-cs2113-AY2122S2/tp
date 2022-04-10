@@ -83,7 +83,9 @@ Here are the items matching your search terms:
 ```
 
 ### List All Items: `list`
-List all items in the inventory.
+List all items in the inventory. `list` disregards all arguments after it.
+
+e.g. `list foo` will behave the same as `list`.
 
 Format: `list`
 
