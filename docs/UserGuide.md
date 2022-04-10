@@ -206,7 +206,7 @@ List all your expenditures stored.
 4. $4.50 was spent on Porridge(Food) using Cash [12/03/2022]
 -----------------------------------------------
 ```
-For example: `list /e 03/22` <br/>
+For example: `list /e 03/2022` <br/>
 List all your expenditures in March 2022.
 ```
 > list /e 03/2022
