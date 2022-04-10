@@ -25,24 +25,24 @@ public class GetAvailabilityTest {
     @Test
     public void duplicateAvailableDayCommand_exceptionThrown() {
         assertThrows(DuplicateCommandException.class, () ->
-                new CommandParser().parse("get available on get available on  ");
+                new CommandParser().parse("get available on get available on  "));
     }
 
     @Test
     public void emptyDay_exceptionThrown() {
         assertThrows(EmptyDayException.class, () ->
-                new CommandParser().parse("get available on ");
+                new CommandParser().parse("get available on "));
     }
 
     @Test
     public void dayGivenNotInteger_exceptionThrown() {
         assertThrows(InvalidDayException.class, () ->
-                new CommandParser().parse("get available on x");
+                new CommandParser().parse("get available on x"));
     }
 
     @Test
     public void dayGivenNotInLimit_exceptionThrown() {
         assertThrows(InvalidDayException.class, () ->
-                new CommandParser().parse("get available on 100");
+                new CommandParser().parse("get available on 100"));
     }
 }
