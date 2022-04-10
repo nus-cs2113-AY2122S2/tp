@@ -91,7 +91,6 @@ Enhancements implemented:
     - Added `Add Expenditure` portion
     - Added Fig 7 - AddCommand Sequence Diagram
     - Added Fig 8 - Add Expenditure Command Sequence Diagram
-    - Added Fig 9 - Add Credit Card Command Sequence Diagram
       <br/><br/>
 2. Wrote the `Appendix Requirements`
     - Added Product Scope, Non-Functional Requirements, Glossary
