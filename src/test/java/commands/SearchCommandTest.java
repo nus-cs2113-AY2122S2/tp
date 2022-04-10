@@ -292,4 +292,64 @@ public class SearchCommandTest {
                 .replaceAll("\r", "");
         assertEquals(expectedOutput, consoleOutputs);
     }
+
+    @Test
+    void execute_validSearchForAllWithWhitespace_expectSuccess() throws InvalidCommandException {
+        SearchCommand searchPlanCommand = parser.createSearchCommand("search /all");
+        String expectedOutput =
+                "The exercise(s) containing keyword(s)" + ui.getColorText(TextColor.COLOR_YELLOW, " [ ] ")
+                        + "is(are) listed below together\nwith its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "1. push up\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "2. sit up\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "3. pull up\n")
+                        + "----------------------------------------------------------------------\n"
+                        + "The workout(s) containing keyword(s)"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [ ] ")
+                        + "is(are) listed below together\n"
+                        + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "1. push up (10 reps)\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "2. sit up (15 reps)\n")
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "3. pull up (20 reps)\n")
+                        + "----------------------------------------------------------------------\n"
+                        + "The plan(s) containing keyword(s)"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [ ] ")
+                        + "is(are) listed below together\n" + "with its(their) original index number(s).\n"
+                        + "----------------------------------------------------------------------\n"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "1. more muscles\n");
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        searchPlanCommand.execute();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "")
+                .replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
+    }
+
+    @Test
+    void execute_validSearchForExtraWhitespaces_expectNoMatch() throws InvalidCommandException {
+        SearchCommand searchAllCommand = parser.createSearchCommand("search /all         p");
+        String expectedOutput =
+                "Sorry, no matching exercise found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [        p]") + ".\n"
+                        + "----------------------------------------------------------------------\n"
+                        + "Sorry, no matching workout found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [        p]") + ".\n"
+                        + "----------------------------------------------------------------------\n"
+                        + "Sorry, no matching plan found for the keyword"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [        p]") + '.';
+
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        searchAllCommand.execute();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "")
+                .replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
+    }
 }
