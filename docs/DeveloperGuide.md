@@ -784,7 +784,7 @@ Test Scenario 2: There is a session named Test1 currently stored in the applicat
 
 Test Scenario 1: No sessions are currently stored in the application. 
 * Test Command: `session /summary /sid 1` <br>
-   Expected: An error message should be printed, indicating that no session are stored in SplitLah.
+   Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
 
 Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
@@ -808,7 +808,7 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 
 Test Scenario 1: No sessions are currently stored in the application.
 * Test Command: `session /view /sid 1` <br>
-  Expected: An error message should be printed, indicating that no session are stored in SplitLah.
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
 
 Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
@@ -831,7 +831,7 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 
 Test Scenario 1: No sessions are currently stored in the application.
 * Test Command: `session /list` <br>
-  Expected: An error message should be printed, indicating that no session are stored in SplitLah.
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
 
 Test Scenario 2: At least 1 session exists in the application.
 * Test Command: `session /list`<br>
