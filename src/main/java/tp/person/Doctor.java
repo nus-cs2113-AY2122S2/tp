@@ -19,6 +19,10 @@ public class Doctor extends Person {
         this.department = department;
     }
 
+    public void setWardNumber(int wardNumber) {
+        this.wardNumber = wardNumber;
+    }
+
     public String getDepartment() {
         return department;
     }

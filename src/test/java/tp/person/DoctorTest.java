@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //@@author cczhouqi
 class DoctorTest {
     private final Doctor doctor = new Doctor("1234", "john",
-            "12341234", "3600@gmail.com", "General", 10);
+            "12341234", "3600@gmail.com", "General", -1);
 
 
     @Test

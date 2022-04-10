@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NurseTest {
     private final Nurse nurse = new Nurse("1234", "john",
-            "12341234", "3600@gmail.com", "Junior", 10);
+            "12341234", "3600@gmail.com", "Junior", -1);
 
     @Test
     void testToString() {
