@@ -492,6 +492,8 @@ public class UI {
 
     /**
      * Prints a message when a plan scheduled on a particular day is removed.
+     *
+     * @param dayName Name of the day to be printed.
      */
     public void printClearedScheduleOnADay(String dayName) {
         if (dayName == " ") {
