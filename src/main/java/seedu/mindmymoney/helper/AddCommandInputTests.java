@@ -269,5 +269,4 @@ public class AddCommandInputTests {
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         checkAfterCurrentDate(date);
     }
-
 }

@@ -39,7 +39,10 @@ C --> C
 deactivate C
 
 else else
-C --> MMM: MindMyMoneyException
+C --> MMM
+note right
+An exception containing warning messages is thrown
+end note
 
 end
 C --> MMM

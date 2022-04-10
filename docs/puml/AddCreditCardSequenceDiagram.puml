@@ -19,10 +19,10 @@ activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> GeneralFunctions: parseInputWithCommandFlag()
 activate GeneralFunctions HELPER_COLOUR
-GeneralFunctions --> AddCommand: cardName, cashBack, cardLimit
+GeneralFunctions --> AddCommand
 deactivate GeneralFunctions
 
-AddCommand -> AddCommand: testCreditCardParameters(cardName, cashBack, cardLimit)
+AddCommand -> AddCommand: testCreditCardParameters()
 activate AddCommand COMMANDS_COLOUR
 AddCommand -> AddCommandInputTest: testsCardName(), testCashBack(), testCardLimit()
 activate AddCommandInputTest HELPER_COLOUR
@@ -33,17 +33,20 @@ AddCommand --> AddCommand
 deactivate AddCommand COMMANDS_COLOUR
 
 create CreditCard
-AddCommand -> CreditCard: new CreditCard(cardName, cashBack, cardLimit)
+AddCommand -> CreditCard: new CreditCard()
 activate CreditCard USERFINANCIAL_COLOUR
 CreditCard --> AddCommand
 deactivate CreditCard
 
-AddCommand -> CreditCardList: creditCardList.add(new CreditCard)
+AddCommand -> CreditCardList: creditCardList.add()
 activate CreditCardList DATA_COLOUR
 CreditCardList --> AddCommand
 deactivate CreditCardList
 
-AddCommand -> AddCommand: print added credit card
+note left
+Details of newly added
+Credit Card is printed out
+end note
 
 AddCommand --> AddCommand:
 deactivate AddCommand

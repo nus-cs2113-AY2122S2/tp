@@ -61,6 +61,11 @@ deactivate
 C --> C
 deactivate
 
+note left
+Details of newly added
+Income is printed out
+end note
+
 C --> MMM
 deactivate
 
