@@ -1,0 +1,30 @@
+@startuml
+!include Style.puml
+
+box Serialize List
+participant ":ExpenditureList" as ExpenditureList USERFINANCIAL_COLOUR
+participant ":SerializerFunctions" as SerializerFunctions STORAGE_COLOUR
+participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
+participant ":PropertyList" as PropertyList STORAGE_COLOUR
+end box
+
+[-> ExpenditureList ++ : serialize()
+ExpenditureList -> SerializerFunctions ++ : addListToStringBuilder()
+loop for each element in list
+    SerializerFunctions -> Expenditure ++ : serialize()
+
+    Expenditure -> PropertyList ** : PropertyList()
+    activate PropertyList
+    deactivate PropertyList
+    PropertyList --> Expenditure --
+    Expenditure -> PropertyList ++ : setValue()
+    PropertyList --> Expenditure --
+    Expenditure -> PropertyList ++ : serialize()
+    PropertyList --> Expenditure --
+
+    Expenditure --> SerializerFunctions --
+end
+SerializerFunctions --> ExpenditureList --
+[<-- ExpenditureList --
+
+@enduml

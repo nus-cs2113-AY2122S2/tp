@@ -1,0 +1,28 @@
+@startuml
+!include Style.puml
+
+box Saving
+participant ":MMM" as MMM MMM_COLOUR
+participant ":Storage" as Storage STORAGE_COLOUR
+participant ":User" as User USERFINANCIAL_COLOUR
+participant ":ExpenditureList" as ExpenditureList USERFINANCIAL_COLOUR
+participant ":CreditCardList" as CreditCardList USERFINANCIAL_COLOUR
+participant ":IncomeList" as IncomeList USERFINANCIAL_COLOUR
+end box
+
+MMM -> Storage ++ : save()
+Storage -> User ++ : serialize()
+activate User
+User -> ExpenditureList ++ : serialize()
+
+ref over User, ExpenditureList : serialize list
+ExpenditureList --> User --
+User -> CreditCardList ++ : serialize()
+
+CreditCardList --> User --
+User -> IncomeList ++ : serialize()
+
+IncomeList --> User --
+User --> Storage --
+deactivate Storage
+@enduml
