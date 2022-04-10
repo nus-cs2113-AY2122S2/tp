@@ -3,9 +3,9 @@ skinparam maxMessageSize 100
 
 hide footbox
 participant "c:ShowCommand" as ShowCommand
-participant "<font color=red>**<<class>>** \nTimetable" as Timetable
-participant "TaskList" as TaskList
-participant "<font color=red>**<<class>>** \nTimetablePrinting" as TimetablePrinting
+participant "<font color=red>**<<class>>** \n:Timetable" as Timetable
+participant ":TaskList" as TaskList
+participant "<font color=red>**<<class>>** \n:TimetablePrinting" as TimetablePrinting
 
 ShowCommand -> Timetable: showScheduleByDay(dateInput: LocalDate, filteredtasks: ArrayList<Task>, ui: Ui)
 activate Timetable
