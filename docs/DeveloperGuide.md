@@ -498,6 +498,45 @@ The general workflow of the `activity /delete` command is as follows:
 10. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUI#printlnMessage`.
 
 ### Edit an activity
+**API reference:** [`ActivityEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `activity /edit` command.
+<br>
+<br>
+![Edit Activity Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ActivityEditCommand.drawio.png)
+<br>
+<br>
+`activity /edit` functions by deleting an existing activity and recreating it with the same `activityId`, but with 
+edited details.
+<br>
+
+The general workflow of the `activity /edit` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input using methods in the `Parser` class to obtain an `ActivityEditCommand` object.
+3. `ActivityEditCommand#run` method is then invoked to run the `activity /edit` command.
+4. Once the command runs, `ActivityEditCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
+5. The `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to edit is stored in.
+    - If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
+    - Else, the `Session` object that the activity is stored in is returned.
+6. `Session#getActivity` is called on the `activityId` provided by the user to fetch the `Activity` object representing
+   the activity to be edited. 
+    - If the activity does not exist, a message indicating that there is no such activity is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
+    - Else, the `Activity` object to be edited is returned and stored temporarily as `oldActivity`.
+7. `ActivityEditCommand#retrieveDetailsFromOldActivity` is called on `oldActivity` to retrieve existing activity details
+   for delimiters not supplied by the user. This allows `ActivityEditCommand` to reuse existing details for details the user
+   does not wish to edit.
+8. `ActivityEditCommand#updateCostAndCostList` and `ActivityEditCommand#validateCostListAndInvolvedList` are called to 
+   create a list of costs and validate them. These costs are necessary to recreate the activity after deleting it.
+9. `ActivityEditCommand#addAllActivityCost` is called to add the respective costs to each `Person` object involved in the activity.
+     - A dummy activity unique identifier that cannot be used by any other activity is when adding these costs.
+10. `Session#removeActivity()` method is invoked to remove `oldActivity` from the list of activities stored.
+11. A new `Activity` object is created using the new activity details and stored as `newActivity`.
+12. `Session#addActivity` is called to add `newActivity` to the session.
+13. `ActivityEditCommand#updateDummyActivityIdsInActivityCosts` is called on the session to update all dummy activity unique identifiers added by `ActivityEditCommand#addAllActivityCost` to
+    the `activityId` of the old activity.
+14. `Manager#saveProfile` is called to save the changes to the local storage file.
+15. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully edited with `TextUi#printlnMessage`.
 
 ### View an activity
 
