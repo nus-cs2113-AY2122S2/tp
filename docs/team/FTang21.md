@@ -8,7 +8,7 @@ Given below are my contributions to the project.
 
 ### Summary of Contributions
 #### Code contributed
-[Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=ftang21&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
+[Franke tP code dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=ftang21&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 * Implemented help feature.
 * Implemented project/todo deadline feature.
 
