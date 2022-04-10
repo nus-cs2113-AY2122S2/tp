@@ -1412,7 +1412,7 @@ The following sequence diagram illustrates how the `schedule /update` command wo
 ![Update Schedule Sequence Diagram](uml/sequenceDiagrams/schedule/images/updateSchedule.png)
 <br><br>
 
-<span class="info box>:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+<span class="info box">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 **(Step 1)** The program waits for the user's input, which in this case,
@@ -1591,12 +1591,12 @@ an `InvalidScheduleException` would be thrown, and the entire process is aborted
 scheduled on that day. The `Day` object that stores the plan details for the specified day in 
 the user command will be deleted.
 
-**(Steps 7 and 8)** After which, the `DayList#convertDayNumberToDay()` method will be called.
+**(Steps 7 to 9)** After which, the `DayList#convertDayNumberToDay()` method will be called.
 As the method name suggests, this method will convert the day number to its corresponding day name. 
 For example, day number 1 will be converted to Monday. The purpose of this method is to 
 make the success message to be displayed to the user more readable.
 
-**(Steps 9 and 10)** After the plan is successfully cleared for that indicated day, a success message of the process 
+**(Steps 10 and 11)** After the plan is successfully cleared for that indicated day, a success message of the process 
 would be printed to the user through the terminal by calling the `UI#printClearedScheduleOnADay()` method. 
 An example of a success message would be
 
@@ -1606,7 +1606,7 @@ Plan has been cleared for Monday.
 ----------------------------------------------------------------------
 ```
 
-**(Step 11)** `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
+**(Step 12)** `FileManager#rewriteAllDaysScheduleToFile()` is called to write all the `Day` objects' data stored 
 in the `dayList` into `schedule.txt` which is stored on the user's local filesystem. For more information
 on the file management, refer to this [section](#rewriting-the-entire-resource-file-with-the-most-recent-set-of-data).
 
