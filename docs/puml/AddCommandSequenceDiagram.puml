@@ -14,16 +14,17 @@ alt hasCreditCardFlag()
 AddCommand -> AddCommand: addCreditCard()
 activate AddCommand COMMANDS_COLOUR
 AddCommand --> AddCommand
-AddCommand --> MMM
 deactivate AddCommand
+AddCommand --> MMM
 
 
 else hasIncomeFlag()
 AddCommand -> AddCommand: addIncome()
 activate AddCommand COMMANDS_COLOUR
 AddCommand --> AddCommand
-AddCommand --> MMM
 deactivate AddCommand
+AddCommand --> MMM
+
 
 else hasExpenditureFlag()
 AddCommand -> AddCommand: addExpenditure()
