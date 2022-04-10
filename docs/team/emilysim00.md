@@ -7,12 +7,11 @@ The users will also be able to schedule their workout plans for a week (7 days).
 [here](https://github.com/AY2122S2-CS2113T-T09-2/tp) for more information.
 
 ### Summary of Contributions
-
 A detailed report of my code contributions to the tP can be found in the 
 [tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=emilysim00&breakdown=true)
 hosted by the module coordinators of CS2113T.
 
-#### Summary of my feature's code contributions 
+#### Summary of my code contributions 
 * Implemented various WerkIt's features. A summary of these features implemented by me is stated below. 
   * **New Feature:** View all workouts <br/>
     * **What it does:** Allows user to view all the workouts created by him/her. <br/>
@@ -40,16 +39,12 @@ hosted by the module coordinators of CS2113T.
 that a plan has been successfully scheduled on the day stated. While the latter method will print a successful message to indicate
 that a plan has been successfully removed on the day stated. 
 * Contributed parts of the `Parser` API, mainly the `createScheduleCommand()` method.
+* Wrote the Junits test cases for `ScheduleCommandTest.java`, `DayListTest.java` and parts of `WorkoutListTest.java`.
 
 #### Enhancements to existing features
 In addition, I have also written JavaDocs for all the methods stated above. Assertions are added into various
 parts of the method to ensure the code works based on assumptions, such as testing the day range. Logging was added to 
-the methods to capture and keep track of the events that has occurred. 
-
-#### Summary of my Test Code contributions
-* Wrote JUnit test cases for parts of WorkoutListTest.java
-* Wrote JUnit test cases for ScheduleCommandTest.java
-* Wrote JUnit test cases for DayListTest.java
+the methods to capture and keep track of the events that has occurred.
 
 ### Contributions to the User Guide (UG)
 * Wrote the [Introduction and Terminology](../UserGuide.md) section in the User Guide.
@@ -66,16 +61,11 @@ the methods to capture and keep track of the events that has occurred.
 * Creating the [Architecture Diagram](../DeveloperGuide.md#architecture-diagram) under the Design Section.
 * Wrote the design section on [UI component](../DeveloperGuide.md#ui-component) and added the class diagram of it.
 * Wrote the design section on [Schedule related features](../DeveloperGuide.md#schedule-related-features).
-* Wrote the following contributions to the [Implementation](../DeveloperGuide.md#implementation) section (including sequence diagram):
-  * [Schedule Features](../DeveloperGuide.md#schedule)
-    * [How a plan is being updated/added into the schedule](../DeveloperGuide.md#update-schedule)
-    * [How to view the schedule](../DeveloperGuide.md#view-schedule)
-    * [How to remove a scheduled workout plan](../DeveloperGuide.md#clear-schedule-for-a-day)
-    * [How to reset the workout plan schedule](../DeveloperGuide.md#clear-schedule-for-the-week)
+* Wrote the [Schedule Features](../DeveloperGuide.md#schedule) under 
+the [Implementation](../DeveloperGuide.md#implementation) section (including sequence diagram).
 * Wrote part of [user stories](../DeveloperGuide.md#user-stories).
 * Wrote part of [manual testing instructions](../DeveloperGuide.md#test-on-schedule-features).
 * Wrote the [non-functional requirements](../DeveloperGuide.md#non-functional-requirements) section.
-
 
 ### Review/Mentoring Contributions
 Reviewed teammates' pull requests, including (but not limited to):
