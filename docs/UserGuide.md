@@ -12,7 +12,8 @@
       * [Add a customer: `addCustomer`](#add-a-customer-addcustomer)
       * [Delete a customer: `deleteCustomer`](#delete-a-customer-deletecustomer)
       * [List all customers: `listCustomer`](#list-all-customers-listcustomer)
-      * [Find a customer by IC: `findCustomer`](#find-a-customer-by-ic-findcustomer)
+      * [Find a customer by IC: `findCustomerIc`](#find-a-customer-by-ic-findcustomeric)
+      * [Find customers by Name: `findCustomerName`](#find-customers-by-name-findcustomername)
     * [Booking Functionalities](#Booking-Functionalities)
       * [Create new flight booking: `book`](#create-new-flight-booking-book)
       * [Remove flight booking: `deleteBooking`](#remove-flight-booking-deletebooking)
@@ -153,16 +154,27 @@ Show the list of all existing customers along with customer information.
 Format: `listCustomer`
 
 
-### Find a customer by IC: `findCustomer`
+### Find a customer by IC: `findCustomerIc`
 Find the  customer with the specified ic.
 
-Format: `findCustomer IC`
+Format: `findCustomerIc IC`
 
 * List the customer information with the `IC`.
 * If no customer is found “No customer found.” will be displayed.
 
 Example of usage:
-* `findCustomer A9470034C`
+* `findCustomerIc A9470034C`
+
+### Find customers by Name: `findCustomerName`
+Find all the customer with the specified name.
+
+Format: `findCustomerName NAME`
+
+* List the customer information with the `NAME`.
+* If no customer is found “No customer found.” will be displayed.
+
+Example of usage:
+* `findCustomerName Bob`
 
 ## Booking Functionalities
 ### Create new flight booking: `book`
@@ -337,7 +349,7 @@ Example of usage: <br>
 ### Add a stuff: `addStaff`
  
 Add a new staff with required staff information:
-* id: 3 character Staff Id, unique for each staff, follow wthe format: [a-zA-Z][0-9][0-9]
+* id: 3 character Staff ID, unique for each staff, follow the format: [a-zA-Z][0-9][0-9]
 * pw: staff's password, string
 * n: staff name, string
 * j: staff job, string
@@ -382,29 +394,29 @@ Example of usage: <br>
 
 ## Command Summary
 
-| Action                        | Format                                                                                             | Examples                                                             |
-|-------------------------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| **Create flight route**       | `addRoute  fid/FLIGHT_ID fd/FLIGHT_DATE ft/FLIGHT_TIME d/DESTINATION s/SOURCE c/CAPACITY`          | `addRoute fid/Bu3037 fd/02172022 ft/11:10 d/singapore s/china c/100` |
-| **Find flight route**         | `findRoute fd/FLIGHT_DATE d/DESTINATION s/SOURCE [ft/FLIGHT_TIME]`                                 | `findRoute fd/02172022 d/singapore s/china ft/15:30`                 |
-| **List all flight routes**    | `listRoute`                                                                                        | `listRoute`                                                          |
-| **Delete flight route**       | `deleteRoute INDEX`                                                                                | `deleteRoute 3`                                                      |
-| **Add customer**              | `addCustomer`                                                                                      | `addCustomer ic/IC n/NAME p/PHONE_NUMBER e/EMAIL`                    | `addCustomer ic/W9248013B n/Eddie p/38201843 e/eddie1238@123.com`
-| **Delete a customer**         | `deleteCustomer INDEX`                                                                             | `deleteCustomer 2`                                                   |
-| **List all customers**        | `listCustomer`                                                                                     | `listCustomer`                                                       |
-| **Find customer by IC**       | `findCustomer IC`                                                                                  | `findCustomer A9470034C`                                             |
-| **Create flight booking**     | `book ic/IC fid/FLIGHT_ID`                                                                         | `book ic/W9848113C fid/SQ123`                                        |
-| **Remove flight booking**     | `deleteBooking INDEX`                                                                              | `deleteBooking 2`                                                    |
-| **List all flight bookings**  | `listBooking`                                                                                      | `listBooking`                                                        |
-| **Add Menu Item**             | `addMenuItem name/MENU_ITEM_NAME type/MENUITEMTYPE price/MENUITEMPRICE`                            | `addMenuItem name/fanta_grape type/drinks price/0.9`                 |
-| **Delete menu item**          | `deleteMenuItem INDEX`                                                                             | `deleteMenuItem 4`                                                   |
-| **List all menu items**       | `listMenuItems`                                                                                    | `listMenuItems`                                                      |
-| **Find menu items by name**   | `findMenuItemName MENU ITEM NAME`                                                                  | `findMenuItemName chocolate cake`                                    |
-| **Find menu items by type**   | `findMenuItemType MENUITEMTYPE`                                                                    | `findMenuItemType drinks`                                            |
-| **Add Meal Reservation**      | `reserveMeal ic/CUSTOMERID fid/FLIGHTID MENUITEMTYPE/MENU_ITEM_NAME [MENUITEMTYPE/MENU_ITEM_NAME]` | `reserveMeal fid/MU8401 ic/W6235354B drinks/coke`                    |
-| **Remove Meal Reservation**   | `deleteMealReservation ic/CUSTOMERID fid/FLIGHTID`                                                 | `deleteMealReservation fid/MU8401 ic/W6235354B`                      |
-| **Find Meal Reservation**     | `findMealReservation ic/CUSTOMERID fid/FLIGHTID`                                                   | `findMealReservation fid/MU8401 ic/W6235354B`                        |
-| **List all Meal Reservation** | `listMealReservations`                                                                             | `listMealReservations`                                               |
-| **Add a staff**               | `addStaff  id/ID pw/PW n/STAFF_NAME j/STAFF_JOB p/STAFF_PHONE email/STAFF_EMAIL`                   | `addStaff id/A12 pw/123wer n/Mike j/manager p/88888888 e/gmail@gamil.com`|
-| **Delete a staff**            | `deleteStaff  id/index`                                                                            | `deleteStaff id/1`                                                   |
-| **List staffs**               | `listStaffs`                                                                                       | `listStaffs`                                                         |
-| **Exit the system**           | `bye`                                                                                              | `bye`                                                                |
+| Action                        | Format                                                                                             | Examples                                                                  |
+|-------------------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| **Create flight route**       | `addRoute  fid/FLIGHT_ID fd/FLIGHT_DATE ft/FLIGHT_TIME d/DESTINATION s/SOURCE c/CAPACITY`          | `addRoute fid/Bu3037 fd/02172022 ft/11:10 d/singapore s/china c/100`      |
+| **Find flight route**         | `findRoute fd/FLIGHT_DATE d/DESTINATION s/SOURCE [ft/FLIGHT_TIME]`                                 | `findRoute fd/02172022 d/singapore s/china ft/15:30`                      |
+| **List all flight routes**    | `listRoute`                                                                                        | `listRoute`                                                               |
+| **Delete flight route**       | `deleteRoute INDEX`                                                                                | `deleteRoute 3`                                                           |
+| **Add customer**              | `addCustomer`                                                                                      | `addCustomer ic/IC n/NAME p/PHONE_NUMBER e/EMAIL`                         | `addCustomer ic/W9248013B n/Eddie p/38201843 e/eddie1238@123.com`
+| **Delete a customer**         | `deleteCustomer INDEX`                                                                             | `deleteCustomer 2`                                                        |
+| **List all customers**        | `listCustomer`                                                                                     | `listCustomer`                                                            |
+| **Find customer by IC**       | `findCustomer IC`                                                                                  | `findCustomer A9470034C`                                                  |
+| **Create flight booking**     | `book ic/IC fid/FLIGHT_ID`                                                                         | `book ic/W9848113C fid/SQ123`                                             |
+| **Remove flight booking**     | `deleteBooking INDEX`                                                                              | `deleteBooking 2`                                                         |
+| **List all flight bookings**  | `listBooking`                                                                                      | `listBooking`                                                             |
+| **Add Menu Item**             | `addMenuItem name/MENU_ITEM_NAME type/MENUITEMTYPE price/MENUITEMPRICE`                            | `addMenuItem name/fanta_grape type/drinks price/0.9`                      |
+| **Delete menu item**          | `deleteMenuItem INDEX`                                                                             | `deleteMenuItem 4`                                                        |
+| **List all menu items**       | `listMenuItems`                                                                                    | `listMenuItems`                                                           |
+| **Find menu items by name**   | `findMenuItemName MENU ITEM NAME`                                                                  | `findMenuItemName chocolate cake`                                         |
+| **Find menu items by type**   | `findMenuItemType MENUITEMTYPE`                                                                    | `findMenuItemType drinks`                                                 |
+| **Add Meal Reservation**      | `reserveMeal ic/CUSTOMERID fid/FLIGHTID MENUITEMTYPE/MENU_ITEM_NAME [MENUITEMTYPE/MENU_ITEM_NAME]` | `reserveMeal fid/MU8401 ic/W6235354B drinks/coke`                         |
+| **Remove Meal Reservation**   | `deleteMealReservation ic/CUSTOMERID fid/FLIGHTID`                                                 | `deleteMealReservation fid/MU8401 ic/W6235354B`                           |
+| **Find Meal Reservation**     | `findMealReservation ic/CUSTOMERID fid/FLIGHTID`                                                   | `findMealReservation fid/MU8401 ic/W6235354B`                             |
+| **List all Meal Reservation** | `listMealReservations`                                                                             | `listMealReservations`                                                    |
+| **Add a staff**               | `addStaff  id/ID pw/PW n/STAFF_NAME j/STAFF_JOB p/STAFF_PHONE email/STAFF_EMAIL`                   | `addStaff id/A12 pw/123wer n/Mike j/manager p/88888888 e/gmail@gamil.com` |
+| **Delete a staff**            | `deleteStaff  id/index`                                                                            | `deleteStaff id/1`                                                        |
+| **List staffs**               | `listStaffs`                                                                                       | `listStaffs`                                                              |
+| **Exit the system**           | `bye`                                                                                              | `bye`                                                                     |
