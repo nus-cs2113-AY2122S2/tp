@@ -217,7 +217,6 @@ public class Validator {
     public static void validateMedicine(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 6);
         assert parameters.length == 6 : "Validate failed to check parameter length";
-        boolean check = true;
         validateMedicineName(parameters[1);
         validateDosage(parameters[2]);
         validateExpiry(parameters[3]);
