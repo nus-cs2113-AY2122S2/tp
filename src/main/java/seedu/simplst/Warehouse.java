@@ -457,6 +457,9 @@ public class Warehouse {
         try {
             int orderID = Integer.parseInt(oid);
             Order order = findOrder(orderID);
+            if (order.getFulfilled()) {
+                System.out.println("Order has already been fulfilled, unable to edit order.");
+            }
             order.removeOrderlineByQty(sku, qty);
 
         } catch (NumberFormatException e) {
