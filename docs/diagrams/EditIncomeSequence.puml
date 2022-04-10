@@ -15,11 +15,11 @@ Ilist -> Ilist: isDescEdited(1, "Bills")
 activate Ilist
 Ilist -> Alist: get(0)
 activate Alist
-Alist --> Ilist : Item: Income
+Alist --> Ilist : item: Income
 deactivate Alist
 Ilist -> Inc: getDescription()
 activate Inc
-Inc --> Ilist: Description:String
+Inc --> Ilist: description:String
 deactivate Inc
 
 alt OPT_COLOR description != null && !Description.equals("Bills")
@@ -40,7 +40,7 @@ Ilist -> Ilist: isPermEdited(1, null)
 activate Ilist
 Ilist -> Alist: get(0)
 activate Alist
-Alist --> Ilist : Item: Income
+Alist --> Ilist : item: Income
 deactivate Alist
 Ilist -> Inc: isPermanent()
 activate Inc
@@ -65,11 +65,11 @@ Ilist -> Ilist: isAmountEdited(1, null)
 activate Ilist
 Ilist -> Alist: get(0)
 activate Alist
-Alist --> Ilist : Item: Income
+Alist --> Ilist : item: Income
 deactivate Alist
 Ilist -> Inc: getAmount()
 activate Inc
-Inc --> Ilist: Amount:Double
+Inc --> Ilist: amount:Double
 deactivate Inc
 
 alt OPT_COLOR Amount != null && !Amount.equals(null)
@@ -95,7 +95,7 @@ alt OPT_COLOR isDescEdited || isAmountEdited || isPermEdited
     deactivate System
     Ilist -> Alist: incomeArrayList.get(0)
     activate Alist
-    Alist --> Ilist : Item: Income
+    Alist --> Ilist : item: Income
     deactivate Alist
     Ilist -> System:println(Item)
     activate System

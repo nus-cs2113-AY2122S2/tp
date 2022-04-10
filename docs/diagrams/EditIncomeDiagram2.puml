@@ -12,25 +12,25 @@ package " " {
     class Fam as "__family:Family__"
     class MyGen as "__myGen:PersonList__"
     class Alice as "__Alice:Person__"
-    class List as "__ExpenditureList:ExpenditureList__"
-    class List2 as "__IncomeList:IncomeList__"
-    class Exp0 as "__Expenditure0:Expenditure__" #LIGHTGREEN {
+    class List as "__expenditureList:ExpenditureList__"
+    class List2 as "__incomeList:IncomeList__"
+    class Exp0 as "__expenditure0:Expenditure__" #LIGHTGREEN {
         description = "Lunch"
         category = 2
     }
-    class Exp1 as "__Expenditure1:Expenditure__" #LIGHTGREEN {
+    class Exp1 as "__expenditure1:Expenditure__" #LIGHTGREEN {
         description = "Dinner"
         category = 2
     }
-    class Exp2 as "__Expenditure2:Expenditure__" #LIGHTGREEN {
+    class Exp2 as "__expenditure2:Expenditure__" #LIGHTGREEN {
         description = "Movies"
         category = 6
     }
-    class Exp3 as "__Expenditure3:Expenditure__" #LIGHTGREEN {
+    class Exp3 as "__expenditure3:Expenditure__" #LIGHTGREEN {
         description = "Electric Bills"
         category = 1
     }
-    class Inc0 as "__Income0:Income__" #LIGHTGREEN {
+    class Inc0 as "__income0:Income__" #LIGHTGREEN {
         description = "Bills"
     }
 
