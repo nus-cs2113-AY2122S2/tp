@@ -200,7 +200,7 @@ public class UpdateCommand extends Command {
                     newCardLimitAsFloat);
 
             creditCardList.set(indexToUpdate, newCreditCard);
-            System.out.println("Successfully set credit card " + indexAsString + " to :\n"
+            System.out.println("Successfully set credit card " + indexAsString + " to:\n"
                     + newCreditCard);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input INDEX, NAME, CASHBACK or CREDIT LIMIT?");

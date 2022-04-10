@@ -14,8 +14,18 @@ platforms, set budget goals and track your spending.
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `MindMyMoney` from [here](https://github.com/AY2122S2-CS2113T-T10-4/tp/releases).
 
-If the setup is correct, you should see something the following in your terminal:
-![start screenshot](./images/start.PNG)<br>
+If the setup is correct, you should see the following in your terminal:
+````
+ __  __ _         _ __  __      __  __
+|  \/  (_)_ _  __| |  \/  |_  _|  \/  |___ _ _  ___ _  _
+| |\/| | | ' \/ _` | |\/| | || | |\/| / _ \ ' \/ -_) || |
+|_|  |_|_|_||_\__,_|_|  |_|\_, |_|  |_\___/_||_\___|\_, |
+                           |__/                     |__/
+<< Set a budget and stick to it >>
+
+Welcome to MindMyMoney
+What can I do for you?
+````
 
 Useful links:
 * [User Guide](UserGuide.md)
