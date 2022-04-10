@@ -2249,7 +2249,7 @@ The following are some test cases for you to try:
 | Test Case                                     | Command                   | Expected result                                                 |
 |:----------------------------------------------|:--------------------------|:----------------------------------------------------------------|
 | Valid list command with extra arguments.      | `workout /list extraline` | Error response (invalid user argument), workouts not displayed. |
-| Extra whitespaces between commands arguments. | :x: `workout      /list`  | Error response (invalid user action), workouts not displayed.   |
+| Extra whitespaces between commands arguments. | `workout      /list`      | Error response (invalid user action), workouts not displayed.   |
 
 #### Deleting An Existing Workout
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-workout-workout-delete).)
@@ -2438,8 +2438,8 @@ The following are some test cases for you to try:
 | Update schedule with missing plan number.     | `schedule /update 1`             | Error response (too few arguments entered), plan is not added/updated to the schedule.  |
 | Schedule a plan on an invalid day.            | `schedule /update 8 1`           | Error response (invalid day number), plan is not added/updated to the schedule.         |
 | Schedule an invalid plan.                     | `schedule /update 2147483646`    | Error response (invalid plan number), plan is not added/updated to the schedule.        |
-| Extra whitespaces between commands arguments. | :x: `schedule     /update 1 2`   | Error response (invalid user action), plan is not added/updated to the schedule.        |
-| Extra whitespaces between command parameters. | :x: `schedule /update   1   2`   | Error response (invalid user action), plan is not added/updated to the schedule.        |
+| Extra whitespaces between commands arguments. | `schedule     /update 1 2`       | Error response (invalid user action), plan is not added/updated to the schedule.        |
+| Extra whitespaces between command parameters. | `schedule /update   1   2`       | Error response (invalid user action), plan is not added/updated to the schedule.        |
 
 
 #### Viewing The Schedule
@@ -2458,7 +2458,7 @@ The following are some test cases for you to try:
 | Test Case                                     | Command                    | Expected result                                                 |
 |:----------------------------------------------|:---------------------------|:----------------------------------------------------------------|
 | List schedule with extra arguments.           | `schedule /list extraline` | Error response (wrong command entered), schedule not displayed. |
-| Extra whitespaces between commands arguments. | :x: `schedule     /list`   | Error response (invalid user action), schedule not displayed.   |
+| Extra whitespaces between commands arguments. | `schedule     /list`       | Error response (invalid user action), schedule not displayed.   |
 
 #### Clearing Plan Schedule For A Day
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#clear-schedule-for-a-day-schedule-clear).)
@@ -2477,7 +2477,7 @@ The following are some test cases for you to try:
 |:----------------------------------------------|:------------------------------|:--------------------------------------------------------------------------------|
 | Day Number exceed the range of 1 to 7.        | `schedule /clear 9`           | Error response (invalid day number), no plan in the schedule is being cleared.  |
 | Command with extra arguments.                 | `schedule /clear 1 extraline` | Error response (invalid command), no plan in the schedule is being cleared.     |
-| Extra whitespaces between commands arguments. | :x: `schedule     /clear 1`   | Error response (invalid user action), no plan in the schedule is being cleared. |
+| Extra whitespaces between commands arguments. | `schedule     /clear 1`       | Error response (invalid user action), no plan in the schedule is being cleared. |
 
 #### Clearing All Plans In The Schedule
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#clear-schedule-for-the-week-schedule-clearall).)
@@ -2495,7 +2495,7 @@ The following are some test cases for you to try:
 | Test Case                                     | Command                        | Expected result                                                                                 |
 |:----------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------|
 | Command with extra arguments.                 | `schedule /clearall extraline` | Error response (wrong command entered), plans not removed from schedule and schedule not reset. |
-| Extra whitespaces between commands arguments. | :x: `schedule     /clearall`   | Error response (invalid user action), plans not removed from schedule and schedule not reset.   |
+| Extra whitespaces between commands arguments. | `schedule     /clearall`       | Error response (invalid user action), plans not removed from schedule and schedule not reset.   |
 
 <br/>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
