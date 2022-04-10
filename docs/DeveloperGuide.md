@@ -890,7 +890,7 @@ Test Scenario 1: A group has been created with a unique identifier of 1, named G
 ### Storage Testing
 <hr>
 
-Test Scenario 1: splitlah.jar is placed in a location where read and write permissions.
+Test Scenario 1: splitlah.jar is placed in a location where read and write permissions are given.
 1. Test: No save file was found. <br>
    Expected: A new save file should be created when the application launches.
 2. Test: Save file was corrupted. <br>
