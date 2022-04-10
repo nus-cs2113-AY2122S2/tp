@@ -17,7 +17,7 @@ public class SessionEditCommandParser implements CommandParser<SessionEditComman
     public static final String COMMAND_TEXT = "session /edit";
 
     public static final String COMMAND_FORMAT =
-            "Syntax: session /edit /sid [SESSION_ID] {</n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}";
+            "Syntax: session /edit /sid [SESSION_ID] {/n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}";
 
     public static final String[] COMMAND_DELIMITERS = {
         ParserUtils.SESSION_ID_DELIMITER,

@@ -36,7 +36,6 @@ public class Parser {
     private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
 
-    // COMMAND PARSING METHODS
     /**
      * Returns a String object containing the arguments portion of the entire command input from the user.<br>
      * E.g. Returns "/n Lunch /d 11-03-2022 /pl Warren Ivan Roy" where
