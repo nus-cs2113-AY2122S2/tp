@@ -758,7 +758,7 @@ This section includes instructions to test SplitLah manually.
 
 Test Scenario 1: No sessions are currently stored in the application. <br>
 1. Test Command: `session /create /n Test1 /pl Person1 Person2 /d 10-04-2022` <br>
-   Expected: A success message is printed along with the details of the session as provided in the command.
+   Expected: A success message should be printed along with the details of the session as provided in the command.
 2. Test Command: `session /create /n Test2 /pl Person1 Person2 /d today`<br>
    Expected: A success message is printed along with the details of the session as provided in the command.
 
@@ -784,21 +784,21 @@ Test Scenario 2: There is a session named Test1 currently stored in the applicat
 
 Test Scenario 1: No sessions are currently stored in the application. 
 * Test Command: `session /summary /sid 1` <br>
-   Expected: An error message is printed indicating that no session are stored in SplitLah.
+   Expected: An error message should be printed, indicating that no session are stored in SplitLah.
 
 Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
 1. Test Command: `session /summary`<br>
-   Expected: An error message is printed indicating that the `/sid` delimiter is missing from the input.
+   Expected: An error message should be printed, indicating that the `/sid` delimiter is missing from the input.
 2. Test Command: `session /summary /sid`<br>
-   Expected: An error message is printed indicating that an argument following the `/sid` delimiter is missing from the input.
+   Expected: An error message should be printed, indicating that an argument following the `/sid` delimiter is missing from the input.
 3. Test Command: `session /summary /sid apple`<br>
-   Expected: An error message is printed indicating that an integer argument should be provided following the `/sid` delimiter.
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
 4. Test Command: `session /summary /sid 2`<br>
-   Expected: An error message is printed indicating that a session with the specified session unique identifier was not found.
+   Expected: An error message should be printed, indicating that a session with the specified session unique identifier was not found.
 5. Test Command: `session /summary /sid 1`<br>
    Expected: A summary indicating the transactions that have to be made to settle all debts of the session with a 
-   session unique identifier of `1` is printed.
+   session unique identifier of `1` should be printed.
 <hr>
 
 #### Viewing a Session
@@ -808,20 +808,20 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 
 Test Scenario 1: No sessions are currently stored in the application.
 * Test Command: `session /view /sid 1` <br>
-  Expected: An error message is printed indicating that no session are stored in SplitLah.
+  Expected: An error message should be printed, indicating that no session are stored in SplitLah.
 
 Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
 1. Test Command: `session /view`<br>
-   Expected: An error message is printed indicating that the `/sid` delimiter is missing from the input.
+   Expected: An error message should be printed, indicating that the `/sid` delimiter is missing from the input.
 2. Test Command: `session /view /sid`<br>
-   Expected: An error message is printed indicating that an argument following the `/sid` delimiter is missing from the input.
+   Expected: An error message should be printed, indicating that an argument following the `/sid` delimiter is missing from the input.
 3. Test Command: `session /view /sid apple`<br>
-   Expected: An error message is printed indicating that an integer argument should be provided following the `/sid` delimiter.
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
 4. Test Command: `session /view /sid 2`<br>
-   Expected: An error message is printed indicating that a session with the specified session unique identifier was not found.
+   Expected: An error message should be printed, indicating that a session with the specified session unique identifier was not found.
 5. Test Command: `session /view /sid 1`<br>
-   Expected: The full details of the session with a session unique identifier of `1` is printed.
+   Expected: The full details of the session with a session unique identifier of `1` should be printed.
 <hr>
 
 #### Listing all Sessions
@@ -831,11 +831,11 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 
 Test Scenario 1: No sessions are currently stored in the application.
 * Test Command: `session /list` <br>
-  Expected: An error message is printed indicating that no session are stored in SplitLah.
+  Expected: An error message should be printed, indicating that no session are stored in SplitLah.
 
 Test Scenario 2: At least 1 session exists in the application.
 * Test Command: `session /list`<br>
-  Expected: A table summarising the details of all existing sessions is printed.
+  Expected: A table summarising the details of all existing sessions should be printed.
 
 <hr>
 
