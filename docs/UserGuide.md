@@ -103,8 +103,6 @@ Expected Output
 Unit Good with SKU: WC1 added to warehouse
 Another command?
 ```
-**Warning** Adding another Unit Good with the same SKU will override the previous good with the same SKU, and the newer
-good added will be present instead.
 
 ### Removing a Unit Good `remove ug/`
 Removing a unit good from the warehouse.
