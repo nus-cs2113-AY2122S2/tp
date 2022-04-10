@@ -1,20 +1,13 @@
 # Emily Sim - Project Portfolio Page
 
 ## Overview
-This page showcases my contributions to the development of WerkIt!, a team project (tP) in the CS2113T
-Software Engineering & Object-Oriented Programming module offered by the School of Computing, National University of
-Singapore.
-
-### About the Project
-WerkIt! is a command line interface (CLI) application written in Java that allows users to create a weekly workout
-schedule for them to refer to and follow. More details about the project can be found in the following locations:
-* [GitHub Repository](https://github.com/AY2122S2-CS2113T-T09-2/tp)
-* [WerkIt! User Guide](../UserGuide.md)
-* [WerkIt! Developer Guide](../DeveloperGuide.md)
-
+WerkIt! is a command line interface (CLI) application written in Java that allows users to create, view, update and 
+delete the workouts and plans they have created and store them in the application. 
+The users will also be able to schedule their workout plans for a week (7 days). Click 
+[here](https://github.com/AY2122S2-CS2113T-T09-2/tp) for more information.
 
 ### Summary of Contributions
-### Code Contributed
+
 A detailed report of my code contributions to the tP can be found in the 
 [tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=emilysim00&breakdown=true)
 hosted by the module coordinators of CS2113T.
@@ -24,13 +17,13 @@ hosted by the module coordinators of CS2113T.
 #### Summary of my feature's code contributions 
 * Implemented various WerkIt's features. A summary of these features implemented by me is stated below. 
 
-| New Feature                                 | What it does                                                   | Justification                                                                                                                                                                                                                                                        | Main Method Implemented | Supporting Methods Implemented                   |
-|---------------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|--------------------------------------------------|
-| View all workouts                           | Allows user to view all the workouts created by him/her.       | This feature allows the user to view all workouts stored in the workout list. They can then create a plan with these workouts.                                                                                                                                       | `listAllWorkout()`      | -                                                | 
-| Add/Update a plan for a day in the schedule | Allows user to schedule a workout plan on a particular day.    | Users should be able to schedule any plans they created for a day in the 7-day workout plan schedule. <br><br> Highlights: Users are able to quickly type out the command by indicating the day in the week with integers instead of typing out the name of the day. | `updateDay()`           | `isDayValid()` <br> `isPlanValid()`              |
-| View schedule                               | Allows user to view all the plans scheduled for the week.      | This feature allows the user to have an overview of all the plans that have been scheduled. This would allow them to determine if they would want to make modification to the schedule.                                                                              | `printSchedule()`       | `padWithSpaces()` <br> `convertDayNumberToDay()` |
-| Remove plan scheduled on a particular day   | Allows users to remove the plan scheduled on a particular day. | This feature allows the user to change the plan scheduled on a particular day easily. <br><br> Highlights: Users are able to quickly type out the command by indicating the day in the week with integers instead of typing out the name of the day.                 | `clearPlan()`           | `isDayValid()` <br> `clearPlan()`                |
-| Reset the 7-days workout plan schedule      | Allows user to reset his/her workout plan schedule.            | This feature allows the user to remove all plans scheduled at once, so they can plan their schedule from the start.                                                                                                                                                  | `clearAllSchedule()`    | `clearPlan()`                                    |
+| New Feature                                 | What it does                                                   | Justification                                                                                                                                                                                                                                                        |
+|---------------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| View all workouts                           | Allows user to view all the workouts created by him/her.       | This feature allows the user to view all workouts stored in the workout list. They can then create a plan with these workouts.                                                                                                                                       |
+| Add/Update a plan for a day in the schedule | Allows user to schedule a workout plan on a particular day.    | Users should be able to schedule any plans they created for a day in the 7-day workout plan schedule. <br><br> Highlights: Users are able to quickly type out the command by indicating the day in the week with integers instead of typing out the name of the day. |
+| View schedule                               | Allows user to view all the plans scheduled for the week.      | This feature allows the user to have an overview of all the plans that have been scheduled. This would allow them to determine if they would want to make modification to the schedule.                                                                              |
+| Remove plan scheduled on a particular day   | Allows users to remove the plan scheduled on a particular day. | This feature allows the user to change the plan scheduled on a particular day easily. <br><br> Highlights: Users are able to quickly type out the command by indicating the day in the week with integers instead of typing out the name of the day.                 |
+| Reset the 7-days workout plan schedule      | Allows user to reset his/her workout plan schedule.            | This feature allows the user to remove all plans scheduled at once, so they can plan their schedule from the start.                                                                                                                                                  |
 
 * Wrote the majority of the codes in `Day.java`, `ScheduleCommand.java` and `InvalidScheduleException.java`.
 * Contributed to some codes in exception-related files such as `InvalidCommandException`. 
@@ -46,13 +39,10 @@ parts of the method to ensure the code works based on assumptions, such as testi
 the methods to capture and keep track of the events that has occurred. 
 
 #### Summary of my Test Code contributions
-Wrote JUnit test cases for WerkIt! The summary of the test cases I have written is stated in the table below. 
-
-| Test Files               | Test Case Name                                                                                                                                                                                                                                                                     |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| WorkoutListTest.java     | listWorkout_expectThreePrints() <br> listWorkout_expectNoPrints()                                                                                                                                                                                                                  |                    
-| ScheduleCommandTest.java | setUserAction_createInvalidAction_expectInvalidCommandException() <br>scheduleCommand_validScheduleUpdateConstruction() <br> scheduleCommand_validScheduleClearConstruction() <br> scheduleCommand_validScheduleClearAllConstruction()                                             |                    
-| DayListTest.java         | updateSchedule_expectSuccess() <br> updateSchedule_expectInvalidUpdate() <br> updateSchedule_expectSuccessPrints() <br> clearSchedule_expectSuccess() <br> clearSchedule_expectInvalidClear() <br> clearAllSchedule_expectSuccess() <br> printSchedule_expectSuccessNoPlansAdded() |
+Wrote JUnit test cases for WerkIt!.
+* Parts of WorkoutListTest.java
+* ScheduleCommandTest.java
+* DayListTest.java
 
 ### Contributions to the User Guide (UG)
 * Wrote the [Introduction and Terminology](../UserGuide.md) section in the User Guide.
@@ -85,10 +75,7 @@ Wrote JUnit test cases for WerkIt! The summary of the test cases I have written 
       * Includes sequence diagrams to visualise the process.
 * Wrote part of [user stories](../DeveloperGuide.md#user-stories).
 * Wrote part of [manual testing instructions](../DeveloperGuide.md#test-on-schedule-features).
-* Wrote the [non-functional requirements](../DeveloperGuide.md#non-functional-requirements) section. 
-
-### Contributions to Team-Based Tasks
-- Helped in release management of WerkIt! (for v1.0 and v2.0)
+* Wrote the [non-functional requirements](../DeveloperGuide.md#non-functional-requirements) section.
 
 ### Review/Mentoring Contributions
 Reviewed teammates' pull requests, including (but not limited to):
@@ -102,19 +89,18 @@ More details on the bug can be viewed in this [issue](https://github.com/AY2122S
 * Spotted a bug on `plan /delete` feature. 
 More details on the bug can be viewed in this [issue](https://github.com/AY2122S2-CS2113T-T09-2/tp/issues/170).
 
-
 ### Community
 * Provided feedback and potential bug reports to another team's project 
 [(CS2113T-T11-1's HotelLite Manager)](https://ay2122s2-cs2113-t11-1.github.io/tp/UserGuide.html) 
 as part of the Practical Exam Dry-Run (PED). 
-  * Screenshot of one of the high severity bugs reported ![Severe Bug](../images/ppp/emilysim00/severeBug1.png)
-  The application is unable to remove the housekeeper if they are being assigned to a hotel room. The program get terminated
+  * One of the high severity bug spotted is that the application was unable to remove the housekeeper if 
+  they are being assigned to a hotel room. The program get terminated
   straight without proper exception handling. 
   Click [here](https://github.com/emilysim00/ped/issues/8) to view the issues in GitHub.
 
   * Another high severity bug reported is on the file management of one of its feature. To find out more details on this 
   bug, click [here](https://github.com/emilysim00/ped/issues/10).
-
+  
   More reported bugs can be found [here](https://github.com/emilysim00/ped/issues)
 
 * Suggested and reviewed other team's Developer Guide 
