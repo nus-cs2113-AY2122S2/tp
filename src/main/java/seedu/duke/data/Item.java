@@ -103,12 +103,14 @@ public class Item {
      * @param name Either an empty Optional instance or
      *             an Optional instance containing a String name in it.
      * @param status Filter out borrow records with this BorrowStatus.
-     * @return List of BorrowRecords.
+     * @return List of borrow records and item name in string format.
      */
-    public List<BorrowRecord> filterRecords(Optional<String> name, BorrowStatus status) {
+    public List<String> filterRecords(Optional<String> name, BorrowStatus status) {
+        String prefix = "Name of Item: " + this.name + System.lineSeparator();
         return borrowRecords.stream()
                 .filter(record -> record.containsBorrowerName(name))
                 .filter(record -> record.isStatus(status))
+                .map(record -> prefix + record.toString())
                 .collect(Collectors.toList());
     }
 
