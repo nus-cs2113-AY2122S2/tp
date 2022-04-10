@@ -75,10 +75,7 @@ Wrote JUnit test cases for WerkIt!.
       * Includes sequence diagrams to visualise the process.
 * Wrote part of [user stories](../DeveloperGuide.md#user-stories).
 * Wrote part of [manual testing instructions](../DeveloperGuide.md#test-on-schedule-features).
-* Wrote the [non-functional requirements](../DeveloperGuide.md#non-functional-requirements) section. 
-
-### Contributions to Team-Based Tasks
-- Helped in release management of WerkIt! (for v1.0 and v2.0)
+* Wrote the [non-functional requirements](../DeveloperGuide.md#non-functional-requirements) section.
 
 ### Review/Mentoring Contributions
 Reviewed teammates' pull requests, including (but not limited to):
@@ -92,19 +89,18 @@ More details on the bug can be viewed in this [issue](https://github.com/AY2122S
 * Spotted a bug on `plan /delete` feature. 
 More details on the bug can be viewed in this [issue](https://github.com/AY2122S2-CS2113T-T09-2/tp/issues/170).
 
-
 ### Community
 * Provided feedback and potential bug reports to another team's project 
 [(CS2113T-T11-1's HotelLite Manager)](https://ay2122s2-cs2113-t11-1.github.io/tp/UserGuide.html) 
 as part of the Practical Exam Dry-Run (PED). 
-  * Screenshot of one of the high severity bugs reported ![Severe Bug](../images/ppp/emilysim00/severeBug1.png)
-  The application is unable to remove the housekeeper if they are being assigned to a hotel room. The program get terminated
+  * One of the high severity bug spotted is that the application was unable to remove the housekeeper if 
+  they are being assigned to a hotel room. The program get terminated
   straight without proper exception handling. 
   Click [here](https://github.com/emilysim00/ped/issues/8) to view the issues in GitHub.
 
   * Another high severity bug reported is on the file management of one of its feature. To find out more details on this 
   bug, click [here](https://github.com/emilysim00/ped/issues/10).
-
+  
   More reported bugs can be found [here](https://github.com/emilysim00/ped/issues)
 
 * Suggested and reviewed other team's Developer Guide 
