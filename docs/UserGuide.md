@@ -157,6 +157,7 @@ Example of usage:
 
 * _Result_: Alice deleted from the Parents' group
 
+  ![delete-command-screenshot](images/DeletePerson.png)
 ---
 
 ### Add an income: `addin`
@@ -203,11 +204,11 @@ Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 
 Example of usage:
 
-* Delete the monthly-recurrent Salary of $2,000 from Alice's income.
+* Delete the monthly-recurrent Salary of $2,000 from Bob's income.
 
   `deletein /g 1 /u 1 /r 1`
 
-* _Result_: Income entry for Salary of $2,000 is deleted from Alice's income list.
+* _Result_: Income entry for Salary of $2,000 is deleted from Bob's income list.
 
   ![deletein-command-screenshot](images/DeleteIncome.png)
 
