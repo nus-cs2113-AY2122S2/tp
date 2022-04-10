@@ -120,7 +120,7 @@ and other documents for the co-requsuite module CS2101 Effective Communication f
 ## Reflections on the Team Project (tP)
 Despite having done a couple of software engineering projects back in my polytechnic days, the tP has taught me many
 new things about the intricacies of a software engineering project. From learning to use Git to learning how to write
-proper documentations for the intended audience, the practical tP has given me the opportunity to learn these things  
+proper documentations for the intended audience, the practical tP has given me the opportunity to learn these things 
 which may not have been possible or as effective if I just sat through lectures to learn about these concepts. In
 addition, the tP has reminded me the importance of communicating effectively with my team members on project matters,
 and to communicate professionally to get the team to achieve our goals in the project. Thus, I am grateful that the 
