@@ -4,6 +4,8 @@ import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.List;
 import seedu.duke.status.Status;
 
+import java.util.Locale;
+
 /*
  * Class that extends Abstract Command Class.
  */

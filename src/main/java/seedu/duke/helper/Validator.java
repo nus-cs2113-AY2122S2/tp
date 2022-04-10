@@ -83,26 +83,34 @@ public class Validator {
         }
     }
 
-    // todo : admission date logic (w respect to dob)
     private static void validateAdmissionDate(String admissionDateString) throws UserInputErrorException {
         LocalDate admissionDate;
         try {
             admissionDate = LocalDate.parse(admissionDateString);
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new UserInputErrorException("Date of birth must be in YYYY-MM-DD format. "
+            throw new UserInputErrorException("Registration date must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
         }
         LocalDate today = LocalDate.now();
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
 
+
         // admission date is after 1980 and before today
         if (!(admissionDate.isAfter(admissionDateLimit) && admissionDate.isBefore(today))) {
-            throw new UserInputErrorException("Date of birth must be in YYYY-MM-DD format. "
+            throw new UserInputErrorException("Registration date must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
         }
     }
 
-    private static void validatedobandage(String age, String dob) throws UserInputErrorException {
+    private static void validateAdmissionDob(String admissionDateString, String dob) throws UserInputErrorException {
+        LocalDate admissionDate = LocalDate.parse(admissionDateString);
+        LocalDate dateOfBirth = LocalDate.parse(dob);
+        if (!(admissionDate.isAfter(dateOfBirth))) {
+            throw new UserInputErrorException("Registration date must be after date of birth!");
+        }
+    }
+
+    private static void validateDobAge(String age, String dob) throws UserInputErrorException {
         validateDob(dob);
         LocalDate today = LocalDate.now();
         LocalDate birthday = LocalDate.parse(dob);
@@ -123,7 +131,7 @@ public class Validator {
         validateGender(parameters[3]);
         validateAddress(parameters[4]);
         validateDob(parameters[5]);
-        validatedobandage(parameters[2], parameters[5]);
+        validateDobAge(parameters[2], parameters[5]);
     }
 
     private static void validateSpecialization(String specialization) throws UserInputErrorException {
@@ -145,6 +153,7 @@ public class Validator {
         minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateAdmissionDate(parameters[6]);
+        validateAdmissionDob(parameters[6],  parameters[5]);
     }
 
 
@@ -254,7 +263,7 @@ public class Validator {
         } else if (type.equals("patient") && newDate.isAfter(admissionDateLimit)
                 && newDate.isBefore(today)) {
             throw new UserInputErrorException("Date must be in YYYY-MM-DD format. "
-                    + "Patient admission date must be after 1980-01-01 and today or before.");
+                    + "Patient registration date must be after 1980-01-01 and today or before.");
         }
     }
 
