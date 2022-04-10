@@ -67,7 +67,8 @@ public class Parser {
 
         case PrintReservationsCommand.COMMAND_WORD:
             return prepareReservations(arguments);
-
+        case PrintAllCommand.COMMAND_WORD:
+            return new PrintAllCommand();
         default:
             return new ErrorCommand(input);
         }
@@ -173,6 +174,8 @@ public class Parser {
             return new WrongFormatCommand(e.getMessage());
         }
     }
+
+
 
     public static boolean dateStartEndValid(LocalDate startDate, LocalDate endDate) {
         return endDate.isAfter(startDate);
