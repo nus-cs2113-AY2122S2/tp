@@ -661,15 +661,27 @@ The overview of the design of the exercise feature can be found [here](#exercise
 
 If the user's command type is to list the exercises available, i.e. `exercise /list`, the
 `Parser#parseUserInput(String userInput)` method will parse the 'exercise' base word and proceed to create exercise related
-command using `Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
+command using `Parser#createExerciseCommand(String userInput)` method. 
+
+This method will further evaluate the
 exercise action, in this case, `/list` and call the constructor of `ExerciseCommand` class by passing relevant parameters related to the
-ExerciseCommand constructor. If the exercise action is null or incorrect, an `InvalidCommandException` will be thrown. Once the exercise command is created,
+ExerciseCommand constructor.
+
+If the exercise action is null or incorrect, an `InvalidCommandException` will be thrown. Once the exercise command is created,
 this exercise command is executed via the `ExerciseCommand#execute()` method. As it is executed, the method will check the
-type of action to be executed, in this case, `/list`. It will then list the exercises available for selection from the exerciseList using the `ExerciseList#printExerciseList()`.
+type of action to be executed, in this case, `/list`. It will then list the exercises available for selection from 
+the exerciseList using the `ExerciseList#printExerciseList()`.
 
 The following sequence diagram illustrates how the `exercise /list` command works in greater detail:
 
+<span class="info box">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
+have been removed from the sequence diagram. Reference frames will be elaborated further
+down this section.</span>
+
 ![List Exercise Sequence Diagram](uml/sequenceDiagrams/exercises/images/viewExercise.png)
+
+<span class="box info">:memo: For more information on the obtaining and parsing functionality of WerkIt!, please refer to
+["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
@@ -1659,6 +1671,10 @@ A summary of the general procedure of search for exercise in the application is 
 
 The following sequence diagram illustrates how the `search /exercise` command works in greater detail:
 
+<span class="info box">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
+have been removed from the sequence diagram. Reference frames will be elaborated further
+down this section.</span>
+
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchExercise.png)
 
 (Before Step 1) The user's input (in this case will be a `search /exercise <exercise keyword>` command) is obtained
@@ -1686,6 +1702,10 @@ A summary of the general procedure of search for workout in the application is a
 2. A list of workouts with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /workout` command works in greater detail:
+
+<span class="info box">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
+have been removed from the sequence diagram. Reference frames will be elaborated further
+down this section.</span>
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchWorkout.png)
 
@@ -1715,6 +1735,10 @@ A summary of the general procedure of search for plan in the application is as f
 
 The following sequence diagram illustrates how the `search /plan` command works in greater detail:
 
+<span class="info box">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
+have been removed from the sequence diagram. Reference frames will be elaborated further
+down this section.</span>
+
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchPlan.png)
 
 (Before Step 1) The user's input (in this case will be a `search /plan <plan keyword>` command) is obtained
@@ -1742,6 +1766,10 @@ A summary of the general procedure of search for plan in the application is as f
 2. A list of exercise name, workouts and plan names with matching result is displayed to the user via the terminal.
 
 The following sequence diagram illustrates how the `search /all` command works in greater detail:
+
+<span class="info box">:memo: To simplify the sequence diagram, some method invocations that are deemed to be trivial
+have been removed from the sequence diagram. Reference frames will be elaborated further
+down this section.</span>
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/search/images/searchAll.png)
 
