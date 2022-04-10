@@ -61,7 +61,8 @@ public class StorageFile {
     public static final int INDEX_OF_FIRST_ELEMENT = 0;
     public static final String WHITESPACE = " ";
     public static final String FORWARD_SLASH = "/";
-    public static final String MESSAGE_CORRUPTED_ENTRY = "Corrupted entry in file. It will be overwritten. Please go through the managers and trackers to observe non-corrupted entries.";
+    public static final String MESSAGE_CORRUPTED_ENTRY = "Corrupted entry in file. It will be overwritten. Please go "
+            + "through the managers and trackers to observe non-corrupted entries.";
 
     private static ContactsManager contactsManager;
     private static StudyManager studyManager;
