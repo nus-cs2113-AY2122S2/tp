@@ -526,6 +526,7 @@ public class UI {
      * Prints message when no matching result is found under search command.
      *
      * @param category The category that will be searched.
+     * @param keyword The keyword to be matched.
      */
     public void printSearchNotFoundMessage(String category, String keyword) {
         System.out.println("Sorry, no matching " + category + " found for the keyword"
