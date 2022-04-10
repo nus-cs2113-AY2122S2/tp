@@ -61,6 +61,7 @@ Given below are my contributions to the project.
     * Developer Guide (DG):
         * Added sections on `Money` design.
         * Added UML diagrams for `Money` component and `Find` implementation.
+        * Added manual testing instructions for adding persons.
 
 <p></p>
 

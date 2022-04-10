@@ -728,23 +728,16 @@ Expected: All incomes and expenditures whose description contains `Test` will be
 2. Test case: `find /d Test /c 7`
    Expected: No entries are printed. Error details shown in the error message.
 
-### Saving data
-
-#### Dealing with missing data file
-Delete the save file `PlanITarium.txt` before executing `bye`.
-Expected: The program checks if the file exists before saving, and creates a new one if it does not.
-#### Dealing with missing directory
-Delete the directory `data` before executing `bye`.
-Expected: The program checks if the directory exists before saving, and creates a new one if it does not.
-
 ### Loading data
 
 #### Dealing with missing data file
-Delete the save file `PlanITarium.txt` if it exists and launch the program.
+Test case: Delete the save file `PlanITarium.txt` if it exists and launch the program.
 Expected: The program will check if the file exists upon start up, and creates one if it does not.
+
 #### Dealing with missing directory
-Delete the directory `data` if it exists and launch the program.
-Expected: The program will check if the directory exists upon start up, and creates on if it does not.
+Test case: Delete the directory `data` if it exists and launch the program.
+Expected: The program will check if the directory exists upon start up, and creates one if it does not.
+
 #### Dealing with corrupted data file
 1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
    a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
@@ -758,4 +751,4 @@ Expected: The program will check if the directory exists upon start up, and crea
    and only `Alice` is printed without the corrupted income entry.
 5. Test case: Edit task type from income `i` to expenditure `e` in save file. The corrupted record should look like 
    this `e Donations /d 200.0 /d false /d 2022-04-08`.
-   Expected: Similar to the above expected outcome. 
+   Expected: Similar to the above expected outcome.
