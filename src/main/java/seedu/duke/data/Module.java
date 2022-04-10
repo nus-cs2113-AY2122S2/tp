@@ -1,6 +1,7 @@
 package seedu.duke.data;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import seedu.duke.util.Grades;
 import seedu.duke.util.StringConstants;
@@ -40,7 +41,11 @@ public class Module {
     }
 
     public void setModuleDescription(String description) {
-        this.moduleDescription = description;
+        if (!Objects.isNull(description) && !description.isBlank()) {
+            this.moduleDescription = description;
+        } else {
+            this.moduleDescription = null;
+        }
     }
 
     public String getModuleDescription() {

@@ -61,7 +61,7 @@ public class Task {
     }
 
     public void setTaskDescription(String description) {
-        if (description.isBlank()) {
+        if (Objects.isNull(description) || description.isBlank()) {
             taskDescription = null;
         } else {
             taskDescription = description;
