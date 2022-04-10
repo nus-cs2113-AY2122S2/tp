@@ -611,6 +611,33 @@ when the user invokes the `group /delete` command.
 <br>
 
 ### Edit a group
+**API reference:** [`GroupEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupEditCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `group /edit` command.
+<br>
+<br>
+![Edit Group Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupEditCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `group /edit` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupEditCommand` object.
+3. The `GroupEditCommand#run` method is invoked to run the `group /edit` command.
+4. The list of Groups are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of groups can be retrieved.
+5. Once the `Profile` object is returned, `Profile#getGroup` is called to retrieve the `Group` object with the specified
+   group unique identifier from the list of groups.
+    * If a `Group` object with the specified group unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+    * Else, the `Group` object with the specified group unique identifier is returned.
+6. `GroupEditCommand#run` checks if there is an update for a new group name, or a new list of persons.
+    * If there is an update on the group name, 
+    * If there is an update on the list of persons,
+7. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
+
+
+
 
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
