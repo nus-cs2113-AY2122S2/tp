@@ -652,7 +652,9 @@ Here are the matching contacts in your list:
 ### Load and Save
 
 Loading and saving is done automatically and the user does not need to worry about manually saving or loading
-data. However, do not tamper with the load and save files. 
+data. However, do not tamper with the load and save files. The file will be called "allonusData.txt" and
+it will be placed in a folder "data" which will be in the same folder/directory as the jar file. Do not replicate
+the "data" folder within the directory the jar file is in. Do not replicate the data file within the "data" folder either.
 
 Furthermore, exit the application properly using the `exit` command from menu for guaranteed correctness of 
 the program and this load and save feature. 
@@ -664,7 +666,7 @@ the program and this load and save feature.
 **A**: After you exit the program, your application data will be automatically stored in a text file locally called 
 "allonusData.txt". 
 You can transfer your data to another computer by copying this text file and placing
-it in the same directory as the application in the new computer. 
+it in a folder called "data" which is in the same directory as the application in the new computer. 
 When the application runs, it will automatically load the saved data in the text file. 
 Please ensure the version of both applications are the same.
 

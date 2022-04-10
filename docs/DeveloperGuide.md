@@ -410,7 +410,8 @@ call to update the value of the corresponding field of `contact`.
 ![](images/StorageFileClassDiagram.png)
 
 Note: Exception classes are left out of this diagram that aims to show the core structure of the load-save functionality.
-Some methods and attributes are not mentioned to keep the diagram simple while keeping the core information visible.
+TextUi class is also left out since it is used once for printing an error message. 
+Some methods and attributes are not mentioned to keep the diagram simple while keeping the core information visible. 
 
 As seen from the class diagram above (which shows the portions relevant to the `StorageFile` class), 
 the `StorageFile` class associates to a `Logger` class, a `ContactsManager` class, an `ExpenseTracker` class
