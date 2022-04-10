@@ -216,6 +216,7 @@ public class StaffController extends Controller {
                         staffNoClash = checkNoStaffClash(staffId);
                         if (staffNoClash) {
                             staff.setStaffId(staffId);
+                            System.out.println("ID successfully updated!");
                             break;
                         } else {
                             System.out.println("Staff with the same ID already exists, use another ID...");
@@ -228,16 +229,19 @@ public class StaffController extends Controller {
             case 2:
                 final String staffName = InputParser.getString("New name of staff: ");
                 staff.setStaffName(staffName);
+                System.out.println("Name successfully updated!");
                 break;
             case 3:
                 final String position = InputParser.getString("New position of staff: ");
                 staff.setPosition(position);
+                System.out.println("Position successfully updated!");
                 break;
             case 4:
                 while (true) {
                     try {
                         double salary = InputParser.getDouble("New salary of staff: ");
                         staff.setSalary(salary);
+                        System.out.println("Salary successfully updated!");
                         break;
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());

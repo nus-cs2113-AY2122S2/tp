@@ -190,7 +190,7 @@ Sequence diagram for `edittStaff()`:
 |---------|----------|--------------------------------------------------|---------------------------------|
 | v1.0    | staff    | modify the order (add, delete, or check price)   | keep the order up to date       |
 | v1.0    | staff    | modify the menu (add, delete, or modify dishes)  | keep the menu up to date        |
- | v1.0    | staff    | modify staff info (add, delete, modify employee) | keep the roster up to date      | 
+ | v1.0    | staff    | modify staff info (add, delete, modify staff)   | keep the roster up to date      | 
 | v2.0    | staff    | print out the order receipt                      | refer to the order anytime      |
 | v2.0    | staff    | store the application data                       | save data across different uses |
 
