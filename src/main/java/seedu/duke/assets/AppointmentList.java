@@ -12,16 +12,20 @@ import seedu.duke.helper.finder.PatientFinder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
 
 public class AppointmentList extends List {
-    protected ArrayList<Appointment> appointments = new ArrayList<>();
+    protected static ArrayList<Appointment> appointments = new ArrayList<>();
     private ArrayList<Appointment> returnedFinderArray = new ArrayList<>();
     private PatientList referencePatientList;
     private DoctorList referenceDoctorList;
+    //private AppointmentList referenceAppointmentList;
 
     public AppointmentList(PatientList patientList, DoctorList doctorList) {
         this.referencePatientList = patientList;
         this.referenceDoctorList = doctorList;
+        //this.referenceAppointmentList = appointmentList;
     }
 
     public Appointment getAppointment(String appointmentId) {
@@ -33,7 +37,10 @@ public class AppointmentList extends List {
         return null;
     }
 
+
     public ArrayList<Appointment> getList() {
+
+
         return appointments;
     }
 
@@ -47,14 +54,22 @@ public class AppointmentList extends List {
             throw new DuplicateEntryException("Patient NRIC corrupted");
         }
         String patientName = foundPatient.get(0).getPatientName();
+        if(foundPatient == null) {
+            throw new DuplicateEntryException("Patient Nric corrupted");
+        }
+
 
         String doctorNric = addAppointmentParameters[1];
         DoctorFinder doctorFinder = new DoctorFinder();
         ArrayList<Doctor> foundDoctor = doctorFinder.findDoctorByNric(referenceDoctorList.getList(), doctorNric);
+
         if (foundDoctor == null) {
             throw new DuplicateEntryException("Doctor NRIC corrupted");
         }
+
+
         String doctorName = foundDoctor.get(0).getFullName();
+
 
         String appointmentDate = addAppointmentParameters[2];
         String appointmentDetails = addAppointmentParameters[3];
@@ -64,13 +79,15 @@ public class AppointmentList extends List {
             if (appointment.getAppointmentId().equals(id)) {
                 throw new DuplicateEntryException("There is already an appointment between this doctor and patient "
                         + "on the given date!");
-            }
+            } else {
+                    throw new DuplicateEntryException("Doctor is not free on this date, please try another date");
+                }
         }
 
-        Appointment newAppointment = new Appointment(id, patientNric, patientName, doctorNric, doctorName,
-                appointmentDate, appointmentDetails);
-        appointments.add(newAppointment);
-        assert appointments.size() == numberOfAppointmentsBefore + 1;
+            Appointment newAppointment = new Appointment(id, patientNric, patientName, doctorNric, doctorName,
+                    appointmentDate, appointmentDetails);
+            appointments.add(newAppointment);
+            assert appointments.size() == numberOfAppointmentsBefore + 1;
     }
 
     @Override
@@ -106,18 +123,26 @@ public class AppointmentList extends List {
     @Override
     public void view() throws UserInputErrorException {
         CommandLineTable appointmentTable = new CommandLineTable();
+        CommandLineTable appointmentTableDoctordate = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
+        //appointmentTableDoctordate.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
+        appointmentTableDoctordate.setHeaders("date");
         if (appointments.size() == 0) {
             throw new UserInputErrorException("Appointment list is empty, please add appointment");
         }
+
+        //Collections.sort(doctorDate);
+            //appointmentTableDoctordate.addRow(String.valueOf((doctorDate)));
+
         for (Appointment appointment : appointments) {
             appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
                     appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
                     appointment.getAppointmentDate(), appointment.getAppointmentDetails());
         }
         appointmentTable.print();
+        //appointmentTableDoctordate.print();
     }
 
     @Override
@@ -210,6 +235,82 @@ public class AppointmentList extends List {
             findAppointmentTable.print();
         }
     }
+    private LocalDate findNextDay(LocalDate localdate)
+    {
+        //for (int i = 0; i < doctorDateAppointment.size(); ++i)
+        return localdate.plusDays(1);
+    }
+/*
+    private void createArrayOfFoundDates() {
+        if (returnedFinderArray.isEmpty()) {
+            UI.printParagraph("Appointment doesn't exist please try again!");
+        } else {
+            CommandLineTable findAppointmentTable = new CommandLineTable();
+            findAppointmentTable.setShowVerticalLines(true);
+            findAppointmentTable.setHeaders("Date");
+            for (int i = 0; i < returnedFinderArray.size(); i++) {
+                doctorDateAppointment.add(returnedFinderArray.get(i).getAppointmentDate());
+            }
+
+            Collections.sort(doctorDateAppointment);
+            LocalDate currentDate = LocalDate.now();
+            for (int i = 0; i < returnedFinderArray.size(); i++) {
+                try {
+                    if(hasAppointmentToday("D", returnedFinderArray.get(i).getDoctorNric())){
+                        findAppointmentTable.addRow(doctorDateAppointment.get(i));
+                    }
+                } catch (NotFoundException e) {
+                    e.printStackTrace();
+                } catch (HalpmiException e) {
+                    e.printStackTrace();
+                }
+            }
+            findAppointmentTable.print();
+        }
+    }
+
+
+
+    public boolean hasAppointmentDate(String type, String nric, LocalDate date) throws NotFoundException, HalpmiException {
+        ArrayList<Appointment> foundAppointments;
+        switch (type) {
+            case "P":
+                for (int i = 0; i < returnedFinderArray.size(); i++) {
+                    doctorDateAppointment.add(returnedFinderArray.get(i).getAppointmentDate());
+                }
+                foundAppointments = AppointmentFinder.findAppointmentByPatientNric(appointments, nric);
+                for (Appointment a : foundAppointments) {
+                    LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
+                    for (int i = 0; i < returnedFinderArray.size(); i++) {
+                        if (appointmentDate.equals(doctorDateAppointment.get(i))) {
+                            return true;
+                        }
+                        findNextDay(LocalDate.parse(doctorDateAppointment.get(i)));
+                    }
+                }
+                throw new NotFoundException("Patient does not have an appointment!");
+            case "D":
+                for (int i = 0; i < returnedFinderArray.size(); i++) {
+                    doctorDateAppointment.add(returnedFinderArray.get(i).getAppointmentDate());
+                }
+                foundAppointments = AppointmentFinder.findAppointmentByDoctorNric(appointments, nric);
+                Collections.sort(doctorDateAppointment);
+                for (Appointment a : foundAppointments) {
+                    LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
+                    for (int i = 0; i < returnedFinderArray.size(); i++) {
+                        if (appointmentDate.equals(doctorDateAppointment.get(i))) {
+                            return true;
+                        }
+                    }
+                }
+                throw new NotFoundException("Doctor does not have an appointment!");
+            default:
+                assert false;
+                throw new HalpmiException("Error with code, approach developer!");
+        }
+    }
+
+ */
 
     public boolean hasAppointmentToday(String type, String nric) throws NotFoundException, UserInputErrorException {
         ArrayList<Appointment> foundAppointments;

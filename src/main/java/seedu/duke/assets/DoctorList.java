@@ -5,6 +5,7 @@ import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.UI;
+import seedu.duke.helper.finder.AppointmentFinder;
 import seedu.duke.helper.finder.DoctorFinder;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class DoctorList extends List {
         }
         return null;
     }
+
 
     public Doctor search(String nric) {
         for (Doctor doctor : doctors) {
@@ -56,26 +58,36 @@ public class DoctorList extends List {
         CommandLineTable doctorTable = new CommandLineTable();
         doctorTable.setShowVerticalLines(true);
         doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                "Specialization");
+                "Specialization", "Appointment details");
         doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
                 doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
-                doctor.getSpecialization());
+                doctor.getSpecialization(), doctor.appointmentDate);
         doctorTable.print();
     }
+
+    public Boolean findDoctorDate(ArrayList<Doctor> doctors, String date) throws DuplicateEntryException {
+        ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
+            if (doctor.getAppointmentDate().equals(date)) {
+                return true;
+            }
+        }
+            throw new DuplicateEntryException("Doctor has an appointment on the given date, please choose another date");
+        }
 
     //view all doctor
     public void view() throws UserInputErrorException {
         CommandLineTable doctorTable = new CommandLineTable();
         doctorTable.setShowVerticalLines(true);
         doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                "Specialization");
+                "Specialization", "Appointment details");
         if (doctors.size() == 0) {
             throw new UserInputErrorException("Doctor list is empty, please add doctor");
         }
         for (Doctor doctor : doctors) {
             doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
                     doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
-                    doctor.getSpecialization());
+                    doctor.getSpecialization(), doctor.appointmentDate());
         }
         doctorTable.print();
     }
@@ -212,6 +224,7 @@ public class DoctorList extends List {
             findPatientTable.print();
         }
     }
+
 
 }
 

@@ -456,6 +456,7 @@ data/        // Primary resource directory for HalpMi
     ├── patient.txt    // Text file containing patient list
     ├── medicine.txt       // Text file containing medcine list
     └── appointment.txt    // Text file containing appointment list
+
 ```
 Do note that the directory (and by extension, the files) will be created in your terminal's
 **current working directory**. Thus, it is highly recommended for you to create a new directory
