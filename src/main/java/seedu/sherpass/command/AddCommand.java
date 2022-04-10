@@ -70,4 +70,18 @@ public class AddCommand extends Command {
             ui.showError(exception.getMessage());
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (obj instanceof AddCommand) {
+            AddCommand addCommand = (AddCommand) obj;
+            return taskDescription.equals(addCommand.taskDescription)
+                    && doOnStartDateTime.equals(addCommand.doOnStartDateTime)
+                    && doOnEndDateTime.equals(addCommand.doOnEndDateTime);
+        } else {
+            return false;
+        }
+    }
 }
