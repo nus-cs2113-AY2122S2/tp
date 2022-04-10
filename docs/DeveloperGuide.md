@@ -578,7 +578,7 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 3. The product should be for a single user i.e. (not a multi-user product).
 4. The data should be stored locally and should be in a human editable text file.
 5. The data should not be stored with a database management system.
-6. The product should work on the Windows, Linux and OS-X platforms.
+6. The product should work on mainstream OS platforms.
 7. The product should work on a computer that has version 11 of Java installed.
 8. The product should work without requiring an installer.
 9. The product should not depend on a remote server.
@@ -589,14 +589,15 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
 
-* *User* - A person that is using or being track by PlanITarium.
+* *User* - A person that is using or being tracked by PlanITarium.
 * *User Index* - The integer used to identify the user in PlanITarium.
 * *Group* - Logically identifies each generation of users.
 * *Group Index* - The integer used to identify the group in PlanITarium.
 * *Family* - The combined collection of all groups and users in PlaniTarium.
 * *Command* - Sequence of characters input by user to execute functions in PlanITarium.
 * *Delimiter* - Sequence of characters for specifying the boundary between separate areas of text.
-* *Mainstream OS* - Windows, Linux.
+* *Mainstream OS* - Windows, Linux, OS-X.
+* *UML* - Unified Modeling Language that provides a standard way to visualize the design of a system.
 * *PlantUML* - The tool used to create the UML diagrams seen in this guide.
 
 ---
