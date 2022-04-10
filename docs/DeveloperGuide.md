@@ -51,7 +51,7 @@ The ***Architecture Diagram*** given below shows the high-level design of PlanIT
 ![ArchitectureDiagram](images/ArchitectureDiagram.png)
 
 > :information_source: **Note:** The that `.puml` files used to create diagrams in this document
-> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#Acknowledgements)
+> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#acknowledgements)
 > to learn how to create and edit these diagrams when necessary.
 
 **Overview of components in the Architecture**
