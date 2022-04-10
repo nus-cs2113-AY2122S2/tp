@@ -724,11 +724,11 @@ This section includes instructions to test SplitLah manually.
 > These instructions only provide a starting point for testers to work on; testers are free to do more _exploratory_ testing.
 
 ### Overview
-* Launch and Shutdown
-* Session Testing
-* Activity Testing
-* Group Testing
-* Storage Testing
+* [Launch and Shutdown](#launch-and-shutdown)
+* [Session Testing](#session-testing)
+* [Activity Testing](#activity-testing)
+* [Group Testing](#group-testing)
+* [Storage Testing](#storage-testing)
 
 ### Launch and Shutdown
 
