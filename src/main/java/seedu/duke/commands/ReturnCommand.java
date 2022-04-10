@@ -13,6 +13,7 @@ import static seedu.duke.parser.CliSyntax.PREFIX_ITEM_INDEX;
 
 public class ReturnCommand extends Command {
     private final int itemIndex;
+    private boolean isValidReturnRequest = false;
     public static final String COMMAND_WORD = "return";
     public static final String COMMAND_NAME = "Return an item:";
     public static final String USAGE_MESSAGE = "Marks item as returned";
@@ -24,6 +25,10 @@ public class ReturnCommand extends Command {
             + "[Command Format] "
             + COMMAND_FORMAT
             + "\n";
+
+    public boolean getValidityOfReturn() {
+        return isValidReturnRequest;
+    }
 
     /**
      * Prepares the return command for execution by extracting the task number of the task to be marked.
@@ -66,16 +71,17 @@ public class ReturnCommand extends Command {
             return;
         }
         ArrayList<BorrowRecord> itemBorrowRecords = returnedItem.getBorrowRecords();
-        boolean isValidReturnRequest = false;
         for (BorrowRecord record : itemBorrowRecords) {
             boolean isOverdue = (record.getBorrowStatus() == BorrowStatus.PAST) && (record.getReturnStatus() == false);
-            if (record.getBorrowStatus() == BorrowStatus.PRESENT || isOverdue) {
+            boolean isOutstanding = (record.getBorrowStatus() == BorrowStatus.PRESENT) &&
+                    (record.getReturnStatus() == false);
+            if (isOutstanding || isOverdue) {
                 record.setReturnStatus(true);
                 record.setEndDate();
                 ui.showMessages(Messages.RETURNED_MESSAGE);
                 ui.showMessages("Name of Item: " + returnedItem.getName(),
                         "Name of Borrower: " + record.getBorrowerName(),
-                        "Borrow Duration: " + record.getBorrowDuration() + "\n");
+                        "Borrow Duration: " + record.getBorrowDuration());
                 ui.showDivider();
                 isValidReturnRequest = true;
                 break;
