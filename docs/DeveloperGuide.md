@@ -773,7 +773,7 @@ Test Scenario 1: There is a session with unique identifier of 1 stored in the ap
 1. Test Command: `session /delete /sid 1`<br>
    Expected: A success message should be printed, indicating that the session has been deleted.
 2. Test Command: `session /delete /sid 2`<br>
-   Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
+   Expected: An error message should be printed, indicating that the specified session unique identifier cannot be found.
 3. Test Command; `session /delete /sid apple`<br>
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
 
