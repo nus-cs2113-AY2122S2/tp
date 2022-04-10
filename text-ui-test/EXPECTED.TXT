@@ -24,7 +24,7 @@ Orderline fulfilled
 Order 1 completed
 Another command?
 List of orders:
-    1 - Danny Phantom (Amity Park) : completed
+	1 - Danny Phantom (Amity Park) : completed
 Another command?
 List of available goods with its quantity:
 	WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 2]
