@@ -34,7 +34,7 @@ hosted by the module coordinators of CS2113T.
   correctly, and `help` method related to the functions I implemented.
 * Implemented the `rewriteAllPlansToFile()` method in `FileManager` class, which allows to rewrite all
   the plans to local file `plans.txt`.
-* Contributes to some parts of the `workoutListTest` class and `planListTest` class.
+* Contributes to some parts of the `WorkoutListTest` class and `PlanListTest` class.
 
 ### Contributions to the UG
 * Wrote the guide for feature `workout /update`.
