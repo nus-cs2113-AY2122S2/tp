@@ -37,10 +37,10 @@ and cancel flight routes and bookings, create in-flight meal reservations and ad
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `ARCS` from [here](https://github.com/AY2122s2-CS2113-F12-3/tp/releases/).
+2. Down the latest version of `ARCS` from [here](https://github.com/AY2122s2-CS2113-F12-3/tp/releases/tag/v2.1b).
 3. Copy the file to the folder you want to use as the home folder for your ARCS.
 4. Open your command line interface and go to the folder directory.
-5. Run the command java -jar CS2113ARCStp.jar.
+5. Run the command java -jar [CS2113-F12-3][ARCS].jar.
 6. Type the command in the command line and press Enter to execute it. <br>
    Some example commands you can try:
 
