@@ -100,6 +100,7 @@ How the Command class works:
 * If it is valid, the `Command` subclass executes its method.
 * The subclass is based on whether the user wants to access either the `Doctor`, `Patient`, `Medicine` or `Appointment` asset list class.
 * The input parameters determine which of the `Command` subclass is used.
+* These input parameters are actions which can be `Add`, `Delete`, `View`, `Edit`, `Find`, `Check`, `Update` or `Clear`
 
 #### `Validator`
 
@@ -223,7 +224,7 @@ be returned if the user input passes the validation by `Validator`. Else, a `Hal
 indicating missing parameters.
 
 Below is a simplified sequence diagram showing the key class interactions specifically when the User calls the
-`view appointment` command appropriately. 
+`view appointment` command appropriately.
 
 ![ViewAppointmentImplementationUML](diagrams/ViewAppointmentImplementationUML.png)
 <br>
@@ -300,8 +301,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |   2.1   | `*`      | user | clear expired medicines | remove expired/ran out medicines from the inventory |
 |   2.1   | `*`      | user | generate the batch id of medicines to dispense | dispense medicine that expire earlier first |
 |   2.1   | `*`      | user | schedule an appointment | schedule an appointment with a doctor that is free |
-### Use cases
 
+### Use cases
 
 ### Non-Functional Requirements
 Device Environment:
