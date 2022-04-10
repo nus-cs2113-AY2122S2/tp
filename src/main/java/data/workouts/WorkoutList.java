@@ -83,7 +83,7 @@ public class WorkoutList {
      * @param workoutName The name of the workout whose index number this method has to find.
      * @return An integer representing the index number the workout is listed in the workoutDisplayList
      *         ArrayList.
-     * @throws InvalidPlanException If the given workout name was not found in workoutsDisplayList.
+     * @throws InvalidWorkoutException If the given workout name was not found in workoutsDisplayList.
      */
     public int getIndexNumFromWorkoutName(String workoutName) throws InvalidWorkoutException {
         for (int i = 0; i < getWorkoutsDisplayList().size(); i += 1) {
