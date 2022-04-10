@@ -47,8 +47,4 @@ public class Orderline extends Good {
                 super.getQuantity(), super.getSku(), super.getName())
                 + isDone();
     }
-
-    public int getId() {
-        return 0;
-    }
 }

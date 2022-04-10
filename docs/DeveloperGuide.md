@@ -2,32 +2,126 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
 ## Design
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-### Good Class
-#### Description
-The goods class keeps track of the various inventory that will be input into the system through the commands class.
-The diagram below shows the model component of the orderline class.
-![Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Good.puml)
+![Architecture Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/ArchitectureDiagram.puml)
 
-The Goods class allows for the creation of orderline objects which has the following attributes: id, name, quantity and 
-description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
+The **Architecture Diagram** above shows the high level design of Simplst. A user who enters their input into Simplst will be handled by User Interface Class.
+1. The [User Interface Class](#user-interface-class) will then decide which [Parser](#command-parser) to send the user input to
+2. The specific Parser will then call the [Match Keyword Class](#match-keyword-class) to find the corresponding keywords in the user input
+3. The parser will then check the flags indicated in the user input to check which function from the [Warehouse Class](#warehouse-class) to call
+4. The [Warehouse Class](#warehouse-class) will contain a collection of [Unit Good](#unit-good-class), [Good](#good-class) and [Order](#order-class)
 
+The sequence diagram using the [View Parser](#view-parser) below shows an example of how the user will send Simplst `view o/ oid/1` with the aim of viewing details of order id 1
+
+![View Order Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/ViewOrder.puml)
+
+The specific details of exactly how view order command will run will be described later in [View Parser](#view-parser)
 
 ## Implementation
-### Regex Class
+### Unit Good Class
+The Unit good class keep track of the unit goods in the warehouse. A unit good is the template, holding the specific details such as SKU, name, description and [Capacity](#capacity-enumeration)
 #### Description
-The Regex Class is created to simplify the use of regular expressions in Java.
-![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Regex.puml)
-The Class Diagram above shows the different variables and methods associated with the regex class.
+![Unit Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UnitGood.puml)
+
+Unit goods will be stored as a HashMap<String, UnitGood> in the warehouse with the key being a unique SKU as a string and the value is the actual Unit Good.
+This means that to update a Unit Good details, there is a need to first remove the Unit Good from the HashMap, then add a new instance of the Unit Good. This is to ensure that existing Unit Goods 
+will not be incorrectly overwritten
+
+The class diagram will be shown below.
+
+
+### Good Class
+A Goods class will extend the unit good class. It will contain the extra variable of quantity which is meant to show the current quantity the warehouse contains.
+#### Description
+Similar to Unit Goods, the Goods will be stored as a HashMap<String, Good> in the warehouse with the key being the SKU as a string and the value is the actual Good.
+
+![Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Good.puml)
+
+The Goods class allows for the creation of orderline objects which has the following attributes: id, name, quantity and
+description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
+
+### Capacity Enumeration
+The Capacity enum is meant as a heuristic to determine the size of a unit good and good.
+#### Description
+This enum will have 3 values:
+- SMALL
+- MEDIUM
+- LARGE
+
+The capacity SMALL will be 1 unit of size, MEDIUM will be 2 units of size and finally LARGE will be 3 units in size.
+A diagram can be seen in the [Architecture Class Diagram](#design)
+
+### Order Class
+#### Description
+### Orderline Class
+A Orderline class will extend the Goods class. It will contain the extra variable of quantityFulfilled and isCheckedOff.
+#### Description
+![Orderline Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Orderline.puml)
+
+The quantity variable here will be to indicate the quantity required to fulfill the current order.
+The quantity fulfilled variable will be to indicate the quantity currently fulfilled for that order. When the quantity fulfilled equals to the quantity required, the variable isCheckedOff will be true.
+This is to indicate that this orderline is fulfilled in that order, and it does not require any more of the good.
+
+The diagram below shows the model component of the orderline class.
+### Warehouse Class
+The warehouse class is created to simulate an entire warehouse
+#### Description
+![Warehouse Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/Warehouse.puml)
+
+Most of the methods in the Warehouse Class will require users to know the SKU of the Good that they want to interact with.
+
+The warehouse class will contain:
+- List of orders
+  - An arraylist is chosen to store the orders.
+  - This is so as to store the ordering of orders being added.
+- HashMap of unitgoods
+  - A hashmap is chosen for UnitGoods with the <key, value> pair as <SKU, UnitGood>.
+  - This is to allow for quick access to the details of the unit good through knowing the SKU
+- LinkedHashMap of goods
+  - A linked hashmap is chosen for goods to ensure that we are able to maintain the ordering of goods added while having the simplicity of accessing the necessary goods through their SKU
+
+
+### Command Parser
+#### Description
+This is the description for the Command Parser. This is an abstract class which all other parser classes will implement
+![Command Parser Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/CommandParser.puml)
+
+#### Add Parser
+##### Description
+#### Remove Parser
+##### Description
+#### View Parser
+##### Description
+#### List Parser
+##### Description
+#### Find Parser
+##### Description
+####  Help Parser
+##### Description
+#### Fulfill Parser
+##### Description
+
+### User Interface Class
+#### Description
+
+### Display Class
+#### Description
+
+### Match Keyword Class
+#### Description
+The Match Keyword Class is created to simplify the use of regular expressions in Java.
+
+![Keyword Matching Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/MatchKeywords.puml)
+
+The Class Diagram above shows the different variables and methods associated with the Match Keyword class.
 This class takes in the regular expression as a string and the string to be matched in the class contructor, and stores the results
 in the private variable `groupValues` which is a Hash Map where the key would be the capture group name and the value as the matched results.
 
 #### Operation
-![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/RegexMatching.puml)
-The above diagram shows the inner workings of how the Regex Class will work. Here are the steps taken by the Regex Class:
+
+![Keyword Matching Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/KeywordMatching.puml)
+
+The above diagram shows the inner workings of how the Match Keyword Class will work. Here are the steps taken by the Regex Class:
 1. findMatch() called when instantiating groupValues variable
 2. findGroups() called within findMatch() to find the capture group names within the regex string
 3. regexMatching() will then be called within findMatch() which will use Java's base Pattern and Matcher Class, and returns a Matcher Object
@@ -44,18 +138,13 @@ String name = matches.get("name");
 String quantity = matches.get("qty");
 String description = matches.get("desc");
 ```
-### Commands Class
-#### Description
-The Commands Class is the class which contains all the available commands that can be used in the Simplst CLI application.
-![Commands Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/CommandsClass.puml)
-
-More about how each feature is run can be seen in each of the methods that can be found below.
 
 ### View Good Method
 #### Description
 View Good belongs as part of the Commands Class. It is used when a user would like to know more information about an inventory item has an item id linked to it in the warehouse.
 
 #### Operation
+
 ![View Good Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/viewGood.puml)
 
 The above sequence diagram shows the operation of how the view orderline method will be called.
@@ -71,7 +160,9 @@ The above sequence diagram shows the operation of how the view orderline method 
 Add Goods belongs as part of the Commands Class. It is used to add a Good Object into the Collection of Goods Objects currently in the Warehouse.
 
 #### Operation
+
 ![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/addGood.puml)
+
 The above sequence diagram shows the operation of how the add goods method will be called. 
 1. The User input will be read by the User Interface Class
 2. The User Interface Class will then match the command keyword `add`
@@ -86,7 +177,9 @@ For more examples of how a user can use a command, refer to the [UserGuide](/Use
 #### Description
 Remove Goods belongs as part of the Commands Class. It is used to remove a certain amount of goods from the inventory.
 #### Operation
+
 ![removeGood diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/removeGood.puml)
+
 The above sequence diagram shows the operation of how the add goods method will be called.
 1. The User input will be read by the User Interface Class
 2. The User Interface Class will then match the command keyword `remove`
@@ -121,7 +214,9 @@ The above sequence diagram shows the operation of how the list goods method will
 Total Goods belongs as part of the Commands Class. It is used to show the total quantity of Goods Objects currently in the Warehouse.
 
 #### Operation
+
 ![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/totalGoods.puml)
+
 The above sequence diagram shows the operation of how the add goods method will be called.
 1. The User input will be read by the User Interface Class
 2. The User Interface Class will then match the command keyword `total`

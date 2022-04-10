@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide empty members
+skinparam classAttributeIconSize 0
+
+Class "Unit Good"
+Class Good
+Class Order
+Class Warehouse {
+-totalCapacity : int
+-{static}orderLists : ArrayList<Order>
+-unitGoodHashMap : HashMap<String, UnitGood>
+-goodList : LinkedHashMap<String, Good>
++addUnitGoodToInventory(String sku, String name, String description, String capacity) : void
++addQuantityOfGoodToInventory(String sku, String qty) : void
++addOrderline(String oid, String sku, String qty) : void
++hasUnitGood(String sku) : boolean
++uniqueInventories() : int
++viewGood(String sku) : void
++viewOrderById(String orderId) : void
++findGoods(String name) : void
++addOrder(String oid, String recv, String addr) : void
++listOrders() : void
++listOrderlines(String oid) : void
++listGoods() : void
++listUnitGoods() : void
++fulfillOrder(String oid) : void
++totalNumberOfOrder() : int
++findOrder(int orderId) : Order
++removeUnitGood(String sku) : void
++removeUnitGoodFromInventory(String sku) : void
++removeQuantityOfGoods(String sku, String qty) : void
++removeOrder(String oid) : void
++removeOrderline(String oid, String sku, String qty) : void
+-hasOrderId(int oid) : boolean
+-fulfillOrderline(Orderline orderline, Good good) : void
+-checkOrderComplete(Order order, ArrayList<Orderline> orderlines) : boolean
+-addGoodToOrder(Order order, String sku, String qty) : void
+-getUnitGoodBySku(String sku) : UnitGood
+
+
+
+}
+
+Warehouse "0..*"--> "Unit Good"
+Warehouse "0..*"--> Good
+Warehouse "0..*"--> Order
+
+@enduml
