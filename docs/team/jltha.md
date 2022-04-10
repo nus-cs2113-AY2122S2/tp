@@ -96,7 +96,6 @@ complete the activities with the use of the study session.
     [#37](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/37) [#59](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/59)
     )
     - Contributed to forum discussion (forum issue [#57](https://github.com/nus-cs2113-AY2122S2/forum/issues/57))
-
-
+    - Reviewed a peer team during the practical exam dry run - [Link](https://github.com/jltha/ped/issues)
 
 
