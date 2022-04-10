@@ -411,6 +411,7 @@ will not be saved unless the application is exited gracefully. Any other means o
 will not save the data (because they are not taken to be typical exit commands, but rather interrupts).
 
 ## Command Summary
+
 | Action    | Command (with respect to Main Menu)                                                                                                                                                                                                                                                                         |
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | List Dish | `1` -> `1` |
