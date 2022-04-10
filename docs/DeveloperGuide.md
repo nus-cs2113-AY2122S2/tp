@@ -283,8 +283,6 @@ Target user profile: Warehouse Managers
 * can type fast
 * is reasonably comfortable using CLI apps
 
-
-
 ### Value proposition
 
 A cheap, user-friendly Warehouse Management System with intuitive commands to improve efficiency.
@@ -307,7 +305,9 @@ A cheap, user-friendly Warehouse Management System with intuitive commands to im
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Simplst should respond to users in less than 3 seconds
+2. Simplst should be able to hold information of up to hundreds of Unit Goods, Goods and Orders simultaneously
+3. Simplst should run on any supported and updated OS with Java 11 or higher installed.
 
 ## Glossary
 
