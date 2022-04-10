@@ -6,8 +6,12 @@ Todo has been marked as done successfully:
 [X] another task : No deadline specified
 Todo: task have been added to project proj1
 Todo: another task  have been added to project proj1
+Todo: task have been added to project proj1
+Todo: another task  have been added to project proj1
 Deadline set for proj1: 2022-03-17
 The Github Repo for proj1 has been changed to: https://github.com/AY2122S2-CS2113-F10-1/tp
+java language added.
+python language added.
 java language added.
 python language added.
 java language added.
@@ -245,6 +249,8 @@ GitHub Repo: https://github.com/AY2122S2-CS2113-F10-1/tp
 	[4]. [ ] another task : No deadline specified
 	[5]. [ ] task: No deadline specified
 	[6]. [ ] another task : No deadline specified
+	[7]. [ ] task: No deadline specified
+	[8]. [ ] another task : No deadline specified
 Programming languages for proj1:
 	[1]. java
 	[2]. python
@@ -252,6 +258,8 @@ Programming languages for proj1:
 	[4]. python
 	[5]. java
 	[6]. python
+	[7]. java
+	[8]. python
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
