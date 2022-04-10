@@ -69,7 +69,7 @@ complete the activities with the use of the study session.
   (pull requests [#83](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/83) and
   - [#137](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/137)).
   - Clean up the code in various occasions (pull requests [#41](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/41)
-    [#150](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/150)).
+    [#150](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/150) [#64](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/64)).
 
 - Project management:
     - Managed releases `v1.0` - `v2.0` (2 releases) on GitHub.
