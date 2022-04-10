@@ -13,6 +13,7 @@ class ":UI" as UI UI_COLOR {
 <color: white> <u>+printHoriLine()
 <color: white> <u>+printWelcomeMsg()
 <color: white> <u>+printExitMsg()
+<color: white> <u>+formatValue()
 }
 }
 

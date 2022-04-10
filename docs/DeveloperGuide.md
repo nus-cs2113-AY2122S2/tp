@@ -98,13 +98,15 @@ The `UI` component consists following classes: [`UI.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/global/UI.java)
 
 The UI component provides function to standardize the output. It provides `printWelcomeMsg()` and `printExitMsg()` 
-as well as chatbox pattern `printHoriLine()` to create chatbox styled output. 
+as well as chatbox pattern `printHoriLine()` to create chatbox styled output. Additionally, `formatValue()` allows for 
+monetary values to be printed appropriately.
  
 How the `UI` component is used:
 
-UI is created when initializing the program. During execution, UI will be called to create chatbox pattern by calling 
-`printHoriLine()`. UI also prints welcome message at the beginning of the session and print exit message at the end of 
+* UI is created when initializing the program. During execution, UI will be called to create chatbox pattern by calling 
+`printHoriLine()`. UI also prints welcome message at the beginning of the session and an exit message at the end of 
 the session.
+* `formatValue` will be called by the `Family` component whenever printing of a monetary value is involved.
 
 ![UIClass](images/UIClass.png)
 
@@ -205,13 +207,13 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 
 > :information_source: **Note:** The following are the ranges of index deemed valid:
 
-| Index       | Range                                                                              |
-|-------------|------------------------------------------------------------------------------------|
-| Group       | [1, ..., 3]                                                                        |
-| User        | [1, ..., MAX_UID], where MAX_UID is the number of people in the given group        |
-| Category    | [1, ..., 6]                                                                        |
-| Income      | [1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person |
-| Expenditure | [1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person |
+| Index       | Range                                                                               |
+|-------------|-------------------------------------------------------------------------------------|
+| Group       | [1, ..., 3]                                                                         |
+| User        | [1, ..., MAX_UID], where MAX_UID is the number of people in the given group         |
+| Category    | [1, ..., 6]                                                                         |
+| Income      | [1, ..., MAX_IID], where MAX_IID is the number of income entries for a given person |
+| Expenditure | [1, ..., MAX_EID], where MAX_EID is the number of income entries for a given person |
 
 ### Family Component
 
@@ -222,10 +224,6 @@ https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/pla
 and [`Person.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Person.java)
 
-The Class Diagram below shows the multiplicity and navigability between the 3 classes.
-
-![FamilyComponent](images/FamilyComponent.png)
-
 The `Family` component is implemented in an n-level architecture. It stores the logical grouping of persons added i.e.,
 all `Person` objects must belong to one of the `PersonList`, with all `PersonList` belonging under one `Family`.
 It also depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person` 
@@ -233,7 +231,9 @@ contains an `IncomeList` and `ExpenditureList`.
 
 The Class Diagram below shows the full structure of the `Family` component and the components it interacts with.
 
-![Placeholder]()
+![FamilyComponent](images/FamilyComponent.png)
+
+The three generational `PersonList` under `Family` are `parents`, `myGen` and `children`.
 
 How the `Family` component is used:
 
@@ -258,7 +258,7 @@ To aid in visualisation,
 
 The following Sequence Diagram shows how the `Family` component handles each call by the `Command` component.  
 
-![Placeholder]()
+![FamilySequenceDiagram](images/FamilySequenceDiagram.png)
 
 ### Money Component
 
@@ -557,13 +557,18 @@ IO redirection testing can be performed via the following steps:
 
 ## Non-Functional Requirements
 
-1. Should work on any _mainstream_ operating systems that has **Java 11** or above.
-2. Should be able to hold up to 1000 combined entries without a noticeable degrade in performance for typical 
-usage.
-3. A user with above average typing speed for regular English text, that are neither programming code nor system
-administrator commands, should be able to accomplish most of the tasks faster using commands than using the keyboard
-and mouse.
-4. Users should be able to load and use the saved application data on _any_ operating systems that fulfils point 1.
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be 
+able to accomplish most of the tasks faster using commands than using the mouse.
+2. The product be able to hold up to 100 entries without a noticeable sluggishness in performance for typical usage.
+3. The product should be for a single user i.e. (not a multi-user product).
+4. The data should be stored locally and should be in a human editable text file.
+5. The data should not be stored with a database management system.
+6. The product should work on the Windows, Linux and OS-X platforms.
+7. The product should work on a computer that has version 11 of Java installed.
+8. The product should work without requiring an installer.
+9. The product should not depend on a remote server.
+10. The product must be packaged into a single JAR file.
+11. Size of product should be less than 100MB, size of documents should be less than 15MB per file.
 
 ---
 

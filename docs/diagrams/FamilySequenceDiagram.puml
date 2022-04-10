@@ -9,8 +9,8 @@ participant ":XYZCommand" as Command COMMAND_COLOR
 
 box
 participant ":Family" as Family MODEL_COLOR
-participant "parents:PersonList" as Parents MODEL_COLOR_T1
-participant ":PersonList" as PersonList MODEL_COLOR_T1
+participant "parents:PersonList" as Parents MODEL_COLOR_T3
+participant ":PersonList" as PersonList MODEL_COLOR_T3
 participant "Alice:Person" as Person MODEL_COLOR_T2
 end box
 
@@ -186,8 +186,12 @@ loop For all Personlists in Family
     activate Family
     Family <- Family: generation:String
     deactivate Family
-    Family -> Family: printFormattedString()
+    Family -> Family: printFormattedOverview()
     activate Family
+    Family -> System: println()
+    activate System
+    Family <- System
+    deactivate System
     Family <- Family
     deactivate Family
 end loop
