@@ -23,7 +23,7 @@ public class CustomerManager {
      * @return true if the IC already exists.
      */
     public boolean hasDuplicateIc(String ic) {
-        for (Customer customer: customers) {
+        for (Customer customer : customers) {
             if (ic.equals(customer.getIc())) {
                 return true;
             }
@@ -37,7 +37,7 @@ public class CustomerManager {
      * @param c the new customer to be added
      * @throws DuplicateDataException if the IC of the customer already exists.
      */
-    public void addCustomer(Customer c) throws DuplicateDataException  {
+    public void addCustomer(Customer c) throws DuplicateDataException {
         boolean hasDuplicateCustomer = hasDuplicateIc(c.getIc());
         if (hasDuplicateCustomer) {
             throw new DuplicateDataException("This customer is already in the system.");
@@ -70,6 +70,7 @@ public class CustomerManager {
 
     /**
      * Finds the customer of the specified IC.
+     *
      * @param ic the IC to be searched
      * @return the customer
      * @throws ArcsException if the input IC is not a valid IC.
@@ -79,13 +80,11 @@ public class CustomerManager {
         if (!Customer.isValidIc(ic)) {
             throw new ArcsException("IC number is invalid.");
         }
-        for (Customer customer: customers) {
+        for (Customer customer : customers) {
             if (ic.equals(customer.getIc())) {
                 return customer;
             }
         }
         return null;
     }
-
-
 }

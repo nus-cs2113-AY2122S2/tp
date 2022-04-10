@@ -3,7 +3,8 @@ package arcs.parser;
 
 import arcs.commands.customer.AddCustomerCommand;
 import arcs.commands.customer.DeleteCustomerCommand;
-import arcs.commands.customer.FindCustomerCommand;
+import arcs.commands.customer.FindCustomerIcCommand;
+import arcs.commands.customer.FindCustomerNameCommand;
 import arcs.commands.customer.ListCustomerCommand;
 import arcs.commands.flightbooking.BookCommand;
 import arcs.commands.flightbooking.DeleteBookingCommand;
@@ -92,8 +93,11 @@ public class Parser {
         case DeleteCustomerCommand.COMMAND_WORD:
             command = CustomerParser.prepareDeleteCustomerCommand(argumentLine);
             break;
-        case FindCustomerCommand.COMMAND_WORD:
-            command = new FindCustomerCommand(argumentLine);
+        case FindCustomerIcCommand.COMMAND_WORD:
+            command = new FindCustomerIcCommand(argumentLine);
+            break;
+        case FindCustomerNameCommand.COMMAND_WORD:
+            command = new FindCustomerNameCommand(argumentLine);
             break;
         case ExitCommand.COMMAND_WORD:
             command = new ExitCommand();
