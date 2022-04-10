@@ -118,9 +118,7 @@ public class ClearCommandTest {
     }
 
 
-    // Disabled as an error occurs when they are run together with the other tests
     @Test
-    @Disabled
     void execute_clearAll_expectAllTasksRemoved() throws IOException, InvalidInputException, TimeClashException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -151,9 +149,7 @@ public class ClearCommandTest {
         assertEquals(expectedOutput, outContent.toString());
     }
 
-    // Disabled as an error occurs when they are run together with the other tests
     @Test
-    @Disabled
     void execute_clearAllCancelConfirmation_expectCancelMessage()
             throws IOException, InvalidInputException, TimeClashException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
