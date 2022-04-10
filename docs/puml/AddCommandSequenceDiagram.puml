@@ -2,18 +2,13 @@
 !include Style.puml
 
 box AddCommand
-participant ":Parser" as Parser PARSER_COLOUR
+participant ":MindMyMoney" as Parser PARSER_COLOUR
 participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
 end box
 hide footbox
 
 Parser -> AddCommand: AddCommand.executeCommand()
 activate AddCommand COMMANDS_COLOUR
-
-AddCommand -> AddCommand: addInput,expenditureList,creditCardList, incomeList
-activate AddCommand COMMANDS_COLOUR
-AddCommand --> AddCommand:
-deactivate AddCommand
 
 alt hasCreditCardFlag()
 AddCommand -> AddCommand: addCreditCard()
@@ -28,13 +23,19 @@ activate AddCommand COMMANDS_COLOUR
 AddCommand --> AddCommand:
 deactivate AddCommand
 
-else else
+else hasExpenditureFlag()
 AddCommand -> AddCommand: addExpenditure()
 activate AddCommand COMMANDS_COLOUR
 AddCommand --> AddCommand:
 deactivate AddCommand COMMANDS_COLOUR
 AddCommand --> Parser:
+
+else else
+AddCommand --> Parser:
 deactivate AddCommand COMMANDS_COLOUR
+note right
+An exception containing warning messages is thrown
+end note
 end
 
 @enduml

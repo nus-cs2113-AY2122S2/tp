@@ -2,16 +2,18 @@
 !include Style.puml
 
 box addExpenditure()
-participant ":Parser" as Parser PARSER_COLOUR
+participant ":MMM" as MMM MMM_COLOUR
 participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
 participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
 participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
 participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
-participant ":expenditureList" as expenditureList DATA_COLOUR
+participant ":ExpenditureList" as ExpenditureList DATA_COLOUR
+participant ":CreditCardList" as CreditCardList DATA_COLOUR
+participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR
 end box
 hide footbox
 
-Parser -> AddCommand: AddCommand.executeCommand()
+MMM -> AddCommand: AddCommand.executeCommand()
 activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> AddCommand: addExpenditure()
@@ -54,15 +56,38 @@ activate Expenditure USERFINANCIAL_COLOUR
 Expenditure --> AddCommand
 deactivate Expenditure
 
-AddCommand -> expenditureList: expenditureList.add(new Expenditure)
-activate expenditureList DATA_COLOUR
-expenditureList --> AddCommand
-deactivate expenditureList
+AddCommand -> ExpenditureList: expenditureList.add(new Expenditure)
+activate ExpenditureList DATA_COLOUR
+ExpenditureList --> AddCommand
+deactivate ExpenditureList
 
-AddCommand -> AddCommand: print added expenditure
+note left
+Details of newly added expenditure
+is printed out
+end note
+
+opt paymentMethod != cash
+
+AddCommand -> AddCommand: AddCommand.updateCreditCardTotalExpenditure(paymentMethod, amountFloat)
+activate AddCommand COMMANDS_COLOUR
+AddCommand -> CreditCardList: creditCardList.get(cardName)
+activate CreditCardList DATA_COLOUR
+CreditCardList --> AddCommand
+deactivate CreditCardList
+
+AddCommand -> CreditCard: creditCard.addExpenditure(amount)
+activate CreditCard USERFINANCIAL_COLOUR
+CreditCard --> AddCommand: creditCard.getBalanceLeft()
+deactivate CreditCard
+
+AddCommand --> AddCommand
+deactivate AddCommand
+
+end
+
 
 AddCommand --> AddCommand:
 deactivate AddCommand
-AddCommand --> Parser: finishedMessage
+AddCommand --> MMM: finishedMessage
 deactivate AddCommand
 @enduml

@@ -94,7 +94,7 @@ about the lower level details. Higher cohesion is also achieved and coupling is 
 <br/>
 
 The Sequence Diagram below shows an example of how the components interact with each other for the scenario 
-where the user issues the command `add /e /pm cash /c food /d Porridge /t 04/04/2022` to add an expenditure.
+where the user issues the command `add /e /pm cash /c food /d Porridge /a 3 /t 04/04/2022` to add an expenditure.
 
 ![sequence_diagram](images/ComponentsSequenceDiagram.png)
 <br/> Fig 2 - Sequence Diagram showing the Add Command
@@ -227,7 +227,8 @@ to the list.
 4. The `AddCommand.addExpenditure()` object instantiates a new `Expenditure` object with the 5 fields and adds them
    into the `ExpenditureList`.
 5. The `AddCommand.addExpenditure()` object prints a list to show the user what it has saved.
-6. The `AddCommand.addExpenditure()` returns to `AddCommand`.
+6. If user input for `PAYMENT_METHOD` is not cash, `AddCommand.addExpenditure()` invokes `AddCommand.updateCreditCardTotalExpenditure` to update the corresponding `creditCard.totalExpenditure`
+7. The `AddCommand.addExpenditure()` returns to `AddCommand`.
 
 <br/>
 
@@ -442,7 +443,7 @@ Manage finances containing multiple payment methods faster than a typical mouse/
 | v2.0    | user     | add my income                                                           | see if I am spending beyond my income                                      |
 | v2.0    | user     | list my income, credit card and expenditure separately                  | better visualise the separate lists instead of seeing all at once          |
 | v2.0    | user     | see the help page for my income, credit card and expenditure separately | refer to the the specific help page that I need                            |
-| v2.1    | user     | save and load my data                                                   | I am able to close and re run the applcation without losing data           |
+| v2.1    | user     | save and load my data                                                   | I am able to close and re run the application without losing data          |
 
 
 ### Non Functional Requirements

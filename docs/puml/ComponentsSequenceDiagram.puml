@@ -22,8 +22,8 @@ end box
 activate MMM MMM_COLOUR
 MMM -> Ui: readInput()
 activate Ui UI_COLOUR
-User -> Ui: add /e /pm cash /c food /d Porridge /t 04/04/2022
-Ui --> MMM: add /e /pm cash /c food /d Porridge /t 04/04/2022
+User -> Ui: add /e /pm cash /c food /d Porridge /a 3 /t 04/04/2022
+Ui --> MMM: add /e /pm cash /c food /d Porridge /a 3 /t 04/04/2022
 deactivate Ui
 
 MMM -> Parser: parseCommand()
