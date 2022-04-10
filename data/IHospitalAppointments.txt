@@ -1,5 +1,5 @@
 1
 1. Appointment:
-* DOCTOR [ DOCTOR [1234] || Name: john || Contact No.: 12341234 || Email: 1234@gmail.com
-* PATIENT [ PATIENT [4321] || Name: Tom || Contact No.: 93333333 || Email: 3233@qq.com || Symptom: symptom || Description: descriptions
+* DOCTOR [222] || Name: Harry Potter || Contact No.: 22223333 || Email: theChosenOne@gmail.com || Department: Defensive || Ward: -1
+* PATIENT [333] || Name: Draco Malfoy || Contact No.: 88888888 || Email: poorPotter@gmail.com || Symptom: cough || Description: Allergic to Harry Potter
 2007-12-03T10:15:30
