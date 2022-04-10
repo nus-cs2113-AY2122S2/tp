@@ -136,17 +136,8 @@ public class ContactsManager {
     }
 
     //@@author wli-linda
-    /**
-     * Prints a message following a defined format.
-     *
-     * @param message Message to print.
-     */
-    public static void printFormat(String message) {
-        showToUser(message);
-    }
-
     private static void contactsWelcome() {
-        printFormat(CONTACTS_WELCOME_MESSAGE);
+        showToUser(CONTACTS_WELCOME_MESSAGE);
         logger.log(Level.FINER, CONTACTS_ENTER_LOG_MESSAGE);
     }
 
@@ -202,7 +193,7 @@ public class ContactsManager {
      */
     private void listContacts() {
         if (listOfContacts.isEmpty()) {
-            printFormat(CONTACTS_EMPTY_LIST_MESSAGE);
+            showToUser(CONTACTS_EMPTY_LIST_MESSAGE);
             return;
         }
 
@@ -212,7 +203,7 @@ public class ContactsManager {
             String currEntry = String.format(CONTACTS_ENUMERATE_HEADER, i + 1, curr);
             listAsString = listAsString.concat(currEntry);
         }
-        printFormat(CONTACTS_LIST_SUCCESS_MESSAGE + listAsString);
+        showToUser(CONTACTS_LIST_SUCCESS_MESSAGE + listAsString);
     }
 
     /**
@@ -232,10 +223,10 @@ public class ContactsManager {
             assert taskInd >= 0;
             assert taskInd < CONTACTS_LIST_MAX_SIZE;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            printFormat(CONTACTS_REMOVE_INVALID_INDEX_MESSAGE);
+            showToUser(CONTACTS_REMOVE_INVALID_INDEX_MESSAGE);
             return;
         }
-        printFormat(CONTACTS_REMOVE_SUCCESS_MESSAGE + curr
+        showToUser(CONTACTS_REMOVE_SUCCESS_MESSAGE + curr
                 + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, getContactsCount()));
         isModified = true;
     }
@@ -251,7 +242,7 @@ public class ContactsManager {
         try {
             contact = parseContact(userInput);
         } catch (InvalidContactField e) {
-            printFormat(e.getMessage());
+            showToUser(e.getMessage());
             return;
         }
 
@@ -259,7 +250,7 @@ public class ContactsManager {
         addHash(contact);
         assert nameHashes.size() == getContactsCount();
         if (fromCommandLine) {
-            printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact
+            showToUser(CONTACTS_ADD_SUCCESS_MESSAGE + contact
                     + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, getContactsCount()));
         }
         isModified = true;
@@ -273,11 +264,11 @@ public class ContactsManager {
     private void findContacts(String userInput) {
         String[] commands = userInput.split(" ");
         if (commands.length == LENGTH_COMMAND_ONLY) {
-            printFormat(CONTACTS_FIND_EMPTY_KEYWORD_MESSAGE);
+            showToUser(CONTACTS_FIND_EMPTY_KEYWORD_MESSAGE);
             return;
         }
         if (commands.length > LENGTH_ONE_KEYWORD) {
-            printFormat(CONTACTS_FIND_MULTIPLE_KEYWORDS_MESSAGE);
+            showToUser(CONTACTS_FIND_MULTIPLE_KEYWORDS_MESSAGE);
             return;
         }
         assert commands.length == LENGTH_ONE_KEYWORD;
@@ -294,9 +285,9 @@ public class ContactsManager {
             }
         }
         if (!listAsString.equals("")) {
-            printFormat(CONTACTS_FIND_SUCCESS_MESSAGE + listAsString);
+            showToUser(CONTACTS_FIND_SUCCESS_MESSAGE + listAsString);
         } else {
-            printFormat(CONTACTS_FIND_NO_MATCHES_MESSAGE);
+            showToUser(CONTACTS_FIND_NO_MATCHES_MESSAGE);
         }
     }
 
@@ -314,24 +305,24 @@ public class ContactsManager {
             assert taskInd <= getContactsCount();
             assert taskInd < CONTACTS_LIST_MAX_SIZE;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            printFormat(CONTACTS_EDIT_INVALID_INDEX_MESSAGE);
+            showToUser(CONTACTS_EDIT_INVALID_INDEX_MESSAGE);
             return;
         }
 
         try {
             ArrayList<String> fieldStrings = getFieldStrings(userInput);
             if (fieldStrings.isEmpty()) {
-                printFormat(CONTACTS_EDIT_NO_FIELDS_MESSAGE);
+                showToUser(CONTACTS_EDIT_NO_FIELDS_MESSAGE);
                 return;
             }
             setContactFields(curr, fieldStrings);
             addHash(curr);
             assert nameHashes.size() == getContactsCount();
         } catch (InvalidContactField e) {
-            printFormat(e.getMessage());
+            showToUser(e.getMessage());
             return;
         }
-        printFormat(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
+        showToUser(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
         isModified = true;
     }
 
@@ -368,7 +359,7 @@ public class ContactsManager {
             } else if (userInput.startsWith(EDIT_COMMAND_STRING)) {
                 editContact(userInput);
             } else {
-                printFormat(CONTACTS_INVALID_COMMAND_MESSAGE);
+                showToUser(CONTACTS_INVALID_COMMAND_MESSAGE);
                 logger.log(Level.FINER, String.format(CONTACTS_INVALID_COMMAND_LOG_MESSAGE, userInput));
             }
             if (isModified) {
