@@ -223,13 +223,16 @@ track of time
 
 ### Timetable implementation 
 
-The **TimeTable** component prints the daily or weekly schedule that the user wishes to see. 
+The **TimeTable** component prints the daily, weekly and monthly schedule that the user wishes to see. 
 
 
 The functionalities of the timetable include:
 - Prints a schedule specific to the date the user inputs 
 - Prints the schedule for the week the user is at
+- Prints the schedule for the week after
 - Prints the schedule of the day whenever the user starts up Sherpass.
+- Prints the schedule of the current month
+- Prints the schedule of any specific month. 
 - The timetable schedule is represented in a table form as shown below:
 
 ![](images/timetableFormat.png)
