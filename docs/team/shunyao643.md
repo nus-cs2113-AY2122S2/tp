@@ -9,7 +9,9 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 Code contribution can be found [here](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=shunyao643&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other).
 
 ### Enhancements implemented
-* In charge of the parsing of commands prior to command execution. Parser implements a regex-based approach to parsing commands. 
+* In charge of the parsing of commands prior to command execution.
+  * Parser implements a regex-based approach to parsing commands. This is challenging and necessary due to non-functional requirements of the project. 
+* Implement DateTime functionality throughout the application's classes.
 
 ### Contributions to UG
 * Add top-level introduction summary.
@@ -21,6 +23,7 @@ Code contribution can be found [here](https://nus-cs2113-ay2122s2.github.io/tp-d
 * Update user-stories and non-functional requirements in line with progress of the project.
 
 ### Contributions to team-based tasks
+* Product Owner for the project.
 * Set up GitHub team organisation and repository.
 * Maintain issue tracker throughout project with the use of assignees, labels, closing statements and milestones.
 * Manage release of v1.0 of the project.
