@@ -26,7 +26,8 @@ needed.
 I implemented the class diagrams for Appointment,AppointmentList,Medicine, and MedicineList and added in descriptions
 for them in the DG. I also helped to make small changes to our DG as our code evolved, such as changing the required
 command inputs in the appendix. I also helped to update the class diagrams by removing the default class and 
-method/variable icons, to adhere to the UML diagram standards given.
+method/variable icons, to adhere to the UML diagram standards given. I did the design implementation section regarding
+the view appointment command.
 <br>
 **Team-based tasks contributions:**
 I helped to set up the milestones and labels on Github issues. I also helped to release V2.0 and kept it updated as

@@ -211,7 +211,7 @@ This feature is a method within `AppointmentList`. `AppointmentList` contains an
 of `Appointment` as a private element. `AppointmentList` methods invoked interacts with this
 list, possibly making changes in the process.
 
-Currently, `AppointmentList` has the following methods:
+Some methods included in the `AppointmentList` are:
 * `AppointmentList#add` -- Appends a new `Appointment` to the list.
 * `AppointmentList#remove` -- Removes an entry from the list by appointment id.
 * `AppointmentList#edit` -- Edits a existing entry from the list by.
@@ -222,9 +222,15 @@ The methods are exposed in the `Manager#runLoop` method where user input is pars
 be returned if the user input passes the validation by `Validator`. Else, a `HalpmiException` will be thrown
 indicating missing parameters.
 
-Below is an example describing the behaviour of the `find` feature.
+Below is a simplified sequence diagram showing the key class interactions specifically when the User calls the
+`view appointment` command appropriately. 
 
-#### Design considerations:
+![ViewAppointmentImplementationUML](diagrams/ViewAppointmentImplementationUML.png)
+The user first types in the command for view appointment correctly. Then, Manager will call UI methods to
+parse and identify the command string and parameters string before parsing within Parser. If parameters are absent,
+then a ViewAppointmentCommand is returned. Else, a FindAppointmentCommand with the parameters is returned. The Command
+is executed which displays the appointments to the User. The command allows calls to get a Status variable to be
+returned to the Manager.
 
 ---------------------------------------------------------------------------------------------------------------
 ## Product scope
