@@ -731,6 +731,22 @@ This section includes instructions to test SplitLah manually.
 * [Storage Testing](#storage-testing)
 
 ### Launch and Shutdown
+<hr>
+
+#### Initial Launch
+1. Ensure that Java 11 or above is installed.
+2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
+3. Copy the file to the folder you wish to use as a home folder for SplitLah.
+4. Open a terminal and set the working directory to the home folder.
+5. Start SplitLah by executing `java -jar splitlah.jar` in the terminal.
+6. When SplitLah has successfully launched a welcome message should appear.
+   For the first launch, SplitLah should mention that no save files were found and loaded.
+
+#### Shutting Down
+1. When SplitLah is awaiting user input, enter `exit` to terminate the application.
+2. A farewell message should be printed as the SplitLah terminates.
+
+<hr>
 
 ### Session Testing
 <hr>
