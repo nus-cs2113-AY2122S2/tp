@@ -2,10 +2,9 @@
 
 ## Project: PlanITarium
 
-<!-- this is placeholder description -->
-PlanITarium is a CLI application that helps you and your family to track your finances. It is written in Java, and has
-about 9k LoC.
-<!-- this is placeholder description -->
+PlanITarium is an application that assists you and your family in managing your finances, optimized for use on the
+Command Line Interface (CLI). You can use it to view your monthly financial status, logically group family members for
+better management, and categorise your expenditures. PlanITarium is written in, and meant to be run on `Java 11`.
 
 ## Summary of Contributions
 
