@@ -2,7 +2,7 @@
 
 ## Introduction
 
-{Travel Agency Reservation Booking System (TARBS) is a desktop app for managing reservations for travel packages and tourist attractions, optimised for use via a Command Line Interface (CLI). If you can type fast, TARBS can help to improve efficiency of adding and editing reservations, amongst many other features.}
+Travel Agency Reservation Booking System (TARBS) is a desktop app for managing reservations for travel packages and tourist attractions, optimised for use via a Command Line Interface (CLI). If you can type fast, TARBS can help to improve efficiency of adding and editing reservations, amongst many other features.
 
 
 ### Why do we need TARBS?
@@ -16,7 +16,7 @@ Travel agencies often have to manage multiple customers and their respective boo
 ## Features 
 
 ### Quick Help: `help`
-Print detailed instructions on the available commands that users may input
+Print detailed instructions on the available commands that users may input.
 
 Usage: `help`
 
@@ -26,13 +26,6 @@ View a list of all available packages
 
 Usage: `packages`
 
-### Get info on a specific package: `info`
-
-Displays the detailed information of a specific travel package
-
-Format: `info {num}`
-
-Usage: `info 2`
 
 ### Adding a package: `add`
 Adds a new Travel Package to the list of Packages.
@@ -40,7 +33,9 @@ Adds a new Travel Package to the list of Packages.
 Format: `add {package_name},{package_id},{startDate},{endDate},{hotel},{price},{country},{vacancies}`
 
 * The `startDate` and `endDate` must be in the format DD/MM/YYYY.
-* The `price` can only contain numbers or decimal points.  
+* The `price` can only contain numbers or decimal points.
+* `package_id` should be unique. 
+*   
 
 Example of usage: 
 
@@ -74,7 +69,7 @@ Example of usage:
 `reserve 3,John,91234567,3`
 
 ### Removing a reservation: `remove`
-Remove a reservation from a Travel Package.
+Remove a reservation from a Travel Package using packageID and contact number. 
 
 Format: `remove {package_id},{contact_number}`
 
@@ -95,7 +90,9 @@ Example of usage:
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: When starting the application, data.txt will be created if there isn't one already. Simply place the data.txt with the executable JAR file on the new computer and you are good to go. 
+
+
 
 ## Command Summary
 
@@ -105,11 +102,11 @@ Example of usage:
 | help | help |
 | packages | packages |
 | info | info {package_number} |
-| add | add {package_name} {country} {duration} {price} {vacancies} |
-| delete | delete {package_number} |
-| reserve  | reserve {package_number} {contact_name} {contact_number} {number_pax} |
-| remove | remove {reservation_id} |
-| reservations | reservations {package_number} |
+| add | add {package_name},{package_id},{startDate},{endDate},{hotel},{price},{country},{max_vacancies} |
+| delete | delete {package_id} |
+| reserve  | reserve {package_id},{contact_name},{contact_number},{number_pax} |
+| remove | remove {package_id},{conact_number} |
+| reservations | reservations {package_id} |
 
 
 

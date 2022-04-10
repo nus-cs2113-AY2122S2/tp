@@ -37,6 +37,7 @@ public class Storage {
     static final int hotelNameIndex = 1;
     static final int hotelCountryIndex = 2;
     static final int hotelPriceIndex = 3;
+    static final int hotelPackageIDIndex = 3;
 
     /**
      * String representation of the file path to the save file
@@ -194,6 +195,38 @@ public class Storage {
             int vacancies = Integer.parseInt(arrayElements[travelPackageVacanciesIndex].trim());
             int numParticipants = Integer.parseInt(arrayElements[travelPackageNumParticipantsIndex].trim());
             return new TravelPackage(name, id, startDate, endDate, hotel, price, country, vacancies, numParticipants);
+        } catch (Exception e) {
+            throw new InvalidInputException(e.getMessage());
+        }
+    }
+
+    public Hotel parseHotel(String str) throws InvalidInputException {
+        try{
+            String[] arrayElements = str.split("\\|");
+            String hotelName = arrayElements[hotelNameIndex].trim();
+            String hID = arrayElements[hotelIDIndex].trim();
+            int id = Integer.parseInt(hID);
+            String country = arrayElements[hotelCountryIndex].trim();
+            double price = Double.parseDouble(arrayElements[hotelPriceIndex].trim());
+            int packageID = Integer.parseInt(arrayElements[hotelPackageIDIndex].trim());
+            if (price <= 0) {
+                throw new InvalidInputException("Price should not be less than or equal to 0!");
+            }
+            return new Hotel(id, hotelName, country, price, packageID);
+        } catch (Exception e) {
+            throw new InvalidInputException(e.getMessage());
+        }
+    }
+
+    public Hotels parseHotelFile(String savedHotels) throws InvalidInputException {
+        Hotels hotelsList = new Hotels();
+        String[] arrayElements = savedHotels.split("%");
+        try {
+            for (String arrayElement : arrayElements) {
+                Hotel newHotel = parseHotel(arrayElement);
+                hotelsList.initHotel(newHotel);
+            }
+            return hotelsList;
         } catch (Exception e) {
             throw new InvalidInputException(e.getMessage());
         }

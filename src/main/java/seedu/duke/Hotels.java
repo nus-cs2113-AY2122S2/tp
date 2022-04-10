@@ -39,6 +39,17 @@ public class Hotels {
         hotels.remove(index);
     }
 
+    public void printAllHotels() {
+        if (hotels.size() == 0) {
+            System.out.println("No hotels added yet!");
+        }
+        else {
+            for (int i = 0; i < hotels.size(); i++) {
+                System.out.println(i + 1 + ". " + hotels.get(i).toString());
+            }
+        }
+    }
+
     public boolean idExists(int id) {
         for (Hotel aHotel : hotels) {
             if (aHotel.getHotelID() == id) {
@@ -59,6 +70,10 @@ public class Hotels {
             }
         }
         return false;
+    }
+
+    public void initHotel(Hotel newHotel) {
+        hotels.add(newHotel);
     }
 
 }
