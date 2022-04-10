@@ -1,9 +1,9 @@
 # Project Portfolio Page of Alan Low (alanlowzies)
 
 ## Overview
-This page showcases my contributions to the development of WerkIt!, a team project (tP) in the CS2113T 
-Software Engineering & Object-Oriented Programming module offered by the School of Computing, National University of 
-Singapore.
+This page showcases my contributions to the development of WerkIt!, an application that I have co-developed with
+my peers as part of a team project (tP) in the CS2113T Software Engineering & Object-Oriented Programming module 
+offered by the School of Computing, National University of Singapore.
 
 ### About the Project
 WerkIt! is a command line interface (CLI) application written in Java that allows users to create a weekly workout 
