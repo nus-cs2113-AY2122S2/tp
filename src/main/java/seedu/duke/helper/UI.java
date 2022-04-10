@@ -72,6 +72,7 @@ public class UI {
         printFindMedicineMessage();
         printUpdateMedicineMessage();
         printClearMedicineMessage();
+        printDispenseMedicineMessage();
         printByeMessage();
         printNewLineSeparator();
     }
@@ -249,16 +250,25 @@ public class UI {
 
     public static void printUpdateMedicineMessage() {
         printNewLineSeparator();
-        System.out.println("Additional feature: UPDATE MEDICINE");
+        System.out.println("Feature: UPDATE MEDICINE");
         System.out.println("Format: update medicines");
         System.out.println("Example: update medicines");
     }
 
     public static void printClearMedicineMessage() {
         printNewLineSeparator();
-        System.out.println("Additional feature: CLEAR MEDICINE");
+        System.out.println("Feature: CLEAR MEDICINE");
         System.out.println("Format: clear medicines");
         System.out.println("Example: clear medicines");
+    }
+
+    public static void printDispenseMedicineMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: DISPENSE MEDICINE");
+        System.out.println("Format: dispense medicine /info [Patient NRIC],[Medicine Name],[Quantity]");
+        System.out.println("You can list multiple medicines as long as each medicine is in the form"
+                + "[Medicine Name],[Quantity]");
+        System.out.println("Example: dispense medicine /info S1234567A,Paracetamol,10,Aspirin,20");
     }
 
     public static void printByeMessage() {
@@ -357,7 +367,7 @@ public class UI {
     }
 
     public static void printPrompt() {
-        System.out.print("You: ");
+        System.out.print("\nYou: ");
     }
 
     public static void printParagraph(String paragraph) {
