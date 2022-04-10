@@ -56,7 +56,7 @@ public class UpdateItemNameCommand extends Command {
         }
         String oldItemName = extractCurrentItemName(tokens);
         String newItemName = extractNewItemName(tokens);
-        Item item = new Item(oldItemName,newItemName);
+        Item item = new Item(oldItemName, newItemName);
         setItem(item);
     }
 
@@ -119,7 +119,7 @@ public class UpdateItemNameCommand extends Command {
      * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
         String oldItemName = item.getName();
@@ -135,6 +135,10 @@ public class UpdateItemNameCommand extends Command {
         oldItemName = oldItemName.toUpperCase();
         newItemName = newItemName.toUpperCase();
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
+    }
+
+    public void writeItemListToFile(ListContainer listContainer) throws IOException {
+        ItemList listOfItems = listContainer.getItemList();
         ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemListFileManager.writeItemListToFile(listOfItems);
     }
