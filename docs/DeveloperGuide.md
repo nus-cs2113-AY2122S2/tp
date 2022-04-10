@@ -9,6 +9,12 @@
   - [Timetable Implementation](#timetable-implementation)
   - [Storage Implementation](#storage-implementation)
 - [Product Scope](#product-scope)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+  - [User Stories](#user-Stories)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+  - [Instruction for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
