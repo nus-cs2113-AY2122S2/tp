@@ -93,6 +93,7 @@ public class TaskUtil {
      *
      * @param taskList    Array representation of tasks.
      * @param taskToCheck New Task to be checked for clash.
+     * @param isFromFile boolean value checking if task to check for is from a save file.
      * @throws TimeClashException If there is a date and time clash, i.e.
      *                            taskToCheck has the same date and clashing of time periods
      *                            with tasks in taskList
