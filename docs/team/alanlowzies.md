@@ -52,8 +52,8 @@ into text files stored on the user's local filesystem
 
 ### Enhancements Implemented
 - (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.
-  This was done as the original MD quote blocks were hard to spot and thus readers may miss such messages. Thus, the
-  boxes were created to make them more conspicuous.
+  This was done as the original MD quote blocks were hard to spot and thus readers may miss such messages. Hence, the
+  custom boxes were created to make them more conspicuous.
   <br/><br/>**Sample:**<br/>
 <span class="box warning">:warning: This is an example of a warning box. Contains advice or instructions that users
 should take note of to avoid issues in the application.</span>
