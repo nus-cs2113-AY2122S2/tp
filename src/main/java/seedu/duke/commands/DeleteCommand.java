@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         try {
             Item removedItem = itemList.removeItem(index);
             ui.showMessages(removedItem + " has been deleted.");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             ui.showMessages(ERROR_MESSAGE, INVALID_INDEX);
         }
     }

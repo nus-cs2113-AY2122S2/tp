@@ -11,6 +11,17 @@ public class EditCommandParserTest {
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
+    void parse_compulsoryFieldsWithoutValue_throwException() {
+        String testInputFormat = " %s %s %s %s";
+        String testInput = String.format(testInputFormat,
+                1,
+                CliSyntax.PREFIX_NAME.getPrefix(),
+                CliSyntax.PREFIX_DESCRIPTION.getPrefix(),
+                CliSyntax.PREFIX_QUANTITY.getPrefix());
+        assertParseFailure(parser, testInput, Messages.INVALID_SYNTAX);
+    }
+
+    @Test
     void parse_missingAllCompulsoryFields_throwException() {
         String testInputFormat = " %s";
         String testInput = String.format(testInputFormat, 1);
@@ -48,5 +59,14 @@ public class EditCommandParserTest {
                 CliSyntax.PREFIX_RELATIVE.getPrefix(), "-");
         assertParseSuccess(parser, testInputRelativeQuantity,
                 ParserStubs.ZEROINDEX_EDITCOMMAND_NEGATIVERELATIVEQUANTITY);
+
+        String testInputNameDescMissingQuantityFormat = " %s %s%s %s%s %s";
+        String testInputNameDescMissingQuantity = String.format(testInputNameDescMissingQuantityFormat,
+                1,
+                CliSyntax.PREFIX_NAME.getPrefix(),  ParserStubs.PAPERCUP_NAME,
+                CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
+                CliSyntax.PREFIX_QUANTITY.getPrefix());
+        assertParseSuccess(parser, testInputNameDescMissingQuantity,
+                ParserStubs.ZEROINDEX_EDITCOMMAND_NAMEDESC_MISSINGQUANTITY);
     }
 }
