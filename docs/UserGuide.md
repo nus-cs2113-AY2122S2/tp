@@ -433,11 +433,17 @@ ____________________________________________________________
 ```
 <br>
 
-> 📔 <span style="color:#3333ff">**NOTE:**</span>
+> ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
 >
 > Only one parameter can be edited per command. You cannot do the following:
 >
 > `edit task 2 -m CS2113T -n "CS2113T Tutorial 1" -d "Draw class diagram"`
+
+> 📔 <span style="color:#3333ff">**NOTE:**</span>
+>
+> You can remove optional parameters from tasks or modules by supplying an empty string (`""`). For example:
+> 
+> `edit task 1 -d ""`
 
 <br>
 
