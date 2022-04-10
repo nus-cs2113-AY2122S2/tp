@@ -32,8 +32,9 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
     * [Adding an Orderline](#adding-an-orderline-add-og)
     * [Removing an Orderline by Quantity](#removing-a-quantity-of-an-orderline-remove-og)
     * [Listing Orderlines in an Order](#listing-orderlines-in-an-order-list-og)
+  * [Command Summary](#command-summary)
 
-##Explanation of key terms or symbols
+## Explanation of key terms or symbols
 | Terms or Symbols used                              | Further Explanation                                                                                                                          |  
 |----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | [Unit Good](#unit-good-commands)                   | A template containing details of a good.                                                                                                     |<br/>
