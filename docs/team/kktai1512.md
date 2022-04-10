@@ -44,3 +44,5 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 * Updated user/developer docs for typos
 * Set up Trello for project management 
 * General code clean up
+
+Overall, I'm thankful for a great team, as everyone helps each other out.
