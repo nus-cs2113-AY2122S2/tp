@@ -35,23 +35,6 @@ public class GroupEditCommand extends Command {
         this.groupName = groupName;
         this.groupId = groupId;
     }
-
-    /**
-     * Checks if new person list is exactly the same as old person list.
-     **/
-    public boolean samePersonList(PersonList newList, ArrayList<Person> oldList) {
-        boolean isSame = true;
-        for (Person person : newList.getPersonList()) {
-            if (!oldList.contains(person)) {
-                isSame = false;
-                return isSame;
-            }
-        }
-        if (newList.getSize() != oldList.size()) {
-            isSame = false;
-        }
-        return isSame;
-    }
     
     public boolean existingGroupWithTheSameName(ArrayList<Group> groupList, String newName, int groupId) {
         boolean hasDuplicate = false;
@@ -91,7 +74,7 @@ public class GroupEditCommand extends Command {
 
             ArrayList<Person> oldList = group.getPersonList();
             PersonList newList = new PersonList(involvedList);
-            if (samePersonList(newList, oldList)) {
+            if (newList.isSamePersonList(oldList)) {
                 ui.printlnMessage(Message.ERROR_GROUPEDIT_SAME_PERSON_LIST);
                 return;
             } else {
