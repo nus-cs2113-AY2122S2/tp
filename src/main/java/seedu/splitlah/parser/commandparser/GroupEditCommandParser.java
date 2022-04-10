@@ -13,7 +13,7 @@ public class GroupEditCommandParser implements CommandParser<GroupEditCommand> {
     public static final String COMMAND_TEXT = "group /edit";
 
     public static final String COMMAND_FORMAT =
-        "Syntax: group /edit /gid [GROUP_ID] [</n [GROUP_NAME]>] [</pl [NAME1 NAME2...]>]";
+        "Syntax: group /edit /gid [GROUP_ID] {/n [GROUP_NAME] /pl [NAME1 NAME2...]}";
 
     public static final String[] COMMAND_DELIMITERS = {
         ParserUtils.GROUP_ID_DELIMITER,
