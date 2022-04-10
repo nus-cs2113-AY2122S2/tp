@@ -47,8 +47,6 @@ into text files stored on the user's local filesystem
   This was done as the original MD quote blocks were hard to spot and thus readers may miss such messages. Hence, the
   custom boxes were created to make them more conspicuous.
   <br/><br/>**Sample:**<br/>
-<span class="box warning">:warning: This is an example of a warning box. Contains advice or instructions that users
-should take note of to avoid issues in the application.</span>
 <span class="box info">:memo: This is an example of an information box. Contains information that may be useful for
 the users.</span>
 - (Developer and User Guides) Inserted 'buttons' throughout the guides to allow users to click and navigate back to the
