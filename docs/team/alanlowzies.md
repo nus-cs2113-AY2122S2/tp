@@ -3,8 +3,7 @@
 ## Overview
 This page showcases my contributions to the development of WerkIt!, written in Java that allows users to create a weekly 
 workout schedule for them to refer to and follow. I co-developed this application with my peers as part of a team 
-project (tP) in the CS2113T Software Engineering & Object-Oriented Programming module offered by the School of 
-Computing, National University of Singapore. More details about the project can be found in the 
+project (tP) in the CS2113T module offered by NUS SoC. More details about the project can be found in the 
 [WerkIt! User Guide](../UserGuide.md), [Developer Guide](../DeveloperGuide.md), and 
 [GitHub repository](ttps://github.com/AY2122S2-CS2113T-T09-2/tp).
 
@@ -32,9 +31,7 @@ A summary of my code contributions are as follows:
   WerkIt! to carry out.
 10. Wrote some exception APIs for WerkIt!, including `InvalidWorkoutException`, `InvalidExerciseException`, and
   `UnknownFileException`.
-11. Contributed to the `ExerciseList` API, which is mainly done by my team member Haofeng, by adding
-  additional functionality to the API such as populating the `exercise.txt` file with default exercises. The exercises
-  were thought of by Haofeng :)
+11. Contributed to the `ExerciseList` API by adding utility methods.
 12. Wrote JUnit test cases for WerkIt! APIs including (but not limited to) `WorkoutCommand`, `FileManager`, `Parser`, etc.
 13. Wrote JavaDocs for the classes and methods that I have created.
 
