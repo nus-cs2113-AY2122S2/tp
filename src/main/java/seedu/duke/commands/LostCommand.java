@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
+import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 import seedu.duke.common.Messages;
 
@@ -50,12 +51,10 @@ public class LostCommand extends Command {
      * @param ui Displays messages to the user
      */
     @Override
-    public void execute(ItemList itemList, Ui ui) {
+    public void execute(ItemList itemList, Ui ui) throws InvMgrException {
         boolean isEmptyItemList = checkItemListSize();
         if (isEmptyItemList) {
-            ui.showMessages(Messages.EMPTY_ITEM_LIST_MESSAGE);
-            ui.showDivider();
-            return;
+            throw new InvMgrException(Messages.EMPTY_ITEM_LIST_MESSAGE);
         }
         Item lostItem = null;
         try {
@@ -71,11 +70,12 @@ public class LostCommand extends Command {
             ui.showMessages(Messages.REPORTED_LOST_MESSAGE);
             System.out.println(lostItem);
         } else if (updatedItemQuantity == 0) {
+            System.out.println("delete command item index is " + itemIndex);
             DeleteCommand deleteCommand = new DeleteCommand(itemIndex);
             deleteCommand.execute(itemList, ui);
             ui.showMessages(Messages.REPORTED_LOST_AND_DELETED_MESSAGE);
         } else {
-            ui.showMessages(Messages.LOST_ERROR_MESSAGE);
+            throw new InvMgrException(Messages.LOST_ERROR_MESSAGE);
         }
         ui.showDivider();
     }
