@@ -101,6 +101,5 @@ as part of the Practical Exam Dry-Run (PED).
   bug, click [here](https://github.com/emilysim00/ped/issues/10).
   
   More reported bugs can be found [here](https://github.com/emilysim00/ped/issues)
-
 * Suggested and reviewed other team's Developer Guide 
   * [Reviewed Group T10-2](https://github.com/nus-cs2113-AY2122S2/tp/pull/7/files/ff6fa7904a5c27a8aeb91b493c812265453b7dda)
