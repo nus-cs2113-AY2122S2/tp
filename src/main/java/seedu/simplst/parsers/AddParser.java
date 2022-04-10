@@ -2,13 +2,12 @@ package seedu.simplst.parsers;
 
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
-import util.exceptions.WrongCommandException;
-import util.exceptions.MissingFlagException;
 import util.exceptions.EmptyFieldException;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
 import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.UnitTestException;
+import util.exceptions.MissingFlagException;
+import util.exceptions.WrongCommandException;
 
 import java.util.HashMap;
 
@@ -41,13 +40,6 @@ public class AddParser extends CommandParser {
             HashMap<String, String> regexUnitGoodMatch = new MatchKeywords(userInput, regexUnitGood).getGroupValues();
             warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
                         regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
-
-            regexUnitGoodMatch = new
-                    MatchKeywords(userInput, regexUnitGood).getGroupValues();
-
-            warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
-                    regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
-
         } else if (matches.get("flag").equals("o")) {
             // adding the base details for order
             String regexOrder = "oid/(?<oid>\\d*) r/(?<recv>.*) addr/(?<addr>.*)";
