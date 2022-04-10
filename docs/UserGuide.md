@@ -97,7 +97,6 @@ Order of other parameters can be switched.
 
 #### Adding a single task
 
-<<<<<<< HEAD
 Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime END_TIME]`
 
 
@@ -240,8 +239,10 @@ Format: `mark TASK_NUMBER` or `unmark TASK_NUMBER`
 ![](images/markTasks.png)
 
 ### Display Daily Schedule: `show today` / `show tomorrow` / `show DATE`
+Sherpass will allow you to display your today schedule, tomorrow schedule or any specific date schedule 
+by using the command shown above.
 
-Displays your schedule for today, tomorrow or any specific date.
+To make things easier for you, command for `show tomorrow` can be shortened to `show tmr`. 
 
 Upon startup, Sherpass also shows your schedule for the day.
 
@@ -258,8 +259,10 @@ Below is an example of the schedule that is being displayed from the given date
 ![ShowDateTimetableFormat](images/showDateTimetableFormat.PNG)
 
 ### Display Weekly Schedule: `show week` / `show next week`
+If you are wondering what is your schedule for the current week or the next week. Fret not, 
+Sherpass has the ability to display your schedule for the current week or the week after.
 
-Displays your schedule for the week or the week after.
+Command for `show next week` can be shortened to `show nextweek`.
 
 Format:
 - To see the schedule for the week you are in: `show week`
@@ -271,12 +274,14 @@ Below is an example of the weekly schedule displayed:
 ![weeklyTimetablePart2](images/weeklyTimetablePart2.PNG)
 
 ### Display Monthly Schedule: `show month` / `show MONTH`
+If showing of your daily schedule or weekly schedule is not enough, Sherpass will allow you to track your
+monthly schedule.
 
 - Displays your schedule for the current month or any specific month
 
 - To make your life easier when typing the to show any specific month command, 
   
-  3-letter abrivation of any specific month is accepted.
+  3-letter abbreviation of any specific month is accepted.
 
 >**💡 Note**
 >
