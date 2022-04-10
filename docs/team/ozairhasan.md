@@ -1,7 +1,12 @@
 # Syed Ozair Ul Hasan - Project Portfolio Page
-### Overview
-AllOnUs Life Management Suite is a command line application used for managing user's 
-modules and timetable, contacts, and expenses. It is written in Java, and has around 6kLoC.
+## Overview
+AlloNUS (“All On Us”) is an all-in-one platform
+for tracking your classes, expenses, and personal contacts
+optimized for use via a Command Line Interface (CLI).
+If you can type fast, AlloNUS can get your schedule, expenses,
+and contact management tasks done faster than traditional GUI apps.
+
+Given below are my contributions to the project.
 
 ### Summary of Contributions
 #### New Features:
