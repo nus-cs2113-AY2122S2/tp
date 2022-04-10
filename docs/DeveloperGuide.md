@@ -276,7 +276,7 @@ https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/pla
 and [`ExpenditureList.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/ExpenditureList.java)
 
-<!-- { ![MoneyClassDiagram](images/MoneyClassDiagram.png) } -->
+![MoneyClassDiagram](images/MoneyClassDiagram.png)
 
 The `Money` components consists of two abstract classes, `Money` and `MoneyList`, of which contains the basic attributes
 and functions required to track monetary items. Each `Person`'s Income and Expenditure are then tracked by the 
@@ -294,7 +294,7 @@ To aid in visualisation, the editing of an existing income will be simulated.
 
 The following Sequence Diagram shows how the `Money` component handles the call by the `Person` component.
 
-<!-- { [MoneyAddInSequenceDiagram](images/MoneySequenceDiagram0.png) } -->
+<!-- { [MoneyEditInSequenceDiagram](images/MoneySequenceDiagram0.png) } -->
 
 ### Storage Component
 
