@@ -1,25 +1,17 @@
 # Project Portfolio Page of Alan Low (alanlowzies)
 
 ## Overview
-This page showcases my contributions to the development of WerkIt!, an application that I have co-developed with
-my peers as part of a team project (tP) in the CS2113T Software Engineering & Object-Oriented Programming module 
-offered by the School of Computing, National University of Singapore.
-
-### About the Project
-WerkIt! is a command line interface (CLI) application written in Java that allows users to create a weekly workout 
-schedule for them to refer to and follow. More details about the project can be found in the following locations:
-* [GitHub Repository](https://github.com/AY2122S2-CS2113T-T09-2/tp)
-* [WerkIt! User Guide](../UserGuide.md)
-* [WerkIt! Developer Guide](../DeveloperGuide.md)
-
----
+This page showcases my contributions to the development of WerkIt!, written in Java that allows users to create a weekly 
+workout schedule for them to refer to and follow. I co-developed this application with my peers as part of a team 
+project (tP) in the CS2113T Software Engineering & Object-Oriented Programming module offered by the School of 
+Computing, National University of Singapore. More details about the project can be found in the 
+[WerkIt! User Guide](../UserGuide.md), [Developer Guide](../DeveloperGuide.md), and 
+[GitHub repository](ttps://github.com/AY2122S2-CS2113T-T09-2/tp).
 
 ## Summary of Contributions
 ### Code Contributed
 A detailed report of my code contributions to the tP can be found in the [tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=alanlowzies&breakdown=true) 
 hosted by the module coordinators of CS2113T.
-
-![tP Code Dashboard](../images/ppp/alanlowzies/tPCodeDashboard.png)
 
 A summary of my code contributions are as follows:
 - Wrote most of the `FileManager` API, which allows WerkIt! to read and write application data
