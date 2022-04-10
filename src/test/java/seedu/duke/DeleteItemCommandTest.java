@@ -8,6 +8,7 @@ import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidItemNameException;
 import seedu.duke.exceptions.ItemNotFoundException;
+import seedu.duke.exceptions.DuplicateCommandException;
 
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
@@ -58,4 +59,8 @@ public class DeleteItemCommandTest {
         assertThrows(InvalidItemNameException.class, () -> new DeleteItemCommand("{1,/0"));
     }
 
+    @Test
+    public void execute_DeleteItemCommandWithinItemNameOrPax_exceptionThrown()  {
+        assertThrows(DuplicateCommandException.class, () -> new DeleteItemCommand("delete item"));
+    }
 }

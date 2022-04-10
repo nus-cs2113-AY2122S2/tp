@@ -12,6 +12,7 @@ import seedu.duke.exceptions.ItemNotFoundException;
 import seedu.duke.exceptions.NewItemPaxSameAsCurrentPaxException;
 import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.exceptions.InvalidUpdateItemPaxCommandException;
+import seedu.duke.exceptions.DuplicateCommandException;
 
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
@@ -115,4 +116,10 @@ public class UpdateItemPaxCommandTest {
         assertThrows(ItemNotFoundException.class, () -> itemNameCommand.execute(listContainer, ui));
     }
 
+    @Test
+    public void execute_UpdateItemPaxCommandWithinItemNameOrPax_exceptionThrown() {
+        assertThrows(DuplicateCommandException.class, () -> new UpdateItemPaxCommand("update item pax / 15"));
+        assertThrows(DuplicateCommandException.class, () -> new UpdateItemPaxCommand("Toilet Roll / update "
+                + "item pax"));
+    }
 }

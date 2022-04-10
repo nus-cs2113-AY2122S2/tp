@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.itemcommands.SearchItemCommand;
 
+import seedu.duke.exceptions.DuplicateCommandException;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.EmptyKeywordException;
 
@@ -54,6 +55,11 @@ public class SearchItemCommandTest {
         String keyword = itemNameCommand.getKeyword();
         ItemList listOfMatchingItem = itemList.findItemsInList(keyword);
         assertEquals(0, listOfMatchingItem.getSize());
+    }
+
+    @Test
+    public void execute_SearchItemCommandWithinItemNameOrPax_exceptionThrown()  {
+        assertThrows(DuplicateCommandException.class, () -> new SearchItemCommand("search item"));
     }
 
 }

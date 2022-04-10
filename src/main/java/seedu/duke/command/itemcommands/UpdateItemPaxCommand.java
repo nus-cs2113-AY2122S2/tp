@@ -10,6 +10,8 @@ import seedu.duke.Ui;
 import seedu.duke.ListContainer;
 import seedu.duke.exceptions.InvalidItemPaxException;
 import seedu.duke.exceptions.InvalidUpdateItemPaxCommandException;
+import seedu.duke.exceptions.DuplicateCommandException;
+
 import seedu.duke.storage.ItemListFileManager;
 
 import java.io.IOException;
@@ -25,6 +27,7 @@ public class UpdateItemPaxCommand extends Command {
     private Item item;
     private static final String DELIMITER = "/";
     private static final int NUMBER_OF_PARTS_IN_COMMAND = 2;
+    private static final String UPDATE_ITEM_PAX_COMMAND = "update item pax";
     private static Logger itemLogger = Logger.getLogger("itemLogger");
 
     /**
@@ -48,6 +51,12 @@ public class UpdateItemPaxCommand extends Command {
                     + "Exception thrown.");
             throw new EmptyItemPaxException();
         }
+
+        if (userInput.contains(UPDATE_ITEM_PAX_COMMAND)) {
+            itemLogger.log(Level.WARNING, "Repeated update item pax command given.");
+            throw new DuplicateCommandException();
+        }
+
         StringTokenizer tokens = new StringTokenizer(userInput, DELIMITER);
         if (tokens.countTokens() != NUMBER_OF_PARTS_IN_COMMAND) {
             itemLogger.log(Level.WARNING, "Invalid formatting for UpdateItemCommand detected."
