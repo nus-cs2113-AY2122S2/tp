@@ -248,6 +248,8 @@ The following sequence diagram shows how the budget is checked upon every new ad
 
 #### Contacts Manager Component
 
+This section describes the design and implementation of Contacts Manager features.
+
 **API:** `ContactsManager.java`
 
 ![](images/ContactClassDiagram.png)
@@ -260,12 +262,19 @@ within a `ContactsManager` instance.
 and `Description`. These four classes inherit from the abstract class `Field`.
 * calls methods in the `ContactParser` class to parse user inputs and
 make the relevant edits to the contacts list
+* when invalid inputs are supplied and parsed, the `ContactParser` class throws
+an `InvalidContactField` exception
 
 #### Contact Parser Component
 **API:** `ContactParser.java`
 
 The Sequence Diagram below illustrates interactions between classes of objects
 for the static `setContactFields(contact, fieldStrings)` API call.
+
+This API call is used both for adding a new contact, and for 
+editing existing contacts. When adding a new contact, an empty `Contact` object
+is supplied as an argument to `setContactFields()`, along with any strings of 
+fields found in the user input.
 
 ![](images/ContactSetFieldsSequence.png)
 
@@ -381,3 +390,39 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
    4. Other incorrect add commands to try: `add`, `add c/lec t/4pm-6pm`
       1. Or any commands that exclude one of the four requirements to add module.
       2. Expected: Error messge similar to above.
+
+### Contacts Manager
+1. Adding a new contact
+   1. Test case: `add n/Name1 f/Faculty e/email@u.nus.edu d/Description` <br/>
+   Expected: A contact with the above fields will be added to the list.
+   Details of the added contact shown in the status message.
+   New number of contacts in the list are also shown.
+   2. Test case: `add e/email@u.nus.edu d/Description n/Name2 f/Faculty` <br/>
+   Expected: Similar to the previous.
+   3. Test case: `add n/Name3 f/Faculty e/invalid email d/Description` <br/>
+   Expected: Similar to the previous, with reminder that the email may be invalid.
+   4. Test case: `add n/Name1 f/Faculty e/email@u.nus.edu d/Description` <br/>
+   Expected: No contact is added. Error details shown in the status message,
+   indicating that `Name1` is already in the list of contacts.
+   5. Other incorrect delete commands to try: `add` (no fields), 
+   `add n/` (invalid fields), `add f/fac d/desc` (missing fields), ...
+   6. Note that any input between the `add` command and the first delimiter
+   are ignored
+
+
+2. Deleting a contact while all contacts are shown. 
+   1. Prerequisites: Show all contacts using the `list` command. 
+   Ensure that there are contacts in the list. 
+   A message will be shown to indicate an empty list.
+   2. Test case: `rm 1` </br>
+   Expected: First contact is deleted from the list. 
+   Details of the deleted contact shown in the status message. 
+   Number of contacts left in the list are also shown. 
+   3. Test case: `rm 0` </br>
+   Expected: No contact is deleted. Error details shown in the status message. 
+   4. Other incorrect delete commands to try: `rm`, `rm x` 
+   (where x is negative or larger than the list size), 
+   `rm not_a_number`, ... </br>
+   Expected: Similar to previous.
+
+[Back to main menu](https://ay2122s2-cs2113-f10-4.github.io/tp/)

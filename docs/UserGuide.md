@@ -610,3 +610,5 @@ data. However, do not tamper with the load and save files.
 | Help                    | `help`                                                                                                                      |
 | Navigate                | `goto m/SECTION`                                                                                                            |
 | Exit                    | `exit`                                                                                                                      |
+
+[Back to main menu](https://ay2122s2-cs2113-f10-4.github.io/tp/)

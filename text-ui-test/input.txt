@@ -3,6 +3,7 @@ invalid contacts command
 add n/Lucy Koh f/SoC e/email@u.nus.edu d/group mate from cs2113
 add n/Daniela Koh d/met at SoC canteen e/invalid placeholder email f/FoS
 add
+add n/
 add n/Name f/Faculty e/email@legit.com
 add n/Name f/Faculty d/some description
 add n/Name e/email@legit.com d/some description

@@ -51,3 +51,4 @@ Given below are my contributions to the project.
       [#77](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/77),
       [#78](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/78)
 
+[Back to main menu](https://ay2122s2-cs2113-f10-4.github.io/tp/)
