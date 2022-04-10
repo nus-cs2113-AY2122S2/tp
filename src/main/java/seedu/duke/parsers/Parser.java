@@ -129,24 +129,6 @@ public abstract class Parser {
     }
 
     //@@author Yzkkk
-    /**
-     * Checks for strings that are parsed into groups based on commandFormat, but are essentially invalid.
-     * @throws InvalidFlagException If the flag inputted is invalid
-     * @throws InvalidModuleGradeException If the module grade inputted is invalid
-     * @throws InvalidTagOperationException If the tag operation inputted is invalid
-     */
-    private void checkForInvalidStrings() throws InvalidFlagException,
-            InvalidModuleGradeException, InvalidTagOperationException {
-        checksForInvalidModFlag();
-        checksForInvalidTaskName();
-        checksForInvalidTaskDescriptionFlag();
-        checksForInvalidModDescriptionFlag();
-        checksForInvalidTimeFlag();
-        checksForInvalidTagCommand();
-        checksForInvalidModuleGrade();
-    }
-
-    //@@author Yzkkk
     private void checksForInvalidModuleGrade() throws InvalidModuleGradeException {
         if (groupNames.contains(INVALID_MODULE_GRADE)) {
             String invalidInput = parsedCommand.get(INVALID_MODULE_GRADE);
@@ -224,5 +206,23 @@ public abstract class Parser {
                 throw new ExcessArgumentException(invalidInput);
             }
         }
+    }
+
+    //@@author Yzkkk
+    /**
+     * Checks for strings that are parsed into groups based on commandFormat, but are essentially invalid.
+     * @throws InvalidFlagException If the flag inputted is invalid
+     * @throws InvalidModuleGradeException If the module grade inputted is invalid
+     * @throws InvalidTagOperationException If the tag operation inputted is invalid
+     */
+    private void checkForInvalidStrings() throws InvalidFlagException,
+            InvalidModuleGradeException, InvalidTagOperationException {
+        checksForInvalidModFlag();
+        checksForInvalidTaskName();
+        checksForInvalidTaskDescriptionFlag();
+        checksForInvalidModDescriptionFlag();
+        checksForInvalidTimeFlag();
+        checksForInvalidTagCommand();
+        checksForInvalidModuleGrade();
     }
 }
