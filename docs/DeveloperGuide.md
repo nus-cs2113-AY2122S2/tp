@@ -1,6 +1,23 @@
 # Developer Guide
 
-## Acknowledgements
+## Table of contents
+* [Design](#design)
+* [Implementation](#implementation)
+  * [Unit Good Class](#unit-good-class)
+  * [Good Class](#good-class)
+  * [Order Class](#order-class)
+  * [Orderline Class](#orderline-class)
+  * [Warehouse Class](#warehouse-class)
+  * [Command Parser](#command-parser)
+    * [Add Parser](#add-parser)
+    * [Remove Parser](#remove-parser)
+    * [View Parser](#view-parser)
+    * [Find Parser](#find-parser)
+    * [List Parser](#list-parser)
+    * [Fulfill Parser](#fulfill-parser)
+    * [Help Parser](#help-parser)
+  * [User Interface Class](#user-interface-class)
+  * [Match Keyword Class](#match-keyword-class)
 
 ## Design
 ![Architecture Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/ArchitectureDiagram.puml)
@@ -19,26 +36,32 @@ The specific details of exactly how view order command will run will be describe
 
 ## Implementation
 ### Unit Good Class
-The Unit good class keep track of the unit goods in the warehouse. A unit good is the template, holding the specific details such as SKU, name, description and [Capacity](#capacity-enumeration)
+The Unit good class keep track of the unit goods in the warehouse.
 #### Description
+Unit goods will be stored as a HashMap<String, UnitGood> in the warehouse with the key being a unique SKU as a string and the value is the actual Unit Good.
+
+A unit good is a template good, holding the specific details such as SKU, name, description and [Capacity](#capacity-enumeration).
+
 ![Unit Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UnitGood.puml)
 
-Unit goods will be stored as a HashMap<String, UnitGood> in the warehouse with the key being a unique SKU as a string and the value is the actual Unit Good.
-This means that to update a Unit Good details, there is a need to first remove the Unit Good from the HashMap, then add a new instance of the Unit Good. This is to ensure that existing Unit Goods 
-will not be incorrectly overwritten
+When a Unit Good is added, Simplst will also add a Good of the same SKU with 0 quantity. This is to indicate that Simplst knows that this Unit Good is tied to the corresponding Good of the same SKU.
 
-The class diagram will be shown below.
-
+To update a Unit Good details, there is a need to first remove the Unit Good from the HashMap, then add a new instance of the Unit Good.
+This design is intentional to ensure that existing Unit Goods will not be incorrectly overwritten.
 
 ### Good Class
-A Goods class will extend the unit good class. It will contain the extra variable of quantity which is meant to show the current quantity the warehouse contains.
+A Goods class will extend the unit good class.
 #### Description
-Similar to Unit Goods, the Goods will be stored as a HashMap<String, Good> in the warehouse with the key being the SKU as a string and the value is the actual Good.
+Similar to [Unit Goods](#unit-good-class), the Goods will be stored as a LinkedHashMap<String, Good> in the warehouse with the key being the SKU as a string and the value is the actual Good.
+
+The Good Class contains the extra variable of quantity which is meant to show the current quantity the warehouse contains in its inventory now.
 
 ![Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Good.puml)
 
-The Goods class allows for the creation of orderline objects which has the following attributes: id, name, quantity and
-description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
+When a good is being added into Simplst, it will first check for its corresponding UnitGood by checking if a UnitGood with the same SKU is known by Simplst.
+Simplst will then add the quantity specified to the LinkedHashMap of Goods stored in the warehouse.
+
+If the SKU is not known, this means that a UnitGood of the same SKU has to be added first.
 
 ### Capacity Enumeration
 The Capacity enum is meant as a heuristic to determine the size of a unit good and good.
@@ -52,23 +75,34 @@ The capacity SMALL will be 1 unit of size, MEDIUM will be 2 units of size and fi
 A diagram can be seen in the [Architecture Class Diagram](#design)
 
 ### Order Class
+The Order Class is used to imitate how orders will be stored in Simplst.
 #### Description
+![Order Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Order.puml)
+
+Orders will contain the Order ID which will be used to identity the order. The Order ID has to be a unique positive number.
+As seen in the class diagram above, Orders will hold a collection of [Orderlines](#orderline-class). This will be used to indicate what goods are required to fulfill the Order.
+
+To [fulfill](#fulfill-parser) an order, this would go through all the orderlines in that order and attempt to fulfill them.
+When all orderlines in the order are fulfilled, this will indicate that the order is fulfilled.
+
 ### Orderline Class
-A Orderline class will extend the Goods class. It will contain the extra variable of quantityFulfilled and isCheckedOff.
+A Orderline class will extend the Goods class.
 #### Description
 ![Orderline Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Orderline.puml)
 
-The quantity variable here will be to indicate the quantity required to fulfill the current order.
+Orderline will contain the extra variable of quantityFulfilled and isCheckedOff as compared to the [Goods Class](#good-class).
+The quantity variable will be to indicate the quantity required to fulfill the current order. This is different as compared to in the Goods Class which indicates the current quantity in the warehouse.
 The quantity fulfilled variable will be to indicate the quantity currently fulfilled for that order. When the quantity fulfilled equals to the quantity required, the variable isCheckedOff will be true.
 This is to indicate that this orderline is fulfilled in that order, and it does not require any more of the good.
 
-The diagram below shows the model component of the orderline class.
 ### Warehouse Class
-The warehouse class is created to simulate an entire warehouse
+The warehouse class is created to simulate an entire warehouse.
 #### Description
 ![Warehouse Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/Warehouse.puml)
 
 Most of the methods in the Warehouse Class will require users to know the SKU of the Good that they want to interact with.
+
+The find method within the Find Parser is aimed at helping users find the SKU of Good that they need.
 
 The warehouse class will contain:
 - List of orders
@@ -79,7 +113,6 @@ The warehouse class will contain:
   - This is to allow for quick access to the details of the unit good through knowing the SKU
 - LinkedHashMap of goods
   - A linked hashmap is chosen for goods to ensure that we are able to maintain the ordering of goods added while having the simplicity of accessing the necessary goods through their SKU
-
 
 ### Command Parser
 #### Description
