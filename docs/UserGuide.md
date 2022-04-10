@@ -74,7 +74,7 @@ If you can type fast, SplitLah can manage your outings faster than applications 
   - Names of `Sessions`,`Activities` and `Groups` can have all printable [ASCII](https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html) characters.
   - Names of participants can only contain: `A-Z`, `a-z`
   - Decimals (up to 2 decimal places): `3.5`, `3.95`
-  - Unique identifiers must be positive integers: `1`, `3`
+  - Unique identifiers must be positive integers less than or equal to `2147483647`: `1`, `3`
   - Dates (DD-MM-YYYY or today): `02-04-2022`, `today`
 - A forward slash `/` indicates a delimiter and is used to separate commands into parts.
   Each command's documentation specifies the required delimiters and their purpose.
@@ -103,9 +103,10 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
 3. Copy the file to the folder you wish to use as a home folder for SplitLah.
-4. Start SplitLah by executing `java -jar splitlah.jar` in the terminal.
-5. Type in a command and press Enter to execute it.
-6. Refer to [Features](#features) for a more in-depth explanation of all commands available.
+4. Open a terminal and set the working directory to the home folder.
+5. Start SplitLah by executing `java -jar splitlah.jar` in the terminal.
+6. Type in a command and press Enter to execute it.
+7. Refer to [Features](#features) for a more in-depth explanation of all commands available.
 
 ## How SplitLah works
 * An activity represents a single group activity, paid for by one person. It stores a list of its participants,
@@ -192,6 +193,7 @@ Deletes an existing session so that you can remove sessions that you no longer n
 > 
 > **⚠️Warning:**
 >* This action is irreversible. The session is deleted immediately after entering this command.
+>* Additionally, all activities in the deleted session are deleted immediately as well.
 
 <br>
 
