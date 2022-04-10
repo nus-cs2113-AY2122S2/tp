@@ -48,7 +48,7 @@ public class StudyCommand extends Command {
      */
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
         timerLogic.killTimer();
-        timerLogic.resetIsTimerInitialised();
+        TimerLogic.resetIsTimerInitialised();
         timerLogic.destroyFrame();
         ui.showLine();
         ui.showToUser(GOODBYE_MESSAGE_STUDY);
