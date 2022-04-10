@@ -15,7 +15,7 @@ import static seedu.sherpass.util.parser.TimerParser.parseStudyMode;
 public class StudyCommand extends Command {
 
     /**
-     * Method is called when user chooses to enter Study mode.
+     * Calls method when user chooses to enter Study mode.
      * User is able to start, pause and stop a timer in Study mode.
      * Only one timer can be running at a time. User can leave Study mode by typing "leave".
      *
