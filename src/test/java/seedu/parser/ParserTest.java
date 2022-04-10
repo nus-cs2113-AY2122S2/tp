@@ -3,6 +3,7 @@ package seedu.parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import seedu.command.AddCommand;
 import seedu.command.Command;
 import seedu.command.DeleteCommand;
 import seedu.command.IncorrectCommand;
@@ -246,6 +247,14 @@ class ParserTest {
         Command expectedCommand = new IncorrectCommand(UpdateCommand.COMMAND_WORD
                 + UpdateCommand.COMMAND_DESCRIPTION);
         Command testCommand = parser.parseCommand("update s/`S1234567E` pd `2022-13-23`");
+        assertEquals(expectedCommand, testCommand);
+    }
+
+    @Test
+    void parseCommand_dollarSignAccepted_exceptionThrown() throws MissingAttributeException {
+        Command testCommand = parser.parseCommand("add n/`SpeakerB` s/`S1404115ASF` t/`Speaker` c/`$200.20` "
+                        + "pf/`Loud_Technologies` pd/`2022-02-23`");
+        Command expectedCommand = new IncorrectCommand(Command.INCORRECT_COST_FORMAT);
         assertEquals(expectedCommand, testCommand);
     }
 

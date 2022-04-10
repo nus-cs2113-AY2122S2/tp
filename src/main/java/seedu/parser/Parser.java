@@ -42,7 +42,7 @@ public class Parser {
             "(?:[sntcSNTC]|[pP][fF]|[pP][dD])" // non-capturing group for argument tag
                     + "\\/" // argument delimiter
                     + "`+" //  backticks to enclose string
-                    + "[\\w\\s\\-\\.]+" // actual argument value
+                    + "[\\w\\s\\-\\.\\$]+" // actual argument value
                     + "`+"; //  backticks to enclose string
     /**
      * Extracts first n-1 tags for debugging and assumes that the last tag contains the whole string, refer to:
