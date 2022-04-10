@@ -143,13 +143,13 @@ public class Validator {
     }
 
 
-    static void validateAddDoctor(String[] parameters) throws UserInputErrorException {
+    public static void validateAddDoctor(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateSpecialization(parameters[6]);
     }
 
-    static void validateAddPatient(String[] parameters) throws UserInputErrorException {
+    public static void validateAddPatient(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateAdmissionDate(parameters[6]);
@@ -197,7 +197,6 @@ public class Validator {
         }
     }
 
-
     /* Validate medicine */
     public static void validateMedicine(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 6);
@@ -206,7 +205,6 @@ public class Validator {
         validateDosage(parameters[2]);
         validateExpiry(parameters[3]);
         validateQuantity(parameters[5]);
-
     }
     /* Validate appointment */
     private static void validateAppointmentDetails(String appointmentDetails) throws UserInputErrorException {
@@ -371,7 +369,6 @@ public class Validator {
             String medicineName = dispenseMedicineParameters[i];
             String medicineQuantity = dispenseMedicineParameters[i + 1];
             validateMedicineName(medicineName);
-            validateQuantity(medicineQuantity);
         }
     }
 }

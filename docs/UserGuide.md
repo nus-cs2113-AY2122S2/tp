@@ -128,7 +128,7 @@ To add a medicine there are some parameters that you would have to provide:
 1. Medicine Name
 2. Dosage
 3. Expiry Date
-4. Side Effects
+4. Side Effects (any string)
 5. Quantity
 
 You will have to follow the formatting given below when calling the command.

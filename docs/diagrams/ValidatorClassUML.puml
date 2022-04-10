@@ -2,31 +2,33 @@
 hide circle
 skinparam classAttributeIconSize 0
 class Validator {
-+validateAddAppointment(String[]): void
-+validateEditAppointment(String[]): void
-+validateFindAppointment(String[]): void
-+validateFindDoctor(String[]): void
-+validateFindMedicine(String[]): void
-+validateFindPatient (String[]): void
-+validateMedicine (String[]): void
-+validateNric (String): void
-+validateAddDoctor (String[]): void
-+validateAddPatient(String[]): void
--validateAddPerson(String[]): void
++minParameterCheck(String U, int): void
++validateAddAppointment(String(]): void
++validateDispenseMedicine(String(]): void
++validateEditAppointment(String(]): void
++validateFindAppointment(String]): void
++validateFindDoctor(String (]): void
++validateFindMedicine(String()]): void
++validateFindPatient (String I)]): void
++validateMedicine (String I]): void
++validateNric(String): void
++validateAddDoctor(String(): void
++validateAddPatient (String I]): void
+-validateAddPerson (String I]): void
 -validateAddress (String): void
 -validateAdmissionDate(String): void
--validateAge (String): void
+-validateAdmissionDob(String, String): void
+-validateAge(String): void
 -validateAppointmentDetails(String): void
--validateDate (String): boolean
--validateDate (String, String): void
--validateDob (String): void
+-validateDate(String): boolean
+-validateDate(String, String): void
+-validateDob(String): void
+-validateDobAge(String, String): void
 -validateDosage(String): boolean
 -validateExpiry(String): boolean
 -validateFullName(String): void
--validateGender (String): void
--validateMedicineld (String): void
+-validateGender(String): void
 -validateMedicineName(String): boolean
--validateMedicineSideEffects(String): void
 -validateQuantity(String): boolean
 -validateSpecialization(String): void
 }
