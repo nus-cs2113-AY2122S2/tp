@@ -40,8 +40,8 @@ public class Warehouse {
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
         Good newGood = new Good(unitGood, 0);
         if (unitGoodHashMap.containsKey(sku)) {
-            System.out.println("Item with SKU: " + sku + "already exists in the warehouse. " +
-                    "Please check the SKU again.");
+            System.out.println("Item with SKU: " + sku + "already exists in the warehouse. "
+                    + "Please check the SKU again.");
             return;
         }
         unitGoodHashMap.put(sku, unitGood);
