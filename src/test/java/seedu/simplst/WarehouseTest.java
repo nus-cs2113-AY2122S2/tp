@@ -1,8 +1,8 @@
 package seedu.simplst;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import util.exceptions.ItemDoesNotExistException;
+import util.exceptions.LargeQuantityException;
 import util.exceptions.UnitTestException;
 import util.exceptions.WrongCommandException;
 
@@ -208,8 +208,119 @@ class WarehouseTest {
     }
 
     @Test
-    void viewOrderByIdTest() {
+    void fulfillOrderTest() {
+        //test 1 - success
+        try {
+            warehouse.fulfillOrder("1");
+        } catch (WrongCommandException e) {
+            fail();
+        }
 
+        //test 2 - fail, order id is blank
+        try {
+            warehouse.fulfillOrder("");
+            fail();
+        } catch (WrongCommandException e) {
+            assertTrue(e.isCommand());
+            assertEquals("fulfill", e.getCommand());
+        }
+
+        //test 3 - fail, order id is not a number
+        try {
+            warehouse.fulfillOrder("one");
+            fail();
+        } catch (WrongCommandException e) {
+            assertTrue(e.isCommand());
+            assertEquals("fulfill", e.getCommand());
+        }
+    }
+
+    @Test
+    void findOrderTest() {
+        //test 1 - success
+        try {
+            warehouse.findOrder(1);
+        } catch (ItemDoesNotExistException e) {
+            fail();
+        }
+
+        //test 2 - fail, item does not exist
+        try {
+            warehouse.findOrder(2);
+            fail();
+        } catch (ItemDoesNotExistException e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    void removeUnitGoodFromInventoryTest() {
+        try {
+            warehouse.addUnitGoodToInventory("SKU02", "saw spear", "serrated", "small");
+        } catch (UnitTestException e) {
+            fail();
+        }
+
+        //test 1 - success
+        try {
+            warehouse.removeUnitGoodFromInventory("SKU02");
+            assertFalse(warehouse.hasUnitGood("SKU02"));
+            assertFalse(warehouse.isSkuInInventory("SKU02"));
+        } catch (ItemDoesNotExistException e) {
+            fail();
+        }
+
+        //test 2 - fail, there is no item with the same SKU
+        try {
+            warehouse.removeUnitGoodFromInventory("SKU03");
+            fail();
+        } catch (ItemDoesNotExistException e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    void removeQuantityOfGoodsTest() {
+        //test 1 - success
+        try {
+            warehouse.removeQuantityOfGoods("SKU01", "10");
+        } catch (WrongCommandException e) {
+            fail();
+        }
+
+        //test 2 - fail, the quantity input is not a number
+        try {
+            warehouse.removeQuantityOfGoods("SKU01", "ten");
+            fail();
+        } catch (WrongCommandException e) {
+            assertTrue(e.isCommand());
+            assertEquals("remove", e.getCommand());
+        }
+
+        //test 3 = fail, the quantity input is too large exception
+        try {
+            warehouse.removeQuantityOfGoods("SKU01", "10000");
+            fail();
+        } catch (WrongCommandException e) {
+            assertTrue(e.isCommand());
+            assertEquals("remove", e.getCommand());
+        }
+    }
+
+    @Test
+    void removeQuantityOfGoodFromInventoryTest() {
+        //success case, wrong number format for quantity and large quantity
+        //exception are already covered in the previous test
+
+        //test 1 - fail, item does not exist
+        try {
+            warehouse.removeQuantityOfGoodFromInventory("SKU33", "10");
+            fail();
+        } catch (ItemDoesNotExistException e1) {
+            assertTrue(true);
+        } catch (LargeQuantityException e2) {
+            fail();
+        }
     }
 }
 
