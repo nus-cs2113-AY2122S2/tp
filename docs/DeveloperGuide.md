@@ -783,12 +783,12 @@ Test Scenario 2: There is a session named Test1 currently stored in the applicat
 **Test Cases:**
 
 Test Scenario 1: The cost is split evenly amongst those who participated in the activity. <br>
-1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /co 20` <br>
-   Expected: A success message should be printed, along with the details of the activity as provided in the command. Each person's cost owed is $10.
+* Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /co 20` <br>
+  Expected: A success message should be printed, along with the details of the activity as provided in the command. Each person's cost owed is $10.
 
 Test Scenario 2: Each person who participated in the activity incurred different costs. <br>
-1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /cl 5 10` <br>
-   Expected: A success message should be printed, along with the details of the activity as provided in the command. PersonOne's cost owed is $5 while PersonTwo's cost owed is $10.
+* Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /cl 5 10` <br>
+  Expected: A success message should be printed, along with the details of the activity as provided in the command. PersonOne's cost owed is $5 while PersonTwo's cost owed is $10.
 
 Test Scenario 3: There was GST and Service Charge involved for an activity. <br>
 1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /co 20 /gst 7 /sc 10` <br>
@@ -810,8 +810,8 @@ Test Scenario 4: The person who paid or the persons involved in the activity wer
 **Test Cases:**
 
 Test Scenario 1: No activities are currently stored in a particular session in the application. <br>
-1. Test Command: `activity /delete /sid 1 /aid 1` <br>
-   Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
+* Test Command: `activity /delete /sid 1 /aid 1` <br>
+  Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
 
 Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
@@ -820,7 +820,7 @@ an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.
 1. Test Command: `activity /delete /sid 1 /aid 1` <br>
    Expected: A success message should be printed, indicating that the activity was deleted successfully.
 2. Test Command: `activity /delete /sid 3 /aid 1` <br>
-      Expected: An error message should be printed, indicating that the session specified was not found.
+   Expected: An error message should be printed, indicating that the session specified was not found.
 3. Test Command: `activity /delete /sid 1 /aid 4` <br>
    Expected: An error message should be printed, indicating that the activity specified was not found in the particular session.
 
@@ -859,8 +859,8 @@ an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.
 **Test Cases:**
 
 Test Scenario 1: No groups are currently stored in the application. <br>
-1. Test Command: `group /view /gid 1` <br>
-   Expected: An error message should be printed indicating that there are currently no groups stored.
+* Test Command: `group /view /gid 1` <br>
+  Expected: An error message should be printed indicating that there are currently no groups stored.
 
 Test Scenario 1: Only a single group with a group unique identifier of `1` exists in the application after creating
 a single group with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create) command. <br>
