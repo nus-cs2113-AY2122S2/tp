@@ -68,7 +68,8 @@ public class GroupEditCommand extends Command {
         }
 
         if (groupName != null) {
-            boolean duplicateName = existingGroupWithTheSameName(manager.getProfile().getGroupList(), groupName, groupId);
+            boolean duplicateName = existingGroupWithTheSameName(
+                manager.getProfile().getGroupList(), groupName, groupId);
             if (groupName.equals(group.getGroupName())) {
                 //ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW);
             } else if (duplicateName) {
