@@ -290,11 +290,8 @@ called from the `Family` class.
 function will be called from either the `IncomeList` or `ExpenditureList` class with the required values parsed 
 out using the `Parser` component.
 
-To aid in visualisation, the editing of an existing income will be simulated.
-
-The following Sequence Diagram shows how the `Money` component handles the call by the `Person` component.
-
-<!-- { [MoneyEditInSequenceDiagram](images/MoneySequenceDiagram0.png) } -->
+To aid in visualisation, the editing of an existing income will be simulated with details shown in the implementation
+section.
 
 ### Storage Component
 
@@ -386,7 +383,7 @@ The rest of the commands follow the similar flow as `AddPersonCommand`.
 ### Find feature
 
 #### Implementation
-
+editin /u 1 /g 1 /r 1 /d Bills
 The proposed find feature is facilitated by `Categories`, `Money(temp)`, `MoneyList(temp)`
 and `Family`. The `Categories` is an enumeration of keys that is used as the expenditure categories. The `Money(temp)`
 will have an additional integer attribute that acts as an index to a category. Additionally, the following operations
