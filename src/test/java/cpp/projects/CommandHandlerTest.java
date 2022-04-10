@@ -116,7 +116,7 @@ class CommandHandlerTest {
     @Test
     public void testListLanguages() throws IllegalCommandException {
         String status = defaultCommandHandler.handleUserInput(
-                defaultProjectList, "listlanguages " + PROJECT2NAME
+                defaultProjectList, "listlanguages " + "1"
         );
         assertEquals(status, response.listLanguageSuccessfully());
     }
