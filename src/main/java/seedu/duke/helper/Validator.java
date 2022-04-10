@@ -286,7 +286,7 @@ public class Validator {
 
     public static void validateFindDoctor(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 2);
-        switch (parameters[0]) {
+        switch (parameters[0].toLowerCase()) {
         case "nric":
             validateNric(parameters[1]);
             break;
@@ -315,7 +315,7 @@ public class Validator {
 
     public static void validateFindAppointment(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 2);
-        switch (parameters[0]) {
+        switch (parameters[0].toLowerCase()) {
         case "id":
             break;
         case "patient name":
@@ -337,8 +337,7 @@ public class Validator {
     public static void validateFindMedicine(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 2);
         boolean check = true;
-        switch (parameters[0]) {
-
+        switch (parameters[0].toLowerCase()) {
         case "name":
             check = validateMedicineName(parameters[1]);
             break;
@@ -359,7 +358,7 @@ public class Validator {
     }
 
     public static void validateFindPatient(String[] parameters) throws UserInputErrorException {
-        switch (parameters[0]) {
+        switch (parameters[0].toLowerCase()) {
         case "nric":
             validateNric(parameters[1]);
             break;

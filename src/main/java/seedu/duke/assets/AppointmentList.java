@@ -1,8 +1,8 @@
 package seedu.duke.assets;
 
 import seedu.duke.exception.DuplicateEntryException;
-import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.exception.NotFoundException;
+import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.IdGenerator;
 import seedu.duke.helper.UI;
@@ -215,7 +215,7 @@ public class AppointmentList extends List {
         ArrayList<Appointment> foundAppointments;
         switch (type) {
         case "P":
-            foundAppointments = AppointmentFinder.findAppointmentByPatientNric(appointments,nric);
+            foundAppointments = AppointmentFinder.findAppointmentByPatientNric(appointments, nric);
             for (Appointment a : foundAppointments) {
                 LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
                 if (appointmentDate.equals(LocalDate.now())) {

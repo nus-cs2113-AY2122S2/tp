@@ -19,7 +19,7 @@ public class FindAppointmentCommand extends Command {
 
     public Status execute(List appointmentList) {
         if (appointmentList instanceof AppointmentList) {
-            switch (parameterArray[0]) {
+            switch (parameterArray[0].toLowerCase()) {
             case "id":
                 ((AppointmentList) appointmentList).findById(parameterArray);
                 break;
