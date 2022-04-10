@@ -14,6 +14,7 @@ public class PatientList extends List {
 
     private ArrayList<Patient> patients = new ArrayList<>();
     private ArrayList<Patient> returnedFinderArray = new ArrayList<>();
+    private final String title = "Table of patients";
 
     public Patient getPatient(String nric) {
         for (Patient patient : patients) {
@@ -65,7 +66,7 @@ public class PatientList extends List {
         if (patient == null) {
             throw new UserInputErrorException("Patient doesn't exist please try again!");
         }
-        CommandLineTable patientTable = new CommandLineTable();
+        CommandLineTable patientTable = new CommandLineTable(title);
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "DateRegistration");
@@ -80,7 +81,7 @@ public class PatientList extends List {
 
     //view all patients
     public void view() throws UserInputErrorException {
-        CommandLineTable patientTable = new CommandLineTable();
+        CommandLineTable patientTable = new CommandLineTable(title);
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "DateRegistration");
@@ -208,7 +209,7 @@ public class PatientList extends List {
         if (returnedFinderArray.isEmpty()) {
             UI.printParagraph("Patient doesn't exist please try again!");
         } else {
-            CommandLineTable findPatientTable = new CommandLineTable();
+            CommandLineTable findPatientTable = new CommandLineTable(title);
             for (int i = 0; i < returnedFinderArray.size(); i++) {
 
                 findPatientTable.setShowVerticalLines(true);
