@@ -61,7 +61,7 @@ loop LOOP_COLOR for each XYZ term in command
     ' needs Validation
     opt OPT_COLOR_T1 if //XYZ// needs validation checking
         [-> Parser : getValidXYZ(//XYZ//:String, [maxValue:int])
-        note right : [maxValue:int] is only needed if //XYZ// is not Money
+        note right : [maxValue:int] is only needed if //XYZ// is UserIndex, IncomeIndex or ExpenditureIndex\n[maxValue:int] for GroupIndex and CategoryIndex are constants
         activate Parser
 
         ' isMoney?
@@ -75,6 +75,16 @@ loop LOOP_COLOR for each XYZ term in command
             Parser -> UParser : checkNegativeMoney(//XYZ//:double)
             activate UParser
             opt OPT_COLOR //XYZ// is negative
+                UParser --> Parser : :NumberFormatException
+                Parser -->[ :InvalidMoneyException
+            end opt
+            UParser --> Parser
+            deactivate UParser
+
+            ' checkTwoDecimalPlace
+            Parser -> UParser : checkTwoDecimalPlace(//XYZ//:String)
+            activate UParser
+            opt OPT_COLOR //XYZ// is more than 2 \ndecimal places
                 UParser --> Parser : :NumberFormatException
                 Parser -->[ :InvalidMoneyException
             end opt
