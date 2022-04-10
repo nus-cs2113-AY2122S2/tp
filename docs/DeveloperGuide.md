@@ -27,42 +27,44 @@
 
 ## 1. Introduction
 Mod Happy is a command-line-based application that helps students manage their academics. Users are able to add modules and tasks, and calculate their Grade Point Average (GPA).
+
 <br><br><br>
 
 ## 2. Product Scope
-<br>
 
 ### 2.1. Target User Profile
 
 - Undergraduate Students
 - Comfortable using CLI applications
 - Able to type relatively quickly
+
 <br>
 
 ### 2.2. Value proposition
 This application seeks to help the target users to keep track of and manage their module components and deadlines, as it can be confusing to juggle so many deliverables at once.
+
 <br><br><br>
 
 ## 3. About this developer guide
-<br>
 
 ### 3.1. Purpose
-This developer guide aims to allow you to understand the design and implementation considerations for Mod Happy. With this guide, you will be able to add on or modify any existing implementation for your own usage.
+This developer guide aims to allow you to understand the design and implementation considerations for Mod Happy. With this guide, you will be able to add on or modify any existing implementations for your own purposes.
+
 <br>
 
 ### 3.2. Explanation of notation
-`Text` formatted as such represent the classes and functions implemented in the application, and user input examples. 
+`Text` formatted as such represent classes and functions occurring in the code, as well as user input examples. 
 
-> 📔 <span style="color:#00bb00">**NOTE:**</span>
+> 📔 <span style="color:#3333ff">**NOTE:**</span>
 >
-> Text enclosed in this "Note" block should be taken note of as it can contain additional important information about the Component/Implementation.
+> Callouts like this one contain additional important information about the component / implementation being discussed. Pay attention to them!
 
 <br><br><br>
 
 ## 4. Acknowledgements
 
 - Some foundational source code was adapted from [addressbook-level2](https://github.com/se-edu/addressbook-level2).
-- Google's [GSON library](https://github.com/google/gson) was used to facilitate serialisation and deserialisation of data stored in the data file.
+- Google's [GSON library](https://github.com/google/gson) was used to facilitate serialisation and deserialisation of data as part of the save/load feature.
 
 <br><br><br>
 
@@ -103,12 +105,14 @@ The `Parser` component serves to interpret user input and construct the relevant
 * `ModHappyParser`, which identifies the command word present in the user input and invokes the relevant command-specific parser.
 * A variety of command-specific parsers (e.g. `AddParser` for the `add` command), referred to in this guide as `XYZParser` for simplicity. These classes perform further parsing on any command-specific arguments, constructing and returning the corresponding `XYZCommand` object.
 
-> 📔 <span style="color:#00bb00">**NOTE:**</span>
+> 📔 <span style="color:#3333ff">**NOTE:**</span>
 > 
 > `NoArgumentParser` is an exception to the above; instead of being associated with a single command type, it is responsible for handling all commands which do not accept any arguments.
 
 The following details how the `Parser` component works at runtime:
+
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/ParserSequenceDiagram.puml)
+
 1. A single `ModHappyParser` instance is initialised by `Main` during at the start of the program.
 2. Each time the user inputs a command, `ModHappyParser`'s `parseCommand()` method with the input as the parameter.
 3. `ModHappyParser` identifies the relevant command-specific parser `XYZParser` and passes on the remaining unparsed arguments to its `parseCommand()` method.
@@ -130,7 +134,7 @@ The `ModuleList` class serves as the main data storage class for the program, an
 
 The `Module` class serves as a wrapper around a `TaskList`, providing additional attributes including the module code and module description. Within the context of Mod Happy, modules can be viewed as task categories with names, descriptions and other attributes; for this reason, the General Tasks list is implemented as a `Module` under the hood.
 
-> 📔 <span style="color:#00bb00">**NOTE:**</span>
+> 📔 <span style="color:#3333ff">**NOTE:**</span>
 >
 > An alternative method of implementing `ModuleList` is shown below, where the default General Tasks
 list is simply represented as a `TaskList` instead of a full-fledged `Module`.
@@ -157,18 +161,19 @@ All commands inherit the abstract `Command` class and must contain an `execute()
 
 ### 5.5. Storage Component
 
-The `Storage` component is responsible for the saving and loading of program data from and to its data files. The following class diagram illustrates the structure of this component:
+The `Storage` component is responsible for the saving and loading of program data to and from its data files. The following class diagram illustrates the structure of this component:
 
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/Storage.puml)
 
-Storage is an interface supporting write/read data to/from computer storage:
-* Storage interface is implemented by JsonStorage in Mod Happy, which will read and load data to and from json format.
-* ListStorage can save a ArrayList of any class that extends Object in json format, and read them back into corresponding objects. (E.g. ModuleListStorage, TaskListStorage inherit from ListStorage)
+* `Storage` is an interface supporting the reading and writing of data to a file.
+* `Storage` is implemented by `JsonStorage`, an abstract class that reads and writes objects to a file in JSON format.
+* `ListStorage` is an abstract class inheriting from `JsonStorage`, which is specifically used for the serialisation and deserialisation of `ArrayList` instances. `ModuleListStorage` and `TaskListStorage` both inherit from `ListStorage`.
   <br><br><br>
 
 ## 6. Implementation
 
 This section describes some details on how some features are implemented.
+
 <br>
 
 ### 6.1. Edit Feature
@@ -177,8 +182,7 @@ The edit feature allows the user to change a parameter of a task/module. The par
 
 The following sequence diagram illustrates the process:
 
-![Sequence Diagra
-m](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/Edit.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/Edit.puml)
 
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/GetModule.puml)
 
@@ -223,7 +227,11 @@ Here is an example on adding a tag to a general task:
 
 ### 6.3. Grade Feature
 
-The Grade feature allows the user to input their predicted/actual grade, according to the official grades that NUS supports.
+The grade feature allows the user to input their predicted/actual grade, according to the official grades that NUS supports.
+
+The following sequence diagram illustrates the process:
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/Grade.puml)
 
 Here is an example on how to assign a grade to a module:
 
@@ -234,15 +242,15 @@ Here is an example on how to assign a grade to a module:
 5. `execute()` retrieves the `Module` instance of `CS2113T` if it exists and invokes `addGradeToModule(m)`.
 6. `addGradeToModule(m)` then invokes `m.setModuleGrade(moduleGrade)` to assign the input grade to the specified module.
 
-Below is the sequence diagram of how the Grade feature works:
-
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/Grade.puml)
-
 <br>
 
 ### 6.4. GPA Feature
 
 The GPA feature computes the user's GPA to 2 decimal places, based on the inputted grades and modular credits of each module currently stored in the program.
+
+The following sequence diagram illustrates the process:
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/GPA.puml)
 
 Here is an example on how to calculate GPA:
 
@@ -253,10 +261,7 @@ Here is an example on how to calculate GPA:
 5. `execute()` invokes `calculateGpa()`, which performs the actual GPA computation by iterating through the provided `moduleList`.
 6. After calculating the GPA, a command feedback string is generated and returned as a string.
 
-Below is the sequence diagram of how the GPA feature works:
-
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/GPA.puml)
-<br><br><br>
+<br>
 
 ### 6.5. Storage Feature
 
@@ -316,6 +321,7 @@ After data is loaded from the data file, some verification checks are performed 
 1. Should work on any mainstream OS as long as it has Java 11 installed.
 2. Should be able to hold up to 1000 tasks and modules combined without a noticeable sluggishness in performance for typical usage.
 3. Should be able to save up to 1000 tasks and modules without taking up noticeable disk space.
+
 <br><br><br>
 
 ## 9. Glossary
@@ -330,6 +336,7 @@ After data is loaded from the data file, some verification checks are performed 
 ## 10. Instructions for manual testing
 
 Below are instructions to perform manual testing of the application. Please refer to the User Guide for more details on the usage of the various commands.
+
 <br>
 
 ### Launch and exit
@@ -340,154 +347,180 @@ Below are instructions to perform manual testing of the application. Please refe
 <br>
 
 ### Adding a module
-1. Test Case: `add mod CS2113T 4 -d "Software Engineering and OOP"` <br>
-   Expected: A module named `CS2113T` with `4` mc is added, with a description of `Software Engineering and OOP`.
-2. Test Case: `add mod CS2113T 4` (Continuation from Test Case 1) <br>
-   Expected: No new module is added. Error details in the message shows that a module of the same name already exists.
-3. Test Case: `add mod CS2101` <br>
-   Expected: No new module is added. Error details in the message shows that there are missing modular credits.
+* Test Case: `add mod CS2113T 4 -d "Software Engineering and OOP"` <br>
+  Expected: A module named `CS2113T` with `4` mc is added, with a description of `Software Engineering and OOP`.
+* Test Case: `add mod CS2113T 4` (Continuation from Test Case 1) <br>
+  Expected: No new module is added. Error details in the message shows that a module of the same name already exists.
+* Test Case: `add mod CS2101` <br>
+  Expected: No new module is added. Error details in the message shows that there are missing modular credits.
 
 <br>
 
 ### Adding a task
-1. Prerequisite: There are existing modules in the application.
-2. Assumption: You have a module `CS2113T` added.
-3. Test Case: `add task "start PE" -m CS2113T` <br>
-   Expected: A task with name `start PE` is added under the module `CS2113T`.
-4. Test Case: `add task Invalid Name` <br>
-   Expected: No task is added. Error details in the message shows that the task name is invalid.
+* Prerequisite: There are existing modules in the application.
+* Assumption: You have a module `CS2113T` added.
+
+
+* Test Case: `add task "start PE" -m CS2113T` <br>
+  Expected: A task with name `start PE` is added under the module `CS2113T`.
+* Test Case: `add task Invalid Name` <br>
+  Expected: No task is added. Error details in the message shows that the task name is invalid.
 
 <br>
 
 ### Deleting a module
-1. Prerequisite: There are existing modules in the application.
-2. Assumption: You have a module `CS2113T` added, but not `CS2101`.
-3. Note: If you have added tasks to a module, deleting that module will prompt a confirmation to delete. Typing `yes` will delete that module. 
-4. Test Case: `del mod CS2113T` <br>
-   Expected: The module `CS2113T` is deleted.
-5. Test Case: `del mod CS2101` <br>
-   Expected: No module is deleted. Error details in the message shows that there are no such module. 
+* Prerequisite: There are existing modules in the application.
+* Assumption: You have a module `CS2113T` added, but not `CS2101`.
+
+
+* Test Case: `del mod CS2113T` <br>
+  Expected: The module `CS2113T` is deleted.
+* Test Case: `del mod CS2101` <br>
+  Expected: No module is deleted. Error details in the message shows that there are no such module. 
+
+> 📔 <span style="color:#3333ff">**NOTE:**</span>
+> 
+> If you have already added tasks to a module, deleting that module will present you with a confirmation request. Type `yes` to proceed with deletion.
 
 <br>
 
 ### Deleting a task
-1. Prerequisite: There are existing tasks in the application.
-2. Assumption: You have the module `CS2113T` added with at least one task added. 
-3. Test Case: `del task 1 -m CS2113T` <br>
-   Expected: The first task in `CS2113T` will be deleted.
-4. Test Case: `del task -1` <br>
-   Expected: No task is deleted. Error details in the message shows that the task number is invalid.
+* Prerequisite: There are existing tasks in the application.
+* Assumption: You have the module `CS2113T` added with at least one task added. 
+
+
+* Test Case: `del task 1 -m CS2113T` <br>
+  Expected: The first task in `CS2113T` will be deleted. 
+* Test Case: `del task -1` <br>
+  Expected: No task is deleted. Error details in the message shows that the task number is invalid.
 
 <br>
 
 ### Editing a module
-1. Prerequisite: There are existing modules in the application. 
-2. Assumption: You have the module `CS2113T` added.
-3. Test Case: `edit mod CS2113T -d "Changed"` <br>
-   Expected: The description of `CS2113T` is set to `Changed`.
-4. Test Case: `edit mod CS2113T -t "2 hours"` <br>
-   Expected: The module remains unchanged. Error details in the message shows that the module description is missing.
+* Prerequisite: There are existing modules in the application. 
+* Assumption: You have the module `CS2113T` added.
+
+
+* Test Case: `edit mod CS2113T -d "Changed"` <br>
+  Expected: The description of `CS2113T` is set to `Changed`.
+* Test Case: `edit mod CS2113T -t "2 hours"` <br>
+  Expected: The module remains unchanged. Error details in the message shows that the module description is missing.
 
 <br>
 
 ### Editing a task
-1. Prerequisite: There are existing tasks in the application.
-2. Assumption: You have at least one task in your `General Tasks`.
-3. Test Case: `edit task 1 -d "Changed"` <br>
-   Expected: The description of the first task in `General Tasks` is set to `Changed`.
-4. Test Case: `edit task 1 -d "Changed" -t "2 hours"` <br>
-   Expected: The task remains unchanged. Error details in the message shows that there is an excess argument of `-t "2 hours"`.
+* Prerequisite: There are existing tasks in the application.
+* Assumption: You have at least one task in your `General Tasks`.
+
+
+* Test Case: `edit task 1 -d "Changed"` <br>
+  Expected: The description of the first task in `General Tasks` is set to `Changed`.
+* Test Case: `edit task 1 -d "Changed" -t "2 hours"` <br>
+  Expected: The task remains unchanged. Error details in the message shows that there is an excess argument of `-t "2 hours"`.
 
 <br>
 
 ### Setting grade for a module
-1. Prerequisite: There are existing modules in the application.
-2. Assumption: You have a module `CS2113T`.
-3. Test Case: `grade CS2113T A+` <br>
-   Expected: The grade of `CS2113T` has been set to `A+`.
-4. Test Case: `grade CS2113T E` <br>
-   Expected: No grade is set. Error details in the message shows that `E` is an invalid module grade.
+* Prerequisite: There are existing modules in the application.
+* Assumption: You have a module `CS2113T`.
+
+
+* Test Case: `grade CS2113T A+` <br>
+  Expected: The grade of `CS2113T` has been set to `A+`.
+* Test Case: `grade CS2113T E` <br>
+  Expected: No grade is set. Error details in the message shows that `E` is an invalid module grade.
 
 <br>
 
 ### Calculating GPA
-1. Prerequisite: There are existing modules in the application.
-2. Assumption: You have a module `CS2113T` of `4` modular credits and grade `A+` and a module `CS2101` of `4` modular credits and grade `B`.
-3. Test Case: `gpa` <br>
-   Expected: Your `gpa` is calculated as `4.25`.
+* Prerequisite: There are existing modules in the application.
+* Assumption: You have a module `CS2113T` of `4` modular credits and grade `A+` and a module `CS2101` of `4` modular credits and grade `B`.
+
+
+* Test Case: `gpa` <br>
+  Expected: Your `gpa` is calculated as `4.25`.
 
 <br>
 
 ### Showing Help
-1. Test Case: `help` <br>
-   Expected: A message for format of the `help` command is shown.
-2. Test Case: `help add` <br>
-   Expected: A message for the format of the `add` command is shown.
+* Test Case: `help` <br>
+  Expected: A message for format of the `help` command is shown.
+* Test Case: `help add` <br>
+  Expected: A message for the format of the `add` command is shown.
 
 <br>
 
 ### Setting options
-1. Test Case: `option` <br>
-   Expected: Available configuration settings is shown with its corresponding value.
-2. Test Case: `option INVALID_CONFIG` <br>
-   Expected: An error message is shown detailing that there is no configuration called `INVALID_CONFIG`.
-3. Test Case: `option SHOW_COMPLETED_TASKS=invalid` <br>
-   Expected: No configuration is changed. Error details in the message shows that the value `invalid` is not supported for configuration `SHOW_COMPLETED_TASKS`.
+* Test Case: `option` <br>
+  Expected: Available configuration settings is shown with its corresponding value.
+* Test Case: `option INVALID_CONFIG` <br>
+  Expected: An error message is shown detailing that there is no configuration called `INVALID_CONFIG`.
+* Test Case: `option SHOW_COMPLETED_TASKS=invalid` <br>
+  Expected: No configuration is changed. Error details in the message shows that the value `invalid` is not supported for configuration `SHOW_COMPLETED_TASKS`.
 
 <br>
 
 ### Adding tags to a task
-1. Prerequisite: There are existing tasks in the application.
-2. Assumption: You have at least one task in `General Tasks`.
-3. Test Case: `tag add 1 IMPT` <br>
-   Expected: The tag `IMPT` is added to your first task in `General Tasks`.
-4. Test Case: `tag add 1 .invalid` <br>
-   Expected: No tag is added. Error details in the message shows that `.invalid` is an invalid tag name.
+* Prerequisite: There are existing tasks in the application.
+* Assumption: You have at least one task in `General Tasks`.
+
+
+* Test Case: `tag add 1 IMPT` <br>
+  Expected: The tag `IMPT` is added to your first task in `General Tasks`.
+* Test Case: `tag add 1 .invalid` <br>
+  Expected: No tag is added. Error details in the message shows that `.invalid` is an invalid tag name.
 
 <br>
 
-### Deleting tags to a task
-1. Prerequisite: There are tasks with tags in the application.
-2. Assumption: The first task in `General Tasks` is tagged as `IMPT` only.
-3. Test Case: `tag del 1 IMPT` <br>
-   Expected: The tag `IMPT` is removed from the first task in `General Tasks`.
-4. Test Case: `tag del 1 OTHERS` <br>
-   Expected: No tag is deleted. Error details in the message shows that no such tag exists.
+### Deleting tags from a task
+* Prerequisite: There are tasks with tags in the application.
+* Assumption: The first task in `General Tasks` is tagged as `IMPT` only.
+
+
+* Test Case: `tag del 1 IMPT` <br>
+  Expected: The tag `IMPT` is removed from the first task in `General Tasks`.
+* Test Case: `tag del 1 OTHERS` <br>
+  Expected: No tag is deleted. Error details in the message shows that no such tag exists.
 
 <br>
 
 ### Listing all modules and tasks
-1. Prerequisite: There are tasks that were tagged.
-2. Assumption: There are tasks that were tagged as `IMPT`.
-3. Test Case: `list` <br>
-   Expected: All of your modules and tasks are shown.
-4. Test Case: `list IMPT` <br>
-   Expected: Only tasks tagged as `IMPT` are shown. All of your modules are still shown regardless.
+* Prerequisite: There are tasks that were tagged.
+* Assumption: There are tasks that were tagged as `IMPT`.
+
+* Test Case: `list` <br>
+  Expected: All of your modules and tasks are shown.
+* Test Case: `list IMPT` <br>
+  Expected: Only tasks tagged as `IMPT` are shown. All of your modules are still shown regardless.
 
 <br>
 
 ### Marking and unmarking a task as completed
-1. Prerequisite: There are existing tasks in the application.
-2. Assumption: There are at least one task in `General Tasks`.
-3. Test Case: `mark c 1` <br>
-   Expected: The first task in `General Tasks` is marked as completed.
-4. Test Case: `mark u 1` <br>
-   Expected: The first task in `General Tasks` is marked as uncompleted.
-5. Test Case: `mark t 1` <br>
-   Expected: No tasks is marked/unmarked. Error details in the message shows that `t` is an invalid flag.
+* Prerequisite: There are existing tasks in the application.
+* Assumption: There are at least one task in `General Tasks`.
+
+
+* Test Case: `mark c 1` <br>
+  Expected: The first task in `General Tasks` is marked as completed.
+* Test Case: `mark u 1` <br>
+  Expected: The first task in `General Tasks` is marked as uncompleted.
+* Test Case: `mark t 1` <br>
+  Expected: No tasks is marked/unmarked. Error details in the message shows that `t` is an invalid flag.
 
 <br>
 
 ### Saving the data in the application
-1. Prerequisite: There are data (module, tasks and options) created in the application. 
-2. Test Case: `save` <br>
-   Expected: Your data will be saved. You can view them directly as `json` files in the `data` directory.
+* Prerequisite: There is some data (modules, tasks and options) in the application.
+
+
+* Test Case: `save` <br>
+   Expected: Your data will be saved. You can view them directly as JSON files in the `data` directory.
 
 <br>
 
 ### Resetting the modules and tasks in the application
-1. Prerequisite: There are modules and tasks added in the application.
-2. Test Case: `reset` <br>
-   Expected: All of your modules and tasks will be removed.
+* Prerequisite: There are modules and tasks added in the application.
 
-<br>
+
+* Test Case: `reset` <br>
+  Expected: All of your modules and tasks will be removed.

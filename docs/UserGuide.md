@@ -35,7 +35,7 @@ Mod Happy is a command line application geared towards NUS students. Designed to
 ## 2. Quick start
 
 1. Ensure that you have _Java 11_ or above installed. The link to the _Java 11_ installer can be found [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
-2. Download the latest version of `Mod Happy` [here](https://github.com/AY2122S2-CS2113T-T10-3/tp/releases).
+2. Download the latest version of Mod Happy [here](https://github.com/AY2122S2-CS2113T-T10-3/tp/releases).
 3. Copy the JAR file into an empty folder.
 4. Open a terminal on your laptop, and navigate to the directory containing the JAR file.
 5. Run the command `java -jar tp.jar` to start the program.
