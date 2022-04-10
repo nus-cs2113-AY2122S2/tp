@@ -1,25 +1,94 @@
 # Developer Guide
 
+## Table of contents
+(tbd at the end)
+
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+The following third party libraries and applications were utilised and referenced in the making of InvMgr.
 
+1. GSON 
+   1. [Library Link](https://github.com/google/gson) & [License](https://github.com/google/gson/blob/master/LICENSE)
+   2. JSON serialisation and deserialisation
+2. SE-EDU Address Book Level 3 
+   1. [App link](https://github.com/se-edu/addressbook-level3) & [License](https://github.com/se-edu/addressbook-level3/blob/master/LICENSE)
+   2. Parser Code
+   3. Developer Guide
+
+## Setting up and getting started
+
+### Prerequisites
+
+Before setting up the project locally, ensure you have installed the following:
+
+1. Java 11
+2. Intellij IDEA (Community/Pro) 
+
+Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
+
+First, **fork** this repo, and **clone** the fork into your computer.
+
+If you plan to use Intellij IDEA (highly recommended):
+1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to to ensure Intellij is configured to use **JDK 11**.
+2. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA. <br>
+   Note: Importing a Gradle project is slightly different from importing a normal Java project.
+3. **Verify the setup**:
+   1. Run `seedu.duke.InvMgr` and try a few commands.
+   2. Run the tests to ensure they all pass.
+   
 ## Design
 
-### Application Launch
+### Architecture
 
-The following diagram shows a sequence diagram of the program when it is run.
+![ArchitectureDiagram](img/ArchitectureDiagram.png)
 
-![ApplicationLaunchSequenceDiagram](img/ApplicationLaunchSequenceDiagram.png)
+The Architecture Diagram given above explains the high-level design of the application
 
-1. `InvMgr` does a setup by creating the required `Ui`, `Storage`, and `ItemList` objects.
-2. To create the `ItemList` object, `load()` from `Storage` must be called. The resulting `ArrayList<Item>` from `load()` is used to create the `ItemList` object.
-3. Then, `InvMgr` will continuously loop, doing the following:
-   i. `InvMgr` will call upon `Ui` to get input from the user.
-   ii. `InvMgr` passes the user input to `Parser.parse(command)`.
-   iii. `Parser.parse(command)` returns a `Command` object.
-   iv. `InvMgr` calls upon the `execute()` method of the returned `Command` object
-4. The loop stops when the user types `exit`.
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+`InvMgr` is the main class and entry point for the application. It does the following:
+
+1. **At app launch**: Initializes the components in the correct sequence, and connects them up with each other.
+2. **When process is running**: Keeps the program running by continuously invoking the correct components in order
+3. **At shut down**: Shuts down the components and invokes cleanup methods where necessary.
+
+`Commons` represents a collection of classes used by multiple other components. 
+
+The rest of the App consists of four other components.
+
+ 1. `UI`: The UI of the App. 
+ 2. `Parser`: Creates the appropriate `Command` object.
+ 3. `Command`: Executes user instructions.
+ 4. `ItemList`: Holds the data of the application (`Item`) in memory. 
+ 5. `Storage`: Reads data from, and writes data to, the storage medium.
+ 
+#### Application Startup
+
+![ApplicationStartupSequenceDiagram](img/ApplicationStartupSequenceDiagram.png)
+
+The above diagram shows a sequence diagram of the program when it first starts up
+
+On startup, `InvMgr` does a setup by creating the required `Ui`, `Storage`, and `ItemList` objects.
+
+1. The `Ui` object is initialised.
+2. `load()` from `Storage` is called. This returns an `ArrayList<Item>` containing the appliaction data.
+3. The `ArrayList<Item>` from before is used to create the `ItemList` object. `ItemList` is a wrapper around a `List<Item>`.
+
+#### Application runtime and exit
+
+![ApplicationRuntimeSequenceDiagram](img/ApplicationRuntimeSequenceDiagram.png)
+
+The above diagram shows a sequence diagram of the program when it is running.
+
+`InvMgr` will continuously loop, doing the following:
+
+1. `InvMgr` will call upon `Ui` to get input from the user.
+2. `InvMgr` passes the user input to `Parser.parse(command)`.
+3. `Parser.parse(command)` returns a `Command` object.
+4. `InvMgr` calls upon the `execute()` method of the returned `Command` object .
+5. The loop stops when the user types `exit`.
 
 ### UI Component
 ![UiClassDiagram](img/UiClassDiagram.png)
