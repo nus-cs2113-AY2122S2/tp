@@ -3,7 +3,10 @@
 ## Introduction
 
 Restaurant-Information-Programme (R.I.P.) is a command line programme for restaurant owners to keep track of menus, staff information, and order management.
+
 R.I.P. features full and concise input validation through simple commands, thereby making R.I.P. a simple yet robust application for restaurant management.
+
+Its usage of simple inputs reduces required training and allows fast uptake, suitable for the environment of a restaurant.
 
 ## Quick Start
 
