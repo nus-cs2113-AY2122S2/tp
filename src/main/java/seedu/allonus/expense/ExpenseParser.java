@@ -233,7 +233,7 @@ public class ExpenseParser {
      */
     public static int parseEditExpense(String userInput) throws IndexOutOfBoundsException, NumberFormatException {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
-        String[] rawInput = userInput.split(" ", SPLIT_IN_HALF);
+        String[] rawInput = userInput.trim().split(" ", SPLIT_IN_HALF);
         int result = Integer.parseInt(rawInput[INDEX_TO_BE_PARSED]);
         return result;
     }

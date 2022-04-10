@@ -1,4 +1,4 @@
-goto m/Contacts_Manager
+goto Contacts_Manager
 invalid contacts command
 add n/Lucy Koh f/SoC e/email@u.nus.edu d/group mate from cs2113
 add n/Daniela Koh d/met at SoC canteen e/invalid placeholder email f/FoS
@@ -48,7 +48,7 @@ add n/Daniela Sim f/FoE e/new_email@gmail.com d/met at SoC canteen
 rm 1
 list
 menu
-goto m/Expense_Tracker
+goto Expense_Tracker
 list
 add d/2022-03-25 a/18.00 c/Category r/This is a remark
 add d/2022-03-24 a/9.50 c/Movie r/Jujutsu Kaisen
@@ -74,7 +74,7 @@ find juju
 rm 1
 list
 menu
-goto m/Study_Manager
+goto Study_Manager
 list
 add m/CS2113 c/lec d/Thursday t/2:00 pm-4:00 pm
 add m/EE4204 d/Wednesday t/1:00 pm-2:00 pm

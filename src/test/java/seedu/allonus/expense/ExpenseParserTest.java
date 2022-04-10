@@ -19,7 +19,7 @@ import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
 import static seedu.allonus.expense.ExpenseParser.parseEditExpense;
 import static seedu.allonus.expense.ExpenseParser.parseFindExpense;
 import static seedu.allonus.expense.ExpenseParser.checkSlashValidity;
-import static seedu.allonus.expense.ExpenseTracker.MSG_EMPTY_FIELDS;
+import static seedu.allonus.expense.ExpenseTracker.MSG_MISSING_FIELDS;
 import static seedu.allonus.expense.ExpenseTracker.MSG_INCORRECT_DATE_FORMAT;
 import static seedu.allonus.expense.ExpenseTracker.MSG_NUMBERS_ONLY_AMOUNT;
 
@@ -74,7 +74,7 @@ class ExpenseParserTest {
             String[] expected = {"2022-03-13", "18.00", "Movie", "This is a remark"};
             assertArrayEquals(expected, result);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(MSG_EMPTY_FIELDS);
+            System.out.println(MSG_MISSING_FIELDS);
         } catch (DateTimeParseException e) {
             System.out.println(MSG_INCORRECT_DATE_FORMAT);
         } catch (NumberFormatException e) {

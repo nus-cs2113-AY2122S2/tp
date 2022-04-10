@@ -3,24 +3,17 @@
 
 skinparam guillemet false
 
-mainframe sd Enter appropriate section or exit depending on user input
+mainframe sd Enter appropriate section depending on mode value
 activate ":AllOnUs"
-activate "AllOnUs <<class>>"
-alt Enter contacts manager
+alt mode is contacts manager mode
     ":AllOnUs" -> "contactsManager:ContactsManager" ++: contactsRunner()
     "contactsManager:ContactsManager" --> ":AllOnUs" --
-else Enter study manager
+else mode is study manager mode
     ":AllOnUs" -> "studyManager:StudyManager" ++: studyManagerRunner()
     "studyManager:StudyManager" --> ":AllOnUs" --
-else Enter expense tracker
+else mode is expense tracker mode
     ":AllOnUs" -> "expenseTracker:ExpenseTracker" ++: expenseRunner()
     "expenseTracker:ExpenseTracker" --> ":AllOnUs" --
-else Get help
-    ":AllOnUs" -> ":AllOnUs"++: displayHelp()
-    ":AllOnUs" --> ":AllOnUs" --
-else Unrecognizable or empty command
-
-else exit
 
 end
 @enduml
