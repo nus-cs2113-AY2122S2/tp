@@ -300,6 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |   2.1   | `*`      | user      | clear expired medicines                        | remove expired/ran out medicines from the inventory |
 |   2.1   | `*`      | user      | generate the batch id of medicines to dispense | dispense medicine that expire earlier first         |
 |   2.1   | `*`      | user      | schedule an appointment                        | schedule an appointment with a doctor that is free  |
+
 ### Use cases
 
 
