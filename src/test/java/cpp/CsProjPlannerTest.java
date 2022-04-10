@@ -88,4 +88,10 @@ class CsProjPlannerTest {
         CsProjPlanner.main(new String[0]);
         assertEquals(WELCOME_MESSAGE + HELP_MESSAGE + EXIT_MESSAGE, outputStream.toString());
     }
+
+    @Test
+    void testDebug() {
+        System.out.println("Testing");
+        assertEquals("Testing\n", outputStream.toString());
+    }
 }
