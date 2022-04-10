@@ -9,7 +9,6 @@ import seedu.splitlah.ui.Message;
  */
 public class ParserErrors {
 
-    // ERROR REPORTING FUNCTIONS
     /**
      * Returns an error message for a specified delimiter that is missing.
      * 
@@ -65,7 +64,7 @@ public class ParserErrors {
 
     /**
      * Returns an error message when the parser is not able to parse an input
-     * as a valid Goods and Services Tax (GST) in percents.
+     * as a valid Goods and Services Tax (GST) in percentage.
      *
      * @return A String object representing an error message for an invalid GST input.
      */
@@ -75,7 +74,7 @@ public class ParserErrors {
 
     /**
      * Returns an error message when the parser is not able to parse an input
-     * as a valid service charge in percents.
+     * as a valid service charge in percentage.
      *
      * @return A String object representing an error message for an invalid service charge input.
      */

@@ -1,3 +1,7 @@
+---
+title: User Guide
+---
+
 <p align="center"><img alt="logo" src="https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/pngLogo.png"></p>
 
 # SplitLah
@@ -306,17 +310,17 @@ There are 2 ways that you can specify the costs of an activity:
 1. Record the total cost to be split amongst everyone involved.
 2. Record each person's individual cost.
 
-> Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
+> Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2 ...]
 /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 > 
-> Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
+> Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2 ...]
 /cl [COST1 COST2 ...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 >
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_NAME]` refers to the name of the activity.
 >    * The activity name is **case-insensitive**.
->* `[PERSON_PAID]` refers to the person who paid for the activity.
+>* `[PAYER]` refers to the person who paid for the activity.
 >    * The person's name is **case-insensitive**.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
 >    * Each individual name is **case-insensitive**.
@@ -332,9 +336,9 @@ There are 2 ways that you can specify the costs of an activity:
 >* A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
 >  it.
 >* Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
->* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
+>* The names in `[PAYER]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
 >  `[SESSION_ID]`.
->* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>* The names in `[PAYER]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >  * Example: `Alice Tan` is not allowed.
 >* The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
 >  and 2 digits after the decimal point, if any.
@@ -395,8 +399,11 @@ Edits an existing activity so that you can change the details of an activity.<br
 
 You only have to supply delimiters for the details you wish to edit. However, the `/sid` and `/aid` 
 delimiters are compulsory to identify the activity you wish to edit.
-> Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] [</n [ACTIVITY_NAME]>] [</p [PAYER]>]
-  [</i [NAME1 NAME2...]>] [</cl [COST1 COST2...]>] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+> Format 1: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER]
+  /i [NAME1 NAME2...] /co [TOTAL_COST] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE]}`
+> 
+> Format 2: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER]
+  /i [NAME1 NAME2...] /cl [COST1 COST2...] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE]}`
 > 
 > Compulsory arguments:
 >* `[SESSION_ID]` refers to the unique identifier of the session.
@@ -409,24 +416,24 @@ delimiters are compulsory to identify the activity you wish to edit.
 >* `[ACTIVITY_NAME]` refers to the name of the activity.
 >     * The activity name is **case-insensitive**.
 >     * If one is not provided, the original activity name is left unchanged.
->* `[PERSON_PAID]` refers to the person who paid for the activity.
+>* `[PAYER]` refers to the person who paid for the activity.
 >    * The person's name is **case-insensitive**.
 >    * If one is not provided, the original payer is left unchanged.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the activity.
->    * Each individual name is **case-insensitive**.
+>* Each individual name is **case-insensitive**.
 >    * If a list is not provided, the original participants are left unchanged.
+>    * You **must** supply a costlist or overall cost if you wish to edit the list of participants.
 >* `[TOTAL_COST]` refers to the overall cost of the activity.
->    * If one is not provided, the original overall cost is left unchanged. If a cost list is provided, that will be used to 
-> edit the activity instead. You cannot supply both a total cost and a cost list.
+>    * If one is not provided, the original overall cost is left unchanged.
+>      You cannot supply both a total cost and a cost list.
 >    * You can use this even if the activity was originally created using a cost list. The new overall cost will be evenly 
 distributed amongst all participants.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
->    * If a list is not provided, the original overall cost list is left unchanged. If an overall cost is provided, that will
->be used to edit the activity instead. You cannot supply both a total cost and a cost list.
+>    * If a list is not provided, the original overall cost list is left unchanged. 
+>      You cannot supply both a total cost and a cost list.
 >    * You can use this even if the activity was originally created using an overall cost. The new cost list will be assigned 
 >to the existing participants in the order displayed when viewing the activity.
->    * You are encouraged to provide a participant list with `/i` together with the cost list to confirm the order in which 
-the costs are distributed.
+>    * You are encouraged to additionally provide a participant list with `/i` to confirm the distribution of costs.
 >* `[GST_PERCENTAGE]` refers to the additional GST that may be charged during your activity.
 >    * If one is not provided, the original GST is left unchanged and will be applied to any changes to the overall cost or
 >cost list.
@@ -439,17 +446,15 @@ the costs are distributed.
 >    * Changing the service charge will automatically recalculate all costs associated with this activity to reflect the new
 >service charge.
 >    * To remove the service charge entirely, you must explicitly specify `/sc 0`.
-
 <br>
 
 > **💡 Notes:**
->* A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
-     it.
->* An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
->* Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
->* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
+>- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before activities in it can be edited.
+>- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
->* The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
+>* The names in `[PAYER]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >   - Example: `Alice Tan` is not allowed.
 >* The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
@@ -747,25 +752,25 @@ Stay tuned to future updates from us!
 
 ## Command Summary
 
-| Action                                  | Format                                                                                                                                                                                                                                 |
-|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Create a new session                    | Format: `session /create /n [SESSION_NAME] /d [DATE] {/pl [NAME1 NAME2 …] /gid [GROUP_ID]}`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Alice Bob Charlie`                                                           |
-| Delete an existing session              | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                                                   |
-| Edit an existing session                | Format: `session /edit /sid [SESSION_ID] {/n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}`<br><br> Example: `session /edit /sid 1 /n Class gathering /d 16-03-2022 /pl Alice Bob Charlie`                                    |
-| View an existing session                | Format: `session /view /sid [SESSION_ID]`<br><br>Example: `session /view /sid 1`                                                                                                                                                       |
-| List all sessions                       | Format: `session /list`                                                                                                                                                                                                                |
-| Create activity (split costs evenly)    | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /co [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 7.5`                               |
-| Create activity (split costs manually)  | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /cl [COST1 COST2...]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /cl 1 1 5.5`                       |
-| Delete an existing activity             | Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`<br><br>Example: `activity /delete /sid 2 /aid 1`                                                                                                                       |
-| Edit an activity (split costs evenly)   | Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /co [TOTAL_COST]`<br><br>Example: `activity /edit /sid 1 /aid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 7.5`         |
-| Edit an activity (split costs manually) | Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /cl [COST1 COST2...]`<br><br>Example: `activity /edit /sid 1 /aid 1 /n Lunch /p Alice /i Alice Bob Charlie /cl 1 1 5.5` |
-| View an existing activity               | Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]` <br><br>Example: `activity /view /sid 1 /aid 1`                                                                                                                          |
-| List all activities                     | Format: `activity /list /sid [SESSION_ID]` <br><br>Example: `activity /list /sid 1`                                                                                                                                                    |
-| Show session summary                    | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                                                 |
-| Create a new group                      | Format: `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 …]`<br><br>Example: `group /create /n SplitLah /pl Roy Ivan Warren Saurav Tianle`                                                                                              |
-| Delete an existing group                | Format: `group /delete /gid [GROUP_ID]`<br><br>Example: `group /delete /gid 1`                                                                                                                                                         |
-| Edit an existing group                  | Format: `group /edit /gid [GROUP_ID] {/n [GROUP_NAME] /pl [NAME1 NAME2...]}`<br><br>Example: `group /edit /gid 1 /n Class gathering`                                                                                                   |
-| View an existing group                  | Format: `group /view /gid [GROUP_ID]`<br><br>Example: `group /view /gid 1`                                                                                                                                                             |
-| List all groups                         | Format: `group /list`                                                                                                                                                                                                                  |
-| List all available commands             | Format: `help`                                                                                                                                                                                                                         |
-| Exit                                    | Format: `exit`                                                                                                                                                                                                                         |
+| Action                                  | Format                                                                                                                                                                                                                                                                              |
+|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Create a new session                    | Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] {/pl [NAME1 NAME2 ...] /gid [GROUP_ID]}`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Alice Bob Charlie`                                                                                              |
+| Delete an existing session              | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                                                                                                |
+| Edit an existing session                | Format: `session /edit /sid [SESSION_ID] {/n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}`<br><br> Example: `session /edit /sid 1 /n Class gathering /d 16-03-2022 /pl Alice Bob Charlie`                                                                                 |
+| View an existing session                | Format: `session /view /sid [SESSION_ID]`<br><br>Example: `session /view /sid 1`                                                                                                                                                                                                    |
+| List all sessions                       | Format: `session /list`                                                                                                                                                                                                                                                             |
+| Create activity (split costs evenly)    | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 7.5`                         |
+| Create activity (split costs manually)  | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /cl [COST1 COST2...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /cl 1 1 5.5`                 |
+| Delete an existing activity             | Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`<br><br>Example: `activity /delete /sid 2 /aid 1`                                                                                                                                                                    |
+| Edit an activity (split costs evenly)   | Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /co [TOTAL_COST] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE]}`<br><br>Example: `activity /edit /sid 1 /aid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 7.5`         |
+| Edit an activity (split costs manually) | Format: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /cl [COST1 COST2...] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE]}`<br><br>Example: `activity /edit /sid 1 /aid 1 /n Lunch /p Alice /i Alice Bob Charlie /cl 1 1 5.5` |
+| View an existing activity               | Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]` <br><br>Example: `activity /view /sid 1 /aid 1`                                                                                                                                                                       |
+| List all activities                     | Format: `activity /list /sid [SESSION_ID]` <br><br>Example: `activity /list /sid 1`                                                                                                                                                                                                 |
+| Show session summary                    | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                                                                                              |
+| Create a new group                      | Format: `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`<br><br>Example: `group /create /n SplitLah /pl Roy Ivan Warren Saurav Tianle`                                                                                                                                         |
+| Delete an existing group                | Format: `group /delete /gid [GROUP_ID]`<br><br>Example: `group /delete /gid 1`                                                                                                                                                                                                      |
+| Edit an existing group                  | Format: `group /edit /gid [GROUP_ID] {/n [GROUP_NAME] /pl [NAME1 NAME2...]}`<br><br>Example: `group /edit /gid 1 /n Class gathering`                                                                                                                                                |
+| View an existing group                  | Format: `group /view /gid [GROUP_ID]`<br><br>Example: `group /view /gid 1`                                                                                                                                                                                                          |
+| List all groups                         | Format: `group /list`                                                                                                                                                                                                                                                               |
+| List all available commands             | Format: `help`                                                                                                                                                                                                                                                                      |
+| Exit                                    | Format: `exit`                                                                                                                                                                                                                                                                      |
