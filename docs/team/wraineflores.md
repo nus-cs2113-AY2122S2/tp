@@ -17,38 +17,27 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 | Help Messages                            | Compiled all messages to be printed out                       |
 
 ## **UG contributions:**
-<br>
 
 * Edited contents in the UG for continuity purposes
-<br>
 
 * Tests examples in the UG to ensure its validity
 
 ## **DG contributions:**
-<br>
 
 * Helped explain the Manager class
-<br>
 
 * Helped explain the Command classes
 
 ## **Team-based tasks contributions:**
-<br>
 
 * Setting up the GitHub team org/repo is by Sharif & Wei Li
-<br>
 
 * Necessary general code enhancements is by everyone
-<br>
 
 * Setting up tools e.g., GitHub, Gradle is by everyone
-<br>
 
 * Maintaining the issue tracker is by everyone
-<br>
 
 * Release management is done by consensus by the majority
-<br>
 
 * Updating user/developer docs that are not specific to a feature is by everyone when we see a change fits
-<br>
