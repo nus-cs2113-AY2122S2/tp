@@ -99,7 +99,7 @@ output in your terminal:
 
 You are now ready to begin developing!
 
-<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+<div class="button-container"><a class="button" href="#werkit-developer-guide">Back to Top</a></div>
 
 ## Design 
 
@@ -2069,7 +2069,7 @@ where there are many other day-to-day things being kept too.
 | v2.0    | user     | view the summary of what I can do in the application | know which command to use to perform the actions I want                |
 
 <br/>
-<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+<div class="button-container"><a class="button" href="#werkit-developer-guide">Back to Top</a></div>
 
 ## Non-Functional Requirements
 #### Data Requirements
@@ -2088,7 +2088,7 @@ are running it on a 64-bit operating system and with a minimum of 8 GB of RAM.
 #### Performance Requirements 
 Each command entered by the user should respond within two seconds.
 
-<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+<div class="button-container"><a class="button" href="#werkit-developer-guide">Back to Top</a></div>
 
 ---
 ## Glossary
@@ -2591,4 +2591,4 @@ rely on former test cases.</span>
 <br>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
 <br/>
-<div class="button-container"><a class="button" href="#">Back to Top</a></div>
+<div class="button-container"><a class="button" href="#werkit-developer-guide">Back to Top</a></div>
