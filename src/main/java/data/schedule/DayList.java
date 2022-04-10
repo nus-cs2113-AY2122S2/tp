@@ -158,6 +158,7 @@ public class DayList {
      * When a plan is clear/reset, the day will set to be a rest day.
      *
      * @param userArgument Day number to be reset/cleared.
+     * @return dayName Name of the day.
      * @throws InvalidScheduleException If the day number specified in userArgument is invalid.
      */
     public String clearDayPlan(String userArgument) throws InvalidScheduleException {
@@ -190,6 +191,8 @@ public class DayList {
 
     /**
      * Remove plan on the stated day.
+     *
+     * @param dayNumber day number to be cleared.
      */
     public void clearPlan(int dayNumber) {
         scheduleList[dayNumber] = null;
