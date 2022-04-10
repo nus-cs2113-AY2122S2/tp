@@ -769,7 +769,7 @@ Test Scenario 3: There is a group with unique identifier of 1 named GroupTest1 w
 > For details on the usage of `session /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-session-session-delete).
 <hr>
 
-Test Scenario 1: There is a sessions with unique identifier of 1 stored in the application. <br>
+Test Scenario 1: There is a session with unique identifier of 1 stored in the application. <br>
 1. Test Command: `session /delete /sid 1`<br>
    Expected: A success message should be printed, indicating the session has been deleted.
 2. Test Command: `session /delete /sid 2`<br>
