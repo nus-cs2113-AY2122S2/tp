@@ -10,8 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddRecordTest {
-
-
     protected static final String INVALID_UID_MSG =
             "Unknown error is detected from 'Invalid category index `-1`', please check again.";
     protected static final String INVALID_IMONEY_MSG =
@@ -22,6 +20,8 @@ public class AddRecordTest {
             "Unknown error is detected from 'Invalid money value `-1999.99`', please check again.";
     protected static final String INVALID_CAT_MSG =
             "Unknown error is detected from 'Invalid category index `-1`', please check again.";
+    protected static final String INVALID_GROUPINX_ERROR_MSG =
+            "Unknown error is detected from 'Invalid group index `5`', please check again.";
 
     Family family;
     AddRecordCommand addRec;
@@ -84,6 +84,17 @@ public class AddRecordTest {
             addRec = new AddRecordCommand(CommandsForTesting.ADDEXPEND3, family);
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_CAT_MSG);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void addPerson_invalidGroupInx_fail() {
+        try {
+            addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME5, family);
+        } catch (PlanITariumException e) {
+            assertEquals(e.toString(), INVALID_GROUPINX_ERROR_MSG);
         } catch (Exception e) {
             fail();
         }

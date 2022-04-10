@@ -47,4 +47,13 @@ public class AddPersonTest {
             fail();
         }
     }
+
+    @Test
+    void addPerson_sucess() {
+        try {
+            add = new AddPersonCommand(CommandsForTesting.ADDPERSON, family);
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }

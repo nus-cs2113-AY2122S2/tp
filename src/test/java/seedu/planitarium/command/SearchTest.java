@@ -16,16 +16,14 @@ public class SearchTest {
             "Unknown error is detected from 'Empty string after `/d`', please check again.";
 
     Family family;
-    AddRecordCommand addIn;
-    AddRecordCommand addOut;
     SearchCommand search;
 
     private void initialize() throws PlanITariumException {
         family = new Family();
         AddPersonCommand add = new AddPersonCommand(CommandsForTesting.ADDPERSON, family);
         add.execute();
-        addIn = new AddRecordCommand(CommandsForTesting.ADDEXPEND, family);
-        addOut = new AddRecordCommand(CommandsForTesting.ADDINCOME, family);
+        AddRecordCommand addIn = new AddRecordCommand(CommandsForTesting.ADDEXPEND, family);
+        AddRecordCommand addOut = new AddRecordCommand(CommandsForTesting.ADDINCOME, family);
         addIn.execute();
         addOut.execute();
     }
@@ -33,9 +31,20 @@ public class SearchTest {
     @Test
     void find_invalidDes_fail() {
         try {
+            initialize();
             search = new SearchCommand(CommandsForTesting.FIND1, family);
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_DES_MSG);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void  find_success() {
+        try {
+            initialize();
+            search = new SearchCommand(CommandsForTesting.FIND, family);
         } catch (Exception e) {
             fail();
         }
