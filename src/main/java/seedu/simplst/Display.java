@@ -30,6 +30,33 @@ public class Display {
     //        }
     //    }
 
+    public static void hello() {
+        String logo = "Simplst";
+        System.out.println("Hello from\n" + logo);
+        System.out.println("What would you like to do?");
+    }
+
+    public static void bye() {
+        System.out.println("Bye");
+    }
+
+    public static void stateRestored() {
+        System.out.println("State restored!");
+    }
+
+    public static void stateSaved() {
+        System.out.println("State saved!");
+    }
+
+    public static void stateNotSaved() {
+        System.out.println("State not saved!");
+    }
+
+    public static void newLogin() {
+//         System.out.println("New login. Please type the total number of goods"
+//                 + " your warehouse can hold");
+        System.out.println("New login.");
+    }
 
     // successful output
     public static void inventoryGoodQtyRemoved(Float qty, String goodName) {
@@ -38,6 +65,10 @@ public class Display {
 
     public static void orderlineCheckedOff(String unitGoodName, String orderId) {
         System.out.println(unitGoodName + "of order " + orderId + " has been removed.");
+    }
+
+    public static void unitGoodAdded(String sku){
+        System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
     }
 
 
@@ -50,6 +81,12 @@ public class Display {
     }
 
     // error outputs
+
+    public static void skuAlreadyExists(String sku) {
+        System.out.println("Item with SKU: " + sku + "already exists in the warehouse. "
+                + "Please check the SKU again.");
+    }
+
     public static void nonExistentGood() {
         System.out.println("The goods you are trying to remove are not on the current list. "
                 + "Please try another id or add the goods first.");

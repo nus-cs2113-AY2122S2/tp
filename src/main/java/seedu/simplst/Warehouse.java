@@ -42,13 +42,12 @@ public class Warehouse {
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
         Good newGood = new Good(unitGood, 0);
         if (unitGoodHashMap.containsKey(sku)) {
-            System.out.println("Item with SKU: " + sku + "already exists in the warehouse. "
-                    + "Please check the SKU again.");
+            Display.skuAlreadyExists(sku);
             return;
         }
         unitGoodHashMap.put(sku, unitGood);
         goodList.put(sku, newGood);
-        System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
+        Display.unitGoodAdded(sku);
     }
 
     /**
@@ -643,8 +642,6 @@ public class Warehouse {
         return ja;
     }
 
-
-
     private Boolean restoreOrders(JSONArray ja){
         ja.forEach(item->{
            JSONObject jo = (JSONObject) item;
@@ -653,22 +650,23 @@ public class Warehouse {
         return true;
     }
 
-    private JSONArray serializeGoods() {
-        JSONArray ja = new JSONArray();
+    private JSONObject serializeGoods() {
+        JSONObject jo = new JSONObject();
         goodList.forEach((sku, good) -> {
             try {
-                JSONObject jo = good.serialize();
-                ja.add(jo);
+                JSONObject goodJ = good.serialize();
+                jo.put(sku, goodJ);
             } catch (Exception e) {
                 Display.serializeException("Warehouse Goodlist");
             }
         });
-        return ja;
+        return jo;
     }
 
     private Boolean restoreGoods(JSONObject jo){
         jo.forEach((sku, jg)->{
-            goodList.put((String)sku,Good.restoreGood(jo));
+//            System.out.println("sku: " + sku);
+            goodList.put((String)sku,Good.restoreGood((JSONObject) jg));
         });
         return true;
     }
@@ -690,7 +688,7 @@ public class Warehouse {
         }
         warehouse.put(WarehouseKeys.orderLists, sol);
 
-        JSONArray sgl = this.serializeGoods();
+        JSONObject sgl = this.serializeGoods();
         if(sgl == null){
             return null;
         }
@@ -714,9 +712,10 @@ public class Warehouse {
         // PARSE
         try{
             JSONObject jWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
+            System.out.println("Parse success");
             boolean status = false;
             //Float totalCapacity = Float.parseFloat();
-            status = this.setTotalCapacity((String)jWarehouse.get(WarehouseKeys.totalCapacity));
+            status = this.setTotalCapacity(jWarehouse.get(WarehouseKeys.totalCapacity).toString());
             if (!status){
                 return false;
             }

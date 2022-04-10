@@ -223,7 +223,7 @@ public class Order {
         orderLinesJson.forEach((item)->{
             JSONObject jol = (JSONObject) item;
             UnitGood ug = UnitGood.restoreUnitGood(jol);
-            String qty = (String)jol.get(GoodKeys.quantity);
+            String qty = jol.get(GoodKeys.quantity).toString();
             try {
                 cur.addOrderline(ug,qty);
             } catch (WrongCommandException e) {
