@@ -550,10 +550,10 @@ the user's input as a `String` object to `WerkIt#startContinuousUserPrompt()`. T
 `WerkIt#startContinuousUserPrompt()` calls `WerkIt#parseUserInput()`, an intermediary method to call
 `Parser#parseUserInput()`, which will parse the user's input and create an 
 object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
-this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()`.
+this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()` via `WerkIt#parseUserInput()`.
 
-<span class="box info">:memo: The intermediary `WerkIt#parseUserInput()` is created to reduce the arrowhead code that
-was grossly present in `WerkIt#startContinuousUserPrompt()`.</span>
+<span class="box info">:memo: The intermediary `WerkIt#parseUserInput()` method is created to reduce the arrowhead code 
+that was grossly present in `WerkIt#startContinuousUserPrompt()`.</span>
 
 <span class="box info">:memo: A detailed implementation of the parsing and creation of subclass-of-`Command` 
 object process can be found in 
