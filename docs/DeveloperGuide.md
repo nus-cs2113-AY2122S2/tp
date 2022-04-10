@@ -270,36 +270,36 @@ Ensure each data type conforms to certain standards with in-built validations.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Version | Priority | As a ...                                   | I want to ...                                | So that I can ...                                                      |
-|---------|----------|--------------------------------------------|----------------------------------------------|------------------------------------------------------------------------|
-|   1.0   | `***`    | new user | view the user guide  | to learn how to use the system |
-|   1.0   | `***`    | user | use the help function  | to get help quickly within the application |
-|   1.0   | `***`    | user | add patient  | keep track of the patients |
-|   1.0   | `***`    | user | add doctor  | keep track of the doctors |
-|   1.0   | `***`    | user | add medicine  | keep track of the medicines|
-|   1.0   | `***`    | user | view patient  | see all patients in the clinic |
-|   1.0   | `***`    | user | view doctor  | see all doctors in the clinic |
-|   1.0   | `***`    | user | view medicine  | see all medicines in the clinic |
-|   1.0   | `**`     | user | delete patient  | remove data of patients that are not needed anymore |
-|   1.0   | `**`     | user | delete doctor  | remove data of doctors that are not needed anymore |
-|   1.0   | `**`     | user | delete medicine  | remove data of medicines that are not needed anymore |
-|   1.0   | `*`      | user | save data of the application  | all changes I made in one session is saved |
-|   1.0   | `*`      | user | exit the app  | work on other issues whenever appropriate |
-|   2.0   | `***`    | user | add appointment  | keep track of appointments |
-|   2.0   | `***`    | user | delete appointment  | remove appointments that are not needed anymore |
-|   2.0   | `***`    | user | view appointment  | see all appointment in the clinic |
-|   2.0   | `**`     | user | edit appointment  | update changes to appointments |
-|   2.0   | `**`     | user | edit patient  | update changes of patients |
-|   2.0   | `**`     | user | edit doctor  | update changes of doctors |
-|   2.0   | `**`     | user | edit medicine  | update changes of medicines |
-|   2.0   | `**`     | user | find patient  | filter out patients by specific criteria |
-|   2.0   | `**`     | user | find doctor  | filter out doctors by specific criteria |
-|   2.0   | `**`     | user | find medicine  | filter out medicines by specific criteria |
-|   2.0   | `**`     | user | find appointment  | filter out appointments by specific criteria |
-|   2.1   | `*`      | user | update medicines in inventory | find medicines that are expired or have ran out |
-|   2.1   | `*`      | user | clear expired medicines | remove expired/ran out medicines from the inventory |
-|   2.1   | `*`      | user | generate the batch id of medicines to dispense | dispense medicine that expire earlier first |
-|   2.1   | `*`      | user | schedule an appointment | schedule an appointment with a doctor that is free |
+| Version | Priority | As a ...  | I want to ...                                  | So that I can ...                                   |
+|---------|----------|-----------|------------------------------------------------|-----------------------------------------------------|
+|   1.0   | `***`    | new user  | view the user guide                            | to learn how to use the system                      |
+|   1.0   | `***`    | user      | use the help function                          | to get help quickly within the application          |
+|   1.0   | `***`    | user      | add patient                                    | keep track of the patients                          |
+|   1.0   | `***`    | user      | add doctor                                     | keep track of the doctors                           |
+|   1.0   | `***`    | user      | add medicine                                   | keep track of the medicines                         |
+|   1.0   | `***`    | user      | view patient                                   | see all patients in the clinic                      |
+|   1.0   | `***`    | user      | view doctor                                    | see all doctors in the clinic                       |
+|   1.0   | `***`    | user      | view medicine                                  | see all medicines in the clinic                     |
+|   1.0   | `**`     | user      | delete patient                                 | remove data of patients that are not needed anymore |
+|   1.0   | `**`     | user      | delete doctor                                  | remove data of doctors that are not needed anymore  |
+|   1.0   | `**`     | user      | delete medicine                                | remove data of medicines that are not needed anymore|
+|   1.0   | `*`      | user      | save data of the application                   | all changes I made in one session is saved          |
+|   1.0   | `*`      | user      | exit the app                                   | work on other issues whenever appropriate           |
+|   2.0   | `***`    | user      | add appointment                                | keep track of appointments                          |
+|   2.0   | `***`    | user      | delete appointment                             | remove appointments that are not needed anymore     |
+|   2.0   | `***`    | user      | view appointment                               | see all appointment in the clinic                   |
+|   2.0   | `**`     | user      | edit appointment                               | update changes to appointments                      |
+|   2.0   | `**`     | user      | edit patient                                   | update changes of patients                          |
+|   2.0   | `**`     | user      | edit doctor                                    | update changes of doctors                           |
+|   2.0   | `**`     | user      | edit medicine                                  | update changes of medicines                         |
+|   2.0   | `**`     | user      | find patient                                   | filter out patients by specific criteria            |
+|   2.0   | `**`     | user      | find doctor                                    | filter out doctors by specific criteria             |
+|   2.0   | `**`     | user      | find medicine                                  | filter out medicines by specific criteria           |
+|   2.0   | `**`     | user      | find appointment                               | filter out appointments by specific criteria        |
+|   2.1   | `*`      | user      | update medicines in inventory                  | find medicines that are expired or have ran out     |
+|   2.1   | `*`      | user      | clear expired medicines                        | remove expired/ran out medicines from the inventory |
+|   2.1   | `*`      | user      | generate the batch id of medicines to dispense | dispense medicine that expire earlier first         |
+|   2.1   | `*`      | user      | schedule an appointment                        | schedule an appointment with a doctor that is free  |
 ### Use cases
 
 
