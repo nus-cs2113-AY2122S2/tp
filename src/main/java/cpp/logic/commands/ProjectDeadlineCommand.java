@@ -22,11 +22,11 @@ public class ProjectDeadlineCommand extends Command {
             projectList.addProjectDeadline(projectIndex, deadline);
         } catch (IndexOutOfBoundsException e) {
             System.out.println(Constants.INDEX_OUT_OF_RANGE);
-            return Response.addProjectDeadlineUnsuccessfully();
+            return Response.deadlineUnsuccessfully();
         }
         if (project == null) {
-            return Response.addProjectDeadlineUnsuccessfully();
+            return Response.deadlineUnsuccessfully();
         }
-        return Response.addProjectDeadlineSuccessfully(project.getTitle(), project.getDeadline());
+        return Response.projectDeadlineSuccessfully(project.getTitle(), project.getDeadline());
     }
 }

@@ -60,5 +60,4 @@ class ProjectListTest {
         assertThrows(IndexOutOfBoundsException.class, () -> defaultProjectList.deleteProject(PROJECT3NAME));
         assertEquals(1, emptyProjectList.getProjectNo());
     }
-
 }

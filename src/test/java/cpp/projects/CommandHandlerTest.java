@@ -32,14 +32,14 @@ class CommandHandlerTest {
     }
 
     @Test
-    void view_noProjectSpecified() {
+    void viewNoProjectSpecified() {
         assertThrows(IllegalCommandException.class, () ->
             defaultCommandHandler.handleUserInput(defaultProjectList, "view")
         );
     }
 
     @Test
-    void input_unknownCommand() {
+    void inputUnknownCommand() {
         assertThrows(IllegalCommandException.class, () ->
                 defaultCommandHandler.handleUserInput(defaultProjectList, "unknownCommand")
         );
@@ -76,18 +76,48 @@ class CommandHandlerTest {
     }
 
     @Test
-    public void testDeadline() throws IllegalCommandException {
+    public void testProjDeadline() throws IllegalCommandException {
         String status = defaultCommandHandler.handleUserInput(
-                    defaultProjectList, "projdeadline 1 2024-12-12");
-        assertEquals(status, response.addProjectDeadlineSuccessfully(PROJECT1NAME, "2024-12-12"));
+                    defaultProjectList, "projdeadline 1 2024-12-12"
+        );
+        assertEquals(status, response.projectDeadlineSuccessfully(PROJECT1NAME, "2024-12-12"));
     }
 
     @Test
-    public void testInvalidCommand() throws IllegalCommandException {
+    public void testTodoDeadline() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(
+                defaultProjectList, "tododeadline 1 2 2024-12-12"
+        );
+        assertEquals(status, response.todoDeadlineSuccessfully(TODO2, "2024-12-12"));
+    }
+
+    @Test
+    public void testInvalidCommand() {
         assertThrows(IllegalCommandException.class, () ->
                 defaultCommandHandler.handleUserInput(defaultProjectList,"zzzzz")
         );
     }
 
+    @Test
+    public void testAddLanguage() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(defaultProjectList, "addlanguage 1 Java");
+        assertEquals(status, response.addLanguageSuccessfully(PROJECT1NAME, "Java"));
+    }
 
+    @Test
+    public void testChangeGitHub() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(
+                defaultProjectList, "changegit 1 https://github.com/AY2122S2-CS2113-F10-1/tp");
+        assertEquals(status,
+                response.addGithubLinkSuccessfully(
+                        PROJECT1NAME, "https://github.com/AY2122S2-CS2113-F10-1/tp"));
+    }
+
+    @Test
+    public void testListLanguages() throws IllegalCommandException {
+        String status = defaultCommandHandler.handleUserInput(
+                defaultProjectList, "listlanguages " + PROJECT2NAME
+        );
+        assertEquals(status, response.listLanguageSuccessfully());
+    }
 }
