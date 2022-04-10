@@ -13,6 +13,7 @@ import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
 
+//@@author DolphXty
 public class AddWardCommand extends Command {
     protected int[] docIndexes;
     protected int[] patientIndexes;
