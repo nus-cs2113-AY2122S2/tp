@@ -2,17 +2,16 @@
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
-
+hide circle
 class Storage {
     -saveFilePath:String
     +Storage(filePath:String)
     +writeSaveData(taskList:TaskList):JSONObject
     +load():ArrayList<Task>
-    +handleCorruptedSave(ui:Ui):void
     -wipeSaveData():void
 }
 
-class Parser {
+class StorageParser {
     +parseSaveData(taskData:JSONObject):Task
 }
 
@@ -20,10 +19,6 @@ class TaskList {
     +getTasks():ArrayList<Task>
 }
 
-class Ui
-hide Ui members
-
-Storage ..> Parser
+Storage ..> StorageParser
 Storage ..> TaskList
-Storage ..> Ui
 @enduml
