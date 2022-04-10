@@ -33,7 +33,6 @@ public class Timetable {
     private static ArrayList<Task> tasks;
     private static Ui ui;
 
-
     private static void setInitialTimetableInputs(LocalDate dateInput,
                                                   ArrayList<Task> filteredTasks, Ui userInterface) {
         localDate = dateInput;
@@ -54,12 +53,23 @@ public class Timetable {
         prepareFullTimetable();
     }
 
-
+    /**
+     * Generates a condensed timetable format of all the pending tasks.
+     *
+     * @param taskList Representation of an array of tasks.
+     * @param ui The user interface which interacts with the user.
+     */
     public static void showPendingTasks(TaskList taskList, Ui ui) {
         tasks = taskList.getPendingTasks();
         prepareCondensedTimetable(tasks, ui);
     }
 
+    /**
+     * Prepares a condensed timetable format and print the tasks given.
+     *
+     * @param tasks Representation of an array of tasks.
+     * @param ui The user interface which interacts with the user.
+     */
     public static void prepareCondensedTimetable(ArrayList<Task> tasks, Ui ui) {
         long taskLength = TimetableLogic.prepareTaskContentLength(tasks,
                 TASK_DESCRIPTION_COMPARE_LENGTH, TASK_DESCRIPTION_COMPARE_OFFSET_LENGTH,
@@ -115,6 +125,9 @@ public class Timetable {
         prepareCondensedTimetable(monthlySchedule, ui);
     }
 
+    /**
+     * Prepares a full timetable and prints the timetable in the terminal.
+     */
     private static void prepareFullTimetable() {
         assert localDate != null;
         String day = localDate.format(dayOnlyFormat);

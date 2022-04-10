@@ -52,8 +52,8 @@ it correctly and with ease. Here are some icons which we will use to convey impo
     - Delete tasks: [`delete`](#deleting-your-tasks-delete)
     - Edit tasks: [`edit`](#editing-your-tasks-edit)
     - Mark tasks [`mark`](#marking-your-tasksmark-task_number--unmark-task_number)
-    - Show tasks: [`show`](#generating-a-full-timetable)
-    - Clear all tasks: [`clear`](#clearing-all-tasks-clear)
+    - Show tasks: [`show`](#generating-a-timetable-show)
+    - Clear all tasks: [`clear`](#clearing-multiple-tasks-clear-all--clear-expired--clear-done)
     - Study session
       - Enter study session: [`study`](#enter-study-session-study)
       - Start timer: [`start`](#starting-a-default-timer-start-mode_number)     
@@ -98,7 +98,8 @@ Order of other parameters can be switched.
 
 #### Adding a single task
 
-Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME]`
+Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime END_TIME]`
+
 
 |    Parameters    | Description                     | Accepted inputs                                                                    | Optional                |
 |:----------------:|---------------------------------|------------------------------------------------------------------------------------|-------------------------|
@@ -108,6 +109,9 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/byda
 |     END_TIME     | Time to stop working on a task  | HH:mm format, must be after START_TIME                                             | No                      |
 |     DUE_DATE     | Due date for the task           | d/M/yyyy format, must be equal to or after DUE_DATE                                | Yes                     |
 |     DUE_TIME     | Due time for the task           | HH:mm format, must be after END_TIME if DUE_DATE is the same as DO_DATE            | No if DUE_DATE is given |
+
+> **💡 Note**
+> When using the optional parameter shown in `[]`, both the`DEADLINE` and `END_TIME` to need be used together.
 
 **Examples**
 - `add write final essay /do 25/6/2022 /start 20:00 /end 22:00 /bydate 27/6/2022 /bytime 23:59`
@@ -120,12 +124,12 @@ Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/byda
 - For a **weekly** recurring task, **2 months'** worth of task will be added.
 - For a **monthly** recurring task, a **year's** worth of task will be added.
 
-Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME] /repeat FREQUENCY`
+Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME] /repeat FREQUENCY`
 
 |    Parameters    | Description                     | Accepted inputs                                                                     | Optional                |
 |:----------------:|---------------------------------|-------------------------------------------------------------------------------------|-------------------------|
 | TASK_DESCRIPTION | Description for the task        | Any phrases or sentences                                                            | No                      |
-|     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g `25/3/2022` for 25 March 2022)                                 | No                      |
+|       DATE       | Date to work on the task        | d/M/yyyy format (e.g `25/3/2022` for 25 March 2022)                                 | No                      |
 |    START_TIME    | Time to start working on a task | HH:mm format (e.g `18:00`)                                                          | No                      |
 |     END_TIME     | Time to stop working on a task  | HH:mm format, must be after START_TIME                                              | No                      |
 |     DUE_DATE     | Due date for the task           | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
@@ -179,8 +183,7 @@ After command: `delete 3 /repeat`
 
 #### Editing a single task
 
-Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME]`
-
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME]`
 
 |    Parameters    | Description                                         | Accepted inputs                                                                     | Optional                |
 |:----------------:|-----------------------------------------------------|-------------------------------------------------------------------------------------|-------------------------|
@@ -192,10 +195,9 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [
 |     DUE_DATE     | Due date for the task                               | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
 |     DUE_TIME     | Due time for the task                               | HH:mm format, must be after END_TIME if DUE_DATE is the same as DO_DATE             | No if DUE_DATE is given |
 
-
 **Examples**
 - `edit 2 write draft essay`
-- `edit 3 submit draft essay /start 10:00 /end 13:00`
+- `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00 /bydate 30/3/2022 /bytime 23:59`
 
 #### Editing a recurring task
 
@@ -205,8 +207,7 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [
 >- To change frequency, delete and add the recurring task with the new frequency using the `delete` and `add` command respectively.
 
 
-Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME] /repeat`
-
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME] /repeat`
 
 |    Parameters    | Description                                         | Accepted inputs                                                                    | Optional                |
 |:----------------:|-----------------------------------------------------|------------------------------------------------------------------------------------|-------------------------|
@@ -248,9 +249,11 @@ Format: `mark TASK_NUMBER` or `unmark TASK_NUMBER`
 > All other `show` related commands aside from that will generate a condensed version of a timetable
 > to minimise any clutter in the terminal.
 
-#### Display Daily Schedule: `show today` / `show tomorrow` / `show DATE`
+### Display Daily Schedule: `show today` / `show tomorrow` / `show DATE`
+Sherpass allows you to display your schedule today, tomorrow or any specific date schedule 
+by using the command shown above.
 
-Displays your schedule for today, tomorrow or any specific date.
+To make things easier for you, command for `show tomorrow` can be shortened to `show tmr`. 
 
 Upon startup, Sherpass also shows your schedule for the day.
 
@@ -261,8 +264,9 @@ Format:
 
 |     Parameters      | Description                                         | Accepted inputs                      | Optional                |
 |:-------------------:|-----------------------------------------------------|--------------------------------------|-------------------------|
-|                     | Shows the schedule for the week you are in          |                                      |                         |
+|        today        | Shows the schedule for the week you are in          |                                      |                         |
 | next week/ nextweek | Shows the schedule for the week after               |                                      |                         |
+
 Format:
 - To see the schedule for the day: `show today`
 - To see the schedule for tomorrow: `show tomorrow` or `show tmr`
@@ -275,9 +279,13 @@ Below is an example of the schedule that is being displayed from the given date
 
 ![ShowDateTimetableFormat](images/showDateTimetableFormat.PNG)
 
-#### Display Weekly Schedule: `show week` / `show next week`
 
-Displays your schedule for the week or the week after.
+### Display Weekly Schedule: `show week` / `show next week`
+If you are wondering what is your schedule for the current week or the next week. Fret not, 
+for Sherpass has the ability to display your schedule for the current week or the week after.
+
+
+Command for `show next week` can be shortened to `show nextweek`.
 
 
 |     Parameters      | Description                                         | Accepted inputs | Optional |
@@ -292,19 +300,29 @@ Below is an example of the weekly schedule displayed:
 ![weeklyTimetablePart2](images/weeklyTimetablePart2.PNG)
 
 
-#### Display Monthly Schedule: `show month` / `show MONTH`
+### Display Monthly Schedule: `show month` / `show MONTH`
+If showing of your daily schedule or weekly schedule is not enough, Sherpass also allows you to track your
+monthly schedule.
 
-Displays your schedule for the current month or any specific month.
 
->⚠️Important note:
->- Monthly Schedule will only display task that are in the current Month or the upcoming Month.
->- Please use `show all` method to see task from previous months. 
+>**💡 Note**
+>
+> Monthly Schedule will only display task that are in the current Month or the upcoming Month.
+>
+> Please use `show all` method to see task from previous months. 
+> 
+> To show any specific Month, only two types of input are accepted:
+> - 3-letter abbreviation of the specific month.
+> - The full spelling of the specific month.
 
 Format:
 - To see the schedule for the current month: `show month`
-- To see the schedule for any specific month: `show MONTH`, where 
-  MONTH is either a three letter abbreviation of the month, or the full name of the month.
+- To see the schedule for any specific month: `show MONTH`,
 
+|     Parameters      | Description                                         | Accepted inputs | Optional |
+|:-------------------:|-----------------------------------------------------|-----------------|----------|
+|        week         | Shows the schedule for the week you are in          | N.A.            | No       |
+| next week/ nextweek | Shows the schedule for the week after               | N.A.            | No       |
 
   E.g. `show sep` or `show september` is the same command 
 
@@ -322,6 +340,12 @@ to view all the tasks that have been added/edited/deleted.
 Format:
 - To view all the tasks that exist in your list: `show all`
 - To view all the tasks that are yet to be completed: `show todo` 
+
+
+|     Parameters      | Description                                         | Accepted inputs | Optional |
+|:-------------------:|-----------------------------------------------------|-----------------|----------|
+|        week         | Shows the schedule for the week you are in          | N.A.            | No       |
+| next week/ nextweek | Shows the schedule for the week after               | N.A.            | No       |
 
 Below are some sample outputs using `show all` and `show todo` respectively
 
@@ -349,7 +373,9 @@ All changes to your tasks are saved automatically into a JSON file at `[JAR FILE
 
 There is no need to manually save your tasks.
 
-> 💡 **Note:** Advanced users are welcome to manually edit the save file.
+> 💡 **Note:** 
+> 
+>Advanced users are welcome to manually edit the save file.
 
 The following fields are required to correctly load a task:
 
@@ -561,6 +587,7 @@ Format: `leave`
 **Q**: My save file is corrupted, how do I resolve this?
 
 **A**: Sherpass will print an error message 
+
 containing details of the corruption (e.g., missing fields, brackets). You can either modify the save file manually to
 rectify the problem or allow Sherpass to create a new save file. 
 
@@ -579,26 +606,32 @@ one of the options provided is `show all`. The `all` keyword would thus be the p
 * *Extraneous* - Something that is unnecessary or irrelevant.
 ## Command Summary
 
-| Action                        | Format, Examples                                                                                                                                                                                                                                 |
-|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Generate timetable            | `show today` / `show DATE` / `show week` / `show MONTH`                                                                                                                                                                                          |
-| List all tasks                | `show all`                                                                                                                                                                                                                                       |
-| List all pending tasks        | `show todo`                                                                                                                                                                                                                                      |
-| Clear multiple tasks          | `clear all` / `clear expired` / `clear done`                                                                                                                                                                                                     |
-| Add single task               | `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME]`<br/>e.g. `add revise chapter 3 /do 25/6/2022 /start 20:00 /end 22:00`                                                                     |
-| Edit single task              | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME]`<br/>e.g. `edit 3 submit draft essay /start 10:00 /end 13:00`                                                         |
-| Delete single task            | `delete TASK_NUMBER`                                                                                                                                                                                                                             |
-| Add recurring task            | `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME] /repeat FREQUENCY`<br/>e.g. `add cs2113t weekly quiz /do 21/6/2022 /start 16:00 /end 18:00 /bydate 25/6/2022 /bytime 16:00 /repeat WEEKLY` |
-| Edit recurring task           | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME] /repeat`<br/>e.g.`edit 5 /start 13:00 /end 14:00 /repeat`                                                             |
-| Delete recurring task         | `delete TASK_NUMBER /repeat`                                                                                                                                                                                                                     |
-| Mark a task as done           | `mark TASK_NUMBER`                                                                                                                                                                                                                               |
-| Mark a task as undone         | `unmark TASK_NUMBER`                                                                                                                                                                                                                             |
-| Enter study session           | `study`                                                                                                                                                                                                                                          |
-| Start default timer           | `start MODE_NUMBER`                                                                                                                                                                                                                              |
-| Start custom timer            | `start /custom DURATION`                                                                                                                                                                                                                         |
-| Start stopwatch               | `start stopwatch`                                                                                                                                                                                                                                |
-| Pause timer/stopwatch         | `pause`                                                                                                                                                                                                                                          |
-| Resume timer/stopwatch        | `resume`                                                                                                                                                                                                                                         |
-| Stop timer/stopwatch          | `stop`                                                                                                                                                                                                                                           |
-| Show tasks (in study session) | `show all`                                                                                                                                                                                                                                       |
-| Leave study session           | `leave`                                                                                                                                                                                                                                          |
+| Action                                | Format, Examples                                                                                                                                                                                                                                 |
+|---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Generate today timetable              | `show today`                                                                                                                                                                                                                                     |
+| Generate tomorrow timetable           | `show tomorrow` / `show tmr`                                                                                                                                                                                                                     |
+| Generate any specific date timetable  | `show DATE`<br/>e.g. `show 25/4/2022` for showing 25 april 2022 timetable                                                                                                                                                                        |
+| Generate current week timetable       | `show week`                                                                                                                                                                                                                                      |
+| Generate next week timetable          | `show next week` / `show nextweek`                                                                                                                                                                                                               |
+| Generate current Month timetable      | `show month`                                                                                                                                                                                                                                     |
+| Generate any specific Month timetable | `show MONTH`<br/>e.g. `show march` / `show mar`                                                                                                                                                                                                  |
+| List all tasks                        | `show all`                                                                                                                                                                                                                                       |
+| List all pending tasks                | `show todo`                                                                                                                                                                                                                                      |
+| Clear multiple tasks                  | `clear all` / `clear expired` / `clear done`                                                                                                                                                                                                     |
+| Add single task                       | `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME]`<br/>e.g. `add revise chapter 3 /do 25/6/2022 /start 20:00 /end 22:00`                                                                     |
+| Edit single task                      | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME]`<br/>e.g. `edit 3 submit draft essay /start 10:00 /end 13:00`                                                         |
+| Delete single task                    | `delete TASK_NUMBER`                                                                                                                                                                                                                             |
+| Add recurring task                    | `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime DUE_TIME] /repeat FREQUENCY`<br/>e.g. `add cs2113t weekly quiz /do 21/6/2022 /start 16:00 /end 18:00 /bydate 25/6/2022 /bytime 16:00 /repeat WEEKLY` |
+| Edit recurring task                   | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE] [/start START_TIME] [/end END_TIME] [/bydate DUE_DATE /bytime DUE_TIME] /repeat`<br/>e.g.`edit 5 /start 13:00 /end 14:00 /repeat`                                                             |
+| Delete recurring task                 | `delete TASK_NUMBER /repeat`                                                                                                                                                                                                                     |
+| Mark a task as done                   | `mark TASK_NUMBER`                                                                                                                                                                                                                               |
+| Mark a task as undone                 | `unmark TASK_NUMBER`                                                                                                                                                                                                                             |
+| Enter study session                   | `study`                                                                                                                                                                                                                                          |
+| Start default timer                   | `start MODE_NUMBER`                                                                                                                                                                                                                              |
+| Start custom timer                    | `start /custom DURATION`                                                                                                                                                                                                                         |
+| Start stopwatch                       | `start stopwatch`                                                                                                                                                                                                                                |
+| Pause timer/stopwatch                 | `pause`                                                                                                                                                                                                                                          |
+| Resume timer/stopwatch                | `resume`                                                                                                                                                                                                                                         |
+| Stop timer/stopwatch                  | `stop`                                                                                                                                                                                                                                           |
+| Show tasks (in study session)         | `show all`                                                                                                                                                                                                                                       |
+| Leave study session                   | `leave`                                                                                                                                                                                                                                          |
