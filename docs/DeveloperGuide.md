@@ -772,8 +772,8 @@ it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/User
 2. Test Command: `session /create /n SessionTest1 /pl Alice Bob /d 10-04-2022` <br>
    Expected: An error message should be printed, indicating that a session with the same name already exists within the application.
 
-Test Scenario 3: Only a single session with a session unique identifier of `1`, named GroupTest1 with Alice, Bob and Charlie exists in the application after creating
-it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. <br>
+Test Scenario 3: Only a single group with a group unique identifier of `1`, named GroupTest1 with Alice, Bob and Charlie exists in the application after creating
+it with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create) command. <br>
 1. Test Command: `session /create /n SessionTest4 /gid 1 /d today`<br>
    Expected: A success message should be printed, indicating the details of the session as provided in the command. 
              The list of persons for the session would include the persons found in the group.
