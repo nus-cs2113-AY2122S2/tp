@@ -10,15 +10,40 @@ participant "expenseTracker:ExpenseTracker"
 
 
 -> "AllOnUs"++ : main()
+"AllOnUs" -> ":AllOnUs" **: new AllOnUs()
+activate ":AllOnUs"
+":AllOnUs" --> "AllOnUs"--
+
 "AllOnUs" -> ":AllOnUs"++: run()
 
-loop true
-    ":AllOnUs" -> "ui:TextUi"++ : getUserInput()
-    "ui:TextUi" --> ":AllOnUs" -- :
-    ":AllOnUs" -> "AllOnUs"++ : is*Command()
-    "AllOnUs" --> ":AllOnUs"--
-    ref over "contactsManager:ContactsManager", "studyManager:StudyManager", "expenseTracker:ExpenseTracker","AllOnUs",":AllOnUs": Enter appropriate section or exit depending on user input
+":AllOnUs" -> "ui:TextUi" **: new TextUi()
+activate "ui:TextUi"
+"ui:TextUi" --> ":AllOnUs"--
 
+":AllOnUs" -> "contactsManager:ContactsManager" **: new ContactsManager()
+activate "contactsManager:ContactsManager"
+"contactsManager:ContactsManager" --> ":AllOnUs"--
+
+":AllOnUs" -> "studyManager:StudyManager" **: new StudyManager()
+activate "studyManager:StudyManager"
+"studyManager:StudyManager" --> ":AllOnUs"--
+
+":AllOnUs" -> "expenseTracker:ExpenseTracker" **: new ExpenseTracker()
+activate "expenseTracker:ExpenseTracker"
+"expenseTracker:ExpenseTracker" --> ":AllOnUs"--
+
+loop true
+    ":AllOnUs" -> "AllOnUs"++ : is*Mode()
+    "AllOnUs" --> ":AllOnUs"--
+    alt mode is not menu mode
+        ref over "contactsManager:ContactsManager", "studyManager:StudyManager", "expenseTracker:ExpenseTracker",":AllOnUs": Enter appropriate section depending on mode value
+    else mode is menu mode
+        ":AllOnUs" -> "ui:TextUi"++ : getUserInput()
+        "ui:TextUi" --> ":AllOnUs" -- :
+        ":AllOnUs" -> "AllOnUs"++ : is*Command()
+        "AllOnUs" --> ":AllOnUs"--
+        ref over "contactsManager:ContactsManager", "studyManager:StudyManager", "expenseTracker:ExpenseTracker","AllOnUs",":AllOnUs": Enter appropriate section or exit depending on user input
+    end
 end
 ":AllOnUs" --> "AllOnUs"--
 "AllOnUs" -> "AllOnUs"++ : exit()

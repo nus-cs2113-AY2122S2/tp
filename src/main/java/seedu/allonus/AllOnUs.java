@@ -27,17 +27,17 @@ public class AllOnUs {
             + "How can we help you today?";
     public static final String GOODBYE_MESSAGE = "Goodbye! Hope to see you again...";
     public static final String LOG_EXIT = "Exiting program.";
-    public static final String CONTACTS_MANAGER_COMMAND = "goto m/Contacts_Manager";
-    public static final String STUDY_MANAGER_COMMAND = "goto m/Study_Manager";
-    public static final String EXPENSE_TRACKER_COMMAND = "goto m/Expense_Tracker";
+    public static final String CONTACTS_MANAGER_COMMAND = "goto Contacts_Manager";
+    public static final String STUDY_MANAGER_COMMAND = "goto Study_Manager";
+    public static final String EXPENSE_TRACKER_COMMAND = "goto Expense_Tracker";
     public static final String EXIT_COMMAND = "exit";
     public static final int LENGTH_OF_EMPTY_COMMAND = 0;
     public static final String HELP_COMMAND = "help";
     public static final String LOG_DISPLAY_OF_HELP_SECTION = "Displaying help section for main menu features.";
     public static final String MAIN_MENU_FEATURES_TEXT = "Going from menu to section of interest:\n\nAllows "
             + "access to subsections of the application, namely, to the expense tracker, "
-            + "contacts manager and task manager.\n\nFormat: goto m/SECTION\n\nExamples:"
-            + "\n\n- goto m/Expense_Tracker\n- goto m/Study_Manager\n- goto m/Contacts_Manager"
+            + "contacts manager and task manager.\n\nFormat: goto SECTION\n\nExamples:"
+            + "\n\n- goto Expense_Tracker\n- goto Study_Manager\n- goto Contacts_Manager"
             + "\n\n\nGoing back to menu:\n\nAllows navigation back to the menu section of the application. "
             + "\n\nFormat: menu\n\nExample:\n\n- menu"
             + "\n\n\nGetting guidance on the usage of the application:\n\nDisplays user guide."

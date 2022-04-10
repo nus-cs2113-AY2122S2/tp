@@ -581,12 +581,13 @@ public class ExpenseTracker {
         String rawInput = ui.getUserInput();
 
         Mode mode = Mode.MENU;
-        boolean isFirstGotoExpenseCommand = false;
+        boolean isGotoExpenseCommand = false;
         mode = getMode(ui, mode, rawInput);
         if ((mode == Mode.CONTACTS_MANAGER) || (mode == Mode.STUDY_MANAGER)) {
             return mode;
         } else if (mode == Mode.EXPENSE_TRACKER) {
-            isFirstGotoExpenseCommand = true;
+            isGotoExpenseCommand = true;
+            mode = Mode.MENU;
         }
 
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
@@ -619,8 +620,8 @@ public class ExpenseTracker {
             case KEYWORD_BLANK:
                 break;
             default:
-                if (isFirstGotoExpenseCommand) {
-                    isFirstGotoExpenseCommand = false;
+                if (isGotoExpenseCommand) {
+                    isGotoExpenseCommand = false;
                     break;
                 }
                 logger.log(Level.WARNING, LOG_INVALID_COMMANDS);
@@ -635,6 +636,9 @@ public class ExpenseTracker {
             mode = getMode(ui, mode, rawInput);
             if ((mode == Mode.CONTACTS_MANAGER) || (mode == Mode.STUDY_MANAGER)) {
                 return mode;
+            } else if (mode == Mode.EXPENSE_TRACKER) {
+                isGotoExpenseCommand = true;
+                mode = Mode.MENU;
             }
         }
         logger.log(Level.INFO, LOG_RETURN_TO_MENU_INTENT);
