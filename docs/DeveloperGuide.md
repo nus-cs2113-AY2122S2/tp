@@ -205,13 +205,13 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 
 > :information_source: **Note:** The following are the ranges of index deemed valid:
 
-| Index       | Range                                                                              |
-|-------------|------------------------------------------------------------------------------------|
-| Group       | [1, ..., 3]                                                                        |
-| User        | [1, ..., MAX_UID], where MAX_UID is the number of people in the given group        |
-| Category    | [1, ..., 6]                                                                        |
-| Income      | [1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person |
-| Expenditure | [1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person |
+| Index       | Range                                                                               |
+|-------------|-------------------------------------------------------------------------------------|
+| Group       | [1, ..., 3]                                                                         |
+| User        | [1, ..., MAX_UID], where MAX_UID is the number of people in the given group         |
+| Category    | [1, ..., 6]                                                                         |
+| Income      | [1, ..., MAX_IID], where MAX_IID is the number of income entries for a given person |
+| Expenditure | [1, ..., MAX_EID], where MAX_EID is the number of income entries for a given person |
 
 ### Family Component
 
