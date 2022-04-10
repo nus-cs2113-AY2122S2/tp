@@ -1,5 +1,7 @@
 package seedu.simplst;
 
+import org.json.simple.JSONObject;
+import seedu.simplst.jsonkeyconstants.UnitGoodKeys;
 import util.exceptions.UnitTestException;
 
 import java.util.ArrayList;
@@ -68,4 +70,32 @@ public class UnitGood {
     public String toString() {
         return String.format("%s - %s (%s)", sku, name, description);
     }
+
+    public JSONObject serialize() {
+        JSONObject jo = new JSONObject();
+        jo.put(UnitGoodKeys.name, this.name);
+        jo.put(UnitGoodKeys.SKU, this.sku);
+        jo.put(UnitGoodKeys.description, this.description);
+        jo.put(UnitGoodKeys.capacity, this.capacity.toString());
+        return jo;
+    }
+
+    public static UnitGood restoreUnitGood(JSONObject jo) {
+        String sku = (String) jo.get(UnitGoodKeys.SKU);
+        String name = (String) jo.get(UnitGoodKeys.name);
+        String description = (String) jo.get(UnitGoodKeys.description);
+        String capacity = (String) jo.get(UnitGoodKeys.capacity);
+        System.out.println("sku: " + sku);
+        System.out.println("name: " + name);
+        System.out.println("description: " + description);
+        System.out.println("capacity: " + capacity);
+        UnitGood ug = new UnitGood(
+                sku,
+                name,
+                description,
+                capacity
+        );
+        return ug;
+    }
+
 }

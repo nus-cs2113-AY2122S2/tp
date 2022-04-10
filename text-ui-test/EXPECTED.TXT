@@ -17,17 +17,17 @@ Wooden Chair is added to order. 8 required to fulfill
 8 of WC1 is added to order number 1
 Another command?
 List of available goods with its quantity:
-WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 10]
+	WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 10]
 Another command?
 Orderline fulfilled
 2 Wooden Chair left in the warehouse
 Order 1 completed
 Another command?
 List of orders:
-	1: 1 - Danny Phantom (Amity Park) : completed
+	1 - Danny Phantom (Amity Park) : completed
 Another command?
 List of available goods with its quantity:
-WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 2]
+	WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 2]
 Another command?
 Order 1 already completed
 Another command?

@@ -2,6 +2,8 @@ package seedu.simplst.parsers;
 
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.MissingFlagException;
 import util.exceptions.WrongCommandException;
 
 public class FulfillParser extends CommandParser {
@@ -9,7 +11,7 @@ public class FulfillParser extends CommandParser {
         super(warehouse);
     }
 
-    protected void init_extract_params() {
+    protected void init_extract_params() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "oid/(?<oid>\\d*)";
