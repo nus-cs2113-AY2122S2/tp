@@ -38,12 +38,14 @@ title: Developer Guide
     * [Edit a group](#edit-a-group)
     * [View a group](#view-a-group)
     * [List all groups](#list-groups)
-* [Project Scope](#product-scope)
-    * [Target user profile](#target-user-profile)
-    * [Value proposition](#value-proposition)
-* [User stories](#user-stories)
-* [Non-functional requirements](#non-functional-requirements)
-* [Glossary](#glossary)
+* [Appendix: Requirements](#appendix-requirements)
+  * [Project Scope](#product-scope)
+      * [Target user profile](#target-user-profile)
+      * [Value proposition](#value-proposition)
+  * [User stories](#user-stories)
+  * [Non-functional requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Appendix: Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 We would like to acknowledge [Address Book (Level-3)](https://github.com/se-edu/addressbook-level3) for providing much
@@ -657,6 +659,7 @@ The general workflow of the `group /list` command is as follows:
 
 <hr>
 
+## Appendix: Requirements
 ## Product scope
 ### Target user profile
 * Budget conscious.
@@ -709,4 +712,112 @@ they engage in during the outings.
 | Command  | A Command is an object that performs a task that corresponds to the user input.                                                                                                                                                                                                                             |
 | Session  | A session represents a group outing that involves a list of participants and spans an arbitrary period of time containing one or more activities.                                                                                                                                                           |
 | Activity | An activity represents a single group activity and stores its name, costs and the name of the payer.                                                                                                                                                                                                        |
-| Group    | A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals without having to manually enter their details one by one when creating a session.                                                                                                    |
+| Group    | A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals without having to manually enter their details one by one when creating a session.                                                                                                    |                                                                                                                                                                |
+
+<hr>
+
+## Appendix: Instructions for Manual Testing
+This section includes instructions to test SplitLah manually.
+
+> **💡 Note:**
+> 
+> These instructions only provide a starting point for testers to work on; testers are free to do more _exploratory_ testing.
+
+### Overview
+* Launch and Shutdown
+* Session Testing
+* Activity Testing
+* Group Testing
+* Storage Testing
+
+### Launch and Shutdown
+
+### Session Testing
+<hr>
+
+#### Creating a Session
+> For details on the usage of `session /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create).
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application. <br>
+1. Test Command: `session /create /n Test1 /pl Person1 Person2 /d 10-04-2022` <br>
+   Expected: A success message is printed along with the details of the session as provided in the command.
+2. Test Command: `session /create /n Test2 /pl Person1 Person2 /d today`<br>
+   Expected: A success message is printed along with the details of the session as provided in the command.
+
+Test Scenario 2: There is a session named Test1 currently stored in the application. <br>
+1. Test Command: `session /create /n Test1 /pl Person1 Person2 /d 10-04-2022` <br>
+   Expected: An error message is printed indicating a session with the same name exists within the application.
+
+
+<hr>
+
+#### Deleting a Session
+> For details on the usage of `session /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-session-session-delete).
+<hr>
+
+#### Editing a Session
+> For details on the usage of `session /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-session-session-edit).
+<hr>
+
+#### Settling a Session
+> For details on the usage of `session /summary` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#settling-all-transactions-for-a-session-session-summary).
+<hr>
+
+#### Viewing a Session
+> For details on the usage of `session /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-session--session-view)
+<hr>
+
+#### Listing all Sessions
+> For details on the usage of `session /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-sessions-session-list)
+<hr>
+
+### Activity Testing
+<hr>
+
+#### Creating an Activity
+> For details on the usage of `activity /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create).
+<hr>
+
+#### Deleting an Activity
+> For details on the usage of `activity /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-an-activity-activity-delete).
+<hr>
+
+#### Editing an Activity
+> For details on the usage of `activity /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-an-activity-activity-edit).
+<hr>
+
+#### Viewing an Activity
+> For details on the usage of `activity /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-an-activity-activity-view).
+<hr>
+
+#### Listing all Activities
+> For details on the usage of `activity /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-activities-in-a-session-activity-list).
+<hr>
+
+### Group Testing
+<hr>
+
+#### Creating a Group
+> For details on the usage of `group /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create).
+<hr>
+
+#### Deleting a Group
+> For details on the usage of `group /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-group-group-delete).
+<hr>
+
+#### Editing a Group
+> For details on the usage of `group /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-group-group-edit).
+<hr>
+
+#### Viewing a Group
+> For details on the usage of `group /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-group-group-view).
+<hr>
+
+#### Listing all Groups
+> For details on the usage of `group /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-groups-group-list).
+<hr>
+
+### Storage Testing
+<hr>
