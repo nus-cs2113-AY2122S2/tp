@@ -115,7 +115,7 @@ public class HousekeeperList {
      * @param name Housekeeper to be remove.
      * @return Index of the housekeeper to be remove in the list.
      */
-    public int getHousekeeperRemove(String name) {
+    private int getHousekeeperRemove(String name) {
         int index = 0;
         int i = 0;
         String nameLowerCase = name.trim().toLowerCase();
@@ -129,7 +129,7 @@ public class HousekeeperList {
         return index;
     }
 
-    public void removeHousekeeper(int housekeeperToRemoveIndex) {
+    private void removeHousekeeper(int housekeeperToRemoveIndex) {
         getHousekeeperList().remove(housekeeperToRemoveIndex);
     }
 

@@ -6,12 +6,16 @@
 
 ### Add Housekeeper Command
 
-The objective of the `AddHousekeeperCommand` is to take in user input and spilt it into two parts which is the name and age of a Housekeeper. These details make up parts of the Housekeeper profile. With the name and age derived, this information will be added into a new Housekeeper object, which will be recorded into the list of housekeeper. The class diagram below depicts how the `AddHousekeeperCommand` interacts with other classes.
+The objective of the `AddHousekeeperCommand` is to take in user input and spilt it into two parts which is the name and 
+age of a Housekeeper. These details make up parts of the Housekeeper profile. With the name and age derived, 
+this information will be added into a new Housekeeper object, which will be recorded into the list of 
+housekeeper. The class diagram below depicts how the `AddHousekeeperCommand` interacts with other classes.
 
 PLEASE NOTE: This class diagram omits the details of some classes involved, like the `Duke`, `CommandParser` and `Command` class.
-![class](team/falicia_addHousekeeperCommand/classAddHousekeeperv2.jpg)
+![class](team/falicia_addHousekeeperCommand/classAddHousekeeperv3.jpg)
 
 Below is an example showing the usage of `AddHousekeeperCommand`.
+
 Step 1: Command given from the user: `add housekeeper susan / 33`. This command meant to add a new housekeeper called susan who is 33 years old.
 
 Step 2: The parse method from `CommandParser` will run parse to create `AddHousekeeperCommand` and would be return to Duke.
@@ -29,7 +33,40 @@ method.
 Step 6: `printHousekeeperNoted` will be called to print a confirmation to show that the housekeeper 
 has been entered into the list.
 
-Step 7. Housekeeper file storing all profile will be updated by calling method `save` from `HousekeeperFileManager`
+Step 7. Housekeeper file storing all profile will be updated by calling method `save` from `HousekeeperFileManager`.
+
+### Delete Housekeeper Command
+
+The objective of the `DeleteHousekeeperCommand` is to take in the housekeeper's name to be deleted from the list. The 
+housekeeper's profile would be completely removed from records in the `housekeeperList`. The class diagram below depicts how the `DeleteHousekeeperCommand` interacts with other classes.
+
+
+PLEASE NOTE: This class diagram omits the details of some classes involved, like the `Duke`, `CommandParser` and `Command` class.
+![Class Delete](team/falicia_deleteHousekeeperCommand/deleteHousekeeperClassv1.jpg)
+
+Below is an example showing the usage of `DeleteHousekeeperCommand`.
+
+Step 1: Command given from the user: `delete housekeeper susan`. This command meant to delete housekeeper called susan.
+
+Step 2: The parse method from `CommandParser` will run parse to create `DeleteHousekeeperCommand` and would be return to Duke.
+
+Step 3: The execute method in `DeleteHousekeeperCommand` will be performed. It would get the `housekeeperList` from `ListContainer`.
+
+Step 4: The `removeHousekeeperInList` method from `HousekeeperList` would be called to check if the housekeeper's name
+is in the `housekeeperList`.
+
+Step 5: `removeHousekeeperInList` will call `getHousekeeperRemove` method which will derive the index of the housekeeper
+recorded in the list. It would return an integer. Assume housekeeper `susan` is recorded in the list and is is in index `0`
+of the list.
+
+Step 6: With the index given, method `removeHousekeeper` will be called to remove housekeeper profile from the list.
+
+Step 7: User will then be able to see a message notifying them that the housekeeper `susan` has been deleted and the total
+number of housekeeper currently in working in the hotel.
+
+Step 8: To update the current `housekeeperList` into housekeeper file, `save` method from `HousekeeperFileManager`
+would be called.
+
 
 ### Add Item Command
 The objective of the AddItemCommand is to allow the user to add a new item to the list of items found within the inventory. It takes in the user input and spilt it up into two parts which are the name of the item to be added and its pax. These two information would then be used to create an Item Object and the Item Object would be saved into a list of items.
@@ -192,38 +229,49 @@ Step 8: Since a housekeeper has been added, `HousekeeperFileManager#save()` will
 `housekeeperlist` into housekeeper file.
 
 
-![Sequence](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandv3.jpg)
+![Sequence](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandv4.jpg)
 
 ### Delete Housekeeper feature 
+
+PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` class.
+
 The add housekeeper mechanism is facilitated by `DeleteHousekeeperCommand`. It extends command. Additionally, it 
 implements the following operations:
 * `DeleteHousekeeperCommand#execute()` — Executes the addition of new housekeeper into list
-
+* `HousekeeperList#hasNameAdded()` — Checks if name of housekeeper has been recorded
+* `HousekeeperList#removeHousekeeperInlist()`  — Checks if housekeeper name exist and remove them from the list
+* `HousekeeperList#getHousekeeperRemove()` — Derive the index of the housekeeper name in the list
+* `HousekeeperList#removeHouseekeeper()` — Given housekeeper's index in the list, remove housekeeper from the list
+* `Ui#printNoted()` — Prints noted line at the top of message
+* `Ui#printBottomLine` — Prints bottom line to denote end of message
+* `Ui#printMessage()` — Used to inform user total pax left in list as well as housekeeper's profile has already
+been deleted
+  
 Given below is an example usage scenario of how DeleteHousekeeperCommand behaves at each step.
 
 Step 1: User has already added a housekeeper called `susan`, age `33`. Sally is not keen in working as a housekeeper
 anymore and resigns. User has to delete the records of `susan` form `housekeeperlist`.
 
-Step 2: User give a delete housekeeper command `delete housekeeper susan` The input will derive the name parameter of 
+Step 2: User gives a delete housekeeper command `delete housekeeper susan` The input will derive the name parameter of 
 the delete command which is `susan`.
 
 Step 3:  The `DeleteHousekeeperCommand` will now contain `susan`.
 
 Step 4: The execute method will call `HousekeeperList#removeHousekeeperInlist()`. The remove method in housekeeper list
-will then call `HousekeeperList#hasNameAdded` where it would use streams to store the housekeeper name which matches
+will then call `HousekeeperList#hasNameAdded()` where it would use streams to store the housekeeper name which matches
 the name for the housekeeper to be deleted. Assuming `susan` exist, this method will then return true.
 
 Step 5: Since `susan` is recorded in the list, the program can proceed to delete `susan` from `housekeeperList`. 
 `HousekeeperList#getHousekeeperRemove()` will be called to derive the index of `susan` in the `housekeeperList`.
 Assuming `susan` is in the front of the list, the method will return `0`. This index will then be pass to 
-`HousekeeperList#removeHouseekeeper()` which removes `sally` from the list
+`HousekeeperList#removeHouseekeeper()` which removes `susan` from the list
 
 Step 6: It will then proceed to print noted message to inform user that the deletion has been completed by calling
 `Ui#printNoted()`, `Ui#printMessage()` and `Ui#printBottomLine`.
 
 Step 7: Changes in the list will be updated to file by calling `HousekeeperFileManager#save()` method.
 
-![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeper.jpg)
+![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperv2.jpg)
 
 
 ### Add Item Command
