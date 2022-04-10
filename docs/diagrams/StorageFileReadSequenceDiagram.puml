@@ -8,7 +8,7 @@ participant "storage:Storage" as Storage
 participant "String" as String <<class>>
 participant "File" as Files <<class>>
 
-group sd [asd]
+group sd Read dataPath into wholeJsonData: String
 activate Storage
     Storage -> Files: readAllLines(dataPath: Path)
     activate Files
@@ -16,7 +16,7 @@ activate Storage
 
     Storage -> String: join("\\n", jsonDataList: List<String>)
     activate String
-    note right: join is a core Java implementation.
+    note right: join is a core Java library functionality.
     return wholeJsonData: String
 
 end

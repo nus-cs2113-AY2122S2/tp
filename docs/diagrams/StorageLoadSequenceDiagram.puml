@@ -32,7 +32,7 @@ activate InvMgr
         destroy GsonManager
 
         ref over Storage
-            Read dataFile into
+            Read dataPath into
             wholeJsonData: String
         end ref
 

@@ -39,7 +39,7 @@ activate InvMgr
 
         ref over Storage
             Write serializedItems: String
-            into dataFile
+            into dataPath
         end ref
 
     return

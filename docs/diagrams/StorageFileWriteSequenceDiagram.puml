@@ -7,7 +7,7 @@ skinparam PackageBackgroundColor pink
 participant "storage:Storage" as Storage
 participant "File" as Files <<class>>
 
-group sd [asd]
+group sd Write serializedItems: String into dataPath
 activate Storage
     Storage -> Files: writeString(dataPath: Path, serializedItems: String, ...)
     note right: "..." are options \npassed to the\n writer object

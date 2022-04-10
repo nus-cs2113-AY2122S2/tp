@@ -219,7 +219,7 @@ The user starts by typing an `edit` command.
 
 **Error handling**
 
-Exceptions are thrown for the following:
+Exceptions are thrown/handled for the following:
 
 1. When the user enters a command without any name, description or quantity (missing all of `n/ q/ d/`). This is done in `EditCommandParser`.
 2. When the user sets the relative flag (`r/`) without any associated quantity. This is done in `EditCommandParser`.
@@ -247,7 +247,7 @@ The user starts by typing a `search` command.
 
 **Error handling**
 
-Exceptions are thrown for the following:
+Exceptions are thrown/handled for the following:
 
 1. When the user enters a command without any name or description (missing all of `n/ d/`). This is done in `SearchCommandParser`.
 
@@ -255,44 +255,72 @@ Exceptions are thrown for the following:
 
 #### Initialisation
 
-The following diagram shows the sequence diagram illustrating how `Storage` is initialised when the program first launches.
+**Normal function**
 
 ![StorageInitialisationSequenceDiagram](img/StorageInitialisationSequenceDiagram.png)
+
+The above diagrams show the sequence diagram when `Storage` is initialisd.
 
 1. `InvMgr` calls the `Storage(filePath)` constructor to create a `Storage` object. `filePath` is a `String` indicating where the data file to be loaded is found.
 2. `Storage(filePath)` will check if the file at `filePath` exists. If it does, it returns a `Path` object pointing to the data file.
 3. If not, the relevant files and subdirectories are created before returning the corresponding `Path` object.
 4. The new `Storage` object will have its `dataPath` attribute set to the `Path` object earlier, and its `filePath` attribute set to the `filePath` passed into the constructor.
 
+**Error handling**
+
+Exceptions are thrown/handled for the following:
+
+1. Input/output errors when creating the file needed at `dataPath`.
+2. When `Storage` is created with a `filePath` that does not represent a valid file path.
+
 #### Loading data
 
-The following diagram shows the sequence diagram illustrating how the data file is loaded. Typically, this is only run once when the program first launches.
+**Normal function**
 
 ![StorageLoadSequenceDiagram](img/StorageLoadSequenceDiagram.png)
+![StorageFileReadSequenceDiagram](img/StorageFileReadSequenceDiagram.png)
+
+The above diagrams show the sequence diagram when `load()` within Storage is called. 
+
+Typically, this is only run once when the program first launches.
 
 1. `InvMgr` calls the `load()` method of `storage`.
-2. `storage` initialises `Gson()` as `gson`, a library used to serialize and deserialize JSON objects into their relevant Java objects.
-3. `storage` will then load the contents of the file at `dataPath` into the `wholeJsonData` `String`. The exact details are not shown in the diagram.
-4. `storage` then calls the `fromJson(wholeJsonData)` method of `gson`.
-5. An `ArrayList<Item>` may be returned by `fromJson()` method. If it is not, a new empty list is created.
-6. `storage` returns `ArrayList<Item>` to `InvMgr`. This will be used to create the `ItemList`, but will not be shown here.
+2. `storage` initialises `GsonManager()`. It is part of the library used to serialise and deserialise JSON into Java objects.
+3. The `GsonManager` is configured to handle `BorrowRecord` object types. The project implements custom serialisation and deserialisation for `BorrowRecord`.
+4. A `Gson()` instance is created based on the configurations in `GsonManager()`. It is referred to as `gson`.
+5. `storage` will then load the contents of the file at `dataPath` into `wholeJsonData`.
+   1. Implemention details for this step is on the second diagram.
+6. `storage` then calls the `fromJson(wholeJsonData)` method of `gson`. This deserialises the JSON data into the respective Java objects.
+7. An `ArrayList<Item>` may be returned by `fromJson()` method. If it is not (e.g. parsing error), a new empty list is created.
+8. `storage` returns `ArrayList<Item>` to `InvMgr`. This will be used to create the `ItemList`.
+
+**Error handling**
+
+Exceptions are thrown/handled for the following:
+
+1. Parsing error while deserialising the JSON data.
+2. Input/output errors while reading the JSON file. 
 
 #### Saving data
 
 The following diagram shows the sequence diagram illustrating how the data file is saved. Typically, this is done after each `Command` is run.
 
 ![StorageSaveSequenceDiagram](img/StorageSaveSequenceDiagram.png)
+![StorageFileWriteSequenceDiagram](img/StorageFileWriteSequenceDiagram.png)
 
 1. `InvMgr` calls the `save(itemList)` method of `storage`.
-2. `storage` initialises `Gson()` as `gson`, a library used to serialize and deserialize JSON objects into their relevant Java objects.
-3. `storage` calls the `toJson(itemList)` method of `gson`. This returns a `String` named `serializedItems` which contains the JSON String representing `itemList`.
-4. `storage` then writes `serializedItems` to the file at `dataFile`.
+2. `storage` initialises `GsonManager()`. It is part of the library used to serialise and deserialise JSON into Java objects.
+3. The `GsonManager` is configured to handle `BorrowRecord` object types. The project implements custom serialisation and deserialisation for `BorrowRecord`.
+4. A `Gson()` instance is created based on the configurations in `GsonManager()`. It is referred to as `gson`.
+5. `storage` calls the `toJson(itemList)` method of `gson`. This returns a `String` named `serializedItems` which contains the JSON String representing `itemList`.
+6. `storage` then writes `serializedItems` to the file at `dataFile`.
+   1. Implemention details for this step is on the second diagram.
 
-#### Extra diagrams regarding file read/write
+**Error handling**
 
-![todo](todo)
+Exceptions are thrown/handled for the following:
 
-The above diagram todo
+1. Input/output errors while writing to the JSON file.
 
 ## Product scope
 ### Target user profile
