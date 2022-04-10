@@ -757,25 +757,59 @@ This section includes instructions to test SplitLah manually.
 **Test Cases:**
 
 Test Scenario 1: No sessions are currently stored in the application. <br>
-1. Test Command: `session /create /n Test1 /pl Person1 Person2 /d 10-04-2022` <br>
-   Expected: A success message should be printed along with the details of the session as provided in the command.
-2. Test Command: `session /create /n Test2 /pl Person1 Person2 /d today`<br>
-   Expected: A success message is printed along with the details of the session as provided in the command.
+1. Test Command: `session /create /n SessionTest1 /pl Alice Bob /d 10-04-2022` <br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command.
+2. Test Command: `session /create /n SessionTest2 /pl Alice Bob /d today`<br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command.
+3. Test Command: `session /create /n SessionTest3 /pl Alice Alice /d today` <br>
+   Expected: An error message should be printed, indicating that there are duplicates in the list of persons provided.
 
-Test Scenario 2: There is a session named Test1 currently stored in the application. <br>
-1. Test Command: `session /create /n Test1 /pl Person1 Person2 /d 10-04-2022` <br>
-   Expected: An error message is printed indicating a session with the same name exists within the application.
+Test Scenario 2: There is a session named SessionTest1 currently stored in the application. <br>
+1. Test Command: `session /create /n SessionTest3 /pl Alice Bob /d today` <br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command.
+2. Test Command: `session /create /n SessionTest1 /pl Alice Bob /d 10-04-2022` <br>
+   Expected: An error message should be printed, indicating that a session with the same name already exists within the application.
 
-
+Test Scenario 3: There is a group with unique identifier of 1 named GroupTest1 with Alice, Bob and Charlie stored in the application. There are no other groups stored apart from GroupTest1.<br>
+1. Test Command: `session /create /n SessionTest4 /gid 1 /d today`<br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command. 
+             The list of persons for the session would include the persons found in the group.
+2. Test Command: `session /create /n SessionTest5 /gid 1 /pl David /d today`<br>
+   Expected: A success message should be printed, indicating the details of the session as provided in the command.
+   The list of persons for the session includes Alice, Bob, Charlie and also David.
+3. Test Command: `session /create /n SessionTest6 /gid 2 /d today`<br>
+   Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
 <hr>
 
 #### Deleting a Session
 > For details on the usage of `session /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-session-session-delete).
 <hr>
 
+Test Scenario 1: There is a session with unique identifier of 1 stored in the application. <br>
+1. Test Command: `session /delete /sid 1`<br>
+   Expected: A success message should be printed, indicating that the session has been deleted.
+2. Test Command: `session /delete /sid 2`<br>
+   Expected: An error message should be printed, indicating that the specified session unique identifier cannot be found.
+3. Test Command; `session /delete /sid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+
 #### Editing a Session
 > For details on the usage of `session /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-session-session-edit).
 <hr>
+
+Test Scenario 1: A session has been created with a unique identifier of 1, named SessionTest1 with Alice and Bob involved on 10-04-2022.
+1. Test Command: `session /edit /sid 1 /n SessionTest1`<br>
+   Expected: A message should be printed, indicating that no edits were made.
+2. Test Command: `session /edit /sid 1 /n SessionTest10`<br>
+   Expected: A success message should be printed, indicating that the session was edited.
+3. Test Command: `session /edit /sid /pl Alice Bob Charlie`<br>
+   Expected: A success message should be printed, indicating that the session was edited.
+4. Test Command: `session /edit /sid 1 /pl Alice`<br>
+   Expected: An error message should be printed, indicating that there are missing persons from the original list of persons of the session.
+5. Test Command: `session /edit /sid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+6. Test Command: `session /edit /sid 1`<br>
+   Expected: An error message should be printed, indicating that no delimiters were found.
 
 #### Settling a Session
 > For details on the usage of `session /summary` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#settling-all-transactions-for-a-session-session-summary).
@@ -869,13 +903,47 @@ Test Scenario 2: At least 1 session exists in the application.
 > For details on the usage of `group /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create).
 <hr>
 
+Test Scenario 1: No groups are currently stored in the application. <br>
+1. Test Command: `group /create /n GroupTest1 /pl Alice Bob Charlie` <br>
+   Expected: A success message should be printed, indicating the details of the group as provided in the command.
+2. Test Command: `group /create /n GruopTest2 /pl Alice Bob Charlie David Mike`<br>
+   Expected: A success message should be printed, indicating the details of the group as provided in the command.
+3. Test Command: `group /create /n GruopTest3 /pl Alice Alice` <br>
+   Expected: An error message should be printed, indicating that there are duplicates in the list of persons provided.
+
+Test Scenario 2: There is a group named GroupTest1 currently stored in the application. <br>
+1. Test Command: `group /create /n GruopTest3 /pl Alice Bob` <br>
+   Expected: A success message should be printed, indicating the details of the group as provided in the command.
+2. Test Command: `group /create /n GroupTest1 /pl Alice Bob Charlie` <br>
+   Expected: An error message should be printed, indicating that a group with the same name already exists within the application.
+
 #### Deleting a Group
 > For details on the usage of `group /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-group-group-delete).
 <hr>
 
+Test Scenario 1: There is a group with unique identifier of 1 stored in the application. <br>
+1. Test Command: `group /delete /gid 1`<br>
+   Expected: A success message should be printed, indicating that the group has been deleted.
+2. Test Command: `group /delete /gid 2`<br>
+   Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
+3. Test Command; `group /delete /gid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
+
 #### Editing a Group
 > For details on the usage of `group /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-group-group-edit).
 <hr>
+
+Test Scenario 1: A group has been created with a unique identifier of 1, named GroupTest1 with Alice, Bob and Charlie.
+1. Test Command: `group /edit /gid 1 /n GroupTest1`<br>
+   Expected: A message should be printed, indicating that no edits were made.
+2. Test Command: `group /edit /gid 1 /n GroupTest10`<br>
+   Expected: A success message should be printed, indicating that the group was edited.
+3. Test Command: `group /edit /gid /pl Alice Bob Charlie`<br>
+   Expected: A success message should be printed, indicating that the group was edited.
+4. Test Command: `group /edit /gid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
+5. Test Command: `group /edit /gid 1`<br>
+   Expected: An error message should be printed, indicating that no delimiters were found.
 
 #### Viewing a Group
 > For details on the usage of `group /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-group-group-view).
@@ -887,3 +955,15 @@ Test Scenario 2: At least 1 session exists in the application.
 
 ### Storage Testing
 <hr>
+
+Test Scenario 1: splitlah.jar is placed in a location where read and write permissions are given.
+1. Test: No save file was found. <br>
+   Expected: A new save file should be created when the application launches.
+2. Test: Save file was corrupted. <br>
+   Expected: The application should detect it as a corrupted file and create a new save file.
+
+Test Scenario 2: splitlah.jar is placed in a location where read and write permissions are not given. 
+* Test: No save file was found.<br>
+   Expected: An error message should be printed indicating no save file was created and changes made in the run time of the application is not saved.
+
+
