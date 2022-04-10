@@ -360,10 +360,15 @@ Show pending tasks:
 Deletes a bunch of tasks with different levels of scope, saving the trouble of deleting them one by one.
 
 Format:
-- To clear all the tasks in your list: `clear all`
-- To clear all the tasks that have expired `DO_DATE`: `clear expired`
-- To clear all the tasks that have been marked as completed: `clear done`
+- `clear all`
+- `clear expired`
+- `clear done`
 
+| Parameters  | Description                                                                   | Accepted inputs | Optional |
+|:-----------:|-------------------------------------------------------------------------------|-----------------|----------|
+|     all     | Clears all of the existing tasks                                              | N.A.            | Yes      |
+|   expired   | Clears all the tasks that have expired, i.e. tasks whose `DO_DATE` has passed | N.A.            | Yes      |
+|    done     | Clears all  tasks that have been marked as completed                          | N.A.            | Yes      |
 
 ### Saving your tasks
 
