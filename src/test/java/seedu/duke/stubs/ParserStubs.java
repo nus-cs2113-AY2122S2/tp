@@ -1,6 +1,11 @@
 package seedu.duke.stubs;
 
-import seedu.duke.commands.*;
+import seedu.duke.commands.AddCommand;
+import seedu.duke.commands.DescCommand;
+import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.EditCommand;
+import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.ReturnCommand;
 import seedu.duke.data.Item;
 
 import java.time.LocalDate;

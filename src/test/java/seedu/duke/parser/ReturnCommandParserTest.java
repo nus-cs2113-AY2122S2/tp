@@ -27,7 +27,7 @@ public class ReturnCommandParserTest {
         String testInputFormat = " %s%s";
         String testInput = String.format(testInputFormat,
                 CliSyntax.PREFIX_ITEM_INDEX.getPrefix(), ParserStubs.ITEM_INDEX);
-         assertParseSuccess(parser, testInput, ParserStubs.RETURNCOMMAND);
+        assertParseSuccess(parser, testInput, ParserStubs.RETURNCOMMAND);
     }
 
     @Test
