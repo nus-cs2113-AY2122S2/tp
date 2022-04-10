@@ -103,6 +103,8 @@ public class FileManager {
     /**
      * Constructs a FileManager object. While instantiating, Paths objects of the various URIs
      * are also instantiated.
+     *
+     * @param planList An instance of a PlanList class.
      */
     public FileManager(PlanList planList) {
         String workingDirectory = System.getProperty(PROPERTY_USER_WORKING_DIRECTORY);
