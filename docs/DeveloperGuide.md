@@ -19,10 +19,10 @@
    <br>6.3. [Grade Feature](#63-grade-feature)
    <br>6.4. [GPA Feature](#64-gpa-feature)
    <br>6.5. [Storage Feature](#65-storage-feature)
-8. [User Stories](#7-user-stories)
-9. [Non-Functional Requirements](#8-non-functional-requirements)
-10. [Glossary](#9-glossary)
-11. [Instructions for manual testing](#10-instructions-for-manual-testing)
+7. [User Stories](#7-user-stories)
+8. [Non-Functional Requirements](#8-non-functional-requirements)
+9. [Glossary](#9-glossary)
+10. [Instructions for manual testing](#10-instructions-for-manual-testing)
 
 
 ## 1. Introduction
