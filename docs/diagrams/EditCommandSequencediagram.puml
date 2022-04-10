@@ -11,7 +11,7 @@ Participant "ui:Ui" as Ui
 Participant "placeholderItem" as placeholderItem
 Participant "Item" as ItemClass <<class>>
 
-[-> EditCommand: execute(itemList:ItemList, ui:Ui)
+-> EditCommand: execute(itemList:ItemList, ui:Ui)
 activate EditCommand
     EditCommand -> ItemList: getItem(index:int)
     activate ItemList

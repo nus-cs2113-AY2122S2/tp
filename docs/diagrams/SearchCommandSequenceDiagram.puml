@@ -9,7 +9,7 @@ Participant ":SearchCommand" as SearchCommand
 Participant "itemList:ItemList" as ItemList
 Participant "ui:Ui" as Ui
 
-[-> SearchCommand: execute(itemList:ItemList, ui:Ui)
+-> SearchCommand: execute(itemList:ItemList, ui:Ui)
 activate SearchCommand
 
     SearchCommand -> Ui: showMessages(message:String)

@@ -6,33 +6,12 @@ skinparam sequenceStereotypeFontColor red
 skinparam sequenceStereotypeFontStyle bold
 
 participant ":InvMgr" as InvMgr
-participant "storage:Storage" as Storage
 participant "ui:Ui" as Ui
-participant "itemList:ItemList" as ItemList
 participant ":Parser" as Parser <<class>>
 participant ":Command" as Command
+participant "storage:Storage" as Storage
 
--> InvMgr: main()
 activate InvMgr
-    create Ui
-    InvMgr -> Ui: Ui()
-    activate Ui
-    return
-
-    create Storage
-    InvMgr -> Storage: Storage(filePath)
-    activate Storage
-    return
-
-    InvMgr -> Storage: load()
-    activate Storage
-    return list: ArrayList<Item>
-
-    create ItemList
-    InvMgr -> ItemList: ItemList(list)
-    activate ItemList
-    return
-
     loop until ExitCommand
         InvMgr -> Ui: getRawUserInput()
         activate Ui
@@ -46,7 +25,7 @@ activate InvMgr
         activate Command
         return
 
-        InvMgr -> Storage: save(itemList)
+        InvMgr -> Storage: save(itemList: ItemList)
         activate Storage
         return
     end

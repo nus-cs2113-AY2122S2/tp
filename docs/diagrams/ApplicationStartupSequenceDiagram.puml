@@ -1,0 +1,34 @@
+@startuml
+
+hide footbox
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+
+participant ":InvMgr" as InvMgr
+participant "storage:Storage" as Storage
+participant "ui:Ui" as Ui
+participant "itemList:ItemList" as ItemList
+
+-> InvMgr: main()
+activate InvMgr
+    create Ui
+    InvMgr -> Ui: Ui()
+    activate Ui
+    return
+
+    create Storage
+    InvMgr -> Storage: Storage(filePath)
+    activate Storage
+    return
+
+    InvMgr -> Storage: load()
+    activate Storage
+    return list: ArrayList<Item>
+
+    create ItemList
+    InvMgr -> ItemList: ItemList(list)
+    activate ItemList
+    return
+
+@enduml
