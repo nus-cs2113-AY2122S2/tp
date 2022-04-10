@@ -205,6 +205,7 @@ public class UI {
      * Prints a message when a workout has been updated.
      * Shows updated workout.
      *
+     * @param oldWorkout The original workout in the list.
      * @param updatedWorkout The workout that is updated.
      */
     public void printUpdateWorkoutMessage(String oldWorkout, Workout updatedWorkout) {

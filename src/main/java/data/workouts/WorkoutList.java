@@ -225,6 +225,7 @@ public class WorkoutList {
      * will indicate the workout index number to delete in the workout list.
      *
      * @param userArgument The argument entered by user, that is, the workout index number to delete.
+     * @return deletedWorkout The workout object that has been deleted.
      * @throws NumberFormatException If workout index number could not be parsed into an integer.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
      * @throws InvalidWorkoutException        If workout index number to delete is out of range.
