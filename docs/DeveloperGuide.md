@@ -778,6 +778,29 @@ Test Scenario 2: There is a session named Test1 currently stored in the applicat
 
 #### Creating an Activity
 > For details on the usage of `activity /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create).
+
+**Test Cases:**
+
+Test Scenario 1: The cost is split evenly amongst those who participated in the activity. <br>
+1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /co 20` <br>
+   Expected: A success message is printed along with the details of the activity as provided in the command. Each person's cost owed is $10.
+
+Test Scenario 2: Each person who participated in the activity incurred different costs. <br>
+1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /cl 5 10` <br>
+   Expected: A success message is printed along with the details of the activity as provided in the command. PersonOne's cost owed is $5 while PersonTwo's cost owed is $10.
+
+Test Scenario 3: There was GST and Service Charge involved for an activity. <br>
+1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /co 20 /gst 7 /sc 10` <br>
+   Expected: A success message is printed along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
+2. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /cl 5 10 /gst 7 /sc 10` <br>
+   Expected: A success message is printed along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
+
+Test Scenario 4: The person who paid or the persons involved in the activity were not part of the session
+1. Test Command: `activity /create /sid 1 /n Test1 /p PersonThree /i PersonOne PersonTwo /co 20 /gst 7 /sc 10` <br>
+   Expected: An error message is printed indicating that a person specified was not found in the particular session.
+2. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonThree /cl 5 10 /gst 7 /sc 10` <br>
+   Expected: An error message is printed indicating that a person specified was not found in the particular session.
+
 <hr>
 
 #### Deleting an Activity
