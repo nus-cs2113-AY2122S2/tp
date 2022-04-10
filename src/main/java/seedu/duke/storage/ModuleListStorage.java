@@ -32,9 +32,9 @@ public class ModuleListStorage extends ListStorage<Module> {
 
     /**
      * Deserialises the ModuleList stored in the json file.
-     * @param path json file path
-     * @return deserialised ModuleList object
-     * @throws ModHappyException if an error was encountered during reading
+     * @param path The json file path
+     * @return Deserialised ModuleList object
+     * @throws ModHappyException If an error was encountered during reading
      */
     @Override
     public ArrayList<Module> loadData(String path) throws ModHappyException {

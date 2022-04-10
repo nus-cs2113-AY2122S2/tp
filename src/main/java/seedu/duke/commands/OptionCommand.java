@@ -18,6 +18,14 @@ public class OptionCommand extends Command {
     private String newValue = null;
 
     //@@author heekit73098
+
+    /**
+     * Constructs a new OptionCommand object.
+     * @param configurationGroupWord The configuration word inputted
+     * @param newValue The value of the configuration to be set
+     * @throws ModHappyException If the configuration word is unknown,
+     *                           or if the value is unsupported in the configuration word group
+     */
     public OptionCommand(String configurationGroupWord, String newValue) throws ModHappyException {
         if (!Objects.isNull(configurationGroupWord)) {
             try {
@@ -39,6 +47,13 @@ public class OptionCommand extends Command {
     }
 
     //@@author Ch40gRv1-Mu
+
+    /**
+     * Sets the new value or display help for the command depending on the command entered.
+     * @param moduleList The list of modules
+     * @param configuration The configuration settings of the application
+     * @return A new {@code CommandResult} with the result string
+     */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) {
         // enter "option" to check the list of configuration setting

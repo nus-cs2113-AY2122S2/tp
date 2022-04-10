@@ -37,6 +37,12 @@ public class OptionParser extends Parser {
         throw new GeneralParseException();
     }
 
+    /**
+     * Parses the user input and extracts the parameters based on the command format.
+     * @param userInput User input of the configuration word and its value to be set
+     * @return A new {@code OptionCommand} object to view or set an option
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);

@@ -51,11 +51,11 @@ public class TagParser extends Parser {
      * Determines the error made by the user in the tag command based on its compulsory parameters.
      * It first checks if the error is in the tag operation, then task number, then tag name.
      * If there are no errors in the above, it means that there is an error due to the module code.
-     * @throws InvalidTagOperationException if the tag is missing or is not add nor del
-     * @throws MissingNumberException if the task number is missing
-     * @throws InvalidNumberException if the task number is not in a positive integer format
-     * @throws MissingCompulsoryParameterException if the tag name is missing
-     * @throws InvalidCompulsoryParameterException if the tag name is not made up of all word characters or
+     * @throws InvalidTagOperationException If the tag is missing or is not add nor del
+     * @throws MissingNumberException If the task number is missing
+     * @throws InvalidNumberException If the task number is not in a positive integer format
+     * @throws MissingCompulsoryParameterException If the tag name is missing
+     * @throws InvalidCompulsoryParameterException If the tag name is not made up of all word characters or
      *                                             if the module code is not made up of all word characters
      */
     @Override
@@ -70,12 +70,12 @@ public class TagParser extends Parser {
     /**
      * Checks if the error is in the tag operation.
      * Checks if the tag operation is present and if it is either add or del.
-     * @throws InvalidTagOperationException if the tag operation is missing or if it is neither add nor del
+     * @throws InvalidTagOperationException If the tag operation is missing or if it is neither add nor del
      */
     private void determineErrorInTagOperation() throws InvalidTagOperationException {
         String tagOperation;
         try {
-            tagOperation = userInput.split(SPACE)[ZEROTH_INDEX];
+            tagOperation = userInput.split(WHITESPACES)[ZEROTH_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTagOperationException();
         }
@@ -87,13 +87,13 @@ public class TagParser extends Parser {
     /**
      * Checks if the error is in task number.
      * Checks if the task number is present or if the task number is in a positive integer format.
-     * @throws MissingNumberException if the task number is missing
-     * @throws InvalidNumberException if the task number is not in a positive integer format
+     * @throws MissingNumberException If the task number is missing
+     * @throws InvalidNumberException If the task number is not in a positive integer format
      */
     private void determineErrorInTaskNumber() throws MissingNumberException, InvalidNumberException {
         String taskNumber;
         try {
-            taskNumber = userInput.split(SPACE)[FIRST_INDEX];
+            taskNumber = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }
@@ -105,17 +105,17 @@ public class TagParser extends Parser {
     /**
      * Checks if the error is in the tag name.
      * Check if the tag name is present or if it is made up of only word characters.
-     * @throws MissingCompulsoryParameterException if the tag name is missing
-     * @throws InvalidCompulsoryParameterException if the tag name is not made up of only word characters
+     * @throws MissingCompulsoryParameterException If the tag name is missing
+     * @throws InvalidCompulsoryParameterException If the tag name is not made up of only word characters
      */
     private void determineErrorInTagName() throws MissingCompulsoryParameterException,
             InvalidCompulsoryParameterException {
         String tagName;
         try {
             if (userInput.contains(TASK_MODULE_FLAG)) {
-                tagName = userInput.split(SPACE)[FOURTH_INDEX];
+                tagName = userInput.split(WHITESPACES)[FOURTH_INDEX];
             } else {
-                tagName = userInput.split(SPACE)[SECOND_INDEX];
+                tagName = userInput.split(WHITESPACES)[SECOND_INDEX];
             }
         } catch (IndexOutOfBoundsException e) {
             throw new MissingCompulsoryParameterException(TAG_NAME_STR);
@@ -128,15 +128,21 @@ public class TagParser extends Parser {
     /**
      * Throws exception that the error is in the module code field as the error is not present in the other compulsory
      * parameters.
-     * @throws InvalidCompulsoryParameterException to show that the error is in the module code
+     * @throws InvalidCompulsoryParameterException To show that the error is in the module code
      */
     private void assertErrorInModuleCode() throws InvalidCompulsoryParameterException {
         assert (userInput.contains(TASK_MODULE_FLAG));
-        String moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(SPACE)[ZEROTH_INDEX];
+        String moduleCode = userInput.split(TASK_MODULE_FLAG)[FIRST_INDEX].split(WHITESPACES)[ZEROTH_INDEX];
         throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
     }
 
     //@@author ngys117
+    /**
+     * Parses the user input and extracts the parameters based on the command format.
+     * @param userInput User input of the task number, task module and the tag name
+     * @return A new {@code TagCommand} object to add/delete a tag to/from a task
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;

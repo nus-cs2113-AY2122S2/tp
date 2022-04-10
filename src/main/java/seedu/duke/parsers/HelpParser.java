@@ -35,6 +35,12 @@ public class HelpParser extends Parser {
     }
 
     //@@author ngys117
+    /**
+     * Parses the user input and extracts the parameters based on the command format.
+     * @param userInput User input of the command to get a help message
+     * @return A new {@code HelpCommand} object to show a help message
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);
