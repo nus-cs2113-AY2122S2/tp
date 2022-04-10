@@ -33,7 +33,7 @@ public class AddAvailabilityTest {
     }
 
     @Test
-    public void commandParser_addAvailability_Success() throws HotelLiteManagerException, IOException {
+    public void commandParser_addAvailability_success() throws HotelLiteManagerException, IOException {
         AddAvailabilityCommand addAvailabilityCommand =
                 new AddAvailabilityCommand("sally / 1,2");
         addAvailabilityCommand.execute(listContainer, ui);

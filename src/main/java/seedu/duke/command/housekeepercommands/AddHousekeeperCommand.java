@@ -175,7 +175,7 @@ public class AddHousekeeperCommand extends Command {
      * @param listContainer Containing the list of information.
      * @throws IOException Write to file failed.
      */
-    public void writeHousekeeperNameToFile(ListContainer listContainer) throws IOException {
+    public void writeHousekeeperToFile(ListContainer listContainer) throws IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
         housekeeperFileManager.save(housekeeperList);

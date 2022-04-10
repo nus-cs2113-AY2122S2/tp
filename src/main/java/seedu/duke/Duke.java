@@ -35,13 +35,16 @@ public class Duke {
     private void writeHousekeeperListsToFile(Command command, ListContainer listContainer) throws IOException {
         if (command instanceof AddHousekeeperCommand) {
             AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command;
-            addHousekeeperCommand.writeHousekeeperNameToFile(listContainer);
+            addHousekeeperCommand.writeHousekeeperToFile(listContainer);
         } else if (command instanceof AddAvailabilityCommand) {
             AddAvailabilityCommand addAvailabilityCommand = (AddAvailabilityCommand) command;
             addAvailabilityCommand.writeAvailabilityToFile(listContainer);
         } else if (command instanceof AgeIncreaseCommand) {
             AgeIncreaseCommand ageIncreaseCommand = (AgeIncreaseCommand) command;
             ageIncreaseCommand.writeAgeIncreaseToFile(listContainer);
+        } else if (command instanceof DeleteHousekeeperCommand) {
+            DeleteHousekeeperCommand deleteHousekeeperCommand = (DeleteHousekeeperCommand) command;
+            deleteHousekeeperCommand.writeHousekeeperToFile(listContainer);
         }
     }
 

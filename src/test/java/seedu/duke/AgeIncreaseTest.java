@@ -35,7 +35,7 @@ public class AgeIncreaseTest {
     }
 
     @Test
-    public void commandParser_addAvailability_Success() throws HotelLiteManagerException, IOException {
+    public void commandParser_addAvailability_success() throws HotelLiteManagerException, IOException {
         AgeIncreaseCommand ageIncreaseCommand =
                 new AgeIncreaseCommand("is a new year");
         ageIncreaseCommand.execute(listContainer, ui);
@@ -47,7 +47,6 @@ public class AgeIncreaseTest {
         ArrayList<Housekeeper> exceedAgeLimit = housekeeperList.getHousekeeperExceedValidAgeList();
         assertEquals("Man", exceedAgeLimit.get(INDEX_OF_MAN_EXCEEDING_AGE).getName());
     }
-
 
     @Test
     public void extraWordIncreaseAgeCommand_exceptionThrown() {
