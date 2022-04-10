@@ -45,7 +45,7 @@ public class Duke {
         } else if (command instanceof DeleteHousekeeperCommand) {
             DeleteHousekeeperCommand deleteHousekeeperCommand = (DeleteHousekeeperCommand) command;
             deleteHousekeeperCommand.writeHousekeeperToFile(listContainer);
-        }
+        } 
     }
 
 
