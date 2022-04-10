@@ -39,9 +39,9 @@ public class ModuleParser {
     public static final String INVALID_DATE_MESSAGE = "You have entered an invalid date";
     public static final String INVALID_WEEKDAY_MESSAGE = "You have entered an invalid day of the week";
     public static final String WRONG_TIME_FORMAT_MESSAGE = "Accepted module time slot input is"
-            + " a valid timeslot of type HH:MMam/pm - HH:MMam/pm";
+            + " a valid timeslot of type HH:MM am/pm - HH:MM am/pm";
 
-    private static final String TIME_FORMAT_WITH_AMPM = "h:mma";
+    private static final String TIME_FORMAT_WITH_AMPM = "h:mm a";
     private static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder()
             .appendPattern(TIME_FORMAT_WITH_AMPM)
             .toFormatter();
@@ -52,7 +52,7 @@ public class ModuleParser {
      * Add module messages.
      */
     private static final String ADD_WRONG_FORMAT_MESSAGE = "Please ensure that your input follows the form:";
-    private static final String ADD_SAMPLE_FORMAT_MESSAGE = "add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm";
+    private static final String ADD_SAMPLE_FORMAT_MESSAGE = "add m/CS2113 c/lec d/Thursday t/2:00 pm-4:00 pm";
     private static final String LOGGER_WRONG_ADD_FORMAT = "Wrong format for add module";
     private static final String LOGGER_MISSING_DAY_IN_ADD = "Day was not specified for add module";
     private static final String LOGGER_MISSING_CAT_IN_ADD = "Category was not specified for add module";
@@ -375,9 +375,13 @@ public class ModuleParser {
     // Checks if given start time is earlier than given end time in a String timeSlot
     private String checkTimeStartEarlier(String timeSlot) throws ModuleTimeException {
         try {
+            timeSlot = timeSlot.replace(" - ","-");
             String[] splitTimeArray = timeSlot.split("-", 2);
-            LocalTime startTime = LocalTime.parse(splitTimeArray[0].replaceAll(" ", ""), TIME_FORMATTER);
-            LocalTime endTime = LocalTime.parse(splitTimeArray[1].replaceAll(" ", ""), TIME_FORMATTER);
+            splitTimeArray[0] = splitTimeArray[0].trim();
+            splitTimeArray[1] = splitTimeArray[1].trim();
+
+            LocalTime startTime = LocalTime.parse(splitTimeArray[0], TIME_FORMATTER);
+            LocalTime endTime = LocalTime.parse(splitTimeArray[1], TIME_FORMATTER);
 
             if (endTime.compareTo(startTime) > 0) {
                 return timeSlot;
@@ -387,7 +391,7 @@ public class ModuleParser {
                 throw new ModuleTimeException(INVALID_GREATER_START_TIME_MESSAGE);
             }
         } catch (DateTimeParseException e) {
-            throw new ModuleTimeException("Parse error for time");
+            throw new ModuleTimeException(WRONG_TIME_FORMAT_MESSAGE);
         }
     }
 

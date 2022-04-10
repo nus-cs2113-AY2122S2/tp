@@ -51,7 +51,7 @@ public class ModuleCalendarReader {
             + System.lineSeparator() + "Please ensure that the ics from nusmods.com has not been edited.";
     private static final String INCORRECT_DAY_ERROR_MESSAGE = "Not a day of the week!";
     private static final String DATE_WAS_NULL_MESSAGE = "DateStart was found to be null";
-    private static final String TIME_FORMAT_WITH_AMPM = "h:mma";
+    private static final String TIME_FORMAT_WITH_AMPM = "h:mm a";
     private static final String STANDARD_DATE_FORMAT = "dd-MM-yyyy";
     private static final String ICS_COMPONENT_SUMMARY = "SUMMARY";
     private static final String ICS_COMPONENT_START_DATE = "DTSTART";

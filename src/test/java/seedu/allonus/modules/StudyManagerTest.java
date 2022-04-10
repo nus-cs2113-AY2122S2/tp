@@ -48,9 +48,9 @@ public class StudyManagerTest {
      */
     @BeforeAll
     public void setUp() {
-        cs2113 = new Module("CS2113", "Lecture", "Friday", "4:00pm-6:00pm");
-        cs3244 = new Module("CS3244", "Tutorial", "Monday", "2:00pm-3:00pm");
-        ee4204 = new Module("EE4204", "Exam", "Monday", "10:00am-12:00pm");
+        cs2113 = new Module("CS2113", "Lecture", "Friday", "4:00 pm-6:00 pm");
+        cs3244 = new Module("CS3244", "Tutorial", "Monday", "2:00 pm-3:00 pm");
+        ee4204 = new Module("EE4204", "Exam", "Monday", "10:00 am-12:00 pm");
 
         testList.add(cs2113);
         testList.add(cs3244);
@@ -77,9 +77,9 @@ public class StudyManagerTest {
     public void testAddModule() {
 
         studyManager.getModulesList().clear();
-        String userInputCs2113 = "add m/CS2113 c/lec d/Friday t/4:00pm-6:00pm";
-        String userInputCs3244 = "add m/CS3244 c/tut d/Monday t/2:00pm-3:00pm";
-        String userInputEe4204 = "add m/EE4204 c/exam d/Monday t/10:00am-12:00pm";
+        String userInputCs2113 = "add m/CS2113 c/lec d/Friday t/4:00 pm-6:00 pm";
+        String userInputCs3244 = "add m/CS3244 c/tut d/Monday t/2:00 pm-3:00 pm";
+        String userInputEe4204 = "add m/EE4204 c/exam d/Monday t/10:00 am-12:00 pm";
 
         studyManager.addModule(userInputCs2113, false);
         studyManager.addModule(userInputCs3244, false);
@@ -118,9 +118,9 @@ public class StudyManagerTest {
         outContent.reset();
         studyManager.listModules();
         String outputList = DIVIDER + "Here are the modules in your schedule:" + System.lineSeparator() + DIVIDER
-                + "1: [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm" + System.lineSeparator()
-                + "2: [Module] CS3244 Tutorial: Monday, 2:00pm-3:00pm" + System.lineSeparator()
-                + "3: [Module] EE4204 Exam: Monday, 10:00am-12:00pm" + System.lineSeparator();
+                + "1: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm" + System.lineSeparator()
+                + "2: [Module] CS3244 Tutorial: Monday, 2:00 pm-3:00 pm" + System.lineSeparator()
+                + "3: [Module] EE4204 Exam: Monday, 10:00 am-12:00 pm" + System.lineSeparator();
         assertEquals(outputList,outContent.toString());
     }
 
@@ -133,15 +133,15 @@ public class StudyManagerTest {
         studyManager.findModule("find CS3244");
         String outputFind = DIVIDER + "Here are the matching modules in your list:" + System.lineSeparator()
                 + DIVIDER
-                + "1: [Module] CS3244 Tutorial: Monday, 2:00pm-3:00pm" + System.lineSeparator();
+                + "1: [Module] CS3244 Tutorial: Monday, 2:00 pm-3:00 pm" + System.lineSeparator();
         assertEquals(outputFind,outContent.toString());
 
         outContent.reset();
         studyManager.findModule("find cs");
         outputFind = DIVIDER + "Here are the matching modules in your list:" + System.lineSeparator()
                 + DIVIDER
-                + "1: [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm" + System.lineSeparator()
-                + "2: [Module] CS3244 Tutorial: Monday, 2:00pm-3:00pm" + System.lineSeparator();
+                + "1: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm" + System.lineSeparator()
+                + "2: [Module] CS3244 Tutorial: Monday, 2:00 pm-3:00 pm" + System.lineSeparator();
         assertEquals(outputFind,outContent.toString());
     }
 
@@ -154,7 +154,7 @@ public class StudyManagerTest {
 
         TextUi ui = new TextUi();
         Module editCheckerModule = new Module("CS2113", "Lecture",
-                "Friday", "4:00pm-6:00pm");
+                "Friday", "4:00 pm-6:00 pm");
 
         // Edit module code check
         String editCodeInput = "m/GEH1049";
@@ -176,9 +176,9 @@ public class StudyManagerTest {
         assertEquals(editCheckerModule.toString(), moduleToEdit.toString());
 
         // Edit module time check
-        String editTimeInput = "t/11:00am-9:00pm";
+        String editTimeInput = "t/11:00 am-9:00 pm";
         studyManager.editModuleTime(moduleToEdit, editTimeInput);
-        editCheckerModule.setTimeSlot("11:00am-9:00pm");
+        editCheckerModule.setTimeSlot("11:00 am-9:00 pm");
         assertEquals(editCheckerModule.toString(), moduleToEdit.toString());
     }
 
@@ -188,7 +188,7 @@ public class StudyManagerTest {
         String outputMessage = "Category has to be one of lec, tut, lab or exam" + System.lineSeparator();
         outputMessage = initializeWithDivider(outputMessage);
         Module editCheckerModule = new Module("CS2113", "Lecture",
-                "Friday", "4:00pm-6:00pm");
+                "Friday", "4:00 pm-6:00 pm");
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleCategory(moduleToEdit, "Invalid category");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
@@ -201,7 +201,7 @@ public class StudyManagerTest {
         String outputMessage = "Your module code must be an alphanumeric parameter!" + System.lineSeparator();
         outputMessage = initializeWithDivider(outputMessage);
         Module editCheckerModule = new Module("CS2113", "Lecture",
-                "Friday", "4:00pm-6:00pm");
+                "Friday", "4:00 pm-6:00 pm");
         Module moduleToEdit = studyManager.getModulesList().get(0);
         studyManager.editModuleCode(moduleToEdit, "[]2e4234.`");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
@@ -211,10 +211,10 @@ public class StudyManagerTest {
     @Test
     public void testEditDayError() {
         Module editCheckerModule = new Module("CS2113", "Lecture",
-                "Friday", "4:00pm-6:00pm");
+                "Friday", "4:00 pm-6:00 pm");
 
         outContent.reset();
-        String module = "[Module] GEH1049 Tutorial: Sunday, 11:00am-9:00pm";
+        String module = "[Module] GEH1049 Tutorial: Sunday, 11:00 am-9:00 pm";
         String outputMessage = DIVIDER
                 + "You have entered an invalid day of the week" + System.lineSeparator()
                 + DIVIDER + DIVIDER
@@ -241,13 +241,13 @@ public class StudyManagerTest {
     @Test
     public void testEditTimeError() {
         outContent.reset();
-        String outputMessage = "Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm"
+        String outputMessage = "Accepted module time slot input is a valid timeslot of type HH:MM am/pm - HH:MM am/pm"
                 + System.lineSeparator();
         outputMessage = initializeWithDivider(outputMessage);
         Module editCheckerModule = new Module("CS2113", "Lecture",
-                "Friday", "4:00pm-6:00pm");
+                "Friday", "4:00 pm-6:00 pm");
         Module moduleToEdit = studyManager.getModulesList().get(0);
-        studyManager.editModuleTime(moduleToEdit, "2pm-4pm");
+        studyManager.editModuleTime(moduleToEdit, "2 pm-4 pm");
         assertEquals(moduleToEdit.toString(), editCheckerModule.toString());
         assertEquals(outputMessage, outContent.toString());
 
@@ -270,22 +270,22 @@ public class StudyManagerTest {
                 + System.lineSeparator() + "I have found these modules from your ics file:"
                 + System.lineSeparator() + System.lineSeparator()
                 + DIVIDER
-                + "1: [Module] EG2401A Lecture: Wednesday, 6:00pm-8:00pm" + System.lineSeparator()
-                + "2: [Module] EG2401A Tutorial: Friday, 9:00am-10:00am" + System.lineSeparator()
-                + "3: [Module] CS2113 Lecture: Friday, 4:00pm-6:00pm" + System.lineSeparator()
-                + "4: [Module] CS2113 Tutorial: Friday, 10:00am-11:00am" + System.lineSeparator()
-                + "5: [Module] CS2113 Exam: 05-05-2022, 1:00pm-3:00pm" + System.lineSeparator()
-                + "6: [Module] CG2271 Tutorial: Wednesday, 4:00pm-5:00pm" + System.lineSeparator()
-                + "7: [Module] CG2271 Lecture: Wednesday, 10:00am-12:00pm" + System.lineSeparator()
-                + "8: [Module] CG2271 Laboratory: Friday, 2:00pm-4:00pm" + System.lineSeparator()
-                + "9: [Module] CG2271 Exam: 28-04-2022, 9:00am-11:00am" + System.lineSeparator()
-                + "10: [Module] CS3244 Lecture: Thursday, 12:00pm-2:00pm" + System.lineSeparator()
-                + "11: [Module] CS3244 Lecture: Monday, 2:00pm-3:00pm" + System.lineSeparator()
-                + "12: [Module] CS3244 Tutorial: Monday, 5:00pm-6:00pm" + System.lineSeparator()
-                + "13: [Module] CS3244 Exam: 23-04-2022, 9:00am-11:00am" + System.lineSeparator()
-                + "14: [Module] EE4204 Lecture: Monday, 10:00am-12:00pm" + System.lineSeparator()
-                + "15: [Module] EE4204 Tutorial: Wednesday, 1:00pm-2:00pm" + System.lineSeparator()
-                + "16: [Module] EE4204 Exam: 29-04-2022, 9:00am-11:00am"
+                + "1: [Module] EG2401A Lecture: Wednesday, 6:00 pm-8:00 pm" + System.lineSeparator()
+                + "2: [Module] EG2401A Tutorial: Friday, 9:00 am-10:00 am" + System.lineSeparator()
+                + "3: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm" + System.lineSeparator()
+                + "4: [Module] CS2113 Tutorial: Friday, 10:00 am-11:00 am" + System.lineSeparator()
+                + "5: [Module] CS2113 Exam: 05-05-2022, 1:00 pm-3:00 pm" + System.lineSeparator()
+                + "6: [Module] CG2271 Tutorial: Wednesday, 4:00 pm-5:00 pm" + System.lineSeparator()
+                + "7: [Module] CG2271 Lecture: Wednesday, 10:00 am-12:00 pm" + System.lineSeparator()
+                + "8: [Module] CG2271 Laboratory: Friday, 2:00 pm-4:00 pm" + System.lineSeparator()
+                + "9: [Module] CG2271 Exam: 28-04-2022, 9:00 am-11:00 am" + System.lineSeparator()
+                + "10: [Module] CS3244 Lecture: Thursday, 12:00 pm-2:00 pm" + System.lineSeparator()
+                + "11: [Module] CS3244 Lecture: Monday, 2:00 pm-3:00 pm" + System.lineSeparator()
+                + "12: [Module] CS3244 Tutorial: Monday, 5:00 pm-6:00 pm" + System.lineSeparator()
+                + "13: [Module] CS3244 Exam: 23-04-2022, 9:00 am-11:00 am" + System.lineSeparator()
+                + "14: [Module] EE4204 Lecture: Monday, 10:00 am-12:00 pm" + System.lineSeparator()
+                + "15: [Module] EE4204 Tutorial: Wednesday, 1:00 pm-2:00 pm" + System.lineSeparator()
+                + "16: [Module] EE4204 Exam: 29-04-2022, 9:00 am-11:00 am"
                 + System.lineSeparator() + DIVIDER + System.lineSeparator()
                 + "I have added these to your existing schedule!" + System.lineSeparator()
                 + DIVIDER;

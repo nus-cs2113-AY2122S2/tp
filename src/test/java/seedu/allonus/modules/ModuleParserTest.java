@@ -30,7 +30,7 @@ public class ModuleParserTest {
 
     private Module cs2113;
 
-    private static final String validUserInput = "add m/CS2113 c/lec d/Friday t/4:00pm-6:00pm";
+    private static final String validUserInput = "add m/CS2113 c/lec d/Friday t/4:00 pm-6:00 pm";
 
     @BeforeEach
     public void setUpStreams() {
@@ -52,7 +52,7 @@ public class ModuleParserTest {
 
     @Test
     public void testAddModuleParser() {
-        cs2113 = new Module("CS2113", "Lecture", "Friday", "4:00pm-6:00pm");
+        cs2113 = new Module("CS2113", "Lecture", "Friday", "4:00 pm-6:00 pm");
         Module outputModule = moduleParser.addModuleParser(validUserInput);
         String outputAdd = "";
         assertEquals(outputAdd, outContent.toString());
@@ -62,13 +62,13 @@ public class ModuleParserTest {
         String invalidUserInput1 = "add";
         outputAdd = DIVIDER
                 + "Please ensure that your input follows the form:" + System.lineSeparator()
-                + "add m/CS2113 c/lec d/Thursday t/2:00pm-4:00pm" + System.lineSeparator()
+                + "add m/CS2113 c/lec d/Thursday t/2:00 pm-4:00 pm" + System.lineSeparator()
                 + DIVIDER;
         moduleParser.addModuleParser(invalidUserInput1);
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
-        String invalidUserInput2 = "add m/-=- c/lec d/Friday t/4:00pm-6:00pm";
+        String invalidUserInput2 = "add m/-=- c/lec d/Friday t/4:00 pm-6:00 pm";
         outputAdd = DIVIDER
                 + "Your module code must be an alphanumeric parameter!" + System.lineSeparator()
                 + DIVIDER;
@@ -76,13 +76,13 @@ public class ModuleParserTest {
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
-        String invalidUserInput3 = "add m/CS2113 c/packaged d/Friday t/4:00pm-6:00pm";
+        String invalidUserInput3 = "add m/CS2113 c/packaged d/Friday t/4:00 pm-6:00 pm";
         outputAdd = DIVIDER + "Category has to be one of lec, tut, lab or exam" + System.lineSeparator() + DIVIDER;
         moduleParser.addModuleParser(invalidUserInput3);
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
-        String invalidUserInput4 = "add m/CS2113 c/lec d/dday t/4:00pm-6:00pm";
+        String invalidUserInput4 = "add m/CS2113 c/lec d/dday t/4:00 pm-6:00 pm";
         outputAdd = DIVIDER
                 + "You have entered an invalid day of the week" + System.lineSeparator()
                 + DIVIDER + DIVIDER
@@ -92,7 +92,7 @@ public class ModuleParserTest {
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
-        String invalidUserInput5 = "add m/CS2113 c/lec d/12122022 t/4:00pm-6:00pm";
+        String invalidUserInput5 = "add m/CS2113 c/lec d/12122022 t/4:00 pm-6:00 pm";
         outputAdd = DIVIDER + "You have entered an invalid date" + System.lineSeparator()
                 + DIVIDER + DIVIDER
                 + "Accepted module day inputs are either a day of the week or a valid date of type DD-MM-YYYY"
@@ -101,8 +101,8 @@ public class ModuleParserTest {
         assertEquals(outputAdd,outContent.toString());
 
         outContent.reset();
-        String invalidUserInput6 = "add m/CS2113 c/lec d/Thursday t/4pm-6pm";
-        outputAdd = DIVIDER + "Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm"
+        String invalidUserInput6 = "add m/CS2113 c/lec d/Thursday t/4 pm-6 pm";
+        outputAdd = DIVIDER + "Accepted module time slot input is a valid timeslot of type HH:MM am/pm - HH:MM am/pm"
                 + System.lineSeparator() + DIVIDER;
         moduleParser.addModuleParser(invalidUserInput6);
         assertEquals(outputAdd,outContent.toString());
@@ -199,23 +199,23 @@ public class ModuleParserTest {
     @Test
     public void testValidateModuleTime() {
         ModuleTimeException thrown = assertThrows(ModuleTimeException.class, () -> {
-            moduleParser.validateModuleTime("2pm");
+            moduleParser.validateModuleTime("2 pm");
             moduleParser.validateModuleTime("text");
             moduleParser.validateModuleTime("`131323`");
-            moduleParser.validateModuleTime("2pm-4pm");
-            moduleParser.validateModuleTime("24:00pm-65:00pm");
+            moduleParser.validateModuleTime("2 pm-4 pm");
+            moduleParser.validateModuleTime("24:00 pm-65:00 pm");
 
         });
 
-        assertEquals("Accepted module time slot input is a valid timeslot of type HH:MMam/pm - HH:MMam/pm",
+        assertEquals("Accepted module time slot input is a valid timeslot of type HH:MM am/pm - HH:MM am/pm",
                 thrown.getMessage());
 
         assertDoesNotThrow(() -> {
-            String output = moduleParser.validateModuleTime("2:00pm-4:00pm");
-            assertEquals(output, "2:00pm-4:00pm");
+            String output = moduleParser.validateModuleTime("2:00 pm-4:00 pm");
+            assertEquals(output, "2:00 pm-4:00 pm");
 
-            output = moduleParser.validateModuleTime("2:00pm - 4:00pm");
-            assertEquals(output, "2:00pm - 4:00pm");
+            output = moduleParser.validateModuleTime("2:00 pm-4:00 pm");
+            assertEquals(output, "2:00 pm-4:00 pm");
         });
     }
 
@@ -242,8 +242,8 @@ public class ModuleParserTest {
             String output = moduleParser.validateFindQuery("find cs");
             assertEquals(output, "cs");
 
-            output = moduleParser.validateFindQuery("find 2:00pm");
-            assertEquals(output, "2:00pm");
+            output = moduleParser.validateFindQuery("find 2:00 pm");
+            assertEquals(output, "2:00 pm");
         });
     }
 }
