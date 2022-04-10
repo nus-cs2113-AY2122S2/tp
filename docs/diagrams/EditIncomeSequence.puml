@@ -1,0 +1,111 @@
+@startuml
+!include style.puml
+
+box
+    participant ":IncomeList" as Ilist MONEY_COLOR
+    participant ":Income" as Inc MONEY_COLOR_T1
+    participant ":ArrayList<Income>" as Alist MONEY_COLOR_T2
+end box
+
+participant ":System" as System SYSTEM_COLOR
+
+[-> Ilist: editIncome(1, 1, "Bills", null ,null)
+activate Ilist
+Ilist -> Ilist: isDescEdited(1, "Bills")
+activate Ilist
+Ilist -> Alist: get(0)
+activate Alist
+Alist --> Ilist : item: Income
+deactivate Alist
+Ilist -> Inc: getDescription()
+activate Inc
+Inc --> Ilist: description:String
+deactivate Inc
+
+alt OPT_COLOR description != null && !Description.equals("Bills")
+    Ilist -> Inc: setDescription("Bills")
+    activate Inc
+    Inc --> Ilist: True
+else else
+    Inc --> Ilist: False
+    deactivate Inc
+end alt
+
+Ilist --> Ilist: True:Boolean
+deactivate Ilist
+deactivate Alist
+
+Ilist -> Ilist: isPermEdited(1, null)
+activate Ilist
+Ilist -> Alist: get(0)
+activate Alist
+Alist --> Ilist : item: Income
+deactivate Alist
+Ilist -> Inc: isPermanent()
+activate Inc
+Inc --> Ilist: isPermanent:Boolean
+deactivate Inc
+
+alt OPT_COLOR isPermanent != null && !isPermanent.equals(null)
+    Ilist -> Inc: setPermanent(null)
+    activate Inc
+    Inc --> Ilist: True
+else else
+    Inc --> Ilist: False
+    deactivate Inc
+end alt
+
+Ilist --> Ilist: False:Boolean
+deactivate Ilist
+deactivate Alist
+
+Ilist -> Ilist: isAmountEdited(1, null)
+activate Ilist
+Ilist -> Alist: get(0)
+activate Alist
+Alist --> Ilist : item: Income
+deactivate Alist
+Ilist -> Inc: getAmount()
+activate Inc
+Inc --> Ilist: amount:Double
+deactivate Inc
+
+alt OPT_COLOR Amount != null && !Amount.equals(null)
+    Ilist -> Inc: setAmount(null)
+    activate Inc
+    Inc --> Ilist: True
+else else
+    Inc --> Ilist: False
+    deactivate Inc
+end alt
+
+Ilist --> Ilist: False:Boolean
+deactivate Ilist
+deactivate Alist
+
+Ilist -> Ilist: printEditMsg(True, False, False)
+activate Ilist
+alt OPT_COLOR isDescEdited || isAmountEdited || isPermEdited
+    Ilist -> System:println("Your Income have been edited")
+    activate System
+    Ilist <-- System
+    deactivate System
+    Ilist -> Alist: get(0)
+    activate Alist
+    Alist --> Ilist : item: Income
+    deactivate Alist
+    Ilist -> System:println(item)
+    activate System
+    Ilist <-- System
+    deactivate System
+else else
+    Ilist -> System:println("No changes have been made")
+    activate System
+    Ilist <-- System
+    deactivate System
+end alt
+
+
+
+
+@enduml

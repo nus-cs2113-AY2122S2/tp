@@ -195,7 +195,8 @@ public class ExpenditureList extends MoneyList {
      * @param category    The new category, if any
      * @param isPermanent The new recurring status, if any
      */
-    public void editExpenditure(int index, String description, Double amount, Integer category, Boolean isPermanent) {
+    public void editExpenditure(int index, String description, Double amount, Integer category,
+                                Boolean isPermanent) {
         logger.log(Level.INFO, LOG_EDIT_EXP);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
@@ -225,7 +226,8 @@ public class ExpenditureList extends MoneyList {
      * @return true if recurring status have been edited, false otherwise
      */
     private boolean editExpPerm(int index, Boolean isPermanent) {
-        if (isPermanent != null) {
+        Boolean itemPerm = expenditureArrayList.get(index - 1).isPermanent();
+        if (isPermanent != null && itemPerm != isPermanent) {
             expenditureArrayList.get(index - 1).setPermanent(isPermanent);
             return true;
         }
@@ -241,10 +243,26 @@ public class ExpenditureList extends MoneyList {
      */
     private boolean editExpCat(int index, Integer category) {
         if (category != null) {
-            expenditureArrayList.get(index - 1).setCategory(category);
-            return true;
+            return checkCat(index, category);
         }
         return false;
+    }
+
+    /**
+     * Given a non-null category integer, check if new
+     * category is same as old.
+     *
+     * @param index    The expenditure's index in the list
+     * @param category The expenditure's category
+     * @return true if category have been edited, false otherwise
+     */
+    private boolean checkCat(int index, Integer category) {
+        String oldCat = expenditureArrayList.get(index - 1).getCategory();
+        String newCat = Category.getLabelForIndex(category);
+        if (!oldCat.equals(newCat)) {
+            expenditureArrayList.get(index - 1).setCategory(category);
+        }
+        return true;
     }
 
     /**
@@ -255,7 +273,8 @@ public class ExpenditureList extends MoneyList {
      * @return true if amount have been edited, false otherwise
      */
     private boolean editExpAmount(int index, Double amount) {
-        if (amount != null) {
+        Double itemAmount = expenditureArrayList.get(index - 1).getAmount();
+        if (amount != null && itemAmount != amount) {
             expenditureArrayList.get(index - 1).setAmount(amount);
             return true;
         }
@@ -270,7 +289,8 @@ public class ExpenditureList extends MoneyList {
      * @return true if description have been edited, false otherwise
      */
     private boolean editExpDesc(int index, String description) {
-        if (description != null) {
+        String oldDesc = expenditureArrayList.get(index - 1).getDescription();
+        if (description != null && !oldDesc.equals(description)) {
             expenditureArrayList.get(index - 1).setDescription(description);
             return true;
         }

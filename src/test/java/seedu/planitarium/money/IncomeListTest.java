@@ -15,47 +15,49 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class IncomeListTest {
 
-    private static final PrintStream ORIGINAL_OUT = System.out;
     private static int INVALID_INDEX = -1;
     private static int VALID_INDEX = 1;
-    private IncomeList personOne;
-    private static final String INDENTATION = "   ";
-    private static final String EXPECTED_LABEL_NUMBERED = INDENTATION + "1. Food: $20.00 - Recurring: false"
-            + System.lineSeparator();
-    private static final String EXPECTED_LABEL = "Food: $20.00 - Recurring: false"
-            + System.lineSeparator();
     private static final int NUM_OF_INC = 2;
+    private static final double VALID_AMOUNT = 30.00;
+    private static final double VALID_AMOUNT_2 = 5.00;
+    private static final double EXPECTED_AMOUNT = 35.00;
+    private static final String VALID_DESC = "clothes";
+    private static final String VALID_DESC_2 = "Transport";
+    private static final String INDENTATION = "   ";
+    private static final String EXPECTED_LABEL_NUMBERED = INDENTATION + "1. " + VALID_DESC
+            + ": $30.00 - Recurring: false" + System.lineSeparator();
+    private static final String EXPECTED_LABEL = VALID_DESC + ": $30.00 - Recurring: false"
+            + System.lineSeparator();
+    private static final PrintStream ORIGINAL_OUT = System.out;
+
+    private IncomeList personOne;
 
     @BeforeEach
     public void setUp() {
         personOne = new IncomeList();
-        personOne.addIncome("Food", 20.0, false);
-        personOne.addIncome("Transport", 5.0, false);
+        personOne.addIncome(VALID_DESC, VALID_AMOUNT, false);
+        personOne.addIncome(VALID_DESC_2, VALID_AMOUNT_2, false);
     }
 
     @Test
     public void addIncome_newIncome_existsInIncome() {
         IncomeList personTwo = new IncomeList();
-        personTwo.addIncome("clothes", 30.0, false);
-        String description = "clothes";
-        double amount = 30;
-        assertEquals(description, personTwo.getDescription(VALID_INDEX));
-        assertEquals(amount, personTwo.getIncomeValue(VALID_INDEX));
+        personTwo.addIncome(VALID_DESC, VALID_AMOUNT_2, false);
+        assertEquals(VALID_DESC, personTwo.getDescription(VALID_INDEX));
+        assertEquals(VALID_AMOUNT_2, personTwo.getIncomeValue(VALID_INDEX));
 
     }
 
     @Test
     public void getDescription_validIndex_expectSameDescription() {
-        String inputString = "Food";
         String getDescriptionString = personOne.getDescription(VALID_INDEX);
-        assertEquals(inputString, getDescriptionString);
+        assertEquals(VALID_DESC, getDescriptionString);
     }
 
     @Test
     public void getIncomeValue_validIndex_expectSameDescription() {
-        double inputAmount = 20;
         double getAmount = personOne.getIncomeValue(VALID_INDEX);
-        assertEquals(inputAmount, getAmount);
+        assertEquals(VALID_AMOUNT, getAmount);
     }
 
     @Test
@@ -107,7 +109,7 @@ class IncomeListTest {
     public void addIncome_nullDescription_expectAssertionError() {
         IncomeList testList = new IncomeList();
         try {
-            testList.addIncome(null, 24.0, false);
+            testList.addIncome(null, VALID_AMOUNT_2, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -116,17 +118,17 @@ class IncomeListTest {
 
     @Test
     public void editIncome_validParam_Success() {
-        personOne.editIncome(1, "Dabao", 1000.0, true);
-        assertEquals(personOne.getDescription(1), "Dabao");
-        assertEquals(personOne.getIncomeValue(1), 1000.0);
-        assertEquals(personOne.isPermanent(1), true);
+        personOne.editIncome(VALID_INDEX, VALID_DESC_2, VALID_AMOUNT_2, true);
+        assertEquals(personOne.getDescription(VALID_INDEX), VALID_DESC_2);
+        assertEquals(personOne.getIncomeValue(VALID_INDEX), VALID_AMOUNT_2);
+        assertEquals(personOne.isPermanent(VALID_INDEX), true);
     }
 
     @Test
     public void findIncome_validParam_Success() {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
-        personOne.find("Food");
+        personOne.find(VALID_DESC);
         assertEquals(EXPECTED_LABEL, newOut.toString());
         System.setOut(ORIGINAL_OUT);
     }
@@ -142,7 +144,7 @@ class IncomeListTest {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
         IncomeList personTwo = new IncomeList();
-        personTwo.addIncome("Food", 20.0, false);
+        personTwo.addIncome(VALID_DESC, VALID_AMOUNT, false);
         personTwo.printIncomeList();
         assertEquals(EXPECTED_LABEL_NUMBERED, newOut.toString());
         System.setOut(ORIGINAL_OUT);
@@ -151,7 +153,6 @@ class IncomeListTest {
     @Test
     public void getTotalInc_success() {
         double totalIncome = personOne.getTotalIncome();
-        double expectedIncome = 25.0;
-        assertEquals(expectedIncome, totalIncome);
+        assertEquals(EXPECTED_AMOUNT, totalIncome);
     }
 }
