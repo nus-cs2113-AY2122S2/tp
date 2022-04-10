@@ -34,14 +34,14 @@ public class ListCommand extends Command {
         StringBuilder res = new StringBuilder();
         if (Objects.isNull(argument)) {
             for (Module m : moduleList.getModuleList()) {
-                res.append(m.printModuleTaskList(showCompletedTasks)).append(LS);
+                res.append(m.stringifyModuleTaskList(showCompletedTasks)).append(LS);
             }
-            res.append(moduleList.getGeneralTasks().printModuleTaskList(showCompletedTasks));
+            res.append(moduleList.getGeneralTasks().stringifyModuleTaskList(showCompletedTasks));
         } else {
             for (Module m : moduleList.getModuleList()) {
-                res.append(m.printModuleTaskListWithTag(argument, showCompletedTasks)).append(LS);
+                res.append(m.stringifyModuleTaskListWithTag(argument, showCompletedTasks)).append(LS);
             }
-            res.append(moduleList.getGeneralTasks().printModuleTaskListWithTag(argument, showCompletedTasks));
+            res.append(moduleList.getGeneralTasks().stringifyModuleTaskListWithTag(argument, showCompletedTasks));
         }
         return new CommandResult(String.format(LIST_MESSAGE, res));
     }

@@ -61,7 +61,7 @@ public class Module {
 
     /**
      * Gets the task list associated with the module.
-     * @return Task List associated with the module
+     * @return Task list associated with the module
      */
     public TaskList getTaskList() {
         return taskList;
@@ -84,11 +84,11 @@ public class Module {
      * @param showCompletedTasks Whether completed tasks should be shown or not
      * @return The string of all tasks, depending on whether completed tasks should be shown
      */
-    public String printModuleTaskList(boolean showCompletedTasks) {
+    public String stringifyModuleTaskList(boolean showCompletedTasks) {
         return this + LS + taskList.getAllTasks(INDENT, showCompletedTasks);
     }
 
-    public String printModuleTaskListWithTag(String tag, boolean showCompletedTasks) {
+    public String stringifyModuleTaskListWithTag(String tag, boolean showCompletedTasks) {
         return this + LS + taskList.getTasksWithTag(INDENT, tag, showCompletedTasks);
     }
 
