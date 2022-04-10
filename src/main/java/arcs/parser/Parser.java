@@ -1,7 +1,11 @@
 package arcs.parser;
 
 
-import arcs.commands.customer.*;
+import arcs.commands.customer.AddCustomerCommand;
+import arcs.commands.customer.DeleteCustomerCommand;
+import arcs.commands.customer.FindCustomerIcCommand;
+import arcs.commands.customer.FindCustomerNameCommand;
+import arcs.commands.customer.ListCustomerCommand;
 import arcs.commands.flightbooking.BookCommand;
 import arcs.commands.flightbooking.DeleteBookingCommand;
 import arcs.commands.flightbooking.ListBookingCommand;
