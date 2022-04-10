@@ -36,14 +36,8 @@ public class ItemList {
      * @param item The item that the user wants to add into the item list.
      * @return true if there is no items within the item list which has the same name as that passed into the function
      */
-    public boolean addItemToList(Item item) {
-        boolean isItemAlreadyInTheList = checkForItemDuplicates(item.getName());
-        if (isItemAlreadyInTheList == true) {
-            return isItemAlreadyInTheList;
-        }
-        String itemName = item.getName();
+    public void addItemToList(Item item) {
         listOfItems.add(item);
-        return isItemAlreadyInTheList;
     }
 
     public int getSize() {

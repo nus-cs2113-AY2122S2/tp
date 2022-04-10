@@ -10,65 +10,13 @@
 Hi, I am Hotel Lite, and I will do the managing for you.
 How can I help you today?
 Error! Invalid Command.
-================ Noted! ===================
-The item and its pax has been added to the item list.
-There are currently 1 items within the item list.
-===========================================
-Error! Item Name cannot be empty.
-Error! Item Pax cannot be empty.
-Error! Item Pax is invalid.
-Error! Item Pax is invalid.
-================ Noted! ===================
-The item and its pax has been added to the item list.
-There are currently 2 items within the item list.
-===========================================
-================ Noted! ===================
-The item and its pax has been added to the item list.
-There are currently 3 items within the item list.
-===========================================
 =============== Item List =================
-1. Item Name: TOILET ROLL Item Pax: 15
-2. Item Name: FORK Item Pax: 15
-3. Item Name: SPOON Item Pax: 2
+No item found within the item list.
 ============ End of the list ==============
-================ Noted! ===================
-The pax of TOILET ROLL has been updated to 5.
-===========================================
-Error! Item Pax is invalid.
-Error! Item Pax cannot be empty.
-Error! Item Name cannot be empty.
-Error! Invalid Command.
-Error! Item not found in inventory.
-================ Noted! ===================
-The pax of SPOON has been updated to 0.
-===========================================
 Error! Invalid Command -> Availability NAME / 1,2
 Error! Invalid Command -> Availability NAME / 1,2
 ================ Noted! ===================
-TOILET ROLL has been removed from the Item List.
-There are currently 2 items within the Item List.
-===========================================
-Error! Item not found in inventory.
-Error! Invalid Command.
-Error! Invalid Command -> Update Item Name OLD NAME / NEW NAME
-Error! Invalid Command -> Update Item Name OLD NAME / NEW NAME
-================ Noted! ===================
-The name of SPOON has been updated to PREMIUM SPOON.
+No Item matching the criteria has been found.
 ===========================================
 Error! Invalid Command.
-=============== Item List =================
-1. Item Name: FORK Item Pax: 15
-2. Item Name: PREMIUM SPOON Item Pax: 0
-============ End of the list ==============
-=============== Item List =================
-1. Item Name: PREMIUM SPOON Item Pax: 0
-============ End of the list ==============
-Error! Invalid Command.
-Error! The item to add already exists within the item list.
-================ Noted! ===================
-The item and its pax has been added to the item list.
-There are currently 3 items within the item list.
-===========================================
-Error! Item Pax is invalid.
-Error! Item Pax is invalid.
 see u again!

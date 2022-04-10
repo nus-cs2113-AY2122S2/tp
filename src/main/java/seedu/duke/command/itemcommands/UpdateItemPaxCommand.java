@@ -119,11 +119,15 @@ public class UpdateItemPaxCommand extends Command {
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         assert (item != null) : "Assertion Failed! There is no item within the UpdateItemPaxCommand object.";
         listOfItems.updateItemPaxInList(item);
         ui.printUpdateItemPaxAcknowledgementMessage(item);
+    }
+
+    public void writeItemListToFile(ListContainer listContainer) throws IOException {
+        ItemList listOfItems = listContainer.getItemList();
         ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemListFileManager.writeItemListToFile(listOfItems);
     }
