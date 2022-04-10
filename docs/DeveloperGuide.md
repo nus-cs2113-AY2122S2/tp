@@ -80,6 +80,22 @@ The warehouse class will contain:
 - LinkedHashMap of goods
   - A linked hashmap is chosen for goods to ensure that we are able to maintain the ordering of goods added while having the simplicity of accessing the necessary goods through their SKU
 
+### UserInterface Class
+UserInterface class will be used to take user input and pass it to the corresponding command parser.
+
+#### Description
+![UserInterface Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UserInterface.puml)
+After receiving user input, the first part of the command will be used to determine what is the command type of the input. Then, it will pass the command to one of the following object for command execution: 
+- listParser
+- viewParser
+- addParser
+- removeParser
+- totalParser
+- findParser
+- helpParser
+- fulfillParser
+
+If the user input `bye`, no other command will be taken and the program will be terminated  
 
 ### Command Parser
 #### Description
@@ -247,14 +263,14 @@ A cheap, user-friendly Warehouse Management System with intuitive commands to im
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|Warehouse Worker|Get the total number of goods in the warehouse|its less tiring to have to count the total number of goods in the warehouse|
-|v1.0|Warehouse Worker|View the description of goods easily|it would be easier for stocktaking|
-|v1.0|Warehouse Worker|Add inventory items to the items list|so that I can keep track of goods entering the warehouse|
-|v1.0|Warehouse Worker|Remove inventory items from the items list|so that I can track whenever a orderline is not in the warehouse|
-|v1.0|Warehouse Worker|Get a list of all the inventory currently in the warehouse|so that I can see all the items we have in the warehouse|
-<!-- |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list| -->
+| Version | As a ... | I want to ... | So that I can ...|
+|---------|----------|---------------|------------------|
+| v1.0    |Warehouse Worker|Get the total number of goods in the warehouse|its less tiring to have to count the total number of goods in the warehouse|
+| v1.0    |Warehouse Worker|View the description of goods easily|it would be easier for stocktaking|
+| v1.0    |Warehouse Worker|Add inventory items to the items list|so that I can keep track of goods entering the warehouse|
+| v1.0    |Warehouse Worker|Remove inventory items from the items list|so that I can track whenever a orderline is not in the warehouse|
+| v1.0    |Warehouse Worker|Get a list of all the inventory currently in the warehouse|so that I can see all the items we have in the warehouse|
+| <!--    |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list| -->
 
 ## Non-Functional Requirements
 
