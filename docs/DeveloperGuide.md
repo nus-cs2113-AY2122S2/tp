@@ -1879,7 +1879,7 @@ version of the `workout /new` command that is accepted by `WorkoutList#createNew
 **(Steps 5 and 6)** The crafted `String` is passed to `WorkoutList#createNewWorkout()` to check the validity of the workout
 data and create the `Workout` object before returning the object to `FileManager#addFileWorkoutToList()`.
 
-***(Step 7)** The newly created `Workout` object is passed to `WorkoutList#addNewWorkoutToLists()` to add the new
+**(Step 7)** The newly created `Workout` object is passed to `WorkoutList#addNewWorkoutToLists()` to add the new
 `Workout` object to the respective data structures maintained in the `WorkoutList` object.
 
 Steps 4 to 9 is repeated until all the lines in `workouts.txt` have been read.
