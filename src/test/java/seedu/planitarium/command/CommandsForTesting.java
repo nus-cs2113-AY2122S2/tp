@@ -17,6 +17,7 @@ public class CommandsForTesting {
 
     public static final String ADDEXPEND = "addout /u 1 /g 1 /e 1999.99 /d spend /c 1 /p f ";
     public static final String ADDEXPEND2 = "addout /u 1 /g 1 /e -1999.99 /d spend /c 1 /p f ";
+    public static final String ADDEXPEND3 = "addout /u 1 /g 1 /e 1999.99 /d spend /c -1 /p f ";
 
     public static final String DELETEINCOME = "deletein /u 1 /g 1 /r 1";
     public static final String DELETEEXPEND = "deleteout /u 1 /g 1 /r 1";
