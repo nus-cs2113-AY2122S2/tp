@@ -787,6 +787,25 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 
 #### Viewing a Session
 > For details on the usage of `session /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-session--session-view)
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `session /view /sid 1` <br>
+  Expected: An error message is printed indicating that no session are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+1. Test Command: `session /view`<br>
+   Expected: An error message is printed indicating that the `/sid` delimiter is missing from the input.
+2. Test Command: `session /view /sid`<br>
+   Expected: An error message is printed indicating that an argument following the `/sid` delimiter is missing from the input.
+3. Test Command: `session /view /sid apple`<br>
+   Expected: An error message is printed indicating that an integer argument should be provided following the `/sid` delimiter.
+4. Test Command: `session /view /sid 2`<br>
+   Expected: An error message is printed indicating that a session with the specified session unique identifier was not found.
+5. Test Command: `session /view /sid 1`<br>
+   Expected: The full details of the session with a session unique identifier of `1` is printed.
 <hr>
 
 #### Listing all Sessions
