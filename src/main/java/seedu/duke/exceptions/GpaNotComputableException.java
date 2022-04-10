@@ -2,6 +2,7 @@ package seedu.duke.exceptions;
 
 import seedu.duke.util.StringConstants;
 
+//@@author Yzkkk
 /**
  * Exception to be thrown when the module list is empty therefore GPA is not computable.
  */

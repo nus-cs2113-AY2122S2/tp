@@ -47,7 +47,7 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
     - Performed code cleanup and fixed bugs.
     - Confirmed meeting time and created Zoom for each meeting.
     - Checked the releases `v1.0` and `v2.0` on multiple systems(macOS, Kali Linux, Ubuntu, CentOS) for each release.
-    - Keep tracking potential bugs and created multiple bug issues after discussing with teammates. [#170](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/170), [#135](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/135), [#134](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/134), [#172](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/172) , [#136](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/136) , [#119](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/119), [#71](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/71)
+    - Keep tracking potential bugs and created multiple bug issues after discussing with teammates. [#170](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/170), [#135](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/135), [#134](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/134), [#172](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/172) , [#136](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/136) , [#119](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/119), [#71](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/71), [#189](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/189)
 
 
 - **Community:**

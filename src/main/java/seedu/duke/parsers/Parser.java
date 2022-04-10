@@ -44,7 +44,7 @@ public abstract class Parser {
     protected static final String INVALID_MODULE_GRADE = StringConstants.INVALID_MODULE_GRADE;
     protected static final String INVALID_TAG_COMMAND = StringConstants.INVALID_TAG_COMMAND;
 
-    protected static final String SPACE = StringConstants.SPACE;
+    protected static final String WHITESPACES = StringConstants.WHITESPACES;
     protected static final String TASK = StringConstants.TASK_STR;
     protected static final String MODULE = StringConstants.MODULE_STR;
     protected static final String TASK_NAME_STR = StringConstants.TASK_NAME_STR;
@@ -64,21 +64,27 @@ public abstract class Parser {
     protected HashMap<String, String> parsedCommand;
     protected HashSet<String> groupNames;
 
+    //@@author Ch40gRv1-Mu
     public Parser() {
         groupNames = new HashSet<String>();
         parsedCommand = new HashMap<>();
     }
 
+    //@@author Ch40gRv1-Mu
     /**
      * Parses the provided user input and returns the relevant Command object.
+     * @throws ModHappyException If there is an error parsing the input
      */
     public abstract Command parseCommand(String userInput) throws ModHappyException;
 
+
     /**
-     * Parses the provided user input and returns the relevant Command object.
+     * Determines the error that occurred in the command.
+     * @throws ModHappyException For the error that occurred in the command
      */
     public abstract void determineError() throws ModHappyException;
 
+    //@@author Ch40gRv1-Mu
     /**
      * Parses string into groups based on commandFormat.
      * @throws ModHappyException if the provided string does not match the pattern
@@ -100,94 +106,7 @@ public abstract class Parser {
         return parsedCommand;
     }
 
-    /**
-     * Checks for strings that are parsed into groups based on commandFormat, but are essentially invalid.
-     */
-    private void checkForInvalidStrings() throws InvalidFlagException,
-            InvalidModuleGradeException, InvalidTagOperationException {
-        checksForInvalidModFlag();
-        checksForInvalidTaskName();
-        checksForInvalidTaskDescriptionFlag();
-        checksForInvalidModDescriptionFlag();
-        checksForInvalidTimeFlag();
-        checksForInvalidTagCommand();
-        checksForInvalidModuleGrade();
-    }
-
-
-    private void checksForInvalidModuleGrade() throws InvalidModuleGradeException {
-        if (groupNames.contains(INVALID_MODULE_GRADE)) {
-            String invalidInput = parsedCommand.get(INVALID_MODULE_GRADE);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidModuleGradeException(invalidInput);
-            }
-        }
-    }
-
-    private void checksForInvalidTagCommand() throws InvalidTagOperationException {
-        if (groupNames.contains(INVALID_TAG_COMMAND)) {
-            String invalidInput = parsedCommand.get(INVALID_TAG_COMMAND);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidTagOperationException(invalidInput);
-            }
-        }
-    }
-
-    private void checksForInvalidTimeFlag() throws InvalidFlagException {
-        if (groupNames.contains(INVALID_TIME_FLAG)) {
-            String invalidInput = parsedCommand.get(INVALID_TIME_FLAG);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidFlagException(invalidInput);
-            }
-        }
-    }
-
-    private void checksForInvalidModDescriptionFlag() throws InvalidFlagException {
-        if (groupNames.contains(INVALID_MOD_DES_FLAG)) {
-            String invalidInput = parsedCommand.get(INVALID_MOD_DES_FLAG);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidFlagException(invalidInput);
-            }
-        }
-    }
-
-    private void checksForInvalidTaskDescriptionFlag() throws InvalidFlagException {
-        if (groupNames.contains(INVALID_TASK_DES_FLAG)) {
-            String invalidInput = parsedCommand.get(INVALID_TASK_DES_FLAG);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidFlagException(invalidInput);
-            }
-        }
-    }
-
-    private void checksForInvalidTaskName() throws InvalidFlagException {
-        if (groupNames.contains(INVALID_TASK_NAME_FLAG)) {
-            String invalidInput = parsedCommand.get(INVALID_TASK_NAME_FLAG);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidFlagException(invalidInput);
-            }
-        }
-    }
-
-    private void checksForInvalidModFlag() throws InvalidFlagException {
-        if (groupNames.contains(INVALID_MOD_FLAG)) {
-            String invalidInput = parsedCommand.get(INVALID_MOD_FLAG);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new InvalidFlagException(invalidInput);
-            }
-        }
-    }
-
-
-    protected void checksForExcessArg() throws ExcessArgumentException {
-        if (groupNames.contains(INVALID)) {
-            String invalidInput = parsedCommand.get(INVALID);
-            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
-                throw new ExcessArgumentException(invalidInput);
-            }
-        }
-    }
-
+    //@@author Yzkkk
     /**
      * Parses the task index from a string to an integer form.
      * It will also check if the index is non-negative, throwing an exception if it is not.
@@ -206,5 +125,103 @@ public abstract class Parser {
             throw new InvalidNumberException(TASK_NUMBER_STR, taskNumberString);
         }
         return taskIndex;
+    }
+
+    //@@author Yzkkk
+    /**
+     * Checks for strings that are parsed into groups based on commandFormat, but are essentially invalid.
+     * @throws InvalidFlagException If the flag inputted is invalid
+     * @throws InvalidModuleGradeException If the module grade inputted is invalid
+     * @throws InvalidTagOperationException If the tag operation inputted is invalid
+     */
+    private void checkForInvalidStrings() throws InvalidFlagException,
+            InvalidModuleGradeException, InvalidTagOperationException {
+        checksForInvalidModFlag();
+        checksForInvalidTaskName();
+        checksForInvalidTaskDescriptionFlag();
+        checksForInvalidModDescriptionFlag();
+        checksForInvalidTimeFlag();
+        checksForInvalidTagCommand();
+        checksForInvalidModuleGrade();
+    }
+
+    //@@author Yzkkk
+    private void checksForInvalidModuleGrade() throws InvalidModuleGradeException {
+        if (groupNames.contains(INVALID_MODULE_GRADE)) {
+            String invalidInput = parsedCommand.get(INVALID_MODULE_GRADE);
+            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
+                throw new InvalidModuleGradeException(invalidInput);
+            }
+        }
+    }
+
+    //@@author Yzkkk
+    private void checksForInvalidTagCommand() throws InvalidTagOperationException {
+        if (groupNames.contains(INVALID_TAG_COMMAND)) {
+            String invalidInput = parsedCommand.get(INVALID_TAG_COMMAND);
+            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
+                throw new InvalidTagOperationException(invalidInput);
+            }
+        }
+    }
+
+    //@@author Yzkkk
+    private void checksForInvalidTimeFlag() throws InvalidFlagException {
+        if (groupNames.contains(INVALID_TIME_FLAG)) {
+            String invalidInput = parsedCommand.get(INVALID_TIME_FLAG);
+            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
+                throw new InvalidFlagException(invalidInput);
+            }
+        }
+    }
+
+    //@@author Yzkkk
+    private void checksForInvalidModDescriptionFlag() throws InvalidFlagException {
+        if (groupNames.contains(INVALID_MOD_DES_FLAG)) {
+            String invalidInput = parsedCommand.get(INVALID_MOD_DES_FLAG);
+            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
+                throw new InvalidFlagException(invalidInput);
+            }
+        }
+    }
+
+    //@@author Yzkkk
+    private void checksForInvalidTaskDescriptionFlag() throws InvalidFlagException {
+        if (groupNames.contains(INVALID_TASK_DES_FLAG)) {
+            String invalidInput = parsedCommand.get(INVALID_TASK_DES_FLAG);
+            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
+                throw new InvalidFlagException(invalidInput);
+            }
+        }
+    }
+
+    //@@author Yzkkk
+    private void checksForInvalidTaskName() throws InvalidFlagException {
+        if (groupNames.contains(INVALID_TASK_NAME_FLAG)) {
+            String invalidInput = parsedCommand.get(INVALID_TASK_NAME_FLAG);
+            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
+                throw new InvalidFlagException(invalidInput);
+            }
+        }
+    }
+
+    //@@author Yzkkk
+    private void checksForInvalidModFlag() throws InvalidFlagException {
+        if (groupNames.contains(INVALID_MOD_FLAG)) {
+            String invalidInput = parsedCommand.get(INVALID_MOD_FLAG);
+            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
+                throw new InvalidFlagException(invalidInput);
+            }
+        }
+    }
+
+    //@@author Yzkkk
+    protected void checksForExcessArg() throws ExcessArgumentException {
+        if (groupNames.contains(INVALID)) {
+            String invalidInput = parsedCommand.get(INVALID);
+            if (!Objects.isNull(invalidInput) && !invalidInput.isBlank()) {
+                throw new ExcessArgumentException(invalidInput);
+            }
+        }
     }
 }

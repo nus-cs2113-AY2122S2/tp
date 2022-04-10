@@ -2,6 +2,7 @@ package seedu.duke.exceptions;
 
 import seedu.duke.util.StringConstants;
 
+//@@author heekit73098
 public class MissingNumberException extends GeneralParseException {
     private static final String ERROR_STRING = StringConstants.ERROR_MISSING_NUMBER;
     private static final String ERROR_STRING_MODULAR_CREDITS = StringConstants.ERROR_MISSING_MODULAR_CREDIT;

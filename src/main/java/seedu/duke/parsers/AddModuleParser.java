@@ -1,5 +1,8 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.EmptyParamException;
@@ -12,8 +15,6 @@ import seedu.duke.exceptions.MissingCompulsoryParameterException;
 import seedu.duke.util.NumberConstants;
 import seedu.duke.util.StringConstants;
 
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * This Parser supports the "add mod" command.
@@ -64,31 +65,31 @@ public class AddModuleParser extends AddParser {
         groupNames.add(INVALID);
     }
 
+    //@@author heekit73098
     /**
      * Determines the error that the user made in its command based on the compulsory parameters.
      * It first checks if the user input has a module code, and if the code is made up of only word characters.
      * Then it checks if the user input has a modular credit, and if the modular credit is an unrestricted integer
-     * @throws MissingCompulsoryParameterException if module code is missing
-     * @throws MissingNumberException if modular credit is missing
-     * @throws InvalidNumberException if the modular credit is not in unrestricted integer format
-     * @throws InvalidCompulsoryParameterException if the module code is not made up of only word characters
+     * @throws MissingCompulsoryParameterException If module code is missing
+     * @throws MissingNumberException If modular credit is missing
+     * @throws InvalidNumberException If the modular credit is not in unrestricted integer format
+     * @throws InvalidCompulsoryParameterException If the module code is not made up of only word characters
      */
     @Override
     public void determineError() throws MissingCompulsoryParameterException, MissingNumberException,
             InvalidNumberException, InvalidCompulsoryParameterException {
         String moduleCode;
-        String modularCredit;
-
         try {
-            moduleCode = userInput.split(SPACE)[FIRST_INDEX];
+            moduleCode = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingCompulsoryParameterException(MODULE_CODE_STR);
         }
         if (!moduleCode.matches(WORD_CHAR_ONLY)) {
             throw new InvalidCompulsoryParameterException(MODULE_CODE_STR, moduleCode);
         }
+        String modularCredit;
         try {
-            modularCredit = userInput.split(SPACE)[SECOND_INDEX];
+            modularCredit = userInput.split(WHITESPACES)[SECOND_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingNumberException();
         }
@@ -98,11 +99,24 @@ public class AddModuleParser extends AddParser {
         throw new InvalidCompulsoryParameterException();
     }
 
+    //@@author Yzkkk
+    /**
+     * Checks if the description is empty.
+     * @param moduleDescription The description of the module to be added
+     * @throws EmptyParamException If the module description is empty
+     */
+    private void checkForEmptyDescription(String moduleDescription) throws EmptyParamException {
+        if (!Objects.isNull(moduleDescription) && moduleDescription.isBlank()) {
+            throw new EmptyParamException(MODULE_DESCRIPTION_STR);
+        }
+    }
+
+    //@@author Yzkkk
     /**
      * Parses the modular credit from a string to an integer, with checks on its validity.
-     * @param modularCreditStr the string representation of the modular credit
-     * @return the modular credits as an integer
-     * @throws InvalidNumberException if the string cannot be parsed into an integer,
+     * @param modularCreditStr The string representation of the modular credit
+     * @return The modular credits as an integer
+     * @throws InvalidNumberException If the string cannot be parsed into an integer,
      *                                or if the credits is not in the range of 0 to 20 inclusive
      */
     private int parseModularCredit(String modularCreditStr) throws InvalidNumberException {
@@ -118,12 +132,14 @@ public class AddModuleParser extends AddParser {
         return modularCredit;
     }
 
-    private void checkForEmptyDescription(String moduleDescription) throws EmptyParamException {
-        if (!Objects.isNull(moduleDescription) && moduleDescription.isBlank()) {
-            throw new EmptyParamException(MODULE_DESCRIPTION_STR);
-        }
-    }
+    //@@author chooyikai
 
+    /**
+     * Parses the user input and extracts the parameters based on the command format.
+     * @param userInput User input of the module code, modular credits and module description
+     * @return A new {@code AddCommand} object to add a new module
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;

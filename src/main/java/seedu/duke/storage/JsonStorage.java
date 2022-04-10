@@ -7,16 +7,18 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import seedu.duke.exceptions.FileCreateFailException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.UnknownException;
 import seedu.duke.exceptions.WriteException;
 
+//@@author Ch40gRv1-Mu
 public abstract class JsonStorage<T> implements Storage<T> {
     /**
      * Writes a ArrayList with elements of type ModHappyT to a json file.
-     * @param path json file path
-     * @throws ModHappyException if an error was encountered during writing
+     * @param path The json file path
+     * @throws ModHappyException If an error was encountered during writing
      */
     @Override
     public void writeData(T object, String path) throws ModHappyException {
@@ -28,16 +30,19 @@ public abstract class JsonStorage<T> implements Storage<T> {
             gson.toJson(object, isr);
             isr.close();
             fos.close();
-        } catch (Exception e) {
+        } catch (JsonParseException e) {
             throw new WriteException();
+        } catch (Exception e) {
+            throw new UnknownException(e.toString());
         }
 
     }
 
+
     /**
      * Checks for the existence of the storage file and create it if it does not already exist.
-     * @param path json file path
-     * @throws ModHappyException if the file could not be created
+     * @param path The json file path
+     * @throws ModHappyException If the file could not be created
      */
     public void createTargetFile(String path) throws ModHappyException {
         File targetFile = new File(path);

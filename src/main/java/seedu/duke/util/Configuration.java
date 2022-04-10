@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
+//@@author Ch40gRv1-Mu
 public class Configuration {
 
     private static final String INDENT = StringConstants.INDENT;
@@ -74,7 +75,7 @@ public class Configuration {
     /**
      * Gets the explanation of each legal value of given configuration group.
      * @param configureGroup A configuration group to explain
-     * @return Explanation report of legal values of the given configuration group.
+     * @return Explanation report of legal values of the given configuration group
      */
     public String getValueExplain(ConfigurationGroup configureGroup) {
         HashSet<String> valueOfConfigureGroup = EXPLAIN_LEGAL_VALUES.get(configureGroup);
@@ -87,7 +88,7 @@ public class Configuration {
 
     /**
      * Gets report of current configuration setting.
-     * @return Report of current configuration setting.
+     * @return Report of current configuration setting
      */
     public String getConfigurationsReport() {
         StringBuilder listResult = new StringBuilder();
@@ -100,8 +101,8 @@ public class Configuration {
 
     /**
      * Gets current configuration value of a given configuration group.
-     * @param group Given configuration group.
-     * @return Current configuration value of a given configuration group.
+     * @param group Given configuration group
+     * @return Current configuration value of a given configuration group
      */
     public String getConfigurationValue(ConfigurationGroup group) {
         return configurationGroupHashMap.get(group);
@@ -109,6 +110,7 @@ public class Configuration {
 
     /**
      * Returns a list of all config settings and their descriptions.
+     * @return String representation of the list of all config settings and descriptions
      */
     public static String getAllConfigurationExplanations() {
         StringBuilder result = new StringBuilder();

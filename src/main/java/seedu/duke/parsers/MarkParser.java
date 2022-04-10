@@ -15,6 +15,7 @@ import seedu.duke.util.StringConstants;
 /**
  * This Parser supports the "mark" command.
  */
+//@@author Yzkkk
 public class MarkParser extends Parser {
     private static final String FLAG = StringConstants.FLAG;
     private static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
@@ -41,21 +42,22 @@ public class MarkParser extends Parser {
         groupNames.add(INVALID);
     }
 
+    //@@author heekit73098
     /**
      * Determines the error made by the user in the mark command based on the compulsory parameters.
      * It will first check if the flag is present and if it is either c or u.
      * Then it will check if the task number is present and if it is in a positive integer format.
-     * @throws InvalidFlagException if the flag is missing, or not c nor u
-     * @throws MissingNumberException if the task number is missing
-     * @throws InvalidNumberException if the task number is not in a positive integer format
-     * @throws InvalidCompulsoryParameterException if the error is none of the above errors
+     * @throws InvalidFlagException If the flag is missing, or not c nor u
+     * @throws MissingNumberException If the task number is missing
+     * @throws InvalidNumberException If the task number is not in a positive integer format
+     * @throws InvalidCompulsoryParameterException If the error is none of the above errors
      */
     @Override
     public void determineError() throws InvalidFlagException, MissingNumberException,
             InvalidNumberException, InvalidCompulsoryParameterException {
         String flag;
         try {
-            flag = userInput.split(SPACE)[ZEROTH_INDEX];
+            flag = userInput.split(WHITESPACES)[ZEROTH_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidFlagException();
         }
@@ -64,7 +66,7 @@ public class MarkParser extends Parser {
         }
         String taskNumber;
         try {
-            taskNumber = userInput.split(SPACE)[FIRST_INDEX];
+            taskNumber = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingNumberException(TASK_NUMBER_STR);
         }
@@ -74,11 +76,12 @@ public class MarkParser extends Parser {
         throw new InvalidCompulsoryParameterException();
     }
 
+    //@@author chooyikai
     /**
      * Parses user's input for "mark" command.
      *
-     * @param userInput User input of completed flag or uncompleted flag, task index and task module.
-     * @throws ModHappyException if completed flag or uncompleted flag is not detected
+     * @param userInput User input of completed flag or uncompleted flag, task index and task module
+     * @throws ModHappyException If completed flag or uncompleted flag is not detected
      */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {

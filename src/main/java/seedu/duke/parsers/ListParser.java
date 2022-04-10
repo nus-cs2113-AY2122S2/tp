@@ -11,6 +11,7 @@ import seedu.duke.util.StringConstants;
 /**
  * This Parser supports the "list" command.
  */
+//@@author Yzkkk
 public class ListParser extends Parser {
     private static final String TAG = StringConstants.TAG_COMMAND_WORD;
     // Unescaped Regex for testing:
@@ -33,6 +34,13 @@ public class ListParser extends Parser {
         throw new GeneralParseException();
     }
 
+    //@@author ngys117
+    /**
+     * Parses the user input and extracts the parameters based on the command format.
+     * @param userInput User input of the tag name
+     * @return A new {@code ListCommand} object to display the list of modules and task
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);

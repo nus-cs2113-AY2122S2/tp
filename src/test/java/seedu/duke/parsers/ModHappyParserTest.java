@@ -78,7 +78,7 @@ public class ModHappyParserTest {
         assertThrows(InvalidFlagException.class, () -> parser.parseCommand(testString));
     }
 
-
+    //@@author chooyikai
     @BeforeEach
     public void setUp() {
         parser = new ModHappyParser();
@@ -134,6 +134,7 @@ public class ModHappyParserTest {
         }
     }
 
+    //@@author
     @Test
     public void parse_addCommand_mod_unknownCommand() {
         final String testString = "add . mod 1 4";
@@ -236,7 +237,7 @@ public class ModHappyParserTest {
         testParseCommand_expectInvalidCompulsoryParameterException(testString);
     }
 
-
+    //@@author chooyikai
     @Test
     public void parse_addCommand_task_withTargetModule_parsedCorrectly() {
         final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
@@ -294,8 +295,7 @@ public class ModHappyParserTest {
         }
     }
 
-
-
+    //@@author
     @Test
     public void parse_addCommand_duplicateTaskDescription() {
         final String testString = "add task \"000\" -d \"123\" -t \"456\" -d \"789\"";

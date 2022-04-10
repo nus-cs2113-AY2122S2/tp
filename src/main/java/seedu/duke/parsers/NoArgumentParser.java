@@ -9,6 +9,7 @@ import seedu.duke.exceptions.AdditionalParameterException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.GeneralParseException;
 
+//@@author chooyikai
 /**
  * This Parser supports all commands which do not accept any additional arguments or parameters.
  */
@@ -24,6 +25,12 @@ public class NoArgumentParser extends Parser {
         throw new GeneralParseException();
     }
 
+    /**
+     * Determines the command based on the command word.
+     * @param userInput An empty string
+     * @return A new {@code Command} object
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         // NoArgumentParser commands strictly take no input.

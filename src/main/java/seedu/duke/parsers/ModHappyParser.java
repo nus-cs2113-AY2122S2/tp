@@ -21,6 +21,7 @@ public class ModHappyParser extends Parser {
     private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)"
             + "\\s*(?<arguments>.*)";
 
+    //@@author Ch40gRv1-Mu
     public ModHappyParser() {
         super();
         // See also https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
@@ -81,13 +82,13 @@ public class ModHappyParser extends Parser {
         case (LIST_COMMAND_WORD):
             return new ListParser();
         case (ADD_COMMAND_WORD):
-            return AddParser.getParser(parsedCommand.get(ARGUMENT).split(SPACE)[0]);
+            return AddParser.getParser(parsedCommand.get(ARGUMENT).split(WHITESPACES)[0]);
         case (DELETE_COMMAND_WORD):
             return new DeleteParser();
         case (MARK_COMMAND_WORD):
             return new MarkParser();
         case (EDIT_COMMAND_WORD):
-            return EditParser.getParser(parsedCommand.get(ARGUMENT).split(SPACE)[0]);
+            return EditParser.getParser(parsedCommand.get(ARGUMENT).split(WHITESPACES)[0]);
         case (HELP_COMMAND_WORD):
             return new HelpParser();
         case (TAG_COMMAND_WORD):

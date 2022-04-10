@@ -11,6 +11,7 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.InvalidCompulsoryParameterException;
 import seedu.duke.util.StringConstants;
 
+//@@author heekit73098
 /**
  * This Parser supports the "grade" command.
  */
@@ -40,16 +41,16 @@ public class GradeParser extends Parser {
      * Determines the error that the user made in the grade command based on the compulsory parameters.
      * It will first check if the module code is present and if it is made up of only word characters.
      * Then it checks if the module grade entered is one of the grades specified.
-     * @throws MissingCompulsoryParameterException if the module code is missing
-     * @throws InvalidCompulsoryParameterException if the module code is not made up of only word characters
-     * @throws InvalidModuleGradeException if the module grade is not valid or missing
+     * @throws MissingCompulsoryParameterException If the module code is missing
+     * @throws InvalidCompulsoryParameterException If the module code is not made up of only word characters
+     * @throws InvalidModuleGradeException If the module grade is not valid or missing
      */
     @Override
     public void determineError() throws MissingCompulsoryParameterException,
             InvalidCompulsoryParameterException, InvalidModuleGradeException {
         String moduleCode;
         try {
-            moduleCode = userInput.split(SPACE)[ZEROTH_INDEX];
+            moduleCode = userInput.split(WHITESPACES)[ZEROTH_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new MissingCompulsoryParameterException(MODULE_CODE_STR);
         }
@@ -58,7 +59,7 @@ public class GradeParser extends Parser {
         }
         String moduleGrade;
         try {
-            moduleGrade = userInput.split(SPACE)[FIRST_INDEX];
+            moduleGrade = userInput.split(WHITESPACES)[FIRST_INDEX];
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidModuleGradeException();
         }
@@ -68,6 +69,12 @@ public class GradeParser extends Parser {
         throw new InvalidCompulsoryParameterException();
     }
 
+    /**
+     * Parses the user input and extracts the parameters based on the command format.
+     * @param userInput User input of the module code and the module grade
+     * @return A new {@code GradeCommand} object to set a grade to the module
+     * @throws ModHappyException If there is an error parsing the command
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         this.userInput = userInput;

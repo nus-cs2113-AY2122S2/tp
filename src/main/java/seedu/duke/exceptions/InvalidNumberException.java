@@ -2,6 +2,7 @@ package seedu.duke.exceptions;
 
 import seedu.duke.util.StringConstants;
 
+//@@author heekit73098
 public class InvalidNumberException extends GeneralParseException {
     private static final String ERROR_STRING = StringConstants.ERROR_INVALID_NUMBER;
     private static final String ERROR_STRING_MODULAR_CREDIT = StringConstants.ERROR_INVALID_MODULAR_CREDIT;
