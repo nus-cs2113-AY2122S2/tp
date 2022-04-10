@@ -805,6 +805,23 @@ Test Scenario 4: The person who paid or the persons involved in the activity wer
 
 #### Deleting an Activity
 > For details on the usage of `activity /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-an-activity-activity-delete).
+
+**Test Cases:**
+
+Test Scenario 1: There is an activity within a particular session that can be deleted. <br>
+1. Test Command: `activity /delete /sid 1 /aid 1` <br>
+   Expected: A success message is printed indicating that the activity was deleted successfully.
+
+Test Scenario 2: There are currently no activities stored in a particular session. <br>
+1. Test Command: `activity /delete /sid 2 /aid 1` <br>
+   Expected: An error message is printed indicating that the list of activities in the session is currently empty.
+
+Test Scenario 3: The session or activity that was indicated does not exist. <br>
+1. Test Command: `activity /delete /sid 3 /aid 1` <br>
+   Expected: An error message is printed indicating that the session specified was not found.
+2. Test Command: `activity /delete /sid 1 /aid 4` <br>
+   Expected: An error message is printed indicating that the activity specified was not found in the particular session.
+
 <hr>
 
 #### Editing an Activity
