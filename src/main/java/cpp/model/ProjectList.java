@@ -133,7 +133,7 @@ public class ProjectList {
         if (index != Constants.PROJECT_NOT_FOUND) {
             Project project = projectList.get(index - 1);
             try {
-                if ((!githubLink.startsWith("http://") && !githubLink.startsWith("https://"))) {
+                if ((!githubLink.startsWith(Constants.HTTP) && !githubLink.startsWith(Constants.HTTPS))) {
                     throw new URISyntaxException(githubLink, "invalid format");
                 }
                 project.setGitHubLink(githubLink);

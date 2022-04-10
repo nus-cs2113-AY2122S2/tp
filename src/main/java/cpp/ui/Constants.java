@@ -23,6 +23,8 @@ public class Constants {
     public static final String UNKNOWN_COMMAND = "Unknown Command.";
     public static final String INVALID_INDEX = "The entered index is invalid.\n";
     public static final String MESSAGE_NO_DEADLINE = "No deadline specified";
+    public static final String HTTP = "http://";
+    public static final String HTTPS = "https://";
     public static final String MESSAGE_INVALID_TODO_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
             + "todo [project_index] [todo_description]";
