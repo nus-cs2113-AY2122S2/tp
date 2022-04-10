@@ -6,7 +6,7 @@ skinparam ClassBorderColor #000000
 show members
 hide empty members
 
-title Initial State
+title After Command Execution
 
 package " " {
     class Fam as "__family:Family__"

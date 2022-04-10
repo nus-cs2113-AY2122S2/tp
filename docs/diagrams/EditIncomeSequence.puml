@@ -90,11 +90,11 @@ alt OPT_COLOR isDescEdited || isAmountEdited || isPermEdited
     activate System
     Ilist <-- System
     deactivate System
-    Ilist -> Alist: incomeArrayList.get(0)
+    Ilist -> Alist: get(0)
     activate Alist
     Alist --> Ilist : item: Income
     deactivate Alist
-    Ilist -> System:println(Item)
+    Ilist -> System:println(item)
     activate System
     Ilist <-- System
     deactivate System
