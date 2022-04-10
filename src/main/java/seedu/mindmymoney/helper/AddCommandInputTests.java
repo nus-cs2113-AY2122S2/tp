@@ -300,8 +300,8 @@ public class AddCommandInputTests {
 
         //Test updated expenditure amount
         String oldPaymentMethod = getOldPaymentMethod(indexToUpdate, expenditureList);
-        if (isSamePaymentMethod(oldPaymentMethod, newPaymentMethod) &&
-                !newPaymentMethod.equalsIgnoreCase("cash")) {
+        if (isSamePaymentMethod(oldPaymentMethod, newPaymentMethod)
+                && !newPaymentMethod.equalsIgnoreCase("cash")) {
             testSameCreditCardExpenditure(indexToUpdate, amountAsString, expenditureList, creditCardList,
                     newPaymentMethod);
         } else {

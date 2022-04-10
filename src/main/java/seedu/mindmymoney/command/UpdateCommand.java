@@ -141,8 +141,8 @@ public class UpdateCommand extends Command {
             String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
             String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
 
-            testUpdateExpenditureParameters(indexToUpdate, newPaymentMethod, inputCategory, newDescription, newAmountAsString,
-                    inputTime, creditCardList, expenditureList);
+            testUpdateExpenditureParameters(indexToUpdate, newPaymentMethod, inputCategory, newDescription,
+                    newAmountAsString, inputTime, creditCardList, expenditureList);
 
             if (capitalise(newPaymentMethod).equals("Cash")) {
                 newPaymentMethod = capitalise(newPaymentMethod);
