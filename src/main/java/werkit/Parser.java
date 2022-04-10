@@ -10,6 +10,7 @@ import commands.SearchCommand;
 import commands.PlanCommand;
 import commands.ScheduleCommand;
 import data.exercises.ExerciseList;
+import data.exercises.InvalidExerciseException;
 import data.plans.PlanList;
 import data.schedule.DayList;
 import data.workouts.WorkoutList;
@@ -312,6 +313,7 @@ public class Parser {
      *
      * @param userInput The user's input.
      * @return A HelpCommand object.
+     * @throws InvalidCommandException  If the command specified by the user is invalid.
      */
     public HelpCommand createHelpCommand(String userInput) throws InvalidCommandException {
         String className = this.getClass().getSimpleName();
