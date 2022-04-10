@@ -20,11 +20,16 @@
       * [Add Income](#add-income-i)
       * [Design Considerations](#addCommand-design-considerations)
     * [CalculateInputCommand feature](#calculateinputcommand-feature)
-    * [List Command](#listcommand-feature)
+    * [List Command](#list-command)
       * [List Expenditure](#list-expenditure-e)
       * [List Credit Card](#list-credit-card-cc)
       * [List Income](#list-income-i)
       * [Design Considerations](#list-command-design-considerations)
+    * [Delete Command](#delete-command)
+      * [Delete Expenditure](#delete-expenditure-e)
+      * [Delete Credit Card](#delete-credit-card-cc)
+      * [Delete Income](#delete-income-i)
+      * [Design Considerations](#delete-command-design-considerations)
 * [Appendix Requirements](#appendix-requirements)
   * [Product scope](#product-scope)
   * [User Stories](#user-stories)
@@ -322,7 +327,7 @@ Aspect: How to allow users to have a better understanding of their own expenses.
 
 <br/>
 
-### ListCommand feature
+### List Command
 The source code can be found in [`ListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/ListCommand.java)  
 
 The List Command feature allows users to view their current expenditures, credit cards and incomes, using their
@@ -406,6 +411,95 @@ separate `ListCommand.listToString()` method.
   * Cons: JUnit testing would require I/O redirection prior to checking the output matches expectations.
 
 <br/>
+
+
+### Delete Command
+The source code can be found in [`DeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/DeleteCommand.java)
+
+The List Command feature allows users to delete an entry in their current expenditure, credit card or income list, using their
+respective flags and followed by the index of the entry to be deleted:
+- Delete an expenditure `/e [INDEX]`.
+- Delete a credit card `/cc [INDEX]`.
+- Delete an income `/i [INDEX]`.
+
+![delete_command_sequence_diagram](images/DeleteCommandSequenceDiagram.png)
+<br/> Fig 16 - Delete Command Sequence Diagram
+
+The sequence diagram above shows the interactions when a `DeleteCommand` is executed.
+1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
+2. If the expenses flag `/e` is present, it calls the `deleteExpenditure()` method.
+3. Else if the credit card flag `/cc` is present, it calls the ` deleteCreditCard()` method.
+4. Else if the income flag `/i` is present, it calls the `deleteIncome()` method.
+5. Else, it throws an error, which is then handled by printing an error message to the user.
+
+<br/>
+
+
+#### Delete Expenditure `/e`
+Deletes an expenditure entry specified by the user using the expenditure's index. The expenditure is deleted through the `DeleteCommand.deleteExpenditure()`
+method, invoked when using the `/e` flag.
+
+![delete_expenditure_sequence_diagram](images/DeleteExpenditureSequenceDiagram.png)
+<br/> Fig 17 - Delete Expenditure Sequence Diagram
+
+The sequence diagram above shows the interactions when listing expenditures.
+1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
+2. `DeleteCommand.deleteExpenditure()`method is invoked as the `/e` flag is present.
+3. `expenditureList.get()` method is then invoked, which retrieves the expenditure object to be deleted.
+4. `Expenditure.getPaymentMethod()` is then used to check if the payment method was in `CASH`.
+5. For Credit Card payment methods, the amount of expenditure is deducted from `CreditCard.totalExpenditure`. 
+6. Details of the deleted expenditure is then printed out.
+7. Control is returned to `MMM`.
+
+<br/>
+
+
+#### Delete Credit Card `/cc`
+Deletes a credit card specified by the user using the credit card's index. The credit card is deleted through the `DeleteCommand.deleteCreditCard()`
+method, invoked when using the `/cc` flag.
+
+![Delete_credit_card_sequence_diagram](images/DeleteCreditCardSequenceDiagram.png)
+<br/> Fig 18 - Delete Credit Card Sequence Diagram
+
+The sequence diagram above shows the interactions when listing credit cards.
+1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
+2. `DeleteCommand.deleteCreditCard()`method is invoked as the `/cc` flag is present.
+3. `creditCardList.delete()` method is then invoked, which removes the specified index of Credit Card input by the user.
+4. Details of the deleted Credit Card is then printed out.
+5. Control is returned to `MMM`.
+
+<br/>
+
+
+#### Delete Income `/i`
+Deletes an Income specified by the user using the Income's index. The Income is deleted through the `DeleteCommand.deleteIncome()`
+method, invoked when using the `/i` flag.
+
+![Delete_income_sequence_diagram](images/DeleteIncomeSequenceDiagram.png)
+<br/> Fig 19 - List Income Sequence Diagram
+
+The sequence diagram above shows the interactions when listing credit cards.
+1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
+2. `DeleteCommand.deleteIncome()`method is invoked as the `/i` flag is present.
+3. `IncomeList.delete()` method is then invoked, which removes the specified index of Income input by the user.
+4. Details of the deleted Income is then printed out.
+5. Control is returned to `MMM`.
+
+<br/>
+
+
+#### Delete Command design considerations
+Aspect: To print deleted object from User's list.
+* Alternative 1 (current choice): Prints details of deleted Expenditure, Credit Card, or Income.
+    * Pros: Users can easily verify that they have correctly deleted the object intended.
+    * Cons: Printing extraneous lines onto the Command-Line may affect user-experience and find the output overwhelming.
+
+* Alternative 2: Quietly delete the specified Expenditure, Credit Card, or Income.
+    * Pros: Easily implemented.
+    * Cons: Users are unable to verify that the correct object was deleted.
+
+<br/>
+
 
 ## Appendix Requirements
 
