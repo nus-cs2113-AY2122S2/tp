@@ -5,6 +5,7 @@ import seedu.duke.commands.DescCommand;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.EditCommand;
 import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.BorrowCommand;
 import seedu.duke.commands.ReturnCommand;
 import seedu.duke.data.Item;
 
