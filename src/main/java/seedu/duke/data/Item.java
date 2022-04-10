@@ -18,13 +18,14 @@ public class Item {
     private String name;
     private int quantity;
     private String description;
+    private ArrayList<BorrowRecord> borrowRecords;
     private boolean isLost = false;
-    public ArrayList<BorrowRecord> borrowRecords = new ArrayList<BorrowRecord>();
 
     public Item(String name, int quantity, String description) {
         this.name = name;
         this.quantity = quantity;
         this.description = description;
+        this.borrowRecords = new ArrayList<>();
     }
 
     public boolean getLost() {
@@ -83,19 +84,27 @@ public class Item {
     }
 
     /**
-     * Add a new borrow record to the item.
-     * @param newRecord A borrow record.
+     * Adds a new borrow record to the item.
+     *
+     * @param newRecord A new borrow record.
      * @return This item that has been added with a new borrow record.
+     * @throws InvMgrException If there is insufficient quantity in inventory to borrow.
      */
     public Item addBorrowRecord(BorrowRecord newRecord) throws InvMgrException {
-        // Iterate through each borrow records.
-        // Throw exception if newRecord conflicts with existing records.
+        // Compute total quantity borrowed in overlapping records.
+        int quantityBorrowed = newRecord.getQuantity();
         for (BorrowRecord record : borrowRecords) {
             if (newRecord.isConflict(record)) {
-                throw new InvMgrException(Messages.INVALID_DATES_CONFLICT);
+                quantityBorrowed += record.getQuantity();
             }
         }
 
+        // Throw exception if there is insufficient quantity in inventory.
+        if (quantityBorrowed > quantity) {
+            throw new InvMgrException(Messages.INVALID_INSUFFICIENT_QUANTITY);
+        }
+
+        // Sufficient quantity in inventory, add borrow record.
         this.borrowRecords.add(newRecord);
         return this;
     }
@@ -127,7 +136,11 @@ public class Item {
 
     @Override
     public String toString() {
-        return String.format("%s | %d", this.name, this.quantity);
+        String output = String.format("%s | %d", this.name, this.quantity);
+        if (isLost) {
+            output = output + " |[LOST]";
+        }
+        return output;
     }
 
     public String toDetailedString() {
@@ -136,25 +149,39 @@ public class Item {
         }
         return String.format("%s | %d | %s", this.name, this.quantity, this.description);
     }
-    /**
-     *     // String representation of an item when printed on Ui.
-     *     @Override
-     *     public String toString() {
-     *         String string1 = (name + " | " + quantity);
-     *         if (isLost) {
-     *             string1 = string1 + " |[LOST]";
-     *         }
-     *         return string1;
-     *     }
-     * */
-
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Item // instanceof handles nulls
-                && this.name.equals(((Item) other).name)
-                && this.description.equals(((Item) other).description)
-                && (this.quantity == ((Item) other).quantity));
+        if (other == this) {
+            return true; // short circuit if same object
+        }
+        // instanceof handles nulls
+        if (other instanceof Item) {
+            Item otherItem = ((Item) other);
+            return this.name.equals(otherItem.name)
+                    && this.description.equals(otherItem.description)
+                    && this.quantity == (otherItem.quantity)
+                    && this.borrowRecords.containsAll(otherItem.borrowRecords);
+        }
+        return false;
+    }
+
+    public static Item copyItem(Item item) {
+        String name = item.getName();
+        int quantity = item.getQuantity();
+        String description = item.getDescription();
+        ArrayList<BorrowRecord> borrowRecords = item.getBorrowRecords();
+        boolean isLost = item.getLost();
+        Item copiedItem = new Item(name, quantity, description);
+        try {
+            for (int i = 0; i < borrowRecords.size(); i++) {
+                copiedItem.addBorrowRecord(borrowRecords.get(i));
+            }
+        } catch (InvMgrException e) {
+            // suppress error, return null
+            return null;
+        }
+        copiedItem.setLost(isLost);
+        return copiedItem;
     }
 }

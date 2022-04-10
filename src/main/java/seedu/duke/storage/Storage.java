@@ -1,7 +1,9 @@
 package seedu.duke.storage;
 
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.Item;
 
 import com.google.gson.Gson;
@@ -14,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,13 +46,15 @@ public class Storage {
     public ArrayList<Item> load() throws InvMgrException {
         ArrayList<Item> bufferTaskList;
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(BorrowRecord.class, new BorrowRecordAdapter())
+                .create();
         try {
             List<String> jsonDataList = Files.readAllLines(dataPath);
             String wholeJsonData = String.join("\n", jsonDataList);
             TypeToken<ArrayList<Item>> dataType = new TypeToken<ArrayList<Item>>(){};
             bufferTaskList = gson.fromJson(wholeJsonData, dataType.getType());
-        } catch (JsonParseException e) {
+        } catch (JsonParseException | NullPointerException e) {
             throw new InvMgrException(JSON_PARSING_ERROR,e);
         } catch (IOException e) {
             throw new InvMgrException(READ_FILE_IOERROR,e);
@@ -72,7 +77,10 @@ public class Storage {
             throw new NullPointerException();
         }
         try {
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(BorrowRecord.class, new BorrowRecordAdapter())
+                    .create();
+
             String serializedItems = gson.toJson(itemList);
             Files.writeString(dataPath,
                     serializedItems,
