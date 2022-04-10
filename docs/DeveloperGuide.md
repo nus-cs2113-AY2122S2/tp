@@ -2196,9 +2196,9 @@ The following are some test cases for you to try:
 
 ##### Positive Test Cases
 
-| Test Case                    | Command          | Expected result                                  |
-|:-----------------------------|:-----------------|:-------------------------------------------------|
-| Valid list exercise command. | `exercise /list` | List down all exercises stored in exercise list. |
+| Test Case                    | Command                 | Expected result                                  |
+|:-----------------------------|:------------------------|:-------------------------------------------------|
+| Valid list exercise command. | `exercise        /list` | List down all exercises stored in exercise list. |
 
 ##### Negative Test Cases
 
