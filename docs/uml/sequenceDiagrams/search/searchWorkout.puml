@@ -27,7 +27,7 @@ deactivate WorkoutList
 
 newCommand -> newCommand : searchWorkout()
 activate newCommand #LightSkyBlue
-
+return A list of workouts to search is displayed
 newCommand --> WerkIt
 
 deactivate newCommand
