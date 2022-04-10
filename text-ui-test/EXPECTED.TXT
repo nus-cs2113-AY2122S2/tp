@@ -1,3 +1,19 @@
+proj1 added.
+Todo: task have been added to project proj1
+Deadline set for task: 2022-03-16
+Todo: another task  have been added to project proj1
+Todo has been marked as done successfully:
+[X] another task : No deadline specified
+Todo: task have been added to project proj1
+Todo: another task  have been added to project proj1
+Deadline set for proj1: 2022-03-17
+The Github Repo for proj1 has been changed to: https://github.com/AY2122S2-CS2113-F10-1/tp
+java language added.
+python language added.
+java language added.
+python language added.
+proj3 added.
+The Github Repo for proj3 has been changed to: http://www.github.com
 
    ___________ ____               _    ____  __
   / ____/ ___// __ \_________    (_)  / __ \/ /___ _____  ____  ___  _____
@@ -17,15 +33,15 @@ Here are all the possible commands:
 1. addproject [Project Name]
 2. deleteproject [Project Name]
 3. changegit [Project Index] [GitHub URL]
-4. opengit [Project Name]
+4. opengit [Project Index]
 5. projdeadline [Project Index] [Date]
 6. tododeadline [Project Index] [Todo Index] [Date]
 7. todo [Project Index] [Description]
 8. mark [Project Index] [Todo Index]
 9. listprojects/listproject
 10. addlanguage [Project Index] [Language]
-11. listlanguages [Project Name]
-12. view [Project Name]
+11. listlanguages [Project Index]
+12. view [Project Index]
 13. exit
 ____________________________________________________________
 What can I help you with next?
@@ -78,7 +94,9 @@ ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-You have not added any projects yet!
+Here are all current project(s) in your list:
+[1] proj1 (2022-03-17)
+[2] proj3 (No deadline specified)
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
@@ -98,7 +116,7 @@ ____________________________________________________________
 ____________________________________________________________
 Execution result: Invalid command format!
 The correct format should be:
-opengit [project_name]
+opengit [project_index]
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
@@ -117,7 +135,7 @@ ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-proj1 added.
+Failed to add proj1. You have added this project before!
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
@@ -127,15 +145,15 @@ ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-proj3 added.
+Failed to add proj3. You have added this project before!
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
 Here are all current project(s) in your list:
-[1] proj1 (No deadline specified)
-[2] proj2 (No deadline specified)
-[3] proj3 (No deadline specified)
+[1] proj1 (2022-03-17)
+[2] proj3 (No deadline specified)
+[3] proj2 (No deadline specified)
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
@@ -151,7 +169,7 @@ What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
 Here are all current project(s) in your list:
-[1] proj1 (No deadline specified)
+[1] proj1 (2022-03-17)
 [2] proj3 (No deadline specified)
 ____________________________________________________________
 What can I help you with next?
@@ -172,12 +190,12 @@ ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-Execution result: Unsuccessful. The index is a negative number!
+Execution result: Unsuccessful. The index is zero or a negative number!
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-Execution result:Unsuccessful.The target index is not found in the list.
+Execution result:Unsuccessful. The target index is not found in the list.
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
@@ -223,9 +241,17 @@ Deadline: 2022-03-17
 GitHub Repo: https://github.com/AY2122S2-CS2113-F10-1/tp
 	[1]. [ ] task: 2022-03-16
 	[2]. [X] another task : No deadline specified
+	[3]. [ ] task: No deadline specified
+	[4]. [ ] another task : No deadline specified
+	[5]. [ ] task: No deadline specified
+	[6]. [ ] another task : No deadline specified
 Programming languages for proj1:
 	[1]. java
 	[2]. python
+	[3]. java
+	[4]. python
+	[5]. java
+	[6]. python
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
