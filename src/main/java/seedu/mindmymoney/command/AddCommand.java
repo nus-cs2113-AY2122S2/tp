@@ -21,12 +21,9 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testCashbackAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testCreditCardLimit;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testCreditCardName;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureParameters;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeParameters;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testCreditCardParameters;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
@@ -103,21 +100,6 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Tests if the input parameters of credit card from the user are valid.
-     *
-     * @param cardName  The name of the credit card.
-     * @param cashBack  The amount of cashback the card provides.
-     * @param cardLimit The spending limit of the credit card.
-     * @throws MindMyMoneyException when the parameters are invalid.
-     */
-    public void testCreditCardParameters(String cardName, String cashBack, String cardLimit)
-        throws MindMyMoneyException {
-        testCreditCardName(cardName);
-        testCashbackAmount(cashBack);
-        testCreditCardLimit(cardLimit);
-    }
-
-    /**
      * Inserts an Expenditure object into user's list of expenditure(s).
      *
      * @throws MindMyMoneyException when inputs are invalid or flags are missing.
@@ -187,10 +169,8 @@ public class AddCommand extends Command {
 
         try {
             int amountAsInt = Integer.parseInt(amountAsString);
-            testIncomeAmount(amountAsInt);
-
             String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_END_VALUE);
-            testIncomeCategory(inputCategory);
+            testIncomeParameters(amountAsInt, inputCategory);
             String category = capitalise(inputCategory);
 
             incomeList.add(new Income(amountAsInt, category));
