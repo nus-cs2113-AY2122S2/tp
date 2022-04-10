@@ -26,7 +26,6 @@ alt OPT_COLOR description != null && !Description.equals("Bills")
     Ilist -> Inc: setDescription("Bills")
     activate Inc
     Inc --> Ilist: True
-    deactivate Inc
 else else
     Inc --> Ilist: False
     deactivate Inc
@@ -51,7 +50,6 @@ alt OPT_COLOR isPermanent != null && !isPermanent.equals(null)
     Ilist -> Inc: setPermanent(null)
     activate Inc
     Inc --> Ilist: True
-    deactivate Inc
 else else
     Inc --> Ilist: False
     deactivate Inc
@@ -76,7 +74,6 @@ alt OPT_COLOR Amount != null && !Amount.equals(null)
     Ilist -> Inc: setAmount(null)
     activate Inc
     Inc --> Ilist: True
-    deactivate Inc
 else else
     Inc --> Ilist: False
     deactivate Inc
