@@ -18,7 +18,7 @@
       * [Add Expenditure](#add-expenditure-e)
       * [Add Credit Card](#add-credit-card-cc)
       * [Add Income](#add-income-i)
-      * [Design Considerations](#addCommand-design-considerations)
+      * [Design Considerations](#addcommand-design-considerations)
     * [CalculateInputCommand feature](#calculateinputcommand-feature)
     * [List Command](#list-command)
       * [List Expenditure](#list-expenditure-e)
@@ -30,6 +30,10 @@
       * [Delete Credit Card](#delete-credit-card-cc)
       * [Delete Income](#delete-income-i)
       * [Design Considerations](#delete-command-design-considerations)
+    * [Storage](#storage)
+      * [Loading](#loading)
+      * [Saving](#saving)
+      * [Design Considerations](#storage-design-considerations)
 * [Appendix Requirements](#appendix-requirements)
   * [Product scope](#product-scope)
   * [User Stories](#user-stories)
@@ -586,7 +590,7 @@ this serialized `PropertyList` is returned by `Expenditure::serialize`.
 5. These serialized expenditures are aggregated into an `String`, which is returned
    to the `deserializeFrom()` call.
 
-#### Design Considerations
+#### Storage Design Considerations
 
 Aspect: When to save user data.
 * Alternative 1 (current choice): After every command.
