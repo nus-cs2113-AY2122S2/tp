@@ -8,7 +8,7 @@ Singapore.
 ### About the Project
 WerkIt! is a command line interface (CLI) application written in Java that allows users to create a weekly workout
 schedule for them to refer to and follow. More details about the project can be found in the following locations:
-* [GitHub Repository](../../)
+* [GitHub Repository](https://github.com/AY2122S2-CS2113T-T09-2/tp)
 * [WerkIt! User Guide](../UserGuide.md)
 * [WerkIt! Developer Guide](../DeveloperGuide.md)
 
@@ -63,7 +63,7 @@ A summary of my code contributions are as follows:
 - Wrote the guide on [listing of plans](../UserGuide.md#list-a-plan-plan-list).
 - Modified some parts of the [Quick Start Guide](../UserGuide.md#quick-start-guide) section.
 - Wrote parts of the table of contents.
-- Wrote parts of the command summary.
+- Wrote parts of the [Command Summary](../UserGuide.md#command-summary).
 - Contributed to a part of the [FAQ](../UserGuide.md#1-my-terminal-in-windows-is-displaying-weird-symbols-when-i-run-the-application),
 by suggesting that we should include what weird symbols in the terminal looks like (FAQ written by team member Alan).
 
