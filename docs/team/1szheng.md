@@ -107,6 +107,8 @@ better management, and categorise your expenditures. PlanITarium is written in, 
       [#124](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/124),
       [#237](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/237)
 
+<div style="page-break-after: always;"></div>
+
 ## Reproduced [User Guide](../UserGuide.md) Contribution
 
 This section contains the reproduction of some of my contributions to the User Guide. The hyperlinks have been
@@ -190,7 +192,7 @@ Example of usage:
 
   ![deletein-command-screenshot](../images/DeleteIncome.png)
 
-<br/>
+<div style="page-break-after: always;"></div>
 
 ## Reproduced [Developer Guide](../DeveloperGuide.md) Contribution
 
