@@ -602,12 +602,18 @@ and will be processed, before returning the user input as a `String` to the call
 `WerkIt#startContinuousUserPrompt()`).
 
 **(Step 3)** In `WerkIt#startContinuousUserPrompt()`, the method will pass the obtained user string as a parameter into
-`Parser#parseUserInput()`. The latter method will first check if the user input contains any characters
-or symbols that are deemed as illegal (see [Illegal Characters and Phrases](#illegal-characters-and-phrases) for details).
+`WerkIt#parseUserInput()`, an intermediary method that will pass the parameter to `Parser#parseUserInput()` which does
+the actual parsing of the user input.
+
+<span class="box info">:memo: The intermediary `WerkIt#parseUserInput()` is created to reduce the arrowhead code that
+was grossly present in `WerkIt#startContinuousUserPrompt()`.</span>
+
+**(Step 4)** In `Parser#parseUserInput()`, it will first check if the user input contains any characters
+or symbols that are deemed as illegal (see ['Illegal Characters and Phrases'](#illegal-characters-and-phrases) for details).
 If at least one illegal character or phrase is found, an `InvalidCommandException` will be thrown and the parsing is
 aborted.
 
-**(Steps 4 to 17)** If no illegal characters and phrases are found, `Parser#parseUserInput()` will examine the first
+**(Steps 5 to 18)** If no illegal characters and phrases are found, `Parser#parseUserInput()` will examine the first
 word in the user input. This first word should represent the command type that the user wish to execute (i.e. `exercise`,
 `workout`, `plan`, `schedule`, `search`, `help`, or `exit`). Depending on the first word of the user input, different
 methods will be invoked to create the appropriate object of the subclass of the `Command` abstract superclass (see the 
@@ -626,7 +632,8 @@ of `Command` is carried out:
 3. A new object of the subclass of `Command` is created and if the object is successfully constructed with no errors,
 it is returned to `Parser#parseUserInput()`.
 
-**(Step 18)** The object created is then returned to `WerkIt#startContinuousUserInput()`.
+**(Steps 19 and 20)** The object created is then returned to `WerkIt#parseUserInput()`, which will return to
+`WerkIt#startContinuousUserInput()`.
 
 <span class="box info">:memo: (About the sequence diagram) Strictly speaking, the object is returned right after whichever 
 'create command' method is invoked. However, to improve the readability of the diagram, only one return line is shown,
