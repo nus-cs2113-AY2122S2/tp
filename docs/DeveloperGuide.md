@@ -532,7 +532,7 @@ The general workflow of the `activity /list` command is as follows:
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
 
 The sequence diagram for `GroupCreateCommand` is omitted as it bears many similarities with [`SessionCreateCommand`](#add-a-session).<br>
-The interactions of GroupCreateCommand with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
+The interactions of `GroupCreateCommand` with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
 * `GroupCreateCommand` parses only the **name** and **list of persons**. It then creates a new `Group` object and adds it to the list of groups managed by the `Profile` class.
 
 Please refer to the [sequence diagram](#add-a-session) of `SessionCreateCommand` for reference.
@@ -573,9 +573,9 @@ when the user invokes the `group /delete` command.
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
 The sequence diagram for `GroupViewCommand` is omitted as it bears many similarities with [`SessionViewCommand`](#view-a-session).<br>
-The interactions of GroupViewCommand with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
+The interactions of `GroupViewCommand` with the `Profile` class is identical but the key differences are as follows:
 * `GroupViewCommand` parses the **group unique identifier** instead of the **session unique identifier**.
-It then displays the details of the `Group` object from the list of groups managed by the `Profile` class corresponding to the **group unique identifier**.
+* It then displays the details of the `Group` object from the list of groups managed by the `Profile` class corresponding to the **group unique identifier**.
 
 Please refer to the [sequence diagram](#view-a-session) of `SessionViewCommand` for reference.
 
@@ -594,14 +594,12 @@ The general workflow of the `group /view` command is as follows:
 
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
+The sequence diagram for `GroupListCommand` is omitted as it bears many similarities with [`SessionListCommand`](#list-sessions).<br>
+The interactions of `GroupListCommand` with the `Profile` class is identical but the key differences lies in the objects that are used in the `Profile` class:
+* `GroupListCommand` calls the method `Profile#getGroupListSummaryString` instead of `Profile#getSessionListSummaryString` which utilises the list of groups instead of the list of sessions.
 
-The sequence diagram below models the interactions between various entities in SplitLah
-when the user invokes the `group /list` command.
-<br>
-<br>
-![List Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupListCommand.drawio.png)
-<br>
-<br>
+Please refer to the [sequence diagram](#list-sessions) of `SessionListCommand` for reference.
+
 The general workflow of the `group /list` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
