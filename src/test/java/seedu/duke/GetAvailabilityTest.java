@@ -19,30 +19,30 @@ public class GetAvailabilityTest {
         CommandParser parser = new CommandParser();
         Command command = parser.parse("get available on 1");
         GetAvailableHousekeeperCommand getAvailableHousekeeperCommand = (GetAvailableHousekeeperCommand) command;
-        assertEquals(1, getAvailableHousekeeperCommand.getSearchDay() );
+        assertEquals(1, getAvailableHousekeeperCommand.getSearchDay());
     }
 
     @Test
     public void duplicateAvailableDayCommand_exceptionThrown() {
         assertThrows(DuplicateCommandException.class, () ->
-                new CommandParser().parse("get available on get available on  "));
+                new CommandParser().parse("get available on get available on  ");
     }
 
     @Test
     public void emptyDay_exceptionThrown() {
         assertThrows(EmptyDayException.class, () ->
-                new CommandParser().parse("get available on "));
+                new CommandParser().parse("get available on ");
     }
 
     @Test
     public void dayGivenNotInteger_exceptionThrown() {
         assertThrows(InvalidDayException.class, () ->
-                new CommandParser().parse("get available on x"));
+                new CommandParser().parse("get available on x");
     }
 
     @Test
     public void dayGivenNotInLimit_exceptionThrown() {
         assertThrows(InvalidDayException.class, () ->
-                new CommandParser().parse("get available on 100"));
+                new CommandParser().parse("get available on 100");
     }
 }
