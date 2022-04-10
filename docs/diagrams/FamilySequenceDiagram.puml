@@ -14,7 +14,7 @@ participant ":PersonList" as PersonList MODEL_COLOR_T3
 participant "Alice:Person" as Person MODEL_COLOR_T2
 end box
 
-participant ":System" as System LOGIC_COLOR
+participant ":System" as System SYSTEM_COLOR
 participant ":MoneyList" as Money MONEY_COLOR
 participant ":UI" as UI UI_COLOR
 
@@ -24,7 +24,7 @@ Command -> Family: addPerson()
 activate Family
 Family -> Family: getList()
 activate Family
-Family <- Family: :PersonList
+Family --> Family: :PersonList
 deactivate Family
 Family -> Parents: addPerson()
 activate Parents
@@ -34,29 +34,29 @@ activate Person
 create Money
 Person -> Money: MoneyList()
 activate Money
-Person <- Money
+Person <-- Money
 deactivate Money
-Parents <- Person
+Parents <-- Person
 deactivate Person
-Family <- Parents
+Family <-- Parents
 deactivate Parents
-opt Not Silent
+opt OPT_COLOR Not Silent
     Family -> Family: getGenerationName()
     activate Family
-    Family <- Family: generation: String
+    Family --> Family: generation:String
     deactivate Family
     Family -> Family: printPersonAdded()
     activate Family
     Family -> System: println()
     activate System
-    Family <- System
-    Family <- Family
+    Family <-- System
+    Family --> Family
     deactivate System
     deactivate Family
 end opt
-Command <- Family
+Command <-- Family
 deactivate Family
-<- Command
+<-- Command
 deactivate Command
 
 -> Command: addin /g 1 /u 1 /i ...
@@ -69,25 +69,25 @@ Parents -> Person: addIncome()
 activate Person
 Person -> Money: addIncome()
 activate Money
-Person <- Money
+Person <-- Money
 deactivate Money
-opt Not Silent
+opt OPT_COLOR Not Silent
     Person -> UI: formatValue()
     activate UI
-    Person <- UI: income:String
+    Person <-- UI: income:String
     deactivate UI
     Person -> System: println()
     activate System
-    Person <- System
+    Person <-- System
     deactivate System
 end opt
-Parents <- Person
+Parents <-- Person
 deactivate Person
-Family <- Parents
+Family <-- Parents
 deactivate Parents
-Command <- Family
+Command <-- Family
 deactivate Family
-<- Command
+<-- Command
 deactivate Command
 
 -> Command: list /g 1
@@ -96,53 +96,53 @@ Command -> Family: list()
 activate Family
 Family -> Family: getGenerationName()
 activate Family
-Family <- Family: generation:String
+Family --> Family: generation:String
 deactivate Family
 Family -> System: println()
 activate System
-Family <- System
+Family <-- System
 deactivate System
 Family -> Family: getList()
 activate Family
-Family <- Family: personList:PersonList
+Family --> Family: personList:PersonList
 deactivate Family
 Family -> Parents: list()
 activate Parents
-loop for every Person
+loop LOOP_COLOR for every Person
     Parents -> Parents: getPerson()
     activate Parents
-    Parents <- Parents:
+    Parents --> Parents:
     deactivate Parents
     Parents -> System: println()
     activate System
-    Parents <- System
+    Parents <-- System
     deactivate System
     Parents -> Person: listIncome()
     activate Person
     Person -> Money: printIncomeList()
     activate Money
-    Person <- Money
+    Person <-- Money
     deactivate Money
-    Parents <- Person
+    Parents <-- Person
     deactivate Person
-        Parents -> Person: listExpenditure()
-        activate Person
-        Person -> Money: printExpenditureList()
-        activate Money
-        Person <- Money
-        deactivate Money
-        Parents <- Person
-        deactivate Person
-        Parents -> System: println()
-        activate System
-        Parents <- System
-        deactivate System
+    Parents -> Person: listExpenditure()
+    activate Person
+    Person -> Money: printExpenditureList()
+    activate Money
+    Person <-- Money
+    deactivate Money
+    Parents <-- Person
+    deactivate Person
+    Parents -> System: println()
+    activate System
+    Parents <-- System
+    deactivate System
 end loop
-Family <- Parents
+Family <-- Parents
 deactivate Parents
-Command <- Family
+Command <-- Family
 deactivate Family
-<- Command
+<-- Command
 deactivate Command
 
 -> Command: overview
@@ -151,61 +151,61 @@ Command -> Family: overview()
 activate Family
 Family -> System: println()
 activate System
-Family <- System
+Family <-- System
 deactivate System
-loop For all Personlists in Family
+loop LOOP_COLOR For all PersonLists in Family
     Family -> Family: getList()
     activate Family
-    Family <- Family: personList:PersonList
+    Family --> Family: personList:PersonList
     deactivate Family
     Family -> PersonList: getTotalIncome()
     activate PersonList
-    Family <- PersonList: income:Double
+    Family <-- PersonList: income:Double
     deactivate PersonList
     Family -> UI: formatValue()
     activate UI
-    Family <- UI: incomeString:String
+    Family <-- UI: incomeString:String
     deactivate UI
     Family -> PersonList: getTotalExpenditure()
     activate PersonList
-    Family <- PersonList: expenditure:Double
+    Family <-- PersonList: expenditure:Double
     deactivate PersonList
     Family -> UI: formatValue()
     activate UI
-    Family <- UI: expenditureString:String
+    Family <-- UI: expenditureString:String
     deactivate UI
     Family -> PersonList: getRemain()
     activate PersonList
-    Family <- PersonList: remain:Double
+    Family <-- PersonList: remain:Double
     deactivate PersonList
     Family -> UI: formatValue()
     activate UI
-    Family <- UI: disposable:String
+    Family <-- UI: disposable:String
     deactivate UI
     Family -> Family: getGenerationName()
     activate Family
-    Family <- Family: generation:String
+    Family --> Family: generation:String
     deactivate Family
     Family -> Family: printFormattedOverview()
     activate Family
     Family -> System: println()
     activate System
-    Family <- System
+    Family <-- System
     deactivate System
-    Family <- Family
+    Family --> Family
     deactivate Family
 end loop
 Family -> UI: formatValue()
 activate UI
-Family <- UI: familyDisposable:String
+Family <-- UI: familyDisposable:String
 deactivate UI
 Family -> System: println()
 activate System
-Family <- System
+Family <-- System
 deactivate System
-Command <- Family
+Command <-- Family
 deactivate Family
-<- Command
+<-- Command
 deactivate Command
 
 @enduml
