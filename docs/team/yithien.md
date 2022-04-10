@@ -51,7 +51,7 @@ Given below are my contributions to the project.
       [#130](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/130)
     - Suggested bug fix for delimiter issues post PE-D adjustments
 - **Community:**
-    - PRs reviewed: [#56](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/56),
+    - Gave comments and reviewed the following PRs: [#56](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/56),
       [#64](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/64),
       [#76](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/76),
       [#77](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/77),
@@ -59,5 +59,6 @@ Given below are my contributions to the project.
       [#129](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/129),
       [#131](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/131),
       [#137](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/137),
-      [#138](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/138)
+      [#138](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/138), 
+      [#150](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/150)
 
