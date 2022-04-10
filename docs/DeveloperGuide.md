@@ -295,7 +295,7 @@ The CalculateCommand can take in 3 different `[DATE]` fields:
 
 <br/>
 
-![calculate_command_sequence_diagram](images/CalculateCommandSequenceDiagram3.png)
+![calculate_command_sequence_diagram](images/CalculateCommandSequenceDiagram.png)
 <br/> Fig 11 - Calculate Input Command Sequence Diagram
 
 The sequence diagram above shows the interactions of different classes when calculating the expenditure.

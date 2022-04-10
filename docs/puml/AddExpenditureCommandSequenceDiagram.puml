@@ -13,7 +13,7 @@ participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR
 end box
 hide footbox
 
-MMM -> AddCommand: AddCommand.executeCommand()
+MMM -> AddCommand: executeCommand()
 activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> AddCommand: addExpenditure()
@@ -21,42 +21,72 @@ activate AddCommand COMMANDS_COLOUR
 
 AddCommand -> GeneralFunctions: parseInputWithCommandFlag()
 activate GeneralFunctions HELPER_COLOUR
-GeneralFunctions --> AddCommand: paymentMethod, category, description, amount, time
+GeneralFunctions --> AddCommand
 deactivate GeneralFunctions
 
 
-AddCommand -> AddCommand: testExpenditureParameters(paymentMethod, category, description, amount, time, creditCardList)
-activate AddCommand COMMANDS_COLOUR
-AddCommand -> AddCommandInputTest: testsPaymentMethod(), testExpenditureCategory(), testDescription(), testExpenditureAmount(), time,
+AddCommand -> AddCommandInputTest: testExpenditureParameters()
 activate AddCommandInputTest HELPER_COLOUR
+
+AddCommandInputTest -> AddCommandInputTest: testsPaymentMethod()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: testExpenditureCategory()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: testDescription()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: testExpenditureAmount()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: checkValidDate()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+AddCommandInputTest -> AddCommandInputTest: checkAfterCurrentDate()
+activate AddCommandInputTest HELPER_COLOUR
+AddCommandInputTest --> AddCommandInputTest
+deactivate AddCommandInputTest
+
+
 AddCommandInputTest --> AddCommand
 deactivate AddCommandInputTest
 AddCommand --> AddCommand
 deactivate AddCommand COMMANDS_COLOUR
 
-opt paymentMethod == cash
+opt PAYMENT_METHOD == cash
 AddCommand -> GeneralFunctions: capitalise(paymentMethod)
 activate GeneralFunctions HELPER_COLOUR
-GeneralFunctions --> AddCommand: Capitalised paymentMethod
+GeneralFunctions --> AddCommand
 deactivate GeneralFunctions
 end
 AddCommand -> GeneralFunctions: capitalise(category)
 activate GeneralFunctions HELPER_COLOUR
-GeneralFunctions --> AddCommand: Capitalised category
+GeneralFunctions --> AddCommand
 deactivate GeneralFunctions
 
 AddCommand -> GeneralFunctions: formatFloat(amount)
 activate GeneralFunctions HELPER_COLOUR
-GeneralFunctions --> AddCommand: Amount rounded to 2dp
+GeneralFunctions --> AddCommand
 deactivate GeneralFunctions
 
 create Expenditure
-AddCommand -> Expenditure: new Expenditure(paymentMethod, category, description, amount, time)
+AddCommand -> Expenditure: Expenditure()
 activate Expenditure USERFINANCIAL_COLOUR
 Expenditure --> AddCommand
 deactivate Expenditure
 
-AddCommand -> ExpenditureList: expenditureList.add(new Expenditure)
+AddCommand -> ExpenditureList: add()
 activate ExpenditureList DATA_COLOUR
 ExpenditureList --> AddCommand
 deactivate ExpenditureList
@@ -66,18 +96,18 @@ Details of newly added expenditure
 is printed out
 end note
 
-opt paymentMethod != cash
+opt PAYMENT_METHOD != cash
 
-AddCommand -> AddCommand: AddCommand.updateCreditCardTotalExpenditure(paymentMethod, amountFloat)
+AddCommand -> AddCommand: updateCreditCardTotalExpenditure()
 activate AddCommand COMMANDS_COLOUR
-AddCommand -> CreditCardList: creditCardList.get(cardName)
+AddCommand -> CreditCardList: get()
 activate CreditCardList DATA_COLOUR
 CreditCardList --> AddCommand
 deactivate CreditCardList
 
-AddCommand -> CreditCard: creditCard.addExpenditure(amount)
+AddCommand -> CreditCard: addExpenditure(amount)
 activate CreditCard USERFINANCIAL_COLOUR
-CreditCard --> AddCommand: creditCard.getBalanceLeft()
+CreditCard --> AddCommand
 deactivate CreditCard
 
 AddCommand --> AddCommand
@@ -88,6 +118,6 @@ end
 
 AddCommand --> AddCommand:
 deactivate AddCommand
-AddCommand --> MMM: finishedMessage
+AddCommand --> MMM
 deactivate AddCommand
 @enduml

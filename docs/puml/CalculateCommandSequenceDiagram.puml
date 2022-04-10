@@ -9,7 +9,7 @@ participant ":GeneralFunctions" as GeneralFunctions  HELPER_COLOUR
 end box
 hide footbox
 
-MMM -> CalculateInputCommand: CalculateInputCommand.executeCommand()
+MMM -> CalculateInputCommand: executeCommand()
 activate CalculateInputCommand COMMANDS_COLOUR
 
 CalculateInputCommand -> GeneralFunctions: parseInput()
@@ -20,7 +20,6 @@ deactivate GeneralFunctions HELPER_COLOUR
 
 alt contain FLAG_OF_EXPENDITURE_PER_MONTH
 CalculateInputCommand -> Calculations: calculateExpenditure()
-activate CalculateInputCommand COMMANDS_COLOUR
 activate Calculations USERFINANCIAL_COLOUR
 Calculations -> GeneralFunctions: findItemInList()
 activate GeneralFunctions HELPER_COLOUR
@@ -33,13 +32,13 @@ deactivate Calculations HELPER_COLOUR
 Calculations --> CalculateInputCommand
 deactivate Calculations HELPER_COLOUR
 CalculateInputCommand --> MMM
-deactivate CalculateInputCommand COMMANDS_COLOUR
 
-
-else
-CalculateInputCommand --> MMM: MindMyMoneyException
+else else
+CalculateInputCommand --> MMM
+note right
+An exception containing warning messages is thrown
+end note
 deactivate CalculateInputCommand COMMANDS_COLOUR
 end
-
 
 @enduml

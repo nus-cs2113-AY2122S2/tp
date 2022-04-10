@@ -29,23 +29,25 @@ activate C COMMANDS_COLOUR
 
 C -> GF: parseInputWithCommandFlag()
 activate GF HELPER_COLOUR
-GF --> C: amountAsString
+GF --> C
 deactivate GF
 
-C -> IT: testIncomeAmount()
+C -> IT: testIncomeParameters()
 activate IT HELPER_COLOUR
+
+IT -> IT: testIncomeAmount()
+activate IT HELPER_COLOUR
+IT --> IT
+deactivate IT HELPER_COLOUR
+
+IT -> IT: testIncomeCategory()
+activate IT HELPER_COLOUR
+IT --> IT
+deactivate IT HELPER_COLOUR
+
 IT --> C
 deactivate IT
 
-C -> GF: parseInputWithCommandFlag()
-activate GF HELPER_COLOUR
-GF --> C: inputCategory
-deactivate GF
-
-C -> IT: testIncomeCategory()
-activate IT HELPER_COLOUR
-IT --> C
-deactivate IT
 
 create I
 C -> I: Income()
@@ -60,6 +62,11 @@ deactivate
 
 C --> C
 deactivate
+
+note left
+Details of newly added
+Income is printed out
+end note
 
 C --> MMM
 deactivate
