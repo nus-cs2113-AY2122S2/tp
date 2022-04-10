@@ -9,13 +9,14 @@
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 ### Update patient information
-Step 1:Patient inform the nurse of their change in personal information. Nurse will open up the Duke system and request to submit the change. Duke will call the Parser#etPatientInfo() to update the patient information. 
+Step 1:Patient inform the nurse of their change in personal information. Nurse will open up the IHospital system and request to submit the change. 
+IHospital will call the Parser which calls on etPatientInfo() to update the patient information. 
 
 Step 2:
 The parser will call the database storing patient information to update the change.
 
 The flow is presented in the sequence diagram (will be included later after pull request is permitted):
-![](patient.png)
+![](updatePatient.jpg)
 
 ### Exit program
 Step 1: User type "bye" as input to exit the program. IHospital will call Parser#getCommand()
@@ -64,7 +65,7 @@ WardList#addWard(ward).
 
 The following sequence diagram shows how the add operation works:
 
-![](addWard.png)
+![](AddWard.jpg)
 
 ### Add Appointment
 Step 1: User types "add appointment" to add an appointment to IHospital. 
