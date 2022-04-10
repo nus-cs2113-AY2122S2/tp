@@ -80,8 +80,14 @@ The warehouse class will contain:
 - LinkedHashMap of goods
   - A linked hashmap is chosen for goods to ensure that we are able to maintain the ordering of goods added while having the simplicity of accessing the necessary goods through their SKU
 
+### Display Class
+Display class is used to store and display different messages to user.
+#### Description
+![Display Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Display.puml)
+By calling different methods of Display class, Simplst can print out different messages for user
+
 ### UserInterface Class
-UserInterface class will be used to take user input and pass it to the corresponding command parser.
+UserInterface class is used to take user input and pass it to the corresponding command parser.
 
 #### Description
 ![UserInterface Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UserInterface.puml)
