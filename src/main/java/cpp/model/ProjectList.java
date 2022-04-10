@@ -28,7 +28,8 @@ public class ProjectList {
      */
     public void addProject(String title) {
         int index = findProjectIndex(title);
-        if (index == Constants.PROJECT_NOT_FOUND) { //this is a new project
+        //this is a new project
+        if (index == Constants.PROJECT_NOT_FOUND) {
             projectList.add(new Project(title));
             System.out.println(title + " added.");
         } else {
