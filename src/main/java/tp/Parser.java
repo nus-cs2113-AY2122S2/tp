@@ -80,7 +80,6 @@ public class Parser {
         return new GetAppointmentsOfDoctorCommand(id);
     }
 
-    //@@author DolphXty
     public AddNurseCommand parseAddNurse(String fullCommand) throws IHospitalException {
         String id;
         String dummy = fullCommand.trim();
@@ -267,6 +266,7 @@ public class Parser {
         }
     }
 
+    //@@author Demonshaha
     public Command parseDeleteCommand(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("delete doctor")) {
             try {
