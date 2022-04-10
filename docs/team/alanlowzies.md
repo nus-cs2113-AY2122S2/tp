@@ -52,16 +52,18 @@ into text files stored on the user's local filesystem
 
 ### Enhancements Implemented
 - (Developer and User Guides) Replaced Markdown quote blocks with custom CSS boxes for informational and warning boxes.
+  This was done as the original MD quote blocks were hard to spot and thus readers may miss such messages. Thus, the
+  boxes were created to make them more conspicuous.
   <br/><br/>**Sample:**<br/>
 <span class="box warning">:warning: This is an example of a warning box. Contains advice or instructions that users
 should take note of to avoid issues in the application.</span>
 <span class="box info">:memo: This is an example of an information box. Contains information that may be useful for
 the users.</span>
 - (Developer and User Guides) Inserted 'buttons' throughout the guides to allow users to click and navigate back to the
-  guides' tables of contents for easier navigation. 
+  guides' tables of contents for easier navigation in our documentations. 
   - I tried to utilise JavaScript for a floating back-to-top button, but due to the time constraints and the need to
     fully understand the structure of the webpage theme that we're using on GitHub Pages, I decided to
-    use simple hyperlink buttons instead.
+    use simple HTML hyperlink buttons with some CSS styling instead.
   - Click [here](../images/ppp/alanlowzies/BackToToCDemo.gif) for a GIF demonstration of the enhancement.
 
 ### Contributions to the User Guide (UG)
