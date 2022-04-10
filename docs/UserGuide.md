@@ -570,11 +570,19 @@ Assigns a grade to a module of your choice.
 - `MODULE_CODE`: The module code of the module to be assigned the grade. Must be a single word containing only alphanumeric characters and underscore `_`. Furthermore, a module with this module code must currently exist.
 - `MODULE_GRADE`: The grade to be assigned to the module.
 
-> 📔 <span style="color:#3333ff">**NOTE:**</span>
+> 📔 <span style="color:#ffa500">**IMPORTANT:**</span>
 >
 > Only the following grades are supported (case-insensitive):
 >
 > A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU
+
+> 📔 <span style="color:#3333ff">**NOTE:**</span>
+>
+> You can remove your grade for a module by supplying a dash (`-`). For example:
+>
+> `grade CS2113T -`
+> 
+> You can only remove your grade if the module has a grade set originally.
 
 ##### Example:
 

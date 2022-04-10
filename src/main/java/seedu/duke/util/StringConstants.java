@@ -237,7 +237,7 @@ public class StringConstants {
             + "Aborting load...";
     public static final String ERROR_INVALID_CONFIG_VALUE = "Config \"%s\" has illegal value \"%s\". Aborting load...";
     public static final String ERROR_INVALID_TASK_DATA = "Invalid task data found in loaded data. Aborting load...";
-
+    public static final String ERROR_GRADE_REMOVAL = "Your grade has not been entered yet for this module...";
 
     /**
      * For parsers.
@@ -313,7 +313,7 @@ public class StringConstants {
     public static final String TASK_PARAMETERS_FLAG_NO_NAME = "\\s+(-d|-t)\\s+";
     public static final String DESCRIPTION_FLAG = "\\s+-d\\s+";
     public static final String QUOTED_UNRESTRICTED_STR = "\"[^\"]*\"";
-    public static final String MODULE_GRADES_MATCH = "(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U)";
+    public static final String MODULE_GRADES_MATCH = "(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U|-)";
     public static final String MARK_COMMAND_FLAGS = "(c|u)";
     public static final String TAG_COMMAND_FLAGS = "(add|del)";
     public static final String TASK_MODULE_FLAG = " -m ";

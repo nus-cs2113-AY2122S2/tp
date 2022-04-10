@@ -21,6 +21,7 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
   - Expanded exceptions to provide more descriptive error messages [#121](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/121)
   - Updated regex and parsers to determine errors in the user command for more descriptive error messages [#182](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/182)
   - Handled bug fixes pertaining to the parsers [#182](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/182), [#196](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/196)
+  - Added support for the removal of optional parameters and grades [#196](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/196)
 
 ### Documentation
 

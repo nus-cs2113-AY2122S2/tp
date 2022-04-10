@@ -5,6 +5,7 @@ import java.util.Objects;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.exceptions.NoSuchModuleException;
+import seedu.duke.exceptions.InvalidGradeRemovalException;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.Grades;
@@ -37,9 +38,11 @@ public class GradeCommand extends Command {
      * @param configuration The configuration settings of the application
      * @return A new {@code CommandResult} with the result string
      * @throws NoSuchModuleException If the module does not exist
+     * @throws InvalidGradeRemovalException If the grade to be removed was not set in the first place
      */
     @Override
-    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws NoSuchModuleException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration)
+            throws NoSuchModuleException , InvalidGradeRemovalException{
         Module targetModule = moduleList.getModule(moduleCode);
         addGradeToModule(targetModule);
         return new CommandResult(result);
@@ -48,13 +51,16 @@ public class GradeCommand extends Command {
     /**
      * Sets grade of the specified module.
      * @param module The module specified for the grade to be set
+     * @throws InvalidGradeRemovalException If the grade to be removed was not set in the first place
      */
-    public void addGradeToModule(Module module) {
+    public void addGradeToModule(Module module) throws InvalidGradeRemovalException {
         boolean hasGrade = !Objects.equals(module.getModuleGrade(), Grades.NOT_ENTERED);
         if (hasGrade) {
             result = String.format(GRADE_CHANGED_MESSAGE, moduleCode);
-        } else {
+        } else if (Grades.getGradeEnum(moduleGrade) != Grades.NOT_ENTERED) {
             result = String.format(GRADE_ADDED_MESSAGE, moduleCode);
+        } else {
+            throw new InvalidGradeRemovalException();
         }
         module.setModuleGrade(moduleGrade);
     }

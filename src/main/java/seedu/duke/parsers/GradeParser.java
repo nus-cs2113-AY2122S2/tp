@@ -21,10 +21,10 @@ public class GradeParser extends Parser {
     private String userInput;
 
     // Unescaped regex for testing:
-    // ((?<moduleCode>\\w+)(\\s+(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U)|
+    // ((?<moduleCode>\\w+)(\\s+(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U|-)|
     // (?<invalidModuleGrade>.*))))(?<invalid>.*)
     private static final String GRADE_FORMAT = "((?<moduleCode>\\w+)(\\s+"
-            + "(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U)|(?<invalidModuleGrade>.*))))(?<invalid>.*)";
+            + "(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U|-)|(?<invalidModuleGrade>.*))))(?<invalid>.*)";
     private static final String WORD_CHAR_ONLY = StringConstants.WORD_CHAR_ONLY;
     private static final String MODULE_GRADES_MATCH = StringConstants.MODULE_GRADES_MATCH;
 
