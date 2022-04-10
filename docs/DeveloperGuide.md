@@ -8,6 +8,7 @@ title: Developer Guide
 ## Contents
 * [Acknowledgements](#acknowledgements)
 * [Introduction](#introduction)
+    * [How to use this developer guide](#how-to-use-this-developer-guide)
 * [Design](#design)
     * [Architecture](#architecture)
     * [Manager Component](#manager-component)
@@ -17,7 +18,7 @@ title: Developer Guide
     * [Parser Component](#parser-component)
     * [Command Component](#command-component)
 * [Implementation](#implementation)
-  * [Parser implementation](#parsing-of-commands)
+  * [Parsing of commands](#parsing-of-commands)
   * [Session Commands](#session-commands)
     * [Add a session](#add-a-session)
     * [Remove a session](#remove-a-session)
@@ -38,8 +39,10 @@ title: Developer Guide
     * [View a group](#view-a-group)
     * [List all groups](#list-groups)
 * [Project Scope](#product-scope)
-* [User Stories](#user-stories)
-* [Non-Functional Requirements](#non-functional-requirements)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+* [User stories](#user-stories)
+* [Non-functional requirements](#non-functional-requirements)
 * [Glossary](#glossary)
 
 ## Acknowledgements
@@ -52,13 +55,13 @@ and [Developer Guide(DG)](https://se-education.org/addressbook-level3/DeveloperG
 This guide's purpose is to explain the internal workings of SplitLah, so that future engineers can understand the application's implementation in detail and continue working on the project with ease.
 
 ### How to use this developer guide
-* SplitLah is divided into **six components**: [Manager Component](#manager-component)
+* SplitLah is divided into **six components**: [Manager Component](#manager-component),
 [Profile Component](#profile-component), [TextUI Component](#textui-component),
 [Storage Component](#storage-component), [Parser Component](#parser-component) and [Command Component](#command-component)
 * Each component has its own section in this guide explaining them in detail.
 * This [diagram](#interaction-between-components) shows the inner workings of how each component interacts with each other.
-* SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands are not explained in detail.
-* Please refer to the [userguide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
+* SplitLah supports a total of **18 commands**. However, the `Help` and `Exit` commands are not explained in detail.
+* Please refer to the [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
 * Please refer to the [implementation section](#implementation) to find out how each command is designed and implemented in SplitLah.
 * Each command's section in this guide contains an API reference link encased in `code block` that brings you to the main source code responsible for executing the command.
 
@@ -75,8 +78,9 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
     * On creation: Initializes the `Profile`, `TextUI` and `Storage` components.
     * On run: Loads data from `Storage`, receives user input from `TextUI` and uses `Parser` to parse user input into application.
 * `Profile`
-    * Handles cached data within run time of application. Manages and stores the list of `session` 
-      that were created by the user before storing it into `Storage`.
+    * Handles cached data within run time of application.
+    * Manages and stores the list of `session` and `group` objects for the application
+    * Stores the data cached within the application into `Storage` whenever a change is made.
 * `TextUI`
     * Handles the reading of user input and the printing of the application's output to the user.
 * `Storage`
@@ -97,9 +101,9 @@ The diagram depicts a scenario where a user attempts to create a session.
 ![SplitLah Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SplitLahComponent.drawio.png)
 <br>
 The `SplitLah` component is the application's main class. Its job is to initialize an instance of `Manager` when the
-application starts. After initialization, it proceeds to run a loop which prompts the user for a 
-command. When it receives a command from the user, it invokes the `Parser` and retrieve the command for SplitLah
-to run. Upon using the `Exit` command, SplitLah exits from the command loop and end the application.
+application starts. After initialization, it proceeds to run a loop which prompts the user for an input.
+When it receives an input from the user, it invokes the `Parser` and retrieves a command corresponding to the input for SplitLah
+to run. Upon retrieving and running the `Exit` command, the application ends the loop and terminates.
 
 
 ### Manager Component
@@ -107,20 +111,20 @@ to run. Upon using the `Exit` command, SplitLah exits from the command loop and 
 <br>
 The `Manager` class is initialized by the `SplitLah` class (the main class) when the application starts.
 It stores the `Profile`, `TextUI` and `Storage` objects. The `Profile` class helps to manage all data accesses 
-throughout the lifetime of the application. While the `Storage` helps to save what the `Profile` class has captured. 
-The `TextUI` class serves as an interface to read user inputs and print application outputs.
+throughout the lifetime of the application while the `Storage` class helps to save what the `Profile` class has captured. 
+As for the `TextUI` class, it serves as an interface to read user inputs and to print application outputs.
 
 ### Profile Component
 ![Profile Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/Profile%20Component.drawio.png)
 <br>
 The `Profile` component is responsible for all data management and accesses within the lifetime of `SplitLah`.
 
-The `Profile` component consists of the `Profile`, `Session`, `Activity`, `PersonList`, `Person`, `ActivityCost`
+It consists of the `Profile`, `Session`, `Activity`, `PersonList`, `Person`, `ActivityCost`
 and `Name` classes.
 * The `Profile` class serves as a container and holds a list of all `Session` and `Group` objects created by the user.<br>
   It also keeps track of and issues new _unique identifiers_ for the creation of `Session`, `Activity` and `Group` objects.
 * The `Session` class stores a list of `Activity` objects that are created within a `Session` object as well as a
-  `PersonList` object that represent a collection of all participants in the session.<br>
+  `PersonList` object that represents a collection of all participants in the session.<br>
   It also holds an _optional_ `Group` object (explained in detail in the following point).
   * A `Session` object is identified by a _session unique identifier_.
 * The `Group` class holds a single `PersonList` object and represents a collection of persons.<br>
@@ -160,6 +164,7 @@ When a command updates any attributes of the `Profile` object, the changes are u
 * `GroupCreateCommand`, `GroupDeleteCommand`, `GroupEditCommand`
 
 Once the commands finishes executing, `Manager#saveProfile` is called to update the save file.<br>
+
 For example:
   1. The user enters `session /create /n Class outing /d 31-03-2022 /pl Alice bob`
   2. SplitLah recognizes this as a `SessionCreateCommand` and creates the new session. 
@@ -189,11 +194,10 @@ The general workflow of the `Parser` component is as follows:
    (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
 3. The `XYZCommandParser` object then uses parse methods from `ParserUtils` class to extract all the
    arguments from the user input.
-   * Each of these parse methods in `ParserUtils` class then calls other utility methods within the class 
+   * Each of these parse methods in `ParserUtils` class calls other utility methods within the class 
      to return a parsed value.
-4. All relevant arguments that are parsed are then used to create a new `XYZCommand `object to be
-   returned to the `Parser` class.
-5. The created `XYZCommand` object is then returned to the `SplitLah` object to be run.
+4. All relevant arguments that are parsed are used to create a new `XYZCommand `object to return to the `Parser` class.
+5. The created `XYZCommand` object is then returned to the `SplitLah` object to run.
 
 ### Command Component
 ![Command Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/CommandComponent.drawio.png)
@@ -226,7 +230,8 @@ The general workflow of the `Command` component is as follows:
 ## Implementation
 
 ### Parsing of Commands
-**API reference:** [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/Parser.java)
+**API reference:** [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/Parser.java),
+[`ParserUtils.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserUtils.java)
 
 The sequence diagram below models the interactions between various entities within the Parser component and
 the Command component when any user input is provided to SplitLah.
@@ -243,10 +248,10 @@ the Command component when any user input is provided to SplitLah.
    `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` is parsed separately as
    `session /create` and `/n Class Outing /d 15-03-2022 /pl Alice Bob`.
    1. If the _command type_ is invalid, the method `Parser#getCommandType` returns null to `Parser` class.
-      An `InvalidCommand` object is then created and returned to `SplitLah`.
-   2. `Parser` class then validates the _command type_ and the _remaining arguments_ with
+      As a result, an `InvalidCommand` object is created and returned to `SplitLah`.
+   2. Else, `Parser` class validates the _command type_ and the _remaining arguments_ with
       `Parser#checkIfCommandIsValid`. If either the _command type_ or the _remaining arguments_ are invalid, an error
-      message is returned by the method, which is then used to return an `InvalidCommand` object to `SplitLah`.
+      message is returned by the method and an `InvalidCommand` object is returned to `SplitLah`.
 3. `Parser` class creates the `XYZCommandParser` object for a `XYZCommand`. For example,
    for a _command type_ of `"session /create"`, a `SessionCreateCommandParser` object is instantiated.
    If `Parser` class does not recognise the _command type_, an `InvalidCommand` object is created and returned immediately.
@@ -266,8 +271,8 @@ the Command component when any user input is provided to SplitLah.
    * For example, `ParserUtils#parseName` returns a `String` object representing a name.
 7. After all necessary information is parsed, `XYZCommandParser` instantiates a new `XYZCommand` object with
    all the parsed information.
-8. The `XYZCommand` object is then returned from `XYZCommandParser` to `Parser` class,
-   and finally back to `SplitLah` to be run.
+8. Following that, the `XYZCommand` object is returned from `XYZCommandParser` to `Parser` class,
+   and finally back to `SplitLah` to run.
 
 ## Session Commands
 
@@ -284,14 +289,14 @@ when the user invokes the `session /create` command.
 The general workflow of the `session /create` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionCreateCommand` object.
-3. `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
+3. `SessionCreateCommand#run` method is invoked to run the `session /create` command.
 4. Once the command runs, `SessionCreateCommand#run` method checks if there is an existing session with the same session name.
 5. If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUI#printlnMessage`.
 6. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
 7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
    which is used to call the `Profile#addSession` method in order to store the new `Session` object.
 8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUI#printlnMessage.
+9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with `TextUI#printlnMessage`.
 
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
@@ -306,14 +311,14 @@ when the user invokes the `session /delete` command.
 The general workflow of the `session /delete` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionDeleteCommand` object.
-3. The `SessionDeleteCommand#run` method is then invoked to run the `session /delete` command.
+3. The `SessionDeleteCommand#run` method is invoked to run the `session /delete` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
    before the list of sessions can be retrieved.
 5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified 
 session unique identifier from the list of sessions.
    * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
-   * Else the `Session` object with the specified session unique identifier is returned.
-6. The `Profile#removeSession` method is then called to remove the `Session` object from the list of sessions stored in `Profile` object.
+   * Else, the `Session` object with the specified session unique identifier is returned.
+6. To remove the `Session` object from the list of sessions stored in `Profile` object, the `Profile#removeSession` method is invoked.
 7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully deleted.
 
@@ -330,28 +335,28 @@ when the user invokes the `session /edit` command.
 The general workflow of the `session /edit` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionEditCommand` object.
-3. The `SessionEditCommand#run` method is then invoked to run the `session /edit` command.
+3. The `SessionEditCommand#run` method is invoked to run the `session /edit` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
    before the list of sessions can be retrieved.
 5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified
    session unique identifier from the list of sessions.
    * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
-   * Else the `Session` object with the specified session unique identifier is returned.
-6. The detail of how a session is updated in the reference diagram below.<br>
+   * Else, the `Session` object with the specified session unique identifier is returned.
+6. The details of how a session is updated are displayed in the reference diagram below.<br>
    ![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
 7. `SessionEditCommand#run` checks if there is an update for a new list of persons, new session or new session date.
    * If there is an update on the list of persons, `SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored. 
      * The method checks if the newly provided list of persons contains duplicated names.
        * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
        * Else, it calls `PersonList#isSuperSet` to check if the newly supplied list of persons contains all existing persons in the session.
-       * If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-       * Else, a new list of persons ready to be stored in the session is returned.
+         * If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+         * Else, a new list of persons ready to be stored in the session is returned.
    * If there is an update on the session name, `SessionEditCommand#getNewSessionName` is called to return the new session name.
      * The method checks if the provided session name already exists in the list of sessions.
        * If the provided session name exists within the list of sessions, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
        * Else, the provided session name is returned to be used as the updated name for the session
    * If there is an update on the session date, `Session#setDateCreated` is called to set the new session date.
-   * After which, the necessary setter methods are called to update the session name and list of persons for the session that is being edited.
+   * After which, the necessary setter methods are called to update the session name and the list of persons for the session that is being edited.
 8. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
 9. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
 
@@ -368,14 +373,14 @@ when the user invokes the `session /view` command.
 The general workflow of the `session /view` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionViewCommand` object.
-3. `SessionViewCommand#run` method is then invoked to run the `session /view` command.
+3. `SessionViewCommand#run` method is invoked to run the `session /view` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
 5. The `SessionViewCommand` object then runs the `Profile#getSession` method to retrieve the session represented
    by the session unique identifier provided.
    1. If the session with the requested session unique identifier does not exist, an error message is printed out with 
       `TextUI#printlnMessage`.
    2. Else, a `String` object representing the details of the requested session is retrieved using the 
-      `Session#toString` method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
+      `Session#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
 
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
@@ -390,15 +395,15 @@ when the user invokes the `session /list` command.
 The general workflow of the `session /list` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
-3. `SessionListCommand#run` method is then invoked to run the `session /list` command.
+3. `SessionListCommand#run` method is invoked to run the `session /list` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called which returns a `Profile`
    object.
 5. Once the profile is retrieved, `SessionListCommand` runs the `Profile#getSessionListSummaryString` method.
    1. If the session list in the profile is empty, the `Profile` class returns a `String` object containing an error 
       message.
-   2. Otherwise, a `String` object representing a table summarising the list of sessions in the 
+   2. Else, a `String` object representing a table summarising the list of sessions in the 
       profile is returned.
-6. The `String` object retrieved is then printed out with `TextUI#printlnMessage`.
+6. Following that, the `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
 ### Settle a session
 **API reference:** [`SessionSummaryCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
@@ -413,14 +418,14 @@ when the user invokes the `session /summary` command
 The general workflow of the `session /summary` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionSummaryCommand` object.
-3. A `SessionSummaryCommand#run` method is then invoked to run the `session /summary` command.
+3. `SessionSummaryCommand#run` method is invoked to run the `session /summary` command.
 4. The `Profile` object that stores all sessions is obtained with the `Manager#getProfile` method.
 5. The `TextUI` object that handles all reading and printing operations with the user interface
    is obtained with the `Manager#getUi` method.
 6. From the `Profile` object obtained, the `Profile#getSession` method is invoked with the session unique identifier
    parsed from the user input to obtain the `Session` object that we want to settle all transactions for.
-7. An `ArrayList<Person>` object containing all persons participating in the session is then obtained with
-   the `Session#getPersonList` method.
+7. The `Session#getPersonList` method is called to retrieve an `ArrayList<Person>` object containing all persons 
+  participating in the session.
 8. With the list of participants, an `ArrayList<PersonCostPair>` object is obtained with the
    `SessionSummaryCommand#getPersonCostPairList` method.
    * This method first calculates all costs borne by each person in the list of participants, 
@@ -431,12 +436,12 @@ The general workflow of the `session /summary` command is as follows:
      to be collected between all persons. Each of such matches is referred to as a transaction.
      The matching process is repeated until no more transactions can be made,
      i.e. all debts are paid and all debts are collected.
-   * A `String` object containing information regarding all transactions that have to be made is then returned.
    * If no transactions are required to be made, a message explaining that no transactions are required to be made
-     is returned instead.
+     is returned.
+   * Else, a `String` object containing information regarding all transactions that have to be made is returned.
    * For the sake of brevity, the specifics of the method `SessionSumamryCommand#processAllTransactions` is omitted
      from the sequence diagram.
-10. Finally, with the `TextUI` object, the method `printlnMessageWithDivider` is called to print the message
+10. Finally, with the `TextUI` object, the method `TextUI#printlnMessageWithDivider` is called to print the message
     obtained from the `SessionSummaryCommand#processAllTransactions` method.
 
 ## Activity Commands
@@ -559,7 +564,7 @@ The general workflow of the `activity /list` command is as follows:
 6. Once the session is retrieved, `ActivityListCommand` class runs `Session#getActivityListSummaryString`.
    1. If the activity list in the session is empty, the Session class returns a `String` object containing an error message.
    2. If it's not empty, a `String` object representing a table summarising the list of activities in the session is returned. 
-7. Finally, the method `printlnMessageWithDivider` is called to print the message returned.
+7. Finally, the method `TextUI#printlnMessageWithDivider` is called to print the message returned.
 
 ## Group Commands
 
@@ -567,7 +572,7 @@ The general workflow of the `activity /list` command is as follows:
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
 
 The sequence diagram for `GroupCreateCommand` is omitted as it bears many similarities with [`SessionCreateCommand`](#add-a-session).<br>
-The interactions of GroupCreateCommand with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
+The interactions of `GroupCreateCommand` with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
 * `GroupCreateCommand` parses only the **name** and **list of persons**. It then creates a new `Group` object and adds it to the list of groups managed by the `Profile` class.
 
 Please refer to the [sequence diagram](#add-a-session) of `SessionCreateCommand` for reference.
@@ -607,14 +612,13 @@ when the user invokes the `group /delete` command.
 
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
+The sequence diagram for `GroupViewCommand` is omitted as it bears many similarities with [`SessionViewCommand`](#view-a-session).<br>
+The interactions of `GroupViewCommand` with the `Profile` class is identical but the key differences are as follows:
+* `GroupViewCommand` parses the **group unique identifier** instead of the **session unique identifier**.
+* It then displays the details of the `Group` object from the list of groups managed by the `Profile` class corresponding to the **group unique identifier**.
 
-The sequence diagram below models the interactions between various entities in SplitLah
-when the user invokes the `group /view` command.
-<br>
-<br>
-![View Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupViewCommand.drawio.png)
-<br>
-<br>
+Please refer to the [sequence diagram](#view-a-session) of `SessionViewCommand` for reference.
+
 The general workflow of the `group /view` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupViewCommand` object.
@@ -630,14 +634,12 @@ The general workflow of the `group /view` command is as follows:
 
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
+The sequence diagram for `GroupListCommand` is omitted as it bears many similarities with [`SessionListCommand`](#list-sessions).<br>
+The interactions of `GroupListCommand` with the `Profile` class is identical but the key differences lies in the objects that are used in the `Profile` class:
+* `GroupListCommand` calls the method `Profile#getGroupListSummaryString` instead of `Profile#getSessionListSummaryString` which utilises the list of groups instead of the list of sessions.
 
-The sequence diagram below models the interactions between various entities in SplitLah
-when the user invokes the `group /list` command.
-<br>
-<br>
-![List Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupListCommand.drawio.png)
-<br>
-<br>
+Please refer to the [sequence diagram](#list-sessions) of `SessionListCommand` for reference.
+
 The general workflow of the `group /list` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
