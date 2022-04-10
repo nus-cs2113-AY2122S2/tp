@@ -373,7 +373,7 @@ public class PlanList {
         ArrayList<Workout> workoutsInPlanList = planToViewDetails.getWorkoutsInPlanList();
         int numberOfWorkoutsInPlan = workoutsInPlanList.size();
         assert ((numberOfWorkoutsInPlan <= PLAN_MAX_NUMBER_OF_WORKOUTS) && (numberOfWorkoutsInPlan > 0)) :
-                "Total number of workouts is not valid.";
+                "Problem with 'numberOfWorkoutsInPlan': Total number of workouts in plan is not valid.";
 
         System.out.println("Here are the " + numberOfWorkoutsInPlan + " workouts in ["
                 + ui.getColorText(TextColor.COLOR_YELLOW, planName) + "].");
@@ -533,8 +533,8 @@ public class PlanList {
         }
 
         for (int planNumber : planIndexWithDeletedWorkout) {
-            System.out.println("\t" + getPlansDisplayList().get(planNumber - 1));
             assert (checkPlanIndexIsWithinRange(planNumber)) : "Plan number is out of range.";
+            System.out.println("\t" + getPlansDisplayList().get(planNumber - 1));
         }
         int totalNumberOfPlanToDelete = planIndexWithDeletedWorkout.size();
         for (int i = 0; i < totalNumberOfPlanToDelete; i++) {

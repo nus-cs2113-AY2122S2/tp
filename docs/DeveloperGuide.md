@@ -1179,8 +1179,7 @@ as well as the rationale of each check:
 | Maximum number of workouts          | Currently, a plan only supports a maximum of 10 workouts as it makes no sense for a plan to have many different workouts in the real-life context. In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                                                                      |
 | Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. This check is done as it makes no sense to create two plans with different plan names, but same workout orders.      |
 
-
-<br><br>
+<br>
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
