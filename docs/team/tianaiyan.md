@@ -18,7 +18,6 @@ A detailed report of my code contributions to the tP can be found in the
 [tP Code Dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=TianaiYan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 hosted by the module coordinators of CS2113T.
 
-![tP Code Dashboard](../images/ppp/tianaiyan/tpCodeDashboard.png)
 * Implemented `updateWorkout()` method in `WorkoutList` class, which allow users to modify the
   repetition value of a workout.
 * Contributes to most of the part for updating the workouts saved in plan when a workout is updated.
