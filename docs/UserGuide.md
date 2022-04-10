@@ -857,6 +857,9 @@ To view the changes enter command ```schedule /list```.
 ---
 ## Search Features
 
+<span class="info box">:memo: **Heads Up!** As of the current version of WerkIt!, multiple trailing whitespaces in your 
+search query will be removed. If your search query only has whitespaces, it will be truncated to a single whitespace.</span>
+
 <span class="info box">:memo: **Heads Up!** Your search keywords are case insensitive.</span>
 
 ### Search For Exercise: `search /exercise`
