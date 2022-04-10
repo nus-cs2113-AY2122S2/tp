@@ -683,15 +683,15 @@ they engage in during the outings.
 | v1.0    | Budget conscious user      | create activities                    | record the details and the expenditure of the activities in a particular outing                                        |
 | v1.0    | Returning User             | delete activities                    | remove unnecessary activities                                                                                          |
 | v1.0    | Returning user             | view existing activities             | see the full details of a particular activity, including the cost breakdown of the activity                            |
-| v1.0    | Budget conscious user      | list all activities in a session     | see a list of  all the activities that were recorded during a particular outing                                        |
+| v1.0    | Budget conscious user      | list all activities in a session     | see a list of all the activities that were recorded during a particular outing                                         |
 | v1.0    | Budget conscious user      | settle all transactions of a session | see a summary of all the transactions that are needed to be made amongst those who went for a particular outing        |
-| v2.0    | Returning User             | view an existing sessions            | see the full details of a particular outing, including a list of activities during the outing                          |
+| v2.0    | Returning user             | view existing sessions               | see the full details of a particular outing, including a list of activities for the outing                             |
 | v2.0    | Careless user              | edit sessions                        | amend a mistake previously made when recording an outing                                                               |
 | v2.0    | Careless User              | edit activities                      | amend a mistake previously made when recording an activity                                                             |
 | v2.0    | User with a lot of friends | create groups                        | easily record outings using groups instead of listing out all the names of the people who went for the outing manually |
 | v2.0    | Returning User             | delete groups                        | remove unnecessary groups                                                                                              |
 | v2.0    | Careless User              | edit groups                          | amend a mistake previously made when creating a group                                                                  |
-| v2.0    | Returning User             | view groups                          | see the full details of a particular group, including the names of the people in the group                             |
+| v2.0    | Returning User             | view existing groups                 | see the full details of a particular group, including the names of the people in the group                             |
 | v2.0    | User with a lot of friends | list groups                          | see a list of all the groups that were created                                                                         |
 
 ## Non-Functional Requirements
@@ -701,6 +701,7 @@ they engage in during the outings.
 4. Ths application should be usable by a novice who has never used an application to split bills.
 
 ## Glossary
+
 | Terms    | Definition                                                                                                                                                                                                                                                                                                  |
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | API      | An Application Programming Interface (API) specifies the interface through which other programs can interact with a software component.                                                                                                                                                                     |
