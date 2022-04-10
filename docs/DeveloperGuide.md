@@ -659,6 +659,7 @@ The general workflow of the `group /list` command is as follows:
 
 <hr>
 
+## Appendix: Requirements
 ## Product scope
 ### Target user profile
 * Budget conscious.
@@ -712,3 +713,20 @@ they engage in during the outings.
 | Activity | An activity represents a single group activity and stores its name, costs and the name of the payer.                                                                                                                                                                                                        |
 | Group    | A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals without having to manually enter their details one by one when creating a session.                                                                                                    |
 | API      | An Application Programming Interface (API) specifies the interface through which other programs can interact with a software component.                                                                                                                                                                     |
+
+<hr>
+
+## Appendix: Instructions for Manual Testing
+This section includes instructions to test SplitLah manually.
+
+> **💡 Note:**
+> 
+> These instructions only provide a starting point for testers to work on; testers are free to do more _exploratory_ testing.
+
+### Overview
+* Launch and Shutdown
+* Session Testing
+* Activity Testing
+* Group Testing
+* Storage Testing
+
