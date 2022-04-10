@@ -60,36 +60,39 @@ Enter choice:
 ```
 Enter corresponding index to use the feature.
 
-## Enter Dish Menu
-In `Main Menu`, when the select panel is shown:
-```
-Welcome to Restaurant Information Programme!
-(0) Exit Application
-(1) Enter Dish Menu
-(2) Enter Order Menu
-(3) Enter Staff Menu
-******************************
-Enter choice: 
-```
-> Enter 1 to use order management function (Dish menu)
-
 ## List dish (indexed as 1)
 When using `List dish`, there is no need for input, the program will print the dish name and the index.
 > Add some dish: Chicken Rice($3.5), Mala hotpot Set A($10), Soup (Along with Chicken Rice)($0), Chilli Crab($30)
 > Enter 1 to list dishes
 ```
 Listing dishes...
-1. Chicken Rice ---- $3.5
-2. Mala Hotpot Set A ---- $10.0
-3. Soup (Along With Chicken Rice) ---- free
-4. Chilli Crab ---- $30.0
+----------------------------------------------
+1. Chicken Rice                   $3.5
+2. Mala Hotpot Set A              $10.0
+3. Soup (along With Chicken Rice) $0.0
+4. Chilli Crab                    $30.0
+----------------------------------------------
 ```
 
 #### Notice
-If there is no dish in the menu. The output will be
+- If there is no dish in the menu. The output will be
 ```
 Listing dishes...
 You haven't got a dish in menu!
+```
+
+- You cannot have the same dish (regardless of cases) in menu:
+```
+Listing dishes...
+----------------------------------------------
+1. Some Dish                      $1.1
+----------------------------------------------
+```
+> And you add `Some Dish` again
+```
+Adding new dish...
+The name of dish: sOme diSH
+Ooops, this dish already exists in your menu
 ```
 
 ### Add dish (indexed as 2)
@@ -103,12 +106,12 @@ The name of dish:
 Enter choice: 2
 Adding new dish...
 The name of dish: some dish
-The price of dish: 
+The price (will be rounded into 1 decimal place) of dish: 
 ```
 > Enter the price of the new dish
 
 #### Notice
-`Name` of the dish cannot be empty, and `price` of the dish cannot be negative (`price` being 0 means this dish is free to serve).
+`Name` of the dish cannot be empty, and `price` of the dish cannot be negative and will be rounded to 10 cents. (`price` being 0 means this dish is free to serve).
 
 ## Order Management
 

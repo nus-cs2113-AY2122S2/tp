@@ -113,7 +113,15 @@ and further isolates the area of concern for which errors are most prone. In add
 methods if required. If possible, additional methods should continue to depend on the first `getString` method.
 
 ### Menu (dishes) Management
+## Overview
+![](diagrams/class/DishManagementOverview.png)
 
+## Dish
+
+`Dish` is basically consist of `name` and `price` and corresponding modification methods.
+It is used as a structure to store dish information.
+
+## DishManager
 The management of menu is handled by `DishManager`, which implements following methods:
 
 - `printDishes()` -- print all dishes and their menu index in current menu.
@@ -136,8 +144,24 @@ For example, `printDishes()`, iterates through `dishes` and calls `get(int)` met
 
 ![](diagrams/sqeuence/DishManager_addDish.png)
 
+`void setPrice(int, double)`:
+![](diagrams/sqeuence/DishManager_setPrice.png)
 
+`void setName(int, String)` is similar:
+![](diagrams/sqeuence/DishManager_setName.png)
 
+## DishController
+`DishController` is the user-facing part of `DishManagement`
+It offers the functions of `DishManager` to user and get input from user.
+
+The index and corresponding function can be found at `DishController.CHOICES`:
+
+- `void listDishes()` -- print all dishes and their menu index in current menu.
+- `void changeName()` -- get dish index and change the name of corresponding dish
+- `void changePrice()` -- get dish index and change the price of corresponding dish
+- `void deleteDish()` -- get dish index and delete corresponding dish
+- `void addDish()` -- get new dish name and price then create a dish
+- `getDishManager()` -- get the list in `dishManager`, this is for `OrderManager` since it might need menu information.
 ### Order Management
 
 The management of menu is functioned by `OrderManager`, which implements following methods:
@@ -228,6 +252,7 @@ As such, this application provides many functionalities to do so. The possibilit
 | v1.0    | staff    | modify staff info           | keep the roster up to date        | 
 | v2.0    | staff    | print out the order receipt | refer to the order anytime        |
 | v2.0    | staff    | store the application data  | save data across different uses   |
+| v2.0    | staff    | mark the deleted dish in order  | keep the order up to date   |
 
 
 ## Non-Functional Requirements

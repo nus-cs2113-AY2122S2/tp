@@ -145,7 +145,7 @@ public class DishController extends Controller {
         dishManager.addDish(new Dish(name, price));
     }
 
-    public DishManager getDishManager() {
+    protected DishManager getDishManager() {
         return dishManager;
     }
 }
