@@ -98,12 +98,14 @@ public class TaskUtil {
      *                            taskToCheck has the same date and clashing of time periods
      *                            with tasks in taskList
      */
-    public static void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck, boolean isFromFile)
+    public static void checkDateTimeClash(ArrayList<Task> taskList, Task taskToCheck,
+                                          boolean isFromFile, boolean isEditByOnly)
             throws TimeClashException, InvalidInputException {
         if (isStartTimeClashWithEndTime(taskToCheck)) {
             throw new InvalidInputException(ERROR_START_AFTER_END_TIME_MESSAGE);
         }
-        if (!isFromFile && !taskToCheck.isDone() && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
+        if (!isEditByOnly && !isFromFile && !taskToCheck.isDone()
+                && taskToCheck.getDoOnStartDateTime().isBefore(LocalDateTime.now())) {
             throw new InvalidInputException(ERROR_START_DATE_IN_THE_PAST_MESSAGE);
         }
         if (isByDateBeforeDoOnDate(taskToCheck)) {

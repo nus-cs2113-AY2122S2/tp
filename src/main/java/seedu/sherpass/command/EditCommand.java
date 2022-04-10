@@ -28,6 +28,7 @@ public class EditCommand extends Command {
     private LocalTime startTime;
     private LocalTime endTime;
     private boolean isRepeating;
+    private boolean isEditByOnly = false;
 
     public EditCommand(int editIndex, String taskDescription,
                        LocalDate doOnDate, LocalTime startTime, LocalTime endTime) {
@@ -62,6 +63,13 @@ public class EditCommand extends Command {
         doOnEndDateTime = LocalDateTime.of(doOnDate, endTime);
     }
 
+    private void setIsEditByOnly() {
+        boolean isByDateEmpty = byDate == null;
+        boolean isDoOnDateEmpty = doOnDate == null && startTime == null && endTime == null;
+        if (!isByDateEmpty && isDoOnDateEmpty) {
+            isEditByOnly = true;
+        }
+    }
 
     /**
      * Executes the editing of a task or multiple tasks.
@@ -73,13 +81,14 @@ public class EditCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task taskToEdit = taskList.getTask(editIndex);
+            setIsEditByOnly();
             setDoOnDateStartEndTime(taskToEdit);
             if (isRepeating) {
                 taskToEdit = taskList.editRepeatedTasks(editIndex, taskDescription,
-                        doOnStartDateTime, doOnEndDateTime, byDate);
+                        doOnStartDateTime, doOnEndDateTime, byDate, isEditByOnly);
             } else {
                 taskToEdit = taskList.editSingleTask(editIndex, taskDescription,
-                        doOnStartDateTime, doOnEndDateTime, byDate);
+                        doOnStartDateTime, doOnEndDateTime, byDate, isEditByOnly);
             }
             storage.writeSaveData(taskList);
             ui.showToUser(EDIT_TASK_RESULT_MESSAGE);
