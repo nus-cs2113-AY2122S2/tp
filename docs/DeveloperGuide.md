@@ -305,19 +305,20 @@ The checking room information by level mechanism is facilitated `CheckRoomByLeve
 
 
 Given below is an example usage scenario of how `CheckRoomByLevelCommand` behaves at each step.
+Step 1: The user enters the `check level 2` command to check all room information at level 2. 
 
-Step 1: User launches the application for the first time. The status of all room will be vacant
-
-Step 2: User give a command `check level 2`. The `CommandParser` runs phase which will return a new `CheckRoomByLevelCommand`.
+Step 2: The `CommandParser` runs phase which will return a new `CheckRoomByLevelCommand`,
 and it will parse the parameter after replace command `check level` to ``.
 
 Step 3: The `CheckRoomByLevelCommand` will now contain `2`.
 
 Step 4: The `execute` method will call `isValidLevel(int level, RoomList roomList)` method to check if the level number is valid.
 
-Step 5: The `excute` method will then call `printRoom(int level, RoomList roomList)` method to print room information at target level.
+Step 5: The `excute` method will then call `ui.printTableHeader` method to print room table header.
 
-![sequence diagram](team/xunyi_checkroombylevelcommand_uml/checkRoomByLevel_Squence.png)
+Step 6. In the `CheckRoomByLevelCommand`, it will iterate for roomList and print information of all room at level 2.
+
+![sequence diagram](team/xunyi_checkroombylevelcommand_uml/XunyiZeng_checkRoomByLevel_Sequence.png)
 
 ## Product scope
 ### Target user profile
