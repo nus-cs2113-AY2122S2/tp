@@ -22,7 +22,7 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
   [#114](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/114)
   - Expanded exceptions, fixed bugs and added more descriptive error messages.
   [#123](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/123)
-  - Added javadoc for the commands and parsers.
+  - Added javadoc for the commands, parsers and exceptions.
   [#123](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/123)
 
 ### Documentation
@@ -36,11 +36,13 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
   
 ### Team Tasks
   - Fixed formatting inconsistencies in the User guide.
-  [#179](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/179)
+  [#179](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/179),
+  [#183](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/183)
 
 ### Community
 - Pull Requests Reviewed:
   [#110](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/110),
   [#176](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/176),
   [#180](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/180),
-  [#182](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/182)
+  [#182](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/182),
+  [#197](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/197)
