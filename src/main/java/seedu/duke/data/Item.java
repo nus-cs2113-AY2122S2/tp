@@ -15,17 +15,12 @@ public class Item {
     private String name;
     private int quantity;
     private String description;
-    private boolean isLost = false;
     public ArrayList<BorrowRecord> borrowRecords = new ArrayList<BorrowRecord>();
 
     public Item(String name, int quantity, String description) {
         this.name = name;
         this.quantity = quantity;
         this.description = description;
-    }
-
-    public boolean getLost() {
-        return isLost;
     }
 
     public String getDescription() {
@@ -47,14 +42,6 @@ public class Item {
     public void setName(String name) {
         Objects.requireNonNull(name, NOT_NULL_NAME);
         this.name = name;
-    }
-
-    public void setLost(boolean isLost) {
-        this.isLost = isLost;
-    }
-
-    public void markItemAsLost() {
-        this.setLost(true);
     }
 
     public void setQuantity(int quantity) {

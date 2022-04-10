@@ -29,8 +29,13 @@ public class Messages {
     public static final String EMPTY_ITEM_LIST_MESSAGE = "Your inventory is currently empty. "
             + "Please enter add an item first!";
     public static final String ITEM_NUMBER_OUT_OF_RANGE_MESSAGE = "Sorry, the item number is out of range. "
-            + "Please enter a different item number!";
-    public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost.";
+            + " Please enter a different item number!";
+    public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost and "
+            + "updated the inventory accordingly!";
+    public static final String REPORTED_LOST_AND_DELETED_MESSAGE = "I've marked this item as lost and "
+            + "deleted it from the inventory!";
+    public static final String LOST_ERROR_MESSAGE = "The quantity lost exceeds the item quantity!"
+            + "Please enter a different item quantity.";
     public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. "
             + "Please ensure that end date >= start date.";
     public static final String INVALID_DATES_CONCLICT = "Sorry. The item is not available on this date, "
