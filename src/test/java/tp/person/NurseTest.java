@@ -14,6 +14,6 @@ class NurseTest {
     void testToString() {
         assertEquals("* NURSE " + "[1234] || Name: john "
                 + "|| Contact No.: 12341234 || Email: 3600@gmail.com "
-                + "|| Title: Junior || Ward: 10", nurse.toString());
+                + "|| Title: Junior || Ward: -1", nurse.toString());
     }
 }

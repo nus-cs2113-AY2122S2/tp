@@ -14,6 +14,6 @@ class DoctorTest {
     void testToString() {
         assertEquals("* DOCTOR " + "[1234] || Name: john "
                              + "|| Contact No.: 12341234 || Email: 3600@gmail.com "
-                             + "|| Department: General || Ward: 10", doctor.toString());
+                             + "|| Department: General || Ward: -1", doctor.toString());
     }
 }
