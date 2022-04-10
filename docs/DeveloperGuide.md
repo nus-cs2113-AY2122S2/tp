@@ -28,7 +28,6 @@ In this project, we have referenced the following list of materials:
 * [NUSMods](https://nusmods.com/)
 * [Our individual projects](AboutUs.md)
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Product scope
 ### Target user profile
@@ -353,7 +352,16 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
 
 ## Glossary
 
-* *glossary item* - Definition
+| Terms     | Definition                                                                                                                                                            |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Main Menu | The Main Menu the user interfaces with to access the 3 components: `ContactsManager`, `ExpenseTracker` and `StudyManager`                                             |
+| Contacts  | The Contacts component which manages a list of contacts added by the user. It facilitates the adding, deleting, editing and finding of contacts as well.              |
+| Expense   | The Expense component which manages a list of expense records added by the user. It facilitates the adding, deleting, editing and finding of expense records as well. |
+| Modules   | The Modules component which manages a list of expense records added by the user. It facilitates the adding, deleting, editing and finding of classes as well.         |
+| Storage   | The Storage class responsible for the saving to and loading from the save file respectively.                                                                          |
+| TextUi    | The TextUi class deals with all things related to printing and reading of lines for the user to interface with.                                                       |
+| Parser    | Each component has their own respective parser, which makes sense of the user's input before executing them.                                                          |
+
 
 ## Instructions for manual testing
 

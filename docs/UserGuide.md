@@ -165,7 +165,7 @@ respectively.
 - The DATE field must be in the format of YYYY-MM-DD. All other formats would not be accepted.
 - The AMOUNT field must be a valid number (integer/float) and must be non-negative.
 - '/' must not be the last character of a given field, even with trailing spaces.
-- The usage of '/' as a free text must be enclosed with white spaces.
+- The usage of '/' as a free text must be enclosed with white spaces, even as the first character.
 - Example: `r/Buffet / Alacarte meal`
 
 Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
