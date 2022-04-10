@@ -35,7 +35,7 @@ public class Response {
         System.out.println(count++ + ". addproject [Project Name]");
         System.out.println(count++ + ". deleteproject [Project Name]");
         System.out.println(count++ + ". changegit [Project Index] [GitHub URL]");
-        System.out.println(count++ + ". opengit [Project Name]");
+        System.out.println(count++ + ". opengit [Project Index]");
         System.out.println(count++ + ". projdeadline [Project Index] [Date]");
         System.out.println(count++ + ". tododeadline [Project Index] [Todo Index] [Date]");
         System.out.println(count++ + ". todo [Project Index] [Description]");
@@ -118,5 +118,13 @@ public class Response {
 
     public static String openGitCommandExecuted() {
         return "Open Git Command Executed";
+    }
+
+    public static String openGitCommandSuccessfully(String projectTitle) {
+        return "Github link opened for " + projectTitle;
+    }
+
+    public static String openGitCommandUnsuccessfully(int projectIndex) {
+        return "Github link was unsuccessful for " + projectIndex;
     }
 }
