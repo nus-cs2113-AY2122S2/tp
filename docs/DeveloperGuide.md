@@ -2414,16 +2414,16 @@ The following are some test cases for you to try:
 #### Updating The Schedule
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#update-schedule-schedule-update).)
 
-**Prerequisites:** Ensure that you have created some plans, at least one, before you to test the
+**Prerequisites:** Ensure that you have created some plans, at least one, before you test the
 `schedule /update` command.
 
 The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case                      | Command                | Expected result                      |
-|:-------------------------------|:-----------------------|:-------------------------------------|
-| Valid update schedule command. | `schedule /update 1 3` | Plan number 3 is schedule on Monday. |
+| Test Case                      | Command                | Expected result                        |
+|:-------------------------------|:-----------------------|:---------------------------------------|
+| Valid update schedule command. | `schedule /update 1 3` | Plan number 3 is scheduled for Monday. |
 
 <br/>**Negative Test Cases**<br/>
 
@@ -2432,7 +2432,7 @@ The following are some test cases for you to try:
 | Update schedule with extra arguments.         | `schedule /update 1 3 extraline`   | Error response (too many arguments entered), plan is not added/updated to the schedule. |
 | Update schedule with missing plan number.     | `schedule /update 1`               | Error response (too few arguments entered), plan is not added/updated to the schedule.  |
 | Schedule a plan on an invalid day.            | `schedule /update 8 1`             | Error response (invalid day number), plan is not added/updated to the schedule.         |
-| Schedule an invalid plan.                     | `schedule /update 1 1222`          | Error response (invalid plan number), plan is not added/updated to the schedule.        |
+| Schedule an invalid plan.                     | `schedule /update 2147483646`      | Error response (invalid plan number), plan is not added/updated to the schedule.        |
 | Extra whitespaces between commands arguments. | `schedule         /update 1 2`     | Error response (invalid user action), plan is not added/updated to the schedule.        |
 | Extra whitespaces between command parameters. | `schedule /update     1         2` | Error response (invalid user action), plan is not added/updated to the schedule.        |
 
@@ -2462,9 +2462,9 @@ The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case                      | Command             | Expected result                                                                   |
-|:-------------------------------|:--------------------|:----------------------------------------------------------------------------------|
-| Valid clear scheduled command. | `schedule /clear 1` | If there is a plan scheduled on Monday, it will be cleared and set to `rest day`. |
+| Test Case                      | Command             | Expected result                                                                    |
+|:-------------------------------|:--------------------|:-----------------------------------------------------------------------------------|
+| Valid clear scheduled command. | `schedule /clear 1` | If there is a plan scheduled for Monday, it will be cleared and set to `rest day`. |
 
 <br/>**Negative Test Cases**<br/>
 
@@ -2481,16 +2481,16 @@ The following are some test cases for you to try:
 
 **Positive Test Cases**<br/>
 
-| Test Case                         | Command              | Expected result                             |
-|:----------------------------------|:---------------------|:--------------------------------------------|
-| Valid clear all schedule command. | `schedule /clearall` | All plans added to the schedule is removed. |
+| Test Case                         | Command              | Expected result                              |
+|:----------------------------------|:---------------------|:---------------------------------------------|
+| Valid clear all schedule command. | `schedule /clearall` | All plans added to the schedule are removed. |
 
 <br/>**Negative Test Cases**<br/>
 
-| Test Case                                               | Command                        | Expected result                                                                                 |
-|:--------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------|
-| Clear all plans scheduled command with extra arguments. | `schedule /clearall extraline` | Error response (wrong command entered), plans not removed from schedule and schedule not reset. |
-| Extra whitespaces between commands arguments.           | `schedule         /clearall`   | Error response (invalid user action), plans not removed from schedule and schedule not reset.   |
+| Test Case                                     | Command                        | Expected result                                                                                 |
+|:----------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------|
+| Command with extra arguments.                 | `schedule /clearall extraline` | Error response (wrong command entered), plans not removed from schedule and schedule not reset. |
+| Extra whitespaces between commands arguments. | `schedule         /clearall`   | Error response (invalid user action), plans not removed from schedule and schedule not reset.   |
 
 <br/>
 <div class="button-container"><a class="button" href="#instructions-for-manual-testing">Back to Manual Testing Overview</a></div>
