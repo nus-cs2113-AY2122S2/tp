@@ -19,12 +19,12 @@ public class OpenGitCommand extends Command {
             project = projectList.getProject(projectIndex - 1);
         } catch (IndexOutOfBoundsException e) {
             System.out.println(Constants.INDEX_OUT_OF_RANGE);
-            return Response.openGitCommandUnsuccessfully(projectIndex);
+            return Response.openGitUnsuccessfully(projectIndex);
         }
         if (project == null) {
-            return Response.openGitCommandUnsuccessfully(projectIndex);
+            return Response.openGitUnsuccessfully(projectIndex);
         }
         projectList.openGit(project.getTitle());
-        return Response.openGitCommandSuccessfully(project.getTitle());
+        return Response.openGitSuccessfully(project.getTitle());
     }
 }

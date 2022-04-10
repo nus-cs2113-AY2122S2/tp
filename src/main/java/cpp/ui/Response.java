@@ -83,6 +83,10 @@ public class Response {
         return ("Languages have been listed successfully.");
     }
 
+    public static String listLanguageUnsuccessfully() {
+       return "ListLanguage command unsuccessful.";
+    }
+
     public static String deleteProjectSuccessfully(String projectTitle) {
         return (projectTitle + " deleted successfully.");
     }
@@ -127,11 +131,11 @@ public class Response {
         return "Open Git Command Executed";
     }
 
-    public static String openGitCommandSuccessfully(String projectTitle) {
+    public static String openGitSuccessfully(String projectTitle) {
         return "Github link opened for " + projectTitle;
     }
 
-    public static String openGitCommandUnsuccessfully(int projectIndex) {
+    public static String openGitUnsuccessfully(int projectIndex) {
         return "Github link was unsuccessful for " + projectIndex;
     }
 }

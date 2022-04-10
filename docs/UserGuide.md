@@ -159,6 +159,11 @@ Format: `changegit [project_index] [github_URL]`
 changegit 1 http://github.com/project1
 ```
 
+#### Example of output
+```
+The Github Repo for project1 has been changed to: http://github.com/project1
+```
+
 ---
 ### Open the GitHub repo of a project
 Opens the GitHub repository in your default browser
@@ -193,11 +198,11 @@ Deadline added to Complete Diagrams: 2022-05-22
 ### View details of a project: `view`
 View details of a project: Name, deadline, todos
 
-Format: `view [project_name]`
+Format: `view [project_index]`
 
 #### Example of usage
 ```
-view cs2113
+view 1
 ```
 
 #### Example of output
@@ -227,11 +232,11 @@ java language added.
 ---
 ### List languages of a project: `listlanguages`
 Lists languages of a project  
-Format: `listlanguages [project_title]`
+Format: `listlanguages [project_index]`
 
 #### Example of usage
 ```
-listlanguages cs2113
+listlanguages 1
 ```  
 
 #### Example of output

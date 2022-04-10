@@ -21,6 +21,7 @@ public class OpenGitCommandParser implements CommandParser<OpenGitCommand> {
 
     @Override
     public OpenGitCommand parse(String[] userInput) throws IllegalCommandException {
+        assert (userInput != null) : "Cannot open git for this project.";
         if (userInput.length != Constants.TWO_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_OPENGIT_COMMAND_FORMAT);
         }
