@@ -18,7 +18,7 @@ complete the activities with the use of the study session.
 #### New features:
   - `Timetable` scheduling
     - User would be able to see his timetable for the day, tomorrow, current week, next week,
-      current Month, and any specfic Month. 
+      current Month, and any specific Month. 
 
 #### Enhancements implemented: 
 - **Refactor Parser Class**
@@ -34,15 +34,22 @@ complete the activities with the use of the study session.
     User Input. The decoded input will be then pass to its relevant Parser Class such as TaskParser for further 
     computation.
   
-  - **Refactor Timetable Class**
-    - Pull Request [#77](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/77)
-    - Original `Timetable` class is responsible for a lot of things such as, ensuring proper printing of timetable schedule, 
-      computation of Timetable Class. 
-    - Split the Timetable Class into 3 different subclass, such as `TimetableLogic`, `TimetablePrinting` and `Timetable`. 
-    - `TimetableLogic` will be responsible for all the computation of Timetable.
-    - `TimetablePrinting` will be responsible for the proper formatting of Timetable schedule.
-    - `Timetable` will be responsible for the type of method available for the user.
+- **Refactor Timetable Class**
+  - Pull Request [#77](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/77)
+  - Original `Timetable` class is responsible for a lot of things such as, ensuring proper printing of timetable schedule, 
+    computation of Timetable Class. 
+  - Split the Timetable Class into 3 different subclass, such as `TimetableLogic`, `TimetablePrinting` and `Timetable`. 
+  - `TimetableLogic` will be responsible for all the computation of Timetable.
+  - `TimetablePrinting` will be responsible for the proper formatting of Timetable schedule.
+  - `Timetable` will be responsible for the type of method available for the user.
 
+- **J-UNIT test**
+  - Timetable Class
+    - Pull Request [#61](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/61)
+    - Wrote test cases for timetable class. 
+  - TimetableParser Class
+    - Pull Request [#153](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/153)
+    - Wrote test cases for timetableParser Class.
 
 #### Contribution to Documentation
   - **User Guide**
@@ -50,13 +57,17 @@ complete the activities with the use of the study session.
     - Add User Guide for `Timetable`
       - All the display method for Timetable such as show,
         today, tomorrow, any date, current week, next week, current Month, any Month.
+    - Update User Guide for `edit command` and `add command` to reflect the latest command syntax.
 
   - **Documentation Guide**
     - Documentation related to showing of monthly Timetable schedule.  
   
-  - **Contribution to team-based tasks**
-    - Refractor Parser Class
-    - Refractor Timetable Class.
+####Contribution to team-based tasks
+- Refractor Parser Class
+- Refractor Timetable Class.
+- Modify the help Command
+  - Pull Request [#153](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/153)
+  - Update the help command for the add and edit features to reflect the latest implementation.
 
 #### Review/mentoring contributions
 - Leave comments and improvement PR [#37](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/37)
