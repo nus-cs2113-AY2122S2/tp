@@ -7,7 +7,7 @@ box
     participant ":ArrayList<Income>" as Alist MONEY_COLOR_T2
 end box
 
-participant ":System" as System LOGIC_COLOR
+participant ":System" as System SYSTEM_COLOR
 
 [-> Ilist: editIncome(1, 1, "Bills", null ,null)
 activate Ilist
