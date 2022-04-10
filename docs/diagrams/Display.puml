@@ -1,5 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide empty member
 
 class Display {
     +hello()
