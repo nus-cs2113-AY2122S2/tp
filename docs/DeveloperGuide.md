@@ -98,13 +98,15 @@ The `UI` component consists following classes: [`UI.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/global/UI.java)
 
 The UI component provides function to standardize the output. It provides `printWelcomeMsg()` and `printExitMsg()` 
-as well as chatbox pattern `printHoriLine()` to create chatbox styled output. 
+as well as chatbox pattern `printHoriLine()` to create chatbox styled output. Additionally, `formatValue()` allows for 
+monetary values to be printed appropriately.
  
 How the `UI` component is used:
 
-UI is created when initializing the program. During execution, UI will be called to create chatbox pattern by calling 
-`printHoriLine()`. UI also prints welcome message at the beginning of the session and print exit message at the end of 
+* UI is created when initializing the program. During execution, UI will be called to create chatbox pattern by calling 
+`printHoriLine()`. UI also prints welcome message at the beginning of the session and an exit message at the end of 
 the session.
+* `formatValue` will be called by the `Family` component whenever printing of a monetary value is involved.
 
 ![UIClass](images/UIClass.png)
 
