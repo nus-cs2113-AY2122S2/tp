@@ -34,11 +34,11 @@ Given below are my contributions to the project.
     * Set up and wrap up `v1.0`, `v2.0`, `v2.1`
     * Assigned tasks on issues
 
-<div style="page-break-after: always;"></div>
+
 
 * **Codes contributes**:https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=li-xinyi1&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other
 
-<div style="page-break-after: always;"></div>
+
 
 * **Documentation**:
     * User Guide:
@@ -56,5 +56,3 @@ Given below are my contributions to the project.
         * Added User stories
             * Staff related activities
 
-
-2
