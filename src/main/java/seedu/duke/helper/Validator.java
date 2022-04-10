@@ -386,7 +386,7 @@ public class Validator {
         case "dob":
             validateDob(parameters[1]);
             break;
-        case "admissiondate":
+        case "registrationdate":
             validateAdmissionDate(parameters[1]);
             break;
         default:
