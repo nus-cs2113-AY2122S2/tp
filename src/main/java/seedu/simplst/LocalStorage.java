@@ -23,33 +23,32 @@ public class LocalStorage {
      * @return saveStr the JSON string from save file
      */
     public String readSaveFile() {
-        String saveStr = null;
+        String saveStr = "";
         try {
             FileReader fr = new FileReader(SAVE_PATH);
             int i;
             while ((i = fr.read()) != -1) {
                 saveStr += ((char) i);
             }
-            //            System.out.println(saveStr);
             fr.close();
         } catch (IOException e) {
-            System.err.println("Failed to open save file!" + e.getMessage() + "\n");
+            System.err.println("Failed to open save file! " + e.getMessage() + "\n");
         }
         return saveStr;
     }
 
     public static String readSaveFile(String filePath) {
-        String saveStr = null;
+        String saveStr = "";
         try {
             FileReader fr = new FileReader(filePath);
             int i;
             while ((i = fr.read()) != -1) {
-                saveStr += ((char) i);
+                char newChar = ((char) i);
+                saveStr += (newChar);
             }
-            //            System.out.println(saveStr);
             fr.close();
         } catch (IOException e) {
-            System.err.println("Failed to open save file!" + e.getMessage() + "\n");
+            System.err.println("Failed to open save file! " + e.getMessage() + "\n");
         }
         return saveStr;
     }
@@ -79,18 +78,16 @@ public class LocalStorage {
     }
 
     public static void writeSaveFile(String storeStr, String filePath) {
-        Path dir = Paths.get(OUT_DIR);
-        //        File f = new File(OUT_DIR);
+        Path dir = Paths.get(filePath);
         if (!Files.exists(dir)) {   //createTempDirectory
             try {
-                Files.createDirectory(Path.of(OUT_DIR));
+                Files.createDirectory(Path.of(filePath));
             } catch (IOException e) {
-                System.err.println("Failed to create directory!" + e.getMessage());
+                System.err.println("Failed to create directory! " + e.getMessage());
             }
         }
-        //        String filePath = String.format("%s/%s", OUT_DIR, "SAVE.json");
-        try {
-            FileWriter fw = new FileWriter(SAVE_PATH);
+         try {
+            FileWriter fw = new FileWriter(filePath);
             fw.write(storeStr);
             fw.close();
         } catch (IOException e) {
