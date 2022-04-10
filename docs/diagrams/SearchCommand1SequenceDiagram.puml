@@ -24,7 +24,7 @@ activate InvMgr
     activate SearchCommand
     return
 
-    InvMgr -> Storage: writeData(ArrayList)
+    InvMgr -> Storage: save(itemList: ArrayList)
     activate Storage
     return
 
