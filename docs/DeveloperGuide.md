@@ -185,8 +185,9 @@ Further, maintaining a record of the equipment is a time-consuming task given th
 | v2.0    | conscientious logs chief              | save the state of the equipment list                           | come back to a saved version of my work later on                     |
 | v2.0    | conscientious logs chief              | delete equipment                                               | remove decommissioned equipment from the application                 |
 | v2.1    | forgetful logs chief                  | search for equipment                                           | be able to find equipment by its attributes                          |
-| v3.0    | forward-planning logs chief           | filter equipment purchased before a certain date               | conduct more regular inspections on them                             |
+| v3.0    | forward-planning logs chief           | filter equipment by date and cost range                        | conduct more regular checks on expensive or old equipment            |
 | v3.0    | busy logs chief                       | mark equipment to be faulty/working                            | filter and send the faulty ones for repair                           |
+| v3.0    | forgetful logs chief                  | add comments to equipment                                      | take note of any other information relating to my equipment          |
 | v3.0    | logs chief supporting multiple events | ensure that equipment can be earmarked for an associated event | my equipment will not be double-booked and have scheduling conflicts |
 
 
