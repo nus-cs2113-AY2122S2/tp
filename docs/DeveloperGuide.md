@@ -538,7 +538,7 @@ The sequence diagram above shows the interactions when updating an expenditure.
 2. Once all the fields are obtained, `UpdateCommand.updateExpenditure()` will run tests for its respective fields.
 3. The `UpdateCommand.updateExpenditure()` object formats the `CATEGORY` and `AMOUNT` fields, and the `PAYMENT_METHOD` if it is cash.
 4. `UpdateCommand.updateExpenditure()` checks if the updated expenditure is similar to the old expenditure it is replacing and throws an error if it is.
-5. If the old expenditure's `PAYMENT_METHOD` or new expenditure's `PAYMENT_METHOD` is not cash, `UpdateCommand.updateExpenditure()` invokes `UpdateCommand.updatePaymentMethod()` to update the corresponding `creditCard.totalExpenditure`
+5. If the old expenditure's `PAYMENT_METHOD` or new expenditure's `PAYMENT_METHOD` is not cash, `UpdateCommand.updateExpenditure()` invokes `UpdateCommand.updatePaymentMethod()` to update the corresponding `creditCard.totalExpenditure`.
 6. The `UpdateCommand.updateExpenditure()` object instantiates a new `Expenditure` object with the 5 fields and sets it into the ExpenditureList.
 7. Details of the updated `Expenditure` is printed out.
 8. Control is returned to `MMM`.
