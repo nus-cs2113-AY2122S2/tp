@@ -60,7 +60,7 @@ This guide's purpose is to explain the internal workings of SplitLah, so that fu
 [Storage Component](#storage-component), [Parser Component](#parser-component) and [Command Component](#command-component)
 * Each component has its own section in this guide explaining them in detail.
 * This [diagram](#interaction-between-components) shows the inner workings of how each component interacts with each other.
-* SplitLah supports a total of **18 commands**. However, the `help` and `exit` commands are not explained in detail.
+* SplitLah supports a total of **18 commands**. However, the `Help` and `Exit` commands are not explained in detail.
 * Please refer to the [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html) to find out how to use each command.
 * Please refer to the [implementation section](#implementation) to find out how each command is designed and implemented in SplitLah.
 * Each command's section in this guide contains an API reference link encased in `code block` that brings you to the main source code responsible for executing the command.
@@ -79,7 +79,8 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
     * On run: Loads data from `Storage`, receives user input from `TextUI` and uses `Parser` to parse user input into application.
 * `Profile`
     * Handles cached data within run time of application.
-    * Manages and stores the list of `session` that were created by the user before storing them into `Storage`.
+    * Manages and stores the list of `session` and `group` objects for the application
+    * Stores the data cached within the application into `Storage` whenever a change is made.
 * `TextUI`
     * Handles the reading of user input and the printing of the application's output to the user.
 * `Storage`
@@ -179,7 +180,7 @@ to write all the data stored in the `Profile` component into the save file witho
 The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class,
 as well as the `CommandParser` class and its subclasses.<br>
 * The `Parser` class provides methods to parse commands from the user and
-  returns a `Command` object representing an instruction that the user has for SplitLah.<br>
+  return a `Command` object representing an instruction that the user has for SplitLah.<br>
 * The `ParserUtils` class provide supporting methods to parse individual arguments from the user input,
   and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.<br>
 * The subclasses of `CommandParser` serve to parse all arguments of a user input to create an object of a corresponding
@@ -295,7 +296,7 @@ The general workflow of the `session /create` command is as follows:
 7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
    which is used to call the `Profile#addSession` method in order to store the new `Session` object.
 8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with `TextUi#printlnMessage`.
+9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with `TextUI#printlnMessage`.
 
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
@@ -440,7 +441,7 @@ The general workflow of the `session /summary` command is as follows:
    * Else, a `String` object containing information regarding all transactions that have to be made is returned.
    * For the sake of brevity, the specifics of the method `SessionSumamryCommand#processAllTransactions` is omitted
      from the sequence diagram.
-10. Finally, with the `TextUI` object, the method `TextUi#printlnMessageWithDivider` is called to print the message
+10. Finally, with the `TextUI` object, the method `TextUI#printlnMessageWithDivider` is called to print the message
     obtained from the `SessionSummaryCommand#processAllTransactions` method.
 
 ## Activity Commands
@@ -524,7 +525,7 @@ The general workflow of the `activity /list` command is as follows:
 6. Once the session is retrieved, `ActivityListCommand` class runs `Session#getActivityListSummaryString`.
    1. If the activity list in the session is empty, the Session class returns a `String` object containing an error message.
    2. If it's not empty, a `String` object representing a table summarising the list of activities in the session is returned. 
-7. Finally, the method `TextUi#printlnMessageWithDivider` is called to print the message returned.
+7. Finally, the method `TextUI#printlnMessageWithDivider` is called to print the message returned.
 
 ## Group Commands
 
