@@ -3,7 +3,14 @@ package seedu.duke;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.itemcommands.AddItemCommand;
-import seedu.duke.exceptions.*;
+
+import seedu.duke.exceptions.EmptyItemNameException;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.EmptyItemPaxException;
+import seedu.duke.exceptions.InvalidItemPaxException;
+import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.ItemAlreadyInListException;
+
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
 
@@ -38,7 +45,7 @@ public class AddItemCommandTest {
         addItemPaxCommand.execute(listContainer, ui);
         ItemList itemList = listContainer.getItemList();
         Item item = itemList.getItem(INDEX_OF_SHAMPOO);
-        assertEquals("Shampoo",item.getName());
+        assertEquals("Shampoo", item.getName());
         assertEquals(30, item.getPax());
     }
 
@@ -54,7 +61,7 @@ public class AddItemCommandTest {
         addItemPaxCommand.execute(listContainer, ui);
         ItemList itemList = listContainer.getItemList();
         Item item = itemList.getItem(INDEX_OF_TOOTH_BRUSH);
-        assertEquals("Tooth Brush",item.getName());
+        assertEquals("Tooth Brush", item.getName());
         assertEquals(1000000, item.getPax());
     }
 
@@ -64,7 +71,7 @@ public class AddItemCommandTest {
         addItemPaxCommand.execute(listContainer, ui);
         ItemList itemList = listContainer.getItemList();
         Item item = itemList.getItem(INDEX_OF_COMB);
-        assertEquals("Comb",item.getName());
+        assertEquals("Comb", item.getName());
         assertEquals(1, item.getPax());
     }
 

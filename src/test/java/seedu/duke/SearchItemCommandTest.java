@@ -48,9 +48,9 @@ public class SearchItemCommandTest {
     public void execute_ItemNameOfANonExistentItem_success() throws HotelLiteManagerException {
         SearchItemCommand itemNameCommand = new SearchItemCommand("Table");
         ItemList itemList = listContainer.getItemList();
-        String keyword =itemNameCommand.getKeyword();
+        String keyword = itemNameCommand.getKeyword();
         ItemList listOfMatchingItem = itemList.findItemsInList(keyword);
-        assertEquals(0,listOfMatchingItem.getSize());
+        assertEquals(0, listOfMatchingItem.getSize());
     }
 
 }

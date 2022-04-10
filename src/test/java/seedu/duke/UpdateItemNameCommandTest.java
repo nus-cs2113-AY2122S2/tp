@@ -2,9 +2,15 @@ package seedu.duke;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.itemcommands.SearchItemCommand;
 import seedu.duke.command.itemcommands.UpdateItemNameCommand;
-import seedu.duke.exceptions.*;
+
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidUpdateItemNameCommandException;
+import seedu.duke.exceptions.DuplicateItemNameException;
+import seedu.duke.exceptions.InvalidItemNameException;
+import seedu.duke.exceptions.ItemNotFoundException;
+import seedu.duke.exceptions.ItemNameAlreadyInListException;
+
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
 
@@ -75,13 +81,13 @@ public class UpdateItemNameCommandTest {
     @Test
     public void execute_ItemNameOfANonExistentItem_success() throws HotelLiteManagerException {
         UpdateItemNameCommand itemNameCommand = new UpdateItemNameCommand("Table / New Table");
-        assertThrows(ItemNotFoundException.class,()->itemNameCommand.execute(listContainer, ui));
+        assertThrows(ItemNotFoundException.class, () -> itemNameCommand.execute(listContainer, ui));
     }
 
     @Test
     public void execute_NewItemNameAlreadyFoundInItemList_success() throws HotelLiteManagerException {
         UpdateItemNameCommand itemNameCommand = new UpdateItemNameCommand("Sofa / Toilet Paper");
-        assertThrows(ItemNameAlreadyInListException.class,()->itemNameCommand.execute(listContainer, ui));
+        assertThrows(ItemNameAlreadyInListException.class, () -> itemNameCommand.execute(listContainer, ui));
     }
 
 
