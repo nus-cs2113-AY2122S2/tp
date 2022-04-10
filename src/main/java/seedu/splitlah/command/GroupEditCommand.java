@@ -82,7 +82,7 @@ public class GroupEditCommand extends Command {
         if (involvedList != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
             if (hasDuplicates) {
-                ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP);
+                ui.printlnMessage(Message.ERROR_GROUPEDIT_DUPLICATE_NAME_IN_GROUP);
                 Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP);
                 ui.printlnMessageWithDivider(Message.ERROR_GROUPEDIT_NO_CHANGE);
                 return;

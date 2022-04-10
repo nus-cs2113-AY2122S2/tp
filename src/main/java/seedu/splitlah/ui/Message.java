@@ -459,6 +459,9 @@ public abstract class Message {
                  + " please rectify and try again.";
     public static final String ERROR_GROUPEDIT_NO_CHANGE =
              "No changes made.";
+    public static final String ERROR_GROUPEDIT_DUPLICATE_NAME_IN_GROUP =
+             "There are duplicate names in the person list for the group you are trying to edit. "
+                 + "Please rectify and try again.";
 
     // Group Edit Command Parser
     public static final String ERROR_GROUPEDIT_NO_EDIT_DELIMITERS_FOUND =
