@@ -2,21 +2,22 @@
 
 ## Project: PlanITarium
 
-<!-- this is placeholder description -->
 PlanITarium is a CLI application that tracks the income and expenditure for you and your family. It gives the
 overview of your family's disposable income. It is written in Java.
-<!-- this is placeholder description -->
 
+### Summary of Contributions
 
-### Given below are my contributions to the project.
+* **Code
+  Contributed**: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=hanshenggit&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=HansHengGit&tabRepo=AY2122S2-CS2113T-T10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
-* **New Feature**: Added expenditure class to track each expenditure details.
+<p></p>
 
-* **New Feature**: Added expenditure list class to track a list of expenditures.
+* **New Feature**: Added Expenditure class to track each expenditure details.
+  * 
+
+* **New Feature**: Added ExpenditureList class to track each list of expenditures.
 
 * **New Feature**: Implemented storage for saving and loading of data.
-
-* **Code Contributed**: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=hanshenggit&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Enhancements to Existing Features**:
     * Implemented JUnit testing for parts of Expenditure and ExpenditureList.
