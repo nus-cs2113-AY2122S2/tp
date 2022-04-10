@@ -42,7 +42,7 @@ public class GetAvailabilityTest {
     }
 
     @Test
-    public void commandParser_getAvailability_success() throws HotelLiteManagerException {
+    public void getAvailability_success() throws HotelLiteManagerException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         ArrayList<Housekeeper> listOfHousekeeperAvailable =
                 housekeeperList.getAvailableHousekeeperByDay(DAY_TWO_AVAILABILITY);

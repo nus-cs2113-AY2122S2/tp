@@ -33,7 +33,7 @@ public class AddAvailabilityTest {
     }
 
     @Test
-    public void commandParser_addAvailability_success() throws HotelLiteManagerException, IOException {
+    public void addAvailability_success() throws HotelLiteManagerException, IOException {
         AddAvailabilityCommand addAvailabilityCommand =
                 new AddAvailabilityCommand("sally / 1,2");
         addAvailabilityCommand.execute(listContainer, ui);
@@ -43,7 +43,7 @@ public class AddAvailabilityTest {
     }
 
     @Test
-    public void commandParser_UserDoesNotExist_exceptionThrown() throws HotelLiteManagerException, IOException {
+    public void UserDoesNotExist_exceptionThrown() throws HotelLiteManagerException, IOException {
         AddAvailabilityCommand addAvailabilityCommand =
                 new AddAvailabilityCommand("han / 1,2");
         assertThrows(UserDoesNotExistException.class, () -> addAvailabilityCommand.execute(listContainer, ui));

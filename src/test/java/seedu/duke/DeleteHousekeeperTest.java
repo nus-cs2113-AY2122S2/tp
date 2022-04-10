@@ -36,7 +36,7 @@ public class DeleteHousekeeperTest {
     }
 
     @Test
-    public void commandParser_deleteHousekeeper_success() throws HotelLiteManagerException, IOException {
+    public void deleteHousekeeper_success() throws HotelLiteManagerException, IOException {
         DeleteHousekeeperCommand deleteHousekeeperCommand =
                 new DeleteHousekeeperCommand("Man");
         deleteHousekeeperCommand.execute(listContainer, ui);
@@ -45,7 +45,7 @@ public class DeleteHousekeeperTest {
     }
 
     @Test
-    public void commandParser_deleteHousekeeperNameDoesNotExist_exceptionThrown() throws HotelLiteManagerException {
+    public void deleteHousekeeperNameDoesNotExist_exceptionThrown() throws HotelLiteManagerException {
         DeleteHousekeeperCommand deleteHousekeeperCommand =
                 new DeleteHousekeeperCommand("jerry");
         assertThrows(UserDoesNotExistException.class, () -> deleteHousekeeperCommand.execute(listContainer, ui));

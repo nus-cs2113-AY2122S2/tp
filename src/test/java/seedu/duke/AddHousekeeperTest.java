@@ -49,7 +49,7 @@ public class AddHousekeeperTest {
     }
 
     @Test
-    public void commandParser_addCommandUserExist_exceptionThrown() throws HotelLiteManagerException {
+    public void addCommandUserExist_exceptionThrown() throws HotelLiteManagerException {
         AddHousekeeperCommand addHousekeeperCommand = new AddHousekeeperCommand("sally / 30");
         assertThrows(InvalidUserException.class, () -> addHousekeeperCommand.execute(listContainer, ui));
     }

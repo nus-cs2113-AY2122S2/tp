@@ -35,7 +35,7 @@ public class AgeIncreaseTest {
     }
 
     @Test
-    public void commandParser_addAvailability_success() throws HotelLiteManagerException, IOException {
+    public void addAvailability_success() throws HotelLiteManagerException, IOException {
         AgeIncreaseCommand ageIncreaseCommand =
                 new AgeIncreaseCommand("is a new year");
         ageIncreaseCommand.execute(listContainer, ui);

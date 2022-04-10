@@ -40,7 +40,7 @@ public class ResetAvailabilityTest {
     }
 
     @Test
-    public void commandParser_resetAvailability_success() throws HotelLiteManagerException, IOException {
+    public void resetAvailability_success() throws HotelLiteManagerException, IOException {
         ResetAvailabilityCommand resetAvailabilityCommand =
                 new ResetAvailabilityCommand("is a new week");
         resetAvailabilityCommand.execute(listContainer, ui);
