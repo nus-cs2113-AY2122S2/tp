@@ -76,6 +76,14 @@ public class TravelPackage {
         return this.startDate.format(printFormat);
     }
 
+    public LocalDate getLocalStartDate() {
+        return this.startDate;
+    }
+
+    public LocalDate getLocalEndDate() {
+        return this.endDate;
+    }
+
     public String getEndDate() {
         return this.endDate.format(printFormat);
     }
