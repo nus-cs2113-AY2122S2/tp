@@ -783,23 +783,23 @@ Test Scenario 2: There is a session named Test1 currently stored in the applicat
 
 Test Scenario 1: The cost is split evenly amongst those who participated in the activity. <br>
 1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /co 20` <br>
-   Expected: A success message is printed along with the details of the activity as provided in the command. Each person's cost owed is $10.
+   Expected: A success message should be printed along with the details of the activity as provided in the command. Each person's cost owed is $10.
 
 Test Scenario 2: Each person who participated in the activity incurred different costs. <br>
 1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /cl 5 10` <br>
-   Expected: A success message is printed along with the details of the activity as provided in the command. PersonOne's cost owed is $5 while PersonTwo's cost owed is $10.
+   Expected: A success message should be printed along with the details of the activity as provided in the command. PersonOne's cost owed is $5 while PersonTwo's cost owed is $10.
 
 Test Scenario 3: There was GST and Service Charge involved for an activity. <br>
 1. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /co 20 /gst 7 /sc 10` <br>
-   Expected: A success message is printed along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
+   Expected: A success message should be printed along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
 2. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonTwo /cl 5 10 /gst 7 /sc 10` <br>
-   Expected: A success message is printed along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
+   Expected: A success message should be printed along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
 
 Test Scenario 4: The person who paid or the persons involved in the activity were not part of the session
 1. Test Command: `activity /create /sid 1 /n Test1 /p PersonThree /i PersonOne PersonTwo /co 20 /gst 7 /sc 10` <br>
-   Expected: An error message is printed indicating that a person specified was not found in the particular session.
+   Expected: An error message should be printed indicating that a person specified was not found in the particular session.
 2. Test Command: `activity /create /sid 1 /n Test1 /p PersonOne /i PersonOne PersonThree /cl 5 10 /gst 7 /sc 10` <br>
-   Expected: An error message is printed indicating that a person specified was not found in the particular session.
+   Expected: An error message should be printed indicating that a person specified was not found in the particular session.
 
 <hr>
 
@@ -808,19 +808,20 @@ Test Scenario 4: The person who paid or the persons involved in the activity wer
 
 **Test Cases:**
 
-Test Scenario 1: There is an activity within a particular session that can be deleted. <br>
-1. Test Command: `activity /delete /sid 1 /aid 1` <br>
-   Expected: A success message is printed indicating that the activity was deleted successfully.
-
-Test Scenario 2: There are currently no activities stored in a particular session. <br>
+Test Scenario 1: No activities are currently stored in a particular session in the application. <br>
 1. Test Command: `activity /delete /sid 2 /aid 1` <br>
-   Expected: An error message is printed indicating that the list of activities in the session is currently empty.
+   Expected: An error message should be printed indicating that the list of activities in the session is currently empty.
 
-Test Scenario 3: The session or activity that was indicated does not exist. <br>
-1. Test Command: `activity /delete /sid 3 /aid 1` <br>
-   Expected: An error message is printed indicating that the session specified was not found.
-2. Test Command: `activity /delete /sid 1 /aid 4` <br>
-   Expected: An error message is printed indicating that the activity specified was not found in the particular session.
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+Also, only an activity with an activity unique identifier of `1` within this session exists in the application after creating
+an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create) command. <br>
+1. Test Command: `activity /delete /sid 1 /aid 1` <br>
+   Expected: A success message should be printed indicating that the activity was deleted successfully.
+2. Test Command: `activity /delete /sid 3 /aid 1` <br>
+      Expected: An error message should be printed indicating that the session specified was not found.
+3. Test Command: `activity /delete /sid 1 /aid 4` <br>
+   Expected: An error message should be printed indicating that the activity specified was not found in the particular session.
 
 <hr>
 
@@ -858,15 +859,15 @@ Test Scenario 3: The session or activity that was indicated does not exist. <br>
 
 Test Scenario 1: There is a group that can be viewed. <br>
 1. Test Command: `group /view /gid 1` <br>
-   Expected: A message is printed displaying the full details of the group.
+   Expected: A message should be printed displaying the full details of the group.
 
 Test Scenario 2: There are currently no groups stored. <br>
 1. Test Command: `group /view /gid 1` <br>
-   Expected: An error message is printed indicating that there are currently no groups stored.
+   Expected: An error message should be printed indicating that there are currently no groups stored.
 
 Test Scenario 3: The group specified does not exist. <br>
 1. Test Command: `group /view /gid 2` <br>
-   Expected: An error message is printed indicating that the group specified was not found.
+   Expected: An error message should be printed indicating that the group specified was not found.
 
 <hr>
 
@@ -877,11 +878,11 @@ Test Scenario 3: The group specified does not exist. <br>
 
 Test Scenario 1: There are groups stored. <br>
 1. Test Command: `group /list` <br>
-   Expected: A message is printed displaying the list of all the groups.
+   Expected: A message should be printed displaying the list of all the groups.
 
 Test Scenario 2: There are currently no groups stored. <br>
 1. Test Command: `group /list` <br>
-   Expected: An error message is printed indicating that there are currently no groups stored.
+   Expected: An error message should be printed indicating that there are currently no groups stored.
 
 <hr>
 
