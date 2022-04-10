@@ -5,6 +5,7 @@ import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
 import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
 import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
 import seedu.allonus.expense.exceptions.ExpenseSurroundSlashSpaceException;
+import seedu.allonus.expense.exceptions.ExpenseInvalidYearException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +36,7 @@ public class ExpenseParser {
     public static final String ERR_NONSPACED_SLASH = "/ must be surrounded by white spaces!";
     public static final String ERR_EMPTY_FIELDS = "Fields cannot be empty!";
     public static final String ASSERT_INPUT_LENGTH_NOT_0 = "Length of user input should not be 0";
+    public static final String ERR_NEGATIVE_YEAR = "Year value should not be negative!";
 
     /**
      * Reformats the date field into a valid date object.
@@ -42,9 +44,13 @@ public class ExpenseParser {
      * @param rawDate the date of the expense record entered by the user
      * @return a string of the reformatted date entered by the user
      * @throws DateTimeParseException if user did not enter a valid date format
+     * @throws ExpenseInvalidYearException if year is a negative value
      */
-    public static String reformatDate(String rawDate) throws DateTimeParseException {
+    public static String reformatDate(String rawDate) throws DateTimeParseException, ExpenseInvalidYearException {
         LocalDate dateOfExpense = LocalDate.parse(rawDate);
+        if (dateOfExpense.getYear() < 0) {
+            throw new ExpenseInvalidYearException(ERR_NEGATIVE_YEAR);
+        }
         String parsedDate = dateOfExpense.format(DateTimeFormatter.ofPattern(VALID_DATE_FORMAT));
         return parsedDate;
     }
@@ -72,7 +78,8 @@ public class ExpenseParser {
      */
     public static String[] parseNewExpense(String userInput) throws IndexOutOfBoundsException,
             DateTimeParseException, NumberFormatException, ExpenseAmountException, ExpenseMissingFieldException,
-            ExpenseEmptyFieldException, ExpenseExtraFieldException, ExpenseSurroundSlashSpaceException {
+            ExpenseEmptyFieldException, ExpenseExtraFieldException, ExpenseSurroundSlashSpaceException,
+            ExpenseInvalidYearException {
         String rawInput = userInput.split(" ", SPLIT_IN_HALF)[EXPENSE_FIELDS].trim();
         rawInput = " " + rawInput;
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
@@ -247,7 +254,7 @@ public class ExpenseParser {
      */
     public static String parseFindExpense(String userInput) throws IndexOutOfBoundsException {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
-        String[] rawInput = userInput.split(" ", SPLIT_IN_HALF);
+        String[] rawInput = userInput.trim().split(" ", SPLIT_IN_HALF);
         String result = rawInput[INDEX_TO_BE_PARSED];
         return result;
     }

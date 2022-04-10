@@ -2,11 +2,12 @@ package seedu.allonus.expense;
 
 
 import seedu.allonus.AllOnUs;
-import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
-import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
 import seedu.allonus.expense.exceptions.ExpenseAmountException;
-import seedu.allonus.expense.exceptions.ExpenseSurroundSlashSpaceException;
+import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
 import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
+import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
+import seedu.allonus.expense.exceptions.ExpenseSurroundSlashSpaceException;
+import seedu.allonus.expense.exceptions.ExpenseInvalidYearException;
 
 import seedu.allonus.mode.Mode;
 import seedu.allonus.storage.StorageFile;
@@ -75,7 +76,7 @@ public class ExpenseTracker {
     public static final String NEW_CATEGORY_VALUE_SET = "New category value set!";
     public static final String MSG_NEW_VALUE_CANNOT_BE_EMPTY = "New value cannot be empty!";
     public static final String NO_TASKS_FOUND = "No tasks found!";
-    public static final String MSG_MATCHING_EXPENSES = "Here are the matching expense records:\n";
+    public static final String MSG_MATCHING_EXPENSES = "Here are the matching expense record(s):\n";
     public static final String MENU_STRING = "menu";
     public static final String MSG_INCORRECT_DATE_FORMAT = "Date field is of incorrect format! Type in YYYY-MM-DD and"
             + " make sure valid values of months are used!";
@@ -104,6 +105,7 @@ public class ExpenseTracker {
     public static final String LOG_EXTRA_FIELDS = "User enter multiple copies of the same delimiter";
     public static final String LOG_INVALID_SLASH = "User entered slash in incorrect format";
     public static final String MSG_ONLY_DONE = "Type only 'done' to exit editing!";
+    public static final String LOG_NEGATIVE_YEAR = "User entered a negative year value";
 
 
     private static void expenseWelcome() {
@@ -385,19 +387,31 @@ public class ExpenseTracker {
         } catch (DateTimeParseException e) {
             TextUi.showToUser(MSG_INCORRECT_DATE_FORMAT);
             return isEdited;
+        } catch (ExpenseInvalidYearException e) {
+            TextUi.showToUser(e.getMessage());
+            return isEdited;
         }
     }
 
     /**
      * Looks through the list of expense records and prints out the records that contain a specified keyword.
      *
-     * @param list         list of expenses itself
      * @param stringToFind keyword to look for within each expense record
      */
-    private static void findExpense(ArrayList<Expense> list, String stringToFind) {
+    private static void findExpense(String stringToFind) {
         boolean isFound = false;
         stringToFind = stringToFind.toLowerCase();
-        for (Expense expense : list) {
+        int noOfItems = Expense.getNoOfItems();
+        assert noOfItems >= ZERO : ASSERT_NUMBER_OF_ITEMS_NON_NEGATIVE;
+        if (noOfItems == ZERO) {
+            TextUi.showToUser(MSG_EMPTY_LIST);
+            return;
+        }
+        String listAsString = "";
+
+        for (int i = ZERO; i < noOfItems; i++) {
+            Expense expense = expenseList.get(i);
+            assert expense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
             String expenseCategory = expense.getCategory().toLowerCase();
             String expenseDate = expense.getDate().toLowerCase();
             String expenseRemark = expense.getRemark().toLowerCase();
@@ -405,15 +419,18 @@ public class ExpenseTracker {
             boolean isFoundInDate = expenseDate.contains(stringToFind);
             boolean isFoundInRemarks = expenseRemark.contains(stringToFind);
             if (isFoundInDate || isFoundInCategory || isFoundInRemarks) {
+                String expenseRecord = String.format(" %d. %s\n", i + EXPENSE_INDEX, expense);
+                listAsString = listAsString.concat(expenseRecord);
                 isFound = true;
-                TextUi.showToUser(MSG_MATCHING_EXPENSES + expense);
             }
         }
         if (!isFound) {
-
             TextUi.showToUser(NO_TASKS_FOUND);
+            return;
         }
+        TextUi.showToUser(MSG_MATCHING_EXPENSES + listAsString);
     }
+
 
     /**
      * Begins executing the Delete method invoked by user's input.
@@ -438,7 +455,6 @@ public class ExpenseTracker {
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
             TextUi.showToUser(MSG_ITEM_NOT_FOUND);
-            return;
         }
     }
 
@@ -479,6 +495,9 @@ public class ExpenseTracker {
         } catch (ExpenseSurroundSlashSpaceException e) {
             logger.log(Level.WARNING, LOG_INVALID_SLASH);
             TextUi.showToUser(e.getMessage());
+        } catch (ExpenseInvalidYearException e) {
+            logger.log(Level.WARNING, LOG_NEGATIVE_YEAR);
+            TextUi.showToUser(e.getMessage());
         }
 
     }
@@ -504,8 +523,9 @@ public class ExpenseTracker {
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
             TextUi.showToUser(MSG_NONEMPTY_KEYWORD);
+            return;
         }
-        findExpense(expenseList, stringToFind);
+        findExpense(stringToFind);
     }
 
     /**

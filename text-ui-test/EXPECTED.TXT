@@ -287,8 +287,9 @@ Here are the expenses you have made so far:
 
 ---------------------------------------------------
 ---------------------------------------------------
-Here are the matching expense records:
-2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+Here are the matching expense record(s):
+ 2. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+
 ---------------------------------------------------
 ---------------------------------------------------
 Deleted entry: 2022-03-25 | $20.00 | Category | valid / slash
