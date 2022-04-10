@@ -81,12 +81,16 @@ complete the activities with the use of the study session.
 - Documentation
     - User Guide:
       - Added documentation for features `study session` 
-      (add timer Ui diagrams and explanations on it), `timetable` and `mark/unmark`.
+      (add timer Ui diagrams and explanations on it), `timetable` and `mark/unmark`. 
+      (examples: pull requests [#86](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/86), [#70](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/70))
       - Did some tweaks to existing features in the document `add`, `delete`. Added extra pictures
+      (examples: pull requests [#161](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/161))
       for clearer illustration of command usages.
     - Developer Guide:
-      - Added implementation details of the `timetable` feature.
-      - Enhanced the architecture diagram of Sherpass.
+      - Added implementation details of the `timetable` feature 
+      (examples: pull requests [#64](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/64)
+      [#139](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/139) [#161](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/161)).
+      - Enhanced the architecture diagram of Sherpass. (pull request [#161](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/161))
 
 
 - Community:
