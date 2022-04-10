@@ -20,7 +20,7 @@ public class Simplst {
         ui = new UserInterface(w);
         ui.run();
         status = w.saveWarehouseState();
-        if (status){
+        if (status) {
             Display.stateSaved();
         } else {
             Display.stateNotSaved();

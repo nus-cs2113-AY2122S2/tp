@@ -80,15 +80,15 @@ public class UnitGood {
         return jo;
     }
 
-    public static UnitGood restoreUnitGood(JSONObject jo){
-        String sku = (String)jo.get(UnitGoodKeys.SKU);
-        String name = (String)jo.get(UnitGoodKeys.name);
-        String description = (String)jo.get(UnitGoodKeys.description);
-        String capacity = (String)jo.get(UnitGoodKeys.capacity);
-//        System.out.println("sku: " + sku);
-//        System.out.println("name: " + name);
-//        System.out.println("description: " + description);
-//        System.out.println("capacity: " + capacity);
+    public static UnitGood restoreUnitGood(JSONObject jo) {
+        String sku = (String) jo.get(UnitGoodKeys.SKU);
+        String name = (String) jo.get(UnitGoodKeys.name);
+        String description = (String) jo.get(UnitGoodKeys.description);
+        String capacity = (String) jo.get(UnitGoodKeys.capacity);
+        System.out.println("sku: " + sku);
+        System.out.println("name: " + name);
+        System.out.println("description: " + description);
+        System.out.println("capacity: " + capacity);
         UnitGood ug = new UnitGood(
                 sku,
                 name,
