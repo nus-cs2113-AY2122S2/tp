@@ -22,16 +22,17 @@ class WerkIt COLOR_WERKIT {
 }
 
 class DayList COLOR_LOGIC {
-+ updateDay(String userArgument):Day
++ updateDay(userArgument:String):Day
 + printSchedule()
-+ clearDayPlan(String userArgument)
++ clearDayPlan(userArgument:String)
 + clearAllSchedule()
++ clearPlan(dayNumber:int)
 }
 
 class FileManager COLOR_STORAGE {
-+ addFileScheduleToList(DayList dayList, String[] scheduleFileDataLine):void
-+ rewriteAllDaysScheduleToFile(DayList dayList):void
-+ convertDayScheduleToFileDataFormat(Day day):String
++ addFileScheduleToList(dayList:DayList, scheduleFileDataLine:String[]):void
++ rewriteAllDaysScheduleToFile(dayList:DayList):void
++ convertDayScheduleToFileDataFormat(day:Day):String
 }
 
 class "{abstract}\nCommand" COLOR_LOGIC {
@@ -47,13 +48,13 @@ class UI COLOR_UI {
 + getUserInput()
 + printScheduleFileNotFoundMessage():void
 + printScheduleFileCreatedMessage():void
-+ printNewScheduleCreatedMessage(Day newDay):void
++ printNewScheduleCreatedMessage(newDay:Day):void
 + printClearedScheduleMessage():void
 }
 
 class Parser COLOR_PARSER {
-+ parseUserInput(String userInput):Command
-+ createScheduleCommand(String userInput):ScheduleCommand
++ parseUserInput(userInput:String):Command
++ createScheduleCommand(userInput:String):ScheduleCommand
 }
 
 

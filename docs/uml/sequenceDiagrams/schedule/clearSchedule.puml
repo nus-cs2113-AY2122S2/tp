@@ -39,8 +39,9 @@ return
 DayList -> DayList : covertDayNumberToDay(dayNumber)
 activate DayList COLOR_LOGIC
 return dayName:String
-DayList -> UI : printClearedScheduleOnADay(dayName)
+return
 deactivate DayList
+newCommand -> UI : printClearedScheduleOnADay(dayName)
 activate UI COLOR_UI
 UI--> newCommand: Print successfully remove \nplan from schedule message
 deactivate UI
@@ -55,6 +56,6 @@ file on user's system.
 end
 newCommand <-- FileManager
 deactivate FileManager
-return
+newCommand --> WerkIt
 destroy newCommand
 @enduml
