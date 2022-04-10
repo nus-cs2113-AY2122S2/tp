@@ -837,6 +837,20 @@ Test Scenario 1: A session has been created with a unique identifier of 1, named
 > For details on the usage of `group /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create).
 <hr>
 
+Test Scenario 1: No groups are currently stored in the application. <br>
+1. Test Command: `group /create /n GroupTest1 /pl Alice Bob Charlie` <br>
+   Expected: A success message should be printed, indicating the details of the group as provided in the command.
+2. Test Command: `group /create /n GruopTest2 /pl Alice Bob Charlie David Mike`<br>
+   Expected: A success message should be printed, indicating the details of the group as provided in the command.
+3. Test Command: `group /create /n GruopTest3 /pl Alice Alice` <br>
+   Expected: An error message should be printed, indicating there are duplicates in the list of persons provided.
+
+Test Scenario 2: There is a group named GroupTest1 currently stored in the application. <br>
+1. Test Command: `group /create /n GruopTest3 /pl Alice Bob` <br>
+   Expected: A success message should be printed, indicating the details of the group as provided in the command.
+2. Test Command: `group /create /n GroupTest1 /pl Alice Bob Charlie` <br>
+   Expected: An error message should be printed, indicating a group with the same name already exists within the application.
+
 #### Deleting a Group
 > For details on the usage of `group /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-group-group-delete).
 <hr>
