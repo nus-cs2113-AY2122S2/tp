@@ -6,7 +6,7 @@ EquipmentManager is a Command Line Interface application to help with keeping tr
 ## Summary of Contributions
 Besides reviewing pull requests and participating in discussions during meetings, below are the main contributions made to the project:
 
-## Contributions to the Codebase
+### Contributions to the Codebase
 * Implementation of the classes in the equipment package.
 * Implementation of the classes in the storage package.
 * Implementation of Gson for serialization and deserialization of the data.
