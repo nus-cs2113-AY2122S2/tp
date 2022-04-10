@@ -39,6 +39,9 @@ public class Duke {
         } else if (command instanceof AddAvailabilityCommand) {
             AddAvailabilityCommand addAvailabilityCommand = (AddAvailabilityCommand) command;
             addAvailabilityCommand.writeAvailabilityToFile(listContainer);
+        } else if (command instanceof AgeIncreaseCommand) {
+            AgeIncreaseCommand ageIncreaseCommand = (AgeIncreaseCommand) command;
+            ageIncreaseCommand.writeAgeIncreaseToFile(listContainer);
         }
     }
 

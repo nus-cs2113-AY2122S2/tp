@@ -7,10 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.duke.command.Command;
 import seedu.duke.command.housekeepercommands.AddAvailabilityCommand;
-import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidAvailabilityException;
-import seedu.duke.exceptions.InvalidUserException;
 import seedu.duke.exceptions.UserDoesNotExistException;
 import seedu.duke.housekeeperlists.Housekeeper;
 import seedu.duke.housekeeperlists.HousekeeperList;
@@ -51,8 +49,6 @@ public class AddAvailabilityTest {
         assertThrows(UserDoesNotExistException.class, () -> addAvailabilityCommand.execute(listContainer, ui));
 
     }
-
-
 
     @Test
     public void commandParser_addCommandNameAvailability_success() throws Exception {
