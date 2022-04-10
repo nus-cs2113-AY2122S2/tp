@@ -57,6 +57,11 @@ This section describes how certain features are implemented. Only part of the fe
 5.1 The following sequence diagram shows how the List Booking Command works.
 ![](diagrams/listBooking.jpg)
 
+### 6. Add Customer Command
+6.1 The following class diagram shows the implementation of the Add Customer Command. <br>
+(Only part of the classes, attributes and operations related to the Add Customer Command are shown here.)
+![](diagrams/AddCustomer_Class_Diagram.jpg)
+
 ## Product scope
 ### Target user profile
 
