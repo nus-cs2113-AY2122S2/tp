@@ -1,4 +1,4 @@
 package seedu.planitarium.command;
 
-public class OverviewTest {
+public class DeleteRecordTest {
 }
