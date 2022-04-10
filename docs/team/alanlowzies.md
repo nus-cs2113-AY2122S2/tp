@@ -46,7 +46,7 @@ into text files stored on the user's local filesystem
   additional functionality to the API such as populating the `exercise.txt` file with default exercises. The exercises
   were thought of by Haofeng :)
 - Wrote JUnit test cases for WerkIt! APIs including (but not limited to) `WorkoutCommand`, `FileManager`, `Parser`, etc.
-- Wrote JavaDocs for most of the classes and methods that I have created.
+- Wrote JavaDocs for the classes and methods that I have created.
 - Created skeleton codes and packages for the project.
 
 
