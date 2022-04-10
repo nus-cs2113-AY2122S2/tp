@@ -58,11 +58,11 @@ the methods to capture and keep track of the events that has occurred.
 * Wrote [command summary](../UserGuide.md#command-summary) for search and schedule features.
 
 ### Contributions to the Developer Guide (DG)
-* Creating the [Architecture Diagram](../DeveloperGuide.md#architecture-diagram) under the Design Section.
+* Creating the [Architecture Diagram](../DeveloperGuide.md#architecture-overview) under the Design Section.
 * Wrote the design section on [UI component](../DeveloperGuide.md#ui-component) and added the class diagram of it.
 * Wrote the design section on [Schedule related features](../DeveloperGuide.md#schedule-related-features).
 * Wrote the [Schedule Features](../DeveloperGuide.md#schedule) under 
-the [Implementation](../DeveloperGuide.md#implementation) section (including sequence diagram).
+the Implementation section (including sequence diagram).
 * Wrote part of [user stories](../DeveloperGuide.md#user-stories).
 * Wrote part of [manual testing instructions](../DeveloperGuide.md#test-on-schedule-features).
 * Wrote the [non-functional requirements](../DeveloperGuide.md#non-functional-requirements) section.
