@@ -2285,11 +2285,11 @@ The following are some test cases for you to try:
 
 ##### Positive Test Cases
 
-| Test Case                                                           | Command                        | Expected result                                                                                                                                                                                                                                                                    |
-|:--------------------------------------------------------------------|:-------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Valid workout index number and new number of repetitions.           | `workout /update 1 10`         | The first workout in the workout list is updated to 10 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.         |
-| Valid workout index number and a highest new number of repetitions. | `workout /update 2 2147483647` | The first workout in the workout list is updated to 2147483647 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps. |
-| Valid workout index number and a minimum new number of repetitions. | `workout /update 3 1`          | The first workout in the workout list is updated to 1 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.          |
+| Test Case                                                           | Command                        | Expected result                                                                                                                                                                                                                                                                        |
+|:--------------------------------------------------------------------|:-------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Valid workout index number and new number of repetitions.           | `workout /update 1 10`         | The first workout in the workout list is updated to 10 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.             |
+| Valid workout index number and a highest new number of repetitions. | `workout /update 2 2147483647` | The second workout in the workout list is updated to 2,147,483,647 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps. |
+| Valid workout index number and a minimum new number of repetitions. | `workout /update 3 1`          | The third workout in the workout list is updated to 1 rep. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.               |
 
 ##### Negative Test Cases
 
@@ -2370,9 +2370,9 @@ The following are some test cases for you to try:
 
 ##### Positive Test Cases
 
-| Test Case               | Command           | Expected result                                        |
-|:------------------------|:------------------|:-------------------------------------------------------|
-| Valid plan index number | `plan /details 1` | All workouts in plan with index number 1 is displayed. |
+| Test Case               | Command           | Expected result                                         |
+|:------------------------|:------------------|:--------------------------------------------------------|
+| Valid plan index number | `plan /details 1` | All workouts in plan with index number 1 are displayed. |
 
 ##### Negative Test Cases
 
