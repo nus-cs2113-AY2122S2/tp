@@ -197,21 +197,6 @@ public class Validator {
         }
     }
 
-    private static void validateMedicineId(String medicineId) throws UserInputErrorException {
-        Pattern fullNamePattern = Pattern.compile("[A-Z][0-9][3}]");
-        Matcher fullNameMatcher = fullNamePattern.matcher(medicineId);
-        if (!fullNameMatcher.matches()) {
-            throw new UserInputErrorException("Medicine must contain only alphabets and Numbers.");
-        }
-    }
-
-    private static void validateMedicineSideEffects(String sideEffects) throws UserInputErrorException {
-        Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
-        Matcher fullNameMatcher = fullNamePattern.matcher(sideEffects);
-        if (!fullNameMatcher.matches()) {
-            throw new UserInputErrorException("Specialization must contain only alphabets and no special characters.");
-        }
-    }
 
     /* Validate medicine */
     public static void validateMedicine(String[] parameters) throws UserInputErrorException {

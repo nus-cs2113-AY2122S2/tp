@@ -105,7 +105,7 @@ How the Command class works:
 
 ![ValidatorClassUML](diagrams/ValidatorClassUML.png)
 
-The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters
+The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters and/or number of parameters
 entered are invalid.
 For example, validateAddPatient validates the parameter of `add patient` command, ensuring each parameter is in correct
 format. Please refer to the below sequence diagram for a clearer understanding.
@@ -117,8 +117,7 @@ format. Please refer to the below sequence diagram for a clearer understanding.
 
 ![ParserClassUML](diagrams/ParserClassUML.png)
 
-The parser parses the description of the command. It first checks the number of parameters entered is correct and
-calls the validator class to validate the parameters, and then returns a command if the validation is successful.
+The parser parses the description of the command. It calls the validator class to validate the parameters, and then returns a command if the validation is successful.
 
 ![ParserUML](diagrams/ParserUML.png)
 
