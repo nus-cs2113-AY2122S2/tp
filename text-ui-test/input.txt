@@ -13,11 +13,11 @@ add n/Name n/Name again
 add n/Name f/Faculty e/email@u.nus.edu n/Name again
 add n/Name f/Faculty e/email@u.nus.edu d/
 list
-find Daniela
+find DaNIeLA
 find Koh
 find
 find Daniela Koh
-find koh
+find keyword_not_in_names
 edit
 edit 0
 edit 9

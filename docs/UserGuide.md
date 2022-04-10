@@ -587,7 +587,7 @@ Only the Name field will be considered when looking for a contact record.
 
 Format: `find KEYWORD`
 
-* The keyword is case-sensitive
+* The keyword is case-insensitive
 * Partial matches on the keyword are also returned
 * You can only search for one keyword at a time
 

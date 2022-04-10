@@ -91,6 +91,14 @@ public class ContactsManager {
     private static final StorageFile storageFile = new StorageFile();
     private static boolean isModified = false;
 
+    //@@author OzairHasan
+    /**
+     * Prints a message to inform user they are already in the study manager.
+     */
+    private static void printAlreadyInContactsManagerMessage(TextUi ui) {
+        ui.showToUser("You are already in Contacts Manager.");
+    }
+
     /**
      * Returns current number of items in contacts list.
      *
@@ -127,6 +135,7 @@ public class ContactsManager {
         addContact(savedContact, false);
     }
 
+    //@@author wli-linda
     /**
      * Prints a message following a defined format.
      *
@@ -141,6 +150,13 @@ public class ContactsManager {
         logger.log(Level.FINER, CONTACTS_ENTER_LOG_MESSAGE);
     }
 
+    /**
+     * Checks whether a duplicate of the new name already exists in the list.
+     *
+     * @param newName String of new name.
+     * @param oldName String of old name.
+     * @throws InvalidContactField If the new name is a duplicate.
+     */
     public static void checkUniqueName(String newName, String oldName) throws InvalidContactField {
         String lowerOldName = oldName.toLowerCase();
         String lowerNewName = newName.toLowerCase();
@@ -159,18 +175,31 @@ public class ContactsManager {
         nameHashes.remove(oldNameHash);
     }
 
+    /**
+     * Adds the hash code of a contact's name field to the set of names.
+     *
+     * @param updatedContact Contact to be added into the list of unique names.
+     */
     public static void addHash(Contact updatedContact) {
         String contactName = updatedContact.getName().toString();
         int nameHash = contactName.toLowerCase().hashCode();
         nameHashes.add(nameHash);
     }
 
+    /**
+     * Removes the hash code of a contact's name from to the set of names.
+     *
+     * @param deletedContact Contact to be added into the list of unique names.
+     */
     public static void deleteHash(Contact deletedContact) {
         String contactName = deletedContact.getName().toString();
         int nameHash = contactName.toLowerCase().hashCode();
         nameHashes.remove(nameHash);
     }
 
+    /**
+     * Lists all contacts.
+     */
     private void listContacts() {
         if (listOfContacts.isEmpty()) {
             printFormat(CONTACTS_EMPTY_LIST_MESSAGE);
@@ -186,6 +215,11 @@ public class ContactsManager {
         printFormat(CONTACTS_LIST_SUCCESS_MESSAGE + listAsString);
     }
 
+    /**
+     * Removes a contact from the list.
+     *
+     * @param userInput String of user input to parse.
+     */
     private void deleteContact(String userInput) {
         Contact curr;
         try {
@@ -206,6 +240,12 @@ public class ContactsManager {
         isModified = true;
     }
 
+    /**
+     * Adds a contact to the list.
+     *
+     * @param userInput String of user input to parse.
+     * @param fromCommandLine Boolean indicating whether the command is from the user in command line.
+     */
     private void addContact(String userInput, boolean fromCommandLine) {
         Contact contact;
         try {
@@ -241,13 +281,13 @@ public class ContactsManager {
             return;
         }
         assert commands.length == LENGTH_ONE_KEYWORD;
-        String keyword = commands[INDEX_AFTER_COMMAND];
+        String keyword = commands[INDEX_AFTER_COMMAND].toLowerCase();
 
         String listAsString = "";
         for (int i = 0; i < getContactsCount(); i++) {
             Contact curr = listOfContacts.get(i);
             Name currName = curr.getName();
-            String contactName = currName.toString();
+            String contactName = currName.toString().toLowerCase();
             if (contactName.contains(keyword)) {
                 String currEntry = String.format(CONTACTS_ENUMERATE_HEADER, i + 1, curr);
                 listAsString = listAsString.concat(currEntry);
@@ -260,6 +300,11 @@ public class ContactsManager {
         }
     }
 
+    /**
+     * Edits an existing contact in the list.
+     *
+     * @param userInput String of user input to parse.
+     */
     private void editContact(String userInput) {
         Contact curr;
         try {
@@ -288,13 +333,6 @@ public class ContactsManager {
         }
         printFormat(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
         isModified = true;
-    }
-
-    /**
-     * Prints a message to inform user they are already in the study manager.
-     */
-    private static void printAlreadyInContactsManagerMessage(TextUi ui) {
-        ui.showToUser("You are already in Contacts Manager.");
     }
 
     /**
