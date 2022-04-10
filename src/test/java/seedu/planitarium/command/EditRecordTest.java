@@ -1,7 +1,9 @@
 package seedu.planitarium.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.planitarium.commands.*;
+import seedu.planitarium.commands.AddPersonCommand;
+import seedu.planitarium.commands.AddRecordCommand;
+import seedu.planitarium.commands.EditRecordCommand;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.family.Family;
 
@@ -42,7 +44,7 @@ public class EditRecordTest {
 
     @Test
     void deleteRec_invalidUid_fail() {
-        try{
+        try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME6, family);
         } catch (PlanITariumException e) {

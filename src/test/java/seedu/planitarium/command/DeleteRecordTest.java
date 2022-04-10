@@ -36,7 +36,7 @@ public class DeleteRecordTest {
 
     @Test
     void deleteRec_invalidUid_fail() {
-        try{
+        try {
             initialize();
             deleteIn = new DeleteRecordCommand(CommandsForTesting.DELETEINCOME4, family);
         } catch (PlanITariumException e) {

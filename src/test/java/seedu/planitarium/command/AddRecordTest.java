@@ -38,7 +38,7 @@ public class AddRecordTest {
 
     @Test
     void addRec_invalidUid_fail() {
-        try{
+        try {
             initialize();
             addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME2, family);
         } catch (PlanITariumException e) {

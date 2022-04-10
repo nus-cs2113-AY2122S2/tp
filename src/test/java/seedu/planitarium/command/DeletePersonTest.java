@@ -26,7 +26,7 @@ public class DeletePersonTest {
 
     @Test
     void deletePerson_invalidUid_fail() {
-        try{
+        try {
             initialize();
             delete = new DeletePersonCommand(CommandsForTesting.DELETEPERSON2, family);
         } catch (PlanITariumException e) {
