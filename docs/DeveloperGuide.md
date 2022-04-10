@@ -24,7 +24,7 @@ users who can type fast will be able to plan out their tasks in a much quicker f
 
 ## Architecture
 
-![image](https://user-images.githubusercontent.com/69501969/160375887-d6da7278-5259-4458-83c7-f53d89fef640.png)
+![](images/ArchitectureDiagram.png)
 
 The above diagram provides a general overview of Sherpass and its major components. The four key areas are:
 
@@ -59,10 +59,13 @@ parsing of JSON from the saved data file.
 
 ### Timetable
 
-For components with more complicated use-cases (`Task` and `Timer`), we separate an extra Logic class to achieve better
+For components with more complicated use-cases (e.g., `Task` and `Timer`), we separate an extra Logic class to achieve better
 modularity, such that each class addresses a separate concern.
 
-Timetable component consists of `Timetable`, `Task`, `TaskList`, `TaskParser`, `TaskLogic` and various commands.
+Timetable component consists of `Timetable`, `TimetableLogic`, `TimetableParser` and `TimetablePrinting`.
+It also interacts with various other classes such as `TaskList` and `Ui` to successfully generate a timetable 
+for the user to view. Refer to its [implementation](#timetable-implementation) for more information on how
+the different classes interact with one another.
 
 ### Study session
 
