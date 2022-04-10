@@ -86,7 +86,7 @@ public class LocalStorage {
                 System.err.println("Failed to create directory! " + e.getMessage());
             }
         }
-         try {
+        try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(storeStr);
             fw.close();

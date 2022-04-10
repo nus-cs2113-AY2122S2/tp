@@ -38,15 +38,15 @@ public class MatchKeywords {
      * @throws //If no match is found should throw something?
      * Current implementation is just to put no value with
      * corresponding keys
-    */
-    private HashMap<String,String> findMatch() {
+     */
+    private HashMap<String, String> findMatch() {
         HashMap<String, String> hashMap = new HashMap<>();
         ArrayList<String> groupNames = findGroup(regex);
         Matcher matcher = regexMatching(regex, input);
 
         // run matcher class to check regex on input string
         boolean hasMatch = matcher.find();
-        for (String groupName: groupNames) {
+        for (String groupName : groupNames) {
             if (!hasMatch) {
                 hashMap.put(groupName, "");
             } else {
@@ -80,12 +80,12 @@ public class MatchKeywords {
         ArrayList<String> groups = new ArrayList<>();
         String[] groupNames = regex.split("\\(?<");
 
-        for (String groupName: groupNames) {
+        for (String groupName : groupNames) {
             if (!groupName.contains(">")) {
                 continue;
             }
             int index = groupName.indexOf(">");
-            String name = groupName.substring(0,index);
+            String name = groupName.substring(0, index);
             groups.add(name);
         }
 
