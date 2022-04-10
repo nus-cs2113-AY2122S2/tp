@@ -534,15 +534,7 @@ The general workflow of the `activity /edit` command is as follows:
     the `activityId` of the old activity.
 14. `Manager#saveProfile` is called to save the changes to the local storage file.
 15. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully edited with `TextUi#printlnMessage`.
-    
-16. After the activity is removed from the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-17. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
-18. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUi#printlnMessage`.
-19. Using the updated details as parameters, the `ActivityCreateCommand` object instantiates an `Activity` object to represent the new activity.
-20. Then, the `Session#addActivity` method is called to add the new `Activity` object into the list of activities.
-21. After the activity is added to the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-22. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
-23. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully created with `TextUi#printlnMessage`.
+
 ### View an activity
 
 ### List activities
