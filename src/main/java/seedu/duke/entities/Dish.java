@@ -8,9 +8,10 @@ public class Dish implements Serializable {
 
     /**
      * Create a new dish.
-     * @param name the name of dish
+     *
+     * @param name  the name of dish
      * @param price the price of dish
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException illegal dish
      */
     public Dish(String name, double price) throws IllegalArgumentException {
         if (name.isEmpty()) {
@@ -25,6 +26,7 @@ public class Dish implements Serializable {
 
     /**
      * Transfer the string to title case.
+     *
      * @param givenString input string
      * @return the title case of input string
      */
@@ -40,6 +42,8 @@ public class Dish implements Serializable {
     }
 
     /**
+     * Get dish name.
+     *
      * @return name of dish
      */
     public String getName() {
@@ -48,8 +52,10 @@ public class Dish implements Serializable {
     }
 
     /**
+     * Change dish name.
+     *
      * @param newName new name of dish
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException illegal dish name
      */
     public void setName(String newName) throws IllegalArgumentException {
         if (newName.isEmpty()) {
@@ -59,6 +65,8 @@ public class Dish implements Serializable {
     }
 
     /**
+     * Get dish price.
+     *
      * @return price of dish
      */
     public double getPrice() {
@@ -67,8 +75,10 @@ public class Dish implements Serializable {
     }
 
     /**
+     * Change dish price.
+     *
      * @param newPrice new price of dish
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException illegal dish price
      */
     public void setPrice(double newPrice) throws IllegalArgumentException {
         if (newPrice < 0) {
