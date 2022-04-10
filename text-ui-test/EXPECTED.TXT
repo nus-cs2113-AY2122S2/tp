@@ -117,6 +117,17 @@ Okay, I've updated the information of this contact:
   Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
 ---------------------------------------------------
 ---------------------------------------------------
+You provided the same delimiter(s) more than once!
+---------------------------------------------------
+---------------------------------------------------
+Okay, I've updated the information of this contact:
+  Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: throw in some/ deli/m/ite/rs
+---------------------------------------------------
+---------------------------------------------------
+Okay, I've updated the information of this contact:
+  Name: Lucy Koh, Faculty: SoC, Email: placeholder (she changed her email), Description: group mate from cs2113
+---------------------------------------------------
+---------------------------------------------------
 Okay, I've updated the information of this contact:
   Name: Daniela Sim, Faculty: FoE, Email: new_email@gmail.com, Description: CS3234 classmate / met at SoC canteen
 ---------------------------------------------------

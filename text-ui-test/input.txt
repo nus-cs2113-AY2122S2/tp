@@ -10,7 +10,7 @@ add f/Faculty e/email@legit.com d/some description
 add n/dANIELA kOH f/YNC e/valid@gmail.com d/description
 add n/Name n/Name again
 add n/Name f/Faculty e/email@u.nus.edu n/Name again
-add n/Name f/Faculty e/email@u.nus.edu d/classmate/friend
+add n/Name f/Faculty e/email@u.nus.edu d/
 list
 find Daniela
 find Koh
@@ -29,6 +29,9 @@ edit 2 n/daniela Koh n/daniela Koh
 edit 2 d/CS3234 classmate / met at SoC canteen
 edit 2 n/daniela Koh
 edit 1 e/placeholder (she changed her email)
+edit 1 e/placeholder (she changed her email) d/throw in e/xtra delimiters
+edit 1 d/throw in some/ deli/m/ite/rs
+edit 1 d/group mate from cs2113
 edit 2 e/new_email@gmail.com f/FoE n/Daniela Sim
 find Koh
 list
