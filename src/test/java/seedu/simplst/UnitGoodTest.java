@@ -30,8 +30,8 @@ public class UnitGoodTest {
                 upperCaseCapacity);
         UnitGood mixCaseUnitGood = new UnitGood("WC1", "Wooden Chair", "German Oak",
                 mixCaseCapacity);
-        assertEquals(Capacity.MEDIUM, smallCaseUnitGood.getCapacity());
-        assertEquals(Capacity.MEDIUM, upperCaseUnitGood.getCapacity());
-        assertEquals(Capacity.MEDIUM, mixCaseUnitGood.getCapacity());
+        assertEquals(Capacity.SMALL, smallCaseUnitGood.getCapacity());
+        assertEquals(Capacity.SMALL, upperCaseUnitGood.getCapacity());
+        assertEquals(Capacity.SMALL, mixCaseUnitGood.getCapacity());
     }
 }
