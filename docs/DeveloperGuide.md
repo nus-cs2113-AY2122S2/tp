@@ -1696,14 +1696,15 @@ and parsed to obtain a `SearchCommand` object that contains the user's input.
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 (Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/exercise`.
-Subsequently, it will call the `ExerciseList#getExerciseList()` method to search from all the available exercises.
+Subsequently, it will call the `ExerciseList#getExerciseList()` method to fetch the `exerciseList` that is used to 
+search through the available exercises.
 
 (Step 4) Based on the exercises from the `exerciseList`, the `searchExercise()` will retrieve all the exercises with name
 containing `<exercise keyword>` and display them in the user's terminal.
 
-(Step 5) The `SearchCommand` object returns to the WerkIt object.
+(Step 5) The `SearchCommand` object returns to the `WerkIt` object.
 
-This completes the process of search for exercise in WerkIt!.
+This completes the process of searching for exercise in WerkIt!.
 
 ---
 
@@ -1728,14 +1729,15 @@ and parsed to obtain a `SearchCommand` object that contains the user's input.
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 (Steps 1 to 3) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/workout`.
-Subsequently, it will call the `WorkoutList#getWorkoutsDisplayList()` method to search from all the existing workouts.
+Subsequently, it will call the `WorkoutList#getWorkoutsDisplayList()` method to fetch the `workoutList` that is used to
+search through the available workouts.
 
 (Step 4) Based on the `workout` objects from the `workoutList`, the `searchWorkout()` will retrieve all the workouts with name
 containing `<exercise keyword>` or repetitions equals to `<number of reps>`, and display them in the user's terminal.
 
-(Step 5) The `SearchCommand` object returns to the WerkIt object.
+(Step 5) The `SearchCommand` object returns to the `WerkIt` object.
 
-This completes the process of search for workout in WerkIt!.
+This completes the process of searching for workout in WerkIt!.
 
 ---
 
@@ -1760,14 +1762,15 @@ and parsed to obtain a `SearchCommand` object that contains the user's input.
 ["Parsing User Input and Getting the Right Command"](#parsing-user-input-and-getting-the-right-command) section.</span>
 
 (Steps 1 to 3) When the SearchCommand#execute() method is called, it will identify that the search action is of type `/plan`.
-Subsequently, it will call the `PlanList#getPlansDisplayList()` method to search from all the existing plans.
+Subsequently, it will call the `PlanList#getPlansDisplayList()` method to fetch the `planList` that is used to
+search through the available plans.
 
 (Step 4) Based on the `plan` objects from the `planList`, the `searchPlan()` will retrieve all the plans with name
 containing `<plan keyword>`, and display them in the user's terminal.
 
-(Step 5) The `SearchCommand` object returns to the WerkIt object.
+(Step 5) The `SearchCommand` object returns to the `WerkIt` object.
 
-This completes the process of search for plan in WerkIt!.
+This completes the process of searching for plan in WerkIt!.
 
 ---
 
@@ -1793,14 +1796,15 @@ and parsed to obtain a `SearchCommand` object that contains the user's input.
 
 (Steps 1 to 7) When the `SearchCommand#execute()` method is called, it will identify that the search action is of type `/all`.
 Subsequently, it will call the `ExerciseList#getExerciseList()`, `WorkoutList#getWorkoutsDisplayList()` and
-`PlanList#getPlansDisplayList()` methods to search from all the existing exercises, workouts and plans.
+`PlanList#getPlansDisplayList()` methods to fetch the `exerciseList`, `workoutList` and `planList` that are used to
+search through the available exercises, workouts and plans.
 
 (Step 8) Based on the exercises, `workout` objects and `plan` objects retrieved, the `searchAll()` will retrieve 
 all the matching results, and display them in the user's terminal.
 
-(Step 9) The `SearchCommand` object returns to the WerkIt object.
+(Step 9) The `SearchCommand` object returns to the `WerkIt` object.
 
-This completes the process of search for all in WerkIt!.
+This completes the process of searching for everything in WerkIt!.
 
 
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
