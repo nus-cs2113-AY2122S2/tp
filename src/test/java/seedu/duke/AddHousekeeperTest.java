@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.duke.command.Command;
 import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
 import seedu.duke.command.housekeepercommands.DeleteHousekeeperCommand;
-//import seedu.duke.exceptions.*;
 import seedu.duke.exceptions.InvalidAgeException;
 import seedu.duke.exceptions.InvalidHousekeeperProfileException;
 import seedu.duke.exceptions.UnderAgeException;
@@ -64,6 +63,13 @@ public class AddHousekeeperTest {
     public void commandParser_addCommandInvalidNameSymbol_exceptionThrown() {
         assertThrows(NameNotStringException.class, () ->
                 new CommandParser().parse("add housekeeper @@@@$S / fifty"));
+    }
+
+
+    @Test
+    public void commandParser_addCommandInvalidSymbol_exceptionThrown() {
+        assertThrows(InvalidHousekeeperProfileException.class, () ->
+                new CommandParser().parse("add housekeeper jane ^ 60"));
     }
 
     @Test
