@@ -52,6 +52,20 @@ Once the doctor is removed from the doctor list, the system informs the user tha
 
 ![](DeleteDoctor.png)
 
+### Add Ward
+Step 1: User type add command to add a ward into the system and provide information required.
+IHospital will call Parser#getCommand() to return the user command received, it will then call
+Parser#parse to determine that the user selected add ward command, and Parser#parse will return an
+AddWardCommand object.
+
+Step 2: IHospital will call execute of the AddWardCommand object and AddWardCommand will
+create a new Ward with the user provided information and add it into WardList using
+WardList#addWard(ward).
+
+The following sequence diagram shows how the add operation works:
+
+![](addWard.png)
+
 ### Add Appointment
 Step 1: User types "add appointment" to add an appointment to IHospital. 
 IHospital will call on the Parser to parse the command. The parser will call on the AddAppointmentCommand.

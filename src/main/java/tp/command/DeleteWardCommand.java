@@ -14,7 +14,7 @@ import tp.WardList;
 import tp.WardStorage;
 import tp.Ward;
 
-
+//@@author sethlxk
 public class DeleteWardCommand extends Command {
     private final int index;
 
