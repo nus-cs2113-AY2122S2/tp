@@ -21,6 +21,7 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 * Edited contents in the UG for continuity purposes
 <br>
+
 * Tests examples in the UG to ensure its validity
 
 ## **DG contributions:**
@@ -28,6 +29,7 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 * Helped explain the Manager class
 <br>
+
 * Helped explain the Command classes
 
 ## **Team-based tasks contributions:**
