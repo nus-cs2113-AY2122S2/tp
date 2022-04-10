@@ -230,7 +230,7 @@ Format: `delete doctor /info [nric]`
 
 Example: `delete doctor /info S7654321A`
 
-
+![](../../Desktop/Screenshot 2022-04-11 at 4.30.41 AM.png)
 
 #### DELETE PATIENT
 
@@ -241,6 +241,8 @@ Format: `delete patient /info [nric]`
 
 Example: `delete patient /info S1234567A`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.32.59 AM.png)
+
 #### DELETE MEDICINE
 
 To delete an existing medicine in the application, you can use the `delete medicine` command. This command requires an
@@ -248,7 +250,9 @@ additional parameter which is the batch id of the medicine.
 
 Format: `delete medicine /info [batch id]`
 
-Example: `delete medicine /info S123`
+Example: `delete medicine /info A123`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.34.21 AM.png)
 
 #### DELETE APPOINTMENT
 
@@ -258,6 +262,8 @@ This command requires an additional parameter which is the appointment id of the
 Format: `delete appointment /info [appointment id]`
 
 Example: `delete appointment /info 12356710156543`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.35.07 AM.png)
 
 ### Editing: `edit`
 
@@ -277,7 +283,9 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `edit doctor /info [nric], [name], [age], [gender], [address], [DOB], [Specialisation]`
 
-Example: `edit doctor /info S7654321A, John Doe, 22, M, 10 Baker Street, 1999-12-31, Urinology`
+Example: `edit doctor /info S7654321A, John Doe, 22, M, 12 Baker Street, 1999-12-31, Urinology Department`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.48.35 AM.png)
 
 #### EDIT PATIENT
 
@@ -295,7 +303,9 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `edit patient /info [nric], [name], [age], [gender], [address], [DOB], [DOA]`
 
-Example: `edit patient /info S1234567A, John Doe, 22, M, 10 Baker Street, 1999-12-31, 2021-02-15`
+Example: `edit patient /info S1234567A, Jammie Doe, 22, F, 14 Baker Street, 1999-12-31, 2021-02-15`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.40.03 AM.png)
 
 #### EDIT MEDICINE
 
@@ -312,7 +322,9 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `edit medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`
 
-Example: `edit medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
+Example: `edit medicine /info A123, Paracetamol, 1000, 2023-06-11, drowsy, 20`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.45.26 AM.png)
 
 #### EDIT APPOINTMENT
 
