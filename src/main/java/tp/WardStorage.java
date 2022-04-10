@@ -1,15 +1,12 @@
 package tp;
 
-import tp.person.Doctor;
-import tp.person.Nurse;
-import tp.person.Patient;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -52,11 +49,11 @@ public class WardStorage {
             fw.write(String.format("%d\n", amount));
             for (int i = 1; i <= amount; i++) {
                 Ward curWard =  wards.getWard(i);
-                fw.write(String.format("%d. Nurse:\n", i));
+                fw.write(String.format("%d. Ward:\n", i));
                 //@@ author  DolphXty
-                fw.write(curWard.getDoctor() + "\n");
-                fw.write(curWard.getPatient() + "\n");
-                fw.write(curWard.getNurse() + "\n");
+                fw.write(Arrays.toString(curWard.getDoctors()) + "\n");
+                fw.write(Arrays.toString(curWard.getPatients())  + "\n");
+                fw.write(Arrays.toString(curWard.getNurses()) + "\n");
                 fw.write(curWard.getNumber() + "\n");
             }
             fw.close();
@@ -70,7 +67,7 @@ public class WardStorage {
      * @return The wardList of the IHospitalWard.txt
      * @throws IHospitalException IHospitalException
      */
-    //@@author Demonshaha
+    //@@author DolphXty
     public WardList loadWardList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
@@ -85,28 +82,29 @@ public class WardStorage {
 
             for (int i = 0; i < n; i++) {
                 data = scanner.nextLine();
-                String did = scanner.nextLine();
-                String dname = scanner.nextLine();
-                String dphoneNumber = scanner.nextLine();
-                String demail = scanner.nextLine();
-                String dwardNumber = scanner.nextLine();
-                String id = scanner.nextLine();
-                String name = scanner.nextLine();
-                String phoneNumber = scanner.nextLine();
-                String email = scanner.nextLine();
-                String symptom = scanner.nextLine();
-                String description = scanner.nextLine();
-                String nid = scanner.nextLine();
-                String nname = scanner.nextLine();
-                String nphoneNumber = scanner.nextLine();
-                String nemail = scanner.nextLine();
-                String title = scanner.nextLine();
-                String wardNumber = scanner.nextLine();
-                Patient patient = new Patient(id, name, phoneNumber, email, symptom, description);
-                Doctor doctor = new Doctor(did, dname, dphoneNumber, demail, dwardNumber);
-                Nurse nurse = new Nurse(nid, nname, nphoneNumber, nemail, title, wardNumber);
-                wardNumber = scanner.nextLine();
-                result.addWard(doctor, patient, nurse, wardNumber);
+                String docs = scanner.nextLine();
+                String[] strings = docs.replaceAll("\\[","")
+                        .replaceAll("]","").split(",");
+                int [] docIndexes = new int[strings.length];
+                for (int j = 0; j < strings.length; j++) {
+                    docIndexes[j] = Integer.parseInt(strings[j]);
+                }
+                String pats = scanner.nextLine();
+                strings = pats.replaceAll("\\[","")
+                        .replaceAll("]","").split(",");
+                int [] patIndexes = new int[strings.length];
+                for (int j = 0; j < strings.length; j++) {
+                    patIndexes[j] = Integer.parseInt(strings[j]);
+                }
+                String nurs = scanner.nextLine();
+                strings = nurs.replaceAll("\\[","")
+                                .replaceAll("]","").split(",");
+                int [] nurIndexes = new int[strings.length];
+                for (int j = 0; j < strings.length; j++) {
+                    nurIndexes[j] = Integer.parseInt(strings[j]);
+                }
+                int wardNumber = Integer.parseInt(scanner.nextLine());
+                result.addWard(docIndexes, patIndexes, nurIndexes, wardNumber);
             }
             return result;
         } catch (FileNotFoundException e) {

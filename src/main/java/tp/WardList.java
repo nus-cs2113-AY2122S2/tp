@@ -1,9 +1,5 @@
 package tp;
 
-import tp.person.Doctor;
-import tp.person.Nurse;
-import tp.person.Patient;
-
 import java.util.ArrayList;
 
 public class WardList {
@@ -23,17 +19,18 @@ public class WardList {
     /**
      * Adds a ward to ward list.
      *
-     * @param doctor Doctor assigned for this ward.
-     * @param patient Patient coming for this ward.
-     * @param nurse Nurse assigned for this ward.
+     * @param doctorIndexes indexes of Doctors assigned for this ward.
+     * @param patientIndexes indexes of Patients coming for this ward.
+     * @param nurseIndexes indexes of Nurses assigned for this ward.
      */
-    public void addWard(Doctor doctor, Patient patient, Nurse nurse, String number) {
-        wards.add(new Ward(doctor, patient, nurse, number));
+    public void addWard(int[] doctorIndexes, int[] patientIndexes, int[] nurseIndexes, int number) {
+        wards.add(new Ward(doctorIndexes, patientIndexes, nurseIndexes, number));
         countWard++;
     }
 
     public void addWard(Ward ward) {
         wards.add(ward);
+        countWard++;
     }
 
     /**
@@ -49,25 +46,25 @@ public class WardList {
     }
 
     /**
-     * Get the list of ward of a given doctor.
+     * Get the list of doctor of a given ward.
      *
-     * @param id ID of the doctor.
-     * @return Ward list of the given doctor.
+     * @param num Num of the ward.
+     * @return Doctor list of the given ward.
      */
-    public WardList getWardListOfDoctorById(String id) {
-        WardList warDoc = new WardList();
-        for (Ward ward :wards) {
-            if (ward.getDoctor().getId().equals(id)) {
-                warDoc.addWard(ward);
+    public String[]  getDoctorListOfWardById(int num) {
+        String[] str = new String[10];
+        for (Ward ward : wards) {
+            if (ward.getNumber() == num) {
+                str = ward.getDoctors();
             }
         }
-        return warDoc;
+        return str;
     }
 
 
-    public Ward searchWardByNumber(String num) {
+    public Ward searchWard(int num) {
         for (int i = 0; i < wards.size(); i++) {
-            if (wards.get(i).getNumber().equals(num)) {
+            if (wards.get(i).getNumber() == num) {
                 return wards.get(i);
             }
         }
@@ -77,7 +74,6 @@ public class WardList {
     public int getSize() {
         return countWard;
     }
-
 
 
     @Override

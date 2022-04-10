@@ -51,9 +51,11 @@ public class AddAppointmentCommand extends Command {
         Doctor doctor = doctorList.getDoctor(doctorIndex);
         Patient patient = patientList.getPatient(patientIndex);
         appointmentList.addAppointment(doctor, patient, time);
-        return String.format(boundary + "Noted. I've added this appointment:\n"
-                                     + appointmentList.getAppointment(appointmentList.getSize()) + "\n"
-                                     + "Now you have " + appointmentList.getSize()
-                                     + " appointments recorded in the system." + System.lineSeparator() + boundary);
+
+        //@@author cczhouqi
+        return (boundary + "Noted. I've added this appointment:\n"
+                        + appointmentList.getAppointment(appointmentList.getSize()) + "\n"
+                        + "Now you have " + appointmentList.getSize()
+                        + " appointments recorded in the system." + System.lineSeparator() + boundary);
     }
 }

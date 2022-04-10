@@ -1,6 +1,6 @@
 package tp.person;
 
-public class Doctor extends tp.person.Person {
+public class Doctor extends Person {
     protected boolean isOnDuty;
     protected boolean assignedWard;
     protected String department;
@@ -12,13 +12,19 @@ public class Doctor extends tp.person.Person {
         assignedWard = true;
         this.department = department;
         this.wardNumber = wardNumber;
+        assert wardNumber == -1 : "Default ward number should be set to -1";
     }
 
-    public Doctor(String id, String name, String phoneNumber, String email,String department) {
-        super(id, name, phoneNumber, email);
-        isOnDuty = false;
-        assignedWard = false;
+    public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public void setWardNumber(int wardNumber) {
+        this.wardNumber = wardNumber;
+    }
+
+    public String getDepartment() {
+        return department;
     }
 
     public void markOnDuty() {

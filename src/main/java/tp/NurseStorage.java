@@ -14,7 +14,7 @@ import java.util.Scanner;
 //@@author   Demonshaha
 public class NurseStorage {
     private static final String root = System.getProperty("user.dir");
-    private static final Path filePath = Paths.get(root, "data", "IHospitalDoctors.txt");
+    private static final Path filePath = Paths.get(root, "data", "IHospitalNurses.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
     /**
@@ -90,7 +90,7 @@ public class NurseStorage {
                 String phoneNumber = scanner.nextLine();
                 String email = scanner.nextLine();
                 String title = scanner.nextLine();
-                String wardNumber = scanner.nextLine();
+                int wardNumber = Integer.parseInt(scanner.nextLine());
                 Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
                 result.addNurse(nurse);
             }

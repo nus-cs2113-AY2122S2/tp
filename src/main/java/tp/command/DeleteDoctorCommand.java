@@ -33,8 +33,10 @@ public class DeleteDoctorCommand extends Command {
             throw new IHospitalException("The doctor does not exist.\n");
         }
         Doctor curr = doctorList.deleteDoctor(index);
-        return String.format(boundary + "Noted. I've removed this doctor:" + curr
-                                     + "\n" + "Now you have " + doctorList.getSize()
-                                     + " doctors in the system." + System.lineSeparator() + boundary);
+
+        //@@author cczhouqi
+        return (boundary + "Noted. I've removed this doctor:\n" + curr
+                        + "\n" + "Now you have " + doctorList.getSize()
+                        + " doctors in the system." + System.lineSeparator() + boundary);
     }
 }

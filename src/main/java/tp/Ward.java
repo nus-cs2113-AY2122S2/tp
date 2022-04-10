@@ -1,61 +1,98 @@
 package tp;
 
-import tp.person.Doctor;
-import tp.person.Nurse;
-import tp.person.Patient;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class Ward {
-    protected Doctor doctor;
-    protected Patient patient;
-    protected Nurse nurse;
-    protected String wardNumber;
+    protected int[] doctorIndexes;
+    protected int[] patientIndexes;
+    protected int[] nurseIndexes;
+    protected int wardNumber;
 
-
-
-    public Ward(Doctor doctor, Patient patient, Nurse nurse, String wardNumber) {
-        this.doctor = doctor;
-        this.patient = patient;
-        this.nurse = nurse;
+    public Ward(int[] doctorIndexes, int[] patientIndexes, int[] nurseIndexes, int wardNumber) {
+        this.doctorIndexes = doctorIndexes;
+        this.patientIndexes = patientIndexes;
+        this.nurseIndexes = nurseIndexes;
         this.wardNumber = wardNumber;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public int[] getDoctorIndexes() {
+        return doctorIndexes;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public void setDoctorIndexes(int[] doctorIndexes) {
+        this.doctorIndexes = doctorIndexes;
     }
 
-    public Nurse getNurse() {
-        return nurse;
+    public int[] getPatientIndexes() {
+        return patientIndexes;
     }
 
-    public void editDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setPatientIndexes(int[] patientIndexes) {
+        this.patientIndexes = patientIndexes;
     }
 
-    public void editPatient(Patient patient) {
-        this.patient = patient;
+    public int[] getNurseIndexes() {
+        return nurseIndexes;
     }
 
-    public void editNurse(Nurse nurse) {
-        this.nurse = nurse;
+    public void setNurseIndexes(int[] nurseIndexes) {
+        this.nurseIndexes = nurseIndexes;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return wardNumber;
     }
 
-    public void setNumber(String number) {
+    public void editNumber(int number) {
         this.wardNumber = number;
     }
 
+    public String[] getDoctors() {
+        String[] docNames = new String[10];
+        int j = 0;
+        for (int i = 0; i < 20; i++) {
+            for (int doctorIndex : doctorIndexes) {
+                if (i == doctorIndex) {
+                    docNames[j] = Objects.requireNonNull(DoctorList.searchDoctor(Integer.toString(i))).getName();
+                }
+            }
+        }
+        return docNames;
+    }
+
+    public String[] getPatients() {
+        String[] patientNames = new String[10];
+        int j = 0;
+        for (int i = 0; i < 20; i++) {
+            for (int patientIndex : patientIndexes) {
+                if (i == patientIndex) {
+                    patientNames[j] = Objects.requireNonNull(PatientList.searchPatient(Integer.toString(i))).getName();
+                }
+            }
+        }
+        return patientNames;
+    }
+
+    public String[] getNurses() {
+        String[] nurseNames = new String[10];
+        int j = 0;
+        for (int i = 0; i < 20; i++) {
+            for (int nurseIndex : nurseIndexes) {
+                if (i == nurseIndex) {
+                    nurseNames[j] = Objects.requireNonNull(NurseList.searchNurse(Integer.toString(i))).getName();
+                }
+            }
+        }
+        return nurseNames;
+    }
+
+
     @Override
     public String toString() {
-        return   "Doctor: " + doctor.getName() + " || Nurse: "
-                + "Nurse: " + nurse.getName() + " || Patient: "
-                + patient.getName() + " || Ward number: " + wardNumber;
+        return   "Doctor: " + Arrays.toString(getDoctors()) + " || Patient: "
+                + Arrays.toString(getPatients()) + " || Nurse: "
+                + Arrays.toString(getNurses()) + " || Ward number: " + wardNumber;
     }
 }
 

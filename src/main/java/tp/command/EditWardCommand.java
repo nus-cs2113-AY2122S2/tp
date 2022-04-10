@@ -12,14 +12,16 @@ import tp.PatientStorage;
 import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
-import tp.person.Patient;
 
-//@@author Demonshaha
-public class DeletePatientCommand extends Command {
-    private final int index;
+public class EditWardCommand extends Command {
+    private int index;
+    private String type;
+    private int newInformation;
 
-    public DeletePatientCommand(int index) {
+    public EditWardCommand(int index, String type, int newInformation) {
         this.index = index;
+        this.type = type;
+        this.newInformation = newInformation;
     }
 
     @Override
@@ -28,14 +30,14 @@ public class DeletePatientCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        if (index <= 0 || index > patientList.getSize()) {
-            throw new IHospitalException("The patient does not exist.\n");
+        if (index <= 0 || index > wardList.getSize()) {
+            throw new IHospitalException("The ward does not exist\n");
         }
-        Patient curr = patientList.deletePatient(index);
-
-        //@@author cczhouqi
-        return (boundary + "Noted. I've removed this patient:\n" + curr
-                        + "\n" + "Now you have " + patientList.getSize()
-                        + " patients in the system." + System.lineSeparator() + boundary);
+        if (type.contains("id")) {
+            wardList.getWard(index).editNumber(newInformation);
+            return String.format(boundary + "Updated already!\n" + wardList.getWard(index) + "\n" + boundary);
+        } else {
+            return String.format(boundary + "Ward details are already up to date!\n");
+        }
     }
 }

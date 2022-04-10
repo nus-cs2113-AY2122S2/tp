@@ -43,15 +43,31 @@ The following sequence diagram shows how the add operation works:
 ![](AddDoctor.png)
 
 ### Delete Doctor
-Step 1: User types "delete" to delete a specific doctor from the system
-This will be passed into Duke. Duke will pass the comment to the parser,
-which will parse through the command to remove the doctor.
+Step 1: User types "delete doctor" to delete a specific doctor from the system.
+This will be passed into IHospital, which will parse the command.
 
-Step 2: The parser will call on deleteDoctor to the doctor list.
+Step 2: The parser will call on parseDeleteDoctor which will invoke the DeleteDoctorCommand class.
 The doctor list acts as a database storage containing the information of a list of doctors.
-Once the doctor is removed from the doctor list, the system informs the user that the doctor is successfully removed
+Once the doctor is removed from the doctor list, the system informs the user that the doctor is successfully removed.
 
-![](DeleteDoctor.jpg)
+![](DeleteDoctor.png)
+
+### Add Appointment
+Step 1: User types "add appointment" to add an appointment to IHospital. 
+IHospital will call on the Parser to parse the command. The parser will call on the AddAppointmentCommand.
+
+Step 2: AddAppointmentCommand calls on the Appointment List to add an appointment to the list of appointments.
+The appointment list will create a new appointment object and add it to the list.
+
+![](AddAppointment.png)
+
+### List Nurse
+Step 1: User types "list nurse" to view the list of nurses in IHospital.
+IHospital will call on the Parser to parse through the command. The Parser will invoke ListNurseListCommand.
+
+Step 2: ListNurseListCommand will call on the toString function in nurseList to print out the array of nurses.
+
+![](ListNurse.png)
 
 ## Product scope
 Use in all hospitals in Singapore
@@ -71,7 +87,6 @@ If you can type fast, this application allows you to access relevant hospital in
 | v1.0    | user     | delete an existing person                         | remove a person when he/she leaves   |
 | v1.0    | user     | edit the information of a person                  | update information                   |
 | v1.0    | user     | add an appointment                                | schedule an appointment for patients |
-
 
 
 

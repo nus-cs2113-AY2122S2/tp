@@ -36,8 +36,10 @@ public class DeleteAppointmentCommand extends Command {
             throw new IHospitalException("The appointment does not exist.\n");
         }
         Appointment curr = appointmentList.deleteAppointment(index);
-        return String.format(boundary + "Noted. I've removed this appointment:\n" + curr
-                                     + "\n" + "Now you have " + (appointmentList.getSize())
-                                     + " appointments recorded in the system." + System.lineSeparator() + boundary);
+
+        //@@author cczhouqi
+        return (boundary + "Noted. I've removed this appointment:\n" + curr
+                        + "\n" + "Now you have " + (appointmentList.getSize())
+                        + " appointments recorded in the system." + System.lineSeparator() + boundary);
     }
 }

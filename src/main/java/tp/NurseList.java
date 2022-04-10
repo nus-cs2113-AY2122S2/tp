@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class NurseList {
     public static String boundary = "____________________________________________________________"
-            + System.lineSeparator();
-    protected ArrayList<Nurse> nurses = new ArrayList<>();
+                                            + System.lineSeparator();
+    protected static ArrayList<Nurse> nurses = new ArrayList<>();
     protected int size;
 
     public NurseList() {
@@ -29,6 +29,7 @@ public class NurseList {
         for (Nurse nurs : nurses) {
             if (nurs.getId().trim().equals(nurse.getId())) {
                 isDuplicate = true;
+                break;
             }
         }
 
@@ -56,7 +57,7 @@ public class NurseList {
      * @param id ID of the nurse to find.
      * @return Nurse with the ID given.
      */
-    public Nurse searchNurse(String id) {
+    public static Nurse searchNurse(String id) {
         for (int i = 0; i < nurses.size(); i++) {
             if (nurses.get(i).getId().trim().equals(id)) {
                 return nurses.get(i);
@@ -65,6 +66,7 @@ public class NurseList {
         return null;
     }
 
+    //@@author sethlxk
     public Nurse searchNurseByName(String name) {
         for (int i = 0; i < nurses.size(); i++) {
             if (nurses.get(i).getName().trim().equals(name)) {
@@ -74,10 +76,11 @@ public class NurseList {
         return null;
     }
 
-    public NurseList getNurseListOfWardById(String id) throws IHospitalException {
+    //@@author sethlxk
+    public NurseList getNurseListOfWardById(int id) throws IHospitalException {
         NurseList warNur = new NurseList();
         for (Nurse nurse:nurses) {
-            if (nurse.getWardNumber().equals(id)) {
+            if (nurse.getWardNumber() == id) {
                 warNur.addNurse(nurse);
             }
         }
@@ -92,7 +95,7 @@ public class NurseList {
 
         }
         toPrint += ("You have " + size + " nurses recorded in the system."
-                + System.lineSeparator() + boundary);
+                            + System.lineSeparator() + boundary);
         return toPrint;
     }
 

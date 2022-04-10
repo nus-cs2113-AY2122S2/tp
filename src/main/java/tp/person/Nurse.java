@@ -1,31 +1,36 @@
 package tp.person;
 
+//@@author sethlxk
 public class Nurse extends Person {
     protected boolean isOnDuty;
     protected String title;
-    protected String wardNumber;
+    protected int wardNumber;
 
-
-    public Nurse(String id, String name, String phoneNumber, String email, String title, String wardNumber) {
+    //@@author sethlxk
+    public Nurse(String id, String name, String phoneNumber, String email, String title, int wardNumber) {
         super(id, name, phoneNumber, email);
         this.title = title;
         this.wardNumber = wardNumber;
         isOnDuty = false;
+
+        //@@author cczhouqi
+        assert wardNumber == -1 : "Default ward number should be set to -1";
     }
 
+    //@@author sethlxk
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void editTitle(String title) {
         this.title = title;
     }
 
-    public String getWardNumber() {
+    public int getWardNumber() {
         return wardNumber;
     }
 
-    public void setWardNumber(String wardNumber) {
+    public void setWardNumber(int wardNumber) {
         this.wardNumber = wardNumber;
     }
 
@@ -39,7 +44,7 @@ public class Nurse extends Person {
 
     @Override
     public String toString() {
-        return "* NURSE " + super.toString() + " || TITLE: " + title + " || WardNumber: " + wardNumber;
+        return "* NURSE " + super.toString() + " || Title: " + title + " || Ward: " + wardNumber;
     }
 
 }

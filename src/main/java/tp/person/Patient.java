@@ -23,8 +23,6 @@ public class Patient extends Person {
         return description;
     }
 
-
-
     @Override
     public String toString() {
         return "* PATIENT " + super.toString() + " || Symptom: " + symptom + " || Description: " + description;
