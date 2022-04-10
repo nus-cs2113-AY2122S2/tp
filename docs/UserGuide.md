@@ -177,11 +177,11 @@ Format: `addin /g GROUP_INDEX /u USER_INDEX /d DESCRIPTION /i INCOME /p <T/(any)
 
 Example of usage:
 
-* Add a monthly-recurrent Salary of $2,000, to Alice's income.
+* Add a monthly-recurrent Salary of $2,000, to Bob's income.
 
   `addin /g 1 /u 1 /d Salary /i 2000 /p T`
 
-* _Result_: Entry for Salary is added to Alice's income list with an income index of **1**.
+* _Result_: Entry for Salary is added to Bob's income list with an income index of **1**.
 
   ![addin-command-screenshot](images/AddIncome.png)
 
@@ -203,11 +203,11 @@ Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 
 Example of usage:
 
-* Delete the monthly-recurrent Salary of $2,000 from Alice's income.
+* Delete the monthly-recurrent Salary of $2,000 from Bob's income.
 
   `deletein /g 1 /u 1 /r 1`
 
-* _Result_: Income entry for Salary of $2,000 is deleted from Alice's income list.
+* _Result_: Income entry for Salary of $2,000 is deleted from Bob's income list.
 
   ![deletein-command-screenshot](images/DeleteIncome.png)
 
