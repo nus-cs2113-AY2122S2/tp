@@ -65,6 +65,8 @@ Delete a project from your current list of projects
 Format: `deleteproject [project_name]`
 *The `project_name` must be a match for a current project already in your list of projects
 
+*Note: deleteproject does not use project_index. This is to ensure you are much less likely to mistype and delete the wrong project. It's easier to type the wrong index than the wrong project name.
+
 #### Example of usage
 ```
 deleteproject project1
