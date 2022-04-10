@@ -9,7 +9,6 @@ Simplst aims to improve efficiency and optimise standard warehouse tasks by havi
 setup and quick to use. Simplst will mainly be used to add, remove, list and view goods and orders for the warehouse.
 
 ## Contents page
-
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
 * [Quick start](#quick-start)
 * [Features](#features)
@@ -33,25 +32,26 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
     * [Adding an Orderline](#adding-an-orderline-add-og)
     * [Removing an Orderline by Quantity](#removing-a-quantity-of-an-orderline-remove-og)
     * [Listing Orderlines in an Order](#listing-orderlines-in-an-order-list-og)
+  * [Command Summary](#command-summary)
 
 ## Explanation of key terms or symbols
 
 | Terms or Symbols used                              | Further Explanation                                                                                                                                                                                                                                            |  
 |----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Unit Good                                          | A template containing details of a good.<br/>A Unit Good contains: <br/>- unique SKU <br/>- name <br/>- description of unit good <br/>- capacity                                                                                                               |
+| [Unit Good](#unit-good-commands)                   | A template containing details of a good.                                                                                                                                                                                                                       |
 | SKU                                                | Stands for Stock-Keeping Unit. It is the unique unit number for a specific warehouse item. It can contain characters and numbers (e.g WC01).                                                                                                                   |
 | Capacity                                           | Size of the object defined as Small, Medium and Large.<br/>SMALL <br/>Medium <br/>Large                                                                                                                                                                        |
-| Good                                               | Is a unit good but contains the quantity of the specific Unit Good. A Good contains: <br/>- quantity of the Unit Good                                                                                                                                          |
-| Order                                              | An order can be added to deliver goods to a receiver at a shipping address. An Order contains: <br/>- Order ID which will be a unique positive number<br/>- Receiver name<br/>- Shipping address                                                               |
-| Orderline                                          | An orderline the specific good required by the order. It is a Good but contains the quantity required to fulfill the good. An orderline contains: <br/>- quantity of Good required to fulfill the order                                                        |
-| Fulfill                                            | Used to check and indicate if an order is completed. A fulfilled order will check if all the orderlines relating to the order have their required quantities met. When all the orderlines quantities are fulfilled, the order will be considered as fulfilled. |
+| [Good](#good-commands)                             | A Good is the actual good that is currently in the warehouse inventory.                                                                                                                                                                                        |
+| [Order](#order-commands)                           | An order in Simplst is used to know who made the order and what goods to deliver to that shipping address.                                                                                                                                                     |
+| [Orderline](#orderline-commands)                   | An orderline is the goods required by the order.                                                                                                                                                                                                               |
+| [Fulfill](#fulfill-order-fulfill)                  | Used to check and indicate if an order is completed.                                                                                                                                                                                                           |
 | `Words in MarkUp`                                  | Used to highlight keywords used for commands and commands themselves.                                                                                                                                                                                          |
 | <img src="img.png" alt="img" style="width:50px;"/> | Used to denote features for warehouse managers.                                                                                                                                                                                                                |
 | `*Optional*`                                       | Fields in MarkUp bounded by asterisks (*) are optional to be filled in, but should be replaced with a space ' ' instead.                                                                                                                                       |
 
+
 This User Guide is meant for both warehouse workers and managers to learn how to use Simplst and the features to 
 improve efficiency in managing warehouse inventory and orders. 
-
 
 ## Quick Start
 
@@ -73,9 +73,18 @@ ____________________________________________________________
 ## Features
 
 ### ***Unit Good Commands***
+A Unit Good is a template of a good. A unit good should be added to the warehouse to allow Simplst to know what kind goods will be added to the warehouse later.
+Unit Goods can help Simplst to estimate storage capacity in the future and other predicitive features for future versions. 
+
+A Unit Good contains:
+* unique SKU
+* name
+* description of unit good
+* capacity
 
 ### Adding a Unit Good `add ug/`
 Add a new unit good to the warehouse, creating a Good with quantity 0 in the process.
+
 
 Format: `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`
 
@@ -132,6 +141,9 @@ WC2 - Wooden Table (Table made of oak from Italy)
 Another command?
 ```
 ### ***Good Commands***
+A Good is the actual good that is currently in the warehouse inventory. It will also have the same information as the Unit Good previously added into Simplst with the same SKU.
+In addition to the details in the Unit Good. A Good will also contain:
+- quantity
 
 ### Adding quantity of a Good `add g/`
 Adding the quantity of a Unit Good which is set to default to be 0.
@@ -237,6 +249,12 @@ Another command?
 ```
 
 ### ***Order Commands***
+An order in Simplst is used to know who made the order and what goods to deliver to that shipping address.
+
+An Order contains:
+* Order ID which will be a unique positive number
+* Receiver name
+* Shipping address
 
 ### Adding an Order `add o/`
 Adding a new order to be tracked in the warehouse.
@@ -322,7 +340,8 @@ Another command?
 ```
 
 ### Fulfill Order `fulfill`
-Fulfill a currently unfulfilled order in the warehouse.
+Fulfill a currently unfulfilled order in the warehouse. To fulfill an order, Simplst will check if all the orderlines relating to the order have their required quantities met.<br/>
+When all the orderlines quantities are fulfilled, the order will be considered as fulfilled.
 
 Format: `fulfill oid/[ORDER_ID]`
 
@@ -360,6 +379,10 @@ Another command?
 ```
 
 ### ***Orderline Commands***
+An orderline is the goods required by the order. It is the same as a Good with the same SKU, and contains the quantity required to fulfill the good.
+
+In addition to the details in a Good. An orderline will also contain:
+- quantity of Good required to fulfill the order                                                        |
 
 ### Adding an Orderline `add og/`
 This will add an orderline to a specified order.

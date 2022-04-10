@@ -91,23 +91,6 @@ public class Order {
         }
     }
 
-    /*
-     * FOR DEV ONLY.
-     *
-     * @param orderlineId orderline id
-     */
-    /*
-    public void removeOrderline(int orderlineId) {
-        for (int idx = 0; idx < orderlines.size(); idx++) {
-            if (orderlineId == orderlines.get(idx).getId()) {
-                orderlines.remove(idx);
-                return;
-            }
-        }
-    }
-    */
-
-
     // Function to print grammar for statements to print
     private String checkPlural(int numberOfGoods) {
         if (numberOfGoods <= 1) {
@@ -155,20 +138,6 @@ public class Order {
 
         return false;
     }
-
-    //    private void addExistingGood(int gid, String name, int qty) throws ItemDoesNotExistException {
-    //        Orderline orderline = findGood(gid);
-    //        if (orderline != null) {
-    //            if (!orderline.getName().equals(name)) {
-    //                throw new ItemDoesNotExistException();
-    //            }
-    //            int oldQty = orderline.getQuantity();
-    //            orderline.setQuantity(oldQty + qty);
-    //            System.out.printf("%d more %s added, total quantity of %s is now %d\n",
-    //                    qty, orderline.getName(),
-    //                    orderline.getName(), orderline.getQuantity());
-    //        }
-    //    }
 
     private String completed() {
         if (isFulfilled) {
