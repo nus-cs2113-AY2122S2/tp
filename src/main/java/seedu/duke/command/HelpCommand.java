@@ -40,6 +40,16 @@ public class HelpCommand extends Command {
                                                 "Format: remove {package_id},{contact_number}" +
                                                 "\nUsage: remove 2,98765432\n";
 
+    public static final String ADD_HOTEL_FORMAT = "ADD HOTEL TO ITINERARY\n" +
+                                                "Adds Hotel Information to the Itinerary\n" +
+                                                "Format: addHotel {hotel_id},{hotel_name},{country},{price},{package_id}" +
+                                                "\nUsage: addHotel 1,Hotel99,Singapore,100,1\n";
+
+    public static final String HOTELS_FORMAT = "VIEW HOTELS\n" +
+                                                "Show hotels for a specified travel package\n" +
+                                                "Format: hotels {package_number}" +
+                                                "\nUsage: hotels 1\n";
+
 
     @Override
     public void execute(Packages packages) {
@@ -52,6 +62,8 @@ public class HelpCommand extends Command {
                             DELETE_FORMAT + SEPARATOR +
                             RESERVATIONS_FORMAT + SEPARATOR +
                             RESERVE_FORMAT + SEPARATOR +
-                            REMOVE_FORMAT + SEPARATOR);
+                            REMOVE_FORMAT + SEPARATOR +
+                            ADD_HOTEL_FORMAT + SEPARATOR +
+                            HOTELS_FORMAT + SEPARATOR);
     }
 }
