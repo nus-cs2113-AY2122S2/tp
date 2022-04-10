@@ -4,6 +4,7 @@ package seedu.planitarium.family;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
+import seedu.planitarium.global.UI;
 
 import java.util.logging.Level;
 
@@ -94,6 +95,16 @@ public class Family {
             return;
         }
         String generation = getGenerationName(group);
+        printPersonAdded(name, generation);
+    }
+
+    /**
+     * Prints the name of the person added, and to which array list.
+     *
+     * @param name The name of the person added
+     * @param generation The group the person is added to
+     */
+    private void printPersonAdded(String name, String generation) {
         System.out.println(name + " has been successfully added to " + generation);
     }
 
@@ -174,34 +185,35 @@ public class Family {
         Double sum = 0.0;
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
-            String income = formatValue(personList.getTotalIncome());
-            String expenditure = formatValue(personList.getTotalExpenditure());
+            Double income = personList.getTotalIncome();
+            String incomeString = UI.formatValue(income);
+            Double expenditure = personList.getTotalExpenditure();
+            String expenditureString = UI.formatValue(expenditure);
             Double remain = personList.getRemain();
             sum += remain;
-            String disposable = formatValue(remain);
+            String disposable = UI.formatValue(remain);
             String generation = getGenerationName(i);
-            System.out.println(i + ". " + generation + ":" + System.lineSeparator()
-                    + Constants.INDENTATION + "Income: " + income + System.lineSeparator()
-                    + Constants.INDENTATION + "Expenditure: " + expenditure + System.lineSeparator()
-                    + Constants.INDENTATION + "Disposable: " + disposable);
-            // Print newline between generations
-            System.out.println(Constants.EMPTY_STRING);
+            printFormattedOverview(i, incomeString, expenditureString, disposable, generation);
         }
-        String familyDisposable = formatValue(sum);
+        String familyDisposable = UI.formatValue(sum);
         System.out.println("Total disposable income in family: " + familyDisposable);
     }
 
     /**
-     * Returns the formatting of a monetary value depending on its polarity.
+     * Prints the total income, expenditure, and disposable income of the generation.
      *
-     * @param entry The monetary value
-     * @return The formatting of the value
+     * @param index The generation number
+     * @param income The income for the generation
+     * @param expenditure The expenditure for the generation
+     * @param disposable The disposable income of the generation
+     * @param generation The generation name
      */
-    public String formatValue(Double entry) {
-        if (entry < 0) {
-            return ("-$" + (-entry));
-        }
-        return ("$" + entry);
+    private void printFormattedOverview(int index, String income, String expenditure, String disposable,
+                                        String generation) {
+        System.out.println(index + ". " + generation + ":" + System.lineSeparator()
+                + Constants.INDENTATION + "Income: " + income + System.lineSeparator()
+                + Constants.INDENTATION + "Expenditure: " + expenditure + System.lineSeparator()
+                + Constants.INDENTATION + "Disposable: " + disposable + System.lineSeparator());
     }
 
     /**

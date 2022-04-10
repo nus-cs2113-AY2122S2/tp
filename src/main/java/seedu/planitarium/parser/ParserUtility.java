@@ -6,10 +6,21 @@ import seedu.planitarium.exceptions.DuplicateDelimiterException;
 import seedu.planitarium.exceptions.EmptyStringException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.global.Constants;
+import seedu.planitarium.global.UI;
 
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ParserUtility {
+    protected static final String FORWARD_SLASH_WARNING = UI.HORI_LINE + System.lineSeparator()
+            + ">\tWarning: '%s' contains a forward slash that is not "
+            + "surrounded by a space.\n>\tUse ` / ` or `\\` instead to avoid potential unintended outcomes."
+            + System.lineSeparator();
+    protected static final String FORWARD_SLASH = "/";
+    protected static final String NOT_SPACED_FORWARD_SLASH = "(?:^/|/$|\\S+/|/\\S+)";
+    protected static final Pattern PATTERN = Pattern.compile(NOT_SPACED_FORWARD_SLASH);
+
     // these static strings are solely for JUnit testing
     private static final String THROW_NEGATIVE_MONEY = "Money is negative";
     private static final String THROW_NOT_TWO_DP = "Money is not 2dp";
@@ -46,7 +57,7 @@ public class ParserUtility {
      * @throws NumberFormatException if the value provided is negative.
      */
     protected static void checkNegativeMoney(double checkMoney) throws NumberFormatException {
-        if (Double.compare(checkMoney, Constants.MONEY_ZERO) < 0) {
+        if (Double.compare(checkMoney, Constants.MONEY_ZERO) < Constants.ZERO) {
             throw new NumberFormatException(THROW_NEGATIVE_MONEY);
         }
     }
@@ -121,6 +132,29 @@ public class ParserUtility {
             Parser.logger.log(
                     Level.WARNING, String.format(Parser.LOG_TOO_MANY_DELIMITER, userInput, delimiter));
             throw new DuplicateDelimiterException(delimiter);
+        }
+    }
+
+    /**
+     * Prints a warning if text contains a forward slash that is not enclosed by spaces.
+     *
+     * @param text The text to be checked.
+     */
+    protected static void warnIfNotSpacedForwardSlash(String text) {
+        if (text.contains(FORWARD_SLASH)) {
+            warnIfMatch(text);
+        }
+    }
+
+    /**
+     * Prints a warning if text contains a forward slash that is not enclosed by spaces.
+     *
+     * @param text The text to be checked.
+     */
+    private static void warnIfMatch(String text) {
+        Matcher matcher = PATTERN.matcher(text);
+        if (matcher.find()) {
+            System.out.printf(FORWARD_SLASH_WARNING, text);
         }
     }
 }

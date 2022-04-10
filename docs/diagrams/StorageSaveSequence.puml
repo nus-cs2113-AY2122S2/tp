@@ -18,7 +18,7 @@ Storage -> PersonList: getPersonList()
 activate PersonList
 PersonList --> Storage: :PersonList
 deactivate PersonList
-    loop until all person in PersonList
+    loop LOOP_COLOR until all person in PersonList
         Storage -> PersonList: getSaveName()
         activate PersonList
         PersonList --> Storage: Name:Person

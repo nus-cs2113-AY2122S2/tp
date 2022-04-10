@@ -1,7 +1,7 @@
 # PlanITarium Developer Guide
 
 This document contains the Developer Guide to the **PlanITarium** application. It serves to explain the internal
-workings of PlanITarium such that engineers can understand the various design and implementations in detail.
+workings of PlanITarium such that developers can understand the various design and implementations in detail.
 
 ---
 
@@ -19,9 +19,7 @@ workings of PlanITarium such that engineers can understand the various design an
 * [Implementation](#implementation)
   * [Command Execution](#command-execution)
   * [Logical Grouping of Persons Added](#logical-grouping-of-persons-added)
-  * [Edit Command](#edit-values-feature)
   * [Find Command](#find-feature)
-  * [[Proposed] Listing Categorised Expenditures](#proposed-listing-categorised-expenditures-feature)
   * [Data Archiving](#data-archiving)
 * [Documentation](#documentation)
   * [Logging](#logging)
@@ -70,7 +68,7 @@ is responsible for,
 
 [`Commands`](#Commands-Component) is responsible for the handling and executing of commands.
 
-[`Parser`](#Parser-Component) is responsible for the parsing and validating user input.
+[`Parser`](#Parser-Component) is responsible for the parsing and validating of user input.
 
 [`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
 
@@ -80,16 +78,19 @@ is responsible for,
 
 **How the components interact with each other**
 
-The following Sequence Diagram, with the specific classes and methods abstracted, shows a high-level view on how the 
-components interact for the scenario where the user issues the command `add /g 2 /n Alice`.
+The following Sequence Diagram shows a high-level view on how the components interact when the user enters the command
+`add /g 2 /n Alice`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
+> :information_source: **Note:** The lifeline for `AddPersonCommand` ends at the destroy marker :x:
+> but due to the limitations of PlantUML, the lifeline reaches the end of the diagram.
 
-Each of the main components shown in the diagram above is defined and implemented in a class with the same name as its
-component. The section below provides a more in-depth details on how the components interact with one another.
+Each of the components are defined and implemented as a class with the same name. The section below provides 
+more in-depth details on how the components interact with one another.
 
-Each component may have several other classes underneath it, belonging to the same logical grouping, to reduce coupling.
-For example, the `Money` component is defined as an abstract class that is extended by `Income` and `Expenditure`.
+Each component may consist of several classes that are working seamlessly together to achieve their intended abstracted 
+representation. For example, the `Money` component contains an abstract class that is extended by `Income` and 
+`Expenditure` to represent the types of money that can be managed.
 
 ### UI Component
 
@@ -203,57 +204,61 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 ![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
 
 > :information_source: **Note:** The following are the ranges of index deemed valid:
-<table>
-    <thead>
-        <tr>
-            <th>Index</th>
-            <th>Range</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Group</td>
-            <td>[1, ..., 3]</td>
-        </tr>
-        <tr>
-            <td>User</td>
-            <td>[1, ..., MAX_UID], where MAX_UID is the number of people in the given group</td>
-        </tr>
-        <tr>
-            <td>Category</td>
-            <td>[1, ..., 6]</td>
-        </tr>
-        <tr>
-            <td>Income</td>
-            <td>[1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person</td>
-        </tr>
-        <tr>
-            <td>Expenditure</td>
-            <td>[1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person</td>
-        </tr>
-    </tbody>
-</table>
+
+| Index       | Range                                                                              |
+|-------------|------------------------------------------------------------------------------------|
+| Group       | [1, ..., 3]                                                                        |
+| User        | [1, ..., MAX_UID], where MAX_UID is the number of people in the given group        |
+| Category    | [1, ..., 6]                                                                        |
+| Income      | [1, ..., MAX_IID] where MAX_IID is the number of income entries for a given person |
+| Expenditure | [1, ..., MAX_EID] where MAX_EID is the number of income entries for a given person |
 
 ### Family Component
 
-The **Class** of this component is specified in [`Family.java`](
+The `Family` component consists of the following classes: [`Family.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Family.java)
 , [`PersonList.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/PersonList.java)
 and [`Person.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Person.java)
 
+The Class Diagram below shows the multiplicity and navigability between the 3 classes.
+
 ![FamilyComponent](images/FamilyComponent.png)
 
-The list of persons consists of a `Family` that is made up of generational `PersonList`s. Each `PersonList` holds a 
-list of `Person`s who belong to that generation.
+The `Family` component is implemented in an n-level architecture. It stores the logical grouping of persons added i.e.,
+all `Person` objects must belong to one of the `PersonList`, with all `PersonList` belonging under one `Family`.
+It also depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person` 
+contains an `IncomeList` and `ExpenditureList`.
 
-The `Person` component,
+The Class Diagram below shows the full structure of the `Family` component and the components it interacts with.
 
-* Stores the logical grouping of persons added i.e., all `Person` objects must belong to one of the `PersonList`s.
-* Stores the total number of `Person`s in the `Family`, as well as each of the generational `PersonList`s.
-* Depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person` 
-  contains an `IncomeList` and `ExpenditureList`.
+![Placeholder]()
+
+How the `Family` component is used:
+
+1. Upon input from the user, the user is passed through the `Command` component and a corresponding method is called from 
+the `Family` class.
+2. Depending on the level which the command executes on, each command is passed top-down until it arrives at the relevant
+level for execution.
+3. If the command requires operations on the `Money` components, the command is further passed down to the `Money`
+component for execution.
+4. It is also responsible most of the printing to the user interface. The n-level implementation allows for effective
+wrapping and indentation of lines printed.
+
+To aid in visualisation, 
+
+* Methods on `IncomeList` and `ExpenditureList` will be simplified to call to `MoneyList`. See 
+[Money Component](#Money-component) for more information.
+* The following situation will be simulated:
+  1. User adds a Person, *Alice* to `parents`
+  2. User adds an income to *Alice*
+  3. User decides to view the `parents` generation in detail
+  4. User decides to view the overall situation in the `Family`
+
+The following Sequence Diagram shows how the `Family` component handles each call by the `Command` component.  
+
+![Placeholder]()
 
 ### Money Component
 
@@ -343,73 +348,6 @@ The following diagram is the sequence diagram of this entire process.
 ![CommandFactorySequence](images/AddPersonCommandSequence3.png)
 
 The rest of the commands follow the similar flow as `AddPersonCommand`.
-
----
-
-### Logical Grouping of Persons Added
-
-#### Implementation
-
-The proposed logical grouping of persons added is facilitated by `Family`. It holds 3 lists of `PersonList`, each one
-for a different generation. Additionally, it implements the following operations:
-
-* `Family#list()` -- Lists a high level overview of income and expenditure of each generation.
-* `Family#remain()` -- Prints the total disposable income remaining for the family after everybody's income and   
-  expenditures have been taken into account.
-* `Family#addParent()` -- Adds a person into the `parents` list.
-* `Family#addMyGen()` -- Adds a person into the `myGen` list.
-* `Family#addChild()` -- Adds a person into the `children` list.
-* `Family#XYZCommand()` -- Passes relevant parameters down to lower level class.
-
-Given below is an example usage scenario and how a generation's high level finance overview is calculated.
-
-Step 1. The user launches the application. A `Family` object will be initialised with its 3 generational 
-`PersonList`s. They are `parents`, `myGen`, and `children`.
-
-![PersonStep1](images/PersonStep1.png)
-
-Step 2. The user wishes to add a person, say `John Doe`, to the `children` list. The user executes 
-`add /n John Doe /g 3` command, adding a `Person` with `name` as `John Doe` to group 3, which is the `children`.
-
-![PersonStep2](images/PersonStep2.png)
-
-Step 3. The user executes `addin /g 3 /u 1 /i ...` to add a new income to index 1 of the `children` list, who is 
-`John Doe`. This causes an income object to be added to the `IncomeList` of `John Doe`.
-
-![PersonStep3.1](images/PersonStep3_1.png)
-
-![PersonStep3.2](images/PersonStep3_2.png)
-
-Step 4. The user now decides to have an overview of his family's finances by executing the `list` command. The `list` 
-command will call `Family#list()`, which will go through each generation to sum up their incomes and expenditures and 
-print that out.
-
-![PersonStep4](images/PersonStep4.png)
-
-#### Design considerations:
-
-**Aspect: How to sort persons into logical groups:**
-
-* **Alternative 1 \(current choice):** Have a `Family` object hold 3 `PersonList`s, one for each generation.
-    * Pros: Only requires storage of one instance of each income and expenditure.
-    * Cons: May have performance issues related to operations which work on every income and expenditure as it makes 
-      them deeply nested.
-* **Alternative 2:** Maintain the single `PersonList` with everyone inside, but give a tag to each `Person` to indicate
-  which generation they belong to
-    * Pros: Very low maintenance and changes required to existing code.
-    * Cons: Lack of abstraction, and that total income and expenditure for each generation would need to be   
-      stored until the entire list is iterated through before being able to print.
-
-**Aspect: How many levels of information to show**
-
-* **Alternative 1 \(current choice):** Each class shows information suiting their level i.e., `Family#list()` shows 
-  an overview of each `PersonList`'s total income and expenditure.
-    * Pros: Users will be able to choose how much information they want to see.
-    * Cons: The user would be unable to view all the information with a single command.
-* **Alternative 2:** Only have a single `Family#list()` which gives detailed information of each `Person`'s income 
-  and expenditures.
-    * Pros: Only 1 command is required to show all information.
-    * Cons: If the user only wants a high level overview, the user could be hit with information overload.
 
 ---
 
@@ -637,4 +575,128 @@ and mouse.
 
 ## Instructions for Manual Testing
 
-See [IO redirection testing](#testing).
+Given below are instructions to test the app manually.
+
+> :information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are 
+> expected to do more *exploratory* testing.
+
+### Launch and shutdown
+
+1. Initial launch
+   1. Download the jar file from [here](https://github.com/AY2122S2-CS2113T-T10-2/tp/releases) and copy it into an empty folder.
+   2. Open a terminal in the folder and run `java -jar PlanITarium.jar`. Expected: Shows the welcome message.
+2. Shutdown
+   1. Upon request for input, type `bye` and press [Enter].
+
+### Deleting persons
+
+1. Deleting a person 
+   1. Use the `list` command on the group which a person should be deleted from.
+   2. Prerequisite: At least 1 person in the group.
+   3. Test case: `delete /g 1 /u 1`
+      Expected: First person is deleted from the `Parents` group. Upon `list /g 1`, other persons have their index decremented.
+   4. Test case: `delete /g 0 /u 1`
+      Expected: No person is deleted. Error details shown in the error message.
+   5. Other incorrect delete commands to try: `delete`, `delete /g 1`, `delete /g 1 /u 0`, `delete /g x /u y` (where y is larger
+   than the number of members in group x)
+      Expected: Similar to previous.
+
+### Adding incomes
+
+1. Adding a non-recurring income
+   1. Prerequisite: The person in which the income will be added to exists, then use the `list` command on the group 
+      which the person resides in to get his user index.
+   2. Test case: `addin /g 1 /u 1 /d Donations /i 6000 /p f`
+      Expected: A non-recurring income entry worth $6000 from Donations is added to the first person of `Parents`.
+   3. Test case: `addin /g 1 /u 1 /d Donations /i 6000.123 /p f`
+      Expected: No income is added. Error details shown in the error message.
+   4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`
+      Expected: Similar to previous.
+2. Adding a recurring income
+   1. Prerequisite: Similar to previous.
+   2. Testing similar to previous, but with `/p t` instead.
+
+### Adding expenditures
+
+1. Adding a non-recurring expenditure
+   1. Prerequisite: The person in which the expenditure will be added to exists, then use the `list` command on the group
+      which the person resides in to get his user index.
+   2. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 2 /p f`
+      Expected: A non-recurring expenditure entry worth $50 for Food, in the category *Food and Drinks*, is added to
+      the first person of `Parents`.
+   3. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 7 /p f`
+      Expected: No expenditure is added. Error details shown in the error message.
+   4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`
+      Expected: Similar to previous.
+2. Adding a recurring expenditure
+   1. Prerequisite: Similar to previous.
+   2. Testing similar to previous, but with `/p t` instead.
+
+### Deleting incomes and expenditures
+
+1. Deleting an income
+   1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the 
+      person resides in to get his user index as well as the income index of interest.
+   2. Test case: `deletein /g 1 /u 1 /r 1`
+      Expected: First income entry of the first person in `Parents` group is deleted. Upon `list /g 1`, other income entries
+      under the first person is decremented.
+   3. Test case: `deletein /g 1 /u 1 /r 0`
+      Expected: No income is deleted. Error details shown in the error message.
+   4. Other incorrect deletein commands to try: `deletein`, `deletein /u 1 /r 1`, `deletein /g 1 /u 1 /r first`
+      Expected: Similar to previous.
+2. Deleting an expenditure
+   1. Prerequisite: Similar to previous, but existing expenditure instead of income.
+   2. Testing similar to previous, but with `deleteout` instead.
+
+### Editing incomes and expenditures
+
+1. Editing an income
+   1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the
+      person resides in to get his user index as well as the income index of interest.
+   2. Test case: `editin /g 1 /u 1 /r 1 /i 50`
+      Expected: In-place editing of the first income record of the first person in `Parents`. Upon `list /g 1`, first 
+      income under the first person will be edited to have an income value of $50.00.
+   3. Test case: `editin /g 1 /u 1 /r 1 /i 100 /d Stocks /p t`
+      Expected: Similar in-place editing of the income value, description, and recurrence.
+   4. Test case: `editin`
+      Expected: No income is edited. Error details shown in the error message.
+   5. Other incorrect editin commands to try: `editin /g 1 /u 1 /r 1`, `editin /g 1 /u 1 /r 1 /i notDouble`
+      Expected: Similar to previous.
+2. Editing an expenditure
+   1. Prerequisite: Similar to previous, but existing expenditure instead of income.
+   2. Testing similar to previous, but with `editin` instead and additional delimiter of `/c` can be added for category.
+
+### Finding entries
+
+1. Finding incomes and general expenditures
+   1. Test case: `find /d Test`
+      Expected: All incomes and expenditures whose description contains `Test` will be printed out.
+2. Finding expenditures in a category
+   1. Test case: `find /d Test /c 1`
+      Expected: All incomes, and expenditures in the category of `Others`, whose description contains `Test` will be 
+      printed out.
+   2. Test case: `find /d Test /c 7`
+      Expected: No entries are printed. Error details shown in the error message.
+
+### Loading data
+
+1. Dealing with missing data file
+   1. Test case: Delete the save file `PlanITarium.txt` if it exists and launch the program.
+      Expected: The program will check if the file exists upon start up, and creates one if it does not.
+2. Dealing with missing directory
+   1. Test case: Delete the directory `data` if it exists and launch the program.
+      Expected: The program will check if the directory exists upon start up, and creates one if it does not.
+3. Dealing with corrupted data file
+   1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
+      a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
+   2. Execute the command `bye` to save the data to `PlanITarium.txt`.
+   3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
+      added above.
+   4. Test case: Remove delimiters `/d` in save file. The corrupted record should look like this 
+      `i Donations 200.0 false 2022-04-08`.
+      Expected: Upon starting up the program again, `Storage` will load valid data until it encounters a
+      corrupted entry as seen in the test case. We can check the loaded data by executing the command `list /g 1` 
+      and only `Alice` is printed without the corrupted income entry.
+   5. Test case: Edit task type from income `i` to expenditure `e` in save file. The corrupted record should look like 
+      this `e Donations /d 200.0 /d false /d 2022-04-08`.
+      Expected: Similar to the above expected outcome. 

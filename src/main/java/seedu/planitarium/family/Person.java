@@ -4,6 +4,7 @@ package seedu.planitarium.family;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
+import seedu.planitarium.global.UI;
 import seedu.planitarium.money.Expenditure;
 import seedu.planitarium.money.Income;
 import seedu.planitarium.money.IncomeList;
@@ -83,11 +84,12 @@ public class Person {
         if (isSilent) {
             return;
         }
+        String income = UI.formatValue(amount);
         if (isPermanent) {
-            System.out.println("A recurring income of " + amount + " from " + description + " has been added to "
+            System.out.println("A recurring income of " + income + " from " + description + " has been added to "
                     + name);
         } else {
-            System.out.println("An income of " + amount + " from " + description + " has been added to " + name);
+            System.out.println("An income of " + income + " from " + description + " has been added to " + name);
         }
     }
 
@@ -124,11 +126,12 @@ public class Person {
         if (isSilent) {
             return;
         }
+        String expend = UI.formatValue(amount);
         if (isPermanent) {
-            System.out.println("A recurring expenditure of " + amount + " for " + description + " has been added to "
+            System.out.println("A recurring expenditure of " + expend + " for " + description + " has been added to "
                     + name);
         } else {
-            System.out.println("An expenditure of " + amount + " for " + description + " has been added to " + name);
+            System.out.println("An expenditure of " + expend + " for " + description + " has been added to " + name);
         }
     }
 

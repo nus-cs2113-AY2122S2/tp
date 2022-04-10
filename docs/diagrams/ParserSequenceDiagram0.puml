@@ -7,7 +7,6 @@ group **sd**  Parser Component parse and validate
 Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
 Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 
-
 [-> Parser : parseCommandType(userInput:String)
 activate Parser
 Parser -->[ : keywordString:String
@@ -24,12 +23,12 @@ loop LOOP_COLOR for each XYZ term in command
     e.g. parseName or parseGroupIndex
 
     ' checkContainsOnlyOneDelimiter
-    Parser -> UParser : checkContainsOnlyOneDelimiter(userInput:String, delimiterXYZ:String)
+    Parser -> UParser : checkContainsOnlyOneDelimiter(userInput:String, DELIMITER_XYZ:String)
     activate UParser
-    opt OPT_COLOR found no delimiterXYZ
+    opt OPT_COLOR found no DELIMITER_XYZ
         UParser --> Parser : :MissingDelimiterException
         Parser -->[ : :MissingDelimiterException
-    else found too many delimiterXYZ
+    else found too many DELIMITER_XYZ
         UParser --> Parser : :DuplicateDelimiterException
         Parser -->[ : :DuplicateDelimiterException
     end opt
@@ -37,7 +36,7 @@ loop LOOP_COLOR for each XYZ term in command
     deactivate UParser
 
     ' parseDelimitedTerm
-    Parser -> UParser : parseDelimitedTerm(userInput:String, delimiterXYZ:String)
+    Parser -> UParser : parseDelimitedTerm(userInput:String, DELIMITER_XYZ:String)
     activate UParser
     opt OPT_COLOR XYZ.isBlank()
         UParser --> Parser : :EmptyStringException
@@ -45,6 +44,13 @@ loop LOOP_COLOR for each XYZ term in command
     end opt
     UParser --> Parser : //XYZ//:object
     deactivate UParser
+
+    opt OPT_COLOR XYZ is NAME or DESCRIPTION
+    Parser -> UParser : warnIfNotSpacedForwardSlash(//XYZ//:object)
+    activate UParser
+    UParser --> Parser
+    deactivate UParser
+    end OPT
 
     Parser -->[ : //XYZ//:object
     deactivate Parser
