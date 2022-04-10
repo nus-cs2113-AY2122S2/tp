@@ -64,6 +64,9 @@ public class ModuleParser {
     /**
      * Find modules messages.
      */
+    public static final String INVALID_FIND_KEYWORD_AM = "am";
+    public static final String INVALID_FIND_KEYWORD_PM = "pm";
+    public static final String INVALID_FIND_KEYWORD_MODULE = "module";
     public static final String FIND_MISSING_QUERY_MESSAGE = "You have not entered a search keyword to find modules!";
     public static final String FIND_SPECIAL_CHARACTERS_MESSAGE = "You have entered a special character."
             + " Please refine your search query!";
@@ -85,6 +88,7 @@ public class ModuleParser {
             + "Start time cannot be equal to end time!";
     public static final String INVALID_GREATER_START_TIME_MESSAGE = "You have entered an invalid timeslot. "
             + "Start time cannot be later than end time!";
+
 
 
     private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
@@ -413,8 +417,8 @@ public class ModuleParser {
         } else if (moduleKeyword.equals(":") || moduleKeyword.equals("[") || moduleKeyword.equals("]")
                 || moduleKeyword.equals(",") || moduleKeyword.equals("-")) {
             throw new InvalidFindInputException(FIND_SPECIAL_CHARACTERS_MESSAGE);
-        } else if (moduleKeyword.equals("am") || moduleKeyword.equals("pm")
-                || moduleKeyword.equalsIgnoreCase("module")) {
+        } else if (moduleKeyword.equals(INVALID_FIND_KEYWORD_AM) || moduleKeyword.equals(INVALID_FIND_KEYWORD_PM)
+                || moduleKeyword.equalsIgnoreCase(INVALID_FIND_KEYWORD_MODULE)) {
             throw new InvalidFindInputException(FIND_COMMON_SEARCH_QUERY_MESSAGE);
         } else {
             return moduleKeyword;
