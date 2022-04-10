@@ -72,13 +72,13 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 * `SplitLah [Main]`
     * On app launch: Creates an instance of a `Manager` and runs the command loop.
 * `Manager`
-    * On creation: Initializes the Profile, TextUI and Storage components.
-    * On run: Loads data from `Storage`, receives user input from UI and uses `Parser` to parse user input into application.
+    * On creation: Initializes the `Profile`, `TextUI` and `Storage` components.
+    * On run: Loads data from `Storage`, receives user input from `TextUI` and uses `Parser` to parse user input into application.
 * `Profile`
     * Handles cached data within run time of application. Manages and stores the list of `session` 
       that were created by the user before storing it into `Storage`.
 * `TextUI`
-    * Handles UI operations of the application.
+    * Handles the reading of user input and the printing of the application's output to the user.
 * `Storage`
     * Handles storage operations of the application.
 * `Parser`
