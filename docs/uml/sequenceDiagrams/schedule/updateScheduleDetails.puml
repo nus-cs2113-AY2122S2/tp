@@ -6,7 +6,6 @@ autonumber 2.1
 hide footbox
 
 participant "dayList\n:DayList" AS DayList COLOR_LOGIC
-participant ":String" AS string COLOR_LOGIC
 
 
 activate DayList COLOR_LOGIC
