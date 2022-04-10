@@ -621,21 +621,21 @@ Upon request for input, type `bye` and press [Enter].
 ### Adding persons
 
 1. Use the `overview` command to view the groups available.
-2. Test case: `add /g 1 /n Alice`
+2. Test case: `add /g 1 /n Alice`  
    Expected: Alice is added to the `Parents` group. Upon `list /g 1`, Alice can be seen under `Parents`.
-3. Test case: `add /g 0 /n Bob`
+3. Test case: `add /g 0 /n Bob`  
    Expected: Bob is not added. Error details shown in the error message.
 
 ### Deleting persons
 
 1. Use the `list` command on the group which a person should be deleted from.
 2. Prerequisite: At least 1 person in the group.
-3. Test case: `delete /g 1 /u 1`
+3. Test case: `delete /g 1 /u 1`  
    Expected: First person is deleted from the `Parents` group. Upon `list /g 1`, other persons have their index decremented.
-4. Test case: `delete /g 0 /u 1`
+4. Test case: `delete /g 0 /u 1`  
    Expected: No person is deleted. Error details shown in the error message.
 5. Other incorrect delete commands to try: `delete`, `delete /g 1`, `delete /g 1 /u 0`, `delete /g x /u y` (where y is larger
-   than the number of members in group x)
+   than the number of members in group x)  
    Expected: Similar to previous.
 
 ### Adding incomes
@@ -643,11 +643,11 @@ Upon request for input, type `bye` and press [Enter].
 #### Adding a non-recurring income
 1. Prerequisite: The person in which the income will be added to exist, then use the `list` command on the group
    which the person resides in to get his user index.
-2. Test case: `addin /g 1 /u 1 /d Donations /i 6000 /p f`
+2. Test case: `addin /g 1 /u 1 /d Donations /i 6000 /p f`  
    Expected: A non-recurring income entry worth $6000 from Donations is added to the first person of `Parents`.
-3. Test case: `addin /g 1 /u 1 /d Donations /i 6000.123 /p f`
+3. Test case: `addin /g 1 /u 1 /d Donations /i 6000.123 /p f`  
    Expected: No income is added. Error details shown in the error message.
-4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`
+4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`  
    Expected: Similar to previous.
 #### Adding a recurring income
 1. Prerequisite: Similar to previous.
@@ -658,12 +658,12 @@ Upon request for input, type `bye` and press [Enter].
 #### Adding a non-recurring expenditure
 1. Prerequisite: The person in which the expenditure will be added to exist, then use the `list` command on the group
    which the person resides in to get his user index.
-2. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 2 /p f`
+2. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 2 /p f`  
    Expected: A non-recurring expenditure entry worth $50 for Food, in the category *Food and Drinks*, is added to
    the first person of `Parents`.
-3. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 7 /p f`
+3. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 7 /p f`  
    Expected: No expenditure is added. Error details shown in the error message.
-4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`
+4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`  
    Expected: Similar to previous.
 #### Adding a recurring expenditure
 1. Prerequisite: Similar to previous.
@@ -674,12 +674,12 @@ Upon request for input, type `bye` and press [Enter].
 #### Deleting an income
 1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the
    person resides in to get his user index as well as the income index of interest.
-2. Test case: `deletein /g 1 /u 1 /r 1`
+2. Test case: `deletein /g 1 /u 1 /r 1`  
    Expected: First income entry of the first person in `Parents` group is deleted. Upon `list /g 1`, other income entries
    under the first person is decremented.
-3. Test case: `deletein /g 1 /u 1 /r 0`
+3. Test case: `deletein /g 1 /u 1 /r 0`  
    Expected: No income is deleted. Error details shown in the error message.
-4. Other incorrect deletein commands to try: `deletein`, `deletein /u 1 /r 1`, `deletein /g 1 /u 1 /r first`
+4. Other incorrect deletein commands to try: `deletein`, `deletein /u 1 /r 1`, `deletein /g 1 /u 1 /r first`  
    Expected: Similar to previous.
 #### Deleting an expenditure
 1. Prerequisite: Similar to previous, but existing expenditure instead of income.
@@ -690,14 +690,14 @@ Upon request for input, type `bye` and press [Enter].
 #### Editing an income
 1. Prerequisite: An income entry exists under an added person, then use the `list` command on the group which the
    person resides in to get his user index as well as the income index of interest.
-2. Test case: `editin /g 1 /u 1 /r 1 /i 50`
+2. Test case: `editin /g 1 /u 1 /r 1 /i 50`  
    Expected: In-place editing of the first income record of the first person in `Parents`. Upon `list /g 1`, first
    income under the first person will be edited to have an income value of $50.00.
-3. Test case: `editin /g 1 /u 1 /r 1 /i 100 /d Stocks /p t`
+3. Test case: `editin /g 1 /u 1 /r 1 /i 100 /d Stocks /p t`  
    Expected: Similar in-place editing of the income value, description, and recurrence.
-4. Test case: `editin`
+4. Test case: `editin`  
    Expected: No income is edited. Error details shown in the error message.
-5. Other incorrect editin commands to try: `editin /g 1 /u 1 /r 1`, `editin /g 1 /u 1 /r 1 /i notDouble`
+5. Other incorrect editin commands to try: `editin /g 1 /u 1 /r 1`, `editin /g 1 /u 1 /r 1 /i notDouble`  
    Expected: Similar to previous.
 #### Editing an expenditure
 1. Prerequisite: Similar to previous, but existing expenditure instead of income.
@@ -706,23 +706,23 @@ Upon request for input, type `bye` and press [Enter].
 ### Finding entries
 
 #### Finding incomes and general expenditures
-Test case: `find /d Test`
+Test case: `find /d Test`  
 Expected: All incomes and expenditures whose description contains `Test` will be printed out.
 #### Finding expenditures in a category
-1. Test case: `find /d Test /c 1`
+1. Test case: `find /d Test /c 1`  
    Expected: All incomes, and expenditures in the category of `Others`, whose description contains `Test` will be
    printed out.
-2. Test case: `find /d Test /c 7`
+2. Test case: `find /d Test /c 7`  
    Expected: No entries are printed. Error details shown in the error message.
 
 ### Loading data
 
 #### Dealing with missing data file
-Test case: Delete the save file `PlanITarium.txt` if it exists and launch the program.
+Test case: Delete the save file `PlanITarium.txt` if it exists and launch the program.  
 Expected: The program will check if the file exists upon start up, and creates one if it does not.
 
 #### Dealing with missing directory
-Test case: Delete the directory `data` if it exists and launch the program.
+Test case: Delete the directory `data` if it exists and launch the program.  
 Expected: The program will check if the directory exists upon start up, and creates one if it does not.
 
 #### Dealing with corrupted data file
@@ -732,10 +732,10 @@ Expected: The program will check if the directory exists upon start up, and crea
 3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
    added above.
 4. Test case: Remove delimiters `/d` in save file. The corrupted record should look like this
-   `i Donations 200.0 false 2022-04-08`.
+   `i Donations 200.0 false 2022-04-08`.  
    Expected: Upon starting up the program again, `Storage` will load valid data until it encounters a
    corrupted entry as seen in the test case. We can check the loaded data by executing the command `list /g 1`
    and only `Alice` is printed without the corrupted income entry.
 5. Test case: Edit task type from income `i` to expenditure `e` in save file. The corrupted record should look like
-   this `e Donations /d 200.0 /d false /d 2022-04-08`.
-   Expected: Similar to the above expected outcome.
+   this `e Donations /d 200.0 /d false /d 2022-04-08`.  
+   Expected: Similar to previous.
