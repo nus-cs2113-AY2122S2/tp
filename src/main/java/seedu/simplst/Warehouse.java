@@ -128,7 +128,7 @@ public class Warehouse {
      *
      * @return number of unique goods
      */
-    public int uniqueInventories() {
+    private int uniqueInventories() {
         ArrayList<Good> uniqueGoods = new ArrayList<>();
 
         goodList.forEach((sku, good) -> {
@@ -534,6 +534,10 @@ public class Warehouse {
             }
         }
         return false;
+    }
+
+    public int getNumberOfOrder() {
+        return orderLists.size();
     }
 
     /**
