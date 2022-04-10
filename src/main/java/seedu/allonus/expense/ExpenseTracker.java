@@ -79,7 +79,7 @@ public class ExpenseTracker {
     public static final String MSG_MATCHING_EXPENSES = "Here are the matching expense record(s):\n";
     public static final String MENU_STRING = "menu";
     public static final String MSG_INCORRECT_DATE_FORMAT = "Date field is of incorrect format! Type in YYYY-MM-DD and"
-            + " make sure valid values of months are used!";
+            + " make sure valid dates are used!";
     public static final String LOG_INCORRECT_DATE_FIELD = "User entered invalid date format";
     public static final String LOG_INVALID_AMOUNT = "User tried entering invalid amount";
     public static final String MSG_NUMBERS_ONLY_AMOUNT = "Please enter only numbers for the Amount field!";

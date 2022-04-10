@@ -284,6 +284,8 @@ Format:
 
 `category movie`
 
+`done`
+
 **Expected Outcome:**
 ```
 ---------------------------------------------------
