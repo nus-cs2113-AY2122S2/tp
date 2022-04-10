@@ -187,7 +187,7 @@ public class StringConstants {
             + "Please check and try again.";
     public static final String ERROR_EMPTY_PARAM = "\nSorry, you have entered an empty %s ._. "
             + "\nPlease try again.";
-    public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters."
+    public static final String ERROR_ADDITIONAL_PARAMETER = "\nSorry, this command should have no parameters."
             + "\nPlease enter only the command word.";
     public static final String ERROR_EXCESS_ARGUMENT = "\nExcess argument '%s'.\nPlease delete it and try again.";
     public static final String ERROR_INVALID_FLAG = "\nInvalid flag '%s'."
@@ -221,9 +221,9 @@ public class StringConstants {
     public static final String ERROR_NO_SUCH_TAG = "Sorry, no such tag exists ._.";
     public static final String ERROR_UNKNOWN_CONFIGURATION_GROUP = "Sorry, no config named \"%s\" exists.\n"
             + "View all available config settings with \"option\".";
-    public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
-            + "Please add some modules or grades!";
-    public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in the wrong format ._.";
+    public static final String ERROR_MODULE_LIST_EMPTY = "\nSorry, you have 0 MCs counted towards your GPA ._."
+            + "\nPlease add some modules or grades!";
+    public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format ._.";
     public static final String ERROR_DUPLICATE_MODULE = "Multiple modules with module code \"%s\" found. "
             + "Aborting load...";
     public static final String ERROR_INVALID_MODULE_CREDITS = "Invalid module credits found (%s had %d MCs). "

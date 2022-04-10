@@ -2,6 +2,7 @@ package seedu.duke.exceptions;
 
 import seedu.duke.util.StringConstants;
 
+//@@author Yzkkk
 public class EmptyParamException extends GeneralParseException {
     private static final String ERROR_STRING = StringConstants.ERROR_EMPTY_PARAM;
 

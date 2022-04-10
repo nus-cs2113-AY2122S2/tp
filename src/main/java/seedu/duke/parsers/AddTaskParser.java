@@ -22,7 +22,7 @@ public class AddTaskParser extends AddParser {
     private static final String TASK_ESTIMATED_WORKING_TIME_STR = StringConstants.TASK_ESTIMATED_WORKING_TIME_STR;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
     private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION;
-    private static final String TASK_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME;
+    private static final String TASK_ESTIMATED_WORKING_TIME = StringConstants.TASK_ESTIMATED_WORKING_TIME;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String MODULE_FLAG = StringConstants.MODULE_FLAG;
     private static final String MODULE_CODE_STR = StringConstants.MODULE_CODE_STR;
@@ -60,7 +60,7 @@ public class AddTaskParser extends AddParser {
         groupNames.add(TASK_NAME);
         groupNames.add(TASK_DESCRIPTION);
         groupNames.add(TASK_MODULE);
-        groupNames.add(TASK_WORKING_TIME);
+        groupNames.add(TASK_ESTIMATED_WORKING_TIME);
         groupNames.add(INVALID);
         groupNames.add(MODULE_FLAG);
     }
@@ -86,6 +86,28 @@ public class AddTaskParser extends AddParser {
         throw new InvalidCompulsoryParameterException();
     }
 
+    //@@author Yzkkk
+    /**
+     * Checks if the entered parameters are empty.
+     * @param taskName The name of the task to be added
+     * @param taskDescription The description of the task to be added
+     * @param estimatedWorkingTime The estimated working time of the task to be added
+     * @throws EmptyParamException If any of the parameters are empty
+     */
+    private void checksForEmptyParams(String taskName, String taskDescription, String estimatedWorkingTime)
+            throws EmptyParamException {
+        if (taskName.isBlank()) {
+            throw new EmptyParamException(TASK_STR);
+        }
+        if (!Objects.isNull(taskDescription) && taskDescription.isBlank()) {
+            throw new EmptyParamException(TASK_DESCRIPTION_STR);
+        }
+        if (!Objects.isNull(estimatedWorkingTime) && estimatedWorkingTime.isBlank()) {
+            throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
+        }
+    }
+
+    //@@author Yzkkk
     /**
      * Checks if the module code contains errors and throws exceptions for any error.
      * It will first attempt to get the string of module code.
@@ -114,26 +136,6 @@ public class AddTaskParser extends AddParser {
         }
     }
 
-    /**
-     * Checks if the entered parameters are empty.
-     * @param taskName The name of the task to be added
-     * @param taskDescription The description of the task to be added
-     * @param estimatedWorkingTime The estimated working time of the task to be added
-     * @throws EmptyParamException If any of the parameters are empty
-     */
-    private void checksForEmptyParams(String taskName, String taskDescription, String estimatedWorkingTime)
-            throws EmptyParamException {
-        if (taskName.isBlank()) {
-            throw new EmptyParamException(TASK_STR);
-        }
-        if (!Objects.isNull(taskDescription) && taskDescription.isBlank()) {
-            throw new EmptyParamException(TASK_DESCRIPTION_STR);
-        }
-        if (!Objects.isNull(estimatedWorkingTime) && estimatedWorkingTime.isBlank()) {
-            throw new EmptyParamException(TASK_ESTIMATED_WORKING_TIME_STR);
-        }
-    }
-
     //@@author chooyikai
     /**
      * Parses the user input and extracts the parameters based on the command format.
@@ -147,7 +149,7 @@ public class AddTaskParser extends AddParser {
         HashMap<String, String> parsedArguments = parseString(userInput);
         final String taskName = parsedArguments.get(TASK_NAME);
         final String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
-        final String estimatedWorkingTime = parsedArguments.get(TASK_WORKING_TIME);
+        final String estimatedWorkingTime = parsedArguments.get(TASK_ESTIMATED_WORKING_TIME);
         final String taskModule = parsedArguments.get(TASK_MODULE);
         final String moduleFlag = parsedArguments.get(MODULE_FLAG);
         final String invalid = parsedArguments.get(INVALID);
