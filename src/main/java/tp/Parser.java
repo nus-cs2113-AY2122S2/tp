@@ -30,8 +30,8 @@ import tp.command.SearchNurseCommand;
 import tp.command.SearchWardCommand;
 import tp.command.SearchPatientCommand;
 import tp.command.SortAppointmentByTimeCommand;
-
-
+import tp.command.ViewDoctorPageCommand;
+import tp.command.ViewPatientPageCommand;
 import java.util.Scanner;
 
 public class Parser {
@@ -80,7 +80,6 @@ public class Parser {
         return new GetAppointmentsOfDoctorCommand(id);
     }
 
-    //@@author
     public AddNurseCommand parseAddNurse(String fullCommand) throws IHospitalException {
         String id;
         String dummy = fullCommand.trim();
@@ -103,8 +102,8 @@ public class Parser {
         String title = dummy.substring(titleIndex + 3).trim();
         return new AddNurseCommand(id, name, phoneNumber, email, title, -1, false);
     }
-    //@@author Demonshaha
 
+    //@@author Demonshaha
     public Command parseAddPatient(String fullCommand) throws IHospitalException {
         String id;
         String dummy = fullCommand.trim();
@@ -130,7 +129,7 @@ public class Parser {
         return new AddPatientCommand(id, name, phoneNumber, email, symptom, description);
     }
 
-    //@@ author DolphXty
+    //@@author DolphXty
     public Command parseAddWard(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
         int doctorIndex = dummy.indexOf("/d");
@@ -178,7 +177,7 @@ public class Parser {
         return new AddAppointmentCommand(doctorIndex, patientIndex, time);
     }
 
-    //@@ author DolphXty
+    //@@author DolphXty
     public Command parseAddPatientDescription(String fullCommand) throws IHospitalException {
         String dummy = fullCommand.trim();
         int patientIndex = dummy.indexOf("/p");
@@ -256,6 +255,7 @@ public class Parser {
         }
     }
 
+    //@@author DolphXty
     public Command parseDeleteWard(String fullCommand) throws IHospitalException {
         String[] dummy = fullCommand.split(" ");
         if (dummy.length <= 2) {
@@ -266,6 +266,7 @@ public class Parser {
         }
     }
 
+    //@@author Demonshaha
     public Command parseDeleteCommand(String fullCommand) throws IHospitalException {
         if (fullCommand.contains("delete doctor")) {
             try {
@@ -451,6 +452,10 @@ public class Parser {
             return parseDeleteCommand(fullCommand);
         } else if (fullCommand.contains("list")) {
             return parseListCommand(fullCommand);
+        } else if (fullCommand.toLowerCase().contains("doctor page")) {
+            return new ViewDoctorPageCommand();
+        } else if (fullCommand.toLowerCase().contains("patient page")) {
+            return new ViewPatientPageCommand();
         } else if (fullCommand.contains("help")) {
             return new HelpCommand();
         } else if (fullCommand.contains("search")) {

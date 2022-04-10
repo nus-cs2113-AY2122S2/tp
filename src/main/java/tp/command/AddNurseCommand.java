@@ -14,6 +14,7 @@ import tp.WardList;
 import tp.WardStorage;
 import tp.person.Nurse;
 
+//@@author DolphXty
 public class AddNurseCommand extends Command {
     protected String id;
     protected String name;
@@ -45,9 +46,9 @@ public class AddNurseCommand extends Command {
                           AppointmentStorage appointmentStorage) throws IHospitalException {
         Nurse nurse = new Nurse(id, name, phoneNumber, email, title, wardNumber);
         nurseList.addNurse(nurse);
-        return String.format(boundary + "Noted. I've added this nurse:"
-                + "\n" + nurseList.getNurse(nurseList.getSize())
-                + "\n" + "Now you have " + nurseList.getSize()
-                + " nurses recorded in the system." + System.lineSeparator() + boundary);
+        return (boundary + "Noted. I've added this nurse:"
+                        + "\n" + nurseList.getNurse(nurseList.getSize())
+                        + "\n" + "Now you have " + nurseList.getSize()
+                        + " nurses recorded in the system." + System.lineSeparator() + boundary);
     }
 }

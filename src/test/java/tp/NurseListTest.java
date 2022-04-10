@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NurseListTest {
     private final Nurse firstNurse = new Nurse("1234", "Rose",
-            "12341234", "3600@gmail.com", "Junior", 10);
+            "12341234", "3600@gmail.com", "Junior", -1);
     private final Nurse secondNurse = new Nurse("2233", "Mary",
-            "66667777", "Mary123@gmail.com", "Senior", 22);
+            "66667777", "Mary123@gmail.com", "Senior", -1);
     private Ui ui = new Ui();
 
     @Test
@@ -61,10 +61,10 @@ class NurseListTest {
                 + "Here are the nurses in this hospital:"
                 + System.lineSeparator()
                 + "1. * NURSE [1234] || Name: Rose || Contact No.: 12341234 "
-                + "|| Email: 3600@gmail.com || Title: Junior || Ward: 10"
+                + "|| Email: 3600@gmail.com || Title: Junior || Ward: -1"
                 + System.lineSeparator()
                 + "2. * NURSE [2233] || Name: Mary || Contact No.: 66667777 "
-                + "|| Email: Mary123@gmail.com || Title: Senior || Ward: 22"
+                + "|| Email: Mary123@gmail.com || Title: Senior || Ward: -1"
                 + System.lineSeparator()
                 + "You have 2 nurses recorded in the system."
                 + System.lineSeparator()

@@ -65,9 +65,9 @@ public class PatientList {
     }
 
     public static Patient searchPatient(String id) {
-        for (int i = 0; i < patients.size(); i++) {
-            if (patients.get(i).getId().trim().equals(id)) {
-                return  patients.get(i);
+        for (Patient patient : patients) {
+            if (patient.getId().trim().equals(id)) {
+                return patient;
             }
         }
         return null;

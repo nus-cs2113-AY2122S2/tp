@@ -12,8 +12,12 @@ public class Nurse extends Person {
         this.title = title;
         this.wardNumber = wardNumber;
         isOnDuty = false;
+
+        //@@author cczhouqi
+        assert wardNumber == -1 : "Default ward number should be set to -1";
     }
 
+    //@@author sethlxk
     public String getTitle() {
         return title;
     }

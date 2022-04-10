@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class NurseList {
     public static String boundary = "____________________________________________________________"
-            + System.lineSeparator();
+                                            + System.lineSeparator();
     protected static ArrayList<Nurse> nurses = new ArrayList<>();
     protected int size;
 
@@ -29,6 +29,7 @@ public class NurseList {
         for (Nurse nurs : nurses) {
             if (nurs.getId().trim().equals(nurse.getId())) {
                 isDuplicate = true;
+                break;
             }
         }
 
@@ -94,7 +95,7 @@ public class NurseList {
 
         }
         toPrint += ("You have " + size + " nurses recorded in the system."
-                + System.lineSeparator() + boundary);
+                            + System.lineSeparator() + boundary);
         return toPrint;
     }
 

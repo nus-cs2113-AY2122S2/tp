@@ -35,8 +35,8 @@ public class DeleteDoctorCommand extends Command {
         Doctor curr = doctorList.deleteDoctor(index);
 
         //@@author cczhouqi
-        return String.format(boundary + "Noted. I've removed this doctor:\n" + curr
-                                     + "\n" + "Now you have " + doctorList.getSize()
-                                     + " doctors in the system." + System.lineSeparator() + boundary);
+        return (boundary + "Noted. I've removed this doctor:\n" + curr
+                        + "\n" + "Now you have " + doctorList.getSize()
+                        + " doctors in the system." + System.lineSeparator() + boundary);
     }
 }

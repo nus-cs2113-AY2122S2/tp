@@ -12,6 +12,7 @@ import java.util.Scanner;
 //@@author Demonshaha
 
 public class DoctorStorage {
+
     private static final String root = System.getProperty("user.dir");
     private static final Path filePath = Paths.get(root, "data", "IHospitalDoctors.txt");
     private static final Path dirPath = Paths.get(root, "data");
@@ -54,7 +55,7 @@ public class DoctorStorage {
                 fw.write(currDoctor.getPhoneNumber() + "\n");
                 fw.write(currDoctor.getEmail() + "\n");
                 fw.write(currDoctor.getDepartment() + "\n");
-                fw.write(Integer.toString(currDoctor.getWardNumber()));
+                fw.write(currDoctor.getWardNumber() + "\n");
             }
             fw.close();
         } catch (IOException e) {
