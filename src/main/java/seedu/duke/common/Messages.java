@@ -22,6 +22,9 @@ public class Messages {
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would be negative! "
             + "Your command has been terminated; no changes were made.";
+    public static final String OVERFLOW_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
+            + "would overflow! (too large) "
+            + "Your command has been terminated; no changes were made.";
     public static final String MISSING_ITEM_NUMBER_MESSAGE = "Sorry, you haven't entered an item number. "
             + "Please enter an item number!";
     public static final String INVALID_ITEM_NUMBER_MESSAGE = "Sorry, you haven't entered a valid item number. "
@@ -35,6 +38,9 @@ public class Messages {
     public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost.";
     public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. "
             + "Please ensure that end date >= start date.";
-    public static final String INVALID_DATES_CONFLICT = "Sorry. The item is not available on this date, "
-            + "please try other dates.";
+    public static final String INVALID_INSUFFICIENT_QUANTITY = "Sorry. There is insufficient quantity. "
+            + "Please reduce your quantity borrowed or try another date.";
+    public static final String INVALID_BORROW_LOST_ITEM = "Sorry. The item is lost and "
+            + "not available for borrowing.";
+    public static final String INVALID_BORROW_DURATION = "Error. You can only borrow for a maximum of 7 days.";
 }

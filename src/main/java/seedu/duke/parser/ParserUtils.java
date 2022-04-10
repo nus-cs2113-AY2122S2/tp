@@ -4,9 +4,12 @@ import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class ParserUtils {
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -67,7 +70,7 @@ public class ParserUtils {
      */
     public static LocalDate parseDate(String dateStr) throws InvMgrException {
         try {
-            LocalDate date = LocalDate.parse(dateStr);
+            LocalDate date = LocalDate.parse(dateStr, DATE_FORMAT);
             return date;
         } catch (DateTimeParseException e) {
             throw new InvMgrException(Messages.INVALID_DATE_FORMAT);
