@@ -1,13 +1,14 @@
 package seedu.duke.commands;
 
-import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ListFutureBorrowingsCommand extends Command {
     public static final String COMMAND_WORD = "listfb";
@@ -18,41 +19,41 @@ public class ListFutureBorrowingsCommand extends Command {
         this.name = name;
     }
 
+    /**
+     * This method first checks if there are any borrow records at all (for the person if it is specified in input).
+     * If there are, the method will loop through the items to print out the items and their respective borrow records.
+     * @param itemList ItemList containing all items in the current inventory
+     * @param ui User Interface for reading inputs and/or printing outputs
+     */
     public void execute(ItemList itemList, Ui ui) {
+        List<Item> items = itemList.getItemArrayList();
+        List<String> futureRecords =
+                items.stream()
+                     // for every item, get the list of borrowrecords in the form of strings
+                     .map(item -> item.filterRecords(name, BorrowStatus.FUTURE))
+                     // combine all the arraylists into 1 single stream of borrowrecords (regardless of item)
+                     .flatMap(Collection::stream)
+                     // convert this stream into a list (that is futureRecords)
+                     .collect(Collectors.toList());
+
+        if (futureRecords.size() == 0) {
+            if (name.isPresent()) {
+                ui.showMessages("There are no future borrowings for " + name.get() + ".");
+            } else {
+                ui.showMessages("There are no future borrowings.");
+            }
+            return;
+        }
+
         if (name.isPresent()) {
             ui.showMessages("Here is a list of future borrowings for " + name.get() + ": ");
-            int borrowIndex = 0;
-            for (int i = 0; i < itemList.getSize(); i++) {
-                Item borrowedItem = itemList.getItem(i);
-                ArrayList<BorrowRecord> borrowRecords = borrowedItem.getBorrowRecords();
-
-                for (BorrowRecord record : borrowRecords) {
-                    boolean isFutureBorrowing = record.getBorrowStatus() == BorrowStatus.FUTURE;
-                    boolean matchesName = record.getBorrowerName().equals(name.get());
-                    if (isFutureBorrowing && matchesName) {
-                        borrowIndex++;
-                        ui.showMessages(borrowIndex + ") Name of Item: " + borrowedItem.getName(),
-                                "Name of Borrower: " + record.getBorrowerName(),
-                                "Borrow Duration: " + record.getBorrowDuration() + "\n");
-                    }
-                }
-            }
         } else {
             ui.showMessages("Here is a list of future borrowings: ");
-            for (int i = 0; i < itemList.getSize(); i++) {
-                Item borrowedItem = itemList.getItem(i);
-                ArrayList<BorrowRecord> borrowRecords = borrowedItem.getBorrowRecords();
+        }
 
-                for (BorrowRecord record : borrowRecords) {
-                    if (record.getBorrowStatus() == BorrowStatus.FUTURE) {
-                        ui.showMessages("Name of Item: " + borrowedItem.getName(),
-                                "Name of Borrower: " + record.getBorrowerName(),
-                                "Borrow Duration: " + record.getBorrowDuration() + "\n");
-                    }
-                }
-            }
+        for (String record: futureRecords) {
+            ui.showMessages(record);
         }
     }
-
 
 }
