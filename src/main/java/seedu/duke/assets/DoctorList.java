@@ -66,8 +66,7 @@ public class DoctorList extends List {
     //view all doctor
     public void view() throws UserInputErrorException {
         CommandLineTable doctorTable = new CommandLineTable();
-        //st.setRightAlign(true);//if true then cell text is right aligned
-        doctorTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
+        doctorTable.setShowVerticalLines(true);
         doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "Specialization");
         if (doctors.size() == 0) {
