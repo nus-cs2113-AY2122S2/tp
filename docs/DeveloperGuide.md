@@ -91,9 +91,10 @@ The above diagram shows a sequence diagram of the program when it is running.
 5. The loop stops when the user types `exit`.
 
 ### UI Component
+
 ![UiClassDiagram](img/UiClassDiagram.png)
 
-The `UI` component consists of a single `Ui` class.
+The above diagram shows the class diagram for the `Ui` component.
 
 The `UI` component
 - Displays salutations, prompts for user input, error messages and results of queries.
@@ -104,23 +105,25 @@ The `UI` component
 
 ![ParserClassDiagram](img/ParserClassDiagram.png)
 
-The diagram above shows the class diagram of how the `Parser` component works.
+The above diagram shows the class diagram for the `Parser` component.
 
-1. The `parse(userInput)` method in `Parser` is called from `InvMgr`, and takes in the raw user input. 
-2. The method checks through a logic gate whether the user input is valid, and returns 
-a `Command` class based on the user input.
+How the parsing works:
+- When called upon to parse a user command, the `InputParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InputParser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Command Component
+
 ![CommandClassDiagram](img/CommandClassDiagram.png)
-The following diagram shows the class diagram for `Command`.
+
+The above diagram shows the class diagram for the `Command` component.
 
 `Command` is an abstract class that sets certain commonalities that is implemented across all types of commands - `AddCommand`, `DescCommand`, `ListCommand`, `DeleteCommand`, `HelpCommand`, `ExitCommand`. Each of these classes have to override the `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
 
 ### Storage Component
 
-The following diagram shows the class diagram for `Storage`.
-
 ![StorageClassDiagram](img/StorageClassDiagram.png)
+
+The above diagram shows the class diagram for the `Storage` component.
 
 1. `Storage` has `save()` and `load()` methods. These are called by `InvMgr` when needed.
 2. `save(itemList)` writes the contents of an `itemList` to a file.
