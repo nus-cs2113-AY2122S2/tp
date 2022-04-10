@@ -21,6 +21,7 @@ public class ReturnCommandParser implements Parser<ReturnCommand> {
             throw new InvMgrException(Messages.INVALID_SYNTAX);
         }
         int itemIndex = ParserUtils.parseIndex(argMultimap.getValue(PREFIX_ITEM_INDEX).get()) - 1;
+        System.out.println(itemIndex);
         return new ReturnCommand(itemIndex);
     }
 
