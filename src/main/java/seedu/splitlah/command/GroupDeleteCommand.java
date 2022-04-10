@@ -42,7 +42,7 @@ public class GroupDeleteCommand extends Command {
             ui.printlnMessageWithDivider(COMMAND_SUCCESS);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPDELETE_GROUP_REMOVED + groupId);
         } catch (InvalidDataException e) {
-            ui.printlnMessageWithDivider(e.getMessage());
+            ui.printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPDELETE_GROUP_REMOVED_FAILED + groupId);
         }
     }
