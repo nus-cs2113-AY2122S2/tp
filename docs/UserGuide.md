@@ -527,8 +527,20 @@ Adds a new contact to the list of contacts.
 
 Format: `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION`
 
-* Use the delimiters `n/`, `f/`, `e/`, `d/` to indicate the contact's name, faculty, email, and description respectively
+* Use the delimiters `n/`, `f/`, `e/`, `d/` to indicate the contact's name, 
+faculty, email, and description respectively; delimiters should be preceded by space
 * You may indicate the fields in any order
+* Two contacts cannot have the same name (case-insensitive)
+* Emails not in the form of `xxx@xxx.xxx` will give an invalid email reminder,
+  but will still be allowed
+* The content of the field should immediately follow the delimiter, e.g.
+  * `n/Name` is a valid way of indicating a field
+  * `n/ Name` is not valid, and will be treated as an empty field
+* Input between the `add` command and the first delimiter will be ignored, e.g.
+  * In the command `add whatever input n/NAME f/FACULTY e/EMAIL d/DESCRIPTION`,
+  the `whatever input` portion will be ignored
+* A field should only be provided once
+* All fields must be provided
 
 Example of usage:
 
@@ -595,7 +607,15 @@ Format: `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`
 * You can edit multiple fields at once, though it is optional
   * However, you must edit at least one field at a time
   * This means that the Contacts Manager will prompt you for a field 
-if you only enter `edit INDEX` without any fields supplied
+  if you only enter `edit INDEX` without any fields supplied
+  * A field should only be provided once
+* The same rules apply regarding the format delimiters (from the `add` command)
+* Two contacts cannot have the same name (case-insensitive)
+* A name can be updated with itself unchanged, or with a different case, e.g.
+  * For a contact with name `Sample`, you may edit the contact name to be
+  `n/Sample`, `n/sample`, `n/SAMPLE`, etc.
+  * A reminder will be given in these edits, but they are still allowed
+
 
 Example of usage:
 
@@ -614,7 +634,7 @@ Only the Name field will be considered when looking for a contact record.
 
 Format: `find KEYWORD`
 
-* The keyword is case-sensitive
+* The keyword is case-insensitive
 * Partial matches on the keyword are also returned
 * You can only search for one keyword at a time
 
@@ -667,3 +687,5 @@ Please ensure the version of both applications are the same.
 | Help                    | `help`                                                                                                                      |
 | Navigate                | `goto m/SECTION`                                                                                                            |
 | Exit                    | `exit`                                                                                                                      |
+
+[Back to main menu](https://ay2122s2-cs2113-f10-4.github.io/tp/)

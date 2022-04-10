@@ -50,3 +50,5 @@ Responsible for creating the modules package and all its components
 * Contributions beyond project team:
 * Contributions to the User Guide:
 * Contributions to the Developer Guide:
+
+[Back to main menu](https://ay2122s2-cs2113-f10-4.github.io/tp/)

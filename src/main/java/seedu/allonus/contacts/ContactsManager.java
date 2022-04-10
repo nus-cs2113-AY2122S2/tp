@@ -91,6 +91,14 @@ public class ContactsManager {
     private static final StorageFile storageFile = new StorageFile();
     private static boolean isModified = false;
 
+    //@@author OzairHasan
+    /**
+     * Prints a message to inform user they are already in the study manager.
+     */
+    private static void printAlreadyInContactsManagerMessage(TextUi ui) {
+        ui.showToUser("You are already in Contacts Manager.");
+    }
+
     /**
      * Returns current number of items in contacts list.
      *
@@ -127,20 +135,19 @@ public class ContactsManager {
         addContact(savedContact, false);
     }
 
-    /**
-     * Prints a message following a defined format.
-     *
-     * @param message Message to print.
-     */
-    public static void printFormat(String message) {
-        showToUser(message);
-    }
-
+    //@@author wli-linda
     private static void contactsWelcome() {
-        printFormat(CONTACTS_WELCOME_MESSAGE);
+        showToUser(CONTACTS_WELCOME_MESSAGE);
         logger.log(Level.FINER, CONTACTS_ENTER_LOG_MESSAGE);
     }
 
+    /**
+     * Checks whether a duplicate of the new name already exists in the list.
+     *
+     * @param newName String of new name.
+     * @param oldName String of old name.
+     * @throws InvalidContactField If the new name is a duplicate.
+     */
     public static void checkUniqueName(String newName, String oldName) throws InvalidContactField {
         String lowerOldName = oldName.toLowerCase();
         String lowerNewName = newName.toLowerCase();
@@ -159,21 +166,34 @@ public class ContactsManager {
         nameHashes.remove(oldNameHash);
     }
 
+    /**
+     * Adds the hash code of a contact's name field to the set of names.
+     *
+     * @param updatedContact Contact to be added into the list of unique names.
+     */
     public static void addHash(Contact updatedContact) {
         String contactName = updatedContact.getName().toString();
         int nameHash = contactName.toLowerCase().hashCode();
         nameHashes.add(nameHash);
     }
 
+    /**
+     * Removes the hash code of a contact's name from to the set of names.
+     *
+     * @param deletedContact Contact to be added into the list of unique names.
+     */
     public static void deleteHash(Contact deletedContact) {
         String contactName = deletedContact.getName().toString();
         int nameHash = contactName.toLowerCase().hashCode();
         nameHashes.remove(nameHash);
     }
 
+    /**
+     * Lists all contacts.
+     */
     private void listContacts() {
         if (listOfContacts.isEmpty()) {
-            printFormat(CONTACTS_EMPTY_LIST_MESSAGE);
+            showToUser(CONTACTS_EMPTY_LIST_MESSAGE);
             return;
         }
 
@@ -183,9 +203,14 @@ public class ContactsManager {
             String currEntry = String.format(CONTACTS_ENUMERATE_HEADER, i + 1, curr);
             listAsString = listAsString.concat(currEntry);
         }
-        printFormat(CONTACTS_LIST_SUCCESS_MESSAGE + listAsString);
+        showToUser(CONTACTS_LIST_SUCCESS_MESSAGE + listAsString);
     }
 
+    /**
+     * Removes a contact from the list.
+     *
+     * @param userInput String of user input to parse.
+     */
     private void deleteContact(String userInput) {
         Contact curr;
         try {
@@ -198,20 +223,26 @@ public class ContactsManager {
             assert taskInd >= 0;
             assert taskInd < CONTACTS_LIST_MAX_SIZE;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            printFormat(CONTACTS_REMOVE_INVALID_INDEX_MESSAGE);
+            showToUser(CONTACTS_REMOVE_INVALID_INDEX_MESSAGE);
             return;
         }
-        printFormat(CONTACTS_REMOVE_SUCCESS_MESSAGE + curr
+        showToUser(CONTACTS_REMOVE_SUCCESS_MESSAGE + curr
                 + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, getContactsCount()));
         isModified = true;
     }
 
+    /**
+     * Adds a contact to the list.
+     *
+     * @param userInput String of user input to parse.
+     * @param fromCommandLine Boolean indicating whether the command is from the user in command line.
+     */
     private void addContact(String userInput, boolean fromCommandLine) {
         Contact contact;
         try {
             contact = parseContact(userInput);
         } catch (InvalidContactField e) {
-            printFormat(e.getMessage());
+            showToUser(e.getMessage());
             return;
         }
 
@@ -219,7 +250,7 @@ public class ContactsManager {
         addHash(contact);
         assert nameHashes.size() == getContactsCount();
         if (fromCommandLine) {
-            printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact
+            showToUser(CONTACTS_ADD_SUCCESS_MESSAGE + contact
                     + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, getContactsCount()));
         }
         isModified = true;
@@ -233,33 +264,38 @@ public class ContactsManager {
     private void findContacts(String userInput) {
         String[] commands = userInput.split(" ");
         if (commands.length == LENGTH_COMMAND_ONLY) {
-            printFormat(CONTACTS_FIND_EMPTY_KEYWORD_MESSAGE);
+            showToUser(CONTACTS_FIND_EMPTY_KEYWORD_MESSAGE);
             return;
         }
         if (commands.length > LENGTH_ONE_KEYWORD) {
-            printFormat(CONTACTS_FIND_MULTIPLE_KEYWORDS_MESSAGE);
+            showToUser(CONTACTS_FIND_MULTIPLE_KEYWORDS_MESSAGE);
             return;
         }
         assert commands.length == LENGTH_ONE_KEYWORD;
-        String keyword = commands[INDEX_AFTER_COMMAND];
+        String keyword = commands[INDEX_AFTER_COMMAND].toLowerCase();
 
         String listAsString = "";
         for (int i = 0; i < getContactsCount(); i++) {
             Contact curr = listOfContacts.get(i);
             Name currName = curr.getName();
-            String contactName = currName.toString();
+            String contactName = currName.toString().toLowerCase();
             if (contactName.contains(keyword)) {
                 String currEntry = String.format(CONTACTS_ENUMERATE_HEADER, i + 1, curr);
                 listAsString = listAsString.concat(currEntry);
             }
         }
         if (!listAsString.equals("")) {
-            printFormat(CONTACTS_FIND_SUCCESS_MESSAGE + listAsString);
+            showToUser(CONTACTS_FIND_SUCCESS_MESSAGE + listAsString);
         } else {
-            printFormat(CONTACTS_FIND_NO_MATCHES_MESSAGE);
+            showToUser(CONTACTS_FIND_NO_MATCHES_MESSAGE);
         }
     }
 
+    /**
+     * Edits an existing contact in the list.
+     *
+     * @param userInput String of user input to parse.
+     */
     private void editContact(String userInput) {
         Contact curr;
         try {
@@ -269,32 +305,25 @@ public class ContactsManager {
             assert taskInd <= getContactsCount();
             assert taskInd < CONTACTS_LIST_MAX_SIZE;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            printFormat(CONTACTS_EDIT_INVALID_INDEX_MESSAGE);
+            showToUser(CONTACTS_EDIT_INVALID_INDEX_MESSAGE);
             return;
         }
 
         try {
             ArrayList<String> fieldStrings = getFieldStrings(userInput);
             if (fieldStrings.isEmpty()) {
-                printFormat(CONTACTS_EDIT_NO_FIELDS_MESSAGE);
+                showToUser(CONTACTS_EDIT_NO_FIELDS_MESSAGE);
                 return;
             }
             setContactFields(curr, fieldStrings);
             addHash(curr);
             assert nameHashes.size() == getContactsCount();
         } catch (InvalidContactField e) {
-            printFormat(e.getMessage());
+            showToUser(e.getMessage());
             return;
         }
-        printFormat(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
+        showToUser(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
         isModified = true;
-    }
-
-    /**
-     * Prints a message to inform user they are already in the study manager.
-     */
-    private static void printAlreadyInContactsManagerMessage(TextUi ui) {
-        ui.showToUser("You are already in Contacts Manager.");
     }
 
     /**
@@ -330,7 +359,7 @@ public class ContactsManager {
             } else if (userInput.startsWith(EDIT_COMMAND_STRING)) {
                 editContact(userInput);
             } else {
-                printFormat(CONTACTS_INVALID_COMMAND_MESSAGE);
+                showToUser(CONTACTS_INVALID_COMMAND_MESSAGE);
                 logger.log(Level.FINER, String.format(CONTACTS_INVALID_COMMAND_LOG_MESSAGE, userInput));
             }
             if (isModified) {
