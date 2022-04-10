@@ -5,9 +5,9 @@ import tp.person.Patient;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class AppointmentList {
     public static String boundary = "____________________________________________________________"
@@ -31,13 +31,28 @@ public class AppointmentList {
      * @param patient Patient coming for this appointment.
      * @param time The time reserved.
      */
-    public void addAppointment(Doctor doctor, Patient patient, LocalDateTime time) {
+    public void addAppointment(Doctor doctor, Patient patient, LocalDateTime time) throws IHospitalException {
+        if (searchAppointmentByTime(time) != null) {
+            Doctor busyDoctor = searchAppointmentByTime(time).getDoctor();
+            if (Objects.equals(doctor.getId(), busyDoctor.getId())) {
+                throw new IHospitalException("This doctor is busy at this time.\n");
+            }
+        }
         appointments.add(new Appointment(doctor, patient, time));
         countAppointment++;
     }
 
-    public void addAppointment(Appointment appointment) {
+    public void addAppointment(Appointment appointment) throws IHospitalException {
+        LocalDateTime time = appointment.getTime();
+        Doctor doctor = appointment.getDoctor();
+        if (searchAppointmentByTime(time) != null) {
+            Doctor busyDoctor = searchAppointmentByTime(time).getDoctor();
+            if (Objects.equals(doctor.getId(), busyDoctor.getId())) {
+                throw new IHospitalException("This doctor is busy at this time.\n");
+            }
+        }
         appointments.add(appointment);
+        countAppointment++;
     }
 
     /**
@@ -61,7 +76,7 @@ public class AppointmentList {
      * @param id ID of the doctor.
      * @return Appointment list of the given doctor.
      */
-    public AppointmentList getAppointmentListOfDoctorById(String id) {
+    public AppointmentList getAppointmentListOfDoctorById(String id) throws IHospitalException {
         AppointmentList res = new AppointmentList();
         for (Appointment appointment : appointments) {
             if (appointment.getDoctor().getId().contains(id)) {
@@ -72,9 +87,18 @@ public class AppointmentList {
     }
 
     public Appointment searchAppointmentByTime(String time) {
-        for (int i = 0; i < appointments.size(); i++) {
-            if (appointments.get(i).getTime().equals(LocalDateTime.parse(time))) {
-                return appointments.get(i);
+        for (Appointment appointment : appointments) {
+            if (appointment.getTime().equals(LocalDateTime.parse(time))) {
+                return appointment;
+            }
+        }
+        return null;
+    }
+
+    public Appointment searchAppointmentByTime(LocalDateTime time) {
+        for (Appointment appointment : appointments) {
+            if (appointment.getTime().equals(time)) {
+                return appointment;
             }
         }
         return null;
@@ -123,7 +147,7 @@ public class AppointmentList {
         for (int i = 1; i <= countAppointment; i++) {
             toPrint += (i + ". " + getAppointment(i) + System.lineSeparator());
         }
-        toPrint += ("Now you have " + countAppointment
+        toPrint += ("You have " + countAppointment
                             + " appointments recorded in the system." + System.lineSeparator()
                             + boundary);
         return toPrint;

@@ -20,10 +20,14 @@ public class Ui {
         System.out.println(message);
     }
 
-    public void printDoctorPage(DoctorList doctors) {
+    public void printDoctorPage(DoctorList doctors, AppointmentList appointments)
+            throws IHospitalException {
         System.out.print(boundary);
         System.out.println("Welcome to Doctor Page.");
-        System.out.print(doctors);
+        for (int i = 1; i <= doctors.getSize(); i++) {
+            System.out.println(doctors.getDoctor(i));
+            System.out.println(appointments.getAppointmentListOfDoctorById(doctors.getDoctor(i).getId()));
+        }
     }
 
     public void printNursePage(NurseList nurses) {

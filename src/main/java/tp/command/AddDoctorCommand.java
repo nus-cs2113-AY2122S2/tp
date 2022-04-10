@@ -49,9 +49,9 @@ public class AddDoctorCommand extends Command {
         doctorList.addDoctor(doctor);
 
         //@@author cczhouqi
-        return String.format(boundary + "Noted. I've added this doctor:"
-                + "\n" + doctorList.getDoctor(doctorList.getSize())
-                + "\n" + "Now you have " + doctorList.getSize()
-                + " doctors recorded in the system." + System.lineSeparator() + boundary);
+        return (boundary + "Noted. I've added this doctor:"
+                        + "\n" + doctorList.getDoctor(doctorList.getSize())
+                        + "\n" + "Now you have " + doctorList.getSize()
+                        + " doctors recorded in the system." + System.lineSeparator() + boundary);
     }
 }

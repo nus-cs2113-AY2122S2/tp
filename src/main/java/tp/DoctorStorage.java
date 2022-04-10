@@ -54,7 +54,7 @@ public class DoctorStorage {
                 fw.write(currDoctor.getPhoneNumber() + "\n");
                 fw.write(currDoctor.getEmail() + "\n");
                 fw.write(currDoctor.getDepartment() + "\n");
-                fw.write(Integer.toString(currDoctor.getWardNumber()));
+                fw.write(currDoctor.getWardNumber() + "\n");
             }
             fw.close();
         } catch (IOException e) {

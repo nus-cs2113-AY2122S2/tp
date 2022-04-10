@@ -32,8 +32,8 @@ public class DeleteWardCommand extends Command {
             throw new IHospitalException("The ward does not exist.\n");
         }
         Ward cur = wardList.deleteWard(index);
-        return String.format(boundary + "Noted. I've removed this ward:\n" + cur
-                + "\n" + "Now you have " + wardList.getSize()
-                + " wards in the system." + System.lineSeparator() + boundary);
+        return (boundary + "Noted. I've removed this ward:\n" + cur
+                        + "\n" + "Now you have " + wardList.getSize()
+                        + " wards in the system." + System.lineSeparator() + boundary);
     }
 }

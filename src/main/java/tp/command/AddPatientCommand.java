@@ -46,9 +46,9 @@ public class AddPatientCommand extends Command {
         patientList.addPatient(patient);
 
         //@@author cczhouqi
-        return String.format(boundary + "Noted. I've added this patient:" + "\n"
-                + patientList.getPatient(patientList.getSize()) + "\n"
-                + "Now you have " + patientList.getSize()
-                + " patients recorded in the system." + System.lineSeparator() + boundary);
+        return (boundary + "Noted. I've added this patient:" + "\n"
+                        + patientList.getPatient(patientList.getSize()) + "\n"
+                        + "Now you have " + patientList.getSize()
+                        + " patients recorded in the system." + System.lineSeparator() + boundary);
     }
 }

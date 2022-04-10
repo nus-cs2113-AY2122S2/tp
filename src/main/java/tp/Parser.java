@@ -30,8 +30,7 @@ import tp.command.SearchNurseCommand;
 import tp.command.SearchWardCommand;
 import tp.command.SearchPatientCommand;
 import tp.command.SortAppointmentByTimeCommand;
-
-
+import tp.command.ViewDoctorPageCommand;
 import java.util.Scanner;
 
 public class Parser {
@@ -451,6 +450,8 @@ public class Parser {
             return parseDeleteCommand(fullCommand);
         } else if (fullCommand.contains("list")) {
             return parseListCommand(fullCommand);
+        } else if (fullCommand.toLowerCase().contains("doctor page")) {
+            return new ViewDoctorPageCommand();
         } else if (fullCommand.contains("help")) {
             return new HelpCommand();
         } else if (fullCommand.contains("search")) {
