@@ -446,7 +446,7 @@ the [features](#features) section.
 | [Searching for details](#searching-for-details-codefindcode)                | find /d __ [ /c __ ] <br/>e.g.<br/> `> find salary` <br/> `> find sugar /c 4`                                                                                       |
 | [Exit the program](#exit-codebyecode)                                       | bye                                                                                                                                                                 |
 
-[**Category Summary**](#show-expenditure-categories-listcat)
+[**Category Summary**](#show-expenditure-categories-codelistcatcode)
 
 | Index | Name                  |
 |-------|-----------------------|
