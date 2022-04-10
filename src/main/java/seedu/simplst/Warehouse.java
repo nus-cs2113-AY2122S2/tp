@@ -41,7 +41,7 @@ public class Warehouse {
         Good newGood = new Good(unitGood, 0);
         unitGoodHashMap.put(sku, unitGood);
         goodList.put(sku, newGood);
-        System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
+        System.out.println("Unit Good with SKU: " + sku + " added to warehouse");
     }
 
     /**
@@ -68,7 +68,7 @@ public class Warehouse {
         try {
             int quantity = Integer.parseInt(qty);
             goodList.get(sku).addQuantity(quantity);
-            System.out.printf("%d Good of SKU: %s added to warehouse\n",
+            System.out.printf("%d of Good with SKU: %s added to warehouse\n",
                     quantity, sku);
         } catch (NumberFormatException e1) {
             // quantity was not a number
@@ -394,6 +394,7 @@ public class Warehouse {
         }
         unitGoodHashMap.remove(sku);
         goodList.remove(sku);
+        System.out.println("Unit Good with SKU: " + sku + " has been removed from warehouse");
     }
 
     /**
@@ -421,6 +422,7 @@ public class Warehouse {
         }
         int qtyNum = Integer.parseInt(qty);
         goodList.get(sku).removeQuantity(qtyNum);
+        System.out.println(qtyNum + " of Good with SKU: " + sku + " has been removed from warehouse");
     }
 
     /**
