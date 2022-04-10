@@ -80,7 +80,8 @@ complete the activities with the use of the study session.
 
 - Documentation
     - User Guide:
-      - Added documentation for features `study session`, `timetable` and `mark/unmark`.
+      - Added documentation for features `study session` 
+      (add timer Ui diagrams and explanations on it), `timetable` and `mark/unmark`.
       - Did some tweaks to existing features in the document `add`, `delete`. Added extra pictures
       for clearer illustration of command usages.
     - Developer Guide:
