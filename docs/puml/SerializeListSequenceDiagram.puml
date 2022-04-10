@@ -8,18 +8,23 @@ participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
 participant ":PropertyList" as PropertyList STORAGE_COLOUR
 end box
 
-[-> ExpenditureList ++ : serialize()
-ExpenditureList -> SerializerFunctions ++ : addListToStringBuilder()
+[-> ExpenditureList : serialize()
+activate ExpenditureList USERFINANCIAL_COLOUR
+ExpenditureList -> SerializerFunctions : addListToStringBuilder()
+activate SerializerFunctions STORAGE_COLOUR
 loop for each element in list
-    SerializerFunctions -> Expenditure ++ : serialize()
+    SerializerFunctions -> Expenditure : serialize()
+    activate Expenditure USERFINANCIAL_COLOUR
 
     Expenditure -> PropertyList ** : PropertyList()
-    activate PropertyList
+    activate PropertyList STORAGE_COLOUR
     deactivate PropertyList
     PropertyList --> Expenditure --
-    Expenditure -> PropertyList ++ : setValue()
+    Expenditure -> PropertyList : setValue()
+    activate PropertyList STORAGE_COLOUR
     PropertyList --> Expenditure --
-    Expenditure -> PropertyList ++ : serialize()
+    Expenditure -> PropertyList : serialize()
+    activate PropertyList STORAGE_COLOUR
     PropertyList --> Expenditure --
 
     Expenditure --> SerializerFunctions --

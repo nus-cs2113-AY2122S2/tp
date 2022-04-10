@@ -11,21 +11,22 @@ participant ":IncomeList" as IncomeList USERFINANCIAL_COLOUR
 end box
 
 MMM -> Storage ** : Storage()
-activate Storage
+activate Storage STORAGE_COLOUR
 Storage --> MMM --
 
-MMM -> Storage ++ : load()
+MMM -> Storage : load()
+activate Storage STORAGE_COLOUR
 Storage -> User ** : deserializeFrom()
-activate User
+activate User USERFINANCIAL_COLOUR
 User -> ExpenditureList ** : deserializeFrom()
-activate ExpenditureList
+activate ExpenditureList USERFINANCIAL_COLOUR
 ref over User, ExpenditureList : deserialize list
 ExpenditureList --> User --
 User -> CreditCardList ** : deserializeFrom()
-activate CreditCardList
+activate CreditCardList USERFINANCIAL_COLOUR
 CreditCardList --> User --
 User -> IncomeList ** : deserializeFrom()
-activate IncomeList
+activate IncomeList USERFINANCIAL_COLOUR
 IncomeList --> User --
 User --> Storage --
 Storage --> MMM --

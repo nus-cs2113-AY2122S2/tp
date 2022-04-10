@@ -10,17 +10,21 @@ participant ":CreditCardList" as CreditCardList USERFINANCIAL_COLOUR
 participant ":IncomeList" as IncomeList USERFINANCIAL_COLOUR
 end box
 
-MMM -> Storage ++ : save()
-Storage -> User ++ : serialize()
-activate User
-User -> ExpenditureList ++ : serialize()
+MMM -> Storage : save()
+activate Storage STORAGE_COLOUR
+Storage -> User : serialize()
+activate User USERFINANCIAL_COLOUR
+User -> ExpenditureList : serialize()
+activate ExpenditureList USERFINANCIAL_COLOUR
 
 ref over User, ExpenditureList : serialize list
 ExpenditureList --> User --
-User -> CreditCardList ++ : serialize()
+User -> CreditCardList : serialize()
+activate CreditCardList USERFINANCIAL_COLOUR
 
 CreditCardList --> User --
-User -> IncomeList ++ : serialize()
+User -> IncomeList : serialize()
+activate IncomeList USERFINANCIAL_COLOUR
 
 IncomeList --> User --
 User --> Storage --

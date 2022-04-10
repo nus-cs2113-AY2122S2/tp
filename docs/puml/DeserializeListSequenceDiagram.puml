@@ -8,18 +8,21 @@ participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
 participant ":PropertyList" as PropertyList STORAGE_COLOUR
 end box
 
-[-> ExpenditureList ++ : deserializeFrom()
-ExpenditureList -> SerializerFunctions ++ : convertInputToList()
+[-> ExpenditureList : deserializeFrom()
+activate ExpenditureList USERFINANCIAL_COLOUR
+ExpenditureList -> SerializerFunctions : convertInputToList()
+activate SerializerFunctions STORAGE_COLOUR
 loop until end line is read
     SerializerFunctions -> Expenditure ** : deserialize()
-    activate Expenditure
+    activate Expenditure USERFINANCIAL_COLOUR
     deactivate Expenditure
 
     Expenditure -> PropertyList ** : deserialize()
-    activate PropertyList
+    activate PropertyList STORAGE_COLOUR
     deactivate PropertyList
     PropertyList --> Expenditure --
-    Expenditure -> PropertyList ++ : getValue()
+    Expenditure -> PropertyList: getValue()
+    activate PropertyList STORAGE_COLOUR
     PropertyList --> Expenditure --
 
     Expenditure --> SerializerFunctions --
