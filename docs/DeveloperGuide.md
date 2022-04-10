@@ -683,23 +683,14 @@ Given below are instructions to test the app manually.
    2. Test case: `find /d Test /c 7`
       Expected: No entries are printed. Error details shown in the error message.
 
-### Saving data
-
-1. Dealing with missing data file
-   1. Delete the save file `PlanITarium.txt` before executing `bye`.
-      Expected: The program checks if the file exists before saving, and creates a new one if it does not.
-2. Dealing with missing directory
-   1. Delete the directory `data` before executing `bye`.
-      Expected: The program checks if the directory exists before saving, and creates a new one if it does not.
-
 ### Loading data
 
 1. Dealing with missing data file
-   1. Delete the save file `PlanITarium.txt` if it exists and launch the program.
+   1. Test case: Delete the save file `PlanITarium.txt` if it exists and launch the program.
       Expected: The program will check if the file exists upon start up, and creates one if it does not.
 2. Dealing with missing directory
-   1. Delete the directory `data` if it exists and launch the program.
-      Expected: The program will check if the directory exists upon start up, and creates on if it does not.
+   1. Test case: Delete the directory `data` if it exists and launch the program.
+      Expected: The program will check if the directory exists upon start up, and creates one if it does not.
 3. Dealing with corrupted data file
    1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
       a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
