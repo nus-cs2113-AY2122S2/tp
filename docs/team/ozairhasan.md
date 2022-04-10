@@ -16,8 +16,8 @@ Added these features to the application:
 
 #### Enhancements:
 * `goto` - Added support to allow navigation to sections from other sections.
-* Improved robustness and flexibility of menu with regards to interaction with user. 
-* Wrote additional tests to increase test coverage. 
+* Improved robustness and flexibility of menu regarding interaction with user. 
+* Wrote additional tests to increase test coverage. [#137](https://github.com/AY2122S2-CS2113-F10-4/tp/pull/137)
 
 #### Documentation
 * **User Guide**:
