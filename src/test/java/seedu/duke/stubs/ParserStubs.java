@@ -54,6 +54,6 @@ public class ParserStubs {
             BORROW_START_DATE,
             BORROW_END_DATE,
             BORROWER_NAME);
-    public static final ReturnCommand RETURNCOMMAND = new ReturnCommand(Integer.parseInt(ITEM_INDEX)-1);
+    public static final ReturnCommand RETURNCOMMAND = new ReturnCommand(Integer.parseInt(ITEM_INDEX) - 1);
 }
 

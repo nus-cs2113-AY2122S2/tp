@@ -3,7 +3,6 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.data.BorrowRecord;
-import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
@@ -78,7 +77,6 @@ public class ReturnCommandTest {
      * */
     @Test
     public void execute_currentlyBorrowedItem_success() throws InvMgrException {
-        Ui ui = new Ui();
         itemList.removeItem(1);
         Item item2 = new Item("Whiteboard", 1, "For writing and drawing");
         itemList.addItem(item2);
@@ -87,15 +85,16 @@ public class ReturnCommandTest {
         BorrowRecord borrowRecord2 = new BorrowRecord(1, startDate2, endDate2, "John Doe");
         item2.addBorrowRecord(borrowRecord2);
         ReturnCommand c = new ReturnCommand(1);
+        Ui ui = new Ui();
         c.execute(itemList, ui);
         assertAll("overdue item", () -> {
-                    boolean isValidReturn = c.getValidityOfReturn();
-                    assertTrue(isValidReturn);
-                    assertAll("second item",
-                            () -> assertTrue(borrowRecord2.getReturnStatus()),
-                            () -> assertEquals(LocalDate.now(), borrowRecord2.getEndDate())
-                    );
-                }
+            boolean isValidReturn = c.getValidityOfReturn();
+            assertTrue(isValidReturn);
+            assertAll("second item",
+                    () -> assertTrue(borrowRecord2.getReturnStatus()),
+                    () -> assertEquals(LocalDate.now(), borrowRecord2.getEndDate())
+            );
+        }
         );
     }
 
