@@ -331,7 +331,7 @@ To find a doctor you would have to provide one of these parameters:
 Format: `find doctor /info [parameter], [keyword to find]`
 
 Example 1: `find doctor /info name, John` <br>
-Example 2: `find doctor /info nric, S7654321X` <br>
+Example 2: `find doctor /info nric, S7654321A` <br>
 Example 3: `find doctor /info age, 22` <br>
 Example 4: `find doctor /info gender, M` <br>
 Example 5: `find doctor /info address, 10 BAKER STREET` <br>
@@ -356,7 +356,7 @@ To find a patient you would have to provide one of these parameters using the gi
 Format: `find patient /info [parameter], [keyword to find]`
 
 Example 1: `find patient /info name, John Doe` <br>
-Example 2: `find patient /info nric, S1234567X` <br>
+Example 2: `find patient /info nric, S1234567A` <br>
 Example 3: `find patient /info age, 22` <br>
 Example 4: `find patient /info gender, M` <br>
 Example 5: `find patient /info address, 10 BAKER STREET` <br>
@@ -378,7 +378,7 @@ To find a medicine you would have to provide one of these parameters using the g
 Format: `find medicine /info [parameter], [keyword to find]`
 
 Example 1: `find medicine /info name, Paracetamol` <br>
-Example 2: `find medicine /info id, S123` <br>
+Example 2: `find medicine /info id, A123` <br>
 Example 3: `find medicine /info dosage, 500` <br>
 Example 4: `find medicine /info expiry, 2023-06-11` <br>
 Example 5: `find medicine /info sideeffects, DROWSY` <br>
@@ -400,7 +400,7 @@ To find an appointment you would have to provide one of these parameters using t
 
 Format: `find appointment /info [parameter], [keyword to find]`
 
-Example 1: `find appointment /info id, A123` <br>
+Example 1: `find appointment /info id, 12356710156543` <br>
 Example 2: `find appointment /info patient nric, S1234567A` <br>
 Example 3: `find appointment /info patient name, Doe` <br>
 Example 4: `find appointment /info doctor nric, S7654321A` <br>
