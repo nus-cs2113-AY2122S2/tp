@@ -18,7 +18,7 @@ title: Developer Guide
     * [Parser Component](#parser-component)
     * [Command Component](#command-component)
 * [Implementation](#implementation)
-  * [Parser of commands](#parsing-of-commands)
+  * [Parsing of commands](#parsing-of-commands)
   * [Session Commands](#session-commands)
     * [Add a session](#add-a-session)
     * [Remove a session](#remove-a-session)
@@ -98,7 +98,7 @@ The diagram depicts a scenario where a user attempts to create a session.
 <br>
 The `SplitLah` component is the application's main class. Its job is to initialize an instance of `Manager` when the
 application starts. After initialization, it proceeds to run a loop which prompts the user for an input.
-When it receives an input from the user, it invokes the `Parser` and retrieve a command corresponding to the input for SplitLah
+When it receives an input from the user, it invokes the `Parser` and retrieves a command corresponding to the input for SplitLah
 to run. Upon retrieving and running the `Exit` command, SplitLah exits from the loop and end the application.
 
 
@@ -107,7 +107,7 @@ to run. Upon retrieving and running the `Exit` command, SplitLah exits from the 
 <br>
 The `Manager` class is initialized by the `SplitLah` class (the main class) when the application starts.
 It stores the `Profile`, `TextUI` and `Storage` objects. The `Profile` class helps to manage all data accesses 
-throughout the lifetime of the application while the `Storage` helps to save what the `Profile` class has captured. 
+throughout the lifetime of the application while the `Storage` class helps to save what the `Profile` class has captured. 
 As for the `TextUI` class, it serves as an interface to read user inputs and to print application outputs.
 
 ### Profile Component
@@ -193,7 +193,7 @@ The general workflow of the `Parser` component is as follows:
    * Each of these parse methods in `ParserUtils` class calls other utility methods within the class 
      to return a parsed value.
 4. All relevant arguments that are parsed are used to create a new `XYZCommand `object to return to the `Parser` class.
-5. The created `XYZCommand` object is returned to the `SplitLah` object to run.
+5. The created `XYZCommand` object is then returned to the `SplitLah` object to run.
 
 ### Command Component
 ![Command Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/CommandComponent.drawio.png)
@@ -247,7 +247,7 @@ the Command component when any user input is provided to SplitLah.
       As a result, an `InvalidCommand` object is created and returned to `SplitLah`.
    2. Else, `Parser` class validates the _command type_ and the _remaining arguments_ with
       `Parser#checkIfCommandIsValid`. If either the _command type_ or the _remaining arguments_ are invalid, an error
-      message is returned by the method, which returns an `InvalidCommand` object to `SplitLah`.
+      message is returned by the method and an `InvalidCommand` object is returned to `SplitLah`.
 3. `Parser` class creates the `XYZCommandParser` object for a `XYZCommand`. For example,
    for a _command type_ of `"session /create"`, a `SessionCreateCommandParser` object is instantiated.
    If `Parser` class does not recognise the _command type_, an `InvalidCommand` object is created and returned immediately.
@@ -267,7 +267,7 @@ the Command component when any user input is provided to SplitLah.
    * For example, `ParserUtils#parseName` returns a `String` object representing a name.
 7. After all necessary information is parsed, `XYZCommandParser` instantiates a new `XYZCommand` object with
    all the parsed information.
-8. Following that, The `XYZCommand` object is returned from `XYZCommandParser` to `Parser` class,
+8. Following that, the `XYZCommand` object is returned from `XYZCommandParser` to `Parser` class,
    and finally back to `SplitLah` to run.
 
 ## Session Commands
@@ -433,7 +433,7 @@ The general workflow of the `session /summary` command is as follows:
      The matching process is repeated until no more transactions can be made,
      i.e. all debts are paid and all debts are collected.
    * If no transactions are required to be made, a message explaining that no transactions are required to be made
-     is returned instead.
+     is returned.
    * Else, a `String` object containing information regarding all transactions that have to be made is returned.
    * For the sake of brevity, the specifics of the method `SessionSumamryCommand#processAllTransactions` is omitted
      from the sequence diagram.
