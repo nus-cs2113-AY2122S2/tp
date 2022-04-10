@@ -63,6 +63,7 @@ Given below are my contributions to the project.
         * Added UML diagrams for `Money` component and `Find` implementation.
         * Added manual testing instructions for adding persons.
         * Added terms for the Glossary section.
+        * [#255](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/255/files)
 
 <p></p>
 
