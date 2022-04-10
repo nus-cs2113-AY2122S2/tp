@@ -511,12 +511,14 @@ the `<keywords>` is not specified, it will be deemed as searching for whitespace
   * [Delete Existing Workout](#delete-existing-workout)
     * [Design Considerations](#design-considerations-for-deleting-existing-workout)
   * [Update Existing Workout](#update-existing-workout)
+    * [Design Consideration](#design-considerations-for-updating-existing-workout)
 * [Plan](#plan)
   * [Create A New Plan](#create-a-new-plan)
     * [Design Considerations](#design-considerations-for-creating-a-new-plan)
   * [List Plans](#list-plans)
   * [List Workouts In A Plan](#list-workouts-in-a-plan)
   * [Delete Existing Plan](#delete-existing-plan)
+    * [Design Consideration](#design-considerations-for-deleting-existing-plan)
 * [Schedule](#schedule)
   * [Update Schedule](#update-schedule)
     * [Design Considerations](#design-considerations-for-update-schedule)
@@ -1190,8 +1192,7 @@ as well as the rationale of each check:
 | Maximum number of workouts          | Currently, a plan only supports a maximum of 10 workouts as it makes no sense for a plan to have many different workouts in the real-life context. In addition, it helps to simplify the tracking of workouts in a plan if a maximum number is placed.                                                                                      |
 | Check plans with same workout order | All plans within the application should have different workout orders. For instance, `PlanA with workout sequence 1,1,2` is the same as `PlanB with workout sequence 1,1,2`, even though the plan names are different. This check is done as it makes no sense to create two plans with different plan names, but same workout orders.      |
 
-
-<br><br>
+<br>
 <div class="button-container"><a class="button" href="#implementation">Back to Implementation Overview</a></div>
 
 ---
