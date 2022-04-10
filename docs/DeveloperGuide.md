@@ -678,20 +678,20 @@ they engage in during the outings.
 |---------|----------------------------|--------------------------------------|------------------------------------------------------------------------------------------------------------------------|
 | v1.0    | New user                   | view a list of instructions          | refer to them when I forget how to use the application                                                                 |
 | v1.0    | Budget conscious user      | create sessions                      | record the details of my outing and keep track of the expenditure of each activity                                     |
-| v1.0    | Returning User             | delete sessions                      | remove unnecessary sessions                                                                                            |
+| v1.0    | Returning user             | delete sessions                      | remove unnecessary sessions                                                                                            |
 | v1.0    | Budget conscious user      | list all existing sessions           | see a list of all the outings that were recorded                                                                       |
 | v1.0    | Budget conscious user      | create activities                    | record the details and the expenditure of the activities in a particular outing                                        |
-| v1.0    | Returning User             | delete activities                    | remove unnecessary activities                                                                                          |
+| v1.0    | Returning user             | delete activities                    | remove unnecessary activities                                                                                          |
 | v1.0    | Returning user             | view existing activities             | see the full details of a particular activity, including the cost breakdown of the activity                            |
 | v1.0    | Budget conscious user      | list all activities in a session     | see a list of all the activities that were recorded during a particular outing                                         |
 | v1.0    | Budget conscious user      | settle all transactions of a session | see a summary of all the transactions that are needed to be made amongst those who went for a particular outing        |
 | v2.0    | Returning user             | view existing sessions               | see the full details of a particular outing, including a list of activities for the outing                             |
 | v2.0    | Careless user              | edit sessions                        | amend a mistake previously made when recording an outing                                                               |
-| v2.0    | Careless User              | edit activities                      | amend a mistake previously made when recording an activity                                                             |
+| v2.0    | Careless user              | edit activities                      | amend a mistake previously made when recording an activity                                                             |
 | v2.0    | User with a lot of friends | create groups                        | easily record outings using groups instead of listing out all the names of the people who went for the outing manually |
-| v2.0    | Returning User             | delete groups                        | remove unnecessary groups                                                                                              |
-| v2.0    | Careless User              | edit groups                          | amend a mistake previously made when creating a group                                                                  |
-| v2.0    | Returning User             | view existing groups                 | see the full details of a particular group, including the names of the people in the group                             |
+| v2.0    | Returning user             | delete groups                        | remove unnecessary groups                                                                                              |
+| v2.0    | Careless user              | edit groups                          | amend a mistake previously made when creating a group                                                                  |
+| v2.0    | Returning user             | view existing groups                 | see the full details of a particular group, including the names of the people in the group                             |
 | v2.0    | User with a lot of friends | list groups                          | see a list of all the groups that were created                                                                         |
 
 ## Non-Functional Requirements
