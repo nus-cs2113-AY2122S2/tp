@@ -109,9 +109,9 @@ better management, and categorise your expenditures. PlanITarium is written in, 
 
 <br/>
 
-### Reproduced [User Guide](../UserGuide.md) Contribution
+## Reproduced [User Guide](../UserGuide.md) Contribution
 
-#### Quick Notes
+### Quick Notes
 
 The following table describes the **formats** used in this User Guide.
 
@@ -134,7 +134,7 @@ Some additional points to take note of:
 * You may provide duplicate entries such as when you have two family members with the same name. PlanITarium will track
   each of them as separate entries via indexing.
 
-#### Features
+### Features
 
 This section describes each command in detail.
 
@@ -160,7 +160,7 @@ This section describes each command in detail.
 
 ---
 
-##### Add an income: `addin`
+#### Add an income: `addin`
 
 > Adds an entry to your list of tracked incomes.
 
@@ -188,7 +188,7 @@ Example of usage:
 
 ---
 
-##### Delete an income: `deletein`
+#### Delete an income: `deletein`
 
 > Deletes an entry from your list of tracked incomes.
 
@@ -214,5 +214,5 @@ Example of usage:
 
 <br/>
 
-### Reproduced [Developer Guide](../DeveloperGuide.md) Contribution
+## Reproduced [Developer Guide](../DeveloperGuide.md) Contribution
 
