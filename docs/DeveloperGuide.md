@@ -553,7 +553,7 @@ method, invoked when using the `/cc` flag.
 <br/> Fig 22 - Update Credit Card Sequence Diagram
 
 The sequence diagram above shows the interactions when updating a credit card .
-1. During the execution, `UpdateCommand.updateCreditCard()` will parse through user input to obtain the CREDIT_CARD_NAME, CATEGORY, CASH_BACK and CARD_LIMIT fields.
+1. During the execution, `UpdateCommand.updateCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`, `CASH_BACK` and `CARD_LIMIT` fields.
 2. Once all the fields are obtained, `UpdateCommand.updateCreditCard()` will run checks prior to its insertion.
 3. The `UpdateCommand.updateCreditCard()` object instantiates a new CreditCard object with the aforementioned 3 fields and sets them into the CreditCardList, at the specified index.
 5. Details of the updated `Credit Card` is printed out.
