@@ -7,6 +7,7 @@ import seedu.command.Command;
 import seedu.command.DeleteCommand;
 import seedu.command.IncorrectCommand;
 import seedu.command.ListCommand;
+import seedu.command.UpdateCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -233,10 +234,18 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_deleteCommand_wrongArgType_exceptionThrown() {
+    void parseCommand_deleteCommandWrongArgType_exceptionCaught() {
         Command expectedCommand = new IncorrectCommand(DeleteCommand.COMMAND_WORD
                 + DeleteCommand.COMMAND_DESCRIPTION);
-        Command testCommand = parser.parseCommand("delete x/S1234567E");
+        Command testCommand = parser.parseCommand("delete x/`S1234567E`");
+        assertEquals(expectedCommand, testCommand);
+    }
+
+    @Test
+    void parseCommand_updateCommandIncorrectDateFormat_exceptionCaught() {
+        Command expectedCommand = new IncorrectCommand(UpdateCommand.COMMAND_WORD
+                + UpdateCommand.COMMAND_DESCRIPTION);
+        Command testCommand = parser.parseCommand("update s/`S1234567E` pd `2022-13-23`");
         assertEquals(expectedCommand, testCommand);
     }
 
