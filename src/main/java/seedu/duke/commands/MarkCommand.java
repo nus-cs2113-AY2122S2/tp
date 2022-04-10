@@ -3,7 +3,6 @@ package seedu.duke.commands;
 import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
@@ -36,7 +35,10 @@ public class MarkCommand extends Command {
 
     /**
      * Marks the specified task as completed or uncompleted.
-     * @throws NoSuchTaskException if the user-supplied index is out of bounds
+     * @param moduleList The list of modules
+     * @param configuration The configuration settings of the application
+     * @return A new {@code CommandResult} with the result string
+     * @throws ModHappyException If the task or the module it falls under does not exist
      */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {

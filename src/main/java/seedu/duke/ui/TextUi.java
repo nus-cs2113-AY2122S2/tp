@@ -14,7 +14,7 @@ public class TextUi {
     /**
      * Formats the provided message.
      *
-     * @param message the message to be printed
+     * @param message The message to be printed
      */
     public static String formatMessage(String message) {
         return String.format("%s%s\n%s\n%s", StringConstants.LS, StringConstants.LINE, message, StringConstants.LINE);
@@ -23,7 +23,7 @@ public class TextUi {
     /**
      * Receives command from user.
      *
-     * @return user input
+     * @return User input
      */
     public static String getUserCommand() {
         out.print(StringConstants.COMMAND_PROMPT);

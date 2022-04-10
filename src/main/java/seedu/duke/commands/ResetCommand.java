@@ -8,7 +8,10 @@ import seedu.duke.util.StringConstants;
 public class ResetCommand extends Command {
 
     /**
-     * Resets the program.
+     * Resets all modules and tasks.
+     * @param moduleList The list of modules
+     * @param configuration The configuration settings of the application
+     * @return A new {@code CommandResult} with the result string
      */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration)  {

@@ -32,9 +32,9 @@ public class TaskDuration {
     protected Duration taskDuration;
 
     /**
-     * A duration of a task.
-     * @param durationString The duration, as a string.
-     * @throws ModHappyException If the duration could not be properly parsed.
+     * Constructs a new TaskDuration object to represent the duration of a task.
+     * @param durationString The duration, as a string
+     * @throws ModHappyException If the duration could not be properly parsed
      */
     public TaskDuration(String durationString) throws ModHappyException {
         HashMap<String, String> parsedDurationString = parseDurationString(durationString);

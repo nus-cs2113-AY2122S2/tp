@@ -16,17 +16,19 @@ public class ModuleList {
 
     /**
      * Adds the specified module to the module list, then returns it for convenience.
-     * @param m the module to be added
+     * @param module The module to be added
+     * @return The module added
      */
-    public Module addModule(Module m) {
-        list.add(m);
-        return m;
+    public Module addModule(Module module) {
+        list.add(module);
+        return module;
     }
 
     /**
      * Removes specified module from the module list.
      *
-     * @param moduleCode the module code to be removed
+     * @param moduleCode The module code to be removed
+     * @return The module removed
      */
 
     public Module removeModule(String moduleCode) throws NoSuchModuleException {
@@ -37,9 +39,9 @@ public class ModuleList {
 
     /**
      * Returns the module in the module list with the given module code.
-     * @param moduleCode The module code to search for.
-     * @return The associated module if it exists.
-     * @throws NoSuchModuleException If the module does not exist.
+     * @param moduleCode The module code to search for
+     * @return The associated module if it exists
+     * @throws NoSuchModuleException If the module does not exist
      */
     public Module getModule(String moduleCode) throws NoSuchModuleException {
         for (Module m : list) {
@@ -73,8 +75,8 @@ public class ModuleList {
 
     /**
      * Checks whether a module with the specified module code already exists in the module list.
-     * @param moduleCode the module code to check for.
-     * @return true if a module in the module list already has that module code, or false otherwise.
+     * @param moduleCode The module code to check for
+     * @return True if a module in the module list already has that module code, or false otherwise
      */
     public boolean isModuleExists(String moduleCode) {
         try {

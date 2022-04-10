@@ -8,6 +8,7 @@ import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.Task;
 import seedu.duke.data.TaskList;
+import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
@@ -48,6 +49,13 @@ public class TagCommand extends Command {
         this.tagDescription = tagDescription;
     }
 
+    /**
+     * Adds/deletes a tag to/from a task.
+     * @param moduleList The list of modules
+     * @param configuration The configuration settings of the application
+     * @return A new {@code CommandResult} with the result string
+     * @throws ModHappyException If the tag, task or module that the task falls under does not exist
+     */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         Module targetModule;
@@ -71,9 +79,10 @@ public class TagCommand extends Command {
     /**
      * Adds a tag to a task.
      *
-     * @param targetModule Module that contains the task to be tagged.
+     * @param targetModule Module that contains the task to be tagged
+     * @throws NoSuchTaskException If the task does not exist
      */
-    private void addTag(Module targetModule) throws ModHappyException {
+    private void addTag(Module targetModule) throws NoSuchTaskException {
         TaskList taskList = targetModule.getTaskList();
         result  = String.format(ADD_TAG_MESSAGE, tagDescription, taskList.addTag(tagDescription, taskIndex));
     }
@@ -82,6 +91,7 @@ public class TagCommand extends Command {
      * Removes a tag from a task.
      *
      * @param targetModule Module that contains the task with the tag to be removed
+     * @throws ModHappyException If the task does not exist, or if the tag does not exist in the task
      */
     private void removeTag(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();

@@ -31,6 +31,13 @@ public class GradeCommand extends Command {
         this.moduleGrade = moduleGrade;
     }
 
+    /**
+     * Sets a grade to the specified module.
+     * @param moduleList The list of modules
+     * @param configuration The configuration settings of the application
+     * @return A new {@code CommandResult} with the result string
+     * @throws NoSuchModuleException If the module does not exist
+     */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws NoSuchModuleException {
         Module targetModule = moduleList.getModule(moduleCode);
@@ -40,14 +47,15 @@ public class GradeCommand extends Command {
 
     /**
      * Sets grade of the specified module.
+     * @param module The module specified for the grade to be set
      */
-    public void addGradeToModule(Module m) {
-        boolean hasGrade = !Objects.equals(m.getModuleGrade(), Grades.NOT_ENTERED);
+    public void addGradeToModule(Module module) {
+        boolean hasGrade = !Objects.equals(module.getModuleGrade(), Grades.NOT_ENTERED);
         if (hasGrade) {
             result = String.format(GRADE_CHANGED_MESSAGE, moduleCode);
         } else {
             result = String.format(GRADE_ADDED_MESSAGE, moduleCode);
         }
-        m.setModuleGrade(moduleGrade);
+        module.setModuleGrade(moduleGrade);
     }
 }

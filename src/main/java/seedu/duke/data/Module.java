@@ -60,7 +60,8 @@ public class Module {
     }
 
     /**
-     * Returns the task list associated with the module.
+     * Gets the task list associated with the module.
+     * @return Task list associated with the module
      */
     public TaskList getTaskList() {
         return taskList;
@@ -72,6 +73,7 @@ public class Module {
 
     /**
      * Adds one task in task list associated with the module.
+     * @param task The task to be added
      */
     public void addTask(Task task) {
         taskList.addTask(task);
@@ -79,17 +81,20 @@ public class Module {
 
     /**
      * Formats the module and its associated tasks according to given parameters.
+     * @param showCompletedTasks Whether completed tasks should be shown or not
+     * @return The string of all tasks, depending on whether completed tasks should be shown
      */
-    public String printModuleTaskList(boolean showCompletedTasks) {
+    public String stringifyModuleTaskList(boolean showCompletedTasks) {
         return this + LS + taskList.getAllTasks(INDENT, showCompletedTasks);
     }
 
-    public String printModuleTaskListWithTag(String tag, boolean showCompletedTasks) {
+    public String stringifyModuleTaskListWithTag(String tag, boolean showCompletedTasks) {
         return this + LS + taskList.getTasksWithTag(INDENT, tag, showCompletedTasks);
     }
 
     /**
      * Formats the module as a string.
+     * @return The module as a string
      */
     @Override
     public String toString() {

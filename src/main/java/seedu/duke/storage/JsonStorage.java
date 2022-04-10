@@ -17,8 +17,8 @@ import seedu.duke.exceptions.WriteException;
 public abstract class JsonStorage<T> implements Storage<T> {
     /**
      * Writes a ArrayList with elements of type ModHappyT to a json file.
-     * @param path json file path
-     * @throws ModHappyException if an error was encountered during writing
+     * @param path The json file path
+     * @throws ModHappyException If an error was encountered during writing
      */
     @Override
     public void writeData(T object, String path) throws ModHappyException {
@@ -41,8 +41,8 @@ public abstract class JsonStorage<T> implements Storage<T> {
 
     /**
      * Checks for the existence of the storage file and create it if it does not already exist.
-     * @param path json file path
-     * @throws ModHappyException if the file could not be created
+     * @param path The json file path
+     * @throws ModHappyException If the file could not be created
      */
     public void createTargetFile(String path) throws ModHappyException {
         File targetFile = new File(path);

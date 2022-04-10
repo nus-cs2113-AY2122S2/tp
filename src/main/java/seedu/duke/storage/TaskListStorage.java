@@ -29,9 +29,9 @@ public class TaskListStorage extends ListStorage<Task> {
 
     /**
      * Deserialises the TaskList stored in the json file.
-     * @param path json file path
-     * @return deserialised TaskList object
-     * @throws ModHappyException if an error was encountered during reading
+     * @param path The json file path
+     * @return Deserialised TaskList object
+     * @throws ModHappyException If an error was encountered during reading
      */
     @Override
     public ArrayList<Task> loadData(String path) throws ModHappyException {
