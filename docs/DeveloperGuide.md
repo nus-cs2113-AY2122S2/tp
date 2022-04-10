@@ -102,7 +102,7 @@ The diagram depicts a scenario where a user attempts to create a session.
 The `SplitLah` component is the application's main class. Its job is to initialize an instance of `Manager` when the
 application starts. After initialization, it proceeds to run a loop which prompts the user for an input.
 When it receives an input from the user, it invokes the `Parser` and retrieves a command corresponding to the input for SplitLah
-to run. Upon retrieving and running the `Exit` command, SplitLah exits from the loop and end the application.
+to run. Upon retrieving and running the `Exit` command, the application ends the loop and terminates.
 
 
 ### Manager Component
