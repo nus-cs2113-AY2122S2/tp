@@ -37,8 +37,7 @@ public class Warehouse {
      * @param capacity Represents the size of the good using arbitrary units
      * @throws UnitTestException Exception when entering an invalid capacity
      */
-    public void addUnitGoodToInventory(String sku, String name, String description, String capacity)
-            throws UnitTestException {
+    public void addUnitGoodToInventory(String sku, String name, String description, String capacity) {
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
         Good newGood = new Good(unitGood, 0);
         if (unitGoodHashMap.containsKey(sku)) {
@@ -135,7 +134,7 @@ public class Warehouse {
      *
      * @return number of unique goods
      */
-    public int uniqueInventories() {
+    private int uniqueInventories() {
         ArrayList<Good> uniqueGoods = new ArrayList<>();
 
         goodList.forEach((sku, good) -> {
@@ -422,7 +421,7 @@ public class Warehouse {
     }
     
     public void removeQuantityOfGoodFromInventory(String sku, String qty) throws
-            ItemDoesNotExistException, LargeQuantityException {
+            ItemDoesNotExistException, LargeQuantityException, NumberFormatException {
         if (!goodList.containsKey(sku)) {
             throw new ItemDoesNotExistException();
         }
