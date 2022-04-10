@@ -33,12 +33,12 @@ AddCommand --> AddCommand
 deactivate AddCommand COMMANDS_COLOUR
 
 create CreditCard
-AddCommand -> CreditCard: new CreditCard()
+AddCommand -> CreditCard: CreditCard()
 activate CreditCard USERFINANCIAL_COLOUR
 CreditCard --> AddCommand
 deactivate CreditCard
 
-AddCommand -> CreditCardList: creditCardList.add()
+AddCommand -> CreditCardList: add()
 activate CreditCardList DATA_COLOUR
 CreditCardList --> AddCommand
 deactivate CreditCardList
