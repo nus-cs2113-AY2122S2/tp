@@ -1,0 +1,17 @@
+@startuml
+
+hide footbox
+
+skinparam PackageBackgroundColor pink
+
+participant "storage:Storage" as Storage
+participant "File" as Files <<class>>
+
+group sd [asd]
+activate Storage
+    Storage -> Files: writeString(dataPath: Path, serializedItems: String, ...)
+    note right: "..." are options \npassed to the\n writer object
+    activate Files
+    return
+end
+@enduml
