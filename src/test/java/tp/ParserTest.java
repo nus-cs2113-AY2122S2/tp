@@ -1,9 +1,44 @@
 package tp;
 
 import org.junit.jupiter.api.Test;
-import tp.command.*;
+import tp.command.Command;
+import tp.command.AddAppointmentCommand;
+import tp.command.AddDoctorCommand;
+import tp.command.AddNurseCommand;
+import tp.command.AddPatientCommand;
+import tp.command.AddPatientDescriptionCommand;
+import tp.command.AddWardCommand;
+import tp.command.DeleteAppointmentCommand;
+import tp.command.DeleteNurseCommand;
+import tp.command.DeletePatientCommand;
+import tp.command.DeleteDoctorCommand;
+import tp.command.DeleteWardCommand;
+import tp.command.EditAppointmentCommand;
+import tp.command.EditNurseCommand;
+import tp.command.EditWardCommand;
+import tp.command.EditDoctorCommand;
+import tp.command.EditPatientCommand;
+import tp.command.GetAppointmentsOfDoctorCommand;
+import tp.command.HelpCommand;
+import tp.command.ListAppointmentListCommand;
+import tp.command.ListDoctorListCommand;
+import tp.command.ListPatientListCommand;
+import tp.command.ListNurseListCommand;
+import tp.command.ListWardListCommand;
+import tp.command.SearchAppointmentCommand;
+import tp.command.SearchDoctorCommand;
+import tp.command.SearchNurseCommand;
+import tp.command.SearchWardCommand;
+import tp.command.SearchPatientCommand;
+import tp.command.SortAppointmentByTimeCommand;
+import tp.command.ViewDoctorPageCommand;
+import tp.command.ViewPatientPageCommand;
+import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
 //@@author Demonshaha
 class ParserTest {
     Parser parser = new Parser();
@@ -171,7 +206,7 @@ class ParserTest {
     }
 
     private <T extends Command> void parseAndAssertCommandType(String input, Class<T> expectedCommandClass)
-    throws IHospitalException {
+        throws IHospitalException {
         final Command result = parser.parse(input);
         assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
     }
