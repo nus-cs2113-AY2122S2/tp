@@ -68,7 +68,7 @@ class ActivityTest {
      * Checks if the correct activity unique identifier is returned.
      */
     @Test
-    void getActivityId_activityOne_correctActivityId() throws InvalidDataException {
+    void getActivityId_activityOne_correctActivityId() {
         assertEquals(1, activityOne.getActivityId());
     }
 
