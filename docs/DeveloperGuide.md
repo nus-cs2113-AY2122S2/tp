@@ -2190,13 +2190,13 @@ Testers are welcome conduct more extensive and rigorous testing.
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                    | Command          | Expected result                                  |
 |:-----------------------------|:-----------------|:-------------------------------------------------|
 | Valid list exercise command. | `exercise /list` | List down all exercises stored in exercise list. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                    | Command                    | Expected result                                                  |
 |:---------------------------------------------|:---------------------------|:-----------------------------------------------------------------|
@@ -2214,14 +2214,14 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                                                  | Command                               | Expected result                    |
 |:-----------------------------------------------------------|:--------------------------------------|:-----------------------------------|
 | Valid exercise name and repetition value.                  | `workout /new russian twist /reps 20` | New workout is added successfully. |
 | Valid exercise name and highest possible repetition value. | `workout /new sit up /reps 2147483647` | New workout is added successfully. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                                                              | Command                                       | Expected result                                                |
 |:---------------------------------------------------------------------------------------|:----------------------------------------------|:---------------------------------------------------------------|
@@ -2234,13 +2234,13 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                   | Command         | Expected result                                |
 |:----------------------------|:----------------|:-----------------------------------------------|
 | Valid list workout command. | `workout /list` | List down all workouts stored in workout list. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                     | Command                   | Expected result                                                 |
 |:----------------------------------------------|:--------------------------|:----------------------------------------------------------------|
@@ -2256,13 +2256,13 @@ See [this section](#creating-a-new-workout) to view how you can populate your wo
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                  | Command             | Expected result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |:---------------------------|:--------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Valid workout to delete    | `workout /delete 1` | The first workout is deleted from the workout list. Details of the deleted workout will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the deleted workout, that plan will also be removed from the plan list. Subsequently, that plan will be removed from the schedule list if it has been assigned to any of the days in the 7-day workout schedule. Any plans or schedules that are affected by the deletion of this workout will display their delete messages accordingly. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                                                                                                                                  | Command             | Expected result                         |
 |:-----------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------|:----------------------------------------|
@@ -2279,7 +2279,7 @@ See [this section](#creating-a-new-workout) to view how you can populate your wo
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                                                           | Command                        | Expected result                                                                                                                                                                                                                                                                    |
 |:--------------------------------------------------------------------|:-------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -2287,7 +2287,7 @@ The following are some test cases for you to try:
 | Valid workout index number and a highest new number of repetitions. | `workout /update 2 2147483647` | The first workout in the workout list is updated to 2147483647 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps. |
 | Valid workout index number and a minimum new number of repetitions. | `workout /update 3 1`          | The first workout in the workout list is updated to 1 reps. Details of the workout after update will be shown on the terminal.  <br/><br/> Addition: If you have any existing plans containing the updated workout, that plan will also be updated to new number of reps.          |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                                                                                                                     | Command                                   | Expected result                                                     |
 |:----------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------|:--------------------------------------------------------------------|
@@ -2364,13 +2364,13 @@ See [this section](#creating-a-new-plan) to view how you can populate your plan 
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case               | Command           | Expected result                                        |
 |:------------------------|:------------------|:-------------------------------------------------------|
 | Valid plan index number | `plan /details 1` | All workouts in plan with index number 1 is displayed. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                                                                      | Command                              | Expected result                                                            |
 |:-----------------------------------------------------------------------------------------------|:-------------------------------------|:---------------------------------------------------------------------------|
@@ -2389,13 +2389,13 @@ See [this section](#creating-a-new-plan) to view how you can populate your plan 
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case               | Command          | Expected result                      |
 |:------------------------|:-----------------|:-------------------------------------|
 | Valid plan index number | `plan /delete 1` | Plan with index number 1 is deleted. |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                                                                      | Command                             | Expected result                                              |
 |:-----------------------------------------------------------------------------------------------|:------------------------------------|:-------------------------------------------------------------|
@@ -2505,14 +2505,14 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                                                                                                 | Command                             | Expected result                                         |
 |:----------------------------------------------------------------------------------------------------------|:------------------------------------|:--------------------------------------------------------|
 | Valid searching for exercise command.                                                                     | `search /exercise`                  | All exercise names containing whitespace will be shown. |
 | Valid searching for exercise command.                                                                     | `search /exercise a`                | All exercise names containing 'a' will be shown.        |
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                                             | Command                    | Expected result                                                                                 |
 |:----------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
@@ -2525,7 +2525,7 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                                                                                                                 | Command                            | Expected result                                                      |
 |:--------------------------------------------------------------------------------------------------------------------------|:-----------------------------------|:---------------------------------------------------------------------|
@@ -2534,7 +2534,7 @@ The following are some test cases for you to try:
 | Valid searching for workout command.                                                                                      | `search /workout a`                | All workouts with exercise name containing 'a' will be shown.        |
 
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                                            | Command                    | Expected result                                                                                 |
 |:---------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------------------------|
@@ -2547,7 +2547,7 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                                                                                     | Command                         | Expected result                                          |
 |:----------------------------------------------------------------------------------------------|:--------------------------------|:---------------------------------------------------------|
@@ -2555,7 +2555,7 @@ The following are some test cases for you to try:
 | Valid searching for plan command.                                                             | `search /plan a`                | All plans with name containing 'a' will be shown.        |
 
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                                         | Command                     | Expected result                                                                                 |
 |:------------------------------------------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------|
@@ -2568,7 +2568,7 @@ The following are some test cases for you to try:
 
 The following are some test cases for you to try:
 
-##### Positive Test Cases
+**Positive Test Cases**<br/>
 
 | Test Case                                                                                | Command                        | Expected result                                                                                                               |
 |:-----------------------------------------------------------------------------------------|:-------------------------------|:------------------------------------------------------------------------------------------------------------------------------|
@@ -2577,7 +2577,7 @@ The following are some test cases for you to try:
 | Valid searching for all command.                                                         | `search /all 15`               | All exercises and plans with name containing '15' will be shown, and all workouts with repetitions equal to 15 will be shown. |
 
 
-##### Negative Test Cases
+<br/>**Negative Test Cases**<br/>
 
 | Test Case                                                        | Command                | Expected result                                                                                 |
 |:-----------------------------------------------------------------|:-----------------------|:------------------------------------------------------------------------------------------------|
