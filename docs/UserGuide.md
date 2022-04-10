@@ -103,9 +103,10 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
 3. Copy the file to the folder you wish to use as a home folder for SplitLah.
-4. Start SplitLah by executing `java -jar splitlah.jar` in the terminal.
-5. Type in a command and press Enter to execute it.
-6. Refer to [Features](#features) for a more in-depth explanation of all commands available.
+4. Open a terminal and set the working directory to the home folder.
+5. Start SplitLah by executing `java -jar splitlah.jar` in the terminal.
+6. Type in a command and press Enter to execute it.
+7. Refer to [Features](#features) for a more in-depth explanation of all commands available.
 
 ## How SplitLah works
 * An activity represents a single group activity, paid for by one person. It stores a list of its participants,
