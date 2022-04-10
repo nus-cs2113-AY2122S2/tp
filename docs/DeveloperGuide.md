@@ -671,25 +671,25 @@ they engage in during the outings.
 
 ## User Stories
 
-| Version | As a ...                   | I want to ...                        | So that I can ...                                                                  |
-|---------|----------------------------|--------------------------------------|------------------------------------------------------------------------------------|
-| v1.0    | New user                   | see usage instructions               | refer to them when I forget how to use the application                             |
-| v1.0    | Budget conscious user      | create sessions                      | record the transactions of the outing                                              |
-| v1.0    | Returning User             | delete sessions                      | remove unnecessary sessions                                                        |
-| v1.0    | Budget conscious user      | create activities                    | able to track the expenditure for each activity                                    |
-| v1.0    | Returning User             | delete activities                    | remove unnecessary activities                                                      |
-| v1.0    | Returning user             | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity           |
-| v1.0    | Budget conscious user      | list all existing sessions           | view all sessions previously created                                               |
-| v1.0    | Budget conscious user      | list all activities in a session     | view all the activities that happened in the session                               |
-| v1.0    | Budget conscious user      | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session        |
-| v2.0    | Careless User              | edit sessions                        | amend a mistake previously made when creating a session                            |
-| v2.0    | Returning user             | view an existing session             | view the full details of a session previously created                              |
-| v2.0    | Careless User              | edit activities                      | amend a mistake previously made when creating an activity                          |
-| v2.0    | User with a lot of friends | create groups                        | I can create sessions with groups instead of listing the person names out manually |
-| v2.0    | Returning User             | delete groups                        | remove unnecessary groups                                                          |
-| v2.0    | Careless User              | edit groups                          | amend a mistake previously made when creating a groups                             |
-| v2.0    | Returning User             | view groups                          | view the full details of a group previously created                                |
-| v2.0    | User with a lot of friends | list groups                          | view all groups previously created                                                 |
+| Version | As a ...                   | I want to ...                        | So that I can ...                                                                                                      |
+|---------|----------------------------|--------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| v1.0    | New user                   | view a list of instructions          | refer to them when I forget how to use the application                                                                 |
+| v1.0    | Budget conscious user      | create sessions                      | record the details of my outing and keep track of the expenditure of each activity                                     |
+| v1.0    | Returning User             | delete sessions                      | remove unnecessary sessions                                                                                            |
+| v1.0    | Budget conscious user      | list all existing sessions           | see a list of all the outings that were recorded                                                                       |
+| v1.0    | Budget conscious user      | create activities                    | record the details and the expenditure of the activities in a particular outing                                        |
+| v1.0    | Returning User             | delete activities                    | remove unnecessary activities                                                                                          |
+| v1.0    | Returning user             | view existing activities             | see the full details of a particular activity, including the cost breakdown of the activity                            |
+| v1.0    | Budget conscious user      | list all activities in a session     | see a list of  all the activities that were recorded during a particular outing                                        |
+| v1.0    | Budget conscious user      | settle all transactions of a session | see a summary of all the transactions that are needed to be made amongst those who went for a particular outing        |
+| v2.0    | Returning User             | view an existing sessions            | see the full details of a particular outing, including a list of activities during the outing                          |
+| v2.0    | Careless user              | edit sessions                        | amend a mistake previously made when recording an outing                                                               |
+| v2.0    | Careless User              | edit activities                      | amend a mistake previously made when recording an activity                                                             |
+| v2.0    | User with a lot of friends | create groups                        | easily record outings using groups instead of listing out all the names of the people who went for the outing manually |
+| v2.0    | Returning User             | delete groups                        | remove unnecessary groups                                                                                              |
+| v2.0    | Careless User              | edit groups                          | amend a mistake previously made when creating a group                                                                  |
+| v2.0    | Returning User             | view groups                          | see the full details of a particular group, including the names of the people in the group                             |
+| v2.0    | User with a lot of friends | list groups                          | see a list of all the groups that were created                                                                         |
 
 ## Non-Functional Requirements
 1. The application should be able to work on any operating systems with `Java 11` installed.
@@ -700,6 +700,7 @@ they engage in during the outings.
 ## Glossary
 | Terms    | Definition                                                                                                                                                                                                                                                                                                  |
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| API      | An Application Programming Interface (API) specifies the interface through which other programs can interact with a software component.                                                                                                                                                                     |
 | Manager  | A Manager manages and stores 3 different objects, namely the `Profile`, `TextUI` and `Storage` objects.                                                                                                                                                                                                     |
 | Profile  | A Profile is responsible for all data management and accesses within the lifetime of the application. It serves as a container and holds a list of all `Session` and `Group` objects and keeps track of the unique identifiers to be issued upon the creation of `Session`, `Activity` and `Group` objects. |
 | TextUI   | A TextUI is an user interface that the user sees on the CLI.                                                                                                                                                                                                                                                |
@@ -709,4 +710,3 @@ they engage in during the outings.
 | Session  | A session represents a group outing that involves a list of participants and spans an arbitrary period of time containing one or more activities.                                                                                                                                                           |
 | Activity | An activity represents a single group activity and stores its name, costs and the name of the payer.                                                                                                                                                                                                        |
 | Group    | A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals without having to manually enter their details one by one when creating a session.                                                                                                    |
-| API      | An Application Programming Interface (API) specifies the interface through which other programs can interact with a software component.                                                                                                                                                                     |
