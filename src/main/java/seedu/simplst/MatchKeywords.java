@@ -93,12 +93,12 @@ public class MatchKeywords {
         ArrayList<String> groups = new ArrayList<>();
         String[] groupNames = regex.split("\\(?<");
 
-        for (String groupName: groupNames) {
+        for (String groupName : groupNames) {
             if (!groupName.contains(">")) {
                 continue;
             }
             int index = groupName.indexOf(">");
-            String name = groupName.substring(0,index);
+            String name = groupName.substring(0, index);
             groups.add(name);
         }
 

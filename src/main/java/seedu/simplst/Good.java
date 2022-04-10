@@ -58,16 +58,16 @@ public class Good extends UnitGood {
         int capacityUnit = 0;
 
         switch (this.getCapacity()) {
-        case LARGE:
-            capacityUnit = 3;
-            break;
-        case MEDIUM:
-            capacityUnit = 2;
-            break;
-        case SMALL:
-            capacityUnit = 1;
-            break;
-        default:
+            case LARGE:
+                capacityUnit = 3;
+                break;
+            case MEDIUM:
+                capacityUnit = 2;
+                break;
+            case SMALL:
+                capacityUnit = 1;
+                break;
+            default:
         }
 
         return capacityUnit * quantity;
@@ -84,7 +84,7 @@ public class Good extends UnitGood {
         return jo;
     }
 
-    public static Good restoreGood(JSONObject jo){
+    public static Good restoreGood(JSONObject jo) {
         UnitGood ug = UnitGood.restoreUnitGood(jo);
         String qty = jo.get(GoodKeys.quantity).toString();
         Good cur = new Good(ug, Integer.parseInt(qty));

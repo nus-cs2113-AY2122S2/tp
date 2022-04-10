@@ -67,7 +67,7 @@ public class Display {
         System.out.println(unitGoodName + "of order " + orderId + " has been removed.");
     }
 
-    public static void unitGoodAdded(String sku){
+    public static void unitGoodAdded(String sku) {
         System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
     }
 
@@ -187,17 +187,21 @@ public class Display {
         helpGood();
         helpOrder();
     }
-    
-    public static void jsonParseException(String fp){
+
+    public static void tryCommandAgain() {
+        System.out.println("Please enter the command again.");
+    }
+
+    public static void jsonParseException(String fp) {
         System.out.println("File: " + fp + " is not a valid json file.");
     }
 
 
-    public static void numberFormatException(){
+    public static void numberFormatException() {
         System.out.println("Number formatting invalid");
     }
 
-    public static void numberFormatException(String val, String type){
+    public static void numberFormatException(String val, String type) {
         System.out.println(val + " can't be intrepreted as type " + type);
     }
 

@@ -187,7 +187,7 @@ public class Order {
 
     private JSONArray serializeOrderlines() {
         JSONArray ja = new JSONArray();
-        for(Orderline ol: orderlines){
+        for (Orderline ol : orderlines) {
             ja.add(ol.serialize());
         }
         return ja;
@@ -208,11 +208,10 @@ public class Order {
     }
 
 
-
-    public static Order restoreOrder(JSONObject jo){
-        Integer orderId = Integer.parseInt((String)jo.get(OrderKeys.orderId));
-        String receiver = (String)jo.get(OrderKeys.receiver);
-        String shippingAddress = (String)jo.get(OrderKeys.shippingAddress);
+    public static Order restoreOrder(JSONObject jo) {
+        Integer orderId = Integer.parseInt((String) jo.get(OrderKeys.orderId));
+        String receiver = (String) jo.get(OrderKeys.receiver);
+        String shippingAddress = (String) jo.get(OrderKeys.shippingAddress);
         Order cur = new Order(
                 orderId,
                 receiver,
@@ -220,17 +219,16 @@ public class Order {
         );
         cur.setFulfilled(Boolean.parseBoolean((String) jo.get(OrderKeys.isFulfilled)));
         JSONArray orderLinesJson = (JSONArray) jo.get(OrderKeys.orderlines);
-        orderLinesJson.forEach((item)->{
+        orderLinesJson.forEach((item) -> {
             JSONObject jol = (JSONObject) item;
             UnitGood ug = UnitGood.restoreUnitGood(jol);
             String qty = jol.get(GoodKeys.quantity).toString();
             try {
-                cur.addOrderline(ug,qty);
+                cur.addOrderline(ug, qty);
             } catch (WrongCommandException e) {
                 e.printStackTrace();
             }
         });
-
 
 
         return cur;

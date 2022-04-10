@@ -31,10 +31,10 @@ public class Warehouse {
      * into the goodList since the warehouse should now include this good but quantity
      * is set to 0 as at this point the good is not in the warehouse yet.
      *
-     * @param sku The Stock Keeping Unit of the unit good
-     * @param name The name of the unit good
+     * @param sku         The Stock Keeping Unit of the unit good
+     * @param name        The name of the unit good
      * @param description Short description of the unit good
-     * @param capacity Represents the size of the good using arbitrary units
+     * @param capacity    Represents the size of the good using arbitrary units
      * @throws UnitTestException Exception when entering an invalid capacity
      */
     public void addUnitGoodToInventory(String sku, String name, String description, String capacity) {
@@ -54,7 +54,7 @@ public class Warehouse {
      *
      * @param sku The Stock Keeping Unit of the good
      * @param qty The quantity to be added to the warehouse for this good
-     * @throws WrongCommandException Exception when the command is not properly used
+     * @throws WrongCommandException     Exception when the command is not properly used
      * @throws ItemDoesNotExistException Exception when the sku cannot be found in the unitGoodHashMap
      */
     public void addQuantityOfGoodToInventory(String sku, String qty)
@@ -216,7 +216,7 @@ public class Warehouse {
             int id = Integer.parseInt(oid);
             Order order = findOrder(id);
             ArrayList<Orderline> orderLines = order.getOrderlines();
-            for (Orderline orderline:orderLines) {
+            for (Orderline orderline : orderLines) {
                 System.out.println(orderline);
             }
         } catch (NumberFormatException e) {
@@ -285,7 +285,7 @@ public class Warehouse {
             }
 
             ArrayList<Orderline> orderlines = order.getOrderlines();
-            for (Orderline orderline:orderlines) {
+            for (Orderline orderline : orderlines) {
                 Good good = goodList.get(orderline.getSku());
                 assert good != null;
                 fulfillOrderline(orderline, good);
@@ -309,7 +309,7 @@ public class Warehouse {
      * Checks off orderline if it is fulfilled
      *
      * @param orderline orderline to fulfill
-     * @param good good with matching sku as orderline in warehouse
+     * @param good      good with matching sku as orderline in warehouse
      */
     private void fulfillOrderline(Orderline orderline, Good good) {
         int qtyToFulfill = orderline.getQuantity();
@@ -339,12 +339,13 @@ public class Warehouse {
 
     /**
      * Checks off the order if all orderlines are checked off.
-     * @param order order to check
+     *
+     * @param order      order to check
      * @param orderlines orderlines in the order to check
      * @return true if all orderlines are checked off, false if any orderline is not checked off
      */
     private boolean checkOrderComplete(Order order, ArrayList<Orderline> orderlines) {
-        for (Orderline orderline:orderlines) {
+        for (Orderline orderline : orderlines) {
             if (!orderline.getCheckedOff()) {
                 return false;
             }
@@ -355,6 +356,7 @@ public class Warehouse {
 
     /**
      * Gives the total number of orders.
+     *
      * @return total number of orders
      */
     public int totalNumberOfOrder() {
@@ -419,7 +421,7 @@ public class Warehouse {
             throw new WrongCommandException("remove", true);
         }
     }
-    
+
     public void removeQuantityOfGoodFromInventory(String sku, String qty) throws
             ItemDoesNotExistException, LargeQuantityException, NumberFormatException {
         if (!goodList.containsKey(sku)) {
@@ -431,6 +433,7 @@ public class Warehouse {
 
     /**
      * Removes an order in the warehouse.
+     *
      * @param oid order id
      * @throws WrongCommandException remove command is wrong
      */
@@ -496,7 +499,7 @@ public class Warehouse {
     }
 
     private boolean hasOrderId(int oid) {
-        for (Order order:orderLists) {
+        for (Order order : orderLists) {
             if (order.getId() == oid) {
                 return true;
             }
@@ -507,7 +510,8 @@ public class Warehouse {
     /**
      * Add the base details of an order.
      * This will add the order to orderLists in the warehouse
-     * @param oid order id
+     *
+     * @param oid  order id
      * @param recv receiver name
      * @param addr shipping address
      * @throws WrongCommandException when input for either field is wrong or empty
@@ -559,7 +563,7 @@ public class Warehouse {
         }
     }
 
-    private void addOrder(Order order){
+    private void addOrder(Order order) {
         orderLists.add(order);
     }
 
@@ -641,10 +645,10 @@ public class Warehouse {
         return ja;
     }
 
-    private Boolean restoreOrders(JSONArray ja){
-        ja.forEach(item->{
-           JSONObject jo = (JSONObject) item;
-           this.addOrder(Order.restoreOrder(jo));
+    private Boolean restoreOrders(JSONArray ja) {
+        ja.forEach(item -> {
+            JSONObject jo = (JSONObject) item;
+            this.addOrder(Order.restoreOrder(jo));
         });
         return true;
     }
@@ -662,17 +666,17 @@ public class Warehouse {
         return jo;
     }
 
-    private Boolean restoreGoods(JSONObject jo){
-        jo.forEach((sku, jg)->{
+    private Boolean restoreGoods(JSONObject jo) {
+        jo.forEach((sku, jg) -> {
 //            System.out.println("sku: " + sku);
-            goodList.put((String)sku,Good.restoreGood((JSONObject) jg));
+            goodList.put((String) sku, Good.restoreGood((JSONObject) jg));
         });
         return true;
     }
 
     private JSONObject serializeUnitGoods() {
         JSONObject jo = new JSONObject();
-        unitGoodHashMap.forEach((sku, ug)->{
+        unitGoodHashMap.forEach((sku, ug) -> {
             jo.put(sku, ug.serialize());
         });
         return jo;
@@ -688,13 +692,13 @@ public class Warehouse {
         warehouse.put(WarehouseKeys.orderLists, sol);
 
         JSONObject sgl = this.serializeGoods();
-        if(sgl == null){
+        if (sgl == null) {
             return null;
         }
         warehouse.put(WarehouseKeys.goodList, sgl);
 
         JSONObject ugm = this.serializeUnitGoods();
-        if(ugm == null){
+        if (ugm == null) {
             return null;
         }
         warehouse.put(WarehouseKeys.unitGoodHashMap, ugm);
@@ -703,37 +707,40 @@ public class Warehouse {
     }
 
 
-    public Boolean restoreWarehouseState(){
+    public Boolean restoreWarehouseState() {
         // READ JSON FILE
         String fp = LocalStorage.WAREHOUSE_PATH;
         String saveStr = LocalStorage.readSaveFile(fp);
-        if (saveStr == null){return false;}
+        if (saveStr == null) {
+            return false;
+        }
         // PARSE
-        try{
+        try {
             JSONObject jWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
             System.out.println("Parse success");
             boolean status = false;
+            //addUnitGoodToInventory
             //Float totalCapacity = Float.parseFloat();
             status = this.setTotalCapacity(jWarehouse.get(WarehouseKeys.totalCapacity).toString());
-            if (!status){
+            if (!status) {
                 return false;
             }
             JSONArray sol = (JSONArray) jWarehouse.get(WarehouseKeys.orderLists);
             status = this.restoreOrders(sol);
-            if (!status){
+            if (!status) {
                 return false;
             }
 
             JSONObject sgl = (JSONObject) jWarehouse.get(WarehouseKeys.goodList);
             status = this.restoreGoods(sgl);
-            if (!status){
+            if (!status) {
                 return false;
             }
 
         } catch (ParseException e) {
             Display.jsonParseException(fp);
             return false;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             Display.numberFormatException();
             Display.jsonParseException(fp);
             return false;
