@@ -5,6 +5,7 @@
  "amount": "4.5"  "description": "Porridge"  "paymentMethod": "Cash"  "time": "12/03/2022"  "category": "Food" 
 # END EXPENDITURES
 # BEGIN CREDIT CARDS
+ "totalExpenditure": "0.0"  "monthlyCardLimit": "50000.0"  "nameOfCard": "DBS"  "cashback": "5.0" 
 # END CREDIT CARDS
 # BEGIN INCOME SOURCES
 # END INCOME SOURCES

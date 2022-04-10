@@ -189,12 +189,23 @@ public class AddCommandInputTests {
     }
 
     /**
-     * Checks if user input of credit card name is valid. Currently, we do not accept Credit Card name to be "Cash"
+     * Checks if user input of credit card name is valid.
+     * Credit Card name as "Cash" and that already exist in the list are not accepted.
+     *
+     * @throws MindMyMoneyException when Credit Card name is cash or has a
      */
-    public static void testCreditCardName(String inputCreditCardName) throws MindMyMoneyException {
+    public static void testCreditCardName(String inputCreditCardName, CreditCardList creditCardList)
+        throws MindMyMoneyException {
         if (inputCreditCardName.equalsIgnoreCase("cash")) {
             throw new MindMyMoneyException("Credit card name cannot be abbreviated as `Cash`.");
         }
+        for (CreditCard creditCard : creditCardList.creditCardListArray) {
+            if (creditCard.getNameOfCard().toLowerCase().equalsIgnoreCase(inputCreditCardName)) {
+                throw new MindMyMoneyException("You already have this card in the list! " +
+                    "Please abbreviate teh card as a different name.");
+            }
+        }
+
     }
 
     /**
@@ -290,9 +301,9 @@ public class AddCommandInputTests {
      * @param cardLimit The spending limit of the credit card.
      * @throws MindMyMoneyException when the parameters are invalid.
      */
-    public static void testCreditCardParameters(String cardName, String cashBack, String cardLimit)
-        throws MindMyMoneyException {
-        testCreditCardName(cardName);
+    public static void testCreditCardParameters(String cardName, String cashBack, String cardLimit,
+                                                CreditCardList creditCardList) throws MindMyMoneyException {
+        testCreditCardName(cardName, creditCardList);
         testCashbackAmount(cashBack);
         testCreditCardLimit(cardLimit);
     }
