@@ -1,7 +1,7 @@
 # Yu Hao - Project Portfolio Page
 
 ## Overview
-EquipmentManager is a Command Line Interface application to help with keeping track of equipment details (e.g. current user, quantity, cost, warranty duration, purchase date) for an AV club. It provides a clean and fast way to manage the inventory as compared to “traditional” methods such as an Excel spreadsheet.
+EquipmentManager is a Command Line Interface application to help with keeping track of equipment details (serial number, name,  quantity, cost, vendor, purchase date) for an AV club. It provides a clean and fast way to manage the inventory as compared to “traditional” methods such as an Excel spreadsheet.
 
 
 ## Summary of Contributions
