@@ -188,14 +188,9 @@ public class Display {
         helpOrder();
     }
 
-    public static void tryCommandAgain() {
-        System.out.println("Please enter the command again.");
-    }
-
     public static void jsonParseException(String fp) {
         System.out.println("File: " + fp + " is not a valid json file.");
     }
-
 
     public static void numberFormatException() {
         System.out.println("Number formatting invalid");
