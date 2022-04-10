@@ -69,7 +69,6 @@ public class TaskDuration {
         throw new WrongDurationFormatException();
     }
 
-
     private HashMap<String, String> parseDurationString(String durationString) throws ModHappyException {
         Pattern commandPattern = Pattern.compile(DURATION_STRING_FORMAT);
         Matcher matcher = commandPattern.matcher(durationString.trim());
@@ -82,6 +81,9 @@ public class TaskDuration {
         return parserDurationString;
     }
 
+    public Duration getTaskDuration() {
+        return taskDuration;
+    }
 
     @Override
     public String toString() {

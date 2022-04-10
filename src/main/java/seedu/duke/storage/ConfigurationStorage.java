@@ -7,11 +7,15 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+
+import seedu.duke.exceptions.InvalidConfigurationException;
+import seedu.duke.exceptions.InvalidConfigurationValueException;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
 import seedu.duke.exceptions.UnknownException;
@@ -30,9 +34,7 @@ public class ConfigurationStorage extends JsonStorage<Configuration> {
             return gson.fromJson(reader, (Type) Configuration.class);
         } catch (JsonSyntaxException e) {
             throw new ReadException();
-        } catch (JsonParseException e) {
-            throw new ReadException(MODIFIED_JSON_EXCEPTION);
-        } catch (IOException e) {
+        } catch (JsonParseException | IOException e) {
             throw new ReadException(MODIFIED_JSON_EXCEPTION);
         } catch (Exception e) {
             throw new UnknownException(e.toString());

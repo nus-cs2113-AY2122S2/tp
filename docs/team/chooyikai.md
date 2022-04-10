@@ -25,8 +25,8 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
   - Significantly rewrote `add`, `exit`, `list` and `mark` commands to comply with the new data classes, after they were changed to be more OOP-compliant. ([#75](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/75))
     - The updated implementation of these commands set the precedent for all future command additions, and this was generally followed by the rest of the team when adding new features.
   - Contributed a significant number of test cases for the parsing of user commands, and refactored some existing ones. ([#86](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/86))
-  - Added input validation to the deserialisation functions used for data loading. ([#175](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/175))
-    - This makes the program inspect and reject invalid user data loaded from the data file instead of blindly trusting anything inside (which could violate some program assumptions if the file was corrupted or modified manually).
+  - Added input validation to the deserialisation functions used for data loading. ([#175](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/175), [#194](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/194))
+    - This makes the program inspect and reject / tweak invalid user data loaded from the data file instead of blindly trusting anything inside (which could violate some program assumptions if the file was corrupted or modified manually).
 
 
 - **Documentation:**
@@ -36,9 +36,10 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
     - Added accepted inputs for each parameter in each command format. ([#116](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/116))
     - Generally rewrote command explanations to sound less clinical and more friendly.
   - Developer guide:
-    - Added explanation of the Data component and created the relevant class diagrams within that section. (, [#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111))
+    - Added explanation of the Data component and created the relevant class diagrams within that section. ([#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111))
     - Edited explanations of the Parser and Command components. ([#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111))
     - Edited class diagram for the Storage component to correctly represent binding relationships. ([#111](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/111), [#116](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/116))
+    - Added some elaboration for the Storage implementation. ([#194](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/194))
 
 
 - **Team tasks:**

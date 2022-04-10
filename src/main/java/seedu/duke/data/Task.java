@@ -48,17 +48,28 @@ public class Task {
         return taskDescription;
     }
 
-    public String getWorkingTime() {
+    public String getWorkingTimeString() {
         if (Objects.isNull(workingTime)) {
             return null;
         } else {
             return workingTime.toString();
         }
+    }
 
+    public TaskDuration getWorkingTime() {
+        return workingTime;
     }
 
     public void setTaskDescription(String description) {
-        taskDescription = description;
+        if (Objects.isNull(description) || description.isBlank()) {
+            taskDescription = null;
+        } else {
+            taskDescription = description;
+        }
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
 
     //@@author Ch40gRv1-Mu
@@ -68,10 +79,6 @@ public class Task {
         } else {
             this.workingTime = null;
         }
-    }
-
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
     }
 
     //@@author heekit73098

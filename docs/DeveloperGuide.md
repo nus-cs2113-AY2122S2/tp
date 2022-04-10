@@ -17,7 +17,8 @@
    <br>6.1. [Edit Feature](#61-edit-feature)
    <br>6.2. [Tag Feature](#62-tag-feature)
    <br>6.3. [Grade Feature](#63-grade-feature)
-   <br>6.2. [GPA Feature](#64-gpa-feature) 
+   <br>6.4. [GPA Feature](#64-gpa-feature)
+   <br>6.5. [Storage Feature](#65-storage-feature)
 7. [User Stories](#7-user-stories)
 8. [Non-Functional Requirements](#8-non-functional-requirements)
 9. [Glossary](#9-glossary)
@@ -257,14 +258,29 @@ Below is the sequence diagram of how the GPA feature works:
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/GPA.puml)
 <br><br><br>
 
-### Storage Feature
+### 6.5. Storage Feature
+
+This component makes use of the [Gson](https://sites.google.com/site/gson/gson-user-guide) library, which can be used to convert Java Objects to and from their JSON representation.
+
 Several type-specific classes exist, each overseeing the storage of a different type of user data:
 
 * `ConfigurationStorage` handles the saving and loading of user preferences. This data is stored in the `data/configuration.json` file.
 * `TaskListStorage` handles the saving and loading of the General Tasks list as an `ArrayList<Task>` instance. This data is stored in the `data/tasks.json` file.
 * `ModuleListStorage` handles the saving and loading of all user-created modules as well as the tasks associated with them as an `ArrayList<Module>` instance. This data is stored in the `data/modules.json` file.
-* `ModuleHappyStorageManager` a singleton object keeps a reference of storage and provides other Components easy and encapsulated access to write and load all kinds of data in Mod Happy.
-  Implementation of JsonStorage applies [Gson](https://sites.google.com/site/gson/gson-user-guide), which is a Java library that can be used to convert Java Objects into their JSON representation and back. The Gson object tasks a specific class to wrap  JSON string to an equivalent Java object, which is why the load method for each class should be implemented independently.
+* `ModHappyStorageManager` keeps a reference of storage and provides other components with easy and encapsulated access to write and load all kinds of data in Mod Happy. 
+
+It is worth noting that `ModuleListStorage` and `TaskListStorage` are implemented separately despite having mostly similar code, as the `gson.fromJson` method takes in the class of the object to be constructed, and `.class` cannot be used with generic types.
+
+After data is loaded from the data file, some verification checks are performed to ensure that the data is valid. The following table details some actions taken by Mod Happy in response to various types of data errors:
+
+| Type of error                                                                                                                                                                                                               | Action taken                                                              |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Malformed JSON<br>Multiple modules with the same module code<br>Module's `moduleCode` attribute is missing<br>Task's `taskName` attribute is missing<br>Invalid configuration name<br>Illegal or no value for configuration | Loading from the file is aborted.<br>A blank file is loaded in its place. |
+| Module's `modularCredit` attribute is missing or contains illegal value                                                                                                                                                     | The missing value is initialised to `0`.                                  |
+| Module's `moduleGrade` attribute is missing or contains illegal value                                                                                                                                                       | The `moduleGrade` is set to `NOT_ENTERED` (the default value when unset). |
+| Task's `isTaskDone` attribute is missing or contains illegal value                                                                                                                                                          | The missing value is initialised to `false`.                              |
+| Task's `taskDuration` attribute is missing or contains illegal value                                                                                                                                                        | The `taskDuration` is set to `null` (the default value when unset).       |
+
 <br><br><br>
 
 ## 7. User Stories

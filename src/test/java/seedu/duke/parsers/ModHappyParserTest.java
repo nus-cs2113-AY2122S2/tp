@@ -108,7 +108,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertNull(t.getTaskDescription());
-            assertNull(t.getWorkingTime());
+            assertNull(t.getWorkingTimeString());
             assertNull(((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -127,7 +127,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertNull(t.getWorkingTime());
+            assertNull(t.getWorkingTimeString());
             assertNull(((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -250,7 +250,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertNull(t.getTaskDescription());
-            assertNull(t.getWorkingTime());
+            assertNull(t.getWorkingTimeString());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -268,7 +268,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertNull(t.getWorkingTime());
+            assertNull(t.getWorkingTimeString());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -288,7 +288,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-t-m /m -m -d -t", t.getTaskDescription());
-            assertEquals("1 hour(s) 15 minute(s)", t.getWorkingTime());
+            assertEquals("1 hour(s) 15 minute(s)", t.getWorkingTimeString());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
