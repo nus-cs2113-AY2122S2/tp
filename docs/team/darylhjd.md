@@ -2,9 +2,9 @@
 
 ## Overview
 
-Hello, my name is Daryl!
+**Project**: Restaurant Information Programme
 
-Thanks for reading this document :)
+Restaurant-Information-Programme (R.I.P.) is a command line programme for restaurant owners to keep track of menus, staff information, and order management.
 
 ## Summary of Contributions
 

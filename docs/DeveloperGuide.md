@@ -87,6 +87,30 @@ Here is the typical design of a manager:
 
 ![](diagrams/class/manager.png)
 
+### InputParser
+
+All input from the user is done through the `InputParser` class. This limits the scope of which the developers will need
+to perform error checking and sanitation of user input, which greatly reduces the need for boilerplate plate throughout
+the rest of the programme.
+
+Due to customer requirements, the team has decided that the constraint of making this application command-based is not applicable,
+and in fact could inhibit usage and uptake of this programme. As such, the developers of this programme have decided to modify
+this requirement in order to better suit the needs of the users and also fulfill certain non-functional requirements (which are
+listed at the bottom of the guide).
+
+Consequently, most inputs are index-based (usually, users will only need to input numbers). This greatly reduces the 
+possibility of human-error in inputs, and more importantly, they are simple to use and remember. Familiar users will
+find it easy to remember the inputs, and will be able to do fast operations in time, which would also fulfill the original
+constraint in the first place.
+
+The class itself is simple, and simply provides a few helper methods to get certain input. They are listed here:
+- `getString(String msg)`
+- `getInteger(String msg)`
+- `getDouble(String msg)`
+
+The implementation of the last 2 methods depend on the implementation of the first method. This reduces code complexity
+and further isolates the area of concern for which errors are most prone. In addition, it enables easy addition of more
+methods if required. If possible, additional methods should continue to depend on the first `getString` method.
 
 ### Menu (dishes) Management
 
@@ -177,32 +201,46 @@ Sequence diagram for `edittStaff()`:
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+The application is meant for the usage of all employees of a restaurant.
+
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Often, restaurants need a centralised system for stock keeping and administrative information.
+
+While this can still be done using normal pen-and-paper, or Excel, using such methods are often slow and may be
+prone to error.
+
+As such, this application provides many functionalities to do so. The possibility of human-errors is greatly reduced!
 
 ## User Stories
 
-
-| Version | As a ... | I want to ...                                    | So that I can ...               |
-|---------|----------|--------------------------------------------------|---------------------------------|
-| v1.0    | staff    | modify the order (add, delete, or check price)   | keep the order up to date       |
-| v1.0    | staff    | modify the menu (add, delete, or modify dishes)  | keep the menu up to date        |
- | v1.0    | staff    | modify staff info (add, delete, modify staff)   | keep the roster up to date      | 
-| v2.0    | staff    | print out the order receipt                      | refer to the order anytime      |
-| v2.0    | staff    | store the application data                       | save data across different uses |
+| Version | As a ... | I want to ...               | So that I can ...                 |
+|---------|----------|-----------------------------|-----------------------------------|
+| v1.0    | staff    | add orders                  | keep the order up to date         |
+| v1.0    | staff    | delete orders               | keep the order up to date         |
+| v1.0    | staff    | check orders                | keep the order up to date         |
+| v1.0    | staff    | add menu items              | keep the menu up to date          |
+| v1.0    | staff    | delete menu items           | keep the menu up to date          |
+| v1.0    | staff    | modify menu items           | keep the menu up to date          |
+ | v1.0    | staff    | add staff info              | keep the roster up to date        | 
+| v1.0    | staff    | delete staff info           | keep the roster up to date        | 
+| v1.0    | staff    | modify staff info           | keep the roster up to date        | 
+| v2.0    | staff    | print out the order receipt | refer to the order anytime        |
+| v2.0    | staff    | store the application data  | save data across different uses   |
 
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+The application fulfills many non-functional requirements that make it easy to use:
+- Simple commands for easy uptake. Great for restaurants where most staff members work on part-time basis.
+- High performance. Operations take on average less than a second to complete!
+- Easy portability. A simple copy-paste allows data and application to be transferred to a new workstation easily.
 
 ## Glossary
 
-* *glossary item* - Definition
+NA.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+NA.
