@@ -10,6 +10,7 @@ import seedu.duke.exceptions.EmptyItemPaxException;
 import seedu.duke.exceptions.InvalidItemPaxException;
 import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.exceptions.ItemAlreadyInListException;
+import seedu.duke.exceptions.DuplicateCommandException;
 
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
@@ -111,5 +112,11 @@ public class AddItemCommandTest {
     public void execute_DuplicateItem_exceptionThrown() throws HotelLiteManagerException {
         AddItemCommand addItemPaxCommand = new AddItemCommand("Toilet Paper / 50");
         assertThrows(ItemAlreadyInListException.class, () -> addItemPaxCommand.execute(listContainer, ui));
+    }
+
+    @Test
+    public void execute_AddItemCommandWithinItemNameOrPax_exceptionThrown()  {
+        assertThrows(DuplicateCommandException.class, () -> new AddItemCommand("add item / 15"));
+        assertThrows(DuplicateCommandException.class, () -> new AddItemCommand("Toilet Roll / add item"));
     }
 }

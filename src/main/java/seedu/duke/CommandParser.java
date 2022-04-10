@@ -97,11 +97,11 @@ public class CommandParser {
         } else if (userInputLowerCase.equals(AVERAGE_SATISFACTION_COMMAND)) {
             userCommand = new AverageSatisfactionCommand();
         } else if (userInputLowerCase.startsWith(VIEW_ITEM_LIST_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_ITEM_LIST_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_ITEM_LIST_COMMAND, "");
             userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
             userCommand = new ViewItemListCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND,
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND,
                     "");
             userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
             userCommand = new ViewItemsWithZeroPaxCommand(userInputLowerCaseWithoutCommand);
@@ -148,7 +148,7 @@ public class CommandParser {
         Command userCommand = null;
         String userInputLowerCaseWithoutCommand;
         if (userInputLowerCase.startsWith(DELETE_ITEM_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_ITEM_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(DELETE_ITEM_COMMAND, "");
             userCommand = new DeleteItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(DELETE_PROFILE)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(DELETE_PROFILE, "");
@@ -178,7 +178,7 @@ public class CommandParser {
                     .trim();
             userCommand = new AddSatisfactionCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(ADD_ITEM_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_ITEM_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_ITEM_COMMAND, "");
             userCommand = new AddItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith((ADD_HOUSEKEEPER_COMMAND))) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ADD_HOUSEKEEPER_COMMAND, "");
@@ -226,13 +226,13 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ASSIGN_HOUSEKEEPER, "");
             userCommand = new AssignHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(SEARCH_ITEM_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(SEARCH_ITEM_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(SEARCH_ITEM_COMMAND, "");
             userCommand = new SearchItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(UPDATE_ITEM_PAX_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(UPDATE_ITEM_PAX_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(UPDATE_ITEM_PAX_COMMAND, "");
             userCommand = new UpdateItemPaxCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(UPDATE_ITEM_NAME_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(UPDATE_ITEM_NAME_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(UPDATE_ITEM_NAME_COMMAND, "");
             userCommand = new UpdateItemNameCommand(userInputLowerCaseWithoutCommand);
         } else {
             throw new InvalidCommandException();

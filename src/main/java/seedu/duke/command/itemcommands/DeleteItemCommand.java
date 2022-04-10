@@ -1,6 +1,7 @@
 package seedu.duke.command.itemcommands;
 
 import seedu.duke.command.Command;
+import seedu.duke.exceptions.DuplicateCommandException;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.itemlists.Item;
 import seedu.duke.exceptions.EmptyItemNameException;
@@ -10,6 +11,8 @@ import seedu.duke.itemlists.ItemList;
 import seedu.duke.storage.ItemListFileManager;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents a command to delete an existing item within the item list. A DeleteItemCommand object consists of the
@@ -17,6 +20,8 @@ import java.io.IOException;
  */
 public class DeleteItemCommand extends Command {
     private Item item;
+    private static final String DELETE_ITEM_COMMAND = "delete item";
+    private static Logger itemLogger = Logger.getLogger("itemLogger");
 
     /**
      * Takes in the user input and checks if the formatting of the delete item command within the user input is
@@ -30,6 +35,12 @@ public class DeleteItemCommand extends Command {
         if (userInput.isEmpty()) {
             throw new EmptyItemNameException();
         }
+
+        if (userInput.contains(DELETE_ITEM_COMMAND)) {
+            itemLogger.log(Level.WARNING, "Repeated delete item command given.");
+            throw new DuplicateCommandException();
+        }
+
         String itemName = userInput.trim();
         Item item = new Item(itemName.trim());
         setItem(item);
