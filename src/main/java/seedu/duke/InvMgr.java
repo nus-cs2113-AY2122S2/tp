@@ -44,6 +44,7 @@ public class InvMgr {
                 String command = ui.getRawUserInput();
                 Command inputCommand = InputParser.parse(command);
                 inputCommand.execute(itemList, ui);
+                ui.showDivider();
                 isExit = inputCommand.isExit();
                 storage.save(itemList.getItemArrayList());
             } catch (InvMgrException e) {
